@@ -525,9 +525,8 @@ en reprenant l'exemple du Post::
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
-            } else {
-                $this->set('posts', $posts);
             }
+            $this->set('posts', $posts);
         }
     }
 

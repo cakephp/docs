@@ -204,18 +204,18 @@ Une simple fonction de connexion pourrait ressembler à cela ::
 
     public function login() {
         if ($this->request->is('post')) {
+            // Important: Utilisez login() sans argument! Voir warning ci-dessous.
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
                 // Avant 2.3, utilisez
                 // `return $this->redirect($this->Auth->redirect());`
-            } else {
-                $this->Session->setFlash(
-                    __('Username ou password est incorrect'),
-                    'default',
-                    array(),
-                    'auth'
-                );
             }
+            $this->Session->setFlash(
+                __('Username ou password est incorrect'),
+                'default',
+                 array(),
+                'auth'
+            );
         }
     }
 

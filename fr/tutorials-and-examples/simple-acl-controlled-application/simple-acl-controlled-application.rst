@@ -175,12 +175,21 @@ les définir en haut dans ``AppController``::
             'Session'
         );
         public $helpers = array('Html', 'Form', 'Session');
-    
+
         public function beforeFilter() {
             //Configure AuthComponent
-            $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
+            $this->Auth->loginAction = array(
+              'controller' => 'users',
+              'action' => 'login'
+            );
+            $this->Auth->logoutRedirect = array(
+              'controller' => 'users',
+              'action' => 'login'
+            );
+            $this->Auth->loginRedirect = array(
+              'controller' => 'posts',
+              'action' => 'add'
+            );
         }
     }
 
@@ -258,9 +267,8 @@ code suivant ::
             }
             if (!$groupId) {
                 return null;
-            } else {
-                return array('Group' => array('id' => $groupId));
             }
+            return array('Group' => array('id' => $groupId));
         }
     }
 

@@ -77,9 +77,8 @@ belongsTo Group::
         }
         if (!$data['User']['group_id']) {
             return null;
-        } else {
-            return array('Group' => array('id' => $data['User']['group_id']));
         }
+        return array('Group' => array('id' => $data['User']['group_id']));
     }
 
 Dans l'exemple ci-dessus, le retour est un tableau qui ressemble aux résultats
