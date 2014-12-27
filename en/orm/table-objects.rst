@@ -144,6 +144,13 @@ or make caching decisions based on the current load.
 In previous versions of CakePHP there was an ``afterFind`` callback, this has
 been replaced with the :ref:`map-reduce` features and entity constructors.
 
+buildValidator
+---------------
+
+.. php:method:: buildValidator(Event $event, Validator $validator)
+
+The ``Model.buildValidator`` event is fired when a validator is created.
+
 buildRules
 ----------
 
