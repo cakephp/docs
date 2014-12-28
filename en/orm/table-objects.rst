@@ -147,9 +147,10 @@ been replaced with the :ref:`map-reduce` features and entity constructors.
 buildValidator
 ---------------
 
-.. php:method:: buildValidator(Event $event, Validator $validator)
+.. php:method:: buildValidator(Event $event, Validator $validator, $name)
 
-The ``Model.buildValidator`` event is fired when a validator is created.
+The ``Model.buildValidator`` event is fired when ``$name`` validator is created.
+Behaviors, can use this hook to add in validation methods.
 
 buildRules
 ----------
@@ -162,7 +163,7 @@ created and the table's ``beforeRules()`` method has been called.
 beforeRules
 --------------
 
-.. php:method:: beforeRules(Event $event, Entity $entity, RulesCheker $rules, $operation)
+.. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
 The ``Model.beforeRules`` event is fired before an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
@@ -171,7 +172,7 @@ operation.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, RulesCheker $rules, $operation)
+.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
 
 The ``Model.afterRules`` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking

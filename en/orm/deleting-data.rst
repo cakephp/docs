@@ -17,7 +17,7 @@ table's delete method::
 When deleting entities a few things happen:
 
 1. The :ref:`delete rules <application-rules>` will be applied. If the rules
-   fail, deleting will be stopped.
+   fail, deletion will be prevented.
 2. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
    delete will be aborted and the event's result will be returned.
 3. The entity will be deleted.

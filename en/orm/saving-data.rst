@@ -286,12 +286,13 @@ Validating Data Before Building Entities
 
 When marshalling data into entities, you can validate data. Validating data
 allows you to check the type, shape and size of data. By default request data
-will be converted into entities before it is converted into entities.
-If any validation rules fail, the returned entity will have errors::
+will be validated before it is converted into entities.
+If any validation rules fail, the returned entity will contain errors, and the
+request data::
 
     $article = $articles->newEntity($this->request->data);
     if ($article->errors()) {
-        // Entity has errors.
+        // Entity failed validation.
     }
 
 When building an entity with validation enabled the following things happen:
@@ -823,6 +824,15 @@ can help provide a nicer user experience. Because of this CakePHP includes an
 
     // Multiple keys, useful for composite primary keys.
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
+
+Using Entity Methods as Rules
+-----------------------------
+
+You may want to use entity methods as domain rules::
+
+    $rules->add(function ($entity, $options) {
+        return $entity->isOkLooking();
+    });
 
 Creating Custom Rule objects
 ----------------------------
