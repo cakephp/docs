@@ -128,7 +128,8 @@ main method wasn't very interesting let's add another command that does somethin
             $this->out('Hello world.');
         }
 
-        public function heyThere($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous')
+        {
             $this->out('Hey there ' . $name);
         }
     }

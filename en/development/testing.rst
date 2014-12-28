@@ -1007,7 +1007,8 @@ controllers that use it. Here is our example component located in
             $this->setController($event->subject());
         }
 
-        public function adjust($length = 'short') {
+        public function adjust($length = 'short')
+        {
             switch ($length) {
                 case 'long':
                     $this->controller->paginate['limit'] = 100;

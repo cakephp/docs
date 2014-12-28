@@ -180,7 +180,8 @@ Method Definition
 
 Example of a method definition::
 
-    public function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '')
+    {
         if (expr) {
             statement;
         }
