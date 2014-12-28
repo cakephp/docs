@@ -295,7 +295,7 @@ augment the request cycle.
 
     Is called before output is sent to the browser.
 
-.. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
+.. php:method:: beforeRedirect(Event $event, $url, Response $response)
 
     Is invoked when the controller's redirect
     method is called but before any further action. If this method
