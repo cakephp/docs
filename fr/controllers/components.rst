@@ -305,7 +305,7 @@ qui vous permettent d'augmenter le cycle de la requête.
 
     Est appelée avant que la sortie soit envoyée au navigateur.
 
-.. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
+.. php:method:: beforeRedirect(Event $event, $url, Response $response)
 
     Est invoquée quand la méthode de redirection du controller est appelée,
     mais avant toute action qui suit. Si cette méthode retourne ``false``, le
