@@ -14,7 +14,6 @@ Requirements
   by no means required.
 - PHP 5.4.16 or greater.
 - mbstring extension
-- mcrypt extension
 - intl extension
 
 While a database engine isn't required, we imagine that most applications will
