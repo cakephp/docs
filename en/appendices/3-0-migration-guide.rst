@@ -12,7 +12,6 @@ Requirements
 
 - CakePHP 3.x supports PHP Version 5.4.16 and above.
 - CakePHP 3.x requires the mbstring extension.
-- CakePHP 3.x requires the mcrypt extension.
 - CakePHP 3.x requires the intl extension.
 
 .. warning::
@@ -1187,18 +1186,28 @@ Security
 --------
 
 - ``Security::cipher()`` has been removed. It is insecure and promoted bad
-  cryptographic practices. You should use :php:meth:`Security::rijndael()`
+  cryptographic practices. You should use :php:meth:`Security::encrypt()`
   instead.
 - The Configure value ``Security.cipherSeed`` is no longer required. With the
   removal of ``Security::cipher()`` it serves no use.
 - Backwards compatibility in :php:meth:`Cake\\Utility\\Security::rijndael()` for values encrypted prior
-  to CakePHP 2.3.1 has been removed. You should re-encrypt values using a recent
-  version of CakePHP 2.x before migrating.
+  to CakePHP 2.3.1 has been removed. You should re-encrypt values using
+  ``Security::encrypt()`` and a recent version of CakePHP 2.x before migrating.
 - The ability to generate a blowfish hash has been removed. You can no longer use type
   "blowfish" for ``Security::hash()``. One should just use PHP's `password_hash()`
   and `password_verify()` to generate and verify blowfish hashes. The compability
   library `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   which is installed along with CakePHP provides these functions for PHP < 5.5.
+- OpenSSL is now used over mcrypt when encrypting/decrypting data. This change
+  provides better performance and future proofs CakePHP against distros dropping
+  support for mcrypt.
+- ``Security::rijndael()`` is deprecated and only available when using mcrypt.
+
+.. warning::
+
+    Data encrypted with Security::encrypt() in previous versions is not
+    compatible with the openssl implementation. You should :ref:`set the
+    implementation to mcrypt <force-mcrypt>` when upgrading.
 
 Time
 ----

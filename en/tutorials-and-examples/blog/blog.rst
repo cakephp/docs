@@ -12,7 +12,7 @@ Here's what you'll need:
    similar. We might have to play a little with the server
    configuration, but most folks can get CakePHP up and running without
    any configuration at all. Make sure you have PHP 5.4.16 or greater, and
-   that the ``mbstring``, ``intl`` and ``mcrypt`` extensions are enabled in PHP.
+   that the ``mbstring`` and ``intl`` extensions are enabled in PHP.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
    database: CakePHP will be taking the reins from there. Since we're using MySQL,
