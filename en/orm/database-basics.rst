@@ -259,10 +259,13 @@ An easy way to fulfill the basic interface is to extend
 :php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
 we could make the following type class::
 
+    // in src/Database/Type/JsonType.php
+
     namespace App\Database\Type;
 
     use Cake\Database\Driver;
     use Cake\Database\Type;
+    use PDO;
 
     class JsonType extends Type {
 
@@ -275,6 +278,14 @@ we could make the following type class::
 
         public function toDatabase($value, Driver $driver) {
             return json_encode($value);
+        }
+
+        public function toStatement($value, Driver $driver)
+        {
+            if ($value === null) {
+                return PDO::PARAM_NULL;
+            }
+            return PDO::PARAM_STR;
         }
 
     }
