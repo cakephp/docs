@@ -80,7 +80,8 @@ créé comme un formulaire d'édition. Par exemple, si nous naviguons vers
 http://example.org/articles/edit/5, nous pourrions faire ce qui suit::
 
     // src/Controller/ArticlesController.php:
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (empty($id)) {
             throw new NotFoundException;
         }
@@ -1621,15 +1622,18 @@ construire un widget Autocomplete, vous pouvez le faire comme ceci::
 
     use Cake\View\Widget\WidgetInterface;
 
-    class AutocompleteWidget implements WidgetInterface {
+    class AutocompleteWidget implements WidgetInterface
+    {
 
         protected $_templates;
 
-        public function __construct($templates) {
+        public function __construct($templates)
+        {
             $this->_templates = $templates;
         }
 
-        public function render(array $data) {
+        public function render(array $data)
+        {
             $data += [
                 'name' => '',
             ];

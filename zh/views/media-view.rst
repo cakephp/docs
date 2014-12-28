@@ -13,8 +13,10 @@
 要使用媒体视图，你需要告诉你的控制器使用 MediaView 类，而不是缺省的 View 类。然后，
 只需要传入其它参数指定文件位置::
 
-    class ExampleController extends AppController {
-        public function download() {
+    class ExampleController extends AppController
+    {
+        public function download()
+        {
             $this->viewClass = 'Media';
             // 下载 app/outside_webroot_dir/example.zip
             $params = array(
@@ -31,7 +33,8 @@
 下面这个例子渲染的文件，其 mime 类型不在 MediaView 的 ``$mimeType`` 数组中。同时
 使用相对于缺省的 ``app/webroot`` 目录的路径::
 
-    public function download() {
+    public function download()
+    {
         $this->viewClass = 'Media';
         // 渲染 app/webroot/files/example.docx
         $params = array(

@@ -91,7 +91,8 @@ properties are passed to the log adapter's constructor as an array. ::
 
     use Cake\Log\LogInterface;
 
-    class DatabaseLog implements LogInterface {
+    class DatabaseLog implements LogInterface
+    {
         public function __construct($options = []) {
             // ...
         }

@@ -22,6 +22,7 @@ un autre helper à la classe de vue bake, cet événement peut être utilisé::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
+    
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 
@@ -45,6 +46,7 @@ de bake::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
+    
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 
@@ -117,7 +119,8 @@ ressemble à ceci::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -141,7 +144,8 @@ rendu, ressemble à ceci::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -157,14 +161,16 @@ ressemble à ceci::
     /**
      * Foo shell command.
      */
-    class FooShell extends Shell {
+    class FooShell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -206,18 +212,22 @@ FooTask.php devra ressembler à ceci::
 
     use Cake\Shell\Task\SimpleBakeTask;
 
-    class FooTask extends SimpleBakeTask {
+    class FooTask extends SimpleBakeTask
+    {
         public $pathFragment = 'Foo/';
 
-        public function name() {
+        public function name()
+        {
             return 'shell';
         }
 
-        public function fileName($name) {
+        public function fileName($name)
+        {
             return $name . 'Foo.php';
         }
 
-        public function template() {
+        public function template()
+        {
             return 'foo';
         }
 

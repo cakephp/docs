@@ -487,21 +487,25 @@ engine for you application::
     // In app/Lib/Configure/Engine/XmlConfig.php
     use Cake\\Utility\\Xml;
 
-    class XmlConfig implements ConfigEngineInterface {
-        public function __construct($path = null) {
+    class XmlConfig implements ConfigEngineInterface
+    {
+        public function __construct($path = null)
+        {
             if (!$path) {
                 $path = APP . 'Config' . DS;
             }
             $this->_path = $path;
         }
 
-        public function read($key) {
+        public function read($key)
+        {
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
 
         // As of 2.3 a dump() method is also required
-        public function dump($key, $data) {
+        public function dump($key, $data)
+        {
             // Code to dump data to file
         }
     }

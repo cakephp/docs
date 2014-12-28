@@ -18,8 +18,10 @@ fichero completo debería tener este aspecto::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -53,7 +55,8 @@ continuación puedes ver el aspecto básico que debería tener este controlador:
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
     }
 
 Vamos a añadir una acción a nuestro nuevo controlador. Las acciones representan
@@ -64,9 +67,11 @@ código para tal acción sería este::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             $articles = $this->Articles->find('all');
             $this->set(compact('articles'));
         }
@@ -179,13 +184,16 @@ contrario, la crearemos ahora en nuestro controlador de artículos::
 
     use Cake\Error\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
              $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -239,14 +247,17 @@ ArticlesController::
 
     use Cake\Error\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $components = ['Flash'];
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -255,7 +266,8 @@ ArticlesController::
             $this->set(compact('article'));
         }
 
-        public function add() {
+        public function add()
+        {
             $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Articles->save($article)) {
@@ -371,12 +383,15 @@ Volvamos al modelo ``Articles`` y hagamos algunos ajustes::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             $validator
                 ->notEmpty('title')
                 ->notEmpty('body');
@@ -405,7 +420,8 @@ Editando artículos: allá vamos. Ya eres un profesional de CakePHP, así que
 habrás cogido la pauta. Crear una acción, luego la vista. He aquí cómo debería
 ser la acción ``edit()`` del controlador ``ArticlesController``::
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Artículo no válido'));
         }
@@ -496,7 +512,8 @@ Borrando Artículos
 Vamos a permitir a los usuarios que borren artículos. Empieza con una acción
 ``delete()`` en el controlador ``ArticlesController``::
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->get($id);

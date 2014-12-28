@@ -108,7 +108,8 @@ présentation acceptés par client pour finalement déléguer le processus
 de rendu à la couche View. Un exemple de controller d'enregistrement
 d'utilisateur serait::
 
-    public function add() {
+    public function add()
+    {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);

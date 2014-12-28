@@ -93,9 +93,11 @@ Router
 これは例えば、サブドメインやHTTPS/HTTPのフラグを扱うルートを作成するのに使用することができます。
 以下はサブドメインをサポートするルートクラスの一例です::
 
-    class SubdomainRoute extends CakeRoute {
+    class SubdomainRoute extends CakeRoute
+    {
 
-        public function match($params) {
+        public function match($params)
+        {
             $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
             unset($params['subdomain']);
             $path = parent::match($params);

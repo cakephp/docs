@@ -330,7 +330,8 @@ argument of :php:meth:`Cake\\Routing\\Router::connect()` you can define which ro
 elements should also be made available as passed arguments::
 
     // SomeController.php
-    public function view($articleId = null, $slug = null) {
+    public function view($articleId = null, $slug = null)
+    {
         // Some code here...
     }
 
@@ -715,7 +716,8 @@ If you were to visit the previously mentioned URL, and you
 had a controller action that looked like::
 
     CalendarsController extends AppController {
-        public function view($arg1, $arg2) {
+        public function view($arg1, $arg2)
+        {
             debug(func_get_args());
         }
     }
@@ -887,7 +889,8 @@ In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
 arguments::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         Router::parseNamedParams($this->request);
     }
@@ -934,8 +937,10 @@ RequestActionTrait
     return the data::
 
         // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            public function latest() {
+        class CommentsController extends AppController
+        {
+            public function latest()
+            {
                 if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }

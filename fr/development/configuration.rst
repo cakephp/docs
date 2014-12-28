@@ -457,21 +457,25 @@ pour votre application::
     use Cake\Core\Configure\ConfigEngineInterface;
     use Cake\Utility\Xml;
 
-    class XmlConfig implements ConfigEngineInterface {
+    class XmlConfig implements ConfigEngineInterface
+    {
 
-        public function __construct($path = null) {
+        public function __construct($path = null)
+        {
             if (!$path) {
                 $path = CONFIG;
             }
             $this->_path = $path;
         }
 
-        public function read($key) {
+        public function read($key)
+        {
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data) {
+        public function dump($key, $data)
+        {
             // Code to dump data to file
         }
     }

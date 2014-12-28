@@ -90,7 +90,8 @@ delega requisições ou processamento de dados da camada Model, selecciona o tip
 dados de apresentação que os clientes estão aceitando, e finalmente delega o processo de
 renderização para a camada View. Um exemplo de controller para registro de usuário seria::
 
-    public function add() {
+    public function add()
+    {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);

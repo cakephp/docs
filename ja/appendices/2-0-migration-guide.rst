@@ -211,7 +211,8 @@ Note: ホームページ自体(``http://domain/``)の $this->request->url は、
 Componentは、全てのコンポーネントが必須とする基底クラスになりました。
 コンポーネントとそのコンストラクタが変更になったことから、これを書き換える必要があります::
 
-    class PrgComponent extends Component {
+    class PrgComponent extends Component
+    {
         public function __construct(ComponentCollection $collection, $settings = array()) {
             parent::__construct($collection, $settings);
         }
@@ -224,7 +225,8 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 設定がコンポーネントのコンストラクタに移動したことで、 ``initialize()`` コールバックは2番目の引数に ``$settings`` を受け取らないようになりました。
 以下のメソッド特性を使うようにコンポーネントを書き換える必要があります::
 
-    public function initialize(Controller $controller) { }
+    public function initialize(Controller $controller)
+    { }
 
 加えて、initialize()メソッドはコンポーネントが有効な時のみ呼び出されます。
 これは通常、コントローラに直接付随したコンポーネントを意味します。
@@ -858,19 +860,23 @@ beforeRenderもまた同様で、ビューでの変数全てが操作される�
 ヘルパーのコールバックは常に一つの引数、beforeRenderとafterRenderにはレンダリングされるビューファイルが、beforeLayoutとafterLayoutにはレンダリングされるレイアウトファイルが与えられるようになりました。
 ヘルパーの関数特性は以下のようにする必要があります::
 
-    public function beforeRender($viewFile) {
+    public function beforeRender($viewFile)
+    {
 
     }
 
-    public function afterRender($viewFile) {
+    public function afterRender($viewFile)
+    {
 
     }
 
-    public function beforeLayout($layoutFile) {
+    public function beforeLayout($layoutFile)
+    {
 
     }
 
-    public function afterLayout($layoutFile) {
+    public function afterLayout($layoutFile)
+    {
 
     }
 
@@ -951,7 +957,8 @@ PHPUnitによって全てのコマンドラインオプションがサポート�
 
 また、以下のようにモデルのクラスにプロパティを定義するだけでも解決できます::
 
-    class Post {
+    class Post
+    {
         public $nonexistentProperty = array();
     }
 

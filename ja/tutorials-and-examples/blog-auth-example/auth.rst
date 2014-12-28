@@ -24,7 +24,8 @@
 次のステップはユーザーのデータを探索(*finding*)、保存(*saving*)、検証(*validating*)する責任を持つ、ユーザーモデルを作成することです::
 
     // app/Model/User.php
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $validate = array(
             'username' => array(
                 'required' => array(
@@ -52,19 +53,23 @@ UsersControllerもまた作成しましょう。
 以下のコードは基本的なCakePHPにバンドルされたコード生成ユーティリティで `焼き上がった` (*baked*) UsersControllerクラスに該当します::
 
     // app/Controller/UsersController.php
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function beforeFilter() {
+        public function beforeFilter()
+        {
             parent::beforeFilter();
             $this->Auth->allow('add');
         }
 
-        public function index() {
+        public function index()
+        {
             $this->User->recursive = 0;
             $this->set('users', $this->paginate());
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             $this->User->id = $id;
             if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
@@ -72,7 +77,8 @@ UsersControllerもまた作成しましょう。
             $this->set('user', $this->User->read(null, $id));
         }
 
-        public function add() {
+        public function add()
+        {
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
@@ -84,7 +90,8 @@ UsersControllerもまた作成しましょう。
             }
         }
 
-        public function edit($id = null) {
+        public function edit($id = null)
+        {
             $this->User->id = $id;
             if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
@@ -102,7 +109,8 @@ UsersControllerもまた作成しましょう。
             }
         }
 
-        public function delete($id = null) {
+        public function delete($id = null)
+        {
             $this->request->onlyAllow('post');
 
             $this->User->id = $id;
@@ -150,7 +158,8 @@ CakePHPではこれを :php:class:`AuthComponent` で処理します。
 ``app/Controller/AppController.php`` ファイルを開いて、以下の行を追加してください::
 
     // app/Controller/AppController.php
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         //...
 
         public $components = array(
@@ -161,7 +170,8 @@ CakePHPではこれを :php:class:`AuthComponent` で処理します。
             )
         );
 
-        public function beforeFilter() {
+        public function beforeFilter()
+        {
             $this->Auth->allow('index', 'view');
         }
         //...
@@ -178,13 +188,15 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
     // app/Controller/UsersController.php
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         // ユーザー自身による登録とログアウトを許可する
         $this->Auth->allow('add', 'logout');
     }
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
@@ -194,7 +206,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->redirect($this->Auth->logout());
     }
 
@@ -206,7 +219,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
     App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
 
     // ...
 
@@ -264,7 +278,8 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 また、作成された投稿に、現在ログインしているユーザーを参照として保存するために、PostsControllerでの小さな変更が必要です::
 
     // app/Controller/PostsController.php
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
             if ($this->Post->save($this->request->data)) {
@@ -292,7 +307,8 @@ Authコンポーネントの ``user()`` 関数は現在ログインしている�
         )
     );
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
@@ -312,7 +328,8 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
 
     // app/Controller/PostsController.php
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         // 登録済ユーザーは投稿できる
         if ($this->action === 'add') {
             return true;
@@ -338,7 +355,8 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
 
     // app/Model/Post.php
 
-    public function isOwnedBy($post, $user) {
+    public function isOwnedBy($post, $user)
+    {
         return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
     }
 

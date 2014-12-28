@@ -159,7 +159,8 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 メソッドの定義の例::
 
-    public function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '')
+    {
         if (expr) {
             statement;
         }
@@ -169,7 +170,8 @@ Cakeの開発者は以下のコーディング規約を使います。
 デフォルトを用いた引数は、関数の定義の最後に置く必要があります。
 関数は何かを、少なくともtrueかfalseを、関数呼び出しが成功したかどうかを判定できるように、返すように作ってみてください::
 
-    public function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false)
+    {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -197,7 +199,8 @@ Cakeの開発者は以下のコーディング規約を使います。
      * @param array $array 配列。
      * @param boolean $boolean 真偽値。
      */
-    public function foo(Model $Model, array $array, $boolean) {
+    public function foo(Model $Model, array $array, $boolean)
+    {
     }
 
 ここで ``$Model`` は ``Model`` のインスタンスで、また ``$array`` は ``array`` でなければなりません。
@@ -210,7 +213,8 @@ Cakeの開発者は以下のコーディング規約を使います。
      *
      * @param array|ArrayObject $array 配列。
      */
-    public function foo($array) {
+    public function foo($array)
+    {
     }
 
 メソッドチェーン
@@ -262,7 +266,8 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
      *
      * @return void
      */
-    function bar() {
+    function bar()
+    {
     }
 
     /**
@@ -270,7 +275,8 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
      *
      * @return void
      */
-    function foo() {
+    function foo()
+    {
     }
 
 ファイルの最初のブロック以外のコメントブロックは、常に新しい行を先に置く必要があります。
@@ -305,7 +311,8 @@ PHPタグ
 
 全ての関数はキャメルバックで書いてください::
 
-    function longFunctionName() {
+    function longFunctionName()
+    {
     }
 
 クラス
@@ -313,7 +320,8 @@ PHPタグ
 
 クラス名はキャメルケースで書かれる必要があります。例::
 
-    class ExampleClass {
+    class ExampleClass
+    {
     }
 
 変数
@@ -336,10 +344,12 @@ PHPタグ
 加えて、protectedなメソッドまたは変数の名前は単一のアンダースコア(``_``)から始まります。
 例::
 
-    class A {
+    class A
+    {
         protected $_iAmAProtectedVariable;
 
-        protected function _iAmAProtectedMethod() {
+        protected function _iAmAProtectedMethod()
+        {
            /*...*/
         }
     }
@@ -347,10 +357,12 @@ PHPタグ
 privateなメソッドまたは変数の名前は二つののアンダースコア(``__``)から始まります。
 例::
 
-    class A {
+    class A
+    {
         private $__iAmAPrivateVariable;
 
-        private function __iAmAPrivateMethod() {
+        private function __iAmAPrivateMethod()
+        {
             /*...*/
         }
     }

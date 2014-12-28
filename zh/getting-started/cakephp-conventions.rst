@@ -25,13 +25,16 @@ http://www.example.com/apples/ 的请求会被映射到对 ``ApplesController`` 
 器的方法名称前面带一个下划线(_)，该方法是无法直接通过 web 访问的，但是可以在内部
 调用。例如::
 
-    class NewsController extends AppController {
+    class NewsController extends AppController
+    {
 
-        public function latest() {
+        public function latest()
+        {
             $this->_findNewArticles();
         }
 
-        protected function _findNewArticles() {
+        protected function _findNewArticles()
+        {
             // Logic to find latest news articles
         }
     }

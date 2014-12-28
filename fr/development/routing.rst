@@ -350,7 +350,8 @@ soient passés aux arguments à la place. En utilisant le 3ème argument de
 doivent aussi être rendus disponibles en arguments passés::
 
     // SomeController.php
-    public function view($articleId = null, $slug = null) {
+    public function view($articleId = null, $slug = null)
+    {
         // du code ici...
     }
 
@@ -779,7 +780,8 @@ Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::
 
     CalendarsController extends AppController{
-        public function view($arg1, $arg2) {
+        public function view($arg1, $arg2)
+        {
             debug(func_get_args());
         }
     }
@@ -998,7 +1000,8 @@ In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
 arguments::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         Router::parseNamedParams($this->request);
     }
@@ -1044,8 +1047,10 @@ RequestActionTrait
     return the data::
 
         // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            public function latest() {
+        class CommentsController extends AppController
+        {
+            public function latest()
+            {
                 if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }

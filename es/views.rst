@@ -365,8 +365,10 @@ controller, setting the ``title`` variable::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->set('title', 'View Active Users');
         }
     }
@@ -381,7 +383,8 @@ controller actions using the controller or view's
 ``$layout`` property::
 
     // From a controller
-    public function admin_view() {
+    public function admin_view()
+    {
         // Stuff
         $this->layout = 'admin';
     }
@@ -396,13 +399,16 @@ using something like::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->set('title', 'View Active Users');
             $this->layout = 'default_small_ad';
         }
 
-        public function view_image() {
+        public function view_image()
+        {
             $this->layout = 'image';
             // Output user image
         }
@@ -426,8 +432,10 @@ Contacts plugin::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -517,9 +525,11 @@ the Post example::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -618,8 +628,10 @@ You'll also want to extend ``View`` to ensure things work correctly::
 
     use Cake\View\View;
 
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
             // Custom logic here.
         }
     }

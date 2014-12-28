@@ -474,7 +474,8 @@ Il y a des fois où vous voulez envoyer des fichiers en réponses de vos
 requêtes. Vous pouvez faire cela en utilisant
 :php:meth:`Cake\\Network\\Response::file()`::
 
-    public function sendFile($id) {
+    public function sendFile($id)
+    {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
         //Retourne un objet reponse pour éviter que le controller n'essaie de
@@ -513,7 +514,8 @@ Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
 exemple si vous voulez générer un pdf ou un ics à la volée et voulez servir la
 chaîne générée en fichier, vous pouvez faire cela en utilisant::
 
-    public function sendIcs() {
+    public function sendIcs()
+    {
         $icsString = $this->Calendar->generateIcs();
         $this->response->body($icsString);
         $this->response->type('ics');
@@ -568,7 +570,8 @@ résultats de l'action d'un controller.
 :php:meth:`Cake\\Network\\Response::disableCache()` est justement prévu pour
 cela::
 
-    public function index() {
+    public function index()
+    {
         // faire quelque chose.
         $this->response->disableCache();
     }
@@ -582,7 +585,8 @@ cela::
 Vous pouvez aussi dire aux clients que vous voulez qu'ils mettent en cache
 des réponses. En utilisant :php:meth:`Cake\\Network\\Response::cache()`::
 
-    public function index() {
+    public function index()
+    {
         //faire quelque chose
         $this->response->cache('-1 minute', '+5 days');
     }
@@ -641,13 +645,15 @@ Le deuxième paramètre de cette méthode est utilisé pour spécifier un ``max-
 pour le cache, qui est le nombre de secondes après lesquelles la réponse n'est
 plus considérée comme récente::
 
-    public function view() {
+    public function view()
+    {
         ...
         // Définit le Cache-Control en public pour 3600 secondes
         $this->response->sharable(true, 3600);
     }
 
-    public function mes_donnees() {
+    public function mes_donnees()
+    {
         ...
         // Définit le Cache-Control en private pour 3600 secondes
         $this->response->sharable(false, 3600);
@@ -665,7 +671,8 @@ Vous pouvez définir l'en-tête ``Expires`` avec une date et un temps après
 lesquels la réponse n'est plus considerée comme récente. Cet en-tête peut être
 défini en utilisant la méthode :php:meth:`Cake\\Network\\Response::expires()`::
 
-    public function view() {
+    public function view()
+    {
         $this->response->expires('+5 days');
     }
 
@@ -698,7 +705,8 @@ soit appeler manuellement la méthode
 :php:meth:`Cake\\Network\\Response::checkNotModified()`, soit avoir le
 :php:class:`RequestHandlerComponent` inclu dans votre controller::
 
-    public function index() {
+    public function index()
+    {
         $articles = $this->Article->find('all');
         $this->response->etag($this->Article->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
@@ -723,7 +731,8 @@ soit appeler manuellement la méthode
 :php:meth:`Cake\\Network\\Response::checkNotModified()`, soit avoir le
 :php:class:`RequestHandlerComponent` inclu dans votre controller::
 
-    public function view() {
+    public function view()
+    {
         $article = $this->Article->find('first');
         $this->response->modified($article['Article']['modified']);
         if ($this->response->checkNotModified($this->request)) {
@@ -779,7 +788,8 @@ La classe ``Response`` aide à faciliter le test des controllers et des
 components. En ayant un seul endroit pour mock/stub les en-têtes, vous
 pouvez tester plus facilement les controllers et les components::
 
-    public function testSomething() {
+    public function testSomething()
+    {
         $this->controller->response = $this->getMock('Cake\Network\Response');
         $this->controller->response->expects($this->once())->method('header');
         // ...

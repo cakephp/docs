@@ -115,7 +115,8 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
     App::uses('AppError', 'Lib');
 
     //app/Lib/AppError.php の中で
-    class AppError {
+    class AppError
+    {
         public static function handleError($code, $description, $file = null, $line = null, $context = null) {
             echo 'エラー発生！';
         }
@@ -162,7 +163,8 @@ CakePHP 2.2 以降、``Error.handler`` は致命的(fatal)なエラーコード�
     App::uses('AppError', 'Lib');
 
     //app/Lib/AppError.php の中で
-    class AppError {
+    class AppError
+    {
         public static function handleError($code, $description, $file = null, $line = null, $context = null) {
             list(, $level) = ErrorHandler::mapErrorCode($code);
             if ($level === LOG_ERROR) {

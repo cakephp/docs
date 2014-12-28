@@ -28,7 +28,8 @@ table ``articles``, nous pourrions créer l'entity suivante::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
     }
 
 Pour l'instant cette entity ne fait pas grand chose. Cependant quand nous
@@ -82,8 +83,10 @@ la façon dont les propriétés sont lues ou définies. Par exemple::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
-        protected function _getTitle($title) {
+    class Article extends Entity
+    {
+        protected function _getTitle($title)
+        {
             return ucwords($title);
         }
     }
@@ -98,9 +101,11 @@ les propriétés sont récupérées/définies en définissant un mutateur::
     use Cake\ORM\Entity;
     use Cake\Utility\Inflector;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _setTitle($title) {
+        protected function _setTitle($title)
+        {
             $this->set('slug', Inflector::slug($title));
             return $title;
         }
@@ -129,9 +134,11 @@ complet::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
-        protected function _getFullName() {
+        protected function _getFullName()
+        {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -212,7 +219,8 @@ si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -226,7 +234,8 @@ behavior fallback si un champ n'est pas nommé spécifiquement::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -302,9 +311,11 @@ données associées en lazy loading::
     use Cake\ORM\Entity;
     use Cake\ORM\TableRegistry;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _getComments() {
+        protected function _getComments()
+        {
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
@@ -341,7 +352,8 @@ Ce trait pourrait donner des méthodes pour rendre les entities comme
 
     trait SoftDeleteTrait {
 
-        public function softDelete() {
+        public function softDelete()
+        {
             $this->set('deleted', true);
         }
 
@@ -355,7 +367,8 @@ et en l'incluant::
     use Cake\ORM\Entity;
     use SoftDelete\Model\Entity\SoftDeleteTrait;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use SoftDeleteTrait;
     }
 
@@ -390,7 +403,8 @@ classe entity, vous pouvez fournir une liste de champs virtuels qui doivent
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_virtual = ['full_name'];
 
@@ -413,7 +427,8 @@ de la définition d'une classe entity, définissez les propriétés qui doivent
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_hidden = ['password'];
 

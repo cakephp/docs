@@ -30,11 +30,13 @@ controller actions. A basic controller might look something like
 this::
 
     // src/Controller/RecipesController.php
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
 
         public $components = array('RequestHandler');
 
-        public function index() {
+        public function index()
+        {
             $recipes = $this->Recipes->find('all')->toArray();
             $this->set(array(
                 'recipes' => $recipes,
@@ -42,7 +44,8 @@ this::
             ));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             $recipe = $this->Recipes->findById($id)->toArray();
             $this->set(array(
                 'recipe' => $recipe,
@@ -50,7 +53,8 @@ this::
             ));
         }
 
-        public function edit($id) {
+        public function edit($id)
+        {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
                 $this->Recipes->patchEntity($recipe, $this->request->data);
@@ -66,7 +70,8 @@ this::
             ));
         }
 
-        public function delete($id) {
+        public function delete($id)
+        {
             $recipe = $this->Recipes->get($id);
             if ($this->Recipes->delete($recipe)) {
                 $message = 'Deleted';

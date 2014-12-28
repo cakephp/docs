@@ -38,9 +38,11 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur:
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             return $validator
                 ->notEmpty('username', "Un nom d'utilisateur est nécessaire")
                 ->notEmpty('password', 'Un mot de passe est nécessaire')
@@ -65,18 +67,22 @@ de génération de code fournis par CakePHP::
     use Cake\Error\NotFoundException;
     use Cake\Event\Event;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             parent::beforeFilter($event);
             $this->Auth->allow('add');
         }
 
-         public function index() {
+         public function index()
+         {
             $this->set('users', $this->Users->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('utilisateur non valide'));
             }
@@ -85,7 +91,8 @@ de génération de code fournis par CakePHP::
             $this->set(compact('user'));
         }
 
-        public function add() {
+        public function add()
+        {
             $user = $this->Users->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Users->save($user)) {
@@ -140,10 +147,12 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
     use Cake\Controller\Controller;
     use Cake\Event\Event;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         //...
 
-        public function initialize() {
+        public function initialize()
+        {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'loginRedirect' => [
@@ -158,7 +167,8 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
             ]);
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             $this->Auth->allow(['index', 'view']);
         }
         //...
@@ -183,13 +193,15 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
 
     // src/Controller/UsersController.php
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
         // Permet aux utilisateurs de s'enregistrer et de se déconnecter.
         $this->Auth->allow(['add', 'logout']);
     }
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -200,7 +212,8 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         return $this->redirect($this->Auth->logout());
     }
 
@@ -214,11 +227,13 @@ fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
     use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // ...
 
-        protected function _setPassword($password) {
+        protected function _setPassword($password)
+        {
             return (new DefaultPasswordHasher)->hash($password);
         }
 
@@ -285,7 +300,8 @@ Aussi, un petit changement dans ArticlesController est nécessaire pour stocker
 l'utilisateur connecté courant en référence pour l'article créé::
 
     // src/Controller/ArticlesController.php
-    public function add() {
+    public function add()
+    {
         $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
             // Ajout de cette ligne
@@ -312,7 +328,8 @@ config de Auth::
 
     // src/Controller/AppController.php
 
-    public function initialize() {
+    public function initialize()
+    {
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'authorize' => ['Controller'], // Ajout de cette ligne
@@ -328,7 +345,8 @@ config de Auth::
         ]);
     }
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         // Admin peuvent accéder à chaque action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
@@ -353,7 +371,8 @@ fichier ``ArticlesController.php`` et ajoutez le contenu suivant::
 
     // src/Controller/ArticlesController.php
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         // Tous les utilisateurs enregistrés peuvent ajouter des articles
         if ($this->request->action === 'add') {
             return true;
@@ -381,7 +400,8 @@ suivante::
 
     // src/Model/Table/ArticlesTable.php
 
-    public function isOwnedBy($articleId, $userId) {
+    public function isOwnedBy($articleId, $userId)
+    {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 

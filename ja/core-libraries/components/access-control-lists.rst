@@ -511,7 +511,8 @@ $components 配列で CakePHP の ACL コンポーネントをインクルード
 
 ::
 
-    public function any_action() {
+    public function any_action()
+    {
         $aro = $this->Acl->Aro;
 
         // すべてのグループ情報を配列の中で列挙しています
@@ -576,7 +577,8 @@ $components 配列で CakePHP の ACL コンポーネントをインクルード
 
 ::
 
-    public function any_action() {
+    public function any_action()
+    {
         $aro = new Aro();
 
         // これが私達の user レコードで、新しい ARO レコードにリンク
@@ -742,7 +744,8 @@ CakePHP のコア Acl コンポーネントによって行われます。
 
 ::
 
-    class SomethingsController extends AppController {
+    class SomethingsController extends AppController
+    {
         // これを AppController に置きたいと思うかもしれませんが、
         // これでもちゃんと動作します。
 
@@ -755,7 +758,8 @@ CakePHP のコア Acl コンポーネントによって行われます。
 
 ::
 
-    public function index() {
+    public function index()
+    {
         // 戦士たちに武器への完全なアクセス権を与えます。
         // これらの例ではいずれもエイリアス書式を使っています。
         $this->Acl->allow('戦士たち', '武器');
@@ -835,7 +839,8 @@ AclComponent を使って自分たちで作った ACO や ARO の間でチェッ
 
 ::
 
-    public function index() {
+    public function index()
+    {
         // これらはどれも true を返します:
         $this->Acl->check('戦士たち/Aragorn', '武器');
         $this->Acl->check('戦士たち/Aragorn', '武器', 'create');

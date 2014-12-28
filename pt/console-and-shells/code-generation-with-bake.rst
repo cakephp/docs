@@ -70,18 +70,22 @@ ShellTask.php file should look like::
 
     use Cake\Shell\Task\SimpleBakeTask;
 
-    class ShellTask extends SimpleBakeTask {
+    class ShellTask extends SimpleBakeTask
+    {
         public $pathFragment = 'Shell/';
 
-        public function name() {
+        public function name()
+        {
             return 'shell';
         }
 
-        public function fileName($name) {
+        public function fileName($name)
+        {
             return $name . 'Shell.php';
         }
 
-        public function template() {
+        public function template()
+        {
             return 'shell';
         }
 
@@ -103,7 +107,8 @@ the following content::
      */
     class <?= $name ?>Shell extends Shell {
 
-        public function main() {
+        public function main()
+        {
             // Add code.
         }
     }

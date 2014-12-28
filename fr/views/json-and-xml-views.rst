@@ -47,13 +47,16 @@ variables de vue avant la génération de la réponse, vous devrez utiliser les
 fichiers de template. La valeur de ``_serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
-    class PostsController extends AppController {
-        public function initialize() {
+    class PostsController extends AppController
+    {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->paginate());
             $this->set('_serialize', ['articles']);
         }
@@ -62,13 +65,16 @@ caractère, soit un tableau de variables de vue à sérialiser::
 Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue à
 combiner::
 
-    class ArticlesController extends AppController {
-        public function initialize() {
+    class ArticlesController extends AppController
+    {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
-        public function index() {
+        public function index()
+        {
             // Some code that created $articles and $comments
             $this->set(compact('articles', 'comments'));
             $this->set('_serialize', ['articles', 'comments']);
@@ -92,8 +98,10 @@ vous aurez probablement envie d'omettre ceci à partir d'une réponse JSON.
 C'est une situation où un fichier de vue est utile::
 
     // Code du controller
-    class PostsController extends AppController {
-        public function index() {
+    class PostsController extends AppController
+    {
+        public function index()
+        {
             $articles = $this->paginate('Articles');
             $this->set(compact('articles'));
         }

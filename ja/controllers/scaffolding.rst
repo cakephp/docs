@@ -24,7 +24,8 @@ web開発者が実際の使われ方がわからないフォームの作成を�
 
 スキャフォールディングを追加するために、コントローラの中で、$scaffold変数を追加して下さい。::
 
-    class CategoriesController extends AppController {
+    class CategoriesController extends AppController
+    {
         public $scaffold;
     }
 
@@ -51,7 +52,8 @@ User追加フォームにGroupのためのselectボックスが空のまま表�
 もしID以外の別なもの(例えばユーザの名前など)を表示したい場合、$displayField変数をモデルで設定して下さい。
 それでは、スキャフォールディングの中でIDではなく名前によってカテゴリに関連したユーザが示されるようにUserクラスに$displayFieldを設定してみましょう。::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $displayField = 'first_name';
     }
@@ -78,7 +80,8 @@ Scaffoldingを使って単純な管理インターフェイスを作成する
 これは単純なバックエンドインターフェイスを素早く作るための簡単な方法です。ただし、管理用と非管理用の足場のメソッドを同時に使うことはできないことを覚えておいて下さい。
 普通のスキャフォールディングでは個別のメソッドを上書きしたり、独自実装に置き換えることができます。::
 
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
       // custom code here
     }
 

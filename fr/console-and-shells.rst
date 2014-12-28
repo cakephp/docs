@@ -95,8 +95,10 @@ dedans::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -129,12 +131,15 @@ ajoutons une autre commande qui fait quelque chose::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function heyThere($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous')
+        {
             $this->out('Hey there ' . $name);
         }
     }
@@ -174,14 +179,17 @@ propriétés attachées à votre shell::
 
     use Cake\Console\Shell;
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        public function show() {
+        public function show()
+        {
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
@@ -203,7 +211,8 @@ tâches vous permettent d'extraire des commandes dans des classes. Par exemple,
 ``bake`` est fait entièrement de tâches. Vous définissez les tâches d'un
 shell en utilisant la propriété ``$tasks``::
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
         public $tasks = ['Template'];
     }
 
@@ -222,8 +231,10 @@ une classe de tâche ressemble à cela::
 
     use Cake\Console\Shell;
 
-    class FileGeneratorTask extends Shell {
-        public function main() {
+    class FileGeneratorTask extends Shell
+    {
+        public function main()
+        {
 
         }
     }
@@ -233,11 +244,13 @@ rend les tâches meilleures pour la réutilisation de fonctions identiques à
 :doc:`/controllers/components`::
 
     // Dans src/Console/Command/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends Shell
+    {
         // Se trouve dans src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
-        public function main() {
+        public function main()
+        {
             $this->Sound->main();
         }
     }
@@ -256,7 +269,8 @@ commande::
 De plus, le nom de la task doit être ajouté en tout que sous commande dans
 l'OptionParser du Shell::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addSubcommand('sound', [
             'help' => 'Execute The Sound Task.'
@@ -528,7 +542,8 @@ et les tâches.
 ConsoleOptionParser implémente une interface courant et inclut les méthodes
 pour configurer facilement les multiple options/arguments en une fois. ::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         //configure parser
         return $parser;
@@ -541,7 +556,8 @@ Toutes les méthodes utilisées pour configurer le parser peuvent
 être chainées, vous permettant de définir l'intégralité des options du
 parser en une unique série d'appel de méthodes::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
@@ -834,7 +850,8 @@ arguments, et les options, doivent suivre le format que
 pouvez aussi utiliser buildFromArray lui-même, pour construire un parser
 d'option::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray([
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),

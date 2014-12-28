@@ -45,7 +45,8 @@ find('first')
 ``find('first', $params)`` は結果を1行返します。1行だけ取得したい時に使います。\
 以下の例を見てください。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
         // ...
         $semiRandomArticle = $this->Article->find('first');
         $lastCreated = $this->Article->find('first', array(
@@ -86,7 +87,8 @@ find('count')
 
 ``find('count', $params)`` は整数を返します。以下のサンプルを見てください。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
         // ...
         $total = $this->Article->find('count');
         $pending = $this->Article->find('count', array(
@@ -114,7 +116,8 @@ find('all')
 ``find('all', $params)`` は配列で結果を返します。 ``find('all')`` は、他のいろいろな\
 ``find()`` や、 ``paginate`` でも使われています。以下のサンプルを見てください。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
         // ...
         $allArticles = $this->Article->find('all');
         $pending = $this->Article->find('all', array(
@@ -165,7 +168,8 @@ find('list')
 ``find('list', $params)`` はインデックス付きの配列を返します。よくあるフォームのセレクトボックスを\
 作るために、リストが欲しい場合などに使うと便利です。以下のサンプルを見てください。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
         // ...
         $allArticles = $this->Article->find('list');
         $pending = $this->Article->find('list', array(
@@ -204,7 +208,8 @@ find('list')
 また、添字に対する値はvalueが使われます。(値については、モデルの属性
 :ref:`model-displayField` で設定できます)以下に例を示します。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
         // ...
         $justusernames = $this->Article->User->find('list', array(
             'fields' => array('User.username')
@@ -266,7 +271,8 @@ find('threaded')
 ``find('threaded', $params)`` は入れ子になった配列を返します。入れ子の構造を表現するために、\
 ``parent_id`` フィールドがある場合に使います。以下のサンプルを見てください。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
         // ...
         $allCategories = $this->Category->find('threaded');
         $someCategories = $this->Comment->find('threaded', array(
@@ -346,7 +352,8 @@ find('neighbors')
 ``find('neighbors', $params)`` はfindの'first'と似たような動きをします。ただ、それに加えて\
 指定した条件の前後の行も一緒に取得してきます。以下の例を見てください。 ::
 
-    public function some_function() {
+    public function some_function()
+    {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
 
@@ -429,7 +436,8 @@ find('neighbors')
 
 ::
 
-    class Article extends AppModel {
+    class Article extends AppModel
+    {
         public $findMethods = array('available' =>  true);
     }
 
@@ -439,7 +447,8 @@ findを実装したければ、その関数の名前は ``_findMyFancySearch`` �
 
 ::
 
-    class Article extends AppModel {
+    class Article extends AppModel
+    {
         public $findMethods = array('available' =>  true);
 
         protected function _findAvailable($state, $query, $results = array()) {
@@ -455,10 +464,12 @@ findを実装したければ、その関数の名前は ``_findMyFancySearch`` �
 
 ::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         // 公開されているすべての記事を検索して、createdカラムの順番に並び替える
-        public function index() {
+        public function index()
+        {
             $articles = $this->Article->find('available', array(
                 'order' => array('created' => 'desc')
             ));
@@ -490,10 +501,12 @@ findを実装したければ、その関数の名前は ``_findMyFancySearch`` �
 ::
 
     <?php
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         // Will paginate all published articles
-        public function index() {
+        public function index()
+        {
             $this->paginate = array('available');
             $articles = $this->paginate();
             $this->set(compact('articles'));
@@ -509,7 +522,8 @@ find結果になります。
 
 ::
 
-    class AppModel extends Model {
+    class AppModel extends Model
+    {
 
     /**
      * Removes 'fields' key from count query on custom finds when it is an array,

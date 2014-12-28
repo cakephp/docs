@@ -290,8 +290,10 @@ de ``Validator`` pour votre logique de validation réutilisable::
 
     use Cake\Validation\Validator;
 
-    class ContactValidator extends Validator {
-        public function __construct() {
+    class ContactValidator extends Validator
+    {
+        public function __construct()
+        {
             // Add validation rules here.
         }
     }

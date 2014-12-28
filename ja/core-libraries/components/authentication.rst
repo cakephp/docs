@@ -258,7 +258,8 @@ Auth の他の設定キー(authError や loginAction など)を authenticate や
 あるオブジェクトでユーザが識別できたら、以降のオブジェクトはチェックされません。
 ログインフォームと連携する単純な login 関数なら次のようになります::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
@@ -336,8 +337,10 @@ Basicおよびダイジェスト認証は初期POSTやフォームを必要と�
 
     App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
-    class OpenidAuthenticate extends BaseAuthenticate {
-        public function authenticate(CakeRequest $request, CakeResponse $response) {
+    class OpenidAuthenticate extends BaseAuthenticate
+    {
+        public function authenticate(CakeRequest $request, CakeResponse $response)
+        {
             // OpenID 用の処理をここに記述します。
             // ユーザ認証が通った場合は、user の配列を返します。
             // 通らなかった場合は false を返します。
@@ -395,7 +398,8 @@ HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値と�
 リクエストごとに、それらの値を再度ユーザを識別するために使い、正規のユーザであることを確認します。
 認証オブジェクトの ``authenticate()`` メソッドと同様に、``getUser()`` メソッドも成功ならユーザ情報の配列を、失敗なら ``false`` を返すようにしてください::
 
-    public function getUser($request) {
+    public function getUser($request)
+    {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
 
@@ -565,7 +569,8 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public function beforeSave($options = array()) {
             if (!$this->id) {
                 $passwordHasher = new SimplePasswordHasher();
@@ -630,7 +635,8 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 パスワードをダイジェスト認証で使用できるよう正しくハッシュ化するために、特別なパスワードハッシュ化の関数 ``DigestAuthenticate`` を使ってください。
 ダイジェスト認証とその他の認証戦略を合わせて利用する場合には、通常のハッシュ化パスワードとは別のカラムでダイジェストパスワードを保管するのをお勧めします::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public function beforeSave($options = array()) {
             // make a password for digest auth.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
@@ -675,12 +681,15 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 
     App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
-    class CustomPasswordHasher extends AbstractPasswordHasher {
-        public function hash($password) {
+    class CustomPasswordHasher extends AbstractPasswordHasher
+    {
+        public function hash($password)
+        {
             // ここにコードを書く
         }
 
-        public function check($password, $hashedPassword) {
+        public function check($password, $hashedPassword)
+        {
             // ここにコードを書く
         }
     }
@@ -700,7 +709,8 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 独自のアプリケーションを登録した直後など、時には手動によるログインが必要になる事態が発生することもあるでしょう。
 ログインさせたいユーザデータを引数に ``$this->Auth->login()`` を呼び出すことで、これを実現することができます::
 
-    public function register() {
+    public function register()
+    {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
             $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
@@ -753,7 +763,8 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 最終的には認証を解除し、適切な場所へとリダイレクトするためのてっとり早い方法がほしくなるでしょう。
 このメソッドはあなたのアプリケーション内のメンバーページに 'ログアウト' リンクを入れたい場合にも便利です::
 
-    public function logout() {
+    public function logout()
+    {
         $this->redirect($this->Auth->logout());
     }
 
@@ -887,8 +898,10 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
     App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
-    class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, CakeRequest $request) {
+    class LdapAuthorize extends BaseAuthorize
+    {
+        public function authorize($user, CakeRequest $request)
+        {
             // LDAP 用の処理をここに記述します。
         }
     }
@@ -1037,11 +1050,13 @@ ControllerAuthorize を使うことで、コントローラのコールバック
 コールバックでは必ず ``isAuthorized()`` を呼んでください。これは該当ユーザがリクエスト内でリソースにアクセスすることが許可されるかを boolean で返します。
 コールバックにはアクティブなユーザが渡されますので、チェックが可能です::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         public $components = array(
             'Auth' => array('authorize' => 'Controller'),
         );
-        public function isAuthorized($user = null) {
+        public function isAuthorized($user = null)
+        {
             // 登録済みユーザなら誰でも公開 function にアクセス可能です。
             if (empty($this->request->params['admin'])) {
                 return true;

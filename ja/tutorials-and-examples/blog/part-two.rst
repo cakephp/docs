@@ -10,7 +10,8 @@ CakePHPのモデルを作成することで、データベースとやりとり�
 CakePHPのモデルクラスのファイルは、 ``/app/Model`` の中にあり、今回は、 ``/app/Model/Post.php`` というファイルを作って保存します。
 ファイルの中身全体は次のようになります::
 
-    class Post extends AppModel {
+    class Post extends AppModel
+    {
     }
 
 命名規約は、CakePHPでは非常に大切です。
@@ -34,7 +35,8 @@ Postsコントローラの作成
 この新しいコントローラは、 ``PostsController.php`` という名前で、 ``/app/Controller`` ディレクトリの中に配置します。
 基本的なコントローラは次のようになります::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form');
     }
 
@@ -45,10 +47,12 @@ www.example.com/posts/index(www.example.com/posts/と同じです)
 をリクエストした場合、投稿記事の一覧が表示されると期待するでしょう。
 このアクションのコードは次のようになります::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form');
 
-        public function index() {
+        public function index()
+        {
             $this->set('posts', $this->Post->find('all'));
         }
     }
@@ -175,14 +179,17 @@ http://www.example.com/posts/index
 そうでないなら、これからPostsControllerの中に作ってみましょう::
 
     // File: /app/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form');
 
-        public function index() {
+        public function index()
+        {
              $this->set('posts', $this->Post->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid post'));
             }
@@ -233,15 +240,18 @@ CakePHPのErrorHandlerに処理が引き継がれます。
 
 まず、PostsControllerの中に、 ``add()`` アクションを作ります::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
 
-        public function index() {
+        public function index()
+        {
             $this->set('posts', $this->Post->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid post'));
             }
@@ -253,7 +263,8 @@ CakePHPのErrorHandlerに処理が引き継がれます。
             $this->set('post', $post);
         }
 
-        public function add() {
+        public function add()
+        {
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
@@ -350,7 +361,8 @@ addのビューは次のようなものになります:
 バリデーションのルールは、モデルの中で定義することができます。
 Postモデルを見直して、幾つか修正してみましょう::
 
-    class Post extends AppModel {
+    class Post extends AppModel
+    {
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
@@ -379,7 +391,8 @@ CakePHPのバリデーションエンジンは強力で、組み込みのルー�
 アクションをつくり、それからビューを作る、というパターンです。
 PostsControllerの ``edit()`` アクションはこんな形になります::
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -474,7 +487,8 @@ editビューは以下のようになるでしょう:
 次に、ユーザが投稿記事を削除できるようにする機能を作りましょう。
 PostsControllerの ``delete()`` アクションを作るところから始めます::
 
-    public function delete($id) {
+    public function delete($id)
+    {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }

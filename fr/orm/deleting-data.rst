@@ -67,7 +67,8 @@ efficace ou utile. Dans ces cas, il est plus performant d'utiliser une
 suppression en masse pour retirer plusieurs lignes en une fois::
 
     // Supprime tous les spams
-    function destroySpam() {
+    function destroySpam()
+    {
         return $this->deleteAll(['is_spam' => true]);
     }
 

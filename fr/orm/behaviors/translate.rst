@@ -20,9 +20,11 @@ Un Rapide Aperçu
 Après avoir créé la table ``i18n`` dans votre base de données, attachez le
 behavior à l'objet Table que vous souhaitez rendre traduisible::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
     
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', ['fields' => ['title']]);
         }
     }
@@ -53,7 +55,8 @@ trait spécial dans votre classe Entity::
     use Cake\Model\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 
@@ -102,9 +105,11 @@ Attacher le Behavior Translate à Vos Tables
 Attacher le behavior peut être fait dans la méthode ``initialize`` dans votre
 classe Table::
 
-    class Articles extends Table {
+    class Articles extends Table
+    {
     
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
@@ -123,9 +128,11 @@ souhaitez une séparation propre des données qui est stocké pour chaque table
 différente::
 
 
-    class Articles extends Table {
+    class Articles extends Table
+    {
     
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
                 'translationTable' => 'articles_i18n'
@@ -188,7 +195,8 @@ classe entity qui est utilisé pour votre table::
     use Cake\Model\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 
@@ -270,13 +278,16 @@ surcharger certains champs dans de tels entities. Garder ceci à l'esprit, vous
 pouvez sauvegarder de façon intuitive les traductions pour une entity donnée.
 Par exemple, étant donné la configuration suivante::
 
-    class Articles extends Table {
-        public function initialize(array $config) {
+    class Articles extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 
@@ -335,7 +346,8 @@ traductions à l'enregistrement de la base de données au même moment. Ceci peu
     use Cake\Model\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 

@@ -25,8 +25,10 @@ AuthComponent dans notre AppController::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
-        public function initialize() {
+    class AppController extends Controller
+    {
+        public function initialize()
+        {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authenticate' => [
@@ -58,7 +60,8 @@ nous n'avons pas encore écrit ce code. Créons donc l'action login::
 
     // Dans src/Controller/UsersController.php
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -98,7 +101,8 @@ Maintenant que les personnes peuvent se connecter, vous voudrez aussi
 probablement fournir un moyen de se déconnecter. Encore une fois, dans
 ``UsersController``, ajoutez le code suivant::
 
-    public function logout() {
+    public function logout()
+    {
         $this->Flash->success('Vous êtes maintenant déconnecté.');
         return $this->redirect($this->Auth->logout());
     }
@@ -137,7 +141,8 @@ assez simples, nous pouvons écrire quelques lignes de code simple dans notre
 AuthComponent comment notre application va autoriser les actions. Dans notre
 ``AppController``, ajoutez ce qui suit::
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         return false;
     }
 
@@ -148,7 +153,8 @@ Aussi, ajoutez ce qui suit dans la configuration de ``Auth`` dans
 
 Votre méthode ``initialize`` doit maintenant ressembler à ceci::
 
-        public function initialize() {
+        public function initialize()
+        {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authorize'=> 'Controller',//added this line
@@ -175,7 +181,8 @@ Nous allons par défaut refuser l'accès, et permettre un accès incrémental o�
 cela est utile. D'abord, nous allons ajouter la logique d'autorisation pour
 les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         $action = $this->request->params['action'];
 
         // Add et index sont toujours permises.
@@ -221,7 +228,8 @@ Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')``
 de ``src/Template/Bookmarks/add.ctp``. Avec ceci retiré, nous allons aussi
 mettre à jour la méthode add pour ressembler à ceci::
 
-    public function add() {
+    public function add()
+    {
         $bookmark = $this->Bookmarks->newEntity($this->request->data);
         $bookmark->user_id = $this->Auth->user('id');
         if ($this->request->is('post')) {
@@ -240,7 +248,8 @@ la possibilité que l'utilisateur puisse modifier de quel utilisateur un
 bookmark provient. Nous ferons la même chose pour le formulaire et l'action
 edit. Votre action edit devrait ressembler à ceci::
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $bookmark = $this->Bookmarks->get($id, [
             'contain' => ['Tags']
         ]);
@@ -265,7 +274,8 @@ Maintenant nous devons montrer les bookmarks pour l'utilisateur actuellement
 connecté. Nous pouvons faire cela en mettant à jour l'appel à ``paginate()``.
 Faites en sorte que votre action index() ressemble à ceci::
 
-    public function index() {
+    public function index()
+    {
         $this->paginate = [
             'conditions' => [
                 'Bookmarks.user_id' => $this->Auth->user('id'),
@@ -296,7 +306,8 @@ pouvons ajouter un champ virtuel/computed à l'entity. Dans
 
     use Cake\Collection\Collection;
 
-    protected function _getTagString() {
+    protected function _getTagString()
+    {
         if (isset($this->_properties['tag_string'])) {
             return $this->_properties['tag_string'];
         }
@@ -348,13 +359,15 @@ parser la chaîne de tag et trouver/construire les entities liées. Ajoutez ce
 qui suit dans ``src/Model/Table/BookmarksTable.php``::
 
 
-    public function beforeSave($event, $entity, $options) {
+    public function beforeSave($event, $entity, $options)
+    {
         if ($entity->tag_string) {
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
     }
 
-    protected function _buildTags($tagString) {
+    protected function _buildTags($tagString)
+    {
         $new = array_unique(array_map('trim', explode(',', $tagString)));
         $out = [];
         $query = $this->Tags->find()

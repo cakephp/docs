@@ -136,8 +136,10 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 ``HelloShell.php`` を作ってください。その中に以下のコードを書きます::
 
     <?php
-    class HelloShell extends AppShell {
-        public function main() {
+    class HelloShell extends AppShell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -168,12 +170,15 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 がある程度わかったら、次は以下のように別のコマンドを追加してみましょう::
 
     <?php
-    class HelloShell extends AppShell {
-        public function main() {
+    class HelloShell extends AppShell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function hey_there() {
+        public function hey_there()
+        {
             $this->out('Hey there ' . $this->args[0]);
         }
     }
@@ -202,10 +207,12 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 定義されたモデルがロードされ、あなたのシェルにプロパティとして接続されます::
 
     <?php
-    class UserShell extends AppShell {
+    class UserShell extends AppShell
+    {
         public $uses = array('User');
 
-        public function show() {
+        public function show()
+        {
             $user = $this->User->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
@@ -224,7 +231,8 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 プロパティを使ってシェルのタスクを定義できます::
 
     <?php
-    class UserShell extends AppShell {
+    class UserShell extends AppShell
+    {
         public $tasks = array('Template');
     }
 
@@ -239,9 +247,11 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 ようになります::
 
     <?php
-    class FileGeneratorTask extends Shell {
+    class FileGeneratorTask extends Shell
+    {
         public $uses = array('User');
-        public function execute() {
+        public function execute()
+        {
 
         }
     }
@@ -251,9 +261,11 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 
     <?php
     // Console/Command/SeaShell.php として作成
-    class SeaShell extends AppShell {
+    class SeaShell extends AppShell
+    {
         public $tasks = array('Sound'); // Console/Command/Task/SoundTask.php として作成
-        public function main() {
+        public function main()
+        {
             $this->Sound->execute();
         }
     }
@@ -433,7 +445,8 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 簡単に設定できるようなメソッドを備えています::
 
     <?php
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         //configure parser
         return $parser;
@@ -720,7 +733,8 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 自分自身に対してbuildFromArrayを使ってオプションパーサを構築することも可能です::
 
     <?php
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray(array(
             'description' => array(
                 __("Use this command to grant ACL permissions. Once executed, the ARO "),

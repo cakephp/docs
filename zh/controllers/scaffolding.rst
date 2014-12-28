@@ -26,7 +26,8 @@ CakePHP 的脚手架相当酷。它可以让你在几分种内就建立起一个
 
 要将脚手架添加到应用程序中，只要在控制器中加入 ``$scaffold`` 变量::
 
-    class CategoriesController extends AppController {
+    class CategoriesController extends AppController
+    {
         public $scaffold;
     }
 
@@ -58,7 +59,8 @@ User 表单中显示来自 Group 表的 ID 或者名字构成的下拉列表::
 架中显示关联到 category 的用户的姓，而不只是 ID。这个特点使脚手架在许多情况下可读
 性更强::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $displayField = 'first_name';
     }
 
@@ -85,7 +87,8 @@ User 表单中显示来自 Group 表的 ID 或者名字构成的下拉列表::
 这种方法能够很快地建立一个简单的后台界面。切记，不能同时使用脚手架搭建的管理和非
 管理两类方法。如同正常脚手架一样，你可以重载个别方法，用自己的方法代替::
 
-    public function admin_view($id = null) {
+    public function admin_view($id = null)
+    {
       // custom code here
     }
 

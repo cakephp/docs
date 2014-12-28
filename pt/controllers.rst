@@ -37,7 +37,8 @@ outros controllers da sua aplicação. O próprio ``AppController`` é estendida
 classe ``Controller`` que faz parte da biblioteca do CakePHP. Assim sendo,
 ``AppController`` é definido em ``/app/Controller/AppController.php`` como::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
     }
 
 Os atributos e métodos criados em ``AppController`` vão estar disponíveis para
@@ -69,7 +70,8 @@ Lembre-se de adicionar os helpers Html e Form padrões se você incluiu o atribu
 Também lembre de fazer as chamadas de callbacks do ``AppController`` nos
 controllers filhos para obter melhores resultados::
 
-    function beforeFilter() {
+    function beforeFilter()
+    {
         parent::beforeFilter();
     }
 
@@ -95,16 +97,20 @@ Retornando ao nosso exemplo da padaria online, nosso controller
         
         # /app/Controller/RecipesController.php
         
-        class RecipesController extends AppController {
-            function view($id) {
+        class RecipesController extends AppController
+        {
+            function view($id)
+            {
                 // a lógica da ação vai aqui
             }
         
-            function share($customer_id, $recipe_id) {
+            function share($customer_id, $recipe_id)
+            {
                 // a lógica da ação vai aqui
             }
         
-            function search($query) {
+            function search($query)
+            {
                 // a lógica da ação vai aqui
             }
         }
@@ -222,9 +228,11 @@ renderizado.
     arquivo view encontrado em ``/app/View/Recipes/search.ctp`` será
     renderizado::
 
-        class RecipesController extends AppController {
+        class RecipesController extends AppController
+        {
         ...
-            function search() {
+            function search()
+            {
                 // Renderiza a view em /View/Recipes/search.ctp
                 $this->render();
             }
@@ -256,8 +264,10 @@ convenção proporciona automaticamente. Você pode fazer isso chamando o métod
 ``render()`` diretamente. Após ter chamado o método ``render()``, o CakePHP
 não irá tentar renderizar novamente a view::
 
-    class PostsController extends AppController {
-        function my_action() {
+    class PostsController extends AppController
+    {
+        function my_action()
+        {
             $this->render('custom_file');
         }
     }
@@ -276,7 +286,8 @@ Controle de Fluxo
     dados no servidor, você pode querer redirecioná-lo para uma outra tela
     de recepção.::
 
-        function place_order() {
+        function place_order()
+        {
             // Logic for finalizing order goes here
             if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
@@ -373,8 +384,10 @@ Outros Métodos Úteis
     HTTP\_REFERER não puder ser lido do cabeçalho da requisição. Então, ao invés
     de fazer isto::
 
-        class UserController extends AppController {
-            function delete($id) {
+        class UserController extends AppController
+        {
+            function delete($id)
+            {
                 // delete code goes here, and then...
                 if ($this->referer() != '/') {
                     $this->redirect($this->referer());
@@ -386,8 +399,10 @@ Outros Métodos Úteis
 
     Você pode fazer isto::
 
-        class UserController extends AppController {
-            function delete($id) {
+        class UserController extends AppController
+        {
+            function delete($id)
+            {
                 // delete code goes here, and then...
                 $this->redirect($this->referer(array('action' => 'index')));
             }
@@ -425,7 +440,8 @@ Outros Métodos Úteis
     os dados enviados deste formulário e criar as condições de busca
     necessárias para completar a tarefa::
 
-        function index() {
+        function index()
+        {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
             $this->set('orders', $orders);
@@ -504,8 +520,10 @@ Outros Métodos Úteis
     retornar os dados::
 
         // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            function latest() {
+        class CommentsController extends AppController
+        {
+            function latest()
+            {
                 return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
             }
         }
@@ -612,7 +630,8 @@ a API do CakePHP. Siga para `http://api20.cakephp.org/class/controller
         
         # Exemplo de uso do atributo $name do controller
         
-        class RecipesController extends AppController {
+        class RecipesController extends AppController
+        {
            public $name = 'Recipes';
         }
 
@@ -658,7 +677,8 @@ como referências para objetos apropriados (``$this->{$helpername}``) na view.
     Vamos ver como dizer para um controller do Cake que você planeja usar
     classes MVC adicionais::
 
-        class RecipesController extends AppController {
+        class RecipesController extends AppController
+        {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
             public $components = array('RequestHandler');
@@ -697,7 +717,8 @@ próprias seções neste manual.
     carregado e configurado, no entanto, é recomendado atualizar seu código para
     usar as configurações normais de componentes::
 
-        class ArticlesController extends AppController {
+        class ArticlesController extends AppController
+        {
             public $components = array(
                 'Paginator' => array(
                     'Article' => array(

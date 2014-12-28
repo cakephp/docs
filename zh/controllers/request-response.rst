@@ -440,7 +440,8 @@ CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是�
 :php:class:`MediaView` 来实现。在 2.3 版本中，:php:class:`MediaView` 已被废弃，
 不过可以用 :php:meth:`CakeResponse::file()` 来发送文件作为响应::
 
-    public function sendFile($id) {
+    public function sendFile($id)
+    {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
         // 返回响应对象，阻止控制器渲染视图
@@ -464,7 +465,8 @@ CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是�
 
 可以发送不在硬盘上的文件作为响应，比如从字符串动态生成的 PDF 文件或者 ICS 日程::
 
-    public function sendIcs() {
+    public function sendIcs()
+    {
         $icsString = $this->Calendar->generateIcs();
         $this->response->body($icsString);
         $this->response->type('ics');
@@ -511,7 +513,8 @@ CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是�
 有时候需要使浏览器不要缓存控制器动作的执行结果。
 :php:meth:`CakeResponse::disableCache()` 方法就是为此目的::
 
-    public function index() {
+    public function index()
+    {
         // 做一些事情
         $this->response->disableCache();
     }
@@ -523,7 +526,8 @@ CakePHP 默认使用 :php:class:`CakeResponse`。:php:class:`CakeResponse` 是�
 
 也可以使用 :php:meth:`CakeResponse::cache()` 方法，告诉客户端要缓存响应::
 
-    public function index() {
+    public function index()
+    {
         //做一些事情
         $this->response->cache('-1 minute', '+5 days');
     }
@@ -569,13 +573,15 @@ Cache-Control 的 ``public`` 指令也会被设置。
 此方法的第二个参数用于指定缓存的 ``max-age`` (最大年龄)，以秒为单位，这段时间过
 后缓存就不认为是最新的了::
 
-    public function view() {
+    public function view()
+    {
         ...
         // 设置 Cache-Control 为公有、3600秒
         $this->response->sharable(true, 3600);
     }
 
-    public function my_data() {
+    public function my_data()
+    {
         ...
         // 设置 Cache-Control 为私有、3600秒
         $this->response->sharable(false, 3600);
@@ -592,7 +598,8 @@ Cache-Control 的 ``public`` 指令也会被设置。
 可以设置 ``Expires`` 头部信息为一个日期及时间，在这之后响应就被认为不是最新的了。
 这个头部信息可以用 :php:meth:`CakeResponse::expires()` 方法来设置::
 
-    public function view() {
+    public function view()
+    {
         $this->response->expires('+5 days');
     }
 
@@ -615,7 +622,8 @@ Etag 头部信息
 :php:meth:`CakeResponse::checkNotModified()` 方法，或者在控制器中引入 
 :php:class:`RequestHandlerComponent`::
 
-    public function index() {
+    public function index()
+    {
         $articles = $this->Article->find('all');
         $this->response->etag($this->Article->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
@@ -637,7 +645,8 @@ Last Modified 头部信息
 :php:meth:`CakeResponse::checkNotModified()` 方法，或者在控制器中引入 
 :php:class:`RequestHandlerComponent`::
 
-    public function view() {
+    public function view()
+    {
         $article = $this->Article->find('first');
         $this->response->modified($article['Article']['modified']);
         if ($this->response->checkNotModified($this->request)) {
@@ -666,7 +675,8 @@ CakeResponse 和测试
 :php:class:`CakeResponse`，只需要模拟一个对象就可以了。这让你更加接近于单元测试，
 也使得测试控制器更容易了::
 
-    public function testSomething() {
+    public function testSomething()
+    {
         $this->controller->response = $this->getMock('CakeResponse');
         $this->controller->response->expects($this->once())->method('header');
         // ...

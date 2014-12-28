@@ -418,7 +418,8 @@ error404に独自のエラーメソッドを変換したいなら、手動です
     <?php
     Configure::write('Routing.prefixes', array('admin', 'member'));
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         var $scaffold = 'member';
     }
 
@@ -433,11 +434,14 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
 ::
 
-    class NlValidation {
-        public function phone($check) {
+    class NlValidation
+    {
+        public function phone($check)
+        {
             ...
         }
-        public function postal($check) {
+        public function postal($check)
+        {
             ...
         }
     }

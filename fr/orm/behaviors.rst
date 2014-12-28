@@ -55,13 +55,15 @@ Pour créer notre behavior sluggable. Mettez ce qui suit dans
 
     use Cake\ORM\Behavior;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
     }
 
 Comme les tables, les behaviors ont également un hook ``initialize()`` où vous
 pouvez mettre le code d'initialisation, si nécessaire::
 
-    public function initialize(array $config) {
+    public function initialize(array $config)
+    {
         // Code d'initialisation ici
     }
 
@@ -73,9 +75,11 @@ ont souvent des propriétés slug pour créer de belles URLs::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Sluggable');
         }
     }
@@ -95,7 +99,8 @@ behavior ne sera pas appelable à partir de la table. Les méthodes mixin de
 Behavior vont recevoir exactement les mêmes arguments qui sont fournis à la
 table. Par exemple, si notre SluggableBehavior définit la méthode suivante::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         return Inflector::slug($value, $this->_config['replacement']);
     }
 
@@ -151,20 +156,23 @@ behavior devrait maintenant ressembler à ceci::
     use Cake\ORM\Query;
     use Cake\Utility\Inflector;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
         proteted $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',
             'replacement' => '-',
         ];
 
-        public function slug(Entity $entity) {
+        public function slug(Entity $entity)
+        {
             $config = $this->config();
             $value = $entity->get($config['field']);
             $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, Entity $entity) {
+        public function beforeSave(Event $event, Entity $entity)
+        {
             $this->slug($entity);
         }
 
@@ -181,7 +189,8 @@ Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors
 Pour empêcher l'enregistrement de continuer, arrêtez simplement la propagation
 de l'événement dans votre callback::
 
-    public function beforeSave(Event $event, Entity $entity) {
+    public function beforeSave(Event $event, Entity $entity)
+    {
         if (...) {
             $event->stopPropagation();
             return;
@@ -198,7 +207,8 @@ facilement récupérer les articles par leur slug. Les méthodes find de behavio
 utilisent les mêmes conventions que les :ref:`custom-find-methods`. Notre
 méthode ``find('slug')`` ressemblerait à ceci::
 
-    public function findSlug(Query $query, array $options) {
+    public function findSlug(Query $query, array $options)
+    {
         return $query->where(['slug' => $options['slug']]);
     }
 

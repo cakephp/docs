@@ -314,8 +314,10 @@ mas você poderá sobrescrevê-la definindo-a em seu *controller*/*view*.
 Para definir o título para o *layout*, o modo mais fácil é no *controller*, setando
 a variável ``$title_for_layout``::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -330,7 +332,8 @@ do seu *controller* usando a propriedade :php:attr:`~View::$layout` do
 *controller* ou *view*::
 
     // de um controller
-    public function admin_view() {
+    public function admin_view()
+    {
         // códigos
         $this->layout = 'admin';
     }
@@ -342,13 +345,16 @@ Por exemplo, se a seção do meu *site* incluir um pequeno espaço para *banner*
 eu posso criar um novo *layout* com um pequeno espaço para propaganda e especificá-lo
 como *layout* para as ações de todos os *controllers* usando algo como::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function view_image() {
+       public function view_image()
+       {
            $this->layout = 'image';
            //output user image
        }
@@ -372,8 +378,10 @@ Usando layouts a partir de plugins
 Se você quiser usar um *layout* que existe em um *plugin*, você pode usar a sintaxe de *plugin*.
 Por exemplo, para usar o *layout* de contato do *plugin* de contatos::
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -453,9 +461,11 @@ da *view* a partir do seu *controller*.
 
 Para isto, em seu *controller*, adicione algo como segue, como exemplo de *Post*::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;

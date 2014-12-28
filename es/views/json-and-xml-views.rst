@@ -49,10 +49,12 @@ can be either a string or an array of view variables to serialize::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $components = ['RequestHandler'];
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->paginate());
             $this->set('_serialize', ['articles']);
         }
@@ -62,10 +64,12 @@ You can also define ``_serialize`` as an array of view variables to combine::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $components = ['RequestHandler'];
 
-        public function index() {
+        public function index()
+        {
             // Some code that created $articles and $comments
             $this->set(compact('articles', 'comments'));
             $this->set('_serialize', ['articles', 'comments']);
@@ -87,8 +91,10 @@ a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful::
 
     // Controller code
-    class ArticlesController extends AppController {
-        public function index() {
+    class ArticlesController extends AppController
+    {
+        public function index()
+        {
             $articles = $this->paginate('Articles');
             $this->set(compact('articles'));
         }

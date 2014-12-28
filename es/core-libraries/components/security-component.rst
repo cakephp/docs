@@ -60,11 +60,13 @@ in the controller.
 By configuring a callback method you can customize how the blackhole process
 works::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Security->config('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type) {
+    public function blackhole($type)
+    {
         // Handle errors.
     }
 
@@ -145,11 +147,13 @@ Using the security component is generally done in the controller
 beforeFilter(). You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter()
+        {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -161,18 +165,21 @@ require secure SSL requests.
 
 ::
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
         public $components = ['Security'];
 
-        public function beforeFilter() {
+        public function beforeFilter()
+        {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
 
-        public function forceSSL() {
+        public function forceSSL()
+        {
             return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
     }

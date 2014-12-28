@@ -33,7 +33,8 @@ basic table class would look like::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
     }
 
 Note that we did not tell the ORM which table to use for our class. By
@@ -47,9 +48,11 @@ method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->table('my_table');
         }
 
@@ -63,8 +66,10 @@ If you need to modify this you can use the ``primaryKey()`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->primaryKey('my_id');
         }
     }
@@ -114,8 +119,10 @@ example if your table class is called ``ArticlesTable`` the entity would be
 ``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
 conventions you can use the ``entityClass`` method to change things up::
 
-    class PurchaseOrdersTable extends Table {
-        public function initialize(array $config) {
+    class PurchaseOrdersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->entityClass('App\Model\PO');
         }
     }
@@ -152,9 +159,11 @@ association in our ArticlesTable::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Authors');
         }
 
@@ -165,9 +174,11 @@ associate with. By default all of the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
 you can do so with the second parameter::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Authors', [
                 'className' => 'Publishing.Authors',
                 'foreignKey' => 'authorid',
@@ -181,9 +192,11 @@ The same table can be used multiple times to define different types of
 associations. For example consider a case where you want to separate
 approved comments and those that have not been moderated yet::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('Comments', [
                 'className' => 'Comments',
                 'conditions' => ['approved' => true]
@@ -201,9 +214,11 @@ As you can see, by specifying the ``className`` key, it is possible to use the
 same table as different associations for the same table. You can even create
 self-associated tables to create parent-child relationships::
 
-    class CategoriesTable extends Table {
+    class CategoriesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('SubCategories', [
                 'className' => 'Categories',
             ]);
@@ -243,8 +258,10 @@ Doctors hasOne Mentors mentors.doctor\_id
 If we had the ``UsersTable`` and ``AddressesTable`` classes made we could make
 the association with the following code::
 
-    class UsersTable extends Table {
-        public function initialize(array $config) {
+    class UsersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasOne('Addresses');
         }
     }
@@ -253,8 +270,10 @@ If you need more control, you can define your associations using
 array syntax. For example, you might want to limit the association
 to include only certain records::
 
-    class UsersTable extends Table {
-        public function initialize(array $config) {
+    class UsersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasOne('Addresses', [
                 'className' => 'Addresses',
                 'conditions' => ['Addresses.primary' => '1'],
@@ -330,9 +349,11 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
 We can define the belongsTo association in our Addresses table as follows::
 
-    class AddressesTable extends Table {
+    class AddressesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Users');
         }
     }
@@ -340,9 +361,11 @@ We can define the belongsTo association in our Addresses table as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class AddressesTable extends Table {
+    class AddressesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Users', [
                 'foreignKey' => 'user_id',
                 'joinType' => 'INNER',
@@ -407,9 +430,11 @@ Doctor hasMany Patient     Patient.doctor\_id
 
 We can define the hasMany association in our Articles model as follows::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('Comments');
         }
     }
@@ -417,9 +442,11 @@ We can define the hasMany association in our Articles model as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('Comments', [
                 'foreignKey' => 'article_id',
                 'dependent' => true,
@@ -518,9 +545,11 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
 
 We can define the belongsToMany association in our Articles model as follows::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Tags');
         }
     }
@@ -528,9 +557,11 @@ We can define the belongsToMany association in our Articles model as follows::
 We can also define a more specific relationship using array
 syntax::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Tags', [
                 'joinTable' => 'article_tag',
             ]);
@@ -635,24 +666,30 @@ otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
 model CoursesMemberships. Take a look at the following models. ::
 
-    class StudentsTable extends Table {
-        public function initialize(array $config) {
+    class StudentsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Courses', [
                 'through' => 'CourseMemberships',
             ]);
         }
     }
 
-    class CoursesTable extends Table {
-        public function initialize(array $config) {
+    class CoursesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Students', [
                 'through' => 'CourseMemberships',
             ]);
         }
     }
 
-    class CoursesMembershipsTable extends Table {
-        public function initialize(array $config) {
+    class CoursesMembershipsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Students');
             $this->belongsTo('Courses');
         }
@@ -835,9 +872,11 @@ table, while the values will be the 'displayField' of the table. You can use the
 ``displayField()`` method on a table object to configure the display field on
 a table::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->displayField('title');
         }
     }
@@ -922,9 +961,11 @@ would do the following::
     use Cake\ORM\Query;
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true
@@ -1332,8 +1373,10 @@ The above would call the ``validationUpdate`` method on the table instance to
 build the required rules.  By default the ``validationDefault`` method will be
 used. A sample validator method for our articles table would be::
 
-    class ArticlesTable extends Table {
-        public function validationUpdate($validator) {
+    class ArticlesTable extends Table
+    {
+        public function validationUpdate($validator)
+        {
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
@@ -1364,9 +1407,11 @@ When a validation rule is created you can name the provider of that rule. For
 example, if your entity had a 'isValidRole' method you could use it as
 a validation rule::
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
@@ -1551,14 +1596,16 @@ necessary.  In these cases it is more efficient to use a bulk-update to modify
 many rows at once::
 
     // Publish all the unpublished articles.
-    function publishAllUnpublished() {
+    function publishAllUnpublished()
+    {
         $this->updateAll(['published' => true], ['published' => false]);
     }
 
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
-    function incrementCounters() {
+    function incrementCounters()
+    {
         $expression = new QueryExpression('view_count = view_count + 1');
         $this->updateAll([$expression], ['published' => true]);
     }
@@ -1591,9 +1638,11 @@ column Types::
     // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        protected function _initializeSchema(Schema $schema) {
+        protected function _initializeSchema(Schema $schema)
+        {
             $schema->columnType('preferences', 'json');
             return $schema;
         }
@@ -1679,7 +1728,8 @@ In these cases it is more performant to use a bulk-delete to remove many rows at
 once::
 
     // Delete all the spam
-    function destroySpam() {
+    function destroySpam()
+    {
         return $this->deleteAll(['is_spam' => true]);
     }
 
@@ -1795,8 +1845,10 @@ Generally the best place to do this is in the ``initialize`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -1808,8 +1860,10 @@ configuration options::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [
@@ -1839,7 +1893,8 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public static function defaultConnectionName() {
             return 'slavedb';
         }

@@ -228,13 +228,16 @@ a cost for people migrating from 2.x. If you had some custom find methods in
 your models, they will need some modifications. This is how you create custom
 finder methods in 3.0::
 
-    class ArticlesTable {
+    class ArticlesTable
+    {
 
-        public function findPopular(Query $query, array $options) {
+        public function findPopular(Query $query, array $options)
+        {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites(Query $query, array $options) {
+        public function findFavorites(Query $query, array $options)
+        {
             $for = $options['for'];
             return $query->matching('Users.Favorites', function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
@@ -255,7 +258,8 @@ migrate this code in one of a few ways:
 
 In the 3rd case above your code would look like::
 
-    public function findAll(Query $query, array $options) {
+    public function findAll(Query $query, array $options)
+    {
         $mapper = function ($row, $key, $mr) {
             // Your afterFind logic
         };
@@ -329,8 +333,10 @@ on the fly::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
-        public function getFullName() {
+    class User extends Entity
+    {
+        public function getFullName()
+        {
             return $this->first_name . '  ' . $this->last_name;
         }
     }
@@ -350,7 +356,8 @@ fields gave::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
         function findAverage(Query $query, array $options = []) {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
@@ -373,9 +380,11 @@ code, interact with the same API when manipulating associations::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Movies');
             $this->hasOne('Ratings');
             $this->hasMany('Comments')
@@ -411,9 +420,11 @@ have multiple sets of rules::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator->validatePresence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
@@ -497,11 +508,13 @@ a constructor::
 
     use Cake\ORM\Behavior;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
 
         protected $_table;
 
-        public function __construct(Table $table, array $config) {
+        public function __construct(Table $table, array $config)
+        {
             parent::__construct($table, $config);
             $this->_table = $table;
         }
@@ -522,7 +535,8 @@ behavior mixin methods can expect the **same** arguments provided to the table
 The behavior providing the ``slug`` method will receive only 1 argument, and its
 method signature should look like::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         // Code here.
     }
 
@@ -533,7 +547,8 @@ Behavior callbacks have been unified with all other listener methods. Instead of
 their previous arguments, they need to expect an event object as their first
 argument::
 
-    public function beforeFind(Event $event, Query $query, array $options) {
+    public function beforeFind(Event $event, Query $query, array $options)
+    {
         // Code.
     }
 

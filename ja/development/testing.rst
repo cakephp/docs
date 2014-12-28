@@ -91,8 +91,10 @@ CakePHPにおけるほとんどのことがそうであるように、テスト�
 一例として、非常に簡単なヘルパーメソッドのためのテストケースを作成します。
 これからテストのために作成するメソッドはHTMLでプログレスバーを作成します。おおよそこのような感じです。::
 
-    class ProgressHelper extends AppHelper {
-        public function bar($value) {
+    class ProgressHelper extends AppHelper
+    {
+        public function bar($value)
+        {
             $width = round($value / 100, 2) * 100;
             return sprintf(
                 '<div class="progress-container">
@@ -109,12 +111,15 @@ CakePHPにおけるほとんどのことがそうであるように、テスト�
     App::uses('View', 'View');
     App::uses('ProgressHelper', 'View/Helper');
 
-    class ProgressHelperTest extends CakeTestCase {
-        public function setUp() {
+    class ProgressHelperTest extends CakeTestCase
+    {
+        public function setUp()
+        {
 
         }
 
-        public function testBar() {
+        public function testBar()
+        {
 
         }
     }
@@ -124,7 +129,8 @@ CakePHPにおけるほとんどのことがそうであるように、テスト�
 呼び出される前に毎回呼び出されます。セットアップメソッドはテストに必要なオブジェクトの
 初期化や設定を行います。今回のセットアップメソッドには次のように書き加えます。::
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $Controller = new Controller();
         $View = new View($Controller);
@@ -138,7 +144,8 @@ CakePHPにおけるほとんどのことがそうであるように、テスト�
 次に、テストメソッドの内容を充実させていきます。あなたの書いたコードが期待した結果を
 出力するかどうか保証するため、アサーションを使います。::
 
-    public function testBar() {
+    public function testBar()
+    {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
         $this->assertContains('progress-bar', $result);
@@ -288,7 +295,8 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 ``app/Test/Fixture`` というディレクトリに ``ArticlesFixture.php`` という名前のファイルを作成し、
 以下のとおりに記述してください。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
 
           /* 任意。異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。 */
           public $useDbConfig = 'test';
@@ -357,7 +365,8 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、
 以下のようにするとよいでしょう。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
 
         public $fields = array(
             'id' => array('type' => 'integer', 'key' => 'primary'),
@@ -368,7 +377,8 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
             'updated' => 'datetime'
         );
 
-        public function init() {
+        public function init()
+        {
             $this->records = array(
                 array(
                     'id' => 1,
@@ -400,7 +410,8 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 例のフィクスチャ(``app/Test/Fixture/ArticlesFixture.php``)を、
 次のように書き換えてください。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
         public $import = 'Article';
     }
 
@@ -409,14 +420,16 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 上記の構文では「Article」のスキーマを読み込むだけなのでレコードを読み込みません。読み込むためには
 コードを次のように変更してください。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
         public $import = array('model' => 'Article', 'records' => true);
     }
 
 一方、モデルが存在しないテーブルの場合はどうするのでしょうか。その場合、代わりにテーブルの情報を
 読み込みよう定義することができます。例は次の通りです。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
         public $import = array('table' => 'articles');
     }
 
@@ -424,7 +437,8 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 「default」という名前のデータベース接続設定を使います。これを変更したい場合は
 次のように書き換えます。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
@@ -432,14 +446,16 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 取得するときにそのプレフィックスは自動的に使用されます。また、前述したふたつの例において、
 レコードは読み込まれません。読み込むには、次のようにします。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
         public $import = array('table' => 'articles', 'records' => true);
     }
 
 既存のテーブルやモデルからテーブルの定義をインポートすることができますが、前節で紹介したように
 フィクスチャに対して読み込むレコードを直接定義することができます。方法は例のとおりです。::
 
-    class ArticlesFixture extends CakeTestFixture {
+    class ArticlesFixture extends CakeTestFixture
+    {
         public $import = 'Article';
         public $records = array(
             array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
@@ -455,7 +471,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 各テストケースではクエリの実行に際して必要となるモデルのフィクスチャをロードすることができます。
 フィクスチャをロードするには、テストケースに ``$fixtures`` プロパティを設定します。::
 
-    class ArticleTest extends CakeTestCase {
+    class ArticleTest extends CakeTestCase
+    {
         public $fixtures = array('app.articles', 'app.comments');
     }
 
@@ -463,7 +480,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 「Fixture」ディレクトリからロードします。同じようにCakePHPのコアや
 プラグインからもロードすることができます。::
 
-    class ArticleTest extends CakeTestCase {
+    class ArticleTest extends CakeTestCase
+    {
         public $fixtures = array('plugin.debug_kit.articles', 'core.comments');
     }
 
@@ -474,11 +492,13 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 ``false`` に設定したあと、テストメソッドの中で
 :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。::
 
-    class ArticleTest extends CakeTestCase {
+    class ArticleTest extends CakeTestCase
+    {
         public $fixtures = array('app.articles', 'app.comments');
         public $autoFixtures = false;
 
-        public function testMyFunction() {
+        public function testMyFunction()
+        {
             $this->loadFixtures('Article', 'Comment');
         }
     }
@@ -488,8 +508,10 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
 まず ``app/Model/Article.php`` に「Article」モデルを定義しましょう。以下のように記述します。::
 
-    class Article extends AppModel {
-        public function published($fields = null) {
+    class Article extends AppModel
+    {
+        public function published($fields = null)
+        {
             $params = array(
                 'conditions' => array(
                     $this->name . '.published' => 1
@@ -512,7 +534,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
     App::uses('Article', 'Model');
 
-    class ArticleTest extends CakeTestCase {
+    class ArticleTest extends CakeTestCase
+    {
         public $fixtures = array('app.articles');
     }
 
@@ -533,15 +556,18 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
     App::uses('Article', 'Model');
 
-    class ArticleTest extends CakeTestCase {
+    class ArticleTest extends CakeTestCase
+    {
         public $fixtures = array('app.articles');
 
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             $this->Article = ClassRegistry::init('Article');
         }
 
-        public function testPublished() {
+        public function testPublished()
+        {
             $result = $this->Article->published(array('id', 'title'));
             $expected = array(
                 array('Article' => array('id' => 1, 'title' => 'First Article')),
@@ -573,7 +599,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 モデルのテストモックを作成するために ``getMockForModel`` を使いましょう。
 このメソッドは、モック自体のプロパティが反映されてしまう問題を回避します。::
 
-    public function testSendingEmails() {
+    public function testSendingEmails()
+    {
         $model = $this->getMockForModel('EmailVerification', array('send'));
         $model->expects($this->once())
             ->method('send')
@@ -598,10 +625,12 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
 下記のように、「Article」モデルに対応した典型的なコントローラーがあるとします。::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $helpers = array('Form', 'Html');
 
-        public function index($short = null) {
+        public function index($short = null)
+        {
             if (!empty($this->request->data)) {
                 $this->Article->save($this->request->data);
             }
@@ -623,20 +652,24 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 ディレクトリ ``app/Test/Case/Controller`` に ``ArticlesControllerTest.php``
 というファイルを作成し、次のように記述します。::
 
-    class ArticlesControllerTest extends ControllerTestCase {
+    class ArticlesControllerTest extends ControllerTestCase
+    {
         public $fixtures = array('app.articles');
 
-        public function testIndex() {
+        public function testIndex()
+        {
             $result = $this->testAction('/articles/index');
             debug($result);
         }
 
-        public function testIndexShort() {
+        public function testIndexShort()
+        {
             $result = $this->testAction('/articles/index/short');
             debug($result);
         }
 
-        public function testIndexShortGetRenderedHtml() {
+        public function testIndexShortGetRenderedHtml()
+        {
             $result = $this->testAction(
                '/articles/index/short',
                 array('return' => 'contents')
@@ -644,7 +677,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
             debug($result);
         }
 
-        public function testIndexShortGetViewVars() {
+        public function testIndexShortGetViewVars()
+        {
             $result = $this->testAction(
                 '/articles/index/short',
                 array('return' => 'vars')
@@ -652,7 +686,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
             debug($result);
         }
 
-        public function testIndexPostData() {
+        public function testIndexPostData()
+        {
             $data = array(
                 'Article' => array(
                     'user_id' => 1,
@@ -680,8 +715,10 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 そしてあなたのコードを終了する代わりに、リダイレクトを追跡して実行を継続します。
 例を示します。::
 
-    class ArticlesController extends AppController {
-        public function add() {
+    class ArticlesController extends AppController
+    {
+        public function add()
+        {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
                     $this->redirect(array('action' => 'index'));
@@ -694,8 +731,10 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 上記のコードをテストすると、リダイレクトに到達したにもかかわらず ``// more code`` が
 実行されてしまいます。代わりに、このようなコードを書くべきです。::
 
-    class ArticlesController extends AppController {
-        public function add() {
+    class ArticlesController extends AppController
+    {
+        public function add()
+        {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
                     return $this->redirect(array('action' => 'index'));
@@ -715,7 +754,8 @@ GETリクエストのアクションとしても使えます。``data`` キー�
 POSTされるであろう値を設定します。規定ではすべてのリクエストはPOSTと扱われます。
 GETリクエストをシミュレートしたい場合は ``method`` キーを設定します。::
 
-    public function testAdding() {
+    public function testAdding()
+    {
         $data = array(
             'Post' => array(
                 'title' => 'New post',
@@ -742,7 +782,8 @@ returnする値の選択
 規定値は ``result`` です。 戻り値の属性を ``result`` 以外にしない限り、
 テストケース内で他の種類の戻り値の属性にアクセスすることができます。::
 
-    public function testIndex() {
+    public function testIndex()
+    {
         $this->testAction('/posts/index');
         $this->assertInternalType('array', $this->vars['posts']);
     }
@@ -795,7 +836,8 @@ returnする値の選択
 プロパティに格納されます。送信されたヘッダー情報には ``headers`` から
 アクセスすることができ、リダイレクトを確認することができます。::
 
-    public function testAdd() {
+    public function testAdd()
+    {
         $Posts = $this->generate('Posts', array(
             'components' => array(
                 'Session',
@@ -818,7 +860,8 @@ returnする値の選択
         $this->assertContains('/posts', $this->headers['Location']);
     }
 
-    public function testAddGet() {
+    public function testAddGet()
+    {
         $this->testAction('/posts/add', array(
             'method' => 'GET',
             'return' => 'contents'
@@ -843,7 +886,8 @@ SessionComponent がモックされたことで、それを用いたテストメ
 モックに期待する値を登録する別のメソッドを用います。
 たとえば :php:meth:`AuthComponent::user()` のモックを使いたい場合は以下のようにします。::
 
-    public function testAdd() {
+    public function testAdd()
+    {
         $Posts = $this->generate('Posts', array(
             'components' => array(
                 'Session',
@@ -866,9 +910,11 @@ JSONはWebサービスの構築において、とても馴染み深く、かつ�
 CakePHPを用いたWebサービスのエンドポイントのテストはとてもシンプルです。
 JSONを返すコントローラーの簡単な例を示します。::
 
-    class MarkersController extends AppController {
+    class MarkersController extends AppController
+    {
         public $autoRender = false;
-        public function index() {
+        public function index()
+        {
             $data = $this->Marker->find('first');
             $this->response->body(json_encode($data));
         }
@@ -877,8 +923,10 @@ JSONを返すコントローラーの簡単な例を示します。::
 Webサービスが適切なレスポンスを返しているか確認するテストを作成しましょう。
 ``app/Test/Case/Controller/MarkersControllerTest.php`` というファイルを以下のように作成します。::
 
-    class MarkersControllerTest extends ControllerTestCase {
-        public function testIndex() {
+    class MarkersControllerTest extends ControllerTestCase
+    {
+        public function testIndex()
+        {
             $result = $this->testAction('/markers/index.json');
             $result = json_decode($result, true);
             $expected = array(
@@ -907,10 +955,12 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 ページネーションの limit 値を設定する手助けをします。例としてコンポーネントが、
 ``app/Controller/Component/PagematronComponent.php`` にあったとします。::
 
-    class PagematronComponent extends Component {
+    class PagematronComponent extends Component
+    {
         public $Controller = null;
 
-        public function startup(Controller $controller) {
+        public function startup(Controller $controller)
+        {
             parent::startup($controller);
             $this->Controller = $controller;
             // コントローラがページネーションを使っているか確かめる
@@ -919,7 +969,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
             }
         }
 
-        public function adjust($length = 'short') {
+        public function adjust($length = 'short')
+        {
             switch ($length) {
                 case 'long':
                     $this->Controller->paginate['limit'] = 100;
@@ -945,15 +996,18 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
     App::uses('PagematronComponent', 'Controller/Component');
 
     // テストの対象となる偽物のコントローラ
-    class TestPagematronController extends Controller {
+    class TestPagematronController extends Controller
+    {
         public $paginate = null;
     }
 
-    class PagematronComponentTest extends CakeTestCase {
+    class PagematronComponentTest extends CakeTestCase
+    {
         public $PagematronComponent = null;
         public $Controller = null;
 
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             // コンポーネントと偽のテストコントローラをセットアップする
             $Collection = new ComponentCollection();
@@ -964,7 +1018,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
             $this->PagematronComponent->startup($this->Controller);
         }
 
-        public function testAdjust() {
+        public function testAdjust()
+        {
             // 異なる値の設定を用いてadjustメソッドをテストする
             $this->PagematronComponent->adjust();
             $this->assertEquals(20, $this->Controller->paginate['limit']);
@@ -976,7 +1031,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
             $this->assertEquals(100, $this->Controller->paginate['limit']);
         }
 
-        public function tearDown() {
+        public function tearDown()
+        {
             parent::tearDown();
             // 終了した後のお掃除
             unset($this->PagematronComponent);
@@ -994,8 +1050,10 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 ビューで通貨の表示を補助するための、 ``usd()`` という唯一の単純なメソッドを持っています。::
 
     // app/View/Helper/CurrencyRendererHelper.php
-    class CurrencyRendererHelper extends AppHelper {
-        public function usd($amount) {
+    class CurrencyRendererHelper extends AppHelper
+    {
+        public function usd($amount)
+        {
             return 'USD ' . number_format($amount, 2, '.', ',');
         }
     }
@@ -1011,11 +1069,13 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
     App::uses('View', 'View');
     App::uses('CurrencyRendererHelper', 'View/Helper');
 
-    class CurrencyRendererHelperTest extends CakeTestCase {
+    class CurrencyRendererHelperTest extends CakeTestCase
+    {
         public $CurrencyRenderer = null;
 
         // ここでヘルパーをインスタンス化する
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             $Controller = new Controller();
             $View = new View($Controller);
@@ -1023,7 +1083,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
         }
 
         // usd()関数をテストする
-        public function testUsd() {
+        public function testUsd()
+        {
             $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
 
             // 常に小数点第二桁までになるべき
@@ -1051,7 +1112,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 すべてのモデルに対してのテストスイートを作成したいときは、 ``app/Test/Case/AllModelTest.php`` を作成します。
 内容は以下のとおりです。::
 
-    class AllModelTest extends CakeTestSuite {
+    class AllModelTest extends CakeTestSuite
+    {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
             $suite->addTestDirectory(TESTS . 'Case/Model');
@@ -1068,7 +1130,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 この例では、 ``app/Test/Case/Model`` のディレクトリ以下のすべてのテストをグループ化します。
 アプリケーションのテストをすべて実行するスイートを構築するためにテストスイートを使用することができます。::
 
-    class AllTestsTest extends CakeTestSuite {
+    class AllTestsTest extends CakeTestSuite
+    {
         public static function suite() {
             $suite = new CakeTestSuite('All tests');
             $suite->addTestDirectoryRecursive(TESTS . 'Case');
@@ -1100,13 +1163,15 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 
     App::uses('BlogPost', 'Blog.Model');
 
-    class BlogPostTest extends CakeTestCase {
+    class BlogPostTest extends CakeTestCase
+    {
 
         // プラグインのフィクスチャは /app/Plugin/Blog/Test/Fixture/ に配置される
         public $fixtures = array('plugin.blog.blog_posts');
         public $BlogPost;
 
-        public function testSomething() {
+        public function testSomething()
+        {
             // ClassRegistry はテスト用のデータベースコネクションをモデルが使うようにしてくれる
             $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
@@ -1146,7 +1211,8 @@ Jenkinsのために別のデータベースを用意するのは、初歩的な�
 
     cat > config/database.php <<'DATABASE_PHP'
     <?php
-    class DATABASE_CONFIG {
+    class DATABASE_CONFIG
+    {
         public $test = array(
             'datasource' => 'Database/Mysql',
             'host'       => 'localhost',

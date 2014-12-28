@@ -17,11 +17,13 @@ use the ``Number`` class::
 
     use Cake\I18n\Number;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
         public $components = array('Auth');
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             $storageUsed = $this->Auth->user('storage_used');
             if ($storageUsed > 5000000) {
                 // Notify users of quota

@@ -97,9 +97,11 @@ page. First, create the file. Its contents should look like::
     use Cake\Event\Event;
     use Cake\Routing\DispatcherFilter;
 
-    class TrackingCookieFilter extends DispatcherFilter {
+    class TrackingCookieFilter extends DispatcherFilter
+    {
 
-        public function beforeDispatch(Event $event) {
+        public function beforeDispatch(Event $event)
+        {
             $request = $event->data['request'];
             $response = $event->data['response'];
             if (!$request->cookie('landing_page')) {
@@ -146,9 +148,11 @@ page, in our case it would be anything served from the ``PagesController``::
     use Cake\Event\Event;
     use Cake\Routing\DispatcherFilter;
 
-    class HttpCacheFilter extends DispatcherFilter {
+    class HttpCacheFilter extends DispatcherFilter
+    {
 
-        public function afterDispatch(Event $event) {
+        public function afterDispatch(Event $event)
+        {
             $request = $event->data['request'];
             $response = $event->data['response'];
 

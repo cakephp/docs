@@ -114,9 +114,11 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 恐らく、注文の詳細を保存したりその他もろもろのロジックを行うための `place` メソッドを持つことになるでしょう::
 
     // Cart/Model/Order.php
-    class Order extends AppModel {
+    class Order extends AppModel
+    {
 
-        public function place($order) {
+        public function place($order)
+        {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $this->sendNotificationEmail();
@@ -143,9 +145,11 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
-    class Order extends AppModel {
+    class Order extends AppModel
+    {
 
-        public function place($order) {
+        public function place($order)
+        {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
@@ -269,9 +273,11 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
     ));
 
     // Cart/Controller/OrdersController.php
-    class OrdersController extends AppController {
+    class OrdersController extends AppController
+    {
 
-        public function finish() {
+        public function finish()
+        {
             foreach (Configure::read('Order.afterPlace') as $l) {
                 $this->Order->getEventManager()->attach($l, 'Model.Order.afterPlace');
             }
@@ -343,15 +349,18 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 このクラスのインスタンスをコールバックとして渡すのが自然でしょう。リスナーは次のように作成します::
 
     App::uses('CakeEventListener', 'Event');
-    class UserStatistic implements CakeEventListener {
+    class UserStatistic implements CakeEventListener
+    {
 
-        public function implementedEvents() {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
             );
         }
 
-        public function updateBuyStatistic($event) {
+        public function updateBuyStatistic($event)
+        {
             // Code to update statistics
         }
     }
@@ -421,8 +430,10 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
 
     // Setting priority for a listener
-    class UserStatistic implements CakeEventListener {
-        public function implementedEvents() {
+    class UserStatistic implements CakeEventListener
+    {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => array('callable' => 'updateBuyStatistic', 'priority' => 100),
             );
@@ -471,14 +482,17 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
 
     // Setting priority for a listener
-    class UserStatistic implements CakeEventListener {
-        public function implementedEvents() {
+    class UserStatistic implements CakeEventListener
+    {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => array('callable' => 'updateBuyStatistic', 'passParams' => true),
             );
         }
 
-        public function updateBuyStatistic($orderData) {
+        public function updateBuyStatistic($orderData)
+        {
             // ...
         }
     }
@@ -530,12 +544,14 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 イベントを停止するためには、コールバックで `false` を返すか、またはイベントオブジェクトで
 `stopPropagation` メソッドを呼び出すかのいずれかを行うことができます::
 
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         return false; // stops the event
     }
 
-    public function updateBuyStatistic($event) {
+    public function updateBuyStatistic($event)
+    {
         // ...
         $event->stopPropagation();
     }
@@ -558,7 +574,8 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 イベントが中止されたかどうかを確認するには、イベント·オブジェクト内で `isStopped()` メソッドを呼び出します::
 
-    public function place($order) {
+    public function place($order)
+    {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
         $this->getEventManager()->dispatch($event);
         if ($event->isStopped()) {
@@ -601,20 +618,23 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 またはコールバック自体の値を返すことで変更できます::
 
     // A listener callback
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
     // Another listener callback
-    public function doSomethingElse($event) {
+    public function doSomethingElse($event)
+    {
         // ...
         $event->result['order'] = $alteredData;
     }
 
     // Using the event result
-    public function place($order) {
+    public function place($order)
+    {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
         $this->getEventManager()->dispatch($event);
         if (!empty($event->result['order'])) {
@@ -763,7 +783,8 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 
-    public function myCallback($event) {
+    public function myCallback($event)
+    {
         if ($event->subject() instanceof Cart) {
             return;
         }

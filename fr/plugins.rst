@@ -256,9 +256,11 @@ Ainsi, nous mettons notre nouveau ContactsController dans
 
     use ContactManager\Controller\AppController;
 
-    class ContactsController extends AppController {
+    class ContactsController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -325,7 +327,8 @@ table et l'entity pour ce controller::
 
     use Cake\ORM\Entity;
 
-    class Contact extends Entity {
+    class Contact extends Entity
+    {
     }
 
     // plugins/ContactManager/src/Model/Table/ContactsTable.php:
@@ -333,7 +336,8 @@ table et l'entity pour ce controller::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
+    class ContactsTable extends Table
+    {
     }
 
 Si vous avez besoin de faire référence à un model dans votre plugin lors de la
@@ -346,8 +350,10 @@ exemple::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
-        public function initialize(array $config) {
+    class ContactsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasMany('ContactManager.AltName');
         }
     }
@@ -360,8 +366,10 @@ préfix du plugin, utilisez la syntaxe alternative::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
-        public function initialize(array $config) {
+    class ContactsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
             ]);
@@ -493,11 +501,13 @@ du component. Par exemple::
 
     use Cake\Controller\Component;
 
-    class ExampleComponent extends Component {
+    class ExampleComponent extends Component
+    {
     }
 
     // dans vos controllers:
-    public function intialize() {
+    public function intialize()
+    {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');
     }

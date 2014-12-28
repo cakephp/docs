@@ -52,7 +52,8 @@ follows::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
     }
 
 Controller attributes and methods created in your ``AppController`` will be
@@ -77,7 +78,8 @@ The values in the child class will always override those in ``AppController.``
 Remember to call ``AppController``'s callbacks within child
 controller callbacks for best results::
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
     }
 
@@ -107,16 +109,20 @@ in ``src/Controller/RecipesController.php`` and contain::
 
         # src/Controller/RecipesController.php
 
-        class RecipesController extends AppController {
-            public function view($id) {
+        class RecipesController extends AppController
+        {
+            public function view($id)
+            {
                 // Action logic goes here..
             }
 
-            public function share($customerId, $recipeId) {
+            public function share($customerId, $recipeId)
+            {
                 // Action logic goes here..
             }
 
-            public function search($query) {
+            public function search($query)
+            {
                 // Action logic goes here..
             }
         }
@@ -143,8 +149,10 @@ you will typcially return a ``Response`` instance. If you have controller
 methods that are used for normal web requests + requestAction, you should check
 the request type before returning::
 
-    class RecipesController extends AppController {
-        public function popular() {
+    class RecipesController extends AppController
+    {
+        public function popular()
+        {
             $popular = $this->Recipes->find('popular');
             if (!$this->request->is('requested')) {
                 $this->response->body(json_encode($popular));
@@ -254,9 +262,11 @@ the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
 
     namespace App\Controller;
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
     // ...
-        public function search() {
+        public function search()
+        {
             // Render the view in src/Template/Recipes/search.ctp
             $this->render();
         }
@@ -287,8 +297,10 @@ have called ``render()``, CakePHP will not try to re-render the view::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public function my_action() {
+    class PostsController extends AppController
+    {
+        public function my_action()
+        {
             $this->render('custom_file');
         }
     }
@@ -303,8 +315,10 @@ For example::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public function my_action() {
+    class PostsController extends AppController
+    {
+        public function my_action()
+        {
             $this->render('Users.UserDetails/custom_file');
         }
     }
@@ -321,7 +335,8 @@ This method takes its first parameter in the form of a
 CakePHP-relative URL. When a user has successfully placed an order,
 you might wish to redirect them to a receipt screen. ::
 
-    public function place_order() {
+    public function place_order()
+    {
         // Logic for finalizing order goes here
         if ($success) {
             return $this->redirect(
@@ -384,7 +399,8 @@ how to use ``paginate()``
 The paginate attribute gives you an easy way to customize how ``paginate()``
 behaves::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $paginate = [
             'Articles' => [
                 'conditions' => ['published' => 1]
@@ -444,7 +460,8 @@ Configuring Helpers to Load
 Let's look at how to tell a CakePHP Controller that you plan to use
 additional MVC classes::
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
         public $helpers = ['Form'];
         public $components = ['RequestHandler'];
     }

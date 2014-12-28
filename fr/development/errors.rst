@@ -73,11 +73,14 @@ une logique de gestion des erreurs personnalisée. Un exemple serait::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError extends BaseErrorHandler {
-        public function _displayError($error, $debug) {
+    class AppError extends BaseErrorHandler
+    {
+        public function _displayError($error, $debug)
+        {
             return 'Il y a eu une erreur!';
         }
-        public function _displayException($exception) {
+        public function _displayException($exception)
+        {
             return 'Il y a eu un exception';
         }
     }
@@ -106,10 +109,12 @@ surcharger comme ceci::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError {
+    class AppError
+    {
         // Autre méthode.
 
-        public function handleFatalError($code, $description, $file, $line) {
+        public function handleFatalError($code, $description, $file, $line)
+        {
             return 'Un erreur fatale est survenue';
         }
     }
@@ -166,7 +171,8 @@ les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
 exceptions HTTP pourrait être le rendu de pages 404 pour les items qui n'ont
 pas été trouvés::
 
-    public function view($id) {
+    public function view($id)
+    {
         $post = $this->Post->findById($id);
         if (!$post) {
             throw new NotFoundException('Could not find that post');
@@ -320,7 +326,8 @@ Utiliser les Exceptions HTTP dans vos Controllers
 Vous pouvez envoyer n'importe quelle exception HTTP liée à partir des actions
 de votre controller pour indiquer les états d'échec. Par exemple::
 
-    public function view($id) {
+    public function view($id)
+    {
         $post = $this->Post->read(null, $id);
         if (!$post) {
             throw new NotFoundException();
@@ -371,7 +378,8 @@ Si votre application contenait l'exception suivante::
 
     use Cake\Core\Exception\Exception;
 
-    class MissingWidgetException extends Exception {};
+    class MissingWidgetException extends Exception
+    {};
 
 Vous pourriez fournir de jolies erreurs de développement, en créant
 ``src/Template/Error/missing_widget.ctp``. Quand on est en mode production,
@@ -386,7 +394,8 @@ fonctionner normalement::
 
     use Cake\Core\Exception\Exception;
 
-    class MissingWidgetException extends Exception {
+    class MissingWidgetException extends Exception
+    {
         protected $_messageTemplate = 'Il semblerait que %s soit manquant.';
     }
 
@@ -461,8 +470,10 @@ pour les erreurs spécifique à votre application::
 
     use Cake\Error\ExceptionRenderer;
 
-    class AppExceptionRenderer extends ExceptionRenderer {
-        public function missingWidget($error) {
+    class AppExceptionRenderer extends ExceptionRenderer
+    {
+        public function missingWidget($error)
+        {
             return 'Oups ce widget est manquant!';
         }
     }
@@ -510,8 +521,10 @@ vous pouvez utiliser n'importe quel controller de votre choix::
     use App\Controller\SuperCustomErrorController;
     use Cake\Error\ExceptionRenderer;
 
-    class AppExceptionRenderer extends ExceptionRenderer {
-        protected function _getController($exception) {
+    class AppExceptionRenderer extends ExceptionRenderer
+    {
+        protected function _getController($exception)
+        {
             return new SuperCustomErrorController();
         }
     }

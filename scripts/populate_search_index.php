@@ -11,7 +11,8 @@ define('ES_INDEX', 'documentation');
 define('CAKEPHP_VERSION', '3-0');
 
 
-function main($argv) {
+function main($argv)
+{
 	if (empty($argv[1])) {
 		echo "A language to scan is required.\n";
 		exit(1);
@@ -33,7 +34,8 @@ function main($argv) {
 	echo "\nIndex update complete\n";
 }
 
-function updateIndex($lang, $file) {
+function updateIndex($lang, $file)
+{
 	$fileData = readFileData($file);
 	$filename = $file->getPathName();
 	list($filename) = explode('.', $filename);
@@ -81,7 +83,8 @@ function updateIndex($lang, $file) {
 	echo "Sent $file\n";
 }
 
-function readFileData($file) {
+function readFileData($file)
+{
 	$contents = file_get_contents($file);
 
 	// extract the title and guess that things underlined with # or == and first in the file

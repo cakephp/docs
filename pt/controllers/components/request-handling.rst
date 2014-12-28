@@ -22,7 +22,8 @@ parsed into an array which is assigned to ``$this->request->data``,
 and can then be saved as model data. In order to make use of
 RequestHandler it must be included in your $components array::
 
-    class WidgetsController extends AppController {
+    class WidgetsController extends AppController
+    {
 
         public $components = ['RequestHandler'];
 
@@ -43,11 +44,13 @@ the client and its request.
     types is accepted by the client. If null returns an array of the
     content-types that the client accepts. For example::
 
-        class ArticlesController extends AppController {
+        class ArticlesController extends AppController
+        {
 
             public $components = ['RequestHandler'];
 
-            public function beforeFilter() {
+            public function beforeFilter()
+            {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html)
                     // response.

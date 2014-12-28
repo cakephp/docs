@@ -19,8 +19,10 @@ look like this::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -54,7 +56,8 @@ what the basic controller should look like::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
     }
 
 Now, let's add an action to our controller. Actions often represent
@@ -65,9 +68,11 @@ articles. The code for that action would look like this::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             $articles = $this->Articles->find('all');
             $this->set(compact('articles'));
         }
@@ -177,13 +182,16 @@ ArticlesController now::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
              $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -236,14 +244,17 @@ ArticlesController::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $components = ['Flash'];
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -252,7 +263,8 @@ ArticlesController::
             $this->set(compact('article'));
         }
 
-        public function add() {
+        public function add()
+        {
             $article = $this->Articles->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Articles->save($article)) {
@@ -368,12 +380,15 @@ back at our Articles model and make a few adjustments::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             $validator
                 ->notEmpty('title')
                 ->notEmpty('body');
@@ -404,7 +419,8 @@ should have picked up a pattern. Make the action, then the view.
 Here's what the ``edit()`` action of the ArticlesController would look
 like::
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid article'));
         }
@@ -494,7 +510,8 @@ Deleting Articles
 Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ArticlesController::
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->get($id);

@@ -17,14 +17,17 @@ d'une ``View``, utilisez la classe ``String``::
 
     use Cake\Utility\String;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth');
         }
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             $message = $this->Users->find('new_message');
             if (!empty($message)) {
                 // notifie à l'utilisateur d'un nouveau message
@@ -155,6 +158,7 @@ Exemple::
 
     // appelé avec String
     use Cake\Utility\String;
+    
     echo String::highlight(
         $lastSentence,
         'using',
@@ -287,6 +291,7 @@ pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
 
     // appelé avec String
     use Cake\Utility\String;
+    
     echo String::excerpt($lastParagraph, 'method', 50, '...');
 
 Sortie::
@@ -307,6 +312,7 @@ joins avec 'and'. ::
 
     // appelé avec String
     use Cake\Utility\String;
+    
     echo String::toList($colors);
 
 Sortie::

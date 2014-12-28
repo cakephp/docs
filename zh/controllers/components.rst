@@ -20,7 +20,8 @@
 :doc:`/core-libraries/components/cookie` 。这些组件以及一般组件的配置，通常都是用 
 ``$components`` 数组、或者控制器的 ``beforeFilter()`` 方法来进行::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array(
             'Auth' => array(
                 'authorize' => array('controller'),
@@ -37,7 +38,8 @@
 种方式适用于你需要将一个函数的结果赋值给一个组件属性的情况下。上面的例子也可以这
 样::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array(
             'controller' => 'users',
@@ -60,7 +62,8 @@
 定制实现的组件来替换 ``$this->Auth`` 或者其它常用组件时::
 
     // app/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array(
             'Auth' => array(
                 'className' => 'MyAuth'
@@ -70,7 +73,8 @@
 
     // app/Controller/Component/MyAuthComponent.php
     App::uses('AuthComponent', 'Controller/Component');
-    class MyAuthComponent extends AuthComponent {
+    class MyAuthComponent extends AuthComponent
+    {
         // 添加你的代码来重载核心 AuthComponent
     }
 
@@ -87,10 +91,12 @@
 属性可供调用。如果你已经在控制器中加载了 :php:class:`SessionComponent` 和 
 :php:class:`CookieComponent` ，你就可以像下面这样访问它们::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array('Session', 'Cookie');
 
-        public function delete() {
+        public function delete()
+        {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
                 return $this->redirect(array('action' => 'index'));
@@ -136,8 +142,10 @@
 ``app/Controller/Component/MathComponent.php`` 文件。组件的基本构造如下::
 
     App::uses('Component', 'Controller');
-    class MathComponent extends Component {
-        public function doComplexOperation($amount1, $amount2) {
+    class MathComponent extends Component
+    {
+        public function doComplexOperation($amount1, $amount2)
+        {
             return $amount1 + $amount2;
         }
     }
@@ -183,24 +191,29 @@
 
     // app/Controller/Component/CustomComponent.php
     App::uses('Component', 'Controller');
-    class CustomComponent extends Component {
+    class CustomComponent extends Component
+    {
         // 你的组件使用的其它组件
         public $components = array('Existing');
 
-        public function initialize(Controller $controller) {
+        public function initialize(Controller $controller)
+        {
             $this->Existing->foo();
         }
 
-        public function bar() {
+        public function bar()
+        {
             // ...
        }
     }
 
     // app/Controller/Component/ExistingComponent.php
     App::uses('Component', 'Controller');
-    class ExistingComponent extends Component {
+    class ExistingComponent extends Component
+    {
 
-        public function foo() {
+        public function foo()
+        {
             // ...
         }
     }
