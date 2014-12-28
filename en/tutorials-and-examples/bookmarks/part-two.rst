@@ -23,8 +23,10 @@ AppController::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
-        public function initialize() {
+    class AppController extends Controller
+    {
+        public function initialize()
+        {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authenticate' => [
@@ -55,7 +57,8 @@ not written that code yet. So let's create the login action::
 
     // In src/Controller/UsersController.php
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -93,7 +96,8 @@ Adding Logout
 Now that people can log in, you'll probably want to provide a way to log out as
 well. Again, in the ``UsersController``, add the following code::
 
-    public function logout() {
+    public function logout()
+    {
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
@@ -128,7 +132,8 @@ requirements are pretty simple, we can write some simple code in our
 AuthComponent how our application is going to authorize actions. In your
 ``AppController`` add the following::
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         return false;
     }
 
@@ -139,7 +144,8 @@ Also, add the following to the configuration for ``Auth`` in your
 
 Your ``initialize`` method should now look like::
 
-        public function initialize() {
+        public function initialize()
+        {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'authorize'=> 'Controller',//added this line
@@ -166,7 +172,8 @@ We'll default to denying access, and incrementally grant access where it makes
 sense. First, we'll add the authorization logic for bookmarks. In your
 ``BookmarksController`` add the following::
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         $action = $this->request->params['action'];
 
         // The add and index actions are always allowed.
@@ -211,7 +218,8 @@ Let's tackle the add form first. To begin with remove the ``input('user_id')``
 from ``src/Template/Bookmarks/add.ctp``. With that removed, we'll also update
 the add method to look like::
 
-    public function add() {
+    public function add()
+    {
         $bookmark = $this->Bookmarks->newEntity($this->request->data);
         $bookmark->user_id = $this->Auth->user('id');
         if ($this->request->is('post')) {
@@ -229,7 +237,8 @@ By setting the entity property with the session data, we remove any possibility
 of the user modifying which user a bookmark is for. We'll do the same for the
 edit form and action. Your edit action should look like::
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $bookmark = $this->Bookmarks->get($id, [
             'contain' => ['Tags']
         ]);
@@ -253,7 +262,8 @@ Now, we only need to show bookmarks for the currently logged in user. We can do
 that by updating the call to ``paginate()``. Make your index() action look
 like::
 
-    public function index() {
+    public function index()
+    {
         $this->paginate = [
             'conditions' => [
                 'Bookmarks.user_id' => $this->Auth->user('id'),
@@ -282,7 +292,8 @@ can add a virtual/computed field to the entity. In
 
     use Cake\Collection\Collection;
 
-    protected function _getTagString() {
+    protected function _getTagString()
+    {
         if (isset($this->_properties['tag_string'])) {
             return $this->_properties['tag_string'];
         }
@@ -332,13 +343,15 @@ to parse the tag string and find/build the related entities. Add the following
 to ``src/Model/Table/BookmarksTable.php``::
 
 
-    public function beforeSave($event, $entity, $options) {
+    public function beforeSave($event, $entity, $options)
+    {
         if ($entity->tag_string) {
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
     }
 
-    protected function _buildTags($tagString) {
+    protected function _buildTags($tagString)
+    {
         $new = array_unique(array_map('trim', explode(',', $tagString)));
         $out = [];
         $query = $this->Tags->find()

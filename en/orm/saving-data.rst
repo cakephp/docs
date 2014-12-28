@@ -403,8 +403,10 @@ The above would call the ``validationUpdate`` method on the table instance to
 build the required rules.  By default the ``validationDefault`` method will be
 used. A sample validator method for our articles table would be::
 
-    class ArticlesTable extends Table {
-        public function validationUpdate($validator) {
+    class ArticlesTable extends Table
+    {
+        public function validationUpdate($validator)
+        {
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
@@ -435,9 +437,11 @@ When a validation rule is created you can name the provider of that rule. For
 example, if your entity had a 'isValidRole' method you could use it as
 a validation rule::
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
@@ -654,9 +658,11 @@ column Types::
     // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        protected function _initializeSchema(Schema $schema) {
+        protected function _initializeSchema(Schema $schema)
+        {
             $schema->columnType('preferences', 'json');
             return $schema;
         }
@@ -694,14 +700,16 @@ necessary. In these cases it is more efficient to use a bulk-update to modify
 many rows at once::
 
     // Publish all the unpublished articles.
-    function publishAllUnpublished() {
+    function publishAllUnpublished()
+    {
         $this->updateAll(['published' => true], ['published' => false]);
     }
 
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
-    function incrementCounters() {
+    function incrementCounters()
+    {
         $expression = new QueryExpression('view_count = view_count + 1');
         $this->updateAll([$expression], ['published' => true]);
     }

@@ -62,7 +62,8 @@ In these cases it is more performant to use a bulk-delete to remove many rows at
 once::
 
     // Delete all the spam
-    function destroySpam() {
+    function destroySpam()
+    {
         return $this->deleteAll(['is_spam' => true]);
     }
 

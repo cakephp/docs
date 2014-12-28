@@ -10,14 +10,17 @@ use the ``Time`` class::
 
     use Cake\I18n\Time;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth');
         }
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
                 // Greet user with a happy birthday message

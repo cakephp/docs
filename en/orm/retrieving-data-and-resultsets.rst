@@ -205,9 +205,11 @@ table, while the values will be the 'displayField' of the table. You can use the
 ``displayField()`` method on a table object to configure the display field of
 a table::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->displayField('title');
         }
     }
@@ -295,9 +297,11 @@ would do the following::
     use Cake\ORM\Query;
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true

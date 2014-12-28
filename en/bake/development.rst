@@ -21,6 +21,7 @@ be used::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
+    
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 
@@ -42,6 +43,7 @@ variables used in the bake templates::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
+    
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 
@@ -111,7 +113,8 @@ looks like this::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -134,7 +137,8 @@ file actually rendered, looks like this::
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -149,14 +153,16 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
     /**
      * Foo shell command.
      */
-    class FooShell extends Shell {
+    class FooShell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -196,18 +202,22 @@ FooTask.php file should look like::
 
     use Cake\Shell\Task\SimpleBakeTask;
 
-    class FooTask extends SimpleBakeTask {
+    class FooTask extends SimpleBakeTask
+    {
         public $pathFragment = 'Foo/';
 
-        public function name() {
+        public function name()
+        {
             return 'shell';
         }
 
-        public function fileName($name) {
+        public function fileName($name)
+        {
             return $name . 'Foo.php';
         }
 
-        public function template() {
+        public function template()
+        {
             return 'foo';
         }
 

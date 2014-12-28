@@ -16,14 +16,17 @@ of a ``View``, use the ``String`` class::
 
     use Cake\Utility\String;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth')
         };
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             $message = $this->Users->find('new_message');
             if (!empty($message)) {
                 // Notify user of new message
@@ -152,6 +155,7 @@ Example::
 
     // Called as String
     use Cake\Utility\String;
+    
     echo String::highlight(
         $lastSentence,
         'using',
@@ -206,6 +210,7 @@ Example::
 
     // Called as String
     use Cake\Utility\String;
+    
     echo String::truncate(
         'The killer crept forward and tripped on the rug.',
         22,
@@ -255,6 +260,7 @@ Example::
 
     // Called as String
     use Cake\Utility\String;
+    
     echo String::tail(
         $sampleText,
         70,
@@ -284,6 +290,7 @@ the resulting document. ::
 
     // Called as String
     use Cake\Utility\String;
+    
     echo String::excerpt($lastParagraph, 'method', 50, '...');
 
 Output::
@@ -304,6 +311,7 @@ with 'and'. ::
 
     // Called as String
     use Cake\Utility\String;
+    
     echo String::toList($colors);
 
 Output::

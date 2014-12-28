@@ -26,7 +26,8 @@ our application had an ``articles`` table we could create the following entity::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
     }
 
 Right now this entity doesn't do very much. However, when we load data from our
@@ -75,8 +76,10 @@ are read or set. For example::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
-        protected function _getTitle($title) {
+    class Article extends Entity
+    {
+        protected function _getTitle($title)
+        {
             return ucwords($title);
         }
     }
@@ -91,9 +94,11 @@ a mutator::
     use Cake\ORM\Entity;
     use Cake\Utility\Inflector;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _setTitle($title) {
+        protected function _setTitle($title)
+        {
             $this->set('slug', Inflector::slug($title));
             return $title;
         }
@@ -119,9 +124,11 @@ actually exist. For example if your users table has ``first_name`` and
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
-        protected function _getFullName() {
+        protected function _getFullName()
+        {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -198,7 +205,8 @@ indicate whether a field can or cannot be mass-assigned::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -212,7 +220,8 @@ fallback behavior if a field is not specifically named::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -284,9 +293,11 @@ can lazily load associated data::
     use Cake\ORM\Entity;
     use Cake\ORM\TableRegistry;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _getComments() {
+        protected function _getComments()
+        {
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
@@ -322,7 +333,8 @@ could be provided by a trait::
 
     trait SoftDeleteTrait {
 
-        public function softDelete() {
+        public function softDelete()
+        {
             $this->set('deleted', true);
         }
 
@@ -336,7 +348,8 @@ it::
     use Cake\ORM\Entity;
     use SoftDelete\Model\Entity\SoftDeleteTrait;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use SoftDeleteTrait;
     }
 
@@ -369,7 +382,8 @@ fields that should be exposed::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_virtual = ['full_name'];
 
@@ -391,7 +405,8 @@ hidden::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_hidden = ['password'];
 

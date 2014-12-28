@@ -385,9 +385,11 @@ class::
 
     namespace App\I18n\Parser;
 
-    class YamlFileParser {
+    class YamlFileParser
+    {
 
-        public function parse($file) {
+        public function parse($file)
+        {
             return yaml_parse_file($file);
         }
     }
@@ -405,6 +407,7 @@ application. Next, create the translations file under
 And finally, configure the translation loader for the domain and locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
+    
     I18n::translator(
         'animals',
         'fr_FR',
