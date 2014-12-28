@@ -192,7 +192,7 @@ Now if you try to view, edit or delete a bookmark that does not belong to you,
 you should be redirected back to the page you came from. However, there is no
 error message being displayed, so let's rectify that next::
 
-    // In src/Template/Layouts/default.ctp
+    // In src/Template/Layout/default.ctp
     // Under the existing flash message.
     <?= $this->Flash->render('auth') ?>
 

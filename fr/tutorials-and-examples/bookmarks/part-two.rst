@@ -201,7 +201,7 @@ Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark
 qui ne vous appartient pas, vous devriez être redirigé vers la page d'où vous
 venez. Cependant, il n'y a pas de message affiché, donc rectifions ensuite cela::
 
-    // Dans src/Template/Layouts/default.ctp
+    // Dans src/Template/Layout/default.ctp
     // Sous le message flash existant.
     <?= $this->Flash->render('auth') ?>
 
