@@ -305,10 +305,10 @@ a.improve {
 	float: right;
 }
 
-#sidebar-navigation > ul > li:nth-of-type(5) a:after,
-#sidebar-navigation > ul > li:nth-of-type(13) a:after,
-#sidebar-navigation > ul > li:nth-of-type(31) a:after,
-#sidebar-navigation > ul > li:nth-of-type(42) a:after {
+#sidebar-navigation > ul > li:nth-of-type(5):last-child:after,
+#sidebar-navigation > ul > li:nth-of-type(13):last-child:after,
+#sidebar-navigation > ul > li:nth-of-type(31):last-child:after,
+#sidebar-navigation > ul > li:nth-of-type(42):last-child:after {
     content: " ";
     display: block;
     margin-bottom: 1em;
