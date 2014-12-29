@@ -450,7 +450,7 @@ your database. This is a pretty simple exercise in CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-When saving, CakePHP will :ref:`apply your rules <appliction-rules>`, and wrap
+When saving, CakePHP will :ref:`apply your rules <application-rules>`, and wrap
 the save operation in a database transaction. It will also only update
 properties that have changed. The above ``save()`` call would generate SQL
 like::
