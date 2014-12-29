@@ -690,8 +690,7 @@ exemple, considérons la requête qui permet de récupérer les ids d'article et
 leur nombre de commentaires::
 
     $query = $articles->find();
-    $query->find()
-        ->select(['Articles.id', $query->func()->count('Comments.id')])
+    $query->select(['Articles.id', $query->func()->count('Comments.id')])
         ->matching('Comments')
         ->group(['Articles.id']);
     $total = $query->count();
