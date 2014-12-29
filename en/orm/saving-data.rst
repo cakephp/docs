@@ -287,8 +287,8 @@ Validating Data Before Building Entities
 When marshalling data into entities, you can validate data. Validating data
 allows you to check the type, shape and size of data. By default request data
 will be validated before it is converted into entities.
-If any validation rules fail, the returned entity will contain errors, and the
-request data::
+If any validation rules fail, the returned entity will contain errors. The
+fields with errors will not be present in the returned entity::
 
     $article = $articles->newEntity($this->request->data);
     if ($article->errors()) {
@@ -303,7 +303,9 @@ When building an entity with validation enabled the following things happen:
 4. The ``Model.buildValidator`` event will be triggered.
 5. Request data will be validated.
 6. Request data will be type cast into types that match the column types.
-7. Data and errors will be set into the entity.
+7. Errors will be set into the entity.
+8. Valid data will be set into the entity, while fields that failed validation
+   will be left out.
 
 If you'd like to disable validation when converting request data, set the
 ``validate`` option to false::
@@ -752,13 +754,13 @@ Creating a Rules Checker
 ------------------------
 
 Rules checker classes are generally defined by the ``buildRules`` method in your
-table class. Behaviors, and other event subscribers can use the
+table class. Behaviors and other event subscribers can use the
 ``Model.buildRules`` event to augment the rules checker for a given Table
 class::
 
     // In a table class
     public function buildRules(RulesChecker $checker) {
-        // Add a rule that is always applied
+        // Add a rule that is applied for create and update operations
         $rules->add(function($entity, $options) {
             // Return a boolean to indicate pass/fail
         });
@@ -807,10 +809,10 @@ allows you to easily define unique field sets::
     use Cake\ORM\Rule\IsUnique;
 
     // A single field.
-    $rules->add(new IsUnique(['email']));
+    $rules->add($rules->isUnique(['email']));
 
     // A list of fields
-    $rules->add(new IsUnique(['username', 'account_id']));
+    $rules->add($rules->isUnique(['username', 'account_id']));
 
 Foreign Key Rules
 -----------------
