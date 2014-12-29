@@ -21,8 +21,10 @@ Basic Usage
 
 You enable the timestamp behavior like any other behavior::
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -39,8 +41,10 @@ Using and Configuring the Behavior
 If you need to modify fields with different names, or want to update additional
 timestamp fields on custom events you can use some additional configuration::
 
-    class OrdersTable extends Table {
-        public function initialize(array $config) {
+    class OrdersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [

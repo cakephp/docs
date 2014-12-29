@@ -97,7 +97,8 @@ Advanced bootstrapping
 
 ::
 
-    function aCallableFunction($pluginName, $config) {
+    function aCallableFunction($pluginName, $config)
+    {
 
     }
 
@@ -171,13 +172,15 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
 ::
 
     // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
-    class ContactManagerAppController extends AppController {
+    class ContactManagerAppController extends AppController
+    {
     }
 
 ::
 
     // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    class ContactManagerAppModel extends AppModel {
+    class ContactManagerAppModel extends AppModel
+    {
     }
 
 もしこれらの特別なクラスの定義を忘れると、"Missing Controller"エラーがでます。
@@ -213,10 +216,12 @@ ContactManagerプラグインのコントローラーは、/app/Plugin/ContactMa
 ::
 
     // app/Plugin/ContactManager/Controller/ContactsController.php
-    class ContactsController extends ContactManagerAppController {
+    class ContactsController extends ContactManagerAppController
+    {
         public $uses = array('ContactManager.Contact');
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -246,7 +251,8 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 ::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
     }
 
 /contact_manager/contacts に（‘contacts’テーブルがある状態で）今アクセスすると、“Missing View”エラーが発生します。
@@ -260,7 +266,8 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 ::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
         public $hasMany = array('ContactManager.AltName');
     }
 
@@ -269,7 +276,8 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 ::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
         public $hasMany = array(
             'AltName' => array(
                 'className' => 'ContactManager.AltName'
@@ -370,7 +378,8 @@ Contacts controllerにはこのファイルを作ります。
 ::
 
     // Component defined in 'ContactManager' plugin
-    class ExampleComponent extends Component {
+    class ExampleComponent extends Component
+    {
     }
 
     // within your controllers:

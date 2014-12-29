@@ -24,8 +24,10 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 
 ::
 
-    class Example extends AppModel {
-        public function getRecent() {
+    class Example extends AppModel
+    {
+        public function getRecent()
+        {
             $conditions = array(
                 'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'
             );

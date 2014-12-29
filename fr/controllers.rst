@@ -50,7 +50,8 @@ librairie du cœur de CakePHP. ``AppController`` est définie dans
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
     }
 
 Les attributs et méthodes de controller créés dans ``AppController`` seront
@@ -67,9 +68,11 @@ Controller pour ce type d'utilisation::
 
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             // Active toujours le component CSRF.
             $this->loadComponent('Csrf');
         }
@@ -111,16 +114,20 @@ RecipesController pourrait contenir les actions
 
     // src/Controller/RecipesController.php
 
-    class RecipesController extends AppController {
-        public function view($id) {
+    class RecipesController extends AppController
+    {
+        public function view($id)
+        {
             //la logique de l'action va ici..
         }
 
-        public function share($customerId, $recipeId) {
+        public function share($customerId, $recipeId)
+        {
             //la logique de l'action va ici..
         }
 
-        public function search($query) {
+        public function search($query)
+        {
             //la logique de l'action va ici..
         }
     }
@@ -149,8 +156,10 @@ retourner::
 
     // src/Controller/RecipesController.php
 
-    class RecipesController extends AppController {
-        public function popular() {
+    class RecipesController extends AppController
+    {
+        public function popular()
+        {
             $popular = $this->Recipes->find('popular');
             if (!$this->request->is('requested')) {
                 $this->response->body(json_encode($popular));
@@ -231,9 +240,11 @@ sera utilisé::
 
     namespace App\Controller;
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
     // ...
-        public function search() {
+        public function search()
+        {
             // Render the view in src/Template/Recipes/search.ctp
             $this->render();
         }
@@ -267,8 +278,10 @@ directement ``render()``. Une fois que vous avez appelé
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public function my_action() {
+    class PostsController extends AppController
+    {
+        public function my_action()
+        {
             $this->render('custom_file');
         }
     }
@@ -282,8 +295,10 @@ Par exemple::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
-        public function my_action() {
+    class PostsController extends AppController
+    {
+        public function my_action()
+        {
             $this->render('Users.UserDetails/custom_file');
         }
     }
@@ -301,7 +316,8 @@ paramètre sous la forme d'une URL relative à votre application CakePHP.
 Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
 rediriger vers un écran affichant le reçu. ::
 
-    public function place_order() {
+    public function place_order()
+    {
         // Logic for finalizing order goes here
         if ($success) {
             return $this->redirect(
@@ -419,7 +435,8 @@ pour plus de détails sur l'utilisation de la pagination.
 L'attribut paginate vous donne une façon facile de personnaliser la façon dont
 ``paginate()`` se comporte::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $paginate = [
             'Articles' => [
                 'conditions' => ['published' => 1]
@@ -436,7 +453,8 @@ Dans la méthode ``initialize()`` de votre Controller, vous pouvez définir
 tout component que vous voulez charger et toute donnée de configuration
 pour eux::
 
-    public function intialize() {
+    public function intialize()
+    {
         parent::initialize();
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure:read('Comments'));
@@ -459,7 +477,8 @@ Configurer les Helpers à Charger
 Voyons comment dire à un controller de CakePHP que vous avez prévu d'utiliser
 les classes MVC supplémentaires::
 
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
         public $helpers = ['Form'];
     }
 
@@ -505,7 +524,8 @@ fournissent aussi un ensemble similaire de callbacks.
 N'oubliez pas d'appeler les callbacks de ``AppController`` dans les callbacks
 des controllers enfant pour avoir de meilleurs résultats::
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
     }
 

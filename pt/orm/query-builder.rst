@@ -1003,11 +1003,13 @@ This is particularly useful for building custom finder methods as described in t
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options) {
+    public function findRecent(Query $query, array $options)
+    {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options) {
+    public function findCommonWords(Query $query, array $options)
+    {
         // Same as in the common words example in the previous section
         $mapper = ...;
         $reducer = ...;

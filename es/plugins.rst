@@ -244,9 +244,11 @@ So, we place our new ContactsController in
 
     use ContactManager\Controller\AppController;
 
-    class ContactsController extends AppController {
+    class ContactsController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -312,7 +314,8 @@ create the table and entity for that controller::
 
     use Cake\ORM\Entity;
 
-    class Contact extends Entity {
+    class Contact extends Entity
+    {
     }
 
     // plugins/ContactManager/src/Model/Table/ContactsTable.php:
@@ -320,7 +323,8 @@ create the table and entity for that controller::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
+    class ContactsTable extends Table
+    {
     }
 
 If you need to reference a model within your plugin when building associations,
@@ -332,8 +336,10 @@ name, separated with a dot. For example::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
-        public function initialize(array $config) {
+    class ContactsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasMany('ContactManager.AltName');
         }
     }
@@ -346,8 +352,10 @@ prefix on them, use the alternative syntax::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
-        public function initialize(array $config) {
+    class ContactsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
             ]);
@@ -470,7 +478,8 @@ that you prefix the plugin name before the name of the component. For example::
 
     use Cake\Controller\Component;
 
-    class ExampleComponent extends Component {
+    class ExampleComponent extends Component
+    {
     }
 
     // Within your controllers:

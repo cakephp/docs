@@ -173,7 +173,8 @@ in the order they are attached. Once one of the objects can identify
 the user, no other objects are checked. A sample login function for
 working with a login form could look like::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -243,8 +244,10 @@ you wanted to create an OpenID authentication object. In
 
     use Cake\Auth\BaseAuthenticate;
 
-    class OpenidAuthenticate extends BaseAuthenticate {
-        public function authenticate(Request $request, Response $response) {
+    class OpenidAuthenticate extends BaseAuthenticate
+    {
+        public function authenticate(Request $request, Response $response)
+        {
             // Do things for OpenID here.
             // Return an array of user if they could authenticate the user,
             // return false if not.
@@ -285,7 +288,8 @@ valid user. As with authentication object's ``authenticate()`` method the
 ``getUser()`` method should return an array of user information on success or
 ``false`` on failure.::
 
-    public function getUser($request) {
+    public function getUser($request)
+    {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
 
@@ -360,11 +364,13 @@ database, the easiest way is to use a setter function in your User entity::
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // ...
 
-        protected function _setPassword($password) {
+        protected function _setPassword($password)
+        {
             return (new DefaultPasswordHasher)->hash($password);
         }
 
@@ -392,13 +398,16 @@ In order to use a different password hasher, you need to create the class in
 
     use \Cake\Auth\AbstractPasswordHasher;
 
-    class LegacyPasswordHasher extends AbstractPasswordHasher {
+    class LegacyPasswordHasher extends AbstractPasswordHasher
+    {
 
-        public function hash($password) {
+        public function hash($password)
+        {
             return sha1($password);
         }
 
-        public function check($password, $hashedPassword) {
+        public function check($password, $hashedPassword)
+        {
             return sha1($password) === $hashedPassword;
         }
     }
@@ -450,7 +459,8 @@ check was unsuccessful.
 In order to update old users' passwords on the fly, you can change the login
 function accordingly::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -487,9 +497,11 @@ from the normal password hash::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function beforeSave(Event $event) {
+        public function beforeSave(Event $event)
+        {
             $entity = $event->data['entity'];
 
             // Make a password for digest auth.
@@ -522,7 +534,8 @@ Sometimes the need arises where you need to manually log a user in, such
 as just after they registered for your application. You can do this by
 calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
 
-    public function register() {
+    public function register()
+    {
         $user = $this->Users->newEntity($this->request->data);
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
@@ -564,7 +577,8 @@ redirect them to where they need to go. This method is also useful if
 you want to provide a 'Log me out' link inside a members' area of your
 application::
 
-    public function logout() {
+    public function logout()
+    {
         return $this->redirect($this->Auth->logout());
     }
 
@@ -662,8 +676,10 @@ following::
     use Cake\Auth\BaseAuthorize;
     use Cake\Network\Request;
 
-    class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, Request $request) {
+    class LdapAuthorize extends BaseAuthorize
+    {
+        public function authorize($user, Request $request)
+        {
             // Do things for ldap here.
         }
     }
@@ -763,11 +779,13 @@ boolean as to whether or not the user is allowed to access resources in
 the request. The callback is passed the active user, so it can be
 checked::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         public $components = [
             'Auth' => ['authorize' => 'Controller'],
         ];
-        public function isAuthorized($user = null) {
+        public function isAuthorized($user = null)
+        {
             // Any registered user can access public functions
             if (empty($this->request->params['prefix'])) {
                 return true;

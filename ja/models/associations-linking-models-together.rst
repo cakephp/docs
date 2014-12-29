@@ -46,7 +46,8 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
 
 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasOne = 'Profile';
         public $hasMany = array(
@@ -64,7 +65,8 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
 **各モデルのエイリアスはアプリケーション全体でユニークでなければなりません。**\
 たとえば次の例を見てください。これは正しい書き方です。 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasMany = array(
             'MyRecipe' => array(
@@ -78,7 +80,8 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
         );
     }
 
-    class Group extends AppModel {
+    class Group extends AppModel
+    {
         public $name = 'Group';
         public $hasMany = array(
             'MyRecipe' => array(
@@ -94,7 +97,8 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
 
 しかし、以下の例はうまく動きません。 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasMany = array(
             'MyRecipe' => array(
@@ -108,7 +112,8 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
         );
     }
 
-    class Group extends AppModel {
+    class Group extends AppModel
+    {
         public $name = 'Group';
         public $hasMany = array(
             'MyRecipe' => array(
@@ -182,7 +187,8 @@ $hasOneプロパティを追加します。ただし、Profileモデルが /app/
 ないと正常に動作しません。 ::
 
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasOne = 'Profile';
     }
@@ -197,7 +203,8 @@ $hasOneプロパティを追加します。ただし、Profileモデルが /app/
 
 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasOne = array(
             'Profile' => array(
@@ -282,14 +289,16 @@ Mentor belongsTo Doctor mentors.doctor\_id
 Profileモデル(/app/Model/Profile.php)に文字列でbelongsToアソシエーションを\
 定義してみましょう。 ::
 
-    class Profile extends AppModel {
+    class Profile extends AppModel
+    {
         public $name = 'Profile';
         public $belongsTo = 'User';
     }
 
 配列を使ってより詳しく設定することもできます。 ::
 
-    class Profile extends AppModel {
+    class Profile extends AppModel
+    {
         public $name = 'Profile';
         public $belongsTo = array(
             'User' => array(
@@ -380,14 +389,16 @@ Product hasMany Option  Option.product\_id
 Userモデル(/app/Model/Profile.php)に文字列でhasManyアソシエーションを\
 定義してみましょう。 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasMany = 'Comment';
     }
 
 配列を使ってより詳しく設定することもできます。 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasMany = array(
             'Comment' => array(
@@ -502,7 +513,8 @@ BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
 counter-cache機能を有効にするためにアソシエーションの設定に \
 ``counterCache`` キーに ``true`` をセットしましょう。 ::
 
-    class ImageComment extends AppModel {
+    class ImageComment extends AppModel
+    {
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
@@ -519,7 +531,8 @@ counter-cache機能を有効にするためにアソシエーションの設定�
 
 Imageモデルのサンプルでは、次のようになるでしょう。 ::
 
-    class ImageComment extends AppModel {
+    class ImageComment extends AppModel
+    {
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
@@ -581,7 +594,8 @@ Foo HABTM Bar             **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.
 
 新しいテーブルを作れば、モデルにHABTMアソシエーションを定義できます。 ::
 
-    class Recipe extends AppModel {
+    class Recipe extends AppModel
+    {
         public $name = 'Recipe';
         public $hasAndBelongsToMany = array(
             'Ingredient' =>
@@ -732,7 +746,8 @@ Course(授業)はStudent(生徒)に取られています。これは単純に多
 CourseMembershipモデルを作ります。以下のモデルを見てください。 ::
 
             // Student.php
-            class Student extends AppModel {
+            class Student extends AppModel
+            {
                 public $hasMany = array(
                     'CourseMembership'
                 );
@@ -740,7 +755,8 @@ CourseMembershipモデルを作ります。以下のモデルを見てくださ�
 
             // Course.php
 
-            class Course extends AppModel {
+            class Course extends AppModel
+            {
                 public $hasMany = array(
                     'CourseMembership'
                 );
@@ -748,7 +764,8 @@ CourseMembershipモデルを作ります。以下のモデルを見てくださ�
 
             // CourseMembership.php
 
-            class CourseMembership extends AppModel {
+            class CourseMembership extends AppModel
+            {
                 public $belongsTo = array(
                     'Student', 'Course'
                 );
@@ -778,7 +795,8 @@ CourseMembershipモデルはStudent(生徒)のCourse(授業)への参加して�
 より詳しくはビルトインビヘイビアについてのマニュアルを参照してください。)
 以下の2つのモデルを使って、bindModel()とunbindModel()の使い方を見てみましょう。 ::
 
-    class Leader extends AppModel {
+    class Leader extends AppModel
+    {
         public $name = 'Leader';
 
         public $hasMany = array(
@@ -789,7 +807,8 @@ CourseMembershipモデルはStudent(生徒)のCourse(授業)への参加して�
         );
     }
 
-    class Follower extends AppModel {
+    class Follower extends AppModel
+    {
         public $name = 'Follower';
     }
 
@@ -799,7 +818,8 @@ Followerを取得できます。上記のコードでは、Leaderモデルのア
 コントローラーのアクションで、アソシエーションを削除するためにunbindModel()を\
 使ってみましょう。 ::
 
-    public function some_action() {
+    public function some_action()
+    {
         // Leaderとそれに関連するFollowerを取得します。
         $this->Leader->find('all');
 
@@ -845,7 +865,8 @@ Principleモデルは$nameプロパティを除いては空っぽの状態です
 それでは、直接PrincipleをLeaderに関連付けてみましょう。\
 LeadersControllerで次のようにします。 ::
 
-    public function another_action() {
+    public function another_action()
+    {
         // leader.phpモデルファイルでは、hasManyアソシエーションは定義されていません。
         // ここでのfindはLeaderのみ取得します。
         $this->Leader->find('all');
@@ -892,7 +913,8 @@ bindModel()は基本的には、生成したいアソシエーションの名前
 この場合、messagesテーブルはuser\_idとrecipient\_idというフィールドを\
 持っています。さて、ここではMessageモデルに次のように定義します。 ::
 
-    class Message extends AppModel {
+    class Message extends AppModel
+    {
         public $name = 'Message';
         public $belongsTo = array(
             'Sender' => array(
@@ -909,7 +931,8 @@ bindModel()は基本的には、生成したいアソシエーションの名前
 RecipientはUserモデルに対するエイリアスです。Userモデルの方は\
 このようになっています。 ::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $name = 'User';
         public $hasMany = array(
             'MessageSent' => array(
@@ -925,7 +948,8 @@ RecipientはUserモデルに対するエイリアスです。Userモデルの方
 
 自分自身に対するアソシエーションも以下のようにして定義できます。 ::
 
-    class Post extends AppModel {
+    class Post extends AppModel
+    {
         public $name = 'Post';
 
         public $belongsTo = array(

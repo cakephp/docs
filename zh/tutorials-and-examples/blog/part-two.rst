@@ -10,7 +10,8 @@
 CakePHP 的模型类文件应该在 ``/app/Model`` 目录中，我们要创建的文件将保存为 
 ``/app/Model/Post.php``。该文件的完整内容应为::
 
-    class Post extends AppModel {
+    class Post extends AppModel
+    {
     }
 
 在 CakePHP 中，命名约定很重要。通过命名我们的模型为 Post，CakePHP 能自动推断出，
@@ -35,7 +36,8 @@ CakePHP 的模型类文件应该在 ``/app/Model`` 目录中，我们要创建�
 器保存在 ``/app/Controller`` 目录下的 ``PostsController.php`` 文件中。这是控制器
 的基本内容::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form');
     }
 
@@ -43,10 +45,12 @@ CakePHP 的模型类文件应该在 ``/app/Model`` 目录中，我们要创建�
 户请求 www.example.com/posts/index (等同于 www.example.com/posts/)，他们将会期望
 看到一个文章列表。这个动作的代码会是这样::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form');
 
-        public function index() {
+        public function index()
+        {
             $this->set('posts', $this->Post->find('all'));
         }
     }
@@ -172,14 +176,17 @@ CakePHP 的视图保存在 ``/app/View`` 目录中，在一个与相应的控制
 PostsController 中创建这个动作吧::
 
     // File: /app/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form');
 
-        public function index() {
+        public function index()
+        {
              $this->set('posts', $this->Post->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid post'));
             }
@@ -225,15 +232,18 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
 
 首先，从在 PostsController 中创建 ``add()`` 动作开始::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
 
-        public function index() {
+        public function index()
+        {
             $this->set('posts', $this->Post->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid post'));
             }
@@ -245,7 +255,8 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
             $this->set('post', $post);
         }
 
-        public function add() {
+        public function add()
+        {
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
@@ -351,7 +362,8 @@ CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——
 你也许会问：怎么告诉 CakePHP 我的验证要求呢？验证规则是在模型中定义的。让我们回去
 看一下 Post 模型，并做一些调整::
 
-    class Post extends AppModel {
+    class Post extends AppModel
+    {
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
@@ -379,7 +391,8 @@ CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——
 模式。建立动作，然后添加视图。控制器 PostsController 中的 ``edit()`` 动作会是这样
 ::
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -485,7 +498,8 @@ edit 视图会是这样:
 接下来，让我们为用户增加删除文章(*post*)的功能。先在 PostsController 中添加 
 ``delete()`` 动作::
 
-    public function delete($id) {
+    public function delete($id)
+    {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }

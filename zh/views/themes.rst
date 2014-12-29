@@ -5,7 +5,8 @@
 
 要使用主题，在控制器中指定主题名称::
 
-    class ExampleController extends AppController {
+    class ExampleController extends AppController
+    {
         public $theme = 'Example';
     }
 

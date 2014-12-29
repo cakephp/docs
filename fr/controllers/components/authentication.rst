@@ -125,7 +125,8 @@ Les objets d'authentification supportent les clés de configuration suivante.
 
 Configurer différents champs pour l'utilisateur dans la méthode ``initialize()``::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -141,7 +142,8 @@ loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
 ressemblerait à quelque chose comme::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'loginAction' => [
@@ -189,7 +191,8 @@ vérifiés dans l'ordre où ils ont été attachés. Une fois qu'un objet
 peut identifier un utilisateur, les autres objets ne sont pas vérifiés.
 Une simple fonction de connexion pourrait ressembler à cela::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -265,8 +268,10 @@ Dans ``src/Auth/OpenidAuthenticate.php``, vous pourriez mettre ce qui suit::
 
     use Cake\Auth\BaseAuthenticate;
 
-    class OpenidAuthenticate extends BaseAuthenticate {
-        public function authenticate(Request $request, Response $response) {
+    class OpenidAuthenticate extends BaseAuthenticate
+    {
+        public function authenticate(Request $request, Response $response)
+        {
             // Faire les trucs d'OpenID ici.
             // Retourne un tableau de l user si ils peuvent authentifier
             // l user
@@ -290,7 +295,8 @@ avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction 
 callback pour ces événements en retournant un tableau de mapping depuis la
 méthode ``implementedEvents()`` de votre classe d'authentification::
 
-    public function implementedEvents() {
+    public function implementedEvents()
+    {
         return [
             'Auth.afterIdentify' => 'afterIdentify',
             'Auth.logout' => 'logout'
@@ -325,7 +331,8 @@ d'authentification de l'objet ``authenticate()``, la méthode ``getuser()``
 devrait retourner un tableau d'information utilisateur en cas de succès,
 et ``false`` en cas d'echec. ::
 
-    public function getUser($request) {
+    public function getUser($request)
+    {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
 
@@ -405,11 +412,13 @@ setter dans votre entity User::
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // ...
 
-        protected function _setPassword($password) {
+        protected function _setPassword($password)
+        {
             return (new DefaultPasswordHasher)->hash($password);
         }
 
@@ -437,13 +446,16 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
 
     use Cake\Auth\AbstractPasswordHasher;
 
-    class LegacyPasswordHasher extends AbstractPasswordHasher {
+    class LegacyPasswordHasher extends AbstractPasswordHasher
+    {
 
-        public function hash($password) {
+        public function hash($password)
+        {
             return sha1($password);
         }
 
-        public function check($password, $hashedPassword) {
+        public function check($password, $hashedPassword)
+        {
             return sha1($password) === $hashedPassword;
         }
     }
@@ -451,7 +463,8 @@ dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` e
 Ensuite, vous devez configurer AuthComponent pour utiliser votre propre
 hasher de mot de passe::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -478,7 +491,8 @@ d'un algorithme vers un autre, ceci est possible avec la classe
 à partir de l'exemple précédent, vous pouvez configurer AuthComponent comme
 suit::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -503,7 +517,8 @@ bien chiffrés avec cette valeur salt.
 Afin de mettre à jour les mots de passe ancien des utilisateurs à la volée, vous
 pouvez changer la fonction login selon::
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -540,9 +555,11 @@ séparée, pour le hachage normal de mot de passe::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function beforeSave(Event $event) {
+        public function beforeSave(Event $event)
+        {
             $entity = $event->data['entity'];
 
             // Make a password for digest auth.
@@ -577,7 +594,8 @@ par exemple juste après qu'il se soit enregistré dans votre application. Vous
 pouvez faire cela en appelant ``$this->Auth->setUser()`` avec les données
 utilisateur que vous voulez pour la 'connexion'::
 
-    public function register() {
+    public function register()
+    {
         $user = $this->Users->newEntity($this->request->data);
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
@@ -620,7 +638,8 @@ les utilisateurs et les rediriger où ils devraient aller. Cette méthode
 est aussi très pratique si vous voulez fournir un lien 'Déconnecte-moi'
 à l'intérieur de la zone membres de votre application::
 
-    public function logout() {
+    public function logout()
+    {
         $this->redirect($this->Auth->logout());
     }
 
@@ -722,8 +741,10 @@ vous pourriez mettre cela::
     use Cake\Auth\BaseAuthorize;
     use Cake\Network\Request;
 
-    class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, Request $request) {
+    class LdapAuthorize extends BaseAuthorize
+    {
+        public function authorize($user, Request $request)
+        {
             // Faire des choses pour ldap ici.
         }
     }
@@ -825,15 +846,18 @@ booléen pour indiquer si l'utilisateur est autorisé ou pas à accéder aux
 ressources de la requête. Le callback est passé à l'utilisateur actif, il
 peut donc être vérifié::
 
-    class AppController extends Controller {
-        public function initialize() {
+    class AppController extends Controller
+    {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth', [
                 'authorize' => 'Controller',
             ]);
         }
 
-        public function isAuthorized($user = null) {
+        public function isAuthorized($user = null)
+        {
             // Chacun des utilisateur enregistré peut accéder aux fonctions publiques
             if (empty($this->request->params['prefix'])) {
                 return true;

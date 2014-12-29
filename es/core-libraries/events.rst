@@ -60,9 +60,11 @@ created. To keep your Orders model clean you could use events::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class OrdersTable extends Table {
+    class OrdersTable extends Table
+    {
 
-        public function place($order) {
+        public function place($order)
+        {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $event = new Event('Model.Order.afterPlace', $this, array(
@@ -176,15 +178,18 @@ necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListener;
 
-    class UserStatistic implements EventListener {
+    class UserStatistic implements EventListener
+    {
 
-        public function implementedEvents() {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
             );
         }
 
-        public function updateBuyStatistic($event) {
+        public function updateBuyStatistic($event)
+        {
             // Code to update statistics
         }
     }
@@ -258,8 +263,10 @@ event listeners::
     );
 
     // Setting priority for a listener
-    class UserStatistic implements EventListener {
-        public function implementedEvents() {
+    class UserStatistic implements EventListener
+    {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => array(
                     'callable' => 'updateBuyStatistic',
@@ -311,12 +318,14 @@ the code detects it cannot proceed any further.
 In order to stop events you can either return ``false`` in your callbacks or call
 the ``stopPropagation`` method on the event object::
 
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         return false; // Stops the event
     }
 
-    public function updateBuyStatistic($event) {
+    public function updateBuyStatistic($event)
+    {
         // ...
         $event->stopPropagation();
     }
@@ -330,7 +339,8 @@ operation from occurring.
 To check if an event was stopped, you call the ``isStopped()`` method in the
 event object::
 
-    public function place($order) {
+    public function place($order)
+    {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
         if ($event->isStopped()) {
@@ -357,20 +367,23 @@ Event results can be altered either using the event object result property
 directly or returning the value in the callback itself::
 
     // A listener callback
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
     // Another listener callback
-    public function doSomethingElse($event) {
+    public function doSomethingElse($event)
+    {
         // ...
         $event->result['order'] = $alteredData;
     }
 
     // Using the event result
-    public function place($order) {
+    public function place($order)
+    {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
         if (!empty($event->result['order'])) {

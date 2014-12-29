@@ -93,8 +93,10 @@ code inside it::
 
     use App\Console\Command\AppShell;
 
-    class HelloShell extends AppShell {
-        public function main() {
+    class HelloShell extends AppShell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -128,12 +130,15 @@ interesting let's add another command that does something::
 
     use App\Console\Command\AppShell;
 
-    class HelloShell extends AppShell {
-        public function main() {
+    class HelloShell extends AppShell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function heyThere($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous')
+        {
             $this->out('Hey there ' . $name);
         }
     }
@@ -166,14 +171,17 @@ properties attached to your shell::
 
     use App\Console\Command\AppShell;
 
-    class UserShell extends AppShell {
+    class UserShell extends AppShell
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        public function show() {
+        public function show()
+        {
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
@@ -193,7 +201,8 @@ to compose functionality into re-usable classes that can be shared across many s
 Tasks allow you to extract commands into classes. For example the ``bake`` is made
 almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
 
-    class UserShell extends AppShell {
+    class UserShell extends AppShell
+    {
         public $tasks = ['Template'];
     }
 
@@ -205,8 +214,10 @@ their classes. So if we were to create a new 'FileGenerator' task, you would cre
 Each task must at least implement an ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
 
-    class FileGeneratorTask extends Shell {
-        public function main() {
+    class FileGeneratorTask extends Shell
+    {
+        public function main()
+        {
 
         }
     }
@@ -215,11 +226,13 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // Found in src/Console/Command/SeaShell.php
-    class SeaShell extends AppShell {
+    class SeaShell extends AppShell
+    {
         // Found in src/Console/Command/Task/SoundTask.php
         public $tasks = ['Sound'];
 
-        public function main() {
+        public function main()
+        {
             $this->Sound->main();
         }
     }
@@ -483,7 +496,8 @@ have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
 methods for easily setting multiple options/arguments at once::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         // Configure parser
         return $parser;
@@ -495,7 +509,8 @@ Configuring an Option Parser with the Fluent Interface
 All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
@@ -772,7 +787,8 @@ format that :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
 :php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also use
 buildFromArray on its own, to build an option parser::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray([
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),

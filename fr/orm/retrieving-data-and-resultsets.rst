@@ -214,9 +214,11 @@ de votre table, alors que les valeurs seront le 'displayField' (champAAfficher)
 de la table. Vous pouvez utiliser la méthode ``displayField()`` sur un objet
 table pour configurer le champ à afficher sur une table::
 
-    class Articles extends Table {
+    class Articles extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->displayField('title');
         }
     }
@@ -306,9 +308,11 @@ des articles publiés, nous ferions ce qui suit::
     use Cake\ORM\Query;
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true

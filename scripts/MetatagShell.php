@@ -10,7 +10,8 @@ App::uses('HttpSocket', 'Network/Http');
  * `app/Console/cake metatag`
  *
  */
-class MetatagShell extends Shell {
+class MetatagShell extends Shell
+{
 
 /**
  * Reads all the files in a directory and process them to extract the description terms

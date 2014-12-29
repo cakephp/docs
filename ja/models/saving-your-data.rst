@@ -23,7 +23,8 @@ FormHelperを使っていれば、 ``$this->request->data`` で簡単にこの�
 データベースのテーブルにデータを保存するためにCakePHPのモデルを使った\
 簡単なサンプルを以下に示します。 ::
 
-    public function edit($id) {
+    public function edit($id)
+    {
         // フォームからポストされたデータがあるかどうか
         if ($this->request->is('post')) {
             // フォームのデータを検証して保存する...
@@ -412,7 +413,8 @@ PostとCommentの両方のモデルを使うことになります。
 以下に示すサンプルは、ひとつのユーザーとひとつのプロフィールを生成するためのデータを\
 FormHelperを使ってPOSTしたときの処理です。 ::
 
-    public function add() {
+    public function add()
+    {
         if (!empty($this->request->data)) {
             // $this->request->data['User']のデータでユーザーデータを保存します。
             $user = $this->User->save($this->request->data);
@@ -477,7 +479,8 @@ Companyモデルがメインの場合、 ``saveAssociated()`` は、関連する
 
 そして、CompaniesControllerに ``add()`` アクションを作ります。 ::
 
-    public function add() {
+    public function add()
+    {
         if (!empty($this->request->data)) {
             // バリデーションエラーを出さないために以下のようにします。
             unset($this->Company->Account->validate['company_id']);
@@ -499,14 +502,17 @@ hasManyを保存する
 以下のコードを見て下さい。 ::
 
    // Controller/CourseMembershipController.php
-   class CourseMembershipsController extends AppController {
+   class CourseMembershipsController extends AppController
+   {
        public $uses = array('CourseMembership');
 
-       public function index() {
+       public function index()
+       {
            $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
        }
 
-       public function add() {
+       public function add()
+       {
            if ($this->request->is('post')) {
                if ($this->CourseMembership->saveAssociated($this->request->data)) {
                    return $this->redirect(array('action' => 'index'));
@@ -723,7 +729,8 @@ Tagを新しく作って、いくつかのレシピに関連付けるための\
 ``save()`` メソッドがコントローラーから呼ばれれば、自動的に\
 HABTMデータをデータベースに保存します。 ::
 
-    public function add() {
+    public function add()
+    {
         // アソシエーションデータを保存
         if ($this->Tag->save($this->request->data)) {
             // 保存が成功した時の処理
@@ -829,7 +836,8 @@ Model::save()を呼び出す前に、 ``created`` や ``modified`` のキーが$
 ``unset($this->data['Model']['modified']`` などとします。または、Model::save()を\
 オーバーライドして、常にunsetの動作をするようにも出来ます。 ::
 
-    class AppModel extends Model {
+    class AppModel extends Model
+    {
 
         public function save($data = null, $validate = true, $fieldList = array()) {
             // 保存前にmodifiedフィールドをクリアする

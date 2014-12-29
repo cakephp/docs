@@ -5,7 +5,8 @@
 
 テーマを使うためには、コントローラの中でテーマ名を指定して下さい。 ::
 
-    class ExampleController extends AppController {
+    class ExampleController extends AppController
+    {
         public $theme = 'Example';
     }
 

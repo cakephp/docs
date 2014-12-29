@@ -73,7 +73,8 @@ While not recommended, you may want to disable the CsrfComponent on certain
 requests. You can do this using the controller's event dispatcher, during the
 ``beforeFilter`` method::
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         $this->eventManager()->detach($this->Csrf);
     }
 

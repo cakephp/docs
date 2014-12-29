@@ -332,8 +332,10 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 
 设置布局的标题，最容易的方法是在控制器中设置 ``$title_for_layout`` 变量::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -346,7 +348,8 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 控制器动作中用控制器或者视图的 :php:attr:`~View::$layout` 属性来切换布局::
 
     // 从一个控制器
-    public function admin_view() {
+    public function admin_view()
+    {
         // stuff
         $this->layout = 'admin';
     }
@@ -357,13 +360,16 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 例如，如果我的网站的一个地方包含一小块广告栏(ad banner)，我也许会建一个新的含有小
 块广告位置的布局，并指定它为所有控制器动作的布局，象下面这样::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function view_image() {
+       public function view_image()
+       {
            $this->layout = 'image';
            //输出用户图像
        }
@@ -384,8 +390,10 @@ AJAX 调用在返回值中只需要一点儿标记，而不是一个完整渲染
 如果你要用存在于插件中的布局，你可以使用 :term:`plugin syntax` 。比如要用 
 Contacts 插件中的 contact 布局::
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -455,9 +463,11 @@ element 方法来输出::
 
 为此，在文章(*Post*)的例子中，在你的控制器中添加下面这样的代码::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -562,8 +572,10 @@ element 方法来输出::
     // in App/View/PdfView.php
 
     App::uses('View', 'View');
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
             // 这里为定制逻辑。
             // custom logic here.
         }

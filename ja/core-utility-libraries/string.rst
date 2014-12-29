@@ -8,11 +8,13 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
 もし、``View`` 以外で :php:class:`TextHelper` が必要な場合、 ``String`` クラスを使ってください。\ ::
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
         public $components = array('Auth');
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             App::uses('String', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {

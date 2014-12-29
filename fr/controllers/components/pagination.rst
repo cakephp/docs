@@ -34,7 +34,8 @@ Elles sont complétées par le tri, la direction, la limitation et les paramètr
 de page passés depuis l'URL. Ici, il est important de noter que l'ordre des clés
 doit être défini dans une structure en tableau comme ci-dessous::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'limit' => 25,
@@ -43,7 +44,8 @@ doit être défini dans une structure en tableau comme ci-dessous::
             ]
         ];
 
-        public function intialize() {
+        public function intialize()
+        {
             parent::initialize();
             $this->loadComponent('Paginator');
         }
@@ -52,7 +54,8 @@ doit être défini dans une structure en tableau comme ci-dessous::
 Vous pouvez aussi inclure d'autres options
 :php:meth:`~Cake\\ORM\\Table::find()`, comme ``fields``::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
@@ -62,7 +65,8 @@ Vous pouvez aussi inclure d'autres options
             ]
         ];
 
-        public function intialize() {
+        public function intialize()
+        {
             parent::initialize();
             $this->loadComponent('Paginator');
         }
@@ -73,7 +77,8 @@ propriété paginate, il est souvent plus propre et simple de mettre vos options
 de pagination dans une :ref:`custom-find-methods`. Vous pouver définir
 l'utilisation de la pagination du finder en configurant l'option ``findType``::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'finder' => 'published',
@@ -83,10 +88,12 @@ l'utilisation de la pagination du finder en configurant l'option ``findType``::
 Because custom finder methods can also take in options, 
 this is how you pass in options into a custom finder method within the paginate property::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         // find articles by tag
-        public function tags() {
+        public function tags()
+        {
             $tags = $this->request->params['pass'];
 
             $customFinderOptions = [
@@ -112,7 +119,8 @@ En plus de définir les valeurs de pagination générales, vous pouvez définir
 plus d'un jeu de pagination par défaut dans votre controller, vous avez juste
 à nommer les clés du tableau d'après le model que vous souhaitez configurer::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'Articles' => [],
@@ -132,9 +140,11 @@ Vous pouvez accéder aux meta-données de pagination avec
 ``$this->request->params['paging']``. un exemple plus complet de l'utilisation
 de ``paginate()`` serait::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->paginate());
         }
     }
@@ -142,7 +152,8 @@ de ``paginate()`` serait::
 Par défaut la méthode ``paginate()`` va utiliser le model par défaut pour un
 controller. Vous pouvez aussi passer la requête résultante d'une méthode find::
 
-     public function index() {
+     public function index()
+     {
         $query = $this->Articles->find('popular')->where(['author_id' => 1]);
         $this->set('articles', $this->paginate($query));
     }
@@ -229,7 +240,8 @@ un bloc try catch et faire des actions appropriées quand une
 
     use Cake\Network\Exception\NotFoundException;
 
-    public function index() {
+    public function index()
+    {
         try {
             $this->paginate();
         } catch (NotFoundException $e) {

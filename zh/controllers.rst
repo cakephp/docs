@@ -29,7 +29,8 @@ App 控制器
 ``AppController`` 本身扩展了 CakePHP 核心库中的 :php:class:`Controller` 类。
 AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
     }
 
 在 ``AppController`` 中创建的控制器的属性和方法， 可以在你的应用程序所有的控制器
@@ -54,7 +55,8 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 
 也请记住，最好在控制器子类的回调方法中调用 ``AppController`` 的回调方法::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
     }
 
@@ -80,16 +82,20 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 
         # /app/Controller/RecipesController.php
 
-        class RecipesController extends AppController {
-            public function view($id) {
+        class RecipesController extends AppController
+        {
+            public function view($id)
+            {
                 // 这里是动作逻辑 ...
             }
 
-            public function share($customerId, $recipeId) {
+            public function share($customerId, $recipeId)
+            {
                 // 这里是动作逻辑 ...
             }
 
-            public function search($query) {
+            public function search($query)
+            {
                 // 这里是动作逻辑 ...
             }
         }
@@ -112,8 +118,10 @@ AppController 定义在 ``/app/Controller/AppController.php`` 中，象这样::
 串数据。如果你有用于正常网页请求 + requestAction 的控制器方法，你应当在返回前检查
 请求类型::
 
-    class RecipesController extends AppController {
-        public function popular() {
+    class RecipesController extends AppController
+    {
+        public function popular()
+        {
             $popular = $this->Recipe->popular();
             if (!empty($this->request->params['requested'])) {
                 return $popular;
@@ -218,9 +226,11 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
     渲染使用的默认视图文件由约定决定。如果请求的是 RecipesController 的 
     ``search()`` 动作，视图文件 /app/View/Recipes/search.ctp 将被渲染::
 
-        class RecipesController extends AppController {
+        class RecipesController extends AppController
+        {
         // ...
-            public function search() {
+            public function search()
+            {
                 // 渲染视图 /View/Recipes/search.ctp
                 $this->render();
             }
@@ -247,8 +257,10 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 :php:meth:`~Controller::render()`。一旦调用了 :php:meth:`~Controller::render()`，
 CakePHP 就不会试图再次渲染该视图了::
 
-    class PostsController extends AppController {
-        public function my_action() {
+    class PostsController extends AppController
+    {
+        public function my_action()
+        {
             $this->render('custom_file');
         }
     }
@@ -260,8 +272,10 @@ CakePHP 就不会试图再次渲染该视图了::
 也可以用下面的语法渲染插件中的视图: 
 ``$this->render('插件名称.插件控制器/定制视图文件')`` 。例如::
 
-    class PostsController extends AppController {
-        public function my_action() {
+    class PostsController extends AppController
+    {
+        public function my_action()
+        {
             $this->render('Users.UserDetails/custom_file');
         }
     }
@@ -277,7 +291,8 @@ CakePHP 就不会试图再次渲染该视图了::
     第一个参数接受的是 CakePHP 相对网址的形式。当一个用户成功地提交了一份订单之后，
     也许要引导他们到收据页面::
 
-        public function place_order() {
+        public function place_order()
+        {
             // 这里是确认订单的逻辑
             if ($success) {
                 return $this->redirect(
@@ -386,8 +401,10 @@ CakePHP 就不会试图再次渲染该视图了::
     返回当前请求的引用网址(*referring URL*)。如果 HTTP\_REFERER 无法从(请求的)头
     部信息中读出，参数 ``$default`` 可以用来提供缺省的网址。所以，与其这样::
 
-        class UserController extends AppController {
-            public function delete($id) {
+        class UserController extends AppController
+        {
+            public function delete($id)
+            {
                 // 删除的代码在这里，然后...
                 if ($this->referer() != '/') {
                     return $this->redirect($this->referer());
@@ -398,8 +415,10 @@ CakePHP 就不会试图再次渲染该视图了::
 
     可以这样::
 
-        class UserController extends AppController {
-            public function delete($id) {
+        class UserController extends AppController
+        {
+            public function delete($id)
+            {
                 // 删除的代码在这里，然后...
                 return $this->redirect(
                     $this->referer(array('action' => 'index'))
@@ -432,7 +451,8 @@ CakePHP 就不会试图再次渲染该视图了::
     :php:class:`FormHelper` 和 :php:class:`HtmlHelper` 来快速创建基于 Order 模型
     的表单。然后控制器的动作就能够用从该表单提交的数据创建出查找条件::
 
-        public function index() {
+        public function index()
+        {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
             $this->set('orders', $orders);
@@ -500,8 +520,10 @@ CakePHP 就不会试图再次渲染该视图了::
     首先我们要增加一个控制器函数来返回数据::
 
         // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            public function latest() {
+        class CommentsController extends AppController
+        {
+            public function latest()
+            {
                 if (empty($this->request->params['requested'])) {
                     throw new ForbiddenException();
                 }
@@ -608,7 +630,8 @@ CakePHP 就不会试图再次渲染该视图了::
     主要模型的复数形式。该属性可以省略，如果 CakePHP 不转换(*inflecting*)它的话::
 
         // $name 控制器属性用法示例
-        class RecipesController extends AppController {
+        class RecipesController extends AppController
+        {
            public $name = 'Recipes';
         }
 
@@ -656,7 +679,8 @@ $components、$helpers 和 $uses
     让我们来看看如何让 CakePHP 的 :php:class:`Controller` 知道你打算使用额外的 MVC
     类::
 
-        class RecipesController extends AppController {
+        class RecipesController extends AppController
+        {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
             public $components = array('RequestHandler');
@@ -690,7 +714,8 @@ $components、$helpers 和 $uses
     paginate 属性是废弃了的兼容性属性。用它来加载和配置 
     :php:class:`PaginatorComponent`。建议你更新你的代码，使用正常的组件设置::
 
-        class ArticlesController extends AppController {
+        class ArticlesController extends AppController
+        {
             public $components = array(
                 'Paginator' => array(
                     'Article' => array(

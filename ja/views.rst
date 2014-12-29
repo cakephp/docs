@@ -304,8 +304,10 @@ fetchを使うとブロックが存在するかどうかによってブロック
 
 レイアウトのタイトルを設定するためには、コントローラにて ``$title_for_layout`` 変数を設定するのが一番簡単です。::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -318,7 +320,8 @@ fetchを使うとブロックが存在するかどうかによってブロック
 コントローラアクションの中かビューの :php:attr:`~View::$layout` プロパティを切り替えるだけで作成できます。::
 
     // コントローラから
-    public function admin_view() {
+    public function admin_view()
+    {
         // stuff
         $this->layout = 'admin';
     }
@@ -329,13 +332,16 @@ fetchを使うとブロックが存在するかどうかによってブロック
 例えば、私のサイトに小さな広告バナー枠があるとします。その場合、私は小さな広告枠が含まれる新しいレイアウトを作って、
 以下のように全コントローラのアクションで指定するかもしれません。::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function view_image() {
+       public function view_image()
+       {
            $this->layout = 'image';
            //output user image
        }
@@ -356,8 +362,10 @@ flashレイアウトは :php:meth:`Controller::flash()` メソッドのメッセ
 もし既存のプラグインでレイアウトを使いたい場合、 :term:`プラグイン記法` を使うことが出来ます。
 コンタクトプラグインからコンタクトのレイアウトを使う場合は以下のようになります。::
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -426,9 +434,11 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 
 これを実際確認するため、Postの例のコントローラに以下のようなコードを追加して下さい。::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -529,8 +539,10 @@ CakePHPのビュークラスのほとんどのコンポーネントと同様に�
     // in App/View/PdfView.php
 
     App::uses('View', 'View');
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
             // custom logic here.
         }
     }

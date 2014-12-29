@@ -58,7 +58,8 @@ findから返された結果を変更するため、あるいは他のfindの後
 
 afterFind によってデータをフォーマットする例を次に示します。::
 
-    public function afterFind($results, $primary = false) {
+    public function afterFind($results, $primary = false)
+    {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
                 $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
@@ -69,7 +70,8 @@ afterFind によってデータをフォーマットする例を次に示しま�
         return $results;
     }
 
-    public function dateFormatAfterFind($dateString) {
+    public function dateFormatAfterFind($dateString)
+    {
         return date('d-m-Y', strtotime($dateString));
     }
 
@@ -129,7 +131,8 @@ beforeSaveによってどのように日付を加工するかの例を次に示�
         return true;
     }
 
-    public function dateFormatBeforeSave($dateString) {
+    public function dateFormatBeforeSave($dateString)
+    {
         return date('Y-m-d', strtotime($dateString));
     }
 
@@ -174,7 +177,8 @@ beforeDelete
     // $this->idがセットされます。
     // 「ProductCategory hasMany Product」と仮定すると、
     // このモデルで$this->Productにアクセスできます。
-    public function beforeDelete($cascade = true) {
+    public function beforeDelete($cascade = true)
+    {
         $count = $this->Product->find("count", array(
             "conditions" => array("product_category_id" => $this->id)
         ));

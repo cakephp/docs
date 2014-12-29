@@ -223,9 +223,11 @@ et les résultats stockés dans le cache pour la clé fournie.
 Par exemple, vous souhaitez souvent mettre en cache les résultats du appel à un
 service distant. Vous pouvez utiliser ``remember()`` pour faciliter cela::
 
-    class IssueService  {
+    class IssueService 
+    {
 
-        function allIssues($repo) {
+        function allIssues($repo)
+        {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });

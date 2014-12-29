@@ -28,7 +28,8 @@ Cake がキャッシュされたビューを見つけられない場合、ある
 
 ::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Cache');
     }
 

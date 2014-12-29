@@ -57,11 +57,13 @@ dans le controller.
 En configurant la fonction de rappel, vous pouvez personnaliser le processus
  de mise en trou noir (blackhole callback)::
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         $this->Security->config('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type) {
+    public function blackhole($type)
+    {
         // Gère les erreurs.
     }
 
@@ -153,14 +155,17 @@ au démarrage::
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-    class WidgetsController extends AppController {
+    class WidgetsController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -175,20 +180,24 @@ Cette exemple forcera toutes les actions qui proviennent de la
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-    class WidgetsController extends AppController {
+    class WidgetsController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             if (isset($this->params['admin'])) {
                 $this->Security->requireSecure();
             }
         }
 
-        public function forceSSL() {
+        public function forceSSL()
+        {
             return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
@@ -225,14 +234,17 @@ fonctionnalités de ``SecurityComponent``::
     use App\Controller\AppController;
     use Cake\Event\Event;
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
              $this->Security->config('unlockedActions', ['edit']);
         }
     }

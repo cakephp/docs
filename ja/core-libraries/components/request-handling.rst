@@ -33,7 +33,8 @@
 また、 XML/JSON データをコントローラへ POST した場合、自動的に解析され ``$this->request->data`` の配列に割り当てられ、モデルデータとして保存可能です。
 リクエストハンドラを利用するためには $components の配列に含めてください。::
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
         public $components = array('RequestHandler');
 
@@ -67,11 +68,13 @@
     null の場合、クライアントが受付けるコンテンツタイプをすべて配列で返します。
     例::
 
-        class PostsController extends AppController {
+        class PostsController extends AppController
+        {
 
             public $components = array('RequestHandler');
 
-            public function beforeFilter() {
+            public function beforeFilter()
+            {
                 if ($this->RequestHandler->accepts('html')) {
                     // クライアントが HTML (text/html) のレスポンスを受付ける場合のみ実行されます
                 } elseif ($this->RequestHandler->accepts('xml')) {

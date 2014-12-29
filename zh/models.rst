@@ -24,7 +24,8 @@
 这里有一个 CakePHP 模型定义的简单例子::
 
     App::uses('AppModel', 'Model');
-    class Ingredient extends AppModel {
+    class Ingredient extends AppModel
+    {
         public $name = 'Ingredient';
     }
 
@@ -67,8 +68,10 @@
 IngredientsController 的控制器会自动初始化 Ingredient 模型，并把它附加在控制器上，
 作为 ``$this->Ingredient``::
 
-    class IngredientsController extends AppController {
-        public function index() {
+    class IngredientsController extends AppController
+    {
+        public function index()
+        {
             //获得所有原料并把它传给视图:
             $ingredients = $this->Ingredient->find('all');
             $this->set('ingredients', $ingredients);
@@ -77,9 +80,11 @@ IngredientsController 的控制器会自动初始化 Ingredient 模型，并把�
 
 关联的模型可以从主模型访问。在下例中，Recipe 模型与 Ingredient 模型有关联::
 
-    class Recipe extends AppModel {
+    class Recipe extends AppModel
+    {
 
-        public function steakRecipes() {
+        public function steakRecipes()
+        {
             $ingredient = $this->Ingredient->findByName('Steak');
             return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
         }

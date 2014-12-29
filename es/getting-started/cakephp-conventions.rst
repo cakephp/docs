@@ -38,13 +38,16 @@ será accesible internamente. Por ejemplo:
 
 ::
 
-    class NewsController extends AppController {
+    class NewsController extends AppController
+    {
 
-        function latest() {
+        function latest()
+        {
             $this->_findNewArticles();
         }
 
-        function _findNewArticles() {
+        function _findNewArticles()
+        {
             //Logic to find latest news articles
         }
     }

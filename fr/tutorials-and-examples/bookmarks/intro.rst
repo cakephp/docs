@@ -232,11 +232,13 @@ mot de passe. Dans ``src/Model/Entity/User.php``, ajoutez ce qui suit::
     use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // Code from bake.
 
-        protected function _setPassword($value) {
+        protected function _setPassword($value)
+        {
             $hasher = new DefaultPasswordHasher();
             return $hasher->hash($value);
         }
@@ -282,7 +284,8 @@ dont ils sont intégrés. Si nous visitions
 de CakePHP. Intégrons maintenant la méthode manquante. Dans
 ``src/Controller/BookmarksController.php``, ajoutez ce qui suit::
 
-    public function tags() {
+    public function tags()
+    {
         $tags = $this->request->params['pass'];
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
@@ -299,7 +302,8 @@ visitez l'URL ``/bookmarks/tagged`` maintenant, vous verrez une erreur que
 la méthode ``findTagged`` n'a pas été encore intégrée, donc faisons cela. Dans
 ``src/Model/Table/BookmarksTable.php`` ajoutez ce qui suit::
 
-    public function findTagged(Query $query, array $options) {
+    public function findTagged(Query $query, array $options)
+    {
         $fields = [
             'Bookmarks.id',
             'Bookmarks.title',

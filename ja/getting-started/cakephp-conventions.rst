@@ -22,13 +22,16 @@ CakePHPでの開発にはこれらの規約の利用をお勧めしますが、�
 コントローラ関数名の先頭にアンダースコア（\_）を付けることで、CakePHP のコントローラメソッドを隠蔽することが可能です。
 アンダースコアが付けられたコントローラメソッドは web 上では見えないように設定され、内部での利用のみ可能になります。例えば::
 
-    class NewsController extends AppController {
+    class NewsController extends AppController
+    {
 
-        public function latest() {
+        public function latest()
+        {
             $this->_findNewArticles();
         }
 
-        protected function _findNewArticles() {
+        protected function _findNewArticles()
+        {
             //最新のニュース記事を取得するロジック
         }
     }

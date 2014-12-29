@@ -424,8 +424,10 @@ table pour construire les règles requises. Par défaut la méthode
 ``validationDefault`` sera utilisée. Un exemple de méthode de validator pour
 notre Table articles serait::
 
-    class ArticlesTable extends Table {
-        public function validationUpdate($validator) {
+    class ArticlesTable extends Table
+    {
+        public function validationUpdate($validator)
+        {
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
@@ -458,9 +460,11 @@ Quand une règle de validation est créée, vous pouvez nommer le provider de ce
 règle. Par exemple, si votre entity a une méthode 'isValidRole', vous pouvez
 l'utiliser comme une règle de validation::
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
@@ -690,9 +694,11 @@ construire les Types de colonne personnalisés::
     // Dans src/Model/Table/UsersTable.php
     use Cake\Database\Schema\Table as Schema;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        protected function _initializeSchema(Schema $schema) {
+        protected function _initializeSchema(Schema $schema)
+        {
             $schema->columnType('preferences', 'json');
             return $schema;
         }
@@ -732,7 +738,8 @@ efficace ou pas nécessaire. Dans ces cas, il est plus efficace d'utiliser une
 mise à jour en masse pour modifier plusieurs lignes en une fois::
 
     // Publie tous les articles non publiés.
-    function publishAllUnpublished() {
+    function publishAllUnpublished()
+    {
         $this->updateAll(['published' => true], ['published' => false]);
     }
 
@@ -740,7 +747,8 @@ Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
 vous devrez utiliser un objet expression puisque ``updateAll()`` utilise
 des requêtes préparées sous le capot::
 
-    function incrementCounters() {
+    function incrementCounters()
+    {
         $expression = new QueryExpression('view_count = view_count + 1');
         $this->updateAll([$expression], ['published' => true]);
     }

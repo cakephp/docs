@@ -141,13 +141,15 @@ sua aplicação pode, como Config, Console, Lib, webroot, etc.
 ::
 
     // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
-    class ContactManagerAppController extends AppController {
+    class ContactManagerAppController extends AppController
+    {
     }
 
 ::
 
     // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    class ContactManagerAppModel extends AppModel {
+    class ContactManagerAppModel extends AppModel
+    {
     }
 
 Se você se esqueceu de definir estas classes especiais, o CakePHP irá entregar
@@ -182,10 +184,12 @@ Então, nós colocamos nosso novo ContactsController em
 /app/Plugin/ContactManager/Controller e deve se parecer com isso::
 
     // app/Plugin/ContactManager/Controller/ContactsController.php
-    class ContactsController extends ContactManagerAppController {
+    class ContactsController extends ContactManagerAppController
+    {
         public $uses = array('ContactManager.Contact');
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -219,7 +223,8 @@ Nós já definimos um ContactsController para este plugin, então vamos
 criar o model para o controller, chamado Contact::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
     }
 
 Visitando /contact_manager/contacts agora (dado que você tem uma
@@ -236,7 +241,8 @@ Vamos criar na próxima.
 Por exemplo::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
         public $hasMany = array('ContactManager.AltName');
     }
 
@@ -244,7 +250,8 @@ Se você preferir que as chaves do array para associação não tenha o
 prefixo do plugin nelas, use uma sintaxe alternativa::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
         public $hasMany = array(
             'AltName' => array(
                 'className' => 'ContactManager.AltName'
@@ -341,7 +348,8 @@ somente que o nome do plugin esteja prefixado antes do nome do
 componente. Por exemplo::
 
     // Componente definido no plugin 'ContactManager'
-    class ExampleComponent extends Component {
+    class ExampleComponent extends Component
+    {
     }
 
     // dentro de seu controller:

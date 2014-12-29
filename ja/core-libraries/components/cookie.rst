@@ -55,7 +55,8 @@ Cookie コンポーネントがどのように動くかは、コントローラ�
 Cookie の初期設定をするための例です。::
 
     public $components = array('Cookie');
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
         $this->Cookie->time = 3600;  // または '1 hour'

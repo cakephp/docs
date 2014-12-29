@@ -22,9 +22,11 @@ tableau qui est assigné à ``$this->request->data``, et pourra alors être
 sauvegardée comme une donnée de model. Afin d'utiliser le Request Handler, il
 doit être inclu dans votre tableau méthode ``initialize()``::
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
@@ -46,14 +48,17 @@ Si c'est un tableau, accepts() renverra ``true`` si un des types du contenu est
 accepté par le client. Si c'est 'null', elle renverra un tableau des types de
 contenu que le client accepte. Par exemple::
 
-        class ArticlesController extends AppController {
+        class ArticlesController extends AppController
+        {
 
-            public function initialize() {
+            public function initialize()
+            {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter() {
+            public function beforeFilter()
+            {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute le code seulement si le client accepte une
                     // response HTML  (text/html).
@@ -232,7 +237,8 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 ``checkHttpCache`` à ``false``::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
             'checkHttpCache' => false
@@ -252,7 +258,8 @@ Vous pouvez mapper les types existants et les nouveaux types à vos classes
 personnalisées. Vous pouvez aussi définir ceci automatiquement en utilisant
 la configuration ``viewClassMap``::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent(''RequestHandler', [
             'viewClassMap' => [

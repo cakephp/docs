@@ -28,7 +28,8 @@ basique devrait ressembler à ceci::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
     }
 
 Notez que nous ne disons pas à l'ORM quelle table utiliser pour notre classe.
@@ -42,9 +43,11 @@ spécifier la table en utilisant la méthode ``table()``::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->table('my_table');
         }
 
@@ -59,8 +62,10 @@ utiliser la méthode ``primaryKey()``::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->primaryKey('my_id');
         }
     }
@@ -76,8 +81,10 @@ conventions de nommage. Par exemple, si votre classe de table est appelée
 souhaitez utiliser une entity qui ne suit pas les conventions, vous pouvez
 utiliser la méthode ``entityClass`` pour changer les choses::
 
-    class PurchaseOrdersTable extends Table {
-        public function initialize(array $config) {
+    class PurchaseOrdersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->entityClass('App\Model\PO');
         }
     }
@@ -221,8 +228,10 @@ méthode ``initialize``::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -234,8 +243,10 @@ et fournir des options de configuration supplémentaires::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [
@@ -266,7 +277,8 @@ quelles connections. C'est avec la méthode ``defaultConnectionName``::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public static function defaultConnectionName() {
             return 'slavedb';
         }

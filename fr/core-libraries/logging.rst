@@ -117,7 +117,8 @@ un tableau. ::
     namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
 
-    class DatabaseLog extends BaseLog {
+    class DatabaseLog extends BaseLog
+    {
         public function __construct($options = []) {
             // ...
         }

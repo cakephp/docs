@@ -184,7 +184,8 @@ Définition des Méthodes
 
 Exemple d'un définition de méthode::
 
-    public function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '')
+    {
         if (expr) {
             statement;
         }
@@ -196,7 +197,8 @@ dans la défintion de la fonction. Essayez de faire en sorte que vos fonctions
 retournent quelque chose, au moins ``true`` ou ``false``, ainsi cela peut
 déterminer si l'appel de la fonction est un succès::
 
-    public function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false)
+    {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -226,7 +228,8 @@ le typage prend du temps::
      * @param callable $callback Some callback.
      * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, callable $callback, $boolean) {
+    public function foo(Model $Model, array $array, callable $callback, $boolean)
+    {
     }
 
 Ici ``$Model`` doit être une instance de ``Model``, ``$array`` doit être un
@@ -241,7 +244,8 @@ le type primitif::
      *
      * @param array|ArrayObject $array Some array value.
      */
-    public function foo($array) {
+    public function foo($array)
+    {
     }
 
 Fonctions Anonymes (Closures)
@@ -308,7 +312,8 @@ ligne DocBlock, par exemple::
      *
      * @return void
      */
-    function bar() {
+    function bar()
+    {
     }
 
     /**
@@ -316,7 +321,8 @@ ligne DocBlock, par exemple::
      *
      * @return void
      */
-    function foo() {
+    function foo()
+    {
     }
 
 Les blocks de commentaires, avec une exception du premier block dans le
@@ -367,7 +373,8 @@ utilisez ``$this`` à la place::
      *
      * @return $this
      */
-    public function foo() {
+    public function foo()
+    {
         return $this;
     }
 
@@ -422,7 +429,8 @@ Fonctions
 
 Ecrivez toutes les fonctions en camelBack::
 
-    function nomDeFonctionLongue() {
+    function nomDeFonctionLongue()
+    {
     }
 
 Classes
@@ -430,7 +438,8 @@ Classes
 
 Les noms de classe doivent être écrites en CamelCase, par exemple::
 
-    class ClasseExemple {
+    class ClasseExemple
+    {
     }
 
 Variables
@@ -455,10 +464,12 @@ Utilisez les mots-clés private et protected de PHP5 pour les méthodes et
 variables. De plus les noms des méthodes et variables protégées commencent
 avec un underscore simple (``_``). Exemple::
 
-    class A {
+    class A
+    {
         protected $_jeSuisUneVariableProtegee;
 
-        protected function _jeSuisUnemethodeProtegee() {
+        protected function _jeSuisUnemethodeProtegee()
+        {
            /*...*/
         }
     }
@@ -466,10 +477,12 @@ avec un underscore simple (``_``). Exemple::
 Les noms de méthodes et variables privées commencent avec un underscore double
 (``__``). Exemple::
 
-    class A {
+    class A
+    {
         private $__iAmAPrivateVariable;
 
-        private function __iAmAPrivateMethod() {
+        private function __iAmAPrivateMethod()
+        {
             /*...*/
         }
     }

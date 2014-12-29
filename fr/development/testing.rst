@@ -129,8 +129,10 @@ bar HTML. Notre helper ressemblera à cela::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper {
-        public function bar($value) {
+    class ProgressHelper extends AppHelper
+    {
+        public function bar($value)
+        {
             $width = round($value / 100, 2) * 100;
             return sprintf(
                 '<div class="progress-container">
@@ -152,12 +154,15 @@ allons commencer avec ce qui suit::
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
-    class ProgressHelperTest extends TestCase {
-        public function setUp() {
+    class ProgressHelperTest extends TestCase
+    {
+        public function setUp()
+        {
 
         }
 
-        public function testBar() {
+        public function testBar()
+        {
 
         }
     }
@@ -169,7 +174,8 @@ Les méthodes de configuration devraient initialiser les objets souhaités
 pour le test, et faire toute configuration souhaitée. Dans notre configuration
 nous ajouterons ce qui suit::
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $View = new View();
         $this->Progress = new ProgressHelper($View);
@@ -183,7 +189,8 @@ dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
 Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques
 assertions pour nous assurer que notre code crée la sortie que nous attendions::
 
-    public function testBar() {
+    public function testBar()
+    {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
         $this->assertContains('progress-bar', $result);
@@ -349,7 +356,8 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
 
           // Facultatif. Définissez cette variable pour charger des fixtures avec
           // une base de données de test différente.
@@ -462,7 +470,8 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     use Cake\TestSuite\Fixture\TestFixture;
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
 
         public $fields = [
             'id' => ['type' => 'integer'],
@@ -476,7 +485,8 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
             ]
         ];
 
-        public function init() {
+        public function init()
+        {
             $this->records = [
                 [
                     'id' => 1,
@@ -510,13 +520,15 @@ disponible dans votre application (qui est lié avec une table nommée
 articles), on changerait le fixture donné dans la section précédente
 (``tests/Fixture/ArticlesFixture.php``) en ce qui suit::
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
         public $import = ['table' => 'articles']
     }
 
 Si vous voulez utiliser une autre connexion, utilisez::
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
@@ -525,7 +537,8 @@ model/d'une table existante, mais vous avez vos enregistrements directement
 définis dans le fixture comme il a été montré dans la section précédente.
 Par exemple::
 
-    class ArticlesFixture extends TestFixture {
+    class ArticlesFixture extends TestFixture
+    {
         public $import = ['table' => 'articles'];
         public $records = [
             [
@@ -570,7 +583,8 @@ besoin. Vous devriez charger une fixture pour chaque model qui aura une requête
 lancée contre elle. Pour charger les fixtures, vous définissez la propriété
 ``$fixtures`` dans votre model::
 
-    class ArticleTest extends TestCase {
+    class ArticleTest extends TestCase
+    {
         public $fixtures = ['app.articles', 'app.comments'];
     }
 
@@ -578,7 +592,8 @@ Ce qui est au-dessus va charger les fixtures d'Article et de Comment à partir
 du répertoire de fixture de l'application. Vous pouvez aussi charger les
 fixtures à partir du cœur de CakePHP ou des plugins::
 
-    class ArticlesTest extends TestCase {
+    class ArticlesTest extends TestCase
+    {
         public $fixtures = ['plugin.debug_kit.articles', 'core.comments'];
     }
 
@@ -590,11 +605,13 @@ Vous pouvez contrôler quand vos fixtures sont chargés en configurant
 :php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` à ``false`` et plus tard
 les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
-    class ArticlesTest extends TestCase {
+    class ArticlesTest extends TestCase
+    {
         public $fixtures = ['app.articles', 'app.comments'];
         public $autoFixtures = false;
 
-        public function testMyFunction() {
+        public function testMyFunction()
+        {
             $this->loadFixtures('Article', 'Comment');
         }
     }
@@ -605,7 +622,8 @@ vous avez une application plus grande. Pour charger les fixtures dans les
 sous-répertoires, incluez simplement le nom du sous-répertoire dans le nom de
 la fixture::
 
-    class ArticlesTest extends CakeTestCase {
+    class ArticlesTest extends CakeTestCase
+    {
         public $fixtures = ['app.blog/articles', 'app.blog/comments'];
     }
 
@@ -623,9 +641,11 @@ Disons que nous avons déjà notre table Articles définie dans
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 $this->alias() . '.published' => 1
             ]);
@@ -647,7 +667,8 @@ répertoire ``tests/TestCase/Model/Table``, avec les contenus suivants::
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase {
+    class ArticleTest extends TestCase
+    {
         public $fixtures = ['app.articles'];
     }
 
@@ -668,15 +689,18 @@ maintenant à ceci::
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase {
+    class ArticleTest extends TestCase
+    {
         public $fixtures = ['app.articles'];
 
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             $this->Articles = TableRegistry::get('Articles');
         }
 
-        public function testFindPublished() {
+        public function testFindPublished()
+        {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->hydrate(false)->toArray();
@@ -708,7 +732,8 @@ les testez. Vous devrez utiliser ``getMockForModel`` pour créer les mocks de
 test des models. Cela évite des problèmes avec les reflected properties that
 normal mocks have::
 
-    public function testSendingEmails() {
+    public function testSendingEmails()
+    {
         $model = $this->getMockForModel('EmailVerification', ['send']);
         $model->expects($this->once())
             ->method('send')
@@ -743,10 +768,12 @@ correspondant. Le code du controller ressemble à ceci::
 
     use App\Controller\AppController;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
         public $helpers = ['Form', 'Html'];
 
-        public function index($short = null) {
+        public function index($short = null)
+        {
             if (!empty($this->request->data)) {
                 $article = $this->Articles->newEntity($this->request->data);
                 $this->Articles->save($article);
@@ -774,24 +801,28 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\IntegrationTestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase {
+    class ArticlesControllerTest extends IntegrationTestCase
+    {
         public $fixtures = ['app.articles'];
 
-        public function testIndex() {
+        public function testIndex()
+        {
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
             // D'autres asserts.
         }
 
-        public function testIndexQueryData() {
+        public function testIndexQueryData()
+        {
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
             // D'autres asserts.
         }
 
-        public function testIndexShort() {
+        public function testIndexShort()
+        {
             $this->get('/articles/index/short');
 
             $this->assertResponseOk();
@@ -799,7 +830,8 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
             // D'autres asserts.
         }
 
-        public function testIndexPostData() {
+        public function testIndexPostData()
+        {
             $data = [
                 'user_id' => 1,
                 'published' => 1,
@@ -865,14 +897,16 @@ Pour ce faire, vous pouvez utiliser les méthodes de helper fournies par
 qui contient une méthode add, et que cette méthode nécessite une
 authentification, vous pourriez écrire les tests suivants::
 
-    public function testAddUnauthenticatedFails() {
+    public function testAddUnauthenticatedFails()
+    {
         // Pas de données de session définies.
         $this->get('/articles/add');
 
         $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
-    public function testAddAuthenticated() {
+    public function testAddAuthenticated()
+    {
         // Défini des données de session
         $this->session([
             'Auth' => [
@@ -942,10 +976,12 @@ JSON est un format sympa et courant à utiliser quand on construit un service we
 Tester les endpoints de votre service web est très simple avec CakePHP. Commençons
 par un exemple de controller simple qui répond en JSON::
 
-    class MarkersController extends AppController {
+    class MarkersController extends AppController
+    {
         public $components = ['RequestHandler'];
 
-        public function view($id) {
+        public function view($id)
+        {
             $marker = $this->Markers->get($id);
             $this->set([
                 '_serialize' => ['marker'],
@@ -957,9 +993,11 @@ par un exemple de controller simple qui répond en JSON::
 Maintenant créons un fichier ``tests/TestCase/Controller/MarkersControllerTest.php``
 et assurons nous que notre service web retourne une réponse appropriée::
 
-    class MarkersControllerTest extends IntegrationTestCase {
+    class MarkersControllerTest extends IntegrationTestCase
+    {
 
-        public function testGet() {
+        public function testGet()
+        {
             $this->configRequest([
                 'headers' => ['Accept' => 'application/json']
             ]);
@@ -1005,10 +1043,12 @@ application. Ce component nous aide à paginer la valeur limite à travers tous
 les controllers qui l'utilisent. Voici notre exemple de component localisé dans
 ``app/Controller/Component/PagematronComponent.php``::
 
-    class PagematronComponent extends Component {
+    class PagematronComponent extends Component
+    {
         public $controller = null;
 
-        public function setController($controller) {
+        public function setController($controller)
+        {
             $this->controller = $controller;
             // Assurez-vous que le contrôleur utilise la pagination.
             if (!isset($this->controller->paginate)) {
@@ -1016,11 +1056,13 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
             }
         }
 
-        public function startup(Event $event) {
+        public function startup(Event $event)
+        {
             $this->setController($event->subject());
         }
 
-        public function adjust($length = 'short') {
+        public function adjust($length = 'short')
+        {
             switch ($length) {
                 case 'long':
                     $this->controller->paginate['limit'] = 100;
@@ -1048,12 +1090,14 @@ dans notre component. Nous créons le fichier
     use Cake\Network\Request;
     use Cake\Network\Response;
 
-    class PagematronComponentTest extends TestCase {
+    class PagematronComponentTest extends TestCase
+    {
 
         public $component = null;
         public $controller = null;
 
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             // Configuration de notre component et de notre faux controller de test.
             $collection = new ComponentCollection();
@@ -1069,7 +1113,8 @@ dans notre component. Nous créons le fichier
             $this->component->setController($this->controller);
         }
 
-        public function testAdjust() {
+        public function testAdjust()
+        {
             // Test de notre méthode avec différents paramètres.
             $this->component->adjust();
             $this->assertEquals(20, $this->controller->paginate['limit']);
@@ -1081,7 +1126,8 @@ dans notre component. Nous créons le fichier
             $this->assertEquals(100, $this->controller->paginate['limit']);
         }
 
-        public function tearDown() {
+        public function tearDown()
+        {
             parent::tearDown();
             // Nettoie les variables quand les tests sont finis.
             unset($this->component, $this->controller);
@@ -1103,8 +1149,10 @@ et pour siplifier, il ne va avoir qu'une méthode ``usd()``::
 
     use Cake\View\Helper;
 
-    class CurrencyRendererHelper extends Helper {
-        public function usd($amount) {
+    class CurrencyRendererHelper extends Helper
+    {
+        public function usd($amount)
+        {
             return 'USD ' . number_format($amount, 2, '.', ',');
         }
     }
@@ -1123,19 +1171,22 @@ Maintenant nous créons nos tests::
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
-    class CurrencyRendererHelperTest extends TestCase {
+    class CurrencyRendererHelperTest extends TestCase
+    {
 
         public $helper = null;
 
         // Nous instancions notre helper
-        public function setUp() {
+        public function setUp()
+        {
             parent::setUp();
             $view = new View();
             $this->helper = new CurrencyRendererHelper($view);
         }
 
         // Test de la fonction usd()
-        public function testUsd() {
+        public function testUsd()
+        {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
             // Nous devrions toujours avoir 2 chiffres après la virgule
@@ -1181,7 +1232,8 @@ code que vous voulez pour préparer votre suite de test. Si nous voulions créer
 une suite de tests pour tous nos tests de modèles, nous pourrions créer le fichier
 ``tests/TestCase/AllModelTest.php``, et mettre le code suivant::
 
-    class AllModelTest extends TestSuite {
+    class AllModelTest extends TestSuite
+    {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
             $suite->addTestDirectory(TESTS . 'Case/Model');
@@ -1225,13 +1277,15 @@ les fixtures de votre plugin avec ``plugin.blog.blog_posts``::
     use Blog\Model\BlogPost;
     use Cake\TestSuite\TestCase;
 
-    class BlogPostTest extends TestCase {
+    class BlogPostTest extends TestCase
+    {
 
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_posts'];
         public $BlogPost;
 
-        public function testSomething() {
+        public function testSomething()
+        {
             // Test something.
         }
     }

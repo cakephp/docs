@@ -37,7 +37,8 @@ Code du Controller
 C'est une bonne idée d'ajouter RequestHandler dans la méthode ``initialize()``
 de votre controller Posts. Cela permettra beaucoup d'automagie::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('RequestHandler');
     }
@@ -62,7 +63,8 @@ le même::
     // l'action qui délivre le flux rss, laquelle est
     // l'action index dans notre exemple
 
-    public function index() {
+    public function index()
+    {
         if ($this->RequestHandler->isRss() ) {
             $posts = $this->Post->find(
                 'all',

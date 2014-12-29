@@ -248,13 +248,16 @@ méthodes find personnalisées dans vos models, elles auront besoin de quelques
 modifications. C'est de cette façon que vous créez les méthodes finder
 personnalisées dans 3.0::
 
-    class ArticlesTable {
+    class ArticlesTable
+    {
 
-        public function findPopular(Query $query, array $options) {
+        public function findPopular(Query $query, array $options)
+        {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites(Query $query, array $options) {
+        public function findFavorites(Query $query, array $options)
+        {
             $for = $options['for'];
             return $query->matching('Users.Favorites', function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
@@ -276,7 +279,8 @@ pouvez migrer ce code d'une des façons suivantes:
 
 Dans le 3ème cas ci-dessus, votre code ressemblerait à::
 
-    public function findAll(Query $query, array $options) {
+    public function findAll(Query $query, array $options)
+    {
         $mapper = function ($row, $key, $mr) {
             // Votre logique afterFind
         };
@@ -357,8 +361,10 @@ a les deux colonnes first et last name, vous pouvez ajouter un accesseur pour
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
-        public function getFullName() {
+    class User extends Entity
+    {
+        public function getFullName()
+        {
             return $this->first_name . '  ' $this->last_name;
         }
     }
@@ -378,7 +384,8 @@ les mêmes résultats que les champs virtuels, cela donne::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
         public function findAverage(Query $query, array $options = []) {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
@@ -403,9 +410,11 @@ manipulation des associations::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Movies');
             $this->hasOne('Rating');
             $this->hasMany('Comments')
@@ -445,9 +454,11 @@ règles::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault($validator)
+        {
             $validator->requirePresence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
@@ -535,11 +546,13 @@ doivent définir un constructeur::
 
     use Cake\ORM\Behavior;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
 
         protected $_table;
 
-        public function __construct(Table $table, array $config) {
+        public function __construct(Table $table, array $config)
+        {
             parent::__construct($table, $config);
             $this->_table = $table;
         }
@@ -560,7 +573,8 @@ changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
 Le behavior qui fournit la méthode ``slug`` va recevoir seulement 1 argument,
 et ses méthodes signature doivent ressembler à ceci::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         // code ici.
     }
 
@@ -571,7 +585,8 @@ Les callbacks de Behavior ont été unifiés avec les autres méthodes listener.
 Au lieu de leurs arguments précédents, ils attendent un objet event en premier
 argument::
 
-    public function beforeFind(Event $event, Query $query, array $options) {
+    public function beforeFind(Event $event, Query $query, array $options)
+    {
         // code.
     }
 

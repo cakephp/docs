@@ -372,9 +372,11 @@ ressembler à cela::
 
     use Cake\Network\Email\AbstractTransport;
 
-    class ExampleTransport extends AbstractTransport {
+    class ExampleTransport extends AbstractTransport
+    {
 
-        public function send(Email $email) {
+        public function send(Email $email)
+        {
             // Magie à l'intérieur!
         }
 

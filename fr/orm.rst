@@ -60,7 +60,8 @@ ajouterions ce qui suit dans ``src/Model/Table/ArticlesTable.php``::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
     }
 
@@ -83,7 +84,8 @@ commencerons par ajouter ce qui suit à ``src/Model/Entity/Article.php``::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
     }
 

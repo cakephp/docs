@@ -19,13 +19,15 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 :php:attr:`~Controller::$helpers` プロパティを持っており、そのプロパティにはビューで利用できるヘルパーの一覧が保持されています。
 ビューでヘルパーを使用するにはヘルパーの名前をコントローラの ``$helpers`` 配列に追加して下さい。::
 
-    class BakeriesController extends AppController {
+    class BakeriesController extends AppController
+    {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
 プラグインからヘルパーを追加するにはCakePHPの様々な場所で使われている :term:`プラグイン記法` を使います。::
 
-    class BakeriesController extends AppController {
+    class BakeriesController extends AppController
+    {
         public $helpers = array('Blog.Comment');
     }
 
@@ -33,11 +35,14 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 同じコントローラの他のアクションでは利用できないようにすることができます。このことはコントローラが整理された状態を維持するのに役立つだけでなく、
 さらに、ヘルパーを使わない他のアクションの処理コストを抑えることになります。::
 
-    class BakeriesController extends AppController {
-        public function bake() {
+    class BakeriesController extends AppController
+    {
+        public function bake()
+        {
             $this->helpers[] = 'Time';
         }
-        public function mix() {
+        public function mix()
+        {
             // ここにTimeヘルパーは読み込まれないので利用出来ません
         }
     }
@@ -45,20 +50,23 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 もしすべてのコントローラでヘルパーを有効にする必要がある場合ヘルパーの名前を ``/app/Controller/AppController.php``
 (見つからない場合は作成して下さい)の ``$helpers`` 配列に追加して下さい。デフォルトのHtmlヘルパーとFormヘルパーも忘れずに読み込んで下さい。::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
 ヘルパーにはオプションを渡すことが出来ます。このオプションは属性の値を設定したり、ヘルパーの動作を変えるために使うことができます。::
 
-    class AwesomeHelper extends AppHelper {
+    class AwesomeHelper extends AppHelper
+    {
         public function __construct(View $view, $config = array()) {
             parent::__construct($view, $config);
             debug($config);
         }
     }
 
-    class AwesomeController extends AppController {
+    class AwesomeController extends AppController
+    {
         public $helpers = array('Awesome' => array('option1' => 'value1'));
     }
 
@@ -66,7 +74,8 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 この機能は ``$this->Html`` や他の共通ヘルパーの参照を独自の実装に置き換えたい時に役立ちます。::
 
     // app/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array(
             'Html' => array(
                 'className' => 'MyHtml'
@@ -76,7 +85,8 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 
     // app/View/Helper/MyHtmlHelper.php
     App::uses('HtmlHelper', 'View/Helper');
-    class MyHtmlHelper extends HtmlHelper {
+    class MyHtmlHelper extends HtmlHelper
+    {
         // コアHtmlHelperを上書きするためのコードを追加して下さい
     }
 
@@ -96,8 +106,10 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 コントローラアクションの外に設定のロジックを置けるようになります。もし、クラス宣言の一部に含めることができない設定項目がある場合、
 コントローラのbeforeRenderコールバックの中でそれらを設定することが出来ます。::
 
-    class PostsController extends AppController {
-        public function beforeRender() {
+    class PostsController extends AppController
+    {
+        public function beforeRender()
+        {
             parent::beforeRender();
             $this->helpers['CustomStuff'] = $this->_getCustomStuffSettings();
         }
@@ -138,8 +150,10 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
     /* /app/View/Helper/LinkHelper.php */
     App::uses('AppHelper', 'View/Helper');
 
-    class LinkHelper extends AppHelper {
-        public function makeEdit($title, $url) {
+    class LinkHelper extends AppHelper
+    {
+        public function makeEdit($title, $url)
+        {
             // 特別に整形されたリンクを作るためのロジックはここ...
         }
     }
@@ -158,10 +172,12 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
     /* /app/View/Helper/LinkHelper.php (他のヘルパーを使っている) */
     App::uses('AppHelper', 'View/Helper');
 
-    class LinkHelper extends AppHelper {
+    class LinkHelper extends AppHelper
+    {
         public $helpers = array('Html');
 
-        public function makeEdit($title, $url) {
+        public function makeEdit($title, $url)
+        {
             // 整形されたデータを出力するために
             // HTMLヘルパーを使う:
 
@@ -180,7 +196,8 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 一旦ヘルパーを作って ``/app/View/Helper/`` に配置すると、コントローラで :php:attr:`~Controller::$helpers`
 という特別な変数を使うことでそのヘルパーを読み込めるようになります。::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = array('Link');
     }
 
@@ -198,8 +215,10 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 
     App::uses('Helper', 'View');
 
-    class AppHelper extends Helper {
-        public function customMethod() {
+    class AppHelper extends Helper
+    {
+        public function customMethod()
+        {
         }
     }
 

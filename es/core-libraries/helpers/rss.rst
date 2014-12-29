@@ -62,7 +62,8 @@ the same::
     // the action which deliver the rss feed, which is the
     // Index action in our example.
 
-    public function index() {
+    public function index()
+    {
         if ($this->RequestHandler->isRss() ) {
             $posts = $this->Posts->find(
                 'all',

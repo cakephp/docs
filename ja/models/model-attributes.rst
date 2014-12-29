@@ -21,7 +21,8 @@ useDbConfig
 
 ::
 
-    class Example extends AppModel {
+    class Example extends AppModel
+    {
         public $useDbConfig = 'alternate';
     }
 
@@ -36,13 +37,15 @@ useTable
 
 使用例::
 
-    class Example extends AppModel {
+    class Example extends AppModel
+    {
         public $useTable = false; // このモデルはデータベース・テーブルを使いません
     }
 
 あるいは::
 
-    class Example extends AppModel {
+    class Example extends AppModel
+    {
         public $useTable = 'exmp'; // このモデルは「exmp」というデータベース・テーブルを使います
     }
 
@@ -57,7 +60,8 @@ tablePrefix
 
 使用例::
 
-    class Example extends AppModel {
+    class Example extends AppModel
+    {
         public $tablePrefix = 'alternate_'; // 「alternate_examples」を見に行く
     }
 
@@ -72,7 +76,8 @@ primaryKey
 
 使用例::
 
-    class Example extends AppModel {
+    class Example extends AppModel
+    {
         public $primaryKey = 'example_id'; // example_idはデータベースのフィールド名
     }
 
@@ -88,7 +93,8 @@ displayField
 
 例えば、 ``username`` フィールドを使うには以下のようにします::
 
-    class User extends AppModel {
+    class User extends AppModel
+    {
         public $displayField = 'username';
     }
 
@@ -229,7 +235,8 @@ name
 
 使用例::
 
-    class Example extends AppModel {
+    class Example extends AppModel
+    {
         public $name = 'Example';
     }
 
