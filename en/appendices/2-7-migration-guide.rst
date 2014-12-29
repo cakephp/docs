@@ -11,7 +11,8 @@ Core
 Configure
 ---------
 
-- :php:meth:`Configure::consume()` has been added to read and delete from Configure in a single step.
+- :php:meth:`Configure::consume()` has been added to read and delete from
+  Configure in a single step.
 
 
 Datasource
@@ -19,7 +20,8 @@ Datasource
 
 CakeSession
 -----------
-- :php:meth:`CakeSession::consume()` has been added to read and delete from session in a single step.
+- :php:meth:`CakeSession::consume()` has been added to read and delete from
+  session in a single step.
 
 
 Controller
@@ -28,7 +30,8 @@ Controller
 SessionComponent
 ----------------
 
-- :php:meth:`SessionComponent::consume()` has been added to read and delete from session in a single step.
+- :php:meth:`SessionComponent::consume()` has been added to read and delete
+  from session in a single step.
 
 
 View
@@ -36,7 +39,8 @@ View
 
 SessionHelper
 -------------
-- :php:meth:`SessionHelper::consume()` has been added to read and delete from session in a single step.
+- :php:meth:`SessionHelper::consume()` has been added to read and delete from
+  session in a single step.
 
 
 TestSuite

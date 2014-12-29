@@ -15,7 +15,7 @@ Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec la :term:`notation avec points`,
 comme ci-dessous::
 
-    array('User' => 
+    array('User' =>
         array('username' => 'super@example.com')
     );
 
@@ -30,6 +30,13 @@ utilisée.
 
     Lire à partir de la Session. Retourne une chaîne de caractère ou un
     tableau dépendant des contenus de la session.
+
+.. php:method:: consume($name)
+
+    :rtype: mixed
+
+    Lit et supprime une valeur de Session. C'est utile quand vous voulez
+    combiner la lecture et la suppression de valeurs en une seule opération.
 
 .. php:method:: check(string $key)
 
