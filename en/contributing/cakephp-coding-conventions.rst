@@ -1,7 +1,9 @@
 Coding Standards
 ################
 
-CakePHP developers will use the following coding standards.
+CakePHP developers will use the `PSR-2 coding style guide
+<http://www.php-fig.org/psr/psr-2/>`_ in addition to the following
+rules as coding standards.
 
 It is recommended that others developing CakeIngredients follow the same
 standards.
@@ -19,7 +21,7 @@ should be passed before committing them to the repository.
 Indentation
 ===========
 
-One tab will be used for indentation.
+Four spaces will be used for indentation.
 
 So, indentation should look like this::
 
@@ -167,7 +169,7 @@ Function Calls
 ==============
 
 Functions should be called without space between function's name and
-starting bracket. There should be one space between every parameter of a
+starting parenthesis. There should be one space between every parameter of a
 function call::
 
     $var = foo($bar, $bar2, $bar3);
