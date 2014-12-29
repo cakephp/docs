@@ -14,7 +14,6 @@ Conditions requises
   aucun cas nécessaire.
 - PHP 5.4.16 ou plus.
 - extension mbstring
-- extension mcrypt
 - extension intl
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous

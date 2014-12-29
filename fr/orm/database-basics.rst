@@ -279,10 +279,13 @@ Une façon facile de remplir l'interface basique est d'étendre
 :php:class:`Cake\Database\Type`. Par exemple, si vous souhaitez ajouter un type
 JSON, nous pourrions faire la classe type suivante::
 
+    // Dans src/Database/Type/JsonType.php
+
     namespace App\Database\Type;
 
     use Cake\Database\Driver;
     use Cake\Database\Type;
+    use PDO;
 
     class JsonType extends Type
     {
@@ -298,6 +301,14 @@ JSON, nous pourrions faire la classe type suivante::
         public function toDatabase($value, Driver $driver)
         {
             return json_encode($value);
+        }
+
+        public function toStatement($value, Driver $driver)
+        {
+            if ($value === null) {
+                return PDO::PARAM_NULL;
+            }
+            return PDO::PARAM_STR;
         }
 
     }

@@ -13,7 +13,6 @@ Pré-requis
 
 - CakePHP 3.x a besoin de la Version 5.4.16 ou supérieur de PHP.
 - CakePHP 3.x a besoin de l'extension mbstring.
-- CakePHP 3.x a besoin de l'extension mcrypt.
 - CakePHP 3.x a besoin de l'extension intl.
 
 .. warning::
@@ -1318,19 +1317,29 @@ Security
 
 - ``Security::cipher()`` a été retirée. Elle est peu sûre et favorise de
   mauvaises pratiques en cryptographie. Vous devrez utiliser
-  :php:meth:`Security::rijndael()` à la place.
+  :php:meth:`Security::encrypt()` à la place.
 - La valeur de configuration ``Security.cipherSeed`` n'est plus nécessaire.
   Avec le retrait de ``Security::cipher()`` elle n'est plus utilisée.
 - La rétrocompatibilité de :php:meth:`Cake\\Utility\\Security::rijndael()` pour
-  les valeurs cryptées avant CakePHP 2.3.1 a été retirée. Vous devrez re-crypter
-  les valeurs en utilisant une version plus récente de CakePHP 2.x avant
-  migration.
+  les valeurs cryptées avant CakePHP 2.3.1 a été retirée. Vous devrez rechiffrer
+  les valeurs en utilisant ``Security::encrypt()`` et une version plus récente
+  de CakePHP 2.x avant migration.
 - La capacité de générer blowfish a été retirée. Vous ne pouvez plus utiliser le
   type "blowfish" pour ``Security::hash()``. Vous devrez utiliser uniquement
   le `password_hash()` de PHP et `password_verify()` pour générer et vérifier
   les hashs de blowfish. La librairie compatible
   `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   qui est installée avec CakePHP fournit ces fonctions pour PHP < 5.5.
+- OpenSSL is now used over mcrypt when encrypting/decrypting data. This change
+  provides better performance and future proofs CakePHP against distros dropping
+  support for mcrypt.
+- ``Security::rijndael()`` is deprecated and only available when using mcrypt.
+
+.. warning::
+
+    Data encrypted with Security::encrypt() in previous versions is not
+    compatible with the openssl implementation. You should :ref:`set the
+    implementation to mcrypt <force-mcrypt>` when upgrading.
 
 Time
 ----
