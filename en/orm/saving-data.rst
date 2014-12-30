@@ -467,7 +467,7 @@ When an entity is saved a few things happen:
 
 1. Rule checking will be started if not disabled.
 2. Rule checking will trigger the ``Model.beforeRules`` event. If this event is
-   stopped the save operation will fail. and return ``false``.
+   stopped, the save operation will fail and return ``false``.
 3. Rules will be checked. If the entity is being created, the ``create`` rules
    will be used. If the entity is being updated, the ``update`` rules will be
    used.
