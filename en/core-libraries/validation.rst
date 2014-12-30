@@ -278,6 +278,7 @@ create ``Validator`` sub-classes for your reusable validation logic::
     {
         public function __construct()
         {
+            parent::__construct();
             // Add validation rules here.
         }
     }
