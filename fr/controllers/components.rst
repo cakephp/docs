@@ -3,13 +3,12 @@ Components (Composants)
 
 Les Components (Composants) sont des regroupements de logique applicative
 qui sont partagés entre les controllers. CakePHP est également livré avec un
-fantastique ensemble de components, que vous pouvez utiliser pour vous aider.
-Vous pouvez également créer votre propres components. Si vous vous surprenez
-à vouloir copier et coller des choses entre vos controllers, alors vous
-devriez
-envisager de regrouper plusieurs fonctionnalités dans un Component. Créer des
-components permet de garder un code de controller propre et vous permet de
-réutiliser du code entre des projets.
+fantastique ensemble de components, que vous pouvez utiliser pour vous aider 
+dans de nombreuses tâches communes. Vous pouvez également créer votre propre
+component. Si vous vous surprenez à vouloir copier et coller des choses entre 
+vos controllers, alors vous devriez envisager de regrouper celle-ci dans un
+Component. Créer des components permet de garder un code de controller propre
+et vous permet de réutiliser le code entre projets.
 
 Pour plus d'informations sur les components intégrés dans CakePHP, consultez
 le chapitre de chaque component:
@@ -34,7 +33,7 @@ De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
 :doc:`/controllers/components/authentication` et
 :doc:`/controllers/components/cookie`.
-Toute configuration pour ces components, et pour les components en général,
+La configuration pour ces components, et pour les components en général,
 se fait via ``loadComponent()`` dans la méthode ``initialize()`` de votre
 Controller ou via le tableau ``$components``::
 
@@ -52,10 +51,9 @@ Controller ou via le tableau ``$components``::
 
     }
 
-Vous pouvez configurer les components à la
-volée en utilisant la méthode ``config()``. Souvent, ceci est fait dans la
-méthode ``beforeFilter()`` de votre controller. Ceci peut aussi être exprimé
-comme ceci::
+Vous pouvez configurer les components à la volée en utilisant la méthode 
+``config()``. Souvent, ceci est fait dans la méthode ``beforeFilter()`` 
+de votre controller. Ceci peut aussi être exprimé comme ceci::
 
     public function beforeFilter()
     {
@@ -117,12 +115,12 @@ Charger les Components à la Volée
 ---------------------------------
 
 Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
-action. Dans ce cas là, vous pouvez le charger à la volée en utilisant le
-:doc:`Registre de Component </core-libraries/registry-objects>`. A
-l'intérieur d'un controller, vous pouvez faire ce qui suit::
+action du controller. Dans ce cas là, vous pouvez le charger à la volée en
+utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 
-    $this->OneTimer = $this->Components->load('OneTimer');
-    $this->OneTimer->getTime();
+    // Dans les actions du controller
+    $this->loadComponent('OneTimer');
+    $time = $this->OneTimer->getTime();
 
 .. note::
 
@@ -200,12 +198,11 @@ le component ressemblerait à quelque chose comme cela::
 Inclure votre Component dans vos Controllers
 --------------------------------------------
 
-Une fois notre component terminé, nous pouvons l'utiliser au sein
-des controllers de l'application en plaçant son nom
-(sans la partie "Component") dans le tableau ``$components`` du controller.
-Le controller sera automatiquement pourvu d'un nouvel attribut nommé
-d'après le component, à travers lequel nous pouvons accéder à une instance
-de celui-ci::
+Une fois notre component terminé, nous pouvons l'utiliser dans
+le controller de l'application en le chargeant durant la méthode
+``initialize()`` du controller. Une fois chargé, le controller sera
+automatiquement pourvu d'un nouvel attribut nommé d'après le component, 
+à travers lequel nous pouvons accéder à une instance de celui-ci::
 
     // Dans un controller
     // Rend le nouveau component disponible par $this->Math
@@ -255,6 +252,7 @@ variable ``$components``::
         // L'autre component que votre component utilise
         public $components = ['Existing'];
 
+        // Exécute une autre configuration additionnelle pour votre component.
         public function initialize(array $config)
         {
             $this->Existing->foo();
@@ -288,7 +286,7 @@ variable ``$components``::
 Accéder au Controller du  Component
 -----------------------------------
 
-À partir d'un composant, vous pouvez accéder au controler courant via le
+À partir d'un component, vous pouvez accéder au controler courant via le
 registre::
 
     $controller = $this->_registry->getController();
@@ -327,9 +325,9 @@ qui vous permettent d'augmenter le cycle de la requête.
 
     Est invoquée quand la méthode de redirection du controller est appelée,
     mais avant toute action qui suit. Si cette méthode retourne ``false``, le
-    controller ne continuera pas de rediriger la requête. Les paramètres $url et
-    $response vous permettent d'inspecter et de modifier la localisation de tout
-    autre header dans la réponse.
+    controller ne continuera pas à rediriger la requête. Les paramètres $url et
+    $response vous permettent d'inspecter et de modifier la localisation ou toutes
+    autres entêtes dans la réponse.
 
 
 .. meta::
