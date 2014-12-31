@@ -294,6 +294,7 @@ de ``Validator`` pour votre logique de validation réutilisable::
     {
         public function __construct()
         {
+            parent::__construct();
             // Add validation rules here.
         }
     }

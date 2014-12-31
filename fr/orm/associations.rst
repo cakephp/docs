@@ -215,7 +215,7 @@ Les clés possibles pour une association hasOne sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-Users peuvent contenir l'enregistrement Address, si il existe::
+Users peuvent contenir l'enregistrement Address, s'il existe::
 
     // Dans un controller ou dans une méthode table.
     $query = $users->find('all')->contain(['Addresses']);
@@ -303,7 +303,7 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-User peuvent contenir l'enregistrement Address si il existe::
+User peuvent contenir l'enregistrement Address s'il existe::
 
     // Dans un controller ou dans une méthode table.
     $query = $addresses->find('all')->contain(['Users']);
@@ -397,7 +397,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations de recherche sur
-la table Articles récupèreront également les Comments liés si ils existent::
+la table Articles récupèreront également les Comments liés s'ils existent::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('all')->contain(['Comments']);
@@ -533,7 +533,7 @@ sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-Articles peuvent contenir les enregistrements de Tag si ils existent::
+Articles peuvent contenir les enregistrements de Tag s'ils existent::
 
     // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')->contain(['Tags']);

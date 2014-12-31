@@ -233,7 +233,7 @@ Truncating the Tail of a String
 
 Si ``$text`` est plus long que ``$length``, cette méthode retire une
 sous-chaîne initiale avec la longueur de la différence et ajoute un
-suffixe ``'ellipsis'``, si il est défini. Si ``'exact'`` est passé à
+suffixe ``'ellipsis'``, s'il est défini. Si ``'exact'`` est passé à
 ``false``, le truchement va se faire au premier espace avant le moment où
 le truchement aurait été fait.
 

@@ -74,7 +74,7 @@ Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
 ArticlesController.
 Cependant, vous pouvez utiliser la même logique pour créer
 un formulaire d'édition. Le FormHelper utilise la propriété ``$this->request->data``
-pour detecter automatiquement si il faut créer un formulaire d'ajout (add) ou
+pour detecter automatiquement s'il faut créer un formulaire d'ajout (add) ou
 un d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être
 créé comme un formulaire d'édition. Par exemple, si nous naviguons vers
 http://example.org/articles/edit/5, nous pourrions faire ce qui suit::
@@ -873,7 +873,7 @@ Affichera:
 
 L'input de type ``select``  permet un attribut ``$option`` spécial
 appelée ``'escape'``  qui accepte un booléen et détermine
-si il faut que l'entité HTML encode le contenu des options
+s'il faut que l'entité HTML encode le contenu des options
 sélectionnées. Par défaut à ``true``::
 
     $options = ['M' => 'Male', 'F' => 'Female'];
@@ -1283,7 +1283,7 @@ le champ donné, dans le cas où une erreur de validation a eu lieu.
 
 Options:
 
--  'escape' booléen si il faut ou non que le HTML échappe le contenu de
+-  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
    l'erreur.
 -  'wrap' valeur mixte définissant s'il faut ou pas que le message d'erreur
    soit enveloppé d'une div. Si c'est une chaîne , sera utilisé comme le
@@ -1514,7 +1514,7 @@ suivantes:
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
-d'un input datetime, ``datetimeContainer`` va être utilisé si il est présent.
+d'un input datetime, ``datetimeContainer`` va être utilisé s'il est présent.
 Si le conteneur n'est pas présent, le template ``inputContainer`` sera utilisé.
 Par exemple::
 

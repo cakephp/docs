@@ -558,8 +558,8 @@ fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
 fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
 
 * Les valeurs séparées par des points sont étendues dans les tableaux.
-* Les valeurs de la famille des boléens comme 'on' et 'off' sont converties
-  en boléens.
+* Les valeurs de la famille des booléens comme 'on' et 'off' sont converties
+  en booléens.
 
 Un fichier ini d'exemple ressemblerait à cela::
 

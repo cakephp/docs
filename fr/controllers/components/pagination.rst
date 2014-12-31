@@ -133,7 +133,7 @@ les propriétés qu'un model/clé sans ``$paginate`` peut contenir.
 
 Une fois que la variable ``$paginate`` à été définie, nous pouvons
 utiliser la méthode :php:meth:`~Cake\\Controller\\Controller::paginate()` pour
-créer les données paginées et ajouter le ``PaginatorHelper`` si il n'a pas déjà
+créer les données paginées et ajouter le ``PaginatorHelper`` s'il n'a pas déjà
 été ajouté. La méthode paginate du controller va retourner l'ensemble des résultats
 de la requête paginée, et définir les meta-données de pagination de la requête.
 Vous pouvez accéder aux meta-données de pagination avec

@@ -342,7 +342,7 @@ chemin donné::
     $this->createFile('bower.json', $stuff);
 
 Si le Shell est interactif, un avertissement sera généré, et il sera demandé
-à l'utilisateur si il veut écraser le fichier si il existe déjà. Si la
+à l'utilisateur s'il veut écraser le fichier s'il existe déjà. Si la
 propriété iinteractive du shell est à ``false``, aucune question ne sera
 posée et le fichier sera simplement écrasé.
 
@@ -633,7 +633,7 @@ Vous pouvez utiliser les options suivantes lors de la création d'un argument:
   rencontre une valeur non valide.
 
 Les arguments qui ont été marqués comme nécessaires vont lancer une exception
-lors du parsing de la commande si ils ont été omis. Donc vous n'avez pas à
+lors du parsing de la commande s'ils ont été omis. Donc vous n'avez pas à
 gérer cela dans votre shell.
 
 .. php:method:: addArguments(array $args)
@@ -676,7 +676,7 @@ Ajouter des Options
 Les options ou les flags sont aussi fréquemment utilisés avec les outils de
 ligne de commande. ``ConsoleOptionParser`` supporte la création d'options avec
 les deux verbose et short aliases, fournissant les valeurs par défaut
-et créant des switches en boléen. Les options sont créées avec soit
+et créant des switches en booléen. Les options sont créées avec soit
 ``$parser->addOption()``, soit ``$parser->addOptions()``. ::
 
     $parser->addOption('connection', [
@@ -688,7 +688,7 @@ et créant des switches en boléen. Les options sont créées avec soit
 Ce qui est au-dessus vous permet l'utilisation soit de
 ``cake myshell --connection=other``, soit de
 ``cake myshell --connection other``, ou soit de ``cake myshell -c other`` lors
-de l'appel au shell. Vous pouvez aussi créer des switches de boléen, ces
+de l'appel au shell. Vous pouvez aussi créer des switches de booléen, ces
 switches ne consomment pas de valeurs, et leur présence les active juste dans
 les paramètres parsés. ::
 
@@ -710,7 +710,7 @@ pour définir le comportement de l'option:
 * ``default`` - La valeur par défaut pour cette option. Si elle n'est pas
   définie, la valeur par défaut sera ``true``.
 * ``boolean`` - L'option n'utilise aucune valeur, c'est juste un switch de
-  boléen.
+  booléen.
   Par défaut à ``false``.
 * ``choices`` Un tableau de choix valides pour cette option. Si elle est vide,
   toutes les valeurs sont valides. Une exception sera lancée lorque parse()
@@ -764,7 +764,7 @@ pour vérifier les flags de booléens::
         // faire quelque chose
     }
 
-Puisque les options boléennes sont toujours définies à ``true`` ou à
+Puisque les options booléennes sont toujours définies à ``true`` ou à
 ``false``, vous pouvez omettre les méthodes de vérification supplémentaires.
 
 Ajouter des sous-commandes

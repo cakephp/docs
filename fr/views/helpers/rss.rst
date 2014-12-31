@@ -43,7 +43,7 @@ de votre controller Posts. Cela permettra beaucoup d'automagie::
         $this->loadComponent('RequestHandler');
     }
 
-Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ainsi il
+Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ains'il
 doit aussi être ajouté au controller::
 
     public $helpers = ['Text'];

@@ -273,14 +273,14 @@ Dans ``src/Auth/OpenidAuthenticate.php``, vous pourriez mettre ce qui suit::
         public function authenticate(Request $request, Response $response)
         {
             // Faire les trucs d'OpenID ici.
-            // Retourne un tableau de l user si ils peuvent authentifier
+            // Retourne un tableau de l user s'ils peuvent authentifier
             // l user
             // retourne false dans le cas contraire
         }
     }
 
-Les objets d'authentification devraient retourner ``false`` si ils ne peuvent
-identifier l'utilisateur. Et un tableau d'information utilisateur si ils le
+Les objets d'authentification devraient retourner ``false`` s'ils ne peuvent
+identifier l'utilisateur. Et un tableau d'information utilisateur s'ils le
 peuvent. Il n'est pas utile d'étendre (extend) ``BaseAuthenticate``, simplement
 votre objet d'identification doit implémenter la méthode ``authenticate()``.
 La class ``BaseAuthenticate`` fournie un nombre de méthode très utiles
@@ -683,7 +683,7 @@ possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
 dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
 ``false``, s'il ne sont pas capable de vérifier les autorisations, ou bien si
-la vérification a échoué. Le gestionnaire devrait retourner ``true`` si ils
+la vérification a échoué. Le gestionnaire devrait retourner ``true`` s'ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
 seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne ``true``.
 Si toutes les vérifications échouent, l'utilisateur sera redirigé vers la page

@@ -50,7 +50,7 @@ Un exemple serait::
 
 Ce qui est au-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
 ``error``. Chacun est configuré pour gérer différents niveaux de message. Ils
-stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il
+stockent aussi leurs messages de journal dans des fichiers séparés, ains'il
 est facile de séparer les logs de debug/notice/info des erreurs plus sérieuses.
 Regardez la section sur :ref:`logging-levels` pour plus d'informations sur les
 différents niveaux et ce qu'ils signifient.
@@ -311,7 +311,7 @@ pour les commandes et les paiements différemment des autres opérations de
 journalisation moins critiques.
 
 CakePHP expose ce concept dans les scopes de journalisation. Quand les messages
-d'erreur sont écrits, vous pouvez inclure un nom scope. Si il y a un logger
+d'erreur sont écrits, vous pouvez inclure un nom scope. S'il y a un logger
 configuré pour ce scope, les messages de log seront dirigés vers ces loggers.
 Si un message de log est écrit vers un scope inconnu, les loggers qui gèrent
 ce niveau de message va journaliser le message. Par exemple::

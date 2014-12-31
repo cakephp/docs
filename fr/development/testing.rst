@@ -1395,7 +1395,7 @@ graphique sympa des résultats de votre test:
 
 .. code-block:: bash
 
-    # Télécharger Composer si il est manquant.
+    # Télécharger Composer s'il est manquant.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Installer les dépendances.
     php composer.phar install

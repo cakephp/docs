@@ -270,7 +270,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
             </a>
         </li>
 
-    Si il n'y avait pas de page précédente vous obtenez:
+    S'il n'y avait pas de page précédente vous obtenez:
 
     .. code-block:: html
 

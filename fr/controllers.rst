@@ -483,7 +483,7 @@ les classes MVC supplémentaires::
     }
 
 Chacune de ces variables sont fusionnées avec leurs valeurs héritées,
-ainsi il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
+ains'il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
 bien tout ce qui est déclaré dans votre ``AppController``.
 
 .. _controller-life-cycle:

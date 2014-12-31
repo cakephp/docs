@@ -329,7 +329,7 @@ L'API de File
 
 .. php:method:: close()
 
-    Ferme le fichier courant si il est ouvert.
+    Ferme le fichier courant s'il est ouvert.
 
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 

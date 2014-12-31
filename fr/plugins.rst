@@ -11,7 +11,7 @@ en plugin CakePHP afin de pouvoir la mettre dans d'autres applications.
 Le principal lien entre un plugin et l'application dans laquelle il a été
 installé, est la configuration de l'application (connexion à la base de
 données, etc.). Autrement, il fonctionne dans son propre espace, se comportant
-comme il l'aurait fait si il était une application à part entière.
+comme il l'aurait fait s'il était une application à part entière.
 
 Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
 ``DebugKit``. Par convention, les plugins utilisent leur nom de package pour

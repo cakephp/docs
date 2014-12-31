@@ -176,7 +176,7 @@ Détermine les content-types que le client préfère. Si aucun paramètre n'est
 donné, le type de contenu le plus approchant est retourné. Si $type est un
 tableau, le premier type que le client accepte sera retourné. La préférence
 est déterminée, premièrement par l'extension de fichier analysée par
-Router, si il y en avait une de fournie et secondairement, par la liste des
+Router, s'il y en avait une de fournie et secondairement, par la liste des
 content-types définis dans ``HTTP\_ACCEPT``::
 
     $this->RequestHandler->prefers('json');

@@ -474,7 +474,7 @@ devrait ressembler::
     }
 
 Cette action s'assure d'abord que l'utilisateur a essayé d'accéder à un
-enregistrement existant. Si il n'y a pas de paramètre ``$id`` passé, ou si le
+enregistrement existant. S'il n'y a pas de paramètre ``$id`` passé, ou si le
 article n'existe pas, nous lançons une ``NotFoundException`` pour que le
 gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 

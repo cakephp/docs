@@ -231,7 +231,7 @@ decimal
     Correspond au type DECIMAL. Supporte les options ``length`` et  ``precision``.
 boolean
     Correspond au BOOLEAN sauf pour MySQL, où TINYINT(1) est utilisé pour
-    représenter les boléens.
+    représenter les booléens.
 binary
     Correspond au type BLOB ou BYTEA fourni par la base de données.
 date

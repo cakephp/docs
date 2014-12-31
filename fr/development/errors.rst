@@ -506,7 +506,7 @@ contrôle total la réponse.
 Créer un Controller Personnalisé pour Gérer les Exceptions
 ----------------------------------------------------------
 
-Par convention CakePHP utilisera ``App\Controller\ErrorController`` si il existe.
+Par convention CakePHP utilisera ``App\Controller\ErrorController`` s'il existe.
 Implémenter cette classe vous offrira une voie pour personnaliser les pages
 d'erreur sans aucune configuration supplémentaire.
 

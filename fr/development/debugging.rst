@@ -42,7 +42,7 @@ Affichage des Valeurs
 .. php:staticmethod:: dump($var, $depth = 3)
 
 Dump affiche le contenu d'une variable. Elle affiche toutes les propriétés
-et méthodes (si il y en a) de la variable fournie:::
+et méthodes (s'il y en a) de la variable fournie:::
 
     $foo = [1,2,3];
 

@@ -412,7 +412,7 @@ Options:
 - ``text`` Texte à inclure dans la balise vidéo.
 - ``pathPrefix`` Préfixe du chemin à utiliser pour les URLs relatives,
   par défaut à 'files/'.
-- ``fullBase`` Si il est fourni, l'attribut src prendra l'adresse complète
+- ``fullBase`` S'il est fourni, l'attribut src prendra l'adresse complète
   incluant le nom de domaine.
 
 Retourne une balise formatée audio/video:

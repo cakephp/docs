@@ -367,7 +367,7 @@ Vérifier les En-têtes Acceptés
 
 .. php:method:: accepts($type = null)
 
-Trouve les types de contenu que le client accepte ou vérifie si il
+Trouve les types de contenu que le client accepte ou vérifie s'il
 accepte un type particulier de contenu.
 
 Récupère tous les types::
@@ -504,7 +504,7 @@ name
     Le nom vous permet de spécifier un nom fichier alternatif à envoyer à
     l'utilisateur.
 download
-    Une valeur boléenne indiquant si les en-têtes doivent être définies pour
+    Une valeur booléenne indiquant si les en-têtes doivent être définies pour
     forcer le téléchargement.
 
 Envoyer une Chaîne de Caractères en Fichier
@@ -605,7 +605,7 @@ Réglage fin du Cache HTTP
 
 Une des façons les meilleures et les plus simples de rendre votre application
 plus rapide est d'utiliser le cache HTTP. vous devez uniquement pour aider les
-clients à décider si ils doivent utiliser une copie de la réponse mise en cache,
+clients à décider s'ils doivent utiliser une copie de la réponse mise en cache,
 en définissant quelques propriétés d'en-têtes comme la date de mise à jour et la
 balise d'entité de réponse :ref:`etag-tag`.
 
@@ -761,7 +761,7 @@ Envoyer des Réponses Non-Modifiées
 .. php:method:: checkNotModified(Request $request)
 
 Compare les en-têtes de cache pour l'objet request avec l'en-tête du cache de
-la response et determine si il peut toujours être considéré comme récent. Si
+la response et determine s'il peut toujours être considéré comme récent. Si
 oui, il supprime le contenu de la réponse et envoie l'en-tête
 `304 Not Modified`::
 

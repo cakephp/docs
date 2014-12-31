@@ -254,7 +254,7 @@ La classe spéciale ``InflectedRoute`` va s'assurer que les paramètres
 .. note::
 
     Les Patrons utilisés pour les éléments de route ne doivent pas contenir
-    de groupes capturés. Si ils le font, le Router ne va pas fonctionner
+    de groupes capturés. S'ils le font, le Router ne va pas fonctionner
     correctement.
 
 Une fois que cette route a été définie, la requête ``/apples/5`` est la même
