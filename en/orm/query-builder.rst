@@ -641,8 +641,7 @@ by clauses without having to rewrite the query in any way. For example, consider
 this query for retrieving article ids and their comments count::
 
     $query = $articles->find();
-    $query->find()
-        ->select(['Articles.id', $query->func()->count('Comments.id')])
+    $query->select(['Articles.id', $query->func()->count('Comments.id')])
         ->matching('Comments')
         ->group(['Articles.id']);
     $total = $query->count();
