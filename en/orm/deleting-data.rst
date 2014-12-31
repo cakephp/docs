@@ -16,13 +16,15 @@ table's delete method::
 
 When deleting entities a few things happen:
 
-1. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
+1. The :ref:`delete rules <application-rules>` will be applied. If the rules
+   fail, deletion will be prevented.
+2. The ``Model.beforeDelete`` event is triggered. If this event is stopped, the
    delete will be aborted and the event's result will be returned.
-2. The entity will be deleted.
-3. All dependent associations will be deleted. If associations are being deleted
+3. The entity will be deleted.
+4. All dependent associations will be deleted. If associations are being deleted
    as entities, additional events will be dispatched.
-4. Any junction table records for BelongsToMany associations will be removed.
-5. The ``Model.afterDelete`` event will be triggered.
+5. Any junction table records for BelongsToMany associations will be removed.
+6. The ``Model.afterDelete`` event will be triggered.
 
 By default all deletes happen within a transaction. You can disable the
 transaction with the atomic option::

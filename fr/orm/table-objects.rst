@@ -157,21 +157,39 @@ Dans les versions précédentes de CakePHP, il y avait un callback ``afterFind``
 ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
 constructeurs d'entity.
 
-beforeValidate
+buildValidator
+---------------
+
+.. php:method:: buildValidator(Event $event, Validator $validator, $name)
+
+The ``Model.buildValidator`` event is fired when ``$name`` validator is created.
+Behaviors, can use this hook to add in validation methods.
+
+buildRules
+----------
+
+.. php:method:: buildRules(Event $event, RulesCheker $rules)
+
+The ``Model.buildRules`` event is fired before after a rules instance has been
+created and the table's ``beforeRules()`` method has been called.
+
+beforeRules
 --------------
 
-.. php:method:: beforeValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
+.. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
-La méthode ``Model.beforeValidate`` est lancée avant qu'une entity ne soit
-validée. En stoppant cet événement, vous pouvez annuler les opérations de
-validate + save.
+The ``Model.beforeRules`` event is fired before an entity has rules applied. By
+stopping this event, you can return the final value of the rules checking
+operation.
 
-afterValidate
--------------
+afterRules
+--------------
 
-.. php:method:: afterValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
+.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
 
-L'événement ``Model.afterValidate`` est lancé après qu'une entity est validée.
+The ``Model.afterRules`` event is fired after an entity has rules applied. By
+stopping this event, you can return the final value of the rules checking
+operation.
 
 beforeSave
 ----------

@@ -291,6 +291,102 @@ dans chacune des entities du tableau::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
+.. _validating-request-data:
+
+Validating Data Before Building Entities
+----------------------------------------
+
+When marshalling data into entities, you can validate data. Validating data
+allows you to check the type, shape and size of data. By default request data
+will be validated before it is converted into entities.
+If any validation rules fail, the returned entity will contain errors, and the
+request data::
+
+    $article = $articles->newEntity($this->request->data);
+    if ($article->errors()) {
+        // Entity failed validation.
+    }
+
+When building an entity with validation enabled the following things happen:
+
+1. The validator object is created.
+2. The ``table`` and ``default`` validation provider are attached.
+3. The named validation method is invoked. For example, ``validationDefault``.
+4. The ``Model.buildValidator`` event will be triggered.
+5. Request data will be validated.
+6. Request data will be type cast into types that match the column types.
+7. Data and errors will be set into the entity.
+
+If you'd like to disable validation when converting request data, set the
+``validate`` option to false::
+
+    $article = $articles->newEntity(
+        $this->request->data,
+        ['validate' => false]
+    );
+
+En plus de désactiver la validation, vous pouvez choisir l'ensemble de règle de
+validation que vous souhaitez appliquer::
+
+    $articles->save($article, ['validate' => 'update']);
+
+Ce qui est au-dessus va appeler la méthode ``validationUpdate`` sur l'instance
+table pour construire les règles requises. Par défaut la méthode
+``validationDefault`` sera utilisée. Un exemple de méthode de validator pour
+notre Table articles serait::
+
+    class ArticlesTable extends Table
+    {
+        public function validationUpdate($validator)
+        {
+            $validator
+                ->add('title', 'notEmpty', [
+                    'rule' => 'notEmpty',
+                    'message' => __('You need to provide a title'),
+                ])
+                ->add('body', 'notEmpty', [
+                    'rule' => 'notEmpty',
+                    'message' => __('A body is required')
+                ]);
+            return $validator;
+        }
+    }
+
+Vous pouvez avoir autant d'ensembles de validation que vous le souhaitez.
+Consultez le :doc:`chapitre sur la validation </core-libraries/validation>`
+pour plus d'informations sur la construction des ensembles de règle de
+validation.
+
+Les règles de validation peuvent utiliser les fonctions définies sur tout
+provider connu. Par défaut, CakePHP définit quelques providers:
+
+1. Les méthodes sur la classe table, ou ses behaviors sont disponible sur
+   le provider ``table``.
+2. Les méthodes sur une classe entity, sont disponibles sur le provider
+   ``entity``.
+3. La classe de :php:class:`~Cake\\Validation\\Validation` du coeur est
+   configurée avec le provider ``default``.
+
+Quand une règle de validation est créée, vous pouvez nommer le provider de cette
+règle. Par exemple, si votre entity a une méthode 'isValidRole', vous pouvez
+l'utiliser comme une règle de validation::
+
+    class UsersTable extends Table
+    {
+
+        public function validationDefault($validator)
+        {
+            $validator
+                ->add('role', 'validRole', [
+                    'rule' => 'isValidRole',
+                    'message' => __('You need to provide a valid role'),
+                    'provider' => 'entity',
+                ]);
+            return $validator;
+        }
+
+    }
+
 Eviter les Attaques d'Assignement de Propriété de Masse
 -------------------------------------------------------
 
@@ -373,7 +469,8 @@ simple dans CakePHP::
     $article->title = 'My new title';
     $articles->save($article);
 
-Lors de la sauvegarde, CakePHP va appliquer vos règles de validation, et
+Lors de la sauvegarde, CakePHP va
+:ref:`appliquer vos règles de validation <application-rules>`, et
 entourer l'opération de sauvegarde dans une transaction de base de données.
 Cela va aussi seulement mettre à jour les propriétés qui ont changé. Le
 ``save()`` ci-dessus va générer le code SQL suivant::
@@ -386,13 +483,14 @@ Si vous avez une nouvelle entity, le code SQL suivant serait généré::
 
 Quand une entity est sauvegardée, voici ce qui se passe:
 
-1. La validation commencera si elle n'est pas désactivée.
-2. La validation va déclencher l'événement ``Model.beforeValidate``. Si
-   l'événement est stoppé, l'opération de sauvegarde va connaitre un échec
-   et retourner ``false``.
-3. La validation sera appliquée. Si la validation échoue, la sauvegarde sera
-   annulée et le save() va retourner ``false``.
-4. L'événement ``Model.afterValidate`` sera déclenché.
+1. La vérification des règles commencera si elle n'est pas désactivée.
+2. La vérification des règles va déclencher l'événement
+   ``Model.beforeRules``. Si l'événement est stoppé, l'opération de
+   sauvegarde va connaitre un échec et retourner ``false``.
+3. Les règles seront vérifiées. Si l'entity est en train d'être créée, les
+   règles ``create`` seront utilisées. Si l'entity est en train d'être mise à
+   jour, les règles ``update`` seront utilisées.
+4. L'événement ``Model.afterRules`` sera déclenché.
 5. L'événement ``Model.beforeSave`` est dispatché. Si il est stoppé, la
    sauvegarde sera annulée, et save() va retourner ``false``.
 6. Les associations parentes sont sauvegardées. Par exemple, toute association
@@ -402,79 +500,20 @@ Quand une entity est sauvegardée, voici ce qui se passe:
    hasMany, hasOne, ou belongsToMany listée sera sauvegardée.
 9. L'événement ``Model.afterSave`` sera dispatché.
 
+Consultez la section :ref:`application-rules` pour plus d'informations sur la
+création et l'utilisation des règles.
+
 .. warning::
 
     Si aucun changement n'est fait à l'entity quand elle est sauvegardée, les
     callbacks ne vont pas être déclenchés car aucune sauvegarde n'est faîte.
 
 La méthode ``save()`` va retourner l'entity modifiée en cas de succès, et
-``false`` en cas d'échec. Vous pouvez désactiver la validation et/ou les
+``false`` en cas d'échec. Vous pouvez désactiver les règles et/ou les
 transactions en utilisant l'argument ``$options`` pendant la sauvegarde::
 
     // Dans un controller ou une méthode de table.
     $articles->save($article, ['validate' => false, 'atomic' => false]);
-
-En plus de désactiver la validation, vous pouvez choisir l'ensemble de règle de
-validation que vous souhaitez appliquer::
-
-    $articles->save($article, ['validate' => 'update']);
-
-Ce qui est au-dessus va appeler la méthode ``validationUpdate`` sur l'instance
-table pour construire les règles requises. Par défaut la méthode
-``validationDefault`` sera utilisée. Un exemple de méthode de validator pour
-notre Table articles serait::
-
-    class ArticlesTable extends Table
-    {
-        public function validationUpdate($validator)
-        {
-            $validator
-                ->add('title', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('You need to provide a title'),
-                ])
-                ->add('body', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('A body is required')
-                ]);
-            return $validator;
-        }
-    }
-
-Vous pouvez avoir autant d'ensembles de validation que vous le souhaitez.
-Consultez le :doc:`chapitre sur la validation </core-libraries/validation>`
-pour plus d'informations sur la construction des ensembles de règle de
-validation.
-
-Les règles de validation peuvent utiliser les fonctions définies sur tout
-provider connu. Par défaut, CakePHP définit quelques providers:
-
-1. Les méthodes sur la classe table, ou ses behaviors sont disponible sur
-   le provider ``table``.
-2. Les méthodes sur une classe entity, sont disponibles sur le provider
-   ``entity``.
-3. La classe de :php:class:`~Cake\\Validation\\Validation` du coeur est
-   configurée avec le provider ``default``.
-
-Quand une règle de validation est créée, vous pouvez nommer le provider de cette
-règle. Par exemple, si votre entity a une méthode 'isValidRole', vous pouvez
-l'utiliser comme une règle de validation::
-
-    class UsersTable extends Table
-    {
-
-        public function validationDefault($validator)
-        {
-            $validator
-                ->add('role', 'validRole', [
-                    'rule' => 'isValidRole',
-                    'message' => __('You need to provide a valid role'),
-                    'provider' => 'entity',
-                ]);
-            return $validator;
-        }
-
-    }
 
 Sauvegarder les Associations
 ----------------------------
@@ -727,6 +766,143 @@ données que vous recevez de l'utilisateur finale est de type correct. Ne pas
 faire correctement la gestion des données complexes entraînera chez des
 utilisateurs mal intentionnés d'être capable de stocker des données qu'ils ne
 pourraient pas stocker normalement.
+
+.. _application-rules:
+
+Applying Application Rules
+==========================
+
+While basic data validation is done when :ref:`request data is converted into
+entities <validating-request-data>`, many applications also have more complex
+validation that should only be applied to after basic validation has completed.
+These types of rules are often referred to as 'domain rules' or 'application
+rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
+before entities are persisted. Some example domain rules are:
+
+* Ensuring email uniqueness
+* State transitions or workflow steps, for example updating an invoice's status.
+* Preventing modification of soft deleted items.
+* Enforcing usage/rate limit caps.
+
+Creating a Rules Checker
+------------------------
+
+Rules checker classes are generally defined by the ``buildRules`` method in your
+table class. Behaviors, and other event subscribers can use the
+``Model.buildRules`` event to augment the rules checker for a given Table
+class::
+
+    // In a table class
+    public function buildRules(RulesChecker $checker) {
+        // Add a rule that is always applied
+        $rules->add(function($entity, $options) {
+            // Return a boolean to indicate pass/fail
+        });
+
+        // Add a rule for create.
+        $rules->addCreate(function ($entity, $options) {
+        });
+
+        // Add a rule for update
+        $rules->addUpdate(function ($entity, $options) {
+        });
+
+        // Add a rule for the deleting.
+        $rules->addDelete(function ($entity, $options) {
+        });
+
+        return $rules;
+    }
+
+Your rules functions can expect to get the Entity being checked, and an array of
+options. The options array will contain ``errorField``, ``message``, and
+``repository``. The ``repository`` option will contain the table class the rules
+are attached to. Because rules accept any ``callable``, you can also use
+instance functions::
+
+    $rules->addCreate([$this, 'uniqueEmail']);
+
+or callable classes::
+
+    $rules->addCreate(new IsUnique(['email']));
+
+When adding rules you can define the field the rule is for, and the error
+message as options::
+
+    $rules->add([$this, 'isValidState'], [
+        'errorField' => 'status',
+        'message' => 'This invoice cannot be moved to that status.'
+    ]);
+
+Creating Unique Field Rules
+---------------------------
+
+Because unique rules are quite common, CakePHP includes a simple Rule class that
+allows you to easily define unique field sets::
+
+    use Cake\ORM\Rule\IsUnique;
+
+    // A single field.
+    $rules->add(new IsUnique(['email']));
+
+    // A list of fields
+    $rules->add(new IsUnique(['username', 'account_id']));
+
+Foreign Key Rules
+-----------------
+
+While you could rely on database errors to enforce constraints, using rules code
+can help provide a nicer user experience. Because of this CakePHP includes an
+``ExistsIn`` rule class::
+
+    // A single field.
+    $rules->add($rules->existsIn('article_id', 'articles'));
+
+    // Multiple keys, useful for composite primary keys.
+    $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
+
+Using Entity Methods as Rules
+-----------------------------
+
+You may want to use entity methods as domain rules::
+
+    $rules->add(function ($entity, $options) {
+        return $entity->isOkLooking();
+    });
+
+Creating Custom Rule objects
+----------------------------
+
+If your application has rules that are commonly reused, it is helpful to package
+those rules into re-usable classes::
+
+    // in src/Model/Rule/CustomRule.php
+    namespace App\Model\Rule;
+
+    use Cake\Datasource\EntityInterface;
+
+    class CustomRule {
+        public function __invoke(EntityInterface $entity, array $options) {
+            // Do work
+            return false;
+        }
+    }
+
+
+    // Add the custom rule
+    use App\Model\Rule\CustomRule;
+
+    $rules->add(new CustomRule(...));
+
+By creating custom rule classes you can keep your code DRY and make your domain
+rules easy to test.
+
+Disabling Rules
+---------------
+
+When saving an entity, you can disable the rules if necessary::
+
+    $articles->save($article, ['checkRules' => false]);
 
 Mises à Jour en Masse
 =====================
