@@ -213,9 +213,9 @@ paths where CakePHP will look for classes::
 Core Configuration
 ==================
 
-Each application in CakePHP contains a configuration file to
-determine CakePHP's internal behavior.
-``app/Config/core.php``. This file is a collection of Configure class
+Each application in CakePHP contains a configuration file,
+``app/Config/core.php``, to determine CakePHP's internal behavior.
+This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
 variables, you'll need to be familiar with :php:class:`Configure`, CakePHP's
@@ -415,7 +415,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: The key to write, can use be a :term:`dot notation` value.
+    :param string $key: The key to write, can be a :term:`dot notation` value.
     :param mixed $value: The value to store.
 
     Use ``write()`` to store data in the application's configuration::
@@ -445,7 +445,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: The key to read, can use be a :term:`dot notation` value
+    :param string $key: The key to read, can be a :term:`dot notation` value
 
     Used to read configuration data from the application. Defaults to
     CakePHP's important debug value. If a key is supplied, the data is
@@ -474,7 +474,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: The key to delete, can use be a :term:`dot notation` value
+    :param string $key: The key to delete, can be a :term:`dot notation` value
 
     Used to delete information from the application's configuration::
 
@@ -527,7 +527,7 @@ using :php:meth:`Configure::config()`::
 You can have multiple readers attached to Configure, each reading
 different kinds of configuration files, or reading from
 different types of sources. You can interact with attached readers
-using a few other methods on Configure. To see check which reader
+using a few other methods on Configure. To see which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
     // Get the array of aliases for attached readers.
@@ -708,7 +708,7 @@ that the resource named ``$key`` contains.
 
     Thrown when errors occur when loading/storing/restoring configuration data.
     :php:interface:`ConfigReaderInterface` implementations should throw this
-    error when they encounter an error.
+    exception when they encounter an error.
 
 Built-in Configuration readers
 ------------------------------
