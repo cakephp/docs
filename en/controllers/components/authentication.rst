@@ -242,7 +242,7 @@ Creating Custom Authentication Objects
 Because authentication objects are pluggable, you can create custom
 authentication objects in your application or plugins. If for example
 you wanted to create an OpenID authentication object. In
-``app/Auth/OpenidAuthenticate.php`` you could put the following::
+``src/Auth/OpenidAuthenticate.php`` you could put the following::
 
     use Cake\Auth\BaseAuthenticate;
 
