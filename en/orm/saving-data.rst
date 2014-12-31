@@ -759,7 +759,7 @@ table class. Behaviors and other event subscribers can use the
 class::
 
     // In a table class
-    public function buildRules(RulesChecker $checker) {
+    public function buildRules(RulesChecker $rules) {
         // Add a rule that is applied for create and update operations
         $rules->add(function ($entity, $options) {
             // Return a boolean to indicate pass/fail
