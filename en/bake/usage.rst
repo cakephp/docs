@@ -90,11 +90,12 @@ Bake themes
 ===========
 
 The theme option is common to all bake commands, and allows changing the bake
-template files used when baking. Any loaded plugin which contains a
-``src/Template/Bake`` folder is automatically detected by bake as an available
-bake theme, and will be displayed in the help output. For example, should a
-plugin exist named ``Special`` implementing a bake theme the help output would
-show::
+template files used when baking. To generate your own templates, you must create
+a plugin and then copy the contents of ``plugins/Bake/src/Template/Bake``.
+Any loaded plugin which contains a ``src/Template/Bake`` folder is automatically
+detected by bake as an available bake theme, and will be displayed in the help
+output. For example, should a plugin exist named ``Special`` implementing a bake
+theme the help output would show::
 
     --theme, -t       The theme to use when baking code. (choices: Special)
 
