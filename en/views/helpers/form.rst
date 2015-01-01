@@ -1401,7 +1401,7 @@ of defaults. You may need to customize the templates to suit your application.
 To change the templates when the helper is loaded you can set the ``templates``
 option when including the helper in your controller::
 
-    // In a controller
+    // In a View class
     $this->loadHelper('Form', [
         'templates' => 'app_form.php',
     ]);
@@ -1409,6 +1409,7 @@ option when including the helper in your controller::
 This would load the tags in ``config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
+    // in config/app_form.php
     $config = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
@@ -1599,32 +1600,29 @@ widget could be built.
 Using Widgets
 -------------
 
-You can load custom widgets either in the ``$helpers`` array or using the
-``addWidget()`` method. In your helpers array, widgets are defined as
+You can load custom widgets when loading FormHelper or by using the
+``addWidget()`` method. When loading FormHelper, widgets are defined as
 a setting::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => ['Autocomplete']
-            ]
+    // In View class
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => ['Autocomplete']
         ]
-    ];
+    ]);
 
 If your widget requires other widgets, you can have FormHelper populate those
 dependencies by declaring them::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => [
-                    'App\View\Widget\AutocompleteWidget',
-                    'text',
-                    'label'
-                ]
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => [
+                'App\View\Widget\AutocompleteWidget',
+                'text',
+                'label'
             ]
         ]
-    ];
+    ]);
 
 In the above example, the autocomplete widget would depend on the ``text`` and
 ``label`` widgets. If your widget needs access to the View, you should use the
