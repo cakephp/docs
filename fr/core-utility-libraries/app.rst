@@ -339,7 +339,7 @@ Pour charger les classes se trouvant dans des sous-répertoires, vous devrez
 ajouter ces chemins avec ``App::build()``::
 
     // Charge la classe ClassInSomePackage dans app/Vendor/SomePackage/ClassInSomePackage.php
-    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
+    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
     App::uses('ClassInSomePackage', 'Vendor');
 
 Vos fichiers vendor ne suivent peut-être pas les conventions, ont une classe
