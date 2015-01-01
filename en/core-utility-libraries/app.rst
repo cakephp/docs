@@ -320,7 +320,7 @@ with ``App::build()``::
 
     // Load the class ClassInSomePackage in
     // app/Vendor/SomePackage/ClassInSomePackage.php
-    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
+    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
     App::uses('ClassInSomePackage', 'Vendor');
 
 Your vendor files may not follow conventions, have a class that differs from
