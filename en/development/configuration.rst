@@ -231,10 +231,11 @@ how it affects your CakePHP application.
 
 debug
     Changes CakePHP debugging output.
-    0 = Production mode. No output.
-    1 = Show errors and warnings.
-    2 = Show errors, warnings, and SQL. [SQL log is only shown when you
-    add $this->element('sql\_dump') to your view or layout.]
+
+    * 0 = Production mode. No output.
+    * 1 = Show errors and warnings.
+    * 2 = Show errors, warnings, and SQL. [SQL log is only shown when you
+      add $this->element('sql\_dump') to your view or layout.]
 
 Error
     Configure the Error handler used to handle errors for your application.
@@ -694,7 +695,7 @@ that the resource named ``$key`` contains.
     This method should load/parse the configuration data identified by ``$key``
     and return an array of data in the file.
 
-.. php:method:: dump($key)
+.. php:method:: dump($key, $data)
 
     :param string $key: The identifier to write to.
     :param array $data: The data to dump.
@@ -734,14 +735,14 @@ Built-in Configuration readers
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+    Load your custom configuration file by inserting the following in app/Config/bootstrap.php::
 
         Configure::load('customConfig');
 
 .. php:class:: IniReader
 
     Allows you to read configuration files that are stored as plain .ini files.
-    The ini files must be compatible with php's ``parse_ini_file`` function, and
+    The ini files must be compatible with PHP's ``parse_ini_file`` function, and
     benefit from the following improvements
 
     * dot separated values are expanded into arrays.
