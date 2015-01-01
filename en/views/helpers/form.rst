@@ -1401,11 +1401,10 @@ of defaults. You may need to customize the templates to suit your application.
 To change the templates when the helper is loaded you can set the ``templates``
 option when including the helper in your controller::
 
-    public $helpers = [
-        'Form' => [
-            'templates' => 'app_form.php',
-        ]
-    ];
+    // In a controller
+    $this->loadHelper('Form', [
+        'templates' => 'app_form.php',
+    ]);
 
 This would load the tags in ``config/app_form.php``. This file should
 contain an array of templates indexed by name::
