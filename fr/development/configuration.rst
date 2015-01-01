@@ -136,24 +136,78 @@ En utilisant :php:meth:`App::build()` dans bootstrap.php nous pouvons définir
 des chemins supplémentaires où CakePHP va recherchez les classes::
 
     App::build(array(
-        'Model'                     => array('/path/to/models', '/next/path/to/models'),
-        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
-        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
-        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
-        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
-        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
-        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
-        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
-        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
-        'View'                      => array('/path/to/views', '/next/path/to/views'),
-        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
-        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
-        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
-        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
-        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
-        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
-        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
-        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
+        'Model' => array(
+            '/path/to/models',
+            '/next/path/to/models'
+        ),
+        'Model/Behavior' => array(
+            '/path/to/behaviors',
+            '/next/path/to/behaviors'
+        ),
+        'Model/Datasource' => array(
+            '/path/to/datasources',
+            '/next/path/to/datasources'
+        ),
+        'Model/Datasource/Database' => array(
+            '/path/to/databases',
+            '/next/path/to/database'
+        ),
+        'Model/Datasource/Session' => array(
+            '/path/to/sessions',
+            '/next/path/to/sessions'
+        ),
+        'Controller' => array(
+            '/path/to/controllers',
+            '/next/path/to/controllers'
+        ),
+        'Controller/Component' => array(
+            '/path/to/components',
+            '/next/path/to/components'
+        ),
+        'Controller/Component/Auth' => array(
+            '/path/to/auths',
+            '/next/path/to/auths'
+        ),
+        'Controller/Component/Acl' => array(
+            '/path/to/acls',
+            '/next/path/to/acls'
+        ),
+        'View' => array(
+            '/path/to/views',
+            '/next/path/to/views'
+        ),
+        'View/Helper' => array(
+            '/path/to/helpers',
+            '/next/path/to/helpers'
+        ),
+        'Console' => array(
+            '/path/to/consoles',
+            '/next/path/to/consoles'
+        ),
+        'Console/Command' => array(
+            '/path/to/commands',
+            '/next/path/to/commands'
+        ),
+        'Console/Command/Task' => array(
+            '/path/to/tasks',
+            '/next/path/to/tasks'
+        ),
+        'Lib' => array(
+            '/path/to/libs',
+            '/next/path/to/libs'
+        ),
+        'Locale' => array(
+            '/path/to/locales',
+            '/next/path/to/locales'
+        ),
+        'Vendor' => array(
+            '/path/to/vendors',
+            '/next/path/to/vendors'
+        ),
+        'Plugin' => array(
+            '/path/to/plugins',
+            '/next/path/to/plugins'
+        ),
     ));
 
 .. note::
@@ -185,14 +239,15 @@ variable et comment elle affecte votre application CakePHP.
 
 debug
     Change la sortie de debug de CakePHP.
-    0 = mode Production. Pas de sortie.
-    1 = Montre les erreurs et les avertissements.
-    2 = Montre les erreurs, avertissements, et le SQL. [le log SQL est
-    seulement montré quand vous ajoutez $this->element('sql\_dump')
-    à votre vue ou votre layout.]
+
+    * 0 = mode Production. Pas de sortie.
+    * 1 = Montre les erreurs et les avertissements.
+    * 2 = Montre les erreurs, avertissements, et le SQL. [le log SQL est
+      seulement montré quand vous ajoutez $this->element('sql\_dump')
+      à votre vue ou votre layout.]
 
 Error
-    Configure le getionnaire d'Error handler utilisé pour gérer les erreurs
+    Configure le gestionnaire d'Error handler utilisé pour gérer les erreurs
     pour votre application.
     Par défaut :php:meth:`ErrorHandler::handleError()` est utilisé. Cela
     affichera les erreurs en utilisant :php:class:`Debugger`, quand debug > 0
@@ -684,7 +739,7 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
     identifiées par ``$key`` et retourner un tableau de données dans le
     fichier.
 
-.. php:method:: dump($key)
+.. php:method:: dump($key, $data)
 
     :param string $key: L'identifieur dans lequel écrire.
     :param array $data: La donnée à supprimer.
@@ -700,7 +755,7 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
     Lancé quand les erreurs apparaissent quand le
     chargement/stockage/restauration des données de configuration.
     Les implémentations de :php:interface:`ConfigReaderInterface` devraient
-    lancer cette erreur quand elles rencontrent une erreur.
+    lancer cette exception quand elles rencontrent une erreur.
 
 Readers de Configuration intégrés
 ---------------------------------
@@ -729,7 +784,7 @@ Readers de Configuration intégrés
     :php:exc:`ConfigureException`.
 
     Charger votre fichier de configuration personnalisé en insérant ce qui suit
-    dans app/Config/bootstrap.php:
+    dans app/Config/bootstrap.php::
 
         Configure::load('customConfig');
 
@@ -737,7 +792,7 @@ Readers de Configuration intégrés
 
     Vous permet de lire les fichiers de configuration qui sont stockés en
     fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
-    fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
+    fonction PHP ``parse_ini_file``, et bénéficie des améliorations suivantes:
 
     * Les valeurs séparées par des points sont étendues dans les tableaux.
     * Les valeurs de la famille des boléens comme 'on' et 'off' sont converties
