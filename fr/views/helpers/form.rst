@@ -1651,31 +1651,29 @@ un widget personnalisé.
 Utiliser les Widgets
 --------------------
 
-Vous pouver charger des widgets personnalisés dans le tableau ``$helpers`` ou
-en utilisant la méthode ``addWidget()``. Dans votre tableau helpers, les widgets
-sont définis comme des paramètres::
+Vous pouvez charger des widgets personnalisés lors du chargement FormHelper ou
+en utilisant la méthode ``addWidget()``. Lors du changement FormHelper, les
+widgets sont définis comme des paramètres::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => ['Autocomplete']
+    // In View class
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => ['Autocomplete']
+        ]
+    ]);
+
+Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces
+dépendances lorsqu'elles sont déclaréees ::
+
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => [
+                'App\View\Widget\AutocompleteWidget',
+                'text',
+                'label'
             ]
         ]
-    ];
-
-Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces dépendances lorsqu'elles sont déclaréees ::
-
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => [
-                    'App\View\Widget\AutocompleteWidget',
-                    'text',
-                    'label'
-                ]
-            ]
-        ]
-    ];
+    ]);
 
 Dans l'exemple ci-dessus, le widget autocomplete widget dépendrait des widgets
 ``text`` et ``label``.Si votre widget doit accéder à la View, vous devrez
