@@ -13,6 +13,7 @@ Contents
    models
    plugins
    development
+   tutorials-and-examples
    contributing
 
 .. todolist::
