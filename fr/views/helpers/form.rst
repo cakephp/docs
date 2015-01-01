@@ -1651,11 +1651,11 @@ un widget personnalisé.
 Utiliser les Widgets
 --------------------
 
-Vous pouvez charger des widgets personnalisés lors du chargement FormHelper ou
-en utilisant la méthode ``addWidget()``. Lors du changement FormHelper, les
-widgets sont définis comme des paramètres::
+Vous pouvez charger des widgets personnalisés lors du chargement du FormHelper
+ou en utilisant la méthode ``addWidget()``. Lors du changement du FormHelper,
+les widgets sont définis comme des paramètres::
 
-    // In View class
+    // Dans une classe de View
     $this->loadHelper('Form', [
         'widgets' => [
             'autocomplete' => ['Autocomplete']
