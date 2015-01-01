@@ -385,7 +385,7 @@ CakePHP 的 Configure 类可以用来保存和读取应用程序或运行时相�
             )
         );
 
-    可以使用 ``Configure:Cwrite('debug', $int)`` 来动态切换调试和生产模式。这对
+    可以使用 ``Configure::write('debug', $int)`` 来动态切换调试和生产模式。这对
     与 AMF 或 SOAP 的交互尤其方便，因为调试信息回引起解析的问题。
 
 .. php:staticmethod:: read($key = null)
