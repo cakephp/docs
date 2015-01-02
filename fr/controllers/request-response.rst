@@ -161,7 +161,7 @@ décodage, vous pouvez recevoir le contenu dans un format déserializé::
     // Obtenir les données encodées JSON soumises par une action PUT/POST
     $data = $this->request->input('json_decode');
 
-Quelques méthodes de desérialization requièreent des paramètres
+Quelques méthodes de desérialization requièrent des paramètres
 supplémentaires quand elles sont appelées, comme le paramètre
 de type tableau de ``json_decode``. Si vous voulez convertir
 du XML en objet DOMDocument,:php:meth:`~Cake\\Network\\Request::input()` 
@@ -395,7 +395,7 @@ Response
 :php:class:`Cake\\Network\\Response` est la classe de réponse par défaut dans
 CakePHP. Elle encapsule un nombre de fonctionnalités et de caractéristiques
 pour la génération de réponses HTTP dans votre application. Elle aide aussi à
-tester puisqu'elle peut être rejetée/écrasée, vous permettant d'inspecter les
+tester des objets factices (mocks/stubs), vous permettant d'inspecter les 
 en-têtes qui vont être envoyés.
 :php:class:`Cake\\Network\\Request`, :php:class:`Cake\\Network\\Response`
 consolide un certain nombre de méthodes qu'on pouvait trouver avant dans
@@ -778,7 +778,7 @@ Response et les Tests
 ---------------------
 
 La classe ``Response`` aide à produire les controllers et component de
-test facilement. En ayant un seul endroit pour rejeté/supprimé les en-têtes, vous
+test facilement. En ayant un seul endroit pour les en-têtes factices, vous
 pouvez tester plus facilement les controllers et les components::
 
     public function testSomething()
@@ -789,7 +789,7 @@ pouvez tester plus facilement les controllers et les components::
     }
 
 De plus, vous pouvez exécuter les tests à partir de la ligne de commande plus
-facilement, comme vous pouvez utiliser mocks('rejet') pour éviter les erreurs
+facilement, comme vous pouvez utiliser les objects factices ('mocks') pour éviter les erreurs
 'd'envois d'en-têtes' qui peuvent arriver en essayant de configurer les
 en-têtes dans CLI.
 
