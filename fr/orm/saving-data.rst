@@ -144,9 +144,9 @@ Fusionner les Données de Request dans des Entities
 --------------------------------------------------
 
 Afin de mettre à jour les entities, vous pouvez choisir d'appliquer des données
-de request directement dans une entity existante. Ceci a le désavantage que
-seuls les champs qui changent réellement seront sauvegardés, as opposed
-to sending all fields to the database to be persisted. Vous pouvez fusionner
+de request directement dans une entity existante. Ceci a l'avantage que seuls les 
+champs qui changent réellement seront sauvegardés, au lieu d'envoyer tous les champs
+à la base de donnée, même ceux qui sont identiques. Vous pouvez fusionner
 un tableau de données brutes dans une entity existante en utilisant la méthode
 ``patchEntity``::
 
