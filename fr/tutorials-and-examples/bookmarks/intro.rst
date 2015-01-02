@@ -86,7 +86,7 @@ capable de se connecter à votre base de données. Si ce n'est pas le cas, vous
 devrez installer des extensions PHP supplémentaires ou définir des permissions de
 répertoire.
 
-Créer la base de données
+Créer la Base de Données
 ========================
 
 Ensuite, configurons la base de données pour notre application de bookmarking.
@@ -142,8 +142,8 @@ mieux contrôler CakePHP et éviter d'avoir à configurer le framework. CakePHP 
 assez flexible pour s'accommoder de tout schéma de base de données, mais
 suivre les conventions va vous faire gagner du temps.
 
-Configuration de la base de données
-===================================
+Configuration de Base de Données
+================================
 
 Ensuite, indiquons à CakePHP où se trouve notre base de données et comment
 s'y connecter.
@@ -206,7 +206,7 @@ des accès aux données vers les tables de la base de données de votre
 application. Une fois que vous avez la liste des bookmarks, ajoutez quelques
 users, bookmarks, et tags.
 
-Ajouter un hashage de mot de passe
+Ajouter un Hashage de Mot de Passe
 ==================================
 
 Quand vous créez vos users, vous avez probablement remarqué que les mots de
