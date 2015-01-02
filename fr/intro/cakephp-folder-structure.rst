@@ -22,7 +22,7 @@ Vous remarquerez quelques dossiers principaux:
   que vous placerez les fichiers de votre application.
 - Le dossier *config* contient les (quelques) fichiers de
   :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
-  connection à la Base de Données, le bootstrapping, les fichiers de
+  connexion à la base de données, le bootstrapping, les fichiers de
   configuration du cœur et consorts doivent être stockés ici.
 - Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
