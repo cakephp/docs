@@ -53,7 +53,7 @@ key
     La clé de chiffrement utilisé quand les cookies chiffrés sont activés. Par
     défaut à Security.salt.
 httpOnly
-    Défini à ``true`` pour ne faire que des cookies HTTP. Les Cookies qui sont 
+    Défini à ``true`` pour ne faire que des cookies HTTP. Les Cookies qui sont
     HTTPOnly ne sont pas accessible en JavaScript. Par défaut à ``false``.
 encryption
     Le type de chiffrement à utiliser. Par défaut à 'aes'. Peut aussi être
@@ -85,8 +85,8 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
         );
 
     Toutes les valeurs dans le cookie sont chiffrées avec AES par défaut. Si
-    vous voulez stocker les valeurs en texte, assure-vous de configurer l'espace
-    de la clé::
+    vous voulez stocker les valeurs en texte, assurez-vous de configurer
+    l'espace de la clé::
 
         $this->Cookie->configKey('User', 'encryption', false);
 
