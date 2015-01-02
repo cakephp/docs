@@ -7,7 +7,7 @@ basique de bookmarking. Dans ce chapitre, nous ajouterons l'authentification
 et nous allons restreindre les bookmarks pour que chaque utilisateur puisse
 voir/modifier seulement ceux qui lui appartiennent.
 
-Ajouter la connexion
+Ajouter la Connexion
 ====================
 
 Dans CakePHP, l'authentification est gérée par les :doc:`/controllers/components`.
@@ -94,7 +94,7 @@ hashé.
 Vous devriez maintenant pouvoir vous connecter. Si ce n'est pas le cas,
 assurez-vous que vous utilisez un utilisateur qui a un mot de passe hashé.
 
-Ajouter la déconnexion
+Ajouter la Déconnexion
 ======================
 
 Maintenant que les personnes peuvent se connecter, vous voudrez aussi
@@ -110,7 +110,7 @@ probablement fournir un moyen de se déconnecter. Encore une fois, dans
 Maintenant vous pouvez visiter ``/users/logout`` pour vous déconnecter et
 être renvoyé vers la page de connexion.
 
-Permettre de s'enregistrer
+Permettre de s'Enregistrer
 ==========================
 
 Si vous n'êtes pas connecté et que vous essayez de visiter ``/users/add`` vous
@@ -130,7 +130,7 @@ d'un utilisateur (view), ni de liste d'utilisateurs (index) dans ce tutoriel
 donc ils ne fonctionneront pas puisque ``AuthComponent`` va vous refuser
 l'accès pour ces actions de controller.
 
-Restreindre l'accès aux Bookmarks
+Restreindre l'Accès aux Bookmarks
 =================================
 
 Maintenant que les utilisateurs peuvent se connecter, nous voulons limiter
@@ -214,7 +214,7 @@ venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions cel
 
 Vous devriez maintenant voir les messages d'erreur d'autorisation.
 
-Régler la vue de liste et les formulaires
+Régler la Vue de Liste et les Formulaires
 =========================================
 
 Alors que view et delete fonctionnent, edit, add et index ont quelques
@@ -267,7 +267,7 @@ Votre action edit devrait ressembler à ceci::
         $this->set(compact('bookmark', 'tags'));
     }
 
-Vue de liste
+Vue de Liste
 ------------
 
 Maintenant nous devons afficher les bookmarks pour l'utilisateur actuellement
@@ -288,7 +288,7 @@ Nous devrions aussi mettre à jour l'action ``tags()`` et la méthode finder
 liée, mais nous vous laisserons ceci en exercice que vous pouvez faire
 vous-même.
 
-Améliorer l'experience de Tag
+Améliorer l'Experience de Tag
 =============================
 
 Actuellement, ajouter des nouveaux tags est un processus difficile, puisque
@@ -297,7 +297,7 @@ nous pouvons améliorer l'UI de sélection de tag en utilisant un champ de texte
 séparé par des virgules. Cela donnera une meilleure expérience à nos
 utilisateurs, et utilisera quelques unes des super fonctionnalités de l'ORM.
 
-Ajouter un champ Computed
+Ajouter un Champ Computed
 -------------------------
 
 Comme nous voulons un accès simple vers les tags formatés pour une entity, nous
@@ -339,7 +339,7 @@ la propriété ``_accessible`` comme ceci::
         'tag_string' => true,
     ];
 
-Mettre à jour les vues
+Mettre à Jour les Vues
 ----------------------
 
 Avec l'entity mise à jour, nous pouvons ajouter un nouvel input pour nos tags.
@@ -348,7 +348,7 @@ qui suit::
 
     <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
 
-Persister la chaîne Tag
+Persister la Chaîne Tag
 -----------------------
 
 Maintenant que nous pouvons voir les tags existants en chaîne, nous voudrions
