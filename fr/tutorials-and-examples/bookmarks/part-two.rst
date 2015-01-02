@@ -10,7 +10,7 @@ voir/modifier seulement ceux qui lui appartiennent.
 Ajouter la Connexion
 ====================
 
-Dans CakePHP, l'authentification est gérée par :doc:`/controllers/components`.
+Dans CakePHP, l'authentification est gérée par les :doc:`/controllers/components`.
 Les components peuvent être imaginés comme des façons de créer des parties
 réutilisables de code du controller pour une fonctionnalité spécifique ou
 un concept. Les components peuvent aussi se lancer dans le cycle de vie
@@ -51,11 +51,11 @@ AuthComponent dans notre AppController::
         }
     }
 
-Nous avons seulement dit à CakePHP que nous souhaitions charger les
+Nous avons seulement indiqué à CakePHP que nous souhaitions charger les
 components ``Flash`` et ``Auth``. En plus, nous avons personnalisé la
 configuration de AuthComponent, puisque notre table users utilise ``email``
 comme username. Maintenant, si vous tapez n'importe quelle URL, vous serez
-envoyé vers ``/users/login``, qui vous montrera une page d'erreur puisque
+renvoyé vers ``/users/login``, qui vous montrera une page d'erreur puisque
 nous n'avons pas encore écrit ce code. Créons donc l'action login::
 
     // Dans src/Controller/UsersController.php
@@ -88,7 +88,7 @@ hashé.
 .. note::
 
     Si aucun de vos utilisateurs n'a de mot de passe hashé, commentez la ligne
-    ``loadComponent('Auth')``. Puis allez modifier l'utilisateur, sauvegardez
+    ``loadComponent('Auth')``. Puis allez modifier l'utilisateur, créez-
     lui un nouveau mot de passe.
 
 Vous devriez maintenant pouvoir vous connecter. Si ce n'est pas le cas,
@@ -115,14 +115,14 @@ Permettre de s'Enregistrer
 
 Si vous n'êtes pas connecté et que vous essayez de visiter ``/users/add`` vous
 serez renvoyés vers la page de connexion. Nous devrions régler cela puisque nous
-voulons que les gens s'inscrivent à notre application. Dans ``UsersController``,
-ajotez ce qui suit::
+voulons que les utilisateurs s'inscrivent à notre application. Dans ``UsersController``,
+ajoutez ce qui suit::
 
     public function beforeFilter(\Cake\Event\Event $event) {
         $this->Auth->allow('add');
     }
 
-Ce qui est au-dessus dit à ``AuthComponent`` que l'action ``add`` *ne* nécessite
+Ce qui est au-dessus indique à ``AuthComponent`` que l'action ``add`` *ne* nécessite
 *pas* d'authentification ou d'autorisation. Vous pouvez prendre le temps de
 nettoyer ``Users/add.ctp`` et de retirer les liens, ou continuez vers la
 prochaine section. Nous ne ferons pas de fichier d'édition (edit) ou de vue
@@ -134,8 +134,8 @@ Restreindre l'Accès aux Bookmarks
 =================================
 
 Maintenant que les utilisateurs peuvent se connecter, nous voulons limiter
-les bookmarks qu'ils peuvent voir à ceux qu'ils ont créés. Nous allons faire
-ceci en utilisant un adaptateur 'authorization'. Puisque nos besoins sont
+les bookmarks qu'ils peuvent voir à ceux qu'ils ont créés. Nous allons le faire
+en utilisant un adaptateur 'authorization'. Puisque nos besoins sont
 assez simples, nous pouvons écrire quelques lignes de code simple dans notre
 ``BookmarksController``. Mais avant de le faire, nous voulons dire à
 AuthComponent comment notre application va autoriser les actions. Dans notre
@@ -146,7 +146,7 @@ AuthComponent comment notre application va autoriser les actions. Dans notre
         return false;
     }
 
-Aussi, ajoutez ce qui suit dans la configuration de ``Auth`` dans
+Ajoutez aussi ce qui suit dans la configuration de ``Auth`` dans
 ``AppController``::
 
     'authorize' => 'Controller',
@@ -206,7 +206,7 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
 
 Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark
 qui ne vous appartient pas, vous devriez être redirigé vers la page d'où vous
-venez. Cependant, il n'y a pas de message affiché, donc rectifions ensuite cela::
+venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions cela::
 
     // Dans src/Template/Layout/default.ctp
     // Sous le message flash existant.
@@ -225,7 +225,7 @@ problèmes:
 #. La page de liste montre les bookmarks des autres utilisateurs.
 
 Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')``
-de ``src/Template/Bookmarks/add.ctp``. Avec ceci retiré, nous allons aussi
+de ``src/Template/Bookmarks/add.ctp``. Une fois retiré, nous allons aussi
 mettre à jour la méthode add pour ressembler à ceci::
 
     public function add()
@@ -244,9 +244,9 @@ mettre à jour la méthode add pour ressembler à ceci::
     }
 
 En définissant la propriété entity avec les données de session, nous retirons
-la possibilité que l'utilisateur puisse modifier de quel utilisateur un
-bookmark provient. Nous ferons la même chose pour le formulaire et l'action
-edit. Votre action edit devrait ressembler à ceci::
+la possibilité que l'utilisateur puisse modifier l'auteur d'un bookmark. 
+Nous ferons la même chose pour le formulaire et l'action edit. 
+Votre action edit devrait ressembler à ceci::
 
     public function edit($id = null)
     {
@@ -270,8 +270,8 @@ edit. Votre action edit devrait ressembler à ceci::
 Vue de Liste
 ------------
 
-Maintenant nous devons montrer les bookmarks pour l'utilisateur actuellement
-connecté. Nous pouvons faire cela en mettant à jour l'appel à ``paginate()``.
+Maintenant nous devons afficher les bookmarks pour l'utilisateur actuellement
+connecté. Nous pouvons le faire en mettant à jour l'appel à ``paginate()``.
 Faites en sorte que votre action index() ressemble à ceci::
 
     public function index()
@@ -291,7 +291,7 @@ vous-même.
 Améliorer l'Experience de Tag
 =============================
 
-Actuellement, ajoutez des nouveaux tags est un processus difficile, puisque
+Actuellement, ajouter des nouveaux tags est un processus difficile, puisque
 ``TagsController`` interdit tous les accès. Plutôt que de permettre l'accès,
 nous pouvons améliorer l'UI de sélection de tag en utilisant un champ de texte
 séparé par des virgules. Cela donnera une meilleure expérience à nos
@@ -351,7 +351,7 @@ qui suit::
 Persister la Chaîne Tag
 -----------------------
 
-Maintenant que nous pouvons voir les tags existant en chaîne, nous voudrons
+Maintenant que nous pouvons voir les tags existants en chaîne, nous voudrions
 aussi sauvegarder les données. Comme nous marquons les ``tag_string``
 accessibles, l'ORM va copier ces données à partir de la requête dans notre
 entity. Nous pouvons utiliser une méthode hook ``beforeSave`` pour
@@ -395,10 +395,10 @@ Alors que ce code est un peu plus compliqué que ce que nous avons déjà fait,
 il permet de montrer la puissance de l'ORM de CakePHP. Vous pouvez facilement
 manipuler les résultats de requête en utilisant
 les méthodes des :doc:`/core-libraries/collections`, et gérer les
-scenariis où vous créez les entities à la volée avec facilité.
+scenariis où vous créer les entities à la volée avec facilité.
 
-Wrapping Up
-===========
+Récapitulatif
+=============
 
 Nous avons élargi notre application de bookmarking pour gérer les scenariis
 de contrôle d'authentification et d'autorisation/d'accès basique. Nous avons
