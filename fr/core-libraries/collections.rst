@@ -502,13 +502,13 @@ Two parameters are required for this function. The first one is the property
 representing the item identifier. The second parameter is the name of the
 property representing the identifier for the parent item::
 
-    $items new Collection([
+    $collection = new Collection([
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
-        ['id' => 6, 'parent_id' => null], 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
     ]);
 
     $collection->nest('id', 'parent_id')->toArray();
@@ -555,7 +555,7 @@ collection.
 Taking the input the nested collection built in the previous example, we can
 flatten it::
 
-    $nested->listNested()->toArray();
+    $collection->listNested()->toArray();
 
     // Returns
     [
@@ -570,8 +570,9 @@ flatten it::
 By default, the tree is traversed from the root to the leaves. You can also
 instruct it to only return the leaf elements in the tree::
 
-    $nested->listNested()->toArray();
-
+    $collection->listNested()->toArray();
+!!?? How did you get the following result? I tried $collection->listNested('leaves')->toArray(); without success!
+Are you sure that 'id' => 2 is supposed to desappear?
     // Returns
     [
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
