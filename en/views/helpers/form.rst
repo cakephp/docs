@@ -1546,6 +1546,8 @@ parameter::
 
     echo $this->Form->allInputs(['password' => false]);
 
+.. _associated-form-inputs:
+
 Creating Inputs for Associated Data
 ===================================
 
@@ -1580,6 +1582,10 @@ create the following inputs::
     echo $this->Form->input('tags.0.name');
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
+
+    // Inputs for the joint table (articles_tags)
+    echo $this->Form->input('tags.0._joinData.starred');
+    echo $this->Form->input('tags.1._joinData.starred');
 
     // Comments inputs (hasMany)
     echo $this->Form->input('comments.0.id');
