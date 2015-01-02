@@ -49,7 +49,7 @@ Le Dossier Src
 ==============
 
 Le répertoire *src* de CakePHP est l'endroit où vous réaliserez la majorité
-du développement de votre application. Regardons d'un peuplus près les dossiers
+du développement de votre application. Regardons d'un peu plus près les dossiers
 à l'intérieur de *src*.
 
 Console
