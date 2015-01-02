@@ -294,7 +294,7 @@ de CakePHP. Intégrons maintenant la méthode manquante. Dans
         $this->set(compact('bookmarks', 'tags'));
     }
 
-Créer la méthode Finder
+Créer la Méthode Finder
 -----------------------
 
 Dans CakePHP, nous aimons garder les actions de notre controller légères, et
@@ -323,7 +323,7 @@ réutilisable de vos requêtes. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
 qui 'match' correspond.
 
-Créer la vue
+Créer la Vue
 ------------
 
 Maintenant si vous vous rendez à l'url ``/bookmarks/tagged``, CakePHP va afficher
