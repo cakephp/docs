@@ -126,7 +126,7 @@ anything you can call on a Collection object, you can also do in a Query object:
         ->map(function ($row) { // map() is a collection method, it executes the query
             $row->trimmedTitle = trim($row->title);
             return $row;
-        });
+        })
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
