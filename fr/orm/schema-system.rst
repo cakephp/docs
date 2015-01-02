@@ -1,19 +1,19 @@
-Système de Schema
+Système de Schéma
 #################
 
 .. php:namespace:: Cake\Database\Schema
 
-CakePHP dispose d'un système de schema qui est capable de montrer et de générer
-les informations de schema des tables dans les stockages de données SQL. Le
-système de schema peut générer/montrer un schema pour toute plateforme SQL
+CakePHP dispose d'un système de schéma qui est capable de montrer et de générer
+les informations de schéma des tables dans les stockages de données SQL. Le
+système de schéma peut générer/montrer un schéma pour toute plateforme SQL
 que CakePHP supporte.
 
-Les principales parties du système de schema sont ``Cake\Database\Schema\Table``
+Les principales parties du système de schéma sont ``Cake\Database\Schema\Table``
 et ``Cake\Database\Schema\Collection``. Ces classes vous donnent accès
 respectivement à la base de donnée toute entière et aux fonctionnalités de
 l'objet Table.
 
-L'utilisation première du système de schema est pour les :ref:`test-fixtures`.
+L'utilisation première du système de schéma est pour les :ref:`test-fixtures`.
 Cependant, il peut aussi être utilisé dans votre application si nécessaire.
 
 Objets Schema\\Table
@@ -21,9 +21,9 @@ Objets Schema\\Table
 
 .. php:class:: Table
 
-Le sous-système de schema fournit un objet Table pour avoir les données d'une
+Le sous-système de schéma fournit un objet Table pour récupérer les données d'une
 table dans la base de données. Cet objet est retourné par les fonctionnalités
-de reflection de schema::
+de réflection de schéma::
 
     use Cake\Database\Schema\Table;
 
@@ -44,11 +44,11 @@ de reflection de schema::
       'columns' => ['id']
     ]);
 
-    // Classes Schema\Table peuvent aussi être créées avec des données de tableau
+    // Les classes Schema\Table peuvent aussi être créées avec des données de tableau
     $t = new Table('posts', $columns);
 
 Les objets ``Schema\Table`` vous permettent de construire des informations sur
-le schema d'une table. Il aide à normaliser et à valider les données utilisés
+le schéma d'une table. Il aide à normaliser et à valider les données utilisées
 pour décrire une table. Par exemple, les deux formulaires suivants sont
 équivalents::
 
@@ -60,7 +60,7 @@ pour décrire une table. Par exemple, les deux formulaires suivants sont
 
 Bien qu'équivalent, le 2ème formulaire donne plus de détails et de contrôle.
 Ceci émule les fonctionnalités existantes disponibles dans les fichiers de
-Schema + le schema de fixture dans 2.x.
+Schéma + le schéma de fixture dans 2.x.
 
 Accéder aux Données de Colonne
 ------------------------------
@@ -76,15 +76,15 @@ Les colonnes sont soit ajoutées en argument du constructeur, soit via
     $cols = $t->columns();
 
 
-Indices et Contraintes
+Index et Contraintes
 ----------------------
 
-Les indices sont ajoutés en utilisant ``addIndex()``. Les contraintes sont
-ajoutées en utilisant ``addConstraint()``.  Les indices & contraintes peuvent
-être ajoutés pour les colonnes qui n'existent pas, puisque cela donnera un
-état invalide. Les indices sont différents des contraintes et les exceptions
-seront levées si vous essayez de mélanger les types entre les méthodes. Un
-exemple des deux méthodes est::
+Les index sont ajoutés en utilisant ``addIndex()``. Les contraintes sont
+ajoutées en utilisant ``addConstraint()``.  Les index & contraintes ne 
+peuvent pas être ajoutés pour les colonnes qui n'existent pas puisque cela
+donnerait un état invalide. Les index sont différents des contraintes et 
+des exceptions seront levées si vous essayez de mélanger les types entre 
+les méthodes. Un exemple des deux méthodes est::
 
     $t = new Table('posts');
     $t->addColumn('id', 'integer')
@@ -117,7 +117,7 @@ exemple des deux méthodes est::
     ]);
 
 Si vous ajoutez une contrainte de clé primaire à une colonne unique integer,
-elle va automatiquement être convertie en une colonne auto-incrémentée/serial
+elle va automatiquement être convertie en une colonne auto-incrémentée/série
 selon la plateforme de la base de données::
 
     $t = new Table('posts');
@@ -154,10 +154,10 @@ auto-incrémenter::
 L'option ``autoIncrement`` ne fonctionne qu'avec les colonnes ``integer`` et
 ``biginteger``.
 
-Lire les Indices et les Contraintes
+Lire les Index et les Contraintes
 -----------------------------------
 
-Les indices et les contraintes peuvent être lus d'un objet table en utilisant
+Les index et les contraintes peuvent être lus d'un objet table en utilisant
 les méthodes d'accesseur. En supposant que ``$t`` est une instance de table
 remplie, vous pourriez faire ce qui suit::
 
@@ -168,10 +168,10 @@ remplie, vous pourriez faire ce qui suit::
     // Récupère les données sur une contrainte unique.
     $constraint = $t->constraint('author_id_idx')
 
-    // Récupère les indices. Va retourner les noms de tous les indices
+    // Récupère les index. Va retourner les noms de tous les index
     $indexes = $t->indexes()
 
-    // Récupère les données d'un indice unique.
+    // Récupère les données d'un index unique.
     $index = $t->index('author_id_idx')
 
 
@@ -212,15 +212,15 @@ spécifique à la plateforme pour créer ou supprimer une table spécifique::
     $sql = $schema->dropSql($db);
     $db->execute($sql);
 
-En utilisant un driver de connection, les données de schema peuvent être
+En utilisant un driver de connection, les données de schéma peuvent être
 converties en SQL spécifique à la plateforme. Le retour de ``createSql`` et
 ``dropSql`` est une liste de requêtes SQL nécessaires pour créer une table et
-les indices nécessaires. Certaines plateformes peuvent nécessiter plusieurs
-lignes pour créer des tables avec des commentaires et/ou indices. Un tableau
+les index nécessaires. Certaines plateformes peuvent nécessiter plusieurs
+lignes pour créer des tables avec des commentaires et/ou index. Un tableau
 de requêtes est toujours retourné.
 
 
-Collections de Schema
+Collections de Schéma
 =====================
 
 .. php:class:: Collection
@@ -232,7 +232,7 @@ habituelle de la classe ressemble à::
 
     $db = ConnectionManager::get('default');
 
-    // Créé une collection de schema.
+    // Créé une collection de schéma.
     $collection = $db->schemaCollection();
 
     // Récupère les noms des tables
