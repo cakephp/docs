@@ -372,5 +372,5 @@ la visibilité des bookmarks à ceux qui appartiennent à l'utilisateur courant.
 
 Maintenant continuons avec
 :doc:`/tutorials-and-examples/bookmarks/part-two`
-pour continuer la construction de votre application ou :doc:`plongez dans la documentation
+pour construire votre application ou :doc:`plongez dans la documentation
 </topics>` pour en apprendre plus sur ce que CakePHP peut faire pour vous.
