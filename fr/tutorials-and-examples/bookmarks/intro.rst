@@ -253,7 +253,7 @@ mots de passe avec
 Vous pouvez aussi utiliser sha1 ou md5 si vous travaillez avec une
 base de données existante.
 
-Récupérer les Bookmarks avec un Tag spécifique
+Récupérer les Bookmarks avec un Tag Spécifique
 ==============================================
 
 Maintenant que vous avez stocké les mots de passe de façon sécurisé, nous
