@@ -82,15 +82,16 @@ démarrer le serveur de développement::
 Ceci va lancer le serveur web intégré de PHP sur le port 8765. Ouvrez
 ``http://localhost:8765`` dans votre navigateur web pour voir la page d'accueil.
 Tous les points devront être cochés sauf pour CakePHP qui n'est pas encore
-capable de se connecter à votre base de données. Si non, vous devrez installer
-des extensions PHP supplémentaires ou définir des permissions de répertoire.
+capable de se connecter à votre base de données. Si ce n'est pas le cas, vous 
+devrez installer des extensions PHP supplémentaires ou définir des permissions de
+répertoire.
 
-Créer la Base de Données
+Créer la base de données
 ========================
 
 Ensuite, configurons la base de données pour notre application de bookmarking.
 Si vous ne l'avez pas déjà fait, créez une base de données vide que nous
-allons utiliser dans ce tutoriel, avec un nom de votre choix, par ex
+allons utiliser dans ce tutoriel, avec un nom de votre choix, par exemple
 ``cake_bookmarks``. Vous pouvez exécuter le SQL suivant pour créer les
 tables nécessaires::
 
@@ -134,19 +135,19 @@ Vous avez peut-être remarqué que la table ``bookmarks_tags`` utilisait une
 clé primaire composite. CakePHP permet les clés primaires composites presque
 partout, facilitant la construction des applications multi-tenanted.
 
-La table et les noms de colonne que nous avons utilisés n'étaient pas
+La table et les noms de colonnes que nous avons utilisés n'étaient pas
 arbitraires. En utilisant les
 :doc:`conventions de nommage </intro/conventions>` de CakePHP, nous pouvons
 mieux contrôler CakePHP et éviter d'avoir à configurer le framework. CakePHP est
 assez flexible pour s'accommoder de tout schéma de base de données, mais
 suivre les conventions va vous faire gagner du temps.
 
-Configuration de Base de Données
-================================
+Configuration de la base de données
+===================================
 
-Ensuite, disons à CakePHP où se trouve notre base de données et comment
+Ensuite, indiquons à CakePHP où se trouve notre base de données et comment
 s'y connecter.
-Pour la plupart des gens, ce sera la première et la dernière fois que vous
+Pour la plupart d'entre vous, ce sera la première et la dernière fois que vous
 devrez configurer quelque chose.
 
 La configuration est assez simple: remplacez juste les valeurs dans le
@@ -197,7 +198,7 @@ les commandes suivantes::
 
 Ceci va générer les controllers, models, views, leurs cas de tests
 correspondants et les fixtures pour nos ressources users, bookmarks et tags.
-Si vous stoppé votre serveur, relancez le et allez sur
+Si vous stoppé votre serveur, relancez-le et allez sur
 ``http://localhost:8765/bookmarks``.
 
 Vous devriez voir une application basique mais fonctionnelle fournissant
@@ -205,7 +206,7 @@ des accès aux données vers les tables de la base de données de votre
 application. Une fois que vous avez la liste des bookmarks, ajoutez quelques
 users, bookmarks, et tags.
 
-Ajouter un Hashage de Mot de Passe
+Ajouter un hashage de mot de passe
 ==================================
 
 Quand vous créez vos users, vous avez probablement remarqué que les mots de
@@ -214,7 +215,7 @@ sécurité, donc réglons ceci.
 
 C'est aussi un bon moment pour parler de la couche model dans CakePHP. Dans
 CakePHP, nous séparons les méthodes qui agissent sur une collection
-d'objets, et un objet unique dans les classes différentes. Les méthodes qui
+d'objets, et un objet unique, dans des classes différentes. Les méthodes qui
 agissent sur la collection des entities sont mises dans la classe *Table*,
 alors que les fonctionnalités correspondant à un enregistrement unique
 sont mises dans la classe *Entity*.
@@ -252,7 +253,7 @@ mots de passe avec
 Vous pouvez aussi utiliser sha1 ou md5 si vous travaillez avec une
 base de données existante.
 
-Récupérer les Bookmarks avec un Tag Spécifique
+Récupérer les Bookmarks avec un Tag spécifique
 ==============================================
 
 Maintenant que vous avez stocké les mots de passe de façon sécurisé, nous
@@ -278,7 +279,7 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
 
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
 chemin ``/bookmarks/tagged/*``, vers ``BookmarksController::tags()``. En
-définissant les routes, vous pouvez isoler le look de vos URLs, de la façon
+définissant les routes, vous pouvez isoler la définition de vos URLs, de la façon
 dont ils sont intégrés. Si nous visitions
 ``http://localhost:8765/bookmarks/tagged``, nous verrions une page d'erreur
 de CakePHP. Intégrons maintenant la méthode manquante. Dans
@@ -293,13 +294,13 @@ de CakePHP. Intégrons maintenant la méthode manquante. Dans
         $this->set(compact('bookmarks', 'tags'));
     }
 
-Créer la Méthode Finder
+Créer la méthode Finder
 -----------------------
 
-Dans CakePHP, nous aimons garder les actions de notre controller petites, et
+Dans CakePHP, nous aimons garder les actions de notre controller légères, et
 mettre la plupart de la logique de notre application dans les models. Si vous
-visitez l'URL ``/bookmarks/tagged`` maintenant, vous verrez une erreur que
-la méthode ``findTagged`` n'a pas été encore intégrée, donc faisons cela. Dans
+visitez l'URL ``/bookmarks/tagged`` maintenant, vous verrez une erreur comme quoi
+la méthode ``findTagged`` n'a pas été encore intégrée, donc faisons-le. Dans
 ``src/Model/Table/BookmarksTable.php`` ajoutez ce qui suit::
 
     public function findTagged(Query $query, array $options)
@@ -322,12 +323,12 @@ réutilisable de vos requêtes. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
 qui 'match' correspond.
 
-Créer la Vue
+Créer la vue
 ------------
 
-Maintenant si vous allez voir l'URL ``/bookmarks/tagged``, CakePHP va montrer
+Maintenant si vous vous rendez à l'url ``/bookmarks/tagged``, CakePHP va afficher
 une erreur vous disant que vous n'avez pas de fichier de vue. Ensuite,
-construisons le fihier de vue pour notre action ``tags``. Dans
+construisons le fichier de vue pour notre action ``tags``. Dans
 ``src/Template/Bookmarks/tags.ctp`` mettez le contenu suivant::
 
     <h1>
@@ -367,10 +368,9 @@ Ainsi nous avons créé une application basique pour gérer des bookmarks, des
 tags et des users.
 Cependant, tout le monde peut voir tous les tags de tout le monde. Dans le
 prochain chapitre, nous allons intégrer une authentification et restreindre
-les bookmarks visibles seulement à ceux à qui appartiennent à l'utilisateur
-actuel.
+la visibilité des bookmarks à ceux qui appartiennent à l'utilisateur courant.
 
 Maintenant continuons avec
 :doc:`/tutorials-and-examples/bookmarks/part-two`
-pour construire votre ou :doc:`plongez dans la documentation
+pour continuer la construction de votre application ou :doc:`plongez dans la documentation
 </topics>` pour en apprendre plus sur ce que CakePHP peut faire pour vous.
