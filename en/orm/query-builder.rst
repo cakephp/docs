@@ -18,8 +18,10 @@ of the following things occur:
 - The query is iterated with ``foreach()``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
+- The query's ``first()`` method is called. This will return the first result in the set 
+  built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
 - The query's ``all()`` method is called. This will return the result set and
-  can only be used with select statements.
+  can only be used with ``SELECT`` statements.
 - The query's ``toArray()`` method is called.
 
 Until one of these conditions are met, the query can be modified with additional
