@@ -20,8 +20,10 @@ pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 - La méthode ``execute()`` de query est appelée. Elle retourne l'objet
   d'instruction sous-jacente, et va être utilisée avec les requêtes
   insert/update/delete.
+- La méthode ``first()`` de query est appelée. Elle retourne le premier résultat 
+  correspondant à l'instruction ``SELECT`` (ajoute LIMIT 1 à la requête). 
 - La méthode ``all()`` de query est appelée. Elle retourne l'ensemble de
-  résultats et peut seulement être utilisée avec les instructions select.
+  résultats et peut seulement être utilisée avec les instructions ``SELECT``.
 - La méthode ``toArray()`` de query est appelée.
 
 Jusqu'à ce qu'une de ces conditions ne soient rencontrées, la requête peut être
@@ -43,7 +45,7 @@ incomplète prête à être modifiée. Vous pouvez aussi utiliser un objet table
 connection pour accéder au niveau inférieur du constructeur de Requête
 qui n'inclut pas les fonctionnalités de l'ORM, si nécessaire. Consultez la
 section :ref:`database-queries` pour plus d'informations. Pour les exemples
-restants, en supposant que ``$articles`` est une
+suivants, en supposant que ``$articles`` est une
 :php:class:`~Cake\\ORM\\Table`::
 
     // Commence une nouvelle requête.
@@ -121,7 +123,7 @@ de la requête et les résultats vous seront retournés::
     // Ceci exécute aussi la requête
     $allTitles = $articles->find()->extract('title');
 
-Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
+Une fois que vous êtes familié avec les méthodes de l'objet Query, il est
 fortement recommandé que vous consultiez la section
 :ref:`Collection<collection-objects>` pour améliorer vos compétences dans
 le traversement efficace de données. En résumé, il est important de se
@@ -149,7 +151,7 @@ Récupérer vos Données
 La plupart des applications web utilisent beaucoup les requêtes de type
 ``SELECT``. CakePHP permet de construire ces requêtes en un clin d'œil. La
 méthode ``select()`` vous permet de ne récupérer que les champs qui vous sont
-nécessaire::
+nécessaires::
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
@@ -208,7 +210,7 @@ Utiliser les Fonctions SQL
 
 L'ORM de CakePHP offre une abstraction pour les fonctions les plus communément
 utilisées par SQL. Utiliser l'abstraction permet à l'ORM de sélectionner
-l'intégration spécifiquede la fonction pour la plateforme que vous souhaitez.
+l'intégration spécifique de la fonction pour la plateforme que vous souhaitez.
 Par exemple, ``concat`` est intégré différemment dans MySQL, Postgres et
 SQLServer. Utiliser l'abstraction permet à votre code d'être portable::
 
@@ -216,7 +218,7 @@ SQLServer. Utiliser l'abstraction permet à votre code d'être portable::
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
-Un certain nombre de fonctions comumnément utilisées peut être créé avec la
+Un certain nombre de fonctions communément utilisées peut être créé avec la
 méthode ``func()``:
 
 - ``sum()`` Calcule une somme. Les arguments sont traités comme des valeurs
@@ -230,17 +232,17 @@ méthode ``func()``:
 - ``count()`` Calcule le count. Les arguments sont traités comme des valeurs
   littérales.
 - ``concat()`` Concatène deux valeurs ensemble. Les arguments sont traités
-  comme des paramètres liés à moins qu'ils ne soient marqués comme littéral.
+  comme des paramètres liés, à moins qu'ils ne soient marqués comme littéral.
 - ``coalesce()`` Regroupe les valeurs. Les arguments sont traités comme des
-  paramètres liés à moins qu'ils ne soient marqués comme littéral.
+  paramètres liés, à moins qu'ils ne soient marqués comme littéral.
 - ``dateDiff()`` Récupère la différence entre deux dates/times. Les arguments
-  sont traités comme des paramètres liés à moins qu'ils ne soient marqués comme
+  sont traités comme des paramètres liés, à moins qu'ils ne soient marqués comme
   littéral.
 - ``now()`` Prend soit 'time', soit 'date' comme argument vous permettant de
   récupérer soit le time courant, soit la date courante.
 
 Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types
-de paramètres que vous pouvez utiliser, les arguments littéraux et les
+de paramètres que vous pouvez utiliser; Les arguments littéraux et les
 paramètres liés. Les paramètres liés vous permettent de référencer les colonnes
 ou les autres valeurs littérales de SQL. Les paramètres liés peuvent être
 utilisés pour ajouter en toute sécurité les données d'utilisateur aux fonctions
@@ -440,8 +442,8 @@ conditions avec une objet ``Expression`` serait::
 
 Puisque nous avons commencé à utiliser ``where()``, nous n'avons pas besoin
 d'appeler ``and_()``, puisqu'elle est appelée implicitement. Un peu de la même
-façon que nous n'appellerions pas ``or_()``, nous avons commencé notre requête
-avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthode
+façon que nous n'appellerions pas ``or_()`` si nous avons commencé notre requête
+avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthodes
 de conditions combinées avec ``AND``. Le code SQL résultant serait::
 
     SELECT *
@@ -553,7 +555,8 @@ Créer automatiquement des Clauses IN
 Quand vous construisez des requêtes en utilisant l'ORM, vous n'avez
 généralement pas besoin d'indiquer les types de données des colonnes avec
 lesquelles vous intéragissez, puisque CakePHP peut déduire les types en se
-basant sur les données du schéma. Si dans vos requêtes, vous souhaitez que
+basant sur les données du :ref:`schéma <namespace-Cake\Database\Schema>`. 
+Si dans vos requêtes, vous souhaitez que
 CakePHP convertisse automatiquement l'égalité en comparaisons ``IN``, vous
 devez indiquer les types de données des colonnes::
 
@@ -610,7 +613,7 @@ Raw Expressions
 ---------------
 
 Quand vous ne pouvez pas construire le code SQL, vous devez utiliser le
-constructeur de requête, vous pouvez utiliser les objets expression pour ajouter
+constructeur de requête, vous pouvez utiliser les objets ``Expression`` pour ajouter
 des extraits de code SQL à vos requêtes::
 
     $query = $articles->find();
@@ -623,7 +626,7 @@ constructeur de requête comme ``where()``, ``limit()``, ``group()``,
 
 .. warning::
 
-    Utiliser les objets expression vous laisse vulnérable aux injections SQL.
+    Utiliser les objets ``Expression`` vous laisse vulnérable aux injections SQL.
     Vous devrez évitez d'interpoler les données d'utilisateur dans les
     expressions.
 
@@ -654,7 +657,7 @@ query pour traiter préalablement ou transformer les résultats::
         return $max->age;
     });
 
-Vous pouvez utliliser ``first`` ou ``firstOrFail`` pour récupérer un
+Vous pouvez utiliser ``first`` ou ``firstOrFail`` pour récupérer un
 enregistrement unique. Ces méthodes vont modifier la requête en ajoutant
 une clause ``LIMIT 1``::
 
@@ -666,7 +669,7 @@ une clause ``LIMIT 1``::
 
 .. _query-count:
 
-Retourner le Compte Total des Enregistrements
+Retourner le Nombre Total des Enregistrements
 ---------------------------------------------
 
 En utilisant un objet query unique, il est possible d'obtenir le nombre total
@@ -769,7 +772,7 @@ Chargement des Associations
 ===========================
 
 Le constructeur peut vous aider à retrouver les données de plusieurs tables en
-même temps avec la quantité minimum de requêtes possible. Pour pouvoir
+même temps avec le minimum de requêtes. Pour pouvoir
 récupérer les données associées, vous devez configurer les associations entre
 les tables comme décrit dans la section :doc:`/orm/associations`. Cette
 technique de requêtes combinées pour récupérer les données associées à partir
@@ -783,7 +786,7 @@ Ajouter des Jointures
 ---------------------
 
 En plus de charger les données liées avec ``contain()``, vous pouvez aussi
-ajouter des jointures supplémentairess avec le constructeur de requête::
+ajouter des jointures supplémentaires avec le constructeur de requête::
 
     $query = $articles->find()
         ->hydrate(false)
@@ -795,7 +798,7 @@ ajouter des jointures supplémentairess avec le constructeur de requête::
         ]);
 
 Vous pouvez ajouter plusieurs jointures en même temps en passant un tableau
-associatif avec plusieurs joins::
+associatif avec plusieurs ``join``::
 
     $query = $articles->find()
         ->hydrate(false)
@@ -812,8 +815,8 @@ associatif avec plusieurs joins::
             ]
         ]);
 
-Comme vu précédemment, lors de l'ajout de joins, l'alias peut être la clé du tableau
-externe. Les conditions join peuvent être aussi exprimées en tableau de
+Comme vu précédemment, lors de l'ajout de ``join``, l'alias peut être la clé du tableau
+externe. Les conditions ``join`` peuvent être aussi exprimées en tableau de
 conditions::
 
     $query = $articles->find()
@@ -830,10 +833,10 @@ conditions::
             ],
         ], ['a.created' => 'datetime', 'c.moderated' => 'boolean']);
 
-Lors de la création de joins à la main, et l'utilisation d'un tableau basé
+Lors de la création de ``join`` à la main, et l'utilisation d'un tableau basé
 sur les conditions, vous devez fournir les types de données pour chaque colonne
-dans les conditions du join. En fournissant les types de données pour les
-conditions de join, l'ORM peut convertir correctement les types de données en
+dans les conditions du ``join``. En fournissant les types de données pour les
+conditions de ``join``, l'ORM peut convertir correctement les types de données en
 code SQL.
 
 Insérer des Données
@@ -952,7 +955,7 @@ Ajouter des Champs Calculés
 Après vos requêtes, vous aurez peut-être besoin de faire des traitements
 postérieurs. Si vous voulez ajouter quelques champs calculés ou des données
 dérivées, vous pouvez utiliser la méthode ``formatResults()``. C'est une
-façon légère de map les ensembles de résultats. Si vous avez besoin de plus de
+façon légère de mapper les ensembles de résultats. Si vous avez besoin de plus de
 contrôle sur le processus, ou que vous souhaitez réduire les résultats, vous
 devriez utiliser la fonctionnalité de :ref:`Map/Reduce <map-reduce>` à la
 place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
@@ -975,7 +978,7 @@ Les formatteurs de résultat sont nécessaires pour retourner un objet itérateu
 qui sera utilisé comme valeur retournée pour la requête. Les fonctions de
 formatteurs sont appliquées après que toutes les routines
 Map/Reduce soient exécutées. Les formatteurs de résultat peuvent aussi être
-appliqués dans les associations contain. CakePHP va s'assurer que vos
+appliqués dans les associations ``contain``. CakePHP va s'assurer que vos
 formatteurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
 comme vous pouvez vous y attendre::
 
@@ -998,27 +1001,27 @@ comme vous pouvez vous y attendre::
 Comme vu précédemment, les formatteurs attachés aux constructeurs de requête
 associées sont limités pour agir seulement sur les données dans l'association.
 CakePHP va s'assurer que les valeurs calculées soient insérées dans la bonne
-entity.
+``entity``.
 
 .. _map-reduce:
 
 Modifier les Résultats avec Map/Reduce
 ======================================
 
-La plupart du temps, les opérations find nécessitent un traitement postérieur
+La plupart du temps, les opérations ``find`` nécessitent un traitement postérieur
 des données qui se trouvent dans la base de données. Alors que les méthodes
-getter des entities peuvent s'occuper de la plupart de la génération de
+``getter`` des ``entities`` peuvent s'occuper de la plupart de la génération de
 propriété virtuelle ou un formattage de données spéciales, parfois vous devez
 changer la structure des données d'une façon plus fondamentale.
 
 Pour ces cas, l'objet ``Query`` offre la méthode ``mapReduce()``, qui est une
-façon de traiter les résultats une fois qu'ils ont été attrapés dans la
+façon de traiter les résultats une fois qu'ils ont été récupérés dans la
 base de données.
 
 Un exemple habituel de changement de structure de données est le groupement de
-résultats ensemble basé sur certaines conditions. Pour cette tâche, nous
+résultats basé sur certaines conditions. Pour cette tâche, nous
 pouvons utiliser la fonction ``mapReduce()``. Nous avons besoin de deux
-fonctions appellables ``$mapper`` et ``$reducer``.
+fonctions appelables ``$mapper`` et ``$reducer``.
 La callable ``$mapper`` reçoit le résultat courant de la base de données en
 premier argument, la clé d'itération en second paramètre et finalement elle
 reçoit une instance de la routine ``MapReduce`` qu'elle lance::
@@ -1117,7 +1120,7 @@ interdits, mais il pourrait ressembler à ceci::
 
 Un dernier exemple et vous serez un expert de map-reduce. Imaginez que vous
 avez une table de ``friends`` et que vous souhaitiez trouver les "fake friends"
-dans notre base de données ou, poautrement dit, les gens qui ne se suivent pas
+dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
 mutuellement. Commençons avec notre fonction ``mapper``::
 
     $mapper = function ($rel, $key, $mr) {
@@ -1126,7 +1129,7 @@ mutuellement. Commençons avec notre fonction ``mapper``::
     };
 
 Nous avons juste dupliqué nos données pour avoir une liste d'utilisateurs que
-chaque utilisateur suit. Mantenant, il est temps de la réduire. Pour chaque
+chaque utilisateur suit. Maintenant, il est temps de la réduire. Pour chaque
 appel au reducer, il va recevoir une liste de followers par utilisateur::
 
     // liste de $friends ressemblera à des nombres répétés
@@ -1168,7 +1171,7 @@ Stacking Multiple Operations
 L'utilisation de `mapReduce` dans une requête ne va pas l'exécuter
 immédiatemment. L'opération va être enregistrée pour être lancée dès que
 l'on tentera de réucpérer le premier résultat.
-Ceci vous permet de continuer à chainer les méthodes de chaînage et les filtres
+Ceci vous permet de continuer à chainer les méthodes et les filtres
 à la requête même après avoir ajouté une routine map-reduce::
 
    $query = $articles->find()
@@ -1203,10 +1206,10 @@ C'est particulièrement utile pour construire des méthodes finder personnalisé
         ->find('published')
         ->find('recent');
 
-En plus, il est aussi possible d'empilier plus d'une opération ``mapReduce``
+En plus, il est aussi possible d'empiler plus d'une opération ``mapReduce``
 pour une requête unique. Par exemple, si nous souhaitons avoir les mots les
 plus couramment utilisés pour les articles, mais ensuite les filtrer pour
-seulemet retourner les mots qui étaient mentionnés plus de 20 fois tout au long
+seulement retourner les mots qui étaient mentionnés plus de 20 fois tout au long
 des articles::
 
     $mapper = function ($count, $word, $mr) {
@@ -1217,7 +1220,7 @@ des articles::
 
     $articles->find('commonWords')->mapReduce($mapper);
 
-Retirer Toutes les Opérations Map-reduce Empliées
+Retirer Toutes les Opérations Map-reduce Empilées
 -------------------------------------------------
 
 Dans les mêmes circonstances vous voulez modifier un objer ``Query`` pour
