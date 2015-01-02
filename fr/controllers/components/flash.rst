@@ -8,7 +8,7 @@ FlashComponent
 FlashComponent est un moyen de définir des messages de notifications à afficher
 après avoir envoyé un formulaire ou des données connus. CakePHP appelle
 ces messages des "messages flash". FlashComponent écrit les messages flash dans
-``$_SESSION``, pour être affichés dans une View en utilisant
+``$_SESSION`` pour être affichés dans une View en utilisant
 :doc:`FlashHelper </views/helpers/flash>`.
 
 Définir les Messages Flash
@@ -17,32 +17,32 @@ Définir les Messages Flash
 FlashComponent fournit deux façons de définir des messages flash : sa méthode
 magique ``__call`` et sa méthode ``set()``. Pour remplir votre application
 sématiquement, la méthode magique ``__call`` de FlashComponent vous permet
-d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
+d'utiliser un nom de méthode qui est lié à un élément qui se trouve dans le
 répertoire ``src/Template/Element/Flash``. Par convention, les méthodes en
-camelcase vont être liées à un nom d'element en minuscule et avec des
-underscores::
+camelcase vont être liées à un nom d'élément en minuscule et avec des
+underscores (_)::
 
     // Utilise src/Template/Element/Flash/success.ctp
-    $this->Flash->success('This was successful');
+    $this->Flash->success('C\'était un succès');
 
     // Utilise src/Template/Element/Flash/great_success.ctp
-    $this->Flash->greatSuccess('This was greatly successful');
+    $this->Flash->greatSuccess('C\'était un grand succès');
 
-De façon alternative, pour définir un message sans rendre un element,
+De façon alternative, pour définir un message sans rendre un élément,
 vous pouvez utiliser la méthode ``set()``::
 
     $this->Flash->set('Ceci est un message');
 
-Les méthodes ``__call`` et ``set()`` de FlashComponent prennent un deuxième
-paramètre optionel, un tableau d'options:
+Les méthodes ``__call`` et ``set()`` de FlashComponent prennent de façon 
+optionnelle un deuxième paramètre, un tableau d'options:
 
-* ``key`` Par défaut à 'flash'. La clé du tableau trouvé dans la clé 'Flash'
+* ``key`` Par défaut à 'flash'. La clé du tableau trouvé sous la clé 'Flash'
   dans la session. 
 * ``element`` Par défaut à null, mais il va automatiquement être défini lors de
-  l'utilisation de la méthode magique ``__call``. Le nom d'element à utiliser
+  l'utilisation de la méthode magique ``__call``. Le nom d'élément à utiliser
   pour le rendu.
 * ``params`` Un tableau en option de clés/valeurs pour rendre disponible des
-  variables dans un element.
+  variables dans un élément.
 
 Un exemple de l'utilisation de ces options::
 
@@ -58,7 +58,7 @@ Un exemple de l'utilisation de ces options::
     // Dans votre Vue
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In src/Template/Element/Flash/success.ctp -->
+    <!-- Dans src/Template/Element/Flash/success.ctp -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
