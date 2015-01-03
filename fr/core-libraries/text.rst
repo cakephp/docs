@@ -1,21 +1,21 @@
-String
-######
+Text
+####
 
 .. php:namespace:: Cake\Utility
 
-.. php:class:: String
+.. php:class:: Text
 
-La classe String inclut des méthodes pratiques pour la création et la
+La classe Text inclut des méthodes pratiques pour la création et la
 manipulation des chaînes de caractères et est normalement accessible
 statiquement. Exemple:
-``String::uuid()``.
+``Text::uuid()``.
 
 Si vous avez besoin des fonctionnalités de :php:class:`TextHelper` en-dehors
-d'une ``View``, utilisez la classe ``String``::
+d'une ``View``, utilisez la classe ``Text``::
 
     namespace App\Controller;
 
-    use Cake\Utility\String;
+    use Cake\Utility\Text;
 
     class UsersController extends AppController
     {
@@ -33,7 +33,7 @@ d'une ``View``, utilisez la classe ``String``::
                 // notifie à l'utilisateur d'un nouveau message
                 $this->FLash->success(__(
                     'Vous avez un message: {0}',
-                    String::truncate($message['Message']['body'], 255, ['html' => true])
+                    Text::truncate($message['Message']['body'], 255, ['html' => true])
                 ));
             }
         }
@@ -48,7 +48,7 @@ Générer des UUIDs
     per :rfc:`4122`. UUID est une chaîne de caractères de 128bit au format
     485fc381-e790-47a3-9794-1337c0a8fe68. ::
 
-        String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
+        Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 Simple String Parsing
 =====================
@@ -63,7 +63,7 @@ Cette méthode peut être utile quand on sépare les données en formatage
 régulier comme les listes de tag::
 
     $data = "cakephp 'great framework' php";
-    $result = String::tokenize($data, ' ', "'", "'");
+    $result = Text::tokenize($data, ' ', "'", "'");
     // le résultat contient
     ['cakephp', "'great framework'", 'php'];
 
@@ -72,7 +72,7 @@ régulier comme les listes de tag::
 Cette méthode enlève le format d'un nombre à partir d'une taille de byte
 lisible par un humain en un nombre entier de bytes::
 
-    $int = String::parseFileSize('2GB');
+    $int = Text::parseFileSize('2GB');
 
 Formatting Strings
 ==================
@@ -82,12 +82,12 @@ Formatting Strings
 La méthode insérée est utilisée pour créer des chaînes templates et pour
 permettre les remplacements de clé/valeur::
 
-    String::insert('Mon nom est :name et j'ai :age ans.', ['name' => 'Bob', 'age' => '65']);
+    Text::insert('Mon nom est :name et j'ai :age ans.', ['name' => 'Bob', 'age' => '65']);
     // génère: "Mon nom est Bob et j'ai 65 ans."
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
 
-Nettoie une chaîne formatée ``String::insert`` avec $options donnée
+Nettoie une chaîne formatée ``Text::insert`` avec $options donnée
 qui dépend de la clé 'clean' dans $options. La méthode par défaut utilisée
 est le texte mais html est aussi disponible. Le but de cette fonction est
 de remplacer tous les espaces blancs et les balises non nécessaires autour
@@ -114,7 +114,7 @@ blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas
 sliced across lines::
 
     $text = 'Ceci est la chanson qui ne stoppe jamais.';
-    $result = String::wrap($text, 22);
+    $result = Text::wrap($text, 22);
 
     // retourne
     Ceci est la chanson
@@ -130,7 +130,7 @@ on entoure. Les options possibles sont:
 * ``indentAt`` Le nombre de ligne pour commencer l'indentation du texte.
   Par défaut à 0.
 
-.. start-string
+.. start-text
 
 Highlighting Substrings
 =======================
@@ -156,10 +156,10 @@ Exemple::
         ['format' => '<span class="highlight">\1</span>']
     );
 
-    // appelé avec String
-    use Cake\Utility\String;
-    
-    echo String::highlight(
+    // appelé avec Text
+    use Cake\Utility\Text;
+
+    echo Text::highlight(
         $lastSentence,
         'using',
         ['format' => '<span class="highlight">\1</span>']
@@ -168,17 +168,17 @@ Exemple::
 Sortie::
 
     Highlights $needle in $haystack <span class="highlight">using</span>
-    the $options['format'] string specified  or a default string.
+    the $options['format'] string specified or a default string.
 
-Removing Links
-==============
+Retirer les Liens
+=================
 
 .. php:method:: stripLinks($text)
 
 Enlève le ``$text`` fourni de tout lien HTML.
 
-Truncating Text
-===============
+Tronquer le Texte
+=================
 
 .. php:method:: truncate(string $text, int $length = 100, array $options)
 
@@ -211,9 +211,9 @@ Exemple::
         ]
     );
 
-    // appelé avec String
-    App::uses('String', 'Utility');
-    echo String::truncate(
+    // appelé avec Text
+    App::uses('Text', 'Utility');
+    echo Text::truncate(
         'The killer crept forward and tripped on the rug.',
         22,
         [
@@ -260,9 +260,9 @@ Exemple::
         ]
     );
 
-    // appelé avec String
-    App::uses('String', 'Utility');
-    echo String::tail(
+    // appelé avec Text
+    App::uses('Text', 'Utility');
+    echo Text::tail(
         $sampleText,
         70,
         [
@@ -289,10 +289,10 @@ pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
     // appelé avec TextHelper
     echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
-    // appelé avec String
-    use Cake\Utility\String;
-    
-    echo String::excerpt($lastParagraph, 'method', 50, '...');
+    // appelé avec Text
+    use Cake\Utility\Text;
+
+    echo Text::excerpt($lastParagraph, 'method', 50, '...');
 
 Sortie::
 
@@ -310,17 +310,17 @@ joins avec 'and'. ::
     // appelé avec TextHelper
     echo $this->Text->toList($colors);
 
-    // appelé avec String
-    use Cake\Utility\String;
-    
-    echo String::toList($colors);
+    // appelé avec Text
+    use Cake\Utility\Text;
+
+    echo Text::toList($colors);
 
 Sortie::
 
     red, orange, yellow, green, blue, indigo et violet
 
-.. end-string
+.. end-text
 
 .. meta::
-    :title lang=fr: String
+    :title lang=fr: Text
     :keywords lang=fr: tableau php,tableau name,string options,data options,result string,class string,string data,string class,placeholders,méthode défaut,valeur clé key,markup,rfc,remplacements,convenience,templates

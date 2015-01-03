@@ -1087,9 +1087,9 @@ the ``I18n`` class::
 
 - The methods below have been moved:
 
-    - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
-    - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
-    - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
+    - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\Text::utf8()``
+    - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\Text::ascii()``
+    - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\Text::isMultibyte()``
 
 - Since CakePHP now requires the mbstring extension, the
   ``Multibyte`` class has been removed.
@@ -1251,7 +1251,7 @@ class.
 - ``CakeNumber`` has been renamed to :php:class:`Cake\\I18n\\Number`.
 - :php:meth:`Number::format()` now requires ``$options`` to be an array.
 - :php:meth:`Number::addFormat()` was removed.
-- ``Number::fromReadableSize()`` has been moved to :php:meth:`Cake\\Utility\\String::parseFileSize()`.
+- ``Number::fromReadableSize()`` has been moved to :php:meth:`Cake\\Utility\\Text::parseFileSize()`.
 
 Validation
 ----------

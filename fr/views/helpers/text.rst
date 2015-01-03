@@ -76,9 +76,9 @@ Output::
     selon nos célèbres pâtes et desserts.<p>
     <p>contact info@example.com</p>
 
-.. include:: /core-libraries/string.rst
-    :start-after: start-string
-    :end-before: end-string
+.. include:: /core-libraries/text.rst
+    :start-after: start-text
+    :end-before: end-text
 
 .. meta::
     :title lang=fr: TextHelper
