@@ -569,8 +569,7 @@ By default, the tree is traversed from the root to the leaves. You can also
 instruct it to only return the leaf elements in the tree::
 
     $nested->listNested()->toArray();
-    The above syntax is incorrect but I cannot guess what is the correct one; listNested('leaves') maybe, but I tried listNested('asc'), listNested('desc), listNested('leaves') and got the same result. 
-And I think that 'id' => 2 is not suppose to desappear from the result.
+
     // Returns
     [
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
