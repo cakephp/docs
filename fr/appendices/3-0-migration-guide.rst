@@ -1205,10 +1205,10 @@ pouvez utiliser la classe ``I18n``::
 
 - Les méthodes ci-dessous ont été déplacées:
 
-  - De ``Cake\I18n\Multibyte::utf8()`` vers ``Cake\Utility\String::utf8()``
-  - De ``Cake\I18n\Multibyte::ascii()`` vers ``Cake\Utility\String::ascii()``
+  - De ``Cake\I18n\Multibyte::utf8()`` vers ``Cake\Utility\Text::utf8()``
+  - De ``Cake\I18n\Multibyte::ascii()`` vers ``Cake\Utility\Text::ascii()``
   - De ``Cake\I18n\Multibyte::checkMultibyte()`` vers
-    ``Cake\Utility\String::isMultibyte()``
+    ``Cake\Utility\Text::isMultibyte()``
 
 - Puisque l'extension mbstring est maintenant nécessaire, la classe
   ``Multibyte`` a été retirée.
@@ -1388,7 +1388,7 @@ Number a été réécrite pour utiliser en interne la classe ``NumberFormatter``
   tableau.
 - :php:meth:`Number::addFormat()` a été retirée.
 - ``Number::fromReadableSize()`` a été déplacée
-  vers :php:meth:`Cake\\Utility\\String::parseFileSize()`.
+  vers :php:meth:`Cake\\Utility\\Text:parseFileSize()`.
 
 Validation
 ----------
