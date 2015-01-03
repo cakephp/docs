@@ -571,6 +571,7 @@ files/syslog can be useful when working with web requests::
     // File logging
     Log::config('queries', [
         'className' => 'File',
+        'path' => LOGS,
         'file' => 'queries.log',
         'scopes' => ['queriesLog']
     ]);
