@@ -605,7 +605,7 @@ entre les models n'est pas exclusif dans le cadre d'une relation HABTM. Par
 exemple, relions notre model Recipe avec un model Ingredient en utilisant
 HABTM. Le fait d'utiliser les tomates en Ingredient pour la recipe de
 Spaghettis de ma grand-mère ne "consomme" pas l'Ingredient. Je peux aussi
-utiliser mes Spaghettis pour une Recipe Salade.
+utiliser mes tomates pour une Recipe Salade.
 
 Les liens entre des objets liés par une association hasMany sont exclusifs. Si
 mon User "hasMany" Comment, un commentaire ne sera lié qu'à un
