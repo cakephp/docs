@@ -500,13 +500,13 @@ Two parameters are required for this function. The first one is the property
 representing the item identifier. The second parameter is the name of the
 property representing the identifier for the parent item::
 
-    $items new Collection([
+    $collection = new Collection([
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
-        ['id' => 6, 'parent_id' => null], 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
     ]);
 
     $collection->nest('id', 'parent_id')->toArray();
@@ -515,17 +515,11 @@ property representing the identifier for the parent item::
         [
             'id' => 1,
             'parent_id' => null,
-            'name' => 'Bird',
+            'name' => 'Birds',
             'children' => [
-                [
-                    'id' => 2,
-                    'parent_id' => 1,
-                    'name' => 'Land Birds',
-                    'children' => [
-                        ['id' => 3, 'name' => 'Eagle', 'parent_id' => 2]
-                    ]
-                ],
-                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull',  'children' => []],
+                ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
+                ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
+                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
             ]
         ],
         [
