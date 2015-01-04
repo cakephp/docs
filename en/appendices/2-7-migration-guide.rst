@@ -22,7 +22,8 @@ CakeSession
 -----------
 - :php:meth:`CakeSession::consume()` has been added to read and delete from
   session in a single step.
-
+- Argument `$renew` has been added to :php:meth:`CakeSession::clear()` to allow emptying the session
+without forcing a new id and renewing the session. It defaults to ``true``.
 
 Controller
 ==========
