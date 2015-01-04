@@ -1723,9 +1723,10 @@ vous devez toujours fermer vos formulaires en utilisant :php:meth:`~Cake\\View\\
 
     Déverrouille un champ en l’exemptant du hashage de ``SecurityComponent``.
     Cela autorise également à manipuler le champ via JavaScript.
-    Le paramètre ``$name`` doit correspondre au nom de l'entity pour l'input::
+    Le paramètre ``$name`` doit correspondre au nom de la propriété de l'entity
+    pour l'input::
 
-        $this->Form->unlockField('User.id');
+        $this->Form->unlockField('id');
 
 .. php:method:: secure(array $fields = [])
 

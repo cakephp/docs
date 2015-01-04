@@ -1658,9 +1658,9 @@ ensure that the special ``_Token`` inputs are generated.
 
     Unlocks a field making it exempt from the ``SecurityComponent`` field
     hashing. This also allows the fields to be manipulated by JavaScript.
-    The ``$name`` parameter should be the entity name for the input::
+    The ``$name`` parameter should be the entity property name for the input::
 
-        $this->Form->unlockField('User.id');
+        $this->Form->unlockField('id');
 
 .. php:method:: secure(array $fields = [])
 
