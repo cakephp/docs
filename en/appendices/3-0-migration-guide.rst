@@ -451,6 +451,8 @@ for using the session object.
   customize the cookie path.
 * A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
   to allow reading and deleting session data in a single step.
+* The default value of :php:meth:`Cake\\Network\\Session::clear()`'s argument ``$renew`` has been changed
+from ``true`` to ``false``.
 
 Network\\Http
 =============
