@@ -1,7 +1,7 @@
 Structure du dossier de CakePHP
 ###############################
 
-Après avoir téléchargé et extrait de l'application CakePHP, voici les fichiers et
+Après avoir téléchargé et extrait l'application CakePHP, voici les fichiers et
 répertoires que vous devriez voir:
 
 - src
@@ -32,18 +32,18 @@ Vous remarquerez quelques dossiers principaux:
   l'application vont être installés. Engagez-vous personnellement à ne
   **pas** modifier les fichiers dans ce dossier. Nous ne pourrons pas vous
   aider si vous avez modifié le cœur du framework.
-- Le répertoire *webroot* est la racine publique de votre application. Il contient
-  tous les fichiers que vous souhaitez voir accessibles publiquement.
+- Le répertoire *webroot* est la racine publique de votre application. Il
+  contient tous les fichiers que vous souhaitez voir accessibles publiquement.
 - Le dossier *tmp* est l'endroit où CakePHP stocke les données temporaires. Les
   données qu'il stocke dépendent de la façon dont vous avez configuré CakePHP
   mais ce dossier est généralement utilisé pour stocker les descriptions de
   model, les logs, et parfois les informations de session.
-- Le dossier *logs* normalement contient vos fichiers de log dépendant de votre
-  configuration des logs.  
+- Le dossier *logs* contient normalement vos fichiers de log dépendant de votre
+  configuration des logs.
 
-  Assurez-vous que les dossiers *tmp* et *logs* existent et qu'ils sont en écriture,
-  autrement la performance de votre application sera sévèrement impactée. En mode 
-  debug, CakePHP vous avertira si ce n'est pas le cas.
+  Assurez-vous que les dossiers *tmp* et *logs* existent et qu'ils sont en
+  écriture, autrement la performance de votre application sera sévèrement
+  impactée. En mode debug, CakePHP vous avertira si ce n'est pas le cas.
 
 Le Dossier Src
 ==============
