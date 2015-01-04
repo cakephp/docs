@@ -543,7 +543,7 @@ array::
       ]
     ]);
 
-Your entities should be in the structured in the same way as they are when
+Your entities should be structured in the same way as they are when
 loaded from the database. See the form helper documentation for :ref:`how to
 build inputs for associations <associated-form-inputs>`.
 
