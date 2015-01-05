@@ -1,6 +1,10 @@
 Controllers
 ###########
 
+.. php:namespace:: Cake\Controller
+
+.. php:class:: Controller
+
 Os controllers correspondem ao 'C' no padrão MVC. Após o roteamento ter sido
 aplicado e o controller correto encontrado, a ação do controller é chamada. Seu
 controller deve lidar com a interpretação dos dados de uma requisição,
@@ -17,107 +21,123 @@ gerenciando suas receitas e seus ingredientes. No CakePHP, controllers são
 nomeados de acordo com o model que manipulam. É também absolutamente possível
 ter controllers que usam mais de um model.
 
-Os controllers da sua aplicação são classes que estendem a classe CakePHP
-``AppController``, a qual por sua vez estende a classe :php:class:`Controller`
-do CakePHP. A classe ``AppController`` pode ser definida em
-``/app/Controller/AppController.php`` e deve conter métodos que são
-compartilhados entre todos os seus controllers.
+Os controllers da sua aplicação são classes que estendem a classe
+``AppController``, a qual por sua vez estende a classe do core :php:class:`Controller`.
+A classe ``AppController`` pode ser definida em
+``/src/Controller/AppController.php`` e deve conter métodos que são
+compartilhados entre todos os controllers de sua aplicação.
 
-Os controllers fornecem uma série de métodos que são chamados de ações. Ações
-são métodos em um controller que manipulam requisições. Por padrão, todos os
-métodos públicos em um controller são ações e acessíveis por urls.
+Os controllers fornecem uma série de métodos que lidam com requisições. Estas
+são chamados de *actions*. Por padrão, todos os métodos públicos em
+um controller são uma action e acessíveis por uma URL. Uma action é responsável
+por interpretar a requisição e criar a resposta. Normalmente as respostas são
+na forma de uma view renderizada, mas também existem outras formas de criar respostas.
 
 .. _app-controller:
 
-A Classe AppController
-======================
+O App Controller
+================
 
 Como mencionado anteriormente, a classe ``AppController`` é a mãe de todos os
-outros controllers da sua aplicação. O próprio ``AppController`` é estendida da
-classe ``Controller`` que faz parte da biblioteca do CakePHP. Assim sendo,
-``AppController`` é definido em ``/app/Controller/AppController.php`` como::
+outros controllers da sua aplicação. A própria ``AppController`` é estendida da
+classe :php:class:`Cake\\Controller\\Controller` incluída no CakePHP.
+Assim sendo, ``AppController`` é definida em ``/src/Controller/AppController.php``
+como a seguir::
+
+    namespace App\Controller;
+
+    use Cake\Controller\Controller;
 
     class AppController extends Controller
     {
     }
 
-Os atributos e métodos criados em ``AppController`` vão estar disponíveis para
-todos os controllers da sua aplicação. Este é o lugar ideal para criar códigos
-que são comuns para todos os seus controllers. Componentes (que você vai
-aprender mais tarde) são a melhor alternativa para códigos que são usados por
-muitos (mas não obrigatoriamente em todos) controllers.
+Os atributos e métodos criados em seu ``AppController`` vão estar disponíveis para
+todos os controllers que a extendam. Components (sobre os quais você irá aprender
+mais tarde) são a melhor alternativa para códigos usados por
+muitos (mas não necessariamente em todos) controllers.
 
-Enquanto regras normais de herança de classes orientadas à objetos são
-aplicadas, o CakePHP também faz um pequeno trabalho extra quando se trata de
-atributos especiais do controller. A lista de componentes (components)
-e helpers usados no controller são tratados diferentemente. Nestes casos, as
-cadeias de valores do ``AppController`` são mescladas com os valores de seus
-controllers filhos. Os valores dos controllers filhos sempre sobrescreveram
-os do ``AppController``.
+Você pode usar seu ``AppController`` para carregar components que serão usados
+em cada controller de sua aplicação. O CakePHP oferece um método ``initialize()``
+que é invocado ao final do construtor do controller para esse tipo de uso::
 
-.. note::
+    namespace App\Controller;
 
-    O CakePHP mescla as seguintes variáveis do ``AppController`` em controllers
-    da sua aplicação:
+    use Cake\Controller\Controller;
 
-    -  $components
-    -  $helpers
-    -  $uses
-
-Lembre-se de adicionar os helpers Html e Form padrões se você incluiu o atributo
-``$helpers`` em seu ``AppController``.
-
-Também lembre de fazer as chamadas de callbacks do ``AppController`` nos
-controllers filhos para obter melhores resultados::
-
-    function beforeFilter()
+    class AppController extends Controller
     {
-        parent::beforeFilter();
+
+        public function initialize()
+        {
+            // Sempre habilite o CSRF component.
+            $this->loadComponent('Csrf');
+        }
+
     }
 
-Parâmetros de Requisição
-========================
+Em adição ao método ``initialize()``, a antiga propriedade ``$components`` também
+vai permitir você declarar quais components devem ser carregados. Enquanto heranças
+objeto-orientadas normais são enquadradas, os components e helpers usados por
+um controller são especialmente tratados. Nestes casos, os valores de propriedade
+do ``AppController`` são mesclados com arrays de classes controller filhas. Os valores
+na classe filha irão sempre sobre-escrever aqueles na ``AppController``.
 
-Quando uma requisição é feita para uma aplicação CakePHP, a classe
-:php:class:`Router` e a classe :php:class:`Dispatcher` do Cake usa a 
-:ref:`routes-configuration` para encontrar e criar o controller correto. Os
-dados da requisição são encapsulados em um objeto de requisição. O CakePHP
-coloca todas as informações importantes de uma requisição na propriedade
-``$this->request``. Veja a seção :doc:`/controllers/request-response` para mais
-informações sobre o objeto de requisição do CakePHP.
-
-Ações de Controllers
+Fluxo de Requisições
 ====================
 
-Retornando ao nosso exemplo da padaria online, nosso controller
-``RecipesController`` poderia conter as ações ``view()``, ``share()`` e
-``search()`` e poderia ser encontrado em
-``/app/Controller/RecipesController.php`` contendo o código a seguir::
+Quando uma requisição é feita para uma aplicação CakePHP, a classe
+:php:class:`Cake\\Routing\\Router` e a classe :php:class:`Cake\\Routing\\Dispatcher`
+ usam :ref:`routes-configuration` para encontrar e criar a instância correta do controller.
+Os dados da requisição são encapsulados em um objeto de requisição. O CakePHP
+coloca todas as informações importantes de uma requisição na propriedade
+``$this->request``. Veja a seção :ref:`cake-request` para mais informações sobre o objeto
+de requisição do CakePHP.
+
+Controller Actions
+==================
+
+Actions de controllers são responsáveis por converter os parâmetros de requisição em uma
+resposta para o navegador/usuário que fez a requisição. O CakePHP usa convenções para
+automatizar este processo e remove alguns códigos clichês que você teria que escrever
+de qualquer forma.
+
+Por convenção, o CakePHP renderiza uma view com uma versão flexionada do nome da action.
+Retornando ao nosso exemplo da padaria online, nosso ``RecipesController`` poderia abrigar as
+actions ``view()``, ``share()`` e ``search()``. O controller seria encontrado em
+``/src/Controller/RecipesController.php`` contendo::
 
         
-        # /app/Controller/RecipesController.php
+        // src/Controller/RecipesController.php
         
         class RecipesController extends AppController
         {
             function view($id)
             {
-                // a lógica da ação vai aqui
+                // A lógica da action vai aqui.
             }
         
-            function share($customer_id, $recipe_id)
+            function share($customerId, $recipeId)
             {
-                // a lógica da ação vai aqui
+                // A lógica da action vai aqui.
             }
         
             function search($query)
             {
-                // a lógica da ação vai aqui
+                // A lógica da action vai aqui.
             }
         }
 
-Para que você use de forma eficaz os controllers em sua aplicação, nós iremos
-cobrir alguns dos atributos e métodos inclusos no controller fornecido pelo
-CakePHP.
+Os arquivos de template para estas actions seriam ``src/Template/Recipes/view.ctp``,
+``src/Template/Recipes/share.ctp`` e ``src/Template/Recipes/search.ctp``. A
+nomenclatura convencional para arquivos view é a versão lowercased (minúscula) e
+underscored (sem sublinhado) do nome da action.
+
+Actions dos controllers geralmente usam ``Controller::set()`` para criar um contexto
+que a ``View`` usa para renderizar a camada view. Devido às convenções que o CakePHP
+usa, você não precisa criar e renderizar as views manualmente. Ao invés, uma vez que
+uma action de controller é completada, o CakePHP irá manipular a renderização e devolver
+a view.
 
 .. _controller-life-cycle:
 
