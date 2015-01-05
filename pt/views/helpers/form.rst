@@ -201,7 +201,7 @@ you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::
 
-    $this->Form->addContextProvider('myprovider', function($request, $data) {
+    $this->Form->addContextProvider('myprovider', function ($request, $data) {
         if ($data['entity'] instanceof MyOrmClass) {
             return new MyProvider($request, $data);
         }
@@ -436,10 +436,10 @@ HTML attributes. The following will cover the options specific to
     echo $this->Form->input('name', ['error' => false]);
 
   To override the model error messages use an array with
-  the keys matching the validation rule names::
+  the keys matching the original validation error messages::
 
     $this->Form->input('name', [
-        'error' => ['tooShort' => __('This is not long enough')]
+        'error' => ['Not long enough' => __('This is not long enough')]
     ]);
 
   As seen above you can set the error message for each validation
@@ -533,22 +533,14 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-      <div class="input select">
-          <label for="field">Field</label>
-          <select name="field" id="field">
-              <option value="">(choose one)</option>
-              <option value="0">1</option>
-              <option value="1">2</option>
-              <option value="2">3</option>
-              <option value="3">4</option>
-              <option value="4">5</option>
-          </select>
-      </div>
-
-  .. note::
-
-      If you need to set the default value in a password field to blank,
-      use 'value' => '' instead.
+      <select name="field" id="field">
+          <option value="">(choose one)</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+      </select>
 
   Options can also supplied as key-value pairs.
 
@@ -583,21 +575,35 @@ Options for Select, Checkbox and Radio Inputs
 
     <h2>Primary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <input type="checkbox" name="color[]" value="5" id="color-red" />
-    <label for="color-red">Red</label>
-    <input type="checkbox" name="color[]" value="5" id="color-blue" />
-    <label for="color-blue">Blue</label>
-    <input type="checkbox" name="color[]" value="5" id="color-yellow" />
-    <label for="color-yellow">Yellow</label>
+    <label for="color-red">
+        <input type="checkbox" name="color[]" value="5" id="color-red" />
+        Red
+    </label>
+
+    <label for="color-blue">
+        <input type="checkbox" name="color[]" value="5" id="color-blue" />
+        Blue
+    </label>
+
+    <label for="color-yellow">
+        <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+        Yellow
+    </label>
 
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="color" value="0" />
-    <input type="checkbox" name="color[]" value="5" id="color-green" />
-    <label for="ColorsGreen">Green</label>
-    <input type="checkbox" name="color[]" value="5" id="color-purple" />
-    <label for="color-purple">Purple</label>
-    <input type="checkbox" name="color[]" value="5" id="color-orange" />
-    <label for="color-orange">Orange</label>
+    <label for="color-green">
+        <input type="checkbox" name="color[]" value="5" id="color-green" />
+        Green
+    </label>
+    <label for="color-purple">
+        <input type="checkbox" name="color[]" value="5" id="color-purple" />
+        Purple
+    </label>
+    <label for="color-orange">
+        <input type="checkbox" name="color[]" value="5" id="color-orange" />
+        Orange
+    </label>
 
   Disabling the ``'hiddenField'`` on the second input group would
   prevent this behavior.
@@ -667,7 +673,7 @@ Creating Password Inputs
 
 .. php:method:: password(string $fieldName, array $options)
 
-Creates a password field.::
+Creates a password field. ::
 
     echo $this->Form->password('password');
 
@@ -697,7 +703,7 @@ Creating Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-Creates a textarea input field.::
+Creates a textarea input field. ::
 
     echo $this->Form->textarea('notes');
 
@@ -755,7 +761,7 @@ Creating Checkboxes
 
 Creates a checkbox form element. This method also generates an
 associated hidden form input to force the submission of data for
-the specified field.::
+the specified field. ::
 
     echo $this->Form->checkbox('done');
 
@@ -798,32 +804,17 @@ Creates a set of radio button inputs.
 
 **Options**
 
-* ``$attributes['value']`` to set which value should be selected default.
-
-* ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
-  will disable all of the generated radio buttons.
-
-* ``$attributes['legend']`` Radio elements are wrapped with a legend and
-  fieldset by default. Set ``$attributes['legend']`` to ``false`` to remove
-  them.::
-
-    $options = ['M' => 'Male', 'F' => 'Female'];
-    $attributes = ['legend' => false];
-    echo $this->Form->radio('gender', $options, $attributes);
-
-  Will output:
-
-  .. code-block:: html
-
-    <input name="gender" value="" type="hidden">
-    <input name="gender" id="gender-M" value="M" type="radio">
-    <label for="gender-m">Male</label>
-    <input name="gender" id="gender-F" value="F" type="radio">
-    <label for="gender-F">Female</label>
-
-If for some reason you don't want the hidden input, setting
-``$attributes['value']`` to a selected value or boolean ``false`` will
-do just that.
+* ``value`` - Indicates the value when this radio button is checked.
+* ``label`` - boolean to indicate whether or not labels for widgets should be
+  displayed.
+* ``hiddenField`` - boolean to indicate if you want the results of radio() to
+  include a hidden input with a value of ''. This is useful for creating radio
+  sets that are non-continuous.
+* ``disabled`` - Set to ``true`` or ``disabled`` to disable all the radio
+  buttons.
+* ``empty`` - Set to ``true`` to create an input with the value '' as the first
+  option. When ``true`` the radio label will be 'empty'. Set this option to
+  a string to control the label value.
 
 Creating Select Pickers
 -----------------------
@@ -943,12 +934,16 @@ Defaults to ``true``::
 
       <input name="field" value="" type="hidden">
       <div class="checkbox">
+        <label for="field-1">
          <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-         <label for="field-1">Label 1</label>
+         Label 1
+         </label>
       </div>
       <div class="checkbox">
+         <label for="field-2">
          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-         <label for="field-2">Label 2</label>
+         Label 2
+         </label>
       </div>
 
 * ``$attributes['disabled']`` When creating checkboxes, this option can be set
@@ -970,12 +965,16 @@ Defaults to ``true``::
 
        <input name="field" value="" type="hidden">
        <div class="checkbox">
+          <label for="field-1">
           <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          <label for="field-1">Label 1</label>
+          Label 1
+          </label>
        </div>
        <div class="checkbox">
+          <label for="field-2">
           <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          <label for="field-2">Label 2</label>
+          Label 2
+          </label>
        </div>
 
 Creating File Inputs
@@ -1253,7 +1252,7 @@ Options:
 .. php:method:: isFieldError(string $fieldName)
 
 Returns ``true`` if the supplied $fieldName has an active validation
-error.::
+error. ::
 
     if ($this->Form->isFieldError('gender')) {
         echo $this->Form->error('gender');
@@ -1282,7 +1281,7 @@ Creating Buttons and Submit Elements
         <div class="submit"><input value="Submit" type="submit"></div>
 
     You can also pass a relative or absolute URL to an image for the
-    caption parameter instead of caption text.::
+    caption parameter instead of caption text. ::
 
         echo $this->Form->submit('ok.png');
 
@@ -1402,15 +1401,15 @@ of defaults. You may need to customize the templates to suit your application.
 To change the templates when the helper is loaded you can set the ``templates``
 option when including the helper in your controller::
 
-    public $helpers = [
-        'Form' => [
-            'templates' => 'app_form.php',
-        ]
-    ];
+    // In a View class
+    $this->loadHelper('Form', [
+        'templates' => 'app_form.php',
+    ]);
 
 This would load the tags in ``config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
+    // in config/app_form.php
     $config = [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
@@ -1480,6 +1479,21 @@ example::
         'type' => 'radio'
     ]);
 
+Moving Checkboxes & Radios Outside of a Label
+---------------------------------------------
+
+By default CakePHP nests checkboxes and radio buttons within label elements.
+This helps make it easier to integrate popular CSS frameworks. If you need to
+place checkbox/radio inputs outside of the label you can do so by modifying the
+templates::
+
+    $this->Form->templates([
+        'nestingLabel' => '{{input}}<label{{attrs}}>{{text}}</label>',
+        'formGroup' => '{{input}}{{label}}',
+    ]);
+
+This will make radio buttons and checkboxes render outside of their labels.
+
 Generating Entire Forms
 =======================
 
@@ -1532,6 +1546,64 @@ parameter::
 
     echo $this->Form->allInputs(['password' => false]);
 
+.. _associated-form-inputs:
+
+Creating Inputs for Associated Data
+===================================
+
+Creating forms for associated data is straightforward and is closely related to
+the paths in your entity's data. Assuming the following table relations:
+
+* Authors HasOne Profiles
+* Authors HasMany Articles
+* Articles HasMany Comments
+* Articles BelongsTo Authors
+* Articles BelongsToMany Tags
+
+If we were editing an article with its associations loaded we could
+create the following inputs::
+
+    $this->Form->create($article);
+
+    // Article inputs.
+    echo $this->Form->input('title');
+
+    // Author inputs (belongsTo)
+    echo $this->Form->input('author.id');
+    echo $this->Form->input('author.first_name');
+    echo $this->Form->input('author.last_name');
+
+    // Author profile (belongsTo + hasOne)
+    echo $this->Form->input('author.profile.id');
+    echo $this->Form->input('author.profile.username');
+
+    // Tags inputs (belongsToMany)
+    echo $this->Form->input('tags.0.id');
+    echo $this->Form->input('tags.0.name');
+    echo $this->Form->input('tags.1.id');
+    echo $this->Form->input('tags.1.name');
+
+    // Inputs for the joint table (articles_tags)
+    echo $this->Form->input('tags.0._joinData.starred');
+    echo $this->Form->input('tags.1._joinData.starred');
+
+    // Comments inputs (hasMany)
+    echo $this->Form->input('comments.0.id');
+    echo $this->Form->input('comments.0.comment');
+    echo $this->Form->input('comments.1.id');
+    echo $this->Form->input('comments.1.comment');
+
+The above inputs could then be marshalled into a completed entity graph using
+the following code in your controller::
+
+    $article = $this->Articles->patchEntity($article, $this->request->data, [
+        'associated' => [
+            'Authors',
+            'Authors.Profiles',
+            'Tags',
+            'Comments'
+        ]
+    ]);
 
 Adding Custom Widgets
 =====================
@@ -1557,7 +1629,7 @@ could do the following::
 
     use Cake\View\Widget\WidgetInterface;
 
-    class Autocomplete implements WidgetInterface
+    class AutocompleteWidget implements WidgetInterface
     {
 
         protected $_templates;
@@ -1586,46 +1658,44 @@ widget could be built.
 Using Widgets
 -------------
 
-You can load custom widgets either in the ``$helpers`` array or using the
-``addWidget()`` method. In your helpers array, widgets are defined as
+You can load custom widgets when loading FormHelper or by using the
+``addWidget()`` method. When loading FormHelper, widgets are defined as
 a setting::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => ['App\View\Widget\Autocomplete']
-            ]
+    // In View class
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => ['Autocomplete']
         ]
-    ];
+    ]);
 
 If your widget requires other widgets, you can have FormHelper populate those
 dependencies by declaring them::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => [
-                    'App\View\Widget\Autocomplete',
-                    'text',
-                    'label'
-                ]
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => [
+                'App\View\Widget\AutocompleteWidget',
+                'text',
+                'label'
             ]
         ]
-    ];
+    ]);
 
 In the above example, the autocomplete widget would depend on the ``text`` and
-``label`` widgets. When the autocomplete widget is created, it will be passed
+``label`` widgets. If your widget needs access to the View, you should use the
+``_view`` 'widget'.  When the autocomplete widget is created, it will be passed
 the widget objects that are related to the ``text`` and ``label`` names. To add
 widgets using the ``addWidget()`` method would look like::
 
     // Using a classname.
     $this->Form->addWidget(
         'autocomplete',
-        ['App\View\Widget\Autocomplete', 'text' 'label']
+        ['Autocomplete', 'text' 'label']
     );
 
     // Using an instance - requires you to resolve dependencies.
-    $autocomplete = new Autocomplete(
+    $autocomplete = new AutocompleteWidget(
         $this->Form->getTemplater(),
         $this->Form->widgetRegistry()->get('text'),
         $this->Form->widgetRegistry()->get('label'),

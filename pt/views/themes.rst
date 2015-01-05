@@ -3,7 +3,7 @@ Themes
 
 You can take advantage of themes, making it easy to switch the look and feel of
 your page quickly and easily. Themes in CakePHP are simply plugins that focus on
-providing view files. In addition to template files, they can also provide
+providing template files. In addition to template files, they can also provide
 helpers and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
@@ -19,7 +19,7 @@ You can also set or change the theme name within an action or within the
 
     $this->theme = 'AnotherExample';
 
-Theme view files need to be within a plugin with the same name. For example,
+Theme template files need to be within a plugin with the same name. For example,
 the above theme would be found in ``plugins/AnotherExample/src/Template``.
 It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
 that, the folder structure within the ``plugins/AnotherExample/src/Template`` folder is
@@ -30,7 +30,7 @@ at ``plugins/Modern/src/Template/Posts/edit.ctp``. Layout files would reside in
 ``plugins/Modern/src/Template/Layout/``.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the ``src/Template/`` folder. This way, you can create master view files
+file in the ``src/Template/`` folder. This way, you can create master template files
 and simply override them on a case-by-case basis within your theme folder.
 
 Theme Assets
@@ -43,7 +43,7 @@ handled by :php:class:`Cake\\Routing\\Dispatcher`. To improve performance for pr
 environments, it's recommended that you :ref:`symlink-assets`.
 
 All of CakePHP's built-in helpers are aware of themes and will create the
-correct paths automatically. Like view files, if a file isn't in the theme
+correct paths automatically. Like template files, if a file isn't in the theme
 folder, it will default to the main webroot folder::
 
     // When in a theme with the name of 'purple_cupcake'
