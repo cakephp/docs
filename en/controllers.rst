@@ -327,7 +327,7 @@ You can also pass data to the action::
 
     return $this->redirect(['action' => 'edit', $id]);
 
-The second parameter of ``redirect()`` allows you to define an HTTP
+The second parameter of ``Controller::redirect()`` allows you to define an HTTP
 status code to accompany the redirect. You may want to use 301
 (moved permanently) or 303 (see other), depending on the nature of
 the redirect.
