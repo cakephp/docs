@@ -33,14 +33,18 @@ that the order key must be defined in an array structure like below::
     class ArticlesController extends AppController
     {
 
-        public $components = ['Paginator'];
-
         public $paginate = [
             'limit' => 25,
             'order' => [
                 'Articles.title' => 'asc'
             ]
         ];
+
+        public function intialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
     }
 
 You can also include any of the options supported by
@@ -49,8 +53,6 @@ You can also include any of the options supported by
     class ArticlesController extends AppController
     {
 
-        public $components = ['Paginator'];
-
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
             'limit' => 25,
@@ -58,6 +60,12 @@ You can also include any of the options supported by
                 'Articles.title' => 'asc'
             ]
         ];
+
+        public function intialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
     }
 
 While you can pass most of the query options from the paginate property it is
@@ -71,6 +79,36 @@ setting the ``finder`` option::
         public $paginate = [
             'finder' => 'published',
         ];
+    }
+    
+Because custom finder methods can also take in options, 
+this is how you pass in options into a custom finder method within the paginate property::
+
+    class ArticlesController extends AppController
+    {
+
+        // find articles by tag
+        public function tags()
+        {
+            $tags = $this->request->params['pass'];
+
+            $customFinderOptions = [
+                'tags' => $tags
+            ];
+            // the custom finder method is called findTagged inside ArticlesTable.php
+            // it should look like this:
+            // public function findTagged(Query $query, array $options) {
+            // hence you use tagged as the key
+            $this->paginate = [
+                'finder' => [
+                    'tagged' => $customFinderOptions
+                ]
+            ];
+    	    
+            $articles = $this->paginate($this->Articles);
+    	    
+            $this->set(compact('articles', 'tags'));
+        }
     }
 
 In addition to defining general pagination values, you can define more than one
@@ -190,6 +228,8 @@ page count.
 
 So you could either let the normal error page be rendered or use a try catch
 block and take appropriate action when a ``NotFoundException`` is caught::
+
+    use Cake\Network\Exception\NotFoundException;
 
     public function index()
     {

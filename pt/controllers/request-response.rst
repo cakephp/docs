@@ -224,13 +224,12 @@ Some examples would be::
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
-    // Add a callback detector. Can either be an anonymous function
-    // or a regular callable.
+    // Add a callback detector. Must be a valid callable.
     $this->request->addDetector(
         'awesome',
-        ['callback' => function ($request) {
+        function ($request) {
             return isset($request->awesome);
-        }]
+        }
     );
 
 ``Request`` also includes methods like
