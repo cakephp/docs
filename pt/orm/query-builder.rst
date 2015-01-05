@@ -1,9 +1,7 @@
-.. php:namespace:: Cake\ORM
-
-.. _query-builder:
-
 Query Builder
 #############
+
+.. php:namespace:: Cake\ORM
 
 .. php:class:: Query
 
@@ -20,8 +18,10 @@ of the following things occur:
 - The query is iterated with ``foreach()``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
+- The query's ``first()`` method is called. This will return the first result in the set 
+  built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
 - The query's ``all()`` method is called. This will return the result set and
-  can only be used with select statements.
+  can only be used with ``SELECT`` statements.
 - The query's ``toArray()`` method is called.
 
 Until one of these conditions are met, the query can be modified with additional
@@ -39,7 +39,7 @@ The easiest way to create a ``Query`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
 modified. You can also use a table's connection object to access the lower level
 Query builder that does not include ORM features, if necessary. See the
-:ref:`database-queries` section for more information.  For the remaining
+:ref:`database-queries` section for more information. For the remaining
 examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
 
     // Start a new query.
@@ -123,10 +123,10 @@ anything you can call on a Collection object, you can also do in a Query object:
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function($row) { // map() is a collection method, it executes the query
+        ->map(function ($row) { // map() is a collection method, it executes the query
             $row->trimmedTitle = trim($row->title);
             return $row;
-        });
+        })
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
@@ -241,6 +241,26 @@ following SQL on MySQL::
 The ``:c0`` value will have the ``' NEW'`` text bound when the query is
 executed.
 
+In addition to the above functions, the ``func()`` method can be used to create any generic SQL function
+such as ``year``, ``date_format``, ``convert``, etc. For example::
+
+    $query = $articles->find();
+    $year = $query->func()->year([
+        'created' => 'literal'
+    ]);
+    $time = $query->func()->date_format([
+        'created' => 'literal',
+        "'%H:%i'" => 'literal'
+    ]);
+    $query->select([
+        'yearCreated' => $year,
+        'timeCreated' => $time
+    ]);
+
+Would result in::
+
+    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
 Aggregates - Group and Having
 -----------------------------
 
@@ -269,6 +289,31 @@ not make sense. In these situations you may want to disable entity hydration::
 
     When hydration is disabled results will be returned as basic arrays.
 
+Case statements
+---------------
+
+The ORM also offers the SQL ``case`` expression. The ``case`` expression allows
+for implementing ``if ... then ... else`` logic inside your SQL. This can be useful
+for reporting on data where you need to conditionally sum or count data, or where you
+need to specific data based on a condition.
+
+If we wished to know how many published articles are in our database, we'd need to generate the following SQL::
+
+    SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
+    FROM articles GROUP BY published
+
+To do this with the query builder, we'd use the following code::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
+    $notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N']), 1, 'integer');
+
+    $query->select([
+        'number_published' => $query->func()->sum($publishedCase),
+        'number_unpublished' => $query->func()->sum($unpublishedCase)
+    ])
+    ->group('published');
+
 .. _advanced-query-conditions:
 
 Advanced Conditions
@@ -282,12 +327,12 @@ conditions arrays in previous versions of CakePHP::
     $query = $articles->find()
         ->where([
             'author_id' => 3,
-            'OR' => ['author_id' => 2],
+            'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
 The above would generate SQL like::
 
-    SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
+    SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
 If you'd prefer to avoid deeply nested arrays, you can use the ``orWhere()`` and
 ``andWhere()`` methods to build your queries. Each method sets the combining
@@ -317,16 +362,18 @@ The above generates SQL similar to::
 
     SELECT *
     FROM articles
-    WHERE (promoted = 1
-    OR (published = true AND view_count > 10)
-    AND (author_id = 2 OR author_id = 3))
+    WHERE (promoted = true
+    OR (
+      (published = true AND view_count > 10)
+      AND (author_id = 2 OR author_id = 3)
+    ))
 
-By using functions as the parameters to ``orWhere()`` abd ``andWhere()``,
+By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
 you can easily compose conditions together with the expression objects::
 
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
-        ->andWhere(function($exp) {
+        ->andWhere(function ($exp) {
             return $exp->or_([
                 'author_id' => 2,
                 'is_highlighted' => true
@@ -353,7 +400,7 @@ with ``OR``. An example of adding conditions with an ``Expression`` object would
 be::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             return $exp
                 ->eq('author_id', 2)
                 ->eq('published', true)
@@ -378,7 +425,7 @@ However, if we wanted to use both ``AND`` & ``OR`` conditions we could do the
 following::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -400,7 +447,7 @@ The ``or_()`` and ``and_()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             $orConditions = $exp->or_(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
@@ -413,7 +460,7 @@ parameters. This is often easier to read than method chaining::
 You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
-        ->where(function($exp) {
+        ->where(function ($exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
@@ -429,6 +476,26 @@ Which will generate the following SQL looking like::
     NOT (author_id = 2 OR author_id = 5)
     AND view_count <= 10)
 
+It is also possible to build expressions using SQL functions::
+
+    $query = $articles->find()
+        ->where(function ($exp, $q) {
+            $year = $q->func()->year([
+                'created' => 'literal'
+            ]);
+            return $exp
+                ->gte($year, 2014)
+                ->eq('published', true);
+        });
+
+Which will generate the following SQL looking like::
+
+    SELECT *
+    FROM articles
+    WHERE (
+    YEAR(created) >= 2014
+    AND published = 1
+    )
 
 When using the expression objects you can use the following methods to create
 conditions:
@@ -486,6 +553,17 @@ the ``IS`` operator to automatically create the correct expression::
 
 The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on the type of ``$parentId``
 
+Automatic IS NOT NULL Creation
+------------------------------
+
+When a condition value is expected not to be ``null`` or any other value, you can use
+the ``IS NOT`` operator to automatically create the correct expression::
+
+    $query = $categories->find()
+        ->where(['parent_id IS NOT' => $parentId]);
+
+
+The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL`` depending on the type of ``$parentId``
 
 Raw Expressions
 ---------------
@@ -504,6 +582,41 @@ expression objects to add snippets of SQL to your queries::
 
     Using expression objects leaves you vulnerable to SQL injection. You should
     avoid interpolating user data into expressions.
+
+Getting Results
+===============
+
+Once you've made your query, you'll want to retrieve rows from it. There are
+a few ways of doing this::
+
+    // Iterate the query
+    foreach ($query as $row) {
+        // Do stuff.
+    }
+
+    // Get the results
+    $results = $query->all();
+
+You can use :doc:`any of the collection </core-libraries/collections>` methods
+on you query objects to pre-process or transform the results::
+
+    // Use one of the collection methods.
+    $ids = $query->map(function ($row) {
+        return $row->id;
+    });
+
+    $maxAge = $query->max(function ($row) {
+        return $max->age;
+    });
+
+You can use ``first`` or ``firstOrFail`` to retrieve a single record. These
+methods will alter the query adding a ``LIMIT 1`` clause::
+
+    // Get just the first row
+    $row = $query->first();
+
+    // Get the first row or an exception.
+    $row = $query->firstOrFail();
 
 .. _query-count:
 
@@ -530,8 +643,7 @@ by clauses without having to rewrite the query in any way. For example, consider
 this query for retrieving article ids and their comments count::
 
     $query = $articles->find();
-    $query->find()
-        ->select(['Articles.id', $query->func()->count('Comments.id')])
+    $query->select(['Articles.id', $query->func()->count('Comments.id')])
         ->matching('Comments')
         ->group(['Articles.id']);
     $total = $query->count();
@@ -548,7 +660,7 @@ expensive unneeded parts such as left joins. This becomes particularly handy
 when using the CakePHP built-in pagination system which calls the ``count()``
 method::
 
-    $query = $query->where(['is_active' => true])->counter(function($query) {
+    $query = $query->where(['is_active' => true])->counter(function ($query) {
         return 100000;
     });
     $query->count(); // Returns 100000
@@ -583,7 +695,7 @@ cache key::
 
     // Generate a key based on a simple checksum
     // of the query's where clause
-    $query->cache(function($q) {
+    $query->cache(function ($q) {
         return 'articles-' . md5(serialize($q->clause('where')));
     });
 
@@ -609,10 +721,10 @@ Loading Associations
 The builder can help you retrieve data from multiple tables at the same time
 with the minimum amount of queries possible. To be able to fetch associated
 data, you first need to setup associations between the tables as described in
-the :ref:`table-associations` section. This technique of combining queries
+the :doc:`/orm/associations` section. This technique of combining queries
 to fetch associated data from other tables is called **eager loading**.
 
-.. include:: ./table-objects.rst
+.. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-contain
     :end-before: end-contain
 
@@ -788,8 +900,8 @@ the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
-    $query->formatResults(function($results, $query) {
-        return $results->map(function($row) {
+    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results, \Cake\Database\Query $query) {
+        return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
         });
@@ -809,8 +921,8 @@ expect::
 
     // In a method in the Articles table
     $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function($authors) {
-            return $authors->map(function($author) {
+        return $q->formatResults(function ($authors) {
+            return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
                 return $author;
             });
@@ -907,7 +1019,7 @@ information about CakePHP, as usual we need a mapper function::
         }
     };
 
-It first checks for whether the "cakephp" word in in the article's body, and
+It first checks for whether the "cakephp" word is in the article's body, and
 then breaks the body into individual words. Each word will create its own
 ``bucket`` where each article id will be stored. Now let's reduce our results to
 only extract the count::
@@ -925,7 +1037,7 @@ Finally, we put everything together::
         ->mapReduce($mapper, $reducer);
 
 This could return a very large array if we don't clean stop words, but it could
-look something like like this::
+look something like this::
 
     [
         'cakephp' => 100,

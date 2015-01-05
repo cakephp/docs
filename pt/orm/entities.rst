@@ -1,5 +1,3 @@
-.. _entities:
-
 Entities
 ########
 
@@ -142,6 +140,32 @@ name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
+Do bear in mind that virtual properties cannot be used in finds.
+
+
+Checking if a Property Has Been Modified
+========================================
+
+.. php:method:: dirty($field, $dirty = null)
+
+You may want to make code conditional based on whether or not properties have
+changed in an entity. For example, may only want to validate fields when they
+change::
+
+    // See if the title has been modified.
+    $article->dirty('title');
+
+You can also flag fields as being modified. This is handy when appending into
+array properties::
+
+    // Add a comment and mark the field as changed.
+    $article->comments[] = $newComment;
+    $article->dirty('comments', true);
+
+In addition you can also base you conditional code on the original properties values
+by using the ``getOriginal()`` method. This method will either return the original
+value of the property if it has been modified or its actual value.
+
 Validation Errors
 =================
 
@@ -167,8 +191,8 @@ it easier to test code that works with error messages::
 Mass Assignment
 ===============
 
-While setting properties to entites in bulk is simple and convenient, it can
-create signifcant security issues. Bulk assigning user data from the request
+While setting properties to entities in bulk is simple and convenient, it can
+create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. By default CakePHP
 protects against mass-assignment and makes you whitelist which fields
 are mass-assignable.

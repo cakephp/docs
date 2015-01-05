@@ -178,7 +178,7 @@ on the fly by using the 'config' function::
 Optionally, you can have a finer grain control of the scope by passing a closure
 as the scope::
 
-    $this->behaviors()->Tree->config('scope', function($query) {
+    $this->behaviors()->Tree->config('scope', function ($query) {
         $country = $this->getConfigureContry(); // A made-up function
         return $query->where(['country_name' => $country]);
     });

@@ -59,6 +59,15 @@ To create our sluggable behavior. Put the following into
     {
     }
 
+Similar to tables, behaviors also have an ``initialize()`` hook where you can
+put your behavior's initialization code, if required::
+
+    public function initialize(array $config)
+    {
+        // Some initialization code here
+    }
+
+
 We can now add this behavior to one of our table classes. In this example we'll
 use an ``ArticlesTable``, as articles often have slug properties for creating
 friendly URLs::
@@ -142,6 +151,7 @@ behavior should now look like::
     use Cake\Event\Event;
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
+    use Cake\ORM\Query;
     use Cake\Utility\Inflector;
 
     class SluggableBehavior extends Behavior
@@ -230,3 +240,21 @@ rename/remove finder methods when adding a behavior to a table. For example::
             'slugged' => 'findSlug',
         ]
     ]);
+
+
+Accessing Loaded Behaviors
+==========================
+
+Once you've attached behaviors to your Table instance you can introspect the
+loaded behaviors, or access specific behaviors using the ``BehaviorRegistry``::
+
+    // See which behaviors are loaded
+    $table->behaviors()->loaded();
+
+    // Check if a specific behavior is loaded.
+    // Remember to omit plugin prefixes.
+    $table->behaviors()->has('CounterCache');
+
+    // Get a loaded behavior
+    // Remember to omit plugin prefixes
+    $table->behaviors()->get('CounterCache');
