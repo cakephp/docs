@@ -168,7 +168,7 @@ the tree::
             } else {
                 $this->Flash->error('The category could not be moved up. Please, try again.');
             }
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect($this->referer(['action' => 'index']));
         }
 
         public function move_down($id = null)
@@ -180,7 +180,7 @@ the tree::
             } else {
                 $this->Flash->error('The category could not be moved down. Please, try again.');
             }
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect($this->referer(['action' => 'index']));
         }
     }
 
@@ -259,7 +259,7 @@ The article add file should look something like this:
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-When you go to the address `/yoursite/articles/add` and you should see a list
+When you go to the address `/yoursite/articles/add` you should see a list
 of categories to choose.
 
 .. meta::
