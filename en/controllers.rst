@@ -260,7 +260,7 @@ Rendering a Specific Template
 
 In your controller, you may want to render a different view than the
 conventional one. You can do this by calling ``Controller::render()`` directly. Once you
-have called ``render()``, CakePHP will not try to re-render the view::
+have called ``Controller::render()``, CakePHP will not try to re-render the view::
 
     namespace App\Controller;
 
