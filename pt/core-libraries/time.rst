@@ -13,7 +13,11 @@ use the ``Time`` class::
     class UsersController extends AppController
     {
 
-        public $components = ['Auth'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Auth');
+        }
 
         public function afterLogin()
         {
@@ -99,14 +103,14 @@ Dates can be modified through subtraction and addition of their components::
 You can get the internal components of a date by accessing its properties::
 
     $now = Time::now();
-    echo $now->y; // 2014
-    echo $now->m; // 5
-    echo $now->d; // 10
+    echo $now->year; // 2014
+    echo $now->month; // 5
+    echo $now->day; // 10
     echo $now->timezone; // America/New_York
 
 It is also allowed to directly assign those properties to modify the date::
 
-    $time->y = 2015;
+    $time->year = 2015;
     $time->timezone = 'Europe/Paris';
 
 Formatting
@@ -129,7 +133,7 @@ dates. CakePHP makes this a snap::
     $now->i18nFormat(\IntlDateFormatter::FULL);
 
     // Use full date but short time format
-    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     // Outputs '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
@@ -175,9 +179,9 @@ a different locale is specified directly in the formatting method.
 Likewise, it is possible to alter the default formatting string to be used for
 ``i18nFormat``::
 
-    Time::setToStringFormat(\IntlDateFormatter::Short);
+    Time::setToStringFormat(\IntlDateFormatter::SHORT);
 
-    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::Short]);
+    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     Time::setToStringFormat('YYYY-MM-dd HH:mm:ss');
 
@@ -265,15 +269,15 @@ You can see if a ``Time`` instance falls within a given range using
     // Within 2 next weeks.
     echo $time->isWithinNext('2 weeks');
 
-.. php:method:: isWithinPast($interval)
+.. php:method:: wasWithinLast($interval)
 
 You can also compare a ``Time`` instance within a range in the past::
 
     // Within past 2 days.
-    echo $time->isWithinPast(2);
+    echo $time->wasWithinLast(2);
 
     // Within past 2 weeks.
-    echo $time->isWithinPast('2 weeks');
+    echo $time->wasWithinLast('2 weeks');
 
 .. end-time
 

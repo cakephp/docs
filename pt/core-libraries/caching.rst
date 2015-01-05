@@ -61,37 +61,60 @@ for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
 Using multiple configurations also lets you incrementally change the storage as
-needed. Example::
+needed. For example in your ``config/app.php`` you could put the following::
+
+    // ...
+    'Cache' => [
+        'short' => [
+            'className' => 'File',
+            'duration' => '+1 hours',
+            'path' => CACHE,
+            'prefix' => 'cake_short_'
+        ],
+        // Using a fully namespaced name.
+        'long' => [
+            'className' => 'Cake\Cache\Engine\FileEngine',
+            'duration' => '+1 week',
+            'probability' => 100,
+            'path' => CACHE . 'long' . DS,
+        ]
+    ]
+    // ...
+
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
+
+    Cache::config('short', [
+        'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
+    ]);
+
+When using a DSN string you can define any additional parameters/options as
+query string arguments.
+
+You can also configure Cache engines at runtime::
 
     // Using a short name
-    Cache::config('short', array(
+    Cache::config('short', [
         'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
         'prefix' => 'cake_short_'
-    ));
+    ]);
 
     // Using a fully namespaced name.
-    Cache::config('long', array(
+    Cache::config('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
-    ));
+    ]);
 
     // Using a constructed object.
     $object = new FileEngine($config);
     Cache::config('other', $object);
 
-.. note::
-
-    You must specify which className to use. It does **not** default to
-    File.
-
-By placing the above code in your ``config/app.php`` you will have two
-additional Cache configurations. The name of these configurations 'short' or
-'long' is used as the ``$config`` parameter for
-:php:meth:`Cake\\Cache\\Cache::write()` and
+The name of these configurations 'short' or 'long' is used as the ``$config``
+parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
 :php:meth:`Cake\\Cache\\Cache::read()`. When configuring Cache engines you can
 refer to the class name using the following syntaxes:
 
@@ -103,6 +126,11 @@ refer to the class name using the following syntaxes:
   classes located outside of the conventional locations.
 * Using an object that extends the ``CacheEngine`` class.
 
+.. note::
+
+    When using the FileEngine you might need to use the ``mask`` option to
+    ensure cache files are made with the correct permissions.
+
 Removing Configured Cache Engines
 ---------------------------------
 
@@ -112,24 +140,6 @@ Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
 :php:meth:`Cake\\Cache\\Cache::config()`. Dropping a cache engine will remove
 the config and destroy the adapter if it was constructed.
-
-Other Cache Related Configuration
----------------------------------
-
-Other than configuring caching adapters, there are a few other cache related
-configuration properties:
-
-enabled
-    When set to ``true``, persistent caching is disabled site-wide.
-    This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
-    You can control this value with :php:meth:`Cake\\Cache\\Cache::enable()` and
-    :php:meth:`Cake\\Cache\\Cache::disable()`. The current state can be read with
-    :php:meth:`Cake\\Cache\\Cache::enabled()`.
-
-.. note::
-
-    When using the FileEngine you might need to use the ``mask`` option to
-    ensure cache files are made with the correct permissions.
 
 Writing to a Cache
 ==================
@@ -190,9 +200,9 @@ For example, you often want to cache remote service call results. You could use
     class IssueService 
     {
 
-        function allIssues($repo)
+        public function allIssues($repo)
         {
-            return Cache::remember($repo . '-issues', function() use ($repo) {
+            return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
         }
@@ -206,7 +216,7 @@ Reading From a Cache
 .. php:staticmethod:: read($key, $config = 'default')
 
 ``Cache::read()`` is used to read the cached value stored under
-``$key`` from the ``$config``. If $config is null the default
+``$key`` from the ``$config``. If ``$config`` is null the default
 config will be used. ``Cache::read()`` will return the cached value
 if it is a valid cache or ``false`` if the cache has expired or
 doesn't exist. The contents of the cache might evaluate false, so
@@ -431,12 +441,12 @@ directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either ``src/Cache/Engine/MyCustomCacheEngine.php``
 as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.::
+dot syntax. ::
 
-    Cache::config('custom', array(
+    Cache::config('custom', [
         'className' => 'CachePack.MyCustomCache',
         // ...
-    ));
+    ]);
 
 Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which
 defines a number of abstract methods as well as provides a few initialization

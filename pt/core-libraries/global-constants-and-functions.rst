@@ -102,6 +102,12 @@ such as debugging and translating content.
     for count $count. Some languages have more than one form for plural
     messages dependent on the count.
 
+.. php:function:: collection(mixed $items)
+
+    Convenience wrapper for instantiating a new :php:class:`Cake\Collection\Collection`
+    object, wrapping the passed argument. The ``$items`` parameter takes either
+    a ``Traversable`` object or an array.
+
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
     If the core ``$debug`` variable is ``true``, $var is printed out.
@@ -230,5 +236,5 @@ Timing Definition Constants
 
 
 .. meta::
-    :title lang=pt: Global Constants and Functions
-    :keywords lang=pt: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations
+    :title lang=en: Global Constants and Functions
+    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations
