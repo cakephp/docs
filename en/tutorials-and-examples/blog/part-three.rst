@@ -4,36 +4,37 @@ Blog Tutorial - Part 3
 Create a Tree Category
 ======================
 
-Let's continue our tutorial and imagine we want to put our Articles in
-Categories. We want that the categories are ordered and for this, we will use
-the Tree behavior that allow us to organize the categories.
+Let's continue our blog application and imagine we want to categorize our
+articles. We want the categories to be ordered, and for this, we will use the
+:doc:`Tree behavior </orm/behaviors/tree>` to help us organize the
+categories.
 
-But we need first to modify our tables.
+But first, we need to modify our tables.
 
 Migrations Plugin
 =================
 
 We will use the `migrations plugin <https://github.com/cakephp/migrations>`_ to
-create a table in our database. If you already have a table articles in your
+create a table in our database. If you already have an articles table in your
 database, erase it.
 
-Now open your composer.json file and normally you should see that the
-migrations plugin is already in require. If not do as follow::
+Now open your application's ``composer.json`` file. Normally you would see that
+the migrations plugin is already under ``require``. If not add it as follows::
 
     "require": {
         "cakephp/migrations": "dev-master"
     }
 
-Then run `composer update`. The Migrations plugin should now be in the
-`/plugins` folder. Also add ``Plugin::load('Migrations');`` in your
-application's bootstrap.php file.
+Then run ``composer update``. The migrations plugin will now be in your
+application's ``/plugins`` folder. Also add ``Plugin::load('Migrations');`` in
+your application's bootstrap.php file.
 
-Do the following command to create a migration file::
+Once the plugin is loaded, run the following command to create a migration file::
 
     bin/cake migrations create Initial
 
-A migration file has been generated in ``/config/Migrations`` folder. You can
-now open your migration file and add the following::
+A migration file will be generated in the ``/config/Migrations`` folder. You can
+open your new migration file and add the following::
 
     <?php
 
@@ -50,6 +51,7 @@ now open your migration file and add the following::
                 ->addColumn('created', 'datetime')
                 ->addColumn('modified', 'datetime', ['null' => true, 'default' => null])
                 ->save();
+
             $categories = $this->table('categories');
             $categories->addColumn('parent_id', 'integer', ['null' => true, 'default' => null])
                 ->addColumn('lft', 'integer', ['null' => true, 'default' => null])
@@ -62,8 +64,7 @@ now open your migration file and add the following::
         }
     }
 
-
-And launch the following command to create your tables::
+Now run the following command to create your tables::
 
     bin/cake migrations migrate
 
@@ -71,13 +72,13 @@ And launch the following command to create your tables::
 Modifying the Tables
 ====================
 
-Our tables are now set up, we can now focus on the categories.
+With our tables set up, we can now focus on categorizing our articles.
 
 We suppose you already have the files (Tables, Controllers and Templates of
 Articles) from part 2. So we'll just add the references to categories.
 
-We need to bind the Tables Articles and Categories together. So you can open
-the ``/src/Model/Table/ArticlesTable.php`` and add the following::
+We need to associated the Articles and Categories tables together. Open
+the ``/src/Model/Table/ArticlesTable.php`` file and add the following::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -97,9 +98,8 @@ the ``/src/Model/Table/ArticlesTable.php`` and add the following::
         }
     }
 
-
-Generate all Files for Categories
-=================================
+Generate Skeleton Code for Categories
+=====================================
 
 Create all files by launching bake commands::
 
@@ -107,44 +107,48 @@ Create all files by launching bake commands::
     bin/cake bake controller Categories
     bin/cake bake view Categories
 
-The bake tool has created all your files in a snap, so don't hesitate to look
-at the new files.
+The bake tool has created all your files in a snap. You can give them a quick
+read if you want re-familiarize yourself with how CakePHP works.
 
+Attach TreeBehavior to CategoriesTable
+======================================
 
-TreeBehavior Attached to CategoriesTable
-========================================
+The :doc:`TreeBehavior </orm/behaviors/tree>` helps you manage hierarchical Tree
+structures in database table. It uses the `MPTT logic
+<http://www.sitepoint.com/hierarchical-data-database-2/>`_ to manage the data.
+MPTT tree structures are optimized for reads, which often makes them a good fit
+for read heavy applications like blogs.
 
-Here put some explanation about TreeBehavior. More info in
-:doc:`Tree Behavior </orm/behaviors/tree>`.
-
-If you open the CategoriesTable.php file baked, you'll see that the TreeBehavior
-has been attached to your CategoriesTable in your initialize method::
+If you open the ``src/Model/Table/CategoriesTable.php`` file, you'll see
+that the TreeBehavior has been attached to your CategoriesTable in the
+``initialize`` method::
 
     $this->addBehavior('Tree');
 
-So now you'll be able to access some features like reordering the categories.
-We'll see that in a moment.
+With the TreeBehavior attached you'll be able to access some features like
+reordering the categories.  We'll see that in a moment.
 
 But for now, you have to remove the following inputs in your Categories add and
-edit files::
+edit template files::
 
     echo $this->Form->input('lft');
     echo $this->Form->input('rght');
 
-Indeed, these fields are automatically fullfilled by the Tree Behavior when
+These fields are automatically managed by the TreeBehavior when
 a category is saved.
 
-Please go now in ``/yoursite/categories/add`` and add some new categories.
+Using your web browser, add some new categories using the
+``/yoursite/categories/add`` controller action.
 
+Reordering Categories with TreeBehavior
+========================================
 
-Reorder Categories with TreeBehavior
-====================================
+In your categories index template file, you can list the categories and ordering
+them.
 
-In your categories index file, you can list the categories and ordering them.
-
-Let's modify the index method in your CategoriesController.php and add
-move_up and move_down methods to be able to reorder the categories in the
-tree::
+Let's modify the index method in your ``CategoriesController.php`` and add
+``move_up`` and ``move_down`` methods to be able to reorder the categories in
+the tree::
 
     class CategoriesController extends AppController
     {
@@ -198,13 +202,12 @@ And the index.ctp::
         <br />
     <?php endforeach; ?>
 
-
-
 Modifying the ArticlesController
 ================================
 
-In our ArticlesController, we'll get the list of all the categories.
-This will allow us to choose a category for an Article in the view::
+In our ``ArticlesController``, we'll get the list of all the categories.
+This will allow us to choose a category for an Article when creating or editing
+it::
 
     // src/Controller/ArticlesController.php
 
@@ -237,8 +240,8 @@ This will allow us to choose a category for an Article in the view::
     }
 
 
-Modifying the Articles Template
-===============================
+Modifying the Articles Templates
+================================
 
 The article add file should look something like this:
 
@@ -246,7 +249,7 @@ The article add file should look something like this:
 
     <!-- File: src/Template/Articles/add.ctp -->
 
-    <h1>Edit Article</h1>
+    <h1>Add Article</h1>
     <?php
     echo $this->Form->create($article);
     // just added the categories input
@@ -256,10 +259,8 @@ The article add file should look something like this:
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-
 When you go to the address `/yoursite/articles/add` and you should see a list
 of categories to choose.
-
 
 .. meta::
     :title lang=en: Blog Tutorial Migrations and Tree
