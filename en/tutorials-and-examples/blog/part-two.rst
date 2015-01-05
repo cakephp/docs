@@ -660,9 +660,10 @@ features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
-Now that you've created a basic CakePHP application, you're ready for
-the real thing. Start your own project and read the rest of the
-:doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
+Now that you've created a basic CakePHP application, you can either continue to
+:doc:`/tutorials-and-examples/blog/part-three`, or start your own project. You
+can also peruse the :doc:`/topics` or `API <http://api.cakephp.org/3.0>` to
+learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the
 :doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!
