@@ -519,3 +519,7 @@ Mais sobre controllers
 
     controllers/pages-controller
     controllers/components
+
+.. meta::
+    :title lang=pt: Controllers
+    :keywords lang=pt: models corretos,controller class,controller controller,core library,um model,model único,request data,mvc,attributes,variables,logic,callback,controller callback,app controller,appcontroller
