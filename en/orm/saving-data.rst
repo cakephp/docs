@@ -759,7 +759,7 @@ table class. Behaviors and other event subscribers can use the
 ``Model.buildRules`` event to augment the rules checker for a given Table
 class::
 
-    use Cake\ORM\RulesChecker
+    use Cake\ORM\RulesChecker;
     
     // In a table class
     public function buildRules(RulesChecker $rules) {
