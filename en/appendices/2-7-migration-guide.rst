@@ -22,8 +22,20 @@ CakeSession
 -----------
 - :php:meth:`CakeSession::consume()` has been added to read and delete from
   session in a single step.
-- Argument `$renew` has been added to :php:meth:`CakeSession::clear()` to allow emptying the session
-without forcing a new id and renewing the session. It defaults to ``true``.
+- Argument `$renew` has been added to :php:meth:`CakeSession::clear()` to allow
+  emptying the session without forcing a new id and renewing the session. It
+  defaults to ``true``.
+
+
+Utility
+=======
+
+CakeText
+--------
+The class ``String`` has been renamed to ``CakeText``. This resolves some
+conflicts around HHVM compatability as well as possibly PHP7+. There is
+a ``String`` class provided as well for compatibility reasons.
+
 
 Controller
 ==========
@@ -40,6 +52,7 @@ View
 
 SessionHelper
 -------------
+
 - :php:meth:`SessionHelper::consume()` has been added to read and delete from
   session in a single step.
 
@@ -49,4 +62,5 @@ TestSuite
 
 ControllerTestCase
 ------------------
+
 - :php:meth:`ControllerTestCase::testAction()` now supports an array as URL.
