@@ -133,7 +133,7 @@ action name.
 
 Controller actions generally use
 ``Controller::set()`` to create a context that
-``View`` uses to render the view. Because of the conventions that
+``View`` uses to render the view layer. Because of the conventions that
 CakePHP uses, you don't need to create and render the view manually. Instead,
 once a controller action has completed, CakePHP will handle rendering and
 delivering the View.
