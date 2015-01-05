@@ -25,6 +25,16 @@ CakeSession
 - Argument `$renew` has been added to :php:meth:`CakeSession::clear()` to allow emptying the session
 without forcing a new id and renewing the session. It defaults to ``true``.
 
+
+Utility
+=======
+
+CakeText
+========
+The class ``String`` has been renamed to ``CakeText``. This resolves some conflicts around HHVM compatability as well
+as possibly PHP7+. There is a ``String`` class provided as well for compatibility reasons.
+
+
 Controller
 ==========
 
