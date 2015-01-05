@@ -80,7 +80,7 @@ will also allow you to declare which components should be loaded. While normal
 object-oriented inheritance rules apply, the components and helpers used by
 a controller are treated specially. In these cases, ``AppController`` property
 values are merged with child controller class arrays.  The values in the child
-class will always override those in ``AppController.``
+class will always override those in ``AppController``.
 
 Request Flow
 ============
