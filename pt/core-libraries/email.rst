@@ -17,7 +17,7 @@ First of all, you should ensure the class is loaded::
 
 After you've loaded ``Email``, you can send an email with the following::
 
-    $email = new Email();
+    $email = new Email('default');
     $email->from(['me@example.com' => 'My Site'])
         ->to('you@example.com')
         ->subject('About')
@@ -124,6 +124,15 @@ The above configuration would enable TLS communication for email messages.
     To use SSL + SMTP, you will need to have the SSL configured in your PHP
     install.
 
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
+
+    Email::configTransport('default', [
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
+    ]);
+
+When using a DSN string you can define any additional parameters/options as
+query string arguments.
 
 .. php:staticmethod:: dropTransport($key)
 
@@ -217,7 +226,7 @@ send multipart templated email messages as well::
         ->from('app@domain.com')
         ->send();
 
-This would use the following view files:
+This would use the following template files:
 
 * ``src/Template/Email/text/welcome.ctp``
 * ``src/Template/Layout/Email/text/fancy.ctp``
@@ -236,7 +245,7 @@ In your email templates you can use these with::
 
     <p>Here is your value: <b><?= $value ?></b></p>
 
-You can use helpers in emails as well, much like you can in normal view files.
+You can use helpers in emails as well, much like you can in normal template files.
 By default only the ``HtmlHelper`` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 

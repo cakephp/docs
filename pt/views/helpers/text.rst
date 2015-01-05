@@ -18,7 +18,7 @@ Linking Email addresses
 
 Adds links to the well-formed email addresses in $text, according
 to any options defined in ``$options`` (see
-:php:meth:`HtmlHelper::link()`).::
+:php:meth:`HtmlHelper::link()`). ::
 
     $myText = 'For more information regarding our world-famous ' .
         'pastries and desserts, contact info@example.com';
@@ -63,7 +63,7 @@ Converting Text into Paragraphs
 .. php:method:: autoParagraph(string $text)
 
 Adds proper <p> around text where double-line returns are found, and <br> where
-single-line returns are found.::
+single-line returns are found. ::
 
     $myText = 'For more information
     regarding our world-famous pastries and desserts.
@@ -77,9 +77,9 @@ Output::
     regarding our world-famous pastries and desserts.<p>
     <p>contact info@example.com</p>
 
-.. include:: /core-libraries/string.rst
-    :start-after: start-string
-    :end-before: end-string
+.. include:: /core-libraries/text.rst
+    :start-after: start-text
+    :end-before: end-text
 
 .. meta::
     :title lang=en: TextHelper

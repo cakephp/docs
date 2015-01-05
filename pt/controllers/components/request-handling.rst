@@ -14,18 +14,22 @@ By default RequestHandler will automatically detect AJAX requests
 based on the HTTP-X-Requested-With header that many JavaScript
 libraries use. When used in conjunction with
 :php:meth:`Cake\\Routing\\Router::extensions()`, RequestHandler will
-automatically switch the layout and view files to those that match the requested
+automatically switch the layout and template files to those that match the requested
 type. Furthermore, if a helper with the same name as the requested
 extension exists, it will be added to the Controllers Helper array.
 Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
 parsed into an array which is assigned to ``$this->request->data``,
 and can then be saved as model data. In order to make use of
-RequestHandler it must be included in your $components array::
+RequestHandler it must be included in your ``initialize()`` method::
 
     class WidgetsController extends AppController
     {
 
-        public $components = ['RequestHandler'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         // Rest of controller
     }
@@ -47,7 +51,11 @@ the client and its request.
         class ArticlesController extends AppController
         {
 
-            public $components = ['RequestHandler'];
+            public function initialize()
+            {
+                parent::initialize();
+                $this->loadComponent('RequestHandler');
+            }
 
             public function beforeFilter()
             {
@@ -223,10 +231,13 @@ the client. The response status code is then set to ``304 Not Modified``.
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to ``false``::
 
-    public $components = [
-        'RequestHandler' => [
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler', [
             'checkHttpCache' => false
-    ]];
+        ]);
+    }
 
 Using custom ViewClasses
 ========================
@@ -239,14 +250,17 @@ with a custom View class, or add View classes for other types.
 You can map existing and new types to your custom classes. You can also set this
 automatically by using the ``viewClassMap`` setting::
 
-    public $components = [
-        'RequestHandler' => [
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent(''RequestHandler', [
             'viewClassMap' => [
                 'json' => 'ApiKit.MyJson',
                 'xml' => 'ApiKit.MyXml',
                 'csv' => 'ApiKit.Csv'
             ]
-    ]];
+        ]);
+    }
 
 .. meta::
     :title lang=en: Request Handling

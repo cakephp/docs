@@ -99,13 +99,13 @@ Folder API
         // Will put folder1 and all its contents into folder2
 
         $folder = new Folder('/path/to/folder');
-        $folder->copy(array(
+        $folder->copy([
             'to' => '/path/to/new/folder',
             'from' => '/path/to/copy/from', // Will cause a cd() to occur
             'mode' => 0755,
-            'skip' => array('skip-me.php', '.git'),
+            'skip' => ['skip-me.php', '.git'],
             'scheme' => Folder::SKIP  // Skip directories/files that already exist.
-        ));
+        ]);
 
     There are 3 supported schemes:
 

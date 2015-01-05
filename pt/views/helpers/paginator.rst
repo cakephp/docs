@@ -211,7 +211,7 @@ Supported options are:
   you wish.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params.::
+also ok to just call the method without any params. ::
 
     echo $this->Paginator->numbers();
 
@@ -444,7 +444,7 @@ It is also possible to sort a column based on associations:
     <table>
         <tr>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
-            <th><?= $this->Paginator->sort('Author.name', 'Author') ?></th>
+            <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
         </tr>
            <?php foreach ($recipies as $recipe): ?>
         <tr>
@@ -481,7 +481,7 @@ Generating Pagination URLs
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
 By default returns a full pagination URL string for use in non-standard
-contexts (i.e. JavaScript).::
+contexts (i.e. JavaScript). ::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 

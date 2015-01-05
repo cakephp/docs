@@ -62,9 +62,9 @@ created. To keep your Orders model clean you could use events::
         {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $event = new Event('Model.Order.afterPlace', $this, array(
+                $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
-                ));
+                ]);
                 $this->eventManager()->dispatch($event);
                 return true;
             }
@@ -129,9 +129,9 @@ using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an i
 of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event::
 
     // Create a new event and dispatch it.
-    $event = new Event('Model.Order.afterPlace', $this, array(
+    $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
-    ));
+    ]);
     $this->eventManager()->dispatch($event);
 
 :php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The first one is
@@ -160,7 +160,7 @@ Registering Listeners
 =====================
 
 Listeners are the preferred way to register callbacks for an event. This is done by
-implementing the :php:class:`Cake\\Event\\EventListener` interface in any class you wish
+implementing the :php:class:`Cake\\Event\\EventListenerInterface` interface in any class you wish
 to register some callbacks. Classes implementing it need to provide the
 ``implementedEvents()`` method. This method must return an associative array
 with all event names that the class will handle.
@@ -171,16 +171,16 @@ global site statistics. This is a great place to use a listener class. Doing so
 allows you concentrate the statistics logic in one place and react to events as
 necessary. Our ``UserStatistics`` listener might start out like::
 
-    use Cake\Event\EventListener;
+    use Cake\Event\EventListenerInterface;
 
-    class UserStatistic implements EventListener
+    class UserStatistic implements EventListenerInterface
     {
 
         public function implementedEvents()
         {
-            return array(
+            return [
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
-            );
+            ];
         }
 
         public function updateBuyStatistic($event)
@@ -207,7 +207,7 @@ function to do so::
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->attach(function($event) {
+    $this->Orders->eventManager()->attach(function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->subject()->id
@@ -217,10 +217,10 @@ function to do so::
 In addition to anonymous functions you can use any other callable type that PHP
 supports::
 
-    $events = array(
+    $events = [
         'email-sending' => 'EmailSender::sendBuyEmail',
-        'inventory' => array($this->InventoryManager, 'decrement'),
-    );
+        'inventory' => [$this->InventoryManager, 'decrement'],
+    ];
     foreach ($events as $callable) {
         $eventManager->attach($callable, 'Model.Order.afterPlace');
     }
@@ -250,24 +250,24 @@ method for callbacks, and declaring it in the ``implementedEvents`` function for
 event listeners::
 
     // Setting priority for a callback
-    $callback = array($this, 'doSomething');
+    $callback = [$this, 'doSomething'];
     $this->eventManager()->attach(
         $callback,
         'Model.Order.afterPlace',
-        array('priority' => 2)
+        ['priority' => 2]
     );
 
     // Setting priority for a listener
-    class UserStatistic implements EventListener
+    class UserStatistic implements EventListenerInterface
     {
         public function implementedEvents()
         {
-            return array(
-                'Model.Order.afterPlace' => array(
+            return [
+                'Model.Order.afterPlace' => [
                     'callable' => 'updateBuyStatistic',
                     'priority' => 100
-                ),
-            );
+                ],
+            ];
         }
     }
 
@@ -284,7 +284,7 @@ converted into arguments for the listeners. An example from the View layer is
 the afterRender callback::
 
     $this->eventManager()
-        ->dispatch(new Event('View.afterRender', $this, [$viewFileName]));
+        ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 
 The listeners of the ``View.afterRender`` callback should have the following
 signature::

@@ -39,7 +39,7 @@ Language Files
 
 Translations can be made available by using language files stored in your
 application. The default format for CakePHP translation files is the
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files neeed to be
+`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
 placed under ``src/Locale/`` and within this directory, there should be
 a subfolder for each language the application needs to support::
 
@@ -335,7 +335,7 @@ for a single domain and locale::
 
     use Aura\Intl\Package;
 
-    I18n::translator('animals', 'fr_FR', function() {
+    I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
             'default', // The fallback domain
@@ -427,7 +427,7 @@ any language from an external service::
 
     use Aura\Intl\Package;
 
-    I18n::config('default', function($domain, $locale) {
+    I18n::config('default', function ($domain, $locale) {
         $locale = Locale::parseLocale($locale);
         $language = $locale['language'];
         $messages = file_get_contents("http://example.com/translations/$lang.json");

@@ -1,6 +1,8 @@
 Hash
 ####
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: Hash
 
 Array management, if done right, can be a very powerful and useful
@@ -115,7 +117,7 @@ Attribute Matching Types
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
-    Removes all elements from an array that match $path.::
+    Removes all elements from an array that match $path. ::
 
         $a = [
             'pages' => ['name' => 'page'],
@@ -140,7 +142,7 @@ Attribute Matching Types
     and optionally $valuePath as path to get the values. If $valuePath is not
     specified, or doesn't match anything, values will be initialized to null.
     You can optionally group the values by what is obtained when following the
-    path specified in $groupPath.::
+    path specified in $groupPath. ::
 
         $a = [
             [
@@ -564,12 +566,12 @@ Attribute Matching Types
     this method::
 
         // Call the noop function $this->noop() on every element of $data
-        $result = Hash::map($data, "{n}", array($this, 'noop'));
+        $result = Hash::map($data, "{n}", [$this, 'noop']);
 
-        function noop($array)
+        public function noop(array $array)
         {
-         // Do stuff to array and return the result
-         return $array;
+            // Do stuff to array and return the result
+            return $array;
         }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)

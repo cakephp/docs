@@ -1,5 +1,5 @@
-Simple Authentication and Authorization Application
-###################################################
+Blog Tutorial - Authentication and Authorization
+################################################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
 secure access to certain URLs, based on the logged-in
@@ -110,6 +110,7 @@ tutorial, we will show just the add.ctp:
 .. code-block:: php
 
     <!-- src/Template/Users/add.ctp -->
+
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
@@ -146,9 +147,10 @@ file and add the following lines::
     {
         //...
 
-        public $components = [
-            'Flash',
-            'Auth' => [
+        public function initialize()
+        {
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
                 'loginRedirect' => [
                     'controller' => 'Articles',
                     'action' => 'index'
@@ -158,8 +160,8 @@ file and add the following lines::
                     'action' => 'display',
                     'home'
                 ]
-            ]
-        ];
+            ]);
+        }
 
         public function beforeFilter(Event $event)
         {
@@ -243,7 +245,7 @@ and add the following lines:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/login.ctp -->
+    <!-- File: src/Template/Users/login.ctp -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>
@@ -320,9 +322,11 @@ config::
 
     // src/Controller/AppController.php
 
-    public $components = [
-        'Flash',
-        'Auth' => [
+    public function initialize()
+    {
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'], // Added this line
             'loginRedirect' => [
                 'controller' => 'Articles',
                 'action' => 'index'
@@ -331,10 +335,9 @@ config::
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
-            ],
-            'authorize' => ['Controller'] // Added this line
-        ]
-    ];
+            ]
+        ]);
+    }
 
     public function isAuthorized($user)
     {
@@ -405,7 +408,7 @@ about configuring the component, creating custom Authorization classes, and much
 Suggested Follow-up Reading
 ---------------------------
 
-#. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
+#. :doc:`/bake/usage` Generating basic CRUD code
 #. :doc:`/controllers/components/authentication`: User registration and login
 
 .. meta::

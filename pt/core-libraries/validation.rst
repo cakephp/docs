@@ -1,7 +1,7 @@
-.. php:namespace:: Cake\Validation
-
 Validation
 ##########
+
+.. php:namespace:: Cake\Validation
 
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease.
@@ -24,7 +24,7 @@ Once created, you can start defining sets of rules for the fields you want to
 validate::
 
     $validator
-        ->validatePresence('title')
+        ->requirePresence('title')
         ->notEmpty('title', 'Please fill this field')
         ->add('title', [
             'length' => [
@@ -36,7 +36,7 @@ validate::
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
-        ->validatePresence('body')
+        ->requirePresence('body')
         ->add('body', 'length', [
             'rule' => ['minLength', 50],
             'message' => 'Articles must have a substantial body.'
@@ -49,12 +49,12 @@ There were a few methods called in the example above, so let's go over the
 various features. The ``add()`` method allows you to add new rules to
 a validator. You can either add rules individually or in groups as seen above.
 
-Validating Field Presence
+Requiring Field Presence
 -------------------------
 
-The ``validatePresence()`` method requires the field to be present in any
+The ``requirePresence()`` method requires the field to be present in any
 validated array. If the field is absent, validation will fail. The
-``validatePresence()`` method has 4 modes:
+``requirePresence()`` method has 4 modes:
 
 * ``true`` The field's presence is always required.
 * ``false`` The field's presence is not required.
@@ -67,7 +67,7 @@ By default, ``true`` is used. Key presence is checked by using
 ``array_key_exists()`` so that null values will count as present. You can set the
 mode using the second parameter::
 
-    $validator->validatePresence('author_id', 'create');
+    $validator->requirePresence('author_id', 'create');
 
 Allowing Empty Fields
 ---------------------
@@ -118,7 +118,7 @@ the following::
         ]
     ]);
 
-This will ensure that the provided e-mail address is only unique to other 
+This will ensure that the provided e-mail address is only unique to other
 records with the same ``site_id``.
 
 Notice that these examples take a ``provider`` key.  Adding ``Validator``
@@ -203,6 +203,12 @@ callable, including anonymous functions, as validation rules::
         }
     ]);
 
+    // Use a rule from a custom provider
+    $validator->add('title', 'unique', [
+        'rule' => 'uniqueTitle',
+        'provider' => 'custom'
+    ]);
+
 Closures or callable methods will receive 2 arguments when called. The first
 will be the value for the field being validated. The second is a context array
 containing data related to the validation process:
@@ -240,14 +246,14 @@ Both take a callable function as the last argument, which determines whether or 
 the rule should be applied. For example, a field can be sometimes allowed to be
 empty::
 
-    $validator->allowEmpty('tax', function($context) {
+    $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
 Likewise, a field can be required to be populated when certain conditions are
 met::
 
-    $validator->notEmpty('email_frequency', 'This field is required', function($context) {
+    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
         return !empty($context['data']['wants_newsletter']);
     });
 
@@ -272,6 +278,7 @@ create ``Validator`` sub-classes for your reusable validation logic::
     {
         public function __construct()
         {
+            parent::__construct();
             // Add validation rules here.
         }
     }
@@ -288,14 +295,14 @@ sending an email you could do the following::
 
     $validator = new Validator();
     $validator
-        ->validatePresence('email')
+        ->requirePresence('email')
         ->add('email', 'validFormat', [
             'rule' => 'email',
             'message' => 'E-mail must be valid'
         ])
-        ->validatePresence('name')
+        ->requirePresence('name')
         ->notEmpty('name', 'We need your name.')
-        ->validatePresence('comment')
+        ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
@@ -324,6 +331,59 @@ the 'create' mode. If you'd like to apply 'update' rules you can do the followin
     If you need to validate entities you should use methods like
     :php:meth:`~Cake\\ORM\\Table::validate()` or
     :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
+
+Validating Entities
+===================
+
+While entities are validated as they are saved, you may also want to validate
+entities before attempting to do any saving. Validating entities before
+saving is often useful from the context of a controller, where you want to show
+all the error messages for an entity and its related data::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($this->request->data());
+    $valid = $articles->validate($article, [
+        'associated' => ['Comments', 'Author']
+    ]);
+    if ($valid) {
+        $articles->save($article, ['validate' => false]);
+    } else {
+        // Do work to show error messages.
+    }
+
+The ``validate`` method returns a boolean indicating whether or not the entity
+& related entities are valid. If they are not valid, any validation errors will
+be set on the entities that had validation errors. You can use the
+:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+
+When you need to pre-validate multiple entities at a time, you can use the
+``validateMany`` method::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($this->request->data());
+    if ($articles->validateMany($entities)) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['validate' => false]);
+        }
+    } else {
+        // Do work to show error messages.
+    }
+
+Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
+methods allow you to specify which associations are validated, and which
+validation sets to apply using the ``options`` parameter::
+
+    $valid = $articles->validate($article, [
+      'associated' => [
+        'Comments' => [
+          'associated' => ['User'],
+          'validate' => 'special',
+        ]
+      ]
+    ]);
+
 
 Core Validation Rules
 =====================

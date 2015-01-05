@@ -22,7 +22,7 @@ Security component.
 If you are using Security component's form protection features and
 other components that process form data in their ``startup()``
 callbacks, be sure to place Security Component before those
-components in your ``$components`` array.
+components in your ``initialize()`` method.
 
 .. note::
 
@@ -87,7 +87,7 @@ Restricting Cross Controller Communication
 
 .. php:attr:: allowedControllers
 
-    A list of controllers which can send requests 
+    A list of controllers which can send requests
     to this controller.
     This can be used to control cross controller requests.
 
@@ -149,7 +149,11 @@ want and the Security Component will enforce them on its startup::
     class WidgetsController extends AppController
     {
 
-        public $components = ['Security'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Security');
+        }
 
         public function beforeFilter(Event $event)
         {
@@ -170,19 +174,22 @@ require secure SSL requests::
     class WidgetsController extends AppController
     {
 
-        public $components = ['Security'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
+        }
 
         public function beforeFilter(Event $event)
         {
             if (isset($this->params['admin'])) {
-                $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
 
         public function forceSSL()
         {
-            return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
+            return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
 
@@ -219,7 +226,11 @@ There may be cases where you want to disable all security checks for an action
     class WidgetController extends AppController
     {
 
-        public $components = ['Security'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Security');
+        }
 
         public function beforeFilter(Event $event)
         {

@@ -87,13 +87,13 @@ generating code or doing work based on conventions::
 Creating URL Safe Strings
 =========================
 
-.. php:staticmethod:: slug($word, $replacement = '_')
+.. php:staticmethod:: slug($word, $replacement = '-')
 
 Slug converts special characters into latin versions and converting
-unmatched characters and spaces to underscores. The slug method
+unmatched characters and spaces to dashes. The slug method
 expects UTF-8 encoding::
 
-    // apple\_puree
+    // apple-puree
     Inflector::slug('apple purée');
 
 

@@ -80,7 +80,7 @@ will also allow you to declare which components should be loaded. While normal
 object-oriented inheritance rules apply, the components and helpers used by
 a controller are treated specially. In these cases, ``AppController`` property
 values are merged with child controller class arrays.  The values in the child
-class will always override those in ``AppController.``
+class will always override those in ``AppController``.
 
 Request Flow
 ============
@@ -112,17 +112,17 @@ in ``src/Controller/RecipesController.php`` and contain::
     {
         public function view($id)
         {
-            // Action logic goes here..
+            // Action logic goes here.
         }
 
         public function share($customerId, $recipeId)
         {
-            // Action logic goes here..
+            // Action logic goes here.
         }
 
         public function search($query)
         {
-            // Action logic goes here..
+            // Action logic goes here.
         }
     }
 
@@ -133,7 +133,7 @@ action name.
 
 Controller actions generally use
 ``Controller::set()`` to create a context that
-``View`` uses to render the view. Because of the conventions that
+``View`` uses to render the view layer. Because of the conventions that
 CakePHP uses, you don't need to create and render the view manually. Instead,
 once a controller action has completed, CakePHP will handle rendering and
 delivering the View.
@@ -218,9 +218,9 @@ Rendering a View
 
 .. php:method:: render(string $view, string $layout)
 
-The ``render()`` method is automatically called at the end of each requested
+The ``Controller::render()`` method is automatically called at the end of each requested
 controller action. This method performs all the view logic (using the data
-you've submitted using the ``set()`` method), places the view inside its
+you've submitted using the ``Controller::set()`` method), places the view inside its
 ``View::$layout``, and serves it back to the end user.
 
 The default view file used by render is determined by convention.
@@ -243,7 +243,7 @@ the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
 Although CakePHP will automatically call it after every action's logic
 (unless you've set ``$this->autoRender`` to ``false``), you can use it to specify
 an alternate view file by specifying a view file name as first argument of
-``render()`` method.
+``Controller::render()`` method.
 
 If ``$view`` starts with '/', it is assumed to be a view or
 element file relative to the ``src/Template`` folder. This allows
@@ -252,15 +252,15 @@ direct rendering of elements, very useful in AJAX calls::
     // Render the element in src/Template/Element/ajaxreturn.ctp
     $this->render('/Element/ajaxreturn');
 
-The second parameter ``$layout`` of ``render()`` allows you to specify the layout
+The second parameter ``$layout`` of ``Controller::render()`` allows you to specify the layout
 with which the view is rendered.
 
 Rendering a Specific Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In your controller, you may want to render a different view than the
-conventional one. You can do this by calling ``render()`` directly. Once you
-have called ``render()``, CakePHP will not try to re-render the view::
+conventional one. You can do this by calling ``Controller::render()`` directly. Once you
+have called ``Controller::render()``, CakePHP will not try to re-render the view::
 
     namespace App\Controller;
 
@@ -299,7 +299,7 @@ Redirecting to Other Pages
 The flow control method you'll use most often is ``Controller::redirect()``.
 This method takes its first parameter in the form of a
 CakePHP-relative URL. When a user has successfully placed an order,
-you might wish to redirect them to a receipt screen. ::
+you might wish to redirect him to a receipt screen. ::
 
     public function place_order()
     {
@@ -327,7 +327,7 @@ You can also pass data to the action::
 
     return $this->redirect(['action' => 'edit', $id]);
 
-The second parameter of ``redirect()`` allows you to define an HTTP
+The second parameter of ``Controller::redirect()`` allows you to define an HTTP
 status code to accompany the redirect. You may want to use 301
 (moved permanently) or 303 (see other), depending on the nature of
 the redirect.
@@ -358,7 +358,7 @@ Redirecting to Another Action on the Same Controller
 .. php:method:: setAction($action, $args...)
 
 If you need to forward the current action to a different action on the *same*
-controller, you can use ``setAction()`` to update the request object, modify the
+controller, you can use ``Controller::setAction()`` to update the request object, modify the
 view template that will be rendered and forward execution to the named action::
 
     // From a delete action, you can render the updated

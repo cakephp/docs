@@ -34,6 +34,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
     // Short classname
     Log::config('debug', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
     ]);
@@ -41,6 +42,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
     // Fully namespaced name.
     Log::config('error', [
         'className' => 'Cake\Log\Engine\FileLog',
+        'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         'file' => 'error',
     ]);
@@ -59,11 +61,20 @@ It is also possible to create loggers by providing a closure. This is useful
 when you need full control over how the logger object is built. The closure
 has to return the constructed logger instance. For example::
 
-    Log::config('special', function() {
-        return new \Cake\Log\Engine\FileLog();
+    Log::config('special', function () {
+        return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
-Loggers are required to implement the ``Psr\Log\LoggerInterface`` interface.
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
+
+    Log::config('error', [
+        'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
+    ]);
+
+.. note::
+
+    Loggers are required to implement the ``Psr\Log\LoggerInterface`` interface.
 
 Creating Log Adapters
 ---------------------
@@ -92,8 +103,9 @@ configuring our DatabaseLog would look like::
 
 When configuring a log adapter the ``className`` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log adapter's constructor as an array.::
+properties are passed to the log adapter's constructor as an array. ::
 
+    namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
 
     class DatabaseLog extends BaseLog
@@ -200,9 +212,9 @@ to specify ``Syslog`` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
 be done in the ``bootstrap.php`` file::
 
-    CakeLog::config('default', array(
+    Log::config('default', [
         'engine' => 'Syslog'
-    ));
+    ]);
 
 The configuration array accepted for the Syslog logging engine understands the
 following keys:
@@ -285,6 +297,7 @@ message. For example::
     // those with `orders` and `payments` scope.
     Log::config('shops', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
         'file' => 'shops.log',
@@ -294,6 +307,7 @@ message. For example::
     // those with `payments` scope.
     Log::config('payments', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
         'file' => 'payments.log',
@@ -389,14 +403,42 @@ logger.
 After installing Monolog using composer, configure the logger using the
 ``Log::config()`` method::
 
+    // config/bootstrap.php
+
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function() {
+    Log::config('default', function () {
         $log = new Logger('app');
-        $log->pushHandler(new StreamHandler('path/to/your.log'));
+        $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
     });
+
+    // Optionally stop using the now redundant default loggers
+    Log::drop('debug');
+    Log::drop('error');
+
+Use similar methods if you want to configure a different logger for your console::
+
+    // config/bootstrap_cli.php
+
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    Log::config('default', function () {
+        $log = new Logger('cli');
+        $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
+        return $log;
+    });
+
+    // Optionally stop using the now redundant default CLI loggers
+    Configure::delete('Log.debug');
+    Configure::delete('Log.error');
+
+.. note::
+
+    When using a console specific logger, make sure to conditionally configure
+    your application logger. This will prevent duplicate log entries.
 
 .. meta::
     :title lang=en: Logging

@@ -69,7 +69,7 @@ authentication by throwing an exception. You will need to catch any
 thrown exceptions, and handle them as needed.
 
 You can configure authentication handlers in your controller's
-``beforeFilter`` or, in the ``$components`` array. You can pass
+``beforeFilter()`` or ``initialize()`` methods. You can pass
 configuration information into each authentication object, using an
 array::
 
@@ -110,27 +110,29 @@ keys.
 - ``contain`` Extra models to contain and return with identified user's info.
 - ``passwordHasher`` Password hasher class. Defaults to ``Default``.
 
-To configure different fields for user in ``$components`` array::
+To configure different fields for user in your ``initialize()`` method::
 
-    // Pass settings in $components array
-    public $components = [
-        'Auth' => [
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'email', 'password' => 'passwd']
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 Do not put other ``Auth`` configuration keys (like ``authError``, ``loginAction`` etc)
 within the ``authenticate`` or ``Form`` element. They should be at the same level as
 the authenticate key. The setup above with other Auth configuration
 should look like::
 
-    // Pass settings in $components array
-    public $components = [
-        'Auth' => [
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login',
@@ -142,8 +144,8 @@ should look like::
                     'fields' => ['username' => 'email']
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -214,11 +216,11 @@ to upon logging in.
 If no parameter is passed, gets the authentication redirect URL. The URL
 returned is as per following rules:
 
- - Returns the normalized URL from session Auth.redirect value if it is
-   present and for the same domain the current app is running on.
- - If there is no session value and there is a config ``loginRedirect``, the
-   ``loginRedirect`` value is returned.
- - If there is no session and no ``loginRedirect``, / is returned.
+- Returns the normalized URL from session Auth.redirect value if it is
+  present and for the same domain the current app is running on.
+- If there is no session value and there is a config ``loginRedirect``, the
+  ``loginRedirect`` value is returned.
+- If there is no session and no ``loginRedirect``, / is returned.
 
 Using Digest and Basic Authentication for Logging In
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -240,7 +242,7 @@ Creating Custom Authentication Objects
 Because authentication objects are pluggable, you can create custom
 authentication objects in your application or plugins. If for example
 you wanted to create an OpenID authentication object. In
-``app/Auth/OpenidAuthenticate.php`` you could put the following::
+``src/Auth/OpenidAuthenticate.php`` you could put the following::
 
     use Cake\Auth\BaseAuthenticate;
 
@@ -262,6 +264,20 @@ provides a number of helpful methods that are commonly used. You can
 also implement a ``getUser()`` method if your authentication object needs
 to support stateless or cookie-less authentication. See the sections on
 basic and digest authentication below for more information.
+
+``AuthComponent`` triggers two events ``Auth.afterIdentify`` and ``Auth.logout``
+after a user has been identified and before a user is logged out respectively.
+You can set callback functions for these events by returning a mapping array
+from ``implementedEvents()`` method of your authenticate class::
+
+    public function implementedEvents()
+    {
+        return [
+            'Auth.afterIdentify' => 'afterIdentify',
+            'Auth.logout' => 'logout'
+        ];
+    }
+
 
 Using Custom Authentication Objects
 -----------------------------------
@@ -286,7 +302,7 @@ authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
 request, these values are used to re-identify the user and ensure they are
 valid user. As with authentication object's ``authenticate()`` method the
 ``getUser()`` method should return an array of user information on success or
-``false`` on failure.::
+``false`` on failure. ::
 
     public function getUser($request)
     {
@@ -396,7 +412,7 @@ In order to use a different password hasher, you need to create the class in
 
     namespace App\Auth;
 
-    use \Cake\Auth\AbstractPasswordHasher;
+    use Cake\Auth\AbstractPasswordHasher;
 
     class LegacyPasswordHasher extends AbstractPasswordHasher
     {
@@ -415,8 +431,10 @@ In order to use a different password hasher, you need to create the class in
 Then you are required to configure the AuthComponent to use your own password
 hasher::
 
-    public $components = [
-        'Auth' => [
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
@@ -424,8 +442,8 @@ hasher::
                     ]
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 Supporting legacy systems is a good idea, but it is even better to keep your
 database with the latest security advancements. The following section will
@@ -439,8 +457,10 @@ to another, this is achieved through the ``FallbackPasswordHasher`` class.
 Assuming you are using ``LegacyPasswordHasher`` from the previous example, you
 can configure the AuthComponent as follows::
 
-    public $components = [
-        'Auth' => [
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'passwordHasher' => [
@@ -449,12 +469,15 @@ can configure the AuthComponent as follows::
                     ]
                 ]
             ]
-        ]
-    ];
+        ]);
+    }
 
 The first name appearing in the ``hashers`` key indicates which of the classes
 is the preferred one, but it will fallback to the others in the list if the
 check was unsuccessful.
+
+When using the ``WeakPasswordHasher`` you will need to
+set the ``Security.salt`` configure value to ensure passwords are salted.
 
 In order to update old users' passwords on the fly, you can change the login
 function accordingly::
@@ -476,9 +499,9 @@ function accordingly::
         }
     }
 
-As you cans see we are just setting the plain password again to to property so
-the setter function in the entity hashes the password as shown in previous
-examples and then saved again to the database.
+As you can see we are just setting the plain password again so the setter
+function in the entity will hash the password as shown in the previous example and
+then save the entity.
 
 Hashing Passwords For Digest Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -627,7 +650,7 @@ Additionally you can halt all authorization by throwing an exception.
 You will need to catch any thrown exceptions, and handle them.
 
 You can configure authorization handlers in your controller's
-``beforeFilter`` or, in the ``$components`` array. You can pass
+``beforeFilter()`` or ``initialize()`` methods. You can pass
 configuration information into each authorization object, using an
 array::
 
@@ -781,9 +804,14 @@ checked::
 
     class AppController extends Controller
     {
-        public $components = [
-            'Auth' => ['authorize' => 'Controller'],
-        ];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('Auth', [
+                'authorize' => 'Controller',
+            ]);
+        }
+
         public function isAuthorized($user = null)
         {
             // Any registered user can access public functions
@@ -809,7 +837,7 @@ Configuration options
 =====================
 
 The following settings can all be defined either in your controller's
-``$components`` array or using ``$this->Auth->config()``:
+``initialize()`` method or using ``$this->Auth->config()`` in your ``beforeFilter()``:
 
 ajaxLogin
     The name of an optional view element to render when an AJAX request is made
@@ -854,7 +882,14 @@ logoutRedirect
 unauthorizedRedirect
     Controls handling of unauthorized access. By default unauthorized user is
     redirected to the referrer URL or ``loginAction`` or '/'.
-    If set to ``false`` a ForbiddenException exception is thrown instead of redirecting.
+    If set to ``false`` a ForbiddenException exception is thrown instead of
+    redirecting.
+
+Testing Actions Protected By AuthComponent
+==========================================
+
+See the :ref:`testing-authentication` section for tips on how to test controller
+actions that are protected by ``AuthComponent``.
 
 .. meta::
     :title lang=en: Authentication

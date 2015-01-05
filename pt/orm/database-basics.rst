@@ -53,6 +53,17 @@ would be::
         'cacheMetadata' => true,
     ]);
 
+
+Configuration options can also be provided as a :term:`DSN` string. This is
+useful when working with environment variables or :term:`PaaS` providers::
+
+    ConnectionManager::config('default', [
+        'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+    ]);
+
+When using a DSN string you can define any additional parameters/options as
+query string arguments.
+
 By default, all Table objects will use the ``default`` connection. To
 use a non-default connection, see :ref:`configuring-table-connections`.
 
@@ -103,15 +114,13 @@ init
     A list of queries that should be sent to the database server as
     when the connection is created. This option is only
     supported by MySQL, Postgres, and SQLServer at this time.
-dsn
-    A full PDO compatible data source name.
 log
     Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
 quoteIdentifiers
     Set to ``true`` if you are using reserved words or special characters in your
     table or column names. Enabling this setting will result in queries built using the
-    :ref:`query-builder` having identifiers quoted when creating SQL. It should be
+    :doc:`/orm/query-builder` having identifiers quoted when creating SQL. It should be
     noted that this decreases performance because each query needs to be traversed
     and manipulated before being executed.
 flags
@@ -164,12 +173,11 @@ Attempting to load connections that do not exist will throw an exception.
 Creating Connections at Runtime
 -------------------------------
 
-.. php:staticmethod:: create($name, $config)
+Using ``config()`` and ``get()`` you can create new connections that are not
+defined in your configuration files at runtime::
 
-The ``create`` method allows you to define new connections that are not defined
-in your configuration files at runtime::
-
-    $conn = ConnectionManager::create('my_connection', $config);
+    ConnectionManager::config('my_connection', $config);
+    $conn = ConnectionManager::get('my_connection');
 
 See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
@@ -251,10 +259,13 @@ An easy way to fulfill the basic interface is to extend
 :php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
 we could make the following type class::
 
+    // in src/Database/Type/JsonType.php
+
     namespace App\Database\Type;
 
     use Cake\Database\Driver;
     use Cake\Database\Type;
+    use PDO;
 
     class JsonType extends Type
     {
@@ -272,6 +283,14 @@ we could make the following type class::
             return json_encode($value);
         }
 
+        public function toStatement($value, Driver $driver)
+        {
+            if ($value === null) {
+                return PDO::PARAM_NULL;
+            }
+            return PDO::PARAM_STR;
+        }
+
     }
 
 By default the ``toStatement`` method will treat values as strings which will
@@ -284,7 +303,9 @@ the type mapping. During our application bootstrap we should do the following::
 
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
-queries.
+queries. You can use the custom types you've created by mapping the types in
+your Table's :ref:`_initializeSchema() method <saving-complex-types>`.
+
 
 Connection Classes
 ==================
@@ -337,7 +358,7 @@ abstract type names when creating a query::
 
 This allows you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
-to use the :ref:`query-builder`. This apporach allows you to build complex and
+to use the :doc:`/orm/query-builder`. This apporach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
     $query = $conn->newQuery();
@@ -382,13 +403,13 @@ In addition to this interface connection instances also provide the
 ``transactional`` method which makes handling the begin/commit/rollback calls
 much simpler::
 
-    $conn->transactional(function($conn) {
+    $conn->transactional(function ($conn) {
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
 In addition to basic queries, you can execute more complex queries using either
-the :ref:`query-builder` or :ref:`table-objects`. The transactional method will
+the :doc:`/orm/query-builder` or :doc:`/orm/table-objects`. The transactional method will
 do the following:
 
 - Call ``begin``.
@@ -550,6 +571,7 @@ files/syslog can be useful when working with web requests::
     // File logging
     Log::config('queries', [
         'className' => 'File',
+        'path' => LOGS,
         'file' => 'queries.log',
         'scopes' => ['queriesLog']
     ]);
