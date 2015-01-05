@@ -375,7 +375,7 @@ not limited to only validating columns in the table schema. However,
 maintaining integrity of data regardless where it came from is important. To
 solve this problem CakePHP offers a second level of validation which is called
 "application rules". You can read more about them in the
-:ref:`Applying Application Rules <_application-rules>` section.
+:ref:`Applying Application Rules <application-rules>` section.
 
 Core Validation Rules
 =====================
