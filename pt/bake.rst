@@ -1,13 +1,13 @@
 Bake Console
 ############
 
-CakePHP's bake console is another effort to get you up and running in CakePHP
-– fast. The bake console can create any of CakePHP's basic ingredients: models,
-behaviors, views, helpers, components, test cases, fixtures and plugins. And we
-aren't just talking skeleton classes: Bake can create a fully functional
-application in just a few minutes. In fact, Bake is a natural step to take once
-an application has been scaffolded.  The following sections cover bake more in
-detail:
+O bake console do CakePHP é outro empenho para você ter o CakePHP configurado
+e funcionando rápido. O bake console pode criar qualquer ingrediente básico do
+CakePHP: models, behaviors, views, helpers, components, test cases, fixtures e
+plugins. E nós não estamos apenas falando de classes esqueleto: O Bake pode criar
+uma aplicação totalmente funcional em questão de minutos. De fato, o Bake é um passo
+natural a se dar uma vez que a aplicação tem seu alicerce construído. As seções a seguir
+cobrem o Bake em mais detalhes:
 
 .. toctree::
     :maxdepth: 1
@@ -17,4 +17,4 @@ detail:
 
 .. meta::
     :title lang=en: Bake Console
-    :keywords lang=en: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
+    :keywords lang=en: cli,linha de comando,command line,dev,desenvolvimento,bake view, bake syntax,erb tags,asp tags,percent tags
