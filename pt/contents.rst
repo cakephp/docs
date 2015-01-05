@@ -2,13 +2,13 @@ Conteúdo
 ########
 
 .. toctree::
-:hidden:
+  :hidden:
 
     index
     topics
 
 .. toctree::
-:maxdepth: 3
+  :maxdepth: 3
 
      intro
      quickstart
