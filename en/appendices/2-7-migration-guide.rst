@@ -33,7 +33,7 @@ Utility
 CakeText
 --------
 The class ``String`` has been renamed to ``CakeText``. This resolves some
-conflicts around HHVM compatability as well as possibly PHP7+. There is
+conflicts around HHVM compatibility as well as possibly PHP7+. There is
 a ``String`` class provided as well for compatibility reasons.
 
 
