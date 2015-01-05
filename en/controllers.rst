@@ -218,9 +218,9 @@ Rendering a View
 
 .. php:method:: render(string $view, string $layout)
 
-The ``render()`` method is automatically called at the end of each requested
+The ``Controller::render()`` method is automatically called at the end of each requested
 controller action. This method performs all the view logic (using the data
-you've submitted using the ``set()`` method), places the view inside its
+you've submitted using the ``Controller::set()`` method), places the view inside its
 ``View::$layout``, and serves it back to the end user.
 
 The default view file used by render is determined by convention.
@@ -243,7 +243,7 @@ the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
 Although CakePHP will automatically call it after every action's logic
 (unless you've set ``$this->autoRender`` to ``false``), you can use it to specify
 an alternate view file by specifying a view file name as first argument of
-``render()`` method.
+``Controller::render()`` method.
 
 If ``$view`` starts with '/', it is assumed to be a view or
 element file relative to the ``src/Template`` folder. This allows
@@ -252,14 +252,14 @@ direct rendering of elements, very useful in AJAX calls::
     // Render the element in src/Template/Element/ajaxreturn.ctp
     $this->render('/Element/ajaxreturn');
 
-The second parameter ``$layout`` of ``render()`` allows you to specify the layout
+The second parameter ``$layout`` of ``Controller::render()`` allows you to specify the layout
 with which the view is rendered.
 
 Rendering a Specific Template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In your controller, you may want to render a different view than the
-conventional one. You can do this by calling ``render()`` directly. Once you
+conventional one. You can do this by calling ``Controller::render()`` directly. Once you
 have called ``render()``, CakePHP will not try to re-render the view::
 
     namespace App\Controller;
