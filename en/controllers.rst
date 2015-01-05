@@ -112,17 +112,17 @@ in ``src/Controller/RecipesController.php`` and contain::
     {
         public function view($id)
         {
-            // Action logic goes here..
+            // Action logic goes here.
         }
 
         public function share($customerId, $recipeId)
         {
-            // Action logic goes here..
+            // Action logic goes here.
         }
 
         public function search($query)
         {
-            // Action logic goes here..
+            // Action logic goes here.
         }
     }
 
