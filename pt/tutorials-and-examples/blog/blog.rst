@@ -1,5 +1,5 @@
 Blog Tutorial
-=============
+#############
 
 This tutorial will walk you through the creation of a simple blog application.
 We'll be installing CakePHP, creating a database, and creating enough
@@ -12,7 +12,7 @@ Here's what you'll need:
    similar. We might have to play a little with the server
    configuration, but most folks can get CakePHP up and running without
    any configuration at all. Make sure you have PHP 5.4.16 or greater, and
-   that the ``mbstring``, ``intl`` and ``mcrypt`` extensions are enabled in PHP.
+   that the ``mbstring`` and ``intl`` extensions are enabled in PHP.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
    database: CakePHP will be taking the reins from there. Since we're using MySQL,
@@ -36,7 +36,7 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the [app_name] directory.::
+in the [app_name] directory. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
@@ -51,6 +51,7 @@ Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
     /cake_install
+        /bin
         /config
         /logs
         /plugins
@@ -59,6 +60,7 @@ completed, your directory setup should look something like the following::
         /tmp
         /vendor
         /webroot
+        .editorconfig
         .gitignore
         .htaccess
         .travis.yml
@@ -158,7 +160,6 @@ array might look something like the following::
                 'username' => 'cake_blog',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
-                'prefix' => false,
                 'encoding' => 'utf8',
                 'timezone' => 'UTC'
             ],
@@ -185,7 +186,7 @@ this tutorial. One is defining a custom string (or "salt") for use
 in security hashes.
 
 The security salt is used for generating hashes. If you used Composer this too is taken
-care of for you during the install. Else you'd need to change the default salt value 
+care of for you during the install. Else you'd need to change the default salt value
 by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
 it's not easily guessed::
 
