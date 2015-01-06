@@ -764,7 +764,7 @@ représentation JSON::
     $usersTable->save($user);
 
 Lors de l'utilisation de types complexes, il est important de vérifier que les
-données que vous recevez de l'utilisateur finale sont valides. Ne pas
+données que vous recevez de l'utilisateur final sont valides. Ne pas
 gérer correctement les données complexes va permettre à des
 utilisateurs mal intentionnés d'être capable de stocker des données qu'ils ne
 pourraient pas stocker normalement.
@@ -775,16 +775,16 @@ Appliquer des Règles pour l'Application
 =======================================
 
 Alors qu'une validation basique des données est faite quand :ref:`les données
-de requêtes sont converties en entities <validating-request-data>`, plusieurs
-applications ont aussi d'autres validations plus complexes qui doivent être
-appliquées seulement après qu'une validation basique a été terminée.
-Ces types de règles sont souvent appelées 'règles de domaine' ou 'règles
-de l'application'. CakePHP utilise ce concept avec les 'RulesCheckers' qui sont
-appliquées avant que les entities ne soient persistentes. Voici quelques
-exemples de règles de domaine:
+de requêtes sont converties en entities <validating-request-data>`, de
+nombreuses applications ont aussi d'autres validations plus complexes qui
+doivent être appliquées seulement après qu'une validation basique a été
+terminée. Ces types de règles sont souvent appelées 'règles de domaine' ou
+'règles de l'application'. CakePHP utilise ce concept avec les 'RulesCheckers'
+qui sont appliquées avant que les entities ne soient sauvegardées. Voici
+quelques exemples de règles de domaine:
 
 * S'assurer qu'un email est unique.
-* Etats de transition ou étapes de flus de travail, par exemple pour mettre à
+* Etats de transition ou étapes de flux de travail, par exemple pour mettre à
   jour un statut de facture.
 * Eviter la modification ou la suppression soft d'articles.
 * Enforcing usage/rate limit caps.
