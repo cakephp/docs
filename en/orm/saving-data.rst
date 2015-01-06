@@ -747,7 +747,7 @@ rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
 before entities are persisted. Some example domain rules are:
 
 * Ensuring email uniqueness
-* State transitions or workflow steps, for example updating an invoices status.
+* State transitions or workflow steps, for example updating an invoice's status.
 * Preventing modification of soft deleted items.
 * Enforcing usage/rate limit caps.
 
