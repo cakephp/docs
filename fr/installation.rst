@@ -18,18 +18,19 @@ Conditions requises
 
 .. note::
 
-    In both XAMPP and WAMP, mcrypt and mbstring extensions are working by default.
+    In both XAMPP and WAMP, mcrypt and mbstring extensions are working by
+    default.
 
     In XAMPP, intl extension is included but you have to uncomment
-    extension=php_intl.dll in php.ini and restart the server through the XAMPP
-    Control Panel.
+    ``extension=php_intl.dll`` in ``php.ini`` and restart the server through
+    the XAMPP Control Panel.
 
     In WAMP, the intl extension is "activated" by default but not working.
     To make it work you have to go to php folder (by default)
-    C:\wamp\bin\php\php{version}, copy all the files that looks like icu***.dll
-    and paste them into the apache bin directory
-    C:\wamp\bin\apache\apache{version}\bin. Then restart all services and it
-    should be OK.
+    ``C:\wamp\bin\php\php{version}``, copy all the files that looks like
+    ``icu***.dll`` and paste them into the apache bin directory
+    ``C:\wamp\bin\apache\apache{version}\bin``. Then restart all services and
+    it should be OK.
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
