@@ -26,9 +26,9 @@ Requirements
 
     In WAMP, the intl extension is "activated" by default but not working.
     To make it work you have to go to php folder (by default)
-    C:\wamp\bin\php\php5.5.12, copy all the files that looks like icu***.dll
+    C:\wamp\bin\php\php{version}, copy all the files that looks like icu***.dll
     and paste them into the apache bin directory
-    C:\wamp\bin\apache\apache2.4.9\bin. Then restart all services and it
+    C:\wamp\bin\apache\apache{version}\bin. Then restart all services and it
     should be OK.
 
 While a database engine isn't required, we imagine that most applications will
