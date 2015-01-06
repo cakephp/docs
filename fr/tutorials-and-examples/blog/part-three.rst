@@ -6,7 +6,7 @@ Créer une Catégorie en Arbre (Tree)
 
 Continuons notre application de blog et imaginons que nous souhaitions
 catégoriser nos articles. Nous souhaitons que les catégories soit triées, et
-pour cela, nous allons utilisé le :doc:`behavior Tree </orm/behaviors/tree>`
+pour cela, nous allons utiliser le :doc:`behavior Tree </orm/behaviors/tree>`
 pour nous aide à organiser les catégories.
 
 Mais d'abord, nous devons modifier nos tables.
@@ -16,7 +16,7 @@ Plugin Migrations
 
 Nous voulons utiliser le
 `plugin migrations <https://github.com/cakephp/migrations>`_ pour
-créer une table dans notre base de données. Si vous avez déja une table
+créer une table dans notre base de données. Si vous avez déjà une table
 articles dans votre base de données, supprimez-la.
 
 Maintenant ouvrez le fichier ``composer.json`` de votre application.
@@ -28,7 +28,7 @@ Normalement vous devriez voir que le plugin migrations est déjà dans
     }
 
 Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
-le dossier ``/plugins`` de votre application. Ajoutez aussi
+le dossier ``plugins`` de votre application. Ajoutez aussi
 ``Plugin::load('Migrations');`` dans le fichier bootstrap.php de votre
 application.
 
@@ -37,7 +37,7 @@ fichier de migration::
 
     bin/cake migrations create Initial
 
-Un fichier de migration sera généré dans le dossier ``/config/Migrations``. Vous
+Un fichier de migration sera généré dans le dossier ``config/Migrations``. Vous
 pouvez ouvrir votre nouveau fichier de migration et ajouter ce qui suit::
 
     <?php
@@ -84,7 +84,7 @@ Templates des Articles) de la partie 2. Donc nous allons juste ajouter les
 références aux categories.
 
 Nous devons associer ensemble les tables Articles et Categories. Ouvrez le
-fichier ``/src/Model/Table/ArticlesTable.php`` et ajoutez ce qui suit::
+fichier ``src/Model/Table/ArticlesTable.php`` et ajoutez ce qui suit::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -104,7 +104,7 @@ fichier ``/src/Model/Table/ArticlesTable.php`` et ajoutez ce qui suit::
         }
     }
 
-Générer les squelettes de code des Catégories
+Générer les Squelettes de Code des Catégories
 =============================================
 
 Créez tous les fichiers en lançant les commandes de bake suivantes::
@@ -113,15 +113,15 @@ Créez tous les fichiers en lançant les commandes de bake suivantes::
     bin/cake bake controller Categories
     bin/cake bake view Categories
 
-L'outil bake a créé tous les fichiers en un clin d'oeil. Vous pouvez les
-rapidement si vous voulez vous re-familiariser avec le fonctionnement de
+L'outil bake a créé tous les fichiers en un clin d'œil. Vous pouvez les
+lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de
 CakePHP.
 
 Attacher TreeBehavior à CategoriesTable
 =======================================
 
 Le :doc:`TreeBehavior </orm/behaviors/tree>` vous aide à gérer des structures
-hiérarchique en arbre dans une table de base de données. Il utilise
+hiérarchiques en arbre dans une table de base de données. Il utilise
 `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_ pour
 gérer les données. Les structures en arbre MPTT sont optimisées pour lire des
 données ce qui les rend souvent pratique pour lire des applications lourdes
@@ -137,7 +137,7 @@ Avec le TreeBehavior attaché, vous serez capable d'accéder à quelques
 fonctionnalités comme la réorganisation de l'ordre des categories. Nous verrons
 cela dans un moment.
 
-Mais pour l'instant, vous devez retirer les inputs suivants dans vos fichiers
+Mais pour l'instant, vous devez retirer les lignes suivantes dans vos fichiers
 de template add et edit::
 
     echo $this->Form->input('lft');
@@ -152,7 +152,7 @@ utilisant l'action du controller ``/yoursite/categories/add``.
 Réorganiser l'Ordre des Catégories avec le TreeBehavior
 =======================================================
 
-Dans nos fichier de template index des catégories, vous pouvez lister les
+Dans votre fichier de template index des catégories, vous pouvez lister les
 catégories et réorganiser leur ordre.
 
 Modifiez la méthode index dans votre ``CategoriesController.php`` et ajoutez les

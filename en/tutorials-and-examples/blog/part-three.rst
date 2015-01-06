@@ -26,7 +26,7 @@ the migrations plugin is already under ``require``. If not add it as follows::
     }
 
 Then run ``composer update``. The migrations plugin will now be in your
-application's ``/plugins`` folder. Also add ``Plugin::load('Migrations');`` in
+application's ``plugins`` folder. Also add ``Plugin::load('Migrations');`` in
 your application's bootstrap.php file.
 
 Once the plugin is loaded, run the following command to create a migration file::
@@ -78,7 +78,7 @@ We suppose you already have the files (Tables, Controllers and Templates of
 Articles) from part 2. So we'll just add the references to categories.
 
 We need to associated the Articles and Categories tables together. Open
-the ``/src/Model/Table/ArticlesTable.php`` file and add the following::
+the ``src/Model/Table/ArticlesTable.php`` file and add the following::
 
     // src/Model/Table/ArticlesTable.php
 
