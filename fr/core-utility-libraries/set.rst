@@ -54,7 +54,7 @@ quelles options sont disponibles.
 |                                | littérale.                                 |
 +--------------------------------+--------------------------------------------+
 | {[a-z]+}                       | Toute chaîne entre accolades (à part       |
-|                                | {n} et {s}) est interpretée comme une      |
+|                                | {n} et {s}) est interprétée comme une      |
 |                                | expression régulière.                      |
 +--------------------------------+--------------------------------------------+
 
