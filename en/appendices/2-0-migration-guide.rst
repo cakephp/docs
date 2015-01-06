@@ -1020,7 +1020,7 @@ supports all the command line options supported by PHPUnit.
 ``cake testsuite help`` will show you a list of all possible modifiers.
 
 Model
-======
+=====
 
 Model relationships are now lazy loaded. You can run into a situation where
 assigning a value to a nonexistent model property will throw errors::
