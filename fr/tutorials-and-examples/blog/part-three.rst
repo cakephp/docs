@@ -1,40 +1,44 @@
-Blog Tutorial - Part 3
-######################
+Tutoriel d'un Blog - Partie 3
+#############################
 
-Create a Tree Category
-======================
+Créer une Catégorie en Arbre (Tree)
+===================================
 
-Let's continue our blog application and imagine we want to categorize our
-articles. We want the categories to be ordered, and for this, we will use the
-:doc:`Tree behavior </orm/behaviors/tree>` to help us organize the
-categories.
+Continuons notre application de blog et imaginons que nous souhaitions
+catégoriser nos articles. Nous souhaitons que les catégories soit triées, et
+pour cela, nous allons utiliser le :doc:`behavior Tree </orm/behaviors/tree>`
+pour nous aide à organiser les catégories.
 
-But first, we need to modify our tables.
+Mais d'abord, nous devons modifier nos tables.
 
-Migrations Plugin
+Plugin Migrations
 =================
 
-We will use the `migrations plugin <https://github.com/cakephp/migrations>`_ to
-create a table in our database. If you already have an articles table in your
-database, erase it.
+Nous voulons utiliser le
+`plugin migrations <https://github.com/cakephp/migrations>`_ pour
+créer une table dans notre base de données. Si vous avez déjà une table
+articles dans votre base de données, supprimez-la.
 
-Now open your application's ``composer.json`` file. Normally you would see that
-the migrations plugin is already under ``require``. If not add it as follows::
+Maintenant ouvrez le fichier ``composer.json`` de votre application.
+Normalement vous devriez voir que le plugin migrations est déjà dans
+``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
 
     "require": {
         "cakephp/migrations": "dev-master"
     }
 
-Then run ``composer update``. The migrations plugin will now be in your
-application's ``plugins`` folder. Also add ``Plugin::load('Migrations');`` in
-your application's bootstrap.php file.
+Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
+le dossier ``plugins`` de votre application. Ajoutez aussi
+``Plugin::load('Migrations');`` dans le fichier bootstrap.php de votre
+application.
 
-Once the plugin is loaded, run the following command to create a migration file::
+Une fois que le plugin est chargé, lancez la commande suivante pour créer un
+fichier de migration::
 
     bin/cake migrations create Initial
 
-A migration file will be generated in the ``/config/Migrations`` folder. You can
-open your new migration file and add the following::
+Un fichier de migration sera généré dans le dossier ``config/Migrations``. Vous
+pouvez ouvrir votre nouveau fichier de migration et ajouter ce qui suit::
 
     <?php
 
@@ -64,21 +68,23 @@ open your new migration file and add the following::
         }
     }
 
-Now run the following command to create your tables::
+Maintenant lancez la commande suivante pour créer vos tables::
 
     bin/cake migrations migrate
 
 
-Modifying the Tables
-====================
+Modifier les Tables
+===================
 
-With our tables set up, we can now focus on categorizing our articles.
+Avec nos tables définies, nous pouvons maintenant nous focaliser sur la
+catégorisation de nos articles.
 
-We suppose you already have the files (Tables, Controllers and Templates of
-Articles) from part 2. So we'll just add the references to categories.
+Nous supposons que vous avez déjà les fichiers (Tables, Controllers et
+Templates des Articles) de la partie 2. Donc nous allons juste ajouter les
+références aux categories.
 
-We need to associated the Articles and Categories tables together. Open
-the ``src/Model/Table/ArticlesTable.php`` file and add the following::
+Nous devons associer ensemble les tables Articles et Categories. Ouvrez le
+fichier ``src/Model/Table/ArticlesTable.php`` et ajoutez ce qui suit::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -98,57 +104,60 @@ the ``src/Model/Table/ArticlesTable.php`` file and add the following::
         }
     }
 
-Generate Skeleton Code for Categories
-=====================================
+Générer les Squelettes de Code des Catégories
+=============================================
 
-Create all files by launching bake commands::
+Créez tous les fichiers en lançant les commandes de bake suivantes::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
     bin/cake bake view Categories
 
-The bake tool has created all your files in a snap. You can give them a quick
-read if you want re-familiarize yourself with how CakePHP works.
+L'outil bake a créé tous les fichiers en un clin d'œil. Vous pouvez les
+lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de
+CakePHP.
 
-Attach TreeBehavior to CategoriesTable
-======================================
+Attacher TreeBehavior à CategoriesTable
+=======================================
 
-The :doc:`TreeBehavior </orm/behaviors/tree>` helps you manage hierarchical Tree
-structures in database table. It uses the `MPTT logic
-<http://www.sitepoint.com/hierarchical-data-database-2/>`_ to manage the data.
-MPTT tree structures are optimized for reads, which often makes them a good fit
-for read heavy applications like blogs.
+Le :doc:`TreeBehavior </orm/behaviors/tree>` vous aide à gérer des structures
+hiérarchiques en arbre dans une table de base de données. Il utilise
+`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_ pour
+gérer les données. Les structures en arbre MPTT sont optimisées pour lire des
+données ce qui les rend souvent pratique pour lire des applications lourdes
+comme les blogs.
 
-If you open the ``src/Model/Table/CategoriesTable.php`` file, you'll see
-that the TreeBehavior has been attached to your CategoriesTable in the
-``initialize`` method::
+Si vous ouvrez le fichier ``src/Model/Table/CategoriesTable.php``, vous verrez
+que le TreeBehavior a été attaché à votre CategoriesTable dans la méthode
+``initialize``::
 
     $this->addBehavior('Tree');
 
-With the TreeBehavior attached you'll be able to access some features like
-reordering the categories.  We'll see that in a moment.
+Avec le TreeBehavior attaché, vous serez capable d'accéder à quelques
+fonctionnalités comme la réorganisation de l'ordre des categories. Nous verrons
+cela dans un moment.
 
-But for now, you have to remove the following inputs in your Categories add and
-edit template files::
+Mais pour l'instant, vous devez retirer les lignes suivantes dans vos fichiers
+de template add et edit::
 
     echo $this->Form->input('lft');
     echo $this->Form->input('rght');
 
-These fields are automatically managed by the TreeBehavior when
-a category is saved.
+Ces champs sont automatiquement gérés par le TreeBehavior quand
+une catégorie est sauvegardée.
 
-Using your web browser, add some new categories using the
-``/yoursite/categories/add`` controller action.
+En utilisant votre navigateur, ajoutez quelques nouvelles catégories en
+utilisant l'action du controller ``/yoursite/categories/add``.
 
-Reordering Categories with TreeBehavior
-========================================
+Réorganiser l'Ordre des Catégories avec le TreeBehavior
+=======================================================
 
-In your categories index template file, you can list the categories and ordering
-them.
+Dans votre fichier de template index des catégories, vous pouvez lister les
+catégories et réorganiser leur ordre.
 
-Let's modify the index method in your ``CategoriesController.php`` and add
-``move_up`` and ``move_down`` methods to be able to reorder the categories in
-the tree::
+Modifiez la méthode index dans votre ``CategoriesController.php`` et ajoutez les
+méthodes ``move_up`` et ``move_down`` pour pouvoir réorganiser l'ordre des
+catégories dans l'arbre::
 
     class CategoriesController extends AppController
     {
@@ -184,7 +193,7 @@ the tree::
         }
     }
 
-And the index.ctp::
+Et l'index.ctp::
 
     <?php foreach ($categories as $category): ?>
         <?= $this->Number->format($category->id) ?>
@@ -202,12 +211,12 @@ And the index.ctp::
         <br />
     <?php endforeach; ?>
 
-Modifying the ArticlesController
-================================
+Modifier ArticlesController
+===========================
 
-In our ``ArticlesController``, we'll get the list of all the categories.
-This will allow us to choose a category for an Article when creating or editing
-it::
+Dans notre ``ArticlesController``, nous allons récupérer la liste de toutes les
+catégories. Ceci va nous permettre de choisir une catégorie pour un Article
+lorsque l'on va le créer ou le modifier::
 
     // src/Controller/ArticlesController.php
 
@@ -240,10 +249,10 @@ it::
     }
 
 
-Modifying the Articles Templates
-================================
+Modifier les Templates des Articles
+===================================
 
-The article add file should look something like this:
+Le fichier add des articles devrait ressembler à quelque chose comme:
 
 .. code-block:: php
 
@@ -259,9 +268,9 @@ The article add file should look something like this:
     echo $this->Form->button(__('Save Article'));
     echo $this->Form->end();
 
-When you go to the address `/yoursite/articles/add` you should see a list
-of categories to choose.
+Quand vous allez à l'adresse `/yoursite/articles/add`, vous devriez voir une
+liste des catégories à choisir.
 
 .. meta::
-    :title lang=en: Blog Tutorial Migrations and Tree
-    :keywords lang=en: doc models,migrations,tree,controller actions,model article,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
+    :title lang=fr: Tutoriel d'un Blog, Migrations et Tree
+    :keywords lang=fr: doc models,migrations,tree,controller actions,model article,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
