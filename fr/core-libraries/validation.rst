@@ -350,24 +350,25 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
     méthodes comme :php:meth:`~Cake\\ORM\\Table::validate()` ou
     :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles sont destinées à cela.
 
-Validating Entities
-===================
+Valider les Entities
+====================
 
-While entities are validated as they are saved, you may also want to validate
-entities before attempting to do any saving. Validating entities before
-saving is done automatically when using the ``newEntity()`` or
-``patchEntityMethods()``::
+Alors que les entities sont validées quand elles sont sauvegardées, vous pouvez
+aussi vouloir valider les entities avant d'essayer de faire toute sauvegarde.
+La validation des entities avant la sauvegarde est faite automatiquement quand
+on utilise ``newEntity()``, ``newEntities()``, ``patchEntity()`` ou
+``patchEntities()``::
 
-    // In the ArticlesController class
+    // Dans la classe ArticlesController
     $article = $this->Articles->newEntity($this->request->data());
     if ($article->errors()) {
-        // Do work to show error messages.
+        // Afficher les messages d'erreur ici.
     }
 
-Similarly, when you need to pre-validate multiple entities at a time, you can use the
-``newEntities()`` method::
+De la même manière, quand vous avez besoin de pré-valider plusieurs entities
+en une fois, vous pouvez utiliser la méthode ``newEntities()``::
 
-    // In the ArticlesController class
+    // Dans la classe ArticlesController
     $entities = $this->Articles->newEntities($this->request->data());
     foreach ($entities as $entity) {
         if (!$entity->errors()) {
@@ -375,9 +376,9 @@ Similarly, when you need to pre-validate multiple entities at a time, you can us
         }
     }
 
-The ``newEntity()``, ``patchEntity()`` and ``newEntities()`` methods
-allow you to specify which associations are validated, and which
-validation sets to apply using the ``options`` parameter::
+Les méthodes ``newEntity()``, ``patchEntity()`` et ``newEntities()``
+vous permettent de spécifier les associations à valider, et les ensembles de
+validation à appliquer en utilisant le paramètre ``options``::
 
     $valid = $this->Articles->newEntity($article, [
       'associated' => [
@@ -388,12 +389,14 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
-Validation is commonly used for user-facing forms or interfaces, and thus it is
-not limited to only validating columns in the table schema. However,
-maintaining integrity of data regardless where it came from is important. To
-solve this problem CakePHP offers a second level of validation which is called
-"application rules". You can read more about them in the
-:ref:`Applying Application Rules <application-rules>` section.
+La validation est habituellement utilisée pour les formulaires ou les
+interfaces utilisateur, et ainsi elle n'est pas limitée seulement à la
+validation des colonnes dans le schéma de la table. Cependant maintenir
+l'intégrité des données selon d'où elles viennent est important. Pour
+résoudre ce problème, CakePHP dispose d'un deuxième niveau de validation
+qui est appelé "règles d'application". Vous pouvez en savoir plus en
+consultant la section
+:ref:`Appliquer les Règles d'Application <application-rules>`.
 
 Règles de Validation du Cœur
 =============================
