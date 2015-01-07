@@ -389,12 +389,13 @@ validation à appliquer en utilisant le paramètre ``options``::
       ]
     ]);
 
-La validation est habituellement utilisée pour les user-facing forms or
-interfaces, et ainsi elle n'est pas limitée seulement à la validation des
-colonnes dans le schéma de la table. Cependant maintenir l'intégrité des
-données selon d'où elles viennent est important. Pour résoudre ce problème,
-CakePHP dispose d'un deuxième niveau de validation qui est appelé
-"règles d'application". Vous pouvez en savoir plus en consultant la section
+La validation est habituellement utilisée pour les formulaires ou les
+interfaces utilisateur, et ainsi elle n'est pas limitée seulement à la
+validation des colonnes dans le schéma de la table. Cependant maintenir
+l'intégrité des données selon d'où elles viennent est important. Pour
+résoudre ce problème, CakePHP dispose d'un deuxième niveau de validation
+qui est appelé "règles d'application". Vous pouvez en savoir plus en
+consultant la section
 :ref:`Appliquer les Règles d'Application <application-rules>`.
 
 Règles de Validation du Cœur
