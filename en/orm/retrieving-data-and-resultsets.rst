@@ -480,7 +480,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...) // Full conditions for filtering
+                return $q->where(...); // Full conditions for filtering
             }
         ]
     ]);
@@ -523,14 +523,14 @@ already familiar to you::
     // In a controller or table method.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Country.name' => 'Japan']);
         }
     );
 
     // Bring unique articles that were commented by 'markstory' using passed variable
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
-        return $q->where(['username' => $username])
+        return $q->where(['username' => $username]);
     });
 
 .. note::
