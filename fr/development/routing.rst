@@ -297,9 +297,7 @@ nous est familier: c'est une route par défaut qui dit à CakePHP d'attendre
 un nom de controller.
 
 Ensuite, nous spécifions quelques valeurs par défaut. Quel que soit le
-controller, nous voulons que l'action index() soit appelée. **Nous définissons
-le paramètre jour (le quatrième élément dans l'URL) à null pour le marquer en
-option.** --Où est-il marqué à null?--
+controller, nous voulons que l'action index() soit appelée.
 
 Finalement, nous spécifions quelques expressions régulières qui vont
 matcher les années, mois et jours sous forme numérique. Notez que les
