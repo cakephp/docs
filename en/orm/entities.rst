@@ -195,7 +195,7 @@ While setting properties to entities in bulk is simple and convenient, it can
 create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. When using
 anonymous entity classes CakePHP does not protect against mass-assignment. You
-can easily protect against mass-assignment by using :ref:`bake` to generate your
+can easily protect against mass-assignment by using :doc:`/bake` to generate your
 entities.
 
 The ``_accessible`` property allows you to provide a map of properties and
