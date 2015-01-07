@@ -80,22 +80,23 @@ Inline Markup
 -------------
 
 * One asterisk: *text* for emphasis (italics)
-  We'll use it for Object names, excluding the following word "object",
-  for method/function names -- include "()".
+  We'll use it for general highlighting/emphasis.
 
-  * ``*PagesController*``, ``**config()**``, etc.
+  * ``*text*``.
 
 * Two asterisks: **text** for strong emphasis (boldface)
-   We'll use it for working directories, bullet list subject, table names,
+   We'll use it for working directories, bullet list subject, table names and
    excluding the following word "table".
 
-  * ``**text**``, ``**articles**``, etc.
+  * ``**/config/Migrations**``, ``**articles**``, etc.
 
 * Two backquotes: ``text`` for code samples
-  We'll use it for general highlighting/emphasis, names of method options and
-  names of table columns.
+  We'll use it for names of method options, names of table columns, object
+  names, excluding the following word "object" and for method/function
+  names -- include "()".
 
-  * ````cascadeCallbacks````, ````true````, ````id````, etc.
+  * ````cascadeCallbacks````, ````true````, ````id````,
+    ````PagesController````, ````config()````, etc.
 
 If asterisks or backquotes appear in running text and could be confused with
 inline markup delimiters, they have to be escaped with a backslash.
