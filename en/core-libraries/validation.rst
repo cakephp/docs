@@ -337,8 +337,8 @@ Validating Entities
 
 While entities are validated as they are saved, you may also want to validate
 entities before attempting to do any saving. Validating entities before
-saving is done automatically when using the ``newEntity()`` or
-``patchEntityMethods()``::
+saving is done automatically when using the ``newEntity()``, ``newEntities()``,
+``patchEntity()`` or ``patchEntities()``::
 
     // In the ArticlesController class
     $article = $this->Articles->newEntity($this->request->data());
