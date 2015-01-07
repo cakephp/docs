@@ -895,7 +895,7 @@ with usage examples.
     decide the type of comparison you want to use. All the operators supported
     by :php:func:`~Validation::comparison()` are supported here as well. This
     method will automatically handle array values from ``$_FILES`` by reading
-    from the ``tmp_name`` key if ``$check`` is an array an contains that key::
+    from the ``tmp_name`` key if ``$check`` is an array and contains that key::
 
         public $validate = array(
             'image' => array(
