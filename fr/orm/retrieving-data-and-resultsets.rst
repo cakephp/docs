@@ -502,7 +502,7 @@ pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...) // Full conditions for filtering
+                return $q->where(...); // Full conditions for filtering
             }
         ]
     ]);
@@ -547,7 +547,7 @@ déjà vous être familière::
     // Dans un controller ou une table de méthode.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Countries.name' => 'Japan']);
         }
     );
 
@@ -555,7 +555,7 @@ déjà vous être familière::
     // en utilisant la variable passée
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
-        return $q->where(['username' => $username])
+        return $q->where(['username' => $username]);
     });
 
 .. note::
