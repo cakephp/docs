@@ -17,6 +17,10 @@ Configure
 Datasource
 ==========
 
+- Les sources de données SQL vont maintenant remplacer ``''`` et ``null`` en
+  ``''`` quand les colonnes ne sont pas nulles et que les lignes sont en train
+  d'être créées ou mises à jour.
+
 CakeSession
 -----------
 - :php:meth:`CakeSession::consume()` a été ajoutée pour lire et supprimer dans
