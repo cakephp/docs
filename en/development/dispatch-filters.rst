@@ -238,6 +238,7 @@ got a valid reason to do so, then you have a clean solution at hand. Keep in
 mind that not everything needs to be a filter, `Controllers` and `Components` are
 usually a more accurate choice for adding any request handling code to your app.
 
+
 .. meta::
     :title lang=en: Dispatcher Filters
     :description lang=en: Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent

@@ -75,7 +75,6 @@ allows you to return only a portion of the requested tree::
     ./Console/cake acl view
 
 
-
 .. meta::
     :title lang=en: ACL Shell
     :keywords lang=en: record style,style reference,acl,database tables,group id,notations,alias,privilege,node,privileges,shell,databases

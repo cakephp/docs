@@ -293,7 +293,6 @@ also modify the ``$settings`` property on the PaginatorComponent::
 By default all of the typical paging parameters will be converted into GET
 arguments.
 
-
 .. note::
 
     You can run into a situation where assigning a value to a nonexistent property will throw errors::

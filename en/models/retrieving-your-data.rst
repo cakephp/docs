@@ -1117,7 +1117,6 @@ custom query you like::
     );
 
 
-
 .. meta::
     :title lang=en: Retrieving Your Data
     :keywords lang=en: upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models

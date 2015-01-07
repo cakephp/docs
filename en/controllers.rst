@@ -28,7 +28,6 @@ for interpreting the request and creating the response. Usually responses are
 in the form of a rendered view, but there are other ways to create responses as
 well.
 
-
 .. _app-controller:
 
 The App Controller

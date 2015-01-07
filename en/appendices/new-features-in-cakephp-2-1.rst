@@ -6,6 +6,7 @@ Models
 
 Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 ----------------------------------------------------------------------
+
 ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
 
     $this->SomeModel->saveAll($data, array(
@@ -208,6 +209,6 @@ it in ``engine`` key::
     }
 
 HtmlHelper
------------
-A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.
+----------
 
+A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.

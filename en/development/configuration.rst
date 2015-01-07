@@ -387,7 +387,6 @@ they are read on every request. By default both of these configurations expire e
 As with all cached data stored in :php:class:`Cache` you can clear data using
 :php:meth:`Cache::clear()`.
 
-
 Configure Class
 ===============
 

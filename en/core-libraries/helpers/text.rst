@@ -89,6 +89,7 @@ truncating long stretches of text.
     :start-after: start-string
     :end-before: end-string
 
+
 .. meta::
     :title lang=en: TextHelper
     :description lang=en: The Text Helper contains methods to make text more usable and friendly in your views.

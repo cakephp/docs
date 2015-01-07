@@ -117,7 +117,7 @@ if a specific object is still enabled using ``enabled()``::
     $enabled = $this->Helpers->enabled();
 
 Object callback priorities
-==============================
+==========================
 
 You can prioritize the triggering object callbacks similar to event callbacks.
 The handling of priority values and order of triggering is the same as

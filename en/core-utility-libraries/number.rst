@@ -186,7 +186,6 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::precision(456.91873645, 2);
 
-
 .. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = array())
 
     :param float $number: The value to covert.
@@ -358,6 +357,7 @@ automatically echo the output into the view.
         This method was added in 2.3
 
 .. end-cakenumber
+
 
 .. meta::
     :title lang=en: NumberHelper

@@ -1,7 +1,6 @@
 Helpers
 #######
 
-
 Helpers are the component-like classes for the presentation layer
 of your application. They contain presentational logic that is
 shared between many views, elements, or layouts. This chapter will
@@ -196,7 +195,6 @@ helper. To do so, you can specify helpers you wish to use with a
         }
     }
 
-
 .. _using-helpers:
 
 Using your Helper
@@ -232,7 +230,6 @@ functionality that would be available to all helpers, create
         public function customMethod() {
         }
     }
-
 
 .. _helper-api:
 
@@ -298,6 +295,7 @@ Callbacks
 
     Is called after layout rendering is complete. Receives the layout filename as an
     argument.
+
 
 .. meta::
     :title lang=en: Helpers

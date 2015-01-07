@@ -212,6 +212,7 @@ If your environment supplies the xdebug php extension, fatal errors will show
 additional xdebug stack trace details. Details about
 `xdebug <http://xdebug.org>`_ .
 
+
 .. meta::
     :title lang=en: Debugging
     :description lang=en: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.

@@ -338,7 +338,6 @@ model that the behavior method was invoked on.
     your behavior.
 
 
-
 .. meta::
     :title lang=en: Behaviors
     :keywords lang=en: tree manipulation,manipulation methods,model behaviors,access control list,model class,tree structures,php class,business contract,class category,database table,bakery,inheritance,functionality,interaction,logic,cakephp,models,essence

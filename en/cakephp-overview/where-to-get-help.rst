@@ -78,6 +78,7 @@ donate your brand new sports car.
 
 Official CakePHP discussion group
 =================================
+
 `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
 
 CakePHP also has its official discusson group on Google Groups.

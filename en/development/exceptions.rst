@@ -36,7 +36,6 @@ you to take full control over the exception handling process, while changing
 the renderer allows you to easily change the output type/contents, as well as
 add in application specific exception handling.
 
-
 .. versionadded:: 2.2
     The ``Exception.consoleHandler`` option was added in 2.2.
 
@@ -213,7 +212,7 @@ and log the exception.
 .. _error-views:
 
 Exception Renderer
-=========================
+==================
 
 .. php:class:: ExceptionRenderer(Exception $exception)
 
@@ -271,7 +270,6 @@ as a string or use its ``getMessage()`` method you will get
 ``Seems that Pointy is missing.``. This allows you easily and quickly create
 your own rich development errors, just like CakePHP uses internally.
 
-
 Creating custom status codes
 ----------------------------
 
@@ -288,7 +286,6 @@ see the ``error500`` template. For any other error code you'll get the
 custom exception, that template will be used in development mode.
 If you'd like your own exception handling logic even in production,
 see the next section.
-
 
 Extending and implementing your own Exception handlers
 ======================================================

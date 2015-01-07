@@ -68,8 +68,7 @@ If you wish to modify the default HTML output produced by the
 "bake" command, follow these simple steps:
 
 For baking custom views
-------------------------
-
+-----------------------
 
 #. Go into: lib/Cake/Console/Templates/default/views
 #. Notice the 4 files there

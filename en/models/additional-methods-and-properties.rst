@@ -109,6 +109,7 @@ Returns the ID of the last record this model inserted.
 
 Alias to ``getInsertID()``.
 
+
 .. meta::
     :title lang=en: Additional Methods and Properties
     :keywords lang=en: model classes,model functions,model class,interval,array

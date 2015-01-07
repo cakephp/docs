@@ -404,7 +404,7 @@ Check the list of :ref:`configurations <email-configurations>` to see all accept
 
 
 Sending emails from CLI
-========================
+=======================
 
 .. versionchanged:: 2.2
 
@@ -421,6 +421,7 @@ name for the message id (since there is no host name in a CLI environment)::
 A valid message id can help to prevent emails ending up in spam folders. If you
 are generating links in your email bodies you will also need to set the
 ``App.fullBaseUrl`` configure value.
+
 
 .. meta::
     :title lang=en: CakeEmail

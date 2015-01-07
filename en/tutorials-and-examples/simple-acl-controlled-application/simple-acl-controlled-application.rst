@@ -7,7 +7,6 @@ Simple Acl controlled Application
     CakePHP we would advise you to get a better overall experience of the
     framework's features before trying out this tutorial.
 
-
 In this tutorial you will create a simple application with
 :doc:`/core-libraries/components/authentication` and
 :doc:`/core-libraries/components/access-control-lists`. This
@@ -41,7 +40,6 @@ To get a fresh download, visit the CakePHP project at GitHub:
 https://github.com/cakephp/cakephp/tags and download the stable
 release. For this tutorial you need the latest 2.0 release.
 
-
 You can also clone the repository using
 `git <http://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``
@@ -61,14 +59,12 @@ statements into your database::
        modified DATETIME
    );
 
-
    CREATE TABLE groups (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
        name VARCHAR(100) NOT NULL,
        created DATETIME,
        modified DATETIME
    );
-
 
    CREATE TABLE posts (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
