@@ -1,7 +1,7 @@
 TreeBehavior
 ############
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TreeBehavior
 
@@ -19,7 +19,6 @@ information multi-niveau.
 Le TreeBehavior vous aide à maintenir une structure de données hierarchisée
 dans la base de données qui peut être requêtée facilement et aide à reconstruire
 les données en arbre pour trouver et afficher les processus.
-
 Pré-Requis
 ==========
 
