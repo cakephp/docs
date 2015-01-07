@@ -403,7 +403,7 @@ les mêmes résultats que les champs virtuels, cela donne::
 Les Associations Ne sont Plus Définies en Propriétés
 ----------------------------------------------------
 
-Dans les précédentes versions de CakePHP, les diverses associations que vos
+Dans les versions précédentes de CakePHP, les diverses associations que vos
 models avaient, ont été définies dans les propriétés comme ``$belongsTo`` et
 ``$hasMany``. Dans CakePHP 3.0, les associations sont créées avec les méthodes.
 L'utilisation de méthodes vous permet de mettre de côté plusieurs définitions
@@ -484,8 +484,8 @@ méthode doit être préfixée avec ``validation`` et accepte un argument
 ``$validator``.
 
 Dans les versions précédentes de CakePHP, la 'validation' et les callbacks liés
-quelques utilisations liées mais différentes. Dans CakePHP 3.0, ce qui était
-avant appelé validation est maintenant séparé en deux concepts:
+couvraient quelques utilisations liées mais différentes. Dans CakePHP 3.0, ce
+qui était avant appelé validation est maintenant séparé en deux concepts:
 
 #. Type de données et validation de format.
 #. Enforcing application, or business rules.
