@@ -479,29 +479,33 @@ règles::
 
     }
 
-You can define as many validation methods as you need. Each method should be
-prefixed with ``validation`` and accept a ``$validator`` argument.
+Vous pouvez définir autant de méthodes de validation que vous souhaitez. Chaque
+méthode doit être préfixée avec ``validation`` et accepte un argument
+``$validator``.
 
-In previous versions of CakePHP 'validation' and the related callbacks covered
-a few related but different uses. In CakePHP 3.0, what was formerly called
-validation is now split into two concepts:
+Dans les versions précédentes de CakePHP, la 'validation' et les callbacks liés
+quelques utilisations liées mais différentes. Dans CakePHP 3.0, ce qui était
+avant appelé validation est maintenant séparé en deux concepts:
 
-#. Data type and format validation.
+#. Type de données et validation de format.
 #. Enforcing application, or business rules.
 
-Validation is now applied before ORM entities are created from request data.
-This step lets you ensure data matches the data type, format, and basic shape
-your application expects. You can use your validators when converting request
-data into entities by using the ``validate`` option. See the documentation on
-:ref:`converting-request-data` for more information.
+La validation est maintenant appliquée avant que les entities de l'ORM
+ne soient créées à partir des données de request. Cette étape permet de
+vous assurer que les données correpondent au type de données, au format et
+à la forme de base que votre application attend. Vous pouvez utiliser
+vos validateurs quand vous convertissez en entities les données de request en
+utilisant l'option ``validate``. Consultez la documentation
+:ref:`converting-request-data` pour plus d'informations.
 
-:ref:`Application rules <application-rules>` allow you to define rules that
-ensure your application's rules, state and workflows are enforced. Rules are
-defined in your Table's ``buildRules()`` method. Behaviors can add rules using
-the ``buildRules()`` hook method. An example ``buildRules`` method for our
-articles table could be::
+:ref:`Les règles d'Application <application-rules>` vous permettent de définir
+les règles qui s'assurent que vos règles d'application, l'état et les flux de
+travail sont remplies. Les règles sont définies dans la méthode ``buildRules()``
+de votre Table. Les behaviors peuvent ajouter des règles en utilisant la méthode
+hook ``buildRules()``. Un exemple de méthode ``buildRules`` pour notre table
+articles pourrait être::
 
-    // In src/Model/Table/ArticlesTable.php
+    // Dans src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
