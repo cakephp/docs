@@ -194,7 +194,6 @@ add-ons that can add this support, you can also import htaccess
 rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
 
-
 #. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Create a new file called web.config in your CakePHP root folder.
@@ -269,7 +268,6 @@ I don't / can't use URL rewriting
 
 If you don't want to or can't use URL rewriting on your webserver,
 refer to the :ref:`core configuration<core-configuration-baseurl>`.
-
 
 
 .. meta::

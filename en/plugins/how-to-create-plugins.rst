@@ -194,7 +194,6 @@ Creating this file, would allow you to override
 
 .. _plugin-assets:
 
-
 Plugin Assets
 =============
 
@@ -238,7 +237,6 @@ would serve the asset
     Use :term:`plugin syntax` to request assets. For example in your View::
     
         <?php echo $this->Html->css("ContactManager.style"); ?>
-
 
 Components, Helpers and Behaviors
 =================================
@@ -332,6 +330,7 @@ The convention is to use lowercase letters and dashes as separator.
 So if you created a plugin "Logging" with your GitHub account "FooBar", a good name
 would be `foo-bar/cakephp-logging`.
 And the CakePHP owned "Localized" plugin can be found under `cakephp/localized` respectively.
+
 
 .. meta::
     :title lang=en: How To Create Plugins

@@ -66,7 +66,6 @@ If you're stuck, there are a number of places :doc:`you can get help
 </cakephp-overview/where-to-get-help>`.
 
 
-
 .. meta::
     :title lang=en: .. CakePHP Cookbook documentation master file, created by
     :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

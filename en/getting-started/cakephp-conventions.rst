@@ -110,7 +110,6 @@ classes you would typically use in a CakePHP application:
 
 Each file would be located in the appropriate folder in your app folder. 
 
-
 Model and Database Conventions
 ==============================
 

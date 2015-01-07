@@ -345,7 +345,6 @@ As part of auth configuration, you can configure proxy authentication. You can
 create your customized method to proxy authentication in the same class of
 authentication. For example::
 
-
     class YourMethodAuthentication {
 
     /**
@@ -376,7 +375,6 @@ authentication. For example::
 
     To use a proxy, you must call the ``HttpSocket::configProxy()`` similar to
     ``HttpSocket::configAuth()``.
-
 
 
 .. meta::

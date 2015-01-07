@@ -1028,7 +1028,7 @@ the Model::save() to always do it for you::
 
     }
 
+
 .. meta::
     :title lang=en: Saving Your Data
     :keywords lang=en: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
-

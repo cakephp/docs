@@ -118,6 +118,7 @@ Displaying notifications or flash messages
         any request or user data in your flash messages, you should escape it
         with :php:func:`h` when formatting your messages.
 
+
 .. meta::
     :title lang=en: SessionHelper
     :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the component's functionality and makes it available in your view.

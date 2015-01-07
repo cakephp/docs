@@ -614,6 +614,7 @@ Other Methods
 .. versionadded:: 2.6
     The ``meta()`` method was added in 2.6.
 
+
 .. meta::
     :title lang=en: PaginatorHelper
     :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.

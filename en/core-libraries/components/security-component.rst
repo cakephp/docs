@@ -154,7 +154,6 @@ tracked as well. All of this data is combined and turned into a hash. When
 a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
 structure and compare the hash.
 
-
 .. note::
 
     The SecurityComponent will **not** prevent select options from being

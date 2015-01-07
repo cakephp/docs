@@ -163,4 +163,3 @@ In a minor release you can:
        This is generally avoided unless renaming has significant benefit.
 .. [3] Avoid whenever possible. Any removals need to be documented in
        the migration guide.
-

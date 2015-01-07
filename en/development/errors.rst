@@ -126,6 +126,7 @@ If you do not want to show the cake error page, you can override it like::
 If you want to keep the default fatal error behavior, you can call ``ErrorHandler::handleFatalError()``
 from your custom handler.
 
+
 .. meta::
     :title lang=en: Error Handling
     :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error

@@ -7,7 +7,6 @@ requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side. Usage of ``$_SESSION`` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
 
-
 Session Configuration
 =====================
 
@@ -139,7 +138,6 @@ handler array. You can then read those values out from inside your handler.
 You can also use session handlers from inside plugins. By setting the engine to
 something like ``MyPlugin.PluginSessionHandler``. This will load and use the
 ``PluginSessionHandler`` class from inside the MyPlugin of your application.
-
 
 CakeSessionHandlerInterface
 ---------------------------
@@ -302,7 +300,6 @@ also easy. In your ``core.php`` make the session block look like the following::
 
 Now our application will start using our custom session handler for reading &
 writing session data.
-
 
 .. php:class:: CakeSession
 

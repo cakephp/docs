@@ -108,6 +108,7 @@ any other helper in your view, such as::
 
     echo $this->ContactInfo->address($contact);
 
+
 .. meta::
     :title lang=en: How To Use Plugins
     :keywords lang=en: plugin folder,configuration database,bootstrap,management module,webroot,user management,contactmanager,array,config,cakephp,models,php,directories,blog,plugins,applications

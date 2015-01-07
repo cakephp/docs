@@ -566,7 +566,6 @@ File API
 
     Get the file's mimetype, returns false on failure.
 
-
 .. php:method:: replaceText( $search, $replace )
 
     :rtype: boolean
@@ -579,6 +578,7 @@ File API
 .. todo::
 
     Better explain how to use each method with both classes.
+
 
 .. meta::
     :title lang=en: Folder & File

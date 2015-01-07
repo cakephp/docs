@@ -116,7 +116,7 @@ You can find these files for few popular languages from the official `Localized 
 repo.
 
 Internationalizing CakePHP Plugins
-===================================
+==================================
 
 If you want to include translation files within your application you'll need to
 follow a few conventions.
@@ -145,6 +145,7 @@ the plugin if there is a match for the given translation file.
 
 Controlling the Translation Order
 =================================
+
 The Configure value ``I18n.preferApp`` can be used to control the order of translations.
 If set to true in bootstrap it will prefer the app translations over any plugins' ones::
 
@@ -220,6 +221,7 @@ command ``locale -a`` in a terminal.
 
 Translating model validation errors
 ===================================
+
 CakePHP will automatically extract the validation error when you are using the
 :doc:`i18n console task </console-and-shells>`. By default, the default domain is used.
 This can be overwritten by setting the ``$validationDomain`` property in your model::
@@ -249,6 +251,7 @@ function. This allows you to create dynamic validation messages::
 Which will do the following internal call::
 
     __d('validation', 'Username should be between %d and %d characters', array(2, 10));
+
 
 .. meta::
     :title lang=en: Internationalization & Localization

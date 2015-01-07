@@ -21,7 +21,6 @@ be able to use the ``cake`` command to create a new application. Since CakePHP
 will be located on PHP's ``include_path`` you won't need to make any other
 changes.
 
-
 Installing CakePHP with Composer
 ================================
 
@@ -119,7 +118,6 @@ it.
 
 To configure your CakePHP installation, you'll need to make some
 changes to the following files.
-
 
 -  /app/webroot/index.php
 -  /app/webroot/test.php (if you use the
