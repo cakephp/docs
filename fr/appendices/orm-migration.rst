@@ -487,8 +487,8 @@ Dans les versions précédentes de CakePHP, la 'validation' et les callbacks li�
 couvraient quelques utilisations liées mais différentes. Dans CakePHP 3.0, ce
 qui était avant appelé validation est maintenant séparé en deux concepts:
 
-#. Type de données et validation de format.
-#. Enforcing application, or business rules.
+#. Validation du type de données et du format.
+#. Vérification des règles métiers.
 
 La validation est maintenant appliquée avant que les entities de l'ORM
 ne soient créées à partir des données de request. Cette étape permet de
@@ -500,9 +500,9 @@ utilisant l'option ``validate``. Consultez la documentation
 
 :ref:`Les règles d'Application <application-rules>` vous permettent de définir
 les règles qui s'assurent que vos règles d'application, l'état et les flux de
-travail sont remplies. Les règles sont définies dans la méthode ``buildRules()``
+travail sont remplis. Les règles sont définies dans la méthode ``buildRules()``
 de votre Table. Les behaviors peuvent ajouter des règles en utilisant la méthode
-hook ``buildRules()``. Un exemple de méthode ``buildRules`` pour notre table
+``buildRules()``. Un exemple de méthode ``buildRules`` pour notre table
 articles pourrait être::
 
     // Dans src/Model/Table/ArticlesTable.php
