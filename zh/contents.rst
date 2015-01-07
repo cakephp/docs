@@ -11,7 +11,9 @@ Contents
    controllers
    views
    models
+   plugins
    development
+   tutorials-and-examples
    contributing
 
 .. todolist::

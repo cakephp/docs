@@ -44,6 +44,9 @@ AuthComponent
 -------------
 
 - ``AuthComponent`` had the ``userFields`` option added.
+- AuthComponent now triggers an ``Auth.afterIdentify`` event after a user has
+  been identified and logged in. The event will contain the logged in user as
+  data.
 
 Behavior
 ========
@@ -59,6 +62,7 @@ Datasource
 Mysql
 -----
 
+- The ``RLIKE`` wildcard operator has been added to allow regular expression pattern lookups this way.
 - Schema migrations with MySQL now support an ``after`` key when adding
   a column. This key allows you to specify which column the new one should be
   added after.
@@ -92,6 +96,13 @@ HttpSocket
 - ``HttpSocket::head()`` was added.
 - You can now use the ``protocol`` option to override the specific protocol to
   use when making a request.
+
+
+I18n
+====
+
+- Configure value ``I18n.preferApp`` can now be used to control the order of translations.
+  If set to true it will prefer the app translations over any plugins' ones.
 
 
 Utility

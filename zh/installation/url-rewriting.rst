@@ -182,7 +182,7 @@ htaccess 规则导入 IIS，来使用 CakePHP 的原生重写。为此，按照�
 #. 使用记事本(*Notepad*)或任何对 XML 安全的编辑器，拷贝下面的代码到新建的
    web.config 文件中……
 
-::
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>

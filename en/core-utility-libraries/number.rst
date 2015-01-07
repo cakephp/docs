@@ -174,7 +174,7 @@ automatically echo the output into the view.
 
     This method displays a number with the specified amount of
     precision (decimal places). It will round in order to maintain the
-    level of precision defined.::
+    level of precision defined. ::
 
         // called as NumberHelper
         echo $this->Number->precision(456.91873645, 2);
@@ -203,7 +203,7 @@ automatically echo the output into the view.
     Like precision(), this method formats a number according to the
     supplied precision (where numbers are rounded to meet the given
     precision). This method also expresses the number as a percentage
-    and prepends the output with a percent sign.::
+    and prepends the output with a percent sign. ::
 
         // Called as NumberHelper. Output: 45.69%
         echo $this->Number->toPercentage(45.691873645);

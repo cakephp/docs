@@ -151,7 +151,10 @@ should look like::
             'authError' => 'Did you really think you are allowed to see that?',
             'authenticate' => array(
                 'Form' => array(
-                    'fields' => array('username' => 'email')
+                    'fields' => array(
+                      'username' => 'my_user_model_username_field', //Default is 'username' in the userModel
+                      'password' => 'my_user_model_password_field'  //Default is 'password' in the userModel
+                    )
                 )
             )
         )
@@ -186,18 +189,18 @@ working with a login form could look like::
 
     public function login() {
         if ($this->request->is('post')) {
+            // Important: Use login() without arguments! See warning below.
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
                 // Prior to 2.3 use
                 // `return $this->redirect($this->Auth->redirect());`
-            } else {
-                $this->Session->setFlash(
-                    __('Username or password is incorrect'),
-                    'default',
-                    array(),
-                    'auth'
-                );
             }
+            $this->Session->setFlash(
+                __('Username or password is incorrect'),
+                'default',
+                array(),
+                'auth'
+            );
         }
     }
 
@@ -280,7 +283,7 @@ authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
 request, these values are used to re-identify the user and ensure they are
 valid user. As with authentication object's ``authenticate()`` method the
 ``getUser()`` method should return an array of user information on success or
-``false`` on failure.::
+``false`` on failure. ::
 
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');
@@ -320,7 +323,7 @@ Displaying auth related flash messages
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
 lines to the ``app/View/Layouts/default.ctp`` file in the body section
-preferable before the content_for_layout line.::
+preferable before the content_for_layout line. ::
 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');

@@ -67,7 +67,7 @@ Apache e mod\_rewrite (e .htaccess)
 ===================================
 
 O CakePHP é desenvolvido para trabalhar com o mod\_rewrite, mas percebemos que
-alguns usuários apanharam ppara fazer isto funcionar nos seus sistemas, então
+alguns usuários apanharam para fazer isto funcionar nos seus sistemas, então
 nós lhe daremos algumas dicas que você pode tentar fazer para rodar corretamente. 
 
 Aqui estão algumas coisas que você pode tentar fazer para rodar corretamente.

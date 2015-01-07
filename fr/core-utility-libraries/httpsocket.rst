@@ -121,7 +121,7 @@ Gérer la réponse
 
 Les réponses des requêtes faîtes avec ``HttpSocket`` sont des instances de
 ``HttpResponse``. L'objet vous donne quelques méthodes accessor pour accéder
-au contenu de la réponse HTTP. Cette classe intégre le
+au contenu de la réponse HTTP. Cette classe intègre le
 `ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ et
 `__toString() <http://www.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
 donc vous pouvez continuer en utilisant ``$http->response`` en tableau et le
@@ -222,7 +222,7 @@ Gérer les certificats SSL
 -------------------------
 
 Quand vous faites des requêtes vers des services en SSL, HttpSocket va
-s'attendre à valider le certicat SSL en utilisant la validation peer. Si le
+s'attendre à valider le certificat SSL en utilisant la validation peer. Si le
 certificat échoue la validation peer ou ne correspond pas au nom d'hôte
 qu'on souhaite accéder, la connexion va échouer, et une exception va être
 lancée. Par défaut HttpSocket va utiliser le fichier d'autorité du certificat
@@ -233,7 +233,7 @@ suivantes pour configurer la façon dont les certificats sont gérés:
    Ce n'est **pas recommandé**.
 - ``ssl_verify_host`` Défini à false si vous souhaitez ignorer les erreurs
   de correspondance du nom d'hôte.
-- ``ssl_allow_self_signed`` Défini à true pour activer les certicats que l'on
+- ``ssl_allow_self_signed`` Défini à true pour activer les certificats que l'on
   accepte soi-même. Cela nécessite que ``ssl_verify_peer`` soit activé.
 - ``ssl_cafile`` Défini au chemin absolu du fichier de l'Autorité de
   Certification que vous souhaitez utiliser pour vérifier les certificats SSL.
@@ -245,7 +245,7 @@ Ces options sont fournies dans les arguments du constructeur::
     ));
 
 Autoriserait les certificats signés soi-même pour toutes les requêtes faîtes
-avec le socket crée.
+avec le socket créé.
 
 .. versionadded:: 2.3
     La validation de certificats SSL a été ajoutée dans 2.3.
@@ -305,7 +305,7 @@ Utiliser l'authentification
 ===========================
 
 HttpSocket supporte des méthodes d'authentification HTTP Basic et Digest. Vous
-pouvez maintenant créer des objets d'authenrification personnalisée pour
+pouvez maintenant créer des objets d'authentification personnalisés pour
 supporter des protocoles comme OAuth. Pour utiliser un système
 d'authentification, vous devez configurer l'instance ``HttpSocket``::
 
@@ -340,7 +340,7 @@ utiliser avec HttpSocket. Vous pouvez créer le fichier
 
     }
 
-Pour configurer HttpSocket afin d'utiliser votre configuraiton auth, vous
+Pour configurer HttpSocket afin d'utiliser votre configuration auth, vous
 pouvez utiliser la nouvelle méthode ``configAuth()``::
 
     $http->configAuth('YourMethod', array('config1' => 'value1', 'config2' => 'value2'));

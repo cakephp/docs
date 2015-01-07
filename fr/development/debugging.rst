@@ -113,8 +113,8 @@ est défini à une valeur supérieure à 0.
 
 .. php:staticmethod:: Debugger::trace($options)
 
-    Retourne le stack trace courant. Chaque ligne des traces inlut la méthode
-    appelée, incluant chaque fichier et ligne d'où est originaire l'appel.::
+    Retourne le stack trace courant. Chaque ligne des traces inclut la méthode
+    appelée, incluant chaque fichier et ligne d'où est originaire l'appel. ::
 
         //Dans PostsController::index()
         pr( Debugger::trace() );
@@ -138,7 +138,7 @@ est défini à une valeur supérieure à 0.
 
     Récupérer un extrait du fichier dans $path (qui est un chemin de fichier
     absolu), mettant en évidence le numéro de la ligne $line avec le nombre
-    de lignes $context autour.::
+    de lignes $context autour. ::
 
         pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
 
@@ -180,10 +180,10 @@ est défini à une valeur supérieure à 0.
 Utiliser Logging pour debug
 ===========================
 
-Les messages de Logging est une autre bonne façon de debugger les applications,
+Logger des messages est une autre bonne façon de debugger les applications,
 et vous pouvez utiliser :php:class:`CakeLog` pour faire le logging dans votre
 application. Tous les objets qui étendent :php:class:`Object` ont une méthode
-d'instanciation `log()` qui peut être utilisé pour les messages de log::
+d'instanciation `log()` qui peut êtreui peut être utilisée pour logger les messages::
 
     $this->log('Got here', 'debug');
 
@@ -203,7 +203,7 @@ a été chargée::
 Kit de Debug
 ============
 
-DebugKit est un plugin qui fournit un nombre de bons outiles de debug. Il
+DebugKit est un plugin qui fournit un nombre de bons outils de debug. Il
 fournit principalement une barre d'outils dans le HTML rendu, qui fournit
 une pléthore d'informations sur votre application et la requête courante.
 Vous pouvez télécharger

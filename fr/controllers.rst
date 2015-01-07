@@ -339,7 +339,7 @@ Contrôle de Flux
     :php:meth:`~Controller::redirect()`. Cette méthode prend son premier
     paramètre sous la forme d'une URL relative à votre application CakePHP.
     Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-    rediriger vers un écran affichant le reçu.::
+    rediriger vers un écran affichant le reçu. ::
 
         public function regler_achats() {
             // Placez ici la logique pour finaliser l'achat...

@@ -25,7 +25,7 @@ CakePHP 已有的行为包括树结构(*tree structure*)，翻译内容(*transla
 CakePHP 自带了一些行为。欲知每个行为的更多信息，请参考下面各章：
 
 .. include:: /core-libraries/toc-behaviors.rst
-    :start-line: 10
+    :start-line: 8
 
 使用行为
 ========

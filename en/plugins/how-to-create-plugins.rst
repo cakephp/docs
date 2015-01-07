@@ -235,8 +235,9 @@ would serve the asset
     asset path. That makes the magic happen!
 
 .. versionchanged:: 2.1
-Use :term:`plugin syntax` to request assets. For example in your View:
-    <?php echo $this->Html->css("ContactManager.style"); ?>
+    Use :term:`plugin syntax` to request assets. For example in your View::
+    
+        <?php echo $this->Html->css("ContactManager.style"); ?>
 
 
 Components, Helpers and Behaviors

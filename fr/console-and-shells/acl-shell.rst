@@ -63,7 +63,7 @@ La seule différence est le remplacement de 'grant' en 'deny'.
 Vérification des permissions
 ============================
 
-Utilisez cette commande pour accorder les permissions ACL.::
+Utilisez cette commande pour accorder les permissions ACL. ::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 

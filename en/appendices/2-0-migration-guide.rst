@@ -1019,8 +1019,8 @@ The testsuite shell has been refactored to use the PHPUnit cli tool. It now
 supports all the command line options supported by PHPUnit.
 ``cake testsuite help`` will show you a list of all possible modifiers.
 
-Models
-======
+Model
+=====
 
 Model relationships are now lazy loaded. You can run into a situation where
 assigning a value to a nonexistent model property will throw errors::

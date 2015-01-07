@@ -199,9 +199,8 @@ dépendent de cet enregistrement soient aussi supprimés.
         ));
         if ($count == 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 afterDelete

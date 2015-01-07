@@ -525,9 +525,8 @@ en reprenant l'exemple du Post::
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
-            } else {
-                $this->set('posts', $posts);
             }
+            $this->set('posts', $posts);
         }
     }
 
@@ -607,7 +606,7 @@ habituelle. Si la vue est rendue pour un controller/action d'un plugin, le nom
 du plugin va automatiquement être préfixé pour tous les elements utilisés, à
 moins qu'un autre nom de plugin ne soit présent.
 Si l'element n'existe pas dans le plugin, il ira voir dans le dossier principal
-APP.::
+APP. ::
 
     echo $this->element('Contacts.helpbox');
 
@@ -840,4 +839,4 @@ En savoir plus sur les vues
 
 .. meta::
     :title lang=fr: Views (Vues)
-    :keywords lang=fr: logique de vue,fichier csv,élements de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc
+    :keywords lang=fr: logique de vue,fichier csv,éléments de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc

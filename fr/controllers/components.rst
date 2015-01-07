@@ -6,8 +6,8 @@ qui sont partagés entre les controllers. CakePHP est également livré avec un
 fantastique ensemble de components, que vous pouvez utiliser pour vous aider.
 Si vous vous surprenez à vouloir copier et coller des choses entre vos
 controllers, alors vous devriez envisager de regrouper plusieurs
-fonctionnalités dans un Component. Créer des components permettent de garder
-un code de controller propre et vous permet de réutiliser du code entre des
+fonctionnalités dans un Component. Créer des components permet de garder
+un code de controller propre et de réutiliser du code entre différents
 projets.
 
 Chacun de ces components d'origine est détaillé dans son chapitre
@@ -298,7 +298,7 @@ Les Callbacks
     méthode retourne false, le controller ne continuera pas de rediriger la
     requête. Les variables $url, $status et $exit ont la même signification
     que pour la méthode du controller. Vous pouvez aussi retourner une chaîne
-    de caractère qui sera interpretée comme une URL pour rediriger ou retourner
+    de caractère qui sera interprétée comme une URL pour rediriger ou retourner
     un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
 
 

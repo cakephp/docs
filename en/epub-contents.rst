@@ -4,8 +4,8 @@ Contents
 .. toctree::
    :maxdepth: 3
 
-   installation
    getting-started
+   installation
    cakephp-overview
    controllers
    views
@@ -15,7 +15,9 @@ Contents
    console-and-shells
    development
    deployment
-   tutorials-and-examples
+   tutorials-and-examples/blog-auth-example/auth
+   tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application
+   tutorials-and-examples/simple-acl-controlled-application/part-two
    contributing
    appendices
 

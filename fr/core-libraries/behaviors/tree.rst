@@ -593,7 +593,7 @@ Utilisation avancée
 
     Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de la
     direction spécifiée dans les paramètres. Cette méthode ne changera pas le
-    parent d'un nœud.::
+    parent d'un nœud. ::
 
         $model->reorder(array(
             'id' => ,    //id de l\'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id
@@ -732,4 +732,4 @@ Exemple de sortie::
 
 .. meta::
     :title lang=fr: Tree
-    :keywords lang=fr: auto increment,représentation littérale,parent id,table catégories,table base de données,données hiérarchisées,valeur null,système de menu,intricacies,contrôle accès,hiérarchie,logique,élements,trees, arbres
+    :keywords lang=fr: auto increment,représentation littérale,parent id,table catégories,table base de données,données hiérarchisées,valeur null,système de menu,intricacies,contrôle accès,hiérarchie,logique,éléments,trees, arbres

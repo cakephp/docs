@@ -85,7 +85,7 @@ etc.) cake will use them if appropriate.
 
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
-should consider implementing a different solution. e.g.::
+should consider implementing a different solution. e.g. ::
 
     // App Controller Code.
     public function beforeFilter() {
@@ -142,6 +142,17 @@ And for other languages than the default::
 The reason for that is that CakePHP will use the lower cased and underscored
 plugin name to compare it to the translation domain and is going to look into
 the plugin if there is a match for the given translation file.
+
+Controlling the Translation Order
+=================================
+The Configure value ``I18n.preferApp`` can be used to control the order of translations.
+If set to true in bootstrap it will prefer the app translations over any plugins' ones::
+
+    Configure::write('I18n.preferApp', true);
+
+It defaults to ``false``.
+
+.. versionadded:: 2.6
 
 Localization in CakePHP
 =======================

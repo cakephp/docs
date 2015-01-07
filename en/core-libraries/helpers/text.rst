@@ -23,7 +23,7 @@ truncating long stretches of text.
 
     Adds links to the well-formed email addresses in $text, according
     to any options defined in ``$htmlOptions`` (see
-    :php:meth:`HtmlHelper::link()`).::
+    :php:meth:`HtmlHelper::link()`). ::
 
         $myText = 'For more information regarding our world-famous ' .
             'pastries and desserts, contact info@example.com';
@@ -69,7 +69,7 @@ truncating long stretches of text.
     :param string $text: The text to convert.
 
     Adds proper <p> around text where double-line returns are found, and <br> where single-line returns
-    are found.::
+    are found. ::
 
         $myText = 'For more information
         regarding our world-famous pastries and desserts.

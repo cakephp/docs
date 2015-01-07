@@ -219,7 +219,7 @@ et de réaliser l'action connexion et deconnexion::
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__("Nom d'user ou mot de passe invalide, réessayer"));
             }

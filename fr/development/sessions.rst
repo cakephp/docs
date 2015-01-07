@@ -19,15 +19,15 @@ niveau ``Session``, et un certain nombre d'options sont disponibles:
 
 * ``Session.timeout`` - Le nombre de *minutes* avant que le gestionnaire de
   session de CakePHP ne fasse expirer la session.
-  Cela affecte ``Session.autoRegenerate`` (ci-dessous), et cela est geré par
+  Cela affecte ``Session.autoRegenerate`` (ci-dessous), et cela est géré par
   CakeSession.
 
 * ``Session.cookieTimeout`` - Le nombre de *minutes* avant que le cookie de
-  session n'expire. Si il n'est pas défini, il utilisera la même valeur que
+  session n'expire. S'il n'est pas défini, il utilisera la même valeur que
   ``Session.timeout``. Cela affecte le cookie de session, et est geré
   directement par PHP.
 
-* ``Session.checkAgent`` - Le user agent doit il être verifié, sur chaque
+* ``Session.checkAgent`` - Le user agent doit-il être vérifié, sur chaque
   requête. Si le useragent ne matche pas, la session sera détruite.
 
 * ``Session.autoRegenerate`` - Activer cette configuration, allume
@@ -168,7 +168,7 @@ Cette interface est utilisée pour tous les gestionnaires de session
 personnalisés à l'intérieur de CakePHP, et peut être utilisé pour créer
 des gestionnaires de session personnalisées user land. En implémentant
 simplement l'interface dans votre classe et en définissant
-``Session.handler.engine`` au nom de classe que vous avez crée. CakePHP
+``Session.handler.engine`` au nom de classe que vous avez créé. CakePHP
 va tenter de charger le gestionnaire à partir de l'intérieur de
 ``app/Model/Datasource/Session/$classname.php``. Donc si votre nom de classe
 est ``AppSessionHandler``, le fichier devrait être
@@ -224,7 +224,7 @@ Les Sessions de Cache
 La classe Cache peut aussi être utilisée pour stocker les sessions. Cela vous
 permet de stocker les sessions dans un cache comme APC, memcache, ou Xcache.
 Il y a some caveats dans l'utilisation des sessions en cache, puisque
-si vous exhaust l'espace de cache, les sessions vont commencer à expirer
+si vous avez épuisé l'espace de cache, les sessions vont commencer à expirer
 puisque les enregistrements sont évincés.
 
 Pour utiliser les sessions basées sur le Cache, vous pouvez configurer votre
@@ -345,7 +345,7 @@ Selon le contexte dans lequel vous êtes dans votre application,
 vous avez différentes classes qui fournissent un accès à la session. Dans
 les controllers, vous pouvez utiliser :php:class:`SessionComponent`.
 Dans la vue, vous pouvez utiliser :php:class:`SessionHelper`. Dans
-tout autre partie de votre application, vous pouvez utiliser
+toute autre partie de votre application, vous pouvez utiliser
 ``CakeSession`` pour accéder aussi à la session. Comme les autres interfaces
 de session, ``CakeSession`` fournit une interface simple de CRUD.
 

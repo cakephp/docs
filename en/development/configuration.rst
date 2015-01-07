@@ -213,9 +213,9 @@ paths where CakePHP will look for classes::
 Core Configuration
 ==================
 
-Each application in CakePHP contains a configuration file to
-determine CakePHP's internal behavior.
-``app/Config/core.php``. This file is a collection of Configure class
+Each application in CakePHP contains a configuration file,
+``app/Config/core.php``, to determine CakePHP's internal behavior.
+This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
 variables, you'll need to be familiar with :php:class:`Configure`, CakePHP's
@@ -231,10 +231,11 @@ how it affects your CakePHP application.
 
 debug
     Changes CakePHP debugging output.
-    0 = Production mode. No output.
-    1 = Show errors and warnings.
-    2 = Show errors, warnings, and SQL. [SQL log is only shown when you
-    add $this->element('sql\_dump') to your view or layout.]
+
+    * 0 = Production mode. No output.
+    * 1 = Show errors and warnings.
+    * 2 = Show errors, warnings, and SQL. [SQL log is only shown when you
+      add $this->element('sql\_dump') to your view or layout.]
 
 Error
     Configure the Error handler used to handle errors for your application.
@@ -415,7 +416,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: The key to write, can use be a :term:`dot notation` value.
+    :param string $key: The key to write, can be a :term:`dot notation` value.
     :param mixed $value: The value to store.
 
     Use ``write()`` to store data in the application's configuration::
@@ -445,7 +446,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: The key to read, can use be a :term:`dot notation` value
+    :param string $key: The key to read, can be a :term:`dot notation` value
 
     Used to read configuration data from the application. Defaults to
     CakePHP's important debug value. If a key is supplied, the data is
@@ -481,7 +482,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: The key to delete, can use be a :term:`dot notation` value
+    :param string $key: The key to delete, can be a :term:`dot notation` value
 
     Used to delete information from the application's configuration::
 
@@ -534,7 +535,7 @@ using :php:meth:`Configure::config()`::
 You can have multiple readers attached to Configure, each reading
 different kinds of configuration files, or reading from
 different types of sources. You can interact with attached readers
-using a few other methods on Configure. To see check which reader
+using a few other methods on Configure. To see which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
     // Get the array of aliases for attached readers.
@@ -701,7 +702,7 @@ that the resource named ``$key`` contains.
     This method should load/parse the configuration data identified by ``$key``
     and return an array of data in the file.
 
-.. php:method:: dump($key)
+.. php:method:: dump($key, $data)
 
     :param string $key: The identifier to write to.
     :param array $data: The data to dump.
@@ -715,7 +716,7 @@ that the resource named ``$key`` contains.
 
     Thrown when errors occur when loading/storing/restoring configuration data.
     :php:interface:`ConfigReaderInterface` implementations should throw this
-    error when they encounter an error.
+    exception when they encounter an error.
 
 Built-in Configuration readers
 ------------------------------
@@ -741,14 +742,14 @@ Built-in Configuration readers
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+    Load your custom configuration file by inserting the following in app/Config/bootstrap.php::
 
         Configure::load('customConfig');
 
 .. php:class:: IniReader
 
     Allows you to read configuration files that are stored as plain .ini files.
-    The ini files must be compatible with php's ``parse_ini_file`` function, and
+    The ini files must be compatible with PHP's ``parse_ini_file`` function, and
     benefit from the following improvements
 
     * dot separated values are expanded into arrays.

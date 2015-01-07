@@ -1,5 +1,5 @@
 Blog Tutoriel - Ajouter la logique
-##################################
+**********************************
 
 Créer un model Post
 ===================
@@ -397,7 +397,7 @@ construisez un formulaire qui envoie les données en POST à l'action ``add()``
 (ou ``edit()`` quand ``id`` est dans les données du formulaire) du controller
 actuel.
 
-La méthode ``$this->Form->input()`` est utilisée pour créer des élements de
+La méthode ``$this->Form->input()`` est utilisée pour créer des éléments de
 formulaire du même nom. Le premier paramètre dit à CakePHP à quels champs ils
 correspondent et le second paramètre vous permet de spécifier un large éventail
 d'options - dans ce cas, le nombre de lignes du textarea. Il y a un peu

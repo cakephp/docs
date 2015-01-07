@@ -50,7 +50,7 @@ que CakePHP est configuré avec un ensemble de routes par défaut.
 Le routing de CakePHP par défaut va vous faire aller assez loin dans toute
 application. Vous pouvez accéder à une action directement par l'URL en
 mettant son nom dans la requête. Vous pouvez aussi passer des paramètres aux
-actions de votre controller en utilisant l'URL.::
+actions de votre controller en utilisant l'URL. ::
 
         modèle URL des routes par défaut: 
         http://example.com/controller/action/param1/param2/param3
@@ -528,7 +528,7 @@ Arguments Passés
 
 Les arguments passés sont des arguments supplémentaires ou des segments
 du chemin qui sont utilisés lors d'une requête. Ils sont souvent utilisés
-pour transmettre des paramètres aux méthodes de vos controllers.::
+pour transmettre des paramètres aux méthodes de vos controllers. ::
 
     http://localhost/calendars/view/recent/mark
 
@@ -947,12 +947,12 @@ API du Router
     Le premier paramètre va être utilisé comme nom de controller alors que
     le second est utilisé en nom d'action. La syntaxe '/\*' rend cette route
     greedy puisqu'elle ca matcher les requêtes comme `/posts/index` ainsi que
-    les requêtes comme ``/posts/edit/1/foo/bar`` .::
+    les requêtes comme ``/posts/edit/1/foo/bar`` . ::
     
         Router::connect('/home-page', array('controller' => 'pages', 'action' => 'display', 'home'));
     
     Ce qui est au-dessus montre l'utilisation d'un paramètre de route par
-    défaut. Et fournit les paramètres de routing pour une route statique.::
+    défaut. Et fournit les paramètres de routing pour une route statique. ::
     
         Router::connect(
             '/:lang/:controller/:action/:id',

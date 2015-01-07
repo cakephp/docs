@@ -59,9 +59,9 @@ traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
 Le domaine par défaut est 'default', donc votre dossier "locale"
 devrait ressembler à cela::
 
-    /app/Locale/eng/LC_MESSAGES/default.po (Anglais)   
-    /app/Locale/fra/LC_MESSAGES/default.po (Français)   
-    /app/Locale/por/LC_MESSAGES/default.po (Portugais) 
+    /app/Locale/eng/LC_MESSAGES/default.po (Anglais)
+    /app/Locale/fra/LC_MESSAGES/default.po (Français)
+    /app/Locale/por/LC_MESSAGES/default.po (Portugais)
 
 Pour créer ou éditer vos fichiers po, il est recommandé de ne pas utiliser
 votre éditeur de texte préféré. Pour créer un fichier po pour la première fois,
@@ -141,14 +141,27 @@ Votre fichier de traduction pour cet exemple devra être dans ::
 
 Et pour les autres langues par rapport à celle par défaut::
 
-    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
-    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)   
-    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
+    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
+    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
+    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
 
 La raison pour cela est que CakePHP va utiliser le nom du plugin en minuscule
 et avec des underscores, pour le comparer avec le domaine de traduction et va
 regarder dans le plugin si il y a une correspondance pour le fichier de
 traduction donné.
+
+Controller l'Ordre de Traduction
+================================
+
+La valeur de configuration ``I18n.preferApp`` peut maintenant être utilisée
+pour controller l'ordre des traductions. Si défini à true, les traductions
+de l'application seront préférées à celles des plugins::
+
+    Configure::write('I18n.preferApp', true);
+
+Défini à ``false`` par défaut.
+
+.. versionadded:: 2.6
 
 Localisation dans CakePHP
 =========================
@@ -156,12 +169,12 @@ Localisation dans CakePHP
 Pour changer ou définir le langage de votre application, tout ce que
 vous avez à faire est dans la partie suivante::
 
-    Configure::write('Config.language', 'fra'); 
+    Configure::write('Config.language', 'fra');
 
 Ceci signale à CakePHP quelle locale utiliser (si vous utilisez une locale
 régionale, comme fr\_FR, la locale
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
-utilisée au cas ou cela n'existerait pas), vous pouvez changer la langue
+utilisée au cas où cela n'existerait pas), vous pouvez changer la langue
 à n'importe quel moment pendant une requête. Ex: dans votre bootstrap
 si vous avez défini les paramètres de langue par défaut, dans la partie
 beforefilter de votre (app) controller si c'est spécifique à la requête ou

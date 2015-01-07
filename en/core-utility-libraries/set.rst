@@ -324,7 +324,7 @@ available.
     its keys, and optionally $path2 as path to get the values. If
     $path2 is not specified, all values will be initialized to null
     (useful for Set::merge). You can optionally group the values by
-    what is obtained when following the path specified in $groupPath.::
+    what is obtained when following the path specified in $groupPath. ::
 
         $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
@@ -891,7 +891,7 @@ available.
 
     :rtype: array
 
-    Inserts $data into an array as defined by $path.::
+    Inserts $data into an array as defined by $path. ::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -1047,7 +1047,7 @@ available.
     :rtype: boolean
 
     Set::matches can be used to see if a single item or a given xpath
-    match certain conditions.::
+    match certain conditions. ::
 
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
@@ -1213,7 +1213,7 @@ available.
 
     :rtype: array
 
-    Normalizes a string or array list.::
+    Normalizes a string or array list. ::
 
         $a = array(
             'Tree',
@@ -1461,7 +1461,7 @@ available.
 
     Set::reverse is basically the opposite of :php:func:`Set::map`. It converts an
     object into an array. If $object is not an object, reverse will
-    simply return $object.::
+    simply return $object. ::
 
         $result = Set::reverse(null);
         // Null

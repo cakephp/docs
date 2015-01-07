@@ -36,7 +36,7 @@ optional::
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-It's also possible to add and use other parameters. Some types of find() 
+It's also possible to add and use other parameters. Some types of find()
 and behaviors make use of this ability, and your own model methods can, too.
 
 If your find() operation fails to match any records, you will get an empty array.
@@ -548,7 +548,7 @@ It is also possible to paginate via a custom find type as follows:
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
 
-To simply return the count of a custom find type, call ``count`` like you normally would, but pass in the 
+To simply return the count of a custom find type, call ``count`` like you normally would, but pass in the
 find type in an array for the second argument.
 
 ::
@@ -868,8 +868,8 @@ a post"::
 
 Notice the '!=' that follows the field name. CakePHP can parse out
 any valid SQL comparison operator, including match expressions
-using LIKE, BETWEEN, or REGEX, as long as you leave a space between
-field name and the operator. The one exception here is IN
+using ``LIKE``, ``BETWEEN``, or ``REGEX``, as long as you leave a space between
+field name and the operator. The one exception here is ``IN``
 (...)-style matches. Let's say you wanted to find posts where the
 title was in a given set of values::
 
@@ -902,7 +902,7 @@ The above example will return posts where the created date is
 equal to the modified date (that is, it will return posts that have never
 been modified).
 
-Remember that if you find yourself unable to form a WHERE clause in
+Remember that if you find yourself unable to form a ``WHERE`` clause in
 this method (for example, boolean operations), you can always specify it as
 a string like::
 
@@ -911,7 +911,7 @@ a string like::
         // other conditions as usual
     )
 
-By default, CakePHP joins multiple conditions with boolean AND.
+By default, CakePHP joins multiple conditions with boolean ``AND``.
 This means the snippet above would only match posts that have
 been created in the past two weeks, and have a title that matches
 one in the given set. However, we could just as easily find posts
@@ -922,8 +922,8 @@ that match either condition::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-CakePHP accepts all valid SQL boolean operations, including AND, OR,
-NOT, XOR, etc., and they can be upper or lower case, whichever you
+CakePHP accepts all valid SQL boolean operations, including ``AND``, ``OR``,
+``NOT``, ``XOR``, etc., and they can be upper or lower case, whichever you
 prefer. These conditions are also infinitely nestable. Let's say
 you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
@@ -939,13 +939,16 @@ wanted to restrict your search to posts written by Bob::
     )
 
 If you need to set multiple conditions on the same field, like when
-you want to do a LIKE search with multiple terms, you can do so by
+you want to do a ``LIKE`` search with multiple terms, you can do so by
 using conditions similar to::
 
     array('OR' => array(
         array('Post.title LIKE' => '%one%'),
         array('Post.title LIKE' => '%two%')
     ))
+
+The wildcard operators ``ILIKE`` and ``RLIKE`` (RLIKE since version 2.6) are
+also available.
 
 CakePHP can also check for null fields. In this example, the query
 will return records where the post title is not null::
@@ -955,7 +958,7 @@ will return records where the post title is not null::
         )
     )
 
-To handle BETWEEN queries, you can use the following::
+To handle ``BETWEEN`` queries, you can use the following::
 
     array('Post.read_count BETWEEN ? AND ?' => array(1,10))
 
@@ -992,8 +995,8 @@ The data returned for this would be in the following format::
         [1] => Array
         ...
 
-A quick example of doing a DISTINCT query. You can use other
-operators, such as MIN(), MAX(), etc., in a similar fashion::
+A quick example of doing a ``DISTINCT`` query. You can use other
+operators, such as ``MIN()``, ``MAX()``, etc., in a similar fashion::
 
     array(
         'fields' => array('DISTINCT (User.name) AS my_column_name'),
@@ -1090,7 +1093,7 @@ This should generate the following SQL::
                 "User2"."status" = 'B'
         )
 
-Also, if you need to pass just part of your query as raw SQL as 
+Also, if you need to pass just part of your query as raw SQL as
 above, datasource **expressions** with raw SQL work for any part of
 the find query.
 

@@ -122,7 +122,7 @@ action logout à votre ``UsersController``::
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Votre nom d\'user ou mot de passe sont incorrects.'));
             }
@@ -175,12 +175,21 @@ les définir en haut dans ``AppController``::
             'Session'
         );
         public $helpers = array('Html', 'Form', 'Session');
-    
+
         public function beforeFilter() {
             //Configure AuthComponent
-            $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-            $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
+            $this->Auth->loginAction = array(
+              'controller' => 'users',
+              'action' => 'login'
+            );
+            $this->Auth->logoutRedirect = array(
+              'controller' => 'users',
+              'action' => 'login'
+            );
+            $this->Auth->loginRedirect = array(
+              'controller' => 'posts',
+              'action' => 'add'
+            );
         }
     }
 
@@ -258,9 +267,8 @@ code suivant ::
             }
             if (!$groupId) {
                 return null;
-            } else {
-                return array('Group' => array('id' => $groupId));
             }
+            return array('Group' => array('id' => $groupId));
         }
     }
 

@@ -8,10 +8,10 @@ CakePHP 的核心助件能帮助你实现的基本任务。
 
 CakePHP 包含了一些有助于创建视图的助件。助件帮助创建完整格式的标记代码
 (*markup*)(包括表单)，帮助格式化文本、时间和数字，甚至加速 AJAX 功能。欲知 
-CakePHP 中助件的更多信息，请查看 :ref:`core-helpers`。
+CakePHP 中助件的更多信息，请查看各个助件的章节：
 
 .. include:: /core-libraries/toc-helpers.rst
-    :start-line: 8
+    :start-line: 10
 
 .. _configuring-helpers:
 
