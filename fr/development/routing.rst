@@ -144,8 +144,8 @@ qu'elle a été matchée. Le deuxième paramètre est un tableau associatif. Les
 clés du tableau devraient être appelées après les éléments de route dans l'URL,
 ou les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``.
 Les valeurs dans le tableau sont les valeurs par défaut pour ces clés.
-Regardons quelques exemples simples avant que nous commencions l'utilisation
-le troisième paramètre de connect()::
+Regardons quelques exemples simples avant que nous commencions à voir l'utilisation
+du troisième paramètre de connect()::
 
     $routes->connect(
         '/pages/*',
@@ -296,10 +296,8 @@ devenir puissantes. L'URL fourni a quatre éléments de route. Le premier
 nous est familier: c'est une route par défaut qui dit à CakePHP d'attendre
 un nom de controller.
 
-Ensuite, nous spécifions quelques valeurs par défaut. Quelque soit le
-controller, nous voulons que l'action index() soit appelée. Nous définissons
-le paramètre jour (le quatrième élément dans l'URL) à null pour le marquer en
-option.
+Ensuite, nous spécifions quelques valeurs par défaut. Quel que soit le
+controller, nous voulons que l'action index() soit appelée.
 
 Finalement, nous spécifions quelques expressions régulières qui vont
 matcher les années, mois et jours sous forme numérique. Notez que les
@@ -314,7 +312,7 @@ date dans ``$this->request->params``.
 
 Il y a plusieurs éléments de route qui ont une signification spéciale dans
 CakePHP, et ne devraient pas être utilisés à moins que vous souhaitiez
-spécifiquement la signification.
+spécifiquement utiliser leur signification.
 
 * ``controller`` Utilisé pour nommer le controller pour une route.
 * ``action`` Utilisé pour nommer l'action de controller pour une route.
