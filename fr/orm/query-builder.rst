@@ -174,7 +174,7 @@ Pour sélectionner des champs distincts, vous pouvez utiliser la méthode
     $query->select(['country'])
         ->distinct(['country']);
 
-Pour définir certaines conditions basiques que vous pouvez utiliser avec la
+Pour définir certaines conditions basiques, vous pouvez utiliser la
 méthode ``where()``::
 
     // Conditions sont combinées avec AND
