@@ -147,36 +147,21 @@ and an even simpler model definition::
 We can check what our category tree data looks like by visiting
 /categories You should see something like this:
 
-
 -  My Categories
-
    -  Fun
-
       -  Sport
-
          -  Surfing
          -  Extreme knitting
-
       -  Friends
-
          -  Gerald
          -  Gwendolyn
-
-
    -  Work
-
       -  Reports
-
          -  Annual
          -  Status
-
       -  Trips
-
          -  National
          -  International
-
-
-
 
 Adding data
 -----------
@@ -204,37 +189,22 @@ to the tree making your new addition a new top level entry::
 Running the above two code snippets would alter your tree as
 follows:
 
-
 -  My Categories
-
    -  Fun
-
       -  Sport
-
          -  Surfing
          -  Extreme knitting
          -  Skating **New**
-
       -  Friends
-
          -  Gerald
          -  Gwendolyn
-
-
    -  Work
-
       -  Reports
-
          -  Annual
          -  Status
-
       -  Trips
-
          -  National
          -  International
-
-
-
 -  Other People's Categories **New**
 
 Modifying data
@@ -253,37 +223,22 @@ parent\_id is included in the data that is passed to save if the
 value doesn't change, neither does the data structure. Therefore
 the tree of data would now look like:
 
-
 -  My Categories
-
 -  Fun
-
  -  Sport
-
     -  Surfing
     -  Extreme fishing **Updated**
     -  Skating
-
  -  Friends
-
     -  Gerald
     -  Gwendolyn
-
-
 -  Work
-
  -  Reports
-
     -  Annual
     -  Status
-
  -  Trips
-
     -  National
     -  International
-
-
-
 -  Other People's Categories
 
 Moving data around in your tree is also a simple affair. Let's say
@@ -301,40 +256,23 @@ following code::
 
 As would be expected the structure would be modified to:
 
-
 -  My Categories
-
  -  Fun
-
     -  Sport
-
        -  Surfing
        -  Skating
-
     -  Friends
-
        -  Gerald
        -  Gwendolyn
-
-
  -  Work
-
     -  Reports
-
        -  Annual
        -  Status
-
     -  Trips
-
        -  National
        -  International
-
-
-
 -  Other People's Categories
-
  -  Extreme fishing **Moved**
-
 
 Deleting data
 -------------
@@ -351,35 +289,20 @@ any model. For example with the following code::
 
 The category tree would be modified as follows:
 
-
 -  My Categories
-
  -  Fun
-
     -  Sport
-
        -  Surfing
        -  Skating
-
     -  Friends
-
        -  Gerald
        -  Gwendolyn
-
-
  -  Work
-
     -  Trips
-
        -  National
        -  International
-
-
-
 -  Other People's Categories
-
  -  Extreme fishing
-
 
 Querying and using your data
 ----------------------------
@@ -394,7 +317,6 @@ are a few more tree-orientated permutations at your disposal.
     the ``lft`` field. If you call ``find()`` and do not order by
     ``lft``, or call a tree behavior method and pass a sort order, you
     may get undesirable results.
-
 
 .. php:class:: TreeBehavior
 
@@ -492,19 +414,12 @@ are a few more tree-orientated permutations at your disposal.
     where you are to the top. So for example the path from the category
     "International" is:
 
-
     -  My Categories
-
      -  ...
      -  Work
-
         -  Trips
-
            -  ...
            -  International
-
-
-
 
     Using the id of "International" getPath will return each of the
     parents in turn (starting from the top). ::
@@ -528,7 +443,6 @@ are a few more tree-orientated permutations at your disposal.
             'Category' => array('id' => 15, 'name' => 'International', ..)
           ),
       )
-
 
 Advanced Usage
 ==============
@@ -611,19 +525,12 @@ Advanced Usage
 
     Taking the following tree as a starting point:
 
-
     -  My Categories
-
        -  Fun
-
           -  Sport
-
              -  Surfing
              -  Extreme knitting
              -  Skating
-
-
-
 
     Running the following code with the id for 'Sport'::
 
@@ -631,16 +538,11 @@ Advanced Usage
 
     The Sport node will be become a top level node:
 
-
     -  My Categories
-
        -  Fun
-
           -  Surfing
           -  Extreme knitting
           -  Skating
-
-
     -  Sport **Moved**
 
     This demonstrates the default behavior of ``removeFromTree`` of
@@ -653,16 +555,11 @@ Advanced Usage
 
     The tree would become
 
-
     -  My Categories
-
        -  Fun
-
           -  Surfing
           -  Extreme knitting
           -  Skating
-
-
 
     This demonstrates the alternate use for ``removeFromTree``, the
     children have been reparented and 'Sport' has been deleted.
@@ -764,7 +661,6 @@ Data Integrity
             'verify' => true
         )
 
-
     .. php:method:: verify()
 
     Returns ``true`` if the tree is valid otherwise an array of errors,
@@ -809,9 +705,7 @@ Data Integrity
                     [1] => 163
                     [2] => left greater than right
                 )
-
         )
-
 
 
 .. meta::
