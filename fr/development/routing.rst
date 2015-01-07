@@ -11,15 +11,15 @@ application est intégré de la façon dont ses URLs sont structurées.
 
 Le Routing dans CakePHP englobe aussi l'idée de routing inversé, où un tableau
 de paramètres peut être transformé en une URL. En utilisant le routing
-inversé, vous pouvez facilement reconstruire votre structure d'URL des
-applications sans avoir mis à jour tous vos codes.
+inversé, vous pouvez facilement reconstruire la structure d'URL de
+votre application sans mettre à jour tous vos codes.
 
 .. index:: routes.php
 
 Tour Rapide
 ===========
 
-Cette section va vous apprendre par exemple les utilisations les plus
+Cette section va vous apprendre les utilisations les plus
 habituelles du Router de CakePHP. Typiquement si vous voulez afficher quelque
 chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
 
@@ -27,18 +27,18 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
 
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-Ceci va exécuter la méthode index dans ``ArticlesController`` quand la page
+Ceci va exécuter la méthode ``index`` dans ``ArticlesController`` quand la page
 d'accueil de votre site est visitée. Parfois vous avez besoin de routes
-dynamiques qui vont accepter plusieurs paramètres, ce sera le cas par exemple
+dynamiques qui vont accepter plusieurs paramètres, ce sera par exemple le cas
 d'une route pour voir le contenu d'un article::
 
     Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
 La route ci-dessus accepte toute url qui ressemble à ``/articles/15`` et appelle
-la méthode ``view(15)`` dans ``ArticlesController``. Ceci ne va pas en revanche
-fonctionner pour les gens qui essaient d'accéder aux URLs ressemblant à
-``/articles/foobar``. Si vous le souhaitez, vous pouvez rechanger quelques
-paramètres pour vous conformer à une expression régulière::
+la méthode ``view(15)`` dans ``ArticlesController``. En revanche, ceci ne va pas
+empêcher les gens d'accéder à une URLs ressemblant à
+``/articles/foobar``. Si vous le souhaitez, vous pouvez restreindre certains
+paramètres grâce à une expression régulière::
 
     Router::connect(
         '/articles/:id',
@@ -46,14 +46,14 @@ paramètres pour vous conformer à une expression régulière::
         ['id' => '\d+', 'pass' => ['id']]
     );
 
-L'exemple précédent a changé le matcher par un nouveau placeholder ``:id``.
+Dans l'exemple précédent, le caractère jocker ``*`` est remplacé par un placeholder ``:id``.
 Utiliser les placeholders nous permet de valider les parties de l'url, dans ce
 cas, nous utilisons l'expression régulière ``\d+`` pour que seuls les chiffres
 fonctionnent. Finalement, nous disons au Router de traiter le placeholder
 ``id`` comme un argument de fonction pour la fonction ``view()`` en spécifiant
 l'option ``pass``. Vous pourrez en voir plus sur leur utilisation plus tard.
 
-Le Router de CakePHP peut aussi faire correspondre les routes en reverse. Cela
+Le Routeur de CakePHP peut aussi faire correspondre les routes en reverse. Cela
 signifie qu'à partir d'un tableau contenant des paramètres similaires, il est
 capable de générer une chaîne URL::
 
