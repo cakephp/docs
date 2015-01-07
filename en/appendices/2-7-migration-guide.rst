@@ -18,6 +18,9 @@ Configure
 Datasource
 ==========
 
+- SQL datasources will now cast ``''`` and ``null`` into ``''`` when columns are
+  not nullable and rows are being created or updated.
+
 CakeSession
 -----------
 - :php:meth:`CakeSession::consume()` has been added to read and delete from
