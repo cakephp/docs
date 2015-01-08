@@ -175,6 +175,11 @@ The config reader classes have been renamed:
 - ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
 
+The config engines no longer support passing keys with file extension.
+
+A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
+been added.
+
 Object
 ------
 
