@@ -1,8 +1,8 @@
 Debug Kit
 #########
 
-DebugKit is a core team supported plugin that provides a toolbar to help make
-debugging CakePHP applications easier.
+DebugKit is a plugin supported by the core team that provides a toolbar to help
+make debugging CakePHP applications easier.
 
 Installation
 ============
@@ -55,8 +55,8 @@ Each panel lets you look at a different aspect of your application:
 * **Variables** Display View variables set in controller.
 
 Typically, a panel handles the collection and display of a single type
-of information such as Logs or Request information. You can choose to panels
-from the toolbar or add your own custom panels.
+of information such as Logs or Request information. You can choose to view
+panels from the toolbar or add your own custom panels.
 
 Developing Your Own Panels
 ==========================
@@ -82,12 +82,12 @@ expected to have a filename of ``src/Panel/MyCustomPanel.php``::
             ...
     }
 
-Notice that custom panels are required to subclass the ``DebugPanel`` class.
+Notice that custom panels are required to extend the ``DebugPanel`` class.
 
 Callbacks
 ---------
 
-By default Panel objects have 2 callbacks, allowing them to hook into the
+By default Panel objects have two callbacks, allowing them to hook into the
 current request. Panels subscribe to the ``Controller.initialize`` and
 ``Controller.shutdown`` events. If your panel needs to subscribe to additional
 events, you can use the ``implementedEvents`` method to define all of the events
