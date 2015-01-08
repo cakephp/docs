@@ -78,8 +78,9 @@ expected to have a filename of ``src/Panel/MyCustomPanel.php``::
     /**
      * My Custom Panel
      */
-    class MyCustomPanel extends DebugPanel {
-            ...
+    class MyCustomPanel extends DebugPanel
+    {
+        ...
     }
 
 Notice that custom panels are required to extend the ``DebugPanel`` class.
@@ -128,7 +129,8 @@ render time::
 
     use DebugKit\DebugPanel;
 
-    class MyCustomPanel extends DebugPanel {
+    class MyCustomPanel extends DebugPanel
+    {
         public $plugin = 'MyPlugin';
             ...
     }
