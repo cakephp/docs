@@ -316,20 +316,21 @@ spécifiquement utiliser leur signification.
 
 * ``controller`` Utilisé pour nommer le controller pour une route.
 * ``action`` Utilisé pour nommer l'action de controller pour une route.
-* ``plugin`` Utilisé pour nommer le plugin dans lequel un controller est localisé.
+* ``plugin`` Utilisé pour nommer le plugin dans lequel un controller est
+  localisé.
 * ``prefix`` Utilisé pour :ref:`prefix-routing`.
 * ``_ext`` Utilisé pour le routing des :ref:`file-extensions`.
-* ``_base`` Défini à ``false`` pour retirer le chemin de base de l'URL générée. Si
-  votre application n'est pas dans le répertoire racine, cette option peut être
-  utilisée pour générer les URLs qui sont 'liées à cake'.
+* ``_base`` Défini à ``false`` pour retirer le chemin de base de l'URL générée.
+  Si votre application n'est pas dans le répertoire racine, cette option peut
+  être utilisée pour générer les URLs qui sont 'liées à cake'.
   Les URLs liées à cake sont nécessaires pour utiliser requestAction.
 * ``_scheme`` Défini pour créer les liens sur les schémas différents comme
   `webcal` ou `ftp`. Par défaut, au schéma courant.
 * ``_host`` Définit l'hôte à utiliser pour le lien. Par défaut à l'hôte courant.
 * ``_port`` Définit le port si vous avez besoin de créer les liens sur des ports
   non-standards.
-* ``_full`` Si à ``true``, la constante `FULL_BASE_URL` va être ajoutée devant les
-  URLS générées.
+* ``_full`` Si à ``true``, la constante `FULL_BASE_URL` va être ajoutée devant
+  les URLS générées.
 * ``#`` Vous permet de définir les fragments de hash d'URL.
 * ``_ssl`` Défini à ``true`` pour convertir l'URL générée à https, ou ``false``
   pour forcer http.
@@ -437,14 +438,14 @@ la clé ``prefix`` avec un appel de ``Router::connect()``::
     });
 
 Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
-``Controller`` de votre application. En ayant des préfixes en tant que controller
-séparés, vous pouvez créer de plus petits et/ou de plus simples controllers.
-Les comportements communs aux controllers préfixés et non-préfixés peuvent être
-encapsulés via héritage :doc:`/controllers/components`, ou traits. En utilisant
-notre exemple des utilisateurs, accéder à l'url ``/admin/users/edit/5`` devrait
-appeler la méthode ``edit`` de notre ``App\Controller\Admin\UsersController``
-en passant 5 comme premier paramètre. Le fichier de vue utilisé serait
-``src/Template/Admin/Users/edit.ctp``.
+``Controller`` de votre application. En ayant des préfixes en tant que
+controller séparés, vous pouvez créer de plus petits et/ou de plus simples
+controllers. Les comportements communs aux controllers préfixés et non-préfixés
+peuvent être encapsulés via héritage :doc:`/controllers/components`, ou traits.
+En utilisant notre exemple des utilisateurs, accéder à l'url
+``/admin/users/edit/5`` devrait appeler la méthode ``edit`` de notre
+``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
+Le fichier de vue utilisé serait ``src/Template/Admin/Users/edit.ctp``.
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::
@@ -528,8 +529,8 @@ l'élément avec l'option ``path``::
         $routes->connect('/:controller');
     });
 
-Lors de l'utilisation des scopes, vous pouvez imbriquer un scope de plugin dans un
-scope de prefix::
+Lors de l'utilisation des scopes, vous pouvez imbriquer un scope de plugin dans
+un scope de prefix::
 
     Router::prefix('admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
@@ -537,8 +538,9 @@ scope de prefix::
         });
     });
 
-Le code ci-dessus devrait créer une route similaire à ``/admin/debug_kit/:controller``.
-Elle devrait avoir les éléments de route ``prefix`` et ``plugin`` définis.
+Le code ci-dessus devrait créer une route similaire à
+``/admin/debug_kit/:controller``. Elle devrait avoir les éléments de route
+``prefix`` et ``plugin`` définis.
 
 Vous pouvez créer des liens qui pointent vers un plugin, en ajoutant la clé
 ``plugin`` au tableau de l'URL::
@@ -548,16 +550,16 @@ Vous pouvez créer des liens qui pointent vers un plugin, en ajoutant la clé
         ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
-Inversement, si la requête active est une requête de plugin et que vous souhaitez
-créer un lien qui n'a pas de plugin, vous pouvez faire ceci::
+Inversement, si la requête active est une requête de plugin et que vous
+souhaitez créer un lien qui n'a pas de plugin, vous pouvez faire ceci::
 
     echo $this->Html->link(
         'New todo',
         ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
     );
 
-En définissant ``plugin => null``, vous dites au Router que vous souhaitez créer
-un lien qui n'appartient pas à un plugin.
+En définissant ``plugin => null``, vous dites au Router que vous souhaitez
+créer un lien qui n'appartient pas à un plugin.
 
 Routing Favorisant le SEO
 -------------------------
@@ -569,8 +571,8 @@ URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
 ``camelCase``.
 
 Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
-et une action ``showItems``, la route générée sera ``/to-do/todo-items/show-items``
-avec le code qui suit::
+et une action ``showItems``, la route générée sera
+``/to-do/todo-items/show-items`` avec le code qui suit::
 
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
         $routes->fallbacks('DashedRoute');
@@ -592,9 +594,10 @@ besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 Cela activera les extensions de nom pour toutes les routes déclarées **après**
 l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
 seront fusionnées avec la liste des extensions existantes. Vous pouvez passer
-``false`` en second argument pour remplacer la liste d'extensions déjà existantes.
-Si vous appelez la méthode sans arguments, elle retournera la liste des extensions
-existantes. Vous pouvez définir des extensions pour chaque scope::
+``false`` en second argument pour remplacer la liste d'extensions déjà
+existantes. Si vous appelez la méthode sans arguments, elle retournera la liste
+des extensions existantes. Vous pouvez définir des extensions pour chaque
+scope::
 
     Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
@@ -602,13 +605,14 @@ existantes. Vous pouvez définir des extensions pour chaque scope::
 
 .. note::
 
-    Le réglage des extensions devrait être la première chose que vous devriez faire
-    dans un scope, car les extensions seront appliquées uniquements aux routes
-    qui sont définies **après** la déclaration des extentions.
+    Le réglage des extensions devrait être la première chose que vous devriez
+    faire dans un scope, car les extensions seront appliquées uniquement aux
+    routes qui sont définies **après** la déclaration des extensions.
 
-En utilisant des extensions, vous dites au router de supprimer toutes les extensions
-de fichiers correspondant, puis d'analyser le reste. Si vous souhaitez créer une
-URL comme ``/page/title-of-page.html`` vous devriez créer un scope comme ceci::
+En utilisant des extensions, vous dites au router de supprimer toutes les
+extensions de fichiers correspondant, puis d'analyser le reste. Si vous
+souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
+un scope comme ceci::
 
     Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
@@ -628,9 +632,9 @@ Ensuite, pour créer des liens, utilisez simplement::
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
-Les extensions de fichier sont utilisées par le :doc:`/controllers/components/request-handling`
-qui fait la commutation des vues automatiquement en se basant sur les types de
-contenu.
+Les extensions de fichier sont utilisées par le
+:doc:`/controllers/components/request-handling` qui fait la commutation des
+vues automatiquement en se basant sur les types de contenu.
 
 .. _resource-routes:
 
@@ -639,9 +643,9 @@ Créer des Routes RESTful
 
 .. php:staticmethod:: mapResources($controller, $options)
 
-Avec le router, il est facile de générer des routes RESTful pour vos controllers.
-Si nous voulions permettre l'accès à une base de données REST, nous ferions
-quelque chose comme ceci::
+Avec le router, il est facile de générer des routes RESTful pour vos
+controllers. Si nous voulions permettre l'accès à une base de données REST,
+nous ferions quelque chose comme ceci::
 
     //Dans config/routes.php
 
@@ -670,17 +674,17 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-La classe Router de CakePHP utilise un nombre différent d'indicateurs pour détecter
-la méthode HTTP utilisée. Voici la liste dans l'ordre de préférence:
+La classe Router de CakePHP utilise un nombre différent d'indicateurs pour
+détecter la méthode HTTP utilisée. Voici la liste dans l'ordre de préférence:
 
 #. La variable POST \_method
 #. Le X\_HTTP\_METHOD\_OVERRIDE
 #. Le header REQUEST\_METHOD
 
 La variable POST \_method est utile dans l'utilisation d'un navigateur comme un
-client REST (ou tout ce qui peut faire facilement du POST). Il suffit de configurer
-la valeur de \_method avec le nom de la méthode de requête HTTP que vous souhaitez
-émuler.
+client REST (ou tout ce qui peut faire facilement du POST). Il suffit de
+configurer la valeur de \_method avec le nom de la méthode de requête HTTP que
+vous souhaitez émuler.
 
 Créer des Ressources Imbriquées
 -------------------------------
@@ -710,9 +714,9 @@ Le code ci-dessus va générer une ressource de routes pour ``articles`` et
 Limiter la Création des Routes
 ------------------------------
 
-Par défaut, CakePHP va connecter 6 routes pour chaque ressource. Si vous souhaitez
-connecter uniquement des routes spécifiques à une ressource, vous pouvez utilisez
-l'option ``only``::
+Par défaut, CakePHP va connecter 6 routes pour chaque ressource. Si vous
+souhaitez connecter uniquement des routes spécifiques à une ressource, vous
+pouvez utilisez l'option ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']
@@ -724,9 +728,10 @@ Les noms de route sont ``create``, ``update``, ``view``, ``index`` et ``delete``
 Changer les Actions du Controller
 ---------------------------------
 
-Vous devrez peut-être modifier le nom des actions du controller qui sont utilisés
-lors de la connexion des routes. Par exemple, si votre action ``edit`` est nommée
-``update``, vous pouvez utiliser la clé ``actions`` pour renommer vos actions::
+Vous devrez peut-être modifier le nom des actions du controller qui sont
+utilisés lors de la connexion des routes. Par exemple, si votre action ``edit``
+est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour renommer
+vos actions::
 
     $routes->resources('Articles', [
         'actions' => ['update' => 'update', 'add' => 'create']
@@ -741,8 +746,8 @@ Classes de Route Personnalisée pour les Ressources
 --------------------------------------------------
 
 Vous pouvez spécifier la clé ``connectOptions`` dans le tableau ``$options`` de
-la fonction ``resources()`` pour fournir une configuration personnalisée utilisée
-par ``connect()``::
+la fonction ``resources()`` pour fournir une configuration personnalisée
+utilisée par ``connect()``::
 
     Router::scope('/', function ($routes) {
         $routes->resources('books', [
@@ -764,15 +769,15 @@ pour transmettre des paramètres aux méthodes de vos controllers. ::
 
     http://localhost/calendars/view/recent/mark
 
-Dans l'exemple ci-dessus, ``recent`` et ``mark`` sont tous deux des arguments passés
-à ``CalendarsController::view()``. Les arguments passés sont transmis aux
+Dans l'exemple ci-dessus, ``recent`` et ``mark`` sont tous deux des arguments
+passés à ``CalendarsController::view()``. Les arguments passés sont transmis aux
 contrôleurs de trois manières. D'abord comme arguments de la méthode de
 l'action appelée, deuxièmement en étant accessibles dans
 ``$this->request->params['pass']`` sous la forme d'un tableau indexé
 numériquement. Enfin, il y a ``$this->passedArgs`` disponible de la même
-façon que par ``$this->request->params['pass']``. Lorsque vous utilisez des routes personnalisées
-il est possible de forcer des paramètres particuliers comme étant des
-paramètres passés également.
+façon que par ``$this->request->params['pass']``. Lorsque vous utilisez des
+routes personnalisées il est possible de forcer des paramètres particuliers
+comme étant des paramètres passés également.
 
 Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::
@@ -866,15 +871,18 @@ older versions of CakePHP.
 You can also use any of the special route elements when generating URLs:
 
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
-  is not in the root directory, this can be used to generate URLs that are 'cake relative'.
-  cake relative URLs are required when using requestAction.
-* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
-  to the current scheme.
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If
+  your application is not in the root directory, this can be used to generate
+  URLs that are 'cake relative'. cake relative URLs are required when using
+  requestAction.
+* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`.
+  Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
-* ``_ssl`` Set to ``true`` to convert the generated URL to https, or ``false`` to force http.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to
+  generated URLs.
+* ``_ssl`` Set to ``true`` to convert the generated URL to https, or ``false``
+  to force http.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
@@ -921,7 +929,8 @@ Custom Route Classes
 Custom route classes allow you to extend and change how individual routes parse
 requests and handle reverse routing. Route classes have a few conventions:
 
-* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin.
+* Route classes are expected to be found in the ``Routing\\Route`` namespace of
+  your application or plugin.
 * Route classes should extend :php:class:`Cake\\Routing\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 
@@ -929,8 +938,9 @@ The ``parse()`` method is used to parse an incoming URL. It should generate an
 array of request parameters that can be resolved into a controller & action.
 Return ``false`` from this method to indicate a match failure.
 
-The ``match()`` method is used to match an array of URL parameters and create a string URL.
-If the URL parameters do not match the route ``false`` should be returned.
+The ``match()`` method is used to match an array of URL parameters and create a
+string URL. If the URL parameters do not match the route ``false`` should be
+returned.
 
 You can use a custom route class when making a route by using the ``routeClass``
 option::
@@ -968,9 +978,9 @@ Fallbacks method
 
 .. php:method:: fallbacks($routeClass = null)
 
-The fallbacks method is a simple shortcut for defining default routes. The method
-uses the passed routing class for the defined rules or if no class is provided the
-class returned by ``Router::defaultRouteClass()`` is used.
+The fallbacks method is a simple shortcut for defining default routes. The
+method uses the passed routing class for the defined rules or if no class is
+provided the class returned by ``Router::defaultRouteClass()`` is used.
 
 Calling fallbacks like so::
 
@@ -979,7 +989,7 @@ Calling fallbacks like so::
 Is equivalent to the following explicit calls::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
 
 .. note::
 
@@ -1096,13 +1106,14 @@ RequestActionTrait
             ['return']
         );
 
-    The URL based array are the same as the ones that :php:meth:`HtmlHelper::link()`
-    uses with one difference - if you are using passed parameters, you must put them
-    in a second array and wrap them with the correct key. This is because
-    requestAction merges the extra parameters (requestAction's 2nd parameter)
-    with the ``request->params`` member array and does not explicitly place them
-    under the ``pass`` key. Any additional keys in the ``$option`` array will
-    be made available in the requested action's ``request->params`` property::
+    The URL based array are the same as the ones that
+    :php:meth:`HtmlHelper::link()` uses with one difference - if you are using
+    passed parameters, you must put them in a second array and wrap them with
+    the correct key. This is because requestAction merges the extra parameters
+    (requestAction's 2nd parameter) with the ``request->params`` member array
+    and does not explicitly place them under the ``pass`` key. Any additional
+    keys in the ``$option`` array will be made available in the requested
+    action's ``request->params`` property::
 
         echo $this->requestAction('/articles/view/5');
 
