@@ -85,8 +85,8 @@ Inline Markup
   * ``*text*``.
 
 * Two asterisks: **text** for strong emphasis (boldface)
-   We'll use it for working directories, bullet list subject, table names and
-   excluding the following word "table".
+  We'll use it for working directories, bullet list subject, table names and
+  excluding the following word "table".
 
   * ``**/config/Migrations**``, ``**articles**``, etc.
 
