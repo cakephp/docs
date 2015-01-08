@@ -36,7 +36,7 @@ d'une route pour voir le contenu d'un article::
 
 La route ci-dessus accepte toute url qui ressemble à ``/articles/15`` et appelle
 la méthode ``view(15)`` dans ``ArticlesController``. En revanche, ceci ne va pas
-empêcher les gens d'accéder à une URLs ressemblant à
+empêcher les visiteurs d'accéder à une URLs ressemblant à
 ``/articles/foobar``. Si vous le souhaitez, vous pouvez restreindre certains
 paramètres grâce à une expression régulière::
 
@@ -53,7 +53,7 @@ fonctionnent. Finalement, nous disons au Router de traiter le placeholder
 ``id`` comme un argument de fonction pour la fonction ``view()`` en spécifiant
 l'option ``pass``. Vous pourrez en voir plus sur leur utilisation plus tard.
 
-Le Routeur de CakePHP peut aussi faire correspondre les routes en reverse. Cela
+Le Router de CakePHP peut aussi faire correspondre les routes en reverse. Cela
 signifie qu'à partir d'un tableau contenant des paramètres similaires, il est
 capable de générer une chaîne URL::
 
@@ -79,7 +79,7 @@ que de spécifier chacun des paramètres de routing::
     // Va afficher
     /login
 
-Pour aider à garder votre code de routeur "DRY", le router apporte le concept
+Pour aider à garder votre code de router "DRY", le router apporte le concept
 de 'scopes'. Un scope (étendue) défini un segment de chemin commun, et
 optionnellement des routes par défaut. Toute route connectée à l'intérieur d'un
 scope héritera du chemin et des routes par défaut du scope qui la contient::
@@ -120,7 +120,7 @@ scope et connecter certaines routes, nous allons utiliser la méthode
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
 faire correspondre, les valeurs par défaut pour les éléments de votre
-route, et les règles d'expression régulière pour aider le routeur à
+route, et les règles d'expression régulière pour aider le router à
 faire correspondre les éléments dans l'URL.
 
 Le format basique pour une définition de route est::
@@ -131,10 +131,10 @@ Le format basique pour une définition de route est::
         ['option' => 'matchingRegex']
     );
 
-Le premier paramètre est utilisé pour dire au routeur quelle sorte d'URL
+Le premier paramètre est utilisé pour dire au router quelle sorte d'URL
 vous essayez de contrôler. L'URL est une chaîne normale délimitée par
 des slashes, mais peut aussi contenir une wildcard (\*) ou
-:ref:`route-elements`. Utiliser une wildcard dit au routeur que vous êtes prêt
+:ref:`route-elements`. Utiliser une wildcard dit au router que vous êtes prêt
 à accepter tout argument supplémentaire fourni. Les Routes sans un \* ne
 matchent que le pattern template exact fourni.
 
@@ -233,7 +233,7 @@ Cet exemple simple montre comment créer une manière rapide de voir les models
 à partir de tout controller en élaborant une URL qui ressemble à
 ``/controllername/:id``. L'URL fournie à connect() spécifie deux éléments de
 route: ``:controller`` et ``:id``. L'élément ``:controller`` est l'élément de
-route par défaut de CakePHP, donc le routeur sait comment matcher et identifier
+route par défaut de CakePHP, donc le router sait comment matcher et identifier
 les noms de controller dans les URLs. L'élément ``:id`` est un élément de route
 personnalisé, et doit être clarifié plus loin en spécifiant une expression
 régulière correspondante dans le troisième paramètre de connect().
