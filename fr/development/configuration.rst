@@ -531,20 +531,20 @@ fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
 ``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
 
     $config = [
-	'debug' => 0,
-	'Security' => [
-	    'salt' => 'its-secret'
-	],
-	'App' => [
-	    'namespace' => 'App'
-	]
+      	'debug' => 0,
+      	'Security' => [
+      	    'salt' => 'its-secret'
+      	],
+      	'App' => [
+      	    'namespace' => 'App'
+      	]
     ];
 
 Des fichiers sans ``$config`` entraîneraient une
 :php:exc:`ConfigureException`.
 
 Charger votre fichier de configuration personnalisé en insérant ce qui suit
-dans ``config/bootstrap.php``:
+dans ``config/bootstrap.php``::
 
     Configure::load('customConfig');
 
