@@ -1403,7 +1403,7 @@ option when including the helper in your controller::
 
     // In a View class
     $this->loadHelper('Form', [
-        'templates' => 'app_form.php',
+        'templates' => 'app_form',
     ]);
 
 This would load the tags in ``config/app_form.php``. This file should
