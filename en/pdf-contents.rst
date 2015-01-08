@@ -50,6 +50,7 @@ Contents
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
     appendices
 
 
