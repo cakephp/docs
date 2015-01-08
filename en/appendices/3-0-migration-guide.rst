@@ -177,7 +177,8 @@ The config reader classes have been renamed:
 
 The config engines no longer support passing keys with file extension.
 
-A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has been added.
+A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
+been added.
 
 Object
 ------

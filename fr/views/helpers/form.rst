@@ -1450,7 +1450,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
 
     // Dans un controller
     $this->loadHelper('Form', [
-        'templates' => 'app_form.php',
+        'templates' => 'app_form',
     ]);
 
 Ceci charge les balises dans ``config/app_form.php``. Le fichier devra

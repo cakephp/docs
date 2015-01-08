@@ -577,6 +577,26 @@ soit à travers des valeurs séparées de point, soit des sections. Les
 sections peuvent contenir des clés séparées de point pour des imbrications
 plus profondes.
 
+Json Configuration Files
+-----------------------
+
+.. php:class:: JsonConfig
+
+Allows you to read / dump configuration files that are stored as JSON encoded
+strings in .json files.
+
+An example JSON file would look like::
+
+    {
+        "debug": false,
+        "App": {
+            "namespace": "MyApp"
+        },
+        "Security": {
+            "salt": "its-secret"
+        }
+    }
+
 Bootstrapping CakePHP
 =====================
 
