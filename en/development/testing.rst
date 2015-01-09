@@ -591,8 +591,8 @@ fixture name::
 In the above example, both fixtures would be loaded from
 ``tests/Fixture/blog/``.
 
-Testing Tables
-==============
+Testing Table Classes
+=====================
 
 Let's say we already have our Articles Table class defined in
 ``src/Model/Table/ArticlesTable.php``, and it looks like::
@@ -1215,17 +1215,16 @@ chapter of this manual. A difference from other tests is in the
 first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
-    namespace Blog\Test\TestCase\Model;
+    namespace Blog\Test\TestCase\Model\Table;
 
-    use Blog\Model\BlogPost;
+    use Blog\Model\Table\BlogPostsTable;
     use Cake\TestSuite\TestCase;
 
-    class BlogPostTest extends TestCase
+    class BlogPostsTableTest extends TestCase
     {
 
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_posts'];
-        public $BlogPost;
 
         public function testSomething()
         {
@@ -1236,6 +1235,35 @@ prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
 ``$fixtures`` array.
+
+Before you can use fixtures you should double check that your ``phpunit.xml``
+contains the fixture listener::
+
+    <!-- Setup a listener for fixtures -->
+    <listeners>
+            <listener
+            class="\Cake\TestSuite\Fixture\FixtureInjector"
+            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+                    <arguments>
+                            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+                    </arguments>
+            </listener>
+    </listeners>
+
+You should also ensure that your fixtures are loadable. Ensure the following is
+present in your ``composer.json`` file::
+
+    "autoload-dev": {
+        "psr-4": {
+            "MyPlugin\\Test\\": "tests",
+            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+        }
+    }
+
+.. note::
+
+    Remember to run ``composer.phar dumpautoload`` when adding new autoload
+    mappings.
 
 Generating Tests with Bake
 ==========================
