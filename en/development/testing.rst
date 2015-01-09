@@ -1201,10 +1201,10 @@ Creating Tests for Plugins
 Tests for plugins are created in their own directory inside the
 plugins folder. ::
 
-    /app
-        /Plugin
+    /src
+        /plugins
             /Blog
-                /Test
+                /tests
                     /TestCase
                     /Fixture
 

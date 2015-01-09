@@ -1289,7 +1289,7 @@ les fixtures de votre plugin avec ``plugin.blog.blog_posts``::
         }
     }
 
-Si vous voulez utiliser les fixures de plugin dans les app tests, vous pouvez
+Si vous voulez utiliser les fixtures de plugin dans les app tests, vous pouvez
 y faire référence en utilisant la syntaxe ``plugin.pluginName.fixtureName``
 dans le tableau ``$fixtures``.
 
@@ -1307,7 +1307,7 @@ contienne un listener (écouteur) pour les fixtures::
             </listener>
     </listeners>
 
-Vous devez également vous assurer que vous fixtures sont chargeables.
+Vous devez également vous assurer que vos fixtures sont chargeables.
 vérifier que le code suivant est présent dans votre fichier ``composer.json`` ::
 
     "autoload-dev": {
