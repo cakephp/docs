@@ -348,7 +348,7 @@ de permutations en plus des méthodes find de bases.
     :param $order: Chaîne SQL des conditions ORDER BY.
     :param $limit: SQL LIMIT déclaration.
     :param $page: pour accéder aux resultats paginés.
-    :param $recursive: Nombre du niveau de profondeur pour la recursivité des
+    :param $recursive: Nombre du niveau de profondeur pour la récursivité des
       models associés.
 
     La méthode ``children`` prend la clé primaire (l\'id d'une ligne) et

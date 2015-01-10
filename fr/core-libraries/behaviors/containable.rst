@@ -14,7 +14,7 @@ utilisateurs d'une façon propre et cohérente.
 Le behavior "Containable" vous permet de rationaliser et de simplifier les
 opérations de construction du model. Il agit en modifiant temporairement ou
 définitivement les associations de vos models. Il fait cela en utilisant
-des "containements" pour génerer une série d'appels ``bindModel`` et
+des "containements" pour générer une série d'appels ``bindModel`` et
 ``unbindModel``. Étant donné que Containable modifie seulement les relations
 déjà existantes, il ne vous permettra pas de restreindre les résultats pour
 des associations distantes. Pour cela, vous devriez voir les
@@ -97,7 +97,7 @@ récupérées par un appel ``find()`` normal est assez étendue ::
 
 Pour certaines interfaces de votre application, vous pouvez ne pas avoir
 besoin d'autant d'information depuis le model Post. Le
-``Behavior containable`` permet de reduire ce que le find() retourne.
+``Behavior containable`` permet de réduire ce que le find() retourne.
 
 Par exemple, pour ne récupérer que les informations liées au post vous
 pouvez faire cela::
@@ -142,7 +142,7 @@ le ``behavior Containable`` en faisant quelque chose comme::
 Le ``behavior Containable`` s'impose vraiment quand vous avez des associations
 complexes, et que vous voulez rogner le nombre d'information au même niveau. La
 propriété $recursive des models est utile si vous voulez éviter un niveau de
-recursivité entier, mais pas pour choisir ce que vous garder à chaque niveau.
+récursivité entier, mais pas pour choisir ce que vous garder à chaque niveau.
 Regardons ensemble comment la methode ``contain()`` agit.
 
 Le premier argument de la méthode accepte le nom, ou un tableau de noms, des
@@ -168,7 +168,7 @@ Des associations plus profondes
 Containable permet également d'aller un peu plus loin : vous pouvez filtrer les
 données des models *associés*. si vous regardez les résultats d'un appel find()
 classique, notez le champ "auteur" dans le model "Comment". Si vous êtes
-interéssés par les posts et les noms des commentaires des auteurs - et rien
+intéressés par les posts et les noms des commentaires des auteurs - et rien
 d'autre - vous devez faire quelque chose comme::
 
     $this->Post->contain('Comment.auteur');
@@ -209,7 +209,7 @@ du find ressemble à::
             (...
 
 Comme vous pouvez le voir, les tableaux de Comment ne contiennent uniquement
-que le champ auteur (avec le post\_id qui est requit par CakePHP pour présenter
+que le champ auteur (avec le post\_id qui est requis par CakePHP pour présenter
 le résultat)
 
 Vous pouvez également filtrer les données associées à Comment en spécifiant une
@@ -347,7 +347,7 @@ Examinons les associations des models suivants::
     User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
     User->Post->Tag
 
-Voici comment nous recupérons les associations ci-dessus avec le behavior
+Voici comment nous récupérons les associations ci-dessus avec le behavior
 Containable ::
 
     $this->User->find('all', array(
@@ -373,7 +373,7 @@ Containable ::
     ));
 
 Gardez à l'esprit que la clé 'contain' n'est utilisée qu'une seule fois dans
-le model principal, vous n'avez pas besoin d'utiliser 'contain' a nouveau
+le model principal, vous n'avez pas besoin d'utiliser 'contain' à nouveau
 dans les models liés.
 
 .. note::
