@@ -27,13 +27,18 @@ would do the following::
 
     php composer.phar require cakephp/debug_kit
 
-This would install the latest version of DebugKit and update your
+This would install the latest version of DebugKit in ``plugins`` and update your
 ``composer.json``, ``composer.lock`` file, and update your autoloader. If
 the plugin you want to install is not available on packagist.org, you can clone
-or copy the plugin code into your ``plugins`` directory. Assuming you want to install
-a plugin named 'ContactManager', you should have a folder in ``plugins``
+or copy the plugin code into your ``src/Plugin`` directory. Assuming you want to install
+a plugin named 'ContactManager', you should have a folder in ``src/Plugin``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
 webroot, and any other directories.
+
+.. note::
+
+    There are two folders for plugins in order to separate the ones you install using
+    composer (in ``plugins``) and the ones you create inside your application (in ``src/Plugin``).
 
 Loading a Plugin
 ================
@@ -72,8 +77,8 @@ to contain the following information::
 
     "psr-4": {
         (...)
-        "MyPlugin\\": "./plugins/MyPlugin/src",
-        "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
+        "MyPlugin\\": "./src/Plugin/MyPlugin/src",
+        "MyPlugin\\Test\\": "./src/Plugin/MyPlugin/tests"
     }
 
 If you are using vendor namespace for your plugins the namespace to path mapping
@@ -81,8 +86,8 @@ should be like::
 
     "psr-4": {
         (...)
-        "AcmeCorp\\Users\\": "./plugins/AcmeCorp/Users/src",
-        "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
+        "AcmeCorp\\Users\\": "./src/Plugin/AcmeCorp/Users/src",
+        "AcmeCorp\\Users\\Test\\": "./src/Plugin/AcmeCorp/Users/tests"
     }
 
 Additionally you will need to tell Composer to refresh its autoloading cache::
@@ -180,24 +185,24 @@ plugin referenced above. To start out, we'll set up our plugin's
 basic directory structure. It should look like this::
 
     /src
-    /plugins
-        /ContactManager
-            /config
-            /src
-                /Controller
-                    /Component
-                /Model
-                    /Table
-                    /Entity
-                    /Behavior
-                /View
-                    /Helper
-                /Template
-                    /Layout
-            /tests
-                /TestCase
-                /Fixture
-            /webroot
+        /Plugin
+            /ContactManager
+                /config
+                /src
+                    /Controller
+                        /Component
+                    /Model
+                        /Table
+                        /Entity
+                        /Behavior
+                    /View
+                        /Helper
+                    /Template
+                        /Layout
+                /tests
+                    /TestCase
+                    /Fixture
+                /webroot
 
 Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
@@ -237,14 +242,14 @@ Plugin Controllers
 ==================
 
 Controllers for our ContactManager plugin will be stored in
-``plugins/ContactManager/src/Controller/``. Since the main thing we'll
+``src/Plugin/ContactManager/src/Controller/``. Since the main thing we'll
 be doing is managing contacts, we'll need a ContactsController for
 this plugin.
 
 So, we place our new ContactsController in
-``plugins/ContactManager/src/Controller`` and it looks like so::
+``src/Plugin/ContactManager/src/Controller`` and it looks like so::
 
-    // plugins/ContactManager/src/Controller/ContactsController.php
+    // src/Plugin/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
 
     use ContactManager\Controller\AppController;
@@ -271,7 +276,7 @@ following::
     Plugin::load('ContactManager', ['routes' => true]);
 
 Then create the ContactManager plugin routes. Put the following into
-``plugins/ContactManager/config/routes.php``::
+``src/Plugin/ContactManager/config/routes.php``::
 
     <?php
     use Cake\Routing\Router;
@@ -310,7 +315,7 @@ plugin specific route files.
 Plugin Models
 =============
 
-Models for the plugin are stored in ``plugins/ContactManager/src/Model``.
+Models for the plugin are stored in ``src/Plugin/ContactManager/src/Model``.
 We've already defined a ContactsController for this plugin, so let's
 create the table and entity for that controller::
 
@@ -379,7 +384,7 @@ Plugin Views
 ============
 
 Views behave exactly as they do in normal applications. Just place them in the
-right folder inside of the ``plugins/[PluginName]/src/Template/`` folder. For our
+right folder inside of the ``src/Plugin/[PluginName]/src/Template/`` folder. For our
 ContactManager plugin, we'll need a view for our ``ContactsController::index()``
 action, so let's include that as well::
 
@@ -389,7 +394,7 @@ action, so let's include that as well::
     <!-- A sortable list of contacts would go here....-->
 
 Plugins can provide their own layouts. Add plugin layouts, inside
-``plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
+``src/Plugin/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
     public $layout = 'ContactManager.admin';
@@ -413,7 +418,7 @@ Contacts controller you could make the following file::
     src/Template/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-``plugins/ContactManager/src/Template/Contacts/index.ctp``.
+``src/Plugin/ContactManager/src/Template/Contacts/index.ctp``.
 
 .. _plugin-assets:
 
@@ -424,7 +429,7 @@ Plugin Assets
 A plugin's web assets (but not PHP files) can be served through the plugin's
 ``webroot`` directory, just like the main application's assets::
 
-    /plugins/ContactManager/webroot/
+    /src/Plugin/ContactManager/webroot/
                                    css/
                                    js/
                                    img/
@@ -462,7 +467,7 @@ This is only recommended for development. In production you should
 If you are not using the helpers, you can prepend /plugin_name/ to the beginning
 of a the URL for an asset within that plugin to serve it. Linking to
 '/contact_manager/js/some_file.js' would serve the asset
-``plugins/ContactManager/webroot/js/some_file.js``.
+``src/Plugin/ContactManager/webroot/js/some_file.js``.
 
 Components, Helpers and Behaviors
 =================================
