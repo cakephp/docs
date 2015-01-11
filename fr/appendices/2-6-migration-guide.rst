@@ -114,15 +114,15 @@ Utility
 CakeTime
 --------
 
-- ``CakeTime::timeAgoInWords()`` now supports ``strftime()`` compatible absolute
-  date formats. This helps make localizing formatted times easier.
+- ``CakeTime::timeAgoInWords()`` supporte maintenant les formats de date absoluts
+  compatible avec ``strftime()``. Cela facilite la localisation des formats de date.
 
 Hash
 ----
 
-- ``Hash::get()`` now raises an exception when the path argument is invalid.
-- ``Hash::nest()`` now raises an exception when the nesting operation results in
-  no data.
+- ``Hash::get()`` lance maintenant une exception quand l'argument path est invalide.
+- ``Hash::nest()`` lance maintenant un exception quand le résultats de l'opération
+  d'imbrication ne retourne aucune donnée.
 
 
 Validation
