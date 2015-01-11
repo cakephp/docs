@@ -64,6 +64,8 @@ filter::
     DispatcherFactory::add('Asset', ['priority' => 1]);
     DispatcherFactory::add(new AssetFilter(['priority' => 1]));
 
+The higher the priority the later this filter will be invoked.
+
 Conditionally Applying Filters
 ------------------------------
 
