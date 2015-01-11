@@ -30,7 +30,7 @@ would do the following::
 This would install the latest version of DebugKit in ``plugins`` and update your
 ``composer.json``, ``composer.lock`` file, and update your autoloader. If
 the plugin you want to install is not available on packagist.org, you can clone
-or copy the plugin code into your ``src/Plugin`` directory. Assuming you want to install
+or copy the plugin code into your ``src/Plugin`` directory. Assuming you want to create
 a plugin named 'ContactManager', you should have a folder in ``src/Plugin``
 named 'ContactManager'. In this directory are the plugin's View, Model, Controller,
 webroot, and any other directories.
