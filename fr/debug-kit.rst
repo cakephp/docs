@@ -77,7 +77,7 @@ Comme vous pouvez le voir, le panneau contient une liste des requêtes. Sur la
 gauche, vous pouvez voir un point marquant la requête actuelle. Cliquer
 sur n'importe quelles données de requête va charger les données du panneau
 pour cette requête. Quand les données historiques sont chargées, les titres
-du panneau vont passer pour indiquer que des données alternatives ont été
+du panneau seront colorés pour indiquer que des données alternatives ont été
 chargées.
 
 .. figure:: /_static/debug-kit/history-panel-use.gif
@@ -109,7 +109,7 @@ que la classe ``MyCustomPanel`` s'attende à avoir un fichier au nom
         ...
     }
 
-Remarquez que les panneaux personnalisés sont nécessaires pour étendre la classe
+Remarquez que les panneaux personnalisés doivent étendre la classe
 ``DebugPanel``.
 
 Callbacks
