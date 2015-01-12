@@ -7,7 +7,7 @@ vous aider à debugger les applications CakePHP plus facilement.
 Installation
 ============
 
-Par défaut DebugKit est installée avec le squelette d'application. Si vous
+Par défaut DebugKit est installé avec le squelette d'application. Si vous
 le retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui
 suit à partir du répertoire ROOT de votre application (où le fichier
 composer.json est localisé)::
@@ -51,7 +51,7 @@ Chaque panneau vous permet d'inspecter plusieurs aspects de votre application:
 * **Log** Affiche toute entrée faite dans les fichiers de log par cette requête.
 * **Request** Affiche les informations sur la requête courante, GET, POST, les
   paramètre de Cake, sur la Route Courante et les Cookies.
-* **Session** Affiche l'information actuellement dans la Session.
+* **Session** Affiche les informations actuellement dans la Session.
 * **Sql Logs** Affiche les logs SQL pour chaque connexion à la base de données.
 * **Timer** Affiche tout timers qui a été défini pendant la requête avec
   ``DebugKit\DebugTimer``, et l'utilisation de la mémoire collectée avec
@@ -122,7 +122,7 @@ s'inscrire à des events supplémentaires, vous pouvez utiliser la méthode
 ``implementedEvents`` pour définir tous les events auxquels votre panneau
 doit s'interesser.
 
-Vous devez vous réferer aux panneaux intégrés pour avoir quelques exemples sur
+Vous devez vous référer aux panneaux intégrés pour avoir quelques exemples sur
 la façon de construire des panneaux.
 
 Elements de Panneau
