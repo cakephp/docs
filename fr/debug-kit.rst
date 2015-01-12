@@ -70,7 +70,7 @@ Le panneau d'historique est l'une des fonctionnalités les plus souvent mal
 comprise de DebugKit. Elle est un moyen de voir les données de la toolbar des
 requêtes précédentes, d'inclure les erreurs et les redirects.
 
-.. figure:: /_static/debug-kit/history-panel.png
+.. figure:: /_static/img/debug-kit/history-panel.png
     :alt: Capture d'écran du panneau historique dans debug kit.
 
 Comme vous pouvez le voir, le panneau contient une liste des requêtes. Sur la
@@ -80,7 +80,7 @@ pour cette requête. Quand les données historiques sont chargées, les titres
 du panneau seront colorés pour indiquer que des données alternatives ont été
 chargées.
 
-.. figure:: /_static/debug-kit/history-panel-use.gif
+.. figure:: /_static/img/debug-kit/history-panel-use.gif
     :alt: Video du panneau historique en action.
 
 Développer vos Propres Panneaux
