@@ -17,7 +17,7 @@ located)::
 DebugKit Storage
 ================
 
-By default, DebugKit uses a small SQLite database in you application's ``/tmp``
+By default, DebugKit uses a small SQLite database in your application's ``/tmp``
 directory to store the panel data. If you'd like DebugKit to store its data
 elsewhere, you should define a ``debug_kit`` connection.
 
@@ -30,7 +30,7 @@ configure DebugKit to use a different database by defining a ``debug_kit``
 connection in your ``config/app.php`` file.
 
 Toolbar Usage
-==============
+=============
 
 The DebugKit Toolbar is comprised of several panels, which are shown by clicking
 the CakePHP icon in the bottom right-hand corner of your browser window. Once
