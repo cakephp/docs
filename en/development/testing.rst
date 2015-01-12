@@ -895,6 +895,9 @@ make testing responses much simpler. Some examples are::
     // Check that no Location header has been set
     $this->assertNoRedirect();
 
+    // Assert response content
+    $this->assertResponseEquals('Yeah!');
+
     // Assert content in the response
     $this->assertResponseContains('You won!');
 
