@@ -540,7 +540,7 @@ dot separated keys for deeper nesting.
 
 
 Json Configuration Files
------------------------
+------------------------
 
 .. php:class:: JsonConfig
 
