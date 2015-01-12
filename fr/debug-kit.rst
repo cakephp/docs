@@ -1,146 +1,159 @@
 Debug Kit
 #########
 
-DebugKit is a plugin supported by the core team that provides a toolbar to help
-make debugging CakePHP applications easier.
+DebugKit est un plugin supporté par la core team qui fournit une toolbar pour
+vous aider à debugger les applications CakePHP plus facilement.
 
 Installation
 ============
 
-By default DebugKit is installed with the default application skeleton. If
-you've removed it and want to re-install it, you can do so by running the
-following from your application's ROOT directory (where composer.json file is
-located)::
+Par défaut DebugKit est installée avec le squelette d'application. Si vous
+le retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui
+suit à partir du répertoire ROOT de votre application (où le fichier
+composer.json est localisé)::
 
     php composer.phar require cakephp/debug_kit "3.0.*-dev"
 
-DebugKit Storage
-================
+Stockage de DebugKit
+====================
 
-By default, DebugKit uses a small SQLite database in you application's ``/tmp``
-directory to store the panel data. If you'd like DebugKit to store its data
-elsewhere, you should define a ``debug_kit`` connection.
+Par défaut, DebugKit utilise une petite base de données SQLite dans le
+répertoire ``/tmp`` de votre application pour stocker les données du panneau.
+Si vous voulez que DebugKit stocke ses données ailleurs, vous pouvez définir
+une connexion ``debug_kit``.
 
-Database Configuration
-----------------------
+Configuration de Base de Données
+--------------------------------
 
-By default DebugKit will store panel data into a SQLite database in your
-application's ``tmp`` directory. If you cannot install pdo_sqlite, you can
-configure DebugKit to use a different database by defining a ``debug_kit``
-connection in your ``config/app.php`` file.
+Par défaut DebugKit va stocker les données du panneau dans une base de données
+SQLite dans le répertoire ``tmp`` de votre application. Si vous ne pouvez pas
+installer pdo_sqlite, vous pouvez configurer DebugKit pour utiliser une base
+de données différente en définissant une connexion ``debug_kit`` dans votre
+fichier ``config/app.php``.
 
-Toolbar Usage
-==============
+Utilisation de la Toolbar
+=========================
 
-The DebugKit Toolbar is comprised of several panels, which are shown by clicking
-the CakePHP icon in the bottom right-hand corner of your browser window. Once
-the toolbar is open, you should see a series of buttons. Each of these buttons
-expands into a panel of related information.
+La Toolbar de DebugKit comprend plusieurs panneaux, qui apparaissent en
+cliquant sur l'icone CakePHP dans le coin en bas à droite de la fenêtre de
+votre navigateur. Une fois que la toolbar est ouverte, vous devriez voir une
+série de boutons. Chacun de ces boutons s'agrandit en un panneau avec des
+informations liées.
 
-Each panel lets you look at a different aspect of your application:
+Chaque panneau vous permet d'inspecter plusieurs aspects de votre application:
 
-* **Cache** See cache usage during a request and clear caches.
-* **Environment** Display environment variables related to PHP + CakePHP.
-* **History** Displays a list of previous requests, and allows you to load
-  and view toolbar data from previous requests.
-* **Include** View the included files grouped by type.
-* **Log** Display any entries made to the log files this request.
-* **Request** Displays information about the current request, GET, POST, Cake
-  Parameters, Current Route information and Cookies.
-* **Session** Display the information currently in the Session.
-* **Sql Logs** Displays SQL logs for each database connection.
-* **Timer** Display any timers that were set during the request with
-  ``DebugKit\DebugTimer``, and memory usage collected with
+* **Cache** Voir l'utilisation du cache pendant une requête et nettoyer les
+  caches.
+* **Environment** Affiche les variables d'environnement liées à PHP + CakePHP.
+* **History** Affiche une liste des requêtes précédentes, et vous permet de
+  charger et de voir les données de la toolbar des requêtes précédentes.
+* **Include** Voir les fichiers inclus groupés par type.
+* **Log** Affiche toute entrée faite dans les fichiers de log par cette requête.
+* **Request** Affiche les informations sur la requête courante, GET, POST, les
+  paramètre de Cake, sur la Route Courante et les Cookies.
+* **Session** Affiche l'information actuellement dans la Session.
+* **Sql Logs** Affiche les logs SQL pour chaque connexion à la base de données.
+* **Timer** Affiche tout timers qui a été défini pendant la requête avec
+  ``DebugKit\DebugTimer``, et l'utilisation de la mémoire collectée avec
   ``DebugKit\DebugMemory``.
-* **Variables** Display View variables set in controller.
+* **Variables** Affiche les variables de View définies dans le controller.
 
-Typically, a panel handles the collection and display of a single type
-of information such as Logs or Request information. You can choose to view
-panels from the toolbar or add your own custom panels.
+Typiquement, un panneau gère la collection et affiche un type unique
+d'information comme les Logs ou les informations de la Requête. Vous pouvez
+choisir de voir les panneaux de la toolbar ou ajouter vos panneaux
+personnalisés.
 
-Using the History Panel
-=======================
+Utiliser le Panneau d'Historique
+================================
 
-The history panel is one of the most frequently misunderstood features of
-DebugKit. It provides a way to view toolbar data from previous requests,
-including errors and redirects.
+Le panneau d'historique est l'une des fonctionnalités les plus souvent mal
+comprise de DebugKit. Elle est un moyen de voir les données de la toolbar des
+requêtes précédentes, d'inclure les erreurs et les redirects.
 
 .. figure:: /_static/debug-kit/history-panel.png
-    :alt: Screenshot of the history panel in debug kit.
+    :alt: Capture d'écran du panneau historique dans debug kit.
 
-As you can see, the panel contains a list of requests. On the left you can see
-a dot marking the active request. Clicking any request data will load the panel
-data for that request. When historical data is loaded the panel titles will
-transition to indicate that alternative data has been loaded.
+Comme vous pouvez le voir, le panneau contient une liste des requêtes. Sur la
+gauche, vous pouvez voir un point marquant la requête actuelle. Cliquer
+sur n'importe quelles données de requête va charger les données du panneau
+pour cette requête. Quand les données historiques sont chargées, les titres
+du panneau vont passer pour indiquer que des données alternatives ont été
+chargées.
 
 .. figure:: /_static/debug-kit/history-panel-use.gif
-    :alt: Video of history panel in action.
+    :alt: Video du panneau historique en action.
 
-Developing Your Own Panels
-==========================
+Développer vos Propres Panneaux
+===============================
 
-You can create your own custom panels for DebugKit to help in debugging your
-applications.
+Vous pouvez créer vos propres panneaux personnalisés pour DebugKit pour
+améliorer le debug de vos applications.
 
-Creating a Panel Class
+Créer une Classe Panel
 ----------------------
 
-Panel Classes simply need to be placed in the ``src/Panel`` directory. The
-filename should match the classname, so the class ``MyCustomPanel`` would be
-expected to have a filename of ``src/Panel/MyCustomPanel.php``::
+Les Classes Panel doivent simplement être placées dans le répertoire
+``src/Panel``. Le nom de fichier doit correspondre au nom de la classe, pour
+que la classe ``MyCustomPanel`` s'attende à avoir un fichier au nom
+``src/Panel/MyCustomPanel.php``::
 
     namespace App\Panel;
 
     use DebugKit\DebugPanel;
 
     /**
-     * My Custom Panel
+     * Mon panneau Personnalisé
      */
     class MyCustomPanel extends DebugPanel
     {
         ...
     }
 
-Notice that custom panels are required to extend the ``DebugPanel`` class.
+Remarquez que les panneaux personnalisés sont nécessaires pour étendre la classe
+``DebugPanel``.
 
 Callbacks
 ---------
 
-By default Panel objects have two callbacks, allowing them to hook into the
-current request. Panels subscribe to the ``Controller.initialize`` and
-``Controller.shutdown`` events. If your panel needs to subscribe to additional
-events, you can use the ``implementedEvents`` method to define all of the events
-your panel is interested in.
+Par défaut, les objets Panel ont deux callbacks, leur permettant de s'insérer
+dans la requête actuelle. Les panneaux s'inscrivent aux events
+``Controller.initialize`` et ``Controller.shutdown``. Si votre panneau doit
+s'inscrire à des events supplémentaires, vous pouvez utiliser la méthode
+``implementedEvents`` pour définir tous les events auxquels votre panneau
+doit s'interesser.
 
-You should refer to the built-in panels for some examples on how you can build
-panels.
+Vous devez vous réferer aux panneaux intégrés pour avoir quelques exemples sur
+la façon de construire des panneaux.
 
-Panel Elements
---------------
+Elements de Panneau
+-------------------
 
-Each Panel is expected to have a view element that renders the content from the
-panel. The element name must be the underscored inflection of the class name.
-For example ``SessionPanel`` has an element named ``session_panel.ctp``, and
-SqllogPanel has an element named ``sqllog_panel.ctp``. These elements should be
-located in the root of your ``src/Template/Element`` directory.
+Chaque panneau s'attend à avoir un element de view qui rend le contenu du
+panneau. Le nom de l'element doit être avec une inflection en underscore du
+nom de la classe.
+Par exemple ``SessionPanel`` a un element nommé ``session_panel.ctp``, et
+SqllogPanel a un element nommé ``sqllog_panel.ctp``. Ces elements doivent être
+localisés à la racine de votre répertoire ``src/Template/Element``.
 
-Custom Titles and Elements
---------------------------
+Titres Personnalisés et Elements
+--------------------------------
 
-Panels should pick up their title and element name by convention. However, if
-you need to choose a custom element name or title, you can define methods to
-customize your panel's behavior:
+Les panneaux doivent choisir leur titre et leur nom d'element par convention.
+Cependant, si vous avez besoin de choisir un nom ou un titre d'element
+personnalisé, vous pouvez définir des méthodes pour personnaliser le
+comportement de votre panneau:
 
-- ``title()`` - Configure the title that is displayed in the toolbar.
-- ``elementName()`` Configure which element should be used for a given panel.
+- ``title()`` - Configure le titre qui est affiché dans la toolbar.
+- ``elementName()`` Configure l'element qui doit être utilisé pour un panneau
+  donné.
 
-Panels in Other Plugins
------------------------
+Panneaux dans d'autres Plugins
+------------------------------
 
-Panels provided by :doc:`/plugins` work almost entirely the same as other
-plugins, with one minor difference:  You must set ``public $plugin`` to be the
-name of the plugin directory, so that the panel's Elements can be located at
-render time::
+Les panneaux fournis par les :doc:`/plugins` fonctionnent presque entièrement
+de la même façon que les autres plugins, avec quelques différences mineures:
+Vous devez définir ``public $plugin`` comme nom de répertoire de plugin, pour
+que les elements du panneau puissent être localisés au moment de les afficher::
 
     namespace MyPlugin\Panel;
 
@@ -152,13 +165,13 @@ render time::
             ...
     }
 
-To use a plugin or app panel, update your application's DebugKit configuration
-to include the panel::
+Pour utiliser un panneau de plugin ou de l'application, mettez à jour
+la configuration du DebugKit de votre application pour ajouter le panneau::
 
     Configure::write(
         'DebugKit.panels',
         array_merge(Configure::read('DebugKit.panels'), ['MyCustomPanel'])
     );
 
-The above would load all the default panels as well as the custom panel from
-``MyPlugin``.
+Ce qui est au-dessus charge tous les panneaux par défaut ainsi que le panneau
+personnalisé dans ``MyPlugin``.
