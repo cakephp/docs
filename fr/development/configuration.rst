@@ -267,7 +267,7 @@ L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
 Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
 les modes de debug et de production à la volée. C'est particulièrement
-pratique pour les intéractions AMF et SOAP quand les informations de debug
+pratique pour les intéractions JSON quand les informations de debug
 peuvent entraîner des problèmes de parsing.
 
 Lire les Données de Configuration
@@ -578,7 +578,7 @@ sections peuvent contenir des clés séparées de point pour des imbrications
 plus profondes.
 
 Json Configuration Files
------------------------
+------------------------
 
 .. php:class:: JsonConfig
 
