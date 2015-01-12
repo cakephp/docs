@@ -144,7 +144,7 @@ Fusionner les Données de Request dans des Entities
 --------------------------------------------------
 
 Afin de mettre à jour les entities, vous pouvez choisir d'appliquer des données
-de request directement dans une entity existante. Ceci a l'avantage que seuls les 
+de request directement dans une entity existante. Ceci a l'avantage que seuls les
 champs qui changent réellement seront sauvegardés, au lieu d'envoyer tous les champs
 à la base de donnée, même ceux qui sont identiques. Vous pouvez fusionner
 un tableau de données brutes dans une entity existante en utilisant la méthode
@@ -763,122 +763,129 @@ représentation JSON::
     ]);
     $usersTable->save($user);
 
-Lors de l'utilisation de types complexes, il est important de valider que les
-données que vous recevez de l'utilisateur finale est de type correct. Ne pas
-faire correctement la gestion des données complexes entraînera chez des
+Lors de l'utilisation de types complexes, il est important de vérifier que les
+données que vous recevez de l'utilisateur final sont valides. Ne pas
+gérer correctement les données complexes va permettre à des
 utilisateurs mal intentionnés d'être capable de stocker des données qu'ils ne
 pourraient pas stocker normalement.
 
 .. _application-rules:
 
-Applying Application Rules
-==========================
+Appliquer des Règles pour l'Application
+=======================================
 
-While basic data validation is done when :ref:`request data is converted into
-entities <validating-request-data>`, many applications also have more complex
-validation that should only be applied to after basic validation has completed.
-These types of rules are often referred to as 'domain rules' or 'application
-rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
-before entities are persisted. Some example domain rules are:
+Alors qu'une validation basique des données est faite quand :ref:`les données
+de requêtes sont converties en entities <validating-request-data>`, de
+nombreuses applications ont aussi d'autres validations plus complexes qui
+doivent être appliquées seulement après qu'une validation basique a été
+terminée. Ces types de règles sont souvent appelées 'règles de domaine' ou
+'règles de l'application'. CakePHP utilise ce concept avec les 'RulesCheckers'
+qui sont appliquées avant que les entities ne soient sauvegardées. Voici
+quelques exemples de règles de domaine:
 
-* Ensuring email uniqueness
-* State transitions or workflow steps, for example updating an invoice's status.
-* Preventing modification of soft deleted items.
+* S'assurer qu'un email est unique.
+* Etats de transition ou étapes de flux de travail, par exemple pour mettre à
+  jour un statut de facture.
+* Eviter la modification ou la suppression soft d'articles.
 * Enforcing usage/rate limit caps.
 
-Creating a Rules Checker
-------------------------
+Créer un Vérificateur de Règles
+-------------------------------
 
-Rules checker classes are generally defined by the ``buildRules`` method in your
-table class. Behaviors and other event subscribers can use the
-``Model.buildRules`` event to augment the rules checker for a given Table
-class::
+Les classes de vérificateur de Règles sont généralement définies par la
+méthode ``buildRules`` dans votre classe de table. Les behaviors et les autres
+souscripteurs d'event peuvent utiliser l'event ``Model.buildRules`` pour
+ajouter des règles au vérificateur pour une classe de Table donnée::
 
-    // In a table class
+    use Cake\ORM\RulesChecker;
+
+    // Dans une classe de table
     public function buildRules(RulesChecker $rules) {
-        // Add a rule that is applied for create and update operations
+        // Ajoute une règle qui est appliquée pour la création et la mise à jour d'opérations
         $rules->add(function ($entity, $options) {
-            // Return a boolean to indicate pass/fail
+            // Retourne un booléen pour indiquer si succès/échec
         });
 
-        // Add a rule for create.
+        // Ajoute une règle pour la création.
         $rules->addCreate(function ($entity, $options) {
         });
 
-        // Add a rule for update
+        // Ajoute une règle pour la mise à jour.
         $rules->addUpdate(function ($entity, $options) {
         });
 
-        // Add a rule for the deleting.
+        // Ajoute une règle pour la suppression.
         $rules->addDelete(function ($entity, $options) {
         });
 
         return $rules;
     }
 
-Your rules functions can expect to get the Entity being checked, and an array of
-options. The options array will contain ``errorField``, ``message``, and
-``repository``. The ``repository`` option will contain the table class the rules
-are attached to. Because rules accept any ``callable``, you can also use
-instance functions::
+Vos fonctions de règles ont pour paramètres l'Entity à vérifier et un tableau
+d'options. Le tableau d'options va contenir ``errorField``, ``message`` et
+``repository``. L'option ``repository`` va contenir la classe de table sur
+laquelle les règles sont attachées. Comme les règles acceptent tout
+``callable``, vous pouvez aussi utiliser des fonctions d'instance::
 
     $rules->addCreate([$this, 'uniqueEmail']);
 
-or callable classes::
+ou des classes callable::
 
     $rules->addCreate(new IsUnique(['email']));
 
-When adding rules you can define the field the rule is for, and the error
-message as options::
+Lors de l'ajout de règles, vous pouvez définir le champ pour lequel la règle
+est faite, et le message d'erreur en options::
 
     $rules->add([$this, 'isValidState'], [
         'errorField' => 'status',
-        'message' => 'This invoice cannot be moved to that status.'
+        'message' => 'Cette facture ne peut pas être déplacée pour ce statut.'
     ]);
 
-Creating Unique Field Rules
----------------------------
+Créer des Règles de Champ Unique
+--------------------------------
 
-Because unique rules are quite common, CakePHP includes a simple Rule class that
-allows you to easily define unique field sets::
+Comme les règles uniques sont couramment utilisées, CakePHP inclut une classe
+de Règle simple qui vous permet de facilement définir des ensembles de champ
+unique::
 
     use Cake\ORM\Rule\IsUnique;
 
-    // A single field.
+    // Un champ unique.
     $rules->add($rules->isUnique(['email']));
 
-    // A list of fields
+    // Une liste de champs
     $rules->add($rules->isUnique(['username', 'account_id']));
 
-Foreign Key Rules
------------------
+Règles des Clés Etrangères
+--------------------------
 
-While you could rely on database errors to enforce constraints, using rules code
-can help provide a nicer user experience. Because of this CakePHP includes an
-``ExistsIn`` rule class::
+Alors que vous pourriez compter sur les erreurs de la base de données pour
+imposer des contraintes, utiliser des règles peut vous aider à fournir une
+experience utilisateur plus sympathique. C'est pour cela que CakePHP inclut
+une classe de règle ``ExistsIn``::
 
-    // A single field.
+    // Un champ unique.
     $rules->add($rules->existsIn('article_id', 'articles'));
 
-    // Multiple keys, useful for composite primary keys.
+    // Plusieurs clés, utile pour des clés primaires composites.
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
 
-Using Entity Methods as Rules
------------------------------
+Utiliser les Méthodes Entity en tant que Règles
+-----------------------------------------------
 
-You may want to use entity methods as domain rules::
+Vous pouvez utiliser les méthodes entity en tant que règles de domaine::
 
     $rules->add(function ($entity, $options) {
         return $entity->isOkLooking();
     });
 
-Creating Custom Rule objects
-----------------------------
+Créer des Objets de Règles Personnalisées
+-----------------------------------------
 
-If your application has rules that are commonly reused, it is helpful to package
-those rules into re-usable classes::
+Si votre application a des règles qui sont souvent réutilisées, il peut être
+utile de packager ces règles dans des classes réutilisables::
 
-    // in src/Model/Rule/CustomRule.php
+    // Dans src/Model/Rule/CustomRule.php
     namespace App\Model\Rule;
 
     use Cake\Datasource\EntityInterface;
@@ -891,18 +898,19 @@ those rules into re-usable classes::
     }
 
 
-    // Add the custom rule
+    // Ajoute la règle personnalisée
     use App\Model\Rule\CustomRule;
 
     $rules->add(new CustomRule(...));
 
-By creating custom rule classes you can keep your code DRY and make your domain
-rules easy to test.
+En ajoutant des classes de règle personnalisée, vous pouvez garder votre code
+DRY et faciliter le test des règles de votre domaine.
 
-Disabling Rules
----------------
+Désactiver les Règles
+---------------------
 
-When saving an entity, you can disable the rules if necessary::
+Quand vous sauvegardez une entity, vous pouvez désactiver les règles si cela
+est nécessaire::
 
     $articles->save($article, ['checkRules' => false]);
 

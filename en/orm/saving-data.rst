@@ -741,7 +741,7 @@ Applying Application Rules
 
 While basic data validation is done when :ref:`request data is converted into
 entities <validating-request-data>`, many applications also have more complex
-validation that should only be applied to after basic validation has completed.
+validation that should only be applied after basic validation has completed.
 These types of rules are often referred to as 'domain rules' or 'application
 rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
 before entities are persisted. Some example domain rules are:

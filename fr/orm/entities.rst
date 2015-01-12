@@ -207,9 +207,11 @@ Assignment de Masse
 Alors que la définition des propriétés en entities en masse est simple et
 pratique, elle peut créer des problèmes importants de sécurité.
 Assigner en masse les données d'utilisateur à partir de la requête dans une
-entity permet à l'utilisateur de modifier toutes les colonnes. Par
-défaut CakePHP protège contre l'assignement en masse et vous fait faire une
-liste des champs qui sont assignables massivement.
+entity permet à l'utilisateur de modifier toutes les colonnes.
+Quand vous utilisez les classes entity anonymes, CakePHP ne protège pas contre
+l'assignement en masse. Vous pouvez facilement vous protéger de
+l'assignement de masse en utilisant :doc:`/bake` pour générer vos
+entities.
 
 La propriété ``_accessible`` vous permet de fournir une liste des champs et
 si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et

@@ -605,8 +605,7 @@ Une des façons les meilleures et les plus simples de rendre votre application
 plus rapide est d'utiliser le cache HTTP. Selon ce modèle de mise en cache,
 vous êtes tenu seulement d'aider les clients à décider s'ils doivent utiliser
 une copie de la réponse mise en cache en définissant quelques propriétés
-d'en-têtes comme la date de mise à jour et la balise d'entité de réponse
-:ref:`etag-tag`.
+d'en-têtes comme la date de mise à jour et la balise entity de réponse.
 
 Plutôt que d'avoir à coder la logique de mise en cache et de sa désactivation
 (rafraîchissement) une fois que les données ont changé, HTTP utilise deux

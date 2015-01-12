@@ -329,7 +329,10 @@ the 'create' mode. If you'd like to apply 'update' rules you can do the followin
 .. note::
 
     If you need to validate entities you should use methods like
-    :php:meth:`~Cake\\ORM\\Table::validate()` or
+    :php:meth:`~Cake\\ORM\\Table::newEntity()`,
+    :php:meth:`~Cake\\ORM\\Table::newEntities()`,
+    :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
+    :php:meth:`~Cake\\ORM\\Table::patchEntities()` or
     :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
 
 Validating Entities
@@ -337,45 +340,31 @@ Validating Entities
 
 While entities are validated as they are saved, you may also want to validate
 entities before attempting to do any saving. Validating entities before
-saving is often useful from the context of a controller, where you want to show
-all the error messages for an entity and its related data::
+saving is done automatically when using the ``newEntity()``, ``newEntities()``,
+``patchEntity()`` or ``patchEntities()``::
 
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $article = $articles->newEntity($this->request->data());
-    $valid = $articles->validate($article, [
-        'associated' => ['Comments', 'Author']
-    ]);
-    if ($valid) {
-        $articles->save($article, ['validate' => false]);
-    } else {
+    // In the ArticlesController class
+    $article = $this->Articles->newEntity($this->request->data());
+    if ($article->errors()) {
         // Do work to show error messages.
     }
 
-The ``validate`` method returns a boolean indicating whether or not the entity
-& related entities are valid. If they are not valid, any validation errors will
-be set on the entities that had validation errors. You can use the
-:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+Similarly, when you need to pre-validate multiple entities at a time, you can use the
+``newEntities()`` method::
 
-When you need to pre-validate multiple entities at a time, you can use the
-``validateMany`` method::
-
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
-    if ($articles->validateMany($entities)) {
-        foreach ($entities as $entity) {
-            $articles->save($entity, ['validate' => false]);
+    // In the ArticlesController class
+    $entities = $this->Articles->newEntities($this->request->data());
+    foreach ($entities as $entity) {
+        if (!$entity->errors()) {
+                $this->Articles->save($entity);
         }
-    } else {
-        // Do work to show error messages.
     }
 
-Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
-methods allow you to specify which associations are validated, and which
+The ``newEntity()``, ``patchEntity()`` and ``newEntities()`` methods
+allow you to specify which associations are validated, and which
 validation sets to apply using the ``options`` parameter::
 
-    $valid = $articles->validate($article, [
+    $valid = $this->Articles->newEntity($article, [
       'associated' => [
         'Comments' => [
           'associated' => ['User'],
@@ -384,6 +373,12 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
+Validation is commonly used for user-facing forms or interfaces, and thus it is
+not limited to only validating columns in the table schema. However,
+maintaining integrity of data regardless where it came from is important. To
+solve this problem CakePHP offers a second level of validation which is called
+"application rules". You can read more about them in the
+:ref:`Applying Application Rules <application-rules>` section.
 
 Core Validation Rules
 =====================

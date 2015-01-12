@@ -174,7 +174,7 @@ Pour sélectionner des champs distincts, vous pouvez utiliser la méthode
     $query->select(['country'])
         ->distinct(['country']);
 
-Pour définir certaines conditions basiques que vous pouvez utiliser avec la
+Pour définir certaines conditions basiques, vous pouvez utiliser la
 méthode ``where()``::
 
     // Conditions sont combinées avec AND
@@ -555,8 +555,7 @@ Créer automatiquement des Clauses IN
 Quand vous construisez des requêtes en utilisant l'ORM, vous n'avez
 généralement pas besoin d'indiquer les types de données des colonnes avec
 lesquelles vous intéragissez, puisque CakePHP peut déduire les types en se
-basant sur les données du :ref:`schéma <namespace-Cake\Database\Schema>`. 
-Si dans vos requêtes, vous souhaitez que
+basant sur les données du schéma. Si dans vos requêtes, vous souhaitez que
 CakePHP convertisse automatiquement l'égalité en comparaisons ``IN``, vous
 devez indiquer les types de données des colonnes::
 

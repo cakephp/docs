@@ -538,6 +538,28 @@ as the PHP example above. Array structures can be created either
 through dot separated values, or sections. Sections can contain
 dot separated keys for deeper nesting.
 
+
+Json Configuration Files
+-----------------------
+
+.. php:class:: JsonConfig
+
+Allows you to read / dump configuration files that are stored as JSON encoded
+strings in .json files.
+
+An example JSON file would look like::
+
+    {
+        "debug": false,
+        "App": {
+            "namespace": "MyApp"
+        },
+        "Security": {
+            "salt": "its-secret"
+        }
+    }
+
+
 Bootstrapping CakePHP
 =====================
 

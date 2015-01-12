@@ -1,7 +1,7 @@
 Translate
 #########
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TranslateBehavior
 
@@ -54,7 +54,7 @@ You can try now getting your entity again::
 Working with multiple translations can be done easily by using a special trait
 in your Entity class::
 
-    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
     class Article extends Entity
@@ -190,7 +190,7 @@ data entities. For example the following properties would be accessible::
 A more elegant way for dealing with this data is by adding a trait to the entity
 class that is used for your table::
 
-    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
     class Article extends Entity
@@ -337,7 +337,7 @@ It is a common requirement to be able to add or edit multiple translations to
 any database record at the same time. This can be easily done using the
 ``TranslateTrait``::
 
-    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
     class Article extends Entity

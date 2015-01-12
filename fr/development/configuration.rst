@@ -531,20 +531,20 @@ fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
 ``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
 
     $config = [
-	'debug' => 0,
-	'Security' => [
-	    'salt' => 'its-secret'
-	],
-	'App' => [
-	    'namespace' => 'App'
-	]
+      	'debug' => 0,
+      	'Security' => [
+      	    'salt' => 'its-secret'
+      	],
+      	'App' => [
+      	    'namespace' => 'App'
+      	]
     ];
 
 Des fichiers sans ``$config`` entraîneraient une
 :php:exc:`ConfigureException`.
 
 Charger votre fichier de configuration personnalisé en insérant ce qui suit
-dans ``config/bootstrap.php``:
+dans ``config/bootstrap.php``::
 
     Configure::load('customConfig');
 
@@ -576,6 +576,26 @@ dans l'exemple PHP du dessus. Les structures de tableau peuvent être créées
 soit à travers des valeurs séparées de point, soit des sections. Les
 sections peuvent contenir des clés séparées de point pour des imbrications
 plus profondes.
+
+Json Configuration Files
+-----------------------
+
+.. php:class:: JsonConfig
+
+Allows you to read / dump configuration files that are stored as JSON encoded
+strings in .json files.
+
+An example JSON file would look like::
+
+    {
+        "debug": false,
+        "App": {
+            "namespace": "MyApp"
+        },
+        "Security": {
+            "salt": "its-secret"
+        }
+    }
 
 Bootstrapping CakePHP
 =====================

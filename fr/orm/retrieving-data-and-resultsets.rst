@@ -502,7 +502,7 @@ pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...) // Full conditions for filtering
+                return $q->where(...); // Full conditions for filtering
             }
         ]
     ]);
@@ -547,7 +547,7 @@ déjà vous être familière::
     // Dans un controller ou une table de méthode.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Countries.name' => 'Japan']);
         }
     );
 
@@ -555,7 +555,7 @@ déjà vous être familière::
     // en utilisant la variable passée
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
-        return $q->where(['username' => $username])
+        return $q->where(['username' => $username]);
     });
 
 .. note::
@@ -592,11 +592,22 @@ Les objets d'ensemble de résultat vont charger lazily les lignes à partir
 de la requête préparée underlying.
 Par défaut, les résultats seront buffered dans la mémoire vous permettant
 d'itérer un ensemble de résultats plusieurs fois, ou de mettre en cache et
-d'itérer les résultats. Si vous devez désactiver le buffering parce que vous
-travaillez sur un ensemble de données qui ne rentre pas dans la mémoire, vous
-pouvez désactiver le buffering sur la requête pour stream les résultats::
+d'itérer les résultats. Si vous devez travailler sur un ensemble de données qui
+ne rentre pas dans la mémoire, vous pouvez désactiver le buffering sur la
+requête pour stream les résultats::
 
     $query->bufferResults(false);
+
+Stopper le buffering nécessite quelques mises en garde:
+
+#. Vous ne pourrez plus itérer un ensemble de résultats plus d'une fois.
+#. Vous ne pourrez plus aussi itérer et mettre en cache les résultats.
+#. Le buffering ne peut pas être désactivé pour les requêtes qui chargent en
+   eager les associations hasMany ou belongsToMany, puisque ces types
+   d'association nécessitent le chargement en eager de tous les résultats
+   pour que les requêtes dépendentes puissent être générées. Cette
+   limitation n'est pas présente lorsque l'on utilise la stratégie ``subquery``
+   pour ces associations.
 
 .. warning::
 

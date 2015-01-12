@@ -175,6 +175,11 @@ The config reader classes have been renamed:
 - ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
 
+The config engines no longer support passing keys with file extension.
+
+A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
+been added.
+
 Object
 ------
 
@@ -452,7 +457,7 @@ for using the session object.
 * A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
   to allow reading and deleting session data in a single step.
 * The default value of :php:meth:`Cake\\Network\\Session::clear()`'s argument ``$renew`` has been changed
-from ``true`` to ``false``.
+  from ``true`` to ``false``.
 
 Network\\Http
 =============

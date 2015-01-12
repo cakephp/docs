@@ -1,7 +1,7 @@
 Behavior CounterCache
 #####################
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: CounterCacheBehavior
 

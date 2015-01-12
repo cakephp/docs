@@ -598,7 +598,7 @@ a few ways of doing this::
     $results = $query->all();
 
 You can use :doc:`any of the collection </core-libraries/collections>` methods
-on you query objects to pre-process or transform the results::
+on your query objects to pre-process or transform the results::
 
     // Use one of the collection methods.
     $ids = $query->map(function ($row) {

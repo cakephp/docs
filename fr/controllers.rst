@@ -85,7 +85,7 @@ que les règles d'héritage en orienté objet s'appliquent, les components et
 les helpers utilisés par un controller sont traités spécialement. Dans ces
 cas, les valeurs de la propriété de ``AppController`` sont fusionnées avec les
 tableaux de la classe de controller enfant. Les valeurs dans la classe enfant
-seront toujours surchargées par celles de ``AppController.``
+seront toujours surchargées par celles de ``AppController``.
 
 Déroulement d'une Requête
 =========================
@@ -118,17 +118,17 @@ RecipesController pourrait contenir les actions
     {
         public function view($id)
         {
-            //la logique de l'action va ici..
+            //la logique de l'action va ici.
         }
 
         public function share($customerId, $recipeId)
         {
-            //la logique de l'action va ici..
+            //la logique de l'action va ici.
         }
 
         public function search($query)
         {
-            //la logique de l'action va ici..
+            //la logique de l'action va ici.
         }
     }
 
@@ -138,7 +138,7 @@ nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
 Les actions du Controller utilisent généralement ``Controller::set()``
-pour créer un contexte que ``View`` utilise pour afficher la vue. Du
+pour créer un contexte que ``View`` utilise pour afficher la couche de vue. Du
 fait des conventions que CakePHP utilise, vous n'avez pas à créer et rendre
 la vue manuellement. Au lieu de ça, une fois qu'une action du controller est
 terminée, CakePHP va gérer le rendu et la livraison de la Vue.
@@ -226,10 +226,10 @@ Rendre une View
 
 .. php:method:: render(string $view, string $layout)
 
-La méthode ``render()`` est automatiquement appelée à
+La méthode ``Controller::render()`` est automatiquement appelée à
 la fin de chaque action exécutée par le controller. Cette méthode exécute
 toute la logique liée à la présentation (en utilisant les variables
-transmises via la méthode ``set()``, place le contenu
+transmises via la méthode ``Controller::set()``, place le contenu
 de la vue à l'intérieur de son ``View::$layout`` et transmet le
 tout à l'utilisateur final.
 
@@ -255,7 +255,7 @@ Bien que CakePHP appelle cette fonction automatiquement à la
 fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
 à ``false``), vous pouvez l'utiliser pour spécifier un fichier de vue
 alternatif en précisant le nom d'un fichier de vue en premier argument de la
-méthode ``render()``.
+méthode ``Controller::render()``.
 
 Si ``$view`` commence par un '/' on suppose que c'est un fichier de
 vue ou un élément dont le chemin est relatif au dossier ``src/Template``.
@@ -265,16 +265,16 @@ d'appels AJAX::
     // Rend un élément dans src/Template/Element/ajaxreturn.ctp
     $this->render('/Element/ajaxreturn');
 
-Le paramètre ``$layout`` de ``render()`` vous permet de spécifier le layout
-de la vue qui est rendue.
+Le paramètre ``$layout`` de ``Controller::render()`` vous permet de spécifier
+le layout de la vue qui est rendue.
 
 Rendre un Template de Vue Spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Dans votre controller, vous pourriez avoir envie de rendre une vue
 différente de celle rendue par défaut. Vous pouvez le faire en appelant
-directement ``render()``. Une fois que vous avez appelé
-``render()``, CakePHP n'essaiera pas de re-rendre la vue::
+directement ``Controller::render()``. Une fois que vous avez appelé
+``Controller::render()``, CakePHP n'essaiera pas de re-rendre la vue::
 
     namespace App\Controller;
 
@@ -342,7 +342,7 @@ Vous pouvez aussi passer des données à l'action::
 
     return $this->redirect(['action' => 'edit', $id]);
 
-Le second paramètre de la fonction ``redirect()``
+Le second paramètre de la fonction ``Controller::redirect()``
 vous permet de définir un code de statut HTTP accompagnant la redirection.
 Vous aurez peut-être besoin d'utiliser le code 301 (document
 déplacé de façon permanente) ou 303 (voir ailleurs), en fonction
@@ -376,7 +376,7 @@ Rediriger vers une Autre Action du Même Controller
 .. php:method:: setAction($action, $args...)
 
 Si vous devez rediriger l'action courante vers une autre action du *même*
-controller, vous pouvez utiliser ``setAction()`` pour mettre à jour l'objet
+controller, vous pouvez utiliser ``Controller::setAction()`` pour mettre à jour l'objet
 request, modifier le template de vue qui va être rendu et rediriger l'exécution
 vers l'action nommée::
 

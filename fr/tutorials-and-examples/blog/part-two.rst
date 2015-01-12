@@ -292,8 +292,9 @@ ArticlesController::
 
         public function add()
         {
-            $article = $this->Articles->newEntity($this->request->data);
+            $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
@@ -684,9 +685,11 @@ nous n'avons pas souhaité couvrir ici pour simplifier les choses. Utilisez
 le reste de ce manuel comme un guide pour développer des applications plus
 riches en fonctionnalités.
 
-Maintenant que vous avez créé une application CakePHP basique, vous êtes prêt
-pour les choses sérieuses. Commencez votre propre projet et lisez le reste du
-:doc:`Cookbook </index>` et l'`API <http://api.cakephp.org>`_.
+Maintenant que vous avez créé une application CakePHP basique, vous pouvez soit
+continuer vers :doc:`/tutorials-and-examples/blog/part-three`, ou commencer
+votre propre projet. Vous pouvez aussi lire attentivement les
+:doc:`/topics` ou l'`API <http://api.cakephp.org/3.0>` pour en
+apprendre plus sur CakePHP.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
 merci de regarder la page :doc:`/intro/where-to-get-help`

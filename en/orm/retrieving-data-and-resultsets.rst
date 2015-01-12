@@ -480,7 +480,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...) // Full conditions for filtering
+                return $q->where(...); // Full conditions for filtering
             }
         ]
     ]);
@@ -523,14 +523,14 @@ already familiar to you::
     // In a controller or table method.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Countries.name' => 'Japan']);
         }
     );
 
     // Bring unique articles that were commented by 'markstory' using passed variable
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
-        return $q->where(['username' => $username])
+        return $q->where(['username' => $username]);
     });
 
 .. note::
@@ -563,18 +563,29 @@ the resulting data from your queries.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
-set multiple times, or cache and iterate the results. If you need to disable
-buffering because you are working with a data set that does not fit into memory you
-can disable buffering on the query to stream results::
+set multiple times, or cache and iterate the results. If you need work with
+a data set that does not fit into memory you can disable buffering on the query
+to stream results::
 
     $query->bufferResults(false);
 
+Turning buffering off has a few caveats:
+
+#. You will not be able to iterate a result set more than once.
+#. You will also not be able to iterate & cache the results.
+#. Buffering cannot be disabled for queries that eager load hasMany or
+   belongsToMany associations, as these association types require eagerly
+   loading all results so that dependent queries can be generated. This
+   limitation is not present when using the ``subquery`` strategy for those
+   associations.
+
 .. warning::
 
-    Streaming results is not possible when using SQLite, or queries with eager
-    loaded hasMany or belongsToMany associations.
+    Streaming results will still allocate memory for the entire results when
+    using Postgres and SQLServer. This is due to limitations in PDO.
 
-Result sets allow you to easily cache/serialize or JSON encode results for API results::
+Result sets allow you to easily cache/serialize or JSON encode results for API
+results::
 
     // In a controller or table method.
     $results = $query->all();

@@ -11,11 +11,11 @@ et plus encore.
 Configuration
 =============
 
-Par convention, les connections à la base de données sont configurées dans
-``config/app.php``. L'information de la connection définie dans ce fichier
+Par convention, les connexions à la base de données sont configurées dans
+``config/app.php``. L'information de la connexion définie dans ce fichier
 se trouve dans :php:class:`Cake\\DataSource\\ConnectionManager` créant la
-configuration de la connection que votre application utilisera. Un exemple
-d'information sur la connection se trouve dans ``config/app.default.php``.
+configuration de la connexion que votre application utilisera. Un exemple
+d'information sur la connexion se trouve dans ``config/app.default.php``.
 Un exemple d'information sur la configuration ressemblera à ceci::
 
     'Datasources' => [
@@ -33,9 +33,9 @@ Un exemple d'information sur la configuration ressemblera à ceci::
         ]
     ],
 
-Ce qui est au-dessus va créer une connection 'default', avec les paramètres
-fournis. Vous pouvez définir autant de connections que vous le souhaitez dans
-votre fichier de configuration. Vous pouvez aussi définir le connections
+Ce qui est au-dessus va créer une connexion 'default', avec les paramètres
+fournis. Vous pouvez définir autant de connexions que vous le souhaitez dans
+votre fichier de configuration. Vous pouvez aussi définir des connexions
 supplémentaires à la volée en utilisant
 :php:meth:`Cake\\DataSource\\ConnectionManager::config()`. Un exemple de ceci
 serait::
@@ -66,8 +66,8 @@ d'environnement ou des fournisseurs :term:`PaaS`::
 Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
 supplémentaires en tant qu'arguments de query string.
 
-Par défaut, tous les objets Table vont utiliser la connection ``default``. Pour
-utiliser une autre connection, regardez
+Par défaut, tous les objets Table vont utiliser la connexion ``default``. Pour
+utiliser une autre connexion, regardez
 :ref:`configuring-table-connections`.
 
 Il y a un certain nombre de clés supportés dans la configuration de la base
@@ -85,7 +85,7 @@ driver
     de driver construite. Les exemples de noms de classe courts sont Mysql,
     Sqlite, Postgres, et Sqlserver.
 persistent
-    S'il faut utiliser ou non une connection persistante à la base de données.
+    S'il faut utiliser ou non une connexion persistante à la base de données.
 host
     Le nom d'hôte du serveur de base de données (ou une adresse IP).
 username
@@ -93,14 +93,14 @@ username
 password
     Le mot de passe pour le compte.
 database
-    Le nom de la base de données pour cette connection à utiliser.
+    Le nom de la base de données pour cette connexion à utiliser.
 port (*optionnel*)
     Le port TCP ou le socket Unix utilisé pour se connecter au serveur.
 encoding
     Indique le character set à utiliser lors de l'envoi d'instructions SQL au
     serveur. Ceci est par défaut à l'encodage par défaut de la base de données
     pout toutes les bases de données autres que DB2. Si vous souhaitez utiliser
-    l'encodage UTF-8 avec les connections mysql, vous devez utiliser
+    l'encodage UTF-8 avec les connexions mysql, vous devez utiliser
     'utf8' sans trait d'union.
 timezone
     La définition du timezone du Serveur.
@@ -122,7 +122,7 @@ ssl_ca
     seulement par MySQL).
 init
     Une liste de requêtes qui doivent être envoyées au serveur de la base de
-    données lorsque la connection est créée. Cette option est seulement
+    données lorsque la connexion est créée. Cette option est seulement
     supportée par le Serveur MySQL, Postgres, et SQL pour le moment.
 log
     Défini à ``true`` pour activer les logs des requêtes. Quand les requêtes
@@ -163,8 +163,8 @@ Gérer les Connections
 .. php:class:: ConnectionManager
 
 La classe ``ConnectionManager`` agit comme un registre pour accéder aux
-connections à la base de données que votre application a effectué. Elle fournit
-un endroit où les autres objets peuvent obtenir des références à des connections
+connexions à la base de données que votre application a effectué. Elle fournit
+un endroit où les autres objets peuvent obtenir des références à des connexions
 existantes.
 
 Accéder à des Connections
@@ -172,30 +172,30 @@ Accéder à des Connections
 
 .. php:staticmethod:: get($name)
 
-Une fois configurées, les connections peuvent être récupérées en utilisant
+Une fois configurées, les connexions peuvent être récupérées en utilisant
 :php:meth:`Cake\\Datasource\\ConnectionManager::get()`. Cette méthode va
-construire et charger une connection si elle n'a pas été déjà construite
-avant, ou retourner la connection connue existante::
+construire et charger une connexion si elle n'a pas été déjà construite
+avant, ou retourner la connexion connue existante::
 
     use Cake\Datasource\ConnectionManager;
 
     $conn = ConnectionManager::get('default');
 
-La tentative de chargement de connections qui n'existent pas va lancer une
+La tentative de chargement de connexions qui n'existent pas va lancer une
 exception.
 
 Créer des Connections à l'exécution
 -----------------------------------
 
 En utilisant ``config()`` et ``get()`` vous pouvez créer à tout moment de
-nouvelles connections qui ne sont pas défines dans votre fichier de
+nouvelles connexions qui ne sont pas défines dans votre fichier de
 configuration::
 
     ConnectionManager::config('my_connection', $config);
     $conn = ConnectionManager::get('my_connection');
 
 Consultez :ref:`database-configuration` pour plus d'informations sur la
-configuration de données utilisée lors de la création de connections.
+configuration de données utilisée lors de la création de connexions.
 
 .. _database-data-types:
 
@@ -335,7 +335,7 @@ Les Classes de Connection
 .. php:class:: Connection
 
 Les classes de Connection fournissent une interface simple pour intéragir avec
-les connections à la base de données d'une façon pratique. Elles ont pour
+les connexions à la base de données d'une façon pratique. Elles ont pour
 objectif d'être une interface plus abstraite à la couche de driver et de fournir
 des fonctionnalités pour l'exécution des requêtes, le logging des requêtes, et
 de faire des opérations transactionnelles.
@@ -417,7 +417,7 @@ démarrer l'itération sur l'ensemble des résultats::
 Utiliser les Transactions
 -------------------------
 
-Les objets de connection vous fournissent quelques manières simples pour que
+Les objets de connexion vous fournissent quelques manières simples pour que
 vous fassiez des transactions de base de données. La façon la plus basique de
 faire des transactions est avec les méthodes ``begin``, ``commit`` et
 ``rollback``, qui correspondent à leurs equivalents SQL::
@@ -429,7 +429,7 @@ faire des transactions est avec les méthodes ``begin``, ``commit`` et
 
 .. php:method:: transactional(callable $callback)
 
-En plus de cette interface, les instances de connection fournissent aussi la
+En plus de cette interface, les instances de connexion fournissent aussi la
 méthode ``transactional`` ce qui simplifie la gestion des appels
 begin/commit/rollback::
 
@@ -582,7 +582,7 @@ Faire des Logs de Requête
 =========================
 
 Le logs de Requête peuvent être activés lors de la configuration de votre
-connection en définissant l'option ``log`` à ``true``. Vous pouvez changer le
+connexion en définissant l'option ``log`` à ``true``. Vous pouvez changer le
 log de requête à la volée, en utilisant ``logQueries``::
 
     // Active les logs des requêtes.

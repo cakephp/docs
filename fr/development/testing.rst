@@ -630,8 +630,8 @@ la fixture::
 Dans l'exemple ci-dessus, les deux fixtures seront chargés à partir de
 ``tests/Fixture/blog/``.
 
-Tester les Models
-=================
+Tester les classes Table
+========================
 
 Disons que nous avons déjà notre table Articles définie dans
 ``src/Model/Table/ArticlesTable.php``, qui ressemble à ceci::
@@ -1272,17 +1272,16 @@ Une différence par rapport aux autres test est dans la première
 ligne où 'Blog.BlogPost' est importé. Vous devrez aussi préfixer
 les fixtures de votre plugin avec ``plugin.blog.blog_posts``::
 
-    namespace Blog\Test\TestCase\Model;
+    namespace Blog\Test\TestCase\Model\Table;
 
-    use Blog\Model\BlogPost;
+    use Blog\Model\Table\BlogPostsTable;
     use Cake\TestSuite\TestCase;
 
-    class BlogPostTest extends TestCase
+    class BlogPostsTableTest extends TestCase
     {
 
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_posts'];
-        public $BlogPost;
 
         public function testSomething()
         {
@@ -1290,9 +1289,38 @@ les fixtures de votre plugin avec ``plugin.blog.blog_posts``::
         }
     }
 
-Si vous voulez utiliser les fixures de plugin dans les app tests, vous pouvez
+Si vous voulez utiliser les fixtures de plugin dans les app tests, vous pouvez
 y faire référence en utilisant la syntaxe ``plugin.pluginName.fixtureName``
 dans le tableau ``$fixtures``.
+
+Avant d'utiliser des fixtures assurez-vous que votre ``phpunit.xml``
+contienne un listener (écouteur) pour les fixtures::
+
+    <!-- Configure un listener pour les fixtures -->
+    <listeners>
+            <listener
+            class="\Cake\TestSuite\Fixture\FixtureInjector"
+            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+                    <arguments>
+                            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+                    </arguments>
+            </listener>
+    </listeners>
+
+Vous devez également vous assurer que vos fixtures sont chargeables.
+vérifier que le code suivant est présent dans votre fichier ``composer.json`` ::
+
+    "autoload-dev": {
+        "psr-4": {
+            "MyPlugin\\Test\\": "tests",
+            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+        }
+    }
+
+.. note::
+
+    N'oubliez pas de lancer ``composer.phar dumpautoload`` lorsque vous modifiez
+    le mapping de l'autoloader.
 
 Générer des Tests avec Bake
 ===========================

@@ -347,54 +347,44 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
 .. note::
 
     Si vous avez besoin de valider les entities, vous devez utiliser les
-    méthodes comme :php:meth:`~Cake\\ORM\\Table::validate()` ou
-    :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles sont destinées à cela.
+    méthodes comme
+    :php:meth:`~Cake\\ORM\\Table::newEntity()`,
+    :php:meth:`~Cake\\ORM\\Table::newEntities()`,
+    :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
+    :php:meth:`~Cake\\ORM\\Table::patchEntities()` or
+    :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles ont été créées pour cela.
 
+Valider les Entities
+====================
 
-Validating Entities
-===================
+Alors que les entities sont validées quand elles sont sauvegardées, vous pouvez
+aussi vouloir valider les entities avant d'essayer de faire toute sauvegarde.
+La validation des entities avant la sauvegarde est faite automatiquement quand
+on utilise ``newEntity()``, ``newEntities()``, ``patchEntity()`` ou
+``patchEntities()``::
 
-While entities are validated as they are saved, you may also want to validate
-entities before attempting to do any saving. Validating entities before
-saving is often useful from the context of a controller, where you want to show
-all the error messages for an entity and its related data::
-
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $article = $articles->newEntity($this->request->data());
-    $valid = $articles->validate($article, [
-        'associated' => ['Comments', 'Author']
-    ]);
-    if ($valid) {
-        $articles->save($article, ['validate' => false]);
-    } else {
-        // Do work to show error messages.
+    // Dans la classe ArticlesController
+    $article = $this->Articles->newEntity($this->request->data());
+    if ($article->errors()) {
+        // Afficher les messages d'erreur ici.
     }
 
-The ``validate`` method returns a boolean indicating whether or not the entity
-& related entities are valid. If they are not valid, any validation errors will
-be set on the entities that had validation errors. You can use the
-:php:meth:`~Cake\\ORM\\Entity::errors()` to read any validation errors.
+De la même manière, quand vous avez besoin de pré-valider plusieurs entities
+en une fois, vous pouvez utiliser la méthode ``newEntities()``::
 
-When you need to pre-validate multiple entities at a time, you can use the
-``validateMany`` method::
-
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $entities = $articles->newEntities($this->request->data());
-    if ($articles->validateMany($entities)) {
-        foreach ($entities as $entity) {
-            $articles->save($entity, ['validate' => false]);
+    // Dans la classe ArticlesController
+    $entities = $this->Articles->newEntities($this->request->data());
+    foreach ($entities as $entity) {
+        if (!$entity->errors()) {
+                $this->Articles->save($entity);
         }
-    } else {
-        // Do work to show error messages.
     }
 
-Much like the ``newEntity()`` method, ``validate()`` and ``validateMany()``
-methods allow you to specify which associations are validated, and which
-validation sets to apply using the ``options`` parameter::
+Les méthodes ``newEntity()``, ``patchEntity()`` et ``newEntities()``
+vous permettent de spécifier les associations à valider, et les ensembles de
+validation à appliquer en utilisant le paramètre ``options``::
 
-    $valid = $articles->validate($article, [
+    $valid = $this->Articles->newEntity($article, [
       'associated' => [
         'Comments' => [
           'associated' => ['User'],
@@ -403,6 +393,14 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
+La validation est habituellement utilisée pour les formulaires ou les
+interfaces utilisateur, et ainsi elle n'est pas limitée seulement à la
+validation des colonnes dans le schéma de la table. Cependant maintenir
+l'intégrité des données selon d'où elles viennent est important. Pour
+résoudre ce problème, CakePHP dispose d'un deuxième niveau de validation
+qui est appelé "règles d'application". Vous pouvez en savoir plus en
+consultant la section
+:ref:`Appliquer les Règles d'Application <application-rules>`.
 
 Règles de Validation du Cœur
 =============================
