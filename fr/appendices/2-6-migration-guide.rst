@@ -38,9 +38,9 @@ ConsoleOptionParser
 Shell
 -----
 
-- ``overwrite()`` a été ajoutée pour permettre de générer des progress bars
-  ou pour éviter de générer de nombreuses lignes en remplçant le texte qui a
-  déjà été affiché à l'écran.
+- ``overwrite()`` a été ajoutée pour permettre de générer des barres de
+  progression ou pour éviter de générer de nombreuses lignes en remplaçant le
+  texte qui a déjà été affiché à l'écran.
 
 Controller
 ==========
@@ -120,7 +120,7 @@ CakeTime
 --------
 
 - ``CakeTime::timeAgoInWords()`` supporte maintenant les formats de date
-  absolus compatible avec ``strftime()``. Cela facilite la localisation des
+  absolus compatibles avec ``strftime()``. Cela facilite la localisation des
   formats de date.
 
 Hash
@@ -148,7 +148,7 @@ HtmlHelper
 
 - :php:meth:`HtmlHelper::css()` a une nouvelle option ``once``. Elle fonctionne
   de la même manière que l'option ``once`` de ``HtmlHelper::script()``. La
-   valeur par défaut est ``false`` pour maintenir une compatibilité rétroactive.
+  valeur par défaut est ``false`` pour maintenir une compatibilité rétroactive.
 - L'argument ``$confirmMessage`` de :php:meth:`HtmlHelper::link()` a été
   déprécié. Vous devez utiliser la clé ``confirm`` à la place dans ``$options``
   pour spécifier le message.
