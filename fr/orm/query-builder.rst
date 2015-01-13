@@ -836,17 +836,17 @@ Lors de la création de ``join`` à la main, et l'utilisation d'un tableau basé
 sur les conditions, vous devez fournir les types de données pour chaque colonne
 dans les conditions du ``join``. En fournissant les types de données pour les
 conditions de ``join``, l'ORM peut convertir correctement les types de données en
-code SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
-``innerJoin()`` to create joins::
+code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
+``leftJoin()`` et ``innerJoin()`` pour créer les jointures::
 
-    // Join with an alias and string conditions
+    // Jointure avec un alias et des conditions
     $query = $articles->find();
     $query->leftJoin(
         ['Authors' => 'authors'],
         ['Authors.id = Articles.author_id']
     );
 
-    // Join with an alias, array conditions, and types
+    // Jointure avec un alias, tableau de conditions, et de types
     $query = $articles->find();
     $query->innerJoin(
         ['Authors' => 'authors'],
