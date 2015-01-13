@@ -20,8 +20,8 @@ pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 - La méthode ``execute()`` de query est appelée. Elle retourne l'objet
   d'instruction sous-jacente, et va être utilisée avec les requêtes
   insert/update/delete.
-- La méthode ``first()`` de query est appelée. Elle retourne le premier résultat 
-  correspondant à l'instruction ``SELECT`` (ajoute LIMIT 1 à la requête). 
+- La méthode ``first()`` de query est appelée. Elle retourne le premier résultat
+  correspondant à l'instruction ``SELECT`` (ajoute LIMIT 1 à la requête).
 - La méthode ``all()`` de query est appelée. Elle retourne l'ensemble de
   résultats et peut seulement être utilisée avec les instructions ``SELECT``.
 - La méthode ``toArray()`` de query est appelée.
@@ -836,7 +836,27 @@ Lors de la création de ``join`` à la main, et l'utilisation d'un tableau basé
 sur les conditions, vous devez fournir les types de données pour chaque colonne
 dans les conditions du ``join``. En fournissant les types de données pour les
 conditions de ``join``, l'ORM peut convertir correctement les types de données en
-code SQL.
+code SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
+``innerJoin()`` to create joins::
+
+    // Join with an alias and string conditions
+    $query = $articles->find();
+    $query->leftJoin(
+        ['Authors' => 'authors'],
+        ['Authors.id = Articles.author_id']
+    );
+
+    // Join with an alias, array conditions, and types
+    $query = $articles->find();
+    $query->innerJoin(
+        ['Authors' => 'authors'],
+        [
+            'Authors.promoted' => true,
+            'Authors.created' => new DateTime('-5 days'),
+            'Authors.id = Articles.author_id'
+        ],
+        ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']
+    );
 
 Insérer des Données
 ===================
