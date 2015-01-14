@@ -95,6 +95,13 @@ configuration. The built-in configurations are:
 * ``database`` - Use the built-in database sessions. See below for more information.
 * ``cache`` - Use the built-in cache sessions. See below for more information.
 
+The accepted values are:
+
+* - defaults: either 'php', 'database', 'cache' or 'cake' as explained above.
+* - handler: An array containing the handler configuration
+* - ini: A list of php.ini directives to set before the session starts.
+* - timeout: The time in minutes the session should stay active
+
 Session Handlers
 ----------------
 
