@@ -65,7 +65,7 @@ O painel History é uma das mais frequentemente confundidas características do
 DebugKit. Ele oferece uma forma de visualizar os dados da barra de ferramentas
 de requisições anteriores, incluindo erros e redirecionamentos.
 
-.. figure:: /_static/debug-kit/history-panel.png
+.. figure:: /_static/img/debug-kit/history-panel.png
     :alt: Screenshot do painel History no DebugKit.
 
 Como você pode ver, o painel contém uma lista de requisições. Na esquerda você
@@ -74,7 +74,7 @@ vai carregar os dados do painel para aquela requisição. Quando os dados são c
 os títulos do painel vão sofrer uma transição para indicar que dados alternativos foram
 carregados.
 
-.. figure:: /_static/debug-kit/history-panel-use.gif
+.. figure:: /_static/img/debug-kit/history-panel-use.gif
     :alt: Video do painel History em ação.
 
 Desenvolvendo seus próprios painéis
@@ -107,41 +107,41 @@ Perceba que painéis customizados são necessários para extender a classe ``Deb
 Callbacks
 ---------
 
-By default Panel objects have two callbacks, allowing them to hook into the
-current request. Panels subscribe to the ``Controller.initialize`` and
-``Controller.shutdown`` events. If your panel needs to subscribe to additional
-events, you can use the ``implementedEvents`` method to define all of the events
-your panel is interested in.
+Por padrão objetos do painel possuem dois callbacks, permitindo-lhes acoplar-se
+na requisição atual. Painéis inscrevem-se aos eventos ``Controller.initialize`` e
+``Controller.shutdown``. Se o seu painel precisa inscrever-se a eventos adicionais,
+você pode usar o método ``implementedEvents`` para definir todos os eventos
+que o seu painel possa estar interessado.
 
-You should refer to the built-in panels for some examples on how you can build
-panels.
+Você deveria estudar os painéis nativos para absorver alguns exemplos de como
+construir painéis.
 
-Panel Elements
---------------
+Elementos do painel
+-------------------
 
-Each Panel is expected to have a view element that renders the content from the
-panel. The element name must be the underscored inflection of the class name.
-For example ``SessionPanel`` has an element named ``session_panel.ctp``, and
-SqllogPanel has an element named ``sqllog_panel.ctp``. These elements should be
-located in the root of your ``src/Template/Element`` directory.
+Cada painel deve ter um elemento view que renderiza o conteúdo do mesmo.
+O nome do elemento deve ser sublinhado e flexionado a partir do nome da classe.
+Por exemplo ``SessionPanel`` possui um elemento nomeado ``session_panel.ctp``, e
+SqllogPanel possui um elemento nomeado ``sqllog_panel.ctp``. Estes elementos devem
+estar localizados na raiz do seu diretório ``src/Template/Element``.
 
-Custom Titles and Elements
---------------------------
+Títulos personalizados e Elementos
+----------------------------------
 
-Panels should pick up their title and element name by convention. However, if
-you need to choose a custom element name or title, you can define methods to
-customize your panel's behavior:
+Os painéis devem pegar o seu título e nome do elemento por convenção. No entanto, se
+você precisa escolher um nome de elemento personalizado ou título, você pode definir métodos para
+customizar o comportamento do seu painel:
 
-- ``title()`` - Configure the title that is displayed in the toolbar.
-- ``elementName()`` Configure which element should be used for a given panel.
+- ``title()`` - Configure o título que é exibido na barra de ferramentas.
+- ``elementName()`` - Configure qual elemento deve ser utilizada para um determinado painel.
 
-Panels in Other Plugins
------------------------
+Painéis em outros plugins
+-------------------------
 
-Panels provided by :doc:`/plugins` work almost entirely the same as other
-plugins, with one minor difference:  You must set ``public $plugin`` to be the
-name of the plugin directory, so that the panel's Elements can be located at
-render time::
+Painéis disponibilizados por :doc:`/plugins` funcionam quase que totalmente
+como outros plugins, com uma pequena diferença: Você deve definir ``public $plugin``
+para ser o nome do diretório do plugin, com isso os elementos do painel poderão ser encontrados
+no momento de renderização::
 
     namespace MyPlugin\Panel;
 
@@ -153,13 +153,13 @@ render time::
             ...
     }
 
-To use a plugin or app panel, update your application's DebugKit configuration
-to include the panel::
+Para usar um plugin ou painel da aplicação, atualize a configuração do DebugKit de
+sua aplicação para incluir o painel::
 
     Configure::write(
         'DebugKit.panels',
         array_merge(Configure::read('DebugKit.panels'), ['MyCustomPanel'])
     );
 
-The above would load all the default panels as well as the custom panel from
-``MyPlugin``.
+O código acima deve carregar todos os painéis padrão tanto como os outros painéis
+customizados do ``MyPlugin``.
