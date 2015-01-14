@@ -168,17 +168,19 @@ Plugin
 Configure
 ---------
 
-The config reader classes have been renamed:
-
-- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
-- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
-- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
+- ``Cake\Configure\PhpReader`` renamed to
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
+- ``Cake\Configure\IniReader`` renamed to
+  :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
+- ``Cake\Configure\ConfigReaderInterface`` renamed to
+  :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
-
-The config engines no longer support passing keys with file extension.
-
-A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
-been added.
+- The config engines no longer support passing keys with file extension.
+- Setting a ``$config`` variable in PHP config file is deprecated.
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
+  file to return an array.
+- A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
+  been added.
 
 Object
 ------

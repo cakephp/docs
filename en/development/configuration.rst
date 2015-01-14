@@ -185,7 +185,7 @@ configured. CakePHP provides two Configure variables to setup additional paths
 for these resources. In your ``config/app.php`` you can set these
 variables::
 
-    $config = [
+    return [
         // More configuration
         'App' => [
             'paths' => [
@@ -344,7 +344,8 @@ Loading Configuration Files
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
 
-Once you've attached a config engine to Configure you can load configuration files::
+Once you've attached a config engine to Configure you can load configuration
+files::
 
     // Load my_file.php using the 'default' engine object.
     Configure::load('my_file', 'default');
@@ -491,11 +492,11 @@ PHP Configuration Files
 .. php:class:: PhpConfig
 
 Allows you to read configuration files that are stored as plain PHP files.
-You can read either files from your ``config`` or from plugin configs
-directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
-variable. An example configuration file would look like::
+You can read either files from your app's ``config`` or from plugin configs
+directories by using :term:`plugin syntax`. Files **must** return an array.
+An example configuration file would look like::
 
-    $config = [
+    return [
         'debug' => 0,
         'Security' => [
             'salt' => 'its-secret'
@@ -505,9 +506,8 @@ variable. An example configuration file would look like::
         ]
     ];
 
-Files without ``$config`` will cause an :php:exc:`ConfigureException`
-
-Load your custom configuration file by inserting the following in ``config/bootstrap.php``::
+Load your custom configuration file by inserting the following in
+``config/bootstrap.php``::
 
     Configure::load('customConfig');
 
