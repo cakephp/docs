@@ -15,16 +15,7 @@ Session Configuration
 Session configuration is stored in ``Configure`` under the top
 level ``Session`` key, and a number of options are available:
 
-* ``Session.cookie`` - Change the name of the session cookie.
-
-* ``Session.cookiePath`` - The url path for which session cookie is set.
-  Maps to the ``session.cookie_path`` php.ini config. Defaults to base path of app.
-
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
-
-* ``Session.cookieTimeout`` - The number of *minutes* before the session cookie expires.
-  If this is undefined, it will use the same value as ``Session.timeout``.
-  This affects the session cookie, and is handled by PHP itself.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
   configurations as a base for your session configuration. See below for the
@@ -52,16 +43,40 @@ this::
     ]);
 
 The session cookie path defaults to app's base path. To change this you can use
-the ``cookiePath`` config. For e.g. if you want your session to persist across
+the ``session.cookie_path`` ini value. For e.g. if you want your session to persist across
 all subdomains you can do::
 
     Configure::write('Session', [
         'defaults' => 'php',
-        'cookiePath' => '/',
         'ini' => [
+            'session.cookie_path' => '/',
             'session.cookie_domain' => '.yourdomain.com'
         ]
     ]);
+
+By default PHP sets the session cookie to expire as soon as the browser is
+closed, regardless of the configured ``Session.timeout`` value. This time is
+controlled by the ``session.cookie_lifetime`` ini value and can be configured
+this way::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            // Invalidate the cookie after 30 minutes without visiting
+            // any page on the site.
+            'session.cookie_lifetime' => 1800
+        ]
+    ]);
+
+The difference between ``Session.timeout`` and the ``session.cookie_lifetime``
+value is that the latter relies on the client telling the truth about the
+cookie. If you require stricter timeout checking, without relying on what the
+client reports as inactivity time, you can use ``Session.timeout``.
+
+Please note that ``Session.timeout`` corresponds to the total time of
+inactivity of a user (i.e. the time without visiting any page where the session
+is used), and does not limit the total amount of minutes a user can stay
+on the site.
 
 Built-in Session Handlers & Configuration
 =========================================
@@ -194,6 +209,8 @@ it to control settings like ``session.gc_divisor``::
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
+            'session.cookie_name' => 'MyCookie',
+            'session.cookie_lifetime' => 1800, // Valid for 30 minutes
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
         ]
