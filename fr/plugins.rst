@@ -506,7 +506,7 @@ du component. Par exemple::
     }
 
     // dans vos controllers:
-    public function intialize()
+    public function initialize()
     {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');

@@ -141,7 +141,7 @@ controller, vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController
     {
-        public function intialize()
+        public function initialize()
         {
             parent::initialize();
             $this->loadComponent('Flash');

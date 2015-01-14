@@ -453,7 +453,7 @@ Dans la méthode ``initialize()`` de votre Controller, vous pouvez définir
 tout component que vous voulez charger et toute donnée de configuration
 pour eux::
 
-    public function intialize()
+    public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Csrf');
