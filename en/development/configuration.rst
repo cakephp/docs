@@ -344,7 +344,8 @@ Loading Configuration Files
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
 
-Once you've attached a config engine to Configure you can load configuration files::
+Once you've attached a config engine to Configure you can load configuration
+files::
 
     // Load my_file.php using the 'default' engine object.
     Configure::load('my_file', 'default');
@@ -505,7 +506,8 @@ An example configuration file would look like::
         ]
     ];
 
-Load your custom configuration file by inserting the following in ``config/bootstrap.php``::
+Load your custom configuration file by inserting the following in
+``config/bootstrap.php``::
 
     Configure::load('customConfig');
 

@@ -202,7 +202,7 @@ un autoloader configuré. CakePHP fournit deux variables de configuration pour
 configurer des chemins supplémentaires pour vos ressources. Dans votre
 ``config/app.php``, vous pouvez définir les variables::
 
-    $config = [
+    return [
         // Plus de configuration
         'App' => [
             'paths' => [
@@ -524,13 +524,13 @@ Fichiers de Configuration PHP
 
 .. php:class:: PhpConfig
 
-Vous permet de lire les fichiers de configuration qui sont stockés en
-fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
-``config``, soit des répertoires configs du plugin en utilisant la
-:term:`syntaxe de plugin`. Les fichiers **doivent** contenir une variable
-``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
+Vous permet de lire les fichiers de configuration de votre application qui
+sont stockés en fichiers PHP simples. Vous pouvez lire soit les fichiers à
+partir de votre ``config``, soit des répertoires configs du plugin en utilisant
+la :term:`syntaxe de plugin`. Les fichiers **doivent** retourner un tableau.
+Un fichier de configuration d'exemple ressemblerait à cela::
 
-    $config = [
+    return [
       	'debug' => 0,
       	'Security' => [
       	    'salt' => 'its-secret'
@@ -540,10 +540,7 @@ fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
       	]
     ];
 
-Des fichiers sans ``$config`` entraîneraient une
-:php:exc:`ConfigureException`.
-
-Charger votre fichier de configuration personnalisé en insérant ce qui suit
+Chargez votre fichier de configuration personnalisé en insérant ce qui suit
 dans ``config/bootstrap.php``::
 
     Configure::load('customConfig');
