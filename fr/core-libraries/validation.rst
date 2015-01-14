@@ -100,7 +100,7 @@ Un exemple de ces méthodes est le suivant::
 
     $validator->allowEmpty('published')
         ->notEmpty('title', 'Un titre est nécessaire')
-        ->notEmpty('body', 'Un titre est nécessaire', 'create')
+        ->notEmpty('body', 'Un body est nécessaire', 'create')
         ->allowEmpty('header_image', 'update');
 
 Champs Uniques

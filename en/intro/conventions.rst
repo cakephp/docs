@@ -38,9 +38,9 @@ equals the controller name so:
 *  /red_apples
 
 Will all resolve to the index of the RedApples controller. However,
-the convention is that your URLs are lowercase and dashed using the ``DashedRoute`` class,
-therefore ``/red-apples/go-pick`` is the correct form to access the
-``RedApplesController::goPick()`` action.
+the convention is that your URLs are lowercase and dashed using the
+``DashedRoute`` class, therefore ``/red-apples/go-pick`` is the correct form
+to access the ``RedApplesController::goPick()`` action.
 
 For more information on CakePHP URLs and parameter handling, see
 :ref:`routes-configuration`.
