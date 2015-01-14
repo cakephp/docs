@@ -288,7 +288,7 @@ management a piece of cake as your AROs become transparently tied
 to your ``users`` and ``groups`` tables. So anytime you create or
 delete a user/group the Aro table is updated.
 
-Our controllers and models are now prepped for adding some initial
+Our controllers and models are now prepared for adding some initial
 data, and our ``Group`` and ``User`` models are bound to the Acl
 table. So add some groups and users using the baked forms by
 browsing to http://example.com/groups/add and
