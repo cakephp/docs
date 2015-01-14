@@ -132,7 +132,7 @@ La liste d'options supportées par find() sont:
 - ``fields`` limite les champs chargés dans l'entity. Charger seulement quelques
   champs peut faire que les entities se comportent de manière incorrecte.
 - ``group`` ajoute une clause GROUP BY à votre requête. C'est utile quand vous
-  utilisez les fonctions d'aggrégation.
+  utilisez les fonctions d'agrégation.
 - ``having`` ajoute une clause HAVING à votre requête.
 - ``join`` définit les jointures personnalisées supplémentaires.
 - ``order`` ordonne l'ensemble des résultats.
@@ -611,9 +611,9 @@ Stopper le buffering nécessite quelques mises en garde:
 
 .. warning::
 
-    Les résultats de streaming ne sont pas possibles quand vous utilisez
-    SQLite, ou avec les requêtes des associations hasMany ou belongsToMany
-    qui sont chargées en eager.
+    Les résultats de streaming alloueront toujours l'espace mémoire nécessaire
+    pour les résultats complets lorsque vous utilisez Postgres et SQLServer.
+    Ceci est dû à des limitations dans PDO.
 
 Les ensembles de résultat vous permettent de mettre en cache/serializer ou
 d'encoder en JSON les résultats pour les résultats d'une API::
