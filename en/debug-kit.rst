@@ -65,7 +65,7 @@ The history panel is one of the most frequently misunderstood features of
 DebugKit. It provides a way to view toolbar data from previous requests,
 including errors and redirects.
 
-.. figure:: /_static/debug-kit/history-panel.png
+.. figure:: /_static/img/debug-kit/history-panel.png
     :alt: Screenshot of the history panel in debug kit.
 
 As you can see, the panel contains a list of requests. On the left you can see
@@ -73,7 +73,7 @@ a dot marking the active request. Clicking any request data will load the panel
 data for that request. When historical data is loaded the panel titles will
 transition to indicate that alternative data has been loaded.
 
-.. figure:: /_static/debug-kit/history-panel-use.gif
+.. figure:: /_static/img/debug-kit/history-panel-use.gif
     :alt: Video of history panel in action.
 
 Developing Your Own Panels
