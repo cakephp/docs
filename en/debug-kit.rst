@@ -132,7 +132,7 @@ you need to choose a custom element name or title, you can define methods to
 customize your panel's behavior:
 
 - ``title()`` - Configure the title that is displayed in the toolbar.
-- ``elementName()`` Configure which element should be used for a given panel.
+- ``elementName()`` - Configure which element should be used for a given panel.
 
 Panels in Other Plugins
 -----------------------
