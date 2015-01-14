@@ -56,8 +56,7 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur:
     }
 
 Créons aussi notre UsersController, le contenu suivant correspond à la
-classe `cuisinée` basique UsersController en utilisant les utilitaires
-de génération de code fournis par CakePHP::
+classe obtenue grâce à l'utilitaire de génération de code fournis par CakePHP::
 
     // src/Controller/UsersController.php
 
@@ -106,8 +105,8 @@ de génération de code fournis par CakePHP::
 
     }
 
-De la même façon, nous avons créé les vues pour nos articles de blog ou en
-utilisant l'outil de génération de code, nous pouvons ajouter les vues. Dans
+De la même façon, nous avons créé les vues pour nos articles de blog en
+utilisant l'outil de génération de code. Dans
 le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
 
 .. code-block:: php
