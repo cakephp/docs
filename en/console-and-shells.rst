@@ -377,9 +377,9 @@ they are interested in by setting the correct flag when calling the shell.
 :php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
 * QUIET - Only absolutely important information should be marked for quiet output.
-* NORMAL - The default level, and normal usage
+* NORMAL - The default level, and normal usage.
 * VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
-  for debugging as VERBOSE
+  for debugging as VERBOSE.
 
 You can mark output as follows::
 
