@@ -17,19 +17,8 @@ Session Configuration
 La configuration de Session est stockée dans ``Configure`` dans la clé de top
 niveau ``Session``, et un certain nombre d'options sont disponibles:
 
-* ``Session.cookie`` - Change le nom du cookie de session.
-
-* ``Session.cookiePath`` - Le chemin url path pour lequel le cookie session est
-  défini. Map vers la config ``session.cookie_path`` de php.ini. Par défaut le
-  chemin racine de l'app.
-
 * ``Session.timeout`` - Le nombre de *minutes* avant que le gestionnaire de
   session de CakePHP ne fasse expirer la session.
-
-* ``Session.cookieTimeout`` - Le nombre de *minutes* avant que le cookie de
-  session n'expire. S'il n'est pas défini, il utilisera la même valeur que
-  ``Session.timeout``. Cela affecte le cookie de session, et est géré
-  directement par PHP.
 
 * ``Session.defaults`` - Vous permet d'utiliser les configurations de session
   intégrées par défaut comme une base pour votre configuration de session.
@@ -59,18 +48,41 @@ désactiver cela::
         ]
     ]);
 
-Les chemins des cookies de Session sont par défaut ``/``. Pour changer
-cela, vous pouvez utiliser la configuration ``cookiePath``. Par exemple,
-si vous voulez que votre session persiste à travers tous les sous-domaines,
-vous pouvez faire ceci::
+The session cookie path defaults to app's base path. To change this you can use
+the ``session.cookie_path`` ini value. For e.g. if you want your session to
+persist across all subdomains you can do::
 
     Configure::write('Session', [
         'defaults' => 'php',
-        'cookiePath' => '/',
         'ini' => [
+            'session.cookie_path' => '/',
             'session.cookie_domain' => '.yourdomain.com'
         ]
     ]);
+
+By default PHP sets the session cookie to expire as soon as the browser is
+closed, regardless of the configured ``Session.timeout`` value. The cookie
+timeout controlled by the ``session.cookie_lifetime`` ini value and can be
+configured using::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            // Invalidate the cookie after 30 minutes without visiting
+            // any page on the site.
+            'session.cookie_lifetime' => 1800
+        ]
+    ]);
+
+The difference between ``Session.timeout`` and the ``session.cookie_lifetime``
+value is that the latter relies on the client telling the truth about the
+cookie. If you require stricter timeout checking, without relying on what the
+client reports, you should use ``Session.timeout``.
+
+Please note that ``Session.timeout`` corresponds to the total time of
+inactivity for a user (i.e. the time without visiting any page where the session
+is used), and does not limit the total amount of minutes a user can stay
+on the site.
 
 Gestionnaires de Session intégrés & Configuration
 =================================================
@@ -222,6 +234,8 @@ pour contrôler les configurations comme ``session.gc_divisor``::
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
+            'session.cookie_name' => 'MyCookie',
+            'session.cookie_lifetime' => 1800, // Valid for 30 minutes
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
         ]
@@ -257,7 +271,7 @@ devrait ressembler à::
             parent::__construct();
         }
 
-        // lire des données de session.
+        // Lire des données de session.
         public function read($id)
         {
             $result = Cache::read($id, $this->cacheKey);
@@ -267,21 +281,21 @@ devrait ressembler à::
             return parent::read($id);
         }
 
-        // écrire des données dans session
+        // Ecrire des données dans session
         public function write($id, $data)
         {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
-        // détruire une session.
+        // Détruire une session.
         public function destroy($id)
         {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
-        // retire des sessions expirées.
+        // Retire des sessions expirées.
         public function gc($expires = null)
         {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
