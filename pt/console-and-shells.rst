@@ -212,9 +212,9 @@ vai chamar esse método quando a task é invocada. Uma classe task se parece com
 Uma shell também pode prover acesso a suas tasks como propriedades, que fazem tasks
 serem ótimas para criar punhados de funcionalidade reutilizáveis similares a :doc:`/controllers/components`::
 
-    // Found in src/Shell/SeaShell.php
+    // Localizado em src/Shell/SeaShell.php
     class SeaShell extends Shell {
-        // Found in src/Shell/Task/SoundTask.php
+        // Localizado em src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
         public function main() {
@@ -248,43 +248,43 @@ Carregará e retornará uma instância ProjectTask. Você pode carregar tasks de
 
 .. _invoking-other-shells-from-your-shell:
 
-Invoking Other Shells from Your Shell
-=====================================
+Invocando outras Shells a partir da sua Shell
+=============================================
 
 .. php:method:: dispatchShell($args)
 
-There are still many cases where you will want to invoke one shell from another though.
-``Shell::dispatchShell()`` gives you the ability to call other shells by providing the
-``argv`` for the sub shell. You can provide arguments and options either
-as var args or as a string::
+Existem ainda muitos casos onde você vai querer invocar uma shell a partir de outra.
+``Shell::dispatchShell()`` lhe dá a habilidade de chamar outras shells ao providenciar o
+``argv`` para a sub shell. Você pode providenciar argumentos e opções tanto como variáveis ou
+como strings::
 
-    // As a string
+    // Como uma string
     $this->dispatchShell('schema create Blog --plugin Blog');
 
-    // As an array
+    // Como um array
     $this->dispatchShell('schema', 'create', 'Blog', '--plugin', 'Blog');
 
-The above shows how you can call the schema shell to create the schema for a plugin
-from inside your plugin's shell.
+O conteúdo acima mostra como você pode chamar a shell schema para criar o schema
+de um plugin de dentro da shell do próprio.
 
-Getting User Input
-==================
+Recenendo Input de usuários
+===========================
 
 .. php:method:: in($question, $choices = null, $defaut = null)
 
-When building interactive console applications you'll need to get user input.
-CakePHP provides an easy way to do this::
+Quando construir aplicações interativas pelo console você irá precisar receber
+inputs dos usuários. CakePHP oferece uma forma fácil de fazer isso::
 
-    // Get arbitrary text from the user.
+    // Receber qualquer texto dos usuários.
     $color = $this->in('What color do you like?');
 
-    // Get a choice from the user.
+    // Receber uma escolha dos usuários.
     $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
 
-Selection validation is case-insensitive.
+A validação de seleção é case-insensitive.
 
-Creating Files
-==============
+Criando Arquivos
+================
 
 .. php:method:: createFile($path, $contents)
 
