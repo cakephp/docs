@@ -331,10 +331,10 @@ Console Output
 The ``Shell`` class provides a few methods for outputting content::
 
     // Write to stdout
-    $this->out('normal message');
+    $this->out('Normal message');
 
     // Write to stderr
-    $this->err('error message');
+    $this->err('Error message');
 
     // Write to stderr and stop the process
     $this->error('Fatal error');
