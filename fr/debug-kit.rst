@@ -80,8 +80,10 @@ pour cette requête. Quand les données historiques sont chargées, les titres
 du panneau seront colorés pour indiquer que des données alternatives ont été
 chargées.
 
-.. figure:: /_static/img/debug-kit/history-panel-use.gif
-    :alt: Video du panneau historique en action.
+.. only:: html or epub
+
+  .. figure:: /_static/img/debug-kit/history-panel-use.gif
+      :alt: Video du panneau historique en action.
 
 Développer vos Propres Panneaux
 ===============================

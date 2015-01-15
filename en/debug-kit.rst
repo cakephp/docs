@@ -73,8 +73,10 @@ a dot marking the active request. Clicking any request data will load the panel
 data for that request. When historical data is loaded the panel titles will
 transition to indicate that alternative data has been loaded.
 
-.. figure:: /_static/img/debug-kit/history-panel-use.gif
-    :alt: Video of history panel in action.
+.. only:: html or epub
+
+  .. figure:: /_static/img/debug-kit/history-panel-use.gif
+      :alt: Video of history panel in action.
 
 Developing Your Own Panels
 ==========================

@@ -74,8 +74,10 @@ vai carregar os dados do painel para aquela requisição. Quando os dados são c
 os títulos do painel vão sofrer uma transição para indicar que dados alternativos foram
 carregados.
 
-.. figure:: /_static/img/debug-kit/history-panel-use.gif
-    :alt: Video do painel History em ação.
+.. only:: html or epub
+
+    .. figure:: /_static/img/debug-kit/history-panel-use.gif
+        :alt: Video do painel History em ação.
 
 Desenvolvendo seus próprios painéis
 ===================================
