@@ -281,54 +281,53 @@ inputs dos usuários. CakePHP oferece uma forma fácil de fazer isso::
     // Receber uma escolha dos usuários.
     $selection = $this->in('Red or Green?', ['R', 'G'], 'R');
 
-A validação de seleção é case-insensitive.
+A validação de seleção é insensitiva a maiúsculas / minúsculas.
 
 Criando Arquivos
 ================
 
 .. php:method:: createFile($path, $contents)
 
-Many Shell applications help automate development or deployment tasks. Creating
-files is often important in these use cases. CakePHP provides an easy way to
-create a file at a given path::
+Muitas aplicações Shell auxiliam tarefas de desenvolvimento e implementação. Criar
+arquivos é frequentemente importante nestes casos de uso. O CakePHP oferece uma forma
+fácil de criar um arquivo em um determinado diretório::
 
     $this->createFile('bower.json', $stuff);
 
-If the Shell is interactive, a warning will be generated, and the user asked if
-they want to overwrite the file if it already exists.  If the shell's
-interactive property is ``false``, no question will be asked and the file will
-simply be overwritten.
+Se a Shell for interativa, um alerta vai ser gerado, e o usuário questionado se
+ele quer sobreescrever o arquivo caso já exista. Se a propriedade de interação da shell
+for ``false``, nenhuma questão será disparada e o arquivo será simplesmente sobreescrito.
 
-Console Output
-==============
+Saída de dados do Console
+=========================
 
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
 
-The ``Shell`` class provides a few methods for outputting content::
+A classe ``Shell`` oferece alguns métodos para direcionar conteúdo::
 
-    // Write to stdout
-    $this->out('normal message');
+    // Escreve para stdout
+    $this->out('Normal message');
 
-    // Write to stderr
-    $this->err('error message');
+    // Escreve para stderr
+    $this->err('Error message');
 
-    // Write to stderr and stop the process
+    // Escreve para stderr e para o processo
     $this->error('Fatal error');
 
-Shell also includes methods for clearing output, creating blank lines, or
-drawing a line of dashes::
+A Shell também inclui métodos para limpar a saída de dados, criando linhas
+em branco, ou desenhando uma linha de traços::
 
-    // Output 2 newlines
+    // Exibe 2 linhas novas
     $this->out($this->nl(2));
 
-    // Clear the user's screen
+    // Limpa a tela do usuário
     $this->clear();
 
-    // Draw a horizontal line
+    // Desenha uma linha horizontal
     $this->hr();
 
-Lastly, you can update the current line of text on the screen using
+Por último, você pode atualizar a linha atual de texto na tela usando
 ``_io->overwrite()``::
 
     $this->out('Counting down');
@@ -338,68 +337,68 @@ Lastly, you can update the current line of text on the screen using
         $this->_io->overwrite($i, 0, 2);
     }
 
-It is important to remember, that you cannot overwrite text
-once a new line has been output.
+É importante lembrar, que você não pode sobreescrever texto
+uma vez que uma nova linha tenha sido exibida.
 
 .. _shell-output-level:
 
 Console Output Levels
 ---------------------
 
-Shells often need different levels of verbosity. When running as cron jobs,
-most output is un-necessary. And there are times when you are not interested in
-everything that a shell has to say. You can use output levels to flag output
-appropriately. The user of the shell, can then decide what level of detail
-they are interested in by setting the correct flag when calling the shell.
-:php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
+Shells frequentemente precisam de diferentes níveis de verbosidade. Quando executadas
+como cron jobs, muitas saídas são desnecessárias. E há ocasiões que você não estará
+interessado em tudo que uma shell tenha a dizer. Você pode usar os níveis de saída
+para sinalizar saídas apropriadamente. O usuário da shell, pode então decidir qual
+nível de detalhe ele está interessado ao sinalizar o chamado da shell.
+:php:meth:`Cake\\Console\\Shell::out()` suporta 3 tipos de saída por padrão.
 
-* QUIET - Only absolutely important information should be marked for quiet output.
-* NORMAL - The default level, and normal usage
-* VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
-  for debugging as VERBOSE
+* QUIET - Apenas informação absolutamente importante deve ser sinalizada.
+* NORMAL - O nível padrão, e uso normal.
+* VERBOSE - Sinalize mensagens que podem ser irritantes em demasia para uso diário, mas informativas
+  para depuração como VERBOSE.
 
-You can mark output as follows::
+Você pode sinalizar a saíde da seguinte forma::
 
-    // Would appear at all levels.
+    // Deve aparecer em todos os níveis.
     $this->out('Quiet message', 1, Shell::QUIET);
     $this->quiet('Quiet message');
 
-    // Would not appear when quiet output is toggled.
+    // Não deve aparecer quando a saída quiet estiver alternado.
     $this->out('normal message', 1, Shell::NORMAL);
     $this->out('loud message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-    // Would only appear when verbose output is enabled.
+    // Deve aparecer somente quando a saíde verbose estiver habilitada.
     $this->out('extra message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-You can control the output level of shells, by using the ``--quiet`` and ``--verbose``
-options. These options are added by default, and allow you to consistently control
-output levels inside your CakePHP shells.
+Você pode controlar o nível de saída das shells, ao usar as opções ``--quiet`` e ``--verbose``.
+Estas opções são adicionadas por padrão, e permitem a você controlar consistentemente
+níveis de saída dentro das suas shells do CakePHP.
 
-Styling Output
---------------
+Estilizando a saída de dados
+----------------------------
 
-Styling output is done by including tags - just like HTML - in your output.
-ConsoleOutput will replace these tags with the correct ansi code sequence, or
-remove the tags if you are on a console that doesn't support ansi codes. There
-are several built-in styles, and you can create more. The built-in ones are
+Estilizar a saída de dados é feito ao incluir tags - como no HTML - em sua saída.
+O ConsoleOutput irá substituir estas tags com a seqüência correta de código ansi.
+Hão diversos estilos nativos, e você pode criar mais. Os nativos são:
 
-* ``error`` Error messages. Red underlined text.
-* ``warning`` Warning messages. Yellow text.
-* ``info`` Informational messages. Cyan text.
-* ``comment`` Additional text. Blue text.
-* ``question`` Text that is a question, added automatically by shell.
+* ``error`` Mensagens de erro. Texto sublinhado vermelho.
+* ``warning`` Mensagens de alerta. Texto amarelo.
+* ``info`` Mensagens informativas. Texto ciano.
+* ``comment`` Texto adicional. Texto azul.
+* ``question`` Texto que é uma questão, adicionado automaticamente pela shell.
 
-You can create additional styles using ``$this->stdout->styles()``. To declare a
-new output style you could do::
+Você pode criar estilos adicionais usando ``$this->stdout->styles()``. Para declarar
+um novo estilo de saíde você pode fazer::
 
     $this->_io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
-This would then allow you to use a ``<flashy>`` tag in your shell output, and if ansi
-colours are enabled, the following would be rendered as blinking magenta text
-``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. When defining
-styles you can use the following colours for the ``text`` and ``background`` attributes:
+Isso deve então permití-lo usar uma ``<flashy>`` tag na saída de sua shell, e se
+as cores ansi estiverem habilitadas, o seguinte pode ser renderizado como texto
+magenta piscante ``$this->out('<flashy>Whoooa</flashy> Something went wrong');``.
+Quando definir estilos você pode usar as seguintes cores para os atributos
+``text`` e ``background``:
 
 * black
 * red
@@ -410,60 +409,60 @@ styles you can use the following colours for the ``text`` and ``background`` att
 * cyan
 * white
 
-You can also use the following options as boolean switches, setting them to a
-truthy value enables them.
+Você também pode usar as seguintes opções através de valores boleanos, defini-los
+com valor positivo os habilita.
 
 * bold
 * underline
 * blink
 * reverse
 
-Adding a style makes it available on all instances of ConsoleOutput as well,
-so you don't have to redeclare styles for both stdout and stderr objects.
+Adicionar um estilo o torna disponível para todas as instâncias do ConsoleOutput,
+então você não tem que redeclarar estilos para os objetos stdout e stderr
+respectivamente.
 
-Turning Off Colouring
----------------------
+Desabilitando a colorização
+---------------------------
 
-Although colouring is pretty awesome, there may be times when you want to turn it off,
-or force it on::
+Mesmo que a colorização seja incrível, haverão ocasiões que você quererá desabilitá-la,
+ou forçá-la::
 
     $this->_io->outputAs(ConsoleOutput::RAW);
 
-The above will put the output object into raw output mode. In raw output mode,
-no styling is done at all. There are three modes you can use.
+O citado irá colocar o objeto de saída em modo raw. Em modo raw,
+nenhum estilo é aplicado. Existem três modos que você pode usar.
 
-* ``ConsoleOutput::RAW`` - Raw output, no styling or formatting will be done.
-  This is a good mode to use if you are outputting XML or, want to debug why
-  your styling isn't working.
-* ``ConsoleOutput::PLAIN`` - Plain text output, known style tags will be stripped
-  from the output.
-* ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
+* ``ConsoleOutput::RAW`` - Saída raw, nenhum estilo ou formatação serão aplicados.
+  Este é um modo indicado se você estiver exibindo XML ou, quiser depurar porquê
+  seu estilo não está funcionando.
+* ``ConsoleOutput::PLAIN`` - Saída de texto simples, tags conhecidas de estilo
+  serão removidas da saída.
+* ``ConsoleOutput::COLOR`` - Saída onde a cor é removida.
 
-By default on \*nix systems ConsoleOutput objects default to colour output.
-On windows systems, plain output is the default unless the ``ANSICON`` environment
-variable is present.
+Por padrão em sistemas \*nix objetos ConsoleOutput padronizam-se a a saída de cores.
+Em sistemas Windows, a saída simples é padrão a não ser que a variável de ambiente
+``ANSICON`` esteja presente.
 
-Configuring Options and Generating Help
-=======================================
+Opções de configuração e Geração de ajuda
+=========================================
 
 .. php:class:: ConsoleOptionParser
 
-``ConsoleOptionParser`` provides a command line option and
-argument parser.
+``ConsoleOptionParser`` oferece uma opção de CLI e analisador de argumentos.
 
-OptionParsers allow you to accomplish two goals at the same time.  First, they
-allow you to define the options and arguments for your commands.  This allows
-you to separate basic input validation and your console commands. Secondly, it
-allows you to provide documentation, that is used to generate a well formatted
-help file.
+OptionParsers permitem a você completar dois objetivos ao mesmo tempo. Primeiro,
+eles permitem definir opções e argumentos para os seus comandos. Isso permite
+separar validação básica de dados e seus comandos do console. Segundo,
+permite prover documentação, que é usada para gerar arquivos de ajuda bem
+formatados.
 
-The console framework in CakePHP gets your shell's option parser by calling
-``$this->getOptionParser()``. Overriding this method allows you to
-configure the OptionParser to define the expected inputs of your shell.
-You can also configure subcommand option parsers, which allow you to
-have different option parsers for subcommands and tasks.
-The ConsoleOptionParser implements a fluent interface and includes
-methods for easily setting multiple options/arguments at once::
+O console framework no CakePHP recebe as opções do seu interpetador shell ao
+chamar ``$this->getOptionParser()``. Sobreescrever esse método permite configurar
+o OptionParser para definir as entradas aguardadas da sua shell.
+Você também pode configurar interpetadores de subcomandos, que permitem ter
+diferentes interpretadores para subcomandos e tarefas.
+O ConsoleOptionParser implementa uma interface fluida e inclui métodos para
+facilmente definir múltiplas opções/argumentos de uma vez::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -471,11 +470,12 @@ methods for easily setting multiple options/arguments at once::
         return $parser;
     }
 
-Configuring an Option Parser with the Fluent Interface
-------------------------------------------------------
+Configurando um interpretador de opção com a interface fluida
+-------------------------------------------------------------
 
-All of the methods that configure an option parser can be chained,
-allowing you to define an entire option parser in one series of method calls::
+Todos os métodos que configuram um interpretador de opções podem ser
+encadeados, permitindo definir um interpretador de opções completo em uma
+série de chamadas de métodos::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -490,7 +490,7 @@ allowing you to define an entire option parser in one series of method calls::
         return $parser;
     }
 
-The methods that allow chaining are:
+Os métodos que permitem encadeamento são:
 
 - description()
 - epilog()
@@ -504,57 +504,57 @@ The methods that allow chaining are:
 
 .. php:method:: description($text = null)
 
-Gets or sets the description for the option parser. The description
-displays above the argument and option information. By passing in
-either an array or a string, you can set the value of the description.
-Calling with no arguments will return the current value::
+Recebe ou define a descrição para o interpretador de opções. A
+descrição é exibida acima da informação do argumento e da opção. Ao
+instanciar tanto em array como em string, você pode definir o valor
+da descrição. Instanciar sem argumentos vai retornar o valor atual::
 
-    // Set multiple lines at once
+    // Define múltiplas linhas de uma vez
     $parser->description(['line one', 'line two']);
 
-    // Read the current value
+    // Lê o valor atual
     $parser->description();
 
 .. php:method:: epilog($text = null)
 
-Gets or sets the epilog for the option parser. The epilog
-is displayed after the argument and option information. By passing in
-either an array or a string, you can set the value of the epilog.
-Calling with no arguments will return the current value::
+Recebe ou define o epílogo para o interpretador de opções. O epílogo
+é exibido depois da informação do argumento e da opção. Ao instanciar
+tanto em array como em string, você pode definir o valor do epílogo.
+Instanciar sem argumentos vai retornar o valor atual::
 
-    // Set multiple lines at once
+    // Define múltiplas linhas de uma vez
     $parser->epilog(['line one', 'line two']);
 
-    // Read the current value
+    // Lê o valor atual
     $parser->epilog();
 
-Adding Arguments
-----------------
+Adicionando argumentos
+----------------------
 
 .. php:method:: addArgument($name, $params = [])
 
-Positional arguments are frequently used in command line tools,
-and ``ConsoleOptionParser`` allows you to define positional
-arguments as well as make them required. You can add arguments
-one at a time with ``$parser->addArgument();`` or multiple at once
-with ``$parser->addArguments();``::
+Argumentos posicionais são frequentemente usados em ferramentas
+de linha de comando, e ``ConsoleOptionParser`` permite definir
+argumentos bem como torná-los requiríveis. Você pode adicionar
+argumentos um por vez com ``$parser->addArgument();`` ou múltiplos
+de uma vez com ``$parser->addArguments();``::
 
     $parser->addArgument('model', ['help' => 'The model to bake']);
 
-You can use the following options when creating an argument:
+Você pode usar as seguintes opções ao criar um argumento:
 
-* ``help`` The help text to display for this argument.
-* ``required`` Whether this parameter is required.
-* ``index`` The index for the arg, if left undefined the argument will be put
-  onto the end of the arguments. If you define the same index twice the
-  first option will be overwritten.
-* ``choices`` An array of valid choices for this argument. If left empty all
-  values are valid. An exception will be raised when parse() encounters an
-  invalid value.
+* ``help`` O texto de ajuda a ser exibido para este argumento.
+* ``required`` Se esse parâmetro é requisito.
+* ``index`` O índice do argumento, se deixado indefinido, o argumento será
+  colocado no final dos argumentos. Se você definir o mesmo índice duas vezes,
+  a primeira opção será sobreescrita.
+* ``choices`` Um array de opções válidas para esse argumento. Se deixado vazio,
+  todos os valores são válidos. Uma exceção será lançada quando parse() encontrar
+  um valor inválido.
 
-Arguments that have been marked as required will throw an exception when
-parsing the command if they have been omitted. So you don't have to
-handle that in your shell.
+Argumentos que forem definidos como requisito lançarão uma exceção quando
+interpretarem o comando se eles forem omitidos. Então você não tem que lidar
+com isso em sua shell.
 
 .. php:method:: addArguments(array $args)
 
