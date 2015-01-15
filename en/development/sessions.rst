@@ -55,9 +55,9 @@ all subdomains you can do::
     ]);
 
 By default PHP sets the session cookie to expire as soon as the browser is
-closed, regardless of the configured ``Session.timeout`` value. This time is
-controlled by the ``session.cookie_lifetime`` ini value and can be configured
-this way::
+closed, regardless of the configured ``Session.timeout`` value. The cookie
+timeout controlled by the ``session.cookie_lifetime`` ini value and can be
+configured using::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -71,10 +71,10 @@ this way::
 The difference between ``Session.timeout`` and the ``session.cookie_lifetime``
 value is that the latter relies on the client telling the truth about the
 cookie. If you require stricter timeout checking, without relying on what the
-client reports as inactivity time, you can use ``Session.timeout``.
+client reports, you should use ``Session.timeout``.
 
 Please note that ``Session.timeout`` corresponds to the total time of
-inactivity of a user (i.e. the time without visiting any page where the session
+inactivity for a user (i.e. the time without visiting any page where the session
 is used), and does not limit the total amount of minutes a user can stay
 on the site.
 
