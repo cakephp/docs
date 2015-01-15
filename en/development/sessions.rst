@@ -15,7 +15,8 @@ Session Configuration
 Session configuration is stored in ``Configure`` under the top
 level ``Session`` key, and a number of options are available:
 
-* ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
+* ``Session.timeout`` - The number of *minutes* before CakePHP's session
+  handler expires the session.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
   configurations as a base for your session configuration. See below for the
@@ -29,8 +30,8 @@ level ``Session`` key, and a number of options are available:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-CakePHP's defaults ``session.cookie_secure`` to ``true``, when your application is
-on an SSL protocol. If your application serves from both SSL and non-SSL
+CakePHP's defaults ``session.cookie_secure`` to ``true``, when your application
+is on an SSL protocol. If your application serves from both SSL and non-SSL
 protocols, then you might have problems with sessions being lost. If you need
 access to the session on both SSL and non-SSL domains you will want to disable
 this::
@@ -43,8 +44,8 @@ this::
     ]);
 
 The session cookie path defaults to app's base path. To change this you can use
-the ``session.cookie_path`` ini value. For e.g. if you want your session to persist across
-all subdomains you can do::
+the ``session.cookie_path`` ini value. For e.g. if you want your session to
+persist across all subdomains you can do::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -107,7 +108,8 @@ configuration. The built-in configurations are:
 * ``cake`` - Saves sessions as files inside ``app/tmp/sessions``. This is a
   good option when on hosts that don't allow you to write outside your own home
   dir.
-* ``database`` - Use the built-in database sessions. See below for more information.
+* ``database`` - Use the built-in database sessions. See below for more
+  information.
 * ``cache`` - Use the built-in cache sessions. See below for more information.
 
 Session Handlers
@@ -116,11 +118,11 @@ Session Handlers
 Session handlers can also be defined in the session config array.  By defining
 the 'handler.engine' config key, you can name the class name, or provide
 a handler instance.  The class/object must implement the
-native PHP ``SessionHandlerInterface``. Implementing this interface will allow ``Session``
-to automatically map the methods for the handler. Both the core Cache and
-Database session handlers use this method for saving sessions. Additional
-settings for the handler should be placed inside the handler array. You can then
-read those values out from inside your handler::
+native PHP ``SessionHandlerInterface``. Implementing this interface will allow
+``Session`` to automatically map the methods for the handler. Both the core
+Cache and Database session handlers use this method for saving sessions.
+Additional settings for the handler should be placed inside the handler array.
+You can then read those values out from inside your handler::
 
     'Session' => [
         'handler' => [
@@ -351,7 +353,8 @@ When you need to delete data from the session, you can use ``delete()``::
 
 .. php:staticmethod:: consume($key)
 
-When you need to read and delete data from the session, you can use ``consume()``::
+When you need to read and delete data from the session, you can use
+``consume()``::
 
     $session->consume('Some.value');
 
@@ -373,8 +376,8 @@ the ``destroy()`` method::
 
     $session->destroy();
 
-Destroying a session will remove all serverside data in the session, but will **not**
-remove the session cookie.
+Destroying a session will remove all serverside data in the session, but will
+**not** remove the session cookie.
 
 Rotating Session Identifiers
 ============================
@@ -390,8 +393,8 @@ out, you may need to rotate the session id's manually. To do this use the
 Flash Messages
 ==============
 
-Flash messages are small messages displayed to end users once. They are often used to
-present error messages, or confirm that actions took place successfully.
+Flash messages are small messages displayed to end users once. They are often
+used to present error messages, or confirm that actions took place successfully.
 
 To set and display flash messages you should use
 :doc:`/controllers/components/flash` and
