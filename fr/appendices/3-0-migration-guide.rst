@@ -183,8 +183,6 @@ Plugin
 Configure
 ---------
 
-Les classes de lecteur de configuration ont été renommées:
-
 - ``Cake\Configure\PhpReader`` renommé en
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
 - ``Cake\Configure\IniReader`` renommé en
@@ -192,11 +190,13 @@ Les classes de lecteur de configuration ont été renommées:
 - ``Cake\Configure\ConfigReaderInterface`` renommé en
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` a été ajoutée.
-
-The config engines no longer support passing keys with file extension.
-
-A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
-been added.
+- Les moteurs de config n'acceptent plus de passer les clés avec l'extension
+  de fichier.
+- Définir une variable ``$config`` dans un fichier PHP de config est déprécié.
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` attend maintenant le
+  fichier de config pour retourner un tableau.
+- Un nouveau moteur de config
+  :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` a été ajouté.
 
 Object
 ------

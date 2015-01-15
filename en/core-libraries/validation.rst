@@ -93,7 +93,7 @@ An example of these methods in action is::
 
     $validator->allowEmpty('published')
         ->notEmpty('title', 'A title is required')
-        ->notEmpty('body', 'A title is required', 'create')
+        ->notEmpty('body', 'A body is required', 'create')
         ->allowEmpty('header_image', 'update');
 
 Unique Fields

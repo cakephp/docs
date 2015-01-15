@@ -487,8 +487,8 @@ that you prefix the plugin name before the name of the component. For example::
     {
     }
 
-    // Within your controllers:
-    public function intialize()
+    // Within your controllers
+    public function initialize()
     {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');

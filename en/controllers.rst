@@ -432,7 +432,7 @@ Configuring Components to Load
 In your Controller's ``initialize()`` method you can define any components you
 want loaded, and any configuration data for them::
 
-    public function intialize()
+    public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Csrf');

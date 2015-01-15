@@ -781,7 +781,25 @@ conditions can also be expressed as an array of conditions::
 When creating joins by hand and using array based conditions, you need to
 provide the datatypes for each column in the join conditions. By providing
 datatypes for the join conditions, the ORM can correctly convert data types into
-SQL.
+SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
+``innerJoin()`` to create joins::
+
+    // Join with an alias and string conditions
+    $query = $articles->find();
+    $query->leftJoin(
+        ['Authors' => 'authors'],
+        ['Authors.id = Articles.author_id']);
+
+    // Join with an alias, array conditions, and types
+    $query = $articles->find();
+    $query->innerJoin(
+        ['Authors' => 'authors'],
+        [
+        'Authors.promoted' => true,
+        'Authors.created' => new DateTime('-5 days'),
+        'Authors.id = Articles.author_id'
+        ],
+        ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
 
 Inserting Data
 ==============
