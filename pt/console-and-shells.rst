@@ -558,24 +558,24 @@ com isso em sua shell.
 
 .. php:method:: addArguments(array $args)
 
-If you have an array with multiple arguments you can use ``$parser->addArguments()``
-to add multiple arguments at once.::
+Se você tem um array com múltiplos argumentos você pode usar ``$parser->addArguments()``
+para adicioná-los de uma vez.::
 
     $parser->addArguments([
         'node' => ['help' => 'The node to create', 'required' => true],
         'parent' => ['help' => 'The parent node', 'required' => true]
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addArguments
-can be used as part of a fluent method chain.
+Assim como todos os métodos de construção no ConsoleOptionParser, addArguments
+pode ser usado como parte de um fluido método encadeado.
 
-Validating Arguments
+Validando argumentos
 --------------------
 
-When creating positional arguments, you can use the ``required`` flag, to
-indicate that an argument must be present when a shell is called.
-Additionally you can use ``choices`` to force an argument to
-be from a list of valid choices::
+Ao criar argumentos posicionais, você pode usar a marcação ``required`` para
+indicar que um argumento deve estar presente quando uma shell é chamada.
+Adicionalmente você pode usar o ``choices`` para forçar um argumento a
+ser de uma lista de escolhas válidas::
 
     $parser->addArgument('type', [
         'help' => 'The type of node to interact with.',
@@ -583,20 +583,20 @@ be from a list of valid choices::
         'choices' => ['aro', 'aco']
     ]);
 
-The above will create an argument that is required and has validation
-on the input. If the argument is either missing, or has an incorrect
-value an exception will be raised and the shell will be stopped.
+O código acima irá criar um argumento que é requisitado e tem validação
+no input. Se o argumento está tanto indefinodo, ou possui um valor
+incorreto, uma exceção será lançada e a shell parará.
 
-Adding Options
---------------
+Adicionando opções
+------------------
 
 .. php:method:: addOption($name, $options = [])
 
-Options or flags are also frequently used in command line tools.
-``ConsoleOptionParser`` supports creating options
-with both verbose and short aliases, supplying defaults
-and creating boolean switches. Options are created with either
-``$parser->addOption()`` or ``$parser->addOptions()``.::
+Opções são frequentemente usadas em ferramentas CLI.
+``ConsoleOptionParser`` suporta a criação de opções com
+verbose e aliases curtas, suprindo padrões e criando ativadores
+boleanos. Opções são criadas tanto com
+``$parser->addOption()`` ou ``$parser->addOptions()``.::
 
     $parser->addOption('connection', [
         'short' => 'c',
@@ -604,43 +604,42 @@ and creating boolean switches. Options are created with either
         'default' => 'default',
     ]);
 
-The above would allow you to use either ``cake myshell --connection=other``,
-``cake myshell --connection other``, or ``cake myshell -c other``
-when invoking the shell. You can also create boolean switches, these switches do not
-consume values, and their presence just enables them in the
-parsed parameters.::
+O código citado permite a você usar tanto ``cake myshell --connection=other``,
+``cake myshell --connection other``, ou ``cake myshell -c other``
+quando invocando a shell. Você também criar ativadores boleanos. Estes ativadores não
+consumem valores, e suas presenças apenas os habilitam nos parâmetros
+interpretados.::
 
     $parser->addOption('no-commit', ['boolean' => true]);
 
-With this option, when calling a shell like ``cake myshell --no-commit something``
-the no-commit param would have a value of ``true``, and 'something'
-would be a treated as a positional argument.
-The built-in ``--help``, ``--verbose``, and ``--quiet`` options
-use this feature.
+Com essa opção, ao chamar uma shell como ``cake myshell --no-commit something``
+o parâmetro no-commit deve ter um valor de ``true``, e `something`
+deve ser tratado como um argumento posicional.
+As opções nativas ``--help``, ``--verbose``, e ``--quiet``
+usam essa funcionalidade.
 
-When creating options you can use the following options to
-define the behavior of the option:
+Ao criar opções você pode usar os seguintes argumentos para definir
+o seu comportamento:
 
-* ``short`` - The single letter variant for this option, leave undefined for none.
-* ``help`` - Help text for this option. Used when generating help for the option.
-* ``default`` - The default value for this option. If not defined the default will be ``true``.
-* ``boolean`` - The option uses no value, it's just a boolean switch.
-  Defaults to ``false``.
-* ``choices`` An array of valid choices for this option. If left empty all
-  values are valid. An exception will be raised when parse() encounters an invalid value.
+* ``short`` - A variação de letra única para essa opção, deixe indefinido para none.
+* ``help`` - Texto de ajuda para essa opção. Usado ao gerar ajuda para a opção.
+* ``default`` - O valor padrão para essa opção. Se não estiver definido o valor padrão será ``true``.
+* ``boolean`` - A opção não usa valor, é apenas um ativador boleano. Por padrão ``false``.
+* ``choices`` - Um array de escolhas válidas para essa opção. Se deixado vazio, todos os
+  valores são considerados válidos. Uma exceção será lançada quando parse() encontrar um valor inválido.
 
 .. php:method:: addOptions(array $options)
 
-If you have an array with multiple options you can use ``$parser->addOptions()``
-to add multiple options at once.::
+Se você tem um array com múltiplas opções, você pode usar ``$parser->addOptions()``
+para adicioná-las de uma vez.::
 
     $parser->addOptions([
         'node' => ['short' => 'n', 'help' => 'The node to create'],
         'parent' => ['short' => 'p', 'help' => 'The parent node']
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addOptions is can be used
-as part of a fluent method chain.
+Assim como com todos os métodos construtores, no ConsoleOptionParser, addOptions
+pode ser usado como parte de um método fluente encadeado.
 
 Validating Options
 ------------------
