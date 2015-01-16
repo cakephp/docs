@@ -179,7 +179,7 @@ A shell acima, irá preencher um user pelo seu username e exibir a informação
 armazenada no banco de dados.
 
 Tasks de Shell
-================
+==============
 
 Haverão momentos construindo aplicações mais avançadas de console que você vai
 querer compor funcionalidades em classes reutilizáveis que podem ser compartilhadas
@@ -641,94 +641,94 @@ para adicioná-las de uma vez.::
 Assim como com todos os métodos construtores, no ConsoleOptionParser, addOptions
 pode ser usado como parte de um método fluente encadeado.
 
-Validating Options
-------------------
+Validando opções
+----------------
 
-Options can be provided with a set of choices much like positional arguments
-can be. When an option has defined choices, those are the only valid choices
-for an option. All other values will raise an ``InvalidArgumentException``::
+Opções podem ser fornecidas com um conjunto de escolhas bem como argumentos posicionais
+podem ser. Quando uma opção define escolhas, essas são as únicas opções válidas
+para uma opção. Todos os outros valores irão gerar um ``InvalidArgumentException``::
 
     $parser->addOption('accept', [
         'help' => 'What version to accept.',
         'choices' => ['working', 'theirs', 'mine']
     ]);
 
-Using Boolean Options
----------------------
+Usando opções boleanas
+----------------------
 
-Options can be defined as boolean options, which are useful when you need to create
-some flag options. Like options with defaults, boolean options always include
-themselves into the parsed parameters. When the flags are present they are set
-to ``true``, when they are absent they are set ot ``false``::
+As opções podem ser definidas como opções boleanas, que são úteis quando você precisa criar
+algumas opções de marcação. Como opções com padrões, opções boleanas sempre irão incluir
+-se nos parâmetros analisados. Quando as marcações estão presentes elas são definidas
+para ``true``, quando elas estão ausentes, são definidas como ``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',
         'boolean' => true
     ]);
 
-The following option would result in ``$this->params['verbose']`` always
-being available. This lets you omit ``empty()`` or ``isset()``
-checks for boolean flags::
+A opção seguinte resultaria em ``$this->params['verbose']`` sempre
+estando disponível. Isso permite a você omitir verificações ``empty()`` ou ``isset()``
+em marcações boleanas::
 
     if ($this->params['verbose']) {
         // Do something.
     }
 
-Since the boolean options are always defined as ``true`` or
-``false`` you can omit additional check methods.
+Desde que as opções boleanas estejam sempre definidas como ``true`` ou
+``false``, você pode omitir métodos de verificação adicionais.
 
-Adding Subcommands
-------------------
+Adicionando subcomandos
+-----------------------
 
 .. php:method:: addSubcommand($name, $options = [])
 
-Console applications are often made of subcommands, and these subcommands
-may require special option parsing and have their own help. A perfect
-example of this is ``bake``. Bake is made of many separate tasks that all
-have their own help and options. ``ConsoleOptionParser`` allows you to
-define subcommands and provide command specific option parsers so the
-shell knows how to parse commands for its tasks::
+Aplicativos de console são muitas vezes feitas de subcomandos, e esses subcomandos
+podem exigir a análise de opções especiais e terem a sua própria ajuda. Um perfeito
+exemplo disso é ``bake``. Bake é feita de muitas tarefas separadas e todas
+têm a sua própria ajuda e opções. ``ConsoleOptionParser`` permite
+definir subcomandos e fornecer comandos analisadores de opção específica, de modo que a
+shell sabe como analisar os comandos para as suas funções ::
 
     $parser->addSubcommand('model', [
         'help' => 'Bake a model',
         'parser' => $this->Model->getOptionParser()
     ]);
 
-The above is an example of how you could provide help and a specialized
-option parser for a shell's task. By calling the Task's ``getOptionParser()``
-we don't have to duplicate the option parser generation, or mix concerns
-in our shell. Adding subcommands in this way has two advantages.
-First it lets your shell easily document its subcommands in the
-generated help. It also gives easy access to the subcommand
-help. With the above subcommand created you could call
-``cake myshell --help`` and see the list of subcommands, and
-also run ``cake myshell model --help`` to view the help for
-just the model task.
+A descrição acima é um exemplo de como você poderia fornecer ajuda e um especializado
+interpretador de opção para a tarefa de uma shell. Ao chamar a tarefa de ``getOptionParser()``
+não temos de duplicar a geração do interpretador de opção, ou misturar preocupações
+no nosso shell. Adicionar subcomandos desta forma tem duas vantagens.
+Primeiro, ele permite que o seu shell documente facilmente seus subcomandos na
+ajuda gerada. Ele também dá fácil acesso ao subcomando
+help. Com o subcomando acima criado você poderia chamar
+``cake myshell --help`` e ver a lista de subcomandos, e
+também executar o ``cake myshell model --help`` para exibir a ajuda
+apenas o modelo de tarefa.
 
 .. note::
 
-    Once your Shell defines subcommands, all subcommands must be explicitly
-    defined.
+    Uma vez que seu Shell define subcomandos, todos os subcomandos deve ser explicitamente
+    definidos.
 
-When defining a subcommand you can use the following options:
+Ao definir um subcomando, você pode usar as seguintes opções:
 
-* ``help`` - Help text for the subcommand.
-* ``parser`` - A ConsoleOptionParser for the subcommand. This allows you
-  to create method specific option parsers. When help is generated for a
-  subcommand, if a parser is present it will be used. You can also
-  supply the parser as an array that is compatible with
+* ``help`` - Texto de ajuda para o subcomando.
+* ``parser`` - Um ConsoleOptionParser para o subcomando. Isso permite que você
+   crie métodos analisadores de opção específios. Quando a ajuda é gerada por um
+   subcomando, se um analisador está presente ele vai ser usado. Você também pode
+   fornecer o analisador como uma matriz que seja compatível com
   :php:meth:`Cake\\Console\\ConsoleOptionParser::buildFromArray()`
 
-Adding subcommands can be done as part of a fluent method chain.
+Adicionar subcomandos pode ser feito como parte de uma cadeia de métodos fluente.
 
-Building a ConsoleOptionParser from an Array
---------------------------------------------
+Construir uma ConsoleOptionParser de uma matriz
+-----------------------------------------------
 
 .. php:method:: buildFromArray($spec)
 
-As previously mentioned, when creating subcommand option parsers,
-you can define the parser spec as an array for that method. This can help
-make building subcommand parsers easier, as everything is an array::
+Como mencionado anteriormente, ao criar interpretadores de opção de subcomando,
+você pode definir a especificação interpretadora como uma matriz para esse método. Isso pode ajudar
+fazer analisadores mais facilmente, já que tudo é um array::
 
     $parser->addSubcommand('check', [
         'help' => __('Check the permissions between an ACO and ARO.'),
@@ -746,12 +746,12 @@ make building subcommand parsers easier, as everything is an array::
         ]
     ]);
 
-Inside the parser spec, you can define keys for ``arguments``, ``options``,
-``description`` and ``epilog``. You cannot define ``subcommands`` inside an
-array style builder. The values for arguments, and options, should follow the
-format that :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
-:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also use
-buildFromArray on its own, to build an option parser::
+Dentro da especificação do interpretador, você pode definir as chaves para ``arguments``, ``options``,
+``description`` e ``epilog``. Você não pode definir ``subcommands`` dentro de um
+construtor estilo array. Os valores para os argumentos e opções, devem seguir o
+formato que :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` e
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` usam. Você também pode usar
+buildFromArray por conta própria, para construir um interpretador de opção::
 
     public function getOptionParser() {
         return ConsoleOptionParser::buildFromArray([
@@ -768,38 +768,39 @@ buildFromArray on its own, to build an option parser::
         ]);
     }
 
-Getting Help from Shells
-------------------------
+Recebendo ajuda das Shells
+--------------------------
 
-With the addition of ConsoleOptionParser getting help from shells is done
-in a consistent and uniform way. By using the ``--help`` or -``h`` option you
-can view the help for any core shell, and any shell that implements a ConsoleOptionParser::
+Com a adição de ConsoleOptionParser receber ajuda de shells é feito
+de uma forma consistente e uniforme. Ao usar a opção ``--help`` ou ``-h`` você
+pode visualizar a ajuda para qualquer núcleo shell, e qualquer shell que implementa
+um ConsoleOptionParser::
 
     cake bake --help
     cake bake -h
 
-Would both generate the help for bake. If the shell supports subcommands
-you can get help for those in a similar fashion::
+Ambos devem gerar a ajuda para o bake. Se o shell suporta subcomandos
+você pode obter ajuda para estes de uma forma semelhante::
 
     cake bake model --help
     cake bake model -h
 
-This would get you the help specific to bake's model task.
+Isso deve fornecer a você a ajuda específica para a tarefa bake dos models.
 
-Getting Help as XML
--------------------
+Recebendo ajuda como XML
+------------------------
 
-When building automated tools or development tools that need to interact
-with CakePHP shells, its nice to have help available in a machine parse-able
-format. The ConsoleOptionParser can provide help in xml by setting an
-additional argument::
+Quando a construção de ferramentas automatizadas ou ferramentas de desenvolvimento
+que necessitam interagir com shells do CakePHP, é bom ter ajuda disponível em uma máquina
+capaz interpretar formatos. O ConsoleOptionParser pode fornecer ajuda em xml, definindo um
+argumento adicional::
 
     cake bake --help xml
     cake bake -h xml
 
-The above would return an XML document with the generated help, options,
-arguments and subcommands for the selected shell. A sample XML document
-would look like:
+O trecho acima deve retornar um documento XML com a ajuda gerada, opções,
+argumentos e subcomando para o shell selecionado. Um documento XML de amostra
+seria algo como:
 
 .. code-block:: xml
 
@@ -851,42 +852,44 @@ would look like:
         </arguments>
     </shell>
 
-Routing in Shells / CLI
-=======================
+Roteamento em Shells / CLI
+==========================
 
-In command-line interface (CLI), specifically your shells and tasks, ``env('HTTP_HOST')`` and
-other webbrowser specific environment variables are not set.
+Na interface de linha de comando (CLI), especificamente suas shells e tarefas, ``env('HTTP_HOST')`` e
+outras variáveis de ambiente webbrowser específica, não estão definidas.
 
-If you generate reports or send emails that make use of ``Router::url()`` those will contain
-the default host ``http://localhost/``  and thus resulting in invalid URLs. In this case you need to
-specify the domain manually.
-You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
+Se você gerar relatórios ou enviar e-mails que fazem uso de ``Router::url()``, estes conterão
+a máquina padrão ``http://localhost/`` e resultando assim em URLs inválidas. Neste caso, você precisa
+especificar o domínio manualmente.
+Você pode fazer isso usando o valor de configuração ``App.fullBaseURL`` no seu bootstrap ou na sua configuração,
+por exemplo.
 
-For sending emails, you should provide CakeEmail class with the host you want to send the email with::
+Para enviar e-mails, você deve fornecer a classe CakeEmail com o host que você deseja enviar o e-mail::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
 
-This asserts that the generated message IDs are valid and fit to the domain the emails are sent from.
+Iste afirma que os IDs de mensagens geradas são válidos e adequados para o domínio a partir do qual os e-mails são
+enviados.
 
-Hook Methods
-============
+Métodos enganchados
+===================
 
 .. php:method:: initialize()
 
-    Initializes the Shell acts as constructor for subclasses allows
-    configuration of tasks prior to shell execution.
+    Inicializa a Shell para atua como construtor de subclasses e permite
+    configuração de tarefas antes de desenvolver a execução.
 
 .. php:method:: startup()
 
-    Starts up the Shell and displays the welcome message. Allows for checking
-    and configuring prior to command or main execution.
+    Inicia-se a Shell e exibe a mensagem de boas-vindas. Permite a verificação
+    e configuração antes de comandar ou da execução principal.
 
-    Override this method if you want to remove the welcome information, or
-    otherwise modify the pre-command flow.
+    Substitua este método se você quiser remover as informações de boas-vindas, ou
+    outra forma modificar o fluxo de pré-comando.
 
-More Topics
-===========
+Mais tópicos
+============
 
 .. toctree::
 :maxdepth: 1
@@ -899,5 +902,5 @@ More Topics
         console-and-shells/upgrade-shell
 
 .. meta::
-    :title lang=en: Console and Shells
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :title lang=pt: Console e Shells
+    :keywords lang=pt: shell scripts,system shell,classes de aplicação,tarefas background,line script,cron job,request response,system path,acl,novos projetos,shells,parametros,i18n,cakephp,directory,manutenção,ideal,aplicações,mvc
