@@ -680,7 +680,7 @@ to add multiple options at once. ::
         'parent' => ['short' => 'p', 'help' => 'The parent node']
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addOptions is can be used
+As with all the builder methods on ConsoleOptionParser, addOptions can be used
 as part of a fluent method chain.
 
 Validating Options
