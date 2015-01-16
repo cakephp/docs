@@ -667,7 +667,7 @@ define the behavior of the option:
 * ``default`` - The default value for this option. If not defined the default will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
-* ``choices`` An array of valid choices for this option. If left empty all
+* ``choices`` - An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
 
 .. php:method:: addOptions(array $options)
