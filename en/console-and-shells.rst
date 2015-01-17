@@ -331,10 +331,10 @@ Console Output
 The ``Shell`` class provides a few methods for outputting content::
 
     // Write to stdout
-    $this->out('normal message');
+    $this->out('Normal message');
 
     // Write to stderr
-    $this->err('error message');
+    $this->err('Error message');
 
     // Write to stderr and stop the process
     $this->error('Fatal error');
@@ -377,9 +377,9 @@ they are interested in by setting the correct flag when calling the shell.
 :php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
 * QUIET - Only absolutely important information should be marked for quiet output.
-* NORMAL - The default level, and normal usage
+* NORMAL - The default level, and normal usage.
 * VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
-  for debugging as VERBOSE
+  for debugging as VERBOSE.
 
 You can mark output as follows::
 
@@ -667,7 +667,7 @@ define the behavior of the option:
 * ``default`` - The default value for this option. If not defined the default will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
-* ``choices`` An array of valid choices for this option. If left empty all
+* ``choices`` - An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
 
 .. php:method:: addOptions(array $options)
@@ -680,7 +680,7 @@ to add multiple options at once. ::
         'parent' => ['short' => 'p', 'help' => 'The parent node']
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addOptions is can be used
+As with all the builder methods on ConsoleOptionParser, addOptions can be used
 as part of a fluent method chain.
 
 Validating Options
