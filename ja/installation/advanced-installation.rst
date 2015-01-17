@@ -20,7 +20,7 @@ PEARでCakePHPをインストールした後、PEARが正しく設定されて�
 CakePHPはPHPの ``include_path`` 上に配置されるので、とくに他の変更を行う必要はありません。
 
 
-ComposerでCekePHPをインストール
+ComposerでCakePHPをインストール
 ===============================
 
 Composerは、PHP 5.3以上向けの依存関係管理ツールです。
