@@ -15,7 +15,7 @@ tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
-:php:class:`AuthComponent` and :php:class:`AclComponent`\.
+:php:class:`AuthComponent` and :php:class:`AclComponent`.
 
 What you will need
 
@@ -41,10 +41,11 @@ https://github.com/cakephp/cakephp/tags and download the stable
 release. For this tutorial you need the latest 2.0 release.
 
 You can also clone the repository using
-`git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git``
+`git <http://git-scm.com/>`_::
 
-Once you've got a fresh copy of cake setup your database.php config
+    git clone git://github.com/cakephp/cakephp.git
+
+Once you've got a fresh copy of CakePHP setup your database.php config
 file, and change the value of Security.salt in your
 app/Config/core.php. From there we will build a simple database
 schema to build our application on. Execute the following SQL
@@ -88,8 +89,8 @@ can start cooking. Use
 :doc:`/console-and-shells/code-generation-with-bake` to quickly
 create your models, controllers, and views.
 
-To use cake bake, call "cake bake all" and this will list the 4
-tables you inserted into mySQL. Select "1. Group", and follow the
+To use cake bake, call ``"cake bake all"`` and this will list the 4
+tables you inserted into MySQL. Select "1. Group", and follow the
 prompts. Repeat for the other 3 tables, and this will have
 generated the 4 controllers, models and your views for you.
 
