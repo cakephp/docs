@@ -358,7 +358,7 @@ La classe ``Shell`` fournit quelques méthodes pour afficher le contenu::
     $this->out('Message Normal');
 
     // Ecrire avec stderr
-    $this->err('Message d'erreur');
+    $this->err('Message d\'erreur');
 
     // Ecrire avec stderr et arrêter le processus
     $this->error('Erreur Fatale');
