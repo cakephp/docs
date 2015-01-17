@@ -318,7 +318,7 @@ create a file at a given path::
     $this->createFile('bower.json', $stuff);
 
 If the Shell is interactive, a warning will be generated, and the user asked if
-he wants to overwrite the file if it already exists.  If the shell's
+they want to overwrite the file if it already exists.  If the shell's
 interactive property is ``false``, no question will be asked and the file will
 simply be overwritten.
 
