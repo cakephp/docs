@@ -89,7 +89,7 @@ can start cooking. Use
 :doc:`/console-and-shells/code-generation-with-bake` to quickly
 create your models, controllers, and views.
 
-To use cake bake, call ``"cake bake all"`` and this will list the 4
+To use cake bake, call ``cake bake all`` and this will list the 4
 tables you inserted into MySQL. Select "1. Group", and follow the
 prompts. Repeat for the other 3 tables, and this will have
 generated the 4 controllers, models and your views for you.
