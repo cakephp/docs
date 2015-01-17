@@ -12,9 +12,7 @@ Installing PHPUnit
 
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
-for making sure your code does what you think it does.::
-
-As of Dec. 31st, 2014 installation via pear.phpunit.de is no longer valid.
+for making sure your code does what you think it does.
     
 Install via Composer
 --------------------
