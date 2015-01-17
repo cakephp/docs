@@ -355,13 +355,13 @@ Sortie de la Console
 La classe ``Shell`` fournit quelques méthodes pour afficher le contenu::
 
     // Ecrire avec stdout
-    $this->out('normal message');
+    $this->out('Message Normal');
 
     // Ecrire avec stderr
-    $this->err('error message');
+    $this->err('Message d'erreur');
 
     // Ecrire avec stderr et arrêter le processus
-    $this->error('Fatal error');
+    $this->error('Erreur Fatale');
 
 Le Shell a aussi quelques méthodes pour nettoyer la sortie, créer des lignes
 blanches, ou dessiner une ligne de tirets::
@@ -404,9 +404,9 @@ défaut.
 
 * QUIET - Seulement des informations importantes doivent être marquées pour
   une paisible.
-* NORMAL - Le niveau par défaut, et un usage normal
+* NORMAL - Le niveau par défaut, et un usage normal.
 * VERBOSE - Les messages marqués qui peuvent être trop ennuyeux pour une
-  utilisation quotidienne, mais aide au debugging en VERBOSE
+  utilisation quotidienne, mais aide au debugging en VERBOSE.
 
 Vous pouvez marquer la sortie comme suit::
 
@@ -712,7 +712,7 @@ pour définir le comportement de l'option:
 * ``boolean`` - L'option n'utilise aucune valeur, c'est juste un switch de
   booléen.
   Par défaut à ``false``.
-* ``choices`` Un tableau de choix valides pour cette option. Si elle est vide,
+* ``choices`` - Un tableau de choix valides pour cette option. Si elle est vide,
   toutes les valeurs sont valides. Une exception sera lancée lorque parse()
   rencontre une valeur non valide.
 
@@ -1001,7 +1001,7 @@ Plus de sujets
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
     console-and-shells/plugin-assets
-    
+
 .. meta::
     :title lang=fr: Console et Shells
     :keywords lang=fr: scripts de shell,système shell,classes application,tâches de fond,script en ligne,tâche cron,réponse requête request response,système path,acl,nouveaux projets,shells,spécifiques,paramètres,i18n,cakephp,répertoire,maintenance,idéal,applications,mvc

@@ -154,10 +154,10 @@ de la méthode::
 Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
 les finds.
 
-Vérifier si une Propriété à été Modifiée
-========================================
+Vérifier si une Entity à été Modifiée
+=====================================
 
-.. php:method:: dirty($field, $dirty = null)
+.. php:method:: dirty($field = null, $dirty = null)
 
 Vous pourriez vouloir écrire du code conditionnel basé sur si oui ou non
 les propriétés ont été modifiées dans l'entity. Par exemple, vous pourriez
@@ -177,6 +177,11 @@ De plus, vous pouvez également baser votre code conditionnel sur les valeurs
 initiales des propriétés en utilisant la méthode ``getOriginal()``. Cette
 méthode retournera soit la valeur initiale de la propriété si elle a été
 modifiée soit la valeur actuelle.
+
+Vous pouvez également si une des propriétés de l'entity a été modifiée::
+
+    // Vérifier si l'entity a changé
+    $article->dirty();
 
 Erreurs de Validation
 =====================
