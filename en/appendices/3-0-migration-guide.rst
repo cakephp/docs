@@ -182,7 +182,6 @@ Configure
   file to return an array.
 - A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
   been added.
--
 
 Object
 ------
