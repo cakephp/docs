@@ -175,7 +175,8 @@ Configure
 - ``Cake\Configure\ConfigReaderInterface`` renamed to
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
-- The config engines no longer support passing keys with file extension.
+- :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without extension suffix
+  as this can be derived from the engine. E.g. using PhpConfig use ``app`` to load ``app.php``.
 - Setting a ``$config`` variable in PHP config file is deprecated.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
   file to return an array.
