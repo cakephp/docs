@@ -190,8 +190,9 @@ Configure
 - ``Cake\Configure\ConfigReaderInterface`` renommé en
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` a été ajoutée.
-- Les moteurs de config n'acceptent plus de passer les clés avec l'extension
-  de fichier.
+- :php:meth:`Cake\\Core\\Configure::load()` attend maintenant un suffix du nom
+  du fichier sans extension puisque celui-ci peut venir d'un moteur. Par
+  exemple, l'utilisation de PhpConfig utilise ``app`` pour charger ``app.php``.
 - Définir une variable ``$config`` dans un fichier PHP de config est déprécié.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` attend maintenant le
   fichier de config pour retourner un tableau.

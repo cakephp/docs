@@ -175,8 +175,9 @@ Configure
 - ``Cake\Configure\ConfigReaderInterface`` renamed to
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
-- :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without extension suffix
-  as this can be derived from the engine. E.g. using PhpConfig use ``app`` to load ``app.php``.
+- :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without
+  extension suffix as this can be derived from the engine. E.g. using PhpConfig
+  use ``app`` to load ``app.php``.
 - Setting a ``$config`` variable in PHP config file is deprecated.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
   file to return an array.
@@ -233,14 +234,14 @@ ConsoleInputArgument
 Shell / Task
 ============
 
-Shells and Tasks have been moved from ``Console/Command`` and ``Console/Command/Task``
-to ``Shell`` and ``Shell/Task``.
+Shells and Tasks have been moved from ``Console/Command`` and
+``Console/Command/Task`` to ``Shell`` and ``Shell/Task``.
 
 ApiShell Removed
 ----------------
 
-The ApiShell was removed as it didn't provide any benefit over the file source itself
-and the online documentation/`API <http://api.cakephp.org/>`_.
+The ApiShell was removed as it didn't provide any benefit over the file source
+itself and the online documentation/`API <http://api.cakephp.org/>`_.
 
 SchemaShell Removed
 -------------------
@@ -263,8 +264,8 @@ BakeShell / TemplateTask
 - Bake is no longer part of the core source and is superseded by
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
 - Bake templates have been moved under ``src/Template/Bake``.
-- The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote templating
-  logic, allowing php code to be treated as plain text.
+- The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
+  templating logic, allowing php code to be treated as plain text.
 
 Event
 =====
@@ -298,13 +299,13 @@ Log
   log levels.  You should use logging scopes to create custom log files or
   specific handling for different sections of your application. Using
   a non-standard log level will now throw an exception.
-* :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
-  add the ``log()`` method.
-* The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now forwarded
-  to the log engines' ``write()`` method in order to provide better context to
-  the engines.
+* :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your
+  classes to add the ``log()`` method.
+* The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now
+  forwarded to the log engines' ``write()`` method in order to provide better
+  context to the engines.
 * Log engines are now required to implement ``Psr\Log\LogInterface`` instead of
-  Cake's own ``LogInterface``. In general, if you extended  :php:class:`Cake\\Log\\Engine\\BaseEngine`
+  Cake's own ``LogInterface``. In general, if you extended :php:class:`Cake\\Log\\Engine\\BaseEngine`
   you just need to rename the ``write()`` method to ``log()``.
 * :php:meth:`Cake\\Log\\Engine\\FileLog` now writes files in ``ROOT/logs`` instead of ``ROOT/tmp/logs``.
 
