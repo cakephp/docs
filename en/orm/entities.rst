@@ -143,10 +143,10 @@ name will be the lower case and underscored version of the method::
 Do bear in mind that virtual properties cannot be used in finds.
 
 
-Checking if a Property Has Been Modified
+Checking if an Entity Has Been Modified
 ========================================
 
-.. php:method:: dirty($field, $dirty = null)
+.. php:method:: dirty($field = null, $dirty = null)
 
 You may want to make code conditional based on whether or not properties have
 changed in an entity. For example, may only want to validate fields when they
@@ -165,6 +165,11 @@ array properties::
 In addition you can also base you conditional code on the original properties values
 by using the ``getOriginal()`` method. This method will either return the original
 value of the property if it has been modified or its actual value.
+
+You can also check for changes to any property in the entity::
+
+    // See if the entity has changed
+    $article->dirty();
 
 Validation Errors
 =================
