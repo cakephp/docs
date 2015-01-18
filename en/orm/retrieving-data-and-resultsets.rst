@@ -371,6 +371,23 @@ The above would translate into the following::
     additional performance overhead.
 
 
+Retrieving Associated Data
+==========================
+
+When you want to grab associated data, or filter based on associated data, there are basically two ways:
+ - use CakePHP ORM query functions like ``contain()`` and ``matching()``
+ - use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
+ 
+When do you use ``contain()``?
+You use it when the main model hasOne or belongsTo the associated data models. 
+For more details on the ``contain()``, look at :doc:`/orm/retrieving-data-and-resultsets#eager-loading-associations`
+
+When do you use ``matching()``?
+You use it when the main model hasMany associated data models. 
+For more details on the ``matching()``, look at :doc:`/orm/retrieving-data-and-resultsets#filtering-by-associated-data`
+
+If you prefer to use join functions, you can look at :doc:`/orm/query-builder#adding-joins` for details.
+ 
 Eager Loading Associations
 ==========================
 
