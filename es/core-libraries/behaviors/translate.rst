@@ -139,7 +139,7 @@ of the data that is stored for each different table::
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
-                'translationTable' => 'articles_i18n'
+                'translationTable' => 'ArticlesI18n'
             ]);
         }
     }
