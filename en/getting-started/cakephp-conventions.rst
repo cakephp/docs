@@ -108,7 +108,7 @@ classes you would typically use in a CakePHP application:
 -  The Helper class **BestEverHelper** would be found in a file
    named **BestEverHelper.php**
 
-Each file would be located in the appropriate folder in your app folder. 
+Each file would be located in the appropriate folder in your app folder.
 
 Model and Database Conventions
 ==============================
@@ -133,7 +133,7 @@ Foreign keys in hasMany, belongsTo or hasOne relationships are
 recognized by default as the (singular) name of the related table
 followed by \_id. So if a Baker hasMany Cake, the cakes table will
 refer to the bakers table via a baker\_id foreign key. For a
-table like category\_types whose name contains multiple words, 
+table like category\_types whose name contains multiple words,
 the foreign key would be category\_type\_id.
 
 Join tables, used in hasAndBelongsToMany (HABTM) relationships
@@ -151,13 +151,14 @@ single-field primary key if you want to use that table's model.
 CakePHP does not support composite primary keys. If you want to
 directly manipulate your join table data, use direct
 :ref:`query <model-query>` calls or add a primary key to act on it
-as a normal model. For example:
+as a normal model. For example::
 
     CREATE TABLE posts_tags (
-    id INT(10) NOT NULL AUTO_INCREMENT,
-    post_id INT(10) NOT NULL,
-    tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id));
+        id INT(10) NOT NULL AUTO_INCREMENT,
+        post_id INT(10) NOT NULL,
+        tag_id INT(10) NOT NULL,
+        PRIMARY KEY(id)
+    );
 
 Rather than using an auto-increment key as the primary key, you may
 also use char(36). CakePHP will then use a unique 36 character UUID
