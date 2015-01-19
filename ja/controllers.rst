@@ -202,7 +202,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         $this->set('title_for_layout', 'This is the page title');
 
 
-.. php:method:: render(string $action, string $layout)
+.. php:method:: render(string $view, string $layout)
 
     :php:meth:`~Controller::render()` メソッドは各アクションの最後に自動的に呼ばれます。
     このメソッドは(:php:meth:`~Controller::set()` を使って渡したデータを使って)すべてのビューロジックを実行し、ビューを :php:attr:`~View::$layout` 内に配置し、エンドユーザーに表示します。
