@@ -260,7 +260,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
     Depuis 2.5 la variable $title_for_layout est dépréciée, utilisez les blocks de vues à la place.
 
-.. php:method:: render(string $action, string $layout)
+.. php:method:: render(string $view, string $layout)
 
     La méthode :php:meth:`~Controller::render()` est automatiquement appelée à
     la fin de chaque action exécutée par le controller. Cette méthode exécute
