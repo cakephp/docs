@@ -1383,7 +1383,7 @@ suit:
 
     cat > config/app_local.php <<'CONFIG'
     <?php
-    $config = [
+    return [
         'Datasources' => [
             'test' => [
                 'datasource' => 'Database/Mysql',

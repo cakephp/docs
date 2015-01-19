@@ -53,7 +53,7 @@ templates from a plugin using :term:`plugin syntax`::
 Whether your templates are in the primary application or a plugin, your
 templates file should look something like::
 
-    $config = [
+    return [
         'number' => '<a href="{{url}}">{{text}}</a>',
     ];
 

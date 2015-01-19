@@ -760,7 +760,7 @@ souhaitez charger, soit avec un tableau des templates à ajouter/remplacer::
 Lors du chargement des fichiers de templates, votre fichier ressemblera à::
 
     <?php
-    $config = [
+    return [
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ];
 

@@ -156,7 +156,7 @@ les valeurs du tableau ``Datatsources.default`` dans le fichier
 ``config/app.php`` avec ceux de votre config. Un exemple de tableau de
 configuration complet pourrait ressembler à ce qui suit::
 
-    $config = [
+    return [
         // Plus de configuration au-dessus.
         'Datasources' => [
             'default' => [

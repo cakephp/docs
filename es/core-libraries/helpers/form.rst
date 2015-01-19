@@ -1428,7 +1428,7 @@ option when including the helper in your controller::
 This would load the tags in ``config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
-    $config = [
+    return [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 

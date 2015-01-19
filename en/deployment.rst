@@ -36,7 +36,7 @@ And then you can set the debug level dynamically in ``app.php``::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 
-    $config = [
+    return [
         'debug' => $debug,
         .....
     ];
