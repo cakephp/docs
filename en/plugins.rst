@@ -46,8 +46,8 @@ paths on the filesystem. It makes it possible for plugins to be installed into
 the standard vendor directory which is outside of the normal search paths. The
 ``Plugin`` class will use this file to locate plugins when they are
 loaded with ``load()`` or ``loadAll()``. You generally won't need to edit this
-file by hand, as composer and the ``plugin-installer`` package will manage it for
-you.
+file by hand, as composer and the ``plugin-installer`` package will manage it
+for you.
 
 Loading a Plugin
 ================

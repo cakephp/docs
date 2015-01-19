@@ -18,8 +18,8 @@ Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
 leur namespace. Si vous souhaitez utiliser un namespace différent, vous pouvez
 configurer le namespace du plugin, quand les plugins sont chargés.
 
-Installer un Plugin
-===================
+Installer un Plugin Avec Composer
+=================================
 
 Plusieurs plugins sont disponibles sur `packagist <http://packagist.org>`_
 et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
@@ -29,12 +29,26 @@ feriez ce qui suit::
 
 Ceci installe la dernière version de DebugKit et met à jour vos
 fichiers ``composer.json``, ``composer.lock``, et met à jour votre
-autoloader. Si le plugin que vous voulez installer n'est pas disponible sur
+autoloader.
+
+Si le plugin que vous voulez installer n'est pas disponible sur
 packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
 répertoire ``plugins``. En supposant que vous voulez installer un plugin
 appelé ``ContactManager``, vous auriez un dossier dans ``plugins``
 appelé ``ContactManager``. Dans ce répertoire se trouvent les View, Model,
 Controller, webroot, et tous les autres répertoires du plugin.
+
+Plugin Map File
+---------------
+
+When installing plugins via composer, you may notice that ``config/plugins.php``
+is updated. This configuration file contains a map of plugin names, and their
+paths on the filesystem. It makes it possible for plugins to be installed into
+the standard vendor directory which is outside of the normal search paths. The
+``Plugin`` class will use this file to locate plugins when they are
+loaded with ``load()`` or ``loadAll()``. You generally won't need to edit this
+file by hand, as composer and the ``plugin-installer`` package will manage it
+for you.
 
 Charger un Plugin
 =================
@@ -59,7 +73,8 @@ explicitement.
 
 .. note::
 
-    ``Plugin::loadAll()`` ne va pas charger tous les plugins de vendor.
+    ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
+    defined in ``config/plugins.php``.
 
 Autochargement des Classes du Plugin
 ------------------------------------
@@ -135,7 +150,7 @@ partir du plugin Blog::
 Notez que tous les fichiers spécifiés doivent réellement exister dans le(s)
 plugin(s) configurés ou PHP vous donnera des avertissements pour chaque
 fichier qu'il ne peut pas charger. Vous pouvez éviter les avertissements
-potentiels en utilisantt l'option ``ignoreMissing``::
+potentiels en utilisant l'option ``ignoreMissing``::
 
     Plugin::loadAll([
         ['ignoreMissing' => true, 'bootstrap' => true],
@@ -388,8 +403,8 @@ Vues du Plugin
 
 Les Vues se comportent exactement comme elles le font dans les applications
 normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
-``plugins/[PluginName]/Template/``. Pour notre plugin ContactManager, nous aurons
-besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
+``plugins/[PluginName]/Template/``. Pour notre plugin ContactManager, nous
+aurons besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
 incluons ceci aussi::
 
     // plugins/ContactManager/src/Template/Contacts/index.ctp:
