@@ -981,7 +981,7 @@ place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
 facilement calculer leur âge avec le formatteur de résultats::
 
     // En supposant que nous avons construit les champs, les conditions et les contain.
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results, \Cake\Database\Query $query) {
+    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
