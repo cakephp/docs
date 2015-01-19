@@ -1456,7 +1456,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
 Ceci charge les balises dans ``config/app_form.php``. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
-    $config = [
+    return [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 

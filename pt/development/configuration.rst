@@ -181,7 +181,7 @@ configured. CakePHP provides two Configure variables to setup additional paths
 for these resources. In your ``config/app.php`` you can set these
 variables::
 
-    $config = [
+    return [
         // More configuration
         'App' => [
             'paths' => [
@@ -491,7 +491,7 @@ You can read either files from your ``config`` or from plugin configs
 directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
 variable. An example configuration file would look like::
 
-    $config = [
+    return [
         'debug' => 0,
         'Security' => [
             'salt' => 'its-secret'

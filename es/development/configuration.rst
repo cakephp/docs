@@ -206,7 +206,7 @@ configured. CakePHP provides two configure variables to setup additional paths
 for these resources. In your ``config/app.php`` you can set these
 variables::
 
-    $config = [
+    return [
         // More configuration
         'App' => [
             'paths' => [

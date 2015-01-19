@@ -147,7 +147,7 @@ values in the ``Datasources.default`` array in the ``config/app.php`` file
 with those that apply to your setup. A sample completed configuration
 array might look something like the following::
 
-    $config = [
+    return [
         // More configuration above.
         'Datasources' => [
             'default' => [

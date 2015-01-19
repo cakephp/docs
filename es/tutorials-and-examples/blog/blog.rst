@@ -163,7 +163,7 @@ reemplaza los valores en la matriz `` Datasources.default`` con los que
 encajen con tu configuración. Una configuración completa de ejemplo podría
 parecerse a esto::
 
-    $config = [
+    return [
         // Más configuración arriba
         'Datasources' => [
             'default' => [
