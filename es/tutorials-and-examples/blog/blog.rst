@@ -138,14 +138,14 @@ framework y ahorrarás mucho trabajo de configuración. CakePHP es suficientemen
 flexible como para acomodarse hasta en el peor esquema de base de datos, pero
 utilizando las convenciones ahorrarás tiempo.
 
-Echa un vistazo a :doc:`las convensionnes </getting-started/cakephp-conventions>`
+Echa un vistazo a :doc:`las convencionnes </getting-started/cakephp-conventions>`
 para más información, pero basta decir que nombrando nuestra tabla 'articles'
 automáticamente lo vincula a nuestro modelo Articles y que campos
 llamados `modified` y `created` serán gestionados automáticamente por CakePHP.
 
-Al llamar 'posts' a nuestra tabla de artículos, estamos diciendo a CakePHP que
-vincule esta tabla por defecto al Modelo 'Post', e incluir los campos 'modified'
-y 'created' con ese nombre, serán automáticamente administrados por CakePHP.
+Al llamar 'articles' a nuestra tabla de artículos, estamos diciendo a CakePHP que
+vincule esta tabla por defecto al Modelo 'Articles', e incluiya los campos 'modified'
+y 'created' con ese nombre, los cuáles serán automáticamente administrados por CakePHP.
 
 Configurando la Base de Datos
 =============================
