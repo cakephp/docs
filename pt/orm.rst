@@ -9,7 +9,7 @@ do fluxo de trabalho de informação no domínio do trabalho.
 No CakePHP seu modelo de domínio da aplicação é dividido em 2 tipos de objetos
 principais. Os primeiros são **repositories (repositórios)** ou **table objects
 (objetos de tabela)**. Estes objetos fornecem acesso a coleções de dados. Eles
-permitem a você salvar novos recordes, modificar/deletar existentes, definir relacionamentos,
+permitem a você salvar novos recordes, modificar/deletar os que já existem, definir relacionamentos,
 e executar operações em massa. O segundo tipo de objetos são as **entities (entidades)**.
 Entities representam recordes individuais e permitem a você definir comportamento em
 nível de linha/registro e funcionalidades.
@@ -27,13 +27,13 @@ database connections <database-configuration>`.
 .. note::
 
     Se você é familiarizado com versões anteriores do CakePHP, você deveria ler o
-    :doc:`/appendices/orm-migration` para diferenças importantes entre o CakePHP 3.0
-    e suas antigas versões.
+    :doc:`/appendices/orm-migration` para esclarecer diferenças importantes entre o CakePHP 3.0
+    e suas versões antigas.
 
 Exemplo rápido
 ==============
 
-Para começar você não precisar escrever código. Se você seguiu as convenções do
+Para começar você não precisa escrever código. Se você seguiu as convenções do
 CakePHP para suas tabelas de banco de dados, você pode simplesmente começar a usar o ORM. Por
 exemplo, se quiséssemos carregar alguns dados da nossa tabela ``articles`` poderíamos fazer::
 
@@ -44,9 +44,9 @@ exemplo, se quiséssemos carregar alguns dados da nossa tabela ``articles`` pode
         echo $row->title;
     }
 
-Nota-se que nós não temos que criar qualquer código ou armar qualquer configuração.
-As convenções no CakePHP nos permitem saltar alguns códigos clichê, e permitir que o
-framework inserir classes de base quando sua aplicação não criou
+Nota-se que nós não temos que criar qualquer código ou definir qualquer configuração.
+As convenções do CakePHP nos permitem pular alguns códigos clichê, e permitir que o
+framework insera classes básicas enquanto sua aplicação não criou
 uma classe concreta. Se quiséssemos customizar nossa classe ArticlesTable adicionando algumas
 associações ou definir alguns métodos adicionais, deveriamos acrescentar o seguinte a
 ``src/Model/Table/ArticlesTable.php`` após a tag de abertura ``<?php``::
@@ -69,8 +69,8 @@ para esta utilizando o :php:class:`~Cake\\ORM\\TableRegistry` como antes::
     $articles = TableRegistry::get('Articles');
 
 Agora que temos uma classe de tabela concreta, nós provavelmente vamos querer usar uma
-classe de entidade concreta. As classes de entidade permitem definir métodos de acesso e mutantes, definir
-lógica personalizada para os registros individuais e muito mais. Vamos começar adicionando o
+classe de entidade concreta. As classes de entidade permitem definir métodos de acesso, métodos mutantes,
+definir lógica personalizada para os registros individuais e muito mais. Vamos começar adicionando o
 seguinte para ``src/Model/Entity/Article.php`` após a tag de abertura ``<?php``::
 
     namespace App\Model\Entity;
@@ -98,12 +98,12 @@ classe Article::
         echo $row->title;
     }
 
-CakePHP utiliza convenções de nome para ligar as classes de tabela e entidade juntas.
+CakePHP utiliza convenções de nomenclatura para ligar as classes de tabela e entidade juntas.
 Se você precisar customizar qual entidade uma tabela utiliza, você pode usar o método
 ``entityClass()`` para definir nomes de classe específicos.
 
 Veja os capítulos em :doc:`/orm/table-objects` e :doc:`/orm/entities` para mais
-informação sobre como usar objetos de tabela e entidades em sua aplicação.
+informações sobre como usar objetos de tabela e entidades em sua aplicação.
 
 Mais informação
 ===============
