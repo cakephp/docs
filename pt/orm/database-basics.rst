@@ -113,7 +113,7 @@ ssl_ca
 init
     A list of queries that should be sent to the database server as
     when the connection is created. This option is only
-    supported by MySQL, PostgreSQL, and SQLServer at this time.
+    supported by MySQL, PostgreSQL, and SQL Server at this time.
 log
     Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
@@ -197,7 +197,7 @@ data types for use with the database layer. The types CakePHP supports are:
 
 string
     Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
-    will force a CHAR column. In SQLServer, NCHAR and NVARCHAR types are used.
+    will force a CHAR column. In SQL Server, NCHAR and NVARCHAR types are used.
 text
     Maps to TEXT types
 uuid
@@ -221,7 +221,7 @@ binary
 date
     Maps to a timezone naive DATE column type.
 datetime
-    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQLServer
+    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL Server
     this turns into a TIMESTAMP type. The default return value of this column
     type is :php:class:`Cake\\I18n\\Time` which extends the built-in
     ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.

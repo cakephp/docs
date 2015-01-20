@@ -612,7 +612,7 @@ Stopper le buffering nécessite quelques mises en garde:
 .. warning::
 
     Les résultats de streaming alloueront toujours l'espace mémoire nécessaire
-    pour les résultats complets lorsque vous utilisez PostgreSQL et SQLServer.
+    pour les résultats complets lorsque vous utilisez PostgreSQL et SQL Server.
     Ceci est dû à des limitations dans PDO.
 
 Les ensembles de résultat vous permettent de mettre en cache/serializer ou

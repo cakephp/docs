@@ -123,7 +123,7 @@ ssl_ca
 init
     Une liste de requêtes qui doivent être envoyées au serveur de la base de
     données lorsque la connexion est créée. Cette option est seulement
-    supportée par MySQL, PostgreSQL, et SQLServer pour le moment.
+    supportée par MySQL, PostgreSQL, et SQL Server pour le moment.
 log
     Défini à ``true`` pour activer les logs des requêtes. Quand les requêtes
     sont activées, elles seront écrites au niveau ``debug`` avec le scope
@@ -213,7 +213,7 @@ couche de la base de données. Les types que CakePHP supporte sont:
 
 string
     Généralement backed by CHAR or VARCHAR columns. Utiliser l'option ``fixed``
-    va forcer une colonne CHAR. Dans SQLServer, les types NCHAR et NVARCHAR sont
+    va forcer une colonne CHAR. Dans SQL Server, les types NCHAR et NVARCHAR sont
     utilisés.
 text
     Correspond aux types TEXT
@@ -238,7 +238,7 @@ date
     Correspond au type de colonne DATE sans timezone.
 datetime
     Correspond au type de colonne DATETIME sans timezone. Dans PostgreSQL et
-    SQLServer, ceci retourne un type TIMESTAMP. La valeur retournée par défaut
+    SQL Server, ceci retourne un type TIMESTAMP. La valeur retournée par défaut
     de ce type de colonne est :php:class:`Cake\\Utility\\Time` qui étend
     les classes intégrées ``DateTime`` et
     `Carbon <https://github.com/briannesbitt/Carbon>`_.
