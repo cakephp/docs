@@ -912,7 +912,7 @@ a string like::
     )
 
 By default, CakePHP joins multiple conditions with boolean ``AND``.
-This means the snippet above would only match posts that have
+This means the snippet below would only match posts that have
 been created in the past two weeks, and have a title that matches
 one in the given set. However, we could just as easily find posts
 that match either condition::
