@@ -8,7 +8,7 @@ em conjunto ou isoladamente.
 O objetivo desta análise é introduzir os conceitos gerais presentes no CakePHP, e lhe dar
 uma rápida visão geral de como estes conceitos são implementados. Se
 você está ávido para começar um projeto, você pode :doc:`começar com o tutorial
-</tutorials-and-examples/blog/blog>`, ou :doc:`mergulhar na documentação</topics>`.
+</tutorials-and-examples/bookmarks/intro>`, ou :doc:`mergulhar na documentação</topics>`.
 
 Convenções Sobre Configuração
 =============================
