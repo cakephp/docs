@@ -95,7 +95,7 @@ encoding
     Indicates the character set to use when sending SQL statements to
     the server. This defaults to the database's default encoding for
     all databases other than DB2. If you wish to use UTF-8 encoding
-    with mysql connections you must use 'utf8' without the
+    with MySQL connections you must use 'utf8' without the
     hyphen.
 timezone
     Server timezone to set.
@@ -103,7 +103,7 @@ schema
     Used in PostgreSQL database setups to specify which schema to use.
 unix_socket
     Used by drivers that support it to connect via Unix socket files. If you are
-    using Postgres and want to use Unix sockets, leave the host key blank.
+    using PostgreSQL and want to use Unix sockets, leave the host key blank.
 ssl_key
     The file path to the SSL key file. (Only supported by MySQL).
 ssl_cert
@@ -113,7 +113,7 @@ ssl_ca
 init
     A list of queries that should be sent to the database server as
     when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQLServer at this time.
+    supported by MySQL, PostgreSQL, and SQLServer at this time.
 log
     Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
@@ -221,7 +221,7 @@ binary
 date
     Maps to a timezone naive DATE column type.
 datetime
-    Maps to a timezone naive DATETIME column type. In postgres, and SQLServer
+    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQLServer
     this turns into a TIMESTAMP type. The default return value of this column
     type is :php:class:`Cake\\I18n\\Time` which extends the built-in
     ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.

@@ -100,7 +100,7 @@ encoding
     Indique le character set à utiliser lors de l'envoi d'instructions SQL au
     serveur. Ceci est par défaut à l'encodage par défaut de la base de données
     pout toutes les bases de données autres que DB2. Si vous souhaitez utiliser
-    l'encodage UTF-8 avec les connexions mysql, vous devez utiliser
+    l'encodage UTF-8 avec les connexions MySQL, vous devez utiliser
     'utf8' sans trait d'union.
 timezone
     La définition du timezone du Serveur.
@@ -109,7 +109,7 @@ schema
     spécifier le schema à utiliser.
 unix_socket
     Utilisé par les drivers qui le supportent pour se connecter via les fichiers
-    socket Unix. Si vous utilisez Postgres et voulez utiliser les sockets Unix,
+    socket Unix. Si vous utilisez PostgreSQL et voulez utiliser les sockets Unix,
     laissez clé host vide.
 ssl_key
     Le chemin du fichier vers la clé du fichier SSL. (supporté seulement par
@@ -123,7 +123,7 @@ ssl_ca
 init
     Une liste de requêtes qui doivent être envoyées au serveur de la base de
     données lorsque la connexion est créée. Cette option est seulement
-    supportée par le Serveur MySQL, Postgres, et SQL pour le moment.
+    supportée par MySQL, PostgreSQL, et SQLServer pour le moment.
 log
     Défini à ``true`` pour activer les logs des requêtes. Quand les requêtes
     sont activées, elles seront écrites au niveau ``debug`` avec le scope
@@ -237,7 +237,7 @@ binary
 date
     Correspond au type de colonne DATE sans timezone.
 datetime
-    Correspond au type de colonne DATETIME sans timezone. Dans postgres et
+    Correspond au type de colonne DATETIME sans timezone. Dans PostgreSQL et
     SQLServer, ceci retourne un type TIMESTAMP. La valeur retournée par défaut
     de ce type de colonne est :php:class:`Cake\\Utility\\Time` qui étend
     les classes intégrées ``DateTime`` et
@@ -420,7 +420,7 @@ Utiliser les Transactions
 Les objets de connexion vous fournissent quelques manières simples pour que
 vous fassiez des transactions de base de données. La façon la plus basique de
 faire des transactions est avec les méthodes ``begin``, ``commit`` et
-``rollback``, qui correspondent à leurs equivalents SQL::
+``rollback``, qui correspondent à leurs équivalents SQL::
 
     $conn->begin();
     $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
