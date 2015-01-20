@@ -496,6 +496,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
                 $this->request->data['User'],
                 array('id' => $id)
             );
+            unset($this->request->data['User']['password']);
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
         }
@@ -505,6 +506,11 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
 
     Be sure to manually add the new User id to the array passed to the login
     method. Otherwise you won't have the user id available.
+    
+.. warning::
+
+    Be sure to unset password fields before manually passing data into
+    ``$this->Auth->login()``, or it will get saved in the Session unhashed.
 
 Accessing the logged in user
 ----------------------------
