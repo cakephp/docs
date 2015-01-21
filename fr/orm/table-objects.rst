@@ -292,13 +292,13 @@ fournis par CakePHP dans le chapitre sur les :doc:`/orm/behaviors`.
 
 .. _configuring-table-connections:
 
-COnfigurer les Connections
-==========================
+Configurer les Connexions
+=========================
 
-Par défaut, toutes les instances de table utilisent la connection à la base
-de données ``default``. Si votre application utilise plusieurs connections à la
+Par défaut, toutes les instances de table utilisent la connexion à la base
+de données ``default``. Si votre application utilise plusieurs connexions à la
 base de données, vous voudrez peut-être configurer quelles tables utilisent
-quelles connections. C'est avec la méthode ``defaultConnectionName``::
+quelles connexions. C'est avec la méthode ``defaultConnectionName``::
 
     namespace App\Model\Table;
 

@@ -315,7 +315,7 @@ Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
 Valider les Données Avant de Construire les Entities
 ----------------------------------------------------
 
-Quand vous marshalling les données dans les entities, vous pouvez valider les
+Durant la transformation des données en entities, vous pouvez valider les
 données. La validation des données vous permet de vérifier le type, la forme et
 la taille des données. Par défaut les données de request seront validées avant
 qu'elles ne soient converties en entities.
@@ -337,7 +337,7 @@ suivantes vont se produire:
    ``validationDefault``.
 4. L'event ``Model.buildValidator`` va être déclenché.
 5. Les données de Request vont être validées.
-6. Les données de Request vont être type cast into types qui correspondent
+6. Les données de Request vont être castées en types qui correspondent
    aux types de colonne.
 7. Les erreurs vont être définies dans l'entity.
 8. Les données valides vont être définies dans l'entity, alors que les champs
