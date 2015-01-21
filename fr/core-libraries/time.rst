@@ -291,6 +291,13 @@ Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé
 
 .. end-time
 
+Accepter des Données de Request Localisées
+==========================================
+
+Quand vous créez des inputs de texte qui manipulent des dates, vous voudrez
+probablement accepter et parser des chaînes datetime localisées. Consultez
+:ref:`parsing-localized-dates`.
+
 .. meta::
     :title lang=fr: Time
     :description lang=fr: Classe Time vous aide à formater le temps et à tester le temps.

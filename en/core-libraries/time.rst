@@ -201,9 +201,9 @@ Often it is useful to print times relative to the present::
     );
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 
-The ``end`` option lets you define at which point after which relative times should be
-formatted using the ``format`` option. The ``accuracy`` option lets us control
-what level of detail should be used for each interval range::
+The ``end`` option lets you define at which point after which relative times
+should be formatted using the ``format`` option. The ``accuracy`` option lets
+us control what level of detail should be used for each interval range::
 
     // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
     echo $timestamp->timeAgoInWords([
@@ -212,8 +212,8 @@ what level of detail should be used for each interval range::
     ]);
     // Outputs '1 month ago'
 
-By setting ``accuracy`` to a string, you can specify what is the maximum level of detail you
-want output::
+By setting ``accuracy`` to a string, you can specify what is the maximum level
+of detail you want output::
 
     $time = new Time('+23 hours');
     // Outputs 'in about a day'
@@ -250,8 +250,8 @@ You can compare a ``Time`` instance with the present in a variety of ways::
     echo $time->isThisMonth();
     echo $time->isThisYear();
 
-Each of the above methods will return ``true``/``false`` based on whether or not the
-``Time`` instance matches the present.
+Each of the above methods will return ``true``/``false`` based on whether or
+not the ``Time`` instance matches the present.
 
 Comparing With Intervals
 ========================
