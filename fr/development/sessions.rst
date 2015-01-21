@@ -48,7 +48,7 @@ désactiver cela::
         ]
     ]);
 
-Le chemins du cookie de session est par défaut le chemin de base de
+Le chemin du cookie de session est par défaut le chemin de base de
 l'application. Pour changer ceci, vous pouvez utiliser la valeur ini
 ``session.cookie_path``. Par exemple, si vous voulez que votre session soit
 sauvegardée pour tous les sous-domaines, vous pouvez faire::
