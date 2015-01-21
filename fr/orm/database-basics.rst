@@ -110,8 +110,8 @@ schema
     PostgreSQL.
 unix_socket
     Utilisé par les drivers qui le supportent pour se connecter via les fichiers
-    socket Unix. Si vous utilisez PostgreSQL et que voulez utiliser les sockets
-    Unix, laissez la clé host vide.
+    socket Unix. Si vous utilisez PostgreSQL et que vous voulez utiliser les
+    sockets Unix, laissez la clé host vide.
 ssl_key
     Le chemin du fichier vers la clé du fichier SSL. (supporté seulement par
     MySQL).
@@ -211,7 +211,7 @@ Types de Données
 
 Puisque tous les fournisseurs de base de données n'intègrent pas la même
 définition des types de données, ou les mêmes noms pour des types de données
-similaires, CakePHP fournit un ensemblee de types de données abstraites à
+similaires, CakePHP fournit un ensemble de types de données abstraites à
 utiliser avec la couche de la base de données. Les types supportés par CakePHP
 sont:
 
@@ -664,8 +664,8 @@ a quelques inconvénients:
   qui suivent les conventions de CakePHP, il n'y a pas de raison de quoter les
   identifiers.
 
-Si vous utilisez pas un schema datant un peu qui nécessite de quoter les
-identifier, vous pouvez l'activer en utilisant le paramètre ``quoteIdentifiers``
+Si vous utilisez un schema datant un peu qui nécessite de quoter les
+identifiers, vous pouvez l'activer en utilisant le paramètre ``quoteIdentifiers``
 dans votre :ref:`database-configuration`. Vous pouvez aussi activer cette
 fonctionnalité à la volée::
 
