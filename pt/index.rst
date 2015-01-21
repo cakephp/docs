@@ -8,7 +8,9 @@ Bem-vindo
 
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
 Esperamos manter um alto nível de qualidade, validade e precisão para a documentação do CakePHP.
-Observe o botão “Improve this Doc” no canto superior direito, ele vai direcioná-lo para o editor online da página ativa no GitHub, permitindo que você facilmente contribua com quaisquer adições, exclusões ou correções para a documentação.
+Observe o botão “Improve this Doc” no canto superior direito, ele vai direcioná-lo para o editor
+online da página ativa no GitHub, permitindo que você facilmente contribua com quaisquer adições,
+exclusões ou correções para a documentação.
 
 .. container:: offline-download
 
@@ -20,6 +22,12 @@ Observe o botão “Improve this Doc” no canto superior direito, ele vai direc
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
     - `Código-fonte Original <http://github.com/cakephp/docs>`_
+
+Obtendo ajuda
+=============
+
+Se você está travado, há um número de lugares que :doc:`Você pode receber ajuda
+</cakephp-overview/where-to-get-help>`.
 
 Começando
 =========
@@ -43,13 +51,6 @@ uma aplicação CakePHP:
   aplicação precisa.
 * :doc:`Models </orm>` são o ingrediente chave em qualquer aplicação. Eles lidam com
   a validação e a lógica de domínio.
-
-Obtendo ajuda
-=============
-
-Se você está travado, há um número de lugares que :doc:`Você pode receber ajuda
-</cakephp-overview/where-to-get-help>`.
-
 
 .. meta::
     :title lang=pt: .. CakePHP Cookbook arquivo mestre de documentação, criado por
