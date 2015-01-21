@@ -4,6 +4,14 @@
 CakePHP 2.7 est une mise à jour complète à partir de l'API de 2.6. Cette page
 souligne les changements et améliorations faits dans 2.7.
 
+Console
+=======
+
+- Les shells de Plugin qui ont le même nom que leur plugin peuvent maintenant
+  être appelés sans le préfixe de plugin. Par exemple
+  ``Console/cake MyPlugin.my_plugin`` peut maintenant être appelé avec
+  ``Console/cake my_plugin``.
+
 Core
 ====
 
