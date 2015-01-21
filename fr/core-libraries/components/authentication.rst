@@ -127,7 +127,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
   .. versionadded:: 2.4
 
 - ``userFields`` La liste des champs à récupérer depuis le ``userModel``. Cette
-  option est utile lorsque vous avez une large table d'utilisateurs et que vous 
+  option est utile lorsque vous avez une large table d'utilisateurs et que vous
   n'avez pas besoin de toutes les colonnes dans la session. Par défaut tous les
   champs sont récupérés.
 
@@ -533,7 +533,11 @@ utilisateur que vous voulez pour la 'connexion'::
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
-            $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
+            $this->request->data['User'] = array_merge(
+                $this->request->data['User'],
+                array('id' => $id)
+            );
+            unset($this->request->data['User']['password']);
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
         }
@@ -541,8 +545,14 @@ utilisateur que vous voulez pour la 'connexion'::
 
 .. warning::
 
-    Soyez certain d'ajouter manuellement le nouvel id utilisateur au tableau passé
-    à la méthode de login. Sinon, l'id utilisateur ne sera pas disponible.
+    Assurez-vous d'ajouter manuellement le nouvel id utilisateur au tableau
+    passé à la méthode de login. Sinon, l'id utilisateur ne sera pas disponible.
+
+.. warning::
+
+    Assurez-vous d'enlever les champs de mot de passe avant de passer
+    manuellement les données dans ``$this->Auth->login()``, sinon celles-ci
+    seront sauvegardées non hashées dans la Session.
 
 Accéder à l'utilisateur connecté
 --------------------------------
@@ -603,7 +613,7 @@ pouvez créer vos propres gestionnaires dans un plugin par exemple.
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-Vous configurez les gestionnaires d'autorisations via 
+Vous configurez les gestionnaires d'autorisations via
 ``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires. L'utilisation de plusieurs gestionnaires vous donne la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
