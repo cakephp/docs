@@ -279,6 +279,25 @@ array::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
+.. _before-marshal:
+
+Modifying Request Data Before Building Entities
+-----------------------------------------------
+
+If you need to modify request data before it is converted into entities, you can
+use the ``Model.beforeMarshal`` event. This event lets you manipulate the
+request data just before entities are created::
+
+    // In a table or behavior class
+    public function beforeMarshal(Event $event, $data, $options = [])
+    {
+        $data['username'] .= 'user';
+    }
+
+The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
+return it to change the data used to create entities.
+
+
 .. _validating-request-data:
 
 Validating Data Before Building Entities
