@@ -293,52 +293,58 @@ dans chacune des entities du tableau::
 
 .. _before-marshal:
 
-Modifying Request Data Before Building Entities
------------------------------------------------
+Modifier les Données de Request Avant de Construire les Entities
+----------------------------------------------------------------
 
-If you need to modify request data before it is converted into entities, you can
-use the ``Model.beforeMarshal`` event. This event lets you manipulate the
-request data just before entities are created::
+Si vous devez modifier les données de request avant qu'elles ne soient
+converties en entities, vous pouvez utiliser l'event ``Model.beforeMarshal``.
+Cet event vous laisse manipuler les données de request juste avant que les
+entities ne soient créées::
 
-    // In a table or behavior class
+    // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, $data, $options = [])
     {
         $data['username'] .= 'user';
     }
 
-The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
-return it to change the data used to create entities.
+Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
+à la retourner pour changer les données utilisées pour créer les entities.
 
 .. _validating-request-data:
 
-Validating Data Before Building Entities
-----------------------------------------
+Valider les Données Avant de Construire les Entities
+----------------------------------------------------
 
-When marshalling data into entities, you can validate data. Validating data
-allows you to check the type, shape and size of data. By default request data
-will be validated before it is converted into entities.
-If any validation rules fail, the returned entity will contain errors. The
-fields with errors will not be present in the returned entity::
+Quand vous marshalling les données dans les entities, vous pouvez valider les
+données. La validation des données vous permet de vérifier le type, la forme et
+la taille des données. Par défaut les données de request seront validées avant
+qu'elles ne soient converties en entities.
+Si aucune règle de validation n'échoue, l'entity retournée va contenir les
+erreurs. Les champs avec des erreurs ne seront pas présents dans l'entity
+retournée::
 
     $article = $articles->newEntity($this->request->data);
     if ($article->errors()) {
-        // Entity failed validation.
+        // validation de l'entity a echoué.
     }
 
-When building an entity with validation enabled the following things happen:
+Quand vous construisez une entity avec la validation activée, les choses
+suivantes vont se produire:
 
-1. The validator object is created.
-2. The ``table`` and ``default`` validation provider are attached.
-3. The named validation method is invoked. For example, ``validationDefault``.
-4. The ``Model.buildValidator`` event will be triggered.
-5. Request data will be validated.
-6. Request data will be type cast into types that match the column types.
-7. Errors will be set into the entity.
-8. Valid data will be set into the entity, while fields that failed validation
-   will be left out.
+1. L'objet validator est créé.
+2. Les providers de validation ``table`` et ``default`` sont attachés.
+3. La méthode de validation nommée est appelée. Par exemple,
+   ``validationDefault``.
+4. L'event ``Model.buildValidator`` va être déclenché.
+5. Les données de Request vont être validées.
+6. Les données de Request vont être type cast into types qui correspondent
+   aux types de colonne.
+7. Les erreurs vont être définies dans l'entity.
+8. Les données valides vont être définies dans l'entity, alors que les champs
+   qui échouent la validation seront laissés de côté.
 
-If you'd like to disable validation when converting request data, set the
-``validate`` option to false::
+Si vous voulez désactiver la validation lors de la conversion des données de
+request, définissez l'option ``validate`` à false::
 
     $article = $articles->newEntity(
         $this->request->data,

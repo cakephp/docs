@@ -138,8 +138,9 @@ beforeMarshal
 
 .. php:method:: beforeMarshal(Event $event, ArrayObject $data, $options)
 
-The ``Model.beforeMarshal`` event is fired before request data is converted
-into entities. See the :ref:`before-marshal` documentation for more information.
+L'event ``Model.beforeMarshal`` est déclenché avant que les données de request
+ne soient converties en entities. Consultez la documentation
+:ref:`before-marshal` pour plus d'informations.
 
 beforeFind
 ----------
