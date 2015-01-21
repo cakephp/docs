@@ -133,6 +133,14 @@ implémentez simplement les signatures de méthode comme décrit ci-dessus.
 Consultez les :doc:`/core-libraries/events` pour avoir plus de détails sur la
 façon d'utiliser le sous-système d'événements.
 
+beforeMarshal
+-------------
+
+.. php:method:: beforeMarshal(Event $event, ArrayObject $data, $options)
+
+The ``Model.beforeMarshal`` event is fired before request data is converted
+into entities. See the :ref:`before-marshal` documentation for more information.
+
 beforeFind
 ----------
 

@@ -289,7 +289,8 @@ use the ``Model.beforeMarshal`` event. This event lets you manipulate the
 request data just before entities are created::
 
     // In a table or behavior class
-    public function beforeMarshal(Event $event, $data, $options = []) {
+    public function beforeMarshal(Event $event, $data, $options = [])
+    {
         $data['username'] .= 'user';
     }
 
