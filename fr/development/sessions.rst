@@ -61,7 +61,7 @@ sauvegardée pour tous les sous-domaines, vous pouvez faire::
         ]
     ]);
 
-Par défaut PHP définit le cookie de session pour qu'il expire aussi dès que le
+Par défaut PHP définit le cookie de session pour qu'il expire dès que le
 navigateur est fermé, quelque soit la valeur ``Session.timeout`` configurée.
 Le timeout du cookie est contrôlé par la valeur ini ``session.cookie_lifetime``
 et peut être configurée en utilisant::
