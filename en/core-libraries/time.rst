@@ -281,6 +281,12 @@ You can also compare a ``Time`` instance within a range in the past::
 
 .. end-time
 
+Accepting Localized Request Data
+================================
+
+When creating text inputs that manipulate dates, you'll probably want to accept
+and parse localized datetime strings. See the :ref:`parsing-localized-dates`.
+
 .. meta::
     :title lang=en: Time
     :description lang=en: Time class helps you format time and test time.
