@@ -1350,7 +1350,7 @@ Security
 Time
 ----
 
-- ``CakeTime`` a été renommée en :php:class:`Cake\\Utility\\Time`.
+- ``CakeTime`` a été renommée en :php:class:`Cake\\I18n\\Time`.
 - ``Time::__set()`` et - ``Time::__get()`` ont été retirées. Celles-ci étaient
   des méthodes magiques setter/getter pour une rétrocompatibilité.
 - ``CakeTime::serverOffset()`` a été retirée. Il incitait à des pratiques de

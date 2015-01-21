@@ -434,8 +434,7 @@ la définition de la table sont:
     - ``binary``: redirige vers ``BLOB``.
 fixed
     Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR`` dans
-    les plates-formes qui les supportent. Également utilisé pour forcer le type
-    ``UUID`` dans Postgres lorsque la longueur est de 36.
+    les plates-formes qui les supportent.
 length
     Défini à la longueur spécifique que le champ doit prendre.
 precision
