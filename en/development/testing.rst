@@ -619,11 +619,12 @@ a file named ``ArticlesTableTest.php`` in your ``tests/TestCase/Model/Table`` di
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
-
+    
+    use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase
+    class ArticlesTableTest extends TestCase
     {
         public $fixtures = ['app.articles'];
     }
@@ -641,10 +642,11 @@ looks like this::
 
     namespace App\Test\TestCase\Model\Table;
 
+    use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase
+    class ArticlesTableTest extends TestCase
     {
         public $fixtures = ['app.articles'];
 
