@@ -4,10 +4,12 @@ Structure du dossier de CakePHP
 Après avoir téléchargé et extrait l'application CakePHP, voici les fichiers et
 répertoires que vous devriez voir:
 
-- src
+- bin
 - config
-- tests
+- logs
 - plugins
+- src
+- tests
 - tmp
 - vendor
 - webroot
@@ -18,28 +20,29 @@ répertoires que vous devriez voir:
 
 Vous remarquerez quelques dossiers principaux:
 
-- Le dossier *src* sera celui où vous exercerez votre magie : c'est là
-  que vous placerez les fichiers de votre application.
+- The *bin* folder holds the Cake console executables.
 - Le dossier *config* contient les (quelques) fichiers de
   :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
   connexion à la base de données, le bootstrapping, les fichiers de
   configuration du cœur et consorts doivent être stockés ici.
-- Le dossier *tests* est l'endroit où vous mettez les cas de test pour votre
-  application.
+- Le dossier *logs* contient normalement vos fichiers de log dépendant de votre
+  configuration des logs.
 - Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
+- Le dossier *src* sera celui où vous exercerez votre magie : c'est là
+  que vous placerez les fichiers de votre application.
+- Le dossier *tests* est l'endroit où vous mettez les cas de test pour votre
+  application.
+- Le dossier *tmp* est l'endroit où CakePHP stocke les données temporaires. Les
+  données qu'il stocke dépendent de la façon dont vous avez configuré CakePHP
+  mais ce dossier est généralement utilisé pour stocker les descriptions de
+  model, les logs, et parfois les informations de session.
 - Le dossier *vendor* est l'endroit où CakePHP et d'autres dépendances de
   l'application vont être installés. Engagez-vous personnellement à ne
   **pas** modifier les fichiers dans ce dossier. Nous ne pourrons pas vous
   aider si vous avez modifié le cœur du framework.
 - Le répertoire *webroot* est la racine publique de votre application. Il
   contient tous les fichiers que vous souhaitez voir accessibles publiquement.
-- Le dossier *tmp* est l'endroit où CakePHP stocke les données temporaires. Les
-  données qu'il stocke dépendent de la façon dont vous avez configuré CakePHP
-  mais ce dossier est généralement utilisé pour stocker les descriptions de
-  model, les logs, et parfois les informations de session.
-- Le dossier *logs* contient normalement vos fichiers de log dépendant de votre
-  configuration des logs.
 
   Assurez-vous que les dossiers *tmp* et *logs* existent et qu'ils sont en
   écriture, autrement la performance de votre application sera sévèrement
