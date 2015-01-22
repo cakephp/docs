@@ -126,7 +126,7 @@ more detail on how to use the events subsystem.
 beforeMarshal
 -------------
 
-.. php:method:: beforeMarshal(Event $event, ArrayObject $data, $options)
+.. php:method:: beforeMarshal(Event $event, ArrayObject $data, array $options)
 
 The ``Model.beforeMarshal`` event is fired before request data is converted
 into entities. See the :ref:`before-marshal` documentation for more information.
