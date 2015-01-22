@@ -249,13 +249,14 @@ You can also access tasks directly from the command line::
 Also, the task name must be added as a sub command to the Shell's
 OptionParser::
 
-	public function getOptionParser() {
-		$parser = parent::getOptionParser();
-		$parser->addSubcommand('sound', [
-			'help' => 'Execute The Sound Task.'
-		]);
-		return $parser;
-	}
+    public function getOptionParser()
+    {
+        $parser = parent::getOptionParser();
+        $parser->addSubcommand('sound', [
+            'help' => 'Execute The Sound Task.'
+        ]);
+        return $parser;
+    }
 
 Loading Tasks On The Fly with TaskRegistry
 ------------------------------------------
