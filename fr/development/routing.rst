@@ -782,7 +782,8 @@ comme étant des paramètres passés également.
 Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::
 
-    CalendarsController extends AppController{
+    class CalendarsController extends AppController
+    {
         public function view($arg1, $arg2)
         {
             debug(func_get_args());
