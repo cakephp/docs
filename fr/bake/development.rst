@@ -112,7 +112,8 @@ ressemble à ceci::
     /**
      * <%= $name %> shell command.
      */
-    class <%= $name %>Shell extends Shell {
+    class <%= $name %>Shell extends Shell
+    {
 
     /**
      * main() method.
@@ -137,7 +138,8 @@ rendu, ressemble à ceci::
     /**
      * <?= $name ?> shell command.
      */
-    class <?= $name ?>Shell extends Shell {
+    class <?= $name ?>Shell extends Shell
+    {
 
     /**
      * main() method.
@@ -244,8 +246,8 @@ ajouterons le contenu suivant::
     /**
      * <%= $name %> foo
      */
-    class <%= $name %>Foo {
-
+    class <%= $name %>Foo
+    {
         // Add code.
     }
 
