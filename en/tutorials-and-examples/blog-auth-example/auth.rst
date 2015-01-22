@@ -357,6 +357,11 @@ config::
                 'action' => 'display', 
                 'home'
             ),
+                'authenticate' => array(
+                    'Form' => array(
+                        'passwordHasher' => 'Blowfish'
+                    )
+                ),
             'authorize' => array('Controller') // Added this line
         )
     );
