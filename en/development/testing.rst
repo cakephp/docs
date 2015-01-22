@@ -24,7 +24,7 @@ To install PHPUnit with Composer, add the following to you application's
 
     "phpunit/phpunit": "*",
 
-After updating your package.json, run Composer again inside your application
+After updating your composer.json, run Composer again inside your application
 directory::
 
     $ php composer.phar install
