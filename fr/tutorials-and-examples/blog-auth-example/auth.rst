@@ -234,7 +234,7 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
 ``app/Model/User.php`` et ajoutez ce qui suit::
 
     // app/Model/User.php
-    
+
     App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
@@ -342,8 +342,17 @@ config de Auth::
         'Session',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-            'authorize' => array('Controller') // Ligne ajoutée
+            'logoutRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            ),
+            'authorize' => array('Controller') // Ajout de cette ligne
         )
     );
 
