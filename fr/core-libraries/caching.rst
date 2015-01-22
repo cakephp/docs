@@ -408,7 +408,8 @@ Par exemple, dès qu'un post est ajouté, nous pouvons dire au moteur de
 Cache de retirer toutes les entrées associées au groupe ``article``::
 
     // src/Model/Table/ArticlesTable.php
-    public function afterSave($entity, $options = []) {
+    public function afterSave($entity, $options = [])
+    {
         if ($entity->isNew()) {
             Cache::clearGroup('article', 'site_home');
         }
@@ -425,7 +426,8 @@ entre des groupes et des configurations, par exemple ayant le même groupe::
      * Une variante de l'exemple précédent qui efface toutes les configurations
      * ayant le même groupe
      */
-    public function afterSave($entity, $options = []) {
+    public function afterSave($entity, $options = [])
+    {
         if ($entity->isNew()) {
             $configs = Cache::groupConfigs('article');
             foreach ($configs['article'] as $config) {
