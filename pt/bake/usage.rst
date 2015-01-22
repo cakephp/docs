@@ -45,7 +45,7 @@ tasks. You should see something like::
     By using `cake bake [name]` you can invoke a specific bake task.
 
 You can get more information on what each task does, and what options are
-availble using the ``--help`` option::
+available using the ``--help`` option::
 
     $ bin/cake bake controller --help
 
@@ -86,7 +86,7 @@ availble using the ``--help`` option::
     name  Name of the controller to bake. Can use Plugin.name to bake
         controllers into plugins. (optional)
 
-Bake themes
+Bake Themes
 ===========
 
 The theme option is common to all bake commands, and allows changing the bake
