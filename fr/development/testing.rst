@@ -26,7 +26,7 @@ Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
 
     "phpunit/phpunit": "*",
 
-Après avoir mis à jour votre package.json, lancez à nouveau Composer dans votre
+Après avoir mis à jour votre composer.json, lancez à nouveau Composer dans votre
 répertoire d'application::
 
     $ php composer.phar install
@@ -621,7 +621,7 @@ vous avez une application plus grande. Pour charger les fixtures dans les
 sous-répertoires, incluez simplement le nom du sous-répertoire dans le nom de
 la fixture::
 
-    class ArticlesTest extends CakeTestCase
+    class ArticlesTableTest extends CakeTestCase
     {
         public $fixtures = ['app.blog/articles', 'app.blog/comments'];
     }
@@ -663,10 +663,11 @@ répertoire ``tests/TestCase/Model/Table``, avec les contenus suivants::
 
     namespace App\Test\TestCase\Model\Table;
 
+    use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase
+    class ArticlesTableTest extends TestCase
     {
         public $fixtures = ['app.articles'];
     }
@@ -675,7 +676,7 @@ Dans notre variable de cas de test ``$fixtures``, nous définissons l'ensemble
 des fixtures que nous utiliserons. Vous devriez vous rappeler d'inclure tous
 les fixtures qui vont avoir des requêtes lancées contre elles.
 
-Créer une méthode de test
+Créer une Méthode de Test
 -------------------------
 
 Ajoutons maintenant une méthode pour tester la fonction published() dans le
@@ -685,10 +686,11 @@ maintenant à ceci::
 
     namespace App\Test\TestCase\Model\Table;
 
+    use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase
+    class ArticlesTableTest extends TestCase
     {
         public $fixtures = ['app.articles'];
 

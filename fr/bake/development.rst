@@ -5,24 +5,24 @@ Bake dispose d'une architecture extensible qui permet à votre application ou
 à vos plugins de facilement modifier ou ajouter la fonctionnalité de base. Bake
 utilise une classe de vue dédiée qui n'utilise pas la syntaxe PHP standard.
 
-Evénements de Bake
-==================
+Events de Bake
+==============
 
-Comme une classe de vue, ``BakeView`` envoie les mêmes événements que toute autre
-classe de vue, ainsi qu'un événement initialize supplémentaire. Cependant,
-alors que les classes de vue standard utilisent le préfixe d'événement
-"View.", ``BakeView`` utilise le préfixe d'événement "Bake.".
+Comme une classe de vue, ``BakeView`` envoie les mêmes events que toute autre
+classe de vue, ainsi qu'un event initialize supplémentaire. Cependant,
+alors que les classes de vue standard utilisent le préfixe d'event
+"View.", ``BakeView`` utilise le préfixe d'event "Bake.".
 
-L'événement initialize peut être utilisé pour faire des changements qui
+L'event initialize peut être utilisé pour faire des changements qui
 s'appliquent à toutes les sorties fabriquées avec bake, par exemple pour ajouter
-un autre helper à la classe de vue bake, cet événement peut être utilisé::
+un autre helper à la classe de vue bake, cet event peut être utilisé::
 
     <?php
     // config/bootstrap_cli.php
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
-    
+
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 
@@ -34,7 +34,7 @@ un autre helper à la classe de vue bake, cet événement peut être utilisé::
 
     }, 'Bake.initialize');
 
-Les événements de Bake peuvent aussi être utiles pour faire des petits
+Les events de Bake peuvent aussi être utiles pour faire des petits
 changements aux templates existants. Par exemple, pour changer les noms de
 variable utilisés lors de la création avec bake de fichiers de
 controller/template, on pourra utiliser une fonction qui écoute
@@ -46,7 +46,7 @@ de bake::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
-    
+
     EventManager::instance()->attach(function (Event $event) {
         $view = $event->subject;
 

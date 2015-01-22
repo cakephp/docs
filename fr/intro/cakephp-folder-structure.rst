@@ -20,7 +20,7 @@ répertoires que vous devriez voir:
 
 Vous remarquerez quelques dossiers principaux:
 
-- The *bin* folder holds the Cake console executables.
+- Le dossier *bin* contient les executables de la console Cake.
 - Le dossier *config* contient les (quelques) fichiers de
   :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
   connexion à la base de données, le bootstrapping, les fichiers de
