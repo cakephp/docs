@@ -580,10 +580,10 @@ By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
-    Router::scope('/api', function ($routes) {
-        $routes->extensions(['json', 'xml']);
+    Router::scope('/page', function ($routes) {
+        $routes->extensions(['json', 'xml', 'html']);
         $routes->connect(
-            '/page/:title',
+            '/:title',
             ['controller' => 'Pages', 'action' => 'view'],
             [
                 'pass' => ['title']
