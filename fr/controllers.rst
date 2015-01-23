@@ -287,7 +287,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
     fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
     à false), vous pouvez l'utiliser pour spécifier un fichier de vue
     alternatif en précisant le nom d'une action dans le controller, via
-    le paramètre ``$action``.
+    le paramètre ``$view``.
 
     Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
     vue ou un élément dont le chemin est relatif au dossier ``/app/View``. Cela
