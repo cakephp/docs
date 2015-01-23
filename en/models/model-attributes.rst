@@ -140,6 +140,11 @@ the default recursive level is 1.
 
         public $recursive = -1;
 
+.. tip::
+
+   If you use events in your system, using the value -1 for recursive will
+   disable all event triggering in the associated model. This appens because
+   no relation is created when the value is set to -1.
 order
 =====
 
