@@ -144,7 +144,8 @@ the default recursive level is 1.
 
    If you use events in your system, using the value -1 for recursive will
    disable all event triggering in the associated model. This happens because
-   no relation is created when the value is set to -1.
+   no relations are created when the value is set to -1.
+   
 order
 =====
 
