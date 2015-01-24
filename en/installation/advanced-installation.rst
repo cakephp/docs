@@ -34,7 +34,7 @@ would look like the following::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.5.*"
+            "cakephp/cakephp": "2.6.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
