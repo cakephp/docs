@@ -74,7 +74,7 @@ treat everything else including php tags as plain text.
 
 .. note::
 
-    Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
+    Bake template files do not use, and are insensitive to, ``asp_tags`` php ini setting.
 
 ``BakeView`` implements the following tags:
 
