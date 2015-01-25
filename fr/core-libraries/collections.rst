@@ -350,7 +350,7 @@ elements::
     $sumOfAges =  $collection->sumOf('age');
 
     $sumOfChildrenAges = $collection->sumOf(function ($person) {
-        return $preson->child->age;
+        return $person->child->age;
     });
 
     $sumOfDadAges = $collection->sumOf('dad.age');
@@ -390,7 +390,7 @@ properties or your own callback function to generate the groups dynamically::
     $commentsByUserId = $comments->groupBy('user.id');
 
     $classResults = $students->groupBy(function ($student) {
-        retrun $student->grade > 6 ? 'approved' : 'denied';
+        return $student->grade > 6 ? 'approved' : 'denied';
     });
 
 .. php:method:: countBy($callback)
@@ -400,7 +400,7 @@ using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
 should be already familiar to you::
 
     $classResults = $students->countBy(function ($student) {
-        retrun $student->grade > 6 ? 'approved' : 'denied';
+        return $student->grade > 6 ? 'approved' : 'denied';
     });
 
     // Result could look like this when converted to array:
