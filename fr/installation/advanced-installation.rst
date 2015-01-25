@@ -26,7 +26,7 @@ vous n'aurez pas besoin de faire d'autres changements.
 Installer CakePHP avec composer
 ===============================
 
-Composer est un outil de gestion de dépendance pour PHP 5.3+. Il règle
+Composer est un outil de gestion de dépendances pour PHP 5.3+. Il règle
 plusieurs problèmes que l'installateur PEAR a, et simplifie la gestion de
 plusieurs versions de librairies. Puisque CakePHP publie un package PEAR,
 vous pouvez installer CakePHP en utilisant
@@ -37,7 +37,7 @@ application CakePHP ressemblerait à ce qui suit::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.5.*"
+            "cakephp/cakephp": "2.6.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
