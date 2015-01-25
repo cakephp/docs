@@ -21,15 +21,15 @@ configurer le namespace du plugin, quand les plugins sont chargés.
 Installer un Plugin Avec Composer
 =================================
 
-Plusieurs plugins sont disponibles sur `packagist <http://packagist.org>`_
+Plusieurs plugins sont disponibles sur `Packagist <http://packagist.org>`_
 et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
 feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
 
 Ceci installe la dernière version de DebugKit et met à jour vos
-fichiers ``composer.json``, ``composer.lock``, et met à jour votre
-autoloader.
+fichiers ``composer.json``, ``composer.lock``, met à jour 
+``vendor/cakephp-plugins.php`` et met à jour votre autoloader.
 
 Si le plugin que vous voulez installer n'est pas disponible sur
 packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
@@ -43,14 +43,15 @@ Controller, webroot, et tous les autres répertoires du plugin.
 Plugin Map File
 ---------------
 
-When installing plugins via composer, you may notice that
-``vendor/cakephp-plugins.php`` is updated. This configuration file contains
-a map of plugin names, and their paths on the filesystem. It makes it possible
-for plugins to be installed into the standard vendor directory which is outside
-of the normal search paths. The ``Plugin`` class will use this file to locate
-plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
-won't need to edit this file by hand, as composer and the ``plugin-installer``
-package will manage it for you.
+Lorsque vous installez des plugins via Composer, vous pouvez voir que
+``vendor/cakephp-plugins.php`` est créé. Ce fichier de configuration contient
+une carte des noms de plugin et leur chemin dans le système de fichiers.
+Cela ouvre la possibilité pour un plugin d'être installé dans le dossier vendor
+standard qui est à l'extérieur des dossiers de recherche standards. La classe
+``Plugin`` utilisera ce fichier pour localiser les plugins lorsqu'ils sont
+chargés avec ``load()`` ou ``loadAll()``. Généralement vous n'aurez pas à éditer
+ce fichier à la main car Composer et le package ``plugin-installer`` le feront
+pour vous.
 
 Charger un Plugin
 =================
@@ -59,13 +60,14 @@ Après avoir installé un plugin et mis à jour l'autoloader, vous aurez besoin
 de charger le plugin. Vous pouvez charger les plugins un par un, ou tous d'un
 coup avec une méthode unique::
 
+    // dans config/bootstrap.php
     // Charge un Plugin unique
     Plugin::load('ContactManager');
 
     // Charge un plugin unique, avec un namespace personnalisé.
     Plugin::load('AcmeCorp/ContactManager');
 
-    // Charge tous les plugins en premier
+    // Charge tous les plugins d'un coup
     Plugin::loadAll();
 
 ``loadAll()`` charge tous les plugins disponibles, vous permettant de définir
@@ -535,7 +537,7 @@ Etendez votre Plugin
 ====================
 
 Cet exemple est un bon début pour un plugin, mais il y a beaucoup plus
-à faire. En règle général, tout ce que vous pouvez faire avec votre
+à faire. En règle générale, tout ce que vous pouvez faire avec votre
 application, vous pouvez le faire à l'intérieur d'un plugin à la place.
 
 Continuez, incluez certaines librairies tierces dans 'Vendor', ajoutez

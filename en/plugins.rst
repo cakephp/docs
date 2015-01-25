@@ -42,13 +42,13 @@ are the plugin's src, tests and any other directories.
 Plugin Map File
 ---------------
 
-When installing plugins via composer, you may notice that
+When installing plugins via Composer, you may notice that
 ``vendor/cakephp-plugins.php`` is created. This configuration file contains
 a map of plugin names, and their paths on the filesystem. It makes it possible
 for plugins to be installed into the standard vendor directory which is outside
 of the normal search paths. The ``Plugin`` class will use this file to locate
 plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
-won't need to edit this file by hand, as composer and the ``plugin-installer``
+won't need to edit this file by hand, as Composer and the ``plugin-installer``
 package will manage it for you.
 
 Loading a Plugin
