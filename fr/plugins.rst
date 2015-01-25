@@ -38,17 +38,19 @@ appelé ``ContactManager``, vous auriez un dossier dans ``plugins``
 appelé ``ContactManager``. Dans ce répertoire se trouvent les View, Model,
 Controller, webroot, et tous les autres répertoires du plugin.
 
+.. index:: vendor/cakephp-plugins.php
+
 Plugin Map File
 ---------------
 
-When installing plugins via composer, you may notice that ``config/plugins.php``
-is updated. This configuration file contains a map of plugin names, and their
-paths on the filesystem. It makes it possible for plugins to be installed into
-the standard vendor directory which is outside of the normal search paths. The
-``Plugin`` class will use this file to locate plugins when they are
-loaded with ``load()`` or ``loadAll()``. You generally won't need to edit this
-file by hand, as composer and the ``plugin-installer`` package will manage it
-for you.
+When installing plugins via composer, you may notice that
+``vendor/cakephp-plugins.php`` is updated. This configuration file contains
+a map of plugin names, and their paths on the filesystem. It makes it possible
+for plugins to be installed into the standard vendor directory which is outside
+of the normal search paths. The ``Plugin`` class will use this file to locate
+plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
+won't need to edit this file by hand, as composer and the ``plugin-installer``
+package will manage it for you.
 
 Charger un Plugin
 =================
@@ -74,7 +76,7 @@ explicitement.
 .. note::
 
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
-    defined in ``config/plugins.php``.
+    defined in ``vendor/cakephp-plugins.php``.
 
 Autochargement des Classes du Plugin
 ------------------------------------

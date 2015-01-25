@@ -28,8 +28,8 @@ would do the following::
     php composer.phar require cakephp/debug_kit
 
 This would install the latest version of DebugKit and update your
-``composer.json``, ``composer.lock`` file, update ``config/plugins.php`` and
-update your autoloader.
+``composer.json``, ``composer.lock`` file, update
+``vendor/cakephp-plugins.php``, and update your autoloader.
 
 If the plugin you want to install is not available on
 packagist.org, you can clone or copy the plugin code into your ``plugins``
@@ -37,17 +37,19 @@ directory. Assuming you want to install a plugin named 'ContactManager', you
 should have a folder in ``plugins`` named 'ContactManager'. In this directory
 are the plugin's src, tests and any other directories.
 
+.. index:: vendor/cakephp-plugins.php
+
 Plugin Map File
 ---------------
 
-When installing plugins via composer, you may notice that ``config/plugins.php``
-is updated. This configuration file contains a map of plugin names, and their
-paths on the filesystem. It makes it possible for plugins to be installed into
-the standard vendor directory which is outside of the normal search paths. The
-``Plugin`` class will use this file to locate plugins when they are
-loaded with ``load()`` or ``loadAll()``. You generally won't need to edit this
-file by hand, as composer and the ``plugin-installer`` package will manage it
-for you.
+When installing plugins via composer, you may notice that
+``vendor/cakephp-plugins.php`` is created. This configuration file contains
+a map of plugin names, and their paths on the filesystem. It makes it possible
+for plugins to be installed into the standard vendor directory which is outside
+of the normal search paths. The ``Plugin`` class will use this file to locate
+plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
+won't need to edit this file by hand, as composer and the ``plugin-installer``
+package will manage it for you.
 
 Loading a Plugin
 ================
@@ -73,7 +75,7 @@ plugins you explicitly specify.
 .. note::
 
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
-    defined in ``config/plugins.php``.
+    defined in ``vendor/cakephp-plugins.php``.
 
 Autoloading Plugin Classes
 --------------------------
