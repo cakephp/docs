@@ -197,8 +197,9 @@ callable, including anonymous functions, as validation rules::
     ]);
 
     // Use a closure
+    $value = 'Some additional value needed inside the closure';
     $validator->add('title', 'custom', [
-        'rule' => function ($value, $context) {
+        'rule' => function ($context) use ($value) {
             // Custom logic that returns true/false
         }
     ]);
