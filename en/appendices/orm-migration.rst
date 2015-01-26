@@ -421,11 +421,12 @@ to have multiple sets of rules::
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
+    use Cake\Validation\Validator;
 
     class ReviewsTable extends Table
     {
 
-        public function validationDefault($validator)
+        public function validationDefault(Validator $validator)
         {
             $validator->requirePresence('body')
                 ->add('body', 'length', [

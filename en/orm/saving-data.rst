@@ -379,10 +379,13 @@ When a validation rule is created you can name the provider of that rule. For
 example, if your entity had a 'isValidRole' method you could use it as
 a validation rule::
 
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
     class UsersTable extends Table
     {
 
-        public function validationDefault($validator)
+        public function validationDefault(Validator $validator)
         {
             $validator
                 ->add('role', 'validRole', [
@@ -779,7 +782,7 @@ table class. Behaviors and other event subscribers can use the
 class::
 
     use Cake\ORM\RulesChecker;
-    
+
     // In a table class
     public function buildRules(RulesChecker $rules) {
         // Add a rule that is applied for create and update operations
