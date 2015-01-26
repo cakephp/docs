@@ -1,5 +1,5 @@
-Request and Response Objects
-############################
+Request & Response Objects
+##########################
 
 .. note::
     Esta página todavía no ha sido traducida y pertenece a la documentación de

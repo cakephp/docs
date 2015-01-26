@@ -1,5 +1,5 @@
-Console and Shells
-##################
+Console & Shells
+################
 
 .. note::
     Esta página todavía no ha sido traducida y pertenece a la documentación de
