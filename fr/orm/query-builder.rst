@@ -211,8 +211,8 @@ Utiliser les Fonctions SQL
 L'ORM de CakePHP offre une abstraction pour les fonctions les plus communément
 utilisées par SQL. Utiliser l'abstraction permet à l'ORM de sélectionner
 l'intégration spécifique de la fonction pour la plateforme que vous souhaitez.
-Par exemple, ``concat`` est intégré différemment dans MySQL, Postgres et
-SQLServer. Utiliser l'abstraction permet à votre code d'être portable::
+Par exemple, ``concat`` est intégré différemment dans MySQL, PostgreSQL et
+SQL Server. Utiliser l'abstraction permet à votre code d'être portable::
 
     // Résultats dans SELECT COUNT(*) count FROM ...
     $query = $articles->find();

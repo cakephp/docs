@@ -5,7 +5,7 @@ Bake features an extensible architecture that allows your application or plugins
 to easily modify or add-to the base functionality. Bake makes use of a dedicated
 view class which does not use standard PHP syntax.
 
-Bake events
+Bake Events
 ===========
 
 As a view class, ``BakeView`` emits the same events as any other view class,
@@ -66,7 +66,7 @@ variables used in the bake templates::
     }, 'Bake.beforeRender');
 
 
-Bake Template syntax
+Bake Template Syntax
 ====================
 
 Bake template files use erb-style (``<% %>``) tags to denote template logic, and
@@ -74,7 +74,7 @@ treat everything else including php tags as plain text.
 
 .. note::
 
-    Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
+    Bake template files do not use, and are insensitive to, ``asp_tags`` php ini setting.
 
 ``BakeView`` implements the following tags:
 
@@ -106,7 +106,8 @@ looks like this::
     /**
      * <%= $name %> shell command.
      */
-    class <%= $name %>Shell extends Shell {
+    class <%= $name %>Shell extends Shell
+    {
 
     /**
      * main() method.
@@ -130,7 +131,8 @@ file actually rendered, looks like this::
     /**
      * <?= $name ?> shell command.
      */
-    class <?= $name ?>Shell extends Shell {
+    class <?= $name ?>Shell extends Shell
+    {
 
     /**
      * main() method.
@@ -167,7 +169,7 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
 
     }
 
-Creating a bake theme
+Creating a Bake Theme
 =====================
 
 If you wish to modify the default output produced by the "bake" command, you can
@@ -182,7 +184,7 @@ templates that bake uses. The best way to do this is:
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
 
-Creating new bake command options
+Creating New Bake Command Options
 =================================
 
 It's possible to add new bake command options, or override the ones provided by
@@ -233,8 +235,8 @@ add the following content::
     /**
      * <%= $name %> foo
      */
-    class <%= $name %>Foo {
-
+    class <%= $name %>Foo
+    {
         // Add code.
     }
 

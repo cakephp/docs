@@ -117,10 +117,10 @@ Lifecycle Callbacks
 ===================
 
 Comme vous l'avez vu ci-dessus les objets table déclenchent un certain nombre
-d'événements. Les événements sont utiles si vous souhaitez hook dans l'ORM
+d'events. Les events sont utiles si vous souhaitez hook dans l'ORM
 et ajouter de la logique sans faire de sous-classe ou sans surcharger les
-méthodes. Les écouteurs d'événement peuvent être définis dans les classes
-table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'événement
+méthodes. Les écouteurs d'event peuvent être définis dans les classes
+table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'event
 de table pour lier les écouteurs dedans.
 
 Lors de l'utilisation des méthodes callback des behaviors attachés dans la
@@ -128,24 +128,33 @@ méthode ``initialize`` va voir ses écouteurs lancés **avant** que les
 méthodes de callback de la table ne soient déclenchées. Ceci suit la même
 séquence que les controllers & les components.
 
-Pour ajouter un écouteur d'événement à une classe Table ou un Behavior,
+Pour ajouter un écouteur d'event à une classe Table ou un Behavior,
 implémentez simplement les signatures de méthode comme décrit ci-dessus.
 Consultez les :doc:`/core-libraries/events` pour avoir plus de détails sur la
-façon d'utiliser le sous-système d'événements.
+façon d'utiliser le sous-système d'events.
+
+beforeMarshal
+-------------
+
+.. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+
+L'event ``Model.beforeMarshal`` est déclenché avant que les données de request
+ne soient converties en entities. Consultez la documentation
+:ref:`before-marshal` pour plus d'informations.
 
 beforeFind
 ----------
 
 .. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
 
-L'événement ``Model.beforeFind`` est lancé avant chaque opération find. En
-stoppant l'événement et en fournissant une valeur de retour, vous pouvez
+L'event ``Model.beforeFind`` est lancé avant chaque opération find. En
+stoppant l'event et en fournissant une valeur de retour, vous pouvez
 outrepasser entièrement l'opération find. Tout changement fait à l'instance
 $query sera retenu pour le reste du find. Le paramètre ``$primary`` indique
 si oui ou non ceci est la requête racine ou une requête associée. Toutes les
-associations participant à une requête vont avoir un événement
+associations participant à une requête vont avoir un event
 ``Model.beforeFind`` déclenché. Pour les associations qui utilisent les joins,
-une requête dummy sera fournie. Dans votre écouteur d'événement, vous pouvez
+une requête dummy sera fournie. Dans votre écouteur d'event, vous pouvez
 définir des champs supplémentaires, des conditions, des joins ou des formatteurs
 de résultat. Ces options/fonctionnalités seront copiées dans la requête racine.
 
@@ -196,16 +205,16 @@ beforeSave
 
 .. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
 
-L'événement ``Model.beforeSave`` est lancé avant que chaque entity ne soit
-sauvegardée. Stopper cet événement va annuler l'opération de sauvegarde. Quand
-l'événement est stoppé, le résultat de l'événement sera retourné.
+L'event ``Model.beforeSave`` est lancé avant que chaque entity ne soit
+sauvegardée. Stopper cet event va annuler l'opération de sauvegarde. Quand
+l'event est stoppé, le résultat de l'event sera retourné.
 
 afterSave
 ---------
 
 .. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
 
-L'événement ``Model.afterSave`` est lancé après qu'une entity ne soit
+L'event ``Model.afterSave`` est lancé après qu'une entity ne soit
 sauvegardée.
 
 beforeDelete
@@ -213,8 +222,8 @@ beforeDelete
 
 .. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
 
-L'événement ``Model.beforeDelete`` est lancé avant qu'une entity ne soit
-supprimée. En stoppant cet événement, vous allez annuler l'opération de
+L'event ``Model.beforeDelete`` est lancé avant qu'une entity ne soit
+supprimée. En stoppant cet event, vous allez annuler l'opération de
 suppression.
 
 afterDelete
@@ -234,9 +243,9 @@ Behaviors
 Les Behaviors fournissent une façon facile de créer des parties de logique
 réutilisables horizontalement liées aux classes table. Vous vous demandez
 peut-être pourquoi les behaviors sont des classes classiques et non des
-traits. La première raison est les écouteurs d'événement. Alors que les traits
+traits. La première raison est les écouteurs d'event. Alors que les traits
 permettent de réutiliser des parties de logique, ils compliqueraient la
-liaison des événements.
+liaison des events.
 
 Pour ajouter un behavior à votre table, vous pouvez appeler la méthode
 ``addBehavior``. Généralement, le meilleur endroit pour le faire est dans la
@@ -283,13 +292,13 @@ fournis par CakePHP dans le chapitre sur les :doc:`/orm/behaviors`.
 
 .. _configuring-table-connections:
 
-COnfigurer les Connections
-==========================
+Configurer les Connexions
+=========================
 
-Par défaut, toutes les instances de table utilisent la connection à la base
-de données ``default``. Si votre application utilise plusieurs connections à la
+Par défaut, toutes les instances de table utilisent la connexion à la base
+de données ``default``. Si votre application utilise plusieurs connexions à la
 base de données, vous voudrez peut-être configurer quelles tables utilisent
-quelles connections. C'est avec la méthode ``defaultConnectionName``::
+quelles connexions. C'est avec la méthode ``defaultConnectionName``::
 
     namespace App\Model\Table;
 

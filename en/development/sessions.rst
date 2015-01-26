@@ -57,7 +57,7 @@ persist across all subdomains you can do::
 
 By default PHP sets the session cookie to expire as soon as the browser is
 closed, regardless of the configured ``Session.timeout`` value. The cookie
-timeout controlled by the ``session.cookie_lifetime`` ini value and can be
+timeout is controlled by the ``session.cookie_lifetime`` ini value and can be
 configured using::
 
     Configure::write('Session', [

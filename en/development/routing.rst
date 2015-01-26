@@ -745,7 +745,8 @@ the passed arguments as well.
 If you were to visit the previously mentioned URL, and you
 had a controller action that looked like::
 
-    CalendarsController extends AppController {
+    class CalendarsController extends AppController
+    {
         public function view($arg1, $arg2)
         {
             debug(func_get_args());

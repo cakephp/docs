@@ -12,9 +12,9 @@ Creating Validators
 .. php:class:: Validator
 
 Validator objects define the rules that apply to a set of fields.
-Validator objects contain a mapping between fields and validation sets. In turn, the
-validation sets contain a collection of rules that apply to the field they are
-attached to. Creating a validator is simple::
+Validator objects contain a mapping between fields and validation sets. In
+turn, the validation sets contain a collection of rules that apply to the field
+they are attached to. Creating a validator is simple::
 
     use Cake\Validation\Validator;
 
@@ -64,19 +64,19 @@ validated array. If the field is absent, validation will fail. The
   operation.
 
 By default, ``true`` is used. Key presence is checked by using
-``array_key_exists()`` so that null values will count as present. You can set the
-mode using the second parameter::
+``array_key_exists()`` so that null values will count as present. You can set
+the mode using the second parameter::
 
     $validator->requirePresence('author_id', 'create');
 
 Allowing Empty Fields
 ---------------------
 
-The ``allowEmpty()`` and ``notEmpty()`` methods allow you to control which fields are
-allowed to be 'empty'. By using the ``notEmpty()`` method, the given field will be marked
-invalid when it is empty. You can use ``allowEmpty()`` to allow a field to be
-empty. Both ``allowEmpty()`` and ``notEmpty()`` support a mode parameter that
-allows you to control when a field can or cannot be empty:
+The ``allowEmpty()`` and ``notEmpty()`` methods allow you to control which
+fields are allowed to be 'empty'. By using the ``notEmpty()`` method, the given
+field will be marked invalid when it is empty. You can use ``allowEmpty()`` to
+allow a field to be empty. Both ``allowEmpty()`` and ``notEmpty()`` support a
+mode parameter that allows you to control when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
 * ``create`` The field is required when validating a **create**
@@ -197,8 +197,9 @@ callable, including anonymous functions, as validation rules::
     ]);
 
     // Use a closure
+    $value = 'Some additional value needed inside the closure';
     $validator->add('title', 'custom', [
-        'rule' => function ($value, $context) {
+        'rule' => function ($context) use ($value) {
             // Custom logic that returns true/false
         }
     ]);
@@ -242,9 +243,9 @@ The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty.
 
 The same can be done for the ``allowEmpty()`` and ``notEmpty`` validation method.
-Both take a callable function as the last argument, which determines whether or not
-the rule should be applied. For example, a field can be sometimes allowed to be
-empty::
+Both take a callable function as the last argument, which determines whether or
+not the rule should be applied. For example, a field can be sometimes allowed
+to be empty::
 
     $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
@@ -319,7 +320,8 @@ failures. The returned array of errors will be structured like::
 
 If you have multiple errors on a single field, an array of error messages will
 be returned per field. By default the ``errors()`` method applies rules for
-the 'create' mode. If you'd like to apply 'update' rules you can do the following::
+the 'create' mode. If you'd like to apply 'update' rules you can do the
+following::
 
     $errors = $validator->errors($this->request->data(), false);
     if (!empty($errors)) {
@@ -349,8 +351,8 @@ saving is done automatically when using the ``newEntity()``, ``newEntities()``,
         // Do work to show error messages.
     }
 
-Similarly, when you need to pre-validate multiple entities at a time, you can use the
-``newEntities()`` method::
+Similarly, when you need to pre-validate multiple entities at a time, you can
+use the ``newEntities()`` method::
 
     // In the ArticlesController class
     $entities = $this->Articles->newEntities($this->request->data());
@@ -405,6 +407,6 @@ as follows::
             'rule' => ['range', 1, 5]
         ]);
 
-Core rules that take additional parameters should have an array for the ``rule`` key
-that contains the rule as the first element, and the additional parameters as
-the remaining parameters.
+Core rules that take additional parameters should have an array for the
+``rule`` key that contains the rule as the first element, and the additional
+parameters as the remaining parameters.

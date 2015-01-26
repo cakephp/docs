@@ -582,7 +582,7 @@ Turning buffering off has a few caveats:
 .. warning::
 
     Streaming results will still allocate memory for the entire results when
-    using Postgres and SQLServer. This is due to limitations in PDO.
+    using PostgreSQL and SQL Server. This is due to limitations in PDO.
 
 Result sets allow you to easily cache/serialize or JSON encode results for API
 results::

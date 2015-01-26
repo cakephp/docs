@@ -279,6 +279,25 @@ array::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
+.. _before-marshal:
+
+Modifying Request Data Before Building Entities
+-----------------------------------------------
+
+If you need to modify request data before it is converted into entities, you can
+use the ``Model.beforeMarshal`` event. This event lets you manipulate the
+request data just before entities are created::
+
+    // In a table or behavior class
+    public function beforeMarshal(Event $event, ArrayObject $data, array $options = [])
+    {
+        $data['username'] .= 'user';
+    }
+
+The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
+return it to change the data used to create entities.
+
+
 .. _validating-request-data:
 
 Validating Data Before Building Entities
@@ -360,10 +379,13 @@ When a validation rule is created you can name the provider of that rule. For
 example, if your entity had a 'isValidRole' method you could use it as
 a validation rule::
 
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
     class UsersTable extends Table
     {
 
-        public function validationDefault($validator)
+        public function validationDefault(Validator $validator)
         {
             $validator
                 ->add('role', 'validRole', [
@@ -760,7 +782,7 @@ table class. Behaviors and other event subscribers can use the
 class::
 
     use Cake\ORM\RulesChecker;
-    
+
     // In a table class
     public function buildRules(RulesChecker $rules) {
         // Add a rule that is applied for create and update operations

@@ -18,7 +18,7 @@ of the following things occur:
 - The query is iterated with ``foreach()``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
-- The query's ``first()`` method is called. This will return the first result in the set 
+- The query's ``first()`` method is called. This will return the first result in the set
   built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
 - The query's ``all()`` method is called. This will return the result set and
   can only be used with ``SELECT`` statements.
@@ -195,7 +195,7 @@ Using SQL Functions
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
 abstraction allows the ORM to select the platform specific implementation of the
 function you want. For example, ``concat`` is implemented differently in MySQL,
-Postgres and SQLServer. Using the abstraction allows your code to be portable::
+PostgreSQL and SQL Server. Using the abstraction allows your code to be portable::
 
     // Results in SELECT COUNT(*) count FROM ...
     $query = $articles->find();

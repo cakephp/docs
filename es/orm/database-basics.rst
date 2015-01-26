@@ -91,7 +91,7 @@ encoding
     Indicates the character set to use when sending SQL statements to
     the server. This defaults to the database's default encoding for
     all databases other than DB2. If you wish to use UTF-8 encoding
-    with mysql connections you must use 'utf8' without the
+    with MySQL connections you must use 'utf8' without the
     hyphen.
 timezone
     Server timezone to set.
@@ -99,7 +99,7 @@ schema
     Used in PostgreSQL database setups to specify which schema to use.
 unix_socket
     Used by drivers that support it to connect via Unix socket files. If you are
-    using Postgres and want to use Unix sockets, leave the host key blank.
+    using PostgreSQL and want to use Unix sockets, leave the host key blank.
 ssl_key
     The file path to the SSL key file. (Only supported by MySQL).
 ssl_cert
@@ -109,7 +109,7 @@ ssl_ca
 init
     A list of queries that should be sent to the database server as
     when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQLServer at this time.
+    supported by MySQL, PostgreSQL, and SQL Server at this time.
 dsn
     A full PDO compatible data source name.
 log
@@ -194,7 +194,7 @@ data types for use with the database layer. The types CakePHP supports are:
 
 string
     Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
-    will force a CHAR column. In SQLServer, NCHAR and NVARCHAR types are used.
+    will force a CHAR column. In SQL Server, NCHAR and NVARCHAR types are used.
 text
     Maps to TEXT types
 uuid
@@ -218,7 +218,7 @@ binary
 date
     Maps to a timezone naive DATE column type.
 datetime
-    Maps to a timezone naive DATETIME column type. In postgres, and SQLServer
+    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL Server
     this turns into a TIMESTAMP type. The default return value of this column
     type is :php:class:`Cake\\Utility\\Time` which extends the built-in
     ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.

@@ -86,8 +86,10 @@ código dentro do arquivo recem criado::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -117,12 +119,15 @@ método principal não ser muito interessante, vamos adicionar outro comando que
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function heyThere($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous')
+        {
             $this->out('Hey there ' . $name);
         }
     }
@@ -159,14 +164,17 @@ são definidos como propriedades anexas à sua shell::
 
     use Cake\Console\Shell;
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        public function show() {
+        public function show()
+        {
             if (empty($this->args[0])) {
                 return $this->error('Por favor, indique um nome de usuário.');
             }
@@ -203,9 +211,10 @@ vai chamar esse método quando a task é invocada. Uma classe task se parece com
 
     use Cake\Console\Shell;
 
-    class FileGeneratorTask extends Shell {
-        public function main() {
-
+    class FileGeneratorTask extends Shell
+    {
+        public function main()
+        {
         }
     }
 
@@ -213,11 +222,13 @@ Uma shell também pode prover acesso a suas tasks como propriedades, que fazem t
 serem ótimas para criar punhados de funcionalidade reutilizáveis similares a :doc:`/controllers/components`::
 
     // Localizado em src/Shell/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends Shell
+    {
         // Localizado em src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
-        public function main() {
+        public function main()
+        {
             $this->Sound->main();
         }
     }
@@ -464,7 +475,8 @@ diferentes interpretadores para subcomandos e tarefas.
 O ConsoleOptionParser implementa uma interface fluida e inclui métodos para
 facilmente definir múltiplas opções/argumentos de uma vez::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         // Configure parser
         return $parser;
@@ -477,7 +489,8 @@ Todos os métodos que configuram um interpretador de opções podem ser
 encadeados, permitindo definir um interpretador de opções completo em uma
 série de chamadas de métodos::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
@@ -753,7 +766,8 @@ formato que :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` e
 :php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` usam. Você também pode usar
 buildFromArray por conta própria, para construir um interpretador de opção::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray([
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),

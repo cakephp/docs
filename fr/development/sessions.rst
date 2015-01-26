@@ -48,9 +48,10 @@ désactiver cela::
         ]
     ]);
 
-The session cookie path defaults to app's base path. To change this you can use
-the ``session.cookie_path`` ini value. For e.g. if you want your session to
-persist across all subdomains you can do::
+Le chemin du cookie de session est par défaut le chemin de base de
+l'application. Pour changer ceci, vous pouvez utiliser la valeur ini
+``session.cookie_path``. Par exemple, si vous voulez que votre session soit
+sauvegardée pour tous les sous-domaines, vous pouvez faire::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -60,29 +61,30 @@ persist across all subdomains you can do::
         ]
     ]);
 
-By default PHP sets the session cookie to expire as soon as the browser is
-closed, regardless of the configured ``Session.timeout`` value. The cookie
-timeout controlled by the ``session.cookie_lifetime`` ini value and can be
-configured using::
+Par défaut PHP définit le cookie de session pour qu'il expire dès que le
+navigateur est fermé, quelque soit la valeur ``Session.timeout`` configurée.
+Le timeout du cookie est contrôlé par la valeur ini ``session.cookie_lifetime``
+et peut être configuré en utilisant::
 
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
-            // Invalidate the cookie after 30 minutes without visiting
-            // any page on the site.
+            // Rend le cookie non valide après 30 minutes s'il n'y
+            // a aucune visite d'aucune page sur le site.
             'session.cookie_lifetime' => 1800
         ]
     ]);
 
-The difference between ``Session.timeout`` and the ``session.cookie_lifetime``
-value is that the latter relies on the client telling the truth about the
-cookie. If you require stricter timeout checking, without relying on what the
-client reports, you should use ``Session.timeout``.
+La différence entre les valeurs ``Session.timeout`` et
+``session.cookie_lifetime`` est que la deuxième repose sur le fait que le
+client dit la vérité sur le cookie. Si vous devez vérifier plus strictement
+le timeout, sans que cela ne repose sur ce que dit le client, vous devez
+utiliser ``Session.timeout``.
 
-Please note that ``Session.timeout`` corresponds to the total time of
-inactivity for a user (i.e. the time without visiting any page where the session
-is used), and does not limit the total amount of minutes a user can stay
-on the site.
+Merci de noter que ``Session.timeout`` correspond au temps total d'inactivité
+d'un utilisateur (par ex, le temps sans visite d'aucune page où la session
+est utilisée), et ne limite pas le nombre total de minutes pendant lesquelles
+un utilisateur peut rester sur le site.
 
 Gestionnaires de Session intégrés & Configuration
 =================================================
@@ -235,7 +237,7 @@ pour contrôler les configurations comme ``session.gc_divisor``::
         'defaults' => 'php',
         'ini' => [
             'session.cookie_name' => 'MyCookie',
-            'session.cookie_lifetime' => 1800, // Valid for 30 minutes
+            'session.cookie_lifetime' => 1800, // Valide pour 30 minutes
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
         ]
