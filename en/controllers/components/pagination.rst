@@ -241,6 +241,21 @@ block and take appropriate action when a ``NotFoundException`` is caught::
         }
     }
 
+Joining Table Objects to the Paginator
+======================================
+
+Table objects can be joined to the Paginator by using the ``contain`` parameter. List the
+model name(s) to be joined to the current object::
+
+    public function index()
+    {
+        $this->paginate = [
+            'contain' => ['Authors', 'Comments']
+        ];
+
+        $this->set('articles', $this->paginate($this->Articles));
+    }
+
 Pagination in the View
 ======================
 
