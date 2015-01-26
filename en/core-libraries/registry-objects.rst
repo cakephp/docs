@@ -1,4 +1,4 @@
-Registry objects
+Registry Objects
 ################
 
 The registry classes provide a simple way to create and retrieve loaded
