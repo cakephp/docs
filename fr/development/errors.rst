@@ -4,9 +4,9 @@ Gestion des Erreurs et des Exceptions
 Un grand nombre de méthodes internes à PHP utilisent les erreurs pour
 communiquer les échecs. Ces erreurs devront être prise au piège et traitées.
 CakePHP fournit une récupération d'erreurs par défaut qui les affiche
-et/ou les logger lorsqu'elles se produisent. Ce gestionnaire d'erreur est utilisé
-pour capturer des exceptions non interceptées des controllers et d'autres parties
-de votre application.
+et/ou les logger lorsqu'elles se produisent. Ce gestionnaire d'erreur est
+utilisé pour capturer des exceptions non interceptées des controllers et
+d'autres parties de votre application.
 
 .. _error-configuration:
 
@@ -315,7 +315,7 @@ Exception.
 Toutes les exceptions Http et CakePHP étendent la classe Exception, qui
 a une méthode pour ajouter les en-têtes à la réponse. Par exemple quand vous
 lancez une MethodNotAllowedException 405,
-le rfc2616 dit:
+le rfc2616 dit::
 
     "La réponse DOIT inclure un en-tête contenant une liste de méthodes valides
     pour la ressource requêtée."
@@ -359,8 +359,8 @@ un autre layout ``src/Template/Layout/my_error.ctp`` pour vos pages d'erreur,
 modifiez simplement les vues d'erreur et ajoutez la ligne
 ``$this->layout = 'my_error';`` dans ``error400.ctp`` et ``error500.ctp``.
 
-Chaque exception au niveau du framework a son propre fichier de vue localisé dans
-les templates du cœur mais vous n'avez pas besoin de les personnaliser
+Chaque exception au niveau du framework a son propre fichier de vue localisé
+dans les templates du cœur mais vous n'avez pas besoin de les personnaliser
 puisqu'ils sont utilisés seulement pendant le développement. Avec debug éteint,
 toutes les exceptions au niveau du framework sont converties en
 ``InternalErrorException``.
@@ -385,12 +385,12 @@ Vous pourriez fournir de jolies erreurs de développement, en créant
 ``src/Template/Error/missing_widget.ctp``. Quand on est en mode production,
 l'erreur du dessus serait traitée comme une erreur 500. Le constructeur
 pour :php:exc:`Cake\\Core\\Exception\\Exception` a été étendu, vous autorisant
-à passer lui des données hashées. Ces hashs sont interpolés dans le messageTemplate,
-ainsi que dans la vue qui est utilisée pour représenter l'erreur dans le
-mode développement. Cela vous permet de créer des exceptions riches en données,
-en fournissant plus de contexte pour vos erreurs. Vous pouvez aussi fournir un
-template de message qui permet aux méthodes natives ``__toString()`` de
-fonctionner normalement::
+à passer lui des données hashées. Ces hashs sont interpolés dans le
+messageTemplate, ainsi que dans la vue qui est utilisée pour représenter
+l'erreur dans le mode développement. Cela vous permet de créer des exceptions
+riches en données, en fournissant plus de contexte pour vos erreurs. Vous
+pouvez aussi fournir un template de message qui permet aux méthodes natives
+``__toString()`` de fonctionner normalement::
 
     use Cake\Core\Exception\Exception;
 
@@ -545,8 +545,8 @@ Loguer les Exceptions
 
 En Utilisant la gestion d'exception intégrée, vous pouvez loguer toutes les
 exceptions qui sont gérées par ErrorHandler en configurant l'option ``log`` à
-``true`` dans votre ``config/app.php``. Activer cela va loguer chaque exception vers
-:php:class:`Cake\\Log\\Log` et les loggers configurés.
+``true`` dans votre ``config/app.php``. Activer cela va loguer chaque exception
+vers :php:class:`Cake\\Log\\Log` et les loggers configurés.
 
 .. note::
 
