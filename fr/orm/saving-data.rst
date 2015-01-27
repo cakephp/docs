@@ -915,7 +915,8 @@ utile de packager ces règles dans des classes réutilisables::
 
     use Cake\Datasource\EntityInterface;
 
-    class CustomRule {
+    class CustomRule
+    {
         public function __invoke(EntityInterface $entity, array $options)
         {
             // Do work

@@ -851,7 +851,8 @@ those rules into re-usable classes::
 
     use Cake\Datasource\EntityInterface;
 
-    class CustomRule {
+    class CustomRule
+    {
         public function __invoke(EntityInterface $entity, array $options)
         {
             // Do work
