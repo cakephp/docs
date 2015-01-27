@@ -1448,7 +1448,7 @@ de personnaliser les templates pour correspondre à votre application.
 Pour changer les templates quand le helper est chargé, vous pouvez définir
 l'option ``templates`` lors de l'inclusion du helper dans votre controller::
 
-    // Dans un controller
+    // Dans une classe de View
     $this->loadHelper('Form', [
         'templates' => 'app_form',
     ]);
