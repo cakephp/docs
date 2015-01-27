@@ -393,7 +393,8 @@ les mêmes résultats que les champs virtuels, cela donne::
 
     class ReviewsTable extends Table
     {
-        public function findAverage(Query $query, array $options = []) {
+        public function findAverage(Query $query, array $options = [])
+        {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
             return $query;

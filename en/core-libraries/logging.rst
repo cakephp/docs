@@ -110,11 +110,13 @@ properties are passed to the log adapter's constructor as an array. ::
 
     class DatabaseLog extends BaseLog
     {
-        public function __construct($options = []) {
+        public function __construct($options = [])
+        {
             // ...
         }
 
-        public function log($level, $message, array $context = []) {
+        public function log($level, $message, array $context = [])
+        {
             // Write to the database.
         }
     }

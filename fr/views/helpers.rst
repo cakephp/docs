@@ -94,7 +94,8 @@ comportement du helper::
 
     class AwesomeHelper extends Helper
     {
-        public function __construct(View $view, $config = []) {
+        public function __construct(View $view, $config = [])
+        {
             parent::__construct($view, $config);
             debug($config);
         }
@@ -126,7 +127,8 @@ toute configuration dont votre helper a besoin. Par exemple::
             ],
         ];
 
-        public function __construct(View $view, $config = []) {
+        public function __construct(View $view, $config = [])
+        {
             parent::__construct($view, $config);
             $this->initStringTemplates();
         }

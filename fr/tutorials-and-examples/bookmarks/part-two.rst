@@ -118,7 +118,8 @@ serez renvoyés vers la page de connexion. Nous devrions régler cela puisque no
 voulons que les utilisateurs s'inscrivent à notre application. Dans ``UsersController``,
 ajoutez ce qui suit::
 
-    public function beforeFilter(\Cake\Event\Event $event) {
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
         $this->Auth->allow('add');
     }
 
