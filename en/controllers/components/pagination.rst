@@ -219,6 +219,21 @@ application, you can adjust it as part of the pagination options::
 If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
 
+Joining Additional Associations
+===============================
+
+Additional associations can be loaded to the paginated table by using the
+``contain`` parameter::
+
+    public function index()
+    {
+        $this->paginate = [
+            'contain' => ['Authors', 'Comments']
+        ];
+
+        $this->set('articles', $this->paginate($this->Articles));
+    }
+
 Out of Range Page Requests
 ==========================
 
@@ -239,21 +254,6 @@ block and take appropriate action when a ``NotFoundException`` is caught::
             // Do something here like redirecting to first or last page.
             // $this->request->params['paging'] will give you required info.
         }
-    }
-
-Joining Table Objects to the Paginator
-======================================
-
-Table objects can be joined to the Paginator by using the ``contain`` parameter. List the
-model name(s) to be joined to the current object::
-
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Authors', 'Comments']
-        ];
-
-        $this->set('articles', $this->paginate($this->Articles));
     }
 
 Pagination in the View
