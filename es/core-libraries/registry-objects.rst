@@ -1,4 +1,4 @@
-Registry objects
+Registry Objects
 ################
 
 .. note::

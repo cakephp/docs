@@ -1,5 +1,5 @@
-Request and Response Objects
-############################
+Request & Response Objects
+##########################
 
 .. php:namespace:: Cake\Network
 
