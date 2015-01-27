@@ -247,7 +247,7 @@ the value for ``show_profile_picture`` is empty. You could also use the
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-The ``allowEmpty()`` and ``notEmpty`` methods will also accept a callback
+The ``allowEmpty()`` and ``notEmpty()`` methods will also accept a callback
 function as their last argument. If present, the callback determines whether or
 not the rule should be applied. For example, a field can be sometimes allowed
 to be empty::
