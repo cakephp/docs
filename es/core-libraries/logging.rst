@@ -93,11 +93,13 @@ properties are passed to the log adapter's constructor as an array. ::
 
     class DatabaseLog implements LogInterface
     {
-        public function __construct($options = []) {
+        public function __construct($options = [])
+        {
             // ...
         }
 
-        public function write($level, $message, $scope = []) {
+        public function write($level, $message, $scope = [])
+        {
             // Write to the database.
         }
     }

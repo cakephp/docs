@@ -119,11 +119,13 @@ un tableau. ::
 
     class DatabaseLog extends BaseLog
     {
-        public function __construct($options = []) {
+        public function __construct($options = [])
+        {
             // ...
         }
 
-        public function log($level, $message, array $context = []) {
+        public function log($level, $message, array $context = [])
+        {
             // Write to the database.
         }
     }

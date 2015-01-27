@@ -824,7 +824,8 @@ ajouter des règles au vérificateur pour une classe de Table donnée::
     use Cake\ORM\RulesChecker;
 
     // Dans une classe de table
-    public function buildRules(RulesChecker $rules) {
+    public function buildRules(RulesChecker $rules)
+    {
         // Ajoute une règle qui est appliquée pour la création et la mise à jour d'opérations
         $rules->add(function ($entity, $options) {
             // Retourne un booléen pour indiquer si succès/échec
@@ -914,8 +915,10 @@ utile de packager ces règles dans des classes réutilisables::
 
     use Cake\Datasource\EntityInterface;
 
-    class CustomRule {
-        public function __invoke(EntityInterface $entity, array $options) {
+    class CustomRule
+    {
+        public function __invoke(EntityInterface $entity, array $options)
+        {
             // Do work
             return false;
         }

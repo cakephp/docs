@@ -111,7 +111,8 @@ If you aren't logged in and you try to visit ``/users/add`` you will be kicked
 to the login page. We should fix that as we'll if we want people to sign up for
 our application. In the ``UsersController`` add the following::
 
-    public function beforeFilter(\Cake\Event\Event $event) {
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
         $this->Auth->allow(['add']);
     }
 
