@@ -37,7 +37,7 @@ traduction est disponible, sinon elle la renverra non modifiée.
 Fichiers de Langues
 -------------------
 
-Les traductions peuvent être mis à disposition en utilisant des fichiers 
+Les traductions peuvent être mis à disposition en utilisant des fichiers
 de langue stockés dans votre application. Le format par défaut pour ces fichiers est
 le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Ces fichiers doivent être
 placés dans ``src/Locale/`` et dans ce répertoire, il devrait y avoir
@@ -54,12 +54,12 @@ un sous-dossier par langue que l'application doit prendre en charge::
             /es
                 default.po
 
-Le domaine par défaut est 'default', votre dossier ``locale`` devrait donc 
+Le domaine par défaut est 'default', votre dossier ``locale`` devrait donc
 contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se réfère à un regroupement
 arbitraire de messages de traduction. Si aucun groupe n'est utilisé, le groupe par défaut
 est sélectionné.
 
-Les plugins peuvent également contenir des fichiers de traduction, la convention est d'utiliser la version 
+Les plugins peuvent également contenir des fichiers de traduction, la convention est d'utiliser la version
 ``under_scored`` du nom du plugin comme domaine de la traduction des messages::
 
     MyPlugin
@@ -70,8 +70,8 @@ Les plugins peuvent également contenir des fichiers de traduction, la conventio
                 /de
                     my_plugin.po
 
-Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de 
-la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``, 
+Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de
+la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``,
 qui contient en même temps la langue et le pays où elle est parlée.
 
 Un fichier de traduction pourrait ressembler à ceci :
@@ -84,6 +84,13 @@ Un fichier de traduction pourrait ressembler à ceci :
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+Extract Pot Files with I18n Shell
+---------------------------------
+
+To create the pot files from `__()` and other internationalized types of
+messages that can be found in your code, you can use the i18n shell. Please read
+the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
+
 Définir la Locale par Défaut
 ----------------------------
 
@@ -92,9 +99,9 @@ via::
 
     ini_set('intl.default_locale', 'fr_FR');
 
-Cela permet de contrôler plusieurs aspects de votre application, incluant la langue 
-de traduction par défaut, le format des dates, des nombres, et devises 
-à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques 
+Cela permet de contrôler plusieurs aspects de votre application, incluant la langue
+de traduction par défaut, le format des dates, des nombres, et devises
+à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques
 de localisation fournies par CakePHP.
 
 Changing the Locale at Runtime
@@ -408,7 +415,7 @@ application. Next, create the translations file under
 And finally, configure the translation loader for the domain and locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
-    
+
     I18n::translator(
         'animals',
         'fr_FR',
