@@ -466,7 +466,7 @@ règles::
     class ReviewsTable extends Table
     {
 
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validatior $validator)
         {
             $validator->requirePresence('body')
                 ->add('body', 'length', [

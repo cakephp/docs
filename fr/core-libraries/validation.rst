@@ -255,18 +255,18 @@ ou non, une règle particulière doit être appliquée::
 
 
 L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
-valeur pour ``show_profile_picture`` est vide. Vous pourriez aussi utiliser
-la règle de validation ``uploadedFile`` pour créer des inputs d'upload de
-fichier en option::
+valeur pour ``show_profile_picture`` est vide. Vous pouvez également utiliser
+la règle de validation ``uploadedFile`` pour créer des inputs optionnelles
+d'upload de fichiers::
 
     $validator->add('picture', 'file', [
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-Les méthodes ``allowEmpty()`` et ``notEmpty()`` vont aussi accepter une fonction
-de callback pour le dernier argument. Si elle est présente, la fonction de
-callback determine si la règle doit oui ou non être appliquée. Par exemple, un
-champ peut parfois être pouvoir être vide::
+Les méthodes de validation ``allowEmpty()`` et ``notEmpty()`` prennent
+également une fonction appelable en dernier argument, ce qui determine si oui
+ou non la règle doit être appliquée. Par exemple on peut autoriser parfois à
+un champ à être vide::
 
     $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
