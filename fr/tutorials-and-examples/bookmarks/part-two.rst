@@ -39,7 +39,7 @@ AuthComponent dans notre AppController::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
                 ]
@@ -245,8 +245,8 @@ mettre à jour la méthode add pour ressembler à ceci::
     }
 
 En définissant la propriété entity avec les données de session, nous retirons
-la possibilité que l'utilisateur puisse modifier l'auteur d'un bookmark. 
-Nous ferons la même chose pour le formulaire et l'action edit. 
+la possibilité que l'utilisateur puisse modifier l'auteur d'un bookmark.
+Nous ferons la même chose pour le formulaire et l'action edit.
 Votre action edit devrait ressembler à ceci::
 
     public function edit($id = null)
