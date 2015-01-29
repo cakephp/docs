@@ -573,12 +573,18 @@ Posts (PostsController) ::
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
+
         if ($this->Post->delete($id)) {
             $this->Session->setFlash(
                 __('Le post avec id : %s a été supprimé.', h($id))
             );
-            return $this->redirect(array('action' => 'index'));
+        } else {
+            $this->Session->setFlash(
+                __('Le post avec l\'id: %s n'a pas pu être supprimé.', h($id))
+            );
         }
+
+        return $this->redirect(array('action' => 'index'));
     }
 
 Cette logique supprime le Post spécifié par $id, et utilise
