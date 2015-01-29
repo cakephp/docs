@@ -7,14 +7,14 @@ Text
 
 The Text class includes convenience methods for creating and
 manipulating strings and is normally accessed statically. Example:
-``Text::uuid()``.
+``String::uuid()``.
 
 If you need :php:class:`Cake\\View\\Helper\\TextHelper` functionalities outside
 of a ``View``, use the ``Text`` class::
 
     namespace App\Controller;
 
-    use Cake\Utility\Text;
+    use Cake\Utility\String;
 
     class UsersController extends AppController
     {
@@ -32,7 +32,7 @@ of a ``View``, use the ``Text`` class::
                 // Notify user of new message
                 $this->Flash->success(__(
                     'You have a new message: {0}',
-                    Text::truncate($message['Message']['body'], 255, ['html' => true])
+                    String::truncate($message['Message']['body'], 255, ['html' => true])
                 ));
             }
         }
@@ -46,7 +46,7 @@ Generating UUIDs
 The UUID method is used to generate unique identifiers as per :rfc:`4122`. The
 UUID is a 128bit string in the format of 485fc381-e790-47a3-9794-1337c0a8fe68. ::
 
-    Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
+    String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 
 Simple String Parsing
@@ -61,7 +61,7 @@ This method can be useful when splitting up data in that has regular
 formatting such as tag lists::
 
     $data = "cakephp 'great framework' php";
-    $result = Text::tokenize($data, ' ', "'", "'");
+    $result = String::tokenize($data, ' ', "'", "'");
     // Result contains
     ['cakephp', "'great framework'", 'php'];
 
@@ -70,7 +70,7 @@ formatting such as tag lists::
 This method unformats a number from a human readable byte size
 to an integer number of bytes::
 
-    $int = Text::parseFileSize('2GB');
+    $int = String::parseFileSize('2GB');
 
 Formatting Strings
 ==================
@@ -80,7 +80,7 @@ Formatting Strings
 The insert method is used to create string templates and to allow
 for key/value replacements::
 
-    Text::insert(
+    String::insert(
         'My name is :name and I am :age years old.',
         ['name' => 'Bob', 'age' => '65']
     );
@@ -88,11 +88,11 @@ for key/value replacements::
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
 
-Cleans up a ``Text::insert`` formatted string with given $options
+Cleans up a ``String::insert`` formatted string with given $options
 depending on the 'clean' key in $options. The default method used
 is text but html is also available. The goal of this function is to
 replace all whitespace and unneeded markup around placeholders that
-did not get replaced by ``Text::insert``.
+did not get replaced by ``String::insert``.
 
 You can use the following options in the options array::
 
@@ -113,7 +113,7 @@ Wraps a block of text to a set width, and indent blocks as well.
 Can intelligently wrap text so words are not sliced across lines::
 
     $text = 'This is the song that never ends.';
-    $result = Text::wrap($text, 22);
+    $result = String::wrap($text, 22);
 
     // Returns
     This is the song
@@ -154,9 +154,9 @@ Example::
     );
 
     // Called as Text
-    use Cake\Utility\Text;
+    use Cake\Utility\String;
     
-    echo Text::highlight(
+    echo String::highlight(
         $lastSentence,
         'using',
         ['format' => '<span class="highlight">\1</span>']
@@ -209,9 +209,9 @@ Example::
     );
 
     // Called as Text
-    use Cake\Utility\Text;
+    use Cake\Utility\String;
     
-    echo Text::truncate(
+    echo String::truncate(
         'The killer crept forward and tripped on the rug.',
         22,
         [
@@ -259,9 +259,9 @@ Example::
     );
 
     // Called as Text
-    use Cake\Utility\Text;
+    use Cake\Utility\String;
     
-    echo Text::tail(
+    echo String::tail(
         $sampleText,
         70,
         [
@@ -289,9 +289,9 @@ the resulting document. ::
     echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
     // Called as Text
-    use Cake\Utility\Text;
+    use Cake\Utility\String;
     
-    echo Text::excerpt($lastParagraph, 'method', 50, '...');
+    echo String::excerpt($lastParagraph, 'method', 50, '...');
 
 Output::
 
@@ -310,9 +310,9 @@ with 'and'. ::
     echo $this->Text->toList($colors);
 
     // Called as Text
-    use Cake\Utility\Text;
+    use Cake\Utility\String;
     
-    echo Text::toList($colors);
+    echo String::toList($colors);
 
 Output::
 
