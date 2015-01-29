@@ -461,11 +461,12 @@ règles::
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
+    use Cake\Validation\Validator;
 
     class ReviewsTable extends Table
     {
 
-        public function validationDefault($validator)
+        public function validationDefault(Validatior $validator)
         {
             $validator->requirePresence('body')
                 ->add('body', 'length', [

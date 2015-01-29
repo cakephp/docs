@@ -397,10 +397,13 @@ Quand une règle de validation est créée, vous pouvez nommer le provider de ce
 règle. Par exemple, si votre entity a une méthode 'isValidRole', vous pouvez
 l'utiliser comme une règle de validation::
 
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
     class UsersTable extends Table
     {
 
-        public function validationDefault($validator)
+        public function validationDefault(Validator $validator)
         {
             $validator
                 ->add('role', 'validRole', [

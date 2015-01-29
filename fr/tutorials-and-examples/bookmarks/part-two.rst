@@ -39,7 +39,7 @@ AuthComponent dans notre AppController::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
                 ]
