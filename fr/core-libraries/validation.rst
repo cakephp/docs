@@ -253,9 +253,10 @@ ou non, une règle particulière doit être appliquée::
         }
     ]);
 
+
 L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
 valeur pour ``show_profile_picture`` est vide. Vous pouvez également utiliser
-la règle de validation ``uploadedFile`` pour créer des inputs optionnelles 
+la règle de validation ``uploadedFile`` pour créer des inputs optionnelles
 d'upload de fichiers::
 
     $validator->add('picture', 'file', [

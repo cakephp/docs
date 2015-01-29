@@ -84,12 +84,14 @@ Un fichier de traduction pourrait ressembler à ceci :
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
-Extract Pot Files with I18n Shell
----------------------------------
+Extraire les Fichiers Pot avec le Shell I18n
+--------------------------------------------
 
-To create the pot files from `__()` and other internationalized types of
-messages that can be found in your code, you can use the i18n shell. Please read
-the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
+Pour créer les fichiers pot à partir de `__()` et des autres types de
+messages internationalisés qui se trouvent dans votre code, vous pouvez
+utiliser le shell i18n. Vous pouvez consulter le
+:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir
+plus.
 
 Définir la Locale par Défaut
 ----------------------------
