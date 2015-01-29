@@ -272,6 +272,13 @@ un champ à être vide::
         return !$context['data']['is_taxable'];
     });
 
+De la même façon, on peut vouloir qu'un champ soit peuplé quand certaines
+conditions sont vérifiées::
+
+    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
+        return !empty($context['data']['wants_newsletter']);
+    });
+
 Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
 si l'utilisateur veut recevoir la newsletter.
 
