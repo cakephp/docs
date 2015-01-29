@@ -37,7 +37,7 @@ AppController::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
                 ]
