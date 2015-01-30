@@ -52,10 +52,10 @@ the events system. For example you could disable component callbacks in the
 following way::
 
     // Remove Auth from callbacks.
-    $this->eventManager()->detach($this->Auth);
+    $this->eventManager()->off($this->Auth);
 
     // Re-enable Auth for callbacks.
-    $this->eventManager()->attach($this->Auth);
+    $this->eventManager()->on($this->Auth);
 
 
 .. meta::

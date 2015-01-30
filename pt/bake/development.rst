@@ -22,7 +22,7 @@ be used::
     use Cake\Event\Event;
     use Cake\Event\EventManager;
     
-    EventManager::instance()->attach(function (Event $event) {
+    EventManager::instance()->on('Bake.initialize', function (Event $event) {
         $view = $event->subject;
 
         // In my bake templates, allow the use of the MySpecial helper
@@ -31,7 +31,7 @@ be used::
         // And add an $author variable so it's always available
         $view->set('author', 'Andy');
 
-    }, 'Bake.initialize');
+    });
 
 Bake events can also be useful for making small changes to existing templates.
 For example, to change the variable names used when baking controller/template
@@ -44,7 +44,7 @@ variables used in the bake templates::
     use Cake\Event\Event;
     use Cake\Event\EventManager;
     
-    EventManager::instance()->attach(function (Event $event) {
+    EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
         $view = $event->subject;
 
         // Use $rows for the main data variable in indexes
@@ -63,7 +63,7 @@ variables used in the bake templates::
             $view->set('singularVar', 'theOne');
         }
 
-    }, 'Bake.beforeRender');
+    });
 
 
 Bake Template Syntax

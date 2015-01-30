@@ -23,7 +23,7 @@ un autre helper à la classe de vue bake, cet event peut être utilisé::
     use Cake\Event\Event;
     use Cake\Event\EventManager;
 
-    EventManager::instance()->attach(function (Event $event) {
+    EventManager::instance()->on('Bake.initialize', function (Event $event) {
         $view = $event->subject;
 
         // Dans mes templates de bake, permet l'utilisation du helper MySpecial
@@ -32,7 +32,7 @@ un autre helper à la classe de vue bake, cet event peut être utilisé::
         // Et ajoute une variable $author pour qu'elle soit toujours disponible
         $view->set('author', 'Andy');
 
-    }, 'Bake.initialize');
+    });
 
 Les events de Bake peuvent aussi être utiles pour faire des petits
 changements aux templates existants. Par exemple, pour changer les noms de
@@ -47,7 +47,7 @@ de bake::
     use Cake\Event\Event;
     use Cake\Event\EventManager;
 
-    EventManager::instance()->attach(function (Event $event) {
+    EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
         $view = $event->subject;
 
         // Utilise $rows pour les principales variables de données dans les indexes
@@ -66,7 +66,7 @@ de bake::
             $view->set('singularVar', 'theOne');
         }
 
-    }, 'Bake.beforeRender');
+    });
 
 
 Syntaxe de Template de Bake
