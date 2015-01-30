@@ -1,5 +1,5 @@
-Gestion des Erreurs et des Exceptions
-#####################################
+Gestion des Erreurs & Exceptions
+################################
 
 Un grand nombre de méthodes internes à PHP utilisent les erreurs pour
 communiquer les échecs. Ces erreurs devront être récupérées et traitées.

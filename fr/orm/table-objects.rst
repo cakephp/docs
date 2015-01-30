@@ -20,7 +20,7 @@ Utilisation Basique
 
 Pour commencer, créez une classe Table. Ces classes se trouvent dans
 ``src/Model/Table``. Les Tables sont une collection de type model spécifique
-aux bases de données relationnelles, et sont l'interface principal pour
+aux bases de données relationnelles, et sont l'interface principale pour
 votre base de données dans l'ORM de CakePHP. La classe table la plus
 basique devrait ressembler à ceci::
 
@@ -90,8 +90,8 @@ utiliser la méthode ``entityClass`` pour changer les choses::
     }
 
 Comme vu dans les exemples ci-dessus, les objets Table ont une méthode
-``initialize()`` qui est appelée à la fin du constructeur. Il est recommandé que
-vous utilisiez cette méthode pour faire la logique d'initialisation au lieu
+``initialize()`` qui est appelée à la fin du constructeur. Il est recommandé
+d'utiliser cette méthode pour placer la logique d'initialisation au lieu
 de surcharger le constructeur.
 
 Obtenir les Instances d'une Classe Table
@@ -107,8 +107,8 @@ instance de la table. Vous pouvez faire ceci en utilisant la classe
     $articles = TableRegistry::get('Articles');
 
 La classe TableRegistry fournit les divers dépendances pour construire la table,
-et maintenir un registre de toutes les instances de table construites,
-faciliter la construction de relations et configurer l'ORM. Regardez
+et maintient un registre de toutes les instances de table construites,
+facilitant la construction de relations et la configuration l'ORM. Regardez
 :ref:`table-registry-usage` pour plus d'informations.
 
 .. _table-callbacks:
@@ -117,8 +117,8 @@ Lifecycle Callbacks
 ===================
 
 Comme vous l'avez vu ci-dessus les objets table déclenchent un certain nombre
-d'events. Les events sont utiles si vous souhaitez hook dans l'ORM
-et ajouter de la logique sans faire de sous-classe ou sans surcharger les
+d'events. Les events sont des hook utiles si vous souhaitez et ajouter de la
+logique dans l'ORM sans faire de sous-classe ou sans surcharger les
 méthodes. Les écouteurs d'event peuvent être définis dans les classes
 table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'event
 de table pour lier les écouteurs dedans.
@@ -154,13 +154,13 @@ $query sera retenu pour le reste du find. Le paramètre ``$primary`` indique
 si oui ou non ceci est la requête racine ou une requête associée. Toutes les
 associations participant à une requête vont avoir un event
 ``Model.beforeFind`` déclenché. Pour les associations qui utilisent les joins,
-une requête dummy sera fournie. Dans votre écouteur d'event, vous pouvez
-définir des champs supplémentaires, des conditions, des joins ou des formatteurs
+une requête factice sera fournie. Dans votre écouteur d'event, vous pouvez
+définir des champs supplémentaires, des conditions, des joins ou des formateurs
 de résultat. Ces options/fonctionnalités seront copiées dans la requête racine.
 
 Vous pouvez utiliser ce callback pour restreindre les opérations find basées
-sur le rôle de l'utilisateur, ou faire des décisions de mise en cache basées sur
-le chargement courant.
+sur le rôle de l'utilisateur, ou prendre des décisions de mise en cache basées
+sur le chargement courant.
 
 Dans les versions précédentes de CakePHP, il y avait un callback ``afterFind``,
 ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
@@ -171,41 +171,43 @@ buildValidator
 
 .. php:method:: buildValidator(Event $event, Validator $validator, $name)
 
-The ``Model.buildValidator`` event is fired when ``$name`` validator is created.
-Behaviors, can use this hook to add in validation methods.
+L'event ``Model.buildValidator`` est déclenché lorsque le validator ``$name``
+est créé. Les behaviors peuvent utiliser ce hook pour ajouter des méthodes
+de validation.
 
 buildRules
 ----------
 
 .. php:method:: buildRules(Event $event, RulesChecker $rules)
 
-The ``Model.buildRules`` event is fired before after a rules instance has been
-created and the table's ``beforeRules()`` method has been called.
+L'event ``Model.buildRules`` est déclenché avant et après qu'une instance
+de règles ait été créée et que la méthode ``beforeRules()`` de la table ait
+été appelée.
 
 beforeRules
 --------------
 
 .. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
-The ``Model.beforeRules`` event is fired before an entity has rules applied. By
-stopping this event, you can return the final value of the rules checking
-operation.
+L'event ``Model.beforeRules`` est déclenché avant que les règles ne soient
+appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
+finale de l'opération de vérification des règles.
 
 afterRules
 --------------
 
 .. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
 
-The ``Model.afterRules`` event is fired after an entity has rules applied. By
-stopping this event, you can return the final value of the rules checking
-operation.
+L'event ``Model.afterRules`` est déclenché après que les règles soient
+appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
+finale de l'opération de vérification des règles.
 
 beforeSave
 ----------
 
 .. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
 
-L'event ``Model.beforeSave`` est lancé avant que chaque entity ne soit
+L'event ``Model.beforeSave`` est déclenché avant que chaque entity ne soit
 sauvegardée. Stopper cet event va annuler l'opération de sauvegarde. Quand
 l'event est stoppé, le résultat de l'event sera retourné.
 
@@ -214,7 +216,7 @@ afterSave
 
 .. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
 
-L'event ``Model.afterSave`` est lancé après qu'une entity ne soit
+L'event ``Model.afterSave`` est déclenché après qu'une entity ne soit
 sauvegardée.
 
 beforeDelete
@@ -222,7 +224,7 @@ beforeDelete
 
 .. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
 
-L'event ``Model.beforeDelete`` est lancé avant qu'une entity ne soit
+L'event ``Model.beforeDelete`` est déclenché avant qu'une entity ne soit
 supprimée. En stoppant cet event, vous allez annuler l'opération de
 suppression.
 
@@ -231,7 +233,7 @@ afterDelete
 
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
-Lancé après qu'une entity a été supprimée.
+L'event ``Model.afterDelete`` est déclenché après qu'une entity a été supprimée.
 
 Behaviors
 =========
@@ -317,14 +319,14 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName``::
 
 .. _table-registry-usage:
 
-Utiliser la TableRegistry
+Utiliser le TableRegistry
 =========================
 
 .. php:class:: TableRegistry
 
-Comme nous l'avons vu précédemment, la classe TableRegistry fournit un moyen
-facile de factory/registry pour accéder aux instances des tables de vos
-applications. Elle fournit aussi quelques autres fonctionnalités utiles.
+Comme nous l'avons vu précédemment, la classe TableRegistry fournit un
+registre/fabrique facile d'utilisation pour accéder aux instances des table
+de vos applications. Elle fournit aussi quelques autres fonctionnalités utiles.
 
 Configurer les Objets Table
 ---------------------------
@@ -332,7 +334,7 @@ Configurer les Objets Table
 .. php:staticmethod:: get($alias, $config)
 
 Lors du chargement des tables à partir du registry, vous pouvez personnaliser
-leurs dépendances, ou utiliser les objets mock en fournissant un tableau
+leurs dépendances, ou utiliser les objets factices en fournissant un tableau
 ``$options``::
 
     $articles = TableRegistry::get('Articles', [
@@ -350,7 +352,7 @@ leurs dépendances, ou utiliser les objets mock en fournissant un tableau
     Si votre table fait aussi une configuration supplémentaire dans sa méthode
     ``initialize()``, ces valeurs vont écraser celles fournies au registre.
 
-Vous pouvez aussi pré-configurer le registre en utilsant la méthode
+Vous pouvez aussi pré-configurer le registre en utilisant la méthode
 ``config()``. Les données de configuration sont stockées *par alias*, et peuvent
 être surchargées par une méthode ``initialize()`` de l'objet::
 
@@ -359,16 +361,16 @@ Vous pouvez aussi pré-configurer le registre en utilsant la méthode
 .. note::
 
     Vous pouvez configurer une table avant ou pendant la **première** fois
-    où vous accédez à l'alias. Faire ceci après que le registre est rempli va
-    n'avoir aucun effet.
+    où vous accédez à l'alias. Faire ceci après que le registre est rempli
+    n'aura aucun effet.
 
-Flushing le Registry
---------------------
+Vider le Registre
+-----------------
 
 .. php:staticmethod:: clear()
 
-Pendant les cas de test, vous voulez flush la registry. Faire ceci est souvent
-utile quand vous utilisez les objets mock, ou modifier les dépendances d'une
+Pendant les cas de test, vous voudrez vider le registre. Faire ceci est souvent
+utile quand vous utilisez les objets factices, ou modifiez les dépendances d'une
 table::
 
     TableRegistry::clear();

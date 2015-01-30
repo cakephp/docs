@@ -486,7 +486,10 @@ passer dans ``save()``. Pare exemple::
 L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
 non une insertion ou une mise à jour doit être faite. Si la méthode
 ``isNew()`` retourne ``null`` et que l'entity a une valeur de clé primaire,
-une requête 'exists' sera faîte.
+une requête 'exists' sera faîte. La requête 'exists' peut être supprimée en
+passant ``'checkExisting' => false`` à l'argument ``$options`` ::
+
+    $articles->save($article, ['checkExisting' => false]);
 
 Une fois que vous avez chargé quelques entities, vous voudrez probablement les
 modifier et les mettre à jour dans votre base de données. C'est un exercice

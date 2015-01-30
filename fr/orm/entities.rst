@@ -5,11 +5,11 @@ Entities
 
 .. php:class:: Entity
 
-Alors que les :doc:`/orm/table-objects` représentent et fournissent un accès à
-une collection d'objets, les entities représentent des lignes individuelles ou
-des objets de domaine dans votre application. Les entities contiennent des
-propriétés et des méthodes persistantes pour manipuler et accéder aux données
-qu'ils contiennent.
+Alors que les :doc:`objets Table</orm/table-objects>` représentent et
+fournissent un accès à une collection d'objets, les entities représentent des
+lignes individuelles ou des objets de domaine dans votre application. Les
+entities contiennent des propriétés et des méthodes persistantes pour manipuler
+et accéder aux données qu'ils contiennent.
 
 Les entities sont créées pour vous par CakePHP à chaque fois que vous utilisez
 ``find()`` sur un objet table.
@@ -67,8 +67,8 @@ en une fois en utilisant un tableau::
 .. warning::
 
     Lors de la mise à jour des entities avec des données requêtées, vous
-    devriez faire une liste des champs qui peuvent être définis avec
-    mass assignment.
+    devriez faire une liste des champs qui peuvent être définis par
+    assignement de masse.
 
 Accesseurs & Mutateurs
 ======================
@@ -115,9 +115,9 @@ les propriétés sont récupérées/définies en définissant un mutateur::
 Les méthodes mutateurs doivent toujours retourner la valeur qui doit être
 stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
 aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
-faisant cela, attention à ne pas introduire de boucle, puisque CakePHP
+faisant cela, attention à ne pas introduire de boucles, puisque CakePHP
 n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
-mutateurs vous permettent de facilement convertir les propriétés puisqu'elles
+mutateurs vous permettent de facilement convertir les propriétés lorsqu'elles
 sont définies ou de créer des données calculées. Les mutateurs et accesseurs
 sont appliqués quand les propriétés sont lues en utilisant la notation objet
 ou en utilisant get() et set().
@@ -199,24 +199,24 @@ les erreurs de validation en utilisant la méthode ``errors()``::
     $errors = $user->errors('password');
 
 La méthode ``errors()`` peut aussi être utilisée pour définir les erreurs sur
-une entity, facilitant le code de test qui fonctionne avec les messages
+une entity, facilitant les tests du code qui fonctionne avec les messages
 d'erreur::
 
     $user->errors('password', ['Password is required.']);
 
 .. _entities-mass-assignment:
 
-Assignment de Masse
-===================
+Assignement de Masse
+====================
 
-Alors que la définition des propriétés en entities en masse est simple et
+Alors que la définition des propriétés des entities en masse est simple et
 pratique, elle peut créer des problèmes importants de sécurité.
 Assigner en masse les données d'utilisateur à partir de la requête dans une
-entity permet à l'utilisateur de modifier toutes les colonnes.
-Quand vous utilisez les classes entity anonymes, CakePHP ne protège pas contre
-l'assignement en masse. Vous pouvez facilement vous protéger de
-l'assignement de masse en utilisant :doc:`/bake` pour générer vos
-entities.
+entity permet à l'utilisateur de modifier n'importe qu'elles (voir toutes) les
+colonnes. Quand vous utilisez les classes entity anonymes, CakePHP ne protège
+pas contre l'assignement en masse. Vous pouvez facilement vous protéger de
+l'assignement de masse en utilisant :doc:`la commande bake </bake>` pour
+générer vos entities.
 
 La propriété ``_accessible`` vous permet de fournir une liste des champs et
 si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
@@ -235,7 +235,7 @@ si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
     }
 
 En plus des champs réels, il existe un champ spécial ``*`` qui définit le
-behavior fallback si un champ n'est pas nommé spécifiquement::
+comportement par défaut si un champ n'est pas nommé spécifiquement::
 
     namespace App\Model\Entity;
 
@@ -252,16 +252,16 @@ behavior fallback si un champ n'est pas nommé spécifiquement::
 
 Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
-Modifier les Champs Gardés à l'exécution
-----------------------------------------
+Modifier les Champs Protégés à l'Exécution
+------------------------------------------
 
-Vous pouvez modifier la liste des champs gardés à la volée en utilisant la
+Vous pouvez modifier la liste des champs protégés à la volée en utilisant la
 méthode ``accessible``::
 
     // Rendre user_id accessible.
     $article->accessible('user_id', true);
 
-    // Rendre title guarded.
+    // Rendre title protégé.
     $article->accessible('title', false);
 
 .. note::
@@ -270,11 +270,11 @@ méthode ``accessible``::
     méthode sur laquelle il est appelé.
 
 
-Outrepasser le Champ Gardé
---------------------------
+Outrepasser la Protection de Champ
+----------------------------------
 
-Il arrive parfois que vous souhaitiez permettre un assignment en masse aux
-champs gardés::
+Il arrive parfois que vous souhaitiez permettre un assignement en masse aux
+champs protégés::
 
     $article->set($properties, ['guard' => false]);
 
