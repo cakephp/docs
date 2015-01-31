@@ -132,7 +132,7 @@ est 1.
     pourrait signifier d'ajouter ``domain_id``.
 
 Le niveau de recursive recommandé pour votre application devrait être -1.
-Cela évite de récupérer des données liés dans les cas où ce n'est pas
+Cela évite de récupérer des données liées dans les cas où ce n'est pas
 nécessaire ou même non souhaité. C'est le plus souvent le cas pour la
 plupart de vos appels find().
 Augmenter le seulement quand cela est souhaité ou utilisez le behavior
@@ -233,8 +233,8 @@ une clé ``name`` avec le résultat de la concaténation. Il n'est pas conseill�
 de créer des champs virtuels avec les mêmes noms comme colonnes dans la base de
 données, ceci peut causer des erreurs SQL.
 
-Pour plus d'informations sur la propriété ``virtualFields``, son usage propre,
-ainsi que des limitations, regardez :doc:`/models/virtual-fields`.
+Pour plus d'informations sur la propriété les``virtualFields``, son usage propre,
+ainsi que des limitations, regardez les :doc:`/models/virtual-fields`.
 
 name
 ====
