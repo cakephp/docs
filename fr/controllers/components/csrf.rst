@@ -78,7 +78,7 @@ controller, au cours de la méthode ``beforeFilter``::
 
     public function beforeFilter(Event $event)
     {
-        $this->eventManager()->detach($this->Csrf);
+        $this->eventManager()->off($this->Csrf);
     }
 
 .. meta::

@@ -251,14 +251,14 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 ..
   How do we register callbacks or observers to our new `afterPlace` event? This
   is subject to a wide variety of different implementations, but they all have
-  to call the :php:meth:`CakeEventManager::attach()` method to register new actors.
+  to call the :php:meth:`CakeEventManager::on()` method to register new actors.
   For simplicity's sake, let's imagine we know in the plugin what the callbacks
   are available in the controller, and say this controller is responsible for
   attaching them. The possible code would look like this::
 
 新しいafterPlaceイベントにコールバックやオブザーバを登録するにはどうすればよいのでしょうか？
 これは多種多様な異なる実装がなされますが、どのような場合であっても新しいアクターを登録する
-:php:meth:`CakeEventManager::attach()` メソッドを呼び出す必要はあります。わかりやすくするために、
+:php:meth:`CakeEventManager::on()` メソッドを呼び出す必要はあります。わかりやすくするために、
 このプラグインにおいてコントローラでコールバックを使用可能であることを我々は知っており、
 このコントローラは、それらを責任を持って接続するとしましょう。可能なコードは次のようになります::
 
@@ -279,7 +279,7 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
         public function finish()
         {
             foreach (Configure::read('Order.afterPlace') as $l) {
-                $this->Order->getEventManager()->attach($l, 'Model.Order.afterPlace');
+                $this->Order->getEventManager()->on('Model.Order.afterPlace', $l);
             }
             if ($this->Order->place($this->Cart->items())) {
                 // ...
@@ -307,13 +307,13 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 第1の引数としてイベントオブジェクトを受け取ります。
 
 ..
-  :php:meth:`CakeEventManager::attach()` Accepts three arguments. The leftmost one is
+  :php:meth:`CakeEventManager::on()` Accepts three arguments. The leftmost one is
   the callback itself, anything that PHP can treat as a callable function. The second
   argument is the event name, and the callback will only get fired if the `CakeEvent`
   object dispatched has a matching name. The last argument is an array of options to
   configure the callback priority, and the preference of arguments to be passed.
 
-:php:meth:`CakeEventManager::attach()` は3つの引数を受け取ります。左端の1つはコールバック自身、
+:php:meth:`CakeEventManager::on()` は3つの引数を受け取ります。左端の1つはコールバック自身、
 PHPが呼び出し可能な関数として扱うことができる何かです。第二引数にはイベント名で、
 `CakeEvent` オブジェクトはこれとマッチした名前でディスパッチされたときにのみ動作します。
 最後の引数はコールバックのプライオリティ、および渡される引数のプライオリティを設定するためのオプションの配列です。
@@ -367,14 +367,14 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
-    $this->Order->getEventManager()->attach($statistics);
+    $this->Order->getEventManager()->on($statistics);
 
 ..
-  As you can see in the above code, the `attach` function can handle instances of
+  As you can see in the above code, the ``on`` function can handle instances of
   the `CakeEventListener` interface. Internally, the event manager will read the
   array returned by `implementedEvents` method and wire the callbacks accordingly.
 
-上記のコードを見るとわかるように、`attach` 関数は `CakeEventListener` インターフェイスの
+上記のコードを見るとわかるように、``on`` 関数は `CakeEventListener` インターフェイスの
 インスタンスを操ることができます。内部的には、イベント·マネージャーは `implementedEvents`
 メソッドが返す配列を読み取り、ただちにコールバックを結びつけます。
 
@@ -422,12 +422,16 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 2つのコールバックが同じプライオリティキューに割り当てられるた場合は、
 それらはFIFOポリシーで実行され、最初にアタッチされたリスナーメソッドは最初に、
-という具合に実行されます。コールバックのプライオリティを設定するためにはattachメソッドを用い、
+という具合に実行されます。コールバックのプライオリティを設定するためにはonメソッドを用い、
 リスナーのプライオリティを設定するためには `implementedEvent` 関数内での宣言を行います::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
+    $this->getEventManager()->on(
+        'Model.Order.afterPlace',
+        array('priority' => 2),
+        $callback
+    );
 
     // Setting priority for a listener
     class UserStatistic implements CakeEventListener
@@ -473,13 +477,13 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   third argument of the `attach` method, or declare it in the `implementedEvents`
   returned array similar to what you do with priorities::
 
-この方法を選択する場合、プライオリティの設定でやったのと同じように、`attach`メソッドの
-3番目の引数に`passParams`オプションを追加するか `implementedEvents` が返す配列に
+この方法を選択する場合、プライオリティの設定でやったのと同じように、``on``メソッドの
+3番目の引数に`passParams`オプションを追加するか ``implementedEvents`` が返す配列に
 それを宣言する必要があります::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
+    $this->getEventManager()->on('Model.Order.afterPlace', $callback);
 
     // Setting priority for a listener
     class UserStatistic implements CakeEventListener
@@ -666,35 +670,35 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 ..
   If for any reason you want to remove any callback from the event manager just call
-  the :php:meth:`CakeEventManager::detach()` method using as arguments the first two
+  the :php:meth:`CakeEventManager::off()` method using as arguments the first two
   params you used for attaching it::
 
 何らかの理由でイベントマネージャーから任意のコールバックを削除したい場合は、
-:php:meth:`CakeEventManager::detach()` を引数の最初の2つの変数を attach のときと
+:php:meth:`CakeEventManager::off()` を引数の最初の2つの変数を attach のときと
 同様の用い方で呼び出すだけで良いです::
 
     // Attaching a function
-    $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
+    $this->getEventManager()->on('My.event', array($this, 'doSomething'));
 
     // Detaching the function
-    $this->getEventManager()->detach(array($this, 'doSomething'), 'My.event');
+    $this->getEventManager()->off('My.event', array($this, 'doSomething'));
 
-    // Attaching an anonymous function (PHP 5.3+ only);
+    // Attaching an anonymous function
     $myFunction = function ($event) { ... };
-    $this->getEventManager()->attach($myFunction, 'My.event');
+    $this->getEventManager()->on('My.event', $myFunction);
 
     // Detaching the anonymous function
-    $this->getEventManager()->detach($myFunction, 'My.event');
+    $this->getEventManager()->off('My.event', $myFunction);
 
     // Attaching a CakeEventListener
     $listener = new MyCakeEventLister();
-    $this->getEventManager()->attach($listener);
+    $this->getEventManager()->on($listener);
 
     // Detaching a single event key from a listener
-    $this->getEventManager()->detach($listener, 'My.event');
+    $this->getEventManager()->off('My.event', $listener);
 
     // Detaching all callbacks implemented by a listener
-    $this->getEventManager()->detach($listener);
+    $this->getEventManager()->off($listener);
 
 .. The global event manager
 
