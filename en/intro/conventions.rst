@@ -130,7 +130,7 @@ been configured by any means other than by creating classes and
 files that you'd need to create anyway.
 
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
-through the :doc:`/tutorials-and-examples/blog/blog` to see how things fit
+through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
 together.
 
 
