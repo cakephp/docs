@@ -233,7 +233,7 @@ une clé ``name`` avec le résultat de la concaténation. Il n'est pas conseill�
 de créer des champs virtuels avec les mêmes noms comme colonnes dans la base de
 données, ceci peut causer des erreurs SQL.
 
-Pour plus d'informations sur la propriété les``virtualFields``, son usage propre,
+Pour plus d'informations sur la propriété ``virtualFields``, son usage propre,
 ainsi que des limitations, regardez les :doc:`/models/virtual-fields`.
 
 name
