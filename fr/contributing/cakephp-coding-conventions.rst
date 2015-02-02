@@ -6,7 +6,7 @@ Les développeurs de CakePHP vont utiliser les normes de code suivantes.
 Il est recommandé que les autres personnes qui développent des IngredientsCake
 suivent les mêmes normes.
 
-Vous pouvez utilisez le `CakePHP Code Sniffer
+Vous pouvez utiliser le `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code
 suit les normes requises.
 

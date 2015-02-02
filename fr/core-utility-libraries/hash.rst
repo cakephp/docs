@@ -101,8 +101,8 @@ Les Types d'Attribut Correspondants
     :rtype: array
 
     ``Hash::extract()`` supporte toutes les expressions, les components
-    matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
-    récupéré les données à partir des tableaux, le long des chemins
+    matcher de la :ref:`hash-path-syntax`. Vous pouvez utiliser l'extract pour
+    récupérer les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier
     les éléments que vous souhaitez retourner ::
@@ -172,7 +172,7 @@ Les Types d'Attribut Correspondants
     multiples en une fois.
 
     .. versionchanged:: 2.5
-        Depuis 2.5.0, les expressions matchant l'attribut fonctionnenent avec
+        Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
         remove()
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
@@ -283,7 +283,7 @@ Les Types d'Attribut Correspondants
         */
 
     Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si
-    vous le faîtes, la première valeur sera utlisée comme un format de chaîne
+    vous le faîte, la première valeur sera utilisée comme un format de chaîne
     de caractères, pour les valeurs extraites par les autres chemins::
 
         $result = Hash::combine(
@@ -662,7 +662,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
-    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    Appliquer un callback à un ensemble de valeurs extraites en utilisant
     $function. La fonction va récupérer les valeurs extraites en premier
     argument.
 

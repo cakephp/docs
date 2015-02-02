@@ -147,7 +147,7 @@ de la route::
         array('controller' => 'products', 'action' => 'display', 5)
     );
 
-Cet exemple montre comment vous pouvez utilisez le deuxième paramètre de
+Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
 pourriez considérer la création d'une route. Cela vous permet de vous lier
