@@ -142,8 +142,8 @@ vous aviez besoin de toute façon.
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez
 essayer de dérouler
-:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/blog/blog>` pour
-voir comment les choses s'articulent.
+:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/bookmarks/intro>`
+pour voir comment les choses s'articulent.
 
 
 .. meta::

@@ -4,8 +4,8 @@ Journalisation (logging)
 Bien que les réglages de la Classe Configure du cœur de CakePHP puissent
 vraiment vous aider à voir ce qui se passe sous le capot, vous aurez besoin
 certaines fois de consigner des données sur le disque pour découvrir ce qui
-se produit. Dans un monde devenu plus dépendant des technologies comme SOAP et
-AJAX, déboguer peut s'avérer difficile.
+se produit. Avec des technologies comme SOAP, AJAX, et les APIs REST, déboguer
+peut s'avérer difficile.
 
 Le logging (journalisation) peut aussi être une façon de découvrir ce qui
 s'est passé dans votre application à chaque instant. Quels termes de recherche
@@ -321,7 +321,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
     // mais seulement ceux avec les scope `orders` et `payments`
     Log::config('shops', [
-        'className' => 'FileLog',        
+        'className' => 'FileLog',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -432,7 +432,7 @@ Après avoir installé Monolog en utilisant composer, configurez le logger en
 utilisant la méthode ``Log::config()``::
 
     // config/bootstrap.php
-    
+
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 

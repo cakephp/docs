@@ -4,8 +4,8 @@ Logging
 While CakePHP core Configure Class settings can really help you see
 what's happening under the hood, there are certain times that
 you'll need to log data to the disk in order to find out what's
-going on. With technologies like SOAP, AJAX, and REST APIs, debugging can be rather
-difficult.
+going on. With technologies like SOAP, AJAX, and REST APIs, debugging can be
+rather difficult.
 
 Logging can also be a way to find out what's been going on in your
 application over time. What search terms are being used? What sorts

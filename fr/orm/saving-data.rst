@@ -302,7 +302,7 @@ Cet event vous laisse manipuler les données de request juste avant que les
 entities ne soient créées::
 
     // Dans une classe table ou behavior
-    public function beforeMarshal(Event $event, ArrayObject $data, array $options = [])
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
         $data['username'] .= 'user';
     }
