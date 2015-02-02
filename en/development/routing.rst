@@ -102,7 +102,7 @@ Connecting Routes
 
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
-To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
+To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
 operation. As seen above you can also use ``Router::connect()`` to connect
 routes. This method defaults to the ``/`` scope. To create a scope and connect
