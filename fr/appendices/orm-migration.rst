@@ -518,12 +518,16 @@ articles pourrait être::
         public function buildRules(RulesChecker $rules)
         {
             $rules->add($rules->existsIn('user_id', 'Users'));
-            $rules->add(function ($article, $options) {
-                return ($article->published && empty($article->reviewer));
-            }, [
-                'errorField' => 'published',
-                'message' => 'Articles must be reviewed before publishing.'
-            ]);
+            $rules->add(
+                function ($article, $options) {
+                    return ($article->published && empty($article->reviewer));
+                },
+                'isReviewed',
+                [
+                    'errorField' => 'published',
+                    'message' => 'Articles must be reviewed before publishing.'
+                ]
+            );
             return $rules;
         }
     }
