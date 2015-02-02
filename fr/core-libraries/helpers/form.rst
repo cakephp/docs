@@ -65,7 +65,7 @@ pleinement avantage du Helper Form (Helper Formulaire) est
     Le helper Form utilise la propriété ``$this->request->data`` pour
     détecter automatiquement s'il faut créer un formulaire d'ajout ou de
     modification. Si ``$this->request->data`` contient un tableau nommé
-    après le model du formulaire , et que ce tableau contient une valeur
+    d'après le model du formulaire , et que ce tableau contient une valeur
     non nulle pour la clé primaire du model, alors le FormHelper créera
     un formulaire de modification pour cet enregistrement précis. Par
     exemple, si on va à l'adresse
