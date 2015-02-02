@@ -1311,35 +1311,39 @@ Création des boutons et des éléments submit
 
 .. php:method:: submit(string $caption, array $options)
 
-    Crée un bouton submit avec la légende ``$caption``. Si la ``$caption``
-    fournie est l'URL d'une image (il contient un caractère '.'), le
-    bouton submit sera affiché comme une image::
+Crée un input submit avec le texte ``$caption``. Si la ``$caption``
+fournie est l'URL d'une image, un bouton submit de l'image sera généré.
+Ce qui suit::
 
-        echo $this->Form->submit();
+    echo $this->Form->submit();
 
-    Affichera:
+Affichera:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <div class="submit"><input value="Submit" type="submit"></div>
+    <div class="submit"><input value="Submit" type="submit"></div>
 
-    Vous pouvez aussi passer une URL relative ou absolue vers une image
-    pour le paramêtre caption au lieu d'un caption text::
+Vous pouvez aussi passer une URL relative ou absolue vers une image
+au paramètre caption au lieu d'un caption text::
 
-        echo $this->Form->submit('ok.png');
+    echo $this->Form->submit('ok.png');
 
-    Affichera:
+Affichera:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <div class="submit"><input type="image" src="/img/ok.png"></div>
+    <div class="submit"><input type="image" src="/img/ok.png"></div>
+
+Les inputs submit sont utiles quand vous avez seulement besoin de textes
+basiques ou d'images. Si vous avez besoin d'un contenu de bouton plus
+complexe, vous devrez plutôt utiliser ``button()``.
 
 Créer des Elements Button
 -------------------------
 
 .. php:method:: button(string $title, array $options = [])
 
-Crée un boutton HTML avec le titre spécifié et un type par défaut "button".
+Crée un bouton HTML avec le titre spécifié et un type par défaut "button".
 Définir ``$options['type']`` affichera l'un des trois types de boutons
 possibles:
 
@@ -1363,11 +1367,15 @@ Affichera :
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-Le input de type ``button`` supporte l'option ``escape`` qui accepte un
+L'input de type ``button`` supporte l'option ``escape`` qui accepte un
 booléen et détermine si oui ou non l'entité HTML encode le $title du bouton.
 Par défaut à ``false``::
 
-    echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
+    // Va afficher le HTML echappé.
+    echo $this->Form->button('<em>Submit Form</em>', [
+        'type' => 'submit',
+        'escape' => true
+    ]);
 
 Fermer le Formulaire
 ====================
