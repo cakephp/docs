@@ -897,10 +897,16 @@ make testing responses much simpler. Some examples are::
     // Check that no Location header has been set
     $this->assertNoRedirect();
 
+    // Assert not empty response content
+    $this->assertResponseNotEmpty();
+
+    // Assert empty response content
+    $this->assertResponseEmpty();
+
     // Assert response content
     $this->assertResponseEquals('Yeah!');
 
-    // Assert content in the response
+    // Assert partial response content
     $this->assertResponseContains('You won!');
 
     // Assert layout
