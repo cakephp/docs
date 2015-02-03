@@ -36,6 +36,12 @@ CakeSession
   emptying the session without forcing a new id and renewing the session. It
   defaults to ``true``.
 
+Model
+=====
+
+TreeBehavior
+------------
+- New method ``TreeBehavior::getLevel()`` has been added which fetches depth of a node.
 
 Utility
 =======
