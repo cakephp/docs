@@ -9,7 +9,7 @@ do fluxo de trabalho de informação no domínio do trabalho.
 No CakePHP seu modelo de domínio da aplicação é dividido em 2 tipos de objetos
 principais. Os primeiros são **repositories (repositórios)** ou **table objects
 (objetos de tabela)**. Estes objetos fornecem acesso a coleções de dados. Eles
-permitem a você salvar novos recordes, modificar/deletar os que já existem, definir relacionamentos,
+permitem a você salvar novos registros, modificar/deletar os que já existem, definir relacionamentos,
 e executar operações em massa. O segundo tipo de objetos são as **entities (entidades)**.
 Entities representam recordes individuais e permitem a você definir comportamento em
 nível de linha/registro e funcionalidades.
