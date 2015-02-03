@@ -835,19 +835,19 @@ ajouter des règles au vérificateur pour une classe de Table donnée::
         // Ajoute une règle qui est appliquée pour la création et la mise à jour d'opérations
         $rules->add(function ($entity, $options) {
             // Retourne un booléen pour indiquer si succès/échec
-        });
+        }, 'ruleName');
 
         // Ajoute une règle pour la création.
         $rules->addCreate(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         // Ajoute une règle pour la mise à jour.
         $rules->addUpdate(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         // Ajoute une règle pour la suppression.
         $rules->addDelete(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         return $rules;
     }
@@ -858,16 +858,16 @@ d'options. Le tableau d'options va contenir ``errorField``, ``message`` et
 laquelle les règles sont attachées. Comme les règles acceptent tout
 ``callable``, vous pouvez aussi utiliser des fonctions d'instance::
 
-    $rules->addCreate([$this, 'uniqueEmail']);
+    $rules->addCreate([$this, 'uniqueEmail'], 'uniqueEmail');
 
 ou des classes callable::
 
-    $rules->addCreate(new IsUnique(['email']));
+    $rules->addCreate(new IsUnique(['email']), 'uniqueEmail');
 
 Lors de l'ajout de règles, vous pouvez définir le champ pour lequel la règle
 est faite, et le message d'erreur en options::
 
-    $rules->add([$this, 'isValidState'], [
+    $rules->add([$this, 'isValidState'], 'validState', [
         'errorField' => 'status',
         'message' => 'Cette facture ne peut pas être déplacée pour ce statut.'
     ]);
@@ -908,7 +908,7 @@ Vous pouvez utiliser les méthodes entity en tant que règles de domaine::
 
     $rules->add(function ($entity, $options) {
         return $entity->isOkLooking();
-    });
+    }, 'ruleName');
 
 Créer des Objets de Règles Personnalisées
 -----------------------------------------
@@ -934,7 +934,7 @@ utile de packager ces règles dans des classes réutilisables::
     // Ajoute la règle personnalisée
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...));
+    $rules->add(new CustomRule(...), 'ruleName');
 
 En ajoutant des classes de règle personnalisée, vous pouvez garder votre code
 DRY et faciliter le test des règles de votre domaine.

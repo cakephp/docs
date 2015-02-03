@@ -827,19 +827,19 @@ class::
         // Add a rule that is applied for create and update operations
         $rules->add(function ($entity, $options) {
             // Return a boolean to indicate pass/fail
-        });
+        }, 'ruleName');
 
         // Add a rule for create.
         $rules->addCreate(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         // Add a rule for update
         $rules->addUpdate(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         // Add a rule for the deleting.
         $rules->addDelete(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         return $rules;
     }
@@ -850,16 +850,16 @@ options. The options array will contain ``errorField``, ``message``, and
 are attached to. Because rules accept any ``callable``, you can also use
 instance functions::
 
-    $rules->addCreate([$this, 'uniqueEmail']);
+    $rules->addCreate([$this, 'uniqueEmail'], 'uniqueEmail');
 
 or callable classes::
 
-    $rules->addCreate(new IsUnique(['email']));
+    $rules->addCreate(new IsUnique(['email']), 'uniqueEmail');
 
 When adding rules you can define the field the rule is for, and the error
 message as options::
 
-    $rules->add([$this, 'isValidState'], [
+    $rules->add([$this, 'isValidState'], 'validState', [
         'errorField' => 'status',
         'message' => 'This invoice cannot be moved to that status.'
     ]);
@@ -898,7 +898,7 @@ You may want to use entity methods as domain rules::
 
     $rules->add(function ($entity, $options) {
         return $entity->isOkLooking();
-    });
+    }, 'ruleName');
 
 Creating Custom Rule objects
 ----------------------------
@@ -924,7 +924,7 @@ those rules into re-usable classes::
     // Add the custom rule
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...));
+    $rules->add(new CustomRule(...), 'ruleName');
 
 By creating custom rule classes you can keep your code DRY and make your domain
 rules easy to test.
