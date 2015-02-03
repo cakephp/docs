@@ -581,13 +581,18 @@ the singular, camel cased version the association name. For
 example::
 
     // In a controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\User;
-
-    $article = new Article(['title' => 'First post']);
-    $article->user = new User(['id' => 1, 'username' => 'mark']);
-
+    $data = [
+        'title' => 'First Post',
+        'user' => [
+            'id' => 1,
+            'username' => 'mark'
+        ]
+    ];
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Users']
+    ]);
+
     $articles->save($article);
 
 Saving HasOne Associations
@@ -597,13 +602,17 @@ When saving hasOne associations, the ORM expects a single nested entity at the
 singular, camel cased version the association name. For example::
 
     // In a controller.
-    use App\Model\Entity\User;
-    use App\Model\Entity\Profile;
-
-    $user = new User(['id' => 1, 'username' => 'cakephp']);
-    $user->profile = new Profile(['twitter' => '@cakephp']);
-
+    $data = [
+        'id' => 1,
+        'username' => 'cakephp',
+        'profile' => [
+            'twitter' => '@cakephp'
+        ]
+    ];
     $users = TableRegistry::get('Users');
+    $user = $users->newEntity($data, [
+        'associated' => ['Profiles']
+    ]);
     $users->save($user);
 
 Saving HasMany Associations
@@ -613,16 +622,17 @@ When saving hasMany associations, the ORM expects an array of entities at the
 plural, camel cased version the association name. For example::
 
     // In a controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\Comment;
-
-    $article = new Article(['title' => 'First post']);
-    $article->comments = [
-        new Comment(['body' => 'Best post ever']),
-        new Comment(['body' => 'I really like this.']),
+    $data = [
+        'title' => 'First Post',
+        'comments' => [
+            ['body' => 'Best post ever'],
+            ['body' => 'I really like this.']
+        ]
     ];
-
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Comments']
+    ]);
     $articles->save($article);
 
 When saving hasMany associations, associated records will either be updated, or
@@ -643,16 +653,18 @@ When saving belongsToMany associations, the ORM expects an array of entities at 
 plural, camel cased version the association name. For example::
 
     // In a controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\Tag;
 
-    $article = new Article(['title' => 'First post']);
-    $article->tags = [
-        new Tag(['tag' => 'CakePHP']),
-        new Tag(['tag' => 'Framework']),
+    $data = [
+        'title' => 'First Post',
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Framework']
+        ]
     ];
-
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Tags']
+    ]);
     $articles->save($article);
 
 When converting request data into entities, the ``newEntity`` and
@@ -705,7 +717,29 @@ setting data to the ``_joinData`` property::
     $studentsTable->save($student);
 
 The ``_joinData`` property can be either an entity, or an array of data if you
-are saving entities built from request data.
+are saving entities built from request data. When saving joint table data from
+request data your POST data should look like::
+
+    $data = [
+        'first_name' => 'Sally',
+        'last_name' => 'Parker',
+        'courses' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'grade' => 80.12,
+                    'days_attended' => 30
+                ]
+            ],
+            // Other courses.
+        ]
+    ];
+    $student = $this->Students->newEntity($data, [
+        'associated' => ['Courses._joinData']
+    ]);
+
+See the :ref:`associated-form-inputs` documentation for how to build inputs with
+``FormHelper`` correctly.
 
 .. _saving-complex-types:
 
