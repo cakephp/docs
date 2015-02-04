@@ -31,7 +31,7 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the [app_name] directory. ::
+in the ``bookmarker`` directory. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
 
