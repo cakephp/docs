@@ -1,7 +1,7 @@
 Construindo um blog
 #############
 
-Este tutorial irá orientá-lo através da criação de um aplicativo simples blog. 
+Este tutorial irá orientá-lo na criação de um simples aplicativo de blog. 
 Estaremos instalando CakePHP, criando um banco de dados e criando a lógica de aplicação suficiente para listar, 
 adicionar, editar e apagar posts.
 
@@ -12,7 +12,7 @@ Aqui está o que você vai precisar:
    Poderíamos ter que brincar um pouco com a configuração do servidor, 
    mas a maioria das pessoas pode ter o CakePHP instalado e funcionando sem 
    qualquer configuração em tudo. 
-   Certifique-se de que você tem o PHP 5.4.16 ou superior, e que os ``mbstring`` e ``intl` 
+   Certifique-se de que você tem o PHP 5.4.16 ou superior, e que os ``mbstring`` e ``intl`` 
    extensões são ativadas no PHP.
 #. Um servidor de banco de dados. Nós vamos estar usando servidor MySQL neste tutorial. 
    Você precisa saber o suficiente sobre SQL para criar um banco de dados: CakePHP 
