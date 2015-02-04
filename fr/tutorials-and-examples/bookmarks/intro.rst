@@ -32,7 +32,7 @@ Ou alors vous pouvez télécharger ``composer.phar`` depuis le
 
 Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
-CakePHP dans le répertoire [app_name]. ::
+CakePHP dans le répertoire ``bookmarker``. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
 
@@ -82,7 +82,7 @@ démarrer le serveur de développement::
 Ceci va lancer le serveur web intégré de PHP sur le port 8765. Ouvrez
 ``http://localhost:8765`` dans votre navigateur web pour voir la page d'accueil.
 Tous les points devront être cochés sauf pour CakePHP qui n'est pas encore
-capable de se connecter à votre base de données. Si ce n'est pas le cas, vous 
+capable de se connecter à votre base de données. Si ce n'est pas le cas, vous
 devrez installer des extensions PHP supplémentaires ou définir des permissions de
 répertoire.
 

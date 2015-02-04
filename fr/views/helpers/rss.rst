@@ -1,11 +1,12 @@
-RSS
-###
+RSSHelper
+#########
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-Le Helper RSS permet de générer facilement des XML pour les flux RSS.
+Le Helper RSS permet de générer facilement le XML pour les
+`flux RSS <https://en.wikipedia.org/wiki/RSS>`_.
 
 Créer un flux RSS avec RssHelper
 ================================
@@ -79,7 +80,7 @@ le même::
             'order' => 'Post.created DESC',
             'limit' => 10
         ];
-        
+
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
