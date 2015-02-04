@@ -1,11 +1,11 @@
-RSS
-###
+RssHelper
+#########
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-The RSS helper makes generating XML for RSS feeds easy.
+The RSS helper makes generating XML for `RSS feeds <https://en.wikipedia.org/wiki/RSS>`_ easy.
 
 Creating an RSS Feed with the RssHelper
 =======================================
