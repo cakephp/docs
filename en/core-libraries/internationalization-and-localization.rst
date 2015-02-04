@@ -164,7 +164,7 @@ All translation functions support placeholder replacements::
 
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
-so you and translate messages and localize dates, numbers and
+so you can translate messages and localize dates, numbers and
 currency at the same time::
 
     echo __(
