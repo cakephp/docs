@@ -1,5 +1,5 @@
 Construindo um blog
-#############
+###################
 
 Este tutorial irá orientá-lo na criação de um simples aplicativo de blog. 
 Estaremos instalando CakePHP, criando um banco de dados e criando a lógica de aplicação suficiente para listar, 
@@ -23,7 +23,7 @@ Aqui está o que você vai precisar:
 Vamos começar!
 
 Instalando o CakePHP
-===============
+====================
 
 A maneira mais fácil de instalar o CakePHP é usar o Composer. Composer é uma forma simples 
 de instalar CakePHP de seu terminal ou linha de comando. 
