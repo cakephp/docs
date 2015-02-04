@@ -41,7 +41,8 @@ Model
 
 TreeBehavior
 ------------
-- New method ``TreeBehavior::getLevel()`` has been added which fetches depth of a node.
+- New method ``TreeBehavior::getLevel()`` has been added which fetches depth of
+a node.
 
 Utility
 =======

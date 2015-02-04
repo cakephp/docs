@@ -37,6 +37,13 @@ CakeSession
   permettre de vider la session sans forcer un nouvel id et renouveler la
   session. Il est par défaut à ``true``.
 
+Model
+=====
+
+TreeBehavior
+------------
+- La nouvelle méthode ``TreeBehavior::getLevel()`` a été ajoutée qui attrape
+le niveau de profondeur d'un noeud.
 
 Utility
 =======
