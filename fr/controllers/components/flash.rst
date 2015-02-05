@@ -63,6 +63,18 @@ Un exemple de l'utilisation de ces options::
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
 
+Notez que le paramètre ``element`` sera toujours surchargé en utilisant
+``__call()``. Afin de récupérer un element spécifique d'un plugin, vous
+devez définir le paramètre ``plugin``.
+Par exemple::
+
+    // Dans votre Controller
+    $this->Flash->warning('My message', ['plugin' => 'PluginName']);
+
+Le code ci-dessus va utiliser l'element warning.ctp dans
+``plugins/PluginName/src/Template/Element/Flash`` pour afficher le message
+flash.
+
 .. note::
     Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
     utilisez une requête ou des données d'utilisateur dans vos messages flash,

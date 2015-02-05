@@ -416,7 +416,7 @@ l'utiliser comme une règle de validation::
 
     }
 
-Eviter les Attaques d'Assignement de Propriété de Masse
+Eviter les Attaques d'Assignement en Masse de Propriété
 -------------------------------------------------------
 
 Lors de la création ou la fusion des entities à partir des données de request,
@@ -900,6 +900,9 @@ une classe de règle ``ExistsIn``::
 
     // Plusieurs clés, utile pour des clés primaires composites.
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
+
+Les champs dont il faut vérifier l'existence dans la table liée doivent faire
+parti de la clé primaire.
 
 Utiliser les Méthodes Entity en tant que Règles
 -----------------------------------------------
