@@ -599,6 +599,8 @@ le tableau d'options::
 
 Vos entities doivent être structurées de la même façon qu'elles l'étaient
 quand elles ont été chargées à partir de la base de données.
+Consultez la documentation du helper Form pour savoir comment
+:ref:`associated-form-inputs`.
 
 Sauvegarder les Associations BelongsTo
 --------------------------------------
@@ -608,13 +610,18 @@ imbriquée unique avec le nom de l'association au singulier, en camel case.
 Par exemple::
 
     // Dans un controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\User;
-
-    $article = new Article(['title' => 'First post']);
-    $article->user = new User(['id' => 1, 'username' => 'mark']);
-
+    $data = [
+        'title' => 'First Post',
+        'user' => [
+            'id' => 1,
+            'username' => 'mark'
+        ]
+    ];
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Users']
+    ]);
+
     $articles->save($article);
 
 Sauvegarder les Associations HasOne
@@ -625,13 +632,17 @@ imbriquée unique avec le nom de l'association au singulier et en camel case.
 Par exemple::
 
     // Dans un controller.
-    use App\Model\Entity\User;
-    use App\Model\Entity\Profile;
-
-    $user = new User(['id' => 1, 'username' => 'cakephp']);
-    $user->profile = new Profile(['twitter' => '@cakephp']);
-
+    $data = [
+        'id' => 1,
+        'username' => 'cakephp',
+        'profile' => [
+            'twitter' => '@cakephp'
+        ]
+    ];
     $users = TableRegistry::get('Users');
+    $user = $users->newEntity($data, [
+        'associated' => ['Profiles']
+    ]);
     $users->save($user);
 
 Sauvegarder les Associations HasMany
@@ -642,16 +653,17 @@ imbriquée unique avec le nom de l'association au pluriel et en camel case.
 Par exemple::
 
     // Dans un controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\Comment;
-
-    $article = new Article(['title' => 'First post']);
-    $article->comments = [
-        new Comment(['body' => 'Best post ever']),
-        new Comment(['body' => 'I really like this.']),
+    $data = [
+        'title' => 'First Post',
+        'comments' => [
+            ['body' => 'Best post ever'],
+            ['body' => 'I really like this.']
+        ]
     ];
-
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Comments']
+    ]);
     $articles->save($article);
 
 Lors de la sauvegarde d'associations hasMany, les enregistrements associés
@@ -675,16 +687,17 @@ imbriquée unique avec le nom de l'association au pluriel et en camel case.
 Par exemple::
 
     // Dans un controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\Tag;
-
-    $article = new Article(['title' => 'First post']);
-    $article->tags = [
-        new Tag(['tag' => 'CakePHP']),
-        new Tag(['tag' => 'Framework']),
+    $data = [
+        'title' => 'First Post',
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Framework']
+        ]
     ];
-
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Tags']
+    ]);
     $articles->save($article);
 
 Quand vous convertissez les données de request en entities, les méthodes
@@ -740,8 +753,31 @@ propriété ``_joinData``::
     $studentsTable->save($student);
 
 La propriété ``_joinData`` peut être soit une entity, soit un tableau de données
-si vous sauvegardez les saving entities construites à partir de données de
-request.
+si vous sauvegardez les entities construites à partir de données de
+request. Lorsque vous sauvegardez des données de tables jointes depuis les données
+de requête, vos données POST doivent ressembler à ceci::
+
+    $data = [
+        'first_name' => 'Sally',
+        'last_name' => 'Parker',
+        'courses' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'grade' => 80.12,
+                    'days_attended' => 30
+                ]
+            ],
+            // d'autres cours (courses).
+        ]
+    ];
+    $student = $this->Students->newEntity($data, [
+        'associated' => ['Courses._joinData']
+    ]);
+
+Regardez le chapitre sur les :ref:`inputs pour les données associées
+<associated-form-inputs>` pour savoir comment construire des inputs avec
+le ``FormHelper`` correctement.
 
 .. _saving-complex-types:
 

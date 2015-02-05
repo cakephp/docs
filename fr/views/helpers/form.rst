@@ -1604,6 +1604,65 @@ générées, définissez les à ``false`` dans le paramètre fields::
 
     echo $this->Form->allInputs(['password' => false]);
 
+.. _associated-form-inputs:
+
+Créer des Inputs pour les Données Associées
+===========================================
+
+Creating forms for associated data is straightforward and is closely related to
+the paths in your entity's data. Assuming the following table relations:
+
+* Authors HasOne Profiles
+* Authors HasMany Articles
+* Articles HasMany Comments
+* Articles BelongsTo Authors
+* Articles BelongsToMany Tags
+
+If we were editing an article with its associations loaded we could
+create the following inputs::
+
+    $this->Form->create($article);
+
+    // Article inputs.
+    echo $this->Form->input('title');
+
+    // Author inputs (belongsTo)
+    echo $this->Form->input('author.id');
+    echo $this->Form->input('author.first_name');
+    echo $this->Form->input('author.last_name');
+
+    // Author profile (belongsTo + hasOne)
+    echo $this->Form->input('author.profile.id');
+    echo $this->Form->input('author.profile.username');
+
+    // Tags inputs (belongsToMany)
+    echo $this->Form->input('tags.0.id');
+    echo $this->Form->input('tags.0.name');
+    echo $this->Form->input('tags.1.id');
+    echo $this->Form->input('tags.1.name');
+
+    // Inputs for the joint table (articles_tags)
+    echo $this->Form->input('tags.0._joinData.starred');
+    echo $this->Form->input('tags.1._joinData.starred');
+
+    // Comments inputs (hasMany)
+    echo $this->Form->input('comments.0.id');
+    echo $this->Form->input('comments.0.comment');
+    echo $this->Form->input('comments.1.id');
+    echo $this->Form->input('comments.1.comment');
+
+The above inputs could then be marshalled into a completed entity graph using
+the following code in your controller::
+
+    $article = $this->Articles->patchEntity($article, $this->request->data, [
+        'associated' => [
+            'Authors',
+            'Authors.Profiles',
+            'Tags',
+            'Comments'
+        ]
+    ]);
+
 Ajouter des Widgets Personnalisés
 =================================
 
