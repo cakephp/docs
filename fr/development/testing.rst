@@ -41,10 +41,6 @@ fichier php.ini ::
     Selon la configuration de votre système, vous devrez lancer les commandes
     précédentes avec ``sudo``.
 
-Une fois que PHPUnit est installé avec l'installeur PEAR, vous devrez confirmer
-que les librairies PHPUnit sont sur le ``include_path`` de PHP. Vous pouvez
-faire cela en vérifiant votre fichier php.ini et en vous assurant que les
-fichiers de PHPUnit sont dans un des répertoires de ``include_path``.
 
 .. tip::
 
