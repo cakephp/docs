@@ -110,6 +110,30 @@ plusieurs articles devrait ressembler à ceci::
         ],
     ];
 
+Il est également possible de permettre à ``newEntity()`` d'écrire dans des champs non accessibles.
+Par exemple, ``id`` est générallement absent de la propriété ``_accessible``.
+Dans ce cas, vous pouvez utiliser l'option ``accessibleFields``. Cela est particulièrement intéressant 
+pour conserver les associations existantes entre certaines entités:
+
+    // Dans un controller.
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags', 'Comments' => 
+            [
+                'associated' => 
+                [
+                    'Users' => 
+                    [
+                        'accessibleFields' => ['id' => true]
+                    ]
+                ]
+            ]
+        ]
+    ]);
+
+Le code ci-dessus permet de conserver l'association entre Comments et Users pour l'entité concernée.
+
 Une fois que vous avez converti des données de request dans des entities, vous
 pouvez leur faire un ``save()`` ou un ``delete()``::
 
@@ -280,7 +304,7 @@ présentes dans les résultats::
         $articles->save($entity);
     }
 
-De la même façon que pour l'utilisation de ``patchEntity``, vous pouvez utiliser
+De la même façon que pour l'utilisation de ``patchEntity()``, vous pouvez utiliser
 le troisième argument pour controller les associations qui seront fusionnées
 dans chacune des entities du tableau::
 
@@ -290,6 +314,25 @@ dans chacune des entities du tableau::
         $this->request->data(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
+
+De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez permettre à ``patchEntity()`` 
+d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement pas déclaré dans la propriété
+``_accessible``::
+
+    // Dans un controller.
+    $patched = $articles->patchEntities(
+        $list,
+        $this->request->data(),
+        ['associated' => 
+            [
+                'Tags', 
+                'Comments.Users' => [
+                    'accessibleFields' => ['id' => true],
+                ]
+            ]
+        ]
+    );
+
 
 .. _before-marshal:
 
