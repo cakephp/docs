@@ -37,11 +37,6 @@ Make sure /usr/local/bin is in your php.ini file's include_path::
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
-Once PHPUnit is installed with the PEAR installer, you should confirm that the
-PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
-your php.ini file and making sure that the PHPUnit files are in one of the
-``include_path`` directories.
-
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6+. Add the ``--debug``
