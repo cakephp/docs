@@ -891,6 +891,9 @@ can help provide a nicer user experience. Because of this CakePHP includes an
     // Multiple keys, useful for composite primary keys.
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
 
+The fields to check existence against in the related table must be part of the
+primary key.
+
 Using Entity Methods as Rules
 -----------------------------
 
