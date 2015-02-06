@@ -113,18 +113,15 @@ plusieurs articles devrait ressembler à ceci::
 Il est également possible de permettre à ``newEntity()`` d'écrire dans des champs non accessibles.
 Par exemple, ``id`` est générallement absent de la propriété ``_accessible``.
 Dans ce cas, vous pouvez utiliser l'option ``accessibleFields``. Cela est particulièrement intéressant 
-pour conserver les associations existantes entre certaines entités:
+pour conserver les associations existantes entre certaines entités::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
-            'Tags', 'Comments' => 
-            [
-                'associated' => 
-                [
-                    'Users' => 
-                    [
+            'Tags', 'Comments' => [
+                'associated' => [
+                    'Users' => [
                         'accessibleFields' => ['id' => true]
                     ]
                 ]
@@ -323,8 +320,7 @@ d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement
     $patched = $articles->patchEntities(
         $list,
         $this->request->data(),
-        ['associated' => 
-            [
+        ['associated' => [
                 'Tags', 
                 'Comments.Users' => [
                     'accessibleFields' => ['id' => true],
