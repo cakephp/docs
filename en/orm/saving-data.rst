@@ -107,6 +107,27 @@ look like::
         ],
     ];
 
+It's also possible to allow ``newEntity()`` to write into non accessible fields.
+For example, ``id`` is usually absent from the ``_accessible`` property.
+In such case, you can use the ``accessibleFields`` option. It could be useful to keep
+ids of associated entities::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags', 'Comments' => [
+                'associated' => [
+                    'Users' => [
+                        'accessibleFields' => ['id' => true]
+                    ]
+                ]
+            ]
+        ]
+    ]);
+
+The above will keep the association unchanged between Comments and Users for the concerned entity.
+
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
 
@@ -268,7 +289,7 @@ the original entities array will be removed and not present in the result::
         $articles->save($entity);
     }
 
-Similarly to using ``patchEntity``, you can use the third argument for
+Similarly to using ``patchEntity()``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
@@ -278,6 +299,23 @@ array::
         $this->request->data(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
+
+Similarly to using ``newEntity()``, you can also allow ``patchEntity()`` to write in non accessible fields
+like ``id`` which is usually not declared in ``_accessible`` property::
+
+    // In a controller.
+    $patched = $articles->patchEntities(
+        $list,
+        $this->request->data(),
+        ['associated' => [
+                'Tags', 
+                'Comments.Users' => [
+                    'accessibleFields' => ['id' => true],
+                ]
+            ]
+        ]
+    );
+
 
 .. _before-marshal:
 
