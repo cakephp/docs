@@ -110,18 +110,15 @@ look like::
 It's also possible to allow ``newEntity()`` to write into non accessible fields.
 For example, ``id`` is usually absent from the ``_accessible`` property.
 In such case, you can use the ``accessibleFields`` option. It could be usefull to keep
-ids of associated entities:
+ids of associated entities::
 
     // In a controller
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
-            'Tags', 'Comments' => 
-            [
-                'associated' => 
-                [
-                    'Users' => 
-                    [
+            'Tags', 'Comments' => [
+                'associated' => [
+                    'Users' => [
                         'accessibleFields' => ['id' => true]
                     ]
                 ]
@@ -310,8 +307,7 @@ like ``id`` which is usually not declared in ``_accessible`` property::
     $patched = $articles->patchEntities(
         $list,
         $this->request->data(),
-        ['associated' => 
-            [
+        ['associated' => [
                 'Tags', 
                 'Comments.Users' => [
                     'accessibleFields' => ['id' => true],
