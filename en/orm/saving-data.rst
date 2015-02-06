@@ -109,7 +109,7 @@ look like::
 
 It's also possible to allow ``newEntity()`` to write into non accessible fields.
 For example, ``id`` is usually absent from the ``_accessible`` property.
-In such case, you can use the ``accessibleFields`` option. It could be usefull to keep
+In such case, you can use the ``accessibleFields`` option. It could be useful to keep
 ids of associated entities::
 
     // In a controller
