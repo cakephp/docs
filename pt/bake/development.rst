@@ -246,6 +246,6 @@ This will generate a new ``ExampleFoo`` class in ``src/Foo/ExampleFoo.php``
 for your application to use.
 
 .. meta::
-    :title lang=en: Extending Bake
-    :keywords lang=en: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
+    :title lang=pt: Extending Bake
+    :keywords lang=pt: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
 

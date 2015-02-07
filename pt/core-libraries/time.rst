@@ -282,6 +282,6 @@ You can also compare a ``Time`` instance within a range in the past::
 .. end-time
 
 .. meta::
-    :title lang=en: Time
-    :description lang=en: Time class helps you format time and test time.
-    :keywords lang=en: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=pt: Time
+    :description lang=pt: Time class helps you format time and test time.
+    :keywords lang=pt: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

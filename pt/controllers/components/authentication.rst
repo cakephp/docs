@@ -892,5 +892,5 @@ See the :ref:`testing-authentication` section for tips on how to test controller
 actions that are protected by ``AuthComponent``.
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=pt: Authentication
+    :keywords lang=pt: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

@@ -179,5 +179,5 @@ your document type to add, remove, or manipulate child nodes::
     ``Xml::toArray()`` without a problem.
 
 .. meta::
-    :title lang=en: Xml
-    :keywords lang=en: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth
+    :title lang=pt: Xml
+    :keywords lang=pt: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth

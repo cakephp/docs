@@ -556,5 +556,5 @@ and :doc:`/views` sections there are better ways you add custom logic to your
 application.
 
 .. meta::
-    :title lang=en: Configuration
-    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
+    :title lang=pt: Configuration
+    :keywords lang=pt: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web

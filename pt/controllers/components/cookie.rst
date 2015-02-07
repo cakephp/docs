@@ -121,5 +121,5 @@ The CookieComponent offers a number of methods for working with Cookies.
         $this->Cookie->delete('foo.bar');
 
 .. meta::
-    :title lang=en: Cookie
-    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
+    :title lang=pt: Cookie
+    :keywords lang=pt: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
