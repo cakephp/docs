@@ -444,5 +444,5 @@ Additional Reading
 
 
 .. meta::
-    :title lang=en: Events system
-    :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php
+    :title lang=pt: Events system
+    :keywords lang=pt: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

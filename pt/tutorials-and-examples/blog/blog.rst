@@ -207,5 +207,5 @@ Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building
 your first CakePHP application.
 
 .. meta::
-    :title lang=en: Blog Tutorial
-    :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads
+    :title lang=pt: Blog Tutorial
+    :keywords lang=pt: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads

@@ -76,5 +76,5 @@ requests. You can do this using the controller's event dispatcher, during the
     }
 
 .. meta::
-    :title lang=en: Csrf
-    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,csrf,submission
+    :title lang=pt: Csrf
+    :keywords lang=pt: configurable parameters,security component,configuration parameters,invalid request,csrf,submission
