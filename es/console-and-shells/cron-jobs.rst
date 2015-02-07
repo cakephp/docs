@@ -24,5 +24,5 @@ trivial to setup, for example::
 You can see more info here: http://en.wikipedia.org/wiki/Cron
 
 .. meta::
-    :title lang=en: Running Shells as cronjobs
-    :keywords lang=en: cronjob,bash script,crontab
+    :title lang=es: Running Shells as cronjobs
+    :keywords lang=es: cronjob,bash script,crontab

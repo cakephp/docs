@@ -210,5 +210,5 @@ There may be cases where you want to disable all security checks for an action
 ``SecurityComponent``.
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions
+    :title lang=es: Security
+    :keywords lang=es: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions

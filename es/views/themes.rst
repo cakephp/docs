@@ -61,5 +61,5 @@ folder, it will default to the main webroot folder::
     plugins/PurpleCupcake/webroot/css/main.css
 
 .. meta::
-    :title lang=en: Themes
-    :keywords lang=en: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
+    :title lang=es: Themes
+    :keywords lang=es: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage

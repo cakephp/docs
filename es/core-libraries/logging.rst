@@ -389,6 +389,6 @@ Logging Trait
 
 
 .. meta::
-    :title lang=en: Logging
-    :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.
-    :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs
+    :title lang=es: Logging
+    :description lang=es: Log CakePHP data to the disk to help debug your application over longer periods of time.
+    :keywords lang=es: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

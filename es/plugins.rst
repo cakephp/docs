@@ -507,5 +507,5 @@ plugins. Just don't forget to share your code with the community so
 that everyone can benefit from your awesome, reusable components!
 
 .. meta::
-    :title lang=en: Plugins
-    :keywords lang=en: plugin folder,configuration database,bootstrap,management module,little space,database connection,webroot,user management,contactmanager,array,config,cakephp,models,php,directories,blog,plugins,applications
+    :title lang=es: Plugins
+    :keywords lang=es: plugin folder,configuration database,bootstrap,management module,little space,database connection,webroot,user management,contactmanager,array,config,cakephp,models,php,directories,blog,plugins,applications

@@ -203,6 +203,6 @@ site at http://validator.w3.org/feed/.
     break XML syntax or feed validation rules.
 
 .. meta::
-    :title lang=en: RssHelper
-    :description lang=en: The RSS helper makes generating XML for RSS feeds easy.
-    :keywords lang=en: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler
+    :title lang=es: RssHelper
+    :description lang=es: The RSS helper makes generating XML for RSS feeds easy.
+    :keywords lang=es: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler

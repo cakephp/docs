@@ -84,5 +84,5 @@ And any other hash algorithmn that PHP's ``hash()`` function supports.
     by default.
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security
+    :title lang=es: Security
+    :keywords lang=es: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security

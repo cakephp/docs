@@ -499,5 +499,5 @@ created translators using the ``translator()`` and ``config()`` methods::
     I18n::defaultFormatter('sprintf');
 
 .. meta::
-    :title lang=en: Internationalization & Localization
-    :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
+    :title lang=es: Internationalization & Localization
+    :keywords lang=es: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages

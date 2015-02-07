@@ -81,5 +81,5 @@ Glossary
 
 
 .. meta::
-    :title lang=en: Glossary
-    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :title lang=es: Glossary
+    :keywords lang=es: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

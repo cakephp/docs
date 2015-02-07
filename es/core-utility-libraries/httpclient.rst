@@ -367,5 +367,5 @@ The decoded response data is stored in the response object, so accessing it
 multiple times has no additional cost.
 
 .. meta::
-    :title lang=en: HttpClient
-    :keywords lang=en: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results
+    :title lang=es: HttpClient
+    :keywords lang=es: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results

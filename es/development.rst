@@ -25,5 +25,5 @@ debugging, and testing will be covered.
 
 
 .. meta::
-    :title lang=en: Development
-    :keywords lang=en: development sessions,debugging,exceptions
+    :title lang=es: Development
+    :keywords lang=es: development sessions,debugging,exceptions

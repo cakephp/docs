@@ -476,11 +476,10 @@ More on Controllers
 .. toctree::
     :maxdepth: 1
 
-    controllers/request-response
     controllers/pages-controller
     controllers/components
 
 
 .. meta::
-    :title lang=en: Controllers
-    :keywords lang=en: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=es: Controllers
+    :keywords lang=es: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
