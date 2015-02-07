@@ -26,7 +26,7 @@ Utilisation du Helper
 
 Il y a deux étapes à franchir avant de pouvoir utiliser le Helper Cache.
 Premièrement dans votre ``APP/Config/core.php`` dé-commenter l'appel Configure
-write pour ``Cache.check``. Ceci dira à CakePHP de regarder dans le cache , et
+write pour ``Cache.check``. Ceci dira à CakePHP de regarder dans le cache, et
 de générer l'affichage des fichiers en cache lors du traitement des demandes.
 
 Une fois que vous avez décommenté la ligne ``Cache.check`` vous devez
@@ -44,7 +44,7 @@ votre bootstrap::
     ));
 
 .. versionadded:: 2.3
-  Si vous avez une configuration avec des domaines ou des languages multiples,
+  Si vous avez une configuration avec des domaines ou des langages multiples,
   vous pouvez utiliser `Configure::write('Cache.viewPrefix', 'YOURPREFIX');`
   pour stocker les fichiers de vue préfixés mis en cache.
 
@@ -89,7 +89,7 @@ En paramétrant ``callbacks => true`` vous dites au CacheHelper
 (Assistant Cache) que vous voulez que les fichiers générés créent
 les components et les models pour le controller. De manière
 additionnelle, lance la méthode initialize du component, le beforeFilter
-du controller , et le démarrage des callbacks de component.
+du controller, et le démarrage des callbacks de component.
 
 .. note::
 
@@ -119,8 +119,8 @@ entourez-les par <!--nocache--> <!--/nocache-->`` comme ci-dessous :
 
 .. note::
 
-    Vous ne pouvez pas utilisez les tags ``nocache`` dans les éléments.
-    puisqu'il n'y a pas de callbacks autour des éléments, ils ne peuvent
+    Vous ne pouvez pas utiliser les tags ``nocache`` dans les éléments.
+    Puisqu'il n'y a pas de callbacks autour des éléments, ils ne peuvent
     être cachés.
 
 Il est à noter, qu'une fois une action mise en cache, la méthode du controller

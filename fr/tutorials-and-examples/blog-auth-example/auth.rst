@@ -140,7 +140,7 @@ de génération de code fournis avec CakePHP::
     Depuis 2.5, utilisez ``CakeRequest::allowMethod()`` au lieu de
     ``CakeRequest::onlyAllow()`` (dépréciée).
 
-De la même façon, nous avons crée les vues pour nos posts de blog ou en
+De la même façon, nous avons créé les vues pour nos posts de blog ou en
 utilisant l'outil de génération de code, nous exécutons les vues. Dans
 le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
 

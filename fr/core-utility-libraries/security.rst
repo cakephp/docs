@@ -104,7 +104,7 @@ L'API de Security
 
     :rtype: string
 
-    Génére un hash d'autorisation.
+    Génère un hash d'autorisation.
 
 .. php:staticmethod:: getInstance( )
 

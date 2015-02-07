@@ -106,7 +106,7 @@ l'endroit où notre tableau ``$channelData`` va venir définir toutes les
 données meta pour notre flux.
 
 Ensuite il y a le fichier de vue pour mes posts/index. Un peu comme le fichier
-de layout que nous avons crée, nous avons besoin de créer un répertoire
+de layout que nous avons créé, nous avons besoin de créer un répertoire
 ``View/Posts/rss/`` et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
 Les contenus du fichier sont ci-dessous.
 
@@ -126,7 +126,7 @@ layout::
         'description' => __("Most recent posts."),
         'language' => 'en-us'));
 
-La seconde partie de la vue génére les éléments pour les enregistrements
+La seconde partie de la vue génère les éléments pour les enregistrements
 actuels du flux. Ceci est accompli en bouclant sur les données qui ont
 été passées à la vue ($items) et en utilisant la méthode
 :php:meth:`RssHelper::item()`. L'autre méthode que vous pouvez utiliser
@@ -254,7 +254,7 @@ API de Rss Helper
 
     :rtype: string
 
-    Génére un élément XML.
+    Génère un élément XML.
 
 .. php:method:: item(array $att = array (), array $elements = array ())
 
