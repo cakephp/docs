@@ -524,7 +524,7 @@ passer dans ``save()``. Pare exemple::
 
 L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
 non une insertion ou une mise à jour doit être faite. Si la méthode
-``isNew()`` retourne ``null`` et que l'entity a une valeur de clé primaire,
+``isNew()`` retourne ``true`` et que l'entity a une valeur de clé primaire,
 une requête 'exists' sera faîte. La requête 'exists' peut être supprimée en
 passant ``'checkExisting' => false`` à l'argument ``$options`` ::
 

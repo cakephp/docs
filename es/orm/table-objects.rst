@@ -1319,8 +1319,12 @@ using ``newEntity()`` for passing into ``save()``. For example::
   }
 
 The ORM uses the ``isNew()`` method on an entity to determine whether or not an
-insert or update should be performed. If the ``isNew()`` method returns ``null``
-and the entity has a primary key value, an 'exists' query will be issued.
+insert or update should be performed. If the ``isNew()`` method returns ``true``
+and the entity has a primary key value, an 'exists' query will be issued. The
+'exists' query can be suppressed by passing ``'checkExisting' => false`` in the
+``$options`` argument::
+
+    $articles->save($article, ['checkExisting' => false]);
 
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
