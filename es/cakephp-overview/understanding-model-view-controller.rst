@@ -28,7 +28,7 @@ pueden ser considerados como "Amigo", "Usuario", "Comentario" y "Foto".
 La capa de la Vista
 ===================
 
-La vista hace una presentación de los datos del modelo estando separada de 
+La vista hace una presentación de los datos del modelo estando separada de
 los objetos del modelo. Es responsable del uso de la información de la cual dispone
 para producir cualquier interfaz de presentación de cualquier petición que se presente.
 
@@ -100,7 +100,7 @@ para acostumbrarse, pero estamos seguros que una vez que hayas terminado tu
 primera aplicación con CakePHP no vas a querer hacerlo de  cualquier otra
 manera.
 
-Para iniciarte con tu primera aplicación en CakePHP 
+Para iniciarte con tu primera aplicación en CakePHP
 :doc:`haz este tutorial ahora </tutorials-and-examples/blog/blog>`
 
-.. |Figure 1| image:: /_static/img/basic_mvc.png
+.. |Figure 1| image:: /_static/img/typical-cake-request.png
