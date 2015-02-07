@@ -10,6 +10,20 @@ CakePHPにはビューの作成に役立ついくつかの特徴的なヘルパ�
 整形式のマークアップ(フォーム含む)、テキスト、時間、数値の整形に役立ったり、Ajax機能をスピードアップさせたりします。
 CakePHPのヘルパーに関するさらなる情報は :ref:`core-helpers` を見て下さい。
 
+.. toctree::
+    :maxdepth: 1
+
+    /views/helpers/flash
+    /views/helpers/form
+    /views/helpers/html
+    /views/helpers/number
+    /views/helpers/paginator
+    /views/helpers/rss
+    /views/helpers/session
+    /views/helpers/text
+    /views/helpers/time
+    /views/helpers/url
+
 .. _configuring-helpers:
 
 ヘルパーの設定と使用

@@ -117,20 +117,19 @@ More on models
 ==============
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
-    models/associations-linking-models-together
-    models/retrieving-your-data
-    models/saving-your-data
-    models/deleting-data
-    models/data-validation
-    models/callback-methods
-    models/behaviors
-    models/datasources
-    models/model-attributes
-    models/additional-methods-and-properties
-    models/virtual-fields
-    models/transactions
+    orm/database-basics
+    orm/table-objects
+    orm/entities
+    orm/retrieving-data-and-resultsets
+    orm/query-builder
+    orm/saving-data
+    orm/deleting-data
+    orm/associations
+    orm/behaviors
+    orm/schema-system
+    console-and-shells/orm-cache
 
 
 .. meta::

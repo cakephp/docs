@@ -18,6 +18,17 @@
 各コアコンポーネントの詳細は各章で説明します。ここでは、独自のコンポーネントを作成する方法を紹介します。
 コンポーネントを作成することでコントローラのコードがクリーンな状態に保たれ、プロジェクト間でコードを再利用し易くなります。
 
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
+
 .. _configuring-components:
 
 コンポーネントの設定
