@@ -74,6 +74,15 @@ Glossary
         to allow you to code things once and re-use them across your
         application.
 
+    PaaS
+        Platform as a Service. Platform as a Service providers will provide
+        cloud based hosting, database and caching resources. Some popular
+        providers include Heroku, EngineYard and PagodaBox
+
+    DSN
+        Data Source Name. A connection string format that is formed like a URI.
+        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+
 
 .. meta::
     :title lang=pt: Glossary

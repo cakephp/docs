@@ -13,7 +13,8 @@ O CakePHP traz incluso várias classes do tipo *View* para lidar com os
 cenários mais comuns de renderização:
 
 - Para criar *webservices* em XML ou JSON, você pode usar o :doc:`views/json-and-xml-views`
-- Para prover arquivos protegidos ou arquivos criados dinamicamente, você pode usar :doc:`views/media-view`
+- To serve protected files, or dynamically generated files, you can use
+  :ref:`cake-response-file`.
 - Para criar múltiplos temas para as visões, você pode usar :doc:`views/themes`
 
 View Templates
@@ -565,8 +566,8 @@ View API
 
 .. php:class:: View
 
-Métodos de *Views* são acessíveis por todas as *views*, *elements* e arquivos de *layout*.
-Para chamar qualquer método de uma *view* use ``$this->method()``.
+Métodos de *Views* são acessíveis por todas as *views*, *elements* e arquivos
+de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 .. php:method:: set(string $var, mixed $value)
 
@@ -614,8 +615,8 @@ Para chamar qualquer método de uma *view* use ``$this->method()``.
     javascript or css diretamente para o *layout*. Ciente que *scripts*
     adicionados de *layouts*, or *elements* do *layout* não serão adicionados
     para ``$scripts_for_layout``. Este método é frequentemente usado dentro
-    dos *helpers*, como nos *Helpers* `/core-libraries/helpers/js` e
-    :doc:`/core-libraries/helpers/html`.
+    dos *helpers*, como nos *Helpers*
+    :doc:`/views/helpers/html`.
 
 
 
@@ -705,6 +706,16 @@ Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 .. versionadded:: 2.1
 
+More About Views
+================
+
+.. toctree::
+    :maxdepth: 1
+
+    views/cells
+    views/themes
+    views/json-and-xml-views
+    views/helpers
 
 .. meta::
     :title lang=pt: Views

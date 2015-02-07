@@ -11,7 +11,7 @@ Installing PHPUnit
 ==================
 
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
-standard for unit testing in PHP.  It offers a deep and powerful set of features
+standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
 through using either a `PHAR package <http://phpunit.de/#download>`_ or `Composer
 <http://getcomposer.org>`_.
@@ -24,14 +24,14 @@ To install PHPUnit with Composer, add the following to you application's
 
     "phpunit/phpunit": "*",
 
-After updating your package.json, run Composer again inside your application
+After updating your composer.json, run Composer again inside your application
 directory::
 
     $ php composer.phar install
 
 You can now run PHPUnit using::
 
-    $ bin/phpunit
+    $ vendor/bin/phpunit
 
 Using the PHAR File
 -------------------
@@ -45,11 +45,10 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``config/app.php``
-file before running any tests.  Tests are not accessible via the web runner when
-debug is equal to 0.  Before running any tests you should be sure to add a
-``test`` datasource configuration to ``config/app.php``.  This
-configuration is used by CakePHP for fixture tables and data::
+Remember to have debug enabled in your ``config/app.php`` file before running
+any tests.  Before running any tests you should be sure to add a ``test``
+datasource configuration to ``config/app.php``. This configuration is used by
+CakePHP for fixture tables and data::
 
     'Datasources' => [
         'test' => [
@@ -81,7 +80,7 @@ application's tests::
     $ php phpunit.phar
 
     // For Composer installed phpunit
-    $ bin/phpunit
+    $ vendor/bin/phpunit
 
 The above should run any tests you have, or let you know that no tests were run.
 To run a specific test you can supply the path to the test as a parameter to
@@ -330,7 +329,7 @@ in your ``tests/Fixture`` directory, with the following content::
 
     namespace App\Test\Fixture;
 
-    use Cake\Test\TestFixture;
+    use Cake\TestSuite\Fixture\TestFixture;
 
     class ArticlesFixture extends TestFixture
     {
@@ -592,8 +591,8 @@ fixture name::
 In the above example, both fixtures would be loaded from
 ``tests/Fixture/blog/``.
 
-Testing Tables
-==============
+Testing Table Classes
+=====================
 
 Let's say we already have our Articles Table class defined in
 ``src/Model/Table/ArticlesTable.php``, and it looks like::
@@ -621,10 +620,11 @@ with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
 
+    use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase
+    class ArticlesTableTest extends TestCase
     {
         public $fixtures = ['app.articles'];
     }
@@ -642,10 +642,11 @@ looks like this::
 
     namespace App\Test\TestCase\Model\Table;
 
+    use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
-    class ArticleTest extends TestCase
+    class ArticlesTableTest extends TestCase
     {
         public $fixtures = ['app.articles'];
 
@@ -816,6 +817,62 @@ that allows you to send a request body. After dispatching a request you can use
 the various assertions provided by ``IntegrationTestCase`` or by PHPUnit to
 ensure your request had the correct side-effects.
 
+Setting up the Request
+----------------------
+
+The ``IntegrationTestCase`` class comes with a number of helpers to make it easy
+to configure the requests you will send to your application under test::
+
+    // Set cookies
+    $this->cookie('name', 'Uncle Bob');
+
+    // Set session data
+    $this->session(['Auth.User.id' => 1]);
+
+    // Configure headers
+    $this->configRequest([
+        'headers' => ['Accept' => 'application/json']
+    ]);
+
+The state set by these helper methods is reset in the ``tearDown`` method.
+
+.. _testing-authentication:
+
+Testing Actions That Require Authentication
+-------------------------------------------
+
+If you are using ``AuthComponent`` you will need to stub out the session data
+that AuthComponent uses to validate a user's identity. You can use helper
+methods in ``IntegrationTestCase`` to do this. Assuming you had an
+``ArticlesController`` that contained an add method, and that add method
+required authentication, you could write the following tests::
+
+    public function testAddUnauthenticatedFails()
+    {
+        // No session data set.
+        $this->get('/articles/add');
+
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+    }
+
+    public function testAddAuthenticated()
+    {
+        // Set session data
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'testing',
+                    // other keys.
+                ]
+            ]
+        ]);
+        $this->get('/articles/add');
+
+        $this->assertResponseOk();
+        // Other assertions.
+    }
+
 Assertion methods
 -----------------
 
@@ -831,10 +888,25 @@ make testing responses much simpler. Some examples are::
     // Check for a 5xx response code
     $this->assertResponseFailure();
 
-    // Check the Location header
-    $this->assertRedirect(['controller' => 'articles', 'action' => 'index']);
+    // Check for a specific response code, e.g. 200
+    $this->assertResponseCode(200);
 
-    // Assert content in the response
+    // Check the Location header
+    $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
+
+    // Check that no Location header has been set
+    $this->assertNoRedirect();
+
+    // Assert not empty response content
+    $this->assertResponseNotEmpty();
+
+    // Assert empty response content
+    $this->assertResponseEmpty();
+
+    // Assert response content
+    $this->assertResponseEquals('Yeah!');
+
+    // Assert partial response content
     $this->assertResponseContains('You won!');
 
     // Assert layout
@@ -865,7 +937,11 @@ begin with a simple example controller that responds in JSON::
 
     class MarkersController extends AppController
     {
-        public $components = ['RequestHandler'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
+        }
 
         public function view($id)
         {
@@ -1134,12 +1210,12 @@ Creating Tests for Plugins
 ==========================
 
 Tests for plugins are created in their own directory inside the
-plugins folder.::
+plugins folder. ::
 
-    /app
-        /Plugin
+    /src
+        /plugins
             /Blog
-                /Test
+                /tests
                     /TestCase
                     /Fixture
 
@@ -1150,17 +1226,16 @@ chapter of this manual. A difference from other tests is in the
 first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
-    namespace Blog\Test\TestCase\Model;
+    namespace Blog\Test\TestCase\Model\Table;
 
-    use Blog\Model\BlogPost;
+    use Blog\Model\Table\BlogPostsTable;
     use Cake\TestSuite\TestCase;
 
-    class BlogPostTest extends TestCase
+    class BlogPostsTableTest extends TestCase
     {
 
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
         public $fixtures = ['plugin.blog.blog_posts'];
-        public $BlogPost;
 
         public function testSomething()
         {
@@ -1172,10 +1247,39 @@ If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
 ``$fixtures`` array.
 
+Before you can use fixtures you should double check that your ``phpunit.xml``
+contains the fixture listener::
+
+    <!-- Setup a listener for fixtures -->
+    <listeners>
+            <listener
+            class="\Cake\TestSuite\Fixture\FixtureInjector"
+            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+                    <arguments>
+                            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+                    </arguments>
+            </listener>
+    </listeners>
+
+You should also ensure that your fixtures are loadable. Ensure the following is
+present in your ``composer.json`` file::
+
+    "autoload-dev": {
+        "psr-4": {
+            "MyPlugin\\Test\\": "tests",
+            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+        }
+    }
+
+.. note::
+
+    Remember to run ``composer.phar dumpautoload`` when adding new autoload
+    mappings.
+
 Generating Tests with Bake
 ==========================
 
-If you use :doc:`bake </console-and-shells/code-generation-with-bake>` to
+If you use :doc:`bake </bake/usage>` to
 generate scaffolding, it will also generate test stubs. If you need to
 re-generate test case skeletons, or if you want to generate test skeletons for
 code you wrote, you can use ``bake``:
@@ -1271,7 +1375,7 @@ of your testing results:
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer| php
     # Install dependencies
     php composer.phar install
-    bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
+    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
@@ -1284,4 +1388,4 @@ necessary changes to get a passing build.
 
 .. meta::
     :title lang=pt: Testing
-    :keywords lang=pt: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :keywords lang=pt: phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

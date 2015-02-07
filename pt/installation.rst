@@ -28,7 +28,7 @@ utilizar um. O CakePHP suporta uma variedade de mecanismos de armazenamento de b
 
     Todos os drivers inclusos internamente requerem PDO. Você deve assegurar-se
     que possui a extensão PDO correta instalada.
-    
+
 Instalando o CakePHP
 ====================
 
@@ -119,7 +119,7 @@ aplicação, execute::
 Por padrão, sem nenhum argumento fornecido, isso vai disponibilizar a sua aplicação em
 ``http://localhost:8765/``.
 
-Se você tem algo conflitando com 
+Se você tem algo conflitando com
 
 A development installation is the fastest method to setup CakePHP.  In this
 example, we will be using CakePHP's console to run PHP's built-in web server
@@ -131,38 +131,38 @@ directory, execute::
 Por padrão, sem nenhum argumento fornecido, isso vai disponibilizar a sua aplicação em
 ``http://localhost:8765/``.
 
-Se você tem algo conflitante com ``localhost`` ou porta ``8765``, você pode 
-dizer ao console CakePHP para executar o servidor web em um host e/ou porta específica 
+Se você tem algo conflitante com ``localhost`` ou porta ``8765``, você pode
+dizer ao console CakePHP para executar o servidor web em um host e/ou porta específica
 utilizando os seguintes argumentos::
 
     bin/cake server -H 192.168.13.37 -p 5673
 
 Isto irá disponibilizar sua aplicação em ``http://192.168.13.37:5673/``.
 
-É isso aí! Sua aplicação CakePHP está instalada e funcionando sem ter que 
+É isso aí! Sua aplicação CakePHP está instalada e funcionando sem ter que
 configurar um servidor web.
 
 .. warning::
 
-    O servidor de desenvolvimento *nunca* deve ser usado em um ambiente de produção. 
+    O servidor de desenvolvimento *nunca* deve ser usado em um ambiente de produção.
     Destina-se apenas como um servidor de desenvolvimento básico.
 
 Se você preferir usar um servidor web real, você deve ser capaz de mover a instalação do
 CakePHP (incluindo os arquivos ocultos) para dentro do diretório raiz do seu servidor web.
-Você deve, então, ser capaz de apontar seu navegador para o diretório que você moveu os 
+Você deve, então, ser capaz de apontar seu navegador para o diretório que você moveu os
 arquivos para dentro e ver a aplicação em ação.
 
 Produção
 ========
 
-Uma instalação de produção é uma forma mais flexível de configurar o CakePHP. Usar este 
-método permite total domínio para agir como uma aplicação CakePHP singular. Este 
-exemplo o ajudará a instalar o CakePHP em qualquer lugar em seu sistema de arquivos e torná-lo 
-disponível em http://www.example.com. Note que esta instalação pode exigir os 
+Uma instalação de produção é uma forma mais flexível de configurar o CakePHP. Usar este
+método permite total domínio para agir como uma aplicação CakePHP singular. Este
+exemplo o ajudará a instalar o CakePHP em qualquer lugar em seu sistema de arquivos e torná-lo
+disponível em http://www.example.com. Note que esta instalação pode exigir os
 direitos de alterar o ``DocumentRoot`` em servidores web Apache.
 
-Depois de instalar a aplicação usando um dos métodos acima no 
-diretório de sua escolha - vamos supor que você escolheu /cake_install - sua 
+Depois de instalar a aplicação usando um dos métodos acima no
+diretório de sua escolha - vamos supor que você escolheu /cake_install - sua
 configuração de produção será parecida com esta no sistema de arquivos::
 
     /cake_install/
@@ -184,11 +184,11 @@ configuração de produção será parecida com esta no sistema de arquivos::
         README.md
 
 Desenvolvedores utilizando Apache devem definir a diretiva ``DocumentRoot``
-pelo domínio para:: 
+pelo domínio para::
 
     DocumentRoot /cake_install/webroot
 
-Se o seu servidor web está configurado corretamente, agora você deve encontrar 
+Se o seu servidor web está configurado corretamente, agora você deve encontrar
 sua aplicação CakePHP acessível em http://www.example.com.
 
 Aquecendo
@@ -250,12 +250,12 @@ maiores informações.
 
    Depois de fazer as mudanças, reinicie o Apache para certificar-se que as configurações
    estão ativas.
-   
+
    Verifique se os seus arquivos .htaccess estão realmente nos diretórios corretos.
    Alguns sistemas operacionais tratam arquivos iniciados
    com '.' como ocultos e portanto, não os copia.
 
-#. Certifique-se de sua cópia do CakePHP vir da seção de downloads 
+#. Certifique-se de sua cópia do CakePHP vir da seção de downloads
    do site ou do nosso repositório Git, e que foi descompactado corretamente, verificando
    os arquivos .htaccess.
 
@@ -306,7 +306,7 @@ maiores informações.
    para os arquivos .htaccess que o CakePHP utiliza. (.htaccess, webroot/.htaccess).
 
    Isso pode ser adicionado na mesma seção com a diretiva RewriteEngine,
-   por exemplo, seu arquivo webroot/.htaccess 
+   por exemplo, seu arquivo webroot/.htaccess
 
    This can be added to the same section with the RewriteEngine
    directive, so for example, your webroot .htaccess ficaria como::
@@ -386,7 +386,8 @@ IIS7 (Windows hosts)
 IIS7 não suporta nativamente arquivos .htaccess. Mesmo existindo
 add-ons que adicionam esse suporte, você também pode importar as regras .htaccess
 no IIS para utilizar as reescritas nativas do CakePHP. Para isso, siga os
-seguintes passos::
+seguintes passos:
+
 
 #. Utilize o `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ para instalar o
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ ou baixe-o diretamente (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
