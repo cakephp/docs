@@ -13,5 +13,5 @@ The following sections cover those tools:
 
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: security, csrf, cross site request forgery component
+    :title lang=ja: Security
+    :keywords lang=ja: security, csrf, cross site request forgery component

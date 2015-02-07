@@ -16,7 +16,7 @@ will only be available in the ``3.0`` branch in git.
     appendices/orm-migration
 
 一般的な情報
-==========
+===========
 
 .. toctree::
     :maxdepth: 1
@@ -26,5 +26,5 @@ will only be available in the ``3.0`` branch in git.
 
 
 .. meta::
-    :title lang=en: Appendices
-    :keywords lang=en: migration guide,migration path,new features,glossary
+    :title lang=ja: Appendices
+    :keywords lang=ja: migration guide,migration path,new features,glossary

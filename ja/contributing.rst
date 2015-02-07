@@ -16,5 +16,5 @@ CakePHPの貢献できる方法は数多くあります。
 
 
 .. meta::
-    :title lang=en: Contributing
-    :keywords lang=en: coding conventions,documentation,maxdepth
+    :title lang=ja: Contributing
+    :keywords lang=ja: coding conventions,documentation,maxdepth

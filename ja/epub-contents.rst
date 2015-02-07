@@ -56,5 +56,5 @@
 .. todolist::
 
 .. meta::
-    :title lang=en: Contents
-    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=ja: Contents
+    :keywords lang=ja: core libraries,ref search,shells,deployment,appendices,glossary,models

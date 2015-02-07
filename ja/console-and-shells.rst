@@ -13,7 +13,7 @@ CakePHPには元々たくさんのコンソールアプリケーションが備�
 あれば、仕事をより早く片付けるための、より一般的なものもあります。
 
 CakePHPのコンソール
-=================
+==================
 
 このセクションでは、コマンドラインにおけるCakePHPのご紹介をします。もし
 過去にcronジョブやコマンドライン・スクリプトから自分のCakePHPのMVCクラスに
@@ -633,7 +633,7 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
     ));
 
 ブール型オプションを使���
-------------------------
+-------------------------
 
 フラグのオプションを作りたい場合、オプションをブール型として指定できます。
 デフォルト値を持つオプションのように、ブール型のオプションもパース済み引数
@@ -1030,13 +1030,12 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/repl
     console-and-shells/cron-jobs
-    console-and-shells/code-generation-with-bake
-    console-and-shells/schema-management-and-migrations
     console-and-shells/i18n-shell
-    console-and-shells/acl-shell
-    console-and-shells/testsuite-shell
+    console-and-shells/completion-shell
     console-and-shells/upgrade-shell
+    console-and-shells/plugin-assets
 
 
 .. meta::

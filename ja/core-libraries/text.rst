@@ -1,7 +1,7 @@
-String
-######
+Text
+####
 
-.. php:class:: String
+.. php:class:: Text
 
 String クラスは文字列の作成や走査に関する便利なクラスです。
 また、スタティックにアクセスすることが可能です。例： ``String::uuid()`` 。
@@ -219,5 +219,5 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 .. end-string
 
 .. meta::
-    :title lang=ja: String
+    :title lang=ja: Text
     :keywords lang=ja: array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
