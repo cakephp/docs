@@ -57,4 +57,4 @@ Conteúdo
 
 .. meta::
     :title lang=pt: Conteúdo
-    :keywords lang=en: core libraries,busca,shells,deployment,apêndices,glossário,models
+    :keywords lang=pt: core libraries,busca,shells,deployment,apêndices,glossário,models

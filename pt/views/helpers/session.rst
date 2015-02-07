@@ -40,6 +40,6 @@ used.
     key's existence.
 
 .. meta::
-    :title lang=en: SessionHelper
-    :description lang=en: The Session Helper replicates most of the functionality and making it available in your view.
-    :keywords lang=en: session helper,flash messages,session flash,session read,session check
+    :title lang=pt: SessionHelper
+    :description lang=pt: The Session Helper replicates most of the functionality and making it available in your view.
+    :keywords lang=pt: session helper,flash messages,session flash,session read,session check

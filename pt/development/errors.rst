@@ -510,5 +510,5 @@ config/app.php. Enabling this will log every exception to
     no effect. Unless you reference it inside your implementation.
 
 .. meta::
-    :title lang=en: Error & Exception Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :title lang=pt: Error & Exception Handling
+    :keywords lang=pt: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error

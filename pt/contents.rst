@@ -63,5 +63,5 @@ Conteúdo
 .. todolist::
 
 .. meta::
-    :title lang=en: Conteúdo
-    :keywords lang=en: bibliotecas do core,busca,filtro,índice,shells,deployment,apêndices,glossário,models,lib
+    :title lang=pt: Conteúdo
+    :keywords lang=pt: bibliotecas do core,busca,filtro,índice,shells,deployment,apêndices,glossário,models,lib

@@ -241,5 +241,5 @@ There may be cases where you want to disable all security checks for an action
 This example would disable all security checks for the edit action.
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions
+    :title lang=pt: Security
+    :keywords lang=pt: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions
