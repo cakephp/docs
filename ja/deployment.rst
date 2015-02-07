@@ -1,56 +1,93 @@
 デプロイ
-######
+#########
 
-アプリケーションが完成したら、またはその前に、それをデプロイしたいと思うことでしょう。
-CakePHPアプリケーションをデプロイする際には、いくつかやっておかなければならないことがあります。
+Once your application is complete, or even before that you'll want to deploy it.
+There are a few things you should do when deploying a CakePHP application.
 
-セキュリティの確認
+Update config/app.php
+=====================
+
+Updating app.php, specifically the value of ``debug`` is extremely important.
+Turning debug = ``false`` disables a number of development features that should never be
+exposed to the Internet at large. Disabling debug changes the following types of
+things:
+
+* Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
+  disabled.
+* Core CakePHP caches are by default flushed every year (about 365 days), instead of every
+  10 seconds as in development.
+* Error views are less informative, and give generic error messages instead.
+* PHP Errors are not displayed.
+* Exception stack traces are disabled.
+
+In addition to the above, many plugins and application extensions use ``debug``
+to modify their behavior.
+
+You can check against an environment variable to set the debug level dynamically
+between environments. This will avoid deploying an application with debug ``true`` and
+also save yourself from having to change the debug level each time before deploying
+to a production environment.
+
+For example, you can set an environment variable in your Apache configuration::
+
+    SetEnv CAKEPHP_DEBUG 1
+
+And then you can set the debug level dynamically in ``app.php``::
+
+    $debug = (bool)getenv('CAKEPHP_DEBUG');
+
+    return [
+        'debug' => $debug,
+        .....
+    ];
+
+Check Your Security
 ===================
 
-もしあなたが荒野にアプリケーションを解き放とうとするなら、何か抜け穴がないかを確認しておくことを\
-お勧めします。 CSRF攻撃や、フォームの改ざんなどを防ぐために :doc:`/core-libraries/components/security-component`
-をチェックしてください。 :doc:`/models/data-validation` を行うこと、そして
-:doc:`/core-utility-libraries/sanitize` は、\
-XSS攻撃からデータベースを保護する素晴らしいアイデアです。 ``webroot`` ディレクトリだけが\
-公開され、あなたの秘密(アプリケーションのsaltとセキュリティキーなど)は\
-プライベートでユニークなことを確認してください!
+If you're throwing your application out into the wild, it's a good idea to make
+sure it doesn't have any obvious leaks:
 
-ドキュメントルートの指定
-========================
+* Ensure you are using the :doc:`/controllers/components/csrf`.
+* You may want to enable :doc:`/controllers/components/security`.
+  It can help prevent several types of form tampering and reduce the possibility
+  of mass-assignment issues.
+* Ensure your models have the correct :doc:`/core-libraries/validation` rules
+  enabled.
+* Check that only your ``webroot`` directory is publicly visible, and that your
+  secrets (such as your app salt, and any security keys) are private and unique
+  as well.
 
-アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、またアプリケーションを安全に保つために重要なステップの内の一つです。
-CakePHPのアプリケーションは、アプリケーションの ``app/webroot`` にドキュメントルートを指定する必要があります。
-これによってアプリケーション、設定のファイルがURLを通してアクセスすることができなくなります。
-ドキュメントルートの指定の仕方はWEBサーバーごとに異なります。
-WEBサーバー特有の情報についていは :doc:`/installation/url-rewriting` ドキュメントを見てください。
+Set Document Root
+=================
 
-どの場合においても ``app/webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
+Setting the document root correctly on your application is an important step to
+keeping your code secure and your application safer. CakePHP applications
+should have the document root set to the application's ``webroot``. This
+makes the application and configuration files inaccessible through a URL.
+Setting the document root is different for different webservers. See the
+:ref:`url-rewriting` documentation for webserver specific
+information.
 
+In all cases you will want to set the virtual host/domain's document to be
+``webroot/``. This removes the possibility of files outside of the webroot
+directory being executed.
 
-core.phpの更新
-================
+.. _symlink-assets:
 
-core.phpの更新、とりわけ ``debug`` 値は非常に重要です。
-debug = 0 にすることで、広くインターネットに晒されることがあってはならない多くの開発用の機能を無効にできます。
-debugの無効化は以下の種々のものごとに変更を与えます:
+Improve Your Application's Performance
+======================================
 
-* :php:func:`pr()` と :php:func:`debug()` で生成されるデバッグメッセージが無効化されます。
-* CakePHPコアのキャッシュが、開発時の10秒ごとの代わりに999日ごとに破棄されるようになります。
-* Errorビューが吐く情報が少なくなり、代わりに共通のエラーメッセージが与えられます。
-* エラーが表示されなくなります。
-* 例外のスタックトレースが無効になります。
+Class loading can easily take a big share of your application's processing time.
+In order to avoid this problem, it is recommended that you run this command in
+your production server once the application is deployed::
 
-上記に加えて、プラグインやアプリケーションの拡張が ``debug`` を用いてその挙動を変えます。
+    php composer.phar dumpautoload -o
 
+Since handling static assets, such as images, JavaScript and CSS files of
+plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
+recommended to symlink them for production. For example like this::
 
-アプリケーションのパフォーマンスの向上
-===================================
-
-プラグインの画像や JavaScript、CSS ファイルなどの静的なアセットを扱う場合、ディスパッチャを通すことはかなりの非効率です。
-
-本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。 ::
-
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 
 .. meta::
     :title lang=ja: デプロイ

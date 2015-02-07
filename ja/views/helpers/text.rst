@@ -1,87 +1,49 @@
-TextHelper
+TimeHelper
 ##########
 
 .. php:namespace:: Cake\View\Helper
 
-.. php:class:: TextHelper(View $view, array $config = [])
+.. php:class:: TimeHelper(View $view, array $config = [])
 
-The TextHelper contains methods to make text more usable and
-friendly in your views. It aids in enabling links, formatting URLs,
-creating excerpts of text around chosen words or phrases,
-highlighting key words in blocks of text, and gracefully
-truncating long stretches of text.
+The Time Helper does what it says on the tin: saves you time. It
+allows for the quick processing of time related information. The
+Time Helper has two main tasks that it can perform:
 
-Linking Email addresses
-=======================
+#. It can format time strings.
+#. It can test time (but cannot bend time, sorry).
 
-.. php:method:: autoLinkEmails(string $text, array $options=[])
+Using the Helper
+================
 
-Adds links to the well-formed email addresses in $text, according
-to any options defined in ``$options`` (see
-:php:meth:`HtmlHelper::link()`). ::
+A common use of the Time Helper is to offset the date and time to match a
+user's time zone. Lets use a forum as an example. Your forum has many users who
+may post messages at any time from any part of the world. An easy way to
+manage the time is to save all dates and times as GMT+0 or UTC. Uncomment the
+line ``date_default_timezone_set('UTC');`` in ``config/bootstrap.php`` to ensure
+your application's time zone is set to GMT+0.
 
-    $myText = 'For more information regarding our world-famous ' .
-        'pastries and desserts, contact info@example.com';
-    $linkedText = $this->Text->autoLinkEmails($myText);
+Next add a time zone field to your users table and make the necessary
+modifications to allow your users to set their time zone. Now that we know
+the time zone of the logged in user we can correct the date and time on our
+posts using the Time Helper::
 
-Output::
+    echo $this->Time->format(
+      $post->created,
+      \IntlDateFormatter::FULL,
+      null,
+      $user->time_zone
+    );
+    // Will display 'Saturday, August 22, 2011 at 11:53:00 PM GMT'
+    // for a user in GMT+0. While displaying,
+    // 'Saturday, August 22, 2011 at 03:53 PM GMT-8:00'
+    // for a user in GMT-8
 
-    For more information regarding our world-famous pastries and desserts,
-    contact <a href="mailto:info@example.com">info@example.com</a>
-
-This method automatically escapes its input. Use the ``escape``
-option to disable this if necessary.
-
-Linking URLs
-============
-
-.. php:method:: autoLinkUrls(string $text, array $options=[])
-
-Same as ``autoLinkEmails()``, only this method searches for
-strings that start with https, http, ftp, or nntp and links them
-appropriately.
-
-This method automatically escapes its input. Use the ``escape``
-option to disable this if necessary.
-
-Linking Both URLs and Email Addresses
-=====================================
-
-.. php:method:: autoLink(string $text, array $options=[])
-
-Performs the functionality in both ``autoLinkUrls()`` and
-``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails
-are linked appropriately given the supplied ``$options``.
-
-This method automatically escapes its input. Use the ``escape``
-option to disable this if necessary.
-
-
-Converting Text into Paragraphs
-===============================
-
-.. php:method:: autoParagraph(string $text)
-
-Adds proper <p> around text where double-line returns are found, and <br> where
-single-line returns are found. ::
-
-    $myText = 'For more information
-    regarding our world-famous pastries and desserts.
-
-    contact info@example.com';
-    $formattedText = $this->Text->autoParagraph($myText);
-
-Output::
-
-    <p>For more information<br />
-    regarding our world-famous pastries and desserts.<p>
-    <p>contact info@example.com</p>
-
-.. include:: /core-libraries/text.rst
-    :start-after: start-text
-    :end-before: end-text
+Most of TimeHelper's features are intended as backwards compatible interfaces
+for applications that are upgrading from older versions of CakePHP. Because the
+ORM returns :php:class:`Cake\\I18n\\Time` instances for every ``timestamp``
+and ``datetime`` column, you can use the methods there to do most tasks.
 
 .. meta::
-    :title lang=ja: TextHelper
-    :description lang=ja: The Text Helper contains methods to make text more usable and friendly in your views.
-    :keywords lang=ja: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text
+    :title lang=ja: TimeHelper
+    :description lang=ja: The Time Helper will help you format time and test time.
+    :keywords lang=ja: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

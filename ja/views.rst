@@ -7,7 +7,8 @@
 CakePHPでは下記の典型的な描画シナリオに対応するためのいくつかの組込みビュークラスを用意しています。:
 
 - XMLやJSONウェブサービスを作成する場合、:doc:`views/json-and-xml-views` を利用できます。
-- 保護されたファイルや動的に生成されたファイルを提供する場合、:doc:`views/media-view` を利用できます。
+- To serve protected files, or dynamically generated files, you can use
+  :ref:`cake-response-file`.
 - 複数テーマのビューを作成する場合、:doc:`views/themes` を利用できます。
 
 ビューテンプレート
@@ -594,7 +595,7 @@ renderメソッドを置き換えると、コンテンツがレンダリング�
     内部のスクリプトバッファにコンテンツを追加します。このバッファはレイアウトの中で ``$scripts_for_layout`` として利用されます。
     このメソッドはjavascriptやcssを直接レイアウトに追加する必要のあるヘルパーを作る時に役立ちます。
     レイアウトやレイアウトの中のエレメントから追加されたスクリプトは ``$scripts_for_layout`` には追加されないということを心に留めておいて下さい。
-    このメソッドはほとんどの場合、:doc:`/core-libraries/helpers/js` と :doc:`/core-libraries/helpers/html` ヘルパーのようなヘルパーの中から使われます。
+    このメソッドはほとんどの場合、:doc:`/views/helpers/js` と :doc:`/views/helpers/html` ヘルパーのようなヘルパーの中から使われます。
 
     .. deprecated:: 2.1
         代わりに :ref:`view-blocks` の機能を使って下さい。

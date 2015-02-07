@@ -212,10 +212,10 @@ App がパッケージを探索できるようにパスを追加する
     使い方::
 
         //Modelパッケージのための新しい探索パスがセットアップされます
-        App::build(array('Model' => array('/a/full/path/to/models/')));
+        App::build(array('Model' => array('/a/full/path/to/orm/')));
 
         //このパスはモデルを探索するための唯一正しいパスとしてセットアップされます
-        App::build(array('Model' => array('/path/to/models/')), App::RESET);
+        App::build(array('Model' => array('/path/to/orm/')), App::RESET);
 
         //ヘルパーの複数の探索パスがセットアップされます
         App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/')));

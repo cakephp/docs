@@ -520,10 +520,10 @@ ini 指示子の設定
 
 ..
   You should also see the documentation on
-  :doc:`/core-libraries/components/sessions` and
-  :doc:`/core-libraries/helpers/session` for how to access Session data
+  :doc:`/controllers/components/sessions` and
+  :doc:`/views/helpers/session` for how to access Session data
   in the controller and view.
 
 コントローラーとビューからのセッションデータへのアクセス方法については、\
-合わせて :doc:`/core-libraries/components/sessions` と \
-:doc:`/core-libraries/helpers/session` をご覧下さい。
+合わせて :doc:`/controllers/components/sessions` と \
+:doc:`/views/helpers/session` をご覧下さい。

@@ -776,7 +776,7 @@ Either of the above would output::
         [1] => mark
     )
 
-When generating URLs, using a :term:`routing array` you add passed
+When generating URLs, using a :term:`ルーティング配列` you add passed
 arguments as values without string keys in the array::
 
     ['controller' => 'Articles', 'action' => 'view', 5]
@@ -790,7 +790,7 @@ Generating URLs
 
 Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your URL structure without having to modify all your code.
-By using :term:`routing arrays <routing array>` to define your URLs, you can
+By using :term:`ルーティング配列s <ルーティング配列>` to define your URLs, you can
 later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
@@ -823,7 +823,7 @@ document fragments using special keys::
     // Will generate a URL like.
     /articles/index?page=1#top
 
-Router will also convert any unknown parameters in a routing array to
+Router will also convert any unknown parameters in a ルーティング配列 to
 querystring parameters.  The ``?`` is offered for backwards compatibility with
 older versions of CakePHP.
 

@@ -150,15 +150,6 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com で Cake アプリケーションがアクセス可能になっているはずです。
 
-応用インストールと URL リライティング
-=====================================
-
-.. toctree::
-    :maxdepth: 1
-
-    installation/advanced-installation
-    installation/url-rewriting
-
 動作確認
 ========
 

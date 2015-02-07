@@ -1,13 +1,16 @@
 シンプルな認証と承認のアプリケーション
 ######################################
 
-:doc:`/tutorials-and-examples/blog/blog` の例の続きで、ユーザーログインを基に、一定のURLへのアクセスを安全にしたいとしましょう。
-その他の要件として、ブログに複数の執筆者(*authors*)がいて、それぞれが各々の意思により投稿を作成、編集、削除でき、他の投稿者からはどんな変更もできないようにします。
+Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
+secure access to certain URLs, based on the logged-in
+user. We also have another requirement: to allow our blog to have multiple authors
+who can create, edit, and delete their own articles while
+disallowing other authors to make any changes to articles they do not own.
 
-ユーザーに関連するコードの作成
+Creating All User-Related Code
 ==============================
 
-初めに、ユーザーのデータを保持するためにブログデータベースに新しいテーブルを作成しましょう::
+First, let's create a new table in our blog database to hold our users' data::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -18,327 +21,360 @@
         modified DATETIME DEFAULT NULL
     );
 
-テーブルの命名は既にCakePHPの規約に従っていますが、他の規約も活用しています:
-ユーザーテーブルでusernameとpasswordカラムを使うことによって、ユーザーログインを実装するにあたってほとんどのことをCalePHPが自動的に設定します。
+We have adhered to the CakePHP conventions in naming tables, but we're also
+taking advantage of another convention: By using the username and password
+columns in a users table, CakePHP will be able to auto-configure most things for
+us when implementing the user login.
 
-次のステップはユーザーのデータを探索(*finding*)、保存(*saving*)、検証(*validating*)する責任を持つ、ユーザーモデルを作成することです::
+Next step is to create our Users table, responsible for finding, saving and
+validating any user data::
 
-    // app/Model/User.php
-    class User extends AppModel
+    // src/Model/Table/UsersTable.php
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class UsersTable extends Table
     {
-        public $validate = array(
-            'username' => array(
-                'required' => array(
-                    'rule' => array('notEmpty'),
-                    'message' => 'A username is required'
-                )
-            ),
-            'password' => array(
-                'required' => array(
-                    'rule' => array('notEmpty'),
-                    'message' => 'A password is required'
-                )
-            ),
-            'role' => array(
-                'valid' => array(
-                    'rule' => array('inList', array('admin', 'author')),
-                    'message' => 'Please enter a valid role',
-                    'allowEmpty' => false
-                )
-            )
-        );
+
+        public function validationDefault(Validator $validator)
+        {
+            return $validator
+                ->notEmpty('username', 'A username is required')
+                ->notEmpty('password', 'A password is required')
+                ->notEmpty('role', 'A role is required')
+                ->add('role', 'inList', [
+                    'rule' => ['inList', ['admin', 'author']],
+                    'message' => 'Please enter a valid role'
+                ]);
+        }
+
     }
 
-UsersControllerもまた作成しましょう。
-以下のコードは基本的なCakePHPにバンドルされたコード生成ユーティリティで `焼き上がった` (*baked*) UsersControllerクラスに該当します::
+Let's also create our UsersController. The following content corresponds to
+parts of a basic baked UsersController class using the code generation utilities bundled
+with CakePHP::
 
-    // app/Controller/UsersController.php
+    // src/Controller/UsersController.php
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use Cake\Network\Exception\ForbiddenException;
+    use Cake\Event\Event;
+
     class UsersController extends AppController
     {
 
-        public function beforeFilter()
+        public function beforeFilter(Event $event)
         {
-            parent::beforeFilter();
+            parent::beforeFilter($event);
             $this->Auth->allow('add');
         }
 
-        public function index()
-        {
-            $this->User->recursive = 0;
-            $this->set('users', $this->paginate());
+         public function index()
+         {
+            $this->set('users', $this->Users->find('all'));
         }
 
-        public function view($id = null)
+        public function view($id)
         {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
+            if (!$id) {
                 throw new NotFoundException(__('Invalid user'));
             }
-            $this->set('user', $this->User->read(null, $id));
+
+            $user = $this->Users->get($id);
+            $this->set(compact('user'));
         }
 
         public function add()
         {
+            $user = $this->Users->newEntity($this->request->data);
             if ($this->request->is('post')) {
-                $this->User->create();
-                if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
-                    $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'add']);
                 }
+                $this->Flash->error(__('Unable to add the user.'));
             }
-        }
-
-        public function edit($id = null)
-        {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            if ($this->request->is('post') || $this->request->is('put')) {
-                if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
-                    $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-                }
-            } else {
-                $this->request->data = $this->User->read(null, $id);
-                unset($this->request->data['User']['password']);
-            }
-        }
-
-        public function delete($id = null)
-        {
-            $this->request->onlyAllow('post');
-
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            if ($this->User->delete()) {
-                $this->Session->setFlash(__('User deleted'));
-                $this->redirect(array('action' => 'index'));
-            }
-            $this->Session->setFlash(__('User was not deleted'));
-            $this->redirect(array('action' => 'index'));
+            $this->set('user', $user);
         }
 
     }
 
-以前ビューを作成した方法と同様に、またはコード生成ツールを用いて、ビューを実装します。
-このチュートリアルの目的に沿って、add.ctpだけを示します:
+In the same way we created the views for our articles or by using the code
+generation tool, we can implement the user views. For the purpose of this
+tutorial, we will show just the add.ctp:
 
 .. code-block:: php
 
-    <!-- app/View/Users/add.ctp -->
+    <!-- src/Template/Users/add.ctp -->
+
     <div class="users form">
-    <?php echo $this->Form->create('User'); ?>
+    <?= $this->Form->create($user) ?>
         <fieldset>
-            <legend><?php echo __('Add User'); ?></legend>
-            <?php echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('role', array(
-                'options' => array('admin' => 'Admin', 'author' => 'Author')
-            ));
-        ?>
-        </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+            <legend><?= __('Add User') ?></legend>
+            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('password') ?>
+            <?= $this->Form->input('role', [
+                'options' => ['admin' => 'Admin', 'author' => 'Author']
+            ]) ?>
+       </fieldset>
+    <?= $this->Form->button(__('Submit')); ?>
+    <?= $this->Form->end() ?>
     </div>
 
-認証(ログインとログアウト)
-==========================
+Authentication (Login and Logout)
+=================================
 
-ようやく認証のレイヤーを追加する準備が整いました。
-CakePHPではこれを :php:class:`AuthComponent` で処理します。
-このクラスは一定のアクションにログインを必要とさせる、ユーザーのサインインとサインアウトの処理、またログインユーザーがアクションに到達することが許可されているかの認証に責任を持ちます。
+We're now ready to add our authentication layer. In CakePHP this is handled by
+the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
+for requiring login for certain actions, handling user login and logout, and
+also authorizing logged-in users to the actions they are allowed to reach.
 
-このコンポーネントをアプリケーションに追加するには、
-``app/Controller/AppController.php`` ファイルを開いて、以下の行を追加してください::
+To add this component to your application open your ``src/Controller/AppController.php``
+file and add the following lines::
 
-    // app/Controller/AppController.php
+    // src/Controller/AppController.php
+
+    namespace App\Controller;
+
+    use Cake\Event\Event;
+    use Cake\Controller\Controller;
+
     class AppController extends Controller
     {
         //...
 
-        public $components = array(
-            'Session',
-            'Auth' => array(
-                'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
-            )
-        );
-
-        public function beforeFilter()
+        public function initialize()
         {
-            $this->Auth->allow('index', 'view');
+            $this->loadComponent('Flash');
+            $this->loadComponent('Auth', [
+                'loginRedirect' => [
+                    'controller' => 'Articles',
+                    'action' => 'index'
+                ],
+                'logoutRedirect' => [
+                    'controller' => 'Pages',
+                    'action' => 'display',
+                    'home'
+                ]
+            ]);
+        }
+
+        public function beforeFilter(Event $event)
+        {
+            $this->Auth->allow(['index', 'view']);
         }
         //...
     }
 
-usersテーブルで規約を用いたので、設定することが多くありません。
-ログインとログアウトのアクションが実行された後に読み込まれるURLを、このケースではそれぞれ ``/posts/`` と ``/`` にセットアップします。
+There is not much to configure, as we used the conventions for the users table.
+We just set up the URLs that will be loaded after the login and logout actions is
+performed, in our case to ``/articles/`` and ``/`` respectively.
 
-``beforeFilter`` 関数で、AuthComponentに全てのコントローラの ``index`` と ``view`` アクションでログインを必要としないように伝えました。
-サイトに登録していない訪問者にエントリを読ませたりリストを見せたりすることができるようにしたのです。
+What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
+require a login for all ``index`` and ``view`` actions, in every controller. We want
+our visitors to be able to read and list the entries without registering in the
+site.
 
-さて、新しいユーザーを登録すること、usernameとpasswordを保存すること、更に重要な平文(*plain text*)でデータベースに保存されないようにパスワードをハッシュ化にすることを可能にする必要があります。
-AuthComponentに認証されていないユーザーがusersのadd関数にアクセスすること、実装にログインとログアウトアクションを伝えましょう::
+Now, we need to be able to register new users, save their username and password,
+and more importantly, hash their password so it is not stored as plain text in
+our database. Let's tell the AuthComponent to let un-authenticated users access
+the users add function and implement the login and logout action::
 
-    // app/Controller/UsersController.php
+    // src/Controller/UsersController.php
 
-    public function beforeFilter()
+    public function beforeFilter(Event $event)
     {
-        parent::beforeFilter();
-        // ユーザー自身による登録とログアウトを許可する
-        $this->Auth->allow('add', 'logout');
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['add', 'logout']);
     }
 
     public function login()
     {
         if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash(__('Invalid username or password, try again'));
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
             }
+            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
 
     public function logout()
     {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
-パスワードのハッシュ化はまだされていません。
-``app/Model/User.php`` のモデルファイルを開いて、以下のものを追加してください::
+Password hashing is not done yet, we need an Entity class for our User in order
+to handle its own specific logic. Create the ``src/Model/Entity/User.php`` entity file
+and add the following::
 
-    // app/Model/User.php
+    // src/Model/Entity/User.php
+    namespace App\Model\Entity;
 
-    App::uses('AppModel', 'Model');
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    use Cake\ORM\Entity;
+    use Cake\Auth\DefaultPasswordHasher;
 
-    class User extends AppModel
+    class User extends Entity
     {
 
-    // ...
+        // Make all fields mass assignable for now.
+        protected $_accessible = ['*' => true];
 
-    public function beforeSave($options = array()) {
-        if (isset($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher();
-            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
+        // ...
+
+        protected function _setPassword($password)
+        {
+            return (new DefaultPasswordHasher)->hash($password);
         }
-        return true;
+
+        // ...
     }
 
-    // ...
-
-これで、ユーザーが保存されるときは毎回 SimplePasswordHasher
-クラスを用いてパスワードがハッシュ化されます。
-あとはログイン関数用のビューテンプレートファイルだけです:
-
+Now every time the password property is assigned to the user it will be hashed
+using the ``DefaultPasswordHasher`` class.  We're just missing a template view
+file for the login function. Open up your ``src/Template/Users/login.ctp`` file
+and add the following lines:
 
 .. code-block:: php
 
+    <!-- File: src/Template/Users/login.ctp -->
+
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
-    <?php echo $this->Form->create('User'); ?>
+    <?= $this->Flash->render('auth') ?>
+    <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?php echo __('Please enter your username and password'); ?></legend>
-            <?php echo $this->Form->input('username');
-            echo $this->Form->input('password');
-        ?>
+            <legend><?= __('Please enter your username and password') ?></legend>
+            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('password') ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Login')); ?>
+    <?= $this->Form->button(__('Login')); ?>
+    <?= $this->Form->end() ?>
     </div>
 
-``/user/add`` URLにアクセスして新しいユーザーを登録し、 ``/users/login`` URLに行き、新しく作られた認証情報を用いてログインすることができるようになりました。
-また、 ``/posts/add`` のような明示的に許可されていない他のURLにアクセスしてみて、アプリケーションが自動的にログインページにリダイレクトさせることを確かめてください。
+You can now register a new user by accessing the ``/users/add`` URL and log in with the
+newly created credentials by going to ``/users/login`` URL. Also, try to access
+any other URL that was not explicitly allowed such as ``/articles/add``, you will see
+that the application automatically redirects you to the login page.
 
-そしてこれでおしまいです！
-シンプルすぎて事実とは思えないかもしれません。
-ちょっと戻って何が起きたのか説明しましょう。
-``beforeFilter`` 関数がAuthComponentにAppControllerの ``beforeFilter`` 関数で許可されていた ``index`` と ``view`` アクションに加え、 ``add`` アクションがログインを必要としないことを伝えています。
+And that's it! It looks too simple to be true. Let's go back a bit to explain what
+happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
+login for the ``add`` action in addition to the ``index`` and ``view`` actions that were
+already allowed in the AppController's ``beforeFilter`` function.
 
-``login`` アクションはAuthComponentの ``this->Auth->login()`` 関数を呼び、前述した規約に従っていたためこれ以上の設定無しに動作します。
-規約とは、usernameとpasswordカラムをもつUserモデルを用意し、コントローラに送信されるユーザーのデータを含むフォームを使用するということです。
-この関数はログインが成功したかどうかを返し、成功した場合は、アプリケーションにAuthComponentを追加した時に設定したリダイレクト先のURLにユーザーをリダイレクトさせます。
+The ``login`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
+and it works without any further config because we are following conventions as
+mentioned earlier. That is, having a Users table with a username and a password
+column, and use a form posted to a controller with the user data. This function
+returns whether the login was successful or not, and in the case it succeeds,
+then we redirect the user to the configured redirection URL that we used when
+adding the AuthComponent to our application.
 
-``/users/logout`` URLにアクセスさえすればログアウトが動作し、先に説明した、設定されたlogoutUrlにユーザーをリダイレクトさせます。
-このURLは ``AuthComponent::logout()`` 関数が成功した時の返り値となります。
+The logout works by just accessing the ``/users/logout`` URL and will redirect
+the user to the configured logoutUrl formerly described. This URL is the result
+of the ``AuthComponent::logout()`` function on success.
 
-承認(誰が何にアクセスができるか)
-================================
+Authorization (who's allowed to access what)
+============================================
 
-前述の通り、このブログを複数ユーザーが書き込めるツールに書き換えようとしていますが、これをするために、postsテーブルを多少書き換えてUserモデルへの参照を追加する必要があります::
+As stated before, we are converting this blog into a multi-user authoring tool,
+and in order to do this, we need to modify the articles table a bit to add the
+reference to the Users table::
 
-    ALTER TABLE posts ADD COLUMN user_id INT(11);
+    ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-また、作成された投稿に、現在ログインしているユーザーを参照として保存するために、PostsControllerでの小さな変更が必要です::
+Also, a small change in the ArticlesController is required to store the currently
+logged in user as a reference for the created article::
 
-    // app/Controller/PostsController.php
+    // src/Controller/ArticlesController.php
+
     public function add()
     {
+        $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
-            if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been saved.'));
-                $this->redirect(array('action' => 'index'));
+            // Added this line
+            $article->user_id = $this->Auth->user('id');
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been saved.'));
+                return $this->redirect(['action' => 'index']);
             }
+            $this->Flash->error(__('Unable to add your article.'));
         }
+        $this->set('article', $article);
     }
 
-Authコンポーネントの ``user()`` 関数は現在ログインしているユーザーから全てのカラムを返します。
-このメソッドを使って、保存されるリクエストデータにそのデータを追加します。
+The ``user()`` function provided by the component returns any column from the
+currently logged in user. We used this method to add the data into the request
+info that is saved.
 
-誰かが他の著者の投稿を編集したり削除したりするのを防ぐように、アプリケーションをセキュアにしましょう。
-アプリケーションの基本的なルールは、普通のユーザー(authorロール)が許可されたアクションだけにアクセスできる一方、管理者ユーザーが全てのURLにアクセスできるということです。
-もう一度AppControllerクラスを開いてAuthの設定にちょっとばかりのオプションを追加しましょう::
+Let's secure our app to prevent some authors from editing or deleting the
+others' articles. Basic rules for our app are that admin users can access every
+URL, while normal users (the author role) can only access the permitted actions.
+Again, open the AppController class and add a few more options to the Auth
+config::
 
-    // app/Controller/AppController.php
+    // src/Controller/AppController.php
 
-    public $components = array(
-        'Session',
-        'Auth' => array(
-            'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-            'authorize' => array('Controller') // この行を追加しました
-        )
-    );
+    public function initialize()
+    {
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'], // Added this line
+            'loginRedirect' => [
+                'controller' => 'Articles',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
+            ]
+        ]);
+    }
 
     public function isAuthorized($user)
     {
+        // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
 
-        // デフォルトは拒否
+        // Default deny
         return false;
     }
 
-とても単純な承認機構を作成しました。
-この場合、 ``admin`` ロールを持つユーザーはログイン時サイト内の全てのURLにアクセスすることができるでしょう。
-しかし残りの人々(例えば ``author`` ロールの人)はログインしていないユーザーと変わらず、何もすることができません。
+We just created a very simple authorization mechanism. In this case the users
+with role ``admin`` will be able to access any URL in the site when logged in,
+but the rest of them (i.e the role ``author``) can't do anything different from
+not logged in users.
 
-これは望んでいたものとは違いますので、 ``isAuthrorized()`` メソッドにより多くのルールを与えるよう修正する必要があります。
-しかしAppControllerでこれをする代わりに、それらの特殊ルールの提供を各コントローラに委譲しましょう。
-PostsControllerに追加しようとしているルールは投稿の作成を著者に許可すべきですが、著者が合っていない場合投稿の編集を防止する必要があります。
-``PostsController.php`` のファイルを開き、以下の内容を追加してください::
+This is not exactly what we wanted, so we need to supply more rules to
+our ``isAuthorized()`` method. But instead of doing it in AppController, let's
+delegate each controller to supply those extra rules. The rules we're going to
+add to ArticlesController should allow authors to create articles but prevent the
+edition of articles if the author does not match. Open the file ``ArticlesController.php``
+and add the following content::
 
-    // app/Controller/PostsController.php
+    // src/Controller/ArticlesController.php
 
     public function isAuthorized($user)
     {
-        // 登録済ユーザーは投稿できる
-        if ($this->action === 'add') {
+        // All registered users can add articles
+        if ($this->request->action === 'add') {
             return true;
         }
 
-        // 投稿のオーナーは編集や削除ができる
-        if (in_array($this->action, array('edit', 'delete'))) {
-            $postId = (int) $this->request->params['pass'][0];
-            if ($this->Post->isOwnedBy($postId, $user['id'])) {
+        // The owner of an article can edit and delete it
+        if (in_array($this->request->action, ['edit', 'delete'])) {
+            $articleId = (int)$this->request->params['pass'][0];
+            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
                 return true;
             }
         }
@@ -346,28 +382,35 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
         return parent::isAuthorized($user);
     }
 
-今AppControllerの ``isAuthorized()`` 呼び出しを上書きし、内部で親クラスが既にユーザーを承認しているかをチェックしています。
-親クラスが承認しなければ、続いてaddアクションへのアクセス、条件的にeditとdeleteを許可します。
-最後に、実装するものが残っています。
-ユーザーが投稿を編集できるかを承認されているかどうかを伝えるために、Postモデルの ``isOwnedBy()`` 関数を呼んでいます。
-一般的に、できるだけ多くのロジックをモデルに移動することは良い習慣です。
-それではその関数を実装していきましょう::
+We're now overriding the AppController's ``isAuthorized()`` call and internally
+checking if the parent class is already authorizing the user. If he isn't,
+then just allow him to access the add action, and conditionally access
+edit and delete. One final thing has not been implemented. To tell whether
+or not the user is authorized to edit the article, we're calling a ``isOwnedBy()``
+function in the Articles table. Let's then implement that function::
 
-    // app/Model/Post.php
+    // src/Model/Table/ArticlesTable.php
 
-    public function isOwnedBy($post, $user)
+    public function isOwnedBy($articleId, $userId)
     {
-        return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
+        return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 
-これはシンプルな認証と承認のチュートリアルのまとめとなります。
-UsersControllerをセキュアにするためには、PostsControllerでしたものと同様のテクニックに続くことができ、独自のルールを元に、より創造性をもち、またAppControllerでより汎用的なコードを書くこともできるでしょう。
+This concludes our simple authentication and authorization tutorial. For securing
+the UsersController you can follow the same technique we did for ArticlesController.
+You could also be more creative and code something more general in AppController based
+on your own rules.
 
-もっと色々なコントロールを必要とするかもしれません。
-コンポーネントの設定、独自の承認クラスの作成、などなどをもっと知るものとして、 :doc:`/core-libraries/components/authentication` セクションで完全なAuthガイドを読むことをお勧めします。
+Should you need more control, we suggest you read the complete Auth guide in the
+:doc:`/controllers/components/authentication` section where you will find more
+about configuring the component, creating custom Authorization classes, and much more.
 
-お勧めの参考資料
-----------------
+Suggested Follow-up Reading
+---------------------------
 
-1. :doc:`/console-and-shells/code-generation-with-bake` 基本的なCRUDコードの生成
-2. :doc:`/core-libraries/components/authentication`: ユーザーの登録とログイン
+#. :doc:`/bake/usage` Generating basic CRUD code
+#. :doc:`/controllers/components/authentication`: User registration and login
+
+.. meta::
+    :title lang=en: Simple Authentication and Authorization Application
+    :keywords lang=en: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns

@@ -24,7 +24,7 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
 ===
 
 ブログの作成
-----------
+--------------
 
 :doc:`ブログチュートリアル</tutorials-and-examples/blog/blog>` を使用した入門。
 基本的なブログの構築の過程を通して、CakePHPの基本を学びます。
@@ -35,34 +35,34 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
 CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエスト
 </getting-started/a-typical-cakephp-request>`
 と、 :doc:`規約
-</getting-started/cakephp-conventions>`
+</intro/conventions>`
 を学びましょう。
 
 コントローラ
-----------
+--------------
 
 コントローラはリクエストを取り扱い、調和の手助けとクライアントへのレスポンスの準備をします。
 詳細は :doc:`/controllers` を見てください。
 
 ビュー
------
+---------
 
 ビューはCakePHPのプレゼンテーション層です。
 これはモデルから取得したデータをクライアントがリクエストした出力フォーマットに変換します。
 詳細は :doc:`/views` を見てください。
 
 モデル
------
+-------
 
 モデルはアプリケーションの心臓部分です。
 これはバリデーション、ストレージ、データの検索を取り扱います。
-詳細は :doc:`/models` を見てください。
+詳細は :doc:`/orm` を見てください。
 
 助けの求め方
-==========
+=============
 
 もし何か困っていたら、 :doc:`いくつもの助けを求められる場所
-</cakephp-overview/where-to-get-help>`
+</intro/where-to-get-help>`
 があります。
 
 .. meta::

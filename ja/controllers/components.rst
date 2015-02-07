@@ -35,7 +35,7 @@
 ====================
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を必要としている例は、
-:doc:`/core-libraries/components/authentication` や :doc:`/core-libraries/components/cookie` などにあります。
+:doc:`/controllers/components/authentication` や :doc:`/controllers/components/cookie` などにあります。
 これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
 ``$components`` 配列かコントローラの ``beforeFilter()`` メソッドで行われます。::
 

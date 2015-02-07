@@ -366,7 +366,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 .. php:method:: referer(mixed $default = null, boolean $local = false)
 
     現在のリクエストに対するリファラURLを返します。
-    ``$default`` パラメータは、HTTP\_REFERERがヘッダから読み取れなかっ���場合にデフォルトURLとして使うために指定します。
+    ``$default`` パラメータは、HTTP\_REFERERがヘッダから読み取れなかっ�����場合にデフォルトURLとして使うために指定します。
     つまり、このようにする代わりに::
 
         class UserController extends AppController
@@ -458,7 +458,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     このメソッドはモデルから取得した結果をページングするために使われます。
     ページサイズやモデルのfind条件などを指定出来ます。
-    paginateのより詳しい使い方は :doc:`pagination <core-libraries/components/pagination>` セクションを参照してください。
+    paginateのより詳しい使い方は :doc:`pagination <controllers/components/pagination>` セクションを参照してください。
 
 .. php:method:: requestAction(string $url, array $options)
 

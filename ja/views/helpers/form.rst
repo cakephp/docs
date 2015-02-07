@@ -353,7 +353,7 @@ Options
 
 ``FormHelper::input()`` supports a large number of options. In addition to its
 own options ``input()`` accepts options for the generated input types, as well as
-HTML attributes. The following will cover the options specific to
+HTML属性. The following will cover the options specific to
 ``FormHelper::input()``.
 
 * ``$options['type']`` You can force the type of an input, overriding model
@@ -1062,7 +1062,7 @@ Creating Year Inputs
 .. php:method:: year(string $fieldName, array $options = [])
 
 Creates a select element populated with the years from ``minYear``
-to ``maxYear``. Additionally, HTML attributes may be supplied in $options. If
+to ``maxYear``. Additionally, HTML属性 may be supplied in $options. If
 ``$options['empty']`` is ``false``, the select will not include an
 empty option:
 
@@ -1218,7 +1218,7 @@ Output:
     <label for="user-name">Name</label>
     <label for="user-name">Your username</label>
 
-``$options`` can either be an array of HTML attributes, or a string that
+``$options`` can either be an array of HTML属性, or a string that
 will be used as a class name::
 
     echo $this->Form->label('User.name', null, ['id' => 'user-label']);

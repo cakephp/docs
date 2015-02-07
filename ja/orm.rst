@@ -1,120 +1,110 @@
 モデル
-#####
+#########
 
-モデルはアプリケーションのビジネスレイヤーを担当するクラスです。\
-すなわち、業務ドメインにおけるデータやその妥当性、トランザクションや\
-情報ワークフローの過程で発生する全てのことがらを管理する役割を負うということです。
+Models are the classes that sit as the business layer in your application.
+This means that they should be responsible for managing almost everything
+that happens regarding your data, its validity, interactions and evolution
+of the information workflow in your domain of work.
 
-モデルクラスは通常はデータを表すもので、\
-CakePHP のアプリケーションではデータアクセスに使われます。\
-具体的に言うと、モデルはデータベースのテーブルを表しますが、それに限らず\
-ファイルや外部 web サービス、iCal のイベントや CSV ファイルの行など、\
-データを扱うあらゆるものに使われます。
+In CakePHP your application's domain model gets split into 2 primary object
+types. The first are **repositories** or **table objects**. These objects
+provide access to collections of data. They allow you to save new records,
+modify/delete existing ones, define relations, and perform bulk operations. The
+second type of objects are **entities**. Entities represent individual records
+and allow you to define row/record level behavior & functionality.
 
-ひとつのモデルを他のモデルと関連づけることができます。\
-例えば Recipe はそのレシビの Author と関連づけられたり、\
-レシピの Ingredient と関連づけられたりします。
+CakePHP's built-in ORM specializes in relational databases, but can be extended
+to support alternative datasources.
 
-このセクションでは、モデルでどのような機能を自動化することができるか、\
-それらをどうやってオーバーライドするか、\
-そしてモデルがどのようなメソッドやプロパティを持っているかについて説明します。\
-データを関連づける様々な方法も説明します。\
-データの検索、保存、削除の仕方も説明します。\
-最後にデータソースについて触れます。
+The CakePHP ORM borrows ideas and concepts from both ActiveRecord and Datamapper
+patterns. It aims to create a hybrid implementation that combines aspects of
+both patterns to create a fast, simple to use ORM.
 
-モデルを理解する
+Before we get started exploring the ORM, make sure you :ref:`configure your
+database connections <database-configuration>`.
+
+.. note::
+
+    If you are familiar with previous versions of CakePHP, you should read the
+    :doc:`/appendices/orm-migration` for important differences between CakePHP 3.0
+    and older versions of CakePHP.
+
+Quick Example
 =============
 
-Model はデータモデルを表します。オブジェクト指向プログラミングにおいて、\
-データモデルは自動車や人、家といった「もの」を表現するオブジェクトです。\
-例えばブログには複数の記事があり、それぞれの記事には複数のコメントがあります。\
-Blog、Post、Comment はすべてモデルの例で、それぞれが互いに関連づけられます。
+To get started you don't have to write any code. If you've followed the CakePHP
+conventions for your database tables you can just start using the ORM. For
+example if we wanted to load some data from our ``articles`` table we could do::
 
-以下は CakePHP におけるモデル定義の簡単な例です。\ ::
-
-    class Ingredient extends AppModel
-    {
-        public $name = 'Ingredient';
+    use Cake\ORM\TableRegistry;
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find();
+    foreach ($query as $row) {
+        echo $row->title;
     }
 
-このシンプルな宣言をするだけで、Ingredient モデルにはデータの保存や削除に関する\
-クエリを発行するのに必要な機能が備わります。\
-これらの魔法のメソッドは CakePHP の Model クラスから継承されます。\
-Ingredient モデルはアプリケーション用のモデルである AppModel を extend しており、\
-AppModel は CakePHP 内部の Model クラスを extend しています。\
-つまり Ingredient クラスに上記の機能を与えているのはコアの Model クラスです。
+Note that we didn't have to create any code or wire any configuration up.
+The conventions in CakePHP allow us to skip some boilerplate code, and allow the
+framework to insert base classes when your application has not created
+a concrete class. If we wanted to customize our ArticlesTable class adding some
+associations or defining some additional methods we would add the following to
+``src/Model/Table/ArticlesTable.php`` after the ``<?php`` opening tag::
 
-中間クラスの AppModel は独自に作成しない限りは空のクラスであり、\
-CakePHP のコアフォルダから取り込まれます。\
-AppModel をオーバーライドすることで、アプリケーション内の全てのモデルで利用可能な\
-機能を定義することができます。この場合、独自の ``AppModel.php`` ファイルを\
-他の全てのモデルと同様に Model フォルダに置きます。 :doc:`Bake <console-and-shells/code-generation-with-bake>`
-を使用してプロジェクトを作成すると、自動的にこのファイルが生成されます。
+    namespace App\Model\Table;
 
-複数のモデルに同様のロジックを適用する方法に関しては
-:doc:`Behaviors <models/behaviors>` も参照してください。
+    use Cake\ORM\Table;
 
-Ingredient モデルの話に戻りましょう。これを動作させるには、\
-``/app/Model/`` ディレクトリに PHP のファイルを作成します。\
-クラス名と同じファイル名をつけることになっています。\
-この例の場合は ``Ingredient.php`` です。
-
-.. note::
-
-    CakePHP は対応するファイルが /app/Model に見つからない場合、\
-    動的にモデルオブジェクトを生成します。\
-    モデルのファイルに正しい名前をつけなければ
-    (つまり ingredient.php や Ingredients.php などとしたら)
-    CakePHP にとって見当たらないそのファイルではなく、\
-    AppModel のインスタンスが使われることになります。\
-    モデル内に自身で定義したメソッドやモデルに追加したビヘイビアを使おうとして、\
-    呼び出し中のメソッドの名前で SQL エラーが発生する場合は
-    CakePHP がそのモデルを見つけられないというサインであり、\
-    ファイル名かアプリケーションキャッシュ、またはその両方をチェックする必要があります。
-
-.. note::
-
-    モデル名には使えない名前があります。\
-    例えば "File" という名前は使えません。\
-    "File" は CakePHP のコアに既に存在するクラスだからです。
-
-モデルを定義すると :doc:`Controller <controllers>` からアクセスできるようになります。\
-モデル名がコントローラ名と対応する名前を持つ場合、
-CakePHP はそのモデルを自動的に呼び出し可能にします。\
-例えば IngredientsController という名前のコントローラは\
-自動で Ingredient モデルを初期化して、\
-コントローラの ``$this->Ingredient`` に割り当てます。\ ::
-
-    class IngredientsController extends AppController
-    {
-        public function index()
-        {
-            //全ての ingredients を取得してビューに渡す
-            $ingredients = $this->Ingredient->find('all');
-            $this->set('ingredients', $ingredients);
-        }
-    }
-
-関連モデルはメインのモデルを通じて利用できます。\
-以下の例は、Recipe が Ingredient モデルと関連づけられている場合です。\ ::
-
-    class Recipe extends AppModel
+    class ArticlesTable extends Table
     {
 
-        public function steakRecipes()
-        {
-            $ingredient = $this->Ingredient->findByName('Steak');
-            return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
-        }
     }
 
-上記は関連するモデルを利用する方法を示しています。\
-関連を定義する方法を確認するには
-:doc:`Associations section <models/associations-linking-models-together>`
-を参照してください。
+Table classes use the CamelCased version of the table name with the ``Table``
+suffix as the class name. Once your class has been created you get a reference
+to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
 
-More on models
-==============
+    use Cake\ORM\TableRegistry;
+    // Now $articles is an instance of our ArticlesTable class.
+    $articles = TableRegistry::get('Articles');
+
+Now that we have a concrete table class, we'll probably want to use a concrete
+entity class. Entity classes let you define accessor and mutator methods, define
+custom logic for individual records and much more. We'll start off by adding the
+following to ``src/Model/Entity/Article.php`` after the ``<?php`` opening tag::
+
+    namespace App\Model\Entity;
+
+    use Cake\ORM\Entity;
+
+    class Article extends Entity
+    {
+
+    }
+
+Entities use the singular CamelCase version of the table name as their class
+name by default. Now that we have created our entity class, when we
+load entities from the database we'll get instances of our new Article class::
+
+    use Cake\ORM\TableRegistry;
+
+    // Now an instance of ArticlesTable.
+    $articles = TableRegistry::get('Articles');
+    $query = $articles->find();
+
+    foreach ($query as $row) {
+        // Each row is now an instance of our Article class.
+        echo $row->title;
+    }
+
+CakePHP uses naming conventions to link the Table and Entity class together. If
+you need to customize which entity a table uses you can use the
+``entityClass()`` method to set a specific classname.
+
+See the chapters on :doc:`/orm/table-objects` and :doc:`/orm/entities` for more
+information on how to use table objects and entities in your application.
+
+More Information
+================
 
 .. toctree::
     :maxdepth: 2

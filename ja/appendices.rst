@@ -16,7 +16,7 @@ will only be available in the ``3.0`` branch in git.
     appendices/orm-migration
 
 一般的な情報
-===========
+===============
 
 .. toctree::
     :maxdepth: 1

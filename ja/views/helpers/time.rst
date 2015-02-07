@@ -35,9 +35,6 @@ Time ヘルパーの基本的な使い道は、ユーザーのタイムゾーン
 Timeヘルパーのメソッドは多くが $timezone パラメーターを持っています。このパラメーターは
 タイムゾーンを表す文字列か、 `DateTimeZone` クラスのインスタンスを渡すことができます。
 
-.. include:: ../../core-utility-libraries/time.rst
-    :start-after: start-time
-    :end-before: end-time
 
 .. meta::
     :title lang=ja: TimeHelper

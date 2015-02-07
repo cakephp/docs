@@ -1,86 +1,114 @@
 ブログチュートリアル
 ####################
 
-Cakeをさっそく使ってみましょう。
-このチュートリアルを読んでいるのは、Cakeの動作に関してさらに学びたいと思っているからだと思います。
-私たちは、生産性を高め、コーディングがさらに楽しいものになることを目指しています。
-コードを調べているうちに、きっとあなたもそのことに気が付くでしょう。
+This tutorial will walk you through the creation of a simple blog application.
+We'll be installing CakePHP, creating a database, and creating enough
+application logic to list, add, edit, and delete blog posts.
 
-このチュートリアルでは、シンプルなブログアプリケーションを作成します。
-Cakeを取得してインストールし、データベースの設定を行い、ブログの投稿記事の一覧表示(*list*)、追加(*add*)、編集(*edit*)、削除(*delete*)などのアプリケーションロジックを作成します。
+Here's what you'll need:
 
-必要なもの:
+#. A running web server. We're going to assume you're using Apache,
+   though the instructions for using other servers should be very
+   similar. We might have to play a little with the server
+   configuration, but most folks can get CakePHP up and running without
+   any configuration at all. Make sure you have PHP 5.4.16 or greater, and
+   that the ``mbstring`` and ``intl`` extensions are enabled in PHP.
+#. A database server. We're going to be using MySQL server in this
+   tutorial. You'll need to know enough about SQL in order to create a
+   database: CakePHP will be taking the reins from there. Since we're using MySQL,
+   also make sure that you have ``pdo_mysql`` enabled in PHP.
+#. Basic PHP knowledge.
 
-#. 動作しているWebサーバ。
-   Apacheを使っているという前提で書いてありますが、他の種類のサーバを使用する場合でも、ほぼ同じにいけるはずです。
-   サーバの設定を少し変える必要があるかもしれませんが、たいていの人は、そのままの設定でCakeを動作させることが可能です。
-   PHP 5.2.8以上が動作していることを確認してください。
-#. データベースサーバ。
-   このチュートリアルでMySQLを使用します。
-   データベースを作成できる程度のSQLの知識が必要です。
-   その先はCakeが面倒をみてくれます。
-   MySQLを使用するので、PHPで ``pdo_mysql`` が有効になっていることを確認してください。
-#. PHPの基本的な知識。
-   オブジェクト指向プログラミングに慣れていれば非常に有利ですが、手続き型に慣れているという人でも心配する必要はありません。
-#. 最後に、MVCプログラミングに関する基本的な知識が必要です。
-   概要については、 :doc:`/cakephp-overview/understanding-model-view-controller` を見てください。
-   半ページぐらいの説明ですので、心配はご無用です。
+Let's get started!
 
-それでは、はじめましょう！
+Getting CakePHP
+===============
 
-Cakeのダウンロード
-==================
+The easiest way to install CakePHP is to use Composer.  Composer is a simple way
+of installing CakePHP from your terminal or command line prompt.  First, you'll
+need to download and install Composer if you haven't done so already. If you
+have cURL installed, it's as easy as running the following::
 
-まずは、最新のCakeのコードをダウンロードしてきましょう。
+    curl -s https://getcomposer.org/installer | php
 
-最新のCakeをダウンロードするには、GitHubにあるCakePHPプロジェクトを見てみましょう:
-`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
-そして、2.0の最新リリースをダウンロードします。
+Or, you can download ``composer.phar`` from the
+`Composer website <https://getcomposer.org/download/>`_.
 
-または、
-`git <http://git-scm.com/>`_
-を使ってレポジトリをcloneすることもできます。
-``git clone git://github.com/cakephp/cakephp.git``
+Then simply type the following line in your terminal from your
+installation directory to install the CakePHP application skeleton
+in the [app_name] directory. ::
 
-どちらにしても、ダウンロードしたコードをDocumentRoot内に配置してください。
-そうすると、ディレクトリは次のようになります::
+    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
-    /path_to_document_root
-        /app
-        /lib
+The advantage to using Composer is that it will automatically complete some
+important set up tasks, such as setting the correct file permissions and
+creating your config/app.php file for you.
+
+There are other ways to install CakePHP. If you cannot or don't want to use
+Composer, check out the :doc:`/installation` section.
+
+Regardless of how you downloaded and installed CakePHP, once your set up is
+completed, your directory setup should look something like the following::
+
+    /cake_install
+        /bin
+        /config
+        /logs
         /plugins
-        /vendors
+        /src
+        /tests
+        /tmp
+        /vendor
+        /webroot
+        .editorconfig
+        .gitignore
         .htaccess
+        .travis.yml
+        composer.json
         index.php
-        README
+        phpunit.xml.dist
+        README.md
 
-Cakeのディレクトリ構造について少し学んでおきましょう:
-:doc:`/getting-started/cakephp-folder-structure` のセクションをチェックしてください。
+Now might be a good time to learn a bit about how CakePHP's directory
+structure works: check out the
+:doc:`/intro/cakephp-folder-structure` section.
 
-Tmpディレクトリのパーミッション
--------------------------------
+Directory Permissions on tmp and logs
+=====================================
 
-次に、 ``app/tmp`` ディレクトリをWebサーバから書き込めるように設定します。
-これを行うためのいちばんいい方法は、 Webサーバを動作させているユーザーを見つけることです。
-次のコード ``<?php echo exec('whoami'); ?>`` を任意のPHPファイルに記述して、Webサーバで実行してみましょう。
-すると、Webサーバを実行しているユーザの名前が表示されるはずです。
-そのユーザーに ``app/tmp`` ディレクトリの所有権を変更します。
-実行するコマンドは (\*nixで) このようになります::
+The ``tmp`` and ``logs`` directories need to have proper permissions to be writable
+by your webserver. If you used Composer for the install, this should have been done
+for you and confirmed with a "Permissions set on <folder>" message. If you instead
+got an error message or want to do it manually, the best way would be to find out
+what user your webserver runs as (``<?= `whoami`; ?>``) and change the ownership of
+these two directories to that user. The final command you run (in \*nix)
+might look something like this::
 
-    $ chown -R www-data app/tmp
+    chown -R www-data tmp
+    chown -R www-data logs
 
-何らかの理由でCakePHPがそのディレクトリに書き込めない場合は、キャッシュデータが書き込めないという警告や例外が表示されます。
+If for some reason CakePHP can't write to these directories, you'll be
+informed by a warning while not in production mode.
 
-ブログデータベースの作成
-========================
+While not recommended, if you are unable to set the permissions to the same as
+your webserver, you can simply set write permissions on the folder by running a
+command such as::
 
-次に、ブログで使用する基礎的なデータベースをセットアップしましょう。
-データベースをまだ作成していないのであれば、このチュートリアル用に好きな名前で空のデータベースを作成しておいてください。
-このページでは、投稿記事を保存するためのテーブルをひとつ作成します。
-次のSQLをデータベースで実行してください。::
+    chmod 777 -R tmp
+    chmod 777 -R logs
 
-    /* まず、postsテーブルを作成します: */
-    CREATE TABLE posts (
+Creating the Blog Database
+==========================
+
+Next, let's set up the underlying MySQL database for our blog. If you
+haven't already done so, create an empty database for use in this
+tutorial, with a name of your choice, e.g. ``cake_blog``. Right now,
+we'll just create a single table to store our articles. We'll also throw
+in a few articles to use for testing purposes. Execute the following
+SQL statements into your database::
+
+    /* First, create our articles table: */
+    CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
         body TEXT,
@@ -88,95 +116,96 @@ Tmpディレクトリのパーミッション
         modified DATETIME DEFAULT NULL
     );
 
-    /* それから、テスト用に記事をいくつか入れておきます: */
-    INSERT INTO posts (title,body,created)
-        VALUES ('タイトル', 'これは、記事の本文です。', NOW());
-    INSERT INTO posts (title,body,created)
-        VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
-    INSERT INTO posts (title,body,created)
-        VALUES ('タイトルの逆襲', 'こりゃ本当にわくわくする！うそ。', NOW());
+    /* Then insert some articles for testing: */
+    INSERT INTO articles (title,body,created)
+        VALUES ('The title', 'This is the article body.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('A title once again', 'And the article body follows.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
-テーブル名とフィールド名は適当に選んだわけではありません。
-Cakeのデータベース命名規約とクラスの命名規約に従っておくと、（どちらも、 :doc:`/getting-started/cakephp-conventions` の中で説明されています）たくさんの機能を自由に使うことができ、設定作業をする必要がなくなります。
-Cakeはフレキシブルなので、最悪な従来型のデータベーススキーマにも対応することができますが、規約に従えば、時間を節約することができます。
+The choices on table and column names are not arbitrary. If you
+follow CakePHP's database naming conventions, and CakePHP's class naming
+conventions (both outlined in
+:doc:`/intro/conventions`), you'll be able to take
+advantage of a lot of free functionality and avoid configuration.
+CakePHP is flexible enough to accommodate even inconsistent legacy
+database schemas, but adhering to the conventions will save you time.
 
-詳細は、 :doc:`/getting-started/cakephp-conventions` を参照してください。
-簡単に言うと、'posts'というテーブル名にしておけば、自動的にPostモデルが呼び出され、'modified'と'created'というフィールドがあると、自動的にCakeが管理するようになります。
+Check out :doc:`/intro/conventions` for more
+information, but it's suffice to say that naming our table 'articles'
+automatically hooks it to our Articles model, and having fields called
+'modified' and 'created' will be automatically managed by CakePHP.
 
-Cakeのデータベース設定
+Database Configuration
 ======================
 
-どんどん進みましょう。
-データベースがどこにあって、どうやって接続するかをCakeに教えます。
-多くの人にとって、設定(*configure*)をする最初で最後の機会です。
+Next, let's tell CakePHP where our database is and how to connect to it.
+For many, this will be the first and last time you will need to configure
+anything.
 
-CakePHPのデータベース設定ファイルの元は、
-``/config/database.php.default`` の中にあります。
-同一ディレクトリ上にこのファイルのコピーを作り、 ``database.php`` という名前にしてください。
+The configuration should be pretty straightforward: just replace the
+values in the ``Datasources.default`` array in the ``config/app.php`` file
+with those that apply to your setup. A sample completed configuration
+array might look something like the following::
 
-この設定ファイルの中身は一目瞭然です。
-``$default`` 配列の値を自分のセットアップに合わせて変更するだけです。
-完全な設定の配列の例は次のようなものになるでしょう::
+    return [
+        // More configuration above.
+        'Datasources' => [
+            'default' => [
+                'className' => 'Cake\Database\Connection',
+                'driver' => 'Cake\Database\Driver\Mysql',
+                'persistent' => false,
+                'host' => 'localhost',
+                'username' => 'cake_blog',
+                'password' => 'AngelF00dC4k3~',
+                'database' => 'cake_blog',
+                'encoding' => 'utf8',
+                'timezone' => 'UTC'
+            ],
+        ],
+        // More configuration below.
+    ];
 
-    public $default = array(
-        'datasource' => 'Database/Mysql',
-        'persistent' => false,
-        'host' => 'localhost',
-        'port' => '',
-        'username' => 'cakeBlog',
-        'password' => 'c4k3-rUl3Z',
-        'database' => 'cake_blog_tutorial',
-        'schema' => '',
-        'prefix' => '',
-        'encoding' => 'utf8'
-    );
-
-新しくできた ``database.php`` ファイルを保存したら、ブラウザをあけて、Cakeのwelcomeページを開いてください。
-データベース接続のファイルがある、そしてデータベースに接続できる、というメッセージが表示されるはずです。
+Once you've saved your ``config/app.php`` file, you should be able to open
+your browser and see the CakePHP welcome page. It should also tell
+you that your database connection file was found, and that CakePHP
+can successfully connect to the database.
 
 .. note::
 
-   PDOとpdo_mysqlがphp.iniで有効になっている必要があることを覚えておいてください。
+    A copy of CakePHP's default configuration file is found in
+    ``config/app.default.php``.
 
-追加の設定
-==========
+Optional Configuration
+======================
 
-設定できる項目があといくつかあります。
-たいていの開発者はこれらの詳細なリストも仕上げますが、このチュートリアルに必要不可欠、というわけではありません。
-ひとつは、セキュリティハッシュ用のカスタム文字列(「salt」ともいう)です。
-二つ目は、独自の番号(「seed」ともいう)を暗号化用に定義するということです。
+There are a few other items that can be configured. Most developers
+complete these laundry-list items, but they're not required for
+this tutorial. One is defining a custom string (or "salt") for use
+in security hashes.
 
-セキュリティ用のsaltは、ハッシュの生成に用いられます。
-``/config/core.php`` を編集し、デフォルトの ``Security.salt`` の値を変更してください。
-この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。::
+The security salt is used for generating hashes. If you used Composer this too is taken
+care of for you during the install. Else you'd need to change the default salt value
+by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
+it's not easily guessed::
 
-    /**
-     * A random string used in security hashing methods.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+    'Security' => [
+        'salt' => 'something long and containing lots of different values.',
+    ],
 
-サイファシード(*cipher seed*)は暗号化・復号化のための文字列です。
-``/config/core.php`` を編集して ``Security.cipherSeed`` をデフォルト値から変更してください。
-この値は、大きくてランダムな整数でなければなりません::
 
-    /**
-     * A random numeric string (digits only) used to encrypt/decrypt strings.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+A Note on mod\_rewrite
+======================
 
-mod\_rewriteについて
-====================
+Occasionally new users will run into mod\_rewrite issues. For example
+if the CakePHP welcome page looks a little funny (no images or CSS styles).
+This probably means mod\_rewrite is not functioning on your system. Please refer
+to the :ref:`url-rewriting` section to help resolve any issues you are having.
 
-新しいユーザはmod\_rewriteでつまずくことがよくあります。
-例えばCakePHPのwelcomeページが少しおかしくなったりします(画像が表示されない、CSSが効いていない)。
-これはおそらく、システム上のmod\_rewriteが機能していないということです。
-以下のいずれかの項目を参照して、URLリライティングが有効になるように設定してください。
+Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building
+your first CakePHP application.
 
-.. toctree::
-    :maxdepth: 1
-
-    /installation/url-rewriting
-
-はじめてのCakePHPアプリケーションを構築しはじめるには、続けて
-:doc:`/tutorials-and-examples/blog/part-two`
-を見てください。
+.. meta::
+    :title lang=en: Blog Tutorial
+    :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads

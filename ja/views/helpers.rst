@@ -293,29 +293,6 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 
     レイアウトの描画が完了した時に呼び出されます。レイアウトファイル名を引数として受け取ります。
 
-コアヘルパー
-============
-
-:doc:`/core-libraries/helpers/cache`
-    ビューコンテンツをキャッシュするためのコアによって使われます。
-:doc:`/core-libraries/helpers/form`
-    HTMLフォームと自動生成されるフォームエレメントを作成します。また、バリデーション問題をハンドリングします。
-:doc:`/core-libraries/helpers/html`
-    整形式のマークアップを作るための便利なメソッドです。画像、リンク、ヘッダタグなど。
-:doc:`/core-libraries/helpers/js`
-    様々なJavascriptライブラリと互換のあるJavascriptを作成するために使われます。
-:doc:`/core-libraries/helpers/number`
-    数値と通貨を整形します。
-:doc:`/core-libraries/helpers/paginator`
-    モデルデータのページ切り替えと並び替え。
-:doc:`/core-libraries/helpers/rss`
-    RSSフィードとXMLデータを出力するための便利なメソッドです。
-:doc:`/core-libraries/helpers/session`
-    ビューでセッションの値を読み込んでアクセスします。
-:doc:`/core-libraries/helpers/text`
-    スマートリンク、ハイライト、ワードスマートトランケート。
-:doc:`/core-libraries/helpers/time`
-    近傍検出(来年かどうか？)や、素晴らしい文字列整形(Today, 10:30 am)とタイムゾーンの変換をします。
 
 .. meta::
     :title lang=ja: Helpers
