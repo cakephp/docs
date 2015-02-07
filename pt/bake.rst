@@ -16,5 +16,5 @@ cobrem o Bake em mais detalhes:
     bake/development
 
 .. meta::
-    :title lang=en: Bake Console
-    :keywords lang=en: cli,linha de comando,command line,dev,desenvolvimento,bake view, bake syntax,erb tags,asp tags,percent tags
+    :title lang=pt: Bake Console
+    :keywords lang=pt: cli,linha de comando,command line,dev,desenvolvimento,bake view, bake syntax,erb tags,asp tags,percent tags

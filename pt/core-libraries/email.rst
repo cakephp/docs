@@ -431,5 +431,5 @@ message id (since there is no host name in a CLI environment)::
 A valid message id can help to prevent emails ending up in spam folders.
 
 .. meta::
-    :title lang=en: Email
-    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
+    :title lang=pt: Email
+    :keywords lang=pt: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

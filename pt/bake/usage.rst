@@ -100,5 +100,5 @@ theme the help output would show::
     --theme, -t       The theme to use when baking code. (choices: Special)
 
 .. meta::
-    :title lang=en: Code Generation with Bake
-    :keywords lang=en: command line interface,functional application,database,database configuration,bash script,basic ingredients,project,model,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
+    :title lang=pt: Code Generation with Bake
+    :keywords lang=pt: command line interface,functional application,database,database configuration,bash script,basic ingredients,project,model,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql

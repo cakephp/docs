@@ -137,5 +137,5 @@ releases periodically by the core team.
 
 
 .. meta::
-    :title lang=en: Code
-    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
+    :title lang=pt: Code
+    :keywords lang=pt: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout

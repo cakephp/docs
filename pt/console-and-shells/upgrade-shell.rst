@@ -11,5 +11,5 @@ It is provided by a standalone
 file to get all information on how to upgrade your application.
 
 .. meta::
-    :title lang=en: Upgrade Shell
-    :keywords lang=en: api docs,shell,upgrade
+    :title lang=pt: Upgrade Shell
+    :keywords lang=pt: api docs,shell,upgrade
