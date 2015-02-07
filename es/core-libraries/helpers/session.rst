@@ -45,6 +45,6 @@ used.
     key's existence.
 
 .. meta::
-    :title lang=en: SessionHelper
-    :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the component's functionality and makes it available in your view.
-    :keywords lang=en: session helper,flash messages,session flash,session read,session check
+    :title lang=es: SessionHelper
+    :description lang=es: As a natural counterpart to the Session Component, the Session Helper replicates most of the component's functionality and makes it available in your view.
+    :keywords lang=es: session helper,flash messages,session flash,session read,session check

@@ -491,6 +491,6 @@ contexts (i.e. JavaScript). ::
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 
 .. meta::
-    :title lang=en: PaginatorHelper
-    :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
-    :keywords lang=en: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter
+    :title lang=es: PaginatorHelper
+    :description lang=es: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
+    :keywords lang=es: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter

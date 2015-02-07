@@ -7,3 +7,7 @@ ES - Deployment
     desde Github <https://github.com/cakephp/docs>`_.
 
 Steps to deploy on a Hosting Server
+
+.. meta::
+    :title lang=es: Deployment
+    :keywords lang=es: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

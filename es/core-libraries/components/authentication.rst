@@ -857,5 +857,5 @@ unauthorizedRedirect
     If set to ``false`` a ForbiddenException exception is thrown instead of redirecting.
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=es: Authentication
+    :keywords lang=es: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

@@ -17,3 +17,7 @@ También puedes ver otros ejemplos en:
 
     tutorials-and-examples/blog/blog
     tutorials-and-examples/blog/part-two
+
+.. meta::
+    :title lang=es: Tutorials & Examples
+    :keywords lang=es: application tutorials,glob,bakery,repository,applications,blog,acl

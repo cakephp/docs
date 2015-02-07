@@ -146,5 +146,5 @@ over the core rules. You can use ``Inflector::reset()`` to clear rules and
 restore the original Inflector state.
 
 .. meta::
-    :title lang=en: Inflector
-    :keywords lang=en: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore
+    :title lang=es: Inflector
+    :keywords lang=es: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

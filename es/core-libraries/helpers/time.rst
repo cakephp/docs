@@ -48,6 +48,6 @@ ORM returns :php:class:`Cake\\Utility\\Time` instances for every ``timestamp``
 and ``datetime`` column, you can use the methods there to do most tasks.
 
 .. meta::
-    :title lang=en: TimeHelper
-    :description lang=en: The Time Helper will help you format time and test time.
-    :keywords lang=en: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=es: TimeHelper
+    :description lang=es: The Time Helper will help you format time and test time.
+    :keywords lang=es: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

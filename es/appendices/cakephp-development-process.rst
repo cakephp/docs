@@ -57,5 +57,5 @@ on irc.freenode.net.
 
 
 .. meta::
-    :title lang=en: CakePHP Development Process
-    :keywords lang=en: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development
+    :title lang=es: CakePHP Development Process
+    :keywords lang=es: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development

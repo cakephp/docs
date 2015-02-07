@@ -59,5 +59,5 @@ following way::
 
 
 .. meta::
-    :title lang=en: Object Registry
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :title lang=es: Object Registry
+    :keywords lang=es: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities

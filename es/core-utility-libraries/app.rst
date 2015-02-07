@@ -129,5 +129,5 @@ If you happen to not be using Composer in your application, you will need to
 manually load all vendor libraries yourself.
 
 .. meta::
-    :title lang=en: App Class
-    :keywords lang=en: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded
+    :title lang=es: App Class
+    :keywords lang=es: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

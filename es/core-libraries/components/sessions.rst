@@ -82,5 +82,5 @@ all Session component methods wherever a name/key is used.
         $this->Session->destroy();
 
 .. meta::
-    :title lang=en: Sessions
-    :keywords lang=en: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp
+    :title lang=es: Sessions
+    :keywords lang=es: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp

@@ -87,6 +87,6 @@ Output::
     :end-before: end-string
 
 .. meta::
-    :title lang=en: TextHelper
-    :description lang=en: The Text Helper contains methods to make text more usable and friendly in your views.
-    :keywords lang=en: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text
+    :title lang=es: TextHelper
+    :description lang=es: The Text Helper contains methods to make text more usable and friendly in your views.
+    :keywords lang=es: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text

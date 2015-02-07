@@ -482,5 +482,5 @@ More on Controllers
 
 
 .. meta::
-    :title lang=en: Controllers
-    :keywords lang=en: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=es: Controllers
+    :keywords lang=es: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes

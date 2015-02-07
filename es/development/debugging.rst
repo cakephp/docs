@@ -171,6 +171,6 @@ information about your application and the current request. You can download
 `DebugKit <https://github.com/cakephp/debug_kit>`_ from GitHub.
 
 .. meta::
-    :title lang=en: Debugging
-    :description lang=en: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
-    :keywords lang=en: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options
+    :title lang=es: Debugging
+    :description lang=es: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
+    :keywords lang=es: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options

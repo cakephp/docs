@@ -17,5 +17,5 @@ When you "bake" an app using Composer the Pages Controller is created in your
 ``src/Controller/`` folder.
 
 .. meta::
-    :title lang=en: The Pages Controller
-    :keywords lang=en: pages controller,default controller,cakephp,ships,php,file folder
+    :title lang=es: The Pages Controller
+    :keywords lang=es: pages controller,default controller,cakephp,ships,php,file folder

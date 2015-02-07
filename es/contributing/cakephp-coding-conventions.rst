@@ -511,5 +511,5 @@ by an underscore character, for example::
 
 
 .. meta::
-    :title lang=en: Coding Standards
-    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=es: Coding Standards
+    :keywords lang=es: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
