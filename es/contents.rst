@@ -2,7 +2,7 @@ Contenidos
 ##########
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
     intro
     quickstart
