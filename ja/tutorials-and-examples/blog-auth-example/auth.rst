@@ -412,5 +412,5 @@ Suggested Follow-up Reading
 #. :doc:`/controllers/components/authentication`: User registration and login
 
 .. meta::
-    :title lang=en: Simple Authentication and Authorization Application
-    :keywords lang=en: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns
+    :title lang=ja: Simple Authentication and Authorization Application
+    :keywords lang=ja: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns

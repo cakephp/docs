@@ -517,13 +517,3 @@ ini 指示子の設定
 セッションからデータ削除が必要なら削除も可能です::
 
     CakeSession::delete('Config.language');
-
-..
-  You should also see the documentation on
-  :doc:`/controllers/components/sessions` and
-  :doc:`/views/helpers/session` for how to access Session data
-  in the controller and view.
-
-コントローラーとビューからのセッションデータへのアクセス方法については、\
-合わせて :doc:`/controllers/components/sessions` と \
-:doc:`/views/helpers/session` をご覧下さい。

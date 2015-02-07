@@ -32,10 +32,7 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
 規約
 ----
 
-CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエスト
-</getting-started/a-typical-cakephp-request>`
-と、 :doc:`規約
-</intro/conventions>`
+CakePHPの動力となっている、典型的な :doc:`規約 </intro/conventions>`
 を学びましょう。
 
 コントローラ
