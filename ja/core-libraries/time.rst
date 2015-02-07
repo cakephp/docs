@@ -288,6 +288,6 @@ When creating text inputs that manipulate dates, you'll probably want to accept
 and parse localized datetime strings. See the :ref:`parsing-localized-dates`.
 
 .. meta::
-    :title lang=en: Time
-    :description lang=en: Time class helps you format time and test time.
-    :keywords lang=en: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=ja: Time
+    :description lang=ja: Time class helps you format time and test time.
+    :keywords lang=ja: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

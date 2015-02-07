@@ -442,6 +442,6 @@ Use similar methods if you want to configure a different logger for your console
     your application logger. This will prevent duplicate log entries.
 
 .. meta::
-    :title lang=en: Logging
-    :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.
-    :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs
+    :title lang=ja: Logging
+    :description lang=ja: Log CakePHP data to the disk to help debug your application over longer periods of time.
+    :keywords lang=ja: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

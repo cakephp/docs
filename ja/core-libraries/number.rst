@@ -314,6 +314,6 @@ Example::
 .. end-cakenumber
 
 .. meta::
-    :title lang=en: NumberHelper
-    :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
-    :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers
+    :title lang=ja: NumberHelper
+    :description lang=ja: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
+    :keywords lang=ja: number helper,currency,number format,number precision,format file size,format numbers
