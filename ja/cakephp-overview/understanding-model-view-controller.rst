@@ -72,4 +72,4 @@ CakePHPのリクエスト循環
 最初のCakePHPアプリケーションを開始するには、
 :doc:`今すぐブログチュートリアルを試しましょう。 </tutorials-and-examples/blog/blog>`
 
-.. |Figure 1| image:: /_static/img/basic_mvc.png
+.. |Figure 1| image:: /_static/img/typical-cake-request.png
