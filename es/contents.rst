@@ -2,12 +2,6 @@ Contenidos
 ##########
 
 .. toctree::
-   :hidden:
-
-   index
-   topics
-
-.. toctree::
     :maxdepth: 3
 
     intro
@@ -27,7 +21,6 @@ Contenidos
 
     core-libraries/caching
     console-and-shells
-    bake
     development/debugging
     deployment
     core-libraries/email
@@ -36,7 +29,6 @@ Contenidos
     core-libraries/logging
     controllers/components/authentication
     controllers/components/pagination
-    core-libraries/form
     plugins
     development/rest
     security
@@ -52,12 +44,11 @@ Contenidos
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/text
+    core-libraries/string
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
-    debug-kit
     appendices
 
 .. todolist::
