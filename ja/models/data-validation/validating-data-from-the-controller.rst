@@ -77,5 +77,5 @@ invalidFields はまた、そのデータを結果として返します::
 
 
 .. meta::
-    :title lang=en: Validating Data from the Controller
-    :keywords lang=en: password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model
+    :title lang=ja: Validating Data from the Controller
+    :keywords lang=ja: password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model

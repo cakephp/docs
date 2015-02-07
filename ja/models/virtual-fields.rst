@@ -242,7 +242,7 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
 
 もし TotalHours を Timelog 配列にグループ化したい場合、集計カラムのためのバーチャルフィールドを指定する必要があります。\
 永続的にモデルに宣言しなくても、その場で新しいバーチャルフィールドを追加することができます。\
-別のクエリがバーチャルフィールドを使用しようとする場合、デフォルト値として ``0`` を与えます。\
+別のクエリがバーチャルフィールドを使用しようとする場合、デフォルト値として ``0`` を与���ます。\
 それが発生した場合、 ``0`` が TotalHours 列に入ります。 ::
 
     $this->Timelog->virtualFields['TotalHours'] = 0;
@@ -308,5 +308,5 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
     $this->virtualFields += $this->Author->virtualFields;
 
 .. meta::
-    :title lang=en: Virtual fields
-    :keywords lang=en: sql expressions,array name,model fields,sql errors,virtual field,concatenation,model name,first name last name
+    :title lang=ja: Virtual fields
+    :keywords lang=ja: sql expressions,array name,model fields,sql errors,virtual field,concatenation,model name,first name last name

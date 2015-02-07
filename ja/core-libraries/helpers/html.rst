@@ -759,7 +759,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         static でない $count を変数として使います。
 
     奇数行と偶数行で異なる属性を割り当てた表のセルを作成します。
-    array() でひとつのセルを囲うと、特定の <td> タグについて属性を
+    array() でひとつの���ルを囲うと、特定の <td> タグについて属性を
     設定できます。::
 
         echo $this->Html->tableCells(array(
@@ -978,6 +978,6 @@ HtmlHelper を使ったパンくずリストの作成
 
 
 .. meta::
-    :title lang=en: HtmlHelper
-    :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
-    :keywords lang=en: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs
+    :title lang=ja: HtmlHelper
+    :description lang=ja: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
+    :keywords lang=ja: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

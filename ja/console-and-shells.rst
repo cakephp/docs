@@ -185,7 +185,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 
 このファイルを作って ``Console/cake hello hey_there あなたの名前`` を実行
 すると、ご自分の名前が表示されるはずです。publicとして定義された任意の
-メソッドのうち頭に ``_`` が付かないものは、コマンドラインから呼び出せます。
+メソッドのうち頭に ``_`` が付かないものは、コマンドラインか���呼び出せます。
 直前の例の ``hey_there`` メソッドの中では ``$this->args`` を使っています。
 これはコマンドに対して与えられた（指定順序が意味を持つ）引数が、与えられた
 順に配列として保持されています。シェルアプリケーションではスイッチや
@@ -413,7 +413,7 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 
 
 * ``ConsoleOutput::RAW`` - RAW出力、スタイルや書式設定は行われない。
-  これはXMLを出力する場合や、スタイルのデバッグを行う際に役立ちます。
+  これはXMLを出力する場合や、スタイルのデバッ���を行う際に役立ちます。
 * ``ConsoleOutput::PLAIN`` - プレーンテキストモード。既知のスタイルタグが
   出力から取り除かれます。
 * ``ConsoleOutput::COLOR`` - カラーエスケープコードを出力します。
@@ -632,7 +632,7 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
         'choices' => array('working', 'theirs', 'mine')
     ));
 
-ブール型オプションを使う
+ブール型オプションを使���
 ------------------------
 
 フラグのオプションを作りたい場合、オプションをブール型として指定できます。
@@ -1040,5 +1040,5 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
 
 .. meta::
-    :title lang=en: Console and Shells
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :title lang=ja: Console and Shells
+    :keywords lang=ja: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

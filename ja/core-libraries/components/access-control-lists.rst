@@ -764,7 +764,7 @@ CakePHP のコア Acl コンポーネントによって行われます。
         // これらの例ではいずれもエイリアス書式を使っています。
         $this->Acl->allow('戦士たち', '武器');
 
-        // しかしながら、王は全員に自由なアクセス権をもたせるのを
+        // しかしながら、���は全員に自由なアクセス権をもたせるのを
         // よしとしません。
         $this->Acl->deny('戦士たち/Legolas', '武器', 'delete');
         $this->Acl->deny('戦士たち/Gimli',   '武器', 'delete');
@@ -867,5 +867,5 @@ AclComponent を使って自分たちで作った ACO や ARO の間でチェッ
 リダイレクトしたりということが可能です。
 
 .. meta::
-    :title lang=en: Access Control Lists
-    :keywords lang=en: fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object
+    :title lang=ja: Access Control Lists
+    :keywords lang=ja: fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object

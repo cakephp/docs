@@ -210,7 +210,7 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 すべてのヘルパーのための機能を作成する
 ======================================
 
-すべてのヘルパーは特別なクラスAppHelperを(モデルがAppModelを継承し、コントローラがAppControllerを継承するのと同じように）継承します。
+すべてのヘルパーは特別なクラスAppHelperを(モデルがAppModelを継承し、コントローラがAppControllerを継承するの���同じように）継承します。
 すべてのヘルパーで利用できる機能を作成するためには、 ``/app/View/Helper/AppHelper.php`` を作成して下さい。::
 
     App::uses('Helper', 'View');
@@ -304,5 +304,5 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
     近傍検出(来年かどうか？)や、素晴らしい文字列整形(Today, 10:30 am)とタイムゾーンの変換をします。
 
 .. meta::
-    :title lang=en: Helpers
-    :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=ja: Helpers
+    :keywords lang=ja: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
