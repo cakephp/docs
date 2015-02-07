@@ -209,10 +209,10 @@ validation::
     ]);
 
     // Utilise une closure
-    $value = 'Some additional value needed inside the closure';
+    $extra = 'Some additional value needed inside the closure';
     $validator->add('title', 'custom', [
-        'rule' => function ($context) use ($value) {
-            // Custom logic that returns true/false
+        'rule' => function ($value, $context) use ($extra) {
+            // Logique personnalisée qui retourne true/false
         }
     ]);
 
@@ -253,14 +253,20 @@ ou non, une règle particulière doit être appliquée::
         }
     ]);
 
-L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
-valeur pour ``show_profile_picture`` est vide.
 
-On peut faire la même chose pour les méthodes de validation ``allowEmpty()``
-et ``notEmpty``.
-Les deux prennent une fonction appelable en dernier argument, ce qui determine
-si oui ou non la règle doit être appliquée. Par exemple on peut autoriser
-parfois à un champ à être vide::
+L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
+valeur pour ``show_profile_picture`` est vide. Vous pouvez également utiliser
+la règle de validation ``uploadedFile`` pour créer des inputs optionnelles
+d'upload de fichiers::
+
+    $validator->add('picture', 'file', [
+        'rule' => ['uploadedFile', ['optional' => true]],
+    ]);
+
+Les méthodes de validation ``allowEmpty()`` et ``notEmpty()`` prennent
+également une fonction appelable en dernier argument, ce qui determine si oui
+ou non la règle doit être appliquée. Par exemple on peut autoriser parfois à
+un champ à être vide::
 
     $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];

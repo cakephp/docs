@@ -85,7 +85,7 @@ l'utilisation de la pagination du finder en configurant l'option ``findType``::
         ];
     }
 
-Because custom finder methods can also take in options, 
+Because custom finder methods can also take in options,
 this is how you pass in options into a custom finder method within the paginate property::
 
     class ArticlesController extends AppController
@@ -134,9 +134,9 @@ les propriétés qu'un model/clé sans ``$paginate`` peut contenir.
 Une fois que la variable ``$paginate`` à été définie, nous pouvons
 utiliser la méthode :php:meth:`~Cake\\Controller\\Controller::paginate()` pour
 créer les données paginées et ajouter le ``PaginatorHelper`` s'il n'a pas déjà
-été ajouté. La méthode paginate du controller va retourner l'ensemble des résultats
-de la requête paginée, et définir les meta-données de pagination de la requête.
-Vous pouvez accéder aux meta-données de pagination avec
+été ajouté. La méthode paginate du controller va retourner l'ensemble des
+résultats de la requête paginée, et définir les meta-données de pagination de
+la requête. Vous pouvez accéder aux meta-données de pagination avec
 ``$this->request->params['paging']``. un exemple plus complet de l'utilisation
 de ``paginate()`` serait::
 
@@ -226,6 +226,21 @@ l'ajuster dans les options de pagination::
 
 Si le paramêtre de limite de la requête est plus grand que cette valeur, elle
 sera réduit à la valeur ``maxLimit``.
+
+Faire des Jointures d'Associations Supplémentaires
+==================================================
+
+Des associations supplémentaires peuvent être chargées à la table paginée en
+utilisant le paramètre ``contain``::
+
+    public function index()
+    {
+        $this->paginate = [
+            'contain' => ['Authors', 'Comments']
+        ];
+
+        $this->set('articles', $this->paginate($this->Articles));
+    }
 
 Requêtes de Page Out of Range
 =============================

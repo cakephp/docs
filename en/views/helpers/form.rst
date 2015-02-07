@@ -1268,28 +1268,31 @@ Creating Buttons and Submit Elements
 
 .. php:method:: submit(string $caption, array $options)
 
-    Creates a submit button with caption ``$caption``. If the supplied
-    ``$caption`` is a URL to an image (it contains a '.' character),
-    the submit button will be rendered as an image. The following::
+Creates a submit input with ``$caption`` as the text. If the supplied
+``$caption`` is a URL to an image, an image submit button will be generated.
+The following::
 
-        echo $this->Form->submit();
+    echo $this->Form->submit();
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <div class="submit"><input value="Submit" type="submit"></div>
+    <div class="submit"><input value="Submit" type="submit"></div>
 
-    You can also pass a relative or absolute URL to an image for the
-    caption parameter instead of caption text. ::
+You can pass a relative or absolute URL to an image for the
+caption parameter instead of caption text::
 
-        echo $this->Form->submit('ok.png');
+    echo $this->Form->submit('ok.png');
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <div class="submit"><input type="image" src="/img/ok.png"></div>
+    <div class="submit"><input type="image" src="/img/ok.png"></div>
+
+Submit inputs are useful when you only need basic text or images. If you need
+more complex button content you should use ``button()``.
 
 Creating Button Elements
 ------------------------
@@ -1325,7 +1328,11 @@ The ``button`` input type supports the ``escape`` option, which accepts
 a boolean and defaults to ``false``. It determines whether to HTML encode the
 ``$title`` of the button::
 
-    echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
+    // Will render escaped HTML.
+    echo $this->Form->button('<em>Submit Form</em>', [
+        'type' => 'submit',
+        'escape' => true
+    ]);
 
 Closing the Form
 ================

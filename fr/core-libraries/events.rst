@@ -120,9 +120,9 @@ en utilisant une méthode statique::
     // Dans tout fichier de configuration ou partie de code qui s'execute avant l'evenement
     use Cake\Event\EventManager;
 
-    EventManager::instance()->attach(
-        $aCallback,
-        'Model.Order.afterPlace'
+    EventManager::instance()->on(
+        'Model.Order.afterPlace',
+        $aCallback
     );
 
 Une chose importante que vous devriez considérer est que les evenements qui
@@ -218,7 +218,7 @@ comme ceci::
 
     // Attache l'objet UserStatistic au gestionnaire globale d'évènement de la Commande
     $statistics = new UserStatistic();
-    $this->Order->eventManager()->attach($statistics);
+    $this->Order->eventManager()->on($statistics);
 
 Comme vous pouvez le voir dans le code ci-dessus, la fonction ``attach`` va
 accepter les instances de l'interface ``EventListener``. En interne, le
@@ -236,12 +236,12 @@ anonyme simple pour le faire::
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->attach(function ($event) {
+    $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->subject()->id
         );
-    }, 'Model.Order.afterPlace');
+    });
 
 En plus des fonctions anonymes, vous pouvez utiliser tout autre type callable
 que PHP supporte::
@@ -251,7 +251,7 @@ que PHP supporte::
         'inventory' => [$this->InventoryManager, 'decrement'],
     ];
     foreach ($events as $callable) {
-        $eventManager->attach($callable, 'Model.Order.afterPlace');
+        $eventManager->on('Model.Order.afterPlace', $callable);
     }
 
 .. _event-priorities:
@@ -281,10 +281,10 @@ la fonction ``implementedEvents`` pour les listeners d'évènement::
 
     // Définir la priorité pour une callback
     $callback = [$this, 'doSomething'];
-    $this->eventManager()->attach(
-        $callback,
+    $this->eventManager()->on(
         'Model.Order.afterPlace',
-        ['priority' => 2]
+        ['priority' => 2],
+        $callback
     );
 
     // Définir la priorité pour un listener
@@ -435,31 +435,31 @@ Retirer les Callbacks et les Listeners
 
 Si pour certaines raisons, vous voulez retirer toute callback d'un gestionnaire
 d'évènement, appelez seulement la méthode
-:php:meth:`Cake\\Event\\EventManager::detach()` en utilisant des arguments
+:php:meth:`Cake\\Event\\EventManager::off()` en utilisant des arguments
 les deux premiers paramètres que vous utilisiez pour l'attacher::
 
     // Attacher une fonction
-    $this->eventManager()->attach([$this, 'doSomething'], 'My.event');
+    $this->eventManager()->on('My.event', [$this, 'doSomething']);
 
     // Détacher une fonction
-    $this->eventManager()->detach([$this, 'doSomething'], 'My.event');
+    $this->eventManager()->off([$this, 'doSomething']);
 
     // Attacher une fonction anonyme.
     $myFunction = function ($event) { ... };
-    $this->eventManager()->attach($myFunction, 'My.event');
+    $this->eventManager()->on('My.event', $myFunction);
 
     // Détacher la fonction anonyme
-    $this->eventManager()->detach($myFunction, 'My.event');
+    $this->eventManager()->off('My.event', $myFunction);
 
     // Attacher un EventListener
     $listener = new MyEventLister();
-    $this->eventManager()->attach($listener);
+    $this->eventManager()->on($listener);
 
     // Détacher une clé d'évènement unique d'un listener
-    $this->eventManager()->detach($listener, 'My.event');
+    $this->eventManager()->off('My.event', $listener);
 
     // Détacher tous les callbacks intégrés par un listener
-    $this->eventManager()->detach($listener);
+    $this->eventManager()->off($listener);
 
 Conclusion
 ==========

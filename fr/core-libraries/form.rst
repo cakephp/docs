@@ -1,5 +1,5 @@
-Forms with no Models
-####################
+Modelless Forms
+###############
 
 .. php:namespace:: Cake\Form
 

@@ -393,7 +393,8 @@ les mêmes résultats que les champs virtuels, cela donne::
 
     class ReviewsTable extends Table
     {
-        public function findAverage(Query $query, array $options = []) {
+        public function findAverage(Query $query, array $options = [])
+        {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
             return $query;
@@ -460,11 +461,12 @@ règles::
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
+    use Cake\Validation\Validator;
 
     class ReviewsTable extends Table
     {
 
-        public function validationDefault($validator)
+        public function validationDefault(Validatior $validator)
         {
             $validator->requirePresence('body')
                 ->add('body', 'length', [
@@ -516,12 +518,16 @@ articles pourrait être::
         public function buildRules(RulesChecker $rules)
         {
             $rules->add($rules->existsIn('user_id', 'Users'));
-            $rules->add(function ($article, $options) {
-                return ($article->published && empty($article->reviewer));
-            }, [
-                'errorField' => 'published',
-                'message' => 'Articles must be reviewed before publishing.'
-            ]);
+            $rules->add(
+                function ($article, $options) {
+                    return ($article->published && empty($article->reviewer));
+                },
+                'isReviewed',
+                [
+                    'errorField' => 'published',
+                    'message' => 'Articles must be reviewed before publishing.'
+                ]
+            );
             return $rules;
         }
     }

@@ -195,7 +195,8 @@ através de muitas shells. Tasks permitem que você extraia comandos em classes.
 o ``bake`` é feito quase que completamente de tasks. Você define tasks para uma shell usando
 a propriedade ``$tasks``::
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
         public $tasks = ['Template'];
     }
 

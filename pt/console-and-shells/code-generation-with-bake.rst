@@ -105,7 +105,8 @@ the following content::
     /**
      * <?= $name ?> shell
      */
-    class <?= $name ?>Shell extends Shell {
+    class <?= $name ?>Shell extends Shell
+    {
 
         public function main()
         {

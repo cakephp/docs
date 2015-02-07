@@ -90,7 +90,8 @@ attribute values or modify behavior of a helper::
 
     class AwesomeHelper extends Helper
     {
-        public function __construct(View $view, $config = []) {
+        public function __construct(View $view, $config = [])
+        {
             parent::__construct($view, $config);
             debug($config);
         }
@@ -122,7 +123,8 @@ your helper requires. For example::
             ],
         ];
 
-        public function __construct(View $view, $config = []) {
+        public function __construct(View $view, $config = [])
+        {
             parent::__construct($view, $config);
             $this->initStringTemplates();
         }

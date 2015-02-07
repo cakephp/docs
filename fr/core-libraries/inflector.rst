@@ -69,7 +69,7 @@ table names or class names::
     Inflector::classify('user_profile_settings');
 
     // user_profile_settings
-    Inflector::tabelize('UserProfileSetting');
+    Inflector::tableize('UserProfileSetting');
 
 Créer des Noms de Variable
 ==========================
@@ -89,7 +89,7 @@ Créer des Chaînes d'URL Safe
 
 Slug convertit les caractères spéciaux en version latins et convertit
 les caractères ne correspondant pas et les espaces en tirêts. La
-méthode slug s'attend à un encodage UTF-8.
+méthode slug s'attend à un encodage UTF-8::
 
     // apple-puree
     Inflector::slug('apple purée');

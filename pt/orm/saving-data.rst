@@ -762,7 +762,8 @@ class::
     use Cake\ORM\RulesChecker;
     
     // In a table class
-    public function buildRules(RulesChecker $rules) {
+    public function buildRules(RulesChecker $rules)
+    {
         // Add a rule that is applied for create and update operations
         $rules->add(function ($entity, $options) {
             // Return a boolean to indicate pass/fail
@@ -850,8 +851,10 @@ those rules into re-usable classes::
 
     use Cake\Datasource\EntityInterface;
 
-    class CustomRule {
-        public function __invoke(EntityInterface $entity, array $options) {
+    class CustomRule
+    {
+        public function __invoke(EntityInterface $entity, array $options)
+        {
             // Do work
             return false;
         }

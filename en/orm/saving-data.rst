@@ -107,6 +107,27 @@ look like::
         ],
     ];
 
+It's also possible to allow ``newEntity()`` to write into non accessible fields.
+For example, ``id`` is usually absent from the ``_accessible`` property.
+In such case, you can use the ``accessibleFields`` option. It could be useful to keep
+ids of associated entities::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags', 'Comments' => [
+                'associated' => [
+                    'Users' => [
+                        'accessibleFields' => ['id' => true]
+                    ]
+                ]
+            ]
+        ]
+    ]);
+
+The above will keep the association unchanged between Comments and Users for the concerned entity.
+
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
 
@@ -268,7 +289,7 @@ the original entities array will be removed and not present in the result::
         $articles->save($entity);
     }
 
-Similarly to using ``patchEntity``, you can use the third argument for
+Similarly to using ``patchEntity()``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
@@ -278,6 +299,23 @@ array::
         $this->request->data(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
+
+Similarly to using ``newEntity()``, you can also allow ``patchEntity()`` to write in non accessible fields
+like ``id`` which is usually not declared in ``_accessible`` property::
+
+    // In a controller.
+    $patched = $articles->patchEntities(
+        $list,
+        $this->request->data(),
+        ['associated' => [
+                'Tags', 
+                'Comments.Users' => [
+                    'accessibleFields' => ['id' => true],
+                ]
+            ]
+        ]
+    );
+
 
 .. _before-marshal:
 
@@ -289,7 +327,7 @@ use the ``Model.beforeMarshal`` event. This event lets you manipulate the
 request data just before entities are created::
 
     // In a table or behavior class
-    public function beforeMarshal(Event $event, ArrayObject $data, array $options = [])
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
         $data['username'] .= 'user';
     }
@@ -463,7 +501,11 @@ using ``newEntity()`` for passing into ``save()``. For example::
 
 The ORM uses the ``isNew()`` method on an entity to determine whether or not an
 insert or update should be performed. If the ``isNew()`` method returns ``null``
-and the entity has a primary key value, an 'exists' query will be issued.
+and the entity has a primary key value, an 'exists' query will be issued. The
+'exists' query can be suppressed by passing ``'checkExisting' => false`` in the
+``$options`` argument::
+
+    $articles->save($article, ['checkExisting' => false]);
 
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
@@ -577,13 +619,18 @@ the singular, camel cased version the association name. For
 example::
 
     // In a controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\User;
-
-    $article = new Article(['title' => 'First post']);
-    $article->user = new User(['id' => 1, 'username' => 'mark']);
-
+    $data = [
+        'title' => 'First Post',
+        'user' => [
+            'id' => 1,
+            'username' => 'mark'
+        ]
+    ];
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Users']
+    ]);
+
     $articles->save($article);
 
 Saving HasOne Associations
@@ -593,13 +640,17 @@ When saving hasOne associations, the ORM expects a single nested entity at the
 singular, camel cased version the association name. For example::
 
     // In a controller.
-    use App\Model\Entity\User;
-    use App\Model\Entity\Profile;
-
-    $user = new User(['id' => 1, 'username' => 'cakephp']);
-    $user->profile = new Profile(['twitter' => '@cakephp']);
-
+    $data = [
+        'id' => 1,
+        'username' => 'cakephp',
+        'profile' => [
+            'twitter' => '@cakephp'
+        ]
+    ];
     $users = TableRegistry::get('Users');
+    $user = $users->newEntity($data, [
+        'associated' => ['Profiles']
+    ]);
     $users->save($user);
 
 Saving HasMany Associations
@@ -609,16 +660,17 @@ When saving hasMany associations, the ORM expects an array of entities at the
 plural, camel cased version the association name. For example::
 
     // In a controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\Comment;
-
-    $article = new Article(['title' => 'First post']);
-    $article->comments = [
-        new Comment(['body' => 'Best post ever']),
-        new Comment(['body' => 'I really like this.']),
+    $data = [
+        'title' => 'First Post',
+        'comments' => [
+            ['body' => 'Best post ever'],
+            ['body' => 'I really like this.']
+        ]
     ];
-
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Comments']
+    ]);
     $articles->save($article);
 
 When saving hasMany associations, associated records will either be updated, or
@@ -639,16 +691,18 @@ When saving belongsToMany associations, the ORM expects an array of entities at 
 plural, camel cased version the association name. For example::
 
     // In a controller.
-    use App\Model\Entity\Article;
-    use App\Model\Entity\Tag;
 
-    $article = new Article(['title' => 'First post']);
-    $article->tags = [
-        new Tag(['tag' => 'CakePHP']),
-        new Tag(['tag' => 'Framework']),
+    $data = [
+        'title' => 'First Post',
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Framework']
+        ]
     ];
-
     $articles = TableRegistry::get('Articles');
+    $article = $articles->newEntity($data, [
+        'associated' => ['Tags']
+    ]);
     $articles->save($article);
 
 When converting request data into entities, the ``newEntity`` and
@@ -701,7 +755,29 @@ setting data to the ``_joinData`` property::
     $studentsTable->save($student);
 
 The ``_joinData`` property can be either an entity, or an array of data if you
-are saving entities built from request data.
+are saving entities built from request data. When saving joint table data from
+request data your POST data should look like::
+
+    $data = [
+        'first_name' => 'Sally',
+        'last_name' => 'Parker',
+        'courses' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'grade' => 80.12,
+                    'days_attended' => 30
+                ]
+            ],
+            // Other courses.
+        ]
+    ];
+    $student = $this->Students->newEntity($data, [
+        'associated' => ['Courses._joinData']
+    ]);
+
+See the :ref:`associated-form-inputs` documentation for how to build inputs with
+``FormHelper`` correctly.
 
 .. _saving-complex-types:
 
@@ -784,23 +860,24 @@ class::
     use Cake\ORM\RulesChecker;
 
     // In a table class
-    public function buildRules(RulesChecker $rules) {
+    public function buildRules(RulesChecker $rules)
+    {
         // Add a rule that is applied for create and update operations
         $rules->add(function ($entity, $options) {
             // Return a boolean to indicate pass/fail
-        });
+        }, 'ruleName');
 
         // Add a rule for create.
         $rules->addCreate(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         // Add a rule for update
         $rules->addUpdate(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         // Add a rule for the deleting.
         $rules->addDelete(function ($entity, $options) {
-        });
+        }, 'ruleName');
 
         return $rules;
     }
@@ -811,16 +888,16 @@ options. The options array will contain ``errorField``, ``message``, and
 are attached to. Because rules accept any ``callable``, you can also use
 instance functions::
 
-    $rules->addCreate([$this, 'uniqueEmail']);
+    $rules->addCreate([$this, 'uniqueEmail'], 'uniqueEmail');
 
 or callable classes::
 
-    $rules->addCreate(new IsUnique(['email']));
+    $rules->addCreate(new IsUnique(['email']), 'uniqueEmail');
 
 When adding rules you can define the field the rule is for, and the error
 message as options::
 
-    $rules->add([$this, 'isValidState'], [
+    $rules->add([$this, 'isValidState'], 'validState', [
         'errorField' => 'status',
         'message' => 'This invoice cannot be moved to that status.'
     ]);
@@ -852,6 +929,9 @@ can help provide a nicer user experience. Because of this CakePHP includes an
     // Multiple keys, useful for composite primary keys.
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
 
+The fields to check existence against in the related table must be part of the
+primary key.
+
 Using Entity Methods as Rules
 -----------------------------
 
@@ -859,7 +939,7 @@ You may want to use entity methods as domain rules::
 
     $rules->add(function ($entity, $options) {
         return $entity->isOkLooking();
-    });
+    }, 'ruleName');
 
 Creating Custom Rule objects
 ----------------------------
@@ -872,8 +952,10 @@ those rules into re-usable classes::
 
     use Cake\Datasource\EntityInterface;
 
-    class CustomRule {
-        public function __invoke(EntityInterface $entity, array $options) {
+    class CustomRule
+    {
+        public function __invoke(EntityInterface $entity, array $options)
+        {
             // Do work
             return false;
         }
@@ -883,7 +965,7 @@ those rules into re-usable classes::
     // Add the custom rule
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...));
+    $rules->add(new CustomRule(...), 'ruleName');
 
 By creating custom rule classes you can keep your code DRY and make your domain
 rules easy to test.

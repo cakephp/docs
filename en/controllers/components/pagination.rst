@@ -219,6 +219,21 @@ application, you can adjust it as part of the pagination options::
 If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
 
+Joining Additional Associations
+===============================
+
+Additional associations can be loaded to the paginated table by using the
+``contain`` parameter::
+
+    public function index()
+    {
+        $this->paginate = [
+            'contain' => ['Authors', 'Comments']
+        ];
+
+        $this->set('articles', $this->paginate($this->Articles));
+    }
+
 Out of Range Page Requests
 ==========================
 

@@ -1,5 +1,5 @@
-Console and Shells
-##################
+Console & Shells
+################
 
 .. php:namespace:: Cake\Console
 
