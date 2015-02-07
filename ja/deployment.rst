@@ -1,11 +1,11 @@
 デプロイ
-########
+######
 
 アプリケーションが完成したら、またはその前に、それをデプロイしたいと思うことでしょう。
 CakePHPアプリケーションをデプロイする際には、いくつかやっておかなければならないことがあります。
 
 セキュリティの確認
-==================
+===============
 
 もしあなたが荒野にアプリケーションを解き放とうとするなら、何か抜け穴がないかを確認しておくことを\
 お勧めします。 CSRF攻撃や、フォームの改ざんなどを防ぐために :doc:`/core-libraries/components/security-component`
@@ -16,7 +16,7 @@ XSS攻撃からデータベースを保護する素晴らしいアイデアで�
 プライベートでユニークなことを確認してください!
 
 ドキュメントルートの指定
-========================
+===================
 
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、またアプリケーションを安全に保つために重要なステップの内の一つです。
 CakePHPのアプリケーションは、アプリケーションの ``app/webroot`` にドキュメントルートを指定する必要があります。
@@ -28,7 +28,7 @@ WEBサーバー特有の情報についていは :doc:`/installation/url-rewriti
 
 
 core.phpの更新
-==============
+=============
 
 core.phpの更新、とりわけ ``debug`` 値は非常に重要です。
 debug = 0 にすることで、広くインターネットに晒されることがあってはならない多くの開発用の機能を無効にできます。
@@ -44,10 +44,14 @@ debugの無効化は以下の種々のものごとに変更を与えます:
 
 
 アプリケーションのパフォーマンスの向上
-==============================================
+===============================
 
 プラグインの画像や JavaScript、CSS ファイルなどの静的なアセットを扱う場合、ディスパッチャを通すことはかなりの非効率です。
 
 本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。 ::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+
+.. meta::
+    :title lang=en: デプロイ
+    :keywords lang=en: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

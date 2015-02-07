@@ -661,18 +661,16 @@ $componentsと$helpersと$uses
     この章は、コントローラのAPIとそのサンプルの量が少ないかもしれませんが、コントローラ変数は、最初からそれらを理解するのはとても難しいです。
     この章では、いくつかのサンプルと、またそれらサンプルで何をやっているか、などと一緒に学習を初めて行きましょう。
 
-More on controllers
+More on Controllers
 ===================
 
 .. toctree::
     :maxdepth: 1
 
-    controllers/request-response
-    controllers/scaffolding
     controllers/pages-controller
     controllers/components
 
 
 .. meta::
-    :title lang=ja: Controllers
-    :keywords lang=ja: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=en: Controllers
+    :keywords lang=en: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes

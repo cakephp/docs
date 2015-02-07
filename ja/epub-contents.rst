@@ -1,8 +1,8 @@
 コンテンツ
-##########
+########
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
     intro
     quickstart
@@ -21,6 +21,7 @@
 
     core-libraries/caching
     console-and-shells
+    bake
     development/debugging
     deployment
     core-libraries/email
@@ -28,6 +29,7 @@
     core-libraries/internationalization-and-localization
     core-libraries/logging
     controllers/components/pagination
+    core-libraries/form
     plugins
     development/rest
     security
@@ -43,12 +45,16 @@
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/string
+    core-libraries/text
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
     appendices
 
 .. todolist::
 
+.. meta::
+    :title lang=en: Contents
+    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models

@@ -6,10 +6,11 @@
 その他にも、既存のアプリケーションやコンポーネントについて、非公式のCakePHPプラグイン倉庫 `CakePackages <http://plugins.cakephp.org/>`_ や、 `Bakery <http://bakery.cakephp.org/>`_ を参考にすることもできます。
 
 .. toctree::
-    :glob:
     :maxdepth: 1
 
+    tutorials-and-examples/bookmarks/intro
+    tutorials-and-examples/bookmarks/part-two
     tutorials-and-examples/blog/blog
     tutorials-and-examples/blog/part-two
+    tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
-

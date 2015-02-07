@@ -1,5 +1,5 @@
 コンソールとシェル
-##################
+##############
 
 CakePHPはWebのフレームワークとしてだけではなく、コンソールアプリケーション
 を開発するためのコンソールフレームワークとしての機能を合わせ持っています。
@@ -13,7 +13,7 @@ CakePHPには元々たくさんのコンソールアプリケーションが備�
 あれば、仕事をより早く片付けるための、より一般的なものもあります。
 
 CakePHPのコンソール
-===================
+=================
 
 このセクションでは、コマンドラインにおけるCakePHPのご紹介をします。もし
 過去にcronジョブやコマンドライン・スクリプトから自分のCakePHPのMVCクラスに
@@ -725,7 +725,7 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
         )
     ));
 
-パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog`` 
+パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog``
 のためのキーを定義できます。配列形式ビルダーの内部にはサブコマンドは定義
 できません。argumentsとoptionsの値は
 :php:func:`ConsoleOptionParser::addArguments()` と
@@ -962,7 +962,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
    :param string $method: 表示するメッセージ
    :param integer $newlines: メッセージの後に出力する改行の数
-   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値 
+   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値
 
    ユーザへの出力を生成するためのもっとも普通のやり方です。
    レベルを指定することで、シェルの出力の度合いを制限できます。

@@ -178,3 +178,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');
+
+.. meta::
+    :title lang=ja: Installation
+    :keywords lang=ja: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate

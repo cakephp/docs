@@ -21,10 +21,10 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
     - `オリジナルソース <http://github.com/cakephp/docs>`_
 
 入門
-====
+===
 
 ブログの作成
-------------
+----------
 
 :doc:`ブログチュートリアル</tutorials-and-examples/blog/blog>` を使用した入門。
 基本的なブログの構築の過程を通して、CakePHPの基本を学びます。
@@ -39,28 +39,32 @@ CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエス�
 を学びましょう。
 
 コントローラ
-------------
+----------
 
 コントローラはリクエストを取り扱い、調和の手助けとクライアントへのレスポンスの準備をします。
 詳細は :doc:`/controllers` を見てください。
 
 ビュー
-------
+-----
 
 ビューはCakePHPのプレゼンテーション層です。
 これはモデルから取得したデータをクライアントがリクエストした出力フォーマットに変換します。
 詳細は :doc:`/views` を見てください。
 
 モデル
-------
+-----
 
 モデルはアプリケーションの心臓部分です。
 これはバリデーション、ストレージ、データの検索を取り扱います。
 詳細は :doc:`/models` を見てください。
 
 助けの求め方
-============
+==========
 
 もし何か困っていたら、 :doc:`いくつもの助けを求められる場所
 </cakephp-overview/where-to-get-help>`
 があります。
+
+.. meta::
+    :title lang=en: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
