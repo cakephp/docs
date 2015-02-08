@@ -144,11 +144,25 @@ schema, you can provide aliases for them::
     public function initialize(array $config)
     {
         $this->addBehavior('Tree', [
-            'parent' => 'ancestor_id', // Use this instead of parent_id,
+            'parent' => 'ancestor_id', // Use this instead of parent_id
             'left' => 'tree_left', // Use this instead of lft
             'right' => 'tree_right' // Use this instead of rght
         ]);
     }
+
+Node Level (Depth)
+==================
+
+Knowing the depth of tree nodes can be useful when you want to retrieve nodes
+only upto a certain level for e.g. when generating menus. You can use the
+``level`` option to specify the field that will save level of each node.
+
+    $this->addBehavior('Tree', [
+        'level' => 'level', // Defaults to null, i.e. no level saving
+    ]);
+
+If you don't want to cache the level using a db field you can use
+``TreeBehavior::getLevel()`` method to get level of a node.
 
 Scoping and Multi Trees
 =======================
