@@ -1,5 +1,5 @@
-RssHelper
-#########
+Rss
+###
 
 .. php:namespace:: Cake\View\Helper
 

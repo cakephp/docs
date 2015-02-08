@@ -1,5 +1,5 @@
-PaginatorHelper
-###############
+Paginator
+#########
 
 .. php:namespace:: Cake\View\Helper
 

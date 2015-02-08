@@ -1,5 +1,5 @@
-FlashComponent
-##############
+Flash
+#####
 
 .. php:namespace:: Cake\Controller\Component
 

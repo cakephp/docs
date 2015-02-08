@@ -1,5 +1,5 @@
-HtmlHelper
-##########
+Html
+####
 
 .. php:namespace:: Cake\View\Helper
 

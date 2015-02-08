@@ -1,5 +1,5 @@
-SessionHelper
-#############
+Session
+#######
 
 .. php:namespace:: Cake\View\Helper
 
