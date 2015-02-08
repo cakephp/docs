@@ -1,8 +1,8 @@
 Guia de Início Rápido
 #####################
 
-A melhor forma de viver experiências e aprender sobre CakePHP é sentar e construir algo.
-Para começar nós iremos construir uma aplicação simples de blog.
+A melhor forma de viver experiências e aprender sobre CakePHP é sentar e
+construir algo. Para começar nós iremos construir uma aplicação simples de blog.
 
 .. include:: /tutorials-and-examples/blog/blog.rst
 .. include:: /tutorials-and-examples/blog/part-two.rst

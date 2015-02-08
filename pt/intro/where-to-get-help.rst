@@ -18,9 +18,9 @@ O Cookbook
 Esse manual deveria ser o primeiro lugar para onde você iria afim de conseguir
 respostas. Assim como muitos outros projetos de código aberto, nós
 conseguimos novos colaboradores regularmente. Tente o seu melhor para
-responder suas questões por si só. Respostas vão vir lentamente, e provavelmente continuarão
-longas. Você pode suavizar nossa carga de suporte. Tanto o manual quanto a API
-possuem um componente online.
+responder suas questões por si só. Respostas vão vir lentamente, e provavelmente
+continuarão longas. Você pode suavizar nossa carga de suporte. Tanto o manual
+quanto a API possuem um componente online.
 
 A Bakery
 ========
@@ -71,7 +71,8 @@ Se você está travado, nos faça uma visita no canal de IRC do CakePHP.
 Alguém do `time de desenvolvimento <https://github.com/cakephp?tab=members>`_
 normalmente está conectado, especiamente nos horários diurnos da América do Sul
 e América do Norte. Nós apreciaríamos ouví-lo se você precisar de ajuda,
-se quiser encontrar usuários da sua área ou ainda se quiser doar seu novo carro esporte.
+se quiser encontrar usuários da sua área ou ainda se quiser doar seu novo carro
+esporte.
 
 .. _cakephp-official-communities:
 
@@ -80,19 +81,19 @@ Grupo oficial de discussão do CakePHP
 `Grupo de discussão do Google <http://groups.google.com/group/cake-php>`_
 
 O CakePHP também possui seu grupo de discussão oficial no Google Grupos.
-Existem milhares de pessoas discutindo projetos CakePHP, ajudando uns aos outros,
-resolvendo problemas, construindo projetos e compartilhando idéias.
-Pode ser uma grande fonte para encontrar respostas arquivadas, perguntas frequentes e
-conseguir respostas para problemas imediatos. Junte-se a outros usuários do CakePHP e
-comece a conversar.
+Existem milhares de pessoas discutindo projetos CakePHP, ajudando uns aos
+outros, resolvendo problemas, construindo projetos e compartilhando idéias.
+Pode ser uma grande fonte para encontrar respostas arquivadas, perguntas
+frequentes e conseguir respostas para problemas imediatos. Junte-se a outros
+usuários do CakePHP e comece a conversar.
 
 Stackoverflow
 =============
 
 `http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Marque suas questões com a tag ``cakephp`` e especifique a versão que você está utilizando
-para permitir que usuários do stackoverflow achem suas questões.
+Marque suas questões com a tag ``cakephp`` e especifique a versão que você está
+utilizando para permitir que usuários do stackoverflow achem suas questões.
 
 Onde conseguir ajuda em sua língua
 ==================================

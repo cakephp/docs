@@ -3,10 +3,11 @@ Convenções do CakePHP
 
 Nós somos grandes fãs de convenção sobre configuração. Apesar de levar um
 pouco de tempo para aprender as convenções do CakePHP, você economiza tempo a
-longo prazo. Ao seguir as convenções, você ganha funcionalidades instantaneamente e
-liberta-se do pesadelo de manutenção e rastreamento de arquivos de configuração.
-Convenções também prezam por uma experiência de desenvolvimento uniforme,
-permitindo que outros desenvolvedores ajudem mais facilmente.
+longo prazo. Ao seguir as convenções, você ganha funcionalidades
+instantaneamente e liberta-se do pesadelo de manutenção e rastreamento de
+arquivos de configuração. Convenções também prezam por uma experiência de
+desenvolvimento uniforme, permitindo que outros desenvolvedores ajudem mais
+facilmente.
 
 Convenções para Controllers
 ===========================
@@ -17,9 +18,9 @@ Os nomes das classes de Controllers são pluralizados, CamelCased, e terminam em
 controllers.
 
 Métodos públicos nos Controllers são frequentemente referenciados como 'actions'
-acessíveis através de um navegador web. Por exemplo, o ``/articles/view`` mapeia para
-o método ``view()`` do ``ArticlesController`` sem nenhum esforço. Métodos privados ou
-protegidos não podem ser acessados pelo roteamento.
+acessíveis através de um navegador web. Por exemplo, o ``/articles/view`` mapeia
+para o método ``view()`` do ``ArticlesController`` sem nenhum esforço. Métodos
+privados ou protegidos não podem ser acessados pelo roteamento.
 
 Considerações de URL para nomes de Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,7 +116,8 @@ você ganha funcionalidades sem luta e sem amarras de configuração.
 Aqui está um exemplo final que enlaça as convenções juntas:
 
 -  Table: "people"
--  Classe Table: "PeopleTable", encontrada em ``src/Model/Table/PeopleTable.php``
+-  Classe Table: "PeopleTable", encontrada em
+   ``src/Model/Table/PeopleTable.php``
 -  Classe Entity: "Person", encontrada em ``src/Model/Entity/Person.php``
 -  Classe Controller: "PeopleController", encontrada em
    ``src/Controller/PeopleController.php``

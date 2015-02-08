@@ -172,5 +172,5 @@ de sua aplicação para incluir o painel::
         array_merge(Configure::read('DebugKit.panels'), ['MyCustomPanel'])
     );
 
-O código acima deve carregar todos os painéis padrão tanto como os outros painéis
-customizados do ``MyPlugin``.
+O código acima deve carregar todos os painéis padrão tanto como os outros
+painéis customizados do ``MyPlugin``.

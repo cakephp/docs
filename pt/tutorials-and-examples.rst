@@ -6,8 +6,8 @@ ver como todas as peças se encaixam.
 
 Como alternativa, você pode preferir visitar o repositório não oficial de
 plugins para o CakePHP `CakePackages <http://plugins.cakephp.org/>`_ e a
-`Bakery (Padaria) <http://bakery.cakephp.org/>`_ para conhecer aplicações e componentes
-existentes.
+`Bakery (Padaria) <http://bakery.cakephp.org/>`_ para conhecer aplicações e
+componentes existentes.
 
 .. toctree::
     :glob:
