@@ -593,7 +593,7 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
     *Views* têm métodos ``set()`` que são análogos aos ``set()``
     encontrados nos objetos *controllers*. Usando set() em seu arquivo *view*
     serão adicionados variáveis para *layouts* e *elements* que serão
-    renderizados posteriormente. Veja :ref:`controller-methods` para maiores
+    renderizados posteriormente. Veja controller-methods para maiores
     informações de como usar o set().
 
     No seu arquivo de *view*, você pode::

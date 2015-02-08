@@ -391,7 +391,7 @@ code, interact with the same API when manipulating associations::
 As you can see from the example above each of the association types uses
 a method to create the association. One other difference is that
 ``hasAndBelongsToMany`` has been renamed to ``belongsToMany``. To find out more
-about creating associations in 3.0 see the section on :ref:`table-associations`.
+about creating associations in 3.0 see the section on :doc:`/orm/associations`.
 
 Another welcome improvement to CakePHP is the ability to create your own
 association classes. If you have association types that are not covered by the
