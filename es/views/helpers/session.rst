@@ -1,48 +1,18 @@
 SessionHelper
 #############
 
-.. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
-
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: SessionHelper(View $view, array $config = [])
 
-As a natural counterpart to the Session Component, the Session
-Helper replicates most of the component's functionality and makes it
-available in your view.
+.. note::
+    The documentation is not currently supported in es language for this page.
 
-The major difference between the Session Helper and the Session
-Component is that the helper does *not* have the ability to write
-to the session.
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_.
 
-As with the Session Component, data is read by using
-:term:`dot notation` array structures::
-
-    ['User' => [
-        'username' => 'super@example.com'
-    ]];
-
-Given the previous array structure, the node would be accessed by
-``User.username``, with the dot indicating the nested array. This
-notation is used for all Session helper methods wherever a ``$key`` is
-used.
-
-.. php:method:: read(string $key)
-
-    :rtype: mixed
-
-    Read from the Session. Returns a string or array depending on the
-    contents of the session.
-
-.. php:method:: check(string $key)
-
-    :rtype: boolean
-
-    Check to see whether a key is in the Session. Returns a boolean representing the
-    key's existence.
+    You can referer to the english
+    version to have information about this page's topic.
 
 .. meta::
     :title lang=es: SessionHelper
