@@ -95,7 +95,7 @@ So, for example, when baking a shell like so::
 
     bin/cake bake shell Foo
 
-The template used (``vendor/cakephp/cakephp/src/Template/Bake/Shell/shell.ctp``)
+The template used (``vendor/cakephp/bake/src/Template/Bake/Shell/shell.ctp``)
 looks like this::
 
     <?php
@@ -179,7 +179,7 @@ templates that bake uses. The best way to do this is:
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
 #. Create a new directory in ``plugin/[name]/src/Template/Bake``.
 #. Copy any templates you want to override from
-   ``vendor/cakephp/cakephp/src/Template/Bake`` to matching directories in your
+   ``vendor/cakephp/bake/src/Template/Bake`` to matching directories in your
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
@@ -189,7 +189,7 @@ Creating New Bake Command Options
 
 It's possible to add new bake command options, or override the ones provided by
 CakePHP by creating tasks in your application or plugins. By extending
-``Cake\Shell\Task\BakeTask``, bake will find your new task and include it as
+``Bake\Shell\Task\BakeTask``, bake will find your new task and include it as
 part of bake.
 
 As an example, we'll make a task that creates an arbitrary foo class. First,
@@ -202,7 +202,7 @@ FooTask.php file should look like::
     <?php
     namespace App\Shell\Task;
 
-    use Cake\Shell\Task\SimpleBakeTask;
+    use Bake\Shell\Task\SimpleBakeTask;
 
     class FooTask extends SimpleBakeTask
     {
