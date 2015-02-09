@@ -1,5 +1,5 @@
-TreeBehavior
-############
+Tree
+####
 
 .. php:namespace:: Cake\ORM\Behavior
 

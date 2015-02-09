@@ -1,5 +1,5 @@
-FormHelper
-##########
+Form
+####
 
 .. php:namespace:: Cake\View\Helper
 

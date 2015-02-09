@@ -1,5 +1,5 @@
-NumberHelper
-############
+Number
+######
 
 .. php:namespace:: Cake\View\Helper
 

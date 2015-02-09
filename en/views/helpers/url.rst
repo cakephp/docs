@@ -1,5 +1,5 @@
-UrlHelper
-##########
+Url
+###
 
 .. php:namespace:: Cake\View\UrlHelper
 
