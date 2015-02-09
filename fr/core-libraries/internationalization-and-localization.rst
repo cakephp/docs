@@ -165,7 +165,7 @@ indépendants::
 
     echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
 
-Toutes les fonctions de traduction intègrent le replacement de placeholder::
+Toutes les fonctions de traduction intègrent le remplacement de placeholder::
 
     __d('validation', 'The field {0} cannot be left empty', 'Name');
 
@@ -204,7 +204,7 @@ Voici la liste des balises spécifiques que vous pouvez mettre après le mot
 
 * ``integer``: Supprime la partie décimale
 * ``decimal``: Formate le nombre en décimal
-* ``currency``: Ajoute le symbole de la devise locale et arrondi les décimales
+* ``currency``: Ajoute le symbole de la devise locale et arrondit les décimales
 * ``percent``: Formate le nombre en pourcentage
 
 Les dates peuvent également être formatées en utilisant le mot ``date`` après
@@ -237,17 +237,17 @@ pluriels dans vos messages.
 Utiliser la Sélection Plurielle ICU
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La première tire parti du format de message ``ICU`` qui vient par défaut dans
-les fonctions de traductions. Dans les fichiers de traduction vous pourriez
-avoir les chaines suivantes
+La première tire parti du format de message ``ICU`` qui est fourni par défaut
+dans les fonctions de traductions. Dans les fichiers de traduction vous
+pourriez avoir les chaines suivantes
 
 .. code-block:: pot
 
      msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
      msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
-Et dans votre application utilisez le code suivant pour l'une des traductions
-pour une telle chaine::
+Et dans votre application utilisez le code suivant pour afficher l'une des
+traductions pour une telle chaine::
 
     __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
 
@@ -317,7 +317,7 @@ pour chaque forme plurielle.
 .. code-block:: pot
 
     msgid "One file removed" # Un identificateur de message pour le singulier
-    msgid_plural "{0} files removed" # Una autre pour le pluriel
+    msgid_plural "{0} files removed" # Une autre pour le pluriel
     msgstr[0] "Un fichero eliminado" # Traduction au singulier
     msgstr[1] "{0} ficheros eliminados" # Traduction au pluriel
 
@@ -382,11 +382,11 @@ place vous pouvez utiliser les fonctions de traduction comme d'habitude::
     I18n::locale('fr_FR');
     __d('animals', 'Dog'); // Retourne "Chien"
 
-Comme vous pouvez e voir, les objets ``Package`` prennent les messages de
+Comme vous pouvez le voir, les objets ``Package`` prennent les messages de
 traduction sous forme de tableau. Vous pouvez passer la méthode
 ``setMessages()`` de la manière qui vous plait: avec du code en ligne, en
 incluant un autre fichier, en appelant une autre fonction, etc. CakePHP fournit
-quelques fonctions de loader que vous pouvezr réutiliser si vous devez juste
+quelques fonctions de loader que vous pouvez réutiliser si vous devez juste
 changer l'endroit où sont chargés les messages.
 Par exemple, vous pouvez toujours utiliser les fichiers ``.po`` mais les charger
 depuis un autre endroit::
@@ -405,7 +405,7 @@ Créer des Parsers de Messages
 -----------------------------
 
 Il est possible de continuer à utiliser les mêmes conventions que CakePHP
-utilise, mais utiliser un autre parser de messages que ``PoFileParser``.
+utilise mais d'utiliser un autre parser de messages que ``PoFileParser``.
 Par exemple, si vous vouliez charger les messages de traduction en utilisant
 ``YAML``, vous aurez d'abord besoin de créer la classe du parser::
 
@@ -445,7 +445,7 @@ Créer des Traducteurs Génériques
 
 Configurer des traducteurs en appelant ``I18n::translator()`` pour chaque
 domaine et locale que vous devez supporter peut être fastidieux, spécialement
-si vous devez supporter pus que quelques locales. Pour éviter ce problème,
+si vous devez supporter plus que quelques locales. Pour éviter ce problème,
 CakePHP vous permet de définir des loaders de traduction génériques pour chaque
 domaine.
 
@@ -485,7 +485,7 @@ d'enregistrement de traductions pour la même clé dans différents contextes::
         ]
     ]
 
-De même vous pouvez exprimer des pluriel de style Gettext en utilisant le tableau
+De même vous pouvez exprimer des pluriels de style Gettext en utilisant le tableau
 de messages avec une clé de tableau imbriqué par forme plurielle::
 
     [
@@ -499,10 +499,10 @@ de messages avec une clé de tableau imbriqué par forme plurielle::
 Utiliser des Formateurs Différents
 ----------------------------------
 
-Dans les exemples précédent nous avons vu que les Packages sont construits en
+Dans les exemples précédents nous avons vu que les Packages sont construits en
 utilisant ``default`` en premier argument, et il était indiqué avec un
 commentaire qu'il correspondait au formateur à utiliser.
-Les formateurs sont des classes responsables s'interpoler les variables dans
+Les formateurs sont des classes responsables d'interpoler les variables dans
 les messages de traduction et sélectionner la forme plurielle correcte.
 
 Si vous avez à faire une application datée, ou que vous n'avez pas besoin de la
@@ -518,7 +518,7 @@ interpoler les variables::
 
 Il est possible de définir le formateur par défaut pour tous les traducteurs
 créés par CakePHP avant qu'ils soient utilisés pour la première fois. Cela
-n'inclue pas les traducteurs créés manuellement en utilisant les méthodes
+n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
 ``translator()`` et ``config()``::
 
     I18n::defaultFormatter('sprintf');
