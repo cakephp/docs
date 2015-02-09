@@ -1,13 +1,16 @@
 Bake Console
 ############
 
-CakePHP's bake console is another effort to get you up and running in CakePHP
-– fast. The bake console can create any of CakePHP's basic ingredients: models,
-behaviors, views, helpers, components, test cases, fixtures and plugins. And we
-aren't just talking skeleton classes: Bake can create a fully functional
-application in just a few minutes. In fact, Bake is a natural step to take once
-an application has been scaffolded.  The following sections cover bake more in
-detail:
+.. note::
+    The documentation is not currently supported in Japanese language for this
+    page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
+
+    You can referer to the english version in the select top menu to have
+    information about this page's topic.
 
 .. toctree::
     :maxdepth: 1

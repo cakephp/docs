@@ -6,8 +6,6 @@ Security
 `security library <http://api.cakephp.org/2.3/class-Security.html>`_ は、\
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
-
-
 Security API
 ============
 

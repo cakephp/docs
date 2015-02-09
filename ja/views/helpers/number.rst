@@ -5,19 +5,16 @@ NumberHelper
 
 .. php:class:: NumberHelper(View $view, array $config = [])
 
-The NumberHelper contains convenient methods that enable display
-numbers in common formats in your views. These methods include ways
-to format currency, percentages, data sizes, format numbers to
-specific precisions and also to give you more flexibility with
-formatting numbers.
+.. note::
+    The documentation is not currently supported in Japanese language for this
+    page.
 
-.. include:: /core-libraries/number.rst
-    :start-after: start-cakenumber
-    :end-before: end-cakenumber
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
 
-.. warning::
-
-    All symbols are UTF-8.
+    You can referer to the english version in the select top menu to have
+    information about this page's topic.
 
 .. meta::
     :title lang=ja: NumberHelper
