@@ -81,7 +81,7 @@ estructura::
 
 Quizás sea buen momento para aprender algo sobre cómo funciona esta estructura
 de directorios: echa un vistazo a la sección
-:doc:`/getting-started/cakephp-folder-structure`.
+:doc:`/intro/cakephp-folder-structure`.
 
 Permisos de directorio en tmp
 =============================
@@ -133,19 +133,20 @@ tabla, ejecuta el siguiente código SQL en ella::
 La elección de los nombres para el nombre de la tabla y de algunas columnas no
 se ha hecho al azar. Si sigues las convenciones para nombres en la Base de
 Datos, y las demás convenciones en tus clases (ver más sobre convenciones aquí:
-:doc:`/getting-started/cakephp-conventions`), aprovecharás la potencia del
+:doc:`/intro/conventions`), aprovecharás la potencia del
 framework y ahorrarás mucho trabajo de configuración. CakePHP es suficientemente
 flexible como para acomodarse hasta en el peor esquema de base de datos, pero
 utilizando las convenciones ahorrarás tiempo.
 
-Echa un vistazo a :doc:`las convencionnes </getting-started/cakephp-conventions>`
+Echa un vistazo a :doc:`las convencionnes </intro/conventions>`
 para más información, pero basta decir que nombrando nuestra tabla 'articles'
 automáticamente lo vincula a nuestro modelo Articles y que campos
 llamados `modified` y `created` serán gestionados automáticamente por CakePHP.
 
-Al llamar 'articles' a nuestra tabla de artículos, estamos diciendo a CakePHP que
-vincule esta tabla por defecto al Modelo 'Articles', e incluiya los campos 'modified'
-y 'created' con ese nombre, los cuáles serán automáticamente administrados por CakePHP.
+Al llamar 'articles' a nuestra tabla de artículos, estamos diciendo a CakePHP
+que vincule esta tabla por defecto al Modelo 'Articles', e incluiya los campos
+'modified' y 'created' con ese nombre, los cuáles serán automáticamente
+administrados por CakePHP.
 
 Configurando la Base de Datos
 =============================
@@ -218,11 +219,6 @@ probablemente mod\_rewrite no está funcionando en tu sistema. Por favor,
 consulta la sección para tu servidor entre las siguientes acerca de re-escritura
 de URLs para poder poner en marcha la aplicación:
 
-.. toctree::
-    :maxdepth: 1
-
-    /installation/url-rewriting
-
 #. Comprueba que existen los ficheros .htaccess en el directorio en el que está
    instalada tu aplicación web. A veces al descomprimir el archivo o al copiarlo
    desde otra ubicación, estos ficheros no se copian correctamente. Si no están
@@ -259,7 +255,7 @@ de www.example.com/nombredelcontrolador/nombredelaaccion/parametro.
 
 Si estás instalando CakePHP en otro servidor diferente a Apache, encontrarás
 instrucciones para que funcione la reescritura de URLs en la sección
-:doc:`/installation/url-rewriting`
+url-rewriting
 
 Ahora continúa hacia :doc:`/tutorials-and-examples/blog/part-two` para empezar
 a construir tu primera aplicación en CakePHP.

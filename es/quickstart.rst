@@ -1,8 +1,14 @@
 Quick Start Guide
 *****************
 
-The best way to experience and learn CakePHP is to sit down and build something.
-To start off we'll build a simple bookmarking application.
+.. note::
+    The documentation is not currently supported in es language for this page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_.
+
+    You can referer to the english
+    version to have information about this page's topic.
 
 .. include:: /tutorials-and-examples/bookmarks/intro.rst
 .. include:: /tutorials-and-examples/bookmarks/part-two.rst

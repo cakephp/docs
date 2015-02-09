@@ -2,11 +2,13 @@ ES - Deployment
 ###############
 
 .. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
+    The documentation is not currently supported in es language for this page.
 
-Steps to deploy on a Hosting Server
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_.
+
+    You can referer to the english
+    version to have information about this page's topic.
 
 .. meta::
     :title lang=es: Deployment

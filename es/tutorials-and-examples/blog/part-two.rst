@@ -1,6 +1,16 @@
 Tutorial de desarrollo del Blog - Añadiendo una capa
 ####################################################
 
+.. note::
+    The documentation is currently partially supported in es language for this
+    page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_.
+
+    You can referer to the english
+    version to have information about this page's topic.
+
 Crear un modelo Artículo (``Article``)
 ======================================
 
@@ -643,7 +653,7 @@ real. Empieza tu nuevo proyecto y lee el resto del :doc:`Cookbook </index>` así
 como la `API <http://api.cakephp.org>`_.
 
 Si necesitas ayuda, hay muchos modos de encontrar la ayuda que buscas - por
-favor, míralo en la página :doc:`/cakephp-overview/where-to-get-help`.
+favor, míralo en la página :doc:`/intro/where-to-get-help`.
 ¡Bienvenido a CakePHP!
 
 Lectura sugerida para continuar desde aquí
@@ -654,5 +664,5 @@ aprender después:
 
 1. :ref:`view-layouts`: Personaliza la plantilla *layout* de tu aplicación
 2. :ref:`view-elements` Incluír vistas y reutilizar trozos de código
-3. :doc:`/console-and-shells/code-generation-with-bake` Generación básica de CRUDs
+3. :doc:`/bake/usage`: Generación básica de CRUDs
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticación y permisos
