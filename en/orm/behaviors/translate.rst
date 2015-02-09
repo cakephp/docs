@@ -127,7 +127,6 @@ repository, you can specify it in the behavior's configuration. This is common
 when you have multiple tables to translate and you want a cleaner separation
 of the data that is stored for each different table::
 
-
     class Articles extends Table
     {
 
@@ -217,6 +216,26 @@ set of records::
     $article = $results->first();
     $spanishTranslation = $article->translation('spa');
     $englishTranslation = $article->translation('eng');
+
+Adding Additional Conditions for Translations
+---------------------------------------------
+
+You may need additional conditions for loading translated records. For example,
+you may only want to load non-empty translations::
+
+    class Articles extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Translate', [
+                'fields' => ['title', 'body'],
+                'conditions' => ['content !=' => '']
+            ]);
+        }
+    }
+
+The above would only load translated data that had content.
 
 Retrieving All Translations For Associations
 --------------------------------------------
