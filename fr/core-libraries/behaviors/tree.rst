@@ -99,31 +99,29 @@ catégories, en visitant /categories. Vous devriez voir quelque chose comme :
 
 -  My Categories
 
-   -  Fun
+    -  Fun
 
-      -  Sport
+        -  Sport
 
-         -  Surfing
-         -  Extreme knitting
+            -  Surfing
+            -  Extreme knitting
 
-      -  Friends
+        -  Friends
 
-         -  Gerald
-         -  Gwendolyn
+            -  Gerald
+            -  Gwendolyn
 
+    -  Work
 
-   -  Work
+        -  Reports
 
-      -  Reports
+            -  Annual
+            -  Status
 
-         -  Annual
-         -  Status
+        -  Trips
 
-      -  Trips
-
-         -  National
-         -  International
-
+            -  National
+            -  International
 
 Ajouter des données
 -------------------
@@ -151,38 +149,34 @@ Le behavior Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
 
 Exécuter les extraits de code ci-dessus devrait modifier l'arbre comme suit:
 
+- My Categories
 
--  My Categories
+    - Fun
 
-   -  Fun
+        - Sport
 
-      -  Sport
+            - Surfing
+            - Extreme knitting
+            - Skating **New**
 
-         -  Surfing
-         -  Extreme knitting
-         -  Skating **New**
+        - Friends
 
-      -  Friends
+            - Gerald
+            - Gwendolyn
 
-         -  Gerald
-         -  Gwendolyn
+    - Work
 
+        - Reports
 
-   -  Work
+            - Annual
+            - Status
 
-      -  Reports
+        - Trips
 
-         -  Annual
-         -  Status
+            - National
+            - International
 
-      -  Trips
-
-         -  National
-         -  International
-
-
-
--  Other People's Categories **New**
+- Other People's Categories **New**
 
 Modification des données
 ------------------------
@@ -201,37 +195,34 @@ même si l\'id du parent (parent\_id) est inclue dans les données passées
 à sauvegarder si les données ne changent pas, pas plus que la structure de
 données. Donc l\'arbre de données devrait maintenant ressembler à:
 
--  My Categories
+- My Categories
 
--  Fun
+    - Fun
 
- -  Sport
+        - Sport
 
-    -  Surfing
-    -  Extreme fishing **Updated**
-    -  Skating
+            - Surfing
+            - Extreme fishing **Updated**
+            - Skating
 
- -  Friends
+        - Friends
 
-    -  Gerald
-    -  Gwendolyn
+            - Gerald
+            - Gwendolyn
 
+    - Work
 
--  Work
+        - Reports
 
- -  Reports
+            - Annual
+            - Status
 
-    -  Annual
-    -  Status
+        - Trips
 
- -  Trips
+            - National
+            - International
 
-    -  National
-    -  International
-
-
-
--  Other People's Categories
+- Other People's Categories
 
 Déplacer les données autour de votre arbre est aussi une affaire simple.
 Supposons que Extreme fishing n'appartienne pas à Sport, mais devrait se
@@ -244,40 +235,35 @@ trouver plutôt sous "D'autres catégories de gens". Avec le code suivant ::
 
 Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
 
+- My Categories
 
--  My Categories
+    - Fun
 
- -  Fun
+        - Sport
 
-    -  Sport
+            - Surfing
+            - Skating
 
-       -  Surfing
-       -  Skating
+        - Friends
 
-    -  Friends
+            - Gerald
+            - Gwendolyn
 
-       -  Gerald
-       -  Gwendolyn
+    - Work
 
+        - Reports
 
- -  Work
+            - Annual
+            - Status
 
-    -  Reports
+        - Trips
 
-       -  Annual
-       -  Status
+            - National
+            - International
 
-    -  Trips
+- Other People's Categories
 
-       -  National
-       -  International
-
-
-
--  Other People's Categories
-
- -  Extreme fishing **déplacé**
-
+    -  Extreme fishing **Moved**
 
 Suppression des données
 -----------------------
@@ -294,34 +280,30 @@ n'importe quel model. Par exemple, avec le code suivant ::
 
 L'arbre des Catégories serait modifié comme suit:
 
--  My Categories
+- My Categories
 
- -  Fun
+    - Fun
 
-    -  Sport
+        - Sport
 
-       -  Surfing
-       -  Skating
+            - Surfing
+            - Skating
 
-    -  Friends
+        - Friends
 
-       -  Gerald
-       -  Gwendolyn
+            - Gerald
+            - Gwendolyn
 
+    - Work
 
- -  Work
+        - Trips
 
-    -  Trips
+            - National
+            - International
 
-       -  National
-       -  International
+- Other People's Categories
 
-
-
--  Other People's Categories
-
- -  Extreme fishing
-
+    - Extreme fishing
 
 Interroger et utiliser vos données
 ----------------------------------
@@ -438,14 +420,12 @@ Par exemple le path (chemin) de la catégorie "International" est:
 
     -  My Categories
 
-    -  ...
-    -  Work
+        - ...
+        - Work
+        - Trips
 
-        -  Trips
-
-            -  ...
-            -  International
-
+            - ...
+            - International
 
 En utilisant l\'id de "international", getPath retournera chacun des
 parents rencontrés (depuis le haut)::
@@ -536,18 +516,17 @@ Il offre plus de contrôle que: ref: `model-delete` qui, pour un model
 en utilisant le behavior tree supprimera le noeud spécifié et tous
 ses enfants.
 
-Prenons l\'arbre suivant au début::
+Prenons l'arbre suivant au début::
 
-    -  My Categories
+-  My Categories
 
-       -  Fun
+    -  Fun
 
-          -  Sport
+        -  Sport
 
-             -  Surfing
-             -  Extreme knitting
-             -  Skating
-
+            -  Surfing
+            -  Extreme knitting
+            -  Skating
 
 En executant le code suivant avec l\'id de 'Sport'::
 
@@ -555,7 +534,7 @@ En executant le code suivant avec l\'id de 'Sport'::
 
 Le noeud Sport sera retiré du haut du noeud:
 
-    -  My Categories
+-  My Categories
 
     -  Fun
 
@@ -563,7 +542,7 @@ Le noeud Sport sera retiré du haut du noeud:
         -  Extreme knitting
         -  Skating
 
-    -  Sport **Déplacé**
+-  Sport **Moved**
 
 Cela démontre le behavior par défaut du ``removeFromTree`` de
 déplacement d'un noeud pour ne plus avoir de parent, et de re-parenter tous
@@ -573,16 +552,15 @@ Si toutefois l'extrait de code suivant était utilisé avec l\'id  'Sport'::
 
     $this->Node->removeFromTree($id, true);
 
-L'arbre deviendrait::
+L'arbre deviendrait
 
-    -  My Categories
+-  My Categories
 
-        -  Fun
+    -  Fun
 
-            -  Surfing
-            -  Extreme knitting
-            -  Skating
-
+        -  Surfing
+        -  Extreme knitting
+        -  Skating
 
 Ceci démontre l'utilisation alternative de ``removeFromTree``, les enfants
 ont été reparentés et 'Sport' a été effacé.
