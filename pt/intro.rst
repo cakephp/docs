@@ -123,8 +123,8 @@ renderizá-la como os dados definidos com ``set()``.
 Ciclo de Requisições do CakePHP
 ===============================
 
-Agora que você é familiar com as diferentes camadas no CakePHP, vamos revisar como
-um cíclo de requisição funciona no CakePHP:
+Agora que você é familiar com as diferentes camadas no CakePHP, vamos revisar
+como um cíclo de requisição funciona no CakePHP:
 
 .. figure:: /_static/img/typical-cake-request.png
    :align: center

@@ -299,9 +299,9 @@ A criação desse, permite a você substituir
 Imagens de Plugin, CSS e Javascript
 -----------------------------------
 
-Imagens, css e javascript de um plugin (mas não arquivos PHP), podem ser servidos por
-meio do diretório de plugin 'webroot', assim como imagens, css e javascript da aplicação
-principal::
+Imagens, css e javascript de um plugin (mas não arquivos PHP), podem ser
+servidos por meio do diretório de plugin 'webroot', assim como imagens, css e
+javascript da aplicação principal::
 
     app/Plugin/ContactManager/webroot/
                                         css/

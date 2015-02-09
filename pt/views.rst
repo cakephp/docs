@@ -12,7 +12,8 @@ da Camada *View*.
 O CakePHP traz incluso várias classes do tipo *View* para lidar com os
 cenários mais comuns de renderização:
 
-- Para criar *webservices* em XML ou JSON, você pode usar o :doc:`views/json-and-xml-views`
+- Para criar *webservices* em XML ou JSON, você pode usar o
+  :doc:`views/json-and-xml-views`
 - To serve protected files, or dynamically generated files, you can use
   :ref:`cake-response-file`.
 - Para criar múltiplos temas para as visões, você pode usar :doc:`views/themes`
@@ -66,12 +67,13 @@ Estendendo Views
 
 .. versionadded:: 2.1
 
-A extensão de uma *View* permite que você inclua uma *view* dentro de outra. Combinando
-isto com :ref:`view blocks <view-blocks>` você tem uma maneira poderosa para
-deixar suas *views*  :term:`DRY` (enxutas). Por exemplo, sua aplicação tem uma
-barra lateral (*sidebar*) que precisa mudar a depender de quando uma *view* específica
-é renderizada. Estendendo um mesmo arquivo de *view*, você pode evitar repetições
-de marcações em comum e apenas definir as que mudam:
+A extensão de uma *View* permite que você inclua uma *view* dentro de outra.
+Combinando isto com :ref:`view blocks <view-blocks>` você tem uma maneira
+poderosa para deixar suas *views*  :term:`DRY` (enxutas). Por exemplo, sua
+aplicação tem uma barra lateral (*sidebar*) que precisa mudar a depender de
+quando uma *view* específica é renderizada. Estendendo um mesmo arquivo de
+*view*, você pode evitar repetições de marcações em comum e apenas definir as
+que mudam:
 
 .. code-block:: php
 
@@ -135,8 +137,9 @@ o conteúdo da *view* anterior como o bloco ``content``.
 
 .. note::
 
-    Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
-    CakePHP usa este nome em *views* estendidas para conteúdos não-capturados.
+    Você deve evitar o uso de ``content`` como o nome de um bloco em sua
+    aplicação. CakePHP usa este nome em *views* estendidas para conteúdos
+    não-capturados.
 
 .. _view-blocks:
 
@@ -145,14 +148,14 @@ Usando Blocos de Views (Visões)
 
 .. versionadded:: 2.1
 
-Blocos de *views* substituem ``$scripts_for_layout`` e provêm uma API flexível que
-permite criar *slots* ou blocos em suas *views*/*layouts* que podem ser definidas
-em qualquer lugar. Por exemplo, blocos são ideais para implementar recursos como
-barras laterais ou regiões para carregar seções na parte de baixo ou no topo
-do *layout*.
-Blocos podem ser definidos de duas formas. Seja capturando um bloco ou por atribuição
-direta. Os métodos ``start()``, ``append()`` e ``end()`` permitem trabalhar com
-captura de blocos::
+Blocos de *views* substituem ``$scripts_for_layout`` e provêm uma API flexível
+que permite criar *slots* ou blocos em suas *views*/*layouts* que podem ser
+definidas em qualquer lugar. Por exemplo, blocos são ideais para implementar
+recursos como barras laterais ou regiões para carregar seções na parte de baixo
+ou no topo do *layout*.
+Blocos podem ser definidos de duas formas. Seja capturando um bloco ou por
+atribuição direta. Os métodos ``start()``, ``append()`` e ``end()`` permitem
+trabalhar com captura de blocos::
 
     // cria um bloco lateral.
     $this->start('sidebar');
@@ -166,8 +169,9 @@ captura de blocos::
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-Também é possível concatenar blocos utilizando o método ``start()`` múltiplas vezes.
-O método ``assign()`` pode ser usado para limpar ou sobrescrever o bloco::
+Também é possível concatenar blocos utilizando o método ``start()`` múltiplas
+vezes. O método ``assign()`` pode ser usado para limpar ou sobrescrever o
+bloco::
 
     // Limpa o conteúdo anterior da barra lateral.
     $this->assign('sidebar', '');
@@ -175,8 +179,9 @@ O método ``assign()`` pode ser usado para limpar ou sobrescrever o bloco::
 
 .. note::
 
-    Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
-    CakePHP usa este nome em *views* estendidas para conteúdos não-capturados .
+    Você deve evitar o uso de ``content`` como o nome de um bloco em sua
+    aplicação. CakePHP usa este nome em *views* estendidas para conteúdos
+    não-capturados .
 
 Exibindo blocos
 ---------------
@@ -188,9 +193,10 @@ um bloco de maneira segura, retornando '' se o bloco não existir"::
 
     echo $this->fetch('sidebar');
 
-Você também pode usar o *fetch* para exibir condicionalmente um conteúdo que deve
-envolver um bloco que deveria existir. Isto é útil em *layouts* ou *views* estendidas,
-nas quais você queira mostrar cabeçalhos e outras marcações condicionalmente:
+Você também pode usar o *fetch* para exibir condicionalmente um conteúdo que
+deve envolver um bloco que deveria existir. Isto é útil em *layouts* ou *views*
+estendidas, nas quais você queira mostrar cabeçalhos e outras marcações
+condicionalmente:
 
 .. code-block:: php
 
@@ -207,10 +213,11 @@ Utilizando blocos para arquivos de script e CSS
 
 .. versionadded:: 2.1
 
-Blocos substituem a variável obsoleta ``$scripts_for_layout`` do *layout*. Em vez
-de usá-la, você deve usar blocos. A :php:class:`HtmlHelper` vincula-se aos blocos da
-*view* e a cada um dos seus métodos php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`
-e :php:meth:`~HtmlHelper::meta()` quando o bloco com o mesmo nome utiliza a opção ``inline = false``:
+Blocos substituem a variável obsoleta ``$scripts_for_layout`` do *layout*. Em
+vez de usá-la, você deve usar blocos. A :php:class:`HtmlHelper` vincula-se aos
+blocos da *view* e a cada um dos seus métodos php:meth:`~HtmlHelper::script()`,
+:php:meth:`~HtmlHelper::css()` e :php:meth:`~HtmlHelper::meta()` quando o bloco
+com o mesmo nome utiliza a opção ``inline = false``:
 
 .. code-block:: php
 
@@ -231,7 +238,8 @@ e :php:meth:`~HtmlHelper::meta()` quando o bloco com o mesmo nome utiliza a opç
 
         // o resto do layout continua
 
-A :php:meth:`HtmlHelper` também permite você controlar para que bloco os *scripts* e CSS vão::
+A :php:meth:`HtmlHelper` também permite você controlar para que bloco os
+*scripts* e CSS vão::
 
     // na sua view
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
@@ -291,29 +299,31 @@ um *layout* padrão deve parecer:
 
 .. note::
 
-    Na versão anterior a 2.1, o método fetch() não estava disponível, ``fetch('content')``
-    é uma substituição para ``$content_for_layout`` e as linhas ``fetch('meta')``,
-    ``fetch('css')`` and ``fetch('script')`` estavam contidas na variável ``$scripts_for_layout``
-    na versão 2.0.
+    Na versão anterior a 2.1, o método fetch() não estava disponível,
+    ``fetch('content')`` é uma substituição para ``$content_for_layout`` e as
+    linhas ``fetch('meta')``, ``fetch('css')`` and ``fetch('script')`` estavam
+    contidas na variável ``$scripts_for_layout`` na versão 2.0.
 
 Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido
-nas *views* usando o *helper* HTML embutido. Útil na inclusão de arquivos *javascript*
-e CSS de *views*.
+nas *views* usando o *helper* HTML embutido. Útil na inclusão de arquivos
+*javascript* e CSS de *views*.
 
 
 .. note::
 
-    Quando usar :php:meth:`HtmlHelper::css()` ou :php:meth:`HtmlHelper::script()`
-    em *views*, especifique 'false' para a opção 'inline' para colocar o código html
-    em um bloco de mesmo nome. (Veja a API para mais detalhes de uso)
+    Quando usar :php:meth:`HtmlHelper::css()` ou
+    :php:meth:`HtmlHelper::script()` em *views*, especifique 'false' para a
+    opção 'inline' para colocar o código html em um bloco de mesmo nome. (Veja
+    a API para mais detalhes de uso)
 
 O bloco ``content`` contem o conteúdo da *view* renderizada.
 
-``$title_for_layout`` contém o título da página, Esta variável é gerada automaticamente,
-mas você poderá sobrescrevê-la definindo-a em seu *controller*/*view*.
+``$title_for_layout`` contém o título da página, Esta variável é gerada
+automaticamente, mas você poderá sobrescrevê-la definindo-a em seu
+*controller*/*view*.
 
-Para definir o título para o *layout*, o modo mais fácil é no *controller*, setando
-a variável ``$title_for_layout``::
+Para definir o título para o *layout*, o modo mais fácil é no *controller*,
+setando a variável ``$title_for_layout``::
 
    class UsersController extends AppController
    {
@@ -343,8 +353,9 @@ do seu *controller* usando a propriedade :php:attr:`~View::$layout` do
     $this->layout = 'loggedin';
 
 Por exemplo, se a seção do meu *site* incluir um pequeno espaço para *banner*,
-eu posso criar um novo *layout* com um pequeno espaço para propaganda e especificá-lo
-como *layout* para as ações de todos os *controllers* usando algo como::
+eu posso criar um novo *layout* com um pequeno espaço para propaganda e
+especificá-lo como *layout* para as ações de todos os *controllers* usando algo
+como::
 
    class UsersController extends AppController
    {
@@ -366,7 +377,8 @@ que você pode usar em suas próprias aplicações: 'ajax' e 'flash'.
 O *layout* Ajax é útil para elaborar respostas Ajax - é um *layout* vazio
 (a maior parte das chamadas ajax requer pouca marcação de retorno,
 preferencialmente a uma interface totalmente renderizada). O *layout*
-flash é usado para mensagens mostradas pelo método :php:meth:`Controller::flash()`.
+flash é usado para mensagens mostradas pelo método
+:php:meth:`Controller::flash()`.
 
 Outros três *layouts*, XML, JS, e RSS, existem no núcleo como um modo
 rápido e fácil de servir conteúdo que não seja text/html.
@@ -376,8 +388,9 @@ Usando layouts a partir de plugins
 
 .. versionadded:: 2.1
 
-Se você quiser usar um *layout* que existe em um *plugin*, você pode usar a sintaxe de *plugin*.
-Por exemplo, para usar o *layout* de contato do *plugin* de contatos::
+Se você quiser usar um *layout* que existe em um *plugin*, você pode usar a
+sintaxe de *plugin*. Por exemplo, para usar o *layout* de contato do *plugin*
+de contatos::
 
     class UsersController extends AppController
     {
@@ -397,16 +410,16 @@ Muitas aplicações possuem pequenos blocos de código de apresentação
 que precisam ser repetidos a cada página, às vezes em diferentes
 lugares no *layout*. O CakePHP ajuda você a repetir partes do seu *website*
 que precisam ser reutilizados. Estas partes reutilizáveis são chamadas de
-*Elements* (ou Elementos). Propagandas, caixas de ajuda, controles de navegação, *menus*
-extras, formulários de *login* e chamadas geralmente são implementadas como
-*elements*. Um *element* é básicamente uma *mini-view* que pode ser incluída
-em outras *views*, *layouts* e até mesmo em outros *elements*. *Elements*
-podem ser usados para criar uma *view* mais legível, colocando o processamento
-de elementos repetidos em seu próprio arquivo. Eles também podem ajudá-lo
-a re-usar conteúdos fragmentados pela sua aplicação.
+*Elements* (ou Elementos). Propagandas, caixas de ajuda, controles de navegação,
+*menus* extras, formulários de *login* e chamadas geralmente são implementadas
+como *elements*. Um *element* é básicamente uma *mini-view* que pode ser
+incluída em outras *views*, *layouts* e até mesmo em outros *elements*.
+*Elements* podem ser usados para criar uma *view* mais legível, colocando o
+processamento de elementos repetidos em seu próprio arquivo. Eles também podem
+ajudá-lo a re-usar conteúdos fragmentados pela sua aplicação.
 
-*Elements* são colocados na pasta ``/app/View/Elements/`` e possuem a extensão .ctp
-no nome do arquivo. Eles são exibidos através do uso do método *element*
+*Elements* são colocados na pasta ``/app/View/Elements/`` e possuem a extensão
+.ctp no nome do arquivo. Eles são exibidos através do uso do método *element*
 da *view*::
 
     echo $this->element('helpbox');
@@ -414,16 +427,18 @@ da *view*::
 Passando variáveis em um Element
 ---------------------------------
 
-Você pode passar dados para um *element* através do segundo argumento do *element*::
+Você pode passar dados para um *element* através do segundo argumento do
+*element*::
 
     echo $this->element('helpbox', array(
         "helptext" => "Oh, este texto é muito útil."
     ));
 
-Dentro do arquivo do *element*, todas as variáveis passadas estão disponíveis como
-membros do *array* de parâmetros (da mesma forma que :php:meth:`Controller::set()` no
-*controller* trabalha com arquivos de *views*). No exemplo acima, o arquivo
-``/app/View/Elements/helpbox.ctp`` pode usar a variável ``$helptext``::
+Dentro do arquivo do *element*, todas as variáveis passadas estão disponíveis
+como membros do *array* de parâmetros (da mesma forma que
+:php:meth:`Controller::set()` no *controller* trabalha com arquivos de *views*).
+No exemplo acima, o arquivo ``/app/View/Elements/helpbox.ctp`` pode usar a
+variável ``$helptext``::
 
     // Dentro de app/View/Elements/helpbox.ctp
     echo $helptext; //outputs "Oh, este texto é muito útil."
@@ -441,11 +456,12 @@ As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
         )
     );
 
-O *cache* de *element* é facilitado através da classe :php:class:`Cache`.  Você pode
-configurar *elements* para serem guardados em qualquer configuração de *cache* que você
-tenha definido. Isto permite uma maior flexibilidade para decidir onde e por quantos
-*elements* são guardados. Para fazer o *cache* de diferentes versões de um mesmo *element*
-em uma aplicação, defina uma única chave de *cache* usando o seguinte formato::
+O *cache* de *element* é facilitado através da classe :php:class:`Cache`. Você
+pode configurar *elements* para serem guardados em qualquer configuração de
+*cache* que você tenha definido. Isto permite uma maior flexibilidade para
+decidir onde e por quantos *elements* são guardados. Para fazer o *cache* de
+diferentes versões de um mesmo *element* em uma aplicação, defina uma única
+chave de *cache* usando o seguinte formato::
 
     $this->element('helpbox', array(), array(
             "cache" => array('config' => 'short', 'key' => 'unique value')
@@ -456,11 +472,12 @@ Você pode tirar vantagem de *elements* usando
 ``requestAction()``. A função ``requestAction()`` carrega variáveis da
 *views* a partir de ações do *controller* e as retorna como um *array*.
 Isto habilita seus *elements* para atuar verdadeiramente no estilo MVC. Crie
-uma ação de *controller* que prepara as variáveis da *view* para seu *element*, depois
-chame ``requestAction()`` no segundo parâmetro do ``element()`` para carregar as variáveis
-da *view* a partir do seu *controller*.
+uma ação de *controller* que prepara as variáveis da *view* para seu *element*,
+depois chame ``requestAction()`` no segundo parâmetro do ``element()`` para
+carregar as variáveis da *view* a partir do seu *controller*.
 
-Para isto, em seu *controller*, adicione algo como segue, como exemplo de *Post*::
+Para isto, em seu *controller*, adicione algo como segue, como exemplo de
+*Post*::
 
     class PostsController extends AppController
     {
@@ -502,10 +519,10 @@ de *caching* um *element* seria::
 
     echo $this->element('helpbox', array(), array('cache' => true));
 
-Se você renderiza o mesmo *element* mais que uma vez em uma *view* e tem *caching*
-ativado, esteja certo de definir o parâmetro chave (*key*) para um nome diferente
-cada vez. Isto irá prevenir que cada chamada sucessiva substitua o resultado
-armazenado da chamada element() anterior. E.g.::
+Se você renderiza o mesmo *element* mais que uma vez em uma *view* e tem
+*caching* ativado, esteja certo de definir o parâmetro chave (*key*) para um
+nome diferente cada vez. Isto irá prevenir que cada chamada sucessiva substitua
+o resultado armazenado da chamada element() anterior. E.g.::
 
     echo $this->element(
         'helpbox',
@@ -519,10 +536,11 @@ armazenado da chamada element() anterior. E.g.::
         array('cache' => array('key' => 'second_use', 'config' => 'view_long')
     );
 
-O código acima garante que ambos os resultados do *element* serão armazenados separadamente.
-Se você quiser que todos os elementos armazenados usem a mesma configuração de *cache*, você
-pode salvar alguma repetição, setando :php:attr:`View::$elementCache` para a configuração
-de *cache* que você quer usar. O CakePHP usará esta configuração, quando nenhuma outra for dada.
+O código acima garante que ambos os resultados do *element* serão armazenados
+separadamente. Se você quiser que todos os elementos armazenados usem a mesma
+configuração de *cache*, você pode salvar alguma repetição, setando
+:php:attr:`View::$elementCache` para a configuração de *cache* que você quer
+usar. O CakePHP usará esta configuração, quando nenhuma outra for dada.
 
 
 Requisitando Elements de um Plugin
@@ -531,24 +549,25 @@ Requisitando Elements de um Plugin
 2.0
 ---
 
-Para carregar um *element* de um *plugin*, use a opção `plugin` (retirada da opção `data` na versão 1.x)::
+Para carregar um *element* de um *plugin*, use a opção `plugin`
+(retirada da opção `data` na versão 1.x)::
 
     echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
 
-Se você está usando um *plugin* e deseja usar *elements* de dentro deste *plugin*
-apenas use :term:`plugin syntax`. Se a *view* está renderizando para um
-*controller*/*action* de *plugin*, o nome do *plugin* será automaticamente prefixado
-antes de todos os *elements* usados, ao menos que outro nome de *plugin* esteja
-presente. Se o *element* não existir no *plugin*, será procurado na pasta
-principal da APP.::
+Se você está usando um *plugin* e deseja usar *elements* de dentro deste
+*plugin* apenas use :term:`plugin syntax`. Se a *view* está renderizando para um
+*controller*/*action* de *plugin*, o nome do *plugin* será automaticamente
+prefixado antes de todos os *elements* usados, ao menos que outro nome de
+*plugin* esteja presente. Se o *element* não existir no *plugin*, será procurado
+na pasta principal da APP.::
 
     echo $this->element('Contacts.helpbox');
 
-Se sua *view* é parte de um *plugin* você pode omitir o nome do *plugin*. Por exemplo,
-se você está no ``ContactsController`` do *plugin* Contatos::
+Se sua *view* é parte de um *plugin* você pode omitir o nome do *plugin*. Por
+exemplo, se você está no ``ContactsController`` do *plugin* Contatos::
 
     echo $this->element('helpbox');
     // and
@@ -573,9 +592,9 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
 
     *Views* têm métodos ``set()`` que são análogos aos ``set()``
     encontrados nos objetos *controllers*. Usando set() em seu arquivo *view*
-    serão adicionados variáveis para *layouts* e *elements* que serão renderizados
-    posteriormente. Veja :ref:`controller-methods` para maiores informações de como
-    usar o set().
+    serão adicionados variáveis para *layouts* e *elements* que serão
+    renderizados posteriormente. Veja controller-methods para maiores
+    informações de como usar o set().
 
     No seu arquivo de *view*, você pode::
 
@@ -595,8 +614,8 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 .. php:method:: element(string $elementPath, array $data, array $options = array())
 
-    Renderiza um elemento ou parte de uma *view*. Veja a seção :ref:`view-elements`
-    para maiores informações e exemplos.
+    Renderiza um elemento ou parte de uma *view*. Veja a seção
+    :ref:`view-elements` para maiores informações e exemplos.
 
 .. php:method:: uuid(string $object, mixed $url)
 
@@ -650,22 +669,22 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 .. php:method:: assign($name, $content)
 
-    Atribui o valor de um bloco. Isso irá sobrescrever qualquer conteúdo existente.
-    Veja a seção em :ref:`view-blocks` para exemplos.
+    Atribui o valor de um bloco. Isso irá sobrescrever qualquer conteúdo
+    existente. Veja a seção em :ref:`view-blocks` para exemplos.
 
     .. versionadded:: 2.1
 
 .. php:method:: fetch($name)
 
-    *Fetch* o valor do bloco. '' Serão retornados de blocos que não estão definidos
-    Veja a seção em :ref:`view-blocks` para exemplos.
+    *Fetch* o valor do bloco. '' Serão retornados de blocos que não estão
+    definidos. Veja a seção em :ref:`view-blocks` para exemplos.
 
     .. versionadded:: 2.1
 
 .. php:method:: extend($name)
 
-    Estende o *view*/*element*/*layout* corrente com o nome fornecido. Veja a seção em
-    :ref:`extending-views` para examplos.
+    Estende o *view*/*element*/*layout* corrente com o nome fornecido. Veja a
+    seção em :ref:`extending-views` para examplos.
 
     .. versionadded:: 2.1
 
@@ -676,8 +695,9 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
 .. php:attr:: elementCache
 
     A configuração de *cache* usada para armazenar *elements*. Setando esta
-    propriedade a configuração padrâo usada para armazenar *elements* será alterada
-    Este padrão pode ser sobrescrito usando a opção 'cache' no método do *element*.
+    propriedade a configuração padrâo usada para armazenar *elements* será
+    alterada Este padrão pode ser sobrescrito usando a opção 'cache' no método
+    do *element*.
 
 
 .. php:attr:: request
@@ -689,8 +709,8 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 .. php:attr:: output
 
-    Contem o último conteúdo renderizado de uma *view*, seja um arquivo de *view*
-    ou conteúdo do *layout*.
+    Contem o último conteúdo renderizado de uma *view*, seja um arquivo de
+    *view* ou conteúdo do *layout*.
 
 
 .. deprecated:: 2.1
@@ -703,8 +723,6 @@ de *layout*. Para chamar qualquer método de uma *view* use ``$this->method()``.
     Uma instância de :php:class:`ViewBlock`. Usada para prover um bloco
     de funcionalidades de *view* na *view* renderizada.
 
-
-.. versionadded:: 2.1
 
 More About Views
 ================

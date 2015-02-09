@@ -82,7 +82,7 @@ A scope defines a common path segment, and optionally route defaults. Any routes
 connected inside a scope will inherit the path/defaults from their wrapping
 scopes::
 
-    Router::scope('/blog', ['plugin' => 'Blog'], function($routes) {
+    Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
         $routes->connect('/', ['controller' => 'Articles']);
     });
 
@@ -102,16 +102,15 @@ Connecting Routes
 
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
-To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
+To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
 operation. As seen above you can also use ``Router::connect()`` to connect
 routes. This method defaults to the ``/`` scope. To create a scope and connect
 some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
-    Router::scope('/', function($routes) {
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+    Router::scope('/', function ($routes) {
+        $routes->fallbacks('InflectedRoute');
     });
 
 The ``connect()`` method takes up to three parameters: the URL template you wish
@@ -147,7 +146,7 @@ start using the third parameter of connect()::
 
 This route is found in the routes.php file distributed with CakePHP.  It matches
 any URL starting with ``/pages/`` and hands it to the ``display()`` action of
-the ``PagesController();``. A request to ``/pages/products`` would be mapped to
+the ``PagesController``. A request to ``/pages/products`` would be mapped to
 ``PagesController->display('products')``.
 
 In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
@@ -406,11 +405,10 @@ privileged users can make changes. This is often done through a
 special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
 can be enabled by using the ``prefix`` scope method::
 
-    Router::prefix('admin', function($routes) {
+    Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
-        $routes->connect('/:controller', ['action' => 'index']);
-        $routes->connect('/:controller/:action/*');
+        $routes->fallbacks('InflectedRoute');
     });
 
 Prefixes are mapped to sub-namespaces in your application's ``Controller``
@@ -425,7 +423,7 @@ view file used would be ``src/Template/Admin/Users/edit.ctp``
 You can map the URL /admin to your ``index`` action of pages controller using
 following route::
 
-    Router::prefix('admin', function($routes) {
+    Router::prefix('admin', function ($routes) {
         // Because you are in the admin scope,
         // you do not need to include the /admin prefix
         // or the admin route element.
@@ -434,8 +432,8 @@ following route::
 
 You can define prefixes inside plugin scopes as well::
 
-    Router::plugin('DebugKit', function($routes) {
-        $routes->prefix('admin', function($routes) {
+    Router::plugin('DebugKit', function ($routes) {
+        $routes->prefix('admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -445,8 +443,8 @@ The connected route would have the ``plugin`` and ``prefix`` route elements set.
 
 When defining prefixes, you can nest multiple prefixes if necessary::
 
-    Router::prefix('manager', function($routes) {
-        $routes->prefix('admin', function($routes) {
+    Router::prefix('manager', function ($routes) {
+        $routes->prefix('admin', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -487,7 +485,7 @@ Plugin Routing
 Plugin routes are most easily created using the ``plugin()`` method. This method
 creates a new routing scope for the plugin's routes::
 
-    Router::plugin('DebugKit', function($routes) {
+    Router::plugin('DebugKit', function ($routes) {
         // Routes connected here are prefixed with '/debug_kit' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/:controller');
@@ -496,7 +494,7 @@ creates a new routing scope for the plugin's routes::
 When creating plugin scopes, you can customize the path element used with the
 ``path`` option::
 
-    Router::plugin('DebugKit', ['path' => '/debugger'], function($routes) {
+    Router::plugin('DebugKit', ['path' => '/debugger'], function ($routes) {
         // Routes connected here are prefixed with '/debugger' and
         // have the plugin route element set to 'DebugKit'.
         $routes->connect('/:controller');
@@ -504,8 +502,8 @@ When creating plugin scopes, you can customize the path element used with the
 
 When using scopes you can nest plugin scopes within prefix scopes::
 
-    Router::prefix('admin', function($routes) {
-        $routes->plugin('DebugKit', function($routes) {
+    Router::prefix('admin', function ($routes) {
+        $routes->plugin('DebugKit', function ($routes) {
             $routes->connect('/:controller');
         });
     });
@@ -535,27 +533,18 @@ create a link that is not part of a plugin.
 SEO-Friendly Routing
 --------------------
 
-As a SEO-minded developer, it'll be desirable to outfit your URLs with dashes in
-order to avoid your application being cast into the search engine shadows,
-and hoist it to the divine rankings of the search engine gods. The
-``DashedRoute`` class furnishes your application with the ability to route
-plugin, controller, and camelized action names to a dashed URL.
+Some developers prefer to use dashes in URLs, as it's perceived to give
+better search engine rankings. The ``DashedRoute`` class can be used in your
+application with the ability to route plugin, controller, and camelized action
+names to a dashed URL.
 
 For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
 ``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
-    Router::scope('/', function($routes) {
-        $routes->connect('/:plugin/:controller/:action',
-            ['plugin' => '*', 'controller' => '*', 'action' => '*'],
-            ['routeClass' => 'DashedRoute']
-        );
-
-        $routes->fallbacks();
+    Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
+        $routes->fallbacks('DashedRoute');
     });
-
-Under the ``/`` routing scope, the previous example will attempt to catch all
-plugin/controller/action dashed routes and map them to their respective actions.
 
 .. index:: file extensions
 .. _file-extensions:
@@ -574,22 +563,24 @@ This will enable the named extensions for all routes connected **after** this
 method call. Any routes connected prior to it will not inherit the extensions.
 By default the extensions you passed will be merged with existing list of extensions.
 You can pass ``false`` for the second argument to override existing list.
-Calling the method with arguments will return existing list of extensions.
+Calling the method without arguments will return existing list of extensions.
 You can set extensions per scope as well::
 
-    Router::scope('/api', function($routes) {
+    Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
     });
 
-Setting the extensions should be the first thing you do in a scope, as the
-extensions will only be applied to routes connected **after** the extensions are
-set.
+.. note::
+
+    Setting the extensions should be the first thing you do in a scope, as the
+    extensions will only be applied to routes connected **after** the extensions
+    are set.
 
 By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
-    Router::scope('/api', function($routes) {
+    Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
         $routes->connect(
             '/page/:title',
@@ -623,7 +614,7 @@ something like this::
 
     // In config/routes.php...
 
-    Router::scope('/', function($routes) {
+    Router::scope('/', function ($routes) {
         $routes->extensions(['json']);
         $routes->resources('Recipes');
     });
@@ -668,8 +659,8 @@ Once you have connected resources in a scope, you can connect routes for
 sub-resources as well. Sub-resource routes will be prepended by the original
 resource name and a id parameter. For example::
 
-    Router::scope('/api', function($routes) {
-        $routes->resources('Articles', function($routes) {
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
             $routes->resources('Comments');
         });
     });
@@ -724,12 +715,12 @@ Custom Route Classes for Resource Routes
 You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
-    Router::scope('/', function($routes) {
-        $routes->resources('books', array(
-            'connectOptions' => array(
+    Router::scope('/', function ($routes) {
+        $routes->resources('books', [
+            'connectOptions' => [
                 'routeClass' => 'ApiRoute',
-            )
-        );
+            ]
+        ];
     });
 
 .. index:: passed arguments
@@ -740,7 +731,7 @@ Passed Arguments
 
 Passed arguments are additional arguments or path segments that are
 used when making a request. They are often used to pass parameters
-to your controller methods.::
+to your controller methods. ::
 
     http://localhost/calendars/view/recent/mark
 
@@ -919,6 +910,45 @@ This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling. You can use plugin route classes using
 standard :term:`plugin syntax`.
 
+Default Route Class
+-------------------
+
+.. php:staticmethod:: defaultRouteClass($routeClass = null)
+
+If you want to use an alterate route class for all your routes besides the
+default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
+before setting up any routes and avoid having to specify the ``routeClass``
+option for each route. For example using::
+
+    Router::defaultRouteClass('DashedRoute');
+
+will cause all routes connected after this to use the ``DashedRoute`` route class.
+Calling the method without an argument will return current default route class.
+
+Fallbacks method
+----------------
+
+.. php:method:: fallbacks($routeClass = null)
+
+The fallbacks method is a simple shortcut for defining default routes. The method
+uses the passed routing class for the defined rules or if no class is provided the
+class returned by ``Router::defaultRouteClass()`` is used.
+
+Calling fallbacks like so::
+
+    $routes->fallbacks('InflectedRoute');
+
+Is equivalent to the following explicit calls::
+
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+
+.. note::
+
+    Using the default route class (``Route``) with fallbacks, or any route
+    with ``:plugin`` and/or ``:controller`` route elements will result in
+    inconsistent URL case.
+
 Handling Named Parameters in URLs
 =================================
 
@@ -1066,6 +1096,11 @@ RequestActionTrait
     to passing all required parameters, passed arguments must be done
     in the second array as seen above.
 
+.. toctree::
+    :glob:
+    :maxdepth: 1
+
+    /development/dispatch-filters
 
 .. meta::
     :title lang=pt: Routing

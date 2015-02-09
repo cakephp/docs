@@ -646,12 +646,16 @@ usam essa funcionalidade.
 Ao criar opções você pode usar os seguintes argumentos para definir
 o seu comportamento:
 
-* ``short`` - A variação de letra única para essa opção, deixe indefinido para none.
+* ``short`` - A variação de letra única para essa opção, deixe indefinido para
+  none.
 * ``help`` - Texto de ajuda para essa opção. Usado ao gerar ajuda para a opção.
-* ``default`` - O valor padrão para essa opção. Se não estiver definido o valor padrão será ``true``.
-* ``boolean`` - A opção não usa valor, é apenas um ativador boleano. Por padrão ``false``.
-* ``choices`` - Um array de escolhas válidas para essa opção. Se deixado vazio, todos os
-  valores são considerados válidos. Uma exceção será lançada quando parse() encontrar um valor inválido.
+* ``default`` - O valor padrão para essa opção. Se não estiver definido o valor
+  padrão será ``true``.
+* ``boolean`` - A opção não usa valor, é apenas um ativador boleano. Por padrão
+  ``false``.
+* ``choices`` - Um array de escolhas válidas para essa opção. Se deixado vazio,
+  todos os valores são considerados válidos. Uma exceção será lançada quando
+  parse() encontrar um valor inválido.
 
 .. php:method:: addOptions(array $options)
 

@@ -4,20 +4,37 @@ Instalação
 O CakePHP é rápido e fácil de instalar. Os requisitos mínimos são um servidor
 web e uma cópia do CakePHP, só isso! Apesar deste manual focar principalmente na
 configuração do Apache (porquê ele é o mais simples de instalar e configurar),
-o CakePHP vai ser executado em uma série de servidores web como nginx, LightHTTPD, ou
-Microsoft IIS.
+o CakePHP vai ser executado em uma série de servidores web como nginx,
+LightHTTPD, ou Microsoft IIS.
 
 Requisitos
 ==========
 
-- HTTP Server. Por exemplo: Apache. De preferência com mod\_rewrite ativo, mas não é obrigatório.
+- HTTP Server. Por exemplo: Apache. De preferência com mod\_rewrite ativo, mas
+  não é obrigatório.
 - PHP 5.4.16 ou superior.
 - extensão mbstring
-- extensão mcrypt
 - extensão intl
 
-Apesar de um mecanismo de banco de dados não ser exigido, nós imaginamos que a maioria das aplicações irá
-utilizar um. O CakePHP suporta uma variedade de mecanismos de armazenamento de banco de dados:
+.. note::
+
+    In both XAMPP and WAMP, mcrypt and mbstring extensions are working by
+    default.
+
+    In XAMPP, intl extension is included but you have to uncomment
+    ``extension=php_intl.dll`` in ``php.ini`` and restart the server through
+    the XAMPP Control Panel.
+
+    In WAMP, the intl extension is "activated" by default but not working.
+    To make it work you have to go to php folder (by default)
+    ``C:\wamp\bin\php\php{version}``, copy all the files that looks like
+    ``icu***.dll`` and paste them into the apache bin directory
+    ``C:\wamp\bin\apache\apache{version}\bin``. Then restart all services and
+    it should be OK.
+
+Apesar de um mecanismo de banco de dados não ser exigido, nós imaginamos que a
+maioria das aplicações irá utilizar um. O CakePHP suporta uma variedade de
+mecanismos de armazenamento de banco de dados:
 
 -  MySQL (5.1.10 ou superior)
 -  PostgreSQL
@@ -32,8 +49,9 @@ utilizar um. O CakePHP suporta uma variedade de mecanismos de armazenamento de b
 Instalando o CakePHP
 ====================
 
-O CakePHP utiliza `Composer <http://getcomposer.org>`_, uma ferramenta de gerenciamento de dependências
-para PHP 5.3+, como o método suportado oficial para instalação.
+O CakePHP utiliza `Composer <http://getcomposer.org>`_, uma ferramenta de
+gerenciamento de dependências para PHP 5.3+, como o método suportado oficial
+para instalação.
 
 Primeiramente, você precisará baixar e instalar o Composer se não
 o fez anteriormente. Se você tem cURL instalada, é tão fácil quanto executar o
@@ -46,11 +64,11 @@ Ou, você pode baixar ``composer.phar`` do
 
 Para sistemas Windows, você pode baixar o instalador
 `aqui <https://github.com/composer/windows-setup/releases/>`__. Mais
-instruções para o instalador Windows do Composer podem ser encontradas dentro do LEIA-ME
-`aqui <https://github.com/composer/windows-setup>`_.
+instruções para o instalador Windows do Composer podem ser encontradas dentro
+do LEIA-ME `aqui <https://github.com/composer/windows-setup>`_.
 
-Agora que você baixou e instalou o Composer, você pode receber uma nova aplicação CakePHP
-executando::
+Agora que você baixou e instalou o Composer, você pode receber uma nova
+aplicação CakePHP executando::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
@@ -60,8 +78,8 @@ Ou se o Composer estiver instalado globalmente::
 
 Uma vez que o Composer terminar de baixar o esqueleto da aplicação e o núcleo
 da biblioteca CakePHP, você deve ter uma aplicação funcional
-instalada via Composer. Esteja certo de manter os arquivos composer.json e composer.lock
-com o restante do seu código fonte.
+instalada via Composer. Esteja certo de manter os arquivos composer.json e
+composer.lock com o restante do seu código fonte.
 
 You can now visit the path to where you installed your CakePHP application and
 see the setup traffic lights.
@@ -84,21 +102,24 @@ Permissões
 ==========
 
 O CakePHP utiliza o diretório ``tmp`` para diversas operações.
-Descrição de models, views armazenadas em cache e informações de sessão são apenas
-alguns exemplos.
-O diretório ``logs`` é utilizado para escrever arquivos de log pelo mecanismo padrão ``FileLog``.
+Descrição de models, views armazenadas em cache e informações de sessão são
+apenas alguns exemplos.
+O diretório ``logs`` é utilizado para escrever arquivos de log pelo mecanismo
+padrão ``FileLog``.
 
-Como tal, certifique-se que os diretórios ``logs``, ``tmp`` e todos os seus sub-diretórios
-em sua instalação CakePHP são graváveis pelo usuário relacionado ao servidor web.
-O processo de instalação do Composer faz ``tmp`` e seus sub-diretórios globalmente graváveis para
-obter as coisas funcionando rapidamente, mas você pode atualizar as permissões para melhor
-segurança e mantê-los graváveis apenas para o usuário relacionado ao servidor web.
+Como tal, certifique-se que os diretórios ``logs``, ``tmp`` e todos os seus
+sub-diretórios em sua instalação CakePHP são graváveis pelo usuário relacionado
+ao servidor web. O processo de instalação do Composer faz ``tmp`` e seus
+sub-diretórios globalmente graváveis para obter as coisas funcionando
+rapidamente, mas você pode atualizar as permissões para melhor segurança e
+mantê-los graváveis apenas para o usuário relacionado ao servidor web.
 
-Um problema comum é que os diretórios e sub-diretórios de ``logs`` e ``tmp`` devem ser
-graváveis tanto pelo servidor quanto pelo usuário da linha de comando. Em um sistema UNIX, se
-seu usuário relacionado ao servidor web é diferente do seu usuário da linha de comando,
-você pode executar somente uma vez os seguintes comandos a partir do diretório da sua aplicação
-para assegurar que as permissões serão configuradas corretamente::
+Um problema comum é que os diretórios e sub-diretórios de ``logs`` e ``tmp``
+devem ser graváveis tanto pelo servidor quanto pelo usuário da linha de comando.
+Em um sistema UNIX, se seu usuário relacionado ao servidor web é diferente do
+seu usuário da linha de comando, você pode executar somente uma vez os seguintes
+comandos a partir do diretório da sua aplicação para assegurar que as permissões
+serão configuradas corretamente::
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -109,31 +130,19 @@ para assegurar que as permissões serão configuradas corretamente::
 Servidor de Desenvolvimento
 ===========================
 
-Uma instalação de desenvolvimento é o método mais rápido de configurar o CakePHP. Neste
-exemplo, nós vamos utilizar o console CakePHP para executar o servidor integrado do PHP
-que vai tornar sua aplicação disponível em ``http://host:port``. A partir do diretório da
-aplicação, execute::
+Uma instalação de desenvolvimento é o método mais rápido de configurar o
+CakePHP. Neste exemplo, nós vamos utilizar o console CakePHP para executar o
+servidor integrado do PHP que vai tornar sua aplicação disponível em
+``http://host:port``. A partir do diretório da aplicação, execute::
 
     bin/cake server
 
-Por padrão, sem nenhum argumento fornecido, isso vai disponibilizar a sua aplicação em
-``http://localhost:8765/``.
-
-Se você tem algo conflitando com
-
-A development installation is the fastest method to setup CakePHP.  In this
-example, we will be using CakePHP's console to run PHP's built-in web server
-which will make your application available at ``http://host:port``. From the app
-directory, execute::
-
-    bin/cake server
-
-Por padrão, sem nenhum argumento fornecido, isso vai disponibilizar a sua aplicação em
-``http://localhost:8765/``.
+Por padrão, sem nenhum argumento fornecido, isso vai disponibilizar a sua
+aplicação em ``http://localhost:8765/``.
 
 Se você tem algo conflitante com ``localhost`` ou porta ``8765``, você pode
-dizer ao console CakePHP para executar o servidor web em um host e/ou porta específica
-utilizando os seguintes argumentos::
+dizer ao console CakePHP para executar o servidor web em um host e/ou porta
+específica utilizando os seguintes argumentos::
 
     bin/cake server -H 192.168.13.37 -p 5673
 
@@ -144,22 +153,24 @@ configurar um servidor web.
 
 .. warning::
 
-    O servidor de desenvolvimento *nunca* deve ser usado em um ambiente de produção.
-    Destina-se apenas como um servidor de desenvolvimento básico.
+    O servidor de desenvolvimento *nunca* deve ser usado em um ambiente de
+    produção. Destina-se apenas como um servidor de desenvolvimento básico.
 
-Se você preferir usar um servidor web real, você deve ser capaz de mover a instalação do
-CakePHP (incluindo os arquivos ocultos) para dentro do diretório raiz do seu servidor web.
-Você deve, então, ser capaz de apontar seu navegador para o diretório que você moveu os
-arquivos para dentro e ver a aplicação em ação.
+Se você preferir usar um servidor web real, você deve ser capaz de mover a
+instalação do CakePHP (incluindo os arquivos ocultos) para dentro do diretório
+raiz do seu servidor web. Você deve, então, ser capaz de apontar seu navegador
+para o diretório que você moveu os arquivos para dentro e ver a aplicação em
+ação.
 
 Produção
 ========
 
-Uma instalação de produção é uma forma mais flexível de configurar o CakePHP. Usar este
-método permite total domínio para agir como uma aplicação CakePHP singular. Este
-exemplo o ajudará a instalar o CakePHP em qualquer lugar em seu sistema de arquivos e torná-lo
-disponível em http://www.example.com. Note que esta instalação pode exigir os
-direitos de alterar o ``DocumentRoot`` em servidores web Apache.
+Uma instalação de produção é uma forma mais flexível de configurar o CakePHP.
+Usar este método permite total domínio para agir como uma aplicação CakePHP
+singular. Este exemplo o ajudará a instalar o CakePHP em qualquer lugar em seu
+sistema de arquivos e torná-lo disponível em http://www.example.com. Note que
+esta instalação pode exigir os direitos de alterar o ``DocumentRoot`` em
+servidores web Apache.
 
 Depois de instalar a aplicação usando um dos métodos acima no
 diretório de sua escolha - vamos supor que você escolheu /cake_install - sua
@@ -211,17 +222,17 @@ Reescrita de URL
 Apache
 ------
 
-Apesar do CakePHP ser construído para trabalhar com mod\_rewrite fora da caixa, e
-normalmente o faz, nos atentamos que aluns usuários lutam para conseguir
+Apesar do CakePHP ser construído para trabalhar com mod\_rewrite fora da caixa,
+e normalmente o faz, nos atentamos que aluns usuários lutam para conseguir
 fazer tudo funcionar bem em seus sistemas.
 
-Aqui estão algumas coisas que você poderia tentar para conseguir tudo rodando corretamente.
-Primeiramente observe seu httpd.conf. (Tenha certeza que você está editando o httpd.conf
-do sistema ao invés de um usuário, ou site específico.)
+Aqui estão algumas coisas que você poderia tentar para conseguir tudo rodando
+corretamente. Primeiramente observe seu httpd.conf. (Tenha certeza que você está
+editando o httpd.conf do sistema ao invés de um usuário, ou site específico.)
 
-Esses arquivos podem variar entre diferentes distribuições e versões do Apache. Você
-também pode pesquisar em http://wiki.apache.org/httpd/DistrosDefaultLayout para
-maiores informações.
+Esses arquivos podem variar entre diferentes distribuições e versões do Apache.
+Você também pode pesquisar em http://wiki.apache.org/httpd/DistrosDefaultLayout
+para maiores informações.
 
 #. Tenha certeza que a sobreescrita do .htaccess está permitida e que
    AllowOverride está definido para All no correto DocumentRoot. Você
@@ -248,16 +259,16 @@ maiores informações.
    Em muitos sistemas estará comentado por padrão, então você pode
    apenas remover os símbolos #.
 
-   Depois de fazer as mudanças, reinicie o Apache para certificar-se que as configurações
-   estão ativas.
+   Depois de fazer as mudanças, reinicie o Apache para certificar-se que as
+   configurações estão ativas.
 
-   Verifique se os seus arquivos .htaccess estão realmente nos diretórios corretos.
-   Alguns sistemas operacionais tratam arquivos iniciados
+   Verifique se os seus arquivos .htaccess estão realmente nos diretórios
+   corretos. Alguns sistemas operacionais tratam arquivos iniciados
    com '.' como ocultos e portanto, não os copia.
 
 #. Certifique-se de sua cópia do CakePHP vir da seção de downloads
-   do site ou do nosso repositório Git, e que foi descompactado corretamente, verificando
-   os arquivos .htaccess.
+   do site ou do nosso repositório Git, e que foi descompactado corretamente,
+   verificando os arquivos .htaccess.
 
    O diretório app do CakePHP (será copiado para o diretório mais alto de sua
    aplicação através do bake)::
@@ -279,9 +290,9 @@ maiores informações.
 
    Se o seu site CakePHP ainda possuir problemas com mod\_rewrite, você pode
    tentar modificar as configurações para Virtual Hosts. No Ubuntu,
-   edita o arquivo /etc/apache2/sites-available/default (a localização depende da distribuição).
-   Nesse arquivo, certifique-se que  ``AllowOverride None`` seja modificado para  ``AllowOverride All``,
-   então você terá::
+   edita o arquivo /etc/apache2/sites-available/default (a localização depende
+   da distribuição). Nesse arquivo, certifique-se que  ``AllowOverride None``
+   seja modificado para  ``AllowOverride All``, então você terá::
 
        <Directory />
            Options FollowSymLinks
@@ -302,8 +313,9 @@ maiores informações.
    na verdade oferecido a partir de um diretório de usuário que já utiliza
    mod\_rewrite. Se você está instalando o CakePHP em um diretório de usuário
    (http://example.com/~username/cakephp/), ou qualquer outra estrutura URL
-   que já utilize mod\_rewrite, você precisará adicionar declarações RewriteBase
-   para os arquivos .htaccess que o CakePHP utiliza. (.htaccess, webroot/.htaccess).
+   que já utilize mod\_rewrite, você precisará adicionar declarações
+   RewriteBase para os arquivos .htaccess que o CakePHP utiliza.
+   (.htaccess, webroot/.htaccess).
 
    Isso pode ser adicionado na mesma seção com a diretiva RewriteEngine,
    por exemplo, seu arquivo webroot/.htaccess
@@ -322,9 +334,9 @@ maiores informações.
    incluir coisas adicionais que não estão relacionadas ao CakePHP.
    Por favor, busque pela documentação online do Apache para mais informações.
 
-#. (Opcional) Para melhorar a configuração de produção, você deve prevenir conteúdos inváidos
-   de serem analisados pelo CakePHP. Modifique seu webroot/.htaccess para algo
-   como::
+#. (Opcional) Para melhorar a configuração de produção, você deve prevenir
+   conteúdos inváidos de serem analisados pelo CakePHP. Modifique seu
+   webroot/.htaccess para algo como::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -334,11 +346,11 @@ maiores informações.
            RewriteRule ^ index.php [L]
        </IfModule>
 
-   Isto irá simplesmente prevenir conteúdo incorreto de ser enviado para o index.php
-   e então exibir sua página de erro 404 do servidor web.
+   Isto irá simplesmente prevenir conteúdo incorreto de ser enviado para o
+   index.php e então exibir sua página de erro 404 do servidor web.
 
-   Adicionalmente você pode criar uma página HTML de erro 404 correspondente, ou utilizar a padrão
-   do CakePHP ao adicionar uma diretiva ``ErrorDocument``::
+   Adicionalmente você pode criar uma página HTML de erro 404 correspondente,
+   ou utilizar a padrão do CakePHP ao adicionar uma diretiva ``ErrorDocument``::
 
        ErrorDocument 404 /404-not-found
 
@@ -384,13 +396,16 @@ IIS7 (Windows hosts)
 --------------------
 
 IIS7 não suporta nativamente arquivos .htaccess. Mesmo existindo
-add-ons que adicionam esse suporte, você também pode importar as regras .htaccess
-no IIS para utilizar as reescritas nativas do CakePHP. Para isso, siga os
-seguintes passos:
+add-ons que adicionam esse suporte, você também pode importar as regras
+.htaccess no IIS para utilizar as reescritas nativas do CakePHP. Para isso, siga
+os seguintes passos:
 
 
-#. Utilize o `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ para instalar o
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ ou baixe-o diretamente (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Utilize o
+   `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
+   para instalar o `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
+   ou baixe-o diretamente (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Crie um novo arquivo chamado web.config em seu diretório raiz do CakePHP.
 #. Utilize o Notepad ou qualquer editor seguro XML para copiar o seguinte código
    em seu novo arquivo web.config::
@@ -422,15 +437,16 @@ seguintes passos:
         </system.webServer>
     </configuration>
 
-Uma vez que o arquivo web.config é criado com as regras amigáveis de reescrita do IIS,
-os links, CSS, JavaScript, e roteamento do CakePHP agora devem funcionar corretamente.
+Uma vez que o arquivo web.config é criado com as regras amigáveis de reescrita
+do IIS, os links, CSS, JavaScript, e roteamento do CakePHP agora devem funcionar
+corretamente.
 
 Não posso utilizar Reescrita de URL
 -----------------------------------
 
 Se você não quer ou não pode ter mod\_rewrite (ou algum outro módulo compatível)
-funcionando no seu servidor, você precisará utilizar as URLs amigáveis natívas do CakePHP.
-No ``config/app.php``, descomente a linha que se parece como::
+funcionando no seu servidor, você precisará utilizar as URLs amigáveis natívas
+do CakePHP. No ``config/app.php``, descomente a linha que se parece como::
 
     'App' => [
         // ...
