@@ -259,7 +259,7 @@ Session Data
 
 To access the session for a given request use the ``session()`` method::
 
-    $this->request->session()->read('User.name');
+    $this->request->session()->read('Auth.User.name');
 
 For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
