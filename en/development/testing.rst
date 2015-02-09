@@ -1041,8 +1041,9 @@ set correctly by the ``adjust`` method in our component. We create the file
     namespace App\Test\TestCase\Controller\Component;
 
     use App\Controller\Component\PagematronComponent;
+    use Cake\TestSuite\TestCase;
     use Cake\Controller\Controller;
-    use Cake\Controller\ComponentCollection;
+    use Cake\Controller\ComponentRegistry;
     use Cake\Network\Request;
     use Cake\Network\Response;
 
@@ -1056,9 +1057,6 @@ set correctly by the ``adjust`` method in our component. We create the file
         {
             parent::setUp();
             // Setup our component and fake test controller
-            $collection = new ComponentCollection();
-            $this->component = new PagematronComponent($collection);
-
             $request = new Request();
             $response = new Response();
             $this->controller = $this->getMock(
@@ -1066,7 +1064,8 @@ set correctly by the ``adjust`` method in our component. We create the file
                 [],
                 [$request, $response]
             );
-            $this->component->setController($this->controller);
+            $registry = new ComponentRegistry($this->controller);
+            $this->component = new PagematronComponent($registry);
         }
 
         public function testAdjust()
