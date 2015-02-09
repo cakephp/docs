@@ -1,13 +1,13 @@
 Internationalisation & Localisation
 ###################################
 
-L'une des meilleurs façons pour que votre application ait une audience plus
+L'une des meilleures façons pour que votre application ait une audience plus
 large est de gérer plusieurs langues. Cela peut souvent se révéler être une
 tâche gigantesque, mais les fonctionnalités d'internationalisation et de
 localisation dans CakePHP rendront cela plus facile.
 
 D'abord il est important de comprendre quelques terminologies.
-*Internationalisation* se réfère a la possibilité qu'a une application d'être
+*Internationalisation* se réfère à la possibilité qu'a une application d'être
 localisée. Le terme *localisation* se réfère à l'adaptation qu'a une
 application de répondre aux besoins d'une langue (ou culture) spécifique
 (par ex: un "locale"). L'internationalisation et la localisation sont souvent
@@ -37,11 +37,12 @@ traduction est disponible, sinon elle la renverra non modifiée.
 Fichiers de Langues
 -------------------
 
-Les traductions peuvent être mis à disposition en utilisant des fichiers
-de langue stockés dans votre application. Le format par défaut pour ces fichiers est
-le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Ces fichiers doivent être
-placés dans ``src/Locale/`` et dans ce répertoire, il devrait y avoir
-un sous-dossier par langue que l'application doit prendre en charge::
+Les traductions peuvent être mises à disposition en utilisant des fichiers
+de langue stockés dans votre application. Le format par défaut pour ces
+fichiers est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
+Ces fichiers doivent être placés dans ``src/Locale/`` et dans ce répertoire,
+il devrait y avoir un sous-dossier par langue que l'application doit prendre
+en charge::
 
 
     /src
@@ -96,7 +97,7 @@ plus.
 Définir la Locale par Défaut
 ----------------------------
 
-La ``locale``par défaut se détermine dans le fichier ``config/bootstrap.php``
+La ``locale`` par défaut se détermine dans le fichier ``config/bootstrap.php``
 via::
 
     ini_set('intl.default_locale', 'fr_FR');
@@ -106,223 +107,233 @@ de traduction par défaut, le format des dates, des nombres, et devises
 à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques
 de localisation fournies par CakePHP.
 
-Changing the Locale at Runtime
-------------------------------
+Modifier la Locale pendant l'Exécution
+--------------------------------------
 
-To change the language for translated strings you can call this method::
+Pour changer la langue des chaines de caractères traduites, vous pouvez
+appeler cette méthode::
 
     use Cake\I18n\I18n;
 
     I18n::locale('de_DE');
 
-This will also change how numbers and dates are formatted when using one of
-the localization tools.
+Cela changera également le formatage des nombres et des dates lorsque vous
+utilisez les outils de localisation.
 
-Using Translation Functions
-===========================
+Utiliser les Fonctions de Traduction
+====================================
 
-CakePHP provides several functions that will help you internationalize your
-application. The most frequently used one is :php:func:`__()`. This function
-is used to retrieve a single translation message or return the same string if no
-translation was found::
+CakePHP fournit plusieurs fonctions qui vous aideront à internationaliser votre
+application. La plus fréquemment utilisée est :php:func:`__()`. Cette fonction
+est utilisée pour récupérer un message de traduction simple ou retourner la
+même chaine si aucune traduction n'est trouvée::
 
     echo __('Popular Articles');
 
-If you need to group your messages, for example, translations inside a plugin,
-you can use the :php:func:`__d()` function to fetch messages from another domain::
+Si vous avez besoin de grouper vos messages, par exemple des traduction à
+l'intérieur d'un plugin, vous pouvez utiliser la fonction :php:func:`__d()`
+pour récupérer les messages d'un autre domaine::
 
     echo __d('my_plugin', 'Trending right now');
 
-Sometimes translations strings can be ambiguous for people translating them.
-This can happen if two strings are identical but refer to different things. For
-example, 'letter' has multiple meanings in english. To solve that problem, you
-can use the :php:func:`__x()` function::
+Parfois les chaines de traduction peuvent être ambigües pour les personnes
+les traduisant. Cela se produit lorsque deux chaines sont identiques mais
+se réfèrent à des choses différentes. Par exemple 'lettre' a plusieurs
+significations en français. Pour résoudre ce problème, vous pouvez utiliser
+la fonction :php:func:`__x()`::
 
-    echo __x('written communication', 'He read the first letter');
+    echo __x('communication écrite', 'Il a lu la première lettre');
 
-    echo __x('alphabet learning', 'He read the first letter');
+    echo __x('apprentissage de l alphabet', 'Il a lu la première lettre');
 
-The first argument is the context of the message and the second is the message
-to be translated.
+Le premier argument est le contexte du message et le second est le message
+à traduire.
 
-Using Variables in Translation Messages
----------------------------------------
+Utiliser des Variables dans les Traductions de Messages
+-------------------------------------------------------
 
-Translation functions allow you to interpolate variables into the messages using
-special markers defined in the message itself or in the translated string::
+Les fonctions de traduction vous permettent d'interpoler des variables dans
+les messages en utilisant des marqueurs définis dans le message lui-même
+ou dans la chaine traduite::
 
     echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
 
-Markers are numeric, and correspond to the keys in the passed array. You can
-also pass variables as independent arguments to the function::
+
+Les marqueurs sont numériques et correspondent aux clés dans le tableau passé.
+Vous pouvez également passer à la fonction les variables en tant qu'arguments
+indépendants::
 
     echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
 
-All translation functions support placeholder replacements::
+Toutes les fonctions de traduction intègrent le remplacement de placeholder::
 
     __d('validation', 'The field {0} cannot be left empty', 'Name');
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
-These functions take advantage of the
-`ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
-so you and translate messages and localize dates, numbers and
-currency at the same time::
+Ces fonctions profitent des avantages du `MessageFormatter ICU
+<http://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
+traduire des messages, des dates, des nombres et des devises en même temps::
 
     echo __(
         'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
         ['Charles', '2014-01-13 11:12:00', 1354.37]
     );
 
-    // Returns
+    // Retourne
     Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 
-
-Numbers in placeholders can be formatted as well with fine grain control of the
-output::
+Les nombres dans les placeholders peuvent également être formatés avec un
+contrôle fin et précis sur la sortie::
 
     echo __(
         'You have traveled {0,number,decimal} kilometers in {1,number,integer} weeks',
         [5423.344, 5.1]
     );
 
-    // Returns
+    // Retourne
     You have traveled 5,423.34 kilometers in 5 weeks
 
     echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
 
-    // Returns
+    // Retourne
     There are 6,100,000,000 people on earth
 
-This is the list of formatter specifiers you can put after the word ``number``:
+Voici la liste des balises spécifiques que vous pouvez mettre après le mot
+``number``:
 
-* ``integer``: Removes the decimal part
-* ``decimal``: Formats the number as a float
-* ``currency``: Puts the locale currency symbol and rounds decimals
-* ``percent``: Formats the number as a percentage
+* ``integer``: Supprime la partie décimale
+* ``decimal``: Formate le nombre en décimal
+* ``currency``: Ajoute le symbole de la devise locale et arrondit les décimales
+* ``percent``: Formate le nombre en pourcentage
 
-Dates can also be formatted by using the word ``date`` after the placeholder
-number. A list of extra options follows:
+Les dates peuvent également être formatées en utilisant le mot ``date`` après
+le nombre placeholder. Les options supplémentaires sont les suivantes:
 
 * ``short``
 * ``medium``
 * ``long``
 * ``full``
 
-The word ``time`` after the placeholder number is also accepted and it
-understands the same options as ``date``.
+Le mot ``time`` après le nombre placeholder est également accepté et
+il comprend les mêmes options que ``date``.
 
 .. note::
 
-    If you are using PHP 5.5+, you can use also named placeholders like {name}
-    {age}, etc. And pass the variables in an array having the corresponding key
-    names like ``['name' => 'Sara', 'age' => 12]``. This feature is not available
-    in PHP 5.4.
+    Si vous utilisez PHP 5.5+, vous pouvez également utiliser les placeholders
+    nommés tel que {name}, {age}, etc. Passez ensuite les variables dans un
+    tableau en faisant correspondre les clés aux noms comme
+    ``['name' => 'Sara','age' => 12]``. Cette fonctionnalité n'est pas
+    disponible dans PHP 5.4.
 
-Plurals
--------
+Pluriels
+--------
 
-One crucial part of internationalizing your application is getting your messages
-pluralized correctly depending on the language they are shown. CakePHP provides
-a couple ways to correctly select plurals in your messages.
+Une partie cruciale de l'internationalisation de votre application est de
+récupérer vos messages pluralisés correctement suivant les langues affichées.
+CakePHP fournit plusieurs possibilités pour sélectionner correctement les
+pluriels dans vos messages.
 
-Using ICU Plural Selection
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser la Sélection Plurielle ICU
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The first one is taking advantage of the ``ICU`` message format that comes
-by default in the translation functions. In the translations file you could have
-the following strings
+La première tire parti du format de message ``ICU`` qui est fourni par défaut
+dans les fonctions de traductions. Dans les fichiers de traduction vous
+pourriez avoir les chaines suivantes
 
 .. code-block:: pot
 
      msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
      msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
-And in your application use the following code to output either of the
-translations for such string::
+Et dans votre application utilisez le code suivant pour afficher l'une des
+traductions pour une telle chaine::
 
     __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
 
-    // Returns "Ningún resultado" as the argument {0} is 0
+    // Retourne "Ningún resultado" puisque l'argument {0} est 0
 
     __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [1]);
 
-    // Returns "1 resultado" because the argument {0} is 1
+    // Retourne "1 resultado" puisque l'argument {0} est 1
 
     __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [2, 2]);
 
-    // Returns "2 resultados" because the argument {0} is 2
+    // Retourne "2 resultados" puisque l'argument {0} est 2
 
-A closer look to the format we just used will make it evident how messages are
-built::
+Regarder de plus près le format que nous avons juste utilisé, rendra évident
+la méthode de construction des messages::
 
     { [count placeholder],plural, case1{message} case2{message} case3{...} ... }
 
-The ``[count placeholder]`` can be the array key number of any of the variables
-you pass to the translation function. It will be used for selecting the correct
-plural form.
+Le ``[count placeholder]`` peut être le numéro de clé du tableau de n'importe
+quelle variable passée à la fonction de traduction. Il sera utilisé pour
+sélectionner la forme plurielle correcte.
 
-You can of course use simpler message ids if you don't want to type the full
-plural selection sequence in your code
+Vous pouvez bien entendu utiliser des id de messages plus simples si vous ne
+voulez pas taper la séquence plurielle complète dans votre code.
 
 .. code-block:: pot
 
      msgid "search.results"
      msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
-Then use the new string in your code::
+Ensuite utilisez la nouvelle chaine dans votre code::
 
     __('search.results', [2, 2]);
 
-    // Returns: "2 resultados"
+    // Retourne "2 resultados"
 
-The latter version has the downside that you will need to have a translation
-messages file even for the default language, but has the advantage that it makes
-the code more readable and leaves the complicated plural selection strings in
-the translation files.
+la dernière version a l'inconvénient que vous aurez besoin d'avoir un fichier
+de message de traduction même pour la langue par défaut, mais comporte
+l'avantage de rendre le code plus lisible et de laisser les chaines de sélection
+de plurielles compliquées dans les fichiers de traduction.
 
-Sometimes using direct number matching in plurals is impractical. For example,
-languages like Arabic require a different plural when you refer
-to few things and other plural form for many things. In those cases you can
-use the ICU matching aliases. Instead of writing::
+Parfois utiliser directement la correspondance des nombres vers les pluriels
+est impossible. Par exemple les langues telles que l'Arabe nécessitent un
+pluriel différent lorsque vous faites référence à une faible quantité et
+un pluriel différent pour une quantité plus importante. Dans ces cas vous
+pouvez utiliser la correspondance d'alias ICU. Au lieu d'écrire::
 
     =0{No results} =1{...} other{...}
 
-You can do::
+Vous pouvez faire::
 
     zero{No Results} one{One result} few{...} many{...} other{...}
 
-Make sure you read the
-`Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
-to get a complete overview of the aliases you can use for each language.
+Assurez-vous de lire le `Guide des Règles Plurielles des Langues
+<http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+pour obtenir une vue d'ensemble complète des alias que vous pouvez utiliser pour
+chaque langue.
 
-Using Gettext Plural Selection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Utiliser la Sélection Plurielle Gettext
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The second plural selection format accepted is using the built-in capabilities
-of Gettext. In this case, plurals will be stored in the ``.po``
-file by creating a separate message translation line per plural form
+Le second format de sélection plurielle accepté est d'utiliser les
+fonctionnalités intégrées de Gettext. Dans ce cas, les pluriels seront
+enregistrés dans le fichier ``.po`` en créant une ligne de traduction séparée
+pour chaque forme plurielle.
 
 .. code-block:: pot
 
-    msgid "One file removed" # One message identifier for singular
-    msgid_plural "{0} files removed" # Another one for plural
-    msgstr[0] "Un fichero eliminado" # Translation in singular
-    msgstr[1] "{0} ficheros eliminados" # Translation in plural
+    msgid "One file removed" # Un identificateur de message pour le singulier
+    msgid_plural "{0} files removed" # Une autre pour le pluriel
+    msgstr[0] "Un fichero eliminado" # Traduction au singulier
+    msgstr[1] "{0} ficheros eliminados" # Traduction au pluriel
 
-When using this other format, you are required to use another translation
-function::
+Lorsque vous utilisez cet autre format, vous devez utiliser une autre fonction
+de traduction::
 
-    // Returns: "10 ficheros eliminados"
+    // Retourne: "10 ficheros eliminados"
     $count = 10;
     __n('One file removed', '{0} files removed', $count, $count);
 
-    // It is also possible to use it inside a domain
+    // Il est également possible de l'utiliser dans un domaine
     __dn('my_plugin', 'One file removed', '{0} files removed', $count, $count);
 
-The number inside ``msgstr[]`` is the number assigned by Gettext for the plural
-form of the language. Some languages have more than two plural forms, for
-example Croatian:
+Le nombre à l'intérieur de ``msgstr[]`` est le nombre assigné par Gettext pour
+la forme plurielle de la langue. Certaines langues ont plus de deux formes
+plurielles, le Croate par exemple:
 
 .. code-block:: pot
 
@@ -332,16 +343,18 @@ example Croatian:
     msgstr[1] "{0} datoteke uklonjenih"
     msgstr[2] "{0} slika uklonjenih"
 
-Please visit the `Launchpad languages page <https://translations.launchpad.net/+languages>`_
-for a detailed explanation of the plural form numbers for each language.
+Merci de visiter la `page des langues Launchpad
+<https://translations.launchpad.net/+languages>`_ pour une explication
+détaillée sur les nombres de formes plurielles de chaque langue.
 
-Creating Your Own Translators
+Créer Vos Propres Traducteurs
 =============================
 
-If you need to diverge from CakePHP conventions regarding where and how
-translation messages are stored, you can create your own translation message
-loader. The easiest way to create your own translator is by defining a loader
-for a single domain and locale::
+Si vous devez vous écarter des conventions de CakePHP en ce qui concerne
+l'emplacement et la manière d'enregistrer les messages de traduction, vous
+pouvez créer votre propre loader de messages traduits. La manière la plus
+simple de créer votre propre traducteur est de définir un loader pour
+un seul domaine et une seule locale::
 
     use Aura\Intl\Package;
 
@@ -360,24 +373,28 @@ for a single domain and locale::
         return $package;
     });
 
-The above code can be added to your ``config/bootstrap.php`` so that
-translations can be found before any translation function is used. The absolute
-minimum that is required for creating a translator is that the loader function
-should return a ``Aura\Intl\Package`` object. Once the code is in place you can
-use the translation functions as usual::
+Le code ci-dessus peut être ajouté à votre ``config/bootstrap.php`` pour
+que les traductions soient ajoutées avant qu'une fonction de traduction ne soit
+utilisée. Le minimum absolu nécessaire pour créer un traducteur est que la
+fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
+code est en place vous pouvez utiliser les fonctions de traduction comme
+d'habitude::
 
     I18n::locale('fr_FR');
-    __d('animals', 'Dog'); // Returns "Chien"
+    __d('animals', 'Dog'); // Retourne "Chien"
 
-As you see, ``Package`` objects take translation messages as an array. You can
-pass the ``setMessages()`` method however you like: with inline code, including
-another file, calling another function, etc. CakePHP provides a few loader
-functions you can reuse if you just need to change where messages are loaded.
-For example, you can still use ``.po`` files, but loaded from another location::
+Comme vous pouvez le voir, les objets ``Package`` prennent les messages de
+traduction sous forme de tableau. Vous pouvez passer la méthode
+``setMessages()`` de la manière qui vous plait: avec du code en ligne, en
+incluant un autre fichier, en appelant une autre fonction, etc. CakePHP fournit
+quelques fonctions de loader que vous pouvez réutiliser si vous devez juste
+changer l'endroit où sont chargés les messages.
+Par exemple, vous pouvez toujours utiliser les fichiers ``.po`` mais les charger
+depuis un autre endroit::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Load messages from src/Locale/folder/sub_folder/filename.po
+    // Charge les messages depuis src/Locale/folder/sub_folder/filename.po
 
     I18n::translator(
         'animals',
@@ -385,13 +402,13 @@ For example, you can still use ``.po`` files, but loaded from another location::
         new Loader('filename', 'folder/sub_folder', 'po')
     );
 
-Creating Message Parsers
-------------------------
+Créer des Parsers de Messages
+-----------------------------
 
-It is possible to continue using the same conventions CakePHP uses, but use
-a message parser other than ``PoFileParser``. For example, if you wanted to load
-translation messages using ``YAML``, you will first need to created the parser
-class::
+Il est possible de continuer à utiliser les mêmes conventions que CakePHP
+utilise mais d'utiliser un autre parser de messages que ``PoFileParser``.
+Par exemple, si vous vouliez charger les messages de traduction en utilisant
+``YAML``, vous auriez d'abord besoin de créer la classe du parser::
 
     namespace App\I18n\Parser;
 
@@ -404,8 +421,8 @@ class::
         }
     }
 
-The file should be created in the ``src/I18n/Parser`` directory of your
-application. Next, create the translations file under
+Le fichier doit être créé dans le dossier ``src/I18n/Parser`` de votre
+application. Ensuite, créez les fichiers de traduction sous
 ``src/Locale/fr_FR/animals.yaml``
 
 .. code-block:: yaml
@@ -414,7 +431,7 @@ application. Next, create the translations file under
     Cat: Chat
     Bird: Oiseau
 
-And finally, configure the translation loader for the domain and locale::
+Enfin, configurez le loader de traduction pour le domaine et la locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
@@ -424,16 +441,17 @@ And finally, configure the translation loader for the domain and locale::
         new Loader('animals', 'fr_FR', 'yaml')
     );
 
-Creating Generic Translators
-----------------------------
+Créer des Traducteurs Génériques
+--------------------------------
 
-Configuring translators by calling ``I18n::translator()`` for each domain and
-locale you need to support can be tedious, specially if you need to support more
-than a few different locales. To avoid this problem, CakePHP lets you define
-generic translator loaders for each domain.
+Configurer des traducteurs en appelant ``I18n::translator()`` pour chaque
+domaine et locale que vous devez supporter peut être fastidieux, spécialement
+si vous devez supporter plus que quelques locales. Pour éviter ce problème,
+CakePHP vous permet de définir des loaders de traduction génériques pour chaque
+domaine.
 
-Imagine that you wanted to load all translations for the default domain and for
-any language from an external service::
+Imaginez que vous vouliez charger toutes les traductions pour le domaine par
+défaut et pour chaque langue depuis un service externe::
 
     use Aura\Intl\Package;
 
@@ -449,17 +467,17 @@ any language from an external service::
         )
     });
 
-The above example calls an example external service to load a json file with the
-translations and then just build a ``Package`` object for any locale that is
-requested in the application.
+Le code ci-dessus appelle un service externe exemple pour charger un fichier
+json avec les traductions puis construit uniquement un objet ``Package``
+pour chaque locale nécessaire dans l'application.
 
-Plurals and Context in Custom Translators
------------------------------------------
+Pluriels et Contexte dans les Traducteurs Personnalisés
+-------------------------------------------------------
 
-The arrays used for ``setMessages()`` can be crafted to instruct the translator
-to store messages under different domains or to trigger Gettext-style plural selection.
-The following is an example of storing translations for the same key in
-different contexts::
+les tableaux utilisées pour ``setMessages()`` peuvent être conçus pour ordonner
+au traducteur d'enregistrer les messages sous différents domaines ou de
+déclencher une sélection de pluriel de style Gettext. Ce qui suit est un exemple
+d'enregistrement de traductions pour la même clé dans différents contextes::
 
     [
         'He reads the letter {0}' => [
@@ -468,8 +486,8 @@ different contexts::
         ]
     ]
 
-Similarly, you can express Gettext-style plurals using the messages array by
-having a nested array key per plural form::
+De même vous pouvez exprimer des pluriels de style Gettext en utilisant le
+tableau de messages avec une clé de tableau imbriqué par forme plurielle::
 
     [
         'I have read one book' => 'He leído un libro',
@@ -479,27 +497,30 @@ having a nested array key per plural form::
         ]
     ]
 
-Using Different Formatters
---------------------------
+Utiliser des Formateurs Différents
+----------------------------------
 
-In previous examples we have seen that Packages are built using ``default`` as
-first argument, and it was indicated with a comment that it corresponded to the
-formatter to be used. Formatters are  classes responsible for interpolating variables
-in translation messages and selecting the correct plural form.
+Dans les exemples précédents nous avons vu que les Packages sont construits en
+utilisant ``default`` en premier argument, et il était indiqué avec un
+commentaire qu'il correspondait au formateur à utiliser.
+Les formateurs sont des classes responsables d'interpoler les variables dans
+les messages de traduction et sélectionner la forme plurielle correcte.
 
-If you're dealing with a legacy application, or you don't need the power offered
-by the ICU message formatting, CakePHP also provides the ``sprintf`` formatter::
+Si vous avez à faire une application datée, ou que vous n'avez pas besoin de la
+puissance offerte par le formateur de message ICU, CakePHP fournit également le
+formateur ``sprintf``::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-The messages to be translated will be passed to the ``sprintf`` function for
-interpolating the variables::
+Les messages à traduire seront passés à la fonction ``sprintf`` pour
+interpoler les variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);
 
-It is possible to set the default formatter for all translators created by
-CakePHP before they are used for the first time. This does not include manually
-created translators using the ``translator()`` and ``config()`` methods::
+Il est possible de définir le formateur par défaut pour tous les traducteurs
+créés par CakePHP avant qu'ils soient utilisés pour la première fois. Cela
+n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
+``translator()`` et ``config()``::
 
     I18n::defaultFormatter('sprintf');
 

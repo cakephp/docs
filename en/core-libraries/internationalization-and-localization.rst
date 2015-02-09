@@ -482,7 +482,7 @@ Using Different Formatters
 
 In previous examples we have seen that Packages are built using ``default`` as
 first argument, and it was indicated with a comment that it corresponded to the
-formatter to be used. Formatters are  classes responsible for interpolating
+formatter to be used. Formatters are classes responsible for interpolating
 variables in translation messages and selecting the correct plural form.
 
 If you're dealing with a legacy application, or you don't need the power offered
