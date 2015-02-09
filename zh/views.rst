@@ -1,6 +1,10 @@
 视图
 ####
 
+.. php:namespace:: Cake\View
+
+.. php:class:: View
+
 视图(*View*)是 MVC 中的 **V**。视图负责生成请求要求的特定输出。经常这是用 HTML、
 XML 或者 JSON 的形式，但提供文件流和创建 PDF 供用户下载也是视图层的责任。
 
@@ -65,7 +69,7 @@ CakePHP 的视图层可以由一些不同的部分组成。每部分有不同的
         </ul>
     </div>
 
-上面的视图文件可以用作父视图。它需要扩展它的视图来定义 ``sidebar`` 和 ``title`` 
+上面的视图文件可以用作父视图。它需要扩展它的视图来定义 ``sidebar`` 和 ``title``
 代码块。``content`` 代码块是个 CakePHP 创建的特殊代码块。它会包括所有子视图中未捕
 获的内容。假设我们的视图文件有一个 ``$posts`` 变量，含有与我们的文章有关的数据。
 我们的视图可以像这样:
@@ -227,8 +231,8 @@ CakePHP 的视图层可以由一些不同的部分组成。每部分有不同的
 .. versionadded:: 2.1
 
 代码块取代了作废的 ``$scripts_for_layout`` 布局变量。你应当使用代码块。
-:php:class:`HtmlHelper` 与视图代码块紧密结合，它的 
-:php:meth:`~HtmlHelper::script()` 、 :php:meth:`~HtmlHelper::css()` 和 
+:php:class:`HtmlHelper` 与视图代码块紧密结合，它的
+:php:meth:`~HtmlHelper::script()` 、 :php:meth:`~HtmlHelper::css()` 和
 :php:meth:`~HtmlHelper::meta()` 方法，当使用 ``inline = false`` 选项时，会更新各
 自对应名称的代码块：
 
@@ -270,7 +274,7 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 就会放在缺省的布局里面。
 
 其它的布局文件应当放在 ``/app/View/Layouts`` 目录内。当你创建一个布局时，你需要
-告诉 CakePHP 视图的输出要放在哪里。为此，确保你的布局有一处包括 
+告诉 CakePHP 视图的输出要放在哪里。为此，确保你的布局有一处包括
 ``$this->fetch('content')`` 。一个缺省布局的例子可能是下面这样的：
 
 .. code-block:: php
@@ -305,8 +309,8 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 
 .. note::
 
-    在 2.1 版本之前，没有 fetch() 方法。 ``fetch('content')`` 代替了 
-    ``$content_for_layout`` ， ``fetch('meta')`` 、``fetch('css')`` 和 
+    在 2.1 版本之前，没有 fetch() 方法。 ``fetch('content')`` 代替了
+    ``$content_for_layout`` ， ``fetch('meta')`` 、``fetch('css')`` 和
     ``fetch('script')`` (所生成的行)包含在 2.0 版本的 ``$scripts_for_layout`` 变
     量中。
 
@@ -315,8 +319,8 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 
 .. note::
 
-    在视图文件中使用 :php:meth:`HtmlHelper::css()` 和 
-    :php:meth:`HtmlHelper::script()` 时，对 'inline' 选项指定 'false'，就可以把 
+    在视图文件中使用 :php:meth:`HtmlHelper::css()` 和
+    :php:meth:`HtmlHelper::script()` 时，对 'inline' 选项指定 'false'，就可以把
     html 源代码放入同名的代码块中了。(欲知用法的更多细节，请参看 API。)
 
 ``content`` 代码块含有渲染的视图的内容。
@@ -326,7 +330,7 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 
 .. note::
 
-    ``$title_for_layout`` 在 2.5 版本中已经作废，请在布局中使用 
+    ``$title_for_layout`` 在 2.5 版本中已经作废，请在布局中使用
     ``$this->fetch('title')`` 以及 ``$this->assign('title', 'page title')`` 来代
     替。
 
@@ -376,8 +380,8 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
    }
 
 CakePHP 有两个核心的布局(除了 CakePHP 的缺省布局)，供你在你自己的应用程序中使用：
-'ajax' 和 'flash'。Ajax 布局对生成 AJAX 响应很方便——这是一个空的布局。(绝大部分 
-AJAX 调用在返回值中只需要一点儿标记，而不是一个完整渲染的界面。) flash 布局用于 
+'ajax' 和 'flash'。Ajax 布局对生成 AJAX 响应很方便——这是一个空的布局。(绝大部分
+AJAX 调用在返回值中只需要一点儿标记，而不是一个完整渲染的界面。) flash 布局用于
 :php:meth:`Controller::flash()` 方法显示的消息。
 
 其它三个核心中的布局，xml、js 和 rss，以快速简便的方式提供非 text/html 的内容。
@@ -387,7 +391,7 @@ AJAX 调用在返回值中只需要一点儿标记，而不是一个完整渲染
 
 .. versionadded:: 2.1
 
-如果你要用存在于插件中的布局，你可以使用 :term:`plugin syntax` 。比如要用 
+如果你要用存在于插件中的布局，你可以使用 :term:`plugin syntax` 。比如要用
 Contacts 插件中的 contact 布局::
 
     class UsersController extends AppController
@@ -406,12 +410,12 @@ Contacts 插件中的 contact 布局::
 
 许多应用程序有小段的表现层代码，要在不同页面重复使用，有时要在布局的不同地方重复
 使用。CakePHP 能够帮助你重复使用网站中要重用的部分。这些可重用的部分叫元素
-(*element*)。广告、帮助框、导航控件、额外的菜单、登录表单和 callout 在 CakePHP 
+(*element*)。广告、帮助框、导航控件、额外的菜单、登录表单和 callout 在 CakePHP
 中经常用元素实现。元素基本上是一个微型视图，可以被引入到其它视图、布局甚至其它元
 素中。元素的运用可使视图的可读性更好，把重复元素的渲染放入它们自己的文件中。它们
 也可以帮助你重用应用程序中的内容片段。
 
-元素存在于 ``/app/View/Elements/`` 目录中，并以 .ctp 为文件扩展名。它们用视图的 
+元素存在于 ``/app/View/Elements/`` 目录中，并以 .ctp 为文件扩展名。它们用视图的
 element 方法来输出::
 
     echo $this->element('helpbox');
@@ -425,14 +429,14 @@ element 方法来输出::
         "helptext" => "Oh, this text is very helpful."
     ));
 
-在元素文件中，所有传入的参数可用参数数组成员来获得(和控制器中使用 
+在元素文件中，所有传入的参数可用参数数组成员来获得(和控制器中使用
 :php:meth:`Controller::set()` 方法为视图文件设置参数的方式相同)。在上述例子中，
 ``/app/View/Elements/helpbox.ctp`` 文件可使用 ``$helptext`` 变量::
 
     // 在 app/View/Elements/helpbox.ctp 中
     echo $helptext; // 输出为 "Oh, this text is very helpful."
 
-:php:meth:`View::element()` 方法也支持元素的配置选项。支持的选项为 'cache' 和 
+:php:meth:`View::element()` 方法也支持元素的配置选项。支持的选项为 'cache' 和
 'callbacks' 。例如::
 
     echo $this->element('helpbox', array(
@@ -458,7 +462,7 @@ element 方法来输出::
 
 你可以用 ``requestAction()`` 方法来充分利用元素。``requestAction()`` 方法从控制器
 动作获取视图变量，再以数组返回。这让你的元素能够以真正的 MVC 方式运作。创建一个控
-制器动作来为你的元素准备视图变量，然后在 ``element()`` 的第二个参数中调用 
+制器动作来为你的元素准备视图变量，然后在 ``element()`` 的第二个参数中调用
 ``requestAction()`` ，就可以从控制器给元素提供视图变量。
 
 为此，在文章(*Post*)的例子中，在你的控制器中添加下面这样的代码::
@@ -498,7 +502,7 @@ element 方法来输出::
 --------------
 
 如果你提供一个 cache 参数，你就可以利用 CakePHP 的视图缓存。如果设为 true，元素就
-会被缓存在 'default' 缓存配置中。否则，你可设置应该使用哪个缓存配置。欲知更多配置 
+会被缓存在 'default' 缓存配置中。否则，你可设置应该使用哪个缓存配置。欲知更多配置
 :php:class:`Cache` 的信息，请参看 :doc:`/core-libraries/caching`。下面是缓存元素
 的一个简单例子::
 
@@ -542,7 +546,7 @@ element 方法来输出::
 
     echo $this->element('Contacts.helpbox');
 
-如果你的视图是插件的一部分，你可以省略插件名称。例如，如果你在 Contacts 插件的 
+如果你的视图是插件的一部分，你可以省略插件名称。例如，如果你在 Contacts 插件的
 ``ContactsController`` 中，下面的::
 
     echo $this->element('helpbox');
@@ -588,7 +592,7 @@ element 方法来输出::
 
 .. php:class:: View
 
-视图方法在所有视图、元素和布局文件中都可使用。要调用任何视图方法，使用 
+视图方法在所有视图、元素和布局文件中都可使用。要调用任何视图方法，使用
 ``$this->method()``。
 
 .. php:method:: set(string $var, mixed $value)
@@ -644,7 +648,7 @@ element 方法来输出::
     添加内容到内部的脚本缓冲区。这个缓冲区可在布局中用 ``$scripts_for_layout`` 来
     访问。这个方法在创建需要直接向布局添加 javascript 或者 css 的助件时，会有用。
     切记，从布局或布局中的元素添加的脚本，不会被加到 ``$scripts_for_layout`` 中。
-    这个方法最常用在助件内，比如 :doc:`/core-libraries/helpers/js` 和 
+    这个方法最常用在助件内，比如 :doc:`/core-libraries/helpers/js` 和
     :doc:`/core-libraries/helpers/html` 助件。
 
     .. deprecated:: 2.1
@@ -693,14 +697,14 @@ element 方法来输出::
 
 .. php:method:: fetch($name, $default = '')
 
-    取得代码块的值。如果代码块为空或未定义，则会返回 ''。例子参见 
+    取得代码块的值。如果代码块为空或未定义，则会返回 ''。例子参见
     :ref:`view-blocks` 一节。
 
     .. versionadded:: 2.1
 
 .. php:method:: extend($name)
 
-    用命名的视图/元素/布局扩展当前的视图/元素/布局。例子参见 
+    用命名的视图/元素/布局扩展当前的视图/元素/布局。例子参见
     :ref:`extending-views` 一节。
 
     .. versionadded:: 2.1
@@ -737,8 +741,8 @@ element 方法来输出::
 .. toctree::
     :maxdepth: 1
 
+    views/cells
     views/themes
-    views/media-view
     views/json-and-xml-views
     views/helpers
 
