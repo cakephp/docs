@@ -162,7 +162,7 @@ following::
     }
 
 Calling the parent method is important in test cases, as CakeTestCase::setUp()
-does a number things like backing up the values in :php:class:`Configure` and,
+does a number of things like backing up the values in :php:class:`Configure` and,
 storing the paths in :php:class:`App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
