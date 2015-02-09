@@ -123,7 +123,7 @@ utilisez les outils de localisation.
 Utiliser les Fonctions de Traduction
 ====================================
 
-CakePHP fournit plusieurs fonctions qui vous aiderons à internationaliser votre
+CakePHP fournit plusieurs fonctions qui vous aideront à internationaliser votre
 application. La plus fréquemment utilisée est :php:func:`__()`. Cette fonction
 est utilisée pour récupérer un message de traduction simple ou retourner la
 même chaine si aucune traduction n'est trouvée::
@@ -132,7 +132,7 @@ même chaine si aucune traduction n'est trouvée::
 
 Si vous avez besoin de grouper vos messages, par exemple des traduction à
 l'intérieur d'un plugin, vous pouvez utiliser la fonction :php:func:`__d()`
-pour récupérer les messages d'un autre domaine:::
+pour récupérer les messages d'un autre domaine::
 
     echo __d('my_plugin', 'Trending right now');
 
@@ -140,7 +140,7 @@ Parfois les chaines de traduction peuvent être ambigües pour les personnes
 les traduisant. Cela se produit lorsque deux chaines sont identiques mais
 se réfèrent à des choses différentes. Par exemple 'lettre' a plusieurs
 significations en français. Pour résoudre ce problème, vous pouvez utiliser
-la fonction :php:func:`__x()` ::
+la fonction :php:func:`__x()`::
 
     echo __x('communication écrite', 'Il a lu la première lettre');
 
@@ -171,7 +171,7 @@ Toutes les fonctions de traduction intègrent le remplacement de placeholder::
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
-Ces fonctions profitent des avantages du `MessageFormatter ICU 
+Ces fonctions profitent des avantages du `MessageFormatter ICU
 <http://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
 traduire des messages, des dates, des nombres et des devises en même temps::
 
@@ -183,8 +183,8 @@ traduire des messages, des dates, des nombres et des devises en même temps::
     // Retourne
     Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 
-Les nombres dans les placeholders peuvent également être formatés avec un contrôle
-fin et précis sur la sortie::
+Les nombres dans les placeholders peuvent également être formatés avec un
+contrôle fin et précis sur la sortie::
 
     echo __(
         'You have traveled {0,number,decimal} kilometers in {1,number,integer} weeks',
@@ -343,7 +343,7 @@ plurielles, le Croate par exemple:
     msgstr[1] "{0} datoteke uklonjenih"
     msgstr[2] "{0} slika uklonjenih"
 
-Merci de visiter la `page des langues Launchpad 
+Merci de visiter la `page des langues Launchpad
 <https://translations.launchpad.net/+languages>`_ pour une explication
 détaillée sur les nombres de formes plurielles de chaque langue.
 
@@ -375,9 +375,10 @@ un seul domaine et une seule locale::
 
 Le code ci-dessus peut être ajouté à votre ``config/bootstrap.php`` pour
 que les traductions soient ajoutées avant qu'une fonction de traduction ne soit
-utilisée. Le minimum absolu nécessaire pour créer un traducteur est que la fonction
-loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le code est en
-place vous pouvez utiliser les fonctions de traduction comme d'habitude::
+utilisée. Le minimum absolu nécessaire pour créer un traducteur est que la
+fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
+code est en place vous pouvez utiliser les fonctions de traduction comme
+d'habitude::
 
     I18n::locale('fr_FR');
     __d('animals', 'Dog'); // Retourne "Chien"
@@ -407,7 +408,7 @@ Créer des Parsers de Messages
 Il est possible de continuer à utiliser les mêmes conventions que CakePHP
 utilise mais d'utiliser un autre parser de messages que ``PoFileParser``.
 Par exemple, si vous vouliez charger les messages de traduction en utilisant
-``YAML``, vous aurez d'abord besoin de créer la classe du parser::
+``YAML``, vous auriez d'abord besoin de créer la classe du parser::
 
     namespace App\I18n\Parser;
 
@@ -485,8 +486,8 @@ d'enregistrement de traductions pour la même clé dans différents contextes::
         ]
     ]
 
-De même vous pouvez exprimer des pluriels de style Gettext en utilisant le tableau
-de messages avec une clé de tableau imbriqué par forme plurielle::
+De même vous pouvez exprimer des pluriels de style Gettext en utilisant le
+tableau de messages avec une clé de tableau imbriqué par forme plurielle::
 
     [
         'I have read one book' => 'He leído un libro',
