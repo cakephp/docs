@@ -92,7 +92,7 @@ add the following to your application's ``composer.json``::
         "cakephp/cakephp": "3.0.*-dev"
     }
 
-Where ``<branch>`` is the branch name you want to follow. Each time you run
+Each time you run
 ``php composer.phar update`` you will receive the latest changes in the chosen
 branch.
 
