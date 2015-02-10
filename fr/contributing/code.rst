@@ -39,14 +39,14 @@ Après que le fork est fait, clonez votre fork sur votre machine local::
 
 Ajoutez le dépôt CakePHP d'origine comme un dépôt distant. Vous utiliserez ceci
 plus tard pour aller chercher les changements du dépôt CakePHP. Cela vous
-permettra de rester à jour avec CakePHP ::
+permettra de rester à jour avec CakePHP::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
 Maintenant que vous avez configuré CakePHP, vous devriez être en mesure
-de définir un ``$test``:ref:`connexion à la base <database-configuration>`,
-et:ref:`exécuter tous les tests de <running-tests>`.
+de définir une :ref:`connexion à la base <database-configuration>` ``$test``,
+et :ref:`exécuter tous les tests de <running-tests>`.
 
 Travailler sur un correctif
 ===========================
@@ -54,10 +54,10 @@ Travailler sur un correctif
 A chaque fois que vous voulez travailler sur un bug, une fonctionnalité ou
 une amélioration, créez une branche avec un sujet.
 
-La branche que vous créez devrait être basée sur la version pour laquelle
-se tourne votre correctif/amélioration.
-Par exemple, si vous régler un bug dans ``2.3``, vous pouvez utiliser la
-branche ``2.3`` comme la base de votre branche. Cela simplifiera la fusion
+La branche que vous créez devra être basée sur la version pour laquelle
+votre correctif/amélioration tourne.
+Par exemple, si vous réglez un bug dans ``2.3``, vous pouvez utiliser la
+branche ``2.3`` comme base de votre branche. Cela simplifiera la fusion
 future de vos changements::
 
     # régler un bug dans 2.3
@@ -84,7 +84,7 @@ Soumettre un pull request
 =========================
 
 Une fois que vos changements sont faits et que vous êtes prêts pour la fusion
-dans CakePHP, vous voudrez mettre à jour votre branche::
+dans CakePHP, vous pouvez mettre à jour votre branche::
 
     git checkout 2.3
     git fetch upstream
@@ -109,13 +109,13 @@ Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branch
 
 Une fois que votre branche est sur github, vous pouvez discuter de cela sur la
 mailing-liste `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
-soumettre un pull request sur github.
+soumettre une pull request sur github.
 
-Choisir l'emplacement dans lequel vos changements seront fusionnés
+Choisir l'Emplacement dans lequel vos Changements seront Fusionnés
 ------------------------------------------------------------------
 
 Quand vous faîtes vos pull requests, vous devez vous assurer de sélectionner
-la branche de base correcte, puisque vous ne pouvez pas l'éditer une fois que
+la bonne branche de base, puisque vous ne pouvez pas l'éditer une fois que
 la pull request est créée.
 
 * Si votre changement est un **bugfix** et n'introduit pas de nouvelles
@@ -135,14 +135,13 @@ la pull request est créée.
 .. note::
 
     Rappelez vous que tout le code auquel vous contribuez pour CakePHP sera
-    sous la licence MIT License, et la
-    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera le
+    sous Licence MIT, et la
+    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
     suivre les `Guidelines de la Communauté CakePHP <http://community.cakephp.org/guidelines>`_.
    
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).
-
 
 .. meta::
     :title lang=fr: Code
