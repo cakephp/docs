@@ -1,23 +1,13 @@
 Running Shells as Cron Jobs
 ###########################
 
-A common thing to do with a shell is making it run as a cronjob to
-clean up the database once in a while or send newsletters. This is
-trivial to setup, for example::
+.. note::
+    A documentação não é atualmente suportada pela lingua portuguesa nesta
+    página.
 
-      */5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
-    # *    *    *    *    *  command to execute
-    # │    │    │    │    │
-    # │    │    │    │    │
-    # │    │    │    │    \───── day of week (0 - 6) (0 to 6 are Sunday to Saturday,
-      |    |    |    |           or use names)
-    # │    │    │    \────────── month (1 - 12)
-    # │    │    \─────────────── day of month (1 - 31)
-    # │    \──────────────────── hour (0 - 23)
-    # \───────────────────────── min (0 - 59)
+    Por favor, sinta-se a vontade para nos enviar um pull request no
+    `Github <https://github.com/cakephp/docs>`_ ou use o botão
+    **Improve This Doc** para propor suas mudanças diretamente.
 
-You can see more info here: http://en.wikipedia.org/wiki/Cron
-
-.. meta::
-    :title lang=pt: Running Shells as cronjobs
-    :keywords lang=pt: cronjob,bash script,crontab
+    Você pode referenciar-se à versão inglesa no menu de seleção superior
+    para obter informações sobre o tópico desta página.

@@ -1,25 +1,13 @@
-NumberHelper
-############
+Number
+######
 
-.. php:namespace:: Cake\View\Helper
+.. note::
+    A documentação não é atualmente suportada pela lingua portuguesa nesta
+    página.
 
-.. php:class:: NumberHelper(View $view, array $config = [])
+    Por favor, sinta-se a vontade para nos enviar um pull request no
+    `Github <https://github.com/cakephp/docs>`_ ou use o botão
+    **Improve This Doc** para propor suas mudanças diretamente.
 
-The NumberHelper contains convenient methods that enable display
-numbers in common formats in your views. These methods include ways
-to format currency, percentages, data sizes, format numbers to
-specific precisions and also to give you more flexibility with
-formatting numbers.
-
-.. include:: /core-libraries/number.rst
-    :start-after: start-cakenumber
-    :end-before: end-cakenumber
-
-.. warning::
-
-    All symbols are UTF-8.
-
-.. meta::
-    :title lang=pt: NumberHelper
-    :description lang=pt: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
-    :keywords lang=pt: number helper,currency,number format,number precision,format file size,format numbers
+    Você pode referenciar-se à versão inglesa no menu de seleção superior
+    para obter informações sobre o tópico desta página.
