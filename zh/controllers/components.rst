@@ -6,18 +6,29 @@
 复制粘贴代码，就应当考虑创建自己的组件，封装这些功能。创建组件可以保持控制器代码
 简洁，并且让你可以在不同的项目中重用代码。
 
-每个核心组件都会在各自的章节中详细介绍，请参看 
-:doc:`/core-libraries/toc-components` 。本节将描述如何配置和使用组件，以及如何创
+每个核心组件都会在各自的章节中详细介绍，请参看
+。本节将描述如何配置和使用组件，以及如何创
 建你自己的组件。
+
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
 
 .. _configuring-components:
 
 配置组件
 ========
 
-许多核心组件需要进行配置。一些要求配置的组件的例子为 
+许多核心组件需要进行配置。一些要求配置的组件的例子为
 :doc:`/core-libraries/components/authentication` 以及
-:doc:`/core-libraries/components/cookie` 。这些组件以及一般组件的配置，通常都是用 
+:doc:`/core-libraries/components/cookie` 。这些组件以及一般组件的配置，通常都是用
 ``$components`` 数组、或者控制器的 ``beforeFilter()`` 方法来进行::
 
     class PostsController extends AppController
@@ -88,7 +99,7 @@
 ========
 
 一旦你已经在控制器中引入了一些组件，用起来是非常简单的。每个组件都作为控制器中的
-属性可供调用。如果你已经在控制器中加载了 :php:class:`SessionComponent` 和 
+属性可供调用。如果你已经在控制器中加载了 :php:class:`SessionComponent` 和
 :php:class:`CookieComponent` ，你就可以像下面这样访问它们::
 
     class PostsController extends AppController
@@ -111,7 +122,7 @@
 动态加载组件
 ------------
 
-你可能不需要在控制器的所有动作中让所有组件可以使用。这种情况下，你可以使用 
+你可能不需要在控制器的所有动作中让所有组件可以使用。这种情况下，你可以使用
 :doc:`Component Collection </core-libraries/collections>` 在运行时(即动态)加载组
 件。在控制器方法中，你可以这样做::
 
@@ -138,7 +149,7 @@
 设想我们的在线应用需要在程序的很多不同地方执行一个复杂的数学运算。我们可以创建一
 个组件把这个共享的逻辑封装起来，从而可以在很多不同的控制器中使用。
 
-首先要创建一个新组件的文件和类。创建 
+首先要创建一个新组件的文件和类。创建
 ``app/Controller/Component/MathComponent.php`` 文件。组件的基本构造如下::
 
     App::uses('Component', 'Controller');
@@ -178,7 +189,7 @@
         'Session', 'Auth'
     );
 
-上面的例子会将包含 precision 和 randomGenerator 的数组作为第二个参数传递给 
+上面的例子会将包含 precision 和 randomGenerator 的数组作为第二个参数传递给
 ``MathComponent::__construct()`` 。按照约定，如果数组的键与组件的公共属性吻合，属
 性将被设置为该键对应的值。
 
@@ -257,12 +268,10 @@
 
 .. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
 
-    在控制器的 redirect 方法调用时、但在进行任何操作之前被调用。如果该方法返回 
+    在控制器的 redirect 方法调用时、但在进行任何操作之前被调用。如果该方法返回
     false，则控制器就不会继续重定向该请求。$url、$status 和 $exit 参数与控制器方
     法中相应的参数含义相同。也可以返回一个字符串作为重定向的网址，或者返回包括键
     'url' 和可选的键 'status'、'exit' 的关联数组。
-
-
 
 .. meta::
     :title lang=zh_CN: Components
