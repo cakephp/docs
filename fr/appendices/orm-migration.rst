@@ -378,7 +378,7 @@ a les deux colonnes first et last name, vous pouvez ajouter un accesseur pour
 
 Une fois définie, vous pouvez accéder à votre nouvelle propriété en utilisant
 ``$user->full_name``. L'utilisation des fonctionnalités :ref:`map-reduce`
-de l'ORM vous permettent de construire des données aggrégées à partir de vos
+de l'ORM vous permettent de construire des données agrégées à partir de vos
 résultats, ce qui était souvent un autre cas d'utilisation callback ``afterFind``.
 
 Alors que les champs virtuels ne sont plus une fonctionnalité de l'ORM,

@@ -327,7 +327,7 @@ des articles publiés, nous ferions ce qui suit::
     $query = $articles->find('published');
 
 Les méthodes finder peuvent modifier la requête comme ceci, ou utiliser
-``$options`` pour personnaliser l'opérarion finder avec la logique
+``$options`` pour personnaliser l'opération finder avec la logique
 d'application concernée. Vous pouvez aussi 'stack' les finders, vous
 permettant de faire des requêtes complexes sans efforts. En supposant que
 vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
@@ -605,7 +605,7 @@ Stopper le buffering nécessite quelques mises en garde:
 #. Le buffering ne peut pas être désactivé pour les requêtes qui chargent en
    eager les associations hasMany ou belongsToMany, puisque ces types
    d'association nécessitent le chargement en eager de tous les résultats
-   pour que les requêtes dépendentes puissent être générées. Cette
+   pour que les requêtes dépendantes puissent être générées. Cette
    limitation n'est pas présente lorsque l'on utilise la stratégie ``subquery``
    pour ces associations.
 

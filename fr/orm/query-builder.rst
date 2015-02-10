@@ -13,8 +13,8 @@ sous-requêtes avec facilité.
 Sous le capot, le constructeur de requête utilise les requêtes préparées de
 PDO qui protègent contre les attaques d'injection SQL.
 
-Les objets Query sont lazily evaluated. Cela signifie qu'une requête n'est
-pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
+Les objets Query sont évalué "lazily" (paresseusement). Cela signifie qu'une
+requête n'est pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 
 - La requête est itérée avec ``foreach()``.
 - La méthode ``execute()`` de query est appelée. Elle retourne l'objet
@@ -32,7 +32,7 @@ que si une Query n'a pas été évaluée, aucun SQL ne sera jamais envoyé à la
 base de données. Une fois exécutée, la modification et la ré-évaluation
 d'une requête va entraîner l'exécution de SQL supplémentaire.
 
-Si vous souhaitez jeter un oeil sur le SQL que CakePHP génère, vous pouvez
+Si vous souhaitez jeter un œil sur le SQL que CakePHP génère, vous pouvez
 activer les :ref:`logs de requête <database-query-logging>` de la base de
 données.
 
@@ -67,7 +67,7 @@ Vous pouvez bien sûr chainer les méthodes que vous appelez sur les objets Quer
         ->order(['created' => 'DESC']);
 
 Si vous essayez d'appeler ``debug()`` sur un objet Query, vous verrez son état
-interne et le SQL qui sera executé dans la base de données::
+interne et le SQL qui sera exécuté dans la base de données::
 
     debug($articles->find()->where(['id' => 1]));
 
@@ -123,7 +123,7 @@ de la requête et les résultats vous seront retournés::
     // Ceci exécute aussi la requête
     $allTitles = $articles->find()->extract('title');
 
-Une fois que vous êtes familié avec les méthodes de l'objet Query, il est
+Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
 fortement recommandé que vous consultiez la section
 :ref:`Collection<collection-objects>` pour améliorer vos compétences dans
 le traversement efficace de données. En résumé, il est important de se
@@ -287,7 +287,7 @@ Entrainera::
 Regroupements - Group et Having
 -------------------------------
 
-Quand vous utilisez les fonctions d'aggrégation comme ``count`` et ``sum``, vous
+Quand vous utilisez les fonctions d'agrégation comme ``count`` et ``sum``, vous
 pouvez utiliser les clauses ``group by`` et ``having``::
 
     $query = $articles->find();
@@ -298,12 +298,12 @@ pouvez utiliser les clauses ``group by`` et ``having``::
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Désactiver l'Hydration
-----------------------
+Désactiver l'Hydratation
+------------------------
 
 Alors que les ensembles de résultats en objet de l'ORM sont puissants,
 l'hydratation des entities n'est parfois pas nécessaire. Par exemple, quand
-vous accédez aux données aggrégées, la construction d'une Entity peut ne pas
+vous accédez aux données agrégées, la construction d'une Entity peut ne pas
 être utile. Dans ces situations, vous pouvez désactiver l'hydratation d'une
 entity::
 
@@ -312,7 +312,7 @@ entity::
 
 .. note::
 
-    Quand l'hydration est désactivée, les résultats seront retournés en
+    Quand l'hydratation est désactivée, les résultats seront retournés en
     tableaux basiques.
 
 Instructions Case
@@ -330,7 +330,7 @@ données, vous auriez besoin de générer le SQL suivant::
     SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
     FROM articles GROUP BY published
 
-Pour faire ceci avec le générateur de requêtes , vous utiliseriez le code suivant::
+Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code suivant::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
@@ -554,7 +554,7 @@ Créer automatiquement des Clauses IN
 
 Quand vous construisez des requêtes en utilisant l'ORM, vous n'avez
 généralement pas besoin d'indiquer les types de données des colonnes avec
-lesquelles vous intéragissez, puisque CakePHP peut déduire les types en se
+lesquelles vous interagissez, puisque CakePHP peut déduire les types en se
 basant sur les données du schéma. Si dans vos requêtes, vous souhaitez que
 CakePHP convertisse automatiquement l'égalité en comparaisons ``IN``, vous
 devez indiquer les types de données des colonnes::
@@ -643,8 +643,8 @@ résultantes. Il y a plusieurs façons de faire ceci::
     // Récupérer les résultats
     $results = $query->all();
 
-Vous pouvez utiliser les méthodes
-:doc:`any of the collection </core-libraries/collections>` sur vos objets
+Vous pouvez utiliser toutes les méthodes
+:doc:`des Collections </core-libraries/collections>` sur vos objets
 query pour traiter préalablement ou transformer les résultats::
 
     // Utilise une des méthodes collection.
@@ -978,7 +978,7 @@ façon légère de mapper les ensembles de résultats. Si vous avez besoin de pl
 contrôle sur le processus, ou que vous souhaitez réduire les résultats, vous
 devriez utiliser la fonctionnalité de :ref:`Map/Reduce <map-reduce>` à la
 place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
-facilement calculer leur âge avec le formatteur de résultats::
+facilement calculer leur âge avec le formateur de résultats::
 
     // En supposant que nous avons construit les champs, les conditions et les contain.
     $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
@@ -988,17 +988,17 @@ facilement calculer leur âge avec le formatteur de résultats::
         });
     });
 
-Comme vous pouvez le voir dans l'exemple ci-dessus, les callbacks de formattage
+Comme vous pouvez le voir dans l'exemple ci-dessus, les callbacks de formatage
 récupéreront un ``ResultSetDecorator`` en premier argument. Le second argument
-sera l'instance Query sur laquelle le formatteur a été attaché. L'argument
+sera l'instance Query sur laquelle le formateur a été attaché. L'argument
 ``$results`` peut être traversé et modifié autant que nécessaire.
 
-Les formatteurs de résultat sont nécessaires pour retourner un objet itérateur,
+Les formateurs de résultat sont nécessaires pour retourner un objet itérateur,
 qui sera utilisé comme valeur retournée pour la requête. Les fonctions de
-formatteurs sont appliquées après que toutes les routines
-Map/Reduce soient exécutées. Les formatteurs de résultat peuvent aussi être
+formateurs sont appliquées après que toutes les routines
+Map/Reduce soient exécutées. Les formateurs de résultat peuvent aussi être
 appliqués dans les associations ``contain``. CakePHP va s'assurer que vos
-formatteurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
+formateurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
 comme vous pouvez vous y attendre::
 
     // Dans une méthode dans la table Articles
@@ -1017,7 +1017,7 @@ comme vous pouvez vous y attendre::
     // Affiche 29
     echo $results->first()->author->age;
 
-Comme vu précédemment, les formatteurs attachés aux constructeurs de requête
+Comme vu précédemment, les formateurs attachés aux constructeurs de requête
 associées sont limités pour agir seulement sur les données dans l'association.
 CakePHP va s'assurer que les valeurs calculées soient insérées dans la bonne
 ``entity``.
@@ -1030,7 +1030,7 @@ Modifier les Résultats avec Map/Reduce
 La plupart du temps, les opérations ``find`` nécessitent un traitement postérieur
 des données qui se trouvent dans la base de données. Alors que les méthodes
 ``getter`` des ``entities`` peuvent s'occuper de la plupart de la génération de
-propriété virtuelle ou un formattage de données spéciales, parfois vous devez
+propriété virtuelle ou un formatage de données spéciales, parfois vous devez
 changer la structure des données d'une façon plus fondamentale.
 
 Pour ces cas, l'objet ``Query`` offre la méthode ``mapReduce()``, qui est une
