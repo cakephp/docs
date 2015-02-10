@@ -1,18 +1,14 @@
-.. Events System
-
 イベントシステム
 ################
 
-.. versionadded:: 2.1
 
-..
-  Creating maintainable applications is both a science and an art. It is
-  well-known that a key for having good quality code is making your objects
-  loosely coupled and strongly cohesive at the same time. Cohesion means that
-  all methods and properties for a class are strongly related to the class
-  itself and it is not trying to do the job other objects should be doing,
-  while loosely coupling is the measure of how little a class is "wired"
-  to external objects, and how much that class is depending on them.
+Creating maintainable applications is both a science and an art. It is
+well-known that a key for having good quality code is making your objects
+loosely coupled and strongly cohesive at the same time. Cohesion means that
+all methods and properties for a class are strongly related to the class
+itself and it is not trying to do the job other objects should be doing,
+while loosely coupling is the measure of how little a class is "wired"
+to external objects, and how much that class is depending on them.
 
 メンテナンス性の高いアプリケーションの創造は、科学でもあり芸術でもあります。
 良く知られていることですが、高い品質のコードを保持するための鍵は、
@@ -835,15 +831,11 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 その他の資料
 ============
 
-.. toctree::
-    :maxdepth: 1
-
-    /core-libraries/collections
-    /models/behaviors
-    /controllers/components
-    /views/helpers
+* :doc:`/orm/behaviors`
+* :doc:`/controllers/components`
+* :doc:`/views/helpers`
 
 
 .. meta::
-    :title lang=en: Events system
-    :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php
+    :title lang=ja: Events system
+    :keywords lang=ja: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

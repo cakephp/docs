@@ -18,13 +18,24 @@
 各コアコンポーネントの詳細は各章で説明します。ここでは、独自のコンポーネントを作成する方法を紹介します。
 コンポーネントを作成することでコントローラのコードがクリーンな状態に保たれ、プロジェクト間でコードを再利用し易くなります。
 
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
+
 .. _configuring-components:
 
 コンポーネントの設定
 ====================
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を必要としている例は、
-:doc:`/core-libraries/components/authentication` や :doc:`/core-libraries/components/cookie` などにあります。
+:doc:`/controllers/components/authentication` や :doc:`/controllers/components/cookie` などにあります。
 これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
 ``$components`` 配列かコントローラの ``beforeFilter()`` メソッドで行われます。::
 
@@ -261,5 +272,5 @@
     'status'と'exit'は任意です。
 
 .. meta::
-    :title lang=en: Components
-    :keywords lang=en: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
+    :title lang=ja: Components
+    :keywords lang=ja: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

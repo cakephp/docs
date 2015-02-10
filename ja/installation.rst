@@ -150,15 +150,6 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com で Cake アプリケーションがアクセス可能になっているはずです。
 
-応用インストールと URL リライティング
-=====================================
-
-.. toctree::
-    :maxdepth: 1
-
-    installation/advanced-installation
-    installation/url-rewriting
-
 動作確認
 ========
 
@@ -167,7 +158,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 この時点では、CakePHP のデフォルトのホーム画面と、現在のデータベース接続の状態が表示されるはずです。
 
 おめでとうございます!
-:doc:`CakePHP の最初のアプリケーションを作る </getting-started>`
+:doc:`CakePHP の最初のアプリケーションを作る </intro>`
 準備ができました。
 
 動きませんか？
@@ -178,3 +169,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');
+
+.. meta::
+    :title lang=ja: Installation
+    :keywords lang=ja: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
