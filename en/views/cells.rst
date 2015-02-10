@@ -91,10 +91,10 @@ following::
 
 .. note::
 
-    Cell templates have an isolated scope do not share the same View instance
-    as the one used to render template and layout for the current controller
-    action or other cells. Hence they are unaware of any helper calls made or
-    blocks set in the action's template / layout and vice versa.
+    Cell templates have an isolated scope that does not share the same View
+    instance as the one used to render template and layout for the current
+    controller action or other cells. Hence they are unaware of any helper calls
+    made or blocks set in the action's template / layout and vice versa.
 
 Loading Cells
 =============
