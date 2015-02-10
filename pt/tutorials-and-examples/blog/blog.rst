@@ -1,54 +1,58 @@
-Blog Tutorial
-#############
+Construindo um blog
+###################
 
-This tutorial will walk you through the creation of a simple blog application.
-We'll be installing CakePHP, creating a database, and creating enough
-application logic to list, add, edit, and delete blog posts.
+Este tutorial irá orientá-lo na criação de um simples aplicativo de blog. 
+Estaremos instalando CakePHP, criando um banco de dados e criando a lógica de aplicação suficiente para listar, 
+adicionar, editar e apagar posts.
 
-Here's what you'll need:
+Aqui está o que você vai precisar:
 
-#. A running web server. We're going to assume you're using Apache,
-   though the instructions for using other servers should be very
-   similar. We might have to play a little with the server
-   configuration, but most folks can get CakePHP up and running without
-   any configuration at all. Make sure you have PHP 5.4.16 or greater, and
-   that the ``mbstring`` and ``intl`` extensions are enabled in PHP.
-#. A database server. We're going to be using MySQL server in this
-   tutorial. You'll need to know enough about SQL in order to create a
-   database: CakePHP will be taking the reins from there. Since we're using MySQL,
-   also make sure that you have ``pdo_mysql`` enabled in PHP.
-#. Basic PHP knowledge.
+#. Um servidor web rodando. Vamos supor que você está usando o Apache, 
+   embora as instruções para usar outros servidores sejam muito semelhantes. 
+   Poderíamos ter que brincar um pouco com a configuração do servidor, 
+   mas a maioria das pessoas pode ter o CakePHP instalado e funcionando sem 
+   qualquer configuração em tudo. 
+   Certifique-se de que você tem o PHP 5.4.16 ou superior, e que os ``mbstring`` e ``intl`` 
+   extensões são ativadas no PHP.
+#. Um servidor de banco de dados. Nós vamos estar usando servidor MySQL neste tutorial. 
+   Você precisa saber o suficiente sobre SQL para criar um banco de dados: CakePHP 
+   vai tomar as rédeas a partir daí. Desde que nós estamos usando o MySQL, 
+   também certificar-se de que você ``pdo_mysql`` habilitado no PHP.
+#. Conhecimento básico de PHP.
 
-Let's get started!
+Vamos começar!
 
-Getting CakePHP
-===============
+Instalando o CakePHP
+====================
 
-The easiest way to install CakePHP is to use Composer.  Composer is a simple way
-of installing CakePHP from your terminal or command line prompt.  First, you'll
-need to download and install Composer if you haven't done so already. If you
-have cURL installed, it's as easy as running the following::
+A maneira mais fácil de instalar o CakePHP é usar o Composer. Composer é uma forma simples 
+de instalar CakePHP de seu terminal ou linha de comando. 
+Primeiro, você precisa baixar e instalar o Composer, se você não tiver feito isso. 
+Se você tiver instalado cURL, é tão fácil quanto executar o seguinte::
 
     curl -s https://getcomposer.org/installer | php
 
-Or, you can download ``composer.phar`` from the
-`Composer website <https://getcomposer.org/download/>`_.
+Ou, você pode baixar ``composer.phar`` diretamente do 
+`site Composer <https://getcomposer.org/download/>`_.
 
-Then simply type the following line in your terminal from your
-installation directory to install the CakePHP application skeleton
-in the [app_name] directory. ::
+Em seguida, basta digitar a seguinte linha no seu terminal a partir 
+do seu diretório de instalação para instalar o esqueleto de aplicação 
+CakePHP no diretório [app_name]. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
 
-The advantage to using Composer is that it will automatically complete some
-important set up tasks, such as setting the correct file permissions and
-creating your config/app.php file for you.
+A vantagem de usar Composer é que ele irá completar automaticamente um conjunto 
+importante de tarefas, como configurar as permissões de arquivo correto e 
+criar o arquivo config/app.php para você.
 
 There are other ways to install CakePHP. If you cannot or don't want to use
 Composer, check out the :doc:`/installation` section.
 
-Regardless of how you downloaded and installed CakePHP, once your set up is
-completed, your directory setup should look something like the following::
+Há outras maneiras de instalar o CakePHP. Se você não puder ou não quiser usar Composer, 
+veja a sessão de :doc:`/installation`.
+
+Independentemente de como você baixou e instalou CakePHP, uma vez que seu setup for concluído, 
+a configuração do diretório deve ficar parecido com o seguinte::
 
     /cake_install
         /bin
@@ -72,6 +76,9 @@ completed, your directory setup should look something like the following::
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
 :doc:`/intro/cakephp-folder-structure` section.
+
+Agora pode ser um bom momento para aprender um pouco sobre como a estrutura de 
+diretórios do CakePHP funciona: confira a sessão :doc:`/intro/cakephp-folder-structure`.
 
 Directory Permissions on tmp and logs
 =====================================
