@@ -5,7 +5,7 @@ Request & Response Objects
     A documentação não é atualmente suportada na lingua portuguesa para esta
     página.
 
-    Por favor, sinta-se a vontade para nos enviar um pull request em
+    Por favor, sinta-se a vontade para nos enviar um pull request no
     `Github <https://github.com/cakephp/docs>`_ ou use o botão
     **Improve This Doc** para propor suas mudanças diretamente.
 
