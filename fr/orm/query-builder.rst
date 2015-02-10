@@ -13,7 +13,7 @@ sous-requêtes avec facilité.
 Sous le capot, le constructeur de requête utilise les requêtes préparées de
 PDO qui protègent contre les attaques d'injection SQL.
 
-Les objets Query sont évalué "lazily" (paresseusement). Cela signifie qu'une
+Les objets Query sont évalués "lazily" (paresseusement). Cela signifie qu'une
 requête n'est pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 
 - La requête est itérée avec ``foreach()``.
