@@ -11,3 +11,17 @@ Helpers
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. toctree::
+    :maxdepth: 1
+
+    /views/helpers/flash
+    /views/helpers/form
+    /views/helpers/html
+    /views/helpers/number
+    /views/helpers/paginator
+    /views/helpers/rss
+    /views/helpers/session
+    /views/helpers/text
+    /views/helpers/time
+    /views/helpers/url

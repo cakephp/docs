@@ -11,3 +11,11 @@ Behaviors
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. toctree::
+    :maxdepth: 1
+
+    /orm/behaviors/counter-cache
+    /orm/behaviors/timestamp
+    /orm/behaviors/translate
+    /orm/behaviors/tree
