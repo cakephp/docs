@@ -2,13 +2,13 @@ Pagination
 ##########
 
 .. note::
-    The documentation is not currently supported in es language for this page.
+    La documentación no es compatible actualmente con el idioma español en esta página.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_.
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
 
-    You can referer to the english
-    version to have information about this page's topic.
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.
 
 .. meta::
     :title lang=es: Pagination
