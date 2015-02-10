@@ -775,9 +775,12 @@ correspondant. Le code du controller ressemble à ceci::
 
         public function index($short = null)
         {
-            if (!empty($this->request->data)) {
+            if ($this->request->is('post')) {
                 $article = $this->Articles->newEntity($this->request->data);
-                $this->Articles->save($article);
+                if ($this->Articles->save($article)) {
+                    // Redirect as per PRG pattern
+                    return $this->redirect(['action' => 'index']);
+                }
             }
             if (!empty($short)) {
                 $result = $this->Article->find('all', [
@@ -840,9 +843,9 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
                 'title' => 'New Article',
                 'body' => 'New Body'
             ];
-            $this->post('/articles/add', $data);
+            $this->post('/articles', $data);
 
-            $this->assertResponseOk();
+            $this->assertResponseSuccess();
             $articles = TableRegistry::get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
@@ -932,6 +935,9 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie pour un code de réponse 2xx
     $this->assertResponseOk();
+
+    // Vérifie pour un code de réponse 2xx/3xx
+    $this->assertResponseSuccess();
 
     // Vérifie pour un code de réponse 4xx
     $this->assertResponseError();
