@@ -1,21 +1,13 @@
 Plugin Assets Shell
 ###################
 
-CakePHP by default serves plugins assets using the ``AssetFilter`` dispatcher
-filter. While this is a good convenience, it is recommended to symlink / copy
-the plugin assets under app's webroot so that they can be directly served by the
-web server without invoking PHP. You can do this by running::
+.. note::
+    A documentação não é atualmente suportada na lingua portuguesa para esta
+    página.
 
-    bin/cake plugin_assets symlink
+    Por favor, sinta-se a vontade para nos enviar um pull request em
+    `Github <https://github.com/cakephp/docs>`_ ou use o botão
+    **Improve This Doc** para propor suas mudanças diretamente.
 
-Running the above command will symlink all plugins assets under app's webroot.
-On Windows, which doesn't support symlinks, the assets will be copied in
-respective folders instead of being symlinked.
-
-You can symlink assets of one particular plugin by specifying it's name::
-
-    bin/cake plugin_assets symlink MyPlugin
-
-.. meta::
-    :title lang=pt: Plugin Assets Shell
-    :keywords lang=pt: plugin,assets
+    Você pode referenciar-se à versão inglesa no menu de seleção superior
+    para obter informações sobre o tópico desta página.
