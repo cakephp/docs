@@ -18,19 +18,19 @@ Conditions requises
 
 .. note::
 
-    In both XAMPP and WAMP, mcrypt and mbstring extensions are working by
-    default.
+    Avec XAMPP et WAMP, les extensions mcrypt et mbstring fonctionnent par
+    défaut.
 
-    In XAMPP, intl extension is included but you have to uncomment
-    ``extension=php_intl.dll`` in ``php.ini`` and restart the server through
-    the XAMPP Control Panel.
+    Dans XAMPP, l'extension intl est incluse mais vous devez décommenter
+    ``extension=php_intl.dll`` dans ``php.ini`` et redémarrer le serveur dans
+    le Panneau de Contrôle de XAMPP.
 
-    In WAMP, the intl extension is "activated" by default but not working.
-    To make it work you have to go to php folder (by default)
-    ``C:\wamp\bin\php\php{version}``, copy all the files that looks like
-    ``icu***.dll`` and paste them into the apache bin directory
-    ``C:\wamp\bin\apache\apache{version}\bin``. Then restart all services and
-    it should be OK.
+    Dans WAMP, l'extension intl est "activée" par défaut mais ne fonctionne pas.
+    Pour la faire fonctionner, vous devez aller dans le dossier php (par défaut)
+    ``C:\wamp\bin\php\php{version}``, copiez tous les fichiers qui ressemblent
+    à ``icu***.dll`` et collez les dans le répertoire bin d'apache
+    ``C:\wamp\bin\apache\apache{version}\bin``. Ensuite redémarrez tous les
+    services et tout devrait être OK.
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
@@ -70,6 +70,10 @@ Maintenant que vous avez téléchargé et installé Composer, vous pouvez obteni
 une nouvelle application CakePHP en lançant::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+
+Ou si Composer est installé globalement::
+
+    composer create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du cœur de la librairie de CakePHP, vous devriez avoir maintenant une
