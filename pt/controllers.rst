@@ -1,11 +1,11 @@
-Controllers
-###########
+Controllers (Controladores)
+###########################
 
 .. php:namespace:: Cake\Controller
 
 .. php:class:: Controller
 
-Os controllers correspondem ao 'C' no padrão MVC. Após o roteamento ter sido
+Os controllers (controladores) correspondem ao 'C' no padrão MVC. Após o roteamento ter sido
 aplicado e o controller correto encontrado, a ação do controller é chamada. Seu
 controller deve lidar com a interpretação dos dados de uma requisição,
 certificando-se que os models corretos são chamados e a resposta ou view
