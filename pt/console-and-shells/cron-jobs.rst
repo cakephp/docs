@@ -2,7 +2,7 @@ Running Shells as Cron Jobs
 ###########################
 
 .. note::
-    A documentação não é atualmente suportada na lingua portuguesa para esta
+    A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.
 
     Por favor, sinta-se a vontade para nos enviar um pull request no
