@@ -9,6 +9,11 @@ les fichiers -- le bouton "Improve this Doc" (Améliorer cette Doc) sur toutes
 les pages vous redirigera vers l'éditeur en ligne de Github pour la page
 correspondante.
 
+CakePHP documentation is
+`continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
+so you can check the status of the `various builds <http://ci.cakephp.org>`_
+on the Jenkins server at any time.
+
 Traductions
 ===========
 
