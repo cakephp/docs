@@ -102,6 +102,10 @@ Francês
 -------
 - `Comunidade CakePHP francesa <http://cakephp-fr.org>`_
 
+Português brasileiro
+--------------------
+- `Comunidade CakePHP brasileira <http://cakephp-fr.org>`_
+
 .. meta::
     :title lang=pt: Onde conseguir ajuda
     :description lang=pt: Onde Conseguir ajuda, O website oficial do CakePHP, O Cookbook, A Bakery, A API, Casos de teste, O canal IRC, O Grupo Google CakePHP ou Questões CakePHP.

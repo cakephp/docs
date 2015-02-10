@@ -105,6 +105,9 @@ Française
 ---------
 - `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
 
+Portugais brésilien
+-------------------
+- `Communauté de CakePHP brésilienne <http://cakephp-br.org>`_
 
 .. meta::
     :title lang=fr: Où trouver de l'aide
