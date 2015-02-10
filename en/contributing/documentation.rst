@@ -8,6 +8,11 @@ You can even edit the docs online with GitHub, without ever downloading the
 files -- the "Improve this Doc" button on any given page will direct you to
 GitHub's online editor for that page.
 
+CakePHP documentation is
+`continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
+so you can check the status of the `various builds <http://ci.cakephp.org>`_
+on the Jenkins server at any time.
+
 Translations
 ============
 
