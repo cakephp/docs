@@ -727,9 +727,12 @@ model. The controller code looks like::
 
         public function index($short = null)
         {
-            if (!empty($this->request->data)) {
+            if ($this->request->is('post')) {
                 $article = $this->Articles->newEntity($this->request->data);
-                $this->Articles->save($article);
+                if ($this->Articles->save($article)) {
+                    // Redirect as per PRG pattern
+                    return $this->redirect(['action' => 'index']);
+                }
             }
             if (!empty($short)) {
                 $result = $this->Article->find('all', [
@@ -792,9 +795,9 @@ Create a file named ``ArticlesControllerTest.php`` in your
                 'title' => 'New Article',
                 'body' => 'New Body'
             ];
-            $this->post('/articles/add', $data);
+            $this->post('/articles', $data);
 
-            $this->assertResponseOk();
+            $this->assertResponseSuccess();
             $articles = TableRegistry::get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
@@ -881,6 +884,9 @@ make testing responses much simpler. Some examples are::
 
     // Check for a 2xx response code
     $this->assertResponseOk();
+
+    // Check for a 2xx/3xx response code
+    $this->assertResponseSuccess();
 
     // Check for a 4xx response code
     $this->assertResponseError();
