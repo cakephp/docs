@@ -47,7 +47,8 @@ Translator tips:
 Documentation Formatting Guide
 ==============================
 
-The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
+The new CakePHP documentation is written with
+`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
 textile. To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
@@ -77,26 +78,33 @@ preceded and followed by a blank line.
 Paragraphs
 ----------
 
-Paragraphs are simply blocks of text, with all the lines at the same level of indentation.
-Paragraphs should be separated by more than one empty line.
+Paragraphs are simply blocks of text, with all the lines at the same level of
+indentation. Paragraphs should be separated by more than one empty line.
 
 Inline Markup
 -------------
 
 * One asterisk: *text* for emphasis (italics)
+  We'll use it for general highlighting/emphasis.
 
-  * ``*text*``
+  * ``*text*``.
 
 * Two asterisks: **text** for strong emphasis (boldface)
+  We'll use it for working directories, bullet list subject, table names and
+  excluding the following word "table".
 
-  * ``**text**``
+  * ``**/config/Migrations**``, ``**articles**``, etc.
 
 * Two backquotes: ``text`` for code samples
+  We'll use it for names of method options, names of table columns, object
+  names, excluding the following word "object" and for method/function
+  names -- include "()".
 
-  * ````text````
+  * ````cascadeCallbacks````, ````true````, ````id````,
+    ````PagesController````, ````config()````, etc.
 
-If asterisks or backquotes appear in running text and could be confused with inline markup
-delimiters, they have to be escaped with a backslash.
+If asterisks or backquotes appear in running text and could be confused with
+inline markup delimiters, they have to be escaped with a backslash.
 
 Inline markup has a few restrictions:
 
@@ -290,8 +298,8 @@ matching directive is found:
 
 .. rst:role:: php:const
 
-   Reference either a global constant, or a class constant. Class constants should
-   be preceded by the owning class::
+   Reference either a global constant, or a class constant. Class constants
+   should be preceded by the owning class::
 
         DateTime has an :php:const:`DateTime::ATOM` constant.
 
@@ -333,7 +341,8 @@ block must be indented, and like all paragraphs be separated by single lines::
 
     This is regular text again.
 
-Literal text is not modified or formatted, save that one level of indentation is removed.
+Literal text is not modified or formatted, save that one level of indentation
+is removed.
 
 
 Notes and Warnings
@@ -357,7 +366,8 @@ All admonitions are made the same::
 
     .. note::
 
-        Indented and preceded and followed by a blank line. Just like a paragraph.
+        Indented and preceded and followed by a blank line. Just like a
+        paragraph.
 
     This text is not part of the note.
 
