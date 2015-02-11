@@ -165,7 +165,7 @@ file and add the following lines::
 
         public function beforeFilter(Event $event)
         {
-            $this->Auth->allow(['index', 'view']);
+            $this->Auth->allow(['index', 'view', 'display']);
         }
         //...
     }
