@@ -301,6 +301,9 @@ logged in user as a reference for the created article::
         if ($this->request->is('post')) {
             // Added this line
             $article->user_id = $this->Auth->user('id');
+            // Also can be used the two lines
+            //$newData = ['user_id' => $this->Auth->user('id')];
+			//$post = $this->Posts->patchEntity($post, $newData);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
