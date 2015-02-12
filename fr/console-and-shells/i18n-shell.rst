@@ -16,7 +16,7 @@ Générer les fichiers POT
 ========================
 
 Les fichiers POT peuvent être générés pour une application existante en
-utilisant la commande ``extract``. Cette commande va scaner toutes les
+utilisant la commande ``extract``. Cette commande va scanner toutes les
 fonctions de type ``__()`` de l'ensemble de votre application, et extraire les
 chaînes de caractères. Chaque chaîne unique dans votre application sera
 combinée en un seul fichier POT::
@@ -49,7 +49,7 @@ extraits dans vos models. Si le model a toujours une propriété
 
     ./Console/cake i18n extract --validation-domain validation_errors
 
-Vous pouvez aussi éviter que le shell n'extrait des messages de validation::
+Vous pouvez aussi éviter que le shell n'extraie des messages de validation::
 
     ./Console/cake i18n extract --ignore-model-validation
 
