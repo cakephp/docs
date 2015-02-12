@@ -47,7 +47,7 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
     見なされ、そのモデルから参照されるモデルについても、そのフォームに
     関連付けられます。モデルを指定しない場合、現在のコントローラー
     のデフォルトモデルを使っていると見なされます::
-    
+
 
         // たとえば /recipes/add にいるとして、
         echo $this->Form->create('Recipe');
@@ -94,7 +94,7 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
         これは編集フォームなので hidden の入力項目が生成され、
         デフォルトの HTTP メソッドは上書きされます。
 
-    プラグイン内のモデル用にフォームを作る場合は、常に :term:`plugin syntax` 
+    プラグイン内のモデル用にフォームを作る場合は、常に :term:`plugin syntax`
     を使います。これで以下のように適切なフォームが生成されます::
 
         echo $this->Form->create('ContactManager.Contact');
@@ -106,7 +106,7 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
     .. versionchanged:: 2.0
         すべてのフォームに関するデフォルトの URL は、現在の URL の後ろに
         渡されたパラメータ、名前付きパラメータ、問合せ文字列をつけたものに
-        なりました。このデフォルトを変更するには、 ``$this->Form->create()`` 
+        なりました。このデフォルトを変更するには、 ``$this->Form->create()``
         の第二引数の中に ``$options['url']`` を指定します。
 
 create()のオプション
@@ -269,7 +269,7 @@ create()には多くのオプションがあります:
         </div>
 
     詳細は
-    `Form Helper API <http://api.cakephp.org/2.4/class-FormHelper.html>`_ 
+    `Form Helper API <http://api.cakephp.org/2.4/class-FormHelper.html>`_
     を参照してください。
 
     .. note::
@@ -349,9 +349,9 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
     オプションに ``'formnovalidate' => true``  を指定するか、もしくは
     :php:meth:`FormHelper::create()` の options で ``'novalidate' => true``
     をセットします。
-    
 
-    たとえば、あなたの User モデルには username (varchar), password (varchar), 
+
+    たとえば、あなたの User モデルには username (varchar), password (varchar),
     approved (datetime) , quote (text) という項目があるとします。
     FormHelper の input() メソッドを使ってこれらすべてのフォーム項目に
     対する適切な input 項目を作ります::
@@ -376,7 +376,7 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
         ));
 
     ``input()`` のオプションでは、後述する特別なオプションの他にも、
-    input のタイプについての任意のオプションや、（たとえば onfocus 
+    input のタイプについての任意のオプションや、（たとえば onfocus
     のように）任意のHTML属性を指定できます。``$options`` と
     ``$htmlAttributes`` に関する詳細は :doc:`/core-libraries/helpers/html`
     を参照してください。
@@ -462,7 +462,7 @@ input タグを生成する場合は、最初のパラメータとして モデ�
 
     echo $this->Form->input('Modelname.fieldname');
 
-同じ項目名で複数の項目を指定したい場合、すなわち一度の saveAll() 
+同じ項目名で複数の項目を指定したい場合、すなわち一度の saveAll()
 で配列として値を保存したい場合は以下の様な書式を使います::
 
     echo $this->Form->input('Modelname.0.fieldname');
@@ -751,13 +751,13 @@ HTML アトリビュートなどもオプションとして設定可能です。
   ここより先のデフォルトを変更するには
   :php:meth:`FormHelper::inputDefaults()` が使えます。
 
-特殊���タイプの入力を生成する
+特殊なタイプの入力を生成する
 ============================
 
 一般的な ``input()`` メソッド以外にも、 ``FormHelper`` には様々に
 異なったタイプの input を生成するための特別なメソッドがあります。
 これらは input ウィジェットそのものを生成するのに使えますが、
-さらに :php:meth:`~FormHelper::label()` や 
+さらに :php:meth:`~FormHelper::label()` や
 :php:meth:`~FormHelper::error()` といった別のメソッドと組み合わせる
 ことで、完全にカスタムメイドのフォームレイアウトを生成できます。
 
@@ -767,8 +767,8 @@ HTML アトリビュートなどもオプションとして設定可能です。
 ------------------
 
 input エレメントに関連するメソッドの多くは、一般的なオプションの
-組合せをサポートしています。これらのオプションはすべて ``input()`` 
-でもサポートされています。繰り返しを減らすために、すべての input 
+組合せをサポートしています。これらのオプションはすべて ``input()``
+でもサポートされています。繰り返しを減らすために、すべての input
 メソッドで使える共通オプションを以下に示します:
 
 * ``$options['class']`` input のクラス名を指定できます::
@@ -933,7 +933,7 @@ select, checkbox, radio に関するオプション
           'hiddenField' => 'N',
       ));
 
-日時関連オプション 
+日時関連オプション
 ------------------
 
 * ``$options['timeFormat']`` 時刻関連の入力に関する select input の書式を
@@ -961,7 +961,7 @@ select, checkbox, radio に関するオプション
   この例では分の select で 15 分間隔で４つのオプションを生成します。
 
 * ``$options['round']`` それぞれの命令で `up` または `down` を指定する
-  ことで強制的な端数の切り上げ／切り下げを指示します。デフォルトは null 
+  ことで強制的な端数の切り上げ／切り下げを指示します。デフォルトは null
   で、これは `interval` にしたがって四捨五入します。
 
   .. versionadded:: 2.4
@@ -1044,14 +1044,14 @@ select, checkbox, radio に関するオプション
     .. code-block:: html
 
         <input name="data[User][id]" id="UserId" type="hidden" />
-        
+
     フォームが編集されると（すなわち、配列 ``$this->request->data`` に
-    ``User`` モデルに渡されるべき情報が含まれている場合）、生成される 
+    ``User`` モデルに渡されるべき情報が含まれている場合）、生成される
     HTML の中に ``id`` フィールドに対応する値が自動的に追加されます。
     たとえば data[User][id] = 10 とすると、以下のようになります:
 
     .. code-block:: html
-        
+
         <input name="data[User][id]" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
@@ -1089,7 +1089,7 @@ select, checkbox, radio に関するオプション
         どうかを指定できます。デフォルトは ``true`` です。
 
     ::
-        
+
         echo $this->Form->textarea('notes', array('escape' => false);
         // または ....
         echo $this->Form->input(
@@ -1172,7 +1172,7 @@ select, checkbox, radio に関するオプション
     * ``$attributes['disabled']`` これを ``true`` または ``'disabled'``
       にすると、生成されたすべてのラジオボタンを無効にします。
 
-    * ``$attributes['legend']`` radio エレメントはデフォルトでは label 
+    * ``$attributes['legend']`` radio エレメントはデフォルトでは label
       とフィールドセットで囲まれます。 ``$attributes['legend']`` を
       false にするとこれらを取り除きます::
 
@@ -1193,7 +1193,7 @@ select, checkbox, radio に関するオプション
             type="radio" />
         <label for="UserGenderF">Female</label>
 
-    何らかの理由で hidden input が不要な場合、 ``$attributes['value']`` 
+    何らかの理由で hidden input が不要な場合、 ``$attributes['value']``
     を選択される値もしくは false にすることで hidden を出力しなく
     なります。
 
@@ -1203,7 +1203,7 @@ select, checkbox, radio に関するオプション
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
     select 要素を作成します。 ``$options`` で項目を定義し、デフォルトで
-    選択される値を ``$attributes['value']`` で指定します。``$attributes`` 
+    選択される値を ``$attributes['value']`` で指定します。``$attributes``
     変数に '空の' キーを作って false を設定することで、デフォルトの
     empty オプションを無効にします。::
 
@@ -1415,7 +1415,7 @@ select, checkbox, radio に関するオプション
 
     この配列は PHP 自体によって生成されます。PHP が file フィールドを
     通してデータをどう処理しているのかについては、PHP マニュアルの
-    ファイルアップロードのセクション 
+    ファイルアップロードのセクション
     `<http://php.net/features.file-upload>`_ を読んでみてください。
 
 アップロードの検証
@@ -1521,7 +1521,7 @@ file input を生成します::
 
 .. php:method:: postButton(string $title, mixed $url, array $options = array ())
 
-    POST 経由でサブミットするための、 ``<form>`` で囲まれた  ``<button>`` 
+    POST 経由でサブミットするための、 ``<form>`` で囲まれた  ``<button>``
     タグを生成します。
 
     このメソッドは ``<form>`` エレメントを作成します。そのため、この
@@ -1548,8 +1548,8 @@ file input を生成します::
 
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
-    日付と時刻の select input の組み合わせを生成します。$dateformat 
-    で有効な値は 'DMY', 'MDY', 'YMD', 'NONE'  です。$timeFormat 
+    日付と時刻の select input の組み合わせを生成します。$dateformat
+    で有効な値は 'DMY', 'MDY', 'YMD', 'NONE'  です。$timeFormat
     で有効な値は '12', '24', null です。
 
     attributes パラメータの中で "array('empty' => false)" を設定すると
@@ -1749,7 +1749,7 @@ SecurityComponent を利用する際は、前述のようにフォームを閉�
 **$selected parameter removed**
 
 FormHelper のいくつかのメソッドから ``$selected`` パラメータが
-削除されました。現在はすべてのメソッドで ``$attributes['value']`` 
+削除されました。現在はすべてのメソッドで ``$attributes['value']``
 キーがサポートされており、これを ``$selected`` の代わりに使うべきです。
 この変更は FormHelper のメソッドをシンプルにし、引数の数を減らし、
 ``$selected`` が生成する重複を減らします。影響を受けるメソッドは

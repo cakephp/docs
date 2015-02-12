@@ -194,7 +194,7 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 ======================================
 
 すべてのヘルパーは特別なクラスAppHelperを(モデルがAppModelを継承し、コントローラがAppControllerを継承するのと同じように）継承します。
-すべてのヘルパーで利用できる���能を作成するためには、 ``/app/View/Helper/AppHelper.php`` を作成して下さい。::
+すべてのヘルパーで利用できる機能を作成するためには、 ``/app/View/Helper/AppHelper.php`` を作成して下さい。::
 
     App::uses('Helper', 'View');
 
