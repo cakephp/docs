@@ -206,7 +206,7 @@ CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてく�
         array('action' => 'update', 'method' => 'POST', 'id' => true)
     ));
 
-デフォルトのリソースマップを上書きする際は、 ``mapResources()`` メソッドを呼ぶと、
+デフォルトのリソース���ップを上書きする際は、 ``mapResources()`` メソッドを呼ぶと、
 新しい定義が利用できます。
 
 
@@ -239,4 +239,4 @@ HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可
 
 .. meta::
     :title lang=ja: REST
-    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :keywords lang=ja: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api

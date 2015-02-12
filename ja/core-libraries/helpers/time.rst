@@ -40,6 +40,6 @@ Timeヘルパーのメソッドは多くが $timezone パラメーターを持�
     :end-before: end-caketime
 
 .. meta::
-    :title lang=en: TimeHelper
-    :description lang=en: The Time Helper will help you format time and test time.
-    :keywords lang=en: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=ja: TimeHelper
+    :description lang=ja: The Time Helper will help you format time and test time.
+    :keywords lang=ja: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

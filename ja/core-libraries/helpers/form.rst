@@ -751,7 +751,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
   ここより先のデフォルトを変更するには
   :php:meth:`FormHelper::inputDefaults()` が使えます。
 
-特殊なタイプの入力を生成する
+特殊���タイプの入力を生成する
 ============================
 
 一般的な ``input()`` メソッド以外にも、 ``FormHelper`` には様々に
@@ -1779,6 +1779,6 @@ hidden フィールドは、もはや class アトリビュートを削除しま
 クラス名として error-field が適用されます。
 
 .. meta::
-    :title lang=en: FormHelper
-    :description lang=en: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
-    :keywords lang=en: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security
+    :title lang=ja: FormHelper
+    :description lang=ja: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
+    :keywords lang=ja: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security

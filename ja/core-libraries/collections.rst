@@ -188,7 +188,7 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
 
 無効化されたオブジェクトはまだそれらの通常のメソッドとプロパティを持っています。
 有効状態と無効状態の根本的な違いはコールバックに関してです。
-``enabled()`` メソッドを用いることで、有効オブジェクトに何があるのかを問い合わせたり、特定のオブジェクトがまだ有効であるのかをチェックすることが出来ます::
+``enabled()`` メソッドを用いることで、有効オブジェクトに何があるのかを問い合わせ���り、特定のオブジェクトがまだ有効であるのかをチェックすることが出来ます::
 
     // あるヘルパーが有効かどうかをチェックします
     $this->Helpers->enabled('Html');
@@ -257,4 +257,4 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
 
 .. meta::
     :title lang=ja: コレクション
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :keywords lang=ja: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities

@@ -158,4 +158,4 @@ CakePHPのスキーマシェルを使った移植
     [n] >
 
 .. meta::
-    :title lang=en: Schema management and migrations
+    :title lang=ja: Schema management and migrations

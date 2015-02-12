@@ -701,7 +701,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
     (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
     デフォルトは false です。
 
-    'regex' キーにはクレジットカード番号の妥当性チェックで使うための
+    'regex' キーにはクレジットカード番号の妥���性チェックで使うための
     独自の正規表現を指定できます::
 
         public $validate = array(
@@ -1264,5 +1264,5 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 
 .. meta::
-    :title lang=en: Data Validation
-    :keywords lang=en: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting
+    :title lang=ja: Data Validation
+    :keywords lang=ja: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting

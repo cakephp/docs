@@ -154,5 +154,5 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 
 
 .. meta::
-    :title lang=en: Cookie
-    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
+    :title lang=ja: Cookie
+    :keywords lang=ja: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

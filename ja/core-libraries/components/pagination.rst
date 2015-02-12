@@ -374,5 +374,5 @@ AJAX 対応ページ制御を簡単にあなたのアプリケーションに組
 :php:class:`PaginatorHelper` のドキュメントを参照してください。
 
 .. meta::
-    :title lang=en: Pagination
-    :keywords lang=en: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
+    :title lang=ja: Pagination
+    :keywords lang=ja: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers

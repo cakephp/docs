@@ -50,5 +50,5 @@
 ネスト化されたトランザクションはデフォルトでは利用不可となっています。これを使うためには、\ ``$dataSource->useNestedTransactions = true;``\ として下さい。
 
 .. meta::
-    :title lang=en: Transactions
-    :keywords lang=en: transaction methods,datasource,rollback,data source,begin,commit,nested transaction
+    :title lang=ja: Transactions
+    :keywords lang=ja: transaction methods,datasource,rollback,data source,begin,commit,nested transaction

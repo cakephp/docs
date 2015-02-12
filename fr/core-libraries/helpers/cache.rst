@@ -161,4 +161,4 @@ utilisez ``clearCache()``.
 .. meta::
     :title lang=fr: CacheHelper
     :description lang=fr: Le helper Cache aide à la mise en cache de layouts et de vues entiers, faisant gagner du temps lors de récupération de données répétitives.
-    :keywords lang=en: cache helper,view caching,cache action,cakephp cache,nocache,clear cache
+    :keywords lang=fr: cache helper,view caching,cache action,cakephp cache,nocache,clear cache

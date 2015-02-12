@@ -280,7 +280,7 @@ HTTP エラー用の例外を使うことで、あなたのコードを奇麗に
 
 .. php:exception:: PrivateActionException
 
-    private なアクションにアクセスしています。
+    private なアクションにアクセス���ています。
     private や protected、_ で始まるアクションにアクセスしているか、prefix されたルートに誤ってアクセスしようとしています。
 
 ..
@@ -661,7 +661,7 @@ Exception.renderer を使って独自のレンダラを使用し、アプリケ�
 
 .. note::
 
-    独自のレンダラはそのコンストラクタ内での例外を予期すべきであり、レンダリングメソッドを実装すべきです。
+    独自のレンダラはそのコンストラクタ���での例外を予期すべきであり、レンダリングメソッドを実装すべきです。
     そうしていない場合、さらなる別のエラーが発生してしまいます。
 
 ..
@@ -739,5 +739,5 @@ Exception.renderer を使って独自のレンダラを使用し、アプリケ�
     no effect. Unless you reference it inside your implementation.
 
 .. meta::
-    :title lang=en: Exceptions
-    :keywords lang=en: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php
+    :title lang=ja: Exceptions
+    :keywords lang=ja: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php

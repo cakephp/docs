@@ -77,6 +77,6 @@
     メディアビューでファイルを送る方法の例を含めてください。
 
 .. meta::
-    :title lang=en: Media Views
-    :keywords lang=en: array php,true extension,zip name,document path,mimetype,boolean value,binary files,webroot,file extension,mime type,default view,file server,authentication,parameters
+    :title lang=ja: Media Views
+    :keywords lang=ja: array php,true extension,zip name,document path,mimetype,boolean value,binary files,webroot,file extension,mime type,default view,file server,authentication,parameters
 

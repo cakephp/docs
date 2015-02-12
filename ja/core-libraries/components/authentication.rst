@@ -373,7 +373,7 @@ Basicおよびダイジェスト認証は初期POSTやフォームを必要と�
 ..
   Using custom authentication objects
 
-カスタム認証オブジェクトを作成したら、AuthComponents の authenticate 配列内にそれを含めることで利用することができます::
+カスタム認証オブジェクトを作成したら、AuthComponents の authenticate 配列���にそれを含めることで利用することができます::
 
     $this->Auth->authenticate = array(
         'Openid', // app内の認証オブジェクト
@@ -763,7 +763,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 
 ダイジェスト／Basic認証でログインしたユーザのログアウトを、すべてのクライアントで成し遂げるのは難しいものです。
 多くのブラウザは開いている間だけ継続する認証情報を保有しています。
-クライアントの中には 401 のステータスコードを送信して強制的にログアウトすることがありえます。
+ク���イアントの中には 401 のステータスコードを送信して強制的にログアウトすることがありえます。
 認証 realm の変更は、一部のクライアントで機能させるためのもう１つの解決法です。
 
 ..
@@ -1446,5 +1446,5 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=ja: Authentication
+    :keywords lang=ja: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
