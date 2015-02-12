@@ -10,7 +10,7 @@ ES_HOST =
 # Languages that can be built.
 LANGS = en es fr ja pt zh
 
-# pdflatex does not like ja or ru for some reason.
+# pdflatex does not like ja for some reason.
 PDF_LANGS = en es fr pt
 
 DEST = website
