@@ -801,6 +801,23 @@ SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
         ],
         ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
 
+It should be noted that if you use set the ``quoteIdentifiers`` option to ``true`` when
+defining your ``Connection``, join conditions between table fields should be set as follow::
+
+    $query = $articles->find()
+        ->join([
+            'c' => [
+                'table' => 'comments',
+                'type' => 'LEFT',
+                'conditions' => [
+                    'c.article_id' => new IdentifierExpression('articles.id')
+                ]
+            ],
+        ]);
+
+This ensures that all of your identifiers will be quoted across the Query, avoiding errors with
+some database Drivers (PostgreSQL notably)
+
 Inserting Data
 ==============
 
