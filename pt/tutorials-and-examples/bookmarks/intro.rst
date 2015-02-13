@@ -152,7 +152,7 @@ aplicam à sua configuração. A amostra completa da gama de configurações pod
 ser algo como o seguinte::
 
     return [
-        // More configuration above.
+        // Mais configuração acima.
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
@@ -167,7 +167,7 @@ ser algo como o seguinte::
                 'cacheMetadata' => true,
             ],
         ],
-        // More configuration below.
+        // Mais configuração abaixo.
     ];
 
 Depois de salvar o seu arquivo ``config/app.php``, você deve notar que a
