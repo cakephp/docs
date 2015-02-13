@@ -28,19 +28,18 @@ tasks. You should see something like::
 
     Available bake commands:
 
-    - all
-    - fixture
-    - test
-    - view
+     - all
     - behavior
-    - helper
-    - shell
-    - controller
-    - model
-    - plugin
-    - project
     - cell
     - component
+    - controller
+    - fixture
+    - helper
+    - model
+    - plugin
+    - shell
+    - template
+    - test
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
