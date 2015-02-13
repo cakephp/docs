@@ -926,7 +926,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
     Contrôle la gestion des accès non autorisés. Par défaut, un utilisateur
     non autorisé est redirigé vers l'URL référente ou vers
-    ``AuthComponent::$loginAction`` ou '/'.
+    ``AuthComponent::$loginRedirect`` ou '/'.
     Si défini à false, une exception ForbiddenException est lancée au lieu de
     la redirection.
 
