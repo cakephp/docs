@@ -858,6 +858,24 @@ code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
         ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']
     );
 
+Notez que si vous définissez l'option ``quoteIdentifiers`` à ``true`` quand vous
+configurez votre ``Connection``, les conditions mettant en relation deux champs
+de tables différentes doivent être définies de cette manière::
+
+    $query = $articles->find()
+        ->join([
+            'c' => [
+                'table' => 'comments',
+                'type' => 'LEFT',
+                'conditions' => [
+                    'c.article_id' => new \Cake\Database\Expression\IdentifierExpression('articles.id')
+                ]
+            ],
+        ]);
+
+Cela permet de s'assurer que tous les ``identifiers`` sont bien quotés dans la requête générée,
+permettant d'éviter des erreurs avec certains drivers (PostgreSQL notamment).
+
 Insérer des Données
 ===================
 
