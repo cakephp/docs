@@ -801,7 +801,7 @@ SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
         ],
         ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
 
-It should be noted that if you use set the ``quoteIdentifiers`` option to ``true`` when
+It should be noted that if you set the ``quoteIdentifiers`` option to ``true`` when
 defining your ``Connection``, join conditions between table fields should be set as follow::
 
     $query = $articles->find()
@@ -810,7 +810,7 @@ defining your ``Connection``, join conditions between table fields should be set
                 'table' => 'comments',
                 'type' => 'LEFT',
                 'conditions' => [
-                    'c.article_id' => new IdentifierExpression('articles.id')
+                    'c.article_id' => new \Cake\Database\Expression\IdentifierExpression('articles.id')
                 ]
             ],
         ]);
