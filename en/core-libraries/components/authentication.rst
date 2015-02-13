@@ -870,7 +870,7 @@ and authentication mechanics in CakePHP.
 .. php:attr:: unauthorizedRedirect
 
     Controls handling of unauthorized access. By default unauthorized user is
-    redirected to the referrer URL or ``AuthComponent::$loginAction`` or '/'.
+    redirected to the referrer URL or ``AuthComponent::$loginRedirect`` or '/'.
     If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 .. php:attr:: request
