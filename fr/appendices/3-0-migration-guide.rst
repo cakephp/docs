@@ -287,6 +287,7 @@ BakeShell / TemplateTask
 - Les templates de bake ont été déplacés vers ``src/Template/Bake``.
 - La syntaxe des templates Bake utilise maintenant des balises de type erb
   (``<% %>``) pour désigner le templating.
+- La commande ``bake view`` a été renommée ``bake template``.
 
 Event
 =====
