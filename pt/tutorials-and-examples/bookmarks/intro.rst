@@ -11,7 +11,7 @@ Aqui está o que você vai precisar:
 #. Um servidor de banco de dados. Nós vamos usar o servidor MySQL neste
    tutorial. Você precisa saber o suficiente sobre SQL para criar um banco de
    dados: O CakePHP vai tomar as rédeas a partir daí. Por nós estarmos
-   usando o MySQL, também certifique-se que você tem a extensão ``pdo_mysql`
+   usando o MySQL, também certifique-se que você tem a extensão ``pdo_mysql``
    habilitada no PHP.
 
 #. Conhecimento básico sobre PHP.
