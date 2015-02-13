@@ -574,7 +574,7 @@ option::
     // In a controller.
 
     // Only save the comments association
-    $articles->save($entity, ['associated' => ['Comments']);
+    $articles->save($entity, ['associated' => ['Comments']]);
 
 You can define save distant or deeply nested associations by using dot notation::
 
