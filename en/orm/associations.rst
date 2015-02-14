@@ -602,17 +602,15 @@ Default Association Conditions
 The ``finder`` option allows you to use a :ref:`custom finder
 <custom-find-methods>` to load associated record data. This lets you encapsulate
 your queries better and keep your code DRY'er. There are some limitations when
-using finders to load associated records for associations that are loaded using
+using finders to load data in associations that are loaded using
 joins (belongsTo/hasOne). Only the following aspects of the query will be
 applied to the root query:
 
-- WHERE conditions
-- Additional joins
-- Contained associations
-- Map/Reduce functions
-- Result formatters
+- WHERE conditions.
+- Additional joins.
+- Contained associations.
 
 Other aspects of the query, such as selected columns, order, group by, having and
 other sub-statements, will not be applied to the root query. Associations that
 are *not* loaded through joins (hasMany/belongsToMany), do not have the above
-restrictions.
+restrictions and can also use result formatters or map/reduce functions.
