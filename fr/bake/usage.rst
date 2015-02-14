@@ -32,18 +32,17 @@ des tâches disponibles. Vous devriez voir quelquechose comme ceci::
     Les commandes disponibles de bake:
 
     - all
-    - fixture
-    - test
-    - view
     - behavior
-    - helper
-    - shell
-    - controller
-    - model
-    - plugin
-    - project
     - cell
     - component
+    - controller
+    - fixture
+    - helper
+    - model
+    - plugin
+    - shell
+    - template
+    - test
 
     En utilisant `cake bake [name]` vous pouvez faire appel à une tâche
     spécifique de bake.

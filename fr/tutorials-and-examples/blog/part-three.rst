@@ -111,7 +111,7 @@ Créez tous les fichiers en lançant les commandes de bake suivantes::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
-    bin/cake bake view Categories
+    bin/cake bake template Categories
 
 L'outil bake a créé tous les fichiers en un clin d'œil. Vous pouvez les
 lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de

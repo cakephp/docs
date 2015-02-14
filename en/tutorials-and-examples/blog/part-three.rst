@@ -105,7 +105,7 @@ Create all files by launching bake commands::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
-    bin/cake bake view Categories
+    bin/cake bake template Categories
 
 The bake tool has created all your files in a snap. You can give them a quick
 read if you want re-familiarize yourself with how CakePHP works.

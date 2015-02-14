@@ -266,6 +266,7 @@ BakeShell / TemplateTask
 - Bake templates have been moved under ``src/Template/Bake``.
 - The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
   templating logic, allowing php code to be treated as plain text.
+- The ``bake view`` command has been renamed ``bake template``.
 
 Event
 =====
