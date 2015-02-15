@@ -128,8 +128,7 @@ CakePHP konsoluna, web sunucusunu belirttiğiniz adres veya portta çalışrmas�
 
 Bu komut uygulamanızı ``http://192.168.13.37:5673/`` adresinde çalıştıracaktır.
 
-That's it! Your CakePHP application is up and running without having to
-configure a web server.
+İşte bu kadar! CakePHP uygulamanız web sunucusu kurulumuna ihityaç duymadan çalışıyor.
 
 .. warning::
 
