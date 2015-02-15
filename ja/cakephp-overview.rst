@@ -13,3 +13,7 @@ Cookbookへようこそ。
     cakephp-overview/what-is-cakephp-why-use-it
     cakephp-overview/understanding-model-view-controller
     cakephp-overview/where-to-get-help
+
+.. meta::
+    :title lang=ja: CakePHP Overview
+    :keywords lang=ja: web application framework,model view controller,object oriented programming,piece of cake,cookbook,functionality,xml,cakephp
