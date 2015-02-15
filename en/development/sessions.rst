@@ -15,16 +15,8 @@ Session Configuration
 Session configuration is stored in ``Configure`` under the top
 level ``Session`` key, and a number of options are available:
 
-* ``Session.cookie`` - Change the name of the session cookie.
-
-* ``Session.cookiePath`` - The url path for which session cookie is set.
-  Maps to the ``session.cookie_path`` php.ini config. Defaults to base path of app.
-
-* ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
-
-* ``Session.cookieTimeout`` - The number of *minutes* before the session cookie expires.
-  If this is undefined, it will use the same value as ``Session.timeout``.
-  This affects the session cookie, and is handled by PHP itself.
+* ``Session.timeout`` - The number of *minutes* before CakePHP's session
+  handler expires the session.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
   configurations as a base for your session configuration. See below for the
@@ -38,8 +30,8 @@ level ``Session`` key, and a number of options are available:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-CakePHP's defaults ``session.cookie_secure`` to ``true``, when your application is
-on an SSL protocol. If your application serves from both SSL and non-SSL
+CakePHP's defaults ``session.cookie_secure`` to ``true``, when your application
+is on an SSL protocol. If your application serves from both SSL and non-SSL
 protocols, then you might have problems with sessions being lost. If you need
 access to the session on both SSL and non-SSL domains you will want to disable
 this::
@@ -52,16 +44,40 @@ this::
     ]);
 
 The session cookie path defaults to app's base path. To change this you can use
-the ``cookiePath`` config. For e.g. if you want your session to persist across
-all subdomains you can do::
+the ``session.cookie_path`` ini value. For e.g. if you want your session to
+persist across all subdomains you can do::
 
     Configure::write('Session', [
         'defaults' => 'php',
-        'cookiePath' => '/',
         'ini' => [
+            'session.cookie_path' => '/',
             'session.cookie_domain' => '.yourdomain.com'
         ]
     ]);
+
+By default PHP sets the session cookie to expire as soon as the browser is
+closed, regardless of the configured ``Session.timeout`` value. The cookie
+timeout is controlled by the ``session.cookie_lifetime`` ini value and can be
+configured using::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            // Invalidate the cookie after 30 minutes without visiting
+            // any page on the site.
+            'session.cookie_lifetime' => 1800
+        ]
+    ]);
+
+The difference between ``Session.timeout`` and the ``session.cookie_lifetime``
+value is that the latter relies on the client telling the truth about the
+cookie. If you require stricter timeout checking, without relying on what the
+client reports, you should use ``Session.timeout``.
+
+Please note that ``Session.timeout`` corresponds to the total time of
+inactivity for a user (i.e. the time without visiting any page where the session
+is used), and does not limit the total amount of minutes a user can stay
+on the site.
 
 Built-in Session Handlers & Configuration
 =========================================
@@ -92,8 +108,16 @@ configuration. The built-in configurations are:
 * ``cake`` - Saves sessions as files inside ``app/tmp/sessions``. This is a
   good option when on hosts that don't allow you to write outside your own home
   dir.
-* ``database`` - Use the built-in database sessions. See below for more information.
+* ``database`` - Use the built-in database sessions. See below for more
+  information.
 * ``cache`` - Use the built-in cache sessions. See below for more information.
+
+The accepted values are:
+
+* - defaults: either 'php', 'database', 'cache' or 'cake' as explained above.
+* - handler: An array containing the handler configuration
+* - ini: A list of php.ini directives to set before the session starts.
+* - timeout: The time in minutes the session should stay active
 
 Session Handlers
 ----------------
@@ -101,11 +125,11 @@ Session Handlers
 Session handlers can also be defined in the session config array.  By defining
 the 'handler.engine' config key, you can name the class name, or provide
 a handler instance.  The class/object must implement the
-native PHP ``SessionHandlerInterface``. Implementing this interface will allow ``Session``
-to automatically map the methods for the handler. Both the core Cache and
-Database session handlers use this method for saving sessions. Additional
-settings for the handler should be placed inside the handler array. You can then
-read those values out from inside your handler::
+native PHP ``SessionHandlerInterface``. Implementing this interface will allow
+``Session`` to automatically map the methods for the handler. Both the core
+Cache and Database session handlers use this method for saving sessions.
+Additional settings for the handler should be placed inside the handler array.
+You can then read those values out from inside your handler::
 
     'Session' => [
         'handler' => [
@@ -194,6 +218,8 @@ it to control settings like ``session.gc_divisor``::
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
+            'session.cookie_name' => 'MyCookie',
+            'session.cookie_lifetime' => 1800, // Valid for 30 minutes
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
         ]
@@ -218,16 +244,19 @@ something like::
     use Cake\Core\Configure;
     use Cake\Network\Session\DatabaseSession;
 
-    class ComboSession extends DatabaseSession {
+    class ComboSession extends DatabaseSession
+    {
         public $cacheKey;
 
-        public function __construct() {
+        public function __construct()
+        {
             $this->cacheKey = Configure::read('Session.handler.cache');
             parent::__construct();
         }
 
         // Read data from the session.
-        public function read($id) {
+        public function read($id)
+        {
             $result = Cache::read($id, $this->cacheKey);
             if ($result) {
                 return $result;
@@ -236,19 +265,22 @@ something like::
         }
 
         // Write data into the session.
-        public function write($id, $data) {
+        public function write($id, $data)
+        {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
         // Destroy a session.
-        public function destroy($id) {
+        public function destroy($id)
+        {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
         // Removes expired sessions.
-        public function gc($expires = null) {
+        public function gc($expires = null)
+        {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }
     }
@@ -322,11 +354,14 @@ compatible syntax::
 
 .. php:method:: delete($key)
 
-When you need to delete data from the session, you can use delete::
+When you need to delete data from the session, you can use ``delete()``::
 
     $session->delete('Some.value');
 
-When you need to read and delete data from the session, you can use consume::
+.. php:staticmethod:: consume($key)
+
+When you need to read and delete data from the session, you can use
+``consume()``::
 
     $session->consume('Some.value');
 
@@ -348,8 +383,8 @@ the ``destroy()`` method::
 
     $session->destroy();
 
-Destroying a session will remove all serverside data in the session, but will **not**
-remove the session cookie.
+Destroying a session will remove all serverside data in the session, but will
+**not** remove the session cookie.
 
 Rotating Session Identifiers
 ============================
@@ -365,8 +400,8 @@ out, you may need to rotate the session id's manually. To do this use the
 Flash Messages
 ==============
 
-Flash messages are small messages displayed to end users once. They are often used to
-present error messages, or confirm that actions took place successfully.
+Flash messages are small messages displayed to end users once. They are often
+used to present error messages, or confirm that actions took place successfully.
 
 To set and display flash messages you should use
 :doc:`/controllers/components/flash` and

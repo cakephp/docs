@@ -13,7 +13,7 @@ CakePHPには元々たくさんのコンソールアプリケーションが備�
 あれば、仕事をより早く片付けるための、より一般的なものもあります。
 
 CakePHPのコンソール
-===================
+======================
 
 このセクションでは、コマンドラインにおけるCakePHPのご紹介をします。もし
 過去にcronジョブやコマンドライン・スクリプトから自分のCakePHPのMVCクラスに
@@ -136,8 +136,10 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 ``HelloShell.php`` を作ってください。その中に以下のコードを書きます::
 
     <?php
-    class HelloShell extends AppShell {
-        public function main() {
+    class HelloShell extends AppShell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -168,19 +170,22 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 がある程度わかったら、次は以下のように別のコマンドを追加してみましょう::
 
     <?php
-    class HelloShell extends AppShell {
-        public function main() {
+    class HelloShell extends AppShell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function hey_there() {
+        public function hey_there()
+        {
             $this->out('Hey there ' . $this->args[0]);
         }
     }
 
 このファイルを作って ``Console/cake hello hey_there あなたの名前`` を実行
 すると、ご自分の名前が表示されるはずです。publicとして定義された任意の
-メソッドのうち頭に ``_`` が付かないものは、コマンドラインから呼び出せます。
+メソッドのうち頭に ``_`` が付かないものは、コマンドラインか���呼び出せます。
 直前の例の ``hey_there`` メソッドの中では ``$this->args`` を使っています。
 これはコマンドに対して与えられた（指定順序が意味を持つ）引数が、与えられた
 順に配列として保持されています。シェルアプリケーションではスイッチや
@@ -202,10 +207,12 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 定義されたモデルがロードされ、あなたのシェルにプロパティとして接続されます::
 
     <?php
-    class UserShell extends AppShell {
+    class UserShell extends AppShell
+    {
         public $uses = array('User');
 
-        public function show() {
+        public function show()
+        {
             $user = $this->User->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
         }
@@ -224,7 +231,8 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 プロパティを使ってシェルのタスクを定義できます::
 
     <?php
-    class UserShell extends AppShell {
+    class UserShell extends AppShell
+    {
         public $tasks = array('Template');
     }
 
@@ -239,9 +247,11 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 ようになります::
 
     <?php
-    class FileGeneratorTask extends Shell {
+    class FileGeneratorTask extends Shell
+    {
         public $uses = array('User');
-        public function execute() {
+        public function execute()
+        {
 
         }
     }
@@ -251,9 +261,11 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 
     <?php
     // Console/Command/SeaShell.php として作成
-    class SeaShell extends AppShell {
+    class SeaShell extends AppShell
+    {
         public $tasks = array('Sound'); // Console/Command/Task/SoundTask.php として作成
-        public function main() {
+        public function main()
+        {
             $this->Sound->execute();
         }
     }
@@ -401,7 +413,7 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 
 
 * ``ConsoleOutput::RAW`` - RAW出力、スタイルや書式設定は行われない。
-  これはXMLを出力する場合や、スタイルのデバッグを行う際に役立ちます。
+  これはXMLを出力する場合や、スタイルのデバッ���を行う際に役立ちます。
 * ``ConsoleOutput::PLAIN`` - プレーンテキストモード。既知のスタイルタグが
   出力から取り除かれます。
 * ``ConsoleOutput::COLOR`` - カラーエスケープコードを出力します。
@@ -433,7 +445,8 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 簡単に設定できるようなメソッドを備えています::
 
     <?php
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         //configure parser
         return $parser;
@@ -619,8 +632,8 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
         'choices' => array('working', 'theirs', 'mine')
     ));
 
-ブール型オプションを使う
-------------------------
+ブール型オプションを使���
+-------------------------
 
 フラグのオプションを作りたい場合、オプションをブール型として指定できます。
 デフォルト値を持つオプションのように、ブール型のオプションもパース済み引数
@@ -712,7 +725,7 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
         )
     ));
 
-パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog`` 
+パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog``
 のためのキーを定義できます。配列形式ビルダーの内部にはサブコマンドは定義
 できません。argumentsとoptionsの値は
 :php:func:`ConsoleOptionParser::addArguments()` と
@@ -720,7 +733,8 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 自分自身に対してbuildFromArrayを使ってオプションパーサを構築することも可能です::
 
     <?php
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray(array(
             'description' => array(
                 __("Use this command to grant ACL permissions. Once executed, the ARO "),
@@ -948,7 +962,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
    :param string $method: 表示するメッセージ
    :param integer $newlines: メッセージの後に出力する改行の数
-   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値 
+   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値
 
    ユーザへの出力を生成するためのもっとも普通のやり方です。
    レベルを指定することで、シェルの出力の度合いを制限できます。
@@ -1016,15 +1030,14 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/repl
     console-and-shells/cron-jobs
-    console-and-shells/code-generation-with-bake
-    console-and-shells/schema-management-and-migrations
     console-and-shells/i18n-shell
-    console-and-shells/acl-shell
-    console-and-shells/testsuite-shell
+    console-and-shells/completion-shell
     console-and-shells/upgrade-shell
+    console-and-shells/plugin-assets
 
 
 .. meta::
-    :title lang=en: Console and Shells
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :title lang=ja: Console and Shells
+    :keywords lang=ja: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

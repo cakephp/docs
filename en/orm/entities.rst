@@ -26,7 +26,8 @@ our application had an ``articles`` table we could create the following entity::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
     }
 
 Right now this entity doesn't do very much. However, when we load data from our
@@ -75,8 +76,10 @@ are read or set. For example::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
-        protected function _getTitle($title) {
+    class Article extends Entity
+    {
+        protected function _getTitle($title)
+        {
             return ucwords($title);
         }
     }
@@ -91,9 +94,11 @@ a mutator::
     use Cake\ORM\Entity;
     use Cake\Utility\Inflector;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _setTitle($title) {
+        protected function _setTitle($title)
+        {
             $this->set('slug', Inflector::slug($title));
             return $title;
         }
@@ -119,9 +124,11 @@ actually exist. For example if your users table has ``first_name`` and
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
-        protected function _getFullName() {
+        protected function _getFullName()
+        {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -136,10 +143,10 @@ name will be the lower case and underscored version of the method::
 Do bear in mind that virtual properties cannot be used in finds.
 
 
-Checking if a Property Has Been Modified
+Checking if an Entity Has Been Modified
 ========================================
 
-.. php:method:: dirty($field, $dirty = null)
+.. php:method:: dirty($field = null, $dirty = null)
 
 You may want to make code conditional based on whether or not properties have
 changed in an entity. For example, may only want to validate fields when they
@@ -158,6 +165,11 @@ array properties::
 In addition you can also base you conditional code on the original properties values
 by using the ``getOriginal()`` method. This method will either return the original
 value of the property if it has been modified or its actual value.
+
+You can also check for changes to any property in the entity::
+
+    // See if the entity has changed
+    $article->dirty();
 
 Validation Errors
 =================
@@ -186,9 +198,10 @@ Mass Assignment
 
 While setting properties to entities in bulk is simple and convenient, it can
 create significant security issues. Bulk assigning user data from the request
-into an entity allows the user to modify any and all columns. By default CakePHP
-protects against mass-assignment and makes you whitelist which fields
-are mass-assignable.
+into an entity allows the user to modify any and all columns. When using
+anonymous entity classes CakePHP does not protect against mass-assignment. You
+can easily protect against mass-assignment by using :doc:`/bake` to generate your
+entities.
 
 The ``_accessible`` property allows you to provide a map of properties and
 whether or not they can be mass-assigned. The values ``true`` and ``false``
@@ -198,7 +211,8 @@ indicate whether a field can or cannot be mass-assigned::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -212,7 +226,8 @@ fallback behavior if a field is not specifically named::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -284,9 +299,11 @@ can lazily load associated data::
     use Cake\ORM\Entity;
     use Cake\ORM\TableRegistry;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _getComments() {
+        protected function _getComments()
+        {
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
@@ -322,7 +339,8 @@ could be provided by a trait::
 
     trait SoftDeleteTrait {
 
-        public function softDelete() {
+        public function softDelete()
+        {
             $this->set('deleted', true);
         }
 
@@ -336,7 +354,8 @@ it::
     use Cake\ORM\Entity;
     use SoftDelete\Model\Entity\SoftDeleteTrait;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use SoftDeleteTrait;
     }
 
@@ -369,7 +388,8 @@ fields that should be exposed::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_virtual = ['full_name'];
 
@@ -391,7 +411,8 @@ hidden::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_hidden = ['password'];
 

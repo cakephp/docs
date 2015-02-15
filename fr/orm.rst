@@ -10,11 +10,10 @@ Dans CakePHP, le domaine d'application du model est séparé en 2 types d'objet
 principaux. Les premiers sont des **repositories** ou **table objects**.
 Ces objets fournissent un accès aux collections de données. Ils vous permettent
 de sauvegarder de nouveaux enregistrements, de modifier/supprimer des
-enregistrements existants, définir des relations et d'effectuer des informations
-en vrac. Les seconds types d'objet sont des **entities**. Les Entities
+enregistrements existants, définir des relations et d'effectuer des opérations
+en masse. Les seconds types d'objet sont des **entities**. Les Entities
 représentent des enregistrements individuels et vous permettent de définir
-des niveaux de ligne/enregistrement (row/record level behavior) &
-fonctionnalités.
+des comportements et des fonctionnalités au niveau des lignes/enregistrements.
 
 L'ORM intégré dans CakePHP se spécialise dans les bases de données
 relationnelles, mais peut être étendu pour supporter des sources de données
@@ -25,16 +24,16 @@ de ActiveRecord et de Datamapper. Il a pour objectif de créer une implémentati
 hybride qui combine les aspects des deux patterns pour créer un ORM rapide et
 facile d'utilisation.
 
-Avant de commencer à explorer ORM, assurez-vous de :ref:`configurer votre
+Avant de commencer à explorer l'ORM, assurez-vous de :ref:`configurer votre
 connexion à la base de données <database-configuration>`.
 
 .. note::
 
-    Si vous etes familier avec les versions précédentes de CakePHP, vous devriez
-    lire :doc:`/appendices/orm-migration` pour voir les différences importantes
+    Si vous êtes familier avec les versions précédentes de CakePHP, vous devriez
+    lire le :doc:`/appendices/orm-migration` pour voir les différences importantes
     entre CakePHP 3.0 et les versions antérieures de CakePHP.
 
-Exemple rapide
+Exemple Rapide
 ==============
 
 Pour commencer, vous n'avez à écrire aucun code. Si vous suivez les conventions
@@ -51,21 +50,23 @@ de CakePHP pour vos tables de base de données, vous pouvez simplement commencer
 
 Notez que nous n'avons créé aucun code ou généré aucune configuration. Les
 conventions dans CakePHP nous permettent d'éviter un code bancal et permettent au
-framework d'inserer des classes de base lorsque votre application n'a pas créé
+framework d'insérer des classes de base lorsque votre application n'a pas créé
 de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
-ajouterions ce qui suit dans ``src/Model/Table/ArticlesTable.php``::
+ajouterions ce qui suit dans ``src/Model/Table/ArticlesTable.php`` après la
+balise d'ouverture ``<?php`` ::
 
     namespace App\Model\Repository;
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
     }
 
 Les classes de Table utilisent la version CamelCased du nom de la table avec le
-suffix ``Table`` en nom de classe. Une fois que votre classe a été créée vous
+suffixe ``Table`` en nom de classe. Une fois que votre classe a été créée vous
 obtenez une référence vers celle-ci en utilisant
 :php:class:`~Cake\\ORM\\TableRegistry` comme avant::
 
@@ -76,14 +77,16 @@ obtenez une référence vers celle-ci en utilisant
 Maintenant que nous avons une classe de table concrète, nous allons
 probablement vouloir utiliser une classe entity concrète. Les classes Entity
 vous laissent définir les méthodes accesseurs et mutateurs, définissant la
-logique personnalisée pour des enegistrements individuels et plus encore. Nous
-commencerons par ajouter ce qui suit à ``src/Model/Entity/Article.php``::
+logique personnalisée pour des enregistrements individuels et plus encore. Nous
+commencerons par ajouter ce qui suit à ``src/Model/Entity/Article.php`` après la
+balise d'ouverture ``<?php`` ::
 
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
     }
 

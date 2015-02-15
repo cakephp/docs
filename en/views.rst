@@ -31,7 +31,8 @@ The App View
 
     use Cake\View\View;
 
-    class AppView extends View {
+    class AppView extends View
+    {
     }
 
 You can use your ``AppView`` to load helpers that will be used for every
@@ -44,9 +45,11 @@ is invoked at the end of a View’s constructor for this kind of use:
 
     use Cake\View\View;
 
-    class AppView extends View {
+    class AppView extends View
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             // Always enable the MyUtils Helper
             $this->loadHelper('MyUtils');
         }
@@ -406,7 +409,8 @@ controller actions using the controller or view's
 ``$layout`` property::
 
     // From a controller
-    public function admin_view() {
+    public function admin_view()
+    {
         // Stuff
         $this->layout = 'admin';
     }
@@ -421,13 +425,16 @@ using something like::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->set('title', 'View Active Users');
             $this->layout = 'default_small_ad';
         }
 
-        public function view_image() {
+        public function view_image()
+        {
             $this->layout = 'image';
             // Output user image
         }
@@ -449,8 +456,10 @@ Contacts plugin::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -540,9 +549,11 @@ the Post example::
 
     namespace App\Controller;
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -620,6 +631,12 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 
 are equivalent and will result in the same element being rendered.
 
+For elements inside subfolder of a plugin
+(e.g., ``plugins/Contacts/sidebar/helpbox.ctp``), use the following::
+
+    echo $this->element('Contacts.sidebar/helpbox');
+
+
 Caching Sections of Your View
 -----------------------------
 
@@ -659,8 +676,10 @@ You'll also want to extend ``View`` to ensure things work correctly::
 
     use Cake\View\View;
 
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
             // Custom logic here.
         }
     }

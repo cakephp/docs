@@ -202,7 +202,7 @@ un autoloader configuré. CakePHP fournit deux variables de configuration pour
 configurer des chemins supplémentaires pour vos ressources. Dans votre
 ``config/app.php``, vous pouvez définir les variables::
 
-    $config = [
+    return [
         // Plus de configuration
         'App' => [
             'paths' => [
@@ -267,7 +267,7 @@ L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
 Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
 les modes de debug et de production à la volée. C'est particulièrement
-pratique pour les intéractions AMF et SOAP quand les informations de debug
+pratique pour les intéractions JSON quand les informations de debug
 peuvent entraîner des problèmes de parsing.
 
 Lire les Données de Configuration
@@ -457,21 +457,25 @@ pour votre application::
     use Cake\Core\Configure\ConfigEngineInterface;
     use Cake\Utility\Xml;
 
-    class XmlConfig implements ConfigEngineInterface {
+    class XmlConfig implements ConfigEngineInterface
+    {
 
-        public function __construct($path = null) {
+        public function __construct($path = null)
+        {
             if (!$path) {
                 $path = CONFIG;
             }
             $this->_path = $path;
         }
 
-        public function read($key) {
+        public function read($key)
+        {
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data) {
+        public function dump($key, $data)
+        {
             // Code to dump data to file
         }
     }
@@ -520,27 +524,24 @@ Fichiers de Configuration PHP
 
 .. php:class:: PhpConfig
 
-Vous permet de lire les fichiers de configuration qui sont stockés en
-fichiers PHP simples. Vous pouvez lire soit les fichiers à partir de votre
-``config``, soit des répertoires configs du plugin en utilisant la
-:term:`syntaxe de plugin`. Les fichiers **doivent** contenir une variable
-``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
+Vous permet de lire les fichiers de configuration de votre application qui
+sont stockés en fichiers PHP simples. Vous pouvez lire soit les fichiers à
+partir de votre ``config``, soit des répertoires configs du plugin en utilisant
+la :term:`syntaxe de plugin`. Les fichiers **doivent** retourner un tableau.
+Un fichier de configuration d'exemple ressemblerait à cela::
 
-    $config = [
-	'debug' => 0,
-	'Security' => [
-	    'salt' => 'its-secret'
-	],
-	'App' => [
-	    'namespace' => 'App'
-	]
+    return [
+      	'debug' => 0,
+      	'Security' => [
+      	    'salt' => 'its-secret'
+      	],
+      	'App' => [
+      	    'namespace' => 'App'
+      	]
     ];
 
-Des fichiers sans ``$config`` entraîneraient une
-:php:exc:`ConfigureException`.
-
-Charger votre fichier de configuration personnalisé en insérant ce qui suit
-dans ``config/bootstrap.php``:
+Chargez votre fichier de configuration personnalisé en insérant ce qui suit
+dans ``config/bootstrap.php``::
 
     Configure::load('customConfig');
 
@@ -554,8 +555,8 @@ fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
 fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
 
 * Les valeurs séparées par des points sont étendues dans les tableaux.
-* Les valeurs de la famille des boléens comme 'on' et 'off' sont converties
-  en boléens.
+* Les valeurs de la famille des booléens comme 'on' et 'off' sont converties
+  en booléens.
 
 Un fichier ini d'exemple ressemblerait à cela::
 
@@ -572,6 +573,26 @@ dans l'exemple PHP du dessus. Les structures de tableau peuvent être créées
 soit à travers des valeurs séparées de point, soit des sections. Les
 sections peuvent contenir des clés séparées de point pour des imbrications
 plus profondes.
+
+Json Configuration Files
+------------------------
+
+.. php:class:: JsonConfig
+
+Allows you to read / dump configuration files that are stored as JSON encoded
+strings in .json files.
+
+An example JSON file would look like::
+
+    {
+        "debug": false,
+        "App": {
+            "namespace": "MyApp"
+        },
+        "Security": {
+            "salt": "its-secret"
+        }
+    }
 
 Bootstrapping CakePHP
 =====================

@@ -4,8 +4,8 @@ Journalisation (logging)
 Bien que les réglages de la Classe Configure du cœur de CakePHP puissent
 vraiment vous aider à voir ce qui se passe sous le capot, vous aurez besoin
 certaines fois de consigner des données sur le disque pour découvrir ce qui
-se produit. Dans un monde devenu plus dépendant des technologies comme SOAP et
-AJAX, déboguer peut s'avérer difficile.
+se produit. Avec des technologies comme SOAP, AJAX, et les APIs REST, déboguer
+peut s'avérer difficile.
 
 Le logging (journalisation) peut aussi être une façon de découvrir ce qui
 s'est passé dans votre application à chaque instant. Quels termes de recherche
@@ -16,7 +16,7 @@ La journalisation des données dans CakePHP est facile - la fonction log()
 est fourni par ``LogTrait``, qui est l'ancêtre commun de la plupart
 des classes CakePHP. Si le contexte est une classe CakePHP (Model, Controller,
 Component... n'importe quoi d'autre), vous pouvez loguer (journaliser) vos
-données. Vous pouvez aussi utiliser ``CakeLog::write()`` directement.
+données. Vous pouvez aussi utiliser ``Log::write()`` directement.
 voir :ref:`writing-to-logs`
 
 .. _log-configuration:
@@ -35,6 +35,7 @@ Un exemple serait::
     // Nom de classe court
     Log::config('debug', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
     ]);
@@ -42,13 +43,14 @@ Un exemple serait::
     // Nom avec le namespace complet.
     Log::config('error', [
         'className' => 'Cake\Log\Engine\FileLog',
+        'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         'file' => 'error',
     ]);
 
 Ce qui est au-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
 ``error``. Chacun est configuré pour gérer différents niveaux de message. Ils
-stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il
+stockent aussi leurs messages de journal dans des fichiers séparés, ains'il
 est facile de séparer les logs de debug/notice/info des erreurs plus sérieuses.
 Regardez la section sur :ref:`logging-levels` pour plus d'informations sur les
 différents niveaux et ce qu'ils signifient.
@@ -64,7 +66,7 @@ construit. La closure doit retourner l'instance de logger construite. Par
 exemple::
 
     Log::config('special', function () {
-        return new \Cake\Log\Engine\FileLog();
+        return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
 Les options de configuration peuvent également être fournies en tant que chaine
@@ -85,14 +87,13 @@ Créer des Adaptateurs de Log
 
 Les gestionnaires de flux de log peuvent faire partie de votre application,
 ou parti d'un plugin. Si par exemple vous avez un enregistreur de logs de
-base de données appelé ``DatabaseLog``. Comme faisant parti de votre
+base de données appelé ``DatabaseLog``. Comme faisant partie de votre
 application il devrait être placé dans
 ``src/Log/Engine/DatabaseLog.php``. Comme faisant partie d'un plugin
 il devrait être placé dans
-``plugins/LoggingPack/Log/Engine/DatabaseLog.php``. Une fois
-configuré ``CakeLog`` va tenter de charger la configuration des flux de logs
-en appelant :php:meth:`Cake\\Log\\Log::config()`. La configuration de notre
-``DatabaseLog`` pourrait ressembler à ceci::
+``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. Pour configurer des
+flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::config()`. Par
+example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 
     // Pour src/Log
     Log::config('otherFile', [
@@ -116,12 +117,15 @@ un tableau. ::
     namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
 
-    class DatabaseLog extends BaseLog {
-        public function __construct($options = []) {
+    class DatabaseLog extends BaseLog
+    {
+        public function __construct($options = [])
+        {
             // ...
         }
 
-        public function log($level, $message, array $context = []) {
+        public function log($level, $message, array $context = [])
+        {
             // Write to the database.
         }
     }
@@ -229,7 +233,7 @@ vous devez juste spécifier `Syslog` comme moteur à utiliser pour la
 journalisation. Le bout de configuration suivant va remplacer le logger
 par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`::
 
-    CakeLog::config('default', [
+    Log::config('default', [
         'engine' => 'Syslog'
     ]);
 
@@ -259,7 +263,7 @@ Ecrire dans les logs
 Ecrire dans les fichiers peut être réalisé de deux façons. La première est
 d'utiliser la méthode statique :php:meth:`Cake\\Log\\Log::write()`::
 
-    CakeLog::write('debug', 'Quelque chose qui ne fonctionne pas');
+    Log::write('debug', 'Quelque chose qui ne fonctionne pas');
 
 La seconde est d'utiliser la fonction raccourcie log() disponible dans chacune
 des classes qui utilisent ``LogTrait``. En appelant log() cela appellera en
@@ -309,7 +313,7 @@ pour les commandes et les paiements différemment des autres opérations de
 journalisation moins critiques.
 
 CakePHP expose ce concept dans les scopes de journalisation. Quand les messages
-d'erreur sont écrits, vous pouvez inclure un nom scope. Si il y a un logger
+d'erreur sont écrits, vous pouvez inclure un nom scope. S'il y a un logger
 configuré pour ce scope, les messages de log seront dirigés vers ces loggers.
 Si un message de log est écrit vers un scope inconnu, les loggers qui gèrent
 ce niveau de message va journaliser le message. Par exemple::
@@ -318,6 +322,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // mais seulement ceux avec les scope `orders` et `payments`
     Log::config('shops', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
         'file' => 'shops.log',
@@ -327,6 +332,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // ceux qui ont un scope `payments`
     Log::config('payments', [
         'className' => 'FileLog',
+        'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
         'file' => 'payments.log',
@@ -344,8 +350,8 @@ de données en contexte::
     Log::warning('This is a warning', ['orders']);
     Log::warning('This is a warning', 'payments');
 
-l'API de CakeLog
-================
+l'API de Log
+============
 
 .. php:namespace:: Cake\Log
 
@@ -425,14 +431,43 @@ comme logger par défaut.
 Après avoir installé Monolog en utilisant composer, configurez le logger en
 utilisant la méthode ``Log::config()``::
 
+    // config/bootstrap.php
+
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
     Log::config('default', function () {
         $log = new Logger('app');
-        $log->pushHandler(new StreamHandler('path/to/your.log'));
+        $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
     });
+
+    // Optionnellement, coupez les loggers par défaut devenus redondants
+    Log::drop('debug');
+    Log::drop('error');
+
+Utilisez des méthodes similaires pour configurer un logger différent pour la console::
+
+    // config/bootstrap_cli.php
+
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+
+    Log::config('default', function () {
+        $log = new Logger('cli');
+        $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
+        return $log;
+    });
+
+    // Optionnellement, coupez les loggers par défaut devenus redondants
+    Configure::delete('Log.debug');
+    Configure::delete('Log.error');
+
+.. note::
+
+    Lorsque vous utilisez un logger spécifique pour la console, assurez-vous
+    de configurer conditionnellement le logger de votre application. Cela
+    évitera la duplication des entrées de log.
 
 .. meta::
     :title lang=fr: Journalisation (Logging)

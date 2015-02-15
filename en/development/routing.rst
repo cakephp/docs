@@ -102,7 +102,7 @@ Connecting Routes
 
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
-To keep your code :term:`DRY` you can should use 'routing scopes'. Routing
+To keep your code :term:`DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
 operation. As seen above you can also use ``Router::connect()`` to connect
 routes. This method defaults to the ``/`` scope. To create a scope and connect
@@ -328,7 +328,8 @@ argument of :php:meth:`Cake\\Routing\\Router::connect()` you can define which ro
 elements should also be made available as passed arguments::
 
     // SomeController.php
-    public function view($articleId = null, $slug = null) {
+    public function view($articleId = null, $slug = null)
+    {
         // Some code here...
     }
 
@@ -744,8 +745,10 @@ the passed arguments as well.
 If you were to visit the previously mentioned URL, and you
 had a controller action that looked like::
 
-    CalendarsController extends AppController {
-        public function view($arg1, $arg2) {
+    class CalendarsController extends AppController
+    {
+        public function view($arg1, $arg2)
+        {
             debug(func_get_args());
         }
     }
@@ -938,7 +941,7 @@ Calling fallbacks like so::
 Is equivalent to the following explicit calls::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $this->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
 
 .. note::
 
@@ -957,7 +960,8 @@ In your controller's ``beforeFilter()`` method you can call
 ``parseNamedParams()`` to extract any named parameters from the passed
 arguments::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         Router::parseNamedParams($this->request);
     }
@@ -1004,8 +1008,10 @@ RequestActionTrait
     return the data::
 
         // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            public function latest() {
+        class CommentsController extends AppController
+        {
+            public function latest()
+            {
                 if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }

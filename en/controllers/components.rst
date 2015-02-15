@@ -33,8 +33,10 @@ requiring configuration are :doc:`/controllers/components/authentication` and
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
-    class PostsController extends AppController {
-        public function initialize() {
+    class PostsController extends AppController
+    {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth', [
                 'authorize' => ['controller'],
@@ -49,7 +51,8 @@ You can configure components at runtime using the ``config()`` method. Often,
 this is done in your controller's ``beforeFilter()`` method. The above could
 also be expressed as::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Auth->config('authorize', ['controller']);
         $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
 
@@ -78,8 +81,10 @@ replace ``$this->Auth`` or another common Component reference with a custom
 implementation::
 
     // src/Controller/PostsController.php
-    class PostsController extends AppController {
-        public function initialize() {
+    class PostsController extends AppController
+    {
+        public function initialize()
+        {
             $this->loadComponent('Auth', [
                 'className' => 'MyAuth'
             ]);
@@ -89,7 +94,8 @@ implementation::
     // src/Controller/Component/MyAuthComponent.php
     use Cake\Controller\Component\AuthComponent;
 
-    class MyAuthComponent extends AuthComponent {
+    class MyAuthComponent extends AuthComponent
+    {
         // Add your code to override the core AuthComponent
     }
 
@@ -128,14 +134,17 @@ you had loaded up the :php:class:`Cake\\Controller\\Component\\FlashComponent`
 and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
 controller, you could access them like so::
 
-    class PostsController extends AppController {
-        public function intialize() {
+    class PostsController extends AppController
+    {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Flash');
             $this->loadComponent('Cookie');
         }
 
-        public function delete() {
+        public function delete()
+        {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Flash->success('Post deleted.');
                 return $this->redirect(['action' => 'index']);
@@ -165,8 +174,10 @@ component would look something like this::
 
     use Cake\Controller\Component;
 
-    class MathComponent extends Component {
-        public function doComplexOperation($amount1, $amount2) {
+    class MathComponent extends Component
+    {
+        public function doComplexOperation($amount1, $amount2)
+        {
             return $amount1 + $amount2;
         }
     }
@@ -187,7 +198,8 @@ component, through which we can access an instance of it::
     // In a controller
     // Make the new component available at $this->Math,
     // as well as the standard $this->Csrf
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Math');
         $this->loadComponent('Csrf');
@@ -199,7 +211,8 @@ constructor. These parameters can then be handled by
 the Component::
 
     // In your controller.
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Math', [
             'precision' => 2,
@@ -224,16 +237,19 @@ way you include them in controllers - using the ``$components`` var::
 
     use Cake\Controller\Component;
 
-    class CustomComponent extends Component {
+    class CustomComponent extends Component
+    {
         // The other component your component uses
         public $components = ['Existing'];
 
         // Execute any other additional setup for your component.
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->Existing->foo();
         }
 
-        public function bar() {
+        public function bar()
+        {
             // ...
        }
     }
@@ -243,9 +259,11 @@ way you include them in controllers - using the ``$components`` var::
 
     use Cake\Controller\Component;
 
-    class ExistingComponent extends Component {
+    class ExistingComponent extends Component
+    {
 
-        public function foo() {
+        public function foo()
+        {
             // ...
         }
     }
@@ -295,7 +313,7 @@ augment the request cycle.
 
     Is called before output is sent to the browser.
 
-.. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
+.. php:method:: beforeRedirect(Event $event, $url, Response $response)
 
     Is invoked when the controller's redirect
     method is called but before any further action. If this method

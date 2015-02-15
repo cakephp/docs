@@ -184,10 +184,12 @@ the results taken from the database is not actually required::
     // No queries made in this example!
     $results = $articles->find()
         ->order(['title' => 'DESC'])
-        ->extract('title');
+        ->formatResults(function ($results) {
+            return $results->extract('title');
+        });
 
 Queries can be seen as the result object, trying to iterate the query, calling
-``toArray`` or any method inherited from :ref:`collection<collection-objects>`,
+``toArray`` or any method inherited from :ref:`collection <collection-objects>`,
 will result in the query being executed and results returned to you.
 
 The biggest difference you will find when coming from CakePHP 2.x is that
@@ -210,8 +212,13 @@ and it is the ``first`` method::
         'conditions' => ['author_id' => 1]
     ])->first();
 
+    // Can also be written
+    $article = $this->Articles->find()
+        ->where(['author_id' => 1])
+        ->first();
+
 If you are a loading a single record by its primary key, it will be better to
-just call ``get``::
+just call ``get()``::
 
     $article = $this->Articles->get(10);
 
@@ -223,13 +230,16 @@ a cost for people migrating from 2.x. If you had some custom find methods in
 your models, they will need some modifications. This is how you create custom
 finder methods in 3.0::
 
-    class ArticlesTable {
+    class ArticlesTable
+    {
 
-        public function findPopular(Query $query, array $options) {
+        public function findPopular(Query $query, array $options)
+        {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites(Query $query, array $options) {
+        public function findFavorites(Query $query, array $options)
+        {
             $for = $options['for'];
             return $query->matching('Users.Favorites', function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
@@ -250,7 +260,8 @@ migrate this code in one of a few ways:
 
 In the 3rd case above your code would look like::
 
-    public function findAll(Query $query, array $options) {
+    public function findAll(Query $query, array $options)
+    {
         $mapper = function ($row, $key, $mr) {
             // Your afterFind logic
         };
@@ -324,8 +335,10 @@ on the fly::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
-        public function getFullName() {
+    class User extends Entity
+    {
+        public function getFullName()
+        {
             return $this->first_name . '  ' . $this->last_name;
         }
     }
@@ -345,8 +358,10 @@ fields gave::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
-        public function findAverage(Query $query, array $options = []) {
+    class ReviewsTable extends Table
+    {
+        public function findAverage(Query $query, array $options = [])
+        {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
             return $query;
@@ -368,9 +383,11 @@ code, interact with the same API when manipulating associations::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Movies');
             $this->hasOne('Ratings');
             $this->hasMany('Comments')
@@ -398,30 +415,27 @@ a ``ModelValidator`` object. This transformation step added a layer of
 indirection, complicating rule changes at runtime. Futhermore, validation rules
 being defined as a property made it difficult for a model to have multiple sets
 of validation rules. In CakePHP 3.0, both these problems have been remedied.
-Validation rules are always built with a ``Validator`` object, and it is trivial to
-have multiple sets of rules::
+Validation rules are always built with a ``Validator`` object, and it is trivial
+to have multiple sets of rules::
 
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
+    use Cake\Validation\Validator;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault(Validator $validator)
+        {
             $validator->requirePresence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
                     'message' => 'Reviews must be 20 characters or more',
                 ])
-                ->add('user_id', 'exists', [
-                    'rule' => function ($value, $context) {
-                        $q = $this->association('Users')
-                            ->find()
-                            ->where(['id' => $value]);
-                        return $q->count() === 1;
-                    },
-                    'message' => 'A valid user is required.'
+                ->add('user_id', 'numeric', [
+                    'rule' => 'numeric'
                 ]);
             return $validator;
         }
@@ -429,9 +443,51 @@ have multiple sets of rules::
     }
 
 You can define as many validation methods as you need. Each method should be
-prefixed with ``validation`` and accept a ``$validator`` argument. You can then
-use your validators when saving using the ``validate`` option. See the
-documentation on :ref:`saving-entities` for more information.
+prefixed with ``validation`` and accept a ``$validator`` argument.
+
+In previous versions of CakePHP 'validation' and the related callbacks covered
+a few related but different uses. In CakePHP 3.0, what was formerly called
+validation is now split into two concepts:
+
+#. Data type and format validation.
+#. Enforcing application, or business rules.
+
+Validation is now applied before ORM entities are created from request data.
+This step lets you ensure data matches the data type, format, and basic shape
+your application expects. You can use your validators when converting request
+data into entities by using the ``validate`` option. See the documentation on
+:ref:`converting-request-data` for more information.
+
+:ref:`Application rules <application-rules>` allow you to define rules that
+ensure your application's rules, state and workflows are enforced. Rules are
+defined in your Table's ``buildRules()`` method. Behaviors can add rules using
+the ``buildRules()`` hook method. An example ``buildRules`` method for our
+articles table could be::
+
+    // In src/Model/Table/ArticlesTable.php
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\RulesChecker;
+
+    class Articles extends Table
+    {
+        public function buildRules(RulesChecker $rules)
+        {
+            $rules->add($rules->existsIn('user_id', 'Users'));
+            $rules->add(
+                function ($article, $options) {
+                    return ($article->published && empty($article->reviewer));
+                },
+                'isReviewed',
+                [
+                    'errorField' => 'published',
+                    'message' => 'Articles must be reviewed before publishing.'
+                ]
+            );
+            return $rules;
+        }
+    }
 
 Identifier Quoting Disabled by Default
 --------------------------------------
@@ -492,11 +548,13 @@ a constructor::
 
     use Cake\ORM\Behavior;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
 
         protected $_table;
 
-        public function __construct(Table $table, array $config) {
+        public function __construct(Table $table, array $config)
+        {
             parent::__construct($table, $config);
             $this->_table = $table;
         }
@@ -517,7 +575,8 @@ behavior mixin methods can expect the **same** arguments provided to the table
 The behavior providing the ``slug`` method will receive only 1 argument, and its
 method signature should look like::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         // Code here.
     }
 
@@ -528,7 +587,8 @@ Behavior callbacks have been unified with all other listener methods. Instead of
 their previous arguments, they need to expect an event object as their first
 argument::
 
-    public function beforeFind(Event $event, Query $query, array $options) {
+    public function beforeFind(Event $event, Query $query, array $options)
+    {
         // Code.
     }
 

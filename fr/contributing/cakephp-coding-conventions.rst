@@ -1,12 +1,13 @@
 Normes de codes
 ###############
 
-Les développeurs de CakePHP vont utiliser les normes de code suivantes.
+Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code PSR-2
+<http://www.php-fig.org/psr/psr-2/fr/>`_ en additions aux règles de code suivantes.
 
-Il est recommandé que les autres personnes qui développent des Ingredients de
+Il est recommandé que les autres personnes qui développent des Ingrédients de
 Cake suivent les mêmes normes.
 
-Vous pouvez utilisez le `Code Sniffer de CakePHP
+Vous pouvez utiliser le `Code Sniffer de CakePHP
 <https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code
 suit les normes requises.
 
@@ -19,7 +20,7 @@ propres tests - qui doivent être validés avant de les committer au dépôt.
 Indentation
 ===========
 
-Un onglet sera utilisé pour l'indentation.
+Quatre espaces seront utilisés pour l'indentation.
 
 Ainsi, l'indentation devrait ressembler à ceci::
 
@@ -34,7 +35,7 @@ Ou::
     $booleanVariable = true;
     $stringVariable = "moose";
     if ($booleanVariable) {
-        echo "Valeur boléenne si true";
+        echo "Valeur booléenne si true";
         if ($stringVariable === "élan") {
             echo "Nous avons rencontré un élan";
         }
@@ -44,7 +45,7 @@ Longueur des lignes
 ===================
 
 Il est recommandé de garder les lignes à une longueur d'environ 100 caractères
-pour une meilleur lisibilité du code.
+pour une meilleure lisibilité du code.
 Les lignes ne doivent pas être plus longues que 120 caractères.
 
 En résumé:
@@ -118,7 +119,7 @@ vérifiée de l'opération pour rendre le code plus clair::
     // Bien, simple et lisible
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    // Imbriquations des ternaires est mauvaise
+    // Imbrications des ternaires est mauvaise
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
@@ -182,9 +183,10 @@ signes égal (=).
 Définition des Méthodes
 =======================
 
-Exemple d'un définition de méthode::
+Exemple d'une définition de méthode::
 
-    public function someFunction($arg1, $arg2 = '') {
+    public function someFunction($arg1, $arg2 = '')
+    {
         if (expr) {
             statement;
         }
@@ -196,7 +198,8 @@ dans la défintion de la fonction. Essayez de faire en sorte que vos fonctions
 retournent quelque chose, au moins ``true`` ou ``false``, ainsi cela peut
 déterminer si l'appel de la fonction est un succès::
 
-    public function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false)
+    {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -226,11 +229,12 @@ le typage prend du temps::
      * @param callable $callback Some callback.
      * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, callable $callback, $boolean) {
+    public function foo(Model $Model, array $array, callable $callback, $boolean)
+    {
     }
 
 Ici ``$Model`` doit être une instance de ``Model``, ``$array`` doit être un
-``array`` et ``$callback`` doit être de type ``callable`` (un callback valide ).
+``array`` et ``$callback`` doit être de type ``callable`` (un callback valide).
 
 Notez que si vous souhaitez autoriser que ``$array`` soit aussi une instance
 de ``ArrayObject``, vous ne devez pas typer puisque ``array`` accepte seulement
@@ -241,7 +245,8 @@ le type primitif::
      *
      * @param array|ArrayObject $array Some array value.
      */
-    public function foo($array) {
+    public function foo($array)
+    {
     }
 
 Fonctions Anonymes (Closures)
@@ -289,7 +294,7 @@ Les commentaires doivent inclure les tags de
 *  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 Les tags de PhpDoc sont un peu du même style que les tags de JavaDoc dans
-Java. Les tags sont seulement traités si ils sont la première chose dans la
+Java. Les tags sont seulement traités s'il sont la première chose dans la
 ligne DocBlock, par exemple::
 
     /**
@@ -308,7 +313,8 @@ ligne DocBlock, par exemple::
      *
      * @return void
      */
-    function bar() {
+    function bar()
+    {
     }
 
     /**
@@ -316,7 +322,8 @@ ligne DocBlock, par exemple::
      *
      * @return void
      */
-    function foo() {
+    function foo()
+    {
     }
 
 Les blocks de commentaires, avec une exception du premier block dans le
@@ -348,7 +355,7 @@ object
 resource
     Type Ressource (retourné par exemple par mysql\_connect()).
     Rappelez vous que quand vous spécifiez un type en mixed, vous devez
-    indiquer si il est inconnu, ou les types possibles.
+    indiquer s'il est inconnu, ou les types possibles.
 callable
     Function appelable.
 
@@ -367,7 +374,8 @@ utilisez ``$this`` à la place::
      *
      * @return $this
      */
-    public function foo() {
+    public function foo()
+    {
         return $this;
     }
 
@@ -422,15 +430,17 @@ Fonctions
 
 Ecrivez toutes les fonctions en camelBack::
 
-    function nomDeFonctionLongue() {
+    function nomDeFonctionLongue()
+    {
     }
 
 Classes
 -------
 
-Les noms de classe doivent être écrites en CamelCase, par exemple::
+Les noms de classe doivent être écrits en CamelCase, par exemple::
 
-    class ClasseExemple {
+    class ClasseExemple
+    {
     }
 
 Variables
@@ -438,7 +448,7 @@ Variables
 
 Les noms de variable doivent être aussi descriptifs que possible, mais
 aussi courts que possible. Les variables normales doivent démarrer
-avec une lettre minuscule, et doivent être écrites en camelBack si il y a
+avec une lettre minuscule, et doivent être écrites en camelBack s'il y a
 plusieurs mots. Les variables contenant des objets doivent démarrer
 avec une majuscule, et d'une certaine manière être associées à la classe d'où
 elles proviennent. Exemple::
@@ -455,10 +465,12 @@ Utilisez les mots-clés private et protected de PHP5 pour les méthodes et
 variables. De plus les noms des méthodes et variables protégées commencent
 avec un underscore simple (``_``). Exemple::
 
-    class A {
+    class A
+    {
         protected $_jeSuisUneVariableProtegee;
 
-        protected function _jeSuisUnemethodeProtegee() {
+        protected function _jeSuisUnemethodeProtegee()
+        {
            /*...*/
         }
     }
@@ -466,17 +478,19 @@ avec un underscore simple (``_``). Exemple::
 Les noms de méthodes et variables privées commencent avec un underscore double
 (``__``). Exemple::
 
-    class A {
+    class A
+    {
         private $__iAmAPrivateVariable;
 
-        private function __iAmAPrivateMethod() {
+        private function __iAmAPrivateMethod()
+        {
             /*...*/
         }
     }
 
 Essayez cependant d'éviter les méthodes et variables privées et privilégiez
 plutôt les variables protégées.
-Ainsi elles pourront être accessible ou modifié par les sous-classes, alors que
+Ainsi elles pourront être accessibles ou modifiées par les sous-classes, alors que
 celles privées empêchent l'extension ou leur réutilisation. La visibilité privée
 rend aussi le test beaucoup plus difficile.
 

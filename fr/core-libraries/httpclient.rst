@@ -144,7 +144,7 @@ Un exemple simple d'authentification::
       'auth' => ['username' => 'mark', 'password' => 'secret']
     ]);
 
-Par défaut Http\\Client va utiliser l'authentification basic si il n'y a pas
+Par défaut Http\\Client va utiliser l'authentification basic s'il n'y a pas
 de clé ``'type'`` dans l'option auth.
 
 

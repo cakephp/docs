@@ -9,6 +9,11 @@ les fichiers -- le bouton "Improve this Doc" (Améliorer cette Doc) sur toutes
 les pages vous redirigera vers l'éditeur en ligne de Github pour la page
 correspondante.
 
+CakePHP documentation is
+`continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
+so you can check the status of the `various builds <http://ci.cakephp.org>`_
+on the Jenkins server at any time.
+
 Traductions
 ===========
 
@@ -83,16 +88,23 @@ Le balisage interne
 -------------------
 
 * Un astérisque: *text* pour une accentuation (italiques)
+  We'll use it for general highlighting/emphasis.
 
-  * ``*text*``
+  * ``*text*``.
 
 * Two asterisks: **text** pour une forte accentuation (caractères gras)
+  We'll use it for working directories, bullet list subject, table names and
+  excluding the following word "table".
 
-  * ``**text**``
+  * ``**/config/Migrations**``, ``**articles**``, etc.
 
 * Two backquotes: ``text`` pour les exemples de code
+  We'll use it for names of method options, names of table columns, object
+  names, excluding the following word "object" and for method/function
+  names -- include "()".
 
-  * ````text````
+  * ````cascadeCallbacks````, ````true````, ````id````,
+    ````PagesController````, ````config()````, etc.
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être
 confondus avec les délimiteurs du balisage interne, ils doivent être echappés
@@ -288,7 +300,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 Référencement croisé
 ~~~~~~~~~~~~~~~~~~~~
 
-Les modèles suivants se réfèrent aux objets php et les liens sont générés
+Les modèles suivants se réfèrent aux objets PHP et les liens sont générés
 si une directive assortie est trouvée:
 
 .. rst:role:: php:func

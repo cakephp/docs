@@ -1,11 +1,12 @@
-RSS
-###
+RSSHelper
+#########
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: RssHelper(View $view, array $config = [])
 
-Le Helper RSS permet de générer facilement des XML pour les flux RSS.
+Le Helper RSS permet de générer facilement le XML pour les
+`flux RSS <https://en.wikipedia.org/wiki/RSS>`_.
 
 Créer un flux RSS avec RssHelper
 ================================
@@ -37,12 +38,13 @@ Code du Controller
 C'est une bonne idée d'ajouter RequestHandler dans la méthode ``initialize()``
 de votre controller Posts. Cela permettra beaucoup d'automagie::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('RequestHandler');
     }
 
-Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ainsi il
+Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ains'il
 doit aussi être ajouté au controller::
 
     public $helpers = ['Text'];
@@ -62,7 +64,8 @@ le même::
     // l'action qui délivre le flux rss, laquelle est
     // l'action index dans notre exemple
 
-    public function index() {
+    public function index()
+    {
         if ($this->RequestHandler->isRss() ) {
             $posts = $this->Post->find(
                 'all',
@@ -77,7 +80,7 @@ le même::
             'order' => 'Post.created DESC',
             'limit' => 10
         ];
-        
+
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }

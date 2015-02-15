@@ -18,17 +18,29 @@
 各コアコンポーネントの詳細は各章で説明します。ここでは、独自のコンポーネントを作成する方法を紹介します。
 コンポーネントを作成することでコントローラのコードがクリーンな状態に保たれ、プロジェクト間でコードを再利用し易くなります。
 
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/authentication
+    /controllers/components/cookie
+    /controllers/components/csrf
+    /controllers/components/flash
+    /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
+
 .. _configuring-components:
 
 コンポーネントの設定
 ====================
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を必要としている例は、
-:doc:`/core-libraries/components/authentication` や :doc:`/core-libraries/components/cookie` などにあります。
+:doc:`/controllers/components/authentication` や :doc:`/controllers/components/cookie` などにあります。
 これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
 ``$components`` 配列かコントローラの ``beforeFilter()`` メソッドで行われます。::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array(
             'Auth' => array(
                 'authorize' => array('controller'),
@@ -41,7 +53,8 @@
 さらに、コントローラの ``beforeFilter()`` メソッドで設定することもできます。これは関数の結果をコンポーネントのプロパティに設定する時に役に立ちます。
 上記の例は次のように書き換えられます。::
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
 
@@ -61,7 +74,8 @@
 この機能は ``$this->Auth`` や他のコンポーネントの参照を独自実装に置き換えたい時に便利です。::
 
     // app/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array(
             'Auth' => array(
                 'className' => 'MyAuth'
@@ -71,7 +85,8 @@
 
     // app/Controller/Component/MyAuthComponent.php
     App::uses('AuthComponent', 'Controller/Component');
-    class MyAuthComponent extends AuthComponent {
+    class MyAuthComponent extends AuthComponent
+    {
         // コアAuthComponentを上書きするコードを追加して
     }
 
@@ -89,10 +104,12 @@
 仮に、 :php:class:`SessionComponent` と :php:class:`CookieComponent` をコントローラに読込んだ場合、
 以下のようにアクセスすることができます。::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array('Session', 'Cookie');
 
-        public function delete() {
+        public function delete()
+        {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
                 return $this->redirect(array('action' => 'index'));
@@ -136,8 +153,10 @@
 コンポーネントの基本構造は以下のようになります。::
 
     App::uses('Component', 'Controller');
-    class MathComponent extends Component {
-        public function doComplexOperation($amount1, $amount2) {
+    class MathComponent extends Component
+    {
+        public function doComplexOperation($amount1, $amount2)
+        {
             return $amount1 + $amount2;
         }
     }
@@ -182,24 +201,29 @@
 
     // app/Controller/Component/CustomComponent.php
     App::uses('Component', 'Controller');
-    class CustomComponent extends Component {
+    class CustomComponent extends Component
+    {
         // 実装中のコンポーネントが使っている他のコンポーネント
         public $components = array('Existing');
 
-        public function initialize(Controller $controller) {
+        public function initialize(Controller $controller)
+        {
             $this->Existing->foo();
         }
 
-        public function bar() {
+        public function bar()
+        {
             // ...
        }
     }
 
     // app/Controller/Component/ExistingComponent.php
     App::uses('Component', 'Controller');
-    class ExistingComponent extends Component {
+    class ExistingComponent extends Component
+    {
 
-        public function foo() {
+        public function foo()
+        {
             // ...
         }
     }
@@ -248,5 +272,5 @@
     'status'と'exit'は任意です。
 
 .. meta::
-    :title lang=en: Components
-    :keywords lang=en: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
+    :title lang=ja: Components
+    :keywords lang=ja: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

@@ -1,7 +1,7 @@
 Translate
 #########
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TranslateBehavior
 
@@ -21,9 +21,11 @@ A Quick Tour
 After creating the ``i18n`` table in your database attach the behavior to any
 Table object you want to make translatable::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', ['fields' => ['title']]);
         }
     }
@@ -52,10 +54,11 @@ You can try now getting your entity again::
 Working with multiple translations can be done easily by using a special trait
 in your Entity class::
 
-    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 
@@ -103,9 +106,11 @@ Attaching the Translate Behavior to Your Tables
 Attaching the behavior can be done in the ``initialize`` method in your Table
 class::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
@@ -122,13 +127,14 @@ repository, you can specify it in the behavior's configuration. This is common
 when you have multiple tables to translate and you want a cleaner separation
 of the data that is stored for each different table::
 
+    class Articles extends Table
+    {
 
-    class Articles extends Table {
-
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
-                'translationTable' => 'articles_i18n'
+                'translationTable' => 'ArticlesI18n'
             ]);
         }
     }
@@ -183,10 +189,11 @@ data entities. For example the following properties would be accessible::
 A more elegant way for dealing with this data is by adding a trait to the entity
 class that is used for your table::
 
-    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 
@@ -209,6 +216,26 @@ set of records::
     $article = $results->first();
     $spanishTranslation = $article->translation('spa');
     $englishTranslation = $article->translation('eng');
+
+Adding Additional Conditions for Translations
+---------------------------------------------
+
+You may need additional conditions for loading translated records. For example,
+you may only want to load non-empty translations::
+
+    class Articles extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Translate', [
+                'fields' => ['title', 'body'],
+                'conditions' => ['content !=' => '']
+            ]);
+        }
+    }
+
+The above would only load translated data that had content.
 
 Retrieving All Translations For Associations
 --------------------------------------------
@@ -264,13 +291,16 @@ representing the default language, and multiple translations that can override
 certain fields in such entity. Keeping this in mind, you can intuitively save
 translations for any given entity. For example, given the following setup::
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 
@@ -326,10 +356,11 @@ It is a common requirement to be able to add or edit multiple translations to
 any database record at the same time. This can be easily done using the
 ``TranslateTrait``::
 
-    use Cake\Model\Behavior\Translate\TranslateTrait;
+    use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use TranslateTrait;
     }
 

@@ -56,7 +56,7 @@ compatibility is ensured.
 
 In minor releases, new methods may be added to classes, and existing methods may
 have new arguments added. Any new arguments will have default values, but if
-you've overidden methods with a differing signature you may see fatal errors.
+you've overridden methods with a differing signature you may see fatal errors.
 Methods that have new arguments added will be documented in the migration guide
 for that release.
 

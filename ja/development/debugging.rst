@@ -300,6 +300,6 @@ GitHub の `DebugKit <https://github.com/cakephp/debug_kit>`_ からダウンロ
 
 
 .. meta::
-    :title lang=en: Debugging
-    :description lang=en: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
-    :keywords lang=en: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options
+    :title lang=ja: Debugging
+    :description lang=ja: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
+    :keywords lang=ja: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options

@@ -17,25 +17,16 @@ Session Configuration
 La configuration de Session est stockée dans ``Configure`` dans la clé de top
 niveau ``Session``, et un certain nombre d'options sont disponibles:
 
-* ``Session.cookie`` - Change le nom du cookie de session.
-
 * ``Session.timeout`` - Le nombre de *minutes* avant que le gestionnaire de
   session de CakePHP ne fasse expirer la session.
-  Cela affecte ``Session.autoRegenerate`` (ci-dessous), et cela est geré par
-  CakeSession.
-
-* ``Session.cookieTimeout`` - Le nombre de *minutes* avant que le cookie de
-  session n'expire. Si il n'est pas défini, il utilisera la même valeur que
-  ``Session.timeout``. Cela affecte le cookie de session, et est geré
-  directement par PHP.
 
 * ``Session.defaults`` - Vous permet d'utiliser les configurations de session
   intégrées par défaut comme une base pour votre configuration de session.
+  Regardez ci-dessous les paramètres intégrés par défaut
 
 * ``Session.handler`` - Vous permet de définir un gestionnaire de session
   personnalisé. La base de données du cœur et les gestionnaires de cache
-  de session utilisent celui-ci. Cette option remplace ``Session.save``
-  dans les versions précédentes. Regardez ci-dessous pour des informations
+  de session utilisent celui-ci. Regardez ci-dessous pour des informations
   supplémentaires sur les gestionnaires de Session.
 
 * ``Session.ini`` - Vous permet de définir les configurations ini de session
@@ -57,16 +48,43 @@ désactiver cela::
         ]
     ]);
 
-Les chemins des cookies de Session sont par défaut ``/``. Pour changer
-cela, vous pouvez utiliser le drapeau ini ``session.cookie_path`` vers le
-chemin du répertoire de votre application::
+Le chemin du cookie de session est par défaut le chemin de base de
+l'application. Pour changer ceci, vous pouvez utiliser la valeur ini
+``session.cookie_path``. Par exemple, si vous voulez que votre session soit
+sauvegardée pour tous les sous-domaines, vous pouvez faire::
 
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
-            'session.cookie_path' => '/src/dir'
+            'session.cookie_path' => '/',
+            'session.cookie_domain' => '.yourdomain.com'
         ]
     ]);
+
+Par défaut PHP définit le cookie de session pour qu'il expire dès que le
+navigateur est fermé, quelque soit la valeur ``Session.timeout`` configurée.
+Le timeout du cookie est contrôlé par la valeur ini ``session.cookie_lifetime``
+et peut être configuré en utilisant::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            // Rend le cookie non valide après 30 minutes s'il n'y
+            // a aucune visite d'aucune page sur le site.
+            'session.cookie_lifetime' => 1800
+        ]
+    ]);
+
+La différence entre les valeurs ``Session.timeout`` et
+``session.cookie_lifetime`` est que la deuxième repose sur le fait que le
+client dit la vérité sur le cookie. Si vous devez vérifier plus strictement
+le timeout, sans que cela ne repose sur ce que dit le client, vous devez
+utiliser ``Session.timeout``.
+
+Merci de noter que ``Session.timeout`` correspond au temps total d'inactivité
+d'un utilisateur (par ex, le temps sans visite d'aucune page où la session
+est utilisée), et ne limite pas le nombre total de minutes pendant lesquelles
+un utilisateur peut rester sur le site.
 
 Gestionnaires de Session intégrés & Configuration
 =================================================
@@ -101,9 +119,9 @@ configuration de session 'php'. Les configurations intégrées sont:
 * ``cake`` - Sauvegarde les sessions en tant que fichiers à l'intérieur de
   ``app/tmp/sessions``. Ceci est une bonne option quand les hôtes ne
   vous autorisent pas à écrire en dehors de votre propre dir home.
-* ``database`` - Utiliser les sessions de base de données intégrées.
+* ``database`` - Utilise les sessions de base de données intégrées.
   Regardez ci-dessous pour plus d'informations.
-* ``cache`` - Utiliser les sessions de cache intégrées. Regardez
+* ``cache`` - Utilise les sessions de cache intégrées. Regardez
   ci-dessous pour plus d'informations.
 
 Gestionnaires de Session
@@ -153,13 +171,13 @@ choisir la base de données par défaut::
         ]
     ]);
 
-Ce qui est au-dessus va dire à CakeSession d'utiliser le 'database' intégré
+Ce qui est au-dessus va dire à Session d'utiliser le 'database' intégré
 par défaut, et spécifier qu'un model appelé ``CustomSession`` sera celui
 délégué pour la sauvegarde d'information de session dans la base de données.
 
 Si vous n'avez pas besoin d'un gestionnaire de session complètement
 personnalisable, mais que vous avez tout de même besoin de stockage de session
-en base de donnée-backed, vous pouvez simplifier le code du dessus par
+en base de données, vous pouvez simplifier le code du dessus par
 celui-ci::
 
     Configure::write('Session', [
@@ -204,7 +222,7 @@ déléguée pour sauvegarder les sessions. Vous pouvez utiliser la clé 'config'
 qui va mettre en cache la configuration à utiliser. La configuration par
 défaut de la mise en cache est ``'default'``.
 
-Configurer les directives ini
+Configurer les Directives ini
 =============================
 
 Celui intégré par défaut tente de fournir une base commune pour la
@@ -218,6 +236,8 @@ pour contrôler les configurations comme ``session.gc_divisor``::
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
+            'session.cookie_name' => 'MyCookie',
+            'session.cookie_lifetime' => 1800, // Valide pour 30 minutes
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
         ]
@@ -243,16 +263,19 @@ devrait ressembler à::
     use Cake\Core\Configure;
     use Cake\Network\Session\DatabaseSession;
 
-    class ComboSession extends DatabaseSession {
+    class ComboSession extends DatabaseSession
+    {
         public $cacheKey;
 
-        public function __construct() {
+        public function __construct()
+        {
             $this->cacheKey = Configure::read('Session.handler.cache');
             parent::__construct();
         }
 
-        // lire des données de session.
-        public function read($id) {
+        // Lire des données de session.
+        public function read($id)
+        {
             $result = Cache::read($id, $this->cacheKey);
             if ($result) {
                 return $result;
@@ -260,31 +283,34 @@ devrait ressembler à::
             return parent::read($id);
         }
 
-        // écrire des données dans session
-        public function write($id, $data) {
+        // Ecrire des données dans session
+        public function write($id, $data)
+        {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
-        // détruire une session.
-        public function destroy($id) {
+        // Détruire une session.
+        public function destroy($id)
+        {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
-        // retire des sessions expirées.
-        public function gc($expires = null) {
+        // Retire des sessions expirées.
+        public function gc($expires = null)
+        {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }
     }
 
 Notre classe étend la classe intégrée ``DatabaseSession`` donc nous ne devons
 pas dupliquer toute sa logique et son comportement. Nous entourons chaque
-opération avec une opération :php:class:`Cache`. Cela nous laisse récupérer les
-sessions de la mise en cache rapide, et nous évite de nous inquiéter sur ce qui
-arrive quand nous remplissons le cache. Utiliser le gestionnaire de session est
-aussi facile. Dans votre ``core.php`` imitez le block de session ressemblant
-à ce qui suit::
+opération avec une opération :php:class:`Cake\\Cache\\Cache`. Cela nous laisse
+récupérer les sessions de la mise en cache rapide, et nous évite de nous
+inquiéter sur ce qui arrive quand nous remplissons le cache. Utiliser le
+gestionnaire de session est aussi facile. Dans votre ``app.php`` imitez le
+block de session ressemblant à ce qui suit::
 
     'Session' => [
         'defaults' => 'database',
@@ -319,7 +345,7 @@ Vous pouvez accéder aux données session à tous les endroits où vous avez acc
 * Components
 
 En plus de l'objet basique session, vous pouvez aussi utiliser
-:php:class:`Cake\\View\\Helper\\SessionHelper` pour intéragir avec la session
+:php:class:`Cake\\View\\Helper\\SessionHelper` pour interagir avec la session
 dans vos views. Un exemple simple de l'utilisation de session serait::
 
     $name = $this->request->session()->read('User.name');
@@ -329,7 +355,7 @@ dans vos views. Un exemple simple de l'utilisation de session serait::
     $session = $this->request->session();
     $name = $session->read('User.name');
 
-Lire & écrire les Données de Session
+Lire & Ecrire les Données de Session
 ====================================
 
 .. php:staticmethod:: read($key)
@@ -337,20 +363,27 @@ Lire & écrire les Données de Session
 Vous pouvez lire les valeurs de session en utilisant la syntaxe
 compatible :php:meth:`Hash::extract()`::
 
-    CakeSession::read('Config.language');
+     $session->read('Config.language');
 
 .. php:staticmethod:: write($key, $value)
 
 ``$key`` devrait être le chemin séparé de point et ``$value`` sa valeur::
 
-    CakeSession::write('Config.language', 'eng');
+     $session->write('Config.language', 'eng');
 
 .. php:staticmethod:: delete($key)
 
 Quand vous avez besoin de supprimer des données de la session, vous pouvez
-utiliser delete::
+utiliser ``delete()``::
 
-    CakeSession::delete('Config.language');
+     $session->delete('Some.value');
+
+.. php:staticmethod:: consume($key)
+
+Quand vous avez besoin de lire et supprimer des données de la session, vous
+pouvez utiliser ``consume()``::
+
+    $session->consume('Some.value');
 
 .. php:method:: check($key)
 

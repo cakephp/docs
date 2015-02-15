@@ -55,9 +55,11 @@ created. To keep your Orders model clean you could use events::
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
-    class OrdersTable extends Table {
+    class OrdersTable extends Table
+    {
 
-        public function place($order) {
+        public function place($order)
+        {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $event = new Event('Model.Order.afterPlace', $this, [
@@ -101,9 +103,9 @@ access the global manager using a static method::
     // In any configuration file or piece of code that executes before the event
     use Cake\Event\EventManager;
 
-    EventManager::instance()->attach(
-        $aCallback,
-        'Model.Order.afterPlace'
+    EventManager::instance()->on(
+        'Model.Order.afterPlace',
+        $aCallback
     );
 
 One important thing you should consider is that there are events that will be
@@ -151,17 +153,17 @@ Finally, the third argument is any additional event data.This can be any data yo
 useful to pass around so listeners can act upon it. While this can be an argument
 of any type, we recommend passing an associative array.
 
-The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event object as an argument
-and notifies all subscribed listeners.
+The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
+object as an argument and notifies all subscribed listeners.
 
 Registering Listeners
 =====================
 
-Listeners are the preferred way to register callbacks for an event. This is done by
-implementing the :php:class:`Cake\\Event\\EventListenerInterface` interface in any class you wish
-to register some callbacks. Classes implementing it need to provide the
-``implementedEvents()`` method. This method must return an associative array
-with all event names that the class will handle.
+Listeners are the preferred way to register callbacks for an event. This is done
+by implementing the :php:class:`Cake\\Event\\EventListenerInterface` interface
+in any class you wish to register some callbacks. Classes implementing it need
+to provide the ``implementedEvents()`` method. This method must return an
+associative array with all event names that the class will handle.
 
 To continue our previous example, let's imagine we have a UserStatistic class
 responsible for calculating a user's purchasing history, and compiling into
@@ -171,24 +173,27 @@ necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListenerInterface;
 
-    class UserStatistic implements EventListenerInterface {
+    class UserStatistic implements EventListenerInterface
+    {
 
-        public function implementedEvents() {
+        public function implementedEvents()
+        {
             return [
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
             ];
         }
 
-        public function updateBuyStatistic($event) {
+        public function updateBuyStatistic($event)
+        {
             // Code to update statistics
         }
     }
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
-    $this->Orders->eventManager()->attach($statistics);
+    $this->Orders->eventManager()->on($statistics);
 
-As you can see in the above code, the ``attach`` function will accept instances
+As you can see in the above code, the ``on`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
 ``implementedEvents`` to attach the correct callbacks.
 
@@ -202,12 +207,12 @@ function to do so::
 
     use Cake\Log\Log;
 
-    $this->Orders->eventManager()->attach(function ($event) {
+    $this->Orders->eventManager()->on('Model.Order.afterPlace', function ($event) {
         Log::write(
             'info',
             'A new order was placed with id: ' . $event->subject()->id
         );
-    }, 'Model.Order.afterPlace');
+    });
 
 In addition to anonymous functions you can use any other callable type that PHP
 supports::
@@ -217,7 +222,7 @@ supports::
         'inventory' => [$this->InventoryManager, 'decrement'],
     ];
     foreach ($events as $callable) {
-        $eventManager->attach($callable, 'Model.Order.afterPlace');
+        $eventManager->on('Model.Order.afterPlace', $callable);
     }
 
 .. _event-priorities:
@@ -246,15 +251,17 @@ event listeners::
 
     // Setting priority for a callback
     $callback = [$this, 'doSomething'];
-    $this->eventManager()->attach(
-        $callback,
+    $this->eventManager()->on(
         'Model.Order.afterPlace',
-        ['priority' => 2]
+        ['priority' => 2],
+        $callback
     );
 
     // Setting priority for a listener
-    class UserStatistic implements EventListenerInterface {
-        public function implementedEvents() {
+    class UserStatistic implements EventListenerInterface
+    {
+        public function implementedEvents()
+        {
             return [
                 'Model.Order.afterPlace' => [
                     'callable' => 'updateBuyStatistic',
@@ -306,12 +313,14 @@ the code detects it cannot proceed any further.
 In order to stop events you can either return ``false`` in your callbacks or call
 the ``stopPropagation`` method on the event object::
 
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         return false; // Stops the event
     }
 
-    public function updateBuyStatistic($event) {
+    public function updateBuyStatistic($event)
+    {
         // ...
         $event->stopPropagation();
     }
@@ -325,7 +334,8 @@ operation from occurring.
 To check if an event was stopped, you call the ``isStopped()`` method in the
 event object::
 
-    public function place($order) {
+    public function place($order)
+    {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
         if ($event->isStopped()) {
@@ -352,20 +362,23 @@ Event results can be altered either using the event object result property
 directly or returning the value in the callback itself::
 
     // A listener callback
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
     // Another listener callback
-    public function doSomethingElse($event) {
+    public function doSomethingElse($event)
+    {
         // ...
         $event->result['order'] = $alteredData;
     }
 
     // Using the event result
-    public function place($order) {
+    public function place($order)
+    {
         $event = new Event('Model.Order.beforePlace', $this, ['order' => $order]);
         $this->eventManager()->dispatch($event);
         if (!empty($event->result['order'])) {
@@ -386,31 +399,31 @@ Removing Callbacks and Listeners
 --------------------------------
 
 If for any reason you want to remove any callback from the event manager just
-call the :php:meth:`Cake\\Event\\EventManager::detach()` method using as
+call the :php:meth:`Cake\\Event\\EventManager::off()` method using as
 arguments the first two params you used for attaching it::
 
     // Attaching a function
-    $this->eventManager()->attach([$this, 'doSomething'], 'My.event');
+    $this->eventManager()->on('My.event', [$this, 'doSomething']);
 
     // Detaching the function
-    $this->eventManager()->detach([$this, 'doSomething'], 'My.event');
+    $this->eventManager()->off('My.event', [$this, 'doSomething']);
 
     // Attaching an anonymous function.
     $myFunction = function ($event) { ... };
-    $this->eventManager()->attach($myFunction, 'My.event');
+    $this->eventManager()->on('My.event', $myFunction);
 
     // Detaching the anonymous function
-    $this->eventManager()->detach($myFunction, 'My.event');
+    $this->eventManager()->off('My.event', $myFunction);
 
-    // Attaching a EventListener
+    // Adding a EventListener
     $listener = new MyEventLister();
-    $this->eventManager()->attach($listener);
+    $this->eventManager()->on($listener);
 
     // Detaching a single event key from a listener
-    $this->eventManager()->detach($listener, 'My.event');
+    $this->eventManager()->off('My.event', $listener);
 
     // Detaching all callbacks implemented by a listener
-    $this->eventManager()->detach($listener);
+    $this->eventManager()->off($listener);
 
 Conclusion
 ==========

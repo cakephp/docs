@@ -1,7 +1,7 @@
 Behavior Timestamp
 ##################
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TimestampBehavior
 
@@ -16,8 +16,10 @@ Utilisation Basique
 
 Vous activez le behavior timestamp comme tout autre behavior::
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -36,8 +38,10 @@ Si vous avez besoin de modifier les champs avec des noms différents, ou si vous
 souhaitez mettre à jour le timestamp supplémentaire sur des evenements
 personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
 
-    class OrdersTable extends Table {
-        public function initialize(array $config) {
+    class OrdersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [

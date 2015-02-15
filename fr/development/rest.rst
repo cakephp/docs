@@ -26,14 +26,17 @@ dans nos actions de controller. Un controller basique pourrait ressembler
 à ceci::
 
     // src/Controller/RecipesController.php
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
 
-        public function index() {
+        public function index()
+        {
             $recipes = $this->Recipes->find('all');
             $this->set([
                 'recipes' => $recipes,
@@ -41,7 +44,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             ]);
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             $recipe = $this->Recipes->get($id);
             $this->set([
                 'recipe' => $recipe,
@@ -49,7 +53,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             ]);
         }
 
-        public function add() {
+        public function add()
+        {
             $recipe = $this->Recipes->newEntity($this->request->data);
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
@@ -63,7 +68,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             ]);
         }
 
-        public function edit($id) {
+        public function edit($id)
+        {
             $recipe = $this->Recipes->get($id);
             if ($this->request->is(['post', 'put'])) {
                 $recipe = $this->Recipes->patchEntity($recipe, $this->request->data);
@@ -79,7 +85,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             ]);
         }
 
-        public function delete($id) {
+        public function delete($id)
+        {
             $recipe = $this->Recipes->get($id);
             $message = 'Deleted';
             if (!$this->Recipes->delete($recipe)) {

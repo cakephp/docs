@@ -2,9 +2,13 @@ Appendices
 ##########
 
 .. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
+    La documentación no es compatible actualmente con el idioma español en esta página.
+
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
+
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.
 
 Appendices contain information regarding the new features
 introduced in each version and the migration path between versions.
@@ -30,7 +34,6 @@ General Information
     appendices/cakephp-development-process
     appendices/glossary
 
-
 .. meta::
-    :title lang=en: Appendices
-    :keywords lang=en: migration guide,migration path,new features,glossary
+    :title lang=es: Appendices
+    :keywords lang=es: migration guide,migration path,new features,glossary

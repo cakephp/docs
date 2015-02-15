@@ -23,29 +23,32 @@ features that all applications are likely to need. The built-in filters are:
   or plugin asset file, such as a CSS, JavaScript or image file stored in either a
   plugin's webroot folder or the corresponding one for a Theme. It will serve the
   file accordingly if found, stopping the rest of the dispatching cycle.
-* ``CacheFilter`` when ``Cache.check`` config variable is enabled, will check if the
-  response was already cached in the file system for a similar request and serve
-  the cached code immediately.
 * ``RoutingFilter`` applies application routing rules to the request URL.
   Populates ``$request->params`` with the results of routing.
 * ``ControllerFactory`` uses ``$request->params`` to locate the controller that
   will handle the current request.
+* ``LocaleSelector`` enables automatic language switching from the ``Accept-Language``
+  header sent by the browser.
 
 Using Filters
 =============
 
 Filters are usually enabled in your application's ``bootstrap.php`` file, but
 you could easily load them any time before the request is dispatched.  Adding
-and removing filters is done through ``Cake\\Routing\\DispatcherFactory``. By
+and removing filters is done through :php:class:`Cake\\Routing\\DispatcherFactory`. By
 default, the CakePHP application template comes with a couple filter classes
 already enabled for all requests; let's take a look at how they are added::
 
-    DispatcherFactory::add('Cache');
     DispatcherFactory::add('Routing');
     DispatcherFactory::add('ControllerFactory');
 
+    // Plugin syntax is also possible
+    DispatcherFactory::add('PluginName.DispatcherName');
+
     // Use options to set priority
     DispatcherFactory::add('Asset', ['priority' => 1]);
+
+Dispatcher filters with higher priority will be executed first. Priority defaults to ``10``.
 
 While using the string name is convenient, you can also pass instances into
 ``add()``::
@@ -64,6 +67,8 @@ filter::
 
     DispatcherFactory::add('Asset', ['priority' => 1]);
     DispatcherFactory::add(new AssetFilter(['priority' => 1]));
+
+The higher the priority the later this filter will be invoked.
 
 Conditionally Applying Filters
 ------------------------------
@@ -98,9 +103,11 @@ page. First, create the file. Its contents should look like::
     use Cake\Event\Event;
     use Cake\Routing\DispatcherFilter;
 
-    class TrackingCookieFilter extends DispatcherFilter {
+    class TrackingCookieFilter extends DispatcherFilter
+    {
 
-        public function beforeDispatch(Event $event) {
+        public function beforeDispatch(Event $event)
+        {
             $request = $event->data['request'];
             $response = $event->data['response'];
             if (!$request->cookie('landing_page')) {
@@ -147,9 +154,11 @@ page, in our case it would be anything served from the ``PagesController``::
     use Cake\Event\Event;
     use Cake\Routing\DispatcherFilter;
 
-    class HttpCacheFilter extends DispatcherFilter {
+    class HttpCacheFilter extends DispatcherFilter
+    {
 
-        public function afterDispatch(Event $event) {
+        public function afterDispatch(Event $event)
+        {
             $request = $event->data['request'];
             $response = $event->data['response'];
 

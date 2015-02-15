@@ -223,9 +223,11 @@ et les résultats stockés dans le cache pour la clé fournie.
 Par exemple, vous souhaitez souvent mettre en cache les résultats du appel à un
 service distant. Vous pouvez utiliser ``remember()`` pour faciliter cela::
 
-    class IssueService  {
+    class IssueService 
+    {
 
-        function allIssues($repo) {
+        function allIssues($repo)
+        {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
@@ -406,7 +408,8 @@ Par exemple, dès qu'un post est ajouté, nous pouvons dire au moteur de
 Cache de retirer toutes les entrées associées au groupe ``article``::
 
     // src/Model/Table/ArticlesTable.php
-    public function afterSave($entity, $options = []) {
+    public function afterSave($entity, $options = [])
+    {
         if ($entity->isNew()) {
             Cache::clearGroup('article', 'site_home');
         }
@@ -423,7 +426,8 @@ entre des groupes et des configurations, par exemple ayant le même groupe::
      * Une variante de l'exemple précédent qui efface toutes les configurations
      * ayant le même groupe
      */
-    public function afterSave($entity, $options = []) {
+    public function afterSave($entity, $options = [])
+    {
         if ($entity->isNew()) {
             $configs = Cache::groupConfigs('article');
             foreach ($configs['article'] as $config) {

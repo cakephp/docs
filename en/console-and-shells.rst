@@ -1,5 +1,5 @@
-Console and Shells
-##################
+Console & Shells
+################
 
 .. php:namespace:: Cake\Console
 
@@ -88,8 +88,10 @@ code inside it::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -119,12 +121,15 @@ main method wasn't very interesting let's add another command that does somethin
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function heyThere($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous')
+        {
             $this->out('Hey there ' . $name);
         }
     }
@@ -161,14 +166,17 @@ properties attached to your shell::
 
     use Cake\Console\Shell;
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        public function show() {
+        public function show()
+        {
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
@@ -188,7 +196,8 @@ to compose functionality into re-usable classes that can be shared across many s
 Tasks allow you to extract commands into classes. For example the ``bake`` is made
 almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
         public $tasks = ['Template'];
     }
 
@@ -204,8 +213,10 @@ will call this method when the task is invoked. A task class looks like::
 
     use Cake\Console\Shell;
 
-    class FileGeneratorTask extends Shell {
-        public function main() {
+    class FileGeneratorTask extends Shell
+    {
+        public function main()
+        {
 
         }
     }
@@ -214,11 +225,13 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // Found in src/Shell/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends Shell
+    {
         // Found in src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
-        public function main() {
+        public function main()
+        {
             $this->Sound->main();
         }
     }
@@ -236,13 +249,14 @@ You can also access tasks directly from the command line::
 Also, the task name must be added as a sub command to the Shell's
 OptionParser::
 
-	public function getOptionParser() {
-		$parser = parent::getOptionParser();
-		$parser->addSubcommand('sound', [
-			'help' => 'Execute The Sound Task.'
-		]);
-		return $parser;
-	}
+    public function getOptionParser()
+    {
+        $parser = parent::getOptionParser();
+        $parser->addSubcommand('sound', [
+            'help' => 'Execute The Sound Task.'
+        ]);
+        return $parser;
+    }
 
 Loading Tasks On The Fly with TaskRegistry
 ------------------------------------------
@@ -318,10 +332,10 @@ Console Output
 The ``Shell`` class provides a few methods for outputting content::
 
     // Write to stdout
-    $this->out('normal message');
+    $this->out('Normal message');
 
     // Write to stderr
-    $this->err('error message');
+    $this->err('Error message');
 
     // Write to stderr and stop the process
     $this->error('Fatal error');
@@ -364,9 +378,9 @@ they are interested in by setting the correct flag when calling the shell.
 :php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
 * QUIET - Only absolutely important information should be marked for quiet output.
-* NORMAL - The default level, and normal usage
+* NORMAL - The default level, and normal usage.
 * VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
-  for debugging as VERBOSE
+  for debugging as VERBOSE.
 
 You can mark output as follows::
 
@@ -491,7 +505,8 @@ have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
 methods for easily setting multiple options/arguments at once::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         // Configure parser
         return $parser;
@@ -503,7 +518,8 @@ Configuring an Option Parser with the Fluent Interface
 All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
@@ -652,7 +668,7 @@ define the behavior of the option:
 * ``default`` - The default value for this option. If not defined the default will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
-* ``choices`` An array of valid choices for this option. If left empty all
+* ``choices`` - An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
 
 .. php:method:: addOptions(array $options)
@@ -665,7 +681,7 @@ to add multiple options at once. ::
         'parent' => ['short' => 'p', 'help' => 'The parent node']
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addOptions is can be used
+As with all the builder methods on ConsoleOptionParser, addOptions can be used
 as part of a fluent method chain.
 
 Validating Options
@@ -780,7 +796,8 @@ format that :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
 :php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also use
 buildFromArray on its own, to build an option parser::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray([
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),

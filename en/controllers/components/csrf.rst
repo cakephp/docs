@@ -1,5 +1,5 @@
-Cross Site Request Forgery Component
-####################################
+Cross Site Request Forgery
+##########################
 
 By enabling the CSRF Component you get protection against attacks. `CSRF
 <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
@@ -20,7 +20,8 @@ Using the CsrfComponent
 Simply by adding the ``CsrfComponent`` to your components array,
 you can benefit from the CSRF protection it provides::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Csrf', [
             'secure' => true
@@ -69,8 +70,9 @@ While not recommended, you may want to disable the CsrfComponent on certain
 requests. You can do this using the controller's event dispatcher, during the
 ``beforeFilter`` method::
 
-    public function beforeFilter(Event $event) {
-        $this->eventManager()->detach($this->Csrf);
+    public function beforeFilter(Event $event)
+    {
+        $this->eventManager()->off($this->Csrf);
     }
 
 .. meta::

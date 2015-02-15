@@ -1,9 +1,9 @@
 CakePHP en un Coup d'Oeil
 #########################
 
-CakePHP est conçu pour rendre les tâches communes de développement web simples
-et faciles. En fournissant une boite à outil tout-en-un pour vous aider à
-démarrer, les différentes parties de CakePHP fonctionnent aussi bien ensemble
+CakePHP est conçu pour faciliter et simplifier les tâches classiques du
+développement web. En fournissant une boite à outil tout-en-un pour vous aider
+à démarrer, les différentes parties de CakePHP fonctionnent aussi bien ensemble
 que séparément.
 
 Le but de cette présentation est d'introduire les concepts généraux de CakePHP,
@@ -20,9 +20,9 @@ de classes, les noms de fichiers, les noms de table de base de données, et
 d'autres conventions. Même si les conventions prennent du temps à apprendre, en
 suivant les conventions offertes par CakePHP, vous pouvez éviter les
 configurations inutiles et construire une structure d'application uniforme
-qui rend le travail avec de multiples projets un jeu d'enfant. Le :doc:`chapitre
-sur les conventions </intro/conventions>` couvre les différentes conventions
-utilisées par CakePHP.
+ce qui facilite le travail quand vous travaillez sur de multiples projets. Le
+:doc:`chapitre sur les conventions </intro/conventions>` couvre les différentes
+conventions utilisées par CakePHP.
 
 La Couche Model (Modèle)
 ========================
@@ -108,7 +108,8 @@ présentation acceptés par client pour finalement déléguer le processus
 de rendu à la couche View. Un exemple de controller d'enregistrement
 d'utilisateur serait::
 
-    public function add() {
+    public function add()
+    {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);

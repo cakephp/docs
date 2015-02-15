@@ -11,7 +11,8 @@ helpers à partir de votre theme, vous devrez continuer à utiliser la
 
 Pour utiliser les themes, spécifiez le nom du theme dans votre controller::
 
-    class ExempleController extends AppController {
+    class ExempleController extends AppController
+    {
         public $theme = 'Exemple';
     }
 

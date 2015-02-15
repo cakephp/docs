@@ -2,28 +2,10 @@ ORM Cache Shell
 ###############
 
 .. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
+    La documentación no es compatible actualmente con el idioma español en esta página.
 
-The OrmCacheShell provides a simple CLI tool for managing your application's
-metadata caches. In deployment situations it is helpful to rebuild the metadata
-cache in-place without clearing the existing cache data. You can do this by
-running::
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
 
-    bin/cake orm_cache build --connection default
-
-This will rebuild the metadata cache for all tables on the ``default``
-connection. If you only need to rebuild a single table you can do that by
-providing its name::
-
-    bin/cake orm_cache build --connection default articles
-
-In addition to building cached data, you can use the OrmCacheShell to remove
-cached metadata as well::
-
-    # Clear all metadata
-    bin/cake orm_cache clear
-
-    # Clear a single table
-    bin/cake orm_cache clear articles
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.

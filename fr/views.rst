@@ -33,7 +33,8 @@ The App View
 
     use Cake\View\View;
 
-    class AppView extends View {
+    class AppView extends View
+    {
     }
 
 Vous pouvez utiliser ``AppView`` pour charger des helpers qui seront utilisés
@@ -47,9 +48,11 @@ type d'utilisation:
 
     use Cake\View\View;
 
-    class AppView extends View {
+    class AppView extends View
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             // Toujours activer le helper MyUtils
             $this->loadHelper('MyUtils');
         }
@@ -423,7 +426,8 @@ actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 
     // A partir d'un controller
-    public function admin_view() {
+    public function admin_view()
+    {
         // stuff
         $this->layout = 'admin';
     }
@@ -438,13 +442,16 @@ actions du controller en utilisant quelque chose comme::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->set('title', 'View Active Users');
             $this->layout = 'default_small_ad';
         }
 
-        public function view_image() {
+        public function view_image()
+        {
             $this->layout = 'image';
             // Output user image
         }
@@ -467,8 +474,10 @@ contact à partir du plugin Contacts::
 
     namespace App\Controller;
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -555,9 +564,11 @@ pour alimenter en variables de vues l'element depuis votre controller.
 Pour ce faire, ajoutez quelque chose comme ce qui suit dans votre controller,
 en reprenant l'exemple du Post::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -642,6 +653,11 @@ Contacts::
 
 Sont équivalents et résulteront au même element rendu.
 
+Pour les elements dans le sous-dossier d'un plugin
+(e.g., ``plugins/Contacts/sidebar/helpbox.ctp``), utilisez ce qui suit::
+
+    echo $this->element('Contacts.sidebar/helpbox');
+
 Mettre en Cache des Sections de votre View
 ------------------------------------------
 
@@ -683,8 +699,10 @@ fonctionnent correctement::
     // dans src/View/PdfView.php
 
     App::uses('View', 'View');
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
             // logique personnalisée ici.
         }
     }

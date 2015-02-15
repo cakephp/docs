@@ -23,7 +23,8 @@ Utiliser le CsrfComponent
 En ajoutant simplement le ``CsrfComponent`` à votre tableau de components,
 vous pouvez profiter de la protection CSRF fournie::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('Csrf', [
             'secure' => true
@@ -75,8 +76,9 @@ Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour cetaines
 requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du
 controller, au cours de la méthode ``beforeFilter``::
 
-    public function beforeFilter(Event $event) {
-        $this->eventManager()->detach($this->Csrf);
+    public function beforeFilter(Event $event)
+    {
+        $this->eventManager()->off($this->Csrf);
     }
 
 .. meta::

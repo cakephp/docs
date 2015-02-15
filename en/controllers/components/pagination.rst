@@ -30,7 +30,8 @@ the basis for your pagination queries. They are augmented by the sort, direction
 limit, and page parameters passed in from the URL. It is important to note
 that the order key must be defined in an array structure like below::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'limit' => 25,
@@ -39,7 +40,8 @@ that the order key must be defined in an array structure like below::
             ]
         ];
 
-        public function intialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Paginator');
         }
@@ -48,7 +50,8 @@ that the order key must be defined in an array structure like below::
 You can also include any of the options supported by
 :php:meth:`~Cake\\ORM\\Table::find()`, such as ``fields``::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'fields' => ['Articles.id', 'Articles.created'],
@@ -58,7 +61,8 @@ You can also include any of the options supported by
             ]
         ];
 
-        public function intialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Paginator');
         }
@@ -69,7 +73,8 @@ often cleaner and simpler to bundle up your pagination options into
 a :ref:`custom-find-methods`. You can define the finder pagination uses by
 setting the ``finder`` option::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'finder' => 'published',
@@ -79,10 +84,12 @@ setting the ``finder`` option::
 Because custom finder methods can also take in options, 
 this is how you pass in options into a custom finder method within the paginate property::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         // find articles by tag
-        public function tags() {
+        public function tags()
+        {
             $tags = $this->request->params['pass'];
 
             $customFinderOptions = [
@@ -108,7 +115,8 @@ In addition to defining general pagination values, you can define more than one
 set of pagination defaults in the controller, you just name the keys of the
 array after the model you wish to configure::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
         public $paginate = [
             'Articles' => [],
@@ -127,9 +135,11 @@ paginated query, and set pagination metadata to the request. You can access the
 pagination metadata at ``$this->request->params['paging']``. A more complete
 example of using ``paginate()`` would be::
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->paginate());
         }
     }
@@ -137,7 +147,8 @@ example of using ``paginate()`` would be::
 By default the ``paginate()`` method will use the default model for
 a controller. You can also pass the resulting query of a find method::
 
-     public function index() {
+     public function index()
+     {
         $query = $this->Articles->find('popular')->where(['author_id' => 1]);
         $this->set('articles', $this->paginate($query));
     }
@@ -176,7 +187,7 @@ Control which Fields Used for Ordering
 ======================================
 
 By default sorting can be done on any non-virtual column a table has. This is
-sometimes undesirable as it allows users to sort on un-indexed columnsthat can
+sometimes undesirable as it allows users to sort on un-indexed columns that can
 be expensive to order by. You can set the whitelist of fields that can be sorted
 using the ``sortWhitelist`` option. This option is required when you want to
 sort on any associated data, or computed fields that may be part of your
@@ -208,6 +219,21 @@ application, you can adjust it as part of the pagination options::
 If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
 
+Joining Additional Associations
+===============================
+
+Additional associations can be loaded to the paginated table by using the
+``contain`` parameter::
+
+    public function index()
+    {
+        $this->paginate = [
+            'contain' => ['Authors', 'Comments']
+        ];
+
+        $this->set('articles', $this->paginate($this->Articles));
+    }
+
 Out of Range Page Requests
 ==========================
 
@@ -220,7 +246,8 @@ block and take appropriate action when a ``NotFoundException`` is caught::
 
     use Cake\Network\Exception\NotFoundException;
 
-    public function index() {
+    public function index()
+    {
         try {
             $this->paginate();
         } catch (NotFoundException $e) {

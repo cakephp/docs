@@ -42,7 +42,7 @@ Affichage des Valeurs
 .. php:staticmethod:: dump($var, $depth = 3)
 
 Dump affiche le contenu d'une variable. Elle affiche toutes les propriétés
-et méthodes (si il y en a) de la variable fournie:::
+et méthodes (s'il y en a) de la variable fournie:::
 
     $foo = [1,2,3];
 
@@ -160,8 +160,8 @@ Kit de Debug
 DebugKit est un plugin qui fournit un nombre de bons outils de debug. Il
 fournit principalement une barre d'outils dans le HTML rendu, qui fournit
 une pléthore d'informations sur votre application et la requête courante.
-Vous pouvez télécharger
-`DebugKit <https://github.com/cakephp/debug_kit>`_ sur GitHub.
+Consultez le chapitre sur :doc:`/debug-kit` pour plus d'information sur son
+installation et son utilisation.
 
 
 .. meta::

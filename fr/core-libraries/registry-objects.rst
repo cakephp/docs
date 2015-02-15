@@ -49,10 +49,10 @@ d'evènements. Par exemple, vous pouvez désactiver les callbacks du component
 de la façon suivante::
 
     // Retire Auth des callbacks.
-    $this->eventManager()->detach($this->Auth);
+    $this->eventManager()->off($this->Auth);
 
     // Re-active Auth pour les callbacks.
-    $this->eventManager()->attach($this->Auth);
+    $this->eventManager()->on($this->Auth);
 
 
 .. meta::

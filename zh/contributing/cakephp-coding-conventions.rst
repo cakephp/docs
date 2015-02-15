@@ -165,7 +165,8 @@ CakePHP 开发人员将使用下面的编码规范。
 
 方法定义的例子::
 
-    function someFunction($arg1, $arg2 = '') {
+    function someFunction($arg1, $arg2 = '')
+    {
         if (expr) {
             statement;
         }
@@ -175,7 +176,8 @@ CakePHP 开发人员将使用下面的编码规范。
 带缺省值的参数应该放在函数定义的最后。尽量让你的函数返回一些东西, 至少是
 ``true`` 或者 ``false`` ，这样就可以判断函数调用是否成功::
 
-    public function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false)
+    {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -202,7 +204,8 @@ CakePHP 开发人员将使用下面的编码规范。
      * @param array $array 数组值。
      * @param bool $boolean 布尔值。
      */
-    public function foo(Model $Model, array $array, $boolean) {
+    public function foo(Model $Model, array $array, $boolean)
+    {
     }
 
 这里 ``$Model`` 必须是 ``Model`` 的实例，``$array`` 必须是数组(``array``)。
@@ -215,7 +218,8 @@ CakePHP 开发人员将使用下面的编码规范。
      *
      * @param array|ArrayObject $array 数组值。
      */
-    public function foo($array) {
+    public function foo($array)
+    {
     }
 
 方法链接(*Method Chaining*)
@@ -267,7 +271,8 @@ PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在�
      *
      * @return void
      */
-    function bar() {
+    function bar()
+    {
     }
 
     /**
@@ -275,7 +280,8 @@ PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在�
      *
      * @return void
      */
-    function foo() {
+    function foo()
+    {
     }
 
 所有注释段, 除了一个文件中的第一段, 之前总是应当有一个空行。
@@ -322,7 +328,8 @@ callable
      *
      * @return $this
      */
-    public function foo() {
+    public function foo()
+    {
         return $this;
 
 包括文件
@@ -354,7 +361,8 @@ PHP 标签
 
 所有函数名都应为 camelBack 形式::
 
-    function longFunctionName() {
+    function longFunctionName()
+    {
     }
 
 类
@@ -362,7 +370,8 @@ PHP 标签
 
 类名应为驼峰命名法(*CamelCase*), 例如::
 
-    class ExampleClass {
+    class ExampleClass
+    {
     }
 
 变量
@@ -383,20 +392,24 @@ PHP 标签
 方法和变量应当使用 PHP5 的 private 和 protected 关键字。另外，protected 的方法和
 变量应当以一个下划线开头(``_``)。例如::
 
-    class A {
+    class A
+    {
         protected $_iAmAProtectedVariable;
 
-        protected function _iAmAProtectedMethod() {
+        protected function _iAmAProtectedMethod()
+        {
            /*...*/
         }
     }
 
 私有方法和变量应当以双下划线(``__``)开头。例如::
 
-    class A {
+    class A
+    {
         private $__iAmAPrivateVariable;
 
-        private function __iAmAPrivateMethod() {
+        private function __iAmAPrivateMethod()
+        {
             /*...*/
         }
     }

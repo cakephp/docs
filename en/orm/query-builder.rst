@@ -18,8 +18,10 @@ of the following things occur:
 - The query is iterated with ``foreach()``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
+- The query's ``first()`` method is called. This will return the first result in the set
+  built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
 - The query's ``all()`` method is called. This will return the result set and
-  can only be used with select statements.
+  can only be used with ``SELECT`` statements.
 - The query's ``toArray()`` method is called.
 
 Until one of these conditions are met, the query can be modified with additional
@@ -124,7 +126,7 @@ anything you can call on a Collection object, you can also do in a Query object:
         ->map(function ($row) { // map() is a collection method, it executes the query
             $row->trimmedTitle = trim($row->title);
             return $row;
-        });
+        })
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
@@ -193,7 +195,7 @@ Using SQL Functions
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
 abstraction allows the ORM to select the platform specific implementation of the
 function you want. For example, ``concat`` is implemented differently in MySQL,
-Postgres and SQLServer. Using the abstraction allows your code to be portable::
+PostgreSQL and SQL Server. Using the abstraction allows your code to be portable::
 
     // Results in SELECT COUNT(*) count FROM ...
     $query = $articles->find();
@@ -596,7 +598,7 @@ a few ways of doing this::
     $results = $query->all();
 
 You can use :doc:`any of the collection </core-libraries/collections>` methods
-on you query objects to pre-process or transform the results::
+on your query objects to pre-process or transform the results::
 
     // Use one of the collection methods.
     $ids = $query->map(function ($row) {
@@ -641,8 +643,7 @@ by clauses without having to rewrite the query in any way. For example, consider
 this query for retrieving article ids and their comments count::
 
     $query = $articles->find();
-    $query->find()
-        ->select(['Articles.id', $query->func()->count('Comments.id')])
+    $query->select(['Articles.id', $query->func()->count('Comments.id')])
         ->matching('Comments')
         ->group(['Articles.id']);
     $total = $query->count();
@@ -780,7 +781,42 @@ conditions can also be expressed as an array of conditions::
 When creating joins by hand and using array based conditions, you need to
 provide the datatypes for each column in the join conditions. By providing
 datatypes for the join conditions, the ORM can correctly convert data types into
-SQL.
+SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
+``innerJoin()`` to create joins::
+
+    // Join with an alias and string conditions
+    $query = $articles->find();
+    $query->leftJoin(
+        ['Authors' => 'authors'],
+        ['Authors.id = Articles.author_id']);
+
+    // Join with an alias, array conditions, and types
+    $query = $articles->find();
+    $query->innerJoin(
+        ['Authors' => 'authors'],
+        [
+        'Authors.promoted' => true,
+        'Authors.created' => new DateTime('-5 days'),
+        'Authors.id = Articles.author_id'
+        ],
+        ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
+
+It should be noted that if you set the ``quoteIdentifiers`` option to ``true`` when
+defining your ``Connection``, join conditions between table fields should be set as follow::
+
+    $query = $articles->find()
+        ->join([
+            'c' => [
+                'table' => 'comments',
+                'type' => 'LEFT',
+                'conditions' => [
+                    'c.article_id' => new \Cake\Database\Expression\IdentifierExpression('articles.id')
+                ]
+            ],
+        ]);
+
+This ensures that all of your identifiers will be quoted across the Query, avoiding errors with
+some database Drivers (PostgreSQL notably)
 
 Inserting Data
 ==============
@@ -899,7 +935,7 @@ the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
 of people, you could easily calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results, \Cake\Database\Query $query) {
+    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
             return $row;
@@ -1110,15 +1146,18 @@ even after adding a map-reduce routine::
 This is particularly useful for building custom finder methods as described in the
 :ref:`custom-find-methods` section::
 
-    public function findPublished(Query $query, array $options]) {
+    public function findPublished(Query $query, array $options])
+    {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options) {
+    public function findRecent(Query $query, array $options)
+    {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options) {
+    public function findCommonWords(Query $query, array $options)
+    {
         // Same as in the common words example in the previous section
         $mapper = ...;
         $reducer = ...;

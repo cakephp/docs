@@ -4,10 +4,12 @@ CakePHP Folder Structure
 After you've downloaded and extracted the CakePHP application, these are the files
 and folders you should see:
 
-- src
+- bin
 - config
-- tests
+- logs
 - plugins
+- src
+- tests
 - tmp
 - vendor
 - webroot
@@ -18,24 +20,25 @@ and folders you should see:
 
 You'll notice a few top level folders:
 
-- The *src* folder will be where you work your magic: it’s where
-  your application’s files will be placed.
+- The *bin* folder holds the Cake console executables.
 - The *config* folder holds the (few) :doc:`/development/configuration` files
   CakePHP uses. Database connection details, bootstrapping, core configuration files
   and more should be stored here.
-- The *tests* folder will be where you put the test cases for your application.
 - The *plugins* folder is where the :doc:`/plugins` your application uses are stored.
+- The *logs* folder normally contains your log files, depending on your log
+  configuration.
+- The *src* folder will be where you work your magic: it’s where
+  your application’s files will be placed.
+- The *tests* folder will be where you put the test cases for your application.
+- The *tmp* folder is where CakePHP stores temporary data. The actual data it
+  stores depends on how you have CakePHP configured, but this folder
+  is usually used to store model descriptions and sometimes
+  session information.
 - The *vendor* folder is where CakePHP and other application dependencies will
   be installed. Make a personal commitment **not** to edit files in this folder.
   We can’t help you if you’ve modified the core.
 - The *webroot* directory is the public document root of your application. It
   contains all the files you want to be publically reachable.
-- The *tmp* folder is where CakePHP stores temporary data. The actual data it
-  stores depends on how you have CakePHP configured, but this folder
-  is usually used to store model descriptions and sometimes
-  session information.
-- The *logs* folder normally contains your log files, depending on your log
-  configuration.
 
   Make sure that the *tmp* and *logs* folders exist and are writable,
   otherwise the performance of your application will be severely

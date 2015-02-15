@@ -2,20 +2,14 @@ The Pages Controller
 ####################
 
 .. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
+    La documentación no es compatible actualmente con el idioma español en esta página.
 
-CakePHP ships with a default controller ``PagesController.php``. This is a
-simple and optional controller for serving up static content. The home page
-you see after installation is generated using this controller. If you make the
-view file ``src/Template/Pages/about_us.ctp`` you can access it using the URL
-``http://example.com/pages/about_us``. You are free to modify the Pages
-Controller to meet your needs.
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
 
-When you "bake" an app using Composer the Pages Controller is created in your
-``src/Controller/`` folder.
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.
 
 .. meta::
-    :title lang=en: The Pages Controller
-    :keywords lang=en: pages controller,default controller,cakephp,ships,php,file folder
+    :title lang=es: The Pages Controller
+    :keywords lang=es: pages controller,default controller,cakephp,ships,php,file folder

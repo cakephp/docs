@@ -1,5 +1,5 @@
-Les Objets Request et Response
-##############################
+Les Objets Request & Response
+#############################
 
 .. php:namespace:: Cake\Network
 
@@ -55,19 +55,19 @@ les deux disponibles dans l'objet request::
     $this->request['pass'];
     $this->request->params['pass'];
 
-Il vous fournira un accès aux arguments passés et aux paramètres nommés.
-Il y a de nombreux paramètres importants et utiles que CakePHP utilise en
-interne, on peut auusi les trouver dans les paramètres de la requête:
+Tous vous fournissent un accès aux arguments passés. Il y a de nombreux
+paramètres importants et utiles que CakePHP utilise en interne qu'on peut aussi
+trouver dans les paramètres de la requête:
 
-* ``plugin`` Le plugin gérant la requête, va être nul quand il n'y a pas de
-  plugins.
-* ``controller`` Le controller gère la requête courante.
-* ``action`` L'action gère la requête courante.
+* ``plugin`` Le plugin gérant la requête aura une valeur nulle quand il n'y a
+  pas de plugins.
+* ``controller`` Le controller gérant la requête courante.
+* ``action`` L'action gérant la requête courante.
 * ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
 * ``bare`` Présent quand la requête vient de
   :php:meth:`~Cake\\Controller\\Controller::requestAction()` et inclut l'option
-  bare. Les requêtes vides n'ont pas de layout de rendu.
+  bare. Les requêtes bare n'ont pas de layout de rendu.
 * ``requested`` Présent et mis à ``true`` quand l'action vient de
   :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
@@ -86,7 +86,7 @@ Vous pouvez soit directement accéder à la propriété demandée, soit vous pou
 utiliser ``query()`` pour lire l'URL requêtée sans erreur.
 Toute clé qui n'existe pas va retourner ``null``::
 
-    $foo = $this->request->query('value_that_does_not_exist');
+    $foo = $this->request->query('valeur_qui_n_existe_pas');
     // $foo === null
 
 Données de la Requête Body
@@ -96,14 +96,14 @@ Données de la Requête Body
 
 Toutes les données POST sont accessibles en utilisant
 :php:meth:`Cake\\Network\\Request::data()`. Toute donnée de formulaire qui
-contient un préfix ``data`` verra ce préfix retiré. Par exemple::
+contient un préfix ``data`` aura ce préfixe supprimé. Par exemple::
 
-    // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible dans
-    $this->request->data('MyModel.title');
+    // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible
+    dans $this->request->data('MyModel.title');
 
 Toute clé qui n'existe pas va retourner ``null``::
 
-    $foo = $this->request->data('Value.that.does.not.exist');
+    $foo = $this->request->data('Valeur_qui_n_existe_pas');
     // $foo == null
 
 Vous pouvez aussi accéder au tableau de données, comme un tableau::
@@ -124,10 +124,10 @@ requêtes ``PUT`` et ``DELETE``. Si vous acceptez les données JSON ou XML,
 regardez la section :ref:`xml-datas` pour voir comment vous pouvez accéder
 aux corps de ces requêtes.
 
-When accessing the input data, you can decode it with an optional function.
-This is useful when interacting with XML or JSON request body content.
-Additional parameters for the decoding function can be passed as arguments to
-``input()``::
+Lorsque vous accédez aux données d'entrée, vous pouvez les décoder avec une
+fonction optionnelle. Cela peut être utile quand vous devez intéragir avec du
+contenu de requête XML ou JSON. Les paramètres additionnels pour la fonction de
+décodage peuvent être passés comme arguments à ``input()``::
 
     $this->request->input('json_decode');
 
@@ -161,12 +161,11 @@ décodage, vous pouvez recevoir le contenu dans un format déserializé::
     // Obtenir les données encodées JSON soumises par une action PUT/POST
     $data = $this->request->input('json_decode');
 
-Puisque certaines méthodes de desérialization ont besoin de paramètres
+Quelques méthodes de desérialization requièrent des paramètres
 supplémentaires quand elles sont appelées, comme le paramètre
-de type tableau pour ``json_decode`` ou si vous voulez
-convertir les XML en objet DOMDocument,
-:php:meth:`~Cake\\Network\\Request::input()` supporte aussi le passage de
-paramètres supplémentaires::
+de type tableau de ``json_decode``. Si vous voulez convertir
+du XML en objet DOMDocument,:php:meth:`~Cake\\Network\\Request::input()`
+supporte aussi le passage de paramètres supplémentaires::
 
     // Obtenir les données encodées en Xml soumises avec une action PUT/POST
     $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
@@ -176,7 +175,7 @@ Informations du Chemin
 
 L'objet request fournit aussi des informations utiles sur les chemins dans votre
 application. ``$request->base`` et ``$request->webroot`` sont utiles pour
-générer des URLs, et déterminer si votre application est ou n'est pas dans un
+générer des URLs et déterminer si votre application est ou n'est pas dans un
 sous-dossier. Les différentes propriétés que vous pouvez utiliser sont::
 
     // Suppose que la requête URL courante est /subdir/articles/edit/1?page=1
@@ -209,20 +208,16 @@ disponibles, en utilisant :php:meth:`Cake\\Network\\Request::addDetector()`
 pour créer de nouveaux types de détecteurs. Il y a quatre différents types
 de détecteurs que vous pouvez créer:
 
-* Comparaison avec valeur d'environnement - Une comparaison de la valeur
-  d'environnement, compare une valeur récupérée à partir de :php:func:`env()`
-  pour une valeur connue, la valeur d'environnement est vérifiée équitablement
-  avec la valeur fournie.
-* La comparaison de la valeur model - La comparaison de la valeur model vous
-  autorise à comparer une valeur récupérée à partir de :php:func:`env()` avec
-  une expression régulière.
-* Comparaison basée sur les options -  La comparaison basée sur les options
-  utilise une liste d'options pour créer une expression régulière. De tels
-  appels pour ajouter un détecteur d'options déjà défini, va fusionner les
-  options.
-* Les détecteurs de Callback - Les détecteurs de Callback vous permettront de
-  fournir un type 'callback' pour gérer une vérification. Le callback va
-  recevoir l'objet requête comme seul paramètre.
+* Comparaison avec valeur d'environnement - Compare la valeur extraite à partir
+  de :php:func:`env()` équitablement avec la valeur fournie.
+* Comparaison de valeur avec motif - Vous autorise à comparer la valeur
+  extraite de :php:func:`env()` avec une expression régulière.
+* Comparaison basée sur les options -  Utilise une liste d'options pour créer
+  une expression régulière. Les appels suivants pour ajouter un détecteur
+  d'option déjà défini, va fusionner les options.
+* Les détecteurs de Callback - Vous permettent de fournir un type 'callback'
+  pour gérer la vérification. Le callback va recevoir l'objet requête comme
+  seul paramètre.
 
 .. php:method:: addDetector($name, $options)
 
@@ -234,7 +229,7 @@ Quelques exemples seraient::
         ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
 
-    // Ajouter un détecteur de valeur model.
+    // Ajouter un détecteur de valeur avec motif.
     $this->request->addDetector(
         'iphone',
         ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
@@ -260,7 +255,7 @@ Quelques exemples seraient::
 et :php:meth:`Cake\\Network\\Request::host()` qui facilitent la vie des
 applications avec sous-domaines.
 
-Vous pouvez utiliser plusieurs détecteurs intégrés:
+Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
 
 * ``is('get')`` Vérifie si la requête courante est un GET.
 * ``is('put')`` Vérifie si la requête courante est un PUT.
@@ -271,7 +266,7 @@ Vous pouvez utiliser plusieurs détecteurs intégrés:
 * ``is('ajax')`` Vérifie si la requête courante vient d'un
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Vérifie si la requête courante est via SSL.
-* ``is('flash')`` Vérifie si la requête courante a un User-Agent
+* ``is('flash')`` Vérifie si la requête courante à un User-Agent
   de Flash.
 * ``is('mobile')`` Vérifie si la requête courante vient d'une liste
   courante de mobiles.
@@ -299,7 +294,7 @@ Retourne le nom de domaine sur lequel votre application tourne::
 
 .. php:method:: subdomains($tldLength = 1)
 
-Retourne un tableau avec le sous-domaine sur lequel votre application tourne::
+Retourne un tableau avec les sous-domaines sur lequel votre application tourne::
 
     // Retourne ['my', 'dev'] pour 'my.dev.example.org'
     $request->subdomains();
@@ -323,7 +318,7 @@ Retourne la méthode HTTP où la requête a été faite::
 
 .. php:method:: allowMethod($methods)
 
-Définit les méthodes HTTP autorisées, si elles ne correspondent pas, elle
+Définit les méthodes HTTP autorisées. Si elles ne correspondent pas, elle
 va lancer une MethodNotAllowedException.
 La réponse 405 va inclure l'en-tête ``Allow`` nécessaire avec les méthodes
 passées.
@@ -348,15 +343,16 @@ Faire Confiance aux Header de Proxy
 -----------------------------------
 
 Si votre application est derrière un load balancer ou exécutée sur un service
-cloud, vous voudrez souvent avoir l'hôte de load balancer, le port et le
-scheme dans vos requêtes. Souvent les load balancers vont aussi envoyer
+cloud, vous voudrez souvent obtenir l'hôte de load balancer, le port et le
+schéma dans vos requêtes. Souvent les load balancers vont aussi envoyer
 des en-têtes ``HTTP-X-Forwarded-*`` avec les valeurs originales. Les en-têtes
 forwarded ne seront pas utilisés par CakePHP directement. Pour que l'objet
-request utilise les en-têtes, définissez la propriété ``trustProxy`` à ``true``::
+request utilise les en-têtes, définissez la propriété ``trustProxy`` à
+``true``::
 
     $this->request->trustProxy = true;
 
-    // Ces méthodes n'utiliseront pas les en-têtes proxied.
+    // Ces méthodes n'utiliseront pas les en-têtes du proxy.
     $this->request->port();
     $this->request->host();
     $this->request->scheme();
@@ -367,7 +363,7 @@ Vérifier les En-têtes Acceptés
 
 .. php:method:: accepts($type = null)
 
-Trouve les types de contenu que le client accepte ou vérifie si il
+Trouve les types de contenu que le client accepte ou vérifie s'il
 accepte un type particulier de contenu.
 
 Récupère tous les types::
@@ -389,7 +385,7 @@ Obtenir la liste des langues acceptées::
 
 Vérifier si une langue spécifique est acceptée::
 
-    $this->request->acceptLanguage('es-es');
+    $this->request->acceptLanguage('fr-fr');
 
 .. index:: $this->response
 
@@ -401,9 +397,9 @@ Response
 :php:class:`Cake\\Network\\Response` est la classe de réponse par défaut dans
 CakePHP. Elle encapsule un nombre de fonctionnalités et de caractéristiques
 pour la génération de réponses HTTP dans votre application. Elle aide aussi à
-tester puisqu'elle peut être mocked/stubbed, vous permettant d'inspecter les
+tester des objets factices (mocks/stubs), vous permettant d'inspecter les
 en-têtes qui vont être envoyés.
-Comme :php:class:`Cake\\Network\\Request`, :php:class:`Cake\\Network\\Response`
+:php:class:`Cake\\Network\\Request`, :php:class:`Cake\\Network\\Response`
 consolide un certain nombre de méthodes qu'on pouvait trouver avant dans
 :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` et :php:class:`Dispatcher`. Les anciennes
@@ -421,9 +417,9 @@ communes liées, telles que:
 Changer la Classe Response
 --------------------------
 
-CakePHP utilise ``Response`` par défaut. ``Response`` est flexible et
-transparente pour l'utilisation de la classe. Si vous avez besoin de la
-remplacer avec une classe spécifique de l'application, vous pouvez remplacer
+CakePHP utilise ``Response`` par défaut. ``Response`` est une classe
+flexible et transparente. Si vous avez besoin de la remplacer avec une
+classe spécifique de l'application, vous pouvez remplacer
 ``Response`` dans ``webroot/index.php``.
 
 Cela fera que tous les controllers dans votre application utiliseront
@@ -450,7 +446,7 @@ vous pouvez faire correspondre ces types avec ``type()`` comme ceci::
 
 Habituellement, vous voudrez faire correspondre des types de contenu
 supplémentaires dans le callback :php:meth:`~Controller::beforeFilter()` de
-votre controller, afin que vous puissiez tirer parti de la fonctionnalité de
+votre controller afin que vous puissiez tirer parti de la fonctionnalité de
 vue de commutation automatique de :php:class:`RequestHandlerComponent`, si vous
 l'utilisez.
 
@@ -474,10 +470,11 @@ Il y a des fois où vous voulez envoyer des fichiers en réponses de vos
 requêtes. Vous pouvez faire cela en utilisant
 :php:meth:`Cake\\Network\\Response::file()`::
 
-    public function sendFile($id) {
+    public function sendFile($id)
+    {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
-        //Retourne un objet reponse pour éviter que le controller n'essaie de
+        //Retourne un objet réponse pour éviter que le controller n'essaie de
         // rendre la vue
         return $this->response;
     }
@@ -500,20 +497,21 @@ d'être affiché dans le navigateur en spécifiant les options::
 les options possibles sont:
 
 name
-    Le nom vous permet de spécifier un nom fichier alternatif à envoyer à
+    Le nom vous permet de spécifier un nom de fichier alternatif à envoyer à
     l'utilisateur.
 download
-    Une valeur boléenne indiquant si les en-têtes doivent être définies pour
+    Une valeur booléenne indiquant si les en-têtes doivent être définies pour
     forcer le téléchargement.
 
 Envoyer une Chaîne de Caractères en Fichier
 -------------------------------------------
 
 Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
-exemple si vous voulez générer un pdf ou un ics à la volée et voulez servir la
-chaîne générée en fichier, vous pouvez faire cela en utilisant::
+exemple si vous voulez générer un pdf ou un ics à la volée à partir d'une
+chaine::
 
-    public function sendIcs() {
+    public function sendIcs()
+    {
         $icsString = $this->Calendar->generateIcs();
         $this->response->body($icsString);
         $this->response->type('ics');
@@ -531,7 +529,7 @@ Définir les En-têtes
 
 .. php:method:: header($header = null, $value = null)
 
-Le réglage des en-têtes est fait avec la méthode
+Le paramétrage des en-têtes est fait avec la méthode
 :php:meth:`Cake\\Network\\Response::header()`. Elle peut être appelée avec
 quelques paramètres de configurations::
 
@@ -548,13 +546,13 @@ quelques paramètres de configurations::
         'Content-type: application/pdf'
     ]);
 
-Régler le même :php:meth:`~CakeResponse::header()` de multiples fois entraînera
+Définir le même :php:meth:`~CakeResponse::header()` de multiples fois entraînera
 l'écrasement des précédentes valeurs, un peu comme les appels réguliers
 d'en-tête. Les en-têtes ne sont pas envoyés quand
-:php:meth:`Cake\\Network\\Response::header()` est appelé; à la place, ils sont
+:php:meth:`Cake\\Network\\Response::header()` est appelé; A la place, ils sont
 simplement conservés jusqu'à ce que la réponse soit effectivement envoyée.
 
-Vous pouvez maintenant utiliser la méthode pratique
+Vous pouvez maintenant utiliser la méthode
 :php:meth:`Cake\\Network\\Response::location()` pour directement définir ou
 récupérer l'en-tête de localisation du redirect.
 
@@ -563,26 +561,30 @@ Interagir avec le Cache du Navigateur
 
 .. php:method:: disableCache()
 
-Vous avez parfois besoin de forcer les navigateurs à ne pas mettre en cache les
+Parfois, vous avez besoin de forcer les navigateurs à ne pas mettre en cache les
 résultats de l'action d'un controller.
 :php:meth:`Cake\\Network\\Response::disableCache()` est justement prévu pour
 cela::
 
-    public function index() {
+    public function index()
+    {
         // faire quelque chose.
         $this->response->disableCache();
     }
 
 .. warning::
 
-    En utilisant disableCache() avec downloads à partir de domaines SSL pendant
+    Utiliser disableCache() avec downloads à partir de domaines SSL pendant
     que vous essayez d'envoyer des fichiers à Internet Explorer peut entraîner
     des erreurs.
+
+.. php:method:: cache($since, $time = '+1 day')
 
 Vous pouvez aussi dire aux clients que vous voulez qu'ils mettent en cache
 des réponses. En utilisant :php:meth:`Cake\\Network\\Response::cache()`::
 
-    public function index() {
+    public function index()
+    {
         //faire quelque chose
         $this->response->cache('-1 minute', '+5 days');
     }
@@ -590,8 +592,8 @@ des réponses. En utilisant :php:meth:`Cake\\Network\\Response::cache()`::
 Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
 pendant 5 jours, en espérant accélerer l'expérience de vos visiteurs.
 :php:meth:`CakeResponse::cache()` définit valeur ``Last-Modified`` en
-premier argument. Expires, et ``max-age`` sont définis en se basant sur le
-second paramètre. Le Cache-Control est défini aussi à ``public``.
+premier argument. L'entête ``Expires`` et ``max-age`` sont définis en se basant
+sur le second paramètre. Le Cache-Control est défini aussi à ``public``.
 
 
 .. _cake-response-caching:
@@ -600,17 +602,17 @@ Réglage fin du Cache HTTP
 -------------------------
 
 Une des façons les meilleures et les plus simples de rendre votre application
-plus rapide est d'utiliser le cache HTTP. vous devez uniquement pour aider les
-clients à décider si ils doivent utiliser une copie de la réponse mise en cache,
-en définissant quelques propriétés d'en-têtes comme la date de mise à jour et la
-balise d'entité de réponse :ref:`etag-tag`.
+plus rapide est d'utiliser le cache HTTP. Selon ce modèle de mise en cache,
+vous êtes tenu seulement d'aider les clients à décider s'ils doivent utiliser
+une copie de la réponse mise en cache en définissant quelques propriétés
+d'en-têtes comme la date de mise à jour et la balise entity de réponse.
 
-Plutôt que d'avoir à coder la logique de mise en cache et de sa nullité
+Plutôt que d'avoir à coder la logique de mise en cache et de sa désactivation
 (rafraîchissement) une fois que les données ont changé, HTTP utilise deux
 modèles, l'expiration et la validation qui habituellement sont beaucoup plus
 simples que d'avoir à gérer le cache soi-même.
 
-En dehors de l'utilisation de :php:meth:`Cake\\Network\\Response::cache()` vous
+En dehors de l'utilisation de :php:meth:`Cake\\Network\\Response::cache()`, vous
 pouvez aussi utiliser plusieurs autres méthodes pour affiner le réglage des
 en-têtes de cache HTTP pour tirer profit du navigateur ou à l'inverse du cache
 du proxy.
@@ -629,25 +631,27 @@ ressembler à ceci::
 
 La classe ``Response`` vous aide à configurer cet en-tête avec quelques
 méthodes utiles qui vont produire un en-tête final valide ``Cache Control``.
-Premièrement il y a la méthode :php:meth:`Cake\\Network\\Response::sharable()`,
+La première est la méthode :php:meth:`Cake\\Network\\Response::sharable()`,
 qui indique si une réponse peut être considerée comme partageable pour
-différents utilisateurs ou clients. Cette méthode contrôle généralement la
-partie `public` ou `private` de cet en-tête. Définir une réponse en privé
-indique que tout ou une partie de celle-ci est prévue pour un unique
+différents utilisateurs ou clients. Cette méthode contrôle en fait la
+partie `public` ou `private` de cet en-tête. Définir une réponse en `private`
+indique que tout ou partie de celle-ci est prévue pour un unique
 utilisateur. Pour tirer profit des mises en cache partagées, il est nécessaire
-de définir la directive de contrôle en publique.
+de définir la directive de contrôle en `public`.
 
 Le deuxième paramètre de cette méthode est utilisé pour spécifier un ``max-age``
-pour le cache, qui est le nombre de secondes après lesquelles la réponse n'est
+pour le cache qui est le nombre de secondes après lesquelles la réponse n'est
 plus considérée comme récente::
 
-    public function view() {
+    public function view()
+    {
         ...
         // Définit le Cache-Control en public pour 3600 secondes
         $this->response->sharable(true, 3600);
     }
 
-    public function mes_donnees() {
+    public function mes_donnees()
+    {
         ...
         // Définit le Cache-Control en private pour 3600 secondes
         $this->response->sharable(false, 3600);
@@ -665,14 +669,13 @@ Vous pouvez définir l'en-tête ``Expires`` avec une date et un temps après
 lesquels la réponse n'est plus considerée comme récente. Cet en-tête peut être
 défini en utilisant la méthode :php:meth:`Cake\\Network\\Response::expires()`::
 
-    public function view() {
+    public function view()
+    {
         $this->response->expires('+5 days');
     }
 
 Cette méthode accepte aussi une instance :php:class:`DateTime` ou toute chaîne
 de caractère qui peut être parsée par la classe :php:class:`DateTime`.
-
-.. _etag-tag:
 
 L'En-tête Etag
 ~~~~~~~~~~~~~~
@@ -688,17 +691,17 @@ C'est utilisé couramment avec des ressources statiques comme les images et
 autres choses.
 
 L'en-tête :php:meth:`~CakeResponse::etag()` (appelé balise d'entité) est une
-chaîne de caractère qui identifie de façon unique les ressources requêtées. Il
-est très semblable à la somme de contrôle d'un fichier; la mise en cache
-permettra de comparer les sommes de contrôle pour savoir si elles correspondent
-ou non.
+chaîne de caractère qui identifie de façon unique les ressources requêtées
+comme le fait un checksum pour un fichier, afin de déterminer si elle
+correspond à une ressource du cache ..
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
-:php:meth:`Cake\\Network\\Response::checkNotModified()`, soit avoir le
-:php:class:`RequestHandlerComponent` inclu dans votre controller::
+:php:meth:`Cake\\Network\\Response::checkNotModified()` ou inclure
+:php:class:`RequestHandlerComponent` dans votre controller::
 
-    public function index() {
+    public function index()
+    {
         $articles = $this->Article->find('all');
         $this->response->etag($this->Article->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
@@ -712,18 +715,19 @@ L'En-tête Last-Modified
 
 .. php:method:: modified($time = null)
 
-Toujours dans le cadre du modèle de validation du cache HTTP, vous pouvez
-définir l'en-tête ``Last-Modified`` pour indiquer la date et l'heure à laquelle la ressource
-a été modifiée pour la dernière fois. Définir cet en-tête
-aide CakePHP à indiquer à ces clients si la réponse a été
+De même, avec le modèle de validation du cache HTTP, vous pouvez
+définir l'en-tête ``Last-Modified`` pour indiquer la date et l'heure à
+laquelle la ressource a été modifiée pour la dernière fois. Définir
+cet en-tête aide CakePHP à indiquer à ces clients si la réponse a été
 modifiée ou n'est pas basée sur leur cache.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
-:php:meth:`Cake\\Network\\Response::checkNotModified()`, soit avoir le
-:php:class:`RequestHandlerComponent` inclu dans votre controller::
+:php:meth:`Cake\\Network\\Response::checkNotModified()` ou inclure
+:php:class:`RequestHandlerComponent` dans votre controller::
 
-    public function view() {
+    public function view()
+    {
         $article = $this->Article->find('first');
         $this->response->modified($article['Article']['modified']);
         if ($this->response->checkNotModified($this->request)) {
@@ -739,7 +743,7 @@ L'en-tête Vary
 
 Dans certains cas, vous voudrez offrir différents contenus en utilisant la
 même URL. C'est souvent le cas quand vous avez une page multilingue ou que
-vous répondez avec différents HTMLs selon le navigateur qui requête la
+vous répondez avec différents page HTMLs selon le navigateur qui requête la
 ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête ``Vary``::
 
         $this->response->vary('User-Agent');
@@ -751,8 +755,8 @@ Envoyer des Réponses Non-Modifiées
 
 .. php:method:: checkNotModified(Request $request)
 
-Compare les en-têtes de cache pour l'objet request avec l'en-tête du cache de
-la response et determine si il peut toujours être considéré comme récent. Si
+Compare les en-têtes de cache pour l'objet requété avec l'en-tête du cache de
+la response et determine s'il peut toujours être considéré comme récent. Si
 oui, il supprime le contenu de la réponse et envoie l'en-tête
 `304 Not Modified`::
 
@@ -768,27 +772,28 @@ Envoyer la Response
 
 Une fois que vous avez fini de créer une response, appeler ``send()`` va
 envoyer tous les en-têtes définis ainsi que le corps. Ceci est fait
-automatiquement à la fin de chaque requête de ``Dispatcher``.
+automatiquement à la fin de chaque requête par le ``Dispatcher``.
 
 .. _cakeresponse-testing:
 
 Response et les Tests
 ---------------------
 
-La classe ``Response`` aide à faciliter le test des controllers et des
-components. En ayant un seul endroit pour mock/stub les en-têtes, vous
+La classe ``Response`` aide à produire les controllers et component de
+test facilement. En ayant un seul endroit pour les en-têtes factices, vous
 pouvez tester plus facilement les controllers et les components::
 
-    public function testSomething() {
+    public function testSomething()
+    {
         $this->controller->response = $this->getMock('Cake\Network\Response');
         $this->controller->response->expects($this->once())->method('header');
         // ...
     }
 
-De plus, vous pouvez faciliter encore plus l'exécution des tests à partir d'une
-ligne de commande, pendant que vous pouvez mocker pour éviter les erreurs
-'d'envois d'en-têtes' qui peuvent arriver en essayant de configurer les
-en-têtes dans CLI.
+De plus, vous pouvez exécuter les tests à partir de la ligne de commande plus
+facilement, comme vous pouvez utiliser les objects factices ('mocks') pour
+éviter les erreurs 'd'envois d'en-têtes' qui peuvent arriver en essayant de
+configurer les en-têtes dans CLI.
 
 
 .. meta::

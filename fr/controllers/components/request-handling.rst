@@ -22,9 +22,11 @@ tableau qui est assigné à ``$this->request->data``, et pourra alors être
 sauvegardée comme une donnée de model. Afin d'utiliser le Request Handler, il
 doit être inclu dans votre tableau méthode ``initialize()``::
 
-    class WidgetController extends AppController {
+    class WidgetController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('RequestHandler');
         }
@@ -46,14 +48,17 @@ Si c'est un tableau, accepts() renverra ``true`` si un des types du contenu est
 accepté par le client. Si c'est 'null', elle renverra un tableau des types de
 contenu que le client accepte. Par exemple::
 
-        class ArticlesController extends AppController {
+        class ArticlesController extends AppController
+        {
 
-            public function initialize() {
+            public function initialize()
+            {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter() {
+            public function beforeFilter()
+            {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute le code seulement si le client accepte une
                     // response HTML  (text/html).
@@ -171,7 +176,7 @@ Détermine les content-types que le client préfère. Si aucun paramètre n'est
 donné, le type de contenu le plus approchant est retourné. Si $type est un
 tableau, le premier type que le client accepte sera retourné. La préférence
 est déterminée, premièrement par l'extension de fichier analysée par
-Router, si il y en avait une de fournie et secondairement, par la liste des
+Router, s'il y en avait une de fournie et secondairement, par la liste des
 content-types définis dans ``HTTP\_ACCEPT``::
 
     $this->RequestHandler->prefers('json');
@@ -232,7 +237,8 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 ``checkHttpCache`` à ``false``::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
             'checkHttpCache' => false
@@ -252,7 +258,8 @@ Vous pouvez mapper les types existants et les nouveaux types à vos classes
 personnalisées. Vous pouvez aussi définir ceci automatiquement en utilisant
 la configuration ``viewClassMap``::
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent(''RequestHandler', [
             'viewClassMap' => [

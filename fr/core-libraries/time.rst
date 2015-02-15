@@ -10,14 +10,17 @@ d'une ``View``, utilisez la classe ``Time``::
 
     use Cake\I18n\Time;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Auth');
         }
 
-        public function afterLogin() {
+        public function afterLogin()
+        {
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
                 // greet user with a happy birthday message
@@ -287,6 +290,13 @@ Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé
     echo $time->wasWithinPast('2 weeks');
 
 .. end-time
+
+Accepter des Données de Request Localisées
+==========================================
+
+Quand vous créez des inputs de texte qui manipulent des dates, vous voudrez
+probablement accepter et parser des chaînes datetime localisées. Consultez
+:ref:`parsing-localized-dates`.
 
 .. meta::
     :title lang=fr: Time

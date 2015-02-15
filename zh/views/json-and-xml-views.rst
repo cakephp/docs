@@ -40,10 +40,12 @@ JSON 和 XML 视图
 如果你需要在生成响应之前对视图变量进行任何格式化或者操作，你就应该创建视图文件。
 ``_serialize``  的值可以是字符串或者一个需要进行序列化的视图变量的数组::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array('RequestHandler');
 
-        public function index() {
+        public function index()
+        {
             $this->set('posts', $this->paginate());
             $this->set('_serialize', array('posts'));
         }
@@ -51,10 +53,12 @@ JSON 和 XML 视图
 
 你也可以定义 ``_serialize`` 为合并多个视图变量的数组::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $components = array('RequestHandler');
 
-        public function index() {
+        public function index()
+        {
             // 创建 $posts 和 $comments 的代码
             $this->set(compact('posts', 'comments'));
             $this->set('_serialize', array('posts', 'comments'));
@@ -73,8 +77,10 @@ XmlView，确保你的视图变量有一个单独的顶层元素。如果没有�
 JSON 响应中略去该字段。这种情况下就需要用到视图文件了::
 
     // 控制器代码
-    class PostsController extends AppController {
-        public function index() {
+    class PostsController extends AppController
+    {
+        public function index()
+        {
             $this->set(compact('posts', 'comments'));
         }
     }

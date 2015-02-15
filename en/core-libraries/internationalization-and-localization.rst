@@ -19,8 +19,8 @@ Setting Up Translations
 
 There are only a few steps to go from a single-language application
 to a multi-lingual application, the first of which is to make use
-of the :php:func:`__()` function in your code. Below is an example of some code for a
-single-language application::
+of the :php:func:`__()` function in your code. Below is an example of some code
+for a single-language application::
 
     <h2>Popular Articles</h2>
 
@@ -84,6 +84,13 @@ An example translation file could look like this:
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+Extract Pot Files with I18n Shell
+---------------------------------
+
+To create the pot files from `__()` and other internationalized types of
+messages that can be found in your code, you can use the i18n shell. Please read
+the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
+
 Setting the Default Locale
 --------------------------
 
@@ -119,7 +126,8 @@ translation was found::
     echo __('Popular Articles');
 
 If you need to group your messages, for example, translations inside a plugin,
-you can use the :php:func:`__d()` function to fetch messages from another domain::
+you can use the :php:func:`__d()` function to fetch messages from another
+domain::
 
     echo __d('my_plugin', 'Trending right now');
 
@@ -156,7 +164,7 @@ All translation functions support placeholder replacements::
 
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
-so you and translate messages and localize dates, numbers and
+so you can translate messages and localize dates, numbers and
 currency at the same time::
 
     echo __(
@@ -385,9 +393,11 @@ class::
 
     namespace App\I18n\Parser;
 
-    class YamlFileParser {
+    class YamlFileParser
+    {
 
-        public function parse($file) {
+        public function parse($file)
+        {
             return yaml_parse_file($file);
         }
     }
@@ -405,6 +415,7 @@ application. Next, create the translations file under
 And finally, configure the translation loader for the domain and locale::
 
     use Cake\I18n\MessagesFileLoader as Loader;
+
     I18n::translator(
         'animals',
         'fr_FR',
@@ -444,9 +455,9 @@ Plurals and Context in Custom Translators
 -----------------------------------------
 
 The arrays used for ``setMessages()`` can be crafted to instruct the translator
-to store messages under different domains or to trigger Gettext-style plural selection.
-The following is an example of storing translations for the same key in
-different contexts::
+to store messages under different domains or to trigger Gettext-style plural
+selection. The following is an example of storing translations for the same key
+in different contexts::
 
     [
         'He reads the letter {0}' => [
@@ -471,8 +482,8 @@ Using Different Formatters
 
 In previous examples we have seen that Packages are built using ``default`` as
 first argument, and it was indicated with a comment that it corresponded to the
-formatter to be used. Formatters are  classes responsible for interpolating variables
-in translation messages and selecting the correct plural form.
+formatter to be used. Formatters are classes responsible for interpolating
+variables in translation messages and selecting the correct plural form.
 
 If you're dealing with a legacy application, or you don't need the power offered
 by the ICU message formatting, CakePHP also provides the ``sprintf`` formatter::

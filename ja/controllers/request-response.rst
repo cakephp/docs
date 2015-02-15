@@ -363,7 +363,8 @@ CakePHPはデフォルトで  ``CakeResponse`` を使います。 ``CakeResponse
 :doc:`/views/media-view` を使うか、 ``CakeResponse`` の機能を使うことで実現できます。
 :php:meth:`CakeResponse::download()` はダウンロードファイルとしてレスポンスを送れるようにしてくれます。::
 
-    public function sendFile($id) {
+    public function sendFile($id)
+    {
         $this->autoRender = false;
 
         $file = $this->Attachment->getFile($id);
@@ -396,7 +397,8 @@ CakeResponseをどのように使えばよいかを示しています。
 時々、コントローラアクションの結果をキャッシュしないようにブラウザに強制する必要がでてきます。
 :php:meth:`CakeResponse::disableCache()` はそういった目的で使われます。::
 
-    public function index() {
+    public function index()
+    {
         // do something.
         $this->response->disableCache();
     }
@@ -407,7 +409,8 @@ CakeResponseをどのように使えばよいかを示しています。
 
 また、:php:meth:`CakeResponse::cache()` を使ってクライアントにレスポンスをキャッシュして欲しいことを伝えられます。::
 
-    public function index() {
+    public function index()
+    {
         //do something
         $this->response->cache('-1 minute', '+5 days');
     }
@@ -450,13 +453,15 @@ privateにレスポンスを設定することは、レスポンスのすべて�
 このメソッドの二番目のパラメータはキャッシュの `max-age` を指定するために使われます。
 このパラメータはレスポンスが古いと見なされる秒数を表しています。::
 
-    public function view() {
+    public function view()
+    {
         ...
         // Cache-Control を3600秒の間、publicとして設定
         $this->response->sharable(true, 3600);
     }
 
-    public function my_data() {
+    public function my_data()
+    {
         ...
         // Cache-Control を3600秒の間、privateとして設定
         $this->response->sharable(false, 3600);
@@ -472,7 +477,8 @@ Expirationヘッダ
 cache expirationモデルのもとではまた、 `Expires` ヘッダを設定することが出来ます。このヘッダは、
 HTTP仕様によるとレスポンスが古いと見なされる日時を表しています。このヘッダは :php:meth:`CakeResponse::expires()` メソッドを使って設定されます。::
 
-    public function view() {
+    public function view()
+    {
         $this->response->expires('+5 days');
     }
 
@@ -494,7 +500,8 @@ Etagヘッダ(entity tagと呼ばれる)は要求されたリソースを識別�
 実際にこのヘッダを使うメリットを得るためには、手動で :php:meth:`CakeResponse::checkNotModified()`
 メソッドを呼び出すかコントローラに :php:class:`RequestHandlerComponent` を読み込まなければなりません。::
 
-    public function index() {
+    public function index()
+    {
         $articles = $this->Article->find('all');
         $this->response->etag($this->Article->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
@@ -514,7 +521,8 @@ HTTPキャッシュのvalidationモデルのもとでは、リソースが最後
 実際にこのヘッダを使うメリットを得るためには、 :php:meth:`CakeResponse::checkNotModified()`
 メソッドを呼び出すかコントローラに :php:class:`RequestHandlerComponent` を読み込まなければなりません。::
 
-    public function view() {
+    public function view()
+    {
         $article = $this->Article->find('first');
         $this->response->modified($article['Article']['modified']);
         if ($this->response->checkNotModified($this->request)) {
@@ -542,13 +550,14 @@ CakeResponseとテスト
 いくつものオブジェクトを横断して使われるメソッドの代わりに、コントローラとコンポーネントが ``CakeResponse``
 に委譲しているのをまねる(mock)オブジェクトを準備するだけでよくなります。このことで'単体'テストを作りやすくなり、コントローラのテスト実施が簡単になります。::
 
-    public function testSomething() {
+    public function testSomething()
+    {
         $this->controller->response = $this->getMock('CakeResponse');
         $this->controller->response->expects($this->once())->method('header');
         // ...
     }
 
-さらに、CLIからヘッダ設定を試みた時に起こる'ヘッダ送信'エラーを避けるためにモックを使うことができるので、コマンドラインからより簡単にテストを実行できます。
+さらに、CLIからヘッダ設定を試みた時に起こる'ヘッダ送信'エラーを避け���ためにモックを使うことができるので、コマンドラインからより簡単にテストを実行できます。
 
 CakeResponse API
 ================
@@ -631,5 +640,5 @@ CakeResponse API
 
 
 .. meta::
-    :title lang=en: Request and Response objects
-    :keywords lang=en: request controller,request parameters,array indices,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp
+    :title lang=ja: Request and Response objects
+    :keywords lang=ja: request controller,request parameters,array indices,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp

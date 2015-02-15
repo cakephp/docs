@@ -162,8 +162,8 @@ Debug Kit
 
 DebugKit is a plugin that provides a number of good debugging tools. It
 primarily provides a toolbar in the rendered HTML, that provides a plethora of
-information about your application and the current request. You can download
-`DebugKit <https://github.com/cakephp/debug_kit>`_ from GitHub.
+information about your application and the current request. See the
+:doc:`/debug-kit` chapter for how to install and use DebugKit.
 
 .. meta::
     :title lang=en: Debugging

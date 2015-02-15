@@ -5,7 +5,7 @@ Bake features an extensible architecture that allows your application or plugins
 to easily modify or add-to the base functionality. Bake makes use of a dedicated
 view class which does not use standard PHP syntax.
 
-Bake events
+Bake Events
 ===========
 
 As a view class, ``BakeView`` emits the same events as any other view class,
@@ -21,7 +21,8 @@ be used::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
-    EventManager::instance()->attach(function (Event $event) {
+
+    EventManager::instance()->on('Bake.initialize', function (Event $event) {
         $view = $event->subject;
 
         // In my bake templates, allow the use of the MySpecial helper
@@ -30,7 +31,7 @@ be used::
         // And add an $author variable so it's always available
         $view->set('author', 'Andy');
 
-    }, 'Bake.initialize');
+    });
 
 Bake events can also be useful for making small changes to existing templates.
 For example, to change the variable names used when baking controller/template
@@ -42,7 +43,8 @@ variables used in the bake templates::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
-    EventManager::instance()->attach(function (Event $event) {
+
+    EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
         $view = $event->subject;
 
         // Use $rows for the main data variable in indexes
@@ -61,10 +63,10 @@ variables used in the bake templates::
             $view->set('singularVar', 'theOne');
         }
 
-    }, 'Bake.beforeRender');
+    });
 
 
-Bake Template syntax
+Bake Template Syntax
 ====================
 
 Bake template files use erb-style (``<% %>``) tags to denote template logic, and
@@ -72,7 +74,7 @@ treat everything else including php tags as plain text.
 
 .. note::
 
-    Bake template files do not use, and are insenstive to, ``asp_tags`` php ini setting.
+    Bake template files do not use, and are insensitive to, ``asp_tags`` php ini setting.
 
 ``BakeView`` implements the following tags:
 
@@ -93,7 +95,7 @@ So, for example, when baking a shell like so::
 
     bin/cake bake shell Foo
 
-The template used (``vendor/cakephp/cakephp/src/Template/Bake/Shell/shell.ctp``)
+The template used (``vendor/cakephp/bake/src/Template/Bake/Shell/shell.ctp``)
 looks like this::
 
     <?php
@@ -104,14 +106,16 @@ looks like this::
     /**
      * <%= $name %> shell command.
      */
-    class <%= $name %>Shell extends Shell {
+    class <%= $name %>Shell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -127,14 +131,16 @@ file actually rendered, looks like this::
     /**
      * <?= $name ?> shell command.
      */
-    class <?= $name ?>Shell extends Shell {
+    class <?= $name ?>Shell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -149,19 +155,21 @@ And the resultant baked class (``src/Shell/FooShell.php``) looks like this::
     /**
      * Foo shell command.
      */
-    class FooShell extends Shell {
+    class FooShell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
 
-Creating a bake theme
+Creating a Bake Theme
 =====================
 
 If you wish to modify the default output produced by the "bake" command, you can
@@ -171,17 +179,17 @@ templates that bake uses. The best way to do this is:
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
 #. Create a new directory in ``plugin/[name]/src/Template/Bake``.
 #. Copy any templates you want to override from
-   ``vendor/cakephp/cakephp/src/Template/Bake`` to matching directories in your
+   ``vendor/cakephp/bake/src/Template/Bake`` to matching directories in your
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
 
-Creating new bake command options
+Creating New Bake Command Options
 =================================
 
 It's possible to add new bake command options, or override the ones provided by
 CakePHP by creating tasks in your application or plugins. By extending
-``Cake\Shell\Task\BakeTask``, bake will find your new task and include it as
+``Bake\Shell\Task\BakeTask``, bake will find your new task and include it as
 part of bake.
 
 As an example, we'll make a task that creates an arbitrary foo class. First,
@@ -194,20 +202,24 @@ FooTask.php file should look like::
     <?php
     namespace App\Shell\Task;
 
-    use Cake\Shell\Task\SimpleBakeTask;
+    use Bake\Shell\Task\SimpleBakeTask;
 
-    class FooTask extends SimpleBakeTask {
+    class FooTask extends SimpleBakeTask
+    {
         public $pathFragment = 'Foo/';
 
-        public function name() {
+        public function name()
+        {
             return 'shell';
         }
 
-        public function fileName($name) {
+        public function fileName($name)
+        {
             return $name . 'Foo.php';
         }
 
-        public function template() {
+        public function template()
+        {
             return 'foo';
         }
 
@@ -223,8 +235,8 @@ add the following content::
     /**
      * <%= $name %> foo
      */
-    class <%= $name %>Foo {
-
+    class <%= $name %>Foo
+    {
         // Add code.
     }
 

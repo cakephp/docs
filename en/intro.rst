@@ -95,7 +95,8 @@ presentational data that the clients are accepting, and finally delegates the
 rendering process to the View layer. An example of a user registration
 controller would be::
 
-    public function add() {
+    public function add()
+    {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);

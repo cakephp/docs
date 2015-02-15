@@ -188,7 +188,7 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
 
 無効化されたオブジェクトはまだそれらの通常のメソッドとプロパティを持っています。
 有効状態と無効状態の根本的な違いはコールバックに関してです。
-``enabled()`` メソッドを用いることで、有効オブジェクトに何があるのかを問い合わせたり、特定のオブジェクトがまだ有効であるのかをチェックすることが出来ます::
+``enabled()`` メソッドを用いることで、有効オブジェクトに何があるのかを問い合わせ���り、特定のオブジェクトがまだ有効であるのかをチェックすることが出来ます::
 
     // あるヘルパーが有効かどうかをチェックします
     $this->Helpers->enabled('Html');
@@ -211,7 +211,8 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
 プライオリティ値とトリガーの順番との取り扱いは :ref:`ここ <event-priorities>` の説明と同じです。
 宣言時にプライオリティを設定できる方法は次に示します::
 
-    class SomeController {
+    class SomeController
+    {
         public $components = array(
             'Foo', //Foo はデフォルトのプライオリティ 10 を持ちます
             'Bar' => array('priority' => 9) //Bar のコールバックは Foo's の前にトリガーされます
@@ -227,7 +228,8 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
     }
 
 
-    class Post {
+    class Post
+    {
         public $actsAs = array(
             'DoFirst' => array('priority' => 1),
             'Media'
@@ -257,4 +259,4 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
 
 .. meta::
     :title lang=ja: コレクション
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
+    :keywords lang=ja: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities

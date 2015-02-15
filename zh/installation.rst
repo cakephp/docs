@@ -2,7 +2,7 @@
 ############
 
 CakePHP 的安装快速、容易。最低要求是一个 web 服务器和一份 CakePHP 的拷贝，仅此而
-已！尽管本手册主要关注于 Apache 服务器(因为它最为常用)，但是也可以配置 CakePHP 
+已！尽管本手册主要关注于 Apache 服务器(因为它最为常用)，但是也可以配置 CakePHP
 运行在不同的 web 服务器上，比如 LightHTTPD 或 Microsoft IIS。
 
 要求
@@ -35,10 +35,10 @@ CakePHP 的许可是基于 MIT 许可协议的。这意味着在保持版权声�
 有两个主要的方式可以获得 CakePHP 的最新拷贝。你可以从官网下载压缩文档(zip/tar.gz/
 tar.bz2)，也可以从 git 库中获取代码。
 
-要下载 CakePHP 最新的主版本，请访问官方网站 
+要下载 CakePHP 最新的主版本，请访问官方网站
 `http://cakephp.org <http://cakephp.org>`_ 并点击 "Download" 链接。
 
-所有 CakePHP 的当前发行版本都托管在 `GitHub <http://github.com/cakephp/cakephp>`_ 
+所有 CakePHP 的当前发行版本都托管在 `GitHub <http://github.com/cakephp/cakephp>`_
 上。GitHub 同时托管了 CakePHP 自身和许多 CakePHP 的其它插件。CakePHP 的所有发行版
 本可从 `GitHub tags <https://github.com/cakephp/cakephp/tags>`_ 获得。
 
@@ -81,11 +81,11 @@ CakePHP 的很多不同操作都要使用 ``app/tmp`` 目录，比如模型描�
 ============
 
 开发安装方式是安装 CakePHP 最快的方法。本例将帮助你安装一个 CakePHP 应用程序并使
-它的网址为 http://www.example.com/cake\_2\_0/。假定文档根目录设置在 
+它的网址为 http://www.example.com/cake\_2\_0/。假定文档根目录设置在
 ``/var/www/html`` 目录。
 
 把 CakePHP 压缩包的内容解压到 ``/var/www/html`` 目录下。现在在文档根目录下已经有
-了一个以你下载的版本号命名的子文件夹(例如 cake\_2.0.0)。将该文件夹更名为 
+了一个以你下载的版本号命名的子文件夹(例如 cake\_2.0.0)。将该文件夹更名为
 cake\_2\_0。开发安装方式的目录结构将如下所示::
 
     /var/www/html/
@@ -98,7 +98,7 @@ cake\_2\_0。开发安装方式的目录结构将如下所示::
             index.php
             README
 
-如果 web 服务器配置正确，就可以通过 http://www.example.com/cake\_2\_0/ 访问你的 
+如果 web 服务器配置正确，就可以通过 http://www.example.com/cake\_2\_0/ 访问你的
 CakePHP 应用程序。
 
 多个应用程序使用同一份 CakePHP 拷贝
@@ -111,9 +111,9 @@ CakePHP 应用程序。
     git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
 这会克隆 CakePHP 到 ``/home/mark/projects`` 目录下。如果不想使用 git，你可以下载
-一个 zip 包，以下的步骤是相同的。接下来，你必须找到并修改 ``php.ini`` 文件。在 
-\*nix 系统中，这通常位于 ``/etc/php.ini`` ，不过，使用 ``php -i`` 并寻找 
-'Loaded Configuration File'，你就可以找到(该文件)实际的位置。一旦找到正确的 ini 
+一个 zip 包，以下的步骤是相同的。接下来，你必须找到并修改 ``php.ini`` 文件。在
+\*nix 系统中，这通常位于 ``/etc/php.ini`` ，不过，使用 ``php -i`` 并寻找
+'Loaded Configuration File'，你就可以找到(该文件)实际的位置。一旦找到正确的 ini
 文件，修改 ``include_path`` 设置使其包含 ``/home/mark/projects/cakephp/lib`` 。例
 如::
 
@@ -130,12 +130,12 @@ CakePHP 应用程序。
 生产安装方式
 ============
 
-生产安装方式是更加灵活的配置 CakePHP 的方式。使用这种方法可以使整个域看起来象一个 
-CakePHP 应用程序。本例将指导你在文件系统的任何位置安装 CakePHP，并可以通过 
-http://www.example.com 访问。注意这种安装方式可能需要你有能够改变 Apache 服务器的 
+生产安装方式是更加灵活的配置 CakePHP 的方式。使用这种方法可以使整个域看起来象一个
+CakePHP 应用程序。本例将指导你在文件系统的任何位置安装 CakePHP，并可以通过
+http://www.example.com 访问。注意这种安装方式可能需要你有能够改变 Apache 服务器的
 ``DocumentRoot`` 的权限。
 
-将 CakePHP 压缩包的内容解压到你选择的任意目录。假定你选择将 CakePHP 安装在 
+将 CakePHP 压缩包的内容解压到你选择的任意目录。假定你选择将 CakePHP 安装在
 /cake\_install 目录中。生产安装方式的文件系统看起来会象下面这样::
 
     /cake_install/
@@ -159,22 +159,16 @@ http://www.example.com 访问。注意这种安装方式可能需要你有能够
 高级安装方式和 URL 重写
 =======================================
 
-.. toctree::
-    :maxdepth: 1
-
-    installation/advanced-installation
-    installation/url-rewriting
-
 启动
 ==========
 
-好了，让我们将 CakePHP 运行起来。取决于所采用的设置，你应当将浏览器指向 
-http://example.com/ 或者 http://example.com/cake\_2\_0/。此时，你将会看到 
+好了，让我们将 CakePHP 运行起来。取决于所采用的设置，你应当将浏览器指向
+http://example.com/ 或者 http://example.com/cake\_2\_0/。此时，你将会看到
 CakePHP 的默认主页，和当前数据库连接状态的消息。
 
 恭喜！你已经可以 :doc:`创建你的第一个 CakePHP 应用程序 </getting-started>` 了。
 
-不能正常运行？如果你得到关于时区(*timezone*)的 PHP 错误，将 
+不能正常运行？如果你得到关于时区(*timezone*)的 PHP 错误，将
 ``app/Config/core.php`` 中下面这行代码注释掉::
 
    /**

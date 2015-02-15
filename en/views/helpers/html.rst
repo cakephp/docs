@@ -1,5 +1,5 @@
-HtmlHelper
-##########
+Html
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -756,7 +756,7 @@ add/replace::
 When loading files of templates, your file should look like::
 
     <?php
-    $config = [
+    return [
         'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
     ];
 

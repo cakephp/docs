@@ -12,7 +12,6 @@ Requirements
 
 - CakePHP 3.x supports PHP Version 5.4.16 and above.
 - CakePHP 3.x requires the mbstring extension.
-- CakePHP 3.x requires the mcrypt extension.
 - CakePHP 3.x requires the intl extension.
 
 .. warning::
@@ -169,12 +168,21 @@ Plugin
 Configure
 ---------
 
-The config reader classes have been renamed:
-
-- ``Cake\Configure\PhpReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
-- ``Cake\Configure\IniReader`` renamed to :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
-- ``Cake\Configure\ConfigReaderInterface`` renamed to :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
+- ``Cake\Configure\PhpReader`` renamed to
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
+- ``Cake\Configure\IniReader`` renamed to
+  :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
+- ``Cake\Configure\ConfigReaderInterface`` renamed to
+  :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
+- :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without
+  extension suffix as this can be derived from the engine. E.g. using PhpConfig
+  use ``app`` to load ``app.php``.
+- Setting a ``$config`` variable in PHP config file is deprecated.
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
+  file to return an array.
+- A new config engine :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` has
+  been added.
 
 Object
 ------
@@ -226,14 +234,14 @@ ConsoleInputArgument
 Shell / Task
 ============
 
-Shells and Tasks have been moved from ``Console/Command`` and ``Console/Command/Task``
-to ``Shell`` and ``Shell/Task``.
+Shells and Tasks have been moved from ``Console/Command`` and
+``Console/Command/Task`` to ``Shell`` and ``Shell/Task``.
 
 ApiShell Removed
 ----------------
 
-The ApiShell was removed as it didn't provide any benefit over the file source itself
-and the online documentation/`API <http://api.cakephp.org/>`_.
+The ApiShell was removed as it didn't provide any benefit over the file source
+itself and the online documentation/`API <http://api.cakephp.org/>`_.
 
 SchemaShell Removed
 -------------------
@@ -256,8 +264,9 @@ BakeShell / TemplateTask
 - Bake is no longer part of the core source and is superseded by
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
 - Bake templates have been moved under ``src/Template/Bake``.
-- The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote templating
-  logic, allowing php code to be treated as plain text.
+- The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
+  templating logic, allowing php code to be treated as plain text.
+- The ``bake view`` command has been renamed ``bake template``.
 
 Event
 =====
@@ -291,13 +300,13 @@ Log
   log levels.  You should use logging scopes to create custom log files or
   specific handling for different sections of your application. Using
   a non-standard log level will now throw an exception.
-* :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
-  add the ``log()`` method.
-* The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now forwarded
-  to the log engines' ``write()`` method in order to provide better context to
-  the engines.
+* :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your
+  classes to add the ``log()`` method.
+* The logging scope passed to :php:meth:`Cake\\Log\\Log::write()` is now
+  forwarded to the log engines' ``write()`` method in order to provide better
+  context to the engines.
 * Log engines are now required to implement ``Psr\Log\LogInterface`` instead of
-  Cake's own ``LogInterface``. In general, if you extended  :php:class:`Cake\\Log\\Engine\\BaseEngine`
+  Cake's own ``LogInterface``. In general, if you extended :php:class:`Cake\\Log\\Engine\\BaseEngine`
   you just need to rename the ``write()`` method to ``log()``.
 * :php:meth:`Cake\\Log\\Engine\\FileLog` now writes files in ``ROOT/logs`` instead of ``ROOT/tmp/logs``.
 
@@ -452,6 +461,8 @@ for using the session object.
   customize the cookie path.
 * A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
   to allow reading and deleting session data in a single step.
+* The default value of :php:meth:`Cake\\Network\\Session::clear()`'s argument ``$renew`` has been changed
+  from ``true`` to ``false``.
 
 Network\\Http
 =============
@@ -740,6 +751,10 @@ The following assertion methods have been deprecated and will be removed in the 
 
 Both method replacements also switched the argument order for a consistent assert method API
 with ``$expected`` as first argument.
+
+The following assertion methods have been added:
+
+- ``assertNotWithinRange()`` as counter part to ``assertWithinRange()``
 
 
 View
@@ -1084,9 +1099,9 @@ the ``I18n`` class::
 
 - The methods below have been moved:
 
-    - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
-    - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
-    - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
+    - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\Text::utf8()``
+    - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\Text::ascii()``
+    - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\Text::isMultibyte()``
 
 - Since CakePHP now requires the mbstring extension, the
   ``Multibyte`` class has been removed.
@@ -1183,18 +1198,28 @@ Security
 --------
 
 - ``Security::cipher()`` has been removed. It is insecure and promoted bad
-  cryptographic practices. You should use :php:meth:`Security::rijndael()`
+  cryptographic practices. You should use :php:meth:`Security::encrypt()`
   instead.
 - The Configure value ``Security.cipherSeed`` is no longer required. With the
   removal of ``Security::cipher()`` it serves no use.
 - Backwards compatibility in :php:meth:`Cake\\Utility\\Security::rijndael()` for values encrypted prior
-  to CakePHP 2.3.1 has been removed. You should re-encrypt values using a recent
-  version of CakePHP 2.x before migrating.
+  to CakePHP 2.3.1 has been removed. You should re-encrypt values using
+  ``Security::encrypt()`` and a recent version of CakePHP 2.x before migrating.
 - The ability to generate a blowfish hash has been removed. You can no longer use type
   "blowfish" for ``Security::hash()``. One should just use PHP's `password_hash()`
   and `password_verify()` to generate and verify blowfish hashes. The compability
   library `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   which is installed along with CakePHP provides these functions for PHP < 5.5.
+- OpenSSL is now used over mcrypt when encrypting/decrypting data. This change
+  provides better performance and future proofs CakePHP against distros dropping
+  support for mcrypt.
+- ``Security::rijndael()`` is deprecated and only available when using mcrypt.
+
+.. warning::
+
+    Data encrypted with Security::encrypt() in previous versions is not
+    compatible with the openssl implementation. You should :ref:`set the
+    implementation to mcrypt <force-mcrypt>` when upgrading.
 
 Time
 ----
@@ -1238,7 +1263,7 @@ class.
 - ``CakeNumber`` has been renamed to :php:class:`Cake\\I18n\\Number`.
 - :php:meth:`Number::format()` now requires ``$options`` to be an array.
 - :php:meth:`Number::addFormat()` was removed.
-- ``Number::fromReadableSize()`` has been moved to :php:meth:`Cake\\Utility\\String::parseFileSize()`.
+- ``Number::fromReadableSize()`` has been moved to :php:meth:`Cake\\Utility\\Text::parseFileSize()`.
 
 Validation
 ----------

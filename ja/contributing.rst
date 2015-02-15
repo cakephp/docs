@@ -11,4 +11,10 @@ CakePHPの貢献できる方法は数多くあります。
     contributing/tickets
     contributing/code
     contributing/cakephp-coding-conventions
+    contributing/backwards-compatibility
 
+
+
+.. meta::
+    :title lang=ja: Contributing
+    :keywords lang=ja: coding conventions,documentation,maxdepth

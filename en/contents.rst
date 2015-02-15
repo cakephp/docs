@@ -36,6 +36,7 @@ Contents
     core-libraries/logging
     controllers/components/authentication
     controllers/components/pagination
+    core-libraries/form
     plugins
     development/rest
     security
@@ -51,11 +52,12 @@ Contents
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/string
+    core-libraries/text
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
     appendices
 
 .. todolist::

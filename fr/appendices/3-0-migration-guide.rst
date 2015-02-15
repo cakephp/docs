@@ -13,7 +13,6 @@ Pré-requis
 
 - CakePHP 3.x a besoin de la Version 5.4.16 ou supérieur de PHP.
 - CakePHP 3.x a besoin de l'extension mbstring.
-- CakePHP 3.x a besoin de l'extension mcrypt.
 - CakePHP 3.x a besoin de l'extension intl.
 
 .. warning::
@@ -184,8 +183,6 @@ Plugin
 Configure
 ---------
 
-Les classes de lecteur de configuration ont été renommées:
-
 - ``Cake\Configure\PhpReader`` renommé en
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
 - ``Cake\Configure\IniReader`` renommé en
@@ -193,6 +190,14 @@ Les classes de lecteur de configuration ont été renommées:
 - ``Cake\Configure\ConfigReaderInterface`` renommé en
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` a été ajoutée.
+- :php:meth:`Cake\\Core\\Configure::load()` attend maintenant un suffix du nom
+  du fichier sans extension puisque celui-ci peut venir d'un moteur. Par
+  exemple, l'utilisation de PhpConfig utilise ``app`` pour charger ``app.php``.
+- Définir une variable ``$config`` dans un fichier PHP de config est déprécié.
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` attend maintenant le
+  fichier de config pour retourner un tableau.
+- Un nouveau moteur de config
+  :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` a été ajouté.
 
 Object
 ------
@@ -282,6 +287,7 @@ BakeShell / TemplateTask
 - Les templates de bake ont été déplacés vers ``src/Template/Bake``.
 - La syntaxe des templates Bake utilise maintenant des balises de type erb
   (``<% %>``) pour désigner le templating.
+- La commande ``bake view`` a été renommée ``bake template``.
 
 Event
 =====
@@ -505,6 +511,8 @@ La classe session n'est plus statique, à la place, la session est accessible
   l'application plutôt que "/".
   De plus, une nouvelle variable de configuration ``Session.cookiePath`` a été
   ajoutée pour personnaliser facilement le chemin du cookie.
+* Une nouvelle méthode :php:meth:`Cake\\Network\\Session::consume()` a été ajoutée
+  pour permettre de lire et supprimer les données de session en une seule étape.
 
 Network\\Http
 =============
@@ -818,6 +826,9 @@ le futur:
 Les deux méthodes de remplacement changent aussi l'ordre des arguments pour
 avoir une méthode d'API assert cohérente avec ``$expected`` en premier argument.
 
+Les méthodes d'assertion suivantes ont été ajoutées:
+
+- ``assertNotWithinRange()`` comme contre partie de ``assertWithinRange()``
 
 View
 ====
@@ -1201,10 +1212,10 @@ pouvez utiliser la classe ``I18n``::
 
 - Les méthodes ci-dessous ont été déplacées:
 
-  - De ``Cake\I18n\Multibyte::utf8()`` vers ``Cake\Utility\String::utf8()``
-  - De ``Cake\I18n\Multibyte::ascii()`` vers ``Cake\Utility\String::ascii()``
+  - De ``Cake\I18n\Multibyte::utf8()`` vers ``Cake\Utility\Text::utf8()``
+  - De ``Cake\I18n\Multibyte::ascii()`` vers ``Cake\Utility\Text::ascii()``
   - De ``Cake\I18n\Multibyte::checkMultibyte()`` vers
-    ``Cake\Utility\String::isMultibyte()``
+    ``Cake\Utility\Text::isMultibyte()``
 
 - Puisque l'extension mbstring est maintenant nécessaire, la classe
   ``Multibyte`` a été retirée.
@@ -1313,24 +1324,34 @@ Security
 
 - ``Security::cipher()`` a été retirée. Elle est peu sûre et favorise de
   mauvaises pratiques en cryptographie. Vous devrez utiliser
-  :php:meth:`Security::rijndael()` à la place.
+  :php:meth:`Security::encrypt()` à la place.
 - La valeur de configuration ``Security.cipherSeed`` n'est plus nécessaire.
   Avec le retrait de ``Security::cipher()`` elle n'est plus utilisée.
 - La rétrocompatibilité de :php:meth:`Cake\\Utility\\Security::rijndael()` pour
-  les valeurs cryptées avant CakePHP 2.3.1 a été retirée. Vous devrez re-crypter
-  les valeurs en utilisant une version plus récente de CakePHP 2.x avant
-  migration.
+  les valeurs cryptées avant CakePHP 2.3.1 a été retirée. Vous devrez rechiffrer
+  les valeurs en utilisant ``Security::encrypt()`` et une version plus récente
+  de CakePHP 2.x avant migration.
 - La capacité de générer blowfish a été retirée. Vous ne pouvez plus utiliser le
   type "blowfish" pour ``Security::hash()``. Vous devrez utiliser uniquement
   le `password_hash()` de PHP et `password_verify()` pour générer et vérifier
   les hashs de blowfish. La librairie compatible
   `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   qui est installée avec CakePHP fournit ces fonctions pour PHP < 5.5.
+- OpenSSL is now used over mcrypt when encrypting/decrypting data. This change
+  provides better performance and future proofs CakePHP against distros dropping
+  support for mcrypt.
+- ``Security::rijndael()`` is deprecated and only available when using mcrypt.
+
+.. warning::
+
+    Data encrypted with Security::encrypt() in previous versions is not
+    compatible with the openssl implementation. You should :ref:`set the
+    implementation to mcrypt <force-mcrypt>` when upgrading.
 
 Time
 ----
 
-- ``CakeTime`` a été renommée en :php:class:`Cake\\Utility\\Time`.
+- ``CakeTime`` a été renommée en :php:class:`Cake\\I18n\\Time`.
 - ``Time::__set()`` et - ``Time::__get()`` ont été retirées. Celles-ci étaient
   des méthodes magiques setter/getter pour une rétrocompatibilité.
 - ``CakeTime::serverOffset()`` a été retirée. Il incitait à des pratiques de
@@ -1374,7 +1395,7 @@ Number a été réécrite pour utiliser en interne la classe ``NumberFormatter``
   tableau.
 - :php:meth:`Number::addFormat()` a été retirée.
 - ``Number::fromReadableSize()`` a été déplacée
-  vers :php:meth:`Cake\\Utility\\String::parseFileSize()`.
+  vers :php:meth:`Cake\\Utility\\Text:parseFileSize()`.
 
 Validation
 ----------

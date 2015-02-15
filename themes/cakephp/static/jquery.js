@@ -926,7 +926,8 @@ if ( document.addEventListener ) {
 }
 
 // The DOM ready check for Internet Explorer
-function doScrollCheck() {
+function doScrollCheck()
+{
 	if ( jQuery.isReady ) {
 		return;
 	}
@@ -1686,7 +1687,8 @@ jQuery.fn.extend({
 	}
 });
 
-function dataAttr( elem, key, data ) {
+function dataAttr( elem, key, data )
+{
 	// If nothing was found internally, try to fetch any
 	// data from the HTML5 data-* attribute
 	if ( data === undefined && elem.nodeType === 1 ) {
@@ -1718,7 +1720,8 @@ function dataAttr( elem, key, data ) {
 // TODO: This is a hack for 1.5 ONLY to allow objects with a single toJSON
 // property to be considered empty objects; this property always exists in
 // order to make sure JSON.stringify does not expose internal metadata
-function isEmptyDataObject( obj ) {
+function isEmptyDataObject( obj )
+{
 	for ( var name in obj ) {
 		if ( name !== "toJSON" ) {
 			return false;
@@ -1731,7 +1734,8 @@ function isEmptyDataObject( obj ) {
 
 
 
-function handleQueueMarkDefer( elem, type, src ) {
+function handleQueueMarkDefer( elem, type, src )
+{
 	var deferDataKey = type + "defer",
 		queueDataKey = type + "queue",
 		markDataKey = type + "mark",
@@ -3130,10 +3134,12 @@ jQuery.Event = function( src, props ) {
 	this[ jQuery.expando ] = true;
 };
 
-function returnFalse() {
+function returnFalse()
+{
 	return false;
 }
-function returnTrue() {
+function returnTrue()
+{
 	return true;
 }
 
@@ -3375,7 +3381,8 @@ if ( !jQuery.support.changeBubbles ) {
 	changeFilters.focus = changeFilters.beforeactivate;
 }
 
-function trigger( type, elem, args ) {
+function trigger( type, elem, args )
+{
 	// Piggyback on a donor event to simulate a different one.
 	// Fake originalEvent to avoid donor's stopPropagation, but if the
 	// simulated event prevents default then we do the same on the donor.
@@ -3614,7 +3621,8 @@ jQuery.each(["live", "die"], function( i, name ) {
 	};
 });
 
-function liveHandler( event ) {
+function liveHandler( event )
+{
 	var stop, maxLevel, related, match, handleObj, elem, j, i, l, data, close, namespace, ret,
 		elems = [],
 		selectors = [],
@@ -3702,7 +3710,8 @@ function liveHandler( event ) {
 	return stop;
 }
 
-function liveConvert( type, selector ) {
+function liveConvert( type, selector )
+{
 	return (type && type !== "*" ? type + "." : "") + selector.replace(rperiod, "`").replace(rspaces, "&");
 }
 
@@ -5017,7 +5026,8 @@ if ( document.querySelectorAll ) {
 	div = null;
 })();
 
-function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
+function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML )
+{
 	for ( var i = 0, l = checkSet.length; i < l; i++ ) {
 		var elem = checkSet[i];
 
@@ -5050,7 +5060,8 @@ function dirNodeCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
 	}
 }
 
-function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
+function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML )
+{
 	for ( var i = 0, l = checkSet.length; i < l; i++ ) {
 		var elem = checkSet[i];
 
@@ -5325,7 +5336,8 @@ jQuery.fn.extend({
 
 // A painfully simple check to see if an element is disconnected
 // from a document (should be improved, where feasible).
-function isDisconnected( node ) {
+function isDisconnected( node )
+{
 	return !node || !node.parentNode || node.parentNode.nodeType === 11;
 }
 
@@ -5447,7 +5459,8 @@ jQuery.extend({
 });
 
 // Implement the identical functionality for filter and not
-function winnow( elements, qualifier, keep ) {
+function winnow( elements, qualifier, keep )
+{
 
 	// Can't pass null or undefined to indexOf in Firefox 4
 	// Set to 0 to skip string check
@@ -5827,14 +5840,16 @@ jQuery.fn.extend({
 	}
 });
 
-function root( elem, cur ) {
+function root( elem, cur )
+{
 	return jQuery.nodeName(elem, "table") ?
 		(elem.getElementsByTagName("tbody")[0] ||
 		elem.appendChild(elem.ownerDocument.createElement("tbody"))) :
 		elem;
 }
 
-function cloneCopyEvent( src, dest ) {
+function cloneCopyEvent( src, dest )
+{
 
 	if ( dest.nodeType !== 1 || !jQuery.hasData( src ) ) {
 		return;
@@ -5863,7 +5878,8 @@ function cloneCopyEvent( src, dest ) {
 	}
 }
 
-function cloneFixAttributes( src, dest ) {
+function cloneFixAttributes( src, dest )
+{
 	var nodeName;
 
 	// We do not need to do anything for non-Elements
@@ -5995,7 +6011,8 @@ jQuery.each({
 	};
 });
 
-function getAll( elem ) {
+function getAll( elem )
+{
 	if ( "getElementsByTagName" in elem ) {
 		return elem.getElementsByTagName( "*" );
 
@@ -6008,13 +6025,15 @@ function getAll( elem ) {
 }
 
 // Used in clean, fixes the defaultChecked property
-function fixDefaultChecked( elem ) {
+function fixDefaultChecked( elem )
+{
 	if ( elem.type === "checkbox" || elem.type === "radio" ) {
 		elem.defaultChecked = elem.checked;
 	}
 }
 // Finds all inputs and passes them to fixDefaultChecked
-function findInputs( elem ) {
+function findInputs( elem )
+{
 	if ( jQuery.nodeName( elem, "input" ) ) {
 		fixDefaultChecked( elem );
 	} else if ( "getElementsByTagName" in elem ) {
@@ -6230,7 +6249,8 @@ jQuery.extend({
 	}
 });
 
-function evalScript( i, elem ) {
+function evalScript( i, elem )
+{
 	if ( elem.src ) {
 		jQuery.ajax({
 			url: elem.src,
@@ -6557,7 +6577,8 @@ if ( document.documentElement.currentStyle ) {
 
 curCSS = getComputedStyle || currentStyle;
 
-function getWH( elem, name, extra ) {
+function getWH( elem, name, extra )
+{
 
 	// Start with offset property
 	var val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
@@ -6680,7 +6701,8 @@ try {
 ajaxLocParts = rurl.exec( ajaxLocation.toLowerCase() ) || [];
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
-function addToPrefiltersOrTransports( structure ) {
+function addToPrefiltersOrTransports( structure )
+{
 
 	// dataTypeExpression is optional and defaults to "*"
 	return function( dataTypeExpression, func ) {
@@ -7394,7 +7416,8 @@ jQuery.extend({
 	}
 });
 
-function buildParams( prefix, obj, traditional, add ) {
+function buildParams( prefix, obj, traditional, add )
+{
 	if ( jQuery.isArray( obj ) ) {
 		// Serialize array item.
 		jQuery.each( obj, function( i, v ) {
@@ -7444,7 +7467,8 @@ jQuery.extend({
  * - finds the right dataType (mediates between content-type and expected dataType)
  * - returns the corresponding response
  */
-function ajaxHandleResponses( s, jqXHR, responses ) {
+function ajaxHandleResponses( s, jqXHR, responses )
+{
 
 	var contents = s.contents,
 		dataTypes = s.dataTypes,
@@ -7509,7 +7533,8 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 }
 
 // Chain conversions given the request and the original response
-function ajaxConvert( s, response ) {
+function ajaxConvert( s, response )
+{
 
 	// Apply the dataFilter if provided
 	if ( s.dataFilter ) {
@@ -7775,13 +7800,15 @@ var // #5280: Internet Explorer will keep connections alive if we don't abort on
 	xhrCallbacks;
 
 // Functions to create xhrs
-function createStandardXHR() {
+function createStandardXHR()
+{
 	try {
 		return new window.XMLHttpRequest();
 	} catch( e ) {}
 }
 
-function createActiveXHR() {
+function createActiveXHR()
+{
 	try {
 		return new window.ActiveXObject( "Microsoft.XMLHTTP" );
 	} catch( e ) {}
@@ -8263,17 +8290,20 @@ jQuery.fn.extend({
 });
 
 // Animations created synchronously will run synchronously
-function createFxNow() {
+function createFxNow()
+{
 	setTimeout( clearFxNow, 0 );
 	return ( fxNow = jQuery.now() );
 }
 
-function clearFxNow() {
+function clearFxNow()
+{
 	fxNow = undefined;
 }
 
 // Generate parameters to create a standard animation
-function genFx( type, num ) {
+function genFx( type, num )
+{
 	var obj = {};
 
 	jQuery.each( fxAttrs.concat.apply([], fxAttrs.slice(0,num)), function() {
@@ -8552,7 +8582,8 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 }
 
 // Try to restore the default display value of an element
-function defaultDisplay( nodeName ) {
+function defaultDisplay( nodeName )
+{
 
 	if ( !elemdisplay[ nodeName ] ) {
 
@@ -8898,7 +8929,8 @@ jQuery.each( ["Left", "Top"], function( i, name ) {
 	};
 });
 
-function getWindow( elem ) {
+function getWindow( elem )
+{
 	return jQuery.isWindow( elem ) ?
 		elem :
 		elem.nodeType === 9 ?

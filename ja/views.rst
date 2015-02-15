@@ -7,7 +7,8 @@
 CakePHPでは下記の典型的な描画シナリオに対応するためのいくつかの組込みビュークラスを用意しています。:
 
 - XMLやJSONウェブサービスを作成する場合、:doc:`views/json-and-xml-views` を利用できます。
-- 保護されたファイルや動的に生成されたファイルを提供する場合、:doc:`views/media-view` を利用できます。
+- To serve protected files, or dynamically generated files, you can use
+  :ref:`cake-response-file`.
 - 複数テーマのビューを作成する場合、:doc:`views/themes` を利用できます。
 
 ビューテンプレート
@@ -304,8 +305,10 @@ fetchを使うとブロックが存在するかどうかによってブロック
 
 レイアウトのタイトルを設定するためには、コントローラにて ``$title_for_layout`` 変数を設定するのが一番簡単です。::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -318,7 +321,8 @@ fetchを使うとブロックが存在するかどうかによってブロック
 コントローラアクションの中かビューの :php:attr:`~View::$layout` プロパティを切り替えるだけで作成できます。::
 
     // コントローラから
-    public function admin_view() {
+    public function admin_view()
+    {
         // stuff
         $this->layout = 'admin';
     }
@@ -329,13 +333,16 @@ fetchを使うとブロックが存在するかどうかによってブロック
 例えば、私のサイトに小さな広告バナー枠があるとします。その場合、私は小さな広告枠が含まれる新しいレイアウトを作って、
 以下のように全コントローラのアクションで指定するかもしれません。::
 
-   class UsersController extends AppController {
-       public function view_active() {
+   class UsersController extends AppController
+   {
+       public function view_active()
+       {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function view_image() {
+       public function view_image()
+       {
            $this->layout = 'image';
            //output user image
        }
@@ -356,8 +363,10 @@ flashレイアウトは :php:meth:`Controller::flash()` メソッドのメッセ
 もし既存のプラグインでレイアウトを使いたい場合、 :term:`プラグイン記法` を使うことが出来ます。
 コンタクトプラグインからコンタクトのレイアウトを使う場合は以下のようになります。::
 
-    class UsersController extends AppController {
-        public function view_active() {
+    class UsersController extends AppController
+    {
+        public function view_active()
+        {
             $this->layout = 'Contacts.contact';
         }
     }
@@ -426,9 +435,11 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 
 これを実際確認するため、Postの例のコントローラに以下のようなコードを追加して下さい。::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         // ...
-        public function index() {
+        public function index()
+        {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
@@ -529,8 +540,10 @@ CakePHPのビュークラスのほとんどのコンポーネントと同様に�
     // in App/View/PdfView.php
 
     App::uses('View', 'View');
-    class PdfView extends View {
-        public function render($view = null, $layout = null) {
+    class PdfView extends View
+    {
+        public function render($view = null, $layout = null)
+        {
             // custom logic here.
         }
     }
@@ -582,7 +595,7 @@ renderメソッドを置き換えると、コンテンツがレンダリング�
     内部のスクリプトバッファにコンテンツを追加します。このバッファはレイアウトの中で ``$scripts_for_layout`` として利用されます。
     このメソッドはjavascriptやcssを直接レイアウトに追加する必要のあるヘルパーを作る時に役立ちます。
     レイアウトやレイアウトの中のエレメントから追加されたスクリプトは ``$scripts_for_layout`` には追加されないということを心に留めておいて下さい。
-    このメソッドはほとんどの場合、:doc:`/core-libraries/helpers/js` と :doc:`/core-libraries/helpers/html` ヘルパーのようなヘルパーの中から使われます。
+    このメソッドはほとんどの場合、:doc:`/views/helpers/js` と :doc:`/views/helpers/html` ヘルパーのようなヘルパーの中から使われます。
 
     .. deprecated:: 2.1
         代わりに :ref:`view-blocks` の機能を使って下さい。
@@ -657,14 +670,9 @@ renderメソッドを置き換えると、コンテンツがレンダリング�
 
     ビューファイルかレイアウトコンテンツのどちらかのビューから最後に描画されたコンテンツが含まれます。
 
-    .. deprecated:: 2.1
-        代わりに ``$view->Blocks->get('content');`` を使って下さい。
-
 .. php:attr:: Blocks
 
     :php:class:`ViewBlock` のインスタンスです。ビューの描画中にビューブロック機能を提供するために使われています。
-
-    .. versionadded:: 2.1
 
 More about Views
 ================
@@ -672,8 +680,8 @@ More about Views
 .. toctree::
     :maxdepth: 1
 
+    views/cells
     views/themes
-    views/media-view
     views/json-and-xml-views
     views/helpers
 

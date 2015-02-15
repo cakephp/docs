@@ -36,15 +36,17 @@ Licencia
 
 CakePHP está licenciado bajo la
 `Licencia MIT <http://www.opensource.org/licenses/mit-license.php>`_. Esto
-signigica que eres libre para modificar, distribuir y republicar el código fuente
-con la condición de que las notas de copyright queden intactas. También eres libre
-para incorporar CakePHP en cualquier aplicación comercial o de código cerrado.
+signigica que eres libre para modificar, distribuir y republicar el código
+fuente con la condición de que las notas de copyright queden intactas. También
+eres libre para incorporar CakePHP en cualquier aplicación comercial o de código
+cerrado.
 
 Instalando CakePHP
 ==================
 
-CakePHP utiliza `Composer <http://getcomposer.org>`_, una herramienta de manejo de
-dependicias para PHP 5.3+, como el método de instalación oficialmente soportado.
+CakePHP utiliza `Composer <http://getcomposer.org>`_, una herramienta de manejo
+de dependicias para PHP 5.3+, como el método de instalación oficialmente
+soportado.
 
 Primero, necesitas descargar e instalar Composer, si no lo has hecho ya.
 Si tienes instalado cURL, es tan fácil como correr esto en un terminal::
@@ -86,16 +88,17 @@ añadir las siguientes líneas al ``composer.json`` de tu aplicación::
         "cakephp/cakephp": "dev-<branch>"
     }
 
-Donde ``<branch>`` es el nombre del branch que quieres seguir. Cada vez que ejecutes
-``php composer.phar update`` recibirás las últimas actualizaciones del branch seleccionado.
+Donde ``<branch>`` es el nombre del branch que quieres seguir. Cada vez que
+ejecutes ``php composer.phar update`` recibirás las últimas actualizaciones del
+branch seleccionado.
 
 Permisos
 ========
 
 CakePHP utiliza el directorio ``tmp`` para varias operaciones. Descripciones de
-Modelos, el caché de las vistas y la información de la sesión son algunos ejemplos
-de lo anterior. El directorio ``logs`` es utilizado para para escribir ficheros
-de log por el motor de ``FileLog`` por defecto.
+Modelos, el caché de las vistas y la información de la sesión son algunos
+ejemplos de lo anterior. El directorio ``logs`` es utilizado para para escribir
+ficheros de log por el motor de ``FileLog`` por defecto.
 
 Asegúrate de que los directorios ``logs``, ``tmp`` y todos sus subdirectorios
 tengan permisos de escritura por el usuario del Servidor Web. La instalación
@@ -140,37 +143,40 @@ Para ello ejecuta desde el directorio ``src``::
 
     bin/cake server
 
-Por defecto, sin ningún argumento, esto colocará tu aplicación en ``http://localhost:8765/``.
+Por defecto, sin ningún argumento, esto colocará tu aplicación en
+``http://localhost:8765/``.
 
 Si tienes algún conflicto con ``localhost`` o ``port 8765``, puedes indicarle
-a la consola de CakePHP que corra el servidor de manera más específica utilizando
-los siguientes argumentos::
+a la consola de CakePHP que corra el servidor de manera más específica
+utilizando los siguientes argumentos::
 
     bin/cake server -H 192.168.13.37 -p 5673
 
 Esto colocará tu aplicación en ``http://192.168.13.37:5673/``.
 
-Eso es todo! Tu aplicación de CakePHP está corriendo perfectamente sin tener que haber
-configurado el servidor web manualmente.
+Eso es todo! Tu aplicación de CakePHP está corriendo perfectamente sin tener que
+haber configurado el servidor web manualmente.
 
 .. warning::
 
-    El servidor de desarrollo *nunca* debe ser utilizado en un ambiente de producción.
-    Se supone que esto es un servidor básico de desarrollo y nada más.
+    El servidor de desarrollo *nunca* debe ser utilizado en un ambiente de
+    producción. Se supone que esto es un servidor básico de desarrollo y nada
+    más.
 
 Producción
 ==========
 
-Una instalación de producción es una manera más flexible de montar una aplicación de
-CakePHP. Utilizando este método, podrás tener un dominio entero actuando como una
-sola aplicación de CakePHP. Este ejemplo te ayudará a instalar CakePHP donde quieras
-en tu sistema de ficheros y tenerlo disponible en ``http://www.example.com``. Toma
-en cuenta que esta instalación requiere que tengas los derechos de cambiar el
-directorio raíz (``DocumentRoot``) del servidor web Apache.
+Una instalación de producción es una manera más flexible de montar una
+aplicación de CakePHP. Utilizando este método, podrás tener un dominio entero
+actuando como una sola aplicación de CakePHP. Este ejemplo te ayudará a instalar
+CakePHP donde quieras en tu sistema de ficheros y tenerlo disponible en
+``http://www.example.com``. Toma en cuenta que esta instalación requiere que
+tengas los derechos de cambiar el directorio raíz (``DocumentRoot``) del
+servidor web Apache.
 
-Después de instalar tu aplicación utilizando cualquiera de los métodos mencionados
-en el directorio elegido - asumiremos que has escogido /cake_install - tu estructura
-de ficheros debe ser la siguiente::
+Después de instalar tu aplicación utilizando cualquiera de los métodos
+mencionados en el directorio elegido - asumiremos que has escogido /cake_install
+- tu estructura de ficheros debe ser la siguiente::
 
     /cake_install/
         bin/
@@ -203,11 +209,6 @@ URL Rewriting
 
 Si quieres utilizar URL rewriting, entra en la sección dedicada a ello:
 
-.. toctree::
-    :maxdepth: 1
-
-    installation/url-rewriting
-
 A rodar!
 ========
 
@@ -217,8 +218,8 @@ o http://localhost:8765/. En este punto, encontrás el home principal de
 CakePHP y un mensaje que te dice el status actual de tu conexión a la base
 de datos.
 
-Felicidades! Estás listo para :doc:`Crear tu primera aplicación de CakePHP </getting-started>`.
-
+Felicidades! Estás listo para
+:doc:`Crear tu primera aplicación de CakePHP </intro>`.
 
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org

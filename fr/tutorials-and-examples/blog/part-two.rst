@@ -22,8 +22,10 @@ collection des entities stockées dans une table spécifique et vont dans
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -59,7 +61,8 @@ articles. Nous placerons ce nouveau controller dans un fichier appelé
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
     }
 
 Maintenant, ajoutons une action à notre controller. Les actions représentent
@@ -73,9 +76,11 @@ ressembler à quelque chose comme ça::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             $articles = $this->Articles->find('all');
             $this->set(compact('articles'));
         }
@@ -196,13 +201,16 @@ tarder dans le Controller Articles::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
              $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Article invalide'));
             }
@@ -258,17 +266,21 @@ ArticlesController::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
-        public function initialize() {
+    class ArticlesController extends AppController
+    {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadComponent('Flash'); // Charge le FlashComponent
         }
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Article invalide'));
             }
@@ -278,9 +290,11 @@ ArticlesController::
             $this->set(compact('article'));
         }
 
-        public function add() {
-            $article = $this->Articles->newEntity($this->request->data);
+        public function add()
+        {
+            $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
                     return $this->redirect(['action' => 'index']);
@@ -402,9 +416,11 @@ ajustements::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             $validator
                 ->allowEmpty('title', false)
                 ->allowEmpty('body', false);
@@ -439,7 +455,8 @@ devrait ressembler::
 
     // src/Controller/ArticlesController.php
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Article invalide'));
         }
@@ -458,7 +475,7 @@ devrait ressembler::
     }
 
 Cette action s'assure d'abord que l'utilisateur a essayé d'accéder à un
-enregistrement existant. Si il n'y a pas de paramètre ``$id`` passé, ou si le
+enregistrement existant. S'il n'y a pas de paramètre ``$id`` passé, ou si le
 article n'existe pas, nous lançons une ``NotFoundException`` pour que le
 gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 
@@ -486,8 +503,8 @@ La vue d'édition devrait ressembler à quelque chose comme cela:
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec
 les messages d'erreur de validation nécessaires.
 
-CakePHP utilisera le résultat de ``$article->isNew()`` pour déterminer whether si
-``save()`` doit insérer un article, ou mettre à jour un article existant.
+CakePHP déterminera si un ``save()`` doit générer une insertion un article ou
+la mise à jour d'un article existant.
 
 Vous pouvez maintenant mettre à jour votre vue index avec des liens pour
 éditer des articles :
@@ -535,7 +552,8 @@ Articles (ArticlesController)::
 
     // src/Controller/ArticlesController.php
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->get($id);
@@ -667,9 +685,11 @@ nous n'avons pas souhaité couvrir ici pour simplifier les choses. Utilisez
 le reste de ce manuel comme un guide pour développer des applications plus
 riches en fonctionnalités.
 
-Maintenant que vous avez créé une application CakePHP basique, vous êtes prêt
-pour les choses sérieuses. Commencez votre propre projet et lisez le reste du
-:doc:`Cookbook </index>` et l'`API <http://api.cakephp.org>`_.
+Maintenant que vous avez créé une application CakePHP basique, vous pouvez soit
+continuer vers :doc:`/tutorials-and-examples/blog/part-three`, ou commencer
+votre propre projet. Vous pouvez aussi lire attentivement les
+:doc:`/topics` ou l'`API <http://api.cakephp.org/3.0>` pour en
+apprendre plus sur CakePHP.
 
 Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
 merci de regarder la page :doc:`/intro/where-to-get-help`

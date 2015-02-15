@@ -22,7 +22,7 @@ En interne, PaginatorHelper utilise une série simple de templates HTML pour
 générer les balises. Vous pouvez modifier ces templates pour personnaliser le
 HTML généré par PaginatorHelper.
 
-Templates utilise des placehoders de style ``{{var}}``. Il est important de ne
+Templates utilise des placeholders de style ``{{var}}``. Il est important de ne
 pas ajouter d'espaces autour du `{{}}` ou les remplacements ne fonctionneront
 pas.
 
@@ -36,7 +36,7 @@ votre code DRY::
 
     // Dans un controller.
     public $helpers = [
-        'Paginator' => ['templates' => 'paginator-templates.php']
+        'Paginator' => ['templates' => 'paginator-templates']
     ];
 
 Cela va charger le fichier qui se trouve dans
@@ -46,13 +46,13 @@ les templates à partir d'un plugin en utilisant :term:`syntaxe de plugin`::
 
     // Dans un controller.
     public $helpers = [
-        'Paginator' => ['templates' => 'MyPlugin.paginator-templates.php']
+        'Paginator' => ['templates' => 'MyPlugin.paginator-templates']
     ];
 
 Si vos templates sont dans l'application principale ou dans un plugin, vos
 fichiers de templates devraient ressembler à ceci::
 
-    $config = [
+    return [
         'number' => '<a href="{{url}}">{{text}}</a>',
     ];
 
@@ -270,7 +270,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
             </a>
         </li>
 
-    Si il n'y avait pas de page précédente vous obtenez:
+    S'il n'y avait pas de page précédente vous obtenez:
 
     .. code-block:: html
 

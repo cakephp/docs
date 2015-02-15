@@ -5,7 +5,8 @@
 
 テーマを使うためには、コントローラの中でテーマ名を指定して下さい。 ::
 
-    class ExampleController extends AppController {
+    class ExampleController extends AppController
+    {
         public $theme = 'Example';
     }
 
@@ -75,5 +76,5 @@ CakePHPによって使われている ``app/webroot`` のパスに一致する�
 
 
 .. meta::
-    :title lang=en: Themes
-    :keywords lang=en: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
+    :title lang=ja: Themes
+    :keywords lang=ja: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage

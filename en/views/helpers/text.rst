@@ -1,5 +1,5 @@
-TextHelper
-##########
+Text
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -77,9 +77,9 @@ Output::
     regarding our world-famous pastries and desserts.<p>
     <p>contact info@example.com</p>
 
-.. include:: /core-libraries/string.rst
-    :start-after: start-string
-    :end-before: end-string
+.. include:: /core-libraries/text.rst
+    :start-after: start-text
+    :end-before: end-text
 
 .. meta::
     :title lang=en: TextHelper

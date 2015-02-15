@@ -348,7 +348,7 @@ elements::
     $sumOfAges =  $collection->sumOf('age');
 
     $sumOfChildrenAges = $collection->sumOf(function ($person) {
-        return $preson->child->age;
+        return $person->child->age;
     });
 
     $sumOfDadAges = $collection->sumOf('dad.age');
@@ -388,7 +388,7 @@ properties or your own callback function to generate the groups dynamically::
     $commentsByUserId = $comments->groupBy('user.id');
 
     $classResults = $students->groupBy(function ($student) {
-        retrun $student->grade > 6 ? 'approved' : 'denied';
+        return $student->grade > 6 ? 'approved' : 'denied';
     });
 
 .. php:method:: countBy($callback)
@@ -398,7 +398,7 @@ using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
 should be already familiar to you::
 
     $classResults = $students->countBy(function ($student) {
-        retrun $student->grade > 6 ? 'approved' : 'denied';
+        return $student->grade > 6 ? 'approved' : 'denied';
     });
 
     // Result could look like this when converted to array:
@@ -500,13 +500,13 @@ Two parameters are required for this function. The first one is the property
 representing the item identifier. The second parameter is the name of the
 property representing the identifier for the parent item::
 
-    $items new Collection([
+    $collection = new Collection([
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
-        ['id' => 6, 'parent_id' => null], 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
     ]);
 
     $collection->nest('id', 'parent_id')->toArray();
@@ -515,17 +515,11 @@ property representing the identifier for the parent item::
         [
             'id' => 1,
             'parent_id' => null,
-            'name' => 'Bird',
+            'name' => 'Birds',
             'children' => [
-                [
-                    'id' => 2,
-                    'parent_id' => 1,
-                    'name' => 'Land Birds',
-                    'children' => [
-                        ['id' => 3, 'name' => 'Eagle', 'parent_id' => 2]
-                    ]
-                ],
-                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull',  'children' => []],
+                ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
+                ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
+                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
             ]
         ],
         [
@@ -793,7 +787,8 @@ The ``buffered()`` method is also useful for converting non-rewindable iterators
 into collections that can be iterated more than once::
 
     // In PHP 5.5+
-    public function results() {
+    public function results()
+    {
         ...
         foreach ($transientElements as $e) {
             yield $e;

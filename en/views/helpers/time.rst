@@ -1,5 +1,5 @@
-TimeHelper
-##########
+Time
+####
 
 .. php:namespace:: Cake\View\Helper
 

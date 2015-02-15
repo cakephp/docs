@@ -39,14 +39,16 @@ controller qu'ils existent. Chaque controller a une propriété
 disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez son nom
 au tableau ``$helpers`` du controller::
 
-    class BakeriesController extends AppController {
+    class BakeriesController extends AppController
+    {
         public $helpers = ['Form', 'Html', 'Time'];
     }
 
 L'ajout des helpers depuis les plugins utilise la :term:`syntaxe de plugin`
 utilisée partout ailleurs dans CakePHP::
 
-    class BakeriesController extends AppController {
+    class BakeriesController extends AppController
+    {
         public $helpers = ['Blog.Comment'];
     }
 
@@ -56,11 +58,14 @@ du controller. Ceci économise de la puissance de calcul pour les autres actions
 qui n'utilisent pas le helper, tout en permettant de conserver le controller
 mieux organisé::
 
-    class BakeriesController extends AppController {
-        public function bake() {
+    class BakeriesController extends AppController
+    {
+        public function bake()
+        {
             $this->helpers[] = 'Time';
         }
-        public function mix() {
+        public function mix()
+        {
             // Le Helper Time n'est pas chargé ici et n'est par conséquent
             // pas disponible
         }
@@ -71,7 +76,8 @@ son nom dans le tableau ``$helpers`` du fichier
 ``src/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas
 d'inclure les helpers par défaut Html et Form::
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         public $helpers = ['Form', 'Html', 'Time'];
     }
 
@@ -86,14 +92,17 @@ comportement du helper::
 
     use Cake\View\Helper;
 
-    class AwesomeHelper extends Helper {
-        public function __construct(View $view, $config = []) {
+    class AwesomeHelper extends Helper
+    {
+        public function __construct(View $view, $config = [])
+        {
             parent::__construct($view, $config);
             debug($config);
         }
     }
 
-    class AwesomeController extends AppController {
+    class AwesomeController extends AppController
+    {
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
@@ -106,7 +115,8 @@ toute configuration dont votre helper a besoin. Par exemple::
     use Cake\View\Helper;
     use Cake\View\StringTemplateTrait;
 
-    class AwesomeHelper extends Helper {
+    class AwesomeHelper extends Helper
+    {
 
         use StringTemplateTrait;
 
@@ -117,7 +127,8 @@ toute configuration dont votre helper a besoin. Par exemple::
             ],
         ];
 
-        public function __construct(View $view, $config = []) {
+        public function __construct(View $view, $config = [])
+        {
             parent::__construct($view, $config);
             $this->initStringTemplates();
         }
@@ -137,8 +148,10 @@ actions de votre controller. Si vous avez des options de configuration qui ne
 peuvent pas être inclues comme une partie de la classe de déclaration, vous
 pouvez les définir dans le callback beforeRender de votre controller::
 
-    class PostsController extends AppController {
-        public function beforeRender() {
+    class PostsController extends AppController
+    {
+        public function beforeRender()
+        {
             parent::beforeRender();
             $this->helpers['CustomStuff'] = $this->_getCustomStuffConfig();
         }
@@ -155,7 +168,8 @@ utile quand vous voulez remplacer ``$this->Html`` ou une autre référence du
 Helper habituel avec une implémentation personnalisée::
 
     // src/Controller/PostsController.php
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = [
             'Html' => [
                 'className' => 'MyHtml'
@@ -166,7 +180,8 @@ Helper habituel avec une implémentation personnalisée::
     // src/View/Helper/MyHtmlHelper.php
     use Cake\View\Helper\HtmlHelper;
 
-    class MyHtmlHelper extends HtmlHelper {
+    class MyHtmlHelper extends HtmlHelper
+    {
         // Ajout de code pour surcharger le HtmlHelper du cœur
     }
 
@@ -228,8 +243,10 @@ fichier de la classe PHP ressemblera à quelque chose comme ceci::
 
     use Cake\View\Helper;
 
-    class LinkHelper extends Helper {
-        public function makeEdit($title, $url) {
+    class LinkHelper extends Helper
+    {
+        public function makeEdit($title, $url)
+        {
             // La logique pour créer le lien spécialement formaté se place ici
         }
     }
@@ -248,10 +265,12 @@ feriez dans un controller::
 
     use Cake\View\Helper;
 
-    class LinkHelper extends Helper {
+    class LinkHelper extends Helper
+    {
         public $helpers = ['Html'];
 
-        public function makeEdit($title, $url) {
+        public function makeEdit($title, $url)
+        {
             // Utilise le Helper Html pour afficher the HTML helper to output
             // les données formatées:
 
@@ -271,7 +290,8 @@ Une fois que vous avez créé votre helper et l'avez placé dans
 ``src/View/Helper/``, vous serez capable de l'inclure dans vos controllers
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
-    class PostsController extends AppController {
+    class PostsController extends AppController
+    {
         public $helpers = ['Link'];
     }
 

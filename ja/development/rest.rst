@@ -62,11 +62,13 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
 基本的なコントローラのサンプルは下記のようになります ::
 
     // Controller/RecipesController.php
-    class RecipesController extends AppController {
+    class RecipesController extends AppController
+    {
 
         public $components = array('RequestHandler');
 
-        public function index() {
+        public function index()
+        {
             $recipes = $this->Recipe->find('all');
             $this->set(array(
                 'recipes' => $recipes,
@@ -74,7 +76,8 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
             ));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             $recipe = $this->Recipe->findById($id);
             $this->set(array(
                 'recipe' => $recipe,
@@ -82,7 +85,8 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
             ));
         }
 
-        public function edit($id) {
+        public function edit($id)
+        {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
                 $message = 'Saved';
@@ -95,7 +99,8 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
             ));
         }
 
-        public function delete($id) {
+        public function delete($id)
+        {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
             } else {
@@ -226,4 +231,4 @@ HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可
 
 .. meta::
     :title lang=ja: REST
-    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :keywords lang=ja: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api

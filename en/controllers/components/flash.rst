@@ -1,5 +1,5 @@
-FlashComponent
-##############
+Flash
+#####
 
 .. php:namespace:: Cake\Controller\Component
 
@@ -60,6 +60,16 @@ An example of using these options::
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
+
+Note that the parameter ``element`` will be always overridden while using ``__call()``.
+In order to retrieve a specific element from a plugin, you should set the ``plugin`` parameter.
+For example::
+
+    // In your Controller
+    $this->Flash->warning('My message', ['plugin' => 'PluginName']);
+
+The code above will use the warning.ctp element under ``plugins/PluginName/src/Template/Element/Flash``
+for rendering the flash message.
 
 .. note::
     By default, CakePHP does not escape the HTML in flash messages. If you

@@ -28,24 +28,23 @@ tasks. You should see something like::
 
     Available bake commands:
 
-    - all
-    - fixture
-    - test
-    - view
+     - all
     - behavior
-    - helper
-    - shell
-    - controller
-    - model
-    - plugin
-    - project
     - cell
     - component
+    - controller
+    - fixture
+    - helper
+    - model
+    - plugin
+    - shell
+    - template
+    - test
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
 You can get more information on what each task does, and what options are
-availble using the ``--help`` option::
+available using the ``--help`` option::
 
     $ bin/cake bake controller --help
 
@@ -86,15 +85,16 @@ availble using the ``--help`` option::
     name  Name of the controller to bake. Can use Plugin.name to bake
         controllers into plugins. (optional)
 
-Bake themes
+Bake Themes
 ===========
 
 The theme option is common to all bake commands, and allows changing the bake
-template files used when baking. Any loaded plugin which contains a
-``src/Template/Bake`` folder is automatically detected by bake as an available
-bake theme, and will be displayed in the help output. For example, should a
-plugin exist named ``Special`` implementing a bake theme the help output would
-show::
+template files used when baking. To generate your own templates, you must create
+a plugin and then copy the contents of ``plugins/Bake/src/Template/Bake``.
+Any loaded plugin which contains a ``src/Template/Bake`` folder is automatically
+detected by bake as an available bake theme, and will be displayed in the help
+output. For example, should a plugin exist named ``Special`` implementing a bake
+theme the help output would show::
 
     --theme, -t       The theme to use when baking code. (choices: Special)
 

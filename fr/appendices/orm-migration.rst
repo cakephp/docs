@@ -56,7 +56,7 @@ séparé en plus de couches:
 * ``Cake\ORM\Behavior`` - La classe de base pour les behaviors, qui agit de
   façon très similaire aux behaviors dans les versions précédentes de CakePHP.
 * ``Cake\ORM\Query`` - Un générateur de requêtes simple basé sur les objets qui
-  remplace les tableaux profondément imbriqués utilisés dans les versions 
+  remplace les tableaux profondément imbriqués utilisés dans les versions
   précédentes de CakePHP.
 * ``Cake\ORM\ResultSet`` - Une collection de résultats qui donne des outils
   puissants pour manipuler les données dans l'ensemble.
@@ -207,11 +207,13 @@ données qui n'est en fait pas nécessaire::
     // Pas de requêtes faites dans cet exemple!
     $results = $articles->find()
         ->order(['title' => 'DESC'])
-        ->extract('title');
+        ->formatResults(function ($results) {
+            return $results->extract('title');
+        });
 
 Les requêtes peuvent être vues comme un objet de résultat, essayant d'itérer la
 requête, appelant ``toArray`` ou toute méthode héritée de
-:ref:`collection<collection-objects>`, va faire que la requête sera exécutée
+:ref:`collection <collection-objects>`, va faire que la requête sera exécutée
 et les résultats vous seront retournés.
 
 La plus grande différence que vous trouverez quand vous venez de CakePHP 2.x est
@@ -234,8 +236,13 @@ cela et il s'agit de la méthode ``first``::
         'conditions' => ['author_id' => 1]
     ])->first();
 
+    // Peut aussi être écrit
+    $article = $this->Articles->find()
+        ->where(['author_id' => 1])
+        ->first();
+
 Si vous chargez un enregistrement unique par sa clé primaire, il serait mieux
-de juste appeler ``get``::
+de juste appeler ``get()``::
 
     $article = $this->Articles->get(10);
 
@@ -248,13 +255,16 @@ méthodes find personnalisées dans vos models, elles auront besoin de quelques
 modifications. C'est de cette façon que vous créez les méthodes finder
 personnalisées dans 3.0::
 
-    class ArticlesTable {
+    class ArticlesTable
+    {
 
-        public function findPopular(Query $query, array $options) {
+        public function findPopular(Query $query, array $options)
+        {
             return $query->where(['times_viewed' > 1000]);
         }
 
-        public function findFavorites(Query $query, array $options) {
+        public function findFavorites(Query $query, array $options)
+        {
             $for = $options['for'];
             return $query->matching('Users.Favorites', function ($q) use ($for) {
                 return $q->where(['Favorites.user_id' => $for]);
@@ -276,7 +286,8 @@ pouvez migrer ce code d'une des façons suivantes:
 
 Dans le 3ème cas ci-dessus, votre code ressemblerait à::
 
-    public function findAll(Query $query, array $options) {
+    public function findAll(Query $query, array $options)
+    {
         $mapper = function ($row, $key, $mr) {
             // Votre logique afterFind
         };
@@ -317,11 +328,11 @@ le behavior est attaché.
 Recursive et ContainableBehavior Retirés.
 -----------------------------------------
 
-Dans les précédentes versions de CakePHP que vous deviez utiliser
+Dans les versions précédentes de CakePHP, vous deviez utiliser
 ``recursive``, ``bindModel()``, ``unbindModel()`` et ``ContainableBehavior``
-pour réduire les données chargées pour l'ensemble des associations pour
-lequelles vous etiez interessées. Une tactique commune pour gérer les
-associations était de définir ``recursive`` à ``-1`` et utiliser Containable
+pour réduire les données chargées pour l'ensemble des associations que
+vous souhaitiez. Une tactique habituelle pour gérer les
+associations était de définir ``recursive`` à ``-1`` et d'utiliser Containable
 pour gérer toutes les associations. Dans CakePHP 3.0 ContainableBehavior,
 recursive, bindModel, et unbindModel ont été retirées. A la place, la méthode
 ``contain()`` a été favorisée pour être une fonctionnalité du cœur du
@@ -340,14 +351,14 @@ En chargeant seulement les données associées qui on été spécifiquement requ
 vous ne passez pas votre temps à vous battre avec l'ORM à essayer d'obtenir
 seulement les données que vous souhaitez.
 
-Pas d'Evenement afterFind ou de Champs Virtuels
------------------------------------------------
+Pas d'Event afterFind ou de Champs Virtuels
+-------------------------------------------
 
 Dans les versions précédentes de CakePHP, vous aviez besoin de rendre
 extensive l'utilisation du callback ``afterFind`` et des champs virtuels afin
 de créer des propriétés de données générées. Ces fonctionnalités ont été
 retirées dans 3.0. Du fait de la façon dont ResultSets générent itérativement
-les entities, le callback ``afterFind`` n'était pas possible. 
+les entities, le callback ``afterFind`` n'était pas possible.
 afterFind et les champs virtuels peuvent tous deux largement être remplacés par
 les propriétés virtuelles sur les entities. Par exemple si votre entité User
 a les deux colonnes first et last name, vous pouvez ajouter un accesseur pour
@@ -357,15 +368,17 @@ a les deux colonnes first et last name, vous pouvez ajouter un accesseur pour
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
-        public function getFullName() {
+    class User extends Entity
+    {
+        public function getFullName()
+        {
             return $this->first_name . '  ' $this->last_name;
         }
     }
 
 Une fois définie, vous pouvez accéder à votre nouvelle propriété en utilisant
 ``$user->full_name``. L'utilisation des fonctionnalités :ref:`map-reduce`
-de l'ORM vous permettent de construire des données aggrégées à partir de vos
+de l'ORM vous permettent de construire des données agrégées à partir de vos
 résultats, ce qui était souvent un autre cas d'utilisation callback ``afterFind``.
 
 Alors que les champs virtuels ne sont plus une fonctionnalité de l'ORM,
@@ -378,8 +391,10 @@ les mêmes résultats que les champs virtuels, cela donne::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
-        public function findAverage(Query $query, array $options = []) {
+    class ReviewsTable extends Table
+    {
+        public function findAverage(Query $query, array $options = [])
+        {
             $avg = $query->func()->avg('rating');
             $query->select(['average' => $avg]);
             return $query;
@@ -389,7 +404,7 @@ les mêmes résultats que les champs virtuels, cela donne::
 Les Associations Ne sont Plus Définies en Propriétés
 ----------------------------------------------------
 
-Dans les précédentes versions de CakePHP, les diverses associations que vos
+Dans les versions précédentes de CakePHP, les diverses associations que vos
 models avaient, ont été définies dans les propriétés comme ``$belongsTo`` et
 ``$hasMany``. Dans CakePHP 3.0, les associations sont créées avec les méthodes.
 L'utilisation de méthodes vous permet de mettre de côté plusieurs définitions
@@ -403,9 +418,11 @@ manipulation des associations::
     use Cake\ORM\Table;
     use Cake\ORM\Query;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Movies');
             $this->hasOne('Rating');
             $this->hasMany('Comments')
@@ -444,23 +461,20 @@ règles::
 
     use Cake\ORM\Table;
     use Cake\ORM\Query;
+    use Cake\Validation\Validator;
 
-    class ReviewsTable extends Table {
+    class ReviewsTable extends Table
+    {
 
-        public function validationDefault($validator) {
+        public function validationDefault(Validatior $validator)
+        {
             $validator->requirePresence('body')
                 ->add('body', 'length', [
                     'rule' => ['minLength', 20],
                     'message' => 'Reviews must be 20 characters or more',
                 ])
-                ->add('user_id', 'exists', [
-                    'rule' => function ($value, $context) {
-                        $q = $this->association('Users')
-                            ->find()
-                            ->where(['id' => $value]);
-                        return $q->count() === 1;
-                    },
-                    'message' => 'A valid user is required.'
+                ->add('user_id', 'numeric', [
+                    'rule' => 'numeric'
                 ]);
             return $validator;
         }
@@ -468,10 +482,55 @@ règles::
     }
 
 Vous pouvez définir autant de méthodes de validation que vous souhaitez. Chaque
-méthode devrait être préfixée avec ``validation`` et accepte un argument
-``$validator``. Vous pouvez ensuite utiliser vos validateurs lors de la
-sauvegarde en utilisant l'option ``validate``. Regardez la
-documentation sur :ref:`saving-entities` pour plus d'informations.
+méthode doit être préfixée avec ``validation`` et accepte un argument
+``$validator``.
+
+Dans les versions précédentes de CakePHP, la 'validation' et les callbacks liés
+couvraient quelques utilisations liées mais différentes. Dans CakePHP 3.0, ce
+qui était avant appelé validation est maintenant séparé en deux concepts:
+
+#. Validation du type de données et du format.
+#. Vérification des règles métiers.
+
+La validation est maintenant appliquée avant que les entities de l'ORM
+ne soient créées à partir des données de request. Cette étape permet de
+vous assurer que les données correpondent au type de données, au format et
+à la forme de base que votre application attend. Vous pouvez utiliser
+vos validateurs quand vous convertissez en entities les données de request en
+utilisant l'option ``validate``. Consultez la documentation
+:ref:`converting-request-data` pour plus d'informations.
+
+:ref:`Les règles d'Application <application-rules>` vous permettent de définir
+les règles qui s'assurent que vos règles d'application, l'état et les flux de
+travail sont remplis. Les règles sont définies dans la méthode ``buildRules()``
+de votre Table. Les behaviors peuvent ajouter des règles en utilisant la méthode
+``buildRules()``. Un exemple de méthode ``buildRules`` pour notre table
+articles pourrait être::
+
+    // Dans src/Model/Table/ArticlesTable.php
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\ORM\RulesChecker;
+
+    class Articles extends Table
+    {
+        public function buildRules(RulesChecker $rules)
+        {
+            $rules->add($rules->existsIn('user_id', 'Users'));
+            $rules->add(
+                function ($article, $options) {
+                    return ($article->published && empty($article->reviewer));
+                },
+                'isReviewed',
+                [
+                    'errorField' => 'published',
+                    'message' => 'Articles must be reviewed before publishing.'
+                ]
+            );
+            return $rules;
+        }
+    }
 
 Identifier Quoting Désactivé par Défaut
 ---------------------------------------
@@ -535,11 +594,13 @@ doivent définir un constructeur::
 
     use Cake\ORM\Behavior;
 
-    class SluggableBehavior extends Behavior {
+    class SluggableBehavior extends Behavior
+    {
 
         protected $_table;
 
-        public function __construct(Table $table, array $config) {
+        public function __construct(Table $table, array $config)
+        {
             parent::__construct($table, $config);
             $this->_table = $table;
         }
@@ -560,7 +621,8 @@ changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
 Le behavior qui fournit la méthode ``slug`` va recevoir seulement 1 argument,
 et ses méthodes signature doivent ressembler à ceci::
 
-    public function slug($value) {
+    public function slug($value)
+    {
         // code ici.
     }
 
@@ -571,7 +633,8 @@ Les callbacks de Behavior ont été unifiés avec les autres méthodes listener.
 Au lieu de leurs arguments précédents, ils attendent un objet event en premier
 argument::
 
-    public function beforeFind(Event $event, Query $query, array $options) {
+    public function beforeFind(Event $event, Query $query, array $options)
+    {
         // code.
     }
 

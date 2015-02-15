@@ -1,7 +1,7 @@
-TreeBehavior
-############
+Tree
+####
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TreeBehavior
 
@@ -42,8 +42,10 @@ A Quick Tour
 You enable the Tree behavior by adding it to the Table you want to store
 hierarchical data in::
 
-    class CategoriesTable extends Table {
-        public function initialize(array $config) {
+    class CategoriesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Tree');
         }
     }
@@ -139,13 +141,28 @@ Configuration
 If the default column names that are used by this behavior don't match your own
 schema, you can provide aliases for them::
 
-    public function initialize(array $config) {
+    public function initialize(array $config)
+    {
         $this->addBehavior('Tree', [
-            'parent' => 'ancestor_id', // Use this instead of parent_id,
+            'parent' => 'ancestor_id', // Use this instead of parent_id
             'left' => 'tree_left', // Use this instead of lft
             'right' => 'tree_right' // Use this instead of rght
         ]);
     }
+
+Node Level (Depth)
+==================
+
+Knowing the depth of tree nodes can be useful when you want to retrieve nodes
+only upto a certain level for e.g. when generating menus. You can use the
+``level`` option to specify the field that will save level of each node.
+
+    $this->addBehavior('Tree', [
+        'level' => 'level', // Defaults to null, i.e. no level saving
+    ]);
+
+If you don't want to cache the level using a db field you can use
+``TreeBehavior::getLevel()`` method to get level of a node.
 
 Scoping and Multi Trees
 =======================
@@ -154,9 +171,11 @@ Sometimes you want to persist more than one tree structure inside the same
 table, you can achieve that by using the 'scope' configuration. For example, in
 a locations table you may want to create one tree per country::
 
-    class LocationsTable extends Table {
+    class LocationsTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);

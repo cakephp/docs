@@ -96,10 +96,14 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // Convertir la requête en tableau va l'exécuter.
     $results = $query->toArray();
 
-Une fois que vous avez commencé une requête, vous pouvez utiliser l'interface
-:doc:`/orm/query-builder` pour construire des requêtes plus complexes, d'ajouter
-des conditions supplémentaires, des limites, ou d'inclure des associations
-en utilisant l'interface courante::
+.. note::
+
+    Une fois que vous avez commencé une requête, vous pouvez utiliser
+    l'interface :doc:`/orm/query-builder` pour construire des requêtes
+    plus complexes, d'ajouter des conditions supplémentaires, des limites,
+    ou d'inclure des associations en utilisant l'interface courante.
+
+.. code-block:: php
 
     // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')
@@ -128,7 +132,7 @@ La liste d'options supportées par find() sont:
 - ``fields`` limite les champs chargés dans l'entity. Charger seulement quelques
   champs peut faire que les entities se comportent de manière incorrecte.
 - ``group`` ajoute une clause GROUP BY à votre requête. C'est utile quand vous
-  utilisez les fonctions d'aggrégation.
+  utilisez les fonctions d'agrégation.
 - ``having`` ajoute une clause HAVING à votre requête.
 - ``join`` définit les jointures personnalisées supplémentaires.
 - ``order`` ordonne l'ensemble des résultats.
@@ -210,9 +214,11 @@ de votre table, alors que les valeurs seront le 'displayField' (champAAfficher)
 de la table. Vous pouvez utiliser la méthode ``displayField()`` sur un objet
 table pour configurer le champ à afficher sur une table::
 
-    class Articles extends Table {
+    class Articles extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->displayField('title');
         }
     }
@@ -302,9 +308,11 @@ des articles publiés, nous ferions ce qui suit::
     use Cake\ORM\Query;
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function findPublished(Query $query, array $options) {
+        public function findPublished(Query $query, array $options)
+        {
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true
@@ -319,7 +327,7 @@ des articles publiés, nous ferions ce qui suit::
     $query = $articles->find('published');
 
 Les méthodes finder peuvent modifier la requête comme ceci, ou utiliser
-``$options`` pour personnaliser l'opérarion finder avec la logique
+``$options`` pour personnaliser l'opération finder avec la logique
 d'application concernée. Vous pouvez aussi 'stack' les finders, vous
 permettant de faire des requêtes complexes sans efforts. En supposant que
 vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
@@ -494,7 +502,7 @@ pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...) // Full conditions for filtering
+                return $q->where(...); // Full conditions for filtering
             }
         ]
     ]);
@@ -539,7 +547,7 @@ déjà vous être familière::
     // Dans un controller ou une table de méthode.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
-            return $q->where(['Country.name' => 'Japan'])
+            return $q->where(['Countries.name' => 'Japan']);
         }
     );
 
@@ -547,7 +555,7 @@ déjà vous être familière::
     // en utilisant la variable passée
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
-        return $q->where(['username' => $username])
+        return $q->where(['username' => $username]);
     });
 
 .. note::
@@ -584,17 +592,28 @@ Les objets d'ensemble de résultat vont charger lazily les lignes à partir
 de la requête préparée underlying.
 Par défaut, les résultats seront buffered dans la mémoire vous permettant
 d'itérer un ensemble de résultats plusieurs fois, ou de mettre en cache et
-d'itérer les résultats. Si vous devez désactiver le buffering parce que vous
-travaillez sur un ensemble de données qui ne rentre pas dans la mémoire, vous
-pouvez désactiver le buffering sur la requête pour stream les résultats::
+d'itérer les résultats. Si vous devez travailler sur un ensemble de données qui
+ne rentre pas dans la mémoire, vous pouvez désactiver le buffering sur la
+requête pour stream les résultats::
 
     $query->bufferResults(false);
 
+Stopper le buffering nécessite quelques mises en garde:
+
+#. Vous ne pourrez plus itérer un ensemble de résultats plus d'une fois.
+#. Vous ne pourrez plus aussi itérer et mettre en cache les résultats.
+#. Le buffering ne peut pas être désactivé pour les requêtes qui chargent en
+   eager les associations hasMany ou belongsToMany, puisque ces types
+   d'association nécessitent le chargement en eager de tous les résultats
+   pour que les requêtes dépendantes puissent être générées. Cette
+   limitation n'est pas présente lorsque l'on utilise la stratégie ``subquery``
+   pour ces associations.
+
 .. warning::
 
-    Les résultats de streaming ne sont pas possibles quand vous utilisez
-    SQLite, ou avec les requêtes des associations hasMany ou belongsToMany
-    qui sont chargées en eager.
+    Les résultats de streaming alloueront toujours l'espace mémoire nécessaire
+    pour les résultats complets lorsque vous utilisez PostgreSQL et SQL Server.
+    Ceci est dû à des limitations dans PDO.
 
 Les ensembles de résultat vous permettent de mettre en cache/serializer ou
 d'encoder en JSON les résultats pour les résultats d'une API::

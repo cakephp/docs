@@ -16,16 +16,18 @@ la méthode delete de la table d'origine::
 
 Quand vous supprimez des entities, quelques actions se passent:
 
-1. L'événement ``Model.beforeDelete`` est déclenché. Si cet événement est
+1. Les :ref:`règles de suppression <application-rules>` seront appliquées. Si
+   les règles échouent, la suppression sera empêchée.
+2. L'événement ``Model.beforeDelete`` est déclenché. Si cet événement est
    arrêté, la suppression sera abandonnée et les résultats de l'événement seront
    retournés.
-2. L'entity sera supprimée.
-3. Toutes les associations dépendantes seront supprimées. Si les associations
+3. L'entity sera supprimée.
+4. Toutes les associations dépendantes seront supprimées. Si les associations
    sont supprimées en tant qu'entities, des événements supplémentaires seront
-   dispatched.
-4. Tout enregistrement de table jointe pour les associations BelongsToMany
-   seront retirées.
-5. L'événement ``Model.afterDelete`` sera déclenché.
+   dispatchés.
+5. Tout enregistrement de table jointe pour les associations BelongsToMany
+   sera retirées.
+6. L'événement ``Model.afterDelete`` sera déclenché.
 
 Par défaut, toutes les suppressions se passent dans une transaction. Vous
 pouvez désactiver la transaction avec l'option atomic::
@@ -67,7 +69,8 @@ efficace ou utile. Dans ces cas, il est plus performant d'utiliser une
 suppression en masse pour retirer plusieurs lignes en une fois::
 
     // Supprime tous les spams
-    function destroySpam() {
+    function destroySpam()
+    {
         return $this->deleteAll(['is_spam' => true]);
     }
 

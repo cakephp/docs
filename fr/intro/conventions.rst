@@ -30,18 +30,18 @@ un chemin URL en minuscules. Par exemple, ``ApplesController`` (qui serait
 défini dans le nom de fichier 'ApplesController.php') est accessible à
 l'adresse http://exemple.com/apples.
 
-Les controllers avec plusieurs mots *peuvent* être de forme 'inflecté' qui
+Les controllers avec plusieurs mots *peuvent* être de forme "inflecté" qui
 correspondent au nom du controller:
 
 *  /redApples
 *  /RedApples
-*  /Red\_apples
-*  /red\_apples
+*  /Red_apples
+*  /red_apples
 
 Pointeront tous vers l'index du controller RedApples. Cependant,
-la convention est que vos URLs soient en minuscules et avec des underscores,
-c'est pourquoi /red\_apples/go\_pick est la forme correcte pour
-accéder à l'action ``RedApplesController::go_pick``.
+la convention est que vos URLs soient en minuscules avec des tirets en utilisant
+la classe ``DashedRoute``, donc ``/red-apples/go-pick`` est la bonne forme
+pour accéder à l'action ``RedApplesController::goPick()``.
 
 Pour plus d'informations sur les URLs de CakePHP et la gestion des paramètres,
 allez voir :ref:`routes-configuration`.
@@ -114,10 +114,10 @@ Conventions des Views
 Les fichiers de template de view sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PeopleController cherchera un gabarit
-de view dans ``src/Template/People/soyez\_pret.ctp``.
+de view dans ``src/Template/People/soyez_pret.ctp``.
 
 Le schéma classique est
-``src/Template/Controller/nom\_de\_fonction\_avec\_underscore.ctp``.
+``src/Template/Controller/nom_de_fonction_avec_underscore.ctp``.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
@@ -125,7 +125,8 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
 -  Nom de la table de la base de données: "people"
--  Classe Table: "PeopleTable" se trouvant dans ``src/Model/Table/PeopleTable.php``
+-  Classe Table: "PeopleTable" se trouvant dans
+   ``src/Model/Table/PeopleTable.php``
 -  Classe Entity: "Person" se trouvant dans ``src/Model/Entity/Person.php``
 -  Classe Controller: "PeopleController" se trouvant dans
    ``src/Controller/PeopleController.php``
@@ -140,12 +141,11 @@ configurée par rien d'autre que la création des classes et des fichiers dont
 vous aviez besoin de toute façon.
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez
-essayer de dérouler 
-:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/blog/blog>` pour
-voir comment les choses s'articulent.
+essayer de dérouler
+:doc:`le tutoriel du Blog CakePHP </tutorials-and-examples/bookmarks/intro>`
+pour voir comment les choses s'articulent.
 
 
 .. meta::
     :title lang=fr: Conventions de CakePHP
     :keywords lang=fr: expérience de développement web,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,pommes,conventions,controller conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs
-

@@ -29,6 +29,7 @@ Contenu
     core-libraries/internationalization-and-localization
     core-libraries/logging
     controllers/components/pagination
+    core-libraries/form
     plugins
     development/rest
     security
@@ -44,11 +45,12 @@ Contenu
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/string
+    core-libraries/text
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
     appendices
 
 

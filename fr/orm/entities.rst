@@ -5,11 +5,11 @@ Entities
 
 .. php:class:: Entity
 
-Alors que les :doc:`/orm/table-objects` représentent et fournissent un accès à
-une collection d'objets, les entities représentent des lignes individuelles ou
-des objets de domaine dans votre application. Les entities contiennent des
-propriétés et des méthodes persistantes pour manipuler et accéder aux données
-qu'ils contiennent.
+Alors que les :doc:`objets Table</orm/table-objects>` représentent et
+fournissent un accès à une collection d'objets, les entities représentent des
+lignes individuelles ou des objets de domaine dans votre application. Les
+entities contiennent des propriétés et des méthodes persistantes pour manipuler
+et accéder aux données qu'ils contiennent.
 
 Les entities sont créées pour vous par CakePHP à chaque fois que vous utilisez
 ``find()`` sur un objet table.
@@ -28,7 +28,8 @@ table ``articles``, nous pourrions créer l'entity suivante::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
     }
 
 Pour l'instant cette entity ne fait pas grand chose. Cependant quand nous
@@ -66,8 +67,8 @@ en une fois en utilisant un tableau::
 .. warning::
 
     Lors de la mise à jour des entities avec des données requêtées, vous
-    devriez faire une liste des champs qui peuvent être définis avec
-    mass assignment.
+    devriez faire une liste des champs qui peuvent être définis par
+    assignement de masse.
 
 Accesseurs & Mutateurs
 ======================
@@ -82,8 +83,10 @@ la façon dont les propriétés sont lues ou définies. Par exemple::
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
-        protected function _getTitle($title) {
+    class Article extends Entity
+    {
+        protected function _getTitle($title)
+        {
             return ucwords($title);
         }
     }
@@ -98,9 +101,11 @@ les propriétés sont récupérées/définies en définissant un mutateur::
     use Cake\ORM\Entity;
     use Cake\Utility\Inflector;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _setTitle($title) {
+        protected function _setTitle($title)
+        {
             $this->set('slug', Inflector::slug($title));
             return $title;
         }
@@ -110,9 +115,9 @@ les propriétés sont récupérées/définies en définissant un mutateur::
 Les méthodes mutateurs doivent toujours retourner la valeur qui doit être
 stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
 aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
-faisant cela, attention à ne pas introduire de boucle, puisque CakePHP
+faisant cela, attention à ne pas introduire de boucles, puisque CakePHP
 n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
-mutateurs vous permettent de facilement convertir les propriétés puisqu'elles
+mutateurs vous permettent de facilement convertir les propriétés lorsqu'elles
 sont définies ou de créer des données calculées. Les mutateurs et accesseurs
 sont appliqués quand les propriétés sont lues en utilisant la notation objet
 ou en utilisant get() et set().
@@ -129,9 +134,11 @@ complet::
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
-        protected function _getFullName() {
+        protected function _getFullName()
+        {
             return $this->_properties['first_name'] . '  ' .
                 $this->_properties['last_name'];
         }
@@ -147,10 +154,10 @@ de la méthode::
 Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
 les finds.
 
-Vérifier si une Propriété à été Modifiée
-========================================
+Vérifier si une Entity à été Modifiée
+=====================================
 
-.. php:method:: dirty($field, $dirty = null)
+.. php:method:: dirty($field = null, $dirty = null)
 
 Vous pourriez vouloir écrire du code conditionnel basé sur si oui ou non
 les propriétés ont été modifiées dans l'entity. Par exemple, vous pourriez
@@ -171,6 +178,11 @@ initiales des propriétés en utilisant la méthode ``getOriginal()``. Cette
 méthode retournera soit la valeur initiale de la propriété si elle a été
 modifiée soit la valeur actuelle.
 
+Vous pouvez également si une des propriétés de l'entity a été modifiée::
+
+    // Vérifier si l'entity a changé
+    $article->dirty();
+
 Erreurs de Validation
 =====================
 
@@ -187,22 +199,24 @@ les erreurs de validation en utilisant la méthode ``errors()``::
     $errors = $user->errors('password');
 
 La méthode ``errors()`` peut aussi être utilisée pour définir les erreurs sur
-une entity, facilitant le code de test qui fonctionne avec les messages
+une entity, facilitant les tests du code qui fonctionne avec les messages
 d'erreur::
 
     $user->errors('password', ['Password is required.']);
 
 .. _entities-mass-assignment:
 
-Assignment de Masse
-===================
+Assignement de Masse
+====================
 
-Alors que la définition des propriétés en entities en masse est simple et
+Alors que la définition des propriétés des entities en masse est simple et
 pratique, elle peut créer des problèmes importants de sécurité.
 Assigner en masse les données d'utilisateur à partir de la requête dans une
-entity permet à l'utilisateur de modifier toutes les colonnes. Par
-défaut CakePHP protège contre l'assignement en masse et vous fait faire une
-liste des champs qui sont assignables massivement.
+entity permet à l'utilisateur de modifier n'importe qu'elles (voir toutes) les
+colonnes. Quand vous utilisez les classes entity anonymes, CakePHP ne protège
+pas contre l'assignement en masse. Vous pouvez facilement vous protéger de
+l'assignement de masse en utilisant :doc:`la commande bake </bake>` pour
+générer vos entities.
 
 La propriété ``_accessible`` vous permet de fournir une liste des champs et
 si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
@@ -212,7 +226,8 @@ si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -220,13 +235,14 @@ si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
     }
 
 En plus des champs réels, il existe un champ spécial ``*`` qui définit le
-behavior fallback si un champ n'est pas nommé spécifiquement::
+comportement par défaut si un champ n'est pas nommé spécifiquement::
 
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         protected $_accessible = [
             'title' => true,
             'body' => true,
@@ -236,16 +252,16 @@ behavior fallback si un champ n'est pas nommé spécifiquement::
 
 Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
-Modifier les Champs Gardés à l'exécution
-----------------------------------------
+Modifier les Champs Protégés à l'Exécution
+------------------------------------------
 
-Vous pouvez modifier la liste des champs gardés à la volée en utilisant la
+Vous pouvez modifier la liste des champs protégés à la volée en utilisant la
 méthode ``accessible``::
 
     // Rendre user_id accessible.
     $article->accessible('user_id', true);
 
-    // Rendre title guarded.
+    // Rendre title protégé.
     $article->accessible('title', false);
 
 .. note::
@@ -254,11 +270,11 @@ méthode ``accessible``::
     méthode sur laquelle il est appelé.
 
 
-Outrepasser le Champ Gardé
---------------------------
+Outrepasser la Protection de Champ
+----------------------------------
 
-Il arrive parfois que vous souhaitiez permettre un assignment en masse aux
-champs gardés::
+Il arrive parfois que vous souhaitiez permettre un assignement en masse aux
+champs protégés::
 
     $article->set($properties, ['guard' => false]);
 
@@ -302,9 +318,11 @@ données associées en lazy loading::
     use Cake\ORM\Entity;
     use Cake\ORM\TableRegistry;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
 
-        protected function _getComments() {
+        protected function _getComments()
+        {
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
@@ -341,7 +359,8 @@ Ce trait pourrait donner des méthodes pour rendre les entities comme
 
     trait SoftDeleteTrait {
 
-        public function softDelete() {
+        public function softDelete()
+        {
             $this->set('deleted', true);
         }
 
@@ -355,7 +374,8 @@ et en l'incluant::
     use Cake\ORM\Entity;
     use SoftDelete\Model\Entity\SoftDeleteTrait;
 
-    class Article extends Entity {
+    class Article extends Entity
+    {
         use SoftDeleteTrait;
     }
 
@@ -390,7 +410,8 @@ classe entity, vous pouvez fournir une liste de champs virtuels qui doivent
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_virtual = ['full_name'];
 
@@ -413,7 +434,8 @@ de la définition d'une classe entity, définissez les propriétés qui doivent
 
     use Cake\ORM\Entity;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         protected $_hidden = ['password'];
 

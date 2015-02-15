@@ -1,5 +1,5 @@
-Console et Shells
-#################
+Console & Shells
+################
 
 .. php:namespace:: Cake\Console
 
@@ -95,8 +95,10 @@ dedans::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
     }
@@ -129,12 +131,15 @@ ajoutons une autre commande qui fait quelque chose::
 
     use Cake\Console\Shell;
 
-    class HelloShell extends Shell {
-        public function main() {
+    class HelloShell extends Shell
+    {
+        public function main()
+        {
             $this->out('Hello world.');
         }
 
-        public function heyThere($name = 'Anonymous') {
+        public function heyThere($name = 'Anonymous')
+        {
             $this->out('Hey there ' . $name);
         }
     }
@@ -174,14 +179,17 @@ propriétés attachées à votre shell::
 
     use Cake\Console\Shell;
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        public function show() {
+        public function show()
+        {
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
@@ -203,7 +211,8 @@ tâches vous permettent d'extraire des commandes dans des classes. Par exemple,
 ``bake`` est fait entièrement de tâches. Vous définissez les tâches d'un
 shell en utilisant la propriété ``$tasks``::
 
-    class UserShell extends Shell {
+    class UserShell extends Shell
+    {
         public $tasks = ['Template'];
     }
 
@@ -222,8 +231,10 @@ une classe de tâche ressemble à cela::
 
     use Cake\Console\Shell;
 
-    class FileGeneratorTask extends Shell {
-        public function main() {
+    class FileGeneratorTask extends Shell
+    {
+        public function main()
+        {
 
         }
     }
@@ -233,11 +244,13 @@ rend les tâches meilleures pour la réutilisation de fonctions identiques à
 :doc:`/controllers/components`::
 
     // Dans src/Console/Command/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends Shell
+    {
         // Se trouve dans src/Shell/Task/SoundTask.php
         public $tasks = ['Sound'];
 
-        public function main() {
+        public function main()
+        {
             $this->Sound->main();
         }
     }
@@ -256,7 +269,8 @@ commande::
 De plus, le nom de la task doit être ajouté en tout que sous commande dans
 l'OptionParser du Shell::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addSubcommand('sound', [
             'help' => 'Execute The Sound Task.'
@@ -328,7 +342,7 @@ chemin donné::
     $this->createFile('bower.json', $stuff);
 
 Si le Shell est interactif, un avertissement sera généré, et il sera demandé
-à l'utilisateur si il veut écraser le fichier si il existe déjà. Si la
+à l'utilisateur s'il veut écraser le fichier s'il existe déjà. Si la
 propriété iinteractive du shell est à ``false``, aucune question ne sera
 posée et le fichier sera simplement écrasé.
 
@@ -341,13 +355,13 @@ Sortie de la Console
 La classe ``Shell`` fournit quelques méthodes pour afficher le contenu::
 
     // Ecrire avec stdout
-    $this->out('normal message');
+    $this->out('Message Normal');
 
     // Ecrire avec stderr
-    $this->err('error message');
+    $this->err('Message d\'erreur');
 
     // Ecrire avec stderr et arrêter le processus
-    $this->error('Fatal error');
+    $this->error('Erreur Fatale');
 
 Le Shell a aussi quelques méthodes pour nettoyer la sortie, créer des lignes
 blanches, ou dessiner une ligne de tirets::
@@ -390,9 +404,9 @@ défaut.
 
 * QUIET - Seulement des informations importantes doivent être marquées pour
   une paisible.
-* NORMAL - Le niveau par défaut, et un usage normal
+* NORMAL - Le niveau par défaut, et un usage normal.
 * VERBOSE - Les messages marqués qui peuvent être trop ennuyeux pour une
-  utilisation quotidienne, mais aide au debugging en VERBOSE
+  utilisation quotidienne, mais aide au debugging en VERBOSE.
 
 Vous pouvez marquer la sortie comme suit::
 
@@ -528,7 +542,8 @@ et les tâches.
 ConsoleOptionParser implémente une interface courant et inclut les méthodes
 pour configurer facilement les multiple options/arguments en une fois. ::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         //configure parser
         return $parser;
@@ -541,7 +556,8 @@ Toutes les méthodes utilisées pour configurer le parser peuvent
 être chainées, vous permettant de définir l'intégralité des options du
 parser en une unique série d'appel de méthodes::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         $parser = parent::getOptionParser();
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
@@ -617,7 +633,7 @@ Vous pouvez utiliser les options suivantes lors de la création d'un argument:
   rencontre une valeur non valide.
 
 Les arguments qui ont été marqués comme nécessaires vont lancer une exception
-lors du parsing de la commande si ils ont été omis. Donc vous n'avez pas à
+lors du parsing de la commande s'ils ont été omis. Donc vous n'avez pas à
 gérer cela dans votre shell.
 
 .. php:method:: addArguments(array $args)
@@ -660,7 +676,7 @@ Ajouter des Options
 Les options ou les flags sont aussi fréquemment utilisés avec les outils de
 ligne de commande. ``ConsoleOptionParser`` supporte la création d'options avec
 les deux verbose et short aliases, fournissant les valeurs par défaut
-et créant des switches en boléen. Les options sont créées avec soit
+et créant des switches en booléen. Les options sont créées avec soit
 ``$parser->addOption()``, soit ``$parser->addOptions()``. ::
 
     $parser->addOption('connection', [
@@ -672,7 +688,7 @@ et créant des switches en boléen. Les options sont créées avec soit
 Ce qui est au-dessus vous permet l'utilisation soit de
 ``cake myshell --connection=other``, soit de
 ``cake myshell --connection other``, ou soit de ``cake myshell -c other`` lors
-de l'appel au shell. Vous pouvez aussi créer des switches de boléen, ces
+de l'appel au shell. Vous pouvez aussi créer des switches de booléen, ces
 switches ne consomment pas de valeurs, et leur présence les active juste dans
 les paramètres parsés. ::
 
@@ -694,9 +710,9 @@ pour définir le comportement de l'option:
 * ``default`` - La valeur par défaut pour cette option. Si elle n'est pas
   définie, la valeur par défaut sera ``true``.
 * ``boolean`` - L'option n'utilise aucune valeur, c'est juste un switch de
-  boléen.
+  booléen.
   Par défaut à ``false``.
-* ``choices`` Un tableau de choix valides pour cette option. Si elle est vide,
+* ``choices`` - Un tableau de choix valides pour cette option. Si elle est vide,
   toutes les valeurs sont valides. Une exception sera lancée lorque parse()
   rencontre une valeur non valide.
 
@@ -748,7 +764,7 @@ pour vérifier les flags de booléens::
         // faire quelque chose
     }
 
-Puisque les options boléennes sont toujours définies à ``true`` ou à
+Puisque les options booléennes sont toujours définies à ``true`` ou à
 ``false``, vous pouvez omettre les méthodes de vérification supplémentaires.
 
 Ajouter des sous-commandes
@@ -834,7 +850,8 @@ arguments, et les options, doivent suivre le format que
 pouvez aussi utiliser buildFromArray lui-même, pour construire un parser
 d'option::
 
-    public function getOptionParser() {
+    public function getOptionParser()
+    {
         return ConsoleOptionParser::buildFromArray([
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),
@@ -984,7 +1001,7 @@ Plus de sujets
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
     console-and-shells/plugin-assets
-    
+
 .. meta::
     :title lang=fr: Console et Shells
     :keywords lang=fr: scripts de shell,système shell,classes application,tâches de fond,script en ligne,tâche cron,réponse requête request response,système path,acl,nouveaux projets,shells,spécifiques,paramètres,i18n,cakephp,répertoire,maintenance,idéal,applications,mvc

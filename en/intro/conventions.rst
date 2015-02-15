@@ -29,18 +29,18 @@ lower case URL path. For example, ``ApplesController`` (which would
 be defined in the file name 'ApplesController.php') is accessed
 from http://example.com/apples.
 
-Multiple word controllers *can* be any 'inflected' form which
+Multiple word controllers *can* be any "inflected" form which
 equals the controller name so:
 
 *  /redApples
 *  /RedApples
-*  /Red\_apples
-*  /red\_apples
+*  /Red_apples
+*  /red_apples
 
 Will all resolve to the index of the RedApples controller. However,
-the convention is that your URLs are lowercase and underscored,
-therefore /red\_apples/go\_pick is the correct form to access the
-``RedApplesController::go_pick`` action.
+the convention is that your URLs are lowercase and dashed using the
+``DashedRoute`` class, therefore ``/red-apples/go-pick`` is the correct form
+to access the ``RedApplesController::goPick()`` action.
 
 For more information on CakePHP URLs and parameter handling, see
 :ref:`routes-configuration`.
@@ -104,10 +104,10 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-``src/Template/People/get\_ready.ctp``.
+``src/Template/People/get_ready.ctp``.
 
 The basic pattern is
-``src/Template/Controller/underscored\_function\_name.ctp``.
+``src/Template/Controller/underscored_function_name.ctp``.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -130,7 +130,7 @@ been configured by any means other than by creating classes and
 files that you'd need to create anyway.
 
 Now that you've been introduced to CakePHP's fundamentals, you might try a run
-through the :doc:`/tutorials-and-examples/blog/blog` to see how things fit
+through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
 together.
 
 

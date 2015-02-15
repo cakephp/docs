@@ -67,7 +67,9 @@ App.baseUrl
     files too.
 App.base
     The base directory the app resides in. If ``false`` this
-    will be auto detected.
+    will be auto detected. If not ``false``, ensure your string starts 
+    with a `/` and does NOT end with a `/`. E.g., `/basedir` is a valid
+    App.base. Otherwise, the AuthComponent will not work properly.
 App.encoding
     Define what encoding your application uses.  This encoding
     is used to generate the charset in the layout, and encode entities.
@@ -185,7 +187,7 @@ configured. CakePHP provides two Configure variables to setup additional paths
 for these resources. In your ``config/app.php`` you can set these
 variables::
 
-    $config = [
+    return [
         // More configuration
         'App' => [
             'paths' => [
@@ -344,7 +346,8 @@ Loading Configuration Files
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
 
-Once you've attached a config engine to Configure you can load configuration files::
+Once you've attached a config engine to Configure you can load configuration
+files::
 
     // Load my_file.php using the 'default' engine object.
     Configure::load('my_file', 'default');
@@ -426,21 +429,25 @@ files, you could create a simple Xml config engine for you application::
     use Cake\Core\Configure\ConfigEngineInterface;
     use Cake\Utility\Xml;
 
-    class XmlConfig implements ConfigEngineInterface {
+    class XmlConfig implements ConfigEngineInterface
+    {
 
-        public function __construct($path = null) {
+        public function __construct($path = null)
+        {
             if (!$path) {
                 $path = CONFIG;
             }
             $this->_path = $path;
         }
 
-        public function read($key) {
+        public function read($key)
+        {
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data) {
+        public function dump($key, $data)
+        {
             // Code to dump data to file
         }
     }
@@ -487,11 +494,11 @@ PHP Configuration Files
 .. php:class:: PhpConfig
 
 Allows you to read configuration files that are stored as plain PHP files.
-You can read either files from your ``config`` or from plugin configs
-directories by using :term:`plugin syntax`. Files **must** contain a ``$config``
-variable. An example configuration file would look like::
+You can read either files from your app's ``config`` or from plugin configs
+directories by using :term:`plugin syntax`. Files **must** return an array.
+An example configuration file would look like::
 
-    $config = [
+    return [
         'debug' => 0,
         'Security' => [
             'salt' => 'its-secret'
@@ -501,9 +508,8 @@ variable. An example configuration file would look like::
         ]
     ];
 
-Files without ``$config`` will cause an :php:exc:`ConfigureException`
-
-Load your custom configuration file by inserting the following in ``config/bootstrap.php``::
+Load your custom configuration file by inserting the following in
+``config/bootstrap.php``::
 
     Configure::load('customConfig');
 
@@ -533,6 +539,28 @@ The above ini file, would result in the same end configuration data
 as the PHP example above. Array structures can be created either
 through dot separated values, or sections. Sections can contain
 dot separated keys for deeper nesting.
+
+
+Json Configuration Files
+------------------------
+
+.. php:class:: JsonConfig
+
+Allows you to read / dump configuration files that are stored as JSON encoded
+strings in .json files.
+
+An example JSON file would look like::
+
+    {
+        "debug": false,
+        "App": {
+            "namespace": "MyApp"
+        },
+        "Security": {
+            "salt": "its-secret"
+        }
+    }
+
 
 Bootstrapping CakePHP
 =====================

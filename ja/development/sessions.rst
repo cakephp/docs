@@ -390,16 +390,19 @@ ini 指示子の設定
 
     App::uses('DatabaseSession', 'Model/Datasource/Session');
 
-    class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
+    class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface
+    {
         public $cacheKey;
 
-        public function __construct() {
+        public function __construct()
+        {
             $this->cacheKey = Configure::read('Session.handler.cache');
             parent::__construct();
         }
 
         // セッションからデータ読み込み
-        public function read($id) {
+        public function read($id)
+        {
             $result = Cache::read($id, $this->cacheKey);
             if ($result) {
                 return $result;
@@ -408,24 +411,28 @@ ini 指示子の設定
         }
 
         // セッションへデータ書き込み
-        public function write($id, $data) {
+        public function write($id, $data)
+        {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
         // セッションの破棄
-        public function destroy($id) {
+        public function destroy($id)
+        {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
         // 期限切れセッションの削除
-        public function gc($expires = null) {
+        public function gc($expires = null)
+        {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }
     }
         // 期限切れセッションの削除
-        public function gc($expires = null) {
+        public function gc($expires = null)
+        {
             return Cache::gc($this->cacheKey) && parent::gc($expires);
         }
     }
@@ -510,13 +517,3 @@ ini 指示子の設定
 セッションからデータ削除が必要なら削除も可能です::
 
     CakeSession::delete('Config.language');
-
-..
-  You should also see the documentation on
-  :doc:`/core-libraries/components/sessions` and
-  :doc:`/core-libraries/helpers/session` for how to access Session data
-  in the controller and view.
-
-コントローラーとビューからのセッションデータへのアクセス方法については、\
-合わせて :doc:`/core-libraries/components/sessions` と \
-:doc:`/core-libraries/helpers/session` をご覧下さい。

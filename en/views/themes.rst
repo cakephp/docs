@@ -9,7 +9,8 @@ theme, you will need to continue using the :term:`plugin syntax`.
 
 To use themes, specify the theme name in your controller::
 
-    class ExamplesController extends AppController {
+    class ExamplesController extends AppController
+    {
         public $theme = 'Modern';
     }
 

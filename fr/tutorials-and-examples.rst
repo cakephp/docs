@@ -16,6 +16,7 @@ et components existants.
     tutorials-and-examples/bookmarks/part-two
     tutorials-and-examples/blog/blog
     tutorials-and-examples/blog/part-two
+    tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
 

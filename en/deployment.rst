@@ -14,7 +14,7 @@ things:
 
 * Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
   disabled.
-* Core CakePHP caches are by default flushed every 999 days, instead of every
+* Core CakePHP caches are by default flushed every year (about 365 days), instead of every
   10 seconds as in development.
 * Error views are less informative, and give generic error messages instead.
 * PHP Errors are not displayed.
@@ -36,7 +36,7 @@ And then you can set the debug level dynamically in ``app.php``::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 
-    $config = [
+    return [
         'debug' => $debug,
         .....
     ];

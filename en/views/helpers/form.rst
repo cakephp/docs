@@ -1,5 +1,5 @@
-FormHelper
-##########
+Form
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -69,7 +69,8 @@ be created as an edit form.  For example, if we browse to
 http://example.org/articles/edit/5, we could do the following::
 
     // src/Controller/ArticlesController.php:
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (empty($id)) {
             throw new NotFoundException;
         }
@@ -1267,28 +1268,31 @@ Creating Buttons and Submit Elements
 
 .. php:method:: submit(string $caption, array $options)
 
-    Creates a submit button with caption ``$caption``. If the supplied
-    ``$caption`` is a URL to an image (it contains a '.' character),
-    the submit button will be rendered as an image. The following::
+Creates a submit input with ``$caption`` as the text. If the supplied
+``$caption`` is a URL to an image, an image submit button will be generated.
+The following::
 
-        echo $this->Form->submit();
+    echo $this->Form->submit();
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <div class="submit"><input value="Submit" type="submit"></div>
+    <div class="submit"><input value="Submit" type="submit"></div>
 
-    You can also pass a relative or absolute URL to an image for the
-    caption parameter instead of caption text. ::
+You can pass a relative or absolute URL to an image for the
+caption parameter instead of caption text::
 
-        echo $this->Form->submit('ok.png');
+    echo $this->Form->submit('ok.png');
 
-    Will output:
+Will output:
 
-    .. code-block:: html
+.. code-block:: html
 
-        <div class="submit"><input type="image" src="/img/ok.png"></div>
+    <div class="submit"><input type="image" src="/img/ok.png"></div>
+
+Submit inputs are useful when you only need basic text or images. If you need
+more complex button content you should use ``button()``.
 
 Creating Button Elements
 ------------------------
@@ -1324,7 +1328,11 @@ The ``button`` input type supports the ``escape`` option, which accepts
 a boolean and defaults to ``false``. It determines whether to HTML encode the
 ``$title`` of the button::
 
-    echo $this->Form->button('Submit Form', ['type' => 'submit', 'escape' => true]);
+    // Will render escaped HTML.
+    echo $this->Form->button('<em>Submit Form</em>', [
+        'type' => 'submit',
+        'escape' => true
+    ]);
 
 Closing the Form
 ================
@@ -1400,16 +1408,16 @@ of defaults. You may need to customize the templates to suit your application.
 To change the templates when the helper is loaded you can set the ``templates``
 option when including the helper in your controller::
 
-    public $helpers = [
-        'Form' => [
-            'templates' => 'app_form.php',
-        ]
-    ];
+    // In a View class
+    $this->loadHelper('Form', [
+        'templates' => 'app_form',
+    ]);
 
 This would load the tags in ``config/app_form.php``. This file should
 contain an array of templates indexed by name::
 
-    $config = [
+    // in config/app_form.php
+    return [
         'inputContainer' => '<div class="form-control">{{content}}</div>',
     ];
 
@@ -1545,6 +1553,64 @@ parameter::
 
     echo $this->Form->allInputs(['password' => false]);
 
+.. _associated-form-inputs:
+
+Creating Inputs for Associated Data
+===================================
+
+Creating forms for associated data is straightforward and is closely related to
+the paths in your entity's data. Assuming the following table relations:
+
+* Authors HasOne Profiles
+* Authors HasMany Articles
+* Articles HasMany Comments
+* Articles BelongsTo Authors
+* Articles BelongsToMany Tags
+
+If we were editing an article with its associations loaded we could
+create the following inputs::
+
+    $this->Form->create($article);
+
+    // Article inputs.
+    echo $this->Form->input('title');
+
+    // Author inputs (belongsTo)
+    echo $this->Form->input('author.id');
+    echo $this->Form->input('author.first_name');
+    echo $this->Form->input('author.last_name');
+
+    // Author profile (belongsTo + hasOne)
+    echo $this->Form->input('author.profile.id');
+    echo $this->Form->input('author.profile.username');
+
+    // Tags inputs (belongsToMany)
+    echo $this->Form->input('tags.0.id');
+    echo $this->Form->input('tags.0.name');
+    echo $this->Form->input('tags.1.id');
+    echo $this->Form->input('tags.1.name');
+
+    // Inputs for the joint table (articles_tags)
+    echo $this->Form->input('tags.0._joinData.starred');
+    echo $this->Form->input('tags.1._joinData.starred');
+
+    // Comments inputs (hasMany)
+    echo $this->Form->input('comments.0.id');
+    echo $this->Form->input('comments.0.comment');
+    echo $this->Form->input('comments.1.id');
+    echo $this->Form->input('comments.1.comment');
+
+The above inputs could then be marshalled into a completed entity graph using
+the following code in your controller::
+
+    $article = $this->Articles->patchEntity($article, $this->request->data, [
+        'associated' => [
+            'Authors',
+            'Authors.Profiles',
+            'Tags',
+            'Comments'
+        ]
+    ]);
 
 Adding Custom Widgets
 =====================
@@ -1559,9 +1625,12 @@ Building a Widget Class
 
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
-the ``render(array $data)`` method to be implemented. The render method
-expects an array of data to build the widget and is expected to return a string
-of HTML for the widget. If CakePHP is constructing your widget you can expect to
+the ``render(array $data)`` and ``secureFields(array $data)`` methods to be implemented.
+The ``render`` method expects an array of data to build the widget and is expected to return a string
+of HTML for the widget.
+The ``secureFields`` method expects an array of data as well and is expected to return an
+array containing the list of fields to secure for this widget.
+If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
 any dependencies you define. If we wanted to build an Autocomplete widget you
 could do the following::
@@ -1570,15 +1639,18 @@ could do the following::
 
     use Cake\View\Widget\WidgetInterface;
 
-    class AutocompleteWidget implements WidgetInterface {
+    class AutocompleteWidget implements WidgetInterface
+    {
 
         protected $_templates;
 
-        public function __construct($templates) {
+        public function __construct($templates)
+        {
             $this->_templates = $templates;
         }
 
-        public function render(array $data) {
+        public function render(array $data)
+        {
             $data += [
                 'name' => '',
             ];
@@ -1588,6 +1660,10 @@ could do the following::
             ]);
         }
 
+        public function secureFields(array $data)
+        {
+            return [$data['name']];
+        }
     }
 
 Obviously, this is a very simple example, but it demonstrates how a custom
@@ -1596,32 +1672,29 @@ widget could be built.
 Using Widgets
 -------------
 
-You can load custom widgets either in the ``$helpers`` array or using the
-``addWidget()`` method. In your helpers array, widgets are defined as
+You can load custom widgets when loading FormHelper or by using the
+``addWidget()`` method. When loading FormHelper, widgets are defined as
 a setting::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => ['Autocomplete']
-            ]
+    // In View class
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => ['Autocomplete']
         ]
-    ];
+    ]);
 
 If your widget requires other widgets, you can have FormHelper populate those
 dependencies by declaring them::
 
-    public $helpers = [
-        'Form' => [
-            'widgets' => [
-                'autocomplete' => [
-                    'App\View\Widget\AutocompleteWidget',
-                    'text',
-                    'label'
-                ]
+    $this->loadHelper('Form', [
+        'widgets' => [
+            'autocomplete' => [
+                'App\View\Widget\AutocompleteWidget',
+                'text',
+                'label'
             ]
         ]
-    ];
+    ]);
 
 In the above example, the autocomplete widget would depend on the ``text`` and
 ``label`` widgets. If your widget needs access to the View, you should use the
@@ -1669,9 +1742,9 @@ ensure that the special ``_Token`` inputs are generated.
 
     Unlocks a field making it exempt from the ``SecurityComponent`` field
     hashing. This also allows the fields to be manipulated by JavaScript.
-    The ``$name`` parameter should be the entity name for the input::
+    The ``$name`` parameter should be the entity property name for the input::
 
-        $this->Form->unlockField('User.id');
+        $this->Form->unlockField('id');
 
 .. php:method:: secure(array $fields = [])
 

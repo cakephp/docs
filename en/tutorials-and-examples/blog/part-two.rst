@@ -21,8 +21,10 @@ look like this::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -58,7 +60,8 @@ what the basic controller should look like::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
     }
 
 Now, let's add an action to our controller. Actions often represent
@@ -71,9 +74,11 @@ articles. The code for that action would look like this::
 
     namespace App\Controller;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             $articles = $this->Articles->find('all');
             $this->set(compact('articles'));
         }
@@ -186,13 +191,16 @@ ArticlesController now::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
              $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id = null) {
+        public function view($id = null)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -248,19 +256,23 @@ ArticlesController::
 
     use Cake\Network\Exception\NotFoundException;
 
-    class ArticlesController extends AppController {
+    class ArticlesController extends AppController
+    {
 
-        public function initialize() {
+        public function initialize()
+        {
             parent::initialize();
 
             $this->loadComponent('Flash'); // Include the FlashComponent
         }
 
-        public function index() {
+        public function index()
+        {
             $this->set('articles', $this->Articles->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid article'));
             }
@@ -269,9 +281,11 @@ ArticlesController::
             $this->set(compact('article'));
         }
 
-        public function add() {
-            $article = $this->Articles->newEntity($this->request->data);
+        public function add()
+        {
+            $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -384,12 +398,15 @@ back at our Articles model and make a few adjustments::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             $validator
                 ->notEmpty('title')
                 ->notEmpty('body');
@@ -422,7 +439,8 @@ like::
 
     // src/Controller/ArticlesController.php
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid article'));
         }
@@ -514,7 +532,8 @@ Next, let's make a way for users to delete articles. Start with a
 
     // src/Controller/ArticlesController.php
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->get($id);
@@ -642,9 +661,10 @@ features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
-Now that you've created a basic CakePHP application, you're ready for
-the real thing. Start your own project and read the rest of the
-:doc:`Cookbook </index>` and `API <http://api.cakephp.org>`_.
+Now that you've created a basic CakePHP application, you can either continue to
+:doc:`/tutorials-and-examples/blog/part-three`, or start your own project. You
+can also peruse the :doc:`/topics` or `API <http://api.cakephp.org/3.0>` to
+learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the
 :doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!

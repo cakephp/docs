@@ -5,24 +5,25 @@ Bake dispose d'une architecture extensible qui permet à votre application ou
 à vos plugins de facilement modifier ou ajouter la fonctionnalité de base. Bake
 utilise une classe de vue dédiée qui n'utilise pas la syntaxe PHP standard.
 
-Evénements de Bake
-==================
+Events de Bake
+==============
 
-Comme une classe de vue, ``BakeView`` envoie les mêmes événements que toute autre
-classe de vue, ainsi qu'un événement initialize supplémentaire. Cependant,
-alors que les classes de vue standard utilisent le préfixe d'événement
-"View.", ``BakeView`` utilise le préfixe d'événement "Bake.".
+Comme une classe de vue, ``BakeView`` envoie les mêmes events que toute autre
+classe de vue, ainsi qu'un event initialize supplémentaire. Cependant,
+alors que les classes de vue standard utilisent le préfixe d'event
+"View.", ``BakeView`` utilise le préfixe d'event "Bake.".
 
-L'événement initialize peut être utilisé pour faire des changements qui
+L'event initialize peut être utilisé pour faire des changements qui
 s'appliquent à toutes les sorties fabriquées avec bake, par exemple pour ajouter
-un autre helper à la classe de vue bake, cet événement peut être utilisé::
+un autre helper à la classe de vue bake, cet event peut être utilisé::
 
     <?php
     // config/bootstrap_cli.php
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
-    EventManager::instance()->attach(function (Event $event) {
+
+    EventManager::instance()->on('Bake.initialize', function (Event $event) {
         $view = $event->subject;
 
         // Dans mes templates de bake, permet l'utilisation du helper MySpecial
@@ -31,9 +32,9 @@ un autre helper à la classe de vue bake, cet événement peut être utilisé::
         // Et ajoute une variable $author pour qu'elle soit toujours disponible
         $view->set('author', 'Andy');
 
-    }, 'Bake.initialize');
+    });
 
-Les événements de Bake peuvent aussi être utiles pour faire des petits
+Les events de Bake peuvent aussi être utiles pour faire des petits
 changements aux templates existants. Par exemple, pour changer les noms de
 variable utilisés lors de la création avec bake de fichiers de
 controller/template, on pourra utiliser une fonction qui écoute
@@ -45,7 +46,8 @@ de bake::
 
     use Cake\Event\Event;
     use Cake\Event\EventManager;
-    EventManager::instance()->attach(function (Event $event) {
+
+    EventManager::instance()->on('Bake.beforeRender', function (Event $event) {
         $view = $event->subject;
 
         // Utilise $rows pour les principales variables de données dans les indexes
@@ -64,7 +66,7 @@ de bake::
             $view->set('singularVar', 'theOne');
         }
 
-    }, 'Bake.beforeRender');
+    });
 
 
 Syntaxe de Template de Bake
@@ -110,14 +112,16 @@ ressemble à ceci::
     /**
      * <%= $name %> shell command.
      */
-    class <%= $name %>Shell extends Shell {
+    class <%= $name %>Shell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -134,14 +138,16 @@ rendu, ressemble à ceci::
     /**
      * <?= $name ?> shell command.
      */
-    class <?= $name ?>Shell extends Shell {
+    class <?= $name ?>Shell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -157,14 +163,16 @@ ressemble à ceci::
     /**
      * Foo shell command.
      */
-    class FooShell extends Shell {
+    class FooShell extends Shell
+    {
 
     /**
      * main() method.
      *
      * @return bool|int Success or error code.
      */
-        public function main() {
+        public function main()
+        {
         }
 
     }
@@ -206,18 +214,22 @@ FooTask.php devra ressembler à ceci::
 
     use Cake\Shell\Task\SimpleBakeTask;
 
-    class FooTask extends SimpleBakeTask {
+    class FooTask extends SimpleBakeTask
+    {
         public $pathFragment = 'Foo/';
 
-        public function name() {
+        public function name()
+        {
             return 'shell';
         }
 
-        public function fileName($name) {
+        public function fileName($name)
+        {
             return $name . 'Foo.php';
         }
 
-        public function template() {
+        public function template()
+        {
             return 'foo';
         }
 
@@ -234,8 +246,8 @@ ajouterons le contenu suivant::
     /**
      * <%= $name %> foo
      */
-    class <%= $name %>Foo {
-
+    class <%= $name %>Foo
+    {
         // Add code.
     }
 

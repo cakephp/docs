@@ -11,30 +11,47 @@ en plugin CakePHP afin de pouvoir la mettre dans d'autres applications.
 Le principal lien entre un plugin et l'application dans laquelle il a été
 installé, est la configuration de l'application (connexion à la base de
 données, etc.). Autrement, il fonctionne dans son propre espace, se comportant
-comme il l'aurait fait si il était une application à part entière.
+comme il l'aurait fait s'il était une application à part entière.
 
 Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
 ``DebugKit``. Par convention, les plugins utilisent leur nom de package pour
 leur namespace. Si vous souhaitez utiliser un namespace différent, vous pouvez
 configurer le namespace du plugin, quand les plugins sont chargés.
 
-Installer un Plugin
-===================
+Installer un Plugin Avec Composer
+=================================
 
-Plusieurs plugins sont disponibles sur `packagist <http://packagist.org>`_
+Plusieurs plugins sont disponibles sur `Packagist <http://packagist.org>`_
 et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
 feriez ce qui suit::
 
     php composer.phar require cakephp/debug_kit
 
 Ceci installe la dernière version de DebugKit et met à jour vos
-fichiers ``composer.json``, ``composer.lock``, et met à jour votre
-autoloader. Si le plugin que vous voulez installer n'est pas disponible sur
+fichiers ``composer.json``, ``composer.lock``, met à jour 
+``vendor/cakephp-plugins.php`` et met à jour votre autoloader.
+
+Si le plugin que vous voulez installer n'est pas disponible sur
 packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
 répertoire ``plugins``. En supposant que vous voulez installer un plugin
 appelé ``ContactManager``, vous auriez un dossier dans ``plugins``
 appelé ``ContactManager``. Dans ce répertoire se trouvent les View, Model,
 Controller, webroot, et tous les autres répertoires du plugin.
+
+.. index:: vendor/cakephp-plugins.php
+
+Plugin Map File
+---------------
+
+Lorsque vous installez des plugins via Composer, vous pouvez voir que
+``vendor/cakephp-plugins.php`` est créé. Ce fichier de configuration contient
+une carte des noms de plugin et leur chemin dans le système de fichiers.
+Cela ouvre la possibilité pour un plugin d'être installé dans le dossier vendor
+standard qui est à l'extérieur des dossiers de recherche standards. La classe
+``Plugin`` utilisera ce fichier pour localiser les plugins lorsqu'ils sont
+chargés avec ``load()`` ou ``loadAll()``. Généralement vous n'aurez pas à éditer
+ce fichier à la main car Composer et le package ``plugin-installer`` le feront
+pour vous.
 
 Charger un Plugin
 =================
@@ -43,13 +60,14 @@ Après avoir installé un plugin et mis à jour l'autoloader, vous aurez besoin
 de charger le plugin. Vous pouvez charger les plugins un par un, ou tous d'un
 coup avec une méthode unique::
 
+    // dans config/bootstrap.php
     // Charge un Plugin unique
     Plugin::load('ContactManager');
 
     // Charge un plugin unique, avec un namespace personnalisé.
     Plugin::load('AcmeCorp/ContactManager');
 
-    // Charge tous les plugins en premier
+    // Charge tous les plugins d'un coup
     Plugin::loadAll();
 
 ``loadAll()`` charge tous les plugins disponibles, vous permettant de définir
@@ -59,7 +77,8 @@ explicitement.
 
 .. note::
 
-    ``Plugin::loadAll()`` ne va pas charger tous les plugins de vendor.
+    ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
+    defined in ``vendor/cakephp-plugins.php``.
 
 Autochargement des Classes du Plugin
 ------------------------------------
@@ -135,7 +154,7 @@ partir du plugin Blog::
 Notez que tous les fichiers spécifiés doivent réellement exister dans le(s)
 plugin(s) configurés ou PHP vous donnera des avertissements pour chaque
 fichier qu'il ne peut pas charger. Vous pouvez éviter les avertissements
-potentiels en utilisantt l'option ``ignoreMissing``::
+potentiels en utilisant l'option ``ignoreMissing``::
 
     Plugin::loadAll([
         ['ignoreMissing' => true, 'bootstrap' => true],
@@ -256,9 +275,11 @@ Ainsi, nous mettons notre nouveau ContactsController dans
 
     use ContactManager\Controller\AppController;
 
-    class ContactsController extends AppController {
+    class ContactsController extends AppController
+    {
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -325,7 +346,8 @@ table et l'entity pour ce controller::
 
     use Cake\ORM\Entity;
 
-    class Contact extends Entity {
+    class Contact extends Entity
+    {
     }
 
     // plugins/ContactManager/src/Model/Table/ContactsTable.php:
@@ -333,7 +355,8 @@ table et l'entity pour ce controller::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
+    class ContactsTable extends Table
+    {
     }
 
 Si vous avez besoin de faire référence à un model dans votre plugin lors de la
@@ -346,8 +369,10 @@ exemple::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
-        public function initialize(array $config) {
+    class ContactsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasMany('ContactManager.AltName');
         }
     }
@@ -360,8 +385,10 @@ préfix du plugin, utilisez la syntaxe alternative::
 
     use Cake\ORM\Table;
 
-    class ContactsTable extends Table {
-        public function initialize(array $config) {
+    class ContactsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
             ]);
@@ -380,8 +407,8 @@ Vues du Plugin
 
 Les Vues se comportent exactement comme elles le font dans les applications
 normales. Placez-les juste dans le bon dossier à l'intérieur du dossier
-``plugins/[PluginName]/Template/``. Pour notre plugin ContactManager, nous aurons
-besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
+``plugins/[PluginName]/Template/``. Pour notre plugin ContactManager, nous
+aurons besoin d'une vue pour notre action ``ContactsController::index()``, ainsi
 incluons ceci aussi::
 
     // plugins/ContactManager/src/Template/Contacts/index.ctp:
@@ -493,11 +520,13 @@ du component. Par exemple::
 
     use Cake\Controller\Component;
 
-    class ExampleComponent extends Component {
+    class ExampleComponent extends Component
+    {
     }
 
     // dans vos controllers:
-    public function intialize() {
+    public function initialize()
+    {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');
     }
@@ -508,7 +537,7 @@ Etendez votre Plugin
 ====================
 
 Cet exemple est un bon début pour un plugin, mais il y a beaucoup plus
-à faire. En règle général, tout ce que vous pouvez faire avec votre
+à faire. En règle générale, tout ce que vous pouvez faire avec votre
 application, vous pouvez le faire à l'intérieur d'un plugin à la place.
 
 Continuez, incluez certaines librairies tierces dans 'Vendor', ajoutez

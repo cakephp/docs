@@ -26,7 +26,8 @@ basic table class would look like::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
     }
 
 Note that we did not tell the ORM which table to use for our class. By
@@ -40,9 +41,11 @@ method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->table('my_table');
         }
 
@@ -56,8 +59,10 @@ If you need to modify this you can use the ``primaryKey()`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->primaryKey('my_id');
         }
     }
@@ -71,8 +76,10 @@ example if your table class is called ``ArticlesTable`` the entity would be
 ``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
 conventions you can use the ``entityClass`` method to change things up::
 
-    class PurchaseOrdersTable extends Table {
-        public function initialize(array $config) {
+    class PurchaseOrdersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->entityClass('App\Model\PO');
         }
     }
@@ -116,6 +123,14 @@ To add an event listener to a Table class or Behavior simply implement the
 method signatures as described below. See the :doc:`/core-libraries/events` for
 more detail on how to use the events subsystem.
 
+beforeMarshal
+-------------
+
+.. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+
+The ``Model.beforeMarshal`` event is fired before request data is converted
+into entities. See the :ref:`before-marshal` documentation for more information.
+
 beforeFind
 ----------
 
@@ -137,20 +152,39 @@ or make caching decisions based on the current load.
 In previous versions of CakePHP there was an ``afterFind`` callback, this has
 been replaced with the :ref:`map-reduce` features and entity constructors.
 
-beforeValidate
+buildValidator
+---------------
+
+.. php:method:: buildValidator(Event $event, Validator $validator, $name)
+
+The ``Model.buildValidator`` event is fired when ``$name`` validator is created.
+Behaviors, can use this hook to add in validation methods.
+
+buildRules
+----------
+
+.. php:method:: buildRules(Event $event, RulesChecker $rules)
+
+The ``Model.buildRules`` event is fired before after a rules instance has been
+created and the table's ``beforeRules()`` method has been called.
+
+beforeRules
 --------------
 
-.. php:method:: beforeValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
+.. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
-The ``Model.beforeValidate`` method is fired before an entity is validated. By
-stopping this event, you can abort the validate + save operations.
+The ``Model.beforeRules`` event is fired before an entity has rules applied. By
+stopping this event, you can return the final value of the rules checking
+operation.
 
-afterValidate
--------------
+afterRules
+--------------
 
-.. php:method:: afterValidate(Event $event, Entity $entity, ArrayObject $options, Validator $validator)
+.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
 
-The ``Model.afterValidate`` event is fired after an entity is validated.
+The ``Model.afterRules`` event is fired after an entity has rules applied. By
+stopping this event, you can return the final value of the rules checking
+operation.
 
 beforeSave
 ----------
@@ -181,7 +215,7 @@ afterDelete
 
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
-Fired after an entity has been deleted.
+The ``Model.beforeDelete`` event is fired after an entity has been deleted.
 
 Behaviors
 =========
@@ -202,8 +236,10 @@ Generally the best place to do this is in the ``initialize`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp');
         }
     }
@@ -215,8 +251,10 @@ configuration options::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
-        public function initialize(array $config) {
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Timestamp', [
                 'events' => [
                     'Model.beforeSave' => [
@@ -246,7 +284,8 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
         public static function defaultConnectionName() {
             return 'slavedb';
         }

@@ -14,8 +14,23 @@ Conditions requises
   aucun cas nécessaire.
 - PHP 5.4.16 ou plus.
 - extension mbstring
-- extension mcrypt
 - extension intl
+
+.. note::
+
+    Avec XAMPP et WAMP, les extensions mcrypt et mbstring fonctionnent par
+    défaut.
+
+    Dans XAMPP, l'extension intl est incluse mais vous devez décommenter
+    ``extension=php_intl.dll`` dans ``php.ini`` et redémarrer le serveur dans
+    le Panneau de Contrôle de XAMPP.
+
+    Dans WAMP, l'extension intl est "activée" par défaut mais ne fonctionne pas.
+    Pour la faire fonctionner, vous devez aller dans le dossier php (par défaut)
+    ``C:\wamp\bin\php\php{version}``, copiez tous les fichiers qui ressemblent
+    à ``icu***.dll`` et collez les dans le répertoire bin d'apache
+    ``C:\wamp\bin\apache\apache{version}\bin``. Ensuite redémarrez tous les
+    services et tout devrait être OK.
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
@@ -55,6 +70,10 @@ Maintenant que vous avez téléchargé et installé Composer, vous pouvez obteni
 une nouvelle application CakePHP en lançant::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+
+Ou si Composer est installé globalement::
+
+    composer create-project --prefer-dist -s dev cakephp/app [app_name]
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du cœur de la librairie de CakePHP, vous devriez avoir maintenant une

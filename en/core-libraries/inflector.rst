@@ -71,7 +71,7 @@ table names or class names::
     Inflector::classify('user_profile_settings');
 
     // user_profile_settings
-    Inflector::tabelize('UserProfileSetting');
+    Inflector::tableize('UserProfileSetting');
 
 Creating Variable Names
 =======================

@@ -2,7 +2,7 @@ Code
 ####
 
 Patches and pull requests are a great way to contribute code back to CakePHP.
-Pull requests can be created in GitHub, and are prefered over patch files in
+Pull requests can be created in GitHub, and are preferred over patch files in
 ticket comments.
 
 Initial Setup

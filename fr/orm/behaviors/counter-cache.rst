@@ -1,7 +1,7 @@
 Behavior CounterCache
 #####################
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: CounterCacheBehavior
 
@@ -20,8 +20,10 @@ nombre de champs qui doivent être stockés sur chacun d'eux. Utiliser notre
 exemple ci-dessous, nous pourrions mettre en cache le nombre de commentaires
 pour chaque article avec ce qui suit::
 
-    class CommentsTable extends Table {
-        public function initialize(array $config) {
+    class CommentsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('CounterCache', [
                 'Articles' => ['comment_count']
             ]);

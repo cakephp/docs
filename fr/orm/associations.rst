@@ -31,9 +31,11 @@ souhaitions définir une association belongsTo dans notre ArticlesTable::
 
     use Cake\ORM\Table;
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Authors');
         }
 
@@ -45,9 +47,11 @@ d'une association vont utiliser les conventions de CakePHP. Si vous souhaitez
 personnaliser la façon dont sont gérées vos associations, vous pouvez le faire
 avec le deuxième paramètre::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Authors', [
                 'className' => 'Publishing.Authors',
                 'foreignKey' => 'authorid',
@@ -61,9 +65,11 @@ La même table peut être utilisée plusieurs fois pour définir différents typ
 d'associations. Par exemple considérons le cas où vous voulez séparer les
 commentaires approuvés et ceux qui n'ont pas encore été modérés::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('Comments', [
                 'className' => 'Comments',
                 'conditions' => ['approved' => true]
@@ -82,9 +88,11 @@ d'utiliser la même table avec des associations différentes pour la même table
 Vous pouvez même créer les tables associées avec elles-même pour créer des
 relations parent-enfant::
 
-    class CategoriesTable extends Table {
+    class CategoriesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('SubCategories', [
                 'className' => 'Categories',
             ]);
@@ -99,9 +107,11 @@ Vous pouvez aussi définir les associations en masse via un appel unique
 à la méthode ``Table::addAssociations()``. Elle accepte en paramètre un
 tableau contenant les noms de tables indexés par association::
 
-    class PostsTable extends Table {
+    class PostsTable extends Table
+    {
 
-      public function initialize(array $config) {
+      public function initialize(array $config)
+      {
         $this->addAssociations([
           'belongsTo' => [
             'Users' => ['className' => 'App\Model\Table\UsersTable']
@@ -149,8 +159,10 @@ Doctors hasOne Mentors mentors.doctor\_id
 Si nous avions les classes ``UsersTable`` et ``AddressesTable``, nous
 pourrions faire l'association avec le code suivant::
 
-    class UsersTable extends Table {
-        public function initialize(array $config) {
+    class UsersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasOne('Addresses');
         }
     }
@@ -159,8 +171,10 @@ Si vous avez besoin de plus de contrôle, vous pouvez définir vos associations
 en utilisant la syntaxe des tableaux. Par exemple, vous voudrez peut-être
 limiter l'association pour inclure seulement certains enregistrements::
 
-    class UsersTable extends Table {
-        public function initialize(array $config) {
+    class UsersTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->hasOne('Addresses', [
                 'className' => 'Addresses',
                 'conditions' => ['Addresses.primary' => '1'],
@@ -201,7 +215,7 @@ Les clés possibles pour une association hasOne sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-Users peuvent contenir l'enregistrement Address, si il existe::
+Users peuvent contenir l'enregistrement Address, s'il existe::
 
     // Dans un controller ou dans une méthode table.
     $query = $users->find('all')->contain(['Addresses']);
@@ -242,9 +256,11 @@ Mentors belongsTo Doctors mentors.doctor\_id
 Nous pouvons définir l'association belongsTo dans notre table Addresses comme
 ce qui suit::
 
-    class AddressesTable extends Table {
+    class AddressesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Users');
         }
     }
@@ -252,9 +268,11 @@ ce qui suit::
 Nous pouvons aussi définir une relation plus spécifique en utilisant une
 syntaxe de tableau::
 
-    class AddressesTable extends Table {
+    class AddressesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Users', [
                 'foreignKey' => 'user_id',
                 'joinType' => 'INNER',
@@ -285,7 +303,7 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-User peuvent contenir l'enregistrement Address si il existe::
+User peuvent contenir l'enregistrement Address s'il existe::
 
     // Dans un controller ou dans une méthode table.
     $query = $addresses->find('all')->contain(['Users']);
@@ -323,9 +341,11 @@ Doctor hasMany Patient     Patient.doctor\_id
 Nous pouvons définir l'association hasMany dans notre model Articles comme
 suit::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('Comments');
         }
     }
@@ -333,9 +353,11 @@ suit::
 Nous pouvons également définir une relation plus spécifique en utilisant un
 tableau::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->hasMany('Comments', [
                 'foreignKey' => 'article_id',
                 'dependent' => true,
@@ -375,7 +397,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations de recherche sur
-la table Articles récupèreront également les Comments liés si ils existent::
+la table Articles récupèreront également les Comments liés s'ils existent::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('all')->contain(['Comments']);
@@ -440,9 +462,11 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
 Nous pouvons définir l'association belongsToMany dans notre model Articles comme
 suit::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Tags');
         }
     }
@@ -450,9 +474,11 @@ suit::
 Nous pouvons aussi définir une relation plus spécifique en utilisant un
 tableau::
 
-    class ArticlesTable extends Table {
+    class ArticlesTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Tags', [
                 'joinTable' => 'article_tag',
             ]);
@@ -507,7 +533,7 @@ sont:
   enregistrements associés.
 
 Une fois que cette association a été définie, les opérations find sur la table
-Articles peuvent contenir les enregistrements de Tag si ils existent::
+Articles peuvent contenir les enregistrements de Tag s'ils existent::
 
     // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')->contain(['Tags']);
@@ -566,24 +592,30 @@ connu comme une association **hasMany through**. Ceci étant, l'association est
 un model lui-même. Donc, nous pouvons créer un nouveau model
 CoursesMemberships. Regardez les models suivants::
 
-    class StudentsTable extends Table {
-        public function initialize(array $config) {
+    class StudentsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Courses', [
                 'through' => 'CourseMemberships',
             ]);
         }
     }
 
-    class CoursesTable extends Table {
-        public function initialize(array $config) {
+    class CoursesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->belongsToMany('Students', [
                 'through' => 'CourseMemberships',
             ]);
         }
     }
 
-    class CoursesMembershipsTable extends Table {
-        public function initialize(array $config) {
+    class CoursesMembershipsTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->belongsTo('Students');
             $this->belongsTo('Courses');
         }

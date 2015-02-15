@@ -1,5 +1,5 @@
-CookieComponent
-###############
+Cookie
+######
 
 .. php:namespace:: Cake\Controller\Component
 

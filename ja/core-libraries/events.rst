@@ -1,18 +1,14 @@
-.. Events System
-
 イベントシステム
 ################
 
-.. versionadded:: 2.1
 
-..
-  Creating maintainable applications is both a science and an art. It is
-  well-known that a key for having good quality code is making your objects
-  loosely coupled and strongly cohesive at the same time. Cohesion means that
-  all methods and properties for a class are strongly related to the class
-  itself and it is not trying to do the job other objects should be doing,
-  while loosely coupling is the measure of how little a class is "wired"
-  to external objects, and how much that class is depending on them.
+Creating maintainable applications is both a science and an art. It is
+well-known that a key for having good quality code is making your objects
+loosely coupled and strongly cohesive at the same time. Cohesion means that
+all methods and properties for a class are strongly related to the class
+itself and it is not trying to do the job other objects should be doing,
+while loosely coupling is the measure of how little a class is "wired"
+to external objects, and how much that class is depending on them.
 
 メンテナンス性の高いアプリケーションの創造は、科学でもあり芸術でもあります。
 良く知られていることですが、高い品質のコードを保持するための鍵は、
@@ -114,9 +110,11 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 恐らく、注文の詳細を保存したりその他もろもろのロジックを行うための `place` メソッドを持つことになるでしょう::
 
     // Cart/Model/Order.php
-    class Order extends AppModel {
+    class Order extends AppModel
+    {
 
-        public function place($order) {
+        public function place($order)
+        {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $this->sendNotificationEmail();
@@ -143,9 +141,11 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
-    class Order extends AppModel {
+    class Order extends AppModel
+    {
 
-        public function place($order) {
+        public function place($order)
+        {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
@@ -247,14 +247,14 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 ..
   How do we register callbacks or observers to our new `afterPlace` event? This
   is subject to a wide variety of different implementations, but they all have
-  to call the :php:meth:`CakeEventManager::attach()` method to register new actors.
+  to call the :php:meth:`CakeEventManager::on()` method to register new actors.
   For simplicity's sake, let's imagine we know in the plugin what the callbacks
   are available in the controller, and say this controller is responsible for
   attaching them. The possible code would look like this::
 
 新しいafterPlaceイベントにコールバックやオブザーバを登録するにはどうすればよいのでしょうか？
 これは多種多様な異なる実装がなされますが、どのような場合であっても新しいアクターを登録する
-:php:meth:`CakeEventManager::attach()` メソッドを呼び出す必要はあります。わかりやすくするために、
+:php:meth:`CakeEventManager::on()` メソッドを呼び出す必要はあります。わかりやすくするために、
 このプラグインにおいてコントローラでコールバックを使用可能であることを我々は知っており、
 このコントローラは、それらを責任を持って接続するとしましょう。可能なコードは次のようになります::
 
@@ -269,11 +269,13 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
     ));
 
     // Cart/Controller/OrdersController.php
-    class OrdersController extends AppController {
+    class OrdersController extends AppController
+    {
 
-        public function finish() {
+        public function finish()
+        {
             foreach (Configure::read('Order.afterPlace') as $l) {
-                $this->Order->getEventManager()->attach($l, 'Model.Order.afterPlace');
+                $this->Order->getEventManager()->on('Model.Order.afterPlace', $l);
             }
             if ($this->Order->place($this->Cart->items())) {
                 // ...
@@ -301,13 +303,13 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 第1の引数としてイベントオブジェクトを受け取ります。
 
 ..
-  :php:meth:`CakeEventManager::attach()` Accepts three arguments. The leftmost one is
+  :php:meth:`CakeEventManager::on()` Accepts three arguments. The leftmost one is
   the callback itself, anything that PHP can treat as a callable function. The second
   argument is the event name, and the callback will only get fired if the `CakeEvent`
   object dispatched has a matching name. The last argument is an array of options to
   configure the callback priority, and the preference of arguments to be passed.
 
-:php:meth:`CakeEventManager::attach()` は3つの引数を受け取ります。左端の1つはコールバック自身、
+:php:meth:`CakeEventManager::on()` は3つの引数を受け取ります。左端の1つはコールバック自身、
 PHPが呼び出し可能な関数として扱うことができる何かです。第二引数にはイベント名で、
 `CakeEvent` オブジェクトはこれとマッチした名前でディスパッチされたときにのみ動作します。
 最後の引数はコールバックのプライオリティ、および渡される引数のプライオリティを設定するためのオプションの配列です。
@@ -343,29 +345,32 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 このクラスのインスタンスをコールバックとして渡すのが自然でしょう。リスナーは次のように作成します::
 
     App::uses('CakeEventListener', 'Event');
-    class UserStatistic implements CakeEventListener {
+    class UserStatistic implements CakeEventListener
+    {
 
-        public function implementedEvents() {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
             );
         }
 
-        public function updateBuyStatistic($event) {
+        public function updateBuyStatistic($event)
+        {
             // Code to update statistics
         }
     }
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
-    $this->Order->getEventManager()->attach($statistics);
+    $this->Order->getEventManager()->on($statistics);
 
 ..
-  As you can see in the above code, the `attach` function can handle instances of
+  As you can see in the above code, the ``on`` function can handle instances of
   the `CakeEventListener` interface. Internally, the event manager will read the
   array returned by `implementedEvents` method and wire the callbacks accordingly.
 
-上記のコードを見るとわかるように、`attach` 関数は `CakeEventListener` インターフェイスの
+上記のコードを見るとわかるように、``on`` 関数は `CakeEventListener` インターフェイスの
 インスタンスを操ることができます。内部的には、イベント·マネージャーは `implementedEvents`
 メソッドが返す配列を読み取り、ただちにコールバックを結びつけます。
 
@@ -413,16 +418,22 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 2つのコールバックが同じプライオリティキューに割り当てられるた場合は、
 それらはFIFOポリシーで実行され、最初にアタッチされたリスナーメソッドは最初に、
-という具合に実行されます。コールバックのプライオリティを設定するためにはattachメソッドを用い、
+という具合に実行されます。コールバックのプライオリティを設定するためにはonメソッドを用い、
 リスナーのプライオリティを設定するためには `implementedEvent` 関数内での宣言を行います::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
+    $this->getEventManager()->on(
+        'Model.Order.afterPlace',
+        array('priority' => 2),
+        $callback
+    );
 
     // Setting priority for a listener
-    class UserStatistic implements CakeEventListener {
-        public function implementedEvents() {
+    class UserStatistic implements CakeEventListener
+    {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => array('callable' => 'updateBuyStatistic', 'priority' => 100),
             );
@@ -462,23 +473,26 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   third argument of the `attach` method, or declare it in the `implementedEvents`
   returned array similar to what you do with priorities::
 
-この方法を選択する場合、プライオリティの設定でやったのと同じように、`attach`メソッドの
-3番目の引数に`passParams`オプションを追加するか `implementedEvents` が返す配列に
+この方法を選択する場合、プライオリティの設定でやったのと同じように、``on``メソッドの
+3番目の引数に`passParams`オプションを追加するか ``implementedEvents`` が返す配列に
 それを宣言する必要があります::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
-    $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
+    $this->getEventManager()->on('Model.Order.afterPlace', $callback);
 
     // Setting priority for a listener
-    class UserStatistic implements CakeEventListener {
-        public function implementedEvents() {
+    class UserStatistic implements CakeEventListener
+    {
+        public function implementedEvents()
+        {
             return array(
                 'Model.Order.afterPlace' => array('callable' => 'updateBuyStatistic', 'passParams' => true),
             );
         }
 
-        public function updateBuyStatistic($orderData) {
+        public function updateBuyStatistic($orderData)
+        {
             // ...
         }
     }
@@ -530,12 +544,14 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 イベントを停止するためには、コールバックで `false` を返すか、またはイベントオブジェクトで
 `stopPropagation` メソッドを呼び出すかのいずれかを行うことができます::
 
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         return false; // stops the event
     }
 
-    public function updateBuyStatistic($event) {
+    public function updateBuyStatistic($event)
+    {
         // ...
         $event->stopPropagation();
     }
@@ -558,7 +574,8 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 イベントが中止されたかどうかを確認するには、イベント·オブジェクト内で `isStopped()` メソッドを呼び出します::
 
-    public function place($order) {
+    public function place($order)
+    {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
         $this->getEventManager()->dispatch($event);
         if ($event->isStopped()) {
@@ -601,20 +618,23 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 またはコールバック自体の値を返すことで変更できます::
 
     // A listener callback
-    public function doSomething($event) {
+    public function doSomething($event)
+    {
         // ...
         $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
     // Another listener callback
-    public function doSomethingElse($event) {
+    public function doSomethingElse($event)
+    {
         // ...
         $event->result['order'] = $alteredData;
     }
 
     // Using the event result
-    public function place($order) {
+    public function place($order)
+    {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
         $this->getEventManager()->dispatch($event);
         if (!empty($event->result['order'])) {
@@ -646,35 +666,35 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 ..
   If for any reason you want to remove any callback from the event manager just call
-  the :php:meth:`CakeEventManager::detach()` method using as arguments the first two
+  the :php:meth:`CakeEventManager::off()` method using as arguments the first two
   params you used for attaching it::
 
 何らかの理由でイベントマネージャーから任意のコールバックを削除したい場合は、
-:php:meth:`CakeEventManager::detach()` を引数の最初の2つの変数を attach のときと
+:php:meth:`CakeEventManager::off()` を引数の最初の2つの変数を attach のときと
 同様の用い方で呼び出すだけで良いです::
 
     // Attaching a function
-    $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
+    $this->getEventManager()->on('My.event', array($this, 'doSomething'));
 
     // Detaching the function
-    $this->getEventManager()->detach(array($this, 'doSomething'), 'My.event');
+    $this->getEventManager()->off('My.event', array($this, 'doSomething'));
 
-    // Attaching an anonymous function (PHP 5.3+ only);
+    // Attaching an anonymous function
     $myFunction = function ($event) { ... };
-    $this->getEventManager()->attach($myFunction, 'My.event');
+    $this->getEventManager()->on('My.event', $myFunction);
 
     // Detaching the anonymous function
-    $this->getEventManager()->detach($myFunction, 'My.event');
+    $this->getEventManager()->off('My.event', $myFunction);
 
     // Attaching a CakeEventListener
     $listener = new MyCakeEventLister();
-    $this->getEventManager()->attach($listener);
+    $this->getEventManager()->on($listener);
 
     // Detaching a single event key from a listener
-    $this->getEventManager()->detach($listener, 'My.event');
+    $this->getEventManager()->off('My.event', $listener);
 
     // Detaching all callbacks implemented by a listener
-    $this->getEventManager()->detach($listener);
+    $this->getEventManager()->off($listener);
 
 .. The global event manager
 
@@ -763,7 +783,8 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 
-    public function myCallback($event) {
+    public function myCallback($event)
+    {
         if ($event->subject() instanceof Cart) {
             return;
         }
@@ -810,15 +831,11 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 その他の資料
 ============
 
-.. toctree::
-    :maxdepth: 1
-
-    /core-libraries/collections
-    /models/behaviors
-    /controllers/components
-    /views/helpers
+* :doc:`/orm/behaviors`
+* :doc:`/controllers/components`
+* :doc:`/views/helpers`
 
 
 .. meta::
-    :title lang=en: Events system
-    :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php
+    :title lang=ja: Events system
+    :keywords lang=ja: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

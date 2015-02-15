@@ -1,5 +1,5 @@
 プラグイン
-##########
+############
 
 CakePHP では、コントローラ・モデル・ビューのコンビをセットアップし、
 パッケージしたアプリケーションプラグインとしてリリースできます。
@@ -34,7 +34,7 @@ CakePHP2.0 の変更点として、プラグインは config/bootstrap.php か�
 ``load()`` も同様の働きですが、明示的に指定したプラグインだけロードします。
 
 プラグイン設定
-==============
+================
 
 プラグイン設定とルーティングは、 load と loadAll メソッドで多くの方法が提供されています。
 特定のカスタムルートや特定プラグインのbootstrapファイルは、おそらく自動で読み込みたいでしょう。
@@ -97,7 +97,8 @@ Advanced bootstrapping
 
 ::
 
-    function aCallableFunction($pluginName, $config) {
+    function aCallableFunction($pluginName, $config)
+    {
 
     }
 
@@ -128,7 +129,7 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
 
 
 プラグイン作成
-=========================
+================
 
 動作サンプルとして、上記を参考にContactManagerを作りましょう。
 先ず始めに、プラグインの基本ディレクトリ構成を準備します。
@@ -171,13 +172,15 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
 ::
 
     // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
-    class ContactManagerAppController extends AppController {
+    class ContactManagerAppController extends AppController
+    {
     }
 
 ::
 
     // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    class ContactManagerAppModel extends AppModel {
+    class ContactManagerAppModel extends AppModel
+    {
     }
 
 もしこれらの特別なクラスの定義を忘れると、"Missing Controller"エラーがでます。
@@ -199,7 +202,7 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
     user@host$ cake bake controller Contacts --plugin ContactManager
 
 もしコマンドラインで問題があれば、ここのチャプターを参照してください
-:doc:`/console-and-shells/code-generation-with-bake`
+:doc:`/bake`
 
 
 プラグインコントローラー
@@ -213,10 +216,12 @@ ContactManagerプラグインのコントローラーは、/app/Plugin/ContactMa
 ::
 
     // app/Plugin/ContactManager/Controller/ContactsController.php
-    class ContactsController extends ContactManagerAppController {
+    class ContactsController extends ContactManagerAppController
+    {
         public $uses = array('ContactManager.Contact');
 
-        public function index() {
+        public function index()
+        {
             //...
         }
     }
@@ -238,7 +243,7 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 .. _plugin-models:
 
 プラグインモデル
-================
+==================
 
 プラグインのモデルは /app/Plugin/ContactManager/Model に設置されます。
 プラグインのContactsControllerは既に定義してあるので、そのモデルを作成します。
@@ -246,7 +251,8 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 ::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
     }
 
 /contact_manager/contacts に（‘contacts’テーブルがある状態で）今アクセスすると、“Missing View”エラーが発生します。
@@ -260,7 +266,8 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 ::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
         public $hasMany = array('ContactManager.AltName');
     }
 
@@ -269,7 +276,8 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 ::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
-    class Contact extends ContactManagerAppModel {
+    class Contact extends ContactManagerAppModel
+    {
         public $hasMany = array(
             'AltName' => array(
                 'className' => 'ContactManager.AltName'
@@ -278,7 +286,7 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
     }
 
 プラグインビュー
-================
+=================
 
 ビューは通常のアプリケーション内での動作として振る舞います。
 /app/Plugin/[PluginName]/View/ フォルダー内に設置するだけです。
@@ -298,7 +306,7 @@ ContactManagerプラグインでは、ContactsController::index() actionのview�
         :ref:`view-elements`
 
 アプリケーション内でのプラグインビューのオーバーライド
-------------------------------------------------------
+----------------------------------------------------------
 
 プラグインのビューはあるパスを使ってオーバーライドできます。
 'ContactManager'という名のプラグインがあるなら、
@@ -315,7 +323,7 @@ Contacts controllerにはこのファイルを作ります。
 
 
 プラグインアセット
-==================
+====================
 
 プラグインのウェブアセット（phpファイルではない）は、 プラグインの'webroot' ディレクトリを通して受け取られます。
 
@@ -355,7 +363,7 @@ Contacts controllerにはこのファイルを作ります。
     <?php echo $this->Html->css("ContactManager.style"); ?>
 
 コンポーネント、ヘルパーとビヘイビア
-====================================
+=====================================
 
 コンポーネント、ヘルパーやビヘイビアを持つプラグインは、通常のCakePHPアプリケーションのようなものです。
 コンポーネントだけ、または、ヘルパーやビヘイビアだけを含むプラグインも作る事が可能で、
@@ -370,7 +378,8 @@ Contacts controllerにはこのファイルを作ります。
 ::
 
     // Component defined in 'ContactManager' plugin
-    class ExampleComponent extends Component {
+    class ExampleComponent extends Component
+    {
     }
 
     // within your controllers:
@@ -389,7 +398,7 @@ Contacts controllerにはこのファイルを作ります。
 
 
 プラグインの拡張
-==================
+=================
 
 この例は、プラグインを作るための一つの良い開始方法であって、他にも色んな方法があります。
 通常のルールでは、つまりアプリケーションでできることは、プラグインでもできます。
@@ -405,7 +414,7 @@ Contact modelにvalidationを作成し、contact管理機能を追加します�
 その誰もが、あなたの素晴らしい、再利用可能なコンポーネントの恩恵を受けることができます！
 
 プラグインTips
-==============
+================
 
 一度、プラグインを /app/Plugin にインストールすると、 /plugin_name/controller_name/action
 というURLでアクセスできます。ContactManagerの例だと、ContactsControllerには /contact_manager/contacts でアクセスできます。
@@ -420,3 +429,7 @@ CakePHPアプリケーションで動作するプラグインの最後のtipsで
    内部プラグインとコミュニケーションができます。
 -  requestActionを使う際は、コントローラ名とモデル名がユニークであることを確認してください。
    そうしないと、"redefined class ..."エラーが発生します。
+
+.. meta::
+    :title lang=ja: Plugins
+    :keywords lang=ja: plugin folder,plugins,controllers,models,views,package,application,database connection,little space

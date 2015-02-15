@@ -76,7 +76,7 @@ Indexes and Constraints
 Indexes are added using the ``addIndex()``. Constraints are added using
 ``addConstraint()``.  Indexes & constraints cannot be added for columns that do
 not exist, as it would result in an invalid state. Indexes are different from
-constraints and exceptions will be raised if you try to mix types beween the
+constraints and exceptions will be raised if you try to mix types between the
 methods. An example of both methods is::
 
     $t = new Table('posts');

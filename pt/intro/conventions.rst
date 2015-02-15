@@ -3,10 +3,11 @@ Convenções do CakePHP
 
 Nós somos grandes fãs de convenção sobre configuração. Apesar de levar um
 pouco de tempo para aprender as convenções do CakePHP, você economiza tempo a
-longo prazo. Ao seguir as convenções, você ganha funcionalidades instantaneamente e 
-liberta-se do pesadelo de manutenção e rastreamento de arquivos de configuração.
-Convenções também prezam por uma experiência de desenvolvimento uniforme, 
-permitindo que outros desenvolvedores ajudem mais facilmente.
+longo prazo. Ao seguir as convenções, você ganha funcionalidades
+instantaneamente e liberta-se do pesadelo de manutenção e rastreamento de
+arquivos de configuração. Convenções também prezam por uma experiência de
+desenvolvimento uniforme, permitindo que outros desenvolvedores ajudem mais
+facilmente.
 
 Convenções para Controllers
 ===========================
@@ -17,9 +18,9 @@ Os nomes das classes de Controllers são pluralizados, CamelCased, e terminam em
 controllers.
 
 Métodos públicos nos Controllers são frequentemente referenciados como 'actions'
-acessíveis através de um navegador web. Por exemplo, o ``/articles/view`` mapeia para
-o método ``view()`` do ``ArticlesController`` sem nenhum esforço. Métodos privados ou
-protegidos não podem ser acessados pelo roteamento.
+acessíveis através de um navegador web. Por exemplo, o ``/articles/view`` mapeia
+para o método ``view()`` do ``ArticlesController`` sem nenhum esforço. Métodos
+privados ou protegidos não podem ser acessados pelo roteamento.
 
 Considerações de URL para nomes de Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,22 +84,23 @@ separadas por sublinhado. As tables sublinhadas para os models mencionados acima
 seriam ``people``,  ``big_people``, e ``really_big_people``,
 respectively.
 
-Você pode utilizar a biblioteca utility :php:class:`Cake\\Utility\\Inflector` para
-checar o singular/plural de palavras. Veja o :doc:`/core-utility-libraries/inflector`
-para mais informações. Recomenda-se que as tables sejam criadas e mantidas
-na língua inglesa.
+Você pode utilizar a biblioteca utility :php:class:`Cake\\Utility\\Inflector`
+para checar o singular/plural de palavras. Veja o
+:doc:`/core-libraries/inflector` para mais informações. Recomenda-se que
+as tables sejam criadas e mantidas na língua inglesa.
 
 Campos com duas ou mais palavras são separados por sublinhado: first\_name.
 
 Chaves estrangeiras nos relacionamentos hasMany, belongsTo ou hasOne são
 reconhecidas por padrão como o nome (singular) da table relacionada seguida por
-\_id. Então se Bakers hasMany Cakes, a table cakes irá referenciar-se para a table
-bakers através da chave estrangeira baker\_id. Para uma tabela como category\_types
-a qual o nome contém mais palavras, a chave estrangeira seria a category\_type\_id.
+\_id. Então se Bakers hasMany Cakes, a table cakes irá referenciar-se para a
+table bakers através da chave estrangeira baker\_id. Para uma tabela como
+category\_types a qual o nome contém mais palavras, a chave estrangeira seria a
+category\_type\_id.
 
-tables de união, usadas no relacionamento BelongsToMany entre models, devem ser nomeadas
-depois das tables que ela está unindo, ordenadas em ordem alfabética (apples\_zebras ao invés
-de zebras\_apples).
+tables de união, usadas no relacionamento BelongsToMany entre models, devem ser
+nomeadas depois das tables que ela está unindo, ordenadas em ordem alfabética
+(apples\_zebras ao invés de zebras\_apples).
 
 Convenções para Views
 =====================
@@ -114,7 +116,8 @@ você ganha funcionalidades sem luta e sem amarras de configuração.
 Aqui está um exemplo final que enlaça as convenções juntas:
 
 -  Table: "people"
--  Classe Table: "PeopleTable", encontrada em ``src/Model/Table/PeopleTable.php``
+-  Classe Table: "PeopleTable", encontrada em
+   ``src/Model/Table/PeopleTable.php``
 -  Classe Entity: "Person", encontrada em ``src/Model/Entity/Person.php``
 -  Classe Controller: "PeopleController", encontrada em
    ``src/Controller/PeopleController.php``

@@ -1,7 +1,7 @@
 TreeBehavior
 ############
 
-.. php:namespace:: Cake\Model\Behavior
+.. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TreeBehavior
 
@@ -19,7 +19,6 @@ information multi-niveau.
 Le TreeBehavior vous aide à maintenir une structure de données hierarchisée
 dans la base de données qui peut être requêtée facilement et aide à reconstruire
 les données en arbre pour trouver et afficher les processus.
-
 Pré-Requis
 ==========
 
@@ -45,8 +44,10 @@ Un Aperçu Rapide
 Vous activez le behavior Tree en l'ajoutant à la Table où vous voulez stocker
 les données hierarchisées dans::
 
-    class CategoriesTable extends Table {
-        public function initialize(array $config) {
+    class CategoriesTable extends Table
+    {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Tree');
         }
     }
@@ -144,7 +145,8 @@ Configuration
 Si les noms de colonne par défaut qui sont utilisés par ce behavior ne
 correspondent pas à votre schéma, vous pouvez leur fournir des alias::
 
-    public function initialize(array $config) {
+    public function initialize(array $config)
+    {
         $this->addBehavior('Tree', [
             'parent' => 'ancestor_id', // Utilise ceci plutôt que parent_id,
             'left' => 'tree_left', // Utilise ceci plutôt que lft
@@ -159,9 +161,11 @@ Parfois vous voulez avoir plus d'une structure d'arbre dans la même table, vous
 pouvez arriver à faire ceci en utilisant la configuration 'scope'. Par exemple,
 dans une table locations vous voudrez créer un arbre par pays::
 
-    class LocationsTable extends Table {
+    class LocationsTable extends Table
+    {
 
-        public function initialize(array $config) {
+        public function initialize(array $config)
+        {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);

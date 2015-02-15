@@ -35,9 +35,11 @@ validating any user data::
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
 
-    class UsersTable extends Table {
+    class UsersTable extends Table
+    {
 
-        public function validationDefault(Validator $validator) {
+        public function validationDefault(Validator $validator)
+        {
             return $validator
                 ->notEmpty('username', 'A username is required')
                 ->notEmpty('password', 'A password is required')
@@ -62,18 +64,22 @@ with CakePHP::
     use Cake\Network\Exception\ForbiddenException;
     use Cake\Event\Event;
 
-    class UsersController extends AppController {
+    class UsersController extends AppController
+    {
 
-        public function beforeFilter(Event $event) {
+        public function beforeFilter(Event $event)
+        {
             parent::beforeFilter($event);
             $this->Auth->allow('add');
         }
 
-         public function index() {
+         public function index()
+         {
             $this->set('users', $this->Users->find('all'));
         }
 
-        public function view($id) {
+        public function view($id)
+        {
             if (!$id) {
                 throw new NotFoundException(__('Invalid user'));
             }
@@ -82,7 +88,8 @@ with CakePHP::
             $this->set(compact('user'));
         }
 
-        public function add() {
+        public function add()
+        {
             $user = $this->Users->newEntity($this->request->data);
             if ($this->request->is('post')) {
                 if ($this->Users->save($user)) {
@@ -136,10 +143,12 @@ file and add the following lines::
     use Cake\Event\Event;
     use Cake\Controller\Controller;
 
-    class AppController extends Controller {
+    class AppController extends Controller
+    {
         //...
 
-        public function initialize() {
+        public function initialize()
+        {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
                 'loginRedirect' => [
@@ -154,8 +163,9 @@ file and add the following lines::
             ]);
         }
 
-        public function beforeFilter(Event $event) {
-            $this->Auth->allow(['index', 'view']);
+        public function beforeFilter(Event $event)
+        {
+            $this->Auth->allow(['index', 'view', 'display']);
         }
         //...
     }
@@ -176,7 +186,8 @@ the users add function and implement the login and logout action::
 
     // src/Controller/UsersController.php
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
         // Allow users to register and logout.
         // You should not add the "login" action to allow list. Doing so would
@@ -184,7 +195,8 @@ the users add function and implement the login and logout action::
         $this->Auth->allow(['add', 'logout']);
     }
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -195,7 +207,8 @@ the users add function and implement the login and logout action::
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         return $this->redirect($this->Auth->logout());
     }
 
@@ -209,14 +222,16 @@ and add the following::
     use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
 
-    class User extends Entity {
+    class User extends Entity
+    {
 
         // Make all fields mass assignable for now.
         protected $_accessible = ['*' => true];
 
         // ...
 
-        protected function _setPassword($password) {
+        protected function _setPassword($password)
+        {
             return (new DefaultPasswordHasher)->hash($password);
         }
 
@@ -280,11 +295,15 @@ logged in user as a reference for the created article::
 
     // src/Controller/ArticlesController.php
 
-    public function add() {
+    public function add()
+    {
         $article = $this->Articles->newEntity($this->request->data);
         if ($this->request->is('post')) {
             // Added this line
             $article->user_id = $this->Auth->user('id');
+            // You could also do the following
+            //$newData = ['user_id' => $this->Auth->user('id')];
+            //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -306,7 +325,8 @@ config::
 
     // src/Controller/AppController.php
 
-    public function initialize() {
+    public function initialize()
+    {
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'authorize' => ['Controller'], // Added this line
@@ -322,7 +342,8 @@ config::
         ]);
     }
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
@@ -346,7 +367,8 @@ and add the following content::
 
     // src/Controller/ArticlesController.php
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user)
+    {
         // All registered users can add articles
         if ($this->request->action === 'add') {
             return true;
@@ -372,7 +394,8 @@ function in the Articles table. Let's then implement that function::
 
     // src/Model/Table/ArticlesTable.php
 
-    public function isOwnedBy($articleId, $userId) {
+    public function isOwnedBy($articleId, $userId)
+    {
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 

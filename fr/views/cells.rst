@@ -30,9 +30,11 @@ Son contenu devrait ressembler à ceci::
 
     use Cake\View\Cell;
 
-    class InboxCell extends Cell {
+    class InboxCell extends Cell
+    {
 
-        public function display() {
+        public function display()
+        {
         }
 
     }
@@ -71,9 +73,11 @@ la classe, nous avons juste ajouté ce qui suit::
 
     use Cake\View\Cell;
 
-    class InboxCell extends Cell {
+    class InboxCell extends Cell
+    {
 
-        public function display() {
+        public function display()
+        {
             $this->loadModel('Messages');
             $unread = $this->Messages->find('unread');
             $this->set('unread_count', $unread->count());
@@ -127,7 +131,8 @@ controller pour y activer la méthode ``cell()``::
     use App\Controller\AppController;
     use Cake\View\CellTrait;
 
-    class DashboardsController extends AppController {
+    class DashboardsController extends AppController
+    {
         use CellTrait;
 
         // More code.
@@ -145,7 +150,8 @@ classes de cell::
 
 Ce qui est au-dessus correspondra à la signature de la fonction suivante::
 
-    public function recent($since) {
+    public function recent($since)
+    {
     }
 
 Afficher une Cell

@@ -197,9 +197,11 @@ and the results stored in the cache at the provided key.
 For example, you often want to cache remote service call results. You could use
 ``remember()`` to make this simple::
 
-    class IssueService  {
+    class IssueService 
+    {
 
-        public function allIssues($repo) {
+        public function allIssues($repo)
+        {
             return Cache::remember($repo . '-issues', function () use ($repo) {
                 return $this->fetchAll($repo);
             });
@@ -373,7 +375,8 @@ For instance, whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the ``article`` group::
 
     // src/Model/Table/ArticlesTable.php
-    public function afterSave($entity, $options = []) {
+    public function afterSave($entity, $options = [])
+    {
         if ($entity->isNew()) {
             Cache::clearGroup('article', 'site_home');
         }
@@ -390,7 +393,8 @@ configurations, i.e.: having the same group::
      * A variation of previous example that clears all Cache configurations
      * having the same group
      */
-    public function afterSave($entity, $options = []) {
+    public function afterSave($entity, $options = [])
+    {
         if ($entity->isNew()) {
             $configs = Cache::groupConfigs('article');
             foreach ($configs['article'] as $config) {

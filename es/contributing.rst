@@ -2,12 +2,13 @@ Contributing
 ############
 
 .. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
+    La documentación no es compatible actualmente con el idioma español en esta página.
 
-There are a number of ways you can contribute to CakePHP. The following sections
-cover the various ways you can contribute to CakePHP:
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
+
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.
 
 .. toctree::
     :maxdepth: 1
@@ -18,8 +19,6 @@ cover the various ways you can contribute to CakePHP:
     contributing/cakephp-coding-conventions
     contributing/backwards-compatibility
 
-
-
 .. meta::
-    :title lang=en: Contributing
-    :keywords lang=en: coding conventions,documentation,maxdepth
+    :title lang=es: Contributing
+    :keywords lang=es: coding conventions,documentation,maxdepth
