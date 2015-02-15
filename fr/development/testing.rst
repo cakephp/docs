@@ -1158,7 +1158,7 @@ important de s'assurer que ces classes sont couvertes par des cas de test.
 
 Tout d'abord, nous créons un helper d'exemple à tester.
 ``CurrencyRendererHelper`` va nous aider à afficher les monnaies dans nos vues
-et pour siplifier, il ne va avoir qu'une méthode ``usd()``::
+et pour simplifier, il ne va avoir qu'une méthode ``usd()``::
 
     // src/View/Helper/CurrencyRendererHelper.php
     namespace App\View\Helper;
@@ -1196,8 +1196,8 @@ Maintenant nous créons nos tests::
         public function setUp()
         {
             parent::setUp();
-            $view = new View();
-            $this->helper = new CurrencyRendererHelper($view);
+            $View = new View();
+            $this->helper = new CurrencyRendererHelper($View);
         }
 
         // Test de la fonction usd()

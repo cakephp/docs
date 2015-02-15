@@ -88,20 +88,20 @@ Le balisage interne
 -------------------
 
 * Un astérisque: *text* pour une accentuation (italiques)
-  We'll use it for general highlighting/emphasis.
+  Nous les utiliserons pour mettre en exergue des infos générales.
 
   * ``*text*``.
 
-* Two asterisks: **text** pour une forte accentuation (caractères gras)
-  We'll use it for working directories, bullet list subject, table names and
-  excluding the following word "table".
+* Deux astérisques: **text** pour une forte accentuation (caractères gras)
+  Nous les utiliserons pour les répertoires de travail, les sujets de liste à
+  puce, les noms de table et en excluant le mot "table" suivant.
 
   * ``**/config/Migrations**``, ``**articles**``, etc.
 
-* Two backquotes: ``text`` pour les exemples de code
-  We'll use it for names of method options, names of table columns, object
-  names, excluding the following word "object" and for method/function
-  names -- include "()".
+* Deux backquotes: ``text`` pour les exemples de code
+  Nous les utiliserons pour les noms d'options de méthode, les noms de colonne
+  des tables, les noms d'objet en excluant le mot "object" suivant et pour les
+  noms de méthode/fonction -- en incluant "()".
 
   * ````cascadeCallbacks````, ````true````, ````id````,
     ````PagesController````, ````config()````, etc.

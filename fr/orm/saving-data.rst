@@ -112,7 +112,7 @@ plusieurs articles devrait ressembler à ceci::
 
 Il est également possible de permettre à ``newEntity()`` d'écrire dans des champs non accessibles.
 Par exemple, ``id`` est générallement absent de la propriété ``_accessible``.
-Dans ce cas, vous pouvez utiliser l'option ``accessibleFields``. Cela est particulièrement intéressant 
+Dans ce cas, vous pouvez utiliser l'option ``accessibleFields``. Cela est particulièrement intéressant
 pour conserver les associations existantes entre certaines entités::
 
     // Dans un controller.
@@ -312,7 +312,7 @@ dans chacune des entities du tableau::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
-De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez permettre à ``patchEntity()`` 
+De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez permettre à ``patchEntity()``
 d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement pas déclaré dans la propriété
 ``_accessible``::
 
@@ -321,7 +321,7 @@ d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement
         $list,
         $this->request->data(),
         ['associated' => [
-                'Tags', 
+                'Tags',
                 'Comments.Users' => [
                     'accessibleFields' => ['id' => true],
                 ]
@@ -601,7 +601,7 @@ utilisant l'option ``associated``::
     // Dans un controller.
 
     // Sauvegarde seulement l'association avec les commentaires
-    $articles->save($entity, ['associated' => ['Comments']);
+    $articles->save($entity, ['associated' => ['Comments']]);
 
 Vous pouvez définir une sauvegarde distante ou des associations imbriquées
 profondément en utilisant la notation par point::
