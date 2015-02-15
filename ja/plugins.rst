@@ -420,3 +420,14 @@ CakePHPアプリケーションで動作するプラグインの最後のtipsで
    内部プラグインとコミュニケーションができます。
 -  requestActionを使う際は、コントローラ名とモデル名がユニークであることを確認してください。
    そうしないと、"redefined class ..."エラーが発生します。
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/how-to-install-plugins
+   plugins/how-to-use-plugins
+   plugins/how-to-create-plugins
+
+.. meta::
+    :title lang=ja: Plugins
+    :keywords lang=ja: plugin folder,plugins,controllers,models,views,package,application,database connection,little space

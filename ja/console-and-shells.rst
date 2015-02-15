@@ -1017,13 +1017,13 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
     :maxdepth: 1
 
     console-and-shells/cron-jobs
+    console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations
     console-and-shells/i18n-shell
     console-and-shells/acl-shell
     console-and-shells/testsuite-shell
     console-and-shells/upgrade-shell
-
 
 .. meta::
     :title lang=ja: Console and Shells
