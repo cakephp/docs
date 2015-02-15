@@ -149,9 +149,8 @@ kurmanıza ve uygulamanın http://www.example.com adresinden erişebilmenize yar
 edecektir. Bu kurulumun apache sunucularda ``DocumentRoot`` dizinine yazma
 hakkı gerektirdiğine dikkat edin.
 
-After installing your application using one of the methods above into the
-directory of your choosing - we'll assume you chose /cake_install - your
-production setup will look like this on the file system::
+Uygulamanızı kurduktan sonra, /cake_install gibi bir dizininiz olduğunu
+düşünürsek, canlı sisteminiz dosya sisteminizde şu şekilde görünmelidir::
 
     /cake_install/
         bin/
@@ -171,13 +170,13 @@ production setup will look like this on the file system::
         phpunit.xml.dist
         README.md
 
-Developers using Apache should set the ``DocumentRoot`` directive
-for the domain to::
+Apache kullanan geliştiriciler alan için ``DocumentRoot`` yönergesini
+ayarlamalılar::
 
     DocumentRoot /cake_install/webroot
 
-If your web server is configured correctly, you should now find
-your CakePHP application accessible at http://www.example.com.
+Eğer web sunucunuz doğru ayarlandıysa, cakePHP uygulamanız
+http://www.example.com adresinde erişilebilir olacaktır.
 
 
 Fire It Up
