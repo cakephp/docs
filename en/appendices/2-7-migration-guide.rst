@@ -62,6 +62,8 @@ SessionComponent
 
 - :php:meth:`SessionComponent::consume()` has been added to read and delete
   from session in a single step.
+- :php:meth:`SessionComponent::setFlash()` has been deprecated. You should use
+  :php:class:`FlashComponent` instead.
 
 
 View
@@ -72,6 +74,8 @@ SessionHelper
 
 - :php:meth:`SessionHelper::consume()` has been added to read and delete from
   session in a single step.
+- :php:meth:`SessionHelper::flash()` has been deprecated. You should use
+  :php:class:`FlashHelper` instead.
 
 
 TestSuite
