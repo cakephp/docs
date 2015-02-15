@@ -156,8 +156,20 @@ CakePHPではこれを :php:class:`AuthComponent` で処理します。
         public $components = array(
             'Session',
             'Auth' => array(
-                'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
+                'loginRedirect' => array(
+                    'controller' => 'posts',
+                    'action' => 'index'
+                ),
+                'logoutRedirect' => array(
+                    'controller' => 'pages',
+                    'action' => 'display',
+                    'home'
+                ),
+                'authenticate' => array(
+                    'Form' => array(
+                        'passwordHasher' => 'Blowfish'
+                    )
+                )
             )
         );
 
@@ -296,7 +308,16 @@ Authコンポーネントの ``user()`` 関数は現在ログインしている�
         'Session',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+            'logoutRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            ),
             'authorize' => array('Controller') // この行を追加しました
         )
     );
