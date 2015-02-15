@@ -14,7 +14,7 @@ vous avez lu le tutoriel du :doc:`/tutorials-and-examples/blog/blog`, et que
 vous êtes familier avec :doc:`/console-and-shells/code-generation-with-bake`.
 Vous devrez avoir un peu d'expérience avec CakePHP, et être familier avec les
 concepts MVC. Ce tutoriel est une briève introduction à
-:php:class:`AuthComponent` et :php:class:`AclComponent`\.
+:php:class:`AuthComponent` et :php:class:`AclComponent`.
 
 Ce dont vous aurez besoin
 
@@ -41,8 +41,9 @@ https://github.com/cakephp/cakephp/tags et téléchargez la version stable.
 Pour ce tutoriel vous aurez besoin de la dernière version 2.x.
 
 Vous pouvez aussi dupliquer le dépôt en utilisant
-`git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git``.
+`git <http://git-scm.com/>`_::
+
+    git clone git://github.com/cakephp/cakephp.git.
 
 Une fois que vous avez votre copie toute récente de CakePHP, configurez votre
 fichier "app/Config/database.php" et changez la valeur du Security.salt
@@ -88,8 +89,8 @@ de données, nous pouvons commencer à cuisiner. Utilisez
 :doc:`/console-and-shells/code-generation-with-bake` pour créer
 rapidement vos models, controllers et vues.
 
-Pour utiliser cake bake, appelez "cake bake all" et cela listera les 4 tables
-que vous avez inseré dans mySQL. Séléctionnez "1. Group", et suivez ce qui
+Pour utiliser cake bake, appelez ``cake bake all`` et cela listera les 4 tables
+que vous avez inseré dans MySQL. Séléctionnez "1. Group", et suivez ce qui
 est écrit sur l'écran. Répétez pour les 3 autres tables, et cela générera
 les 4 controllers, models et vues pour vous.
 
@@ -128,7 +129,7 @@ action logout à votre ``UsersController``::
             }
         }
     }
-     
+
     public function logout() {
         //Laissez vide pour le moment.
     }
@@ -227,7 +228,7 @@ Pour supprimer ces erreurs, nous devons exécuter un fichier de schéma. Dans un
 shell, exécutez la commande suivante::
 
     ./Console/cake schema create DbAcl
-    
+
 Ce schéma vous invite à supprimer et créer les tables. Répondez Oui (Yes) à la
 suppression et création des tables.
 
@@ -255,7 +256,7 @@ code suivant ::
     class User extends Model {
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
-         
+
         public function parentNode() {
             if (!$this->id && empty($this->data)) {
                 return null;
@@ -276,7 +277,7 @@ Ensuite dans notre Model ``Group`` ajoutons ce qui suit::
 
     class Group extends Model {
         public $actsAs = array('Acl' => array('type' => 'requester'));
-         
+
         public function parentNode() {
             return null;
         }

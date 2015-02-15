@@ -215,7 +215,7 @@ CakePHP は正しく動作します。
 ``required`` と ``allowEmpty`` の違いは少し紛らわしいです。
 ``'required' => true`` の場合、 ``$this->data`` の中にその
 項目の『キー』がないと、モデルの保存はできません（チェックは
-``isset`` で行われます）。一方 ``'allowEmpty' => false`` 
+``isset`` で行われます）。一方 ``'allowEmpty' => false``
 にした場合、前述のように現在の項目の『値が』 nonempty で
 あること、となります。
 
@@ -311,7 +311,7 @@ last
 項目単位の複数ルールでは、デフォルトでは特定のルールに引っかかると
 そのルールのエラーメッセージが返され、その項目についてそれ以降の
 ルールは処理されません。もしあるルールが失敗しても
-それ以降のバリデーションを継続したい場合は、そのルールで ``last`` 
+それ以降のバリデーションを継続したい場合は、そのルールで ``last``
 キーを ``false`` にします。
 
 以下の例では "rule1" のチェックに引っかかっても "rule2" が
@@ -374,7 +374,7 @@ last
 どうかをチェックしています。
 
 ``rule`` で指定する正規表現は、スラッシュで囲まなければなりません。
-末尾のスラッシュの後に 'i' を付けると、その正規表現は case 
+末尾のスラッシュの後に 'i' を付けると、その正規表現は case
 *i*\ nsensitive（大文字と小文字を区別しないこをと）を表します。
 
 独自のバリデーションメソッドを追加する
@@ -410,7 +410,7 @@ last
 渡されます。
 
 作成したバリデーション用の関数に追加のパラメータを渡したい場合は、
-要素を 'rule' 配列に入れ、関数内でそれらを（主となる $check 
+要素を 'rule' 配列に入れ、関数内でそれらを（主となる $check
 パラメータの後の）追加パラメータとして処理します。
 
 作成したバリデーション関数は（上記の例のように）モデルの中に書くか、
@@ -457,7 +457,7 @@ last
 入力値が有効の場合、メソッドは ``true`` を返さなければなりません。
 無効の場合は ``false`` を返します。これら以外の返り値が文字列であれば、
 それはエラーメッセージとして表示されます。文字列を返すということは、
-チェックでエラーになったことを表します。その文字列は $validate 
+チェックでエラーになったことを表します。その文字列は $validate
 配列に設定された message を上書きし、その項目がエラーになった
 理由としてビューのフォームに表示されます。
 
@@ -756,7 +756,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
     -  'ymd' たとえば 2006-12-27 または 06-12-27 （区切り文字には空白、
        ピリオド、ハイフン、スラッシュが使えます）
     -  'dMy' たとえば 27 December 2006 または 27 Dec 2006
-    -  'Mdy' たとえば December 27, 2006 または Dec 27, 2006 
+    -  'Mdy' たとえば December 27, 2006 または Dec 27, 2006
        （カンマはオプション）
     -  'My' たとえば December 2006 または Dec 2006
     -  'my' たとえば 12/2006 または 12/06 （区切り文字には空白、
@@ -796,7 +796,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
     -  'ymd' たとえば 2006-12-27 または 06-12-27 （区切り文字には空白、
        ピリオド、ハイフン、スラッシュが使えます）
     -  'dMy' たとえば 27 December 2006 または 27 Dec 2006
-    -  'Mdy' たとえば December 27, 2006 または Dec 27, 2006 
+    -  'Mdy' たとえば December 27, 2006 または Dec 27, 2006
        （カンマはオプションです）
     -  'My' たとえば December 2006 または Dec 2006
     -  'my' たとえば 12/2006 or 12/06 （区切り文字には空白、
@@ -910,7 +910,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
              )
          );
 
-    デフォルトでは比較の際に大文字と小文字を区別します。 ``$caseInsensitive`` 
+    デフォルトでは比較の際に大文字と小文字を区別します。 ``$caseInsensitive``
     を true で指定すると大文字と小文字を区別せずに比較します。
 
 .. php:staticmethod:: ip(string $check, string $type = 'both')
@@ -1264,5 +1264,5 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 
 .. meta::
-    :title lang=en: Data Validation
-    :keywords lang=en: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting
+    :title lang=ja: Data Validation
+    :keywords lang=ja: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting

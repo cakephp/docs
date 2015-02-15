@@ -92,7 +92,8 @@ lowercased Folders:
 * webroot
 
 htaccess (URL Rewriting)
-===============================================
+========================
+
 In your ``app/webroot/.htaccess`` replace line ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` with ``RewriteRule ^(.*)$ index.php [QSA,L]``
 
 AppController / AppModel / AppHelper / AppShell

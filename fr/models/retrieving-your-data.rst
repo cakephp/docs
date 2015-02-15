@@ -943,7 +943,7 @@ toujours possible de la spécifier sous forme de chaîne comme ceci::
     )
 
 Par défaut, CakePHP fournit les conditions multiples avec l'opérateur booléen
-``AND``, ce qui signifie que le bout de code ci-dessus correspondra
+``AND``, ce qui signifie que le bout de code ci-dessous correspondra
 uniquement aux posts qui ont été créés durant les deux dernières semaines, et
 qui ont un titre correspondant à ceux donnés. Cependant, nous pouvons simplement
 trouver les posts qui correspondent à l'une ou l'autre des conditions::

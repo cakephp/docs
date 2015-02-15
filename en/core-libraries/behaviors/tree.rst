@@ -147,36 +147,31 @@ and an even simpler model definition::
 We can check what our category tree data looks like by visiting
 /categories You should see something like this:
 
-
 -  My Categories
 
-   -  Fun
+    -  Fun
 
-      -  Sport
+        -  Sport
 
-         -  Surfing
-         -  Extreme knitting
+            -  Surfing
+            -  Extreme knitting
 
-      -  Friends
+        -  Friends
 
-         -  Gerald
-         -  Gwendolyn
+            -  Gerald
+            -  Gwendolyn
 
+    -  Work
 
-   -  Work
+        -  Reports
 
-      -  Reports
+            -  Annual
+            -  Status
 
-         -  Annual
-         -  Status
+        -  Trips
 
-      -  Trips
-
-         -  National
-         -  International
-
-
-
+            -  National
+            -  International
 
 Adding data
 -----------
@@ -204,38 +199,34 @@ to the tree making your new addition a new top level entry::
 Running the above two code snippets would alter your tree as
 follows:
 
+- My Categories
 
--  My Categories
+    - Fun
 
-   -  Fun
+        - Sport
 
-      -  Sport
+            - Surfing
+            - Extreme knitting
+            - Skating **New**
 
-         -  Surfing
-         -  Extreme knitting
-         -  Skating **New**
+        - Friends
 
-      -  Friends
+            - Gerald
+            - Gwendolyn
 
-         -  Gerald
-         -  Gwendolyn
+    - Work
 
+        - Reports
 
-   -  Work
+            - Annual
+            - Status
 
-      -  Reports
+        - Trips
 
-         -  Annual
-         -  Status
+            - National
+            - International
 
-      -  Trips
-
-         -  National
-         -  International
-
-
-
--  Other People's Categories **New**
+- Other People's Categories **New**
 
 Modifying data
 --------------
@@ -253,38 +244,34 @@ parent\_id is included in the data that is passed to save if the
 value doesn't change, neither does the data structure. Therefore
 the tree of data would now look like:
 
+- My Categories
 
--  My Categories
+    - Fun
 
--  Fun
+        - Sport
 
- -  Sport
+            - Surfing
+            - Extreme fishing **Updated**
+            - Skating
 
-    -  Surfing
-    -  Extreme fishing **Updated**
-    -  Skating
+        - Friends
 
- -  Friends
+            - Gerald
+            - Gwendolyn
 
-    -  Gerald
-    -  Gwendolyn
+    - Work
 
+        - Reports
 
--  Work
+            - Annual
+            - Status
 
- -  Reports
+        - Trips
 
-    -  Annual
-    -  Status
+            - National
+            - International
 
- -  Trips
-
-    -  National
-    -  International
-
-
-
--  Other People's Categories
+- Other People's Categories
 
 Moving data around in your tree is also a simple affair. Let's say
 that Extreme fishing does not belong under Sport, but instead
@@ -301,40 +288,35 @@ following code::
 
 As would be expected the structure would be modified to:
 
+- My Categories
 
--  My Categories
+    - Fun
 
- -  Fun
+        - Sport
 
-    -  Sport
+            - Surfing
+            - Skating
 
-       -  Surfing
-       -  Skating
+        - Friends
 
-    -  Friends
+            - Gerald
+            - Gwendolyn
 
-       -  Gerald
-       -  Gwendolyn
+    - Work
 
+        - Reports
 
- -  Work
+            - Annual
+            - Status
 
-    -  Reports
+        - Trips
 
-       -  Annual
-       -  Status
+            - National
+            - International
 
-    -  Trips
+- Other People's Categories
 
-       -  National
-       -  International
-
-
-
--  Other People's Categories
-
- -  Extreme fishing **Moved**
-
+    -  Extreme fishing **Moved**
 
 Deleting data
 -------------
@@ -351,35 +333,30 @@ any model. For example with the following code::
 
 The category tree would be modified as follows:
 
+- My Categories
 
--  My Categories
+    - Fun
 
- -  Fun
+        - Sport
 
-    -  Sport
+            - Surfing
+            - Skating
 
-       -  Surfing
-       -  Skating
+        - Friends
 
-    -  Friends
+            - Gerald
+            - Gwendolyn
 
-       -  Gerald
-       -  Gwendolyn
+    - Work
 
+        - Trips
 
- -  Work
+            - National
+            - International
 
-    -  Trips
+- Other People's Categories
 
-       -  National
-       -  International
-
-
-
--  Other People's Categories
-
- -  Extreme fishing
-
+    - Extreme fishing
 
 Querying and using your data
 ----------------------------
@@ -394,7 +371,6 @@ are a few more tree-orientated permutations at your disposal.
     the ``lft`` field. If you call ``find()`` and do not order by
     ``lft``, or call a tree behavior method and pass a sort order, you
     may get undesirable results.
-
 
 .. php:class:: TreeBehavior
 
@@ -492,19 +468,14 @@ are a few more tree-orientated permutations at your disposal.
     where you are to the top. So for example the path from the category
     "International" is:
 
-
     -  My Categories
 
-     -  ...
-     -  Work
+        - ...
+        - Work
+        - Trips
 
-        -  Trips
-
-           -  ...
-           -  International
-
-
-
+            - ...
+            - International
 
     Using the id of "International" getPath will return each of the
     parents in turn (starting from the top). ::
@@ -529,289 +500,276 @@ are a few more tree-orientated permutations at your disposal.
           ),
       )
 
-
 Advanced Usage
 ==============
 
-    The tree behavior doesn't only work in the background, there are a
-    number of specific methods defined in the behavior to cater for all
-    your hierarchical data needs, and any unexpected problems that
-    might arise in the process.
+The tree behavior doesn't only work in the background, there are a
+number of specific methods defined in the behavior to cater for all
+your hierarchical data needs, and any unexpected problems that
+might arise in the process.
 
-    .. php:method:: moveDown()
+.. php:method:: moveDown()
 
-    Used to move a single node down the tree. You need to provide the
-    ID of the element to be moved and a positive number of how many
-    positions the node should be moved down. All child nodes for the
-    specified node will also be moved.
+Used to move a single node down the tree. You need to provide the
+ID of the element to be moved and a positive number of how many
+positions the node should be moved down. All child nodes for the
+specified node will also be moved.
 
-    Here is an example of a controller action (in a controller named
-    Categories) that moves a specified node down the tree::
+Here is an example of a controller action (in a controller named
+Categories) that moves a specified node down the tree::
 
-        public function movedown($id = null, $delta = null) {
-            $this->Category->id = $id;
-            if (!$this->Category->exists()) {
-               throw new NotFoundException(__('Invalid category'));
-            }
-
-            if ($delta > 0) {
-                $this->Category->moveDown($this->Category->id, abs($delta));
-            } else {
-                $this->Session->setFlash(
-                  'Please provide the number of positions the field should be' .
-                  'moved down.'
-                );
-            }
-
-            return $this->redirect(array('action' => 'index'));
+    public function movedown($id = null, $delta = null) {
+        $this->Category->id = $id;
+        if (!$this->Category->exists()) {
+           throw new NotFoundException(__('Invalid category'));
         }
 
-    For example, if you'd like to move the "Sport" ( id of 3 ) category one
-    position down, you would request: /categories/movedown/3/1.
-
-    .. php:method:: moveUp()
-
-    Used to move a single node up the tree. You need to provide the ID
-    of the element to be moved and a positive number of how many
-    positions the node should be moved up. All child nodes will also be
-    moved.
-
-    Here's an example of a controller action (in a controller named
-    Categories) that moves a node up the tree::
-
-        public function moveup($id = null, $delta = null) {
-            $this->Category->id = $id;
-            if (!$this->Category->exists()) {
-               throw new NotFoundException(__('Invalid category'));
-            }
-
-            if ($delta > 0) {
-                $this->Category->moveUp($this->Category->id, abs($delta));
-            } else {
-                $this->Session->setFlash(
-                  'Please provide a number of positions the category should' .
-                  'be moved up.'
-                );
-            }
-
-            return $this->redirect(array('action' => 'index'));
+        if ($delta > 0) {
+            $this->Category->moveDown($this->Category->id, abs($delta));
+        } else {
+            $this->Session->setFlash(
+              'Please provide the number of positions the field should be' .
+              'moved down.'
+            );
         }
 
-    For example, if you would like to move the category "Gwendolyn" ( id of 8 ) up
-    one position you would request /categories/moveup/8/1. Now
-    the order of Friends will be Gwendolyn, Gerald.
+        return $this->redirect(array('action' => 'index'));
+    }
 
-    .. php:method:: removeFromTree($id = null, $delete = false)
+For example, if you'd like to move the "Sport" ( id of 3 ) category one
+position down, you would request: /categories/movedown/3/1.
 
-    Using this method will either delete or move a node but retain its
-    sub-tree, which will be reparented one level higher. It offers more
-    control than :ref:`model-delete`, which for a model
-    using the tree behavior will remove the specified node and all of
-    its children.
+.. php:method:: moveUp()
 
-    Taking the following tree as a starting point:
+Used to move a single node up the tree. You need to provide the ID
+of the element to be moved and a positive number of how many
+positions the node should be moved up. All child nodes will also be
+moved.
 
+Here's an example of a controller action (in a controller named
+Categories) that moves a node up the tree::
 
-    -  My Categories
+    public function moveup($id = null, $delta = null) {
+        $this->Category->id = $id;
+        if (!$this->Category->exists()) {
+           throw new NotFoundException(__('Invalid category'));
+        }
 
-       -  Fun
+        if ($delta > 0) {
+            $this->Category->moveUp($this->Category->id, abs($delta));
+        } else {
+            $this->Session->setFlash(
+              'Please provide a number of positions the category should' .
+              'be moved up.'
+            );
+        }
 
-          -  Sport
+        return $this->redirect(array('action' => 'index'));
+    }
 
-             -  Surfing
-             -  Extreme knitting
-             -  Skating
+For example, if you would like to move the category "Gwendolyn" ( id of 8 ) up
+one position you would request /categories/moveup/8/1. Now
+the order of Friends will be Gwendolyn, Gerald.
 
+.. php:method:: removeFromTree($id = null, $delete = false)
 
+Using this method will either delete or move a node but retain its
+sub-tree, which will be reparented one level higher. It offers more
+control than :ref:`model-delete`, which for a model
+using the tree behavior will remove the specified node and all of
+its children.
 
+Taking the following tree as a starting point:
 
-    Running the following code with the id for 'Sport'::
+-  My Categories
 
-        $this->Node->removeFromTree($id);
+    -  Fun
 
-    The Sport node will be become a top level node:
+        -  Sport
 
+            -  Surfing
+            -  Extreme knitting
+            -  Skating
 
-    -  My Categories
+Running the following code with the id for 'Sport'::
 
-       -  Fun
+    $this->Node->removeFromTree($id);
 
-          -  Surfing
-          -  Extreme knitting
-          -  Skating
+The Sport node will be become a top level node:
 
+-  My Categories
 
-    -  Sport **Moved**
+    -  Fun
 
-    This demonstrates the default behavior of ``removeFromTree`` of
-    moving the node to have no parent, and re-parenting all children.
+        -  Surfing
+        -  Extreme knitting
+        -  Skating
 
-    If however the following code snippet was used with the id for
-    'Sport'::
+-  Sport **Moved**
 
-        $this->Node->removeFromTree($id, true);
+This demonstrates the default behavior of ``removeFromTree`` of
+moving the node to have no parent, and re-parenting all children.
 
-    The tree would become
+If however the following code snippet was used with the id for
+'Sport'::
 
+    $this->Node->removeFromTree($id, true);
 
-    -  My Categories
+The tree would become
 
-       -  Fun
+-  My Categories
 
-          -  Surfing
-          -  Extreme knitting
-          -  Skating
+    -  Fun
 
+        -  Surfing
+        -  Extreme knitting
+        -  Skating
 
+This demonstrates the alternate use for ``removeFromTree``, the
+children have been reparented and 'Sport' has been deleted.
 
-    This demonstrates the alternate use for ``removeFromTree``, the
-    children have been reparented and 'Sport' has been deleted.
+.. php:method:: reorder(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
 
-    .. php:method:: reorder(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
+Reorders the nodes (and child nodes) of the tree according to the
+field and direction specified in the parameters. This method does
+not change the parent of any node. ::
 
-    Reorders the nodes (and child nodes) of the tree according to the
-    field and direction specified in the parameters. This method does
-    not change the parent of any node. ::
+    $model->reorder(array(
+        //id of record to use as top node for reordering, default: $Model->id
+        'id' => ,
+        //which field to use in reordering, default: $Model->displayField
+        'field' => ,
+        //direction to order, default: 'ASC'
+        'order' => ,
+        //whether or not to verify the tree before reorder, default: true
+        'verify' =>
+    ));
 
-        $model->reorder(array(
-            //id of record to use as top node for reordering, default: $Model->id
-            'id' => ,
-            //which field to use in reordering, default: $Model->displayField
-            'field' => ,
-            //direction to order, default: 'ASC'
-            'order' => ,
-            //whether or not to verify the tree before reorder, default: true
-            'verify' =>
-        ));
+.. note::
 
-    .. note::
-
-        If you have saved your data or made other operations on the model,
-        you might want to set ``$model->id = null`` before calling
-        ``reorder``. Otherwise only the current node and it's children will
-        be reordered.
+    If you have saved your data or made other operations on the model,
+    you might want to set ``$model->id = null`` before calling
+    ``reorder``. Otherwise only the current node and it's children will
+    be reordered.
 
 Data Integrity
 ==============
 
-    Due to the nature of complex self referential data structures such
-    as trees and linked lists, they can occasionally become broken by a
-    careless call. Take heart, for all is not lost! The Tree Behavior
-    contains several previously undocumented features designed to
-    recover from such situations.
+Due to the nature of complex self referential data structures such
+as trees and linked lists, they can occasionally become broken by a
+careless call. Take heart, for all is not lost! The Tree Behavior
+contains several previously undocumented features designed to
+recover from such situations.
 
-    .. php:method:: recover($mode = 'parent', $missingParentAction = null)
+.. php:method:: recover($mode = 'parent', $missingParentAction = null)
 
-    The ``mode`` parameter is used to specify the source of info that
-    is valid/correct. The opposite source of data will be populated
-    based upon that source of info. E.g. if the MPTT fields are corrupt
-    or empty, with the ``$mode 'parent'`` the values of the
-    ``parent_id`` field will be used to populate the left and right
-    fields. The ``missingParentAction`` parameter only applies to
-    "parent" mode and determines what to do if the parent field
-    contains an id that is not present.
+The ``mode`` parameter is used to specify the source of info that
+is valid/correct. The opposite source of data will be populated
+based upon that source of info. E.g. if the MPTT fields are corrupt
+or empty, with the ``$mode 'parent'`` the values of the
+``parent_id`` field will be used to populate the left and right
+fields. The ``missingParentAction`` parameter only applies to
+"parent" mode and determines what to do if the parent field
+contains an id that is not present.
 
-    Available ``$mode`` options:
+Available ``$mode`` options:
 
-    -  ``'parent'`` - use the existing ``parent_id``'s to update the
-       ``lft`` and ``rght`` fields
-    -  ``'tree'`` - use the existing ``lft`` and ``rght`` fields to
-       update ``parent_id``
+-  ``'parent'`` - use the existing ``parent_id``'s to update the
+   ``lft`` and ``rght`` fields
+-  ``'tree'`` - use the existing ``lft`` and ``rght`` fields to
+   update ``parent_id``
 
-    Available ``missingParentActions`` options when using
-    ``mode='parent'``:
+Available ``missingParentActions`` options when using
+``mode='parent'``:
 
-    -  ``null`` - do nothing and carry on
-    -  ``'return'`` - do nothing and return
-    -  ``'delete'`` - delete the node
-    -  ``int`` - set the parent\_id to this id
+-  ``null`` - do nothing and carry on
+-  ``'return'`` - do nothing and return
+-  ``'delete'`` - delete the node
+-  ``int`` - set the parent\_id to this id
 
-    Example::
+Example::
 
-        // Rebuild all the left and right fields based on the parent_id
-        $this->Category->recover();
-        // or
-        $this->Category->recover('parent');
+    // Rebuild all the left and right fields based on the parent_id
+    $this->Category->recover();
+    // or
+    $this->Category->recover('parent');
 
-        // Rebuild all the parent_id's based on the lft and rght fields
-        $this->Category->recover('tree');
-
-
-    .. php:method:: reorder($options = array())
-
-    Reorders the nodes (and child nodes) of the tree according to the
-    field and direction specified in the parameters. This method does
-    not change the parent of any node.
-
-    Reordering affects all nodes in the tree by default, however the
-    following options can affect the process:
-
-    -  ``'id'`` - only reorder nodes below this node.
-    -  ``'field``' - field to use for sorting, default is the
-       ``displayField`` for the model.
-    -  ``'order'`` - ``'ASC'`` for ascending, ``'DESC'`` for descending
-       sort.
-    -  ``'verify'`` - whether or not to verify the tree prior to
-       resorting.
-
-    ``$options`` is used to pass all extra parameters, and has the
-    following possible keys by default, all of which are optional::
-
-        array(
-            'id' => null,
-            'field' => $model->displayField,
-            'order' => 'ASC',
-            'verify' => true
-        )
+    // Rebuild all the parent_id's based on the lft and rght fields
+    $this->Category->recover('tree');
 
 
-    .. php:method:: verify()
+.. php:method:: reorder($options = array())
 
-    Returns ``true`` if the tree is valid otherwise an array of errors,
-    with fields for type, incorrect index and message.
+Reorders the nodes (and child nodes) of the tree according to the
+field and direction specified in the parameters. This method does
+not change the parent of any node.
 
-    Each record in the output array is an array of the form (type, id,
-    message)
+Reordering affects all nodes in the tree by default, however the
+following options can affect the process:
 
-    -  ``type`` is either ``'index'`` or ``'node'``
-    -  ``'id'`` is the id of the erroneous node.
-    -  ``'message'`` depends on the error
+-  ``'id'`` - only reorder nodes below this node.
+-  ``'field``' - field to use for sorting, default is the
+   ``displayField`` for the model.
+-  ``'order'`` - ``'ASC'`` for ascending, ``'DESC'`` for descending
+   sort.
+-  ``'verify'`` - whether or not to verify the tree prior to
+   resorting.
 
-    Example Use::
+``$options`` is used to pass all extra parameters, and has the
+following possible keys by default, all of which are optional::
 
-        $this->Category->verify();
+    array(
+        'id' => null,
+        'field' => $model->displayField,
+        'order' => 'ASC',
+        'verify' => true
+    )
 
-    Example output::
+.. php:method:: verify()
 
-        Array
-        (
-            [0] => Array
-                (
-                    [0] => node
-                    [1] => 3
-                    [2] => left and right values identical
-                )
-            [1] => Array
-                (
-                    [0] => node
-                    [1] => 2
-                    [2] => The parent node 999 doesn't exist
-                )
-            [10] => Array
-                (
-                    [0] => index
-                    [1] => 123
-                    [2] => missing
-                )
-            [99] => Array
-                (
-                    [0] => node
-                    [1] => 163
-                    [2] => left greater than right
-                )
+Returns ``true`` if the tree is valid otherwise an array of errors,
+with fields for type, incorrect index and message.
 
-        )
+Each record in the output array is an array of the form (type, id,
+message)
 
+-  ``type`` is either ``'index'`` or ``'node'``
+-  ``'id'`` is the id of the erroneous node.
+-  ``'message'`` depends on the error
+
+Example Use::
+
+    $this->Category->verify();
+
+Example output::
+
+    Array
+    (
+        [0] => Array
+            (
+                [0] => node
+                [1] => 3
+                [2] => left and right values identical
+            )
+        [1] => Array
+            (
+                [0] => node
+                [1] => 2
+                [2] => The parent node 999 doesn't exist
+            )
+        [10] => Array
+            (
+                [0] => index
+                [1] => 123
+                [2] => missing
+            )
+        [99] => Array
+            (
+                [0] => node
+                [1] => 163
+                [2] => left greater than right
+            )
+    )
 
 
 .. meta::

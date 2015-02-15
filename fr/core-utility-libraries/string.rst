@@ -60,7 +60,7 @@ d'une ``View``, utilisez la classe ``String``::
     permettre les remplacements de clé/valeur::
 
         String::insert('Mon nom est :name et j'ai :age ans.', array('name' => 'Bob', 'age' => '65'));
-        // génére: "Mon nom est Bob et j'ai 65 ans."
+        // génère: "Mon nom est Bob et j'ai 65 ans."
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 

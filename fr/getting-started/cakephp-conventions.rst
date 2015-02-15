@@ -39,16 +39,16 @@ underscore, la méthode ne sera pas accessible directement à partir du web
 mais est disponible pour une utilisation interne. Par exemple::
 
     class NewsController extends AppController {
-    
+
         public function latest() {
             $this->_findNewArticles();
         }
-        
+
         protected function _findNewArticles() {
             // Logique pour trouver les derniers articles de nouvelles
         }
     }
-    
+
 
 Alors que la page http://www.exemple.com/news/latest/ est accessible
 pour l'utilisateur comme d'habitude, quelqu'un qui essaie d'aller sur la page
@@ -155,13 +155,14 @@ CakePHP n'accepte pas les clés primaires composées. Dans l'éventualité où v
 voulez manipuler directement les données de votre table de jointure, cela veut
 dire que vous devez soit utiliser les appels directs à
 :ref:`query <model-query>`, soit ajouter une clé primaire pour être en mesure
-d'agir sur elle comme un model normal. Exemple:
+d'agir sur elle comme un model normal. Exemple::
 
     CREATE TABLE posts_tags (
-    id INT(10) NOT NULL AUTO_INCREMENT,
-    post_id INT(10) NOT NULL,
-    tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
+        id INT(10) NOT NULL AUTO_INCREMENT,
+        post_id INT(10) NOT NULL,
+        tag_id INT(10) NOT NULL,
+        PRIMARY KEY(id
+    );
 
 Plutôt que d'utiliser une clé auto-incrémentée comme clé primaire, vous pouvez
 aussi utiliser un champ char(36). CakePHP utilisera alors un UUID de 36
@@ -182,13 +183,13 @@ Le schéma classique est
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
 affres de la configuration. Voici un exemple récapitulant les conventions
-abordées :
+abordées:
 
-    Nom de la table dans la base de données : "personnes"
-    Classe du Model : "Personne", trouvée dans /app/Model/Personne.php
-    Classe du Controller : "PersonnesController", trouvée dans 
-    /app/Controller/PersonnesController.php
-    Gabarit de la Vue : trouvé dans /app/View/Personnes/index.ctp
+- Nom de la table dans la base de données : "personnes"
+- Classe du Model : "Personne", se trouvant dans /app/Model/Personne.php
+- Classe du Controller : "PersonnesController", se trouvant dans
+  /app/Controller/PersonnesController.php
+- Template de Vue : se trouve dans /app/View/Personnes/index.ctp
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/personnes/ sera liée à un appel à la fonction index() du
@@ -207,4 +208,3 @@ s'articulent.
 .. meta::
     :title lang=fr: Conventions de CakePHP
     :keywords lang=fr: expérience de développement web,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,pommes,conventions,controller conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs
-

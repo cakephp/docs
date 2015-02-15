@@ -554,6 +554,6 @@ File API
 ..     双方のクラスの各メソッドの使い方について、より良い解説が必要です。
 
 .. meta::
-    :title lang=en: Folder & File
-    :description lang=en: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
-    :keywords lang=en: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file
+    :title lang=ja: Folder & File
+    :description lang=ja: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
+    :keywords lang=ja: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file

@@ -231,5 +231,5 @@ URLリライティングを使わない/使えない場合
 
 
 .. meta::
-    :title lang=en: URL Rewriting
-    :keywords lang=en: url rewriting, mod_rewrite, apache, iis, plugin assets, nginx
+    :title lang=ja: URL Rewriting
+    :keywords lang=ja: url rewriting, mod_rewrite, apache, iis, plugin assets, nginx

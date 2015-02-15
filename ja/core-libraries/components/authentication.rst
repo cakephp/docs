@@ -1243,12 +1243,12 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:attr:: unauthorizedRedirect
 
     許可されていないアクセスに対する処理を制御します。
-    デフォルトでは、許可されていないユーザーはリファラの URL か ``AuthComponent::$loginAction`` か、もしくは '/' にリダイレクトされます。
+    デフォルトでは、許可されていないユーザーはリファラの URL か ``AuthComponent::$loginRedirect`` か、もしくは '/' にリダイレクトされます。
     false をセットした場合は、リダイレクトする代わりに ForbiddenException が送出されます。
 
     ..
       Controls handling of unauthorized access. By default unauthorized user is
-      redirected to the referrer url or ``AuthComponent::$loginAction`` or '/'.
+      redirected to the referrer url or ``AuthComponent::$loginRedirect`` or '/'.
       If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 .. php:attr:: request
@@ -1446,5 +1446,5 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=ja: Authentication
+    :keywords lang=ja: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

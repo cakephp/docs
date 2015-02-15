@@ -168,5 +168,5 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 ``getInsertID()`` のエイリアスです。
 
 .. meta::
-    :title lang=en: Additional Methods and Properties
-    :keywords lang=en: model classes,model functions,model class,interval,array
+    :title lang=ja: Additional Methods and Properties
+    :keywords lang=ja: model classes,model functions,model class,interval,array

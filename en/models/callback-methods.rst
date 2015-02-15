@@ -96,7 +96,7 @@ to modify validation rules if required. This function must also
 return *true*, otherwise the current save() execution will abort.
 
 afterValidate
-==============
+=============
 
 ``afterValidate()``
 

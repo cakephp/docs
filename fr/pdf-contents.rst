@@ -27,4 +27,3 @@ Indices et tables
 =================
 
 * :ref:`genindex`
-* :ref:`modindex`

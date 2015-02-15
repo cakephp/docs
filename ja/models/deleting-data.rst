@@ -64,5 +64,5 @@ deleteAll
     削除対象の条件は正しく、また対象のレコードは残っていないからです。
 
 .. meta::
-    :title lang=en: Deleting Data
-    :keywords lang=en: doc models,custom logic,callback methods,model class,database model,callbacks,information model,request data,deleteall,fragment,leverage,array,cakephp,failure,recipes,benefit,delete,data model
+    :title lang=ja: Deleting Data
+    :keywords lang=ja: doc models,custom logic,callback methods,model class,database model,callbacks,information model,request data,deleteall,fragment,leverage,array,cakephp,failure,recipes,benefit,delete,data model

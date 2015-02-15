@@ -19,6 +19,6 @@ CakePHPのコンソールユーティリティ"bake"を使って新しいアプ�
     将来コアがアップデートされた時に問題を避けるために ``lib/Cake`` フォルダにあるいかなるファイルであっても直接編集しないで下さい。
 
 .. meta::
-    :title lang=en: The Pages Controller
-    :keywords lang=en: pages controller,default controller,lib,cakephp,ships,php,file folder
+    :title lang=ja: The Pages Controller
+    :keywords lang=ja: pages controller,default controller,lib,cakephp,ships,php,file folder
 

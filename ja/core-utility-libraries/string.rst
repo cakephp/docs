@@ -217,5 +217,5 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 .. end-string
 
 .. meta::
-    :title lang=en: String
-    :keywords lang=en: array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
+    :title lang=ja: String
+    :keywords lang=ja: array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates

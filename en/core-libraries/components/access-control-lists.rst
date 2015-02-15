@@ -121,66 +121,44 @@ fashion while maintaining a good grip on the big picture.
 Being the wise leader he is, Gandalf elects to use ACL in his new
 system, and organizes his objects along the following lines:
 
-
 -  Fellowship of the Ring™
-
    -  Warriors
-
       -  Aragorn
       -  Legolas
       -  Gimli
-
    -  Wizards
-
       -  Gandalf
-
    -  Hobbits
-
       -  Frodo
       -  Bilbo
       -  Merry
       -  Pippin
-
    -  Visitors
-
       -  Gollum
-
-
 
 Using a tree structure for AROs allows Gandalf to define
 permissions that apply to entire groups of users at once. So, using
 our ARO tree, Gandalf can tack on a few group-based permissions:
 
-
 -  Fellowship of the Ring
    (**Deny**: all)
-
    -  Warriors
       (**Allow**: Weapons, Ale, Elven Rations, Salted Pork)
-
       -  Aragorn
       -  Legolas
       -  Gimli
-
    -  Wizards
       (**Allow**: Salted Pork, Diplomacy, Ale)
-
       -  Gandalf
-
    -  Hobbits
       (**Allow**: Ale)
-
       -  Frodo
       -  Bilbo
       -  Merry
       -  Pippin
-
    -  Visitors
       (**Allow**: Salted Pork)
-
       -  Gollum
-
-
 
 If we wanted to use ACL to see whether Pippin was allowed to access
 the ale, we'd first consult the tree to retrieve his path through it, which is
@@ -208,26 +186,19 @@ The tree also allows us to make finer adjustments for more granular
 control, while still keeping the ability to make sweeping changes
 to groups of AROs:
 
-
 -  Fellowship of the Ring
    (**Deny**: all)
-
    -  Warriors
       (**Allow**: Weapons, Ale, Elven Rations, Salted Pork)
-
       -  Aragorn
          (Allow: Diplomacy)
       -  Legolas
       -  Gimli
-
    -  Wizards
       (**Allow**: Salted Pork, Diplomacy, Ale)
-
       -  Gandalf
-
    -  Hobbits
       (**Allow**: Ale)
-
       -  Frodo
          (Allow: Ring)
       -  Bilbo
@@ -235,13 +206,9 @@ to groups of AROs:
          (Deny: Ale)
       -  Pippin
          (Allow: Diplomacy)
-
    -  Visitors
       (**Allow**: Salted Pork)
-
       -  Gollum
-
-
 
 This approach allows us the ability to make both wide-reaching
 permissions changes and fine-grained adjustments. This allows
@@ -353,7 +320,6 @@ Now that you've got your permissions defined via the INI mechanism,
 you can skip to :ref:`the section on checking permissions <checking-permissions>`
 using the ACL component. Alternatively, you can keep reading to see how
 you would define the same permissions using a database ACL.
-
 
 Defining Permissions: CakePHP's Database ACL
 ============================================
@@ -703,7 +669,6 @@ controllers.
 Let's set up an ACO tree that will mimic a CakePHP
 app setup. Since we have five ACOs, we'll create an ACO tree that
 should end up looking something like the following:
-
 
 -  Weapons
 -  Rings

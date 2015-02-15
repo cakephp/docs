@@ -51,7 +51,6 @@ as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
 
-
 Configuring Cache class
 =======================
 
@@ -458,6 +457,7 @@ Cache API
 
     .. versionadded:: 2.5
         remember() was added in 2.5.
+
 
 .. meta::
     :title lang=en: Caching

@@ -76,6 +76,7 @@ This will do **most** of the work to upgrade your app to 2.x. Check things over
 in your upgraded ``app`` folder. If everything looks good then congratulate
 yourself and delete your ``mywebsite/cake`` folder. Welcome to 2.x!
 
+
 .. meta::
     :title lang=en: .. _upgrade-shell:
     :keywords lang=en: api docs,shell

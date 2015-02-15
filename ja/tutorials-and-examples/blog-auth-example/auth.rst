@@ -202,9 +202,9 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 ``app/Model/User.php`` のモデルファイルを開いて、以下のものを追加してください::
 
     // app/Model/User.php
-
+    
     App::uses('AppModel', 'Model');
-    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+    App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
 
@@ -212,20 +212,29 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher();
-            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
+            $passwordHasher = new BlowfishPasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                $this->data[$this->alias]['password']
+            );
         }
         return true;
     }
 
     // ...
+    
+.. note::
 
-これで、ユーザーが保存されるときは毎回 SimplePasswordHasher
+    BlowfishPasswordHasherはSimplePasswordHasherより強いハッシュアルゴリズム(bcrypt) を使い、
+    ユーザーソルトごとに提供します。SimplePasswordHasherはCakePHP version 3.0で削除されます。
+
+これで、ユーザーが保存されるときは毎回 BlowfishPasswordHasher
 クラスを用いてパスワードがハッシュ化されます。
 あとはログイン関数用のビューテンプレートファイルだけです:
 
 
 .. code-block:: php
+
+    //app/View/Users/login.ctp
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>

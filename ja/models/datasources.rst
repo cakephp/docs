@@ -327,6 +327,6 @@ PHP の基本構成には含まれておらず、別途インストールする�
 されているかどうかを確認して下さい。
 
 .. meta::
-    :title lang=en: DataSources
-    :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+    :title lang=ja: DataSources
+    :keywords lang=ja: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
 

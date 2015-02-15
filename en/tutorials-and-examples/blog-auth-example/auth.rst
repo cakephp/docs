@@ -31,7 +31,7 @@ validating any user data::
 
     // app/Model/User.php
     App::uses('AppModel', 'Model');
-    
+
     class User extends AppModel {
         public $validate = array(
             'username' => array(
@@ -62,7 +62,7 @@ with CakePHP::
 
     // app/Controller/UsersController.php
     App::uses('AppController', 'Controller');
-    
+
     class UsersController extends AppController {
 
         public function beforeFilter() {
@@ -180,12 +180,12 @@ file and add the following lines::
             'Session',
             'Auth' => array(
                 'loginRedirect' => array(
-                    'controller' => 'posts', 
+                    'controller' => 'posts',
                     'action' => 'index'
                 ),
                 'logoutRedirect' => array(
-                    'controller' => 'pages', 
-                    'action' => 'display', 
+                    'controller' => 'pages',
+                    'action' => 'display',
                     'home'
                 ),
                 'authenticate' => array(
@@ -241,7 +241,7 @@ Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
     // app/Model/User.php
-    
+
     App::uses('AppModel', 'Model');
     App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
@@ -328,7 +328,7 @@ logged in user as a reference for the created post::
     public function add() {
         if ($this->request->is('post')) {
             //Added this line
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); 
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id');
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash(__('Your post has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -353,9 +353,14 @@ config::
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
             'logoutRedirect' => array(
-                'controller' => 'pages', 
-                'action' => 'display', 
+                'controller' => 'pages',
+                'action' => 'display',
                 'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
             ),
             'authorize' => array('Controller') // Added this line
         )

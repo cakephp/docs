@@ -218,7 +218,7 @@ CakePHPはテストを実行するために ``test`` シェルを提供します
 .. note::
 
     セッションと相互作用するテストを実行するときは、基本的に ``--stderr`` オプションを使うようにするとうまくいきます。
-    これにより、<em>headers_sent warning</em>によってテストが失敗する問題が解決するでしょう。
+    これにより、 *headers_sent warning* によってテストが失敗する問題が解決するでしょう。
 
 .. versionchanged:: 2.1
     ``test`` シェルは2.1で追加されました。 2.0の ``testsuite`` シェルは現在も利用できますが、
@@ -347,11 +347,11 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
         - ``date``: ``DATE`` と対応
         - ``binary``: ``BLOB`` と対応
 ``key``
-    ``primary`` を設定するとフィールドに<em>field AUTO\_INCREMENT</em>と<em>PRIMARY KEY</em>が適用されます。
+    ``primary`` を設定するとフィールドに *field AUTO\_INCREMENT* と *PRIMARY KEY* が適用されます。
 ``length``
     フィールドが許容するサイズを設定します。
 ``null``
-    ``true`` (<em>NULL</em>を許容する)または ``false`` (<em>NULL</em>を許容しない)のいずれかを設定します。
+    ``true`` ( *NULL* を許容する)または ``false`` ( *NULL* を許容しない)のいずれかを設定します。
 ``default``
     フィールドの規定値を設定します。
 
@@ -1205,5 +1205,5 @@ Clover coverageとjUnitの結果を使えれば、Jenkinsが正しく設定で�
 
 .. meta::
     :title lang=ja: テスト
-    :keywords lang=en: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :keywords lang=ja: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
     :keywords lang=ja: PHPUnit,テストデータベース,データベース設定,データベースのセットアップ,データベースのテスト,テストフレームワーク,テストのセットアップ,デファクトスタンダード,pear,ランナー,array,データベース,cakephp,php,統合

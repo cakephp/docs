@@ -563,8 +563,13 @@ Next, let's make a way for users to delete posts. Start with a
             $this->Session->setFlash(
                 __('The post with id: %s has been deleted.', h($id))
             );
-            return $this->redirect(array('action' => 'index'));
+        } else {
+            $this->Session->setFlash(
+                __('The post with id: %s could not be deleted.', h($id))
+            );
         }
+
+        return $this->redirect(array('action' => 'index'));
     }
 
 This logic deletes the post specified by $id, and uses

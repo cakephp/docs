@@ -285,5 +285,5 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
     近傍検出(来年かどうか？)や、素晴らしい文字列整形(Today, 10:30 am)とタイムゾーンの変換をします。
 
 .. meta::
-    :title lang=en: Helpers
-    :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=ja: Helpers
+    :keywords lang=ja: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins

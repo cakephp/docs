@@ -88,7 +88,7 @@ CakeResponse
 
 :php:class:`CakeResponse` est une nouvelle classe introduite dans 2.0. Elle
 encapsule les méthodes et propriétés utilisées couramment dans la réponse HTTP
-que votre application génére. Elle consolide plusieurs caractéristiques dans
+que votre application génère. Elle consolide plusieurs caractéristiques dans
 CakePHP. Lisez en plus sur :php:class:`CakeResponse`.
 
 CakeSession, SessionComponent

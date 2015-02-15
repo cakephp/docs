@@ -15,7 +15,6 @@ cover the various ways you can contribute to CakePHP:
     contributing/cakephp-development-process
 
 
-
 .. meta::
     :title lang=en: Contributing
     :keywords lang=en: coding conventions,documentation,maxdepth

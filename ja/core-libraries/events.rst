@@ -820,5 +820,5 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 
 .. meta::
-    :title lang=en: Events system
-    :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php
+    :title lang=ja: Events system
+    :keywords lang=ja: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

@@ -306,7 +306,7 @@ When using multiple rules per field the 'required' and 'allowEmpty'
 keys need to be used only once in the first rule.
 
 last
--------
+----
 
 In case of multiple rules per field by default if a particular rule
 fails error message for that rule is returned and the following rules
@@ -345,7 +345,6 @@ providing the ``message`` key. Consider this example::
 If the ``alphaNumeric`` rules fails the array key for this rule
 'Only alphabets and numbers allowed' will be returned as error message since
 the ``message`` key is not set.
-
 
 Custom Validation Rules
 =======================
@@ -459,7 +458,6 @@ be shown as the error message. Returning a string means the validation failed.
 The string will overwrite the message set in the $validate array and be shown
 in the view's form as the reason why the field was not valid.
 
-
 Dynamically change validation rules
 ===================================
 
@@ -472,7 +470,6 @@ All validation rules are stored in a ``ModelValidator`` object, which holds
 every rule set for each field in your model. Defining new validation rules is as
 easy as telling this object to store new validation methods for the fields you
 want to.
-
 
 Adding new validation rules
 ---------------------------
@@ -825,7 +822,6 @@ with usage examples.
 
     Note that unlike date(), datetime() will validate a date and a time.
 
-
 .. php:staticmethod:: decimal(string $check, integer $places = null, string $regex = null)
 
     This rule ensures that the data is a valid decimal number. A
@@ -871,7 +867,6 @@ with usage examples.
             )
         );
 
-
 .. php:staticmethod:: extension(mixed $check, array $extensions = array('gif', 'jpeg', 'png', 'jpg'))
 
     This rule checks for valid file extensions like .jpg or .png. Allow
@@ -895,7 +890,7 @@ with usage examples.
     decide the type of comparison you want to use. All the operators supported
     by :php:func:`~Validation::comparison()` are supported here as well. This
     method will automatically handle array values from ``$_FILES`` by reading
-    from the ``tmp_name`` key if ``$check`` is an array an contains that key::
+    from the ``tmp_name`` key if ``$check`` is an array and contains that key::
 
         public $validate = array(
             'image' => array(
@@ -1135,7 +1130,6 @@ with usage examples.
             )
         );
 
-
 .. php:staticmethod:: postal(mixed $check, string $regex = null, string $country = 'us')
 
     Postal is used to validate ZIP codes from the U.S. (us), Canada
@@ -1188,7 +1182,6 @@ with usage examples.
                 'rule' => array('ssn', null, 'us')
             )
         );
-
 
 .. php:staticmethod:: time(string $check)
 

@@ -415,6 +415,7 @@ appropriate log level.
 .. php:staticmethod:: debug($message, $scope = array())
 .. php:staticmethod:: info($message, $scope = array())
 
+
 .. meta::
     :title lang=en: Logging
     :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.

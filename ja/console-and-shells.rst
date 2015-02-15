@@ -712,7 +712,7 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
         )
     ));
 
-パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog`` 
+パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog``
 のためのキーを定義できます。配列形式ビルダーの内部にはサブコマンドは定義
 できません。argumentsとoptionsの値は
 :php:func:`ConsoleOptionParser::addArguments()` と
@@ -948,7 +948,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
    :param string $method: 表示するメッセージ
    :param integer $newlines: メッセージの後に出力する改行の数
-   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値 
+   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値
 
    ユーザへの出力を生成するためのもっとも普通のやり方です。
    レベルを指定することで、シェルの出力の度合いを制限できます。
@@ -1026,5 +1026,5 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
 
 .. meta::
-    :title lang=en: Console and Shells
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :title lang=ja: Console and Shells
+    :keywords lang=ja: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

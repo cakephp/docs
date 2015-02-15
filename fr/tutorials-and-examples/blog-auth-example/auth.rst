@@ -140,7 +140,7 @@ de génération de code fournis avec CakePHP::
     Depuis 2.5, utilisez ``CakeRequest::allowMethod()`` au lieu de
     ``CakeRequest::onlyAllow()`` (dépréciée).
 
-De la même façon, nous avons crée les vues pour nos posts de blog ou en
+De la même façon, nous avons créé les vues pour nos posts de blog ou en
 utilisant l'outil de génération de code, nous exécutons les vues. Dans
 le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
 
@@ -234,7 +234,7 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de model
 ``app/Model/User.php`` et ajoutez ce qui suit::
 
     // app/Model/User.php
-    
+
     App::uses('AppModel', 'Model');
     App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
@@ -342,8 +342,17 @@ config de Auth::
         'Session',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-            'authorize' => array('Controller') // Ligne ajoutée
+            'logoutRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            ),
+            'authorize' => array('Controller') // Ajout de cette ligne
         )
     );
 

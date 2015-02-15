@@ -246,10 +246,10 @@ the 2nd parameter. This allows you to munge the method name for additional
 information, much like ``Model::findAllByXX``. If the above behavior was
 attached to a model the following would happen::
 
-    $model->doReleaseTheHounds('homer', 'lenny');
+    $model->doReleaseTheHounds('karl', 'lenny');
 
     // would output
-    'ReleaseTheHounds', 'homer', 'lenny'
+    'ReleaseTheHounds', 'karl', 'lenny'
 
 Behavior callbacks
 ==================
@@ -336,7 +336,6 @@ model that the behavior method was invoked on.
 
     You can use afterDelete to perform clean up operations related to
     your behavior.
-
 
 
 .. meta::

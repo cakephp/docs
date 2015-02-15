@@ -19,7 +19,6 @@ debugging, and testing will be covered.
     development/dispatch-filters
 
 
-
 .. meta::
     :title lang=en: Development
     :keywords lang=en: development sessions,debugging,exceptions

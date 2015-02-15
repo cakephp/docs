@@ -7,13 +7,16 @@ souligne les changements et améliorations faits dans 2.6.
 Basics.php
 ==========
 
-- ``stackTrace()`` has been added as a convenience wrapper function for ``Debugger::trace()``.
-  It directly echos just as ``debug()`` does. But only if debug level is on.
-- New i18n functions have been added. The new functions allow you to include
-  message context which allows you disambiguate possibly confusing message
-  strings. For example 'read' can mean multiple things in english depending on
-  the context. The new ``__x``, ``__xn``, ``__dx``, ``__dxn``, ``__dxc``,
-  ``__dxcn``, and ``__xc`` functions provide access to the new features.
+- ``stackTrace()`` a été ajoutée pour être une fonction de wrapper pratique pour
+  ``Debugger::trace()``.
+  Elle affiche directement un peu comme ``debug()`` le fait. Mais seulement
+  si le niveau de debug est activé.
+- Les nouvelles fonctions i18n ont été ajoutées. Les nouvelles fonctions vous
+  permettent d'inclure un message de contexte ce qui vous permet d'enlever une
+  éventuelle ambiguité dans des chaines de message.  Par exemple 'read' peut
+  signifier plusieurs choses en anglais selon le contexte. Les nouvelles
+  fonctions ``__x``, ``__xn``, ``__dx``, ``__dxn``, ``__dxc``, ``__dxcn``, et
+  ``__xc`` fournissent un accès à ces nouvelles fonctionnalités.
 
 Cache
 =====
@@ -35,9 +38,9 @@ ConsoleOptionParser
 Shell
 -----
 
-- ``overwrite()`` a été ajoutée pour permettre de générer des progress bars
-  ou pour éviter de générer de nombreuses lignes en remplçant le texte qui a
-  déjà été affiché à l'écran.
+- ``overwrite()`` a été ajoutée pour permettre de générer des barres de
+  progression ou pour éviter de générer de nombreuses lignes en remplaçant le
+  texte qui a déjà été affiché à l'écran.
 
 Controller
 ==========
@@ -65,11 +68,11 @@ Datasource
 Mysql
 -----
 
-- The ``RLIKE`` wildcard operator has been added to allow regular expression
-  pattern lookups this way.
-- Schema migrations with MySQL now support an ``after`` key when adding
-  a column. This key allows you to specify which column the new one should be
-  added after.
+- L'opérateur wildcard ``RLIKE`` a été ajouté pour permettre des correspondances
+  avec les expressions régulières.
+- Les migrations de Schema avec MySQL supportent maintenant une clé ``after``
+  lorsque on ajoute une colonne. Cette clé vous permet de spécifier après quelle
+  colonne la colonne à créer doit être ajoutée.
 
 
 Model
@@ -78,11 +81,13 @@ Model
 Model
 -----
 
-- ``Model::save()`` had the ``atomic`` option back-ported from 3.0.
-- ``Model::afterFind()`` now always uses a consistent format for afterFind().
-  When ``$primary`` is false, the results will always be located under
-  ``$data[0]['ModelName']``. You can set the ``useConsistentAfterFind`` property
-  to false on your models to restore the original behavior.
+- ``Model::save()`` a l'option ``atomic`` importée de 3.0.
+- ``Model::afterFind()`` utilise maintenant toujours un format cohérent pour
+  afterFind().
+  Quand ``$primary`` est à false, les résultats vont toujours être localisés
+  dans ``$data[0]['ModelName']``. Vous pouvez définir la propriété
+  ``useConsistentAfterFind`` à false sur vos models pour restaurer le
+  comportement original.
 
 Network
 =======
@@ -90,7 +95,7 @@ Network
 CakeRequest
 -----------
 
-- ``CakeRequest::param()`` peut maintenant lire des valeurs utilisant
+- ``CakeRequest::param()`` peut maintenant lire des valeurs en utilisant
   :ref:`hash-path-syntax` comme ``data()``.
 - ``CakeRequest:setInput()`` a été ajoutée.
 
@@ -98,8 +103,8 @@ HttpSocket
 ----------
 
 - ``HttpSocket::head()`` a été ajoutée.
-- You can now use the ``protocol`` option to override the specific protocol to
-  use when making a request.
+- Vous pouvez maintenant utiliser l'option ``protocol`` pour surcharger le
+  protocole spécifique à utiliser lorsque vous faîtes une requête.
 
 I18n
 ====
@@ -114,15 +119,17 @@ Utility
 CakeTime
 --------
 
-- ``CakeTime::timeAgoInWords()`` now supports ``strftime()`` compatible absolute
-  date formats. This helps make localizing formatted times easier.
+- ``CakeTime::timeAgoInWords()`` supporte maintenant les formats de date
+  absolus compatibles avec ``strftime()``. Cela facilite la localisation des
+  formats de date.
 
 Hash
 ----
 
-- ``Hash::get()`` now raises an exception when the path argument is invalid.
-- ``Hash::nest()`` now raises an exception when the nesting operation results in
-  no data.
+- ``Hash::get()`` lance maintenant une exception quand l'argument path est
+  invalide.
+- ``Hash::nest()`` lance maintenant une exception quand les résultats de
+  l'opération d'imbrication ne retourne aucune donnée.
 
 
 Validation
@@ -130,7 +137,7 @@ Validation
 
 - ``Validation::between`` a été dépréciée, vous devez utiliser
   :php:meth:`Validation::lengthBetween` à la place.
-- ``Validation::ssn`` a été dépréciée et peut être fourni en tant que plugin
+- ``Validation::ssn`` a été dépréciée et peut être fournie en tant que plugin
   autonome.
 
 View
@@ -139,12 +146,12 @@ View
 HtmlHelper
 ----------
 
-- :php:meth:`HtmlHelper::css()` had the ``once`` option added. It works the same
-  as the ``once`` option for ``HtmlHelper::script()``. The default value is
-  ``false`` to maintain backwards compatibility.
-- The ``$confirmMessage`` argument of :php:meth:`HtmlHelper::link()` has been
-  deprecated. You should instead use key ``confirm`` in ``$options`` to specify
-  the message.
+- :php:meth:`HtmlHelper::css()` a une nouvelle option ``once``. Elle fonctionne
+  de la même manière que l'option ``once`` de ``HtmlHelper::script()``. La
+  valeur par défaut est ``false`` pour maintenir une compatibilité rétroactive.
+- L'argument ``$confirmMessage`` de :php:meth:`HtmlHelper::link()` a été
+  déprécié. Vous devez utiliser la clé ``confirm`` à la place dans ``$options``
+  pour spécifier le message.
 
 FormHelper
 ----------

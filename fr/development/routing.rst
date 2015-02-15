@@ -147,7 +147,7 @@ de la route::
         array('controller' => 'products', 'action' => 'display', 5)
     );
 
-Cet exemple montre comment vous pouvez utilisez le deuxième paramètre de
+Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
 pourriez considérer la création d'une route. Cela vous permet de vous lier
@@ -974,7 +974,7 @@ API du Router
       du tableau de route régulière. Ex. ``'pass' => array('slug')``.
     
     * ``persist`` est utilisé pour définir lesquels des paramètres de route
-      devrait être automatiquement inclus quand on génére les nouvels URLs.
+      devrait être automatiquement inclus quand on génère les nouvels URLs.
       Vous pouvez écraser les paramètres persistentes en les redéfinissant
       dans une URL ou les retirer en configurant le paramètre à ``false``.
       Ex. ``'persist' => array('lang')``.
@@ -1031,7 +1031,7 @@ API du Router
              chaînes de requête HTML échappées '&'.
            * full - Si à true, l'URL de base complète sera précédée.
 
-    Génére une URL pour l'action spécfiée. Retourne une URL pointant vers
+    Génère une URL pour l'action spécfiée. Retourne une URL pointant vers
     une combinaison de controller et d'action. $url peut être:
 
     * Empty - la méthode trouve l'adresse du controller/de l'action actuel.
@@ -1095,7 +1095,7 @@ API du Router
 
     :param string $url: La chaîne URL à parser.
     
-    Parse une URL entrante, et génére un tableau de paramètres requêtés sur
+    Parse une URL entrante, et génère un tableau de paramètres requêtés sur
     lequel le Dispatcher peut agir. Etendre cette méthode vous permet de
     personnaliser comment les URLs entrantes sont converties en un tableau.
     Retourne ``false`` à partir d'une URL pour indiquer un échec de match.

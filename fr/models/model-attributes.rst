@@ -20,9 +20,7 @@ est placé dans /app/Config/database.php.
 La propriété ``useDbConfig`` est par défaut la connexion à la base de
 données 'default'.
 
-Exemple d'utilisation:
-
-::
+Exemple d'utilisation::
 
     class Exemple extends AppModel {
         public $useDbConfig = 'alternate';
@@ -133,18 +131,20 @@ est 1.
     au tableau ``fields`` manuellement. Dans l'exemple ci-dessus, ceci
     pourrait signifier d'ajouter ``domain_id``.
 
-.. tip::
+Le niveau de recursive recommandé pour votre application devrait être -1.
+Cela évite de récupérer des données liées dans les cas où ce n'est pas
+nécessaire ou même non souhaité. C'est le plus souvent le cas pour la
+plupart de vos appels find().
+Augmenter le seulement quand cela est souhaité ou utilisez le behavior
+Containable.
 
-    Le niveau de recursive recommandé pour votre application devrait être -1.
-    Cela évite de récupérer des données liés dans les cas où ce n'est pas
-    nécessaire ou même non souhaité. C'est le plus souvent le cas pour la
-    plupart de vos appels find().
-    Augmenter le seulement quand cela est souhaité ou utilisez le behavior
-    Containable.
+Vous pouvez réaliser cela en l'ajoutant à AppModel::
 
-    Vous pouvez réaliser cela en l'ajoutant à AppModel::
+    public $recursive = -1;
 
-        public $recursive = -1;
+Si vous utilisez les events dans votre système, utiliser la valeur -1 pour
+recursive va désactiver tous les events du model associé. Ceci se passe car
+aucune relation n'est créée quand la valeur est définie à -1.
 
 order
 =====
@@ -234,7 +234,7 @@ de créer des champs virtuels avec les mêmes noms comme colonnes dans la base d
 données, ceci peut causer des erreurs SQL.
 
 Pour plus d'informations sur la propriété ``virtualFields``, son usage propre,
-ainsi que des limitations, regardez :doc:`/models/virtual-fields`.
+ainsi que des limitations, regardez les :doc:`/models/virtual-fields`.
 
 name
 ====

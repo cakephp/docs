@@ -34,7 +34,7 @@ section nous couvrirons le schéma d'usage classique pour ajouter des
 behaviors aux models, l'utilisation des behaviors intégrés à
 CakePHP et la manière de créer nos propres behaviors.
 
-Au final, les Behaviors sont 
+Au final, les Behaviors sont
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
 
 Il y a un certain nombre de Behaviors inclus dans CakePHP. Pour en savoir
@@ -256,10 +256,10 @@ Cela vous permet de munge le nom de la méthode pour des informations
 supplémentaires, un peu comme ``Model::findAllByXX``. Si le behavior
 du dessus est attaché à un model, ce qui suit arrivera::
 
-    $model->doReleaseTheHounds('homer', 'lenny');
+    $model->doReleaseTheHounds('karl', 'lenny');
 
     // sortira
-    'ReleaseTheHounds', 'homer', 'lenny'
+    'ReleaseTheHounds', 'karl', 'lenny'
 
 Callbacks du Behavior
 =====================

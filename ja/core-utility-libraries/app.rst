@@ -593,5 +593,5 @@ App init/load/shutdown メソッド
     ``$_map`` に変更が加えられている場合にキャッシュファイルに書き込みます。
 
 .. meta::
-    :title lang=en: App Class
-    :keywords lang=en: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded
+    :title lang=ja: App Class
+    :keywords lang=ja: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

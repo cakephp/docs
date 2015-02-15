@@ -9,7 +9,6 @@ The Xml class was all refactored. As PHP 5 has
 re-implement an XML parser. The new XML class will transform an array
 into SimpleXMLElement or DOMDocument objects, and vice versa.
 
-
 Importing data to Xml class
 ===========================
 
@@ -82,7 +81,6 @@ If your input is invalid the Xml class will throw a Exception::
     `DOMDocument <http://php.net/domdocument>`_ and
     `SimpleXML <http://php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
-
 
 Transforming a XML string in array
 ==================================

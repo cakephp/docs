@@ -101,7 +101,6 @@ the console folder to your ``PATH``::
 The path supplied can be relative to the current working directory
 or supplied as an absolute path.
 
-
 .. _adding-cake-to-your-path:
 
 Adding cake to your system path

@@ -480,9 +480,16 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
-            return $this->redirect(array('action' => 'index'));
+            $this->Session->setFlash(
+                __('The post with id: %s has been deleted.', h($id))
+            );
+        } else {
+            $this->Session->setFlash(
+                __('The post with id: %s could not be deleted.', h($id))
+            );
         }
+
+        return $this->redirect(array('action' => 'index'));
     }
 
 このロジックは、$idで指定された記事を削除し、

@@ -164,6 +164,7 @@ Here is a full example from the acl class ::
 
 Columns
 -------
+
 Each column is encoded as a key value associative array.
 The field name is the key of the field, the value is another array with some of
 the following attributes. 
@@ -392,6 +393,7 @@ Will bring up the following choices::
     DROP `position`;
     Are you sure you want to alter the tables? (y/n)
     [n] >
+
 
 .. meta::
     :title lang=en: Schema management and migrations

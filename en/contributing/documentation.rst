@@ -149,7 +149,11 @@ Links to external documents can be with the following::
 
     `External Link <http://example.com>`_
 
-The above would generate a link pointing to http://example.com
+The above would generate this `External Link <http://example.com>`_
+
+.. note::
+
+    Make sure you add the underscore after the backtick, it is important!
 
 Links to other pages
 ~~~~~~~~~~~~~~~~~~~~

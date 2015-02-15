@@ -53,7 +53,6 @@ chapter:
   CakePHP can help you build forms, build AJAX functionality,
   paginate model data, or serve RSS feeds.
 
-
 .. _extending-views:
 
 Extending Views
@@ -133,7 +132,6 @@ as the ``content`` block.
     You should avoid using ``content`` as a block name in your application.
     CakePHP uses this for uncaptured content in extended views.
 
-
 .. _view-blocks:
 
 Using view blocks
@@ -209,7 +207,6 @@ default content with the ``<p>`` tag will be discarded.
 
     You should avoid using ``content`` as a block name. This is used by CakePHP
     internally for extended views, and view content in the layout.
-
 
 Displaying blocks
 -----------------
@@ -433,7 +430,6 @@ Contacts plugin::
             $this->layout = 'Contacts.contact';
         }
     }
-
 
 .. _view-elements:
 

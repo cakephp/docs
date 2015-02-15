@@ -978,6 +978,6 @@ HtmlHelper を使ったパンくずリストの作成
 
 
 .. meta::
-    :title lang=en: HtmlHelper
-    :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
-    :keywords lang=en: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs
+    :title lang=ja: HtmlHelper
+    :description lang=ja: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
+    :keywords lang=ja: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

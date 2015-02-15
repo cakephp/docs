@@ -158,7 +158,11 @@ Les liens vers les documents externes peuvent être les suivants::
 
     `Lien externe <http://exemple.com>`_
 
-Le lien ci-dessus générera un lien pointant vers http://example.com
+Le lien ci-dessus générera ce `Lien Externe <http://example.com>`_
+
+.. note::
+
+    Assurez-vous d'ajouter le underscore après le backtick, c'est important!
 
 Lien vers les autres pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

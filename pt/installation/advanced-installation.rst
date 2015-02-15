@@ -16,7 +16,7 @@ Em primeiro lugar, note que há três partes principais de uma aplicação CakeP
 Cada um desses diretórios podem ser localizados em qualquer em seu sistema de
 arquivos, com exceção do webroot, que precisa ser acessível pelo seu servidor
 web. Você pode até mesmo mover a pasta webroot para fora da pasta app, desde
-que você dia ao Cake onde você colocou.
+que você diga ao Cake onde você colocou.
 
 Para configurar sua instalação do Cake, você precisa fazer algumas modificações
 nos seguintes arquivos.

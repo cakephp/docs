@@ -160,10 +160,10 @@ Security API
 
     Validate authorization hash.
 
-
 .. todo::
 
     Add more examples :|
+
 
 .. meta::
     :title lang=en: Security
