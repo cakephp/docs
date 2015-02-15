@@ -79,7 +79,8 @@ PHP 5.3が名前空間のサポートをしていることから、このPHPバ�
 * tmp
 
 htaccess (URL リライティング)
-===============================================
+=============================
+
 ``app/webroot/.htaccess`` の ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` の行を ``RewriteRule ^(.*)$ index.php [QSA,L]`` に置き換えてください。
 
 AppController / AppModel / AppHelper / AppShell
