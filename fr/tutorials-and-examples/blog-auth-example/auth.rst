@@ -168,7 +168,7 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
 
         public function beforeFilter(Event $event)
         {
-            $this->Auth->allow(['index', 'view']);
+            $this->Auth->allow(['index', 'view', 'display']);
         }
         //...
     }
@@ -305,6 +305,9 @@ l'utilisateur connecté courant en référence pour l'article créé::
         if ($this->request->is('post')) {
             // Ajout de cette ligne
             $article->user_id = $this->Auth->user('id');
+            // Vous pourriez aussi faire ce qui suit
+            //$newData = ['user_id' => $this->Auth->user('id')];
+            //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été sauvegardé.'));
                 return $this->redirect(['action' => 'index']);
