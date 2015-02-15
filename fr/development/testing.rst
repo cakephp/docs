@@ -76,9 +76,6 @@ Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
 lancer vos propres tests en lancant un de ceux présents dans le cœur::
 
-    // Pour un PHPunit installé sur l'ensemble du système
-    $ phpunit
-
     // Pour phpunit.phar
     $ php phpunit.phar
 
@@ -90,7 +87,7 @@ qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fou
 le chemin au test en paramètre de PHPUnit. Par exemple, si vous aviez un cas
 de test pour la classe ArticlesTable, vous pourriez le lancer avec::
 
-    $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
+    $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
 Vous devriez voir une barre verte avec quelques informations supplémentaires sur
 les tests exécutés et le nombre qui a été passé.
@@ -223,14 +220,34 @@ Une fois que vous avez installé PHPUnit et que quelques cas de tests sont
 bonne idée de lancer les tests avant de committer tout changement pour aider
 à s'assurer que vous n'avez rien cassé.
 
-En utilisant ``phpunit``, vous pouvez lancer votre application et les tests de
-plugin. Pour lancer vos tests d'application, vous pouvez simplement lancer::
+En utilisant ``phpunit``, vous pouvez lancer les tests de votre application.
+Pour lancer vos tests d'application, vous pouvez simplement lancer::
 
-    $ phpunit
+    // composer installs
+    $ vendor/bin/phpunit
 
-A partir du répertoire racine de votre application. Pour lancer les tests pour
-les plugin, faîtes d'abord ``cd`` vers le répertoire du plugin, et ensuite
-utilisez ``phpunit`` pour lancer les tests.
+    // phar file
+    php phpunit.phar
+
+From your application's root directory. To run tests for a plugin that is part
+of your application source, first ``cd`` into the plugin directory, then use
+``phpunit`` command that matches how you installed phpunit::
+
+    cd plugins
+
+    // Using composer installed phpunit
+    ../vendor/bin/phpunit
+
+    // Using phar file
+    php ../phpunit.phar
+
+To run tests on a standalone plugin, you should first install the project in
+a separate directory and install its dependencies::
+
+    git clone git://github.com/cakephp/debug_kit.git
+    cd debug_kit
+    php ~/composer.phar install
+    php ~/phpunit.phar
 
 Filtrer les cas de test
 -----------------------
