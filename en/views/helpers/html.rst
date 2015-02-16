@@ -563,7 +563,7 @@ Build a nested list (UL/OL) out of an associative array::
                 'American',
                 'Canadian',
                 'British',
-            [,
+            ],
             'Spanish',
             'German',
         ]
