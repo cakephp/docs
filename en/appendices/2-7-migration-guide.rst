@@ -41,8 +41,10 @@ Model
 
 TreeBehavior
 ------------
+- New setting `level` is now available. You can use it to specify field name in
+  which the depth of tree nodes will be stored.
 - New method ``TreeBehavior::getLevel()`` has been added which fetches depth of
-a node.
+  a node.
 
 Utility
 =======
