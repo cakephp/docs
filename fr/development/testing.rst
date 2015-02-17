@@ -103,17 +103,16 @@ Conventions des cas de Test
 Comme beaucoup de choses dans CakePHP, les cas de test ont quelques
 conventions. En ce qui concerne les tests:
 
-#. Les fichiers PHP contenant les tests devraient être dans votre répertoire
-   ``tests/Case/[Type]``.
-#. Les noms de fichier de ces fichiers devraient finir avec ``Test.php`` à la
-   place de .php.
-#. Les classes contenant les tests devraient étendre ``Cake\TestSuite\TestCase``,
+#. Les fichiers PHP contenant les tests doivent être dans votre répertoire
+   ``tests/TestCase/[Type]``.
+#. Les noms de ces fichiers doivent finir avec ``Test.php`` plutôt que juste ``.php``.
+#. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
    correspondre au nom de fichier. ``RouterTest.php`` doit contenir
    ``class RouterTest extends TestCase``.
 #. Le nom de toute méthode contenant un test (par ex: contenant une assertion)
-   devrait commencer par ``test``, comme dans ``testPublished()``.
+   doit commencer par ``test``, comme dans ``testPublished()``.
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
 
