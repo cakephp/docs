@@ -10,6 +10,9 @@ primarily use elements to render flash messages.  Flash elements are found under
 the ``app/View/Elements/Flash`` directory.  You'll notice that CakePHP's App
 template comes with two flash elements: ``success.ctp`` and ``error.ctp``.
 
+The FlashHelper replaces the ``flash()`` method on ``SessionHelper``
+and should be used instead of that method.
+
 Rendering Flash Messages
 ========================
 

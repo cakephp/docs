@@ -9,6 +9,9 @@ messages as "flash messages". FlashComponent writes flash messages to
 ``$_SESSION``, to be rendered in a View using
 :doc:`FlashHelper </core-libraries/helpers/flash>`.
 
+The FlashComponent replaces the ``setFlash()`` method on ``SessionComponent``
+and should be used instead of that method.
+
 Setting Flash Messages
 ======================
 
@@ -59,9 +62,9 @@ An example of using these options::
         <?php echo h($message) ?>: <?php echo h($params['name']) ?>, <?php echo h($params['email']) ?>.
     </div>
 
-Note that the parameter ``element`` will be always overridden while using ``__call()``.
-In order to retrieve a specific element from a plugin, you should set the ``plugin`` parameter.
-For example::
+If you are using the ``__call()`` magic method, the ``element`` option will
+always be replaced. In order to retrieve a specific element from a plugin, you
+should set the ``plugin`` parameter. For example::
 
     // In your Controller
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
