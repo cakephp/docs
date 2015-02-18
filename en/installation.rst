@@ -22,14 +22,14 @@ Requirements
     default.
 
     In XAMPP, intl extension is included but you have to uncomment
-    ``extension=php_intl.dll`` in ``php.ini`` and restart the server through
+    ``extension=php_intl.dll`` in **php.ini** and restart the server through
     the XAMPP Control Panel.
 
     In WAMP, the intl extension is "activated" by default but not working.
     To make it work you have to go to php folder (by default)
-    ``C:\wamp\bin\php\php{version}``, copy all the files that looks like
-    ``icu***.dll`` and paste them into the apache bin directory
-    ``C:\wamp\bin\apache\apache{version}\bin``. Then restart all services and
+    **C:\\wamp\\bin\\php\\php{version}**, copy all the files that looks like
+    **icu*.dll** and paste them into the apache bin directory
+    **C:\\wamp\\bin\\apache\\apache{version}\\bin**. Then restart all services and
     it should be OK.
 
 While a database engine isn't required, we imagine that most applications will
@@ -86,7 +86,7 @@ Keeping Up To Date with the Latest CakePHP Changes
 --------------------------------------------------
 
 If you want to keep current with the latest changes in CakePHP you can
-add the following to your application's ``composer.json``::
+add the following to your application's **composer.json**::
 
     "require": {
         "cakephp/cakephp": "3.0.*-dev"
@@ -99,17 +99,17 @@ branch.
 Permissions
 ===========
 
-CakePHP uses the ``tmp`` directory for a number of different operations.
+CakePHP uses the **tmp** directory for a number of different operations.
 Model descriptions, cached views, and session information are just a few examples.
-The ``logs`` directory is used to write log files by the default ``FileLog`` engine.
+The **logs** directory is used to write log files by the default ``FileLog`` engine.
 
-As such, make sure the directories ``logs``, ``tmp`` and all its subdirectories
+As such, make sure the directories **logs**, **tmp** and all its subdirectories
 in your CakePHP installation are writable by the web server user. Composer's
-installation process makes ``tmp`` and it's subfolders globally writeable to get
+installation process makes **tmp** and it's subfolders globally writeable to get
 things up and running quickly but you can update the permissions for better
 security and keep them writable only for the webserver user.
 
-One common issue is that ``logs`` and ``tmp`` directories and subdirectories must be
+One common issue is that **logs** and **tmp** directories and subdirectories must be
 writable both by the web server and the command line user. On a UNIX system, if
 your web server user is different from your command line user, you can run the
 following commands from your application directory just once in your project to
@@ -126,21 +126,21 @@ Development Server
 
 A development installation is the fastest method to setup CakePHP.  In this
 example, we will be using CakePHP's console to run PHP's built-in web server
-which will make your application available at ``http://host:port``. From the app
+which will make your application available at **http://host:port**. From the app
 directory, execute::
 
     bin/cake server
 
 By default, without any arguments provided, this will serve your application at
-``http://localhost:8765/``.
+**http://localhost:8765/**.
 
-If you have something conflicting with ``localhost`` or port ``8765``, you can
+If you have something conflicting with **localhost** or port 8765, you can
 tell the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments::
 
     bin/cake server -H 192.168.13.37 -p 5673
 
-This will serve your application at ``http://192.168.13.37:5673/``.
+This will serve your application at **http://192.168.13.37:5673/**.
 
 That's it! Your CakePHP application is up and running without having to
 configure a web server.
@@ -283,7 +283,7 @@ further information.
 
    If your CakePHP site still has problems with mod\_rewrite, you might
    want to try modifying settings for Virtual Hosts. On Ubuntu,
-   edit the file /etc/apache2/sites-available/default (location is
+   edit the file **/etc/apache2/sites-available/default** (location is
    distribution-dependent). In this file, ensure that
    ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
 
@@ -434,7 +434,7 @@ I Can't Use URL Rewriting
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``config/app.php``,
+use CakePHP's built in pretty URLs. In **config/app.php**,
 uncomment the line that looks like::
 
     'App' => [
