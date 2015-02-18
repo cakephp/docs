@@ -171,35 +171,37 @@ verificação.
     Uma cópia do arquivo de configuração padrão do CakePHP é encontrado em
     ``config/app.default.php``.
 
-Optional Configuration
-======================
+Configurações opcionais
+=======================
 
-There are a few other items that can be configured. Most developers
-complete these laundry-list items, but they're not required for
-this tutorial. One is defining a custom string (or "salt") for use
-in security hashes.
+Existem pequenos items que podem ser configurados. Muitos desenvolvedores
+completam essa lista de items, mas ela não é obrigatória para
+este tutorial. Um dos items é definir uma string (ou "salt") customizada
+para uso em criptografias de segurança.
 
-The security salt is used for generating hashes. If you used Composer this too is taken
-care of for you during the install. Else you'd need to change the default salt value
-by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
-it's not easily guessed::
+O security salt é usado para gerar criptografias. Se você utilizou Composer,
+isso também é levado em consideração para você no momento da instalação.
+Se não, seria necessário alterar o valor padrão do salt editando
+``config/app.php``. Não importa muito o que é o novo valor, contanto que não
+seja de fácil dedução::
 
     'Security' => [
         'salt' => 'something long and containing lots of different values.',
     ],
 
 
-A Note on mod\_rewrite
-======================
+Uma nota sobre mod\_rewrite
+===========================
 
-Occasionally new users will run into mod\_rewrite issues. For example
-if the CakePHP welcome page looks a little funny (no images or CSS styles).
-This probably means mod\_rewrite is not functioning on your system. Please refer
-to the :ref:`url-rewriting` section to help resolve any issues you are having.
+Ocasionalmente novos usuários vão se deparar com questões sobre mod\_rewrite.
+Por exemplo, se a página de boas-vindas do CakePHP parecer um pouco estranha
+(sem imagens ou estilos CSS). Isso provavelmente significa que o mod\_rewrite
+não está funcionando em seu sistema. Por favor, dirija-se à seção
+:ref:`url-rewriting` para receber ajuda sobre qualquer questão que você tenha.
 
-Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building
-your first CakePHP application.
+Agora continue em :doc:`/tutorials-and-examples/blog/part-two` para começar a
+construir sua aplicação com o CakePHP.
 
 .. meta::
-    :title lang=en: Blog Tutorial
-    :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads
+    :title lang=pt: Tutorial de Blog
+    :keywords lang=pt: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads
