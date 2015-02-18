@@ -339,6 +339,13 @@ CakePHP's ORM provides dynamically constructed finder methods which allow you to
 easily express simple queries with no additional code. For example if you wanted
 to find a user by username you could do::
 
+    // In a controller
+    // The following two calls are equal.
+    $query = $this->Users->findByUsername('joebob');
+    $query = $this->Users->findAllByUsername('joebob');
+    
+    //In a table method
+    $users = TableRegistry::get('Users');
     // The following two calls are equal.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
