@@ -166,8 +166,8 @@ array might look something like the following::
         // More configuration below.
     ];
 
-Once you've saved your ``config/app.php`` file, you should the 'CakePHP is able
-to connect to the database' section have a checkmark.
+Once you've saved your ``config/app.php`` file, you should see that 'CakePHP is
+able to connect to the database' section have a checkmark.
 
 .. note::
 
