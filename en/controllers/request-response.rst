@@ -242,16 +242,18 @@ There are several built-in detectors that you can use:
 
 * ``is('get')`` Check to see whether the current request is a GET.
 * ``is('put')`` Check to see whether the current request is a PUT.
+* ``is('patch')`` Check to see whether the current request is a PATCH.
 * ``is('post')`` Check to see whether the current request is a POST.
 * ``is('delete')`` Check to see whether the current request is a DELETE.
 * ``is('head')`` Check to see whether the current request is HEAD.
 * ``is('options')`` Check to see whether the current request is OPTIONS.
 * ``is('ajax')`` Check to see whether the current request came with
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Check to see whether the request is via SSL
-* ``is('flash')`` Check to see whether the request has a User-Agent of Flash
-* ``is('mobile')`` Check to see whether the request came from a common list
-  of mobile agents.
+* ``is('ssl')`` Check to see whether the request is via SSL.
+* ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
+* ``is('requested')`` Check to see whether the request has a query param 'requested' with value 1.
+* ``is('json')`` Check to see whether the request has 'json' extension add accept 'application/json' mimetype.
+* ``is('xml')`` Check to see whether the request has 'xml' extension add accept 'application/xml' or 'text/xml' mimetype.
 
 
 Session Data
