@@ -62,7 +62,9 @@ Affichage de notifications ou de messages flash
 
 .. php:method:: flash(string $key = 'flash', array $params = array())
 
-    :rtype: string
+    .. deprecated:: 2.7.0
+        You should use :doc:`/core-libraries/helpers/flash` to
+        render flash messages.
 
     Comme expliqué dans :ref:`creating-notification-messages` vous pouvez
     créer des notifications uniques pour le le feedback. Après avoir

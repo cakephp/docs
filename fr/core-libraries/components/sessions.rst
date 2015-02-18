@@ -88,7 +88,9 @@ Création de messages de notification
 
 .. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
 
-    :rtype: void
+    .. deprecated:: 2.7.0
+        You should use :doc:`/core-libraries/components/flash` to
+        create flash messages. The setFlash() method will be removed in 3.0.0.
 
     Souvent dans les applications web, vous aurez besoin d'afficher des
     messages de notification instantanés à l'utilisateur après avoir

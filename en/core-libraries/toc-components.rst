@@ -9,6 +9,7 @@ configure and use components.
     :maxdepth: 1
 
     /core-libraries/components/pagination
+    /core-libraries/components/flash
     /core-libraries/components/sessions
     /core-libraries/components/authentication
     /core-libraries/components/security-component

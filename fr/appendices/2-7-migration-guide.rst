@@ -63,7 +63,8 @@ SessionComponent
 
 - :php:meth:`SessionComponent::consume()` a été ajoutée pour lire et supprimer
   dans Session en une seule étape.
-
+- :php:meth:`SessionComponent::setFlash()` has been deprecated. You should use
+  :php:class:`FlashComponent` instead.
 
 View
 ====
@@ -72,7 +73,8 @@ SessionHelper
 -------------
 - :php:meth:`SessionHelper::consume()` a été ajoutée pour lire et supprimer
   dans Session en une seule étape.
-
+- :php:meth:`SessionHelper::flash()` has been deprecated. You should use
+  :php:class:`FlashHelper` instead.
 
 TestSuite
 =========
