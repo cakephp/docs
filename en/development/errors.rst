@@ -493,7 +493,7 @@ error page output.
 
 If you are using custom exception renderer, you can use the ``_getController()``
 method to return a customize the controller.  By implementing
-``_getController()``in your exception renderer you can use any controller you
+``_getController()`` in your exception renderer you can use any controller you
 want::
 
     // in src/Error/AppExceptionRenderer
