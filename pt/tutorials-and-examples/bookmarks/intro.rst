@@ -339,12 +339,12 @@ controller.
 
 Você pode perceber que fomos capazes de utilizar as variáveis ``$tags`` e
 ``bookmarks`` em nossa view. Quando usamos o método ``set()`` em nosso
-controller, automaticamente definimos variáveis ​​específicas que devem ser
-enviadas para a view. A view vai tornar todas as variáveis ​​passadas
-disponíveis nos templates como variáveis ​​locais.
+controller, automaticamente definimos variáveis específicas que devem ser
+enviadas para a view. A view vai tornar todas as variáveis passadas
+disponíveis nos templates como variáveis locais.
 
 Em nossa view, usamos alguns dos :doc:`helpers </views/helpers>` nativos do
-CakePHP. Helpers são usados ​​para criar lógica re-utilizável ​​para a
+CakePHP. Helpers são usados para criar lógica re-utilizável para a
 formatação de dados, a criação de HTML ou outra saída da view.
 
 Agora você deve ser capaz de visitar a URL ``/bookmarks/tagged/funny`` e ver
