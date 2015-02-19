@@ -456,7 +456,7 @@ params you used for attaching it::
     $this->getEventManager()->detach($myFunction, 'My.event');
 
     // Attaching a CakeEventListener
-    $listener = new MyEventLister();
+    $listener = new MyEventListener();
     $this->getEventManager()->attach($listener);
 
     // Detaching a single event key from a listener
