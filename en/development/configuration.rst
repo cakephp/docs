@@ -17,7 +17,7 @@ Configuring your Application
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
-``config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` is used for
+**config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` is used for
 general configuration, and the adapter based classes provide ``config()``
 methods to make configuration simple and transparent.
 
@@ -26,7 +26,7 @@ Loading Additional Configuration Files
 
 If your application has many configuration options it can be helpful to split
 configuration into multiple files. After creating each of the files in your
-``config/`` directory you can load them in ``bootstrap.php``::
+**config/** directory you can load them in **bootstrap.php**::
 
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
@@ -36,7 +36,7 @@ configuration into multiple files. After creating each of the files in your
     Configure::load('other_config', 'default');
 
 You can also use additional configuration files to provide environment specific
-overrides. Each file loaded after ``app.php`` can redefine previously declared
+overrides. Each file loaded after **app.php** can redefine previously declared
 values allowing you to customize configuration for development or staging
 environments.
 
@@ -55,7 +55,7 @@ App.namespace
     .. note::
 
         When changing the namespace in your configuration, you will also
-        need to update your ``composer.json`` file to use this namespace
+        need to update your **composer.json** file to use this namespace
         as well. Additionally, create a new autoloader by running
         ``php composer.phar dumpautoload``.
 
@@ -184,7 +184,7 @@ View and Plugin Paths
 
 Since views and plugins are not classes, they cannot have an autoloader
 configured. CakePHP provides two Configure variables to setup additional paths
-for these resources. In your ``config/app.php`` you can set these
+for these resources. In your **config/app.php** you can set these
 variables::
 
     return [
@@ -452,7 +452,7 @@ files, you could create a simple Xml config engine for you application::
         }
     }
 
-In your ``config/bootstrap.php`` you could attach this engine and use it::
+In your **config/bootstrap.php** you could attach this engine and use it::
 
     use App\Configure\Engine\XmlConfig;
 
@@ -494,8 +494,8 @@ PHP Configuration Files
 .. php:class:: PhpConfig
 
 Allows you to read configuration files that are stored as plain PHP files.
-You can read either files from your app's ``config`` or from plugin configs
-directories by using :term:`plugin syntax`. Files **must** return an array.
+You can read either files from your app's config or from plugin configs
+directories by using :term:`plugin syntax`. Files *must* return an array.
 An example configuration file would look like::
 
     return [
@@ -509,7 +509,7 @@ An example configuration file would look like::
     ];
 
 Load your custom configuration file by inserting the following in
-``config/bootstrap.php``::
+**config/bootstrap.php**::
 
     Configure::load('customConfig');
 
@@ -519,7 +519,7 @@ Ini Configuration Files
 .. php:class:: IniConfig
 
 Allows you to read configuration files that are stored as plain .ini files.
-The ini files must be compatible with php's ``parse_ini_file`` function, and
+The ini files must be compatible with php's ``parse_ini_file()`` function, and
 benefit from the following improvements
 
 * dot separated values are expanded into arrays.
@@ -566,7 +566,7 @@ Bootstrapping CakePHP
 =====================
 
 If you have any additional configuration needs, you should add them to your
-application's ``config/bootstrap.php`` file. This file is included before each
+application's **config/bootstrap.php** file. This file is included before each
 request, and CLI command.
 
 This file is ideal for a number of common bootstrapping tasks:
