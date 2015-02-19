@@ -12,7 +12,7 @@ Adicionando login
 
 No CakePHP, a autenticação é feita por :doc:`/controllers/components`. Os
 Components podem ser considerados como formas de criar pedaços reutilizáveis
-​​de código relacionado a controllers com uma característica específica ou
+de código relacionado a controllers com uma característica específica ou
 conceito. Os components também podem ligar-se ao evento do ciclo de vida do
 controller e interagir com a sua aplicação. Para começar, vamos
 adicionar o AuthComponent a nossa aplicação. Nós vamos querer muito que
@@ -326,15 +326,15 @@ propriedade ``tag_string`` a lista ``_accessible`` em sua entidade.
 Em ``src/Model/Entity/Bookmark.php`` adicione o ``tag_string`` ao
 ``_accessible`` desta forma::
 
-	protected $_accessible = [
-		'user_id' => true,
-		'title' => true,
-		'description' => true,
-		'url' => true,
-		'user' => true,
-		'tags' => true,
-		'tag_string' => true,
-	];
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
 
 Atualizando as views
 --------------------
