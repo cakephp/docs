@@ -95,7 +95,7 @@ So, for example, when baking a shell like so::
 
     bin/cake bake shell Foo
 
-The template used (``vendor/cakephp/bake/src/Template/Bake/Shell/shell.ctp``)
+The template used (**vendor/cakephp/bake/src/Template/Bake/Shell/shell.ctp**)
 looks like this::
 
     <?php
