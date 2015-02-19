@@ -1,7 +1,7 @@
 Flash
 #####
 
-.. php:class:: FlashHelper(View $view, array $config = [])
+.. php:class:: FlashHelper(View $view, array $config = array())
 
 FlashHelper provides a way to render flash messages that were set in
 ``$_SESSION`` by :doc:`FlashComponent </core-libraries/components/flash>`.
@@ -31,14 +31,14 @@ flash key to render::
 You can also override any of the options that were set in FlashComponent::
 
     // In your Controller
-    $this->Flash->set('The user has been saved.', [
+    $this->Flash->set('The user has been saved.', array(
         'element' => 'success'
-    ]);
+    ));
 
     // In your View: Will use great_success.ctp instead of succcess.ctp
-    <?php echo $this->Flash->render('flash', [
+    <?php echo $this->Flash->render('flash', array(
         'element' => 'great_success'
-    ]);
+    ));
 
 .. note::
     By default, CakePHP does not escape the HTML in flash messages. If you are using
