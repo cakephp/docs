@@ -478,7 +478,7 @@ deux premiers paramètres que vous avez utilisés pour les attacher::
     $this->getEventManager()->detach($myFunction, 'My.event');
 
     // Attacher un écouteur Cake (CakeEventListener)
-    $listener = new MyEventLister();
+    $listener = new MyEventListener();
     $this->getEventManager()->attach($listener);
 
     // Détacher une simple clé d'événement depuis un écouteur (listener)
