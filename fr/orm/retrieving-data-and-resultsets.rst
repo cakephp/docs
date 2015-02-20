@@ -354,6 +354,13 @@ vous permettent de facilement exprimer des requêtes simples sans aucun code
 supplémentaire. Par exemple si vous vouliez trouver un utilisateur selon son
 username, vous pourriez faire::
 
+    // Dans un controller
+    // Les deux appels suivants sont équivalents.
+    $query = $this->Users->findByUsername('joebob');
+    $query = $this->Users->findAllByUsername('joebob');
+
+    // Dans une méthode de table
+    $users = TableRegistry::get('Users');
     // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');

@@ -20,7 +20,7 @@ La configuration est généralement stockée soit dans les fichiers PHP ou INI,
 et chargée pendant le bootstrap de l'application. CakePHP est fourni avec un
 fichier de configuration par défaut, mais si cela et nécessaire, vous pouvez
 ajouter des fichiers supplémentaires de configuration et les charger dans
-``config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` est utilisée
+**config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` est utilisée
 pour la configuration générale, et les classes d'adaptateur fournissent
 les méthodes ``config()`` pour faciliter la configuration et la rendre plus
 transparente.
@@ -30,8 +30,8 @@ Charger les Fichiers de Configuration Supplémentaires
 
 Si votre application a plusieurs options de configuration, il peut être utile
 de séparer la configuration dans plusieurs fichiers. Après avoir créé chacun
-des fichiers dans votre répertoire ``config/``, vous pouvez les charger
-dans ``bootstrap.php``::
+des fichiers dans votre répertoire **config/**, vous pouvez les charger
+dans **bootstrap.php**::
 
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
@@ -41,7 +41,7 @@ dans ``bootstrap.php``::
     Configure::load('other_config', 'default');
 
 Vous pouvez aussi utiliser des fichiers de configuration supplémentaires pour
-surcharger un environement spécifique. Chaque fichier chargé après ``app.php``
+surcharger un environnement spécifique. Chaque fichier chargé après **app.php**
 peut redéfinir les valeurs déclarées précédemment ce qui vous permet de
 personnaliser la configuration pour les environnements de développement ou
 intermédiaires.
@@ -62,7 +62,7 @@ App.namespace
     .. note::
 
         Quand vous changez le namespace dans votre configuration, vous devez
-        aussi mettre à jour le fichier ``composer.json`` pour utiliser aussi
+        aussi mettre à jour le fichier **composer.json** pour utiliser aussi
         ce namespace. De plus, créer un nouvel autoloader en lançant
         ``php composer.phar dumpautoload``.
 
@@ -200,7 +200,7 @@ Les chemins de View et de Plugin
 Puisque les views et plugins ne sont pas des classes, ils ne peuvent pas avoir
 un autoloader configuré. CakePHP fournit deux variables de configuration pour
 configurer des chemins supplémentaires pour vos ressources. Dans votre
-``config/app.php``, vous pouvez définir les variables::
+**config/app.php**, vous pouvez définir les variables::
 
     return [
         // Plus de configuration
@@ -480,7 +480,7 @@ pour votre application::
         }
     }
 
-Dans votre ``config/bootstrap.php``, vous pouvez attacher ce reader et
+Dans votre **config/bootstrap.php**, vous pouvez attacher ce reader et
 l'utiliser::
 
     use App\Configure\Engine\XmlConfig;
@@ -526,22 +526,22 @@ Fichiers de Configuration PHP
 
 Vous permet de lire les fichiers de configuration de votre application qui
 sont stockés en fichiers PHP simples. Vous pouvez lire soit les fichiers à
-partir de votre ``config``, soit des répertoires configs du plugin en utilisant
+partir de votre config, soit des répertoires configs du plugin en utilisant
 la :term:`syntaxe de plugin`. Les fichiers **doivent** retourner un tableau.
 Un fichier de configuration d'exemple ressemblerait à cela::
 
     return [
-      	'debug' => 0,
-      	'Security' => [
-      	    'salt' => 'its-secret'
-      	],
-      	'App' => [
-      	    'namespace' => 'App'
-      	]
+        'debug' => 0,
+        'Security' => [
+            'salt' => 'its-secret'
+        ],
+        'App' => [
+            'namespace' => 'App'
+        ]
     ];
 
 Chargez votre fichier de configuration personnalisé en insérant ce qui suit
-dans ``config/bootstrap.php``::
+dans **config/bootstrap.php**::
 
     Configure::load('customConfig');
 
@@ -552,7 +552,7 @@ Fichiers de Configuration Ini
 
 Vous permet de lire les fichiers de configuration qui sont stockés en
 fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
-fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
+fonction php ``parse_ini_file()``, et bénéficie des améliorations suivantes:
 
 * Les valeurs séparées par des points sont étendues dans les tableaux.
 * Les valeurs de la famille des booléens comme 'on' et 'off' sont converties
@@ -598,7 +598,7 @@ Bootstrapping CakePHP
 =====================
 
 Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
-bootstrap de CakePHP dans ``config/bootstrap.php``. Ce fichier est
+bootstrap de CakePHP dans **config/bootstrap.php**. Ce fichier est
 inclu juste avant chaque requête et commande CLI.
 
 Ce fichier est idéal pour un certain nombre de tâches de bootstrapping

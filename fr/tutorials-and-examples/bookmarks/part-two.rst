@@ -55,7 +55,7 @@ Nous avons seulement indiqué à CakePHP que nous souhaitions charger les
 components ``Flash`` et ``Auth``. En plus, nous avons personnalisé la
 configuration de AuthComponent, puisque notre table users utilise ``email``
 comme username. Maintenant, si vous tapez n'importe quelle URL, vous serez
-renvoyé vers ``/users/login``, qui vous montrera une page d'erreur puisque
+renvoyé vers **/users/login**, qui vous montrera une page d'erreur puisque
 nous n'avons pas encore écrit ce code. Créons donc l'action login::
 
     // Dans src/Controller/UsersController.php
@@ -72,7 +72,7 @@ nous n'avons pas encore écrit ce code. Créons donc l'action login::
         }
     }
 
-Et dans ``src/Template/Users/login.ctp``, ajoutez ce qui suit::
+Et dans **src/Template/Users/login.ctp**, ajoutez ce qui suit::
 
     <h1>Connexion</h1>
     <?= $this->Form->create() ?>
@@ -113,7 +113,7 @@ Maintenant vous pouvez visiter ``/users/logout`` pour vous déconnecter et
 Permettre de s'Enregistrer
 ==========================
 
-Si vous n'êtes pas connecté et que vous essayez de visiter ``/users/add`` vous
+Si vous n'êtes pas connecté et que vous essayez de visiter **/users/add** vous
 serez renvoyés vers la page de connexion. Nous devrions régler cela puisque nous
 voulons que les utilisateurs s'inscrivent à notre application. Dans ``UsersController``,
 ajoutez ce qui suit::
@@ -123,10 +123,10 @@ ajoutez ce qui suit::
         $this->Auth->allow('add');
     }
 
-Ce qui est au-dessus indique à ``AuthComponent`` que l'action ``add`` *ne* nécessite
-*pas* d'authentification ou d'autorisation. Vous pouvez prendre le temps de
-nettoyer ``Users/add.ctp`` et de retirer les liens, ou continuez vers la
-prochaine section. Nous ne ferons pas de fichier d'édition (edit) ou de vue
+Ce qui est au-dessus indique à ``AuthComponent`` que l'action ``add()`` *ne*
+nécessite *pas* d'authentification ou d'autorisation. Vous pouvez prendre le
+temps de nettoyer **Users/add.ctp** et de retirer les liens, ou continuez vers
+la prochaine section. Nous ne ferons pas de fichier d'édition (edit) ou de vue
 d'un utilisateur (view), ni de liste d'utilisateurs (index) dans ce tutoriel
 donc ils ne fonctionneront pas puisque ``AuthComponent`` va vous refuser
 l'accès pour ces actions de controller.
@@ -152,7 +152,7 @@ Ajoutez aussi ce qui suit dans la configuration de ``Auth`` dans
 
     'authorize' => 'Controller',
 
-Votre méthode ``initialize`` doit maintenant ressembler à ceci::
+Votre méthode ``initialize()`` doit maintenant ressembler à ceci::
 
         public function initialize()
         {
@@ -226,7 +226,7 @@ problèmes:
 #. La page de liste montre les bookmarks des autres utilisateurs.
 
 Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')``
-de ``src/Template/Bookmarks/add.ctp``. Une fois retiré, nous allons aussi
+de **src/Template/Bookmarks/add.ctp**. Une fois retiré, nous allons aussi
 mettre à jour la méthode add pour ressembler à ceci::
 
     public function add()
@@ -273,7 +273,7 @@ Vue de Liste
 
 Maintenant nous devons afficher les bookmarks pour l'utilisateur actuellement
 connecté. Nous pouvons le faire en mettant à jour l'appel à ``paginate()``.
-Faites en sorte que votre action index() ressemble à ceci::
+Faites en sorte que votre action ``index()`` ressemble à ceci::
 
     public function index()
     {
@@ -303,7 +303,7 @@ Ajouter un Champ Computed
 
 Comme nous voulons un accès simple vers les tags formatés pour une entity, nous
 pouvons ajouter un champ virtuel/computed à l'entity. Dans
-``src/Model/Entity/Bookmark.php`` ajoutez ce qui suit::
+**src/Model/Entity/Bookmark.php** ajoutez ce qui suit::
 
     use Cake\Collection\Collection;
 
@@ -327,7 +327,7 @@ Nous utiliserons cette propriété dans inputs plus tard. Rappelez-vous
 d'ajouter la propriété ``tag_string`` dans la liste ``_accessible`` de votre
 entity, puisque nous voulons la 'sauvegarder' plus tard.
 
-Dans le fichier ``src/Model/Entity/Bookmark.php``, ajoutez ``tag_string`` à
+Dans le fichier **src/Model/Entity/Bookmark.php**, ajoutez ``tag_string`` à
 la propriété ``_accessible`` comme ceci::
 
     protected $_accessible = [
@@ -355,9 +355,9 @@ Persister la Chaîne Tag
 Maintenant que nous pouvons voir les tags existants en chaîne, nous voudrions
 aussi sauvegarder les données. Comme nous marquons les ``tag_string``
 accessibles, l'ORM va copier ces données à partir de la requête dans notre
-entity. Nous pouvons utiliser une méthode hook ``beforeSave`` pour
+entity. Nous pouvons utiliser une méthode hook ``beforeSave()`` pour
 parser la chaîne de tag et trouver/construire les entities liées. Ajoutez ce
-qui suit dans ``src/Model/Table/BookmarksTable.php``::
+qui suit dans **src/Model/Table/BookmarksTable.php**::
 
 
     public function beforeSave($event, $entity, $options)

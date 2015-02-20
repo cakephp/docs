@@ -140,46 +140,6 @@ emails, mettre à jour les statistiques d'utilisateur si possible dans des
 objets séparés et même le déleguer à des tâches offlline si vous avez ce
 besoin.
 
-Dispatcher les Evènements
-=========================
-
-Une fois que vous avez obtenu une instance du gestionnaire d'event, vous pouvez
-dispatcher les evenements en utilisant
-:php:meth:`~Cake\\Event\\EventManager::dispatch()`. Cette méthode prend une
-instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
-d'un evenement::
-
-    // Créé un nouvel évènement et le dispatch.
-    $event = new Event('Model.Order.afterPlace', $this, [
-        'order' => $order
-    ]);
-    $this->eventManager()->dispatch($event);
-
-:php:class:`Cake\\Event\\Event` accepte 3 arguments dans son constructeur. Le
-premier est le nom de l'event, vous devriez essayer de garder ce nom aussi
-unique que possible, en le rendant lisible. Nous vous suggérons une convention
-comme suit: ``Layer.eventName`` pour les évènements généraux qui arrivent
-au niveau couche (par ex ``Controller.startup``,
-``View.beforeRender``) et ``Layer.Class.eventName`` pour les événements
-qui arrivent dans des classes spécifiques sur une couche, par exemple
-``Model.User.afterRegister`` ou ``Controller.Courses.invalidAccess``.
-
-Le deuxième argument est le ``subject``, c'est à dire l'objet associé
-à l'évènement, comme une classe attrape les
-évènements sur elle-même, utiliser ``$this`` sera le cas le plus commun.
-Même si un :php:class:`Component` peut aussi déclencher les événements d'un
-controller. La classe subject est importante parce que les écouteurs auront
-un accès immédiat aux propriétés de l'objet et pourront les inspecter ou
-les changer à la volée.
-
-Au final, le troisième argument est une donnée d'événement supplémentaire. Ceci
-peut être toute donnée que vous considérez utile de passer pour que les
-écouteurs puissent agir sur eux. Alors que ceci peut être un argument de tout
-type, nous vous recommandons de passer un tableau associatif.
-
-La méthode :php:meth:`~Cake\\Event\\EventManager::dispatch()` accepte un objet
-event en argument et notifie à tous les écouteurs qui sont abonnés.
-
 Enregistrer les Listeners
 =========================
 
@@ -332,6 +292,45 @@ déterminer l'ordre des arguments de la fonction.
     Au contraire de 2.x, convertir les données d'event en arguments du listener
     est le comportement par défaut et ne peut pas être désactivé.
 
+Dispatcher les Events
+=====================
+
+Une fois que vous avez obtenu une instance du gestionnaire d'event, vous pouvez
+dispatcher les events en utilisant
+:php:meth:`~Cake\\Event\\EventManager::dispatch()`. Cette méthode prend une
+instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
+d'un evenement::
+
+    // Créé un nouvel évènement et le dispatch.
+    $event = new Event('Model.Order.afterPlace', $this, [
+        'order' => $order
+    ]);
+    $this->eventManager()->dispatch($event);
+
+:php:class:`Cake\\Event\\Event` accepte 3 arguments dans son constructeur. Le
+premier est le nom de l'event, vous devriez essayer de garder ce nom aussi
+unique que possible, en le rendant lisible. Nous vous suggérons une convention
+comme suit: ``Layer.eventName`` pour les évènements généraux qui arrivent
+au niveau couche (par ex ``Controller.startup``,
+``View.beforeRender``) et ``Layer.Class.eventName`` pour les événements
+qui arrivent dans des classes spécifiques sur une couche, par exemple
+``Model.User.afterRegister`` ou ``Controller.Courses.invalidAccess``.
+
+Le deuxième argument est le ``subject``, c'est à dire l'objet associé
+à l'évènement, comme une classe attrape les
+évènements sur elle-même, utiliser ``$this`` sera le cas le plus commun.
+Même si un :php:class:`Component` peut aussi déclencher les événements d'un
+controller. La classe subject est importante parce que les écouteurs auront
+un accès immédiat aux propriétés de l'objet et pourront les inspecter ou
+les changer à la volée.
+
+Au final, le troisième argument est une donnée d'événement supplémentaire. Ceci
+peut être toute donnée que vous considérez utile de passer pour que les
+écouteurs puissent agir sur eux. Alors que ceci peut être un argument de tout
+type, nous vous recommandons de passer un tableau associatif.
+
+La méthode :php:meth:`~Cake\\Event\\EventManager::dispatch()` accepte un objet
+event en argument et notifie à tous les écouteurs qui sont abonnés.
 
 Stopper les Events
 ------------------

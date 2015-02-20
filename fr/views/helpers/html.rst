@@ -567,7 +567,7 @@ Fabrique une liste imbriquée (UL/OL) dans un tableau associatif::
                 'American',
                 'Canadian',
                 'British',
-            [,
+            ],
             'Spanish',
             'German',
         ]

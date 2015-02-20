@@ -1345,8 +1345,7 @@ vérifier que le code suivant est présent dans votre fichier ``composer.json`` 
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "tests",
-            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
         }
     }
 

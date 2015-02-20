@@ -66,7 +66,7 @@ contenu que le client accepte. Par exemple::
                     // Execute uniquement le code XML
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
-                    // Execute si le client accetpte l'une des réponses 
+                    // Execute si le client accetpte l'une des réponses
                     // ci-dessus: XML, RSS ou Atom.
                 }
             }
@@ -261,7 +261,7 @@ la configuration ``viewClassMap``::
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent(''RequestHandler', [
+        $this->loadComponent('RequestHandler', [
             'viewClassMap' => [
                 'json' => 'ApiKit.MyJson',
                 'xml' => 'ApiKit.MyXml',

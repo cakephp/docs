@@ -14,7 +14,7 @@ Configuration des Erreurs et des Exceptions
 ===========================================
 
 La configuration des Erreurs est faite à l'intérieur du fichier
-``config/app.php`` de votre application. Par défaut CakePHP utilise la classe
+**config/app.php** de votre application. Par défaut CakePHP utilise la classe
 ``ErrorHandler`` ou ``ConsoleErrorHandler`` pour capturer et afficher/logger
 les erreurs. Vous pouvez remplacer ce comportement en changeant le gestionnaire
 d'erreur par défaut. Le gestionnaire d'erreur par défaut gère également les
@@ -85,9 +85,9 @@ une logique de gestion des erreurs personnalisée. Un exemple serait::
         }
     }
 
-``BaseErrorHandler`` définit deux méthodes abstraites. ``_displayError`` est
-utilisée lorsque les erreurs sont déclenchées. La méthode ``_displayException``
-est appelée lorsqu'il y a une exception non interceptée.
+``BaseErrorHandler`` définit deux méthodes abstraites. ``_displayError()`` est
+utilisée lorsque les erreurs sont déclenchées. La méthode
+``_displayException()`` est appelée lorsqu'il y a une exception non interceptée.
 
 Changer le Comportement des Erreurs Fatales
 ===========================================
@@ -349,14 +349,14 @@ La classe ExceptionRenderer avec l'aide de ``ErrorController`` s'occupe
 du rendu des pages d'erreur pour toutes les exceptions lancées par votre
 application.
 
-Les vues de la page d'erreur sont localisées dans ``src/Template/Error/``. Pour
-toutes les erreurs 4xx et 5xx, les fichiers de template ``error400.ctp`` et
-``error500.ctp`` sont utilisées respectivement. Vous pouvez les personnaliser
-selon vos besoins. Par défaut, votre ``src/Template/Layout/default.ctp`` est
+Les vues de la page d'erreur sont localisées dans **src/Template/Error/**. Pour
+toutes les erreurs 4xx et 5xx, les fichiers de template **error400.ctp** et
+**error500.ctp** sont utilisées respectivement. Vous pouvez les personnaliser
+selon vos besoins. Par défaut, votre **src/Template/Layout/default.ctp** est
 également utilisé pour les pages d'erreur. Si par exemple, vous voulez utiliser
-un autre layout ``src/Template/Layout/my_error.ctp`` pour vos pages d'erreur,
+un autre layout **src/Template/Layout/my_error.ctp** pour vos pages d'erreur,
 modifiez simplement les vues d'erreur et ajoutez la ligne
-``$this->layout = 'my_error';`` dans ``error400.ctp`` et ``error500.ctp``.
+``$this->layout = 'my_error';`` dans **error400.ctp** et **error500.ctp**.
 
 Chaque exception au niveau du framework a son propre fichier de vue localisé
 dans les templates du cœur mais vous n'avez pas besoin de les personnaliser
@@ -381,7 +381,7 @@ Si votre application contenait l'exception suivante::
     {};
 
 Vous pourriez fournir de jolies erreurs de développement, en créant
-``src/Template/Error/missing_widget.ctp``. Quand on est en mode production,
+**src/Template/Error/missing_widget.ctp**. Quand on est en mode production,
 l'erreur du dessus serait traitée comme une erreur 500. Le constructeur
 pour :php:exc:`Cake\\Core\\Exception\\Exception` a été étendu, vous autorisant
 à lui passer des données hashées. Ces hashs sont interpolés dans le
@@ -415,12 +415,12 @@ utilisé quand vous créez une exception::
 
     throw new MissingWidgetHelperException('Widget manquant', 501);
 
-Va créer un code de réponse ``501``, vous pouvez utiliser le code de statut
+Va créer un code de réponse 501, vous pouvez utiliser le code de statut
 HTTP que vous souhaitez. En développement, si votre exception n'a pas
 de template spécifique, et que vous utilisez un code supérieur ou égal
-à ``500``, vous verrez le template ``error500``. Pour tout autre code
-d'erreur, vous aurez le template ``error400``. Si vous avez défini un template
-d'erreur pour votre exception personnalisée, ce template sera utilisé
+à ``500``, vous verrez le template **error500.ctp**. Pour tout autre code
+d'erreur, vous aurez le template **error400.ctp**. Si vous avez défini un
+template d'erreur pour votre exception personnalisée, ce template sera utilisé
 en mode développement. Si vous souhaitez votre propre logique de gestionnaire
 d'exception même en production, regardez la section suivante.
 
@@ -457,10 +457,10 @@ Utiliser l'Option exceptionRenderer dans le Gestionnaire par Défaut
 
 Si vous ne voulez pas prendre le contrôle sur le gestionnaire d'exception,
 mais que vous voulez changer la manière dont les exceptions sont rendues, vous
-pouvez utiliser l'option ``exceptionRenderer`` dans ``config`/app.php`` pour
+pouvez utiliser l'option ``exceptionRenderer`` dans **config`/app.php** pour
 choisir la classe qui affichera les pages d'exception. Par défaut
 :php:class:`Cake\\Core\\Exception\\ExceptionRenderer` est utilisée. Votre
-gestionnaire d'exceptions doit être placé dans ``src/Error``. Dans une classe
+gestionnaire d'exceptions doit être placé dans **src/Error**. Dans une classe
 de rendu personnalisé d'exception vous pouvez fournir un traitement particulier
 pour les erreurs spécifique à votre application::
 
@@ -510,8 +510,8 @@ Implémenter cette classe vous offrira une voie pour personnaliser les pages
 d'erreur sans aucune configuration supplémentaire.
 
 Si vous utilisez un moteur de rendu d'exceptions personnalisé, vous pouvez
-utiliser la méthode ``_getController`` pour rendre un controller personnalisé.
-En implémentant ``_getController`` dans votre moteur de rendu d'exceptions,
+utiliser la méthode ``_getController()`` pour rendre un controller personnalisé.
+En implémentant ``_getController()`` dans votre moteur de rendu d'exceptions,
 vous pouvez utiliser n'importe quel controller de votre choix::
 
     // Dans src/Error/AppExceptionRenderer
@@ -544,7 +544,7 @@ Logger les Exceptions
 
 En Utilisant la gestion d'exception intégrée, vous pouvez logger toutes les
 exceptions qui sont gérées par ErrorHandler en configurant l'option ``log`` à
-``true`` dans votre ``config/app.php``. Activer cela va logger chaque exception
+``true`` dans votre **config/app.php**. Activer cela va logger chaque exception
 vers :php:class:`Cake\\Log\\Log` et les loggers configurés.
 
 .. note::

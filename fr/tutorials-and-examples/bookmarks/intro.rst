@@ -32,13 +32,13 @@ Ou alors vous pouvez télécharger ``composer.phar`` depuis le
 
 Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
-CakePHP dans le répertoire ``bookmarker``. ::
+CakePHP dans le répertoire **bookmarker**. ::
 
     php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
 
 L'avantage d'utiliser Composer est qu'il va automatiquement faire des tâches
 de configuration importantes, comme de définir les bonnes permissions de
-fichier et créer votre fichier ``config/app.php`` pour vous.
+fichier et créer votre fichier **config/app.php** pour vous.
 
 Il y a d'autres façons d'installer CakePHP. Si vous ne pouvez ou ne voulez pas
 utiliser Composer, consultez la section :doc:`/installation`.
@@ -80,7 +80,7 @@ démarrer le serveur de développement::
     bin/cake server
 
 Ceci va lancer le serveur web intégré de PHP sur le port 8765. Ouvrez
-``http://localhost:8765`` dans votre navigateur web pour voir la page d'accueil.
+**http://localhost:8765** dans votre navigateur web pour voir la page d'accueil.
 Tous les points devront être cochés sauf pour CakePHP qui n'est pas encore
 capable de se connecter à votre base de données. Si ce n'est pas le cas, vous
 devrez installer des extensions PHP supplémentaires ou définir des permissions de
@@ -151,7 +151,7 @@ Pour la plupart d'entre vous, ce sera la première et la dernière fois que vous
 devrez configurer quelque chose.
 
 La configuration est assez simple: remplacez juste les valeurs dans le
-tableau ``Datasources.default`` dans le fichier ``config/app.php`` avec
+tableau ``Datasources.default`` dans le fichier **config/app.php** avec
 ceux qui correspondent à votre configuration. Un exemple simple de tableau
 de configuration pourrait ressembler à ce qui suit::
 
@@ -174,14 +174,14 @@ de configuration pourrait ressembler à ce qui suit::
         // Plus de configuration en dessous.
     ];
 
-Une fois que vous avez sauvegardé votre fichier ``config/app.php``, vous
+Une fois que vous avez sauvegardé votre fichier **config/app.php**, vous
 devriez voir la section 'CakePHP est capable de se connecter à la base de
 données' cochée.
 
 .. note::
 
     Une copie du fichier de configuration par défaut de CakePHP se trouve dans
-    ``config/app.default.php``.
+    **config/app.default.php**.
 
 Génération de Code Scaffold
 ===========================
@@ -199,7 +199,7 @@ les commandes suivantes::
 Ceci va générer les controllers, models, views, leurs cas de tests
 correspondants et les fixtures pour nos ressources users, bookmarks et tags.
 Si vous stoppé votre serveur, relancez-le et allez sur
-``http://localhost:8765/bookmarks``.
+**http://localhost:8765/bookmarks**.
 
 Vous devriez voir une application basique mais fonctionnelle fournissant
 des accès aux données vers les tables de la base de données de votre
@@ -216,9 +216,9 @@ sécurité, donc réglons ceci.
 C'est aussi un bon moment pour parler de la couche model dans CakePHP. Dans
 CakePHP, nous séparons les méthodes qui agissent sur une collection
 d'objets, et un objet unique, dans des classes différentes. Les méthodes qui
-agissent sur la collection des entities sont mises dans la classe *Table*,
+agissent sur la collection des entities sont mises dans la classe ``Table``,
 alors que les fonctionnalités correspondant à un enregistrement unique
-sont mises dans la classe *Entity*.
+sont mises dans la classe ``Entity``.
 
 Par exemple, le hashage des mots de passe se fait pour un enregistrement
 individuel, donc nous allons intégrer ce comportement sur l'objet entity.
@@ -226,7 +226,7 @@ Comme nous voulons hasher le mot de passe à chaque fois qu'il est défini
 nous allons utiliser une méthode mutateur/setter. CakePHP va appeler
 les méthodes setter basées sur les conventions à chaque fois qu'une
 propriété est définie dans une de vos entities. Ajoutons un setter pour le
-mot de passe. Dans ``src/Model/Entity/User.php``, ajoutez ce qui suit::
+mot de passe. Dans **src/Model/Entity/User.php**, ajoutez ce qui suit::
 
     namespace App\Model\Entity;
 
@@ -264,10 +264,10 @@ intégrer une route, une action de controller, et une méthode finder pour
 chercher les bookmarks par tag.
 
 Idéalement, nous aurions une URL qui ressemble à
-``http://localhost:8765/bookmarks/tagged/funny/cat/gifs`` Cela nous aide
+**http://localhost:8765/bookmarks/tagged/funny/cat/gifs** Cela nous aide
 à trouver tous les bookmarks qui ont les tags 'funny', 'cat' et 'gifs'. Avant
 de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
-``config/routes.php``, ajoutez ce qui suit en haut du fichier::
+**config/routes.php**, ajoutez ce qui suit en haut du fichier::
 
     Router::scope(
         '/bookmarks',
@@ -278,12 +278,12 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
     );
 
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
-chemin ``/bookmarks/tagged/*``, vers ``BookmarksController::tags()``. En
+chemin **/bookmarks/tagged/***, vers ``BookmarksController::tags()``. En
 définissant les routes, vous pouvez isoler la définition de vos URLs, de la façon
 dont ils sont intégrés. Si nous visitions
-``http://localhost:8765/bookmarks/tagged``, nous verrions une page d'erreur
+**http://localhost:8765/bookmarks/tagged**, nous verrions une page d'erreur
 de CakePHP. Intégrons maintenant la méthode manquante. Dans
-``src/Controller/BookmarksController.php``, ajoutez ce qui suit::
+**src/Controller/BookmarksController.php**, ajoutez ce qui suit::
 
     public function tags()
     {
@@ -299,9 +299,9 @@ Créer la Méthode Finder
 
 Dans CakePHP, nous aimons garder les actions de notre controller légères, et
 mettre la plupart de la logique de notre application dans les models. Si vous
-visitez l'URL ``/bookmarks/tagged`` maintenant, vous verrez une erreur comme quoi
-la méthode ``findTagged`` n'a pas été encore intégrée, donc faisons-le. Dans
-``src/Model/Table/BookmarksTable.php`` ajoutez ce qui suit::
+visitez l'URL **/bookmarks/tagged** maintenant, vous verrez une erreur comme quoi
+la méthode ``findTagged()`` n'a pas été encore intégrée, donc faisons-le. Dans
+**src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
 
     public function findTagged(Query $query, array $options)
     {
@@ -326,10 +326,10 @@ qui 'match' correspond.
 Créer la Vue
 ------------
 
-Maintenant si vous vous rendez à l'url ``/bookmarks/tagged``, CakePHP va afficher
+Maintenant si vous vous rendez à l'url **/bookmarks/tagged**, CakePHP va afficher
 une erreur vous disant que vous n'avez pas de fichier de vue. Ensuite,
-construisons le fichier de vue pour notre action ``tags``. Dans
-``src/Template/Bookmarks/tags.ctp`` mettez le contenu suivant::
+construisons le fichier de vue pour notre action ``tags()``. Dans
+**src/Template/Bookmarks/tags.ctp** mettez le contenu suivant::
 
     <h1>
         Bookmarks tagged with
@@ -361,7 +361,7 @@ Dans notre vue, nous avons utilisé quelques uns des :doc:`helpers
 logique réutilisable pour le formatage des données, pour la création de
 HTML ou pour l'affichage d'autre vue.
 
-Vous devriez maintenant pouvoir visiter l'URL ``/bookmarks/tagged/funny`` et
+Vous devriez maintenant pouvoir visiter l'URL **/bookmarks/tagged/funny** et
 voir tous les bookmarks taggés avec 'funny'.
 
 Ainsi nous avons créé une application basique pour gérer des bookmarks, des

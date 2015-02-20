@@ -343,8 +343,8 @@ to find a user by username you could do::
     // The following two calls are equal.
     $query = $this->Users->findByUsername('joebob');
     $query = $this->Users->findAllByUsername('joebob');
-    
-    //In a table method
+
+    // In a table method
     $users = TableRegistry::get('Users');
     // The following two calls are equal.
     $query = $users->findByUsername('joebob');

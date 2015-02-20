@@ -101,7 +101,7 @@ Ainsi, par exemple, pour créer avec bake un shell comme ceci::
     bin/cake bake shell Foo
 
 Le template utilisé
-(``vendor/cakephp/cakephp/src/Template/Bake/Shell/shell.ctp``)
+(**vendor/cakephp/cakephp/src/Template/Bake/Shell/shell.ctp**)
 ressemble à ceci::
 
     <?php
@@ -127,7 +127,7 @@ ressemble à ceci::
     }
 
 Le fichier template déjà présent (pre-processed)
-(``tmp/Bake-Shell-shell-ctp.php``), qui est le fichier réellement
+(**tmp/Bake-Shell-shell-ctp.php**), qui est le fichier réellement
 rendu, ressemble à ceci::
 
     <CakePHPBakeOpenTagphp
@@ -152,7 +152,7 @@ rendu, ressemble à ceci::
 
     }
 
-Et la classe résultante construite avec bake (``src/Shell/FooShell.php``)
+Et la classe résultante construite avec bake (**src/Shell/FooShell.php**)
 ressemble à ceci::
 
     <?php
@@ -186,9 +186,9 @@ remplacer certaine ou toute partie des templates que bake utilise. Pour créer
 un nouveau template de bake, faîtes ce qui suit:
 
 #. Créez un nouveau plugin avec Bake. Le nom du plugin est le nom du 'theme' de Bake
-#. Créez un nouveau répertoire dans ``plugin/[name]/src/Template/Bake``.
+#. Créez un nouveau répertoire dans **plugin/[name]/src/Template/Bake**.
 #. Copiez tout template que vous souhaitez changer à partir de
-   ``vendor/cakephp/cakephp/src/Template/Bake`` vers les
+   **vendor/cakephp/cakephp/src/Template/Bake** vers les
    répertoires correspondants dans votre plugin.
 #. Quand vous lancez bake, utilisez l'option ``--theme`` pour spécifier le
    theme de bake que vous souhaitez utiliser.
@@ -202,7 +202,7 @@ application ou dans vos plugins. En étendant ``Cake\Shell\Task\BakeTask``, bake
 va trouver votre nouvelle tâche et l'inclure comme faisant partie de bake.
 
 En exemple, nous allons faire une tâche qui créé une classe arbitraire foo.
-D'abord créez le fichier de tâche ``src/Shell/Task/FooTask.php``. Nous
+D'abord créez le fichier de tâche **src/Shell/Task/FooTask.php**. Nous
 étendrons le ``SimpleBakeTask`` pour l'instant puisque notre tâche shell sera
 simple. ``SimpleBakeTask`` est abstraite et nous impose de définir 4 méthodes
 qui disent à bake comment la tâche est appelée, l'endroit où devront se trouver
@@ -237,7 +237,7 @@ FooTask.php devra ressembler à ceci::
 
 Une fois que le fichier a été créé, nous devons créer un template que bake peut
 utiliser pour la génération de code. Créez
-``src/Template/Bake/foo.ctp``. Dans ce fichier, nous
+**src/Template/Bake/foo.ctp**. Dans ce fichier, nous
 ajouterons le contenu suivant::
 
     <?php
@@ -255,7 +255,7 @@ Vous devriez maintenant voir votre nouvelle tâche dans l'affichage de
 ``bin/cake bake``. Vous pouvez lancer votre nouvelle tâche en exécutant
 ``bin/cake bake foo Example``.
 Cela va générer une nouvelle classe ``ExampleFoo`` dans
-``src/Foo/ExampleFoo.php`` que votre application va
+**src/Foo/ExampleFoo.php** que votre application va
 pouvoir utiliser.
 
 .. meta::

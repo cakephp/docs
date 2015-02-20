@@ -259,6 +259,7 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
 
 * ``is('get')`` Vérifie si la requête courante est un GET.
 * ``is('put')`` Vérifie si la requête courante est un PUT.
+* ``is('patch')`` Vérifie si la requête courante est un PATCH.
 * ``is('post')`` Vérifie si la requête courante est un POST.
 * ``is('delete')`` Vérifie si la requête courante est un DELETE.
 * ``is('head')`` Vérifie si la requête courante est un HEAD.
@@ -266,10 +267,13 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
 * ``is('ajax')`` Vérifie si la requête courante vient d'un
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Vérifie si la requête courante est via SSL.
-* ``is('flash')`` Vérifie si la requête courante à un User-Agent
-  de Flash.
-* ``is('mobile')`` Vérifie si la requête courante vient d'une liste
-  courante de mobiles.
+* ``is('flash')`` Vérifie si la requête courante a un User-Agent de Flash.
+* ``is('requested')`` Vérifie si la requête a un paramètre de requête
+  'requested' avec la valeur 1.
+* ``is('json')`` Vérifie si la requête a l'extension 'json' ajoutée et si elle
+  accepte le mimetype 'application/json'.
+* ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle
+  accepte le mimetype 'application/xml' ou 'text/xml'.
 
 Données de Session
 ------------------
