@@ -1289,8 +1289,7 @@ present in your ``composer.json`` file::
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "tests",
-            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+            "MyPlugin\\Test\\": "./plugins/MyPlugin/test"
         }
     }
 
