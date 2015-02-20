@@ -228,20 +228,21 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer::
     // phar file
     php phpunit.phar
 
-From your application's root directory. To run tests for a plugin that is part
-of your application source, first ``cd`` into the plugin directory, then use
-``phpunit`` command that matches how you installed phpunit::
+A partir du répertoire racine de votre application. Pour lancer les tests pour
+un plugin qui fait parti de la source de votre application, d'abord faîtes la
+commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
+``phpunit`` qui correspond à la façon dont vous avez installé phpunit::
 
     cd plugins
 
-    // Using composer installed phpunit
+    // En utilisant composer installed phpunit
     ../vendor/bin/phpunit
 
-    // Using phar file
+    // En utilisant phar file
     php ../phpunit.phar
 
-To run tests on a standalone plugin, you should first install the project in
-a separate directory and install its dependencies::
+Pour lancer les tests sur un plugin séparé, vous devez d'abord installer le
+projet dans un répertoire séparé et installer ses dépendances::
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
