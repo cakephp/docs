@@ -707,6 +707,39 @@ the ``actions`` key to rename the actions used::
 The above would use ``update`` for the update action, and ``create`` instead of
 ``add``.
 
+Mapping Additional Resource Routes
+----------------------------------
+
+You can map additional resource methods using the ``map`` option::
+
+     $routes->resources('Articles', [
+        'map' => [
+            'deleteAll' => [
+                'action' => 'deleteAll',
+                'method' => 'DELETE'
+            ]
+        ]
+     ]);
+     // This would connect /articles/deleteAll
+
+In addition to the default routes, this would also connect a route for
+`/articles/delete_all`. By default the path segment will match the key name. You
+can use the 'path' key inside the resource definition to customize the path name::
+
+
+    $routes->resources('Articles', [
+        'map' => [
+            'updateAll' => [
+                'action' => 'updateAll',
+                'method' => 'DELETE',
+                'path' => '/update_many'
+            ],
+        ]
+    ]);
+    // This would connect /articles/update_many
+
+If you define 'only' and 'map', make sure that your mapped methods are also in the 'only' list.
+
 .. _custom-rest-routing:
 
 Custom Route Classes for Resource Routes
