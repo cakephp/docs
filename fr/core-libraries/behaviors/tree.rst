@@ -705,6 +705,27 @@ Exemple de sortie::
 
     )
 
+Niveau du Noeud (Profondeur)
+============================
+
+.. versionadded:: 2.7
+
+Connaître la profondeur des noeuds d'un arbre peut être utile quand vous
+voulez récupérer les noeuds seulement pour un certain niveau par exemple, quand
+vous générez des menus. Vous pouvez utiliser l'option ``level`` pour spécifier
+le champ qui sauvegardera le niveau de chaque noeud.
+
+    public $actAs = array('Tree' => array(
+        'level' => 'level', // Defaults to null, i.e. no level saving
+    ));
+
+.. php:method:: getLevel($id)
+
+.. versionadded:: 2.7
+
+Si vous ne mettez pas en cache le niveau des noeuds en utilisant l'option
+``level`` dans les configurations, vous pouvez utiliser cette méthode pour
+récupérer le niveau d'un noeud en particulier.
 
 .. meta::
     :title lang=fr: Tree

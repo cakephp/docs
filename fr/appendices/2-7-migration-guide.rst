@@ -42,8 +42,12 @@ Model
 
 TreeBehavior
 ------------
+- La nouvelle configuration `level` est maintenant disponible. Vous pouvez
+  l'utiliser pour spécifier un nom de champ dans lequel la profondeur des
+  noeuds de l'arbre sera stocké.
+  which the depth of tree nodes will be stored.
 - La nouvelle méthode ``TreeBehavior::getLevel()`` a été ajoutée qui attrape
-le niveau de profondeur d'un noeud.
+  le niveau de profondeur d'un noeud.
 
 Utility
 =======
@@ -63,8 +67,8 @@ SessionComponent
 
 - :php:meth:`SessionComponent::consume()` a été ajoutée pour lire et supprimer
   dans Session en une seule étape.
-- :php:meth:`SessionComponent::setFlash()` has been deprecated. You should use
-  :php:class:`FlashComponent` instead.
+- :php:meth:`SessionComponent::setFlash()` a été dépréciée. Vous devez utiliser
+  :php:class:`FlashComponent` à la place.
 
 View
 ====
@@ -73,8 +77,8 @@ SessionHelper
 -------------
 - :php:meth:`SessionHelper::consume()` a été ajoutée pour lire et supprimer
   dans Session en une seule étape.
-- :php:meth:`SessionHelper::flash()` has been deprecated. You should use
-  :php:class:`FlashHelper` instead.
+- :php:meth:`SessionHelper::flash()` a été dépréciée. Vous devez utiliser
+  :php:class:`FlashHelper` à la place.
 
 TestSuite
 =========

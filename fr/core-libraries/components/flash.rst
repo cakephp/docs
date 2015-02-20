@@ -1,78 +1,85 @@
 Flash
 #####
 
-.. php:class:: FlashComponent(ComponentCollection $collection, array $config = [])
+.. php:class:: FlashComponent(ComponentCollection $collection, array $config = array())
 
-FlashComponent provides a way to set one-time notification messages to be
-displayed after processing a form or acknowledging data. CakePHP refers to these
-messages as "flash messages". FlashComponent writes flash messages to
-``$_SESSION``, to be rendered in a View using
+FlashComponent est un moyen de définir des messages de notifications à afficher
+après avoir envoyé un formulaire ou des données connus. CakePHP appelle
+ces messages des "messages flash". FlashComponent écrit les messages flash dans
+``$_SESSION`` pour être affichés dans une View en utilisant
 :doc:`FlashHelper </core-libraries/helpers/flash>`.
 
-Setting Flash Messages
-======================
+FlashComponent remplace la méthode ``setFlash()`` de ``SessionComponent``
+et doit être utilisé à la place de cette méthode.
 
-FlashComponent provides two ways to set flash messages: its ``__call`` magic
-method and its ``set()`` method.  To furnish your application with verbosity,
-FlashComponent's ``__call`` magic method allows you use a method name that maps
-to an element located under the ``app/View/Elements/Flash`` directory. By
-convention, camelcased methods will map to the lowercased and underscored
-element name::
+Définir les Messages Flash
+==========================
 
-    // Uses app/View/Elements/Flash/success.ctp
-    $this->Flash->success('This was successful');
+FlashComponent fournit deux façons de définir des messages flash : sa méthode
+magique ``__call`` et sa méthode ``set()``. Pour remplir votre application
+sématiquement, la méthode magique ``__call`` de FlashComponent vous permet
+d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
+répertoire ``app/View/Elements/Flash``. Par convention, les méthodes en
+camelcase vont être liées à un nom d'element en minuscule et avec des
+underscores (_)::
 
-    // Uses app/View/Elements/Flash/great_success.ctp
-    $this->Flash->greatSuccess('This was greatly successful');
+    // Utilise app/View/Elements/Flash/success.ctp
+    $this->Flash->success('C\'était un succès');
 
-Alternatively, to set a plain-text message without rendering an element, you can
-use the ``set()`` method::
+    // Utilise app/View/Elements/Flash/great_success.ctp
+    $this->Flash->greatSuccess('C\'était un grand succès');
 
-    $this->Flash->set('This is a message');
+De façon alternative, pour définir un message sans rendre un element,
+vous pouvez utiliser la méthode ``set()``::
 
-FlashComponent's ``__call`` and ``set()`` methods optionally take a second
-parameter, an array of options:
+    $this->Flash->set('Ceci est un message');
 
-* ``key`` Defaults to 'flash'. The array key found under the 'Flash' key in
-  the session.
-* ``element`` Defaults to null, but will automatically be set when using the
-  ``__call()`` magic method. The element name to use for rendering.
-* ``params`` An optional array of keys/values to make available as variables
-  within an element.
+Les méthodes ``__call`` et ``set()`` de FlashComponent prennent de façon
+optionnelle un deuxième paramètre, un tableau d'options:
 
-An example of using these options::
+* ``key`` Par défaut à 'flash'. La clé du tableau trouvé sous la clé 'Flash'
+  dans la session.
+* ``element`` Par défaut à null, mais il va automatiquement être défini lors de
+  l'utilisation de la méthode magique ``__call``. Le nom d'element à utiliser
+  pour le rendu.
+* ``params`` Un tableau en option de clés/valeurs pour rendre disponible des
+  variables dans un element.
 
-    // In your Controller
-    $this->Flash->success('The user has been saved', [
+Un exemple de l'utilisation de ces options::
+
+    // Dans votre Controller
+    $this->Flash->success('The user has been saved', array(
         'key' => 'positive',
-        'params' => [
+        'params' => array(
             'name' => $user['User']['name'],
             'email' => $user['User']['email']
-        ]
-    ]);
+        )
+    ));
 
-    // In your View
+    // Dans votre Vue
     <?php echo $this->Flash->render('positive') ?>
 
-    <!-- In app/View/Elements/Flash/success.ctp -->
+    <!-- Dans app/View/Elements/Flash/success.ctp -->
     <div id="flash-<?php echo h($key) ?>" class="message-info success">
         <?php echo h($message) ?>: <?php echo h($params['name']) ?>, <?php echo h($params['email']) ?>.
     </div>
 
-Note that the parameter ``element`` will be always overridden while using ``__call()``.
-In order to retrieve a specific element from a plugin, you should set the ``plugin`` parameter.
-For example::
+Si vous utilisez la méthode magique ``__call()``, l'option ``element`` sera
+toujours remplacée. Afin de récupérer un element spécifique d'un plugin, vous
+devez définir le paramètre ``plugin``. Par exemple::
 
-    // In your Controller
-    $this->Flash->warning('My message', ['plugin' => 'PluginName']);
+    // Dans votre Controller
+    $this->Flash->warning('My message', array('plugin' => 'PluginName'));
 
-The code above will use the warning.ctp element under ``plugins/PluginName/View/Elements/Flash``
-for rendering the flash message.
+Le code ci-dessus va utiliser l'element warning.ctp dans
+``plugins/PluginName/View/Elements/Flash`` pour afficher le message
+flash.
 
 .. note::
-    By default, CakePHP does not escape the HTML in flash messages. If you
-    are using any request or user data in your flash messages, you should
-    escape it with :php:func:`h` when formatting your messages.
+    Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
+    utilisez une requête ou des données d'utilisateur dans vos messages flash,
+    vous devrez les échapper avec :php:func:`h` lors du formatage de vos
+    messages flash.
 
-For more information about rendering your flash messages, please refer to the
-:doc:`FlashHelper </core-libraries/helpers/flash>` section.
+Pour plus d'informations sur le rendu de vos messages flash, consultez la
+section :doc:`FlashHelper </core-libraries/helpers/flash>`.

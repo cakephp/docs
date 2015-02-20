@@ -1,46 +1,52 @@
 Flash
 #####
 
-.. php:class:: FlashHelper(View $view, array $config = [])
+.. php:class:: FlashHelper(View $view, array $config = array())
 
-FlashHelper provides a way to render flash messages that were set in
-``$_SESSION`` by :doc:`FlashComponent </core-libraries/components/flash>`.
-:doc:`FlashComponent </core-libraries/components/flash>` and FlashHelper
-primarily use elements to render flash messages.  Flash elements are found under
-the ``app/View/Elements/Flash`` directory.  You'll notice that CakePHP's App
-template comes with two flash elements: ``success.ctp`` and ``error.ctp``.
+FlashHelper fournit une façon de rendre les messages flash qui sont définis dans
+``$_SESSION`` par :doc:`FlashComponent </core-libraries/components/flash>`.
+:doc:`FlashComponent </core-libraries/components/flash>` et FlashHelper
+utilisent principalement des elements pour rendre les messages flash. Les
+elements flash se trouvent dans le répertoire ``app/View/Elements/Flash``.
+Vous remarquerez que le template de l'App de CakePHP est livré avec deux
+elements flash: ``success.ctp`` et ``error.ctp``.
 
-Rendering Flash Messages
-========================
+FlashHelper remplace la méthode ``flash()`` de ``SessionHelper``
+et doit être utilisé à la place de cette méthode.
 
-To render a flash message, you can simply use FlashHelper's ``render()``
-method::
+Rendre les Messages Flash
+=========================
+
+Pour afficher un message flash, vous pouvez simplement utiliser la méthode
+``render()`` du FlashHelper::
 
     <?php echo $this->Flash->render() ?>
 
-By default, CakePHP uses a "flash" key for flash messages in a session.  But, if
-you've specified a key when setting the flash message in
-:doc:`FlashComponent </core-libraries/components/flash>`, you can specify which
-flash key to render::
+Par défaut, CakePHP utilise une clé "flash" pour les messages flash dans une
+session. Mais si vous spécifiez une clé lors de la définition du message
+flash dans :doc:`FlashComponent </core-libraries/components/flash>`, vous
+pouvez spécifier la clé flash à rendre::
 
     <?php echo $this->Flash->render('other') ?>
 
-You can also override any of the options that were set in FlashComponent::
+Vous pouvez aussi surcharger toutes les options qui sont définies dans
+FlashComponent::
 
-    // In your Controller
-    $this->Flash->set('The user has been saved.', [
+    // Dans votre Controller
+    $this->Flash->set('The user has been saved.', array(
         'element' => 'success'
-    ]);
+    ));
 
-    // In your View: Will use great_success.ctp instead of succcess.ctp
-    <?php echo $this->Flash->render('flash', [
+    // Dans votre View: Va utiliser great_success.ctp au lieu de success.ctp
+    <?php echo $this->Flash->render('flash', array(
         'element' => 'great_success'
-    ]);
+    ));
 
 .. note::
-    By default, CakePHP does not escape the HTML in flash messages. If you are using
-    any request or user data in your flash messages, you should escape it
-    with :php:func:`h` when formatting your messages.
+    Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
+    utilisez une requête ou des données d'utilisateur dans vos messages flash,
+    vous devez les échapper avec :php:func:`h` lors du formatage de vos
+    messages.
 
-For more information about the available array options, please refer to the
-:doc:`FlashComponent </core-libraries/components/flash>` section.
+Pour plus d'informations sur le tableau d'options disponibles, consultez la
+section :doc:`FlashComponent </core-libraries/components/flash>`.
