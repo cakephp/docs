@@ -293,7 +293,7 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
     y será compartido para todos los controladores que hereden de él.
 
 Lo que la función add() hace es: si el formulario enviado no está vacío, intenta
-salvar un nuevo artículo utilizando el modelo *Post*. Si no se guarda bien,
+guardar un nuevo artículo utilizando el modelo *Post*. Si no se guarda bien,
 muestra la vista correspondiente, así podremos mostrar los errores de validación
 si el artículo no se ha guardado correctamente.
 
