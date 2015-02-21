@@ -1775,7 +1775,7 @@ le second paramètre de ``$this->Form->create()``.
 
 **FormHelper::hidden()**
 
-Les champs cachés n'enlève plus les attributs de classe. Cela
+Les champs cachés n'enlèvent plus les attributs de classe. Cela
 signifie que si il y a des erreurs de validation sur les champs
 cachés le nom de classe error-field sera appliqué.
 
