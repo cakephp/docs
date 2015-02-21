@@ -29,7 +29,7 @@ adresse e-mail de travail::
 
 Récupérez un clone du code source de CakePHP sous github.:
 
-* Si vous n'avez pas de compte `github <http://github.com>`_ , créez en un.
+* Si vous n'avez pas de compte `github <http://github.com>`_ , créez-en un.
 * Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
   sur le bouton **Fork**.
 
@@ -68,7 +68,7 @@ future de vos changements::
 
     Utiliser un nom descriptif pour vos branches, en référence au ticket ou
     au nom de la fonctionnalité, est une bonne convention. Ex: ticket-1234,
-    fonctionnalité-géniale.
+    great-fonctionnality.
 
 Ce qui précède va créer une branche locale basée sur la branche (CakePHP) 2.3
 en amont. Travaillez sur votre correctif, et faîtes autant de commits que vous
@@ -109,14 +109,14 @@ Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branch
 
 Une fois que votre branche est sur github, vous pouvez discuter de cela sur la
 mailing-liste `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
-soumettre une pull request sur github.
+soumettre un pull request sur github.
 
 Choisir l'Emplacement dans lequel vos Changements seront Fusionnés
 ------------------------------------------------------------------
 
 Quand vous faîtes vos pull requests, vous devez vous assurer de sélectionner
 la bonne branche de base, puisque vous ne pouvez pas l'éditer une fois que
-la pull request est créée.
+le pull request est créée.
 
 * Si votre changement est un **bugfix** et n'introduit pas de nouvelles
   fonctionnalités et corrige seulement un comportement existant qui est présent
