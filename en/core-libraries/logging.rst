@@ -155,7 +155,7 @@ Error and Exception Logging
 
 Errors and Exceptions can also be logged. By configuring the co-responding
 values in your app.php file.  Errors will be displayed when debug > 0 and logged
-when debug is ``false``. To log uncaugh exceptions, set the ``log`` option to
+when debug is ``false``. To log uncaught exceptions, set the ``log`` option to
 ``true``. See :doc:`/development/configuration` for more information.
 
 Interacting with Log Streams
