@@ -615,7 +615,7 @@ Saving BelongsTo Associations
 -----------------------------
 
 When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, camel cased version the association name. For
+the singular, underscored version of the association name. For
 example::
 
     // In a controller.
@@ -637,7 +637,7 @@ Saving HasOne Associations
 --------------------------
 
 When saving hasOne associations, the ORM expects a single nested entity at the
-singular, camel cased version the association name. For example::
+singular, underscored version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -657,7 +657,7 @@ Saving HasMany Associations
 ---------------------------
 
 When saving hasMany associations, the ORM expects an array of entities at the
-plural, camel cased version the association name. For example::
+plural, underscored version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -688,7 +688,7 @@ Saving BelongsToMany Associations
 ---------------------------------
 
 When saving belongsToMany associations, the ORM expects an array of entities at the
-plural, camel cased version the association name. For example::
+plural, underscored version of the association name. For example::
 
     // In a controller.
 

@@ -645,7 +645,7 @@ Sauvegarder les Associations BelongsTo
 --------------------------------------
 
 Lors de la sauvegarde des associations belongsTo, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au singulier, en camel case.
+imbriquée unique avec le nom de l'association au singulier, en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -667,7 +667,7 @@ Sauvegarder les Associations HasOne
 -----------------------------------
 
 Lors de la sauvegarde d'associations hasOne, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au singulier et en camel case.
+imbriquée unique avec le nom de l'association au singulier et en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -688,7 +688,7 @@ Sauvegarder les Associations HasMany
 ------------------------------------
 
 Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au pluriel et en camel case.
+imbriquée unique avec le nom de l'association au pluriel et en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -722,7 +722,7 @@ Sauvegarder les Associations BelongsToMany
 ------------------------------------------
 
 Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au pluriel et en camel case.
+imbriquée unique avec le nom de l'association au pluriel et en underscore.
 Par exemple::
 
     // Dans un controller.
