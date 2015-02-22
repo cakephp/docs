@@ -363,7 +363,8 @@ Tout point dans vos noms de champs sera converti dans des données de requête
 imbriquées. Par exemple, si vous créez un champ avec un nom
 ``0.comments.body`` vous aurez un nom d'attribut qui sera
 ``0[comments][body]``. Cette convention facilite la sauvegarde des données
-avec l'ORM.
+avec l'ORM. Details for the various association types can be found in the
+:ref:`associated-form-inputs` section.
 
 Lors de la création d'inputs de type datetime, FormHelper va ajouter un
 suffixe au champ. Vous pouvez remarquer des champs supplémentaires nommés

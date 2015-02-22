@@ -340,7 +340,8 @@ You can create inputs for associated models, or arbitrary models by passing in
 Any dots in your field names will be converted into nested request data. For
 example, if you created a field with a name ``0.comments.body`` you would get
 a name attribute that looks like ``0[comments][body]``. This convention makes it
-easy to save data with the ORM.
+easy to save data with the ORM. Details for the various association types can
+be found in the :ref:`associated-form-inputs` section.
 
 When creating datetime related inputs, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
