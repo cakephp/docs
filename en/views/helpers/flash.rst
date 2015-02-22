@@ -46,3 +46,11 @@ You can also override any of the options that were set in FlashComponent::
 
 For more information about the available array options, please refer to the
 :doc:`FlashComponent </controllers/components/flash>` section.
+
+Flash Messages and themes
+=========================
+
+The FlashHelper uses normal elements to render the messages and will therefore
+obey any theme you might have specified. So when your theme has a
+``src/Template/Element/Flash/error.ctp`` file it will be used, just as with any
+Elements and Views.
