@@ -365,9 +365,9 @@ Creating or Modifying Configuration Files
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config
 engine attached as $config. For example, if the 'default' engine is
-a :php:class:`Cake\\Configure\\Engine\\PhpConfig`, the generated file will be
+a :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`, the generated file will be
 a PHP configuration file loadable by the
-:php:class:`Cake\\Configure\\Engine\\PhpConfig`
+:php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`
 
 Given that the 'default' engine is an instance of PhpConfig.
 Save all data in Configure to the file `my_config.php`::
