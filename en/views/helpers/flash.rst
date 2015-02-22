@@ -51,6 +51,6 @@ Flash Messages and themes
 =========================
 
 The FlashHelper uses normal elements to render the messages and will therefore
-obey any theme you might have specified. So when you theme has a
+obey any theme you might have specified. So when your theme has a
 ``src/Template/Element/Flash/error.ctp`` file it will be used, just as with any
 Elements and Views.
