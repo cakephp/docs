@@ -614,10 +614,10 @@ extensions de fichiers correspondant, puis d'analyser le reste. Si vous
 souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
 un scope comme ceci::
 
-    Router::scope('/api', function ($routes) {
+    Router::scope('/page', function ($routes) {
         $routes->extensions(['json', 'xml']);
         $routes->connect(
-            '/page/:title',
+            '/:title',
             ['controller' => 'Pages', 'action' => 'view'],
             [
                 'pass' => ['title']
