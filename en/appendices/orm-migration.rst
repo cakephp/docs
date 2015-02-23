@@ -337,7 +337,7 @@ on the fly::
 
     class User extends Entity
     {
-        public function getFullName()
+        protected function _getFullName()
         {
             return $this->first_name . '  ' . $this->last_name;
         }
