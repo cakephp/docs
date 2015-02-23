@@ -49,6 +49,16 @@ TreeBehavior
 - La nouvelle méthode ``TreeBehavior::getLevel()`` a été ajoutée qui attrape
   le niveau de profondeur d'un noeud.
 
+Network
+=======
+
+CakeEmail
+---------
+
+- CakeEmail va maintenant utiliser la config 'default' lors de lacréation des
+  instances qui ne spécifient pas une configuration à utiliser. Par exemple
+  ``$email = new CakeEmail();`` va maintenant utiliser la config 'default'.
+
 Utility
 =======
 
