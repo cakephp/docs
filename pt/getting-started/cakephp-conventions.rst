@@ -116,7 +116,7 @@ exemplos de nomes de models que seguem a convenção.
 
 Nomes de tabelas correspondentes à models do CakePHP são escritos no plural e
 usando underscores. As tabelas correspondentes para os models mencionados acima
-são respectivamente cars, ``big\_cars`` e ``really\_big\_cars``.
+são respectivamente cars, ``big_cars`` e ``really_big_cars``.
 
 Você pode usar a biblioteca utilitária :php:class:`Inflector` para verificar a
 forma singular/plural das palavras. Veja a classe
