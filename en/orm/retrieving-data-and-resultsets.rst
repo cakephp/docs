@@ -497,8 +497,9 @@ load fields off of contained associations, you can use ``autoFields()``::
 
     // Select id & title from articles, but all fields off of Users.
     $query->select(['id', 'title'])
-        ->contain(['Users'])
-        ->autoFields(true);
+        ->contain(['Users' => function($q) {
+			return $q->autoFields(true);
+		          }]);
 
 Filtering by Associated Data
 ----------------------------
