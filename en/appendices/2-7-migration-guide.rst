@@ -46,6 +46,17 @@ TreeBehavior
 - New method ``TreeBehavior::getLevel()`` has been added which fetches depth of
   a node.
 
+
+Network
+=======
+
+CakeEmail
+---------
+
+- CakeEmail will now use the 'default' config set when creating instances that
+  do not specify a configuration set to use. For example ``$email = new
+  CakeEmail();`` will now use the 'default' config set.
+
 Utility
 =======
 

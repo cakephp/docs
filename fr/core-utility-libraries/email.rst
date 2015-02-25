@@ -89,6 +89,9 @@ méthode ``config()`` ou la passer au constructeur de ``CakeEmail``::
     //ou dans un constructeur::
     $Email = new CakeEmail('default');
 
+    // config 'default' implicite utilisée depuis 2.7
+    $Email = new CakeEmail();
+
 Plutôt que de passer une chaîne qui correspond au nom de la configuration dans
 ``EmailConfig``, vous pouvez aussi juste charger un tableau de configs::
 
