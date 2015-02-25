@@ -171,6 +171,11 @@ des requêtes POST/PUT et fournir la version du tableau de ces données dans
 supplémentaires dans des formats alternatifs si vous avez besoin d'eux en
 utilisant :php:meth:`RequestHandler::addInputType()`
 
+RESTful Routing
+===============
+
+CakePHP's Router makes connecting RESTful resource routes easy. See the section
+on :ref:`resource-routes` for more information.
 
 .. meta::
     :title lang=fr: REST
