@@ -215,11 +215,11 @@ a table::
     }
 
 When calling ``list`` you can configure the fields used for the key and value with
-the ``idField`` and ``valueField`` options respectively::
+the ``keyField`` and ``valueField`` options respectively::
 
     // In a controller or table method.
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug', 'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -234,7 +234,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
     // In a controller or table method.
     $query = $articles->find('list', [
-        'idField' => 'slug',
+        'keyField' => 'slug',
         'valueField' => 'title',
         'groupField' => 'author_id'
     ]);
@@ -265,7 +265,7 @@ table. All entities matching a given ``parent_id`` are placed under the
 
     // Expanded default values
     $query = $comments->find('threaded', [
-        'idField' => $comments->primaryKey(),
+        'keyField' => $comments->primaryKey(),
         'parentField' => 'parent_id'
     ]);
     $results = $query->toArray();
@@ -273,7 +273,7 @@ table. All entities matching a given ``parent_id`` are placed under the
     echo count($results[0]->children);
     echo $results[0]->children[0]->comment;
 
-The ``parentField`` and ``idField`` keys can be used to define the fields that
+The ``parentField`` and ``keyField`` keys can be used to define the fields that
 threading will occur on.
 
 .. tip::
