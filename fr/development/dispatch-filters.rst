@@ -1,82 +1,87 @@
 Filtres du Dispatcher
 #####################
 
-Il y a plusieurs raisons de vouloir un bout de code à lancer avant que tout
-code de controller soit lancé ou juste avant que la réponse soit envoyée au
-client, comme la mise en cache de la réponse, le header tuning,
+Il y a plusieurs raisons de vouloir lancer un bout de code avant que tout
+code de controller ne soit lancé ou juste avant que la réponse ne soit
+envoyée au client, comme la mise en cache de la réponse, le header tuning,
 l'authentication spéciale ou juste pour fournir l'accès à une réponse de
 l'API critique plus rapidement qu'avec un cycle complet de dispatchement
 de requêtes.
 
 CakePHP fournit une interface propre et extensible pour de tels cas pour
 attacher les filtres au cycle de dispatchement, de la même façon qu'une
-couce middleware pour fournir des services empilables ou des routines
+couche middleware pour fournir des services empilables ou des routines
 pour chaque requête. Nous les appelons *Dispatcher Filters*.
 
 Filtres Intégrés
 ================
 
-CakePHP comes with several dispatcher filters built-in. They handle common
-features that all applications are likely to need. The built-in filters are:
+CakePHP fournit plusieurs filtres de dispatcher intégrés. Ils gèrent des
+fonctionnalités habituelles dont toutes les applications vont avoir besoin.
+Les filtres intégrés sont:
 
-* ``AssetFilter`` checks whether the request is referring to a theme
-  or plugin asset file, such as a CSS, JavaScript or image file stored in either a
-  plugin's webroot folder or the corresponding one for a Theme. It will serve the
-  file accordingly if found, stopping the rest of the dispatching cycle.
-* ``RoutingFilter`` applies application routing rules to the request URL.
-  Populates ``$request->params`` with the results of routing.
-* ``ControllerFactory`` uses ``$request->params`` to locate the controller that
-  will handle the current request.
-* ``LocaleSelector`` enables automatic language switching from the ``Accept-Language``
-  header sent by the browser.
+* ``AssetFilter`` vérifie si la requête fait référence au fichier d'asset de plugin
+  ou du theme, comme un fichier CSS, un fichier JavaScript ou une image stockée soit
+  dans le dossier webroot d'un plugin ou celui qui correspond pour un Theme. Il va
+  servir le fichier correpondant si il est trouvé, stoppant le reste du cycle de
+  dispatchment.
+* ``RoutingFilter`` applique les règles de routing de l'application pour l'URL de
+  la requête. Remplit ``$request->params`` avec les résultats de routing.
+* ``ControllerFactory`` utilise ``$request->params`` pour localiser le controller qui
+  gère la requête courante.
+* ``LocaleSelector`` active le language automatiquement en changeant le header ``Accept-Language``
+  envoyé par le navigateur.
 
-Using Filters
-=============
+Utiliser les Filtres
+====================
 
-Filters are usually enabled in your application's **bootstrap.php** file, but
-you could easily load them any time before the request is dispatched.  Adding
-and removing filters is done through :php:class:`Cake\\Routing\\DispatcherFactory`. By
-default, the CakePHP application template comes with a couple filter classes
-already enabled for all requests; let's take a look at how they are added::
+Les filtres sont habituellement activés dans le fichier **bootstrap.php** de votre
+application, mais vous pouvez facilement les charger à n'importe quel moment avant que
+la requête ne soit dispatchée. Ajouter et retirer les filtres se fait avec
+:php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le template d'une application 
+CakePHP est fourni avec un couple de classes filter déjà activées pour toutes les
+requêtes; Regardons la façon dont elles sont ajoutées::
 
     DispatcherFactory::add('Routing');
     DispatcherFactory::add('ControllerFactory');
 
-    // Plugin syntax is also possible
+    // La syntaxe de plugin est aussi possible
     DispatcherFactory::add('PluginName.DispatcherName');
 
-    // Use options to set priority
+    // Utilisez les options pour définir la priorité
     DispatcherFactory::add('Asset', ['priority' => 1]);
 
-Dispatcher filters with higher priority will be executed first. Priority defaults to ``10``.
+Les filtres Dispatcher avec une priorité importante seront les premiers executés. La priorité
+est par défaut à ``10``.
 
-While using the string name is convenient, you can also pass instances into
-``add()``::
+Alors qu'utiliser le nom de la chaîne est pratique, vous pouvez aussi passer les instances
+dans ``add()``::
 
     use Cake\Routing\Filter\RoutingFilter;
 
     DispatcherFactory::add(new RoutingFilter());
 
-Configuring Filter Order
-------------------------
+Configurer l'Ordre de Filter
+----------------------------
 
-When adding filters, you can control the order they are invoked in using
-event handler priorities. While filters can define a default priority using the
-``$_priority`` property, you can set a specific priority when attaching the
-filter::
+Lors de l'ajout de filtres, vous pouvez contrôler l'ordre dans lequel ils sont
+appelés en utilisant les priorités du gestionnaire d'event. Alors que les filtres
+peuvent définir une priorité par défaut en utilisant la propriété ``$_priority``,
+vous pouvez définir une priorité spécifique quand vous attachez le filtre::
 
     DispatcherFactory::add('Asset', ['priority' => 1]);
     DispatcherFactory::add(new AssetFilter(['priority' => 1]));
 
-The higher the priority the later this filter will be invoked.
+Plus la priorité est haute, plus le filtre sera appelé tardivement.
 
-Conditionally Applying Filters
-------------------------------
+Appliquer les Filtres de Façon Conditionnelle
+---------------------------------------------
 
-If you don't want to run a filter on every request, you can use conditions to
-only apply it some of the time. You can apply conditions using the ``for`` and
-``when`` options. The ``for`` option lets you match on URL substrings, while the
-``when`` option allows you to run a callable::
+Si vous ne voulez pas exécuter un filtre sur chaque requête, vous pouvez utiliser
+des conditions pour les appliquer seulement certaines fois. Vous pouvez appliquer
+les conditinos en utilisant les options ``for`` et ``when``. L'option ``for`` vous
+laisse faire la correspondance sur des sous-chaines d'URL, alors que l'option
+``when`` vous permet de lancer un callable::
 
     // Only runs on requests starting with `/blog`
     DispatcherFactory::add('BlogHeader', ['for' => '/blog']);
@@ -170,7 +175,7 @@ page, in our case it would be anything served from the ``PagesController``::
     }
 
 
-    // In our bootstrap.php
+    // Dans notre bootstrap.php
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
 
 This filter will send a expiration header to 1 day in the future for
@@ -186,7 +191,6 @@ wisely and adding response handlers for each URL in your app is not a good use f
 them. Keep in mind that not everything needs to be a filter; `Controllers` and
 `Components` are usually a more accurate choice for adding any request handling
 code to your app.
-
 
 .. meta::
     :title lang=fr: Filtres du Dispatcher
