@@ -182,6 +182,7 @@ necessary. Our ``UserStatistics`` listener might start out like::
         }
     }
 
+    // In a controller or somewhere else where $this->Order is accessible
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
     $this->Order->getEventManager()->attach($statistics);
