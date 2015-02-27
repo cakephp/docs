@@ -36,7 +36,7 @@ Collection serait::
     });
 
 Le :php:trait:`~Cake\\Collection\\CollectionTrait` vous permet également
-d'intégrer des fonctionnalité semblabes aux collections pour tout objet
+d'intégrer des fonctionnalité semblables aux collections pour tout objet
 ``Traversable`` de votre application.
 
 Liste des Méthodes
@@ -87,7 +87,7 @@ objet dans la collection::
     });
 
 Le retour de ``each()`` sera un objet collection. Each va itérer la collection
-en appliquant immédiatemment le callback pour chaque valeur dans collection.
+en appliquant immédiatement le callback pour chaque valeur de la collection.
 
 .. php:method:: map(callable $c)
 
@@ -109,29 +109,30 @@ les objets résultants quand ils sont itérés.
 
 .. php:method:: extract($matcher)
 
-One of the most common uses for a ``map()`` function is to extract a single
-column from a collection. If you are looking to build a list of elements
-containing the values for a particular property, you can use the ``extract()``
-method::
+Une des utilisations les plus courantes de la fonction ``map()`` est l'extraction
+d'une colonne unique d'une collection. Si vous souhaitez construire une liste
+d'éléments contenant les valeurs pour une propriété en particulier, vous pouvez
+utiliser la méthode ``extract()``::
 
     $collection = new Collection($people);
     $names = $collection->extract('name');
 
-    // $result contains ['mark', 'jose', 'barbara'];
+    // $result contient ['mark', 'jose', 'barbara'];
     $result = $names->toArray();
 
-As with many other functions in the collection class, you are allowed to specify
-a dot-separated path for extracting columns. This example will return
-a collection containing the author names from a list of articles::
+Comme plusieurs autres fonctions dans la classe collection, vous pouvez
+spécifier un chemin séparé de points pour extraire les colonnes. Cet exemple va
+retourner une collection contenant les noms d'auteur à partir d'une liste
+d'articles::
 
     $collection = new Collection($articles);
     $names = $collection->extract('author.name');
 
-    // $result contains ['Maria', 'Stacy', 'Larry'];
+    // $result contient ['Maria', 'Stacy', 'Larry'];
     $result = $names->toArray();
 
-Finally, if the property you are looking after cannot be expressed as a path,
-you can use a callback function to return it::
+Finalement, si la propriété que vous recherchez ne peut être exprimée en chemin,
+vous pouvez utiliser une fonction de callback pour la retourner::
 
     $collection = new Collection($articles);
     $names = $collection->extract(function ($article) {
@@ -140,9 +141,9 @@ you can use a callback function to return it::
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
-Collections allow you to create a new collection made from keys and values in
-an existing collection. Both the key and value paths can be specified with
-dot notation paths::
+Les collections vous permettent de créer une nouvelle collection à partir des clés
+et des valeurs d'une collection existante. Les chemins de clé et de valeur peuvent
+être spécifiés avec la notation par point des chemins::
 
     $items = [
         ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
@@ -151,18 +152,19 @@ dot notation paths::
     ];
     $combined = (new Collection($items))->combine('id', 'name');
 
-    // Result will look like this when converted to array
+    // Le résultat ressemblera à ceci quand il est converti en tableau
     [
         1 => 'foo',
         2 => 'bar',
         3 => 'baz',
     ];
 
-You can also optionally use a ``groupPath`` to group results based on a path::
+Vous pouvez aussi utiliser ``groupPath`` en option pour grouper les résultats basés
+sur un chemin::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
-    // Result will look like this when converted to array
+    // Le résultat va ressembler à ceci quand converti en tableau
     [
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
@@ -170,9 +172,9 @@ You can also optionally use a ``groupPath`` to group results based on a path::
 
 .. php:method:: stopWhen(callable $c)
 
-You can stop the iteration at any point using the ``stopWhen()`` method. Calling
-it in a collection will create a new one that will stop yielding results if the
-passed callable returns false for one of the elements::
+Vous pouvez stopper l'itération à n'importe quel point en utilisant la méthode
+``stopWhen()``. L'appeler dans une collection va en créer une qui va stopper les
+résultats yielding si le callable passé retourne false pour l'un des éléments::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
@@ -182,31 +184,32 @@ passed callable returns false for one of the elements::
         return $value > 30;
     });
 
-    // $result contains [10, 20];
+    // $result contient [10, 20];
     $result = $new->toArray();
 
 .. php:method:: unfold(callable $c)
 
-Sometimes the internal items of a collection will contain arrays or iterators
-with more items. If you wish to flatten the internal structure to iterate once
-over all elements you can use the ``unfold()`` method. It will create a new
-collection that will yield the every single element nested in the collection::
+Parfois les items internes d'une collection vont contenir des tableaux ou des
+itérateurs avec plus d'items. Si vous souhaitez flatten la structure interne pour
+itérer une fois tous les éléments, vous pouvez utiliser la méthode ``unfold()``.
+Cela va créer une nouvelle collection qui va produire l'élément unique imbriqué
+dans la collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
     $allElements = $collection->unfold();
 
-    // $result contains [1, 2, 3, 4, 5];
+    // $result contient [1, 2, 3, 4, 5];
     $result = $new->toArray(false);
 
-When passing a callable to ``unfold()`` you can control what elements will be
-unfolded from each item in the original collection. This is useful for returning
-data from paginated services::
+QUand vous passez un callable à ``unfold()``, vous pouvez contrôler les éléments qui
+vont être révélés à partir de chaque item dans la collection originale. C'est utile
+pour retourner les données à partir des services paginées::
 
     $pages = [1, 2, 3, 4];
     $collection = new Collection($pages);
     $items = $collection->unfold(function ($page, $key) {
-        // An imaginary web service that returns a page of results
+        // Un service web imaginaire qui retourne une page de résultats
         return MyService::fetchPage($page)->toArray();
     });
 
@@ -217,9 +220,10 @@ Filtrer
 
 .. php:method:: filter(callable $c)
 
-Collections make it easy to filter and create new collections based on
-the result of callback functions. You can use ``filter()`` to create a new
-collection of elements matching a criteria callback::
+Les collections permettent de filtrer et de créer facilement les nouvelles
+collections basées sur le résultat de fonctions callback. Vous pouvez utiliser
+``filter()`` pour créer une nouvelle collection d'éléments qui matchent un
+critère callback::
 
     $collection = new Collection($people);
     $ladies = $collection->filter(function ($person, $key) {
@@ -231,8 +235,8 @@ collection of elements matching a criteria callback::
 
 .. php:method:: reject(callable $c)
 
-The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
-removing elements that match the filter function::
+L'inverse de ``filter()`` est ``reject()``. Cette méthode fait un filtre négatif,
+retirant les éléments qui matchent la fonction filter::
 
     $collection = new Collection($people);
     $ladies = $collection->reject(function ($person, $key) {
@@ -241,8 +245,8 @@ removing elements that match the filter function::
 
 .. php:method:: every(callable $c)
 
-You can do truth tests with filter functions. To see if every element in
-a collection matches a test you can use ``every()``::
+Vous pouvez faire des tests de vérité avec les fonctions filter. Pour voir si chaque
+élément dans une collection matche un test, vous pouvez utiliser ``every()``::
 
     $collection = new Collection($people);
     $allYoungPeople = $collection->every(function ($person) {
@@ -251,8 +255,8 @@ a collection matches a test you can use ``every()``::
 
 .. php:method:: some(callable $c)
 
-You can see if the collection contains at least one element matching a filter
-function using the ``some()`` method::
+Vous pouvez regarder si la collection contient au moins un élément matchant une fonction
+filter en utilisant la méthode ``some()``::
 
     $collection = new Collection($people);
     $hasYoungPeople = $collection->some(function ($person) {
@@ -261,17 +265,17 @@ function using the ``some()`` method::
 
 .. php:method:: match(array $conditions)
 
-If you need to extract a new collection containing only the elements that
-contain a given set of properties, you should use the ``match()`` method::
+Si vous avez besoin d'extraire une nouvelle collection contenant seulement les éléments qui
+contiennent un ensemble donné de propriétés, vous devez utiliser la méthode ``match()``::
 
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
-The property name can be a dot-separated path. You can traverse into nested
-entities and match the values they contain. When you only need the first
-matching element from a collection, you can use ``firstMatch()``::
+Le nom de la propriété peut être un chemin séparé par des points. Vous pouvez traverser des
+entities imbriquées et matcher les valeurs qu'elles contiennent. Quand vous avez besoin de
+seulement matcher le premier élément d'une collection, vous pouvez utiliser ``firstMatch()``::
 
     $collection = new Collection($comments);
     $comment = $collection->firstMatch([
@@ -279,10 +283,10 @@ matching element from a collection, you can use ``firstMatch()``::
         'active' => true
     ]);
 
-As you can see from the above, both ``match()`` and ``firstMatch()`` allow you
-to provide multiple conditions to match on. In addition, the conditions can be
-for different paths, allowing you to express complex conditions to match
-against.
+Comme vous pouvez le voir ci-dessus, les deux méthodes ``match()`` et ``firstMatch()`` vous
+permettent de fournir plusieurs conditions qui correspondent. En plus, les conditions peuvent
+être pour différents chemins, vous permettant d'exprimer des conditions complexes à faire
+correspondre.
 
 Agrégation
 ==========
