@@ -217,11 +217,15 @@ set of records::
     $spanishTranslation = $article->translation('spa');
     $englishTranslation = $article->translation('eng');
 
-Adding Additional Conditions for Translations
----------------------------------------------
+Preventing Retrieval of Empty Translations
+------------------------------------------
 
-You may need additional conditions for loading translated records. For example,
-you may only want to load non-empty translations::
+Translation records can contain any string, if a record has been translated
+and stored as an empty string ('') the translate behavior will take and use
+this to overwrite the original field value.
+
+If this is undesired, you can ignore translations which are empty using the
+``allowEmptyTranslations`` config key::
 
     class Articles extends Table
     {
@@ -230,7 +234,7 @@ you may only want to load non-empty translations::
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
-                'conditions' => ['content !=' => '']
+                'allowEmptyTranslations' => false
             ]);
         }
     }
