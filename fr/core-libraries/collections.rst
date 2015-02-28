@@ -109,10 +109,10 @@ les objets résultants quand ils sont itérés.
 
 .. php:method:: extract($matcher)
 
-Une des utilisations les plus courantes de la fonction ``map()`` est l'extraction
-d'une colonne unique d'une collection. Si vous souhaitez construire une liste
-d'éléments contenant les valeurs pour une propriété en particulier, vous pouvez
-utiliser la méthode ``extract()``::
+Une des utilisations les plus courantes de la fonction ``map()`` est
+l'extraction d'une colonne unique d'une collection. Si vous souhaitez construire
+une liste d'éléments contenant les valeurs pour une propriété en particulier,
+vous pouvez utiliser la méthode ``extract()``::
 
     $collection = new Collection($people);
     $names = $collection->extract('name');
@@ -141,9 +141,9 @@ vous pouvez utiliser une fonction de callback pour la retourner::
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
-Les collections vous permettent de créer une nouvelle collection à partir des clés
-et des valeurs d'une collection existante. Les chemins de clé et de valeur peuvent
-être spécifiés avec la notation par point des chemins::
+Les collections vous permettent de créer une nouvelle collection à partir des
+clés et des valeurs d'une collection existante. Les chemins de clé et de valeur
+peuvent être spécifiés avec la notation par point des chemins::
 
     $items = [
         ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
@@ -159,8 +159,8 @@ et des valeurs d'une collection existante. Les chemins de clé et de valeur peuv
         3 => 'baz',
     ];
 
-Vous pouvez aussi utiliser ``groupPath`` en option pour grouper les résultats basés
-sur un chemin::
+Vous pouvez aussi utiliser ``groupPath`` en option pour grouper les résultats
+basés sur un chemin::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
@@ -173,8 +173,9 @@ sur un chemin::
 .. php:method:: stopWhen(callable $c)
 
 Vous pouvez stopper l'itération à n'importe quel point en utilisant la méthode
-``stopWhen()``. L'appeler dans une collection va en créer une qui va stopper les
-résultats yielding si le callable passé retourne false pour l'un des éléments::
+``stopWhen()``. L'appeler dans une collection va en créer une qui va stopper le
+retour des résultats si le callable passé retourne false pour l'un des
+éléments::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
@@ -190,10 +191,10 @@ résultats yielding si le callable passé retourne false pour l'un des élément
 .. php:method:: unfold(callable $c)
 
 Parfois les items internes d'une collection vont contenir des tableaux ou des
-itérateurs avec plus d'items. Si vous souhaitez flatten la structure interne pour
-itérer une fois tous les éléments, vous pouvez utiliser la méthode ``unfold()``.
-Cela va créer une nouvelle collection qui va produire l'élément unique imbriqué
-dans la collection::
+itérateurs avec plus d'items. Si vous souhaitez aplatir la structure interne
+pour itérer une fois tous les éléments, vous pouvez utiliser la méthode
+``unfold()``. Cela va créer une nouvelle collection qui va produire l'élément
+unique imbriqué dans la collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
@@ -202,9 +203,9 @@ dans la collection::
     // $result contient [1, 2, 3, 4, 5];
     $result = $new->toArray(false);
 
-QUand vous passez un callable à ``unfold()``, vous pouvez contrôler les éléments qui
-vont être révélés à partir de chaque item dans la collection originale. C'est utile
-pour retourner les données à partir des services paginées::
+Quand vous passez un callable à ``unfold()``, vous pouvez contrôler les éléments
+qui vont être révélés à partir de chaque item dans la collection originale.
+C'est utile pour retourner les données à partir des services paginés::
 
     $pages = [1, 2, 3, 4];
     $collection = new Collection($pages);
@@ -235,8 +236,8 @@ critère callback::
 
 .. php:method:: reject(callable $c)
 
-L'inverse de ``filter()`` est ``reject()``. Cette méthode fait un filtre négatif,
-retirant les éléments qui matchent la fonction filter::
+L'inverse de ``filter()`` est ``reject()``. Cette méthode fait un filtre
+négatif, retirant les éléments qui matchent la fonction filter::
 
     $collection = new Collection($people);
     $ladies = $collection->reject(function ($person, $key) {
@@ -245,8 +246,9 @@ retirant les éléments qui matchent la fonction filter::
 
 .. php:method:: every(callable $c)
 
-Vous pouvez faire des tests de vérité avec les fonctions filter. Pour voir si chaque
-élément dans une collection matche un test, vous pouvez utiliser ``every()``::
+Vous pouvez faire des tests de vérité avec les fonctions filter. Pour voir si
+chaque élément dans une collection matche un test, vous pouvez utiliser
+``every()``::
 
     $collection = new Collection($people);
     $allYoungPeople = $collection->every(function ($person) {
@@ -255,8 +257,8 @@ Vous pouvez faire des tests de vérité avec les fonctions filter. Pour voir si 
 
 .. php:method:: some(callable $c)
 
-Vous pouvez regarder si la collection contient au moins un élément matchant une fonction
-filter en utilisant la méthode ``some()``::
+Vous pouvez regarder si la collection contient au moins un élément matchant une
+fonction filter en utilisant la méthode ``some()``::
 
     $collection = new Collection($people);
     $hasYoungPeople = $collection->some(function ($person) {
@@ -265,17 +267,19 @@ filter en utilisant la méthode ``some()``::
 
 .. php:method:: match(array $conditions)
 
-Si vous avez besoin d'extraire une nouvelle collection contenant seulement les éléments qui
-contiennent un ensemble donné de propriétés, vous devez utiliser la méthode ``match()``::
+Si vous avez besoin d'extraire une nouvelle collection contenant seulement les
+éléments qui contiennent un ensemble donné de propriétés, vous devez utiliser
+la méthode ``match()``::
 
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
-Le nom de la propriété peut être un chemin séparé par des points. Vous pouvez traverser des
-entities imbriquées et matcher les valeurs qu'elles contiennent. Quand vous avez besoin de
-seulement matcher le premier élément d'une collection, vous pouvez utiliser ``firstMatch()``::
+Le nom de la propriété peut être un chemin séparé par des points. Vous pouvez
+traverser des entities imbriquées et matcher les valeurs qu'elles contiennent.
+Quand vous avez besoin de seulement matcher le premier élément d'une collection,
+vous pouvez utiliser ``firstMatch()``::
 
     $collection = new Collection($comments);
     $comment = $collection->firstMatch([
@@ -283,10 +287,10 @@ seulement matcher le premier élément d'une collection, vous pouvez utiliser ``
         'active' => true
     ]);
 
-Comme vous pouvez le voir ci-dessus, les deux méthodes ``match()`` et ``firstMatch()`` vous
-permettent de fournir plusieurs conditions qui correspondent. En plus, les conditions peuvent
-être pour différents chemins, vous permettant d'exprimer des conditions complexes à faire
-correspondre.
+Comme vous pouvez le voir ci-dessus, les deux méthodes ``match()`` et
+``firstMatch()`` vous permettent de fournir plusieurs conditions qui
+correspondent. En plus, les conditions peuvent être pour différents chemins,
+vous permettant d'exprimer des conditions complexes à faire correspondre.
 
 Agrégation
 ==========
