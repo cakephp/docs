@@ -201,6 +201,7 @@ pour déclencher les méthodes de cette classe. Un écouteur (listener)
         }
     }
 
+    // Dans un controller ou à n'importe quel endroit où $this->Order est accessible
     // Attache l'objet UserStatistic au gestionnaire d'événement 'Order' (commande)
     $statistics = new UserStatistic();
     $this->Order->getEventManager()->attach($statistics);
