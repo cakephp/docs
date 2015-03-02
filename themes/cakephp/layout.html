@@ -143,7 +143,7 @@ window.lang = "{{ language }}";
 	<div class="document columns nine push-three">
 		<div class="body">
 			{%- if pagename != 'search' -%}
-				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
+				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ lang_dir(language) }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
 			{%- endif -%}
 			{% block body %} {% endblock %}
 		</div>
