@@ -65,22 +65,6 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
         :doc:`/core-libraries/internationalization-and-localization`
         のセクションを確認して下さい。
 
-.. php:function:: __c(string $msg, integer $category, mixed $args = null)
-
-    ..
-        Note that the category must be specified with a numeric value, instead of
-        the constant name. The values are
-
-    カテゴリは定義済みの名前をそのまま使うのではなく、数値で指定されなければなりません。それらの値は以下の通り:
-
-    - 0 - LC_ALL
-    - 1 - LC_COLLATE
-    - 2 - LC_CTYPE
-    - 3 - LC_MONETARY
-    - 4 - LC_NUMERIC
-    - 5 - LC_TIME
-    - 6 - LC_MESSAGES
-
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
     .. Allows you to override the current domain for a single message lookup.
@@ -92,124 +76,121 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     プラグインを国際化するときに便利です:
     ``echo __d('PluginName', 'This is my plugin');``
 
-.. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
-
-    ..
-        Allows you to override the current domain for a single message lookup. It
-        also allows you to specify a category.
-
-    メッセージを一つ取得するために、現在のドメインを変更することが可能です。
-    同時に、カテゴリを指定することも出来ます。
-
-    ..
-        Note that the category must be specified with a numeric value, instead of
-        the constant name. The values are:
-
-    カテゴリは定義済みの名前をそのまま使うのではなく、数値で指定されなければなりません。
-    それらの値は以下の通り:
-
-    - 0 - LC_ALL
-    - 1 - LC_COLLATE
-    - 2 - LC_CTYPE
-    - 3 - LC_MONETARY
-    - 4 - LC_NUMERIC
-    - 5 - LC_TIME
-    - 6 - LC_MESSAGES
-
-.. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
-
-    ..
-        Allows you to override the current domain for a single plural message
-        lookup. It also allows you to specify a category. Returns correct plural
-        form of message identified by $singular and $plural for count $count from
-        domain $domain.
-
-    複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
-    同時に、カテゴリを指定することも出来ます。
-    $domain でドメインを指定し、$count の数を数え、 $singular と $plural に基いて複数形を正しく処理したメッセージを返します。
-
-    ..
-        Note that the category must be specified with a numeric value, instead of
-        the constant name. The values are:
-
-    カテゴリは定義済みの名前をそのまま使うのではなく、数値で指定されなければなりません。
-    それらの値は以下の通り:
-
-    - 0 - LC_ALL
-    - 1 - LC_COLLATE
-    - 2 - LC_CTYPE
-    - 3 - LC_MONETARY
-    - 4 - LC_NUMERIC
-    - 5 - LC_TIME
-    - 6 - LC_MESSAGES
-
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
     ..
         Allows you to override the current domain for a single plural message
-        lookup. Returns correct plural form of message identified by $singular and
-        $plural for count $count from domain $domain.
+        lookup. Returns correct plural form of message identified by
+        ``$singular`` and ``$plural`` for count ``$count`` from domain
+        ``$domain``.
 
     複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
-    $domain でドメインを指定し、$count の数を数え、 $singular と $plural に基いて複数形を正しく処理したメッセージを返します。
+    ``$domain`` でドメインを指定し、``$count`` の数を数え、 ``$singular`` と
+    ``$plural`` に基いて複数形を正しく処理したメッセージを返します。
+
+.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
+
+    ..
+        Allows you to override the current domain for a single message lookup. It
+        also allows you to specify a context.
+
+    メッセージを一つ取得するために、現在のドメインを変更することが可能です。
+    また、あなたがコンテキストを指定することができます。
+
+    ..
+        The context is a unique identifier for the translations string that
+        makes it unique for in the same domain.
+
+    コンテキストは、同じドメイン内のため
+    それがユニークな翻訳文字列の一意の識別子です。
+
+.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    ..
+        Allows you to override the current domain for a single plural message
+        lookup. It also allows you to specify a context. Returns correct plural
+        form of message identified by ``$singular`` and ``$plural`` for count
+        ``$count`` from domain ``$domain``. Some languages have more than one
+        form for plural messages dependent on the count.
+
+    複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
+    また、あなたがコンテキストを指定することができます。
+    ``$domain`` でドメインを指定し、``$count`` の数を数え、 ``$singular`` と
+    ``$plural`` に基いて複数形を正しく処理したメッセージを返します。
+    幾つかの言語が、数に応じた複数形の形式を一つ以上持っています。
+
+    ..
+        The context is a unique identifier for the translations string that
+        makes it unique for in the same domain.
+
+    コンテキストは、同じドメイン内のため
+    それがユニークな翻訳文字列の一意の識別子です。
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
     ..
-        Returns correct plural form of message identified by $singular and $plural
-        for count $count. Some languages have more than one form for plural
-        messages dependent on the count.
+        Returns correct plural form of message identified by ``$singular`` and
+        ``$plural`` for count ``$count``. Some languages have more than one form
+        for plural messages dependent on the count.
 
-    $count の数を数え、 $singular と $plural に基いて複数形を正しく処理したメッセージを返します。
+    ``$count`` の数を数え、 ``$singular`` と ``$plural`` に基いて複数形を正しく処理したメッセージを返します。
     幾つかの言語が、数に応じた複数形の形式を一つ以上持っています。
 
-.. php:function:: am(array $one, $two, $three...)
+.. php:function:: __x(string $context, string $msg, mixed $args = null)
 
     ..
-        Merges all the arrays passed as parameters and returns the merged
-        array.
+        The context is a unique identifier for the translations string that
+        makes it unique for in the same domain.
 
-    パラメータとして渡されてすべての配列をマージして、その結果の配列を返します。
+    コンテキストは、同じドメイン内のため
+    それがユニークな翻訳文字列の一意の識別子です。
 
-.. php:function:: config()
-
-    ..
-        Can be used to load files from your application ``config``-folder
-        via include\_once. Function checks for existence before include and
-        returns boolean. Takes an optional number of arguments.
-
-    アプリケーション内の ``config`` フォルダから include\_once 経由でファイルをロードするために使用することが出来ます。
-    この関数はインクルードする前にファイルの存在チェックを行い、ブール値を返します。
-    任意の数の引数を取ります。
-
-    .. Example: ``config('some_file', 'myconfig');``
-
-    例: ``config('some_file', 'myconfig');``
-
-.. php:function:: convertSlash(string $string)
+.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
     ..
-        Converts forward slashes to underscores and removes the first and
-        last underscores in a string. Returns the converted string.
+        Returns correct plural form of message identified by ``$singular`` and
+        ``$plural`` for count ``$count``. It also allows you to specify a
+        context. Some languages have more than one form for plural messages
+        dependent on the count.
 
-    文字列のスラッシュをアンダースコアに変換し、最初と最後のアンダースコアを削除します。
-    変換した文字列を返します。
+    ``$count`` の数を数え、 ``$singular`` と ``$plural``
+    に基いて複数形を正しく処理したメッセージを返します。
+    また、あなたがコンテキストを指定することができます。
+    幾つかの言語が、数に応じた複数形の形式を一つ以上持っています。
+
+    ..
+        The context is a unique identifier for the translations string that
+        makes it unique for in the same domain.
+
+    コンテキストは、同じドメイン内のため
+    それがユニークな翻訳文字列の一意の識別子です。
+
+.. php:function:: collection(mixed $items)
+
+    ..
+        Convenience wrapper for instantiating a new
+        :php:class:`Cake\Collection\Collection` object, wrapping the passed
+        argument. The ``$items`` parameter takes either a ``Traversable`` object
+        or an array.
+
+    渡された引数をラップする、新しい :php:class:`Cake\Collection\Collection`
+    オブジェクトをインスタンス化するための簡易ラッパー。``$items`` パラメータは
+    ``Traversable`` オブジェクトまたは配列のいずれかを取ります。
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
     ..
-        If the application's DEBUG level is non-zero, $var is printed out.
-        If ``$showHTML`` is true or left as null, the data is rendered to be
-        browser-friendly.
-        If $showFrom is not set to false, the debug output will start with the line from
-        which it was called
+        If the core ``$debug`` variable is ``true``, ``$var`` is printed out.
+        If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered
+        to be browser-friendly.
+        If ``$showFrom`` is not set to ``false``, the debug output will start
+        with the line from which it was called
         Also see :doc:`/development/debugging`
 
-    アプリケーションの DEBUG レベルがゼロ以外の場合に $var が出力されます。
-    ``$showHTML`` が true あるいは null のままであればデータはブラウザ表示に相応しいように描画されます。
-    ``$showFrom`` が false にセットされない場合、それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
+    コア ``$debug`` 変数が ``true`` であれば、 ``$var`` がプリントアウトされる。
+    ``$showHTML`` が ``true`` あるいは ``null`` のままであればデータはブラウザ表示に相応しいように描画されます。
+    ``$showFrom`` が ``false`` にセットされない場合、それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
     :doc:`/development/debugging` も参照して下さい
-
 
 .. php:function:: env(string $key)
 
@@ -218,7 +199,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
         backup if ``$_SERVER`` or ``$_ENV`` are disabled.
 
     ..
-        This function also emulates PHP\_SELF and DOCUMENT\_ROOT on
+        This function also emulates ``PHP_SELF`` and ``DOCUMENT_ROOT`` on
         unsupporting servers. In fact, it's a good idea to always use
         ``env()`` instead of ``$_SERVER`` or ``getenv()`` (especially if
         you plan to distribute the code), since it's a full emulation
@@ -226,19 +207,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     可能な限りの環境変数を取得します。仮に ``$_SERVER`` か ``$_ENV`` が使用不可の場合にはバックアップとして用いられます。
 
-    この関数はまた、PHP\_SELF と DOCUMENT\_ROOT を、非サポートのサーバー上でエミュレートします。
+    この関数はまた、``PHP_SELF`` と ``DOCUMENT_ROOT`` を、非サポートのサーバー上でエミュレートします。
     これは完全なエミュレーションラッパーなので、``$_SERVER`` や ``getenv()`` の代わりに ``env()`` を常に用いることは、
     （とりわけあなたがコードを配布する予定なら）とても良い考えです。
-
-
-.. php:function:: fileExistsInPath(string $file)
-
-    ..
-        Checks to make sure that the supplied file is within the current
-        PHP include\_path. Returns a boolean result.
-
-    渡されたファイルが、現在の PHP include\_path の中にあるかどうかをチェックします。
-    ブール値の結果を返します。
 
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
@@ -246,20 +217,14 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ``htmlspecialchars()`` の便利なラッパー。
 
-.. php:function:: LogError(string $message)
-
-    .. Shortcut to :php:meth:`Log::write()`.
-
-    :php:meth:`Log::write()` へのショートカット。
-
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
     ..
-        Splits a dot syntax plugin name into its plugin and classname. If $name
-        does not have a dot, then index 0 will be null.
+        Splits a dot syntax plugin name into its plugin and classname. If ``$name``
+        does not have a dot, then index 0 will be ``null``.
 
     ドット記法されたプラグイン名をプラグインとクラス名に分離します。
-    $name にドットが含まれない場合、インデクスが 0 の箇所は null になります。
+    ``$name`` にドットが含まれない場合、インデクスが 0 の箇所は ``null`` になります。
 
     .. Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
 
@@ -269,24 +234,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ..
         Convenience wrapper for ``print_r()``, with the addition of
-        wrapping <pre> tags around the output.
+        wrapping ``<pre>`` tags around the output.
 
-    出力を <pre> タグでラップする機能を追加した ``print_r()`` の便利なラッパー。
-
-.. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
-
-    .. Sorts given $array by key $sortby.
-
-    与えられた $array を $sortby キーによってソートします。
-
-.. php:function:: stripslashes_deep(array $value)
-
-    ..
-        Recursively strips slashes from the supplied ``$value``. Returns
-        the modified array.
-
-    与えられた ``$value`` から、再帰的にスラッシュを取り除きます。
-    変換された配列を返します。
+    出力を ``<pre>`` タグでラップする機能を追加した ``print_r()`` の便利なラッパー。
 
 .. Core Definition Constants
 
@@ -343,9 +293,11 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
 .. php:const:: DS
 
-    .. Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+    ..
+        Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and
+        ``\\`` on Windows.
 
-    PHP の DIRECTORY\_SEPARATOR (Linux の場合は / windows の場合は \\) のショートカット。
+    PHP の ``DIRECTORY_SEPARATOR`` (Linux の場合は ``/`` Windows の場合は ``\\``) のショートカット。
 
 .. php:const:: LOGS
 
