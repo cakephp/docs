@@ -36,7 +36,7 @@ Collection serait::
     });
 
 Le :php:trait:`~Cake\\Collection\\CollectionTrait` vous permet également
-d'intégrer des fonctionnalité semblables aux collections pour tout objet
+d'intégrer des fonctionnalités semblables aux Collections pour tout objet
 ``Traversable`` de votre application.
 
 Liste des Méthodes
@@ -120,9 +120,9 @@ vous pouvez utiliser la méthode ``extract()``::
     // $result contient ['mark', 'jose', 'barbara'];
     $result = $names->toArray();
 
-Comme plusieurs autres fonctions dans la classe collection, vous pouvez
+Comme plusieurs autres fonctions dans la classe ``Collection``, vous pouvez
 spécifier un chemin séparé de points pour extraire les colonnes. Cet exemple va
-retourner une collection contenant les noms d'auteur à partir d'une liste
+retourner une collection contenant les noms d'auteurs à partir d'une liste
 d'articles::
 
     $collection = new Collection($articles);
@@ -152,7 +152,7 @@ peuvent être spécifiés avec la notation par point des chemins::
     ];
     $combined = (new Collection($items))->combine('id', 'name');
 
-    // Le résultat ressemblera à ceci quand il est converti en tableau
+    // Le résultat ressemble à ceci quand il est converti en tableau
     [
         1 => 'foo',
         2 => 'bar',
@@ -164,7 +164,7 @@ basés sur un chemin::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
-    // Le résultat va ressembler à ceci quand converti en tableau
+    // Le résultat ressemble à ceci quand il est converti en tableau
     [
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
@@ -287,10 +287,10 @@ vous pouvez utiliser ``firstMatch()``::
         'active' => true
     ]);
 
-Comme vous pouvez le voir ci-dessus, les deux méthodes ``match()`` et
-``firstMatch()`` vous permettent de fournir plusieurs conditions qui
-correspondent. En plus, les conditions peuvent être pour différents chemins,
-vous permettant d'exprimer des conditions complexes à faire correspondre.
+Comme vous pouvez le voir ci-dessus, les méthodes ``match()`` et
+``firstMatch()`` vous permettent de fournir plusieurs conditions à matcher. De
+plus, les conditions peuvent être utilisées sur des chemins différents, vous
+permettant d'exprimer des conditions complexes à faire correspondre.
 
 Agrégation
 ==========
