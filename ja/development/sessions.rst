@@ -421,12 +421,8 @@ ini 指示子の設定
 
         // 期限切れセッションの削除
         public function gc($expires = null) {
-            return Cache::gc($this->cacheKey) && parent::gc($expires);
-        }
-    }
-        // 期限切れセッションの削除
-        public function gc($expires = null) {
-            return Cache::gc($this->cacheKey) && parent::gc($expires);
+            Cache::gc($this->cacheKey);
+            return parent::gc($expires);
         }
     }
 
