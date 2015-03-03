@@ -99,9 +99,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ..
         The context is a unique identifier for the translations string that
-        makes it unique for in the same domain.
+        makes it unique within the same domain.
 
-    コンテキストは、同じドメイン内のため
+    コンテキストは、同じドメイン内で、
     それがユニークな翻訳文字列の一意の識別子です。
 
 .. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
@@ -121,9 +121,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ..
         The context is a unique identifier for the translations string that
-        makes it unique for in the same domain.
+        makes it unique within the same domain.
 
-    コンテキストは、同じドメイン内のため
+    コンテキストは、同じドメイン内で、
     それがユニークな翻訳文字列の一意の識別子です。
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
@@ -140,9 +140,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ..
         The context is a unique identifier for the translations string that
-        makes it unique for in the same domain.
+        makes it unique within the same domain.
 
-    コンテキストは、同じドメイン内のため
+    コンテキストは、同じドメイン内で、
     それがユニークな翻訳文字列の一意の識別子です。
 
 .. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
@@ -160,9 +160,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     ..
         The context is a unique identifier for the translations string that
-        makes it unique for in the same domain.
+        makes it unique within the same domain.
 
-    コンテキストは、同じドメイン内のため
+    コンテキストは、同じドメイン内で、
     それがユニークな翻訳文字列の一意の識別子です。
 
 .. php:function:: collection(mixed $items)

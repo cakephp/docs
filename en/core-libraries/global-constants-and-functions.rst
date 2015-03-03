@@ -55,7 +55,7 @@ such as debugging and translating content.
     also allows you to specify a context.
 
     The context is a unique identifier for the translations string that makes it
-    unique for in the same domain.
+    unique within the same domain.
 
 .. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
@@ -66,7 +66,7 @@ such as debugging and translating content.
     for plural messages dependent on the count.
 
     The context is a unique identifier for the translations string that makes it
-    unique for in the same domain.
+    unique within the same domain.
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
@@ -77,7 +77,7 @@ such as debugging and translating content.
 .. php:function:: __x(string $context, string $msg, mixed $args = null)
 
     The context is a unique identifier for the translations string that makes it
-    unique for in the same domain.
+    unique within the same domain.
 
 .. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
 
@@ -87,7 +87,7 @@ such as debugging and translating content.
     messages dependent on the count.
 
     The context is a unique identifier for the translations string that makes it
-    unique for in the same domain.
+    unique within the same domain.
 
 .. php:function:: collection(mixed $items)
 
