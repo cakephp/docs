@@ -401,7 +401,7 @@ Changing the Response Class
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
 transparent class. If you need to override it with your own application-specific class,
-you can replace ``Response`` in ``webroot/index.php``.
+you can replace ``Response`` in **webroot/index.php**.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response
