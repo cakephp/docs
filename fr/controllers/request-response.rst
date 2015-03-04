@@ -424,7 +424,7 @@ Changer la Classe Response
 CakePHP utilise ``Response`` par défaut. ``Response`` est une classe
 flexible et transparente. Si vous avez besoin de la remplacer avec une
 classe spécifique de l'application, vous pouvez remplacer
-``Response`` dans ``webroot/index.php``.
+``Response`` dans **webroot/index.php**.
 
 Cela fera que tous les controllers dans votre application utiliseront
 ``VotreResponse`` au lieu de :php:class:`Cake\\Network\\Response`. Vous pouvez

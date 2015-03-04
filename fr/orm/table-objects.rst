@@ -219,6 +219,18 @@ afterSave
 L'event ``Model.afterSave`` est déclenché après qu'une entity ne soit
 sauvegardée.
 
+afterSaveCommit
+---------------
+
+.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+
+L'event ``Model.afterSaveCommit`` est lancé après que la transaction, dans
+laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
+déclenché pour des sauvegardes non atomic, quand les opérations sur la base de
+données sont implicitement committées. L'event est décenché seulement pour
+la table primaire sur laquelle ``save()`` est directement appelée. L'event
+n'est pas déclenché si une transaction est démarrée avant l'appel de save.
+
 beforeDelete
 ------------
 
@@ -234,6 +246,19 @@ afterDelete
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
 L'event ``Model.afterDelete`` est déclenché après qu'une entity a été supprimée.
+
+afterDeleteCommit
+-----------------
+
+.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+
+L'event ``Model.afterDeleteCommit`` est lancé après que la transaction, dans
+laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
+déclenché pour des suppressions non atomic, quand les opérations sur la base de
+données sont implicitement committées. L'event est décenché seulement pour
+la table primaire sur laquelle ``delete()`` est directement appelée. L'event
+n'est pas déclenché si une transaction est démarrée avant l'appel de delete.
+
 
 Behaviors
 =========
