@@ -202,6 +202,17 @@ afterSave
 
 The ``Model.afterSave`` event is fired after an entity is saved.
 
+afterSaveCommit
+---------------
+
+.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+
+The ``Model.afterSaveCommit`` event is fired after the transaction in which the
+save operation is wrapped has been committed. It's also triggered for non atomic
+saves where database operations are implicitly committed. The event is triggered
+only for the primary table on which ``save()`` is directly called. The event is
+not triggered if a transaction is started before calling save.
+
 beforeDelete
 ------------
 
@@ -216,6 +227,17 @@ afterDelete
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
 The ``Model.beforeDelete`` event is fired after an entity has been deleted.
+
+afterDeleteCommit
+-----------------
+
+.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+
+The ``Model.afterDeleteCommit`` event is fired after the transaction in which the
+delete operation is wrapped has been is committed. It's also triggered for non
+atomic deletes where database operations are implicitly committed. The event is
+triggered only for the primary table on which ``delete()`` is directly called.
+The event is not triggered if a transaction is started before calling delete.
 
 Behaviors
 =========
