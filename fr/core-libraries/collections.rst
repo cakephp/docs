@@ -665,41 +665,45 @@ Agrandir les Collections
 
 .. php:method:: append(array|Traversable $items)
 
-You can compose multiple collections into a single one. This enables you to
-gather data from various sources, concatenate it, and apply other collection
-functions to it very smoothly. The ``append()`` method will return a new
-collection containing the values from both sources::
+Vous pouvez composer plusieurs collections en une collection unique. Ceci vous
+permet de recueillir des données provenant de diverses sources, de concaténer
+et de lui appliquer d'autres fonctions de collection très en douceur. La méthode
+``append()`` va retourner une nouvelle collection contenant les valeurs à partir
+des deux sources::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->append($phpTweets);
 
-    // Tweets containing cakefest from both sources
+    // Tweets contenant cakefest à partir des deux sources
     $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });
 
 .. warning::
 
-    When appending from different sources, you can expect some keys from both
-    collections to be the same. For example, when appending two simple arrays.
-    This can present a problem when converting a collection to an array using
-    ``toArray()``. If you do not want values from one collection to override
-    others in the previous one based on their key, make sure that you call
-    ``toArray(false)`` in order to drop the keys and preserve all values.
+    Quand vous ajoutez différentes sources, vous pouvez avoir certaines clés
+    des deux collections qui sont les mêmes. Par exemple, quand vous ajoutez
+    deux tableaux uniques. Ceci peut entraîner un problème quand vous
+    convertissez une collection en un tableau en utilisant ``toArray()``. Si
+    vous ne voulez pas que des valeurs d'une collection surchargent les autres
+    dans la précédente basée sur leur clé, assurez-vous que vous appelez
+    ``toArray(false)`` afin de supprimer les clés et de préserver toutes les
+    valeurs.
 
 Modification d'Eléments
 -----------------------
 
 .. php:method:: insert(string $path, array|Traversable $items)
 
-At times, you may have two separate sets of data that you would like to insert
-the elements of one set into each of the elements of the other set. This is
-a very common case when you fetch data from a data source that does not support
-data-merging or joins natively.
+A certains moments, vous pourriez avoir à séparer des ensembles de données que
+vous souhaiteriez, pour insérer les éléments d'un ensemble dans chacun des
+éléments de l'autre ensemble. C'est un cas très courant quand vous récupérez
+les données à partir d'une source de données qui ne supporte pas la fusion de
+données ou les jointures nativement.
 
-Collections offer an ``insert()`` method that will allow you to insert each of
-the elements in one collection into a property inside each of the elements of
-another collection::
+Les collections ont une méthode ``insert()`` qui vous permet d'insérer chacun
+des éléments dans une collection dans une propriété dans chacun des éléments
+d'une autre collection::
 
     $users = [
         ['username' => 'mark'],
@@ -715,7 +719,7 @@ another collection::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-When converted to an array, the ``$merged`` collection will look like this::
+Quand converti en un tableau, la collection ``$merged`` va ressmebler à ceci::
 
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
@@ -723,16 +727,17 @@ When converted to an array, the ``$merged`` collection will look like this::
         ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
     ];
 
-The first parameter for the ``insert()`` method is a dot-separated path of
-properties to follow so that the elements can be inserted at that position. The
-second argument is anything that can be converted to a collection object.
+Le premier paramètre de la méthode ``insert()`` est un chemin séparé par des
+points des propriétés à suivre pour que les éléments puissent être insérés à
+cette position. Le second argument est tout ce qui peut être converti en
+objets collection.
 
-Please observe that elements are inserted by the position they are found, thus,
-the first element of the second collection is merged into the first
-element of the first collection.
+Merci de remarquer que les éléments sont insérés par la position dans laquelle
+ils sont trouvés, ainsi le premier élément de la deuxième collection est
+fusionné dans le premier élément de la première collection.
 
-If there are not enough elements in the second collection to insert into the
-first one, then the target property will be filled with ``null`` values::
+Si il y a assez d'éléments de la seconde collection à insérer dans la première,
+alors la propriété cible va être remplie avec les valeurs ``null``::
 
     $languages = [
         ['PHP', 'Python', 'Ruby'],
@@ -741,31 +746,32 @@ first one, then the target property will be filled with ``null`` values::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-    // Will yield
+    // Va retourner
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
         ['username' => 'jose', 'skills' => null]
     ];
 
-The ``insert()`` method can operate array elements or objects implementing the
-``ArrayAccess`` interface.
+La méthode ``insert()`` peut opérer sur des éléments tableau ou des objets qui
+implémentent l'interface ``ArrayAccess``.
 
 Optimiser les Collections
 -------------------------
 
 .. php:method:: buffered()
 
-Collections often perform most operations that you create using its functions in
-a lazy way. This means that even though you can call a function, it does not
-mean it is executed right away. This is true for a great deal of functions in
-this class. Lazy evaluation allows you to save resources in situations
-where you don't use all the values in a collection. You might not use all the
-values when iteration stops early, or when an exception/failure case is reached
-early.
+Les collections effectuent souvent la plupart des opérations que vous créez
+en utilisant ses fonctions de façon lazy. Ceci signifie que même si vous pouvez
+appeler une fonction, cela ne signifie pas qu'elle est executée de la bonne
+manière. C'est vrai pour une grande quantité de fonctions de cette classe.
+L'évaluation lazy vous permet de gagner des ressources dans des situations
+où vous n'utilisez pas toutes les valeurs d'une collection. Vous pouvez ne pas
+utiliser toutes les valeurs quand l'itération stoppe rapidement, ou quand une
+exception/un échec se produit rapidement.
 
-Additionally, lazy evaluation helps speed up some operations. Consider the
-following example::
+De plus, l'évaluation lazy aide à accélerer certaines operations. Considerez
+l'exemple suivant::
 
     $collection = new Collection($oneMillionItems);
     $collection->map(function ($item) {
@@ -773,16 +779,16 @@ following example::
     });
     $itemsToShow = $collection->take(30);
 
-Had the collections not been lazy, we would have executed one million operations,
-even though we only wanted to show 30 elements out of it. Instead, our map
-operation was only applied to the 30 elements we used. We can also
-derive benefits from this lazy evaluation for smaller collections when we
-do more than one operation on them. For example: calling ``map()`` twice and
-then ``filter()``.
+Si nous avions des collections non lazy, nous aurions dû executer un million
+d'opérations, même si nous voulions seulement montrer 30 éléments. A la
+place, notre opération map a été seulement appliquée aux 30 éléments que nous
+avons utilisés. Nous pouvons aussi tirer des bénéfices de l'évaluation lazy
+pour des collections plus petites quand nous faisons plus qu'une opération sur
+eux. Par exemple: appeler ``map()`` deux fois et ensuite ``filter()``.
 
-Lazy evaluation comes with its downside too. You could be doing the same
-operations more than once if you optimize a collection prematurely. Consider
-this example::
+L'évaluation lazy a aussi ses inconvénients. Vous pourriez faire les mêmes
+opérations plus d'une fois si vous optimisiez une collection prématurément.
+Considérons cet exemple::
 
     $ages = $collection->extract('age');
 
@@ -794,29 +800,31 @@ this example::
         return $item > 30;
     });
 
-If we iterate both ``youngerThan30`` and ``olderThan30``, the collection would
-unfortunately execute the ``extract()`` operation twice. This is because
-collections are immutable and the lazy-extracting operation would be done for
-both filters.
+Si nous itérons ``youngerThan30`` et ``olderThan30``, la collection exécuterait
+malheureusement l'opération ``extract()`` deux fois. C'est parce que les
+collections sont immutables et l'opération d'extraction lazy serait fait pour
+les deux filtres.
 
-Luckily we can overcome this issue with a single function. If you plan to reuse
-the values from certain operations more than once, you can compile the results
-into another collection using the ``buffered()`` function::
+Heureusement, nous pouvons dépasser ce problème avec une simple fonction. Si
+vous planifiez de réutilser les valeurs à partir de certaines opérations plus
+d'une fois, vous pouvez compiler les résultats dans une autre collection en
+utilisant la fonction ``buffered()``::
 
     $ages = $collection->extract('age')->buffered();
     $youngerThan30 = ...
     $olderThan30 = ...
 
-Now, when both collections are iterated, they will only call the
-extracting operation once.
+Maintenant quand les deux collections sont itérées, elles vont seulement appeler
+l'opération d'extraction en une fois.
 
 Rendre les Collections Rembobinables
 ------------------------------------
 
-The ``buffered()`` method is also useful for converting non-rewindable iterators
-into collections that can be iterated more than once::
+La méthode ``buffered()`` est aussi utile pour convertir des itérateurs
+non-rembobinables dans des collections qui peuvent être itérées plus d'une
+fois::
 
-    // In PHP 5.5+
+    // Dans PHP 5.5+
     public function results()
     {
         ...
@@ -831,10 +839,10 @@ Clonage de Collection
 
 .. php:method:: compile(bool $preserveKeys = true)
 
-Sometimes you need to get a clone of the elements from another
-collection. This is useful when you need to iterate the same set from different
-places at the same time. In order to clone a collection out of another use the
-``compile()`` method::
+Parfois vous devez cloner un des éléments à partir d'une collection. C'est
+utile quand vous avez besoin d'itérer le même ensemble à partir d'endroits
+différents au même moment. Afin de cloner une collection à partir d'une autre,
+utilisez la méthode ``compile()``:
 
     $ages = $collection->extract('age')->compile();
 
