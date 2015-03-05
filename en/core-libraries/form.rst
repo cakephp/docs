@@ -130,10 +130,10 @@ $errors must be in this format: ["fieldName" => ["validatorName" => "The error m
 
 Now you will be able to invalidate form fields by setting the fieldName, then set the error messages.::
 
-    // In a controller
-    
-    $contact = new ContactForm();
-    $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
+	// In a controller
+	
+	$contact = new ContactForm();
+	$contact->setErrors(["email" => ["_required" => "Your email is required"]]);
 
 Proceed to Creating HTML with FormHelper to see the results.
 
