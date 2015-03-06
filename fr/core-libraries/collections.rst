@@ -298,7 +298,7 @@ Agrégation
 .. php:method:: reduce(callable $c)
 
 La contrepartie de l'opération ``map()`` est habituellemt un ``reduce``. Cette
-fonction va vous aider à construire un résultat unique en dehors de tous les
+fonction va vous aider à construire un résultat unique à partir de tous les
 éléments d'une collection::
 
     $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
@@ -308,7 +308,7 @@ fonction va vous aider à construire un résultat unique en dehors de tous les
 Dans l'exemple ci-dessus, ``$totalPrice`` va être la somme de tous les prix
 uniques qui se trouvent dans la collection. Remarquez le deuxième argument
 pour la fonction ``reduce()``, il prend la valeur initiale pour l'opération
-reduce que vous souhaitez faire::
+``reduce`` que vous souhaitez faire::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
         return array_merge($accumulated, $article->tags);
@@ -352,8 +352,8 @@ La même chose peut être appliquée à la fonction ``max()``, qui retourne un
 
 .. php:method:: sumOf(string|callable $callback)
 
-Au final, la méthode ``sumOf`` va retourner la somme d'une propriété de tous les
-éléments::
+Pour finir, la méthode ``sumOf`` va retourner la somme d'une propriété de tous
+les éléments::
 
     $collection = new Collection($people);
     $sumOfAges =  $collection->sumOf('age');
@@ -419,9 +419,10 @@ Result could look like this when converted to array:
 
 .. php:method:: indexBy($callback)
 
-Il y aura certaines fois où vous savez qu'un élément est unique pour la
-propriété selon laquelle vous souhaitez faire un groupe by. Si vous souhaitez
-un unique résultat par groupe, vous pouvez utiliser la fontion ``indexBy()``::
+Il y aura des cas où vous savez qu'un élément est unique pour la
+propriété selon laquelle vous souhaitez faire un ``groupBy()``. Si vous
+souhaitez un unique résultat par groupe, vous pouvez utiliser la fontion
+``indexBy()``::
 
     $usersById = $users->indexBy('id');
 
@@ -446,8 +447,8 @@ Trier
 
 .. php:method:: sortBy($callback)
 
-Les valeurs de collection peuvent être triées dans l'ordre ascendant ou
-descendant basé sur une colonnne ou une fonction personnalisée. Pour créer une
+Les valeurs de collection peuvent être triées par ordre croissant ou
+décroissant basé sur une colonnne ou une fonction personnalisée. Pour créer une
 nouvelle collection triée à partir de valeurs d'une autre, vous pouvez utiliser
 ``sortBy``::
 
@@ -456,7 +457,7 @@ nouvelle collection triée à partir de valeurs d'une autre, vous pouvez utilise
 
 Comme vu ci-dessus, vous pouvez trier en passant le nom d'une colonne ou d'une
 propriété qui est présente dans les valeurs de la collection. Vous pouvez aussi
-spécifier une propriété de chemin à la place de la notation par point. L'exemple
+spécifier un chemin de propriété à la place de la notation par point. L'exemple
 suivant va trier les articles par leur nom d'auteur::
 
     $collection = new Collection($articles);
@@ -471,24 +472,23 @@ utiliser pour comparer deux valeurs différentes dans la collection::
         return $article->author->name . '-' . $article->title;
     });
 
-Afin de spécifier la direction dans laquelle la collection doit êter triée, vous
+Afin de spécifier la direction dans laquelle la collection doit être triée, vous
 devez fournir soit ``SORT_ASC`` soit ``SORT_DESC`` en deuxième paramètre pour
-trier respectivement en direction ascendante ou descendante. Par défaut, les
-collections sont triées dans la direction ascendante::
+trier respectivement par ordre croissant ou décroissant. Par défaut, les
+collections sont triées par ordre croissant::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
 
 Parfois vous devez spécifier le type de données que vous essayez de comparer
-pour que vous ayez des résultats cohérents. A cet effet, vous devez fournir
+pour avoir des résultats cohérents. A cet effet, vous devez fournir
 un troisième argument dans la fonction ``sortBy()`` avec une des constantes
 suivantes:
 
 - **SORT_NUMERIC**: Pour comparer les nombres
 - **SORT_STRING**: Pour comparer les valeurs de chaîne
-- **SORT_NATURAL**: Pour trier une chaîne contenant des nombres et vous
-  souhaitez que ces nombres soient triés de façon naturelle. Par exemple:
-  montre "10" après "2".
+- **SORT_NATURAL**: Pour trier une chaîne contenant des nombres que vous
+  souhaitez trier de façon naturelle. Par exemple, afficher "10" après "2".
 - **SORT_LOCALE_STRING**: Pour comparer les chaînes basées sur la locale
   courante.
 
@@ -508,7 +508,7 @@ Utiliser des Données en Arbre
 
 .. php:method:: nest($idPath, $parentPath)
 
-Toutes les données ne sont pas destinées à être représentées de faàn linéaire.
+Toutes les données ne sont pas destinées à être représentées de façon linéaire.
 Les collections facilitent la construction et l'aplatissement de structures
 hiérarchiques ou imbriquées. Créer une structure imbriquée où les enfants sont
 groupés selon une propriété identifier parente est facile avec la méthode
@@ -556,7 +556,7 @@ propriété représentant l'identifier pour l'item parent::
         ]
     ];
 
-Les éléments enfant sont imbriqués dans la propriété ``children`` à l'intérieur
+Les éléments enfants sont imbriqués dans la propriété ``children`` à l'intérieur
 de chacun des items dans la collection. Cette représentation de type de données
 aide à rendre les menus ou à traverser les éléments vers le haut à un certain
 niveau dans l'arbre.
@@ -569,7 +569,7 @@ paramètres, le premier est le mode de traversement (asc, desc ou leaves), et
 le deuxième est le nom de la propriété contenant les enfants pour chaque élément
 dans la collection.
 
-Considérons la collection imbriquée intégrée dans l'exemple précédente, nous
+Considérons la collection imbriquée intégrée dans l'exemple précédent, nous
 pouvons l'aplatir::
 
     $nested->listNested()->toArray();
@@ -585,7 +585,7 @@ pouvons l'aplatir::
     ]
 
 Par défaut, l'arbre est traversé de la racine vers les feuilles. Vous pouvez
-également demander à retourner seulement les elements leaf de l'arbre::
+également demander à retourner seulement les éléments feuilles de l'arbre::
 
     $nested->listNested()->toArray();
 
@@ -609,8 +609,8 @@ une valeur particulière: en utilisant la méthode ``contains()``::
     $hasThree = $collection->contains(3);
 
 Les comparaisons sont effectuées en utilisant l'opérateur ``===``. Si vous
-souhaitez faire des types de comparaison looser, vous pouvez utiliser la méthode
-``some()``.
+souhaitez faire des types de comparaison non stricte, vous pouvez utiliser la
+méthode ``some()``.
 
 .. php:method:: shuffle()
 
@@ -629,19 +629,19 @@ Retrait d'Eléments
 .. php:method:: sample(int $size)
 
 Remanier une collection est souvent utile quand vous faites des statistiques
-d'analyse rapides. Une autre opération habituelle est quand vous faites ce type
-de tâches est de soustraire quelques valeurs au hasard en dehors de la
+d'analyse rapides. Une autre opération habituelle quand vous faites ce type
+de tâches est d'extraire quelques valeurs au hasard en dehors de la
 collection pour que plus de tests puissent être effectués dessus. Par exemple,
 si vous souhaitez sélectionner 5 utilisateurs au hasard auxquels vous voulez
 appliquer des tests A/B, vous pouvez utiliser la fonction ``sample()``::
 
     $collection = new Collection($people);
 
-    // Soustrait au maximum 20 utilisateurs au hasard de la collection
+    // Extrait au maximum 20 utilisateurs au hasard de la collection
     $testSubjects = $collection->sample(20);
 
 ``sample()`` va prendre au moins le nombre de valeurs que vous spécifiez dans
-le premier argument. Si il n'ya pas assez d'éléments dans la collection qui
+le premier argument. Si il n'y a pas assez d'éléments dans la collection qui
 satisfont le sample, la collection sera retournée en entier dans un ordre au
 hasard.
 
@@ -665,7 +665,7 @@ Agrandir les Collections
 
 .. php:method:: append(array|Traversable $items)
 
-Vous pouvez composer plusieurs collections en une collection unique. Ceci vous
+Vous pouvez regrouper plusieurs collections en une collection unique. Ceci vous
 permet de recueillir des données provenant de diverses sources, de concaténer
 et de lui appliquer d'autres fonctions de collection très en douceur. La méthode
 ``append()`` va retourner une nouvelle collection contenant les valeurs à partir
@@ -683,7 +683,7 @@ des deux sources::
 
     Quand vous ajoutez différentes sources, vous pouvez avoir certaines clés
     des deux collections qui sont les mêmes. Par exemple, quand vous ajoutez
-    deux tableaux uniques. Ceci peut entraîner un problème quand vous
+    deux tableaux unidimensionnels. Ceci peut entraîner un problème quand vous
     convertissez une collection en un tableau en utilisant ``toArray()``. Si
     vous ne voulez pas que des valeurs d'une collection surchargent les autres
     dans la précédente basée sur leur clé, assurez-vous que vous appelez
@@ -784,7 +784,7 @@ d'opérations, même si nous voulions seulement montrer 30 éléments. A la
 place, notre opération map a été seulement appliquée aux 30 éléments que nous
 avons utilisés. Nous pouvons aussi tirer des bénéfices de l'évaluation lazy
 pour des collections plus petites quand nous faisons plus qu'une opération sur
-eux. Par exemple: appeler ``map()`` deux fois et ensuite ``filter()``.
+elles. Par exemple: appeler ``map()`` deux fois et ensuite ``filter()``.
 
 L'évaluation lazy a aussi ses inconvénients. Vous pourriez faire les mêmes
 opérations plus d'une fois si vous optimisiez une collection prématurément.
@@ -805,7 +805,7 @@ malheureusement l'opération ``extract()`` deux fois. C'est parce que les
 collections sont immutables et l'opération d'extraction lazy serait fait pour
 les deux filtres.
 
-Heureusement, nous pouvons dépasser ce problème avec une simple fonction. Si
+Heureusement, nous pouvons passer outre ce problème avec une simple fonction. Si
 vous planifiez de réutilser les valeurs à partir de certaines opérations plus
 d'une fois, vous pouvez compiler les résultats dans une autre collection en
 utilisant la fonction ``buffered()``::
