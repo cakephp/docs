@@ -1,17 +1,19 @@
-Modelless Forms
-###############
+Formulaires Sans Models
+#######################
 
 .. php:namespace:: Cake\Form
 
 .. php:class:: Form
 
-Most of the time you will have forms backed by :doc:`ORM entities </orm/entities>`
-and :doc:`ORM tables </orm/table-objects>` or other peristent stores,
-but there are times when you'll need to validate user input and then perform an
-action if the data is valid. The most common example of this is a contact form.
+La plupart du temps, vous aurez des formulaires avec derrière des
+:doc:`ORM entities </orm/entities>`
+et des :doc:`ORM tables </orm/table-objects>` ou d'autres stockages persistents,
+mais il y a des fois où vous aurez besoin de valider un input de l'utilisateur
+et effectuer une action si les données sont valides. L'exemple le plus courant
+est un formulaire de contact.
 
-Creating a Form
-===============
+Créer un Formulaire
+===================
 
 Generally when using the Form class you'll want to use a subclass to define your
 form. This makes testing easier, and lets you re-use your form. Forms are put

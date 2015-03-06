@@ -734,10 +734,10 @@ est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour renommer
 vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'update', 'add' => 'create']
+        'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-Le code ci-dessus va utiliser ``update`` pour l'action update, et ``create`` au
+Le code ci-dessus va utiliser ``edit`` pour l'action update, et ``create`` au
 lieu de ``add``.
 
 Mapping Additional Resource Routes
