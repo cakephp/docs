@@ -373,7 +373,7 @@ Possible keys for hasMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & plural name of the association so ``comments`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
+- **strategy**: Defines the query strategy to use. Defaults to 'select'. The other
   valid value is 'subquery', which replaces the ``IN`` list with an equivalent
   subquery.
 - **finder**: The finder method to use when loading associated records.
@@ -495,7 +495,7 @@ Possible keys for belongsToMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & plural name of the association, so ``tags`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The
+- **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the ``IN`` list with an
   equivalent subquery.
 - **saveStrategy**: Either 'append' or 'replace'. Indicates the mode to be used
