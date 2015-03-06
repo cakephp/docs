@@ -701,10 +701,10 @@ routes. For example, if your ``edit`` action is called ``update`` you can use
 the ``actions`` key to rename the actions used::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'update', 'add' => 'create']
+        'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-The above would use ``update`` for the update action, and ``create`` instead of
+The above would use ``update`` for the ``edit`` action, and ``create`` instead of
 ``add``.
 
 Mapping Additional Resource Routes
