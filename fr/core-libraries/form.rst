@@ -111,6 +111,34 @@ Once a form has been validated you can retreive the errors from it::
     ]
     */
 
+Invalidating Individual Form Fields from Controller
+===================================================
+
+It is possible to invalidate individual fields from the controller without the
+use of the Validator class.  The most common use case for this is when the
+validation is done on a remote server.  In such case, you must manually
+invalidate the fields accordingly to the feedback from the remote server::
+
+    // in src/Form/ContactForm.php
+    public function setErrors($errors)
+    {
+        $this->_errors = $errors;
+    }
+
+According to how the validator class would have returned the errors, $errors
+must be in this format::
+
+    ["fieldName" => ["validatorName" => "The error message to display"]]
+
+Now you will be able to invalidate form fields by setting the fieldName, then
+set the error messages::
+
+    // In a controller
+    $contact = new ContactForm();
+    $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
+
+Proceed to Creating HTML with FormHelper to see the results.
+
 Creating HTML with FormHelper
 =============================
 
