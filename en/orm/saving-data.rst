@@ -611,6 +611,12 @@ Your entities should be structured in the same way as they are when
 loaded from the database. See the form helper documentation for :ref:`how to
 build inputs for associations <associated-form-inputs>`.
 
+If you are building or modifying association data after building your entities
+you will have to mark the association property as modified with ``dirty()``::
+
+    $company->author->name = 'Master Chef';
+    $company->dirty('author', true);
+
 Saving BelongsTo Associations
 -----------------------------
 
