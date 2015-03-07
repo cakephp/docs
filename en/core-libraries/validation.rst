@@ -381,7 +381,7 @@ validation sets to apply using the ``options`` parameter::
     ]);
 
 Validation is commonly used for user-facing forms or interfaces, and thus it is
-not limited to only validating columns in the table schema. However,
+limited to only validating columns in the table schema. However,
 maintaining integrity of data regardless where it came from is important. To
 solve this problem CakePHP offers a second level of validation which is called
 "application rules". You can read more about them in the
