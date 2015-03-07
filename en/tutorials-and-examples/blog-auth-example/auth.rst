@@ -61,8 +61,8 @@ with CakePHP::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Network\Exception\ForbiddenException;
     use Cake\Event\Event;
+    use Cake\Network\Exception\ForbiddenException;
 
     class UsersController extends AppController
     {
@@ -140,8 +140,8 @@ file and add the following lines::
 
     namespace App\Controller;
 
-    use Cake\Event\Event;
     use Cake\Controller\Controller;
+    use Cake\Event\Event;
 
     class AppController extends Controller
     {
@@ -219,8 +219,8 @@ and add the following::
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
-    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
 
     class User extends Entity
     {
