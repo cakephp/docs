@@ -436,7 +436,7 @@ want loaded, and any configuration data for them::
     {
         parent::initialize();
         $this->loadComponent('Csrf');
-        $this->loadComponent('Comments', Configure:read('Comments'));
+        $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
 .. php:attr:: components
