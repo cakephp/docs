@@ -2,7 +2,9 @@ Folder & File
 #############
 
 
-Os utilitários de Folder(Pasta) e File(Arquivo) são classes convenientes para ajudar você a escrever/inserir mudanças em arquivos; listar arquivos em uma pasta e outro diretório comum em tarefas relacionadas.
+Os utilitários de Folder(Pasta) e File(Arquivo) são classes convenientes para
+ajudar você a escrever/inserir mudanças em arquivos; listar arquivos em uma
+pasta e outro diretório comum em tarefas relacionadas.
 
 Usabilidade básica
 ===========
@@ -24,7 +26,8 @@ e uma busca por todos arquivos *.ctp* nesta pasta usando regex::
     $files = $dir->find('.*\.ctp');
 
 
-Agora nós podemos percorrer os arquivos e ler ou escrever/adicionar a o conteudo ou simplesmente deleter o arquivo::
+Agora nós podemos percorrer os arquivos e ler ou escrever/adicionar a o conteudo
+ou simplesmente deleter o arquivo::
 
     <?php
     foreach ($files as $file) {
@@ -49,7 +52,8 @@ Folder API
 
 .. php:attr:: path
 
-    Caminho para a pasta atual. :php:meth:`Folder::pwd()` irá retornar a mesma informação.
+    Caminho para a pasta atual. :php:meth:`Folder::pwd()` irá retornar a mesma
+    informação.
 
 .. php:attr:: sort
 
@@ -57,7 +61,8 @@ Folder API
 
 .. php:attr:: mode
 
-    Mode para ser usado quando criar a pasta. Padrão ``0755``. Isto não vale para ambientes windows.
+    Mode para ser usado quando criar a pasta. Padrão ``0755``. Isto não vale
+    para ambientes windows.
 
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
@@ -93,7 +98,8 @@ Folder API
 .. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
 
     :rtype: boolean
-    Muda o mode(Permissão) de uma estrutura de diretórios recursivamente. Isso inclui       mudança no mode(Permissão) dos arquivos também::
+    Muda o mode(Permissão) de uma estrutura de diretórios recursivamente. Isso
+    inclui mudança no mode(Permissão) dos arquivos também::
 
         <?php
         $dir = new Folder();
@@ -102,7 +108,9 @@ Folder API
 .. php:method:: copy(array|string $options = array())
 
     :rtype: boolean
-    Copia um diretório recursivamente. O unico parâmetro $options pode ser um caminho para copiar ou um array de opções::
+
+    Copia um diretório recursivamente. O unico parâmetro $options pode ser um
+    caminho para copiar ou um array de opções::
 
         <?php
         $folder1 = new Folder('/path/to/folder1');
@@ -120,11 +128,17 @@ Folder API
 
     Existem 3 tipos schemes suportados:
 
-    * ``Folder::SKIP`` ignora copiando/movendo arquivos e diretórios caso exista na pasta de destino.
-    
-    * ``Folder::MERGE`` mescla os diretórios destinatario/destino. Arquivos do diretório de origem irá substituir os arquivos no diretório de destino. Os conteudos serão mesclados.
-      
-    * ``Folder::OVERWRITE``sobreescreve arquivos existentes e diretórios no diretório de destino com os arquivos de origem. Se ambos os diretórios possuem um mesmo sub-diretório o sub-diretório de origem sera removido e o de destino entrara no lugar dele.
+    * ``Folder::SKIP`` ignora copiando/movendo arquivos e diretórios caso exista
+      na pasta de destino.
+
+    * ``Folder::MERGE`` mescla os diretórios destinatario/destino. Arquivos do
+      diretório de origem irá substituir os arquivos no diretório de destino. Os
+      conteudos serão mesclados.
+
+    * ``Folder::OVERWRITE``sobreescreve arquivos existentes e diretórios no
+      diretório de destino com os arquivos de origem. Se ambos os diretórios
+      possuem um mesmo sub-diretório o sub-diretório de origem sera removido
+      e o de destino entrara no lugar dele.
 
     .. versionchanged:: 2.3
         O merge, skip e overwrite schemes foram adicionados para o ``copy()``
@@ -139,7 +153,9 @@ Folder API
 .. php:method:: create(string $pathname, integer $mode = false)
 
     :rtype: boolean
-    Cria uma estrutura de diretorios recursivamente. Pode ser usado para criar dentro de estruturas como `/foo/bar/baz/shoe/horn`::
+
+   Cria uma estrutura de diretorios recursivamente. Pode ser usado para criar
+   dentro de estruturas como `/foo/bar/baz/shoe/horn`::
 
         <?php
         $folder = new Folder();
@@ -193,8 +209,10 @@ Folder API
         */
 
 .. note::
-    Os métodos find e findRecursive irão buscar somente arquivos. Se você deve buscar pastas e arquivos veja o método :php:meth:`Folder::read()` ou :php:meth:`Folder::tree()`
-   
+    Os métodos find e findRecursive irão buscar somente arquivos. Se você deve
+    buscar pastas e arquivos veja o método :php:meth:`Folder::read()` ou
+    :php:meth:`Folder::tree()`
+
 
 .. php:method:: findRecursive(string $pattern = '.*', boolean $sort = false)
 
@@ -280,7 +298,8 @@ Folder API
 
     :rtype: string
 
-    Retorna um conjunto correto de barras para determinado $path ('\\' para caminhos Windows e  '/' para outros caminhos).
+    Retorna um conjunto correto de barras para determinado $path ('\\' para
+    caminhos Windows e  '/' para outros caminhos).
 
 .. php:method:: pwd()
 
@@ -296,6 +315,7 @@ Folder API
     :param boolean $sort: Se true vai ordenar os resultados.
     :param mixed $exceptions: Um array de nomes de arquivos e pastas para ignorar. Se true ou '.' este metodo vai ignorar arquivos escondidos ou pontos.
     :param boolean $fullPath: Se true vai retornar os resultados usando o caminho absoluto.
+
     Retorna um array de conteudos do diretório atual.O array retornado possui dois sub arrays: Um com diretórios e um com arquivos::
 
         <?php
@@ -328,7 +348,9 @@ Folder API
 .. php:staticmethod:: slashTerm(string $path)
 
     :rtype: string
-    Retorna $path com a barra adicionada para terminação(Correto para Windows ou outro OS).
+
+    Retorna $path com a barra adicionada para terminação(Correto para Windows ou
+    outro OS).
 
 .. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
 
@@ -383,7 +405,7 @@ File API
     :rtype: boolean
 
     Fecha o arquivo atual se estiver aberto.
-    
+
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 
     :rtype: boolean
@@ -494,7 +516,9 @@ File API
     :rtype: string
 
     
-    Prepara uma string ascii para escrever. Converte o final da linha para o     terminador correto para a plataforma atual. Para Windows "\r\n" vai ser      usado, "\n" para todas as plataformas.
+    Prepara uma string ascii para escrever. Converte o final da linha para
+    o terminador correto para a plataforma atual. Para Windows "\r\n" vai
+    ser usado, "\n" para todas as plataformas.
 
 .. php:method:: pwd()
 
@@ -550,7 +574,8 @@ File API
 
     :rtype: boolean
 
-    Sobrescreve o texto no arquivo. Retorna falso se falhar ou true se          funcionar.
+    Sobrescreve o texto no arquivo. Retorna falso se falhar ou true se
+    funcionar.
 
     .. versionadded::
         2.5 ``File::replaceText()``
