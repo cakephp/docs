@@ -740,6 +740,20 @@ persisted::
 
 Without the call to ``dirty()`` the updated tags will not be saved.
 
+When saving belongsToMany Associations, it can be relevant to save some additional data to the Joint Table.
+In the previous example of tags, it could be the ``vote_type`` of person who voted on that article.
+The ``vote_type`` can be either ``upvote`` or ``downvote`` and is represented by a string.
+The relation is between Users and Articles.
+
+Saving that association, and the ``vote_type`` is done by first adding some data to ``_joinData`` and then
+saving the association with ``link()``, example:
+
+    $article = $this->Articles->get($article_id);
+    $user = $this->Users->get($user_id);
+    
+    $user-_joinData = new Entity(['vote_type' => $vote_type, ['markNew' => true]]);
+    $this->Articles->Users->link($article, [$user]);
+
 Saving Additional Data to the Joint Table
 -----------------------------------------
 
