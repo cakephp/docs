@@ -643,6 +643,13 @@ quand elles ont été chargées à partir de la base de données.
 Consultez la documentation du helper Form pour savoir comment
 :ref:`associated-form-inputs`.
 
+Si vous construisez ou modifiez une donnée d'association après avoir construit
+vos entities, vous devrez marquer la propriété d'association comme étant
+modifiée avec ``dirty()``::
+
+    $company->author->name = 'Master Chef';
+    $company->dirty('author', true);
+
 Sauvegarder les Associations BelongsTo
 --------------------------------------
 

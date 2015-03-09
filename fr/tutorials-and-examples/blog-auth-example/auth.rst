@@ -63,8 +63,8 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Error\NotFoundException;
     use Cake\Event\Event;
+    use Cake\Network\Exception\NotFoundException;
 
     class UsersController extends AppController
     {
@@ -223,8 +223,8 @@ fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
-    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
 
     class User extends Entity
     {

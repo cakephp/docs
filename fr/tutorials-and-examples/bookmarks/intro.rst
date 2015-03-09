@@ -230,8 +230,8 @@ mot de passe. Dans **src/Model/Entity/User.php**, ajoutez ce qui suit::
 
     namespace App\Model\Entity;
 
-    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
 
     class User extends Entity
     {

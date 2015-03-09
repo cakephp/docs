@@ -62,7 +62,7 @@ with CakePHP::
 
     use App\Controller\AppController;
     use Cake\Event\Event;
-    use Cake\Network\Exception\ForbiddenException;
+    use Cake\Network\Exception\NotFoundException;
 
     class UsersController extends AppController
     {
