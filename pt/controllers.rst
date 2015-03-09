@@ -450,7 +450,7 @@ component que quiser carregado, e qualquer configuração de dados para eles::
     {
         parent::initialize();
         $this->loadComponent('Csrf');
-        $this->loadComponent('Comments', Configure:read('Comments'));
+        $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
 .. php:attr:: components
