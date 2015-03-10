@@ -740,6 +740,14 @@ persisted::
 
 Without the call to ``dirty()`` the updated tags will not be saved.
 
+Often you'll find yourself wanting to make an association between two existing entities, eg. a user 
+"liking" an article. This is done by using the method ``link()``, like this:
+
+    $article = $this->Articles->get($article_id);
+    $user = $this->Users->get($user_id);
+    
+    $this->Articles->Users->link($article, [$user]);
+
 When saving belongsToMany Associations, it can be relevant to save some additional data to the Joint Table.
 In the previous example of tags, it could be the ``vote_type`` of person who voted on that article.
 The ``vote_type`` can be either ``upvote`` or ``downvote`` and is represented by a string.
@@ -753,6 +761,8 @@ saving the association with ``link()``, example:
     
     $user-_joinData = new Entity(['vote_type' => $vote_type, ['markNew' => true]]);
     $this->Articles->Users->link($article, [$user]);
+
+An alternate approach to saving data to the joint table that can be used with directly from Form data:
 
 Saving Additional Data to the Joint Table
 -----------------------------------------
