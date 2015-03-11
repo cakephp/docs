@@ -292,7 +292,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 Référencement croisé
 ~~~~~~~~~~~~~~~~~~~~
 
-Les modèles suivants se réfèrent aux objets php et les liens sont générés
+Les modèles suivants se réfèrent aux objets PHP et les liens sont générés
 si une directive assortie est trouvée:
 
 .. rst:role:: php:func

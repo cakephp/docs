@@ -68,7 +68,7 @@ Permissions du répertoire Tmp
 Ensuite vous devrez mettre le répertoire ``app/tmp`` en écriture pour le
 serveur web. La meilleur façon de le faire est de trouver sous quel utilisateur
 votre serveur web tourne. Vous pouver mettre ``<?php echo exec('whoami'); ?>``
-à l'intérieur de tout fichier php que votre serveur web execute. Vous devriez
+à l'intérieur de tout fichier PHP que votre serveur web execute. Vous devriez
 voir afficher un nom d'utilisateur. Changez le possesseur du répertoire
 ``app/tmp`` pour cet utilisateur. La commande finale que vous pouvez lancer
 (dans \*nix) pourrait ressembler à ceci::

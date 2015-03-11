@@ -25,7 +25,7 @@ ComposerでCakePHPをインストール
 
 Composerは、PHP 5.3以上向けの依存関係管理ツールです。
 これは、PEARインストーラが抱える問題の多くを解決し、いろんなバージョンのライブラリをシンプルに管理できるようにします。
-CakePHPはPEARパッケージを公開しているので、 `composer <http://getcomposer.org>`_ を使用してCakePHPをインストールすることができます。
+CakePHPはPEARパッケージを公開しているので、 `Composer <http://getcomposer.org>`_ を使用してCakePHPをインストールすることができます。
 CakePHPをインストールする前に ``composer.json`` ファイルをセットアップしましょう。
 CakePHPアプリケーションのための composer.json ファイルは次のようになります::
 
@@ -52,7 +52,7 @@ composerをダウンロードしたら、 CakePHPをインストールしまし�
 
     $ php composer.phar install
 
-composerの実行が終わると、ディレクトリ構造は次のようになっていると思います::
+Composerの実行が終わると、ディレクトリ構造は次のようになっていると思います::
 
     example-app/
         composer.phar
@@ -76,19 +76,19 @@ composerの実行が終わると、ディレクトリ構造は次のようにな
         ROOT . '/Vendor/cakephp/cakephp/lib'
     );
 
-composerで他のライブラリをインストールしている場合は、
+Composerで他のライブラリをインストールしている場合は、
 オートローダーを設定してcomposerのオートローダーで起こる問題を回避してください。
 ``Config/bootstrap.php`` ファイルに次の行を追加します::
 
-    // composerのautoloadを読み込み
+    // Composerのautoloadを読み込み
     require APP . 'Vendor/autoload.php';
 
-    // CakePHPのオートローダーをいったん削除し、composerより先に評価されるように先頭に追加する
+    // CakePHPのオートローダーをいったん削除し、Composerより先に評価されるように先頭に追加する
     // https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b を参照
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
-これで、composerでインストールしたCakePHPが機能するCakePHPアプリケーションができました。
+これで、ComposerでインストールしたCakePHPが機能するCakePHPアプリケーションができました。
 ソースコードの残りの部分とcomposer.jsonとcomposer.lockファイルを保存しておいてください。
 
 

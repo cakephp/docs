@@ -2,13 +2,13 @@
 ############
 
 データソースはモデルとモデルが表現するデータの元（ソース）とを
-仲立ちするものです。多くの場合、データは MySQL, PostgreSQL, MSSQL
+仲立ちするものです。多くの場合、データは MySQL, PostgreSQL, Microsoft SQL Server
 といったリレーショナルデータベースから取り出されます。
 CakePHP は、以下の一覧にあるようないくつかのデータベース固有の
 データソース（ ``lib/Cake/Model/Datasource/Database`` を参照）
 とともに配布されています。:
 
-- MySql
+- Mysql
 - Postgres
 - Sqlite
 - Sqlserver
@@ -28,7 +28,7 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
 ほとんどのリレーショナルデータベースで共通な、いくつかのロジックを
 集約しています。新しく RDBMS のデータソースを書いてみようという向きには、
 まずこれらのどれかを手本にするとよいでしょう
-（Mysql または Sqlite が最もオススメです）。
+（MySQL または SQLite が最もオススメです）。
 
 ただし、多くの人はリモート REST API さらには LDAP サーバといった、
 外部ソースに関するデータソースを書くことに興味を持っています。
@@ -328,5 +328,5 @@ PHP の基本構成には含まれておらず、別途インストールする�
 
 .. meta::
     :title lang=ja: DataSources
-    :keywords lang=ja: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+    :keywords lang=ja: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,microsoft sql server,aggregates,apis,repository,signatures
 

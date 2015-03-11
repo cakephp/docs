@@ -1203,7 +1203,7 @@ Le driver PDO va automatiquement echapper ces valeurs pour vous.
   cas où vous auriez besoin de parler directement au driver.
 * Le traitement des valeurs boléennes a changé un peu pour pouvoir faciliter le
   croisement de base de données, vous devrez peut-être changer vos cas de test.
-* Le support de Postgresql a été immensément amélioré, il crée maintenant
+* Le support de PostgreSQL a été immensément amélioré, il crée maintenant
   correctement les schémas, vide les tables, et il est plus facile d'écrire des
   tests en l'utilisant.
 * DboSource::insertMulti() n'acceptera plus les chaînes sql, passez juste un
@@ -1211,20 +1211,20 @@ Le driver PDO va automatiquement echapper ces valeurs pour vous.
   une fois.
 * TranslateBehavior a été reconstruit pour utiliser les vituaFields des
   models, cela rend l'implémentation plus portable.
-* Tous les cas de test avec les choses liées de Mysql ont été déplacés vers le
+* Tous les cas de test avec les choses liées de MySQL ont été déplacés vers le
   cas de test du driver correspondant. Cela a laissé le fichier DboSourceTest
   un peu maigre.
 * Support de l'imbrication des transactions. Maintenant il est possible de
   démarrer une transaction plusieurs fois. Il ne peut être engagé si la méthode
   de validation est appelé le même nombre de fois.
-* Le support Sqlite a été grandement amélioré. La différence majeure avec cake
-  1.3 est qu'il ne supportera que Sqlite 3.x. C'est une bonne alternative pour
+* Le support SQLite a été grandement amélioré. La différence majeure avec cake
+  1.3 est qu'il ne supportera que SQLite 3.x. C'est une bonne alternative pour
   le développement des apps, et rapidement en lançant les cas de test.
 * Les valeurs des colonnes boléennes vont être lancées automatiquement vers le
   type booléen natif de php, donc assurez vous de mettre à jour vos cas de test
   et code si vous attendiez une valeur retournée de type chaîne de caractère ou
   un entier: Si vous aviez une colonne "published" dans le passé en utilisant
-  mysql, toutes les valeurs retournées d'un find auraient été numériques dans
+  MySQL, toutes les valeurs retournées d'un find auraient été numériques dans
   le passé, maintenant elles sont strictement des valeurs boléennes.
 
 BehaviorCollection

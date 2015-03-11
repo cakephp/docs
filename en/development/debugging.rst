@@ -205,12 +205,12 @@ primarily provides a toolbar in the rendered HTML, that provides a plethora of
 information about your application and the current request. You can download
 `DebugKit <https://github.com/cakephp/debug_kit>`_ from GitHub.
 
-xdebug
+Xdebug
 ======
 
-If your environment supplies the xdebug php extension, fatal errors will show
-additional xdebug stack trace details. Details about
-`xdebug <http://xdebug.org>`_ .
+If your environment supplies the Xdebug PHP extension, fatal errors will show
+additional Xdebug stack trace details. Details about
+`Xdebug <http://xdebug.org>`_ .
 
 
 .. meta::

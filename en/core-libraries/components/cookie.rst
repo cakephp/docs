@@ -117,7 +117,7 @@ The CookieComponent offers a number of methods for working with Cookies.
 
     The last parameter to write is $expires – the number of seconds
     until your cookie will expire. For convenience, this parameter can
-    also be passed as a string that the php strtotime() function
+    also be passed as a string that the PHP strtotime() function
     understands::
 
         // Both cookies expire in one hour.

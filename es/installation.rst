@@ -4,7 +4,7 @@ Instalación
 CakePHP se instala de forma fácil y rápidamente. Los requisitos mínimos son: un servidor
 web y una copia de los archivos de CakePHP ¡Eso es todo! Aunque este manual se centra en 
 la configuración de Apache, ya que es el servidor web más común, se puede configurar 
-CakePHP para que funcione en otros servidores como LightHTTPD o Microsoft IIS.
+CakePHP para que funcione en otros servidores como lighttpd o Microsoft IIS.
 
 Vamos a preparar el proceso de instalación, que consta de los siguientes pasos:
 
