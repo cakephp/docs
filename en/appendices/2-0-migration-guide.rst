@@ -1120,24 +1120,24 @@ The PDO driver will automatically escape those values for you.
   need to talk to the driver directly.
 * Treatment of boolean values changed a bit to make it more cross-database
   friendly, you may need to change your test cases.
-* Postgresql support was immensely improved, it now correctly creates schemas,
+* PostgreSQL support was immensely improved, it now correctly creates schemas,
   truncate tables, and is easier to write tests using it.
 * DboSource::insertMulti() will no longer accept sql string, just pass an array
   of fields and a nested array of values to insert them all at once
 * TranslateBehavior was refactored to use model virtualFields, this makes the
   implementation more portable.
-* All tests cases with Mysql related stuff were moved to the corresponding
+* All tests cases with MySQL related stuff were moved to the corresponding
   driver test case. This left the DboSourceTest file a bit skinny.
 * Transaction nesting support. Now it is possible to start a transaction several
   times. It will only be committed if the commit method is called the same
   amount of times.
-* Sqlite support was greatly improved. The major difference with cake 1.3 is
-  that it will only support Sqlite 3.x . It is a great alternative for
+* SQLite support was greatly improved. The major difference with cake 1.3 is
+  that it will only support SQLite 3.x . It is a great alternative for
   development apps, and quick at running test cases.
-* Boolean column values will be casted to php native boolean type automatically,
+* Boolean column values will be casted to PHP native boolean type automatically,
   so make sure you update your test cases and code if you were expecting the
   returned value to be a string or an integer: If you had a "published" column in
-  the past using mysql all values returned from a find would be numeric in the
+  the past using MySQL all values returned from a find would be numeric in the
   past, now they are strict boolean values.
 
 Behaviors

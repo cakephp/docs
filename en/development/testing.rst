@@ -16,7 +16,7 @@ for making sure your code does what you think it does.
     
 Install via Composer
 --------------------
-The newer versions of phpunit do not currently work with cake::
+The newer versions of PHPUnit do not currently work with cake::
 
     "phpunit/phpunit": "3.7.32"
     
@@ -210,7 +210,7 @@ results.
 Viewing code coverage
 ~~~~~~~~~~~~~~~~~~~~~
 
-If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
+If you have `Xdebug <http://xdebug.org>`_ installed, you can view code coverage
 results. Code coverage is useful for telling you what parts of your code your
 tests do not reach. Coverage is useful for determining where you should add
 tests in the future, and gives you one measurement to track your testing
@@ -223,7 +223,7 @@ progress with.
 The inline code coverage uses green lines to indicate lines that have been run.
 If you hover over a green line a tooltip will indicate which tests covered the
 line. Lines in red did not run, and have not been exercised by your tests. Grey
-lines are considered unexecutable code by xdebug.
+lines are considered unexecutable code by Xdebug.
 
 .. _run-tests-from-command-line:
 

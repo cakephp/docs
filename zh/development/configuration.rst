@@ -61,7 +61,7 @@ encoding
 schema
     用于 PostgreSQL 数据库设置，指定使用哪个 schema。
 unix_socket
-    用于支持通过 unix 套接字(*socket*)文件连接的驱动程序。如果使用 postgres 
+    用于支持通过 unix 套接字(*socket*)文件连接的驱动程序。如果使用 PostgreSQL
     数据库，并且想使用 unix 套接字，需要将 host 键留空。
 ssl_key
     SSL 密钥(*SSL key*)文件的路径(仅为 MySQL 所支持，要求 PHP 5.3.7+)。
@@ -72,7 +72,7 @@ ssl_ca
     要求 PHP 5.3.7+)。
 settings
     一个包含键值对的数组，在建立连接时应当作为 ``SET`` 命令发送到数据库服务器。
-    该选项当前只被 MySQL、Postgres 和 SQLserver 所支持。
+    该选项当前只被 Mysql、Postgres 和 Sqlserver 所支持。
 
 .. versionchanged:: 2.4
     参数 ``settings`` 、 ``ssl_key`` 、 ``ssl_cert`` 和 ``ssl_ca`` 是在 2.4 版本
@@ -91,7 +91,7 @@ big\_boxes，模型命名为 BigBox，控制器命名为 BigBoxesController，�
 
 .. todo::
 
-    为不同数据库供应商的特定选项增加信息，比如 SQLServer、Postgres 和 MySQL。
+    为不同数据库供应商的特定选项增加信息，比如 Microsoft SQL Server、PostgreSQL 和 MySQL。
 
 额外的类路径
 ============

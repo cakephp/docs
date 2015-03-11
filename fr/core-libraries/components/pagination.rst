@@ -190,7 +190,7 @@ dans le model dans lequel vous voulez récupérer des données::
 
 Vous aurez aussi besoin de surcharger le ``paginateCount()`` du noyau,
 cette méthode s'attend aux mêmes arguments que ``Model::find('count')``.
-L'exemple ci-dessous utilise quelques fonctionnalités Postgres spécifiques,
+L'exemple ci-dessous utilise quelques fonctionnalités PostgreSQL spécifiques,
 Veuillez ajuster en conséquence en fonction de la base de données que vous
 utilisez::
 

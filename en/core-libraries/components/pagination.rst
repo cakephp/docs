@@ -186,7 +186,7 @@ from::
 
 You also need to override the core ``paginateCount()``, this method
 expects the same arguments as ``Model::find('count')``. The example
-below uses some Postgres-specifc features, so please adjust
+below uses some PostgresSQL-specifc features, so please adjust
 accordingly depending on what database you are using::
 
     /**

@@ -302,7 +302,7 @@ http://example.com/users/add. I made the following groups:
 I also created a user in each group so I had a user of each
 different access group to test with later. Write everything down or
 use easy passwords so you don't forget. If you do a
-``SELECT * FROM aros;`` from a mysql prompt you should get
+``SELECT * FROM aros;`` from a MySQL prompt you should get
 something like the following::
 
     +----+-----------+-------+-------------+-------+------+------+

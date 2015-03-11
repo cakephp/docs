@@ -73,7 +73,7 @@ schema
     Used in PostgreSQL database setups to specify which schema to use.
 unix_socket
     Used by drivers that support it to connect via unix socket files. If you are
-    using postgres and want to use unix sockets, leave the host key blank.
+    using PostgreSQL and want to use unix sockets, leave the host key blank.
 ssl_key
     The file path to the SSL key file. (Only supported by MySQL, requires PHP
     5.3.7+).
@@ -86,7 +86,7 @@ ssl_ca
 settings
     An array of key/value pairs that should be sent to the database server as
     ``SET`` commands when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQLserver at this time.
+    supported by the Mysql, Postgres, and Sqlserver datasources at this time.
 
 .. versionchanged:: 2.4
     The ``settings``, ``ssl_key``, ``ssl_cert`` and ``ssl_ca`` keys
@@ -113,7 +113,7 @@ bakers, pastry\_stores, and savory\_cakes.
 .. todo::
 
     Add information about specific options for different database
-    vendors, such as SQLServer, Postgres and MySQL.
+    vendors, such as Microsoft SQL Server, PostgreSQL and MySQL.
 
 Additional Class Paths
 ======================

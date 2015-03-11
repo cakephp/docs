@@ -23,14 +23,14 @@ application. Puisque CakePHP sera localisé dans l'``include_path`` de PHP,
 vous n'aurez pas besoin de faire d'autres changements.
 
 
-Installer CakePHP avec composer
+Installer CakePHP avec Composer
 ===============================
 
 Composer est un outil de gestion de dépendances pour PHP 5.3+. Il règle
 plusieurs problèmes que l'installateur PEAR a, et simplifie la gestion de
 plusieurs versions de librairies. Puisque CakePHP publie un package PEAR,
 vous pouvez installer CakePHP en utilisant
-`composer <http://getcomposer.org>`_. Avant d'installer CakePHP, vous devrez
+`Composer <http://getcomposer.org>`_. Avant d'installer CakePHP, vous devrez
 configurer un fichier ``composer.json``. Un fichier composer.json pour une
 application CakePHP ressemblerait à ce qui suit::
 
@@ -51,7 +51,7 @@ fichier ``composer.json``, lancez ce qui suit::
 
     $ php composer.phar install
 
-Une fois que composer a terminé son exécution, vous devriez avoir une structure
+Une fois que Composer a terminé son exécution, vous devriez avoir une structure
 de répertoire qui ressemble à::
 
     example-app/
@@ -87,7 +87,7 @@ Si vous installez d'autres librairies avec Composer, vous devrez configurer
 l'autoloader et régler un problème dans l'autoloader de Composer. Dans votre
 fichier ``Config/bootstrap.php``, ajoutez ce qui suit::
 
-    // Charger l'autoload de composer.
+    // Charger l'autoload de Composer.
     require APP . 'Vendor/autoload.php';
 
     // Retire et réajoute l'autoloader de CakePHP puisque Composer pense que
@@ -97,7 +97,7 @@ fichier ``Config/bootstrap.php``, ajoutez ce qui suit::
     spl_autoload_register(array('App', 'load'), true, true);
 
 Vous devriez maintenant avoir une application CakePHP fonctionnelle avec
-CakePHP installé via composer. Assurez-vous de garder les fichiers
+CakePHP installé via Composer. Assurez-vous de garder les fichiers
 composer.json et composer.lock.json avec le reste de votre code source.
 
 Partager les librairies de CakePHP pour plusieurs applications

@@ -58,7 +58,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
   * ``handler`` - callback - The callback to handle errors. You can set this to any
     callable type, including anonymous functions.
   * ``level`` - int - The level of errors you are interested in capturing. Use the
-    built-in php error constants, and bitmasks to select the level of error you
+    built-in PHP error constants, and bitmasks to select the level of error you
     are interested in.
   * ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces
     will be included in the log after each error.  This is helpful for finding

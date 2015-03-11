@@ -108,7 +108,7 @@ Ajouter cake à votre système path
 Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous
 permettront de rendre cake executable dans votre système path.
 
-#. Localisez où se trouve votre installation de cakephp et le cake exécutable.
+#. Localisez où se trouve votre installation de CakePHP et le cake exécutable.
    Par exemple ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Modifiez votre fichier ``.bashrc`` ou ``.bash_profile`` dans votre
    répertoire home, et ajoutez ce qui suit::

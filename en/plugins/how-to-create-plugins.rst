@@ -320,7 +320,7 @@ Publish Your Plugin
 You can add your plugin to `plugins.cakephp.org <http://plugins.cakephp.org>`_.
 
 Also, you might want to create a composer.json file and publish your plugin at `packagist.org <https://packagist.org/>`_.
-This way it can easily be used through composer.
+This way it can easily be used through Composer.
 
 Choose a semantically meaningful name for the package name. This should ideally be prefixed with the dependency, in this case "cakephp" as the framework.
 The vendor name will usually be your GitHub username.

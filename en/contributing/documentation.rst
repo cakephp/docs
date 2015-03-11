@@ -275,7 +275,7 @@ Each directive populates the index, and or the namespace index.
 Cross Referencing
 ~~~~~~~~~~~~~~~~~
 
-The following roles refer to php objects and links are generated if a
+The following roles refer to PHP objects and links are generated if a
 matching directive is found:
 
 .. rst:role:: php:func

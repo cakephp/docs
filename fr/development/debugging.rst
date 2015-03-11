@@ -209,12 +209,12 @@ une pléthore d'informations sur votre application et la requête courante.
 Vous pouvez télécharger
 `DebugKit <https://github.com/cakephp/debug_kit>`_ sur github.
 
-xdebug
+Xdebug
 ======
 
-Si votre environnement a l'extension php xdebug, des erreurs fatales vont
-montrer des détails de stack trace supplémentaires de xdebug. Plus de détails
-sur `xdebug <https://xdebug.org>`_ .
+Si votre environnement a l'extension PHP Xdebug, des erreurs fatales vont
+montrer des détails de stack trace supplémentaires de Xdebug. Plus de détails
+sur `Xdebug <https://xdebug.org>`_ .
 
 .. meta::
     :title lang=fr: Debugger
