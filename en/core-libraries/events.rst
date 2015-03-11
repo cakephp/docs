@@ -182,6 +182,7 @@ necessary. Our ``UserStatistics`` listener might start out like::
         }
     }
 
+    // In a controller or somewhere else where $this->Order is accessible
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
     $this->Order->getEventManager()->attach($statistics);
@@ -456,7 +457,7 @@ params you used for attaching it::
     $this->getEventManager()->detach($myFunction, 'My.event');
 
     // Attaching a CakeEventListener
-    $listener = new MyEventLister();
+    $listener = new MyEventListener();
     $this->getEventManager()->attach($listener);
 
     // Detaching a single event key from a listener

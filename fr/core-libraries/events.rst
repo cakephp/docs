@@ -201,6 +201,7 @@ pour déclencher les méthodes de cette classe. Un écouteur (listener)
         }
     }
 
+    // Dans un controller ou à n'importe quel endroit où $this->Order est accessible
     // Attache l'objet UserStatistic au gestionnaire d'événement 'Order' (commande)
     $statistics = new UserStatistic();
     $this->Order->getEventManager()->attach($statistics);
@@ -478,7 +479,7 @@ deux premiers paramètres que vous avez utilisés pour les attacher::
     $this->getEventManager()->detach($myFunction, 'My.event');
 
     // Attacher un écouteur Cake (CakeEventListener)
-    $listener = new MyEventLister();
+    $listener = new MyEventListener();
     $this->getEventManager()->attach($listener);
 
     // Détacher une simple clé d'événement depuis un écouteur (listener)

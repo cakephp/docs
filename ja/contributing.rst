@@ -11,8 +11,8 @@ CakePHPの貢献できる方法は数多くあります。
     contributing/tickets
     contributing/code
     contributing/cakephp-coding-conventions
+    contributing/backwards-compatibility
     contributing/cakephp-development-process
-
 
 .. meta::
     :title lang=ja: 貢献

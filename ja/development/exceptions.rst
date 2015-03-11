@@ -596,7 +596,7 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 .. index:: appError
 
 AppController::appError() を使う
-=================================
+================================
 
 ..
   Using AppController::appError();

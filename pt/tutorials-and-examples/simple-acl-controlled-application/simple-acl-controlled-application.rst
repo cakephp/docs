@@ -2,7 +2,7 @@ Aplicação simples controlada por Acl
 ####################################
 
 .. note::
-    
+
     Este não é um tutorial para iniciantes. Se você está dando os 
     primeiros passos com o CakePHP nós sugerimos que você explore mais as 
     funcionalidades do framework antes de seguir com esse tutorial.

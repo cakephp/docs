@@ -21,4 +21,3 @@ Contents
    appendices
 
 .. todolist::
-

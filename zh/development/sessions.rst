@@ -249,7 +249,8 @@ IO 的好处，而不必担心缓存满了时会话会逐渐丢失。
 
         // 清除过期的会话。
         public function gc($expires = null) {
-            return Cache::gc($this->cacheKey) && parent::gc($expires);
+            Cache::gc($this->cacheKey);
+            return parent::gc($expires);
         }
     }
 

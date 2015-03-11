@@ -84,7 +84,7 @@ beforeValidate
 そうでない場合、現在のsave()の実行が中断されます。
 
 afterValidate
-==============
+=============
 
 ``afterValidate()``
 

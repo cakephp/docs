@@ -42,7 +42,7 @@ Controllers
 -----------
 Os `controllers` (controladores) manipulam as requisições e ajudam coordenando e
 preparando as respostas que serão enviadas para o cliente.
-Lei mais sobre os :doc:`/controllers`
+Leia mais sobre os :doc:`/controllers`
 
 Views
 -----

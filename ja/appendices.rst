@@ -3,8 +3,24 @@
 
 ここでは、2.xで導入された新機能に関する情報と、1.3から2.0への移行手順を解説します。
 
+2.6 移行ガイド
+==============
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-6-migration-guide
+
+2.5 移行ガイド
+==============
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-5-migration-guide
+
 2.4 移行ガイド
-===================
+==============
 
 .. toctree::
     :maxdepth: 1
@@ -62,3 +78,7 @@
     :maxdepth: 1
 
     appendices/glossary
+
+.. meta::
+    :title lang=ja: Appendices
+    :keywords lang=ja: migration guide,migration path,new features,glossary

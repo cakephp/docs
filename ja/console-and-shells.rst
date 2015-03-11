@@ -129,7 +129,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 #. これでOkをクリックすれば、 ``cake`` がどこからでも動くようになるはずです。
 
 シェルの作成
-================
+============
 
 早速コンソールで動くシェルを作ってみましょう。この例ではシンプルなhello world
 シェルを作ります。お使いのアプリケーションの ``Console/Command`` ディレクトリで
@@ -193,7 +193,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 何か他のメソッド名を使う必要があります。
 
 シェルの中でモデルを使う
----------------------------
+------------------------
 
 自作アプリケーションのビジネスロジックを、シェルユーティリティの中からアクセス
 する必要があることも少なくありません。CakePHPでは、これはいとも簡単に実現可能
@@ -270,7 +270,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
     にある機能を上書きするのでアクセスできなくなりますよという警告が出ます。
 
 TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
-----------------------------------------------------------------
+--------------------------------------------------------------
 
 タスクコレクションオブジェクトを使って、タスクをその場でロードすることも
 できます。$tasksで宣言するのとはまた別のやり方です::
@@ -1017,13 +1017,13 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
     :maxdepth: 1
 
     console-and-shells/cron-jobs
+    console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations
     console-and-shells/i18n-shell
     console-and-shells/acl-shell
     console-and-shells/testsuite-shell
     console-and-shells/upgrade-shell
-
 
 .. meta::
     :title lang=ja: Console and Shells
