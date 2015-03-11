@@ -57,7 +57,7 @@ In the above example we see the 3 hook methods that forms provide:
 
 * ``_buildSchema`` is used to define the schema data that is used by FormHelper
   to create an HTML form. You can define field type, length, and precision.
-* ``_buildValidator`` Gets a :php:class:`Cake\Validation\Validator` instance
+* ``_buildValidator`` Gets a :php:class:`Cake\\Validation\\Validator` instance
   that you can attach validators to.
 * ``_execute`` lets you define the behavior you want to happen when
   ``execute()`` is called and the data is valid.
@@ -125,7 +125,7 @@ invalidate the fields accordingly to the feedback from the remote server::
         $this->_errors = $errors;
     }
 
-According to how the validator class would have returned the errors, $errors
+According to how the validator class would have returned the errors, ``$errors``
 must be in this format::
 
     ["fieldName" => ["validatorName" => "The error message to display"]]

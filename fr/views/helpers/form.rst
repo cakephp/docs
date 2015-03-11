@@ -562,7 +562,7 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-      <select name="field" id="field">
+      <select name="field">
           <option value="">(choose one)</option>
           <option value="0">1</option>
           <option value="1">2</option>
@@ -579,8 +579,8 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="published" value="0" />
+    <input type="checkbox" name="published" value="1" />
 
   Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
 

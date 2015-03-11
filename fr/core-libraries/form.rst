@@ -5,22 +5,23 @@ Formulaires Sans Models
 
 .. php:class:: Form
 
-La plupart du temps, vous aurez des formulaires avec derrière des
-:doc:`ORM entities </orm/entities>`
-et des :doc:`ORM tables </orm/table-objects>` ou d'autres stockages persistents,
-mais il y a des fois où vous aurez besoin de valider un input de l'utilisateur
-et effectuer une action si les données sont valides. L'exemple le plus courant
-est un formulaire de contact.
+La plupart du temps, vous aurez des formulaires avec des
+:doc:`entities </orm/entities>` et des :doc:`tables </orm/table-objects>` de
+l'ORM en arrière-plan ou d'autres stockages persistants, mais il y a des fois
+où vous aurez besoin de valider un input de l'utilisateur et effectuer une
+action si les données sont valides. L'exemple le plus courant est un formulaire
+de contact.
 
 Créer un Formulaire
 ===================
 
-Generally when using the Form class you'll want to use a subclass to define your
-form. This makes testing easier, and lets you re-use your form. Forms are put
-into ``src/Form`` and usually have ``Form`` as a class suffix. For example,
-a simple contact form would look like::
+Généralement lorsque vous utilisez la classe Form, vous voudrez utiliser une
+sous classe pour définir votre formulaire. Cela rend les tests plus faciles et
+vous permet de réutiliser votre formulaire. Les formulaires sont situés dans
+``src/Form`` et ont habituellement ``Form`` comme suffixe de classe. Par
+exemple, un simple formulaire de contact ressemblerait à ceci::
 
-    // in src/Form/ContactForm.php
+    // Dans src/Form/ContactForm.php
     namespace App\Form;
 
     use Cake\Form\Form;
@@ -41,38 +42,41 @@ a simple contact form would look like::
         {
             return $validator->add('name', 'length', [
                     'rule' => ['minLength', 10],
-                    'message' => 'A name is required'
+                    'message' => 'Un nom est requis'
                 ])->add('email', 'format', [
                     'rule' => 'email',
-                    'message' => 'A valid email address is required',
+                    'message' => 'Une adresse email valide est requise',
                 ]);
         }
 
         protected function _execute(array $data)
         {
-            // Send an email.
+            // Envoie un email.
             return true;
         }
     }
 
-In the above example we see the 3 hook methods that forms provide:
+Dans l'exemple ci-dessus nous pouvons voir les 3 méthodes de hook fournies par
+les formulaires:
 
-* ``_buildSchema`` is used to define the schema data that is used by FormHelper
-  to create an HTML form. You can define field type, length, and precision.
-* ``_buildValidator`` Gets a :php:class:`Cake\Validation\Validator` instance
-  that you can attach validators to.
-* ``_execute`` lets you define the behavior you want to happen when
-  ``execute()`` is called and the data is valid.
+* ``_buildSchema`` et utilisé pour définir le schema des données utilisé par
+  FormHelper pour créer le formulaire HTML. Vous pouvez définir le type de
+  champ, la longueur et la précision.
+* ``_buildValidator`` Récupère une instance de :php:class:`Cake\\Validation\\Validator`
+  à laquelle vous pouvez attacher des validateurs.
+* ``_execute`` vous permet de définir le comportement que vous souhaitez lorsque
+  ``execute()`` est appelée et que les données sont valides.
 
-You can always define additional public methods as you need as well.
+Vous pouvez toujours également définir des méthodes publiques additionnelles si
+besoin.
 
-Processing Request Data
-=======================
+Traiter les Données de Requêtes
+===============================
 
-Once you've defined your form, you can use it in your controller to process
-and validate request data::
+Une fois que vous avez défini votre formulaire, vous pouvez l'utiliser dans
+votre controller pour traiter et valider les données de la requête::
 
-    // In a controller
+    // Dans un controller
     namespace App\Controller;
 
     use App\Controller\AppController;
@@ -85,67 +89,71 @@ and validate request data::
             $contact = new ContactForm();
             if ($this->request->is('post')) {
                 if ($contact->execute($this->request->data)) {
-                    $this->Flash->success('We will get back to you soon.');
+                    $this->Flash->success('Nous reviendrons vers vous rapidement.');
                 } else {
-                    $this->Flash->error('There was a problem submitting your form.');
+                    $this->Flash->error('Il y a eu un problème lors de la soumission de votre formulaire.');
                 }
             }
             $this->set('contact', $contact);
         }
     }
 
-In the above example, we use the ``execute()`` method to run our form's
-``_execute()`` method only when the data is valid, and set flash messages
-accordingly. We could have also used the ``validate()`` method to only validate
-the request data::
+Dans l'exemple ci-dessus, nous utilisons la méthode ``execute()`` pour lancer
+la méthode ``_execute()`` de notre formulaire seulement lorsque les données
+sont valides, et définissons un message flash en conséquence. Nous aurions
+aussi pu utiliser la méthode ``validate()`` pour valider uniquement les données
+de requête::
 
     $isValid = $form->validate($this->request->data);
 
-Getting Form Errors
-===================
 
-Once a form has been validated you can retreive the errors from it::
+Récupérer les Erreurs d'un Formulaire
+=====================================
+
+Une fois qu'un formulaire a été validé, vous pouvez récupérer les erreurs
+comme ceci::
 
     $errors = $form->errors();
-    /* $errors contains
+    /* $errors contient
     [
-        'email' => ['A valid email address is required']
+        'email' => ['Une adresse email valide est requise']
     ]
     */
 
-Invalidating Individual Form Fields from Controller
-===================================================
+Invalider un Champ de Formulaire depuis un Controller
+=====================================================
 
-It is possible to invalidate individual fields from the controller without the
-use of the Validator class.  The most common use case for this is when the
-validation is done on a remote server.  In such case, you must manually
-invalidate the fields accordingly to the feedback from the remote server::
+Il est possible d'invalider un champ individuel depuis un controller sans
+utiliser la class Validator. Le scénario le plus courant est lorsque la
+validation est faite sur un serveur distant. Dans ce cas, vous devez invalider
+manuellement le champ suivant le retour du serveur distant::
 
-    // in src/Form/ContactForm.php
+    // Dans src/Form/ContactForm.php
     public function setErrors($errors)
     {
         $this->_errors = $errors;
     }
 
-According to how the validator class would have returned the errors, $errors
-must be in this format::
+De la même façon que ce que la classe Validator aurait retourné l'erreur,
+``$errors`` doit être sous ce format::
 
     ["fieldName" => ["validatorName" => "The error message to display"]]
 
-Now you will be able to invalidate form fields by setting the fieldName, then
-set the error messages::
+Maintenant vous pourrez invalider des champs de formulaire en définissant le nom
+du champ suivi du message d'erreur::
 
-    // In a controller
+    // Dans un controller
     $contact = new ContactForm();
     $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
 
-Proceed to Creating HTML with FormHelper to see the results.
+Créez un formulaire HTML avec FormHelper pour voir le résultat.
 
-Creating HTML with FormHelper
+Créer le HTML avec FormHelper
 =============================
 
-Once you've created a Form class, you'll likely want to create an HTML form for
-it. FormHelper understands Form objects just like ORM entities::
+Une fois que vous avez créé une classe Form, vous voudrez probablement créer un
+formulaire HTML. FormHelper comprend les objets Form de la même manière que des
+entities de l'ORM::
 
     echo $this->Form->create($contact);
     echo $this->Form->input('name');
@@ -154,6 +162,7 @@ it. FormHelper understands Form objects just like ORM entities::
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 
-The above would create an HTML form for the ``ContactForm`` we defined earlier.
-HTML forms created with FormHelper will use the defined schema and validator to
-determine field types, maxlengths, and validation errors.
+Le code ci-dessus créé un formulaire HTML pour le ``ContactForm`` que nous avons
+défini précédemment. Les formulaires HTML créés avec FormHelper utiliseront les
+schema et validator définis pour déterminer les types de champ, leurs longueurs
+et les erreurs de validation.
