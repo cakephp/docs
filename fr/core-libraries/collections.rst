@@ -842,7 +842,7 @@ Clonage de Collection
 Parfois vous devez cloner un des éléments à partir d'une collection. C'est
 utile quand vous avez besoin d'itérer le même ensemble à partir d'endroits
 différents au même moment. Afin de cloner une collection à partir d'une autre,
-utilisez la méthode ``compile()``:
+utilisez la méthode ``compile()``::
 
     $ages = $collection->extract('age')->compile();
 
