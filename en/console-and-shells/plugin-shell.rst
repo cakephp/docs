@@ -11,11 +11,11 @@ The plugin shell allows you to load and unload plugins via the command prompt.  
 Loading plugins
 ---------------
 
-Via the `Load` task you are able to load plugins in your `config/bootstrap.php`. You can do this by running::
+Via the `Load` task you are able to load plugins in your ``config/bootstrap.php``. You can do this by running::
 
     bin/cake plugin load MyPlugin
 
-This will add the following to your `config/bootstrap.php`::
+This will add the following to your ``config/bootstrap.php``::
 
     Plugin::load('MyPlugin', ['bootstrap' => false, 'routes' => false, 'autoload' => true]);
 
@@ -38,7 +38,7 @@ You can unload a plugin by specifying it's name::
 
     bin/cake plugin unload MyPlugin
 
-This will remove the line `Plugin::load('MyPlugin',...` from your `config/bootstrap.php`.
+This will remove the line ``Plugin::load('MyPlugin',...`` from your ``config/bootstrap.php``.
 
 .. meta::
     :title lang=en: Plugin Shell
