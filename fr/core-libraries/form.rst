@@ -67,7 +67,7 @@ les formulaires:
 * ``_execute`` vous permet de définir le comportement que vous souhaitez lorsque
   ``execute()`` est appelée et que les données sont valides.
 
-Vous pouvez toujours également définir de méthodes publiques additionnelles si
+Vous pouvez toujours également définir des méthodes publiques additionnelles si
 besoin.
 
 Traiter les Données de Requêtes
@@ -146,7 +146,7 @@ du champ suivi du message d'erreur::
     $contact = new ContactForm();
     $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
 
-Créez un formulaire HTML vec FormHelper pour voir le résultat.
+Créez un formulaire HTML avec FormHelper pour voir le résultat.
 
 Créer le HTML avec FormHelper
 =============================
