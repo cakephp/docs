@@ -122,12 +122,6 @@ your helper requires. For example::
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
         ];
-
-        public function __construct(View $view, $config = [])
-        {
-            parent::__construct($view, $config);
-            $this->initStringTemplates();
-        }
     }
 
 Any configuration provided to your helper's constructor will be merged with the
