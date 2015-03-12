@@ -778,6 +778,30 @@ de l'association doit persister::
 
 Sans appel à ``dirty()``, les tags mis à jour ne seront pas sauvegardés.
 
+Often you'll find yourself wanting to make an association between two existing
+entities, eg. a user coauthoring an article. This is done by using the method
+``link()``, like this::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $this->Articles->Users->link($article, [$user]);
+
+When saving belongsToMany Associations, it can be relevant to save some
+additional data to the Joint Table.  In the previous example of tags, it could
+be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
+be either ``upvote`` or ``downvote`` and is represented by a string.  The
+relation is between Users and Articles.
+
+Saving that association, and the ``vote_type`` is done by first adding some data
+to ``_joinData`` and then saving the association with ``link()``, example::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $this->Articles->Users->link($article, [$user]);
+
 Sauvegarder des Données Supplémentaires à la Table de Jointure
 --------------------------------------------------------------
 
