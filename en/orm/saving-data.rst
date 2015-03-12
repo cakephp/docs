@@ -308,7 +308,7 @@ like ``id`` which is usually not declared in ``_accessible`` property::
         $list,
         $this->request->data(),
         ['associated' => [
-                'Tags', 
+                'Tags',
                 'Comments.Users' => [
                     'accessibleFields' => ['id' => true],
                 ]
@@ -742,7 +742,7 @@ Without the call to ``dirty()`` the updated tags will not be saved.
 
 Often you'll find yourself wanting to make an association between two existing
 entities, eg. a user coauthoring an article. This is done by using the method
-``link()``, like this:
+``link()``, like this::
 
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
