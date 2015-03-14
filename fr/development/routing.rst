@@ -456,6 +456,15 @@ du controller Pages en utilisant la route suivante::
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
+When creating prefix routes, you can set additional route parameters using
+the ``$options`` argument::
+
+    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+        // Routes connected here are prefixed with '/admin' and
+        // have the 'param' routing key set.
+        $routes->connect('/:controller');
+    });
+
 Vous pouvez aussi définir les préfixes dans les scopes de plugin::
 
     Router::plugin('DebugKit', function ($routes) {
