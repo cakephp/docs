@@ -166,10 +166,11 @@ Seu método ``initialize`` agora deve parecer com::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
-                ]
+                ],
+                'unauthorizedRedirect' => $this->referer()
             ]);
 
             // Permite a ação display, assim nosso pages controller
