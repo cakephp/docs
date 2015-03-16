@@ -22,7 +22,7 @@ Configuration des Components
 
 De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
-:doc:`/core-libraries/components/authentication` and
+:doc:`/core-libraries/components/authentication` et
 :doc:`/core-libraries/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
 se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
@@ -100,7 +100,7 @@ Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à
 Utiliser les Components
 =======================
 
-Une fois que vous avez inclu quelques components dans votre controller,
+Une fois que vous avez inclus quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
 :php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre
@@ -245,8 +245,8 @@ variable ``$components``::
     }
 
 .. note::
-    Au contraire d'un component inclu dans un controller, aucun callback
-    ne sera attrapé pour un component inclu dans un component.
+    Au contraire d'un component inclus dans un controller, aucun callback
+    ne sera attrapé pour un component inclus dans un component.
 
 .. _component-api:
 
