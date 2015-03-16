@@ -201,11 +201,11 @@ Cette exemple forcera toutes les actions qui proviennent de la
             return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
-    
+
 Cet exemple forcera toutes les actions qui proviennent de la "route"
 admin à requérir des requêtes sécurisés SSL. Quand la requête est placée
 dans un trou noir, elle appellera le callback ``forceSSL()`` qui redirigera
-les requêtes non sécurisées vers les requêtes sécurisées automatiquement.
+automatiquement les requêtes non sécurisées vers les requêtes sécurisées.
 
 .. _security-csrf:
 
@@ -216,7 +216,7 @@ CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour
 les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
-Pour activer la protection CSRF, utilisez 
+Pour activer la protection CSRF, utilisez
 :doc:`/controllers/components/csrf`.
 
 Désactiver le Component Security pour des Actions Spécifiques
@@ -225,7 +225,7 @@ Désactiver le Component Security pour des Actions Spécifiques
 Il peut arriver que vous souhaitiez désactiver toutes les vérifications de
 sécurité pour une action (ex. ajax request).
 Vous pouvez "délocker" ces actions en les listant dans
-``$this->Security->unlockedActions`` dans votre ``beforeFilter``. La propriété
+``$this->Security->unlockedActions`` dans votre ``beforeFilter()``. La propriété
 ``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
 fonctionnalités de ``SecurityComponent``::
 

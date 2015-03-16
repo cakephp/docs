@@ -21,7 +21,7 @@ application will be combined into a single POT file::
     bin/cake i18n extract
 
 The above will run the extraction shell. The result of this command will be the
-file ``src/Locale/default.pot``. You use the pot file as a template for creating
+file **src/Locale/default.pot**. You use the pot file as a template for creating
 po files. If you are manually creating po files from the pot file, be sure to
 correctly set the ``Plural-Forms`` header line.
 
@@ -72,7 +72,7 @@ The i18n shell can also be used to initialize the default tables used by the
 
     bin/cake i18n initdb
 
-This will create the ``i18n`` table used by translate behavior.
+This will create the **i18n** table used by translate behavior.
 
 
 .. meta::

@@ -248,6 +248,15 @@ table. Par exemple::
         ]
     ]);
 
+Retirer les Behaviors Chargés
+=============================
+
+Pour retirer un behavior de votre table, vous pouvez appeler la méthode
+``removeBehavior``::
+
+    // Retire le behavior chargé
+    $this->removeBehavior('Sluggable');
+
 Accéder aux Behaviors Chargés
 =============================
 

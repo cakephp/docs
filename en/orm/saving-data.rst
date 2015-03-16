@@ -308,7 +308,7 @@ like ``id`` which is usually not declared in ``_accessible`` property::
         $list,
         $this->request->data(),
         ['associated' => [
-                'Tags', 
+                'Tags',
                 'Comments.Users' => [
                     'accessibleFields' => ['id' => true],
                 ]
@@ -611,11 +611,17 @@ Your entities should be structured in the same way as they are when
 loaded from the database. See the form helper documentation for :ref:`how to
 build inputs for associations <associated-form-inputs>`.
 
+If you are building or modifying association data after building your entities
+you will have to mark the association property as modified with ``dirty()``::
+
+    $company->author->name = 'Master Chef';
+    $company->dirty('author', true);
+
 Saving BelongsTo Associations
 -----------------------------
 
 When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, camel cased version the association name. For
+the singular, underscored version of the association name. For
 example::
 
     // In a controller.
@@ -637,7 +643,7 @@ Saving HasOne Associations
 --------------------------
 
 When saving hasOne associations, the ORM expects a single nested entity at the
-singular, camel cased version the association name. For example::
+singular, underscored version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -657,7 +663,7 @@ Saving HasMany Associations
 ---------------------------
 
 When saving hasMany associations, the ORM expects an array of entities at the
-plural, camel cased version the association name. For example::
+plural, underscored version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -688,7 +694,7 @@ Saving BelongsToMany Associations
 ---------------------------------
 
 When saving belongsToMany associations, the ORM expects an array of entities at the
-plural, camel cased version the association name. For example::
+plural, underscored version of the association name. For example::
 
     // In a controller.
 
@@ -733,6 +739,30 @@ persisted::
     $article->dirty('tags', true);
 
 Without the call to ``dirty()`` the updated tags will not be saved.
+
+Often you'll find yourself wanting to make an association between two existing
+entities, eg. a user coauthoring an article. This is done by using the method
+``link()``, like this::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $this->Articles->Users->link($article, [$user]);
+
+When saving belongsToMany Associations, it can be relevant to save some
+additional data to the Joint Table.  In the previous example of tags, it could
+be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
+be either ``upvote`` or ``downvote`` and is represented by a string.  The
+relation is between Users and Articles.
+
+Saving that association, and the ``vote_type`` is done by first adding some data
+to ``_joinData`` and then saving the association with ``link()``, example::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $this->Articles->Users->link($article, [$user]);
 
 Saving Additional Data to the Joint Table
 -----------------------------------------

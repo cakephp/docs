@@ -76,7 +76,7 @@ Logging With Stack Traces
 Crée un stack trace log détaillé au moment de l'invocation. La
 méthode ``log()`` affiche les données identiques à celles faites par
 ``Debugger::dump()``, mais dans debug.log au lieu de les sortir
-buffer. Notez que votre répertoire ``tmp`` (et son contenu) doit
+buffer. Notez que votre répertoire **tmp** (et son contenu) doit
 être ouvert en écriture par le serveur web pour que le ``log()`` fonctionne
 correctement.
 

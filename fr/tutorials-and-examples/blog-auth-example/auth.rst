@@ -63,8 +63,8 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Error\NotFoundException;
     use Cake\Event\Event;
+    use Cake\Network\Exception\NotFoundException;
 
     class UsersController extends AppController
     {
@@ -168,7 +168,7 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
 
         public function beforeFilter(Event $event)
         {
-            $this->Auth->allow(['index', 'view']);
+            $this->Auth->allow(['index', 'view', 'display']);
         }
         //...
     }
@@ -223,8 +223,8 @@ fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
-    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
 
     class User extends Entity
     {
@@ -305,6 +305,9 @@ l'utilisateur connecté courant en référence pour l'article créé::
         if ($this->request->is('post')) {
             // Ajout de cette ligne
             $article->user_id = $this->Auth->user('id');
+            // Vous pourriez aussi faire ce qui suit
+            //$newData = ['user_id' => $this->Auth->user('id')];
+            //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été sauvegardé.'));
                 return $this->redirect(['action' => 'index']);

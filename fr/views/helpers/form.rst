@@ -363,7 +363,8 @@ Tout point dans vos noms de champs sera converti dans des données de requête
 imbriquées. Par exemple, si vous créez un champ avec un nom
 ``0.comments.body`` vous aurez un nom d'attribut qui sera
 ``0[comments][body]``. Cette convention facilite la sauvegarde des données
-avec l'ORM.
+avec l'ORM. Plus de détails pour tous les types d'associations se trouvent
+dans la section :ref:`associated-form-inputs`.
 
 Lors de la création d'inputs de type datetime, FormHelper va ajouter un
 suffixe au champ. Vous pouvez remarquer des champs supplémentaires nommés
@@ -561,7 +562,7 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-      <select name="field" id="field">
+      <select name="field">
           <option value="">(choose one)</option>
           <option value="0">1</option>
           <option value="1">2</option>
@@ -578,8 +579,8 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="published" value="0" />
+    <input type="checkbox" name="published" value="1" />
 
   Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
 

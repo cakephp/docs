@@ -2,7 +2,7 @@ Normes de codes
 ###############
 
 Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code PSR-2
-<http://www.php-fig.org/psr/psr-2/fr/>`_ en additions aux règles de code suivantes.
+<http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code suivantes.
 
 Il est recommandé que les autres personnes qui développent des Ingrédients de
 Cake suivent les mêmes normes.
@@ -130,7 +130,7 @@ Dans les fichiers de template (fichiers .ctp) les développeurs devront utiliser
 les structures de contrôle en mot (keyword control structures).
 Les structures de contrôle en mot sont plus faciles à lire dans des fichiers
 de template complexes. Les structures de contrôle peuvent soit être contenues
-dans un block PHP plus large, soit dans des tags PHP séparés::
+dans un block PHP plus large, soit dans des balises PHP séparées::
 
     <?php
     if ($isAdmin):
@@ -546,7 +546,6 @@ Si un nom de constante a plusieurs mots, ils doivent être séparés par un
 caractère underscore, par exemple::
 
     define('NOM_LONG_DE_CONSTANTE', 2);
-
 
 .. meta::
     :title lang=fr: Normes de code

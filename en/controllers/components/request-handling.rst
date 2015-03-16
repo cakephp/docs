@@ -253,7 +253,7 @@ automatically by using the ``viewClassMap`` setting::
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent(''RequestHandler', [
+        $this->loadComponent('RequestHandler', [
             'viewClassMap' => [
                 'json' => 'ApiKit.MyJson',
                 'xml' => 'ApiKit.MyXml',

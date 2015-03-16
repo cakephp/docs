@@ -24,7 +24,7 @@ combinée en un seul fichier POT::
     bin/cake i18n extract
 
 La commande du dessus va lancer le shell d'extraction. Le résultat de cette
-commande va être la création du fichier ``src/Locale/default.pot``. Vous
+commande va être la création du fichier **src/Locale/default.pot**. Vous
 utilisez le fichier pot comme un template pour créer les fichiers po. Si vous
 créez manuellement les fichiers po à partir du fichier pot, pensez à bien
 corriger le ``Plural-Forms`` de la ligne d'en-tête.
@@ -76,7 +76,7 @@ utilisées par :php:class:`TranslateBehavior`::
 
     bin/cake i18n initdb
 
-Cela va créer la table ``i18n`` utilisée par le behavior Translate.
+Cela va créer la table **i18n** utilisée par le behavior Translate.
 
 
 .. meta::

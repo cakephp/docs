@@ -126,12 +126,6 @@ toute configuration dont votre helper a besoin. Par exemple::
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
         ];
-
-        public function __construct(View $view, $config = [])
-        {
-            parent::__construct($view, $config);
-            $this->initStringTemplates();
-        }
     }
 
 Toute configuration fournie au constructeur de votre helper sera fusionnée avec
@@ -260,7 +254,7 @@ vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le
 feriez dans un controller::
 
     /* src/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
-   
+
     namespace App\View\Helper;
 
     use Cake\View\Helper;

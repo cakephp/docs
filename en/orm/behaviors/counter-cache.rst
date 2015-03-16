@@ -65,19 +65,19 @@ to find records instead::
             ]
         ]
     ]);
-    
+
 If you want CounterCache to update multiple fields, for example both showing a
 conditional count and a basic count you can add these fields in the array::
 
     $this->addBehavior('CounterCache', [
-            'Articles' => ['comment_count',
-                'published_comment_count' => [
-                    'conditions' => [
-                        'findType' => 'published'
-                    ]
+        'Articles' => ['comment_count',
+            'published_comment_count' => [
+                'conditions' => [
+                    'findType' => 'published'
                 ]
             ]
-        ]);
+        ]
+    ]);
 
 Lastly, if a custom finder and conditions are not suitable you can provide
 a callback method. This callable must return the count value to be stored::

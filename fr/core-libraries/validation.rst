@@ -417,7 +417,7 @@ CakePHP fournit une suite basique de méthodes de validation dans la classe
 qui fournissent des validators pour plusieurs situations de validation
 habituelles.
 
-La `documentaition de l'API
+La `documentation de l'API
 <http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
 classe ``Validation`` fournit une bonne liste de règles de validation qui sont
 disponibles, et leur utilisation basique.

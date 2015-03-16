@@ -340,7 +340,8 @@ You can create inputs for associated models, or arbitrary models by passing in
 Any dots in your field names will be converted into nested request data. For
 example, if you created a field with a name ``0.comments.body`` you would get
 a name attribute that looks like ``0[comments][body]``. This convention makes it
-easy to save data with the ORM.
+easy to save data with the ORM. Details for the various association types can
+be found in the :ref:`associated-form-inputs` section.
 
 When creating datetime related inputs, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
@@ -533,7 +534,7 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-      <select name="field" id="field">
+      <select name="field">
           <option value="">(choose one)</option>
           <option value="0">1</option>
           <option value="1">2</option>
@@ -550,8 +551,8 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="published" value="0" />
+    <input type="checkbox" name="published" value="1" />
 
   This can be disabled by setting the ``$options['hiddenField'] = false``::
 

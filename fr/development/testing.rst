@@ -76,9 +76,6 @@ Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
 lancer vos propres tests en lancant un de ceux présents dans le cœur::
 
-    // Pour un PHPunit installé sur l'ensemble du système
-    $ phpunit
-
     // Pour phpunit.phar
     $ php phpunit.phar
 
@@ -90,7 +87,7 @@ qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fou
 le chemin au test en paramètre de PHPUnit. Par exemple, si vous aviez un cas
 de test pour la classe ArticlesTable, vous pourriez le lancer avec::
 
-    $ phpunit Test/TestCase/Model/Table/ArticlesTableTest
+    $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
 Vous devriez voir une barre verte avec quelques informations supplémentaires sur
 les tests exécutés et le nombre qui a été passé.
@@ -106,17 +103,16 @@ Conventions des cas de Test
 Comme beaucoup de choses dans CakePHP, les cas de test ont quelques
 conventions. En ce qui concerne les tests:
 
-#. Les fichiers PHP contenant les tests devraient être dans votre répertoire
-   ``tests/Case/[Type]``.
-#. Les noms de fichier de ces fichiers devraient finir avec ``Test.php`` à la
-   place de .php.
-#. Les classes contenant les tests devraient étendre ``Cake\TestSuite\TestCase``,
+#. Les fichiers PHP contenant les tests doivent être dans votre répertoire
+   ``tests/TestCase/[Type]``.
+#. Les noms de ces fichiers doivent finir avec ``Test.php`` plutôt que juste ``.php``.
+#. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
    correspondre au nom de fichier. ``RouterTest.php`` doit contenir
    ``class RouterTest extends TestCase``.
 #. Le nom de toute méthode contenant un test (par ex: contenant une assertion)
-   devrait commencer par ``test``, comme dans ``testPublished()``.
+   doit commencer par ``test``, comme dans ``testPublished()``.
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
 
@@ -223,14 +219,35 @@ Une fois que vous avez installé PHPUnit et que quelques cas de tests sont
 bonne idée de lancer les tests avant de committer tout changement pour aider
 à s'assurer que vous n'avez rien cassé.
 
-En utilisant ``phpunit``, vous pouvez lancer votre application et les tests de
-plugin. Pour lancer vos tests d'application, vous pouvez simplement lancer::
+En utilisant ``phpunit``, vous pouvez lancer les tests de votre application.
+Pour lancer vos tests d'application, vous pouvez simplement lancer::
 
-    $ phpunit
+    // composer installs
+    $ vendor/bin/phpunit
+
+    // phar file
+    php phpunit.phar
 
 A partir du répertoire racine de votre application. Pour lancer les tests pour
-les plugin, faîtes d'abord ``cd`` vers le répertoire du plugin, et ensuite
-utilisez ``phpunit`` pour lancer les tests.
+un plugin qui fait parti de la source de votre application, d'abord faîtes la
+commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
+``phpunit`` qui correspond à la façon dont vous avez installé phpunit::
+
+    cd plugins
+
+    // En utilisant composer installed phpunit
+    ../vendor/bin/phpunit
+
+    // En utilisant phar file
+    php ../phpunit.phar
+
+Pour lancer les tests sur un plugin séparé, vous devez d'abord installer le
+projet dans un répertoire séparé et installer ses dépendances::
+
+    git clone git://github.com/cakephp/debug_kit.git
+    cd debug_kit
+    php ~/composer.phar install
+    php ~/phpunit.phar
 
 Filtrer les cas de test
 -----------------------
@@ -1158,7 +1175,7 @@ important de s'assurer que ces classes sont couvertes par des cas de test.
 
 Tout d'abord, nous créons un helper d'exemple à tester.
 ``CurrencyRendererHelper`` va nous aider à afficher les monnaies dans nos vues
-et pour siplifier, il ne va avoir qu'une méthode ``usd()``::
+et pour simplifier, il ne va avoir qu'une méthode ``usd()``::
 
     // src/View/Helper/CurrencyRendererHelper.php
     namespace App\View\Helper;
@@ -1196,8 +1213,8 @@ Maintenant nous créons nos tests::
         public function setUp()
         {
             parent::setUp();
-            $view = new View();
-            $this->helper = new CurrencyRendererHelper($view);
+            $View = new View();
+            $this->helper = new CurrencyRendererHelper($View);
         }
 
         // Test de la fonction usd()
@@ -1328,8 +1345,7 @@ vérifier que le code suivant est présent dans votre fichier ``composer.json`` 
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "tests",
-            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
         }
     }
 

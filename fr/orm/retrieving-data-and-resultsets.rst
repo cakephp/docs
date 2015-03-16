@@ -224,12 +224,12 @@ table pour configurer le champ à afficher sur une table::
     }
 
 Quand vous appelez ``list``, vous pouvez configurer les champs utilisés pour
-la clé et la valeur avec respectivement les options ``idField`` et
+la clé et la valeur avec respectivement les options ``keyField`` et
 ``valueField``::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug', 'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -245,7 +245,7 @@ elements ``<optgroup>`` avec FormHelper::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title',
+        'keyField' => 'slug', 'valueField' => 'title',
         'groupField' => ['author_id']
     ]);
     $data = $query->toArray();
@@ -275,7 +275,7 @@ un ``parent_id`` donné sont placées sous l'attribut ``children``::
 
     // Expanded les valeurs par défaut
     $query = $comments->find('threaded', [
-        'idField' => $comments->primaryKey(),
+        'keyField' => $comments->primaryKey(),
         'parentField' => 'parent_id'
     ]);
     $results = $query->toArray();
@@ -283,7 +283,7 @@ un ``parent_id`` donné sont placées sous l'attribut ``children``::
     echo count($results[0]->children);
     echo $results[0]->children[0]->comment;
 
-Les clés ``parentField`` et ``idField`` peuvent être utilisées pour définir
+Les clés ``parentField`` et ``keyField`` peuvent être utilisées pour définir
 les champs sur lesquels le threading va être.
 
 .. tip::
@@ -354,6 +354,13 @@ vous permettent de facilement exprimer des requêtes simples sans aucun code
 supplémentaire. Par exemple si vous vouliez trouver un utilisateur selon son
 username, vous pourriez faire::
 
+    // Dans un controller
+    // Les deux appels suivants sont équivalents.
+    $query = $this->Users->findByUsername('joebob');
+    $query = $this->Users->findAllByUsername('joebob');
+
+    // Dans une méthode de table
+    $users = TableRegistry::get('Users');
     // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');

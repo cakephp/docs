@@ -391,7 +391,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   celui-ci est le nom au pluriel et avec des underscores de l'association donc
   ``comments`` dans notre exemple.
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
+  'select'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
@@ -522,7 +522,7 @@ sont:
   c'est le nom au pluriel, avec des underscores de l'association, donc ``tags``
   dans notre exemple.
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
+  'select'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
 - **saveStrategy**: Soit 'append' ou bien 'replace'. Indique le mode à utiliser
   pour sauvegarder les entities associées. Le premier va seulement créer des
@@ -632,17 +632,16 @@ L'option ``finder`` vous permet d'utiliser un
 :ref:`finder personnalisé <custom-find-methods>` pour charger les données
 associées. Ceci permet de mieux encapsuler vos requêtes et de garder votre code
 plus DRY. Il y a quelques limitations lors de l'utilisation de finders pour
-charger les enregistrements associés pour les associations qui sont chargées en
+charger les données dans les associations qui sont chargées en
 utilisant les jointures (belongsTo/hasOne). Les seuls aspects de la requête
 qui seront appliqués à la requête racine sont les suivants:
 
-- WHERE conditions
-- Jointures supplémentaires
-- Associations avec Contain
-- Fonctions Map/Reduce
-- Result formatters
+- WHERE conditions.
+- Additional joins.
+- Contained associations.
 
 Les autres aspects de la requête, comme les colonnes sélectionnées, l'order,
 le group by, having et les autres sous-instructions, ne seront pas appliqués à
 la requête racine. Les associations qui *ne* sont *pas* chargées avec les
-jointures (hasMany/belongsToMany), n'ont pas les restrictions ci-dessus.
+jointures (hasMany/belongsToMany), n'ont pas les restrictions ci-dessus et
+peuvent aussi utiliser les formateurs de résultats ou les fonctions map/reduce.

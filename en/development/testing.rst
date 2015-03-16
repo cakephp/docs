@@ -73,9 +73,6 @@ After installing PHPUnit and setting up your ``test`` datasource configuration
 you can make sure you're ready to write and run your own tests by running your
 application's tests::
 
-    // For system wide PHPUnit
-    $ phpunit
-
     // For phpunit.phar
     $ php phpunit.phar
 
@@ -87,7 +84,7 @@ To run a specific test you can supply the path to the test as a parameter to
 PHPUnit. For example, if you had a test case for ArticlesTable class you could
 run it with::
 
-    $ phpunit tests/TestCase/Model/Table/ArticlesTableTest
+    $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
 You should see a green bar with some additional information about the tests run,
 and number passed.
@@ -211,13 +208,34 @@ Once you have PHPUnit installed and some test cases written, you'll want to run
 the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
-By using ``phpunit`` you can run your application and plugin tests. To run your
+By using ``phpunit`` you can run your application tests. To run your
 application's tests you can simply run::
 
-    $ phpunit
+    // composer installs
+    $ vendor/bin/phpunit
 
-From your application's root directory. To run a plugin's tests, first ``cd``
-into the plugin directory, then use ``phpunit`` to run the tests.
+    // phar file
+    php phpunit.phar
+
+From your application's root directory. To run tests for a plugin that is part
+of your application source, first ``cd`` into the plugin directory, then use
+``phpunit`` command that matches how you installed phpunit::
+
+    cd plugins
+
+    // Using composer installed phpunit
+    ../vendor/bin/phpunit
+
+    // Using phar file
+    php ../phpunit.phar
+
+To run tests on a standalone plugin, you should first install the project in
+a separate directory and install its dependencies::
+
+    git clone git://github.com/cakephp/debug_kit.git
+    cd debug_kit
+    php ~/composer.phar install
+    php ~/phpunit.phar
 
 Filtering Test Cases
 --------------------
@@ -1271,8 +1289,7 @@ present in your ``composer.json`` file::
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "tests",
-            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
         }
     }
 

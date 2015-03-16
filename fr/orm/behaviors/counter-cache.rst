@@ -9,7 +9,10 @@ Souvent les applications web doivent afficher le nombre d'objets liés. Par
 exemple, quand vous montrez une liste d'articles, vous voulez peut-être
 afficher combien de commentaires ils ont. Ou quand vous montrez un utilisateur,
 vous voulez montrer le nombre d'amis/de followers qu'il a. Le behavior
-CounterCache est présent pour ces situations.
+CounterCache est présent pour ces situations. CounterCache va mettre à jour
+un champ dans les models associés assignés dans les options quand il est
+invoqué. Les champs doivent exister dans la base de données et être de type
+INT.
 
 Usage Basique
 =============
@@ -62,6 +65,20 @@ un tableau de conditions pour trouver les enregistrements à la place::
         'Articles' => [
             'comment_count' => [
                 'conditions' => ['Comments.spam' => false]
+            ]
+        ]
+    ]);
+
+Si vous voulez que CounterCache mette à jour plusieurs champs, par exemple
+deux champs qui montrent un compte conditionnel et un compte basique,
+vous pouvez ajouter ces champs dans le tableau::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => ['comment_count',
+            'published_comment_count' => [
+                'conditions' => [
+                    'findType' => 'published'
+                ]
             ]
         ]
     ]);

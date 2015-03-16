@@ -22,14 +22,14 @@ Conditions requises
     défaut.
 
     Dans XAMPP, l'extension intl est incluse mais vous devez décommenter
-    ``extension=php_intl.dll`` dans ``php.ini`` et redémarrer le serveur dans
+    ``extension=php_intl.dll`` dans **php.ini** et redémarrer le serveur dans
     le Panneau de Contrôle de XAMPP.
 
     Dans WAMP, l'extension intl est "activée" par défaut mais ne fonctionne pas.
     Pour la faire fonctionner, vous devez aller dans le dossier php (par défaut)
-    ``C:\wamp\bin\php\php{version}``, copiez tous les fichiers qui ressemblent
-    à ``icu***.dll`` et collez les dans le répertoire bin d'apache
-    ``C:\wamp\bin\apache\apache{version}\bin``. Ensuite redémarrez tous les
+    **C:\\wamp\\bin\\php\\php{version}**, copiez tous les fichiers qui
+    ressemblent à **icu*.dll** et collez les dans le répertoire bin d'apache
+    **C:\\wamp\\bin\\apache\\apache{version}\\bin**. Ensuite redémarrez tous les
     services et tout devrait être OK.
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
@@ -88,7 +88,7 @@ Rester à jour avec les derniers changements de CakePHP
 ------------------------------------------------------
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP, vous
-pouvez ajouter ce qui suit dans le ``composer.json`` de votre application::
+pouvez ajouter ce qui suit dans le **composer.json** de votre application::
 
     "require": {
         "cakephp/cakephp": "3.0.*-dev"
@@ -101,21 +101,21 @@ changements de la branche choisie.
 Permissions
 ===========
 
-CakePHP utilise le répertoire ``tmp`` pour un certain nombre d'opérations.
+CakePHP utilise le répertoire **tmp** pour un certain nombre d'opérations.
 Les descriptions de Model, les vues mises en cache, et les informations de
 session en sont juste quelques exemples.
-Le répertoire ``logs`` est utilisé pour écrire les fichiers de log par le
+Le répertoire **logs** est utilisé pour écrire les fichiers de log par le
 moteur par défaut ``FileLog``.
 
-De même, assurez-vous que les répertoires ``logs``, ``tmp`` et tous ses
+De même, assurez-vous que les répertoires **logs**, **tmp** et tous ses
 sous-répertoires dans votre installation Cake sont accessible en écriture pour
 l'utilisateur du serveur web. Le processus d'installation avec Composer va
-rendre ``tmp`` et ses sous-dossiers accessibles en écriture pour récupérer et
+rendre **tmp** et ses sous-dossiers accessibles en écriture pour récupérer et
 lancer rapidement, mais vous pouvez mettre à jour les permissions pour une
 meilleur sécurité et les garder en écriture seulement pour l'utilisateur du
 serveur web.
 
-Un problème habituel est que les répertoires ``logs`` et ``tmp`` et les
+Un problème habituel est que les répertoires **logs** et **tmp** et les
 sous-répertoires doivent être accessible en écriture à la fois pour le serveur
 web et et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
 votre serveur web est différent à partir de l'utilisateur en ligne de commande,
@@ -134,20 +134,20 @@ Serveur de Développement
 Une installation "développement" est la méthode la plus rapide pour lancer
 CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour exécuter
 le serveur web PHP intégré qui va rendre votre application disponible sur
-``http://host:port``. A partir du répertoire de l'app, lancez::
+**http://host:port**. A partir du répertoire de l'app, lancez::
 
     bin/cake server
 
 Par défaut, sans aucun argument fourni, cela va afficher votre application
-sur ``http://localhost:8765/``.
+sur **http://localhost:8765/**.
 
-Si vous avez quelque chose qui rentre en conflit avec ``localhost`` ou le
-``port 8765``, vous pouvez dire à la console CakePHP de lancer le seveur web
+Si vous avez quelque chose qui rentre en conflit avec **localhost** ou le
+port 8765, vous pouvez dire à la console CakePHP de lancer le serveur web
 sur un hôte spécifique et/ou un port utilisant les arguments suivants::
 
     bin/cake server -H 192.168.13.37 -p 5673
 
-Cela affichera votre application sur ``http://192.168.13.37:5673/``.
+Cela affichera votre application sur **http://192.168.13.37:5673/**.
 
 C'est tout! Votre application CakePHP est ok et elle est lancée sans avoir
 à configurer un serveur web.
@@ -300,7 +300,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
    Si votre site Cakephp a toujours des problèmes avec mod\_rewrite,
    essayez de modifier les paramètres pour les Hôtes Virtuels. Si vous
-   êtes sur Ubuntu, modifiez le fichier /etc/apache2/sites-available/default
+   êtes sur Ubuntu, modifiez le fichier **/etc/apache2/sites-available/default**
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
    que ``AllowOverride None`` a été changé en ``AllowOverride All``, donc vous
    devez avoir::
@@ -455,7 +455,7 @@ Je ne veux / ne peux utiliser l'URL rewriting
 
 Si vous ne voulez pas ou ne pouvez pas avoir mod\_rewrite (ou tout autre
 module compatible) sur votre serveur, vous devrez utiliser les belles URLs
-intégrées à CakePHP. Dans ``config/app.php``, décommentez la ligne qui
+intégrées à CakePHP. Dans **config/app.php**, décommentez la ligne qui
 ressemble à::
 
     'App' => [

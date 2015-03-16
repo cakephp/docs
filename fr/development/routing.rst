@@ -456,6 +456,15 @@ du controller Pages en utilisant la route suivante::
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
+When creating prefix routes, you can set additional route parameters using
+the ``$options`` argument::
+
+    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+        // Routes connected here are prefixed with '/admin' and
+        // have the 'param' routing key set.
+        $routes->connect('/:controller');
+    });
+
 Vous pouvez aussi définir les préfixes dans les scopes de plugin::
 
     Router::plugin('DebugKit', function ($routes) {
@@ -614,10 +623,10 @@ extensions de fichiers correspondant, puis d'analyser le reste. Si vous
 souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
 un scope comme ceci::
 
-    Router::scope('/api', function ($routes) {
+    Router::scope('/page', function ($routes) {
         $routes->extensions(['json', 'xml']);
         $routes->connect(
-            '/page/:title',
+            '/:title',
             ['controller' => 'Pages', 'action' => 'view'],
             [
                 'pass' => ['title']
@@ -734,11 +743,44 @@ est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour renommer
 vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'update', 'add' => 'create']
+        'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-Le code ci-dessus va utiliser ``update`` pour l'action update, et ``create`` au
+Le code ci-dessus va utiliser ``edit`` pour l'action update, et ``create`` au
 lieu de ``add``.
+
+Mapping Additional Resource Routes
+----------------------------------
+
+You can map additional resource methods using the ``map`` option::
+
+     $routes->resources('Articles', [
+        'map' => [
+            'deleteAll' => [
+                'action' => 'deleteAll',
+                'method' => 'DELETE'
+            ]
+        ]
+     ]);
+     // This would connect /articles/deleteAll
+
+In addition to the default routes, this would also connect a route for
+`/articles/delete_all`. By default the path segment will match the key name. You
+can use the 'path' key inside the resource definition to customize the path name::
+
+
+    $routes->resources('Articles', [
+        'map' => [
+            'updateAll' => [
+                'action' => 'updateAll',
+                'method' => 'DELETE',
+                'path' => '/update_many'
+            ],
+        ]
+    ]);
+    // This would connect /articles/update_many
+
+If you define 'only' and 'map', make sure that your mapped methods are also in the 'only' list.
 
 .. _custom-rest-routing:
 

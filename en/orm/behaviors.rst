@@ -241,6 +241,13 @@ rename/remove finder methods when adding a behavior to a table. For example::
         ]
     ]);
 
+Removing Loaded Behaviors
+=========================
+
+To remove a behavior from your table you can call the ``removeBehavior`` method::
+
+    // Remove the loaded behavior
+    $this->removeBehavior('Sluggable');
 
 Accessing Loaded Behaviors
 ==========================

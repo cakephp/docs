@@ -49,3 +49,11 @@ FlashComponent::
 
 Pour plus d'informations sur le tableau d'options disponibles, consultez la
 section :doc:`FlashComponent </controllers/components/flash>`.
+
+Les Messages Flash et les themes
+================================
+
+FlashHelper utilise des elements normaux pour afficher les messages et va donc
+correspondre à n'importe quel thème que vous avez éventuellement spécifié. Donc
+quand votre thème a un fichier ``src/Template/Element/Flash/error.ctp``, il sera
+utilisé, comme avec tout Element et View.
