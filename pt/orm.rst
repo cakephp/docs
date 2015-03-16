@@ -11,7 +11,7 @@ principais. Os primeiros são **repositories (repositórios)** ou **table object
 (objetos de tabela)**. Estes objetos fornecem acesso a coleções de dados. Eles
 permitem a você salvar novos registros, modificar/deletar os que já existem,
 definir relacionamentos, e executar operações em massa. O segundo tipo de
-objetos são as **entities (entidades)**. Entities representam recordes
+objetos são as **entities (entidades)**. Entities representam registros
 individuais e permitem a você definir comportamento em nível de linha/registro
 e funcionalidades.
 
