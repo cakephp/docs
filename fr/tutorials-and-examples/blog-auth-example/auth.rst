@@ -137,7 +137,7 @@ la connexion et la déconnexion, et aussi d'autoriser aux utilisateurs connecté
 les actions que l'on souhaite leur voir autorisées.
 
 Pour ajouter ce component à votre application, ouvrez votre fichier
-``src/Controller/AppController.php`` et ajoutez les lignes suivantes::
+**src/Controller/AppController.php** et ajoutez les lignes suivantes::
 
     // src/Controller/AppController.php
 
@@ -218,7 +218,7 @@ utilisateurs et de réaliser l'action connexion et deconnexion::
 
 Le hash du mot de passe n'est pas encore fait, nous avons besoin d'une classe
 Entity pour notre User afin de gérer sa propre logique spécifique. Créons
-fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
+fichier entity dans **src/Model/Entity/User.php** et ajoutons ce qui suit::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -242,7 +242,7 @@ fichier entity dans ``src/Model/Entity/User.php`` et ajoutons ce qui suit::
 Ainsi, maintenant à chaque fois qu'un utilisateur est sauvegardé, le mot de
 passe est hashé en utilisant la classe ``DefaultPasswordHasher``. Il nous
 manque juste un fichier template de vue pour la fonction de connexion. Ouvrez
-votre fichier ``src/Template/Users/login.ctp`` et ajoutez les lignes suivantes:
+votre fichier **src/Template/Users/login.ctp** et ajoutez les lignes suivantes:
 
 .. code-block:: php
 

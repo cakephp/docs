@@ -133,8 +133,8 @@ da action. Retornando ao nosso exemplo da padaria online, nosso
     }
 
 Os arquivos de template para estas actions seriam
-``src/Template/Recipes/view.ctp``, ``src/Template/Recipes/share.ctp`` e
-``src/Template/Recipes/search.ctp``. A nomenclatura convencional para arquivos
+**src/Template/Recipes/view.ctp**, **src/Template/Recipes/share.ctp** e
+**src/Template/Recipes/search.ctp**. A nomenclatura convencional para arquivos
 view é a versão lowercased (minúscula) e underscored (sem sublinhado) do nome
 da action.
 

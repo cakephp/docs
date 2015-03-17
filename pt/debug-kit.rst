@@ -94,10 +94,10 @@ na depuração de suas aplicações.
 Criando uma Panel Class
 -----------------------
 
-Panel Classes precisam ser colocadas no diretório ``src/Panel``. O
+Panel Classes precisam ser colocadas no diretório **src/Panel**. O
 nome do arquivo deve combinar com o nome da classe, então a classe
 ``MyCustomPanel`` deveria ter o nome de arquivo
-``src/Panel/MyCustomPanel.php``::
+**src/Panel/MyCustomPanel.php**::
 
     namespace App\Panel;
 
@@ -133,7 +133,7 @@ Cada painel deve ter um elemento view que renderiza o conteúdo do mesmo.
 O nome do elemento deve ser sublinhado e flexionado a partir do nome da classe.
 Por exemplo ``SessionPanel`` possui um elemento nomeado ``session_panel.ctp``, e
 SqllogPanel possui um elemento nomeado ``sqllog_panel.ctp``. Estes elementos
-devem estar localizados na raiz do seu diretório ``src/Template/Element``.
+devem estar localizados na raiz do seu diretório **src/Template/Element**.
 
 Títulos personalizados e Elementos
 ----------------------------------

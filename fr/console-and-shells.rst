@@ -221,7 +221,7 @@ Vous pouvez utiliser les tâches à partir de plugins en utilisant la
 ``Shell/Task/`` dans les fichiers nommées d'après leur
 classe. Ainsi si vous étiez sur le point de créer une nouvelle
 tâche 'FileGenerator', vous pourriez créer
-``src/Shell/Task/FileGeneratorTask.php``.
+**src/Shell/Task/FileGeneratorTask.php**.
 
 Chaque tâche doit au moins intégrer une méthode ``main()``. Le
 ShellDispatcher appellera cette méthode quand la tâche est invoquée.

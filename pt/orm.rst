@@ -52,7 +52,7 @@ configuração. As convenções do CakePHP nos permitem pular alguns códigos cl
 e permitir que o framework insera classes básicas enquanto sua aplicação não
 criou uma classe concreta. Se quiséssemos customizar nossa classe ArticlesTable
 adicionando algumas associações ou definir alguns métodos adicionais, deveriamos
-acrescentar o seguinte a ``src/Model/Table/ArticlesTable.php`` após a tag de
+acrescentar o seguinte a **src/Model/Table/ArticlesTable.php** após a tag de
 abertura ``<?php``::
 
     namespace App\Model\Table;
@@ -77,7 +77,7 @@ Agora que temos uma classe de tabela concreta, nós provavelmente vamos querer
 usar uma classe de entidade concreta. As classes de entidade permitem definir
 métodos de acesso, métodos mutantes, definir lógica personalizada para os
 registros individuais e muito mais. Vamos começar adicionando o seguinte para
-``src/Model/Entity/Article.php`` após a tag de abertura ``<?php``::
+**src/Model/Entity/Article.php** após a tag de abertura ``<?php``::
 
     namespace App\Model\Entity;
 

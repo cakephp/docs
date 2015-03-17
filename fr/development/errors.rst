@@ -32,7 +32,7 @@ personnaliser la gestion des erreurs pour votre application:
   générées.
 * ``exceptionRenderer`` - string - La classe responsable de rendre les
   exceptions non interceptées. Si vous choisissez une classe personnalisée,
-  vous devrez placer le fichier de cette classe dans le dossier ``src/Error``.
+  vous devrez placer le fichier de cette classe dans le dossier **src/Error**.
   Cette classe doit implémenter une méthode ``render()``.
 * ``log`` - boolean - Si ``true``, les exceptions et leur stack traces seront
   loguées vers :php:class:`Cake\\Log\\Log`.

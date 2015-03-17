@@ -89,7 +89,7 @@ Les gestionnaires de flux de log peuvent faire partie de votre application,
 ou parti d'un plugin. Si par exemple vous avez un enregistreur de logs de
 base de données appelé ``DatabaseLog``. Comme faisant partie de votre
 application il devrait être placé dans
-``src/Log/Engine/DatabaseLog.php``. Comme faisant partie d'un plugin
+**src/Log/Engine/DatabaseLog.php**. Comme faisant partie d'un plugin
 il devrait être placé dans
 ``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. Pour configurer des
 flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::config()`. Par

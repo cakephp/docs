@@ -25,7 +25,7 @@ The App View
 
 ``AppView`` est la classe View par défaut de votre application. ``AppView``
 étend lui même la classe ``Cake\View\View`` de CakePHP et est définie dans
-``src/View/AppView.php`` comme suit:
+**src/View/AppView.php** comme suit:
 
 .. code-block:: php
 
@@ -75,11 +75,11 @@ dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
 utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
 fera le pont entre votre langage de template et CakePHP.
 
-Un fichier de template est stocké dans ``src/Template/``, dans un sous-dossier
+Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
-``src/Template/Products/view.ctp``.
+**src/Template/Products/view.ctp**.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différents usages qui seront présentés dans ce
@@ -359,12 +359,12 @@ Tout ce que vous voulez voir dans toutes vos vues devra être placé dans un
 layout.
 
 Le fichier de layout par défaut de CakePHP est placé dans
-``src/Template/Layout/default.ctp``. Si vous voulez changer entièrement le
+**src/Template/Layout/default.ctp**. Si vous voulez changer entièrement le
 look de votre application, alors c'est le bon endroit pour commencer, parce que
 le code de vue de rendu du controller est placé à l'intérieur du layout par
 défaut quand la page est rendue.
 
-Les autres fichiers de layout devront être placés dans ``src/Template/Layout``.
+Les autres fichiers de layout devront être placés dans **src/Template/Layout**.
 Quand vous créez un layout, vous devez dire à CakePHP où placer
 la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple de ce à quoi un layout pourrait
@@ -421,7 +421,7 @@ d'un fichier de vue::
     $this->assign('title', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
-le répertoire ``src/Template/Layout``, et passez de l'un à l'autre depuis les
+le répertoire **src/Template/Layout**, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 
@@ -503,7 +503,7 @@ pour rendre une vue plus lisible, en plaçant le rendu d'éléments répétitifs
 dans ses propres fichiers. Ils peuvent aussi vous aider à réutiliser des
 fragments de contenu dans votre application.
 
-Les elements se trouvent dans le dossier ``src/Template/Element/``, et ont une
+Les elements se trouvent dans le dossier **src/Template/Element/**, et ont une
 extension .ctp. Ils sont affichés en utilisant la méthode element de la vue::
 
     echo $this->element('helpbox');
@@ -521,7 +521,7 @@ Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
 de template). Dans l'exemple ci-dessus, le fichier
-``src/Template/Element/helpbox.ctp`` peut utiliser la variable ``$helptext``::
+**src/Template/Element/helpbox.ctp** peut utiliser la variable ``$helptext``::
 
     // A l'intérieur de src/Template/Element/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
@@ -686,8 +686,8 @@ nouveaux types de données de vue, ou ajouter de la logique supplémentaire
 de rendu de vue personnalisée. Comme la plupart des components de CakePHP, les
 classes de vue ont quelques conventions:
 
-* Les fichiers de classe de View doivent être mis dans ``src/View``. Par
-  exemple ``src/View/PdfView.php``.
+* Les fichiers de classe de View doivent être mis dans **src/View**. Par
+  exemple **src/View/PdfView.php**.
 * Les classes de View doivent être suffixées avec ``View``. Par exemple
   ``PdfView``.
 * Quand vous référencez les noms de classe de vue, vous devez omettre le

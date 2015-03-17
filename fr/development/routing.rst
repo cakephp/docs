@@ -445,7 +445,7 @@ peuvent être encapsulés via héritage :doc:`/controllers/components`, ou trait
 En utilisant notre exemple des utilisateurs, accéder à l'url
 ``/admin/users/edit/5`` devrait appeler la méthode ``edit`` de notre
 ``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
-Le fichier de vue utilisé serait ``src/Template/Admin/Users/edit.ctp``.
+Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.ctp**.
 
 Vous pouvez faire correspondre l'URL /admin à votre action ``index``
 du controller Pages en utilisant la route suivante::

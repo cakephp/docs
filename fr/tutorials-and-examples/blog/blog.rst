@@ -85,7 +85,7 @@ web. Si vous avez utilisé Composer pour l'installation, ceci a du être fait po
 "Permissions set on <folder>". Si vous avez plutôt un message d'erreur ou
 voulez le faire manuellement, la meilleur façon de le faire est de trouver
 sous quel utilisateur votre serveur web tourne en faisant
-(``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire ``src/tmp``
+(``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire **src/tmp**
 pour cet utilisateur. La commande finale que vous pouvez lancer (dans \*nix)
 pourrait ressembler à ceci::
 

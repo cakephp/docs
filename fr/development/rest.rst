@@ -111,7 +111,7 @@ variables de vue que ``XmlView`` doit sérialiser en XML.
 Si nous voulons modifier les données avant qu'elles soient converties en XML,
 nous ne devons pas définir la variable de vue ``_serialize``, et à la place
 utiliser les fichiers de template. Nous plaçons les vues REST pour notre
-RecipesController à l'intérieur de ``src/Template/Recipes/xml``. Nous pouvons aussi
+RecipesController à l'intérieur de **src/Template/Recipes/xml**. Nous pouvons aussi
 utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces vues.
 Voici ce que notre vue index pourrait ressembler à::
 

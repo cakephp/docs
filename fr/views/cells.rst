@@ -20,8 +20,8 @@ de ``requestAction()``.
 Créer une Cell
 ==============
 
-Pour créer une cell, vous définissez une classe dans ``src/View/Cell``, et un
-template dans ``src/Template/Cell/``. Dans cet exemple, nous ferons une
+Pour créer une cell, vous définissez une classe dans **src/View/Cell**, et un
+template dans **src/Template/Cell/**. Dans cet exemple, nous ferons une
 cell pour afficher le nombre de messages dans la boite de message de
 notification de l'utilisateur. D'abord, créons le fichier de classe.
 Son contenu devrait ressembler à ceci::
@@ -39,7 +39,7 @@ Son contenu devrait ressembler à ceci::
 
     }
 
-Sauvegardez ce fichier dans ``src/View/Cell/InboxCell.php``. Comme vous pouvez
+Sauvegardez ce fichier dans **src/View/Cell/InboxCell.php**. Comme vous pouvez
 le voir, comme pour les autres classes dans CakePHP, les Cells ont quelques
 conventions:
 
@@ -51,7 +51,7 @@ conventions:
 Nous avons ajouté une méthode vide ``display()`` à notre cell, c'est la méthode
 conventionnelle par défaut pour le rendu de cell. Nous couvrirons la façon
 d'utiliser les autres méthodes plus tard dans la doc. Maintenant, créons le
-fichier ``src/Template/Cell/Inbox/display.ctp``. Ce sera le template pour notre
+fichier **src/Template/Cell/Inbox/display.ctp**. Ce sera le template pour notre
 nouvelle cell.
 
 Vous pouvez générer ce bout de code rapidement en utilisant ``bake``::

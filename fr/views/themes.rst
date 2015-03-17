@@ -26,14 +26,14 @@ exemple, le theme ci-dessus se trouvera dans
 ``plugins/AutreExemple/src/Template``. Il est important de se rappeler que
 CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
 cela, la structure de dossier dans le dossier ``plugins/AutreExemple/src/Template``
-est exactement la même que ``src/Template/``.
+est exactement la même que **src/Template/**.
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
 trouvera dans ``plugins/AutreExemple/src/Template/Posts/edit.ctp``. Les fichiers de
 layout se trouveront dans ``plugins/AutreExemple/src/Template/Layout/``.
 
 Si un fichier de template ne peut pas être trouvé dans le theme, CakePHP va essayer
-de le trouver dans le dossier ``src/Template/``. De cette façon, vous pouvez
+de le trouver dans le dossier **src/Template/**. De cette façon, vous pouvez
 créer les fichiers de template principaux et simplement les surcharger au cas par
 cas dans votre dossier theme.
 

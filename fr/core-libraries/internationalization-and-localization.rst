@@ -40,7 +40,7 @@ Fichiers de Langues
 Les traductions peuvent être mises à disposition en utilisant des fichiers
 de langue stockés dans votre application. Le format par défaut pour ces
 fichiers est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
-Ces fichiers doivent être placés dans ``src/Locale/`` et dans ce répertoire,
+Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire,
 il devrait y avoir un sous-dossier par langue que l'application doit prendre
 en charge::
 
@@ -421,7 +421,7 @@ Par exemple, si vous vouliez charger les messages de traduction en utilisant
         }
     }
 
-Le fichier doit être créé dans le dossier ``src/I18n/Parser`` de votre
+Le fichier doit être créé dans le dossier **src/I18n/Parser** de votre
 application. Ensuite, créez les fichiers de traduction sous
 ``src/Locale/fr_FR/animals.yaml``
 
