@@ -254,6 +254,7 @@ implement the following methods:
 * toPHP
 * toDatabase
 * toStatement
+* marshal
 
 An easy way to fulfill the basic interface is to extend
 :php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
@@ -274,6 +275,14 @@ we could make the following type class::
         {
             if ($value === null) {
                 return null;
+            }
+            return json_decode($value, true);
+        }
+
+        public function marshal($value)
+        {
+            if (is_array($value) || $value === null) {
+                return $value;
             }
             return json_decode($value, true);
         }
