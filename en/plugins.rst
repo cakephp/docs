@@ -254,12 +254,12 @@ Plugin Controllers
 ==================
 
 Controllers for our ContactManager plugin will be stored in
-``plugins/ContactManager/src/Controller/``. Since the main thing we'll
+**plugins/ContactManager/src/Controller/**. Since the main thing we'll
 be doing is managing contacts, we'll need a ContactsController for
 this plugin.
 
 So, we place our new ContactsController in
-``plugins/ContactManager/src/Controller`` and it looks like so::
+**plugins/ContactManager/src/Controller** and it looks like so::
 
     // plugins/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
@@ -288,7 +288,7 @@ following::
     Plugin::load('ContactManager', ['routes' => true]);
 
 Then create the ContactManager plugin routes. Put the following into
-``plugins/ContactManager/config/routes.php``::
+**plugins/ContactManager/config/routes.php**::
 
     <?php
     use Cake\Routing\Router;
@@ -327,7 +327,7 @@ plugin specific route files.
 Plugin Models
 =============
 
-Models for the plugin are stored in ``plugins/ContactManager/src/Model``.
+Models for the plugin are stored in **plugins/ContactManager/src/Model**.
 We've already defined a ContactsController for this plugin, so let's
 create the table and entity for that controller::
 
@@ -430,7 +430,7 @@ Contacts controller you could make the following file::
     src/Template/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-``plugins/ContactManager/src/Template/Contacts/index.ctp``.
+**plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
 .. _plugin-assets:
 

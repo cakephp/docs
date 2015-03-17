@@ -94,7 +94,7 @@ Will output:
     <link rel="stylesheet" href="/css/menu.css" />
 
 You can include CSS files from any loaded plugin using
-:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/css/toolbar.css``
+:term:`plugin syntax`. To include **plugins/DebugKit/webroot/css/toolbar.css**
 you could use the following::
 
     echo $this->Html->css('DebugKit.toolbar.css');
@@ -278,7 +278,7 @@ Will output:
     <img src="http://example.com/img/logo.jpg" alt="" />
 
 You can include image files from any loaded plugin using
-:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/img/icon.png``
+:term:`plugin syntax`. To include **plugins/DebugKit/webroot/img/icon.png**
 You could use the following::
 
     echo $this->Html->image('DebugKit.icon.png');
@@ -514,7 +514,7 @@ In your layout you can output all the script tags added to 'scriptBottom'::
     echo $this->fetch('scriptBottom');
 
 You can include script files from any loaded plugin using
-:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/js/toolbar.js``
+:term:`plugin syntax`. To include **plugins/DebugKit/webroot/js/toolbar.js**
 You could use the following::
 
     echo $this->Html->script('DebugKit.toolbar.js');
