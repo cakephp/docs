@@ -133,7 +133,7 @@ the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
 for requiring login for certain actions, handling user login and logout, and
 also authorizing logged-in users to the actions they are allowed to reach.
 
-To add this component to your application open your ``src/Controller/AppController.php``
+To add this component to your application open your **src/Controller/AppController.php**
 file and add the following lines::
 
     // src/Controller/AppController.php
@@ -213,7 +213,7 @@ the users add function and implement the login and logout action::
     }
 
 Password hashing is not done yet, we need an Entity class for our User in order
-to handle its own specific logic. Create the ``src/Model/Entity/User.php`` entity file
+to handle its own specific logic. Create the **src/Model/Entity/User.php** entity file
 and add the following::
 
     // src/Model/Entity/User.php
@@ -240,7 +240,7 @@ and add the following::
 
 Now every time the password property is assigned to the user it will be hashed
 using the ``DefaultPasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your ``src/Template/Users/login.ctp`` file
+file for the login function. Open up your **src/Template/Users/login.ctp** file
 and add the following lines:
 
 .. code-block:: php

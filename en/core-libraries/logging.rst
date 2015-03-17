@@ -81,7 +81,7 @@ Creating Log Adapters
 Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLog``. As part of your application it would be placed in
-``src/Log/Engine/DatabaseLog.php``. As part of a plugin it would be placed in
+**src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
 ``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. To configure log
 adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
 configuring our DatabaseLog would look like::

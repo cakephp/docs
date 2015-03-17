@@ -215,8 +215,8 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``src/Template/Email/html/welcome.ctp`` for the view
-and ``src/Template/Layout/Email/html/fancy.ctp`` for the layout. You can
+The above would use **src/Template/Email/html/welcome.ctp** for the view
+and **src/Template/Layout/Email/html/fancy.ctp** for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -228,10 +228,10 @@ send multipart templated email messages as well::
 
 This would use the following template files:
 
-* ``src/Template/Email/text/welcome.ctp``
-* ``src/Template/Layout/Email/text/fancy.ctp``
-* ``src/Template/Email/html/welcome.ctp``
-* ``src/Template/Layout/Email/html/fancy.ctp``
+* **src/Template/Email/text/welcome.ctp**
+* **src/Template/Layout/Email/text/fancy.ctp**
+* **src/Template/Email/html/welcome.ctp**
+* **src/Template/Layout/Email/html/fancy.ctp**
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -340,7 +340,7 @@ Creating Custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``src/Network/Email/ExampleTransport.php`` (where Example is the name of your
+**src/Network/Email/ExampleTransport.php** (where Example is the name of your
 transport). To start off your file should look like::
 
     use Cake\Network\Email\AbstractTransport;

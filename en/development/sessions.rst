@@ -142,7 +142,7 @@ The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
 expect to find your class in the ``Network\Session`` namespace. For example, if
 you had a ``AppSessionHandler`` class,  the file should be
-``src/Network/Session/AppSessionHandler.php``, and the class name should be
+**src/Network/Session/AppSessionHandler.php**, and the class name should be
 ``App\\Network\\Session\\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
@@ -235,7 +235,7 @@ example we'll create a session handler that stores sessions both in the Cache
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
-``src/Network/Session/ComboSession.php``. The class should look
+**src/Network/Session/ComboSession.php**. The class should look
 something like::
 
     namespace App\Network\Session;

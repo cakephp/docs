@@ -29,7 +29,7 @@ your application:
   finding where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
   exceptions. If you choose a custom class you should place the file for that
-  class in ``src/Error``. This class needs to implement a ``render()`` method.
+  class in **src/Error**. This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When ``true``, exceptions + their stack traces will be
   logged to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
