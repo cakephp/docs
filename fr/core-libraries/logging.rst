@@ -91,7 +91,7 @@ base de données appelé ``DatabaseLog``. Comme faisant partie de votre
 application il devrait être placé dans
 **src/Log/Engine/DatabaseLog.php**. Comme faisant partie d'un plugin
 il devrait être placé dans
-``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. Pour configurer des
+**plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. Pour configurer des
 flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::config()`. Par
 example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 

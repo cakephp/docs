@@ -654,7 +654,7 @@ Contacts::
 Sont équivalents et résulteront au même element rendu.
 
 Pour les elements dans le sous-dossier d'un plugin
-(e.g., ``plugins/Contacts/sidebar/helpbox.ctp``), utilisez ce qui suit::
+(e.g., **plugins/Contacts/sidebar/helpbox.ctp**), utilisez ce qui suit::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
