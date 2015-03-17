@@ -282,7 +282,7 @@ So, we place our new ContactsController in
     AppController.
 
 Before you can access your controllers, you'll need to ensure the plugin is
-loaded and connect some routes. In your ``config/bootstrap.php`` add the
+loaded and connect some routes. In your **config/bootstrap.php** add the
 following::
 
     Plugin::load('ContactManager', ['routes' => true]);
@@ -479,7 +479,7 @@ This is only recommended for development. In production you should
 If you are not using the helpers, you can prepend /plugin_name/ to the beginning
 of a the URL for an asset within that plugin to serve it. Linking to
 '/contact_manager/js/some_file.js' would serve the asset
-``plugins/ContactManager/webroot/js/some_file.js``.
+**plugins/ContactManager/webroot/js/some_file.js**.
 
 Components, Helpers and Behaviors
 =================================

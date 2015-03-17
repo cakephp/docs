@@ -291,7 +291,7 @@ Ainsi, nous mettons notre nouveau ContactsController dans
     parente.
 
 Avant d'accéder à vos controllers, vous devrez vous assurez que le plugin est
-chargé et connecte des routes. Dans votre ``config/bootstrap.php``, ajoutez
+chargé et connecte des routes. Dans votre **config/bootstrap.php**, ajoutez
 ce qui suit::
 
     Plugin::load('ContactManager', ['routes' => true]);
@@ -496,7 +496,7 @@ améliorer la performance.
 Si vous n'utilisez pas les helpers, vous pouvez préfixer /plugin_name/ au
 début de l'URL pour servir un asset du plugin . Lier avec
 '/contact_manager/js/some_file.js' servirait l'asset
-``plugins/ContactManager/webroot/js/some_file.js``.
+**plugins/ContactManager/webroot/js/some_file.js**.
 
 Components, Helpers et Behaviors
 ================================

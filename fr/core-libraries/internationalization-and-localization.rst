@@ -97,7 +97,7 @@ plus.
 Définir la Locale par Défaut
 ----------------------------
 
-La ``locale`` par défaut se détermine dans le fichier ``config/bootstrap.php``
+La ``locale`` par défaut se détermine dans le fichier **config/bootstrap.php**
 via::
 
     ini_set('intl.default_locale', 'fr_FR');
@@ -373,7 +373,7 @@ un seul domaine et une seule locale::
         return $package;
     });
 
-Le code ci-dessus peut être ajouté à votre ``config/bootstrap.php`` pour
+Le code ci-dessus peut être ajouté à votre **config/bootstrap.php** pour
 que les traductions soient ajoutées avant qu'une fonction de traduction ne soit
 utilisée. Le minimum absolu nécessaire pour créer un traducteur est que la
 fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
@@ -423,7 +423,7 @@ Par exemple, si vous vouliez charger les messages de traduction en utilisant
 
 Le fichier doit être créé dans le dossier **src/I18n/Parser** de votre
 application. Ensuite, créez les fichiers de traduction sous
-``src/Locale/fr_FR/animals.yaml``
+**src/Locale/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 

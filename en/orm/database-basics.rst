@@ -10,11 +10,11 @@ reflection/generation, a flexible type system and more.
 Configuration
 =============
 
-By convention database connections are configured in ``config/app.php``. The
+By convention database connections are configured in **config/app.php**. The
 connection information defined in this file is fed into
 :php:class:`Cake\\Datasource\\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
-``config/app.default.php``. A sample connection configuration would look
+**config/app.default.php**. A sample connection configuration would look
 like::
 
     'Datasources' => [

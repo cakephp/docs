@@ -286,8 +286,8 @@ directement ``Controller::render()``. Une fois que vous avez appelé
         }
     }
 
-Cela rendrait ``src/Template/Posts/custom_file.ctp`` au lieu de
-``src/Template/Posts/my_action.ctp``.
+Cela rendrait **src/Template/Posts/custom_file.ctp** au lieu de
+**src/Template/Posts/my_action.ctp**.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -303,7 +303,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
+Cela rendrait la vue **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Rediriger vers d'Autres Pages
 =============================

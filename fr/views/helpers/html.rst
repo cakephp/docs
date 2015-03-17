@@ -72,7 +72,7 @@ Si la clé 'rel' dans le tableau ``$options`` est définie à 'import',
 la feuille de style sera importée.
 
 Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
-le répertoire ``webroot/css`` si le chemin ne commence pas par un '/'. ::
+le répertoire **webroot/css** si le chemin ne commence pas par un '/'. ::
 
     echo $this->Html->css('forms');
 
@@ -102,7 +102,7 @@ vous pouvez utiliser ce qui suit::
 
 Si vous voulez inclure un fichier CSS qui partage un nom avec un plugin
 chargé vous pouvez faire ce qui suit. Par exemple vous avez un plugin
-``Blog``, et souhaitez inclure également ``webroot/css/Blog.common.css``
+``Blog``, et souhaitez inclure également **webroot/css/Blog.common.css**
 vous pouvez faire ceci::
 
     echo $this->Html->css('Blog.common.css', ['plugin' => false]);
@@ -240,7 +240,7 @@ Lier des Images
 .. php:method:: image(string $path, array $options = [])
 
 Créé une balise image formatée. Le chemin fourni devra être relatif à
-``webroot/img/``. ::
+**webroot/img/**. ::
 
     echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -286,7 +286,7 @@ utilisant :term:`syntaxe de plugin`. Pour inclure
 Si vous voulez inclure un fichier image qui partage un nom
 avec un plugin chargé vous pouvez faire ce qui suit. Par exemple si vous
 avez un plugin ``Blog``, et si vous voulez également inclure
-``webroot/js/Blog.icon.png``, vous feriez::
+**webroot/js/Blog.icon.png**, vous feriez::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
@@ -522,7 +522,7 @@ la :term:`syntaxe de plugin`. Pour inclure
 
 Si vous voulez inclure un fichier de script qui partage un nom de fichier
 avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez
-Un plugin ``Blog``, et voulez inclure également ``webroot/js/Blog.plugins.js``,
+Un plugin ``Blog``, et voulez inclure également **webroot/js/Blog.plugins.js**,
 vous feriez::
 
     echo $this->Html->script('Blog.plugins.js', ['plugin' => false]);

@@ -104,10 +104,10 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-``src/Template/People/get_ready.ctp``.
+**src/Template/People/get_ready.ctp**.
 
 The basic pattern is
-``src/Template/Controller/underscored_function_name.ctp``.
+**src/Template/Controller/underscored_function_name.ctp**.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers

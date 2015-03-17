@@ -20,7 +20,7 @@ l'extension .rss demandée à ``posts/index`` pour en faire votre URL
 ``posts/index.rss``. Avant d'aller plus loin en essayant d'initialiser et
 de lancer notre service Web, nous avons besoin de faire un certain nombre
 de choses. Premièrement, le parsing d'extensions doit être activé dans
-``config/routes.php``::
+**config/routes.php**::
 
     Router::extensions('rss');
 

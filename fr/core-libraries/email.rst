@@ -49,9 +49,9 @@ Configuration
 
 La Configuration par défaut pour ``Email`` est créé en utilisant ``config()`` et
 ``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
-le fichier ``config/app.php``. Le fichier ``config/app.php.default`` est
+le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
-d'email dans ``config/app.php``. ``Email`` peut être utilisé sans cela
+d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
 et utilise les méthodes séparement pour définir toutes les configurations
 ou charger un tableau de configs.
 
@@ -295,7 +295,7 @@ d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
 modifier le plugin Blog. Le fichier de template devra être créé dans le
 chemin suivant:
-``src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
+**src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp**.
 
 Envoyer les pièces jointes
 ==========================

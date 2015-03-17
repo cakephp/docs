@@ -622,7 +622,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 
-CakePHP's routing is found in ``config/routes.php``. You'll want
+CakePHP's routing is found in **config/routes.php**. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this:
 

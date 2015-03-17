@@ -1462,7 +1462,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         'templates' => 'app_form',
     ]);
 
-Ceci charge les balises dans ``config/app_form.php``. Le fichier devra
+Ceci charge les balises dans **config/app_form.php**. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     return [
