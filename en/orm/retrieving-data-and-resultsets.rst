@@ -60,7 +60,7 @@ Using Finders to Load Data
 .. php:method:: find($type, $options = [])
 
 Before you can work with entities, you'll need to load them. The easiest way to
-do this is using the ``find`` method. The find method provides an easy and
+do this is using the ``find()`` method. The find method provides an easy and
 extensible way to find the data you are interested in::
 
     // In a controller or table method.
@@ -68,7 +68,7 @@ extensible way to find the data you are interested in::
     // Find all the articles
     $query = $articles->find('all');
 
-The return value of any ``find`` method is always
+The return value of any ``find()`` method is always
 a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
 refine a query after creating it. Query objects are evaluated lazily, and do not
 execute until you start fetching rows, convert it to an array, or when the
@@ -135,7 +135,7 @@ The list of options supported by find() are:
 
 Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
-``getOptions`` method on a query object to retrieve the options used. While you
+``getOptions()`` method on a query object to retrieve the options used. While you
 can very easily pass query objects to your controllers, we recommend that you
 package your queries up as :ref:`custom-find-methods` instead. Using custom
 finder methods will let you re-use your queries more easily and make testing

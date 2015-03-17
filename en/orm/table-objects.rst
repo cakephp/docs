@@ -74,7 +74,7 @@ By default table objects use an entity class based on naming conventions. For
 example if your table class is called ``ArticlesTable`` the entity would be
 ``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
 ``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
-conventions you can use the ``entityClass`` method to change things up::
+conventions you can use the ``entityClass()`` method to change things up::
 
     class PurchaseOrdersTable extends Table
     {
@@ -115,7 +115,7 @@ overriding methods. Event listeners can be defined in table or behavior classes.
 You can also use a table's event manager to bind listeners in.
 
 When using callback methods behaviors attached in the
-``initialize`` method will have their listeners fired **before** the table
+``initialize()`` method will have their listeners fired **before** the table
 callback methods are triggered. This follows the same sequencing as controllers
 & components.
 
@@ -251,8 +251,8 @@ related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
 would allow for re-usable pieces of logic, they would complicate binding events.
 
-To add a behavior to your table you can call the ``addBehavior`` method.
-Generally the best place to do this is in the ``initialize`` method::
+To add a behavior to your table you can call the ``addBehavior()`` method.
+Generally the best place to do this is in the ``initialize()`` method::
 
     namespace App\Model\Table;
 
@@ -300,7 +300,7 @@ Configuring Connections
 
 By default all table instances use the ``default`` database connection. If your
 application uses multiple database connections you will want to configure which
-tables use which connections. This is the ``defaultConnectionName`` method::
+tables use which connections. This is the ``defaultConnectionName()`` method::
 
     namespace App\Model\Table;
 
@@ -315,7 +315,7 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
 .. note::
 
-    The ``defaultConnectionName`` method **must** be static.
+    The ``defaultConnectionName()`` method **must** be static.
 
 .. _table-registry-usage:
 

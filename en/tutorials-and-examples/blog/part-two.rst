@@ -317,7 +317,7 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use FlashComponent's magic ``__call`` method to set a message to a session
+We use FlashComponent's magic ``__call()`` method to set a message to a session
 variable, which will be displayed on the page after redirection. In the layout
 we have ``<?= $this->Flash->render() ?>`` which displays the message and clears
 the corresponding session variable. The controller's

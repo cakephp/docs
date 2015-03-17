@@ -121,7 +121,7 @@ for read heavy applications like blogs.
 
 If you open the **src/Model/Table/CategoriesTable.php** file, you'll see
 that the TreeBehavior has been attached to your CategoriesTable in the
-``initialize`` method::
+``initialize()`` method::
 
     $this->addBehavior('Tree');
 
@@ -147,7 +147,7 @@ In your categories index template file, you can list the categories and ordering
 them.
 
 Let's modify the index method in your ``CategoriesController.php`` and add
-``move_up`` and ``move_down`` methods to be able to reorder the categories in
+``move_up`` and ``move_down()`` methods to be able to reorder the categories in
 the tree::
 
     class CategoriesController extends AppController

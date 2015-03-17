@@ -416,7 +416,7 @@ namespace. By having prefixes as separate controllers you can create smaller and
 simpler controllers. Behavior that is common to the prefixed and non-prefixed
 controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
-the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
+the URL ``/admin/users/edit/5`` would call the ``edit()`` method of our
 **src/Controller/Admin/UsersController.php** passing 5 as the first parameter. The
 view file used would be **src/Template/Admin/Users/edit.ctp**
 

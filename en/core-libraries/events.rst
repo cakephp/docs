@@ -311,7 +311,7 @@ listeners from being notified. You can see this in action during model callbacks
 the code detects it cannot proceed any further.
 
 In order to stop events you can either return ``false`` in your callbacks or call
-the ``stopPropagation`` method on the event object::
+the ``stopPropagation()`` method on the event object::
 
     public function doSomething($event)
     {

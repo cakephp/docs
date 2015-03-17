@@ -190,7 +190,7 @@ doing the following::
 
     echo $this->Html->css('styles');
 
-The above would call the ``css`` method on the HtmlHelper. You can
+The above would call the ``css()`` method on the HtmlHelper. You can
 access any loaded helper using ``$this->{$helperName}``.
 
 Loading Helpers On The Fly
