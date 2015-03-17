@@ -18,7 +18,7 @@ Créer un Formulaire
 Généralement lorsque vous utilisez la classe Form, vous voudrez utiliser une
 sous classe pour définir votre formulaire. Cela rend les tests plus faciles et
 vous permet de réutiliser votre formulaire. Les formulaires sont situés dans
-``src/Form`` et ont habituellement ``Form`` comme suffixe de classe. Par
+**src/Form** et ont habituellement ``Form`` comme suffixe de classe. Par
 exemple, un simple formulaire de contact ressemblerait à ceci::
 
     // Dans src/Form/ContactForm.php

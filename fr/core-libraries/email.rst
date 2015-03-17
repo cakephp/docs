@@ -235,8 +235,8 @@ normales::
         ->from('app@domain.com')
         ->send();
 
-Ce qui est au-dessus utilise ``src/Template/Email/html/welcome.ctp`` pour la vue,
-et ``src/Template/Layout/Email/html/fancy.ctp`` pour le layout. Vous pouvez
+Ce qui est au-dessus utilise **src/Template/Email/html/welcome.ctp** pour la vue,
+et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $Email = new Email();
@@ -248,10 +248,10 @@ aussi envoyer des messages email templaté multipart::
 
 Ceci utiliserait les fichiers de template suivants:
 
-* ``src/Template/Email/text/welcome.ctp``
-* ``src/Template/Layout/Email/text/fancy.ctp``
-* ``src/Template/Email/html/welcome.ctp``
-* ``src/Template/Layout/Email/html/fancy.ctp``
+* **src/Template/Email/text/welcome.ctp**
+* **src/Template/Layout/Email/text/fancy.ctp**
+* **src/Template/Email/html/welcome.ctp**
+* **src/Template/Layout/Email/html/fancy.ctp**
 
 Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 ``text``, ``html`` soit ``both``.
@@ -366,7 +366,7 @@ Créer des Transports Personnalisés
 
 Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres
 systèmes email (comme SwiftMailer). Pour créer votre transport, créez tout
-d'abord le fichier ``src/Network/Email/ExampleTransport.php`` (où
+d'abord le fichier **src/Network/Email/ExampleTransport.php** (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 

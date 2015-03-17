@@ -25,7 +25,7 @@ gère.
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
 :php:class:`Controller` du cœur. La classe ``AppController`` peut être définie
-dans ``src/Controller/AppController.php`` et elle devra contenir les
+dans **src/Controller/AppController.php** et elle devra contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
@@ -44,7 +44,7 @@ Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
 elle-même la classe :php:class:`Cake\\Controller\\Controller` incluse dans la
 librairie du cœur de CakePHP. ``AppController`` est définie dans
-``src/Controller/AppController.php`` comme ceci::
+**src/Controller/AppController.php** comme ceci::
 
     namespace App\Controller;
 
@@ -110,7 +110,7 @@ Par convention, CakePHP rend une vue avec une version inflectée du nom de
 l'action. Revenons à notre boulangerie en ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
-``src/Controller/RecipesController.php`` et contiendrait::
+**src/Controller/RecipesController.php** et contiendrait::
 
     // src/Controller/RecipesController.php
 
@@ -132,8 +132,8 @@ RecipesController pourrait contenir les actions
         }
     }
 
-Les fichiers de template pour ces actions seraient ``src/Template/Recipes/view.ctp``,
-``src/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
+Les fichiers de template pour ces actions seraient **src/Template/Recipes/view.ctp**,
+**src/Template/Recipes/share.ctp**, et **src/Template/Recipes/search.ctp**. Le
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
@@ -235,7 +235,7 @@ tout à l'utilisateur final.
 
 Le fichier de vue utilisé par défaut est déterminé par convention.
 Ainsi, si l'action ``search()`` de notre controller RecipesController
-est demandée, le fichier de vue situé dans ``src/Template/Recipes/search.ctp``
+est demandée, le fichier de vue situé dans **src/Template/Recipes/search.ctp**
 sera utilisé::
 
     namespace App\Controller;
@@ -258,7 +258,7 @@ alternatif en précisant le nom d'un fichier de vue en premier argument de la
 méthode ``Controller::render()``.
 
 Si ``$view`` commence par un '/' on suppose que c'est un fichier de
-vue ou un élément dont le chemin est relatif au dossier ``src/Template``.
+vue ou un élément dont le chemin est relatif au dossier **src/Template**.
 Cela permet un affichage direct des éléments, ce qui est très pratique lors
 d'appels AJAX::
 

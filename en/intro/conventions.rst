@@ -115,11 +115,11 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Table class: "PeopleTable", found at ``src/Model/Table/PeopleTable.php``
--  Entity class: "Person", found at ``src/Model/Entity/Person.php``
+-  Table class: "PeopleTable", found at **src/Model/Table/PeopleTable.php**
+-  Entity class: "Person", found at **src/Model/Entity/Person.php**
 -  Controller class: "PeopleController", found at
-   ``src/Controller/PeopleController.php``
--  View template, found at ``src/Template/People/index.ctp``
+   **src/Controller/PeopleController.php**
+-  View template, found at **src/Template/People/index.ctp**
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the ``index()`` function

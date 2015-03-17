@@ -150,7 +150,7 @@ de session de la Base de Données avec un model de l'application. Lors de
 l'utilisation de noms de classe comme handler.engine, CakePHP va s'attendre
 à trouver votre classe dans le namespace ``Network\\Session``. Par exemple,
 si vous aviez une classe ``AppSessionHandler``, le fichier doit être
-``src/Network/Session/AppSessionHandler.php``, et le nom de classe doit être
+**src/Network/Session/AppSessionHandler.php**, et le nom de classe doit être
 ``App\\Network\\Session\\AppSessionHandler``. Vous pouvez aussi utiliser les
 gestionnaires de session à partir des plugins. En configurant le moteur
 avec ``MyPlugin.PluginSessionHandler``.
@@ -254,7 +254,7 @@ meilleur du IO rapide de apc, sans avoir à se soucier des sessions s'évaporant
 quand le cache se remplit.
 
 D'abord, nous aurons besoin de créer notre classe personnalisée et de la
-mettre dans ``src/Network/Session/ComboSession.php``. La classe
+mettre dans **src/Network/Session/ComboSession.php**. La classe
 devrait ressembler à::
 
     namespace App\Network\Session;

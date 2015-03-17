@@ -613,7 +613,7 @@ Testing Table Classes
 =====================
 
 Let's say we already have our Articles Table class defined in
-``src/Model/Table/ArticlesTable.php``, and it looks like::
+**src/Model/Table/ArticlesTable.php**, and it looks like::
 
     namespace App\Model\Table;
 

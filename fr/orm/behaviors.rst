@@ -41,7 +41,7 @@ résultats de ``Inflector::slug()`` basé sur un autre champ.
 Avant de créer notre behavior, nous devrions comprendre les conventions pour
 les behaviors:
 
-- Les fichiers Behavior sont localisés dans ``src/Model/Behavior``, ou dans
+- Les fichiers Behavior sont localisés dans **src/Model/Behavior**, ou dans
   ``MyPlugin\Model\Behavior``.
 - Les classes de Behavior devraient être dans le namespace
   ``App\Model\Behavior``, ou le namespace ``MyPlugin\Model\Behavior``.
@@ -49,7 +49,7 @@ les behaviors:
 - Les Behaviors étendent ``Cake\ORM\Behavior``.
 
 Pour créer notre behavior sluggable. Mettez ce qui suit dans
-``src/Model/Behavior/SluggableBehavior.php``::
+**src/Model/Behavior/SluggableBehavior.php**::
 
     namespace App\Model\Behavior;
 

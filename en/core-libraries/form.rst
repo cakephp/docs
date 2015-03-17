@@ -15,7 +15,7 @@ Creating a Form
 
 Generally when using the Form class you'll want to use a subclass to define your
 form. This makes testing easier, and lets you re-use your form. Forms are put
-into ``src/Form`` and usually have ``Form`` as a class suffix. For example,
+into **src/Form** and usually have ``Form`` as a class suffix. For example,
 a simple contact form would look like::
 
     // in src/Form/ContactForm.php

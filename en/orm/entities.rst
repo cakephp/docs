@@ -18,7 +18,7 @@ Creating Entity Classes
 
 You don't need to create entity classes to get started with the ORM in CakePHP.
 However, if you want to have custom logic in your entities you will need to
-create classes. By convention entity classes live in ``src/Model/Entity/``. If
+create classes. By convention entity classes live in **src/Model/Entity/**. If
 our application had an ``articles`` table we could create the following entity::
 
     // src/Model/Entity/Article.php
@@ -324,7 +324,7 @@ Creating Re-usable Code with Traits
 
 You may find yourself needing the same logic in multiple entity classes. PHP's
 traits are a great fit for this. You can put your application's traits in
-``src/Model/Entity``. By convention traits in CakePHP are suffixed with
+**src/Model/Entity**. By convention traits in CakePHP are suffixed with
 ``Trait`` so they are easily discernible from classes or interfaces. Traits are
 often a good compliment to behaviors, allowing you to provide functionality for
 the table and entity objects.

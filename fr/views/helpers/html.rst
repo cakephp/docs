@@ -95,7 +95,7 @@ Affichera:
     <link rel="stylesheet" href="/css/menu.css" />
 
 Vous pouvez inclure un fichier CSS depuis un plugin chargé en utilisant la
-:term:`syntaxe de plugin`. Pour inclure ``plugins/DebugKit/webroot/css/toolbar.css``,
+:term:`syntaxe de plugin`. Pour inclure **plugins/DebugKit/webroot/css/toolbar.css**,
 vous pouvez utiliser ce qui suit::
 
         echo $this->Html->css('DebugKit.toolbar.css');
@@ -279,7 +279,7 @@ Affichera:
 
 Vous pouvez inclure des fichiers images depuis un plugin chargé en
 utilisant :term:`syntaxe de plugin`. Pour inclure
-``plugins/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
+**plugins/DebugKit/webroot/img/icon.png**, vous pouvez faire cela::
 
     echo $this->Html->image('DebugKit.icon.png');
 
@@ -516,7 +516,7 @@ dans 'scriptBottom'::
 
 Vous pouvez inclure des fichiers de script depuis un plugin en utilisant
 la :term:`syntaxe de plugin`. Pour inclure
-``plugins/DebugKit/webroot/js/toolbar.js`` vous pouvez faire cela::
+**plugins/DebugKit/webroot/js/toolbar.js** vous pouvez faire cela::
 
     echo $this->Html->script('DebugKit.toolbar.js');
 

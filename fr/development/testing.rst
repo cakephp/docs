@@ -650,7 +650,7 @@ Tester les classes Table
 ========================
 
 Disons que nous avons déjà notre table Articles définie dans
-``src/Model/Table/ArticlesTable.php``, qui ressemble à ceci::
+**src/Model/Table/ArticlesTable.php**, qui ressemble à ceci::
 
     namespace App\Model\Table;
 

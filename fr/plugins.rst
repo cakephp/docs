@@ -263,12 +263,12 @@ Controllers du Plugin
 =====================
 
 Les controllers pour notre plugin ContactManager seront stockés dans
-``plugins/ContactManager/src/Controller/``. Puisque la principale chose que
+**plugins/ContactManager/src/Controller/**. Puisque la principale chose que
 nous souhaitons faire est la gestion des contacts, nous aurons besoin de créer
 un ContactsController pour ce plugin.
 
 Ainsi, nous mettons notre nouveau ContactsController dans
-``plugins/ContactManager/src/Controller`` et il ressemblerait à cela::
+**plugins/ContactManager/src/Controller** et il ressemblerait à cela::
 
     // plugins/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
@@ -297,7 +297,7 @@ ce qui suit::
     Plugin::load('ContactManager', ['routes' => true]);
 
 Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
-``plugins/ContactManager/config/routes.php``::
+**plugins/ContactManager/config/routes.php**::
 
     <?php
     use Cake\Routing\Router;
@@ -337,7 +337,7 @@ la façon de charger les fichiers de route spécifique à un plugin.
 Models du Plugin
 ================
 
-Les Models pour le plugin sont stockés dans ``plugins/ContactManager/src/Model``.
+Les Models pour le plugin sont stockés dans **plugins/ContactManager/src/Model**.
 Nous avons déjà défini un ContactsController pour ce plugin, donc créons la
 table et l'entity pour ce controller::
 
@@ -444,7 +444,7 @@ Contacts, vous pouvez faire le fichier suivant::
     src/Template/plugins/src/ContactManager/Contacts/index.ctp
 
 Créer ce fichier vous permettra de redéfinir
-``plugins/ContactManager/src/Template/Contacts/index.ctp``.
+**plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
 .. _plugin-assets:
 

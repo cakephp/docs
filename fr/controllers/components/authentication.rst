@@ -264,7 +264,7 @@ Créer des Objets d'Authentification Personnalisés
 Comme les objets d'authentification sont modulaires, vous pouvez créer des
 objets d'authentification personnalisés pour votre application ou plugins.
 Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
-``src/Auth/OpenidAuthenticate.php``, vous pourriez mettre ce qui suit::
+**src/Auth/OpenidAuthenticate.php**, vous pourriez mettre ce qui suit::
 
     use Cake\Auth\BaseAuthenticate;
 
@@ -365,7 +365,7 @@ Afficher les Messages Flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
-suivantes au fichier ``src/Template/Layouts/default.ctp`` dans la section body::
+suivantes au fichier **src/Template/Layouts/default.ctp** dans la section body::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
@@ -439,7 +439,7 @@ Créer des Classes de Hash de Mot de Passe Personnalisé
 ------------------------------------------------------
 
 Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
-dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` et
+dans **src/Auth/LegacyPasswordHasher.php** et intégrer les méthodes ``hash`` et
 ``check``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
 
     namespace App\Auth;
@@ -734,7 +734,7 @@ Création d'Objets Authorize Personnalisés
 
 Parce que les objets authorize sont modulables, vous pouvez créer des objets
 authorize personnalisés dans votre application ou plugins. Si par exemple
-vous voulez créer un objet authorize LDAP dans ``src/Auth/LdapAuthorize.php``,
+vous voulez créer un objet authorize LDAP dans **src/Auth/LdapAuthorize.php**,
 vous pourriez mettre cela::
 
     namespace App\Auth;

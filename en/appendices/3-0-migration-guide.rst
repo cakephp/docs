@@ -45,7 +45,7 @@ Namespaces
 ==========
 
 All of CakePHP's core classes are now namespaced and follow PSR-4 autoloading
-specifications. For example ``src/Cache/Cache.php`` is namespaced as
+specifications. For example **src/Cache/Cache.php** is namespaced as
 ``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
@@ -263,7 +263,7 @@ BakeShell / TemplateTask
 
 - Bake is no longer part of the core source and is superseded by
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
-- Bake templates have been moved under ``src/Template/Bake``.
+- Bake templates have been moved under **src/Template/Bake**.
 - The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
   templating logic, allowing php code to be treated as plain text.
 - The ``bake view`` command has been renamed ``bake template``.
@@ -776,7 +776,7 @@ Both these issues are solved by converting themes into plugins.
 View Folders Renamed
 --------------------
 
-The folders containing view files now go under ``src/Template`` instead of ``src/View``.
+The folders containing view files now go under **src/Template** instead of **src/View**.
 This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
 
 The following View folders have been renamed to avoid naming collisions with controller names:

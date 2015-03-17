@@ -18,7 +18,7 @@ Basic Usage
 ===========
 
 To get started, create a Table class. These classes live in
-``src/Model/Table``. Tables are a type model collection specific to relational
+**src/Model/Table**. Tables are a type model collection specific to relational
 databases, and the main interface to your database in CakePHP's ORM. The most
 basic table class would look like::
 
