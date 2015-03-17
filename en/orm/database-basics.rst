@@ -256,7 +256,7 @@ implement the following methods:
 * toStatement
 
 An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
+:php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
 we could make the following type class::
 
     // in src/Database/Type/JsonType.php

@@ -280,7 +280,7 @@ les méthodes suivantes:
 * toStatement
 
 Une façon facile de remplir l'interface basique est d'étendre
-:php:class:`Cake\Database\Type`. Par exemple, si vous souhaitez ajouter un type
+:php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un type
 JSON, nous pourrions faire la classe type suivante::
 
     // Dans src/Database/Type/JsonType.php

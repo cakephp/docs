@@ -349,7 +349,7 @@ protocoles ou méthodes. CakePHP supporte les transports Mail (par défaut),
 Debug et SMTP.
 
 Pour configurer votre méthode, vous devez utiliser la méthode
-:php:meth:`Cake\\Network\Email\\Email::transport()` ou avoir le transport dans
+:php:meth:`Cake\\Network\\Email\\Email::transport()` ou avoir le transport dans
 votre configuration::
 
     $email = new Email();
@@ -419,7 +419,7 @@ Envoyer des Messages Rapidement
 
 Parfois vous avez besoin d'une façon rapide d'envoyer un email, et vous n'avez
 pas particulièrement envie en même temps de définir un tas de configuration.
-:php:meth:`Cake\\Network\Email\\Email::deliver()` est présent pour ce cas.
+:php:meth:`Cake\\Network\\Email\\Email::deliver()` est présent pour ce cas.
 
 Vous pouvez créer votre configuration dans
 :php:meth:`Cake\\Network\\Email\\Email::config()`, ou utiliser un

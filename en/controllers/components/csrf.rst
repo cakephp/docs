@@ -12,7 +12,7 @@ are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
 is added containing the CSRF token. During the ``Controller.startup`` event, if
 the request is a POST, PUT, DELETE, PATCH request the component will compare the
 request data & cookie value. If either is missing or the two values mismatch the
-component will throw a :php:class:`Cake\Network\Exception\ForbiddenException`.
+component will throw a :php:class:`Cake\\Network\\Exception\\ForbiddenException`.
 
 Using the CsrfComponent
 =======================

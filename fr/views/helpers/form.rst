@@ -1791,8 +1791,9 @@ controller, vous bénéficierez automatiquement des fonctionnalités de prévent
 contre la falsification de formulaires.
 
 Tel que mentionné précédemment, lorsque vous utilisez le SecurityComponent,
-vous devez toujours fermer vos formulaires en utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les inputs spéciales
-``_Token`` soient générées.
+vous devez toujours fermer vos formulaires en utilisant
+:php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les
+inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)
 

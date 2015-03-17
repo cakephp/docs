@@ -395,7 +395,7 @@ Will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check :php:meth:`Cake\View\Helper\UrlHelper::build()` method
+Also check :php:meth:`Cake\\View\\Helper\\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 Linking to Videos and Audio Files

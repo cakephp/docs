@@ -25,7 +25,7 @@ encrypted in one implementation is portable to the other.
 
 Cette méthode **ne** devrait **jamais** être utilisée pour stocker des mots
 de passe. A la place, vous devriez utiliser la manière de hasher les mots
-de passe fournie par :php:meth:`~Cake\Utility\Security::hash()`.
+de passe fournie par :php:meth:`~Cake\\Utility\\Security::hash()`.
 Un exemple d'utilisation serait::
 
     // En supposant que la clé est stockée quelque part, elle peut être

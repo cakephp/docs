@@ -396,7 +396,7 @@ Affichera:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Regardez aussi la méthode :php:meth:`Cake\View\Helper\UrlHelper::build()` pour
+Regardez aussi la méthode :php:meth:`Cake\\View\\Helper\\UrlHelper::build()` pour
 plus d'exemples des différents types d'URLs.
 
 Liens vers des Videos et Fichiers Audio

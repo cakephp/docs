@@ -15,7 +15,7 @@ CSRF est ajouté. Au cours de l'événement ``Controller.startup``, si la requê
 est de type POST, PUT, DELETE, PATCH, le component va comparer les données de
 la requête et la valeur du cookie. Si l'une des deux est manquantes ou que les
 deux valeurs ne correspondent pas, le component lancera une
-:php:class:`Cake\Network\Exception\ForbiddenException`.
+:php:class:`Cake\\Network\\Exception\\ForbiddenException`.
 
 Utiliser le CsrfComponent
 =========================
