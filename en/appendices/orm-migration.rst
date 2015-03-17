@@ -194,7 +194,7 @@ will result in the query being executed and results returned to you.
 
 The biggest difference you will find when coming from CakePHP 2.x is that
 ``find('first')`` does not exist anymore. There is a trivial replacement for it,
-and it is the ``first`` method::
+and it is the ``first()`` method::
 
     // Before
     $article = $this->Article->find('first');
@@ -375,7 +375,7 @@ In previous versions of CakePHP the various associations your models had were
 defined in properties like ``$belongsTo`` and ``$hasMany``. In CakePHP 3.0,
 associations are created with methods. Using methods allows us to sidestep the
 many limitations class definitions have, and provide only one way to define
-associations. Your ``initialize`` method and all other parts of your application
+associations. Your ``initialize()`` method and all other parts of your application
 code, interact with the same API when manipulating associations::
 
     namespace App\Model\Table;
@@ -461,7 +461,7 @@ data into entities by using the ``validate`` option. See the documentation on
 :ref:`Application rules <application-rules>` allow you to define rules that
 ensure your application's rules, state and workflows are enforced. Rules are
 defined in your Table's ``buildRules()`` method. Behaviors can add rules using
-the ``buildRules()`` hook method. An example ``buildRules`` method for our
+the ``buildRules()`` hook method. An example ``buildRules()`` method for our
 articles table could be::
 
     // In src/Model/Table/ArticlesTable.php
@@ -540,7 +540,7 @@ New Base Class
 The base class for behaviors has changed. Behaviors should now extend
 ``Cake\ORM\Behavior``; if a behavior does not extend this class an exception
 will be raised. In addition to the base class changing, the constructor for
-behaviors has been modified, and the ``startup`` method has been removed.
+behaviors has been modified, and the ``startup()`` method has been removed.
 Behaviors that need access to the table they are attached to should define
 a constructor::
 
@@ -572,7 +572,7 @@ behavior mixin methods can expect the **same** arguments provided to the table
     // Assume table has a slug() method provided by a behavior.
     $table->slug($someValue);
 
-The behavior providing the ``slug`` method will receive only 1 argument, and its
+The behavior providing the ``slug()`` method will receive only 1 argument, and its
 method signature should look like::
 
     public function slug($value)

@@ -293,7 +293,7 @@ we could make the following type class::
 
     }
 
-By default the ``toStatement`` method will treat values as strings which will
+By default the ``toStatement()`` method will treat values as strings which will
 work for our new type. Once we've created our new type, we need to add it into
 the type mapping. During our application bootstrap we should do the following::
 
@@ -359,7 +359,7 @@ method is ``query()`` which allows you to run already completed SQL queries::
 
 .. php:method:: execute($sql, $params, $types)
 
-The ``query`` method does not allow for additional parameters. If you need
+The ``query()`` method does not allow for additional parameters. If you need
 additional parameters you should use the ``execute()`` method, which allows for
 placeholders to be used::
 
@@ -413,8 +413,8 @@ Using Transactions
 -------------------
 
 The connection objects provide you a few simple ways you do database
-transactions. The most basic way of doing transactions is through the ``begin``,
-``commit`` and ``rollback`` methods, which map to their SQL equivalents::
+transactions. The most basic way of doing transactions is through the ``begin()``,
+``commit()`` and ``rollback()`` methods, which map to their SQL equivalents::
 
     $conn->begin();
     $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
@@ -424,7 +424,7 @@ transactions. The most basic way of doing transactions is through the ``begin``,
 .. php:method:: transactional(callable $callback)
 
 In addition to this interface connection instances also provide the
-``transactional`` method which makes handling the begin/commit/rollback calls
+``transactional()`` method which makes handling the begin/commit/rollback calls
 much simpler::
 
     $conn->transactional(function ($conn) {
@@ -475,7 +475,7 @@ Binding Values
 --------------
 
 Once you've created a prepared statement, you may need to bind additional data.
-You can bind multiple values at once using the ``bind`` method, or bind
+You can bind multiple values at once using the ``bind()`` method, or bind
 individual elements using ``bindValue``::
 
     $stmt = $conn->prepare(

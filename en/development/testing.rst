@@ -694,7 +694,7 @@ creating an instance of our ``ArticlesTable`` class, and then run our
 ``find('published')`` method. In ``$expected`` we set what we expect should be
 the proper result (that we know since we have defined which records are
 initially populated to the article table.) We test that the result equals our
-expectation by using the ``assertEquals`` method. See the :ref:`running-tests`
+expectation by using the ``assertEquals()`` method. See the :ref:`running-tests`
 section for more information on how to run your test case.
 
 
@@ -855,7 +855,7 @@ to configure the requests you will send to your application under test::
         'headers' => ['Accept' => 'application/json']
     ]);
 
-The state set by these helper methods is reset in the ``tearDown`` method.
+The state set by these helper methods is reset in the ``tearDown()`` method.
 
 .. _testing-authentication:
 
@@ -1059,8 +1059,8 @@ controllers that use it. Here is our example component located in
     }
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being
-set correctly by the ``adjust`` method in our component. We create the file
-**tests/TestCase/Controller/Component/PagematronComponentTest.php**::
+set correctly by the ``adjust()`` method in our component. We create the file
+``tests/TestCase/Controller/Component/PagematronComponentTest.php``::
 
     namespace App\Test\TestCase\Controller\Component;
 

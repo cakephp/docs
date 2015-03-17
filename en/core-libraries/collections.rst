@@ -341,7 +341,7 @@ element from the collection having the highest property value::
 
 .. php:method:: sumOf(string|callable $callback)
 
-Finally, the ``sumOf`` method will return the sum of a property of all
+Finally, the ``sumOf()`` method will return the sum of a property of all
 elements::
 
     $collection = new Collection($people);

@@ -164,7 +164,7 @@ In order to update entities you may choose to apply request data directly to an
 existing entity. This has the advantage that only the fields that actually
 changed will be saved, as opposed to sending all fields to the database to be
 persisted. You can merge an array of raw data into an existing entity using the
-``patchEntity`` method::
+``patchEntity()`` method::
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
@@ -173,7 +173,7 @@ persisted. You can merge an array of raw data into an existing entity using the
     $articles->save($article);
 
 As explained in the previous section, the request data should follow the
-structure of your entity. The ``patchEntity`` method is equally capable of
+structure of your entity. The ``patchEntity()`` method is equally capable of
 merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the third parameter of the method::
@@ -380,8 +380,8 @@ want applied::
         ['validate' => 'update']
     );
 
-The above would call the ``validationUpdate`` method on the table instance to
-build the required rules. By default the ``validationDefault`` method will be
+The above would call the ``validationUpdate()`` method on the table instance to
+build the required rules. By default the ``validationDefault()`` method will be
 used. A sample validator for our articles table would be::
 
     class ArticlesTable extends Table
@@ -711,8 +711,8 @@ plural, underscored version of the association name. For example::
     ]);
     $articles->save($article);
 
-When converting request data into entities, the ``newEntity`` and
-``newEntities`` methods will handle both arrays of properties, as well as a list
+When converting request data into entities, the ``newEntity()`` and
+``newEntities()`` methods will handle both arrays of properties, as well as a list
 of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
 select box or checkbox based form controls for belongs to many associations. See
 the :ref:`converting-request-data` section for more information.
@@ -882,7 +882,7 @@ before entities are persisted. Some example domain rules are:
 Creating a Rules Checker
 ------------------------
 
-Rules checker classes are generally defined by the ``buildRules`` method in your
+Rules checker classes are generally defined by the ``buildRules()`` method in your
 table class. Behaviors and other event subscribers can use the
 ``Model.buildRules`` event to augment the rules checker for a given Table
 class::

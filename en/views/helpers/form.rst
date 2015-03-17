@@ -1627,9 +1627,9 @@ Building a Widget Class
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
 the ``render(array $data)`` and ``secureFields(array $data)`` methods to be implemented.
-The ``render`` method expects an array of data to build the widget and is expected to return a string
+The ``render()`` method expects an array of data to build the widget and is expected to return a string
 of HTML for the widget.
-The ``secureFields`` method expects an array of data as well and is expected to return an
+The ``secureFields()`` method expects an array of data as well and is expected to return an
 array containing the list of fields to secure for this widget.
 If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by

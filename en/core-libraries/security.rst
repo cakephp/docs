@@ -86,7 +86,7 @@ value will be used::
     // Using the default hash algorithm
     $hash = Security::hash('CakePHP Framework');
 
-The ``hash`` method supports the following hashing strategies:
+The ``hash()`` method supports the following hashing strategies:
 
 - md5
 - sha1

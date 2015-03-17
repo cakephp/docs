@@ -111,7 +111,7 @@ Callbacks
 By default Panel objects have two callbacks, allowing them to hook into the
 current request. Panels subscribe to the ``Controller.initialize`` and
 ``Controller.shutdown`` events. If your panel needs to subscribe to additional
-events, you can use the ``implementedEvents`` method to define all of the events
+events, you can use the ``implementedEvents()`` method to define all of the events
 your panel is interested in.
 
 You should refer to the built-in panels for some examples on how you can build

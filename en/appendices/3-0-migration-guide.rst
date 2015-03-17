@@ -580,9 +580,9 @@ CookieComponent
 
 - Uses :php:meth:`Cake\\Network\\Request::cookie()` to read cookie data,
   this eases testing, and allows for ControllerTestCase to set cookies.
-- Cookies encrypted in previous versions of CakePHP using the ``cipher`` method
+- Cookies encrypted in previous versions of CakePHP using the ``cipher()`` method
   are now un-readable because ``Security::cipher()`` has been removed. You will
-  need to re-encrypt cookies with the ``rijndael`` or ``aes`` method before upgrading.
+  need to re-encrypt cookies with the ``rijndael()`` or ``aes()`` method before upgrading.
 - ``CookieComponent::type()`` has been removed and replaced with configuration
   data accessed through ``config()``.
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
@@ -937,7 +937,7 @@ and reduce the problems people had in the past:
 - The ``submit()`` has had the ``div``, ``before`` and ``after`` options
   removed. You can customize the ``submitContainer`` template to modify this
   content.
-- The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
+- The ``inputs()`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
   It now also requires ``$fields`` parameter to be an array. The ``$blacklist``
   parameter has been removed, the functionality has been replaced by specifying
