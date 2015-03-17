@@ -29,7 +29,7 @@ Par défaut DebugKit va stocker les données du panneau dans une base de donnée
 SQLite dans le répertoire ``tmp`` de votre application. Si vous ne pouvez pas
 installer pdo_sqlite, vous pouvez configurer DebugKit pour utiliser une base
 de données différente en définissant une connexion ``debug_kit`` dans votre
-fichier ``config/app.php``.
+fichier **config/app.php**.
 
 Utilisation de la Toolbar
 =========================

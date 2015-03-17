@@ -1462,7 +1462,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         'templates' => 'app_form',
     ]);
 
-Ceci charge les balises dans ``config/app_form.php``. Le fichier devra
+Ceci charge les balises dans **config/app_form.php**. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     return [
@@ -1791,8 +1791,9 @@ controller, vous bénéficierez automatiquement des fonctionnalités de prévent
 contre la falsification de formulaires.
 
 Tel que mentionné précédemment, lorsque vous utilisez le SecurityComponent,
-vous devez toujours fermer vos formulaires en utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les inputs spéciales
-``_Token`` soient générées.
+vous devez toujours fermer vos formulaires en utilisant
+:php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les
+inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)
 

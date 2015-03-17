@@ -145,7 +145,7 @@ For many, this will be the first and last time you will need to configure
 anything.
 
 The configuration should be pretty straightforward: just replace the
-values in the ``Datasources.default`` array in the ``config/app.php`` file
+values in the ``Datasources.default`` array in the **config/app.php** file
 with those that apply to your setup. A sample completed configuration
 array might look something like the following::
 
@@ -167,7 +167,7 @@ array might look something like the following::
         // More configuration below.
     ];
 
-Once you've saved your ``config/app.php`` file, you should be able to open
+Once you've saved your **config/app.php** file, you should be able to open
 your browser and see the CakePHP welcome page. It should also tell
 you that your database connection file was found, and that CakePHP
 can successfully connect to the database.
@@ -175,7 +175,7 @@ can successfully connect to the database.
 .. note::
 
     A copy of CakePHP's default configuration file is found in
-    ``config/app.default.php``.
+    **config/app.default.php**.
 
 Optional Configuration
 ======================
@@ -187,7 +187,7 @@ in security hashes.
 
 The security salt is used for generating hashes. If you used Composer this too is taken
 care of for you during the install. Else you'd need to change the default salt value
-by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
+by editing **config/app.php**. It doesn't matter much what the new value is, as long as
 it's not easily guessed::
 
     'Security' => [

@@ -48,9 +48,9 @@ Configuration
 
 Configuration for ``Email`` defaults is created using ``config()`` and
 ``configTransport()``. You should put your email presets in the
-``config/app.php`` file.  The ``config/app.php.default`` file is an
+**config/app.php** file.  The ``config/app.php.default`` file is an
 example of this file. It is not required to define email configuration in
-``config/app.php``. ``Email`` can be used without it and use the respective
+**config/app.php**. ``Email`` can be used without it and use the respective
 methods to set all configurations separately or load an array of configs.
 
 By defining profiles and transports, you can keep your application code free of
@@ -273,7 +273,7 @@ You can do this using themes by telling Email to use appropriate theme using
 This allows you to override the ``new_comment`` template in your theme without
 modifying the Blog plugin. The template file needs to be created in the
 following path:
-``src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp``.
+**src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp**.
 
 Sending Attachments
 ===================

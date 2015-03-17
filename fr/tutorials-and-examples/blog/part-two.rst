@@ -645,7 +645,7 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Articles
 (ArticlesController).
 
-Le routage de CakePHP se trouve dans ``config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans **config/routes.php**. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela:
 

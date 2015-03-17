@@ -49,7 +49,7 @@ Configuring Cache Class
 .. php:staticmethod:: config($key, $config = null)
 
 Configuring the Cache class can be done anywhere, but generally you will want to
-configure Cache during bootstrapping.  The ``config/app.php`` file is the
+configure Cache during bootstrapping.  The **config/app.php** file is the
 conventional location to do this.  You can configure as many cache
 configurations as you need, and use any mixture of cache engines.  CakePHP uses
 two cache configurations internally.  ``_cake_core_`` is used for storing file
@@ -61,7 +61,7 @@ for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
 Using multiple configurations also lets you incrementally change the storage as
-needed. For example in your ``config/app.php`` you could put the following::
+needed. For example in your **config/app.php** you could put the following::
 
     // ...
     'Cache' => [

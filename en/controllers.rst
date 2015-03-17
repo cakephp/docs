@@ -272,8 +272,8 @@ have called ``Controller::render()``, CakePHP will not try to re-render the view
         }
     }
 
-This would render ``src/Template/Posts/custom_file.ctp`` instead of
-``src/Template/Posts/my_action.ctp``.
+This would render **src/Template/Posts/custom_file.ctp** instead of
+**src/Template/Posts/my_action.ctp**.
 
 You can also render views inside plugins using the following syntax:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -289,7 +289,7 @@ For example::
         }
     }
     
-This would render ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
+This would render **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Redirecting to Other Pages
 ==========================

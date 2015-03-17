@@ -94,7 +94,7 @@ the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
 Setting the Default Locale
 --------------------------
 
-The default locale can be set in your ``config/bootstrap.php`` folder by using
+The default locale can be set in your **config/bootstrap.php** folder by using
 the following line::
 
     ini_set('intl.default_locale', 'fr_FR');
@@ -358,7 +358,7 @@ for a single domain and locale::
         return $package;
     });
 
-The above code can be added to your ``config/bootstrap.php`` so that
+The above code can be added to your **config/bootstrap.php** so that
 translations can be found before any translation function is used. The absolute
 minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
@@ -404,7 +404,7 @@ class::
 
 The file should be created in the **src/I18n/Parser** directory of your
 application. Next, create the translations file under
-``src/Locale/fr_FR/animals.yaml``
+**src/Locale/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 

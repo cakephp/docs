@@ -12,10 +12,10 @@ Configuration
 =============
 
 Par convention, les connexions à la base de données sont configurées dans
-``config/app.php``. L'information de connexion définie dans ce fichier
+**config/app.php**. L'information de connexion définie dans ce fichier
 est envoyée au :php:class:`Cake\\DataSource\\ConnectionManager` créant la
 configuration de la connexion que votre application utilisera. Un exemple
-d'information sur la connexion se trouve dans ``config/app.default.php``.
+d'information sur la connexion se trouve dans **config/app.default.php**.
 Un exemple d'information sur la configuration ressemblera à ceci::
 
     'Datasources' => [
@@ -280,7 +280,7 @@ les méthodes suivantes:
 * toStatement
 
 Une façon facile de remplir l'interface basique est d'étendre
-:php:class:`Cake\Database\Type`. Par exemple, si vous souhaitez ajouter un type
+:php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un type
 JSON, nous pourrions faire la classe type suivante::
 
     // Dans src/Database/Type/JsonType.php

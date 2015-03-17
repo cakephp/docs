@@ -153,7 +153,7 @@ vous configurerez quelque chose.
 
 Le fichier de configuration devrait être assez simple : remplacez simplement
 les valeurs du tableau ``Datatsources.default`` dans le fichier
-``config/app.php`` avec ceux de votre config. Un exemple de tableau de
+**config/app.php** avec ceux de votre config. Un exemple de tableau de
 configuration complet pourrait ressembler à ce qui suit::
 
     return [
@@ -174,7 +174,7 @@ configuration complet pourrait ressembler à ce qui suit::
         // Plus de configuration ci-dessous.
     ];
 
-Une fois votre fichier ``config/app.php`` sauvegardé, vous devriez
+Une fois votre fichier **config/app.php** sauvegardé, vous devriez
 être en mesure d'ouvrir votre navigateur internet et de voir la page d'accueil
 de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion
 a été trouvé, et que CakePHP peut s'y connecter avec succès.
@@ -182,7 +182,7 @@ a été trouvé, et que CakePHP peut s'y connecter avec succès.
 .. note::
 
     Une copie du fichier de configuration par défaut de
-    CakePHP se trouve dans ``config/app.default.php``.
+    CakePHP se trouve dans **config/app.default.php**.
 
 Configuration facultative
 =========================

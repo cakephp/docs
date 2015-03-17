@@ -10,11 +10,11 @@ reflection/generation, a flexible type system and more.
 Configuration
 =============
 
-By convention database connections are configured in ``config/app.php``. The
+By convention database connections are configured in **config/app.php**. The
 connection information defined in this file is fed into
 :php:class:`Cake\\Datasource\\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
-``config/app.default.php``. A sample connection configuration would look
+**config/app.default.php**. A sample connection configuration would look
 like::
 
     'Datasources' => [
@@ -256,7 +256,7 @@ implement the following methods:
 * toStatement
 
 An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
+:php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
 we could make the following type class::
 
     // in src/Database/Type/JsonType.php

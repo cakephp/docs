@@ -58,7 +58,7 @@ Configuration de la classe Cache
 
 La configuration de la classe Cache peut être effectuée n'importe où, mais
 généralement vous voudrez configurer le cache pendant la phase de bootstrap.
-le fichier ``config/app.php`` est le lieu approprié pour cette configuration.
+le fichier **config/app.php** est le lieu approprié pour cette configuration.
 Vous pouvez configurer autant de configurations de cache dont vous avez besoin,
 et vous pouvez utiliser tous les mélanges de
 moteurs de cache. CakePHP utilise deux configurations de cache en interne.
@@ -73,7 +73,7 @@ autre application.
 
 L'utilisation de plusieurs configurations vous permet également de changer le
 stockage comme vous l'entendez. Par exemple vous pouvez mettre ceci dans votre
-``config/app.php``::
+**config/app.php**::
 
     // ...
     'Cache' => [
@@ -131,7 +131,7 @@ Vous pouvez également configurer les moteurs de cache pendant l'exécution::
     Vous devez spécifier le moteur à utiliser. Il ne met **pas** File par
     défaut.
 
-En insérant le code ci-dessus dans votre ``config/app.php`` vous
+En insérant le code ci-dessus dans votre **config/app.php** vous
 aurez deux configurations de cache supplémentaires. Le nom de ces
 configurations 'short' ou 'long' est utilisé comme paramètre ``$config``
 pour :php:meth:`Cake\\Cache\\Cache::write()` et

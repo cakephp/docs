@@ -45,9 +45,9 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have debug enabled in your ``config/app.php`` file before running
+Remember to have debug enabled in your **config/app.php** file before running
 any tests.  Before running any tests you should be sure to add a ``test``
-datasource configuration to ``config/app.php``. This configuration is used by
+datasource configuration to **config/app.php**. This configuration is used by
 CakePHP for fixture tables and data::
 
     'Datasources' => [
@@ -134,7 +134,7 @@ Our helper looks like::
 
 This is a very simple example, but it will be useful to show how you can create
 a simple test case. After creating and saving our helper, we'll create the test
-case file in ``tests/TestCase/View/Helper/ProgressHelperTest.php``. In that file
+case file in **tests/TestCase/View/Helper/ProgressHelperTest.php**. In that file
 we'll start with the following::
 
     namespace App\Test\TestCase\View\Helper;
@@ -311,7 +311,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``test`` in your ``config/datasources.php``
+CakePHP uses the connection named ``test`` in your **config/datasources.php**
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -343,7 +343,7 @@ When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
 used to test our own Article model. Create a file named ``ArticlesFixture.php``
-in your ``tests/Fixture`` directory, with the following content::
+in your **tests/Fixture** directory, with the following content::
 
     namespace App\Test\Fixture;
 
@@ -501,7 +501,7 @@ create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
-(``tests/Fixture/ArticlesFixture.php``) to::
+(**tests/Fixture/ArticlesFixture.php**) to::
 
 
     class ArticlesFixture extends TestFixture
@@ -633,7 +633,7 @@ Let's say we already have our Articles Table class defined in
     }
 
 We now want to set up a test that will test this table class. Let's now create
-a file named ``ArticlesTableTest.php`` in your ``tests/TestCase/Model/Table`` directory,
+a file named ``ArticlesTableTest.php`` in your **tests/TestCase/Model/Table** directory,
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
@@ -655,7 +655,7 @@ Creating a Test Method
 ----------------------
 
 Let's now add a method to test the function published() in the Article model.
-Edit the file ``tests/TestCase/Model/Table/ArticlesTableTest.php`` so it now
+Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it now
 looks like this::
 
     namespace App\Test\TestCase\Model\Table;
@@ -768,7 +768,7 @@ model. The controller code looks like::
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
-``tests/TestCase/Controller`` directory and put the following inside::
+**tests/TestCase/Controller** directory and put the following inside::
 
     namespace App\Test\TestCase\Controller;
 
@@ -977,7 +977,7 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``tests/TestCase/Controller/MarkersControllerTest.php``
+Now we create the file **tests/TestCase/Controller/MarkersControllerTest.php**
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase
@@ -1022,7 +1022,7 @@ Testing Components
 Let's pretend we have a component called PagematronComponent in our application.
 This component helps us set the pagination limit value across all the
 controllers that use it. Here is our example component located in
-``app/Controller/Component/PagematronComponent.php``::
+**app/Controller/Component/PagematronComponent.php**::
 
     class PagematronComponent extends Component
     {
@@ -1060,7 +1060,7 @@ controllers that use it. Here is our example component located in
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being
 set correctly by the ``adjust`` method in our component. We create the file
-``tests/TestCase/Controller/Component/PagematronComponentTest.php``::
+**tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 
     namespace App\Test\TestCase\Controller\Component;
 
@@ -1208,7 +1208,7 @@ would be
 ``CakeTestSuite`` offers several methods for easily creating test suites based
 on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
-would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
+would create **tests/TestCase/AllModelTest.php**. Put the following in it::
 
     class AllModelTest extends TestSuite
     {
@@ -1220,13 +1220,13 @@ would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
     }
 
 The code above will group all test cases found in the
-``tests/TestCase/Model/`` folder. To add an individual file, use
+**tests/TestCase/Model/** folder. To add an individual file, use
 ``$suite->addTestFile($filename);``. You can recursively add a directory
 for all tests using::
 
     $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
-Would recursively add all test cases in the ``tests/TestCase/``
+Would recursively add all test cases in the **tests/TestCase/**
 directory.
 
 Creating Tests for Plugins
@@ -1368,7 +1368,7 @@ a *shell script step* to the build that contains the following:
     ];
     CONFIG
 
-Then uncomment the following line in your ``config/bootstrap.php`` file::
+Then uncomment the following line in your **config/bootstrap.php** file::
 
     //Configure::load('app_local', 'default');
 

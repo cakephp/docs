@@ -27,7 +27,7 @@ Database Configuration
 By default DebugKit will store panel data into a SQLite database in your
 application's ``tmp`` directory. If you cannot install pdo_sqlite, you can
 configure DebugKit to use a different database by defining a ``debug_kit``
-connection in your ``config/app.php`` file.
+connection in your **config/app.php** file.
 
 Toolbar Usage
 =============

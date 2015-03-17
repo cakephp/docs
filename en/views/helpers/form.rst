@@ -1414,7 +1414,7 @@ option when including the helper in your controller::
         'templates' => 'app_form',
     ]);
 
-This would load the tags in ``config/app_form.php``. This file should
+This would load the tags in **config/app_form.php**. This file should
 contain an array of templates indexed by name::
 
     // in config/app_form.php
