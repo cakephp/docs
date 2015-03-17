@@ -1060,7 +1060,7 @@ controllers that use it. Here is our example component located in
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being
 set correctly by the ``adjust()`` method in our component. We create the file
-``tests/TestCase/Controller/Component/PagematronComponentTest.php``::
+**tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 
     namespace App\Test\TestCase\Controller\Component;
 
