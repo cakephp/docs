@@ -147,7 +147,7 @@ In your categories index template file, you can list the categories and ordering
 them.
 
 Let's modify the index method in your ``CategoriesController.php`` and add
-``move_up`` and ``move_down()`` methods to be able to reorder the categories in
+``move_up()`` and ``move_down()`` methods to be able to reorder the categories in
 the tree::
 
     class CategoriesController extends AppController

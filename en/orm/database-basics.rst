@@ -413,8 +413,8 @@ Using Transactions
 -------------------
 
 The connection objects provide you a few simple ways you do database
-transactions. The most basic way of doing transactions is through the ``begin``,
-``commit`` and ``rollback()`` methods, which map to their SQL equivalents::
+transactions. The most basic way of doing transactions is through the ``begin()``,
+``commit()`` and ``rollback()`` methods, which map to their SQL equivalents::
 
     $conn->begin();
     $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);

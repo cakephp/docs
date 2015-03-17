@@ -407,7 +407,7 @@ Creating Custom Password Hasher Classes
 
 In order to use a different password hasher, you need to create the class in
 **src/Auth/LegacyPasswordHasher.php** and implement the
-``hash`` and ``check()`` methods. This class needs to extend the
+``hash()`` and ``check()`` methods. This class needs to extend the
 ``AbstractPasswordHasher`` class::
 
     namespace App\Auth;

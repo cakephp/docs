@@ -582,7 +582,7 @@ CookieComponent
   this eases testing, and allows for ControllerTestCase to set cookies.
 - Cookies encrypted in previous versions of CakePHP using the ``cipher()`` method
   are now un-readable because ``Security::cipher()`` has been removed. You will
-  need to re-encrypt cookies with the ``rijndael`` or ``aes()`` method before upgrading.
+  need to re-encrypt cookies with the ``rijndael()`` or ``aes()`` method before upgrading.
 - ``CookieComponent::type()`` has been removed and replaced with configuration
   data accessed through ``config()``.
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
