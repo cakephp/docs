@@ -871,7 +871,7 @@ Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
 
 Cet exemple montre quelques façons d'utiliser l'envoi de requête et quelques
 assertions qu'intègre ``IntegrationTestCase``. Avant de pouvoir utiliser les
-assertions, vous aurez besoin de simulez une requête. Vous pouvez utilisez
+assertions, vous aurez besoin de simulez une requête. Vous pouvez utiliser
 l'une des méthodes suivantes pour simuler une requête:
 
 * ``get()`` Sends a GET request.

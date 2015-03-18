@@ -85,7 +85,7 @@ ont souvent des propriétés slug pour créer de belles URLs::
     }
 
 Notre nouveau behavior ne fait pas beaucoup plus pour le moment. Ensuite, nous
-allons ajouter une méthode mixin et un event listener pour que lorque nous
+allons ajouter une méthode mixin et un event listener pour que lorsque nous
 sauvegarderons les entities, nous puissions automatiquement slugger un champ.
 
 Définir les Méthodes Mixin

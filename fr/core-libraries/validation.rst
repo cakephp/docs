@@ -64,7 +64,7 @@ méthode ``requirePresence()`` a 4 modes:
 * ``false`` La présence du champ n'est pas requise.
 * ``create`` La présence du champ est requise lorsque vous validez une
   opération **create**.
-* ``update`` La présence du champ est requise lorque vous validez une
+* ``update`` La présence du champ est requise lorsque vous validez une
   opération **update**.
 
 Par défaut ``true`` est utilisée. La présence de la clé est vérifiée pour

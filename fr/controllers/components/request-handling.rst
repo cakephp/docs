@@ -20,7 +20,7 @@ il sera ajouté au tableau des helpers des Controllers. Enfin, si une donnée
 XML/JSON est POST'ée vers vos Controllers, elle sera décomposée dans un
 tableau qui est assigné à ``$this->request->data``, et pourra alors être
 sauvegardée comme une donnée de model. Afin d'utiliser le Request Handler, il
-doit être inclu dans votre tableau méthode ``initialize()``::
+doit être inclus dans votre tableau méthode ``initialize()``::
 
     class WidgetController extends AppController
     {

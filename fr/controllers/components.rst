@@ -132,7 +132,7 @@ utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 Utiliser les Components
 =======================
 
-Une fois que vous avez inclu quelques components dans votre controller,
+Une fois que vous avez inclus quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
 :php:class:`Cake\\Controller\\Component\\FlashComponent` et le
@@ -280,8 +280,8 @@ variable ``$components``::
 
 .. note::
 
-    Au contraire d'un component inclu dans un controller, aucun callback
-    ne sera attrapé pour un component inclu dans un component.
+    Au contraire d'un component inclus dans un controller, aucun callback
+    ne sera attrapé pour un component inclus dans un component.
 
 Accéder au Controller du  Component
 -----------------------------------

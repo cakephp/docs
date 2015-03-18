@@ -7,7 +7,7 @@ Routing
 
 Le Routing est une fonctionnalité qui fait correspondre les URLs aux actions du
 controller. En définissant des routes, vous pouvez séparer la façon dont votre
-application est intégré de la façon dont ses URLs sont structurées.
+application est intégrée de la façon dont ses URLs sont structurées.
 
 Le Routing dans CakePHP englobe aussi l'idée de routing inversé, où un tableau
 de paramètres peut être transformé en une URL. En utilisant le routing
@@ -178,7 +178,7 @@ paramètre de routing qui est composé des valeurs par défaut de la route::
         ['controller' => 'Pages', 'action' => 'display', 5]
     );
 
-Cet exemple montre comment vous pouvez utilisez le deuxième paramètre de
+Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
 pourriez considérer la création d'une route. Cela vous permet de vous lier
@@ -393,7 +393,7 @@ Utiliser les Routes Nommées
 
 Parfois vous trouvez que taper tous les paramètres de l'URL pour une route est
 trop verbeux, ou bien vous souhaitez tirer avantage des améliorations de la
-performance que les routes nommées permettent. Lorque vous connectez les routes,
+performance que les routes nommées permettent. Lorsque vous connectez les routes,
 vous pouvez spécifier une option ``_name``, cette option peut être utilisée
 pour le routing inversé pour identifier la route que vous souhaitez utiliser::
 
@@ -725,7 +725,7 @@ Limiter la Création des Routes
 
 Par défaut, CakePHP va connecter 6 routes pour chaque ressource. Si vous
 souhaitez connecter uniquement des routes spécifiques à une ressource, vous
-pouvez utilisez l'option ``only``::
+pouvez utiliser l'option ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']

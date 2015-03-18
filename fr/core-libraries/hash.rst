@@ -90,7 +90,7 @@ Les Types d'Attribut Correspondants
 .. php:staticmethod:: extract(array $data, $path)
 
     ``Hash::extract()`` supporte toutes les expressions, les components
-    matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
+    matcher de la :ref:`hash-path-syntax`. Vous pouvez utiliser l'extract pour
     récupérer les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier

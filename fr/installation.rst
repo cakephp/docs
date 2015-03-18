@@ -266,7 +266,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    Dans la plupart des systèmes, cette ligne est commentée donc vous aurez
    juste besoin de retirer le symbole # en début de ligne.
 
-   Après avoir effectué les changements, re-démarrez Apache pour être sûr
+   Après avoir effectué les changements, redémarrez Apache pour être sûr
    que les paramètres soient actifs.
 
    Vérifiez que vos fichiers .htaccess sont effectivement dans le bon

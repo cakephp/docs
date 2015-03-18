@@ -73,12 +73,12 @@ App.baseUrl
     le mod\_rewrite d'Apache avec CakePHP. N'oubliez pas aussi de retirer vos
     fichiers .htaccess.
 App.base
-    Le répertoire de base où l'app se trouve. Si à ``false``, il sera detecté
+    Le répertoire de base où l'app se trouve. Si à ``false``, il sera détecté
     automatiquement.
 App.encoding
     Définit l'encodage que votre application utilise. Cet encodage est utilisé
     pour générer le charset dans le layout, et les entities encodés. Cela
-    doit correspondre aux valeurs d'encodage spécifiés pour votre base de
+    doit correspondre aux valeurs d'encodage spécifiées pour votre base de
     données.
 App.webroot
     Le répertoire webroot.
@@ -267,7 +267,7 @@ L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
 Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
 les modes de debug et de production à la volée. C'est particulièrement
-pratique pour les intéractions JSON quand les informations de debug
+pratique pour les interactions JSON quand les informations de debug
 peuvent entraîner des problèmes de parsing.
 
 Lire les Données de Configuration
@@ -316,7 +316,7 @@ Lire & Supprimer les Données de Configuration
 .. php:staticmethod:: consume($key)
 
 Lit et supprime une clé de Configure. C'est utile quand vous voulez combiner
-la lecture et la suppresssion de valeurs en une seule opération.
+la lecture et la suppression de valeurs en une seule opération.
 
 Lire et Ecrire les Fichiers de Configuration
 ============================================
@@ -599,7 +599,7 @@ Bootstrapping CakePHP
 
 Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
 bootstrap de CakePHP dans **config/bootstrap.php**. Ce fichier est
-inclu juste avant chaque requête et commande CLI.
+inclus juste avant chaque requête et commande CLI.
 
 Ce fichier est idéal pour un certain nombre de tâches de bootstrapping
 courantes:
