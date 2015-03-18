@@ -71,6 +71,18 @@ h5, h6 {
 	color: #BD8A5D;
 }
 
+/* Font sizes */
+td, th, p, li {
+	font-size: 15px;
+	font-size: 1.5rem;
+	line-height: 140%
+}
+
+/* Emphasis */
+strong {
+	font-weight: 600;
+}
+
 /* Links */
 a {
 	color: #417282;

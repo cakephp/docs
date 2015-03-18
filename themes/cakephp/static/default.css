@@ -282,11 +282,7 @@ h6:hover .headerlink {
 .body {
 	position: relative;
 }
-td, th, p, li {
-	font-size: 14px;
-	font-size: 1.4rem;
-	line-height: 140%
-}
+
 @media handheld, only screen and (max-width: 767px) {
 	td, th, p, li {
 		font-size: 16px;
