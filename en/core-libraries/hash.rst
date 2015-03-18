@@ -86,10 +86,15 @@ Attribute Matching Types
     want returned ::
 
         // Common Usage:
-        $users = $this->User->find("all");
-        $results = Hash::extract($users, '{n}.User.id');
+        $users = [
+            ['id' => 1, 'name' => 'mark'],
+            ['id' => 2, 'name' => 'jane'],
+            ['id' => 3, 'name' => 'sally'],
+            ['id' => 4, 'name' => 'jose'],
+        ];
+        $results = Hash::extract($users, '{n}.id');
         // $results equals:
-        // [1,2,3,4,5,...];
+        // [1,2,3,4];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
@@ -112,8 +117,7 @@ Attribute Matching Types
     You can use paths using ``{n}`` and ``{s}`` to insert data into multiple
     points::
 
-        $users = $this->User->find('all');
-        $users = Hash::insert($users, '{n}.User.new', 'value');
+        $users = Hash::insert($users, '{n}.new', 'value');
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
@@ -737,7 +741,6 @@ Attribute Matching Types
 .. php:staticmethod:: nest(array $data, array $options = [])
 
     Takes a flat array set, and creates a nested, or threaded data structure.
-    Used by methods like ``Table::find('threaded')``.
 
     **Options:**
 
@@ -749,53 +752,53 @@ Attribute Matching Types
       Should be compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.parent_id``
     - ``root`` The id of the desired top-most result.
 
-    Example::
+    For example, if you had the following array of data::
 
         $data = [
-            ['ModelName' => ['id' => 1, 'parent_id' => null]],
-            ['ModelName' => ['id' => 2, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 3, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 4, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 5, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 6, 'parent_id' => null]],
-            ['ModelName' => ['id' => 7, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 8, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 9, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 10, 'parent_id' => 6]]
+            ['ThreadPost' => ['id' => 1, 'parent_id' => null]],
+            ['ThreadPost' => ['id' => 2, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 3, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 4, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 5, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 6, 'parent_id' => null]],
+            ['ThreadPost' => ['id' => 7, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 8, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 9, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 10, 'parent_id' => 6]]
         ];
 
         $result = Hash::nest($data, ['root' => 6]);
         /* $result now looks like:
             [
                 (int) 0 => [
-                    'ModelName' => [
+                    'ThreadPost' => [
                         'id' => (int) 6,
                         'parent_id' => null
                     ],
                     'children' => [
                         (int) 0 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 7,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 1 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 8,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 2 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 9,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 3 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 10,
                                 'parent_id' => (int) 6
                             ],
