@@ -105,7 +105,7 @@ Les Types d'Attribut Correspondants
         ];
         $results = Hash::extract($users, '{n}.id');
         // $results égal à:
-        // [1,2,3,4,5,...];
+        // [1,2,3,4];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 

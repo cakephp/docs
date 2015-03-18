@@ -94,7 +94,7 @@ Attribute Matching Types
         ];
         $results = Hash::extract($users, '{n}.id');
         // $results equals:
-        // [1,2,3,4,5,...];
+        // [1,2,3,4];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
