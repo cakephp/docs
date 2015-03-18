@@ -174,14 +174,14 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post['Post']['id']
+        $post->id
     ]); ?>
     </li>
     <?php $this->end(); ?>
 
     // The remaining content will be available as the 'content' block
     // In the parent view.
-    <?= h($post['Post']['body']) ?>
+    <?= h($post->body) ?>
 
 The post view above shows how you can extend a view, and populate a set of
 blocks. Any content not already in a defined block will be captured and put
