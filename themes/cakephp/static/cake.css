@@ -21,6 +21,8 @@
  * Vendor:      exljbris
  * License URL: http://www.fontspring.com/fflicense/exljbris
  */
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic);
+
 @font-face {
     font-family: 'MuseoSlab500';
     src: url('Museo_Slab_500-webfont.eot');
@@ -39,7 +41,7 @@ html {
 body {
 	color: #000;
 	background: #fff;
-	font-family: Arial;
+	font-family: 'Source Sans Pro', sans-serif;
 	width: 100%;
 }
 
@@ -67,6 +69,18 @@ h5, h6 {
 	font-size: 21px;
 	font-size: 2.1rem;
 	color: #BD8A5D;
+}
+
+/* Font sizes */
+td, th, p, li {
+	font-size: 15px;
+	font-size: 1.5rem;
+	line-height: 140%
+}
+
+/* Emphasis */
+strong {
+	font-weight: 600;
 }
 
 /* Links */
