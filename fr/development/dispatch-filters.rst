@@ -1,15 +1,15 @@
 Filtres du Dispatcher
 #####################
 
-Il y a plusieurs raisons de vouloir lancer un bout de code avant que tout
+Il y a plusieurs raisons de vouloir éxécuter un bout de code avant que tout
 code de controller ne soit lancé ou juste avant que la réponse ne soit
-envoyée au client, comme la mise en cache de la réponse, le header tuning,
-l'authentication spéciale ou juste pour fournir l'accès à une réponse de
-l'API critique plus rapidement qu'avec un cycle complet de dispatchement
+envoyée au client, comme la mise en cache de la réponse, le tunning de header,
+une authentification spéciale ou juste pour fournir l'accès à une réponse de
+l'API critique plus rapidement qu'avec un cycle complet de dispatch
 de requêtes.
 
 CakePHP fournit une interface propre et extensible pour de tels cas pour
-attacher les filtres au cycle de dispatchement, de la même façon qu'une
+attacher les filtres au cycle de dispatch, de la même façon qu'une
 couche middleware pour fournir des services empilables ou des routines
 pour chaque requête. Nous les appelons *Dispatcher Filters*.
 
@@ -23,13 +23,13 @@ Les filtres intégrés sont:
 * ``AssetFilter`` vérifie si la requête fait référence au fichier d'asset de plugin
   ou du theme, comme un fichier CSS, un fichier JavaScript ou une image stockée soit
   dans le dossier webroot d'un plugin ou celui qui correspond pour un Theme. Il va
-  servir le fichier correpondant si il est trouvé, stoppant le reste du cycle de
-  dispatchment.
+  servir le fichier correspondant s'il est trouvé, stoppant le reste du cycle de
+  dispatch.
 * ``RoutingFilter`` applique les règles de routing de l'application pour l'URL de
   la requête. Remplit ``$request->params`` avec les résultats de routing.
 * ``ControllerFactory`` utilise ``$request->params`` pour localiser le controller qui
   gère la requête courante.
-* ``LocaleSelector`` active le language automatiquement en changeant le header ``Accept-Language``
+* ``LocaleSelector`` active le langage automatiquement en changeant le header ``Accept-Language``
   envoyé par le navigateur.
 
 Utiliser les Filtres
@@ -38,7 +38,7 @@ Utiliser les Filtres
 Les filtres sont habituellement activés dans le fichier **bootstrap.php** de votre
 application, mais vous pouvez facilement les charger à n'importe quel moment avant que
 la requête ne soit dispatchée. Ajouter et retirer les filtres se fait avec
-:php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le template d'une application 
+:php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le template d'une application
 CakePHP est fourni avec un couple de classes filter déjà activées pour toutes les
 requêtes; Regardons la façon dont elles sont ajoutées::
 
@@ -51,7 +51,7 @@ requêtes; Regardons la façon dont elles sont ajoutées::
     // Utilisez les options pour définir la priorité
     DispatcherFactory::add('Asset', ['priority' => 1]);
 
-Les filtres Dispatcher avec une priorité importante seront les premiers executés. La priorité
+Les filtres Dispatcher avec une priorité importante seront les premiers exécutés. La priorité
 est par défaut à ``10``.
 
 Alors qu'utiliser le nom de la chaîne est pratique, vous pouvez aussi passer les instances
@@ -79,7 +79,7 @@ Appliquer les Filtres de Façon Conditionnelle
 
 Si vous ne voulez pas exécuter un filtre sur chaque requête, vous pouvez utiliser
 des conditions pour les appliquer seulement certaines fois. Vous pouvez appliquer
-les conditinos en utilisant les options ``for`` et ``when``. L'option ``for`` vous
+les conditions en utilisant les options ``for`` et ``when``. L'option ``for`` vous
 laisse faire la correspondance sur des sous-chaines d'URL, alors que l'option
 ``when`` vous permet de lancer un callable::
 
@@ -96,12 +96,13 @@ laisse faire la correspondance sur des sous-chaines d'URL, alors que l'option
 The callable provided to ``when`` should return ``true`` when the filter should run.
 The callable can expect to get the current request and response as arguments.
 
-Building a Filter
-=================
+Construire un Filtre
+====================
 
-To create a filter, define a class in **src/Routing/Filter**. In this example,
-we'll be making a filter that adds a tracking cookie for the first landing
-page. First, create the file. Its contents should look like::
+Pour créer un filtre, définissez une classe dans **src/Routing/Filter**. Dans
+cet exemple, nous allons créer un filtre qui ajoute un cookie de tracking pour
+la page d'accueil. Premièrement, créez le fichier. Son contenu doit ressembler
+à ceci::
 
     namespace App\Routing\Filter;
 
@@ -125,34 +126,37 @@ page. First, create the file. Its contents should look like::
         }
     }
 
-Save this file into **src/Routing/Filter/TrackingCookieFilter.php**. As you can see, like other
-classes in CakePHP, dispatcher filters have a few conventions:
+Enregistrez ce fichier sous **src/Routing/Filter/TrackingCookieFilter.php**.
+Comme vous pouvez le voir, à l'image des autres classes dans CakePHP, les
+filtres de dispatcher suivent quelques conventions:
 
-* Class names end in ``Filter``.
-* Classes are in the ``Routing\\Filter`` namespace. For example,
+* Les noms de classes finissent par ``Filter``.
+* Les classes sont dans le namespace ``Routing\\Filter``. par exemple,
   ``App\\Routing\\Filter``.
-* Generally filters extend ``Cake\\Routing\\DispatcherFilter``.
+* Généralement, les filtres étendent ``Cake\\Routing\\DispatcherFilter``.
 
-``DispatcherFilter`` exposes two methods that can be overridden in subclasses,
-they are ``beforeDispatch()`` and ``afterDispatch()``. These methods are executed
-before or after any controller is executed respectively. Both methods receive
-a :php:class:`Cake\\Event\\Event` object containing the ``request`` and
-``response`` objects (:php:class:`Cake\\Network\\Request` and
-:php:class:`Cake\\Network\\Response` instances) inside the ``data`` property.
+``DispatcherFilter`` expose deux méthodes qui peuvent être surchargées dans les
+sous-classes qui sont ``beforeDispatch()`` et ``afterDispatch()``. Ces méthodes
+sont exécutées respectivement avant et après l'exécution de tout controller.
+les deux méthodes reçoivent un objet :php:class:`Cake\\Event\\Event` contenant
+les objets ``request`` et ``response`` (instances de :php:class:`Cake\\Network\\Request`
+and :php:class:`Cake\\Network\\Response`) dans la propriété ``data``.
 
-While our filter was pretty simple, there are a few other interesting things we
-can do in filter methods. By returning an ``Response`` object, you can
-short-circuit the dispatch process and prevent the controller from being called.
-When returning a response, you should also remember to call
-``$event->stopPropagation()`` so other filters are not called.
+Alors que notre filtre était relativement simple, il y a quelques autres choses
+intéressantes que nous puvons réaliser dans les méthodes de filtre. En renvoyant
+un objet ``Response``, vous pouvez court-circuiter le process de dispatch et
+empêcher le controller d'être appelé. Lorsque vous renvoyez une response,
+n'oubliez pas d'appeller ``$event->stopPropagation()`` pour que les autres
+filtres ne soient pas appelés.
 
 .. note::
 
-    When a beforeDispatch method returns a response, the controller, and
-    afterDispatch event will not be invoked.
+    Lorsque la méthode beforeDispatch renvoie une response, le controller, et
+    l'event afterDispatch ne seront pas appelés.
 
-Let's now create another filter for altering response headers in any public
-page, in our case it would be anything served from the ``PagesController``::
+Créons maintenant un autre filtre pour modifier l'en-tête de response de
+n'importe quelle page publique, dans notre cas ce serait tout ce qui est
+servi depuis le ``PagesController``::
 
     namespace App\Routing\Filter;
 
@@ -178,19 +182,20 @@ page, in our case it would be anything served from the ``PagesController``::
     // Dans notre bootstrap.php
     DispatcherFactory::add('HttpCache', ['for' => '/pages'])
 
-This filter will send a expiration header to 1 day in the future for
-all responses produced by the pages controller. You could of course do the same
-in the controller, this is just an example of what could be done with filters.
-For instance, instead of altering the response, you could cache it using
-:php:class:`Cake\\Cache\\Cache` and serve the response from the ``beforeDispatch()``
-callback.
+Ce filtre enverra un en-tête d'expiration pour 1 jour dans le futur pour toutes
+responses produites pour le controller pages. Vous pourriez bien entendu faire
+la même chose dans un controller, ce n'est qu'un exemple de ce qui peut être
+réalisé avec les filtres. Par exemple, au lieu d'altérer la response, vous
+pourriez la mettre en cache en utilisant :php:class:`Cake\\Cache\\Cache` en
+servant la response depuis le callback ``beforeDispatch()``.
 
-While powerful, dispatcher filters have the potential to make your application
-more difficult to maintain. Filters are an extremely powerful tool when used
-wisely and adding response handlers for each URL in your app is not a good use for
-them. Keep in mind that not everything needs to be a filter; `Controllers` and
-`Components` are usually a more accurate choice for adding any request handling
-code to your app.
+Bien que très puissants, les filtres du dispatcher peuvent également compliquer
+la maintenance de votre application. Les filtres sont des outils extrêmement
+puissants lorsqu'ils sont utilisés sagement et ajouter des gestionnaires de
+responses pour chaque URL dans votre application n'est pas une bonne utilisation.
+Gardez à l'esprit que tout n'a pas besoin d'être un filtre; Les `Controllers` et
+les `Components` sont souvent un choix plus précis pour ajouter tout code de
+gestionnaire de requête à votre application.
 
 .. meta::
     :title lang=fr: Filtres du Dispatcher
