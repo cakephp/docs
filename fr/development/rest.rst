@@ -44,11 +44,11 @@ GET         /recipes/123.format   RecipesController::view(123)
 ----------- --------------------- ------------------------------
 POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
+POST        /recipes/123.format   RecipesController::edit(123)
+----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
 DELETE      /recipes/123.format   RecipesController::delete(123)
------------ --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
 =========== ===================== ==============================
 
 La classe Router de CakePHP utilise un certain nombre d'indicateurs
