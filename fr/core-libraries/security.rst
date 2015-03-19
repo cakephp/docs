@@ -87,7 +87,7 @@ Fallback sur la prochaine méthode disponible. Si ``$salt`` est défini à
     // Utilise l'algorithme de hashage par défaut
     $hash = Security::hash('CakePHP Framework');
 
-La méthode ``hash`` a aussi les stratégies de hashage suivantes:
+La méthode ``hash()`` a aussi les stratégies de hashage suivantes:
 
 - md5
 - sha1

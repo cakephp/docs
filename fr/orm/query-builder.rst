@@ -656,7 +656,7 @@ query pour traiter préalablement ou transformer les résultats::
         return $max->age;
     });
 
-Vous pouvez utiliser ``first`` ou ``firstOrFail`` pour récupérer un
+Vous pouvez utiliser ``first()`` ou ``firstOrFail()`` pour récupérer un
 enregistrement unique. Ces méthodes vont modifier la requête en ajoutant
 une clause ``LIMIT 1``::
 
@@ -956,7 +956,7 @@ Les unions sont créées en composant une ou plusieurs requêtes select ensemble
     $unpublished->union($inReview);
 
 Vous pouvez créer les requêtes ``UNION ALL`` en utilisant la méthode
-``unionAll``::
+``unionAll()``::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);

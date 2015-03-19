@@ -74,7 +74,7 @@ Désactiver le Component CSRF pour des Actions Spécifiques
 
 Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour cetaines
 requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'événement du
-controller, au cours de la méthode ``beforeFilter``::
+controller, au cours de la méthode ``beforeFilter()``::
 
     public function beforeFilter(Event $event)
     {

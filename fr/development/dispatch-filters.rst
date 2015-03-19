@@ -131,7 +131,7 @@ Comme vous pouvez le voir, à l'image des autres classes dans CakePHP, les
 filtres de dispatcher suivent quelques conventions:
 
 * Les noms de classes finissent par ``Filter``.
-* Les classes sont dans le namespace ``Routing\\Filter``. par exemple,
+* Les classes sont dans le namespace ``Routing\\Filter``. Par exemple,
   ``App\\Routing\\Filter``.
 * Généralement, les filtres étendent ``Cake\\Routing\\DispatcherFilter``.
 
@@ -143,11 +143,11 @@ les objets ``request`` et ``response`` (instances de :php:class:`Cake\\Network\\
 and :php:class:`Cake\\Network\\Response`) dans la propriété ``data``.
 
 Alors que notre filtre était relativement simple, il y a quelques autres choses
-intéressantes que nous puvons réaliser dans les méthodes de filtre. En renvoyant
-un objet ``Response``, vous pouvez court-circuiter le process de dispatch et
-empêcher le controller d'être appelé. Lorsque vous renvoyez une response,
-n'oubliez pas d'appeller ``$event->stopPropagation()`` pour que les autres
-filtres ne soient pas appelés.
+intéressantes que nous pouvons réaliser dans les méthodes de filtre. En
+renvoyant un objet ``Response``, vous pouvez court-circuiter le process de
+dispatch et empêcher le controller d'être appelé. Lorsque vous renvoyez une
+response, n'oubliez pas d'appeller ``$event->stopPropagation()`` pour que les
+autres filtres ne soient pas appelés.
 
 .. note::
 

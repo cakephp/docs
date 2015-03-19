@@ -17,7 +17,7 @@ Pour utiliser les themes, spécifiez le nom du theme dans votre controller::
     }
 
 Vous pouvez également définir ou modifier le nom du theme dans une action ou
-dans les fonctions de callback ``beforeFilter`` ou ``beforeRender``::
+dans les fonctions de callback ``beforeFilter()`` ou ``beforeRender()``::
 
     $this->theme = 'AutreExemple';
 

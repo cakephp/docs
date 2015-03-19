@@ -329,7 +329,7 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode magique ``__call`` du Component Flash pour
+Nous utilisons la méthode magique ``__call()`` du Component Flash pour
 définir un message dans une variable de session et qui sera affiché dans la page
 juste après la redirection. Dans le layout, nous avons
 ``<?= $this->Flash->render() ?>`` qui permet
@@ -429,7 +429,7 @@ ajustements::
         }
     }
 
-Le méthode ``validationDefault`` indique à CakePHP comment valider vos données
+Le méthode ``validationDefault()`` indique à CakePHP comment valider vos données
 lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les
 deux champs "body" et "title" ne doivent pas être vides. Le moteur de
 validation de CakePHP est puissant, il dispose d'un certain nombre de

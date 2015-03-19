@@ -352,7 +352,7 @@ La même chose peut être appliquée à la fonction ``max()``, qui retourne un
 
 .. php:method:: sumOf(string|callable $callback)
 
-Pour finir, la méthode ``sumOf`` va retourner la somme d'une propriété de tous
+Pour finir, la méthode ``sumOf()`` va retourner la somme d'une propriété de tous
 les éléments::
 
     $collection = new Collection($people);

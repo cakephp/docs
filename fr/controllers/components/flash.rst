@@ -15,7 +15,7 @@ Définir les Messages Flash
 ==========================
 
 FlashComponent fournit deux façons de définir des messages flash : sa méthode
-magique ``__call`` et sa méthode ``set()``. Pour remplir votre application
+magique ``__call()`` et sa méthode ``set()``. Pour remplir votre application
 sématiquement, la méthode magique ``__call()`` de FlashComponent vous permet
 d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
 répertoire **src/Template/Element/Flash**. Par convention, les méthodes en

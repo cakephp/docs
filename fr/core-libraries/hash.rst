@@ -20,7 +20,7 @@ Syntaxe de chemin Hash
 ======================
 
 La syntaxe de chemin décrite ci-dessous est utilisée par toutes les méthodes
-dans ``Hash``. Les parties de la syntaxe du chemin ne sont pas toutes
+dans ``hash()``. Les parties de la syntaxe du chemin ne sont pas toutes
 disponibles dans toutes les méthodes. Une expression en chemin est faite
 depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux
 groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
@@ -792,7 +792,7 @@ Les Types d'Attribut Correspondants
         ];
 
         $result = Hash::nest($data, ['root' => 6]);
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             [
                 (int) 0 => [
                     'ThreadPost' => [

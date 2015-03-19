@@ -278,6 +278,7 @@ les méthodes suivantes:
 * toPHP
 * toDatabase
 * toStatement
+* marshal
 
 Une façon facile de remplir l'interface basique est d'étendre
 :php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un type
@@ -298,6 +299,14 @@ JSON, nous pourrions faire la classe type suivante::
         {
             if ($value === null) {
                 return null;
+            }
+            return json_decode($value, true);
+        }
+
+        public function marshal($value)
+        {
+            if (is_array($value) || $value === null) {
+                return $value;
             }
             return json_decode($value, true);
         }

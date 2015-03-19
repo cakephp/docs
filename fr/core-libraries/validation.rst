@@ -128,7 +128,7 @@ pouvez la scoper avec ce qui suit::
 Cela va s'assurer que l'adresse email fournie est seulement unique pour les
 autres enregistrements avec le même ``site_id``.
 
-Remarquez que ces exemples prennent une clé ``provider``. L'ajout des providers
+Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des providers
 ``Validator`` est expliqué plus loin dans les sections suivantes.
 
 Marquer les Règles comme étant les Dernières à être exécutées
@@ -169,7 +169,7 @@ classe :php:class:`~Cake\\Validation\\Validation`. Cela facilite l'utilisation
 des méthodes de cette classe en règles de validation. Lors de l'utilisation
 conjointe de Validators et de l'ORM, des providers supplémentaires sont
 configurés pour la table et les objets entity. Vous pouvez utiliser la méthode
-``provider`` pour ajouter un provider supplémentaire que votre application
+``provider()`` pour ajouter un provider supplémentaire que votre application
 a besoin d'utiliser::
 
     $validator = new Validator();
@@ -182,7 +182,7 @@ a besoin d'utiliser::
 
 Les providers de Validation peuvnt être des objets, ou des noms de classe. Si
 un nom de classe est utilisé, les méthodes doivent être static. Pour utiliser
-un provider autre que 'default', assurez-vous de définir la clé ``provider``
+un provider autre que 'default', assurez-vous de définir la clé ``provider()``
 dans votre règle::
 
     // Utilise une règle à partir du provider de la table

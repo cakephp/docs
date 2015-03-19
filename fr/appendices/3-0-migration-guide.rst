@@ -636,9 +636,9 @@ CookieComponent
   cookie, ceci facilite les tests, et permet de définir les cookies pour
   ControllerTestCase.
 - Les Cookies chiffrés dans les versions précédentes de CakePHP utilisant la
-  méthode ``cipher`` sont maintenant illisible parce que ``Security::cipher()``
+  méthode ``cipher()`` sont maintenant illisible parce que ``Security::cipher()``
   a été retirée. Vous aurez besoin de re-chiffrer les cookies avec la méthode
-  ``rijndael`` ou ``aes`` avant mise à jour.
+  ``rijndael()`` ou ``aes()`` avant mise à jour.
 - ``CookieComponent::type()`` a été retirée et remplacée par la donnée de
   configuration accessible avec ``config()``.
 - ``write()`` ne prend plus de paramètres ``encryption`` ou ``expires``. Ces
@@ -1028,7 +1028,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   l'ordre dans lequel les inputs doivent être affichés.
 - ``submit()`` a eu les options ``div``, ``before`` and ``after`` retirées. Vous
   pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
-- La méthode ``inputs`` n'accepte plus ``legend`` et ``fieldset`` dans le
+- La méthode ``inputs()`` n'accepte plus ``legend`` et ``fieldset`` dans le
   paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.
   Elle nécessite aussi que le paramètre ``$fields`` soit un tableau. Le
   paramètre ``$blacklist`` a été retiré, la fonctionnalité a été remplacée en

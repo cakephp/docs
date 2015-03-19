@@ -171,7 +171,7 @@ requêtées directement dans une entity existante. Ceci a l'avantage que seuls l
 champs qui changent réellement seront sauvegardés, au lieu d'envoyer tous les champs
 à la base de données, même ceux qui sont identiques. Vous pouvez fusionner
 un tableau de données brutes dans une entity existante en utilisant la méthode
-``patchEntity``::
+``patchEntity()``::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
@@ -180,7 +180,7 @@ un tableau de données brutes dans une entity existante en utilisant la méthode
     $articles->save($article);
 
 Comme expliqué dans la section précédente, les données requêtées doivent suivre
-la structure de votre entity. La méthode ``patchEntity`` est également capable
+la structure de votre entity. La méthode ``patchEntity()`` est également capable
 de fusionner les associations, par défaut seul les premiers niveaux
 d'associations sont fusionnés mais si vous voulez contrôler la liste des
 associations à fusionner ou fusionner des niveaux de plus en plus profonds, vous
@@ -375,7 +375,7 @@ suivantes vont se produire:
 1. L'objet validator est créé.
 2. Les providers de validation ``table`` et ``default`` sont attachés.
 3. La méthode de validation nommée est appelée. Par exemple,
-   ``validationDefault``.
+   ``validationDefault()``.
 4. L'event ``Model.buildValidator`` va être déclenché.
 5. Les données Requêtées vont être validées.
 6. Les données Requêtées vont être castées en types qui correspondent
@@ -397,9 +397,9 @@ validation que vous souhaitez appliquer::
 
     $articles->save($article, ['validate' => 'update']);
 
-Ce qui est au-dessus va appeler la méthode ``validationUpdate`` sur l'instance
+Ce qui est au-dessus va appeler la méthode ``validationUpdate()`` sur l'instance
 table pour construire les règles requises. Par défaut la méthode
-``validationDefault`` sera utilisée. Un exemple de méthode de validator pour
+``validationDefault()`` sera utilisée. Un exemple de méthode de validator pour
 notre Table articles serait::
 
     class ArticlesTable extends Table
@@ -749,7 +749,7 @@ Par exemple::
     $articles->save($article);
 
 Quand vous convertissez les données requêtées en entities, les méthodes
-``newEntity`` et ``newEntities`` vont gérer les deux tableaux de propriétés,
+``newEntity()`` et ``newEntities()`` vont gérer les deux tableaux de propriétés,
 ainsi qu'une liste d'ids avec la clé ``_ids``. Utiliser la clé ``_ids``
 facilite la construction d'un box select ou d'un checkbox basé sur les
 contrôles pour les associations belongs to many. Consultez la section
@@ -931,7 +931,7 @@ Créer un Vérificateur de Règles
 -------------------------------
 
 Les classes de vérificateur de Règles sont généralement définies par la
-méthode ``buildRules`` dans votre classe de table. Les behaviors et les autres
+méthode ``buildRules()`` dans votre classe de table. Les behaviors et les autres
 souscripteurs d'event peuvent utiliser l'event ``Model.buildRules`` pour
 ajouter des règles au vérificateur pour une classe de Table donnée::
 

@@ -1679,9 +1679,9 @@ Construire une Classe Widget
 Les classes Widget ont une interface requise vraiment simple. Elles doivent
 implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
 nécessite que les méthodes ``render(array $data)`` et ``secureFields(array $data)`` soient implémentées.
-La méthode ``render`` attend un tableau de données pour constuire le widget et doit renvoyer
+La méthode ``render()`` attend un tableau de données pour constuire le widget et doit renvoyer
 un chaine HTML pour le widget.
-La méthode ``secureFields`` attend également un tableau de données et doit retourner un tableau
+La méthode ``secureFields()`` attend également un tableau de données et doit retourner un tableau
 contenant la liste des champs à sécuriser pour ce widget.
 Si CakePHP construit votre widget, vous pouvez
 vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier

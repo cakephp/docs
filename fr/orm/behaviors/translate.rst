@@ -103,7 +103,7 @@ en lançant manuellement le script SQL suivant dans votre base de données:
 Attacher le Behavior Translate à Vos Tables
 ===========================================
 
-Attacher le behavior peut être fait dans la méthode ``initialize`` de votre
+Attacher le behavior peut être fait dans la méthode ``initialize()`` de votre
 classe Table::
 
     class Articles extends Table

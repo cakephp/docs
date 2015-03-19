@@ -182,7 +182,7 @@ comme ceci::
 
 Comme vous pouvez le voir dans le code ci-dessus, la fonction ``attach`` va
 accepter les instances de l'interface ``EventListener``. En interne, le
-gestionnaire d'evenement va utiliser ``implementedEvents`` pour attacher
+gestionnaire d'evenement va utiliser ``implementedEvents()`` pour attacher
 les bonnes callbacks.
 
 Enregistrer des Listeners Anonymes
@@ -237,7 +237,7 @@ après les autres, utiliser un nombre au-dessus de ``10`` le fera.
 Si deux callbacks ont la même valeur de priorité, elles seront exécutées selon
 l'ordre dans lequel elles ont été attachées. Vous définissez les priorités en
 utilisant la méthode ``attach`` pour les callbacks et en la déclarant dans
-la fonction ``implementedEvents`` pour les listeners d'évènement::
+la fonction ``implementedEvents()`` pour les listeners d'évènement::
 
     // Définir la priorité pour une callback
     $callback = [$this, 'doSomething'];
@@ -342,7 +342,7 @@ stopper l'opération de sauvegarde si le code détecte qu'il ne peut pas
 continuer.
 
 Afin de stopper les évènements, vous pouvez soit retourner ``false`` dans vos
-callbacks ou appeler la méthode ``stopPropagation`` sur l'objet event::
+callbacks ou appeler la méthode ``stopPropagation()`` sur l'objet event::
 
     public function doSomething($event)
     {

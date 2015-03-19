@@ -252,7 +252,7 @@ Retirer les Behaviors Chargés
 =============================
 
 Pour retirer un behavior de votre table, vous pouvez appeler la méthode
-``removeBehavior``::
+``removeBehavior()``::
 
     // Retire le behavior chargé
     $this->removeBehavior('Sluggable');

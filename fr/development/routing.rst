@@ -443,7 +443,7 @@ controller séparés, vous pouvez créer de plus petits et/ou de plus simples
 controllers. Les comportements communs aux controllers préfixés et non-préfixés
 peuvent être encapsulés via héritage :doc:`/controllers/components`, ou traits.
 En utilisant notre exemple des utilisateurs, accéder à l'url
-``/admin/users/edit/5`` devrait appeler la méthode ``edit`` de notre
+``/admin/users/edit/5`` devrait appeler la méthode ``edit()`` de notre
 ``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
 Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.ctp**.
 
@@ -456,12 +456,12 @@ du controller Pages en utilisant la route suivante::
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
 
-When creating prefix routes, you can set additional route parameters using
-the ``$options`` argument::
+Quand vous créez des routes prefixées, vous pouvez définir des paramètres de
+route supplémentaires en utilisant l'argument ``$options``::
 
     Router::prefix('admin', ['param' => 'value'], function ($routes) {
-        // Routes connected here are prefixed with '/admin' and
-        // have the 'param' routing key set.
+        // Routes connectées ici sont préfixées par '/admin' et
+        // ont la clé 'param' de routing définie.
         $routes->connect('/:controller');
     });
 
@@ -732,22 +732,23 @@ pouvez utiliser l'option ``only``::
     ]);
 
 Le code ci-dessus devrait créer uniquement les routes de ressource ``lecture``.
-Les noms de route sont ``create``, ``update``, ``view``, ``index`` et ``delete``.
+Les noms de route sont ``create``, ``update``, ``view``, ``index`` et
+``delete``.
 
 Changer les Actions du Controller
 ---------------------------------
 
 Vous devrez peut-être modifier le nom des actions du controller qui sont
-utilisés lors de la connexion des routes. Par exemple, si votre action ``edit``
-est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour renommer
-vos actions::
+utilisés lors de la connexion des routes. Par exemple, si votre action
+``edit()`` est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour
+renommer vos actions::
 
     $routes->resources('Articles', [
         'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-Le code ci-dessus va utiliser ``edit`` pour l'action update, et ``create`` au
-lieu de ``add``.
+Le code ci-dessus va utiliser ``edit()`` pour l'action update, et ``create()``
+au lieu de ``add()``.
 
 Mapping Additional Resource Routes
 ----------------------------------

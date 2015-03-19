@@ -309,7 +309,7 @@ pouvez utiliser quand vous faîtes les tests:
 * ``setUp`` est appelé avant chaque méthode de test. Doit être utilisé pour
   créer les objets qui vont être testés, et initialiser toute donnée pour le
   test. Toujours se rappeler d'appeler ``parent::setUp()``.
-* ``tearDown`` est appelé après chaque méthode de test. Devrait être utilisé
+* ``tearDown()`` est appelé après chaque méthode de test. Devrait être utilisé
   pour nettoyer une fois que le test est terminé. Toujours se rappeler
   d'appeler ``parent::tearDown()``.
 * ``setupBeforeClass`` est appelé une fois avant que les méthodes de test
@@ -738,7 +738,7 @@ ensuite notre méthode ``published()``. Dans ``$expected``, nous définissons
 ce que nous en attendons, ce qui devrait être le résultat approprié (que nous
 connaissons depuis que nous avons défini quels enregistrements sont remplis
 initialement dans la table articles.). Nous testons que les résultats
-correspondent à nos attentes en utilisant la méthode ``assertEquals``.
+correspondent à nos attentes en utilisant la méthode ``assertEquals()``.
 Regarder la section sur les :ref:`running-tests` pour plus d'informations
 sur la façon de lancer les cas de test.
 
@@ -904,7 +904,7 @@ la configuration des requêtes que vous allez envoyer à votre controller::
     ]);
 
 Les états de ces helpers définis par ces méthodes est remis à zéro dans la
-méthode ``tearDown``.
+méthode ``tearDown()``.
 
 .. _testing-authentication:
 
@@ -1111,7 +1111,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
     }
 
 Maintenant nous pouvons écrire des tests pour nous assurer que notre paramètre
-de pagination ``limit`` est défini correctement par la méthode ``adjust``
+de pagination ``limit`` est défini correctement par la méthode ``adjust()``
 dans notre component. Nous créons le fichier
 **tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 

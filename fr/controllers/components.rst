@@ -126,7 +126,7 @@ utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 
     Gardez à l'esprit que le chargement d'un component à la volée n'appellera
     pas les callbacks manquants. Si vous souhaitez que les callbacks
-    ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
+    ``initialize()`` ou ``startup()`` soient appelées, vous devrez les appeler
     manuellement selon le moment où vous chargez votre component.
 
 Utiliser les Components
