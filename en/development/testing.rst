@@ -637,7 +637,7 @@ a file named ``ArticlesTableTest.php`` in your **tests/TestCase/Model/Table** di
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
-    
+
     use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
@@ -1065,11 +1065,11 @@ set correctly by the ``adjust()`` method in our component. We create the file
     namespace App\Test\TestCase\Controller\Component;
 
     use App\Controller\Component\PagematronComponent;
-    use Cake\TestSuite\TestCase;
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
     use Cake\Network\Request;
     use Cake\Network\Response;
+    use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
     {

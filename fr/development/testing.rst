@@ -1119,9 +1119,10 @@ dans notre component. Nous créons le fichier
 
     use App\Controller\Component\PagematronComponent;
     use Cake\Controller\Controller;
-    use Cake\Controller\ComponentCollection;
+    use Cake\Controller\ComponentRegistry;
     use Cake\Network\Request;
     use Cake\Network\Response;
+    use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
     {
@@ -1133,9 +1134,6 @@ dans notre component. Nous créons le fichier
         {
             parent::setUp();
             // Configuration de notre component et de notre faux controller de test.
-            $collection = new ComponentCollection();
-            $this->component = new PagematronComponent($collection);
-
             $request = new Request();
             $response = new Response();
             $this->controller = $this->getMock(
@@ -1143,7 +1141,8 @@ dans notre component. Nous créons le fichier
                 [],
                 [$request, $response]
             );
-            $this->component->setController($this->controller);
+            $registry = new ComponentRegistry($this->controller);
+            $this->component = new PagematronComponent($registry);
         }
 
         public function testAdjust()
