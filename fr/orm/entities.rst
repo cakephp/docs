@@ -308,7 +308,7 @@ Lazy loading
     commentaires va fréquemment émettre N requêtes où N est le nombre d'articles
     étant itérés.
 
-Alors que le lazy loading n'est pas inclu par l'ORM de CakePHP, il n'est
+Alors que le lazy loading n'est pas inclus par l'ORM de CakePHP, il n'est
 pas difficile de l'intégrer vous-même quand et où vous le souhaitez. Lors
 de l'implémentation d'une méthode accesseur, vous pouvez charger les
 données associées en lazy loading::

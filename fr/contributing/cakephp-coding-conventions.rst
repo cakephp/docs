@@ -59,13 +59,13 @@ Structures de Contrôle
 Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. Ci-dessous, un exemple avec "``if``"::
 
-    if ((expr_1) || (expr_2)) { 
+    if ((expr_1) || (expr_2)) {
         // action_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // action_2; 
+        // action_2;
     } else {
-        // default_action; 
-    } 
+        // default_action;
+    }
 
 *  Dans les structures de contrôle, il devrait y avoir 1 (un) espace avant la
    première parenthèse et 1 (un) espace entre les dernières parenthèses et
@@ -85,11 +85,11 @@ Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
 ::
 
     // mauvais = pas d'accolades, déclaration mal placée
-    if (expr) statement; 
+    if (expr) statement;
 
     // mauvais = pas d'accolades
-    if (expr) 
-        statement; 
+    if (expr)
+        statement;
 
     // bon
     if (expr) {
@@ -175,7 +175,7 @@ Les fonctions doivent être appelées sans espace entre le nom de la fonction et
 la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre
 d'un appel de fonction::
 
-    $var = foo($bar, $bar2, $bar3); 
+    $var = foo($bar, $bar2, $bar3);
 
 Comme vous pouvez le voir, il doit y avoir un espace des deux côtés des
 signes égal (=).
@@ -402,7 +402,7 @@ Les Balises PHP
 
 Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
 courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de
-template (``.ctp``) lorque cela est nécessaire.
+template (``.ctp``) lorsque cela est nécessaire.
 
 Echo court
 ----------

@@ -1073,7 +1073,7 @@ HtmlHelper
   ``$options``.
 - ``HtmlHelper::nestedList()`` nécessite maintenant que ``$options`` soit un
   tableau. Le quatrième argument pour le niveau de tag a été retiré et il a été
-  inclu dans le tableau ``$options``.
+  inclus dans le tableau ``$options``.
 - L'argument ``$confirmMessage`` de
   :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()` a été retiré. Vous devez
   maintenant utiliser la clé ``confirm`` dans ``$options`` pour spécifier

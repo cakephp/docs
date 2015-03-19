@@ -179,14 +179,14 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post['Post']['id']
+        $post->id'
     ]); ?>
     </li>
     <?php $this->end(); ?>
 
     // The remaining content will be available as the 'content' block
     // In the parent view.
-    <?= h($post['Post']['body']) ?>
+    <?= h($post->body) ?>
 
 L'exemple ci-dessus vous montre comment vous pouvez étendre une vue, et
 remplir un ensemble de blocks. Tout contenu qui ne serait pas déjà dans un block
