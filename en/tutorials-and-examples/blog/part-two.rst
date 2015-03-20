@@ -39,7 +39,7 @@ be used in the ArticlesController, and will be tied to a database table called
     CakePHP will dynamically create a model object for you if it
     cannot find a corresponding file in **src/Model/Table**. This also means
     that if you accidentally name your file wrong (i.e. articlestable.php or
-    ArticleTable.php), CakePHP will not recognize any of your settings and will
+    ArticlesTable.php), CakePHP will not recognize any of your settings and will
     use the a generated model instead.
 
 For more on models, such as callbacks, and validation, check out the :doc:`/orm`
