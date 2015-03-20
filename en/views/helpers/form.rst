@@ -1528,8 +1528,9 @@ You can customize the generated inputs by defining additional options in the
 When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
-- ``fieldset`` Set to ``false`` to disable the fieldset. If a string is supplied
-  it will be used as the class name for the fieldset element.
+- ``fieldset`` Set to ``false`` to disable the fieldset. You can also pass an
+  array of parameters to be applied as HTML attributes to the fieldset tag. If you
+  pass an empty array, the fieldset will be displayed without attributes.
 - ``legend`` Set to ``false`` to disable the legend for the generated input set.
   Or supply a string to customize the legend text.
 
