@@ -715,6 +715,10 @@ with reflected properties that normal mocks have::
         $model->verifyEmail('test@example.com');
     }
 
+In your ``tearDown()`` method be sure to remove the mock with::
+
+    TableRegistry::clear();
+
 .. _integration-testing:
 
 Controller Integration Testing
