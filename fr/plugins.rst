@@ -332,7 +332,7 @@ CakePHP va aussi connecter les routes qui utilisent le modèle suivant::
     /:prefix/:plugin/:controller/:action
 
 Consultez la section sur :ref:`plugin-configuration` pour plus d'informations
-sur la façon de charger les fichiers de route spécifique à un plugin.
+sur la façon de charger les fichiers de routes spécifiques à un plugin.
 
 Pour les plugins que vous n'avez pas créés avec bake, vous devrez aussi modifier
 le fichier ``composer.json`` pour ajouter votre plugin aux classes d'autoload,
@@ -519,8 +519,8 @@ Construire ces components est exactement la même chose que de les construire
 de nommage.
 
 Faire référence avec votre component, depuis l'intérieur ou l'extérieur de
-votre plugin nécessite seulement que vous préfixiez le nom du plugin avant le nom
-du component. Par exemple::
+votre plugin nécessite seulement que vous préfixiez le nom du plugin avant le
+nom du component. Par exemple::
 
     // Component défini dans le plugin 'ContactManager'
     namespace ContactManager\Controller\Component;
