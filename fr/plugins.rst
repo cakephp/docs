@@ -28,7 +28,7 @@ feriez ce qui suit::
     php composer.phar require cakephp/debug_kit
 
 Ceci installe la dernière version de DebugKit et met à jour vos
-fichiers ``composer.json``, ``composer.lock``, met à jour 
+fichiers ``composer.json``, ``composer.lock``, met à jour
 ``vendor/cakephp-plugins.php`` et met à jour votre autoloader.
 
 Si le plugin que vous voulez installer n'est pas disponible sur
@@ -79,6 +79,8 @@ explicitement.
 
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
     defined in ``vendor/cakephp-plugins.php``.
+
+.. _autoloading-plugin-classes:
 
 Autochargement des Classes du Plugin
 ------------------------------------
@@ -329,8 +331,13 @@ CakePHP va aussi connecter les routes qui utilisent le modèle suivant::
     /:prefix/:plugin/:controller
     /:prefix/:plugin/:controller/:action
 
-Regardez la section sur :ref:`plugin-configuration` pour plus d'informations sur
-la façon de charger les fichiers de route spécifique à un plugin.
+Consultez la section sur :ref:`plugin-configuration` pour plus d'informations
+sur la façon de charger les fichiers de routes spécifiques à un plugin.
+
+Pour les plugins que vous n'avez pas créés avec bake, vous devrez aussi modifier
+le fichier ``composer.json`` pour ajouter votre plugin aux classes d'autoload,
+ceci peut être fait comme expliqué dans la documentation
+:ref:`autoloading-plugin-classes`.
 
 .. _plugin-models:
 
@@ -512,8 +519,8 @@ Construire ces components est exactement la même chose que de les construire
 de nommage.
 
 Faire référence avec votre component, depuis l'intérieur ou l'extérieur de
-votre plugin nécessite seulement que vous préfixiez le nom du plugin avant le nom
-du component. Par exemple::
+votre plugin nécessite seulement que vous préfixiez le nom du plugin avant le
+nom du component. Par exemple::
 
     // Component défini dans le plugin 'ContactManager'
     namespace ContactManager\Controller\Component;

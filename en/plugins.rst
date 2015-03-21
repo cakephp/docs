@@ -77,6 +77,8 @@ plugins you explicitly specify.
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
     defined in ``vendor/cakephp-plugins.php``.
 
+.. _autoloading-plugin-classes:
+
 Autoloading Plugin Classes
 --------------------------
 
@@ -324,7 +326,7 @@ plugin specific route files.
 
 For plugins you did not create with bake, you will also need to edit the
 ``composer.json`` file to add your plugin to the autoload classes, this can be
-done as per the documentation :doc:`autoloading-plugin-classes`.
+done as per the documentation :ref:`autoloading-plugin-classes`.
 
 .. _plugin-models:
 
