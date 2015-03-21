@@ -174,8 +174,8 @@ utilisant :php:meth:`RequestHandler::addInputType()`
 RESTful Routing
 ===============
 
-CakePHP's Router makes connecting RESTful resource routes easy. See the section
-on :ref:`resource-routes` for more information.
+Le Router de CakePHP facilite la connection des routes pour les ressources
+RESTful. Consultez la section :ref:`resource-routes` pour plus d'informations.
 
 .. meta::
     :title lang=fr: REST
