@@ -61,7 +61,7 @@ dans le tableau de données::
       'logo' => $fileHandle
     ]);
 
-En préfixant les valeurs des données par ``@`` ou en inclluant un gestionnaire
+En préfixant les valeurs des données par ``@`` ou en incluant un gestionnaire
 de fichier dans les données. Si un gestionnaire de fichier est utilisé, le
 gestionnaire de fichier sera lu jusqu'à sa fin, il ne sera pas rembobiné avant
 d'être lu.
@@ -108,15 +108,15 @@ utilisées dans ``$options``:
 - ``cookie`` - Tableau de cookies à utiliser.
 - ``proxy`` - Tableau d'informations proxy.
 - ``auth`` - Tableau de données d'authentification, la clé ``type`` est utilisée
-  pour déleguer à une stratégie d'authentification. Par défaut l'Auth Basic est
+  pour déléguer à une stratégie d'authentification. Par défaut l'Auth Basic est
   utilisée.
 - ``ssl_verify_peer`` - par défaut à ``true``. Définie à ``false`` pour
   désactiver la certification SSL (non conseillé)
 - ``ssl_verify_depth`` - par défaut à 5. Depth to traverse in the CA chain.
 - ``ssl_verify_host`` - par défaut à ``true``. Valide le certificat SSL pour un
   nom d'hôte.
-- ``ssl_cafile`` - par défaut pour construire dans cafile. Overwrite to use
-  custom CA bundles.
+- ``ssl_cafile`` - par défaut pour construire dans cafile. Ecrasez-le pour
+  utiliser des bundles CA personnalisés.
 - ``timeout`` - Durée d'attente avant timing out.
 - ``type`` - Envoi un corps de requête dans un type de contenu personnalisé.
   Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
@@ -124,7 +124,7 @@ utilisées dans ``$options``:
 
 Le paramètre options est toujours le 3ème paramètre dans chaque méthode HTTP.
 Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des
-:ref:`scoped clients <http_client_scoped_client>`.
+:ref:`clients scoped <http_client_scoped_client>`.
 
 Authentification
 ================
@@ -146,7 +146,6 @@ Un exemple simple d'authentification::
 
 Par défaut Http\\Client va utiliser l'authentification basic s'il n'y a pas
 de clé ``'type'`` dans l'option auth.
-
 
 Utiliser l'Authentification Digest
 ----------------------------------
@@ -247,9 +246,8 @@ host, scheme, proxy, port sont remplacées dans l'URL de la requête::
 
 Ce qui est au-dessus va remplacer le domaine, le scheme, et le port. Cependant,
 cette requête va continuer à utiliser toutes les autres options définies quand
-le client scoped a été créé. Regardez :ref:`http_client_request_options`
+le client scoped a été créé. Consultez :ref:`http_client_request_options`
 pour plus d'informations sur les options intégrées.
-
 
 Configurer et Gérer les Cookies
 ===============================
