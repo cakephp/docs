@@ -68,6 +68,7 @@ List of Methods
 * :php:meth:`insert`
 * :php:meth:`buffered`
 * :php:meth:`compile`
+* :php:meth:`through`
 
 Iterating
 =========
@@ -195,7 +196,7 @@ collection that will yield the every single element nested in the collection::
     $allElements = $collection->unfold();
 
     // $result contains [1, 2, 3, 4, 5];
-    $result = $new->toArray(false);
+    $result = $new->toList();
 
 When passing a callable to ``unfold()`` you can control what elements will be
 unfolded from each item in the original collection. This is useful for returning
@@ -208,7 +209,20 @@ data from paginated services::
         return MyService::fetchPage($page)->toArray();
     });
 
-    $allPagesItems = $items->toArray(false);
+    $allPagesItems = $items->toList();
+
+If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
+to return as many elements per each item in the collection as you may need::
+
+    $oddNumbers = [1, 3, 5, 7];
+    $oddNumbers = new Collection($oddNumbers);
+    $result = $collection->unfold(function ($oddNumber) {
+        yield $oddNumber;
+        yield $oddNumber + 1;
+    });
+
+    // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
+    $result = $new->toList();
 
 Filtering
 =========
@@ -655,7 +669,7 @@ collection containing the values from both sources::
     This can present a problem when converting a collection to an array using
     ``toArray()``. If you do not want values from one collection to override
     others in the previous one based on their key, make sure that you call
-    ``toArray(false)`` in order to drop the keys and preserve all values.
+    ``toList()`` in order to drop the keys and preserve all values.
 
 Modifiying Elements
 -------------------
@@ -720,6 +734,95 @@ first one, then the target property will be filled with ``null`` values::
 
 The ``insert()`` method can operate array elements or objects implementing the
 ``ArrayAccess`` interface.
+
+Making Collection Methods Reusable
+----------------------------------
+
+Using closures for collection methods is great when the work to be done is
+small and focused, but it can get messy very quickly, specially when a lot of
+different methods need to be called or when the length of the closure methods
+is more than just a few lines.
+
+There are also cases when the logic used for any of the collection methods
+called can be reused in multiple parts of the application. So, it is
+recommended that you consider extracting the logic to separate classes. For
+example, imagine a lengthy closure like this one::
+
+        $colletion
+                ->map(function ($row, $key) {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                });
+
+This can be refactored by creating another class::
+
+        class TotalOrderCalculator
+        {
+
+                public function __invoke($row, $key)
+                {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                }
+        }
+
+        // Use the logic in your map() call
+        $collection->map(new TotalOrderCalculator)
+
+
+.. php:method:: through(callable $c)
+
+Sometimes a chain of collection method calls can become reusable in other parts
+of your application, but only if they are called in that specific order. In
+those cases you can use the ``through`` in combination with an invokable class
+instance to distribute your handy data processing calls::
+
+        $collection
+                ->map(new ShippingCostCalculator)
+                ->map(new TotalOrderCalculator)
+                ->map(new GiftCardPriceReducer)
+                ->buffered()
+               ...
+
+All those method calls can be extracted into a new class so they don't need to
+be repeated every time::
+
+        class FinalCheckOutRowProcessor
+        {
+
+                public function __invoke($collection)
+                {
+                        return $collection
+                                ->map(new ShippingCostCalculator)
+                                ->map(new TotalOrderCalculator)
+                                ->map(new GiftCardPriceReducer)
+                                ->buffered()
+                               ...
+                }
+        }
+
+
+        // Now you can use the through() method to call all methods at once
+
+        $collection->through(new FinalCheckOutRowProcessor);
 
 Optimizing Collections
 ----------------------
@@ -816,4 +919,4 @@ places at the same time. In order to clone a collection out of another use the
 
 .. meta::
     :title lang=en: Collections
-    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold
+    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold, through
