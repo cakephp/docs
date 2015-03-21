@@ -38,8 +38,8 @@ de la base de données appelée ``articles``.
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
-    pas le fichier correspondant dans **src/Model/Table**. Cela veut aussi dire que
-    si vous n'avez pas nommé correctement votre fichier (par ex.
+    pas le fichier correspondant dans **src/Model/Table**. Cela veut aussi dire
+    que si vous n'avez pas nommé correctement votre fichier (par ex.
     articlestable.php ou ArticleTable.php). CakePHP ne reconnaîtra pas votre
     configuration et utilisera les objets par défaut.
 
