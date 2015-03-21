@@ -324,6 +324,8 @@ plugin specific route files.
 
 .. _plugin-models:
 
+For none baked plugins you will also need to edit the composer.json file to add your plugin to the autoload classes, this can be done as per the documentation :doc:'autoloading-plugin-classes'
+
 Plugin Models
 =============
 
