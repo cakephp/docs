@@ -971,6 +971,9 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     // Vérifie qu'aucun en-tête Location n'a été envoyé
     $this->assertNoRedirect();
 
+    // Vérifie une partie de l'en-tête Location
+    $this->assertRedirectContains();
+
     // Vérifie que le contenu de la réponse n'est pas vide
     $this->assertResponseNotEmpty();
 
