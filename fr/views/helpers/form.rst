@@ -1577,9 +1577,9 @@ additionnelles dans le paramètre ``$fields``::
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
 ``$options`` pour contrôler les legend/fields générés.
 
-- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Si une chaîne est
-  fournie, elle sera utilisée comme nom de classe pour l'element fieldset
-
+- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez également passer
+  un tableau de paramètres qui seront rendus comme attributs HTML sur le tag du fieldset.
+  Si vous passez un tableau vide, le fieldset sera simplement rendu sans attributs.
 - ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble d'input
   généré.
   Ou fournir une chaîne pour personnaliser le texte de legend.
