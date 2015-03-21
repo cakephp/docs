@@ -115,7 +115,7 @@ API de Folder
     * ``Folder::MERGE`` fusionne les répertoires source/destination. Les
       fichiers dans le répertoire source vont remplacer les fichiers dans le
       répertoire de cible. Les contenus du répertoire seront fusionnés.
-    * ``Folder::OVERWRITE`` écrase les fichiers & répertoires existant dans lac
+    * ``Folder::OVERWRITE`` écrase les fichiers & répertoires existant dans le
       répertoire cible avec ceux dans le répertoire source. Si la source
       et la destination contiennent le même sous-répertoire, les contenus du
       répertoire de cible vont être retirés et remplacés avec celui de la
