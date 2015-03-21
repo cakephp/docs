@@ -322,9 +322,11 @@ also connect routes that use the following pattern::
 See the section on :ref:`plugin-configuration` for information on how to load
 plugin specific route files.
 
-.. _plugin-models:
+For plugins you did not create with bake, you will also need to edit the
+``composer.json`` file to add your plugin to the autoload classes, this can be
+done as per the documentation :doc:`autoloading-plugin-classes`.
 
-For none baked plugins you will also need to edit the composer.json file to add your plugin to the autoload classes, this can be done as per the documentation :doc:'autoloading-plugin-classes'
+.. _plugin-models:
 
 Plugin Models
 =============
