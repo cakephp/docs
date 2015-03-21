@@ -212,7 +212,7 @@ data from paginated services::
     $allPagesItems = $items->toList();
 
 If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
-to return as many elements per each item in the collection as you may need::
+to return as many elements for each item in the collection as you may need::
 
     $oddNumbers = [1, 3, 5, 7];
     $oddNumbers = new Collection($oddNumbers);
@@ -738,15 +738,15 @@ The ``insert()`` method can operate array elements or objects implementing the
 Making Collection Methods Reusable
 ----------------------------------
 
-Using closures for collection methods is great when the work to be done is
-small and focused, but it can get messy very quickly, specially when a lot of
-different methods need to be called or when the length of the closure methods
-is more than just a few lines.
+Using closures for collection methods is great when the work to be done is small
+and focused, but it can get messy very quickly. This becomes more obvious when
+a lot of different methods need to be called or when the length of the closure
+methods is more than just a few lines.
 
-There are also cases when the logic used for any of the collection methods
-called can be reused in multiple parts of the application. So, it is
-recommended that you consider extracting the logic to separate classes. For
-example, imagine a lengthy closure like this one::
+There are also cases when the logic used for the collection methods can be
+reused in multiple parts of your application. It is recommended that you
+consider extracting complex collection logic to separate classes. For example,
+imagine a lengthy closure like this one::
 
         $colletion
                 ->map(function ($row, $key) {
@@ -792,8 +792,8 @@ This can be refactored by creating another class::
 
 Sometimes a chain of collection method calls can become reusable in other parts
 of your application, but only if they are called in that specific order. In
-those cases you can use the ``through`` in combination with an invokable class
-instance to distribute your handy data processing calls::
+those cases you can use ``through()`` in combination with a class implementing
+``__invoke`` to distribute your handy data processing calls::
 
         $collection
                 ->map(new ShippingCostCalculator)
@@ -802,7 +802,7 @@ instance to distribute your handy data processing calls::
                 ->buffered()
                ...
 
-All those method calls can be extracted into a new class so they don't need to
+The above method calls can be extracted into a new class so they don't need to
 be repeated every time::
 
         class FinalCheckOutRowProcessor
@@ -821,7 +821,6 @@ be repeated every time::
 
 
         // Now you can use the through() method to call all methods at once
-
         $collection->through(new FinalCheckOutRowProcessor);
 
 Optimizing Collections
