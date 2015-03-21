@@ -19,7 +19,7 @@ many to one   belongsTo             Many articles belong to a user.
 many to many  belongsToMany         Tags belong to many articles.
 ============= ===================== =======================================
 
-Associations are defined during the ``inititalize()`` method of your table
+Associations are defined during the ``initialize()`` method of your table
 object. Methods matching the association type allow you to define the
 associations in your application. For example if we wanted to define a belongsTo
 association in our ArticlesTable::
