@@ -760,6 +760,10 @@ normal mocks have::
         $model->verifyEmail('test@example.com');
     }
 
+Dans votre méthode ``tearDown()``, assurez-vous de retirer le mock avec ceci::
+
+    TableRegistry::clear();
+
 .. _integration-testing:
 
 Test d'intégrations des Controllers
