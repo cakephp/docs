@@ -89,7 +89,7 @@ If you want to keep current with the latest changes in CakePHP you can
 add the following to your application's **composer.json**::
 
     "require": {
-        "cakephp/cakephp": "3.0.*-dev"
+        "cakephp/cakephp": "dev-master"
     }
 
 Each time you run
