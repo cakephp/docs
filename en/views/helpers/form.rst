@@ -505,7 +505,7 @@ Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
 * ``$options['value']`` Used in combination with a select-type input (i.e.
-  For types select, date, time, datetime). Set 'selected' to the value of the
+  For types select, date, time, datetime). Set 'value' to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->time('close_time', [
@@ -516,6 +516,17 @@ Options for Select, Checkbox and Radio Inputs
 
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
+    
+  
+
+  For select input where you turn on the `multiple` attribute as true, 
+  you can use an array of the values you want to render as default selected::
+    
+    echo $this->Form->select('rooms', [
+        'multiple' => true,
+        'value' => [1, 3] // options with values 1 and 3 will be selected as default
+    ]);
+    
 
 * ``$options['empty']`` If set to ``true``, forces the input to remain empty.
 
