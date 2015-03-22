@@ -100,7 +100,7 @@ callback being applied to each object in the original collection::
         return $value * 2;
     });
 
-    // $result contains [2, 4, 6];
+    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
 
 The ``map()`` method will create a new iterator which lazily creates
@@ -193,7 +193,7 @@ collection that will yield the every single element nested in the collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
-    $allElements = $collection->unfold();
+    $new = $collection->unfold();
 
     // $result contains [1, 2, 3, 4, 5];
     $result = $new->toList();
@@ -215,8 +215,8 @@ If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
 to return as many elements for each item in the collection as you may need::
 
     $oddNumbers = [1, 3, 5, 7];
-    $oddNumbers = new Collection($oddNumbers);
-    $result = $collection->unfold(function ($oddNumber) {
+    $collection = new Collection($oddNumbers);
+    $new = $collection->unfold(function ($oddNumber) {
         yield $oddNumber;
         yield $oddNumber + 1;
     });
@@ -608,7 +608,7 @@ position, use the ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
-    // This could return ['b' => 2, 'c' => 3, 'a' => 1]
+    // This could return [2, 3, 1]
     $collection->shuffle()->toArray();
 
 Withdrawing Elements
@@ -748,7 +748,7 @@ reused in multiple parts of your application. It is recommended that you
 consider extracting complex collection logic to separate classes. For example,
 imagine a lengthy closure like this one::
 
-        $colletion
+        $collection
                 ->map(function ($row, $key) {
                     if (!empty($row['items'])) {
                         $row['total'] = collection($row['items'])->sumOf('price');
