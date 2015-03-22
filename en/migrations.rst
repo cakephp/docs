@@ -5,8 +5,8 @@ Migrations is another plugin supported by the core team that helps you
 do schema changes in your database by writing PHP files that can be tracked
 using your version control system.
 
-It  allows you to evolve your database tables over time. Instead of writing
-schema modifications in SQL, this  plugin allow you to use an intuitive set
+It allows you to evolve your database tables over time. Instead of writing
+schema modifications in SQL, this plugin allows you to use an intuitive set
 of methods to implement your database changes.
 
 This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_
@@ -31,7 +31,7 @@ config/app.php file as explained in the :ref:`Databse Configuration section <dat
 Overview
 ========
 
-A migrations is basically a single PHP file that describes a new 'version' of
+A migration is basically a single PHP file that describes a new 'version' of
 the database. A migration file can create tables, add or remove columns, create
 indexes and even insert data into the database.
 
@@ -66,7 +66,7 @@ the change, at this point no ``products`` table exist, but we have created
 a file that is both able to create the table with the right column as well as
 to drop it if we rollback the migration.
 
-Once the file has been created in the ``config/Migrations`` folder, you will be
+Once the file has been created in the **config/Migrations** folder, you will be
 able to execute the following command to create the table in your database::
 
         bin/cake migrations migrate
@@ -74,9 +74,9 @@ able to execute the following command to create the table in your database::
 Creating Migrations
 ===================
 
-Migration files are stored in the ``config/Migration`` directory of your
+Migration files are stored in the **config/Migration** directory of your
 application. The name of the migration files are prefixed with the date in
-which they were created, in the format ``YYYYMMDDHHMMSS_my_new_migration.php``.
+which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**.
 
 The easiest way of creating a migrations file is by using the command line.
 Let's imagine that you'd like to add a new ``products`` table::
@@ -202,7 +202,7 @@ database, you can run the ``migration_snapshot`` command::
 
         bin/cake bake migration_snapshot Initial
 
-It will generate a migration file called ``Initial`` containing all the create
+It will generate a migration file called **Initial** containing all the create
 statements for all tables in your database.
 
 Creating Custom Primary Keys
