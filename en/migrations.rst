@@ -26,7 +26,7 @@ You will need to add the following line to your application's bootstrap.php file
         Plugin::load('Migrations');
 
 Additionally, you will need to configure the default database configuration in your
-config/app.php file as explained in the :ref:`Databse Configuration section <database-configuration>`.
+config/app.php file as explained in the :ref:`Database Configuration section <database-configuration>`.
 
 Overview
 ========
