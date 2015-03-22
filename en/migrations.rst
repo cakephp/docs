@@ -9,7 +9,7 @@ It  allows you to evolve your database tables over time. Instead of writing
 schema modifications in SQL, this  plugin allow you to use an intuitive set
 of methods to implement your database changes.
 
-This plugin is a wrapper for the database migrations libray `Phinx <https://phinx.org/>`_
+This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_
 
 Installation
 ============
@@ -183,5 +183,94 @@ can be:
 * date
 * binary
 * boolean
+* uuid
 
+Additionally you can create an empty migrations file if you want full control
+over what needs to be executed::
+
+        bin/cake migrations create MyCustomMigration
+
+Please make sure you read the official `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
+in order to know the complete list of methods you can use for writing migration files.
+
+Generating Migrations From Existing Databases
+---------------------------------------------
+
+If you are dealing with a pre-existing database and want to start using
+migrations, or to version control the initial schema of your application's
+database, you can run the ``migration_snapshot`` command::
+
+        bin/cake bake migration_snapshot Initial
+
+It will generate a migration file called ``Initial`` containing all the create
+statements for all tables in your database.
+
+Creating Custom Primary Keys
+----------------------------
+
+If you need to avoid the automatic creation of the ``id`` primary key when
+adding new tables to the database, you can use the second argument of the
+``table()`` method::
+
+        class CreateProductsTable extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this->table('products', ['id' => false, 'primary_key' => ['id']]);
+                $table
+                      ->addColumn('id', 'uuid')
+                      ->addColumn('name', 'string')
+                      ->addColumn('description', 'text')
+                      ->create();
+            }
+
+The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
+
+Applying Migrations
+===================
+
+Once you have generated or written your migration file, you need to execute the
+following command to apply the changes to your database::
+
+        bin/cake migrations migrate
+
+To migrate to a specific version then use the --target parameter or -t for short::
+
+        bin/cake migrations migrate -t 20150103081132
+
+That corresponds to the timestamp that is prefixed to the migrations file name.
+
+Reverting Migrations
+====================
+
+The Rollback command is used to undo previous migrations executed by this
+plugin. It is the reverse action of the ``migrate`` command.
+
+You can rollback to the previous migration by using the ``rollback`` command::
+
+        bin/cake migrations rollback
+
+You can also pass a migration version number to rollback to a specific version::
+
+         bin/cake migrations rollback -t 20150103081132
+
+Migrations Status
+=================
+
+The Status command prints a list of all migrations, along with their current status.
+You can use this command to determine which migrations have been run::
+
+        bin/cake migrations status
+
+Using Migrations In Plugins
+===========================
+
+Plugins can also provide migration files. This makes plugins that are intended
+to be distributed much more portable and easy to install. All commands in the
+Migrations plugin support the ``--plugin`` or ``-p`` option that will scope the
+execution to the migrations relative to that plugin::
+
+        bin/cake migrations status -p PluginName
+
+        bin/cake migrations migrate -p PluginName
 
