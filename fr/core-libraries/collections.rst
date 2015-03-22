@@ -70,6 +70,7 @@ Liste des Méthodes
 * :php:meth:`insert`
 * :php:meth:`buffered`
 * :php:meth:`compile`
+* :php:meth:`through`
 
 Faire une Itération
 ===================
@@ -101,7 +102,7 @@ callback étant appliqué à chaque objet dans la collection originelle::
         return $value * 2;
     });
 
-    // $result contient [2, 4, 6];
+    // $result contient ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
 
 La méthode ``map()`` va créer un nouvel itérateur, qui va créer automatiquement
@@ -198,10 +199,10 @@ unique imbriqué dans la collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
-    $allElements = $collection->unfold();
+    $new = $collection->unfold();
 
     // $result contient [1, 2, 3, 4, 5];
-    $result = $new->toArray(false);
+    $result = $new->toList();
 
 Quand vous passez un callable à ``unfold()``, vous pouvez contrôler les éléments
 qui vont être révélés à partir de chaque item dans la collection originale.
@@ -214,7 +215,21 @@ C'est utile pour retourner les données à partir des services paginés::
         return MyService::fetchPage($page)->toArray();
     });
 
-    $allPagesItems = $items->toArray(false);
+    $allPagesItems = $items->toList();
+
+Si vous utiliez PHP 5.5+, vous pouvez utiliser le mot clé ``yield`` à l'intérieur
+de ``unfold()`` pour renvoyer autant d'éléments pour chaque item dans la collection
+que besoin::
+
+    $oddNumbers = [1, 3, 5, 7];
+    $collection = new Collection($oddNumbers);
+    $new = $collection->unfold(function ($oddNumber) {
+        yield $oddNumber;
+        yield $oddNumber + 1;
+    });
+
+    // $result contient [1, 2, 3, 4, 5, 6, 7, 8];
+    $result = $new->toList();
 
 Filtrer
 =======
@@ -620,7 +635,7 @@ dans une position au hasard, utilisez ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
-    // Ceci pourrait retourner ['b' => 2, 'c' => 3, 'a' => 1]
+    // Ceci pourrait retourner [2, 3, 1]
     $collection->shuffle()->toArray();
 
 Retrait d'Eléments
@@ -687,7 +702,7 @@ des deux sources::
     convertissez une collection en un tableau en utilisant ``toArray()``. Si
     vous ne voulez pas que des valeurs d'une collection surchargent les autres
     dans la précédente basée sur leur clé, assurez-vous que vous appelez
-    ``toArray(false)`` afin de supprimer les clés et de préserver toutes les
+    ``toList()`` afin de supprimer les clés et de préserver toutes les
     valeurs.
 
 Modification d'Eléments
@@ -755,6 +770,94 @@ alors la propriété cible va être remplie avec les valeurs ``null``::
 
 La méthode ``insert()`` peut opérer sur des éléments tableau ou des objets qui
 implémentent l'interface ``ArrayAccess``.
+
+Making Collection Methods Reusable
+----------------------------------
+
+Using closures for collection methods is great when the work to be done is small
+and focused, but it can get messy very quickly. This becomes more obvious when
+a lot of different methods need to be called or when the length of the closure
+methods is more than just a few lines.
+
+There are also cases when the logic used for the collection methods can be
+reused in multiple parts of your application. It is recommended that you
+consider extracting complex collection logic to separate classes. For example,
+imagine a lengthy closure like this one::
+
+        $collection
+                ->map(function ($row, $key) {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                });
+
+This can be refactored by creating another class::
+
+        class TotalOrderCalculator
+        {
+
+                public function __invoke($row, $key)
+                {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                }
+        }
+
+        // Use the logic in your map() call
+        $collection->map(new TotalOrderCalculator)
+
+
+.. php:method:: through(callable $c)
+
+Sometimes a chain of collection method calls can become reusable in other parts
+of your application, but only if they are called in that specific order. In
+those cases you can use ``through()`` in combination with a class implementing
+``__invoke`` to distribute your handy data processing calls::
+
+        $collection
+                ->map(new ShippingCostCalculator)
+                ->map(new TotalOrderCalculator)
+                ->map(new GiftCardPriceReducer)
+                ->buffered()
+               ...
+
+The above method calls can be extracted into a new class so they don't need to
+be repeated every time::
+
+        class FinalCheckOutRowProcessor
+        {
+
+                public function __invoke($collection)
+                {
+                        return $collection
+                                ->map(new ShippingCostCalculator)
+                                ->map(new TotalOrderCalculator)
+                                ->map(new GiftCardPriceReducer)
+                                ->buffered()
+                               ...
+                }
+        }
+
+
+        // Now you can use the through() method to call all methods at once
+        $collection->through(new FinalCheckOutRowProcessor);
 
 Optimiser les Collections
 -------------------------
@@ -854,4 +957,4 @@ utilisez la méthode ``compile()``::
 
 .. meta::
     :title lang=fr: Collections
-    :keywords lang=fr: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold
+    :keywords lang=fr: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold, through
