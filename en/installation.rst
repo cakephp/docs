@@ -68,11 +68,11 @@ instructions for Composer's Windows installer can be found within the README
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 Or if Composer is installed globally::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application
