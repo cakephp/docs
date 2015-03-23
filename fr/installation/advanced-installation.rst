@@ -28,11 +28,13 @@ Installer CakePHP avec Composer
 
 Composer est un outil de gestion de dépendances pour PHP 5.3+. Il règle
 plusieurs problèmes que l'installateur PEAR a, et simplifie la gestion de
-plusieurs versions de librairies. Puisque CakePHP publie un package PEAR,
-vous pouvez installer CakePHP en utilisant
-`Composer <http://getcomposer.org>`_. Avant d'installer CakePHP, vous devrez
-configurer un fichier ``composer.json``. Un fichier composer.json pour une
-application CakePHP ressemblerait à ce qui suit::
+plusieurs versions de librairies. `Packagist <https://packagist.org/>`_ est le
+dépôt principal des packages installables avec Composer. Puisque CakePHP publie
+aussi les versions dans Packagist, vous pouvez installer CakePHP en utilisant
+`Composer <http://getcomposer.org>`_.
+Avant d'installer CakePHP, vous devrez configurer un fichier ``composer.json``.
+Un fichier composer.json pour une application CakePHP ressemblerait à ce qui
+suit::
 
     {
         "name": "example-app",
@@ -150,8 +152,8 @@ Etant donné ce type de configuration, j'aurai besoin de modifier mon fichier
 webroot/index.php (qui finira dans /var/www/mysite/index.php, dans cet
 exemple) pour ressembler à ce qui suit::
 
-    // /app/webroot/index.php (partiel, commentaires retirés) 
-    
+    // /app/webroot/index.php (partiel, commentaires retirés)
+
     if (!defined('ROOT')) {
         define('ROOT', DS . 'home' . DS . 'me');
     }
