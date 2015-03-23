@@ -85,7 +85,7 @@ Si quieres mantenerte al corriente de los últimos cambios en CakePHP puedes
 añadir las siguientes líneas al ``composer.json`` de tu aplicación::
 
     "require": {
-        "cakephp/cakephp": "dev-<branch>"
+        "cakephp/cakephp": "dev-master"
     }
 
 Donde ``<branch>`` es el nombre del branch que quieres seguir. Cada vez que

@@ -91,7 +91,7 @@ Si vous voulez rester à jour avec les derniers changements de CakePHP, vous
 pouvez ajouter ce qui suit dans le **composer.json** de votre application::
 
     "require": {
-        "cakephp/cakephp": "3.0.*-dev"
+        "cakephp/cakephp": "dev-master"
     }
 
 Où ``<branch>`` est le nom de la branche que vous voulez suivre. Chaque fois
