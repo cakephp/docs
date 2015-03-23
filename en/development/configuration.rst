@@ -446,7 +446,7 @@ files, you could create a simple Xml config engine for you application::
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data)
+        public function dump($key, array $data)
         {
             // Code to dump data to file
         }
