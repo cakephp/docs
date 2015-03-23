@@ -132,6 +132,12 @@ We can also use the load method to override behavior settings::
     // We will change one setting from our already attached behavior
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
+And using aliasing, we can customize the alias it will be loaded as, also allowing it to be loaded
+multiple times with different settings::
+
+    // The behavior will be available as 'MyTree'
+    $this->Category->Behaviors->load('MyTree', array('className' => 'Tree'));
+
 There's also a method to obtain the list of behaviors a model has
 attached. If we pass the name of a behavior to the method, it will
 tell us if that behavior is attached to the model, otherwise it
