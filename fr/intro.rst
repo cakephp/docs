@@ -160,7 +160,7 @@ fonctionnalités de CakePHP sont:
   Memcache, Redis et d'autres.
 * Un :doc:`outil de génération de code
   </bake/usage>` puissant pour partir sur les chapeaux de roue.
-* Un :doc:`framework de tests intégéré</development/testing>` pour vous assurer
+* Un :doc:`framework de tests intégré</development/testing>` pour vous assurer
   que votre code fonctionne correctement.
 
 Les prochaines étapes évidentes sont de :doc:`télécharger CakePHP </installation>`
