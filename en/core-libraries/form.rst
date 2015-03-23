@@ -102,8 +102,8 @@ the request data::
 Setting Form Values
 ===================
 
-In order to set the values for the fields of a modelless form, you can define
-the values in ``$this->request->data``::
+In order to set the values for the fields of a modelless form, one can define
+the values using ``$this->request->data``, like in all other forms created by the FormHelper::
 
     // In a controller
     namespace App\Controller;
@@ -124,16 +124,19 @@ the values in ``$this->request->data``::
                 }
             }
             
-            //Values from the User Model e.g.
-            $this->request->data['name'] = 'John Doe';
-            $this->request->data['email'] = 'john.doe@example.com';
+            if ($this->request->is('get') {
+                //Values from the User Model e.g.
+                $this->request->data['name'] = 'John Doe';
+                $this->request->data['email'] = 'john.doe@example.com';
+            }
             
             $this->set('contact', $contact);
         }
     }
     
-Values should be defined after the processing of the data, otherwise your
-data will override the values from the form.
+Values should only be defined if the request method is GET, otherwise
+you will overwrite your previous POST Data which might have been incorrect
+and not been saved.
 
 Getting Form Errors
 ===================
