@@ -84,19 +84,39 @@ source.
 Vous devriez être maintenant capable de visiter le chemin où vous avez installé
 votre application CakePHP et voir les feux de signalisations de configuration.
 
-Rester à jour avec les derniers changements de CakePHP
+Bien que composer soit la méthode d'installation recommandée, il existe des
+versions pré-installables disponibles sur
+`Github <https://github.com/cakephp/cakephp/tags>`_
+Ces téléchargements contiennent le squelette d'une app avec tous les packages
+installés dans vendor.
+Aussi le ``composer.phar`` est inclu donc vous avez tout ce dont vous avez
+besoin pour continuer à l'utiliser.
+
+Rester à jour avec les Derniers Changements de CakePHP
 ------------------------------------------------------
 
-Si vous voulez rester à jour avec les derniers changements de CakePHP, vous
-pouvez ajouter ce qui suit dans le **composer.json** de votre application::
+Par défaut c'est ce à quoi le **composer.json** de votre application ressemble::
+
+    "require": {
+        "cakephp/cakephp": "~3.0"
+    }
+
+A chaque fois que vous lancez ``php composer.phar update``, vous allez
+recevoir la dernière version stable quand vous utilisez la contrainte de
+version par défaut ``~3.0``. Seuls les fix de bug et les versions mineures de
+3.x seront utilisés lors de la mise à jour.
+
+Si vous voulez rester à jour avec les derniers changements de CakePHP non
+stables, vous pouvez changez le **composer.json** de votre application::
 
     "require": {
         "cakephp/cakephp": "dev-master"
     }
 
-Où ``<branch>`` est le nom de la branche que vous voulez suivre. Chaque fois
-que vous exécutez ``php composer.phar update`` vous allez recevoir les derniers
-changements de la branche choisie.
+Notez que ce n'est pas recommandé, puisque votre application peut casser quand
+la prochaine version majeure sort. De plus, composer ne met pas en cache les
+branches de développement, donc cela ralentit les installs/updates consécutifs
+de composer.
 
 Permissions
 ===========
