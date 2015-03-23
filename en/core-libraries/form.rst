@@ -98,6 +98,42 @@ accordingly. We could have also used the ``validate()`` method to only validate
 the request data::
 
     $isValid = $form->validate($this->request->data);
+    
+Setting Form Values
+===================
+
+In order to set the values for the fields of a modelless form, you can define
+the values in ``$this->request->data``::
+
+    // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->data)) {
+                    $this->Flash->success('We will get back to you soon.');
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+            
+            //Values from the User Model e.g.
+            $this->request->data['name'] = 'John Doe';
+            $this->request->data['email'] = 'john.doe@example.com';
+            
+            $this->set('contact', $contact);
+        }
+    }
+    
+Values should be defined after the processing of the data, otherwise your
+data will override the values from the form.
 
 Getting Form Errors
 ===================
