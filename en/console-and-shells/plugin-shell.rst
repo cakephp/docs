@@ -34,7 +34,7 @@ By adding `-r` or `-b` to your command you can enable to `bootstrap` and `routes
 Unloading plugins
 -----------------
 
-You can unload a plugin by specifying it's name::
+You can unload a plugin by specifying its name::
 
     bin/cake plugin unload MyPlugin
 
