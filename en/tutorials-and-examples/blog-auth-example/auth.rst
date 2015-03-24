@@ -266,8 +266,8 @@ that the application automatically redirects you to the login page.
 
 And that's it! It looks too simple to be true. Let's go back a bit to explain what
 happened. The ``beforeFilter()`` function is telling the AuthComponent to not require a
-login for the ``add()`` action in addition to the ``index`` and ``view()`` actions that were
-already allowed in the AppController's ``beforeFilter()`` function.
+login for the ``add()`` action in addition to the ``index()`` and ``view()`` actions
+that were already allowed in the AppController's ``beforeFilter()`` function.
 
 The ``login()`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
 and it works without any further config because we are following conventions as

@@ -389,7 +389,7 @@ Chargement des Models Supplémentaires
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
-La fonction ``loadModel`` devient pratique quand
+La fonction ``loadModel()`` devient pratique quand
 vous avez besoin d'utiliser une table de model/collection qui n'est pas le
 model du controller par défaut ou un de ses models associés::
 
@@ -410,7 +410,7 @@ connectant sa méthode factory::
         ['ElasticIndexes', 'factory']
     );
 
-Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel``
+Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel()``
 pour charger les instances::
 
     // Dans une méthode de controller.

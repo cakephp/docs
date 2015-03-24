@@ -447,7 +447,7 @@ En utilisant notre exemple des utilisateurs, accéder à l'url
 ``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
 Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.ctp**.
 
-Vous pouvez faire correspondre l'URL /admin à votre action ``index``
+Vous pouvez faire correspondre l'URL /admin à votre action ``index()``
 du controller Pages en utilisant la route suivante::
 
     Router::prefix('admin', function ($routes) {
@@ -580,7 +580,7 @@ URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
 ``camelCase``.
 
 Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
-et une action ``showItems``, la route générée sera
+et une action ``showItems()``, la route générée sera
 ``/to-do/todo-items/show-items`` avec le code qui suit::
 
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
@@ -740,7 +740,7 @@ Changer les Actions du Controller
 
 Vous devrez peut-être modifier le nom des actions du controller qui sont
 utilisés lors de la connexion des routes. Par exemple, si votre action
-``edit()`` est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour
+``edit()`` est nommée ``update()``, vous pouvez utiliser la clé ``actions`` pour
 renommer vos actions::
 
     $routes->resources('Articles', [

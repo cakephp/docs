@@ -89,7 +89,7 @@ versions pré-installables disponibles sur
 `Github <https://github.com/cakephp/cakephp/tags>`_
 Ces téléchargements contiennent le squelette d'une app avec tous les packages
 installés dans vendor.
-Aussi le ``composer.phar`` est inclu donc vous avez tout ce dont vous avez
+Aussi le ``composer.phar`` est inclus donc vous avez tout ce dont vous avez
 besoin pour continuer à l'utiliser.
 
 Rester à jour avec les Derniers Changements de CakePHP
@@ -103,11 +103,11 @@ Par défaut c'est ce à quoi le **composer.json** de votre application ressemble
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
 recevoir la dernière version stable quand vous utilisez la contrainte de
-version par défaut ``~3.0``. Seuls les fix de bug et les versions mineures de
-3.x seront utilisés lors de la mise à jour.
+version par défaut ``~3.0``. Seuls les corrections de bug et les versions
+mineures de 3.x seront utilisés lors de la mise à jour.
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP non
-stables, vous pouvez changez le **composer.json** de votre application::
+stables, vous pouvez changer le **composer.json** de votre application::
 
     "require": {
         "cakephp/cakephp": "dev-master"
@@ -363,7 +363,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    CakePHP. Merci de vous renseigner sur la documentation en ligne d'Apache
    pour plus d'informations.
 
-#. (Optionel) Pour améliorer la configuration de production, vous devriez
+#. (Optionnel) Pour améliorer la configuration de production, vous devriez
    empêcher les assets invalides d'être parsés par CakePHP. Modifiez votre
    webroot .htaccess pour quelque chose comme::
 
@@ -389,7 +389,7 @@ nginx
 
 nginx ne fait pas usage de fichiers .htaccess comme Apache et Lighttpd, il est
 donc nécessaire de créer les URLs réécrites disponibles dans la configuration
-du site. selon votre configuration, vous devrez modifier cela, mais à tout le
+du site. Selon votre configuration, vous devrez modifier cela, mais à tout le
 moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI::
 
     server {

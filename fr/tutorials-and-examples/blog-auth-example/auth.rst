@@ -179,8 +179,8 @@ URLs qui seront chargées après que la connexion et la déconnexion des actions
 sont effectuées, dans notre cas, respectivement à ``/articles/`` et ``/``.
 
 Ce que nous avons fait dans la fonction ``beforeFilter()`` a été de dire au
-AuthComponent de ne pas exiger un login pour toutes les actions ``index``
-et ``view``, dans chaque controller. Nous voulons que nos visiteurs soient
+AuthComponent de ne pas exiger un login pour toutes les actions ``index()``
+et ``view()``, dans chaque controller. Nous voulons que nos visiteurs soient
 capables de lire et lister les entrées sans s'inscrire sur le site.
 
 Maintenant, nous avons besoin d'être capable d'inscrire des nouveaux
@@ -268,8 +268,8 @@ que l'application vous redirige automatiquement vers la page de connexion.
 
 Et c'est tout! Cela semble trop simple pour être vrai. Retournons en arrière un
 peu pour expliquer ce qui s'est passé. La fonction ``beforeFilter()`` dit au
-component AuthComponent de ne pas exiger de connexion pour l'action ``add``
-en plus des actions ``index`` et ``view`` qui étaient déjà autorisées dans
+component AuthComponent de ne pas exiger de connexion pour l'action ``add()``
+en plus des actions ``index()`` et ``view()`` qui étaient déjà autorisées dans
 la fonction ``beforeFilter()`` de l'AppController.
 
 L'action ``login()`` appelle la fonction ``$this->Auth->identify()`` dans

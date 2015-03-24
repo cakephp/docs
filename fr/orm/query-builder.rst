@@ -1158,7 +1158,7 @@ interdits, mais il pourrait ressembler à ceci::
 Un dernier exemple et vous serez un expert de map-reduce. Imaginez que vous
 avez une table de ``friends`` et que vous souhaitiez trouver les "fake friends"
 dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
-mutuellement. Commençons avec notre fonction ``mapper``::
+mutuellement. Commençons avec notre fonction ``mapper()``::
 
     $mapper = function ($rel, $key, $mr) {
         $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);

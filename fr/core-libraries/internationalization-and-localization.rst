@@ -512,7 +512,7 @@ formateur ``sprintf``::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-Les messages à traduire seront passés à la fonction ``sprintf`` pour
+Les messages à traduire seront passés à la fonction ``sprintf()`` pour
 interpoler les variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);
