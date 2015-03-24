@@ -79,7 +79,7 @@ base de données::
 
         bin/cake migrations migrate
 
-Création de migrations
+Création de Migrations
 ======================
 
 Les fichiers de migrations sont stockés dans le répertoire **config/Migration**
@@ -274,8 +274,8 @@ une version spécifique::
 
          bin/cake migrations rollback -t 20150103081132
 
-Migrations Statuts
-==================
+Statuts de Migrations
+=====================
 
 La commande ``status`` affiche une liste de toutes les migrations, ainsi que
 leur état actuel. Vous pouvez utiliser cette commande pour déterminer les
