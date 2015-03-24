@@ -1,41 +1,42 @@
 Migrations
 ##########
 
-Migrations is another plugin supported by the core team that helps you
-do schema changes in your database by writing PHP files that can be tracked
-using your version control system.
+Migrations est un plugin supporté par la core team pour vous aider à gérer 
+les changements dans la base de données en écrivant des fichiers PHP qui
+peuvent être suivis par votre système de gestion de version.
 
-It allows you to evolve your database tables over time. Instead of writing
-schema modifications in SQL, this plugin allows you to use an intuitive set
-of methods to implement your database changes.
+Il vous permet de faire évoluer vos tables au fil du temps. 
+Au lieu d'écrire vos modifications de schéma en SQL, ce plugin vous permet d'utiliser 
+un ensemble intuitif de méthodes qui facilite la mise en œuvre des modifications au sein 
+de la base de données.
 
-This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_
+Ce plugin est un wrapper pour la librairie de gestion des migrations de bases de données 
+`Phinx <https://phinx.org/>` _
 
 Installation
 ============
 
-By default Migrations is installed with the default application skeleton. If
-you've removed it and want to re-install it, you can do so by running the
-following from your application's ROOT directory (where composer.json file is
-located)::
+Par défaut Migrations est installé avec le squelette d’application. Si vous le 
+retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit 
+à partir du répertoire ROOT de votre application (où le fichier composer.json est localisé)::
 
         php composer.phar require cakephp/migrations "@stable"
 
-You will need to add the following line to your application's bootstrap.php file::
+Vous aurez besoin d'ajouter la ligne suivante dans le fichier bootstrap.php de votre application ::
 
         Plugin::load('Migrations');
 
-Additionally, you will need to configure the default database configuration in your
-config/app.php file as explained in the :ref:`Database Configuration section <database-configuration>`.
+De plus, vous devrez configurer la base de données par défaut dans le fichier
+config/app.php comme expliqué dans :ref:`Database Configuration section <database-configuration>`.
 
-Overview
-========
+Vue d'ensemble
+==============
 
-A migration is basically a single PHP file that describes a new 'version' of
-the database. A migration file can create tables, add or remove columns, create
-indexes and even insert data into the database.
+Une migration est simplement un fichier PHP qui décrit une nouvelle 'version' de la
+la base de données. Un fichier de migration peut créer des tables, ajouter ou supprimer des colonnes, créer
+des index et même insérer des données dans la base de données.
 
-Here's an example of a migration::
+Ci dessous un exemple de migration::
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -57,33 +58,33 @@ Here's an example of a migration::
             }
 
 
-This migration adds a table called products with a string column called ``name``, a text
-``description`` column and a column called ``created`` with a datetime type.
-A primary key column called ``id`` will also be added implicitly.
+Cette migration ajoute une table appelée ``products`` avec une colonne de type chaîne 
+appelée `` name``, une colonne texte `` description`` et une colonne `` created`` avec un type datetime.
+Une colonne de clé primaire appelé `` id`` sera également ajouté implicitement.
 
-Note that this file describes how the database should look like after applying
-the change, at this point no ``products`` table exist, but we have created
-a file that is both able to create the table with the right column as well as
-to drop it if we rollback the migration.
+Notez que ce fichier décrit à quoi la base de données devrait ressembler après l'application
+de la migration, à ce stade la table ``products`` n'existe pas, mais nous avons créé
+un fichier qui est à la fois capable de créer la table avec les bonnes colonnes mais aussi
+de supprimer la table en cas de retour en arrière.
 
-Once the file has been created in the **config/Migrations** folder, you will be
-able to execute the following command to create the table in your database::
+Une fois que le fichier a été créé dans le dossier **config/Migrations**, vous serez
+capable d'exécuter la commande suivante pour créer la table dans votre base de données ::
 
         bin/cake migrations migrate
 
-Creating Migrations
-===================
+Création de migrations
+======================
 
-Migration files are stored in the **config/Migration** directory of your
-application. The name of the migration files are prefixed with the date in
-which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**.
+Les fichiers de migrations sont stockés dans le répertoire **config/Migration**  de votre
+application. Le nom des fichiers de migration est précédés de la date/heure du jour de création
+, dans le format **YYYYMMDDHHMMSS_my_new_migration.php**.
 
-The easiest way of creating a migrations file is by using the command line.
-Let's imagine that you'd like to add a new ``products`` table::
+La meilleure façon de créer un fichier de migration est d'utiliser la ligne de commande.
+Imaginons que vous souhaitez ajouter une nouvelle table ``products`` ::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
-The above line will create a migration file looking like this::
+La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci ::
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -97,13 +98,13 @@ The above line will create a migration file looking like this::
                       ->create();
             }
 
-If the migration name in the command line is of the form "AddXXXToYYY" or "RemoveXXXFromYYY"
-and is followed by a list of column names and types then a migration file
-containing the code for creating or dropping the columns will be generated::
+Si le nom de la migration dans la ligne de commande est de la forme "AddXXXToYYY" ou "RemoveXXXFromYYY"
+et est suivie d'une liste de noms de colonnes et les types alors un fichier de migration
+contenant le code pour la création ou le retrait des colonnes sera généré::
 
         bin/cake bake migration AddPriceToProducts price:decimal
 
-Executing the command line above will generate::
+L'exécution de la ligne de commande ci-dessus va générer ::
 
         class AddPriceToProducts extends AbstractMigration
         {
@@ -115,11 +116,11 @@ Executing the command line above will generate::
                       ->save();
             }
 
-It is also possible to add indexes to columns::
+Il est également possible d'ajouter des indexes de colonnes ::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index
 
-will generate::
+va générer::
 
         class AddNameIndexToProducts extends AbstractMigration
         {
@@ -132,25 +133,25 @@ will generate::
             }
 
 
-When using fields in the command line it may be handy to remember that they
-follow the following pattern::
+Lors de l'utilisation des champs dans la ligne de commande, il est utile de se rappeler qu'ils
+sont décrit selon le schéma suivant ::
 
         field:fieldType:indexType:indexName
 
-For instance, the following are all valid ways of specifying an email field:
+Par exemple, les éléments suivants sont autant de façons de spécifier un champ email:
 
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 
-Fields named ``created`` and ``modified`` will automatically be set to the type
+Les champs nommés ``created`` et ``modified`` seront automatiquement réglés sur le type
 ``datetime``.
 
-In the same way, you can generate a migration to remove a column by using the
-command line::
+De la même façon, vous pouvez générer une migration permettant de supprimer une colonne 
+en utilisant la ligne de commande ::
 
          bin/cake bake migration RemovePriceFromProducts price
 
-creates the file::
+crée le fichier ::
 
         class RemovePriceFromProducts extends AbstractMigration
         {
@@ -160,16 +161,16 @@ creates the file::
                 $table->removeColumn('price');
             }
 
-Migration Names can follow any of the following patterns:
+Les noms des migration peuvent suivre l'un des motifs suivants:
 
-* Create a table: (``/^(Create)(.*)/``) Creates the specified table.
-* Drop a table: (``/^(Drop)(.*)/``) Drops the specified table. Ignores specified field arguments.
-* Add a field: (``/^(Add).*(?:To)(.*)/``) Adds fields to the specified table.
-* Remove a field: (``/^(Remove).*(?:From)(.*)/``) Removes fields from the specified table.
-* Alter a table:  (``/^(Alter)(.*)/``) Alters the specified table. An alias for CreateTable and AddField.
+* Créer une table: (``/^(Create)(.*)/``) Crée la table spécifiée.
+* Supprimer une table: (``/^(Drop)(.*)/``) Supprime la table spécifiée. Ignore arguments de champ spécifié.
+* Ajouter un champ: (``/^(Add).*(?:To)(.*)/``) Ajoute les champs à la table spécifiée.
+* Supprimer un champ: (``/^(Remove).*(?:From)(.*)/``) Supprime les champs de la table spécifiée.
+* Modifier une table:  (``/^(Alter)(.*)/``) Modifie la table spécifiée. Un alias pour CreateTable et AddField.
 
-Field types a those generically made available by the ``Phinx`` library. Those
-can be:
+Les types de champs sont ceux mis à disposition par la bibliothèque `` Phinx``. Cela
+peut être:
 
 * string
 * text
@@ -185,32 +186,32 @@ can be:
 * boolean
 * uuid
 
-Additionally you can create an empty migrations file if you want full control
-over what needs to be executed::
+De plus, vous pouvez créer un fichier migrations vide si vous voulez un contrôle total
+sur ce qui doit être exécuté ::
 
         bin/cake migrations create MyCustomMigration
 
-Please make sure you read the official `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
-in order to know the complete list of methods you can use for writing migration files.
+Prenez soin de lire la documentation officielle Phinx `<http://docs.phinx.org/en/latest/migrations.html>` _
+afin de connaître la liste complète des méthodes que vous pouvez utiliser pour écrire des fichiers de migration.
 
-Generating Migrations From Existing Databases
----------------------------------------------
+Générer une migration à partir d'une base de données existante
+--------------------------------------------------------------
 
-If you are dealing with a pre-existing database and want to start using
-migrations, or to version control the initial schema of your application's
-database, you can run the ``migration_snapshot`` command::
+Si vous avez affaire à une base de données pré-existante et que vous voulez commencer à utiliser
+migrations, ou que vous souhaitez versionner le schéma initial de votre base de données, 
+vous pouvez exécuter la commande ``migration_snapshot`` ::
 
         bin/cake bake migration_snapshot Initial
 
-It will generate a migration file called **Initial** containing all the create
-statements for all tables in your database.
+Elle va générer un fichier de migration appelé **Initial** contenant toutes les
+déclarations pour toutes les tables de votre base de données.
 
-Creating Custom Primary Keys
-----------------------------
+Créer des clés primaires personnalisées
+---------------------------------------
 
-If you need to avoid the automatic creation of the ``id`` primary key when
-adding new tables to the database, you can use the second argument of the
-``table()`` method::
+Pour personnaliser la création automatique de la clé primaire ``id`` lors 
+de l'ajout de nouvelles tables, vous pouvez utiliser le deuxième argument de la méthode
+``table()`` ::
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -224,51 +225,51 @@ adding new tables to the database, you can use the second argument of the
                       ->create();
             }
 
-The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
+Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisé comme clé primaire.
 
-Applying Migrations
-===================
+Appliquer les migrations
+========================
 
-Once you have generated or written your migration file, you need to execute the
-following command to apply the changes to your database::
+Une fois que vous avez généré ou écrit votre fichier de migration, vous devez exécuter la
+commande suivante pour appliquer les modifications à votre base de données ::
 
         bin/cake migrations migrate
 
-To migrate to a specific version then use the --target parameter or -t for short::
+Pour migrer vers une version spécifique, utilisez le paramètre --target ou -t (version courte) ::
 
         bin/cake migrations migrate -t 20150103081132
 
-That corresponds to the timestamp that is prefixed to the migrations file name.
+Cela correspond à l'horodatage qui est ajouté au début du nom de fichier des migrations.
 
-Reverting Migrations
-====================
+Annuler une migration
+=====================
 
-The Rollback command is used to undo previous migrations executed by this
-plugin. It is the reverse action of the ``migrate`` command.
+La commande de restauration est utilisée pour annuler les précédentes migrations réalisées par ce
+plugin. C'est l'inverse de la commande ``migrate``.
 
-You can rollback to the previous migration by using the ``rollback`` command::
+Vous pouvez annuler la migration précédente en utilisant la commande ``rollback`` ::
 
         bin/cake migrations rollback
 
-You can also pass a migration version number to rollback to a specific version::
+Vous pouvez également passer un numéro de version de migration pour revenir à une version spécifique ::
 
          bin/cake migrations rollback -t 20150103081132
 
-Migrations Status
+Migrations Statuts
 =================
 
-The Status command prints a list of all migrations, along with their current status.
-You can use this command to determine which migrations have been run::
+La commande ``status`` affiche une liste de toutes les migrations, ainsi que leur état actuel.
+Vous pouvez utiliser cette commande pour déterminer les migrations qui ont été exécutés :: 
 
         bin/cake migrations status
 
-Using Migrations In Plugins
-===========================
+Utiliser Migrations dans les plugins
+====================================
 
-Plugins can also provide migration files. This makes plugins that are intended
-to be distributed much more portable and easy to install. All commands in the
-Migrations plugin support the ``--plugin`` or ``-p`` option that will scope the
-execution to the migrations relative to that plugin::
+Les plugins peuvent également contenir des fichiers de migration. Cela rend les plugins destinés
+à la communauté beaucoup plus portable et plus facile à installer. Toutes les commandes du
+plugin Migrations supporte l'option ``--plugin`` ou ``-p`` afin d'exécuter les commandes 
+par rapport à ce plugin ::
 
         bin/cake migrations status -p PluginName
 
