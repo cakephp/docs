@@ -490,7 +490,7 @@ by the ICU message formatting, CakePHP also provides the ``sprintf`` formatter::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-The messages to be translated will be passed to the ``sprintf`` function for
+The messages to be translated will be passed to the ``sprintf()`` function for
 interpolating the variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);

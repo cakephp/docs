@@ -371,7 +371,7 @@ Loading Additional Models
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
-The ``loadModel`` function comes handy when you need to use a model
+The ``loadModel()`` function comes handy when you need to use a model
 table/collection that is not the controller's default one::
 
     // In a controller method.

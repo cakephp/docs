@@ -174,7 +174,7 @@ There is not much to configure, as we used the conventions for the users table.
 We just set up the URLs that will be loaded after the login and logout actions is
 performed, in our case to ``/articles/`` and ``/`` respectively.
 
-What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
+What we did in the ``beforeFilter()`` function was to tell the AuthComponent to not
 require a login for all ``index()`` and ``view()`` actions, in every controller. We want
 our visitors to be able to read and list the entries without registering in the
 site.
@@ -265,9 +265,9 @@ any other URL that was not explicitly allowed such as ``/articles/add``, you wil
 that the application automatically redirects you to the login page.
 
 And that's it! It looks too simple to be true. Let's go back a bit to explain what
-happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
+happened. The ``beforeFilter()`` function is telling the AuthComponent to not require a
 login for the ``add()`` action in addition to the ``index`` and ``view()`` actions that were
-already allowed in the AppController's ``beforeFilter`` function.
+already allowed in the AppController's ``beforeFilter()`` function.
 
 The ``login()`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
 and it works without any further config because we are following conventions as

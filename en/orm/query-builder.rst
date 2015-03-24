@@ -1085,7 +1085,7 @@ look something like this::
 One last example and you will be a map-reduce expert. Imagine you have
 a ``friends`` table and you want to find "fake friends" in our database, or
 better said, people who do not follow each other. Let's start with our
-``mapper`` function::
+``mapper()`` function::
 
     $mapper = function ($rel, $key, $mr) {
         $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
