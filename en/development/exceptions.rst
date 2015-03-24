@@ -64,7 +64,7 @@ exceptions for HTTP methods
 
 .. php:exception::UnauthorizedException
 
-    Used for doing a 401 Not found error.
+    Used for doing a 401 Unauthorized error.
 
 .. php:exception:: ForbiddenException
 
