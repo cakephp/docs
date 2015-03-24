@@ -62,7 +62,7 @@ exceptions for HTTP methods
 
     Used for doing 400 Bad Request error.
 
-.. php:exception::UnauthorizedException
+.. php:exception:: UnauthorizedException
 
     Used for doing a 401 Unauthorized error.
 

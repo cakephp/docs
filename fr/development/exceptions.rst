@@ -67,9 +67,9 @@ internes du framework, il y a plusieurs exceptions pour les méthodes HTTP.
 
     Utilisé pour faire une erreur 400 de Mauvaise Requête.
 
-.. php:exception::UnauthorizedException
+.. php:exception:: UnauthorizedException
 
-    Utilisé pour faire une erreur 401 Non Trouvé.
+    Utilisé pour faire une erreur 401 Non Autorisé.
 
 .. php:exception:: ForbiddenException
 
