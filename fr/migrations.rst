@@ -11,7 +11,7 @@ un ensemble intuitif de méthodes qui facilite la mise en œuvre des modificatio
 de la base de données.
 
 Ce plugin est un wrapper pour la librairie de gestion des migrations de bases de données 
-`Phinx <https://phinx.org/>` _
+`Phinx <https://phinx.org/>`_
 
 Installation
 ============
@@ -22,12 +22,12 @@ retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit
 
         php composer.phar require cakephp/migrations "@stable"
 
-Vous aurez besoin d'ajouter la ligne suivante dans le fichier bootstrap.php de votre application ::
+Vous aurez besoin d'ajouter la ligne suivante dans le fichier bootstrap.php de votre application::
 
         Plugin::load('Migrations');
 
 De plus, vous devrez configurer la base de données par défaut dans le fichier
-config/app.php comme expliqué dans :ref:`Database Configuration section <database-configuration>`.
+config/app.php comme expliqué dans :ref:la section sur la configuration des bases de données <database-configuration> ?.
 
 Vue d'ensemble
 ==============
@@ -36,7 +36,7 @@ Une migration est simplement un fichier PHP qui décrit une nouvelle 'version' d
 la base de données. Un fichier de migration peut créer des tables, ajouter ou supprimer des colonnes, créer
 des index et même insérer des données dans la base de données.
 
-Ci dessous un exemple de migration::
+Ci-dessous un exemple de migration::
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -68,7 +68,7 @@ un fichier qui est à la fois capable de créer la table avec les bonnes colonne
 de supprimer la table en cas de retour en arrière.
 
 Une fois que le fichier a été créé dans le dossier **config/Migrations**, vous serez
-capable d'exécuter la commande suivante pour créer la table dans votre base de données ::
+capable d'exécuter la commande suivante pour créer la table dans votre base de données::
 
         bin/cake migrations migrate
 
@@ -80,11 +80,11 @@ application. Le nom des fichiers de migration est précédés de la date/heure d
 , dans le format **YYYYMMDDHHMMSS_my_new_migration.php**.
 
 La meilleure façon de créer un fichier de migration est d'utiliser la ligne de commande.
-Imaginons que vous souhaitez ajouter une nouvelle table ``products`` ::
+Imaginons que vous souhaitez ajouter une nouvelle table ``products``::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
-La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci ::
+La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci::
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -104,7 +104,7 @@ contenant le code pour la création ou le retrait des colonnes sera généré::
 
         bin/cake bake migration AddPriceToProducts price:decimal
 
-L'exécution de la ligne de commande ci-dessus va générer ::
+L'exécution de la ligne de commande ci-dessus va générer::
 
         class AddPriceToProducts extends AbstractMigration
         {
@@ -147,11 +147,11 @@ Les champs nommés ``created`` et ``modified`` seront automatiquement réglés s
 ``datetime``.
 
 De la même façon, vous pouvez générer une migration permettant de supprimer une colonne 
-en utilisant la ligne de commande ::
+en utilisant la ligne de commande::
 
          bin/cake bake migration RemovePriceFromProducts price
 
-crée le fichier ::
+crée le fichier::
 
         class RemovePriceFromProducts extends AbstractMigration
         {
@@ -164,7 +164,7 @@ crée le fichier ::
 Les noms des migration peuvent suivre l'un des motifs suivants:
 
 * Créer une table: (``/^(Create)(.*)/``) Crée la table spécifiée.
-* Supprimer une table: (``/^(Drop)(.*)/``) Supprime la table spécifiée. Ignore arguments de champ spécifié.
+* Supprimer une table: (``/^(Drop)(.*)/``) Supprime la table spécifiée. Ignore les arguments de champ spécifié.
 * Ajouter un champ: (``/^(Add).*(?:To)(.*)/``) Ajoute les champs à la table spécifiée.
 * Supprimer un champ: (``/^(Remove).*(?:From)(.*)/``) Supprime les champs de la table spécifiée.
 * Modifier une table:  (``/^(Alter)(.*)/``) Modifie la table spécifiée. Un alias pour CreateTable et AddField.
@@ -187,14 +187,14 @@ peut être:
 * uuid
 
 De plus, vous pouvez créer un fichier migrations vide si vous voulez un contrôle total
-sur ce qui doit être exécuté ::
+sur ce qui doit être exécuté::
 
         bin/cake migrations create MyCustomMigration
 
 Prenez soin de lire la documentation officielle Phinx `<http://docs.phinx.org/en/latest/migrations.html>` _
 afin de connaître la liste complète des méthodes que vous pouvez utiliser pour écrire des fichiers de migration.
 
-Générer une migration à partir d'une base de données existante
+Générer une Migration à partir d'une base de données existante
 --------------------------------------------------------------
 
 Si vous avez affaire à une base de données pré-existante et que vous voulez commencer à utiliser
@@ -211,7 +211,7 @@ Créer des clés primaires personnalisées
 
 Pour personnaliser la création automatique de la clé primaire ``id`` lors 
 de l'ajout de nouvelles tables, vous pouvez utiliser le deuxième argument de la méthode
-``table()`` ::
+``table()``::
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -225,33 +225,33 @@ de l'ajout de nouvelles tables, vous pouvez utiliser le deuxième argument de la
                       ->create();
             }
 
-Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisé comme clé primaire.
+Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisée comme clé primaire.
 
-Appliquer les migrations
+Appliquer les Migrations
 ========================
 
 Une fois que vous avez généré ou écrit votre fichier de migration, vous devez exécuter la
-commande suivante pour appliquer les modifications à votre base de données ::
+commande suivante pour appliquer les modifications à votre base de données::
 
         bin/cake migrations migrate
 
-Pour migrer vers une version spécifique, utilisez le paramètre --target ou -t (version courte) ::
+Pour migrer vers une version spécifique, utilisez le paramètre --target ou -t (version courte)::
 
         bin/cake migrations migrate -t 20150103081132
 
 Cela correspond à l'horodatage qui est ajouté au début du nom de fichier des migrations.
 
-Annuler une migration
+Annuler une Migration
 =====================
 
 La commande de restauration est utilisée pour annuler les précédentes migrations réalisées par ce
 plugin. C'est l'inverse de la commande ``migrate``.
 
-Vous pouvez annuler la migration précédente en utilisant la commande ``rollback`` ::
+Vous pouvez annuler la migration précédente en utilisant la commande ``rollback``::
 
         bin/cake migrations rollback
 
-Vous pouvez également passer un numéro de version de migration pour revenir à une version spécifique ::
+Vous pouvez également passer un numéro de version de migration pour revenir à une version spécifique::
 
          bin/cake migrations rollback -t 20150103081132
 
@@ -259,17 +259,17 @@ Migrations Statuts
 =================
 
 La commande ``status`` affiche une liste de toutes les migrations, ainsi que leur état actuel.
-Vous pouvez utiliser cette commande pour déterminer les migrations qui ont été exécutés :: 
+Vous pouvez utiliser cette commande pour déterminer les migrations qui ont été exécutés:: 
 
         bin/cake migrations status
 
-Utiliser Migrations dans les plugins
+Utiliser Migrations dans les Plugins
 ====================================
 
 Les plugins peuvent également contenir des fichiers de migration. Cela rend les plugins destinés
 à la communauté beaucoup plus portable et plus facile à installer. Toutes les commandes du
-plugin Migrations supporte l'option ``--plugin`` ou ``-p`` afin d'exécuter les commandes 
-par rapport à ce plugin ::
+plugin Migrations supportent l'option ``--plugin`` ou ``-p`` afin d'exécuter les commandes 
+par rapport à ce plugin::
 
         bin/cake migrations status -p PluginName
 
