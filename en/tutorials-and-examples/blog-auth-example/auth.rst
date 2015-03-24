@@ -175,7 +175,7 @@ We just set up the URLs that will be loaded after the login and logout actions i
 performed, in our case to ``/articles/`` and ``/`` respectively.
 
 What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
-require a login for all ``index`` and ``view()`` actions, in every controller. We want
+require a login for all ``index()`` and ``view()`` actions, in every controller. We want
 our visitors to be able to read and list the entries without registering in the
 site.
 
