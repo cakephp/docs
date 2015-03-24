@@ -1,5 +1,7 @@
-Interactive Console (REPL)
-##########################
+.. _plugin-shell:
+
+Plugin Shell
+############
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta
@@ -11,3 +13,7 @@ Interactive Console (REPL)
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección
     superior para obtener información sobre el tema de esta página.
+
+.. meta::
+    :title lang=es: Plugin Shell
+    :keywords lang=es: api docs,shell,plugin,load,unload
