@@ -158,9 +158,9 @@ necessary. Our ``UserStatistics`` listener might start out like::
     $statistics = new UserStatistic();
     $this->Orders->eventManager()->on($statistics);
 
-As you can see in the above code, the ``on`` function will accept instances
+As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
-``implementedEvents`` to attach the correct callbacks.
+``implementedEvents()`` to attach the correct callbacks.
 
 Registering Anonymous Listeners
 -------------------------------
@@ -210,8 +210,8 @@ below this default will work. On the other hand if you desire to run the
 callback after the others, using a number above ``10`` will do.
 
 If two callbacks happen to have the same priority value, they will be executed
-with a the order they were attached. You set priorities using the ``attach``
-method for callbacks, and declaring it in the ``implementedEvents`` function for
+with a the order they were attached. You set priorities using the ``attach()``
+method for callbacks, and declaring it in the ``implementedEvents()`` function for
 event listeners::
 
     // Setting priority for a callback

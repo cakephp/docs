@@ -420,7 +420,7 @@ the URL ``/admin/users/edit/5`` would call the ``edit()`` method of our
 **src/Controller/Admin/UsersController.php** passing 5 as the first parameter. The
 view file used would be **src/Template/Admin/Users/edit.ctp**
 
-You can map the URL /admin to your ``index`` action of pages controller using
+You can map the URL /admin to your ``index()`` action of pages controller using
 following route::
 
     Router::prefix('admin', function ($routes) {
@@ -548,7 +548,7 @@ application with the ability to route plugin, controller, and camelized action
 names to a dashed URL.
 
 For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
-``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
+``showItems()`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
@@ -706,15 +706,15 @@ Changing the Controller Actions Used
 ------------------------------------
 
 You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit`` action is called ``update`` you can use
-the ``actions`` key to rename the actions used::
+routes. For example, if your ``edit()`` action is called ``update()`` you can
+use the ``actions`` key to rename the actions used::
 
     $routes->resources('Articles', [
         'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-The above would use ``update`` for the ``edit`` action, and ``create`` instead of
-``add``.
+The above would use ``update()`` for the ``edit()`` action, and ``create()``
+instead of ``add()``.
 
 Mapping Additional Resource Routes
 ----------------------------------
