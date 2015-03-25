@@ -350,8 +350,8 @@ could do the following::
 
 .. index:: appError
 
-Using AppController::appError();
-================================
+Using AppController::appError()
+===============================
 
 Implementing this method is an alternative to implementing a custom exception
 handler. It's primarily provided for backwards compatibility, and is not
