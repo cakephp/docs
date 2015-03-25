@@ -44,6 +44,12 @@ You can also override any of the options that were set in FlashComponent::
     any request or user data in your flash messages, you should escape it
     with :php:func:`h` when formatting your messages.
 
+.. note::
+    Since 3.1, the :doc:`FlashComponent </controllers/components/flash>` can
+    stack messages. If you set multiple flash messages, when you call
+    ``render()``, each message will be rendered in its own elements, in the
+    order they were set.
+
 For more information about the available array options, please refer to the
 :doc:`FlashComponent </controllers/components/flash>` section.
 

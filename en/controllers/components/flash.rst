@@ -32,6 +32,12 @@ use the ``set()`` method::
 
     $this->Flash->set('This is a message');
 
+
+.. note::
+
+    New in 3.1 : Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with
+    the same key will append the messages in the ``$_SESSION``.
+
 FlashComponent's ``__call()`` and ``set()`` methods optionally take a second
 parameter, an array of options:
 
@@ -41,6 +47,11 @@ parameter, an array of options:
   ``__call()`` magic method. The element name to use for rendering.
 * ``params`` An optional array of keys/values to make available as variables
   within an element.
+
+.. note::
+
+    New in 3.1 : A new key ``clear`` was added. This key expects a ``bool`` and allows you
+    to delete all messages in the current stack and start a new one.
 
 An example of using these options::
 
