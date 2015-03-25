@@ -308,7 +308,7 @@ d'erreur pour votre exception personnalisée, ce template va être utilisé
 en mode développement. Si vous souhaitez votre propre gestionnaire d'exception
 logique même en production, regardez la section suivante.
 
-Etendre et Implementer vos propres gestionnaires d'Exception
+Etendre et Implementer vos Propres Gestionnaires d'Exception
 ============================================================
 
 Vous pouvez implémenter un gestionnaire d'exception spécifique pour votre
@@ -322,8 +322,8 @@ montants de contrôle sur le processus de gestion d'exception.
 Dans les prochaines sections, nous allons détailler les différentes approches
 et les bénéfices de chacun.
 
-Créer vos propress gestionnaires d'Exception avec `Exception.handler`
-=====================================================================
+Créer vos Propres Gestionnaires d'Exception avec `Exception.handler`
+====================================================================
 
 Créer votre propre gestionnaire d'exception vous donne plus de contrôle
 sur le processus de gestion des exceptions. La classe que vous choisissez
@@ -376,8 +376,8 @@ comme suit::
 
 .. index:: appError
 
-Utiliser AppController::appError();
-===================================
+Utiliser AppController::appError()
+==================================
 
 Implémenter cette méthode est une alternative pour implémenter un gestionnaire
 d'exception personnalisé. Il est fourni principalement pour une compatibilité
@@ -459,7 +459,7 @@ ou dans la méthode de rendu. Puisque celles-ci sont les seules méthodes
 que la classe ``ErrorHandler`` intégrée appelle directement.
 
 
-Logging exceptions
+Logging Exceptions
 ------------------
 
 Utiliser la gestion d'exception intégrée, vous pouvez lancer les exceptions
