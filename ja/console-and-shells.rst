@@ -1036,6 +1036,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
     console-and-shells/plugin-assets
+    console-and-shells/plugin-shell
 
 
 .. meta::

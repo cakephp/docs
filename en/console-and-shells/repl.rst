@@ -18,16 +18,16 @@ application's models::
     App : App
     Path: /Users/mark/projects/cakephp-app/src/
     ---------------------------------------------------------------
-    [1] app > $articles = Cake\ORM\TableRegistry::get('Articles');
+    >>> $articles = Cake\ORM\TableRegistry::get('Articles');
     // object(Cake\ORM\Table)(
     //
     // )
-    [2] app > $articles->find();
+    >>> $articles->find();
 
 Since your application has been bootstrapped you can also test routing using the
 REPL::
 
-    [1] app > Cake\Routing\Router::parse('/articles/view/1');
+    >>> Cake\Routing\Router::parse('/articles/view/1');
     // [
     //   'controller' => 'Articles',
     //   'action' => 'view',
@@ -39,12 +39,7 @@ REPL::
 
 You can also test generating URL's::
 
-    [1] app > Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
+    >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
 
-To quit the REPL you can use ``CTRL-D``.
-
-.. warning::
-
-    The REPL does not work properly on windows systems due to issues with
-    readline and POSIX extensions.
+To quit the REPL you can use ``CTRL-C`` or by typing ``exit``.
