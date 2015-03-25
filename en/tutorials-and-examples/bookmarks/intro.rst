@@ -33,7 +33,7 @@ Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
 in the **bookmarker** directory. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
