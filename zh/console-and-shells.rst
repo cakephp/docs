@@ -22,6 +22,7 @@ Console & Shells
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
+    console-and-shells/plugin-assets
     console-and-shells/plugin-shell
 
 .. meta::
