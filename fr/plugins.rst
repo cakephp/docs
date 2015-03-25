@@ -77,8 +77,8 @@ explicitement.
 
 .. note::
 
-    ``Plugin::loadAll()`` ne va pas charger les plugins avec namespace du
-    dossier vendor qui ne sont pas définis dans ``vendor/cakephp-plugins.php``.
+    ``Plugin::loadAll()`` ne va pas charger les plugins se trouvant dans vendor
+    qui ne sont pas définis dans ``vendor/cakephp-plugins.php``.
 
 .. _autoloading-plugin-classes:
 
