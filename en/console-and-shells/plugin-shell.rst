@@ -44,9 +44,6 @@ You can unload a plugin by specifying its name::
 This will remove the line ``Plugin::load('MyPlugin',...`` from your
 ``config/bootstrap.php``.
 
-.. meta::
-    :title lang=en: Plugin Shell
-    :keywords lang=en: api docs,shell,plugin,load,unload
 
 Plugin Assets
 -------------
@@ -67,5 +64,5 @@ You can symlink assets of one particular plugin by specifying it's name::
     bin/cake plugin assets symlink MyPlugin
 
 .. meta::
-    :title lang=en: Plugin Assets Shell
-    :keywords lang=en: plugin,assets
+    :title lang=en: Plugin Shell
+    :keywords lang=en: plugin,assets,shell,load,unload
