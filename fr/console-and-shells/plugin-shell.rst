@@ -4,8 +4,7 @@ Shell Plugin
 ############
 
 Le shell plugin vous permet de charger et décharger les plugins avec le
-prompteur de commandes.
-Si vous avez besoin d'aide, lancez::
+prompteur de commandes. Si vous avez besoin d'aide, lancez::
 
     bin/cake plugin --help
 
@@ -44,6 +43,24 @@ Vous pouvez décharger un plugin en spécifiant son nom::
 Ceci va retirer la ligne ``Plugin::load('MyPlugin',...`` de votre
 ``config/bootstrap.php``.
 
+Plugin Assets
+-------------
+
+CakePHP by default serves plugins assets using the ``AssetFilter`` dispatcher
+filter. While this is a good convenience, it is recommended to symlink / copy
+the plugin assets under app's webroot so that they can be directly served by the
+web server without invoking PHP. You can do this by running::
+
+    bin/cake plugin_assets symlink
+
+Running the above command will symlink all plugins assets under app's webroot.
+On Windows, which doesn't support symlinks, the assets will be copied in
+respective folders instead of being symlinked.
+
+You can symlink assets of one particular plugin by specifying it's name::
+
+    bin/cake plugin_assets symlink MyPlugin
+
 .. meta::
     :title lang=fr: Plugin Shell
-    :keywords lang=fr: api docs,shell,plugin,load,unload
+    :keywords lang=fr: plugin,assets,shell,load,unload
