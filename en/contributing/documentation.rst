@@ -20,7 +20,67 @@ Email the docs team (docs at cakephp dot org) or hop on IRC
 (#cakephp on freenode) to discuss any translation efforts you would
 like to participate in.
 
-Translator tips:
+New Translation Language
+------------------------
+
+We want to provide translations as complete as possible, but there may be times
+where a translation file is not up-to-date. So you should always consider the
+english version as the reference for the documentation.
+
+If your language is not in the actual languages, please contact us through
+Github and we can consider creating a skeleton folder for it. The following
+sections are for us the first one you should consider translating as these
+files don't change often::
+
+- index.rst
+- intro.rst
+- quickstart.rst
+- installation.rst
+- /intro folder
+- /tutorials-and-examples folder
+
+Reminder for Docs Admin
+-----------------------
+
+The structure of all languages folders should follow the english folder
+structure. If the structure changes for the english version, we should apply
+the changes for all other languages.
+
+For example, if a new english file is created in **en/file.rst**, we should:
+
+- add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
+- delete the content, but keeping the ``title``, ``meta informations`` and
+  eventual ``toc-tree`` elements. The following note will be added while nobody
+  has translated the file::
+
+    File Title
+    ##########
+
+    .. note::
+        The documentation is not currently supported in XX language for this
+        page.
+
+        Please feel free to send us a pull request on
+        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+        button to directly propose your changes.
+
+        You can referer to the english version in the select top menu to have
+        information about this page's topic.
+
+    // If toc-tree elements are in the english version
+    .. toctree::
+        :maxdepth: 1
+
+        one-toc-file
+        other-toc-file
+
+    .. meta::
+        :title lang=xx: File Title
+        :keywords lang=xx: title, description,...
+
+
+Translator tips
+---------------
 
 - Browse and edit in the language you want the content to be
   translated to - otherwise you won't see what has already been
