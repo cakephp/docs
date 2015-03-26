@@ -350,7 +350,7 @@ Utiliser le TableRegistry
 .. php:class:: TableRegistry
 
 Comme nous l'avons vu précédemment, la classe TableRegistry fournit un
-registre/fabrique facile d'utilisation pour accéder aux instances des table
+registre/fabrique facile d'utilisation pour accéder aux instances des tables
 de vos applications. Elle fournit aussi quelques autres fonctionnalités utiles.
 
 Configurer les Objets Table
@@ -365,12 +365,17 @@ leurs dépendances, ou utiliser les objets factices en fournissant un tableau
     $articles = TableRegistry::get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
-        'connection' => $connection,
+        'connection' => $connectionObject,
         'schema' => $schemaObject,
         'entityClass' => 'Custom\EntityClass',
         'eventManager' => $eventManager,
         'behaviors' => $behaviorRegistry
     ]);
+
+Remarquez les paramètres de configurations de la connexion et du schéma, ils
+ne sont pas des valeurs de type string mais des objets. La connection va
+prendre un objet ``Cake\Database\Connection`` et un schéma
+``Cake\Database\Schema\Collection``.
 
 .. note::
 

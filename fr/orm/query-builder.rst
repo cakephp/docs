@@ -781,6 +781,8 @@ d'autres tables est appelé **eager loading**.
     :start-after: start-contain
     :end-before: end-contain
 
+.. _adding-joins:
+
 Ajouter des Jointures
 ---------------------
 
