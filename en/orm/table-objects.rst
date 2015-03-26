@@ -339,12 +339,16 @@ use mock objects by providing an ``$options`` array::
     $articles = TableRegistry::get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
-        'connection' => $connection,
+        'connection' => $connectionObject,
         'schema' => $schemaObject,
         'entityClass' => 'Custom\EntityClass',
         'eventManager' => $eventManager,
         'behaviors' => $behaviorRegistry
     ]);
+
+Pay attention to the connection and schema configuration settings, they aren't
+string values but objects. The connection will take an object of
+``Cake\Database\Connection`` and schema ``Cake\Database\Schema\Collection``.
 
 .. note::
 
