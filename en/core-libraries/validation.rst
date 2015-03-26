@@ -159,7 +159,7 @@ Validator instances come with a 'default' provider setup automatically. The
 default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
 class. This makes it simple to use the methods on that class as validation
 rules. When using Validators and the ORM together, additional providers are
-configured for the table and entity objects. You can use the ``provider`` method
+configured for the table and entity objects. You can use the ``provider()`` method
 to add any additional providers your application needs::
 
     $validator = new Validator();

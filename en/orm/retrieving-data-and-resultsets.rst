@@ -60,7 +60,7 @@ Using Finders to Load Data
 .. php:method:: find($type, $options = [])
 
 Before you can work with entities, you'll need to load them. The easiest way to
-do this is using the ``find`` method. The find method provides an easy and
+do this is using the ``find()`` method. The find method provides an easy and
 extensible way to find the data you are interested in::
 
     // In a controller or table method.
@@ -68,7 +68,7 @@ extensible way to find the data you are interested in::
     // Find all the articles
     $query = $articles->find('all');
 
-The return value of any ``find`` method is always
+The return value of any ``find()`` method is always
 a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
 refine a query after creating it. Query objects are evaluated lazily, and do not
 execute until you start fetching rows, convert it to an array, or when the
@@ -135,7 +135,7 @@ The list of options supported by find() are:
 
 Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
-``getOptions`` method on a query object to retrieve the options used. While you
+``getOptions()`` method on a query object to retrieve the options used. While you
 can very easily pass query objects to your controllers, we recommend that you
 package your queries up as :ref:`custom-find-methods` instead. Using custom
 finder methods will let you re-use your queries more easily and make testing
@@ -215,11 +215,11 @@ a table::
     }
 
 When calling ``list`` you can configure the fields used for the key and value with
-the ``idField`` and ``valueField`` options respectively::
+the ``keyField`` and ``valueField`` options respectively::
 
     // In a controller or table method.
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug', 'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -234,7 +234,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 
     // In a controller or table method.
     $query = $articles->find('list', [
-        'idField' => 'slug',
+        'keyField' => 'slug',
         'valueField' => 'title',
         'groupField' => 'author_id'
     ]);
@@ -265,7 +265,7 @@ table. All entities matching a given ``parent_id`` are placed under the
 
     // Expanded default values
     $query = $comments->find('threaded', [
-        'idField' => $comments->primaryKey(),
+        'keyField' => $comments->primaryKey(),
         'parentField' => 'parent_id'
     ]);
     $results = $query->toArray();
@@ -273,7 +273,7 @@ table. All entities matching a given ``parent_id`` are placed under the
     echo count($results[0]->children);
     echo $results[0]->children[0]->comment;
 
-The ``parentField`` and ``idField`` keys can be used to define the fields that
+The ``parentField`` and ``keyField`` keys can be used to define the fields that
 threading will occur on.
 
 .. tip::
@@ -377,6 +377,31 @@ The above would translate into the following::
     While dynamic finders make it simple to express queries, they come with some
     additional performance overhead.
 
+
+Retrieving Associated Data
+==========================
+
+When you want to grab associated data, or filter based on associated data, there
+are two ways:
+
+- use CakePHP ORM query functions like ``contain()`` and ``matching()``
+- use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
+
+You should use ``contain()`` when you want to load the primary model, and its
+associated data. While ``contain()`` will let you apply additional conditions to
+the loaded associations, you cannot constrain the primary model based on the
+associations. For more details on the ``contain()``, look at
+:ref:`eager-loading-associations`.
+
+You should use ``matching()`` when you want to restrict the primary model based
+on associations. For example, you want to load all the articles that have
+a specific tag on them. For more details on the ``matching()``, look at
+:ref:`filtering-by-associated-data`.
+
+If you prefer to use join functions, you can look at
+:ref:`adding-joins` for more information.
+
+.. _eager-loading-associations:
 
 Eager Loading Associations
 ==========================
@@ -499,6 +524,8 @@ load fields off of contained associations, you can use ``autoFields()``::
     $query->select(['id', 'title'])
         ->contain(['Users'])
         ->autoFields(true);
+
+.. _filtering-by-associated-data
 
 Filtering by Associated Data
 ----------------------------

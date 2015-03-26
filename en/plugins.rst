@@ -77,6 +77,8 @@ plugins you explicitly specify.
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
     defined in ``vendor/cakephp-plugins.php``.
 
+.. _autoloading-plugin-classes:
+
 Autoloading Plugin Classes
 --------------------------
 
@@ -254,12 +256,12 @@ Plugin Controllers
 ==================
 
 Controllers for our ContactManager plugin will be stored in
-``plugins/ContactManager/src/Controller/``. Since the main thing we'll
+**plugins/ContactManager/src/Controller/**. Since the main thing we'll
 be doing is managing contacts, we'll need a ContactsController for
 this plugin.
 
 So, we place our new ContactsController in
-``plugins/ContactManager/src/Controller`` and it looks like so::
+**plugins/ContactManager/src/Controller** and it looks like so::
 
     // plugins/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
@@ -282,13 +284,13 @@ So, we place our new ContactsController in
     AppController.
 
 Before you can access your controllers, you'll need to ensure the plugin is
-loaded and connect some routes. In your ``config/bootstrap.php`` add the
+loaded and connect some routes. In your **config/bootstrap.php** add the
 following::
 
     Plugin::load('ContactManager', ['routes' => true]);
 
 Then create the ContactManager plugin routes. Put the following into
-``plugins/ContactManager/config/routes.php``::
+**plugins/ContactManager/config/routes.php**::
 
     <?php
     use Cake\Routing\Router;
@@ -322,12 +324,16 @@ also connect routes that use the following pattern::
 See the section on :ref:`plugin-configuration` for information on how to load
 plugin specific route files.
 
+For plugins you did not create with bake, you will also need to edit the
+``composer.json`` file to add your plugin to the autoload classes, this can be
+done as per the documentation :ref:`autoloading-plugin-classes`.
+
 .. _plugin-models:
 
 Plugin Models
 =============
 
-Models for the plugin are stored in ``plugins/ContactManager/src/Model``.
+Models for the plugin are stored in **plugins/ContactManager/src/Model**.
 We've already defined a ContactsController for this plugin, so let's
 create the table and entity for that controller::
 
@@ -430,7 +436,7 @@ Contacts controller you could make the following file::
     src/Template/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-``plugins/ContactManager/src/Template/Contacts/index.ctp``.
+**plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
 .. _plugin-assets:
 
@@ -479,7 +485,7 @@ This is only recommended for development. In production you should
 If you are not using the helpers, you can prepend /plugin_name/ to the beginning
 of a the URL for an asset within that plugin to serve it. Linking to
 '/contact_manager/js/some_file.js' would serve the asset
-``plugins/ContactManager/webroot/js/some_file.js``.
+**plugins/ContactManager/webroot/js/some_file.js**.
 
 Components, Helpers and Behaviors
 =================================

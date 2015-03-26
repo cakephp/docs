@@ -11,7 +11,7 @@ Voici ce dont vous allez avoir besoin:
 #. Un serveur de base de données. Nous allons utiliser un serveur MySQL dans
    ce tutoriel. Vous devrez en savoir assez sur SQL pour créer une base de
    données: CakePHP prendra les rênes à partir de là. Puisque nous utilisons
-   MySQL, assure-vous aussi d'avoir ``pdo_mysql`` activé dans PHP.
+   MySQL, assurez-vous aussi d'avoir ``pdo_mysql`` activé dans PHP.
 #. Des connaissances de base en PHP.
 
 C'est parti !
@@ -34,7 +34,7 @@ Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
 CakePHP dans le répertoire **bookmarker**. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
 L'avantage d'utiliser Composer est qu'il va automatiquement faire des tâches
 de configuration importantes, comme de définir les bonnes permissions de
@@ -132,7 +132,7 @@ tables nécessaires::
     );
 
 Vous avez peut-être remarqué que la table ``bookmarks_tags`` utilisait une
-clé primaire composite. CakePHP permet les clés primaires composites presque
+clé primaire composite. CakePHP accepte les clés primaires composites presque
 partout, facilitant la construction des applications multi-tenanted.
 
 La table et les noms de colonnes que nous avons utilisés n'étaient pas
@@ -198,7 +198,7 @@ les commandes suivantes::
 
 Ceci va générer les controllers, models, views, leurs cas de tests
 correspondants et les fixtures pour nos ressources users, bookmarks et tags.
-Si vous stoppé votre serveur, relancez-le et allez sur
+Si vous avez stoppé votre serveur, relancez-le et allez sur
 **http://localhost:8765/bookmarks**.
 
 Vous devriez voir une application basique mais fonctionnelle fournissant
@@ -215,10 +215,10 @@ sécurité, donc réglons ceci.
 
 C'est aussi un bon moment pour parler de la couche model dans CakePHP. Dans
 CakePHP, nous séparons les méthodes qui agissent sur une collection
-d'objets, et un objet unique, dans des classes différentes. Les méthodes qui
-agissent sur la collection des entities sont mises dans la classe ``Table``,
-alors que les fonctionnalités correspondant à un enregistrement unique
-sont mises dans la classe ``Entity``.
+d'objets, et celles qui agissent sur un objet unique, dans des classes
+différentes. Les méthodes qui agissent sur la collection des entities sont
+mises dans la classe ``Table``, alors que les fonctionnalités correspondant
+à un enregistrement unique sont mises dans la classe ``Entity``.
 
 Par exemple, le hashage des mots de passe se fait pour un enregistrement
 individuel, donc nous allons intégrer ce comportement sur l'objet entity.
@@ -230,8 +230,8 @@ mot de passe. Dans **src/Model/Entity/User.php**, ajoutez ce qui suit::
 
     namespace App\Model\Entity;
 
-    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
 
     class User extends Entity
     {
@@ -245,7 +245,7 @@ mot de passe. Dans **src/Model/Entity/User.php**, ajoutez ce qui suit::
         }
     }
 
-Maintenant mettez à jour un des users que vous avez créez précédemment, si vous
+Maintenant mettez à jour un des users que vous avez créé précédemment, si vous
 changez son mot de passe, vous devriez voir un mot de passe hashé à la
 place de la valeur originale sur la liste ou les pages de vue. CakePHP hashe les
 mots de passe avec
@@ -280,7 +280,7 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
 chemin **/bookmarks/tagged/***, vers ``BookmarksController::tags()``. En
 définissant les routes, vous pouvez isoler la définition de vos URLs, de la façon
-dont ils sont intégrés. Si nous visitions
+dont elles sont intégrées. Si nous visitions
 **http://localhost:8765/bookmarks/tagged**, nous verrions une page d'erreur
 de CakePHP. Intégrons maintenant la méthode manquante. Dans
 **src/Controller/BookmarksController.php**, ajoutez ce qui suit::
@@ -321,14 +321,14 @@ Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`. C
 un concept très puissant dans CakePHP qui vous permet de faire un package
 réutilisable de vos requêtes. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
-qui 'match' correspond.
+qui 'match'.
 
 Créer la Vue
 ------------
 
 Maintenant si vous vous rendez à l'url **/bookmarks/tagged**, CakePHP va afficher
-une erreur vous disant que vous n'avez pas de fichier de vue. Ensuite,
-construisons le fichier de vue pour notre action ``tags()``. Dans
+une erreur vous disant que vous n'avez pas de fichier de vue. Construisons
+donc le fichier de vue pour notre action ``tags()``. Dans
 **src/Template/Bookmarks/tags.ctp** mettez le contenu suivant::
 
     <h1>

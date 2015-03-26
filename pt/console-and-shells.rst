@@ -209,7 +209,7 @@ tasks. Você define tasks para uma shell usando a propriedade ``$tasks``::
 Você pode utilizar tasks de plugins utilizando o padrão :term:`plugin syntax`.
 Tasks são armazenadas sob ``Shell/Task/`` em arquivos nomeados depois de suas
 classes. Então se nós estivéssemos criando uma nova task 'FileGenerator', você
-deveria criar ``src/Shell/Task/FileGeneratorTask.php``.
+deveria criar **src/Shell/Task/FileGeneratorTask.php**.
 
 Cada task deve ao menos implementar um método ``main()``. O ShellDispatcher,
 vai chamar esse método quando a task é invocada. Uma classe task se parece com::
@@ -939,6 +939,7 @@ Mais tópicos
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
     console-and-shells/plugin-assets
+    console-and-shells/plugin-shell
 
 .. meta::
     :title lang=pt: Console e Shells

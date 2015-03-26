@@ -251,7 +251,8 @@ Comparer Avec le Present
 .. php:method:: isThisMonth()
 .. php:method:: isThisYear()
 
-Vous pouvez comparer une instance ``Time`` avec le présent de plusieurs façons::
+Vous pouvez comparer une instance ``Time`` avec le temps présent de plusieurs
+façons::
 
     $time = new Time('2014-06-15');
 
@@ -261,14 +262,14 @@ Vous pouvez comparer une instance ``Time`` avec le présent de plusieurs façons
     echo $time->isThisYear();
 
 Chacune des méthodes ci-dessus va retourner ``true``/``false`` selon si oui ou non
-l'instance ``Time`` correspond au présent.
+l'instance ``Time`` correspond au temps présent.
 
 Comparer Avec les Intervals
 ===========================
 
 .. php:method:: isWithinNext($interval)
 
-Vous pouvez regarder si une instance ``Time`` tombe dans un interval en
+Vous pouvez regarder si une instance ``Time`` tombe dans un intervalle en
 utilisant ``wasWithinLast()`` et ``isWithinNext()``::
 
     $time = new Time('2014-06-15');
@@ -281,7 +282,7 @@ utilisant ``wasWithinLast()`` et ``isWithinNext()``::
 
 .. php:method:: wasWithinPast($interval)
 
-Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé::
+Vous pouvez aussi comparer une instance ``Time`` dans un intervalle dans le passé::
 
     // Dans les 2 derniers jours.
     echo $time->wasWithinPast(2);
@@ -291,8 +292,8 @@ Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé
 
 .. end-time
 
-Accepter des Données de Request Localisées
-==========================================
+Accepter des Données Requêtées Localisées
+=========================================
 
 Quand vous créez des inputs de texte qui manipulent des dates, vous voudrez
 probablement accepter et parser des chaînes datetime localisées. Consultez

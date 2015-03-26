@@ -22,7 +22,7 @@ handles.
 
 Your application's controllers extend the ``AppController`` class, which in turn
 extends the core :php:class:`Controller` class. The ``AppController``
-class can be defined in ``src/Controller/AppController.php`` and it should
+class can be defined in **src/Controller/AppController.php** and it should
 contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods that handle requests. These are called
@@ -40,7 +40,7 @@ The App Controller
 As stated in the introduction, the ``AppController`` class is the parent class
 to all of your application's controllers.  ``AppController`` itself extends the
 :php:class:`Cake\\Controller\\Controller` class included in CakePHP.
-``AppController`` is defined in ``src/Controller/AppController.php`` as
+``AppController`` is defined in **src/Controller/AppController.php** as
 follows::
 
     namespace App\Controller;
@@ -104,7 +104,7 @@ to write.
 By convention, CakePHP renders a view with an inflected version of the action
 name. Returning to our online bakery example, our RecipesController might contain the
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
-in ``src/Controller/RecipesController.php`` and contain::
+in **src/Controller/RecipesController.php** and contain::
 
     // src/Controller/RecipesController.php
 
@@ -126,8 +126,8 @@ in ``src/Controller/RecipesController.php`` and contain::
         }
     }
 
-The template files for these actions would be ``src/Template/Recipes/view.ctp``,
-``src/Template/Recipes/share.ctp``, and ``src/Template/Recipes/search.ctp``. The
+The template files for these actions would be **src/Template/Recipes/view.ctp**,
+**src/Template/Recipes/share.ctp**, and **src/Template/Recipes/search.ctp**. The
 conventional view file name is the lowercased and underscored version of the
 action name.
 
@@ -225,7 +225,7 @@ you've submitted using the ``Controller::set()`` method), places the view inside
 
 The default view file used by render is determined by convention.
 If the ``search()`` action of the RecipesController is requested,
-the view file in ``src/Template/Recipes/search.ctp`` will be rendered::
+the view file in **src/Template/Recipes/search.ctp** will be rendered::
 
     namespace App\Controller;
 
@@ -246,7 +246,7 @@ an alternate view file by specifying a view file name as first argument of
 ``Controller::render()`` method.
 
 If ``$view`` starts with '/', it is assumed to be a view or
-element file relative to the ``src/Template`` folder. This allows
+element file relative to the **src/Template** folder. This allows
 direct rendering of elements, very useful in AJAX calls::
 
     // Render the element in src/Template/Element/ajaxreturn.ctp
@@ -272,8 +272,8 @@ have called ``Controller::render()``, CakePHP will not try to re-render the view
         }
     }
 
-This would render ``src/Template/Posts/custom_file.ctp`` instead of
-``src/Template/Posts/my_action.ctp``.
+This would render **src/Template/Posts/custom_file.ctp** instead of
+**src/Template/Posts/my_action.ctp**.
 
 You can also render views inside plugins using the following syntax:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -289,7 +289,7 @@ For example::
         }
     }
     
-This would render ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
+This would render **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Redirecting to Other Pages
 ==========================
@@ -371,7 +371,7 @@ Loading Additional Models
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
-The ``loadModel`` function comes handy when you need to use a model
+The ``loadModel()`` function comes handy when you need to use a model
 table/collection that is not the controller's default one::
 
     // In a controller method.
@@ -436,7 +436,7 @@ want loaded, and any configuration data for them::
     {
         parent::initialize();
         $this->loadComponent('Csrf');
-        $this->loadComponent('Comments', Configure:read('Comments'));
+        $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
 .. php:attr:: components

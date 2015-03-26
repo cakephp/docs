@@ -221,7 +221,7 @@ Vous pouvez utiliser les tâches à partir de plugins en utilisant la
 ``Shell/Task/`` dans les fichiers nommées d'après leur
 classe. Ainsi si vous étiez sur le point de créer une nouvelle
 tâche 'FileGenerator', vous pourriez créer
-``src/Shell/Task/FileGeneratorTask.php``.
+**src/Shell/Task/FileGeneratorTask.php**.
 
 Chaque tâche doit au moins intégrer une méthode ``main()``. Le
 ShellDispatcher appellera cette méthode quand la tâche est invoquée.
@@ -713,7 +713,7 @@ pour définir le comportement de l'option:
   booléen.
   Par défaut à ``false``.
 * ``choices`` - Un tableau de choix valides pour cette option. Si elle est vide,
-  toutes les valeurs sont valides. Une exception sera lancée lorque parse()
+  toutes les valeurs sont valides. Une exception sera lancée lorsque parse()
   rencontre une valeur non valide.
 
 .. php:method:: addOptions(array $options)
@@ -1001,6 +1001,7 @@ Plus de sujets
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
     console-and-shells/plugin-assets
+    console-and-shells/plugin-shell
 
 .. meta::
     :title lang=fr: Console et Shells

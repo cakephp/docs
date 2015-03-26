@@ -1,14 +1,13 @@
 Déploiement
 ###########
 
-Une fois que votre application est terminée, ou même avant que vous
-souhaitiez la déployer. Il y a quelques choses que vous devriez faire quand
-vous déployez une application CakePHP.
+Une fois que votre application CakePHP est terminée, ou même avant que
+vous souhaitiez la déployer, il y a certains points à vérifier.
 
 Mise à jour de config/app.php
 =============================
 
-Mettre à jour core.php, spécialement la valeur de ``debug`` est extrêmement
+Mettre à jour app.php, spécialement la valeur de ``debug`` est extrêmement
 important. Mettre debug = ``false`` désactive un certain nombre de
 fonctionnalités de développement qui ne devraient jamais être exposées sur
 internet. Désactiver le debug change les types de choses suivantes:

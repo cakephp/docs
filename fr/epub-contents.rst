@@ -52,6 +52,7 @@ Contenu
 
     core-libraries/global-constants-and-functions
     debug-kit
+    migrations
     appendices
 
 .. todolist::

@@ -728,6 +728,8 @@ to fetch associated data from other tables is called **eager loading**.
     :start-after: start-contain
     :end-before: end-contain
 
+.. _adding-joins:
+
 Adding Joins
 ------------
 
@@ -894,7 +896,7 @@ Unions are created by composing one or more select queries together::
 
     $unpublished->union($inReview);
 
-You can create ``UNION ALL`` queries using the ``unionAll`` method::
+You can create ``UNION ALL`` queries using the ``unionAll()`` method::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);
@@ -1085,7 +1087,7 @@ look something like this::
 One last example and you will be a map-reduce expert. Imagine you have
 a ``friends`` table and you want to find "fake friends" in our database, or
 better said, people who do not follow each other. Let's start with our
-``mapper`` function::
+``mapper()`` function::
 
     $mapper = function ($rel, $key, $mr) {
         $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);

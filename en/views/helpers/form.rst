@@ -505,7 +505,7 @@ Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
 * ``$options['value']`` Used in combination with a select-type input (i.e.
-  For types select, date, time, datetime). Set 'selected' to the value of the
+  For types select, date, time, datetime). Set 'value' to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->time('close_time', [
@@ -516,6 +516,15 @@ Options for Select, Checkbox and Radio Inputs
 
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
+
+  For select input where you set the ``multiple`` attribute to true,
+  you can use an array of the values you want to select by default::
+
+    echo $this->Form->select('rooms', [
+        'multiple' => true,
+         // options with values 1 and 3 will be selected as default
+        'default' => [1, 3]
+    ]);
 
 * ``$options['empty']`` If set to ``true``, forces the input to remain empty.
 
@@ -534,7 +543,7 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-      <select name="field" id="field">
+      <select name="field">
           <option value="">(choose one)</option>
           <option value="0">1</option>
           <option value="1">2</option>
@@ -551,8 +560,8 @@ Options for Select, Checkbox and Radio Inputs
 
   .. code-block:: html
 
-    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="published" value="0" />
+    <input type="checkbox" name="published" value="1" />
 
   This can be disabled by setting the ``$options['hiddenField'] = false``::
 
@@ -1414,7 +1423,7 @@ option when including the helper in your controller::
         'templates' => 'app_form',
     ]);
 
-This would load the tags in ``config/app_form.php``. This file should
+This would load the tags in **config/app_form.php**. This file should
 contain an array of templates indexed by name::
 
     // in config/app_form.php
@@ -1528,8 +1537,9 @@ You can customize the generated inputs by defining additional options in the
 When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
-- ``fieldset`` Set to ``false`` to disable the fieldset. If a string is supplied
-  it will be used as the class name for the fieldset element.
+- ``fieldset`` Set to ``false`` to disable the fieldset. You can also pass an
+  array of parameters to be applied as HTML attributes to the fieldset tag. If you
+  pass an empty array, the fieldset will be displayed without attributes.
 - ``legend`` Set to ``false`` to disable the legend for the generated input set.
   Or supply a string to customize the legend text.
 
@@ -1627,9 +1637,9 @@ Building a Widget Class
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
 the ``render(array $data)`` and ``secureFields(array $data)`` methods to be implemented.
-The ``render`` method expects an array of data to build the widget and is expected to return a string
+The ``render()`` method expects an array of data to build the widget and is expected to return a string
 of HTML for the widget.
-The ``secureFields`` method expects an array of data as well and is expected to return an
+The ``secureFields()`` method expects an array of data as well and is expected to return an
 array containing the list of fields to secure for this widget.
 If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by

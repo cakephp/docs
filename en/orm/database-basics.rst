@@ -10,11 +10,11 @@ reflection/generation, a flexible type system and more.
 Configuration
 =============
 
-By convention database connections are configured in ``config/app.php``. The
+By convention database connections are configured in **config/app.php**. The
 connection information defined in this file is fed into
 :php:class:`Cake\\Datasource\\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
-``config/app.default.php``. A sample connection configuration would look
+**config/app.default.php**. A sample connection configuration would look
 like::
 
     'Datasources' => [
@@ -254,9 +254,10 @@ implement the following methods:
 * toPHP
 * toDatabase
 * toStatement
+* marshal
 
 An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\Database\Type`. For example if we wanted to add a JSON type,
+:php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
 we could make the following type class::
 
     // in src/Database/Type/JsonType.php
@@ -278,6 +279,14 @@ we could make the following type class::
             return json_decode($value, true);
         }
 
+        public function marshal($value)
+        {
+            if (is_array($value) || $value === null) {
+                return $value;
+            }
+            return json_decode($value, true);
+        }
+
         public function toDatabase($value, Driver $driver)
         {
             return json_encode($value);
@@ -293,7 +302,7 @@ we could make the following type class::
 
     }
 
-By default the ``toStatement`` method will treat values as strings which will
+By default the ``toStatement()`` method will treat values as strings which will
 work for our new type. Once we've created our new type, we need to add it into
 the type mapping. During our application bootstrap we should do the following::
 
@@ -359,7 +368,7 @@ method is ``query()`` which allows you to run already completed SQL queries::
 
 .. php:method:: execute($sql, $params, $types)
 
-The ``query`` method does not allow for additional parameters. If you need
+The ``query()`` method does not allow for additional parameters. If you need
 additional parameters you should use the ``execute()`` method, which allows for
 placeholders to be used::
 
@@ -413,8 +422,8 @@ Using Transactions
 -------------------
 
 The connection objects provide you a few simple ways you do database
-transactions. The most basic way of doing transactions is through the ``begin``,
-``commit`` and ``rollback`` methods, which map to their SQL equivalents::
+transactions. The most basic way of doing transactions is through the ``begin()``,
+``commit()`` and ``rollback()`` methods, which map to their SQL equivalents::
 
     $conn->begin();
     $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
@@ -424,7 +433,7 @@ transactions. The most basic way of doing transactions is through the ``begin``,
 .. php:method:: transactional(callable $callback)
 
 In addition to this interface connection instances also provide the
-``transactional`` method which makes handling the begin/commit/rollback calls
+``transactional()`` method which makes handling the begin/commit/rollback calls
 much simpler::
 
     $conn->transactional(function ($conn) {
@@ -475,7 +484,7 @@ Binding Values
 --------------
 
 Once you've created a prepared statement, you may need to bind additional data.
-You can bind multiple values at once using the ``bind`` method, or bind
+You can bind multiple values at once using the ``bind()`` method, or bind
 individual elements using ``bindValue``::
 
     $stmt = $conn->prepare(

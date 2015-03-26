@@ -56,7 +56,7 @@ pour lesquels l'autoloader est configuré.
 
 .. php:staticmethod:: core(string $package)
 
-Utilisé pour trouver le chemin vers un package dans CakePHP::
+Utilisée pour trouver le chemin vers un package dans CakePHP::
 
     // Obtenir le chemin des moteurs de Cache.
     App::core('Cache/Engine');

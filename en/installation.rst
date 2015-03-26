@@ -68,11 +68,11 @@ instructions for Composer's Windows installer can be found within the README
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 Or if Composer is installed globally::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application
@@ -82,19 +82,36 @@ files with the rest of your source code.
 You can now visit the path to where you installed your CakePHP application and
 see the setup traffic lights.
 
+Although composer is the recommended installation method, there are
+pre-installed downloads available on `Github <https://github.com/cakephp/cakephp/tags>`_
+Those downloads contain the app skeleton with all vendor packages installed.
+Also it includes the ``composer.phar`` so you have everything you need for
+further use.
+
 Keeping Up To Date with the Latest CakePHP Changes
 --------------------------------------------------
 
-If you want to keep current with the latest changes in CakePHP you can
-add the following to your application's **composer.json**::
+By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.0.*-dev"
+        "cakephp/cakephp": "~3.0"
     }
 
 Each time you run
-``php composer.phar update`` you will receive the latest changes in the chosen
-branch.
+``php composer.phar update`` you will receive the latest stable releases when
+using the default version constraint ``~3.0``. Only bugfix and minor version
+releases of 3.x will be used when updating.
+
+If you want to keep current with the latest unreleased changes in CakePHP you
+can add the change your application's **composer.json**::
+
+    "require": {
+        "cakephp/cakephp": "dev-master"
+    }
+
+Be aware that is not recommended, as your application can break when next major
+version is being released. Additionally composer does not cache development
+branches, so it slows down consecutive composer installs/updates.
 
 Permissions
 ===========

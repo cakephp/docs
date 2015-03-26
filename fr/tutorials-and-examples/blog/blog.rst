@@ -41,7 +41,7 @@ Ensuite tapez simplement la ligne suivante dans votre terminal depuis votre
 répertoire d'installation pour installer le squelette d'application de CakePHP
 dans le répertoire [app_name]. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions
@@ -85,7 +85,7 @@ web. Si vous avez utilisé Composer pour l'installation, ceci a du être fait po
 "Permissions set on <folder>". Si vous avez plutôt un message d'erreur ou
 voulez le faire manuellement, la meilleur façon de le faire est de trouver
 sous quel utilisateur votre serveur web tourne en faisant
-(``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire ``src/tmp``
+(``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire **src/tmp**
 pour cet utilisateur. La commande finale que vous pouvez lancer (dans \*nix)
 pourrait ressembler à ceci::
 
@@ -153,7 +153,7 @@ vous configurerez quelque chose.
 
 Le fichier de configuration devrait être assez simple : remplacez simplement
 les valeurs du tableau ``Datatsources.default`` dans le fichier
-``config/app.php`` avec ceux de votre config. Un exemple de tableau de
+**config/app.php** avec ceux de votre config. Un exemple de tableau de
 configuration complet pourrait ressembler à ce qui suit::
 
     return [
@@ -174,7 +174,7 @@ configuration complet pourrait ressembler à ce qui suit::
         // Plus de configuration ci-dessous.
     ];
 
-Une fois votre fichier ``config/app.php`` sauvegardé, vous devriez
+Une fois votre fichier **config/app.php** sauvegardé, vous devriez
 être en mesure d'ouvrir votre navigateur internet et de voir la page d'accueil
 de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion
 a été trouvé, et que CakePHP peut s'y connecter avec succès.
@@ -182,7 +182,7 @@ a été trouvé, et que CakePHP peut s'y connecter avec succès.
 .. note::
 
     Une copie du fichier de configuration par défaut de
-    CakePHP se trouve dans ``config/app.default.php``.
+    CakePHP se trouve dans **config/app.default.php**.
 
 Configuration facultative
 =========================

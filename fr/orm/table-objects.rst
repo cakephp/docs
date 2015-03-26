@@ -19,7 +19,7 @@ Utilisation Basique
 ===================
 
 Pour commencer, créez une classe Table. Ces classes se trouvent dans
-``src/Model/Table``. Les Tables sont une collection de type model spécifique
+**src/Model/Table**. Les Tables sont une collection de type model spécifique
 aux bases de données relationnelles, et sont l'interface principale pour
 votre base de données dans l'ORM de CakePHP. La classe table la plus
 basique devrait ressembler à ceci::
@@ -79,7 +79,7 @@ conventions de nommage. Par exemple, si votre classe de table est appelée
 ``ArticlesTable`` l'entity sera ``Article``. Si la classe table est
 ``PurchaseOrdersTable`` l'entity sera ``PurchaseOrder``. Cependant si vous
 souhaitez utiliser une entity qui ne suit pas les conventions, vous pouvez
-utiliser la méthode ``entityClass`` pour changer les choses::
+utiliser la méthode ``entityClass()`` pour changer les choses::
 
     class PurchaseOrdersTable extends Table
     {
@@ -124,7 +124,7 @@ table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'event
 de table pour lier les écouteurs dedans.
 
 Lors de l'utilisation des méthodes callback des behaviors attachés dans la
-méthode ``initialize`` va voir ses écouteurs lancés **avant** que les
+méthode ``initialize()`` va voir ses écouteurs lancés **avant** que les
 méthodes de callback de la table ne soient déclenchées. Ceci suit la même
 séquence que les controllers & les components.
 
@@ -219,6 +219,18 @@ afterSave
 L'event ``Model.afterSave`` est déclenché après qu'une entity ne soit
 sauvegardée.
 
+afterSaveCommit
+---------------
+
+.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+
+L'event ``Model.afterSaveCommit`` est lancé après que la transaction, dans
+laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
+déclenché pour des sauvegardes non atomic, quand les opérations sur la base de
+données sont implicitement committées. L'event est décenché seulement pour
+la table primaire sur laquelle ``save()`` est directement appelée. L'event
+n'est pas déclenché si une transaction est démarrée avant l'appel de save.
+
 beforeDelete
 ------------
 
@@ -235,6 +247,19 @@ afterDelete
 
 L'event ``Model.afterDelete`` est déclenché après qu'une entity a été supprimée.
 
+afterDeleteCommit
+-----------------
+
+.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+
+L'event ``Model.afterDeleteCommit`` est lancé après que la transaction, dans
+laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
+déclenché pour des suppressions non atomic, quand les opérations sur la base de
+données sont implicitement committées. L'event est décenché seulement pour
+la table primaire sur laquelle ``delete()`` est directement appelée. L'event
+n'est pas déclenché si une transaction est démarrée avant l'appel de delete.
+
+
 Behaviors
 =========
 
@@ -250,8 +275,8 @@ permettent de réutiliser des parties de logique, ils compliqueraient la
 liaison des events.
 
 Pour ajouter un behavior à votre table, vous pouvez appeler la méthode
-``addBehavior``. Généralement, le meilleur endroit pour le faire est dans la
-méthode ``initialize``::
+``addBehavior()``. Généralement, le meilleur endroit pour le faire est dans la
+méthode ``initialize()``::
 
     namespace App\Model\Table;
 
@@ -300,7 +325,7 @@ Configurer les Connexions
 Par défaut, toutes les instances de table utilisent la connexion à la base
 de données ``default``. Si votre application utilise plusieurs connexions à la
 base de données, vous voudrez peut-être configurer quelles tables utilisent
-quelles connexions. C'est avec la méthode ``defaultConnectionName``::
+quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
 
     namespace App\Model\Table;
 
@@ -315,7 +340,7 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName``::
 
 .. note::
 
-    La méthode ``defaultConnectionName`` **doit** être statique.
+    La méthode ``defaultConnectionName()`` **doit** être statique.
 
 .. _table-registry-usage:
 

@@ -3,9 +3,9 @@ Components (Composants)
 
 Les Components (Composants) sont des regroupements de logique applicative
 qui sont partagés entre les controllers. CakePHP est également livré avec un
-fantastique ensemble de components, que vous pouvez utiliser pour vous aider 
+fantastique ensemble de components, que vous pouvez utiliser pour vous aider
 dans de nombreuses tâches communes. Vous pouvez également créer votre propre
-component. Si vous vous surprenez à vouloir copier et coller des choses entre 
+component. Si vous vous surprenez à vouloir copier et coller des choses entre
 vos controllers, alors vous devriez envisager de regrouper celle-ci dans un
 Component. Créer des components permet de garder un code de controller propre
 et vous permet de réutiliser le code entre projets.
@@ -51,8 +51,8 @@ Controller ou via le tableau ``$components``::
 
     }
 
-Vous pouvez configurer les components à la volée en utilisant la méthode 
-``config()``. Souvent, ceci est fait dans la méthode ``beforeFilter()`` 
+Vous pouvez configurer les components à la volée en utilisant la méthode
+``config()``. Souvent, ceci est fait dans la méthode ``beforeFilter()``
 de votre controller. Ceci peut aussi être exprimé comme ceci::
 
     public function beforeFilter()
@@ -126,13 +126,13 @@ utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 
     Gardez à l'esprit que le chargement d'un component à la volée n'appellera
     pas les callbacks manquants. Si vous souhaitez que les callbacks
-    ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
+    ``initialize()`` ou ``startup()`` soient appelées, vous devrez les appeler
     manuellement selon le moment où vous chargez votre component.
 
 Utiliser les Components
 =======================
 
-Une fois que vous avez inclu quelques components dans votre controller,
+Une fois que vous avez inclus quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
 :php:class:`Cake\\Controller\\Component\\FlashComponent` et le
@@ -174,7 +174,7 @@ de l'utiliser dans plusieurs controllers différents.
 
 La première étape consiste à créer un nouveau fichier et une classe pour
 le component. Créez le fichier dans
-``src/Controller/Component/MathComponent.php``. La structure de base pour
+**src/Controller/Component/MathComponent.php**. La structure de base pour
 le component ressemblerait à quelque chose comme cela::
 
     namespace App\Controller\Component;
@@ -201,11 +201,11 @@ Inclure votre Component dans vos Controllers
 Une fois notre component terminé, nous pouvons l'utiliser dans
 le controller de l'application en le chargeant durant la méthode
 ``initialize()`` du controller. Une fois chargé, le controller sera
-automatiquement pourvu d'un nouvel attribut nommé d'après le component, 
+automatiquement pourvu d'un nouvel attribut nommé d'après le component,
 à travers lequel nous pouvons accéder à une instance de celui-ci::
 
     // Dans un controller
-    // Rend le nouveau component disponible par $this->Math
+    // Rend le nouveau component disponible avec $this->Math
     // ainsi que le component standard $this->Csrf
     public function initialize()
     {
@@ -280,8 +280,8 @@ variable ``$components``::
 
 .. note::
 
-    Au contraire d'un component inclu dans un controller, aucun callback
-    ne sera attrapé pour un component inclu dans un component.
+    Au contraire d'un component inclus dans un controller, aucun callback
+    ne sera attrapé pour un component inclus dans un component.
 
 Accéder au Controller du  Component
 -----------------------------------
@@ -328,7 +328,6 @@ qui vous permettent d'augmenter le cycle de la requête.
     controller ne continuera pas à rediriger la requête. Les paramètres $url et
     $response vous permettent d'inspecter et de modifier la localisation ou toutes
     autres entêtes dans la réponse.
-
 
 .. meta::
     :title lang=fr: Components (Composants)

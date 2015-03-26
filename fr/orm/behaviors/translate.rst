@@ -5,12 +5,13 @@ Translate
 
 .. php:class:: TranslateBehavior
 
-Le behavior Translate vous permet de créer et de récupérer les copies traduits
+Le behavior Translate vous permet de créer et de récupérer les copies traduites
 de vos entities en plusieurs langues. Il le fait en utilisant une table
 ``i18n`` séparée où il stocke la traduction pour chacun des champs de tout
 objet Table donné auquel il est lié.
 
 .. warning::
+
     TranslateBehavior ne supporte pas les clés primaires composite pour
     l'intant.
 
@@ -22,7 +23,7 @@ behavior à l'objet Table que vous souhaitez rendre traduisible::
 
     class ArticlesTable extends Table
     {
-    
+
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', ['fields' => ['title']]);
@@ -60,7 +61,7 @@ trait spécial dans votre classe Entity::
         use TranslateTrait;
     }
 
-Maintenant, vous pouvez trouver toutes les traductions pour une entity unique::
+Maintenant, vous pouvez trouver toutes les traductions pour une seule entity::
 
     $article = $articles->find('translations')->first();
     echo $article->translation('spa')->title; // 'Un Artículo'
@@ -102,12 +103,12 @@ en lançant manuellement le script SQL suivant dans votre base de données:
 Attacher le Behavior Translate à Vos Tables
 ===========================================
 
-Attacher le behavior peut être fait dans la méthode ``initialize`` dans votre
+Attacher le behavior peut être fait dans la méthode ``initialize()`` de votre
 classe Table::
 
     class Articles extends Table
     {
-    
+
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
@@ -116,21 +117,20 @@ classe Table::
 
 La première chose à noter est que vous devez passer la clé ``fields`` dans le
 tableau de configuration. La liste des champs est souhaitée pour dire au
-behavior les colonnes qui seront capable de stocker les traductions.
+behavior les colonnes qui pourront stocker les traductions.
 
 Utiliser une Table de Traductions Séparée
 -----------------------------------------
 
 Si vous souhaitez utiliser une table autre que ``i18n`` pour la traduction
 d'un dépôt particulier, vous pouvez le spécifier dans la configuration du
-behavior. C'est commun quand vous avez plusieurs tables à traduire et que vous
-souhaitez une séparation propre des données qui est stocké pour chaque table
-différente::
-
+behavior. C'est le cas quand vous avez plusieurs tables à traduire et
+que vous souhaitez une séparation propre des données qui sont stockées pour
+chaque table spécifiquement::
 
     class Articles extends Table
     {
-    
+
         public function initialize(array $config)
         {
             $this->addBehavior('Translate', [
@@ -148,7 +148,6 @@ Lire du Contenu Traduit
 
 Comme montré ci-dessus, vous pouvez utiliser la méthode ``locale`` pour choisir
 la traduction active pour les entities qui sont chargées::
-translation for entities that are loaded::
 
     I18n::locale('spa');
     $articles = TableRegistry::get('Articles');
@@ -156,8 +155,9 @@ translation for entities that are loaded::
     // Toutes les entities dans les résultats vont contenir la traduction espagnol
     $results = $articles->find()->all();
 
-Cette méthode fonctionne avec tout finder dans vos tables. Par exemple, vous
-pouvez utiliser TranslateBehavior avec ``find('list')``::
+Cette méthode fonctionne avec n'importe quel finder se trouvant dans vos
+tables. Par exemple, vous pouvez utiliser TranslateBehavior avec
+``find('list')``::
 
     I18n::locale('spa');
     $data = $articles->find('list')->toArray();
@@ -201,12 +201,12 @@ classe entity qui est utilisé pour votre table::
     }
 
 Ce trait contient une méthode unique appelée ``translation``, ce qui vous laisse
-accéder ou créer des entities de nouvel traduction à la volée::
+accéder ou créer à la volée des entities pour de nouvelles traductions::
 
     // Affiche 'title'
     echo $article->translation('eng')->title;
 
-    // Ajoute une nouvelle données de traduction de l'entity à l'article
+    // Ajoute une nouvelle donnée de traduction de l'entity à l'article
     $article->translation('deu')->title = 'Wunderbar';
 
 Limiter les Traductions à Récupérer
@@ -220,11 +220,37 @@ données pour un ensemble particulier d'enregistrements::
     $spanishTranslation = $article->translation('spa');
     $englishTranslation = $article->translation('eng');
 
+Eviter la Récupération de Traductions Vides
+-------------------------------------------
+
+Les enregistrements traduits peuvent contenir tout type de chaîne, si un
+enregistrement a été traduit et stocké comme étant une chaîne vide ('')
+le behavior translate va prendre et utiliser ceci pour écraser la valeur du
+champ originel.
+
+Si ce n'est pas désiré, vous pouvez ignorer les traductions qui sont vides en
+utilisant la clé de config ``allowEmptyTranslations``::
+
+    class Articles extends Table
+    {
+
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Translate', [
+                'fields' => ['title', 'body'],
+                'allowEmptyTranslations' => false
+            ]);
+        }
+    }
+
+Ce qui est au-dessus va seulement charger les données traduites qui ont du
+conenu.
+
 Récupérer Toutes les Traductions pour des Associations
 ------------------------------------------------------
 
 Il est aussi possible de trouver des traductions pour toute association dans une
-opération de find unique::
+unique opération de find::
 
     $article = $articles->find('translations')->contain([
         'Categories' => function ($query) {
@@ -240,7 +266,7 @@ utilise simplement la fonction de construction de requête pour la clause
 ``contain`` d'utiliser les ``translations`` du finder personnalisé dans
 l'association.
 
-Récupérer une langue sans utiliser I18n::locale
+Récupérer une Langue sans Utiliser I18n::locale
 -----------------------------------------------
 
 Appeler ``I18n::locale('spa');`` change la locale par défaut pour tous les finds
@@ -248,9 +274,9 @@ traduits, il peut y avoir des fois où vous souhaitez récupérer du contenu
 traduit sans modification de l'état de l'application. Pour ces scenarii,
 utilisez la méthode ``locale`` du behavior::
 
-    I18n::locale('eng'); // reset for illustration
+    I18n::locale('eng'); // réinitialisation pour l'exemple
     $articles = TableRegistry::get('Articles');
-    $articles->locale('spa'); // specific locale
+    $articles->locale('spa'); // locale spécifique
 
     $article = $articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
@@ -274,9 +300,9 @@ Sauvegarder dans une Autre Langue
 
 La philosophie derrière le TranslateBehavior est que vous avez une entity
 représentant la langue par défaut, et plusieurs traductions qui peuvent
-surcharger certains champs dans de tels entities. Garder ceci à l'esprit, vous
-pouvez sauvegarder de façon intuitive les traductions pour une entity donnée.
-Par exemple, étant donné la configuration suivante::
+surcharger certains champs dans de telles entities. Garder ceci à l'esprit,
+vous pouvez sauvegarder de façon intuitive les traductions pour une entity
+donnée. Par exemple, étant donné la configuration suivante::
 
     class Articles extends Table
     {
@@ -301,7 +327,7 @@ Par exemple, étant donné la configuration suivante::
     $articles->save($article);
 
 Donc, après avoir sauvegardé votre premier article, vous pouvez maintenant
-sauvegarder une traduction pour celui-ci, il y a quelques façons de le faire. La
+sauvegarder une traduction pour celui-ci. Il y a quelques façons de le faire. La
 première est de configurer la langue directement dans une entity::
 
     $article->_locale = 'spa';
@@ -310,8 +336,8 @@ première est de configurer la langue directement dans une entity::
     $articles->save($article);
 
 Après que l'entity a été sauvegardé, le champ traduit va aussi être persistent,
-une chose à noter est que les valeurs à partir de la langue par défaut qui
-étaient surchargées seront préservées::
+une chose à noter est que les valeurs qui étaient par défaut surchargées à
+partir de la langue, seront préservées::
 
     // Affiche 'This is the content'
     echo $article->body;
@@ -326,7 +352,7 @@ sauvegardée et récupérée comme d'habitude::
     $articles->save($article);
 
 La deuxième manière de l'utiliser pour sauvegarder les entities dans une autre
-langue est de définir la langue par défaut directement à la table::
+langue est de définir par défaut la langue directement à la table::
 
     I18n::locale('spa');
     $article->title = 'Mi Primer Artículo';

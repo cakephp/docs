@@ -164,7 +164,7 @@ In order to update entities you may choose to apply request data directly to an
 existing entity. This has the advantage that only the fields that actually
 changed will be saved, as opposed to sending all fields to the database to be
 persisted. You can merge an array of raw data into an existing entity using the
-``patchEntity`` method::
+``patchEntity()`` method::
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
@@ -173,7 +173,7 @@ persisted. You can merge an array of raw data into an existing entity using the
     $articles->save($article);
 
 As explained in the previous section, the request data should follow the
-structure of your entity. The ``patchEntity`` method is equally capable of
+structure of your entity. The ``patchEntity()`` method is equally capable of
 merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the third parameter of the method::
@@ -308,7 +308,7 @@ like ``id`` which is usually not declared in ``_accessible`` property::
         $list,
         $this->request->data(),
         ['associated' => [
-                'Tags', 
+                'Tags',
                 'Comments.Users' => [
                     'accessibleFields' => ['id' => true],
                 ]
@@ -380,8 +380,8 @@ want applied::
         ['validate' => 'update']
     );
 
-The above would call the ``validationUpdate`` method on the table instance to
-build the required rules. By default the ``validationDefault`` method will be
+The above would call the ``validationUpdate()`` method on the table instance to
+build the required rules. By default the ``validationDefault()`` method will be
 used. A sample validator for our articles table would be::
 
     class ArticlesTable extends Table
@@ -611,6 +611,12 @@ Your entities should be structured in the same way as they are when
 loaded from the database. See the form helper documentation for :ref:`how to
 build inputs for associations <associated-form-inputs>`.
 
+If you are building or modifying association data after building your entities
+you will have to mark the association property as modified with ``dirty()``::
+
+    $company->author->name = 'Master Chef';
+    $company->dirty('author', true);
+
 Saving BelongsTo Associations
 -----------------------------
 
@@ -705,8 +711,8 @@ plural, underscored version of the association name. For example::
     ]);
     $articles->save($article);
 
-When converting request data into entities, the ``newEntity`` and
-``newEntities`` methods will handle both arrays of properties, as well as a list
+When converting request data into entities, the ``newEntity()`` and
+``newEntities()`` methods will handle both arrays of properties, as well as a list
 of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
 select box or checkbox based form controls for belongs to many associations. See
 the :ref:`converting-request-data` section for more information.
@@ -733,6 +739,30 @@ persisted::
     $article->dirty('tags', true);
 
 Without the call to ``dirty()`` the updated tags will not be saved.
+
+Often you'll find yourself wanting to make an association between two existing
+entities, eg. a user coauthoring an article. This is done by using the method
+``link()``, like this::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $this->Articles->Users->link($article, [$user]);
+
+When saving belongsToMany Associations, it can be relevant to save some
+additional data to the Joint Table.  In the previous example of tags, it could
+be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
+be either ``upvote`` or ``downvote`` and is represented by a string.  The
+relation is between Users and Articles.
+
+Saving that association, and the ``vote_type`` is done by first adding some data
+to ``_joinData`` and then saving the association with ``link()``, example::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $this->Articles->Users->link($article, [$user]);
 
 Saving Additional Data to the Joint Table
 -----------------------------------------
@@ -852,7 +882,7 @@ before entities are persisted. Some example domain rules are:
 Creating a Rules Checker
 ------------------------
 
-Rules checker classes are generally defined by the ``buildRules`` method in your
+Rules checker classes are generally defined by the ``buildRules()`` method in your
 table class. Behaviors and other event subscribers can use the
 ``Model.buildRules`` event to augment the rules checker for a given Table
 class::

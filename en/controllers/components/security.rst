@@ -214,7 +214,7 @@ Disabling Security Component for Specific Actions
 
 There may be cases where you want to disable all security checks for an action
 (ex. AJAX requests).  You may "unlock" these actions by listing them in
-``$this->Security->unlockedActions`` in your ``beforeFilter``. The
+``$this->Security->unlockedActions`` in your ``beforeFilter()``. The
 ``unlockedActions`` property will **not** affect other features of
 ``SecurityComponent``::
 

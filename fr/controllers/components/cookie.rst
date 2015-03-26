@@ -5,7 +5,7 @@ CookieComponent
 
 .. php:class:: CookieComponent(ComponentRegistry $collection, array $config = [])
 
-Le component Cookie est un conteneur de la méthode native de PHP ``setcookie``.
+Le component Cookie est un conteneur de la méthode native de PHP ``setcookie()``.
 Il simplifie la manipulation des cookies et chiffre automatiquement les données
 du cookie.
 

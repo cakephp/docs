@@ -656,7 +656,7 @@ query pour traiter préalablement ou transformer les résultats::
         return $max->age;
     });
 
-Vous pouvez utiliser ``first`` ou ``firstOrFail`` pour récupérer un
+Vous pouvez utiliser ``first()`` ou ``firstOrFail()`` pour récupérer un
 enregistrement unique. Ces méthodes vont modifier la requête en ajoutant
 une clause ``LIMIT 1``::
 
@@ -956,7 +956,7 @@ Les unions sont créées en composant une ou plusieurs requêtes select ensemble
     $unpublished->union($inReview);
 
 Vous pouvez créer les requêtes ``UNION ALL`` en utilisant la méthode
-``unionAll``::
+``unionAll()``::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);
@@ -1158,7 +1158,7 @@ interdits, mais il pourrait ressembler à ceci::
 Un dernier exemple et vous serez un expert de map-reduce. Imaginez que vous
 avez une table de ``friends`` et que vous souhaitiez trouver les "fake friends"
 dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
-mutuellement. Commençons avec notre fonction ``mapper``::
+mutuellement. Commençons avec notre fonction ``mapper()``::
 
     $mapper = function ($rel, $key, $mr) {
         $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);

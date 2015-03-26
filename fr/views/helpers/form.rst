@@ -562,7 +562,7 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-      <select name="field" id="field">
+      <select name="field">
           <option value="">(choose one)</option>
           <option value="0">1</option>
           <option value="1">2</option>
@@ -579,8 +579,8 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="published" value="0" />
+    <input type="checkbox" name="published" value="1" />
 
   Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
 
@@ -1462,7 +1462,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         'templates' => 'app_form',
     ]);
 
-Ceci charge les balises dans ``config/app_form.php``. Le fichier devra
+Ceci charge les balises dans **config/app_form.php**. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     return [
@@ -1577,9 +1577,9 @@ additionnelles dans le paramètre ``$fields``::
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
 ``$options`` pour contrôler les legend/fields générés.
 
-- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Si une chaîne est
-  fournie, elle sera utilisée comme nom de classe pour l'element fieldset
-
+- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez également passer
+  un tableau de paramètres qui seront rendus comme attributs HTML sur le tag du fieldset.
+  Si vous passez un tableau vide, le fieldset sera simplement rendu sans attributs.
 - ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble d'input
   généré.
   Ou fournir une chaîne pour personnaliser le texte de legend.
@@ -1679,9 +1679,9 @@ Construire une Classe Widget
 Les classes Widget ont une interface requise vraiment simple. Elles doivent
 implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
 nécessite que les méthodes ``render(array $data)`` et ``secureFields(array $data)`` soient implémentées.
-La méthode ``render`` attend un tableau de données pour constuire le widget et doit renvoyer
+La méthode ``render()`` attend un tableau de données pour constuire le widget et doit renvoyer
 un chaine HTML pour le widget.
-La méthode ``secureFields`` attend également un tableau de données et doit retourner un tableau
+La méthode ``secureFields()`` attend également un tableau de données et doit retourner un tableau
 contenant la liste des champs à sécuriser pour ce widget.
 Si CakePHP construit votre widget, vous pouvez
 vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier
@@ -1791,8 +1791,9 @@ controller, vous bénéficierez automatiquement des fonctionnalités de prévent
 contre la falsification de formulaires.
 
 Tel que mentionné précédemment, lorsque vous utilisez le SecurityComponent,
-vous devez toujours fermer vos formulaires en utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les inputs spéciales
-``_Token`` soient générées.
+vous devez toujours fermer vos formulaires en utilisant
+:php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les
+inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)
 

@@ -84,7 +84,7 @@ Templates des Articles) de la partie 2. Donc nous allons juste ajouter les
 références aux categories.
 
 Nous devons associer ensemble les tables Articles et Categories. Ouvrez le
-fichier ``src/Model/Table/ArticlesTable.php`` et ajoutez ce qui suit::
+fichier **src/Model/Table/ArticlesTable.php** et ajoutez ce qui suit::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -127,9 +127,9 @@ gérer les données. Les structures en arbre MPTT sont optimisées pour lire des
 données ce qui les rend souvent pratique pour lire des applications lourdes
 comme les blogs.
 
-Si vous ouvrez le fichier ``src/Model/Table/CategoriesTable.php``, vous verrez
+Si vous ouvrez le fichier **src/Model/Table/CategoriesTable.php**, vous verrez
 que le TreeBehavior a été attaché à votre CategoriesTable dans la méthode
-``initialize``::
+``initialize()``::
 
     $this->addBehavior('Tree');
 
@@ -156,7 +156,7 @@ Dans votre fichier de template index des catégories, vous pouvez lister les
 catégories et réorganiser leur ordre.
 
 Modifiez la méthode index dans votre ``CategoriesController.php`` et ajoutez les
-méthodes ``move_up`` et ``move_down`` pour pouvoir réorganiser l'ordre des
+méthodes ``move_up()`` et ``move_down()`` pour pouvoir réorganiser l'ordre des
 catégories dans l'arbre::
 
     class CategoriesController extends AppController

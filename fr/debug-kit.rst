@@ -29,7 +29,7 @@ Par défaut DebugKit va stocker les données du panneau dans une base de donnée
 SQLite dans le répertoire ``tmp`` de votre application. Si vous ne pouvez pas
 installer pdo_sqlite, vous pouvez configurer DebugKit pour utiliser une base
 de données différente en définissant une connexion ``debug_kit`` dans votre
-fichier ``config/app.php``.
+fichier **config/app.php**.
 
 Utilisation de la Toolbar
 =========================
@@ -95,9 +95,9 @@ Créer une Classe Panel
 ----------------------
 
 Les Classes Panel doivent simplement être placées dans le répertoire
-``src/Panel``. Le nom de fichier doit correspondre au nom de la classe, pour
+**src/Panel**. Le nom de fichier doit correspondre au nom de la classe, pour
 que la classe ``MyCustomPanel`` s'attende à avoir un fichier au nom
-``src/Panel/MyCustomPanel.php``::
+**src/Panel/MyCustomPanel.php**::
 
     namespace App\Panel;
 
@@ -121,7 +121,7 @@ Par défaut, les objets Panel ont deux callbacks, leur permettant de s'insérer
 dans la requête actuelle. Les panneaux s'inscrivent aux events
 ``Controller.initialize`` et ``Controller.shutdown``. Si votre panneau doit
 s'inscrire à des events supplémentaires, vous pouvez utiliser la méthode
-``implementedEvents`` pour définir tous les events auxquels votre panneau
+``implementedEvents()`` pour définir tous les events auxquels votre panneau
 doit s'interesser.
 
 Vous devez vous référer aux panneaux intégrés pour avoir quelques exemples sur
@@ -135,7 +135,7 @@ panneau. Le nom de l'element doit être avec une inflection en underscore du
 nom de la classe.
 Par exemple ``SessionPanel`` a un element nommé ``session_panel.ctp``, et
 SqllogPanel a un element nommé ``sqllog_panel.ctp``. Ces elements doivent être
-localisés à la racine de votre répertoire ``src/Template/Element``.
+localisés à la racine de votre répertoire **src/Template/Element**.
 
 Titres Personnalisés et Elements
 --------------------------------

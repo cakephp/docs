@@ -40,7 +40,7 @@ Fichiers de Langues
 Les traductions peuvent être mises à disposition en utilisant des fichiers
 de langue stockés dans votre application. Le format par défaut pour ces
 fichiers est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
-Ces fichiers doivent être placés dans ``src/Locale/`` et dans ce répertoire,
+Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire,
 il devrait y avoir un sous-dossier par langue que l'application doit prendre
 en charge::
 
@@ -97,7 +97,7 @@ plus.
 Définir la Locale par Défaut
 ----------------------------
 
-La ``locale`` par défaut se détermine dans le fichier ``config/bootstrap.php``
+La ``locale`` par défaut se détermine dans le fichier **config/bootstrap.php**
 via::
 
     ini_set('intl.default_locale', 'fr_FR');
@@ -373,7 +373,7 @@ un seul domaine et une seule locale::
         return $package;
     });
 
-Le code ci-dessus peut être ajouté à votre ``config/bootstrap.php`` pour
+Le code ci-dessus peut être ajouté à votre **config/bootstrap.php** pour
 que les traductions soient ajoutées avant qu'une fonction de traduction ne soit
 utilisée. Le minimum absolu nécessaire pour créer un traducteur est que la
 fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
@@ -421,9 +421,9 @@ Par exemple, si vous vouliez charger les messages de traduction en utilisant
         }
     }
 
-Le fichier doit être créé dans le dossier ``src/I18n/Parser`` de votre
+Le fichier doit être créé dans le dossier **src/I18n/Parser** de votre
 application. Ensuite, créez les fichiers de traduction sous
-``src/Locale/fr_FR/animals.yaml``
+**src/Locale/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 
@@ -512,7 +512,7 @@ formateur ``sprintf``::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-Les messages à traduire seront passés à la fonction ``sprintf`` pour
+Les messages à traduire seront passés à la fonction ``sprintf()`` pour
 interpoler les variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);

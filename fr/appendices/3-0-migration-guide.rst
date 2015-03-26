@@ -49,7 +49,7 @@ Namespaces (Espaces de Noms)
 
 Toutes les classes du cœur de CakePHP sont maintenant dans des namespaces et
 suivent les spécifications du chargement PSR-4. Par exemple
-``src/Cache/Cache.php`` est dans le namespace ``Cake\Cache\Cache``. Les constantes
+**src/Cache/Cache.php** est dans le namespace ``Cake\Cache\Cache``. Les constantes
 globales et les méthodes de helper comme :php:meth:`__()` et :php:meth:`debug()`
 ne sont pas mis dans un namespace pour des raisons de commodité.
 
@@ -284,7 +284,7 @@ BakeShell / TemplateTask
 
 - Bake ne fait plus partie du code source du core et est remplacé par le
   `Plugin CakePHP Bake <https://github.com/cakephp/bake>`_
-- Les templates de bake ont été déplacés vers ``src/Template/Bake``.
+- Les templates de bake ont été déplacés vers **src/Template/Bake**.
 - La syntaxe des templates Bake utilise maintenant des balises de type erb
   (``<% %>``) pour désigner le templating.
 - La commande ``bake view`` a été renommée ``bake template``.
@@ -636,9 +636,9 @@ CookieComponent
   cookie, ceci facilite les tests, et permet de définir les cookies pour
   ControllerTestCase.
 - Les Cookies chiffrés dans les versions précédentes de CakePHP utilisant la
-  méthode ``cipher`` sont maintenant illisible parce que ``Security::cipher()``
+  méthode ``cipher()`` sont maintenant illisible parce que ``Security::cipher()``
   a été retirée. Vous aurez besoin de re-chiffrer les cookies avec la méthode
-  ``rijndael`` ou ``aes`` avant mise à jour.
+  ``rijndael()`` ou ``aes()`` avant mise à jour.
 - ``CookieComponent::type()`` a été retirée et remplacée par la donnée de
   configuration accessible avec ``config()``.
 - ``write()`` ne prend plus de paramètres ``encryption`` ou ``expires``. Ces
@@ -851,8 +851,8 @@ Ces deux problèmes sont résolus en convertissant les themes en plugins.
 Les Dossiers de View Renommés
 -----------------------------
 
-Les dossiers contenant les fichiers de vue vont maintenant dans ``src/Template``
-à la place de ``src/View``.
+Les dossiers contenant les fichiers de vue vont maintenant dans **src/Template**
+à la place de **src/View**.
 Ceci a été fait pour séparer les fichiers de vue des fichiers contenant des
 classes php (par ex les classes Helpers et View).
 
@@ -1028,7 +1028,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   l'ordre dans lequel les inputs doivent être affichés.
 - ``submit()`` a eu les options ``div``, ``before`` and ``after`` retirées. Vous
   pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
-- La méthode ``inputs`` n'accepte plus ``legend`` et ``fieldset`` dans le
+- La méthode ``inputs()`` n'accepte plus ``legend`` et ``fieldset`` dans le
   paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.
   Elle nécessite aussi que le paramètre ``$fields`` soit un tableau. Le
   paramètre ``$blacklist`` a été retiré, la fonctionnalité a été remplacée en
@@ -1073,7 +1073,7 @@ HtmlHelper
   ``$options``.
 - ``HtmlHelper::nestedList()`` nécessite maintenant que ``$options`` soit un
   tableau. Le quatrième argument pour le niveau de tag a été retiré et il a été
-  inclu dans le tableau ``$options``.
+  inclus dans le tableau ``$options``.
 - L'argument ``$confirmMessage`` de
   :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()` a été retiré. Vous devez
   maintenant utiliser la clé ``confirm`` dans ``$options`` pour spécifier

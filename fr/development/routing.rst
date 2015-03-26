@@ -7,7 +7,7 @@ Routing
 
 Le Routing est une fonctionnalité qui fait correspondre les URLs aux actions du
 controller. En définissant des routes, vous pouvez séparer la façon dont votre
-application est intégré de la façon dont ses URLs sont structurées.
+application est intégrée de la façon dont ses URLs sont structurées.
 
 Le Routing dans CakePHP englobe aussi l'idée de routing inversé, où un tableau
 de paramètres peut être transformé en une URL. En utilisant le routing
@@ -178,7 +178,7 @@ paramètre de routing qui est composé des valeurs par défaut de la route::
         ['controller' => 'Pages', 'action' => 'display', 5]
     );
 
-Cet exemple montre comment vous pouvez utilisez le deuxième paramètre de
+Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
 pourriez considérer la création d'une route. Cela vous permet de vous lier
@@ -393,7 +393,7 @@ Utiliser les Routes Nommées
 
 Parfois vous trouvez que taper tous les paramètres de l'URL pour une route est
 trop verbeux, ou bien vous souhaitez tirer avantage des améliorations de la
-performance que les routes nommées permettent. Lorque vous connectez les routes,
+performance que les routes nommées permettent. Lorsque vous connectez les routes,
 vous pouvez spécifier une option ``_name``, cette option peut être utilisée
 pour le routing inversé pour identifier la route que vous souhaitez utiliser::
 
@@ -443,17 +443,26 @@ controller séparés, vous pouvez créer de plus petits et/ou de plus simples
 controllers. Les comportements communs aux controllers préfixés et non-préfixés
 peuvent être encapsulés via héritage :doc:`/controllers/components`, ou traits.
 En utilisant notre exemple des utilisateurs, accéder à l'url
-``/admin/users/edit/5`` devrait appeler la méthode ``edit`` de notre
+``/admin/users/edit/5`` devrait appeler la méthode ``edit()`` de notre
 ``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
-Le fichier de vue utilisé serait ``src/Template/Admin/Users/edit.ctp``.
+Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.ctp**.
 
-Vous pouvez faire correspondre l'URL /admin à votre action ``index``
+Vous pouvez faire correspondre l'URL /admin à votre action ``index()``
 du controller Pages en utilisant la route suivante::
 
     Router::prefix('admin', function ($routes) {
         // Parce que vous êtes dans le scope admin, vous n'avez pas besoin
         // d'inclure le prefix /admin ou l'élément de route admin.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
+    });
+
+Quand vous créez des routes prefixées, vous pouvez définir des paramètres de
+route supplémentaires en utilisant l'argument ``$options``::
+
+    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+        // Routes connectées ici sont préfixées par '/admin' et
+        // ont la clé 'param' de routing définie.
+        $routes->connect('/:controller');
     });
 
 Vous pouvez aussi définir les préfixes dans les scopes de plugin::
@@ -571,7 +580,7 @@ URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
 ``camelCase``.
 
 Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
-et une action ``showItems``, la route générée sera
+et une action ``showItems()``, la route générée sera
 ``/to-do/todo-items/show-items`` avec le code qui suit::
 
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
@@ -716,29 +725,63 @@ Limiter la Création des Routes
 
 Par défaut, CakePHP va connecter 6 routes pour chaque ressource. Si vous
 souhaitez connecter uniquement des routes spécifiques à une ressource, vous
-pouvez utilisez l'option ``only``::
+pouvez utiliser l'option ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']
     ]);
 
 Le code ci-dessus devrait créer uniquement les routes de ressource ``lecture``.
-Les noms de route sont ``create``, ``update``, ``view``, ``index`` et ``delete``.
+Les noms de route sont ``create``, ``update``, ``view``, ``index`` et
+``delete``.
 
 Changer les Actions du Controller
 ---------------------------------
 
 Vous devrez peut-être modifier le nom des actions du controller qui sont
-utilisés lors de la connexion des routes. Par exemple, si votre action ``edit``
-est nommée ``update``, vous pouvez utiliser la clé ``actions`` pour renommer
-vos actions::
+utilisés lors de la connexion des routes. Par exemple, si votre action
+``edit()`` est nommée ``update()``, vous pouvez utiliser la clé ``actions`` pour
+renommer vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'update', 'add' => 'create']
+        'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-Le code ci-dessus va utiliser ``update`` pour l'action update, et ``create`` au
-lieu de ``add``.
+Le code ci-dessus va utiliser ``edit()`` pour l'action update, et ``create()``
+au lieu de ``add()``.
+
+Mapping Additional Resource Routes
+----------------------------------
+
+You can map additional resource methods using the ``map`` option::
+
+     $routes->resources('Articles', [
+        'map' => [
+            'deleteAll' => [
+                'action' => 'deleteAll',
+                'method' => 'DELETE'
+            ]
+        ]
+     ]);
+     // This would connect /articles/deleteAll
+
+In addition to the default routes, this would also connect a route for
+`/articles/delete_all`. By default the path segment will match the key name. You
+can use the 'path' key inside the resource definition to customize the path name::
+
+
+    $routes->resources('Articles', [
+        'map' => [
+            'updateAll' => [
+                'action' => 'updateAll',
+                'method' => 'DELETE',
+                'path' => '/update_many'
+            ],
+        ]
+    ]);
+    // This would connect /articles/update_many
+
+If you define 'only' and 'map', make sure that your mapped methods are also in the 'only' list.
 
 .. _custom-rest-routing:
 

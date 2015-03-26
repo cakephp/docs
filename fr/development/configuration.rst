@@ -73,12 +73,12 @@ App.baseUrl
     le mod\_rewrite d'Apache avec CakePHP. N'oubliez pas aussi de retirer vos
     fichiers .htaccess.
 App.base
-    Le répertoire de base où l'app se trouve. Si à ``false``, il sera detecté
+    Le répertoire de base où l'app se trouve. Si à ``false``, il sera détecté
     automatiquement.
 App.encoding
     Définit l'encodage que votre application utilise. Cet encodage est utilisé
     pour générer le charset dans le layout, et les entities encodés. Cela
-    doit correspondre aux valeurs d'encodage spécifiés pour votre base de
+    doit correspondre aux valeurs d'encodage spécifiées pour votre base de
     données.
 App.webroot
     Le répertoire webroot.
@@ -132,37 +132,37 @@ données.
 Configuration de la Mise en Cache
 ---------------------------------
 
-Regardez :ref:`cache-configuration` pour plus d'informations sur la
+Consultez :ref:`cache-configuration` pour plus d'informations sur la
 configuration de la mise en cache dans CakePHP.
 
 Configuration de Gestion des Erreurs et des Exceptions
 ------------------------------------------------------
 
-Regardez les sections sur :ref:`error-configuration` pour des informations sur
+Consultez les sections sur :ref:`error-configuration` pour des informations sur
 la configuration des gestionnaires d'erreur et d'exception.
 
 Configuration du Logging
 ------------------------
 
-Regardez :ref:`log-configuration` pour des informations sur la configuration
+Consultez :ref:`log-configuration` pour des informations sur la configuration
 du logging dans CakePHP.
 
 Configuration de Email
 ----------------------
 
-Regardez :ref:`email-configuration` pour des informations sur la configuration
+Consultez :ref:`email-configuration` pour des informations sur la configuration
 prédéfini d'email dans CakePHP.
 
 Configuration de Session
 ------------------------
 
-Regardez :ref:`session-configuration` pour avoir des informations sur la
+Consultez :ref:`session-configuration` pour avoir des informations sur la
 configuration de la gestion des sessions dans CakePHP.
 
 Configuration du Routing
 ------------------------
 
-Regardez :ref:`routes-configuration` pour plus d'informations sur la
+Consultez :ref:`routes-configuration` pour plus d'informations sur la
 configuration du routing et de la création de routes pour votre application.
 
 .. _additional-class-paths:
@@ -267,7 +267,7 @@ L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
 Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
 les modes de debug et de production à la volée. C'est particulièrement
-pratique pour les intéractions JSON quand les informations de debug
+pratique pour les interactions JSON quand les informations de debug
 peuvent entraîner des problèmes de parsing.
 
 Lire les Données de Configuration
@@ -296,7 +296,7 @@ Vérifier si les Données de Configuration sont Définies
 
 .. php:staticmethod:: check($key)
 
-Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null::
+Utilisée pour vérifier si une clé/chemin existe et a une valeur non-null::
 
     $exists = Configure::check('Company.name');
 
@@ -316,7 +316,7 @@ Lire & Supprimer les Données de Configuration
 .. php:staticmethod:: consume($key)
 
 Lit et supprime une clé de Configure. C'est utile quand vous voulez combiner
-la lecture et la suppresssion de valeurs en une seule opération.
+la lecture et la suppression de valeurs en une seule opération.
 
 Lire et Ecrire les Fichiers de Configuration
 ============================================
@@ -474,7 +474,7 @@ pour votre application::
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data)
+        public function dump($key, array $data)
         {
             // Code to dump data to file
         }
@@ -579,10 +579,10 @@ Json Configuration Files
 
 .. php:class:: JsonConfig
 
-Allows you to read / dump configuration files that are stored as JSON encoded
-strings in .json files.
+Vous permet de lire / effacer les fichiers de configuration qui sont
+stockés en chaînes encodées JSON dans des fichiers .json.
 
-An example JSON file would look like::
+Un exemple de fichier JSON ressemblerait à ceci::
 
     {
         "debug": false,
@@ -599,7 +599,7 @@ Bootstrapping CakePHP
 
 Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
 bootstrap de CakePHP dans **config/bootstrap.php**. Ce fichier est
-inclu juste avant chaque requête et commande CLI.
+inclus juste avant chaque requête et commande CLI.
 
 Ce fichier est idéal pour un certain nombre de tâches de bootstrapping
 courantes:
@@ -616,7 +616,6 @@ fonctions de formatage ici afin de les utiliser dans vos controllers.
 Comme vous le verrez dans les sections :doc:`/controllers` et
 :doc:`/views`, il y a de meilleurs moyens d'ajouter de la logique personnalisée
 à votre application.
-
 
 .. meta::
     :title lang=fr: Configuration

@@ -49,7 +49,7 @@ Configuring Cache Class
 .. php:staticmethod:: config($key, $config = null)
 
 Configuring the Cache class can be done anywhere, but generally you will want to
-configure Cache during bootstrapping.  The ``config/app.php`` file is the
+configure Cache during bootstrapping.  The **config/app.php** file is the
 conventional location to do this.  You can configure as many cache
 configurations as you need, and use any mixture of cache engines.  CakePHP uses
 two cache configurations internally.  ``_cake_core_`` is used for storing file
@@ -61,7 +61,7 @@ for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
 Using multiple configurations also lets you incrementally change the storage as
-needed. For example in your ``config/app.php`` you could put the following::
+needed. For example in your **config/app.php** you could put the following::
 
     // ...
     'Cache' => [
@@ -346,7 +346,7 @@ You can greatly improve the performance of your application by putting results
 that infrequently change, or that are subject to heavy reads into the cache.
 A perfect example of this are the results from
 :php:meth:`Cake\\ORM\\Table::find()`. The Query object allows you to cache
-results using the ``cache`` method. See the :ref:`caching-query-results` section
+results using the ``cache()`` method. See the :ref:`caching-query-results` section
 for more information.
 
 Using Groups
@@ -440,7 +440,7 @@ You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
 as in plugins using ``$plugin\Cache\Engine``. src/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``src/Cache/Engine/MyCustomCacheEngine.php``
+it would be placed in either **src/Cache/Engine/MyCustomCacheEngine.php**
 as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. ::

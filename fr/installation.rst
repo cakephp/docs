@@ -69,11 +69,11 @@ instructions pour l'installeur Windows de Composer se trouvent dans le
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
 une nouvelle application CakePHP en lançant::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 Ou si Composer est installé globalement::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Une fois que Composer finit le téléchargement du squelette de l'application et
 du cœur de la librairie de CakePHP, vous devriez avoir maintenant une
@@ -84,19 +84,39 @@ source.
 Vous devriez être maintenant capable de visiter le chemin où vous avez installé
 votre application CakePHP et voir les feux de signalisations de configuration.
 
-Rester à jour avec les derniers changements de CakePHP
+Bien que composer soit la méthode d'installation recommandée, il existe des
+versions pré-installables disponibles sur
+`Github <https://github.com/cakephp/cakephp/tags>`_
+Ces téléchargements contiennent le squelette d'une app avec tous les packages
+installés dans vendor.
+Aussi le ``composer.phar`` est inclus donc vous avez tout ce dont vous avez
+besoin pour continuer à l'utiliser.
+
+Rester à jour avec les Derniers Changements de CakePHP
 ------------------------------------------------------
 
-Si vous voulez rester à jour avec les derniers changements de CakePHP, vous
-pouvez ajouter ce qui suit dans le **composer.json** de votre application::
+Par défaut c'est ce à quoi le **composer.json** de votre application ressemble::
 
     "require": {
-        "cakephp/cakephp": "3.0.*-dev"
+        "cakephp/cakephp": "~3.0"
     }
 
-Où ``<branch>`` est le nom de la branche que vous voulez suivre. Chaque fois
-que vous exécutez ``php composer.phar update`` vous allez recevoir les derniers
-changements de la branche choisie.
+A chaque fois que vous lancez ``php composer.phar update``, vous allez
+recevoir la dernière version stable quand vous utilisez la contrainte de
+version par défaut ``~3.0``. Seuls les corrections de bug et les versions
+mineures de 3.x seront utilisés lors de la mise à jour.
+
+Si vous voulez rester à jour avec les derniers changements de CakePHP non
+stables, vous pouvez changer le **composer.json** de votre application::
+
+    "require": {
+        "cakephp/cakephp": "dev-master"
+    }
+
+Notez que ce n'est pas recommandé, puisque votre application peut casser quand
+la prochaine version majeure sort. De plus, composer ne met pas en cache les
+branches de développement, donc cela ralentit les installs/updates consécutifs
+de composer.
 
 Permissions
 ===========
@@ -266,7 +286,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    Dans la plupart des systèmes, cette ligne est commentée donc vous aurez
    juste besoin de retirer le symbole # en début de ligne.
 
-   Après avoir effectué les changements, re-démarrez Apache pour être sûr
+   Après avoir effectué les changements, redémarrez Apache pour être sûr
    que les paramètres soient actifs.
 
    Vérifiez que vos fichiers .htaccess sont effectivement dans le bon
@@ -343,7 +363,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    CakePHP. Merci de vous renseigner sur la documentation en ligne d'Apache
    pour plus d'informations.
 
-#. (Optionel) Pour améliorer la configuration de production, vous devriez
+#. (Optionnel) Pour améliorer la configuration de production, vous devriez
    empêcher les assets invalides d'être parsés par CakePHP. Modifiez votre
    webroot .htaccess pour quelque chose comme::
 
@@ -369,7 +389,7 @@ nginx
 
 nginx ne fait pas usage de fichiers .htaccess comme Apache et Lighttpd, il est
 donc nécessaire de créer les URLs réécrites disponibles dans la configuration
-du site. selon votre configuration, vous devrez modifier cela, mais à tout le
+du site. Selon votre configuration, vous devrez modifier cela, mais à tout le
 moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI::
 
     server {

@@ -103,7 +103,7 @@ manually running the following SQL script in your database:
 Attaching the Translate Behavior to Your Tables
 ===============================================
 
-Attaching the behavior can be done in the ``initialize`` method in your Table
+Attaching the behavior can be done in the ``initialize()`` method in your Table
 class::
 
     class ArticlesTable extends Table
@@ -145,7 +145,7 @@ You need to make sure that any custom table you use has the columns ``field``,
 Reading Translated Content
 ==========================
 
-As shown above you can use the ``locale`` method to choose the active
+As shown above you can use the ``locale()`` method to choose the active
 translation for entities that are loaded::
 
     I18n::locale('spa');
@@ -217,11 +217,15 @@ set of records::
     $spanishTranslation = $article->translation('spa');
     $englishTranslation = $article->translation('eng');
 
-Adding Additional Conditions for Translations
----------------------------------------------
+Preventing Retrieval of Empty Translations
+------------------------------------------
 
-You may need additional conditions for loading translated records. For example,
-you may only want to load non-empty translations::
+Translation records can contain any string, if a record has been translated
+and stored as an empty string ('') the translate behavior will take and use
+this to overwrite the original field value.
+
+If this is undesired, you can ignore translations which are empty using the
+``allowEmptyTranslations`` config key::
 
     class Articles extends Table
     {
@@ -230,7 +234,7 @@ you may only want to load non-empty translations::
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
-                'conditions' => ['content !=' => '']
+                'allowEmptyTranslations' => false
             ]);
         }
     }
@@ -261,7 +265,7 @@ Retrieving one language without using I18n::locale
 
 calling ``I18n::locale('spa');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without modifying
-the application's state. For these scenarios use the behavior ``locale`` method::
+the application's state. For these scenarios use the behavior ``locale()`` method::
 
     I18n::locale('eng'); // reset for illustration
     $articles = TableRegistry::get('Articles');

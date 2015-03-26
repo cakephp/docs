@@ -41,7 +41,7 @@ résultats de ``Inflector::slug()`` basé sur un autre champ.
 Avant de créer notre behavior, nous devrions comprendre les conventions pour
 les behaviors:
 
-- Les fichiers Behavior sont localisés dans ``src/Model/Behavior``, ou dans
+- Les fichiers Behavior sont localisés dans **src/Model/Behavior**, ou dans
   ``MyPlugin\Model\Behavior``.
 - Les classes de Behavior devraient être dans le namespace
   ``App\Model\Behavior``, ou le namespace ``MyPlugin\Model\Behavior``.
@@ -49,7 +49,7 @@ les behaviors:
 - Les Behaviors étendent ``Cake\ORM\Behavior``.
 
 Pour créer notre behavior sluggable. Mettez ce qui suit dans
-``src/Model/Behavior/SluggableBehavior.php``::
+**src/Model/Behavior/SluggableBehavior.php**::
 
     namespace App\Model\Behavior;
 
@@ -85,7 +85,7 @@ ont souvent des propriétés slug pour créer de belles URLs::
     }
 
 Notre nouveau behavior ne fait pas beaucoup plus pour le moment. Ensuite, nous
-allons ajouter une méthode mixin et un event listener pour que lorque nous
+allons ajouter une méthode mixin et un event listener pour que lorsque nous
 sauvegarderons les entities, nous puissions automatiquement slugger un champ.
 
 Définir les Méthodes Mixin
@@ -247,6 +247,15 @@ table. Par exemple::
             'slugged' => 'findSlug',
         ]
     ]);
+
+Retirer les Behaviors Chargés
+=============================
+
+Pour retirer un behavior de votre table, vous pouvez appeler la méthode
+``removeBehavior()``::
+
+    // Retire le behavior chargé
+    $this->removeBehavior('Sluggable');
 
 Accéder aux Behaviors Chargés
 =============================
