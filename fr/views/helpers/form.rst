@@ -204,9 +204,10 @@ spécifiques qui s'appliquent uniquement quand un compte est enregistré::
         'context' => ['validator' => 'register']
     ]);
 
-The above will use the ``register`` validator for the ``$user`` and all related
-associations. If you are creating a form for associated entities, you can define
-validation rules for each association by using an array::
+L'exemple précédent utilise le validateur ``register`` pour l'``$user`` et
+toutes les associations liées. Si vous créez un formulaire pour les entities
+associées, vous pouvez définir les règles de validation pour chaque association
+en utilisant un tableau::
 
     echo $this->Form->create($user, [
         'context' => [
@@ -217,8 +218,8 @@ validation rules for each association by using an array::
         ]
     ]);
 
-The above would use ``register`` for the user, and ``default`` for the user's
-comments.
+Ce qui est au-dessus va utiliser ``register`` pour l'utilisateur, et ``default``
+pour les commentaires de l'utilisateur.
 
 Créer des Classes de Contexte
 -----------------------------
