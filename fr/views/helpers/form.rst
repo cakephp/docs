@@ -542,8 +542,18 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. note::
 
-    La clé selected pour les inputs de type date et datetime peuvent aussi
-    être des timestamps UNIX.
+    La clé value pour les inputs de type date et datetime peut aussi
+    être un timestamp UNIX ou un objet DateTime.
+
+  Pour un input select où vous définissez l'attribut ``multiple`` à true,
+  vous pouvez utiliser un tableau des valeurs que vous voulez sélectionner par
+  défaut::
+
+    echo $this->Form->select('rooms', [
+        'multiple' => true,
+        // options avec valeurs 1 et 3 seront sélectionnées par défaut
+        'default' => [1, 3]
+    ]);
 
 * ``$options['empty']`` Est défini à ``true``, pour forcer l'input à rester vide.
 
@@ -573,7 +583,7 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   Les options peuvent aussi fournir une paire de clé-valeur.
 
-* ``$options['hiddenField']`` Pour certain types d' input (checkboxes,
+* ``$options['hiddenField']`` Pour certain types d'input (checkboxes,
   radios) un input caché est créé. Ainsi, la clé dans $this->request->data
   existera même sans valeur spécifiée:
 

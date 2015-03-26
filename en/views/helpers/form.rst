@@ -522,7 +522,7 @@ Options for Select, Checkbox and Radio Inputs
 
     echo $this->Form->select('rooms', [
         'multiple' => true,
-         // options with values 1 and 3 will be selected as default
+        // options with values 1 and 3 will be selected as default
         'default' => [1, 3]
     ]);
 
