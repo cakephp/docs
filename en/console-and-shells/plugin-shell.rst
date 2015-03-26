@@ -8,7 +8,6 @@ If you need help, run::
 
     bin/cake plugin --help
 
-
 Loading Plugins
 ---------------
 
@@ -43,7 +42,6 @@ You can unload a plugin by specifying its name::
 
 This will remove the line ``Plugin::load('MyPlugin',...`` from your
 ``config/bootstrap.php``.
-
 
 Plugin Assets
 -------------
