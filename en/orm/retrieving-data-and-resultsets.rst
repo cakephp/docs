@@ -525,7 +525,7 @@ load fields off of contained associations, you can use ``autoFields()``::
         ->contain(['Users'])
         ->autoFields(true);
 
-.. _filtering-by-associated-data
+.. _filtering-by-associated-data:
 
 Filtering by Associated Data
 ----------------------------

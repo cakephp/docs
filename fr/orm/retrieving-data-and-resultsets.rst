@@ -416,7 +416,7 @@ au model primaire selon les associations. Par exemple, vous voulez charger tous
 les articles qui ont un tag spécifique. Pour plus de détails sur ``matching()``,
 consultez :ref:`filtering-by-associated-data`.
 
-Si vous préférez utiliser les fonctions de jointure, vous pouvez consultez
+Si vous préférez utiliser les fonctions de jointure, vous pouvez consulter
 :ref:`adding-joins` pour plus d'informations.
 
 .. _eager-loading-associations:
@@ -550,7 +550,7 @@ vous pouvez utiliser ``autoFields()``::
         ->contain(['Users'])
         ->autoFields(true);
 
-.. _filtering-by-associated-data
+.. _filtering-by-associated-data:
 
 Filtrer par les Données Associées
 ---------------------------------
