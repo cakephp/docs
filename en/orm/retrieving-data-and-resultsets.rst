@@ -374,20 +374,28 @@ The above would translate into the following::
 Retrieving Associated Data
 ==========================
 
-When you want to grab associated data, or filter based on associated data, there are basically two ways:
- - use CakePHP ORM query functions like ``contain()`` and ``matching()``
- - use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
- 
-When do you use ``contain()``?
-You use it when the main model hasOne or belongsTo the associated data models. 
-For more details on the ``contain()``, look at :doc:`/orm/retrieving-data-and-resultsets#eager-loading-associations`
+When you want to grab associated data, or filter based on associated data, there
+are two ways:
 
-When do you use ``matching()``?
-You use it when the main model hasMany associated data models. 
-For more details on the ``matching()``, look at :doc:`/orm/retrieving-data-and-resultsets#filtering-by-associated-data`
+- use CakePHP ORM query functions like ``contain()`` and ``matching()``
+- use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
 
-If you prefer to use join functions, you can look at :doc:`/orm/query-builder#adding-joins` for details.
- 
+You should use ``contain()`` when you want to load the primary model, and its
+associated data. While ``contain()`` will let you apply additional conditions to
+the loaded associations, you cannot constrain the primary model based on the
+associations. For more details on the ``contain()``, look at
+:ref:`eager-loading-associations`.
+
+You should use ``matching()`` when you want to restrict the primary model based
+on associations. For example, you want to load all the articles that have
+a specific tag on them. For more details on the ``matching()``, look at
+:ref:`filtering-by-associated-data`.
+
+If you prefer to use join functions, you can look at
+:ref:`adding-joins` for more information.
+
+.. _eager-loading-associations:
+
 Eager Loading Associations
 ==========================
 
@@ -509,6 +517,8 @@ load fields off of contained associations, you can use ``autoFields()``::
     $query->select(['id', 'title'])
         ->contain(['Users'])
         ->autoFields(true);
+
+.. _filtering-by-associated-data
 
 Filtering by Associated Data
 ----------------------------
