@@ -306,7 +306,7 @@ a.improve {
 }
 
 #sidebar-navigation > ul > li:nth-of-type(5):last-child:after,
-#sidebar-navigation > ul > li:nth-of-type(13):last-child:after,
+#sidebar-navigation > ul > li:nth-of-type(12):last-child:after,
 #sidebar-navigation > ul > li:nth-of-type(31):last-child:after,
 #sidebar-navigation > ul > li:nth-of-type(42):last-child:after {
     content: " ";
@@ -335,7 +335,7 @@ a.improve {
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(6):before {
     content: "Pour Commencer";
 }
-#sidebar-navigation > ul > li:nth-of-type(14):before {
+#sidebar-navigation > ul > li:nth-of-type(13):before {
     border-top: 1px solid #e6e6e6;
     color: #BD8A5D;
     content: "General Topics";
@@ -344,7 +344,7 @@ a.improve {
     padding-bottom: .4em;
     padding-top: 1em;
 }
-#sidebar-navigation > ul > li:lang(fr):nth-of-type(14):before {
+#sidebar-navigation > ul > li:lang(fr):nth-of-type(13):before {
     content: "Généralités";
 }
 #sidebar-navigation > ul > li:nth-of-type(32):before {
