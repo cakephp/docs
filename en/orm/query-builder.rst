@@ -728,6 +728,8 @@ to fetch associated data from other tables is called **eager loading**.
     :start-after: start-contain
     :end-before: end-contain
 
+.. _adding-joins:
+
 Adding Joins
 ------------
 
