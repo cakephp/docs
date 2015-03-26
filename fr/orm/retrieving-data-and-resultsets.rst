@@ -394,28 +394,30 @@ Ce qui est au-dessus se traduirait dans ce qui suit::
     Alors que les finders dynamiques facilitent la gestion des requêtes, ils
     entraînent des coûts de performance supplémentaires.
 
-Retrieving Associated Data
-==========================
+Récupérer les Données Associées
+===============================
 
-When you want to grab associated data, or filter based on associated data, there
-are two ways:
+Quand vous voulez récupérer des données associées, ou filtrer selon les données
+associées, il y a deux façons:
 
-- use CakePHP ORM query functions like ``contain()`` and ``matching()``
-- use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
+- utiliser les fonctions query de l'ORM de CakePHP comme ``contain()`` et
+  ``matching()``
+- utiliser les fonctions de jointures comme ``innerJoin()``, ``leftJoin()``, et
+  ``rightJoin()``
 
-You should use ``contain()`` when you want to load the primary model, and its
-associated data. While ``contain()`` will let you apply additional conditions to
-the loaded associations, you cannot constrain the primary model based on the
-associations. For more details on the ``contain()``, look at
-:ref:`eager-loading-associations`.
+Vous pouvez utiliser ``contain()`` quand vous voulez charger le model primaire
+et ses données associées. Alors que ``contain()`` va vous laisser appliquer
+des conditions supplémentaires aux associations chargées, vous ne pouvez pas
+donner des contraintes au model primaire selon les associations. Pour plus de
+détails sur ``contain()``, consultez :ref:`eager-loading-associations`.
 
-You should use ``matching()`` when you want to restrict the primary model based
-on associations. For example, you want to load all the articles that have
-a specific tag on them. For more details on the ``matching()``, look at
-:ref:`filtering-by-associated-data`.
+Vous pouvez utiliser ``matching()`` quand vous souhaitez donner des contraintes
+au model primaire selon les associations. Par exemple, vous voulez charger tous
+les articles qui ont un tag spécifique. Pour plus de détails sur ``matching()``,
+consultez :ref:`filtering-by-associated-data`.
 
-If you prefer to use join functions, you can look at
-:ref:`adding-joins` for more information.
+Si vous préférez utiliser les fonctions de jointure, vous pouvez consulter
+:ref:`adding-joins` pour plus d'informations.
 
 .. _eager-loading-associations:
 
@@ -548,7 +550,7 @@ vous pouvez utiliser ``autoFields()``::
         ->contain(['Users'])
         ->autoFields(true);
 
-.. _filtering-by-associated-data
+.. _filtering-by-associated-data:
 
 Filtrer par les Données Associées
 ---------------------------------
