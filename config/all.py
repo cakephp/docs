@@ -6,6 +6,7 @@
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
+import datetime
 
 # Add any Sphinx extension module names here, as strings.
 # They can be extensions coming with Sphinx
@@ -31,7 +32,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'CakePHP Cookbook'
-copyright = u'2014, Cake Software Foundation, Inc'
+copyright = u'%d, Cake Software Foundation, Inc' % datetime.datetime.now().year
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -247,7 +248,8 @@ man_pages = [
 epub_title = u'CakePHP Cookbook'
 epub_author = u'Cake Software Foundation, Inc.'
 epub_publisher = u'Cake Software Foundation, Inc.'
-epub_copyright = u'2013, Cake Software Foundation, Inc.'
+epub_copyright = u'%d, Cake Software Foundation, Inc.' % datetime.datetime.now().year
+
 
 epub_theme = 'cakephp-epub'
 
