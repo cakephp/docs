@@ -286,11 +286,19 @@ Ainsi, nous mettons notre nouveau ContactsController dans
         }
     }
 
-.. note::
+Also make the ``AppController`` if you don't have one already::
 
-    Ce controller étend AppController du plugin (appelé
-    ContactManagerAppController) plutôt que l'AppController de l'application
-    parente.
+    // plugins/ContactManager/src/Controller/ContactsController.php
+    namespace ContactManager\Controller;
+
+    use App\Controller\AppController as BaseController;
+
+    class AppController extends BaseController
+    {
+    }
+
+A plugin's ``AppController`` can hold controller logic common to all controllers
+in a plugin, and is not required if you don't want to use one.
 
 Avant d'accéder à vos controllers, vous devrez vous assurez que le plugin est
 chargé et connecte des routes. Dans votre **config/bootstrap.php**, ajoutez
