@@ -279,7 +279,7 @@ So, we place our new ContactsController in
 
 Also make the ``AppController`` if you don't have one already::
 
-    // plugins/ContactManager/src/Controller/ContactsController.php
+    // plugins/ContactManager/src/Controller/AppController.php
     namespace ContactManager\Controller;
 
     use App\Controller\AppController as BaseController;
