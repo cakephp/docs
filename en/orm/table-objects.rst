@@ -346,7 +346,9 @@ use mock objects by providing an ``$options`` array::
         'behaviors' => $behaviorRegistry
     ]);
 
-Pay attention to the connection and schema configuration settings, they aren't string values but objects. The connection will take an object of  `Cake\Database\Connection` and schema `Cake\Database\Schema\Collection`.
+Pay attention to the connection and schema configuration settings, they aren't
+string values but objects. The connection will take an object of
+``Cake\Database\Connection`` and schema ``Cake\Database\Schema\Collection``.
 
 .. note::
 
