@@ -19,16 +19,16 @@ des requêtes en utilisant les models de votre application::
     App : App
     Path: /Users/mark/projects/cakephp-app/src/
     ---------------------------------------------------------------
-    [1] app > $articles = Cake\ORM\TableRegistry::get('Articles');
+    >>> $articles = Cake\ORM\TableRegistry::get('Articles');
     // object(Cake\ORM\Table)(
     //
     // )
-    [2] app > $articles->find();
+    >>> $articles->find();
 
 Puisque votre application a été démarrée, vous pouvez aussi tester le routing
 en utilisant le REPL::
 
-    [1] app > Cake\Routing\Router::parse('/articles/view/1');
+    >>> Cake\Routing\Router::parse('/articles/view/1');
     // [
     //   'controller' => 'Articles',
     //   'action' => 'view',
@@ -40,12 +40,7 @@ en utilisant le REPL::
 
 Vous pouvez aussi tester la génération d'URL::
 
-    [1] app > Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
+    >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
 
-Pour quitter le REPL, vous pouver utiliser ``CTRL-D``.
-
-.. warning::
-
-    Le REPL ne fonctionne pas correctement sur les systèmes windows en raison
-    de problèmes avec la readline et les extensions POSIX.
+Pour quitter le REPL, vous pouver utiliser ``CTRL-C`` ou en tapant ``exit``.

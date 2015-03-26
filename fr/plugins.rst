@@ -77,8 +77,8 @@ explicitement.
 
 .. note::
 
-    ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
-    defined in ``vendor/cakephp-plugins.php``.
+    ``Plugin::loadAll()`` ne va pas charger les plugins se trouvant dans vendor
+    qui ne sont pas définis dans ``vendor/cakephp-plugins.php``.
 
 .. _autoloading-plugin-classes:
 
@@ -99,7 +99,7 @@ composer.json de votre application pour contenir les informations suivantes::
         "MyPlugin\\Test\\": "/plugins/MyPlugin/tests"
     }
 
-Si vous utilisez un espace de nom pour vos plugins, le mapping des namespaces
+Si vous utilisez un namespace pour vos plugins, le mapping des namespaces
 vers les dossiers doit ressembler à ceci::
 
     "psr-4": {
@@ -177,9 +177,9 @@ comme ``AcmeCorp/Users``, alors vous devrez charger le plugin comme suit::
 Cela va assurer que les noms de classe sont résolus correctement lors de
 l'utilisation de la :term:`syntaxe de plugin`.
 
-La plupart des plugins va indiquer la procédure correcte pour les configurer et
-configurer la base de données dans leur documentation. Certains plugins
-nécessitent plus de configuration que les autres.
+La plupart des plugins vont indiquer la procédure correcte pour les configurer
+et configurer la base de données dans leur documentation. Certains plugins
+nécessitent plus de configurations que les autres.
 
 Utiliser un Plugin
 ==================

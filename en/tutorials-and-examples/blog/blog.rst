@@ -38,7 +38,7 @@ Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
 in the [app_name] directory. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and

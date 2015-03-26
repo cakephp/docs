@@ -41,7 +41,7 @@ Ensuite tapez simplement la ligne suivante dans votre terminal depuis votre
 répertoire d'installation pour installer le squelette d'application de CakePHP
 dans le répertoire [app_name]. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions
