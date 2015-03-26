@@ -516,17 +516,15 @@ Options for Select, Checkbox and Radio Inputs
 
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
-    
-  
 
-  For select input where you turn on the `multiple` attribute as true, 
-  you can use an array of the values you want to render as default selected::
-    
+  For select input where you set the ``multiple`` attribute to true,
+  you can use an array of the values you want to select by default::
+
     echo $this->Form->select('rooms', [
         'multiple' => true,
-        'value' => [1, 3] // options with values 1 and 3 will be selected as default
+         // options with values 1 and 3 will be selected as default
+        'default' => [1, 3]
     ]);
-    
 
 * ``$options['empty']`` If set to ``true``, forces the input to remain empty.
 
