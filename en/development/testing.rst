@@ -939,6 +939,7 @@ make testing responses much simpler. Some examples are::
 
     // Assert partial response content
     $this->assertResponseContains('You won!');
+    $this->assertResponseNotContains('You lost!');
 
     // Assert layout
     $this->assertLayout('default');
@@ -956,7 +957,16 @@ make testing responses much simpler. Some examples are::
     $this->assertEquals('jose', $this->viewVariable('user.username'));
 
     // Assert cookies in the response
-    $this->assertEquals('1', $this->cookies());
+    $this->assertCookie('1', 'thingid');
+
+    // Check the content type
+    $this->assertContentType('application/json');
+
+In addition to the above assertion methods, you can also use all of the
+assertions in `TestSuite
+<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
+found in `PHPUnit
+<https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
 
 
 Testing a JSON Responding Controller
