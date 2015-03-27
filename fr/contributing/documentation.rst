@@ -358,7 +358,7 @@ Notes et avertissements
 
 Il y a souvent des fois où vous voulez informer le lecteur d'une astuce
 importante, une note spéciale ou un danger potentiel. Les avertissements
-dans sphinx sont justement utilisés pour cela. Il y a trois types
+dans sphinx sont justement utilisés pour cela. Il y a cinq types
 d'avertissements.
 
 * ``.. tip::`` Les astuces sont utilisées pour documenter ou réitérer des
@@ -373,6 +373,14 @@ d'avertissements.
   potentiellement dangereux, ou des informations relatives à la sécurité. Le
   contenu de la directive doit être écrite en phrases complètes et inclure
   toute la ponctuation appropriée.
+* ``.. versionadded:: X.Y.Z`` Les avertissements "ajouté en version X.Y.Z" sont
+  utilisés pour spécifier l'ajout de fonctionnalités dans une version spécifique,
+  ``X.Y.Z`` étant la version à laquelle l'ajout de la fonctionnalité en question a
+  eu lieu
+* ``.. deprecated:: X.Y.Z`` À la différence des avertissements "ajouté en version",
+  les avertissements "déprécié en version" servent à indiquer la dépréciation d'une
+  fonctionnalité à une version précise, ``X.Y.Z`` étant la version à laquelle le retrait
+  de la fonctionnalité en question a eu lieu
 
 Tous les avertissements sont faits de la même façon::
 
@@ -397,6 +405,14 @@ Exemples
 .. warning::
 
     Cela pourrait être dangereux.
+
+.. versionadded:: 2.6.3
+
+    Cette super fonctionnalité a été ajoutée en version 2.6.3
+
+.. deprecated:: 2.6.3
+
+    Cette vieille fonctionnalité a été dépréciée en version 2.6.3
 
 
 .. meta::

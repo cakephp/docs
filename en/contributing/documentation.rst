@@ -339,7 +339,7 @@ Notes and warnings
 
 There are often times when you want to inform the reader of an important tip,
 special note or a potential hazard. Admonitions in sphinx are used for just
-that. There are three kinds of admonitions.
+that. There are five kinds of admonitions.
 
 * ``.. tip::`` Tips are used to document or re-iterate interesting or important
   information. The content of the directive should be written in complete
@@ -350,6 +350,12 @@ that. There are three kinds of admonitions.
 * ``.. warning::`` Warnings are used to document potential stumbling blocks, or
   information pertaining to security. The content of the directive should be
   written in complete sentences and include all appropriate punctuation.
+* ``.. versionadded:: X.Y.Z`` "Version added" admonitions are used to display notes
+  specific to new features added at a specific version, ``X.Y.Z`` being the version on
+  which the said feature was added.
+* ``.. deprecated:: X.Y.Z`` As opposed to "version added" admonitions, "deprecated"
+  admonition are used to notify of a deprecated feature, ``X.Y.Z`` being the version on
+  which the said feature was deprecated.
 
 All admonitions are made the same::
 
@@ -373,6 +379,14 @@ Samples
 .. warning::
 
     It could be dangerous.
+
+.. versionadded:: 2.6.3
+
+    This awesome feature was added on version 2.6.3
+
+.. deprecated:: 2.6.3
+
+    This old feature was deprecated on version 2.6.3
 
 
 .. meta::
