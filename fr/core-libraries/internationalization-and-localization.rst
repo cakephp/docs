@@ -171,6 +171,18 @@ Toutes les fonctions de traduction intègrent le remplacement de placeholder::
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
+le caractère ``'`` (guillemet simple ou apostrophe) agit comme un caractère
+d'échappement dans les messages de traduction. Chaque variable entourée de
+guillemets simples ne sera pas remplacée et sera traitée en tant que texte
+littéral. Par exemple::
+
+    __("This variable '{0}' be replaced.", 'will not');
+
+En utilisant deux guillemets  simples côte à côte, vos variables seront
+remplacées correctement::
+
+    __("This variable ''{0}'' be replaced.", 'will');
+
 Ces fonctions profitent des avantages du `MessageFormatter ICU
 <http://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
 traduire des messages, des dates, des nombres et des devises en même temps::

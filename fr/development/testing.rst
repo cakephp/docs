@@ -989,6 +989,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie un contenu partiel de la réponse
     $this->assertResponseContains('You won!');
+    $this->assertResponseNotContains('You lost!');
 
     // Vérifie le layout
     $this->assertLayout('default');
@@ -1006,8 +1007,15 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     $this->assertEquals('jose', $this->viewVariable('user.username'));
 
     // Vérifie les cookies.
-    $this->assertEquals('1', $this->cookies());
+    $this->assertCookie('1', 'thingid');
 
+    // vérifie le type de contenu
+    $this->assertContentType('application/json');
+
+En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
+toutes les assertions de `TestSuite
+<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
+de `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
 
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
