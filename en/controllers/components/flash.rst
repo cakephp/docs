@@ -34,6 +34,7 @@ use the ``set()`` method::
 
 
 .. versionadded:: 3.1
+
     Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with
     the same key will append the messages in the ``$_SESSION``. If you want to keep
     the old behavior (one message even after consecutive calls), set the ``clear``
@@ -50,6 +51,7 @@ parameter, an array of options:
   within an element.
 
 .. versionadded:: 3.1
+
     A new key ``clear`` was added. This key expects a ``bool`` and allows you
     to delete all messages in the current stack and start a new one.
 
@@ -83,12 +85,10 @@ The code above will use the warning.ctp element under **plugins/PluginName/src/T
 for rendering the flash message.
 
 .. note::
+
     By default, CakePHP does not escape the HTML in flash messages. If you
     are using any request or user data in your flash messages, you should
     escape it with :php:func:`h` when formatting your messages.
 
 For more information about rendering your flash messages, please refer to the
 :doc:`FlashHelper </views/helpers/flash>` section.
-
-Setting Flash Messages
-======================

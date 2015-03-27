@@ -42,12 +42,14 @@ FlashComponent::
     ]);
 
 .. note::
+
     Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
     utilisez une requête ou des données d'utilisateur dans vos messages flash,
     vous devez les échapper avec :php:func:`h` lors du formatage de vos
     messages.
 
 .. versionadded:: 3.1
+
     Le :doc:`FlashComponent </controllers/components/flash>` empile maintenant
     les messages. Si vous définissez plusieurs messages, lors d'un appel à
     ``render()``, chaque message sera rendu dans son élément, dans l'ordre
