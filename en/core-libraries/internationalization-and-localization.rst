@@ -162,6 +162,16 @@ All translation functions support placeholder replacements::
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
+The ``'`` (single quote) character acts as an escape code in translation
+messages. Any variables between single quotes will not be replaced and is
+treated as literal text. For example::
+
+    __("This variable '{0}' be replaced.", 'will not');
+
+By using two adjacent quotes your variables will be replaced properly::
+
+    __("This variable ''{0}'' be replaced.", 'will');
+
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
 so you can translate messages and localize dates, numbers and
