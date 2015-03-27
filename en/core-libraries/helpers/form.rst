@@ -1518,7 +1518,7 @@ Creating buttons and submit elements
     opened form. Instead use :php:meth:`FormHelper::submit()` or
     :php:meth:`FormHelper::button()` to create buttons inside opened forms.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = array ())
 
     Creates an HTML link, but access the URL using method POST. Requires
     JavaScript to be enabled in browser.
@@ -1538,7 +1538,7 @@ Creating buttons and submit elements
         the form tag to ``postLink`` content block or you can use option ``block``
         to specify a custom block.
 
-   .. versionchanged:: 2.6
+    .. versionchanged:: 2.6
         The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
         in ``$options`` instead.
 
