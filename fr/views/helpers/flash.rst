@@ -47,10 +47,10 @@ FlashComponent::
     vous devez les échapper avec :php:func:`h` lors du formatage de vos
     messages.
 
-.. note::
-    Depuis la version 3.1, le :doc:`FlashComponent </controllers/components/flash>`
-    peut empiler les messages. Si vous définissez plusieurs messages, lors d'un
-    appel à ``render()``, chaque message sera rendu dans son élément, dans l'ordre
+.. versionadded:: 3.1
+    Le :doc:`FlashComponent </controllers/components/flash>` empile maintenant
+    les messages. Si vous définissez plusieurs messages, lors d'un appel à
+    ``render()``, chaque message sera rendu dans son élément, dans l'ordre
     dans lequel les messages ont été définis.
 
 Pour plus d'informations sur le tableau d'options disponibles, consultez la

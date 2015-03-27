@@ -33,10 +33,11 @@ use the ``set()`` method::
     $this->Flash->set('This is a message');
 
 
-.. note::
-
-    New in 3.1 : Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with
-    the same key will append the messages in the ``$_SESSION``.
+.. versionadded:: 3.1
+    Flash messages now stack. Successive calls to ``set()`` or ``__call()`` with
+    the same key will append the messages in the ``$_SESSION``. If you want to keep
+    the old behavior (one message even after consecutive calls), set the ``clear``
+    parameter to ``true`` when configuring the Component.
 
 FlashComponent's ``__call()`` and ``set()`` methods optionally take a second
 parameter, an array of options:
@@ -48,9 +49,8 @@ parameter, an array of options:
 * ``params`` An optional array of keys/values to make available as variables
   within an element.
 
-.. note::
-
-    New in 3.1 : A new key ``clear`` was added. This key expects a ``bool`` and allows you
+.. versionadded:: 3.1
+    A new key ``clear`` was added. This key expects a ``bool`` and allows you
     to delete all messages in the current stack and start a new one.
 
 An example of using these options::
@@ -89,3 +89,6 @@ for rendering the flash message.
 
 For more information about rendering your flash messages, please refer to the
 :doc:`FlashHelper </views/helpers/flash>` section.
+
+Setting Flash Messages
+======================
