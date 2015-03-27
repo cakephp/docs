@@ -122,18 +122,26 @@ Being the wise leader he is, Gandalf elects to use ACL in his new
 system, and organizes his objects along the following lines:
 
 -  Fellowship of the Ring™
+
    -  Warriors
+
       -  Aragorn
       -  Legolas
       -  Gimli
+
    -  Wizards
+
       -  Gandalf
+
    -  Hobbits
+
       -  Frodo
       -  Bilbo
       -  Merry
       -  Pippin
+
    -  Visitors
+
       -  Gollum
 
 Using a tree structure for AROs allows Gandalf to define
@@ -142,22 +150,30 @@ our ARO tree, Gandalf can tack on a few group-based permissions:
 
 -  Fellowship of the Ring
    (**Deny**: all)
+
    -  Warriors
       (**Allow**: Weapons, Ale, Elven Rations, Salted Pork)
+
       -  Aragorn
       -  Legolas
       -  Gimli
+
    -  Wizards
       (**Allow**: Salted Pork, Diplomacy, Ale)
+
       -  Gandalf
+
    -  Hobbits
       (**Allow**: Ale)
+
       -  Frodo
       -  Bilbo
       -  Merry
       -  Pippin
+
    -  Visitors
       (**Allow**: Salted Pork)
+
       -  Gollum
 
 If we wanted to use ACL to see whether Pippin was allowed to access
@@ -188,17 +204,23 @@ to groups of AROs:
 
 -  Fellowship of the Ring
    (**Deny**: all)
+
    -  Warriors
       (**Allow**: Weapons, Ale, Elven Rations, Salted Pork)
+
       -  Aragorn
          (Allow: Diplomacy)
       -  Legolas
       -  Gimli
+
    -  Wizards
       (**Allow**: Salted Pork, Diplomacy, Ale)
+
       -  Gandalf
+
    -  Hobbits
       (**Allow**: Ale)
+
       -  Frodo
          (Allow: Ring)
       -  Bilbo
@@ -206,8 +228,10 @@ to groups of AROs:
          (Deny: Ale)
       -  Pippin
          (Allow: Diplomacy)
+
    -  Visitors
       (**Allow**: Salted Pork)
+
       -  Gollum
 
 This approach allows us the ability to make both wide-reaching
@@ -239,9 +263,7 @@ for some reason might not be using a database.
 
 By default, CakePHP's ACL is database-driven. To enable INI-based
 ACL, you'll need to tell CakePHP what system you're using by
-updating the following lines in app/Config/core.php
-
-::
+updating the following lines in app/Config/core.php::
 
     // Change these lines:
     Configure::write('Acl.classname', 'DbAcl');
@@ -264,9 +286,7 @@ ACOs are specified in INI sections that only include the allow and
 deny properties.
 
 As an example, let's see how the Fellowship ARO structure we've
-been crafting would look in INI syntax:
-
-::
+been crafting would look in INI syntax::
 
     ;-------------------------------------
     ; AROs
@@ -339,20 +359,15 @@ initialize your database and interact with your ACO and ARO trees.
 
 To get started, first you'll need to make sure your
 ``/app/Config/database.php`` is present and correctly configured.
-See section 4.1 for more information on database configuration.
 
 Once you've done that, use the CakePHP console to create your ACL
-database tables:
-
-::
+database tables::
 
     $ cake schema create DbAcl
 
 Running this command will drop and re-create the tables necessary
 to store ACO and ARO information in tree format. The output of the
-console application should look something like the following:
-
-::
+console application should look something like the following::
 
     ---------------------------------------------------------------
     Cake Schema Shell
@@ -447,9 +462,7 @@ new child.
 
 Before we can create new ACL objects, we'll need to load up their
 respective classes. The easiest way to do this is to include CakePHP's
-ACL Component in your controller's $components array:
-
-::
+ACL Component in your controller's $components array::
 
     public $components = array('Acl');
 
@@ -468,9 +481,7 @@ to them, we'll use aliases to create the ACL objects. Here, we create them
 via a controller action, but we could do it elsewhere.
 
 Our approach shouldn't be drastically new - we're just using
-models to save data like we always do:
-
-::
+models to save data like we always do::
 
     public function any_action() {
         $aro = $this->Acl->Aro;
@@ -504,9 +515,7 @@ models to save data like we always do:
     }
 
 Once we've got the groups, we can use the ACL console
-application to verify the tree structure.
-
-::
+application to verify the tree structure::
 
     $ cake acl view aro
 
@@ -695,9 +704,7 @@ component. Let's continue with our example.
 
 Here we'll work with Acl permisions in the context of a controller
 action. Let's set up some basic permissions using the AclComponent in 
-an action inside our controller.
-
-::
+an action inside our controller::
 
     class SomethingsController extends AppController {
         // You might want to place this in the AppController
@@ -735,9 +742,7 @@ permission decision. We want Aragorn to keep his full-access
 privileges, but we want to deny other warriors in the group the ability to
 delete Weapons records. We're using the alias syntax to address the
 AROs above, but you might want to use the model/foreign key syntax
-yourself. What we have above is equivalent to this:
-
-::
+yourself. What we have above is equivalent to this::
 
     // 6342 = Legolas
     // 1564 = Gimli
@@ -771,15 +776,11 @@ Checking Permissions: The ACL Component
 Let's use the AclComponent to make sure dwarves and elves can't
 remove things from the armory. At this point, we should be able to
 use the AclComponent to make a check between the ACOs and AROs
-we've created. The basic syntax for making a permissions check is:
-
-::
+we've created. The basic syntax for making a permissions check is::
 
     $this->Acl->check($aro, $aco, $action = '*');
 
-Let's give it a try inside a controller action:
-
-::
+Let's give it a try inside a controller action::
 
     public function index() {
         // These all return true:
