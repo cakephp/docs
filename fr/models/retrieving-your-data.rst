@@ -1033,7 +1033,7 @@ analogue::
 
     array(
         'fields' => array('DISTINCT (User.nom) AS nom_de_ma_colonne'),
-        'order' = >array('User.id DESC')
+        'order' =>array('User.id DESC')
     )
 
 Vous pouvez créer des conditions très complexes, en regroupant des tableaux

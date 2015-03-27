@@ -344,7 +344,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         L'option ``fullBase`` a été ajouté.
         Le support de :term:`syntaxe de plugin` a été ajouté.
 
-.. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = array())
 
     :param string $title: Le texte à afficher comme corps du lien.
     :param mixed $url: Soit la chaîne spécifiant le chemin, ou un
@@ -479,8 +479,12 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-   .. versionchanged:: 2.4
+    .. versionchanged:: 2.4
         L'option ``escapeTitle`` a été ajoutée.
+
+    .. versionchanged:: 2.6
+        L'argument ``$confirmMessage`` a été dépréciée. Utilisez la clé
+        ``confirm`` dans ``$options`` à la place.
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url` pour
     plus d'exemples des différents types d'URLs.
