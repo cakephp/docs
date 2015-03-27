@@ -116,7 +116,7 @@ pleinement avantage du Helper Form (Helper Formulaire) est
     ``$options['url']`` en second paramètre de ``$this->Form->create()``.
 
 Options pour  create()
------------------------
+----------------------
 
 Il y plusieurs options pour create():
 

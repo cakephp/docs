@@ -31,7 +31,7 @@ CakePHP, comme le débogage et la traduction de contenu.
     des arguments supplémentaires pour remplacer les espaces
     réservés dans votre chaîne::
 
-        __('You have %s unread messages', $number);
+        __('You have %s unread messages', h($number));
 
     .. note::
 
@@ -54,7 +54,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
-    Vous permet de remplacer le domaine courant lors de la recherche d'un 
+    Vous permet de remplacer le domaine courant lors de la recherche d'un
     message.
 
     Utile pour internationaliser un plugin:
@@ -64,10 +64,10 @@ CakePHP, comme le débogage et la traduction de contenu.
 
     Vous permet de remplacer le domaine courant pour la recherche d'un message.
     Permet également de spécifier une catégorie.
-    
+
     Notez que la catégorie doit être spécifiée avec une constante de classe I18n
     au lieu du nom de la constante. Les valeurs sont:
-   
+
     - I18n::LC_ALL - LC_ALL
     - I18n::LC_COLLATE - LC_COLLATE
     - I18n::LC_CTYPE - LC_CTYPE
@@ -86,7 +86,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
     Notez que la catégorie doit être spécifiée avec des une constante de classe
     I18n, au lieu des noms de constantes. Les valeurs sont:
-   
+
     - I18n::LC_ALL - LC_ALL
     - I18n::LC_COLLATE - LC_COLLATE
     - I18n::LC_CTYPE - LC_CTYPE
@@ -101,25 +101,25 @@ CakePHP, comme le débogage et la traduction de contenu.
     au pluriel d'un message. Retourne la forme pluriel correcte d'un
     message identifié par $singular et $plural pour le compteur $count
     depuis le domaine $domain.
-  
+
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
     Retourne la forme correcte d'un message identifié par $singular et $plural
-    pour le compteur $count. Certaines langues ont plus d'une forme de pluriel 
+    pour le compteur $count. Certaines langues ont plus d'une forme de pluriel
     dépendant du compteur
- 
+
 .. php:function:: am(array $one, $two, $three...)
 
     Fusionne tous les tableaux passés en paramètre et retourne le tableau
     fusionné.
-   
+
 .. php:function:: config()
 
     Peut être utilisé pour charger des fichiers depuis le dossier config
     de votre application via include\_once. La fonction vérifie l'existence
     du fichier avant de l'inclure et retourne un booléen.
     Prend un nombre optionnel d'arguments.
-   
+
     Exemple: ``config('un_fichier', 'maconfig');``
 
 .. php:function:: convertSlash(string $string)
@@ -154,9 +154,9 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: fileExistsInPath(string $file)
 
-    Vérifie que le fichier donné est dans le include\_path PHP actuel. 
+    Vérifie que le fichier donné est dans le include\_path PHP actuel.
     Renvoie une valeur booléenne.
-    
+
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
     Raccourci pratique pour ``htmlspecialchars()``.
@@ -164,7 +164,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 .. php:function:: LogError(string $message)
 
     Raccourci pour: :php:meth:`Log::write()`.
- 
+
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
     Divise le nom d'un plugin en notation par point en plugin et classname
@@ -181,7 +181,7 @@ CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
 
-    Tris de $array par la clé $sortby. 
+    Tris de $array par la clé $sortby.
 
 .. php:function:: stripslashes_deep(array $value)
 
@@ -210,7 +210,7 @@ dans votre application.
 
     Chemin vers le répertoire de cache. il peut être partagé entre les
     hôtes dans une configuration multi-serveurs.
-    
+
 .. php:const:: CAKE
 
     Chemin vers le répertoire de CAKE.
@@ -235,7 +235,7 @@ dans votre application.
 
     .. deprecated:: 2.4
         Utilisez la valeur de config ``App.cssBaseUrl`` à la place.
-   
+
 .. php:const:: DS
 
     Raccourci pour la constante PHP DIRECTORY\_SEPARATOR, qui est égale à /
@@ -298,7 +298,7 @@ dans votre application.
 .. php:const:: WEBROOT_DIR
 
     La même chose que ``webroot`` ou le nom du répertoire webroot.
-    
+
 .. php:const:: WWW\_ROOT
 
     Chemin d'accès complet vers la racine web (webroot).
@@ -310,7 +310,7 @@ Définition de Constantes de Temps
 
     timestamp Unix en microseconde au format float du démarrage de
     l'application.
-  
+
 .. php:const:: SECOND
 
     Égale à 1
