@@ -1091,6 +1091,8 @@ RequestActionTrait
 
         If used without caching ``requestAction`` can lead to poor
         performance. It is seldom appropriate to use in a controller.
+        A better alternative to using ``requestAction`` is creating
+        :doc:`/views/cells`
 
     ``requestAction`` is best used in conjunction with (cached)
     elements – as a way to fetch data for an element before rendering.
@@ -1106,10 +1108,7 @@ RequestActionTrait
                 if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }
-                return $this->Comments->find('all', [
-                    'order' => 'Comment.created DESC',
-                    'limit' => 10
-               ]);
+                return $this->Comments->find()->order('created')->limit(10);
             }
         }
 
