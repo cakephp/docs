@@ -23,14 +23,14 @@ like to participate in.
 New Translation Language
 ------------------------
 
-We want to provide translations as complete as possible, but there may be times
-where a translation file is not up-to-date. So you should always consider the
-english version as the reference for the documentation.
+We want to provide translations that are as complete as possible. However, there
+may be times where a translation file is not up-to-date. You should always
+consider the english version as the authoritative version.
 
-If your language is not in the actual languages, please contact us through
-Github and we can consider creating a skeleton folder for it. The following
-sections are for us the first one you should consider translating as these
-files don't change often::
+If your language is not in the current languages, please contact us through
+Github and we will consider creating a skeleton folder for it. The following
+sections are the first one you should consider translating as these
+files don't change often:
 
 - index.rst
 - intro.rst
@@ -42,9 +42,9 @@ files don't change often::
 Reminder for Docs Admin
 -----------------------
 
-The structure of all languages folders should follow the english folder
+The structure of all language folders should mirror the english folder
 structure. If the structure changes for the english version, we should apply
-the changes for all other languages.
+those changes in the other languages.
 
 For example, if a new english file is created in **en/file.rst**, we should:
 
