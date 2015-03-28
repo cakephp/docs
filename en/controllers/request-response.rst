@@ -689,7 +689,7 @@ To take advantage of this header, you must either call the
 
     public function view()
     {
-        $article = $this->Articles->find('first');
+        $article = $this->Articles->find()->first();
         $this->response->modified($article->modified);
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
