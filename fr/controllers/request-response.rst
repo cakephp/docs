@@ -476,7 +476,7 @@ requêtes. Vous pouvez faire cela en utilisant
 
     public function sendFile($id)
     {
-        $file = $this->Attachment->getFile($id);
+        $file = $this->Attachments->getFile($id);
         $this->response->file($file['path']);
         //Retourne un objet réponse pour éviter que le controller n'essaie de
         // rendre la vue
@@ -516,7 +516,7 @@ chaine::
 
     public function sendIcs()
     {
-        $icsString = $this->Calendar->generateIcs();
+        $icsString = $this->Calendars->generateIcs();
         $this->response->body($icsString);
         $this->response->type('ics');
 
@@ -706,8 +706,8 @@ soit appeler manuellement la méthode
 
     public function index()
     {
-        $articles = $this->Article->find('all');
-        $this->response->etag($this->Article->generateHash($articles));
+        $articles = $this->Articles->find('all');
+        $this->response->etag($this->Articles->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
@@ -732,8 +732,8 @@ soit appeler manuellement la méthode
 
     public function view()
     {
-        $article = $this->Article->find('first');
-        $this->response->modified($article['Article']['modified']);
+        $article = $this->Articles->find()->first();
+        $this->response->modified($article->modified);
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
