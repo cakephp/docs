@@ -102,7 +102,7 @@ latex:
 latexpdf:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(LANG)
 	@echo "Running LaTeX files through pdflatex..."
-	make -C $(BUILDDIR)/latex/$(LANG) all-pdf
+	make -C $(BUILDDIR)/latex/$(LANG) all-pdf-ja
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex/$(LANG)."
 
 text:
