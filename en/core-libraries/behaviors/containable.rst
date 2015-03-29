@@ -14,7 +14,7 @@ and consistent way.
 Containable allows you to streamline and simplify operations on
 your model bindings. It works by temporarily or permanently
 altering the associations of your models. It does this by using
-supplied the containments to generate a series of ``bindModel`` and
+the supplied containments to generate a series of ``bindModel`` and
 ``unbindModel`` calls. Since Containable only modifies existing relationships it
 will not allow you to restrict results by distant associations. Instead
 you should refer to :ref:`joining-tables`.
