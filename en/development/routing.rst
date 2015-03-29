@@ -302,7 +302,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``action`` Used to name the controller action for a route.
 * ``plugin`` Used to name the plugin a controller is located in.
 * ``prefix`` Used for :ref:`prefix-routing`
-* ``_ext`` Used for :ref:`file-extensions` routing.
+* ``_ext`` Used for :ref:`File extentions routing <file-extensions>`.
 * ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
@@ -895,7 +895,7 @@ Redirect Routing
 Redirect routing allows you to issue HTTP status 30x redirects for
 incoming routes, and point them at different URLs. This is useful
 when you want to inform client applications that a resource has moved
-and you don't want to expose two URLs for the same content
+and you don't want to expose two URLs for the same content.
 
 Redirection routes are different from normal routes as they perform an actual
 header redirection if a match is found. The redirection can occur to
