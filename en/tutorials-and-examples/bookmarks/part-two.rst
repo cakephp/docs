@@ -222,9 +222,10 @@ the add method to look like::
 
     public function add()
     {
-        $bookmark = $this->Bookmarks->newEntity($this->request->data);
+        $bookmark = $this->Bookmarks->newEntity();
         $bookmark->user_id = $this->Auth->user('id');
         if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
@@ -317,15 +318,15 @@ later on.
 In **src/Model/Entity/Bookmark.php** add the ``tag_string`` to ``$_accessible``
 this way::
 
-	protected $_accessible = [
-		'user_id' => true,
-		'title' => true,
-		'description' => true,
-		'url' => true,
-		'user' => true,
-		'tags' => true,
-		'tag_string' => true,
-	];
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
 
 
 Updating the Views
