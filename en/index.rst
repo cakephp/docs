@@ -33,7 +33,7 @@ First Steps
 ===========
 
 Learning a new framework can be intimidating and exciting at the same time. To
-help you along, we have created a cookbook packed with examples and recipies to
+help you along, we have created a cookbook packed with examples and recipes to
 get the common tasks completed. If you are new, you should start off with the
 :doc:`/quickstart` as it will give you a quick tour of what
 CakePHP has to offer and how it works.
