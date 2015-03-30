@@ -6,6 +6,10 @@
 Welcome
 #######
 
+.. warning::
+    This version of the documentation is for CakePHP 3.0. Go `here for the
+    CakePHP 2.x documentation <http://book.cakephp.org/2.0/ja>`_.
+
 CakePHP cookbookは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
 
