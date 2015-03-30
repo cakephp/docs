@@ -387,10 +387,12 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 nginx
 -----
 
-nginx ne fait pas usage de fichiers .htaccess comme Apache et Lighttpd, il est
+nginx ne fait pas usage de fichiers .htaccess comme Apache, il est
 donc nécessaire de créer les URLs réécrites disponibles dans la configuration
-du site. Selon votre configuration, vous devrez modifier cela, mais à tout le
-moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI::
+du site. Ceci se fait habituellement dans
+``/etc/nginx/sites-available/your_virtual_host_conf_file``.Selon votre
+configuration, vous devrez modifier cela, mais à tout le moins, vous aurez
+besoin de PHP fonctionnant comme une instance FastCGI::
 
     server {
         listen   80;
@@ -401,6 +403,38 @@ moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI::
     server {
         listen   80;
         server_name example.com;
+
+        # root directive should be global
+        root   /var/www/example.com/public/webroot/;
+        index  index.php;
+
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+
+On some servers (Like Ubuntu 14.04) the above configuration won't work out of
+the box, and the nginx docs recommend a different appraoch anyway
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html) You might try the
+following (you'll notice this is also just one server {} block, rather than two,
+although if you want example.com to resolve to your CakePHP application in
+addition to www.example.com consult the nginx link above)::
+
+    server {
+        listen   80;
+        server_name www.example.com;
+        rewrite 301 http://www.example.com$request_uri permanent;
 
         # root directive should be global
         root   /var/www/example.com/public/webroot/;

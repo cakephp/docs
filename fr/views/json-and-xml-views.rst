@@ -1,9 +1,8 @@
 Vues JSON et XML
 ################
 
-Les views ``XmlView`` et
-``JsonView`` vous laissent créer facilement des réponses XML et JSON,
-et sont intégrées à
+Les views ``XmlView`` et ``JsonView`` vous permettent de créer facilement des
+réponses XML et JSON, et sont intégrées à
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 En activant ``RequestHandlerComponent`` dans votre application, et en activant
@@ -17,21 +16,32 @@ la clé ``_serialize``, et la seconde en créant des fichiers de template normau
 Activation des Vues de Données dans votre Application
 =====================================================
 
-Avant que vous puissiez utiliser les classes de vue de données, vous aurez
-besoin de faire un peu de configuration:
+Avant que vous ne puissiez utiliser les classes de vue de données, vous devrez
+charger :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` dans
+votre controller::
 
-#. Activez les extensions json et/ou xml avec :ref:`file-extensions`.
-   Cela permettra au Router de gérer plusieurs extensions.
-#. Ajoutez le :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
-   à la liste de components de votre controller. Cela activera automatiquement
-   le changement de la classe de vue pour les types de contenu. Vous pouvez
-   également paramétrer les components avec ``viewClassMap``, pour mapper des
-   types vers vos classes personnalisées et/ou mapper d'autres types.
+    public function initialize()
+    {
+        ...
+        $this->loadComponent('RequestHandler');
+    }
 
-Après avoir activé :ref:`le routing des extensions de fichier <file-extensions>`,
-CakePHP changera automatiquement les classes de vue quand une requête
-sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
-``application/json``.
+Ceci peut être fait dans votre `AppController` et va activer automatiquement
+la classe de vue en s'adaptant selon les types de contenu. Vous pouvez aussi
+configurer le component avec le paramètre ``viewClassMap``, pour faire
+correspondre les types à vos classes personnalisées et/ou les faire correspondre
+à d'autres types de données.
+
+Vous pouvez en option activer les extensions json et ou xml avec les
+:ref:`file-extensions`. Ceci va vous permettre d'accéder à ``JSON``, ``XML`` ou
+tout autre format spécial de vue en utilisant une URL personnalisée finissant
+avec le nom du type de réponse en tant qu'extension de fichier comme par
+exemple ``http://example.com/posts.json``.
+
+Par défaut, quand vous n'activez pas les :ref:`file-extensions`, l'en-tête
+``Accept`` de la requête est utilisé pour sélectionner le type de format qui
+doit être rendu à l'utilisateur. Un exemple de format ``Accept`` utilisé pour
+rendre les réponses ``JSON`` est ``application/json``.
 
 Utilisation des Vues de Données avec la Clé Serialize
 =====================================================
