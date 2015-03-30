@@ -245,6 +245,7 @@ you wanted to create an OpenID authentication object. In
 **src/Auth/OpenidAuthenticate.php** you could put the following::
 
     namespace App\Auth;
+
     use Cake\Auth\BaseAuthenticate;
 
     class OpenidAuthenticate extends BaseAuthenticate
