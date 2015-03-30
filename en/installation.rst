@@ -366,9 +366,10 @@ nginx
 -----
 
 nginx does not make use of .htaccess files like Apache, so it is necessary to
-create those rewritten URLs in the site-available configuration. This is usually found in /etc/nginx/sites-available/your_virtual_host_conf_file.
-Depending upon your setup, you will have to modify this, but at the very least,
-you will need PHP running as a FastCGI instance::
+create those rewritten URLs in the site-available configuration. This is usually
+found in ``/etc/nginx/sites-available/your_virtual_host_conf_file``. Depending
+upon your setup, you will have to modify this, but at the very least, you will
+need PHP running as a FastCGI instance::
 
     server {
         listen   80;
@@ -399,11 +400,13 @@ you will need PHP running as a FastCGI instance::
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
-    
-One some servers (Like Ubuntu 12.04) the above configuration won't work out of the box, 
-and the nginx docs recommend a different appraoch anyway (http://nginx.org/en/docs/http/converting_rewrite_rules.html)
-You might try the following (you'll notice this is also just one server {} block, rather than two, although if you 
-want example.com to resolve to your CakePHP application in addition to www.example.com consult the nginx link above)::
+
+On some servers (Like Ubuntu 14.04) the above configuration won't work out of
+the box, and the nginx docs recommend a different appraoch anyway
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html) You might try the
+following (you'll notice this is also just one server {} block, rather than two,
+although if you want example.com to resolve to your CakePHP application in
+addition to www.example.com consult the nginx link above)::
 
     server {
         listen   80;
