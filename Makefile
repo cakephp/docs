@@ -1,5 +1,5 @@
 # MakeFile for building all the docs at once.
-# Inspired by the Makefile used by bazaar. 
+# Inspired by the Makefile used by bazaar.
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
 PYTHON = python
@@ -19,13 +19,13 @@ DEST = website
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
-# Copy-paste the English Makefile everywhere it's needed.
+# Copy-paste the English Makefile everywhere it's needed (if non existing).
 %/Makefile: en/Makefile
-	cp $< $@
+	cp -n $< $@
 
 #
 # The various formats the documentation can be created in.
-# 
+#
 # Loop over the possible languages and call other build targets.
 #
 html: $(foreach lang, $(LANGS), html-$(lang))
