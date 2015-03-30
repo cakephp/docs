@@ -55,7 +55,7 @@ devrions:
 - Ajouter le fichier dans les autres langues : **fr/file.rst**, **zh/file.rst**, ...
 - Supprimer le contenu, mais en gardant les ``title``, informations ``meta``
   et d'éventuels éléments ``toc-tree``. La note suivante sera ajoutée en anglais
-  tant que personne n'a transmis le fichier::
+  tant que personne n'a traduit le fichier::
 
     File Title
     ##########
