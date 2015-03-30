@@ -593,12 +593,12 @@ et une action ``showItems()``, la route générée sera
 Routing des Extensions de Fichier
 ---------------------------------
 
-.. php:staticmethod:: parseExtensions($extensions, $merge = true)
+.. php:staticmethod:: extensions($extensions, $merge = true)
 
 Pour manipuler différentes extensions de fichier avec vos routes, vous avez
 besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 
-    Router::parseExtensions(['html', 'rss']);
+    Router::extensions(['html', 'rss']);
 
 Cela activera les extensions de nom pour toutes les routes déclarées **après**
 l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
