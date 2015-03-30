@@ -266,6 +266,8 @@ objets d'authentification personnalisés pour votre application ou plugins.
 Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
 **src/Auth/OpenidAuthenticate.php**, vous pourriez mettre ce qui suit::
 
+    namespace App\Auth;
+
     use Cake\Auth\BaseAuthenticate;
 
     class OpenidAuthenticate extends BaseAuthenticate
