@@ -1067,7 +1067,7 @@ passés::
     }
 
 Ceci va remplir ``$this->request->params['named']`` avec tout paramètre nommé
-trouvé dans les arguments passés. Tout argument passé qui a été interpreté comme
+trouvé dans les arguments passés. Tout argument passé qui a été interprété comme
 un paramètre nommé, sera retiré de la liste des arguments passés.
 
 
@@ -1081,7 +1081,7 @@ RequestActionTrait
 
 .. php:method:: requestAction(string $url, array $options)
 
-    Cette fonction appelle une action du controller à partir de toute
+    Cette fonction appelle une action du controller à partir de tout
     endroit et retourne des données de l'action. L'``$url`` passé est une URL
     liée à CakePHP (/controllername/actionname/params). Pour passer des données
     supplémentaires à l'action du controller reçue, ajoutez les au tableau
@@ -1090,7 +1090,7 @@ RequestActionTrait
     .. note::
 
         Vous pouvez utiliser ``requestAction()`` pour récupérer une vue
-        complètement rendur en passant 'return' dans les options:
+        complètement rendue en passant 'return' dans les options:
         ``requestAction($url, ['return']);``. Il est important de noter que
         faire une requestAction en utilisant 'return' à partir d'une méthode
         de controller peut empêcher les balises script et css de fonctionner
@@ -1098,8 +1098,8 @@ RequestActionTrait
 
     .. warning::
 
-        Si utilisée sans mettre en cache ``requestAction`` peut entraîner une
-        faibles performances. Il est rarement approprié de l'utiliser dans un
+        L'utiliser sans mise en cache ``requestAction`` peut entraîner une
+        faible performance. Il est rarement approprié de l'utiliser dans un
         controller.
         Une meilleure alternative à l'utilisation de ``requestAction`` est de
         créer les :doc:`/views/cells`

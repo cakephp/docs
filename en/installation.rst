@@ -404,7 +404,7 @@ need PHP running as a FastCGI instance::
 
 On some servers (Like Ubuntu 14.04) the above configuration won't work out of
 the box, and the nginx docs recommend a different approach anyway
-(http://nginx.org/en/docs/http/converting_rewrite_rules.html) You might try the
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html). You might try the
 following (you'll notice this is also just one server {} block, rather than two,
 although if you want example.com to resolve to your CakePHP application in
 addition to www.example.com consult the nginx link above)::

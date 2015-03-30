@@ -137,7 +137,7 @@ serveur web.
 
 Un problème habituel est que les répertoires **logs** et **tmp** et les
 sous-répertoires doivent être accessible en écriture à la fois pour le serveur
-web et et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
+web et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
 votre serveur web est différent à partir de l'utilisateur en ligne de commande,
 vous pouvez lancer les commandes suivantes juste une fois dans votre projet
 pour vous assurer que les permissions sont bien configurées::
@@ -390,7 +390,7 @@ nginx
 nginx ne fait pas usage de fichiers .htaccess comme Apache, il est
 donc nécessaire de créer les URLs réécrites disponibles dans la configuration
 du site. Ceci se fait habituellement dans
-``/etc/nginx/sites-available/your_virtual_host_conf_file``.Selon votre
+``/etc/nginx/sites-available/your_virtual_host_conf_file``. Selon votre
 configuration, vous devrez modifier cela, mais à tout le moins, vous aurez
 besoin de PHP fonctionnant comme une instance FastCGI::
 
@@ -427,7 +427,7 @@ besoin de PHP fonctionnant comme une instance FastCGI::
 Sur certains serveurs (Comme Ubuntu 14.04) la configuration ci-dessus ne
 fonctionnera pas d'emblée et la documentation de nginx recommande une approche
 différente de toute façon
-(http://nginx.org/en/docs/http/converting_rewrite_rules.html. Vous pourriez
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html). Vous pourriez
 essayer ce qui suit (vous remarquerez que ceci n'est que pour un unique block
 {} de serveur, plutôt que deux, si bien que si vous voulez que example.com
 accède à votre application CakePHP en plus de www.example.com, consultez le
