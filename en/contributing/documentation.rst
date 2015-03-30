@@ -25,7 +25,7 @@ New Translation Language
 
 We want to provide translations that are as complete as possible. However, there
 may be times where a translation file is not up-to-date. You should always
-consider the english version as the authoritative version.
+consider the English version as the authoritative version.
 
 If your language is not in the current languages, please contact us through
 Github and we will consider creating a skeleton folder for it. The following
@@ -39,17 +39,17 @@ files don't change often:
 - /intro folder
 - /tutorials-and-examples folder
 
-Reminder for Docs Admin
------------------------
+Reminder for Docs Administrators
+--------------------------------
 
-The structure of all language folders should mirror the english folder
-structure. If the structure changes for the english version, we should apply
+The structure of all language folders should mirror the English folder
+structure. If the structure changes for the English version, we should apply
 those changes in the other languages.
 
-For example, if a new english file is created in **en/file.rst**, we should:
+For example, if a new English file is created in **en/file.rst**, we should:
 
-- add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
-- delete the content, but keeping the ``title``, ``meta informations`` and
+- Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
+- Delete the content, but keeping the ``title``, ``meta informations`` and
   eventual ``toc-tree`` elements. The following note will be added while nobody
   has translated the file::
 
@@ -64,10 +64,10 @@ For example, if a new english file is created in **en/file.rst**, we should:
         `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
         button to directly propose your changes.
 
-        You can referer to the english version in the select top menu to have
+        You can refer to the English version in the select top menu to have
         information about this page's topic.
 
-    // If toc-tree elements are in the english version
+    // If toc-tree elements are in the English version
     .. toctree::
         :maxdepth: 1
 
