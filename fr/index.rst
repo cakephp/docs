@@ -2,8 +2,8 @@ Bienvenue
 #########
 
 .. warning::
-    This version of the documentation is for CakePHP 3.0. Go `here for the
-    CakePHP 2.x documentation <http://book.cakephp.org/2.0/fr>`_.
+    Cette version de documentation concerne CakePHP 3.0. Rendez vous 
+    `ici pour la documentation sur CakePHP 2.x <http://book.cakephp.org/2.0/fr>`_.
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Remarquez le bouton "Improve this Doc" dans le coin en haut
