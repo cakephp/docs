@@ -1,10 +1,9 @@
-.. CakePHP Cookbook documentation master file, created by
-   sphinx-quickstart on Tue Jan 18 12:54:14 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Bem-vindo
 #########
+
+.. warning::
+    This version of the documentation is for CakePHP 3.0. Go `here for the
+    CakePHP 2.x documentation <http://book.cakephp.org/2.0/pt>`_.
 
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
 Esperamos manter um alto nível de qualidade, validade e precisão para a
