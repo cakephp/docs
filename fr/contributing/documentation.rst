@@ -9,6 +9,12 @@ les fichiers -- le bouton "Improve this Doc" (Améliorer cette Doc) sur toutes
 les pages vous redirigera vers l'éditeur en ligne de Github pour la page
 correspondante.
 
+La documentation de CakePHP est `intégrée de façon continue
+<http://en.wikipedia.org/wiki/Continuous_integration>`_,
+donc vous pouvez vérifier le statut des
+`différents builds <http://ci.cakephp.org>`_
+sur le serveur Jenkins à tout moment.
+
 Traductions
 ===========
 
@@ -16,7 +22,69 @@ Envoyez un Email à l'équipe docs (docs at cakephp dot org) ou venez
 discuter sur IRC (#cakephp on freenode) de tout effort de traduction auquel
 vous souhaitez participer.
 
-Astuces de traducteurs:
+Nouvelle Traduction d'une Langue
+--------------------------------
+
+Nous souhaitons créer des traductions aussi complètes que possible. Cependant,
+il peut arriver des fois où un fichier de traduction n'est pas à jour. Vous
+devriez toujours considérer la version anglais comme la version qui fait
+autorité.
+
+Si votre langue n'est pas dans les langues actuellement proposées, merci de
+nous contacter sur Github et nous envisagerons de créer un squelette de dossier
+pour cette langue. Les sections suivantes sont les premières par lesquelles vous
+devriez commencer puisque ce sont des fichiers qui ne changent pas souvent:
+
+- index.rst
+- intro.rst
+- quickstart.rst
+- installation.rst
+- dossier /intro
+- dossier /tutorials-and-examples
+
+Note pour les Administrateurs de la Doc
+---------------------------------------
+
+La structure de tous les dossiers de langue doivent refléter la structure du
+dossier anglais. Si la structure change pour la version anglaise, nous devrions
+appliquer ces changements dans les autres langues.
+
+Par exemple, si un nouveau fichier anglais est créé dans **en/file.rst**, nous
+devrions:
+
+- Ajouter le fichier dans les autres langues : **fr/file.rst**, **zh/file.rst**, ...
+- Supprimer le contenu, mais en gardant les ``title``, informations ``meta``
+  et d'éventuels éléments ``toc-tree``. La note suivante sera ajoutée en anglais
+  tant que personne n'a traduit le fichier::
+
+    File Title
+    ##########
+
+    .. note::
+        The documentation is not currently supported in XX language for this
+        page.
+
+        Please feel free to send us a pull request on
+        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+        button to directly propose your changes.
+
+        You can refer to the English version in the select top menu to have
+        information about this page's topic.
+
+    // If toc-tree elements are in the English version
+    .. toctree::
+        :maxdepth: 1
+
+        one-toc-file
+        other-toc-file
+
+    .. meta::
+        :title lang=xx: File Title
+        :keywords lang=xx: title, description,...
+
+
+Astuces de traducteurs
+----------------------
 
 - Parcourez et modifiez le contenu à traduire dans le langage voulu - sinon
   vous ne verrez pas ce qui a déjà été traduit.
@@ -76,7 +144,7 @@ Les Paragraphes
 ---------------
 
 Les paragraphes sont simplement des blocks de texte, avec toutes les lignes au
-même niveau d'indentation. Les paragraphes ne doivent être séparés par plus
+même niveau d'indentation. Les paragraphes ne doivent pas être séparés par plus
 d'une ligne vide.
 
 Le balisage interne

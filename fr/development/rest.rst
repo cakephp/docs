@@ -31,12 +31,12 @@ comme cela::
     Router::parseExtensions();
 
 La première ligne met en place un certain nombre de routes par défaut pour
-un accès facile par REST où la méthode spécifie le format de résultat
-souhaité (ex: xml, json, rss). Ces routes correspondent aux méthodes de
-requêtes HTTP.
+un accès facile par REST là où la méthode ``parseExtensions()`` spécifie le
+format de résultat souhaité (ex: xml, json, rss). Ces routes correspondent aux
+méthodes de requêtes HTTP.
 
 =========== ===================== ==============================
-HTTP format URL.format            Action de contrôleur appelée
+HTTP format format URL            Action de contrôleur appelée
 =========== ===================== ==============================
 GET         /recipes.format       RecipesController::index()
 ----------- --------------------- ------------------------------
