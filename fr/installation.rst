@@ -424,12 +424,14 @@ besoin de PHP fonctionnant comme une instance FastCGI::
         }
     }
 
-On some servers (Like Ubuntu 14.04) the above configuration won't work out of
-the box, and the nginx docs recommend a different appraoch anyway
-(http://nginx.org/en/docs/http/converting_rewrite_rules.html) You might try the
-following (you'll notice this is also just one server {} block, rather than two,
-although if you want example.com to resolve to your CakePHP application in
-addition to www.example.com consult the nginx link above)::
+Sur certains serveurs (Comme Ubuntu 14.04) la configuration ci-dessus ne
+fonctionnera pas d'emblée et la documentation de nginx recommande une approche
+différente de toute façon
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html. Vous pourriez
+essayer ce qui suit (vous remarquerez que ceci n'est que pour un unique block
+{} de serveur, plutôt que deux, si bien que si vous voulez que example.com
+accède à votre application CakePHP en plus de www.example.com, consultez le
+lien nginx ci-dessus)::
 
     server {
         listen   80;
@@ -468,7 +470,8 @@ faire, suivez ces étapes:
    <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
    l'URL
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou téléchargez le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   ou téléchargez le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Créez un nouveau fichier dans votre dossier CakePHP, appelé web.config.
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
    dans votre nouveau fichier web.config::
