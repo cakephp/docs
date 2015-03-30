@@ -442,7 +442,7 @@ Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
 controller séparés, vous pouvez créer de plus petits et/ou de plus simples
 controllers. Les comportements communs aux controllers préfixés et non-préfixés
 peuvent être encapsulés via l'héritage, les :doc:`/controllers/components`, ou
-lestraits. En utilisant notre exemple des utilisateurs, accéder à l'url
+les traits. En utilisant notre exemple des utilisateurs, accéder à l'url
 ``/admin/users/edit/5`` devrait appeler la méthode ``edit()`` de notre
 ``App\Controller\Admin\UsersController`` en passant 5 comme premier paramètre.
 Le fichier de vue utilisé serait **src/Template/Admin/Users/edit.ctp**.
