@@ -49,7 +49,7 @@ those changes in the other languages.
 For example, if a new English file is created in **en/file.rst**, we should:
 
 - Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
-- Delete the content, but keeping the ``title``, ``meta informations`` and
+- Delete the content, but keeping the ``title``, ``meta`` information and
   eventual ``toc-tree`` elements. The following note will be added while nobody
   has translated the file::
 
