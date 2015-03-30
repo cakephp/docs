@@ -1049,16 +1049,16 @@ Est équivalent à ces appels explicites::
     route avec les éléments ``:plugin`` et/ou ``:controller`` résultera en
     URL incompatibles.
 
-Handling Named Parameters in URLs
-=================================
+Gérer les Paramètres Nommés dans les URLs
+=========================================
 
-Although named parameters were removed in CakePHP 3.0, applications may have
-published URLs containing them.  You can continue to accept URLs containing
-named parameters.
+Bien que les paramètres nommés ont été retirés dans CakePHP 3.0, les
+applications peuvent publier des URLs les contenant. Vous pouvez continuer à
+accepter les URLs contenant les paramètres nommés.
 
-In your controller's ``beforeFilter()`` method you can call
-``parseNamedParams()`` to extract any named parameters from the passed
-arguments::
+Dans la méthode de votre ``beforeFilter()``, vous pouvez appeler
+``parseNamedParams()`` pour extraire tout paramètre nommé à partir des arguments
+passés::
 
     public function beforeFilter()
     {
@@ -1066,9 +1066,9 @@ arguments::
         Router::parseNamedParams($this->request);
     }
 
-This will populate ``$this->request->params['named']`` with any named parameters
-found in the passed arguments.  Any passed argument that was interpreted as a
-named parameter, will be removed from the list of passed arguments.
+Ceci va remplir ``$this->request->params['named']`` avec tout paramètre nommé
+trouvé dans les arguments passés. Tout argument passé qui a été interprété comme
+un paramètre nommé, sera retiré de la liste des arguments passés.
 
 
 RequestActionTrait
@@ -1076,31 +1076,33 @@ RequestActionTrait
 
 .. php:trait:: RequestActionTrait
 
-    This trait allows classes which include it to create sub-requests or
-    request actions.
+    Ce trait permet aux classes qui l'incluent de créer des sous-requêtes ou des
+    actions de requête.
 
 .. php:method:: requestAction(string $url, array $options)
 
-    This function calls a controller's action from any location and
-    returns data from the action. The ``$url`` passed is a
-    CakePHP-relative URL (/controllername/actionname/params). To pass
-    extra data to the receiving controller action add to the $options
-    array.
+    Cette fonction appelle une action du controller à partir de tout
+    endroit et retourne des données de l'action. L'``$url`` passé est une URL
+    liée à CakePHP (/controllername/actionname/params). Pour passer des données
+    supplémentaires à l'action du controller reçue, ajoutez les au tableau
+    $options.
 
     .. note::
 
-        You can use ``requestAction()`` to retrieve a fully rendered view
-        by passing 'return' in the options:
-        ``requestAction($url, ['return']);``. It is important to note
-        that making a requestAction using 'return' from a controller method
-        can cause script and css tags to not work correctly.
+        Vous pouvez utiliser ``requestAction()`` pour récupérer une vue
+        complètement rendue en passant 'return' dans les options:
+        ``requestAction($url, ['return']);``. Il est important de noter que
+        faire une requestAction en utilisant 'return' à partir d'une méthode
+        de controller peut empêcher les balises script et css de fonctionner
+        correctement.
 
     .. warning::
 
-        If used without caching ``requestAction`` can lead to poor
-        performance. It is seldom appropriate to use in a controller.
-        A better alternative to using ``requestAction`` is creating
-        :doc:`/views/cells`
+        L'utiliser sans mise en cache ``requestAction`` peut entraîner une
+        faible performance. Il est rarement approprié de l'utiliser dans un
+        controller.
+        Une meilleure alternative à l'utilisation de ``requestAction`` est de
+        créer les :doc:`/views/cells`
 
     ``requestAction`` is best used in conjunction with (cached)
     elements – as a way to fetch data for an element before rendering.

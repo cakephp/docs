@@ -17,37 +17,42 @@ Enabling Data Views in Your Application
 =======================================
 
 Before you can use the data view classes, you'll first need to load the
-:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your contoller::
+:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
+contoller::
 
     public function initialize()
     {
         ...
         $this->loadComponent('RequestHandler');
     }
-    
-This can be done in your `AppController` and will enable automatic view class switching on content types.
-You can also set the component up with the ``viewClassMap`` setting, to map types to your custom classes
-and/or map other data types.
-   
-You can optionally enable the json and or xml extensions with :ref:`file-extensions`. This will allow you
-to access the ``JSON``, ``XML`` or any other special format views by using a custom URL ending with
-the name of the response type as a file extension such as ``http://example.com/posts.json``
 
-By default, when not enabling :ref:`file-extensions`, the request the ``Accept`` header is used for selecting
-which type of format should be rendered to the user. An example ``Accept`` format that is used to render
-``JSON`` responses is ``application/json``.
+This can be done in your `AppController` and will enable automatic view class
+switching on content types. You can also set the component up with the
+``viewClassMap`` setting, to map types to your custom classes and/or map other
+data types.
+
+You can optionally enable the json and or xml extensions with
+:ref:`file-extensions`. This will allow you to access the ``JSON``, ``XML`` or
+any other special format views by using a custom URL ending with the name of the
+response type as a file extension such as ``http://example.com/posts.json``.
+
+By default, when not enabling :ref:`file-extensions`, the request the ``Accept``
+header is used for selecting which type of format should be rendered to the
+user. An example ``Accept`` format that is used to render ``JSON`` responses is
+``application/json``.
 
 Using Data Views with the Serialize Key
 =======================================
 
-The ``_serialize`` key is a special view variable that indicates which other view
-variable(s) should be serialized when using a data view. This lets you skip
+The ``_serialize`` key is a special view variable that indicates which other
+view variable(s) should be serialized when using a data view. This lets you skip
 defining template files for your controller actions if you don't need to do any
 custom formatting before your data is converted into json/xml.
 
 If you need to do any formatting or manipulation of your view variables before
-generating the response, you should use template files. The value of ``_serialize``
-can be either a string or an array of view variables to serialize::
+generating the response, you should use template files. The value of
+``_serialize`` can be either a string or an array of view variables to
+serialize::
 
     namespace App\Controller;
 
@@ -146,8 +151,9 @@ values of this option.
 JSONP Responses
 ---------------
 
-When using ``JsonView`` you can use the special view variable ``_jsonp`` to enable
-returning a JSONP response. Setting it to ``true`` makes the view class check if query
-string parameter named "callback" is set and if so wrap the json response in the
-function name provided. If you want to use a custom query string parameter name
-instead of "callback" set ``_jsonp`` to required name instead of ``true``.
+When using ``JsonView`` you can use the special view variable ``_jsonp`` to
+enable returning a JSONP response. Setting it to ``true`` makes the view class
+check if query string parameter named "callback" is set and if so wrap the json
+response in the function name provided. If you want to use a custom query string
+parameter name instead of "callback" set ``_jsonp`` to required name instead of
+``true``.
