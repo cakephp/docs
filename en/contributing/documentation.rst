@@ -8,6 +8,11 @@ You can even edit the docs online with GitHub, without ever downloading the
 files -- the "Improve this Doc" button on any given page will direct you to
 GitHub's online editor for that page.
 
+The CakePHP documentation is
+`continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
+so you can check the status of the `various builds <http://ci.cakephp.org>`_
+on the Jenkins server at any time.
+
 Translations
 ============
 
@@ -15,7 +20,67 @@ Email the docs team (docs at cakephp dot org) or hop on IRC
 (#cakephp on freenode) to discuss any translation efforts you would
 like to participate in.
 
-Translator tips:
+New Translation Language
+------------------------
+
+We want to provide translations that are as complete as possible. However, there
+may be times where a translation file is not up-to-date. You should always
+consider the English version as the authoritative version.
+
+If your language is not in the current languages, please contact us through
+Github and we will consider creating a skeleton folder for it. The following
+sections are the first one you should consider translating as these
+files don't change often:
+
+- index.rst
+- intro.rst
+- quickstart.rst
+- installation.rst
+- /intro folder
+- /tutorials-and-examples folder
+
+Reminder for Docs Administrators
+--------------------------------
+
+The structure of all language folders should mirror the English folder
+structure. If the structure changes for the English version, we should apply
+those changes in the other languages.
+
+For example, if a new English file is created in **en/file.rst**, we should:
+
+- Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
+- Delete the content, but keeping the ``title``, ``meta`` information and
+  eventual ``toc-tree`` elements. The following note will be added while nobody
+  has translated the file::
+
+    File Title
+    ##########
+
+    .. note::
+        The documentation is not currently supported in XX language for this
+        page.
+
+        Please feel free to send us a pull request on
+        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+        button to directly propose your changes.
+
+        You can refer to the English version in the select top menu to have
+        information about this page's topic.
+
+    // If toc-tree elements are in the English version
+    .. toctree::
+        :maxdepth: 1
+
+        one-toc-file
+        other-toc-file
+
+    .. meta::
+        :title lang=xx: File Title
+        :keywords lang=xx: title, description,...
+
+
+Translator tips
+---------------
 
 - Browse and edit in the language you want the content to be
   translated to - otherwise you won't see what has already been
@@ -39,19 +104,21 @@ Translator tips:
 - If the original content is missing some info, submit an edit for
   that first.
 
-Documentation formatting guide
+Documentation Formatting Guide
 ==============================
 
-The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
-(Re Structured Text) is a plain text markup syntax similar to markdown or
-textile. To maintain consistency, follow these guidelines to format and
+The new CakePHP documentation is written with
+`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
+(Re Structured Text) is a plain text markup syntax similar to markdown, or
+textile. To maintain consistency it is recommended that when adding to the
+CakePHP documentation you follow the guidelines here on how to format and
 structure your text.
 
-Line length
+Line Length
 -----------
 
 Lines of text should be wrapped at 80 columns. The only exception should be
-long URLs and code snippets.
+long URLs, and code snippets.
 
 Headings and Sections
 ---------------------
@@ -71,26 +138,33 @@ preceded and followed by a blank line.
 Paragraphs
 ----------
 
-Paragraphs are simply blocks of text, with all the lines at the same level of indentation.
-Paragraphs should be separated by more than one empty line.
+Paragraphs are simply blocks of text, with all the lines at the same level of
+indentation. Paragraphs should be separated by more than one empty line.
 
-Inline markup
+Inline Markup
 -------------
 
 * One asterisk: *text* for emphasis (italics)
+  We'll use it for general highlighting/emphasis.
 
-  * ``*text*``
+  * ``*text*``.
 
 * Two asterisks: **text** for strong emphasis (boldface)
+  We'll use it for working directories, bullet list subject, table names and
+  excluding the following word "table".
 
-  * ``**text**``
+  * ``**/config/Migrations**``, ``**articles**``, etc.
 
 * Two backquotes: ``text`` for code samples
+  We'll use it for names of method options, names of table columns, object
+  names, excluding the following word "object" and for method/function
+  names -- include "()".
 
-  * ````text````
+  * ````cascadeCallbacks````, ````true````, ````id````,
+    ````PagesController````, ````config()````, etc.
 
-If asterisks or backquotes appear in running text and could be confused with inline markup
-delimiters, they have to be escaped with a backslash.
+If asterisks or backquotes appear in running text and could be confused with
+inline markup delimiters, they have to be escaped with a backslash.
 
 Inline markup has a few restrictions:
 
@@ -142,20 +216,16 @@ Links
 
 There are several kinds of links, each with their own uses.
 
-External links
+External Links
 ~~~~~~~~~~~~~~
 
 Links to external documents can be with the following::
 
     `External Link <http://example.com>`_
 
-The above would generate this `External Link <http://example.com>`_
+The above would generate a link pointing to http://example.com
 
-.. note::
-
-    Make sure you add the underscore after the backtick, it is important!
-
-Links to other pages
+Links to Other Pages
 ~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: doc
@@ -168,7 +238,7 @@ Links to other pages
     ``:doc:`/core-helpers```, it would always reference ``/core-helpers``
     regardless of where it was used.
 
-Cross referencing links
+Cross Referencing Links
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: ref
@@ -191,7 +261,7 @@ Cross referencing links
     The link's text would be the title that the link preceded. You can also
     provide custom link text using ``:ref:`Link text <label-name>```.
 
-Describing classes and their contents
+Describing Classes and their Contents
 -------------------------------------
 
 The CakePHP documentation uses the `phpdomain
@@ -199,7 +269,7 @@ The CakePHP documentation uses the `phpdomain
 directives for describing PHP objects and constructs. Using these directives
 and roles is required to give proper indexing and cross referencing features.
 
-Describing classes and constructs
+Describing Classes and Constructs
 ---------------------------------
 
 Each directive populates the index, and or the namespace index.
@@ -288,8 +358,8 @@ matching directive is found:
 
 .. rst:role:: php:const
 
-   Reference either a global constant, or a class constant. Class constants should
-   be preceded by the owning class::
+   Reference either a global constant, or a class constant. Class constants
+   should be preceded by the owning class::
 
         DateTime has an :php:const:`DateTime::ATOM` constant.
 
@@ -317,7 +387,7 @@ matching directive is found:
    Reference an exception.
 
 
-Source code
+Source Code
 -----------
 
 Literal code blocks are created by ending a paragraph with ``::``. The literal
@@ -331,15 +401,16 @@ block must be indented, and like all paragraphs be separated by single lines::
 
     This is regular text again.
 
-Literal text is not modified or formatted, save that one level of indentation is removed.
+Literal text is not modified or formatted, save that one level of indentation
+is removed.
 
 
-Notes and warnings
+Notes and Warnings
 ------------------
 
 There are often times when you want to inform the reader of an important tip,
 special note or a potential hazard. Admonitions in sphinx are used for just
-that. There are five kinds of admonitions.
+that. There are fives kinds of admonitions.
 
 * ``.. tip::`` Tips are used to document or re-iterate interesting or important
   information. The content of the directive should be written in complete
@@ -361,7 +432,8 @@ All admonitions are made the same::
 
     .. note::
 
-        Indented and preceded and followed by a blank line. Just like a paragraph.
+        Indented and preceded and followed by a blank line. Just like a
+        paragraph.
 
     This text is not part of the note.
 
@@ -390,5 +462,5 @@ Samples
 
 
 .. meta::
-    :title lang=en: Documentation
+:title lang=en: Documentation
     :keywords lang=en: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
