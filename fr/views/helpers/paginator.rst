@@ -445,16 +445,16 @@ intégrées dans vos en-têtes de colonne de table:
 
 .. code-block:: php
 
-    <!-- src/View/Posts/index.ctp -->
+    <!-- src/Template/Posts/index.ctp -->
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
         </tr>
-           <?php foreach ($data as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
-            <td><?= $recipe['Recipe']['id'] ?> </td>
-            <td><?= h($recipe['Recipe']['title']) ?> </td>
+            <td><?= $recipe->id ?> </td>
+            <td><?= h($recipe->title) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -471,12 +471,11 @@ Il est aussi possible de trier une colonne basée sur des associations:
         <tr>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
             <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
-
         </tr>
-           <?php foreach ($data as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
-            <td><?= h($recipe['Recipe']['title']) ?> </td>
-            <td><?= h($recipe['Author']['name']) ?> </td>
+            <td><?= h($recipe->title) ?> </td>
+            <td><?= h($recipe->name) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
