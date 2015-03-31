@@ -1512,6 +1512,17 @@ example::
         'type' => 'radio'
     ]);
 
+Similar to input containers, the ``input()`` method will also attempt to use
+distinct templates for each form group. A form group is a combo of label and input.
+For example, when creating a radio input the ``radioFormGroup`` will be used if
+it is present. If that template is missing by default each set of label & input
+is rendered using the ``formGroup`` template. For example::
+
+    // Add custom radio form group
+    $this->Form->templates([
+        'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
+    ]);
+
 Moving Checkboxes & Radios Outside of a Label
 ---------------------------------------------
 
