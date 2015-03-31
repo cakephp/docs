@@ -11,8 +11,8 @@ Once you've loaded an entity you can delete it by calling the originating
 table's delete method::
 
     // In a controller.
-    $entity = $articles->get(2);
-    $result = $articles->delete($entity);
+    $entity = $this->Articles->get(2);
+    $result = $this->Articles->delete($entity);
 
 When deleting entities a few things happen:
 
@@ -29,7 +29,7 @@ When deleting entities a few things happen:
 By default all deletes happen within a transaction. You can disable the
 transaction with the atomic option::
 
-    $result = $articles->delete($entity, ['atomic' => false]);
+    $result = $this->Articles->delete($entity, ['atomic' => false]);
 
 Cascading Deletes
 -----------------

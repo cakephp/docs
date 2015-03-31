@@ -36,7 +36,7 @@ Em seguida, basta digitar a seguinte linha no seu terminal a partir do diretóri
 onde se localiza o arquivo ``composer.phar`` para instalar o esqueleto de
 aplicações do CakePHP no diretório ``bookmarker``. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
 A vantagem de usar Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar as permissões de arquivo e criar a sua
@@ -216,7 +216,7 @@ circunstância de nós querermos criptografar a senha cada vez que é
 definida, vamos usar um método modificador/definidor. O CakePHP vai chamar
 métodos de definição baseados em convenções a qualquer momento que uma
 propriedade é definida em uma de suas entidades. Vamos adicionar um definidor
-para a senha. Em ``src/Model/Entity/User.php`` adicione o seguinte::
+para a senha. Em **src/Model/Entity/User.php** adicione o seguinte::
 
     namespace App\Model\Entity;
 
@@ -270,7 +270,7 @@ O acima define uma nova "rota" que liga o caminho ``/bookmarks/tagged/*``, a
 suas URLs parecerão, de como eles são implementadas. Se fôssemos visitar
 ``http://localhost:8765/bookmarks/tagged``, deveriamos ver uma página de erro
 informativa do CakePHP. Vamos implementar esse método ausente agora. Em
-``src/Controller/BookmarksController.php`` adicione o seguinte::
+**src/Controller/BookmarksController.php** adicione o seguinte::
 
     public function tags()
     {
@@ -288,7 +288,7 @@ No CakePHP nós gostamos de manter as nossas ações do controller enxutas, e
 colocar a maior parte da lógica de nossa aplicação nos modelos. Se você fosse
 visitar a URL ``/bookmarks/tagged`` agora, você veria um erro sobre o
 método ``findTagged`` não estar implementado ainda, então vamos fazer isso. Em
-``src/Model/Table/BookmarksTable.php`` adicione o seguinte::
+**src/Model/Table/BookmarksTable.php** adicione o seguinte::
 
     public function findTagged(Query $query, array $options)
     {
@@ -316,7 +316,7 @@ Criando a view
 Agora, se você visitar a URL ``/bookmarks/tagged``, o CakePHP irá mostrar um
 erro e deixá-lo saber que você ainda não fez um arquivo view. Em seguida,
 vamos construir o arquivo view para a nossa ação ``tags``. Em
-``src/Template/Bookmarks/tags.ctp`` coloque o seguinte conteúdo::
+**src/Template/Bookmarks/tags.ctp** coloque o seguinte conteúdo::
 
     <h1>
         Bookmarks tagged with

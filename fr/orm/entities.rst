@@ -20,7 +20,7 @@ Créer des Classes Entity
 Vous n'avez pas besoin de créer des classes entity pour utiliser l'ORM dans
 CakePHP. Cependant si vous souhaitez avoir de la logique personnalisée dans
 vos entities, vous devrez créer des classes. Par convention, les classes
-entity se trouvent dans ``src/Model/Entity/``. Si notre application a une
+entity se trouvent dans **src/Model/Entity/**. Si notre application a une
 table ``articles``, nous pourrions créer l'entity suivante::
 
     // src/Model/Entity/Article.php
@@ -308,7 +308,7 @@ Lazy loading
     commentaires va fréquemment émettre N requêtes où N est le nombre d'articles
     étant itérés.
 
-Alors que le lazy loading n'est pas inclu par l'ORM de CakePHP, il n'est
+Alors que le lazy loading n'est pas inclus par l'ORM de CakePHP, il n'est
 pas difficile de l'intégrer vous-même quand et où vous le souhaitez. Lors
 de l'implémentation d'une méthode accesseur, vous pouvez charger les
 données associées en lazy loading::
@@ -343,7 +343,7 @@ Créer du Code Re-utilisable avec les Traits
 
 Vous pouvez vous retrouver dans un cas où vous avez besoin de la même logique
 dans plusieurs classes d'entity. Les traits de PHP sont parfaits pour cela.
-Vous pouvez mettre les traits de votre application dans ``src/Model/Entity``.
+Vous pouvez mettre les traits de votre application dans **src/Model/Entity**.
 Par convention, les traits dans CakePHP sont suffixés avec ``Trait`` pour
 qu'ils soient facilement discernables des classes ou des interfaces. Les traits
 sont souvent un bon allié des behaviors, vous permettant de fournir des

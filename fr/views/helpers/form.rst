@@ -204,6 +204,23 @@ spécifiques qui s'appliquent uniquement quand un compte est enregistré::
         'context' => ['validator' => 'register']
     ]);
 
+L'exemple précédent utilise le validateur ``register`` pour l'``$user`` et
+toutes les associations liées. Si vous créez un formulaire pour les entities
+associées, vous pouvez définir les règles de validation pour chaque association
+en utilisant un tableau::
+
+    echo $this->Form->create($user, [
+        'context' => [
+            'validator' => [
+                'Users' => 'register',
+                'Comments' => 'default'
+            ]
+        ]
+    ]);
+
+Ce qui est au-dessus va utiliser ``register`` pour l'utilisateur, et ``default``
+pour les commentaires de l'utilisateur.
+
 Créer des Classes de Contexte
 -----------------------------
 
@@ -363,7 +380,8 @@ Tout point dans vos noms de champs sera converti dans des données de requête
 imbriquées. Par exemple, si vous créez un champ avec un nom
 ``0.comments.body`` vous aurez un nom d'attribut qui sera
 ``0[comments][body]``. Cette convention facilite la sauvegarde des données
-avec l'ORM.
+avec l'ORM. Plus de détails pour tous les types d'associations se trouvent
+dans la section :ref:`associated-form-inputs`.
 
 Lors de la création d'inputs de type datetime, FormHelper va ajouter un
 suffixe au champ. Vous pouvez remarquer des champs supplémentaires nommés
@@ -541,8 +559,18 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. note::
 
-    La clé selected pour les inputs de type date et datetime peuvent aussi
-    être des timestamps UNIX.
+    La clé value pour les inputs de type date et datetime peut aussi
+    être un timestamp UNIX ou un objet DateTime.
+
+  Pour un input select où vous définissez l'attribut ``multiple`` à true,
+  vous pouvez utiliser un tableau des valeurs que vous voulez sélectionner par
+  défaut::
+
+    echo $this->Form->select('rooms', [
+        'multiple' => true,
+        // options avec valeurs 1 et 3 seront sélectionnées par défaut
+        'default' => [1, 3]
+    ]);
 
 * ``$options['empty']`` Est défini à ``true``, pour forcer l'input à rester vide.
 
@@ -561,7 +589,7 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   .. code-block:: html
 
-      <select name="field" id="field">
+      <select name="field">
           <option value="">(choose one)</option>
           <option value="0">1</option>
           <option value="1">2</option>
@@ -572,14 +600,14 @@ Les Options pour Select, Checkbox et Inputs Radio
 
   Les options peuvent aussi fournir une paire de clé-valeur.
 
-* ``$options['hiddenField']`` Pour certain types d' input (checkboxes,
+* ``$options['hiddenField']`` Pour certain types d'input (checkboxes,
   radios) un input caché est créé. Ainsi, la clé dans $this->request->data
   existera même sans valeur spécifiée:
 
   .. code-block:: html
 
-    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="published" value="0" />
+    <input type="checkbox" name="published" value="1" />
 
   Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
 
@@ -1461,7 +1489,7 @@ l'option ``templates`` lors de l'inclusion du helper dans votre controller::
         'templates' => 'app_form',
     ]);
 
-Ceci charge les balises dans ``config/app_form.php``. Le fichier devra
+Ceci charge les balises dans **config/app_form.php**. Le fichier devra
 contenir un tableau des templates indexés par leur nom::
 
     return [
@@ -1576,9 +1604,9 @@ additionnelles dans le paramètre ``$fields``::
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
 ``$options`` pour contrôler les legend/fields générés.
 
-- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Si une chaîne est
-  fournie, elle sera utilisée comme nom de classe pour l'element fieldset
-
+- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez également passer
+  un tableau de paramètres qui seront rendus comme attributs HTML sur le tag du fieldset.
+  Si vous passez un tableau vide, le fieldset sera simplement rendu sans attributs.
 - ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble d'input
   généré.
   Ou fournir une chaîne pour personnaliser le texte de legend.
@@ -1678,9 +1706,9 @@ Construire une Classe Widget
 Les classes Widget ont une interface requise vraiment simple. Elles doivent
 implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
 nécessite que les méthodes ``render(array $data)`` et ``secureFields(array $data)`` soient implémentées.
-La méthode ``render`` attend un tableau de données pour constuire le widget et doit renvoyer
+La méthode ``render()`` attend un tableau de données pour constuire le widget et doit renvoyer
 un chaine HTML pour le widget.
-La méthode ``secureFields`` attend également un tableau de données et doit retourner un tableau
+La méthode ``secureFields()`` attend également un tableau de données et doit retourner un tableau
 contenant la liste des champs à sécuriser pour ce widget.
 Si CakePHP construit votre widget, vous pouvez
 vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier
@@ -1790,8 +1818,9 @@ controller, vous bénéficierez automatiquement des fonctionnalités de prévent
 contre la falsification de formulaires.
 
 Tel que mentionné précédemment, lorsque vous utilisez le SecurityComponent,
-vous devez toujours fermer vos formulaires en utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les inputs spéciales
-``_Token`` soient générées.
+vous devez toujours fermer vos formulaires en utilisant
+:php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les
+inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)
 

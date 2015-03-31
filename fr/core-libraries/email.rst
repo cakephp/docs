@@ -49,9 +49,9 @@ Configuration
 
 La Configuration par défaut pour ``Email`` est créé en utilisant ``config()`` et
 ``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
-le fichier ``config/app.php``. Le fichier ``config/app.php.default`` est
+le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
-d'email dans ``config/app.php``. ``Email`` peut être utilisé sans cela
+d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
 et utilise les méthodes séparement pour définir toutes les configurations
 ou charger un tableau de configs.
 
@@ -235,8 +235,8 @@ normales::
         ->from('app@domain.com')
         ->send();
 
-Ce qui est au-dessus utilise ``src/Template/Email/html/welcome.ctp`` pour la vue,
-et ``src/Template/Layout/Email/html/fancy.ctp`` pour le layout. Vous pouvez
+Ce qui est au-dessus utilise **src/Template/Email/html/welcome.ctp** pour la vue,
+et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
     $Email = new Email();
@@ -248,10 +248,10 @@ aussi envoyer des messages email templaté multipart::
 
 Ceci utiliserait les fichiers de template suivants:
 
-* ``src/Template/Email/text/welcome.ctp``
-* ``src/Template/Layout/Email/text/fancy.ctp``
-* ``src/Template/Email/html/welcome.ctp``
-* ``src/Template/Layout/Email/html/fancy.ctp``
+* **src/Template/Email/text/welcome.ctp**
+* **src/Template/Layout/Email/text/fancy.ctp**
+* **src/Template/Email/html/welcome.ctp**
+* **src/Template/Layout/Email/html/fancy.ctp**
 
 Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 ``text``, ``html`` soit ``both``.
@@ -295,7 +295,7 @@ d'utiliser le bon theme en utilisant la méthode ``Email::theme()``::
 Ceci vous permet de remplacer le template `new_comment` dans votre theme sans
 modifier le plugin Blog. Le fichier de template devra être créé dans le
 chemin suivant:
-``src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp``.
+**src/View/Themed/TestTheme/Blog/Email/text/new_comment.ctp**.
 
 Envoyer les pièces jointes
 ==========================
@@ -349,7 +349,7 @@ protocoles ou méthodes. CakePHP supporte les transports Mail (par défaut),
 Debug et SMTP.
 
 Pour configurer votre méthode, vous devez utiliser la méthode
-:php:meth:`Cake\\Network\Email\\Email::transport()` ou avoir le transport dans
+:php:meth:`Cake\\Network\\Email\\Email::transport()` ou avoir le transport dans
 votre configuration::
 
     $email = new Email();
@@ -366,7 +366,7 @@ Créer des Transports Personnalisés
 
 Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres
 systèmes email (comme SwiftMailer). Pour créer votre transport, créez tout
-d'abord le fichier ``src/Network/Email/ExampleTransport.php`` (où
+d'abord le fichier **src/Network/Email/ExampleTransport.php** (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 
@@ -419,7 +419,7 @@ Envoyer des Messages Rapidement
 
 Parfois vous avez besoin d'une façon rapide d'envoyer un email, et vous n'avez
 pas particulièrement envie en même temps de définir un tas de configuration.
-:php:meth:`Cake\\Network\Email\\Email::deliver()` est présent pour ce cas.
+:php:meth:`Cake\\Network\\Email\\Email::deliver()` est présent pour ce cas.
 
 Vous pouvez créer votre configuration dans
 :php:meth:`Cake\\Network\\Email\\Email::config()`, ou utiliser un

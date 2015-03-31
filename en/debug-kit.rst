@@ -27,7 +27,7 @@ Database Configuration
 By default DebugKit will store panel data into a SQLite database in your
 application's ``tmp`` directory. If you cannot install pdo_sqlite, you can
 configure DebugKit to use a different database by defining a ``debug_kit``
-connection in your ``config/app.php`` file.
+connection in your **config/app.php** file.
 
 Toolbar Usage
 =============
@@ -87,9 +87,9 @@ applications.
 Creating a Panel Class
 ----------------------
 
-Panel Classes simply need to be placed in the ``src/Panel`` directory. The
+Panel Classes simply need to be placed in the **src/Panel** directory. The
 filename should match the classname, so the class ``MyCustomPanel`` would be
-expected to have a filename of ``src/Panel/MyCustomPanel.php``::
+expected to have a filename of **src/Panel/MyCustomPanel.php**::
 
     namespace App\Panel;
 
@@ -111,7 +111,7 @@ Callbacks
 By default Panel objects have two callbacks, allowing them to hook into the
 current request. Panels subscribe to the ``Controller.initialize`` and
 ``Controller.shutdown`` events. If your panel needs to subscribe to additional
-events, you can use the ``implementedEvents`` method to define all of the events
+events, you can use the ``implementedEvents()`` method to define all of the events
 your panel is interested in.
 
 You should refer to the built-in panels for some examples on how you can build
@@ -124,7 +124,7 @@ Each Panel is expected to have a view element that renders the content from the
 panel. The element name must be the underscored inflection of the class name.
 For example ``SessionPanel`` has an element named ``session_panel.ctp``, and
 SqllogPanel has an element named ``sqllog_panel.ctp``. These elements should be
-located in the root of your ``src/Template/Element`` directory.
+located in the root of your **src/Template/Element** directory.
 
 Custom Titles and Elements
 --------------------------

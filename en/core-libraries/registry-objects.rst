@@ -41,7 +41,7 @@ for your application.
 Disabling Callbacks
 ===================
 
-In previous versions collection objects provided a ``disable`` method to disable
+In previous versions collection objects provided a ``disable()`` method to disable
 objects from recieving callbacks. To do this now, you should use the features in
 the events system. For example you could disable component callbacks in the
 following way::

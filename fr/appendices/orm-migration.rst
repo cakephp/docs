@@ -218,7 +218,7 @@ et les résultats vous seront retournés.
 
 La plus grande différence que vous trouverez quand vous venez de CakePHP 2.x est
 que ``find('first')`` n'existe plus. Il existe un remplacement trivial pour
-cela et il s'agit de la méthode ``first``::
+cela et il s'agit de la méthode ``first()``::
 
     // Avant
     $article = $this->Article->find('first');
@@ -409,7 +409,7 @@ models avaient, ont été définies dans les propriétés comme ``$belongsTo`` e
 ``$hasMany``. Dans CakePHP 3.0, les associations sont créées avec les méthodes.
 L'utilisation de méthodes vous permet de mettre de côté plusieurs définitions
 de classes de limitations, et fournissent seulement une façon de définir les
-associations. Votre méthode ``initialize`` et toutes les autres parties de
+associations. Votre méthode ``initialize()`` et toutes les autres parties de
 votre code d'application, intéragit avec la même API lors de la
 manipulation des associations::
 
@@ -504,7 +504,7 @@ utilisant l'option ``validate``. Consultez la documentation
 les règles qui s'assurent que vos règles d'application, l'état et les flux de
 travail sont remplis. Les règles sont définies dans la méthode ``buildRules()``
 de votre Table. Les behaviors peuvent ajouter des règles en utilisant la méthode
-``buildRules()``. Un exemple de méthode ``buildRules`` pour notre table
+``buildRules()``. Un exemple de méthode ``buildRules()`` pour notre table
 articles pourrait être::
 
     // Dans src/Model/Table/ArticlesTable.php
@@ -586,7 +586,7 @@ Nouvelle classe de Base
 La classe de base pour les behaviors a changé. Les Behaviors doivent maintenant
 étendre ``Cake\ORM\Behavior``; si un behavior n'étend pas cette classe, une
 exception sera lancée. En plus du changement de classe de base, le contructeur
-pour les behaviors a été modifié, et la méthode ``startup`` a été retirée.
+pour les behaviors a été modifié, et la méthode ``startup()`` a été retirée.
 Les Behaviors qui ont besoin d'accéder à la table à laquelle ils sont attachés,
 doivent définir un constructeur::
 
@@ -618,7 +618,7 @@ changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
     // Supposons que la table a une méthode slug() fournie par un behavior.
     $table->slug($someValue);
 
-Le behavior qui fournit la méthode ``slug`` va recevoir seulement 1 argument,
+Le behavior qui fournit la méthode ``slug()`` va recevoir seulement 1 argument,
 et ses méthodes signature doivent ressembler à ceci::
 
     public function slug($value)

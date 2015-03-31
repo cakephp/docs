@@ -20,7 +20,7 @@ l'extension .rss demandée à ``posts/index`` pour en faire votre URL
 ``posts/index.rss``. Avant d'aller plus loin en essayant d'initialiser et
 de lancer notre service Web, nous avons besoin de faire un certain nombre
 de choses. Premièrement, le parsing d'extensions doit être activé dans
-``config/routes.php``::
+**config/routes.php**::
 
     Router::extensions('rss');
 
@@ -92,7 +92,7 @@ Layout
 ------
 
 Un layout Rss est très simple, mettez les contenus suivants dans
-``src/Template/Layout/rss/default.ctp``::
+**src/Template/Layout/rss/default.ctp**::
 
     if (!isset($documentData)) {
         $documentData = [];
@@ -115,13 +115,13 @@ données meta pour notre flux.
 
 Ensuite il y a le fichier de vue pour mes posts/index. Un peu comme le fichier
 de layout que nous avons crée, nous avons besoin de créer un répertoire
-``src/Template/Posts/rss/`` et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
+**src/Template/Posts/rss/** et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
 Les contenus du fichier sont ci-dessous.
 
 View
 ----
 
-Notre vue, localisée dans ``src/Template/Posts/rss/index.ctp``, commence par
+Notre vue, localisée dans **src/Template/Posts/rss/index.ctp**, commence par
 définir les variables ``$documentData`` et ``$channelData`` pour le layout,
 celles-ci contiennent toutes les metadonnées pour notre flux RSS. C'est fait
 en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la

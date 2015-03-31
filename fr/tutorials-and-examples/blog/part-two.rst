@@ -12,8 +12,8 @@ tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 Les fichiers des classes de model de CakePHP sont séparés entre des objets
 ``Table`` et ``Entity``. Les objets ``Table`` fournissent un accès à la
 collection des entities stockées dans une table spécifique et vont dans
-``src/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
-``src/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
+**src/Model/Table**. Le fichier que nous allons créé sera sauvegardé dans
+**src/Model/Table/ArticlesTable.php**. Le fichier complété devrait ressembler
 à ceci::
 
     // src/Model/Table/ArticlesTable.php
@@ -38,8 +38,8 @@ de la base de données appelée ``articles``.
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
-    pas le fichier correspondant dans ``src/Model/Table``. Cela veut aussi dire que
-    si vous n'avez pas nommé correctement votre fichier (par ex.
+    pas le fichier correspondant dans **src/Model/Table**. Cela veut aussi dire
+    que si vous n'avez pas nommé correctement votre fichier (par ex.
     articlestable.php ou ArticleTable.php). CakePHP ne reconnaîtra pas votre
     configuration et utilisera les objets par défaut.
 
@@ -54,7 +54,7 @@ Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
-``ArticlesController.php`` à l'intérieur du dossier ``src/Controller``. Voici
+``ArticlesController.php`` à l'intérieur du dossier **src/Controller**. Voici
 à quoi devrait ressembler le controller de base ::
 
     // src/Controller/ArticlesController.php
@@ -130,7 +130,7 @@ la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre l'objet query à la vue  pour être invoqué par une
 itération ``foreach``.
 
-Les fichiers de template de CakePHP sont stockés dans ``src/Template`` à
+Les fichiers de template de CakePHP sont stockés dans **src/Template** à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
 aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
 données de ces articles dans un joli tableau, le code de notre vue devrait
@@ -238,7 +238,7 @@ existe. Dans le cas où l'article requêté n'est pas présent dans la base de
 données, la fonction ``get()`` va lancer une ``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
-dans ``src/Template/Articles/view.ctp``.
+dans **src/Template/Articles/view.ctp**.
 
 .. code-block:: php
 
@@ -329,7 +329,7 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode magique ``__call`` du Component Flash pour
+Nous utilisons la méthode magique ``__call()`` du Component Flash pour
 définir un message dans une variable de session et qui sera affiché dans la page
 juste après la redirection. Dans le layout, nous avons
 ``<?= $this->Flash->render() ?>`` qui permet
@@ -399,7 +399,7 @@ champs cachés si la protection de falsification de formulaire et/ou CRSF est
 activée.
 
 A présent, revenons en arrière et modifions notre vue
-``src/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
+**src/Template/Articles/index.ctp** pour ajouter un lien "Ajouter un article".
 Ajoutez la ligne suivante avant ``<table>`` ::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
@@ -429,7 +429,7 @@ ajustements::
         }
     }
 
-Le méthode ``validationDefault`` indique à CakePHP comment valider vos données
+Le méthode ``validationDefault()`` indique à CakePHP comment valider vos données
 lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les
 deux champs "body" et "title" ne doivent pas être vides. Le moteur de
 validation de CakePHP est puissant, il dispose d'un certain nombre de
@@ -645,7 +645,7 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Articles
 (ArticlesController).
 
-Le routage de CakePHP se trouve dans ``config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans **config/routes.php**. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela:
 

@@ -70,11 +70,11 @@ do LEIA-ME `aqui <https://github.com/composer/windows-setup>`_.
 Agora que você baixou e instalou o Composer, você pode receber uma nova
 aplicação CakePHP executando::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 Ou se o Composer estiver instalado globalmente::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Uma vez que o Composer terminar de baixar o esqueleto da aplicação e o núcleo
 da biblioteca CakePHP, você deve ter uma aplicação funcional
@@ -91,7 +91,7 @@ Se você quer se manter atualizado com as últimas mudanças no CakePHP, você p
 adicionar o seguinte ao ``composer.json`` de sua aplicação::
 
     "require": {
-        "cakephp/cakephp": "3.0.*-dev"
+        "cakephp/cakephp": "dev-master"
     }
 
 Onde ``<branch>`` é o nome do branch que você segue. Toda vez que você executar

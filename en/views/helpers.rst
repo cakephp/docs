@@ -69,7 +69,7 @@ organized::
     }
 
 If you need to enable a helper for all controllers add the name of
-the helper to the ``$helpers`` array in ``src/Controller/AppController.php`` (or
+the helper to the ``$helpers`` array in **src/Controller/AppController.php** (or
 create if not present). Remember to include the default Html and
 Form helpers::
 
@@ -122,12 +122,6 @@ your helper requires. For example::
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
         ];
-
-        public function __construct(View $view, $config = [])
-        {
-            parent::__construct($view, $config);
-            $this->initStringTemplates();
-        }
     }
 
 Any configuration provided to your helper's constructor will be merged with the
@@ -196,7 +190,7 @@ doing the following::
 
     echo $this->Html->css('styles');
 
-The above would call the ``css`` method on the HtmlHelper. You can
+The above would call the ``css()`` method on the HtmlHelper. You can
 access any loaded helper using ``$this->{$helperName}``.
 
 Loading Helpers On The Fly
@@ -229,7 +223,7 @@ Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed at many different
 places in your application. In order to fit your logic into
 CakePHP's existing helper structure, you'll need to create a new
-class in ``src/View/Helper``. Let's call our helper LinkHelper. The
+class in **src/View/Helper**. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
     /* src/View/Helper/LinkHelper.php */
@@ -279,7 +273,7 @@ Using Your Helper
 -----------------
 
 Once you've created your helper and placed it in
-``src/View/Helper/``, you'll be able to include it in your
+**src/View/Helper/**, you'll be able to include it in your
 controllers using the special variable :php:attr:`~Controller::$helpers`::
 
     class PostsController extends AppController

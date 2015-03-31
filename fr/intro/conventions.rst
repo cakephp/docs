@@ -114,10 +114,10 @@ Conventions des Views
 Les fichiers de template de view sont nommés d'après les fonctions
 du controller qu'elles affichent, sous une forme avec underscores.
 La fonction soyezPret() de la classe PeopleController cherchera un gabarit
-de view dans ``src/Template/People/soyez_pret.ctp``.
+de view dans **src/Template/People/soyez_pret.ctp**.
 
 Le schéma classique est
-``src/Template/Controller/nom_de_fonction_avec_underscore.ctp``.
+**src/Template/Controller/nom_de_fonction_avec_underscore.ctp**.
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
 de votre application, vous gagnerez des fonctionnalités sans les tracas et les
@@ -126,11 +126,11 @@ abordées :
 
 -  Nom de la table de la base de données: "people"
 -  Classe Table: "PeopleTable" se trouvant dans
-   ``src/Model/Table/PeopleTable.php``
--  Classe Entity: "Person" se trouvant dans ``src/Model/Entity/Person.php``
+   **src/Model/Table/PeopleTable.php**
+-  Classe Entity: "Person" se trouvant dans **src/Model/Entity/Person.php**
 -  Classe Controller: "PeopleController" se trouvant dans
-   ``src/Controller/PeopleController.php``
--  Template de View se trouvant dans ``src/Template/People/index.ctp``
+   **src/Controller/PeopleController.php**
+-  Template de View se trouvant dans **src/Template/People/index.ctp**
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/personnes/ sera liée à un appel à la fonction ``index()`` du

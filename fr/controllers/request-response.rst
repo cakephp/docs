@@ -259,6 +259,7 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
 
 * ``is('get')`` Vérifie si la requête courante est un GET.
 * ``is('put')`` Vérifie si la requête courante est un PUT.
+* ``is('patch')`` Vérifie si la requête courante est un PATCH.
 * ``is('post')`` Vérifie si la requête courante est un POST.
 * ``is('delete')`` Vérifie si la requête courante est un DELETE.
 * ``is('head')`` Vérifie si la requête courante est un HEAD.
@@ -266,10 +267,13 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
 * ``is('ajax')`` Vérifie si la requête courante vient d'un
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Vérifie si la requête courante est via SSL.
-* ``is('flash')`` Vérifie si la requête courante à un User-Agent
-  de Flash.
-* ``is('mobile')`` Vérifie si la requête courante vient d'une liste
-  courante de mobiles.
+* ``is('flash')`` Vérifie si la requête courante a un User-Agent de Flash.
+* ``is('requested')`` Vérifie si la requête a un paramètre de requête
+  'requested' avec la valeur 1.
+* ``is('json')`` Vérifie si la requête a l'extension 'json' ajoutée et si elle
+  accepte le mimetype 'application/json'.
+* ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle
+  accepte le mimetype 'application/xml' ou 'text/xml'.
 
 Données de Session
 ------------------
@@ -420,7 +424,7 @@ Changer la Classe Response
 CakePHP utilise ``Response`` par défaut. ``Response`` est une classe
 flexible et transparente. Si vous avez besoin de la remplacer avec une
 classe spécifique de l'application, vous pouvez remplacer
-``Response`` dans ``webroot/index.php``.
+``Response`` dans **webroot/index.php**.
 
 Cela fera que tous les controllers dans votre application utiliseront
 ``VotreResponse`` au lieu de :php:class:`Cake\\Network\\Response`. Vous pouvez
@@ -472,7 +476,7 @@ requêtes. Vous pouvez faire cela en utilisant
 
     public function sendFile($id)
     {
-        $file = $this->Attachment->getFile($id);
+        $file = $this->Attachments->getFile($id);
         $this->response->file($file['path']);
         //Retourne un objet réponse pour éviter que le controller n'essaie de
         // rendre la vue
@@ -512,7 +516,7 @@ chaine::
 
     public function sendIcs()
     {
-        $icsString = $this->Calendar->generateIcs();
+        $icsString = $this->Calendars->generateIcs();
         $this->response->body($icsString);
         $this->response->type('ics');
 
@@ -702,8 +706,8 @@ soit appeler manuellement la méthode
 
     public function index()
     {
-        $articles = $this->Article->find('all');
-        $this->response->etag($this->Article->generateHash($articles));
+        $articles = $this->Articles->find('all');
+        $this->response->etag($this->Articles->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
@@ -728,8 +732,8 @@ soit appeler manuellement la méthode
 
     public function view()
     {
-        $article = $this->Article->find('first');
-        $this->response->modified($article['Article']['modified']);
+        $article = $this->Articles->find()->first();
+        $this->response->modified($article->modified);
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }

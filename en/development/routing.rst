@@ -302,7 +302,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``action`` Used to name the controller action for a route.
 * ``plugin`` Used to name the plugin a controller is located in.
 * ``prefix`` Used for :ref:`prefix-routing`
-* ``_ext`` Used for :ref:`file-extensions` routing.
+* ``_ext`` Used for :ref:`File extentions routing <file-extensions>`.
 * ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
   cake relative URLs are required when using requestAction.
@@ -416,11 +416,11 @@ namespace. By having prefixes as separate controllers you can create smaller and
 simpler controllers. Behavior that is common to the prefixed and non-prefixed
 controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
-the URL ``/admin/users/edit/5`` would call the ``edit`` method of our
-``src/Controller/Admin/UsersController.php`` passing 5 as the first parameter. The
-view file used would be ``src/Template/Admin/Users/edit.ctp``
+the URL ``/admin/users/edit/5`` would call the ``edit()`` method of our
+**src/Controller/Admin/UsersController.php** passing 5 as the first parameter. The
+view file used would be **src/Template/Admin/Users/edit.ctp**
 
-You can map the URL /admin to your ``index`` action of pages controller using
+You can map the URL /admin to your ``index()`` action of pages controller using
 following route::
 
     Router::prefix('admin', function ($routes) {
@@ -428,6 +428,15 @@ following route::
         // you do not need to include the /admin prefix
         // or the admin route element.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
+    });
+
+When creating prefix routes, you can set additional route parameters using
+the ``$options`` argument::
+
+    Router::prefix('admin', ['param' => 'value'], function ($routes) {
+        // Routes connected here are prefixed with '/admin' and
+        // have the 'param' routing key set.
+        $routes->connect('/:controller');
     });
 
 You can define prefixes inside plugin scopes as well::
@@ -539,7 +548,7 @@ application with the ability to route plugin, controller, and camelized action
 names to a dashed URL.
 
 For example, if we had a ``ToDo`` plugin, with a ``TodoItems`` controller, and a
-``showItems`` action, it could be accessed at ``/to-do/todo-items/show-items``
+``showItems()`` action, it could be accessed at ``/to-do/todo-items/show-items``
 with the following router connection::
 
     Router::plugin('ToDo', ['path' => 'to-do'], function ($routes) {
@@ -580,10 +589,10 @@ By using extensions, you tell the router to remove any matching file extensions,
 and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
-    Router::scope('/api', function ($routes) {
+    Router::scope('/page', function ($routes) {
         $routes->extensions(['json', 'xml']);
         $routes->connect(
-            '/page/:title',
+            '/:title',
             ['controller' => 'Pages', 'action' => 'view'],
             [
                 'pass' => ['title']
@@ -697,15 +706,48 @@ Changing the Controller Actions Used
 ------------------------------------
 
 You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit`` action is called ``update`` you can use
-the ``actions`` key to rename the actions used::
+routes. For example, if your ``edit()`` action is called ``update()`` you can
+use the ``actions`` key to rename the actions used::
 
     $routes->resources('Articles', [
-        'actions' => ['update' => 'update', 'add' => 'create']
+        'actions' => ['edit' => 'update', 'add' => 'create']
     ]);
 
-The above would use ``update`` for the update action, and ``create`` instead of
-``add``.
+The above would use ``update()`` for the ``edit()`` action, and ``create()``
+instead of ``add()``.
+
+Mapping Additional Resource Routes
+----------------------------------
+
+You can map additional resource methods using the ``map`` option::
+
+     $routes->resources('Articles', [
+        'map' => [
+            'deleteAll' => [
+                'action' => 'deleteAll',
+                'method' => 'DELETE'
+            ]
+        ]
+     ]);
+     // This would connect /articles/deleteAll
+
+In addition to the default routes, this would also connect a route for
+`/articles/delete_all`. By default the path segment will match the key name. You
+can use the 'path' key inside the resource definition to customize the path name::
+
+
+    $routes->resources('Articles', [
+        'map' => [
+            'updateAll' => [
+                'action' => 'updateAll',
+                'method' => 'DELETE',
+                'path' => '/update_many'
+            ],
+        ]
+    ]);
+    // This would connect /articles/update_many
+
+If you define 'only' and 'map', make sure that your mapped methods are also in the 'only' list.
 
 .. _custom-rest-routing:
 
@@ -853,7 +895,7 @@ Redirect Routing
 Redirect routing allows you to issue HTTP status 30x redirects for
 incoming routes, and point them at different URLs. This is useful
 when you want to inform client applications that a resource has moved
-and you don't want to expose two URLs for the same content
+and you don't want to expose two URLs for the same content.
 
 Redirection routes are different from normal routes as they perform an actual
 header redirection if a match is found. The redirection can occur to
@@ -1000,6 +1042,8 @@ RequestActionTrait
 
         If used without caching ``requestAction`` can lead to poor
         performance. It is seldom appropriate to use in a controller.
+        A better alternative to using ``requestAction`` is creating 
+        :doc:`/views/cells`
 
     ``requestAction`` is best used in conjunction with (cached)
     elements – as a way to fetch data for an element before rendering.
@@ -1015,10 +1059,7 @@ RequestActionTrait
                 if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }
-                return $this->Comments->find('all', [
-                    'order' => 'Comment.created DESC',
-                    'limit' => 10
-               ]);
+                return $this->Comments->find()->order('created')->limit(10);
             }
         }
 

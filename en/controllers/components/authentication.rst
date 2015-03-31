@@ -242,7 +242,9 @@ Creating Custom Authentication Objects
 Because authentication objects are pluggable, you can create custom
 authentication objects in your application or plugins. If for example
 you wanted to create an OpenID authentication object. In
-``src/Auth/OpenidAuthenticate.php`` you could put the following::
+**src/Auth/OpenidAuthenticate.php** you could put the following::
+
+    namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
 
@@ -338,7 +340,7 @@ Displaying Auth Related Flash Messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the ``src/Template/Layout/default.ctp`` file in the body section::
+lines to the **src/Template/Layout/default.ctp** file in the body section::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
@@ -406,8 +408,8 @@ Creating Custom Password Hasher Classes
 ---------------------------------------
 
 In order to use a different password hasher, you need to create the class in
-``src/Auth/LegacyPasswordHasher.php`` and implement the
-``hash`` and ``check`` methods. This class needs to extend the
+**src/Auth/LegacyPasswordHasher.php** and implement the
+``hash()`` and ``check()`` methods. This class needs to extend the
 ``AbstractPasswordHasher`` class::
 
     namespace App\Auth;
@@ -691,7 +693,7 @@ Creating Custom Authorize Objects
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example you wanted to
 create an LDAP authorize object. In
-``src/Auth/LdapAuthorize.php`` you could put the
+**src/Auth/LdapAuthorize.php** you could put the
 following::
 
     namespace App\Auth;

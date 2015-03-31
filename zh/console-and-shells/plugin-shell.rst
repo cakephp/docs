@@ -1,8 +1,10 @@
-Plugin Assets Shell
-###################
+.. _plugin-shell:
+
+Plugin Shell
+############
 
 .. note::
-    The documentation is not currently supported in Japanese language for this
+    The documentation is not currently supported in Chinese language for this
     page.
 
     Please feel free to send us a pull request on
@@ -13,5 +15,5 @@ Plugin Assets Shell
     information about this page's topic.
 
 .. meta::
-    :title lang=ja: Plugin Assets Shell
-    :keywords lang=ja: plugin,assets
+    :title lang=zh: Plugin Shell
+    :keywords lang=zh: api docs,shell,plugin,load,unload

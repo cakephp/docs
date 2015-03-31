@@ -377,7 +377,7 @@ campos ocultos si la CSRF/prevención de manipulación de formularios ha sido
 habilitada.
 
 Volvamos atrás un minuto y actualicemos nuestra vista
-``src/Template/Articles/index.ctp`` para añadir un enlace de "Añadir Artículo".
+**src/Template/Articles/index.ctp** para añadir un enlace de "Añadir Artículo".
 Justo antes del tag <table> añade la siguiente línea::
 
     <?= $this->Html->link(

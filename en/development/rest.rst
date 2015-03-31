@@ -108,7 +108,7 @@ serialize into XML.
 
 If we wanted to modify the data before it is converted into XML we should not
 define the ``_serialize`` view variable, and instead use template files. We place
-the REST views for our RecipesController inside ``src/Template/recipes/xml``. We can also use
+the REST views for our RecipesController inside **src/Template/recipes/xml**. We can also use
 the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
@@ -165,6 +165,12 @@ it will decode any incoming JSON/XML input data for POST/PUT requests
 and supply the array version of that data in ``$this->request->data``.
 You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`RequestHandler::addInputType()`.
+
+RESTful Routing
+===============
+
+CakePHP's Router makes connecting RESTful resource routes easy. See the section
+on :ref:`resource-routes` for more information.
 
 .. meta::
     :title lang=en: REST

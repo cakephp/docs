@@ -12,7 +12,7 @@ are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
 is added containing the CSRF token. During the ``Controller.startup`` event, if
 the request is a POST, PUT, DELETE, PATCH request the component will compare the
 request data & cookie value. If either is missing or the two values mismatch the
-component will throw a :php:class:`Cake\Network\Exception\ForbiddenException`.
+component will throw a :php:class:`Cake\\Network\\Exception\\ForbiddenException`.
 
 Using the CsrfComponent
 =======================
@@ -68,7 +68,7 @@ Disabling the CSRF Component for Specific Actions
 
 While not recommended, you may want to disable the CsrfComponent on certain
 requests. You can do this using the controller's event dispatcher, during the
-``beforeFilter`` method::
+``beforeFilter()`` method::
 
     public function beforeFilter(Event $event)
     {

@@ -40,7 +40,7 @@ Language Files
 Translations can be made available by using language files stored in your
 application. The default format for CakePHP translation files is the
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
-placed under ``src/Locale/`` and within this directory, there should be
+placed under **src/Locale/** and within this directory, there should be
 a subfolder for each language the application needs to support::
 
     /src
@@ -94,7 +94,7 @@ the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
 Setting the Default Locale
 --------------------------
 
-The default locale can be set in your ``config/bootstrap.php`` folder by using
+The default locale can be set in your **config/bootstrap.php** folder by using
 the following line::
 
     ini_set('intl.default_locale', 'fr_FR');
@@ -161,6 +161,16 @@ All translation functions support placeholder replacements::
     __d('validation', 'The field {0} cannot be left empty', 'Name');
 
     __x('alphabet', 'He read the letter {0}', 'Z');
+
+The ``'`` (single quote) character acts as an escape code in translation
+messages. Any variables between single quotes will not be replaced and is
+treated as literal text. For example::
+
+    __("This variable '{0}' be replaced.", 'will not');
+
+By using two adjacent quotes your variables will be replaced properly::
+
+    __("This variable ''{0}'' be replaced.", 'will');
 
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
@@ -358,7 +368,7 @@ for a single domain and locale::
         return $package;
     });
 
-The above code can be added to your ``config/bootstrap.php`` so that
+The above code can be added to your **config/bootstrap.php** so that
 translations can be found before any translation function is used. The absolute
 minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
@@ -402,9 +412,9 @@ class::
         }
     }
 
-The file should be created in the ``src/I18n/Parser`` directory of your
+The file should be created in the **src/I18n/Parser** directory of your
 application. Next, create the translations file under
-``src/Locale/fr_FR/animals.yaml``
+**src/Locale/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 
@@ -490,7 +500,7 @@ by the ICU message formatting, CakePHP also provides the ``sprintf`` formatter::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-The messages to be translated will be passed to the ``sprintf`` function for
+The messages to be translated will be passed to the ``sprintf()`` function for
 interpolating the variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);

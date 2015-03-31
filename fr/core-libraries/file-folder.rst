@@ -3,9 +3,9 @@ Folder & File
 
 .. php:namespace:: Cake\Filesystem
 
-Les utilitaires Folder et File sont des classes pratiques pour aider à la
-lecture, l'écriture/l'ajout de fichiers; Lister les fichiers d'un dossier
-et autres tâches habituelles liées aux répertoires.
+Les utilitaires Folder et File sont des classes pratiques pour la
+lecture, l'écriture/l'ajout de fichiers, lister les fichiers d'un dossier
+et toute autre tâche habituelle liée aux répertoires.
 
 Utilisation Basique
 ===================
@@ -33,7 +33,7 @@ Maintenant nous pouvons faire une boucle sur les fichiers et les lire,
         // $file->write('J'écris dans ce fichier');
         // $file->append('J'ajoute à la fin de ce fichier.');
         // $file->delete(); // Je supprime ce fichier
-        $file->close(); // Assurez vous de fermer le fichier quand c'est fini
+        $file->close(); // Assurez-vous de fermer le fichier quand c'est fini
     }
 
 API de Folder
@@ -53,7 +53,7 @@ API de Folder
 
 .. php:attr:: sort
 
-    Dit si la liste des résultats doit être oui ou non rangée par name.
+    Dit si la liste des résultats doit être oui ou non rangée selon name.
 
 .. php:attr:: mode
 
@@ -115,9 +115,9 @@ API de Folder
     * ``Folder::MERGE`` fusionne les répertoires source/destination. Les
       fichiers dans le répertoire source vont remplacer les fichiers dans le
       répertoire de cible. Les contenus du répertoire seront fusionnés.
-    * ``Folder::OVERWRITE`` écrase les fichiers & répertoires existant dans la
-      répertoire cible avec ceux dans le répertoire source. Si les deux source
-      et destination contiennent le même sous-répertoire, les contenus du
+    * ``Folder::OVERWRITE`` écrase les fichiers & répertoires existant dans le
+      répertoire cible avec ceux dans le répertoire source. Si la source
+      et la destination contiennent le même sous-répertoire, les contenus du
       répertoire de cible vont être retirés et remplacés avec celui de la
       source.
 
@@ -128,7 +128,7 @@ API de Folder
 
 .. php:method:: create(string $pathname, integer $mode = false)
 
-    Crée une structure de répertoire de façon récursive. Peut être utilisé
+    Crée une structure de répertoire de façon récursive. Peut être utilisée
     pour créer des structures de chemin profond comme `/foo/bar/baz/shoe/horn`::
 
         $folder = new Folder();
@@ -304,7 +304,7 @@ L'API de File
 
 .. php:attr:: name
 
-    Le nom du fichier avec l'extension. Différe de :php:meth:`File::name()`
+    Le nom du fichier avec l'extension. Diffère de :php:meth:`File::name()`
     qui retourne le nom sans l'extension.
 
 .. php:attr:: info
@@ -317,7 +317,7 @@ L'API de File
 
 .. php:attr:: lock
 
-    Active le blocage du fichier en lecture et écriture.
+    Active le blocage du fichier en lecture et en écriture.
 
 .. php:attr:: path
 
@@ -345,7 +345,7 @@ L'API de File
 
 .. php:method:: executable()
 
-    Retourne ``true`` si le Fichier est executable.
+    Retourne ``true`` si le Fichier est exécutable.
 
 .. php:method:: exists()
 
@@ -405,7 +405,7 @@ L'API de File
     Prépare une chaîne de caractères ascii pour l'écriture. Convertit les
     lignes de fin en un terminator correct pour la plateforme courante. Si
     c'est windows "\r\n" sera utilisé, toutes les autres plateformes
-    utiliseront "\n"
+    utiliseront "\n".
 
 .. php:method:: pwd()
 
@@ -444,8 +444,8 @@ L'API de File
 
 .. php:method:: replaceText( $search, $replace )
 
-    Remplace le texte dans un fichier. Retourne ``false`` en cas d'échec et ``true`` en cas de succès.
-
+    Remplace le texte dans un fichier. Retourne ``false`` en cas d'échec et ``true``
+    en cas de succès.
 
 .. meta::
     :title lang=fr: Folder & File

@@ -20,7 +20,7 @@ Syntaxe de chemin Hash
 ======================
 
 La syntaxe de chemin décrite ci-dessous est utilisée par toutes les méthodes
-dans ``Hash``. Les parties de la syntaxe du chemin ne sont pas toutes
+dans ``hash()``. Les parties de la syntaxe du chemin ne sont pas toutes
 disponibles dans toutes les méthodes. Une expression en chemin est faite
 depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux
 groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
@@ -90,17 +90,22 @@ Les Types d'Attribut Correspondants
 .. php:staticmethod:: extract(array $data, $path)
 
     ``Hash::extract()`` supporte toutes les expressions, les components
-    matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
+    matcher de la :ref:`hash-path-syntax`. Vous pouvez utiliser l'extract pour
     récupérer les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier
     les éléments que vous souhaitez retourner ::
 
         // Utilisation habituelle:
-        $users = $this->User->find("all");
-        $results = Hash::extract($users, '{n}.User.id');
+        $users = [
+            ['id' => 1, 'name' => 'mark'],
+            ['id' => 2, 'name' => 'jane'],
+            ['id' => 3, 'name' => 'sally'],
+            ['id' => 4, 'name' => 'jose'],
+        ];
+        $results = Hash::extract($users, '{n}.id');
         // $results égal à:
-        // [1,2,3,4,5,...];
+        // [1,2,3,4];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
@@ -114,18 +119,17 @@ Les Types d'Attribut Correspondants
         [
             [pages] => [
                     [name] => page
-	]
+            ]
             [files] => [
 
                     [name] => files
-	]
+            ]
         ]
 
     Vous pouvez utiliser les chemins en utilisant ``{n}`` et ``{s}`` pour
     insérer des données dans des points multiples::
 
-        $users = $this->User->find('all');
-        $users = Hash::insert($users, '{n}.User.new', 'value');
+        $users = Hash::insert($users, '{n}.new', 'value');
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
@@ -140,7 +144,7 @@ Les Types d'Attribut Correspondants
             [
                 [pages] => [
                         [name] => page
-	    ]
+            ]
 
             ]
         */
@@ -758,8 +762,7 @@ Les Types d'Attribut Correspondants
 .. php:staticmethod:: nest(array $data, array $options = [])
 
     Prend un ensemble de tableau aplati, et crée une structure de données
-    imbriquée ou chaînée. Utilisé par des méthodes comme
-    ``Model::find('threaded')``.
+    imbriquée ou chaînée.
 
     **Options:**
 
@@ -776,50 +779,50 @@ Les Types d'Attribut Correspondants
     Exemple::
 
         $data = [
-            ['ModelName' => ['id' => 1, 'parent_id' => null]],
-            ['ModelName' => ['id' => 2, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 3, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 4, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 5, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 6, 'parent_id' => null]],
-            ['ModelName' => ['id' => 7, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 8, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 9, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 10, 'parent_id' => 6]]
+            ['ThreadPost' => ['id' => 1, 'parent_id' => null]],
+            ['ThreadPost' => ['id' => 2, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 3, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 4, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 5, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 6, 'parent_id' => null]],
+            ['ThreadPost' => ['id' => 7, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 8, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 9, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 10, 'parent_id' => 6]]
         ];
 
         $result = Hash::nest($data, ['root' => 6]);
         /* $result ressemble maintenant à:
             [
                 (int) 0 => [
-                    'ModelName' => [
+                    'ThreadPost' => [
                         'id' => (int) 6,
                         'parent_id' => null
                     ],
                     'children' => [
                         (int) 0 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 7,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 1 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 8,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 2 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 9,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 3 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 10,
                                 'parent_id' => (int) 6
                             ],
@@ -829,7 +832,6 @@ Les Types d'Attribut Correspondants
                 ]
             ]
             */
-
 
 .. meta::
     :title lang=fr: Hash

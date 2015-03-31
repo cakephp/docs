@@ -279,7 +279,7 @@ Auth の他の設定キー(authError や loginAction など)を authenticate や
 ログインが成功ならユーザが最後に訪れていたページか :php:attr:`AuthComponent::$loginRedirect` へと redirect します。ログインが失敗なら、フラッシュメッセージがセットされます。
 
 ..
-  The above code (without any data passed to the ``login`` method),
+  The above code (without any data passed to the ``login()`` method),
   will attempt to log a user in using the POST data,
   and if successful redirect the user to either the last page they were visiting,
   or :php:attr:`AuthComponent::$loginRedirect`.  If the login is unsuccessful, a flash message is set.

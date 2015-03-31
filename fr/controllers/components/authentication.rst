@@ -138,8 +138,8 @@ Pour configurer les différents champs de l'utilisateur dans la méthode ``initi
     }
 
 Ne mettez pas d'autre clés de configuration de Auth (comme authError,
-loginAction, ...) au sein d'élément ``authenticate`` ou ``Form``. Ils doivent 
-se trouver au même niveau que la clé d'authentification. La configuration 
+loginAction, ...) au sein d'élément ``authenticate`` ou ``Form``. Ils doivent
+se trouver au même niveau que la clé d'authentification. La configuration
 ci-dessus avec d'autres configurations ressemblerait à quelque chose comme::
 
     public function initialize()
@@ -235,7 +235,7 @@ Si aucun paramètre n'est passé, elle obtient l'URL de redirection
 d'authentification. L'URL retournée correspond aux règles suivantes:
 
 - Retourne l'URL normalisée de valeur ``Auth.redirect`` si elle est
-  présente en session et pour le même domaine que celui sur lequel 
+  présente en session et pour le même domaine que celui sur lequel
   application est exécuté.
 - S'il n'y a pas de valeur en session et qu'il y a une configuration
   ``loginRedirect``, la valeur de ``loginRedirect`` est retournée.
@@ -246,16 +246,16 @@ Utilisation de l'Authentification Digest et Basic pour la Connexion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Les authentifications basic et digest sont des schémas d'authentification
-sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si 
+sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
 vous utilisez seulement les authentificateurs basic / digest, vous n'avez pas
-besoin d'action login dans votre controller. Aussi, vous pouvez définir 
-``$this->Auth->sessionKey`` à ``false`` pour vous assurer que AuthComponent 
+besoin d'action login dans votre controller. Aussi, vous pouvez définir
+``$this->Auth->sessionKey`` à ``false`` pour vous assurer que AuthComponent
 n'essaie pas de lire les infos de l'utilisateur à partir de la session. Vous
 voudrez peut-être aussi définir ``unauthorizedRedirect`` à ``false`` ce qui
 va entraîner l'envoi d'une ``ForbiddenException`` de AuthComponent à la place
-du comportement par défaut de redirection vers le référent. L'authentification 
-stateless va re-vérifier les certificats de l'utilisateur à chaque requête, 
-créant une petite quantité de charge supplémentaire, mais permet aux clients 
+du comportement par défaut de redirection vers le référent. L'authentification
+stateless va re-vérifier les certificats de l'utilisateur à chaque requête,
+créant une petite quantité de charge supplémentaire, mais permet aux clients
 de se connecter sans utiliser les cookies et est parfait pour le APIs.
 
 Créer des Objets d'Authentification Personnalisés
@@ -264,7 +264,9 @@ Créer des Objets d'Authentification Personnalisés
 Comme les objets d'authentification sont modulaires, vous pouvez créer des
 objets d'authentification personnalisés pour votre application ou plugins.
 Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
-``src/Auth/OpenidAuthenticate.php``, vous pourriez mettre ce qui suit::
+**src/Auth/OpenidAuthenticate.php**, vous pourriez mettre ce qui suit::
+
+    namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
 
@@ -327,7 +329,7 @@ L'authentification HTTP Basic utilise par exemple
 username et password. Pour chaque requête, ces valeurs sont utilisées pour
 ré-identifier l'utilisateur et s'assurer que c'est un utilisateur valide. Comme
 avec les méthodes d'authentification de l'objet ``authenticate()``, la méthode
-``getuser()`` devrait retourner un tableau d'information utilisateur en cas de 
+``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
 succès et ``false`` en cas d'echec. ::
 
     public function getUser($request)
@@ -349,10 +351,10 @@ utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 Gestion des Requêtes non Authentifiées
 --------------------------------------
 
-Quand un utilisateur non authentifié essaie d'accéder à une page protégée en 
+Quand un utilisateur non authentifié essaie d'accéder à une page protégée en
 premier, la méthode ``unauthenticated()`` du dernier authentificateur dans la
-chaîne est appelée. L'objet d'authentification peut gérer la réponse d'envoi 
-ou la redirection appropriée en retournant l'objet response pour indiquer 
+chaîne est appelée. L'objet d'authentification peut gérer la réponse d'envoi
+ou la redirection appropriée en retournant l'objet response pour indiquer
 qu'aucune action suivante n'est nécessaire du fait de l'ordre dans lequel vous
 spécifiez l'objet d'authentification dans les propriétés de ``authenticate``.
 
@@ -365,7 +367,7 @@ Afficher les Messages Flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
-suivantes au fichier ``src/Template/Layouts/default.ctp`` dans la section body::
+suivantes au fichier **src/Template/Layouts/default.ctp** dans la section body::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
@@ -425,8 +427,8 @@ directrice (setter) dans votre entity User::
     }
 
 AuthComponent est configuré par défaut pour utiliser ``DefaultPasswordHasher``
-lors de la validation des informations d'identification de l'utilisateur si 
-aucune configuration supplémentaire est requise afin d'authentifier les 
+lors de la validation des informations d'identification de l'utilisateur si
+aucune configuration supplémentaire est requise afin d'authentifier les
 utilisateurs.
 
 ``DefaultPasswordHasher`` utilise l'algorithme de hashage bcrypt en interne,
@@ -439,8 +441,8 @@ Créer des Classes de Hash de Mot de Passe Personnalisé
 ------------------------------------------------------
 
 Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
-dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` et
-``check``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
+dans **src/Auth/LegacyPasswordHasher.php** et intégrer les méthodes ``hash()`` et
+``check()``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
 
     namespace App\Auth;
 
@@ -625,7 +627,7 @@ accéder à l'utilisateur en cours de connexion en utilisant
     // Depuis l'intérieur du controler
     $this->Auth->user('id');
 
-Si l'utilisateur courant n'est pas connecté ou que la clé n'existe pas, 
+Si l'utilisateur courant n'est pas connecté ou que la clé n'existe pas,
 la valeur null sera retournée.
 
 Déconnexion des Utilisateurs
@@ -661,7 +663,7 @@ S'il est activé, ``ÀuthComponent`` peut vérifier automatiquement des
 gestionnaires d'autorisations et veiller à ce que les utilisateurs connectés
 soient autorisés à accéder aux ressources qu'ils demandent.
 Il y a plusieurs gestionnaires d'autorisations intégrés et vous
-pouvez créer vos propres gestionnaires pour votre application ou comme 
+pouvez créer vos propres gestionnaires pour votre application ou comme
 faisant partie d'un plugin par exemple.
 
 - ``ControllerAuthorize`` appelle ``isAuthorized()`` sur le controller actif
@@ -734,7 +736,7 @@ Création d'Objets Authorize Personnalisés
 
 Parce que les objets authorize sont modulables, vous pouvez créer des objets
 authorize personnalisés dans votre application ou plugins. Si par exemple
-vous voulez créer un objet authorize LDAP dans ``src/Auth/LdapAuthorize.php``,
+vous voulez créer un objet authorize LDAP dans **src/Auth/LdapAuthorize.php**,
 vous pourriez mettre cela::
 
     namespace App\Auth;
@@ -750,11 +752,11 @@ vous pourriez mettre cela::
         }
     }
 
-Les objets Authorize devraient retourner ``false`` si l'utilisateur se voit 
-refuser l'accès ou si l'objet est incapable de faire un contrôle. Si l'objet 
-est capable de vérifier l'accès de l'utilisateur, ``true`` devrait être 
-retourné. Il n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut 
-simplement que votre objet authorize implémente la méthode ``authorize()``. 
+Les objets Authorize devraient retourner ``false`` si l'utilisateur se voit
+refuser l'accès ou si l'objet est incapable de faire un contrôle. Si l'objet
+est capable de vérifier l'accès de l'utilisateur, ``true`` devrait être
+retourné. Il n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut
+simplement que votre objet authorize implémente la méthode ``authorize()``.
 La classe ``BaseAuthorize`` fournit un nombre intéressant de méthodes utiles
 qui sont communément utilisées.
 

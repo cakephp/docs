@@ -11,8 +11,8 @@ Une fois que vous avez chargé une entity, vous pouvez la supprimer en appelant
 la méthode delete de la table d'origine::
 
     // Dans un controller.
-    $entity = $articles->get(2);
-    $result = $articles->delete($entity);
+    $entity = $this->Articles->get(2);
+    $result = $this->Articles->delete($entity);
 
 Quand vous supprimez des entities, quelques actions se passent:
 
@@ -32,7 +32,7 @@ Quand vous supprimez des entities, quelques actions se passent:
 Par défaut, toutes les suppressions se passent dans une transaction. Vous
 pouvez désactiver la transaction avec l'option atomic::
 
-    $result = $articles->delete($entity, ['atomic' => false]);
+    $result = $this->Articles->delete($entity, ['atomic' => false]);
 
 Suppression en Cascade
 ----------------------

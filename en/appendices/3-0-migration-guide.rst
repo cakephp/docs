@@ -45,7 +45,7 @@ Namespaces
 ==========
 
 All of CakePHP's core classes are now namespaced and follow PSR-4 autoloading
-specifications. For example ``src/Cache/Cache.php`` is namespaced as
+specifications. For example **src/Cache/Cache.php** is namespaced as
 ``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
@@ -263,7 +263,7 @@ BakeShell / TemplateTask
 
 - Bake is no longer part of the core source and is superseded by
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
-- Bake templates have been moved under ``src/Template/Bake``.
+- Bake templates have been moved under **src/Template/Bake**.
 - The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
   templating logic, allowing php code to be treated as plain text.
 - The ``bake view`` command has been renamed ``bake template``.
@@ -580,9 +580,9 @@ CookieComponent
 
 - Uses :php:meth:`Cake\\Network\\Request::cookie()` to read cookie data,
   this eases testing, and allows for ControllerTestCase to set cookies.
-- Cookies encrypted in previous versions of CakePHP using the ``cipher`` method
+- Cookies encrypted in previous versions of CakePHP using the ``cipher()`` method
   are now un-readable because ``Security::cipher()`` has been removed. You will
-  need to re-encrypt cookies with the ``rijndael`` or ``aes`` method before upgrading.
+  need to re-encrypt cookies with the ``rijndael()`` or ``aes()`` method before upgrading.
 - ``CookieComponent::type()`` has been removed and replaced with configuration
   data accessed through ``config()``.
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
@@ -776,7 +776,7 @@ Both these issues are solved by converting themes into plugins.
 View Folders Renamed
 --------------------
 
-The folders containing view files now go under ``src/Template`` instead of ``src/View``.
+The folders containing view files now go under **src/Template** instead of **src/View**.
 This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
 
 The following View folders have been renamed to avoid naming collisions with controller names:
@@ -937,7 +937,7 @@ and reduce the problems people had in the past:
 - The ``submit()`` has had the ``div``, ``before`` and ``after`` options
   removed. You can customize the ``submitContainer`` template to modify this
   content.
-- The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
+- The ``inputs()`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
   It now also requires ``$fields`` parameter to be an array. The ``$blacklist``
   parameter has been removed, the functionality has been replaced by specifying

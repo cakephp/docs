@@ -11,8 +11,8 @@ edit, and delete operations later.
 
 CakePHP's model class files are split between ``Table`` and ``Entity`` objects.
 ``Table`` objects provide access to the collection of entities stored in a
-specific table and go in ``src/Model/Table``. The file we'll be creating will
-be saved to ``src/Model/Table/ArticlesTable.php``. The completed file should
+specific table and go in **src/Model/Table**. The file we'll be creating will
+be saved to **src/Model/Table/ArticlesTable.php**. The completed file should
 look like this::
 
     // src/Model/Table/ArticlesTable.php
@@ -37,7 +37,7 @@ be used in the ArticlesController, and will be tied to a database table called
 .. note::
 
     CakePHP will dynamically create a model object for you if it
-    cannot find a corresponding file in ``src/Model/Table``. This also means
+    cannot find a corresponding file in **src/Model/Table**. This also means
     that if you accidentally name your file wrong (i.e. articlestable.php or
     ArticleTable.php), CakePHP will not recognize any of your settings and will
     use the a generated model instead.
@@ -53,7 +53,7 @@ Next, we'll create a controller for our articles. The controller is
 where all interaction with articles will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
 related to articles done. We'll place this new controller in a file called
-``ArticlesController.php`` inside the ``src/Controller`` directory. Here's
+``ArticlesController.php`` inside the **src/Controller** directory. Here's
 what the basic controller should look like::
 
     // src/Controller/ArticlesController.php
@@ -124,7 +124,7 @@ Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
 object to the view to be invoked with a ``foreach`` iteration.
 
-CakePHP's template files are stored in ``src/Template`` inside a folder
+CakePHP's template files are stored in **src/Template** inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Articles' in this case). To format this article data in a
 nice table, our view code might look something like this:
@@ -227,7 +227,7 @@ is not present in the database, the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
-``src/Template/Articles/view.ctp``
+**src/Template/Articles/view.ctp**
 
 .. code-block:: php
 
@@ -317,7 +317,7 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use FlashComponent's magic ``__call`` method to set a message to a session
+We use FlashComponent's magic ``__call()`` method to set a message to a session
 variable, which will be displayed on the page after redirection. In the layout
 we have ``<?= $this->Flash->render() ?>`` which displays the message and clears
 the corresponding session variable. The controller's
@@ -381,7 +381,7 @@ field specified.
 The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
 CSRF/Form Tampering prevention is enabled.
 
-Now let's go back and update our ``src/Template/Articles/index.ctp``
+Now let's go back and update our **src/Template/Articles/index.ctp**
 view to include a new "Add Article" link. Before the ``<table>``, add
 the following line::
 
@@ -622,7 +622,7 @@ By default, CakePHP responds to a request for the root of your site
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 
-CakePHP's routing is found in ``config/routes.php``. You'll want
+CakePHP's routing is found in **config/routes.php**. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this:
 

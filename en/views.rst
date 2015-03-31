@@ -23,7 +23,7 @@ The App View
 
 ``AppView`` is your application’s default View class. ``AppView`` itself extends the
 ``Cake\View\View`` class included in CakePHP and is defined in
-``src/View/AppView.php`` as follows:
+**src/View/AppView.php** as follows:
 
 .. code-block:: php
 
@@ -71,11 +71,11 @@ serving to. If you'd prefer using a templating language like
 Twig, a subclass of View will bridge your templating
 language and CakePHP.
 
-Template files are stored in ``src/Template/``, in a folder named after the
+Template files are stored in **src/Template/**, in a folder named after the
 controller that uses the files, and named after the action it
 corresponds to. For example, the view file for the Products
 controller's "view()" action, would normally be found in
-``src/Template/Products/view.ctp``.
+**src/Template/Products/view.ctp**.
 
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
@@ -174,14 +174,14 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post['Post']['id']
+        $post->id
     ]); ?>
     </li>
     <?php $this->end(); ?>
 
     // The remaining content will be available as the 'content' block
     // In the parent view.
-    <?= h($post['Post']['body']) ?>
+    <?= h($post->body) ?>
 
 The post view above shows how you can extend a view, and populate a set of
 blocks. Any content not already in a defined block will be captured and put
@@ -345,12 +345,12 @@ A layout contains presentation code that wraps around a view.
 Anything you want to see in all of your views should be placed in a
 layout.
 
-CakePHP's default layout is located at ``src/Template/Layout/default.ctp``.
+CakePHP's default layout is located at **src/Template/Layout/default.ctp**.
 If you want to change the overall look of your application, then this is
 the right place to start, because controller-rendered view code is placed
 inside of the default layout when the page is rendered.
 
-Other layout files should be placed in ``src/Template/Layout``.
+Other layout files should be placed in **src/Template/Layout**.
 When you create a layout, you need to tell CakePHP where to place
 the output of your views. To do so, make sure your layout includes a
 place for ``$this->fetch('content')`` Here's an example of what a default layout
@@ -404,7 +404,7 @@ You can set the ``title`` block content from inside your view file::
     $this->assign('title', 'View Active Users');
 
 You can create as many layouts as you wish: just place them in the
-``src/Template/Layout`` directory, and switch between them inside of your
+**src/Template/Layout** directory, and switch between them inside of your
 controller actions using the controller or view's
 ``$layout`` property::
 
@@ -484,7 +484,7 @@ make a view more readable, placing the rendering of repeating
 elements in its own file. They can also help you re-use content
 fragments in your application.
 
-Elements live in the ``src/Template/Element/`` folder, and have the .ctp
+Elements live in the **src/Template/Element/** folder, and have the .ctp
 filename extension. They are output using the element method of the
 view::
 
@@ -503,7 +503,7 @@ argument::
 Inside the element file, all the passed variables are available as
 members of the parameter array (in the same way that ``Controller::set()`` in
 the controller works with template files). In the above example, the
-``src/Template/Element/helpbox.ctp`` file can use the ``$helptext``
+**src/Template/Element/helpbox.ctp** file can use the ``$helptext``
 variable::
 
     // Inside src/Template/Element/helpbox.ctp
@@ -632,7 +632,7 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 are equivalent and will result in the same element being rendered.
 
 For elements inside subfolder of a plugin
-(e.g., ``plugins/Contacts/sidebar/helpbox.ctp``), use the following::
+(e.g., **plugins/Contacts/sidebar/helpbox.ctp**), use the following::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
@@ -663,8 +663,8 @@ You may need to create custom view classes to enable new types of data views, or
 add additional custom view-rendering logic to your application. Like most
 components of CakePHP, view classes have a few conventions:
 
-* View class files should be put in ``src/View``. For example:
-  ``src/View/PdfView.php``
+* View class files should be put in **src/View**. For example:
+  **src/View/PdfView.php**
 * View classes should be suffixed with ``View``. For example: ``PdfView``.
 * When referencing view class names you should omit the ``View`` suffix. For
   example: ``$this->viewClass = 'Pdf';``.

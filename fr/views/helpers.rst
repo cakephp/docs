@@ -73,7 +73,7 @@ mieux organisé::
 
 Si vous avez besoin d'activer un helper pour tous les controllers, ajoutez
 son nom dans le tableau ``$helpers`` du fichier
-``src/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas
+**src/Controller/AppController.php** (à créer si pas présent). N'oubliez pas
 d'inclure les helpers par défaut Html et Form::
 
     class AppController extends Controller
@@ -126,12 +126,6 @@ toute configuration dont votre helper a besoin. Par exemple::
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
         ];
-
-        public function __construct(View $view, $config = [])
-        {
-            parent::__construct($view, $config);
-            $this->initStringTemplates();
-        }
     }
 
 Toute configuration fournie au constructeur de votre helper sera fusionnée avec
@@ -235,7 +229,7 @@ Mettons que nous voulions créer un helper, qui pourra être utilisé pour
 produire un lien CSS, façonné spécialement selon vos besoins, à différents
 endroits de votre application. Afin de trouver une place à votre logique dans
 la structure de helper existante dans CakePHP, vous devrez créer une nouvelle
-classe dans ``src/View/Helper``. Appelons notre helper LinkHelper. Le
+classe dans **src/View/Helper**. Appelons notre helper LinkHelper. Le
 fichier de la classe PHP ressemblera à quelque chose comme ceci::
 
     /* src/View/Helper/LinkHelper.php */
@@ -260,7 +254,7 @@ vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le
 feriez dans un controller::
 
     /* src/View/Helper/LinkHelper.php (utilisant d'autres helpers) */
-   
+
     namespace App\View\Helper;
 
     use Cake\View\Helper;
@@ -287,7 +281,7 @@ Utiliser votre Helper
 ---------------------
 
 Une fois que vous avez créé votre helper et l'avez placé dans
-``src/View/Helper/``, vous serez capable de l'inclure dans vos controllers
+**src/View/Helper/**, vous serez capable de l'inclure dans vos controllers
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
     class PostsController extends AppController

@@ -1,31 +1,33 @@
-Sauvegarder les Donnnées
-########################
+Sauvegarder les Données
+#######################
 
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
 
 Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
-voulez probablement mettre à jour & sauvegarder les changements.
+voudrez probablement mettre à jour & sauvegarder les changements.
 
 .. _converting-request-data:
 
-Convertir les Données de Request en Entities
-============================================
+Convertir les Données Requêtées en Entities
+===========================================
 
-Avant de modifier et sauvegarder les données à nouveau dans la base de données,
-vous devrez convertir les données de request à partir du format de tableau
-qui se trouve dans la request, et les entities que l'ORM utilise. La classe
-Table est un moyen facile de convertir une ou plusieurs entities à partir de
-données de request. Vous pouvez convertir une entity unique en utilisant::
+Avant de modifier et sauvegarder à nouveau les données dans la base de données,
+vous devrez convertir les données requêtées (qui se trouvent dans
+$this->request->data) à partir du format de tableau
+qui se trouvent dans la requête, et les entities que l'ORM utilise. La classe
+Table facilite la conversion d'une ou de plusieurs entities à partir des
+données requêtées. Vous pouvez convertir une entity unique en utilisant::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data());
 
-Les données de request doivent suivre la structure de vos entities. Par exemple
-si vous avez un article, qui appartient à un utilisateur, et avez plusieurs
-commentaires, vos données de request devraient ressembler à ceci::
+Les données requêtées doivent suivre la structure de vos entities. Par
+exemple si vous avez un article qui appartient à un utilisateur, et si vous
+avez plusieurs commentaires, vos données requêtées devraient ressembler
+à ceci::
 
     $data = [
         'title' => 'My title',
@@ -42,7 +44,7 @@ commentaires, vos données de request devraient ressembler à ceci::
 
 Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
 une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
-liste de données d'entity, vos données de request devraient ressembler à ceci::
+liste de données d'entity, vos données requêtées devraient ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -54,7 +56,7 @@ liste de données d'entity, vos données de request devraient ressembler à ceci
         ]
     ];
 
-Quand vous utilisez une liste d'ids, vos données de request devraient ressembler
+Quand vous utilisez une liste d'ids, vos données requêtées devraient ressembler
 à ceci::
 
     $data = [
@@ -96,7 +98,7 @@ Vous pouvez convertir plusieurs entities en utilisant::
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
-Lors de la conversion de plusieurs entities, les données de request pour
+Lors de la conversion de plusieurs entities, les données requetées pour
 plusieurs articles devrait ressembler à ceci::
 
     $data = [
@@ -111,9 +113,9 @@ plusieurs articles devrait ressembler à ceci::
     ];
 
 Il est également possible de permettre à ``newEntity()`` d'écrire dans des champs non accessibles.
-Par exemple, ``id`` est générallement absent de la propriété ``_accessible``.
+Par exemple, ``id`` est généralement absent de la propriété ``_accessible``.
 Dans ce cas, vous pouvez utiliser l'option ``accessibleFields``. Cela est particulièrement intéressant
-pour conserver les associations existantes entre certaines entités::
+pour conserver les associations existantes entre certaines entities::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
@@ -129,9 +131,9 @@ pour conserver les associations existantes entre certaines entités::
         ]
     ]);
 
-Le code ci-dessus permet de conserver l'association entre Comments et Users pour l'entité concernée.
+Le code ci-dessus permet de conserver l'association entre Comments et Users pour l'entity concernée.
 
-Une fois que vous avez converti des données de request dans des entities, vous
+Une fois que vous avez converti les données requêtées dans des entities, vous
 pouvez leur faire un ``save()`` ou un ``delete()``::
 
     // Dans un controller.
@@ -156,20 +158,20 @@ vous pouvez utiliser ``transactional()``::
 
 .. note::
 
-    Si vous utilisez newEntity() et il manque quelques unes ou toutes les
-    données des entities résultants, vérifiez deux fois que les colonnes que
+    Si vous utilisez newEntity() et qu'il manque quelques unes ou toutes les
+    données des entities résultantes, vérifiez deux fois que les colonnes que
     vous souhaitez définir sont listées dans la propriété ``$_accessible``
     de votre entity.
 
-Fusionner les Données de Request dans des Entities
---------------------------------------------------
+Fusionner les Données Requêtées dans les Entities
+-------------------------------------------------
 
-Afin de mettre à jour les entities, vous pouvez choisir d'appliquer des données
-de request directement dans une entity existante. Ceci a l'avantage que seuls les
+Afin de mettre à jour les entities, vous pouvez choisir d'appliquer les données
+requêtées directement dans une entity existante. Ceci a l'avantage que seuls les
 champs qui changent réellement seront sauvegardés, au lieu d'envoyer tous les champs
-à la base de donnée, même ceux qui sont identiques. Vous pouvez fusionner
+à la base de données, même ceux qui sont identiques. Vous pouvez fusionner
 un tableau de données brutes dans une entity existante en utilisant la méthode
-``patchEntity``::
+``patchEntity()``::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
@@ -177,8 +179,8 @@ un tableau de données brutes dans une entity existante en utilisant la méthode
     $articles->patchEntity($article, $this->request->data());
     $articles->save($article);
 
-Comme expliqué dans la section précédente, les données de request doivent suivre
-la structure de votre entity. La méthode ``patchEntity`` est également capable
+Comme expliqué dans la section précédente, les données requêtées doivent suivre
+la structure de votre entity. La méthode ``patchEntity()`` est également capable
 de fusionner les associations, par défaut seul les premiers niveaux
 d'associations sont fusionnés mais si vous voulez contrôler la liste des
 associations à fusionner ou fusionner des niveaux de plus en plus profonds, vous
@@ -197,7 +199,7 @@ de données. Pour des associations belongsTo et hasOne, les nouvelles entities
 seront construites si aucune entity précédente n'est trouvé pour la propriété
 cible.
 
-Pa exemple, donnez des données de request comme ce qui suit::
+Pa exemple, prenons les données requêtées comme ce qui suit::
 
     $data = [
         'title' => 'My title',
@@ -214,7 +216,7 @@ créer une nouvelle entity user::
     echo $entity->user->username; // Echoes 'mark'
 
 La même chose peut être dite pour les associations hasMany et belongsToMany,
-mais une importante note doit être faîte.
+mais une note importante doit être faîte.
 
 .. note::
 
@@ -223,7 +225,7 @@ mais une importante note doit être faîte.
     enregistrement dans le tableau de données, alors ces enregistrements
     seraient annulés de l'entity résultante.
 
-    Rappelez-vous que l'utilisation soit de ``patchEntity()`` ou
+    Rappelez-vous que l'utilisation de ``patchEntity()`` ou de
     ``patchEntities()`` ne fait pas persister les données, il modifie juste
     (ou créé) les entities données. Afin de sauvegarder l'entity, vous devrez
     appeler la méthode ``save()``.
@@ -263,7 +265,7 @@ résultat suivant::
 
 Comme vous l'avez vu, le commentaire avec l'id 2 n'est plus ici, puisqu'il ne
 correspondait à rien dans le tableau ``$newData``. Ceci est fait ainsi pour
-mieux capturer l'intention du post des données de request. Les données envoyées
+mieux capturer l'intention du post des données requêtées. Les données envoyées
 reflètent le nouvel état que l'entity doit avoir.
 
 Des avantages supplémentaires à cette approche sont qu'elle réduit le nombre
@@ -302,7 +304,7 @@ présentes dans les résultats::
     }
 
 De la même façon que pour l'utilisation de ``patchEntity()``, vous pouvez utiliser
-le troisième argument pour controller les associations qui seront fusionnées
+le troisième argument pour contrôler les associations qui seront fusionnées
 dans chacune des entities du tableau::
 
     // Dans un controller.
@@ -313,8 +315,8 @@ dans chacune des entities du tableau::
     );
 
 De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez permettre à ``patchEntity()``
-d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement pas déclaré dans la propriété
-``_accessible``::
+d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement pas déclaré dans
+la propriété ``_accessible``::
 
     // Dans un controller.
     $patched = $articles->patchEntities(
@@ -332,12 +334,12 @@ d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement
 
 .. _before-marshal:
 
-Modifier les Données de Request Avant de Construire les Entities
-----------------------------------------------------------------
+Modifier les Données Requêtées Avant de Construire les Entities
+---------------------------------------------------------------
 
-Si vous devez modifier les données de request avant qu'elles ne soient
+Si vous devez modifier les données requêtées avant qu'elles ne soient
 converties en entities, vous pouvez utiliser l'event ``Model.beforeMarshal``.
-Cet event vous laisse manipuler les données de request juste avant que les
+Cet event vous laisse manipuler les données requêtées juste avant que les
 entities ne soient créées::
 
     // Dans une classe table ou behavior
@@ -356,7 +358,7 @@ Valider les Données Avant de Construire les Entities
 
 Durant la transformation des données en entities, vous pouvez valider les
 données. La validation des données vous permet de vérifier le type, la forme et
-la taille des données. Par défaut les données de request seront validées avant
+la taille des données. Par défaut les données requêtées seront validées avant
 qu'elles ne soient converties en entities.
 Si aucune règle de validation n'échoue, l'entity retournée va contenir les
 erreurs. Les champs avec des erreurs ne seront pas présents dans l'entity
@@ -373,17 +375,17 @@ suivantes vont se produire:
 1. L'objet validator est créé.
 2. Les providers de validation ``table`` et ``default`` sont attachés.
 3. La méthode de validation nommée est appelée. Par exemple,
-   ``validationDefault``.
+   ``validationDefault()``.
 4. L'event ``Model.buildValidator`` va être déclenché.
-5. Les données de Request vont être validées.
-6. Les données de Request vont être castées en types qui correspondent
+5. Les données Requêtées vont être validées.
+6. Les données Requêtées vont être castées en types qui correspondent
    aux types de colonne.
 7. Les erreurs vont être définies dans l'entity.
 8. Les données valides vont être définies dans l'entity, alors que les champs
    qui échouent la validation seront laissés de côté.
 
-Si vous voulez désactiver la validation lors de la conversion des données de
-request, définissez l'option ``validate`` à false::
+Si vous voulez désactiver la validation lors de la conversion des données
+requêtées, définissez l'option ``validate`` à false::
 
     $article = $articles->newEntity(
         $this->request->data,
@@ -395,9 +397,9 @@ validation que vous souhaitez appliquer::
 
     $articles->save($article, ['validate' => 'update']);
 
-Ce qui est au-dessus va appeler la méthode ``validationUpdate`` sur l'instance
+Ce qui est au-dessus va appeler la méthode ``validationUpdate()`` sur l'instance
 table pour construire les règles requises. Par défaut la méthode
-``validationDefault`` sera utilisée. Un exemple de méthode de validator pour
+``validationDefault()`` sera utilisée. Un exemple de méthode de validator pour
 notre Table articles serait::
 
     class ArticlesTable extends Table
@@ -407,11 +409,11 @@ notre Table articles serait::
             $validator
                 ->add('title', 'notEmpty', [
                     'rule' => 'notEmpty',
-                    'message' => __('You need to provide a title'),
+                    'message' => __('Vous devez fournir un titre'),
                 ])
                 ->add('body', 'notEmpty', [
                     'rule' => 'notEmpty',
-                    'message' => __('A body is required')
+                    'message' => __('un corps est nécessaire')
                 ]);
             return $validator;
         }
@@ -447,7 +449,7 @@ l'utiliser comme une règle de validation::
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
-                    'message' => __('You need to provide a valid role'),
+                    'message' => __('Vous devez fournir un rôle valide'),
                     'provider' => 'entity',
                 ]);
             return $validator;
@@ -455,13 +457,13 @@ l'utiliser comme une règle de validation::
 
     }
 
-Eviter les Attaques d'Assignement en Masse de Propriété
--------------------------------------------------------
+Eviter les Attaques d'Assignement en Masse de Propriétés
+--------------------------------------------------------
 
-Lors de la création ou la fusion des entities à partir des données de request,
+Lors de la création ou la fusion des entities à partir de données requêtées,
 vous devez faire attention à ce que vous autorisez à changer ou à ajouter
 dans les entities à vos utilisateurs. Par exemple, en envoyant un tableau
-dans la request contenant ``user_id``, un pirate pourrait changer le
+dans la requête contenant ``user_id``, un pirate pourrait changer le
 propriétaire d'un article, ce qui entraînerait des effets indésirables::
 
     // Contient ['user_id' => 100, 'title' => 'Hacked!'];
@@ -471,7 +473,7 @@ propriétaire d'un article, ce qui entraînerait des effets indésirables::
 
 Il y a deux façons de se protéger pour ce problème. La première est de définir
 les colonnes par défaut qui peuvent être définies en toute sécurité à partir
-d'une request en utilisant la fonctionnalité d':ref:`entities-mass-assignment`
+d'une requête en utilisant la fonctionnalité d':ref:`entities-mass-assignment`
 dans les entities.
 
 La deuxième façon est d'utiliser l'option ``fieldList`` lors de la création ou
@@ -480,7 +482,7 @@ la fusion de données dans une entity::
     // Contient ['user_id' => 100, 'title' => 'Hacked!'];
     $data = $this->request->data;
 
-    // Permet seulement pour au title d'être changé
+    // Permet seulement de changer le title
     $entity = $this->patchEntity($entity, $data, [
         'fieldList' => ['title']
     ]);
@@ -511,7 +513,7 @@ Sauvegarder les Entities
 
 .. php:method:: save(Entity $entity, array $options = [])
 
-Quand vous sauvegardez les données de request dans votre base de données, vous
+Quand vous sauvegardez les données requêtées dans votre base de données, vous
 devez d'abord hydrater une nouvelle entity en utilisant ``newEntity()`` pour
 passer dans ``save()``. Pare exemple::
 
@@ -555,21 +557,21 @@ Si vous avez une nouvelle entity, le code SQL suivant serait généré::
 Quand une entity est sauvegardée, voici ce qui se passe:
 
 1. La vérification des règles commencera si elle n'est pas désactivée.
-2. La vérification des règles va déclencher l'événement
-   ``Model.beforeRules``. Si l'événement est stoppé, l'opération de
+2. La vérification des règles va déclencher l'event
+   ``Model.beforeRules``. Si l'event est stoppé, l'opération de
    sauvegarde va connaitre un échec et retourner ``false``.
 3. Les règles seront vérifiées. Si l'entity est en train d'être créée, les
    règles ``create`` seront utilisées. Si l'entity est en train d'être mise à
    jour, les règles ``update`` seront utilisées.
-4. L'événement ``Model.afterRules`` sera déclenché.
-5. L'événement ``Model.beforeSave`` est dispatché. S'il est stoppé, la
+4. L'event ``Model.afterRules`` sera déclenché.
+5. L'event ``Model.beforeSave`` est dispatché. S'il est stoppé, la
    sauvegarde sera annulée, et save() va retourner ``false``.
 6. Les associations parentes sont sauvegardées. Par exemple, toute association
    belongsTo listée sera sauvegardée.
 7. Les champs modifiés sur l'entity seront sauvegardés.
 8. Les associations Enfant sont sauvegardées. Par exemple, toute association
    hasMany, hasOne, ou belongsToMany listée sera sauvegardée.
-9. L'événement ``Model.afterSave`` sera dispatché.
+9. L'event ``Model.afterSave`` sera dispatché.
 
 Consultez la section :ref:`application-rules` pour plus d'informations sur la
 création et l'utilisation des règles.
@@ -592,8 +594,8 @@ Sauvegarder les Associations
 Quand vous sauvegardez une entity, vous pouvez aussi choisir d'avoir quelques
 unes ou toutes les entities associées. Par défaut, toutes les entities de
 premier niveau seront sauvegardées. Par exemple sauvegarder un Article, va
-aussi automatiquement mettre à jour tout entity dirty qui n'est pas directement
-liée à la table articles.
+aussi automatiquement mettre à jour tout entity modifiée qui n'est pas
+directement liée à la table articles.
 
 Vous pouvez régler finement les associations qui sont sauvegardées en
 utilisant l'option ``associated``::
@@ -641,11 +643,18 @@ quand elles ont été chargées à partir de la base de données.
 Consultez la documentation du helper Form pour savoir comment
 :ref:`associated-form-inputs`.
 
+Si vous construisez ou modifiez une donnée d'association après avoir construit
+vos entities, vous devrez marquer la propriété d'association comme étant
+modifiée avec ``dirty()``::
+
+    $company->author->name = 'Master Chef';
+    $company->dirty('author', true);
+
 Sauvegarder les Associations BelongsTo
 --------------------------------------
 
 Lors de la sauvegarde des associations belongsTo, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au singulier, en camel case.
+imbriquée unique avec le nom de l'association au singulier, en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -667,7 +676,7 @@ Sauvegarder les Associations HasOne
 -----------------------------------
 
 Lors de la sauvegarde d'associations hasOne, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au singulier et en camel case.
+imbriquée unique avec le nom de l'association au singulier et en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -688,7 +697,7 @@ Sauvegarder les Associations HasMany
 ------------------------------------
 
 Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au pluriel et en camel case.
+imbriquée unique avec le nom de l'association au pluriel et en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -706,8 +715,8 @@ Par exemple::
     $articles->save($article);
 
 Lors de la sauvegarde d'associations hasMany, les enregistrements associés
-seront soit mis à jour, soit insérés. L'ORM ne va pas retirer ou 'sync' une
-association hasMany. Peu importe quand vous ajoutez de nouveaux
+seront soit mis à jour, soit insérés. L'ORM ne va pas retirer ou 'synchroniser'
+une association hasMany. Peu importe quand vous ajoutez de nouveaux
 enregistrements dans une association existante, vous devez toujours marquer la
 propriété de l'association comme 'dirty'. Ceci dit à l'ORM que la propriété de
 l'association doit persister::
@@ -722,7 +731,7 @@ Sauvegarder les Associations BelongsToMany
 ------------------------------------------
 
 Lors de la sauvegarde d'associations hasMany, l'ORM s'attend à une entity
-imbriquée unique avec le nom de l'association au pluriel et en camel case.
+imbriquée unique avec le nom de l'association au pluriel et en underscore.
 Par exemple::
 
     // Dans un controller.
@@ -739,10 +748,10 @@ Par exemple::
     ]);
     $articles->save($article);
 
-Quand vous convertissez les données de request en entities, les méthodes
-``newEntity`` et ``newEntities`` vont gérer les deux tableau de propriétés,
+Quand vous convertissez les données requêtées en entities, les méthodes
+``newEntity()`` et ``newEntities()`` vont gérer les deux tableaux de propriétés,
 ainsi qu'une liste d'ids avec la clé ``_ids``. Utiliser la clé ``_ids``
-facilite lac construction d'un box select ou d'un checkbox basé sur les
+facilite la construction d'un box select ou d'un checkbox basé sur les
 contrôles pour les associations belongs to many. Consultez la section
 :ref:`converting-request-data` pour plus d'informations.
 
@@ -750,7 +759,7 @@ Lors de la sauvegarde des associations belongsToMany, vous avez le choix entre
 2 stratégies de sauvegarde:
 
 append
-    Seuls les nouveaux liens seront créés entre chaque côté de cette
+    Seuls les nouveaux liens seront créés de chaque côté de cette
     association. Cette stratégie ne va pas détruire les liens existants même
     s'ils ne sont pas présents dans le tableau d'entities à sauvegarder.
 replace
@@ -768,6 +777,30 @@ de l'association doit persister::
     $article->dirty('tags', true);
 
 Sans appel à ``dirty()``, les tags mis à jour ne seront pas sauvegardés.
+
+Often you'll find yourself wanting to make an association between two existing
+entities, eg. a user coauthoring an article. This is done by using the method
+``link()``, like this::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $this->Articles->Users->link($article, [$user]);
+
+When saving belongsToMany Associations, it can be relevant to save some
+additional data to the Joint Table.  In the previous example of tags, it could
+be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
+be either ``upvote`` or ``downvote`` and is represented by a string.  The
+relation is between Users and Articles.
+
+Saving that association, and the ``vote_type`` is done by first adding some data
+to ``_joinData`` and then saving the association with ``link()``, example::
+
+    $article = $this->Articles->get($articleId);
+    $user = $this->Users->get($userId);
+
+    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $this->Articles->Users->link($article, [$user]);
 
 Sauvegarder des Données Supplémentaires à la Table de Jointure
 --------------------------------------------------------------
@@ -792,9 +825,9 @@ propriété ``_joinData``::
     $studentsTable->save($student);
 
 La propriété ``_joinData`` peut être soit une entity, soit un tableau de données
-si vous sauvegardez les entities construites à partir de données de
-request. Lorsque vous sauvegardez des données de tables jointes depuis les données
-de requête, vos données POST doivent ressembler à ceci::
+si vous sauvegardez les entities construites à partir de données
+requêtées. Lorsque vous sauvegardez des données de tables jointes depuis les données
+requêtées, vos données POST doivent ressembler à ceci::
 
     $data = [
         'first_name' => 'Sally',
@@ -880,7 +913,7 @@ Appliquer des Règles pour l'Application
 =======================================
 
 Alors qu'une validation basique des données est faite quand :ref:`les données
-de requêtes sont converties en entities <validating-request-data>`, de
+requêtées sont converties en entities <validating-request-data>`, de
 nombreuses applications ont aussi d'autres validations plus complexes qui
 doivent être appliquées seulement après qu'une validation basique a été
 terminée. Ces types de règles sont souvent appelées 'règles de domaine' ou
@@ -898,7 +931,7 @@ Créer un Vérificateur de Règles
 -------------------------------
 
 Les classes de vérificateur de Règles sont généralement définies par la
-méthode ``buildRules`` dans votre classe de table. Les behaviors et les autres
+méthode ``buildRules()`` dans votre classe de table. Les behaviors et les autres
 souscripteurs d'event peuvent utiliser l'event ``Model.buildRules`` pour
 ajouter des règles au vérificateur pour une classe de Table donnée::
 
@@ -1055,6 +1088,6 @@ lignes sont mises à jour.
 
 .. warning::
 
-    updateAll *ne* va *pas* déclencher d'événements beforeSave/afterSave. Si
+    updateAll *ne* va *pas* déclencher d'events beforeSave/afterSave. Si
     vous avez besoin de ceux-ci, chargez d'abord une collection
     d'enregistrements et mettez les à jour.
