@@ -120,7 +120,9 @@ Our helper looks like::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper
+    use Cake\View\Helper;
+
+    class ProgressHelper extends Helper
     {
         public function bar($value)
         {
