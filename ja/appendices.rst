@@ -6,14 +6,19 @@
 3.0 Migration Guide
 ===================
 
-3.0 is still under development, and any documented changes
-will only be available in the ``3.0`` branch in git.
-
 .. toctree::
     :maxdepth: 1
 
     appendices/3-0-migration-guide
     appendices/orm-migration
+
+3.1 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/3-1-migration-guide
 
 一般的な情報
 ===============
