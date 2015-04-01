@@ -52,7 +52,7 @@ un champ.
 En utilisant le champ exemple ci-dessus::
 
     $this->User->hasField('nom'); // Retournera false, puisqu'il n'y a pas de champ concret appelé nom.
-    $this->User->hasField('nom', true); // Retournera true puisqu'il n'y a pas de champ virtuel appelé nom.
+    $this->User->hasField('nom', true); // Retournera true puisqu'il y a un champ virtuel appelé nom.
 
 Model::isVirtualField()
 -----------------------
