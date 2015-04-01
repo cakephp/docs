@@ -30,6 +30,8 @@ customize the rules used::
 
     ``pluralize()`` may not always correctly convert a noun that is already in it's plural form.
 
+.. code-block:: php
+
     // Person
     echo Inflector::singularize('People');
     

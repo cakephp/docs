@@ -125,7 +125,9 @@ bar HTML. Notre helper ressemblera à cela::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper
+    use Cake\View\Helper;
+
+    class ProgressHelper extends Helper
     {
         public function bar($value)
         {
@@ -146,7 +148,6 @@ allons commencer avec ce qui suit::
     namespace App\Test\TestCase\View\Helper;
 
     use App\View\Helper\ProgressHelper;
-    use Cake\Controller\Controller;
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
