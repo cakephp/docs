@@ -50,10 +50,10 @@ For more information about the available array options, please refer to the
 Routing prefix and Flash messages
 =========================
 
-.. versionadded:: 3.1
+.. versionadded:: 3.0.1
 
 If you have a Routing prefix configured, you can now have your Flash elements
-stored in ``src/Template/{Prefix}/Element/Flash``. This way, you can have specific
+stored in **src/Template/{Prefix}/Element/Flash**. This way, you can have specific
 messages layouts for each part of your application (for instance, have different
 layouts for you front-end and your admin side).
 

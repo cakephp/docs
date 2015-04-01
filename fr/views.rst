@@ -661,16 +661,16 @@ Pour les elements dans le sous-dossier d'un plugin
 Routing prefix and Elements
 ---------------------------------
 
-.. versionadded:: 3.1
+.. versionadded:: 3.0.1
 
 Si vous avez configuré un préfix de routage, la résolution des chemins d'accès aux
 Elements peut chercher dans un chemin préfixé, comme les Layouts et les vues d'Action
 le font déjà.
 En partant du postulat que vous avez configuré le préfix "Admin" et que vous appelez::
 
- echo $this->element('my_element');
+    echo $this->element('my_element');
 
-L'Element va d'abord être cherché dans ``src/Template/Admin/Element/``. Si un tel fichier
+L'Element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un tel fichier
 n'existe pas, il sera ensuite cherché dans le chemin par défaut.
 
 Mettre en Cache des Sections de votre View

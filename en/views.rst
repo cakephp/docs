@@ -640,15 +640,15 @@ For elements inside subfolder of a plugin
 Routing prefix and Elements
 ---------------------------------
 
-.. versionadded:: 3.1
+.. versionadded:: 3.0.1
 
 If you have a Routing prefix configured, the Element path resolution can switch to
 a prefix location, as Layouts and action View do.
 Assuming you have a prefix "Admin" configured and you call::
 
- echo $this->element('my_element');
+    echo $this->element('my_element');
 
-The element first be looked for in ``src/Template/Admin/Element/``. If such a file
+The element first be looked for in **src/Template/Admin/Element/**. If such a file
 does not exist, it will be looked for in the default location.
 
 Caching Sections of Your View
