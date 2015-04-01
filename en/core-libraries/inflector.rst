@@ -26,8 +26,16 @@ customize the rules used::
     // Apples
     echo Inflector::pluralize('Apple');
 
+.. note::
+
+    ``pluralize()`` may not always correctly convert a noun that is already in it's plural form.
+
     // Person
     echo Inflector::singularize('People');
+    
+.. note::
+
+    ``singularize()`` may not always correctly convert a noun that is already in it's singular form.
 
 Creating CamelCase and under_scored Forms
 =========================================
