@@ -54,7 +54,6 @@ de la façon suivante::
     // Re-active Auth pour les callbacks.
     $this->eventManager()->on($this->Auth);
 
-
 .. meta::
     :title lang=fr: Objet Registry
     :keywords lang=fr: nom tableau,chargement components,plusieurs types différents,api uni,charger objects,noms component,clé speciale,components cœur,callbacks,prg,callback,alias,fatal error,collections,memoire,priorité,priorités

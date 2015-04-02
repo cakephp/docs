@@ -46,12 +46,13 @@ paramètres grâce à une expression régulière::
         ['id' => '\d+', 'pass' => ['id']]
     );
 
-Dans l'exemple précédent, le caractère jocker ``*`` est remplacé par un placeholder ``:id``.
-Utiliser les placeholders nous permet de valider les parties de l'url, dans ce
-cas, nous utilisons l'expression régulière ``\d+`` pour que seuls les chiffres
-fonctionnent. Finalement, nous disons au Router de traiter le placeholder
-``id`` comme un argument de fonction pour la fonction ``view()`` en spécifiant
-l'option ``pass``. Vous pourrez en voir plus sur leur utilisation plus tard.
+Dans l'exemple précédent, le caractère jocker ``*`` est remplacé par un
+placeholder ``:id``. Utiliser les placeholders nous permet de valider les
+parties de l'url, dans ce cas, nous utilisons l'expression régulière ``\d+``
+pour que seuls les chiffres fonctionnent. Finalement, nous disons au Router de
+traiter le placeholder ``id`` comme un argument de fonction pour la fonction
+``view()`` en spécifiant l'option ``pass``. Vous pourrez en voir plus sur leur
+utilisation plus tard.
 
 Le Router de CakePHP peut aussi faire correspondre les routes en reverse. Cela
 signifie qu'à partir d'un tableau contenant des paramètres similaires, il est
@@ -144,8 +145,8 @@ qu'elle a été matchée. Le deuxième paramètre est un tableau associatif. Les
 clés du tableau devraient être appelées après les éléments de route dans l'URL,
 ou les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``.
 Les valeurs dans le tableau sont les valeurs par défaut pour ces clés.
-Regardons quelques exemples simples avant que nous commencions à voir l'utilisation
-du troisième paramètre de connect()::
+Regardons quelques exemples simples avant que nous commencions à voir
+l'utilisation du troisième paramètre de connect()::
 
     $routes->connect(
         '/pages/*',

@@ -113,8 +113,8 @@ remplaceront la clé correspondante dans la clé 'all'.
 Les objets d'authentification supportent les clés de configuration suivante.
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.  Vous pouvez
-  utiliser les mots clés ``username`` et ``password`` pour spécifier le champ de nom
-  d'utilisateur et le mot de passe respectivement.
+  utiliser les mots clés ``username`` et ``password`` pour spécifier le champ de
+  nom d'utilisateur et le mot de passe respectivement.
 - ``userModel`` Le nom du model de la table users, par défaut Users.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``['Users.is_active' => true]``.
@@ -123,7 +123,8 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut
   à ``Default``.
 
-Pour configurer les différents champs de l'utilisateur dans la méthode ``initialize()``::
+Pour configurer les différents champs de l'utilisateur dans la méthode
+``initialize()``::
 
     public function initialize()
     {
@@ -377,8 +378,9 @@ component Auth ``AuthComponent`` utilise. En utilisant ``flash``,
 vous pouvez configurer les paramètres que le component Auth utilise pour
 envoyer des messages flash. Les clés disponibles sont
 
-- ``key`` - La clé à utiliser, 'auth' par défaut
-- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par défaut
+- ``key`` - La clé à utiliser, 'auth' par défaut.
+- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par
+  défaut.
 
 En plus des paramètres de message flash, vous pouvez personnaliser les autres
 messages d'erreurs que le component AuthComponent utilise. Dans la partie
@@ -441,8 +443,8 @@ Créer des Classes de Hash de Mot de Passe Personnalisé
 ------------------------------------------------------
 
 Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
-dans **src/Auth/LegacyPasswordHasher.php** et intégrer les méthodes ``hash()`` et
-``check()``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
+dans **src/Auth/LegacyPasswordHasher.php** et intégrer les méthodes ``hash()``
+et ``check()``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
 
     namespace App\Auth;
 
@@ -489,9 +491,9 @@ Changer les Algorithmes de Hashage
 
 CakePHP fournit un moyen propre de migrer vos mots de passe utilisateurs
 d'un algorithme vers un autre, ceci est possible avec la classe
-``FallbackPasswordHasher``. Supposons que vous utilisiez ``LegacyPasswordHasher``
-à partir de l'exemple précédent, vous pouvez configurer AuthComponent comme
-suit::
+``FallbackPasswordHasher``. Supposons que vous utilisiez
+``LegacyPasswordHasher`` à partir de l'exemple précédent, vous pouvez
+configurer AuthComponent comme suit::
 
     public function initialize()
     {
@@ -537,8 +539,8 @@ pouvez changer la fonction login selon::
     }
 
 Comme vous pouvez le voir, nous définissons le mot de passe en clair à nouveau
-pour que la fonction directrice (setter) dans l'entity hashe le mot de passe comme montré
-dans les exemples précédents et sauvegarde ensuite l'entity.
+pour que la fonction directrice (setter) dans l'entity hashe le mot de passe
+comme montré dans les exemples précédents et sauvegarde ensuite l'entity.
 
 Hachage de Mots de Passe pour l'Authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -682,9 +684,9 @@ Configurer les Gestionnaires d'Autorisation
 Vous configurez les gestionnaires d'autorisation en utilisant la clé de config
 ``authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires pour l'autorisation. L'utilisation de plusieurs gestionnaires
-vous donne la possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
-Quand les gestionnaires d'autorisation sont vérifiés, ils sont appelés
-dans l'ordre où ils sont déclarés. Les gestionnaires devraient retourner
+vous donne la possibilité d'utiliser plusieurs moyens de vérifier les
+autorisations. Quand les gestionnaires d'autorisation sont vérifiés, ils sont
+appelés dans l'ordre où ils sont déclarés. Les gestionnaires devraient retourner
 ``false``, s'il ne sont pas capable de vérifier les autorisations ou bien si
 la vérification a échoué. Les gestionnaires devraient retourner ``true`` s'ils
 sont capables de vérifier avec succès les autorisations. Les gestionnaires

@@ -145,8 +145,8 @@ Enregistrer les Listeners
 
 Les listeners (écouteurs) sont le meilleur moyen d'enregistrer les callbacks
 pour un évènement. Ceci est fait en intégrant l'interface
-:php:class:`Cake\\Event\\EventListenerInterface` dans toute classe dans laquelle vous
-souhaitez enregistrer des callbacks. Les classes l'intégrant ont besoin de
+:php:class:`Cake\\Event\\EventListenerInterface` dans toute classe dans laquelle
+vous souhaitez enregistrer des callbacks. Les classes l'intégrant ont besoin de
 fournir la méthode ``implementedEvents()``. Cette méthode doit retourner un
 tableau associatif avec tous les noms d'évènement que la classe va gérer.
 
@@ -424,10 +424,10 @@ le callback elle-même::
     }
 
 Il est possible de modifier toute propriété d'un objet event et d'avoir les
-nouvelles données passées à la prochaine callback. Dans la plupart des cas, fournir
-des objets en données d'event ou en résultat et directement modifier l'objet
-est la meilleure solution puisque la référence est la même et les modifications
-sont partagées à travers tous les appels de callback.
+nouvelles données passées à la prochaine callback. Dans la plupart des cas,
+fournir des objets en données d'event ou en résultat et directement modifier
+l'objet est la meilleure solution puisque la référence est la même et les
+modifications sont partagées à travers tous les appels de callback.
 
 Retirer les Callbacks et les Listeners
 --------------------------------------

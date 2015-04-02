@@ -46,8 +46,8 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre
 application interagit avec :php:class:`Cake\\Cache\\Cache` de manière cohérente.
-Cela signifie que vous pouvez aisément permuter les moteurs de cache en fonction de
-l'évolution de votre application.
+Cela signifie que vous pouvez aisément permuter les moteurs de cache en fonction
+de l'évolution de votre application.
 
 .. _cache-configuration:
 
@@ -182,8 +182,9 @@ stocker les résultats des 'finds' de vos models::
         Cache::write('posts', $posts);
     }
 
-Utiliser ``Cache :: write()`` et ``Cache :: read ()`` réduira facilement le nombre
-d'allers-retours effectués vers la base de données pour récupérer les messages.
+Utiliser ``Cache :: write()`` et ``Cache :: read ()`` réduira facilement le
+nombre d'allers-retours effectués vers la base de données pour récupérer les
+messages.
 
 .. note::
 
@@ -223,7 +224,7 @@ et les résultats stockés dans le cache pour la clé fournie.
 Par exemple, vous souhaitez souvent mettre en cache les résultats du appel à un
 service distant. Vous pouvez utiliser ``remember()`` pour faciliter cela::
 
-    class IssueService 
+    class IssueService
     {
 
         function allIssues($repo)
@@ -546,7 +547,6 @@ L'API requise pour CacheEngine est
     Non requise, mais utilisée pour faire du nettoyage quand les ressources
     expirent. Le moteur FileEngine utilise cela pour effacer les fichiers
     qui contiennent des contenus expirés.
-
 
 .. meta::
     :title lang=fr: Mise en cache

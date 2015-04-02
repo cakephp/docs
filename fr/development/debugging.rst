@@ -145,8 +145,8 @@ Ce qui est au-dessus écrit ``Got here`` dans le log de debug. Vous pouvez
 utiliser les logs (log entries) pour faciliter le debug des méthodes qui
 impliquent des redirections ou des boucles compliquées. Vous pouvez aussi
 utiliser :php:meth:`Cake\\Log\\Log::write()`` pour écrire les messages de log.
-Cette méthode peut être appelée statiquement partout dans votre application où CakeLog
-a été chargée::
+Cette méthode peut être appelée statiquement partout dans votre application où
+CakeLog a été chargée::
 
     // Au début du fichier dans lequel vous voulez logger.
     use Cake\Log\Log;
@@ -162,7 +162,6 @@ fournit principalement une barre d'outils dans le HTML rendu, qui fournit
 une pléthore d'informations sur votre application et la requête courante.
 Consultez le chapitre sur :doc:`/debug-kit` pour plus d'information sur son
 installation et son utilisation.
-
 
 .. meta::
     :title lang=fr: Debugger

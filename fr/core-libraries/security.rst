@@ -33,8 +33,8 @@ Un exemple d'utilisation serait::
     $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
     $result = Security::encrypt($value, $key);
 
-Si vous ne fournissez pas de sel HMAC, la valeur ``Security.salt`` sera utilisée.
-Les valeurs chiffrées peuvent être déchiffrées avec
+Si vous ne fournissez pas de sel HMAC, la valeur ``Security.salt`` sera
+utilisée. Les valeurs chiffrées peuvent être déchiffrées avec
 :php:meth:`Cake\\Utility\\Security::decrypt()`.
 
 Déchiffre une valeur chiffrée au préalable. Les paramètres ``$key`` et

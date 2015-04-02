@@ -56,12 +56,13 @@ en charge::
                 default.po
 
 Le domaine par défaut est 'default', votre dossier ``locale`` devrait donc
-contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se réfère à un regroupement
-arbitraire de messages de traduction. Si aucun groupe n'est utilisé, le groupe par défaut
-est sélectionné.
+contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se
+réfère à un regroupement arbitraire de messages de traduction. Si aucun groupe
+n'est utilisé, le groupe par défaut est sélectionné.
 
-Les plugins peuvent également contenir des fichiers de traduction, la convention est d'utiliser la version
-``under_scored`` du nom du plugin comme domaine de la traduction des messages::
+Les plugins peuvent également contenir des fichiers de traduction, la convention
+est d'utiliser la version ``under_scored`` du nom du plugin comme domaine de la
+traduction des messages::
 
     MyPlugin
         /src
@@ -71,9 +72,9 @@ Les plugins peuvent également contenir des fichiers de traduction, la conventio
                 /de
                     my_plugin.po
 
-Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de
-la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``,
-qui contient en même temps la langue et le pays où elle est parlée.
+Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO
+de la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``,
+``da_DK``, qui contient en même temps la langue et le pays où elle est parlée.
 
 Un fichier de traduction pourrait ressembler à ceci :
 
@@ -102,8 +103,8 @@ via::
 
     ini_set('intl.default_locale', 'fr_FR');
 
-Cela permet de contrôler plusieurs aspects de votre application, incluant la langue
-de traduction par défaut, le format des dates, des nombres, et devises
+Cela permet de contrôler plusieurs aspects de votre application, incluant la
+langue de traduction par défaut, le format des dates, des nombres, et devises
 à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques
 de localisation fournies par CakePHP.
 
@@ -535,7 +536,6 @@ n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
 ``translator()`` et ``config()``::
 
     I18n::defaultFormatter('sprintf');
-
 
 .. meta::
     :title lang=fr: Internationalization & Localization

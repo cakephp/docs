@@ -15,11 +15,12 @@ comme:
 Comme tous les components, il est configuré au travers de plusieurs paramètres
 configurables.
 Toutes ces propriétés peuvent être définies directement ou au travers de
-"méthodes setter" du même nom dans la partie ``beforeFilter()`` de votre controller.
+"méthodes setter" du même nom dans la partie ``beforeFilter()`` de votre
+controller.
 
-En utilisant le Component Security vous obtenez automatiquement une protection contre la falsification de formulaire.
-Des jetons de champs cachés seront automatiquement insérés dans les
-formulaires et vérifiés par le component Security.
+En utilisant le Component Security vous obtenez automatiquement une protection
+contre la falsification de formulaire. Des jetons de champs cachés seront
+automatiquement insérés dans les formulaires et vérifiés par le component Security.
 
 Si vous utilisez la fonctionnalité de protection des formulaires
 par le component Security et que d'autres components traitent des données

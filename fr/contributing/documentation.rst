@@ -444,13 +444,13 @@ d'avertissements.
   contenu de la directive doit être écrite en phrases complètes et inclure
   toute la ponctuation appropriée.
 * ``.. versionadded:: X.Y.Z`` Les avertissements "ajouté en version X.Y.Z" sont
-  utilisés pour spécifier l'ajout de fonctionnalités dans une version spécifique,
-  ``X.Y.Z`` étant la version à laquelle l'ajout de la fonctionnalité en question a
-  eu lieu
-* ``.. deprecated:: X.Y.Z`` À la différence des avertissements "ajouté en version",
-  les avertissements "déprécié en version" servent à indiquer la dépréciation d'une
-  fonctionnalité à une version précise, ``X.Y.Z`` étant la version à laquelle le retrait
-  de la fonctionnalité en question a eu lieu
+  utilisés pour spécifier l'ajout de fonctionnalités dans une version
+  spécifique, ``X.Y.Z`` étant la version à laquelle l'ajout de la fonctionnalité
+  en question a eu lieu
+* ``.. deprecated:: X.Y.Z`` À la différence des avertissements "ajouté en
+  version", les avertissements "déprécié en version" servent à indiquer la
+  dépréciation d'une fonctionnalité à une version précise, ``X.Y.Z`` étant la
+  version à laquelle le retrait de la fonctionnalité en question a eu lieu.
 
 Tous les avertissements sont faits de la même façon::
 
@@ -478,12 +478,11 @@ Exemples
 
 .. versionadded:: 2.6.3
 
-    Cette super fonctionnalité a été ajoutée en version 2.6.3
+    Cette super fonctionnalité a été ajoutée à partir de la version 2.6.3.
 
 .. deprecated:: 2.6.3
 
-    Cette vieille fonctionnalité a été dépréciée en version 2.6.3
-
+    Cette vieille fonctionnalité a été dépréciée à partir de la version 2.6.3.
 
 .. meta::
     :title lang=fr: Documentation

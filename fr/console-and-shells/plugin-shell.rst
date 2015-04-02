@@ -43,21 +43,24 @@ Vous pouvez décharger un plugin en spécifiant son nom::
 Ceci va retirer la ligne ``Plugin::load('MyPlugin',...`` de votre
 ``config/bootstrap.php``.
 
-Plugin Assets
--------------
+Assets des Plugins
+------------------
 
-CakePHP by default serves plugins assets using the ``AssetFilter`` dispatcher
-filter. While this is a good convenience, it is recommended to symlink / copy
-the plugin assets under app's webroot so that they can be directly served by the
-web server without invoking PHP. You can do this by running::
+CakePHP sert par défaut les assets des plugins en utilisant le filtre de
+dispatcher ``AssetFilter``. Bien que ce soit pratique, il est recommandé de
+faire des liens symboliques / copier les assets des plugins dans le dossier
+webroot de l'application pour qu'ils puissent être directement servis par le
+serveur web dans invoquer PHP. Vous pouvez faire ceci en lançant::
 
     bin/cake plugin_assets symlink
 
-Running the above command will symlink all plugins assets under app's webroot.
-On Windows, which doesn't support symlinks, the assets will be copied in
-respective folders instead of being symlinked.
+Lancer la commande ci-dessus va faire faire un lien symbolique pour tous les
+assets des plugins dans le dossier webroot de l'application.
+Sur Windows, qui ne supporte pas les liens symboliques, les assets seront
+copiés dans les dossiers respectifs plutôt que mis en liens symboliques.
 
-You can symlink assets of one particular plugin by specifying it's name::
+Vous pouvez faire des liens symboliques des assets d'un plugin en particulier en
+spécifiant son nom::
 
     bin/cake plugin_assets symlink MyPlugin
 

@@ -228,7 +228,6 @@ Définition de Constantes de Temps
 
     Égale à 31536000
 
-
 .. meta::
     :title lang=fr: Constantes Globales et Fonctions
     :keywords lang=fr: internationalization et localization,constantes globales,exemple config,tableau php,convenience functions,core libraries,classes component,optional number,fonctions globales,string string,core classes,format strings,messages non lus,placeholders,fonctions utiles,sprintf,tableaux,paramètres,existence,traductions

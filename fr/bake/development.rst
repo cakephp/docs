@@ -185,7 +185,8 @@ Si vous souhaitez modifier la sortie par défaut du HTML produit par la commande
 remplacer certaine ou toute partie des templates que bake utilise. Pour créer
 un nouveau template de bake, faîtes ce qui suit:
 
-#. Créez un nouveau plugin avec Bake. Le nom du plugin est le nom du 'theme' de Bake
+#. Créez un nouveau plugin avec Bake. Le nom du plugin est le nom du 'theme' de
+   Bake
 #. Créez un nouveau répertoire dans **plugin/[name]/src/Template/Bake**.
 #. Copiez tout template que vous souhaitez changer à partir de
    **vendor/cakephp/cakephp/src/Template/Bake** vers les

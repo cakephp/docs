@@ -799,7 +799,6 @@ facilement, comme vous pouvez utiliser les objects factices ('mocks') pour
 éviter les erreurs 'd'envois d'en-têtes' qui peuvent arriver en essayant de
 configurer les en-têtes dans CLI.
 
-
 .. meta::
     :title lang=fr: Objets Request et Response
     :keywords lang=fr: requête controller,paramètres de requête,tableaux indicés,purpose index,objets réponse,information domaine,Objet requête,donnée requêtée,interrogation,params,précédentes versions,introspection,dispatcher,rout,structures de données,tableaux,adresse ip,migration,indexes,cakephp

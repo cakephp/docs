@@ -7,7 +7,6 @@ changements faits dans le cœur depuis la branche CakePHP 2.x. Assurez-vous de
 bien lire les autres pages de ce guide pour toutes les nouvelles
 fonctionnalités et les changements de l'API.
 
-
 Pré-requis
 ==========
 
@@ -49,9 +48,10 @@ Namespaces (Espaces de Noms)
 
 Toutes les classes du cœur de CakePHP sont maintenant dans des namespaces et
 suivent les spécifications du chargement PSR-4. Par exemple
-**src/Cache/Cache.php** est dans le namespace ``Cake\Cache\Cache``. Les constantes
-globales et les méthodes de helper comme :php:meth:`__()` et :php:meth:`debug()`
-ne sont pas mis dans un namespace pour des raisons de commodité.
+**src/Cache/Cache.php** est dans le namespace ``Cake\Cache\Cache``. Les
+constantes globales et les méthodes de helper comme :php:meth:`__()` et
+:php:meth:`debug()` ne sont pas mis dans un namespace pour des raisons de
+commodité.
 
 Constantes retirées
 ===================
@@ -204,9 +204,9 @@ Object
 
 La classe ``Object`` a été retirée. Elle contenait au début un tas de méthodes
 qui étaient utilisées dans plusieurs endroits à travers le framework. Les
-méthodes les plus utiles qui étaient utilisées ont été extraites dans des traits.
-Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la méthode
-``log()``. :php:trait:`Cake\\Routing\\RequestActionTrait` fournit
+méthodes les plus utiles qui étaient utilisées ont été extraites dans des
+traits. Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la
+méthode ``log()``. :php:trait:`Cake\\Routing\\RequestActionTrait` fournit
 ``requestAction()``.
 
 Console
@@ -1014,8 +1014,8 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
 - L'option ``showParents`` a été retirée de select().
 - Les options ``div``, ``before``, ``after``, ``between`` et ``errorMessage``
   ont été retirées de ``input()``. Vous pouvez utiliser les templates pour
-  mettre à jour le HTML qui l'entoure. L'option ``templates`` vous permet de surcharger
-  les templates chargés pour un input.
+  mettre à jour le HTML qui l'entoure. L'option ``templates`` vous permet de
+  surcharger les templates chargés pour un input.
 - Les options ``separator``, ``between``, et ``legend`` ont été retirées de
   ``radio()``. Vous pouvez maintenant utiliser les templates pour changer le
   HTML qui l'entoure.
@@ -1047,9 +1047,10 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   compatibilité avec les librairies CSS populaires telles que
   `Bootstrap <http://getbootstrap.com/>`_ et
   `Foundation <http://foundation.zurb.com/>`_.
-- Les tags de templates sont maintenant tous écrits en *camelBack*. Les tags pre-3.0 ``formstart``,
-  ``formend``, ``hiddenblock`` et ``inputsubmit`` sont maintenant ``formStart``, ``formEnd``, ``hiddenBlock``
-  et ``inputSubmit``. Pensez à bien les changer s'ils sont personnalisés dans votre application.
+- Les tags de templates sont maintenant tous écrits en *camelBack*. Les tags
+  pre-3.0 ``formstart``, ``formend``, ``hiddenblock`` et ``inputsubmit`` sont
+  maintenant ``formStart``, ``formEnd``, ``hiddenBlock`` et ``inputSubmit``.
+  Pensez à bien les changer s'ils sont personnalisés dans votre application.
 
 Il est recommandé que vous regardiez la documentation
 :doc:`/views/helpers/form` pour plus de détails sur la façon d'utiliser
@@ -1153,8 +1154,8 @@ fonctionnalités que CacheHelper fournissait. Cependant, implémenter `Edge Side
 Includes <http://fr.wikipedia.org/wiki/Edge_Side_Includes>`_ en PHP présente un
 grand nombre de limitations. Au lieu de construire une solution de qualité
 inférieure, nous recommandons aux développeurs ayant besoin d'un cache global
-d'utiliser `Varnish <http://varnish-cache.org>`_ ou `Squid <http://squid-cache.org>`_
-à la place.
+d'utiliser `Varnish <http://varnish-cache.org>`_ ou
+`Squid <http://squid-cache.org>`_ à la place.
 
 I18n
 ====
@@ -1248,8 +1249,8 @@ Testing
   le navigateur.
 
 - ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
-  Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
-  à la place.
+  Vous devez utiliser les nouvelles fonctionnalités de
+  :ref:`integration-testing` à la place.
 - Les fixtures doivent maintenant être référencées sous leur forme plurielle::
 
     // Au lieu de
@@ -1279,15 +1280,15 @@ Inflector
 ---------
 
 - la valeur par défaut pour l'argument ``$replacement`` de la méthode
-  :php:meth:`Cake\\Utility\\Inflector::slug()` a été modifée de underscore (``_``)
-  au tirêt (``-``). utiliser des tirêts pour séparer les mots dans les url
-  est le choix le plus courant et également celui recommandé par Google.
+  :php:meth:`Cake\\Utility\\Inflector::slug()` a été modifée de underscore
+  (``_``) au tiret (``-``). utiliser des tirêts pour séparer les mots dans les
+  url est le choix le plus courant et également celui recommandé par Google.
 
 - Les translitérations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
-  changé. Si vous utilisez des translitérations  personnalisées, vous devrez mettre
-  à jour votre code. A la place des expressions régulières, les translitérations
-  utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
-  performances significatives::
+  changé. Si vous utilisez des translitérations  personnalisées, vous devrez
+  mettre à jour votre code. A la place des expressions régulières, les
+  translitérations utilisent le remplacement par chaîne simple. Cela a donné
+  des améliorations de performances significatives::
 
     // Au lieu de
     Inflector::rules('transliteration', [

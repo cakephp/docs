@@ -12,7 +12,8 @@ services webs et des APIs distantes.
 Faire des Requêtes
 ==================
 
-Faire des requêtes est simple et direct. Faire une requête get ressemble à ceci::
+Faire des requêtes est simple et direct. Faire une requête get ressemble à
+ceci::
 
     use Cake\Network\Http\Client;
 
@@ -91,7 +92,7 @@ qui suit::
     $http = new Client();
     $response = $http->get(
       'http://example.com/tasks',
-      ['q' => 'test', '_content' => json_encode($data)], 
+      ['q' => 'test', '_content' => json_encode($data)],
       ['type' => 'json']
     );
 
@@ -187,7 +188,7 @@ déjà votre clé de consommateur et un secret de consommateur::
       ]
     ]);
 
-Authentification Proxy 
+Authentification Proxy
 ----------------------
 
 Certains proxies ont besoin d'une authentification pour les utiliser.
@@ -238,7 +239,7 @@ client scoped:
 * ssl_verify_host
 
 Chacune de ces options peut être remplacées en les spécifiant quand vous
-faîtes des requêtes. 
+faîtes des requêtes.
 host, scheme, proxy, port sont remplacées dans l'URL de la requête::
 
     // Utiliser le client scoped que nous avons créé précédemment.
@@ -319,8 +320,8 @@ de réponse.
 .. php:method:: cookie($name = null, $all = false)
 
     Récupère un cookie unique à partir de response. Par défaut, seule la valeur
-    d'un cookie est retourné. Si vous définissez le deuxième paramètre à ``true``,
-    toutes les propriétés définies dans la response seront retournées.
+    d'un cookie est retourné. Si vous définissez le deuxième paramètre à
+    ``true``, toutes les propriétés définies dans la response seront retournées.
 
 .. php:method:: statusCode()
 

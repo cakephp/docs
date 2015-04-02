@@ -261,8 +261,8 @@ façons::
     echo $time->isThisMonth();
     echo $time->isThisYear();
 
-Chacune des méthodes ci-dessus va retourner ``true``/``false`` selon si oui ou non
-l'instance ``Time`` correspond au temps présent.
+Chacune des méthodes ci-dessus va retourner ``true``/``false`` selon si oui ou
+non l'instance ``Time`` correspond au temps présent.
 
 Comparer Avec les Intervals
 ===========================
@@ -282,7 +282,8 @@ utilisant ``wasWithinLast()`` et ``isWithinNext()``::
 
 .. php:method:: wasWithinPast($interval)
 
-Vous pouvez aussi comparer une instance ``Time`` dans un intervalle dans le passé::
+Vous pouvez aussi comparer une instance ``Time`` dans un intervalle dans le
+passé::
 
     // Dans les 2 derniers jours.
     echo $time->wasWithinPast(2);

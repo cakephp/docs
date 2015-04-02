@@ -24,8 +24,8 @@ adresse e-mail de travail::
 
 .. note::
 
-    Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
-    excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
+    Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire
+    l'excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
 
 Récupérez un clone du code source de CakePHP sous github.:
 
@@ -46,7 +46,7 @@ permettra de rester à jour avec CakePHP::
 
 Maintenant que vous avez configuré CakePHP, vous devriez être en mesure
 de définir une :ref:`connexion à la base <database-configuration>` ``$test``,
-et :ref:`exécuter tous les tests de <running-tests>`.
+et :ref:`d'exécuter tous les tests de <running-tests>`.
 
 Travailler sur un correctif
 ===========================
@@ -80,7 +80,7 @@ le souhaitez; mais gardez à l'esprit ce qui suit:
 * Faîtes des commits logiques, et écrivez des messages de commit bien clairs
   et concis.
 
-Soumettre un pull request
+Soumettre un Pull Request
 =========================
 
 Une fois que vos changements sont faits et que vous êtes prêts pour la fusion
@@ -139,7 +139,7 @@ le pull request est créée.
     `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
     suivre les `Guidelines de la Communauté CakePHP <http://community.cakephp.org/guidelines>`_.
-   
+
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).
 

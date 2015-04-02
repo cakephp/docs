@@ -611,8 +611,8 @@ Changements de Signature des Méthodes Mixin
 -------------------------------------------
 
 Les Behaviors continuent d'offir la possibilité d'ajouter les méthodes
-'mixin' à des objets Table, cependant la signature de méthode pour ces méthodes a
-changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
+'mixin' à des objets Table, cependant la signature de méthode pour ces méthodes
+a changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
 **mêmes** arguments fournis à la table 'method'. Par exemple::
 
     // Supposons que la table a une méthode slug() fournie par un behavior.
