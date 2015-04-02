@@ -6,8 +6,19 @@ CakePHP's bake console is another effort to get you up and running in CakePHP
 behaviors, views, helpers, components, test cases, fixtures and plugins. And we
 aren't just talking skeleton classes: Bake can create a fully functional
 application in just a few minutes. In fact, Bake is a natural step to take once
-an application has been scaffolded.  The following sections cover bake more in
-detail:
+an application has been scaffolded.
+
+Installation
+============
+
+Before trying to use or extend bake make sure it is installed in your
+application. Bake is provided as a plugin that you can install with composer::
+
+    composer require --dev cakephp/bake
+
+The above will install bake as a development dependency. This means that it will
+not be installed when you do production deployments. The following sections
+cover bake more in detail:
 
 .. toctree::
     :maxdepth: 1
