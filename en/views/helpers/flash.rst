@@ -47,8 +47,8 @@ You can also override any of the options that were set in FlashComponent::
 For more information about the available array options, please refer to the
 :doc:`FlashComponent </controllers/components/flash>` section.
 
-Routing prefix and Flash messages
-=========================
+Routing Prefix and Flash Messages
+=================================
 
 .. versionadded:: 3.0.1
 
@@ -57,7 +57,7 @@ stored in **src/Template/{Prefix}/Element/Flash**. This way, you can have specif
 messages layouts for each part of your application (for instance, have different
 layouts for you front-end and your admin side).
 
-Flash Messages and themes
+Flash Messages and Themes
 =========================
 
 The FlashHelper uses normal elements to render the messages and will therefore

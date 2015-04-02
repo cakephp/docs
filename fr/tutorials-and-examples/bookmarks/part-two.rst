@@ -233,9 +233,9 @@ mettre à jour la méthode add pour ressembler à ceci::
     public function add()
     {
         $bookmark = $this->Bookmarks->newEntity();
-        $bookmark->user_id = $this->Auth->user('id');
         if ($this->request->is('post')) {
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');
                 return $this->redirect(['action' => 'index']);
