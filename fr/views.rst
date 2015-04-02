@@ -68,12 +68,12 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut .ctp
-(Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la logique
-de présentation nécessaire à l'organisation des données reçues du controller,
-dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
-utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
-fera le pont entre votre langage de template et CakePHP.
+Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut
+.ctp (Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la
+logique de présentation nécessaire à l'organisation des données reçues du
+controller, dans un format qui satisfasse l'audience que vous recherchez. Si
+vous préférez utiliser un langage de template comme Twig, ou Smarty, une
+sous-classe de View fera le pont entre votre langage de template et CakePHP.
 
 Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
@@ -103,7 +103,8 @@ chapitre :
 Variables de Vue
 ----------------
 
-Toute variable que vous définissez dans votre controller avec ``set()`` sera disponible à la fois dans la vue et dans le layout que votre action utilise.
+Toute variable que vous définissez dans votre controller avec ``set()`` sera
+disponible à la fois dans la vue et dans le layout que votre action utilise.
 En plus, toute variable définie sera aussi disponible dans tout element.
 Si vous avez besoin de passer des variables supplémentaires de la
 vue vers le layout, vous pouvez soit appeler ``set()`` dans le template de vue,
@@ -639,7 +640,7 @@ habituelle. Si la vue est rendue pour un controller/action d'un plugin, le nom
 du plugin va automatiquement être préfixé pour tous les elements utilisés, à
 moins qu'un autre nom de plugin ne soit présent.
 Si l'element n'existe pas dans le plugin, il ira voir dans le dossier principal
-APP. ::
+APP::
 
     echo $this->element('Contacts.helpbox');
 
@@ -663,15 +664,16 @@ Routing prefix and Elements
 
 .. versionadded:: 3.0.1
 
-Si vous avez configuré un préfix de routage, la résolution des chemins d'accès aux
-Elements peut chercher dans un chemin préfixé, comme les Layouts et les vues d'Action
-le font déjà.
-En partant du postulat que vous avez configuré le préfix "Admin" et que vous appelez::
+Si vous avez configuré un préfix de routage, la résolution des chemins d'accès
+aux Elements peut chercher dans un chemin préfixé, comme les Layouts et les vues
+d'Action le font déjà.
+En partant du postulat que vous avez configuré le préfix "Admin" et que vous
+appelez::
 
     echo $this->element('my_element');
 
-L'Element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un tel fichier
-n'existe pas, il sera ensuite cherché dans le chemin par défaut.
+L'Element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un
+tel fichier n'existe pas, il sera ensuite cherché dans le chemin par défaut.
 
 Mettre en Cache des Sections de votre View
 ------------------------------------------

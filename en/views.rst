@@ -21,8 +21,8 @@ common rendering scenarios:
 The App View
 ============
 
-``AppView`` is your application’s default View class. ``AppView`` itself extends the
-``Cake\View\View`` class included in CakePHP and is defined in
+``AppView`` is your application’s default View class. ``AppView`` itself
+extends the ``Cake\View\View`` class included in CakePHP and is defined in
 **src/View/AppView.php** as follows:
 
 .. code-block:: php
@@ -36,8 +36,8 @@ The App View
     }
 
 You can use your ``AppView`` to load helpers that will be used for every
-view rendered in your application. CakePHP provides an ``initialize()`` method that
-is invoked at the end of a View’s constructor for this kind of use:
+view rendered in your application. CakePHP provides an ``initialize()`` method
+that is invoked at the end of a View’s constructor for this kind of use:
 
 .. code-block:: php
 
@@ -136,10 +136,10 @@ Extending Views
 
 View extending allows you to wrap one view in another. Combining this with
 :ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
-:term:`DRY`. For example, your application has a sidebar that needs to change depending
-on the specific view being rendered. By extending a common view file, you can
-avoid repeating the common markup for your sidebar, and only define the parts
-that change:
+:term:`DRY`. For example, your application has a sidebar that needs to change
+depending on the specific view being rendered. By extending a common view file,
+you can avoid repeating the common markup for your sidebar, and only define the
+parts that change:
 
 .. code-block:: php
 
@@ -221,8 +221,8 @@ your views/layouts that will be defined elsewhere. For example, blocks are ideal
 for implementing things such as sidebars, or regions to load assets at the
 bottom/top of the layout. Blocks can be defined in two ways: either as
 a capturing block, or by direct assignment. The ``start()``, ``append()``,
-``prepend()``, ``assign()``, ``fetch()``, and ``end()`` methods allow you to work with
-capturing blocks::
+``prepend()``, ``assign()``, ``fetch()``, and ``end()`` methods allow you to
+work with capturing blocks::
 
     // Create the sidebar block.
     $this->start('sidebar');
@@ -440,8 +440,8 @@ using something like::
         }
     }
 
-Besides a default layout CakePHP's official skeleton app also has an 'ajax' layout.
-The Ajax layout is handy for crafting AJAX responses - it's an
+Besides a default layout CakePHP's official skeleton app also has an 'ajax'
+layout. The Ajax layout is handy for crafting AJAX responses - it's an
 empty layout. (Most AJAX calls only require a bit of markup in
 return, rather than a fully-rendered interface.)
 
@@ -526,9 +526,9 @@ The options supported are 'cache' and 'callbacks'. An example::
 
 Element caching is facilitated through the ``Cache`` class. You can
 configure elements to be stored in any Cache configuration you've set up. This
-gives you a great amount of flexibility to decide where and for how long elements
-are stored. To cache different versions of the same element in an application,
-provide a unique cache key value using the following format::
+gives you a great amount of flexibility to decide where and for how long
+elements are stored. To cache different versions of the same element in an
+application, provide a unique cache key value using the following format::
 
     $this->element('helpbox', [], [
             "cache" => ['config' => 'short', 'key' => 'unique value']
@@ -618,7 +618,7 @@ If you are using a plugin and wish to use elements from within the
 plugin, just use the familiar :term:`plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP folder. ::
+If the element doesn't exist in the plugin, it will look in the main APP folder::
 
     echo $this->element('Contacts.helpbox');
 
@@ -642,14 +642,14 @@ Routing prefix and Elements
 
 .. versionadded:: 3.0.1
 
-If you have a Routing prefix configured, the Element path resolution can switch to
-a prefix location, as Layouts and action View do.
+If you have a Routing prefix configured, the Element path resolution can switch
+to a prefix location, as Layouts and action View do.
 Assuming you have a prefix "Admin" configured and you call::
 
     echo $this->element('my_element');
 
-The element first be looked for in **src/Template/Admin/Element/**. If such a file
-does not exist, it will be looked for in the default location.
+The element first be looked for in **src/Template/Admin/Element/**. If such a
+file does not exist, it will be looked for in the default location.
 
 Caching Sections of Your View
 -----------------------------
