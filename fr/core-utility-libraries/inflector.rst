@@ -16,10 +16,20 @@ Vous pouvez essayer les inflections enligne sur
     * **Input:** Apple, Orange, Person, Man
     * **Output:** Apples, Oranges, People, Men
 
+.. note::
+
+    ``pluralize()`` ne convertit pas toujours correctement un nom qui est déjà
+    au pluriel.
+
 .. php:staticmethod:: singularize($plural)
 
     * **Input:** Apples, Oranges, People, Men
     * **Output:** Apple, Orange, Person, Man
+
+.. note::
+
+    ``singularize()`` ne convertit pas toujours correctement un nom qui est déjà
+    au singulier.
 
 .. php:staticmethod:: camelize($underscored)
 
@@ -31,7 +41,7 @@ Vous pouvez essayer les inflections enligne sur
     Il doit être noté que les underscores vont seulement convertir les mots
     formatés en camelCase. Les mots qui contiennent des espaces seront en
     minuscules, mais ne contiendront pas d'underscore.
-    
+
     * **Input:** applePie, someThing
     * **Output:** apple\_pie, some\_thing
 
@@ -73,7 +83,6 @@ Vous pouvez essayer les inflections enligne sur
     Définit de nouvelles règles d'inflection et de translitération à utiliser
     pour Inflector.
     Regardez :ref:`inflection-configuration` pour plus d'informations.
-
 
 .. meta::
     :title lang=fr: Inflector
