@@ -53,7 +53,8 @@ should look like::
         ]
     ];
 
-When using a list of ids, your request data should look like::
+The above will create 2 new tags. If you want to link an article with existing
+tags you can use a list of ids. Your request data should look like::
 
     $data = [
         'title' => 'My title',
@@ -64,8 +65,17 @@ When using a list of ids, your request data should look like::
         ]
     ];
 
-The marshaller will handle both of these forms correctly, but only for
-belongsToMany associations.
+If you are saving hasMany associations and want to link existing records to
+a new parent record you can use the ``_ids`` format::
+
+    $data = [
+        'title' => 'My new article',
+        'body' => 'The text',
+        'user_id' => 1,
+        'comments' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
 
 When building forms that save nested associations, you need to define which
 associations should be marshalled::
@@ -87,14 +97,15 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-You can convert multiple entities using::
+
+When creating forms that create/update multiple records at once you can use
+``newEntities()``::
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
-When converting multiple entities, the request data for multiple articles should
-look like::
+In this situation, the request data for multiple articles should look like::
 
     $data = [
         [
@@ -126,7 +137,8 @@ ids of associated entities::
         ]
     ]);
 
-The above will keep the association unchanged between Comments and Users for the concerned entity.
+The above will keep the association unchanged between Comments and Users for the
+concerned entity.
 
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
