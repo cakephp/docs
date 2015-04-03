@@ -201,9 +201,6 @@ ArticlesController now::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -273,10 +270,6 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
-
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -441,10 +434,6 @@ like::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
