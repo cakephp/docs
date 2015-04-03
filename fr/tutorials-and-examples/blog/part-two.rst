@@ -199,7 +199,7 @@ tarder dans le Controller Articles::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -211,9 +211,6 @@ tarder dans le Controller Articles::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Article invalide'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -264,7 +261,7 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -281,12 +278,7 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Article invalide'));
-            }
-
             $article = $this->Articles->get($id);
-
             $this->set(compact('article'));
         }
 
@@ -457,10 +449,6 @@ devrait ressembler::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Article invalide'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
