@@ -43,6 +43,10 @@ shells and tasks for an application. It also comes with an executable::
     $ cd /path/to/app
     $ bin/cake
 
+.. note::
+
+    For Windows, the command needs to be ``bin\cake`` (note the backslash).
+
 Running the Console with no arguments produces this help message::
 
     Welcome to CakePHP v3.0.0 Console
