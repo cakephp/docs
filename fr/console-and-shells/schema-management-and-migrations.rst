@@ -118,7 +118,7 @@ les plugins. SchemaShell permet aussi cette fonctionnalité.
 
 CakeSchema supporte aussi ``tableParameters``. Les paramètres de Table sont
 les informations non spécifiques aux colonnes de la table comme collation,
-charset, comments, et le le type de moteur de la table. Chaque Dbo implémente
+charset, comments, et le type de moteur de la table. Chaque Dbo implémente
 le tableParameters qu'ils supportent.
 
 Exemple

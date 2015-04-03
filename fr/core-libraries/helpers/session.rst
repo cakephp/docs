@@ -58,7 +58,7 @@ Affichage de notifications ou de messages flash
     :rtype: string
 
     Comme expliqué dans :ref:`creating-notification-messages` vous pouvez
-    créer des notifications uniques pour le le feedback. Après avoir
+    créer des notifications uniques pour le feedback. Après avoir
     créé les messages avec :php:meth:`SessionComponent::setFlash()`, vous
     voudrez les afficher. Une fois que le message est affiché, il sera
     retiré et ne s'affichera plus::
