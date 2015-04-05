@@ -56,8 +56,9 @@ liste de données d'entity, vos données requêtées devraient ressembler à cec
         ]
     ];
 
-Quand vous utilisez une liste d'ids, vos données requêtées devraient ressembler
-à ceci::
+Le code ci-dessus créera 2 nouveaux tags. Si vous voulez créer un lien d'un
+article  vers des tags existants, vous pouvez utiliser une lite des ids.
+Vos données de requête doivent ressembler à ceci::
 
     $data = [
         'title' => 'My title',
@@ -68,8 +69,17 @@ Quand vous utilisez une liste d'ids, vos données requêtées devraient ressembl
         ]
     ];
 
-Le marshaller va gérer ces deux formulaires correctement, mais seulement pour
-des associations belongsToMany.
+Si vous sauvegardez des associations hasMany et voulez lier des enregistrements
+existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
+
+    $data = [
+        'title' => 'My new article',
+        'body' => 'The text',
+        'user_id' => 1,
+        'comments' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
 
 Lors de la construction de formulaires qui sauvegardent des associations
 imbriquées, vous devez définir quelles associations doivent être marshalled::
@@ -92,14 +102,15 @@ la notation par point pour être plus bref::
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-Vous pouvez convertir plusieurs entities en utilisant::
+Lorsque vous créez des formulaires de création/mise à jour d'enregistrements
+multiples en une seule opération vous pouvez utiliser ``newEntities()``::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
-Lors de la conversion de plusieurs entities, les données requetées pour
-plusieurs articles devrait ressembler à ceci::
+Dans cette situation, les données de requête pour plusieurs articles doivent
+ressembler à ceci::
 
     $data = [
         [
@@ -112,10 +123,11 @@ plusieurs articles devrait ressembler à ceci::
         ],
     ];
 
-Il est également possible de permettre à ``newEntity()`` d'écrire dans des champs non accessibles.
-Par exemple, ``id`` est généralement absent de la propriété ``_accessible``.
-Dans ce cas, vous pouvez utiliser l'option ``accessibleFields``. Cela est particulièrement intéressant
-pour conserver les associations existantes entre certaines entities::
+Il est également possible de permettre à ``newEntity()`` d'écrire dans des
+champs non accessibles. Par exemple, ``id`` est généralement absent de la
+propriété ``_accessible``. Dans ce cas, vous pouvez utiliser l'option
+``accessibleFields``. Cela est particulièrement intéressant pour conserver les
+associations existantes entre certaines entities::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
@@ -131,7 +143,8 @@ pour conserver les associations existantes entre certaines entities::
         ]
     ]);
 
-Le code ci-dessus permet de conserver l'association entre Comments et Users pour l'entity concernée.
+Le code ci-dessus permet de conserver l'association entre Comments et Users pour
+l'entity concernée.
 
 Une fois que vous avez converti les données requêtées dans des entities, vous
 pouvez leur faire un ``save()`` ou un ``delete()``::
