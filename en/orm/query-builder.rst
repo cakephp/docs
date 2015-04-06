@@ -512,6 +512,7 @@ conditions:
 - ``lte()`` Create a ``<=`` condition.
 - ``isNull()`` Create an ``IS NULL`` condition.
 - ``isNotNull()`` Create a negated ``IS NULL`` condition.
+- ``between()`` Create a ``BETWEEN`` condition.
 
 Automatically Creating IN Clauses
 ---------------------------------
