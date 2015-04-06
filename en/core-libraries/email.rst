@@ -347,12 +347,10 @@ transport). To start off your file should look like::
 
     class ExampleTransport extends AbstractTransport
     {
-
-        public function send(Email $email)
+        public function send(Cake\Network\Email\Email $email)
         {
             // Magic inside!
         }
-
     }
 
 You must implement the method ``send(Email $email)`` with your custom logic.
