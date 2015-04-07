@@ -223,19 +223,19 @@ important note should be made.
 
 .. note::
 
-    For belongsToMany associations, please ensure that the relevant entity has a property accessible to the associated entity.
+    For belongsToMany associations, ensure the relevant entity has 
+    a property accessible for the associated entity.
     
     
-    If a Product belongsToMany Tag::
+If a Product belongsToMany Tag::
     
-        // in the Product Entity
-        protected $_accessible = [
-            // .. other properties
-            'tags' => true,
-        ];
+    // in the Product Entity
+    protected $_accessible = [
+        // .. other properties
+       'tags' => true,
+    ];
     
     
-
 .. note::
 
     For hasMany and belongsToMany associations, if there were any entities that
