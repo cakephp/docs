@@ -5,7 +5,7 @@ Les correctifs et les pull requests sont les meilleures façons de contribuer
 au code de CakePHP. Les pull requests peuvent être créés sur Github, et sont
 préférés aux correctifs attachés aux tickets.
 
-Configuration initiale
+Configuration Initiale
 ======================
 
 Avant de travailler sur les correctifs pour CakePHP, c'est une bonne idée de
@@ -46,9 +46,9 @@ permettra de rester à jour avec CakePHP::
 
 Maintenant que vous avez configuré CakePHP, vous devriez être en mesure
 de définir une :ref:`connexion à la base <database-configuration>` ``$test``,
-et :ref:`d'exécuter tous les tests de <running-tests>`.
+et :ref:`d'exécuter tous les tests <running-tests>`.
 
-Travailler sur un correctif
+Travailler sur un Correctif
 ===========================
 
 A chaque fois que vous voulez travailler sur un bug, une fonctionnalité ou
@@ -134,7 +134,7 @@ le pull request est créée.
 
 .. note::
 
-    Rappelez vous que tout le code auquel vous contribuez pour CakePHP sera
+    Rappelez-vous que tout le code auquel vous contribuez pour CakePHP sera
     sous Licence MIT, et la
     `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
