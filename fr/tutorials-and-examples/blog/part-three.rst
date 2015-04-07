@@ -24,7 +24,7 @@ Normalement vous devriez voir que le plugin migrations est déjà dans
 ``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
 
     "require": {
-        "cakephp/migrations": "dev-master"
+        "cakephp/migrations": "~1.0"
     }
 
 Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
