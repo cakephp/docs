@@ -22,7 +22,7 @@ Now open your application's ``composer.json`` file. Normally you would see that
 the migrations plugin is already under ``require``. If not add it as follows::
 
     "require": {
-        "cakephp/migrations": "dev-master"
+        "cakephp/migrations": "~1.0"
     }
 
 Then run ``composer update``. The migrations plugin will now be in your
