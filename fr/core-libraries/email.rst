@@ -371,6 +371,7 @@ Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 
     use Cake\Network\Email\AbstractTransport;
+    use Cake\Network\Email\Email;
 
     class ExampleTransport extends AbstractTransport
     {

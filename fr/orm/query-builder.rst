@@ -548,6 +548,7 @@ suivantes pour créer des conditions:
 - ``lte()`` Créé une condition ``<=``.
 - ``isNull()`` Créé une condition ``IS NULL``.
 - ``isNotNull()`` Créé une condition négative ``IS NULL``.
+- ``between()`` Créé une condition ``BETWEEN``.
 
 Créer automatiquement des Clauses IN
 ------------------------------------
