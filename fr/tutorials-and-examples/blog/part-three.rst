@@ -7,7 +7,7 @@ Créer une Catégorie en Arbre (Tree)
 Continuons notre application de blog et imaginons que nous souhaitions
 catégoriser nos articles. Nous souhaitons que les catégories soit triées, et
 pour cela, nous allons utiliser le :doc:`behavior Tree </orm/behaviors/tree>`
-pour nous aide à organiser les catégories.
+pour nous aider à organiser les catégories.
 
 Mais d'abord, nous devons modifier nos tables.
 
