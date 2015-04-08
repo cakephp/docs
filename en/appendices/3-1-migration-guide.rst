@@ -8,7 +8,7 @@ Controller
 ==========
 
 FlashComponent
--------------
+--------------
 
 - ``FlashComponent`` now stacks Flash messages when set with the ``set()``
   or ``__call()`` method. This means that the structure in the Session for
@@ -17,8 +17,13 @@ FlashComponent
 Helper
 ==========
 
-FlashHelper
+SessionHelper
 -------------
+
+- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly.
+
+FlashHelper
+-----------
 
 - ``FlashHelper`` can render multiple messages if multiple messages where
   set with the ``FlashComponent``. Each message will be rendered in its own
