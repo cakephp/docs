@@ -20,7 +20,7 @@ Helper
 SessionHelper
 -------------
 
-- The ``SessionHelper`` has been deprecated. Yo can use ``$this->request->session()`` directly.
+- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly.
 
 FlashHelper
 -----------
