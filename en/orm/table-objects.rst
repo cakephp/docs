@@ -226,7 +226,7 @@ afterDelete
 
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
-The ``Model.beforeDelete`` event is fired after an entity has been deleted.
+The ``Model.afterDelete`` event is fired after an entity has been deleted.
 
 afterDeleteCommit
 -----------------
