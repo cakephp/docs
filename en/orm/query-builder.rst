@@ -12,6 +12,170 @@ queries using unions and subqueries with ease.
 Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
+The Query Object
+================
+
+The easiest way to create a ``Query`` object is to use ``find()`` from a
+``Table`` object. This method will return an incomplete query ready to be
+modified. You can also use a table's connection object to access the lower level
+Query builder that does not include ORM features, if necessary. See the
+:ref:`database-queries` section for more information::
+
+    use Cake\ORM\TableRegistry;
+    $articles = TableRegistry::get('Articles');
+
+    // Start a new query.
+    $query = $articles->find();
+
+When inside a controller, you can use the automatic table variable that is
+created using the conventions system::
+
+    // Inside ArticlesController.php
+
+    $query = $this->Articles->find();
+
+Selecting Rows From A Table
+---------------------------
+
+::
+
+    use Cake\ORM\TableRegistry;
+
+    $query = TableRegistry::get('Articles')->find();
+
+    foreach ($query as $article) {
+        debug($article->title);
+    }
+
+For the remaining examples, assume that ``$articles`` is a
+:php:class:`~Cake\\ORM\\Table`. When inside controllers, you can use
+``$this->Articles`` instead of ``$articles``.
+
+Almost every method in a ``Query`` object will return the same query, this means
+that ``Query`` objects are lazy, and will not be executed unless you tell them
+to::
+
+    $query->where(['id' => 1]); // Return the same query object
+    $query->order(['title' => 'DESC']); // Still same object, no SQL executed
+
+You can of course chain the methods you call on Query objects::
+
+    $query = $articles
+        ->find()
+        ->select(['id', 'name'])
+        ->where(['id !=' => 1])
+        ->order(['created' => 'DESC']);
+
+    foreach ($query as $article) {
+        debug($article->created);
+    }
+
+If you try to call ``debug()`` on a Query object, you will see its internal
+state and the SQL that will be executed in the database::
+
+    debug($articles->find()->where(['id' => 1]));
+
+    // Outputs
+    // ...
+    // 'sql' => 'SELECT * FROM articles where id = ?'
+    // ...
+
+You can execute a query directly without having to use ``foreach`` on it.
+The easiest way is to either call the ``all()`` or ``toArray()`` methods::
+
+    $resultsIteratorObject = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->all();
+
+    foreach ($resultsIteratorObject as $article) {
+        debug($article->id);
+    }
+
+    $resultsArray = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->toArray();
+
+    foreach ($resultsArray as $article) {
+        debug($article->id);
+    }
+
+    debug($resultsArray[0]->title);
+
+In the above example, ``$resultsIteratorObject`` will be an instance of
+``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
+and traversing methods on.
+
+Often, there is no need to call ``all()``, you are
+allowed to just iterate the Query object to get its results. Query objects can
+also be used directly as the result object; trying to iterate the query, calling
+``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
+will result in the query being executed and results returned to you.
+
+Selecting A Single Row From A Table
+-----------------------------------
+
+You can use the ``first()`` method to get the first result in the query::
+
+    $article = $articles
+        ->find()
+        ->where(['id' => 1])
+        ->first();
+
+    debug($article->title);
+
+Getting A List Of Values From A Column
+--------------------------------------
+
+::
+
+    // Use the extract() method from the collections library
+    // This executes the query as well
+    $allTitles = $articles->find()->extract('title');
+
+    foreach ($allTitles as $title) {
+        echo $title;
+    }
+
+You can also get a key-value list out of a query result::
+
+    $list = $articles->find('list')->select(['id', 'title']);
+
+    foreach ($list as $id => $title) {
+        echo "$id : $title"
+    }
+
+Queries Are Collection Objects
+------------------------------
+
+Once you get familiar with the Query object methods, it is strongly encouraged
+that you visit the :ref:`Collection<collection-objects>` section to improve your skills
+in efficiently traversing the data. In short, it is important to remember that
+anything you can call on a Collection object, you can also do in a Query object::
+
+    // Use the combine() method from the collections library
+    // This is equivalent to find('list')
+    $keyValueList = $articles->find()->combine('id', 'title');
+
+    // An advanced example
+    $results = $articles->find()
+        ->where(['id >' => 1])
+        ->order(['title' => 'DESC'])
+        ->map(function ($row) { // map() is a collection method, it executes the query
+            $row->trimmedTitle = trim($row->title);
+            return $row;
+        })
+        ->combine('id', 'trimmedTitle') // combine() is another collection method
+        ->toArray(); // Also a collections library method
+
+    foreach ($results as $id $trimmedTitle) {
+        echo "$id : $trimmedTitle";
+    }
+
+How Are Queries Lazily Evaluated
+--------------------------------
+
 Query objects are lazily evaluated. This means a query is not executed until one
 of the following things occur:
 
@@ -31,104 +195,6 @@ re-evaluating a query will result in additional SQL being run.
 
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
-
-The Query Object
-================
-
-The easiest way to create a ``Query`` object is to use ``find()`` from a
-``Table`` object. This method will return an incomplete query ready to be
-modified. You can also use a table's connection object to access the lower level
-Query builder that does not include ORM features, if necessary. See the
-:ref:`database-queries` section for more information. For the remaining
-examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
-
-    // Start a new query.
-    $query = $articles->find();
-
-Almost every method in a ``Query`` object will return the same query, this means
-that ``Query`` objects are lazy, and will not be executed unless you tell them
-to::
-
-    $query->where(['id' => 1]); // Return the same query object
-    $query->order(['title' => 'DESC']); // Still same object, no SQL executed
-
-You can of course chain the methods you call on Query objects::
-
-    $query = $articles
-        ->find()
-        ->select(['id', 'name'])
-        ->where(['id !=' => 1])
-        ->order(['created' => 'DESC']);
-
-If you try to call ``debug()`` on a Query object, you will see its internal
-state and the SQL that will be executed in the database::
-
-    debug($articles->find()->where(['id' => 1]));
-
-    // Outputs
-    // ...
-    // 'sql' => 'SELECT * FROM articles where id = ?'
-    // ...
-
-Once you're happy with the Query, you can execute it. The easiest way is to
-either call the ``first()`` or the ``all()`` methods::
-
-    $firstArticle = $articles
-        ->find()
-        ->where(['id' => 1])
-        ->first();
-
-    $allResults = $articles
-        ->find()
-        ->where(['id >' => 1])
-        ->all();
-
-In the above example, ``$allResults`` will be an instance of
-``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
-and traversing methods on. Often, there is no need to call ``all()``, you are
-allowed to just iterate the Query object to get its results::
-
-    // Iterate the results
-    foreach ($allResults as $result) {
-     ...
-    }
-
-    // That is equivalent to
-    $query = $articles->find()->where(['id' => 1]);
-    foreach ($query as $result) {
-     ...
-    }
-
-Query objects can also be used directly as the result object; trying to iterate the query,
-calling ``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
-will result in the query being executed and results returned to you::
-
-    // This executes the query and returns an array of results
-    $resultsIntoAnArray = $articles->find()->where(['id >' => 1])->toArray();
-
-    // Use the combine() method from the collections library
-    // This executes the query
-    $keyValueList = $articles->find()->combine('id', 'title');
-
-    // Use the extract() method from the collections library
-    // This executes the query as well
-    $allTitles = $articles->find()->extract('title');
-
-Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`Collection<collection-objects>` section to improve your skills
-in efficiently traversing the data. In short, it is important to remember that
-anything you can call on a Collection object, you can also do in a Query object::
-
-    // An advanced example
-    $results = $articles->find()
-        ->where(['id >' => 1])
-        ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
-            $row->trimmedTitle = trim($row->title);
-            return $row;
-        })
-        ->combine('id', 'trimmedTitle') // combine() is another collection method
-        ->toArray(); // Also a collections library method
 
 The following sections will show you everything there is to know about using and
 combining the Query object methods to construct SQL statements and extract data.
@@ -275,20 +341,6 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Disabling Hydration
--------------------
-
-While ORMs and object result sets are powerful, hydrating entities is sometimes
-unnecessary. For example, when accessing aggregated data, building an Entity may
-not make sense. In these situations you may want to disable entity hydration::
-
-    $query = $articles->find();
-    $query->hydrate(false);
-
-.. note::
-
-    When hydration is disabled results will be returned as basic arrays.
-
 Case statements
 ---------------
 
@@ -313,6 +365,20 @@ To do this with the query builder, we'd use the following code::
         'number_unpublished' => $query->func()->sum($unpublishedCase)
     ])
     ->group('published');
+
+Disabling Hydration
+-------------------
+
+While ORMs and object result sets are powerful, hydrating entities is sometimes
+unnecessary. For example, when accessing aggregated data, building an Entity may
+not make sense. In these situations you may want to disable entity hydration::
+
+    $query = $articles->find();
+    $query->hydrate(false);
+
+.. note::
+
+    When hydration is disabled results will be returned as basic arrays.
 
 .. _advanced-query-conditions:
 
