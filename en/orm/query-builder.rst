@@ -107,11 +107,11 @@ In the above example, ``$resultsIteratorObject`` will be an instance of
 ``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
 and traversing methods on.
 
-Often, there is no need to call ``all()``, you are
-allowed to just iterate the Query object to get its results. Query objects can
-also be used directly as the result object; trying to iterate the query, calling
-``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
-will result in the query being executed and results returned to you.
+Often, there is no need to call ``all()``, you can simply iterate the
+Query object to get its results. Query objects can also be used directly as the
+result object; trying to iterate the query, calling ``toArray`` or some of the
+methods inherited from :ref:`Collection <collection-objects>`, will result in the
+query being executed and results returned to you.
 
 Selecting A Single Row From A Table
 -----------------------------------
@@ -150,9 +150,10 @@ Queries Are Collection Objects
 ------------------------------
 
 Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`Collection<collection-objects>` section to improve your skills
-in efficiently traversing the data. In short, it is important to remember that
-anything you can call on a Collection object, you can also do in a Query object::
+that you visit the :ref:`Collection <collection-objects>` section to improve
+your skills in efficiently traversing the data. In short, it is important to
+remember that anything you can call on a Collection object, you can also do in
+a Query object::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
@@ -188,7 +189,7 @@ of the following things occur:
   can only be used with ``SELECT`` statements.
 - The query's ``toArray()`` method is called.
 
-Until one of these conditions are met, the query can be modified with additional
+Until one of these conditions are met, the query can be modified without additional
 SQL being sent to the database. It also means that if a Query hasn't been
 evaluated, no SQL is ever sent to the database. Once executed, modifying and
 re-evaluating a query will result in additional SQL being run.
