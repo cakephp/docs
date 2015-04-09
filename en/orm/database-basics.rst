@@ -2,17 +2,17 @@ Database Basics
 ###############
 
 The CakePHP database access layer abstracts and provides help with most aspects
-of dealing with relational database such as keeping connections to the server,
+of dealing with relational databases such as, keeping connections to the server,
 building queries, preventing SQL injections, inspecting and altering schemas,
 and with debugging and profiling queries sent to the database.
 
 Quick Tour
 ==========
 
-The functions described in this chapter relate to what is possible to do with
-the lower-level database access API. If you want instead to learn more about the
-full ORM, you can read the :doc:`/orm/query-builder` and :doc:`/orm/table-objects`
-sections.
+The functions described in this chapter illustrate what is possible to do with
+the lower-level database access API. If instead you want to learn more about the
+complete ORM, you can read the :doc:`/orm/query-builder` and
+:doc:`/orm/table-objects` sections.
 
 The easiest way to create a database connection is using a ``DSN`` string::
 
@@ -35,8 +35,7 @@ Running raw SQL queries is a breeze::
     $connection = ConnectionManager::get('default');
     $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
 
-
-You can use arguments to parametrize select statements::
+You can use prepared statements to insert parameters::
 
     $results = $connection
         ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
@@ -52,7 +51,7 @@ It is also possible to use complex data types as arguments::
         )
         ->fetchAll('assoc');
 
-Instead of writing the SQL manually, you can use the built-in query builder::
+Instead of writing the SQL manually, you can use the query builder::
 
     $results = $connection
         ->newQuery()
