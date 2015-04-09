@@ -537,6 +537,59 @@ n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
 
     I18n::defaultFormatter('sprintf');
 
+Localiser les Dates et les Nombres
+==================================
+
+Lorsque vous affichez des dates et des nombres dans votre application, vous
+voudrez souvent qu'elles soient formatées conformément au format du pays ou
+de la région dans lequel vous souhaitez afficher la page.
+
+Pour changer l'affichage des dates et des nombres, vous devez uniquement changer
+la locale et utiliser les bonnes classes::
+
+    use Cake\I18n\I18n;
+    use Cake\I18n\Time;
+    use Cake\I18n\Number;
+
+    I18n::locale('fr-FR');
+
+    $date = new Time('2015-04-05 23:00:00');
+
+    echo $date; // Affiche 05/04/2015 23:00
+
+    echo Number::format(524.23); // Displays 524,23
+
+Assurez vous de lire les sections :doc:`/core-libraries/time` et
+:doc:`/core-libraries/number` pour en apprendre plus sur les options de formatage.
+
+Par défaut, les dates renvoyées par l'ORM utilisent la classe ``Cake\I18n\Time``,
+donc leur l'affichage direct dans votre application sera affecté par le
+changement de la locale.
+
+.. _parsing-localized-dates:
+
+Parser les Données Datetime Localisées
+--------------------------------------
+
+Quand vous acceptez les données localisées, c'est sympa d'accepter les
+informations de type datetime dans un format localisé pour l'utilisateur. Dans
+un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
+les types Date, Time, et DateTime pour parser les formats localisés::
+
+    use Cake\Database\Type;
+
+    // Permet de parser avec le format de locale par défaut.
+    Type::build('datetime')->useLocaleParser();
+
+    // Configure un parser personnalisé du format de datetime.
+    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+
+    // Vous pouvez aussi utiliser les constantes IntlDateFormatter.
+    Type::build('datetime')->useLocaleParser()
+        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
+
+Le parsing du format par défaut est le même que le format de chaîne par défaut.
+
 .. meta::
     :title lang=fr: Internationalization & Localization
     :keywords lang=fr: internationalization localization,internationalization et localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages

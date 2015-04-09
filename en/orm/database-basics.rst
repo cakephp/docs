@@ -315,31 +315,6 @@ CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
 your Table's :ref:`_initializeSchema() method <saving-complex-types>`.
 
-.. _parsing-localized-dates:
-
-Parsing Localized Datetime Data
--------------------------------
-
-When accepting localized data, it is nice to accept datetime information in
-a user's localized format. In a controller, or
-:doc:`/development/dispatch-filters` you can configure the Date, Time, and
-DateTime types to parse localized formats::
-
-    use Cake\Database\Type;
-
-    // Enable default locale format parsing.
-    Type::build('datetime')->useLocaleParser();
-
-    // Configure a custom datetime format parser format.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
-
-    // You can also use IntlDateFormatter constants.
-    Type::build('datetime')->useLocaleParser()
-        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
-
-The default parsing format is the same as the default string format.
-
-
 Connection Classes
 ==================
 

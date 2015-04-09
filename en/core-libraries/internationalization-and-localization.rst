@@ -511,6 +511,59 @@ created translators using the ``translator()`` and ``config()`` methods::
 
     I18n::defaultFormatter('sprintf');
 
+Localizing Dates and Numbers
+============================
+
+When outputting Dates and Numbers in your application, you will often need that
+they are formatted according to the preferred format for the country or region
+that you wish your page to be displayed.
+
+In order to change how dates and numbers are displayed you just need to change
+the current locale setting and use the right classes::
+
+    use Cake\I18n\I18n;
+    use Cake\I18n\Time;
+    use Cake\I18n\Number;
+
+    I18n::locale('fr-FR');
+
+    $date = new Time('2015-04-05 23:00:00');
+
+    echo $date; // Displays 05/04/2015 23:00
+
+    echo Number::format(524.23); // Displays 524,23
+
+Make sure you read the :doc:`/core-libraries/time` and :doc:`/core-libraries/number`
+sections to learn more about formatting options.
+
+By default dates returned for the ORM results use the ``Cake\I18n\Time`` class,
+so displaying them directly in you application will be affected by changing the
+current locale.
+
+.. _parsing-localized-dates:
+
+Parsing Localized Datetime Data
+-------------------------------
+
+When accepting localized data from the request, it is nice to accept datetime
+information in a user's localized format. In a controller, or
+:doc:`/development/dispatch-filters` you can configure the Date, Time, and
+DateTime types to parse localized formats::
+
+    use Cake\Database\Type;
+
+    // Enable default locale format parsing.
+    Type::build('datetime')->useLocaleParser();
+
+    // Configure a custom datetime format parser format.
+    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+
+    // You can also use IntlDateFormatter constants.
+    Type::build('datetime')->useLocaleParser()
+        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
+
+The default parsing format is the same as the default string format.
+
 .. meta::
     :title lang=en: Internationalization & Localization
     :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
