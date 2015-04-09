@@ -172,5 +172,5 @@ CakePHP 应用程序.
 
 
 .. meta::
-    :title lang=zh_CN: Blog Tutorial
-    :keywords lang=zh_CN: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads
+    :title lang=zh: Blog Tutorial
+    :keywords lang=zh: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads
