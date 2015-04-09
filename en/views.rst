@@ -354,26 +354,14 @@ JavaScript and CSS files from views.
 
 The ``content`` block contains the contents of the rendered view.
 
-``$title_for_layout`` contains the page title. This variable is generated automatically,
-but you can override it by setting it in your controller/view.
+``$title_for_layout`` contains the page title. This variable is generated
+automatically, but you can override it by setting it in your controller/view as
+you would any other view variable.
 
 .. note::
 
     The ``$title_for_layout`` is deprecated as of 2.5, use ``$this->fetch('title')``
     in your layout and ``$this->assign('title', 'page title')`` instead.
-
-Setting the title for the layout is easiest to do in the
-controller, setting the ``$title_for_layout`` variable::
-
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title_for_layout', 'View Active Users');
-       }
-   }
-
-You can also set the title_for_layout variable from inside the view file::
-
-    $this->set('title_for_layout', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
 ``app/View/Layouts`` directory, and switch between them inside of your
