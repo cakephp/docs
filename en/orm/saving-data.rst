@@ -39,6 +39,29 @@ request data should look like::
         ]
     ];
 
+When building forms that save nested associations, you need to define which
+associations should be marshalled::
+
+    // In a controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags', 'Comments' => ['associated' => ['Users']]
+        ]
+    ]);
+
+The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
+should be marshalled. Alternatively, you can use dot notation for brevity::
+
+    // In a controller.
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
+
+Converting BelongsToMany Data
+-----------------------------
+
 If you are saving belongsToMany associations you can either use a list of
 entity data or a list of ids. When using a list of entity data your request data
 should look like::
@@ -65,6 +88,28 @@ tags you can use a list of ids. Your request data should look like::
         ]
     ];
 
+If you need to link against some existing belongsToMany records, and create new
+ones at the same time you can use an expanded format::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['name' => 'A new tag'],
+            ['name' => 'Another new tag'],
+            ['id' => 5],
+            ['id' => 21]
+        ]
+    ];
+
+When the above data is converted into entities, you will have 4 tags. The first
+two will be new objects, and the second two will be references to existing
+records.
+
+Converting HasMany Data
+-----------------------
+
 If you are saving hasMany associations and want to link existing records to
 a new parent record you can use the ``_ids`` format::
 
@@ -77,26 +122,8 @@ a new parent record you can use the ``_ids`` format::
         ]
     ];
 
-When building forms that save nested associations, you need to define which
-associations should be marshalled::
-
-    // In a controller
-    $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
-        'associated' => [
-            'Tags', 'Comments' => ['associated' => ['Users']]
-        ]
-    ]);
-
-The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. Alternatively, you can use dot notation for brevity::
-
-    // In a controller.
-    $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
-        'associated' => ['Tags', 'Comments.Users']
-    ]);
-
+Converting Multiple Records
+---------------------------
 
 When creating forms that create/update multiple records at once you can use
 ``newEntities()``::
@@ -117,6 +144,9 @@ In this situation, the request data for multiple articles should look like::
             'published' => 1
         ],
     ];
+
+Changing Accessible Fields
+--------------------------
 
 It's also possible to allow ``newEntity()`` to write into non accessible fields.
 For example, ``id`` is usually absent from the ``_accessible`` property.
