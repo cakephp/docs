@@ -344,30 +344,6 @@ Vous pouvez utiliser les types personnalisés créés en faisant la correspondan
 des types dans la :ref:`méhode _initializeSchema() <saving-complex-types>` de
 votre Table.
 
-.. _parsing-localized-dates:
-
-Parser les Données Datetime Localisées
---------------------------------------
-
-Quand vous acceptez les données localisées, c'est sympa d'accepter les
-informations de type datetime dans un format localisé pour l'utilisateur. Dans
-un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
-les types Date, Time, et DateTime pour parser les formats localisés::
-
-    use Cake\Database\Type;
-
-    // Permet de parser avec le format de locale par défaut.
-    Type::build('datetime')->useLocaleParser();
-
-    // Configure un parser personnalisé du format de datetime.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
-
-    // Vous pouvez aussi utiliser les constantes IntlDateFormatter.
-    Type::build('datetime')->useLocaleParser()
-        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
-
-Le parsing du format par défaut est le même que le format de chaîne par défaut.
-
 Les Classes de Connection
 =========================
 
