@@ -296,7 +296,7 @@ epub_tocdup = False
 epub_use_index = False
 
 # Languages available.
-languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh_CN']
+languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh']
 
 # The GitHub branch name for this version of the docs
 branch = '3.0'
