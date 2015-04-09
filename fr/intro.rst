@@ -10,16 +10,16 @@ Le but de cette présentation est d'introduire les concepts généraux de CakePH
 et de vous donner un aperçu rapide de la façon dont ces concepts sont mis en
 œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, vous pouvez
 :doc:`commencer avec le tutoriel </tutorials-and-examples/bookmarks/intro>`, ou
-:doc:`plonger dans la documentation </topics>`.
+:doc:`vous plonger dans la documentation </topics>`.
 
 Conventions plutôt que Configuration
 ====================================
 
 CakePHP fournit une structure organisationnelle de base qui comprend les noms
 de classes, les noms de fichiers, les noms de table de base de données, et
-d'autres conventions. Même si les conventions prennent du temps à apprendre, en
-suivant les conventions offertes par CakePHP, vous pouvez éviter les
-configurations inutiles et construire une structure d'application uniforme
+d'autres conventions. Même si les conventions peuvent paraître longues à
+apprendre, en suivant les conventions offertes par CakePHP, vous pouvez éviter
+les configurations inutiles et construire une structure d'application uniforme
 ce qui facilite le travail quand vous travaillez sur de multiples projets. Le
 :doc:`chapitre sur les conventions </intro/conventions>` couvre les différentes
 conventions utilisées par CakePHP.
@@ -37,7 +37,7 @@ Dans le cas d'un réseau social, la couche Model s'occuperait des tâches telles
 que sauvegarder les données utilisateur, sauvegarder les associations d'amis,
 enregistrer et récupérer les photos des utilisateurs, trouver des suggestions
 de nouveaux amis, etc ...
-Tandis que les objets Models seront "Friend", "User", "Comment", "Photo".
+Tandis que les objets Models seraient "Friend", "User", "Comment", "Photo".
 Si nous voulions charger des données depuis notre table ``users``, nous
 pourrions faire::
 
