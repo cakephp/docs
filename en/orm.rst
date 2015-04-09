@@ -1,17 +1,16 @@
-Models
-######
+ORM and Database Access
+#######################
 
-Models are the classes that sit as the business layer in your application.
-This means that they should be responsible for managing almost everything
-that happens regarding your data, its validity, interactions and evolution
-of the information workflow in your domain of work.
-
-In CakePHP your application's domain model gets split into 2 primary object
+In CakePHP working with data through the database is done with 2 primary object
 types. The first are **repositories** or **table objects**. These objects
 provide access to collections of data. They allow you to save new records,
 modify/delete existing ones, define relations, and perform bulk operations. The
 second type of objects are **entities**. Entities represent individual records
 and allow you to define row/record level behavior & functionality.
+
+These two classes are usually responsible for managing almost everything
+that happens regarding your data, its validity, interactions and evolution
+of the information workflow in your domain of work.
 
 CakePHP's built-in ORM specializes in relational databases, but can be extended
 to support alternative datasources.
