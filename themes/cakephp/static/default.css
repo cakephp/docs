@@ -578,7 +578,6 @@ dt tt {
 }
 
 /* -- Sidebar -- */
-.page-contents > ul,
 #sidebar-navigation > ul {
 	margin-left: 0;
 }
@@ -664,7 +663,10 @@ dt tt {
 	}
 }
 
+.page-contents ul {
+    margin-left:1.5rem;
+}
 
-#back-to-contents {
-	display: none;
+.page-contents ul li {
+    font-size:1.4rem;
 }
