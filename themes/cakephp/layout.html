@@ -147,10 +147,12 @@ window.lang = "{{ language }}";
 			{%- if pagename != 'search' -%}
 				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
 			{%- endif -%}
+			{%- if pagename != 'search' and pagename != 'contents' and pagename != 'index' -%}
 			<div id="page-contents" class="page-contents">
 				<h3>{{ _('Page Contents') }}</h3>
 				{{ toc }}
 			</div>
+			{%- endif -%}
 			{% block body %} {% endblock %}
 		</div>
 	</div>
