@@ -1,9 +1,100 @@
 Database Basics
 ###############
 
-The ORM and database access in CakePHP has been totally rebuilt for 3.0.
-It features a new fluent API for building queries, improved schema
-reflection/generation, a flexible type system and more.
+The CakePHP database access layer abstracts and provides help with most aspects
+of dealing with relational database such as keeping connections to the server,
+building queries, preventing SQL injections, inspecting and altering schemas,
+and with debugging and profiling queries sent to the database.
+
+Quick Tour
+==========
+
+The functions described in this chapter relate to what is possible to do with
+the lower-level database access API. If you want instead to learn more about the
+full ORM, you can read the :doc:`/orm/query-builder` and :doc:`/orm/table-objects`
+sections.
+
+The easiest way to create a database connection is using a ``DSN`` string::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $dsn = 'mysql://root:password@localhost/my_database';
+    ConnectionManager::config('default', ['url' => $dsn]);
+
+Once created, you can access the connection object to start using it::
+
+    $connection = ConnectionManager::get('default');
+
+Runnig Select Statements
+------------------------
+
+Running raw SQL queries is a breeze::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
+
+
+You can use arguments to parametrize select statements::
+
+    $results = $connection
+        ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
+        ->fetchAll('assoc');
+
+It is also possible to use complex data types as arguments::
+
+    $results = $connection
+        ->execute(
+            'SELECT * FROM articles WHERE created >= :time',
+            ['created' => DateTime('1 day ago')],
+            ['created' => 'datetime']
+        )
+        ->fetchAll('assoc');
+
+Instead of writing the SQL manually, you can use the built-in query builder::
+
+    $results = $connection
+        ->newQuery()
+        ->select('*')
+        ->from('articles')
+        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->order(['title' => 'DESC'])
+        ->execute()
+        ->fetchAll('assoc');
+
+Running Insert Statements
+-------------------------
+
+Inserting rows in the database is usually a matter of a couple lines::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $connection->insert('articles', [
+        'title' => 'A New Article',
+        'created' => new DateTime('now')
+    ], ['created' => 'datetime']);
+
+Running Update Statements
+-------------------------
+
+Updating rows in the database is equally intuitive, the following example will
+update the article with **id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
+
+Running Delete Statements
+-------------------------
+
+Similarly, the ``delete()`` method is used to delete rows from the database, the
+following example deletes the article with **id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->delete('articles', ['id' => 10]);
 
 .. _database-configuration:
 
