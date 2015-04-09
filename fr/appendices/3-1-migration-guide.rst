@@ -9,17 +9,23 @@ Controller
 ==========
 
 FlashComponent
--------------
+--------------
 
 - ``FlashComponent`` empile maintenant les messages enregistrés avec les
   méthodes ``set()`` et ``__call()``. Cela signifie que la structure des
   données stockées dans la Session pour les messages Flash a changé.
 
 Helper
-==========
+======
+
+SessionHelper
+-------------
+
+- ``SessionHelper`` a été dépréciée. Vous pouvez directement utiliser
+``$this->request->session()``.
 
 FlashHelper
--------------
+-----------
 
 - ``FlashHelper`` peut maintenant rendre plusieurs messages si plusieurs
   messages ont été enregistrés avec le ``FlashComponent``. Chaque message
