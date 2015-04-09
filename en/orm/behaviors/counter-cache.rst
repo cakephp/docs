@@ -50,7 +50,7 @@ counter value::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'findType' => 'published'
+                'finder' => 'published'
             ]
         ]
     ]);
@@ -72,9 +72,7 @@ conditional count and a basic count you can add these fields in the array::
     $this->addBehavior('CounterCache', [
         'Articles' => ['comment_count',
             'published_comment_count' => [
-                'conditions' => [
-                    'findType' => 'published'
-                ]
+                'finder' => 'published'
             ]
         ]
     ]);
