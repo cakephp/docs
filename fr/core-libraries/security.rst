@@ -100,7 +100,7 @@ Et tout autre algorithme de hashage que la fonction
 
     Vous ne devriez pas utiliser ``hash()`` pour les mots de passe dans les nouvelles applications.
     A la place, vous devez utiliser la classe ``DefaultPasswordHasher`` qui
-    utilise bcrpyt par défaut.
+    utilise bcrypt par défaut.
 
 .. meta::
     :title lang=fr: Security
