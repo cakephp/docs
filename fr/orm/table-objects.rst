@@ -227,7 +227,7 @@ afterSaveCommit
 L'event ``Model.afterSaveCommit`` est lancé après que la transaction, dans
 laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
 déclenché pour des sauvegardes non atomic, quand les opérations sur la base de
-données sont implicitement committées. L'event est décenché seulement pour
+données sont implicitement committées. L'event est déclenché seulement pour
 la table primaire sur laquelle ``save()`` est directement appelée. L'event
 n'est pas déclenché si une transaction est démarrée avant l'appel de save.
 

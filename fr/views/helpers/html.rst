@@ -72,7 +72,7 @@ Si la clé 'rel' dans le tableau ``$options`` est définie à 'import',
 la feuille de style sera importée.
 
 Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
-le répertoire **webroot/css** si le chemin ne commence pas par un '/'. ::
+le répertoire **webroot/css** si le chemin ne commence pas par un '/'.::
 
     echo $this->Html->css('forms');
 
@@ -82,7 +82,7 @@ Affichera:
 
     <link rel="stylesheet" href="/css/forms.css" />
 
-Le premier paramètre peut être un tableau pour inclure des fichiers multiples. ::
+Le premier paramètre peut être un tableau pour inclure des fichiers multiples.::
 
     echo $this->Html->css(['forms', 'tables', 'menu']);
 
@@ -95,8 +95,8 @@ Affichera:
     <link rel="stylesheet" href="/css/menu.css" />
 
 Vous pouvez inclure un fichier CSS depuis un plugin chargé en utilisant la
-:term:`syntaxe de plugin`. Pour inclure **plugins/DebugKit/webroot/css/toolbar.css**,
-vous pouvez utiliser ce qui suit::
+:term:`syntaxe de plugin`. Pour inclure
+**plugins/DebugKit/webroot/css/toolbar.css**, vous pouvez utiliser ce qui suit::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
@@ -113,7 +113,7 @@ Créer des CSS par Programmation
 
 Construit les définitions de style CSS en se basant sur les clés et
 valeurs du tableau passé à la méthode. Particulièrement pratique si votre
-fichier CSS est dynamique. ::
+fichier CSS est dynamique.::
 
     echo $this->Html->style([
         'background' => '#633',
@@ -240,7 +240,7 @@ Lier des Images
 .. php:method:: image(string $path, array $options = [])
 
 Créé une balise image formatée. Le chemin fourni devra être relatif à
-**webroot/img/**. ::
+**webroot/img/**.::
 
     echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -251,7 +251,7 @@ Affichera:
     <img src="/img/cake_logo.png" alt="CakePHP" />
 
 Pour créer un lien d'image, spécifiez le lien de destination en
-utilisant l'option ``url`` dans ``$attributes``. ::
+utilisant l'option ``url`` dans ``$attributes``.::
 
     echo $this->Html->image("recipes/6.jpg", [
         "alt" => "Brownies",
@@ -297,7 +297,7 @@ Créer des Liens
 
 Méthode générale pour la création de liens HTML. Utilisez les ``$options``
 pour spécifier les attributs des éléments et si le ``$title`` doit ou
-non être échappé. ::
+non être échappé.::
 
     echo $this->Html->link(
         'Enter',
@@ -345,7 +345,7 @@ Affichera:
         Delete
     </a>
 
-Les chaînes de requête peuvent aussi être créées avec ``link()``. ::
+Les chaînes de requête peuvent aussi être créées avec ``link()``.::
 
     echo $this->Html->link('View image', [
         'controller' => 'Images',
@@ -380,7 +380,7 @@ Affichera:
 
 Définir ``escape`` à ``false`` va aussi désactiver l'échappement des attributs
 du lien. Vous pouvez utiliser l'option ``escapeTitle`` pour juste
-désactiver l'échappement du titre et pas des attributs. ::
+désactiver l'échappement du titre et pas des attributs.::
 
     echo $this->Html->link(
         $this->Html->image('recipes/6.jpg', ['alt' => 'Brownies']),
@@ -467,7 +467,7 @@ pour la balise script générée. Si un tableau de balise script est utilisé,
 les attributs seront appliqués à toutes les balises script générées.
 
 Cette méthode d'inclusion de fichier JavaScript suppose que les fichiers
-JavaScript spécifiés se trouvent dans le répertoire ``webroot/js``. ::
+JavaScript spécifiés se trouvent dans le répertoire ``webroot/js``.::
 
     echo $this->Html->script('scripts');
 
@@ -492,7 +492,7 @@ Affichera:
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
 
-Le premier paramètre peut être un tableau pour inclure des fichiers multiples. ::
+Le premier paramètre peut être un tableau pour inclure des fichiers multiples.::
 
     echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
 
@@ -505,7 +505,7 @@ Affichera:
     <script src="/js/scripts.js"></script>
 
 Vous pouvez insérer dans la balise script un bloc spécifique en
-utilisant l'option ``block``. ::
+utilisant l'option ``block``.::
 
     echo $this->Html->script('wysiwyg', ['block' => 'scriptBottom']);
 
@@ -600,7 +600,7 @@ Créer des En-Têtes de Tableaux
 
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
-Crée une ligne de cellule d'en-tête à placer dans la balise <table>. ::
+Crée une ligne de cellule d'en-tête à placer dans la balise <table>.::
 
     echo $this->Html->tableHeaders(['Date', 'Title', 'Active']);
 
@@ -659,7 +659,7 @@ Créer des Cellules de Tableaux
 Crée des cellules de table, en assignant aux lignes  des attributs <tr>
 différents pour les lignes paires et les lignes impaires. Entoure une
 table simple de cellule dans un [] pour des attributs <td>
-spécifiques. ::
+spécifiques.::
 
     echo $this->Html->tableCells([
         ['Jul 7th, 2007', 'Best Brownies', 'Yes'],
@@ -798,7 +798,7 @@ Toute clé qui n'est pas ``text`` ou ``url`` sera passée à
 :php:meth:`~HtmlHelper::link()` comme paramètre ``$options``.
 
 Maintenant, dans votre vue vous allez devoir ajouter ce qui suit
-pour démarrer le fil d'Ariane sur chacune de vos pages. ::
+pour démarrer le fil d'Ariane sur chacune de vos pages.::
 
     $this->Html->addCrumb('Users', '/users');
     $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
@@ -816,8 +816,8 @@ que :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`, il utilise toutes
 les options que chacun des fils a ajouté. Vous pouvez utiliser le paramètre
 ``$startText`` pour fournir le premier lien de fil. C'est utile quand vous
 voulez inclure un lien racine. Cette option fonctionne de la même façon que
-l'option ``$startText`` pour :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
-
+l'option ``$startText`` pour
+:php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
 
 .. meta::
     :title lang=fr: HtmlHelper

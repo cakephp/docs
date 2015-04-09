@@ -105,7 +105,8 @@ conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests doivent être dans votre répertoire
    ``tests/TestCase/[Type]``.
-#. Les noms de ces fichiers doivent finir avec ``Test.php`` plutôt que juste ``.php``.
+#. Les noms de ces fichiers doivent finir avec ``Test.php`` plutôt que juste
+   ``.php``.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
@@ -451,12 +452,13 @@ la définition de la table sont:
     - ``date``: redirige vers ``DATE``.
     - ``binary``: redirige vers ``BLOB``.
 fixed
-    Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR`` dans
-    les plates-formes qui les supportent.
+    Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR``
+    dans les plates-formes qui les supportent.
 length
     Défini à la longueur spécifique que le champ doit prendre.
 precision
-    Défini le nombre de décimales utilisées sur les champs ``float`` et ``decimal``.
+    Défini le nombre de décimales utilisées sur les champs ``float`` et
+    ``decimal``.
 null
     Défini soit à ``true`` (pour permettre les NULLs) soit à ``false`` (pour
     ne pas permettre les NULLs).
@@ -586,10 +588,10 @@ Par exemple::
     }
 
 Vous ne pouvez pas charger/créer tout type de schéma dans une fixture. Ceci est
-utile si vous avez déjà une configuration de base de données de test, avec toutes
-les tables vides créés. En définissant ni ``$fields`` ni ``$import``, une fixture
-va seulement inserer ces enregistrements et tronquer les enregistrements sur
-chaque méthode de test.
+utile si vous avez déjà une configuration de base de données de test, avec
+toutes les tables vides créés. En définissant ni ``$fields`` ni ``$import``,
+une fixture va seulement inserer ces enregistrements et tronquer les
+enregistrements sur chaque méthode de test.
 
 Charger les fixtures dans vos cas de test
 -----------------------------------------
@@ -771,10 +773,10 @@ Test d'intégrations des Controllers
 ===================================
 
 Alors que vous pouvez tester les controller de la même manière que les Helpers,
-Models et Components, CakePHP offre une classe spécialisée ``IntegrationTestCase``.
-L'utilisation de cette classe en tant que classe de base pour les cas de test de
-votre controller vous permet de mettre plus facilement en place des tests
-d'intégration pour vos controllers.
+Models et Components, CakePHP offre une classe spécialisée
+``IntegrationTestCase``. L'utilisation de cette classe en tant que classe de
+base pour les cas de test de votre controller vous permet de mettre plus
+facilement en place des tests d'intégration pour vos controllers.
 
 Si vous n'êtes pas familiés avec les tests d'intégrations, il s'agit d'une
 approche de test qui rend facile à tester plusieurs éléments en même temps. Les
@@ -1021,9 +1023,9 @@ de `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
 
-JSON est un format sympa et courant à utiliser quand on construit un service web.
-Tester les endpoints de votre service web est très simple avec CakePHP. Commençons
-par un exemple de controller simple qui répond en JSON::
+JSON est un format sympa et courant à utiliser quand on construit un service
+web. Tester les endpoints de votre service web est très simple avec CakePHP.
+Commençons par un exemple de controller simple qui répond en JSON::
 
     class MarkersController extends AppController
     {
@@ -1039,8 +1041,9 @@ par un exemple de controller simple qui répond en JSON::
         }
     }
 
-Maintenant créons un fichier **tests/TestCase/Controller/MarkersControllerTest.php**
-et assurons nous que notre service web retourne une réponse appropriée::
+Maintenant créons un fichier
+**tests/TestCase/Controller/MarkersControllerTest.php** et assurons-nous que
+notre service web retourne une réponse appropriée::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
@@ -1260,11 +1263,12 @@ Créer les Test Suites
 =====================
 
 Si vous voulez que plusieurs de vos tests s'exécutent en même temps, vous pouvez
-créer une suite de tests. Une suite de test est composée de plusieurs cas de test.
-Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de votre
-application, ou par la création de classes en utilisant ``CakeTestSuite``. Utiliser
-``phpunit.xml`` est bien quand vous avez seulement besoin d'inclure/d'exclure
-de simples règles pour définir votre suite de tests. Un exemple simple serait::
+créer une suite de tests. Une suite de test est composée de plusieurs cas de
+test. Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de
+votre application, ou par la création de classes en utilisant ``CakeTestSuite``.
+Utiliser ``phpunit.xml`` est bien quand vous avez seulement besoin
+d'inclure/d'exclure de simples règles pour définir votre suite de tests. Un
+exemple simple serait::
 
     <testsuites>
       <testsuite name="Models">
@@ -1277,8 +1281,8 @@ de simples règles pour définir votre suite de tests. Un exemple simple serait:
 ``CakeTestSuite`` propose plusieurs méthodes pour créer facilement des suites de
 tests basé sur le système de fichiers. Il vous permet d'exécuter n'importe quel
 code que vous voulez pour préparer votre suite de test. Si nous voulions créer
-une suite de tests pour tous nos tests de modèles, nous pourrions créer le fichier
-**tests/TestCase/AllModelTest.php**, et mettre le code suivant::
+une suite de tests pour tous nos tests de modèles, nous pourrions créer le
+fichier **tests/TestCase/AllModelTest.php**, et mettre le code suivant::
 
     class AllModelTest extends TestSuite
     {
@@ -1356,7 +1360,7 @@ contienne un listener (écouteur) pour les fixtures::
     </listeners>
 
 Vous devez également vous assurer que vos fixtures sont chargeables.
-vérifier que le code suivant est présent dans votre fichier ``composer.json`` ::
+vérifier que le code suivant est présent dans votre fichier ``composer.json``::
 
     "autoload-dev": {
         "psr-4": {
@@ -1372,11 +1376,11 @@ vérifier que le code suivant est présent dans votre fichier ``composer.json`` 
 Générer des Tests avec Bake
 ===========================
 
-Si vous utilisez :doc:`bake </bake/usage>` pour
-générer votre code, il va également générer le squelette de vos fichiers de tests.
-Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
-vous souhaitez générer le squelette de test pour le code que vous avez écrit, vous
-pouvez utiliser ``bake``:
+Si vous utilisez :doc:`bake </bake/usage>` pour générer votre code, il va
+également générer le squelette de vos fichiers de tests. Si vous avez besoin
+de re-générer le squelette de vos fichiers de tests, ou si vous souhaitez
+générer le squelette de test pour le code que vous avez écrit, vous pouvez
+utiliser ``bake``:
 
 .. code-block:: bash
 
@@ -1444,7 +1448,8 @@ suit:
     ];
     CONFIG
 
-Ensuite, décommentez la ligne suivante dans votre fichier **config/bootstrap.php**::
+Ensuite, décommentez la ligne suivante dans votre fichier
+**config/bootstrap.php**::
 
     //Configure::load('app_local', 'default');
 
@@ -1486,8 +1491,6 @@ Lancer un build
 Vous devriez être capable de lancer un build maintenant. Vérifiez la sortie de
 la console et faites tous les changements necéssaires pour obtenir un build
 précédent.
-
-
 
 .. meta::
     :title lang=fr: Test

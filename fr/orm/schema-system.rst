@@ -75,15 +75,14 @@ Les colonnes sont soit ajoutées en argument du constructeur, soit via
     // Récupère la liste de toutes les colonnes.
     $cols = $t->columns();
 
-
 Index et Contraintes
-----------------------
+--------------------
 
 Les index sont ajoutés en utilisant ``addIndex()``. Les contraintes sont
-ajoutées en utilisant ``addConstraint()``.  Les index & contraintes ne 
+ajoutées en utilisant ``addConstraint()``.  Les index & contraintes ne
 peuvent pas être ajoutés pour les colonnes qui n'existent pas puisque cela
-donnerait un état invalide. Les index sont différents des contraintes et 
-des exceptions seront levées si vous essayez de mélanger les types entre 
+donnerait un état invalide. Les index sont différents des contraintes et
+des exceptions seront levées si vous essayez de mélanger les types entre
 les méthodes. Un exemple des deux méthodes est::
 
     $t = new Table('posts');
@@ -155,7 +154,7 @@ L'option ``autoIncrement`` ne fonctionne qu'avec les colonnes ``integer`` et
 ``biginteger``.
 
 Lire les Index et les Contraintes
------------------------------------
+---------------------------------
 
 Les index et les contraintes peuvent être lus d'un objet table en utilisant
 les méthodes d'accesseur. En supposant que ``$t`` est une instance de table

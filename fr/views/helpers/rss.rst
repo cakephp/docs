@@ -25,8 +25,8 @@ de choses. Premièrement, le parsing d'extensions doit être activé dans
     Router::extensions('rss');
 
 Dans l'appel ci-dessus, nous avons activé l'extension .rss. Quand vous
-utilisez :php:meth:`Cake\\Routing\\Router::extensions()`, vous pouvez passer autant
-d'arguments ou d'extensions que vous le souhaitez. Cela activera le
+utilisez :php:meth:`Cake\\Routing\\Router::extensions()`, vous pouvez passer
+autant d'arguments ou d'extensions que vous le souhaitez. Cela activera le
 content-type de chaque extension utilisée dans votre application. Maintenant,
 quand l'adresse ``posts/index.rss`` est demandée, vous obtiendrez une version
 XML de votre ``posts/index``. Cependant, nous avons d'abord besoin d'éditer
@@ -115,8 +115,8 @@ données meta pour notre flux.
 
 Ensuite il y a le fichier de vue pour mes posts/index. Un peu comme le fichier
 de layout que nous avons crée, nous avons besoin de créer un répertoire
-**src/Template/Posts/rss/** et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
-Les contenus du fichier sont ci-dessous.
+**src/Template/Posts/rss/** et un nouveau ``index.ctp`` à l'intérieur de ce
+répertoire. Les contenus du fichier sont ci-dessous.
 
 View
 ----

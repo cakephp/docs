@@ -252,7 +252,6 @@ lorsque l'on va le créer ou le modifier::
         }
     }
 
-
 Modifier les Templates des Articles
 ===================================
 

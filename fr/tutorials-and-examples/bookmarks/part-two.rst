@@ -10,12 +10,12 @@ voir/modifier seulement ceux qui lui appartiennent.
 Ajouter la Connexion
 ====================
 
-Dans CakePHP, l'authentification est gérée par les :doc:`/controllers/components`.
-Les components peuvent être imaginés comme des façons de créer des parties
-réutilisables de code du controller pour une fonctionnalité spécifique ou
-un concept. Les components peuvent aussi se lancer dans le cycle de vie
-de l'event du controller et intéragir avec votre application de cette façon.
-Pour commencer, nous ajouterons :doc:`AuthComponent
+Dans CakePHP, l'authentification est gérée par les
+:doc:`/controllers/components`. Les components peuvent être imaginés comme des
+façons de créer des parties réutilisables de code du controller pour une
+fonctionnalité spécifique ou un concept. Les components peuvent aussi se lancer
+dans le cycle de vie de l'event du controller et intéragir avec votre
+application de cette façon. Pour commencer, nous ajouterons :doc:`AuthComponent
 </controllers/components/authentication>` à notre application. Nous voulons
 que chaque méthode nécessite l'authentification, donc nous allons ajouter
 AuthComponent dans notre AppController::
@@ -115,8 +115,8 @@ Permettre de s'Enregistrer
 
 Si vous n'êtes pas connecté et que vous essayez de visiter **/users/add** vous
 serez renvoyés vers la page de connexion. Nous devrions régler cela puisque nous
-voulons que les utilisateurs s'inscrivent à notre application. Dans ``UsersController``,
-ajoutez ce qui suit::
+voulons que les utilisateurs s'inscrivent à notre application. Dans
+``UsersController``, ajoutez ce qui suit::
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
@@ -208,7 +208,8 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
 
 Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark
 qui ne vous appartient pas, vous devriez être redirigé vers la page d'où vous
-venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions cela::
+venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions
+cela::
 
     // Dans src/Template/Layout/default.ctp
     // Sous le message flash existant.

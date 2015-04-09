@@ -181,10 +181,10 @@ Fusionner les Données Requêtées dans les Entities
 
 Afin de mettre à jour les entities, vous pouvez choisir d'appliquer les données
 requêtées directement dans une entity existante. Ceci a l'avantage que seuls les
-champs qui changent réellement seront sauvegardés, au lieu d'envoyer tous les champs
-à la base de données, même ceux qui sont identiques. Vous pouvez fusionner
-un tableau de données brutes dans une entity existante en utilisant la méthode
-``patchEntity()``::
+champs qui changent réellement seront sauvegardés, au lieu d'envoyer tous les
+champs à la base de données, même ceux qui sont identiques. Vous pouvez
+fusionner un tableau de données brutes dans une entity existante en utilisant la
+méthode ``patchEntity()``::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
@@ -316,9 +316,9 @@ présentes dans les résultats::
         $articles->save($entity);
     }
 
-De la même façon que pour l'utilisation de ``patchEntity()``, vous pouvez utiliser
-le troisième argument pour contrôler les associations qui seront fusionnées
-dans chacune des entities du tableau::
+De la même façon que pour l'utilisation de ``patchEntity()``, vous pouvez
+utiliser le troisième argument pour contrôler les associations qui seront
+fusionnées dans chacune des entities du tableau::
 
     // Dans un controller.
     $patched = $articles->patchEntities(
@@ -327,9 +327,9 @@ dans chacune des entities du tableau::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
-De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez permettre à ``patchEntity()``
-d'écrire dans des champs non accessibles comme ``id``, qui n'est généralement pas déclaré dans
-la propriété ``_accessible``::
+De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez
+permettre à ``patchEntity()`` d'écrire dans des champs non accessibles comme
+``id``, qui n'est généralement pas déclaré dans la propriété ``_accessible``::
 
     // Dans un controller.
     $patched = $articles->patchEntities(

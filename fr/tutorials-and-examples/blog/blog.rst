@@ -81,13 +81,13 @@ Les Permissions des Répertoires tmp et logs
 ===========================================
 
 Les répertoires ``tmp`` and ``logs`` doivent être en écriture pour le serveur
-web. Si vous avez utilisé Composer pour l'installation, ceci a du être fait pour vous et confirmé par un message
-"Permissions set on <folder>". Si vous avez plutôt un message d'erreur ou
-voulez le faire manuellement, la meilleur façon de le faire est de trouver
-sous quel utilisateur votre serveur web tourne en faisant
-(``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire **src/tmp**
-pour cet utilisateur. La commande finale que vous pouvez lancer (dans \*nix)
-pourrait ressembler à ceci::
+web. Si vous avez utilisé Composer pour l'installation, ceci a du être fait pour
+vous et confirmé par un message "Permissions set on <folder>". Si vous avez
+plutôt un message d'erreur ou voulez le faire manuellement, la meilleur façon
+de le faire est de trouver sous quel utilisateur votre serveur web tourne en
+faisant (``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire
+**src/tmp** pour cet utilisateur. La commande finale que vous pouvez lancer
+(dans \*nix) pourrait ressembler à ceci::
 
     chown -R www-data tmp
     chown -R www-data logs
@@ -107,10 +107,10 @@ Créer la Base de Données du Blog
 
 Maintenant, mettons en place la base de données pour notre blog. Si vous
 ne l'avez pas déjà fait, créez une base de données vide avec le nom de votre
-choix pour l'utiliser dans ce tutoriel, par ex ``cake_blog``.Pour le moment, nous allons juste créer
-une simple table pour stocker nos posts. Nous allons également insérer quelques
-posts à des fins de tests. Exécutez les requêtes SQL suivantes dans votre base
-de données::
+choix pour l'utiliser dans ce tutoriel, par ex ``cake_blog``.Pour le moment,
+nous allons juste créer une simple table pour stocker nos posts. Nous allons
+également insérer quelques posts à des fins de tests. Exécutez les requêtes SQL
+suivantes dans votre base de données::
 
     /* D'abord, créons la table des posts : */
     CREATE TABLE articles (

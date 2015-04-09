@@ -51,14 +51,15 @@ suivants, en supposant que ``$articles`` est une
     // Commence une nouvelle requête.
     $query = $articles->find();
 
-Presque chaque méthode dans un objet ``Query`` va retourner la même requête, cela
-signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à moins
-que vous lui disiez de le faire::
+Presque chaque méthode dans un objet ``Query`` va retourner la même requête,
+cela signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à
+moins que vous lui disiez de le faire::
 
     $query->where(['id' => 1]); // Retourne le même objet query
     $query->order(['title' => 'DESC']); // Toujours le même objet, aucun SQL exécuté
 
-Vous pouvez bien sûr chainer les méthodes que vous appelez sur les objets Query::
+Vous pouvez bien sûr chainer les méthodes que vous appelez sur les objets
+Query::
 
     $query = $articles
         ->find()
@@ -613,8 +614,8 @@ Raw Expressions
 ---------------
 
 Quand vous ne pouvez pas construire le code SQL, vous devez utiliser le
-constructeur de requête, vous pouvez utiliser les objets ``Expression`` pour ajouter
-des extraits de code SQL à vos requêtes::
+constructeur de requête, vous pouvez utiliser les objets ``Expression`` pour
+ajouter des extraits de code SQL à vos requêtes::
 
     $query = $articles->find();
     $expr = $query->newExpr()->add('1 + 1');
@@ -817,9 +818,9 @@ associatif avec plusieurs ``join``::
             ]
         ]);
 
-Comme vu précédemment, lors de l'ajout de ``join``, l'alias peut être la clé du tableau
-externe. Les conditions ``join`` peuvent être aussi exprimées en tableau de
-conditions::
+Comme vu précédemment, lors de l'ajout de ``join``, l'alias peut être la clé du
+tableau externe. Les conditions ``join`` peuvent être aussi exprimées en tableau
+de conditions::
 
     $query = $articles->find()
         ->hydrate(false)
@@ -838,8 +839,8 @@ conditions::
 Lors de la création de ``join`` à la main, et l'utilisation d'un tableau basé
 sur les conditions, vous devez fournir les types de données pour chaque colonne
 dans les conditions du ``join``. En fournissant les types de données pour les
-conditions de ``join``, l'ORM peut convertir correctement les types de données en
-code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
+conditions de ``join``, l'ORM peut convertir correctement les types de données
+en code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
 ``leftJoin()`` et ``innerJoin()`` pour créer les jointures::
 
     // Jointure avec un alias et des conditions
@@ -876,8 +877,9 @@ de tables différentes doivent être définies de cette manière::
             ],
         ]);
 
-Cela permet de s'assurer que tous les ``identifiers`` sont bien quotés dans la requête générée,
-permettant d'éviter des erreurs avec certains drivers (PostgreSQL notamment).
+Cela permet de s'assurer que tous les ``identifiers`` sont bien quotés dans la
+requête générée, permettant d'éviter des erreurs avec certains drivers
+(PostgreSQL notamment).
 
 Insérer des Données
 ===================
@@ -1048,11 +1050,11 @@ CakePHP va s'assurer que les valeurs calculées soient insérées dans la bonne
 Modifier les Résultats avec Map/Reduce
 ======================================
 
-La plupart du temps, les opérations ``find`` nécessitent un traitement postérieur
-des données qui se trouvent dans la base de données. Alors que les méthodes
-``getter`` des ``entities`` peuvent s'occuper de la plupart de la génération de
-propriété virtuelle ou un formatage de données spéciales, parfois vous devez
-changer la structure des données d'une façon plus fondamentale.
+La plupart du temps, les opérations ``find`` nécessitent un traitement
+postérieur des données qui se trouvent dans la base de données. Alors que les
+méthodes ``getter`` des ``entities`` peuvent s'occuper de la plupart de la
+génération de propriété virtuelle ou un formatage de données spéciales, parfois
+vous devez changer la structure des données d'une façon plus fondamentale.
 
 Pour ces cas, l'objet ``Query`` offre la méthode ``mapReduce()``, qui est une
 façon de traiter les résultats une fois qu'ils ont été récupérés dans la

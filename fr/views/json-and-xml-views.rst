@@ -48,9 +48,9 @@ Utilisation des Vues de Données avec la Clé Serialize
 
 La clé ``_serialize`` est une variable de vue spéciale qui indique quelle(s)
 autre(s) variable(s) de vue devrai(en)t être sérialisée(s) quand on utilise la
-vue de données. Cela vous permet de sauter la définition des fichiers de template
-pour vos actions de controller si vous n'avez pas besoin de faire un formatage
-avant que vos données ne soient converties en json/xml.
+vue de données. Cela vous permet de sauter la définition des fichiers de
+template pour vos actions de controller si vous n'avez pas besoin de faire un
+formatage avant que vos données ne soient converties en json/xml.
 
 Si vous avez besoin de faire tout type de formatage ou de manipulation de vos
 variables de vue avant la génération de la réponse, vous devrez utiliser les

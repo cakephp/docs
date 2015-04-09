@@ -3,8 +3,8 @@ Database Basics
 
 L'ORM et l'accès à la base de données dans CakePHP a été totalement reconstruit
 pour la version 3.0. Il amène une nouvelle API pour la construction des
-requêtes, améliore la génération/reflection de schema, un système de type flexible
-et plus encore.
+requêtes, améliore la génération/reflection de schema, un système de type
+flexible et plus encore.
 
 .. _database-configuration:
 
@@ -98,8 +98,8 @@ database
 port (*optionnel*)
     Le port TCP ou le socket Unix utilisé pour se connecter au serveur.
 encoding
-    Indique le jeu de caractères à utiliser lors de l'envoi d'instructions SQL au
-    serveur. L'encodage par défaut est celui de la base de données
+    Indique le jeu de caractères à utiliser lors de l'envoi d'instructions SQL
+    au serveur. L'encodage par défaut est celui de la base de données
     pour toutes les bases de données autres que DB2. Si vous souhaitez utiliser
     l'encodage UTF-8 avec les connexions MySQL, vous devez utiliser
     'utf8' sans trait d'union.
@@ -216,9 +216,9 @@ utiliser avec la couche de la base de données. Les types supportés par CakePHP
 sont:
 
 string
-    Généralement construit en colonnes CHAR ou VARCHAR. Utiliser l'option ``fixed``
-    va forcer une colonne CHAR. Dans SQL Server, les types NCHAR et NVARCHAR sont
-    utilisés.
+    Généralement construit en colonnes CHAR ou VARCHAR. Utiliser l'option
+    ``fixed`` va forcer une colonne CHAR. Dans SQL Server, les types NCHAR et
+    NVARCHAR sont utilisés.
 text
     Correspond aux types TEXT
 uuid
@@ -230,9 +230,11 @@ biginteger
     Correspond au type BIGINT fourni par la base de données.
 float
     Correspond soit à DOUBLE, soit à FLOAT selon la base de données.
-    L'option ``precision`` peut être utilisée pour définir la précision utilisée.
+    L'option ``precision`` peut être utilisée pour définir la précision
+    utilisée.
 decimal
-    Correspond au type DECIMAL. Supporte les options ``length`` et  ``precision``.
+    Correspond au type DECIMAL. Supporte les options ``length`` et
+    ``precision``.
 boolean
     Correspond au BOOLEAN sauf pour MySQL, où TINYINT(1) est utilisé pour
     représenter les booléens.
@@ -251,9 +253,9 @@ timestamp
 time
     Correspond au type TIME dans toutes les bases de données.
 
-Ces types sont utilisés à la fois pour les fonctionnalités de reflection de schema
-fournies par CakePHP, et pour les fonctionnalités de génération de schema que CakePHP
-utilise lors des fixtures de test.
+Ces types sont utilisés à la fois pour les fonctionnalités de reflection de
+schema fournies par CakePHP, et pour les fonctionnalités de génération de schema
+que CakePHP utilise lors des fixtures de test.
 
 Chaque type peut aussi fournir des fonctions de traduction entre les
 représentations PHP et SQL. Ces méthodes sont invoquées selon le type hints
@@ -281,8 +283,8 @@ les méthodes suivantes:
 * marshal
 
 Une façon facile de remplir l'interface basique est d'étendre
-:php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un type
-JSON, nous pourrions faire la classe type suivante::
+:php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un
+type JSON, nous pourrions faire la classe type suivante::
 
     // Dans src/Database/Type/JsonType.php
 
@@ -674,9 +676,9 @@ a quelques inconvénients:
   identifiers.
 
 Si vous utilisez un schema datant un peu qui nécessite de quoter les
-identifiers, vous pouvez l'activer en utilisant le paramètre ``quoteIdentifiers``
-dans votre :ref:`database-configuration`. Vous pouvez aussi activer cette
-fonctionnalité à la volée::
+identifiers, vous pouvez l'activer en utilisant le paramètre
+``quoteIdentifiers`` dans votre :ref:`database-configuration`. Vous pouvez
+aussi activer cette fonctionnalité à la volée::
 
     $conn->driver()->autoQuoting(true);
 

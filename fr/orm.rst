@@ -30,8 +30,8 @@ connexion à la base de données <database-configuration>`.
 .. note::
 
     Si vous êtes familier avec les versions précédentes de CakePHP, vous devriez
-    lire le :doc:`/appendices/orm-migration` pour voir les différences importantes
-    entre CakePHP 3.0 et les versions antérieures de CakePHP.
+    lire le :doc:`/appendices/orm-migration` pour voir les différences
+    importantes entre CakePHP 3.0 et les versions antérieures de CakePHP.
 
 Exemple Rapide
 ==============

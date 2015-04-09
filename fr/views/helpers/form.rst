@@ -53,11 +53,11 @@ Toutes les classes de contexte ont aussi un accès aux données requêtées,
 facilitant la construction des formulaires.
 
 Une fois qu'un formulaire a été créé avec un contexte, tous les inputs que vous
-créez vont utiliser le contexte actif. Dans le cas d'un formulaire basé sur l'ORM,
-FormHelper peut accéder facilement aux données associées, aux erreurs de validation
-et aux metadata du schema rendant la construction de formulaires simples. Vous
-pouvez fermer le contexte actif en utilisant la méthode ``end()``, ou en
-appelant ``create()`` à nouveau. Pour créer un formulaire pour une entity,
+créez vont utiliser le contexte actif. Dans le cas d'un formulaire basé sur
+l'ORM, FormHelper peut accéder facilement aux données associées, aux erreurs de
+validation et aux metadata du schema rendant la construction de formulaires
+simples. Vous pouvez fermer le contexte actif en utilisant la méthode ``end()``,
+ou en appelant ``create()`` à nouveau. Pour créer un formulaire pour une entity,
 faîtes ce qui suit::
 
     // Si vous êtes sur /articles/add
@@ -73,11 +73,12 @@ Affichera:
 Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
 ArticlesController.
 Cependant, vous pouvez utiliser la même logique pour créer
-un formulaire d'édition. Le FormHelper utilise la propriété ``$this->request->data``
-pour detecter automatiquement s'il faut créer un formulaire d'ajout (add) ou
-un d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être
-créé comme un formulaire d'édition. Par exemple, si nous naviguons vers
-http://example.org/articles/edit/5, nous pourrions faire ce qui suit::
+un formulaire d'édition. Le FormHelper utilise la propriété
+``$this->request->data`` pour detecter automatiquement s'il faut créer un
+formulaire d'ajout (add) ou un d'édition (edit). Si l'entity fournie n'est pas
+'nouvelle', le form va être créé comme un formulaire d'édition. Par exemple, si
+nous naviguons vers http://example.org/articles/edit/5, nous pourrions faire ce
+qui suit::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
@@ -138,11 +139,11 @@ Affichera:
 
     <form enctype="multipart/form-data" method="post" action="/articles/add">
 
-Quand vous utilisez 'put', 'patch' ou 'delete', votre formulaire aura un fonctionnement
-équivalent à un formulaire de type 'post', mais quand il sera envoyé, la
-méthode de requête HTTP sera respectivement réécrite avec 'PUT', PATCH' ou
-'DELETE'. Cela permettra à CakePHP de créer son propre support REST dans les
-navigateurs web.
+Quand vous utilisez 'put', 'patch' ou 'delete', votre formulaire aura un
+fonctionnement équivalent à un formulaire de type 'post', mais quand il sera
+envoyé, la méthode de requête HTTP sera respectivement réécrite avec 'PUT',
+PATCH' ou 'DELETE'. Cela permettra à CakePHP de créer son propre support REST
+dans les navigateurs web.
 
 Définir l'Action du Controller pour le Formulaire
 -------------------------------------------------
@@ -242,7 +243,8 @@ l'application::
 
 Les fonctions de fabrique de contexte sont l'endroit où vous pouvez ajouter la
 logique pour vérifier les options du formulaire pour le type d'entity approprié.
-Si une donnée d'entrée correspondante est trouvée, vous pouvez retourner un objet. Si n'y a pas de correspondance, retourne null.
+Si une donnée d'entrée correspondante est trouvée, vous pouvez retourner un
+objet. Si n'y a pas de correspondance, retourne null.
 
 .. _automagic-form-elements:
 
@@ -520,7 +522,8 @@ répétitions, les options communes partagées par toutes les méthodes input so
 
     echo $this->Form->text('ingredient', ['default' => 'Sugar']);
 
-  Exemple avec un champ sélectionné (Taille "Moyen" sera sélectionné par défaut)::
+  Exemple avec un champ sélectionné (Taille "Moyen" sera sélectionné par
+  défaut)::
 
     $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
     echo $this->Form->select('size', $sizes, ['default' => 'm']);
@@ -534,9 +537,9 @@ répétitions, les options communes partagées par toutes les méthodes input so
     La valeur par défaut des champs Date et datetime peut être définie en
     utilisant la clé 'selected'.
 
-    Attention à l'utilisation de ``false`` pour assigner une valeur par défaut. Une
-    valeur ``false`` est utilisée pour désactiver/exclure les options d'un champ,
-    ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
+    Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
+    Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
+    champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,
     utilisez ``'default' => 0``.
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
@@ -703,9 +706,9 @@ Les Options de Datetime
   dans une direction. Par défaut à null qui arrondit à la moitié
   supérieure selon `interval`.
 
-* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead of text.
-  Si on lui passe un tableau du style ``['01' => 'Jan', '02' => 'Feb', ...]``
-  alors ce tableau sera utilisé.
+* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
+  of text. Si on lui passe un tableau du style
+  ``['01' => 'Jan', '02' => 'Feb', ...]`` alors ce tableau sera utilisé.
 
 Créer des Elements Input
 ========================
@@ -1108,12 +1111,12 @@ un certain nombre d'options:
   Si c'est un tableau, le tableau passé sera utilisé.
 * ``minYear`` L'année la plus ancienne à utiliser dans le select de l'année
 * ``maxYear`` L'année la plus lointaine à utiliser dans le select de l'année
-* ``interval`` L'intervale en minutes entre chaque valeur dans le slect des minutes. 1 par défaut.
+* ``interval`` L'intervale en minutes entre chaque valeur dans le slect des
+  minutes. 1 par défaut.
 * ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
   chaine, cette chaine est affichée comme élément vide.
 * ``round`` - Mettre à ``up`` ou ``down`` pour forcer l'arrondi
   dans une direction. Par défaut à null.
-
 * ``default`` Le valeur par défaut à utiliser par l'input. Une valeur dans
   ``$this->request->data`` correspondante au nom du l'input écrasera cette
   valeur. Si aucune valeur par défaut n'est définie, ``time()`` sera utilisé.
@@ -1255,8 +1258,8 @@ Créer des Inputs Minute
 
 Crée un élément select (menu de sélection) rempli avec les minutes
 d'une heure. Vous pouvez créer un select qui contient des valeurs spécifiques
-en utilisant l'option ``interval``. Par exemple si vous souhaitez une incrémentation
-toutes les 10 minutes, vous devez faire::
+en utilisant l'option ``interval``. Par exemple si vous souhaitez une
+incrémentation toutes les 10 minutes, vous devez faire::
 
     echo $this->Form->minute('created', [
         'interval' => 10
@@ -1410,11 +1413,11 @@ Fermer le Formulaire
 
 .. php:method:: end($secureAttributes = [])
 
-La méthode ``end()`` ferme et complète le marquage du formulaire. Souvent, ``end()`` affiche juste
-la base fermante du formulaire, mais l'utilisation de ``end()`` permet
-également au FormHelper d'ajouter les champs cachées dont le component
-Security :php:class:`Cake\\Controller\\Component\\SecurityComponent` a
-besoin:
+La méthode ``end()`` ferme et complète le marquage du formulaire. Souvent,
+``end()`` affiche juste la base fermante du formulaire, mais l'utilisation de
+``end()`` permet également au FormHelper d'ajouter les champs cachées dont le
+component Security :php:class:`Cake\\Controller\\Component\\SecurityComponent`
+a besoin:
 
 .. code-block:: php
 
@@ -1478,8 +1481,9 @@ Personnaliser les Templates que FormHelper Utilise
 
 Comme beaucoup de helpers dans CakePHP, FormHelper utilise les string templates
 pour mettre en forme le HTML qu'il créé. Alors que les templates par défaut
-sont destinés à être un ensemble raisonnable de valeurs par défaut, vous aurez peut-être besoin
-de personnaliser les templates pour correspondre à votre application.
+sont destinés à être un ensemble raisonnable de valeurs par défaut, vous aurez
+peut-être besoin de personnaliser les templates pour correspondre à votre
+application.
 
 Pour changer les templates quand le helper est chargé, vous pouvez définir
 l'option ``templates`` lors de l'inclusion du helper dans votre controller::
@@ -1565,16 +1569,16 @@ Par exemple::
     ]);
 
 Similar to input containers, the ``input()`` method will also attempt to use
-distinct templates for each form group. A form group is a combo of label and input.
-For example, when creating a radio input the ``radioFormGroup`` will be used if
-it is present. If that template is missing by default each set of label & input
-is rendered using the ``formGroup`` template. For example::
+distinct templates for each form group. A form group is a combo of label and
+input. For example, when creating a radio input the ``radioFormGroup`` will be
+used if it is present. If that template is missing by default each set of label
+& input is rendered using the ``formGroup`` template. For example::
 
     // Add custom radio form group
     $this->Form->templates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
-    
+
 Déplacer les Checkboxes & Boutons Radios à l'Extérieur du Label
 ---------------------------------------------------------------
 
@@ -1595,7 +1599,8 @@ Générer des Formulaires Entiers
 
 .. php:method:: inputs(mixed $fields = [], $options = [])
 
-Génére un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier les champs générés en les incluant::
+Génére un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier les
+champs générés en les incluant::
 
     echo $this->Form->inputs([
         'name' => ['label' => 'custom label']
@@ -1615,11 +1620,12 @@ additionnelles dans le paramètre ``$fields``::
 Quand vous personnalisez ``fields``, vous pouvez utiliser le paramètre
 ``$options`` pour contrôler les legend/fields générés.
 
-- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez également passer
-  un tableau de paramètres qui seront rendus comme attributs HTML sur le tag du fieldset.
-  Si vous passez un tableau vide, le fieldset sera simplement rendu sans attributs.
-- ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble d'input
-  généré.
+- ``fieldset`` Défini à ``false`` pour désactiver le fieldset. Vous pouvez
+  également passer un tableau de paramètres qui seront rendus comme attributs
+  HTML sur le tag du fieldset. Si vous passez un tableau vide, le fieldset sera
+  simplement rendu sans attributs.
+- ``legend`` Défini à ``false`` pour désactiver la legend pour l'ensemble
+  d'input généré.
   Ou fournir une chaîne pour personnaliser le texte de legend.
 
 Par exemple::
@@ -1716,15 +1722,15 @@ Construire une Classe Widget
 
 Les classes Widget ont une interface requise vraiment simple. Elles doivent
 implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
-nécessite que les méthodes ``render(array $data)`` et ``secureFields(array $data)`` soient implémentées.
-La méthode ``render()`` attend un tableau de données pour constuire le widget et doit renvoyer
-un chaine HTML pour le widget.
-La méthode ``secureFields()`` attend également un tableau de données et doit retourner un tableau
-contenant la liste des champs à sécuriser pour ce widget.
-Si CakePHP construit votre widget, vous pouvez
+nécessite que les méthodes ``render(array $data)`` et
+``secureFields(array $data)`` soient implémentées. La méthode ``render()``
+attend un tableau de données pour constuire le widget et doit renvoyer une
+chaine HTML pour le widget. La méthode ``secureFields()`` attend également un
+tableau de données et doit retourner un tableau contenant la liste des champs à
+sécuriser pour ce widget. Si CakePHP construit votre widget, vous pouvez
 vous attendre à recevoir une instance de ``Cake\View\StringTemplate`` en premier
-argument, suivi de toutes les dépendances que vous aurez définies. Si vous voulez
-construire un widget Autocomplete, vous pouvez le faire comme ceci::
+argument, suivi de toutes les dépendances que vous aurez définies. Si vous
+voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
 
     namespace App\View\Widget;
 

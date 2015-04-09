@@ -738,7 +738,6 @@ En savoir plus sur les vues
     views/json-and-xml-views
     views/helpers
 
-
 .. meta::
     :title lang=fr: Views (Vues)
     :keywords lang=fr: logique de vue,fichier csv,éléments de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc

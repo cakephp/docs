@@ -83,8 +83,8 @@ Ceci va lancer le serveur web intégré de PHP sur le port 8765. Ouvrez
 **http://localhost:8765** dans votre navigateur web pour voir la page d'accueil.
 Tous les points devront être cochés sauf pour CakePHP qui n'est pas encore
 capable de se connecter à votre base de données. Si ce n'est pas le cas, vous
-devrez installer des extensions PHP supplémentaires ou définir des permissions de
-répertoire.
+devrez installer des extensions PHP supplémentaires ou définir des permissions
+de répertoire.
 
 Créer la Base de Données
 ========================
@@ -279,8 +279,8 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
 
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
 chemin **/bookmarks/tagged/***, vers ``BookmarksController::tags()``. En
-définissant les routes, vous pouvez isoler la définition de vos URLs, de la façon
-dont elles sont intégrées. Si nous visitions
+définissant les routes, vous pouvez isoler la définition de vos URLs, de la
+façon dont elles sont intégrées. Si nous visitions
 **http://localhost:8765/bookmarks/tagged**, nous verrions une page d'erreur
 de CakePHP. Intégrons maintenant la méthode manquante. Dans
 **src/Controller/BookmarksController.php**, ajoutez ce qui suit::
@@ -299,9 +299,9 @@ Créer la Méthode Finder
 
 Dans CakePHP, nous aimons garder les actions de notre controller légères, et
 mettre la plupart de la logique de notre application dans les models. Si vous
-visitez l'URL **/bookmarks/tagged** maintenant, vous verrez une erreur comme quoi
-la méthode ``findTagged()`` n'a pas été encore intégrée, donc faisons-le. Dans
-**src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
+visitez l'URL **/bookmarks/tagged** maintenant, vous verrez une erreur comme
+quoi la méthode ``findTagged()`` n'a pas été encore intégrée, donc faisons-le.
+Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
 
     public function findTagged(Query $query, array $options)
     {
@@ -317,8 +317,8 @@ la méthode ``findTagged()`` n'a pas été encore intégrée, donc faisons-le. D
             });
     }
 
-Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`. C'est
-un concept très puissant dans CakePHP qui vous permet de faire un package
+Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`.
+C'est un concept très puissant dans CakePHP qui vous permet de faire un package
 réutilisable de vos requêtes. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
 qui 'match'.
@@ -326,9 +326,9 @@ qui 'match'.
 Créer la Vue
 ------------
 
-Maintenant si vous vous rendez à l'url **/bookmarks/tagged**, CakePHP va afficher
-une erreur vous disant que vous n'avez pas de fichier de vue. Construisons
-donc le fichier de vue pour notre action ``tags()``. Dans
+Maintenant si vous vous rendez à l'url **/bookmarks/tagged**, CakePHP va
+afficher une erreur vous disant que vous n'avez pas de fichier de vue.
+Construisons donc le fichier de vue pour notre action ``tags()``. Dans
 **src/Template/Bookmarks/tags.ctp** mettez le contenu suivant::
 
     <h1>
