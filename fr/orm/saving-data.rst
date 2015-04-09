@@ -42,6 +42,30 @@ avez plusieurs commentaires, vos données requêtées devraient ressembler
         ]
     ];
 
+Lors de la construction de formulaires qui sauvegardent des associations
+imbriquées, vous devez définir quelles associations doivent être marshalled::
+
+    // Dans un controller
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags', 'Comments' => ['associated' => ['Users']]
+        ]
+    ]);
+
+Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
+Comments doivent être marshalled. D'une autre façon, vous pouvez utiliser
+la notation par point pour être plus bref::
+
+    // Dans un controller.
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => ['Tags', 'Comments.Users']
+    ]);
+
+Converting BelongsToMany Data
+-----------------------------
+
 Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
 une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
 liste de données d'entity, vos données requêtées devraient ressembler à ceci::
@@ -69,6 +93,28 @@ Vos données de requête doivent ressembler à ceci::
         ]
     ];
 
+If you need to link against some existing belongsToMany records, and create new
+ones at the same time you can use an expanded format::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['name' => 'A new tag'],
+            ['name' => 'Another new tag'],
+            ['id' => 5],
+            ['id' => 21]
+        ]
+    ];
+
+When the above data is converted into entities, you will have 4 tags. The first
+two will be new objects, and the second two will be references to existing
+records.
+
+Converting HasMany Data
+-----------------------
+
 Si vous sauvegardez des associations hasMany et voulez lier des enregistrements
 existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
 
@@ -81,26 +127,8 @@ existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
         ]
     ];
 
-Lors de la construction de formulaires qui sauvegardent des associations
-imbriquées, vous devez définir quelles associations doivent être marshalled::
-
-    // Dans un controller
-    $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
-        'associated' => [
-            'Tags', 'Comments' => ['associated' => ['Users']]
-        ]
-    ]);
-
-Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
-Comments doivent être marshalled. D'une autre façon, vous pouvez utiliser
-la notation par point pour être plus bref::
-
-    // Dans un controller.
-    $articles = TableRegistry::get('Articles');
-    $entity = $articles->newEntity($this->request->data(), [
-        'associated' => ['Tags', 'Comments.Users']
-    ]);
+Converting Multiple Records
+---------------------------
 
 Lorsque vous créez des formulaires de création/mise à jour d'enregistrements
 multiples en une seule opération vous pouvez utiliser ``newEntities()``::
@@ -122,6 +150,9 @@ ressembler à ceci::
             'published' => 1
         ],
     ];
+
+Changing Accessible Fields
+--------------------------
 
 Il est également possible de permettre à ``newEntity()`` d'écrire dans des
 champs non accessibles. Par exemple, ``id`` est généralement absent de la
@@ -230,6 +261,20 @@ créer une nouvelle entity user::
 
 La même chose peut être dite pour les associations hasMany et belongsToMany,
 mais une note importante doit être faîte.
+
+.. note::
+
+    For belongsToMany associations, ensure the relevant entity has
+    a property accessible for the associated entity.
+
+
+If a Product belongsToMany Tag::
+
+    // in the Product Entity
+    protected $_accessible = [
+        // .. other properties
+       'tags' => true,
+    ];
 
 .. note::
 
@@ -442,9 +487,7 @@ provider connu. Par défaut, CakePHP définit quelques providers:
 
 1. Les méthodes sur la classe table, ou ses behaviors sont disponible sur
    le provider ``table``.
-2. Les méthodes sur une classe entity, sont disponibles sur le provider
-   ``entity``.
-3. La classe de :php:class:`~Cake\\Validation\\Validation` du coeur est
+2. La classe de :php:class:`~Cake\\Validation\\Validation` du coeur est
    configurée avec le provider ``default``.
 
 Quand une règle de validation est créée, vous pouvez nommer le provider de cette
@@ -463,7 +506,7 @@ l'utiliser comme une règle de validation::
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
                     'message' => __('Vous devez fournir un rôle valide'),
-                    'provider' => 'entity',
+                    'provider' => 'table',
                 ]);
             return $validator;
         }
@@ -748,6 +791,7 @@ imbriquée unique avec le nom de l'association au pluriel et en underscore.
 Par exemple::
 
     // Dans un controller.
+
     $data = [
         'title' => 'First Post',
         'tags' => [
