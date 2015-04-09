@@ -1,7 +1,7 @@
 ORM and Database Access
 #######################
 
-In CakePHP working with data through the database is done with 2 primary object
+In CakePHP working with data through the database is done with two primary object
 types. The first are **repositories** or **table objects**. These objects
 provide access to collections of data. They allow you to save new records,
 modify/delete existing ones, define relations, and perform bulk operations. The
