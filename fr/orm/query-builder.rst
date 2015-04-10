@@ -29,8 +29,8 @@ section :ref:`database-queries` pour plus d'informations::
     // Commence une nouvelle requête.
     $query = $articles->find();
 
-Quand vous êtes dans un controller, vous pouvez utiliser la variable automatique
-de la table qui est créée selon le système de conventions::
+Depuis un controller, vous pouvez utiliser la variable de table créée
+automatiquement par le système de conventions::
 
     // Inside ArticlesController.php
 
@@ -107,14 +107,15 @@ La façon la plus simple est d'appeler les méthodes ``all()`` ou ``toArray()``:
     debug($resultsArray[0]->title);
 
 Dans l'exemple ci-dessus, ``$resultsIteratorObject`` sera une instance de
-``Cake\ORM\ResultSet``, un objet que vous pouvez itérer et appliquer
-plusieurs extractions et traverser les méthodes.
+``Cake\ORM\ResultSet``, un objet que vous pouvez itérer et sur lequel vous
+pouvez appliquer plusieurs méthodes d'extractions ou de traversement.
 
 Souvent, il n'y a pas besoin d'appeler ``all()``, vous pouvez juste itérer
-l'objet Query pour récupérer ses résultats. Query objects can also be used
-directly as the result object; trying to iterate the query, calling ``toArray``
-or some of the methods inherited from :ref:`Collection <collection-objects>`,
-will result in the query being executed and results returned to you.
+l'objet Query pour récupérer ses résultats. les objets Query peuvent également
+être utilisés directement en tant qu'objet résultat; Essayer d'itérer la requête
+en utilisant ``toArray()``ou n'importe qu'elle méthode héritée de
+:ref:`Collection <collection-objects>`, aura pour résultat l'exécution de la
+requête et la récupération des résultats.
 
 Récupérez une Ligne Unique d'une Table
 --------------------------------------
@@ -151,8 +152,8 @@ requête::
         echo "$id : $title"
     }
 
-Les Requêtes sont des Objets de Collection
-------------------------------------------
+Les Requêtes sont des Objets Collection
+---------------------------------------
 
 Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
 fortement recommandé que vous consultiez la section
@@ -161,7 +162,7 @@ le traversement efficace de données. En résumé, il est important de se
 rappeler que tout ce que vous pouvez appeler sur un objet Collection, vous
 pouvez aussi le faire avec un objet Query::
 
-    // Utilise la méthode combine() à partir de la libraire collections
+    // Utilise la méthode combine() à partir de la libraire collection
     // Ceci est équivalent au find('list')
     $keyValueList = $articles->find()->combine('id', 'title');
 
@@ -173,8 +174,8 @@ pouvez aussi le faire avec un objet Query::
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
-        ->combine('id', 'trimmedTitle') // combine() est une autre méthode de
-        ->toArray(); // Aussi une méthode de la librairie collections
+        ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
+        ->toArray(); // Aussi une méthode de la librairie collection
 
     foreach ($results as $id $trimmedTitle) {
         echo "$id : $trimmedTitle";

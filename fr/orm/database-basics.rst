@@ -1,47 +1,52 @@
-Database Basics
-###############
+Notions de Base de Base de Données
+##################################
 
-The CakePHP database access layer abstracts and provides help with most aspects
-of dealing with relational databases such as, keeping connections to the server,
-building queries, preventing SQL injections, inspecting and altering schemas,
-and with debugging and profiling queries sent to the database.
+La couche d'accès à la base de données de CakePHP fournit une abstraction et aide
+avec la plupart des aspects du traitement des bases de données relationnelles
+telles que, le maintient les connexions au serveur, la construction de requêtes,
+la protection contre les injections SQL, l'inspection et la modification des
+schémas, et avec le débogage et le profilage des requêtes envoyées à la base de
+données.
 
-Quick Tour
-==========
+Tour Rapide
+===========
 
-The functions described in this chapter illustrate what is possible to do with
-the lower-level database access API. If instead you want to learn more about the
-complete ORM, you can read the :doc:`/orm/query-builder` and
-:doc:`/orm/table-objects` sections.
+les fonctions décrites dans ce chapitre illustrent les possibilités de l'API
+d'accès à la base de données de plus bas niveau. Si vous souhaitez plutôt en
+apprendre plus sur l'ORM complet, vous pouvez lire les sections portant sur le
+:doc:`/orm/query-builder` et :doc:`/orm/table-objects`.
 
-The easiest way to create a database connection is using a ``DSN`` string::
+La manière la plus simple de créer une connexion à la base de données est
+d'utiliser une chaine ``DSN``::
 
     use Cake\Datasource\ConnectionManager;
 
     $dsn = 'mysql://root:password@localhost/my_database';
     ConnectionManager::config('default', ['url' => $dsn]);
 
-Once created, you can access the connection object to start using it::
+Une fois créé, vous pouvez accéder à l'objet Connection pour commencer à
+l'utiliser::
 
     $connection = ConnectionManager::get('default');
 
-Runnig Select Statements
-------------------------
+Exécuter des Instructions Select
+--------------------------------
 
-Running raw SQL queries is a breeze::
+Exécuter une instruction SQL pur est un jeu d'enfant::
 
     use Cake\Datasource\ConnectionManager;
 
     $connection = ConnectionManager::get('default');
     $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
 
-You can use prepared statements to insert parameters::
+Vous pouvez utiliser des instructions préparées pour insérer des paramètres::
 
     $results = $connection
         ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
         ->fetchAll('assoc');
 
-It is also possible to use complex data types as arguments::
+il est également possible d'utiliser des types de données complexes en tant
+qu'arguments::
 
     $results = $connection
         ->execute(
@@ -51,7 +56,8 @@ It is also possible to use complex data types as arguments::
         )
         ->fetchAll('assoc');
 
-Instead of writing the SQL manually, you can use the query builder::
+Au lieu d'écrire du SQL manuellement, vous pouvez utiliser le générateur de
+requêtes::
 
     $results = $connection
         ->newQuery()
@@ -62,10 +68,11 @@ Instead of writing the SQL manually, you can use the query builder::
         ->execute()
         ->fetchAll('assoc');
 
-Running Insert Statements
--------------------------
+Ecécuter des Instructions Insert
+--------------------------------
 
-Inserting rows in the database is usually a matter of a couple lines::
+Insérer une ligne dans une base de données est habituellement l'affaire
+de quelques lignes::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -75,21 +82,22 @@ Inserting rows in the database is usually a matter of a couple lines::
         'created' => new DateTime('now')
     ], ['created' => 'datetime']);
 
-Running Update Statements
--------------------------
+Exécuter des Instructions Update
+--------------------------------
 
-Updating rows in the database is equally intuitive, the following example will
-update the article with **id** 10::
+Mettre à jour une ligne de base de données est aussi intuitif, l'exemple suivant
+procédera à la mise à jour de l'article comportant l'**id** 10::
 
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
     $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
 
-Running Delete Statements
--------------------------
+Exécuter des Instructions Delete
+--------------------------------
 
-Similarly, the ``delete()`` method is used to delete rows from the database, the
-following example deletes the article with **id** 10::
+De même, la méthode ``delete()`` est utilisée pour supprimer des lignes de la
+base de données, l'exemple suivant procédera à suppression de l'article
+comportant l'**id** 10::
 
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
@@ -156,7 +164,7 @@ Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/optio
 supplémentaires en tant qu'arguments de query string.
 
 Par défaut, tous les objets Table vont utiliser la connexion ``default``. Pour
-utiliser une autre connexion, reportez vous à
+utiliser une autre connexion, reportez-vous à
 :ref:`la configuration des connexions<configuring-table-connections>`.
 
 Il y a un certain nombre de clés supportées dans la configuration de la base
@@ -451,7 +459,7 @@ L'exécution des Requêtes
 
 .. php:method:: query($sql)
 
-Une fois que vous avez un objet connection, vous voudrez probablement réaliser
+Une fois que vous avez un objet Connection, vous voudrez probablement réaliser
 quelques requêtes avec. La couche d'abstraction de CakePHP fournit des
 fonctionnalités au-dessus de PDO et des drivers natifs. Ces fonctionnalités
 fournissent une interface similaire à PDO. Il y a quelques différentes façons
