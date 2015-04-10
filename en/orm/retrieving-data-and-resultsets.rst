@@ -830,7 +830,7 @@ even after adding a map-reduce routine::
 This is particularly useful for building custom finder methods as described in the
 :ref:`custom-find-methods` section::
 
-    public function findPublished(Query $query, array $options])
+    public function findPublished(Query $query, array $options)
     {
         return $query->where(['published' => true]);
     }
