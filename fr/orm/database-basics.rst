@@ -1,10 +1,107 @@
-Database Basics
-###############
+Notions de Base de Base de Données
+##################################
 
-L'ORM et l'accès à la base de données dans CakePHP a été totalement reconstruit
-pour la version 3.0. Il amène une nouvelle API pour la construction des
-requêtes, améliore la génération/reflection de schema, un système de type
-flexible et plus encore.
+La couche d'accès à la base de données de CakePHP fournit une abstraction et
+aide avec la plupart des aspects du traitement des bases de données
+relationnelles telles que, le maintien des connexions au serveur, la
+construction de requêtes, la protection contre les injections SQL, l'inspection
+et la modification des schémas, et avec le débogage et le profilage les requêtes
+envoyées à la base de données.
+
+Tour Rapide
+===========
+
+les fonctions décrites dans ce chapitre illustrent les possibilités de l'API
+d'accès à la base de données de plus bas niveau. Si vous souhaitez plutôt en
+apprendre plus sur l'ORM complet, vous pouvez lire les sections portant sur le
+:doc:`/orm/query-builder` et :doc:`/orm/table-objects`.
+
+La manière la plus simple de créer une connexion à la base de données est
+d'utiliser une chaine ``DSN``::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $dsn = 'mysql://root:password@localhost/my_database';
+    ConnectionManager::config('default', ['url' => $dsn]);
+
+Une fois créé, vous pouvez accéder à l'objet Connection pour commencer à
+l'utiliser::
+
+    $connection = ConnectionManager::get('default');
+
+Exécuter des Instructions Select
+--------------------------------
+
+Exécuter une instruction SQL pur est un jeu d'enfant::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
+
+Vous pouvez utiliser des instructions préparées pour insérer des paramètres::
+
+    $results = $connection
+        ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
+        ->fetchAll('assoc');
+
+il est également possible d'utiliser des types de données complexes en tant
+qu'arguments::
+
+    $results = $connection
+        ->execute(
+            'SELECT * FROM articles WHERE created >= :time',
+            ['created' => DateTime('1 day ago')],
+            ['created' => 'datetime']
+        )
+        ->fetchAll('assoc');
+
+Au lieu d'écrire du SQL manuellement, vous pouvez utiliser le générateur de
+requêtes::
+
+    $results = $connection
+        ->newQuery()
+        ->select('*')
+        ->from('articles')
+        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->order(['title' => 'DESC'])
+        ->execute()
+        ->fetchAll('assoc');
+
+Ecécuter des Instructions Insert
+--------------------------------
+
+Insérer une ligne dans une base de données est habituellement l'affaire
+de quelques lignes::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $connection->insert('articles', [
+        'title' => 'A New Article',
+        'created' => new DateTime('now')
+    ], ['created' => 'datetime']);
+
+Exécuter des Instructions Update
+--------------------------------
+
+Mettre à jour une ligne de base de données est aussi intuitif, l'exemple suivant
+procédera à la mise à jour de l'article comportant l'**id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
+
+Exécuter des Instructions Delete
+--------------------------------
+
+De même, la méthode ``delete()`` est utilisée pour supprimer des lignes de la
+base de données, l'exemple suivant procédera à suppression de l'article
+comportant l'**id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->delete('articles', ['id' => 10]);
 
 .. _database-configuration:
 
@@ -67,7 +164,7 @@ Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/optio
 supplémentaires en tant qu'arguments de query string.
 
 Par défaut, tous les objets Table vont utiliser la connexion ``default``. Pour
-utiliser une autre connexion, reportez vous à
+utiliser une autre connexion, reportez-vous à
 :ref:`la configuration des connexions<configuring-table-connections>`.
 
 Il y a un certain nombre de clés supportées dans la configuration de la base
@@ -362,7 +459,7 @@ L'exécution des Requêtes
 
 .. php:method:: query($sql)
 
-Une fois que vous avez un objet connection, vous voudrez probablement réaliser
+Une fois que vous avez un objet Connection, vous voudrez probablement réaliser
 quelques requêtes avec. La couche d'abstraction de CakePHP fournit des
 fonctionnalités au-dessus de PDO et des drivers natifs. Ces fonctionnalités
 fournissent une interface similaire à PDO. Il y a quelques différentes façons

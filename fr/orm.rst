@@ -1,7 +1,7 @@
 Accès Base de Données & ORM
 ###########################
 
-La manipulation de données de la base de donnés dans CakePHP est réalisée 
+La manipulation de données de la base de donnés dans CakePHP est réalisée
 avec deux types d'objets principaux. Les premiers sont des **repositories** ou
 **table objects**.
 Ces objets fournissent un accès aux collections de données. Ils vous permettent
@@ -122,10 +122,10 @@ Pour en savoir plus sur les Models
     :maxdepth: 2
 
     orm/database-basics
+    orm/query-builder
     orm/table-objects
     orm/entities
     orm/retrieving-data-and-resultsets
-    orm/query-builder
     orm/saving-data
     orm/deleting-data
     orm/associations
