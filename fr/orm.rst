@@ -1,19 +1,19 @@
-Models (Modèles)
-################
+Accès Base de Données & ORM
+###########################
 
-Les Models sont les classes qui représentent la couche de logique dans votre
-application. Cela signifie qu'ils sont responsables de la gestion de presque
-tout ce qui concerne les données, leur validité, les interactions et
-l'évolution du flux d'informations dans votre domaine de travail.
-
-Dans CakePHP, le domaine d'application du model est séparé en 2 types d'objet
-principaux. Les premiers sont des **repositories** ou **table objects**.
+La manipulation de données de la base de donnés dans CakePHP est réalisée 
+avec deux types d'objets principaux. Les premiers sont des **repositories** ou
+**table objects**.
 Ces objets fournissent un accès aux collections de données. Ils vous permettent
 de sauvegarder de nouveaux enregistrements, de modifier/supprimer des
 enregistrements existants, définir des relations et d'effectuer des opérations
-en masse. Les seconds types d'objet sont des **entities**. Les Entities
+en masse. Les seconds types d'objets sont les **entities**. Les Entities
 représentent des enregistrements individuels et vous permettent de définir
 des comportements et des fonctionnalités au niveau des lignes/enregistrements.
+
+Ces deux classes sont habituellement responsables de la gestion de presque
+tout ce qui concerne les données, leur validité, les interactions et
+l’évolution du flux d’informations dans votre domaine de travail.
 
 L'ORM intégré dans CakePHP se spécialise dans les bases de données
 relationnelles, mais peut être étendu pour supporter des sources de données

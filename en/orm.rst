@@ -1,5 +1,5 @@
-ORM and Database Access
-#######################
+Database Access & ORM
+#####################
 
 In CakePHP working with data through the database is done with two primary object
 types. The first are **repositories** or **table objects**. These objects
