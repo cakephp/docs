@@ -95,8 +95,8 @@ composer.json de votre application pour contenir les informations suivantes::
 
     "psr-4": {
         (...)
-        "MyPlugin\\": "/plugins/MyPlugin/src",
-        "MyPlugin\\Test\\": "/plugins/MyPlugin/tests"
+        "MyPlugin\\": "./plugins/MyPlugin/src",
+        "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
 Si vous utilisez un namespace pour vos plugins, le mapping des namespaces
