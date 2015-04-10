@@ -12,26 +12,6 @@ queries using unions and subqueries with ease.
 Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
-Query objects are lazily evaluated. This means a query is not executed until one
-of the following things occur:
-
-- The query is iterated with ``foreach()``.
-- The query's ``execute()`` method is called. This will return the underlying
-  statement object, and is to be used with insert/update/delete queries.
-- The query's ``first()`` method is called. This will return the first result in the set
-  built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
-- The query's ``all()`` method is called. This will return the result set and
-  can only be used with ``SELECT`` statements.
-- The query's ``toArray()`` method is called.
-
-Until one of these conditions are met, the query can be modified with additional
-SQL being sent to the database. It also means that if a Query hasn't been
-evaluated, no SQL is ever sent to the database. Once executed, modifying and
-re-evaluating a query will result in additional SQL being run.
-
-If you want to take a look at what SQL CakePHP is generating, you can turn
-database :ref:`query logging <database-query-logging>` on.
-
 The Query Object
 ================
 
@@ -39,11 +19,37 @@ The easiest way to create a ``Query`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
 modified. You can also use a table's connection object to access the lower level
 Query builder that does not include ORM features, if necessary. See the
-:ref:`database-queries` section for more information. For the remaining
-examples, assume that ``$articles`` is a :php:class:`~Cake\\ORM\\Table`::
+:ref:`database-queries` section for more information::
+
+    use Cake\ORM\TableRegistry;
+    $articles = TableRegistry::get('Articles');
 
     // Start a new query.
     $query = $articles->find();
+
+When inside a controller, you can use the automatic table variable that is
+created using the conventions system::
+
+    // Inside ArticlesController.php
+
+    $query = $this->Articles->find();
+
+Selecting Rows From A Table
+---------------------------
+
+::
+
+    use Cake\ORM\TableRegistry;
+
+    $query = TableRegistry::get('Articles')->find();
+
+    foreach ($query as $article) {
+        debug($article->title);
+    }
+
+For the remaining examples, assume that ``$articles`` is a
+:php:class:`~Cake\\ORM\\Table`. When inside controllers, you can use
+``$this->Articles`` instead of ``$articles``.
 
 Almost every method in a ``Query`` object will return the same query, this means
 that ``Query`` objects are lazy, and will not be executed unless you tell them
@@ -60,6 +66,10 @@ You can of course chain the methods you call on Query objects::
         ->where(['id !=' => 1])
         ->order(['created' => 'DESC']);
 
+    foreach ($query as $article) {
+        debug($article->created);
+    }
+
 If you try to call ``debug()`` on a Query object, you will see its internal
 state and the SQL that will be executed in the database::
 
@@ -70,54 +80,84 @@ state and the SQL that will be executed in the database::
     // 'sql' => 'SELECT * FROM articles where id = ?'
     // ...
 
-Once you're happy with the Query, you can execute it. The easiest way is to
-either call the ``first()`` or the ``all()`` methods::
+You can execute a query directly without having to use ``foreach`` on it.
+The easiest way is to either call the ``all()`` or ``toArray()`` methods::
 
-    $firstArticle = $articles
-        ->find()
-        ->where(['id' => 1])
-        ->first();
-
-    $allResults = $articles
+    $resultsIteratorObject = $articles
         ->find()
         ->where(['id >' => 1])
         ->all();
 
-In the above example, ``$allResults`` will be an instance of
+    foreach ($resultsIteratorObject as $article) {
+        debug($article->id);
+    }
+
+    $resultsArray = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->toArray();
+
+    foreach ($resultsArray as $article) {
+        debug($article->id);
+    }
+
+    debug($resultsArray[0]->title);
+
+In the above example, ``$resultsIteratorObject`` will be an instance of
 ``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
-and traversing methods on. Often, there is no need to call ``all()``, you are
-allowed to just iterate the Query object to get its results::
+and traversing methods on.
 
-    // Iterate the results
-    foreach ($allResults as $result) {
-     ...
-    }
+Often, there is no need to call ``all()``, you can simply iterate the
+Query object to get its results. Query objects can also be used directly as the
+result object; trying to iterate the query, calling ``toArray`` or some of the
+methods inherited from :ref:`Collection <collection-objects>`, will result in the
+query being executed and results returned to you.
 
-    // That is equivalent to
-    $query = $articles->find()->where(['id' => 1]);
-    foreach ($query as $result) {
-     ...
-    }
+Selecting A Single Row From A Table
+-----------------------------------
 
-Query objects can also be used directly as the result object; trying to iterate the query,
-calling ``toArray`` or some of the methods inherited from :ref:`Collection<collection-objects>`,
-will result in the query being executed and results returned to you::
+You can use the ``first()`` method to get the first result in the query::
 
-    // This executes the query and returns an array of results
-    $resultsIntoAnArray = $articles->find()->where(['id >' => 1])->toArray();
+    $article = $articles
+        ->find()
+        ->where(['id' => 1])
+        ->first();
 
-    // Use the combine() method from the collections library
-    // This executes the query
-    $keyValueList = $articles->find()->combine('id', 'title');
+    debug($article->title);
+
+Getting A List Of Values From A Column
+--------------------------------------
+
+::
 
     // Use the extract() method from the collections library
     // This executes the query as well
     $allTitles = $articles->find()->extract('title');
 
+    foreach ($allTitles as $title) {
+        echo $title;
+    }
+
+You can also get a key-value list out of a query result::
+
+    $list = $articles->find('list')->select(['id', 'title']);
+
+    foreach ($list as $id => $title) {
+        echo "$id : $title"
+    }
+
+Queries Are Collection Objects
+------------------------------
+
 Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`Collection<collection-objects>` section to improve your skills
-in efficiently traversing the data. In short, it is important to remember that
-anything you can call on a Collection object, you can also do in a Query object::
+that you visit the :ref:`Collection <collection-objects>` section to improve
+your skills in efficiently traversing the data. In short, it is important to
+remember that anything you can call on a Collection object, you can also do in
+a Query object::
+
+    // Use the combine() method from the collections library
+    // This is equivalent to find('list')
+    $keyValueList = $articles->find()->combine('id', 'title');
 
     // An advanced example
     $results = $articles->find()
@@ -129,6 +169,33 @@ anything you can call on a Collection object, you can also do in a Query object:
         })
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
+
+    foreach ($results as $id $trimmedTitle) {
+        echo "$id : $trimmedTitle";
+    }
+
+How Are Queries Lazily Evaluated
+--------------------------------
+
+Query objects are lazily evaluated. This means a query is not executed until one
+of the following things occur:
+
+- The query is iterated with ``foreach()``.
+- The query's ``execute()`` method is called. This will return the underlying
+  statement object, and is to be used with insert/update/delete queries.
+- The query's ``first()`` method is called. This will return the first result in the set
+  built by ``SELECT`` (it adds ``LIMIT 1`` to the query).
+- The query's ``all()`` method is called. This will return the result set and
+  can only be used with ``SELECT`` statements.
+- The query's ``toArray()`` method is called.
+
+Until one of these conditions are met, the query can be modified without additional
+SQL being sent to the database. It also means that if a Query hasn't been
+evaluated, no SQL is ever sent to the database. Once executed, modifying and
+re-evaluating a query will result in additional SQL being run.
+
+If you want to take a look at what SQL CakePHP is generating, you can turn
+database :ref:`query logging <database-query-logging>` on.
 
 The following sections will show you everything there is to know about using and
 combining the Query object methods to construct SQL statements and extract data.
@@ -275,20 +342,6 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Disabling Hydration
--------------------
-
-While ORMs and object result sets are powerful, hydrating entities is sometimes
-unnecessary. For example, when accessing aggregated data, building an Entity may
-not make sense. In these situations you may want to disable entity hydration::
-
-    $query = $articles->find();
-    $query->hydrate(false);
-
-.. note::
-
-    When hydration is disabled results will be returned as basic arrays.
-
 Case statements
 ---------------
 
@@ -313,6 +366,20 @@ To do this with the query builder, we'd use the following code::
         'number_unpublished' => $query->func()->sum($unpublishedCase)
     ])
     ->group('published');
+
+Disabling Hydration
+-------------------
+
+While ORMs and object result sets are powerful, hydrating entities is sometimes
+unnecessary. For example, when accessing aggregated data, building an Entity may
+not make sense. In these situations you may want to disable entity hydration::
+
+    $query = $articles->find();
+    $query->hydrate(false);
+
+.. note::
+
+    When hydration is disabled results will be returned as basic arrays.
 
 .. _advanced-query-conditions:
 
@@ -976,221 +1043,3 @@ expect::
 As seen above, the formatters attached to associated query builders are scoped
 to operate only on the data in the association. CakePHP will ensure that
 computed values are inserted into the correct entity.
-
-.. _map-reduce:
-
-Modifying Results with Map/Reduce
-==================================
-
-More often than not, find operations require post-processing the data that is
-found in the database. While entities' getter methods can take care of most of
-the virtual property generation or special data formatting, sometimes you
-need to change the data structure in a more fundamental way.
-
-For those cases, the ``Query`` object offers the ``mapReduce()`` method, which
-is a way of processing results once they are fetched from the database.
-
-A common example of changing the data structure is grouping results together
-based on certain conditions. For this task we can use the ``mapReduce()``
-function. We need two callable functions the ``$mapper`` and the ``$reducer``.
-The ``$mapper`` callable receives the current result from the database as first
-argument, the iteration key as second argument and finally it receives an
-instance of the ``MapReduce`` routine it is running::
-
-    $mapper = function ($article, $key, $mapReduce) {
-        $status = 'published';
-        if ($article->isDraft() || $article->isInReview()) {
-            $status = 'unpublished';
-        }
-        $mapReduce->emitIntermediate($article, $status);
-    };
-
-In the above example ``$mapper`` is calculating the status of an article, either
-published or unpublished, then it calls ``emitIntermediate()`` on the
-``MapReduce`` instance. The method stores the article in the list of articles
-labelled as either published or unpublished.
-
-The next step in the map-reduce process is to consolidate the final results. For
-each status created in the mapper, the ``$reducer`` function will be called so
-you can do any extra processing. This function will receive the list of articles
-in a particular ``bucket`` as the first parameter, the name of the ``bucket`` it
-needs to process as the second parameter, and again, as in the ``mapper()``
-function, the instance of the ``MapReduce`` routine as the third parameter. In
-our example, we did not have to do any extra processing, so we just ``emit()``
-the final results::
-
-    $reducer = function ($articles, $status, $mapReduce) {
-        $mapReduce->emit($articles, $status);
-    };
-
-Finally, we can put these two functions together to do the grouping::
-
-    $articlesByStatus = $articles->find()
-        ->where(['author_id' => 1])
-        ->mapReduce($mapper, $reducer);
-
-    foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("The are %d %s articles", count($articles), $status);
-    }
-
-The above will ouput the following lines::
-
-    There are 4 published articles
-    There are 5 unpublished articles
-
-Of course, this is a simplistic example that could actually be solved in another
-way without the help of a map-reduce process. Now, let's take a look at another
-example in which the reducer function will be needed to do something more than
-just emitting the results.
-
-Calculating the most commonly mentioned words, where the articles contain
-information about CakePHP, as usual we need a mapper function::
-
-    $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
-            return;
-        }
-
-        $words = array_map('strtolower', explode(' ', $article['body']));
-        foreach ($words as $word) {
-            $mapReduce->emitIntermediate($article['id'], $word);
-        }
-    };
-
-It first checks for whether the "cakephp" word is in the article's body, and
-then breaks the body into individual words. Each word will create its own
-``bucket`` where each article id will be stored. Now let's reduce our results to
-only extract the count::
-
-    $reducer = function ($occurrences, $word, $mapReduce) {
-        $mapReduce->emit(count($occurrences), $word);
-    }
-
-Finally, we put everything together::
-
-    $articlesByStatus = $articles->find()
-        ->where(['published' => true])
-        ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
-
-This could return a very large array if we don't clean stop words, but it could
-look something like this::
-
-    [
-        'cakephp' => 100,
-        'awesome' => 39,
-        'impressive' => 57,
-        'outstanding' => 10,
-        'mind-blowing' => 83
-    ]
-
-One last example and you will be a map-reduce expert. Imagine you have
-a ``friends`` table and you want to find "fake friends" in our database, or
-better said, people who do not follow each other. Let's start with our
-``mapper()`` function::
-
-    $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
-    };
-
-We just duplicated our data to have a list of users each other user follows.
-Now it's time to reduce it. For each call to the reducer, it will receive a list
-of followers per user::
-
-    // $friends list will look like
-    // repeated numbers mean that the relationship existed in both directions
-    [2, 5, 100, 2, 4]
-
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
-            }
-        }
-    }
-
-And we supply our functions to a query::
-
-    $fakeFriends = $friends->find()
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer)
-        ->toArray();
-
-This would return an array similar to this::
-
-    [
-        1 => [2, 4],
-        3 => [6]
-        ...
-    ]
-
-The resulting array means, for example, that user with id ``1`` follows users
-``2`` and ``4``, but those do not follow ``1`` back.
-
-
-Stacking Multiple Operations
-----------------------------
-
-Using `mapReduce` in a query will not execute it immediately. The operation will
-be registered to be run as soon as the first result is attempted to be fetched.
-This allows you to keep chaining additional methods and filters to the query
-even after adding a map-reduce routine::
-
-   $query = $articles->find()
-        ->where(['published' => true])
-        ->mapReduce($mapper, $reducer);
-
-    // At a later point in your app:
-    $query->where(['created >=' => new DateTime('1 day ago')]);
-
-This is particularly useful for building custom finder methods as described in the
-:ref:`custom-find-methods` section::
-
-    public function findPublished(Query $query, array $options])
-    {
-        return $query->where(['published' => true]);
-    }
-
-    public function findRecent(Query $query, array $options)
-    {
-        return $query->where(['created >=' => new DateTime('1 day ago')]);
-    }
-
-    public function findCommonWords(Query $query, array $options)
-    {
-        // Same as in the common words example in the previous section
-        $mapper = ...;
-        $reducer = ...;
-        return $query->mapReduce($mapper, $reducer);
-    }
-
-    $commonWords = $articles
-        ->find('commonWords')
-        ->find('published')
-        ->find('recent');
-
-Moreover, it is also possible to stack more than one ``mapReduce`` operation for
-a single query. For example, if we wanted to have the most commonly used words
-for articles, but then filter it to only return words that were mentioned more
-than 20 times across all articles::
-
-    $mapper = function ($count, $word, $mr) {
-        if ($count > 20) {
-            $mr->emit($count, $word);
-        }
-    };
-
-    $articles->find('commonWords')->mapReduce($mapper);
-
-Removing All Stacked Map-reduce Operations
-------------------------------------------
-
-Under some circumstances you may want to modify a ``Query`` object so that no
-``mapReduce`` operations are executed at all. This can be easily done by
-calling the method with both parameters as null and the third parameter
-(overwrite) as ``true``::
-
-    $query->mapReduce(null, null, true);
