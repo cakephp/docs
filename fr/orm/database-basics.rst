@@ -1,12 +1,12 @@
 Notions de Base de Base de Données
 ##################################
 
-La couche d'accès à la base de données de CakePHP fournit une abstraction et aide
-avec la plupart des aspects du traitement des bases de données relationnelles
-telles que, le maintient les connexions au serveur, la construction de requêtes,
-la protection contre les injections SQL, l'inspection et la modification des
-schémas, et avec le débogage et le profilage des requêtes envoyées à la base de
-données.
+La couche d'accès à la base de données de CakePHP fournit une abstraction et
+aide avec la plupart des aspects du traitement des bases de données
+relationnelles telles que, le maintien des connexions au serveur, la
+construction de requêtes, la protection contre les injections SQL, l'inspection
+et la modification des schémas, et avec le débogage et le profilage les requêtes
+envoyées à la base de données.
 
 Tour Rapide
 ===========
