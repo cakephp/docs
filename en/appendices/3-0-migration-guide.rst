@@ -684,7 +684,7 @@ new ORM.
 ConnectionManager
 -----------------
 
-- ConnectionManager has been moved to the ``Cake\Database`` namespace.
+- ConnectionManager has been moved to the ``Cake\Datasource`` namespace.
 - ConnectionManager has had the following methods removed:
 
   - ``sourceList``
