@@ -29,15 +29,15 @@ section :ref:`database-queries` pour plus d'informations::
     // Commence une nouvelle requête.
     $query = $articles->find();
 
-When inside a controller, you can use the automatic table variable that is
-created using the conventions system::
+Quand vous êtes dans un controller, vous pouvez utiliser la variable automatique
+de la table qui est créée selon le système de conventions::
 
     // Inside ArticlesController.php
 
     $query = $this->Articles->find();
 
-Selecting Rows From A Table
----------------------------
+Récupérer les Lignes d'une Table
+--------------------------------
 
 ::
 
@@ -49,9 +49,9 @@ Selecting Rows From A Table
         debug($article->title);
     }
 
-For the remaining examples, assume that ``$articles`` is a
-:php:class:`~Cake\\ORM\\Table`. When inside controllers, you can use
-``$this->Articles`` instead of ``$articles``.
+Pour les exemples restants, imaginez que ``$articles`` est une
+:php:class:`~Cake\\ORM\\Table`. Quand vous êtes dans des controllers, vous
+pouvez utiliser ``$this->Articles`` plutôt que ``$articles``.
 
 Presque chaque méthode dans un objet ``Query`` va retourner la même requête,
 cela signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à
@@ -83,8 +83,8 @@ interne et le SQL qui sera exécuté dans la base de données::
     // 'sql' => 'SELECT * FROM articles where id = ?'
     // ...
 
-You can execute a query directly without having to use ``foreach`` on it.
-The easiest way is to either call the ``all()`` or ``toArray()`` methods::
+Vous pouvez exécuter une requête directement sans avoir à utiliser ``foreach``.
+La façon la plus simple est d'appeler les méthodes ``all()`` ou ``toArray()``::
 
     $resultsIteratorObject = $articles
         ->find()
@@ -106,20 +106,21 @@ The easiest way is to either call the ``all()`` or ``toArray()`` methods::
 
     debug($resultsArray[0]->title);
 
-In the above example, ``$resultsIteratorObject`` will be an instance of
-``Cake\ORM\ResultSet``, an object you can iterate and apply several extracting
-and traversing methods on.
+Dans l'exemple ci-dessus, ``$resultsIteratorObject`` sera une instance de
+``Cake\ORM\ResultSet``, un objet que vous pouvez itérer et appliquer
+plusieurs extractions et traverser les méthodes.
 
-Often, there is no need to call ``all()``, you can simply iterate the
-Query object to get its results. Query objects can also be used directly as the
-result object; trying to iterate the query, calling ``toArray`` or some of the
-methods inherited from :ref:`Collection <collection-objects>`, will result in the
-query being executed and results returned to you.
+Souvent, il n'y a pas besoin d'appeler ``all()``, vous pouvez juste itérer
+l'objet Query pour récupérer ses résultats. Query objects can also be used
+directly as the result object; trying to iterate the query, calling ``toArray``
+or some of the methods inherited from :ref:`Collection <collection-objects>`,
+will result in the query being executed and results returned to you.
 
-Selecting A Single Row From A Table
------------------------------------
+Récupérez une Ligne Unique d'une Table
+--------------------------------------
 
-You can use the ``first()`` method to get the first result in the query::
+Vous pouvez utilisez la méthode ``first()`` pour récupérer le premier résultat
+dans la requête::
 
     $article = $articles
         ->find()
@@ -128,20 +129,21 @@ You can use the ``first()`` method to get the first result in the query::
 
     debug($article->title);
 
-Getting A List Of Values From A Column
---------------------------------------
+Récupérer une Liste de Valeurs à Partir d'une Colonne
+-----------------------------------------------------
 
 ::
 
-    // Use the extract() method from the collections library
-    // This executes the query as well
+    // Utilise la méthode extract() à partir de la libraire collections
+    // Ceci exécute aussi la requête
     $allTitles = $articles->find()->extract('title');
 
     foreach ($allTitles as $title) {
         echo $title;
     }
 
-You can also get a key-value list out of a query result::
+Vous pouvez aussi récupérer une liste de clé-valeur à partir d'un résultat d'une
+requête::
 
     $list = $articles->find('list')->select(['id', 'title']);
 
@@ -149,36 +151,37 @@ You can also get a key-value list out of a query result::
         echo "$id : $title"
     }
 
-Queries Are Collection Objects
-------------------------------
+Les Requêtes sont des Objets de Collection
+------------------------------------------
 
-Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`Collection <collection-objects>` section to improve
-your skills in efficiently traversing the data. In short, it is important to
-remember that anything you can call on a Collection object, you can also do in
-a Query object::
+Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
+fortement recommandé que vous consultiez la section
+:ref:`Collection<collection-objects>` pour améliorer vos compétences dans
+le traversement efficace de données. En résumé, il est important de se
+rappeler que tout ce que vous pouvez appeler sur un objet Collection, vous
+pouvez aussi le faire avec un objet Query::
 
-    // Use the combine() method from the collections library
-    // This is equivalent to find('list')
+    // Utilise la méthode combine() à partir de la libraire collections
+    // Ceci est équivalent au find('list')
     $keyValueList = $articles->find()->combine('id', 'title');
 
-    // An advanced example
+    // Un exemple avancé
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
+        ->map(function ($row) { // map() est une méthode de collection, elle exécute la requête
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
-        ->combine('id', 'trimmedTitle') // combine() is another collection method
-        ->toArray(); // Also a collections library method
+        ->combine('id', 'trimmedTitle') // combine() est une autre méthode de
+        ->toArray(); // Aussi une méthode de la librairie collections
 
     foreach ($results as $id $trimmedTitle) {
         echo "$id : $trimmedTitle";
     }
 
-How Are Queries Lazily Evaluated
---------------------------------
+Comment les Requêtes sont Évaluées Lazily
+-----------------------------------------
 
 Les objets Query sont évalués "lazily" (paresseusement). Cela signifie qu'une
 requête n'est pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
