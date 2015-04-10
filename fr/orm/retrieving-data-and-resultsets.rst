@@ -874,7 +874,7 @@ Ceci vous permet de continuer à chainer les méthodes et les filtres
 C'est particulièrement utile pour construire des méthodes finder personnalisées
  comme décrit dans la section :ref:`custom-find-methods`::
 
-    public function findPublished(Query $query, array $options])
+    public function findPublished(Query $query, array $options)
     {
         return $query->where(['published' => true]);
     }
