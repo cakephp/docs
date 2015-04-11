@@ -564,6 +564,22 @@ DateTime types to parse localized formats::
 
 The default parsing format is the same as the default string format.
 
+Automatically Choosing the Locale Based on Request Data
+=======================================================
+
+By using the ``LocaleSelectorFilter`` in your application, CakePHP will
+automatically set the locale based on the current user::
+
+    // in config/bootstrap.php
+    DispatcherFactory::add('LocaleSelector');
+
+    // Restrict the locales to only en-US, fr-FR
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+
+The ``LocalSelectorFilter`` will use the ``Accept-Language`` header to
+automatically set the user's preferred locale. You can use the locale list
+option to restrict which locales will automatically be used.
+
 .. meta::
     :title lang=en: Internationalization & Localization
     :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
