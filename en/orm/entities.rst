@@ -37,12 +37,47 @@ articles table, we'll get instances of this class.
 
     If you don't define an entity class CakePHP will use the basic Entity class.
 
+Creating Entities
+=================
+
+Entities can be directly instantiated::
+
+    use App\Model\Entity\Article;
+
+    $article = new Article();
+
+When instantiating an entity you can pass the properties with the data you want
+to store in them::
+
+    use App\Model\Entity\Article;
+
+    $article = new Article([
+        'id' => 1,
+        'title' => 'New Article',
+        'created' => new DateTime('now')
+    ]);
+
+Another way of getting new entities is using the ``newEntity()`` method from the
+``Table`` objects::
+
+    use Cake\ORM\TableRegistry;
+
+    $article = TableRegistry::get('Articles')->newEntity();
+    $article = TableRegistry::get('Articles')->newEntity([
+        'id' => 1,
+        'title' => 'New Article',
+        'created' => new DateTime('now')
+    ]);
+
 Accessing Entity Data
 =====================
 
 Entities provide a few ways to access the data they contain. Most commonly you
 will access the data in an entity using object notation::
 
+    use App\Model\Entity\Article;
+
+    $article = new Article;
     $article->title = 'This is my first post';
     echo $article->title;
 
@@ -171,6 +206,16 @@ You can also check for changes to any property in the entity::
     // See if the entity has changed
     $article->dirty();
 
+To remove the dirty mark from fields in an entity, you can use the ``clean()``
+method::
+
+    $article->clean();
+
+When creating a new entity, you can avoid the fields from being marked as dirty
+by passing an extra option::
+
+    $article = new Article(['title' => 'New Article'], ['markClean' => true]);
+
 Validation Errors
 =================
 
@@ -237,6 +282,16 @@ fallback behavior if a field is not specifically named::
 
 If the ``*`` property is not defined it will default to ``false``.
 
+Avoiding Mass Assignment Protection
+-----------------------------------
+
+When creating a new entity using the ``new`` keyword you can tell it to not
+protect itself against mass assignment::
+
+    use App\Model\Entity\Article;
+
+    $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
+
 Modifying the Guarded Fields at Runtime
 ---------------------------------------
 
@@ -254,6 +309,9 @@ method::
     Modifying accessible fields effects only the instance the method is called
     on.
 
+When using the ``newEntity()`` and ``patchEntity()`` methods in the ``Table``
+objects you also have control over the mass assignment protection. Please refer
+to the :ref:`changing-accessible-fields` section for more information.
 
 Bypassing Field Guarding
 ------------------------
@@ -266,6 +324,23 @@ fields::
 By setting the ``guard`` option to ``false``, you can ignore the accessible field
 list for a single call to ``set()``.
 
+
+Checking In An Entity Was Persisted
+-----------------------------------
+
+It is often needed to know if an entity represents a row that is already
+present in the database. For those cases use the ``isNew()`` method::
+
+    if (!$aricle->isNew()) {
+        echo 'This article was saved already!';
+    }
+
+If you are certain that an entity was already persisted in database, you can
+change at runtime the return value of ``isNew()``::
+
+    $article->isNew(false);
+
+    $article->isNew(true);
 
 .. _lazy-load-associations:
 
