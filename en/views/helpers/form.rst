@@ -1470,7 +1470,7 @@ A list of the default templates and the variables they can expect are:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
+* ``checkboxFormGroup`` {{label}}
 * ``checkboxWrapper`` {{input}}, {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
