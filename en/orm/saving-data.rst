@@ -46,16 +46,14 @@ purpose::
     $article->title = 'A new title for the article';
     $articlesTable->save($article);
 
-CakePHP can know whether to do an insert or an update based on the return value
-of the ``isNew()`` method in the entity. Entities that were retrieved with
-``get()`` or ``find()`` will always return false when ``isNew()`` is called on
-them.
+CakePHP will know whether to do an insert or an update based on the return value
+of the ``isNew()`` method. Entities that were retrieved with ``get()`` or
+``find()`` will always return false when ``isNew()`` is called on them.
 
 Saving With Associations
 ------------------------
 
-By default the ``save()`` method can handle one level deep of associations when
-saving. You just need to make sure the right properties are set when saving::
+By default the ``save()`` method will also save one level of associations::
 
     $articlesTable = TableRegistry::get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
@@ -65,9 +63,10 @@ saving. You just need to make sure the right properties are set when saving::
     $article->author = $author;
 
     $articlesTable->save($article);
-    echo $article->author_id; // The foreign key value was set automatically.
+     // The foreign key value was set automatically.
+    echo $article->author_id;
 
-The ``save()`` is also able to create new records for associations::
+The ``save()`` method is also able to create new records for associations::
 
     $firstComment = $articlesTable->Comments->newEntity();
     $firstComment->body = 'This is a great article';
@@ -98,7 +97,6 @@ method in the association::
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
 
-
 Saving Data To The Join Table
 -----------------------------
 
@@ -124,10 +122,9 @@ Unlinking many to many records is done via the ``unlink()`` method::
 
     $articlesTable->Tags->unlink($article, $tags);
 
-
 When modifying records by directly setting or changing the properties no
 validation happens, which is a problem when accepting form data. The following
-sections will deal with how to efficiently convert form data into entities so
+sections will show you how to efficiently convert form data into entities so
 that they can be validated and saved.
 
 .. _converting-request-data:

@@ -325,18 +325,18 @@ By setting the ``guard`` option to ``false``, you can ignore the accessible fiel
 list for a single call to ``set()``.
 
 
-Checking In An Entity Was Persisted
+Checking if an Entity was Persisted
 -----------------------------------
 
-It is often needed to know if an entity represents a row that is already
-present in the database. For those cases use the ``isNew()`` method::
+It is often necessary to know if an entity represents a row that is already
+in the database. In those situations use the ``isNew()`` method::
 
     if (!$aricle->isNew()) {
         echo 'This article was saved already!';
     }
 
-If you are certain that an entity was already persisted in database, you can
-change at runtime the return value of ``isNew()``::
+If you are certain that an entity hash already been persisted, you can use
+``isNew()`` as a setter::
 
     $article->isNew(false);
 
