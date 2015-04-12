@@ -590,6 +590,23 @@ les types Date, Time, et DateTime pour parser les formats localisés::
 
 Le parsing du format par défaut est le même que le format de chaîne par défaut.
 
+Sélection Automatique de Locale Basée sur les Données de Requêtes
+=================================================================
+
+En utilisant le ``LocaleSelectorFilter`` dans votre application, CakePHP
+définira automatiquement la locale en se basant sur l'utilisateur actuel::
+
+    // dans config/bootstrap.php
+    DispatcherFactory::add('LocaleSelector');
+
+    // Limimte les locale à en-US et fr-FR uniquement
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+
+Le ``LocalSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir
+automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
+l'option de liste de locale pour limiter quelles locales seront utilisées
+automatiquement.
+
 .. meta::
     :title lang=fr: Internationalization & Localization
     :keywords lang=fr: internationalization localization,internationalization et localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages

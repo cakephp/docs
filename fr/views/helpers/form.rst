@@ -1526,8 +1526,8 @@ suivantes:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
-* ``checkboxWrapper`` {{input}}, {{label}}
+* ``checkboxFormGroup`` {{label}}
+* ``checkboxWrapper`` {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
@@ -1542,6 +1542,8 @@ suivantes:
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``inputSubmit`` {{type}}, {{attrs}}
 * ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``nestingLabel`` {{hidden}}, {{attrs}}, {{input}}, {{text}}
+* ``legend`` {{text}}
 * ``option`` {{value}}, {{attrs}}, {{text}}
 * ``optgroup`` {{label}}, {{attrs}}, {{content}}
 * ``radio`` {{name}}, {{value}}, {{attrs}}
@@ -1550,6 +1552,7 @@ suivantes:
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
+* ``submitContainer`` {{content}}
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
