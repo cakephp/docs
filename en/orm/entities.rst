@@ -335,7 +335,7 @@ in the database. In those situations use the ``isNew()`` method::
         echo 'This article was saved already!';
     }
 
-If you are certain that an entity hash already been persisted, you can use
+If you are certain that an entity has already been persisted, you can use
 ``isNew()`` as a setter::
 
     $article->isNew(false);
