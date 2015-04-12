@@ -48,7 +48,7 @@ purpose::
 
 CakePHP will know whether to do an insert or an update based on the return value
 of the ``isNew()`` method. Entities that were retrieved with ``get()`` or
-``find()`` will always return false when ``isNew()`` is called on them.
+``find()`` will always return ``false`` when ``isNew()`` is called on them.
 
 Saving With Associations
 ------------------------
