@@ -8,6 +8,132 @@ Sauvegarder les Données
 Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
 voudrez probablement mettre à jour & sauvegarder les changements.
 
+Coup d'Oeil sur Enregistrement des Données
+==========================================
+
+Les applications ont habituellement deux façons d'enregistrer les données.
+La première est évidemment via des formulaires web et l'autre en générant ou
+modifiant directement les données dans le code pour l'envoyer à la base de
+données.
+
+Insérer des Données
+-------------------
+
+Le moyen le plus simple d'insérer des données dans une base de données est de
+créer une nouvelle entity et de la passer à la méthode ``save()`` de la classe
+``Table``::
+
+    use Cake\ORM\TableRegistry;
+
+    $articlesTable = TableRegistry::get('Articles');
+    $article = $articlesTable->newEntity();
+
+    $article->title = 'A New Article';
+    $article->body = 'Ceci est le contenu de cet article';
+
+    $articlesTable->save($article);
+
+Mettre à jour des Données
+-------------------------
+
+La ise à jour est aussi simple; et la méthode ``save()`` sert également ce
+but::
+
+    use Cake\ORM\TableRegistry;
+
+    $articlesTable = TableRegistry::get('Articles');
+    $article = $articlesTable->get(12); // article avec l'id 12
+
+    $article->title = 'Un nouveau titre pour cet article';
+    $articlesTable->save($article);
+
+CakePHP saura s'il doit faire un ajout ou une mise à jour en se basant sur le
+résultat de la méthode ``isNew()``. Les entities qui sont récupérées via
+``get()`` ou  ``find()`` renverrons toujours ``false`` lorsque la méthode
+``isNew()`` est appelée sur eux.
+
+Enregistrements avec Associations
+---------------------------------
+
+par défaut, la méthode ``save()`` ne sauvegardera qu'un seul niveau
+d'association::
+
+    $articlesTable = TableRegistry::get('Articles');
+    $author = $articlesTable->Authors->findByUserName('mark')->first();
+
+    $article = $articlesTable->newEntity();
+    $article->title = 'Un article par mark';
+    $article->author = $author;
+
+    $articlesTable->save($article);
+     // La valeur de la clé étrangère a été ajoutée automatiquement.
+    echo $article->author_id;
+
+La méthode ``save()`` est également capacle de créer de nouveaux
+enregistrements pour les associations::
+
+    $firstComment = $articlesTable->Comments->newEntity();
+    $firstComment->body = 'Un super article';
+
+    $secondComment = $articlesTable->Comments->newEntity();
+    $secondComment = 'J aime lire ceci!';
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2->name = 'Génial';
+
+    $article = $articlesTable->get(12);
+    $article->comments = [$firstComment, $secondComment];
+    $article->tags = [$tag1, $tag2];
+
+    $articlesTable->save($article);
+
+Associer des Enregistrement Many to Many
+----------------------------------------
+
+Dans le code ci-dessus il y a déjà un exemple de liaison d'un article vers
+deux tags. Il y a un autre moyen de faire la même chose en utilisant la
+méthode ``link()`` dans l'association::
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2->name = 'Génial';
+
+    $articlesTable->Tags->link($article, [$tag1, $tag2]);
+
+Sauvergader des Données dans la Table de Jointure
+-------------------------------------------------
+
+L'enregistrement de données dans la table de jointure est réalisé en utilisant
+la propriété spéciale ``_joinData``. Cette propriété doit être une instance
+d'Entity de la table de jointure::
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
+    $tag1->_joinData->tagComment = 'Je pense que cela est lié à CakePHP';
+
+    $ArticlesTags->link($article, [$tag1]);
+
+Délier les Enregistrements Many To Many
+---------------------------------------
+
+Délier des enregistrement Many to Many (plusieurs à pluiseurs) est réalisable
+via la méthode ``unlink()``::
+
+    $tags = $articlesTable
+        ->Tags
+        ->find()
+        ->where(['name IN' => ['cakephp', 'awesome']])
+        ->toArray();
+
+    $articlesTable->Tags->unlink($article, $tags);
+
+Lors de la modification d'enregistrements en définissant ou modifiant
+directement leurs propriétés il n'y aura pas de validation, ce qui est
+problématique pour l'acceptation de données de formulaire. La section suivante
+va vous expliquer comment convertir efficacement les données de formulaire
+en entities afin qu'elles puissent être validées et sauvegardées.
+
 .. _converting-request-data:
 
 Convertir les Données Requêtées en Entities
@@ -63,8 +189,8 @@ la notation par point pour être plus bref::
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-Converting BelongsToMany Data
------------------------------
+Convertir des Données BelongsToMany
+-----------------------------------
 
 Si vous sauvegardez des associations belongsToMany, vous pouvez soit utiliser
 une liste de données d'entity ou une liste d'ids. Quand vous utilisez une
@@ -112,8 +238,8 @@ When the above data is converted into entities, you will have 4 tags. The first
 two will be new objects, and the second two will be references to existing
 records.
 
-Converting HasMany Data
------------------------
+Convertir des Données HasMany
+-----------------------------
 
 Si vous sauvegardez des associations hasMany et voulez lier des enregistrements
 existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
@@ -127,8 +253,8 @@ existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
         ]
     ];
 
-Converting Multiple Records
----------------------------
+Convertir des Enregistrements Multiples
+---------------------------------------
 
 Lorsque vous créez des formulaires de création/mise à jour d'enregistrements
 multiples en une seule opération vous pouvez utiliser ``newEntities()``::
@@ -151,8 +277,10 @@ ressembler à ceci::
         ],
     ];
 
-Changing Accessible Fields
---------------------------
+.. _changing-accessible-fields:
+
+Changer les Champs Accessibles
+------------------------------
 
 Il est également possible de permettre à ``newEntity()`` d'écrire dans des
 champs non accessibles. Par exemple, ``id`` est généralement absent de la
