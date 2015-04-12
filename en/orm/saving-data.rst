@@ -41,7 +41,7 @@ purpose::
     use Cake\ORM\TableRegistry;
 
     $articlesTable = TableRegistry::get('Articles');
-    $article $articlesTable->get(12); // article with id 12
+    $article = $articlesTable->get(12); // article with id 12
 
     $article->title = 'A new title for the article';
     $articlesTable->save($article);
