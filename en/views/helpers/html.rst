@@ -806,9 +806,9 @@ You can also fetch the crumbs formatted inside an HTML list::
 
     echo $this->Html->getCrumbList();
 
-As options you can use regular Html parameter that fits in the ``<ul>``
+As options you can use regular HTML parameter that fits in the ``<ul>``
 (Unordered List) such as ``class`` and for the specific options, you have:
-``separator`` (will be between the <li> elements), ``firstClass`` and ``lastClass``
+``separator`` (will be between the ``<li>`` elements), ``firstClass`` and ``lastClass``
  like:
  
     echo $this->Html->getCrumbList(
