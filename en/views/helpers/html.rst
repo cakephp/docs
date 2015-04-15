@@ -772,6 +772,7 @@ Creating Breadcrumb Trails with HtmlHelper
 
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
+.. php:method:: getCrumbList(array $options = [], $startText = false)
 
 Many applications have breadcrumb trails to ease end user navigations. You can
 create a breadcrumb trail in your app with some help from HtmlHelper. To make
@@ -804,6 +805,20 @@ layout where ``getCrumbs`` was added.
 You can also fetch the crumbs formatted inside an HTML list::
 
     echo $this->Html->getCrumbList();
+
+As options you can use regular HTML parameter that fits in the ``<ul>``
+(Unordered List) such as ``class`` and for the specific options, you have:
+``separator`` (will be between the ``<li>`` elements), ``firstClass`` and ``lastClass``
+ like:
+ 
+    echo $this->Html->getCrumbList(
+        [
+            'firstClass' => false,
+            'lastClass' => 'active',
+            'class' => 'breadcrumb'
+        ],
+        'Home'
+    );
 
 This method uses :php:meth:`Cake\\View\\Helper\\HtmlHelper::tag()` to generate
 list and its elements. Works similar to
