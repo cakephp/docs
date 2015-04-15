@@ -26,8 +26,8 @@ In the call above we've activated the .rss extension. When using
 :php:meth:`Cake\\Routing\\Router::extensions()` you can pass a string or an
 array of extensions as first argument. This will activate each
 extension/content-type for use in your application. Now when the address
-``artciles/index.rss`` is requested you will get an xml version of
-your ``artciles/index``. However, first we need to edit the controller to
+``articles/index.rss`` is requested you will get an xml version of
+your ``articles/index``. However, first we need to edit the controller to
 add in the rss-specific code.
 
 Controller Code
@@ -42,15 +42,15 @@ It is a good idea to add RequestHandler to your ArticlesController's
         $this->loadComponent('RequestHandler');
     }
 
-Before we can make an RSS version of our ``articles/index`` we need to get
-a few things in order. It may be tempting to put the channel metadata in the
+Before we can make an RSS version of our ``articles/index`` we need to get a few
+things in order. It may be tempting to put the channel metadata in the
 controller action and pass it to your view using the
-:php:meth:`Controller::set()` method but this is inappropriate. That
-information can also go in the view. That will come later though, for now if
-you have a different set of logic for the data used to make the RSS feed and
-the data for the HTML view you can use the
-:php:meth:`RequestHandler::isRss()` method, otherwise your controller can stay
-the same::
+:php:meth:`Cake\\Controller\\Controller::set()` method but this is
+inappropriate. That information can also go in the view. That will come later
+though, for now if you have a different set of logic for the data used to make
+the RSS feed and the data for the HTML view you can use the
+:php:meth:`Cake\\Controller\\Component\\RequestHandler::isRss()` method,
+otherwise your controller can stay the same::
 
     // Modify the Posts Controller action that corresponds to
     // the action which deliver the rss feed, which is the
@@ -110,12 +110,12 @@ are below.
 View
 ----
 
-Our view, located at **src/Template/Posts/rss/index.ctp**, begins by setting
-the ``$documentData`` and ``$channelData`` variables for the layout, these
-contain all the metadata for our RSS feed. This is done by using the 
-:php:meth:`View::set()` method which is analogous to the
-:php:meth:`Controller::set()` method. Here though we are passing the channel's
-metadata back to the layout::
+Our view, located at **src/Template/Posts/rss/index.ctp**, begins by setting the
+``$documentData`` and ``$channelData`` variables for the layout, these contain
+all the metadata for our RSS feed. This is done by using the
+:php:meth:`Cake\\View\\View::set()` method which is analogous to the
+:php:meth:`Cake\\Controller\\Controller::set()` method. Here though we are
+passing the channel's metadata back to the layout::
 
     $this->set('channelData', [
         'title' => __("Most Recent Posts"),
