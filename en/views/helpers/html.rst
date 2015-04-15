@@ -799,8 +799,8 @@ breadcrumb trails on each of the pages::
     $this->Html->addCrumb('Users', '/users');
     $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
 
-This will add the output of "**Home > Users > Add User**" in your
-layout where ``getCrumbs`` was added.
+This will add the output of "**Home > Users > Add User**" in your layout where
+``getCrumbs`` was added.
 
 You can also fetch the crumbs formatted inside an HTML list::
 
@@ -808,9 +808,9 @@ You can also fetch the crumbs formatted inside an HTML list::
 
 As options you can use regular HTML parameter that fits in the ``<ul>``
 (Unordered List) such as ``class`` and for the specific options, you have:
-``separator`` (will be between the ``<li>`` elements), ``firstClass`` and ``lastClass``
- like:
- 
+``separator`` (will be between the ``<li>`` elements), ``firstClass`` and
+``lastClass`` like::
+
     echo $this->Html->getCrumbList(
         [
             'firstClass' => false,

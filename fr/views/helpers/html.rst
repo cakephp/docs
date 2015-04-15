@@ -820,11 +820,11 @@ voulez inclure un lien racine. Cette option fonctionne de la même façon que
 l'option ``$startText`` pour
 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
 
-En options vous pouvez utiliser un paramètre HTML régulier qui fonctionnent
-dans ``<ul>`` (Liste non ordonnées) comme ``class`` et pour des options
+En option vous pouvez préciser un attribut standard HTML valide pour un
+``<ul>`` (Liste non ordonnées) comme ``class`` et pour des options
 specifiques, vous avez:
 ``separator`` (sera entre les éléments ``<li>``), ``firstClass`` et
-``lastClass`` comme:
+``lastClass`` comme::
 
     echo $this->Html->getCrumbList(
         [
