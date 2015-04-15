@@ -777,6 +777,7 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
+.. php:method:: getCrumbList(array $options = [], $startText = false)
 
 Beaucoup d'applications utilisent un chemin de navigation (fil d'Ariane) pour
 faciliter la navigation des utilisateurs. Vous pouvez créer un chemin de
@@ -811,12 +812,36 @@ Vous pouvez aussi récupérer le fil d'Ariane en tant que liste Html::
     echo $this->Html->getCrumbList();
 
 Cette méthode utilise :php:meth:`Cake\\View\\Helper\\HtmlHelper::tag()` pour
-générer la liste et ces éléments. Fonctionne de la même manière
+générer la liste et ses éléments. Fonctionne de la même manière
 que :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`, il utilise toutes
 les options que chacun des fils a ajouté. Vous pouvez utiliser le paramètre
 ``$startText`` pour fournir le premier lien de fil. C'est utile quand vous
 voulez inclure un lien racine. Cette option fonctionne de la même façon que
 l'option ``$startText`` pour
+:php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
+
+En options vous pouvez utiliser un paramètre HTML régulier qui fonctionnent
+dans ``<ul>`` (Liste non ordonnées) comme ``class`` et pour des options
+specifiques, vous avez:
+``separator`` (sera entre les éléments ``<li>``), ``firstClass`` et
+``lastClass`` comme:
+
+    echo $this->Html->getCrumbList(
+        [
+            'firstClass' => false,
+            'lastClass' => 'active',
+            'class' => 'breadcrumb'
+        ],
+        'Home'
+    );
+
+Cette méthode utilise :php:meth:`Cake\\View\\Helper\\HtmlHelper::tag()` pour
+générer une liste et ses éléments. Fonctionne de la même manière que
+:php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`, donc elle utilise
+des options pour lesquelles chaque crumb a été ajouté. Vous pouvez utiliser le
+paramètre ``$startText`` pour fournir le premier lien/texte breadcrumb. C'est
+utile quand vous voulez toujours inclure un lien avec la racine. Cette option
+fonctionne de la même manière que l'option ``$startText`` pour
 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
 
 .. meta::

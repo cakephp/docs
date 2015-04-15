@@ -41,8 +41,8 @@ de cette classe.
     Si vous ne définissez pas de classe entity, CakePHP va utiliser la classe
     de base Entity.
 
-Créer de Entities
-=================
+Créer des Entities
+==================
 
 Les Entities peuvent être instanciées directement::
 
@@ -224,7 +224,7 @@ la méthode ``clean()``::
 
     $article->clean();
 
-Lors de la création d'un nouvelle entity, vous pouvez empêcher les champs 
+Lors de la création d'un nouvelle entity, vous pouvez empêcher les champs
 d'être marqués dirty en passant une option supplémentaire::
 
     $article = new Article(['title' => 'New Article'], ['markClean' => true]);
@@ -301,7 +301,7 @@ Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 Eviter la Protection Contre l'Assignement de Masse
 --------------------------------------------------
 
-lorss de la création d'un nouvelle entity via le mot clé ``new`` vous pouvez
+lors de la création d'un nouvelle entity via le mot clé ``new`` vous pouvez
 lui spécifier de ne pas se protéger contre l'assignement de masse::
 
     use App\Model\Entity\Article;
