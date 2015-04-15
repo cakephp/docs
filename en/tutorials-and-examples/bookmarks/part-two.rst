@@ -218,7 +218,7 @@ While view and delete are working, edit, add and index have a few problems:
 
 Let's tackle the add form first. To begin with remove the ``input('user_id')``
 from **src/Template/Bookmarks/add.ctp**. With that removed, we'll also update
-the add method to look like::
+the ``add()`` action from **src/Controller/BookmarksController.php** to look like::
 
     public function add()
     {
@@ -238,7 +238,7 @@ the add method to look like::
 
 By setting the entity property with the session data, we remove any possibility
 of the user modifying which user a bookmark is for. We'll do the same for the
-edit form and action. Your edit action should look like::
+edit form and action. Your ``edit()`` action from **src/Controller/BookmarksController.php** should look like::
 
     public function edit($id = null)
     {
@@ -262,7 +262,7 @@ List View
 ---------
 
 Now, we only need to show bookmarks for the currently logged in user. We can do
-that by updating the call to ``paginate()``. Make your ``index()`` action look
+that by updating the call to ``paginate()``. Make your ``index()`` action from **src/Controller/BookmarksController.php** look
 like::
 
     public function index()
