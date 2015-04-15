@@ -157,6 +157,8 @@ sont définies ou de créer des données calculées. Les mutateurs et accesseurs
 sont appliqués quand les propriétés sont lues en utilisant la notation objet
 ou en utilisant get() et set().
 
+.. _entities-virtual-properties:
+
 Créer des Propriétés Virtuelles
 -------------------------------
 
