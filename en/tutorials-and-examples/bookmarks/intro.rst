@@ -181,9 +181,9 @@ Because our database is following the CakePHP conventions, we can use the
 :doc:`bake console </bake/usage>` application to quickly generate a basic application. In your
 command line run the following commands::
 
-    bin/cake bake all users
-    bin/cake bake all bookmarks
-    bin/cake bake all tags
+    "bin/cake" bake all users
+    "bin/cake" bake all bookmarks
+    "bin/cake" bake all tags
 
 This will generate the controllers, models, views, their corresponding test
 cases, and fixtures for our users, bookmarks and tags resources. If you've
