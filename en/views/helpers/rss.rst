@@ -102,7 +102,7 @@ it's doing a lot of lifting for us. We haven't set ``$documentData`` or
 can pass variables back to the layout. Which is where our ``$channelData``
 array will come from setting all of the meta data for our feed.
 
-Next up is view file for my posts/index. Much like the layout file
+Next up is view file for my articles/index. Much like the layout file
 we created, we need to create a **src/Template/Posts/rss/** directory and
 create a new ``index.ctp`` inside that folder. The contents of the file
 are below.
@@ -128,7 +128,7 @@ The second part of the view generates the elements for the actual records of
 the feed. This is accomplished by looping through the data that has been passed
 to the view ($items) and using the :php:meth:`RssHelper::item()` method. The
 other method you can use, :php:meth:`RssHelper::items()` which takes a callback
-and an array of items for the feed. The callback method s usually called
+and an array of items for the feed. The callback method is usually called
 ``transformRss()``. There is one downfall to this method, which is that you
 cannot use any of the other helper classes to prepare your data inside the
 callback method because the scope inside the method does not include anything
