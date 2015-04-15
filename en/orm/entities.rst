@@ -148,6 +148,8 @@ you easily convert properties as they are set, or create calculated data.
 Mutators and accessors are applied when properties are read using object
 notation, or using get() and set().
 
+.. _entities-virtual-properties:
+
 Creating Virtual Properties
 ---------------------------
 
