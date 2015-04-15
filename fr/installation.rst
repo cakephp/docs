@@ -446,7 +446,7 @@ lien nginx ci-dessus)::
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            try_files $uri $uri/ /index.php?$args;
+            try_files $uri /index.php?$args;
         }
 
         location ~ \.php$ {
