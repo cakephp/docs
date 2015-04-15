@@ -391,5 +391,5 @@ We've expanded our bookmarking application to handle authentication and basic
 authorization/access control scenarios. We've also added some nice UX
 improvements by leveraging the FormHelper and ORM capabilities.
 
-Thanks for taking the time to explore CakePHP. Next, you can learn more about
+Thanks for taking the time to explore CakePHP. Next, you can complete the :doc:`/tutorials-and-examples/blog/blog`, learn more about
 the :doc:`/orm`, or you can peruse the :doc:`/topics`.
