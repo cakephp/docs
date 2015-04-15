@@ -478,23 +478,6 @@ array::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
-Similarly to using ``newEntity()``, you can also allow ``patchEntity()`` to write in non accessible fields
-like ``id`` which is usually not declared in ``_accessible`` property::
-
-    // In a controller.
-    $patched = $articles->patchEntities(
-        $list,
-        $this->request->data(),
-        ['associated' => [
-                'Tags',
-                'Comments.Users' => [
-                    'accessibleFields' => ['id' => true],
-                ]
-            ]
-        ]
-    );
-
-
 .. _before-marshal:
 
 Modifying Request Data Before Building Entities
