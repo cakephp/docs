@@ -218,7 +218,8 @@ While view and delete are working, edit, add and index have a few problems:
 
 Let's tackle the add form first. To begin with remove the ``input('user_id')``
 from **src/Template/Bookmarks/add.ctp**. With that removed, we'll also update
-the ``add()`` action from **src/Controller/BookmarksController.php** to look like::
+the ``add()`` action from **src/Controller/BookmarksController.php** to look
+like::
 
     public function add()
     {
@@ -238,7 +239,8 @@ the ``add()`` action from **src/Controller/BookmarksController.php** to look lik
 
 By setting the entity property with the session data, we remove any possibility
 of the user modifying which user a bookmark is for. We'll do the same for the
-edit form and action. Your ``edit()`` action from **src/Controller/BookmarksController.php** should look like::
+edit form and action. Your ``edit()`` action from
+**src/Controller/BookmarksController.php** should look like::
 
     public function edit($id = null)
     {
