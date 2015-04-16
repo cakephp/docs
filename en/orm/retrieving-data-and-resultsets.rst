@@ -254,8 +254,8 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
 You can also create list data from associations that can be reached with joins::
 
     $query = $articles->find('list', [
-        'keyField' => 'Articles.id',
-        'valueField' => 'Authors.name'
+        'keyField' => 'id',
+        'valueField' => 'author.name'
     ])->contain(['Authors']);
 
 Finding Threaded Data
