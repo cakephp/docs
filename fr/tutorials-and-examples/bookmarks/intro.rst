@@ -107,7 +107,7 @@ tables nécessaires::
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created DATETIME,
-        updated DATETIME
+        modified DATETIME
     );
 
     CREATE TABLE bookmarks (
@@ -117,7 +117,7 @@ tables nécessaires::
         description TEXT,
         url TEXT,
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         FOREIGN KEY user_key (user_id) REFERENCES users(id)
     );
 
@@ -125,7 +125,7 @@ tables nécessaires::
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         UNIQUE KEY (title)
     );
 
