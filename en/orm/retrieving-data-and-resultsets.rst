@@ -187,7 +187,7 @@ Finding Key/Value Pairs
 =======================
 
 It is often useful to generate an associative array of data from your application's
-data. For example, this is very useful when creating `<select>` elements. CakePHP
+data. For example, this is very useful when creating ``<select>`` elements. CakePHP
 provides a simple to use method for generating 'lists' of data::
 
     // In a controller or table method.
@@ -250,6 +250,13 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
             // More data.
         ]
     ];
+
+You can also create list data from associations that can be reached with joins::
+
+    $query = $articles->find('list', [
+        'keyField' => 'Articles.id',
+        'valueField' => 'Authors.name'
+    ])->contain(['Authors']);
 
 Finding Threaded Data
 =====================
