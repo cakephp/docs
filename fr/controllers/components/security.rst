@@ -56,7 +56,7 @@ Vous pouvez configurer ce comportement, en définissant l'option de configuratio
 dans le controller.
 
 En configurant la fonction de rappel, vous pouvez personnaliser le processus
- de mise en trou noir (blackhole callback)::
+de mise en trou noir (blackhole callback)::
 
     public function beforeFilter(Event $event)
     {
