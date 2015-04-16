@@ -32,9 +32,16 @@ Ou alors vous pouvez télécharger ``composer.phar`` depuis le
 
 Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
-CakePHP dans le répertoire **bookmarker**. ::
+CakePHP dans le répertoire **bookmarker**::
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
+
+Si vous avez téléchargé et exécuté l'`installeur Windows de Composer
+<https://getcomposer.org/Composer-Setup.exe>`_, tapez la ligne suivante dans
+votre terminal à partir de votre répertoire d'installation. (par exemple
+C:\\wamp\\www\\dev\\cakephp3)::
+
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 L'avantage d'utiliser Composer est qu'il va automatiquement faire des tâches
 de configuration importantes, comme de définir les bonnes permissions de
@@ -205,6 +212,11 @@ Vous devriez voir une application basique mais fonctionnelle fournissant
 des accès aux données vers les tables de la base de données de votre
 application. Une fois que vous avez la liste des bookmarks, ajoutez quelques
 users, bookmarks, et tags.
+
+.. note::
+
+    Si vous avez une page Not Found (404), vérifiez que le module mod_rewrite
+    d'Apache est chargé.
 
 Ajouter un Hashage de Mot de Passe
 ==================================

@@ -229,7 +229,8 @@ problèmes:
 
 Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')``
 de **src/Template/Bookmarks/add.ctp**. Une fois retiré, nous allons aussi
-mettre à jour la méthode add pour ressembler à ceci::
+mettre à jour l'action ``add()`` dans **src/Controller/BookmarksController.php**
+pour ressembler à ceci::
 
     public function add()
     {
@@ -249,8 +250,9 @@ mettre à jour la méthode add pour ressembler à ceci::
 
 En définissant la propriété entity avec les données de session, nous retirons
 la possibilité que l'utilisateur puisse modifier l'auteur d'un bookmark.
-Nous ferons la même chose pour le formulaire et l'action edit.
-Votre action edit devrait ressembler à ceci::
+Nous ferons la même chose pour le formulaire et l'action edit. Votre action
+``edit()`` dans **src/Controller/BookmarksController.php** devrait ressembler à
+ceci::
 
     public function edit($id = null)
     {
@@ -276,7 +278,8 @@ Vue de Liste
 
 Maintenant nous devons afficher les bookmarks pour l'utilisateur actuellement
 connecté. Nous pouvons le faire en mettant à jour l'appel à ``paginate()``.
-Faites en sorte que votre action ``index()`` ressemble à ceci::
+Faites en sorte que votre action ``index()`` dans
+**src/Controller/BookmarksController.php** ressemble à ceci::
 
     public function index()
     {
@@ -347,10 +350,10 @@ Mettre à Jour les Vues
 ----------------------
 
 Avec l'entity mise à jour, nous pouvons ajouter un nouvel input pour nos tags.
-Dans les vues add et edit, remplacez l'input ``tags._ids`` existant avec ce
-qui suit::
+Dans **src/Template/Bookmarks/add.ctp** et **src/Template/Bookmarks/edit.ctp**,
+remplacez l'input ``tags._ids`` existant avec ce qui suit::
 
-    <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
+    echo $this->Form->input('tag_string', ['type' => 'text']);
 
 Persister la Chaîne Tag
 -----------------------
@@ -409,6 +412,6 @@ de contrôle d'authentification et d'autorisation/d'accès basique. Nous avons
 aussi ajouté quelques améliorations UX en tirant parti du FormHelper et des
 capacités de l'ORM.
 
-Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez en
-apprendre plus sur l':doc:`ORM </orm>`, ou vous pouvez lire attentivement
-:doc:`/topics`.
+Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez
+finir le tutoriel du :doc:`/tutorials-and-examples/blog/blog`, en apprendre
+plus sur l':doc:`ORM </orm>` ou vous pouvez lire attentivement :doc:`/topics`.

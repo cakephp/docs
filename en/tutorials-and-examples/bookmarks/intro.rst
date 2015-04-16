@@ -31,14 +31,14 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the **bookmarker** directory. ::
+in the **bookmarker** directory::
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
 If you downloaded and ran the `Composer Windows Installer
 <https://getcomposer.org/Composer-Setup.exe>`_, then type the following line in
 your terminal from your installation directory (ie.
-C:\\wamp\\www\\dev\\cakephp3). ::
+C:\\wamp\\www\\dev\\cakephp3)::
 
     composer create-project --prefer-dist cakephp/app bookmarker
 
@@ -185,8 +185,8 @@ Generating Scaffold Code
 ========================
 
 Because our database is following the CakePHP conventions, we can use the
-:doc:`bake console </bake/usage>` application to quickly generate a basic application. In your
-command line run the following commands::
+:doc:`bake console </bake/usage>` application to quickly generate a basic
+application. In your command line run the following commands::
 
     bin/cake bake all users
     bin/cake bake all bookmarks
@@ -198,11 +198,12 @@ stopped your server, restart it and go to **http://localhost:8765/bookmarks**.
 
 You should see a basic but functional application providing data access to your
 application's database tables. Once you're at the list of bookmarks, add a few
-users, bookmarks, and tags.  
+users, bookmarks, and tags.
 
 .. note::
 
-    If you see a Not Found (404) page, confirm that the Apache mod_rewrite module is loaded.
+    If you see a Not Found (404) page, confirm that the Apache mod_rewrite
+    module is loaded.
 
 Adding Password Hashing
 =======================
