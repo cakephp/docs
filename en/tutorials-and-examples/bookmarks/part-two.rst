@@ -334,10 +334,10 @@ this way::
 Updating the Views
 ------------------
 
-With the entity updated we can add a new input for our tags. In the add and
-edit view, replace the existing ``tags._ids`` input with the following::
+With the entity updated we can add a new input for our tags. In **src/Template/Bookmarks/add.ctp** and
+**src/Template/Bookmarks/edit.ctp**, replace the existing ``tags._ids`` input with the following::
 
-    <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
+    echo $this->Form->input('tag_string', ['type' => 'text']);
 
 Persisting the Tag String
 -------------------------
