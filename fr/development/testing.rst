@@ -388,7 +388,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
               'body' => 'text',
               'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
               'created' => 'datetime',
-              'updated' => 'datetime',
+              'modified' => 'datetime',
               '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']]
               ]
@@ -400,7 +400,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'body' => 'First Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:39:23',
-                  'updated' => '2007-03-18 10:41:31'
+                  'modified' => '2007-03-18 10:41:31'
               ],
               [
                   'id' => 2,
@@ -408,7 +408,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'body' => 'Second Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:41:23',
-                  'updated' => '2007-03-18 10:43:31'
+                  'modified' => '2007-03-18 10:43:31'
               ],
               [
                   'id' => 3,
@@ -416,7 +416,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'body' => 'Third Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:43:23',
-                  'updated' => '2007-03-18 10:45:31'
+                  'modified' => '2007-03-18 10:45:31'
               ]
           ];
      }
@@ -498,7 +498,7 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
             'body' => 'text',
             'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
             'created' => 'datetime',
-            'updated' => 'datetime',
+            'modified' => 'datetime',
             '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']],
             ]
@@ -513,7 +513,7 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ],
             ];
             parent::init();
@@ -566,7 +566,7 @@ Par exemple::
               'body' => 'First Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:39:23',
-              'updated' => '2007-03-18 10:41:31'
+              'modified' => '2007-03-18 10:41:31'
             ],
             [
               'id' => 2,
@@ -574,7 +574,7 @@ Par exemple::
               'body' => 'Second Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:41:23',
-              'updated' => '2007-03-18 10:43:31'
+              'modified' => '2007-03-18 10:43:31'
             ],
             [
               'id' => 3,
@@ -582,7 +582,7 @@ Par exemple::
               'body' => 'Third Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:43:23',
-              'updated' => '2007-03-18 10:45:31'
+              'modified' => '2007-03-18 10:45:31'
             ]
         ];
     }

@@ -101,7 +101,7 @@ the following SQL to create the necessary tables::
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created DATETIME,
-        updated DATETIME
+        modified DATETIME
     );
 
     CREATE TABLE bookmarks (
@@ -111,7 +111,7 @@ the following SQL to create the necessary tables::
         description TEXT,
         url TEXT,
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         FOREIGN KEY user_key (user_id) REFERENCES users(id)
     );
 
@@ -119,7 +119,7 @@ the following SQL to create the necessary tables::
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         UNIQUE KEY (title)
     );
 

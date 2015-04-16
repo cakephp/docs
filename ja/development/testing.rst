@@ -302,12 +302,12 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
               'body' => 'text',
               'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
               'created' => 'datetime',
-              'updated' => 'datetime'
+              'modified' => 'datetime'
           );
           public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31')
           );
      }
 
@@ -358,7 +358,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 レコードのフィクスチャをクラスプロパティとして定義すると、関数を使ったり、フィクスチャの定義に
 他の動的なデータを使用することは易しいものではありません。
 解決策として、 ``$records`` をフィクスチャクラスの関数 init() で定義するという方法があります。
-たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、
+たとえば、「created」と「modified」のタイムスタンプに今日の日付を反映させたいのであれば、
 以下のようにするとよいでしょう。::
 
     class ArticlesFixture extends CakeTestFixture
@@ -370,7 +370,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
             'body' => 'text',
             'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
             'created' => 'datetime',
-            'updated' => 'datetime'
+            'modified' => 'datetime'
         );
 
         public function init()
@@ -382,7 +382,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ),
             );
             parent::init();
@@ -454,9 +454,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     {
         public $import = 'Article';
         public $records = array(
-            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31'),
+            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31'),
+            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31')
         );
     }
 
