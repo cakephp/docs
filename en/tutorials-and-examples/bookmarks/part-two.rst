@@ -264,8 +264,8 @@ List View
 ---------
 
 Now, we only need to show bookmarks for the currently logged in user. We can do
-that by updating the call to ``paginate()``. Make your ``index()`` action from **src/Controller/BookmarksController.php** look
-like::
+that by updating the call to ``paginate()``. Make your ``index()`` action from
+**src/Controller/BookmarksController.php** look like::
 
     public function index()
     {
@@ -334,8 +334,9 @@ this way::
 Updating the Views
 ------------------
 
-With the entity updated we can add a new input for our tags. In **src/Template/Bookmarks/add.ctp** and
-**src/Template/Bookmarks/edit.ctp**, replace the existing ``tags._ids`` input with the following::
+With the entity updated we can add a new input for our tags. In
+**src/Template/Bookmarks/add.ctp** and **src/Template/Bookmarks/edit.ctp**,
+replace the existing ``tags._ids`` input with the following::
 
     echo $this->Form->input('tag_string', ['type' => 'text']);
 
