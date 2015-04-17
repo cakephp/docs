@@ -456,7 +456,7 @@ abstract type names when creating a query::
 
 This allows you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
-to use the :doc:`/orm/query-builder`. This apporach allows you to build complex and
+to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
     $query = $conn->newQuery();

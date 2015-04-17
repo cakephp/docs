@@ -231,7 +231,7 @@ require a login action in your controller. Also you can set
 ``$this->Auth->sessionKey`` to ``false`` to ensure AuthComponent doesn't try to
 read user info from session. You may also want to set config
 ``unauthorizedRedirect`` to ``false`` which will cause AuthComponent to throw
-a ``ForbiddenException`` instead of default behavior of redirecting to referer.
+a ``ForbiddenException`` instead of default behavior of redirecting to referrer.
 Stateless authentication will re-verify the user's credentials on each request,
 this creates a small amount of additional overhead, but allows clients to
 login in without using cookies and makes is suitable for APIs.
@@ -795,7 +795,7 @@ Using ControllerAuthorize
 
 ControllerAuthorize allows you to handle authorization checks in a
 controller callback. This is ideal when you have very simple
-authorization, or you need to use a combination of models + components
+authorization, or you need to use a combination of models and components
 to do your authorization, and don't want to create a custom authorize
 object.
 
