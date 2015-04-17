@@ -462,5 +462,5 @@ Samples
 
 
 .. meta::
-:title lang=en: Documentation
+    :title lang=en: Documentation
     :keywords lang=en: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission

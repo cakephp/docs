@@ -116,9 +116,9 @@ View
 Notre vue, localisée dans ``app/View/Posts/rss/index.ctp``, commence par
 définir les variables ``$documentData`` et ``$channelData`` pour le layout,
 celles-ci contiennent toutes les metadonnées pour notre flux RSS. C'est fait
-en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la
-méthode Controller::set(). Ici nous passons les canaux de données en retour au
-layout::
+en utilisant la méthode :php:meth:`View::set()` qui est analogue à la
+méthode :php:meth:`View::set()`. Ici nous passons les canaux de données en
+retour au layout::
 
     $this->set('channelData', array(
         'title' => __("Most Recent Posts"),
@@ -177,7 +177,7 @@ pour chaque pair de valeur de clé.
     }
 
 Vous pouvez voir ci-dessus que nous pouvons utiliser la boucle pour préparer
-les données devant être transformées en elements XML. Il est important de
+les données devant être transformées en éléments XML. Il est important de
 filtrer tout texte de caractères non brute en-dehors de la description,
 spécialement si vous utilisez un éditeur de texte riche pour le corps de votre
 blog. Dans le code ci-dessus nous utilisons ``strip_tags()`` et
