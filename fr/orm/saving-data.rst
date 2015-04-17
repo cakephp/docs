@@ -36,7 +36,7 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
 Mettre à jour des Données
 -------------------------
 
-La ise à jour est aussi simple; et la méthode ``save()`` sert également ce
+La mise à jour est aussi simple et la méthode ``save()`` sert également ce
 but::
 
     use Cake\ORM\TableRegistry;
@@ -55,7 +55,7 @@ résultat de la méthode ``isNew()``. Les entities qui sont récupérées via
 Enregistrements avec Associations
 ---------------------------------
 
-par défaut, la méthode ``save()`` ne sauvegardera qu'un seul niveau
+Par défaut, la méthode ``save()`` ne sauvegardera qu'un seul niveau
 d'association::
 
     $articlesTable = TableRegistry::get('Articles');
@@ -69,7 +69,7 @@ d'association::
      // La valeur de la clé étrangère a été ajoutée automatiquement.
     echo $article->author_id;
 
-La méthode ``save()`` est également capacle de créer de nouveaux
+La méthode ``save()`` est également capable de créer de nouveaux
 enregistrements pour les associations::
 
     $firstComment = $articlesTable->Comments->newEntity();
@@ -88,8 +88,8 @@ enregistrements pour les associations::
 
     $articlesTable->save($article);
 
-Associer des Enregistrement Many to Many
-----------------------------------------
+Associer des Enregistrements Many to Many
+-----------------------------------------
 
 Dans le code ci-dessus il y a déjà un exemple de liaison d'un article vers
 deux tags. Il y a un autre moyen de faire la même chose en utilisant la
@@ -101,7 +101,7 @@ méthode ``link()`` dans l'association::
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);
 
-Sauvergader des Données dans la Table de Jointure
+Sauvegarder des Données dans la Table de Jointure
 -------------------------------------------------
 
 L'enregistrement de données dans la table de jointure est réalisé en utilisant
@@ -117,7 +117,7 @@ d'Entity de la table de jointure::
 Délier les Enregistrements Many To Many
 ---------------------------------------
 
-Délier des enregistrement Many to Many (plusieurs à pluiseurs) est réalisable
+Délier des enregistrements Many to Many (plusieurs à pluiseurs) est réalisable
 via la méthode ``unlink()``::
 
     $tags = $articlesTable
@@ -500,24 +500,6 @@ fusionnées dans chacune des entities du tableau::
         ['associated' => ['Tags', 'Comments.Users']]
     );
 
-De la même façon que pour l'utilisation de ``newEntity()``, vous pouvez
-permettre à ``patchEntity()`` d'écrire dans des champs non accessibles comme
-``id``, qui n'est généralement pas déclaré dans la propriété ``_accessible``::
-
-    // Dans un controller.
-    $patched = $articles->patchEntities(
-        $list,
-        $this->request->data(),
-        ['associated' => [
-                'Tags',
-                'Comments.Users' => [
-                    'accessibleFields' => ['id' => true],
-                ]
-            ]
-        ]
-    );
-
-
 .. _before-marshal:
 
 Modifier les Données Requêtées Avant de Construire les Entities
@@ -578,10 +560,13 @@ requêtées, définissez l'option ``validate`` à false::
         ['validate' => false]
     );
 
-En plus de désactiver la validation, vous pouvez choisir l'ensemble de règle de
+En plus de désactiver la validation, vous pouvez choisir l'ensemble de règles de
 validation que vous souhaitez appliquer::
 
-    $articles->save($article, ['validate' => 'update']);
+    $article = $articles->newEntity(
+        $this->request->data,
+        ['validate' => 'update']
+    );
 
 Ce qui est au-dessus va appeler la méthode ``validationUpdate()`` sur l'instance
 table pour construire les règles requises. Par défaut la méthode

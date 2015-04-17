@@ -93,6 +93,9 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
+    // Once we have a result set we can get all the rows
+    $data = $results->toArray();
+
     // Convertir la requête en tableau va l'exécuter.
     $results = $query->toArray();
 
@@ -229,7 +232,8 @@ la clé et la valeur avec respectivement les options ``keyField`` et
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'keyField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug',
+        'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -245,8 +249,9 @@ elements ``<optgroup>`` avec FormHelper::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'keyField' => 'slug', 'valueField' => 'title',
-        'groupField' => ['author_id']
+        'keyField' => 'slug',
+        'valueField' => 'title',
+        'groupField' => 'author_id'
     ]);
     $data = $query->toArray();
 
@@ -260,6 +265,14 @@ elements ``<optgroup>`` avec FormHelper::
             // Plus de données.
         ]
     ];
+
+Vous pouvez aussi créer une liste de données à partir des associations qui
+peuvent être atteintes avec les jointures::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'author.name'
+    ])->contain(['Authors']);
 
 Trouver des Données Threaded
 ============================

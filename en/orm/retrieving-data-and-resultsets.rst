@@ -219,7 +219,8 @@ the ``keyField`` and ``valueField`` options respectively::
 
     // In a controller or table method.
     $query = $articles->find('list', [
-        'keyField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug',
+        'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
