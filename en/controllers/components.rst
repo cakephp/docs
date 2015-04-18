@@ -318,7 +318,7 @@ augment the request cycle.
     Is invoked when the controller's redirect
     method is called but before any further action. If this method
     returns ``false`` the controller will not continue on to redirect the
-    request. The $url, and $response paramaters allow you to inspect and modify
+    request. The $url, and $response parameters allow you to inspect and modify
     the location or any other headers in the response.
 
 .. meta::

@@ -333,7 +333,7 @@ Checking if an Entity was Persisted
 It is often necessary to know if an entity represents a row that is already
 in the database. In those situations use the ``isNew()`` method::
 
-    if (!$aricle->isNew()) {
+    if (!$article->isNew()) {
         echo 'This article was saved already!';
     }
 
