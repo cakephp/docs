@@ -283,6 +283,20 @@ migrations qui ont été exécutées::
 
         bin/cake migrations status
 
+Marqué une migration comme "migrée"
+=====================
+
+.. versionadded:: cakephp/migrations 1.1.0
+
+Il peut parfois être utile de marquer une migration comme "migrée" sans avoir à exécuter la migration.
+Pour ce faire, vous pouvez utiliser la commande ``mark_migrated``. Cette commande attend le numéro de
+version de la migration comme argument::
+
+    bin/cake migrations mark_migrated 20150420082532
+
+Notez que lorsque vous faites un snapshot avec la commande ``cake bake migration_snapshot``, la migration créée sera
+automatiquement marquée comme "migrée".
+
 Utiliser Migrations dans les Plugins
 ====================================
 
