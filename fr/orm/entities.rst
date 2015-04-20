@@ -343,6 +343,23 @@ champs protégés::
 En définissant l'option ``guard`` à ``false``. vous pouvez ignorer la liste des
 champs accessibles pour un appel unique de ``set()``.
 
+Vérifier si une Entity a été Sauvegardée
+----------------------------------------
+
+Il est souvent nécessaire de savoir si une entity représente une ligne qui
+est déjà présente en base de données. Pour cela, utilisez la méthode
+``isNew()``:
+
+    if (!$article->isNew()) {
+        echo 'Cette article a déjà été sauvegardé!';
+    }
+
+Si vous êtes certains qu'une entity a déjà été sauvegardée, vous pouvez
+utiliser ``isNew()`` en tant que setter::
+
+    $article->isNew(false);
+
+    $article->isNew(true);
 
 .. _lazy-load-associations:
 

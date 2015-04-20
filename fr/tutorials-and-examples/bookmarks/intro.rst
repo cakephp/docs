@@ -86,6 +86,10 @@ démarrer le serveur de développement::
 
     bin/cake server
 
+.. note::
+
+    Sur Windows, cette commande doit être ``bin\cake`` (notez l'antislash).
+
 Ceci va lancer le serveur web intégré de PHP sur le port 8765. Ouvrez
 **http://localhost:8765** dans votre navigateur web pour voir la page d'accueil.
 Tous les points devront être cochés sauf pour CakePHP qui n'est pas encore

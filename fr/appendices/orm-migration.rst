@@ -212,7 +212,7 @@ données qui n'est en fait pas nécessaire::
         });
 
 Les requêtes peuvent être vues comme un objet de résultat, essayant d'itérer la
-requête, appelant ``toArray`` ou toute méthode héritée de
+requête, appelant ``toArray()`` ou toute méthode héritée de
 :ref:`collection <collection-objects>`, va faire que la requête sera exécutée
 et les résultats vous seront retournés.
 
