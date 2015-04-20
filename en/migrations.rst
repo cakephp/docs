@@ -274,7 +274,7 @@ version number as argument::
     bin/cake migrations mark_migrated 20150420082532
 
 Note that when you bake a snapshot with the ``cake bake migration_snapshot`` command, the created migration
-will automatically be mark as migrated.
+will automatically be marked as migrated.
 
 Using Migrations In Plugins
 ===========================
