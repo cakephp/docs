@@ -641,7 +641,7 @@ can access and you want to let your users edit different data based on their
 privileges.
 
 The ``fieldList`` options is also accepted by the ``newEntity()``,
-``newEntities()`` and ``patchEntitites()`` methods.
+``newEntities()`` and ``patchEntities()`` methods.
 
 .. _saving-entities:
 
