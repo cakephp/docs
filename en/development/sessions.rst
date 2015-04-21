@@ -149,40 +149,38 @@ from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 Database Sessions
 -----------------
 
-The changes in session configuration change how you define database sessions.
-Most of the time you will only need to set ``Session.handler.model`` in your
-configuration as well as choose the database defaults::
+If you you need to use a database to store your session data, configure as follows::
 
-    Configure::write('Session', [
-        'defaults' => 'database',
-        'handler' => [
-            'model' => 'CustomSessions'
-        ]
-    ]);
-
-The above will tell Session to use the built-in 'database' defaults, and
-specify that a model called ``CustomSessions`` will be the delegate for saving
-session information to the database.
-
-If you do not need a fully custom session handler, but still require
-database-backed session storage, you can simplify the above code to::
-
-    Configure::write('Session', [
+    'Session' => [
         'defaults' => 'database'
-    ]);
+    ]
 
 This configuration will require a database table to be added with
 at least these fields::
 
     CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
-      `data` text,
+      `data` VARBINARY, -- or BYTEA for postgres
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
 
 You can find a copy of the schema for the sessions table in the application
 skeleton.
+
+You can also use your own ``Table`` class to handle the saving of the sessions::
+
+    'Session' => [
+        'defaults' => 'database',
+        'handler' => [
+            'engine' => 'Database',
+            'model' => 'CustomSessions'
+        ]
+    ]
+
+The above will tell Session to use the built-in 'database' defaults, and
+specify that a Table called ``CustomSessions`` will be the delegate for saving
+session information to the database.
 
 Cache Sessions
 --------------
