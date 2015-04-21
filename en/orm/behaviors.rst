@@ -119,7 +119,7 @@ example if we wanted to prefix our slug() method we could do the following::
 
     public $_defaultConfig = [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ];
 
@@ -134,7 +134,7 @@ rename/remove mixin methods when adding a behavior to a table. For example::
     // In a table's initialize() method.
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ]);
 
