@@ -287,6 +287,143 @@ a un bloque con el mismo nombre si se usan con la opción ``inline = false``:
 
 .. _view-layouts:
 
+Layouts
+=======
+
+Un layout contiene el código de presentación que envuelve a la vista.
+Todo lo que quieras ver en una vista debe ser puesto en un layout.
+
+El layout predeterminado de CakePHP está localizado en ``/app/View/Layouts/default.ctp``.
+Si quieres cambiar el aspecto general de la aplicación, este es el lugar
+indicado para comenzar, ya que el código de la vista renderizada por el
+controlador está colocado dentro del layout predeterminado cuando la página
+es renderizada.
+
+Otros archivos de layout deberán ser puestos en ``app/View/Layouts``.
+Cuando creas un layout, necesitas decirle a CakePHP en dónde se deben
+desplegar tus vistas. Para hacer esto, asegurate que tu layout incluya
+en algún lugar ``$this->fetch('content')``. Un ejemplo de cómo se podría ver
+un layout predeterminado:
+
+.. code-block:: php
+
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+   <title><?php echo $this->fetch('title'); ?></title>
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <!-- Include external files and scripts here (See HTML helper for more info.) -->
+   <?php
+   echo $this->fetch('meta');
+   echo $this->fetch('css');
+   echo $this->fetch('script');
+   ?>
+   </head>
+   <body>
+
+   <!-- Si deseas que menús aparezcan
+   en todas las vistas, incluyelos aquí -->
+   <div id="header">
+       <div id="menu">...</div>
+   </div>
+
+   <!-- Aquí es donde quieres tus vistas desplegadas -->
+   <?php echo $this->fetch('content'); ?>
+
+   <!-- Añade un pie de página a todas las páginas -->
+   <div id="footer">...</div>
+
+   </body>
+   </html>
+
+.. note::
+
+    Antes de la versión 2.1, el método fetch() no estaba disponible, ``fetch('content')``
+    es un reemplazo de ``$content_for_layout`` y las líneas ``fetch('meta')``,
+    ``fetch('css')`` y ``fetch('script')`` están contenidas en la
+    variable ``$scripts_for_layout`` en la versión 2.0
+
+Los bloques ``script``, ``css`` y ``meta`` contienen todo el contenido definido
+en las vistas usando un helper de HTML incluido. Útil para incluir
+archivos de JavaScript y CSS de las vistas.
+
+.. note::
+
+    Cuando se usen :php:meth:`HtmlHelper::css()` o :php:meth:`HtmlHelper::script()`
+    in archivos de vistas, especifica 'false' en la opción 'inline' para
+    colocar la fuente de HTML en un bloque con el mismo nombre. (Ve el API
+    para más detalles de uso).
+
+El bloque ``content`` contiene los contenidos de la vista renderizada.
+
+``$title_for_layout`` contiene el título de la página. Esta variable es
+generada automaticamente, pero puede ser reasignar como cualquier otra
+variable en tu controlador o vista.
+
+.. note::
+
+    La variable ``$title_for_layout`` estará deperciada a partir de
+    la versión 2.5, usa ``$this->fetch('title')`` en tu layout y
+    ``$this->assign('title', 'page title')`` en su lugar.
+
+Puedes crear cuantos layouts quieras: sólo colócalas en el directorio
+``app/View/Layouts`` y alterna entre ellas dentro de tus acciones de
+controlador usando :php:attr:`~View::$layout` property::
+
+    // desde un controlador
+    public function admin_view() {
+        // stuff
+        $this->layout = 'admin';
+    }
+
+    // desde un archivo de vista
+    $this->layout = 'loggedin';
+
+Por ejemplo, si una sección de un sitio incluye un espacio pequeño
+para publicidad, se podría un nuevo layout con el pequeño espacio
+publicitario y aplicarlo para todas las acciones del controlador
+usando algo como esto::
+
+   class UsersController extends AppController {
+       public function view_active() {
+           $this->set('title_for_layout', 'View Active Users');
+           $this->layout = 'default_small_ad';
+       }
+
+       public function view_image() {
+           $this->layout = 'image';
+           //despliegue de imagen de usuario
+       }
+   }
+
+CakePHP tiene dos layouts base (sin contar el layout predeterminado
+de CakePHP) que puedes usar en tu propia aplicación: 'ajax' y 'flash'.
+El layout Ajax es útil para generar respuestas AJAX, es un layout
+vacío. (La mayoría de llamadas AJAX sólo requieren un poco de
+markup en su retorno, en lugar de una interfaz completa.) El layout
+de flash es usado por mensajes mostrados por el método :php:meth:`Controller::flash()`.
+
+Otros tres layouts existen (xml, js y rss) existen en la base para
+una forma rápida y fácil de generar contenido que no es texto o html.
+
+
+Usar layouts desde los plugins
+------------------------------
+
+.. versionadded:: 2.1
+
+Si quieres usar un layout que existe en un plugin, puedes usar
+:term:`plugin syntax`. Por ejemplo, para usar el layout de contacto
+desde el plugin Contacts::
+
+    class UsersController extends AppController {
+        public function view_active() {
+            $this->layout = 'Contacts.contact';
+        }
+    }
+
+.. _view-elements:
+
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
 
