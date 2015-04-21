@@ -5,6 +5,12 @@ CakePHP 3.1 est une mise à jour de CakePHP 3.0 dont la compatibilité
 API est complète. Cette page souligne les changements et améliorations
 faits dans 3.1.
 
+Console
+=======
+
+- ``Shell::dispatchShell()`` n'affiche plus le message d'accueil à partir du
+  shell dispatché.
+
 Controller
 ==========
 
