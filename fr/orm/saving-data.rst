@@ -673,7 +673,7 @@ auxquelles vos utilisateurs peuvent accéder et que vous voulez laisser vos
 utilisateurs modifier différentes données basées sur leurs privilèges.
 
 L'option ``fieldList`` est aussi acceptée par les méthodes ``newEntity()``,
-``newEntities()`` et ``patchEntitites()``.
+``newEntities()`` et ``patchEntities()``.
 
 .. _saving-entities:
 
