@@ -120,7 +120,9 @@ Our helper looks like::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper
+    use Cake\View\Helper;
+
+    class ProgressHelper extends Helper
     {
         public function bar($value)
         {
@@ -361,7 +363,7 @@ in your **tests/Fixture** directory, with the following content::
               'body' => 'text',
               'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
               'created' => 'datetime',
-              'updated' => 'datetime',
+              'modified' => 'datetime',
               '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']]
               ]
@@ -373,7 +375,7 @@ in your **tests/Fixture** directory, with the following content::
                   'body' => 'First Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:39:23',
-                  'updated' => '2007-03-18 10:41:31'
+                  'modified' => '2007-03-18 10:41:31'
               ],
               [
                   'id' => 2,
@@ -381,7 +383,7 @@ in your **tests/Fixture** directory, with the following content::
                   'body' => 'Second Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:41:23',
-                  'updated' => '2007-03-18 10:43:31'
+                  'modified' => '2007-03-18 10:43:31'
               ],
               [
                   'id' => 3,
@@ -389,7 +391,7 @@ in your **tests/Fixture** directory, with the following content::
                   'body' => 'Third Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:43:23',
-                  'updated' => '2007-03-18 10:45:31'
+                  'modified' => '2007-03-18 10:45:31'
               ]
           ];
      }
@@ -449,7 +451,7 @@ Dynamic Data and Fixtures
 Since records for a fixture are declared as a class property, you cannot easily
 use functions or other dynamic data to define fixtures. To solve this problem,
 you can define ``$records`` in the init() function of your fixture. For example
-if you wanted all the created and updated timestamps to reflect today's date you
+if you wanted all the created and modified timestamps to reflect today's date you
 could do the following::
 
     namespace App\Test\Fixture;
@@ -465,7 +467,7 @@ could do the following::
             'body' => 'text',
             'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
             'created' => 'datetime',
-            'updated' => 'datetime',
+            'modified' => 'datetime',
             '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']],
             ]
@@ -480,7 +482,7 @@ could do the following::
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ],
             ];
             parent::init();
@@ -531,7 +533,7 @@ as it was shown on previous section. For example::
               'body' => 'First Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:39:23',
-              'updated' => '2007-03-18 10:41:31'
+              'modified' => '2007-03-18 10:41:31'
             ],
             [
               'id' => 2,
@@ -539,7 +541,7 @@ as it was shown on previous section. For example::
               'body' => 'Second Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:41:23',
-              'updated' => '2007-03-18 10:43:31'
+              'modified' => '2007-03-18 10:43:31'
             ],
             [
               'id' => 3,
@@ -547,7 +549,7 @@ as it was shown on previous section. For example::
               'body' => 'Third Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:43:23',
-              'updated' => '2007-03-18 10:45:31'
+              'modified' => '2007-03-18 10:45:31'
             ]
         ];
     }
@@ -939,6 +941,7 @@ make testing responses much simpler. Some examples are::
 
     // Assert partial response content
     $this->assertResponseContains('You won!');
+    $this->assertResponseNotContains('You lost!');
 
     // Assert layout
     $this->assertLayout('default');
@@ -956,7 +959,16 @@ make testing responses much simpler. Some examples are::
     $this->assertEquals('jose', $this->viewVariable('user.username'));
 
     // Assert cookies in the response
-    $this->assertEquals('1', $this->cookies());
+    $this->assertCookie('1', 'thingid');
+
+    // Check the content type
+    $this->assertContentType('application/json');
+
+In addition to the above assertion methods, you can also use all of the
+assertions in `TestSuite
+<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
+found in `PHPUnit
+<https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
 
 
 Testing a JSON Responding Controller

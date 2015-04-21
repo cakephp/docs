@@ -8,6 +8,125 @@ Saving Data
 After you have :doc:`loaded your data</orm/retrieving-data-and-resultsets>` you
 will probably want to update & save the changes.
 
+
+A Glance Over Saving Data
+=========================
+
+Applications will usually have a couple ways in which data is saved. The first
+one is obviously though web forms and the other is by directly generating or
+changing data in the code to be sent to the database.
+
+Inserting Data
+--------------
+
+The easiest way to insert data in the database is creating a new entity and
+passing it to the ``save()`` method in the ``Table`` class::
+
+    use Cake\ORM\TableRegistry;
+
+    $articlesTable = TableRegistry::get('Articles');
+    $article = $articlesTable->newEntity();
+
+    $article->title = 'A New Article';
+    $article->body = 'This is the body of the article';
+
+    $articlesTable->save($article);
+
+Updating Data
+-------------
+
+Updating is equally easy, and the ``save()`` method is also used for that
+purpose::
+
+    use Cake\ORM\TableRegistry;
+
+    $articlesTable = TableRegistry::get('Articles');
+    $article = $articlesTable->get(12); // article with id 12
+
+    $article->title = 'A new title for the article';
+    $articlesTable->save($article);
+
+CakePHP will know whether to do an insert or an update based on the return value
+of the ``isNew()`` method. Entities that were retrieved with ``get()`` or
+``find()`` will always return ``false`` when ``isNew()`` is called on them.
+
+Saving With Associations
+------------------------
+
+By default the ``save()`` method will also save one level of associations::
+
+    $articlesTable = TableRegistry::get('Articles');
+    $author = $articlesTable->Authors->findByUserName('mark')->first();
+
+    $article = $articlesTable->newEntity();
+    $article->title = 'An article by mark';
+    $article->author = $author;
+
+    $articlesTable->save($article);
+     // The foreign key value was set automatically.
+    echo $article->author_id;
+
+The ``save()`` method is also able to create new records for associations::
+
+    $firstComment = $articlesTable->Comments->newEntity();
+    $firstComment->body = 'This is a great article';
+
+    $secondComment = $articlesTable->Comments->newEntity();
+    $secondComment = 'I like reading this!';
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2->name = 'awesome';
+
+    $article = $articlesTable->get(12);
+    $article->comments = [$firstComment, $secondComment];
+    $article->tags = [$tag1, $tag2];
+
+    $articlesTable->save($article);
+
+Associate Many To Many Records
+------------------------------
+
+In the code above there was already an example of linking an article to
+a couple tags. There is another way of doing the same by using the ``link()``
+method in the association::
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2->name = 'awesome';
+
+    $articlesTable->Tags->link($article, [$tag1, $tag2]);
+
+Saving Data To The Join Table
+-----------------------------
+
+Saving data to the join table is done by using the special ``_joinData``
+property. This property should be an Entity instance from the join Table class::
+
+    $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
+    $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
+    $tag1->_joinData->tagComment = 'I think this is related to cake';
+
+    $ArticlesTags->link($article, [$tag1]);
+
+Unlink Many To Many Records
+---------------------------
+
+Unlinking many to many records is done via the ``unlink()`` method::
+
+    $tags = $articlesTable
+        ->Tags
+        ->find()
+        ->where(['name IN' => ['cakephp', 'awesome']])
+        ->toArray();
+
+    $articlesTable->Tags->unlink($article, $tags);
+
+When modifying records by directly setting or changing the properties no
+validation happens, which is a problem when accepting form data. The following
+sections will show you how to efficiently convert form data into entities so
+that they can be validated and saved.
+
 .. _converting-request-data:
 
 Converting Request Data into Entities
@@ -39,34 +158,6 @@ request data should look like::
         ]
     ];
 
-If you are saving belongsToMany associations you can either use a list of
-entity data or a list of ids. When using a list of entity data your request data
-should look like::
-
-    $data = [
-        'title' => 'My title',
-        'body' => 'The text',
-        'user_id' => 1,
-        'tags' => [
-            ['tag' => 'CakePHP'],
-            ['tag' => 'Internet'],
-        ]
-    ];
-
-When using a list of ids, your request data should look like::
-
-    $data = [
-        'title' => 'My title',
-        'body' => 'The text',
-        'user_id' => 1,
-        'tags' => [
-            '_ids' => [1, 2, 3, 4]
-        ]
-    ];
-
-The marshaller will handle both of these forms correctly, but only for
-belongsToMany associations.
-
 When building forms that save nested associations, you need to define which
 associations should be marshalled::
 
@@ -87,14 +178,80 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-You can convert multiple entities using::
+Converting BelongsToMany Data
+-----------------------------
+
+If you are saving belongsToMany associations you can either use a list of
+entity data or a list of ids. When using a list of entity data your request data
+should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['tag' => 'CakePHP'],
+            ['tag' => 'Internet'],
+        ]
+    ];
+
+The above will create 2 new tags. If you want to link an article with existing
+tags you can use a list of ids. Your request data should look like::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
+
+If you need to link against some existing belongsToMany records, and create new
+ones at the same time you can use an expanded format::
+
+    $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'tags' => [
+            ['name' => 'A new tag'],
+            ['name' => 'Another new tag'],
+            ['id' => 5],
+            ['id' => 21]
+        ]
+    ];
+
+When the above data is converted into entities, you will have 4 tags. The first
+two will be new objects, and the second two will be references to existing
+records.
+
+Converting HasMany Data
+-----------------------
+
+If you are saving hasMany associations and want to link existing records to
+a new parent record you can use the ``_ids`` format::
+
+    $data = [
+        'title' => 'My new article',
+        'body' => 'The text',
+        'user_id' => 1,
+        'comments' => [
+            '_ids' => [1, 2, 3, 4]
+        ]
+    ];
+
+Converting Multiple Records
+---------------------------
+
+When creating forms that create/update multiple records at once you can use
+``newEntities()``::
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
-When converting multiple entities, the request data for multiple articles should
-look like::
+In this situation, the request data for multiple articles should look like::
 
     $data = [
         [
@@ -106,6 +263,11 @@ look like::
             'published' => 1
         ],
     ];
+
+.. _changing-accessible-fields:
+
+Changing Accessible Fields
+--------------------------
 
 It's also possible to allow ``newEntity()`` to write into non accessible fields.
 For example, ``id`` is usually absent from the ``_accessible`` property.
@@ -126,7 +288,8 @@ ids of associated entities::
         ]
     ]);
 
-The above will keep the association unchanged between Comments and Users for the concerned entity.
+The above will keep the association unchanged between Comments and Users for the
+concerned entity.
 
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
@@ -209,6 +372,21 @@ a new user entity::
 The same can be said about hasMany and belongsToMany associations, but an
 important note should be made.
 
+.. note::
+
+    For belongsToMany associations, ensure the relevant entity has 
+    a property accessible for the associated entity.
+    
+    
+If a Product belongsToMany Tag::
+    
+    // in the Product Entity
+    protected $_accessible = [
+        // .. other properties
+       'tags' => true,
+    ];
+    
+    
 .. note::
 
     For hasMany and belongsToMany associations, if there were any entities that
@@ -299,23 +477,6 @@ array::
         $this->request->data(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
-
-Similarly to using ``newEntity()``, you can also allow ``patchEntity()`` to write in non accessible fields
-like ``id`` which is usually not declared in ``_accessible`` property::
-
-    // In a controller.
-    $patched = $articles->patchEntities(
-        $list,
-        $this->request->data(),
-        ['associated' => [
-                'Tags',
-                'Comments.Users' => [
-                    'accessibleFields' => ['id' => true],
-                ]
-            ]
-        ]
-    );
-
 
 .. _before-marshal:
 

@@ -204,9 +204,9 @@ Les clés possibles pour une association hasOne sont:
   suppression d'un User supprime aussi son Address associée.
 - **cascadeCallbacks**: Quand ceci et **dependent** sont à ``true``, les
   suppressions en cascade vont charger et supprimer les entities pour que les
-  callbacks soient lancés correctement. Quand il est à ``false``. ``deleteAll()``
-  est utilisée pour retirer les données associées et que aucun callback ne soit
-  lancé.
+  callbacks soient lancés correctement. Quand il est à ``false``.
+  ``deleteAll()`` est utilisée pour retirer les données associées et que aucun
+  callback ne soit lancé.
 - **propertyName**: Le nom de la propriété qui doit être rempli avec les données
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans

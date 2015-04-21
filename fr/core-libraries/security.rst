@@ -33,8 +33,8 @@ Un exemple d'utilisation serait::
     $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
     $result = Security::encrypt($value, $key);
 
-Si vous ne fournissez pas de sel HMAC, la valeur ``Security.salt`` sera utilisée.
-Les valeurs chiffrées peuvent être déchiffrées avec
+Si vous ne fournissez pas de sel HMAC, la valeur ``Security.salt`` sera
+utilisée. Les valeurs chiffrées peuvent être déchiffrées avec
 :php:meth:`Cake\\Utility\\Security::decrypt()`.
 
 Déchiffre une valeur chiffrée au préalable. Les paramètres ``$key`` et
@@ -100,7 +100,7 @@ Et tout autre algorithme de hashage que la fonction
 
     Vous ne devriez pas utiliser ``hash()`` pour les mots de passe dans les nouvelles applications.
     A la place, vous devez utiliser la classe ``DefaultPasswordHasher`` qui
-    utilise bcrpyt par défaut.
+    utilise bcrypt par défaut.
 
 .. meta::
     :title lang=fr: Security

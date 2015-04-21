@@ -212,7 +212,7 @@ données qui n'est en fait pas nécessaire::
         });
 
 Les requêtes peuvent être vues comme un objet de résultat, essayant d'itérer la
-requête, appelant ``toArray`` ou toute méthode héritée de
+requête, appelant ``toArray()`` ou toute méthode héritée de
 :ref:`collection <collection-objects>`, va faire que la requête sera exécutée
 et les résultats vous seront retournés.
 
@@ -611,8 +611,8 @@ Changements de Signature des Méthodes Mixin
 -------------------------------------------
 
 Les Behaviors continuent d'offir la possibilité d'ajouter les méthodes
-'mixin' à des objets Table, cependant la signature de méthode pour ces méthodes a
-changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
+'mixin' à des objets Table, cependant la signature de méthode pour ces méthodes
+a changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
 **mêmes** arguments fournis à la table 'method'. Par exemple::
 
     // Supposons que la table a une méthode slug() fournie par un behavior.

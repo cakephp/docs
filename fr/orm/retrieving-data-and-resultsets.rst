@@ -93,6 +93,9 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
+    // Once we have a result set we can get all the rows
+    $data = $results->toArray();
+
     // Convertir la requête en tableau va l'exécuter.
     $results = $query->toArray();
 
@@ -103,7 +106,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     plus complexes, d'ajouter des conditions supplémentaires, des limites,
     ou d'inclure des associations en utilisant l'interface courante.
 
-.. code-block:: php
+::
 
     // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')
@@ -229,7 +232,8 @@ la clé et la valeur avec respectivement les options ``keyField`` et
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'keyField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug',
+        'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -245,8 +249,9 @@ elements ``<optgroup>`` avec FormHelper::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'keyField' => 'slug', 'valueField' => 'title',
-        'groupField' => ['author_id']
+        'keyField' => 'slug',
+        'valueField' => 'title',
+        'groupField' => 'author_id'
     ]);
     $data = $query->toArray();
 
@@ -260,6 +265,14 @@ elements ``<optgroup>`` avec FormHelper::
             // Plus de données.
         ]
     ];
+
+Vous pouvez aussi créer une liste de données à partir des associations qui
+peuvent être atteintes avec les jointures::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'author.name'
+    ])->contain(['Authors']);
 
 Trouver des Données Threaded
 ============================
@@ -394,6 +407,33 @@ Ce qui est au-dessus se traduirait dans ce qui suit::
     Alors que les finders dynamiques facilitent la gestion des requêtes, ils
     entraînent des coûts de performance supplémentaires.
 
+Récupérer les Données Associées
+===============================
+
+Quand vous voulez récupérer des données associées, ou filtrer selon les données
+associées, il y a deux façons:
+
+- utiliser les fonctions query de l'ORM de CakePHP comme ``contain()`` et
+  ``matching()``
+- utiliser les fonctions de jointures comme ``innerJoin()``, ``leftJoin()``, et
+  ``rightJoin()``
+
+Vous pouvez utiliser ``contain()`` quand vous voulez charger le model primaire
+et ses données associées. Alors que ``contain()`` va vous laisser appliquer
+des conditions supplémentaires aux associations chargées, vous ne pouvez pas
+donner des contraintes au model primaire selon les associations. Pour plus de
+détails sur ``contain()``, consultez :ref:`eager-loading-associations`.
+
+Vous pouvez utiliser ``matching()`` quand vous souhaitez donner des contraintes
+au model primaire selon les associations. Par exemple, vous voulez charger tous
+les articles qui ont un tag spécifique. Pour plus de détails sur ``matching()``,
+consultez :ref:`filtering-by-associated-data`.
+
+Si vous préférez utiliser les fonctions de jointure, vous pouvez consulter
+:ref:`adding-joins` pour plus d'informations.
+
+.. _eager-loading-associations:
+
 Eager Loading des Associations
 ==============================
 
@@ -522,6 +562,8 @@ vous pouvez utiliser ``autoFields()``::
     $query->select(['id', 'title'])
         ->contain(['Users'])
         ->autoFields(true);
+
+.. _filtering-by-associated-data:
 
 Filtrer par les Données Associées
 ---------------------------------
@@ -663,3 +705,231 @@ une liste des tags uniques sur une collection d'articles assez facilement::
 Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
 ce qui peut être fait avec les ensembles de résultat en utilisant les
 fonctionnalités des collections.
+
+.. _map-reduce:
+
+Modifier les Résultats avec Map/Reduce
+======================================
+
+La plupart du temps, les opérations ``find`` nécessitent un traitement
+postérieur des données qui se trouvent dans la base de données. Alors que les
+méthodes ``getter`` des ``entities`` peuvent s'occuper de la plupart de la
+génération de propriété virtuelle ou un formatage de données spéciales, parfois
+vous devez changer la structure des données d'une façon plus fondamentale.
+
+Pour ces cas, l'objet ``Query`` offre la méthode ``mapReduce()``, qui est une
+façon de traiter les résultats une fois qu'ils ont été récupérés dans la
+base de données.
+
+Un exemple habituel de changement de structure de données est le groupement de
+résultats basé sur certaines conditions. Pour cette tâche, nous
+pouvons utiliser la fonction ``mapReduce()``. Nous avons besoin de deux
+fonctions appelables ``$mapper`` et ``$reducer``.
+La callable ``$mapper`` reçoit le résultat courant de la base de données en
+premier argument, la clé d'itération en second paramètre et finalement elle
+reçoit une instance de la routine ``MapReduce`` qu'elle lance::
+
+    $mapper = function ($article, $key, $mapReduce) {
+        $status = 'published';
+        if ($article->isDraft() || $article->isInReview()) {
+            $status = 'unpublished';
+        }
+        $mapReduce->emitIntermediate($article, $status);
+    };
+
+Dans l'exemple ci-dessus, ``$mapper`` calcule le statut d'un article, soit
+publié (published) soit non publié (unpublished), ensuite il appelle
+``emitIntermediate()`` sur l'instance ``MapReduce``. La méthode stocke
+l'article dans la liste des articles avec pour label soit publié (published)
+ou non publié (unpublished).
+
+La prochaine étape dans le processus de map-reduce  est de consolider les
+résultats finaux. Pour chaque statut créé dans le mapper, la fonction
+``$reducer`` va être appelée donc vous pouvez faire des traitements
+supplémentaires. Cette fonction va recevoir la liste des articles dans un
+``bucket`` particulier en premier paramètre, le nom du ``bucket`` dont il a
+besoin pour faire le traitement en second paramètre, et encore une fois, comme
+dans la fonction ``mapper()``, l'instance de la routine ``MapReduce`` en
+troisième paramètre. Dans notre exemple, nous n'avons pas fait de traitement
+supplémentaire, donc nous avons juste ``emit()`` les résultats finaux::
+
+    $reducer = function ($articles, $status, $mapReduce) {
+        $mapReduce->emit($articles, $status);
+    };
+
+Finalement, nous pouvons mettre ces deux fonctions ensemble pour faire le
+groupement::
+
+    $articlesByStatus = $articles->find()
+        ->where(['author_id' => 1])
+        ->mapReduce($mapper, $reducer);
+
+    foreach ($articlesByStatus as $status => $articles) {
+        echo sprintf("The are %d %s articles", count($articles), $status);
+    }
+
+Ce qui est au-dessus va afficher les lignes suivantes::
+
+    There are 4 published articles
+    There are 5 unpublished articles
+
+Bien sûr, ceci est un exemple simple qui pourrait être solutionné d'une autre
+façon sans l'aide d'un traitement map-reduce. Maintenant, regardons un autre
+exemple dans lequel la fonction reducer sera nécessaire pour faire quelque
+chose de plus que d'émettre les résultats.
+
+Calculer les mots mentionnés le plus souvent, où les articles contiennent
+l'information sur CakePHP, comme d'habitude nous avons besoin d'une fonction
+mapper::
+
+    $mapper = function ($article, $key, $mapReduce) {
+        if (stripos('cakephp', $article['body']) === false) {
+            return;
+        }
+
+        $words = array_map('strtolower', explode(' ', $article['body']));
+        foreach ($words as $word) {
+            $mapReduce->emitIntermediate($article['id'], $word);
+        }
+    };
+
+Elle vérifie d'abord si le mot "cakephp" est dans le corps de l'article, et
+ensuite coupe le corps en mots individuels. Chaque mot va créer son propre
+``bucket`` où chaque id d'article sera stocké. Maintenant réduisons nos
+résultats pour extraire seulement le compte::
+
+    $reducer = function ($occurrences, $word, $mapReduce) {
+        $mapReduce->emit(count($occurrences), $word);
+    }
+
+Finalement, nous mettons tout ensemble::
+
+    $articlesByStatus = $articles->find()
+        ->where(['published' => true])
+        ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
+        ->hydrate(false)
+        ->mapReduce($mapper, $reducer);
+
+Ceci pourrait retourner un tableau très grand si nous ne nettoyons pas les mots
+interdits, mais il pourrait ressembler à ceci::
+
+    [
+        'cakephp' => 100,
+        'awesome' => 39,
+        'impressive' => 57,
+        'outstanding' => 10,
+        'mind-blowing' => 83
+    ]
+
+Un dernier exemple et vous serez un expert de map-reduce. Imaginez que vous
+avez une table de ``friends`` et que vous souhaitiez trouver les "fake friends"
+dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
+mutuellement. Commençons avec notre fonction ``mapper()``::
+
+    $mapper = function ($rel, $key, $mr) {
+        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+    };
+
+Nous avons juste dupliqué nos données pour avoir une liste d'utilisateurs que
+chaque utilisateur suit. Maintenant, il est temps de la réduire. Pour chaque
+appel au reducer, il va recevoir une liste de followers par utilisateur::
+
+    // liste de $friends ressemblera à des nombres répétés
+    // ce qui signifie que les relations existent dans les deux directions
+    [2, 5, 100, 2, 4]
+
+    $reducer = function ($friendsList, $user, $mr) {
+        $friends = array_count_values($friendsList);
+        foreach ($friends as $friend => $count) {
+            if ($count < 2) {
+                $mr->emit($friend, $user);
+            }
+        }
+    }
+
+Et nous fournissons nos fonctions à la requête::
+
+    $fakeFriends = $friends->find()
+        ->hydrate(false)
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
+
+Ceci retournerait un tableau similaire à ceci::
+
+    [
+        1 => [2, 4],
+        3 => [6]
+        ...
+    ]
+
+Les tableaux résultants signifient, par exemple, que l'utilisateur avec l'id
+``1`` suit les utilisateurs ``2`` and ``4``, mais ceux-ci ne suivent pas
+``1`` de leur côté.
+
+
+Stacking Multiple Operations
+----------------------------
+
+L'utilisation de `mapReduce` dans une requête ne va pas l'exécuter
+immédiatemment. L'opération va être enregistrée pour être lancée dès que
+l'on tentera de réucpérer le premier résultat.
+Ceci vous permet de continuer à chainer les méthodes et les filtres
+à la requête même après avoir ajouté une routine map-reduce::
+
+   $query = $articles->find()
+        ->where(['published' => true])
+        ->mapReduce($mapper, $reducer);
+
+    // Plus loin dans votre app:
+    $query->where(['created >=' => new DateTime('1 day ago')]);
+
+C'est particulièrement utile pour construire des méthodes finder personnalisées
+ comme décrit dans la section :ref:`custom-find-methods`::
+
+    public function findPublished(Query $query, array $options)
+    {
+        return $query->where(['published' => true]);
+    }
+
+    public function findRecent(Query $query, array $options)
+    {
+        return $query->where(['created >=' => new DateTime('1 day ago')]);
+    }
+
+    public function findCommonWords(Query $query, array $options)
+    {
+        // Same as in the common words example in the previous section
+        $mapper = ...;
+        $reducer = ...;
+        return $query->mapReduce($mapper, $reducer);
+    }
+
+    $commonWords = $articles
+        ->find('commonWords')
+        ->find('published')
+        ->find('recent');
+
+En plus, il est aussi possible d'empiler plus d'une opération ``mapReduce``
+pour une requête unique. Par exemple, si nous souhaitons avoir les mots les
+plus couramment utilisés pour les articles, mais ensuite les filtrer pour
+seulement retourner les mots qui étaient mentionnés plus de 20 fois tout au long
+des articles::
+
+    $mapper = function ($count, $word, $mr) {
+        if ($count > 20) {
+            $mr->emit($count, $word);
+        }
+    };
+
+    $articles->find('commonWords')->mapReduce($mapper);
+
+Retirer Toutes les Opérations Map-reduce Empilées
+-------------------------------------------------
+
+Dans les mêmes circonstances vous voulez modifier un objer ``Query`` pour
+que les opérations ``mapReduce`` ne soient pas exécutées du tout. Ceci peut
+être facilement fait en appelant la méthode avec les deux paramètres à
+null et le troisième paramètre (overwrite) à ``true``::
+
+    $query->mapReduce(null, null, true);

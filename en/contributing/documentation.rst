@@ -20,7 +20,67 @@ Email the docs team (docs at cakephp dot org) or hop on IRC
 (#cakephp on freenode) to discuss any translation efforts you would
 like to participate in.
 
-Translator tips:
+New Translation Language
+------------------------
+
+We want to provide translations that are as complete as possible. However, there
+may be times where a translation file is not up-to-date. You should always
+consider the English version as the authoritative version.
+
+If your language is not in the current languages, please contact us through
+Github and we will consider creating a skeleton folder for it. The following
+sections are the first one you should consider translating as these
+files don't change often:
+
+- index.rst
+- intro.rst
+- quickstart.rst
+- installation.rst
+- /intro folder
+- /tutorials-and-examples folder
+
+Reminder for Docs Administrators
+--------------------------------
+
+The structure of all language folders should mirror the English folder
+structure. If the structure changes for the English version, we should apply
+those changes in the other languages.
+
+For example, if a new English file is created in **en/file.rst**, we should:
+
+- Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
+- Delete the content, but keeping the ``title``, ``meta`` information and
+  eventual ``toc-tree`` elements. The following note will be added while nobody
+  has translated the file::
+
+    File Title
+    ##########
+
+    .. note::
+        The documentation is not currently supported in XX language for this
+        page.
+
+        Please feel free to send us a pull request on
+        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+        button to directly propose your changes.
+
+        You can refer to the English version in the select top menu to have
+        information about this page's topic.
+
+    // If toc-tree elements are in the English version
+    .. toctree::
+        :maxdepth: 1
+
+        one-toc-file
+        other-toc-file
+
+    .. meta::
+        :title lang=xx: File Title
+        :keywords lang=xx: title, description,...
+
+
+Translator tips
+---------------
 
 - Browse and edit in the language you want the content to be
   translated to - otherwise you won't see what has already been
@@ -350,7 +410,7 @@ Notes and Warnings
 
 There are often times when you want to inform the reader of an important tip,
 special note or a potential hazard. Admonitions in sphinx are used for just
-that. There are three kinds of admonitions.
+that. There are fives kinds of admonitions.
 
 * ``.. tip::`` Tips are used to document or re-iterate interesting or important
   information. The content of the directive should be written in complete
@@ -361,6 +421,12 @@ that. There are three kinds of admonitions.
 * ``.. warning::`` Warnings are used to document potential stumbling blocks, or
   information pertaining to security. The content of the directive should be
   written in complete sentences and include all appropriate punctuation.
+* ``.. versionadded:: X.Y.Z`` "Version added" admonitions are used to display notes
+  specific to new features added at a specific version, ``X.Y.Z`` being the version on
+  which the said feature was added.
+* ``.. deprecated:: X.Y.Z`` As opposed to "version added" admonitions, "deprecated"
+  admonition are used to notify of a deprecated feature, ``X.Y.Z`` being the version on
+  which the said feature was deprecated.
 
 All admonitions are made the same::
 
@@ -385,6 +451,14 @@ Samples
 .. warning::
 
     It could be dangerous.
+
+.. versionadded:: 2.6.3
+
+    This awesome feature was added on version 2.6.3
+
+.. deprecated:: 2.6.3
+
+    This old feature was deprecated on version 2.6.3
 
 
 .. meta::

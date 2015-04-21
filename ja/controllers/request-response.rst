@@ -1,11 +1,9 @@
-リクエストとレスポンスオブジェクト
-##################################
+Request & Response Objects
+##########################
 
-CakePHP2.0では新しくリクエストとレスポンスオブジェクトが追加されました。以前のバージョンではこれらのオブジェクトは配列で表現されており、
-また関連するメソッドは :php:class:`RequestHandlerComponent`, :php:class:`Router`,
-:php:class:`Dispatcher`, :php:class:`Controller` に分散していました。そのため、
-リクエストにどのような情報が含まれているかを正確に表すオブジェクトは存在しませんでした。
-バージョン2.0において :php:class:`CakeRequest` と :php:class:`CakeResponse` は上記の目的で使用されます。
+.. note::
+    The documentation is not currently supported in Japanese language for this
+    page.
 
 .. index:: $this->request
 .. _cake-request:
@@ -557,7 +555,7 @@ CakeResponseとテスト
         // ...
     }
 
-さらに、CLIからヘッダ設定を試みた時に起こる'ヘッダ送信'エラーを避け���ためにモックを使うことができるので、コマンドラインからより簡単にテストを実行できます。
+さらに、CLIからヘッダ設定を試みた時に起こる'ヘッダ送信'エラーを避けるためにモックを使うことができるので、コマンドラインからより簡単にテストを実行できます。
 
 CakeResponse API
 ================
@@ -637,7 +635,12 @@ CakeResponse API
 
     レスポンスの作成が完了した後に、send()を呼び出すことでボディと同様に設定されているすべてのヘッダが送られます。
     各リクエストの最後に :php:class:`Dispatcher` によって自動的に行われます。
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
 
+    You can referer to the english version in the select top menu to have
+    information about this page's topic.
 
 .. meta::
     :title lang=ja: Request and Response objects

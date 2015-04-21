@@ -20,27 +20,28 @@ CakePHP fournit plusieurs filtres de dispatcher intégrés. Ils gèrent des
 fonctionnalités habituelles dont toutes les applications vont avoir besoin.
 Les filtres intégrés sont:
 
-* ``AssetFilter`` vérifie si la requête fait référence au fichier d'asset de plugin
-  ou du theme, comme un fichier CSS, un fichier JavaScript ou une image stockée soit
-  dans le dossier webroot d'un plugin ou celui qui correspond pour un Theme. Il va
-  servir le fichier correspondant s'il est trouvé, stoppant le reste du cycle de
-  dispatch.
-* ``RoutingFilter`` applique les règles de routing de l'application pour l'URL de
-  la requête. Remplit ``$request->params`` avec les résultats de routing.
-* ``ControllerFactory`` utilise ``$request->params`` pour localiser le controller qui
-  gère la requête courante.
-* ``LocaleSelector`` active le langage automatiquement en changeant le header ``Accept-Language``
-  envoyé par le navigateur.
+* ``AssetFilter`` vérifie si la requête fait référence au fichier d'asset de
+  plugin ou du theme, comme un fichier CSS, un fichier JavaScript ou une image
+  stockée soit dans le dossier webroot d'un plugin ou celui qui correspond pour
+  un Theme. Il va servir le fichier correspondant s'il est trouvé, stoppant le
+  reste du cycle de dispatch.
+* ``RoutingFilter`` applique les règles de routing de l'application pour l'URL
+  de la requête. Remplit ``$request->params`` avec les résultats de routing.
+* ``ControllerFactory`` utilise ``$request->params`` pour localiser le
+  controller qui gère la requête courante.
+* ``LocaleSelector`` active le langage automatiquement en changeant le header
+  ``Accept-Language`` envoyé par le navigateur.
 
 Utiliser les Filtres
 ====================
 
-Les filtres sont habituellement activés dans le fichier **bootstrap.php** de votre
-application, mais vous pouvez facilement les charger à n'importe quel moment avant que
-la requête ne soit dispatchée. Ajouter et retirer les filtres se fait avec
-:php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le template d'une application
-CakePHP est fourni avec un couple de classes filter déjà activées pour toutes les
-requêtes; Regardons la façon dont elles sont ajoutées::
+Les filtres sont habituellement activés dans le fichier **bootstrap.php** de
+votre application, mais vous pouvez facilement les charger à n'importe quel
+moment avant que la requête ne soit dispatchée. Ajouter et retirer les filtres
+se fait avec :php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le
+template d'une application CakePHP est fourni avec un couple de classes filter
+déjà activées pour toutes les requêtes; Regardons la façon dont elles sont
+ajoutées::
 
     DispatcherFactory::add('Routing');
     DispatcherFactory::add('ControllerFactory');
@@ -51,11 +52,11 @@ requêtes; Regardons la façon dont elles sont ajoutées::
     // Utilisez les options pour définir la priorité
     DispatcherFactory::add('Asset', ['priority' => 1]);
 
-Les filtres Dispatcher avec une priorité importante seront les premiers exécutés. La priorité
-est par défaut à ``10``.
+Les filtres Dispatcher avec une priorité importante seront les premiers
+exécutés. La priorité est par défaut à ``10``.
 
-Alors qu'utiliser le nom de la chaîne est pratique, vous pouvez aussi passer les instances
-dans ``add()``::
+Alors qu'utiliser le nom de la chaîne est pratique, vous pouvez aussi passer les
+instances dans ``add()``::
 
     use Cake\Routing\Filter\RoutingFilter;
 
@@ -65,9 +66,10 @@ Configurer l'Ordre de Filter
 ----------------------------
 
 Lors de l'ajout de filtres, vous pouvez contrôler l'ordre dans lequel ils sont
-appelés en utilisant les priorités du gestionnaire d'event. Alors que les filtres
-peuvent définir une priorité par défaut en utilisant la propriété ``$_priority``,
-vous pouvez définir une priorité spécifique quand vous attachez le filtre::
+appelés en utilisant les priorités du gestionnaire d'event. Alors que les
+filtres peuvent définir une priorité par défaut en utilisant la propriété
+``$_priority``, vous pouvez définir une priorité spécifique quand vous attachez
+le filtre::
 
     DispatcherFactory::add('Asset', ['priority' => 1]);
     DispatcherFactory::add(new AssetFilter(['priority' => 1]));
@@ -77,11 +79,11 @@ Plus la priorité est haute, plus le filtre sera appelé tardivement.
 Appliquer les Filtres de Façon Conditionnelle
 ---------------------------------------------
 
-Si vous ne voulez pas exécuter un filtre sur chaque requête, vous pouvez utiliser
-des conditions pour les appliquer seulement certaines fois. Vous pouvez appliquer
-les conditions en utilisant les options ``for`` et ``when``. L'option ``for`` vous
-laisse faire la correspondance sur des sous-chaines d'URL, alors que l'option
-``when`` vous permet de lancer un callable::
+Si vous ne voulez pas exécuter un filtre sur chaque requête, vous pouvez
+utiliser des conditions pour les appliquer seulement certaines fois. Vous
+pouvez appliquer les conditions en utilisant les options ``for`` et ``when``.
+L'option ``for`` vous laisse faire la correspondance sur des sous-chaines d'URL,
+alors que l'option ``when`` vous permet de lancer un callable::
 
     // Only runs on requests starting with `/blog`
     DispatcherFactory::add('BlogHeader', ['for' => '/blog']);
@@ -93,8 +95,9 @@ laisse faire la correspondance sur des sous-chaines d'URL, alors que l'option
         }
     ]);
 
-The callable provided to ``when`` should return ``true`` when the filter should run.
-The callable can expect to get the current request and response as arguments.
+The callable provided to ``when`` should return ``true`` when the filter should
+run. The callable can expect to get the current request and response as
+arguments.
 
 Construire un Filtre
 ====================
@@ -139,8 +142,9 @@ filtres de dispatcher suivent quelques conventions:
 sous-classes qui sont ``beforeDispatch()`` et ``afterDispatch()``. Ces méthodes
 sont exécutées respectivement avant et après l'exécution de tout controller.
 les deux méthodes reçoivent un objet :php:class:`Cake\\Event\\Event` contenant
-les objets ``request`` et ``response`` (instances de :php:class:`Cake\\Network\\Request`
-and :php:class:`Cake\\Network\\Response`) dans la propriété ``data``.
+les objets ``request`` et ``response``
+(instances de :php:class:`Cake\\Network\\Request` et
+:php:class:`Cake\\Network\\Response`) dans la propriété ``data``.
 
 Alors que notre filtre était relativement simple, il y a quelques autres choses
 intéressantes que nous pouvons réaliser dans les méthodes de filtre. En
@@ -192,10 +196,10 @@ servant la response depuis le callback ``beforeDispatch()``.
 Bien que très puissants, les filtres du dispatcher peuvent également compliquer
 la maintenance de votre application. Les filtres sont des outils extrêmement
 puissants lorsqu'ils sont utilisés sagement et ajouter des gestionnaires de
-responses pour chaque URL dans votre application n'est pas une bonne utilisation.
-Gardez à l'esprit que tout n'a pas besoin d'être un filtre; Les `Controllers` et
-les `Components` sont souvent un choix plus précis pour ajouter tout code de
-gestionnaire de requête à votre application.
+responses pour chaque URL dans votre application n'est pas une bonne
+utilisation. Gardez à l'esprit que tout n'a pas besoin d'être un filtre; Les
+`Controllers` et les `Components` sont souvent un choix plus précis pour ajouter
+tout code de gestionnaire de requête à votre application.
 
 .. meta::
     :title lang=fr: Filtres du Dispatcher

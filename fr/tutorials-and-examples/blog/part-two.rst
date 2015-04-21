@@ -132,8 +132,8 @@ itération ``foreach``.
 
 Les fichiers de template de CakePHP sont stockés dans **src/Template** à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
-aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
-données de ces articles dans un joli tableau, le code de notre vue devrait
+aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme
+les données de ces articles dans un joli tableau, le code de notre vue devrait
 ressembler à quelque chose comme cela:
 
 .. code-block:: php
@@ -199,7 +199,7 @@ tarder dans le Controller Articles::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -211,9 +211,6 @@ tarder dans le Controller Articles::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Article invalide'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -232,10 +229,11 @@ Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
 utilisateur accède bien à l'enregsitrement. Si un utilisateur requête
 ``/articles/view``, nous lancerons un ``NotFoundException`` et laisserons
 le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. En utilisant
-la fonction ``get()`` dans la table Articles, nous faisons aussi une vérification
-similaire pour nous assurer que l'utilisateur a accès à l'enregistrement qui
-existe. Dans le cas où l'article requêté n'est pas présent dans la base de
-données, la fonction ``get()`` va lancer une ``NotFoundException``.
+la fonction ``get()`` dans la table Articles, nous faisons aussi une
+vérification similaire pour nous assurer que l'utilisateur a accès à
+l'enregistrement qui existe. Dans le cas où l'article requêté n'est pas présent
+dans la base de données, la fonction ``get()`` va lancer une
+``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
 dans **src/Template/Articles/view.ctp**.
@@ -264,7 +262,7 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -281,12 +279,7 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Article invalide'));
-            }
-
             $article = $this->Articles->get($id);
-
             $this->set(compact('article'));
         }
 
@@ -457,10 +450,6 @@ devrait ressembler::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Article invalide'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
@@ -569,8 +558,8 @@ confirmation après l'avoir redirigé sur ``/articles``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de
 CakePHP et un joli message d'erreur est affiché. Il y a plusieurs
-:doc:`Exceptions </development/errors>` intégrées qui peuvent être utilisées pour
-indiquer les différentes erreurs HTTP que votre application pourrait
+:doc:`Exceptions </development/errors>` intégrées qui peuvent être utilisées
+pour indiquer les différentes erreurs HTTP que votre application pourrait
 rencontrer.
 
 Etant donné que nous exécutons juste un peu de logique et de redirection,

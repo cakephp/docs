@@ -8,7 +8,6 @@ If you need help, run::
 
     bin/cake plugin --help
 
-
 Loading Plugins
 ---------------
 
@@ -44,6 +43,24 @@ You can unload a plugin by specifying its name::
 This will remove the line ``Plugin::load('MyPlugin',...`` from your
 ``config/bootstrap.php``.
 
+Plugin Assets
+-------------
+
+CakePHP by default serves plugins assets using the ``AssetFilter`` dispatcher
+filter. While this is a good convenience, it is recommended to symlink / copy
+the plugin assets under app's webroot so that they can be directly served by the
+web server without invoking PHP. You can do this by running::
+
+    bin/cake plugin assets symlink
+
+Running the above command will symlink all plugins assets under app's webroot.
+On Windows, which doesn't support symlinks, the assets will be copied in
+respective folders instead of being symlinked.
+
+You can symlink assets of one particular plugin by specifying it's name::
+
+    bin/cake plugin assets symlink MyPlugin
+
 .. meta::
     :title lang=en: Plugin Shell
-    :keywords lang=en: api docs,shell,plugin,load,unload
+    :keywords lang=en: plugin,assets,shell,load,unload

@@ -109,7 +109,7 @@ la surcharger comme ceci::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError
+    class AppError extends BaseErrorHandler
     {
         // Autre méthode.
 

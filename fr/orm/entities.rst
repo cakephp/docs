@@ -41,6 +41,38 @@ de cette classe.
     Si vous ne définissez pas de classe entity, CakePHP va utiliser la classe
     de base Entity.
 
+Créer des Entities
+==================
+
+Les Entities peuvent être instanciées directement::
+
+    use App\Model\Entity\Article;
+
+    $article = new Article();
+
+Lorsque vous instanciez une entity, vous pouvez lui passer des propriétés avec
+les données que vous voulez y stocker::
+
+    use App\Model\Entity\Article;
+
+    $article = new Article([
+        'id' => 1,
+        'title' => 'New Article',
+        'created' => new DateTime('now')
+    ]);
+
+Une autre approche pour récupérer une nouvelle entity est d'utiliser la méthode
+``newEntity()`` de l'objet ``Table``::
+
+    use Cake\ORM\TableRegistry;
+
+    $article = TableRegistry::get('Articles')->newEntity();
+    $article = TableRegistry::get('Articles')->newEntity([
+        'id' => 1,
+        'title' => 'New Article',
+        'created' => new DateTime('now')
+    ]);
+
 Accéder aux Données de l'Entity
 ===============================
 
@@ -48,6 +80,9 @@ Les entities fournissent quelques façons d'accéder aux données qu'elles
 contiennent. La plupart du temps, vous accéderez aux données dans une entity
 en utilisant la notation objet::
 
+    use App\Model\Entity\Article;
+
+    $article = new Article;
     $article->title = 'Ceci est mon premier post';
     echo $article->title;
 
@@ -122,6 +157,8 @@ sont définies ou de créer des données calculées. Les mutateurs et accesseurs
 sont appliqués quand les propriétés sont lues en utilisant la notation objet
 ou en utilisant get() et set().
 
+.. _entities-virtual-properties:
+
 Créer des Propriétés Virtuelles
 -------------------------------
 
@@ -154,7 +191,7 @@ de la méthode::
 Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
 les finds.
 
-Vérifier si une Entity à été Modifiée
+Vérifier si une Entity a été Modifiée
 =====================================
 
 .. php:method:: dirty($field = null, $dirty = null)
@@ -178,10 +215,21 @@ initiales des propriétés en utilisant la méthode ``getOriginal()``. Cette
 méthode retournera soit la valeur initiale de la propriété si elle a été
 modifiée soit la valeur actuelle.
 
-Vous pouvez également si une des propriétés de l'entity a été modifiée::
+Vous pouvez également vérifier si une des propriétés de l'entity a été
+modifiée::
 
     // Vérifier si l'entity a changé
     $article->dirty();
+
+Pour retirer le marquage dirty des champs d'une entity, vous pouvez utiliser
+la méthode ``clean()``::
+
+    $article->clean();
+
+Lors de la création d'un nouvelle entity, vous pouvez empêcher les champs
+d'être marqués dirty en passant une option supplémentaire::
+
+    $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 
 Erreurs de Validation
 =====================
@@ -252,6 +300,16 @@ comportement par défaut si un champ n'est pas nommé spécifiquement::
 
 Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
+Eviter la Protection Contre l'Assignement de Masse
+--------------------------------------------------
+
+lors de la création d'un nouvelle entity via le mot clé ``new`` vous pouvez
+lui spécifier de ne pas se protéger contre l'assignement de masse::
+
+    use App\Model\Entity\Article;
+
+    $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
+
 Modifier les Champs Protégés à l'Exécution
 ------------------------------------------
 
@@ -269,6 +327,10 @@ méthode ``accessible``::
     Modifier des champs accessibles agit seulement sur l'instance de la
     méthode sur laquelle il est appelé.
 
+Lorsque vous utilisez les méthodes ``newEntity()`` et ``patchEntity()`` dans
+les objets ``Table`` vous avez également le contrôle sur la protection de
+masse. Réferez vous à la section to the :ref:`changing-accessible-fields`
+pour plus d'information.
 
 Outrepasser la Protection de Champ
 ----------------------------------
@@ -281,6 +343,23 @@ champs protégés::
 En définissant l'option ``guard`` à ``false``. vous pouvez ignorer la liste des
 champs accessibles pour un appel unique de ``set()``.
 
+Vérifier si une Entity a été Sauvegardée
+----------------------------------------
+
+Il est souvent nécessaire de savoir si une entity représente une ligne qui
+est déjà présente en base de données. Pour cela, utilisez la méthode
+``isNew()``:
+
+    if (!$article->isNew()) {
+        echo 'Cette article a déjà été sauvegardé!';
+    }
+
+Si vous êtes certains qu'une entity a déjà été sauvegardée, vous pouvez
+utiliser ``isNew()`` en tant que setter::
+
+    $article->isNew(false);
+
+    $article->isNew(true);
 
 .. _lazy-load-associations:
 
@@ -338,8 +417,8 @@ Intégrer la méthode ci-dessus va vous permettre de faire ce qui suit::
         echo $comment->body;
     }
 
-Créer du Code Re-utilisable avec les Traits
-===========================================
+Créer du Code Réutilisable avec les Traits
+==========================================
 
 Vous pouvez vous retrouver dans un cas où vous avez besoin de la même logique
 dans plusieurs classes d'entity. Les traits de PHP sont parfaits pour cela.

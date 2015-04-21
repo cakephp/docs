@@ -1,9 +1,99 @@
 Database Basics
 ###############
 
-The ORM and database access in CakePHP has been totally rebuilt for 3.0.
-It features a new fluent API for building queries, improved schema
-reflection/generation, a flexible type system and more.
+The CakePHP database access layer abstracts and provides help with most aspects
+of dealing with relational databases such as, keeping connections to the server,
+building queries, preventing SQL injections, inspecting and altering schemas,
+and with debugging and profiling queries sent to the database.
+
+Quick Tour
+==========
+
+The functions described in this chapter illustrate what is possible to do with
+the lower-level database access API. If instead you want to learn more about the
+complete ORM, you can read the :doc:`/orm/query-builder` and
+:doc:`/orm/table-objects` sections.
+
+The easiest way to create a database connection is using a ``DSN`` string::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $dsn = 'mysql://root:password@localhost/my_database';
+    ConnectionManager::config('default', ['url' => $dsn]);
+
+Once created, you can access the connection object to start using it::
+
+    $connection = ConnectionManager::get('default');
+
+Runnig Select Statements
+------------------------
+
+Running raw SQL queries is a breeze::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
+
+You can use prepared statements to insert parameters::
+
+    $results = $connection
+        ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
+        ->fetchAll('assoc');
+
+It is also possible to use complex data types as arguments::
+
+    $results = $connection
+        ->execute(
+            'SELECT * FROM articles WHERE created >= :time',
+            ['created' => DateTime('1 day ago')],
+            ['created' => 'datetime']
+        )
+        ->fetchAll('assoc');
+
+Instead of writing the SQL manually, you can use the query builder::
+
+    $results = $connection
+        ->newQuery()
+        ->select('*')
+        ->from('articles')
+        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->order(['title' => 'DESC'])
+        ->execute()
+        ->fetchAll('assoc');
+
+Running Insert Statements
+-------------------------
+
+Inserting rows in the database is usually a matter of a couple lines::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $connection->insert('articles', [
+        'title' => 'A New Article',
+        'created' => new DateTime('now')
+    ], ['created' => 'datetime']);
+
+Running Update Statements
+-------------------------
+
+Updating rows in the database is equally intuitive, the following example will
+update the article with **id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
+
+Running Delete Statements
+-------------------------
+
+Similarly, the ``delete()`` method is used to delete rows from the database, the
+following example deletes the article with **id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->delete('articles', ['id' => 10]);
 
 .. _database-configuration:
 
@@ -315,31 +405,6 @@ CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
 your Table's :ref:`_initializeSchema() method <saving-complex-types>`.
 
-.. _parsing-localized-dates:
-
-Parsing Localized Datetime Data
--------------------------------
-
-When accepting localized data, it is nice to accept datetime information in
-a user's localized format. In a controller, or
-:doc:`/development/dispatch-filters` you can configure the Date, Time, and
-DateTime types to parse localized formats::
-
-    use Cake\Database\Type;
-
-    // Enable default locale format parsing.
-    Type::build('datetime')->useLocaleParser();
-
-    // Configure a custom datetime format parser format.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
-
-    // You can also use IntlDateFormatter constants.
-    Type::build('datetime')->useLocaleParser()
-        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
-
-The default parsing format is the same as the default string format.
-
-
 Connection Classes
 ==================
 
@@ -391,7 +456,7 @@ abstract type names when creating a query::
 
 This allows you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
-to use the :doc:`/orm/query-builder`. This apporach allows you to build complex and
+to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
     $query = $conn->newQuery();

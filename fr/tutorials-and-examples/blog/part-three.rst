@@ -7,7 +7,7 @@ Créer une Catégorie en Arbre (Tree)
 Continuons notre application de blog et imaginons que nous souhaitions
 catégoriser nos articles. Nous souhaitons que les catégories soit triées, et
 pour cela, nous allons utiliser le :doc:`behavior Tree </orm/behaviors/tree>`
-pour nous aide à organiser les catégories.
+pour nous aider à organiser les catégories.
 
 Mais d'abord, nous devons modifier nos tables.
 
@@ -24,7 +24,7 @@ Normalement vous devriez voir que le plugin migrations est déjà dans
 ``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
 
     "require": {
-        "cakephp/migrations": "dev-master"
+        "cakephp/migrations": "~1.0"
     }
 
 Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
@@ -234,8 +234,9 @@ lorsque l'on va le créer ou le modifier::
 
         public function add()
         {
-            $article = $this->Articles->newEntity($this->request->data);
+            $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -250,7 +251,6 @@ lorsque l'on va le créer ou le modifier::
             $this->set(compact('categories'));
         }
     }
-
 
 Modifier les Templates des Articles
 ===================================

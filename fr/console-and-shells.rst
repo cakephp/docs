@@ -48,6 +48,10 @@ un exécutable::
     $ cd /path/to/app
     $ bin/cake
 
+.. note::
+
+    Sur Windows, cette commande doit être ``bin\cake`` (notez l'antislash).
+
 Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
     Welcome to CakePHP v3.0.0 Console
@@ -1000,7 +1004,6 @@ Plus de sujets
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
     console-and-shells/upgrade-shell
-    console-and-shells/plugin-assets
     console-and-shells/plugin-shell
 
 .. meta::

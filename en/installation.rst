@@ -29,8 +29,8 @@ Requirements
     To make it work you have to go to php folder (by default)
     **C:\\wamp\\bin\\php\\php{version}**, copy all the files that looks like
     **icu*.dll** and paste them into the apache bin directory
-    **C:\\wamp\\bin\\apache\\apache{version}\\bin**. Then restart all services and
-    it should be OK.
+    **C:\\wamp\\bin\\apache\\apache{version}\\bin**. Then restart all services
+    and it should be OK.
 
 While a database engine isn't required, we imagine that most applications will
 utilize one. CakePHP supports a variety of database storage engines:
@@ -83,7 +83,8 @@ You can now visit the path to where you installed your CakePHP application and
 see the setup traffic lights.
 
 Although composer is the recommended installation method, there are
-pre-installed downloads available on `Github <https://github.com/cakephp/cakephp/tags>`_
+pre-installed downloads available on
+`Github <https://github.com/cakephp/cakephp/tags>`_.
 Those downloads contain the app skeleton with all vendor packages installed.
 Also it includes the ``composer.phar`` so you have everything you need for
 further use.
@@ -366,9 +367,10 @@ nginx
 -----
 
 nginx does not make use of .htaccess files like Apache, so it is necessary to
-create those rewritten URLs in the site-available configuration. Depending upon
-your setup, you will have to modify this, but at the very least,
-you will need PHP running as a FastCGI instance::
+create those rewritten URLs in the site-available configuration. This is usually
+found in ``/etc/nginx/sites-available/your_virtual_host_conf_file``. Depending
+upon your setup, you will have to modify this, but at the very least, you will
+need PHP running as a FastCGI instance::
 
     server {
         listen   80;
@@ -400,6 +402,39 @@ you will need PHP running as a FastCGI instance::
         }
     }
 
+On some servers (Like Ubuntu 14.04) the above configuration won't work out of
+the box, and the nginx docs recommend a different approach anyway
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html). You might try the
+following (you'll notice this is also just one server {} block, rather than two,
+although if you want example.com to resolve to your CakePHP application in
+addition to www.example.com consult the nginx link above)::
+
+    server {
+        listen   80;
+        server_name www.example.com;
+        rewrite 301 http://www.example.com$request_uri permanent;
+
+        # root directive should be global
+        root   /var/www/example.com/public/webroot/;
+        index  index.php;
+
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
+
+        location / {
+            try_files $uri /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+
+
 IIS7 (Windows hosts)
 --------------------
 
@@ -409,8 +444,10 @@ rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
 
 
-#. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
+   to install the URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
+   or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Create a new file called web.config in your CakePHP root folder.
 #. Using Notepad or any XML-safe editor, copy the following
    code into your new web.config file::

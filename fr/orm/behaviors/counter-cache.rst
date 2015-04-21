@@ -53,7 +53,7 @@ des méthodes finder pour générer une valeur du compteur::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'findType' => 'published'
+                'finder' => 'published'
             ]
         ]
     ]);
@@ -76,9 +76,7 @@ vous pouvez ajouter ces champs dans le tableau::
     $this->addBehavior('CounterCache', [
         'Articles' => ['comment_count',
             'published_comment_count' => [
-                'conditions' => [
-                    'findType' => 'published'
-                ]
+                'finder' => 'published'
             ]
         ]
     ]);

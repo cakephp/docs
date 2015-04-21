@@ -105,7 +105,8 @@ conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests doivent être dans votre répertoire
    ``tests/TestCase/[Type]``.
-#. Les noms de ces fichiers doivent finir avec ``Test.php`` plutôt que juste ``.php``.
+#. Les noms de ces fichiers doivent finir avec ``Test.php`` plutôt que juste
+   ``.php``.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
@@ -125,7 +126,9 @@ bar HTML. Notre helper ressemblera à cela::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper
+    use Cake\View\Helper;
+
+    class ProgressHelper extends Helper
     {
         public function bar($value)
         {
@@ -146,7 +149,6 @@ allons commencer avec ce qui suit::
     namespace App\Test\TestCase\View\Helper;
 
     use App\View\Helper\ProgressHelper;
-    use Cake\Controller\Controller;
     use Cake\TestSuite\TestCase;
     use Cake\View\View;
 
@@ -386,7 +388,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
               'body' => 'text',
               'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
               'created' => 'datetime',
-              'updated' => 'datetime',
+              'modified' => 'datetime',
               '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']]
               ]
@@ -398,7 +400,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'body' => 'First Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:39:23',
-                  'updated' => '2007-03-18 10:41:31'
+                  'modified' => '2007-03-18 10:41:31'
               ],
               [
                   'id' => 2,
@@ -406,7 +408,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'body' => 'Second Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:41:23',
-                  'updated' => '2007-03-18 10:43:31'
+                  'modified' => '2007-03-18 10:43:31'
               ],
               [
                   'id' => 3,
@@ -414,7 +416,7 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'body' => 'Third Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:43:23',
-                  'updated' => '2007-03-18 10:45:31'
+                  'modified' => '2007-03-18 10:45:31'
               ]
           ];
      }
@@ -450,12 +452,13 @@ la définition de la table sont:
     - ``date``: redirige vers ``DATE``.
     - ``binary``: redirige vers ``BLOB``.
 fixed
-    Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR`` dans
-    les plates-formes qui les supportent.
+    Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR``
+    dans les plates-formes qui les supportent.
 length
     Défini à la longueur spécifique que le champ doit prendre.
 precision
-    Défini le nombre de décimales utilisées sur les champs ``float`` et ``decimal``.
+    Défini le nombre de décimales utilisées sur les champs ``float`` et
+    ``decimal``.
 null
     Défini soit à ``true`` (pour permettre les NULLs) soit à ``false`` (pour
     ne pas permettre les NULLs).
@@ -495,7 +498,7 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
             'body' => 'text',
             'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
             'created' => 'datetime',
-            'updated' => 'datetime',
+            'modified' => 'datetime',
             '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']],
             ]
@@ -510,7 +513,7 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ],
             ];
             parent::init();
@@ -563,7 +566,7 @@ Par exemple::
               'body' => 'First Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:39:23',
-              'updated' => '2007-03-18 10:41:31'
+              'modified' => '2007-03-18 10:41:31'
             ],
             [
               'id' => 2,
@@ -571,7 +574,7 @@ Par exemple::
               'body' => 'Second Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:41:23',
-              'updated' => '2007-03-18 10:43:31'
+              'modified' => '2007-03-18 10:43:31'
             ],
             [
               'id' => 3,
@@ -579,16 +582,16 @@ Par exemple::
               'body' => 'Third Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:43:23',
-              'updated' => '2007-03-18 10:45:31'
+              'modified' => '2007-03-18 10:45:31'
             ]
         ];
     }
 
 Vous ne pouvez pas charger/créer tout type de schéma dans une fixture. Ceci est
-utile si vous avez déjà une configuration de base de données de test, avec toutes
-les tables vides créés. En définissant ni ``$fields`` ni ``$import``, une fixture
-va seulement inserer ces enregistrements et tronquer les enregistrements sur
-chaque méthode de test.
+utile si vous avez déjà une configuration de base de données de test, avec
+toutes les tables vides créés. En définissant ni ``$fields`` ni ``$import``,
+une fixture va seulement inserer ces enregistrements et tronquer les
+enregistrements sur chaque méthode de test.
 
 Charger les fixtures dans vos cas de test
 -----------------------------------------
@@ -770,10 +773,10 @@ Test d'intégrations des Controllers
 ===================================
 
 Alors que vous pouvez tester les controller de la même manière que les Helpers,
-Models et Components, CakePHP offre une classe spécialisée ``IntegrationTestCase``.
-L'utilisation de cette classe en tant que classe de base pour les cas de test de
-votre controller vous permet de mettre plus facilement en place des tests
-d'intégration pour vos controllers.
+Models et Components, CakePHP offre une classe spécialisée
+``IntegrationTestCase``. L'utilisation de cette classe en tant que classe de
+base pour les cas de test de votre controller vous permet de mettre plus
+facilement en place des tests d'intégration pour vos controllers.
 
 Si vous n'êtes pas familiés avec les tests d'intégrations, il s'agit d'une
 approche de test qui rend facile à tester plusieurs éléments en même temps. Les
@@ -989,6 +992,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie un contenu partiel de la réponse
     $this->assertResponseContains('You won!');
+    $this->assertResponseNotContains('You lost!');
 
     // Vérifie le layout
     $this->assertLayout('default');
@@ -1006,15 +1010,22 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     $this->assertEquals('jose', $this->viewVariable('user.username'));
 
     // Vérifie les cookies.
-    $this->assertEquals('1', $this->cookies());
+    $this->assertCookie('1', 'thingid');
 
+    // vérifie le type de contenu
+    $this->assertContentType('application/json');
+
+En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
+toutes les assertions de `TestSuite
+<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
+de `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
 
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
 
-JSON est un format sympa et courant à utiliser quand on construit un service web.
-Tester les endpoints de votre service web est très simple avec CakePHP. Commençons
-par un exemple de controller simple qui répond en JSON::
+JSON est un format sympa et courant à utiliser quand on construit un service
+web. Tester les endpoints de votre service web est très simple avec CakePHP.
+Commençons par un exemple de controller simple qui répond en JSON::
 
     class MarkersController extends AppController
     {
@@ -1030,8 +1041,9 @@ par un exemple de controller simple qui répond en JSON::
         }
     }
 
-Maintenant créons un fichier **tests/TestCase/Controller/MarkersControllerTest.php**
-et assurons nous que notre service web retourne une réponse appropriée::
+Maintenant créons un fichier
+**tests/TestCase/Controller/MarkersControllerTest.php** et assurons-nous que
+notre service web retourne une réponse appropriée::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
@@ -1251,11 +1263,12 @@ Créer les Test Suites
 =====================
 
 Si vous voulez que plusieurs de vos tests s'exécutent en même temps, vous pouvez
-créer une suite de tests. Une suite de test est composée de plusieurs cas de test.
-Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de votre
-application, ou par la création de classes en utilisant ``CakeTestSuite``. Utiliser
-``phpunit.xml`` est bien quand vous avez seulement besoin d'inclure/d'exclure
-de simples règles pour définir votre suite de tests. Un exemple simple serait::
+créer une suite de tests. Une suite de test est composée de plusieurs cas de
+test. Vous pouvez créer des suites de tests dans le fichier ``phpunit.xml`` de
+votre application, ou par la création de classes en utilisant ``CakeTestSuite``.
+Utiliser ``phpunit.xml`` est bien quand vous avez seulement besoin
+d'inclure/d'exclure de simples règles pour définir votre suite de tests. Un
+exemple simple serait::
 
     <testsuites>
       <testsuite name="Models">
@@ -1268,8 +1281,8 @@ de simples règles pour définir votre suite de tests. Un exemple simple serait:
 ``CakeTestSuite`` propose plusieurs méthodes pour créer facilement des suites de
 tests basé sur le système de fichiers. Il vous permet d'exécuter n'importe quel
 code que vous voulez pour préparer votre suite de test. Si nous voulions créer
-une suite de tests pour tous nos tests de modèles, nous pourrions créer le fichier
-**tests/TestCase/AllModelTest.php**, et mettre le code suivant::
+une suite de tests pour tous nos tests de modèles, nous pourrions créer le
+fichier **tests/TestCase/AllModelTest.php**, et mettre le code suivant::
 
     class AllModelTest extends TestSuite
     {
@@ -1347,7 +1360,7 @@ contienne un listener (écouteur) pour les fixtures::
     </listeners>
 
 Vous devez également vous assurer que vos fixtures sont chargeables.
-vérifier que le code suivant est présent dans votre fichier ``composer.json`` ::
+vérifier que le code suivant est présent dans votre fichier ``composer.json``::
 
     "autoload-dev": {
         "psr-4": {
@@ -1363,11 +1376,11 @@ vérifier que le code suivant est présent dans votre fichier ``composer.json`` 
 Générer des Tests avec Bake
 ===========================
 
-Si vous utilisez :doc:`bake </bake/usage>` pour
-générer votre code, il va également générer le squelette de vos fichiers de tests.
-Si vous avez besoin de re-générer le squelette de vos fichiers de tests, ou si
-vous souhaitez générer le squelette de test pour le code que vous avez écrit, vous
-pouvez utiliser ``bake``:
+Si vous utilisez :doc:`bake </bake/usage>` pour générer votre code, il va
+également générer le squelette de vos fichiers de tests. Si vous avez besoin
+de re-générer le squelette de vos fichiers de tests, ou si vous souhaitez
+générer le squelette de test pour le code que vous avez écrit, vous pouvez
+utiliser ``bake``:
 
 .. code-block:: bash
 
@@ -1435,7 +1448,8 @@ suit:
     ];
     CONFIG
 
-Ensuite, décommentez la ligne suivante dans votre fichier **config/bootstrap.php**::
+Ensuite, décommentez la ligne suivante dans votre fichier
+**config/bootstrap.php**::
 
     //Configure::load('app_local', 'default');
 
@@ -1477,8 +1491,6 @@ Lancer un build
 Vous devriez être capable de lancer un build maintenant. Vérifiez la sortie de
 la console et faites tous les changements necéssaires pour obtenir un build
 précédent.
-
-
 
 .. meta::
     :title lang=fr: Test

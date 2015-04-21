@@ -56,12 +56,13 @@ en charge::
                 default.po
 
 Le domaine par défaut est 'default', votre dossier ``locale`` devrait donc
-contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se réfère à un regroupement
-arbitraire de messages de traduction. Si aucun groupe n'est utilisé, le groupe par défaut
-est sélectionné.
+contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se
+réfère à un regroupement arbitraire de messages de traduction. Si aucun groupe
+n'est utilisé, le groupe par défaut est sélectionné.
 
-Les plugins peuvent également contenir des fichiers de traduction, la convention est d'utiliser la version
-``under_scored`` du nom du plugin comme domaine de la traduction des messages::
+Les plugins peuvent également contenir des fichiers de traduction, la convention
+est d'utiliser la version ``under_scored`` du nom du plugin comme domaine de la
+traduction des messages::
 
     MyPlugin
         /src
@@ -71,9 +72,9 @@ Les plugins peuvent également contenir des fichiers de traduction, la conventio
                 /de
                     my_plugin.po
 
-Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de
-la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``,
-qui contient en même temps la langue et le pays où elle est parlée.
+Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO
+de la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``,
+``da_DK``, qui contient en même temps la langue et le pays où elle est parlée.
 
 Un fichier de traduction pourrait ressembler à ceci :
 
@@ -102,8 +103,8 @@ via::
 
     ini_set('intl.default_locale', 'fr_FR');
 
-Cela permet de contrôler plusieurs aspects de votre application, incluant la langue
-de traduction par défaut, le format des dates, des nombres, et devises
+Cela permet de contrôler plusieurs aspects de votre application, incluant la
+langue de traduction par défaut, le format des dates, des nombres, et devises
 à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques
 de localisation fournies par CakePHP.
 
@@ -170,6 +171,18 @@ Toutes les fonctions de traduction intègrent le remplacement de placeholder::
     __d('validation', 'The field {0} cannot be left empty', 'Name');
 
     __x('alphabet', 'He read the letter {0}', 'Z');
+
+le caractère ``'`` (guillemet simple ou apostrophe) agit comme un caractère
+d'échappement dans les messages de traduction. Chaque variable entourée de
+guillemets simples ne sera pas remplacée et sera traitée en tant que texte
+littéral. Par exemple::
+
+    __("This variable '{0}' be replaced.", 'will not');
+
+En utilisant deux guillemets  simples côte à côte, vos variables seront
+remplacées correctement::
+
+    __("This variable ''{0}'' be replaced.", 'will');
 
 Ces fonctions profitent des avantages du `MessageFormatter ICU
 <http://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
@@ -524,6 +537,75 @@ n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
 
     I18n::defaultFormatter('sprintf');
 
+Localiser les Dates et les Nombres
+==================================
+
+Lorsque vous affichez des dates et des nombres dans votre application, vous
+voudrez souvent qu'elles soient formatées conformément au format du pays ou
+de la région dans lequel vous souhaitez afficher la page.
+
+Pour changer l'affichage des dates et des nombres, vous devez uniquement changer
+la locale et utiliser les bonnes classes::
+
+    use Cake\I18n\I18n;
+    use Cake\I18n\Time;
+    use Cake\I18n\Number;
+
+    I18n::locale('fr-FR');
+
+    $date = new Time('2015-04-05 23:00:00');
+
+    echo $date; // Affiche 05/04/2015 23:00
+
+    echo Number::format(524.23); // Displays 524,23
+
+Assurez vous de lire les sections :doc:`/core-libraries/time` et
+:doc:`/core-libraries/number` pour en apprendre plus sur les options de formatage.
+
+Par défaut, les dates renvoyées par l'ORM utilisent la classe ``Cake\I18n\Time``,
+donc leur l'affichage direct dans votre application sera affecté par le
+changement de la locale.
+
+.. _parsing-localized-dates:
+
+Parser les Données Datetime Localisées
+--------------------------------------
+
+Quand vous acceptez les données localisées, c'est sympa d'accepter les
+informations de type datetime dans un format localisé pour l'utilisateur. Dans
+un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
+les types Date, Time, et DateTime pour parser les formats localisés::
+
+    use Cake\Database\Type;
+
+    // Permet de parser avec le format de locale par défaut.
+    Type::build('datetime')->useLocaleParser();
+
+    // Configure un parser personnalisé du format de datetime.
+    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+
+    // Vous pouvez aussi utiliser les constantes IntlDateFormatter.
+    Type::build('datetime')->useLocaleParser()
+        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
+
+Le parsing du format par défaut est le même que le format de chaîne par défaut.
+
+Sélection Automatique de Locale Basée sur les Données de Requêtes
+=================================================================
+
+En utilisant le ``LocaleSelectorFilter`` dans votre application, CakePHP
+définira automatiquement la locale en se basant sur l'utilisateur actuel::
+
+    // dans config/bootstrap.php
+    DispatcherFactory::add('LocaleSelector');
+
+    // Limimte les locale à en-US et fr-FR uniquement
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+
+Le ``LocalSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir
+automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
+l'option de liste de locale pour limiter quelles locales seront utilisées
+automatiquement.
 
 .. meta::
     :title lang=fr: Internationalization & Localization

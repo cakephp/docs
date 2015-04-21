@@ -97,7 +97,7 @@ And any other hash algorithmn that PHP's ``hash()`` function supports.
 .. warning::
 
     You should not be using ``hash()`` for passwords in new applications.
-    Instead you should use the ``DefaultPasswordHasher`` class which uses bcrpyt
+    Instead you should use the ``DefaultPasswordHasher`` class which uses bcrypt
     by default.
 
 .. meta::

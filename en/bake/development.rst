@@ -177,9 +177,9 @@ create your own bake 'theme' which allows you to replace some or all of the
 templates that bake uses. The best way to do this is:
 
 #. Bake a new plugin. The name of the plugin is the bake 'theme' name
-#. Create a new directory in **plugin/[name]/src/Template/Bake**.
+#. Create a new directory **plugins/[name]/src/Template/Bake/Template/**.
 #. Copy any templates you want to override from
-   **vendor/cakephp/bake/src/Template/Bake** to matching directories in your
+   **vendor/cakephp/bake/src/Template/Bake/Template** to matching files in your
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.

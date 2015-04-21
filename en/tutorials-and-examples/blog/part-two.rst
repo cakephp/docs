@@ -189,8 +189,6 @@ ArticlesController now::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
-
     class ArticlesController extends AppController
     {
 
@@ -201,9 +199,6 @@ ArticlesController now::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -218,12 +213,10 @@ we'd like to see. This parameter is handed to the action through
 the requested URL. If a user requests ``/articles/view/3``, then the value
 '3' is passed as ``$id``.
 
-We also do a bit of error checking to ensure a user is actually
-accessing a record. If a user requests ``/articles/view``, we will throw a
-``NotFoundException`` and let the ErrorHandler take over. By using the
-``get()`` function in the Articles table, we also perform a similar check to make
-sure the user has accessed a record that exists. In case the requested article
-is not present in the database, the ``get()`` function will throw
+We also do a bit of error checking to ensure a user is actually accessing
+a record. By using the ``get()`` function in the Articles table, we make sure
+the user has accessed a record that exists. In case the requested article is not
+present in the database, or the id is falsey the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
@@ -254,7 +247,7 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -273,10 +266,6 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
-
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -441,10 +430,6 @@ like::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);

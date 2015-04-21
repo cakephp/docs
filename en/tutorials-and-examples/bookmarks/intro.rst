@@ -31,9 +31,16 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the **bookmarker** directory. ::
+in the **bookmarker** directory::
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
+
+If you downloaded and ran the `Composer Windows Installer
+<https://getcomposer.org/Composer-Setup.exe>`_, then type the following line in
+your terminal from your installation directory (ie.
+C:\\wamp\\www\\dev\\cakephp3)::
+
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -75,6 +82,10 @@ home page. Before you can do that, you'll need to start the development server::
 
     bin/cake server
 
+.. note::
+
+    For Windows, the command needs to be ``bin\cake`` (note the backslash).
+
 This will start PHP's built-in webserver on port 8765. Open up
 **http://localhost:8765** in your web browser to see the welcome page. All the
 bullet points should be checkmarks other than CakePHP being able to connect to
@@ -94,7 +105,7 @@ the following SQL to create the necessary tables::
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created DATETIME,
-        updated DATETIME
+        modified DATETIME
     );
 
     CREATE TABLE bookmarks (
@@ -104,7 +115,7 @@ the following SQL to create the necessary tables::
         description TEXT,
         url TEXT,
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         FOREIGN KEY user_key (user_id) REFERENCES users(id)
     );
 
@@ -112,7 +123,7 @@ the following SQL to create the necessary tables::
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         UNIQUE KEY (title)
     );
 
@@ -178,9 +189,10 @@ Generating Scaffold Code
 ========================
 
 Because our database is following the CakePHP conventions, we can use the
-:doc:`bake console </bake/usage>` application to quickly generate a basic application. In your
-command line run the following commands::
+:doc:`bake console </bake/usage>` application to quickly generate a basic
+application. In your command line run the following commands::
 
+    // On windows you'll need to use bin\cake instead.
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags
@@ -192,6 +204,11 @@ stopped your server, restart it and go to **http://localhost:8765/bookmarks**.
 You should see a basic but functional application providing data access to your
 application's database tables. Once you're at the list of bookmarks, add a few
 users, bookmarks, and tags.
+
+.. note::
+
+    If you see a Not Found (404) page, confirm that the Apache mod_rewrite
+    module is loaded.
 
 Adding Password Hashing
 =======================

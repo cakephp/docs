@@ -137,7 +137,7 @@ serveur web.
 
 Un problème habituel est que les répertoires **logs** et **tmp** et les
 sous-répertoires doivent être accessible en écriture à la fois pour le serveur
-web et et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
+web et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
 votre serveur web est différent à partir de l'utilisateur en ligne de commande,
 vous pouvez lancer les commandes suivantes juste une fois dans votre projet
 pour vous assurer que les permissions sont bien configurées::
@@ -387,10 +387,12 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 nginx
 -----
 
-nginx ne fait pas usage de fichiers .htaccess comme Apache et Lighttpd, il est
+nginx ne fait pas usage de fichiers .htaccess comme Apache, il est
 donc nécessaire de créer les URLs réécrites disponibles dans la configuration
-du site. Selon votre configuration, vous devrez modifier cela, mais à tout le
-moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI::
+du site. Ceci se fait habituellement dans
+``/etc/nginx/sites-available/your_virtual_host_conf_file``. Selon votre
+configuration, vous devrez modifier cela, mais à tout le moins, vous aurez
+besoin de PHP fonctionnant comme une instance FastCGI::
 
     server {
         listen   80;
@@ -422,6 +424,40 @@ moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI::
         }
     }
 
+Sur certains serveurs (Comme Ubuntu 14.04) la configuration ci-dessus ne
+fonctionnera pas d'emblée et la documentation de nginx recommande une approche
+différente de toute façon
+(http://nginx.org/en/docs/http/converting_rewrite_rules.html). Vous pourriez
+essayer ce qui suit (vous remarquerez que ceci n'est que pour un unique block
+{} de serveur, plutôt que deux, si bien que si vous voulez que example.com
+accède à votre application CakePHP en plus de www.example.com, consultez le
+lien nginx ci-dessus)::
+
+    server {
+        listen   80;
+        server_name www.example.com;
+        rewrite 301 http://www.example.com$request_uri permanent;
+
+        # root directive should be global
+        root   /var/www/example.com/public/webroot/;
+        index  index.php;
+
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
+
+        location / {
+            try_files $uri /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_pass    127.0.0.1:9000;
+            fastcgi_index   index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+
 IIS7 (serveurs Windows)
 -----------------------
 
@@ -434,7 +470,8 @@ faire, suivez ces étapes:
    <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
    l'URL
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou téléchargez le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   ou téléchargez le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Créez un nouveau fichier dans votre dossier CakePHP, appelé web.config.
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
    dans votre nouveau fichier web.config::

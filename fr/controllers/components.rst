@@ -326,8 +326,8 @@ qui vous permettent d'augmenter le cycle de la requête.
     Est invoquée quand la méthode de redirection du controller est appelée,
     mais avant toute action qui suit. Si cette méthode retourne ``false``, le
     controller ne continuera pas à rediriger la requête. Les paramètres $url et
-    $response vous permettent d'inspecter et de modifier la localisation ou toutes
-    autres entêtes dans la réponse.
+    $response vous permettent d'inspecter et de modifier la localisation ou
+    toutes autres entêtes dans la réponse.
 
 .. meta::
     :title lang=fr: Components (Composants)

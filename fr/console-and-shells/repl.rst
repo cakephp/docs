@@ -1,7 +1,7 @@
 Console Interactive (REPL)
 ##########################
 
-Le squelette de l'app CakePHP app intègre un REPL(Read Eval Print Loop
+Le squelette de l'application CakePHP intègre un REPL(Read Eval Print Loop
 = Lire Evaluer Afficher Boucler) qui facilite l'exploration de CakePHP et
 de votre application avec une console interactive. Vous pouvez commencer la
 console interactive en utilisant::

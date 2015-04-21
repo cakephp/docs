@@ -128,8 +128,8 @@ pouvez la scoper avec ce qui suit::
 Cela va s'assurer que l'adresse email fournie est seulement unique pour les
 autres enregistrements avec le même ``site_id``.
 
-Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des providers
-``Validator`` est expliqué plus loin dans les sections suivantes.
+Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des
+providers ``Validator`` est expliqué plus loin dans les sections suivantes.
 
 Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------

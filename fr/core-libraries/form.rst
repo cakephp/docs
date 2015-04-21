@@ -62,8 +62,9 @@ les formulaires:
 * ``_buildSchema`` et utilisé pour définir le schema des données utilisé par
   FormHelper pour créer le formulaire HTML. Vous pouvez définir le type de
   champ, la longueur et la précision.
-* ``_buildValidator`` Récupère une instance de :php:class:`Cake\\Validation\\Validator`
-  à laquelle vous pouvez attacher des validateurs.
+* ``_buildValidator`` Récupère une instance de
+  :php:class:`Cake\\Validation\\Validator` à laquelle vous pouvez attacher des
+  validateurs.
 * ``_execute`` vous permet de définir le comportement que vous souhaitez lorsque
   ``execute()`` est appelée et que les données sont valides.
 
@@ -130,17 +131,17 @@ Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
                     $this->Flash->error('Il y a eu un problème lors de la soumission de votre formulaire.');
                 }
             }
-            
+
             if ($this->request->is('get') {
                 //Values from the User Model e.g.
                 $this->request->data['name'] = 'John Doe';
                 $this->request->data['email'] = 'john.doe@example.com';
             }
-            
+
             $this->set('contact', $contact);
         }
     }
-    
+
 Les valeurs ne doivent être définies que si la méthode de requête est GET,
 sinon vous allez surcharger les données POST qui auraient pu être incorrectes
 et non sauvegardées.

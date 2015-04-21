@@ -218,13 +218,15 @@ While view and delete are working, edit, add and index have a few problems:
 
 Let's tackle the add form first. To begin with remove the ``input('user_id')``
 from **src/Template/Bookmarks/add.ctp**. With that removed, we'll also update
-the add method to look like::
+the ``add()`` action from **src/Controller/BookmarksController.php** to look
+like::
 
     public function add()
     {
-        $bookmark = $this->Bookmarks->newEntity($this->request->data);
-        $bookmark->user_id = $this->Auth->user('id');
+        $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
@@ -237,7 +239,8 @@ the add method to look like::
 
 By setting the entity property with the session data, we remove any possibility
 of the user modifying which user a bookmark is for. We'll do the same for the
-edit form and action. Your edit action should look like::
+edit form and action. Your ``edit()`` action from
+**src/Controller/BookmarksController.php** should look like::
 
     public function edit($id = null)
     {
@@ -261,8 +264,8 @@ List View
 ---------
 
 Now, we only need to show bookmarks for the currently logged in user. We can do
-that by updating the call to ``paginate()``. Make your ``index()`` action look
-like::
+that by updating the call to ``paginate()``. Make your ``index()`` action from
+**src/Controller/BookmarksController.php** look like::
 
     public function index()
     {
@@ -317,24 +320,25 @@ later on.
 In **src/Model/Entity/Bookmark.php** add the ``tag_string`` to ``$_accessible``
 this way::
 
-	protected $_accessible = [
-		'user_id' => true,
-		'title' => true,
-		'description' => true,
-		'url' => true,
-		'user' => true,
-		'tags' => true,
-		'tag_string' => true,
-	];
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
 
 
 Updating the Views
 ------------------
 
-With the entity updated we can add a new input for our tags. In the add and
-edit view, replace the existing ``tags._ids`` input with the following::
+With the entity updated we can add a new input for our tags. In
+**src/Template/Bookmarks/add.ctp** and **src/Template/Bookmarks/edit.ctp**,
+replace the existing ``tags._ids`` input with the following::
 
-    <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
+    echo $this->Form->input('tag_string', ['type' => 'text']);
 
 Persisting the Tag String
 -------------------------
@@ -390,5 +394,6 @@ We've expanded our bookmarking application to handle authentication and basic
 authorization/access control scenarios. We've also added some nice UX
 improvements by leveraging the FormHelper and ORM capabilities.
 
-Thanks for taking the time to explore CakePHP. Next, you can learn more about
-the :doc:`/orm`, or you can peruse the :doc:`/topics`.
+Thanks for taking the time to explore CakePHP. Next, you can complete the
+:doc:`/tutorials-and-examples/blog/blog`, learn more about the
+:doc:`/orm`, or you can peruse the :doc:`/topics`.

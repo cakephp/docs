@@ -189,6 +189,22 @@ rules that only apply when an account is being registered::
         'context' => ['validator' => 'register']
     ]);
 
+The above will use the ``register`` validator for the ``$user`` and all related
+associations. If you are creating a form for associated entities, you can define
+validation rules for each association by using an array::
+
+    echo $this->Form->create($user, [
+        'context' => [
+            'validator' => [
+                'Users' => 'register',
+                'Comments' => 'default'
+            ]
+        ]
+    ]);
+
+The above would use ``register`` for the user, and ``default`` for the user's
+comments.
+
 Creating context classes
 ------------------------
 
@@ -505,7 +521,7 @@ Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
 * ``$options['value']`` Used in combination with a select-type input (i.e.
-  For types select, date, time, datetime). Set 'selected' to the value of the
+  For types select, date, time, datetime). Set 'value' to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->time('close_time', [
@@ -516,6 +532,15 @@ Options for Select, Checkbox and Radio Inputs
 
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
+
+  For select input where you set the ``multiple`` attribute to true,
+  you can use an array of the values you want to select by default::
+
+    echo $this->Form->select('rooms', [
+        'multiple' => true,
+        // options with values 1 and 3 will be selected as default
+        'default' => [1, 3]
+    ]);
 
 * ``$options['empty']`` If set to ``true``, forces the input to remain empty.
 
@@ -1445,8 +1470,8 @@ A list of the default templates and the variables they can expect are:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
-* ``checkboxWrapper`` {{input}}, {{label}}
+* ``checkboxFormGroup`` {{label}}
+* ``checkboxWrapper`` {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
@@ -1461,6 +1486,8 @@ A list of the default templates and the variables they can expect are:
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``inputSubmit`` {{type}}, {{attrs}}
 * ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``nestingLabel`` {{hidden}}, {{attrs}}, {{input}}, {{text}}
+* ``legend`` {{text}}
 * ``option`` {{value}}, {{attrs}}, {{text}}
 * ``optgroup`` {{label}}, {{attrs}}, {{content}}
 * ``radio`` {{name}}, {{value}}, {{attrs}}
@@ -1469,6 +1496,7 @@ A list of the default templates and the variables they can expect are:
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
+* ``submitContainer`` {{content}}
 
 In addition to these templates, the ``input()`` method will attempt to use
 distinct templates for each input container. For example, when creating
@@ -1485,6 +1513,17 @@ example::
     echo $this->Form->radio('User.email_notifications', [
         'options' => ['y', 'n'],
         'type' => 'radio'
+    ]);
+
+Similar to input containers, the ``input()`` method will also attempt to use
+distinct templates for each form group. A form group is a combo of label and input.
+For example, when creating a radio input the ``radioFormGroup`` will be used if
+it is present. If that template is missing by default each set of label & input
+is rendered using the ``formGroup`` template. For example::
+
+    // Add custom radio form group
+    $this->Form->templates([
+        'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
 Moving Checkboxes & Radios Outside of a Label

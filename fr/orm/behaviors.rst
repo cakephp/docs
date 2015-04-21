@@ -68,8 +68,8 @@ pouvez mettre le code d'initialisation, si nécessaire::
     }
 
 Nous pouvons maintenant ajouter ce behavior à l'une de nos classes de table.
-Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque les articles
-ont souvent des propriétés slug pour créer de belles URLs::
+Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque les
+articles ont souvent des propriétés slug pour créer de belles URLs::
 
     namespace App\Model\Table;
 

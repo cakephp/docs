@@ -10,12 +10,12 @@ voir/modifier seulement ceux qui lui appartiennent.
 Ajouter la Connexion
 ====================
 
-Dans CakePHP, l'authentification est gérée par les :doc:`/controllers/components`.
-Les components peuvent être imaginés comme des façons de créer des parties
-réutilisables de code du controller pour une fonctionnalité spécifique ou
-un concept. Les components peuvent aussi se lancer dans le cycle de vie
-de l'event du controller et intéragir avec votre application de cette façon.
-Pour commencer, nous ajouterons :doc:`AuthComponent
+Dans CakePHP, l'authentification est gérée par les
+:doc:`/controllers/components`. Les components peuvent être imaginés comme des
+façons de créer des parties réutilisables de code du controller pour une
+fonctionnalité spécifique ou un concept. Les components peuvent aussi se lancer
+dans le cycle de vie de l'event du controller et intéragir avec votre
+application de cette façon. Pour commencer, nous ajouterons :doc:`AuthComponent
 </controllers/components/authentication>` à notre application. Nous voulons
 que chaque méthode nécessite l'authentification, donc nous allons ajouter
 AuthComponent dans notre AppController::
@@ -115,8 +115,8 @@ Permettre de s'Enregistrer
 
 Si vous n'êtes pas connecté et que vous essayez de visiter **/users/add** vous
 serez renvoyés vers la page de connexion. Nous devrions régler cela puisque nous
-voulons que les utilisateurs s'inscrivent à notre application. Dans ``UsersController``,
-ajoutez ce qui suit::
+voulons que les utilisateurs s'inscrivent à notre application. Dans
+``UsersController``, ajoutez ce qui suit::
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
@@ -208,7 +208,8 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
 
 Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark
 qui ne vous appartient pas, vous devriez être redirigé vers la page d'où vous
-venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions cela::
+venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions
+cela::
 
     // Dans src/Template/Layout/default.ctp
     // Sous le message flash existant.
@@ -228,13 +229,15 @@ problèmes:
 
 Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')``
 de **src/Template/Bookmarks/add.ctp**. Une fois retiré, nous allons aussi
-mettre à jour la méthode add pour ressembler à ceci::
+mettre à jour l'action ``add()`` dans **src/Controller/BookmarksController.php**
+pour ressembler à ceci::
 
     public function add()
     {
-        $bookmark = $this->Bookmarks->newEntity($this->request->data);
-        $bookmark->user_id = $this->Auth->user('id');
+        $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');
                 return $this->redirect(['action' => 'index']);
@@ -247,8 +250,9 @@ mettre à jour la méthode add pour ressembler à ceci::
 
 En définissant la propriété entity avec les données de session, nous retirons
 la possibilité que l'utilisateur puisse modifier l'auteur d'un bookmark.
-Nous ferons la même chose pour le formulaire et l'action edit.
-Votre action edit devrait ressembler à ceci::
+Nous ferons la même chose pour le formulaire et l'action edit. Votre action
+``edit()`` dans **src/Controller/BookmarksController.php** devrait ressembler à
+ceci::
 
     public function edit($id = null)
     {
@@ -274,7 +278,8 @@ Vue de Liste
 
 Maintenant nous devons afficher les bookmarks pour l'utilisateur actuellement
 connecté. Nous pouvons le faire en mettant à jour l'appel à ``paginate()``.
-Faites en sorte que votre action ``index()`` ressemble à ceci::
+Faites en sorte que votre action ``index()`` dans
+**src/Controller/BookmarksController.php** ressemble à ceci::
 
     public function index()
     {
@@ -345,10 +350,10 @@ Mettre à Jour les Vues
 ----------------------
 
 Avec l'entity mise à jour, nous pouvons ajouter un nouvel input pour nos tags.
-Dans les vues add et edit, remplacez l'input ``tags._ids`` existant avec ce
-qui suit::
+Dans **src/Template/Bookmarks/add.ctp** et **src/Template/Bookmarks/edit.ctp**,
+remplacez l'input ``tags._ids`` existant avec ce qui suit::
 
-    <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
+    echo $this->Form->input('tag_string', ['type' => 'text']);
 
 Persister la Chaîne Tag
 -----------------------
@@ -407,6 +412,6 @@ de contrôle d'authentification et d'autorisation/d'accès basique. Nous avons
 aussi ajouté quelques améliorations UX en tirant parti du FormHelper et des
 capacités de l'ORM.
 
-Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez en
-apprendre plus sur l':doc:`ORM </orm>`, ou vous pouvez lire attentivement
-:doc:`/topics`.
+Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez
+finir le tutoriel du :doc:`/tutorials-and-examples/blog/blog`, en apprendre
+plus sur l':doc:`ORM </orm>` ou vous pouvez lire attentivement :doc:`/topics`.

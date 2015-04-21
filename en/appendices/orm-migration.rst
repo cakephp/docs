@@ -14,7 +14,7 @@ a few issues that we wanted to fix.
   reduced adoption at some levels.
 * No record object - This makes attaching formatting methods
   difficult/impossible.
-* Containable - Should be part of the ORM, not a crazy hacky behaviour.
+* Containable - Should be part of the ORM, not a crazy hacky behavior.
 * Recursive - This should be better controlled as defining which associations
   are included, not a level of recursiveness.
 * DboSource - It is a beast, and Model relies on it more than datasource.  That
@@ -45,7 +45,7 @@ operations. Now the ORM is split into more layers:
   bindings for each data type. For example datetime columns are represented as
   ``DateTime`` instances in your code now.
 * ``Cake\ORM\Table`` - The main entry point into the new ORM. Provides access
-  to a single table. Handles the definition of assocation, use of behaviors and
+  to a single table. Handles the definition of association, use of behaviors and
   creation of entities and query objects.
 * ``Cake\ORM\Behavior`` - The base class for behaviors, which act very similar
   to behaviors in previous versions of CakePHP.
@@ -189,7 +189,7 @@ the results taken from the database is not actually required::
         });
 
 Queries can be seen as the result object, trying to iterate the query, calling
-``toArray`` or any method inherited from :ref:`collection <collection-objects>`,
+``toArray()`` or any method inherited from :ref:`collection <collection-objects>`,
 will result in the query being executed and results returned to you.
 
 The biggest difference you will find when coming from CakePHP 2.x is that
@@ -327,7 +327,7 @@ In previous versions of CakePHP you needed to make extensive use of the
 properties. These features have been removed in 3.0. Because of how ResultSets
 iteratively generate entities, the ``afterFind`` callback was not possible.
 Both afterFind and virtual fields can largely be replaced with virtual
-properies on entities. For example if your User entity has both first and last
+properties on entities. For example if your User entity has both first and last
 name columns you can add an accessor for `full_name` and generate the property
 on the fly::
 
@@ -412,7 +412,7 @@ Validation No Longer Defined as a Property
 Like associations, validation rules were defined as a class property in previous
 versions of CakePHP. This array would then be lazily transformed into
 a ``ModelValidator`` object. This transformation step added a layer of
-indirection, complicating rule changes at runtime. Futhermore, validation rules
+indirection, complicating rule changes at runtime. Furthermore, validation rules
 being defined as a property made it difficult for a model to have multiple sets
 of validation rules. In CakePHP 3.0, both these problems have been remedied.
 Validation rules are always built with a ``Validator`` object, and it is trivial
@@ -522,7 +522,7 @@ Updating Behaviors
 ==================
 
 Like most ORM related features, behaviors have changed in 3.0 as well. They now
-attach to ``Table`` instances which are the conceptual descendent of the
+attach to ``Table`` instances which are the conceptual descendant of the
 ``Model`` class in previous versions of CakePHP. There are a few key
 differences from behaviors in CakePHP 2.x:
 

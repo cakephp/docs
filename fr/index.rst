@@ -1,6 +1,10 @@
 Bienvenue
 #########
 
+.. warning::
+    Cette version de documentation concerne CakePHP 3.0. Rendez vous
+    `ici pour la documentation sur CakePHP 2.x <http://book.cakephp.org/2.0/fr>`_.
+
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Remarquez le bouton "Improve this Doc" dans le coin en haut
 à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la page active,
@@ -48,7 +52,6 @@ clés d'une application CakePHP:
 * Les :doc:`Models </orm>` sont les ingrédients clés dans toute application. Ils
   gèrent la validation et la logique du domaine de votre application.
 
-
 .. meta::
-    :title lang=fr: .. Documentation CakePHP 
+    :title lang=fr: .. Documentation CakePHP
     :keywords lang=fr: modèles,models,documentation,présentation vue,documentation du projet,démarrage rapide,source original,sphinx,liens,livre de cuisine,conventions,validation,cakephp,stockage et récupération,cœur,blog,projet

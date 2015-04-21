@@ -189,7 +189,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 ..
   To configure different fields for user in ``$components`` array::
 
-Auth の他の設定キー(authError や loginAction など)を authenticate や Form の下位要素として書いてはいけ���せん。
+Auth の他の設定キー(authError や loginAction など)を authenticate や Form の下位要素として書いてはいけません。
 それらは authenticate キーと同じレベルであるべきです。
 上記の例を他の Auth 設定を使って書いた場合は次のようになります::
 
@@ -773,7 +773,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
   This method is also useful if you want to provide a 'Log me out' link inside a members' area of your application::
 
 ダイジェスト／Basic認証でログインしたユーザのログアウトを、すべてのクライアントで成し遂げるのは難しいものです。
-多くのブラウザは開いている間だけ継続���る認証情報を保有しています。
+多くのブラウザは開いている間だけ継続する認証情報を保有しています。
 クライアントの中には 401 のステータスコードを送信して強制的にログアウトすることがありえます。
 認証 realm の変更は、一部のクライアントで機能させるためのもう１つの解決法です。
 
@@ -1359,7 +1359,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
 .. php:method:: loggedIn()
 
-    現在のクライアントがログイン済みなら true を返します。そうでないなら false を返しま���。
+    現在のクライアントがログイン済みなら true を返します。そうでないなら false を返します。
 
     ..
       Returns true if the current client is a logged in user, or false if they are not.

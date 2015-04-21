@@ -344,15 +344,14 @@ systems (like SwiftMailer). To create your transport, first create the file
 transport). To start off your file should look like::
 
     use Cake\Network\Email\AbstractTransport;
+    use Cake\Network\Email\Email;
 
     class ExampleTransport extends AbstractTransport
     {
-
         public function send(Email $email)
         {
             // Magic inside!
         }
-
     }
 
 You must implement the method ``send(Email $email)`` with your custom logic.

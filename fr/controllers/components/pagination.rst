@@ -85,13 +85,14 @@ l'utilisation de la pagination du finder en configurant l'option ``findType``::
         ];
     }
 
-Because custom finder methods can also take in options,
-this is how you pass in options into a custom finder method within the paginate property::
+Comme les méthodes finder personnalisées peuvent aussi être prises en options,
+voici comment vous pouvez passer des options  dans une méthode de finder
+personnalisée dans la propriété paginate::
 
     class ArticlesController extends AppController
     {
 
-        // find articles by tag
+        // trouve les articles selon les tags
         public function tags()
         {
             $tags = $this->request->params['pass'];
@@ -99,10 +100,11 @@ this is how you pass in options into a custom finder method within the paginate 
             $customFinderOptions = [
                 'tags' => $tags
             ];
-            // the custom finder method is called findTagged inside ArticlesTable.php
-            // it should look like this:
+            // la méthode de finder personnalisée est appelée findTagged dans
+            // ArticlesTable.php
+            // elle devrait ressembler à ceci:
             // public function findTagged(Query $query, array $options) {
-            // hence you use tagged as the key
+            // ainsi vous utilisez tagged en clé
             $this->paginate = [
                 'finder' => [
                     'tagged' => $customFinderOptions
@@ -270,7 +272,6 @@ Pagination dans la Vue
 
 Regardez la documentation :php:class:`~Cake\\View\\Helper\\PaginatorHelper`
 pour savoir comment créer des liens de navigation paginés.
-
 
 .. meta::
     :title lang=fr: Pagination

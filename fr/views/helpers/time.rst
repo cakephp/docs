@@ -39,11 +39,11 @@ pouvons corriger la date et le temps de nos posts en utilisant le Helper Time::
     // 'Saturday, August 22, 2011 at 03:53 PM GMT-8:00'
     // pour un utilisateur dans GMT-8
 
-La plupart des fonctionnalités de TimeHelper sont des interfaces rétro-compatibles
-pour les applications qui sont mises à jour à partir des versions anciennes de
-CakePHP. Comme l'ORM retourne des instances :php:class:`Cake\\I18n\\Time` pour
-chaque colonne ``timestamp`` et ``datetime``, vous pouvez utiliser les méthodes
-ici pour faire la plupart des tâches.
+La plupart des fonctionnalités de TimeHelper sont des interfaces
+rétro-compatibles pour les applications qui sont mises à jour à partir des
+versions anciennes de CakePHP. Comme l'ORM retourne des instances
+:php:class:`Cake\\I18n\\Time` pour chaque colonne ``timestamp`` et ``datetime``,
+vous pouvez utiliser les méthodes ici pour faire la plupart des tâches.
 
 .. meta::
     :title lang=fr: TimeHelper

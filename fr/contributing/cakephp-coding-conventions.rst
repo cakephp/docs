@@ -1,8 +1,9 @@
 Normes de codes
 ###############
 
-Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code PSR-2
-<http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code suivantes.
+Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code
+PSR-2 <http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code
+suivantes.
 
 Il est recommandé que les autres personnes qui développent des Ingrédients de
 Cake suivent les mêmes normes.
@@ -122,7 +123,6 @@ vérifiée de l'opération pour rendre le code plus clair::
     // Imbrications des ternaires est mauvaise
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Fichiers de Template
 --------------------
 
@@ -153,7 +153,7 @@ Pour tester si une variable est null, il est recommandé d'utiliser une
 vérification stricte::
 
     if ($value === null) {
-    	  // ...
+          // ...
     }
 
 La valeur avec laquelle on vérifie devra être placée sur le côté droit::
@@ -490,9 +490,9 @@ Les noms de méthodes et variables privées commencent avec un underscore double
 
 Essayez cependant d'éviter les méthodes et variables privées et privilégiez
 plutôt les variables protégées.
-Ainsi elles pourront être accessibles ou modifiées par les sous-classes, alors que
-celles privées empêchent l'extension ou leur réutilisation. La visibilité privée
-rend aussi le test beaucoup plus difficile.
+Ainsi elles pourront être accessibles ou modifiées par les sous-classes, alors
+que celles privées empêchent l'extension ou leur réutilisation. La visibilité
+privée rend aussi le test beaucoup plus difficile.
 
 Exemple d'Adresses
 ------------------
@@ -523,17 +523,17 @@ Pour le casting, nous utilisons:
 Type
     Description
 (bool)
-		Cast pour boolean.
+        Cast pour boolean.
 (int)
-		Cast pour integer.
+        Cast pour integer.
 (float)
-		Cast pour float.
+        Cast pour float.
 (string)
-		Cast pour string.
+        Cast pour string.
 (array)
-		Cast pour array.
+        Cast pour array.
 (object)
-		Cast pour object.
+        Cast pour object.
 
 Constantes
 ----------

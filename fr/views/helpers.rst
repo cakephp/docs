@@ -106,9 +106,9 @@ comportement du helper::
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-Par défaut, toutes les options de configuration sont fusionnées avec la propriété
-``$_defaultConfig``. Cette propriété doit définir les valeurs par défaut de
-toute configuration dont votre helper a besoin. Par exemple::
+Par défaut, toutes les options de configuration sont fusionnées avec la
+propriété ``$_defaultConfig``. Cette propriété doit définir les valeurs par
+défaut de toute configuration dont votre helper a besoin. Par exemple::
 
     namespace App\View\Helper;
 

@@ -103,7 +103,7 @@ standard error page, you can override it like::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError
+    class AppError extends BaseErrorHandler
     {
         // Other methods.
 

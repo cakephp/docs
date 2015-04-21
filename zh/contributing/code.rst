@@ -124,5 +124,5 @@ CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
 
 
 .. meta::
-    :title lang=zh_CN: Code
-    :keywords lang=zh_CN: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
+    :title lang=zh: Code
+    :keywords lang=zh: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
