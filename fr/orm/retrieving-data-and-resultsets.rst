@@ -32,7 +32,7 @@ Vous pouvez faire ceci facilement en utilisant ``get()``::
     ]);
 
 Si l'opération get ne trouve aucun résultat, une
-``Cake\ORM\Error\RecordNotFoundException`` sera levée. Vous pouvez soit
+``Cake\Datasource\Exception\RecordNotFoundException`` sera levée. Vous pouvez soit
 attraper cette exception vous-même, ou permettre à CakePHP de la convertir en
 une erreur 404.
 
