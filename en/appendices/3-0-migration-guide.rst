@@ -1022,7 +1022,9 @@ NumberHelper
 SessionHelper
 -------------
 
-- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly.
+- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly,
+  and the flash message functionality has been moved into :doc:`/views/helpers/flash` instead.
+
 
 JsHelper
 --------
