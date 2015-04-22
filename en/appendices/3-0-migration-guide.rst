@@ -1022,8 +1022,7 @@ NumberHelper
 SessionHelper
 -------------
 
-- ``SessionHelper::flash()`` is deprecated. You should use
-  :doc:`/views/helpers/flash` instead.
+- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly.
 
 JsHelper
 --------
