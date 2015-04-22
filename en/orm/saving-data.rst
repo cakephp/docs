@@ -1107,6 +1107,11 @@ allows you to easily define unique field sets::
     // A list of fields
     $rules->add($rules->isUnique(['username', 'account_id']));
 
+When setting rules on foreign key fields it is important to remember, that
+only the fields listed are used in the rule. This means that setting
+``$user->account->id`` will not trigger the above rule.
+
+
 Foreign Key Rules
 -----------------
 
