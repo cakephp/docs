@@ -226,6 +226,12 @@ adding new tables to the database, you can use the second argument of the
 
 The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
 
+.. tip::
+
+    You can also use ``BINARY(36)`` for UUIDs, which perform better than ``CHAR(36)``.
+    Use type `binary` then as column type.
+
+
 Applying Migrations
 ===================
 
