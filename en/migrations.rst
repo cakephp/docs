@@ -263,18 +263,18 @@ You can use this command to determine which migrations have been run::
         bin/cake migrations status
 
 Marking a migration as migrated
-=================
+===============================
 
 .. versionadded:: cakephp/migrations 1.1.0
 
 It can sometimes be useful to mark a migration as migrated without actually running it.
-In order to do this, you can use the ``mark_migrated`` command. This command expects the migration
-version number as argument::
+In order to do this, you can use the ``mark_migrated`` command. This command
+expects the migration version number as argument::
 
     bin/cake migrations mark_migrated 20150420082532
 
-Note that when you bake a snapshot with the ``cake bake migration_snapshot`` command, the created migration
-will automatically be marked as migrated.
+Note that when you bake a snapshot with the ``cake bake migration_snapshot``
+command, the created migration will automatically be marked as migrated.
 
 Using Migrations In Plugins
 ===========================
