@@ -119,7 +119,7 @@ méthode slug(), nous pourrions faire ce qui suit::
 
     public $_defaultConfig = [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ];
 
@@ -135,7 +135,7 @@ table. Par exemple::
     // Dans une méhode initialize() de la table.
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ]);
 

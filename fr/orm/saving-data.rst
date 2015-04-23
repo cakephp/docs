@@ -1165,6 +1165,11 @@ unique::
     // Une liste de champs
     $rules->add($rules->isUnique(['username', 'account_id']));
 
+Quand vous définissez des règles sur des champs de clé étrangère, il est
+important de se rappeler que seuls les champs listés sont utilisés dans la
+règle. Cela signifie que définir ``$user->account->id`` ne va pas déclencher
+la règle ci-dessus.
+
 Règles des Clés Etrangères
 --------------------------
 
