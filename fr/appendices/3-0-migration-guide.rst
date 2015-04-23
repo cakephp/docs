@@ -1131,8 +1131,9 @@ NumberHelper
 SessionHelper
 -------------
 
-- ``SessionHelper::flash()`` est déprécié. Vous devez utiliser
-  :doc:`/views/helpers/flash` à la place.
+- ``SessionHelper`` est déprécié. Vous pouvez utiliser
+  ``$this->request->session()`` directement, et la fonctionnalité de message
+  flash a été déplacée dans :doc:`/views/helpers/flash` à la place.
 
 JsHelper
 --------
