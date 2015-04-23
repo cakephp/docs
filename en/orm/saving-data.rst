@@ -30,7 +30,10 @@ passing it to the ``save()`` method in the ``Table`` class::
     $article->title = 'A New Article';
     $article->body = 'This is the body of the article';
 
-    $articlesTable->save($article);
+    $savedArticle = $articlesTable->save($article);
+
+    // Both $article and the returned $savedArticle entity contain the id now
+    $id = $savedArticle->id;
 
 Updating Data
 -------------
@@ -374,7 +377,7 @@ important note should be made.
 
 .. note::
 
-    For belongsToMany associations, ensure the relevant entity has 
+    For belongsToMany associations, ensure the relevant entity has
     a property accessible for the associated entity.
     
     
