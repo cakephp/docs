@@ -25,8 +25,8 @@ Once created, you can access the connection object to start using it::
 
     $connection = ConnectionManager::get('default');
 
-Runnig Select Statements
-------------------------
+Running Select Statements
+-------------------------
 
 Running raw SQL queries is a breeze::
 
