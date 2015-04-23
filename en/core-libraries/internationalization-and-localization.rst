@@ -249,17 +249,17 @@ the following strings
 And in your application use the following code to output either of the
 translations for such string::
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
+    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {0} records}}', [0]);
 
     // Returns "Ningún resultado" as the argument {0} is 0
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [1]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {0} records}}', [1]);
 
     // Returns "1 resultado" because the argument {0} is 1
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [2, 2]);
+    __('{1,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 2]);
 
-    // Returns "2 resultados" because the argument {0} is 2
+    // Returns "2 resultados" because the argument {1} is 2
 
 A closer look to the format we just used will make it evident how messages are
 built::
