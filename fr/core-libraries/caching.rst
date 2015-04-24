@@ -7,11 +7,11 @@ La mise en cache
 
 La mise en cache est fréquemment utilisée pour réduire le temps pris pour créer
 ou lire depuis une autre ressource. La mise en cache est souvent utilisée pour
-rendre la lecture de ressources consommatrices en temps et en ressources moins
+rendre la lecture de ressources consommatrices en temps, en ressources moins
 consommatrice. Vous pouvez aisément stocker en cache les résultats de requêtes
 consommatrices en ressources ou les accès à distance à des services web qui ne
 changent pas fréquemment. Une fois mis en cache, re-lire les ressources
-stockées depuis le cache est moins consommateur en ressource qu'un accès a une
+stockées depuis le cache est moins consommateur en ressource qu'un accès à une
 ressource distante.
 
 La mise en cache dans CakePHP se fait principalement par la classe
