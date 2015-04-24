@@ -377,7 +377,7 @@ Turning off colouring
 Although colouring is pretty awesome, there may be times when you want to turn it off,
 or force it on::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 The above will put the output object into raw output mode. In raw output mode,
 no styling is done at all. There are three modes you can use.
