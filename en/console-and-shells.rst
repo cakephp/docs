@@ -295,6 +295,38 @@ as var args or as a string::
 The above shows how you can call the schema shell to create the schema for a plugin
 from inside your plugin's shell.
 
+Passing extra parameters to the dispatched Shell
+------------------------------------------------
+
+.. versionadded:: 3.1
+
+It can sometimes be useful to pass on extra parameters (that are not shell arguments)
+to the dispatched Shell. In order to do this, you can now pass an array to
+``dispatchShell()``. The array is expected to have a ``command`` key as well
+as an ``extra`` key::
+
+    // Using a command string
+    $this->dispatchShell([
+       'command' => 'schema create Blog --plugin Blog'
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+    // Using a command array
+    $this->dispatchShell([
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+Parameters passed through ``extra`` will be merged in the ``Shell::$params``
+property and are accessible with the ``Shell::param()`` method.
+By default, a ``requested`` extra param is automatically added when a Shell
+is dispatched using ``dispatchShell()``. This ``requested`` parameter prevents
+the CakePHP console welcome message from being displayed on dispatched shells.
+
 Getting User Input
 ==================
 

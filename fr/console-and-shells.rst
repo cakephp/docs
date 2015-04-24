@@ -316,6 +316,39 @@ chaînes de caractères::
 Ce qui est au-dessus montre comment vous pouvez appeler le shell schema pour un
 plugin à partir du shell de votre plugin.
 
+Passer des paramètres supplémentaires au Shell appelé
+-----------------------------------------------------
+
+.. versionadded:: 3.1
+
+Il peut parfois être utile de passer des paramètres supplémentaires (qui ne
+seraient pas des arguments du Shell) aux Shells appelés.
+Pour ce faire, vous pouvez maintenant passer un tableau à ``dispatchShell()``.
+Le tableau devra avoir une clé ``command`` ainsi qu'une clé ``extra``::
+
+    // En passant la commande via une chaîne
+    $this->dispatchShell([
+       'command' => 'schema create Blog --plugin Blog'
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+    // En passant la commande via un tableau
+    $this->dispatchShell([
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+Les paramètres ajoutés via ``extra`` seront fusionnés dans la propriété
+``Shell::$params`` et accessibles via la méthode ``Shell::param()``.
+Par défaut, un paramètre supplémentaire ``requested`` est automatiquement
+ajouté quand un Shell est appelé via ``dispatchShell()``. Ce paramètre
+empêche la console de CakePHP d'afficher le message de bienvenue à chaque
+Shell appelé via ``dispatchShell()``.
+
 Récupérer les Entrées de l'Utilisateur
 ======================================
 
