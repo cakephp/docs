@@ -31,7 +31,10 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
     $article->title = 'A New Article';
     $article->body = 'Ceci est le contenu de cet article';
 
-    $articlesTable->save($article);
+    $savedArticle = $articlesTable->save($article);
+
+    // L'$article et l'entity $savedArticle retourné contient maintenant l'id
+    $id = $savedArticle->id;
 
 Mettre à jour des Données
 -------------------------

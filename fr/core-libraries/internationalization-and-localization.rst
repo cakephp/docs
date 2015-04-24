@@ -262,17 +262,17 @@ pourriez avoir les chaines suivantes
 Et dans votre application utilisez le code suivant pour afficher l'une des
 traductions pour une telle chaine::
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
+    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {0} records}}', [0]);
 
     // Retourne "Ningún resultado" puisque l'argument {0} est 0
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [1]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {0} records}}', [1]);
 
     // Retourne "1 resultado" puisque l'argument {0} est 1
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [2, 2]);
+    __('{1,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 2]);
 
-    // Retourne "2 resultados" puisque l'argument {0} est 2
+    // Retourne "2 resultados" puisque l'argument {1} est 2
 
 Regarder de plus près le format que nous avons juste utilisé, rendra évident
 la méthode de construction des messages::
