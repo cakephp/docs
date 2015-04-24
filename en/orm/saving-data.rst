@@ -600,6 +600,20 @@ a validation rule::
 
     }
 
+You can also use closures for validation rules::
+
+    $validator->add('name', 'myRule', [
+        'rule' => function ($data, $provider) {
+            if ($data > 1) {
+                return true;
+            }
+            return 'Not a good value.';
+        }
+    ]);
+
+Validation methods can return error messages when they fail. This is a simple
+way to make error messages dynamic based on the provided value.
+
 Avoiding Property Mass Assignment Attacks
 -----------------------------------------
 
