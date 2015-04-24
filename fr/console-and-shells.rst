@@ -443,7 +443,7 @@ supprimera les tags si vous êtes sur une console qui ne supporte pas les
 codes ansi. Il y a plusieurs styles intégrés, et vous pouvez en créer plus.
 Ceux intégrés sont::
 
-* ``error`` Messages d'Erreur. Texte rouge souligné.
+* ``error`` Messages d'Erreur. Texte rouge.
 * ``warning`` Messages d'avertissement. Texte jaune.
 * ``info`` Messages d'informations. Texte cyan.
 * ``comment`` Texte supplémentaire. Texte bleu.
