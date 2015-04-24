@@ -108,7 +108,7 @@ the resulting items when iterated.
 
 .. php:method:: extract($matcher)
 
-One of the most common uses for a ``map()`` function is to extract a single
+One of the most common uses for a ``extract()`` function is to extract a single
 column from a collection. If you are looking to build a list of elements
 containing the values for a particular property, you can use the ``extract()``
 method::
