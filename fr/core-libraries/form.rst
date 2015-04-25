@@ -132,7 +132,7 @@ Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
                 }
             }
 
-            if ($this->request->is('get') {
+            if ($this->request->is('get')) {
                 //Values from the User Model e.g.
                 $this->request->data['name'] = 'John Doe';
                 $this->request->data['email'] = 'john.doe@example.com';
