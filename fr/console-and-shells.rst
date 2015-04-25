@@ -413,7 +413,7 @@ Enlever la coloration
 Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous
 voulez l'arrêter, ou forcer à l'avoir::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
