@@ -626,6 +626,21 @@ l'utiliser comme une règle de validation::
 
     }
 
+Vous pouvez également utiliser des closures en tant que règle de validation::
+
+    $validator->add('name', 'myRule', [
+        'rule' => function ($data, $provider) {
+            if ($data > 1) {
+                return true;
+            }
+            return 'Valeur incorrecte.';
+        }
+    ]);
+
+Les méthodes de validation peuvent renvoyer des messages lorsqu'elles échouent.
+C'est un moyen simple de créer des messages d'erreur dynamiques basés sur la
+valeur fournie.
+
 Eviter les Attaques d'Assignement en Masse de Propriétés
 --------------------------------------------------------
 
