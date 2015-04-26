@@ -466,15 +466,15 @@ Variables
 ---------
 
 Variable names should be as descriptive as possible, but also as short
-as possible. Normal variables should start with a lowercase letter, and
+as possible. All variables should start with a lowercase letter, and
 should be written in camelBack in case of multiple words. Variables
-referencing objects should start with a capital letter, and in some way
-associate to the class the variable is an object of. Example::
+referencing objects should in some way associate to the class the
+variable is an object of. Example::
 
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
 
-    $Dispatcher = new Dispatcher();
+    $dispatcher = new Dispatcher();
 
 Member Visibility
 -----------------
