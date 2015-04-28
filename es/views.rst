@@ -46,13 +46,13 @@ en este capítulo:
 - **elements**: piezas más pequeñas y reutilizables de código. Los
   elementos son renderizados típicamente en las vistas.
 - **layouts**: archivos de vistas que contienen code de presentación
-que envuelven muchas interfaces de la aplicación. La mayoría de
-vistas son renderizadas dentro de un layout.
+  que envuelven muchas interfaces de la aplicación. La mayoría de
+  vistas son renderizadas dentro de un layout.
 - **helpers**: estas clases encapsulan la logica de las vistas que
-es necesaria en muchos lugares de la capa de vistas. Los helpers en
-CakePHP puede ayudar a construir formularios, funcionalidad de AJAX,
-paginar datos de lso modelos, o proveer transmisiones de RSS, entre
-otros.
+  es necesaria en muchos lugares de la capa de vistas. Los helpers en
+  CakePHP puede ayudar a construir formularios, funcionalidad de AJAX,
+  paginar datos de lso modelos, o proveer transmisiones de RSS, entre
+  otros.
 
 .. _extending-views:
 
@@ -220,7 +220,8 @@ desplegará de forma segura, retornando '' si el bloque no existe::
 
     echo $this->fetch('sidebar');
 
-``fetch()`` también puede ser usado para desplegar condicionalmente ontenido que debe envolver un bloque si este existe. Esto es útil en layouts o vistas
+``fetch()`` también puede ser usado para desplegar condicionalmente contenido
+que debe envolver un bloque si este existe. Esto es útil en layouts o vistas
 extendidas donde quieras mostrar condicionalmente encabezados u otro markup:
 
 .. code-block:: php
@@ -362,7 +363,7 @@ variable en tu controlador o vista.
 
 .. note::
 
-    La variable ``$title_for_layout`` estará deperciada a partir de
+    La variable ``$title_for_layout`` estará depreciada a partir de
     la versión 2.5, usa ``$this->fetch('title')`` en tu layout y
     ``$this->assign('title', 'page title')`` en su lugar.
 
@@ -449,7 +450,7 @@ de la vista::
 Pasar variables a un elemento
 ---------------------------------
 
-Puedes pasar datos a un elemento a través del segundo arumento
+Puedes pasar datos a un elemento a través del segundo argumento
 del elemento::
 
     echo $this->element('helpbox', array(
@@ -597,7 +598,7 @@ plugin, buscará en el directorio principal APP::
     echo $this->element('Contacts.helpbox');
 
 Si tu vista es parte de un plugin, puedes omitir el nombre del plugin.
-Por ejemplo, si estás en ``ContactsController` del plugin de Conctacts::
+Por ejemplo, si estás en ``ContactsController`` del plugin de Contacts::
 
     echo $this->element('helpbox');
     // y
