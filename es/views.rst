@@ -424,14 +424,393 @@ desde el plugin Contacts::
 
 .. _view-elements:
 
-.. note::
-    La documentación no es compatible actualmente con el idioma español en esta página.
+Elementos
+=========
 
-    Por favor, siéntase libre de enviarnos un pull request en
-    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
+Muchas aplicaciones tienen pequeños bloques de código de presentación
+que necesitan repetirse en varias páginas, a veces en distintos
+lugares en el layout. CakePHP puede ayudarte a repetir las partes
+de tu sitio web que necesitan reutilizarse. Estas partes reutilizables
+son llamadas Elementos (Elements). Espacios publicitarios, de ayuda,
+controles de navegación, menus adicionales, formularios de inicio
+de sesión son generalmente implementados como elementos en CakePHP.
+Un elemento es una vista miniatura que puede ser incluída en otras
+vistas, en layouts o incluso otros elementos. Los elementos pueden
+ser usados para hacer una vista más legible, colocando la renderización
+de los elementos que se repiten en su propio archivo. También pueden
+ayudarte a reutilizar fragmentos de contenido en tu aplicación.
 
-    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
-    para obtener información sobre el tema de esta página.
+Los elementos viven en el directorio ``/app/View/Elements``, y tienen
+la extension .ctp. Son desplegados utilizando el método de elementos
+de la vista::
+
+    echo $this->element('helpbox');
+
+Pasar variables a un elemento
+---------------------------------
+
+Puedes pasar datos a un elemento a través del segundo arumento
+del elemento::
+
+    echo $this->element('helpbox', array(
+        "helptext" => "Oh, this text is very helpful."
+    ));
+
+Dentro del archivo del elemento estarán todas variables pasadas como
+miembros del arreglo de parametros (de la misma forma que
+:php:meth`Controller::set()` funciona en el controlador con los archivos
+de vistas). En el ejemplo anterior el archivo ``/app/View/Elements/helpbox.ctp``
+puede usar la variable ``$helptext`` variable::
+
+    // dentro de app/View/Elements/helpbox.ctp
+    echo $helptext; //despliega "Oh, this text is very helpful."
+
+El método :php:meth:`View:element()` también soporta opciones para el elemento.
+Las opciones suportadas son 'cache' y 'callbacks'. Un ejemplo::
+
+    echo $this->element('helpbox', array(
+            "helptext" => "This is passed to the element as $helptext",
+            "foobar" => "This is passed to the element as $foobar",
+        ),
+        array(
+            // usa la configuración de cache "long_view"
+            "cache" => "long_view",
+            // puesto en true para hacer llamadas a before/afterRender del elemento
+            "callbacks" => true
+        )
+    );
+
+El almacenamiento de los elementos es facilitado por la clase
+:php:class:`Cache`. Se puede configurar que los elementos se almacenen
+en cualquier Cache que se haya configurado. Esto te da una gran
+flexibilidad para decidir dónde y por cuánto tiempo se almacenan los
+elementos. Para almacenar distintas versiones del mismo elemento en
+una aplicación debes proveer una llave única de cache usando el siguiente
+formato::
+
+    $this->element('helpbox', array(), array(
+            "cache" => array('config' => 'short', 'key' => 'valor único')
+        )
+    );
+
+Puedes tomar completa ventaja de los elementos al usar
+``requestAction()``, el cual obtiene las variables de la
+vista desde una acción de controlador y las retorna como
+un arreglo. Esto le permite a tus elementos operar en la
+forma pura del estilo MVC. Crea una acción de controlador
+que prepare las variables de vista para tus elementos, luego
+llama ``requestAction()`` dentro del segundo parametro de
+``element()`` para alimentar al elemento las variables de
+vista desde tu controlador.
+
+Para hacer esto, en tu controlador, agrega algo similar a
+lo siguiente para el ejemplo de Post::
+
+    class PostsController extends AppController {
+        // ...
+        public function index() {
+            $posts = $this->paginate();
+            if ($this->request->is('requested')) {
+                return $posts;
+            }
+            $this->set('posts', $posts);
+        }
+    }
+
+Y después en el elemento podemos acceder al modelo de publicaciones
+paginado. Para obtener las últimas 5 publicaciones en una lista
+ordenada tendríamos que hacer algo similar a lo siguiente:
+
+.. code-block:: php
+
+    <h2>Latest Posts</h2>
+    <?php
+      $posts = $this->requestAction(
+        'posts/index/sort:created/direction:asc/limit:5'
+      );
+    ?>
+    <ol>
+    <?php foreach ($posts as $post): ?>
+          <li><?php echo $post['Post']['title']; ?></li>
+    <?php endforeach; ?>
+    </ol>
+
+Almacenar elementos
+-------------------
+
+Puedes tomar ventaja de el almacenamiento del almacenamiento de
+vistas de CakePHP si provees un parametro de cache. Si se le
+asigna true almacenará el elemento en el cache 'default'
+(predeterminado) de la configuración. De lo contrario puedes
+configurar cuál cache deberá usarse en la configuración. Ver
+:doc:`/core-libraries/caching` para más información de cómo
+configurar la clase :php:class:`Cache`. Un ejemplo simple de
+almacenamiento un elemento sería así::
+
+    echo $this->element('helpbox', array(), array('cache' => true));
+
+Si renderizas un mismo elemento más de una vez en una vista y tienes
+activado el almacenamiento, asegurate de asignarle a 'key' un valor
+diferente cada vez. Esto prevendrá que cada llamada sobreescriba
+el resultado anterior de las llamadas anteriores de element(). Por
+ejemplo::
+
+    echo $this->element(
+        'helpbox',
+        array('var' => $var),
+        array('cache' => array('key' => 'primer_uso', 'config' => 'view_long')
+    );
+
+    echo $this->element(
+        'helpbox',
+        array('var' => $varDiferente),
+        array('cache' => array('key' => 'segundo_uso', 'config' => 'view_long')
+    );
+
+Lo de arriba asegurará que los elementos se almacenen por separado. Si
+quieres que todo almacenamiento use la misma configuración, puedes evitar
+un poco de repetición usando :php:attr:`View::$elementCache` a la
+configuración de cache que quieres usar. CakePHP usará esta configuración
+cuando no se provea una.
+
+Solicitar elementos de un plugin
+--------------------------------
+
+2.0
+---
+
+Para cargar un elemento de un plugin, usa la opción de `plugin` (movida fuera
+la opción de `data` en la versión 1.x)::
+
+    echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
+
+2.1
+---
+
+Si estás usando algún plugin y deseas usar elementos dentro del plugin
+simplemente utiliza :term:`plugin syntax`. Si la vista está siendo
+renderizada por un controlador o acción de plugin, el nombre del plugin
+será antepuesto automáticamente a todos los elementos usados, a menos que
+otro nombre de un plugin esté presente. Si el elemento no existe en el
+plugin, buscará en el directorio principal APP::
+
+    echo $this->element('Contacts.helpbox');
+
+Si tu vista es parte de un plugin, puedes omitir el nombre del plugin.
+Por ejemplo, si estás en ``ContactsController` del plugin de Conctacts::
+
+    echo $this->element('helpbox');
+    // y
+    echo $this->element('Contacts.helpbox');
+
+son equivalentes y resultarán en que el mismo elemento cargue.
+
+.. versionchanged:: 2.1
+    La opción ``$options[plugin]`` fue depreciada y soporte para
+    ``Plugin.element`` fue añadida.
+
+
+Crear tus propias clases de vistas
+==================================
+
+Puede que necesites crear clases personalizadas para activar nuevos
+tipos de datos o agregar lógica de renderización adicional a tu
+aplicación. Como la mayoría de componentes de CakePHP, las clases
+de vista tienen un par de estándares:
+
+* Archivos de clases de vistas deben estar en ``App/View``. Por ejemplo:
+  ``App/View/PdfView.php``
+* Las clases deben tener el sufijo ``View``. Por ejemplo: ``PdfView``.
+* Al hacer referencia a una vista, se debe omitir el sufijo ``View```. Por
+  ejemplo: ``$this->viewClass = 'Pdf';``.
+
+También deberás extender ``View`` para asegurar que las cosas funcionen bien::
+
+    // en App/View/PdfView.php
+
+    App::uses('View', 'View');
+    class PdfView extends View {
+        public function render($view = null, $layout = null) {
+            // lógica personalizada aquí.
+        }
+    }
+
+Reemplazar el método de renderizado te deja control total sobre cómo se
+renderiza el contenido.
+
+API de Vistas
+=============
+
+.. php:class:: View
+
+Los métodos de vistas son accesibles en todos los archivos de vistas,
+elementos y layouts. Para llamar a cualquier método usa ``$this->method()``
+
+.. php:method:: set(string $var, mixed $value)
+
+    Las vistas tienen un método ``set()`` que es análogo al ``set()``
+    de los objetos "Controller". Usar set() desde el archivo de vista
+    agregará variables al layout y elementos que serán renderizados
+    después. Ver :ref:`controller-methods` para más información de
+    cómo usar set().
+
+    En tu archivo de vista puedes hacer::
+
+        $this->set('activeMenuButton', 'posts');
+
+    Luego, en tu layout, la variable ``$activeMenuButton`` estará
+    disponible y contendrá el valor 'posts'.
+
+.. php:method:: get(string $var, $default = null)
+
+    Obtiene el valor de la viewVar con el nombre ``$var``.
+
+    A partir de la versión 2.5 se puede proveer un valor predetermiando
+    en caso de que la variable no tenga un valor asignado.
+
+    .. versionchanged:: 2.5
+        El argumento ``$default`` fue agregado en la versión 2.5.
+
+.. php:method:: getVar(string $var)
+
+    Obtiene el valor de la viewVar con el nombre ``$var``.
+
+    .. deprecated:: 2.3
+        Usa :php:meth:`View::get()` en su lugar.
+
+.. php:method:: getVars()
+
+    Obtiene una lista de todas las variables de vista en el alcance
+    actual de renderizado. Retorna un arreglo de nombres de variables.
+
+.. php:method:: element(string $elementPath, array $data, array $options = array())
+
+    Renderiza un elemento o vista parcial. Ver la sección de
+    :ref:`view-elements` para más información y ejemplos.
+
+.. php:method:: uuid(string $object, mixed $url)
+
+    Genera un ID de DOM no aleatorio para un objeto basándose en el
+    tipo de objeto y URL. Este método es regularmente usado por helpers
+    que necesitan generar IDs de DOM para elementos como la clase
+    :php:class`JsHelper`::
+
+        $uuid = $this->uuid(
+          'form',
+          array('controller' => 'posts', 'action' => 'index')
+        );
+        //$uuid contiene 'form0425fe3bad'
+
+.. php:method:: addScript(string $name, string $content)
+
+    Agrega contenido al búfer interno de scripts. Este búfer está
+    disponible en el layout como ``$scripts_for_layout``. Este método
+    es útil cuando se crean helpers que necesiten agregarle javascript
+    or CSS directamente al layout. No olvides que los scripts agregados
+    desde el layout y elementos en el layout no serán añadidos a
+    ``$scripts_for_layout``. Este método es usado generalmente desde
+    helpers, como :doc:`/core-libraries/helpers/js` y
+    :doc:`/core-libraries/helpers/html`.
+
+    .. deprecated:: 2.1
+        Usar :ref:`view-blocks` en su lugar.
+
+.. php:method:: blocks
+
+    Coloca los nombres de todos los bloques definidos en un arreglo.
+
+.. php:method:: start($name)
+
+    Empezar la captura de un bloque para un bloque de vista. Ver la
+    sección de :ref:`view-blocks` para más detalles y ejemplos.
+
+    .. versionadded:: 2.1
+
+.. php:method:: end
+
+    Terminar el bloque más recientemente abierto. Ver la sección
+    de :ref:`view-blocks` para más detalles y ejemplos.
+
+    .. versionadded:: 2.1
+
+.. php:method:: append($name, $content)
+
+    Añadir al final de bloques con ``$name``. Ver la sección de
+    :ref:`view-blocks` para más detalles y ejemplos.
+
+    .. versionadded:: 2.1
+
+.. php:method:: prepend($name, $content)
+
+    Anteponer a bloques con ``$name``. Ver la sección de
+    :ref:`view-blocks` para más detalles y ejemplos.
+
+    .. versionadded:: 2.3
+
+.. php:method:: startIfEmpty($name)
+
+    Empezar un bloque si está vacío. Todo el contenido del
+    bloque será capturado y descartado si el bloque ya estaba
+    definido.
+
+    .. versionadded:: 2.3
+
+.. php:method:: assign($name, $content)
+
+    Asignar el valor a un bloque. Esto sobreescribirá cualquier contenido
+    existente. Ver la sección de :ref:`view-blocks` para más detalles
+    y ejemplos.
+
+    .. versionadded:: 2.1
+
+.. php:method:: fetch($name, $default = '')
+
+    Obtener el valor de un bloque. Si un bloque está vacío o no definido,
+    se retornará ''. Ver la sección de :ref:`view-blocks` para más detalles
+    y ejemplos.
+
+    .. versionadded:: 2.1
+
+.. php:method:: extend($name)
+
+    Extender la vista, elemento o layout actual con la vista con este nombre.
+    Ver la sección de :ref:`extending-views` para más detalles y ejemplos.
+
+    .. versionadded:: 2.1
+
+.. php:attr:: layout
+
+    Asignar el layout que envolverá a la vista actual.
+
+.. php:attr:: elementCache
+
+    La configuración que se usa para almacenar elementos. Darle
+    valor a esta propiedad cambiará el comportamiento predeterminado
+    usado para almacenar elementos. Lo predeterminado puede ser
+    modificado usando la opción 'cache' en el método del elemento.
+
+.. php:attr:: request
+
+    Una instancia de :php:class:`CakeRequest`. Usa esta instancia para
+    acceder información acerca de la solicitud (request) actual.
+
+.. php:attr:: output
+
+    Contiene el último contenido renderizado de una vista, ya sea el
+    archivo de vista o el contenido del layout.
+
+    .. deprecated:: 2.1
+        Usa ``$view->Blocks->get('content');`` en su lugar.
+
+.. php:attr:: Blocks
+
+    Una instancia de :php:class:`ViewBlock`. Usado para proporcionar la
+    funcionalidad de bloque de vista en el renderizado de vista.
+
+    .. versionadded:: 2.1
+
+Más acerca de vistas
+====================
 
 .. toctree::
     :maxdepth: 1
@@ -440,6 +819,7 @@ desde el plugin Contacts::
     views/media-view
     views/json-and-xml-views
     views/helpers
+
 
 .. meta::
     :title lang=es: Views
