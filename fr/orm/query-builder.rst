@@ -197,7 +197,7 @@ requête n'est pas exécutée jusqu'à ce qu'une des prochaines actions se fasse
   résultats et peut seulement être utilisée avec les instructions ``SELECT``.
 - La méthode ``toArray()`` de query est appelée.
 
-Jusqu'à ce qu'une de ces conditions ne soient rencontrées, la requête peut être
+Jusqu'à ce qu'une de ces conditions soit rencontrée, la requête peut être
 modifiée avec du SQL supplémentaire envoyé à la base de données. Cela signifie
 que si une Query n'a pas été évaluée, aucun SQL ne sera jamais envoyé à la
 base de données. Une fois exécutée, la modification et la ré-évaluation
