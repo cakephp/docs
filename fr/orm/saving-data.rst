@@ -79,7 +79,7 @@ enregistrements pour les associations::
     $firstComment->body = 'Un super article';
 
     $secondComment = $articlesTable->Comments->newEntity();
-    $secondComment = 'J aime lire ceci!';
+    $secondComment->body = 'J aime lire ceci!';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag2 = $articlesTable->Tags->newEntity();
