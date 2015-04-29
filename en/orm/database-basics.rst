@@ -202,8 +202,7 @@ ssl_ca
     The file path to the SSL certificate authority. (Only supported by MySQL).
 init
     A list of queries that should be sent to the database server as
-    when the connection is created. This option is only
-    supported by MySQL, PostgreSQL, and SQL Server at this time.
+    when the connection is created.
 log
     Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
