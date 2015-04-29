@@ -113,7 +113,7 @@ pouvez appliquer plusieurs méthodes d'extractions ou de traversement.
 Souvent, il n'y a pas besoin d'appeler ``all()``, vous pouvez juste itérer
 l'objet Query pour récupérer ses résultats. les objets Query peuvent également
 être utilisés directement en tant qu'objet résultat; Essayer d'itérer la requête
-en utilisant ``toArray()``ou n'importe qu'elle méthode héritée de
+en utilisant ``toArray()`` ou n'importe qu'elle méthode héritée de
 :ref:`Collection <collection-objects>`, aura pour résultat l'exécution de la
 requête et la récupération des résultats.
 

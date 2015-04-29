@@ -80,7 +80,7 @@ soient exécutés en-dehors du répertoire webroot.
 
 .. _symlink-assets:
 
-Améliorer les performances de votre application
+Améliorer les Performances de votre Application
 ===============================================
 
 Le chargement des classes peut facilement prendre une bonne part du temps
@@ -90,12 +90,23 @@ que l'application est déployée::
 
     php composer.phar dumpautoload -o
 
-Comme la gestion des éléments statiques, comme les images, le Javascript et
-les fichiers CSS des plugins à travers le Dispatcher est incroyablement
-inefficace, il est chaudement recommandé de les symlinker pour la
-production. Par exemple comme ceci::
+Étant donné que la gestion des éléments statiques, comme les images, le
+Javascript et les fichiers CSS des plugins à travers le ``Dispatcher`` est
+incroyablement inefficace, il est chaudement recommandé d'utiliser les liens
+symboliques pour la production. Ceci peut être fait facilement en utilisant
+le shell ``plugin``::
 
-    ln -s plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+    bin/cake plugin assets symlink
+
+La commande ci-dessus va faire un lien symbolique du répertoire ``webroot``
+de tous les plugins chargés vers les chemins appropriés dans le répertoire
+``webroot`` de l'application.
+
+Si votre système de fichier ne permet pas de créer des liens symboliques, les
+répertoires seront copiés à la place des liens symboliques. Vous pouvez aussi
+explicitement copier les répertoires en utilisant::
+
+    bin/cake plugin assets copy
 
 .. meta::
     :title lang=fr: Déploiement

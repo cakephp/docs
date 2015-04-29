@@ -157,43 +157,41 @@ avec ``MyPlugin.PluginSessionHandler``.
 Les Sessions de la Base de Données
 ----------------------------------
 
-Les changements dans la configuration de session changent la façon dont vous
-définissez les sessions de base de données.
-La plupart du temps, vous aurez seulement besoin de définir
-``Session.handler.model`` dans votre configuration ainsi que
-choisir la base de données par défaut::
+Si vous devez utiliser une base de données pour stocker vos données de session,
+configurez comme suit::
 
-    Configure::write('Session', [
-        'defaults' => 'database',
-        'handler' => [
-            'model' => 'CustomSessions'
-        ]
-    ]);
-
-Le code ci-dessus va dire à Session d'utiliser le 'database' intégré
-par défaut, et spécifier qu'un model appelé ``CustomSession`` sera celui
-délégué pour la sauvegarde d'information de session dans la base de données.
-
-Si vous n'avez pas besoin d'un gestionnaire de session complètement
-personnalisable, mais que vous avez tout de même besoin de stockage de session
-en base de données, vous pouvez simplifier le code précédent comme ceci::
-
-    Configure::write('Session', [
+    'Session' => [
         'defaults' => 'database'
-    ]);
+    ]
 
-Cette configuration nécessitera qu'une table de base de données soit ajoutée
-avec au moins ces champs::
+Cette configuration nécessitera l'ajout d'une table de base de données avec au
+moins ces champs::
 
     CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
-      `data` text,
+      `data` VARBINARY, -- or BYTEA for postgres
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
 
 Vous pouvez trouver une copie du schéma pour la table de sessions dans le
 squelette d'application.
+
+Vous pouvez utiliser votre propre classe ``Table`` pour gérer la sauvegarde des
+sessions::
+
+    'Session' => [
+        'defaults' => 'database',
+        'handler' => [
+            'engine' => 'Database',
+            'model' => 'CustomSessions'
+        ]
+    ]
+
+Le code ci-dessus va dire à Session d'utiliser la base de donnée 'database'
+intégrée par défaut, et spécifier qu'un model appelé ``CustomSession`` sera
+celui délégué pour la sauvegarde d'information de session dans la base de
+données.
 
 Les Sessions de Cache
 ---------------------

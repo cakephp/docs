@@ -28,7 +28,7 @@ customize the rules used::
 
 .. note::
 
-    ``pluralize()`` may not always correctly convert a noun that is already in it's plural form.
+    ``pluralize()`` may not always correctly convert a noun that is already in its plural form.
 
 .. code-block:: php
 
@@ -37,7 +37,7 @@ customize the rules used::
     
 .. note::
 
-    ``singularize()`` may not always correctly convert a noun that is already in it's singular form.
+    ``singularize()`` may not always correctly convert a noun that is already in its singular form.
 
 Creating CamelCase and under_scored Forms
 =========================================

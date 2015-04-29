@@ -220,8 +220,7 @@ ssl_ca
     seulement par MySQL).
 init
     Une liste de requêtes qui doivent être envoyées au serveur de la base de
-    données lorsque la connexion est créée. Cette option est seulement
-    supportée par MySQL, PostgreSQL, et SQL Server pour le moment.
+    données lorsque la connexion est créée.
 log
     Défini à ``true`` pour activer les logs des requêtes. Si activé,
     les requêtes seront écrites au niveau ``debug`` avec le scope

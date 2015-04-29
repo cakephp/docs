@@ -109,7 +109,7 @@ and traversing methods on.
 
 Often, there is no need to call ``all()``, you can simply iterate the
 Query object to get its results. Query objects can also be used directly as the
-result object; trying to iterate the query, calling ``toArray`` or some of the
+result object; trying to iterate the query, calling ``toArray()`` or some of the
 methods inherited from :ref:`Collection <collection-objects>`, will result in the
 query being executed and results returned to you.
 

@@ -124,7 +124,7 @@ the values using ``$this->request->data``, like in all other forms created by th
                 }
             }
             
-            if ($this->request->is('get') {
+            if ($this->request->is('get')) {
                 //Values from the User Model e.g.
                 $this->request->data['name'] = 'John Doe';
                 $this->request->data['email'] = 'john.doe@example.com';

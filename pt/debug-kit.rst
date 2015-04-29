@@ -13,7 +13,7 @@ você o removeu e gostaria de reinstalá-lo, você pode fazê-lo ao executar o
 seguinte comando a partir do diretório raiz da aplicação (onde o arquivo
 composer.json está localizado)::
 
-    php composer.phar require cakephp/debug_kit "3.0.*-dev"
+    php composer.phar require --dev cakephp/debug_kit "~3.0"
 
 Armazenamento do DebugKit
 =========================

@@ -30,7 +30,10 @@ passing it to the ``save()`` method in the ``Table`` class::
     $article->title = 'A New Article';
     $article->body = 'This is the body of the article';
 
-    $articlesTable->save($article);
+    $savedArticle = $articlesTable->save($article);
+
+    // Both $article and the returned $savedArticle entity contain the id now
+    $id = $savedArticle->id;
 
 Updating Data
 -------------
@@ -72,7 +75,7 @@ The ``save()`` method is also able to create new records for associations::
     $firstComment->body = 'This is a great article';
 
     $secondComment = $articlesTable->Comments->newEntity();
-    $secondComment = 'I like reading this!';
+    $secondComment->body = 'I like reading this!';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag2 = $articlesTable->Tags->newEntity();
@@ -374,7 +377,7 @@ important note should be made.
 
 .. note::
 
-    For belongsToMany associations, ensure the relevant entity has 
+    For belongsToMany associations, ensure the relevant entity has
     a property accessible for the associated entity.
     
     
@@ -597,6 +600,20 @@ a validation rule::
 
     }
 
+You can also use closures for validation rules::
+
+    $validator->add('name', 'myRule', [
+        'rule' => function ($data, $provider) {
+            if ($data > 1) {
+                return true;
+            }
+            return 'Not a good value.';
+        }
+    ]);
+
+Validation methods can return error messages when they fail. This is a simple
+way to make error messages dynamic based on the provided value.
+
 Avoiding Property Mass Assignment Attacks
 -----------------------------------------
 
@@ -641,7 +658,7 @@ can access and you want to let your users edit different data based on their
 privileges.
 
 The ``fieldList`` options is also accepted by the ``newEntity()``,
-``newEntities()`` and ``patchEntitites()`` methods.
+``newEntities()`` and ``patchEntities()`` methods.
 
 .. _saving-entities:
 
@@ -1106,6 +1123,11 @@ allows you to easily define unique field sets::
 
     // A list of fields
     $rules->add($rules->isUnique(['username', 'account_id']));
+
+When setting rules on foreign key fields it is important to remember, that
+only the fields listed are used in the rule. This means that setting
+``$user->account->id`` will not trigger the above rule.
+
 
 Foreign Key Rules
 -----------------

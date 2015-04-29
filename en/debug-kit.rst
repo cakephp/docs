@@ -12,7 +12,7 @@ you've removed it and want to re-install it, you can do so by running the
 following from your application's ROOT directory (where composer.json file is
 located)::
 
-    php composer.phar require cakephp/debug_kit "3.0.*-dev"
+    php composer.phar require --dev cakephp/debug_kit "~3.0"
 
 DebugKit Storage
 ================

@@ -31,7 +31,10 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
     $article->title = 'A New Article';
     $article->body = 'Ceci est le contenu de cet article';
 
-    $articlesTable->save($article);
+    $savedArticle = $articlesTable->save($article);
+
+    // L'$article et l'entity $savedArticle retourné contient maintenant l'id
+    $id = $savedArticle->id;
 
 Mettre à jour des Données
 -------------------------
@@ -76,7 +79,7 @@ enregistrements pour les associations::
     $firstComment->body = 'Un super article';
 
     $secondComment = $articlesTable->Comments->newEntity();
-    $secondComment = 'J aime lire ceci!';
+    $secondComment->body = 'J aime lire ceci!';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag2 = $articlesTable->Tags->newEntity();
@@ -626,6 +629,21 @@ l'utiliser comme une règle de validation::
 
     }
 
+Vous pouvez également utiliser des closures en tant que règle de validation::
+
+    $validator->add('name', 'myRule', [
+        'rule' => function ($data, $provider) {
+            if ($data > 1) {
+                return true;
+            }
+            return 'Valeur incorrecte.';
+        }
+    ]);
+
+Les méthodes de validation peuvent renvoyer des messages lorsqu'elles échouent.
+C'est un moyen simple de créer des messages d'erreur dynamiques basés sur la
+valeur fournie.
+
 Eviter les Attaques d'Assignement en Masse de Propriétés
 --------------------------------------------------------
 
@@ -673,7 +691,7 @@ auxquelles vos utilisateurs peuvent accéder et que vous voulez laisser vos
 utilisateurs modifier différentes données basées sur leurs privilèges.
 
 L'option ``fieldList`` est aussi acceptée par les méthodes ``newEntity()``,
-``newEntities()`` et ``patchEntitites()``.
+``newEntities()`` et ``patchEntities()``.
 
 .. _saving-entities:
 
@@ -1164,6 +1182,11 @@ unique::
 
     // Une liste de champs
     $rules->add($rules->isUnique(['username', 'account_id']));
+
+Quand vous définissez des règles sur des champs de clé étrangère, il est
+important de se rappeler que seuls les champs listés sont utilisés dans la
+règle. Cela signifie que définir ``$user->account->id`` ne va pas déclencher
+la règle ci-dessus.
 
 Règles des Clés Etrangères
 --------------------------
