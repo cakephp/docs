@@ -75,7 +75,7 @@ The ``save()`` method is also able to create new records for associations::
     $firstComment->body = 'This is a great article';
 
     $secondComment = $articlesTable->Comments->newEntity();
-    $secondComment = 'I like reading this!';
+    $secondComment->body = 'I like reading this!';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag2 = $articlesTable->Tags->newEntity();
