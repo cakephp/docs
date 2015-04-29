@@ -11,7 +11,7 @@ The collection classes provide a set of tools to manipulate arrays or
 ``Traversable`` objects. If you have ever used underscore.js,
 you have an idea of what you can expect from the collection classes.
 
-Collection instances are immutable, modifying a collection will instead generate
+Collection instances are immutable; modifying a collection will instead generate
 a new collection. This makes working with collection objects more predictable as
 operations are side-effect free.
 
@@ -189,7 +189,7 @@ passed callable returns false for one of the elements::
 Sometimes the internal items of a collection will contain arrays or iterators
 with more items. If you wish to flatten the internal structure to iterate once
 over all elements you can use the ``unfold()`` method. It will create a new
-collection that will yield the every single element nested in the collection::
+collection that will yield every single element nested in the collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
@@ -311,7 +311,7 @@ collection::
 
 In the above example, ``$totalPrice`` will be the sum of all single prices
 contained in the collection. Note the second argument for the ``reduce()``
-function, it takes the initial value for the reduce operation you are
+function takes the initial value for the reduce operation you are
 performing::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
@@ -327,13 +327,13 @@ not just the smallest value found::
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
-    echo $yougest->name;
+    echo $youngest->name;
 
 You are also able to express the property to compare by providing a path or a
 callback function::
 
     $collection = new Collection($people);
-    $personYougestChild = $collection->min(function ($person) {
+    $personYoungestChild = $collection->min(function ($person) {
         return $person->child->age;
     });
 
@@ -553,7 +553,7 @@ rendering menus or traversing elements up to certain level in the tree.
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
 The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
-a tree structure back into a linear structure. It takes two parameters, the
+a tree structure back into a linear structure. It takes two parameters; the
 first one is the traversing mode (asc, desc or leaves), and the second one is
 the name of the property containing the children for each element in the
 collection.
@@ -613,7 +613,7 @@ position, use the ``shuffle``::
 
 Withdrawing Elements
 --------------------
-
+i
 .. php:method:: sample(int $size)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
