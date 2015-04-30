@@ -114,10 +114,10 @@ configuration. The built-in configurations are:
 
 The accepted values are:
 
-* - defaults: either 'php', 'database', 'cache' or 'cake' as explained above.
-* - handler: An array containing the handler configuration
-* - ini: A list of php.ini directives to set before the session starts.
-* - timeout: The time in minutes the session should stay active
+* defaults - either 'php', 'database', 'cache' or 'cake' as explained above.
+* handler - An array containing the handler configuration
+* ini - A list of php.ini directives to set before the session starts.
+* timeout - The time in minutes the session should stay active
 
 Session Handlers
 ----------------
