@@ -405,7 +405,7 @@ données associées en lazy loading::
             $comments = TableRegistry::get('Comments');
             return $comments->find('all')
                 ->where(['article_id' => $this->id])
-                ->all();
+                ->toArray();
         }
 
     }

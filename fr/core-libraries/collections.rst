@@ -338,13 +338,13 @@ utilisez juste la fontion ``min()``. Celle-ci va retourner l'élément complet
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
-    echo $yougest->name;
+    echo $youngest->name;
 
 Vous pouvez aussi exprimer la propriété à comparer en fournissant un chemin ou
 une fonction callback::
 
     $collection = new Collection($people);
-    $personYougestChild = $collection->min(function ($person) {
+    $personYoungestChild = $collection->min(function ($person) {
         return $person->child->age;
     });
 
