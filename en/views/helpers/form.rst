@@ -329,6 +329,15 @@ Afterwards, add the following to your view template::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
+To make a select box for a belongsToMany Groups association you can add the
+following to your UsersController::
+
+    $this->set('groups', $this->Users->Groups->find('list'));
+
+Afterwards, add the following to your view template::
+
+    echo $this->Form->input('groups._ids', ['options' => $groups]);
+
 If your model name consists of two or more words, e.g.,
 "UserGroup", when passing the data using set() you should name your
 data in a pluralised and camelCased format as follows::
@@ -1630,6 +1639,13 @@ create the following inputs::
     echo $this->Form->input('tags.0.name');
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
+
+    // Multiple select element for belongsToMany
+    echo $this->Form->input('tags._ids', [
+        'type' => 'select',
+        'multiple' => true,
+        'options' => $tagList,
+    ]);
 
     // Inputs for the joint table (articles_tags)
     echo $this->Form->input('tags.0._joinData.starred');

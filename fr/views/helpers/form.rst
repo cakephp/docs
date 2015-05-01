@@ -351,6 +351,15 @@ Ensuite, ajouter les lignes suivantes à votre template de vue de formulaire::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
+Pour créer un select pour l'association belongsToMany Groups, vous pouvez
+ajouter ce qui suit dans votre UsersController::
+
+    $this->set('groups', $this->Users->Groups->find('list'));
+
+Ensuite, ajouter les lignes suivantes à votre template de vue::
+
+    echo $this->Form->input('groups._ids', ['options' => $groups]);
+
 Si votre nom de model est composé de deux mots ou plus,
 ex. "UserGroup", quand vous passez les données en utilisant set()
 vous devrez nommer vos données dans un format CamelCase
@@ -1688,6 +1697,13 @@ create the following inputs::
     echo $this->Form->input('tags.0.name');
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
+
+    // Multiple select element for belongsToMany
+    echo $this->Form->input('tags._ids', [
+        'type' => 'select',
+        'multiple' => true,
+        'options' => $tagList,
+    ]);
 
     // Inputs for the joint table (articles_tags)
     echo $this->Form->input('tags.0._joinData.starred');
