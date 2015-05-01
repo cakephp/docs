@@ -330,7 +330,7 @@ Afterwards, add the following to your view template::
     echo $this->Form->input('group_id', ['options' => $groups]);
 
 To make a select box for a belongsToMany Groups association you can add the
-following you your UsersController::
+following to your UsersController::
 
     $this->set('groups', $this->Users->Groups->find('list'));
 
