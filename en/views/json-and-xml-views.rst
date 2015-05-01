@@ -139,7 +139,7 @@ view variables with a ``<response>`` node. You can set a custom name for
 this node using the ``_rootNode`` view variable.
 
 The XmlView class supports the ``_xmlOptions`` variable that allows you to
-customize the options used to generate XML, e.g. `tags` vs `attributes`.
+customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
 
 Creating JSON Views
 ===================
