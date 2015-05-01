@@ -506,3 +506,8 @@ Entities are not intended to contain the logic for serializing and
 unserializing complex data coming from the database. Refer to the
 :ref:`saving-complex-types` section to understand how your application can store
 more complex data types like arrays and objects.
+
+.. meta::
+    :title lang=en: Entities
+    :keywords lang=en: entity, entities, single row, individual record
+    
