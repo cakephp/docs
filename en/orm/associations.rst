@@ -405,25 +405,10 @@ given article is often cached to make generating lists of articles more
 efficient. You can use the :doc:`CounterCacheBehavior
 </orm/behaviors/counter-cache>` to cache counts of associated records.
 
-.. note::
-    Beware of conflict when you have the plural name of the associated model in
-    the first model.
-    
-    For example:
-    Countries hasMany Regions
-    Regions belongsTo Country
-    
-    In your database, you decided to keep a integer count of regions in your 
-    countries table with column name `regions`. This column will be in conflict
-    with the associated model when you do your select query. Although it is
-    recommended to rename the column name in such circumstances, if you are 
-    unable to do so, there is an alternative solution:
-    
-    $this->hasMany('CountryRegions', [//Instead of the convention: `Regions`
-        'className' => 'Regions',//Place the Model here instead
-    ]);
-    
-    This way, you will resolve the conflict.
+You should make sure that your database tables do not contain columns that match
+association property names. If for example you have counter fields that conflict
+with association properties, you must either rename the association property, or
+the column name.
 
 BelongsToMany Associations
 ==========================
