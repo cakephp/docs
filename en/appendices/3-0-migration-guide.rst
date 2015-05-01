@@ -835,6 +835,12 @@ JsonView
   variable. This allows you to configure the bit-mask options used when generating
   JSON.
 
+XmlView
+-------
+
+- :php:class:`Cake\\View\\XmlView` now supports the ``_xmlOptions`` view
+  variable. This allows you to configure the options used when generating
+  XML.
 
 View\\Helper
 ============
