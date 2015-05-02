@@ -114,10 +114,18 @@ well.
     .. versionadded:: 2.3
         The ``_rootNode`` feature was added.
 
+    ..  versionadded:: 2.6
+        The XmlView class supports the ``_xmlOptions`` variable that allows you to
+        customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
+
 .. php:class:: JsonView
 
     A view class for generating Json view data. See above for how you can use
     JsonView in your application.
+
+    ..  versionadded:: 2.6
+        JsonView now supports the ``_jsonOptions`` view variable.
+        This allows you to configure the bit-mask options used when generating JSON.
 
 JSONP response
 ==============
