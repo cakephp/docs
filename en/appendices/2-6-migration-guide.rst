@@ -133,6 +133,22 @@ Validation
 View
 ====
 
+JsonView
+--------
+
+- ``JsonView`` now supports the ``_jsonOptions`` view variable.
+  This allows you to configure the bit-mask options used when generating JSON.
+
+XmlView
+-------
+
+- ``XmlView`` now supports the ``_xmlOptions`` view variable.
+  This allows you to configure the options used when generating XML.
+
+
+Helper
+======
+
 HtmlHelper
 ----------
 
