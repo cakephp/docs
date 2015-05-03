@@ -453,9 +453,7 @@ HTML attributes. The following will cover the options specific to
     </div>
 
 * ``$options['error']`` Using this key allows you to override the default model
-  error messages and can be used, for example, to set i18n messages. It has a
-  number of suboptions which control the wrapping element, wrapping element
-  class name, and whether HTML in the error message will be escaped.
+  error messages and can be used, for example, to set i18n messages.
 
   To disable error message output & field classes set the error key to ``false``::
 
@@ -1278,9 +1276,6 @@ Options:
 
 -  'escape' bool Whether or not to HTML escape the contents of the
    error.
--  'wrap' mixed Whether or not the error message should be wrapped
-   in a div. If a string, will be used as the HTML tag to use.
--  'class' string The class name for the error message
 
 .. TODO:: Add examples.
 

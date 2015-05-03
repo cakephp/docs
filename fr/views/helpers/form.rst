@@ -480,9 +480,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
 * ``$options['error']`` Utiliser cette clé vous permettra de transformer
   les messages de model par défaut et de les utiliser, par exemple, pour
-  définir des messages i18n. Elle comporte un nombre de sous-options qui
-  contrôle l'enveloppe de l'élément (wrapping), le nom de classe de l'élément
-  enveloppé, et si le HTML dans le message d'erreur doit être échappé ou non.
+  définir des messages i18n.
 
   Pour désactiver le rendu des messages d'erreurs définissez la clé error
   ``false``::
@@ -1325,10 +1323,6 @@ Options:
 
 -  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
    l'erreur.
--  'wrap' valeur mixte définissant s'il faut ou pas que le message d'erreur
-   soit enveloppé d'une div. Si c'est une chaîne , sera utilisé comme le
-   tag HTML à utiliser.
--  'class' chaine contenant le nom de classe du message d'erreur.
 
 .. TODO:: Add examples.
 
