@@ -523,7 +523,6 @@ In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
 
-
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
@@ -835,7 +834,7 @@ Creating Radio Buttons
 
 Creates a set of radio button inputs.
 
-**Options**
+**Attributes**
 
 * ``value`` - Indicates the value when this radio button is checked.
 * ``label`` - boolean to indicate whether or not labels for widgets should be
@@ -848,6 +847,33 @@ Creates a set of radio button inputs.
 * ``empty`` - Set to ``true`` to create an input with the value '' as the first
   option. When ``true`` the radio label will be 'empty'. Set this option to
   a string to control the label value.
+
+Generally ``$options`` is a simple key => value pair. However, if you need to
+put custom attributes on your radio buttons you can use an expanded format::
+
+    echo $this->Form->radio(
+        'favorite_color',
+        [
+            ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+            ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+            ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+        ]
+    );
+
+    // Will output
+    <input type="hidden" name="favorite_color" value="">
+    <label for="favorite-color-r">
+        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
+        Red
+    </label>
+    <label for="favorite-color-u">
+        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
+        Blue
+    </label>
+    <label for="favorite-color-g">
+        <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
+        Green
+    </label>
 
 Creating Select Pickers
 -----------------------

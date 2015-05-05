@@ -872,7 +872,7 @@ Créer des Boutons Radio
 
 Crée un jeu d'inputs radios.
 
-**Options**
+**Attributes**
 
 * ``value`` - Indique la valeur quand ce bouton radio est coché.
 * ``label`` - booléen pour indiquer si oui ou non les labels pour les widgets
@@ -885,6 +885,33 @@ Crée un jeu d'inputs radios.
 * ``empty`` - Défini à ``true`` pour créer un input avec la valeur '' en
   première option. Quand à ``true``, le label radio sera 'vide'. Définissez
   cette option pour contrôler la valeur du label.
+
+Generally ``$options`` is a simple key => value pair. However, if you need to
+put custom attributes on your radio buttons you can use an expanded format::
+
+    echo $this->Form->radio(
+        'favorite_color',
+        [
+            ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+            ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+            ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+        ]
+    );
+
+    // Will output
+    <input type="hidden" name="favorite_color" value="">
+    <label for="favorite-color-r">
+        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
+        Red
+    </label>
+    <label for="favorite-color-u">
+        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
+        Blue
+    </label>
+    <label for="favorite-color-g">
+        <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
+        Green
+    </label>
 
 Créer des Pickers Select
 ------------------------
