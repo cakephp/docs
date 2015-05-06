@@ -66,7 +66,10 @@ serialize::
 
         public function index()
         {
+            // Set the view vars that have to be serialized.
             $this->set('articles', $this->paginate());
+            
+            // Specify which view vars JsonView should serialize.
             $this->set('_serialize', ['articles']);
         }
     }
@@ -86,7 +89,11 @@ You can also define ``_serialize`` as an array of view variables to combine::
         public function index()
         {
             // Some code that created $articles and $comments
+            
+            // Set the view vars that have to be serialized.
             $this->set(compact('articles', 'comments'));
+            
+            // Specify which view vars JsonView should serialize.
             $this->set('_serialize', ['articles', 'comments']);
         }
     }
