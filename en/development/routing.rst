@@ -872,14 +872,16 @@ older versions of CakePHP.
 You can also use any of the special route elements when generating URLs:
 
 * ``_ext`` Used for :ref:`file-extensions` routing.
-* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
-  is not in the root directory, this can be used to generate URLs that are 'cake relative'.
-  cake relative URLs are required when using requestAction.
-* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
-  to the current scheme.
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If
+  your application is not in the root directory, this can be used to generate
+  URLs that are 'cake relative'.  cake relative URLs are required when using
+  requestAction.
+* ``_scheme``  Set to create links on different schemes like ``webcal`` or
+  ``ftp``. Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_full``  If ``true`` the ``FULL_BASE_URL`` constant will be prepended to
+  generated URLs.
 * ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
   to force http.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
@@ -990,6 +992,31 @@ Is equivalent to the following explicit calls::
     Using the default route class (``Route``) with fallbacks, or any route
     with ``:plugin`` and/or ``:controller`` route elements will result in
     inconsistent URL case.
+
+Creating Persistent URL Parameters
+==================================
+
+You can hook into the URL generation process using URL filter functions.  Filter
+functions are called *before* the URLs are matched against the routes, this
+allows you to prepare URLs before routing.
+
+Callback filter functions should expect the following parameters:
+
+- ``$params`` The URL params being processed.
+- ``$request`` The current request.
+
+The URL filter function should *always* return the params even if unmodified.
+
+URL filters allow you to easily implement features like persistent parameters::
+
+    Router::addUrlFilter(function ($params, $request) {
+        if (isset($request->params['lang']) && !isset($params['lang'])) {
+            $params['lang'] = $request->params['lang'];
+        }
+        return $params;
+    });
+
+Filter functions are applied in the order they are connected.
 
 Handling Named Parameters in URLs
 =================================
