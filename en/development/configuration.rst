@@ -488,6 +488,8 @@ configuration information that the resource named ``$key`` contains.
 Built-in Configuration Engines
 ==============================
 
+.. php:namespace:: Cake\Core\Configure\Engine
+
 PHP Configuration Files
 -----------------------
 
