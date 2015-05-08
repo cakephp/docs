@@ -2,8 +2,9 @@
 ############
 
 CakePHP は素早く簡単にインストールできます。
-最小構成で必要なものは、ウェブサーバと Cake のコピー、それだけです!
-このマニュアルでは主に(最も一般的である) Apache でのセットアップに主眼を置いていますが、 Cake を lighttpd や Microsoft IIS のような様々なウェブサーバで走らせるよう設定することもできます。
+最小構成で必要なものは、ウェブサーバと CakePHP のコピー、それだけです!
+このマニュアルでは主に(最も一般的である) Apache でのセットアップに主眼を置いていますが、
+CakePHP を lighttpd や Microsoft IIS のような様々なウェブサーバで走らせるよう設定することもできます。
 
 
 システム要件
@@ -38,14 +39,15 @@ CakePHPのダウンロード
 CakePHP の最新版を手に入れるには、主に二つの方法があります。
 ウェブサイトからアーカイブ(zip/tar.gz/tar.bz2)としてダウンロードする、あるいは git リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
 
-最新のアーカイブをダウンロードするには、 `http://cakephp.org <http://cakephp.org>`_ のウェブサイトに行き、"Download Now!" という大きなリンクに従って進みます。
+最新のアーカイブをダウンロードするには、 `http://cakephp.org <http://cakephp.org>`_ のウェブサイトに行き、
+"Download" というリンクに従って進みます。
 
 CakePHP の最新のリリースは `GitHub <http://github.com/cakephp/cakephp>`_ でホスティングされています。
 GitHubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
 CakePHPのリリースは `GitHub tags <https://github.com/cakephp/cakephp/tags>`_ で入手できます。
 
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。
-これらは `GitHub`_ からレポジトリを複製することでアクセスすることができます::
+これらは `GitHub`_ からレポジトリを複製することでアクセスすることができます ::
 
     git clone git://github.com/cakephp/cakephp.git
 
@@ -56,31 +58,38 @@ CakePHPのリリースは `GitHub tags <https://github.com/cakephp/cakephp/tags>
 CakePHP は、幾つかの操作のために ``app/tmp`` ディレクトリを使用します。
 モデルのdescriptionや、ビューのキャッシュ、セッション情報などです。
 
-従って、Cakeのインストール時の ``app/tmp`` ディレクトリと、そのサブディレクトリ全てに、WEBサーバーのユーザによる書き込み権限があることを確認してください。
+従って、 CakePHP のインストール時の ``app/tmp`` ディレクトリと、そのサブディレクトリ全てに、ウェブサーバーのユーザによる書き込み権限があることを確認してください。
+
+一般的な課題として、app/tmp ディレクトリとサブディレクトリは、ウェブサーバとコマンドラインユーザの両方で書き込み権限が必要なことがあります。
+UNIXシステム上で ウェブサーバユーザとコマンドラインユーザが異なる場合、パーミッションのプロパティ設定を確保するために、あなたのプロジェクト内で一度だけ以下のコマンドを実行してください。 ::
+
+   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+   setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+   setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
 
 設定
 ====
 
-CakePHPのインストールは、Webサーバのドキュメントルートに放り込むだけの簡単インストールから、好きなだけ複雑かつ柔軟に設定することまでもできます。
+CakePHP のインストールは、ウェブサーバのドキュメントルートに放り込むだけの簡単インストールから、好きなだけ複雑かつ柔軟に設定することまでもできます。
 このセクションでは、CakePHPの３種類の主なインストール方法: 開発、運用、応用について説明します。
 
 -  開発(*Development*): 簡単にはじめることができますが、アプリケーションのURLには、CakePHPをインストールしたディレクトリ名が入ります。
    他の設定と比べるとセキュリティ面はやや弱くなります。
--  運用(*Production*): Webサーバのドキュメントルートを設定できる必要がありますが、URLをクリーンにでき、セキュリティを固くできます。
+-  運用(*Production*): ウェブサーバのドキュメントルートを設定できる必要がありますが、URLをクリーンにでき、セキュリティを固くできます。
 -  応用(*Advanced*): 幾つかの設定により、CakePHPの重要な各ディレクトリをファイルシステムの異なる場所に配置することができるので、
    多くのCakePHPアプリケーションがひとつのCakePHPコアライブラリのフォルダを共有することなどが可能です。
 
 開発(*Development*)
 ===================
 
-開発用のインストールは Cake をセットアップする最も早い方法です。
+開発用のインストールは CakePHP をセットアップする最も早い方法です。
 この例では CakePHP をインストールし、 http://www.example.com/cake\_2\_0/ でアクセスできるようにする方法を説明します。
 ドキュメントルートは ``/var/www/html`` であると仮定します。
 
-Cake のアーカイブを ``/var/www/html`` に展開してください。
+CakePHP のアーカイブを ``/var/www/html`` に展開してください。
 ドキュメントルートに、ダウンロードしたリリースの名前がついたフォルダ(例えば cake\_2.0.0)が取得できます。
 このフォルダを cake\_2\_0 という名前にリネームしてください。
-ファイルシステム上の開発用の設定は次のようになります::
+ファイルシステム上の開発用の設定は次のようになります ::
 
     /var/www/html/
         cake_2_0/
@@ -92,7 +101,7 @@ Cake のアーカイブを ``/var/www/html`` に展開してください。
             index.php
             README
 
-もしウェブサーバが適切に設定されていれば、 http://www.example.com/cake\_2\_0/ で Cake アプリケーションがアクセス可能になっているはずです。
+もしウェブサーバが適切に設定されていれば、 http://www.example.com/cake\_2\_0/ で CakePHP アプリケーションがアクセス可能になっているはずです。
 
 複数のアプリケーションから一つのCakePHPを使用する
 -------------------------------------------------
@@ -101,20 +110,20 @@ Cake のアーカイブを ``/var/www/html`` に展開してください。
 それらがCakePHPのコアファイルを共有するのは理にかなっているといえます。\
 そのようにするには、いくつか方法があります。いちばん簡単なのが、PHPの ``include_path`` を使う方法です。\
 そのためにまずは、CakePHPを適当なディレクトリに複製します。この例では
-``~/projects`` ディレクトリにします。 ::
+``/home/mark/projects`` ディレクトリにします。 ::
 
-    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
+    git clone git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
 
-このコマンドを実行すると、CakePHPのファイルが ``~/projects`` ディレクトリの中に複製されます。\
+このコマンドを実行すると、CakePHP のファイルが ``/home/mark/projects`` ディレクトリの中に複製されます。\
 gitを使用したくない場合は、zip形式でのダウンロードも可能で、残りの手順も同じです。\
 次は、 ``php.ini`` を探して編集する必要があります。\*nix系のシステムならたいていは
 ``/etc/php.ini`` にあります。もしくは ``php -i`` コマンドを実行して 'Loaded Configuration File' を確認してください。\
-iniファイルを見つけたら、 ``include_path`` の設定を変更して ``~/projects/cakephp/lib`` が含まれるようにしてください。\
+ini ファイルを見つけたら、 ``include_path`` の設定を変更して ``/home/mark/projects/cakephp/lib`` が含まれるようにしてください。\
 例としては次のようになります。 ::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
-Webサーバを再起動した後、 ``phpinfo()`` で変更が反映されているのを確認してください。
+ウェブサーバを再起動した後、 ``phpinfo()`` で変更が反映されているのを確認してください。
 
 .. note::
 
@@ -125,14 +134,14 @@ Webサーバを再起動した後、 ``phpinfo()`` で変更が反映されて�
 運用(*Production*)
 ==================
 
-運用向けのインストールは Cake をセットアップするより柔軟な方法です。
+運用向けのインストールは CakePHP をセットアップするより柔軟な方法です。
 この方法を使うと、ドメイン全体を単一の CakePHP アプリケーションのように振舞わせることができます。
-この例では CakePHP を任意のファイルシステムの場所にインストールし、http://www.example.com でアクセスできるようにする方法を説明します。
+この例では CakePHP を任意のファイルシステムの場所にインストールし、 http://www.example.com でアクセスできるようにする方法を説明します。
 このインストールにおいては Apache ウェブサーバの ``DocumentRoot`` の設定を正しいものに変更する必要が出てくるかもしれないことに注意してください。
 
-Cake のアーカイブを好きなディレクトリに展開してください。
-この例において、Cake をインストールすると決めたディレクトリは /cake\_install であると仮定します。
-ファイルシステム上の運用向けの設定は次のようになります::
+CakePHP のアーカイブを好きなディレクトリに展開してください。
+この例において、CakePHP をインストールすると決めたディレクトリは /cake\_install であると仮定します。
+ファイルシステム上の運用向けの設定は次のようになります ::
 
     /cake_install/
         app/
@@ -144,11 +153,11 @@ Cake のアーカイブを好きなディレクトリに展開してください
         index.php
         README
 
-Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディレクティブを次のように設定してください::
+Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディレクティブを次のように設定してください ::
 
     DocumentRoot /cake_install/app/webroot
 
-もしウェブサーバが適切に設定されていれば、 http://www.example.com で Cake アプリケーションがアクセス可能になっているはずです。
+もしウェブサーバが適切に設定されていれば、 http://www.example.com で CakePHP アプリケーションがアクセス可能になっているはずです。
 
 応用インストールと URL リライティング
 =====================================
@@ -163,7 +172,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 ========
 
 それでは、実際に CakePHP を動作させてみましょう。
-セットアップの種類にもよりますが、http://example.com/ または http://example.com/cake\_install/ をブラウザで開いてみましょう。
+セットアップの種類にもよりますが、 http://example.com/ または http://example.com/cake\_2\_0/ をブラウザで開いてみましょう。
 この時点では、CakePHP のデフォルトのホーム画面と、現在のデータベース接続の状態が表示されるはずです。
 
 おめでとうございます!
@@ -171,10 +180,15 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 準備ができました。
 
 動きませんか？
-もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
+もし PHP のタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください ::
 
    /**
     * Uncomment this line and correct your server timezone to fix
     * any date & time related errors.
     */
        date_default_timezone_set('UTC');
+
+
+.. meta::
+    :title lang=ja: インストール
+    :keywords lang=ja: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighttpd,repository,enhancements,source code,cakephp,incorporate
