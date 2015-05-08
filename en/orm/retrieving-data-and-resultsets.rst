@@ -666,6 +666,20 @@ articles quite easily::
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features.
 
+Checking if a Query has no Results
+----------------------------------
+
+You can use the ``isEmpty()`` method on a Query or ResultSet object to see if it
+has any rows in it. Calling ``isEmpty()`` on a Query object will evaluate the
+query::
+
+    // Check a query.
+    $query->isEmpty();
+
+    // Check results
+    $results = $query->all();
+    $results->isEmpty();
+
 .. _map-reduce:
 
 Modifying Results with Map/Reduce
