@@ -562,6 +562,45 @@ vous pouvez utiliser ``autoFields()``::
     $query->select(['id', 'title'])
         ->contain(['Users'])
         ->autoFields(true);
+  
+Parfois vous voudrez restreindre le nombre de données associées retournées par un ``contain``. Ceci causera
+un problème car les restrictions seront appliquées à la ``query`` principale.
+La solution pour faire cela est de détacher le ``fetcher`` à l'extérieur de la requête principale 
+avec l'option ``strategy``.
+De cette manière, vous pourrez appliquer des règles telles que ``limit()`` ou ``order()`` à votre sous-requête::
+
+    // In the example below, we have several translated comments on any articles.
+    // the Comments table could look like as shown:
+    | id | article_id | language_id | comment          |
+    |  1 |          1 |           1 | French comment   |
+    |  2 |          1 |           3 | Spanish comment  |
+    |  3 |          1 |           9 | English comment  |
+    |  4 |          2 |           1 | French comment   |
+    |  5 |          2 |           9 | English comment  |
+    
+    // What we want to do here is to return the comment in Spanish for example if it exists, if no, in English, if no, in French
+    $languageFr_id = 1; 
+    $languageEn_id = 9;
+    $reqLanguage_id = $this->request->datas['reqLanguageId']; // for example
+    
+    $query = $articles->find()->contain([
+        'Comments.strategy' => 'select',
+        'Comments.queryBuilder' => function ($q) use ($reqLanguage_id, $languageFr_id, $languageEn_id) {
+            return $q
+                ->select([
+                    'isGivenLanguage' => $q->newExpr()->eq('language_id', $reqLanguage_id), 
+                    'article_id', 
+                    'language_id', 
+                    'comment',
+                ])
+                 ->where (['language_id IN ' => [$reqLanguage_id, $languageFr_id, $languageEn_id]])
+                ->order(['isGivenLanguage' => 'DESC', 'language_id' => 'DESC'])
+                ->limit(1);
+            },
+    ]);  
+    
+    // If you ask for article_id 2 and language_id 3, you should get 'English comment'.
+    
 
 .. _filtering-by-associated-data:
 
