@@ -533,6 +533,40 @@ load fields off of contained associations, you can use ``autoFields()``::
         ->contain(['Users'])
         ->autoFields(true);
 
+Sometimes you want to restrict the number associated datas returned by a contain. That will cause a problem
+because the rule will be applied to the whole query by the join.
+The solution to do that is to move the fetcher out of the main query calling the option ``strategy``. 
+That way you can apply rules such as ``limit()`` or ``order()``, to the subquery::
+
+    // In the example below, we have several translated comments on any articles.
+    // the Comments table could look like as shown:
+    | id | article_id | language_id | comment          |
+    |  1 |          1 |           1 | French comment   |
+    |  2 |          1 |           3 | Spanish comment  |
+    |  3 |          1 |           9 | English comment  |
+    |  4 |          2 |           1 | French comment   |
+    |  5 |          2 |           9 | English comment  |
+    
+    // What we want to do here is to return the comment in Spanish if it exists, if no, in English, if no, in French
+    $query = $articles->find()->contain([
+        'Comments.strategy' => 'select',
+        'Comments.queryBuilder' => function ($q) use ($reqLanguage_id, $languageFr_id, $languageEn_id) {
+            return $q
+                ->select([
+                    'isGivenLanguage' => $q->newExpr()->eq('language_id', $reqLanguage_id), 
+                    'article_id', 
+                    'language_id', 
+                    'comment',
+                ])
+                 ->where (['language_id IN ' => [$reqLanguage_id, $languageFr_id, $languageEn_id]])
+                ->order(['isGivenLanguage' => 'DESC', 'language_id' => 'DESC'])
+                ->limit(1);
+            },
+    ]);  
+    
+    // If you ask for article_id 2 and language_id 3, you should get 'English comment'.
+    
+
 .. _filtering-by-associated-data:
 
 Filtering by Associated Data
