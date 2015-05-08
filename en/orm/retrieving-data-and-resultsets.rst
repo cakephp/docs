@@ -533,7 +533,7 @@ load fields off of contained associations, you can use ``autoFields()``::
         ->contain(['Users'])
         ->autoFields(true);
 
-Sometimes you want to restrict the number associated datas returned by a contain. That will cause a problem
+Sometimes you want to restrict the number associated data returned by a contain. That will cause a problem
 because the rule will be applied to the whole query by the join.
 The solution to do that is to move the fetcher out of the main query calling the option ``strategy``. 
 That way you can apply rules such as ``limit()`` or ``order()``, to the subquery::
@@ -547,7 +547,11 @@ That way you can apply rules such as ``limit()`` or ``order()``, to the subquery
     |  4 |          2 |           1 | French comment   |
     |  5 |          2 |           9 | English comment  |
     
-    // What we want to do here is to return the comment in Spanish if it exists, if no, in English, if no, in French
+    // What we want to do here is to return the comment in Spanish if it exists, if not, in English, if not, in French
+    $languageFr_id = 1;
+    $languageEn_id = 9;
+    $reqLanguage_id = $this->request->datas['reqLanguageId']; // for example
+
     $query = $articles->find()->contain([
         'Comments.strategy' => 'select',
         'Comments.queryBuilder' => function ($q) use ($reqLanguage_id, $languageFr_id, $languageEn_id) {
