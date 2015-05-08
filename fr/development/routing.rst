@@ -1050,6 +1050,36 @@ Est équivalent à ces appels explicites::
     route avec les éléments ``:plugin`` et/ou ``:controller`` résultera en
     URL incompatibles.
 
+Créer des Paramètres d'URL Persistants
+======================================
+
+En utilisant les fonctions de filtre, vous pouvez vous immiscer dans le process
+de génération d'URL. Les fonctions de filtres sont appelées *avant* que les
+URLs ne soient vérifiées via les routes, cela vous permet donc de préparer les
+URLs avant le routing.
+
+Les fonctions de callback de filtre doivent attendre les paramètres suivants:
+
+- ``$params`` Le paramètre d'URL à traiter.
+- ``$request`` La requête actuelle.
+
+
+La fonction filtre d'URL doit *toujours* retourner les paramètres même s'ils
+n'ont pas été modifiés.
+
+Les filtres d'URL vous permettent d'implémenter facilement des fonctionnalités
+telles que l'utilisation de paramètres d'URL persistants::
+
+    Router::addUrlFilter(function ($params, $request) {
+        if (isset($request->params['lang']) && !isset($params['lang'])) {
+            $params['lang'] = $request->params['lang'];
+        }
+        return $params;
+    });
+
+Le fonctions de filtres sont appliquées dans l'ordre dans lequel elles sont
+connectées.
+
 Gérer les Paramètres Nommés dans les URLs
 =========================================
 
