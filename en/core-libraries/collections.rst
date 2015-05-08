@@ -69,6 +69,7 @@ List of Methods
 * :php:meth:`buffered`
 * :php:meth:`compile`
 * :php:meth:`through`
+* :php:meth:`isEmpty`
 
 Iterating
 =========
@@ -587,6 +588,18 @@ instruct it to only return the leaf elements in the tree::
 
 Other Methods
 =============
+
+.. php:method:: isEmpty()
+
+Allows you to see if a collection contains any elements::
+
+    $collection = new Collection([]);
+    // Returns true
+    $collection->isEmpty();
+
+    $collection = new Collection([1]);
+    // Returns false
+    $collection->isEmpty();
 
 .. php:method:: contains($value)
 
