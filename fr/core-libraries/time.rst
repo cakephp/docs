@@ -206,7 +206,7 @@ Souvent, il est utile d'afficher les temps liés au présent::
 
     $now = new Time('Aug 22, 2011');
     echo $now->timeAgoInWords(
-        ['format' => 'F jS, Y', 'end' => '+1 year']
+        ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 

@@ -519,6 +519,8 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
 Moteurs de Configuration intégrés
 =================================
 
+.. php:namespace:: Cake\Core\Configure\Engine
+
 Fichiers de Configuration PHP
 -----------------------------
 

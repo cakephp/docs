@@ -71,6 +71,7 @@ Liste des Méthodes
 * :php:meth:`buffered`
 * :php:meth:`compile`
 * :php:meth:`through`
+* :php:meth:`isEmpty`
 
 Faire une Itération
 ===================
@@ -613,6 +614,18 @@ Par défaut, l'arbre est traversé de la racine vers les feuilles. Vous pouvez
 
 Autres Méthodes
 ===============
+
+.. php:method:: isEmpty()
+
+Vous permet de voir si une collection contient un élément::
+
+    $collection = new Collection([]);
+    // Returns true
+    $collection->isEmpty();
+
+    $collection = new Collection([1]);
+    // Returns false
+    $collection->isEmpty();
 
 .. php:method:: contains($value)
 

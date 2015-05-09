@@ -67,7 +67,10 @@ caractère, soit un tableau de variables de vue à sérialiser::
 
         public function index()
         {
+            // Défini les variables de vues qui doivent être sérialisées.
             $this->set('articles', $this->paginate());
+
+            // Spécifie quelles variables de vues JsonView doit sérialiser.
             $this->set('_serialize', ['articles']);
         }
     }
@@ -86,7 +89,11 @@ combiner::
         public function index()
         {
             // Some code that created $articles and $comments
+
+            // Défini les variables de vues qui doivent être sérialisées.
             $this->set(compact('articles', 'comments'));
+
+            // Spécifie quelles variables de vues JsonView doit sérialiser.
             $this->set('_serialize', ['articles', 'comments']);
         }
     }
