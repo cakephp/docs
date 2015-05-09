@@ -601,7 +601,7 @@ the finder query for the association, such as ``order()`` or ``limit()``.
 Fore example, imagine you wanted to have the first comment of an article as an
 association::
 
-   $articlesTable->hasOne('FirstComment', [
+   $articles->hasOne('FirstComment', [
         'className' => 'Comments',
         'foreignKey' => 'article_id'
    ]);
@@ -622,11 +622,38 @@ column::
 Dynamically changing the strategy in this way will only apply to a specific
 query. If you want to make the strategy change permanent you can do::
 
-    $articlesTable->FirstComment->strategy('select');
+    $articles->FirstComment->strategy('select');
 
 Using the ``select`` strategy is also a great way of making associations with
 tables in another database, since it would not be possible to fetch records
 using ``joins``.
+
+Fetching With The Subquery Strategy
+-----------------------------------
+
+As your tables grow in since, fetching associations from them can become
+slower, especially if you are querying big batches at once. A good way of
+optimizing association loading for ``hasMany`` and ``belongsToMany``
+associations is using the ``subquery`` strategy::
+
+    $query = $articles->find()->contain([
+        'Comments' => [
+                'strategy' => 'subquery',
+                'queryBuilder' => function ($q) {
+                    return $q->where(['Comments.approved' => true]);
+                }
+        ]
+    ]);
+
+The result will remain the same as with using the default strategy, but this
+can greatly improve the query and fetching time in some databases, in
+particular it will allow to fetch big chunks of data at the same time in
+databases that limit the amount of bound parameters per query, such as
+**Microfost SQL Server**.
+
+You can also make the strategy permanent for the association by doing::
+
+    $articles->Comments->strategy('subquery');
 
 Lazy Loading Associations
 -------------------------

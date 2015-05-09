@@ -562,45 +562,6 @@ vous pouvez utiliser ``autoFields()``::
     $query->select(['id', 'title'])
         ->contain(['Users'])
         ->autoFields(true);
-  
-Parfois vous voudrez restreindre le nombre de données associées retournées par un ``contain``. Ceci causera
-un problème car les restrictions seront appliquées à la ``query`` principale.
-La solution pour faire cela est de détacher le ``fetcher`` à l'extérieur de la requête principale 
-avec l'option ``strategy``.
-De cette manière, vous pourrez appliquer des règles telles que ``limit()`` ou ``order()`` à votre sous-requête::
-
-    // In the example below, we have several translated comments on any articles.
-    // the Comments table could look like as shown:
-    | id | articleId  | languageId  | comment          |
-    |  1 |          1 |           1 | French comment   |
-    |  2 |          1 |           3 | Spanish comment  |
-    |  3 |          1 |           9 | English comment  |
-    |  4 |          2 |           1 | French comment   |
-    |  5 |          2 |           9 | English comment  |
-    
-    // What we want to do here is to return the comment in Spanish for example if it exists, if not, in English, if not, in French
-    $languageFrId = 1; 
-    $languageEnId = 9;
-    $reqLanguageId = $this->request->datas['reqLanguageId']; // for example
-    
-    $query = $articles->find()->contain([
-        'Comments.strategy' => 'select',
-        'Comments.queryBuilder' => function ($q) use ($reqLanguageId, $languageFrId, $languageEnId) {
-            return $q
-                ->select([
-                    'isGivenLanguage' => $q->newExpr()->eq('languageId', $reqLanguageId), 
-                    'articleId', 
-                    'languageId', 
-                    'comment',
-                ])
-                 ->where (['languageId IN ' => [$reqLanguageId, $languageFrId, $languageEnId]])
-                ->order(['isGivenLanguage' => 'DESC', 'languageId' => 'DESC'])
-                ->limit(1);
-            },
-    ]);  
-    
-    // If you ask for articleId 2 and languageId 3, you should get 'English comment'.
-    
 
 .. _filtering-by-associated-data:
 
@@ -661,6 +622,72 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 dans vos résultats.
 
 .. end-contain
+
+Changing Fetching Strategies
+----------------------------
+
+As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
+using a ``JOIN`` in the main finder query. While this improves query and
+fetching speed and allows for creating more expressive conditions when
+retrieving data, this may be a problem when you want to apply certain clauses to
+the finder query for the association, such as ``order()`` or ``limit()``.
+
+Fore example, imagine you wanted to have the first comment of an article as an
+association::
+
+   $articles->hasOne('FirstComment', [
+        'className' => 'Comments',
+        'foreignKey' => 'article_id'
+   ]);
+
+In order to correctly fetch the data from this association, we will need to tell
+the query to use the ``select`` strategy, since we want order by a particular
+column::
+
+    $query = $articles->find()->contain([
+        'FirstComment' => [
+                'strategy' => 'select',
+                'queryBuilder' => function ($q) {
+                    return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
+                }
+        ]
+    ]);
+
+Dynamically changing the strategy in this way will only apply to a specific
+query. If you want to make the strategy change permanent you can do::
+
+    $articles->FirstComment->strategy('select');
+
+Using the ``select`` strategy is also a great way of making associations with
+tables in another database, since it would not be possible to fetch records
+using ``joins``.
+
+Fetching With The Subquery Strategy
+-----------------------------------
+
+As your tables grow in since, fetching associations from them can become
+slower, especially if you are querying big batches at once. A good way of
+optimizing association loading for ``hasMany`` and ``belongsToMany``
+associations is using the ``subquery`` strategy::
+
+    $query = $articles->find()->contain([
+        'Comments' => [
+                'strategy' => 'subquery',
+                'queryBuilder' => function ($q) {
+                    return $q->where(['Comments.approved' => true]);
+                }
+        ]
+    ]);
+
+The result will remain the same as with using the default strategy, but this
+can greatly improve the query and fetching time in some databases, in
+particular it will allow to fetch big chunks of data at the same time in
+databases that limit the amount of bound parameters per query, such as
+**Microfost SQL Server**.
+
+You can also make the strategy permanent for the association by doing::
+
+    $articles->Comments->strategy('subquery');
 
 Lazy loading des Associations
 -----------------------------
