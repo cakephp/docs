@@ -632,7 +632,7 @@ fetching speed and allows for creating more expressive conditions when
 retrieving data, this may be a problem when you want to apply certain clauses to
 the finder query for the association, such as ``order()`` or ``limit()``.
 
-Fore example, imagine you wanted to have the first comment of an article as an
+For example, if you wanted to get the first comment of an article as an
 association::
 
    $articles->hasOne('FirstComment', [
@@ -665,10 +665,10 @@ using ``joins``.
 Fetching With The Subquery Strategy
 -----------------------------------
 
-As your tables grow in since, fetching associations from them can become
+As your tables grow in size, fetching associations from them can become
 slower, especially if you are querying big batches at once. A good way of
 optimizing association loading for ``hasMany`` and ``belongsToMany``
-associations is using the ``subquery`` strategy::
+associations is by using the ``subquery`` strategy::
 
     $query = $articles->find()->contain([
         'Comments' => [
@@ -683,7 +683,7 @@ The result will remain the same as with using the default strategy, but this
 can greatly improve the query and fetching time in some databases, in
 particular it will allow to fetch big chunks of data at the same time in
 databases that limit the amount of bound parameters per query, such as
-**Microfost SQL Server**.
+**Microsoft SQL Server**.
 
 You can also make the strategy permanent for the association by doing::
 
