@@ -68,7 +68,7 @@ caractère, soit un tableau de variables de vue à sérialiser::
         public function index()
         {
             $this->set('articles', $this->paginate());
-            $this->set('_serialize', ['articles']);
+            $this->set('_serialize', 'articles');
         }
     }
 
@@ -97,6 +97,12 @@ automatiquement un élément de top-niveau ``<response>`` en utilisant
 ``_serialize`` et XmlView, assurez-vous que vos variables de vue aient un
 élément unique de top-niveau. Sans un élément de top-niveau, le Xml ne pourra
 être généré.
+
+.. versionadded:: 3.1.0
+
+    Vous pouvez maintenant définir ``_serialized`` à ``true`` pour
+    pour sérialiser toutes les variables de vue au lieu de les spécifier
+    explicitement.
 
 Utilisation d'une Vue de Données avec les Fichiers de Template
 ==============================================================
