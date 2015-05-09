@@ -117,7 +117,7 @@ pouvez utiliser la clé de configuration ``implementedMethods`` pour renommer
 ou exclure les méthodes mixin. Par exemple si nous voulions préfixer notre
 méthode slug(), nous pourrions faire ce qui suit::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedMethods' => [
             'superSlug' => 'slug',
         ]
@@ -226,7 +226,7 @@ la clé de configuration ``implementedFinders`` pour renommer ou exclure les
 méthodes find. Par exemple, si vous vouliez renommer votre méthode
 ``find(slug)``, vous pourriez faire ce qui suit::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]
