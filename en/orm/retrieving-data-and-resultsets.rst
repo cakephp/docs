@@ -533,6 +533,44 @@ load fields off of contained associations, you can use ``autoFields()``::
         ->contain(['Users'])
         ->autoFields(true);
 
+Sometimes you want to restrict the number associated data returned by a contain. That will cause a problem
+because the rule will be applied to the whole query by the join.
+The solution to do that is to move the fetcher out of the main query calling the option ``strategy``. 
+That way you can apply rules such as ``limit()`` or ``order()``, to the subquery::
+
+    // In the example below, we have several translated comments on any articles.
+    // the Comments table could look like as shown:
+    | id | articleId  | languageId  | comment          |
+    |  1 |          1 |           1 | French comment   |
+    |  2 |          1 |           3 | Spanish comment  |
+    |  3 |          1 |           9 | English comment  |
+    |  4 |          2 |           1 | French comment   |
+    |  5 |          2 |           9 | English comment  |
+    
+    // What we want to do here is to return the comment in Spanish if it exists, if not, in English, if not, in French
+    $languageFrId = 1;
+    $languageEnId = 9;
+    $reqLanguageId = $this->request->datas['reqLanguageId']; // for example
+
+    $query = $articles->find()->contain([
+        'Comments.strategy' => 'select',
+        'Comments.queryBuilder' => function ($q) use ($reqLanguageId, $languageFrId, $languageEnId) {
+            return $q
+                ->select([
+                    'isGivenLanguage' => $q->newExpr()->eq('languageId', $reqLanguageId), 
+                    'articleId', 
+                    'languageId', 
+                    'comment',
+                ])
+                 ->where (['languageId IN ' => [$reqLanguageId, $languageFrId, $languageEnId]])
+                ->order(['isGivenLanguage' => 'DESC', 'languageId' => 'DESC'])
+                ->limit(1);
+            },
+    ]);  
+    
+    // If you ask for articleId 2 and languageId 3, you should get 'English comment'.
+    
+
 .. _filtering-by-associated-data:
 
 Filtering by Associated Data
