@@ -1,58 +1,52 @@
 応用インストール
 ################
 
-PEARインストーラでCakePHPをインストール
-=======================================
+PEAR インストーラで CakePHP をインストール
+==========================================
 
-CakePHPはあなたがPEARインストーラを使用してインストールできるようにPEARパッケージを公開しています。
-PEARインストーラでインストールすると、複数のアプリケーションでCakePHPライブラリを共有するのが簡単になります。
-PEARでCakePHPをインストールするには、次の手順を実行する必要があります::
+CakePHP はあなたが PEAR インストーラを使用してインストールできるように PEAR パッケージを公開しています。
+PEAR インストーラでインストールすると、複数のアプリケーションで CakePHP ライブラリを共有するのが簡単になります。
+PEAR で CakePHP をインストールするには、次の手順を実行する必要があります。 ::
 
     pear channel-discover pear.cakephp.org
     pear install cakephp/CakePHP
 
 .. note::
 
-    PEARでCakePHPをインストールするとき、システムによっては ``sudo`` が必要になります。
+    PEAR で CakePHP をインストールするとき、システムによっては ``sudo`` が必要になります。
 
-PEARでCakePHPをインストールした後、PEARが正しく設定されていれば、
+PEAR で CakePHP をインストールした後、PEAR が正しく設定されていれば、
 新しいアプリケーションを作成するために ``cake`` コマンドが使えるようになっています。
-CakePHPはPHPの ``include_path`` 上に配置されるので、とくに他の変更を行う必要はありません。
+CakePHP は PHP の ``include_path`` 上に配置されるので、とくに他の変更を行う必要はありません。
 
+Composer で CakePHP をインストール
+==================================
 
-ComposerでCakePHPをインストール
-===============================
-
-Composerは、PHP 5.3以上向けの依存関係管理ツールです。
-これは、PEARインストーラが抱える問題の多くを解決し、いろんなバージョンのライブラリをシンプルに管理できるようにします。
-CakePHPはPEARパッケージを公開しているので、 `Composer <http://getcomposer.org>`_ を使用してCakePHPをインストールすることができます。
-CakePHPをインストールする前に ``composer.json`` ファイルをセットアップしましょう。
-CakePHPアプリケーションのための composer.json ファイルは次のようになります::
+Composer は、PHP 5.3 以上向けの依存関係管理ツールです。これは、PEAR インストーラが抱える
+問題の多くを解決し、いろんなバージョンのライブラリをシンプルに管理できるようにします。
+`Packagist <https://packagist.org/>`_ は、Composer でインストール可能なパッケージのメインリポジトリです。
+CakePHP は、Packagist 上に公開された時、 `Composer <http://getcomposer.org>`_ を使用してインストールすることができます。
+CakePHP をインストールする前に ``composer.json`` ファイルをセットアップしましょう。
+CakePHP アプリケーションのための composer.json ファイルは次のようになります。 ::
 
     {
         "name": "example-app",
-        "repositories": [
-            {
-                "type": "pear",
-                "url": "http://pear.cakephp.org"
-            }
-        ],
         "require": {
-            "cakephp/cakephp": ">=2.6.*"
+            "cakephp/cakephp": "2.6.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
         }
     }
 
-このJSONを ``composer.json`` としてプロジェクトのルートディレクトリに保存します。
-次に、composer.pharファイルをダウンロードしてきます。
-composerをダウンロードしたら、 CakePHPをインストールしましょう。
-``composer.json`` と同じディレクトリで次のコマンドを実行します::
+この JSON を ``composer.json`` としてプロジェクトの APP ディレクトリに保存します。
+次に、composer.phar ファイルをプロジェクト内にダウンロードしてください。
+Composer をダウンロードしたら、 CakePHP をインストールしましょう。
+``composer.json`` と同じディレクトリで次のコマンドを実行します。 ::
 
     $ php composer.phar install
 
-Composerの実行が終わると、ディレクトリ構造は次のようになっていると思います::
+Composer の実行が終わると、ディレクトリ構造は次のようになっていると思います。 ::
 
     example-app/
         composer.phar
@@ -63,74 +57,75 @@ Composerの実行が終わると、ディレクトリ構造は次のようにな
             composer/
             cakephp/
 
-さあ、アプリケーションのスケルトンの残りの部分を生成する準備ができました::
+さあ、アプリケーションのスケルトンの残りの部分を生成する準備ができました。 ::
 
     $ Vendor/bin/cake bake project <path to project>
 
 デフォルトでは、 ``bake`` は :php:const:`CAKE_CORE_INCLUDE_PATH` をハードコードするようになっています。
 アプリケーションの移植性を高めるためには、 ``webroot/index.php`` を修正し、
-``CAKE_CORE_INCLUDE_PATH`` を相対パスに変更しましょう::
+``CAKE_CORE_INCLUDE_PATH`` を相対パスに変更しましょう。 ::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
-        ROOT . '/Vendor/cakephp/cakephp/lib'
+        ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
     );
 
-Composerで他のライブラリをインストールしている場合は、
-オートローダーを設定してcomposerのオートローダーで起こる問題を回避してください。
-``Config/bootstrap.php`` ファイルに次の行を追加します::
+.. note::
 
-    // Composerのautoloadを読み込み
+    もし、あなたのアプリケーションのためにユニットテストを作成する予定があるなら、
+    ``webroot/test.php`` も同様の変更が必要になります。
+
+Composer で他のライブラリをインストールしている場合は、
+オートローダーを設定して composer のオートローダーで起こる問題を回避してください。
+``Config/bootstrap.php`` ファイルに次の行を追加します。 ::
+
+    // Composer の autoload を読み込み
     require APP . 'Vendor/autoload.php';
 
-    // CakePHPのオートローダーをいったん削除し、Composerより先に評価されるように先頭に追加する
-    // https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b を参照
+    // CakePHP のオートローダーをいったん削除し、Composer より先に評価されるように先頭に追加する
+    // http://goo.gl/kKVJO7 を参照
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
-これで、ComposerでインストールしたCakePHPが機能するCakePHPアプリケーションができました。
-ソースコードの残りの部分とcomposer.jsonとcomposer.lockファイルを保存しておいてください。
+これで、Composer でインストールした CakePHP が機能する CakePHP アプリケーションができました。
+ソースコードの残りの部分と composer.json と composer.lock ファイルを保存しておいてください。
 
+複数のアプリケーションで CakePHP を共有する
+===========================================
 
-複数のアプリケーションでCakePHPを共有する
-=========================================
+時には、CakePHP のディレクトリをファイルシステムの別な場所に配置したいと思う場合があるかもしれません。
+共有しているホストの制限であったり、複数のアプリが同じ CakePHP のライブラリを共有したい場合などです。
+このセクションでは、どうやって CakePHP のディレクトリをファイルシステム内に分散配置できるのかを説明します。
 
-時には、CakePHPのディレクトリをファイルシステムの別な場所に配置したいと思う場合があるかもしれません。
-共有しているホストの制限であったり、複数のアプリが同じCakeのライブラリを使うようにしたかったりする場合などです。
-このセクションでは、どうやってCakePHPのディレクトリをファイルシステム内に分散配置できるのかを説明します。
+まず、CakePHP アプリケーションには三つの主要な部分があることを意識しましょう:
 
-まず、Cakeアプリケーションには三つの主要な部分があることに注意しましょう:
+#. CakePHP のコアライブラリは、 /lib/Cake の中です。
+#. アプリケーションコードは、/app の中です。
+#. アプリケーションのウェブルートは、通常 /app/webroot の中です。
 
-#. CakePHPのコアライブラリは、 /lib/Cakeの中にあります。
-#. アプリケーションコードは、/appの中です。
-#. アプリケーションのウェブルートは、通常、/app/webrootにあります。
+webroot を除く各ディレクトリは、 ファイルシステム内のどこにでも配置できます。
+これらは Web サーバからアクセスできるようにする必要があります。
+また、 CakePHP に場所を知らせれば、 webroot フォルダを app フォルダの外に移すことができます。
 
-この各ディレクトリは、webrootを除いて、ファイルシステム内のどこにでも配置できます。
-webrootは、Webサーバからアクセスできるようにする必要があります。
-しかし、Cakeに場所を知らせれば、webrootフォルダをappフォルダの中から取り出すことさえ可能です。
-
-Cakeインストールの環境設定をするには、以下のファイルを少し修正する必要があります。
-
+CakePHP インストールの環境設定をするには、以下のファイルを少し修正する必要があります。
 
 -  /app/webroot/index.php
 -  /app/webroot/test.php ( :doc:`テスト </development/testing>` 機能を使う場合。)
 
 編集しなくてはいけない三つの定数は、 ``ROOT`` 、 ``APP_DIR`` 、 ``CAKE_CORE_INCLUDE_PATH`` です。
 
-
 -  ``ROOT`` には、アプリのフォルダが含まれているディレクトリのパスを設定します。
 -  ``APP_DIR`` には、（訳注：相対的な）アプリのフォルダ名を設定します。
--  ``CAKE_CORE_INCLUDE_PATH`` には、CakePHPライブラリフォルダのパスを設定します。
+-  ``CAKE_CORE_INCLUDE_PATH`` には、CakePHP ライブラリフォルダのパスを設定します。
 
 例を挙げて、応用インストールを実践した場合の様子を見てみましょう。
-CakePHPを次のような条件で動作させたいとします:
+CakePHP を次のような条件で動作させたいとします:
 
+-  CakePHP のコアライブラリは /usr/lib/cake に配置する。
+-  アプリケーションの webroot ディレクトリは /var/www/mysite/ にする。
+-  アプリケーションのアプリディレクトリは /home/me/myapp にする。
 
--  CakePHPのコアライブラリは/usr/lib/cakeに配置する。
--  アプリケーションのwebrootディレクトリは/var/www/mysite/にする。
--  アプリケーションのアプリディレクトリは/home/me/myappにする。
-
-このようなセットアップの場合には、 webroot/index.phpファイル（つまり、この例では/var/www/mysite/index.php）が次のようになるよう、編集します::
+このようなセットアップの場合には、 webroot/index.php ファイル（つまり、この例では /var/www/mysite/index.php）が次のようになるよう、編集します。 ::
 
     // /app/webroot/index.php (一部分。コメントは取り除いてあります。)
 
@@ -149,7 +144,12 @@ CakePHPを次のような条件で動作させたいとします:
 ファイルパスの区切り文字には、スラッシュではなく ``DS`` 定数を使うのがオススメです。
 こうしておくと、間違った区切り文字による、ファイルが無いというエラーを防ぐことができ、コードをさまざまなプラットフォームで動くようにすることができます。
 
-Apacheとmod\_rewrite(と.htaccess)
-=================================
+Apache と mod\_rewrite (と .htaccess)
+=====================================
 
 この章は :doc:`URLリライティング </installation/url-rewriting>` に移動しました。
+
+
+.. meta::
+    :title lang=ja: 応用インストール
+    :keywords lang=ja: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path
