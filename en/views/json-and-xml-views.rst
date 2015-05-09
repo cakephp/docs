@@ -67,7 +67,7 @@ serialize::
         public function index()
         {
             $this->set('articles', $this->paginate());
-            $this->set('_serialize', ['articles']);
+            $this->set('_serialize', 'articles');
         }
     }
 
@@ -96,6 +96,11 @@ appending a top-level ``<response>`` element when using :php:class:`XmlView`.
 If you use a string value for ``_serialize`` and XmlView, make sure that your
 view variable has a single top-level element. Without a single top-level
 element the Xml will fail to generate.
+
+.. versionadded:: 3.1.0
+
+    You can also set ``_serialized`` to ``true`` to serialize all view variables
+    instead of explicitly specifying them.
 
 Using a Data View with Template Files
 =====================================
