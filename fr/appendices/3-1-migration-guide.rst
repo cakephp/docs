@@ -21,6 +21,13 @@ FlashComponent
   méthodes ``set()`` et ``__call()``. Cela signifie que la structure des
   données stockées dans la Session pour les messages Flash a changé.
 
+View
+====
+
+- Vous pouvez maintenant définir ``_serialized`` à ``true`` pour ``JsonView``
+  et ``XmlView`` pour sérialiser toutes les variables de vue au lieu de les 
+  spécifier explicitement.
+
 Helper
 ======
 

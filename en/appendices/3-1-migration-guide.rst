@@ -20,6 +20,12 @@ FlashComponent
   or ``__call()`` method. This means that the structure in the Session for
   stored Flash messages has changed.
 
+View
+====
+
+- You can now set ``_serialized`` to ``true`` for ``JsonView`` and ``XmlView``
+  to serialize all view variables instead of explicitly specifying them.
+
 Helper
 ======
 
