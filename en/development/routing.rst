@@ -962,9 +962,9 @@ default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
 before setting up any routes and avoid having to specify the ``routeClass``
 option for each route. For example using::
 
-    Router::defaultRouteClass('DashedRoute');
+    Router::defaultRouteClass('InflectedRoute');
 
-will cause all routes connected after this to use the ``DashedRoute`` route class.
+will cause all routes connected after this to use the ``InflectedRoute`` route class.
 Calling the method without an argument will return current default route class.
 
 Fallbacks Method
