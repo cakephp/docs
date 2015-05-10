@@ -93,7 +93,7 @@ Debugger 类重载了 PHP 默认的错误处理，替换为更加实用的错误
 
 .. php:staticmethod:: Debugger::trace($options)
 
-    返回当前的堆栈追踪记录，每行显示调用的方法，包含调用所在的文件及行号。
+    返回当前的堆栈追踪记录，每行显示调用的方法，包含调用所在的文件及行号。 ::
 
         //在 PostsController::index() 中
         pr(Debugger::trace());
