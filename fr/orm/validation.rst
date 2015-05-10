@@ -1,15 +1,15 @@
-Validating Data
-###############
+Valider des Données
+###################
 
-Before you :doc:`save your data</orm/saving-data>` you
-will probably want to ensure the data is correct and consistent. In CakePHP we
-have two stages of validation:
+Avant que vous :doc:`sauvegardiez des données</orm/saving-data>` vous voudrez
+probablement vous assurer que les données sont correctes et cohérentes. Dans
+CakePHP, nous avons deux étapes de validation:
 
-1. Before request data is converted into entities validation rules around
-   data types, and formatting can be applied.
-2. Before data is saved, domain or application rules can be applied. These rules
-   help ensure that your application's data remains consistent.
-
+1. Avant que les données de requête ne soit converties en entity, les règle de
+   validation concernant le type de données et leur format peuvent être appliquées.
+2. Avant que les données ne soient sauvegardées, les règles du domaine ou de
+   l'application peuvent être appliquées. Ces règles aident à garantir que les
+   données de votre application restent cohérentes.
 
 .. _validating-request-data:
 
