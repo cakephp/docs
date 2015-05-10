@@ -4,6 +4,12 @@
 CakePHP 3.1 is a fully API compatible upgrade from 3.0. This page outlines
 the changes and improvements made in 3.1.
 
+Routing
+=======
+The default route class has been changed to `Dashed` in the ``cakephp/app`` repo.
+Your current code base is not affected by this, but it is recommended to use this route
+class from here on.
+
 Console
 =======
 

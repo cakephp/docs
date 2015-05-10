@@ -110,7 +110,7 @@ some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
     Router::scope('/', function ($routes) {
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 The ``connect()`` method takes up to three parameters: the URL template you wish
@@ -227,9 +227,19 @@ identify controller names in URLs. The ``:id`` element is a custom
 route element, and must be further clarified by specifying a
 matching regular expression in the third parameter of connect().
 
-CakePHP does not automatically produce lowercased urls when using the
-``:controller`` parameter. If you need this, the above example could be
-rewritten like so::
+CakePHP does not automatically produce prettified URLs when using the
+``:controller`` parameter for performance reasons.
+It is recommended, though, to use the `DashedRoute` class for your
+public URLs (not only for SEO reasons)::
+
+    $routes->connect(
+        '/:controller/:id',
+        ['action' => 'view'],
+        ['id' => '[0-9]+', 'routeClass' => 'DashedRoute']
+    );
+
+If you need underscored URLs as part of a CakePHP 2.x migration,
+the above example could be rewritten like so::
 
     $routes->connect(
         '/:controller/:id',
@@ -408,7 +418,7 @@ can be enabled by using the ``prefix`` scope method::
     Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 Prefixes are mapped to sub-namespaces in your application's ``Controller``
