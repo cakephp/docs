@@ -209,7 +209,7 @@ Xdebug
 ======
 
 If your environment supplies the Xdebug PHP extension, fatal errors will show
-additional Xdebug stack trace details. Details about
+additional Xdebug stack trace details. Details about Xdebug can be found at
 `Xdebug <http://xdebug.org>`_ .
 
 
