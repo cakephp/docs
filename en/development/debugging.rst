@@ -48,7 +48,7 @@ functions, ``Configure::debug`` must be set to a value higher than 0.
 When an error is raised, Debugger both outputs information to the
 page and makes an entry in the error.log file. The error report
 that is generated has both a stack trace and a code excerpt from
-where the error was raised. Click on the "Error" link type to
+where the error was raised. Click on the "Error" link to
 reveal the stack trace, and on the "Code" link to reveal the
 error-causing lines.
 
@@ -209,7 +209,7 @@ Xdebug
 ======
 
 If your environment supplies the Xdebug PHP extension, fatal errors will show
-additional Xdebug stack trace details. Details about
+additional Xdebug stack trace details. Details about Xdebug can be found at
 `Xdebug <http://xdebug.org>`_ .
 
 
