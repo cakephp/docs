@@ -227,7 +227,7 @@ identify controller names in URLs. The ``:id`` element is a custom
 route element, and must be further clarified by specifying a
 matching regular expression in the third parameter of connect().
 
-CakePHP does not automatically produce lowercased urls when using the
+CakePHP does not automatically produce lowercased and dashed URLs when using the
 ``:controller`` parameter. If you need this, the above example could be
 rewritten like so::
 
@@ -239,6 +239,9 @@ rewritten like so::
 
 The ``DashedRoute`` class will make sure that the ``:controller`` and
 ``:plugin`` parameters are correctly lowercased and dashed.
+
+If you need lowercased and underscored URLs while migrating from a CakePHP
+2.x application, you can instead use the ``InflectedRoute`` class.
 
 .. note::
 
