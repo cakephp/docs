@@ -110,7 +110,7 @@ some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
     Router::scope('/', function ($routes) {
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 The ``connect()`` method takes up to three parameters: the URL template you wish
@@ -234,11 +234,11 @@ rewritten like so::
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'InflectedRoute']
+        ['id' => '[0-9]+', 'routeClass' => 'DashedRoute']
     );
 
-The special ``InflectedRoute`` class will make sure that the ``:controller`` and
-``:plugin`` parameters are correctly lowercased.
+The ``DashedRoute`` class will make sure that the ``:controller`` and
+``:plugin`` parameters are correctly lowercased and dashed.
 
 .. note::
 
@@ -408,7 +408,7 @@ can be enabled by using the ``prefix`` scope method::
     Router::prefix('admin', function ($routes) {
         // All routes here will be prefixed with `/admin`
         // And have the prefix => admin route element added.
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 Prefixes are mapped to sub-namespaces in your application's ``Controller``
@@ -957,7 +957,7 @@ Default Route Class
 
 .. php:staticmethod:: defaultRouteClass($routeClass = null)
 
-If you want to use an alterate route class for all your routes besides the
+If you want to use an alternate route class for all your routes besides the
 default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
 before setting up any routes and avoid having to specify the ``routeClass``
 option for each route. For example using::
@@ -967,7 +967,7 @@ option for each route. For example using::
 will cause all routes connected after this to use the ``DashedRoute`` route class.
 Calling the method without an argument will return current default route class.
 
-Fallbacks method
+Fallbacks Method
 ----------------
 
 .. php:method:: fallbacks($routeClass = null)
@@ -978,12 +978,12 @@ class returned by ``Router::defaultRouteClass()`` is used.
 
 Calling fallbacks like so::
 
-    $routes->fallbacks('InflectedRoute');
+    $routes->fallbacks('DashedRoute');
 
 Is equivalent to the following explicit calls::
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
 
 .. note::
 
