@@ -10,6 +10,8 @@ have two stages of validation:
 2. Before data is saved, domain or application rules can be applied. These rules
    help ensure that your application's data remains consistent.
 
+.. _validating-request-data:
+
 Validating Data Before Building Entities
 ========================================
 

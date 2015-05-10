@@ -499,9 +499,6 @@ request data just before entities are created::
 The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
 return it to change the data used to create entities.
 
-
-.. _validating-request-data:
-
 Validating Data Before Building Entities
 ----------------------------------------
 
