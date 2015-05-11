@@ -34,6 +34,8 @@ Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
 to power its Time utility. Anything you can do with ``Carbon`` and
 ``DateTime``, you can do with ``Time``.
 
+For details on Carbon please see `their documentation. <http://carbon.nesbot.com/docs/>`_.
+
 .. start-time
 
 Creating Time Instances
