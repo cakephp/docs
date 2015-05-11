@@ -23,9 +23,7 @@ you can benefit from the CSRF protection it provides::
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Csrf', [
-            'secure' => true
-        ]);
+        $this->loadComponent('Csrf');
     }
 
 Settings can be passed into the component through your component's settings.
@@ -33,8 +31,9 @@ The available configuration options are:
 
 - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
 - ``expiry`` How long the CSRF token should last. Defaults to browser session.
-- ``secure`` Whether or not the cookie will be set with the Secure flag.
-  Defaults to ``false``.
+- ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
+  the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
+  will fail. Defaults to ``false``.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 
