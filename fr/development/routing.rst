@@ -661,7 +661,7 @@ nous ferions quelque chose comme ceci::
 
     Router::scope('/', function ($routes) {
         $routes->extensions(['json']);
-        $routes->resources('recipes');
+        $routes->resources('Recipes');
     });
 
 La première ligne définit un certain nombre de routes par défaut pour l'accès
