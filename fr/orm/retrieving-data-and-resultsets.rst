@@ -700,7 +700,7 @@ Travailler avec des Ensembles de Résultat
 =========================================
 
 Une fois qu'une requête est exécutée avec ``all()``, vous récupèrerez une
-instance de :php:class:`Cake\\ORM\ResultSet`. Cet objet offre des manières
+instance de :php:class:`Cake\\ORM\\ResultSet`. Cet objet offre des manières
 puissantes de manipuler les données résultantes à partir de vos requêtes.
 
 Les objets d'ensemble de résultat vont charger lazily les lignes à partir
