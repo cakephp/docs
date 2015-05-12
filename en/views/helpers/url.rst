@@ -21,7 +21,7 @@ generates the URL for the controller and action combo. If ``full`` is
 ``true``, the full base URL will be prepended to the result::
 
     echo $this->Url->build([
-        "controller" => "posts",
+        "controller" => "Posts",
         "action" => "view",
         "bar"
     ]);
@@ -34,7 +34,7 @@ Here are a few more usage examples:
 URL with named parameters::
 
     echo $this->Url->build([
-        "controller" => "posts",
+        "controller" => "Posts",
         "action" => "view",
         "foo" => "bar"
     ]);
@@ -45,7 +45,7 @@ URL with named parameters::
 URL with extension::
 
     echo $this->Url->build([
-        "controller" => "posts",
+        "controller" => "Posts",
         "action" => "list",
         "_ext" => "rss"
     ]);
@@ -63,7 +63,7 @@ URL (starting with '/') with the full base URL prepended::
 URL with GET params and named anchor::
 
     echo $this->Url->build([
-        "controller" => "posts",
+        "controller" => "Posts",
         "action" => "search",
         "?" => ["foo" => "bar"],
         "#" => "first"
@@ -80,7 +80,7 @@ URL for named route::
     // $router->connect(
     //     '/products/:slug',
     //     [
-    //         'controller' => 'products',
+    //         'controller' => 'Products',
     //         'action' => 'view'
     //     ],
     //     [
