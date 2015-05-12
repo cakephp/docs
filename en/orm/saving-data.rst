@@ -30,10 +30,10 @@ passing it to the ``save()`` method in the ``Table`` class::
     $article->title = 'A New Article';
     $article->body = 'This is the body of the article';
 
-    $savedArticle = $articlesTable->save($article);
-
-    // Both $article and the returned $savedArticle entity contain the id now
-    $id = $savedArticle->id;
+    if ($articlesTable->save($article)) {
+        // The $article entity contain the id now
+        $id = $article->id;
+    }
 
 Updating Data
 -------------
@@ -65,9 +65,10 @@ By default the ``save()`` method will also save one level of associations::
     $article->title = 'An article by mark';
     $article->author = $author;
 
-    $articlesTable->save($article);
-     // The foreign key value was set automatically.
-    echo $article->author_id;
+    if ($articlesTable->save($article)) {
+        // The foreign key value was set automatically.
+        echo $article->author_id;
+    }
 
 The ``save()`` method is also able to create new records for associations::
 
