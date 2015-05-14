@@ -293,7 +293,7 @@ To validate the comments you would use a nested validator::
     $commentValidator->add('comment', 'not-blank', ['rule' => 'notBlank']);
 
     // Connect the nested validators.
-    $validator->addNestedMany('comments', $comment);
+    $validator->addNestedMany('comments', $commentValidator);
 
     // Get all errors including those from nested validators.
     $validator->errors($data);

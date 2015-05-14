@@ -311,7 +311,7 @@ Pour valider les commentaires, vous utiliseriez un validator imbriqué::
     $commentValidator->add('comment', 'not-blank', ['rule' => 'notBlank']);
 
     // Connecte les validators imbriqués.
-    $validator->addNestedMany('comments', $comment);
+    $validator->addNestedMany('comments', $commentValidator);
 
     // Récupère toutes erreurs y compris celles des validators imbriqués.
     $validator->errors($data);
