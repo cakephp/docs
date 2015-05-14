@@ -266,6 +266,42 @@ met::
 In the above example, the ``email_frequency`` field cannot be left empty if the
 the user wants to receive the newsletter.
 
+Nesting Validators
+------------------
+
+.. versionadded:: 3.0.5
+
+When validating :doc:`/core-libraries/form` with nested data, or when working
+with models that contain array data types, it is necessary to validate the
+nested data you have. CakePHP makes it simple to add validators to specific
+attributes. For example, assume you are working with a non-relational database
+and need to store an article and its comments::
+
+    $data = [
+        'title' => 'Best article',
+        'comments' => [
+            ['comment' => '']
+        ]
+    ];
+
+To validate the comments you would use a nested validator::
+
+    $validator = new Validator();
+    $validator->add('title', 'not-blank', ['rule' => 'notBlank']);
+
+    $commentValidator = new Validator();
+    $commentValidator->add('comment', 'not-blank', ['rule' => 'notBlank']);
+
+    // Connect the nested validators.
+    $validator->addNestedMany('comments', $commentValidator);
+
+    // Get all errors including those from nested validators.
+    $validator->errors($data);
+
+You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
+with ``addNestedMany()``. With both methods, the nested validator's errors will
+contribute to the parent validator's errors and influence the final result.
+
 .. _reusable-validators:
 
 Creating Reusable Validators

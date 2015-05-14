@@ -282,6 +282,45 @@ conditions sont vérifiées::
 Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
 si l'utilisateur veut recevoir la newsletter.
 
+Imbriquer des Validators
+------------------------
+
+.. versionadded:: 3.0.5
+
+Lorsque vous validez des :doc:`/core-libraries/form` avec des données
+imbriquées, ou lorsque vous travaillez avec des modèles qui contiennent des
+données de type tableau, il est nécessaire de valider les données imbriquées
+dont vous disposez. CakePHP permet facilement d'ajouter des validators sur des
+attributs spécifiques. Par exemple, imaginez que vous travailliez avec une base
+de données non relationnelle et que vous ayez besoin d'enregistrer un article
+et ses commentaires::
+
+    $data = [
+        'title' => 'Meilleur article',
+        'comments' => [
+            ['comment' => '']
+        ]
+    ];
+
+Pour valider les commentaires, vous utiliseriez un validator imbriqué::
+
+    $validator = new Validator();
+    $validator->add('title', 'not-blank', ['rule' => 'notBlank']);
+
+    $commentValidator = new Validator();
+    $commentValidator->add('comment', 'not-blank', ['rule' => 'notBlank']);
+
+    // Connecte les validators imbriqués.
+    $validator->addNestedMany('comments', $commentValidator);
+
+    // Récupère toutes erreurs y compris celles des validators imbriqués.
+    $validator->errors($data);
+
+Vous pouvez créer des 'relations' 1:1 avec ``addNested()`` et  des 'relations'
+1:N avec ``addNestedMany()``. Avec ces deux méthodes, les erreurs des
+validators contribuerons aux erreurs du validator parent and influeront sur le
+résultat final.
+
 .. _reusable-validators:
 
 Créer des Validators Ré-utilisables
