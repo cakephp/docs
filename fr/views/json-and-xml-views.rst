@@ -148,13 +148,17 @@ variables de vue sérialisées avec un nœud ``<response>``. Vous pouvez
 définir un nom personnalisé pour ce nœud en utilisant la variable de vue
 ``_rootNode``.
 
+La classe XmlView intègre la variable ``_xmlOptions`` qui vous permet de
+personnaliser les options utilisées pour générer le XML, par exemple ``tags``
+au lieu d'``attributes``.
+
 Créer des Views JSON
 ====================
 
 .. php:class:: JsonView
 
 La classe JsonView intègre la variable ``_jsonOptions`` qui vous permet de
-personnaliser le bit-mask utilisé pour générer le JSON. Regardez la
+personnaliser le masque utilisé pour générer le JSON. Regardez la
 documentation `json_encode <http://php.net/json_encode>`_ sur les valeurs
 valides de cette option.
 

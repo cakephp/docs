@@ -31,10 +31,10 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
     $article->title = 'A New Article';
     $article->body = 'Ceci est le contenu de cet article';
 
-    $savedArticle = $articlesTable->save($article);
-
-    // L'$article et l'entity $savedArticle retourné contient maintenant l'id
-    $id = $savedArticle->id;
+    if ($articlesTable->save($article)) {
+        // L'entity $article contient maintenant l'id
+        $id = $article->id;
+    }
 
 Mettre à jour des Données
 -------------------------
@@ -68,9 +68,10 @@ d'association::
     $article->title = 'Un article par mark';
     $article->author = $author;
 
-    $articlesTable->save($article);
-     // La valeur de la clé étrangère a été ajoutée automatiquement.
-    echo $article->author_id;
+    if ($articlesTable->save($article)) {
+        // La valeur de la clé étrangère a été ajoutée automatiquement.
+        echo $article->author_id;
+    }
 
 La méthode ``save()`` est également capable de créer de nouveaux
 enregistrements pour les associations::
