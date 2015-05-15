@@ -123,7 +123,8 @@ Folder API
             'from' => '/path/to/copy/from', // Realizara um cd() para fazer
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
-            'scheme' => Folder::SKIP  // Ignora diretórios/arquivos que existam.
+            'scheme' => Folder::SKIP,  // Ignora diretórios/arquivos que existam.
+            'recursive' => true
         ));
 
     Existem 3 tipos schemes suportados:

@@ -122,7 +122,8 @@ Folder API
             'from' => '/path/to/copy/from', // will cause a cd() to occur
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
-            'scheme' => Folder::SKIP  // Skip directories/files that already exist.
+            'scheme' => Folder::SKIP,  // Skip directories/files that already exist.
+            'recursive' => true //set false to disable recursive copy
         ));
 
     There are 3 supported schemes:
