@@ -113,6 +113,23 @@ La sortie sera similaire à ceci::
     __National
     __International
 
+The ``treeList`` finder takes a number of options:
+
+* ``keyPath``: A dot separated path to fetch the field to use for the array key,
+  or a closure to return the key out of the provided row.
+* ``valuePath``: A dot separated path to fetch the field to use for the array
+  value, or a closure to return the value out of the provided row.
+* ``spacer``: A string to be used as prefix for denoting the depth in the tree
+  for each item
+
+An example of all options in use is::
+
+    $query = $categories->find('treeList', [
+        'keyPath' => 'url',
+        'valuePath' => 'id',
+        'spacer' => ' '
+    ]);
+
 Une tâche classique est de trouver le chemin de l'arbre à partir d'un nœud en
 particulier vers la racine de l'arbre. C'est utile, par exemple, pour ajouter
 la liste des breadcrumbs pour une structure de menu::
