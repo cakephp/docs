@@ -22,7 +22,7 @@ Insérer des Données
 Le moyen le plus simple d'insérer des données dans une base de données est de
 créer une nouvelle entity et de la passer à la méthode ``save()`` de la classe
 ``Table``::
-
+    
     use Cake\ORM\TableRegistry;
 
     $articlesTable = TableRegistry::get('Articles');
@@ -35,6 +35,10 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
 
     // L'$article et l'entity $savedArticle retourné contient maintenant l'id
     $id = $savedArticle->id;
+
+En utilisant ``newEntity``, la méthode ``isNew()`` de l'entity nouvellement 
+crée renverra ``true``. C'est ainsi que, lors de l'appel de ``save()``, 
+CakePHP saura qu'il s'agit d'un ajout et non une mise à jour.
 
 Mettre à jour des Données
 -------------------------
@@ -222,8 +226,8 @@ Vos données de requête doivent ressembler à ceci::
         ]
     ];
 
-If you need to link against some existing belongsToMany records, and create new
-ones at the same time you can use an expanded format::
+Si vous souhaitez lier des entrées belongsToMany existantes et en créer de
+nouvelles en même temps, vous pouvez utiliser la forme étendue ::
 
     $data = [
         'title' => 'My title',
@@ -237,9 +241,9 @@ ones at the same time you can use an expanded format::
         ]
     ];
 
-When the above data is converted into entities, you will have 4 tags. The first
-two will be new objects, and the second two will be references to existing
-records.
+Quand les données ci-dessus seront converties en entities, il y aura 4 tags.
+Les deux premiers seront de nouveaux objets, et les deux seconds seront des
+références à des tags existants.
 
 Convertir des Données HasMany
 -----------------------------
@@ -334,8 +338,8 @@ vous pouvez utiliser ``transactional()``::
 .. note::
 
     Si vous utilisez newEntity() et qu'il manque quelques unes ou toutes les
-    données des entities résultantes, vérifiez deux fois que les colonnes que
-    vous souhaitez définir sont listées dans la propriété ``$_accessible``
+    données dans les entities résultantes, vérifiez deux fois que les colonnes 
+    que vous souhaitez définir sont listées dans la propriété ``$_accessible``
     de votre entity.
 
 Fusionner les Données Requêtées dans les Entities
@@ -395,11 +399,11 @@ mais une note importante doit être faîte.
 
 .. note::
 
-    For belongsToMany associations, ensure the relevant entity has
-    a property accessible for the associated entity.
+    Pour les associations belongsToMany, vérifiez que les entities associées
+    sont bien présentes dans la propriété ``$_accessible``
 
 
-If a Product belongsToMany Tag::
+Si Product belongsToMany Tag::
 
     // in the Product Entity
     protected $_accessible = [
@@ -429,7 +433,9 @@ Par exemple, considérons le cas suivant::
             ['body' => 'Second comment', 'id' => 2],
         ]
     ];
-    $entity = $articles->newEntity($data);
+    
+    $article = $articles->newEntity($data);
+    $articles->save($article);
 
     $newData = [
         'comments' => [
@@ -437,7 +443,7 @@ Par exemple, considérons le cas suivant::
             ['body' => 'A new comment'],
         ]
     ];
-    $articles->patchEntity($entity, $newData);
+    $articles->patchEntity($article, $newData);
     $articles->save($article);
 
 A la fin, si l'entity est à nouveau convertie en tableau, vous obtiendrez le
@@ -468,7 +474,7 @@ pas dans la liste::
 
     // Dans un controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($entity->comments))->extract('id');
+    $present = (new Collection($article->comments))->extract('id');
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
