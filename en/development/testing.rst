@@ -1041,7 +1041,7 @@ Testing Components
 Let's pretend we have a component called PagematronComponent in our application.
 This component helps us set the pagination limit value across all the
 controllers that use it. Here is our example component located in
-**app/Controller/Component/PagematronComponent.php**::
+**src/Controller/Component/PagematronComponent.php**::
 
     class PagematronComponent extends Component
     {
