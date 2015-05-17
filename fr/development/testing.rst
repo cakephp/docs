@@ -1093,7 +1093,7 @@ Tester les Components
 Imaginons que nous avons un component appelé PagematronComponent dans notre
 application. Ce component nous aide à paginer la valeur limite à travers tous
 les controllers qui l'utilisent. Voici notre exemple de component localisé dans
-**app/Controller/Component/PagematronComponent.php**::
+**src/Controller/Component/PagematronComponent.php**::
 
     class PagematronComponent extends Component
     {
