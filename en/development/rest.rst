@@ -112,7 +112,7 @@ the REST views for our RecipesController inside **src/Template/Recipes/xml**. We
 the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
-    // src/View/Template/xml/index.ctp
+    // src/Template/Recipes/xml/index.ctp
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(['response' => $recipes]);
