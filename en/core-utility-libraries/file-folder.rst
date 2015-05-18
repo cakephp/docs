@@ -108,7 +108,7 @@ Folder API
 
     :rtype: boolean
 
-    Recursively copy a directory. The only parameter $options can either
+    Copy a directory (recursively by default). The only parameter $options can either
     be a path into copy to or an array of options::
 
         <?php
@@ -288,7 +288,7 @@ Folder API
 
     :rtype: boolean
 
-    Recursive directory move.
+    Move a directory (recursively by default). The only parameter $options is the same as for ``copy()``
 
 .. php:staticmethod:: normalizePath(string $path)
 
