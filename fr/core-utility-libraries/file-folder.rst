@@ -125,7 +125,8 @@ API de Folder
             'from' => '/path/to/copy/from', // va entraîner l'execution de cd()
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
-            'scheme' => Folder::SKIP // Passe les répertoires/fichiers qui existent déjà.
+            'scheme' => Folder::SKIP, // Passe les répertoires/fichiers qui existent déjà.
+            'recursive' => true
         ));
 
     y a 3 schémas supportés:
