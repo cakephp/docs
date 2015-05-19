@@ -292,9 +292,10 @@ by including them in AuthComponents authenticate array::
         'AuthBag.Openid', // plugin authentication object.
     ]);
 
-> Note that when using plugin notation there's no 'Authenticate' word when
-initiating the authentication object. Instead, if using namespaces, you'll need
-to set the full namespace of the class (including the 'Authenticate' word).
+.. note::
+    Note that when using simple notation there's no 'Authenticate' word when
+    initiating the authentication object. Instead, if using namespaces, you'll need
+    to set the full namespace of the class (including the 'Authenticate' word).
 
 Creating Stateless Authentication Systems
 -----------------------------------------
