@@ -195,7 +195,7 @@ the login field. If it doesn't, validation will fail. The default
 value for this key is boolean false.
 
 ``required => true`` does not mean the same as the validation rule
-``notEmpty()``. ``required => true`` indicates that the array *key*
+``notBlank()``. ``required => true`` indicates that the array *key*
 must be present - it does not mean it must have a value. Therefore
 validation will fail if the field is not present in the dataset,
 but may (depending on the rule) succeed if the value submitted is
@@ -557,8 +557,8 @@ directly into the ``CakeValidationRule`` object::
     $this->validator()->getField('password')
         ->getRule('required')->message = 'This field cannot be left blank';
 
-Properties in any ``CakeValidationRule`` get their name from the array keys 
-one is allowed to use when defining a validation rule's properties, such as the 
+Properties in any ``CakeValidationRule`` get their name from the array keys
+one is allowed to use when defining a validation rule's properties, such as the
 array keys 'message' and 'allowEmpty' for example.
 
 As with adding new rule to the set, it is also possible to modify existing rules
@@ -961,7 +961,7 @@ with usage examples.
 
     Make sure to include the original field in the list of fields when making
     a unique rule across multiple fields.
-    
+
     If a listed field isn't included in the model data, then it's treated as a null value.
     You may consider marking the listed fields as ``required``.
 
@@ -1070,6 +1070,14 @@ with usage examples.
     if you need case insensitive comparison.
 
 .. php:staticmethod:: notEmpty(mixed $check)
+
+    .. deprecated:: 2.7
+
+    Use ``notBlank`` instead.
+
+.. php:staticmethod:: notBlank(mixed $check)
+
+    .. versionadded:: 2.7
 
     The basic rule to ensure that a field is not empty. ::
 
