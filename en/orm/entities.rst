@@ -459,7 +459,7 @@ Exposing Virtual Properties
 By default virtual properties are not exported when converting entities to
 arrays or JSON. In order to expose virtual properties you need to make them
 visible. When defining your entity class you can provide a list of virtual
-fields that should be exposed::
+properties that should be exposed::
 
     namespace App\Model\Entity;
 
@@ -510,4 +510,3 @@ more complex data types like arrays and objects.
 .. meta::
     :title lang=en: Entities
     :keywords lang=en: entity, entities, single row, individual record
-    
