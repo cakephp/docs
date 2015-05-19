@@ -670,8 +670,8 @@ Other Useful Methods
             array('limit' => 5, 'order' => 'Article.created DESC')
         );
 
-        $this->loadModel('User');
-        $user = $this->User->findById(2);
+        $this->loadModel('User', 2);
+        $user = $this->User->read();
 
 
 Controller Attributes
