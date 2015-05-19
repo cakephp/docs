@@ -264,7 +264,7 @@ tag.
 
 Ideally, we'd have a URL that looks like
 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs**. This would let us
-find all the bookmarks that have the 'funny', 'cat' and 'gifs' tags. Before we
+find all the bookmarks that have the 'funny', 'cat' or 'gifs' tags. Before we
 can implement this, we'll add a new route. In **config/routes.php**, add the
 following at the top of the file::
 
