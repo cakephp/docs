@@ -139,14 +139,14 @@ customize your panel's behavior:
 Panel Hook Methods
 ------------------
 
-You can also implement the following hook methods ot customize how your panel
+You can also implement the following hook methods to customize how your panel
 behaves and appears:
 
 * ``shutdown(Event $event)`` This method typically collects and prepares the
   data for the panel. Data is generally stored in ``$this->_data``.
 * ``summary()`` Can return a string of summary data to be displayed in the
   toolbar even when a panel is collapsed. Often this is a counter, or short
-  summary inofrmation.
+  summary information.
 * ``data()`` Returns the panel's data to be used as element context. This hook
   method lets you further manipulate the data collected in the ``shutdown()``
   method. This method **must** return data that can be serialized.
