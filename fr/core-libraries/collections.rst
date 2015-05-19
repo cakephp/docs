@@ -747,7 +747,7 @@ d'une autre collection::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-Quand converti en un tableau, la collection ``$merged`` va ressmebler à ceci::
+Une fois convertie en un tableau, la collection ``$merged`` va ressembler à ceci::
 
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
@@ -760,7 +760,7 @@ points des propriétés à suivre pour que les éléments puissent être insér�
 cette position. Le second argument est tout ce qui peut être converti en
 objets collection.
 
-Merci de remarquer que les éléments sont insérés par la position dans laquelle
+Veuillez noter que les éléments sont insérés par la position dans laquelle
 ils sont trouvés, ainsi le premier élément de la deuxième collection est
 fusionné dans le premier élément de la première collection.
 
@@ -784,18 +784,18 @@ alors la propriété cible va être remplie avec les valeurs ``null``::
 La méthode ``insert()`` peut opérer sur des éléments tableau ou des objets qui
 implémentent l'interface ``ArrayAccess``.
 
-Making Collection Methods Reusable
+Créer des Méthodes de Collection Réutilisables
 ----------------------------------
 
-Using closures for collection methods is great when the work to be done is small
-and focused, but it can get messy very quickly. This becomes more obvious when
-a lot of different methods need to be called or when the length of the closure
-methods is more than just a few lines.
+Utiliser une restriction pour les méthodes de Collection est optimal lorsque le travail à accomplir est petit
+et ciblée, mais cela peut devenir gênant très rapidement. Cela devient plus évident quand
+beaucoup de méthodes différentes doivent être appelées ou lorsque la longueur de la méthode de restriction
+Méthodes est de plus de quelques lignes.
 
-There are also cases when the logic used for the collection methods can be
-reused in multiple parts of your application. It is recommended that you
-consider extracting complex collection logic to separate classes. For example,
-imagine a lengthy closure like this one::
+Il y a aussi des cas où la logique utilisée pour les méthodes de Collection peut être
+réutilisée dans plusieurs parties de votre application. Il est recommandé que d'envisager d'éclater 
+la logique d'ensemble complexe dans des classes séparées. Par exemple, imaginez une longue restriction comme 
+celle-ci.::
 
         $collection
                 ->map(function ($row, $key) {
@@ -812,7 +812,7 @@ imagine a lengthy closure like this one::
                     return $modifiedRow;
                 });
 
-This can be refactored by creating another class::
+Cela peut être remodeler en créant une autre classe::
 
         class TotalOrderCalculator
         {
@@ -839,10 +839,10 @@ This can be refactored by creating another class::
 
 .. php:method:: through(callable $c)
 
-Sometimes a chain of collection method calls can become reusable in other parts
-of your application, but only if they are called in that specific order. In
-those cases you can use ``through()`` in combination with a class implementing
-``__invoke`` to distribute your handy data processing calls::
+Parfois une suite d'appels de méthodes de Collection peut devenir réutilisable dans d'autres parties
+de votre application, mais seulement si elles sont appelées dans cet ordre précis. Dans
+ces cas, vous pouvez utiliser les ``through()`` en combinaison avec une implémentation de la classe
+``__invoke`` pour répartir vos traitements de données::
 
         $collection
                 ->map(new ShippingCostCalculator)
@@ -851,8 +851,8 @@ those cases you can use ``through()`` in combination with a class implementing
                 ->buffered()
                ...
 
-The above method calls can be extracted into a new class so they don't need to
-be repeated every time::
+Les appels aux méthodes ci-dessus, peuvent être regroupés dans une nouvelle classe permettant
+de ne pas être répétés à chaque fois::
 
         class FinalCheckOutRowProcessor
         {
