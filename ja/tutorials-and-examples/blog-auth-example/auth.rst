@@ -65,11 +65,10 @@ UsersControllerもまた作成しましょう。
         }
 
         public function view($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
+            if (!$this->User->exists($id)) {
                 throw new NotFoundException(__('Invalid user'));
             }
-            $this->set('user', $this->User->read(null, $id));
+            $this->set('user', $this->User->findById($id));
         }
 
         public function add() {
@@ -97,7 +96,7 @@ UsersControllerもまた作成しましょう。
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
                 }
             } else {
-                $this->request->data = $this->User->read(null, $id);
+                $this->request->data = $this->User->findById($id);
                 unset($this->request->data['User']['password']);
             }
         }
