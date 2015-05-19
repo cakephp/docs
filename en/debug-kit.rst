@@ -136,6 +136,21 @@ customize your panel's behavior:
 - ``title()`` - Configure the title that is displayed in the toolbar.
 - ``elementName()`` - Configure which element should be used for a given panel.
 
+Panel Hook Methods
+------------------
+
+You can also implement the following hook methods to customize how your panel
+behaves and appears:
+
+* ``shutdown(Event $event)`` This method typically collects and prepares the
+  data for the panel. Data is generally stored in ``$this->_data``.
+* ``summary()`` Can return a string of summary data to be displayed in the
+  toolbar even when a panel is collapsed. Often this is a counter, or short
+  summary information.
+* ``data()`` Returns the panel's data to be used as element context. This hook
+  method lets you further manipulate the data collected in the ``shutdown()``
+  method. This method **must** return data that can be serialized.
+
 Panels in Other Plugins
 -----------------------
 
@@ -157,10 +172,9 @@ render time::
 To use a plugin or app panel, update your application's DebugKit configuration
 to include the panel::
 
-    Configure::write(
-        'DebugKit.panels',
-        array_merge(Configure::read('DebugKit.panels'), ['MyCustomPanel'])
-    );
+    // in config/bootstrap.php
+    Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
+    Plugin::load('DebugKit', ['bootstrap' => true]);
 
-The above would load all the default panels as well as the custom panel from
-``MyPlugin``.
+The above would load all the default panels as well as the ``AppPanel``, and
+``MyCustomPanel`` panel from ``MyPlugin``.

@@ -149,6 +149,22 @@ comportement de votre panneau:
 - ``elementName()`` Configure l'element qui doit être utilisé pour un panneau
   donné.
 
+Méthodes de Hook pour Panneaux
+------------------------------
+
+Vous pouvez également implémenter les méthodes suivantes pour personnaliser
+la manière dont votre panneau se comporte et s'affiche:
+
+* ``shutdown(Event $event)`` Cette méthode collecte et prépare les données pour
+  panneau. Les données sont généralement stockées dans ``$this->_data``.
+* ``summary()`` Peut retourner une chaine de caractères contenu un résumé de
+  données qui sera affiché dans la barre lorsque le panneau est replié. C'est
+  souvent un compteur ou un court résumé.
+* ``data()`` Retourne les données du panneau pour être utilisées dans un
+  element. Cette méthode vous laisse manipuler les données collectées dans
+  la méthode ``shutdown()``. cette méthode **doit** retourner des données
+  sérializables.
+
 Panneaux dans d'autres Plugins
 ------------------------------
 
@@ -170,10 +186,9 @@ que les elements du panneau puissent être localisés au moment de les afficher:
 Pour utiliser un panneau de plugin ou de l'application, mettez à jour
 la configuration du DebugKit de votre application pour ajouter le panneau::
 
-    Configure::write(
-        'DebugKit.panels',
-        array_merge(Configure::read('DebugKit.panels'), ['MyCustomPanel'])
-    );
+    // dans config/bootstrap.php
+    Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
+    Plugin::load('DebugKit', ['bootstrap' => true]);
 
 Ce qui est au-dessus charge tous les panneaux par défaut ainsi que le panneau
-personnalisé dans ``MyPlugin``.
+``AppPanel``et le panneau ``MyCustomPanel`` depuis ``MyPlugin``.
