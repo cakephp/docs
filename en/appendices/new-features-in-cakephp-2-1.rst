@@ -160,7 +160,7 @@ CPU cycles and memory. ::
         public $components = array('RequestHandler');
 
         public function view($id) {
-            $article = $this->Article->read(null, $id);
+            $article = $this->Article->findById($id);
             $this->response->modified($article['Article']['modified']);
             $this->set(compact('article'));
         }
