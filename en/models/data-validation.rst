@@ -481,7 +481,7 @@ set. The first one is using the ``add`` method::
 
     // Inside a model class
     $this->validator()->add('password', 'required', array(
-        'rule' => 'notEmpty',
+        'rule' => 'notBlank',
         'required' => 'create'
     ));
 
@@ -491,7 +491,7 @@ multiple calls to add to create as many rules as you like::
     // Inside a model class
     $this->validator()
         ->add('password', 'required', array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ))
         ->add('password', 'size', array(
@@ -503,7 +503,7 @@ It is also possible to add multiple rules at once for a single field::
 
     $this->validator()->add('password', array(
         'required' => array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ),
         'size' => array(
@@ -1075,7 +1075,7 @@ with usage examples.
 
         public $validate = array(
             'title' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'This field cannot be left blank'
             )
         );

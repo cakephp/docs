@@ -66,6 +66,12 @@ The class ``String`` has been renamed to ``CakeText``. This resolves some
 conflicts around HHVM compatibility as well as possibly PHP7+. There is
 a ``String`` class provided as well for compatibility reasons.
 
+Validation
+----------
+- ``Validation::notEmpty()`` has been renamed to ``Validation::notBlank()``. This aims to avoid confusion
+around the PHP `notEmpty()` function and that the validation rule accepts ``0`` as valid input.
+Don't forget to adjust your validation rule setup regarding this change.
+
 
 Controller
 ==========

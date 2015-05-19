@@ -36,13 +36,13 @@ validating any user data::
         public $validate = array(
             'username' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'A username is required'
                 )
             ),
             'password' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'A password is required'
                 )
             ),
