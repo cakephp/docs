@@ -11,7 +11,6 @@ Console
   the plugin prefix. For example ``Console/cake MyPlugin.my_plugin`` can now
   be called with ``Console/cake my_plugin``.
 
-
 Core
 ====
 
@@ -21,7 +20,6 @@ Configure
 - :php:meth:`Configure::consume()` has been added to read and delete from
   Configure in a single step.
 
-
 Datasource
 ==========
 
@@ -30,6 +28,7 @@ Datasource
 
 CakeSession
 -----------
+
 - :php:meth:`CakeSession::consume()` has been added to read and delete from
   session in a single step.
 - Argument `$renew` has been added to :php:meth:`CakeSession::clear()` to allow
@@ -41,11 +40,11 @@ Model
 
 TreeBehavior
 ------------
+
 - New setting `level` is now available. You can use it to specify field name in
   which the depth of tree nodes will be stored.
 - New method ``TreeBehavior::getLevel()`` has been added which fetches depth of
   a node.
-
 
 Network
 =======
@@ -62,15 +61,17 @@ Utility
 
 CakeText
 --------
+
 The class ``String`` has been renamed to ``CakeText``. This resolves some
 conflicts around HHVM compatibility as well as possibly PHP7+. There is
 a ``String`` class provided as well for compatibility reasons.
 
 Validation
 ----------
-- ``Validation::notEmpty()`` has been renamed to ``Validation::notBlank()``. This aims to avoid confusion
-around the PHP `notEmpty()` function and that the validation rule accepts ``0`` as valid input.
 
+- ``Validation::notEmpty()`` has been renamed to ``Validation::notBlank()``.
+  This aims to avoid confusion around the PHP `notEmpty()` function and that the
+  validation rule accepts ``0`` as valid input.
 
 Controller
 ==========
@@ -83,7 +84,6 @@ SessionComponent
 - :php:meth:`SessionComponent::setFlash()` has been deprecated. You should use
   :php:class:`FlashComponent` instead.
 
-
 View
 ====
 
@@ -94,7 +94,6 @@ SessionHelper
   session in a single step.
 - :php:meth:`SessionHelper::flash()` has been deprecated. You should use
   :php:class:`FlashHelper` instead.
-
 
 TestSuite
 =========

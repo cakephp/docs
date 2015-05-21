@@ -21,7 +21,6 @@ Configure
 - :php:meth:`Configure::consume()` a été ajoutée pour lire et supprimer dans
   Configure en une seule étape.
 
-
 Datasource
 ==========
 
@@ -31,6 +30,7 @@ Datasource
 
 CakeSession
 -----------
+
 - :php:meth:`CakeSession::consume()` a été ajoutée pour lire et supprimer dans
   Session en une seule étape.
 - L'argument `$renew` a été ajouté à :php:meth:`CakeSession::clear()` pour
@@ -42,10 +42,10 @@ Model
 
 TreeBehavior
 ------------
+
 - La nouvelle configuration `level` est maintenant disponible. Vous pouvez
   l'utiliser pour spécifier un nom de champ dans lequel la profondeur des
   noeuds de l'arbre sera stocké.
-  which the depth of tree nodes will be stored.
 - La nouvelle méthode ``TreeBehavior::getLevel()`` a été ajoutée qui attrape
   le niveau de profondeur d'un noeud.
 
@@ -64,10 +64,17 @@ Utility
 
 CakeText
 --------
+
 La classe ``String`` a été renommée en ``CakeText``. Ceci résoud
 certains conflits de compatibilité avec HHVM et aussi avec PHP7+. Il y a aussi
 une classe ``String`` fournie pour des raisons de compatibilité.
 
+Validation
+----------
+
+- ``Validation::notEmpty()`` a été renommée en ``Validation::notBlank()``.
+  Ceci a pour objectif d'éviter la confusion autour de la fonction PHP
+  `notEmpty()` et que la règle de validation accepte ``0`` en input valide.
 
 Controller
 ==========
@@ -85,6 +92,7 @@ View
 
 SessionHelper
 -------------
+
 - :php:meth:`SessionHelper::consume()` a été ajoutée pour lire et supprimer
   dans Session en une seule étape.
 - :php:meth:`SessionHelper::flash()` a été dépréciée. Vous devez utiliser
@@ -95,5 +103,6 @@ TestSuite
 
 ControllerTestCase
 ------------------
+
 - :php:meth:`ControllerTestCase::testAction()` supporte maintenant un tableau
   pour une URL.

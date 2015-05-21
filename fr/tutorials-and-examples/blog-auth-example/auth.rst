@@ -40,13 +40,13 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'user::
         public $validate = array(
             'username' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'Un nom d\'utilisateur est requis'
                 )
             ),
             'password' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'Un mot de passe est requis'
                 )
             ),
