@@ -202,7 +202,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         $this->set('title_for_layout', 'This is the page title');
 
 
-.. php:method:: render(string $action, string $layout, string $file)
+.. php:method:: render(string $view, string $layout)
 
     :php:meth:`~Controller::render()` メソッドは各アクションの最後に自動的に呼ばれます。
     このメソッドは(:php:meth:`~Controller::set()` を使って渡したデータを使って)すべてのビューロジックを実行し、ビューを :php:attr:`~View::$layout` 内に配置し、エンドユーザーに表示します。
@@ -220,15 +220,14 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         }
 
     CakePHPは(``$this->autoRender`` にfalseをセットしない限り)アクションの後に自動的に描画メソッドを呼び出しますが、
-    コントローラで ``$action`` にアクション名を指定することで、別のビューファイルを指定することが出来ます。
+    コントローラで ``$view`` にビュー名を指定することで、別のビューファイルを指定することが出来ます。
 
-    ``$action`` が'/'で始まっていれば、 ``/app/View`` への相対パスでビューまたはエレメントを探そうとします。
+    ``$view`` が'/'で始まっていれば、 ``/app/View`` への相対パスでビューまたはエレメントを探そうとします。
     これはエレメントを直接描画することができ、Ajax呼び出しではとても有用です。::
 
         // /View/Elements/ajaxreturn.ctpのビューが描画されます
         $this->render('/Elements/ajaxreturn');
 
-    また3つ目のパラメータ ``$file`` を使って別のビューまたはエレメントを指定することも出来ます。
     :php:attr:`~View::$layout` パラメータはビューが描画されるレイアウトの指定が出来ます。
 
 指定したビューを描画する

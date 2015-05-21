@@ -32,7 +32,7 @@ Attacher le Behavior Translate à vos Models
 ===========================================
 
 Ajoutez-le à votre model en utilisant la propriété ``$actsAs`` comme dans
-l'exemple suivant.::
+l'exemple suivant. ::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -80,7 +80,7 @@ récupération de données avec les locales.
 
     Si tous les champs dans votre model sont traduits, assurez-vous d'ajouter
     les colonnes ``created`` et ``modified`` à votre table. CakePHP a besoin
-    d'au moins un champ différent d'une clé primaire avant d'enregister un
+    d'au moins un champ différent d'une clé primaire avant d'enregistrer un
     enregistrement.
 
 Conclusion
@@ -94,7 +94,7 @@ identifiant d'une langue, pour ainsi dire.
 Lire le contenu traduit
 =======================
 
-Par défaut, le TranslateBehavior va automatiquement récupèrer et ajouter les
+Par défaut, le TranslateBehavior va automatiquement récupérer et ajouter les
 données basées sur la locale courante. La locale courante est lue à partir de
 ``Configure::read('Config.language')`` qui est assignée par la classe
 :php:class:`L10n`. Vous pouvez surcharger cette valeur par défaut à la volée
@@ -119,7 +119,7 @@ Récupérer tous les enregistrements de traduction pour un champ
 Si vous voulez avoir tous les enregistrements de traduction attachés à
 l'enregistrement de model courant, vous étendez simplement le **tableau champ**
 dans votre paramétrage du behavior, comme montré ci-dessous. Vous êtes
-complètement libre de choisir le nommage.::
+complètement libre de choisir le nommage. ::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -187,7 +187,7 @@ avez besoin, en utilisant la méthode bindTranslation.
 
 ``$fields`` st un tableau associatif composé du champ et du nom de
 l'association, dans lequel la clé est le champ traduisible et la valeur
-est le nom fictif de l'association.::
+est le nom fictif de l'association. ::
 
     $this->Post->bindTranslation(array('name' => 'titleTranslation'));
     $this->Post->find('all', array('recursive' => 1)); // il est nécessaire d'avoir au moins un recursive à 1 pour que ceci fonctionne 
@@ -315,7 +315,7 @@ Pour que cela fonctionne vous devez créer le fichier du model actuel dans le
 dossier des models. La raison est qu'il n'y a pas de propriété pour définir le
 displayField directement dans le model utilisant ce behavior.
 
-Assurez vous de changer le ``$displayField`` en ``'field'``.::
+Assurez vous de changer le ``$displayField`` en ``'field'``. ::
 
     class PostI18n extends AppModel { 
         public $displayField = 'field'; // important

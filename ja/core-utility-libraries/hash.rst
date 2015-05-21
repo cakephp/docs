@@ -23,7 +23,7 @@ CakePHP の Hash クラスは Inflector クラスと同様で、どのモデル�
 .. _hash-path-syntax:
 
 Hash パス構文
-=================
+=============
 
 ..
   Hash path syntax
@@ -1032,5 +1032,5 @@ Hash パス構文
 
 
 .. meta::
-    :title lang=en: Hash
-    :keywords lang=en: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path
+    :title lang=ja: Hash
+    :keywords lang=ja: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path

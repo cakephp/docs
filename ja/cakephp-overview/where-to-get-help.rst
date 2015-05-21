@@ -2,7 +2,7 @@
 ############
 
 公式CakePHPウェブサイト
-=========================
+=======================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
 
@@ -65,7 +65,8 @@ IRC チャンネル
 .. _cakephp-official-communities:
 
 CakePHP 公式コミュニティ
-============================
+========================
+
 CakePHP は Facebook や Google Plus などのよく知られたソーシャルネットワーク上にも
 公式グループがあります。
 
@@ -101,4 +102,5 @@ Where to get Help in your Language
 
 French
 ------
+
 - `French CakePHP Community <http://cakephp-fr.org>`_

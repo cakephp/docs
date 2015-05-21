@@ -1,5 +1,5 @@
 博客教程——添加一个层
-####################
+********************
 
 创建文章(*Post*)模型
 ====================
@@ -494,8 +494,13 @@ edit 视图会是这样:
             $this->Session->setFlash(
                 __('The post with id: %s has been deleted.', h($id))
             );
-            return $this->redirect(array('action' => 'index'));
+        } else {
+            $this->Session->setFlash(
+                __('The post with id: %s could not be deleted.', h($id))
+            );
         }
+
+        return $this->redirect(array('action' => 'index'));
     }
 
 这个逻辑删除 `$id` 指定的文章(*post*)，然后使用 ``$this->Session->setFlash()``，

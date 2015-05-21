@@ -106,7 +106,7 @@ l'endroit où notre tableau ``$channelData`` va venir définir toutes les
 données meta pour notre flux.
 
 Ensuite il y a le fichier de vue pour mes posts/index. Un peu comme le fichier
-de layout que nous avons crée, nous avons besoin de créer un répertoire
+de layout que nous avons créé, nous avons besoin de créer un répertoire
 ``View/Posts/rss/`` et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
 Les contenus du fichier sont ci-dessous.
 
@@ -116,9 +116,9 @@ View
 Notre vue, localisée dans ``app/View/Posts/rss/index.ctp``, commence par
 définir les variables ``$documentData`` et ``$channelData`` pour le layout,
 celles-ci contiennent toutes les metadonnées pour notre flux RSS. C'est fait
-en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la
-méthode Controller::set(). Ici nous passons les canaux de données en retour au
-layout::
+en utilisant la méthode :php:meth:`View::set()` qui est analogue à la
+méthode :php:meth:`View::set()`. Ici nous passons les canaux de données en
+retour au layout::
 
     $this->set('channelData', array(
         'title' => __("Most Recent Posts"),
@@ -126,7 +126,7 @@ layout::
         'description' => __("Most recent posts."),
         'language' => 'en-us'));
 
-La seconde partie de la vue génére les éléments pour les enregistrements
+La seconde partie de la vue génère les éléments pour les enregistrements
 actuels du flux. Ceci est accompli en bouclant sur les données qui ont
 été passées à la vue ($items) et en utilisant la méthode
 :php:meth:`RssHelper::item()`. L'autre méthode que vous pouvez utiliser
@@ -177,7 +177,7 @@ pour chaque pair de valeur de clé.
     }
 
 Vous pouvez voir ci-dessus que nous pouvons utiliser la boucle pour préparer
-les données devant être transformées en elements XML. Il est important de
+les données devant être transformées en éléments XML. Il est important de
 filtrer tout texte de caractères non brute en-dehors de la description,
 spécialement si vous utilisez un éditeur de texte riche pour le corps de votre
 blog. Dans le code ci-dessus nous utilisons ``strip_tags()`` et
@@ -254,7 +254,7 @@ API de Rss Helper
 
     :rtype: string
 
-    Génére un élément XML.
+    Génère un élément XML.
 
 .. php:method:: item(array $att = array (), array $elements = array ())
 

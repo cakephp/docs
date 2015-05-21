@@ -30,7 +30,7 @@ You have 5 built-in options when configuring error handlers:
 * ``handler`` - callback - The callback to handle errors. You can set this to any
   callable type, including anonymous functions.
 * ``level`` - int - The level of errors you are interested in capturing. Use the
-  built-in php error constants, and bitmasks to select the level of error you
+  built-in PHP error constants, and bitmasks to select the level of error you
   are interested in.
 * ``trace`` - boolean - Include stack traces for errors in log files. Stack traces
   will be included in the log after each error. This is helpful for finding
@@ -80,7 +80,7 @@ need to be done::
 
 This class/method will print out 'There has been an error!' each time an error
 occurs. Since you can define an error handler as any callback type, you could
-use an anonymous function if you are using PHP5.3 or greater.::
+use an anonymous function if you are using PHP5.3 or greater. ::
 
     Configure::write('Error.handler', function($code, $description, $file = null,
         $line = null, $context = null) {
@@ -125,6 +125,7 @@ If you do not want to show the cake error page, you can override it like::
 
 If you want to keep the default fatal error behavior, you can call ``ErrorHandler::handleFatalError()``
 from your custom handler.
+
 
 .. meta::
     :title lang=en: Error Handling

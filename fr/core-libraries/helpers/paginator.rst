@@ -5,7 +5,7 @@ Paginator
 
 Le Helper Paginator est utilisé pour présenter des contrôles de pagination
 comme les numéros de pages et les liens suivant/précédent. Il travaille en
-tamdem avec :php:class:`PaginatorComponent`.
+tandem avec :php:class:`PaginatorComponent`.
 
 Voir aussi :doc:`/core-libraries/components/pagination` pour des informations
 sur la façon de créer des jeux de données paginés et faire des requêtes paginées.
@@ -151,7 +151,7 @@ Les options supportées sont:
   'a' ou 'span' supplémentaires.
 
 Bien que cette méthode permette beaucoup de customisation pour ses sorties.
-Elle est aussi prête pour être appelée sans aucun paramètres.::
+Elle est aussi prête pour être appelée sans aucun paramètres. ::
 
     echo $this->Paginator->numbers();
 
@@ -573,7 +573,7 @@ D'autres Méthodes
     :param string $model: Le model sur lequel paginer.
 
     Par défaut retourne une chaîne URL complètement paginée à utiliser
-    dans des contextes non-standard (ex. JavaScript).::
+    dans des contextes non-standard (ex. JavaScript). ::
 
         echo $this->Paginator->url(array('sort' => 'titre'), true);
 

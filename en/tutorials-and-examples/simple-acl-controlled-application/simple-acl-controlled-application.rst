@@ -7,7 +7,6 @@ Simple Acl controlled Application
     CakePHP we would advise you to get a better overall experience of the
     framework's features before trying out this tutorial.
 
-
 In this tutorial you will create a simple application with
 :doc:`/core-libraries/components/authentication` and
 :doc:`/core-libraries/components/access-control-lists`. This
@@ -16,7 +15,7 @@ tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
-:php:class:`AuthComponent` and :php:class:`AclComponent`\.
+:php:class:`AuthComponent` and :php:class:`AclComponent`.
 
 What you will need
 
@@ -41,12 +40,12 @@ To get a fresh download, visit the CakePHP project at GitHub:
 https://github.com/cakephp/cakephp/tags and download the stable
 release. For this tutorial you need the latest 2.0 release.
 
-
 You can also clone the repository using
-`git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git``
+`git <http://git-scm.com/>`_::
 
-Once you've got a fresh copy of cake setup your database.php config
+    git clone git://github.com/cakephp/cakephp.git
+
+Once you've got a fresh copy of CakePHP setup your database.php config
 file, and change the value of Security.salt in your
 app/Config/core.php. From there we will build a simple database
 schema to build our application on. Execute the following SQL
@@ -61,14 +60,12 @@ statements into your database::
        modified DATETIME
    );
 
-
    CREATE TABLE groups (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
        name VARCHAR(100) NOT NULL,
        created DATETIME,
        modified DATETIME
    );
-
 
    CREATE TABLE posts (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -92,8 +89,8 @@ can start cooking. Use
 :doc:`/console-and-shells/code-generation-with-bake` to quickly
 create your models, controllers, and views.
 
-To use cake bake, call "cake bake all" and this will list the 4
-tables you inserted into mySQL. Select "1. Group", and follow the
+To use cake bake, call ``cake bake all`` and this will list the 4
+tables you inserted into MySQL. Select "1. Group", and follow the
 prompts. Repeat for the other 3 tables, and this will have
 generated the 4 controllers, models and your views for you.
 
@@ -127,7 +124,7 @@ Acl components. First add a login and logout action to your
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Session->setFlash(__('Your username or password was incorrect.'));
         }
@@ -185,15 +182,15 @@ site controlled with Auth and Acl, we will set them up in
         public function beforeFilter() {
             //Configure AuthComponent
             $this->Auth->loginAction = array(
-              'controller' => 'users', 
+              'controller' => 'users',
               'action' => 'login'
             );
             $this->Auth->logoutRedirect = array(
-              'controller' => 'users', 
+              'controller' => 'users',
               'action' => 'login'
             );
             $this->Auth->loginRedirect = array(
-              'controller' => 'posts', 
+              'controller' => 'posts',
               'action' => 'add'
             );
         }
@@ -270,9 +267,8 @@ our ``User`` model we will add the following::
             }
             if (!$groupId) {
                 return null;
-            } else {
-                return array('Group' => array('id' => $groupId));
             }
+            return array('Group' => array('id' => $groupId));
         }
     }
 
@@ -293,7 +289,7 @@ management a piece of cake as your AROs become transparently tied
 to your ``users`` and ``groups`` tables. So anytime you create or
 delete a user/group the Aro table is updated.
 
-Our controllers and models are now prepped for adding some initial
+Our controllers and models are now prepared for adding some initial
 data, and our ``Group`` and ``User`` models are bound to the Acl
 table. So add some groups and users using the baked forms by
 browsing to http://example.com/groups/add and
@@ -306,7 +302,7 @@ http://example.com/users/add. I made the following groups:
 I also created a user in each group so I had a user of each
 different access group to test with later. Write everything down or
 use easy passwords so you don't forget. If you do a
-``SELECT * FROM aros;`` from a mysql prompt you should get
+``SELECT * FROM aros;`` from a MySQL prompt you should get
 something like the following::
 
     +----+-----------+-------+-------------+-------+------+------+
@@ -339,7 +335,7 @@ Then modify the ``actsAs`` for the model ``User`` and disable the requester dire
 
     public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
 
-These two changes will tell ACL to skip checking ``User`` Aro's and to check only ``Group`` 
+These two changes will tell ACL to skip checking ``User`` Aro's and to check only ``Group``
 Aro's. This also avoids the afterSave being called.
 
 Note: Every user has to have ``group_id`` assigned for this to work.

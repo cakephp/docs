@@ -103,16 +103,16 @@ RecipesController pourrait contenir les actions
 ``/app/Controller/RecettesController.php`` et contiendrait::
 
         # /app/Controller/RecettesController.php
-        
+
         class RecettesController extends AppController {
             public function view($id) {
                 //la logique de l'action va ici..
             }
-        
+
             public function share($client_id, $recette_id) {
                 //la logique de l'action va ici..
             }
-        
+
             public function search($query) {
                 //la logique de l'action va ici..
             }
@@ -247,10 +247,10 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
             'prix_de_base' => 23.95
         );
 
-        // donne $couleur, $type, et $prix_de_base 
+        // donne $couleur, $type, et $prix_de_base
         // disponible dans la vue:
 
-        $this->set($data);  
+        $this->set($data);
 
 
     L'attribut ``$pageTitle`` n'existe plus. Utilisez
@@ -260,7 +260,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
 
     Depuis 2.5 la variable $title_for_layout est dépréciée, utilisez les blocks de vues à la place.
 
-.. php:method:: render(string $action, string $layout, string $file)
+.. php:method:: render(string $view, string $layout)
 
     La méthode :php:meth:`~Controller::render()` est automatiquement appelée à
     la fin de chaque action exécutée par le controller. Cette méthode exécute
@@ -287,7 +287,7 @@ utiliser, et quel fichier de vue doit être rendu à partir du controller.
     fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
     à false), vous pouvez l'utiliser pour spécifier un fichier de vue
     alternatif en précisant le nom d'une action dans le controller, via
-    le paramètre ``$action``.
+    le paramètre ``$view``.
 
     Si ``$view`` commence avec un '/' on suppose que c'est un fichier de
     vue ou un élément dont le chemin est relatif au dossier ``/app/View``. Cela
@@ -328,7 +328,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` 
+Cela rendrait la vue ``app/Plugin/Users/View/UserDetails/custom_file.ctp``
 
 Contrôle de Flux
 ----------------
@@ -339,7 +339,7 @@ Contrôle de Flux
     :php:meth:`~Controller::redirect()`. Cette méthode prend son premier
     paramètre sous la forme d'une URL relative à votre application CakePHP.
     Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-    rediriger vers un écran affichant le reçu.::
+    rediriger vers un écran affichant le reçu. ::
 
         public function regler_achats() {
             // Placez ici la logique pour finaliser l'achat...
@@ -550,7 +550,7 @@ Autres Méthodes utiles
         $conditions = $this->postConditions(
             $this->request->data,
             array(
-                'nb_items' => '>=', 
+                'nb_items' => '>=',
                 'referrer' => 'LIKE'
             )
         );
@@ -601,7 +601,7 @@ Autres Méthodes utiles
     pour un élément avant de l'afficher. Prenons l'exemple de la mise en place
     d'un élément "derniers commentaires" dans le layout. Nous devons d'abord
     créer une méthode de controller qui retourne les données::
-    
+
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             public function latest() {
@@ -666,7 +666,7 @@ Autres Méthodes utiles
     ``Controller::params`` et ne place pas les arguments nommés dans la clé
     'named'. Des parties supplémentaires dans le tableau ``$option`` vont aussi
     être disponibles dans le tableau Controller::params de l'action requêtée ::
-        
+
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
@@ -699,7 +699,7 @@ Autres Méthodes utiles
     La fonction :php:meth:`~Controller::loadModel()` devient pratique quand
     vous avez besoin d'utiliser un model qui n'est pas le model du controller
     par défaut ou un de ses models associés::
-    
+
         $this->loadModel('Article');
         $recentArticles = $this->Article->find(
             'all',
@@ -757,7 +757,7 @@ référence à l'objet (``$this->{$helpername}``).
     :php:attr:`~Controller::$uses`, le nom du model primaire du controller
     courant doit également être inclu. Ceci est illustré dans l'exemple
     ci-dessous.
-    
+
     Si vous ne souhaitez pas utiliser un Model dans votre controller,
     définissez ``public $uses = array()``. Cela vous permettra d'utiliser un
     controller sans avoir besoin d'un fichier Model correspondant. Cependant,

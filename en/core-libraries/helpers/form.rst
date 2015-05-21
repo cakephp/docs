@@ -424,7 +424,7 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
     ``$this->Form->inputs(array('legend' => 'My legend'));``
     Would generate an input set with a custom legend. You can customize
-    individual inputs through ``$fields`` as well.::
+    individual inputs through ``$fields`` as well. ::
 
         echo $this->Form->inputs(array(
             'name' => array('label' => 'custom label')
@@ -1010,7 +1010,7 @@ Ex: name=data[User][username], id=UserUsername
 
 .. php:method:: password(string $fieldName, array $options)
 
-    Creates a password field.::
+    Creates a password field. ::
 
         echo $this->Form->password('password');
 
@@ -1049,7 +1049,7 @@ Ex: name=data[User][username], id=UserUsername
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-    Creates a textarea input field.::
+    Creates a textarea input field. ::
 
         echo $this->Form->textarea('notes');
 
@@ -1110,7 +1110,7 @@ Ex: name=data[User][username], id=UserUsername
 
     Creates a checkbox form element. This method also generates an
     associated hidden form input to force the submission of data for
-    the specified field.::
+    the specified field. ::
 
         echo $this->Form->checkbox('done');
 
@@ -1163,7 +1163,7 @@ Ex: name=data[User][username], id=UserUsername
 
     * ``$attributes['legend']`` Radio elements are wrapped with a legend and
       fieldset by default. Set ``$attributes['legend']`` to false to remove
-      them.::
+      them. ::
 
         $options = array('M' => 'Male', 'F' => 'Female');
         $attributes = array('legend' => false);
@@ -1462,7 +1462,7 @@ Creating buttons and submit elements
         <div class="submit"><input value="Submit" type="submit"></div>
 
     You can also pass a relative or absolute URL to an image for the
-    caption parameter instead of caption text.::
+    caption parameter instead of caption text. ::
 
         echo $this->Form->submit('ok.png');
 
@@ -1518,7 +1518,7 @@ Creating buttons and submit elements
     opened form. Instead use :php:meth:`FormHelper::submit()` or
     :php:meth:`FormHelper::button()` to create buttons inside opened forms.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = array ())
 
     Creates an HTML link, but access the URL using method POST. Requires
     JavaScript to be enabled in browser.
@@ -1538,7 +1538,7 @@ Creating buttons and submit elements
         the form tag to ``postLink`` content block or you can use option ``block``
         to specify a custom block.
 
-   .. versionchanged:: 2.6
+    .. versionchanged:: 2.6
         The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
         in ``$options`` instead.
 
@@ -1671,7 +1671,7 @@ Displaying and checking errors
 .. php:method:: isFieldError(string $fieldName)
 
     Returns true if the supplied $fieldName has an active validation
-    error.::
+    error. ::
 
         if ($this->Form->isFieldError('gender')) {
             echo $this->Form->error('gender');

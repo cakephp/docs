@@ -23,7 +23,7 @@ CakePHP のアプリケーションではデータアクセスに使われます
 最後にデータソースについて触れます。
 
 モデルを理解する
-====================
+================
 
 Model はデータモデルを表します。オブジェクト指向プログラミングにおいて、\
 データモデルは自動車や人、家といった「もの」を表現するオブジェクトです。\
@@ -129,5 +129,5 @@ More on models
 
 
 .. meta::
-    :title lang=en: Models
-    :keywords lang=en: information workflow,csv file,object oriented programming,model class,model classes,model definition,internal model,core model,simple declaration,application model,php class,database table,data model,data access,external web,inheritance,different ways,validity,functionality,queries
+    :title lang=ja: Models
+    :keywords lang=ja: information workflow,csv file,object oriented programming,model class,model classes,model definition,internal model,core model,simple declaration,application model,php class,database table,data model,data access,external web,inheritance,different ways,validity,functionality,queries

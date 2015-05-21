@@ -25,13 +25,13 @@ CakePHP 发行 PEAR 的安装包，故可以通过 PEAR 安装器安装。用 PE
 
 Composer 是一个适用于 PHP 5.3+ 的依赖管理工具，解决了通过 PEAR 安装的很多问题，并
 且简化了对类库的多个版本的管理。由于 CakePHP 有 PEAR 发行包，故而可以使用 
-`composer <http://getcomposer.org>`_ 安装 CakePHP。在安装 CakePHP 之前需要建立 
+`Composer <http://getcomposer.org>`_ 安装 CakePHP。在安装 CakePHP 之前需要建立
 ``composer.json`` 文件。CakePHP 应用程序的 composer.json 可以象下面这样::
 
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.5.*"
+            "cakephp/cakephp": "2.6.*"
         },
         "config": {
             "vendor-dir": "Vendor/"

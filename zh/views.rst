@@ -461,9 +461,8 @@ element 方法来输出::
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
-            } else {
-                $this->set('posts', $posts);
             }
+            $this->set('posts', $posts);
         }
     }
 
@@ -528,7 +527,7 @@ element 方法来输出::
 
 如果你使用插件，并且使用插件中的元素，只需使用熟悉的 :term:`plugin syntax`。如果
 视图是为插件中的控制器/动作而渲染，使用的所有元素都会自动添加插件名称为其前缀，除
-非已有了另一个插件名称。如果元素不在插件内，就会在主 APP 目录内查找。::
+非已有了另一个插件名称。如果元素不在插件内，就会在主 APP 目录内查找。 ::
 
     echo $this->element('Contacts.helpbox');
 

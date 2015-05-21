@@ -48,7 +48,7 @@ DatabaseLog would look like::
 
 When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log stream's constructor as an array.::
+properties are passed to the log stream's constructor as an array. ::
 
     App::uses('BaseLog', 'Log/Engine');
 
@@ -411,9 +411,12 @@ appropriate log level.
 .. php:staticmethod:: emergency($message, $scope = array())
 .. php:staticmethod:: alert($message, $scope = array())
 .. php:staticmethod:: critical($message, $scope = array())
+.. php:staticmethod:: error($message, $scope = array())
+.. php:staticmethod:: warning($message, $scope = array())
 .. php:staticmethod:: notice($message, $scope = array())
-.. php:staticmethod:: debug($message, $scope = array())
 .. php:staticmethod:: info($message, $scope = array())
+.. php:staticmethod:: debug($message, $scope = array())
+
 
 .. meta::
     :title lang=en: Logging

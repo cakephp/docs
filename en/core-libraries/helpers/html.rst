@@ -84,7 +84,7 @@ methods of the HtmlHelper and how to use them.
     If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
 
     This method of CSS inclusion assumes that the CSS file specified
-    resides inside the /app/webroot/css directory if path doesn't start with a '/'.::
+    resides inside the /app/webroot/css directory if path doesn't start with a '/'. ::
 
         echo $this->Html->css('forms');
 
@@ -94,7 +94,7 @@ methods of the HtmlHelper and how to use them.
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
 
-    The first parameter can be an array to include multiple files.::
+    The first parameter can be an array to include multiple files. ::
 
         echo $this->Html->css(array('forms', 'tables', 'menu'));
 
@@ -262,7 +262,7 @@ methods of the HtmlHelper and how to use them.
 
     Builds CSS style definitions based on the keys and values of the
     array passed to the method. Especially handy if your CSS file is
-    dynamic.::
+    dynamic. ::
 
         echo $this->Html->style(array(
             'background' => '#633',
@@ -280,7 +280,7 @@ methods of the HtmlHelper and how to use them.
     :param array $options: An array of :term:`html attributes`.
 
     Creates a formatted image tag. The path supplied should be relative
-    to /app/webroot/img/.::
+    to /app/webroot/img/. ::
 
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
@@ -291,7 +291,7 @@ methods of the HtmlHelper and how to use them.
         <img src="/img/cake_logo.png" alt="CakePHP" />
 
     To create an image link specify the link destination using the
-    ``url`` option in ``$htmlAttributes``.::
+    ``url`` option in ``$htmlAttributes``. ::
 
         echo $this->Html->image("recipes/6.jpg", array(
             "alt" => "Brownies",
@@ -333,7 +333,7 @@ methods of the HtmlHelper and how to use them.
         The ``fullBase`` option was added.
         Support for :term:`plugin syntax` was added.
 
-.. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = array())
 
     :param string $title: The text to display as the body of the link.
     :param mixed $url: Either the string location, or a :term:`routing array`.
@@ -341,7 +341,7 @@ methods of the HtmlHelper and how to use them.
 
     General purpose method for creating HTML links. Use ``$options`` to
     specify attributes for the element and whether or not the
-    ``$title`` should be escaped.::
+    ``$title`` should be escaped. ::
 
         echo $this->Html->link(
             'Enter',
@@ -393,7 +393,7 @@ methods of the HtmlHelper and how to use them.
             Delete
         </a>
 
-    Query strings can also be created with ``link()``.::
+    Query strings can also be created with ``link()``. ::
 
         echo $this->Html->link('View image', array(
             'controller' => 'images',
@@ -412,7 +412,7 @@ methods of the HtmlHelper and how to use them.
     names for ALL parameters in the URL. Using the string syntax for
     paramters (i.e. "recipes/view/6/comments:false" will result in
     the colon characters being HTML escaped and the link will not work
-    as desired.::
+    as desired. ::
 
         <?php
         echo $this->Html->link(
@@ -435,7 +435,7 @@ methods of the HtmlHelper and how to use them.
 
     HTML special characters in ``$title`` will be converted to HTML
     entities. To disable this conversion, set the escape option to
-    false in the ``$options`` array.::
+    false in the ``$options`` array. ::
 
         <?php
         echo $this->Html->link(
@@ -454,7 +454,7 @@ methods of the HtmlHelper and how to use them.
 
     Setting ``escape`` to false will also disable escaping of attributes of the
     link. As of 2.4 you can use the option ``escapeTitle`` to disable just
-    escaping of title and not the attributes.::
+    escaping of title and not the attributes. ::
 
         <?php
         echo $this->Html->link(
@@ -471,10 +471,10 @@ methods of the HtmlHelper and how to use them.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-   .. versionchanged:: 2.4
+    .. versionchanged:: 2.4
         The ``escapeTitle`` option was added.
 
-   .. versionchanged:: 2.6
+    .. versionchanged:: 2.6
         The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
         in ``$options`` instead.
 
@@ -660,7 +660,7 @@ methods of the HtmlHelper and how to use them.
         <script type="text/javascript" href="http://code.jquery.com/jquery.min.js">
             </script>
 
-    The first parameter can be an array to include multiple files.::
+    The first parameter can be an array to include multiple files. ::
 
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
@@ -784,7 +784,7 @@ methods of the HtmlHelper and how to use them.
     :param array $thOptions: An array of :term:`html attributes` for the <th> elements
 
     Creates a row of table header cells to be placed inside of <table>
-    tags.::
+    tags. ::
 
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 

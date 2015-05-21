@@ -6,7 +6,7 @@ TextHelper
 TextHelper possède des méthodes pour rendre le texte plus utilisable et sympa
 dans vos vues. Il aide à activer les liens, à formater les URLs, à créer
 des extraits de texte autour des mots ou des phrases choisies, mettant en
-évidence des mots clés dans des blocs de texte et tronquer élegamment de 
+évidence des mots clés dans des blocs de texte et tronquer élégamment de 
 longues étendues de texte.
 
 .. versionchanged:: 2.1
@@ -24,7 +24,7 @@ longues étendues de texte.
 
     Ajoute les liens aux adresses email bien formées dans $text, selon toute
     les options définies dans ``$htmlOptions`` (regardez
-    :php:meth:`HtmlHelper::link()`).::
+    :php:meth:`HtmlHelper::link()`). ::
 
         $myText = 'Pour plus d'informations sur nos pâtes et desserts fameux,
             contactez info@example.com';
@@ -36,7 +36,7 @@ longues étendues de texte.
         contactez <a href="mailto:info@example.com">info@example.com</a>
 
     .. versionchanged:: 2.1
-        Dans 2.1, cette méthode echappe automatiquement ces inputs. Utilisez
+        Dans 2.1, cette méthode échappe automatiquement ces inputs. Utilisez
         l'option ``escape`` pour la désactiver si nécessaire.
 
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
@@ -59,7 +59,7 @@ longues étendues de texte.
     :param array $htmlOptions: Un tableau d' :term:`attributs HTML` pour
         générer les liens.
 
-    Execute la fonctionnalité dans les deux ``autoLinkUrls()`` et
+    Exécute la fonctionnalité dans les deux ``autoLinkUrls()`` et
     ``autoLinkEmails()`` sur le ``$text`` fourni. Tous les URLs et emails
     sont liés de manière appropriée donnée par ``$htmlOptions`` fourni.
 
@@ -72,7 +72,7 @@ longues étendues de texte.
     :param string $text: Le texte à convertir.
 
     Ajoute <p> autour du texte où la double ligne retourne et <br> où une
-    simple ligne retourne, sont trouvés.::
+    simple ligne retourne, sont trouvés. ::
 
         $myText = 'For more information
         regarding our world-famous pastries and desserts.

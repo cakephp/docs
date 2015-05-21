@@ -209,7 +209,7 @@ Finding which objects CakePHP knows about
         //returns array('PagesController', 'BlogController');
         App::objects('Controller');
 
-    You can also search only within a plugin's objects by using the plugin dot syntax.::
+    You can also search only within a plugin's objects by using the plugin dot syntax. ::
 
         // returns array('MyPluginPost', 'MyPluginComment');
         App::objects('MyPlugin.Model');
@@ -320,7 +320,7 @@ with ``App::build()``::
 
     // Load the class ClassInSomePackage in
     // app/Vendor/SomePackage/ClassInSomePackage.php
-    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
+    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
     App::uses('ClassInSomePackage', 'Vendor');
 
 Your vendor files may not follow conventions, have a class that differs from
@@ -405,6 +405,7 @@ App Init/Load/Shutdown Methods
 
     Object destructor. Writes cache file if changes have been made to the
     ``$_map``.
+
 
 .. meta::
     :title lang=en: App Class

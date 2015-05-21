@@ -53,7 +53,7 @@ CakePHP には、あなたのアプリケーション内に保管されている
   By default ``AuthComponent`` uses ``FormAuthenticate``.
 
 認証タイプの選択
--------------------------------
+----------------
 
 ..
   Choosing an Authentication type
@@ -85,7 +85,7 @@ Basic認証では、ユーザ名とパスワードは平文のテキストとし
 
 
 認証を設定するためのハンドラ
------------------------------------
+----------------------------
 
 ..
   Configuring Authentication handlers
@@ -240,7 +240,7 @@ Auth の他の設定キー(authError や loginAction など)を authenticate や
     to ``md5($settings['realm'])``
 
 ユーザの識別とログイン
--------------------------------------
+----------------------
 
 ..
   Identifying users and logging them in
@@ -293,7 +293,7 @@ Auth の他の設定キー(authError や loginAction など)を authenticate や
       whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in when successful.
 
 ログインでのダイジェスト認証・Basic認証の利用
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ..
   Using Digest and Basic Authentication for logging in
 
@@ -325,7 +325,7 @@ Basicおよびダイジェスト認証は初期POSTやフォームを必要と�
     will cause an error prior to 2.4.
 
 カスタム認証オブジェクトの作成
---------------------------------------
+------------------------------
 
 ..
   Creating Custom Authentication objects
@@ -368,7 +368,7 @@ Basicおよびダイジェスト認証は初期POSTやフォームを必要と�
   See the sections on basic and digest authentication below for more information.
 
 カスタム認証オブジェクトの利用
------------------------------------
+------------------------------
 
 ..
   Using custom authentication objects
@@ -384,7 +384,7 @@ Basicおよびダイジェスト認証は初期POSTやフォームを必要と�
   Once you've created your custom authentication object, you can use them by including them in AuthComponents authenticate array::
 
 ステートレス認証システムの作成
------------------------------------------
+------------------------------
 
 ..
   Creating stateless authentication systems
@@ -622,7 +622,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
   to do with specify ``passwordHasher`` setting for the authenticating object::
 
 ダイジェスト認証のパスワードのハッシュ化
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ..
   Hashing passwords for digest authentication
 
@@ -692,7 +692,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
   the following::
 
 手動でのユーザログイン
--------------------------
+----------------------
 
 ..
   Manually logging users in
@@ -928,7 +928,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
   Once you've created your custom authorize object, you can use them by including them in your AuthComponent's authorize array::
 
 権限判定を使用しない
-----------------------
+--------------------
 
 ..
   Using no authorization
@@ -990,7 +990,7 @@ AuthComponent は悲観的であり、デフォルトではアクセスを拒否
   You can also supply an array containing all the action names.
 
 権限判定が必要なアクションの作成
-------------------------------------
+--------------------------------
 
 ..
   Making actions require authorization
@@ -1243,12 +1243,12 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:attr:: unauthorizedRedirect
 
     許可されていないアクセスに対する処理を制御します。
-    デフォルトでは、許可されていないユーザーはリファラの URL か ``AuthComponent::$loginAction`` か、もしくは '/' にリダイレクトされます。
+    デフォルトでは、許可されていないユーザーはリファラの URL か ``AuthComponent::$loginRedirect`` か、もしくは '/' にリダイレクトされます。
     false をセットした場合は、リダイレクトする代わりに ForbiddenException が送出されます。
 
     ..
       Controls handling of unauthorized access. By default unauthorized user is
-      redirected to the referrer url or ``AuthComponent::$loginAction`` or '/'.
+      redirected to the referrer url or ``AuthComponent::$loginRedirect`` or '/'.
       If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 .. php:attr:: request
@@ -1446,5 +1446,5 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging
+    :title lang=ja: Authentication
+    :keywords lang=ja: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

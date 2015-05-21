@@ -129,7 +129,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 #. これでOkをクリックすれば、 ``cake`` がどこからでも動くようになるはずです。
 
 シェルの作成
-================
+============
 
 早速コンソールで動くシェルを作ってみましょう。この例ではシンプルなhello world
 シェルを作ります。お使いのアプリケーションの ``Console/Command`` ディレクトリで
@@ -193,7 +193,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 何か他のメソッド名を使う必要があります。
 
 シェルの中でモデルを使う
----------------------------
+------------------------
 
 自作アプリケーションのビジネスロジックを、シェルユーティリティの中からアクセス
 する必要があることも少なくありません。CakePHPでは、これはいとも簡単に実現可能
@@ -270,7 +270,7 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
     にある機能を上書きするのでアクセスできなくなりますよという警告が出ます。
 
 TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
-----------------------------------------------------------------
+--------------------------------------------------------------
 
 タスクコレクションオブジェクトを使って、タスクをその場でロードすることも
 できます。$tasksで宣言するのとはまた別のやり方です::
@@ -712,7 +712,7 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
         )
     ));
 
-パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog`` 
+パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog``
 のためのキーを定義できます。配列形式ビルダーの内部にはサブコマンドは定義
 できません。argumentsとoptionsの値は
 :php:func:`ConsoleOptionParser::addArguments()` と
@@ -948,7 +948,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
    :param string $method: 表示するメッセージ
    :param integer $newlines: メッセージの後に出力する改行の数
-   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値 
+   :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値
 
    ユーザへの出力を生成するためのもっとも普通のやり方です。
    レベルを指定することで、シェルの出力の度合いを制限できます。
@@ -1017,6 +1017,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
     :maxdepth: 1
 
     console-and-shells/cron-jobs
+    console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations
     console-and-shells/i18n-shell
@@ -1024,7 +1025,6 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
     console-and-shells/testsuite-shell
     console-and-shells/upgrade-shell
 
-
 .. meta::
-    :title lang=en: Console and Shells
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :title lang=ja: Console and Shells
+    :keywords lang=ja: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

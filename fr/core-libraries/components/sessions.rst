@@ -72,7 +72,7 @@ le nom/la clé utilisé.
 
     La méthode ``destroy`` supprimera le cookie de session et toutes les
     données de session stockées dans le fichier temporaire du système. Cela
-    va détruire la session PHP et ainsi en créer une nouvelle.::
+    va détruire la session PHP et ainsi en créer une nouvelle. ::
     
         $this->Session->destroy();
 
@@ -112,7 +112,7 @@ Création de messages de notification
     et les notifications positives peuvent avoir des apparences différentes.
     CakePHP vous donne un moyen de le faire.
     En utilisant le paramètre ``$key`` vous pouvez stocker différents messages,
-    qui peuvent être séparément récupérer en sortie.::
+    qui peuvent être séparément récupérer en sortie. ::
 
         // définit le message que ca va mal
         $this->Session->setFlash('Ca va mal.', 'default', array(), 'mal');
@@ -143,7 +143,7 @@ Création de messages de notification
     au layout de rendu. Les paramètres peuvent être passés en affectant
     la div de rendu, par exemple en ajoutant "class" dans le tableau
     $params qui appliquera une classe à la div de sortie en utilisant
-    ``$this->Session->flash()`` dans votre layout ou vue.::
+    ``$this->Session->flash()`` dans votre layout ou vue. ::
 
         $this->Session->setFlash(
             'Message Exemple',

@@ -3,18 +3,17 @@ Xml
 
 .. php:class:: Xml
 
-The Xml class was all refactored. As PHP 5 have
+The Xml class was all refactored. As PHP 5 has
 `SimpleXML <http://php.net/simplexml>`_ and
-`DOMDocument <http://php.net/domdocument>`_, the CakePHP doesn't need to
-re-implement an XML parser. The new XML class will basically transform an array
+`DOMDocument <http://php.net/domdocument>`_, CakePHP doesn't need to
+re-implement an XML parser. The new XML class will transform an array
 into SimpleXMLElement or DOMDocument objects, and vice versa.
-
 
 Importing data to Xml class
 ===========================
 
 In CakePHP 1.3 you can pass array, XML as string, URL or file path to the
-constructor of Xml class to import data. In CakePHP 2.0 you can do it using
+constructor of the Xml class to import data. In CakePHP 2.0 you can do it using
 :php:meth:`Xml::build()`. Unless the return is an Xml object, it will return a
 SimpleXMLElement or DOMDocument object (depending of your options parameter -
 default is SimpleXMLElement). Below the samples how to import data from URL::
@@ -82,7 +81,6 @@ If your input is invalid the Xml class will throw a Exception::
     `DOMDocument <http://php.net/domdocument>`_ and
     `SimpleXML <http://php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
-
 
 Transforming a XML string in array
 ==================================

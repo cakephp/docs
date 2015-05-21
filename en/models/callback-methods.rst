@@ -96,7 +96,7 @@ to modify validation rules if required. This function must also
 return *true*, otherwise the current save() execution will abort.
 
 afterValidate
-==============
+=============
 
 ``afterValidate()``
 
@@ -147,7 +147,7 @@ changed very easily. Use the code below in the appropriate model.
 
 .. tip::
 
-    Be sure that beforeSave() returns true, or your save is going to
+    Make sure that beforeSave() returns true, or your save is going to
     fail.
 
 afterSave
@@ -178,7 +178,7 @@ on this record will also be deleted.
 
 .. tip::
 
-    Be sure that beforeDelete() returns true, or your delete is going
+    Make sure that beforeDelete() returns true, or your delete is going
     to fail.
 
 ::
@@ -196,9 +196,8 @@ on this record will also be deleted.
         ));
         if ($count == 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 afterDelete

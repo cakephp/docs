@@ -86,5 +86,5 @@ Sanitizeのコアライブラリを読み込むには、次のようにします
 
 
 .. meta::
-    :title lang=en: Data Sanitization
-    :keywords lang=en: array notation,sql security,sql function,malicious data,controller class,data options,raw html,core library,carriage returns,database connection,orm,industrial strength,slashes,chars,multi purpose,arrays,cakephp,element,models
+    :title lang=ja: Data Sanitization
+    :keywords lang=ja: array notation,sql security,sql function,malicious data,controller class,data options,raw html,core library,carriage returns,database connection,orm,industrial strength,slashes,chars,multi purpose,arrays,cakephp,element,models

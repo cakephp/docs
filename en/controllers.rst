@@ -28,7 +28,6 @@ for interpreting the request and creating the response. Usually responses are
 in the form of a rendered view, but there are other ways to create responses as
 well.
 
-
 .. _app-controller:
 
 The App Controller
@@ -269,8 +268,8 @@ rendered from the controller.
 
     Although CakePHP will automatically call it after every action's logic
     (unless you've set ``$this->autoRender`` to false), you can
-    use it to specify an alternate view file by specifying an action
-    name in the controller using ``$action``.
+    use it to specify an alternate view file by specifying a view
+    name in the controller using ``$view``.
 
     If ``$view`` starts with '/', it is assumed to be a view or
     element file relative to the ``/app/View`` folder. This allows
@@ -321,7 +320,7 @@ Flow Control
     The flow control method you'll use most often is :php:meth:`~Controller::redirect()`.
     This method takes its first parameter in the form of a
     CakePHP-relative URL. When a user has successfully placed an order,
-    you might wish to redirect them to a receipt screen.::
+    you might wish to redirect them to a receipt screen. ::
 
         public function place_order() {
             // Logic for finalizing order goes here

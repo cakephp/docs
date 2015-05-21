@@ -6,8 +6,8 @@ qui sont partagés entre les controllers. CakePHP est également livré avec un
 fantastique ensemble de components, que vous pouvez utiliser pour vous aider.
 Si vous vous surprenez à vouloir copier et coller des choses entre vos
 controllers, alors vous devriez envisager de regrouper plusieurs
-fonctionnalités dans un Component. Créer des components permettent de garder
-un code de controller propre et vous permet de réutiliser du code entre des
+fonctionnalités dans un Component. Créer des components permet de garder
+un code de controller propre et de réutiliser du code entre différents
 projets.
 
 Chacun de ces components d'origine est détaillé dans son chapitre
@@ -22,7 +22,7 @@ Configuration des Components
 
 De nombreux components du cœur nécessitent une configuration. Quelques
 exemples :
-:doc:`/core-libraries/components/authentication` and
+:doc:`/core-libraries/components/authentication` et
 :doc:`/core-libraries/components/cookie`.
 Toute configuration pour ces components, et pour les components en général,
 se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
@@ -100,7 +100,7 @@ Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à
 Utiliser les Components
 =======================
 
-Une fois que vous avez inclu quelques components dans votre controller,
+Une fois que vous avez inclus quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
 :php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre
@@ -245,8 +245,8 @@ variable ``$components``::
     }
 
 .. note::
-    Au contraire d'un component inclu dans un controller, aucun callback
-    ne sera attrapé pour un component inclu dans un component.
+    Au contraire d'un component inclus dans un controller, aucun callback
+    ne sera attrapé pour un component inclus dans un component.
 
 .. _component-api:
 
@@ -298,7 +298,7 @@ Les Callbacks
     méthode retourne false, le controller ne continuera pas de rediriger la
     requête. Les variables $url, $status et $exit ont la même signification
     que pour la méthode du controller. Vous pouvez aussi retourner une chaîne
-    de caractère qui sera interpretée comme une URL pour rediriger ou retourner
+    de caractère qui sera interprétée comme une URL pour rediriger ou retourner
     un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
 
 

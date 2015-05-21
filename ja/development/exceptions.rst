@@ -596,7 +596,7 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 .. index:: appError
 
 AppController::appError() を使う
-=================================
+================================
 
 ..
   Using AppController::appError();
@@ -739,5 +739,5 @@ Exception.renderer を使って独自のレンダラを使用し、アプリケ�
     no effect. Unless you reference it inside your implementation.
 
 .. meta::
-    :title lang=en: Exceptions
-    :keywords lang=en: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php
+    :title lang=ja: Exceptions
+    :keywords lang=ja: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php

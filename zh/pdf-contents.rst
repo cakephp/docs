@@ -10,6 +10,7 @@ Contents
    controllers
    views
    models
+   plugins
    development
 
 
@@ -17,4 +18,3 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`

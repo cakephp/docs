@@ -1,5 +1,5 @@
 # MakeFile for building all the docs at once.
-# Inspired by the Makefile used by bazaar. 
+# Inspired by the Makefile used by bazaar.
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
 PYTHON = python
@@ -8,9 +8,9 @@ ES_HOST =
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
 # Languages that can be built.
-LANGS = en es fr ja pt ru zh
+LANGS = en es fr ja pt zh
 
-# pdflatex does not like ja or ru for some reason.
+# pdflatex does not like ja for some reason.
 PDF_LANGS = en es fr pt
 
 DEST = website
@@ -19,13 +19,13 @@ DEST = website
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
-# Copy-paste the English Makefile everywhere it's needed.
+# Copy-paste the English Makefile everywhere it's needed (if non existing).
 %/Makefile: en/Makefile
-	cp $< $@
+	cp -n $< $@
 
 #
 # The various formats the documentation can be created in.
-# 
+#
 # Loop over the possible languages and call other build targets.
 #
 html: $(foreach lang, $(LANGS), html-$(lang))

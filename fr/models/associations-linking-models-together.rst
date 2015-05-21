@@ -42,6 +42,10 @@ plusieurs vers un          belongsTo             Plusieurs recipes appartiennent
 plusieurs vers plusieurs   hasAndBelongsToMany   Les recipes ont, et appartiennent à plusieurs ingrédients.
 ========================== ===================== ============================================================
 
+Pour clarifier davantage la définition des associations dans les modèles:
+Si la table d'un model contient la clé étrangère (other_model_id), le type
+de relation dans ce model est **toujours** un Model **belongsTo** OtherModel.
+
 Les associations se définissent en créant une variable de classe nommée
 comme l'association que vous souhaitez définir. La variable de classe peut
 quelquefois se limiter à une chaîne de caractère, mais peut également être
@@ -601,7 +605,7 @@ entre les models n'est pas exclusif dans le cadre d'une relation HABTM. Par
 exemple, relions notre model Recipe avec un model Ingredient en utilisant
 HABTM. Le fait d'utiliser les tomates en Ingredient pour la recipe de
 Spaghettis de ma grand-mère ne "consomme" pas l'Ingredient. Je peux aussi
-utiliser mes Spaghettis pour une Recipe Salade.
+utiliser mes tomates pour une Recipe Salade.
 
 Les liens entre des objets liés par une association hasMany sont exclusifs. Si
 mon User "hasMany" Comment, un commentaire ne sera lié qu'à un
@@ -821,7 +825,7 @@ dans les colonnes qui ne seraient pas remplacées dans le nouvel ajout.
 La façon d'implémenter nos exigences est d'utiliser un **join model**,
 autrement connu comme une association **hasMany through**.
 Cela étant fait, l'association est elle-même un model. Ainsi, vous pouvez
-créer un nouveau model CourseMembership. Regardez les models suivants.::
+créer un nouveau model CourseMembership. Regardez les models suivants. ::
 
             // Student.php
             class Student extends AppModel {

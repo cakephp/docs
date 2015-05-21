@@ -58,6 +58,7 @@ one global transaction.
 The real nested transaction is disabled by default. Enable it using
 ``$dataSource->useNestedTransactions = true;``.
 
+
 .. meta::
     :title lang=en: Transactions
     :keywords lang=en: transaction methods,datasource,rollback,data source,begin,commit,nested transaction

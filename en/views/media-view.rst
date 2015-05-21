@@ -86,7 +86,6 @@ Settable Parameters
     to the number of seconds in the future for when the cache should
     expire.
 
-
 .. todo::
 
     Include examples of how to send files with Media View.

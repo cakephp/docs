@@ -58,7 +58,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
   * ``handler`` - callback - The callback to handle errors. You can set this to any
     callable type, including anonymous functions.
   * ``level`` - int - The level of errors you are interested in capturing. Use the
-    built-in php error constants, and bitmasks to select the level of error you
+    built-in PHP error constants, and bitmasks to select the level of error you
     are interested in.
   * ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces
     will be included in the log after each error.  This is helpful for finding
@@ -184,5 +184,5 @@ CakePHP 2.2 以降、``Error.handler`` は致命的(fatal)なエラーコード�
   from your custom handler.
 
 .. meta::
-    :title lang=en: Error Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :title lang=ja: Error Handling
+    :keywords lang=ja: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error

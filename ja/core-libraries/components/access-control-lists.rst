@@ -16,7 +16,7 @@ ACL はどうやって動いているのでしょうか？
 されます。一方、システムにおいて利用を要求される側（ほとんどの場合は
 アクションまたはデータ）は Access Control Object(ACO) で表現されます。
 これらのエンティティ（実体）は 'オブジェクト' と呼ばれます。なぜなら
-要求するオブジェクトは人間ではないこともあるからです。たとえば CakePHP 
+要求するオブジェクトは人間ではないこともあるからです。たとえば CakePHP
 にある特定のコントローラーの能力を一部制限した状態で、アプリケーション
 の他の部品にあるロジックを起動したい場合もあるのではないでしょうか。
 コントローラーのアクションから Web サービスやあなたのおばあさんの
@@ -289,7 +289,7 @@ ARO/ACO のパーミッションは **/app/Config/acl.ini.php** の中で
 -  allow: この ARO がアクセス権を持つ ACO の名前
 -  deny: この ARO がアクセスを禁止されるべき ACO の名前
 
-ACO は INI セクションで指定され、プロパティは allow と deny 
+ACO は INI セクションで指定され、プロパティは allow と deny
 のみです。
 
 例として、私たちが作ってきた 指輪の仲間 ARO 構造を見てみると、
@@ -346,7 +346,7 @@ ACO は INI セクションで指定され、プロパティは allow と deny
     allow = 塩漬け豚
 
 INI メカニズムを通してパーミッションを定義することができたので、
-ACL コンポーネントを使って 
+ACL コンポーネントを使って
 :ref:`パーミッションをチェックする説明 <checking-permissions>`
 のところまでスキップできます。もしくは、データベース ACL を使って
 同様のパーミッションを定義する方法を引き続き読んでいただいても構いません。
@@ -422,7 +422,7 @@ ACO と ARO ツリーを使えるようにします。
 ``app/Config/Schema/db_acl.sql`` という SQL ファイルを使うことも
 できなくはないですが、これは決して楽しいものではありません。
 
-ここまで終わったら、あなたのシステム上に acos, aros, aros\_acos 
+ここまで終わったら、あなたのシステム上に acos, aros, aros\_acos
 （２つのツリーの間でパーミッション情報を生成するための JOIN
 テーブル）という３つの新しいテーブルができます。
 
@@ -465,7 +465,7 @@ ACL オブジェクトの ``model`` と ``foreign_key`` フィールドを使う
 オブジェクトをそれに対応するモデルのレコードに（もしそのレコードが
 存在すれば）リンクすることができます。たとえば、データベースの中で
 多くの ARO にはそれぞれに対応する User レコードがあるとします。
-モデルのアソシエーションが正確に設定してあれば、ARO の 
+モデルのアソシエーションが正確に設定してあれば、ARO の
 ``foreign_key`` を User の ID にセットすることで、ARO と User の
 情報を単一の User モデルの find() にリンクすることができます。
 反対に、特定のブログのポストやレシピに対する編集操作を管理した
@@ -483,7 +483,7 @@ ACL オブジェクトの ``parent_id`` を使ってツリー構造に書き込�
 生成します。
 
 新しい ACL オブジェクトを生成する前に、それぞれのクラスをロード
-しておく必要があります。もっとも簡単なのは、コントローラーの 
+しておく必要があります。もっとも簡単なのは、コントローラーの
 $components 配列で CakePHP の ACL コンポーネントをインクルード
 する方法です:
 
@@ -565,7 +565,7 @@ $components 配列で CakePHP の ACL コンポーネントをインクルード
 レベルノードがあることまでは少なくとも確認できましたね。これらの
 グループ配下に特定のユーザ ARO を入れることで、ARO の子ノードを
 追加してみましょう。Middle Earth（中つ国）のよい市民たちはみんな
-私達の新しいシステムのアカウントを持っていますので、これらの ARO 
+私達の新しいシステムのアカウントを持っていますので、これらの ARO
 をデータベース内で特定のモデルのレコードに紐付けます。
 
 
@@ -776,7 +776,7 @@ ARO を特定しています。
 ３つ目のパラメーがありますね。これはすべての CakePHP の ACO に
 組み込まれている便利なアクションです。このパラメータのデフォルト
 のオプションは ``create``, ``read``, ``update``, ``delete`` ですが、
-``aros_acos`` データベーステーブル（実際は、たとえば ``_admin`` 
+``aros_acos`` データベーステーブル（実際は、たとえば ``_admin``
 のように接頭辞がつきます）にカラムを追加して、それをデフォルト値と
 合わせて指定することも可能です。
 
@@ -862,5 +862,5 @@ AclComponent を使って自分たちで作った ACO や ARO の間でチェッ
 リダイレクトしたりということが可能です。
 
 .. meta::
-    :title lang=en: Access Control Lists
-    :keywords lang=en: fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object
+    :title lang=ja: Access Control Lists
+    :keywords lang=ja: fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object

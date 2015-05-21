@@ -8,7 +8,21 @@ Contents
    installation
    getting-started
    cakephp-overview
+   controllers
+   views
+   models
+   core-libraries
+   plugins
+   console-and-shells
+   development
+   deployment
    tutorials-and-examples
+   contributing
+   appendices
 
 .. todolist::
 
+
+.. meta::
+    :title lang=es: Contents
+    :keywords lang=es: core libraries,ref search,shells,deployment,appendices,glossary,models

@@ -76,7 +76,7 @@ La structure de votre dossier devrait ressembler à cela maintenant::
         index.php
 
 Maintenant nous pouvons lancer la mise à jour shell en tapant ``cd`` puis le
-chemin vers votre app et en lancant la commande::
+chemin vers votre app et en lançant la commande::
 
     ./Console/cake upgrade all
 

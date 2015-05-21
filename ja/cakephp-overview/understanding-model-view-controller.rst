@@ -1,5 +1,5 @@
 MVC(*Model-View-Controller*)を理解する
-####################################################
+######################################
 
 CakePHPは
 `MVC <http://ja.wikipedia.org/wiki/Model_View_Controller>`_

@@ -310,6 +310,7 @@ You can also set this automatically by using the ``viewClassMap`` setting::
             )
     ));
 
+
 .. meta::
     :title lang=en: Request Handling
     :keywords lang=en: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php

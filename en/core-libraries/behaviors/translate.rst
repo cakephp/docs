@@ -18,7 +18,7 @@ You can either use the CakePHP console or you can manually create
 it. It is advised to use the console for this, because it might
 happen that the layout changes in future versions of CakePHP.
 Sticking to the console will make sure that you have the correct
-layout.::
+layout. ::
 
     ./cake i18n
 
@@ -31,7 +31,7 @@ Attaching the Translate Behavior to your Models
 ===============================================
 
 Add it to your model by using the ``$actsAs`` property like in the
-following example.::
+following example. ::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -115,7 +115,7 @@ Retrieve all translation records for a field
 
 If you want to have all translation records attached to the current
 model record you simply extend the **field array** in your behavior
-setup as shown below. The naming is completely up to you.::
+setup as shown below. The naming is completely up to you. ::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -183,7 +183,7 @@ using the bindTranslation method
 
 ``$fields`` is a named-key array of field and association name,
 where the key is the translatable field and the value is the fake
-association name.::
+association name. ::
 
     $this->Post->bindTranslation(array('title' => 'titleTranslation'));
     // need at least recursive 1 for this to work.
@@ -313,7 +313,7 @@ For this to work you need to create the actual model file in your
 models folder. Reason is that there is no property to set the
 displayField directly in the model using this behavior yet.
 
-Make sure that you change the ``$displayField`` to ``'field'``.::
+Make sure that you change the ``$displayField`` to ``'field'``. ::
 
     class PostI18n extends AppModel {
         public $displayField = 'field'; // important

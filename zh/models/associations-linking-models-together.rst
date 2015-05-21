@@ -33,6 +33,10 @@ CakePHP 的四种关联类型是：hasOne、hasMany、belongsTo 和 hasAndBelong
 多对多        hasAndBelongsToMany   多份食谱有且属于多种原料。
 ============= ===================== =======================================
 
+要进一步阐明在模型中关联定义的方式：如果模型的表包含外键(other_model_id)，该模型
+的关系类型 **总是** 模型 **belongsTo** 另一个模型的关系。
+
+
 要定义关联，创建一个以要定义的关联命名的类变量。此变量有时候可以简单到只是一个字
 符串，但也可以复杂到是一个多维数组，来定义关联细节。
 
@@ -676,7 +680,7 @@ HABTM 关联。
     请参阅 :ref:`HABTM association arrays <ref-habtm-arrays>`。
 
 实现需求的方法是使用 **连接模型**，或者也称为 **hasMany through** 关联。即，关联
-自身也是一个模型。现在我们建立一个新的模型 CourseMembership。请看下面的模型。::
+自身也是一个模型。现在我们建立一个新的模型 CourseMembership。请看下面的模型。 ::
 
             // Student.php
             class Student extends AppModel {

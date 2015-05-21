@@ -136,11 +136,11 @@ Attribute Matching Types
         As of 2.5.0 attribute matching expressions work with insert().
 
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     :rtype: array
 
-    Removes all elements from an array that match $path.::
+    Removes all elements from an array that match $path. ::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -163,7 +163,7 @@ Attribute Matching Types
     .. versionchanged:: 2.5
         As of 2.5.0 attribute matching expressions work with remove()
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     :rtype: array
 
@@ -171,7 +171,7 @@ Attribute Matching Types
     and optionally $valuePath as path to get the values. If $valuePath is not
     specified, or doesn't match anything, values will be initialized to null.
     You can optionally group the values by what is obtained when following the
-    path specified in $groupPath.::
+    path specified in $groupPath. ::
 
         $a = array(
             array(

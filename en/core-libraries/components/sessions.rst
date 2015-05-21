@@ -167,6 +167,7 @@ Creating notification messages
         any request or user data in your flash messages, you should escape it
         with :php:func:`h` when formatting your messages.
 
+
 .. meta::
     :title lang=en: Sessions
     :keywords lang=en: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp

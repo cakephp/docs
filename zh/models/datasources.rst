@@ -2,12 +2,12 @@
 ######
 
 数据源是模型和模型所代表的数据来源之间的联系。在很多情况下，数据是从关系型数据库
-中取得，比如 MySQL、PostgreSQL 或者 MSSQL。CakePHP 的发布就带有若干针对数据库的
+中取得，比如 MySQL、PostgreSQL 或者 Microsoft SQL Server。CakePHP 的发布就带有若干针对数据库的
 数据源(请参看 ``lib/Cake/Model/Datasource/Database`` 中的类文件)，为了便利，摘录
 如下：
 
 
-- MySql
+- Mysql
 - Postgres
 - Sqlite
 - Sqlserver
@@ -22,8 +22,8 @@
 在使用它们了。
 
 所有上述数据源继承于一个基类 ``DboSource``，它汇集了大多数关系型数据库通用的一些
-逻辑。如果你决定编写一个 RDBMS 数据源，你最好从这些中的一个(例如 Mysql 或者 
-Sqlite)开始。
+逻辑。如果你决定编写一个 RDBMS 数据源，你最好从这些中的一个(例如 MySQL 或者
+SQLite)开始。
 
 当然，大多数人还是感兴趣于为外部数据来源编写数据源，比如远程 REST API，或者甚至
 是 LDAP 服务器。所以，这就是我们下面要介绍的。
@@ -293,5 +293,5 @@ Client。
 
 .. meta::
     :title lang=zh_CN: DataSources
-    :keywords lang=zh_CN: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+    :keywords lang=zh_CN: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,microsoft sql server,aggregates,apis,repository,signatures
 

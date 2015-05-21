@@ -60,7 +60,7 @@ switch 'deny' in for 'grant'.
 Check permissions
 =================
 
-Use this command to check ACL permissions.::
+Use this command to check ACL permissions. ::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
@@ -73,7 +73,6 @@ The view command will return the ARO or ACO tree. The optional node parameter
 allows you to return only a portion of the requested tree::
 
     ./Console/cake acl view
-
 
 
 .. meta::

@@ -13,7 +13,7 @@ HTTPヘッダによって制御されます。
 CakePHPを使ってRESTのAPIを提供するのはすごく簡単です。
 
 簡単なセットアップ
-=========================
+==================
 
 RESTを動かすための手っ取り早い方法は、 app/Config/routes.php ファイルに数行追記することです。
 Routerオブジェクトは、 ``mapResources()`` というメソッドを提供していて、
@@ -40,11 +40,11 @@ GET         /recipes/123.format   RecipesController::view(123)
 ----------- --------------------- ------------------------------
 POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
+POST        /recipes/123.format   RecipesController::edit(123)
+----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
 DELETE      /recipes/123.format   RecipesController::delete(123)
------------ --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
 =========== ===================== ==============================
 
 CakePHPのルータクラスは、いくつかの異なる方法でHTTPリクエストメソッドを判定します。
@@ -81,7 +81,7 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
                 '_serialize' => array('recipe')
             ));
         }
-        
+
         public function add() {
             $this->Recipe->create();
             if ($this->Recipe->save($this->request->data)) {
@@ -175,7 +175,7 @@ Cakeの :php:class:`Xml` クラスに渡され、配列に変換され、
 
 
 他のフォーマットのインプットデータ
-============================================
+==================================
 
 RESTアプリケーションの場合、様々なフォーマットのデータを扱います。
 CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてくれます。
@@ -185,7 +185,7 @@ CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてく�
 
 
 デフォルトのRESTルーティングの修正
-=============================================
+==================================
 
 .. versionadded:: 2.1
 
@@ -211,7 +211,7 @@ CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてく�
 
 
 カスタムRESTルーティング
-=============================
+========================
 
 :php:meth:`Router::mapResources()` で生成したデフォルトルーティングがうまく動かない場合は、
 :php:meth:`Router::connect()` メソッドを使い、RESTルーティングのカスタムセットを定義します。
@@ -239,4 +239,4 @@ HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可
 
 .. meta::
     :title lang=ja: REST
-    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :keywords lang=ja: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api

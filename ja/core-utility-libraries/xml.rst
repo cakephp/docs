@@ -226,7 +226,7 @@ Xml クラスは例外をスローします。以下は正しくない例です�
     </projects>
 
 名前空間の使用
----------------
+--------------
 
 配列で XML 名前空間を定義するには、デフォルト名前空間は ``xmlns:`` という名前のキー、
 カスタム名前空間は ``xmlns:`` から始まる名前のキーを用いた要素を作成します。
@@ -264,7 +264,7 @@ Xml クラスは例外をスローします。以下は正しくない例です�
     <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
 子要素の作成
---------------
+------------
 
 CakePHP 2.0 の Xml クラスはコンテンツの操作をするメソッドを提供しません。
 これらの操作は SimpleXMLElement または DOMDocument を使ってしなければなりません。
@@ -352,5 +352,5 @@ factory クラスまたは変換クラスです。
 
 
 .. meta::
-    :title lang=en: Xml
-    :keywords lang=en: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth
+    :title lang=ja: Xml
+    :keywords lang=ja: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth

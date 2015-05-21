@@ -58,7 +58,7 @@ chapitre :
 
 .. _extending-views:
 
-Vues étendues
+Vues Étendues
 -------------
 
 .. versionadded:: 2.1
@@ -367,20 +367,6 @@ controller/view.
     ``$this->fetch('title')`` dans votre layout et
     ``$this->assign('title', 'page title')`` à la place.
 
-Pour définir le titre pour le layout, il est plus facile de le faire dans le
-controller, en configurant la variable ``$title_for_layout``::
-
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title_for_layout', 'Voir les Utilisateurs actifs');
-       }
-   }
-
-Vous pouvez aussi définir la variable title_for_layout depuis l'intérieur
-d'un fichier de vue::
-
-    $this->set('title_for_layout', $titleContent);
-
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
 le répertoire ``app/View/Layouts``, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
@@ -525,9 +511,8 @@ en reprenant l'exemple du Post::
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;
-            } else {
-                $this->set('posts', $posts);
             }
+            $this->set('posts', $posts);
         }
     }
 
@@ -607,7 +592,7 @@ habituelle. Si la vue est rendue pour un controller/action d'un plugin, le nom
 du plugin va automatiquement être préfixé pour tous les elements utilisés, à
 moins qu'un autre nom de plugin ne soit présent.
 Si l'element n'existe pas dans le plugin, il ira voir dans le dossier principal
-APP.::
+APP. ::
 
     echo $this->element('Contacts.helpbox');
 
@@ -840,4 +825,4 @@ En savoir plus sur les vues
 
 .. meta::
     :title lang=fr: Views (Vues)
-    :keywords lang=fr: logique de vue,fichier csv,élements de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc
+    :keywords lang=fr: logique de vue,fichier csv,éléments de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc

@@ -54,7 +54,7 @@ quelles options sont disponibles.
 |                                | littérale.                                 |
 +--------------------------------+--------------------------------------------+
 | {[a-z]+}                       | Toute chaîne entre accolades (à part       |
-|                                | {n} et {s}) est interpretée comme une      |
+|                                | {n} et {s}) est interprétée comme une      |
 |                                | expression régulière.                      |
 +--------------------------------+--------------------------------------------+
 
@@ -326,7 +326,7 @@ quelles options sont disponibles.
     en clé, et en option $path2 comme chemin pour obtenir les valeurs. Si 
     $path2 n'est pas spécifié, toutes les valeurs seront initialisées à null
     (utile pour Set::merge). Vous pouvez en option grouper les valeurs par 
-    ce qui est obtenu quand on suit le chemin spécifié dans $groupPath.::
+    ce qui est obtenu quand on suit le chemin spécifié dans $groupPath. ::
 
         $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
@@ -711,7 +711,7 @@ quelles options sont disponibles.
 
     Set::extract utilise la syntaxe basique XPath 2.0 pour retourner les 
     sous-ensembles de vos données à partir d'un fin ou d'un find all. Cette 
-    fonction vous permet de récupèrer vos données rapidement sans avoir 
+    fonction vous permet de récupérer vos données rapidement sans avoir 
     à boucler à travers des tableaux multi-dimensionnels ou de traverser 
     à travers les structures en arbre.
     
@@ -898,7 +898,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Insére $data dans un tableau comme défini dans $path.::
+    Insére $data dans un tableau comme défini dans $path. ::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -1055,7 +1055,7 @@ quelles options sont disponibles.
     :rtype: boolean
 
     Set::matches peut être utilisé pour voir si un item unique ou un xpath
-    donné admet certaines conditions.::
+    donné admet certaines conditions. ::
 
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
@@ -1159,7 +1159,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Normalise une liste de chaîne ou de tableau.::
+    Normalise une liste de chaîne ou de tableau. ::
 
         $a = array('Tree', 'CounterCache',
                 'Upload' => array(
@@ -1375,7 +1375,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Retire un élémént d'un Set ou d'un tableau selon ce qui est défini par $path::
+    Retire un élément d'un Set ou d'un tableau selon ce qui est défini par $path::
 
         $a = array(
             'pages'     => array('name' => 'page'),
@@ -1401,7 +1401,7 @@ quelles options sont disponibles.
 
     Set::reverse est au fond l'opposé de :php:func:`Set::map`. Elle convertit
     un objet en un tableau. Si $object n'est pas un objet, reverse va
-    simplement retourner $object.::
+    simplement retourner $object. ::
 
         $result = Set::reverse(null);
         // Null

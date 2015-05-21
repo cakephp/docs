@@ -14,13 +14,25 @@ Installer PHPUnit
 CakePHP utilise PHPUnit as its underlying test framework. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait
-ce que vous pensez qu'il doit faire. PHPUnit peut être installé à travers
-le `PEAR installer <http://pear.php.net>`_. Pour installer PHPUnit, lancez
-ce qui suit::
+ce que vous pensez qu'il doit faire.
 
-    pear upgrade PEAR
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit-3.7.32
+Installation via Composer
+-------------------------
+Les dernières versions de PHPUnit ne fonctionnent pas avec cake::
+
+    "phpunit/phpunit": "3.7.32"
+
+Installation via Package .phar
+------------------------------
+
+Vous pouvez également télécharger le fichier directement. Assurez-vous de
+récupérer la bonne version depuis https://phar.phpunit.de/.
+Assurez-vous également que /usr/local/bin est dans le include_path de votre
+fichier php.ini ::
+
+    wget https://phar.phpunit.de/phpunit-3.7.32.phar
+    chmod +x phpunit.phar
+    mv phpunit.phar /usr/local/bin/phpunit
 
 .. note::
 
@@ -29,10 +41,6 @@ ce qui suit::
     Selon la configuration de votre système, vous devrez lancer les commandes
     précédentes avec ``sudo``.
 
-Une fois que PHPUnit est installé avec l'installeur PEAR, vous devrez confirmer
-que les librairies PHPUnit sont sur le ``include_path`` de PHP. Vous pouvez
-faire cela en vérifiant votre fichier php.ini et en vous assurant que les
-fichiers de PHPUnit sont dans un des répertoires de ``include_path``.
 
 .. tip::
 
@@ -71,8 +79,8 @@ Vérifier la Configuration Test
 
 Après avoir installé PHPUnit et configuré le ``$test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lancant un de ceux présents dans le coeur. Il y a
-deux exécuteurs integrés pour le test, nous commencerons en utilisant
+lancer vos propres tests en lançant un de ceux présents dans le coeur. Il y a
+deux exécuteurs intégrés pour le test, nous commencerons en utilisant
 l'exécution par le navigateur. Les tests peuvent être accessibles par le
 navigateur à http://localhost/votre_app/test.php. Vous devriez voir une liste
 des cas de test du coeur. Cliquez sur le test 'AllConfigure'. Vous devriez voir
@@ -101,7 +109,7 @@ conventions. En ce qui concerne les tests:
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
 
-Quand vous avez crée un cas de test, vous pouvez l'exécuter en naviguant sur
+Quand vous avez créé un cas de test, vous pouvez l'exécuter en naviguant sur
 ``http://localhost/votre_app/test.php`` (selon votre configuration spécifique)
 Cliquez sur les cas de test de App, et cliquez ensuite sur le lien de votre
 fichier spécifique. Vous pouvez lancer les tests à partir des lignes de
@@ -129,7 +137,7 @@ bar HTML. Notre helper ressemblerait à cela::
     }
 
 C'est un exemple très simple, mais ce sera utile pour montrer comment vous
-pouvez créer un cas de test simple. Après avoir créer et sauvegardé notre
+pouvez créer un cas de test simple. Après avoir créé et sauvegardé notre
 helper, nous allons créer le fichier de cas de tests dans
 ``app/Test/Case/View/Helper/ProgressHelperTest.php``. Dans ce fichier, nous
 allons commencer avec ce qui suit::
@@ -212,14 +220,14 @@ environnement. Vous pouvez accéder au web runner en allant sur
 test.php va changer en fonction de votre configuration. Mais le fichier est
 au même niveau que ``index.php``.
 
-Une fois que vous chargé les test runner, vous pouvez naviguer dans les
+Une fois que vous chargé les tests runners, vous pouvez naviguer dans les
 suites test de App, Core et Plugin. Cliquer sur un cas de test individuel
 va lancer ce test et afficher les résultats.
 
 Voir la couverture du code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si vous avez `XDebug <http://xdebug.org>`_ installé, vous pouvez voir les
+Si vous avez `Xdebug <http://xdebug.org>`_ installé, vous pouvez voir les
 résultats de la couverture du code. La couverture du Code est utile pour vous
 dire quelles parties de votre code vos tests n'atteignent pas. La couverture
 est utile pour déterminer où vous devriez ajouter les tests dans le futur,
@@ -233,7 +241,7 @@ La couverture du code inline utilise les lignes vertes pour indiquer les
 lignes qui ont été exécutées. Si vous vous placez sur une ligne verte, une
 info-bulle indiquera quels tests couvre la ligne. Les lignes en rouge n'ont
 pas été lancées, et n'ont pas été testées par vos tests. Les lignes grises
-sont considerées comme du code non exécuté par xdebug.
+sont considérées comme du code non exécuté par Xdebug.
 
 .. _run-tests-from-command-line:
 
@@ -243,7 +251,7 @@ Lancer les tests à partir d'une ligne de commande
 CakePHP fournit un shell ``test`` pour lancer les tests. Vous pouvez
 lancer les tests de app, core et plugin facilement en utilisant le shell
 test. Il accepte aussi tous les arguments que vous vous attendez à trouver
-sur l'outil de ligne de commnde du PHPUnit normal. A partir de votre répertoire
+sur l'outil de ligne de commande du PHPUnit normal. A partir de votre répertoire
 app, vous pouvez faire ce qui suit pour lancer les tests::
 
     # Lancer un test de model dans app
@@ -257,7 +265,7 @@ app, vous pouvez faire ce qui suit pour lancer les tests::
 
 .. note::
 
-    Si vous lancez des tests qui intéragissent avec la session, c'est
+    Si vous lancez des tests qui interagissent avec la session, c'est
     généralement une bonne idée d'utiliser l'option ``--stderr``. Cela
     réglera les problèmes des échecs de test dûs aux avertissements
     des headers_sent.
@@ -270,10 +278,10 @@ Vous pouvez aussi lancer le shell ``test`` dans le répertoire de projet
 racine. Cela vous montre une liste complète de tous les tests que vous avez
 actuellement. Vous pouvez ainsi choisir librement quel(s) test(s) lancer::
 
-    # Lancer test dans le réperoire de projet racine pour le dossier applicaton appelé app
+    # Lancer test dans le répertoire de projet racine pour le dossier application appelé app
     lib/Cake/Console/cake test app
 
-    # Lancer test dans le repértoire de projets racine pour une application dans ./myapp
+    # Lancer test dans le répertoire de projets racine pour une application dans ./myapp
     lib/Cake/Console/cake test -app myapp app
 
 
@@ -287,7 +295,7 @@ filtrer les méthodes de test::
 
     ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
 
-Le paramètre filter est utilisé commme une expression régulière sensible à la
+Le paramètre filter est utilisé comme une expression régulière sensible à la
 casse pour filtrer les méthodes de test à lancer.
 
 Générer une couverture de code
@@ -343,7 +351,7 @@ temporairement des tables de données chargées avec des données d'exemple
 qui peuvent être utilisées par le test. Le bénéfice de l'utilisation de
 fixtures est que votre test n'a aucune chance d'abimer les données
 de l'application qui tourne. De plus, vous pouvez commencer à tester
-votre code avant dee développer réellement en live le contenu pour
+votre code avant de développer réellement en live le contenu pour
 une application.
 
 CakePHP utilise la connexion nommée ``$test`` dans votre fichier de
@@ -354,8 +362,8 @@ d'utiliser les fixtures de la base de données.
 CakePHP effectue ce qui suit pendant le chemin d'une fixture basée sur un cas
 de test:
 
-#. Crée les tables pour chacun des fixtues necéssaires.
-#. Remplit les tables avec les données, si les données sont fournis dans la fixture.
+#. Crée les tables pour chacun des fixtures nécessaires.
+#. Remplit les tables avec les données, si les données sont fournies dans la fixture.
 #. Lance les méthodes de test.
 #. Vide les tables de fixture.
 #. Retire les tables de fixture de la base de données.
@@ -364,7 +372,7 @@ Créer les fixtures
 ------------------
 
 A la création d'une fixture, vous pouvez définir principalement deux choses:
-comment la table est créée (quels champs font parti de la table), et quels
+comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
 Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire
@@ -402,7 +410,7 @@ fixture devra utiliser la source de données ``test_mydb``. Si la connexion
 par ``test`` pour réduire la possibilité de trucher accidentellement toutes
 les données de votre application quand vous lancez des tests.
 
-Nous utilisons ``$fields`` pour spécifier les champs qui feront parti de cette
+Nous utilisons ``$fields`` pour spécifier les champs qui feront partie de cette
 table, et comment ils sont définis. Le format utilisé pour définir ces champs
 est le même qu'utilisé avec :php:class:`CakeSchema`. Les clés disponibles pour
 la définition de la table sont:
@@ -429,8 +437,8 @@ la définition de la table sont:
 ``default``
     Valeur par défaut que le champ prend.
 
-Nos pouvons définir un ensemble d'enregistrements qui seront remplis après que
-la table de fixture est crée. Le format est directement fairly forward,
+Nous pouvons définir un ensemble d'enregistrements qui seront remplis après que
+la table de fixture est créée. Le format est directement fairly forward,
 ``$records`` est un tableau d'enregistrements. Chaque item dans ``$records``
 devrait être une unique ligne. A l'intérieur de chaque ligne, il devrait y
 avoir un tableau associatif des colonnes et valeurs pour la ligne. Gardez juste
@@ -446,7 +454,7 @@ Depuis que les enregistrements pour une fixture sont déclarées en propriété
 de classe, vous ne pouvez pas facilement utiliser les fonctions ou autres
 données dynamiques pour définir les fixtures. Pour résoudre ce problème,
 vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
-exemple, si vous voulez tous les timestamps crées et mis à jours pour
+exemple, si vous voulez tous les timestamps créés et mis à jours pour
 refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     class ArticleFixture extends CakeTestFixture {
@@ -525,7 +533,7 @@ Si vous voulez utiliser une connexion différente, utilisez::
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
-Puisqu'on utilise votre connexion à la base de données CakePHP, si il y a un
+Puisqu'on utilise votre connexion à la base de données CakePHP, s'il y a un
 préfixe de table déclaré, il sera automatiquement utilisé quand on récupère
 l'information de la table. Pour forcer la fixture et aussi importer ses
 enregistrements, changez l'importation en ::
@@ -624,7 +632,7 @@ Disons que nous avons déjà notre model Article défini dans
 Nous voulons maintenant configurer un test qui va utiliser la définition du
 model, mais à travers les fixtures, pour tester quelques fonctionnalités dans
 le model. Le test suite de CakePHP charge un petit ensemble minimum de fichiers
-(pour garder les test isolés), ainsi nous devons commencer par charger notre
+(pour garder les tests isolés), ainsi nous devons commencer par charger notre
 model - dans ce cas le model Article que nous avons déjà défini.
 
 Créons maintenant un fichier nommé ``ArticleTest.php`` dans votre répertoire
@@ -1116,7 +1124,7 @@ dans notre component. Nous créons le fichier
         }
 
         public function testAdjust() {
-            // Tester notre méthode adjust avec les configuraitons de différents paramètres
+            // Tester notre méthode adjust avec les configurations de différents paramètres
             $this->PagematronComponent->adjust();
             $this->assertEquals(20, $this->Controller->paginate['limit']);
 
@@ -1143,7 +1151,7 @@ important de s'assurer que ces classes sont couvertes par des cas de test.
 
 Tout d'abord, nous créons un helper d'exemple à tester.
 ``CurrencyRendererHelper`` va nous aider à afficher les monnaies dans nos vues
-et pour siplifier, il ne va avoir qu'une méthode ``usd()``.
+et pour simplifier, il ne va avoir qu'une méthode ``usd()``.
 
 ::
 
@@ -1241,8 +1249,8 @@ Vous pouvez ensuite lancer ce test en ligne de commande en utilisant::
 Créer des Tests pour les Plugins
 ================================
 
-Les Tests pour les plugins sont crées dans leur propre répertoire à
-l'intérieur du dossier des plugins.::
+Les Tests pour les plugins sont créés dans leur propre répertoire à
+l'intérieur du dossier des plugins. ::
 
     /app
         /Plugin
@@ -1255,7 +1263,7 @@ Ils travaillent comme des tests normaux mais vous devrez vous souvenir
 d'utiliser les conventions de nommage pour les plugins quand vous
 importez des classes. Ceci est un exemple d'un testcase pour le model
 ``BlogPost`` à partir du chapitre des plugins de ce manuel.
-Une différence par rapport aux autres test est dans la première
+Une différence par rapport aux autres tests est dans la première
 ligne où 'Blog.BlogPost' est importé. Vous devrez aussi préfixer
 les fixtures de votre plugin avec ``plugin.blog.blog_post``::
 
@@ -1305,7 +1313,7 @@ Ajouter une config de base de données de test
 
 Utiliser une base de données séparée juste pour Jenkins est généralement une
 bonne idée, puisque cela évite au sang de couler et évite un certain nombre
-de problèmes basiques. Une fois que vous avez crée une nouvelle base de données
+de problèmes basiques. Une fois que vous avez créé une nouvelle base de données
 dans un serveur de base de données auquel jenkins peut accéder (habituellement
 localhost). Ajoutez une *étape de script shell* au build qui contient ce qui
 suit::
@@ -1328,7 +1336,7 @@ Cela s'assure que vous aurez toujours la bonne configuration de la base
 de données dont Jenkins a besoin. Faites la même chose pour tout autre
 fichier de configuration dont vous auriez besoin. Il est souvent une bonne
 idée de supprimer et re-créer la base de données avant chaque build aussi.
-Cela vous évite des echecs de chaînes, où un buid cassé entraîne l'echec
+Cela vous évite des échecs de chaînes, où un buid cassé entraîne l'echec
 des autres. Ajoutez une autre *étape de script shell* au build qui contient
 ce qui suit::
 
@@ -1355,7 +1363,7 @@ Lancer un build
 ---------------
 
 Vous devriez être capable de lancer un build maintenant. Vérifiez la sortie de
-la console et faites tous les changements necéssaires pour obtenir un build
+la console et faites tous les changements nécessaires pour obtenir un build
 précédent.
 
 

@@ -46,7 +46,7 @@ Returns::
     controller db_config fixture model plugin project test view
 
 options
---------
+-------
 
 As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)

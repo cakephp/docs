@@ -186,7 +186,7 @@ from::
 
 You also need to override the core ``paginateCount()``, this method
 expects the same arguments as ``Model::find('count')``. The example
-below uses some Postgres-specifc features, so please adjust
+below uses some PostgresSQL-specifc features, so please adjust
 accordingly depending on what database you are using::
 
     /**
@@ -292,7 +292,6 @@ also modify the ``$settings`` property on the PaginatorComponent::
 
 By default all of the typical paging parameters will be converted into GET
 arguments.
-
 
 .. note::
 

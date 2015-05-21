@@ -152,7 +152,7 @@ des ``$options``.
 avec une sélection d'éléments dans le DOM, ``$this->Js->get()``
 retourne un $this, vous permettent d'enchaîner les méthodes en
 utilisant la selection.  Le chaînage de méthode vous permet
-d'écrire moins, et de rendre votre code plus expressif .::
+d'écrire moins, et de rendre votre code plus expressif . ::
 
     $this->Js->get('#foo')->event('click', $eventCode);
 
@@ -292,7 +292,7 @@ méthode.
     **Options**
 
     -  ``containment`` - Conteneur de l'action de déplacement.
-    -  ``handle`` - Selecteur de l'élement. Seul cet élément
+    -  ``handle`` - Selecteur de l'élément. Seul cet élément
        commencera l'action de tri.
     -  ``revert`` - S'il faut ou pas utiliser un effet pour déplacer l'élément
        triable dans sa position finale.
@@ -377,7 +377,7 @@ méthode.
 
     Définit la 'sélection' interne dans un sélecteur CSS. La sélection
     active est utilisée dans les opérations ultérieures jusqu'à ce qu'une
-    nouvelle soit faite.::
+    nouvelle soit faite. ::
     
         $this->Js->get('#element');
 
@@ -399,7 +399,7 @@ méthode.
 
     **Options**
 
-    -  ``handle`` - selecteur de l'élement.
+    -  ``handle`` - selecteur de l'élément.
     -  ``snapGrid`` - La grille de pixel qui  déclenche les mouvements, un
        tableau(x, y)
     -  ``container`` - L'élément qui agit comme un rectangle de selection pour
@@ -643,14 +643,14 @@ méthode.
 
     Créé un extrait de code JavaScript contenant un ``alert()``. Par
     défaut, ``alert`` ne bufferise pas, et retourne le morceau de script
-    suivant.::
+    suivant. ::
 
         $alert = $this->Js->alert('Zogotunga!');
 
 .. php:method:: confirm($message)
 
     Créé un bout de code contenant ``confirm()``. Par défaut, ``confirm``
-    ne bufferise pas, et retourne le morceau de script suivant.::
+    ne bufferise pas, et retourne le morceau de script suivant. ::
 
         $alert = $this->Js->confirm('Vraiment certain?');
 
@@ -658,7 +658,7 @@ méthode.
 
     Créé un bout de code Javascript contenant ``prompt()``. Par
     défaut, ``prompt`` ne bufferise pas, et retourne le morceau de code
-    suivant.::
+    suivant. ::
 
         $prompt = $this->Js->prompt('C'est quoi ta couleur préférée?', 'bleu');
 
@@ -689,7 +689,7 @@ méthode.
         echo $this->Js->submit('Save', array('update' => '#content'));
 
     Va créé un bouton submit et un événement onclick attaché. 
-    L'événement click sera bufferisé par défaut.::
+    L'événement click sera bufferisé par défaut. ::
 
         echo $this->Js->submit('Save', array(
             'update' => '#content',
@@ -737,7 +737,7 @@ méthode.
     avec la réponse.
 
     Vous pouvez utiliser les options de ``htmlAttributes`` pour ajouter des
-    attributs personnalisés.::
+    attributs personnalisés. ::
 
         echo $this->Js->link('Page 2', array('page' => 2), array(
             'update' => '#content',

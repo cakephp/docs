@@ -1,5 +1,5 @@
 Blog Tutorial
-#############
+*************
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -96,11 +96,11 @@ statements into your database::
     );
 
     /* Then insert some posts for testing: */
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('The title', 'This is the post body.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('A title once again', 'And the post body follows.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you

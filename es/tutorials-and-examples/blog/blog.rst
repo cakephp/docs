@@ -205,17 +205,17 @@ defecto está activo.
 Sobre mod\_rewrite
 ==================
 
-Si eres nuevo usuario de apache, puedes encontrar alguna dificultad con
+Si eres nuevo usuario de Apache, puedes encontrar alguna dificultad con
 mod\_rewrite, así que lo trataremos aquí.
 
 Si al cargar la página de bienvenida de CakePHP ves cosas raras (no se cargan
 las imágenes ni los estilos y se ve todo en blanco y negro), esto significa que
-probablemente la configuración necesita ser revisada en el servidor apache.
+probablemente la configuración necesita ser revisada en el servidor Apache.
 Prueba lo siguiente:
 
 
 #. Asegúrate de que existe la configuración para procesar los ficheros
-   .htaccess. En el fichero de configuración de apache: 'httpd.conf' debería
+   .htaccess. En el fichero de configuración de Apache: 'httpd.conf' debería
    existir una sección para cada 'Directory' de tu servidor. Asegúrate de que
    ``AllowOverride`` está fijado a ``All`` para el directorio que contiene tu
    aplicación web. Para tu seguridad, es mejor que no asignes ``All`` a tu
@@ -224,18 +224,18 @@ Prueba lo siguiente:
 
 #. Asegúrate que estás editando el fichero httpd.conf correcto, ya que en
    algunos sistemas hay ficheros de este tipo por usuario o por aplicación web.
-   Consulta la documentación de apache para tu sistema.
+   Consulta la documentación de Apache para tu sistema.
 
 #. Comprueba que existen los ficheros .htaccess en el directorio en el que está
    instalada tu aplicación web. A veces al descomprimir el archivo o al copiarlo
    desde otra ubicación, estos ficheros no se copian correctamente. Si no están
    ahí, obtén otra copia de CakePHP desde el servidor oficial de descargas.
 
-#. Asegúrate de tener activado el módulo mod\_rewrite en la configuración de apache. Deberías tener algo así::
+#. Asegúrate de tener activado el módulo mod\_rewrite en la configuración de Apache. Deberías tener algo así::
 
         LoadModule rewrite_module       libexec/httpd/mod_rewrite.so
 
-    (para apache 1.3)::
+    (para Apache 1.3)::
 
         AddModule       mod_rewrite.c
 

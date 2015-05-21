@@ -48,7 +48,7 @@ functions, ``Configure::debug`` must be set to a value higher than 0.
 When an error is raised, Debugger both outputs information to the
 page and makes an entry in the error.log file. The error report
 that is generated has both a stack trace and a code excerpt from
-where the error was raised. Click on the "Error" link type to
+where the error was raised. Click on the "Error" link to
 reveal the stack trace, and on the "Code" link to reveal the
 error-causing lines.
 
@@ -113,7 +113,7 @@ set to a value greater than 0.
 
     Returns the current stack trace. Each line of the trace includes
     the calling method, including which file and line the call
-    originated from.::
+    originated from. ::
 
         //In PostsController::index()
         pr(Debugger::trace());
@@ -137,7 +137,7 @@ set to a value greater than 0.
 
     Grab an excerpt from the file at $path (which is an absolute
     filepath), highlights line number $line with $context number of
-    lines around it.::
+    lines around it. ::
 
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
@@ -205,12 +205,13 @@ primarily provides a toolbar in the rendered HTML, that provides a plethora of
 information about your application and the current request. You can download
 `DebugKit <https://github.com/cakephp/debug_kit>`_ from GitHub.
 
-xdebug
+Xdebug
 ======
 
-If your environment supplies the xdebug php extension, fatal errors will show
-additional xdebug stack trace details. Details about
-`xdebug <http://xdebug.org>`_ .
+If your environment supplies the Xdebug PHP extension, fatal errors will show
+additional Xdebug stack trace details. Details about Xdebug can be found at
+`Xdebug <http://xdebug.org>`_ .
+
 
 .. meta::
     :title lang=en: Debugging

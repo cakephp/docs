@@ -10,7 +10,7 @@ puissant et utile pour construire du code plus intelligent et plus
 optimisé. CakePHP offre un ensemble d'utilitaires statiques très
 utile dans la classe Hash qui vous permet de faire justement cela.
 
-La classe Hash de CakePHP peut être appelée à partir de n'inporte quel
+La classe Hash de CakePHP peut être appelée à partir de n'importe quel
 model ou controller de la même façon que pour un appel à Inflector
 Exemple: :php:meth:`Hash::combine()`.
 
@@ -25,7 +25,7 @@ disponibles dans toutes les méthodes. Une expression en chemin est faite
 depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux
 groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
 alors que les matchers sont utilisés pour qualifier les éléments. Vous
-appliquez les matchers aux élements de l'expression.
+appliquez les matchers aux éléments de l'expression.
 
 Types d'expression
 ------------------
@@ -67,12 +67,12 @@ Les Types d'Attribut Correspondants
 |                                | à 2.                                       |
 +--------------------------------+--------------------------------------------+
 | ``[id>=2]``                    | Match les éléments avec un id supérieur    |
-|                                | égal à 2.                                  |
+|                                | ou égal à 2.                               |
 +--------------------------------+--------------------------------------------+
 | ``[id<2]``                     | Match les éléments avec un id inférieur    |
 |                                | à 2.                                       |
 +--------------------------------+--------------------------------------------+
-| ``[id<=2]``                    | Match les éléménts avec un id inférieur    |
+| ``[id<=2]``                    | Match les éléments avec un id inférieur    |
 |                                | ou égal à 2.                               |
 +--------------------------------+--------------------------------------------+
 | ``[text=/.../]``               | Match les éléments qui ont des valeurs     |
@@ -101,8 +101,8 @@ Les Types d'Attribut Correspondants
     :rtype: array
 
     ``Hash::extract()`` supporte toutes les expressions, les components
-    matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
-    récupèrer les données à partir des tableaux, le long des chemins
+    matcher de la :ref:`hash-path-syntax`. Vous pouvez utiliser l'extract pour
+    récupérer les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier
     les éléments que vous souhaitez retourner ::
@@ -146,11 +146,11 @@ Les Types d'Attribut Correspondants
         Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
         insert().
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     :rtype: array
 
-    Retire tous les éléments d'un tableau qui matche avec $path.::
+    Retire tous les éléments d'un tableau qui matche avec $path. ::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -172,19 +172,19 @@ Les Types d'Attribut Correspondants
     multiples en une fois.
 
     .. versionchanged:: 2.5
-        Depuis 2.5.0, les expressions matchant l'attribut fonctionnenent avec
+        Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
         remove()
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     :rtype: array
 
     Crée un tableau associatif en utilisant $keyPath en clé pour le chemin
-    à construire, et optionnellement $valuePath comme chemin pour récupèrer
+    à construire, et optionnellement $valuePath comme chemin pour récupérer
     les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
     valeurs seront initialisées à null. Vous pouvez grouper en option les
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans
-    $groupPath.::
+    $groupPath. ::
 
         $a = array(
             array(
@@ -283,7 +283,7 @@ Les Types d'Attribut Correspondants
         */
 
     Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si
-    vous le faîtes, la première valeur sera utlisée comme un format de chaîne
+    vous le faîte, la première valeur sera utilisée comme un format de chaîne
     de caractères, pour les valeurs extraites par les autres chemins::
 
         $result = Hash::combine(
@@ -662,7 +662,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
-    Appliquer un callback à un ensemble de valuers extraites en utilisant
+    Appliquer un callback à un ensemble de valeurs extraites en utilisant
     $function. La fonction va récupérer les valeurs extraites en premier
     argument.
 
@@ -671,7 +671,7 @@ Les Types d'Attribut Correspondants
     :rtype: array
 
     Trie un tableau selon n'importe quelle valeur, déterminé par une
-    :ref:`hash-path-syntax`. Seuls les élements de type expression sont
+    :ref:`hash-path-syntax`. Seuls les éléments de type expression sont
     supportés par cette méthode::
 
         $a = array(

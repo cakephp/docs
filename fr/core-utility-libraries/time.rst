@@ -32,7 +32,7 @@ Formatage
     :rtype: integer
 
     Convertit étant donné le time (dans le time zone du serveur) vers le time
-    de l'utilisateur, étant donné son/sa sortie de GMT.::
+    de l'utilisateur, étant donné son/sa sortie de GMT. ::
 
         // appel via TimeHelper
         echo $this->Time->convert(time(), 'Asia/Jakarta');
@@ -173,7 +173,7 @@ Formatage
 
     :rtype: integer
 
-    Va retourner la date en un nombre défini sur Greenwich Mean Time (GMT).::
+    Va retourner la date en un nombre défini sur Greenwich Mean Time (GMT). ::
 
         // Appelé avec TimeHelper
         echo $this->Time->gmt('Aug 22, 2011');

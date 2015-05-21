@@ -6,7 +6,7 @@ Folder と File ユーティリティは、ファイルの読み書きやフォ�
 
 
 基本的な使い方
-================
+==============
 
 :php:meth:`App::uses()` を使ってクラスをロードします。\ ::
 
@@ -107,7 +107,8 @@ Folder API
             'to' => '/path/to/new/folder',
             'from' => '/path/to/copy/from', // will cause a cd() to occur
             'mode' => 0755,
-            'skip' => array('skip-me.php', '.git')
+            'skip' => array('skip-me.php', '.git'),
+            'recursive' => true
         ));
 
         $folder1 = new Folder('/path/to/folder1');
@@ -554,6 +555,6 @@ File API
 ..     双方のクラスの各メソッドの使い方について、より良い解説が必要です。
 
 .. meta::
-    :title lang=en: Folder & File
-    :description lang=en: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
-    :keywords lang=en: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file
+    :title lang=ja: Folder & File
+    :description lang=ja: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
+    :keywords lang=ja: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file

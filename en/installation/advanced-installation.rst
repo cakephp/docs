@@ -21,21 +21,21 @@ be able to use the ``cake`` command to create a new application. Since CakePHP
 will be located on PHP's ``include_path`` you won't need to make any other
 changes.
 
-
 Installing CakePHP with Composer
 ================================
 
 Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
-libraries. Since CakePHP publishes a PEAR package you can install CakePHP using
-`composer <http://getcomposer.org>`_. Before installing CakePHP you'll need to
-setup a ``composer.json`` file. A composer.json file for a CakePHP application
-would look like the following::
+libraries. `Packagist <https://packagist.org/>`_ is the main repository of
+Composer installable packages. Since CakePHP also publishes releases to Packagist, 
+you can install CakePHP using `Composer <http://getcomposer.org>`_.
+Before installing CakePHP you'll need to setup a ``composer.json`` file. A 
+composer.json file for a CakePHP application would look like the following::
 
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.5.*"
+            "cakephp/cakephp": "2.6.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
@@ -119,7 +119,6 @@ it.
 
 To configure your CakePHP installation, you'll need to make some
 changes to the following files.
-
 
 -  /app/webroot/index.php
 -  /app/webroot/test.php (if you use the

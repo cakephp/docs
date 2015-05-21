@@ -6,6 +6,7 @@ Models
 
 Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 ----------------------------------------------------------------------
+
 ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
 
     $this->SomeModel->saveAll($data, array(
@@ -153,7 +154,7 @@ When those methods are combined with having the :php:class:`RequestHandlerCompon
 enabled in your controller, the component will automatically decide if the
 response is already cached in the client and will send a `304 Not Modified`
 status code before rendering the view. Skipping the view rendering process saves
-CPU cycles and memory.::
+CPU cycles and memory. ::
 
     class ArticlesController extends AppController {
         public $components = array('RequestHandler');
@@ -208,6 +209,6 @@ it in ``engine`` key::
     }
 
 HtmlHelper
------------
-A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.
+----------
 
+A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.

@@ -73,7 +73,7 @@ en interne, ils sont aussi trouvables dans les paramètres de la requête:
   plugins.
 * ``controller`` Le controller gère la requête courante.
 * ``action`` L'action gère la requête courante.
-* ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
+* ``prefix`` Le préfixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
 * ``bare`` Présent quand la requête vient de
   :php:meth:`~Controller::requestAction()` et inclut l'option bare. Les requêtes
@@ -107,7 +107,7 @@ Accéder aux données POST
 
 Toutes les données POST peuvent être atteintes à travers
 :php:attr:`CakeRequest::$data`. N'importe quelle forme de tableau qui contient
-un prefixe ``data``, va avoir sa donnée prefixée retirée. Par exemple::
+un préfixe ``data``, va avoir sa donnée préfixée retirée. Par exemple::
 
     // Un input avec un nom attribute égal à 'data[MyModel][title]'
     // est accessible
@@ -481,7 +481,7 @@ Cela fera que tous les controllers dans votre application utiliseront
 remplacer l'instance de réponse de la configuration
 ``$this->response`` dans vos controllers. Ecraser l'objet réponse
 est à portée de main pour les tests car il vous permet d'écraser les
-méthodes qui interragissent avec :php:meth:`~CakeResponse::header()`. Voir la
+méthodes qui interagissent avec :php:meth:`~CakeResponse::header()`. Voir la
 section sur :ref:`cakeresponse-testing` pour plus d'informations.
 
 Gérer les types de contenu
@@ -618,7 +618,7 @@ des réponses. En utilisant :php:meth:`CakeResponse::cache()`::
     }
 
 Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
-pendant 5 jours, en espérant accélerer l'expérience de vos visiteurs.
+pendant 5 jours, en espérant accélérer l'expérience de vos visiteurs.
 :php:meth:`CakeResponse::cache()` définit valeur ``Last-Modified`` en
 premier argument. Expires, et ``max-age`` sont définis en se basant sur le
 second paramètre. Le Cache-Control est défini aussi à ``public``.
@@ -661,7 +661,7 @@ La classe :php:class:`CakeResponse` vous aide à configurer cet en-tête avec
 quelques méthodes utiles qui vont produire un en-tête final valide
 ``Cache Control``. Premièrement il y a la méthode
 :php:meth:`CakeResponse::sharable()`, qui indique si une réponse peut être
-considerée comme partageable pour différents utilisateurs ou clients. Cette
+considérée comme partageable pour différents utilisateurs ou clients. Cette
 méthode contrôle généralement la partie ``public`` ou ``private`` de
 cet en-tête. Définir une réponse en privé indique que tout ou une partie de
 celle-ci est prévue pour un unique utilisateur. Pour tirer profit
@@ -694,7 +694,7 @@ L'en-tête d'Expiration
 
 Aussi sous le model d'expiration de cache, vous pouvez définir l'en-tête
 ``Expires``, qui selon la spécification HTTP est la date et le temps après que
-la réponse ne soit plus considerée comme récente. Cet en-tête peut être défini
+la réponse ne soit plus considérée comme récente. Cet en-tête peut être défini
 en utilisant la méthode :php:meth:`CakeResponse::expires()`::
 
     public function view() {
@@ -726,7 +726,7 @@ ou non.
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
 :php:meth:`CakeResponse::checkNotModified()`, soit avoir le
-:php:class:`RequestHandlerComponent` inclu dans votre controller::
+:php:class:`RequestHandlerComponent` inclus dans votre controller::
 
     public function index() {
         $articles = $this->Article->find('all');
@@ -751,7 +751,7 @@ modifiée ou n'est pas basée sur leur cache.
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
 :php:meth:`CakeResponse::checkNotModified()`, soit avoir le
-:php:class:`RequestHandlerComponent` inclu dans votre controller::
+:php:class:`RequestHandlerComponent` inclus dans votre controller::
 
     public function view() {
         $article = $this->Article->find('first');
@@ -782,7 +782,7 @@ CakeResponse et les tests
 Probablement l'une des plus grandes victoires de :php:class:`CakeResponse` vient
 de comment il facilite les tests des controllers et des components. Au lieu
 d'avoir des méthodes répandues à travers plusieurs objets, vous avez un seul
-objet pour mocker pendant que les controllers et les components déleguent à
+objet pour mocker pendant que les controllers et les components délèguent à
 :php:class:`CakeResponse`. Cela vous aide à rester plus près d'un test unitaire
 et facilite les tests des controllers::
 

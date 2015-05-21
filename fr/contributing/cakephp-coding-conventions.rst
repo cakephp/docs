@@ -6,7 +6,7 @@ Les développeurs de CakePHP vont utiliser les normes de code suivantes.
 Il est recommandé que les autres personnes qui développent des IngredientsCake
 suivent les mêmes normes.
 
-Vous pouvez utilisez le `CakePHP Code Sniffer
+Vous pouvez utiliser le `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code
 suit les normes requises.
 
@@ -481,16 +481,15 @@ Variables
 ---------
 
 Les noms de variable doivent être aussi descriptifs que possible, mais
-aussi courts que possible. Les variables normales doivent démarrer
+aussi courts que possible. Tous les noms de variables doivent démarrer
 avec une lettre minuscule, et doivent être écrites en camelBack si il y a
-plusieurs mots. Les variables contenant des objets doivent démarrer
-avec une majuscule, et d'une certaine manière être associées à la classe d'où
-elles proviennent. Exemple::
+plusieurs mots. Les variables contenant des objets doivent d'une certaine
+manière être associées à la classe d'où elles proviennent. Exemple::
 
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
 
-    $Dispatcher = new Dispatcher();
+    $dispatcher = new Dispatcher();
 
 Visibilité des Membres
 ----------------------

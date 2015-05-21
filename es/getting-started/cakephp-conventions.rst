@@ -187,8 +187,8 @@ Si usas estas convenciones, CakePHP sabrá que una llamada a
 http://example.com/people/ se mapeará a una llamada al método index() del 
 controlador PeopleController, donde el modelo Person será instanciado 
 automáticamente para su uso (leerá los datos de la tabla 'people' en la base 
-de datos). Ninguna de estas relaciones necesita ser creada ni configurada s
-nombras de la forma correcta los los ficheros que de todos modos tienes que
+de datos). Ninguna de estas relaciones necesita ser creada ni configurada si
+nombras de la forma correcta los ficheros que de todos modos tienes que
 crear para que tu aplicación funcione.
 
 Ahora conoces los fundamentos y convenciones que debes utilizar en CakePHP, 

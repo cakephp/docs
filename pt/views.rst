@@ -697,5 +697,5 @@ Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 
 .. meta::
-    :title lang=en: Views
-    :keywords lang=en: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
+    :title lang=pt: Views
+    :keywords lang=pt: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

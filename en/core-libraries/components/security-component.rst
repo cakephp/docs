@@ -57,9 +57,9 @@ in the controller.
 
 .. php:attr:: blackHoleCallback
 
-    A Controller callback that will handle and requests that are
-    blackholed. A blackhole callback can be any public method on a controllers.
-    The callback should expect an parameter indicating the type of error::
+    A Controller callback that will handle any requests that are
+    blackholed. A blackhole callback can be any public method on a controller.
+    The callback should expect a parameter indicating the type of error::
 
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
@@ -153,7 +153,6 @@ and tracking which fields are in a form. The values for hidden fields are
 tracked as well. All of this data is combined and turned into a hash. When
 a form is submitted, the ``SecurityComponent`` will use the POST data to build the same
 structure and compare the hash.
-
 
 .. note::
 
@@ -272,7 +271,7 @@ Using CSRF protection
 Simply by adding the ``SecurityComponent`` to your components array,
 you can benefit from the CSRF protection it provides. By default CSRF tokens are
 valid for 30 minutes and expire on use. You can control how long tokens last by setting
-csrfExpires on the component.::
+csrfExpires on the component. ::
 
     public $components = array(
         'Security' => array(

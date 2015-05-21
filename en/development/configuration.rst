@@ -73,7 +73,7 @@ schema
     Used in PostgreSQL database setups to specify which schema to use.
 unix_socket
     Used by drivers that support it to connect via unix socket files. If you are
-    using postgres and want to use unix sockets, leave the host key blank.
+    using PostgreSQL and want to use unix sockets, leave the host key blank.
 ssl_key
     The file path to the SSL key file. (Only supported by MySQL, requires PHP
     5.3.7+).
@@ -86,7 +86,7 @@ ssl_ca
 settings
     An array of key/value pairs that should be sent to the database server as
     ``SET`` commands when the connection is created. This option is only
-    supported by MySQL, Postgres, and SQLserver at this time.
+    supported by the Mysql, Postgres, and Sqlserver datasources at this time.
 
 .. versionchanged:: 2.4
     The ``settings``, ``ssl_key``, ``ssl_cert`` and ``ssl_ca`` keys
@@ -113,7 +113,7 @@ bakers, pastry\_stores, and savory\_cakes.
 .. todo::
 
     Add information about specific options for different database
-    vendors, such as SQLServer, Postgres and MySQL.
+    vendors, such as Microsoft SQL Server, PostgreSQL and MySQL.
 
 Additional Class Paths
 ======================
@@ -213,9 +213,9 @@ paths where CakePHP will look for classes::
 Core Configuration
 ==================
 
-Each application in CakePHP contains a configuration file to
-determine CakePHP's internal behavior.
-``app/Config/core.php``. This file is a collection of Configure class
+Each application in CakePHP contains a configuration file,
+``app/Config/core.php``, to determine CakePHP's internal behavior.
+This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
 variables, you'll need to be familiar with :php:class:`Configure`, CakePHP's
@@ -231,10 +231,11 @@ how it affects your CakePHP application.
 
 debug
     Changes CakePHP debugging output.
-    0 = Production mode. No output.
-    1 = Show errors and warnings.
-    2 = Show errors, warnings, and SQL. [SQL log is only shown when you
-    add $this->element('sql\_dump') to your view or layout.]
+
+    * 0 = Production mode. No output.
+    * 1 = Show errors and warnings.
+    * 2 = Show errors, warnings, and SQL. [SQL log is only shown when you
+      add $this->element('sql\_dump') to your view or layout.]
 
 Error
     Configure the Error handler used to handle errors for your application.
@@ -386,7 +387,6 @@ they are read on every request. By default both of these configurations expire e
 As with all cached data stored in :php:class:`Cache` you can clear data using
 :php:meth:`Cache::clear()`.
 
-
 Configure Class
 ===============
 
@@ -415,7 +415,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: The key to write, can use be a :term:`dot notation` value.
+    :param string $key: The key to write, can be a :term:`dot notation` value.
     :param mixed $value: The value to store.
 
     Use ``write()`` to store data in the application's configuration::
@@ -445,7 +445,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: The key to read, can use be a :term:`dot notation` value
+    :param string $key: The key to read, can be a :term:`dot notation` value
 
     Used to read configuration data from the application. Defaults to
     CakePHP's important debug value. If a key is supplied, the data is
@@ -474,7 +474,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: The key to delete, can use be a :term:`dot notation` value
+    :param string $key: The key to delete, can be a :term:`dot notation` value
 
     Used to delete information from the application's configuration::
 
@@ -527,7 +527,7 @@ using :php:meth:`Configure::config()`::
 You can have multiple readers attached to Configure, each reading
 different kinds of configuration files, or reading from
 different types of sources. You can interact with attached readers
-using a few other methods on Configure. To see check which reader
+using a few other methods on Configure. To see which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
     // Get the array of aliases for attached readers.
@@ -644,9 +644,9 @@ This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config
 reader for you application::
 
-    // in app/Lib/Configure/XmlReader.php
+    // in app/Lib/Configure/MyXmlReader.php
     App::uses('Xml', 'Utility');
-    class XmlReader implements ConfigReaderInterface {
+    class MyXmlReader implements ConfigReaderInterface {
         public function __construct($path = null) {
             if (!$path) {
                 $path = APP . 'Config' . DS;
@@ -667,11 +667,17 @@ reader for you application::
 
 In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
-    App::uses('XmlReader', 'Configure');
-    Configure::config('xml', new XmlReader());
+    App::uses('MyXmlReader', 'Configure');
+    Configure::config('xml', new MyXmlReader());
     ...
 
     Configure::load('my_xml');
+
+.. warning::
+
+        It is not a good idea to call your custom configure class ``XmlReader`` because that
+        class name is an internal PHP one already:
+        `XMLReader <http://php.net/manual/en/book.xmlreader.php>`_
 
 The ``read()`` method of a config reader, must return an array of the configuration information
 that the resource named ``$key`` contains.
@@ -688,7 +694,7 @@ that the resource named ``$key`` contains.
     This method should load/parse the configuration data identified by ``$key``
     and return an array of data in the file.
 
-.. php:method:: dump($key)
+.. php:method:: dump($key, $data)
 
     :param string $key: The identifier to write to.
     :param array $data: The data to dump.
@@ -702,7 +708,7 @@ that the resource named ``$key`` contains.
 
     Thrown when errors occur when loading/storing/restoring configuration data.
     :php:interface:`ConfigReaderInterface` implementations should throw this
-    error when they encounter an error.
+    exception when they encounter an error.
 
 Built-in Configuration readers
 ------------------------------
@@ -728,14 +734,14 @@ Built-in Configuration readers
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+    Load your custom configuration file by inserting the following in app/Config/bootstrap.php::
 
         Configure::load('customConfig');
 
 .. php:class:: IniReader
 
     Allows you to read configuration files that are stored as plain .ini files.
-    The ini files must be compatible with php's ``parse_ini_file`` function, and
+    The ini files must be compatible with PHP's ``parse_ini_file`` function, and
     benefit from the following improvements
 
     * dot separated values are expanded into arrays.

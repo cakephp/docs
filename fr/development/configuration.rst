@@ -81,7 +81,7 @@ datasource
     Source de données Non-DBO à utiliser, ex: 'ldap', 'twitter'.
 unix_socket
     Utilisé par les pilotes qui le supportent pour connecter via les fichiers
-    socket unix. Si vous utilisez postgres et voulez utiliser les sockets
+    socket unix. Si vous utilisez PostgreSQL et voulez utiliser les sockets
     unix, laissez la clé host vide.
 ssl_key
     Le chemin vers le fichier de clé SSL. (Seulement supporté par MySQL,
@@ -95,7 +95,7 @@ ssl_ca
 settings
     Un tableau de clé/valeur qui doit être envoyé à la base de données du
     serveur en tant que commandes ``SET`` quand la connexion est créée.
-    Cette option est seulement supportée par MySQL, Postgres, et SQLserver en
+    Cette option est seulement supportée par Mysql, Postgres, et Sqlserver en
     ce moment.
 
 .. versionchanged:: 2.4
@@ -122,7 +122,7 @@ noms de vos tables - par exemple : bakers, pastry\_stores, et savory\_cakes.
 .. todo::
 
     Ajouter des informations sur les options spécifiques pour différents
-    fournisseurs de base de données comme SQLServer, Postgres et MySQL.
+    fournisseurs de base de données comme Microsoft SQL Server, PostgreSQL et MySQL.
 
 Chemins de Classe Supplémentaires
 =================================
@@ -136,24 +136,78 @@ En utilisant :php:meth:`App::build()` dans bootstrap.php nous pouvons définir
 des chemins supplémentaires où CakePHP va recherchez les classes::
 
     App::build(array(
-        'Model'                     => array('/path/to/models', '/next/path/to/models'),
-        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
-        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
-        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
-        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
-        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
-        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
-        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
-        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
-        'View'                      => array('/path/to/views', '/next/path/to/views'),
-        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
-        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
-        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
-        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
-        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
-        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
-        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
-        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
+        'Model' => array(
+            '/path/to/models',
+            '/next/path/to/models'
+        ),
+        'Model/Behavior' => array(
+            '/path/to/behaviors',
+            '/next/path/to/behaviors'
+        ),
+        'Model/Datasource' => array(
+            '/path/to/datasources',
+            '/next/path/to/datasources'
+        ),
+        'Model/Datasource/Database' => array(
+            '/path/to/databases',
+            '/next/path/to/database'
+        ),
+        'Model/Datasource/Session' => array(
+            '/path/to/sessions',
+            '/next/path/to/sessions'
+        ),
+        'Controller' => array(
+            '/path/to/controllers',
+            '/next/path/to/controllers'
+        ),
+        'Controller/Component' => array(
+            '/path/to/components',
+            '/next/path/to/components'
+        ),
+        'Controller/Component/Auth' => array(
+            '/path/to/auths',
+            '/next/path/to/auths'
+        ),
+        'Controller/Component/Acl' => array(
+            '/path/to/acls',
+            '/next/path/to/acls'
+        ),
+        'View' => array(
+            '/path/to/views',
+            '/next/path/to/views'
+        ),
+        'View/Helper' => array(
+            '/path/to/helpers',
+            '/next/path/to/helpers'
+        ),
+        'Console' => array(
+            '/path/to/consoles',
+            '/next/path/to/consoles'
+        ),
+        'Console/Command' => array(
+            '/path/to/commands',
+            '/next/path/to/commands'
+        ),
+        'Console/Command/Task' => array(
+            '/path/to/tasks',
+            '/next/path/to/tasks'
+        ),
+        'Lib' => array(
+            '/path/to/libs',
+            '/next/path/to/libs'
+        ),
+        'Locale' => array(
+            '/path/to/locales',
+            '/next/path/to/locales'
+        ),
+        'Vendor' => array(
+            '/path/to/vendors',
+            '/next/path/to/vendors'
+        ),
+        'Plugin' => array(
+            '/path/to/plugins',
+            '/next/path/to/plugins'
+        ),
     ));
 
 .. note::
@@ -185,14 +239,15 @@ variable et comment elle affecte votre application CakePHP.
 
 debug
     Change la sortie de debug de CakePHP.
-    0 = mode Production. Pas de sortie.
-    1 = Montre les erreurs et les avertissements.
-    2 = Montre les erreurs, avertissements, et le SQL. [le log SQL est
-    seulement montré quand vous ajoutez $this->element('sql\_dump')
-    à votre vue ou votre layout.]
+
+    * 0 = mode Production. Pas de sortie.
+    * 1 = Montre les erreurs et les avertissements.
+    * 2 = Montre les erreurs, avertissements, et le SQL. [le log SQL est
+      seulement montré quand vous ajoutez $this->element('sql\_dump')
+      à votre vue ou votre layout.]
 
 Error
-    Configure le getionnaire d'Error handler utilisé pour gérer les erreurs
+    Configure le gestionnaire d'Error handler utilisé pour gérer les erreurs
     pour votre application.
     Par défaut :php:meth:`ErrorHandler::handleError()` est utilisé. Cela
     affichera les erreurs en utilisant :php:class:`Debugger`, quand debug > 0
@@ -254,11 +309,11 @@ Routing.prefixes
     tableau de noms préfixés de routes que vous voulez utiliser. En savoir
     plus sur cela plus tard.
 Cache.disable
-    Quand défini à true, la mise en cache persistente est désativée côté-site.
+    Quand défini à true, la mise en cache persistante est désactivée côté-site.
     Cela mettra toutes les lectures/écritures du :php:class:`Cache` en échec.
 Cache.check
     Si défini à true, active la mise en cache de la vue. L'activation est
-    toujours necéssaire dans les controllers, mais cette variable permet
+    toujours nécessaire dans les controllers, mais cette variable permet
     la détection de ces configurations.
 Session
     Contient un tableau de configurations à utiliser pour la configuration
@@ -302,7 +357,7 @@ Session
     Session.handler à <name>.
 
     Pour utiliser les sessions en base de données, lancez le schéma
-    ``app/Config/Schema/sessions.php`` en utilisant la commnde de shell de
+    ``app/Config/Schema/sessions.php`` en utilisant la commande de shell de
     cake: ``cake schema create Sessions``.
 
 Security.salt
@@ -365,15 +420,15 @@ Classe Configure
 .. php:class:: Configure
 
 Malgré quelques petites choses à configurer dans CakePHP, il
-est parfois utilie d'avoir vos propres règles de configuration pour votre
-application. Dans le passé, vous avoiez peut-être défini des valeurs
+est parfois utile d'avoir vos propres règles de configuration pour votre
+application. Dans le passé, vous aviez peut-être défini des valeurs
 de configuration personnalisées en définissant des variables ou des
 constantes dans certains fichiers. Faire cela, vous force à inclure ce
 fichier de configuration chaque fois que vous souhaitez utiliser
 ces valeurs.
 
 La nouvelle classe Configure de CakePHP peut être utilisée pour stocker et
-récupèrer des valeurs spécifiques d'exécution ou d'application. Attention,
+récupéré des valeurs spécifiques d'exécution ou d'application. Attention,
 cette classe vous permet de stocker tout dedans, puis de l'utiliser dans
 toute autre partie de votre code: une tentative évidente de casser le modèle
 MVC avec lequel CakePHP a été conçu. Le but principal de la classe Configure
@@ -607,10 +662,10 @@ Restaurer la configuration de runtime
 .. php:staticmethod:: restore($name, $cacheConfig = 'default')
 
     :param string $name: La clé de stockage à charger.
-    :param string $cacheConfig: La configuration de cache à partir de laquel
+    :param string $cacheConfig: La configuration de cache à partir de laquelle
         on charge les données.
 
-Une fois que vous avez stocké la configuration executée, vous aurez
+Une fois que vous avez stocké la configuration exécutée, vous aurez
 probablement besoin de la restaurer afin que vous puissiez y accéder à nouveau.
 ``Configure::restore()`` fait exactement cela::
 
@@ -632,9 +687,9 @@ plugins. Les readers de configuration ont besoin d'implémenter l'
 lecture, comme seule méthode requise. Si vous aimez vraiment les fichiers XML,
 vous pouvez créer un reader de config simple Xml pour votre application::
 
-    // dans app/Lib/Configure/XmlReader.php
+    // dans app/Lib/Configure/MyXmlReader.php
     App::uses('Xml', 'Utility');
-    class XmlReader implements ConfigReaderInterface {
+    class MyXmlReader implements ConfigReaderInterface {
         public function __construct($path = null) {
             if (!$path) {
                 $path = APP . 'Config' . DS;
@@ -656,11 +711,17 @@ vous pouvez créer un reader de config simple Xml pour votre application::
 Dans votre ``app/Config/bootstrap.php``, vous pouvez attacher ce reader et
 l'utiliser::
 
-    App::uses('XmlReader', 'Configure');
-    Configure::config('xml', new XmlReader());
+    App::uses('MyXmlReader', 'Configure');
+    Configure::config('xml', new MyXmlReader());
     ...
 
     Configure::load('my_xml');
+
+.. warning::
+
+        Ce n'dest pas une bonne idée de nommer votre classe de configuration
+        ``XmlReader`` car ce nom de classe est déjà utilisé en interne par PHP
+        `XMLReader <http://php.net/manual/fr/book.xmlreader.php>`_
 
 La méthode ``read()`` du reader de config, doit retourner un tableau
 d'informations de configuration que la ressource nommé ``$key`` contient.
@@ -678,7 +739,7 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
     identifiées par ``$key`` et retourner un tableau de données dans le
     fichier.
 
-.. php:method:: dump($key)
+.. php:method:: dump($key, $data)
 
     :param string $key: L'identifieur dans lequel écrire.
     :param array $data: La donnée à supprimer.
@@ -694,7 +755,7 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
     Lancé quand les erreurs apparaissent quand le
     chargement/stockage/restauration des données de configuration.
     Les implémentations de :php:interface:`ConfigReaderInterface` devraient
-    lancer cette erreur quand elles rencontrent une erreur.
+    lancer cette exception quand elles rencontrent une erreur.
 
 Readers de Configuration intégrés
 ---------------------------------
@@ -723,7 +784,7 @@ Readers de Configuration intégrés
     :php:exc:`ConfigureException`.
 
     Charger votre fichier de configuration personnalisé en insérant ce qui suit
-    dans app/Config/bootstrap.php:
+    dans app/Config/bootstrap.php::
 
         Configure::load('customConfig');
 
@@ -731,7 +792,7 @@ Readers de Configuration intégrés
 
     Vous permet de lire les fichiers de configuration qui sont stockés en
     fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
-    fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
+    fonction PHP ``parse_ini_file``, et bénéficie des améliorations suivantes:
 
     * Les valeurs séparées par des points sont étendues dans les tableaux.
     * Les valeurs de la famille des boléens comme 'on' et 'off' sont converties

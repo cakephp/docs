@@ -127,7 +127,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
   .. versionadded:: 2.4
 
 - ``userFields`` La liste des champs à récupérer depuis le ``userModel``. Cette
-  option est utile lorsque vous avez une large table d'utilisateurs et que vous 
+  option est utile lorsque vous avez une large table d'utilisateurs et que vous
   n'avez pas besoin de toutes les colonnes dans la session. Par défaut tous les
   champs sont récupérés.
 
@@ -149,24 +149,27 @@ Les objets d'authentification supportent les clés de configuration suivante.
 Ne mettez pas d'autre clés de configuration de Auth(comme authError,
 loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
-ressemblerait à quelque chose comme.::
+ressemblerait à quelque chose comme. ::
 
-        // Passage de paramètre dans le tableau $components
-        public $components = array(
-            'Auth' => array(
-                'loginAction' => array(
-                    'controller' => 'users',
-                    'action' => 'login',
-                    'plugin' => 'users'
-                ),
-                'authError' => 'Pensiez-vous réellement que vous étiez autorisés à voir cela ?',
-                'authenticate' => array(
-                    'Form' => array(
-                        'fields' => array('username' => 'email')
+    // Passage de paramètre dans le tableau $components
+    public $components = array(
+        'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+                'plugin' => 'users'
+            ),
+            'authError' => 'Pensiez-vous réellement que vous étiez autorisés à voir cela ?',
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array(
+                        'username' => 'mon_champ_username_personnalise', // 'username' par défaut
+                        'password' => 'mon_champ_password_personnalise'  // 'password' par défaut
                     )
                 )
             )
-        );
+        )
+    );
 
 En plus de la configuration courante, l'authentification de base
 prend en charge les clés suivantes:
@@ -201,18 +204,18 @@ Une simple fonction de connexion pourrait ressembler à cela ::
 
     public function login() {
         if ($this->request->is('post')) {
+            // Important: Utilisez login() sans argument! Voir warning ci-dessous.
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
                 // Avant 2.3, utilisez
                 // `return $this->redirect($this->Auth->redirect());`
-            } else {
-                $this->Session->setFlash(
-                    __('Username ou password est incorrect'),
-                    'default',
-                    array(),
-                    'auth'
-                );
             }
+            $this->Session->setFlash(
+                __('Username ou password est incorrect'),
+                'default',
+                 array(),
+                'auth'
+            );
         }
     }
 
@@ -307,7 +310,7 @@ cookies, ces valeurs sont utilisées pour ré-identifier l'utilisateur et
 s'assurer que c'est un utilisateur valide. Comme avec les méthodes
 d'authentification de l'objet ``authenticate()``, la méthode ``getuser()``
 devrait retourner un tableau d'information utilisateur en cas de succès,
-et ``false`` en cas d'echec.::
+et ``false`` en cas d'echec. ::
 
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');
@@ -350,7 +353,7 @@ Afficher les messages flash de Auth
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
 suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de
-préférence avant la ligne content_for_layout.::
+préférence avant la ligne content_for_layout. ::
 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
@@ -530,7 +533,11 @@ utilisateur que vous voulez pour la 'connexion'::
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
-            $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
+            $this->request->data['User'] = array_merge(
+                $this->request->data['User'],
+                array('id' => $id)
+            );
+            unset($this->request->data['User']['password']);
             $this->Auth->login($this->request->data['User']);
             return $this->redirect('/users/home');
         }
@@ -538,8 +545,14 @@ utilisateur que vous voulez pour la 'connexion'::
 
 .. warning::
 
-    Soyez certain d'ajouter manuellement le nouvel id utilisateur au tableau passé
-    à la méthode de login. Sinon, l'id utilisateur ne sera pas disponible.
+    Assurez-vous d'ajouter manuellement le nouvel id utilisateur au tableau
+    passé à la méthode de login. Sinon, l'id utilisateur ne sera pas disponible.
+
+.. warning::
+
+    Assurez-vous d'enlever les champs de mot de passe avant de passer
+    manuellement les données dans ``$this->Auth->login()``, sinon celles-ci
+    seront sauvegardées non hashées dans la Session.
 
 Accéder à l'utilisateur connecté
 --------------------------------
@@ -600,7 +613,7 @@ pouvez créer vos propres gestionnaires dans un plugin par exemple.
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-Vous configurez les gestionnaires d'autorisations via 
+Vous configurez les gestionnaires d'autorisations via
 ``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires. L'utilisation de plusieurs gestionnaires vous donne la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
@@ -884,7 +897,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     :php:meth:`SessionComponent::setFlash()`.
     Les clés disponibles sont:
 
-    - ``element`` - L'élement à utiliser , par défaut à 'default'.
+    - ``element`` - L'élément à utiliser , par défaut à 'default'.
     - ``key`` - La clé à utiliser, par défaut à 'auth'.
     - ``params`` - Un tableau de paramètres supplémentaires à utiliser par
       défaut à array()
@@ -913,7 +926,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
     Contrôle la gestion des accès non autorisés. Par défaut, un utilisateur
     non autorisé est redirigé vers l'URL référente ou vers
-    ``AuthComponent::$loginAction`` ou '/'.
+    ``AuthComponent::$loginRedirect`` ou '/'.
     Si défini à false, une exception ForbiddenException est lancée au lieu de
     la redirection.
 

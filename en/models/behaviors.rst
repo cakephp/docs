@@ -132,6 +132,12 @@ We can also use the load method to override behavior settings::
     // We will change one setting from our already attached behavior
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
+And using aliasing, we can customize the alias it will be loaded as, also allowing it to be loaded
+multiple times with different settings::
+
+    // The behavior will be available as 'MyTree'
+    $this->Category->Behaviors->load('MyTree', array('className' => 'Tree'));
+
 There's also a method to obtain the list of behaviors a model has
 attached. If we pass the name of a behavior to the method, it will
 tell us if that behavior is attached to the model, otherwise it
@@ -246,10 +252,10 @@ the 2nd parameter. This allows you to munge the method name for additional
 information, much like ``Model::findAllByXX``. If the above behavior was
 attached to a model the following would happen::
 
-    $model->doReleaseTheHounds('homer', 'lenny');
+    $model->doReleaseTheHounds('karl', 'lenny');
 
     // would output
-    'ReleaseTheHounds', 'homer', 'lenny'
+    'ReleaseTheHounds', 'karl', 'lenny'
 
 Behavior callbacks
 ==================
@@ -336,7 +342,6 @@ model that the behavior method was invoked on.
 
     You can use afterDelete to perform clean up operations related to
     your behavior.
-
 
 
 .. meta::

@@ -14,7 +14,7 @@ httpd.conf (Assurez-vous que vous avez édité le httpd.conf du système
 plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
 Ces fichiers peuvent varier selon les différentes distributions et les versions
-d'apache. Vous pouvez allez voir
+d'Apache. Vous pouvez allez voir
 http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à

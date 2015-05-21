@@ -295,7 +295,7 @@ En ajoutant simplement la ``SecurityComponent`` à votre tableau
 de component, vous pouvez bénéficier de la protection CSRF fournie.
 Par défaut les jetons CSRF sont valides 30 minutes et expire à l'utilisation.
 Vous pouvez contrôler la durée des jetons en paramétrant csrfExpires
-dans le component.::
+dans le component. ::
 
     public $components = array(
         'Security' => array(
@@ -304,7 +304,7 @@ dans le component.::
     );
 
 Vous pouvez aussi définir cette propriété dans la partie ``beforeFilter``
-de votre controller.::
+de votre controller. ::
 
     public function beforeFilter() {
         $this->Security->csrfExpires = '+1 hour';

@@ -50,7 +50,7 @@ que CakePHP est configuré avec un ensemble de routes par défaut.
 Le routing de CakePHP par défaut va vous faire aller assez loin dans toute
 application. Vous pouvez accéder à une action directement par l'URL en
 mettant son nom dans la requête. Vous pouvez aussi passer des paramètres aux
-actions de votre controller en utilisant l'URL.::
+actions de votre controller en utilisant l'URL. ::
 
         modèle URL des routes par défaut: 
         http://example.com/controller/action/param1/param2/param3
@@ -147,7 +147,7 @@ de la route::
         array('controller' => 'products', 'action' => 'display', 5)
     );
 
-Cet exemple montre comment vous pouvez utilisez le deuxième paramètre de
+Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
 pourriez considérer la création d'une route. Cela vous permet de vous lier
@@ -528,7 +528,7 @@ Arguments Passés
 
 Les arguments passés sont des arguments supplémentaires ou des segments
 du chemin qui sont utilisés lors d'une requête. Ils sont souvent utilisés
-pour transmettre des paramètres aux méthodes de vos controllers.::
+pour transmettre des paramètres aux méthodes de vos controllers. ::
 
     http://localhost/calendars/view/recent/mark
 
@@ -947,12 +947,12 @@ API du Router
     Le premier paramètre va être utilisé comme nom de controller alors que
     le second est utilisé en nom d'action. La syntaxe '/\*' rend cette route
     greedy puisqu'elle ca matcher les requêtes comme `/posts/index` ainsi que
-    les requêtes comme ``/posts/edit/1/foo/bar`` .::
+    les requêtes comme ``/posts/edit/1/foo/bar`` . ::
     
         Router::connect('/home-page', array('controller' => 'pages', 'action' => 'display', 'home'));
     
     Ce qui est au-dessus montre l'utilisation d'un paramètre de route par
-    défaut. Et fournit les paramètres de routing pour une route statique.::
+    défaut. Et fournit les paramètres de routing pour une route statique. ::
     
         Router::connect(
             '/:lang/:controller/:action/:id',
@@ -974,7 +974,7 @@ API du Router
       du tableau de route régulière. Ex. ``'pass' => array('slug')``.
     
     * ``persist`` est utilisé pour définir lesquels des paramètres de route
-      devrait être automatiquement inclus quand on génére les nouvels URLs.
+      devrait être automatiquement inclus quand on génère les nouvels URLs.
       Vous pouvez écraser les paramètres persistentes en les redéfinissant
       dans une URL ou les retirer en configurant le paramètre à ``false``.
       Ex. ``'persist' => array('lang')``.
@@ -1031,7 +1031,7 @@ API du Router
              chaînes de requête HTML échappées '&'.
            * full - Si à true, l'URL de base complète sera précédée.
 
-    Génére une URL pour l'action spécfiée. Retourne une URL pointant vers
+    Génère une URL pour l'action spécfiée. Retourne une URL pointant vers
     une combinaison de controller et d'action. $url peut être:
 
     * Empty - la méthode trouve l'adresse du controller/de l'action actuel.
@@ -1095,7 +1095,7 @@ API du Router
 
     :param string $url: La chaîne URL à parser.
     
-    Parse une URL entrante, et génére un tableau de paramètres requêtés sur
+    Parse une URL entrante, et génère un tableau de paramètres requêtés sur
     lequel le Dispatcher peut agir. Etendre cette méthode vous permet de
     personnaliser comment les URLs entrantes sont converties en un tableau.
     Retourne ``false`` à partir d'une URL pour indiquer un échec de match.

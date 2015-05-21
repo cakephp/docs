@@ -25,7 +25,7 @@ to implement your own caching systems. The built-in caching engines are:
   By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
-  optimized for Windows and IIS.
+  optimized for Windows and Microsoft IIS.
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
@@ -50,7 +50,6 @@ Regardless of the CacheEngine you choose to use, your application interacts with
 as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
-
 
 Configuring Cache class
 =======================
@@ -115,7 +114,7 @@ directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either ``app/Lib/Cache/Engine/MyCustomCacheEngine.php``
 as an app/libs or in ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.::
+dot syntax. ::
 
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
@@ -387,7 +386,7 @@ Cache API
     ``Cache::set()`` to change the settings for a write, you should
     also use ``Cache::set()`` before reading the data back in. If you
     fail to do so, the default settings will be used when the cache key
-    is read.::
+    is read. ::
 
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);
@@ -458,6 +457,7 @@ Cache API
 
     .. versionadded:: 2.5
         remember() was added in 2.5.
+
 
 .. meta::
     :title lang=en: Caching

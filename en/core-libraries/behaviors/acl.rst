@@ -74,9 +74,8 @@ belongsTo Group::
         }
         if (!$data['User']['group_id']) {
             return null;
-        } else {
-            return array('Group' => array('id' => $data['User']['group_id']));
         }
+        return array('Group' => array('id' => $data['User']['group_id']));
     }
 
 In the above example the return is an array that looks similar to
@@ -114,6 +113,7 @@ specify which node type you want::
         'id' => 1
     ));
     $node = $this->User->node($user, 'Aro');
+
 
 .. meta::
     :title lang=en: ACL

@@ -9,7 +9,7 @@ Cache
 
 - Un nouvel adaptateur a été ajouté pour ``Memcached``. Ce nouvel adaptateur
   utilise ext/memcached au lieu de ext/memcache. Il permet d'améliorer la
-  performance et les connections persistentes partagées.
+  performance et les connexions persistentes partagées.
 - L'adaptateur ``Memcache`` est maintenant déprécié en faveur de ``Memcached``.
 - :php:meth:`Cache::remember()` a été ajoutée.
 - :php:meth:`Cache::config()` accepte maintenant la clé ``database`` lors de

@@ -151,10 +151,10 @@ et fixtures à n'importe quel moment dans votre processus de développement.
 En plus d'être reconstructibles à n'importe quel moment, les tests cuits
 sont maintenant capable de trouver autant de fixtures que possible.
 Dans le passé, tester impliquait souvent de se battre à travers de
-nombreuses erreurs 'Manque la table'. Avec une detection des fixtures
+nombreuses erreurs 'Manque la table'. Avec une détection des fixtures
 plus poussée, nous espérons rendre le test plus simple plus accessible.
 
-Les cas de test générent aussi des méthodes squelettes de test pour chaque
+Les cas de test génèrent aussi des méthodes squelettes de test pour chaque
 méthode publique non héritée dans vos classes. Vous enlevant une étape
 supplémentaire.
 
@@ -205,7 +205,7 @@ Une nouveauté dans bake pour 1.3 est l'ajout de plus de templates.
 Dans 1.2, les vues bakées utilisaient les templates qui pouvaient être
 changés pour modifier les fichiers vues bakés générées. Dans 1.3, les
 templates sont utilisés pour générer toute sortie de bake générée.
-Il y a des templates séparés poour les controllers, les ensembles d'action
+Il y a des templates séparés pour les controllers, les ensembles d'action
 des controllers, les fixtures, les models, les cas de test, et les fichiers
 de vue de 1.2. Comme de plus en plus de templates, vous pouvez aussi avoir des
 ensembles de template multiple ou, de thèmes bakés. Les thèmes bakés peuvent

@@ -68,5 +68,5 @@ Example:
 
 
 .. meta::
-    :title lang=en: Inflector
-    :keywords lang=en: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore
+    :title lang=ja: Inflector
+    :keywords lang=ja: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

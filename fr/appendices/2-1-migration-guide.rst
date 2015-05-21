@@ -264,7 +264,7 @@ HtmlHelper
   sur le premier lien crumb.
 - :php:meth:`HtmlHelper::docType()` est par défaut HTML5.
 - :php:meth:`HtmlHelper::image()` a maintenant une option ``fullBase``.
-- :php:meth:`HtmlHelper::media()` a été ajoutée. Vous pouvez utilisez cette 
+- :php:meth:`HtmlHelper::media()` a été ajoutée. Vous pouvez utiliser cette 
   méthode pour créer des éléments audio/vidéo HTML5.
 - Le support du :term:`syntaxe de plugin` a été ajouté pour
   :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, 
@@ -306,7 +306,7 @@ Vues étendues
 -------------
 
 :php:class:`View` a une nouvelle méthode vous permettant d'enrouler 
-ou 'étendre' une vue/élement/layout avec un autre fichier.
+ou 'étendre' une vue/élément/layout avec un autre fichier.
 Voir la section sur
 :ref:`extending-views` pour plus d'informations sur cette fonctionnalité.
 

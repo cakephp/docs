@@ -218,12 +218,12 @@ Le résultat d'un appel à ``find('list')`` sera de la forme suivante::
         [3] => 'valeurAffichage3',
     )
 
-En appelant ``find('list')``, les champs (``fields``) passés sont utilisés 
-pour déterminer ce qui devrait être utilisé comme clé, valeur du tableau 
-et, optionnellement, par quoi regrouper les résultats (group by). Par 
-défaut la clé primaire du model est utilisé comme clé et le champ affiché 
-(display field qui peut être configuré en utilisant l'attribut 
-:ref:`model-displayField` du model) est utilisé pour la valeur. Quelques 
+En appelant ``find('list')``, les champs (``fields``) passés sont utilisés
+pour déterminer ce qui devrait être utilisé comme clé, valeur du tableau
+et, optionnellement, par quoi regrouper les résultats (group by). Par
+défaut la clé primaire du model est utilisé comme clé et le champ affiché
+(display field qui peut être configuré en utilisant l'attribut
+:ref:`model-displayField` du model) est utilisé pour la valeur. Quelques
 exemples complémentaires pour clarifier les choses::
 
     public function une_function() {
@@ -447,7 +447,7 @@ Le format retourné par un appel à ``find('neighbors')`` est de la forme :
 .. note::
 
     Notez que le résultat contient toujours seulement deux éléments
-    de premier niveau : prev et next. Cette fonction ne possède pas 
+    de premier niveau : prev et next. Cette fonction ne possède pas
     de variable récursive par défaut d'un model. Le paramètre récursif doit
     être passé dans les paramètres de chaque appel.
 
@@ -542,11 +542,11 @@ de nouvelles données, le traiter pour retourner dans un autre format, ou faire
 ce que vous voulez sur les données fraichement récupérées. Cet état nécessite
 que vous retourniez le tableau $results (modifié ou non).
 
-Vous pouvez créer autant de finders personnalisés que vous souhaitez, et ils 
-sont une bonne façon de réutiliser du code dans votre application à travers 
+Vous pouvez créer autant de finders personnalisés que vous souhaitez, et ils
+sont une bonne façon de réutiliser du code dans votre application à travers
 les models.
 
-Il est aussi possible de paginer grâce à un type de find personnalisé comme 
+Il est aussi possible de paginer grâce à un type de find personnalisé comme
 suit:
 
 ::
@@ -574,7 +574,7 @@ dans un tableau dans le second argument.
 
     class ArticlesController extends AppController {
 
-        // Va récupèrer le nombre d'articles publiés (en utilisant le find available défini ci-dessus)
+        // Va récupérer le nombre d'articles publiés (en utilisant le find available défini ci-dessus)
         public function index() {
             $count = $this->Article->find('count', array(
                 'type' => 'available'
@@ -892,16 +892,16 @@ le cas où vous devriez changer votre schéma.
 
 Qu'en est-il des autres types de correspondances ? Elles sont aussi simples.
 Disons que nous voulons trouver tous les posts dont le titre n'est pas
-"Ceci est un post":: 
+"Ceci est un post"::
 
     array("Post.titre !=" => "Il y a un post")
 
 Notez le '!=' qui précède l'expression. CakePHP peut parser tout opérateur
 de comparaison valide de SQL, même les expressions de correspondance
-utilisant LIKE, BETWEEN, ou REGEX, tant que vous laissez un espace entre
-l'opérateur et la valeur. Les seules exceptions à ceci sont les correspondances
-du genre IN(...). Admettons que vous vouliez trouver les posts dont le titre
-appartient à un ensemble de valeurs données::
+utilisant ``LIKE``, ``BETWEEN``, ou ``REGEX``, tant que vous laissez un espace
+entre l'opérateur et la valeur. Les seules exceptions à ceci sont les
+correspondances du genre ``IN(...)``. Admettons que vous vouliez trouver les
+posts dont le titre appartient à un ensemble de valeurs données::
 
     array(
         "Post.titre" => array("Premier post", "Deuxième post", "Troisième post")
@@ -934,7 +934,7 @@ L'exemple ci-dessus retournera les posts où la date de création est égale
 sont retournés).
 
 Souvenez-vous que si vous vous trouvez dans l'incapacité de formuler une
-clause WHERE par cette méthode (ex. opérations booléennes), il vous est
+clause ``WHERE`` par cette méthode (ex. opérations booléennes), il vous est
 toujours possible de la spécifier sous forme de chaîne comme ceci::
 
     array(
@@ -943,9 +943,9 @@ toujours possible de la spécifier sous forme de chaîne comme ceci::
     )
 
 Par défaut, CakePHP fournit les conditions multiples avec l'opérateur booléen
-AND, ce qui signifie que le bout de code ci-dessus correspondra uniquement
-aux posts qui ont été créés durant les deux dernières semaines, et qui ont
-un titre correspondant à ceux donnés. Cependant, nous pouvons simplement
+``AND``, ce qui signifie que le bout de code ci-dessous correspondra
+uniquement aux posts qui ont été créés durant les deux dernières semaines, et
+qui ont un titre correspondant à ceux donnés. Cependant, nous pouvons simplement
 trouver les posts qui correspondent à l'une ou l'autre des conditions::
 
     array("OR" => array(
@@ -953,14 +953,14 @@ trouver les posts qui correspondent à l'une ou l'autre des conditions::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-CakePHP accepte toute opération booléenne SQL valide, telles que AND, OR, NOT,
-XOR, etc., et elles peuvent être en majuscule comme en minuscule, comme vous
-préférez. Ces conditions sont également infiniment "IMBRIQUABLES". Admettons
-que vous ayez une relation hasMany/belongsTo entre Posts et Auteurs, ce qui
-reviendrait à un LEFT JOIN. Admettons aussi que vous vouliez trouver tous les
-posts qui contiennent un certain mot-clé "magique" ou qui a été créé au
-cours des deux dernières semaines, mais que vous voulez restreindre votre
-recherche aux posts écrits par Bob::
+CakePHP accepte toute opération booléenne SQL valide, telles que ``AND``,
+``OR``, ``NOT``, ``XOR``, etc., et elles peuvent être en majuscule comme en
+minuscule, comme vous préférez. Ces conditions sont également infiniment
+"IMBRIQUABLES". Admettons que vous ayez une relation hasMany/belongsTo entre
+Posts et Auteurs, ce qui reviendrait à un LEFT JOIN. Admettons aussi que vous
+vouliez trouver tous les posts qui contiennent un certain mot-clé "magique" ou
+qui a été créé au cours des deux dernières semaines, mais que vous voulez
+restreindre votre recherche aux posts écrits par Bob::
 
     array(
         "Auteur.nom" => "Bob",
@@ -971,13 +971,16 @@ recherche aux posts écrits par Bob::
     )
 
 Si vous avez besoin de mettre plusieurs conditions sur le même champ, comme
-quand vous voulez faire une recherche LIKE avec des termes multiples, vous
+quand vous voulez faire une recherche ``LIKE`` avec des termes multiples, vous
 pouvez faire ceci en utilisant des conditions identiques à::
 
     array('OR' => array(
         array('Post.titre LIKE' => '%one%'),
         array('Post.titre LIKE' => '%two%')
     ))
+
+Les opérateurs wildcard ``ILIKE`` et ``RLIKE`` (RLIKE depuis la version 2.6)
+sont aussi disponible.
 
 CakePHP peut aussi vérifier les champs null. Dans cet exemple, la requête
 retournera les enregistrements où le titre du post n'est pas null::
@@ -987,7 +990,7 @@ retournera les enregistrements où le titre du post n'est pas null::
         )
     )
 
-Pour gérer les requêtes BETWEEN, vous pouvez utiliser ceci::
+Pour gérer les requêtes ``BETWEEN``, vous pouvez utiliser ceci::
 
     array('Post.read_count BETWEEN ? AND ?' => array(1,10))
 
@@ -1024,12 +1027,13 @@ Les données retournées seront dans le format suivant::
         [1] => Array
         ...
 
-Un exemple rapide pour faire une requête DISTINCT. Vous pouvez utiliser
-d'autres opérateurs, comme MIN(), MAX(), etc..., d'une manière analogue::
+Un exemple rapide pour faire une requête ``DISTINCT``. Vous pouvez utiliser
+d'autres opérateurs, comme ``MIN()``, ``MAX()``, etc..., d'une manière
+analogue::
 
     array(
         'fields' => array('DISTINCT (User.nom) AS nom_de_ma_colonne'),
-        'order' = >array('User.id DESC')
+        'order' =>array('User.id DESC')
     )
 
 Vous pouvez créer des conditions très complexes, en regroupant des tableaux

@@ -178,7 +178,7 @@
   Obtaining Additional Client Information
 
 クライアントについての追加情報を取得する
-===========================================
+========================================
 
 .. php:method:: getAjaxVersion()
 
@@ -193,7 +193,7 @@
   Automatically decoding request data
 
 リクエストデータの自動デコード
-===================================
+==============================
 
 .. php:method:: addInputType($type, $handler)
 
@@ -248,7 +248,7 @@
   Responding To Requests
 
 リクエストへの応答
-======================
+==================
 
 ..
   In addition to request detection RequestHandler also provides easy
@@ -382,7 +382,7 @@
   Taking advantage of HTTP cache validation
 
 HTTP キャッシュバリデーションの活用
-=========================================
+===================================
 
 .. versionadded:: 2.1
 
@@ -425,7 +425,7 @@ HTTP キャッシュバリデーションモデルは、クライアントへの
     ));
 
 カスタム ViewClasses の利用
-=============================
+===========================
 
 .. versionadded:: 2.3
 

@@ -108,7 +108,7 @@ Ajouter cake à votre système path
 Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous
 permettront de rendre cake executable dans votre système path.
 
-#. Localisez où se trouve votre installation de cakephp et le cake exécutable.
+#. Localisez où se trouve votre installation de CakePHP et le cake exécutable.
    Par exemple ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Modifiez votre fichier ``.bashrc`` ou ``.bash_profile`` dans votre
    répertoire home, et ajoutez ce qui suit::
@@ -413,7 +413,7 @@ Enlever la coloration
 Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous
 voulez l'arrêter, ou forcer à l'avoir::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
@@ -454,7 +454,7 @@ Vous pouvez aussi configurer les parsers d'option des sous-commandes, ce qui
 vous permet d'avoir des parsers d'option différents pour les sous-commandes
 et les tâches.
 ConsoleOptionParser implémente une interface courant et inclut les méthodes
-pour configurer facilement les multiple options/arguments en une fois.::
+pour configurer facilement les multiple options/arguments en une fois. ::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -551,7 +551,7 @@ gérer cela dans votre shell.
 .. php:method:: addArguments(array $args)
 
 Si vous avez un tableau avec plusieurs arguments, vous pouvez utiliser
-``$parser->addArguments()`` pour ajouter plusieurs arguments en une fois.::
+``$parser->addArguments()`` pour ajouter plusieurs arguments en une fois. ::
 
     $parser->addArguments(array(
         'node', array('help' => 'The node to create', 'required' => true),
@@ -589,7 +589,7 @@ Les options ou les flags sont aussi fréquemment utilisés avec les outils de
 ligne de commande. ``ConsoleOptionParser`` supporte la création d'options avec
 les deux verbose et short aliases, fournissant les valeurs par défaut
 et créant des switches en boléen. Les options sont créées avec soit
-``$parser->addOption()``, soit ``$parser->addOptions()``.::
+``$parser->addOption()``, soit ``$parser->addOptions()``. ::
 
     $parser->addOption('connection', array(
         'short' => 'c'
@@ -602,7 +602,7 @@ Ce qui est au-dessus vous permet l'utilisation soit de
 ``cake myshell --connection other``, ou soit de ``cake myshell -c other`` lors
 de l'appel au shell. Vous pouvez aussi créer des switches de boléen, ces
 switches ne consomment pas de valeurs, et leur présence les active juste dans
-les paramètres parsés.::
+les paramètres parsés. ::
 
     $parser->addOption('no-commit', array('boolean' => true));
 
@@ -631,7 +631,7 @@ pour définir le comportement de l'option:
 .. php:method:: addOptions(array $options)
 
 Si vous avez un tableau avec plusieurs options, vous pouvez utiliser
-``$parser->addOptions()`` pour ajouter plusieurs options en une fois.::
+``$parser->addOptions()`` pour ajouter plusieurs options en une fois. ::
 
     $parser->addOptions(array(
         'node', array('short' => 'n', 'help' => 'The node to create'),
@@ -1049,7 +1049,7 @@ API de Shell
     - Correspondance du nom de la tâche.
     - méthode main().
 
-    Si un shell intégre une méthode main(), toute appel de méthode perdu
+    Si un shell intègre une méthode main(), toute appel de méthode perdu
     sera envoyé à main() avec le nom de la méthode originale dans argv.
 
 .. php:method:: shortPath($file)

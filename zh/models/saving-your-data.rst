@@ -100,9 +100,9 @@ save 方法还有另外一种语法::
 * ``callbacks`` 设置为 false 将禁止回调。使用 'before' 或 'after' 将仅开启指定的
   回调。
 * ``counterCache`` (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值
+* ``atomic`` (从 2.6 版本开始) 指定要使用事务保存记录的布尔值。
 
 欲知模型回调的更多信息，请参见 :doc:`这里 <callback-methods>`。
-
 
 .. tip::
 
@@ -237,7 +237,7 @@ saveField 方法也有另一种语法::
 * ``atomic``: 如果为 true (默认值)，将试图用单个事务保存所有记录。如果数据库/表
   不支持事务，则应当设置为 false。
 * ``fieldList``: 同 Model::save() 方法的 $fieldList 参数
-* ``deep``: (从 2.1 版开始) 如果设置为 true，关联数据也被保存，也可参见 
+* ``deep``: (从 2.1 版开始) 如果设置为 true，关联数据也被保存；也可参见 
   saveAssociated 方法。
 * ``callbacks`` 设置为 false 将关闭回调。使用 'before' 或 'after' 将仅开启指定的
   回调。
@@ -289,6 +289,8 @@ saveField 方法也有另一种语法::
             'Article' => array('id' => 2, 'title' => 'title 2')),
     );
 
+
+.. _Model-saveAssociated:
 
 :php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
 ===============================================================================
@@ -497,7 +499,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 让我们来看看如何保存两个模型的连接(*join*)表中的数据。就像 
 :ref:`hasMany-through` 一节展示的那样，连接表用 `hasMany` 类型的关系关联到各个模
 型。在我们的例子中，Cake 学校的负责人要求我们写一个应用程序，让他可以记录一个学
-生在某门课上的出勤天数和分数。查看下面的代码。::
+生在某门课上的出勤天数和分数。查看下面的代码。 ::
 
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {
@@ -531,7 +533,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
    <?php echo  $this->Form->end(); ?>
 
 
-提交的数据数组如下。::
+提交的数据数组如下。 ::
 
     Array
     (
@@ -740,7 +742,7 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
             (
                 [Post] => Array
                     (
-                        [title] => 'Dr Who's Name is Revealed'
+                        [title] => 'Dr Who\'s Name is Revealed'
                     )
                 [Tag] => Array
                     (
@@ -832,7 +834,7 @@ HABTM 关系更可能的情形会包含一个允许多选的 ``<select>`` 元素
 
 关键在于模型的设置 ``className``。简单地添加 ``Project`` HABTM ``Project`` 关联
 会引起保存数据时的错误。设置 ``className`` 为模型名称，并用别名作为键，就避免了
-这些问题。::
+这些问题。 ::
 
     class Project extends AppModel {
         public $hasAndBelongsToMany = array(
@@ -895,7 +897,7 @@ HABTM 关系更可能的情形会包含一个允许多选的 ``<select>`` 元素
 ======
 
 虽然 CakePHP 可以有非数据库驱动的数据源，但大多数时候是数据库驱动的。CakePHP 被
-设计成与(数据库)无关，可以使用 MySQL、MSSQL、PostgreSQL 和其它数据库。你可以象平
+设计成与(数据库)无关，可以使用 MySQL、Microsoft SQL Server、PostgreSQL 和其它数据库。你可以象平
 时那样创建数据库表。在创建模型类时，模型将自动映射到你创建的表上。按照约定，表名
 为小写、复数，多个单词的表名用下划线分隔。例如，名为 Ingredient 的模型对应的表名
 为 ingredients。名为 EventRegistration 的模型对应的表名为 event_registrations。

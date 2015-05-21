@@ -50,7 +50,7 @@ pourrait ressembler à ceci::
 Lorsque vous configurez le flux d'un log le paramètre de ``engine`` est
 utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
-un tableau.::
+un tableau. ::
 
     App::uses('BaseLog', 'Log/Engine');
 
@@ -174,7 +174,7 @@ l'utilisateur pour que la journalisation fonctionne correctement.
 
 Vous pouvez configurer/alterner la localisation de FileLog en utilisant
 :php:meth:`CakeLog::config()`. FileLog accepte un ``chemin`` qui permet aux
-chemins personnalisés d'être utilisés.::
+chemins personnalisés d'être utilisés. ::
 
     CakeLog::config('chemin_perso', array(
         'engine' => 'FileLog',
@@ -421,11 +421,13 @@ niveau de log approprié.
 .. php:staticmethod:: emergency($message, $scope = array())
 .. php:staticmethod:: alert($message, $scope = array())
 .. php:staticmethod:: critical($message, $scope = array())
+.. php:staticmethod:: error($message, $scope = array())
+.. php:staticmethod:: warning($message, $scope = array())
 .. php:staticmethod:: notice($message, $scope = array())
-.. php:staticmethod:: debug($message, $scope = array())
 .. php:staticmethod:: info($message, $scope = array())
+.. php:staticmethod:: debug($message, $scope = array())
 
 .. meta::
     :title lang=fr: Journalisation (Logging)
     :description lang=fr: Journal Log de CakePHP de données du disque pour vous aider à debugger votre application sur des longues périodes de temps.
-    :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs
+    :keywords lang=fr: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

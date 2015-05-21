@@ -40,6 +40,11 @@ many to one   belongsTo             Many recipes belong to a user.
 many to many  hasAndBelongsToMany   Recipes have, and belong to, many ingredients.
 ============= ===================== =======================================
 
+To further clarify which way around the associations are defined in the models:
+If the table of the model contains the foreign key (other_model_id), the relation
+type in this model is **always** a Model **belongsTo** OtherModel relation!
+
+
 Associations are defined by creating a class variable named after
 the association you are defining. The class variable can sometimes
 be as simple as a string, but can be as complex as a
@@ -792,7 +797,7 @@ the columns as it is not replaced in the new insert.
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CourseMembership. Take a look at the following models.::
+model CourseMembership. Take a look at the following models. ::
 
             // Student.php
             class Student extends AppModel {

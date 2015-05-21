@@ -101,7 +101,6 @@ the console folder to your ``PATH``::
 The path supplied can be relative to the current working directory
 or supplied as an absolute path.
 
-
 .. _adding-cake-to-your-path:
 
 Adding cake to your system path
@@ -378,7 +377,7 @@ Turning off colouring
 Although colouring is pretty awesome, there may be times when you want to turn it off,
 or force it on::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 The above will put the output object into raw output mode. In raw output mode,
 no styling is done at all. There are three modes you can use.
@@ -414,7 +413,7 @@ configure the OptionParser to match the expected inputs of your shell.
 You can also configure subcommand option parsers, which allow you to
 have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
-methods for easily setting multiple options/arguments at once.::
+methods for easily setting multiple options/arguments at once. ::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -510,7 +509,7 @@ handle that in your shell.
 .. php:method:: addArguments(array $args)
 
 If you have an array with multiple arguments you can use ``$parser->addArguments()``
-to add multiple arguments at once.::
+to add multiple arguments at once. ::
 
     $parser->addArguments(array(
         'node' => array('help' => 'The node to create', 'required' => true),
@@ -547,7 +546,7 @@ Options or flags are also frequently used in command line tools.
 ``ConsoleOptionParser`` supports creating options
 with both verbose and short aliases, supplying defaults
 and creating boolean switches. Options are created with either
-``$parser->addOption()`` or ``$parser->addOptions()``.::
+``$parser->addOption()`` or ``$parser->addOptions()``. ::
 
     $parser->addOption('connection', array(
         'short' => 'c',
@@ -559,7 +558,7 @@ The above would allow you to use either ``cake myshell --connection=other``,
 ``cake myshell --connection other``, or ``cake myshell -c other``
 when invoking the shell. You can also create boolean switches, these switches do not
 consume values, and their presence just enables them in the
-parsed parameters.::
+parsed parameters. ::
 
     $parser->addOption('no-commit', array('boolean' => true));
 
@@ -583,7 +582,7 @@ define the behavior of the option:
 .. php:method:: addOptions(array $options)
 
 If you have an array with multiple options you can use ``$parser->addOptions()``
-to add multiple options at once.::
+to add multiple options at once. ::
 
     $parser->addOptions(array(
         'node' => array('short' => 'n', 'help' => 'The node to create'),

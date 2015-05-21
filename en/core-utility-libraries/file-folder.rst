@@ -108,7 +108,7 @@ Folder API
 
     :rtype: boolean
 
-    Recursively copy a directory. The only parameter $options can either
+    Copy a directory (recursively by default). The only parameter $options can either
     be a path into copy to or an array of options::
 
         <?php
@@ -122,7 +122,8 @@ Folder API
             'from' => '/path/to/copy/from', // will cause a cd() to occur
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
-            'scheme' => Folder::SKIP  // Skip directories/files that already exist.
+            'scheme' => Folder::SKIP,  // Skip directories/files that already exist.
+            'recursive' => true //set false to disable recursive copy
         ));
 
     There are 3 supported schemes:
@@ -287,7 +288,7 @@ Folder API
 
     :rtype: boolean
 
-    Recursive directory move.
+    Move a directory (recursively by default). The only parameter $options is the same as for ``copy()``
 
 .. php:staticmethod:: normalizePath(string $path)
 
@@ -566,7 +567,6 @@ File API
 
     Get the file's mimetype, returns false on failure.
 
-
 .. php:method:: replaceText( $search, $replace )
 
     :rtype: boolean
@@ -579,6 +579,7 @@ File API
 .. todo::
 
     Better explain how to use each method with both classes.
+
 
 .. meta::
     :title lang=en: Folder & File

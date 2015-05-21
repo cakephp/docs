@@ -173,7 +173,7 @@ Quand ces méthodes sont combinés avec le :php:class:`RequestHandlerComponent`
 activé dans votre controller, le component décidera automatiquement si la 
 réponse est déjà mise en cache dans le client et enverra un code de statut 
 `304 Not Modified` avant le rendu de la vue. Sauter le processus de rendu de 
-vue sauvegarde les cycles CPU et la mémoire.::
+vue sauvegarde les cycles CPU et la mémoire. ::
 
     class ArticlesController extends AppController {
         public $components = array('RequestHandler');

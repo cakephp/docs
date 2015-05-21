@@ -23,7 +23,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
   Interacting with Session data
 
 セッションデータを伝達する
-=============================
+==========================
 
 ..
   The Session component is used to interact with session information.
@@ -137,7 +137,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 .. _creating-notification-messages:
 
 通知メッセージの作成
-==============================
+====================
 
 .. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
 

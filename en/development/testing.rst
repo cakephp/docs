@@ -12,13 +12,23 @@ Installing PHPUnit
 
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
-for making sure your code does what you think it does. PHPUnit can be installed
-through the `pear installer <http://pear.php.net>`_. To install PHPUnit run the
-following::
+for making sure your code does what you think it does.
+    
+Install via Composer
+--------------------
+The newer versions of PHPUnit do not currently work with cake::
 
-    pear upgrade PEAR
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit-3.7.32
+    "phpunit/phpunit": "3.7.32"
+    
+Install via .phar Package
+-------------------------
+
+You can also download the file directly. Just make sure you get the correct version from https://phar.phpunit.de/. 
+Make sure /usr/local/bin is in your php.ini file's include_path::
+
+    wget https://phar.phpunit.de/phpunit-3.7.32.phar
+    chmod +x phpunit.phar
+    mv phpunit.phar /usr/local/bin/phpunit
 
 .. note::
 
@@ -26,11 +36,6 @@ following::
     
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
-
-Once PHPUnit is installed with the PEAR installer, you should confirm that the
-PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
-your php.ini file and making sure that the PHPUnit files are in one of the
-``include_path`` directories.
 
 .. tip::
 
@@ -152,7 +157,7 @@ following::
     }
 
 Calling the parent method is important in test cases, as CakeTestCase::setUp()
-does a number things like backing up the values in :php:class:`Configure` and,
+does a number of things like backing up the values in :php:class:`Configure` and,
 storing the paths in :php:class:`App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
@@ -205,7 +210,7 @@ results.
 Viewing code coverage
 ~~~~~~~~~~~~~~~~~~~~~
 
-If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
+If you have `Xdebug <http://xdebug.org>`_ installed, you can view code coverage
 results. Code coverage is useful for telling you what parts of your code your
 tests do not reach. Coverage is useful for determining where you should add
 tests in the future, and gives you one measurement to track your testing
@@ -218,7 +223,7 @@ progress with.
 The inline code coverage uses green lines to indicate lines that have been run.
 If you hover over a green line a tooltip will indicate which tests covered the
 line. Lines in red did not run, and have not been exercised by your tests. Grey
-lines are considered unexecutable code by xdebug.
+lines are considered unexecutable code by Xdebug.
 
 .. _run-tests-from-command-line:
 
@@ -1237,7 +1242,7 @@ Creating Tests for Plugins
 ==========================
 
 Tests for plugins are created in their own directory inside the
-plugins folder.::
+plugins folder. ::
 
     /app
         /Plugin
@@ -1343,7 +1348,6 @@ Run a build
 
 You should be able to run a build now. Check the console output and make any
 necessary changes to get a passing build.
-
 
 
 .. meta::

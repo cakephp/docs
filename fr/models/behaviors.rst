@@ -34,7 +34,7 @@ section nous couvrirons le schéma d'usage classique pour ajouter des
 behaviors aux models, l'utilisation des behaviors intégrés à
 CakePHP et la manière de créer nos propres behaviors.
 
-Au final, les Behaviors sont 
+Au final, les Behaviors sont
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
 
 Il y a un certain nombre de Behaviors inclus dans CakePHP. Pour en savoir
@@ -137,6 +137,13 @@ du behavior::
 
     // Nous changerons un réglage de notre behavior déjà attaché
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
+
+Et en utilisant des alias, nous pouvons personnaliser l'alias avec lequel il
+sera chargé, lui permettant aussi d'être chargé plusieurs fois avec différentes
+configurations::
+
+    // Le behavior sera disponible en tant que 'MyTree'
+    $this->Category->Behaviors->load('MyTree', array('className' => 'Tree'));
 
 Il y a aussi une méthode pour obtenir la liste des behaviors qui sont
 attachés à un model. Si nous passons le nom d'un behavior à une méthode,
@@ -256,10 +263,10 @@ Cela vous permet de munge le nom de la méthode pour des informations
 supplémentaires, un peu comme ``Model::findAllByXX``. Si le behavior
 du dessus est attaché à un model, ce qui suit arrivera::
 
-    $model->doReleaseTheHounds('homer', 'lenny');
+    $model->doReleaseTheHounds('karl', 'lenny');
 
     // sortira
-    'ReleaseTheHounds', 'homer', 'lenny'
+    'ReleaseTheHounds', 'karl', 'lenny'
 
 Callbacks du Behavior
 =====================

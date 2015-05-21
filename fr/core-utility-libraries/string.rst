@@ -60,7 +60,7 @@ d'une ``View``, utilisez la classe ``String``::
     permettre les remplacements de clé/valeur::
 
         String::insert('Mon nom est :name et j'ai :age ans.', array('name' => 'Bob', 'age' => '65'));
-        // génére: "Mon nom est Bob et j'ai 65 ans."
+        // génère: "Mon nom est Bob et j'ai 65 ans."
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 
@@ -118,7 +118,7 @@ d'une ``View``, utilisez la classe ``String``::
     Options:
 
     -  'format' - chaîne la partie de html avec laquelle la phrase sera mise
-       en excergue.
+       en exergue.
     -  'html' - bool Si true, va ignorer tous les tags HTML, s'assurant que
        seul le bon texte est mise en avant.
 
@@ -158,8 +158,8 @@ d'une ``View``, utilisez la classe ``String``::
     longueur ``$length`` et ajoute un prefix ``'ellipsis'``, si défini. Si
     ``'exact'`` est passé à ``false``, le truchement va se faire au premier
     espace après le point où ``$length`` a dépassé. Si ``'html'``
-    est passé à ``true``, les balises html seront respectés et ne seront pas
-    coupés.
+    est passé à ``true``, les balises html seront respectées et ne seront pas
+    coupées.
 
     ``$options`` est utilisé pour passer tous les paramètres supplémentaires,
     et a les clés suivantes possibles par défaut, celles-ci étant toutes
@@ -267,7 +267,7 @@ d'une ``View``, utilisez la classe ``String``::
     avec un nombre de caractères de chaque côté déterminé par ``$radius``,
     et prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
     pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
-    être montrés dans le document résultant.::
+    être montrés dans le document résultant. ::
 
         // appelé avec TextHelper
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
@@ -287,7 +287,7 @@ d'une ``View``, utilisez la classe ``String``::
     :param string $and: Le mot utilisé pour le dernier join.
 
     Crée une liste séparée avec des virgules, où les deux derniers items sont
-    joins avec 'and'.::
+    joins avec 'and'. ::
 
         // appelé avec TextHelper
         echo $this->Text->toList($colors);

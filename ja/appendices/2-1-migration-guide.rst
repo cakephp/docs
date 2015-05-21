@@ -257,7 +257,7 @@ General
 - 作成されたファイルは、作成された日時のタイムスタンプをもう含んでいません。
 
 ルーティング
-=============
+============
 
 Router
 ------
@@ -302,7 +302,7 @@ CakeResponse
 - :ref:`cake-response-caching` 用の沢山のメソッドが追加されました。
 
 コントローラ
-==============
+============
 
 Controller
 ----------
@@ -330,7 +330,7 @@ Controller
 
 
 コンポーネント
-===============
+==============
 
 AuthComponent
 -------------
@@ -387,7 +387,7 @@ AclComponent
 
 
 ヘルパー
-=========
+========
 
 TextHelper
 ----------
@@ -441,7 +441,7 @@ HtmlHelper
 
 
 ビュー
-=======
+======
 
 ..
   - :php:attr:`View::$output` is deprecated.
@@ -538,7 +538,7 @@ View blocks
 
 
 ヘルパー
-=========
+========
 
 New callbacks
 -------------
@@ -617,7 +617,7 @@ PaginatorHelper
 
 
 テスト
-=======
+======
 
 ..
   - Web test runner now displays the PHPUnit version number.

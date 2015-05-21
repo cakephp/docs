@@ -1,5 +1,5 @@
 Tutoriel d'un Blog
-##################
+******************
 
 Bienvenue sur CakePHP. Vous consultez probablement ce tutoriel parce que vous
 voulez en apprendre plus à propos du fonctionnement de CakePHP.
@@ -68,7 +68,7 @@ Permissions du répertoire Tmp
 Ensuite vous devrez mettre le répertoire ``app/tmp`` en écriture pour le
 serveur web. La meilleur façon de le faire est de trouver sous quel utilisateur
 votre serveur web tourne. Vous pouver mettre ``<?php echo exec('whoami'); ?>``
-à l'intérieur de tout fichier php que votre serveur web execute. Vous devriez
+à l'intérieur de tout fichier PHP que votre serveur web execute. Vous devriez
 voir afficher un nom d'utilisateur. Changez le possesseur du répertoire
 ``app/tmp`` pour cet utilisateur. La commande finale que vous pouvez lancer
 (dans \*nix) pourrait ressembler à ceci::
@@ -101,11 +101,11 @@ de données :
     );
 
     /* Puis insérons quelques posts pour les tests : */
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Le titre', 'Voici le contenu du post.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Encore un titre', 'Et le contenu du post qui suit.', NOW());
-    INSERT INTO posts (title,body,created)
+    INSERT INTO posts (title, body, created)
         VALUES ('Le retour du titre', 'C\'est très excitant, non ?', NOW());
 
 Le choix des noms pour les tables et les colonnes ne sont pas arbitraires.
@@ -165,7 +165,7 @@ de CakePHP. Elle devrait également vous indiquer que votre fichier de connexion
 Configuration facultative
 =========================
 
-Il y a quelques autres élements qui peuvent être configurés. La plupart des
+Il y a quelques autres éléments qui peuvent être configurés. La plupart des
 développeurs configurent les éléments de cette petite liste, mais ils ne
 sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
