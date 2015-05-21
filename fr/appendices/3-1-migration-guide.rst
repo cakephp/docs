@@ -5,6 +5,13 @@ CakePHP 3.1 est une mise à jour de CakePHP 3.0 dont la compatibilité
 API est complète. Cette page souligne les changements et améliorations
 faits dans 3.1.
 
+Routing
+=======
+
+La classe de route par défaut a été changée en ``DashedRoute`` dans le dépôt
+``cakephp/app``. Votre base de code actuelle n'est pas affectée par ceci mais
+il est recommandé d'utiliser cette classe de route à partir de maintenant.
+
 Console
 =======
 
@@ -25,7 +32,7 @@ View
 ====
 
 - Vous pouvez maintenant définir ``_serialized`` à ``true`` pour ``JsonView``
-  et ``XmlView`` pour sérialiser toutes les variables de vue au lieu de les 
+  et ``XmlView`` pour sérialiser toutes les variables de vue au lieu de les
   spécifier explicitement.
 
 Helper

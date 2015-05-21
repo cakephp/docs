@@ -116,7 +116,7 @@ scope et connecter certaines routes, nous allons utiliser la méthode
 
     // Dans config/routes.php
     Router::scope('/', function ($routes) {
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
@@ -239,18 +239,21 @@ les noms de controller dans les URLs. L'élément ``:id`` est un élément de ro
 personnalisé, et doit être clarifié plus loin en spécifiant une expression
 régulière correspondante dans le troisième paramètre de connect().
 
-CakePHP ne produit pas automatiquement d'urls en minuscule quand vous utilisez
-le paramètre ``:controller``. Si vous avez besoin de ceci, l'exemple ci-dessus
-peut être réécrit en::
+CakePHP ne produit pas automatiquement d'urls en minuscule avec des tirets quand
+vous utilisez le paramètre ``:controller``. Si vous avez besoin de ceci,
+l'exemple ci-dessus peut être réécrit en::
 
     $routes->connect(
         '/:controller/:id',
         ['action' => 'view'],
-        ['id' => '[0-9]+', 'routeClass' => 'InflectedRoute']
+        ['id' => '[0-9]+', 'routeClass' => 'DashedRoute']
     );
 
-La classe spéciale ``InflectedRoute`` va s'assurer que les paramètres
-``:controller`` et ``:plugin`` sont correctement mis en minuscule.
+La classe spéciale ``DashedRoute`` va s'assurer que les paramètres
+``:controller`` et ``:plugin`` sont correctement mis en minuscule et avec des
+tirets. Si vous avez besoin d'URLs en minuscule avec des underscores en migrant
+d'une application CakePHP 2.x, vous pouvez utiliser à la place la classe
+``InflectedRoute``.
 
 .. note::
 
@@ -435,7 +438,7 @@ la clé ``prefix`` avec un appel de ``Router::connect()``::
     Router::prefix('admin', function ($routes) {
         // Toutes les routes ici seront préfixées avec `/admin` et auront
         // l'élément de route prefix => admin ajouté.
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 Les préfixes sont mappés aux sous-espaces de noms dans l'espace de nom
@@ -1018,9 +1021,9 @@ en plus de la ``Route`` par défaut, vous pouvez faire ceci en appelant
 de spécifier l'option ``routeClass`` pour chaque route. Par exemple en
 utilisant::
 
-    Router::defaultRouteClass('DashedRoute');
+    Router::defaultRouteClass('InflectedRoute');
 
-Cela provoquera l'utilisation de la classe ``DashedRoute`` pour toutes les
+Cela provoquera l'utilisation de la classe ``InflectedRoute`` pour toutes les
 routes suivantes.
 Appeler la méthode sans argument va retourner la classe de route courante par
 défaut.
@@ -1037,12 +1040,12 @@ définies ou, si aucune classe n'est passée, la classe retournée par
 
 Appellez fallbacks comme ceci::
 
-    $routes->fallbacks('InflectedRoute');
+    $routes->fallbacks('DashedRoute');
 
 Est équivalent à ces appels explicites::
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
 
 .. note::
 
