@@ -27,8 +27,8 @@ Ce behavior nécessite que les colonnes suivantes soient présentes dans votre
 table:
 
 - ``parent_id`` (nullable) La colonne contenant l'ID de la ligne parente
-- ``lft`` (integer) Utilisé pour maintenir la structure en arbre
-- ``rght`` (integer) Utilisé pour maintenir la structure en arbre
+- ``lft`` (integer, signed) Utilisé pour maintenir la structure en arbre
+- ``rght`` (integer, signed) Utilisé pour maintenir la structure en arbre
 
 Vous pouvez configurer le nom de ces champs.
 Plus d'informations sur la signification des champs et comment ils sont utilisés
@@ -118,7 +118,7 @@ Le finder ``treeList`` accepte un certain nombre d'options:
 * ``keyPath``: Le chemin séparé par des points pour récupérer le champ à
   utiliser en clé de tableau, ou une closure qui retourne la clé de la ligne
   fournie.
-* ``valuePath``: 
+* ``valuePath``:
 * ``keyPath``: Le chemin séparé par des points pour récupérer le champ à
   utiliser en valeur de tableau, ou une closure qui retourne la valeur de la
   ligne fournie.
