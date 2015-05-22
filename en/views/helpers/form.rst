@@ -1540,8 +1540,7 @@ example::
     ]);
 
     // Create a radio set with our custom wrapping div.
-    echo $this->Form->radio('User.email_notifications', [
-        'options' => ['y', 'n'],
+    echo $this->Form->radio('User.email_notifications', ['y', 'n'], [
         'type' => 'radio'
     ]);
 
