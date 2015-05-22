@@ -20,9 +20,10 @@ Chiffre ``$text`` en utilisant AES-256. La ``$key`` devrait être une valeur
 avec beaucoup de différence dans les données un peu comme un bon mot de
 passe. Le résultat retourné sera la valeur chiffrée avec un checksum HMAC.
 
-This method will use either `openssl <http://php.net/openssl>`_ or `mcrypt
-<http://php.net/mcrypt>`_ based on what is available on your system. Data
-encrypted in one implementation is portable to the other.
+Cette méthode va soit utiliser `openssl <http://php.net/openssl>`_ soit `mcrypt
+<http://php.net/mcrypt>`_ selon ce qui est disponible sur votre système. Les
+données cryptées dans une implémentation sont portables vers les autres
+implémentations.
 
 Cette méthode **ne** devrait **jamais** être utilisée pour stocker des mots
 de passe. A la place, vous devriez utiliser la manière de hasher les mots
@@ -54,21 +55,23 @@ le sel HMAC à ``false`` sera retournée.
 
 .. _force-mcrypt:
 
-Choosing a Specific Crypto Implementation
------------------------------------------
+Choisir une Implémentation de Crypto Spécifique
+-----------------------------------------------
 
-If you are upgrading an application from CakePHP 2.x, data encrypted in 2.x is
-not compatible with openssl. This is because the encrypted data is not fully AES
-compliant. If you don't want to go through the trouble of re-encrypting your
-data, you can force CakePHP to use ``mcrypt`` using the ``engine()`` method::
+Si vous mettez à jour une application à partir de CakePHP 2.x, les données
+cryptées dans 2.x ne sont pas compatibles avec openssl. Cela est dû au fait
+que les données cryptées ne sont pas complètement compatibles avec AES. Si vous
+ne voulez pas gérer les problèmes de rechiffrage de vos données, vous pouvez
+forcer CakePHP à utiliser ``mcrypt`` en utilisant la méthode ``engine()``::
 
-    // In config/bootstrap.php
+    // Dans config/bootstrap.php
     use Cake\Utility\Crypto\Mcrypt;
 
     Security::engine(new Mcrypt());
 
-The above will allow you to seamlessly read data from older versions of CakePHP,
-and encrypt new data to be compatible with OpenSSL.
+L'exemple ci-dessus vous permet de lire les données de façon transparente des
+versions précédentes de CakePHP, et de chiffrer les nouvelles données pour
+être compatible avec OpenSSL.
 
 Hashage des Données
 ===================
@@ -99,9 +102,9 @@ Et tout autre algorithme de hashage que la fonction
 
 .. warning::
 
-    Vous ne devriez pas utiliser ``hash()`` pour les mots de passe dans les nouvelles applications.
-    A la place, vous devez utiliser la classe ``DefaultPasswordHasher`` qui
-    utilise bcrypt par défaut.
+    Vous ne devriez pas utiliser ``hash()`` pour les mots de passe dans les
+    nouvelles applications. A la place, vous devez utiliser la classe
+    ``DefaultPasswordHasher`` qui utilise bcrypt par défaut.
 
 .. meta::
     :title lang=fr: Security
