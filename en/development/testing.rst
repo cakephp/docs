@@ -18,7 +18,7 @@ Install via Composer
 --------------------
 The newer versions of PHPUnit do not currently work with cake::
 
-    "phpunit/phpunit": "3.7.32"
+    "phpunit/phpunit": "3.7.38"
     
 Install via .phar Package
 -------------------------
