@@ -14,7 +14,7 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 
 Composer でのインストール
 -------------------------
-PHPUnit の最新バージョンは、 CakePHP 上では動作しません::
+PHPUnit の最新バージョンは、 今のところ cake では動作しません::
 
     "phpunit/phpunit": "3.7.32"
 
