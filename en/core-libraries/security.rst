@@ -5,7 +5,8 @@ Security
 
 .. php:class:: Security
 
-The `security library <http://api.cakephp.org/class/security>`_
+The `security library
+<http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
