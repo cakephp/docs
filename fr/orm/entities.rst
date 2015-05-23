@@ -483,7 +483,7 @@ Par défaut, les propriétés virtuelles ne sont pas exportées lors de la
 conversion des entities en tableaux ou JSON. Afin de montrer les propriétés
 virtuelles, vous devez les rendre visibles. Lors de la définition de votre
 classe entity, vous pouvez fournir une liste de propriétés virtuelles qui
-doivent être exposés::
+doivent être exposées::
 
     namespace App\Model\Entity;
 
