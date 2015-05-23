@@ -1540,9 +1540,7 @@ example::
     ]);
 
     // Create a radio set with our custom wrapping div.
-    echo $this->Form->radio('User.email_notifications', ['y', 'n'], [
-        'type' => 'radio'
-    ]);
+    echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
 Similar to input containers, the ``input()`` method will also attempt to use
 distinct templates for each form group. A form group is a combo of label and input.
