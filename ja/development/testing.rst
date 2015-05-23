@@ -16,7 +16,7 @@ Composer でのインストール
 -------------------------
 PHPUnit の最新バージョンは、 今のところ cake では動作しません::
 
-    "phpunit/phpunit": "3.7.32"
+    "phpunit/phpunit": "3.7.38"
 
 .phar パッケージでのインストール
 --------------------------------
@@ -24,7 +24,7 @@ PHPUnit の最新バージョンは、 今のところ cake では動作しま�
 ファイルを直接ダウンロードします。まず、 http://phar.phpunit.de/ から適切なバージョンを取得しておきます。
 そして php.ini ファイルの include_path に /usr/local/bin を加えてください。::
 
-    wget https://phar.phpunit.de/phpunit-3.7.32.phar
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar
     chmod +x phpunit.phar
     mv phpunit.phar /usr/local/bin/phpunit
 
