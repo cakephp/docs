@@ -194,7 +194,7 @@ ArticlesController now::
 
         public function index()
         {
-             $articles = $this->set('articles', $this->Articles->find('all'));
+             $articles = $this->Articles->find('all');
              $this->set(compact('articles'));
         }
 
@@ -262,7 +262,7 @@ ArticlesController::
 
         public function index()
         {
-            $articles = $this->set('articles', $this->Articles->find('all'));
+            $articles = $this->Articles->find('all');
             $this->set(compact('articles'));
         }
 
