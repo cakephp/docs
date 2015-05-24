@@ -787,12 +787,13 @@ from a result set::
 Getting an Arbitrary Index From a ResultSet
 -------------------------------------------
 
-You can use ``take()`` to get an arbitrary record from a ResultSet::
+You can use ``skip()`` and ``first()`` to get an arbitrary record from
+a ResultSet::
 
     $result = $articles->find('all')->all();
 
     // Get the 5th record
-    $row = $result->take(1, 4);
+    $row = $result->skip(4)->first();
 
 .. _map-reduce:
 

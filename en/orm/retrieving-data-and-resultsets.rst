@@ -752,7 +752,7 @@ You can use ``take()`` to get an arbitrary record from a ResultSet::
     $result = $articles->find('all')->all();
 
     // Get the 5th record
-    $row = $result->take(1, 4);
+    $row = $result->skip(4)->first();
 
 Checking if a Query or ResultSet is Empty
 -----------------------------------------
