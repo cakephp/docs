@@ -667,7 +667,9 @@ Working with Result Sets
 
 Once a query is executed with ``all()``, you will get an instance of
 :php:class:`Cake\\ORM\\ResultSet`. This object offers powerful ways to manipulate
-the resulting data from your queries.
+the resulting data from your queries. Like Query objects, ResultSets are
+a :doc:`Collection </core-libraries/collections>` and you can use any collection
+method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
@@ -747,7 +749,8 @@ from a result set::
 Getting an Arbitrary Index From a ResultSet
 -------------------------------------------
 
-You can use ``take()`` to get an arbitrary record from a ResultSet::
+You can use ``skip()`` and ``first()`` to get an arbitrary record from
+a ResultSet::
 
     $result = $articles->find('all')->all();
 
