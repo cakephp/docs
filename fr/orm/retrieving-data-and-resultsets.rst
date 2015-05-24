@@ -772,6 +772,28 @@ Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
 ce qui peut être fait avec les ensembles de résultat en utilisant les
 fonctionnalités des collections.
 
+Getting the First & Last Record From a ResultSet
+------------------------------------------------
+
+You can use the ``first()`` and ``last()`` methods to get the respective records
+from a result set::
+
+    $result = $articles->find('all')->all();
+
+    // Get the first and/or last result.
+    $row = $result->first();
+    $row = $result->last();
+
+Getting an Arbitrary Index From a ResultSet
+-------------------------------------------
+
+You can use ``take()`` to get an arbitrary record from a ResultSet::
+
+    $result = $articles->find('all')->all();
+
+    // Get the 5th record
+    $row = $result->take(1, 4);
+
 .. _map-reduce:
 
 Modifier les Résultats avec Map/Reduce

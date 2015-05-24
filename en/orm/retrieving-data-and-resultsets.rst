@@ -732,8 +732,30 @@ articles quite easily::
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features.
 
-Checking if a Query has no Results
-----------------------------------
+Getting the First & Last Record From a ResultSet
+------------------------------------------------
+
+You can use the ``first()`` and ``last()`` methods to get the respective records
+from a result set::
+
+    $result = $articles->find('all')->all();
+
+    // Get the first and/or last result.
+    $row = $result->first();
+    $row = $result->last();
+
+Getting an Arbitrary Index From a ResultSet
+-------------------------------------------
+
+You can use ``take()`` to get an arbitrary record from a ResultSet::
+
+    $result = $articles->find('all')->all();
+
+    // Get the 5th record
+    $row = $result->take(1, 4);
+
+Checking if a Query or ResultSet is Empty
+-----------------------------------------
 
 You can use the ``isEmpty()`` method on a Query or ResultSet object to see if it
 has any rows in it. Calling ``isEmpty()`` on a Query object will evaluate the
