@@ -333,18 +333,18 @@ CakePHP が把握しているオブジェクトを探索する
 プラグインの配置
 ================
 
-.. php:staticmethod:: pluginPath(string $plugin)
+.. php:staticmethod:: Plugin::path(string $plugin)
 
     :rtype: string
 
     ..
-        Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
+        Plugins can be located with Plugin. Using ``Plugin::path('DebugKit');``
         for example, will give you the full path to the DebugKit plugin
 
     プラグインも同じように App で配置できます。
-    例えば ``App::pluginPath('DebugKit');`` を用いることで DebugKit プラグインへのフルパスをあなたに与えます::
+    例えば ``Plugin::path('DebugKit');`` を用いることで DebugKit プラグインへのフルパスをあなたに与えます::
 
-        $path = App::pluginPath('DebugKit');
+        $path = Plugin::path('DebugKit');
 
 .. Locating themes
 

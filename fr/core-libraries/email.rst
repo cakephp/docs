@@ -114,7 +114,7 @@ valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
 
     Email::configTransport('gmail', [
         'host' => 'smtp.gmail.com',
-        'port' => 465,
+        'port' => 587,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'className' => 'Smtp',

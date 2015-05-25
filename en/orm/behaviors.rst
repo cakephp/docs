@@ -117,7 +117,7 @@ public methods as mixin methods. In these cases you can use the
 ``implementedMethods`` configuration key to rename or exclude mixin methods. For
 example if we wanted to prefix our slug() method we could do the following::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedMethods' => [
             'superSlug' => 'slug',
         ]
@@ -220,7 +220,7 @@ these cases you can use the ``implementedFinders`` configuration key to rename
 or exclude finder methods. For example if we wanted to rename our ``find(slug)``
 method we could do the following::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]

@@ -110,7 +110,7 @@ enable TLS SMTP using the ``tls`` option::
 
     Email::configTransport('gmail', [
         'host' => 'smtp.gmail.com',
-        'port' => 465,
+        'port' => 587,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'className' => 'Smtp',

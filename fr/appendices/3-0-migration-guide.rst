@@ -916,10 +916,16 @@ JsonView
   Ceci empêche les problèmes possible de XSS quand le contenu de la view
   JSON est intégrée dans les fichiers HTML.
 - :php:class:`Cake\\View\\JsonView` supporte maintenant la variable de view
-  ``_jsonOptions``. Ceci vous permet de configurer les options bit-mask
-  utilisées lors de la génération de JSON.
+  ``_jsonOptions``. Ceci vous permet de configurer le masque utilisé lors de la
+  génération de JSON.
 
+XmlView
+-------
 
+- :php:class:`Cake\\View\\XmlView` supporte maintenant la variable de view
+  ``_xmlOptions``. Ceci vous permet de configurer les options utilisées lors de
+   la génération de XML.
+  
 View\\Helper
 ============
 

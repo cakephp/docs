@@ -24,8 +24,8 @@ Requirements
 This behavior requires the following columns in your table:
 
 - ``parent_id`` (nullable) The column holding the ID of the parent row
-- ``lft`` (integer) Used to maintain the tree structure
-- ``rght`` (integer) Used to maintain the tree structure
+- ``lft`` (integer, signed) Used to maintain the tree structure
+- ``rght`` (integer, signed) Used to maintain the tree structure
 
 You can configure the name of those fields should you need to customize them.
 More information on the meaning of the fields and how they are used can be found
@@ -107,6 +107,23 @@ The output will be similar to::
     _Trips
     __National
     __International
+
+The ``treeList`` finder takes a number of options:
+
+* ``keyPath``: A dot separated path to fetch the field to use for the array key,
+  or a closure to return the key out of the provided row.
+* ``valuePath``: A dot separated path to fetch the field to use for the array
+  value, or a closure to return the value out of the provided row.
+* ``spacer``: A string to be used as prefix for denoting the depth in the tree
+  for each item
+
+An example of all options in use is::
+
+    $query = $categories->find('treeList', [
+        'keyPath' => 'url',
+        'valuePath' => 'id',
+        'spacer' => ' '
+    ]);
 
 One very common task is to find the tree path from a particular node to the root
 of the tree. This is useful, for example, for adding the breadcrumbs list for

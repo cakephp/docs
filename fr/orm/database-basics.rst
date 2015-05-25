@@ -50,7 +50,7 @@ qu'arguments::
 
     $results = $connection
         ->execute(
-            'SELECT * FROM articles WHERE created >= :time',
+            'SELECT * FROM articles WHERE created >= :created',
             ['created' => DateTime('1 day ago')],
             ['created' => 'datetime']
         )

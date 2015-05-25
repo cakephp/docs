@@ -285,12 +285,13 @@ Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
 Les objets d'authentification devraient retourner ``false`` s'ils ne peuvent
 identifier l'utilisateur et un tableau d'information utilisateur s'ils le
 peuvent. Il n'est pas utile d'étendre ``BaseAuthenticate``, simplement
-votre objet d'identification doit implémenter la méthode ``authenticate()``.
-La class ``BaseAuthenticate`` fournit un nombre de méthode très utiles
-communément utilisées. Vous pouvez aussi implémenter une méthode ``getUser()``
-si votre objet d'identification doit supporter des authentifications sans
-cookie ou sans état (stateless). Regardez les sections portant sur
-l'authentification digest et basic plus bas pour plus d'information.
+votre objet d'identification doit implémenter
+``Cake\Event\EventListenerInterface``. La class ``BaseAuthenticate`` fournit un
+nombre de méthode très utiles communément utilisées. Vous pouvez aussi
+implémenter une méthode ``getUser()`` si votre objet d'identification doit
+supporter des authentifications sans cookie ou sans état (stateless). Regardez
+les sections portant sur l'authentification digest et basic plus bas pour plus
+d'information.
 
 ``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
 ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et

@@ -66,8 +66,10 @@ serialize::
 
         public function index()
         {
+            // Set the view vars that have to be serialized.
             $this->set('articles', $this->paginate());
-            $this->set('_serialize', 'articles');
+            // Specify which view vars JsonView should serialize.
+            $this->set('_serialize', ['articles']);
         }
     }
 
@@ -86,7 +88,11 @@ You can also define ``_serialize`` as an array of view variables to combine::
         public function index()
         {
             // Some code that created $articles and $comments
+            
+            // Set the view vars that have to be serialized.
             $this->set(compact('articles', 'comments'));
+            
+            // Specify which view vars JsonView should serialize.
             $this->set('_serialize', ['articles', 'comments']);
         }
     }
@@ -142,6 +148,9 @@ Creating XML Views
 By default when using ``_serialize`` the XmlView will wrap your serialized
 view variables with a ``<response>`` node. You can set a custom name for
 this node using the ``_rootNode`` view variable.
+
+The XmlView class supports the ``_xmlOptions`` variable that allows you to
+customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
 
 Creating JSON Views
 ===================

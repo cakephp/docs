@@ -71,6 +71,7 @@ Liste des Méthodes
 * :php:meth:`buffered`
 * :php:meth:`compile`
 * :php:meth:`through`
+* :php:meth:`isEmpty`
 
 Faire une Itération
 ===================
@@ -338,13 +339,13 @@ utilisez juste la fontion ``min()``. Celle-ci va retourner l'élément complet
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
-    echo $yougest->name;
+    echo $youngest->name;
 
 Vous pouvez aussi exprimer la propriété à comparer en fournissant un chemin ou
 une fonction callback::
 
     $collection = new Collection($people);
-    $personYougestChild = $collection->min(function ($person) {
+    $personYoungestChild = $collection->min(function ($person) {
         return $person->child->age;
     });
 
@@ -613,6 +614,18 @@ Par défaut, l'arbre est traversé de la racine vers les feuilles. Vous pouvez
 
 Autres Méthodes
 ===============
+
+.. php:method:: isEmpty()
+
+Vous permet de voir si une collection contient un élément::
+
+    $collection = new Collection([]);
+    // Returns true
+    $collection->isEmpty();
+
+    $collection = new Collection([1]);
+    // Returns false
+    $collection->isEmpty();
 
 .. php:method:: contains($value)
 

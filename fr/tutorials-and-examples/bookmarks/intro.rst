@@ -282,7 +282,7 @@ chercher les bookmarks par tag.
 
 Idéalement, nous aurions une URL qui ressemble à
 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs** Cela nous aide
-à trouver tous les bookmarks qui ont les tags 'funny', 'cat' et 'gifs'. Avant
+à trouver tous les bookmarks qui ont les tags 'funny', 'cat' ou 'gifs'. Avant
 de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
 **config/routes.php**, ajoutez ce qui suit en haut du fichier::
 

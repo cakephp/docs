@@ -113,6 +113,7 @@ More Information
     orm/table-objects
     orm/entities
     orm/retrieving-data-and-resultsets
+    orm/validation
     orm/saving-data
     orm/deleting-data
     orm/associations

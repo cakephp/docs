@@ -34,6 +34,8 @@ Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
 to power its Time utility. Anything you can do with ``Carbon`` and
 ``DateTime``, you can do with ``Time``.
 
+For details on Carbon please see `their documentation <http://carbon.nesbot.com/docs/>`_.
+
 .. start-time
 
 Creating Time Instances
@@ -197,7 +199,7 @@ Often it is useful to print times relative to the present::
 
     $now = new Time('Aug 22, 2011');
     echo $now->timeAgoInWords(
-        ['format' => 'F jS, Y', 'end' => '+1 year']
+        ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 

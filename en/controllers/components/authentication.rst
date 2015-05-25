@@ -261,7 +261,7 @@ you wanted to create an OpenID authentication object. In
 Authentication objects should return ``false`` if they cannot identify the
 user and an array of user information if they can. It's not required
 that you extend ``BaseAuthenticate``, only that your authentication object
-implements an ``authenticate()`` method. The ``BaseAuthenticate`` class
+implements ``Cake\Event\EventListenerInterface``. The ``BaseAuthenticate`` class
 provides a number of helpful methods that are commonly used. You can
 also implement a ``getUser()`` method if your authentication object needs
 to support stateless or cookie-less authentication. See the sections on
@@ -289,8 +289,13 @@ by including them in AuthComponents authenticate array::
 
     $this->Auth->config('authenticate', [
         'Openid', // app authentication object.
-        'AuthBag.Combo', // plugin authentication object.
+        'AuthBag.Openid', // plugin authentication object.
     ]);
+
+.. note::
+    Note that when using simple notation there's no 'Authenticate' word when
+    initiating the authentication object. Instead, if using namespaces, you'll need
+    to set the full namespace of the class (including the 'Authenticate' word).
 
 Creating Stateless Authentication Systems
 -----------------------------------------

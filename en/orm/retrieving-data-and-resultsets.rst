@@ -589,6 +589,72 @@ association properties in your results.
 
 .. end-contain
 
+Changing Fetching Strategies
+----------------------------
+
+As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
+using a ``JOIN`` in the main finder query. While this improves query and
+fetching speed and allows for creating more expressive conditions when
+retrieving data, this may be a problem when you want to apply certain clauses to
+the finder query for the association, such as ``order()`` or ``limit()``.
+
+For example, if you wanted to get the first comment of an article as an
+association::
+
+   $articles->hasOne('FirstComment', [
+        'className' => 'Comments',
+        'foreignKey' => 'article_id'
+   ]);
+
+In order to correctly fetch the data from this association, we will need to tell
+the query to use the ``select`` strategy, since we want order by a particular
+column::
+
+    $query = $articles->find()->contain([
+        'FirstComment' => [
+                'strategy' => 'select',
+                'queryBuilder' => function ($q) {
+                    return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
+                }
+        ]
+    ]);
+
+Dynamically changing the strategy in this way will only apply to a specific
+query. If you want to make the strategy change permanent you can do::
+
+    $articles->FirstComment->strategy('select');
+
+Using the ``select`` strategy is also a great way of making associations with
+tables in another database, since it would not be possible to fetch records
+using ``joins``.
+
+Fetching With The Subquery Strategy
+-----------------------------------
+
+As your tables grow in size, fetching associations from them can become
+slower, especially if you are querying big batches at once. A good way of
+optimizing association loading for ``hasMany`` and ``belongsToMany``
+associations is by using the ``subquery`` strategy::
+
+    $query = $articles->find()->contain([
+        'Comments' => [
+                'strategy' => 'subquery',
+                'queryBuilder' => function ($q) {
+                    return $q->where(['Comments.approved' => true]);
+                }
+        ]
+    ]);
+
+The result will remain the same as with using the default strategy, but this
+can greatly improve the query and fetching time in some databases, in
+particular it will allow to fetch big chunks of data at the same time in
+databases that limit the amount of bound parameters per query, such as
+**Microsoft SQL Server**.
+
+You can also make the strategy permanent for the association by doing::
+
+    $articles->Comments->strategy('subquery');
+
 Lazy Loading Associations
 -------------------------
 
@@ -600,7 +666,7 @@ Working with Result Sets
 ========================
 
 Once a query is executed with ``all()``, you will get an instance of
-:php:class:`Cake\\ORM\ResultSet`. This object offers powerful ways to manipulate
+:php:class:`Cake\\ORM\\ResultSet`. This object offers powerful ways to manipulate
 the resulting data from your queries.
 
 Result set objects will lazily load rows from the underlying prepared statement.
@@ -665,6 +731,20 @@ articles quite easily::
 
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features.
+
+Checking if a Query has no Results
+----------------------------------
+
+You can use the ``isEmpty()`` method on a Query or ResultSet object to see if it
+has any rows in it. Calling ``isEmpty()`` on a Query object will evaluate the
+query::
+
+    // Check a query.
+    $query->isEmpty();
+
+    // Check results
+    $results = $query->all();
+    $results->isEmpty();
 
 .. _map-reduce:
 

@@ -351,6 +351,15 @@ Ensuite, ajouter les lignes suivantes à votre template de vue de formulaire::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
+Pour créer un select pour l'association belongsToMany Groups, vous pouvez
+ajouter ce qui suit dans votre UsersController::
+
+    $this->set('groups', $this->Users->Groups->find('list'));
+
+Ensuite, ajouter les lignes suivantes à votre template de vue::
+
+    echo $this->Form->input('groups._ids', ['options' => $groups]);
+
 Si votre nom de model est composé de deux mots ou plus,
 ex. "UserGroup", quand vous passez les données en utilisant set()
 vous devrez nommer vos données dans un format CamelCase
@@ -471,9 +480,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
 * ``$options['error']`` Utiliser cette clé vous permettra de transformer
   les messages de model par défaut et de les utiliser, par exemple, pour
-  définir des messages i18n. Elle comporte un nombre de sous-options qui
-  contrôle l'enveloppe de l'élément (wrapping), le nom de classe de l'élément
-  enveloppé, et si le HTML dans le message d'erreur doit être échappé ou non.
+  définir des messages i18n.
 
   Pour désactiver le rendu des messages d'erreurs définissez la clé error
   ``false``::
@@ -865,7 +872,7 @@ Créer des Boutons Radio
 
 Crée un jeu d'inputs radios.
 
-**Options**
+**Attributes**
 
 * ``value`` - Indique la valeur quand ce bouton radio est coché.
 * ``label`` - booléen pour indiquer si oui ou non les labels pour les widgets
@@ -878,6 +885,33 @@ Crée un jeu d'inputs radios.
 * ``empty`` - Défini à ``true`` pour créer un input avec la valeur '' en
   première option. Quand à ``true``, le label radio sera 'vide'. Définissez
   cette option pour contrôler la valeur du label.
+
+Generally ``$options`` is a simple key => value pair. However, if you need to
+put custom attributes on your radio buttons you can use an expanded format::
+
+    echo $this->Form->radio(
+        'favorite_color',
+        [
+            ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+            ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+            ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+        ]
+    );
+
+    // Will output
+    <input type="hidden" name="favorite_color" value="">
+    <label for="favorite-color-r">
+        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
+        Red
+    </label>
+    <label for="favorite-color-u">
+        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
+        Blue
+    </label>
+    <label for="favorite-color-g">
+        <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
+        Green
+    </label>
 
 Créer des Pickers Select
 ------------------------
@@ -1316,10 +1350,6 @@ Options:
 
 -  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
    l'erreur.
--  'wrap' valeur mixte définissant s'il faut ou pas que le message d'erreur
-   soit enveloppé d'une div. Si c'est une chaîne , sera utilisé comme le
-   tag HTML à utiliser.
--  'class' chaine contenant le nom de classe du message d'erreur.
 
 .. TODO:: Add examples.
 
@@ -1566,10 +1596,7 @@ Par exemple::
     ]);
 
     // Créé un ensemble d'inputs radio avec notre div personnalisé autour
-    echo $this->Form->radio('User.email_notifications', [
-        'options' => ['y', 'n'],
-        'type' => 'radio'
-    ]);
+    echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
 Similar to input containers, the ``input()`` method will also attempt to use
 distinct templates for each form group. A form group is a combo of label and
@@ -1688,6 +1715,13 @@ create the following inputs::
     echo $this->Form->input('tags.0.name');
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
+
+    // Multiple select element for belongsToMany
+    echo $this->Form->input('tags._ids', [
+        'type' => 'select',
+        'multiple' => true,
+        'options' => $tagList,
+    ]);
 
     // Inputs for the joint table (articles_tags)
     echo $this->Form->input('tags.0._joinData.starred');

@@ -405,6 +405,11 @@ given article is often cached to make generating lists of articles more
 efficient. You can use the :doc:`CounterCacheBehavior
 </orm/behaviors/counter-cache>` to cache counts of associated records.
 
+You should make sure that your database tables do not contain columns that match
+association property names. If for example you have counter fields that conflict
+with association properties, you must either rename the association property, or
+the column name.
+
 BelongsToMany Associations
 ==========================
 
