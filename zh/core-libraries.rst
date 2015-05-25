@@ -1,25 +1,13 @@
-Core Libraries
-##############
+核心库
+######
 
-.. note::
-    The documentation is not currently supported in zh language for this page.
+CakePHP 自带丰富的内置函数和类。这些类和函数尽力涵盖网络应用程序必需的一些最常用的
+功能。
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+通用目的
+========
 
-    You can referer to the english version in the select top menu to have
-    information about this page's topic.
-
-CakePHP comes with a plethora of built-in functions and classes. These classes
-and functions try to cover some of the most common features required in web
-applications.
-
-General Purpose
-===============
-
-General purpose libraries are available and reused in many places across
-CakePHP.
+有通用目的的库，在 CakePHP 的很多地方重用。
 
 .. toctree::
     :maxdepth: 2
@@ -28,8 +16,8 @@ CakePHP.
 
 .. _core-behaviors:
 
-Behaviors
-=========
+行为
+====
 
 .. include:: /core-libraries/toc-behaviors.rst
     :start-line: 3
@@ -42,8 +30,8 @@ Behaviors
 
 .. _core-components:
 
-Components
-==========
+组件
+====
 
 .. include:: /core-libraries/toc-components.rst
     :start-line: 3
@@ -56,8 +44,8 @@ Components
 
 .. _core-helpers:
 
-Helpers
-=======
+助件
+====
 
 .. include:: /core-libraries/toc-helpers.rst
     :start-line: 3
@@ -68,12 +56,11 @@ Helpers
 
     /core-libraries/toc-helpers
 
-Utilities
-=========
+工具
+====
 
-Beyond the core MVC components, CakePHP includes a great selection of utility
-classes that help you do everything from webservice requests, to caching, to
-logging, internationalization and more.
+除了核心的 MVC 组件，CakePHP 包括一组很棒的工具类，帮助你做各种事情，象网络服务请求、
+缓存、日志、国际化，等等。
 
 .. toctree::
     :maxdepth: 2
@@ -82,5 +69,5 @@ logging, internationalization and more.
 
 
 .. meta::
-    :title lang=zh: Core Libraries
-    :keywords lang=zh: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events
+    :title lang=zh_CN: Core Libraries
+    :keywords lang=zh_CN: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events
