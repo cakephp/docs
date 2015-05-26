@@ -248,7 +248,7 @@ the tree) is trivial::
     $categoriesTable->delete($aCategory);
 
 The TreeBehavior will take care of all internal deleting operations for you. It
-is also possible to Only delete one node and re-assign all children to the
+is also possible to only delete one node and re-assign all children to the
 immediately superior parent node in the tree::
 
     $aCategory = $categoriesTable->get(10);
@@ -256,3 +256,21 @@ immediately superior parent node in the tree::
     $categoriesTable->delete($aCategory);
 
 All children nodes will be kept and a new parent will be assigned to them.
+
+The deletion of a node is based off of the lft and rght values of the entity. This
+is important to note when looping through the various children of a node for
+conditional deletes::
+
+    $descendants = $teams->find('children', ['for' => 1]);
+    
+    foreach ($descendants as $descendant) {
+        $team = $teams->get($descendant->id); // search for the up-to-date entity object
+        if ($team->expired) {
+            $teams->delete($team); // deletion reorders the lft and rght of database entries
+        }
+    }
+    
+The TreeBehavior reorders the lft and rght values of records in the table when a node
+is deleted. As such, the lft and rght values of the entities inside ``$descendants``
+(saved before the delete operation) will be inaccurate. Entities will have to be loaded
+and modified on the fly to prevent inconsistencies in the table.
