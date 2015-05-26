@@ -1,5 +1,5 @@
-TreeBehavior
-############
+Tree
+####
 
 .. php:namespace:: Cake\ORM\Behavior
 
@@ -178,7 +178,7 @@ correspondent pas à votre schéma, vous pouvez leur fournir des alias::
 Niveau des Nœuds (profondeur)
 =============================
 
-Connaitre la profondeur d'une structure arbre peut être utile lorsque vous
+Connaître la profondeur d'une structure arbre peut être utile lorsque vous
 voulez récupérer des nœuds jusqu'à un certain niveau uniquement par exemple
 lorsque pour générer un menu. Vous pouvez utiliser l'option ``level`` pour
 spécifier les champs qui sauvegarderont la profondeur de chaque nœud::
@@ -259,7 +259,7 @@ niveau dans l'arbre) est facile::
     $categoriesTable->delete($aCategory);
 
 TreeBehavior va s'occuper de toutes les opérations internes de suppression.
-Il est aussi possible de Seulement supprimer un nœud et de réassigner tous les
+Il est aussi possible de supprimer seulement un nœud et de réassigner tous les
 enfants au nœud parent immédiatement supérieur dans l'arbre::
 
     $aCategory = $categoriesTable->get(10);
@@ -267,3 +267,22 @@ enfants au nœud parent immédiatement supérieur dans l'arbre::
     $categoriesTable->delete($aCategory);
 
 Tous les nœuds enfant seront conservés et un nouveau parent leur sera assigné.
+
+La suppression d'un noeud est basée sur les valeurs lft et rght de l'entity.
+C'est important de le noter quand on fait une boucle des différents enfants
+d'un noeud pour des suppressions conditionnelles::
+
+    $descendants = $teams->find('children', ['for' => 1]);
+
+    foreach ($descendants as $descendant) {
+        $team = $teams->get($descendant->id); // cherche l'objet entity mis à jour
+        if ($team->expired) {
+            $teams->delete($team); // la suppression re-trie les entrées lft et rght de la base de données
+        }
+    }
+
+TreeBehavior re-trie les valeurs lft et rght des enregistrements de la table
+quand un noeud est supprimé. Telles quelles, les valeurs lft et rght des
+entities dans ``$descendants`` (sauvegardées avant l'opération de suppression)
+seront erronées. Les entities devront être chargées et modifiées à la volée
+pour éviter les incohérences dans la table.
