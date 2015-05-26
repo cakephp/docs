@@ -123,7 +123,7 @@ The **logs** directory is used to write log files by the default ``FileLog`` eng
 
 As such, make sure the directories **logs**, **tmp** and all its subdirectories
 in your CakePHP installation are writable by the web server user. Composer's
-installation process makes **tmp** and it's subfolders globally writeable to get
+installation process makes **tmp** and its subfolders globally writeable to get
 things up and running quickly but you can update the permissions for better
 security and keep them writable only for the webserver user.
 
