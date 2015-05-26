@@ -1,5 +1,5 @@
-Behavior Timestamp
-##################
+Timestamp
+#########
 
 .. php:namespace:: Cake\ORM\Behavior
 

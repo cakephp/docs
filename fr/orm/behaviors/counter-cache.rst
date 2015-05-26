@@ -1,5 +1,5 @@
-Behavior CounterCache
-#####################
+CounterCache
+############
 
 .. php:namespace:: Cake\ORM\Behavior
 
