@@ -667,7 +667,9 @@ Working with Result Sets
 
 Once a query is executed with ``all()``, you will get an instance of
 :php:class:`Cake\\ORM\\ResultSet`. This object offers powerful ways to manipulate
-the resulting data from your queries.
+the resulting data from your queries. Like Query objects, ResultSets are
+a :doc:`Collection </core-libraries/collections>` and you can use any collection
+method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
@@ -732,8 +734,31 @@ articles quite easily::
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features.
 
-Checking if a Query has no Results
-----------------------------------
+Getting the First & Last Record From a ResultSet
+------------------------------------------------
+
+You can use the ``first()`` and ``last()`` methods to get the respective records
+from a result set::
+
+    $result = $articles->find('all')->all();
+
+    // Get the first and/or last result.
+    $row = $result->first();
+    $row = $result->last();
+
+Getting an Arbitrary Index From a ResultSet
+-------------------------------------------
+
+You can use ``skip()`` and ``first()`` to get an arbitrary record from
+a ResultSet::
+
+    $result = $articles->find('all')->all();
+
+    // Get the 5th record
+    $row = $result->skip(4)->first();
+
+Checking if a Query or ResultSet is Empty
+-----------------------------------------
 
 You can use the ``isEmpty()`` method on a Query or ResultSet object to see if it
 has any rows in it. Calling ``isEmpty()`` on a Query object will evaluate the
