@@ -61,17 +61,17 @@ You can include files in request bodies by including a filehandle in the array::
 
 The filehandle will be read until its end; it will not be rewound before being read.
 
-*Warning:* For compatibility reasons, strings beginning with ``@`` will be evaluated
+.. warning:: For compatibility reasons, strings beginning with ``@`` will be evaluated
 as local or remote file paths. This functionality is deprecated as of CakePHP 3.0.5
 and will be removed in a future version. Until that happens, user data being passed
-to the Http Client must be sanitized as follows:
+to the Http Client must be sanitized as follows::
 
     $response = $http->post('http://example.com/api', [
         'search' => ltrim($this->request->data('search'), '@'),
     ]);
 
 If it is necessary to preserve leading ``@`` characters in query strings, you can pass
-a pre-encoded query string from ``http_build_query()``:
+a pre-encoded query string from ``http_build_query()``::
 
     $response = $http->post('http://example.com/api', http_build_query([
         'search' => $this->request->data('search'),
