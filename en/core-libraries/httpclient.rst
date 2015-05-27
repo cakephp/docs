@@ -52,17 +52,30 @@ Doing post and put requests is equally simple::
 Creating Multipart Requests with Files
 ======================================
 
-You can include files in request bodies by including them in the data array::
+You can include files in request bodies by including a filehandle in the array::
 
     $http = new Client();
     $response = $http->post('http://example.com/api', [
-      'image' => '@/path/to/a/file',
-      'logo' => $fileHandle
+      'image' => fopen('/path/to/a/file', 'r'),
     ]);
 
-By prefixing data values with ``@`` or including a filehandle in the data.  If
-a filehandle is used, the filehandle will be read until its end, it will not be
-rewound before being read.
+The filehandle will be read until its end; it will not be rewound before being read.
+
+*Warning:* For compatibility reasons, strings beginning with ``@`` will be evaluated
+as local or remote file paths. This functionality is deprecated as of CakePHP 3.0.5
+and will be removed in a future version. Until that happens, user data being passed
+to the Http Client must be sanitized as follows:
+
+    $response = $http->post('http://example.com/api', [
+        'search' => ltrim($this->request->data('search'), '@'),
+    ]);
+
+If it is necessary to preserve leading ``@`` characters in query strings, you can pass
+a pre-encoded query string from ``http_build_query()``:
+
+    $response = $http->post('http://example.com/api', http_build_query([
+        'search' => $this->request->data('search'),
+    ]));
 
 Sending Request Bodies
 ======================
