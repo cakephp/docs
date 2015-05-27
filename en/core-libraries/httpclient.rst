@@ -61,8 +61,12 @@ You can include files in request bodies by including a filehandle in the array::
 
 The filehandle will be read until its end; it will not be rewound before being read.
 
-.. warning:: For compatibility reasons, strings beginning with ``@`` will be evaluated
-as local or remote file paths. This functionality is deprecated as of CakePHP 3.0.5
+.. warning::
+
+    For compatibility reasons, strings beginning with ``@`` will be evaluated
+    as local or remote file paths.
+
+This functionality is deprecated as of CakePHP 3.0.5
 and will be removed in a future version. Until that happens, user data being passed
 to the Http Client must be sanitized as follows::
 
