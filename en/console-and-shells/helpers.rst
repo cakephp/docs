@@ -5,21 +5,18 @@ Shell Helpers
     Shell Helpers were added in 3.1.0
 
 Shell Helpers let you easily package up complex output generation code. Shell
-Helpers can be accessed and used from any shell or task's ``_io`` property::
+Helpers can be accessed and used from any shell or task::
 
     // Output some data as a table.
-    $this->_io->table($data);
+    $this->helper('table')->output($data);
 
-The ``ConsoleIo`` object uses ``__call`` to invoke shell helpers located in your
-app or in CakePHP. For plugin helpers, you'll need to use a slightly more
-verbose syntax::
-
-    $this->_io->helper('Plugin.HelperName')->output($data);
+    // Get a helper from a plugin.
+    $this->helper('Plugin.HelperName')->output($data);
 
 You can also get instances of helpers and call any public methods on them::
 
     // Get and use the Progress Helper.
-    $progress = $this->_io->helper('Progress');
+    $progress = $this->helper('Progress');
     $progress->increment(10);
     $progress->draw();
 
@@ -49,10 +46,10 @@ the following in it::
 We can then use this new helper in one of our shell commands by calling it::
 
     // With ### on either side
-    $this->_io->heading('It works!');
+    $this->helper('heading')->output('It works!');
 
     // With ~~~~ on either side
-    $this->_io->heading('It works!', '~', 4);
+    $this->helper('heading')->output('It works!', '~', 4);
 
 Built-In Helpers
 ================
@@ -68,7 +65,7 @@ pretty simple::
             ['short', 'Longish thing', 'short'],
             ['Longer thing', 'short', 'Longest Value'],
         ];
-        $this->_io->table($data);
+        $this->helper('table')->output($data);
 
         // Outputs
         +--------------+---------------+---------------+
@@ -84,7 +81,7 @@ Progress Helper
 The ProgressHelper can be used in two different ways. The simple mode lets you
 provide a callback that is invoked until the progress is complete::
 
-    $this->_io->progress(function ($progress) {
+    $this->helper('progress')->output(function ($progress) {
         // Do work here.
         $progress->increment(20);
     });
@@ -99,7 +96,7 @@ You can control the progress bar more by providing additional options:
 
 An example of all the options in use would be::
 
-    $this->_io->progress([
+    $this->helper('progress')->output([
         'total' => 10,
         'width' => 20,
         'callback' => function ($progress) {
@@ -110,7 +107,7 @@ An example of all the options in use would be::
 The progress helper can also be used manually to increment and re-render the
 progress bar as necessary::
 
-    $progress = $this->_io->helper('Progress');
+    $progress = $this->helper('Progress');
     $progress->init([
         'total' => 10,
         'width' => 20,
