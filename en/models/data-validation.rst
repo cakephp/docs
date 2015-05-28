@@ -61,7 +61,7 @@ some of these built-in validation rules::
                     'message' => 'Letters and numbers only'
                 ),
                 'between' => array(
-                    'rule'    => array('lengthBetween', 5, 15),
+                    'rule' => array('lengthBetween', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
