@@ -28,7 +28,7 @@ Creating Helpers
 
 While CakePHP comes with a few shell helpers you can create more in your
 application or plugins. As an example, we'll create a simple helper to generate
-fancy headings. First create the ``src/Shell/Helper/HeadingHelper.php`` and put
+fancy headings. First create the **src/Shell/Helper/HeadingHelper.php** and put
 the following in it::
 
     <?php
