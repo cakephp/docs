@@ -13,8 +13,8 @@ introduites dans chaque version et le chemin de migration entre les versions.
     appendices/3-0-migration-guide
     appendices/orm-migration
 
-3.1 Guide de migration
-===================
+3.1 Guide de Migration
+======================
 
 .. toctree::
     :maxdepth: 1

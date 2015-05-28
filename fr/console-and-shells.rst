@@ -289,12 +289,19 @@ Vous pouvez charger les tâches à la volée en utilisant l'objet Task Collectio
 Vous pouvez charger les tâches qui ne sont pas déclarées dans $tasks de cette
 façon::
 
-    $Project = $this->Tasks->load('Project');
+    $project = $this->Tasks->load('Project');
 
 Chargera et retournera une instance ProjectTask. Vous pouvez charger les tâches
 à partir des plugins en utilisant::
 
-    $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+    $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+
+Shell Helpers
+=============
+
+Si vous avez une logique complexe de génération de sortie, vous pouvez utiliser
+les :doc:`/console-and-shells/helpers` pour encapsuler cette logique d'une manière
+réutilisable.
 
 .. _invoking-other-shells-from-your-shell:
 
@@ -1032,6 +1039,7 @@ Plus de sujets
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell

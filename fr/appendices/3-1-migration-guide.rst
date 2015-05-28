@@ -1,5 +1,5 @@
-3.1 Guide de migration
-###################
+3.1 Guide de Migration
+######################
 
 CakePHP 3.1 est une mise à jour de CakePHP 3.0 dont la compatibilité
 API est complète. Cette page souligne les changements et améliorations
@@ -17,6 +17,9 @@ Console
 
 - ``Shell::dispatchShell()`` n'affiche plus le message d'accueil à partir du
   shell dispatché.
+- Les :doc:`/console-and-shells/helpers` ont été ajoutés. Les Shell Helpers vous
+  permettent d'empaqueter un logique de sortie complexe d'une manière
+  réutilisable.
 
 Controller
 ==========
@@ -42,7 +45,7 @@ SessionHelper
 -------------
 
 - ``SessionHelper`` a été dépréciée. Vous pouvez directement utiliser
-``$this->request->session()``.
+  ``$this->request->session()``.
 
 FlashHelper
 -----------
