@@ -492,19 +492,19 @@ common options shared by all input methods are as follows:
 * ``$options['id']`` Set this key to force the value of the DOM id for the input.
   This will override the idPrefix that may be set.
 
-* ``$options['default']`` Used to set a default value for the input field. The
+* ``$options['val']`` Used to set a default value for the input field. The
   value is used if the data passed to the form does not contain a value for the
   field (or if no data is passed at all).
 
   Example usage::
 
-    echo $this->Form->text('ingredient', ['default' => 'Sugar']);
+    echo $this->Form->text('ingredient', ['val' => 'Sugar']);
 
   Example with select field (Size "Medium" will be selected as
   default)::
 
     $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
-    echo $this->Form->select('size', $sizes, ['default' => 'm']);
+    echo $this->Form->select('size', $sizes, ['val' => 'm']);
 
   .. note::
 
@@ -545,7 +545,7 @@ Options for Select, Checkbox and Radio Inputs
     echo $this->Form->select('rooms', [
         'multiple' => true,
         // options with values 1 and 3 will be selected as default
-        'default' => [1, 3]
+        'val' => [1, 3]
     ]);
 
 * ``$options['empty']`` If set to ``true``, forces the input to remain empty.
