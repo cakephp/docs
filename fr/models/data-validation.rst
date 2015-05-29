@@ -33,7 +33,7 @@ montre quelques règles simples de validation qui s'appliquent à ces champs::
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
-            'date_de_naissance'  => 'date'
+            'date_de_naissance' => 'date'
         );
     }
 
@@ -56,23 +56,23 @@ quelques-unes de ces règles pré-définies::
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
-                    'rule'     => 'alphaNumeric',
+                    'rule' => 'alphaNumeric',
                     'required' => true,
-                    'message'  => 'Chiffres et lettres uniquement !'
+                    'message' => 'Chiffres et lettres uniquement !'
                 ),
                 'between' => array(
-                    'rule'    => array('lengthBetween', 5, 15),
+                    'rule' => array('lengthBetween', 5, 15),
                     'message' => 'Entre 5 et 15 caractères'
                 )
             ),
             'password' => array(
-                'rule'    => array('minLength', '8'),
+                'rule' => array('minLength', '8'),
                 'message' => '8 caractères minimum'
             ),
             'email' => 'email',
             'date_de_naissance' => array(
-                'rule'       => 'date',
-                'message'    => 'Entrez une date valide',
+                'rule' => 'date',
+                'message' => 'Entrez une date valide',
                 'allowEmpty' => true
             )
         );
@@ -239,7 +239,7 @@ personnalisé pour la règle::
 
     public $validate = array(
         'password' => array(
-            'rule'    => array('minLength', 8),
+            'rule' => array('minLength', 8),
             'message' => 'Le mot de passe doit comporter au moins 8 caractères'
         )
     );
@@ -286,12 +286,12 @@ Ce sera plus explicite avec un exemple pratique::
     public $validate = array(
         'login' => array(
             'regleLogin-1' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'Lettres et chiffres uniquement',
-                'last'    => true
+                'last' => true
              ),
             'regleLogin-2' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Taille minimum de 8 caractères'
             )
         )
@@ -320,12 +320,12 @@ si "rule2" échoue aussi::
     public $validate = array(
         'login' => array(
             'rule1' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
-                'last'    => false
+                'last' => false
              ),
             'rule2' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Minimum length of 8 characters'
             )
         )
@@ -338,7 +338,7 @@ exemple::
     public $validate = array(
         'login' => array(
             'Only alphabets and numbers allowed' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
              ),
         )
     );
@@ -365,7 +365,7 @@ personnalisée comme une règle de validation de champ::
 
     public $validate = array(
         'login' => array(
-            'rule'    => '/^[a-z0-9]{3,}$/i',
+            'rule' => '/^[a-z0-9]{3,}$/i',
             'message' => 'Seulement des lettres et des entiers, minimum 3 caractères'
         )
     );
@@ -388,7 +388,7 @@ propre méthode de validation, comme indiqué ci-dessous::
     class User extends AppModel {
         public $validate = array(
             'code_promo' => array(
-                'rule'    => array('limiteUtilisations', 25),
+                'rule' => array('limiteUtilisations', 25),
                 'message' => 'Ce code promo a dépassé son nombre maximal d\'utilisation.'
             )
         );
@@ -432,7 +432,7 @@ stocké dans une variable de $this->data::
     class Post extends AppModel {
         public $validate = array(
             'slug' => array(
-                'rule'    => 'alphaNumericDashUnderscore',
+                'rule' => 'alphaNumericDashUnderscore',
                 'message' => 'Le slug ne peut contenir que des lettres, des nombres, des tirets ou des underscores.'
             )
         );
@@ -627,7 +627,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'login' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'Les données pour ce champ ne doivent contenir que lettres et chiffres.'
             )
         );
@@ -640,7 +640,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'mot_de_passe' => array(
-                'rule'    => array('between', 5, 15),
+                'rule' => array('between', 5, 15),
                 'message' => 'Le mot de passe doit avoir une longueur comprise entre 5 et 15 caractères.'
             )
         );
@@ -659,7 +659,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'id' => array(
                 'rule' => 'blank',
-                'on'   => 'create'
+                'on' => 'create'
             )
         );
 
@@ -671,7 +671,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'maCaseACocher' => array(
-                'rule'    => array('boolean'),
+                'rule' => array('boolean'),
                 'message' => 'Valeur incorrecte pour maCaseACocher'
             )
         );
@@ -716,7 +716,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'numero_cc' => array(
-                'rule'    => array('cc', array('visa', 'maestro'), false, null),
+                'rule' => array('cc', array('visa', 'maestro'), false, null),
                 'message' => 'Le numéro de carte de crédit que vous avez saisi était invalide.'
             )
         );
@@ -730,14 +730,14 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', '>=', 18),
+                'rule' => array('comparison', '>=', 18),
                 'message' => 'Vous devez avoir 18 ans au moins pour vous inscrire.'
             )
         );
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', 'greater or equal', 18),
+                'rule' => array('comparison', 'greater or equal', 18),
                 'message' => 'Vous devez avoir 18 ans au moins pour vous inscrire.'
             )
         );
@@ -748,7 +748,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'infinite' => array(
-                'rule'    => array('custom', '\u221E'),
+                'rule' => array('custom', '\u221E'),
                 'message' => 'Merci de rentrer un nombre infini.'
             )
         );
@@ -781,8 +781,8 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'date_de_naissance' => array(
-                'rule'       => array('date', 'ymd'),
-                'message'    => 'Entrez une date valide au format AA-MM-JJ.',
+                'rule' => array('date', 'ymd'),
+                'message' => 'Entrez une date valide au format AA-MM-JJ.',
                 'allowEmpty' => true
             )
         );
@@ -821,7 +821,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'birthday' => array(
-                'rule'    => array('datetime', 'dmy'),
+                'rule' => array('datetime', 'dmy'),
                 'message' => 'Merci de rentrer une date et un time valide.'
             )
         );
@@ -856,7 +856,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('email', true),
+                'rule' => array('email', true),
                 'message' => 'Merci de soumettre une adresse email valide.'
             )
         );
@@ -870,7 +870,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'nourriture' => array(
-                'rule'    => array('equalTo', 'gâteau'),
+                'rule' => array('equalTo', 'gâteau'),
                 'message' => 'Cette valeur devrait être la chaîne gâteau'
             )
         );
@@ -885,7 +885,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+                'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
                 'message' => 'Merci de soumettre une image valide.'
             )
         );
@@ -921,7 +921,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'fonction' => array(
                  'choixAutorise' => array(
-                     'rule'    => array('inList', array('Foo', 'Bar')),
+                     'rule' => array('inList', array('Foo', 'Bar')),
                      'message' => 'Entrez soit Foo, soit Bar.'
                  )
              )
@@ -940,7 +940,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'ip_client' => array(
-                'rule'    => array('ip', 'IPv4'), // ou 'IPv6' ou 'both' (par défaut)
+                'rule' => array('ip', 'IPv4'), // ou 'IPv6' ou 'both' (par défaut)
                 'message' => 'Merci de soumettre une adresse IP valide.'
             )
         );
@@ -952,7 +952,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'login' => array(
-                'rule'    => 'isUnique',
+                'rule' => 'isUnique',
                 'message' => 'Ce nom d\'user a déjà été choisi.'
             )
         );
@@ -962,7 +962,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('isUnique', array('email', 'username'), false),
+                'rule' => array('isUnique', array('email', 'username'), false),
                 'message' => 'Cette combinaise nom & email est déjà utilisée.'
             )
         );
@@ -988,7 +988,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'login' => array(
-                'rule'    => array('maxLength', 15),
+                'rule' => array('maxLength', 15),
                 'message' => 'Les noms d\'user ne doivent pas dépasser 15 caractères.'
             )
         );
@@ -1012,11 +1012,11 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('mimeType', array('image/gif')),
+                'rule' => array('mimeType', array('image/gif')),
                 'message' => 'Invalid mime type.'
             ),
             'logo' => array(
-                'rule'    => array('mimeType', '#image/.+#'),
+                'rule' => array('mimeType', '#image/.+#'),
                 'message' => 'Invalid mime type.'
             ),
         );
@@ -1029,7 +1029,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'login' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Usernames must be at least 8 characters long.'
             )
         );
@@ -1048,7 +1048,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'salaire' => array(
-                'rule'    => array('money', 'left'),
+                'rule' => array('money', 'left'),
                 'message' => 'Merci de soumettre une somme monétaire valide.'
             )
         );
@@ -1081,7 +1081,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'titre' => array(
-                'rule'    => 'notEmpty',
+                'rule' => 'notEmpty',
                 'message' => 'Ce champ ne peut pas rester vide'
             )
         );
@@ -1095,7 +1095,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'cars' => array(
-                'rule'    => 'numeric',
+                'rule' => 'numeric',
                 'message' => 'Merci de soumettre le nombre de voitures.'
             )
         );
@@ -1112,11 +1112,11 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'wheels' => array(
-                'rule'    => 'naturalNumber',
+                'rule' => 'naturalNumber',
                 'message' => 'Merci de fournir le nombre de pneus.'
             ),
             'airbags' => array(
-                'rule'    => array('naturalNumber', true),
+                'rule' => array('naturalNumber', true),
                 'message' => 'Merci de remplir le nombre d'airbags.'
             ),
         );
@@ -1161,7 +1161,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'nombre' => array(
-                'rule'    => array('range', -1, 11),
+                'rule' => array('range', -1, 11),
                 'message' => 'Merci d\'entrer un nombre entre -1 et 11'
             )
         );
@@ -1204,7 +1204,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
         public $validate = array(
             'image' => array(
-                'rule'    => 'uploadError',
+                'rule' => 'uploadError',
                 'message' => 'Something went wrong with the upload.'
             ),
         );
