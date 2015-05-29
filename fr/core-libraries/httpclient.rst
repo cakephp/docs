@@ -1,4 +1,4 @@
-Http Client
+Client Http
 ###########
 
 .. php:namespace:: Cake\Network\Http
@@ -53,19 +53,37 @@ Faire des requêtes post et put est également simple::
 Créer des Requêtes Multipart avec des Fichiers
 ==============================================
 
-Vous pouvez inclure des fichiers dans des corps de requête en les incluant
-dans le tableau de données::
+Vous pouvez inclure des fichiers dans des corps de requête en incluant un
+gestionnaire de fichier dans le tableau de données::
 
     $http = new Client();
     $response = $http->post('http://example.com/api', [
-      'image' => '@/path/to/a/file',
-      'logo' => $fileHandle
+      'image' => fopen('/path/to/a/file', 'r'),
     ]);
 
-En préfixant les valeurs des données par ``@`` ou en incluant un gestionnaire
-de fichier dans les données. Si un gestionnaire de fichier est utilisé, le
-gestionnaire de fichier sera lu jusqu'à sa fin, il ne sera pas rembobiné avant
-d'être lu.
+Le gestionnaire de fichiers sera lu jusqu'à sa fin, il ne sera pas rembobiné
+avant d'être lu.
+
+.. warning::
+
+    Pour des raisons de compatibilité, les chaînes commençant par ``@`` seront
+    considérées comme locales ou des chemins de fichier d'un dépôt.
+
+Cette fonctionnalité est dépréciée depuis CakePHP 3.0.5 et sera retirée dans une
+version future. Avant que cela n'arrive, les données d'utilisateur passées
+au Client Http devront être nettoyées comme suit::
+
+    $response = $http->post('http://example.com/api', [
+        'search' => ltrim($this->request->data('search'), '@'),
+    ]);
+
+Si il est nécessaire de garder les caractères du début ``@`` dans les chaînes
+de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
+``http_build_query()``::
+
+    $response = $http->post('http://example.com/api', http_build_query([
+        'search' => $this->request->data('search'),
+    ]));
 
 Envoyer des Corps de Requête
 ============================
