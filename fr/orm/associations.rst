@@ -512,6 +512,9 @@ sont:
   des conditions sur une table associée, vous devriez utiliser un model
   'through' et lui définir les associations belongsTo nécessaires.
 - **sort** un tableau de clauses order compatible avec find().
+- **dependent**: Quand la clé dependent est définie à ``false`` et qu'une entity
+  est supprimée, les enregistrements de la table de jointure ne seront pas
+  supprimés.
 - **through** Vous permet de fournir soit le nom de l'instance de la Table
   que vous voulez utiliser, soit l'instance elle-même. Cela rend possible la
   personnalisation des clés de la table de jointure, et vous permet de
