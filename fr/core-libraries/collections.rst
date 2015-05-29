@@ -787,15 +787,16 @@ implémentent l'interface ``ArrayAccess``.
 Créer des Méthodes de Collection Réutilisables
 ----------------------------------
 
-Utiliser une ``Closure`` pour les méthodes de Collection est optimal lorsque le 
-travail à accomplir est petit et ciblé, mais cela peut devenir gênant très rapidement. 
-Cela devient plus évident quand beaucoup de méthodes différentes doivent être appelées 
-ou lorsque la longueur des méthodes de la ``Closure`` est de plus de quelques lignes.
+Utiliser une ``Closure`` pour les méthodes de Collection est optimal lorsque le
+travail à accomplir est petit et ciblé, mais cela peut devenir gênant très
+rapidement. Cela devient plus évident quand beaucoup de méthodes différentes
+doivent être appelées ou lorsque la longueur des méthodes de la ``Closure`` est
+de plus de quelques lignes.
 
-Il y a aussi des cas où la logique utilisée pour les méthodes de Collection peut être
-réutilisée dans plusieurs parties de votre application. Il est préférable d'envisager 
-d'éclater la logique d'ensemble complexe dans des classes séparées. Par exemple, imaginez 
-une longue restriction comme celle-ci.::
+Il y a aussi des cas où la logique utilisée pour les méthodes de Collection peut
+être réutilisée dans plusieurs parties de votre application. Il est préférable
+d'envisager d'éclater la logique d'ensemble complexe dans des classes séparées.
+Par exemple, imaginez une longue restriction comme celle-ci.::
 
         $collection
                 ->map(function ($row, $key) {
@@ -839,11 +840,11 @@ Cela peut être remodeler en créant une autre classe::
 
 .. php:method:: through(callable $c)
 
-Parfois une suite d'appels de méthodes de Collection peut devenir réutilisable 
-dans d'autres parties de votre application, mais seulement si elles sont appelées 
-dans cet ordre précis. Dans ces cas, vous pouvez utiliser les ``through()`` en 
-combinaison avec une classe implémentant ``__invoke`` pour répartir vos traitements 
-de données::
+Parfois une suite d'appels de méthodes de Collection peut devenir réutilisable
+dans d'autres parties de votre application, mais seulement si elles sont
+appelées dans cet ordre précis. Dans ces cas, vous pouvez utiliser les
+``through()`` en combinaison avec une classe implémentant ``__invoke`` pour
+répartir vos traitements de données::
 
         $collection
                 ->map(new ShippingCostCalculator)
@@ -852,8 +853,8 @@ de données::
                 ->buffered()
                ...
 
-Les appels aux méthodes ci-dessus, peuvent être regroupés dans une nouvelle classe 
-permettant de ne pas être répétés à chaque fois::
+Les appels aux méthodes ci-dessus, peuvent être regroupés dans une nouvelle
+classe permettant de ne pas être répétés à chaque fois::
 
         class FinalCheckOutRowProcessor
         {
@@ -870,7 +871,7 @@ permettant de ne pas être répétés à chaque fois::
         }
 
 
-        // Now you can use the through() method to call all methods at once
+        // Maintenant vous pouvez utiliser la méthode through() pour appeler toutes les méthodes en une fois
         $collection->through(new FinalCheckOutRowProcessor);
 
 Optimiser les Collections
