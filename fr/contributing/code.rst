@@ -126,7 +126,7 @@ le pull request est créée.
   au framework, alors vous devez choisir la branche avec le nombre de la version
   prochaine. Par exemple si la version stable courante est ``2.2.2``, la branche
   acceptant les nouvelles fonctionnalités sera ``2.3``.
-* Si votre changement est une défailance d'une fonctionnalité existante, ou de
+* Si votre changement est une défaillance d'une fonctionnalité existante, ou de
   l'API, alors vous devrez choisir la prochaine version majeure. Par exemple,
   si la version courante est ``2.2.2`` alors la prochaine fois qu'un
   comportement peut être cassé sera dans ``3.0`` ainsi vous devez cibler

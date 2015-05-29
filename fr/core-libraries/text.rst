@@ -143,7 +143,7 @@ spécifique ``$options['format']`` ou une chaîne par défaut.
 Options:
 
 -  'format' - chaîne la partie de html avec laquelle la phrase sera mise
-   en excergue.
+   en exergue.
 -  'html' - booléen Si ``true``, va ignorer tous les tags HTML, s'assurant que
    seul le bon texte est mise en avant.
 
@@ -275,15 +275,15 @@ Sortie::
 
     ...a TV, a C# program that can divide by zero, death metal t-shirts
 
-Extracting an Excerpt
-=====================
+Générer un Extrait
+==================
 
 .. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
-Extrait un excerpt de ``$haystack`` surrounding the ``$needle``
-avec un nombre de caractères de chaque côté determiné par ``$radius``,
-et prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
-pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
+Génère un extrait de ``$haystack`` entourant le ``$needle``
+avec un nombre de caractères de chaque côté déterminé par ``$radius``,
+et préfixé/suffixé avec ``$ellipsis``. Cette méthode est spécialement pratique
+pour les résultats de recherches. La chaîne requêtée ou les mots clés peuvent
 être montrés dans le document résultant. ::
 
     // appelé avec TextHelper
@@ -292,12 +292,11 @@ pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
     // appelé avec Text
     use Cake\Utility\Text;
 
-    echo Text::excerpt($lastParagraph, 'method', 50, '...');
+    echo Text::excerpt($lastParagraph, 'méthode', 50, '...');
 
-Sortie::
-
-    ... par $radius, et prefix/suffix avec $ending. Cette méthode est
-    spécialement pratique pour les résultats de recherche. La requête...
+Génère::
+    ...$radius,et préfixé/suffixé avec $ellipsis. Cette méthode est
+    spécialement pratique pour les résultats de r...
 
 Converting an Array to Sentence Form
 ====================================

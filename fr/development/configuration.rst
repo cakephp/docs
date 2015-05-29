@@ -103,7 +103,7 @@ App.paths
     Les chemins de Configure pour les ressources non basées sur les classes.
     Accepte les sous-clés ``plugins``, ``templates``, ``locales``, qui
     permettent la définition de chemins respectivement pour les plugins, les
-    templates de view et les fichiers locale.
+    templates de view et les fichiers de locales.
 App.jsBaseUrl
     Le chemin Web vers le répertoire public des js dans webroot. Si vous
     utilisez un :term:`CDN`, vous devriez définir cette valeur vers la
@@ -341,7 +341,7 @@ en utilisant :php:meth:`Configure::config()`::
 
 Vous pouvez avoir plusieurs readers attachés à Configure, chacun lisant
 différents types de fichiers de configuration, ou lisant à partir de
-différents types de sources. Vous pouvez intéragir avec les readers attachés
+différents types de sources. Vous pouvez interagir avec les readers attachés
 en utilisant quelques autres méthodes de Configure. Pour voir, vérifier
 quels alias de reader sont attachés, vous pouvez utiliser
 :php:meth:`Configure::configured()`::

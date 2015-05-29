@@ -254,5 +254,5 @@ Cet exemple désactiverait toutes les vérifications de sécurité pour une acti
 edit.
 
 .. meta::
-    :title lang=fr: Security (Securité)
+    :title lang=fr: Security (Sécurité)
     :keywords lang=fr: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class

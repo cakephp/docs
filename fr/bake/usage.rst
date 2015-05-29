@@ -17,7 +17,7 @@ base de données est configurée. Regardez la section dans
 d'informations.
 
 Si vous exécutez la commande sans argument, ``bin/cake bake`` affichera la liste
-des tâches disponibles. Vous devriez voir quelquechose comme ceci::
+des tâches disponibles. Vous devriez voir quelque chose comme ceci::
 
     $ bin/cake bake
 

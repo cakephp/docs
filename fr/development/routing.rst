@@ -428,7 +428,7 @@ laquelle les utilisateurs privilégiés peuvent faire des modifications.
 Ceci est souvent réalisé grâce à une URL spéciale telle que
 ``/admin/users/edit/5``. Dans CakePHP, les préfixes de routage peuvent être
 activés depuis le fichier de configuration du cœur en configurant les
-préfixes avec Routing.prefixes. Les Prefixes peuvent être soit activés en
+préfixes avec Routing.prefixes. Les préfixes peuvent être soit activés en
 utilisant la valeur de configuration ``Routing.prefixes``, soit en définissant
 la clé ``prefix`` avec un appel de ``Router::connect()``::
 
@@ -1035,7 +1035,7 @@ par défaut. La méthode utilise la classe de route passée pour les règles
 définies ou, si aucune classe n'est passée, la classe retournée par
 ``Router::defaultRouteClass()`` sera utilisée.
 
-Appellez fallbacks comme ceci::
+Appelez fallbacks comme ceci::
 
     $routes->fallbacks('InflectedRoute');
 

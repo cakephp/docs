@@ -21,7 +21,7 @@ Votre forum a plusieurs utilisateurs qui peuvent poster des messages depuis
 n'importe quelle partie du monde. Une façon facile de gérer le temps est de
 sauvegarder toutes les dates et les times à GMT+0 or UTC. Décommenter la
 ligne ``date_default_timezone_set('UTC');`` dans **config/bootstrap.php** pour
-s'assurer que le time zone de votre aplication est défini à GMT+0.
+s'assurer que le time zone de votre application est défini à GMT+0.
 
 Ensuite, ajoutez un time zone à votre table users et faîtes les modifications
 nécessaires pour permettre à vos utilisateurs de définir leur time zone.

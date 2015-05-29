@@ -122,7 +122,7 @@ dans la requête actuelle. Les panneaux s'inscrivent aux events
 ``Controller.initialize`` et ``Controller.shutdown``. Si votre panneau doit
 s'inscrire à des events supplémentaires, vous pouvez utiliser la méthode
 ``implementedEvents()`` pour définir tous les events auxquels votre panneau
-doit s'interesser.
+doit s'intéresser.
 
 Vous devez vous référer aux panneaux intégrés pour avoir quelques exemples sur
 la façon de construire des panneaux.

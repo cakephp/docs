@@ -817,12 +817,12 @@ générer dynamiquement la clé mise en cache::
     });
 
 La méthode cache facilite l'ajout des résultats mis en cache à vos finders
-personnalisés ou à travers des écouteurs d'événement.
+personnalisés ou à travers des écouteurs d'évènement.
 
 Quand les résultats pour une requête mise en cache sont récupérés, ce qui suit
 va arriver:
 
-1. L'événement ``Model.beforeFind`` est déclenché.
+1. L'évènement ``Model.beforeFind`` est déclenché.
 2. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
 3. La clé du cache va être déterminée et les données du cache vont être lues.
    Si les données du cache sont vides, ces résultats vont être retournés.

@@ -28,7 +28,7 @@ Insertion d'éléments correctement formatés
 
 La tâche la plus importante que le Helper Html accomplit est la création d'un
 balisage bien formé. Cette section couvrira quelques méthodes du Helper Html et
-leur utlisation.
+leur utilisation.
 
 Créer un Tag Charset
 --------------------
@@ -822,7 +822,7 @@ l'option ``$startText`` pour
 
 En option vous pouvez préciser un attribut standard HTML valide pour un
 ``<ul>`` (Liste non ordonnées) comme ``class`` et pour des options
-specifiques, vous avez:
+spécifiques, vous avez:
 ``separator`` (sera entre les éléments ``<li>``), ``firstClass`` et
 ``lastClass`` comme::
 

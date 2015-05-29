@@ -218,7 +218,7 @@ C'est utile pour retourner les données à partir des services paginés::
 
     $allPagesItems = $items->toList();
 
-Si vous utiliez PHP 5.5+, vous pouvez utiliser le mot clé ``yield`` à l'intérieur
+Si vous utilisez PHP 5.5+, vous pouvez utiliser le mot clé ``yield`` à l'intérieur
 de ``unfold()`` pour renvoyer autant d'éléments pour chaque item dans la collection
 que besoin::
 
@@ -313,7 +313,7 @@ Agrégation
 
 .. php:method:: reduce(callable $c)
 
-La contrepartie de l'opération ``map()`` est habituellemt un ``reduce``. Cette
+La contrepartie de l'opération ``map()`` est habituellement un ``reduce``. Cette
 fonction va vous aider à construire un résultat unique à partir de tous les
 éléments d'une collection::
 
@@ -333,7 +333,7 @@ pour la fonction ``reduce()``, il prend la valeur initiale pour l'opération
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
 Pour extraire la valeur minimum pour une collection basée sur une propriété,
-utilisez juste la fontion ``min()``. Celle-ci va retourner l'élément complet
+utilisez juste la fonction ``min()``. Celle-ci va retourner l'élément complet
 à partir de la collection et pas seulement la plus petite valeur trouvée::
 
     $collection = new Collection($people);
@@ -437,7 +437,7 @@ Result could look like this when converted to array:
 
 Il y aura des cas où vous savez qu'un élément est unique pour la
 propriété selon laquelle vous souhaitez faire un ``groupBy()``. Si vous
-souhaitez un unique résultat par groupe, vous pouvez utiliser la fontion
+souhaitez un unique résultat par groupe, vous pouvez utiliser la fonction
 ``indexBy()``::
 
     $usersById = $users->indexBy('id');
@@ -464,7 +464,7 @@ Trier
 .. php:method:: sortBy($callback)
 
 Les valeurs de collection peuvent être triées par ordre croissant ou
-décroissant basé sur une colonnne ou une fonction personnalisée. Pour créer une
+décroissant basé sur une colonne ou une fonction personnalisée. Pour créer une
 nouvelle collection triée à partir de valeurs d'une autre, vous pouvez utiliser
 ``sortBy``::
 
@@ -675,7 +675,7 @@ hasard.
 
 .. php:method:: take(int $size, int $from)
 
-Quand vous souhaitez prendre une parite d'une collection, utilisez la fonction
+Quand vous souhaitez prendre une partie d'une collection, utilisez la fonction
 ``take()``, cela va créer une nouvelle collection avec au moins le nombre de
 valeurs que vous spécifiez dans le premier argument, en commençant par la
 position passée dans le second argument::
@@ -785,7 +785,7 @@ La méthode ``insert()`` peut opérer sur des éléments tableau ou des objets q
 implémentent l'interface ``ArrayAccess``.
 
 Créer des Méthodes de Collection Réutilisables
-----------------------------------
+----------------------------------------------
 
 Utiliser une ``Closure`` pour les méthodes de Collection est optimal lorsque le
 travail à accomplir est petit et ciblé, mais cela peut devenir gênant très
@@ -881,14 +881,14 @@ Optimiser les Collections
 
 Les collections effectuent souvent la plupart des opérations que vous créez
 en utilisant ses fonctions de façon lazy. Ceci signifie que même si vous pouvez
-appeler une fonction, cela ne signifie pas qu'elle est executée de la bonne
+appeler une fonction, cela ne signifie pas qu'elle est exécutée de la bonne
 manière. C'est vrai pour une grande quantité de fonctions de cette classe.
 L'évaluation lazy vous permet de gagner des ressources dans des situations
 où vous n'utilisez pas toutes les valeurs d'une collection. Vous pouvez ne pas
 utiliser toutes les valeurs quand l'itération stoppe rapidement, ou quand une
 exception/un échec se produit rapidement.
 
-De plus, l'évaluation lazy aide à accélerer certaines operations. Considerez
+De plus, l'évaluation lazy aide à accélérer certaines operations. Considérez
 l'exemple suivant::
 
     $collection = new Collection($oneMillionItems);
@@ -924,7 +924,7 @@ collections sont immutables et l'opération d'extraction lazy serait fait pour
 les deux filtres.
 
 Heureusement, nous pouvons passer outre ce problème avec une simple fonction. Si
-vous planifiez de réutilser les valeurs à partir de certaines opérations plus
+vous planifiez de réutiliser les valeurs à partir de certaines opérations plus
 d'une fois, vous pouvez compiler les résultats dans une autre collection en
 utilisant la fonction ``buffered()``::
 

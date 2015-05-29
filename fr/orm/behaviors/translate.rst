@@ -13,7 +13,7 @@ objet Table donné auquel il est lié.
 .. warning::
 
     TranslateBehavior ne supporte pas les clés primaires composite pour
-    l'intant.
+    l'instant.
 
 Un Rapide Aperçu
 ================
@@ -244,7 +244,7 @@ utilisant la clé de config ``allowEmptyTranslations``::
     }
 
 Ce qui est au-dessus va seulement charger les données traduites qui ont du
-conenu.
+contenu.
 
 Récupérer Toutes les Traductions pour des Associations
 ------------------------------------------------------
@@ -271,7 +271,7 @@ Récupérer une Langue sans Utiliser I18n::locale
 
 Appeler ``I18n::locale('spa');`` change la locale par défaut pour tous les finds
 traduits, il peut y avoir des fois où vous souhaitez récupérer du contenu
-traduit sans modification de l'état de l'application. Pour ces scenarii,
+traduit sans modification de l'état de l'application. Pour ces scenarios,
 utilisez la méthode ``locale`` du behavior::
 
     I18n::locale('eng'); // réinitialisation pour l'exemple
@@ -365,7 +365,7 @@ ou quand vous avez besoin de sauvegarder plusieurs entities en une fois.
 Sauvegarder Plusieurs Traductions
 =================================
 
-C'est un pré-requis habituel d'être capable d'ajouter ou de modifier plusieurs
+C'est un prérequis habituel d'être capable d'ajouter ou de modifier plusieurs
 traductions à l'enregistrement de la base de données au même moment. Ceci peut
 être facilement fait en utilisant ``TranslateTrait``::
 

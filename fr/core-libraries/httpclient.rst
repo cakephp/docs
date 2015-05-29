@@ -274,7 +274,7 @@ Configurer et Gérer les Cookies
 Http\\Client peut aussi accepter les cookies quand on fait des requêtes. En plus
 d'accepter les cookies, il va aussi automatiquement stocker les cookies valides
 définis dans les responses. Toute response avec des cookies, les verra
-stockés dans l'instance d'origne de Http\\Client. Les cookies stockés dans une
+stockés dans l'instance d'origine de Http\\Client. Les cookies stockés dans une
 instance Client sont automatiquement inclus dans les futures requêtes vers
 le domaine + combinaisons de chemin qui correspondent::
 

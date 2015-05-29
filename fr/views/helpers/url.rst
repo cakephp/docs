@@ -5,12 +5,12 @@ UrlHelper
 
 .. php:class:: UrlHelper(View $view, array $config = [])
 
-UrlHelper vous permez de générer facilement des liens pour vos autres Helpers.
+UrlHelper vous permet de générer facilement des liens pour vos autres Helpers.
 C'est aussi un endroit unique pour personnaliser la façon dont les URLs sont
 générées en surchargeant le helper du cœur avec celui d'une application.
 Regardez la section :ref:`aliasing-helpers` pour voir comment faire.
 
-Genérer des URLs
+Générer des URLs
 ================
 
 .. php:method:: build(mixed $url = NULL, boolean $full = false)

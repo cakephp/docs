@@ -329,7 +329,7 @@ méthode ``accessible``::
 
 Lorsque vous utilisez les méthodes ``newEntity()`` et ``patchEntity()`` dans
 les objets ``Table`` vous avez également le contrôle sur la protection de
-masse. Réferez vous à la section to the :ref:`changing-accessible-fields`
+masse. Référez vous à la section to the :ref:`changing-accessible-fields`
 pour plus d'information.
 
 Outrepasser la Protection de Champ
@@ -348,7 +348,7 @@ Vérifier si une Entity a été Sauvegardée
 
 Il est souvent nécessaire de savoir si une entity représente une ligne qui
 est déjà présente en base de données. Pour cela, utilisez la méthode
-``isNew()``:
+``isNew()``::
 
     if (!$article->isNew()) {
         echo 'Cette article a déjà été sauvegardé!';

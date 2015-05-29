@@ -1,7 +1,7 @@
 Filtres du Dispatcher
 #####################
 
-Il y a plusieurs raisons de vouloir éxécuter un bout de code avant que tout
+Il y a plusieurs raisons de vouloir exécuter un bout de code avant que tout
 code de controller ne soit lancé ou juste avant que la réponse ne soit
 envoyée au client, comme la mise en cache de la réponse, le tunning de header,
 une authentification spéciale ou juste pour fournir l'accès à une réponse de
@@ -150,7 +150,7 @@ Alors que notre filtre était relativement simple, il y a quelques autres choses
 intéressantes que nous pouvons réaliser dans les méthodes de filtre. En
 renvoyant un objet ``Response``, vous pouvez court-circuiter le process de
 dispatch et empêcher le controller d'être appelé. Lorsque vous renvoyez une
-response, n'oubliez pas d'appeller ``$event->stopPropagation()`` pour que les
+response, n'oubliez pas d'appeler ``$event->stopPropagation()`` pour que les
 autres filtres ne soient pas appelés.
 
 .. note::

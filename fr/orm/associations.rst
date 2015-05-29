@@ -427,7 +427,7 @@ mettre en cache les compteurs des enregistrements associés.
 
 Assurez-vous que vos tables de base de données ne contiennent pas de colonnes
 du même nom que les attributs d'association. Si par exemple vous avez un champs
-counter en colision avec une propriété d'association, vous devez soit renommer
+counter en collision avec une propriété d'association, vous devez soit renommer
 l'association ou le nom de la colonne.
 
 Associations BelongsToMany
