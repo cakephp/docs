@@ -212,12 +212,15 @@ MySQLは一番多くのテーブルパラメータをサポートしています
 **スキーマファイルでテーブルパラメータを使う**
 
 スキーマファイルで他のキーを使うのと同様に、 ``tableParameters`` を使います。
-``indexes`` とよく似ています：
-
-::
+``indexes`` とよく似ています::
 
     var $comments => array(
-        'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
+        'id' => array(
+          'type' => 'integer',
+          'null' => false,
+          'default' => 0,
+          'key' => 'primary'
+        ),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
         'comment' => array('type' => 'text'),
         'indexes' => array(
@@ -282,19 +285,35 @@ RouterとDispatcher
 
 新しいスタイルの prefix を用いたURL生成は、まさしく 1.2 での admin ルーティングと同じく振舞います。
 同じ文法を使い、同じ方法で持続的になり、同じ方法で振る舞います。
-core.phpに ``Configure::write('Routing.prefixes', array('admin', 'member'));`` となっていると仮定すると、prefix 無しのURLから次のようにすることができます：
+core.phpに ``Configure::write('Routing.prefixes', array('admin', 'member'));`` となっていると仮定すると、prefix 無しのURLから次のようにすることができます::
 
-::
+    $this->Html->link(
+      'Go',
+      array('controller' => 'posts', 'action' => 'index', 'member' => true)
+    );
+    $this->Html->link(
+      'Go',
+      array('controller' => 'posts', 'action' => 'index', 'admin' => true)
+    );
 
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
+同様に、prefix 有りのURLにおいて、prefix 無しのURLに行きたい場合、次のようにします::
 
-同様に、prefix 有りのURLにおいて、prefix 無しのURLに行きたい場合、次のようにします：
-
-::
-
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
-    $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
+    $this->Html->link(
+      'Go',
+      array(
+        'controller' => 'posts',
+        'action' => 'index',
+        'member' => false
+      )
+    );
+    $this->Html->link(
+      'Go',
+      array(
+        'controller' => 'posts',
+        'action' => 'index',
+        'admin' => false
+      )
+    );
 
 **ルートクラス**
 
@@ -471,5 +490,5 @@ IPアドレスのバリデーションは特定のIPバージョンの厳格な�
 **Validation::uuid()**
 
 uuid()パターンのバリデーションが ``Validation`` クラスに追加されました。
-これは与えられた文字列をパターンによってuuidに適合するかのチェックだけをします。
-与えられたuuidの唯一性を保障するわけではありません。
+これは与えられた文字列をパターンによって UUID に適合するかのチェックだけをします。
+与えられた UUID の唯一性を保障するわけではありません。

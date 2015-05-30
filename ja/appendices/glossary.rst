@@ -13,10 +13,10 @@
         HTMLの属性を構成するキー => 値の配列。例::
 
             // これを与えると
-            array('class' => 'my-class', '_target' => 'blank')
+            array('class' => 'my-class', 'target' => '_blank')
 
             // これが生成される
-            class="my-class" _target="blank"
+            class="my-class" target="_blank"
 
         オプションが最小化できるか、名前そのもが値として許可される場合は、 ``true`` が利用できます::
 
@@ -58,3 +58,8 @@
     DRY
         同じことを繰り返さない(Don’t repeat yourself)。これはあらゆる情報の繰り返しを少なくするためのソフトウェア開発の原則です。
         CakePHPでは同じコードは1箇所に書いて再利用するという形でDRY原則に従っています。
+
+
+.. meta::
+    :title lang=ja: 用語集
+    :keywords lang=ja: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

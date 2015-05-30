@@ -43,8 +43,10 @@ HtmlHelper
 
     public $helpers = array(
         'Html' => array(
-            'configFile' => array('config_file', 'php') // 一つ目の方法：ファイル名とリーダー名の配列
-            'configFile' => 'config_file' // 二つ目の方法： ファイル名の文字列。PhpReaderが用いられます。
+            // 一つ目の方法：ファイル名とリーダー名の配列
+            'configFile' => array('config_file', 'php')
+            // 二つ目の方法： ファイル名の文字列。PhpReaderが用いられます。
+            'configFile' => 'config_file'
         )
     );
 

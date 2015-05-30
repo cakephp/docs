@@ -213,7 +213,8 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 コンポーネントとそのコンストラクタが変更になったことから、これを書き換える必要があります::
 
     class PrgComponent extends Component {
-        public function __construct(ComponentCollection $collection, $settings = array()) {
+        public function __construct(ComponentCollection $collection,
+          $settings = array()) {
             parent::__construct($collection, $settings);
         }
     }
@@ -522,7 +523,10 @@ Router
   2.0では、 ``index`` アクションのみがショートカットルートとして与えられます。
   引き続きショートカットを利用したいと思う方は、以下のようにルートを追加できます::
 
-    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+    Router::connect(
+      '/users/:action',
+      array('controller' => 'users', 'plugin' => 'users')
+    );
 
   ショートカットルートを有効にしたいプラグイン毎にroutesファイルにこれを追加してください。
 
@@ -1003,8 +1007,24 @@ PDOを採用した後に追加された素晴らしい機能のうちの一つ�
 * DboSource::fetchAll() は第二引数に配列を受け取ることができるようになり、クエリに結び付けられる値を渡します。
   第三引数は削除されました。例::
 
-    $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
-    $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
+    $db->fetchAll(
+      'SELECT
+        * from users
+      WHERE
+        username = ?
+      AND
+        password = ?',
+      array('jhon', '12345')
+    );
+    $db->fetchAll(
+      'SELECT
+        * from users
+      WHERE
+          username = :username
+      AND
+        password = :password',
+      array('username' => 'jhon', 'password' => '12345')
+    );
 
 PDOドライバは自動的にこれらの値をエスケープします。
 
