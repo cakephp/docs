@@ -348,7 +348,7 @@ Vérifier si une Entity a été Sauvegardée
 
 Il est souvent nécessaire de savoir si une entity représente une ligne qui
 est déjà présente en base de données. Pour cela, utilisez la méthode
-``isNew()``:
+``isNew()``::
 
     if (!$article->isNew()) {
         echo 'Cette article a déjà été sauvegardé!';
