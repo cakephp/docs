@@ -69,7 +69,7 @@ Executar o Console sem argumentos produz esta mensagem de ajuda::
 
     [Migrations] migrations
 
-    [CORE] i18n, server, plugin, server
+    [CORE] i18n, orm_cache, plugin, server
 
     [app] behavior_time, console, orm
 
