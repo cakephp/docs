@@ -11,7 +11,7 @@ Sub Commands
 ============
 
 The Completion Shell consists of a number of sub commands to assist the
-developer creating it's completion script. Each for a different step in the
+developer creating its completion script. Each for a different step in the
 autocompletion process.
 
 Commands

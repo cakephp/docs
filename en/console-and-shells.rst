@@ -67,7 +67,11 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-    [CORE] bake, i18n, server, test
+    [Bake] bake
+
+    [Migrations] migrations
+
+    [CORE] i18n, orm_cache, plugin, routes, server
 
     [app] behavior_time, console, orm
 
@@ -225,7 +229,7 @@ will call this method when the task is invoked. A task class looks like::
         }
     }
 
-A shell can also access it's tasks as properties, which makes tasks great for
+A shell can also access its tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // Found in src/Shell/SeaShell.php
@@ -888,7 +892,7 @@ Getting Help as XML
 -------------------
 
 When building automated tools or development tools that need to interact
-with CakePHP shells, its nice to have help available in a machine parse-able
+with CakePHP shells, it's nice to have help available in a machine parse-able
 format. The ConsoleOptionParser can provide help in xml by setting an
 additional argument::
 
