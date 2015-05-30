@@ -65,6 +65,10 @@ Executar o Console sem argumentos produz esta mensagem de ajuda::
 
     Available Shells:
 
+    [Bake] bake
+
+    [Migrations] migrations
+
     [CORE] i18n, server, plugin, server
 
     [app] behavior_time, console, orm
