@@ -16,6 +16,8 @@ Console
 
 - ``Shell::dispatchShell()`` no longer outputs the welcome message from the
   dispatched shell.
+- :doc:`/console-and-shells/helpers` were added. Shell Helpers allow you to
+  package up complex output logic in a reusable way.
 
 Controller
 ==========
@@ -40,7 +42,7 @@ SessionHelper
 -------------
 
 - The ``SessionHelper`` has been deprecated. You can use
-``$this->request->session()`` directly.
+  ``$this->request->session()`` directly.
 
 FlashHelper
 -----------

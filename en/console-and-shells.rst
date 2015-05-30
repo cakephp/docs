@@ -274,6 +274,12 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
+Shell Helpers
+=============
+
+If you have complex output generation logic, you can use
+:doc:`/console-and-shells/helpers` to encapsulate this logic in a re-usable way.
+
 .. _invoking-other-shells-from-your-shell:
 
 Invoking Other Shells from Your Shell
@@ -969,6 +975,7 @@ More Topics
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
