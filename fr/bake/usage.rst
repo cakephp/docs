@@ -37,6 +37,7 @@ des tâches disponibles. Vous devriez voir quelquechose comme ceci::
     - component
     - controller
     - fixture
+    - form
     - helper
     - model
     - plugin

@@ -34,6 +34,7 @@ tasks. You should see something like::
     - component
     - controller
     - fixture
+    - form
     - helper
     - model
     - plugin
