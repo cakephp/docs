@@ -132,7 +132,7 @@ Alors que les méthodes montrées sont définies par configuration, vous pouvez
 aussi renommer/retirer les méthodes mixin lors de l'ajout d'un behavior à la
 table. Par exemple::
 
-    // Dans une méhode initialize() de la table.
+    // Dans une méthode initialize() de la table.
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
             'superSlug' => 'slug',
@@ -178,7 +178,7 @@ behavior devrait maintenant ressembler à ceci::
 
     }
 
-Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors:
+Le code ci-dessus montre quelques fonctionnalités intéressantes des behaviors:
 
 - Les Behaviors peuvent définir des méthodes callback en définissant des
   méthodes qui suivent les conventions des :ref:`table-callbacks`.
@@ -187,7 +187,7 @@ Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors
   attaché à la table.
 
 Pour empêcher l'enregistrement de continuer, arrêtez simplement la propagation
-de l'événement dans votre callback::
+de l'évènement dans votre callback::
 
     public function beforeSave(Event $event, Entity $entity)
     {

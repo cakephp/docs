@@ -599,7 +599,7 @@ définira automatiquement la locale en se basant sur l'utilisateur actuel::
     // dans config/bootstrap.php
     DispatcherFactory::add('LocaleSelector');
 
-    // Limimte les locale à en-US et fr-FR uniquement
+    // Limite les locale à en-US et fr-FR uniquement
     DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
 
 Le ``LocalSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir

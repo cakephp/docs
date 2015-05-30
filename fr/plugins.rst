@@ -495,13 +495,13 @@ Vous pouvez utiliser la :term:`syntaxe de plugin` pour lier les assets de plugin
 en utilisant les méthodes script, image ou css de
 :php:class:`~Cake\\View\\Helper\\HtmlHelper`::
 
-    // Génére une url de /contact_manager/css/styles.css
+    // Génère une url de /contact_manager/css/styles.css
     echo $this->Html->css('ContactManager.styles');
 
-    // Génére une url de /contact_manager/js/widget.js
+    // Génère une url de /contact_manager/js/widget.js
     echo $this->Html->script('ContactManager.widget');
 
-    // Génére une url de /contact_manager/img/logo.js
+    // Génère une url de /contact_manager/img/logo.js
     echo $this->Html->image('ContactManager.logo');
 
 Les assets de Plugin sont servis en utilisant le filtre du dispatcheur

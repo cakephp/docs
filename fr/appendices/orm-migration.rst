@@ -16,7 +16,7 @@ moment, il avait quelques problèmes que nous souhaitions régler.
 * Pas d'objet d'enregistrement - Ceci rend l'attachement de méthodes de format
   difficile/impossible.
 * Containable - Devrait être une partie de l'ORM, pas un behaviour compliqué.
-* Recursive - Ceci devrait être mieux controllé en définissant quelles
+* Recursive - Ceci devrait être mieux contrôlé en définissant quelles
   associations sont inclues, et pas un niveau de récursivité.
 * DboSource - C'est un calvaire, et le Model repose dessus plus que sur la
   source de données. Cette séparation pourrait être plus propre et plus simple.
@@ -38,7 +38,7 @@ Source de données pour toutes les opérations. Maintenant l'ORM est
 séparé en plus de couches:
 
 * ``Cake\Database\Connection`` - Fournit un moyen de créer et utiliser des
-  connections indépendement de la plateforme. Cette classe permet
+  connections indépendamment de la plateforme. Cette classe permet
   d'utiliser les transactions, d'exécuter les queries et d'accéder aux données
   du schema.
 * ``Cake\Database\Dialect`` - Les classes dans ce namespace fournissent le SQL
@@ -83,7 +83,7 @@ Table gèrent les tâches telles que:
 - Supprimer des entités.
 - Définir & accéder aux associations.
 - Déclencher les évènements de callback.
-- Intéragir avec les behaviors.
+- Interagir avec les behaviors.
 
 Le chapitre de la documentation sur :doc:`/orm/table-objects` fournit bien plus
 de détails sur la façon d'utiliser les objets de table que ce guide.
@@ -117,14 +117,14 @@ Les Objets Entity
 Dans les versions précédentes de CakePHP la classe ``Model`` retournait
 des tableaux idiots qui ne contenaient pas de logique ou de behavior. Alors
 que la communauté rendait cela accessible et moins douloureux avec les
-projets comme CakeEntity, le tableau de résulats était souvent une source
+projets comme CakeEntity, le tableau de résutlats était souvent une source
 de difficulté pour beaucoup de développeurs. Pour CakePHP 3.0, l'ORM
 retourne toujours l'ensemble des résultats en objet à moins que vous ne
 désactiviez explicitement cette fonctionnalité. Le chapitre sur
 :doc:`/orm/entities` couvre les différentes tâches que vous pouvez accomplir
 avec les entities.
 
-Les entities sont créées en choississant l'une des deux façons suivantes. Soit
+Les entities sont créées en choisissant l'une des deux façons suivantes. Soit
 en chargeant les données à partir de la base de données, soit en convertissant
 les données de requête en entities. Une fois créées, les entities vous
 permettent de manipuler les données qu'elles contiennent et font persister leurs
@@ -175,7 +175,7 @@ Find retourne un Objet Query
 ----------------------------
 
 Une différence importante dans le nouvel ORM est qu'appeler ``find`` sur une
-table ne va pas retourner les résultats immédiatemment, mais va retourner un
+table ne va pas retourner les résultats immédiatement, mais va retourner un
 objet Query; cela sert dans plusieurs cas.
 
 Il est possible de modifier les requêtes plus tard, après avoir appeler
@@ -294,7 +294,7 @@ Dans le 3ème cas ci-dessus, votre code ressemblerait à::
         return $query->mapReduce($mapper);
     }
 
-Vous pouvez peut-être noter que les finders personnalisés recoivent
+Vous pouvez peut-être noter que les finders personnalisés reçoivent
 un tableau d'options, vous pouvez passer toute information supplémentaire
 à votre finder en utilisant ce paramètre. C'est une bonne nouvelle pour la
 migration de gens à partir de 2.x. Chacune des clés de requêtées qui a été
@@ -357,7 +357,7 @@ Pas d'Event afterFind ou de Champs Virtuels
 Dans les versions précédentes de CakePHP, vous aviez besoin de rendre
 extensive l'utilisation du callback ``afterFind`` et des champs virtuels afin
 de créer des propriétés de données générées. Ces fonctionnalités ont été
-retirées dans 3.0. Du fait de la façon dont ResultSets générent itérativement
+retirées dans 3.0. Du fait de la façon dont ResultSets génèrent itérativement
 les entities, le callback ``afterFind`` n'était pas possible.
 afterFind et les champs virtuels peuvent tous deux largement être remplacés par
 les propriétés virtuelles sur les entities. Par exemple si votre entité User
@@ -410,7 +410,7 @@ models avaient, ont été définies dans les propriétés comme ``$belongsTo`` e
 L'utilisation de méthodes vous permet de mettre de côté plusieurs définitions
 de classes de limitations, et fournissent seulement une façon de définir les
 associations. Votre méthode ``initialize()`` et toutes les autres parties de
-votre code d'application, intéragit avec la même API lors de la
+votre code d'application, interagit avec la même API lors de la
 manipulation des associations::
 
     namespace App\Model\Table;
@@ -466,7 +466,7 @@ règles::
     class ReviewsTable extends Table
     {
 
-        public function validationDefault(Validatior $validator)
+        public function validationDefault(Validator $validator)
         {
             $validator->requirePresence('body')
                 ->add('body', 'length', [
@@ -494,7 +494,7 @@ qui était avant appelé validation est maintenant séparé en deux concepts:
 
 La validation est maintenant appliquée avant que les entities de l'ORM
 ne soient créées à partir des données de request. Cette étape permet de
-vous assurer que les données correpondent au type de données, au format et
+vous assurer que les données correspondent au type de données, au format et
 à la forme de base que votre application attend. Vous pouvez utiliser
 vos validateurs quand vous convertissez en entities les données de request en
 utilisant l'option ``validate``. Consultez la documentation
@@ -542,7 +542,7 @@ les coûts du identifier quoting l'emporte sur tout avantage qu'il fournisse.
 Puisque ce identifier quoting a été désactivé par défaut dans 3.0. Vous devriez
 seulement activer le identifier quoting si vous utilisez les noms de colonne ou
 les noms de table qui contiennent des caractères spéciaux ou sont des mots
-résérvés. Si nécessaire, vous pouvez activer identifier quoting lors de la
+réservés. Si nécessaire, vous pouvez activer identifier quoting lors de la
 configuration d'une connection::
 
     // Dans config/app.php
@@ -585,7 +585,7 @@ Nouvelle classe de Base
 
 La classe de base pour les behaviors a changé. Les Behaviors doivent maintenant
 étendre ``Cake\ORM\Behavior``; si un behavior n'étend pas cette classe, une
-exception sera lancée. En plus du changement de classe de base, le contructeur
+exception sera lancée. En plus du changement de classe de base, le constructeur
 pour les behaviors a été modifié, et la méthode ``startup()`` a été retirée.
 Les Behaviors qui ont besoin d'accéder à la table à laquelle ils sont attachés,
 doivent définir un constructeur::
@@ -610,7 +610,7 @@ doivent définir un constructeur::
 Changements de Signature des Méthodes Mixin
 -------------------------------------------
 
-Les Behaviors continuent d'offir la possibilité d'ajouter les méthodes
+Les Behaviors continuent d'offrir la possibilité d'ajouter les méthodes
 'mixin' à des objets Table, cependant la signature de méthode pour ces méthodes
 a changé. Dans CakePHP 3.0, les méthodes mixin du behavior peuvent attendre les
 **mêmes** arguments fournis à la table 'method'. Par exemple::

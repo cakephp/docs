@@ -63,7 +63,7 @@ trouver dans les paramètres de la requête:
   pas de plugins.
 * ``controller`` Le controller gérant la requête courante.
 * ``action`` L'action gérant la requête courante.
-* ``prefix`` Le prefixe pour l'action courante. Voir :ref:`prefix-routing` pour
+* ``prefix`` Le préfixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
 * ``bare`` Présent quand la requête vient de
   :php:meth:`~Cake\\Controller\\Controller::requestAction()` et inclut l'option
@@ -125,7 +125,7 @@ regardez la section :ref:`xml-datas` pour voir comment vous pouvez accéder
 aux corps de ces requêtes.
 
 Lorsque vous accédez aux données d'entrée, vous pouvez les décoder avec une
-fonction optionnelle. Cela peut être utile quand vous devez intéragir avec du
+fonction optionnelle. Cela peut être utile quand vous devez interagir avec du
 contenu de requête XML ou JSON. Les paramètres additionnels pour la fonction de
 décodage peuvent être passés comme arguments à ``input()``::
 
@@ -594,7 +594,7 @@ des réponses. En utilisant :php:meth:`Cake\\Network\\Response::cache()`::
     }
 
 Ce qui est au-dessus dira aux clients de mettre en cache la réponse résultante
-pendant 5 jours, en espérant accélerer l'expérience de vos visiteurs.
+pendant 5 jours, en espérant accélérer l'expérience de vos visiteurs.
 :php:meth:`CakeResponse::cache()` définit valeur ``Last-Modified`` en
 premier argument. L'entête ``Expires`` et ``max-age`` sont définis en se basant
 sur le second paramètre. Le Cache-Control est défini aussi à ``public``.
@@ -636,7 +636,7 @@ ressembler à ceci::
 La classe ``Response`` vous aide à configurer cet en-tête avec quelques
 méthodes utiles qui vont produire un en-tête final valide ``Cache Control``.
 La première est la méthode :php:meth:`Cake\\Network\\Response::sharable()`,
-qui indique si une réponse peut être considerée comme partageable pour
+qui indique si une réponse peut être considérée comme partageable pour
 différents utilisateurs ou clients. Cette méthode contrôle en fait la
 partie `public` ou `private` de cet en-tête. Définir une réponse en `private`
 indique que tout ou partie de celle-ci est prévue pour un unique
@@ -670,7 +670,7 @@ L'En-tête d'Expiration
 .. php:method:: expires($time = null)
 
 Vous pouvez définir l'en-tête ``Expires`` avec une date et un temps après
-lesquels la réponse n'est plus considerée comme récente. Cet en-tête peut être
+lesquels la réponse n'est plus considérée comme récente. Cet en-tête peut être
 défini en utilisant la méthode :php:meth:`Cake\\Network\\Response::expires()`::
 
     public function view()

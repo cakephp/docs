@@ -226,7 +226,7 @@ Si un utilisateur demande ``/articles/view/3``, alors la valeur '3' est
 transmise à la variable ``$id``.
 
 Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
-utilisateur accède bien à l'enregsitrement. Si un utilisateur requête
+utilisateur accède bien à l'enregistrement. Si un utilisateur requête
 ``/articles/view``, nous lancerons un ``NotFoundException`` et laisserons
 le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. En utilisant
 la fonction ``get()`` dans la table Articles, nous faisons aussi une
@@ -343,7 +343,7 @@ Valider les Données
 ===================
 
 Cake place la barre très haute pour briser la monotonie de la validation des
-champs de formulaires. Tout le monde déteste le dévelopement de formulaires
+champs de formulaires. Tout le monde déteste le développement de formulaires
 interminables et leurs routines de validations. Cake rend tout cela plus facile
 et plus rapide.
 
@@ -690,7 +690,7 @@ Prochaines lectures suggérées
 Voici les différents chapitres que les gens veulent souvent lire après:
 
 1. :ref:`view-layouts`: Personnaliser les Layouts de votre application.
-2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues.
+2. :ref:`view-elements`: Inclure et réutiliser les portions de vues.
 3. :doc:`/bake/usage` Générer un code CRUD basique.
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur l'enregistrement et la connexion d'utilisateurs.
 

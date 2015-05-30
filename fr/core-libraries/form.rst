@@ -111,7 +111,7 @@ Définir des Valeurs pour le Formulaire
 ======================================
 
 Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
-``$this->request->data`` comme dans tous fourmulaires créés par le FormHelper::
+``$this->request->data`` comme dans tous formulaires créés par le FormHelper::
 
     // Dans uncontroller
     namespace App\Controller;

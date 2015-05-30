@@ -139,13 +139,13 @@ pour :php:meth:`Cake\\Cache\\Cache::write()` et
 de cache, vous pouvez vous référer au nom de la classe en utilisant les
 syntaxes suivantes:
 
-* Un nom racourci sans 'Engine' ou namespace (espace de nom).  Il déduira que
+* Un nom raccourci sans 'Engine' ou namespace (espace de nom).  Il déduira que
   que vous voulez utiliser ``Cake\Cache\Engine`` ou ``App\Cache\Engine``.
 * Utiliser la :term:`syntaxe de plugin` qui permet de charger des moteurs
   depuis un plugin spécifique.
 * Utiliser un nom de classe complet incluant le namespace. Cela vous permet
   d'utiliser des classes situées en dehors des emplacements classiques.
-* tiliser un objet qui étend la classe ``CacheEngine``
+* Utiliser un objet qui étend la classe ``CacheEngine``
 
 .. note::
 
@@ -188,7 +188,7 @@ messages.
 
 .. note::
 
-    Si vous prevoyez de mettre en cache le résulat de requêtes faites avec
+    Si vous prévoyez de mettre en cache le résultat de requêtes faites avec
     l'ORM de CakePHP, il est préférable d'utiliser les fonctionnalités de cache
     intégrées dans l'objet Query, telles que décrites dans la section
     :ref:`mettre les résultats de requête en cache <caching-query-results>`

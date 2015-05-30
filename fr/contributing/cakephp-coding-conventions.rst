@@ -194,7 +194,7 @@ Exemple d'une définition de méthode::
     }
 
 Les paramètres avec une valeur par défaut, doivent être placés en dernier
-dans la défintion de la fonction. Essayez de faire en sorte que vos fonctions
+dans la définition de la fonction. Essayez de faire en sorte que vos fonctions
 retournent quelque chose, au moins ``true`` ou ``false``, ainsi cela peut
 déterminer si l'appel de la fonction est un succès::
 
@@ -218,8 +218,8 @@ Typehinting
 -----------
 
 Les arguments qui attendent des objets, des tableaux ou des callbacks
-(appelables) peuvent être typés. Nous ne typons que les méthodes publiques car
-le typage prend du temps::
+(fonctions de rappel) peuvent être typés. Nous ne typons que les méthodes
+publiques car le typage prend du temps::
 
     /**
      * Some method description.
@@ -357,7 +357,7 @@ resource
     Rappelez vous que quand vous spécifiez un type en mixed, vous devez
     indiquer s'il est inconnu, ou les types possibles.
 callable
-    Function appelable.
+    Fonction de rappel.
 
 Vous pouvez aussi combiner les types en utilisant le caractère pipe::
 
@@ -408,7 +408,7 @@ Echo court
 ----------
 
 L'echo court doit être utilisé dans les fichiers de vue à la place de
-``<?php echo``. Il doit être immédiatemment suivi par un espace unique, la
+``<?php echo``. Il doit être immédiatement suivi par un espace unique, la
 variable ou la valeur de la fonction pour faire un ``echo``, un espace unique,
 et la balise de fermeture de php::
 
@@ -548,4 +548,4 @@ caractère underscore, par exemple::
 
 .. meta::
     :title lang=fr: Normes de code
-    :keywords lang=fr: accolades,niveau d'indentation,erreurs logiques,structures de contrôle,structure de contôle,expr,normes de code,parenthèses,foreach,Lecture possible,moose,nouvelles fonctionnalités,dépôt,developpeurs
+    :keywords lang=fr: accolades,niveau d'indentation,erreurs logiques,structures de contrôle,structure de contrôle,expr,normes de code,parenthèses,foreach,Lecture possible,moose,nouvelles fonctionnalités,dépôt,developpeurs

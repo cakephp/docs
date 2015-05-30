@@ -74,7 +74,7 @@ Vérifier la Configuration Test
 
 Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
 la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lancant un de ceux présents dans le cœur::
+lancer vos propres tests en lançant un de ceux présents dans le cœur::
 
     // Pour phpunit.phar
     $ php phpunit.phar
@@ -90,7 +90,7 @@ de test pour la classe ArticlesTable, vous pourriez le lancer avec::
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
 Vous devriez voir une barre verte avec quelques informations supplémentaires sur
-les tests exécutés et le nombre qui a été passé.
+les tests exécutés et le nombre de tests réussis.
 
 .. note::
 
@@ -261,7 +261,7 @@ filtrer les méthodes de test::
 
     $ phpunit --filter testSave Test/TestCase/Model/Table/ArticlesTableTest
 
-Le paramètre filter est utilisé commme une expression régulière sensible à la
+Le paramètre filter est utilisé comme une expression régulière sensible à la
 casse pour filtrer les méthodes de test à lancer.
 
 Générer une couverture de code
@@ -343,7 +343,7 @@ d'utiliser les fixtures de la base de données.
 CakePHP effectue ce qui suit pendant le chemin d'une fixture basée sur un cas
 de test:
 
-#. Crée les tables pour chacun des fixtues necéssaires.
+#. Crée les tables pour chacun des fixtures nécessaires.
 #. Remplit les tables avec les données, si les données sont fournis dans la fixture.
 #. Lance les méthodes de test.
 #. Vide les tables de fixture.
@@ -478,7 +478,7 @@ spécifiez juste la valeur de cette clé à ``null``.
 Les données dynamiques et les fixtures
 --------------------------------------
 
-Depuis que les enregistrements pour une fixture sont déclarées en propriété
+Depuis que les enregistrements pour une fixture sont déclarés en propriété
 de classe, vous ne pouvez pas facilement utiliser les fonctions ou autres
 données dynamiques pour définir les fixtures. Pour résoudre ce problème,
 vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
@@ -590,7 +590,7 @@ Par exemple::
 Vous ne pouvez pas charger/créer tout type de schéma dans une fixture. Ceci est
 utile si vous avez déjà une configuration de base de données de test, avec
 toutes les tables vides créés. En définissant ni ``$fields`` ni ``$import``,
-une fixture va seulement inserer ces enregistrements et tronquer les
+une fixture va seulement insérer ces enregistrements et tronquer les
 enregistrements sur chaque méthode de test.
 
 Charger les fixtures dans vos cas de test
@@ -748,7 +748,7 @@ sur la façon de lancer les cas de test.
 Méthodes de Mocking des models
 ------------------------------
 
-Il y aura des fois où vous voudrez mock les méhodes sur les models quand vous
+Il y aura des fois où vous voudrez mock les méthodes sur les models quand vous
 les testez. Vous devrez utiliser ``getMockForModel`` pour créer les mocks de
 test des models. Cela évite des problèmes avec les reflected properties that
 normal mocks have::
@@ -778,7 +778,7 @@ Models et Components, CakePHP offre une classe spécialisée
 base pour les cas de test de votre controller vous permet de mettre plus
 facilement en place des tests d'intégration pour vos controllers.
 
-Si vous n'êtes pas familiés avec les tests d'intégrations, il s'agit d'une
+Si vous n'êtes pas familiers avec les tests d'intégrations, il s'agit d'une
 approche de test qui rend facile à tester plusieurs éléments en même temps. Les
 fonctionnalités de test d'intégration dans CakePHP simulent une requête HTTP à
 traiter par votre application. Par exemple, tester vos controllers impactera
@@ -1412,7 +1412,7 @@ Intégrer une application CakePHP avec Jenkins est assez simple. Ce
 qui suit suppose que vous avez déjà installé Jenkins sur un système \*nix,
 et que vous êtes capable de l'administrer. Vous savez aussi comment créer des
 jobs, et lancer des builds. Si vous n'êtes pas sur de tout cela,
-réferez vous à la `documentation de Jenkins <http://jenkins-ci.org/>`_.
+référez vous à la `documentation de Jenkins <http://jenkins-ci.org/>`_.
 
 Créer un job
 ------------
@@ -1489,7 +1489,7 @@ Lancer un build
 ---------------
 
 Vous devriez être capable de lancer un build maintenant. Vérifiez la sortie de
-la console et faites tous les changements necéssaires pour obtenir un build
+la console et faites tous les changements nécessaires pour obtenir un build
 précédent.
 
 .. meta::

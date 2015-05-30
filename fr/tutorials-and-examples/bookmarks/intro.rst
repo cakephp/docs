@@ -144,7 +144,7 @@ tables nécessaires::
 
 Vous avez peut-être remarqué que la table ``bookmarks_tags`` utilisait une
 clé primaire composite. CakePHP accepte les clés primaires composites presque
-partout, facilitant la construction des applications multi-tenanted.
+partout, facilitant la construction des applications à tenant multiples.
 
 La table et les noms de colonnes que nous avons utilisés n'étaient pas
 arbitraires. En utilisant les

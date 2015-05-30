@@ -41,7 +41,7 @@ utilisateurs enregistrés dans votre application.
 * ``DigestAuthenticate`` vous permet d'identifier les utilisateurs en
   utilisant l'authentification Digest HTTP.
 
-Par défaut Le component Auth (``AutComponent``) utilise ``FormAuthenticate``.
+Par défaut Le component Auth (``AuthComponent``) utilise ``FormAuthenticate``.
 
 Choisir un Type d'Authentification
 ----------------------------------
@@ -293,10 +293,10 @@ supporter des authentifications sans cookie ou sans état (stateless). Regardez
 les sections portant sur l'authentification digest et basic plus bas pour plus
 d'information.
 
-``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
+``AuthComponent`` lance maintenant deux évènements``Auth.afterIdentify`` et
 ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
 avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction de
-callback pour ces événements en retournant un tableau de mapping depuis la
+callback pour ces évènements en retournant un tableau de mapping depuis la
 méthode ``implementedEvents()`` de votre classe d'authentification::
 
     public function implementedEvents()
@@ -338,7 +338,7 @@ username et password. Pour chaque requête, ces valeurs sont utilisées pour
 ré-identifier l'utilisateur et s'assurer que c'est un utilisateur valide. Comme
 avec les méthodes d'authentification de l'objet ``authenticate()``, la méthode
 ``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
-succès et ``false`` en cas d'echec. ::
+succès et ``false`` en cas d'échec. ::
 
     public function getUser($request)
     {
@@ -398,7 +398,7 @@ l'authentification échoue::
     $this->Auth->config('authError', "Désolé, vous n'êtes pas autorisés à accéder à cette zone.");
 
 Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
-l'user se soit déja connecté. Vous pouvez supprimer ce message en configurant
+l'user se soit déjà connecté. Vous pouvez supprimer ce message en configurant
 sa valeur avec le booléen ``false``.
 
 Dans le beforeFilter() de votre controller ou dans les configurations du

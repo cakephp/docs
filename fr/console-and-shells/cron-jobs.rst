@@ -1,4 +1,4 @@
-Éxecuter des Shells en Tâches Cron (Cron Jobs)
+Exécuter des Shells en Tâches Cron (Cron Jobs)
 ##############################################
 
 Une action habituelle à faire avec un shell est de l'exécuter par une tâche

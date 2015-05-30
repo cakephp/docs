@@ -50,7 +50,7 @@ Un exemple serait::
 
 Ce qui est au-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
 ``error``. Chacun est configuré pour gérer différents niveaux de message. Ils
-stockent aussi leurs messages de journal dans des fichiers séparés, ains'il
+stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il
 est facile de séparer les logs de debug/notice/info des erreurs plus sérieuses.
 Regardez la section sur :ref:`logging-levels` pour plus d'informations sur les
 différents niveaux et ce qu'ils signifient.
@@ -61,7 +61,7 @@ place, vous devez retirer la configuration et la re-créer en utilisant
 :php:meth:`Cake\\Log\\Log::config()`.
 
 Il est aussi possible de créer des loggers en fournissant une closure. C'est
-utile quand vous devez avoir un contôle complet sur la façon dont l'objet est
+utile quand vous devez avoir un contrôle complet sur la façon dont l'objet est
 construit. La closure doit retourner l'instance de logger construite. Par
 exemple::
 
@@ -130,7 +130,7 @@ un tableau. ::
         }
     }
 
-CakePHP a besoin que tous les adaptateurs de logging intégrent
+CakePHP a besoin que tous les adaptateurs de logging intègrent
 ``Psr\Log\LoggerInterface``. La classe :php:class:`Cake\Log\Engine\BaseLog` est
 un moyen facile de satisfaire l'interface puisqu'elle nécessite seulement
 que vous intégriez la méthode ``log()``.
@@ -154,14 +154,14 @@ Le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 .. warning::
 
-    Les moteurs ont le suffix ``Log``. Vous devrez éviter les noms de classe
-    comme ``SomeLogLog`` qui inclut le suffix deux fois à la fin.
+    Les moteurs ont le suffixe ``Log``. Vous devrez éviter les noms de classe
+    comme ``SomeLogLog`` qui inclut le suffixe deux fois à la fin.
 
 .. note::
 
     Vous devrez configurer les loggers pendant le bootstrapping.
     **config/app.php** est l'endroit par convention pour configurer les
-    adaptaters de log.
+    adaptateurs de log.
 
     En mode debug, les répertoires manquants vont maintenant être
     automatiquement créés pour éviter le lancement des erreurs non nécessaires

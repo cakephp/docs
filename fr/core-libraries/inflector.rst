@@ -10,7 +10,7 @@ pour gérer les variations de mot comme les mises au pluriel ou les mises
 en Camel et est normalement accessible statiquement. Exemple:
 ``Inflector::pluralize('example')`` retourne "examples".
 
-Vous pouvez essayer les inflections enligne sur
+Vous pouvez essayer les inflections en ligne sur
 `inflector.cakephp.org <http://inflector.cakephp.org/>`_.
 
 Créer des Formes Pluriel et Singulier
@@ -98,7 +98,7 @@ Créer des Chaînes d'URL Safe
 .. php:staticmethod:: slug($word, $replacement = '-')
 
 Slug convertit les caractères spéciaux en version latins et convertit
-les caractères ne correspondant pas et les espaces en tirêts. La
+les caractères ne correspondant pas et les espaces en tirets. La
 méthode slug s'attend à un encodage UTF-8::
 
     // apple-puree

@@ -26,7 +26,7 @@ retournée::
 
     $article = $articles->newEntity($this->request->data);
     if ($article->errors()) {
-        // validation de l'entity a echoué.
+        // validation de l'entity a échouée.
     }
 
 Quand vous construisez une entity avec la validation activée, les choses

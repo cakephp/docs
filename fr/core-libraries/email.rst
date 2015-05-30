@@ -26,11 +26,11 @@ Après avoir chargé ``Email``, vous pouvez envoyer un email avec ce qui suit::
 Puisque les méthodes de setter d'``Email`` retournent l'instance de la classe,
 vous pouvez définir ses propriétés avec le chaînage des méthodes.
 
-Choisir l'Emetteur
+Choisir l'émetteur
 ------------------
 
 Quand on envoie des emails de la part d'autre personne, c'est souvent une
-bonne idée de définir l'emetteur original en utilisant le header Sender.
+bonne idée de définir l'émetteur original en utilisant le header Sender.
 Vous pouvez faire ceci en utilisant ``sender()``::
 
     $email = new Email();
@@ -38,7 +38,7 @@ Vous pouvez faire ceci en utilisant ``sender()``::
 
 .. note::
 
-    C'est aussi une bonne idée de définir l'envelope de l'emetteur quand on
+    C'est aussi une bonne idée de définir l'envelope de l'émetteur quand on
     envoie un mail de la part d'une autre personne. Cela les empêche d'obtenir
     tout message sur la délivrance.
 
@@ -52,7 +52,7 @@ La Configuration par défaut pour ``Email`` est créé en utilisant ``config()``
 le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
 d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
-et utilise les méthodes séparement pour définir toutes les configurations
+et utilise les méthodes séparément pour définir toutes les configurations
 ou charger un tableau de configs.
 
 En définissant des profiles et des transports, vous pouvez garder le code de
@@ -121,7 +121,7 @@ valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
         'tls' => true
     ]);
 
-La configuration ci-dessis va activer la communication TLS pour tous les
+La configuration ci-dessus va activer la communication TLS pour tous les
 messages d'email.
 
 .. note::
@@ -157,13 +157,13 @@ avoir autant de profiles que nécessaire. Les clés de configuration suivantes
 sont utilisées:
 
 - ``'from'``: Email ou un tableau d'emmeteur. Regardez ``Email::from()``.
-- ``'sender'``: Email ou un tableau d'emetteur réel. Regardez
+- ``'sender'``: Email ou un tableau d'émetteur réel. Regardez
   ``Email::sender()``.
 - ``'to'``: Email ou un tableau de destination. Regardez ``Email::to()``.
 - ``'cc'``: Email ou un tableau de copy carbon. Regardez ``Email::cc()``.
 - ``'bcc'``: Email ou un tableau de copy carbon blind. Regardez
   ``Email::bcc()``.
-- ``'replyTo'``: Email ou un tableau de repondre à cet e-mail. Regardez
+- ``'replyTo'``: Email ou un tableau de répondre à cet e-mail. Regardez
   ``Email::replyTo()``.
 - ``'readReceipt'``: Adresse Email ou un tableau d'adresses pour recevoir un
   récepissé de lecture. Regardez ``Email::readReceipt()``.
@@ -193,7 +193,7 @@ sont utilisées:
   ``Email::emailFormat()``.
 - ``'transport'``: Nom du Transport. Regardez
   :php:meth:`~Cake\\Network\\Email\\Email::configTransport()`.
-- ``'log'``: Niveau de Log pour connecter les headers del'email headers et le
+- ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
   message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``.
 - ``'helpers'``: Tableau de helpers utilisés dans le template email.
 
@@ -327,7 +327,7 @@ client:
 
    Ce qui est au-dessus va attacher le fichier avec différent mimetype et avec
    un content ID personnalisé (Quand vous définissez le content ID, la pièce
-   jointe est transformée en inline). Le mimetype et contentId sont optionels
+   jointe est transformée en inline). Le mimetype et contentId sont optionnels
    dans ce formulaire.
 
    4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans

@@ -121,7 +121,7 @@ d'Entity de la table de jointure::
 Délier les Enregistrements Many To Many
 ---------------------------------------
 
-Délier des enregistrements Many to Many (plusieurs à pluiseurs) est réalisable
+Délier des enregistrements Many to Many (plusieurs à plusieurs) est réalisable
 via la méthode ``unlink()``::
 
     $tags = $articlesTable
