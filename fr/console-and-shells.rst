@@ -77,7 +77,7 @@ Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
     [Migrations] migrations
 
-    [CORE] i18n, orm_cache, plugin, server
+    [CORE] i18n, orm_cache, plugin, routes, server
 
     [app] behavior_time, console, orm
 
