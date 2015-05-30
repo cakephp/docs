@@ -700,26 +700,28 @@ Travailler avec des Ensembles de Résultat
 =========================================
 
 Une fois qu'une requête est exécutée avec ``all()``, vous récupèrerez une
-instance de :php:class:`Cake\\ORM\\ResultSet`. Cet objet offre des manières
-puissantes de manipuler les données résultantes à partir de vos requêtes.
+instance de :php:class:`Cake\\ORM\\ResultSet`. Cet objet permet de manipuler les
+données résultantes de vos requêtes. Comme les objets Query, les ensembles de
+résultats sont une :doc:`Collection </core-libraries/collections>` et vous
+pouvez utiliser toute méthode de collection sur des objets ResultSet.
 
-Les objets d'ensemble de résultat vont charger lazily les lignes à partir
-de la requête préparée underlying.
-Par défaut, les résultats seront buffered dans la mémoire vous permettant
+Les objets ResultSet vont charger lazily les lignes à partir de la requête
+préparée sous-jacente.
+Par défaut, les résultats seront mis en mémoire vous permettant
 d'itérer un ensemble de résultats plusieurs fois, ou de mettre en cache et
 d'itérer les résultats. Si vous devez travailler sur un ensemble de données qui
-ne rentre pas dans la mémoire, vous pouvez désactiver le buffering sur la
-requête pour stream les résultats::
+ne rentre pas dans la mémoire, vous pouvez désactiver la mise en mémoire sur la
+requête pour faire un stream des résultats::
 
     $query->bufferResults(false);
 
-Stopper le buffering nécessite quelques mises en garde:
+Stopper la mise en mémoire tampon nécessite quelques mises en garde:
 
 #. Vous ne pourrez plus itérer un ensemble de résultats plus d'une fois.
 #. Vous ne pourrez plus aussi itérer et mettre en cache les résultats.
-#. Le buffering ne peut pas être désactivé pour les requêtes qui chargent en
-   eager les associations hasMany ou belongsToMany, puisque ces types
-   d'association nécessitent le chargement en eager de tous les résultats
+#. La mise en mémoire tampon ne peut pas être désactivé pour les requêtes qui
+   chargent en eager les associations hasMany ou belongsToMany, puisque ces
+   types d'association nécessitent le chargement en eager de tous les résultats
    pour que les requêtes dépendantes puissent être générées. Cette
    limitation n'est pas présente lorsque l'on utilise la stratégie ``subquery``
    pour ces associations.
@@ -771,6 +773,43 @@ une liste des tags uniques sur une collection d'articles assez facilement::
 Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
 ce qui peut être fait avec les ensembles de résultat en utilisant les
 fonctionnalités des collections.
+
+Récupérer le Premier & Dernier enregistrement à partir d'un ResultSet
+---------------------------------------------------------------------
+
+Vous pouvez utiliser les méthodes ``first()`` et ``last()`` pour récupérer
+les enregistrements respectifs à partir d'un ensemble de résultats::
+
+    $result = $articles->find('all')->all();
+
+    // Récupère le premier et/ou le dernier résultat.
+    $row = $result->first();
+    $row = $result->last();
+
+Récupérer un Index arbitraire à partir d'un ResultSet
+-----------------------------------------------------
+
+Vous pouvez utiliser ``skip()`` et ``first()`` pour récupérer un enregistrement
+arbitraire à partir d'un ensemble de résultats::
+
+    $result = $articles->find('all')->all();
+
+    // Récupère le 5ème enregistrement
+    $row = $result->skip(4)->first();
+
+Vérifier si une Requête Query ou un ResultSet est vide
+------------------------------------------------------
+
+Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
+pour voir si il contient au moins une colonne. Appeler ``isEmpty()`` sur un
+objet Query va évaluer la requête::
+
+    // VérifieCheck une requête.
+    $query->isEmpty();
+
+    // Vérifie les résultats.
+    $results = $query->all();
+    $results->isEmpty();
 
 .. _map-reduce:
 

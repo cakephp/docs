@@ -315,8 +315,14 @@ en les incluant dans le tableau d'authentification AuthComponents::
 
     $this->Auth->config('authenticate', [
         'Openid', // objet d'authentification de app
-        'AuthBag.Combo', // objet d'identification de plugin.
+        'AuthBag.Openid', // objet d'identification de plugin.
     ]);
+
+.. note::
+    Notez qu'en utilisant la notation simple, il n'y a pas le mot
+    'Authenticate' lors de l'instantiation de l'objet d'authentification. A la
+    place, si vous utilisez les namespaces, vous devrez définir le namespace
+    complet de la classe (y compris le mot 'Authenticate').
 
 Création de Systèmes d'Authentification Stateless
 -------------------------------------------------

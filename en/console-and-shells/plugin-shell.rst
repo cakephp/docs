@@ -57,7 +57,7 @@ Running the above command will symlink all plugins assets under app's webroot.
 On Windows, which doesn't support symlinks, the assets will be copied in
 respective folders instead of being symlinked.
 
-You can symlink assets of one particular plugin by specifying it's name::
+You can symlink assets of one particular plugin by specifying its name::
 
     bin/cake plugin assets symlink MyPlugin
 

@@ -488,6 +488,8 @@ Possible keys for belongsToMany association arrays include:
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it.
 - **sort** an array of find() compatible order clauses.
+- **dependent**: When the dependent key is set to ``false``, and an entity is
+  deleted, the data of the join table will not be deleted.
 - **through** Allows you to provide a either the name of the Table instance you
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the

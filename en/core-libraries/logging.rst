@@ -48,7 +48,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
 The above creates two loggers.  One named ``debug`` the other named ``error``.
 Each is configured to handle different levels of messages. They also store their
-log messages in separate files, so its easy to separate debug/notice/info logs
+log messages in separate files, so it's easy to separate debug/notice/info logs
 from more serious errors. See the section on :ref:`logging-levels` for more
 information on the different levels and what they mean.
 

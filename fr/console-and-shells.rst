@@ -73,7 +73,11 @@ Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
     Shells disponibles:
 
-    [CORE] bake, i18n, server, test
+    [Bake] bake
+
+    [Migrations] migrations
+
+    [CORE] i18n, orm_cache, plugin, server
 
     [app] behavior_time, console, orm
 

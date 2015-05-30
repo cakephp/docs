@@ -18,7 +18,7 @@ Glossary
             // Would generate
             class="my-class" target="_blank"
 
-        If an option can be minimized or accepts it's name as the value, then ``true``
+        If an option can be minimized or accepts its name as the value, then ``true``
         can be used::
 
             // Given
