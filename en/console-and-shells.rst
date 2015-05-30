@@ -67,7 +67,7 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-    [CORE] bake, i18n, server, test
+    [CORE] i18n, server, plugin, server
 
     [app] behavior_time, console, orm
 
