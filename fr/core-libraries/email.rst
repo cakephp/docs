@@ -228,8 +228,8 @@ Les templates pour les emails se placent dans un dossier spécial appelé
 des emails peuvent aussi utiliser les layouts et éléments tout comme les
 templates normales::
 
-    $Email = new Email();
-    $Email->template('welcome', 'fancy')
+    $email = new Email();
+    $email->template('welcome', 'fancy')
         ->emailFormat('html')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -239,8 +239,8 @@ Ce qui est au-dessus utilise **src/Template/Email/html/welcome.ctp** pour la
 vue, et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
-    $Email = new Email();
-    $Email->template('welcome', 'fancy')
+    $email = new Email();
+    $email->template('welcome', 'fancy')
         ->emailFormat('both')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -270,7 +270,7 @@ pouvez dans des fichiers de template normaux. Par défaut, seul
 :php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers
 supplémentaires en utilisant la méthode ``helpers()``::
 
-    $Email->helpers(['Html', 'Custom', 'Text']);
+    $email->helpers(['Html', 'Custom', 'Text']);
 
 Quand vous définissez les helpers, assurez vous d'inclure 'Html' ou il sera
 retiré des helpers chargés dans votre template d'email.
@@ -307,17 +307,17 @@ formats différents qui dépendent de quel type de fichier vous avez, et comment
 vous voulez que les noms de fichier apparaissent dans le mail de réception du
 client:
 
-1. Chaîne de caractères: ``$Email->attachments('/full/file/path/file.png')`` va
+1. Chaîne de caractères: ``$email->attachments('/full/file/path/file.png')`` va
    attacher ce fichier avec le nom file.png.
-2. Tableau: ``$Email->attachments(['/full/file/path/file.png'])`` aura le
+2. Tableau: ``$email->attachments(['/full/file/path/file.png'])`` aura le
    même comportement qu'en utilisant une chaîne de caractères.
 3. Tableau avec clé:
-   ``$Email->attachments(['photo.png' => '/full/some_hash.png'])`` va
+   ``$email->attachments(['photo.png' => '/full/some_hash.png'])`` va
    attacher some_hash.png avec le nom photo.png. Le récipiendaire va voir
    photo.png, pas some_hash.png.
 4. Tableaux imbriqués::
 
-    $Email->attachments([
+    $email->attachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
@@ -383,7 +383,7 @@ ressembler à cela::
 
     }
 
-Vous devez intégrer la méthode ``send(Email $Email)`` avec votre
+Vous devez intégrer la méthode ``send(Email $email)`` avec votre
 logique personnalisée. En option, vous pouvez intégrer la méthode
 ``config($config)``. ``config()`` est appelée avant send() et vous permet
 d'accepter les configurations de l'utilisateur. Par défaut, cette méthode
@@ -394,9 +394,9 @@ avant l'envoi, vous pouvez utiliser
 :php:meth:`Cake\\Network\\Email\\Email::transportClass()` pour obtenir une
 instance du transport. Exemple::
 
-    $yourInstance = $Email->transport('your')->transportClass();
+    $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
-    $Email->send();
+    $email->send();
 
 Faciliter les Règles de Validation des Adresses
 -----------------------------------------------
@@ -458,7 +458,7 @@ vous devez définir manuellement le nom de domaine que Email doit utiliser.
 Il sera utilisé comme nom d'hôte pour l'id du message (puisque il n'y a pas
 de nom d'hôte dans un environnement CLI)::
 
-    $Email->domain('www.example.org');
+    $email->domain('www.example.org');
     // Resulte en ids de message comme ``<UUID@www.example.org>`` (valid)
     // au lieu de `<UUID@>`` (invalid)
 
