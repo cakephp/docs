@@ -44,7 +44,7 @@ Generating UUIDs
 .. php:staticmethod:: uuid()
 
 The UUID method is used to generate unique identifiers as per :rfc:`4122`. The
-UUID is a 128bit string in the format of 485fc381-e790-47a3-9794-1337c0a8fe68. ::
+UUID is a 128-bit string in the format of ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -57,7 +57,7 @@ Simple String Parsing
 Tokenizes a string using ``$separator``, ignoring any instance of
 ``$separator`` that appears between ``$leftBound`` and ``$rightBound``.
 
-This method can be useful when splitting up data in that has regular
+This method can be useful when splitting up data that has regular
 formatting such as tag lists::
 
     $data = "cakephp 'great framework' php";
@@ -67,7 +67,7 @@ formatting such as tag lists::
 
 .. php:method:: parseFileSize(string $size, $default)
 
-This method unformats a number from a human readable byte size
+This method unformats a number from a human-readable byte size
 to an integer number of bytes::
 
     $int = Text::parseFileSize('2GB');
@@ -88,8 +88,8 @@ for key/value replacements::
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
 
-Cleans up a ``Text::insert`` formatted string with given $options
-depending on the 'clean' key in $options. The default method used
+Cleans up a ``Text::insert`` formatted string with given ``$options``
+depending on the 'clean' key in ``$options``. The default method used
 is text but html is also available. The goal of this function is to
 replace all whitespace and unneeded markup around placeholders that
 did not get replaced by ``Text::insert``.
@@ -109,7 +109,7 @@ Wrapping Text
 
 .. php:staticmethod:: wrap($text, $options = [])
 
-Wraps a block of text to a set width, and indent blocks as well.
+Wraps a block of text to a set width and indents blocks as well.
 Can intelligently wrap text so words are not sliced across lines::
 
     $text = 'This is the song that never ends.';
@@ -139,9 +139,9 @@ specified or a default string.
 
 Options:
 
--  'format' - string The piece of HTML with that the phrase will be
+-  ``format`` string - The piece of HTML with the phrase that will be
    highlighted
--  'html' - bool If ``true``, will ignore any HTML tags, ensuring that
+-  ``html`` bool - If ``true``, will ignore any HTML tags, ensuring that
    only the correct text is highlighted
 
 Example::
