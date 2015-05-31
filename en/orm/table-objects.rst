@@ -242,7 +242,7 @@ The event is not triggered if a transaction is started before calling delete.
 Behaviors
 =========
 
-.. php:method:: addBehavior($name, $config = [])
+.. php:method:: addBehavior($name, array $options = [])
 
 .. start-behaviors
 
@@ -331,7 +331,7 @@ few other useful features as well.
 Configuring Table Objects
 -------------------------
 
-.. php:staticmethod:: get($alias, array $options = [])
+.. php:staticmethod:: get($alias, $config)
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
