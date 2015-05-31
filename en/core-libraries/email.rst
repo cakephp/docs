@@ -249,7 +249,7 @@ You can use helpers in emails as well, much like you can in normal template file
 By default only the ``HtmlHelper`` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 
-    $Email->helpers(['Html', 'Custom', 'Text']);
+    $email->helpers(['Html', 'Custom', 'Text']);
 
 When setting helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
@@ -284,17 +284,17 @@ You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
-1. String: ``$Email->attachments('/full/file/path/file.png')`` will attach this
+1. String: ``$email->attachments('/full/file/path/file.png')`` will attach this
    file with the name file.png.
-2. Array: ``$Email->attachments(['/full/file/path/file.png'])`` will have
+2. Array: ``$email->attachments(['/full/file/path/file.png'])`` will have
    the same behavior as using a string.
 3. Array with key:
-   ``$Email->attachments(['photo.png' => '/full/some_hash.png'])`` will
+   ``$email->attachments(['photo.png' => '/full/some_hash.png'])`` will
    attach some_hash.png with the name photo.png. The recipient will see
    photo.png, not some_hash.png.
 4. Nested arrays::
 
-    $Email->attachments([
+    $email->attachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
