@@ -107,7 +107,7 @@ For translation of strings of LC_TIME category CakePHP uses POSIX compliant LC_T
 files. The i18n functions of :php:class:`CakeTime` utility class and helper :php:class:`TimeHelper`
 use these LC_TIME files.
 
-Just place LC_TIME file in it's respective locale directory::
+Just place LC_TIME file in its respective locale directory::
 
     /app/Locale/fra/LC_TIME (French)
     /app/Locale/por/LC_TIME (Portuguese)
