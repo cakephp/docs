@@ -331,7 +331,7 @@ few other useful features as well.
 Configuring Table Objects
 -------------------------
 
-.. php:staticmethod:: get($alias, $config)
+.. php:staticmethod:: get($alias, array $options = [])
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
