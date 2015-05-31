@@ -31,7 +31,7 @@ use the ``Time`` class::
 
 
 Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
-to power its Time utility. Anything you can do with ``Carbon`` and
+to power its ``Time`` utility. Anything you can do with ``Carbon`` and
 ``DateTime``, you can do with ``Time``.
 
 For details on Carbon please see `their documentation <http://carbon.nesbot.com/docs/>`_.
@@ -63,11 +63,11 @@ There are a few ways to create ``Time`` instances::
 
     $time = new Time('2 hours ago');
 
-The ``Time`` class constructor can take any paramenter the internal ``DateTime``
+The ``Time`` class constructor can take any parameter that the internal ``DateTime``
 PHP class can. When passing a number or numeric string, it will be interpreted
 as a UNIX timestamp.
 
-In test cases, you can easily mock out ``now()`` using ``setTestNow()``::
+In test cases you can easily mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
     $now = new Time('2014-04-12 12:22:30');
@@ -155,7 +155,7 @@ want to display them in a user's own timezone::
 
     $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 
-Leaving the first parameter as null will use the default formatting string::
+Leaving the first parameter as ``null`` will use the default formatting string::
 
     $now->i18nFormat(null, 'Europe/Paris');
 
@@ -169,13 +169,13 @@ Setting the Default Locale and Format String
 --------------------------------------------
 
 The default locale in which dates are displayed when using ``nice``
-``18nFormat`` is taken from the directive
+``i18nFormat`` is taken from the directive
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 You can, however, modify this default at runtime::
 
     Time::$defaultLocale = 'es-ES';
 
-From now on, dates will be displayed in the Spanish preferred format, unless
+From now on, dates will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
 
 Likewise, it is possible to alter the default formatting string to be used for
