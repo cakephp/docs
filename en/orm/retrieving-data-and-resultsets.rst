@@ -10,6 +10,18 @@ objects, when you query for individual records you get 'entity' objects. While
 this section discusses the different ways you can find and load entities, you
 should read the :doc:`/orm/entities` section for more information on entities.
 
+Debugging Queries and ResultSets
+================================
+
+Since the ORM now returns Collections and Entities, debugging these objects can be more complicated than in previous CakePHP versions. There are now various ways to inspect the data returned by the ORM.
+
+- ``debug($query)`` Shows the SQL and bound params, does not show results.
+- ``debug($query->all())`` Shows the ResultSet properties (not the results).
+- ``debug($query->toArray())`` An easy way to show each of the results.
+- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
+- ``debug($query->first())`` Show the properties of a single entity.
+- ``debug((string)$query->first())`` Show the properties of a single entity as JSON.
+
 Getting a Single Entity by Primary Key
 ======================================
 
