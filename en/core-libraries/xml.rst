@@ -14,7 +14,7 @@ Importing Data to Xml Class
 
 .. php:staticmethod:: build($input, array $options = [])
 
-You can load XML-ish data do it using ``Xml::build()``. Depending on your
+You can load XML-ish data using ``Xml::build()``. Depending on your
 ``$options`` parameter, this method will return a SimpleXMLElement (default)
 or DOMDocument object. You can use ``Xml::build()`` to build XML
 objects from a variety of sources.  For example, you can load XML from
@@ -44,11 +44,11 @@ You can also build Xml objects using an array::
     ];
     $xml = Xml::build($data);
 
-If your input is invalid the Xml class will throw an Exception::
+If your input is invalid, the Xml class will throw an exception::
 
     $xmlString = 'What is XML?'
     try {
-        $xmlObject = Xml::build($xmlString); // Here will throw a Exception
+        $xmlObject = Xml::build($xmlString); // Here will throw an exception
     } catch (\Cake\Utility\Exception\XmlException $e) {
         throw new InternalErrorException();
     }
@@ -84,7 +84,7 @@ Transforming an Array into a String of XML
     $xmlString = $xmlObject->asXML();
 
 Your array must have only one element in the "top level" and it can not be
-numeric. If the array is not in this format, Xml will throw a Exception.
+numeric. If the array is not in this format, Xml will throw an exception.
 Examples of invalid arrays::
 
     // Top level with numeric key
@@ -99,8 +99,8 @@ Examples of invalid arrays::
     ];
 
 
-By default array values will be output as XML tags, if you want to define
-attributes or text values you can should prefix the keys that are supposed to be
+By default array values will be output as XML tags. If you want to define
+attributes or text values you can prefix the keys that are supposed to be
 attributes with ``@``. For value text, use ``@`` as the key::
 
     $xmlArray = [
@@ -122,8 +122,8 @@ The content of ``$xmlString`` will be::
 Using Namespaces
 ----------------
 
-To use XML Namespaces, in your array you must create a key with name ``xmlns:``
-to generic namespace or input the prefix ``xmlns:`` in a custom namespace. See
+To use XML Namespaces, create a key in your array with the name ``xmlns:``
+in a generic namespace or input the prefix ``xmlns:`` in a custom namespace. See
 the samples::
 
     $xmlArray = [
@@ -175,7 +175,7 @@ your document type to add, remove, or manipulate child nodes::
 
 .. tip::
 
-    After manipulate your XML using SimpleXMLElement or DomDocument you can use
+    After manipulating your XML using SimpleXMLElement or DomDocument you can use
     ``Xml::toArray()`` without a problem.
 
 .. meta::
