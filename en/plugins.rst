@@ -419,7 +419,7 @@ action, so let's include that as well::
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
-Plugins can provide their own layouts. To add plugin layouts, place your template files inside inside
+Plugins can provide their own layouts. To add plugin layouts, place your template files inside 
 ``plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
