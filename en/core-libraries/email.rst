@@ -363,9 +363,9 @@ If you need to call additional methods on the transport before send, you can use
 :php:meth:`Cake\\Network\\Email\\Email::transportClass()` to get an instance of the transport.
 Example::
 
-    $yourInstance = $Email->transport('your')->transportClass();
+    $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
-    $Email->send();
+    $email->send();
 
 Relaxing Address Validation Rules
 ---------------------------------
@@ -423,7 +423,7 @@ When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment)::
 
-    $Email->domain('www.example.org');
+    $email->domain('www.example.org');
     // Results in message ids like ``<UUID@www.example.org>`` (valid)
     // Instead of `<UUID@>`` (invalid)
 
