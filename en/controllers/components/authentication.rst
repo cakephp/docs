@@ -109,6 +109,7 @@ keys.
   authenticating users, i.e. ``['Users.is_active' => true]``.
 - ``contain`` Extra models to contain and return with identified user's info.
 - ``passwordHasher`` Password hasher class. Defaults to ``Default``.
+- ``storage`` Storage class. Defaults to ``Session``.
 
 To configure different fields for user in your ``initialize()`` method::
 
@@ -227,14 +228,17 @@ Using Digest and Basic Authentication for Logging In
 
 Basic and digest are stateless authentication schemes and don't require an
 initial POST or a form. If using only basic / digest authenticators you don't
-require a login action in your controller. Also you can set
-``$this->Auth->sessionKey`` to ``false`` to ensure AuthComponent doesn't try to
-read user info from session. You may also want to set config
-``unauthorizedRedirect`` to ``false`` which will cause AuthComponent to throw
-a ``ForbiddenException`` instead of default behavior of redirecting to referrer.
-Stateless authentication will re-verify the user's credentials on each request,
-this creates a small amount of additional overhead, but allows clients to
-login in without using cookies and makes is suitable for APIs.
+require a login action in your controller. Stateless authentication will
+re-verify the user's credentials on each request, this creates a small amount of
+additional overhead, but allows clients to login in without using cookies and
+makes is suitable for APIs.
+
+For stateless authenticators the ``storage`` config should be set to ``Memory``
+so that AuthComponent does not use session to storage user record. You may also
+want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
+throws a ``ForbiddenException`` instead of default behavior of redirecting to
+referrer.
+
 
 Creating Custom Authentication Objects
 --------------------------------------
