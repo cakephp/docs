@@ -12,7 +12,7 @@ DOMDocument objects, and back into arrays again.
 Importing Data to Xml Class
 ===========================
 
-.. php:staticmethod:: build($input, $options = [])
+.. php:staticmethod:: build($input, array $options = [])
 
 You can load XML-ish data do it using ``Xml::build()``. Depending on your
 ``$options`` parameter, this method will return a SimpleXMLElement (default)
@@ -63,7 +63,7 @@ If your input is invalid the Xml class will throw an Exception::
 Transforming a XML String in Array
 ==================================
 
-.. php:staticmethod:: toArray($xml);
+.. php:staticmethod:: toArray($obj);
 
 Converting XML strings into arrays is simple with the Xml class as well. By
 default you'll get a SimpleXml object back::
