@@ -5,12 +5,12 @@ CakePHP 3.0 features a new ORM that has been re-written from the ground up.
 While the ORM used in 1.x and 2.x has served us well for a long time it had
 a few issues that we wanted to fix.
 
-* Frankenstein - is it a record, or a table? Currently it's both.
+* Frankenstein - Is it a record, or a table? Currently it's both.
 * Inconsistent API - Model::read() for example.
 * No query object - Queries are always defined as arrays, this has some
   limitations and restrictions. For example it makes doing unions and
   sub-queries much harder.
-* Returns arrays.  This is a common complaint about CakePHP, and has probably
+* Returns arrays - This is a common complaint about CakePHP, and has probably
   reduced adoption at some levels.
 * No record object - This makes attaching formatting methods
   difficult/impossible.
@@ -71,7 +71,7 @@ Table objects are the gateway into your data. They handle many of the tasks that
 - Providing finders.
 - Validating and saving entities.
 - Deleting entities.
-- Defining & accessing associations.
+- Defining and accessing associations.
 - Triggering callback events.
 - Interacting with behaviors.
 
@@ -116,7 +116,7 @@ with table objects.
 Key Differences
 ===============
 
-The new ORM is a large departure from the existing ``Model`` layer, there are
+The new ORM is a large departure from the existing ``Model`` layer. There are
 many important differences that are important in understanding how the new ORM
 operates and how to update your code.
 
@@ -178,7 +178,7 @@ ever::
     $query->where(['id' => $favoritesQuery->select(['id'])]);
 
 You can decorate queries with iterators and call methods without even touching
-the database, this is great when you have parts of your view cached and having
+the database. This is great when you have parts of your view cached and having
 the results taken from the database is not actually required::
 
     // No queries made in this example!
@@ -268,7 +268,7 @@ In the 3rd case above your code would look like::
         return $query->mapReduce($mapper);
     }
 
-You may have noticed that custom finders receive an options array, you can pass
+You may have noticed that custom finders receive an options array. You can pass
 any extra information to your finder using this parameter. This is great
 news for people migrating from 2.x. Any of the query keys that were used in
 previous versions will be converted automatically for you in 3.x to the correct
@@ -286,8 +286,8 @@ functions::
         'limit' => 10,
     ]);
 
-Hopefully, migrating from older versions is not as daunting as it first seems,
-much of the features we have added helps you remove code as you can better
+Hopefully, migrating from older versions is not as daunting as it first seems.
+Many of the features we have added will help you remove code as you can better
 express your requirements using the new ORM and at the same time the
 compatibility wrappers will help you rewrite those tiny differences in a fast
 and painless way.
