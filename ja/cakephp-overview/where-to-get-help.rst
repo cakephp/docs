@@ -33,18 +33,20 @@ CakePHPに関する理解が深まったらログインして知識をコミュ�
 API
 ===
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
-直接的な答えがコア開発者から直接得られるので、CakePHP API (*Application Programming Interface*)は、フレームワークの内部動作に関する詳細に関する、もっとも総合的なドキュメントです。
-しかしこの文書は、直接的なコードリファレンスであり、経験の浅い PHP プログラマにとっては魑魅魍魎がはびこる魔窟となり得ます。
-あらかじめ最寄りの陰陽師のもとで修行しておきましょう :)
+直接的な答えがコア開発者から直接得られるので、
+CakePHP API (*Application Programming Interface*) は、
+フレームワークの内部動作に関する詳細に関する、もっとも総合的なドキュメントです。
+この文書は、直接的なコードリファレンスですので、技術的に十分な理解を持っている
+ことを前提としています。
 
 
 テストケース
 ============
 
 API で提供される情報が十分ではないと感じる場合、CakePHPで提供されるテストケースのコードをチェックしてください。
-関数の実践的な例やクラスのメンバーの使用法として使用できます。::
+関数の実践的な例やクラスのメンバーの使用法として使用できます。 ::
 
     lib/Cake/Test/Case
 
@@ -59,34 +61,25 @@ IRC チャンネル
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
 
 途方にくれたら、CakePHP の IRC チャンネルで叫んでみましょう。（注：ただし英語）
-北アメリカと南アメリカの昼間の時間帯であれば、たいていは開発チームのだれかがそこにいます。
-助けが必要な場合でも、同じ地域での知り合いが必要でも、最新のスポーツカーを寄付したいという場合でも、喜んで聞いてくれるはずです。
+北アメリカと南アメリカの昼間の時間帯であれば、たいていは `開発チーム
+<https://github.com/cakephp?tab=members>`_ のだれかがそこにいます。
+助けが必要な場合でも、同じ地域での知り合いが必要でも、最新のスポーツカーを
+寄付したいという場合でも、喜んで聞いてくれるはずです。
 
 .. _cakephp-official-communities:
 
-CakePHP 公式コミュニティ
-========================
+公式 CakePHP ディスカッショングループ
+=====================================
 
-CakePHP は Facebook や Google Plus などのよく知られたソーシャルネットワーク上にも
-公式グループがあります。
+`CakePHP Google グループ <http://groups.google.com/group/cake-php>`_
 
+CakePHP には Google グループ上に公式ディスカッショングループがあります。
 そこでは、たくさんの人々が CakePHP プロジェクトのディスカッションをしたり、
 お互いに助けあったり、問題解決をしたり、プロジェクトを作ったり、
 アイデアの交換を行ったりしています。
-
 また、以前に行なわれた回答や、よくある質問と答え、差し迫った問題に対する回答などが
-存在している素晴らしい場所となっています。
-
-CakePHP ユーザーであれば、以下のコミュニティに参加しましょう。
-
--   `CakePHP Google Group <http://groups.google.com/group/cake-php>`_
--   `CakePHP Facebook Group <https://www.facebook.com/groups/cake.community>`_
--   `CakePHP Google Plus Community <https://plus.google.com/communities/108328920558088369819>`_
-
-（訳注: 日本語が主体のコミュニティとしては下記もあります）
-
--   `cakephp.jp <http://cakephp.jp>`_
--   `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
+存在している素晴らしい場所となっています。他の CakePHP ユーザーと一緒に、
+ディスカッションを始めましょう。
 
 
 Stackoverflow
@@ -97,10 +90,22 @@ Stackoverflow
 Stack Overflow の既存ユーザーが質問を見つけやすくするために、質問の際には
 ``cakephp`` タグと利用中のバージョンを明記して下さい。
 
-Where to get Help in your Language
-==================================
+あなたの言語で情報を得るには
+============================
 
-French
-------
+フランス語
+----------
 
 - `French CakePHP Community <http://cakephp-fr.org>`_
+
+日本語
+------
+
+- `cakephp.jp <http://cakephp.jp>`_
+- `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
+
+
+.. meta::
+    :title lang=ja: Where to Get Help
+    :description lang=ja: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
+    :keywords lang=ja: cakephp,cakephp help,help with cakephp,where to get help,cakephp irc,cakephp questions,cakephp api,cakephp test cases,open source projects,channel irc,code reference,irc channel,developer tools,test case,bakery
