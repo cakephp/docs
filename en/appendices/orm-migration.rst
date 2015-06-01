@@ -256,16 +256,17 @@ migrate this code in one of a few ways:
 
 1. Override your entity constructor method and do additional formatting there.
 2. Create accessor methods in your entity to create the virtual properties.
-3. Redefine ``findAll()`` and attach a map/reduce function.
+3. Redefine ``findAll()`` and use ``formatResults``.
 
 In the 3rd case above your code would look like::
 
     public function findAll(Query $query, array $options)
     {
-        $mapper = function ($row, $key, $mr) {
-            // Your afterFind logic
-        };
-        return $query->mapReduce($mapper);
+        return $query->formatResults(function ($results) {
+            return $results->map(function ($row) {
+                // Your afterfind logic
+            });
+        })
     }
 
 You may have noticed that custom finders receive an options array. You can pass
@@ -285,6 +286,13 @@ functions::
         'order' => ['title' => 'DESC'],
         'limit' => 10,
     ]);
+
+If your application uses 'magic' or :ref:`dynamic-finders`, you will have to
+adapt those calls. In 3.x the ``findAllBy*`` methods have been removed, instead
+``findBy*`` always returns a query object. To get the first result, you need to
+use the ``first()`` method::
+
+    $article = $this->Articles->findByTitle('A great post!')->first();
 
 Hopefully, migrating from older versions is not as daunting as it first seems.
 Many of the features we have added will help you remove code as you can better
