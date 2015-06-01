@@ -28,12 +28,13 @@ tasks. You should see something like::
 
     Available bake commands:
 
-     - all
+    - all
     - behavior
     - cell
     - component
     - controller
     - fixture
+    - form
     - helper
     - model
     - plugin
