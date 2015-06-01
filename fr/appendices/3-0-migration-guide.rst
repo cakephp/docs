@@ -571,7 +571,8 @@ Controller
   liées.
 - ``Controller::loadModel()`` charge maintenant les objets table.
 - La propriété ``Controller::$scaffold`` a été retirée. Le scaffolding dynamique
-  a été retiré du cœur de CakePHP, et sera fourni en tant que plugin autonome.
+  a été retiré du cœur de CakePHP. Un plugin de scaffolding appelé CRUD se
+  trouve ici: https://github.com/FriendsOfCake/crud
 - La propriété ``Controller::$ext`` a été retirée. Vous devez maintenant étendre
   et surcharger la propriété ``View::$_ext`` si vous voulez utiliser une
   extension de fichier de view autre que celle par défaut.
@@ -596,8 +597,8 @@ Scaffold retiré
 
 Le scaffolding dynamique dans CakePHP a été retiré du cœur de CakePHP. Il
 était peu fréquemment utilisé, et n'avait jamais pour intention d'être
-utilisé en mode production. Il sera remplacé par un plugin autonome que les
-gens désireux d'avoir cette fonctionnalité pourront utiliser.
+utilisé en mode production. Un plugin de scaffolding appelé CRUD se trouve ici:
+https://github.com/FriendsOfCake/crud
 
 ComponentCollection remplacée
 -----------------------------
@@ -925,7 +926,7 @@ XmlView
 - :php:class:`Cake\\View\\XmlView` supporte maintenant la variable de view
   ``_xmlOptions``. Ceci vous permet de configurer les options utilisées lors de
   la génération de XML.
-  
+
 View\\Helper
 ============
 

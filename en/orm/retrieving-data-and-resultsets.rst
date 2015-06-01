@@ -13,7 +13,9 @@ should read the :doc:`/orm/entities` section for more information on entities.
 Debugging Queries and ResultSets
 ================================
 
-Since the ORM now returns Collections and Entities, debugging these objects can be more complicated than in previous CakePHP versions. There are now various ways to inspect the data returned by the ORM.
+Since the ORM now returns Collections and Entities, debugging these objects can
+be more complicated than in previous CakePHP versions. There are now various
+ways to inspect the data returned by the ORM.
 
 - ``debug($query)`` Shows the SQL and bound params, does not show results.
 - ``debug($query->all())`` Shows the ResultSet properties (not the results).

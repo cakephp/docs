@@ -542,7 +542,9 @@ Scaffold Removed
 ----------------
 
 The dynamic scaffolding in CakePHP has been removed from CakePHP core. It was
-infrequently used, and never intended for production use. An improved scaffolding plugin, named CRUD, can be found here: https://github.com/FriendsOfCake/crud
+infrequently used, and never intended for production use. An improved
+scaffolding plugin, named CRUD, can be found here:
+https://github.com/FriendsOfCake/crud
 
 ComponentCollection Replaced
 ----------------------------

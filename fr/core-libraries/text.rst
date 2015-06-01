@@ -45,8 +45,8 @@ Générer des UUIDs
 .. php:staticmethod:: uuid()
 
     La méthode UUID est utilisée pour générer des identificateurs uniques comme
-    per :rfc:`4122`. UUID est une chaîne de caractères de 128bit au format
-    485fc381-e790-47a3-9794-1337c0a8fe68. ::
+    per :rfc:`4122`. UUID est une chaîne de caractères de 128-bit au format
+    ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
         Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -87,8 +87,8 @@ permettre les remplacements de clé/valeur::
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
 
-Nettoie une chaîne formatée ``Text::insert`` avec $options donnée
-qui dépend de la clé 'clean' dans $options. La méthode par défaut utilisée
+Nettoie une chaîne formatée ``Text::insert`` avec ``$options`` donnée
+qui dépend de la clé 'clean' dans ``$options``. La méthode par défaut utilisée
 est le texte mais html est aussi disponible. Le but de cette fonction est
 de remplacer tous les espaces blancs et les balises non nécessaires autour
 des placeholders qui ne sont pas remplacés par Set::insert.
@@ -142,9 +142,9 @@ spécifique ``$options['format']`` ou une chaîne par défaut.
 
 Options:
 
--  'format' - chaîne la partie de html avec laquelle la phrase sera mise
+-  ``format`` - chaîne la partie de html avec laquelle la phrase sera mise
    en exergue.
--  'html' - booléen Si ``true``, va ignorer tous les tags HTML, s'assurant que
+-  ``html`` - booléen Si ``true``, va ignorer tous les tags HTML, s'assurant que
    seul le bon texte est mise en avant.
 
 Exemple::
