@@ -453,6 +453,18 @@ are a few more tree-orientated permutations at your disposal.
           [5] =>  "_Extreme fishing"
       )
 
+    .. php:method:: formatTreeList($results, $options=array())
+
+    .. versionadded:: 2.7
+
+    :param $results: Results of a find('all') call.
+    :param $options: Options to pass into, see generateTreeList() for details.
+
+    This method will return data similar to
+    :ref:`model-find-list` but with a nested prefix that is specified
+    in the ``spacer`` option to show the structure of your data.
+    See generateTreeList() for an example output.
+
     .. php:method:: getParentNode()
 
     This convenience function will, as the name suggests, return the
