@@ -189,7 +189,7 @@ a result count of that query::
 
     // In a controller or table method.
     $query = $articles->find('all', [
-        'where' => ['Articles.title LIKE' => '%Ovens%']
+        'conditions' => ['Articles.title LIKE' => '%Ovens%']
     ]);
     $number = $query->count();
 
