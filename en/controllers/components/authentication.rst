@@ -230,8 +230,8 @@ Basic and digest are stateless authentication schemes and don't require an
 initial POST or a form. If using only basic / digest authenticators you don't
 require a login action in your controller. Stateless authentication will
 re-verify the user's credentials on each request, this creates a small amount of
-additional overhead, but allows clients to login in without using cookies and
-makes is suitable for APIs.
+additional overhead, but allows clients to login without using cookies and
+makes AuthComponent more suitable for building APIs.
 
 For stateless authenticators the ``storage`` config should be set to ``Memory``
 so that AuthComponent does not use session to storage user record. You may also
