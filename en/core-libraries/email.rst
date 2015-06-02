@@ -457,7 +457,7 @@ following::
 
         public function resetPassword($user)
         {
-            $this->subject = sprintf('Reset password');
+            $this->subject = 'Reset password';
             $this->to = $user->email;
             $this->set(['token' => $user->token]);
         }
