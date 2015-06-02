@@ -429,6 +429,59 @@ message id (since there is no host name in a CLI environment)::
 
 A valid message id can help to prevent emails ending up in spam folders.
 
+
+Creating Reusable Emails
+========================
+
+Mailers allow you to create reusable emails throughout your application. They
+can also be used to contain multiple email configurations in one location. This
+helps keep your code DRYer and keeps email configuration noise out of other
+areas in your application.
+
+In this example we will be creating a ``Mailer`` that contains user-related
+emails. To create our ``UserMailer``, create the file
+**src/Mailer/UserMailer.php**. The contents of the file should look like the
+following::
+
+    namespace App\Mailer;
+
+    use Cake\Mailer\Mailer;
+
+    class UserMailer extends Mailer
+    {
+        public function welcome($user)
+        {
+            $this->subject = sprintf('Welcome %s', $user->name);
+            $this->to = $user->email;
+        }
+
+        public function resetPassword($user)
+        {
+            $this->subject = sprintf('Reset password');
+            $this->to = $user->email;
+            $this->set(['token' => $user->token]);
+        }
+    }
+
+In our example we have created two methods, one for sending a welcome email, and
+another for sending a password reset email. Each of these methods expect a user
+`Entity` and utilizes its properties for configuring each email. 
+
+We are now able to use our ``UserMailer`` to send out our user-related emails
+from anywhere in our application. For example, if we wanted to send our welcome
+email we could do the following::
+
+    use App\Mailer\UserMailer;
+
+    // ...
+
+    $users = TableRegistry::get('Users');
+    $user = $users->get($id);
+
+    $mailer = new UserMailer;
+    $mailer->send('welcome', [$user]);
+
+
 .. meta::
     :title lang=en: Email
     :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
