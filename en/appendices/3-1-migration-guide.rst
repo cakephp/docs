@@ -22,6 +22,14 @@ Console
 Controller
 ==========
 
+AuthComponent
+-------------
+
+- New config ``storage`` has been added. It contains the storage class name that
+  ``AuthComponent`` uses to store user record. By default ``SessionStorage`` is used.
+  If using a stateless authenticator you should configure ``AuthComponent`` to
+  use ``MemoryStorage`` instead.
+
 FlashComponent
 --------------
 
