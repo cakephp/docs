@@ -55,8 +55,8 @@ Email
 =====
 
 ``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
-namespace. Their former namespaces are still usable as class aliases for them
-have been added.
+namespace. Their former namespaces are still usable as class aliases have
+been set for them.
 
 Mailer
 ------
