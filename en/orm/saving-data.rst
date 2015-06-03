@@ -412,6 +412,7 @@ For example, consider the following case::
         ]
     ];
     $entity = $articles->newEntity($data);
+    $articles->save($article);
 
     $newData = [
         'comments' => [

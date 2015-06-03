@@ -363,9 +363,9 @@ Lazy loading
     Lazy loading defers loading association data until it is absolutely
     required. While this can save CPU time because possibly unused data is not
     hydrated into objects, it can result in many more queries being emitted to
-    the database. **For example looping over a set of articles & their comments
+    the database. For example looping over a set of articles & their comments
     will frequently emit N queries where N is the number of articles being
-    iterated.**
+    iterated.
 
 While lazy loading is not included by CakePHP's ORM, it is not hard to implement
 it yourself when and where you need it. When implementing an accessor method you

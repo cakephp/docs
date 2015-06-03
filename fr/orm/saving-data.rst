@@ -36,10 +36,6 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
         $id = $article->id;
     }
 
-En utilisant ``newEntity``, la méthode ``isNew()`` de l'entity nouvellement 
-crée renverra ``true``. C'est ainsi que, lors de l'appel de ``save()``, 
-CakePHP saura qu'il s'agit d'un ajout et non une mise à jour.
-
 Mettre à jour des Données
 -------------------------
 
@@ -434,7 +430,6 @@ Par exemple, considérons le cas suivant::
             ['body' => 'Second comment', 'id' => 2],
         ]
     ];
-    
     $article = $articles->newEntity($data);
     $articles->save($article);
 
