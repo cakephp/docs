@@ -465,7 +465,7 @@ following::
 
 In our example we have created two methods, one for sending a welcome email, and
 another for sending a password reset email. Each of these methods expect a user
-`Entity` and utilizes its properties for configuring each email. 
+``Entity`` and utilizes its properties for configuring each email. 
 
 We are now able to use our ``UserMailer`` to send out our user-related emails
 from anywhere in our application. For example, if we wanted to send our welcome
