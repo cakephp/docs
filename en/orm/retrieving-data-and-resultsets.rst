@@ -354,6 +354,8 @@ If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
+.. _dynamic-finders:
+
 Dynamic Finders
 ===============
 
@@ -393,6 +395,9 @@ The above would translate into the following::
     $users->find('trolls', [
         'conditions' => ['username' => 'bro']
     ]);
+
+Once you have a query object from a dynamic finder, you'll need to call
+``first()`` if you want the first result.
 
 .. note::
 
