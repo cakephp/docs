@@ -808,7 +808,7 @@ the default host ``http://localhost/``  and thus resulting in invalid URLs. In t
 specify the domain manually.
 You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
 
-For sending emails, you should provide CakeEmail class with the host you want to send the email with:
+For sending emails, you should provide CakeEmail class with the host you want to send the email with::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
@@ -919,13 +919,13 @@ Shell API
 
 .. php:method:: nl($multiplier = 1)
 
-    :param int $multiplier Number of times the linefeed sequence should be repeated
+    :param int $multiplier: Number of times the linefeed sequence should be repeated
 
     Returns a number of linefeed sequences.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
-    :param string $method: The message to print.
+    :param string $message: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
     :param integer $level: The highest :ref:`shell-output-level` this message
         should display at.
@@ -953,7 +953,7 @@ Shell API
 
 .. php:method:: overwrite($message = null, $newlines = 1, $size = null)
 
-    :param string $method: The message to print.
+    :param string $message: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
     :param integer $size: The number of bytes to overwrite
 
