@@ -22,6 +22,11 @@ features that all applications are likely to need. The built-in filters are:
   or plugin asset file, such as a CSS, JavaScript or image file stored in either a
   plugin's webroot folder or the corresponding one for a Theme. It will serve the
   file accordingly if found, stopping the rest of the dispatching cycle.
+
+        // Use options to set cacheTime for your static assets
+        // If not set, this defaults to +1 hour
+          DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
+
 * ``RoutingFilter`` applies application routing rules to the request URL.
   Populates ``$request->params`` with the results of routing.
 * ``ControllerFactory`` uses ``$request->params`` to locate the controller that
