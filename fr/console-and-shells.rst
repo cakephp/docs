@@ -867,7 +867,7 @@ utilisant la valeur de Configure ``App.fullBaseURL`` de votre bootstrap ou
 config, par exemple.
 
 Pour envoyer des emails, vous devrez fournir à la classe CakeEmail l'hôte avec
-lequel vous souhaitez envoyer l'email en faisant:
+lequel vous souhaitez envoyer l'email en faisant::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
@@ -988,14 +988,14 @@ API de Shell
 
 .. php:method:: nl($multiplier = 1)
 
-    :param int $multiplier Nombre de fois que la séquence de ligne doit être
+    :param int $multiplier: Nombre de fois que la séquence de ligne doit être
         répétée.
 
     Sort un certain nombre de séquences de nouvelles lignes.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
-    :param string $method: Le message à afficher.
+    :param string $message: Le message à afficher.
     :param integer $newlines: Le nombre de nouvelles lignes qui suivent le
         message.
     :param integer $level: Le :ref:`shell-output-level` le plus haut que ce
@@ -1026,7 +1026,7 @@ API de Shell
 
 .. php:method:: overwrite($message = null, $newlines = 1, $size = null)
 
-    :param string $method: Le message à afficher.
+    :param string $message: Le message à afficher.
     :param integer $newlines: Le nombre de nouvelle ligne à la suite du message.
     :param integer $size: Le nombre d'octets à surcharger
 

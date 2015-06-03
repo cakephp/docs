@@ -882,7 +882,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
 .. php:method:: err($message = null, $newlines = 1)
 
-   :param string $method: 表示するメッセージ
+   :param string $message: 表示するメッセージ
    :param integer $newlines: メッセージの後の改行する数
 
    ``stderr`` へ出力するメソッド。 :php:meth:`Shell::out()` のように動作する。
@@ -940,13 +940,13 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
 .. php:method:: nl($multiplier = 1)
 
-   :param int $multiplier 改行動作を繰り返す回数
+   :param int $multiplier: 改行動作を繰り返す回数
 
    指定数の改行を出力します。
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
-   :param string $method: 表示するメッセージ
+   :param string $message: 表示するメッセージ
    :param integer $newlines: メッセージの後に出力する改行の数
    :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値
 
