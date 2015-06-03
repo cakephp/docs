@@ -612,6 +612,30 @@ Par défaut, l'arbre est traversé de la racine vers les feuilles. Vous pouvez
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
+Once you have converted a tree into a nested list, you can use the ``printer()``
+method to configure how the list output should be formatted::
+
+    $nested->listNested()->printer('name', 'id', '--')->toArray();
+
+    // Returns
+    [
+        3 => 'Eagle',
+        4 => 'Seagull',
+        5 -> '--Clown Fish',
+    ]
+
+The ``printer()`` method also lets you use a callback to generate the keys and
+or values::
+
+    $nested->listNested()->printer(
+        function ($el) {
+            return $el->name;
+        },
+        function ($el) {
+            return $el->id;
+        }
+    );
+
 Autres Méthodes
 ===============
 
