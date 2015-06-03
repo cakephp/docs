@@ -199,7 +199,7 @@ Une fois que vous avez créé un objet query, vous pouvez utiliser la méthode
 
     // Dans un controller ou une méthode de table.
     $query = $articles->find('all', [
-        'where' => ['Articles.title LIKE' => '%Ovens%']
+        'conditions' => ['Articles.title LIKE' => '%Ovens%']
     ]);
     $number = $query->count();
 
