@@ -590,7 +590,7 @@ and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
     Router::scope('/page', function ($routes) {
-        $routes->extensions(['json', 'xml']);
+        $routes->extensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
             ['controller' => 'Pages', 'action' => 'view'],
