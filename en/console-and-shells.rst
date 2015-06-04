@@ -239,7 +239,7 @@ will call this method when the task is invoked. A task class looks like::
         }
     }
 
-A shell can also access it's tasks as properties, which makes tasks great for
+A shell can also access its tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // found in Console/Command/SeaShell.php
