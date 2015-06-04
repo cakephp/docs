@@ -162,7 +162,7 @@ cases you can use the ``{*}`` matcher in the path key::
         ]
     ];
 
-    $numbers = (new Collection($data))->extract('phone_numbers.{*},number');
+    $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
     $numbers->toList();
     // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
 
