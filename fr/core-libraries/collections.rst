@@ -145,6 +145,32 @@ vous pouvez utiliser une fonction de callback pour la retourner::
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
+Often, the properties you need to extract a common key present in multiple
+arrays or objects that are deeply nested inside other structures. For those
+cases you can use the ``{*}`` matcher in the path key::
+
+    $data = [
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-1'],
+                ['number' => 'number-2'],
+                ['number' => 'number-3'],
+            ]
+        ],
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-4'],
+                ['number' => 'number-5'],
+            ]
+        ]
+    ];
+
+    $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
+    $numbers->toList();
+    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
 Les collections vous permettent de créer une nouvelle collection à partir des

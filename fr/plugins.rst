@@ -99,7 +99,7 @@ composer.json de votre application pour contenir les informations suivantes::
         "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
-Si vous utilisez un namespace pour vos plugins, le mapping des namespaces
+Si vous utilisez des namespaces pour vos plugins, le mapping des namespaces
 vers les dossiers doit ressembler à ceci::
 
     "psr-4": {

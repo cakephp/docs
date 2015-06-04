@@ -625,7 +625,7 @@ souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
 un scope comme ceci::
 
     Router::scope('/page', function ($routes) {
-        $routes->extensions(['json', 'xml']);
+        $routes->extensions(['json', 'xml', 'html']);
         $routes->connect(
             '/:title',
             ['controller' => 'Pages', 'action' => 'view'],

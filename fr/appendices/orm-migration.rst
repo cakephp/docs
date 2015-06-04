@@ -314,10 +314,10 @@ vous dans 3.x vers les bonnes fonctions::
         'limit' => 10,
     ]);
 
-Si votre application utilise 'magic' ou :ref:`dynamic-finders`, vous devrez
-adapter ces appels. Dans 3.x, les méthodes ``findAllBy*`` ont été retirées,
-à la place ``findBy*`` retourne toujours un objet query. Pour récupérer le
-premier résultat, vous devrez utiliser la méthode ``first()``::
+Si votre application utilise des :ref:`dynamic-finders` ou 'magiques', vous
+devrez adapter ces appels. Dans 3.x, les méthodes ``findAllBy*`` ont été
+retirées, à la place ``findBy*`` retourne toujours un objet query. Pour
+récupérer le premier résultat, vous devrez utiliser la méthode ``first()``::
 
     $article = $this->Articles->findByTitle('Un super post!')->first();
 
