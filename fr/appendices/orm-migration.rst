@@ -282,19 +282,20 @@ pouvez migrer ce code d'une des façons suivantes:
 
 1. Surcharger la méthode constructeur de votre entity et faire le formatage supplémentaire ici.
 2. Créer des méthodes accesseurs dans votre entity pour créer les propriétés virtuelles.
-3. Redéfinir ``findAll()`` et attacher une fonction map/reduce.
+3. Redéfinir ``findAll()`` et utiliser ``formatResults``.
 
 Dans le 3ème cas ci-dessus, votre code ressemblerait à::
 
     public function findAll(Query $query, array $options)
     {
-        $mapper = function ($row, $key, $mr) {
-            // Votre logique afterFind
-        };
-        return $query->mapReduce($mapper);
+        return $query->formatResults(function ($results) {
+            return $results->map(function ($row) {
+                // Votre logique afterfind
+            });
+        })
     }
 
-Vous pouvez peut-être noter que les finders personnalisés reçoivent
+Vous avez peut-être noté que les finders personnalisés reçoivent
 un tableau d'options, vous pouvez passer toute information supplémentaire
 à votre finder en utilisant ce paramètre. C'est une bonne nouvelle pour la
 migration de gens à partir de 2.x. Chacune des clés de requêtées qui a été
@@ -312,6 +313,13 @@ vous dans 3.x vers les bonnes fonctions::
         'order' => ['title' => 'DESC'],
         'limit' => 10,
     ]);
+
+Si votre application utilise 'magic' ou :ref:`dynamic-finders`, vous devrez
+adapter ces appels. Dans 3.x, les méthodes ``findAllBy*`` ont été retirées,
+à la place ``findBy*`` retourne toujours un objet query. Pour récupérer le
+premier résultat, vous devrez utiliser la méthode ``first()``::
+
+    $article = $this->Articles->findByTitle('Un super post!')->first();
 
 Heureusement, la migration à partir des versions anciennes n'est pas aussi
 difficile qu'il y paraît, la plupart des fonctionnalités que nous avons ajoutées

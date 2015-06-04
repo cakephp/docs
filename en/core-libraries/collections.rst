@@ -483,16 +483,16 @@ multidimensional arrays::
 
     // Getting jan and feb data together
 
-     $firstYear = new Collection(array_shift($data));
-     $firstYear->zip($data[0], $data[1])->toList();
+    $firstYear = new Collection(array_shift($data));
+    $firstYear->zip($data[0], $data[1])->toList();
 
-     // Or $firstYear->zip(...$data) in PHP >= 5.6
+    // Or $firstYear->zip(...$data) in PHP >= 5.6
 
-     // Returns
-     [
+    // Returns
+    [
         [100, 300, 400],
         [200, 500, 600]
-     ]
+    ]
 
 Sorting
 =======

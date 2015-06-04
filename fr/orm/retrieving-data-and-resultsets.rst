@@ -373,6 +373,8 @@ pouvez utiliser une fonction :ref:`map-reduce` pour modifier les résultats.
 Les fonctionnalités de map reduce remplacent le callback 'afterFind' qu'on
 avait dans les versions précédentes de CakePHP.
 
+.. _dynamic-finders:
+
 Finders Dynamiques
 ==================
 
@@ -415,6 +417,9 @@ Ce qui est au-dessus se traduirait dans ce qui suit::
     $users->find('trolls', [
         'conditions' => ['username' => 'bro']
     ]);
+
+Une fois que vous avez un objet query à partir d'un finder dynamique, vous
+devrez appeler ``first()`` si vous souhaitez le premier résultat.
 
 .. note::
 
