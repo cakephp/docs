@@ -736,7 +736,7 @@ Getting help as XML
 -------------------
 
 When building automated tools or development tools that need to interact
-with CakePHP shells, its nice to have help available in a machine parse-able
+with CakePHP shells, it's nice to have help available in a machine parse-able
 format. The ConsoleOptionParser can provide help in xml by setting an
 additional argument::
 
