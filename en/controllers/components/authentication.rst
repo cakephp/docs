@@ -239,7 +239,6 @@ want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
 throws a ``ForbiddenException`` instead of default behavior of redirecting to
 referrer.
 
-
 Creating Custom Authentication Objects
 --------------------------------------
 

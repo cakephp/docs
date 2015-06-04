@@ -24,6 +24,15 @@ Console
 Controller
 ==========
 
+AuthComponent
+-------------
+
+- Une nouvelle config ``storage`` a été ajoutée. Elle contient le nom de la
+  classe de stockage que ``AuthComponent`` utilise pour stocker l'enregistrement
+  de l'utilisateur. Par défaut ``SessionStorage`` est utilisée.
+  Si vous utilisez un authentificateur stateless, vous devez configurer
+  ``AuthComponent`` avec ``MemoryStorage`` à la place.
+
 FlashComponent
 --------------
 
