@@ -711,15 +711,15 @@ Positions are zero-based, therefore the first position number is ``0``.
 .. php:method:: skip(int $positions)
 
 While the second argument of ``take()`` can help you skip some elements before
-getting them form the collection, you can also use ``skip()`` for the same
-purpose as a way to take the rest of the elements after certain position::
+getting them from the collection, you can also use ``skip()`` for the same
+purpose as a way to take the rest of the elements after a certain position::
 
     $collection = new Collection([1, 2, 3, 4]);
     $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
 
 .. php:method:: first()
 
-One of the most common usages of ``take()`` is getting the first element in the
+One of the most common uses of ``take()`` is getting the first element in the
 collection. A shortcut method for achieving the same goal is using the
 ``first()`` method::
 
