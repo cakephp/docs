@@ -1050,7 +1050,7 @@ Ex: name=data[User][username], id=UserUsername
 
     .. code-block:: html
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden">
+        <input name="data[User][id]" id="UserId" type="hidden">
 
     Si le form est édité (qui est le tableau ``$this->request->data`` va
     contenir les informations sauvegardées pour le model ``User``), la valeur
@@ -1059,7 +1059,7 @@ Ex: name=data[User][username], id=UserUsername
 
     .. code-block:: html
 
-        <input name="data[User][id]" id="UserId" type="hidden" />
+        <input name="data[User][id]" id="UserId" type="hidden" value="10" />
 
     .. versionchanged:: 2.0
         Les champs cachés n'enlèvent plus la classe attribute. Cela signifie

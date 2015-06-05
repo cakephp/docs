@@ -1040,7 +1040,7 @@ Ex: name=data[User][username], id=UserUsername
 
     .. code-block:: html
 
-        <input name="data[User][id]" id="UserId" type="hidden" />
+        <input name="data[User][id]" id="UserId" type="hidden" value="10" />
 
     .. versionchanged:: 2.0
         Hidden fields no longer remove the class attribute. This means

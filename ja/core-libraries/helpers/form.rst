@@ -1052,7 +1052,7 @@ select, checkbox, radio に関するオプション
 
     .. code-block:: html
 
-        <input name="data[User][id]" id="UserId" type="hidden" />
+        <input name="data[User][id]" id="UserId" type="hidden" value="10" />
 
     .. versionchanged:: 2.0
         hidden フィールドは class アトリビュートを削除しなくなりました。
