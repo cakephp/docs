@@ -130,10 +130,32 @@ on entoure. Les options possibles sont:
 * ``indentAt`` Le nombre de ligne pour commencer l'indentation du texte.
   Par défaut à 0.
 
+.. php:staticmethod:: wrapBlock($text, $options = [])    
+
+Si vous devez vous assurer que la largeur totale du bloc généré ne dépassera
+pas une ceartine largeur y compris si elle contient des indentations, vous
+devez utiliser ``wrapBlock()`` au lieu de ``wrap()``. C'est particulièrement
+utile pour générer du texte dans la console par exemple. Elle accepte les mêmes
+options que ``wrap()``::
+
+    $text = 'Ceci est la chanson qui ne stoppe jamais. Ceci est la chanson qui ne stoppe jamais.';
+    $result = Text::wrapBlock($text, [
+        'width' => 22,
+        'indent' => ' → ',
+        'indentAt' => 1
+    ]);
+
+    // Génère
+    Ceci est la chanson
+     → qui ne stoppe
+     → jamais. Ceci est
+     → la chanson qui ne
+     → stoppe jamais.
+
 .. start-text
 
-Highlighting Substrings
-=======================
+Subrillance de Sous-Chaîne
+==========================
 
 .. php:method:: highlight(string $haystack, string $needle, array $options = [] )
 
