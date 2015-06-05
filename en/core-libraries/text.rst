@@ -116,8 +116,8 @@ Can intelligently wrap text so words are not sliced across lines::
     $result = Text::wrap($text, 22);
 
     // Returns
-    This is the song
-    that never ends.
+    This is the song that
+    never ends.
 
 You can provide an array of options that control how wrapping is done. The
 supported options are:
@@ -126,6 +126,26 @@ supported options are:
 * ``wordWrap`` Whether or not to wrap whole words. Defaults to ``true``.
 * ``indent`` The character to indent lines with. Defaults to ''.
 * ``indentAt`` The line number to start indenting text. Defaults to 0.
+
+.. php:staticmethod:: wrapBlock($text, $options = [])    
+
+If you need to ensure that the total width of the generated block won't
+exceed a certain length even with internal identation, you need to use
+``wrapBlock()`` instead of ``wrap()``. This is particulary useful to generate
+text for the console for example. It accepts the same options than ``wrap()``::
+
+    $text = 'This is the song that never ends. This is the song that never ends.';
+    $result = Text::wrapBlock($text, [
+        'width' => 22,
+        'indent' => ' → ',
+        'indentAt' => 1
+    ]);
+
+    // Returns
+    This is the song that
+     → never ends. This
+     → is the song that
+     → never ends.
 
 .. start-text
 
