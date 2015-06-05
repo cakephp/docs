@@ -175,13 +175,13 @@ The required API for a CacheEngine is
 
 .. php:method:: decrement($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :return: The decremented value on success, false otherwise.
 
     Decrement a number under the key and return decremented value
 
 .. php:method:: increment($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :return: The incremented value on success, false otherwise.
 
     Increment a number under the key and return incremented value
 
