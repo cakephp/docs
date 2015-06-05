@@ -129,7 +129,7 @@ supported options are:
 
 .. php:staticmethod:: wrapBlock($text, $options = [])    
 
-if you need to ensure that the total width of the generated block won't
+If you need to ensure that the total width of the generated block won't
 exceed a certain length even with internal identation, you need to use
 ``wrapBlock()`` instead of ``wrap()``. This is particulary useful to generate
 text for the console for example. It accepts the same options than ``wrap()``::
