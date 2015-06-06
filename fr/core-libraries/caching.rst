@@ -190,13 +190,13 @@ L'API requise pour CacheEngine est
 
 .. php:method:: decrement($key, $offset = 1)
 
-    :retourne: Un boléen true en cas de succès.
+    :retourne: La valeur décrémentée en en cas de succès, false sinon.
 
     Décrémente un nombre dans la clé et retourne la valeur décrémentée
    
 .. php:method:: increment($key, $offset = 1)
 
-    :retourne: Un boléen true en cas de succès.
+    :retourne: La valeur incrémentée en en cas de succès, false sinon.
 
     Incrémente un nombre dans la clé et retourne la valeur incrémentée
    
