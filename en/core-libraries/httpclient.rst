@@ -197,6 +197,17 @@ key and consumer secret::
       ]
     ]);
 
+OAuth 2 Authentication
+----------------------
+
+Because OAuth2 is often just a simple header, there is not a specialized
+authentication adapter. Instead you can create a client with the access token::
+
+    $http = new Client([
+        'headers' => ['Authorization' => 'Bearer ' . $accessToken]
+    ]);
+    $response = $http->get('https://example.com/api/profile/1');
+
 Proxy Authentication
 --------------------
 
