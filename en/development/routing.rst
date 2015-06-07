@@ -25,7 +25,17 @@ this to your **routes.php** file::
 
     use Cake\Routing\Router;
 
+    // Using the scoped route builder.
+    Router::scope('/', function ($routes) {
+        $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    });
+
+    // Using the static method.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
+
+``Router`` provides two interfaces for connecting routes. The static method is
+a backwards compatible interface, while the scoped builders offer more terse
+syntax when building multiple routes, and better performance.
 
 This will execute the index method in the ``ArticlesController`` when the homepage
 of your site is visited. Sometimes you need dynamic routes that will accept
@@ -52,8 +62,8 @@ the Router to treat the ``id`` placeholder as a function argument to the
 ``view()`` function by specifying the ``pass`` option. More on using this
 options later.
 
-The CakePHP Router can also match routes in reverse. That means that from an
-array containing similar parameters, it is capable of generation a URL string::
+The CakePHP Router can also reverse match routes. That means that from an
+array containing matching parameters, it is capable of generation a URL string::
 
     use Cake\Routing\Router;
 
@@ -322,29 +332,34 @@ CakePHP, and should not be used unless you want the special meaning
 Passing Parameters to Action
 ----------------------------
 
-When connecting routes using :ref:`route-elements` you may want
-to have routed elements be passed arguments instead. By using the 3rd
-argument of :php:meth:`Cake\\Routing\\Router::connect()` you can define which route
-elements should also be made available as passed arguments::
+When connecting routes using :ref:`route-elements` you may want to have routed
+elements be passed arguments instead. The ``pass`` option whitelists which route
+elements should also be made available as arguments passed into the controller
+functions::
 
-    // SomeController.php
+    // src/Controller/BlogsController.php
     public function view($articleId = null, $slug = null)
     {
         // Some code here...
     }
 
     // routes.php
-    Router::connect(
-        '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-        ['controller' => 'Blog', 'action' => 'view'],
-        [
-            // order matters since this will simply map ":id" to $articleId in your action
-            'pass' => ['id', 'slug'],
-            'id' => '[0-9]+'
-        ]
-    );
+    Router::scope('/', function ($routes) {
+        $routes->connect(
+            '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
+            ['controller' => 'Blogs', 'action' => 'view'],
+            [
+                // Define the route elements in the route template
+                // to pass as function arguments. Order matters since this
+                // will simply map ":id" to $articleId in your action
+                'pass' => ['id', 'slug'],
+                // Define a pattern that `id` must match.
+                'id' => '[0-9]+'
+            ]
+        );
+    });
 
-And now, thanks to the reverse routing capabilities, you can pass
+Now thanks to the reverse routing capabilities, you can pass
 in the URL array like below and CakePHP will know how to form the URL
 as defined in the routes::
 
@@ -491,8 +506,8 @@ Plugin Routing
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Plugin routes are most easily created using the ``plugin()`` method. This method
-creates a new routing scope for the plugin's routes::
+Routes for :doc:`/plugins` are most easily created using the ``plugin()``
+method. This method creates a new routing scope for the plugin's routes::
 
     Router::plugin('DebugKit', function ($routes) {
         // Routes connected here are prefixed with '/debug_kit' and
@@ -618,7 +633,7 @@ Creating RESTful Routes
 .. php:staticmethod:: mapResources($controller, $options)
 
 Router makes it easy to generate RESTful routes for your controllers.
-If we wanted to allow REST access to a recipe database, we'd do
+If we wanted to allow REST access to a recipe controller, we'd do
 something like this::
 
     // In config/routes.php...
@@ -661,8 +676,8 @@ REST client (or anything else that can do POST easily). Just set
 the value of \_method to the name of the HTTP request method you
 wish to emulate.
 
-Creating Nested Resources
--------------------------
+Creating Nested Resource Routes
+-------------------------------
 
 Once you have connected resources in a scope, you can connect routes for
 sub-resources as well. Sub-resource routes will be prepended by the original
@@ -944,7 +959,7 @@ If the URL parameters do not match the route ``false`` should be returned.
 You can use a custom route class when making a route by using the ``routeClass``
 option::
 
-    Router::connect(
+    $routes->connect(
          '/:slug',
          ['controller' => 'Articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']
