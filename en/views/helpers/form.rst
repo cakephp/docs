@@ -1780,7 +1780,7 @@ widgets using the ``addWidget()`` method would look like::
     // Using a classname.
     $this->Form->addWidget(
         'autocomplete',
-        ['Autocomplete', 'text' 'label']
+        ['Autocomplete', 'text', 'label']
     );
 
     // Using an instance - requires you to resolve dependencies.
