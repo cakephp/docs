@@ -438,7 +438,7 @@ Les filtres de Dispatcher ne sont plus ajoutés à votre application en utilisan
 ``Configure``. Vous les ajoutez maintenant avec
 :php:class:`Cake\\Routing\\DispatcherFactory`. Cela signifie que si votre
 application utilisait ``Dispatcher.filters``, vous devrez maintenant utiliser
-php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
 En plus des changements de configuration, les filtres du dispatcher ont vu
 leurs conventions mises à jour, et des fonctionnalités ont été ajoutées.
@@ -780,7 +780,7 @@ Behaviors
 TreeBehavior
 ------------
 
-TreeBheavior a été complètement réécrit pour utiliser le nouvel ORM. Bien qu'il
+TreeBehavior a été complètement réécrit pour utiliser le nouvel ORM. Bien qu'il
 fonctionne de la même manière que dans 2.x, certaines méthodes ont été renommées
 ou retirées:
 
