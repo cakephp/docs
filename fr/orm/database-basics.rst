@@ -438,7 +438,20 @@ notre nouveau type, et la couche de base de données de CakePHP va
 automatiquement convertir nos données JSON lors de la création de requêtes.
 Vous pouvez utiliser les types personnalisés créés en faisant la correspondance
 des types dans la :ref:`méthode _initializeSchema() <saving-complex-types>` de
-votre Table.
+votre Table::
+
+    use Cake\Database\Schema\Table as Schema;
+
+    class WidgetsTable extends Table
+    {
+
+        protected function _initializeSchema(Schema $schema)
+        {
+            $schema->columnType('widget_prefs', 'json');
+            return $schema;
+        }
+
+    }
 
 Les Classes de Connection
 =========================
