@@ -25,7 +25,18 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
 
     use Cake\Routing\Router;
 
+    // EN utilisant le route builder scopé.
+    Router::scope('/', function ($routes) {
+        $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    });
+
+    // En utilisant la méthode statique.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
+
+``Router``fourni deux interfaces pour connecter les routes. La méthode statique
+est une interface retro-compatible, alors que le builder scopé (lié la portée)
+offre une syntaxe plus laconique pour construire des routes multiples, et de
+meilleures performances.
 
 Ceci va exécuter la méthode ``index`` dans ``ArticlesController`` quand la page
 d'accueil de votre site est visitée. Parfois vous avez besoin de routes
@@ -345,26 +356,32 @@ Passer des Paramètres à l'Action
 
 Quand vous connectez les routes en utilisant
 :ref:`route-elements` vous voudrez peut-être que des éléments routés
-soient passés aux arguments à la place. En utilisant le 3ème argument de
-:php:meth:`Router::connect()`, vous pouvez définir quels éléments de route
-doivent aussi être rendus disponibles en arguments passés::
+soient passés aux arguments à la place. L'option ``pass`` défini une liste
+des éléments de route doit également être rendu disponible en tant qu'arguments
+passé aux fonctions du controller::
 
-    // SomeController.php
+    // src/Controller/BlogsController.php
     public function view($articleId = null, $slug = null)
     {
         // du code ici...
     }
 
     // routes.php
-    Router::connect(
-        '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-        ['controller' => 'Blog', 'action' => 'view'],
-        [
-            // order matters since this will simply map ":id" to $articleId in your action
-            'pass' => ['id', 'slug'],
-            'id' => '[0-9]+'
-        ]
-    );
+    Router::scope('/', function ($routes) {
+        $routes->connect(
+            '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
+            ['controller' => 'Blogs', 'action' => 'view'],
+            [
+                // Défini les éléments de route dans le template de route
+                // à passer en tant qu'arguments à la fonction. L'ordre est
+                // important car cela fera simplement correspondre ":id" avec
+                // articleId dans votre action.
+                'pass' => ['id', 'slug'],
+                // Défini un modèle auquel `id` doit correspondre.
+                'id' => '[0-9]+'
+            ]
+        );
+    });
 
 Maintenant, grâce aux possibilités de routing inversé, vous pouvez passer
 dans le tableau d'URL comme ci-dessous et CakePHP sait comment former l'URL
@@ -521,7 +538,7 @@ Routing des Plugins
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Les routes des plugins sont plus faciles à créer en utilisant la méthode
+Les routes des :doc:`/plugins` sont plus faciles à créer en utilisant la méthode
 ``plugin()``. Cette méthode crée un nouveau scope pour les routes de plugin::
 
     Router::plugin('DebugKit', function ($routes) {
@@ -653,9 +670,10 @@ Créer des Routes RESTful
 
 .. php:staticmethod:: mapResources($controller, $options)
 
-Avec le router, il est facile de générer des routes RESTful pour vos
-controllers. Si nous voulions permettre l'accès à une base de données REST,
-nous ferions quelque chose comme ceci::
+Le router rend facile la génération des routes RESTful pour vos controllers.
+Les routes RESTful sont utiles lorsque vous créez des points de terminaison
+d'API pour vos applications. Si nous voulions permettre l'accès à une base
+de données REST, nous ferions quelque chose comme ceci::
 
     //Dans config/routes.php
 
@@ -696,8 +714,8 @@ client REST (ou tout ce qui peut faire facilement du POST). Il suffit de
 configurer la valeur de \_method avec le nom de la méthode de requête HTTP que
 vous souhaitez émuler.
 
-Créer des Ressources Imbriquées
--------------------------------
+Créer des Routes de Ressources Imbriquées
+-----------------------------------------
 
 Une fois que vous avez connecté une ressource dans un scope, vous pouvez aussi
 connecter des routes pour des sous-ressources. Les routes de sous-ressources
@@ -997,7 +1015,7 @@ correspondent pas, ``false`` doit être renvoyé.
 Vous pouvez utiliser votre classe de route personnalisée lors de la création
 d'une route en utilisant l'option ``routeClass``::
 
-    Router::connect(
+    $routes->connect(
          '/:slug',
          ['controller' => 'Articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']

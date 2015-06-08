@@ -206,6 +206,18 @@ déjà votre clé de consommateur et un secret de consommateur::
       ]
     ]);
 
+Authentification OAuth 2
+------------------------
+
+Il n'y a pas d'adapteur d'authentification spécialisé car OAuth2 est souvent
+juste un simple entête. A la place, vous pouvez créer un client avec le token
+d'accès::
+
+    $http = new Client([
+        'headers' => ['Authorization' => 'Bearer ' . $accessToken]
+    ]);
+    $response = $http->get('https://example.com/api/profile/1');
+
 Authentification Proxy
 ----------------------
 
