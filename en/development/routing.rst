@@ -632,9 +632,10 @@ Creating RESTful Routes
 
 .. php:staticmethod:: mapResources($controller, $options)
 
-Router makes it easy to generate RESTful routes for your controllers.
-If we wanted to allow REST access to a recipe controller, we'd do
-something like this::
+Router makes it easy to generate RESTful routes for your controllers. RESTful
+routes are helpful when you are creating API endpoints for your application.  If
+we wanted to allow REST access to a recipe controller, we'd do something like
+this::
 
     // In config/routes.php...
 
