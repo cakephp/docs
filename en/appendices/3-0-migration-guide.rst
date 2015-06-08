@@ -391,7 +391,7 @@ Dispatcher Filters Configuration Changed
 Dispatcher filters are no longer added to your application using ``Configure``.
 You now append them with :php:class:`Cake\\Routing\\DispatcherFactory`. This
 means if your application used ``Dispatcher.filters``, you should now use
-php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
 In addition to configuration changes, dispatcher filters have had some
 conventions updated, and features added. See the
@@ -710,7 +710,7 @@ Behaviors
 TreeBehavior
 ------------
 
-The TreeBheavior was completely re-written to use the new ORM. Although it works
+The TreeBehavior was completely re-written to use the new ORM. Although it works
 the same as in 2.x, a few methods were renamed or removed:
 
 - ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
