@@ -89,6 +89,23 @@ La première information affichée est en rapport avec les chemins. Ceci est
 particulièrement pratique si vous exécutez la Console depuis différents
 endroits de votre système de fichier.
 
+Vous pouvez lancer n'importe quel shell listé en utilisant son nom::
+
+    # lance le shell server
+    bin/cake server
+
+    # lance le shell migrations
+    bin/cake migrations -h
+
+    # lance le shell bake (avec le préfie plugin)
+    bin/cake bake.bake -h
+
+Les shells de plugins peuvent être invoqué sans le préfixe du plugin si le nom
+du shell n'entre pas en collision avec un shell de l'application ou du
+framework. Dans le cas où deux plugins fournissent un shell du même nom, c'est
+le le premier chargé qui récupérera l'alias court. Vous pouvez toujours
+utiliser le format ``plugin.shell`` pour référencer un shell sans ambiguïté.
+
 .. php:class:: Shell
 
 Créer un Shell
@@ -113,7 +130,7 @@ dedans::
 
 Les conventions pour les classes de shell sont que les noms de classe doivent
 correspondre au nom du fichier, avec Shell en suffixe. Dans notre shell, nous
-avons crée une méthode ``main()``.
+avons créé une méthode ``main()``.
 Cette méthode est appelée quand un shell est appelé avec aucune commande
 supplémentaire. Nous allons ajouter quelques commandes en plus dans un moment,
 mais pour l'instant lançons juste notre shell. Depuis le répertoire de votre
