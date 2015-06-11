@@ -407,6 +407,10 @@ can be used in reverse routing to identify the route you want to use::
 If your route template contains any route elements like ``:controller`` you'll
 need to supply those as part of the options to ``Router::url()``.
 
+.. note::
+
+    Route names must be unique across your entire application. The same ``_name`` cannot be used twice, even if the names occur inside a different routing scope.
+
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
 
