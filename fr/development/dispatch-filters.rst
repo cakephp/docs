@@ -24,7 +24,12 @@ Les filtres intégrés sont:
   plugin ou du theme, comme un fichier CSS, un fichier JavaScript ou une image
   stockée soit dans le dossier webroot d'un plugin ou celui qui correspond pour
   un Theme. Il va servir le fichier correspondant s'il est trouvé, stoppant le
-  reste du cycle de dispatch.
+  reste du cycle de dispatch::
+
+        // Utilisez options pour définir le cacheTime de vos assets statiques
+        // S'il n'est pas défini, il est de 1 heure (+1 hour) par défaut.
+        DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
+
 * ``RoutingFilter`` applique les règles de routing de l'application pour l'URL
   de la requête. Remplit ``$request->params`` avec les résultats de routing.
 * ``ControllerFactory`` utilise ``$request->params`` pour localiser le
