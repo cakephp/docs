@@ -480,6 +480,24 @@ email we could do the following::
 
     $this->getMailer('User')->send('welcome', [$user]);
 
+If we wanted to send the welcome email everytime a new user has registered, we
+can have our ``Mailer`` subscribe to the ``Model.afterSave`` event by adding the
+following to our ``Mailer``::
+
+    public function implementedEvents()
+    {
+        return [
+            'Model.afterSave' => 'onRegistration',
+        ;
+    }
+
+    public function onRegistration(Event $event, Entity $entity, ArrayObject $options)
+    {
+        if ($entity->isNew()) {
+            $this->send('welcome', [$entity]);
+        }
+    }
+
 
 .. meta::
     :title lang=en: Email
