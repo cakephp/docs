@@ -471,15 +471,14 @@ We are now able to use our ``UserMailer`` to send out our user-related emails
 from anywhere in our application. For example, if we wanted to send our welcome
 email we could do the following::
 
-    use App\Mailer\UserMailer;
+    use Cake\Mailer\MailerAwareTrait;
 
     // ...
 
     $users = TableRegistry::get('Users');
     $user = $users->get($id);
 
-    $mailer = new UserMailer;
-    $mailer->send('welcome', [$user]);
+    $this->getMailer('User')->send('welcome', [$user]);
 
 
 .. meta::
