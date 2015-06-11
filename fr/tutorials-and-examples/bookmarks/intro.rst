@@ -341,8 +341,8 @@ Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
 
 Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`.
 C'est un concept très puissant dans CakePHP qui vous permet de faire un package
-réutilisable de vos requêtes. les finders attendent toujours un objet
-:doc:`/orm/query-builder` et un tableau d'options en paramètre. les finders
+réutilisable de vos requêtes. Les finders attendent toujours un objet
+:doc:`/orm/query-builder` et un tableau d'options en paramètre. Les finders
 peuvent manipuler les requêtes et ajouter n'importe quels conditions ou
 critères. Une fois qu'ils ont terminé, les finders doivent retourner l'objet
 Query modifié. Dans notre finder nous avons amené la méthode
@@ -375,7 +375,7 @@ Construisons donc le fichier de vue pour notre action ``tags()``. Dans
     <?php endforeach; ?>
     </section>
 
-Dans le code ci-dessus, nous utilisons le :doc:`Helper HTMl </views/helpers/html>`
+Dans le code ci-dessus, nous utilisons le :doc:`Helper HTML </views/helpers/html>`
 et le :doc:`Helper Text </views/helpers/text>` pour aider à la génération
 du contenu de notre vue. Nous utilisons également la fonction :php:func:`h`
 pour encoder la sortie en HTML. Vous devez vous rappeler de toujours utiliser
@@ -383,9 +383,8 @@ pour encoder la sortie en HTML. Vous devez vous rappeler de toujours utiliser
 les problèmes d'injection HTML.
 
 Le fichier ``tags.ctp`` que nous venons de créer suit la convention de nommage
-de CakePHP pour un ficher de template de vue. la convention d'avoir le nom
-de template en version en minuscule et en underscore du nom de l'action du
-controller.
+de CakePHP pour un ficher de template de vue. La convention d'avoir le nom
+de template en minuscule et en underscore du nom de l'action du controller.
 
 Vous avez peut-être remarqué que nous pouvions utiliser les variables
 ``$tags`` et ``$bookmarks`` dans notre vue. Quand nous utilisons la méthode

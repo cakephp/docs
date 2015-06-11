@@ -100,10 +100,10 @@ Vous pouvez lancer n'importe quel shell listé en utilisant son nom::
     # lance le shell bake (avec le préfie plugin)
     bin/cake bake.bake -h
 
-Les shells de plugins peuvent être invoqué sans le préfixe du plugin si le nom
+Les shells de plugins peuvent être invoqués sans le préfixe du plugin si le nom
 du shell n'entre pas en collision avec un shell de l'application ou du
 framework. Dans le cas où deux plugins fournissent un shell du même nom, c'est
-le le premier chargé qui récupérera l'alias court. Vous pouvez toujours
+le premier chargé qui récupérera l'alias court. Vous pouvez toujours
 utiliser le format ``plugin.shell`` pour référencer un shell sans ambiguïté.
 
 .. php:class:: Shell
