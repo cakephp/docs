@@ -111,7 +111,7 @@ property. This property should be an Entity instance from the join Table class::
     $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
     $tag1->_joinData->tagComment = 'I think this is related to cake';
 
-    $ArticlesTags->link($article, [$tag1]);
+    $articlesTable->Tags->link($article, [$tag1]);
 
 Unlink Many To Many Records
 ---------------------------
