@@ -198,7 +198,7 @@ You can also optionally use a ``groupPath`` to group results based on a path::
         'b' => [2 => 'bar']
     ];
     
-Finally you can use ``closures`` to generate paths dynamically, for example when working with entities and dates (converted to ``Cake/Time instances`` by the ORM) you may want to group results by date::
+Finally you can use ``closures`` to generate paths dynamically, for example when working with entities and dates (converted to ``Cake/Time`` instances by the ORM) you may want to group results by date::
     
     $combined = (new Collection($entities))->combine(
         'id',
