@@ -3,7 +3,7 @@
 
 CakePHP 的安装快速、容易。最低要求是一个 web 服务器和一份 CakePHP 的拷贝，仅此而
 已！尽管本手册主要关注于 Apache 服务器(因为它最为常用)，但是也可以配置 CakePHP 
-运行在不同的 web 服务器上，比如 LightHTTPD 或 Microsoft IIS。
+运行在不同的 web 服务器上，比如 lighttpd 或 Microsoft IIS。
 
 要求
 ============
@@ -185,4 +185,4 @@ CakePHP 的默认主页，和当前数据库连接状态的消息。
 
 .. meta::
     :title lang=zh_CN: Installation
-    :keywords lang=zh_CN: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
+    :keywords lang=zh_CN: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighttpd,repository,enhancements,source code,cakephp,incorporate

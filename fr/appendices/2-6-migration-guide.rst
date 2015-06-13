@@ -143,6 +143,22 @@ Validation
 View
 ====
 
+JsonView
+--------
+
+- ``JsonView`` supporte maintenant la variable de vue ``_jsonOptions``.
+  Cela permet de configurer les options utilisées pour générer le JSON.
+
+XmlView
+-------
+
+- ``XmlView`` supporte maintenant la variable de vue ``_xmlOptions``.
+  Cela permet de configurer les options utilisées pour générer le XML.
+
+
+Helper
+======
+
 HtmlHelper
 ----------
 

@@ -61,7 +61,7 @@ some of these built-in validation rules::
                     'message' => 'Letters and numbers only'
                 ),
                 'between' => array(
-                    'rule'    => array('lengthBetween', 5, 15),
+                    'rule' => array('lengthBetween', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
@@ -725,7 +725,7 @@ with usage examples.
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', 'greater or equal', 18),
+                'rule' => array('comparison', 'greater or equal', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );

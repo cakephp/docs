@@ -239,7 +239,7 @@ will call this method when the task is invoked. A task class looks like::
         }
     }
 
-A shell can also access it's tasks as properties, which makes tasks great for
+A shell can also access its tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // found in Console/Command/SeaShell.php
@@ -377,7 +377,7 @@ Turning off colouring
 Although colouring is pretty awesome, there may be times when you want to turn it off,
 or force it on::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 The above will put the output object into raw output mode. In raw output mode,
 no styling is done at all. There are three modes you can use.
@@ -736,7 +736,7 @@ Getting help as XML
 -------------------
 
 When building automated tools or development tools that need to interact
-with CakePHP shells, its nice to have help available in a machine parse-able
+with CakePHP shells, it's nice to have help available in a machine parse-able
 format. The ConsoleOptionParser can provide help in xml by setting an
 additional argument::
 
@@ -808,7 +808,7 @@ the default host ``http://localhost/``  and thus resulting in invalid URLs. In t
 specify the domain manually.
 You can do that using the Configure value ``App.fullBaseURL`` from your bootstrap or config, for example.
 
-For sending emails, you should provide CakeEmail class with the host you want to send the email with:
+For sending emails, you should provide CakeEmail class with the host you want to send the email with::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
@@ -919,13 +919,13 @@ Shell API
 
 .. php:method:: nl($multiplier = 1)
 
-    :param int $multiplier Number of times the linefeed sequence should be repeated
+    :param int $multiplier: Number of times the linefeed sequence should be repeated
 
     Returns a number of linefeed sequences.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
-    :param string $method: The message to print.
+    :param string $message: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
     :param integer $level: The highest :ref:`shell-output-level` this message
         should display at.
@@ -953,7 +953,7 @@ Shell API
 
 .. php:method:: overwrite($message = null, $newlines = 1, $size = null)
 
-    :param string $method: The message to print.
+    :param string $message: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
     :param integer $size: The number of bytes to overwrite
 

@@ -118,7 +118,7 @@ d'une ``View``, utilisez la classe ``String``::
     Options:
 
     -  'format' - chaîne la partie de html avec laquelle la phrase sera mise
-       en excergue.
+       en exergue.
     -  'html' - bool Si true, va ignorer tous les tags HTML, s'assurant que
        seul le bon texte est mise en avant.
 
@@ -158,8 +158,8 @@ d'une ``View``, utilisez la classe ``String``::
     longueur ``$length`` et ajoute un prefix ``'ellipsis'``, si défini. Si
     ``'exact'`` est passé à ``false``, le truchement va se faire au premier
     espace après le point où ``$length`` a dépassé. Si ``'html'``
-    est passé à ``true``, les balises html seront respectés et ne seront pas
-    coupés.
+    est passé à ``true``, les balises html seront respectées et ne seront pas
+    coupées.
 
     ``$options`` est utilisé pour passer tous les paramètres supplémentaires,
     et a les clés suivantes possibles par défaut, celles-ci étant toutes

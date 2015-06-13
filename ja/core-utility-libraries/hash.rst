@@ -141,7 +141,7 @@ Hash パス構文
 
         // 共通の使い方:
         $users = $this->user->find("all");
-        $results = hash::extract($users, '{n}.user.id');
+        $results = Hash::extract($users, '{n}.user.id');
         // $results は以下のとおり:
         // array(1,2,3,4,5,...);
 

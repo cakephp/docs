@@ -81,7 +81,7 @@ datasource
     Source de données Non-DBO à utiliser, ex: 'ldap', 'twitter'.
 unix_socket
     Utilisé par les pilotes qui le supportent pour connecter via les fichiers
-    socket unix. Si vous utilisez postgres et voulez utiliser les sockets
+    socket unix. Si vous utilisez PostgreSQL et voulez utiliser les sockets
     unix, laissez la clé host vide.
 ssl_key
     Le chemin vers le fichier de clé SSL. (Seulement supporté par MySQL,
@@ -95,7 +95,7 @@ ssl_ca
 settings
     Un tableau de clé/valeur qui doit être envoyé à la base de données du
     serveur en tant que commandes ``SET`` quand la connexion est créée.
-    Cette option est seulement supportée par MySQL, Postgres, et SQLserver en
+    Cette option est seulement supportée par Mysql, Postgres, et Sqlserver en
     ce moment.
 
 .. versionchanged:: 2.4
@@ -122,7 +122,7 @@ noms de vos tables - par exemple : bakers, pastry\_stores, et savory\_cakes.
 .. todo::
 
     Ajouter des informations sur les options spécifiques pour différents
-    fournisseurs de base de données comme SQLServer, Postgres et MySQL.
+    fournisseurs de base de données comme Microsoft SQL Server, PostgreSQL et MySQL.
 
 Chemins de Classe Supplémentaires
 =================================

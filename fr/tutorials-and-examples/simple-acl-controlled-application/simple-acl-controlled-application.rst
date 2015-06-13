@@ -303,7 +303,7 @@ http://exemple.com/users/add. J'ai créé les groups suivants :
 J'ai également créé un user dans chaque groupe, de façon à avoir un
 user de chaque niveau d'accès pour les tests ultérieurs. Ecrivez tout
 sur du papier ou utilisez des mots de passe faciles, de façon à ne pas les
-oublier. Si vous faites un `SELECT * FROM aros;`` depuis une commande mysql,
+oublier. Si vous faites un `SELECT * FROM aros;`` depuis une commande MySQL,
 vous devriez recevoir quelque chose comme cela::
 
     +----+-----------+-------+-------------+-------+------+------+

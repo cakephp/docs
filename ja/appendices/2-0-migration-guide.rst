@@ -213,7 +213,8 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 コンポーネントとそのコンストラクタが変更になったことから、これを書き換える必要があります::
 
     class PrgComponent extends Component {
-        public function __construct(ComponentCollection $collection, $settings = array()) {
+        public function __construct(ComponentCollection $collection,
+          $settings = array()) {
             parent::__construct($collection, $settings);
         }
     }
@@ -522,7 +523,10 @@ Router
   2.0では、 ``index`` アクションのみがショートカットルートとして与えられます。
   引き続きショートカットを利用したいと思う方は、以下のようにルートを追加できます::
 
-    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+    Router::connect(
+      '/users/:action',
+      array('controller' => 'users', 'plugin' => 'users')
+    );
 
   ショートカットルートを有効にしたいプラグイン毎にroutesファイルにこれを追加してください。
 
@@ -1003,8 +1007,24 @@ PDOを採用した後に追加された素晴らしい機能のうちの一つ�
 * DboSource::fetchAll() は第二引数に配列を受け取ることができるようになり、クエリに結び付けられる値を渡します。
   第三引数は削除されました。例::
 
-    $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
-    $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
+    $db->fetchAll(
+      'SELECT
+        * from users
+      WHERE
+        username = ?
+      AND
+        password = ?',
+      array('jhon', '12345')
+    );
+    $db->fetchAll(
+      'SELECT
+        * from users
+      WHERE
+          username = :username
+      AND
+        password = :password',
+      array('username' => 'jhon', 'password' => '12345')
+    );
 
 PDOドライバは自動的にこれらの値をエスケープします。
 
@@ -1012,7 +1032,7 @@ PDOドライバは自動的にこれらの値をエスケープします。
 * 新しいメソッドDboSource::getConnection()は直接ドライバと対話する必要がある場合のためにPDOオブジェクトを返します。
 * 真偽値の扱いがよりクロスデータベース(*cross-database*)指向にするため、多少変更が成されました。
   テストケースを変更する必要があるかもしれません。
-* Postgresqlのサポートは莫大に向上し、正しいスキーマの生成、テーブルのtruncateができるようになり、これを使ったテストを書くのがより簡単になりました。
+* PostgreSQLのサポートは莫大に向上し、正しいスキーマの生成、テーブルのtruncateができるようになり、これを使ったテストを書くのがより簡単になりました。
 * DboSource::insertMulti() はSQL文字列を受け取らないようになりました。
   一度に全てを挿入するためのフィールドの配列とネストされた値の配列を単に渡してください。
 * TranslateBehavior はモデルのvirtualFieldsを使うように書きなおされました。
@@ -1022,8 +1042,8 @@ PDOドライバは自動的にこれらの値をエスケープします。
 * トランザクションのネストのサポート。
   何重かにトランザクションをを開始することができるようになりました。
   commitメソッドが同じ回数だけ呼び出された時のみコミットがなされます。
-* Sqliteサポートが素晴らしく向上しました。
-  cake 1.3との主な違いはSqlite 3.xのみをサポートするということです。
+* SQLiteサポートが素晴らしく向上しました。
+  cake 1.3との主な違いはSQLite 3.xのみをサポートするということです。
   これは開発中のアプリケーションで素晴らしい代替物となり、テストケースの実行が素早くなります。
 * 真偽値カラムの値はPHPネイティブの真偽値型に自動的にキャストされます。
   従って、もし返り値を文字列や数値として期待しているなら、テストケースやコードを必ず書きなおしてください:

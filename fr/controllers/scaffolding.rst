@@ -20,7 +20,7 @@ Il vous permet de mettre en place une application basique CRUD
 Il est si bien fait que vous aurez envie de l'utiliser dans toutes
 vos applications. 
 Attention ! Nous pensons aussi que le scaffolding est utile,
-mais veuillez réaliser que ce n'est... qu'un échaufaudage !
+mais veuillez réaliser que ce n'est... qu'un échafaudage !
 C'est une structure très simple à mettre en oeuvre, et il vaut mieux
 ne l'utiliser qu'au début d'un projet. Il n'a pas été conçu pour être
 flexible, mais uniquement pour être un moyen temporaire de mettre en place

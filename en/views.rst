@@ -62,10 +62,10 @@ Extending Views
 
 View extending allows you to wrap one view in another. Combining this with
 :ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
-:term:`DRY`. For example, your application has a sidebar that needs to change depending
-on the specific view being rendered. By extending a common view file, you can
-avoid repeating the common markup for your sidebar, and only define the parts
-that change:
+:term:`DRY`. For example, your application has a sidebar that needs to change
+depending on the specific view being rendered. By extending a common view file,
+you can avoid repeating the common markup for your sidebar, and only define the
+parts that change:
 
 .. code-block:: php
 
@@ -172,10 +172,10 @@ method was added to prepend content to an existing block::
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
 
-The method ``startIfEmpty()`` can be used to start a block **only** if it is empty
-or undefined. If the block already exists, the captured content will be
-discarded. This is useful when you want to conditionally define default content for
-a block if it does not already exist:
+The method ``startIfEmpty()`` can be used to start a block **only** if it is
+empty or undefined. If the block already exists, the captured content will be
+discarded. This is useful when you want to conditionally define default content
+for a block if it does not already exist:
 
 .. code-block:: php
 
@@ -252,8 +252,8 @@ Using blocks for script and CSS files
 .. versionadded:: 2.1
 
 Blocks replace the deprecated ``$scripts_for_layout`` layout variable. Instead
-you should use blocks. The :php:class:`HtmlHelper` ties into view blocks, and its
-:php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
+you should use blocks. The :php:class:`HtmlHelper` ties into view blocks, and
+its :php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
 :php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
 when used with the ``inline = false`` option:
 
@@ -339,8 +339,8 @@ might look like:
 
     Prior to version 2.1, method fetch() was not available, ``fetch('content')``
     is a replacement for ``$content_for_layout`` and lines ``fetch('meta')``,
-    ``fetch('css')`` and ``fetch('script')`` are contained in the ``$scripts_for_layout``
-    variable in version 2.0
+    ``fetch('css')`` and ``fetch('script')`` are contained in the
+    ``$scripts_for_layout`` variable in version 2.0
 
 The ``script``, ``css`` and ``meta`` blocks contain any content defined
 in the views using the built-in HTML helper. Useful for including
@@ -354,26 +354,15 @@ JavaScript and CSS files from views.
 
 The ``content`` block contains the contents of the rendered view.
 
-``$title_for_layout`` contains the page title. This variable is generated automatically,
-but you can override it by setting it in your controller/view.
+``$title_for_layout`` contains the page title. This variable is generated
+automatically, but you can override it by setting it in your controller/view as
+you would any other view variable.
 
 .. note::
 
-    The ``$title_for_layout`` is deprecated as of 2.5, use ``$this->fetch('title')``
-    in your layout and ``$this->assign('title', 'page title')`` instead.
-
-Setting the title for the layout is easiest to do in the
-controller, setting the ``$title_for_layout`` variable::
-
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title_for_layout', 'View Active Users');
-       }
-   }
-
-You can also set the title_for_layout variable from inside the view file::
-
-    $this->set('title_for_layout', $titleContent);
+    The ``$title_for_layout`` is deprecated as of 2.5, use
+    ``$this->fetch('title')`` in your layout and
+    ``$this->assign('title', 'page title')`` instead.
 
 You can create as many layouts as you wish: just place them in the
 ``app/View/Layouts`` directory, and switch between them inside of your
@@ -465,10 +454,10 @@ argument::
     ));
 
 Inside the element file, all the passed variables are available as
-members of the parameter array (in the same way that :php:meth:`Controller::set()` in
-the controller works with view files). In the above example, the
-``/app/View/Elements/helpbox.ctp`` file can use the ``$helptext``
-variable::
+members of the parameter array (in the same way that
+:php:meth:`Controller::set()` in the controller works with view files). In the
+above example, the ``/app/View/Elements/helpbox.ctp`` file can use the
+``$helptext`` variable::
 
     // inside app/View/Elements/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
@@ -490,9 +479,9 @@ The options supported are 'cache' and 'callbacks'. An example::
 
 Element caching is facilitated through the :php:class:`Cache` class. You can
 configure elements to be stored in any Cache configuration you've set up. This
-gives you a great amount of flexibility to decide where and for how long elements
-are stored. To cache different versions of the same element in an application,
-provide a unique cache key value using the following format::
+gives you a great amount of flexibility to decide where and for how long
+elements are stored. To cache different versions of the same element in an
+application, provide a unique cache key value using the following format::
 
     $this->element('helpbox', array(), array(
             "cache" => array('config' => 'short', 'key' => 'unique value')
@@ -547,7 +536,8 @@ You can take advantage of CakePHP view caching if you supply a
 cache parameter. If set to true, it will cache the element in the
 'default' Cache configuration. Otherwise, you can set which cache configuration
 should be used. See :doc:`/core-libraries/caching` for more information on
-configuring :php:class:`Cache`. A simple example of caching an element would be::
+configuring :php:class:`Cache`. A simple example of caching an element would
+be::
 
     echo $this->element('helpbox', array(), array('cache' => true));
 
@@ -580,7 +570,8 @@ Requesting Elements from a Plugin
 2.0
 ---
 
-To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x)::
+To load an element from a plugin, use the `plugin` option (moved out of the
+`data` option in 1.x)::
 
     echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
@@ -591,7 +582,8 @@ If you are using a plugin and wish to use elements from within the
 plugin, just use the familiar :term:`plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP folder. ::
+If the element doesn't exist in the plugin, it will look in the main APP
+folder. ::
 
     echo $this->element('Contacts.helpbox');
 
@@ -761,8 +753,8 @@ To call any view method use ``$this->method()``
 
 .. php:method:: fetch($name, $default = '')
 
-    Fetch the value of a block. If a block is empty or undefined, '' will be returned.
-    See the section on :ref:`view-blocks` for examples.
+    Fetch the value of a block. If a block is empty or undefined, '' will be
+    returned. See the section on :ref:`view-blocks` for examples.
 
     .. versionadded:: 2.1
 

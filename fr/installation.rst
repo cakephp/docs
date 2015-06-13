@@ -5,7 +5,7 @@ CakePHP est rapide et facile à installer. Les conditions minimum requises sont
 un serveur web et une copie de CakePHP, c'est tout! Bien que ce manuel se focalise
 principalement sur la configuration avec Apache (parce que c'est le plus
 utilisé couramment), vous pouvez configurer CakePHP pour lancer une diversité de
-serveurs web tels que LightHTTPD ou Microsoft IIS.
+serveurs web tels que lighttpd ou Microsoft IIS.
 
 Conditions requises
 ===================
@@ -233,4 +233,4 @@ décommentez la ligne dans ``app/Config/core.php``::
 
 .. meta::
     :title lang=fr: Installation
-    :keywords lang=fr: apache mod rewrite,serveur sql microsoft,tar bz2,répertoire tmp,stockage de base de données,copie d'archive,tar gz,source application,versions courantes,serveurs web,microsoft iis,copyright notices,moteur de base de données,bug fixes,lighthttpd,dépôt,améliorations,code source,cakephp,incorporate
+    :keywords lang=fr: apache mod rewrite,serveur sql microsoft,tar bz2,répertoire tmp,stockage de base de données,copie d'archive,tar gz,source application,versions courantes,serveurs web,microsoft iis,copyright notices,moteur de base de données,bug fixes,lighttpd,dépôt,améliorations,code source,cakephp,incorporate

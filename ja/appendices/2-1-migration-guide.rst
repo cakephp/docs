@@ -88,19 +88,15 @@ app/Controller ディレクトリへコピーする必要があります。
 - ``beforeDelete`` コールバックは、ビヘイビアの beforeDelete コールバッ
   クより前に実行されます。これはモデルレイヤでの他のイベントとの動きと
   一貫したものになります。
-
 - ``Model::find('threaded')`` では、 ``parent_id`` 以外のフィールドを使
   えるように ``$options['parent']`` が利用可能になりました。もちろん、
   モデルが TreeBehavior をアタッチし、他の親フィールドを利用している場
   合には、threaded 検索はデフォルトでそのフィールドを利用します。
-
 - プリペアード・ステートメントで利用するクエリのパラメータは SQL ダンプ
   の一部となりました。
-
 - バリデーション配列は、フィールドの必要性をより明確に指定できるようになりました。
   ``required`` キーは ``create`` と ``update`` の値を持つことができます。
   これらの値は、作成時と更新時のそれぞれでフィールドの値の必要性を定義できます。
-
 - モデルには ``schemaName`` プロパティが加わりました。もし、あなたの
   アプリケーションが :php:attr:`Model::$useDbConfig` を修正して、データソース
   を切り替えた場合、 ``schemaName`` も修正することができます。もしくは、
@@ -156,7 +152,6 @@ TranslateBehavior
     and useful output.
 
 - :php:func:`Debugger::getType()` が追加されました。これは変数の型を取得します。
-
 - :php:func:`Debugger::exportVar()` がより読みやすく使いやすい出力が出来るように修正されました。
 
 
@@ -273,9 +268,7 @@ Router
 - Route 機能は特別な ``/**`` の書き方が利用できるようになりました。全て
   の引数を単一の引数のように扱えます。詳しくは
   :ref:`connecting-routes` セクションを確認してください。
-
 - :php:meth:`Router::resourceMap()` が追加されました。
-
 - :php:meth:`Router::defaultRouteClass()` が追加されました。このメソッ
   ドは、これより先に接続する全てのデフォルトの route クラスを設定できます。
 
@@ -346,7 +339,6 @@ AuthComponent
   ``allow('*')`` のようなワイルドカードは使わなくなりました。
   代わりに ``allow()`` を使ってください。
   これは allow() と deny() とで共通した API となります。
-
 - 全ての認証用アダプタに ``recursive`` オプションが追加されました。セッ
   ションに格納されたアソシエーションをより用意にコントロールすることが
   できるようになりました。
@@ -370,17 +362,14 @@ AclComponent
 
 - :php:class:`AclComponent` は、 ``Acl.classname`` で使う場合に小文字お
   よび複数形ではなくなりました。
-
 - Acl バックエンドの実装は ``Controller/Component/Acl`` へ置かれるよう
   になりました。
-
 - Acl の実装は Component ディレクトリから Component/Acl ディレクトリへ
   移動されました。例えば、
   ``Controller/Component/CustomAclComponent.php`` に保存していた
   ``CustomAclComponent`` という名前の独自 Acl クラスを使っていたとしま
   す。これは ``Controller/Component/Acl/CustomAcl.php`` へ移動します。
   また、名称を ``CustomAcl`` へ変更します。
-
 - :php:class:`DbAcl` は、単独のファイルに分割されました。
 - :php:class:`IniAcl` は、単独のファイルに分割されました。
 - :php:class:`AclInterface` は、単独のファイルに分割されました。
@@ -464,7 +453,6 @@ HtmlHelper
 - :php:attr:`View::$output` は推奨されません。
 - ``$content_for_layout`` は推奨されません。
   代わりに ``$this->fetch('content');`` を利用してください。
-
 - ``$scripts_for_layout`` は推奨されません。代わりに下記の記述を利用してください。 ::
 
         echo $this->fetch('meta');
@@ -473,11 +461,9 @@ HtmlHelper
 
   ``$scripts_for_layout`` は、まだ存在しています。
   しかし、 :ref:`view blocks <view-blocks>` API 方が拡張性や柔軟性をもたらします。
-
 - ``Plugin.view`` シンタックスがどこでも使えるようになりました。ビュー
   やレイアウト、エレメントの名前を参照したい際に、どこでもこのシンタッ
   クスを利用できます。
-
 - :php:meth:`~View::element()` の ``$options['plugin']`` オプションは推奨されません。
   代わりに ``Plugin.element_name`` を利用してください。
 
@@ -589,19 +575,14 @@ FormHelper
   フィールドを除外するようになりました。これにより
   :php:class:`SecurityComponent` と disabled な input フィールドとの共
   存がしやすくなりました。
-
 - ラジオボタンで ``between`` オプションを利用していた場合の挙動が変わりました。
   ``between`` の値は、legend タグと最初の input エレメントの間に表示されます。
-
 - チェックボックスの ``hiddenField`` オプションは、ちょうど 0 ではなく
   'N' のような特定の値をセットできるようになりました。
-
 - 日付および時間の入力における ``for`` アトリビュートは、最初に作成された input タグに反映されます。
   これは生成された datetime 項目にで変化が生じるかも知れません。
-
 - :php:meth:`FormHelper::button()`  の ``type`` アトリビュートは削除可能になりました。
   デフォルトは 'submit' になっています。
-
 - :php:meth:`FormHelper::radio()` は全ての option を無効にできるように
   なりました。``$attributes`` 配列において、 ``'disabled' => true``
   もしくは ``'disabled' => 'disabled'`` とすることで可能になります。
@@ -638,7 +619,6 @@ PaginatorHelper
 - テストケースは setup メソッドを含んだクラスとして生成されます。
 
 
-
 イベント
 ========
 
@@ -650,6 +630,5 @@ PaginatorHelper
 
 - 新しい一般的なイベントシステムが作成され、コールバックによる方法は推奨されなくなりました。
   これはあなたのコードの変更を要求するものではありません。
-
 - あなた自身のイベントをディスパッチすることができ、自由自在にコールバックに付加することができます。
   これによりプラグイン間の通信に有効だったり、クラスの分離を容易にしたりします。

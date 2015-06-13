@@ -25,7 +25,7 @@ to implement your own caching systems. The built-in caching engines are:
   By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
-  optimized for Windows and IIS.
+  optimized for Windows and Microsoft IIS.
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
@@ -175,13 +175,13 @@ The required API for a CacheEngine is
 
 .. php:method:: decrement($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :return: The decremented value on success, false otherwise.
 
     Decrement a number under the key and return decremented value
 
 .. php:method:: increment($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :return: The incremented value on success, false otherwise.
 
     Increment a number under the key and return incremented value
 

@@ -1000,7 +1000,7 @@ operators, such as ``MIN()``, ``MAX()``, etc., in a similar fashion::
 
     array(
         'fields' => array('DISTINCT (User.name) AS my_column_name'),
-        'order' = >array('User.id DESC')
+        'order' =>array('User.id DESC')
     )
 
 You can create very complex conditions by nesting multiple

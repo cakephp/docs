@@ -10,26 +10,35 @@ PHPUnitのインストール
 
 CakePHPのテストフレームワークは、PHPUnitを基礎としています。PHPUnitはPHPのユニットテストにおいて
 デファクトスタンダードとなっています。それはあなたが思い通りのコードを確実に書くための、
-深遠で強力な機能を提供します。PHPUnitは `pear installer <http://pear.php.net>`_ でインストールすることができます。
-方法は以下のとおりです::
+深遠で強力な機能を提供します。
 
-    pear upgrade PEAR
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit-3.7.32
+Composer でのインストール
+-------------------------
+PHPUnit の最新バージョンは、 今のところ cake では動作しません::
+
+    "phpunit/phpunit": "3.7.38"
+
+.phar パッケージでのインストール
+--------------------------------
+
+ファイルを直接ダウンロードします。まず、 http://phar.phpunit.de/ から適切なバージョンを取得しておきます。
+そして php.ini ファイルの include_path に /usr/local/bin を加えてください。::
+
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar
+    chmod +x phpunit.phar
+    mv phpunit.phar /usr/local/bin/phpunit
 
 .. note::
 
     PHPUnit4 はCakePHPのユニットテスト機能と互換性がありません。
-    システムの設定によっては、上記のコマンドを実行する際、 ``sudo`` を各行の前につける必要があります。
 
-一旦PEARインストーラーによってPHPUnitをインストールしたら、PHPの ``include_path`` 上にPHPUnitの
-ライブラリがあるか確認してください。PHPUnitのファイルが、php.iniファイルで設定されている
-``include_path`` のディレクトリ以下にあるかどうか確かめることで調べられます。
+    システムの設定によっては、上記のコマンドを実行する際、 ``sudo`` を各行の前につける必要があります。
 
 .. tip::
 
-    PHPUnit 3.6以上では出力が少なくなります。コマンドラインから実行するときに ``--debug``
-    オプションをつけるか、Webランナーを使って出力を表示するときに ``&debug=1`` とURLに付け足します。
+    PHPUnit 3.6 以上では全ての出力が非表示になります。表示するためには、コマンドラインから
+    実行するときに ``--debug`` オプションをつけるか、Web ランナーを使うときに ``&debug=1``
+    を URL に付け足してください。
 
 テスト用データベースのセットアップ
 ==================================
@@ -182,7 +191,7 @@ CakePHPはテストを実行するためのwebベースのインタフェース�
 コードカバレッジの確認
 ~~~~~~~~~~~~~~~~~~~~~~
 
-`XDebug <http://xdebug.org>`_ をインストールしてあればコードカバレッジの結果を見ることができます。
+`Xdebug <http://xdebug.org>`_ をインストールしてあればコードカバレッジの結果を見ることができます。
 コードカバレッジはあなたの書いたテストが網羅していないコードの部分があるか知るために有用です。
 また、将来テストを追加するべきか決定するときにも有用ですし、テストの進捗率を計測する
 指標のひとつとしても一役買ってくれます。
@@ -194,7 +203,7 @@ CakePHPはテストを実行するためのwebベースのインタフェース�
 インラインコードカバレッジでは緑色の行は実行したことを示しています。緑色の行にポインタを置くと、
 どのテストがカバーしているか示してくれます。実行されなかった行は赤で示されます。これはテストが
 うまく働かなかったことを示します。
-グレーの行はXDebugによって実行できないと考えられた行です。
+グレーの行はXdebugによって実行できないと考えられた行です。
 
 .. _run-tests-from-command-line:
 
@@ -304,20 +313,50 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 
     class ArticleFixture extends CakeTestFixture {
 
-          /* 任意。異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。 */
+          // 任意。
+          // 異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。
           public $useDbConfig = 'test';
           public $fields = array(
               'id' => array('type' => 'integer', 'key' => 'primary'),
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+              'title' => array(
+                'type' => 'string',
+                'length' => 255,
+                'null' => false
+              ),
               'body' => 'text',
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'published' => array(
+                'type' => 'integer',
+                'default' => '0',
+                'null' => false
+              ),
               'created' => 'datetime',
               'updated' => 'datetime'
           );
           public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array(
+                'id' => 1,
+                'title' => 'First Article',
+                'body' => 'First Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:39:23',
+                'updated' => '2007-03-18 10:41:31'
+              ),
+              array(
+                'id' => 2,
+                'title' => 'Second Article',
+                'body' => 'Second Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:41:23',
+                'updated' => '2007-03-18 10:43:31'
+              ),
+              array(
+                'id' => 3,
+                'title' => 'Third Article',
+                'body' => 'Third Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:43:23',
+                'updated' => '2007-03-18 10:45:31'
+              )
           );
      }
 
@@ -329,7 +368,6 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 存在しなかったときは規定値として ``mydb`` がデータソースとして使われます。
 テストを実行するときにテーブル名の衝突を避けるため、フィクスチャのデータソースには
 ``test`` の接頭辞が必ず付きます。
-
 
 ``$fields`` ではテーブルを構成するフィールドと、その定義を記述します。
 フィールドの定義には :php:class:`CakeSchema` と同じ書式を使います。
@@ -456,9 +494,30 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
         public $records = array(
-            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+            array(
+              'id' => 1,
+              'title' => 'First Article',
+              'body' => 'First Article Body',
+              'published' => '1',
+              'created' => '2007-03-18 10:39:23',
+              'updated' => '2007-03-18 10:41:31'
+            ),
+            array(
+              'id' => 2,
+              'title' => 'Second Article',
+              'body' => 'Second Article Body',
+              'published' => '1',
+              'created' => '2007-03-18 10:41:23',
+              'updated' => '2007-03-18 10:43:31'
+            ),
+            array(
+              'id' => 3,
+              'title' => 'Third Article',
+              'body' => 'Third Article Body',
+              'published' => '1',
+              'created' => '2007-03-18 10:43:23',
+              'updated' => '2007-03-18 10:45:31'
+            )
         );
     }
 
@@ -496,6 +555,19 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
             $this->loadFixtures('Article', 'Comment');
         }
     }
+
+2.5.0 から、サブディレクトリ中のフィクスチャをロードできます。複数ディレクトリを使用することは、
+大規模なアプリケーションで、フィクスチャを整理しやすくします。
+サブディレクトリ中のフィクスチャをロードするためには、フィクスチャ名にサブディレクトリを加えてください::
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.blog/article', 'app.blog/comment');
+    }
+
+上記の例では、両方のフィクスチャは、 ``App/Test/Fixture/blog/`` からロードされます。
+
+.. versionchanged:: 2.5
+    2.5.0 から、サブディレクトリ中のフィクスチャをロードできます。
 
 モデルのテスト
 ==============

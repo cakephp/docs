@@ -61,12 +61,12 @@ CakePHP には多くのバリデーションルールが用意されており、
                     'message'  => 'Letters and numbers only'
                 ),
                 'between' => array(
-                    'rule'    => array('between', 5, 15),
+                    'rule' => array('between', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
             'password' => array(
-                'rule'    => array('minLength', '8'),
+                'rule' => array('minLength', '8'),
                 'message' => 'Minimum 8 characters long'
             ),
             'email' => 'email',
@@ -242,7 +242,7 @@ message キーを使うと、そのルールについてのカスタムバリデ
 
     public $validate = array(
         'password' => array(
-            'rule'    => array('minLength', 8),
+            'rule' => array('minLength', 8),
             'message' => 'パスワードは８文字以上必要です。'
         )
     );
@@ -288,11 +288,11 @@ message キーを使うと、そのルールについてのカスタムバリデ
     public $validate = array(
         'login' => array(
             'loginRule-1' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'アルファベットまたは数字のみです',
              ),
             'loginRule-2' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => '最低８文字です'
             )
         )
@@ -321,12 +321,12 @@ last
     public $validate = array(
         'login' => array(
             'rule1' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'アルファベットと数字だけを使えます',
                 'last'    => false
              ),
             'rule2' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => '８文字以上です'
             )
         )
@@ -338,7 +338,7 @@ last
     public $validate = array(
         'login' => array(
             'アルファベットと数字だけです' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
              ),
         )
     );
@@ -365,7 +365,7 @@ last
 
     public $validate = array(
         'login' => array(
-            'rule'    => '/^[a-z0-9]{3,}$/i',
+            'rule' => '/^[a-z0-9]{3,}$/i',
             'message' => '文字と数字のみ、３文字以上'
         )
     );
@@ -389,7 +389,7 @@ last
 
         public $validate = array(
             'promotion_code' => array(
-                'rule'    => array('limitDuplicates', 25),
+                'rule' => array('limitDuplicates', 25),
                 'message' => '利用回数の制限を超えました。'
             )
         );
@@ -432,7 +432,7 @@ last
 
         public $validate = array(
             'slug' => array(
-                'rule'    => 'alphaNumericDashUnderscore',
+                'rule' => 'alphaNumericDashUnderscore',
                 'message' => 'これには文字、数字、ハイフン、' .
                     'アンダースコアが使えます'
             )
@@ -622,7 +622,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'login' => array(
-                'rule'    => 'alphaNumeric',
+                'rule' => 'alphaNumeric',
                 'message' => 'ユーザ名には文字と数字だけしか使えません。'
             )
         );
@@ -634,7 +634,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'password' => array(
-                'rule'    => array('between', 5, 15),
+                'rule' => array('between', 5, 15),
                 'message' => 'パスワードは5～15文字でなければなりません。'
             )
         );
@@ -664,7 +664,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'myCheckbox' => array(
-                'rule'    => array('boolean'),
+                'rule' => array('boolean'),
                 'message' => 'myCheckbox の値が誤っています'
             )
         );
@@ -706,7 +706,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'ccnumber' => array(
-                'rule'    => array('cc', array('visa', 'maestro'), false, null),
+                'rule' => array('cc', array('visa', 'maestro'), false, null),
                 'message' => 'クレジットカード番号が正しくありません。'
             )
         );
@@ -719,14 +719,14 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', '>=', 18),
+                'rule' => array('comparison', '>=', 18),
                 'message' => '条件は１８歳以上です。'
             )
         );
 
         public $validate = array(
             'age' => array(
-                'rule'    => array('comparison', 'greater or equal', 18),
+                'rule' => array('comparison', 'greater or equal', 18),
                 'message' => '条件は１８歳以上です。'
             )
         );
@@ -737,7 +737,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'infinite' => array(
-                'rule'    => array('custom', '\u221E'),
+                'rule' => array('custom', '\u221E'),
                 'message' => '∞ を入力してください'
             )
         );
@@ -806,7 +806,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'birthday' => array(
-                'rule'    => array('datetime', 'dmy'),
+                'rule' => array('datetime', 'dmy'),
                 'message'    => '有効な日時を入力してください。',
             )
         );
@@ -839,7 +839,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('email', true),
+                'rule' => array('email', true),
                 'message' => '有効なメールアドレスを入力してください。'
             )
         );
@@ -852,7 +852,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'food' => array(
-                'rule'    => array('equalTo', 'cake'),
+                'rule' => array('equalTo', 'cake'),
                 'message' => 'この値は文字列 cake でなければなりません。'
             )
         );
@@ -866,7 +866,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'image' => array(
-                'rule'    => array(
+                'rule' => array(
                     'extension',
                     array('gif', 'jpeg', 'png', 'jpg')
                 ),
@@ -904,7 +904,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
         public $validate = array(
             'function' => array(
                  'allowedChoice' => array(
-                     'rule'    => array('inList', array('Foo', 'Bar')),
+                     'rule' => array('inList', array('Foo', 'Bar')),
                      'message' => 'Foo または Bar を入力してください。'
                  )
              )
@@ -923,7 +923,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'clientip' => array(
-                'rule'    => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+                'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
                 'message' => '有効なIPアドレスを入力してください。'
             )
         );
@@ -934,7 +934,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'login' => array(
-                'rule'    => 'isUnique',
+                'rule' => 'isUnique',
                 'message' => 'そのユーザ名はすでに使われています。'
             )
         );
@@ -944,7 +944,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'email' => array(
-                'rule'    => array('isUnique', array('email', 'username'), false),
+                'rule' => array('isUnique', array('email', 'username'), false),
                 'message' => 'このユーザ名とメールアドレスの組み合わせはすでに使われています。'
             )
         );
@@ -964,7 +964,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'login' => array(
-                'rule'    => array('maxLength', 15),
+                'rule' => array('maxLength', 15),
                 'message' => 'ユーザ名は15文字までです。'
             )
         );
@@ -988,11 +988,11 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'image' => array(
-                'rule'    => array('mimeType', array('image/gif')),
+                'rule' => array('mimeType', array('image/gif')),
                 'message' => 'mime 型が不正です。'
             ),
             'logo' => array(
-                'rule'    => array('mimeType', '#image/.+#'),
+                'rule' => array('mimeType', '#image/.+#'),
                 'message' => 'mime 型が不正です。'
             ),
         );
@@ -1005,7 +1005,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'login' => array(
-                'rule'    => array('minLength', 8),
+                'rule' => array('minLength', 8),
                 'message' => 'Usernames must be at least 8 characters long.'
             )
         );
@@ -1024,7 +1024,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'salary' => array(
-                'rule'    => array('money', 'left'),
+                'rule' => array('money', 'left'),
                 'message' => '適切な金額を入力してください。'
             )
         );
@@ -1055,7 +1055,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'title' => array(
-                'rule'    => 'notEmpty',
+                'rule' => 'notEmpty',
                 'message' => 'この項目は必須入力です。'
             )
         );
@@ -1069,7 +1069,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'cars' => array(
-                'rule'    => 'numeric',
+                'rule' => 'numeric',
                 'message' => '車の台数を入力してください。'
             )
         );
@@ -1085,11 +1085,11 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'wheels' => array(
-                'rule'    => 'naturalNumber',
+                'rule' => 'naturalNumber',
                 'message' => '車輪の数を入力してください。'
             ),
             'airbags' => array(
-                'rule'    => array('naturalNumber', true),
+                'rule' => array('naturalNumber', true),
                 'message' => 'エアバッグ数を入力してください。'
             ),
         );
@@ -1134,7 +1134,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'number' => array(
-                'rule'    => array('range', -1, 11),
+                'rule' => array('range', -1, 11),
                 'message' => '0 から 10 までの数字を入力してください。'
             )
         );
@@ -1177,7 +1177,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
         public $validate = array(
             'image' => array(
-                'rule'    => 'uploadError',
+                'rule' => 'uploadError',
                 'message' => 'ファイルアップロードで障害が起こりました。'
             ),
         );

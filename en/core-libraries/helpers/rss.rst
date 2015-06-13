@@ -113,8 +113,8 @@ View
 Our view, located at ``app/View/Posts/rss/index.ctp``, begins by
 setting the ``$documentData`` and ``$channelData`` variables for the
 layout, these contain all the metadata for our RSS feed. This is
-done by using the :php:meth:`View::set()`` method which is analogous to the
-Controller::set() method. Here though we are passing the channel's
+done by using the :php:meth:`View::set()` method which is analogous to the
+:php:meth:`Controller::set()` method. Here though we are passing the channel's
 metadata back to the layout::
 
     $this->set('channelData', array(
@@ -178,7 +178,7 @@ You can see above that we can use the loop to prepare the data to be transformed
 into XML elements. It is important to filter out any non-plain text characters
 out of the description, especially if you are using a rich text editor for the
 body of your blog. In the code above we used ``strip_tags()`` and
-:php:func:`h()` to remove/escape any XML special characaters from the content,
+:php:func:`h()` to remove/escape any XML special characters from the content,
 as they could cause validation errors. Once we have set up the data for the
 feed, we can then use the :php:meth:`RssHelper::item()` method to create the XML
 in RSS format. Once you have all this setup, you can test your RSS feed by going

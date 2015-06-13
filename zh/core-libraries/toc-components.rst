@@ -1,15 +1,8 @@
-Components
-##########
+组件
+####
 
-.. note::
-    The documentation is not currently supported in zh language for this page.
-
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
-
-    You can referer to the english version in the select top menu to have
-    information about this page's topic.
+CakePHP 有一组组件(*component*)，帮助处理控制器中的基本任务。欲知如何配置和使用组件，
+请看 :doc:`/controllers/components` 一节。
 
 .. toctree::
     :maxdepth: 1

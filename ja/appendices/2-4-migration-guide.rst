@@ -102,7 +102,7 @@ Models
 Datasource
 ----------
 
-- Mysql と Postgres、SQLserver では、接続設定に 'settings' 配列が利用可能になりました。
+- Mysql と Postgres、Sqlserver では、接続設定に 'settings' 配列が利用可能になりました。
   このキー・バリューペアは、コネクションの生成時に ``SET`` コマンドとして発行されます。
 - Mysql ドライバが SSL オプションをサポートしました。
 

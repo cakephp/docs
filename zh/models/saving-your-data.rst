@@ -897,7 +897,7 @@ HABTM 关系更可能的情形会包含一个允许多选的 ``<select>`` 元素
 ======
 
 虽然 CakePHP 可以有非数据库驱动的数据源，但大多数时候是数据库驱动的。CakePHP 被
-设计成与(数据库)无关，可以使用 MySQL、MSSQL、PostgreSQL 和其它数据库。你可以象平
+设计成与(数据库)无关，可以使用 MySQL、Microsoft SQL Server、PostgreSQL 和其它数据库。你可以象平
 时那样创建数据库表。在创建模型类时，模型将自动映射到你创建的表上。按照约定，表名
 为小写、复数，多个单词的表名用下划线分隔。例如，名为 Ingredient 的模型对应的表名
 为 ingredients。名为 EventRegistration 的模型对应的表名为 event_registrations。

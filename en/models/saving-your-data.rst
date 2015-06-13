@@ -987,7 +987,7 @@ Datatables
 
 While CakePHP can have datasources that aren't database driven, most of the
 time, they are. CakePHP is designed to be agnostic and will work with MySQL,
-MSSQL, PostgreSQL and others. You can create your database tables as you
+Microsoft SQL Server, PostgreSQL and others. You can create your database tables as you
 normally would. When you create your Model classes, they'll automatically map to
 the tables that you've created. Table names are by convention lowercase and
 pluralized with multi-word table names separated by underscores. For example, a

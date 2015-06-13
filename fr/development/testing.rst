@@ -18,9 +18,9 @@ ce que vous pensez qu'il doit faire.
 
 Installation via Composer
 -------------------------
-Les dernières versions de phpunit ne fonctionnent pas avec cake::
+Les dernières versions de PHPUnit ne fonctionnent pas avec cake::
 
-    "phpunit/phpunit": "3.7.32"
+    "phpunit/phpunit": "3.7.38"
 
 Installation via Package .phar
 ------------------------------
@@ -30,7 +30,7 @@ récupérer la bonne version depuis https://phar.phpunit.de/.
 Assurez-vous également que /usr/local/bin est dans le include_path de votre
 fichier php.ini ::
 
-    wget https://phar.phpunit.de/phpunit-3.7.32.phar
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar
     chmod +x phpunit.phar
     mv phpunit.phar /usr/local/bin/phpunit
 
@@ -227,7 +227,7 @@ va lancer ce test et afficher les résultats.
 Voir la couverture du code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si vous avez `XDebug <http://xdebug.org>`_ installé, vous pouvez voir les
+Si vous avez `Xdebug <http://xdebug.org>`_ installé, vous pouvez voir les
 résultats de la couverture du code. La couverture du Code est utile pour vous
 dire quelles parties de votre code vos tests n'atteignent pas. La couverture
 est utile pour déterminer où vous devriez ajouter les tests dans le futur,
@@ -241,7 +241,7 @@ La couverture du code inline utilise les lignes vertes pour indiquer les
 lignes qui ont été exécutées. Si vous vous placez sur une ligne verte, une
 info-bulle indiquera quels tests couvre la ligne. Les lignes en rouge n'ont
 pas été lancées, et n'ont pas été testées par vos tests. Les lignes grises
-sont considérées comme du code non exécuté par xdebug.
+sont considérées comme du code non exécuté par Xdebug.
 
 .. _run-tests-from-command-line:
 

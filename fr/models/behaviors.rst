@@ -138,6 +138,13 @@ du behavior::
     // Nous changerons un réglage de notre behavior déjà attaché
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
+Et en utilisant des alias, nous pouvons personnaliser l'alias avec lequel il
+sera chargé, lui permettant aussi d'être chargé plusieurs fois avec différentes
+configurations::
+
+    // Le behavior sera disponible en tant que 'MyTree'
+    $this->Category->Behaviors->load('MyTree', array('className' => 'Tree'));
+
 Il y a aussi une méthode pour obtenir la liste des behaviors qui sont
 attachés à un model. Si nous passons le nom d'un behavior à une méthode,
 elle nous dira si ce behavior est attaché au model, sinon elle nous

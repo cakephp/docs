@@ -108,7 +108,7 @@ Ajouter cake à votre système path
 Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous
 permettront de rendre cake executable dans votre système path.
 
-#. Localisez où se trouve votre installation de cakephp et le cake exécutable.
+#. Localisez où se trouve votre installation de CakePHP et le cake exécutable.
    Par exemple ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Modifiez votre fichier ``.bashrc`` ou ``.bash_profile`` dans votre
    répertoire home, et ajoutez ce qui suit::
@@ -413,7 +413,7 @@ Enlever la coloration
 Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous
 voulez l'arrêter, ou forcer à l'avoir::
 
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans
 le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes
@@ -867,7 +867,7 @@ utilisant la valeur de Configure ``App.fullBaseURL`` de votre bootstrap ou
 config, par exemple.
 
 Pour envoyer des emails, vous devrez fournir à la classe CakeEmail l'hôte avec
-lequel vous souhaitez envoyer l'email en faisant:
+lequel vous souhaitez envoyer l'email en faisant::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
@@ -988,14 +988,14 @@ API de Shell
 
 .. php:method:: nl($multiplier = 1)
 
-    :param int $multiplier Nombre de fois que la séquence de ligne doit être
+    :param int $multiplier: Nombre de fois que la séquence de ligne doit être
         répétée.
 
     Sort un certain nombre de séquences de nouvelles lignes.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
-    :param string $method: Le message à afficher.
+    :param string $message: Le message à afficher.
     :param integer $newlines: Le nombre de nouvelles lignes qui suivent le
         message.
     :param integer $level: Le :ref:`shell-output-level` le plus haut que ce
@@ -1026,7 +1026,7 @@ API de Shell
 
 .. php:method:: overwrite($message = null, $newlines = 1, $size = null)
 
-    :param string $method: Le message à afficher.
+    :param string $message: Le message à afficher.
     :param integer $newlines: Le nombre de nouvelle ligne à la suite du message.
     :param integer $size: Le nombre d'octets à surcharger
 

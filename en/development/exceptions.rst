@@ -62,9 +62,9 @@ exceptions for HTTP methods
 
     Used for doing 400 Bad Request error.
 
-.. php:exception::UnauthorizedException
+.. php:exception:: UnauthorizedException
 
-    Used for doing a 401 Not found error.
+    Used for doing a 401 Unauthorized error.
 
 .. php:exception:: ForbiddenException
 
@@ -350,8 +350,8 @@ could do the following::
 
 .. index:: appError
 
-Using AppController::appError();
-================================
+Using AppController::appError()
+===============================
 
 Implementing this method is an alternative to implementing a custom exception
 handler. It's primarily provided for backwards compatibility, and is not

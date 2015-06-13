@@ -11,7 +11,7 @@ Vérifier votre sécurité
 Si vous sortez votre application dans la nature, il est bon de vous assurer
 qu'elle n'a pas de fuites. Allez voir
 :doc:`/core-libraries/components/security-component` pour vous sécuriser contre
-les attaques CSRF, form field tampering, etc... Utiliser
+les attaques CSRF, la falsification de champ de formulaire, etc... Utiliser
 :doc:`/models/data-validation`, et/ou :doc:`/core-utility-libraries/sanitize`
 est aussi une bonne idée, pour protéger votre base de données et aussi contre
 les attaques XSS. Vérifiez que seul votre répertoire ``webroot`` est visible

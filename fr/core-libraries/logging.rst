@@ -421,9 +421,11 @@ niveau de log approprié.
 .. php:staticmethod:: emergency($message, $scope = array())
 .. php:staticmethod:: alert($message, $scope = array())
 .. php:staticmethod:: critical($message, $scope = array())
+.. php:staticmethod:: error($message, $scope = array())
+.. php:staticmethod:: warning($message, $scope = array())
 .. php:staticmethod:: notice($message, $scope = array())
-.. php:staticmethod:: debug($message, $scope = array())
 .. php:staticmethod:: info($message, $scope = array())
+.. php:staticmethod:: debug($message, $scope = array())
 
 .. meta::
     :title lang=fr: Journalisation (Logging)

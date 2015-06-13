@@ -5,7 +5,7 @@ CakePHP is fast and easy to install. The minimum requirements are a
 webserver and a copy of CakePHP, that's it! While this manual focuses
 primarily on setting up on Apache (because it's the most commonly used),
 you can configure CakePHP to run on a variety of web servers such as
-LightHTTPD or Microsoft IIS.
+lighttpd or Microsoft IIS.
 
 Requirements
 ============
@@ -223,4 +223,4 @@ uncomment one line in ``app/Config/core.php``::
 
 .. meta::
     :title lang=en: Installation
-    :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
+    :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighttpd,repository,enhancements,source code,cakephp,incorporate

@@ -88,10 +88,10 @@ Models
 Datasource
 ----------
 
-- Mysql, Postgres, and SQLserver now support a 'settings' array in the
+- The Mysql, Postgres, and Sqlserver datasources now support a 'settings' array in the
   connection definition. This key => value pair will be issued as ``SET`` commands when the
   connection is created.
-- Mysql driver now supports SSL options.
+- The MySQL driver now supports SSL options.
 
 
 View

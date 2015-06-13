@@ -333,7 +333,7 @@ methods of the HtmlHelper and how to use them.
         The ``fullBase`` option was added.
         Support for :term:`plugin syntax` was added.
 
-.. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = array())
 
     :param string $title: The text to display as the body of the link.
     :param mixed $url: Either the string location, or a :term:`routing array`.
@@ -471,10 +471,10 @@ methods of the HtmlHelper and how to use them.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-   .. versionchanged:: 2.4
+    .. versionchanged:: 2.4
         The ``escapeTitle`` option was added.
 
-   .. versionchanged:: 2.6
+    .. versionchanged:: 2.6
         The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key
         in ``$options`` instead.
 

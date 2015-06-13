@@ -1,7 +1,7 @@
 コンソールとシェル
 ##################
 
-CakePHPはWebのフレームワークとしてだけではなく、コンソールアプリケーション
+CakePHP はウェブフレームワークとしてだけではなく、コンソールアプリケーション
 を開発するためのコンソールフレームワークとしての機能を合わせ持っています。
 コンソールアプリケーションはメンテナンスといった様々なバックグラウンド
 タスクを行ったり、リクエスト－レスポンスのサイクルの外側で何かを実行する
@@ -11,6 +11,8 @@ CakePHPはWebのフレームワークとしてだけではなく、コンソー�
 CakePHPには元々たくさんのコンソールアプリケーションが備わっています。
 これらの中には（ACLやi18nのように）他のCakePHPの機能と組合せて使うものも
 あれば、仕事をより早く片付けるための、より一般的なものもあります。
+
+.. _the-cakephp-console:
 
 CakePHPのコンソール
 ===================
@@ -104,7 +106,7 @@ app, coreのパスで、それぞれコンソールの場所が変更されて�
 \*nixシステム(linux, MacOSX)をお使いの場合は、以下の手順によりcakeの
 実行ファイルへのパスをシステムパスに追加します。
 
-#. CakePHPがインストールされている場所にcakeの実行ファイルがあることを確認します。例えば、以下の場所になります::
+#. CakePHP がインストールされている場所に cake の実行ファイルがあることを確認します。例えば、以下の場所になります
 
    ``/Users/mark/cakephp/lib/Cake/Console/cake``
 
@@ -117,12 +119,11 @@ app, coreのパスで、それぞれコンソールの場所が変更されて�
 Windows Vistaもしくは7をお使いの場合は、以下の手順に従ってください。
 
 #. CakePHPがインストールされている場所にcakeの実行ファイルがあることを確認します。
-
    ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
-
 #. マイコンピュータからシステムのプロパティを開きます。ショートカットを使う場合は Windows キー + Pause もしくは Windows キー + Breakです。デスクトップからの場合はコンピュータで右クリックしてプロパティを開き、システムの詳細設定をクリックします。
-
-#. 詳細設定タブから環境変数を開き、システム環境変数の中のPathをダブルクリックして修正します。ここに ``cake`` のインストールパス文字列を;で区切って追加します。その結果は以下のようになります::
+#. 詳細設定タブから環境変数を開きます。
+#. システム環境変数の中のPathをダブルクリックして修正します。
+#. ``cake`` のインストールパス文字列を;で区切って追加します。その結果は以下のようになります::
 
     %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\Cake\lib\Console;
 
@@ -135,7 +136,6 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 シェルを作ります。お使いのアプリケーションの ``Console/Command`` ディレクトリで
 ``HelloShell.php`` を作ってください。その中に以下のコードを書きます::
 
-    <?php
     class HelloShell extends AppShell {
         public function main() {
             $this->out('Hello world.');
@@ -167,7 +167,6 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 存在しない場合、CakePHPはビルトインされたものを使います。mainメソッドの使い方
 がある程度わかったら、次は以下のように別のコマンドを追加してみましょう::
 
-    <?php
     class HelloShell extends AppShell {
         public function main() {
             $this->out('Hello world.');
@@ -201,7 +200,6 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 配列を定義できます。ちょうどコントローラからモデルに接続するのと同じように、
 定義されたモデルがロードされ、あなたのシェルにプロパティとして接続されます::
 
-    <?php
     class UserShell extends AppShell {
         public $uses = array('User');
 
@@ -223,7 +221,6 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 たとえば ``bake`` は、そのほとんどがタスクにより作られています。 ``$tasks``
 プロパティを使ってシェルのタスクを定義できます::
 
-    <?php
     class UserShell extends AppShell {
         public $tasks = array('Template');
     }
@@ -238,7 +235,6 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 起動時、ShellDispatcherはこのメソッドをコールします。タスククラスは以下の
 ようになります::
 
-    <?php
     class FileGeneratorTask extends Shell {
         public $uses = array('User');
         public function execute() {
@@ -249,7 +245,6 @@ Windows Vistaもしくは7をお使いの場合は、以下の手順に従って
 シェルではタスクのプロパティにもアクセスできます。これにより、タスクを
 :doc:`/controllers/components` と同様に再利用可能な部分に分割できます。::
 
-    <?php
     // Console/Command/SeaShell.php として作成
     class SeaShell extends AppShell {
         public $tasks = array('Sound'); // Console/Command/Task/SoundTask.php として作成
@@ -275,13 +270,11 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 タスクコレクションオブジェクトを使って、タスクをその場でロードすることも
 できます。$tasksで宣言するのとはまた別のやり方です::
 
-    <?php
     $Project = $this->Tasks->load('Project');
 
 これによりタスクをロードしてProjectTaskインスタンスを返します。
 プラグインからタスクをロードすることもできます::
 
-    <?php
     $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
 .. _invoking-other-shells-from-your-shell:
@@ -295,7 +288,6 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 サブシェル側では引数を受け取るための `argv` が使えます。引数やオプションは
 引数リスト（配列）もしくは文字列として指定できます::
 
-    <?php
     // 文字列で渡す
     $this->dispatchShell('schema create Blog --plugin Blog');
 
@@ -304,7 +296,6 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 
 これらの例では自分のプラグインのシェルの中からプラグインのスキーマを
 作るためにschemaシェルを呼んでいます。
-
 
 .. _shell-output-level:
 
@@ -325,7 +316,6 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 
 以下のように出力を指定できます::
 
-    <?php
     // どのレベルでも表示されます
     $this->out('Quiet message', 1, Shell::QUIET);
 
@@ -358,7 +348,6 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 `$this->stdout->styles()` を使ってさらに多くのスタイルを追加できます。
 新しいスタイルを追加するには以下のようにします::
 
-    <?php
     $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
 
 これで ``<flashy>`` というタグが有効になり、ansiカラーが有効な端末であれば、
@@ -383,7 +372,6 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 * blink
 * reverse
 
-
 スタイルを追加するとConsoleOutputのすべてのインスタンスでも有効になります。
 なのでstdoutとstderr両方のオブジェクトでこれらを再定義する必要はありません。
 
@@ -393,8 +381,7 @@ TaskCollectionによる、必要な場所(on the fly)でのタスクのロード
 カラー表示はなかなか綺麗ですが、オフにしたい場合や強制的にオンにしたい場合も
 あるでしょう::
 
-    <?php
-    $this->output->outputAs(ConsoleOutput::RAW);
+    $this->stdout->outputAs(ConsoleOutput::RAW);
 
 これはRAW（生の）出力モードにします。RAW出力モードではすべてのスタイルが
 無効になります。モードには３種類あります。
@@ -432,7 +419,6 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 は柔軟なインターフェースを実装しており、また複数のオプション／引数を一度に
 簡単に設定できるようなメソッドを備えています::
 
-    <?php
     public function getOptionParser() {
         $parser = parent::getOptionParser();
         //configure parser
@@ -445,15 +431,18 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 オプションパーサを構成するすべてのメソッドは相互に連結可能です。
 これによりオプションパーサ全体を１回のメソッド呼び出しで定義できます。::
 
-    <?php
-    $parser->addArgument('type', array(
-        'help' => 'フルパスもしくはクラスの型のいずれか。'
-    ))->addArgument('className', array(
-        'help' => 'CakePHPコアのクラス名（Component, HtmlHelper等)。'
-    ))->addOption('method', array(
-        'short' => 'm',
-        'help' => __('The specific method you want help on.')
-    ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+    public function getOptionParser() {
+        $parser = parent::getOptionParser();
+        $parser->addArgument('type', array(
+            'help' => 'フルパスもしくはクラスの型のいずれか。'
+        ))->addArgument('className', array(
+            'help' => 'CakePHP コアのクラス名（Component, HtmlHelper 等)。'
+        ))->addOption('method', array(
+            'short' => 'm',
+            'help' => __('The specific method you want help on.')
+        ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+        return $parser;
+    }
 
 連結できるのは以下のメソッドです:
 
@@ -473,7 +462,6 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 の上に表示されます。配列または文字列を渡すことで説明文の値を設定できます。
 引数がない場合は現在の値を返します::
 
-    <?php
     // 一度に複数行を設定
     $parser->description(array('１行目', '２行目'));
 
@@ -486,7 +474,6 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 またはオプション情報の後に表示されます。配列または文字列を渡すことで
 エピローグの値を設定できます。引数がない場合は現在の値を返します::
 
-    <?php
     // 一度に複数行を設定
     $parser->epilog(array('１行目', '２行目'));
 
@@ -500,11 +487,10 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 
 コマンドラインツールにおいて、指定順序が意味を持つ引数はよく使われます。
 ``ConsoleOptionParser`` では指定順序が意味を持つ引数を要求するだけでなく
-定義することもできます。指定する際は``$parser->addArgument();``で一度に
+定義することもできます。指定する際は ``$parser->addArgument();`` で一度に
 ひとつずつ設定するか、 ``$parser->addArguments();`` で複数個を同時に
 指定するかを選べます。::
 
-    <?php
     $parser->addArgument('model', array('help' => 'The model to bake'));
 
 引数を作成する際は以下のオプションが指定できます:
@@ -523,7 +509,6 @@ OptionParsersは同時に２つのことを実現します。１つ目は、基�
 複数の引数を１個の配列で持つ場合、 ``$parser->addArguments()`` により
 一度に複数の引数を追加できます::
 
-    <?php
     $parser->addArguments(array(
         'node', array('help' => '生成するノード', 'required' => true),
         'parent' => array('help' => '親ノード', 'required' => true)
@@ -537,10 +522,9 @@ ConsoleOptionParser上のすべてのビルダーメソッドと同様に、addA
 
 指定順序が意味を持つ引数を定義する場合、 ``required`` フラグを指定できます。
 これはシェルが呼ばれた時、その引数が存在しなければならないことを意味します。
-さらに``choices``を使うことで、その引数が取りうる有効な値の選択肢を制限
+さらに ``choices`` を使うことで、その引数が取りうる有効な値の選択肢を制限
 できます::
 
-    <?php
     $parser->addArgument('type', array(
         'help' => 'これとやり取りするノードの型',
         'required' => true,
@@ -560,9 +544,8 @@ ConsoleOptionParser上のすべてのビルダーメソッドと同様に、addA
 ``ConsoleOptionParser`` では長い名称と短い別名の両方を持つオプション、
 デフォルト値の設定やブール型スイッチの作成などをサポートしています。
 オプションは ``$parser->addOption()`` または ``$parser->addOptions()``
-により追加します。::
+により追加します。 ::
 
-    <?php
     $parser->addOption('connection', array(
         'short' => 'c'
         'help' => 'connection',
@@ -573,9 +556,8 @@ ConsoleOptionParser上のすべてのビルダーメソッドと同様に、addA
 ``cake myshell --connection other``, ``cake myshell -c other``
 のいずれかで引数を指定できます。またブール型のスイッチも作れますが、
 これらのスイッチは値を消費せず、またその存在はパースされた引数の中
-だけとなります。::
+だけとなります。 ::
 
-    <?php
     $parser->addOption('no-commit', array('boolean' => true));
 
 このオプション指定の場合、 ``cake myshell --no-commit something`` のように
@@ -595,9 +577,8 @@ ConsoleOptionParser上のすべてのビルダーメソッドと同様に、addA
 .. php:method:: addOptions(array $options)
 
 複数のオプションが１個の配列に入っている場合、 ``$parser->addOptions()``
-を使って複数のオプションを一度に設定できます。::
+を使って複数のオプションを一度に設定できます。 ::
 
-    <?php
     $parser->addOptions(array(
         'node' => array('short' => 'n', 'help' => '生成するノード'),
         'parent' => array('short' => 'p', 'help' => '親ノード')
@@ -613,7 +594,6 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 選択肢が指定されている場合、それらがそのオプションで取りうる有効な値です。
 これ以外の値が指定されると ``InvalidArgumentException`` が発生します::
 
-    <?php
     $parser->addOption('accept', array(
         'help' => 'What version to accept.',
         'choices' => array('working', 'theirs', 'mine')
@@ -628,7 +608,6 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 存在しない場合は偽になります::
 
 
-    <?php
     $parser->addOption('verbose', array(
         'help' => '冗長出力を有効にする.',
         'boolean' => true
@@ -638,7 +617,6 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 これにより、ブール型のフラグをチェックする際に ``empty()`` や ``isset()`` に
 よるチェックをする必要がありません。::
 
-    <?php
     if ($this->params['verbose']) {
         // do something
     }
@@ -659,7 +637,6 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 パーサを提供できるので、シェルはそれぞれのタスクについてコマンドをどう
 解析すればよいのかを知ることができます::
 
-    <?php
     $parser->addSubcommand('model', array(
         'help' => 'Bake a model',
         'parser' => $this->Model->getOptionParser()
@@ -695,7 +672,6 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
 に対するパーサの仕様を配列として定義できます。これによりすべてが配列として
 扱えるので、サブコマンドパーサの構築が容易になります::
 
-    <?php
     $parser->addSubcommand('check', array(
         'help' => __('Check the permissions between an ACO and ARO.'),
         'parser' => array(
@@ -713,19 +689,18 @@ ConsoleOptionParser上のビルダーメソッドと同様に、addOptionsも強
     ));
 
 パーサの仕様の中では ``definition``, ``arguments``, ``options``, ``epilog``
-のためのキーを定義できます。配列形式ビルダーの内部にはサブコマンドは定義
+のためのキーを定義できます。配列形式ビルダーの内部には ``subcommands`` は定義
 できません。argumentsとoptionsの値は
 :php:func:`ConsoleOptionParser::addArguments()` と
 :php:func:`ConsoleOptionParser::addOptions()` が利用する書式に準じてください。
 自分自身に対してbuildFromArrayを使ってオプションパーサを構築することも可能です::
 
-    <?php
     public function getOptionParser() {
         return ConsoleOptionParser::buildFromArray(array(
             'description' => array(
-                __("Use this command to grant ACL permissions. Once executed, the ARO "),
-                __("specified (and its children, if any) will have ALLOW access to the"),
-                __("specified ACO action (and the ACO's children, if any).")
+                __("Use this command to grant ACL permissions. Once executed, the "),
+                __("ARO specified (and its children, if any) will have ALLOW access "),
+                __("to the specified ACO action (and the ACO's children, if any).")
             ),
             'arguments' => array(
                 'aro' => array('help' => __('ARO to check.'), 'required' => true),
@@ -775,7 +750,10 @@ ConsoleOptionParserを追加することにより、一貫性のある方法で�
         <command>bake fixture</command>
         <description>Generate fixtures for use with the test suite. You can use
             `bake fixture all` to bake all fixtures.</description>
-        <epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>
+        <epilog>
+            Omitting all arguments and options will enter into an interactive
+            mode.
+        </epilog>
         <subcommands/>
         <options>
             <option name="--help" short="-h" boolean="1">
@@ -819,7 +797,7 @@ ConsoleOptionParserを追加することにより、一貫性のある方法で�
 ===============================
 
 コマンドライン・インターフェース(CLI)、特にあなたのシェルやタスクでは、
-``env('HTTP_HOST')`` やその他のWebブラウザ固有の変数がセットされていません。
+``env('HTTP_HOST')`` やその他のウェブブラウザ固有の変数がセットされていません。
 
 ``Router::url()`` を使ってレポートを作成したりeメールを送ったりする場合、
 それらにはデフォルトホスト ``http://localhost/`` が構成に含まれており、
@@ -882,7 +860,7 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
 .. php:method:: err($message = null, $newlines = 1)
 
-   :param string $method: 表示するメッセージ
+   :param string $message: 表示するメッセージ
    :param integer $newlines: メッセージの後の改行する数
 
    ``stderr`` へ出力するメソッド。 :php:meth:`Shell::out()` のように動作する。
@@ -924,7 +902,6 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
    このメソッドはユーザとの会話を助ける、会話的なシェルを作成します。
    プロンプトに対するユーザの入力値を返し、またユーザに有効な選択肢を提示します::
 
-        <?php
         $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
 
    入力値の検査では、大文字小文字は区別されない。
@@ -940,13 +917,13 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
 
 .. php:method:: nl($multiplier = 1)
 
-   :param int $multiplier 改行動作を繰り返す回数
+   :param int $multiplier: 改行動作を繰り返す回数
 
    指定数の改行を出力します。
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
-   :param string $method: 表示するメッセージ
+   :param string $message: 表示するメッセージ
    :param integer $newlines: メッセージの後に出力する改行の数
    :param integer $level: このメッセージを表示するべき :ref:`shell-output-level` の最大値
 
@@ -966,12 +943,23 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
    スタイルタグでメッセージを書式化することにより、スタイルを適用した
    出力が行えます::
 
-        <?php
         $this->out('<warning>これはファイルシステムからデータを消去します.</warning>');
 
    \*nixシステムのデフォルトでは、ConsoleOutputオブジェクトのデフォルトは
    カラー出力です。Windowsシステムでは、 ``ANSICON`` 環境変数が存在しない
    限りはプレインテキスト出力がデフォルトです。
+
+.. php:method:: overwrite($message = null, $newlines = 1, $size = null)
+
+    :param string $message: 表示するメッセージ
+    :param integer $newlines: メッセージの後に出力する改行の数
+    :param integer $size: 上書きするバイト数
+
+    プログレスバーの生成や大量の行出力を避けるのに便利なメソッドです。
+
+    注意: 改行コードを含む文字列は上書きできません。
+
+    .. versionadded:: 2.6
 
 .. php:method:: runCommand($command, $argv)
 

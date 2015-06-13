@@ -152,6 +152,7 @@ a:hover {
 /* Preformatted text */
 pre, code {
 	font-family: "Bitstream Vera Sans Mono", "Consolas", "Monaco", monospace;
+    font-size: 1.3rem;
 }
 pre {
 	margin-bottom: 18px;

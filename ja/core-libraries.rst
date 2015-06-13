@@ -1,12 +1,13 @@
 コアライブラリ
 ##############
 
-CakePHPは沢山の組込関数とクラスを備えています。これらのクラスと関数はwebアプリケーションで必要とされる共通機能をカバーしようと試みています。
+CakePHP は沢山の組込関数とクラスを備えています。これらのクラスと関数は
+ウェブアプリケーションで必要とされる共通機能をカバーしようと試みています。
 
 汎用
 ====
 
-汎用ライブラリはCakePHPの様々な場所で使うことができ、再利用されています。
+汎用ライブラリは CakePHP の様々な場所で使うことができ、再利用されています。
 
 .. toctree::
     :maxdepth: 2
@@ -18,10 +19,9 @@ CakePHPは沢山の組込関数とクラスを備えています。これらの�
 ビヘイビア
 ==========
 
-ビヘイビアはモデルに拡張機能を追加します。CakePHPは :php:class:`TreeBehavior` や
-:php:class:`ContainableBehavior` など、沢山の組込みビヘイビアを備えています。
-
-ビヘイビアの作成方法と使い方については学ぶには :doc:`/models/behaviors` を読んでください。
+.. include:: /core-libraries/toc-behaviors.rst
+    :start-line: 3
+    :end-before: toctree
 
 .. toctree::
     :maxdepth: 2
@@ -33,38 +33,41 @@ CakePHPは沢山の組込関数とクラスを備えています。これらの�
 コンポーネント
 ==============
 
-CakePHPはコントローラ内の基本的なタスクをこなすのに役立つコンポーネントを取り揃えています。
-コンポーネントの使い方と設定方法については :doc:`/controllers/components` を参照して下さい。
+.. include:: /core-libraries/toc-components.rst
+    :start-line: 3
+    :end-before: toctree
 
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/toc-components
+    /core-libraries/toc-components
 
 .. _core-helpers:
 
 ヘルパー
 ========
 
-CakePHPにはビューを作成を手助けする沢山のヘルパーがあります。それらは整形式でマークアップする手助けをしたり(フォームを含む)、
-テキスト、時間、数値の整形に役立ったり、よく使われているjavascriptライブラリを導入することさえできます。
-組込みのヘルパーの概要は以下の通りです。
-
-ヘルパーやそのAPI、独自のヘルパーの作成方法や使い方についてさらに学習したい場合は、:doc:`/views/helpers` を読んでください。
+.. include:: /core-libraries/toc-helpers.rst
+    :start-line: 3
+    :end-before: toctree
 
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/toc-helpers
-
+    /core-libraries/toc-helpers
 
 ユーティリティ
 ==============
 
-コアMVCコンポーネントに加えてCakePHPはキャッシュやロギング、国際化対応などwebサービスで必要とされるあらゆるユーティリティクラスを備えています。
+コア MVC コンポーネントに加えて CakePHP はキャッシュやロギング、国際化対応など
+ウェブサービスで必要とされるあらゆるユーティリティクラスを備えています。
 
 .. toctree::
     :maxdepth: 2
 
     core-libraries/toc-utilities
 
+
+.. meta::
+    :title lang=ja: コアライブラリ
+    :keywords lang=ja: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events

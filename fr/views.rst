@@ -58,7 +58,7 @@ chapitre :
 
 .. _extending-views:
 
-Vues étendues
+Vues Étendues
 -------------
 
 .. versionadded:: 2.1
@@ -366,20 +366,6 @@ controller/view.
     ``$title_for_layout`` est déprécié depuis 2.5, utilisez
     ``$this->fetch('title')`` dans votre layout et
     ``$this->assign('title', 'page title')`` à la place.
-
-Pour définir le titre pour le layout, il est plus facile de le faire dans le
-controller, en configurant la variable ``$title_for_layout``::
-
-   class UsersController extends AppController {
-       public function view_active() {
-           $this->set('title_for_layout', 'Voir les Utilisateurs actifs');
-       }
-   }
-
-Vous pouvez aussi définir la variable title_for_layout depuis l'intérieur
-d'un fichier de vue::
-
-    $this->set('title_for_layout', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
 le répertoire ``app/View/Layouts``, et passez de l'un à l'autre depuis les

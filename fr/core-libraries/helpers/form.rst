@@ -100,14 +100,14 @@ pleinement avantage du Helper Form (Helper Formulaire) est
     A la création de formulaires pour les models dans des plugins. Nous
     devrons toujours utiliser la :term:`syntaxe de plugin` à la création
     d'un formulaire. Cela assurera que le formulaire est correctement généré::
-    
+
         echo $this->Form->create('ContactManager.Contact');
 
     Le tableau ``$options`` est l'endroit où la plupart des paramètres
     de configurations sont stockés. Ce tableau spécial peut contenir
     un certain nombre de paires clé-valeur qui peuvent affecter la
     manière dont le formulaire sera créé.
-    
+
     .. versionchanged:: 2.0
 
     L'Url par défaut pour tous les formulaires, est maintenant l'Url
@@ -115,8 +115,8 @@ pleinement avantage du Helper Form (Helper Formulaire) est
     pouvez redéfinir cette valeur par défaut en fournissant
     ``$options['url']`` en second paramètre de ``$this->Form->create()``.
 
-Options pour  create() 
------------------------
+Options pour  create()
+----------------------
 
 Il y plusieurs options pour create():
 
@@ -134,13 +134,13 @@ Il y plusieurs options pour create():
     .. code-block:: html
 
         <form id="UserAddForm" method="get" action="/users/add">
-    
+
     En spécifiant 'file' cela changera la méthode de soumission à 'post', et
     ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
     Vous devez l'utiliser si vous avez des demandes de fichiers dans
     votre formulaire. L'absence de cet attribut enctype empêchera le
     fonctionnement de l'envoi de fichiers. ::
- 
+
         echo $this->Form->create('User', array('type' => 'file'));
 
     Affichera:
@@ -228,7 +228,7 @@ Il y plusieurs options pour create():
 
         // Pas de div, Pas de label
         echo $this->Form->input('password');
-        // a un élément label 
+        // a un élément label
         echo $this->Form->input('username', array('label' => 'Username'));
 
 Fermer le Formulaire
@@ -253,7 +253,7 @@ Fermer le Formulaire
     Si une chaîne est fournie comme premier argument à end(), le FormHelper
     affichera un bouton submit nommé en conséquence en même temps
     que la balise de fermeture du formulaire. ::
-   
+
         echo $this->Form->end('Termine');
 
     Affichera:
@@ -340,7 +340,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
     Le paramètre ``$options`` vous permet de personnaliser le
     fonctionnement de ``input()``, et contrôle finement ce qui est généré.
-    
+
     Le div entourant aura un nom de classe ``required`` ajouté à la suite si
     les règles de validation pour le champ du Model ne spécifient pas
     ``allowEmpty => true``. Une limitation de ce comportement est que le champ
@@ -408,7 +408,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     Si vous voulez un champ de sélection utilisant une relation belongsTo
     ou hasOne, vous pouvez ajouter ceci dans votre controller Users
     (en supposant que l'User belongsTo Group)::
-   
+
         $this->set('groups', $this->User->Group->find('list'));
 
     Ensuite, ajouter les lignes suivantes à votre vue de formulaire::
@@ -431,7 +431,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
 
         Essayez d'éviter l'utilisation de `FormHelper::input()` pour générer
         les boutons submit. Utilisez plutôt :php:meth:`FormHelper::submit()`.
-     
+
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null, $options = array())
 
     Génère un ensemble d'inputs (entrées) pour ``$fields``. Si $fields est
@@ -590,7 +590,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
 * ``$options['label']`` Définissez cette clé à la chaîne que vous voudriez
   afficher dans le label qui accompagne le input::
-  
+
       echo $this->Form->input('User.name', array(
           'label' => "Alias de l'user"
       ));
@@ -731,7 +731,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
   Pour un élément de type  ``date`` et ``datetime`` l'attribut 'separator'
   peut être utilisé pour modifier la chaîne entre les select. Par défaut '-'.
- 
+
 * ``$options['format']`` L'ordre du code HTML généré par FormHelper est
   contrôlable comme vous le souhaitez. l'option 'format' supporte un tableau
   de chaîne  décrivant le model de page que vous voudriez que l'élément
@@ -757,13 +757,13 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
       // Pas de div, ni label
       echo $this->Form->input('password');
-      
+
       // a un élément label
       echo $this->Form->input('username', array('label' => 'Username'));
 
   Si vous avez besoin de changer plus tard les valeurs par défaut, vous
   pourrez utiliser :php:meth:`FormHelper::inputDefaults()`.
-  
+
 Générer des types de inputs spécifiques
 =======================================
 
@@ -838,7 +838,7 @@ Les options pour  select, checkbox et inputs radio
 
   .. note::
 
-    La clé selected pour les inputs de type date et datetime peuvent aussi 
+    La clé selected pour les inputs de type date et datetime peuvent aussi
     être des timestamps UNIX.
 
 * ``$options['empty']`` Est défini à true, pour forcer l'input à rester vide.
@@ -887,7 +887,7 @@ Les options pour  select, checkbox et inputs radio
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
   Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
-    
+
     echo $this->Form->checkbox('published', array('hiddenField' => false));
 
   Retournera:
@@ -902,7 +902,7 @@ Les options pour  select, checkbox et inputs radio
   place à différents endroits c'est seulement le dernier groupe
   de valeur d'input qui sera sauvegardé.
 
-  Dans cet exemple , seules les couleurs tertiaires seront passées, 
+  Dans cet exemple , seules les couleurs tertiaires seront passées,
   et les couleurs primaires seront réécrite:
 
   .. code-block:: html
@@ -925,10 +925,10 @@ Les options pour  select, checkbox et inputs radio
     <input type="checkbox" name="data[Addon][Addon][]" value="5" id="CouleursOranges" />
     <label for="CouleursOranges">Orange</label>
 
-  En désactivant le champ caché ``'hiddenField'`` dans le second groupe 
+  En désactivant le champ caché ``'hiddenField'`` dans le second groupe
   d'input empêchera ce behavior.
 
-  Vous pouvez définir une valeur différente pour le champ caché autre que 0 
+  Vous pouvez définir une valeur différente pour le champ caché autre que 0
   comme 'N'::
 
       echo $this->Form->checkbox('published', array(
@@ -1050,7 +1050,7 @@ Ex: name=data[User][username], id=UserUsername
 
     .. code-block:: html
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden">
+        <input name="data[User][id]" id="UserId" type="hidden">
 
     Si le form est édité (qui est le tableau ``$this->request->data`` va
     contenir les informations sauvegardées pour le model ``User``), la valeur
@@ -1059,7 +1059,7 @@ Ex: name=data[User][username], id=UserUsername
 
     .. code-block:: html
 
-        <input name="data[User][id]" id="UserId" type="hidden" />
+        <input name="data[User][id]" id="UserId" type="hidden" value="10" />
 
     .. versionchanged:: 2.0
         Les champs cachés n'enlèvent plus la classe attribute. Cela signifie
@@ -1080,7 +1080,7 @@ Ex: name=data[User][username], id=UserUsername
 
     Si le form est édité (ainsi, le tableau ``$this->request->data`` va contenir
     les informations sauvegardées pour le model ``User``), la valeur
-    correspondant au champs ``notes`` sera automatiquement ajoutée au HTML 
+    correspondant au champs ``notes`` sera automatiquement ajoutée au HTML
     généré. Exemple:
 
     .. code-block:: html
@@ -1192,7 +1192,7 @@ Ex: name=data[User][username], id=UserUsername
         <label for="UserGenreF">Femme</label>
 
     Si pour quelque raisons vous ne voulez pas du input caché, définissez
-    ``$attributes['value']`` à une valeur sélectionnée ou le booléen false 
+    ``$attributes['value']`` à une valeur sélectionnée ou le booléen false
 
     .. versionchanged:: 2.1
         L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
@@ -1519,7 +1519,7 @@ Création des boutons et des éléments submits
     :php:meth:`FormHelper::submit() ou :php:meth:`FormHelper::button()`
     pour créer des boutons a l'intérieur de formulaires ouvert.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = array ())
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
     Requiert que JavaScript  soit autorisé dans votre navigateur.
@@ -1539,6 +1539,10 @@ Création des boutons et des éléments submits
         Définir ``'inline' => true`` va ajouter la balise de form en block
         de contenu ``postLink`` ou vous pouvez utiliser l'option ``block``
         pour spécifier un block personnalisé.
+
+    .. versionchanged:: 2.6
+        L'argument ``$confirmMessage`` a été dépréciée. Utilisez la clé
+        ``confirm`` dans ``$options`` à la place.
 
 Crée des inputs de date et d'heure (date and time inputs)
 =========================================================
@@ -1729,7 +1733,7 @@ Ceci assurera que les inputs  jeton spéciaux ``_Token`` seront générés.
 
 .. php:method:: unlockField($name)
 
-    Déverrouille un champ en le rendant exempt du hachage (hashing) 
+    Déverrouille un champ en le rendant exempt du hachage (hashing)
     du ``SecurityComponent``. Ceci permet également au champ d'être
     manipulé par Javascript. Le paramètre ``$name`` devra être le nom
     d'entité de l'input::

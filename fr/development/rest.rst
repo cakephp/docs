@@ -31,12 +31,12 @@ comme cela::
     Router::parseExtensions();
 
 La première ligne met en place un certain nombre de routes par défaut pour
-un accès facile par REST où la méthode spécifie le format de résultat
-souhaité (ex: xml, json, rss). Ces routes correspondent aux méthodes de
-requêtes HTTP.
+un accès facile par REST là où la méthode ``parseExtensions()`` spécifie le
+format de résultat souhaité (ex: xml, json, rss). Ces routes correspondent aux
+méthodes de requêtes HTTP.
 
 =========== ===================== ==============================
-HTTP format URL.format            Action de contrôleur appelée
+HTTP format format URL            Action de contrôleur appelée
 =========== ===================== ==============================
 GET         /recipes.format       RecipesController::index()
 ----------- --------------------- ------------------------------
@@ -44,11 +44,11 @@ GET         /recipes/123.format   RecipesController::view(123)
 ----------- --------------------- ------------------------------
 POST        /recipes.format       RecipesController::add()
 ----------- --------------------- ------------------------------
+POST        /recipes/123.format   RecipesController::edit(123)
+----------- --------------------- ------------------------------
 PUT         /recipes/123.format   RecipesController::edit(123)
 ----------- --------------------- ------------------------------
 DELETE      /recipes/123.format   RecipesController::delete(123)
------------ --------------------- ------------------------------
-POST        /recipes/123.format   RecipesController::edit(123)
 =========== ===================== ==============================
 
 La classe Router de CakePHP utilise un certain nombre d'indicateurs

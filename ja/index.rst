@@ -6,14 +6,17 @@
 Welcome
 #######
 
-CakePHP cookbookは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
+CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
+右上の "Improve this Doc" (この文書を改善する)  ボタンに注目してください。
+このボタンは、あなたがドキュメンテーションの追加・削除・修正などの貢献が簡単にできるように、
+該当ページの GitHub のオンラインエディタへ誘導します。
 
 .. container:: offline-download
 
     **cookbookをどこででも**
 
-    どこでもCakePHPのレシピをお楽しみ頂けます。PDFとEPUBをご用意しましたので、\
+    どこでも CakePHP クックブックをお楽しみ頂けます。 PDF と EPUB をご用意しましたので、\
     多くのデバイス上でオフラインでドキュメントを読むことができます。
 
     - `PDF(英語) <../_downloads/en/CakePHPCookbook.pdf>`_
@@ -64,3 +67,8 @@ CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエス�
 もし何か困っていたら、 :doc:`いくつもの助けを求められる場所
 </cakephp-overview/where-to-get-help>`
 があります。
+
+
+.. meta::
+    :title lang=ja: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=ja: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

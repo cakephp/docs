@@ -4,12 +4,12 @@ DataSources (Sources de Données)
 Les Sources de données (DataSources) sont les liens entre les models et la
 source de données qu'ils représentent. Dans de nombreux cas, les données
 sont récupérées depuis une base de données relationnelle telle MySQL,
-PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de
+PostgreSQL ou Microsoft SQL Server. CakePHP est distribué avec de nombreuses sources de
 données spécifiques d'une base de données (voir les fichiers de classe
 dans ``lib/Cake/Model/Datasource/Database``), un résumé de ceux-ci est listé
 ici pour votre confort :
 
-- MySql
+- Mysql
 - Postgres
 - Sqlite
 - Sqlserver
@@ -29,8 +29,8 @@ sources de données, vous les utilisez tout le temps.
 Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``,
 qui agrège de la logique commune à la plupart des bases de données
 relationnelles. Si vous décidez d'écrire une source de donnée RDBMS,
-travailler à partir de l'une d'entre elles (par ex Mysql ou
-Sqlite) est plus sûr.
+travailler à partir de l'une d'entre elles (par ex MySQL ou
+SQLite) est plus sûr.
 
 La plupart des gens cependant, sont intéressés par l'écriture de sources
 de données pour des sources externes, telles les APIs REST distantes ou
@@ -322,4 +322,4 @@ du Serveur SQL.
 
 .. meta::
     :title lang=fr: DataSources (Sources de Données)
-    :keywords lang=fr: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+    :keywords lang=fr: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,microsoft sql server,aggregates,apis,repository,signatures

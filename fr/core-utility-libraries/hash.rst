@@ -146,7 +146,7 @@ Les Types d'Attribut Correspondants
         Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
         insert().
 
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     :rtype: array
 
@@ -175,7 +175,7 @@ Les Types d'Attribut Correspondants
         Depuis 2.5.0, les expressions matchant l'attribut fonctionnent avec
         remove()
 
-.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
     :rtype: array
 
