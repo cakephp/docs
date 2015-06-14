@@ -621,6 +621,125 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 à la fois la propriété ``_matchingData`` et la propriété standard d'association
 dans vos résultats.
 
+Using innerJoinWith
+~~~~~~~~~~~~~~~~~~~
+
+Using the ``matching()`` function, as we saw already, will create an ``INNER
+JOIN`` with the specified association and will also load the fields into the
+result set.
+
+There may be cases where you want to use ``matching()`` but are not interested
+in loading the fields into the result set. For this purpose, you can sue the
+``innerJoinWith()`` function::
+
+    $query = $articles->find();
+    $query->innerJoinWith('Tags', function ($q) {
+        return $q->where(['Tags.name' => 'CakePHP']);
+    });
+
+The ``innerJoinWith()`` function works exactly the same as ``matching()``, that
+means that you are allowed to use dot notation for joining deeply nested
+associations::
+
+    $query = $products->find()innerJoinWith(
+        'Shops.Cities.Countries', function ($q) {
+            return $q->where(['Countries.name' => 'Japan']);
+        }
+    );
+
+Again, the only difference is that the results for those associations will not
+be present in the ``_matchingData`` property in each result.
+
+Using notMatching
+~~~~~~~~~~~~~~~~~
+
+The opposite of ``matching()`` is ``notMatching()``. This function will change
+the query so that it filters results that have no relation to the specified
+association::
+
+    // In a controller or table method.
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Tags', function ($q) {
+            return $q->where(['Tags.name' => 'boring']);
+        });
+
+The example above will find all articles that were not tagged with the word
+``boring``.  You can apply this method to HasMany associations as well. You could,
+for example,  find all the authors with no published articles in the last 10
+days::
+
+    $query = $authorsTable
+        ->find()
+        ->notMatching('Articles', function ($q) {
+            return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
+        });
+
+It is also possible to use this method for filtering out records not matching
+deep associations, for example, you could find articles that has not been
+commented by a certain user::
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Comments.Users', function ($q) {
+            return $q->where(['username' => 'jose']);
+        });
+
+Since articles with no comments at all also satisfy the condition above, you may
+want to combine ``matching()`` and ``notMatching()`` in the same query. The
+following example will find articles having at least one comment, but not
+commented by a certain user::
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Comments.Users', function ($q) {
+            return $q->where(['username' => 'jose']);
+        })
+        ->matching('Comments');
+
+.. note::
+
+    As ``notMatching()`` will create a ``LEFT JOIN``, you might want to consider
+    calling ``distinct`` on the find query as you might get duplicate rows
+    otherwise.
+
+Keep in mind that contrary to the ``matching()`` function, ``notMatching()``
+will not add any data to the ``_matchingData`` property in the results.
+
+Using leftJoinWith
+~~~~~~~~~~~~~~~~~~
+
+On certain occasions you may want to calculate a fields based on an association,
+without having to load all the records for it. For example, if you wanted to
+load the total amount of comments an article has along with all the article
+data, you can use the ``leftJoinWith()`` function::
+
+    $query = $articlesTable->find();
+    $query->select(['total_articles' => $query->func()->count('Articles.id')])
+        ->leftJoinWith('Articles')
+        ->group(['Articles.id'])
+        ->autoFields(true);
+
+The results for the above query will contain the article data and the
+``total_articles`` property for each of them.
+
+``leftJoinWith()`` can also be used with deeply nested associations. This is
+useful, for example, for bringing the count of articles tagged with a certain
+word, per author::
+
+    $query = $authorsTable->find();
+        ->find()
+        ->select(['total_articles' => $query->func()->count('Articles.id')])
+        ->leftJoinWith('Articles.Tags', function ($q) {
+            return $q->where(['Tags.name' => 'awesome']);
+        })
+        ->group(['Authors.id'])
+        ->autoFields(true);
+
+This function will not load any columns from the specified associations into the
+result set.
+
 .. end-contain
 
 Changing Fetching Strategies
