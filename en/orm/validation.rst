@@ -127,9 +127,9 @@ way to make error messages dynamic based on the provided value.
 Default Validator Class
 =======================
 
-As stated above by default the validation methods receive an instance of
-``Cake\Validation\Validator``. Instead if you want your custom validator's
-instance to be used each time you can use table's ``$_validatorClass`` property::
+As stated above, by default the validation methods receive an instance of
+``Cake\Validation\Validator``. Instead, if you want your custom validator's
+instance to be used each time, you can use table's ``$_validatorClass`` property::
 
     // In your table class
     public function initialize()
