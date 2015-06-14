@@ -1088,7 +1088,7 @@ way PHP handles data passed via file fields
     encoding-type, by setting the type option to 'file' in
     ``$this->Form->create()``.
 
-Creating Date and Time Inputs
+Creating DateTime Inputs
 -----------------------------
 
 .. php:method:: dateTime($fieldName, $options = [])
@@ -1114,6 +1114,54 @@ can override the ``dateWidget`` template. By default the ``dateWidget`` template
 is::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+
+Creating Time Inputs
+--------------------
+
+.. php:method:: time($fieldName, $options = [])
+
+Creates two select elements populated with 24 hours and 60 minutes for ``hour`` and ``minute``, respectively.
+Additionally, HTML attributes may be supplied in $options for each specific ``type``. If ``$options['empty']`` is ``false``, the select will not include an empty option:
+
+* ``empty`` - If ``true``, the empty select option is shown. If a string,
+  that string is displayed as the empty element.
+* ``default`` | ``value`` The default value to be used by the input. A value in ``$this->request->data``
+  matching the field name will override this value. If no default is provided ``time()`` will be used.
+* ``timeFormat`` The time format to use, either 12 or 24. Defaults to 24.
+* ``second`` Set to ``true`` to enable seconds drop down.
+* ``interval`` The interval for the minutes select. Defaults to 1.
+
+For example, to create a time range with minutes selectable in 15 minute increments, and to apply classes to the select boxes, you could do the following::
+
+    echo $this->Form->time('released', [
+        'interval' => 15,
+        'hour' => [
+            'class' => 'foo-class',
+        ],
+        'minute' => [
+            'class' => 'bar-class',
+        ],
+    ]);
+    
+Which would create the following two selects:
+
+.. code-block:: html
+    
+    <select name="released[hour]" class="foo-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+        <option value="22">22</option>
+        <option value="23">23</option>
+    </select>
+    <select name="released[minute]" class="bar-class">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
 
 Creating Year Inputs
 --------------------
