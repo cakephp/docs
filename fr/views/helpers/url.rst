@@ -1,5 +1,5 @@
-UrlHelper
-##########
+Url
+###
 
 .. php:namespace:: Cake\View\UrlHelper
 
@@ -90,7 +90,7 @@ URL utilisant une route labellisée ::
     // );
     /produits/i-m-slug
 
-Pour de plus amples informations, voir 
+Pour de plus amples informations, voir
 `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
 dans l'API.
 

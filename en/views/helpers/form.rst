@@ -22,8 +22,8 @@ is ``create()``. This method outputs an opening form tag.
 All parameters are optional. If ``create()`` is called with no parameters
 supplied, it assumes you are building a form that submits to the current
 controller, via the current URL. The default method for form submission is POST.
-If you were to call ``create()`` inside the view for UsersController::add(), you would see
-something like the following output in the rendered view:
+If you were to call ``create()`` inside the view for UsersController::add(), you
+would see something like the following output in the rendered view:
 
 .. code-block:: html
 
@@ -515,9 +515,9 @@ common options shared by all input methods are as follows:
     Date and datetime fields' default values can be set by using the
     'selected' key.
 
-    Beware of using ``false`` to assign a default value. A ``false`` value is used to
-    disable/exclude options of an input field, so ``'default' => false`` would
-    not set any value at all. Instead use ``'default' => 0``.
+    Beware of using ``false`` to assign a default value. A ``false`` value is
+    used to disable/exclude options of an input field, so ``'default' => false``
+    would not set any value at all. Instead use ``'default' => 0``.
 
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
@@ -672,11 +672,12 @@ Datetime Options
   Would create 4 options in the minute select. One for each 15
   minutes.
 
-* ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
-  Defaults to null which rounds half up according to `interval`.
+* ``$options['round']`` Can be set to `up` or `down` to force rounding in either
+  direction. Defaults to null which rounds half up according to `interval`.
 
-* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead of text.
-  If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]`` then the given array will be used.
+* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
+  of text. If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]``
+  then the given array will be used.
 
 Creating Input Elements
 =======================
@@ -906,9 +907,9 @@ Defaults to ``true``::
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
-* ``$attributes['options']`` This key allows you to manually specify options for a
-  select input, or for a radio group. Unless the 'type' is specified as 'radio',
-  the FormHelper will assume that the target output is a select input::
+* ``$attributes['options']`` This key allows you to manually specify options for
+  a select input, or for a radio group. Unless the 'type' is specified as
+  'radio', the FormHelper will assume that the target output is a select input::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
 
@@ -1089,7 +1090,7 @@ way PHP handles data passed via file fields
     ``$this->Form->create()``.
 
 Creating DateTime Inputs
------------------------------
+------------------------
 
 .. php:method:: dateTime($fieldName, $options = [])
 
@@ -1103,9 +1104,11 @@ of options:
 * ``interval`` The interval for the minutes select. Defaults to 1
 * ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
-* ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either direction. Defaults to null.
-* ``default`` The default value to be used by the input. A value in ``$this->request->data``
-  matching the field name will override this value. If no default is provided ``time()`` will be used.
+* ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either
+  direction. Defaults to null.
+* ``default`` The default value to be used by the input. A value in
+  ``$this->request->data`` matching the field name will override this value. If
+  no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24.
 * ``second`` Set to ``true`` to enable seconds drop down.
 
@@ -1120,18 +1123,24 @@ Creating Time Inputs
 
 .. php:method:: time($fieldName, $options = [])
 
-Creates two select elements populated with 24 hours and 60 minutes for ``hour`` and ``minute``, respectively.
-Additionally, HTML attributes may be supplied in $options for each specific ``type``. If ``$options['empty']`` is ``false``, the select will not include an empty option:
+Creates two select elements populated with 24 hours and 60 minutes for ``hour``
+and ``minute``, respectively.
+Additionally, HTML attributes may be supplied in $options for each specific
+``type``. If ``$options['empty']`` is ``false``, the select will not include an
+empty option:
 
 * ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
-* ``default`` | ``value`` The default value to be used by the input. A value in ``$this->request->data``
-  matching the field name will override this value. If no default is provided ``time()`` will be used.
+* ``default`` | ``value`` The default value to be used by the input. A value in
+  ``$this->request->data`` matching the field name will override this value.
+  If no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24. Defaults to 24.
 * ``second`` Set to ``true`` to enable seconds drop down.
 * ``interval`` The interval for the minutes select. Defaults to 1.
 
-For example, to create a time range with minutes selectable in 15 minute increments, and to apply classes to the select boxes, you could do the following::
+For example, to create a time range with minutes selectable in 15 minute
+increments, and to apply classes to the select boxes, you could do the
+following::
 
     echo $this->Form->time('released', [
         'interval' => 15,
@@ -1142,11 +1151,11 @@ For example, to create a time range with minutes selectable in 15 minute increme
             'class' => 'bar-class',
         ],
     ]);
-    
+
 Which would create the following two selects:
 
 .. code-block:: html
-    
+
     <select name="released[hour]" class="foo-class">
         <option value="" selected="selected"></option>
         <option value="00">0</option>
@@ -1489,8 +1498,9 @@ Creating Standalone Buttons and POST links
     POST.
 
     This method creates a ``<form>`` element. So do not use this method in some
-    opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
-    :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
+    opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
+    or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons
+    inside opened forms.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
@@ -1591,10 +1601,10 @@ example::
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
 Similar to input containers, the ``input()`` method will also attempt to use
-distinct templates for each form group. A form group is a combo of label and input.
-For example, when creating a radio input the ``radioFormGroup`` will be used if
-it is present. If that template is missing by default each set of label & input
-is rendered using the ``formGroup`` template. For example::
+distinct templates for each form group. A form group is a combo of label and
+input. For example, when creating a radio input the ``radioFormGroup`` will be
+used if it is present. If that template is missing by default each set of label
+& input is rendered using the ``formGroup`` template. For example::
 
     // Add custom radio form group
     $this->Form->templates([
@@ -1643,8 +1653,8 @@ When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
 - ``fieldset`` Set to ``false`` to disable the fieldset. You can also pass an
-  array of parameters to be applied as HTML attributes to the fieldset tag. If you
-  pass an empty array, the fieldset will be displayed without attributes.
+  array of parameters to be applied as HTML attributes to the fieldset tag. If
+  you pass an empty array, the fieldset will be displayed without attributes.
 - ``legend`` Set to ``false`` to disable the legend for the generated input set.
   Or supply a string to customize the legend text.
 
@@ -1748,11 +1758,11 @@ Building a Widget Class
 
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
-the ``render(array $data)`` and ``secureFields(array $data)`` methods to be implemented.
-The ``render()`` method expects an array of data to build the widget and is expected to return a string
-of HTML for the widget.
-The ``secureFields()`` method expects an array of data as well and is expected to return an
-array containing the list of fields to secure for this widget.
+the ``render(array $data)`` and ``secureFields(array $data)`` methods to be
+implemented. The ``render()`` method expects an array of data to build the
+widget and is expected to return a string of HTML for the widget.
+The ``secureFields()`` method expects an array of data as well and is expected
+to return an array containing the list of fields to secure for this widget.
 If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
 any dependencies you define. If we wanted to build an Autocomplete widget you

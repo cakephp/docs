@@ -22,7 +22,7 @@ Insérer des Données
 Le moyen le plus simple d'insérer des données dans une base de données est de
 créer une nouvelle entity et de la passer à la méthode ``save()`` de la classe
 ``Table``::
-    
+
     use Cake\ORM\TableRegistry;
 
     $articlesTable = TableRegistry::get('Articles');
@@ -116,7 +116,7 @@ d'Entity de la table de jointure::
     $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
     $tag1->_joinData->tagComment = 'Je pense que cela est lié à CakePHP';
 
-    $ArticlesTags->link($article, [$tag1]);
+    $articlesTable->Tags->link($article, [$tag1]);
 
 Délier les Enregistrements Many To Many
 ---------------------------------------
@@ -335,7 +335,7 @@ vous pouvez utiliser ``transactional()``::
 .. note::
 
     Si vous utilisez newEntity() et qu'il manque quelques unes ou toutes les
-    données dans les entities résultantes, vérifiez deux fois que les colonnes 
+    données dans les entities résultantes, vérifiez deux fois que les colonnes
     que vous souhaitez définir sont listées dans la propriété ``$_accessible``
     de votre entity.
 

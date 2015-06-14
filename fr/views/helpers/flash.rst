@@ -1,5 +1,5 @@
-FlashHelper
-###########
+Flash
+#####
 
 .. php:namespace:: Cake\View\Helper
 

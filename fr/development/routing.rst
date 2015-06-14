@@ -432,6 +432,12 @@ pour le routing inversé pour identifier la route que vous souhaitez utiliser::
 Si votre template de route contient des éléments de route comme ``:controller``,
 vous aurez besoin de fournir ceux-ci comme options de ``Router::url()``.
 
+.. note::
+
+    Les noms de Route doivent être uniques pour l'ensemble de votre application.
+    Le même ``_name`` ne peut être utilisé deux fois, même si les noms
+    apparaissent dans un scope de routing différent.
+
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
 

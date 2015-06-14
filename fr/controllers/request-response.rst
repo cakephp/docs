@@ -778,27 +778,6 @@ Une fois que vous avez fini de créer une response, appeler ``send()`` va
 envoyer tous les en-têtes définis ainsi que le corps. Ceci est fait
 automatiquement à la fin de chaque requête par le ``Dispatcher``.
 
-.. _cakeresponse-testing:
-
-Response et les Tests
----------------------
-
-La classe ``Response`` aide à produire les controllers et component de
-test facilement. En ayant un seul endroit pour les en-têtes factices, vous
-pouvez tester plus facilement les controllers et les components::
-
-    public function testSomething()
-    {
-        $this->controller->response = $this->getMock('Cake\Network\Response');
-        $this->controller->response->expects($this->once())->method('header');
-        // ...
-    }
-
-De plus, vous pouvez exécuter les tests à partir de la ligne de commande plus
-facilement, comme vous pouvez utiliser les objects factices ('mocks') pour
-éviter les erreurs 'd'envois d'en-têtes' qui peuvent arriver en essayant de
-configurer les en-têtes dans CLI.
-
 .. meta::
     :title lang=fr: Objets Request et Response
     :keywords lang=fr: requête controller,paramètres de requête,tableaux indicés,purpose index,objets réponse,information domaine,Objet requête,donnée requêtée,interrogation,params,précédentes versions,introspection,dispatcher,rout,structures de données,tableaux,adresse ip,migration,indexes,cakephp

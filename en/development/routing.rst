@@ -219,8 +219,8 @@ actions should lie. When a request is made, the values for these
 route elements are found in ``$this->request->params`` in the controller.
 When you define a custom route element, you can optionally specify a regular
 expression - this tells CakePHP how to know if the URL is correctly formed or
-not. If you choose to not provide a regular expression, any non ``/`` character will be
-treated as part of the parameter::
+not. If you choose to not provide a regular expression, any non ``/`` character
+will be treated as part of the parameter::
 
     $routes->connect(
         '/:controller/:id',
@@ -313,14 +313,16 @@ CakePHP, and should not be used unless you want the special meaning
 * ``plugin`` Used to name the plugin a controller is located in.
 * ``prefix`` Used for :ref:`prefix-routing`
 * ``_ext`` Used for :ref:`File extentions routing <file-extensions>`.
-* ``_base`` Set to ``false`` to remove the base path from the generated URL. If your application
-  is not in the root directory, this can be used to generate URLs that are 'cake relative'.
-  cake relative URLs are required when using requestAction.
-* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`. Defaults
-  to the current scheme.
+* ``_base`` Set to ``false`` to remove the base path from the generated URL. If
+  your application is not in the root directory, this can be used to generate
+  URLs that are 'cake relative'. cake relative URLs are required when using
+  requestAction.
+* ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`.
+  Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to generated URLs.
+* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to
+  generated URLs.
 * ``#`` Allows you to set URL hash fragments.
 * ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
   to force http.
@@ -409,7 +411,9 @@ need to supply those as part of the options to ``Router::url()``.
 
 .. note::
 
-    Route names must be unique across your entire application. The same ``_name`` cannot be used twice, even if the names occur inside a different routing scope.
+    Route names must be unique across your entire application. The same
+    ``_name`` cannot be used twice, even if the names occur inside a different
+    routing scope.
 
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
@@ -436,8 +440,8 @@ simpler controllers. Behavior that is common to the prefixed and non-prefixed
 controllers can be encapsulated using inheritance,
 :doc:`/controllers/components`, or traits.  Using our users example, accessing
 the URL ``/admin/users/edit/5`` would call the ``edit()`` method of our
-**src/Controller/Admin/UsersController.php** passing 5 as the first parameter. The
-view file used would be **src/Template/Admin/Users/edit.ctp**
+**src/Controller/Admin/UsersController.php** passing 5 as the first parameter.
+The view file used would be **src/Template/Admin/Users/edit.ctp**
 
 You can map the URL /admin to your ``index()`` action of pages controller using
 following route::
@@ -589,10 +593,10 @@ extra line in your routes config file::
 
 This will enable the named extensions for all routes connected **after** this
 method call. Any routes connected prior to it will not inherit the extensions.
-By default the extensions you passed will be merged with existing list of extensions.
-You can pass ``false`` for the second argument to override existing list.
-Calling the method without arguments will return existing list of extensions.
-You can set extensions per scope as well::
+By default the extensions you passed will be merged with existing list of
+extensions. You can pass ``false`` for the second argument to override existing
+list. Calling the method without arguments will return existing list of
+extensions. You can set extensions per scope as well::
 
     Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
@@ -706,8 +710,8 @@ You can get the ``article_id`` in ``CommentsController`` by::
 
 .. note::
 
-    While you can nest resources as deeply as you require, it is not recommended to
-    nest more than 2 resources together.
+    While you can nest resources as deeply as you require, it is not recommended
+    to nest more than 2 resources together.
 
 Limiting the Routes Created
 ---------------------------
@@ -753,7 +757,8 @@ You can map additional resource methods using the ``map`` option::
 
 In addition to the default routes, this would also connect a route for
 `/articles/delete_all`. By default the path segment will match the key name. You
-can use the 'path' key inside the resource definition to customize the path name::
+can use the 'path' key inside the resource definition to customize the path
+name::
 
 
     $routes->resources('Articles', [
@@ -767,7 +772,8 @@ can use the 'path' key inside the resource definition to customize the path name
     ]);
     // This would connect /articles/update_many
 
-If you define 'only' and 'map', make sure that your mapped methods are also in the 'only' list.
+If you define 'only' and 'map', make sure that your mapped methods are also in
+the 'only' list.
 
 .. _custom-rest-routing:
 
@@ -850,10 +856,10 @@ Generating URLs
 
 .. php:staticmethod:: url($url = null, $full = false)
 
-Generating URLs or Reverse routing is a feature in CakePHP that is used to allow you to
-easily change your URL structure without having to modify all your code.
-By using :term:`routing arrays <routing array>` to define your URLs, you can
-later configure routes and the generated URLs will automatically update.
+Generating URLs or Reverse routing is a feature in CakePHP that is used to
+allow you to easily change your URL structure without having to modify all your
+code. By using :term:`routing arrays <routing array>` to define your URLs, you
+can later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
 
@@ -950,7 +956,8 @@ Custom Route Classes
 Custom route classes allow you to extend and change how individual routes parse
 requests and handle reverse routing. Route classes have a few conventions:
 
-* Route classes are expected to be found in the ``Routing\\Route`` namespace of your application or plugin.
+* Route classes are expected to be found in the ``Routing\\Route`` namespace of
+  your application or plugin.
 * Route classes should extend :php:class:`Cake\\Routing\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 
@@ -958,8 +965,9 @@ The ``parse()`` method is used to parse an incoming URL. It should generate an
 array of request parameters that can be resolved into a controller & action.
 Return ``false`` from this method to indicate a match failure.
 
-The ``match()`` method is used to match an array of URL parameters and create a string URL.
-If the URL parameters do not match the route ``false`` should be returned.
+The ``match()`` method is used to match an array of URL parameters and create a
+string URL. If the URL parameters do not match the route ``false`` should be
+returned.
 
 You can use a custom route class when making a route by using the ``routeClass``
 option::
@@ -986,17 +994,18 @@ option for each route. For example using::
 
     Router::defaultRouteClass('DashedRoute');
 
-will cause all routes connected after this to use the ``DashedRoute`` route class.
-Calling the method without an argument will return current default route class.
+will cause all routes connected after this to use the ``DashedRoute`` route
+class. Calling the method without an argument will return current default route
+class.
 
 Fallbacks method
 ----------------
 
 .. php:method:: fallbacks($routeClass = null)
 
-The fallbacks method is a simple shortcut for defining default routes. The method
-uses the passed routing class for the defined rules or if no class is provided the
-class returned by ``Router::defaultRouteClass()`` is used.
+The fallbacks method is a simple shortcut for defining default routes. The
+method uses the passed routing class for the defined rules or if no class is
+provided the class returned by ``Router::defaultRouteClass()`` is used.
 
 Calling fallbacks like so::
 
@@ -1016,7 +1025,7 @@ Is equivalent to the following explicit calls::
 Creating Persistent URL Parameters
 ==================================
 
-You can hook into the URL generation process using URL filter functions.  Filter
+You can hook into the URL generation process using URL filter functions. Filter
 functions are called *before* the URLs are matched against the routes, this
 allows you to prepare URLs before routing.
 

@@ -1,5 +1,5 @@
-FormHelper
-##########
+Form
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -1132,8 +1132,8 @@ les champs ``files``,
     type d'envodage du formulaire en définissant l'option type à 'file' dans
     ``$this->Form->create()``.
 
-Crée des Inputs de date et d'heure (date and time inputs)
----------------------------------------------------------
+Crée des Inputs DateTime
+------------------------
 
 .. php:method:: dateTime($fieldName, $options = [])
 
@@ -1162,6 +1162,61 @@ vous pouvez remplacer le template ``dateWidget``. Par défaut le template
 ``dateWidget`` est::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+
+Créer des Inputs Time
+---------------------
+
+.. php:method:: time($fieldName, $options = [])
+
+Créé deux éléments select remplis respectivement avec 24 hours et 60 minutes
+pour ``hour`` et ``minute``.
+De plus, les attributs HTML peuvent être fournis dans $options pour chaque
+``type`` spécifique. Si ``$options['empty']`` est ``false``, le select
+n'inclura pas une option vide:
+
+* ``empty`` - Si ``true``, l'option select vide est montrée. Si c'est une
+  chaîne, cette chaîne sera affichée en tant qu'élément vide.
+* ``default`` | ``value`` La valeur par défaut à utiliser pour l'input. Une
+  valeur dans ``$this->request->data`` qui correspond au nom du champ va écraser
+  cette valeur.
+  Si aucune valeur par défaut n'est fournie, ``time()`` sera utilisée.
+* ``timeFormat`` Le format de time à utiliser, soit 12 soit 24. Par défaut à 24.
+* ``second`` Défini à ``true`` pour activer les secondes déroulantes.
+* ``interval`` L'intervalle pour le select minutes. Par défaut à 1.
+
+Par exemple, pour créer un intervalle de temps avec des minutes selectionnables
+toutes les 15 minutes, et pour l'appliquer aux selects, vous pourriez faire
+ceci ::
+
+    echo $this->Form->time('released', [
+        'interval' => 15,
+        'hour' => [
+            'class' => 'foo-class',
+        ],
+        'minute' => [
+            'class' => 'bar-class',
+        ],
+    ]);
+
+Ce qui créerait les deux selects suivants:
+
+.. code-block:: html
+
+    <select name="released[hour]" class="foo-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+        <option value="22">22</option>
+        <option value="23">23</option>
+    </select>
+    <select name="released[minute]" class="bar-class">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
 
 Créer des Inputs Year
 ---------------------
