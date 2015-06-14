@@ -605,7 +605,7 @@ JOIN`` with the specified association and will also load the fields into the
 result set.
 
 There may be cases where you want to use ``matching()`` but are not interested
-in loading the fields into the result set. For this purpose, you can sue the
+in loading the fields into the result set. For this purpose, you can use the
 ``innerJoinWith()`` function::
 
     $query = $articles->find();
@@ -617,7 +617,7 @@ The ``innerJoinWith()`` function works exactly the same as ``matching()``, that
 means that you are allowed to use dot notation for joining deeply nested
 associations::
 
-    $query = $products->find()innerJoinWith(
+    $query = $products->find()->innerJoinWith(
         'Shops.Cities.Countries', function ($q) {
             return $q->where(['Countries.name' => 'Japan']);
         }
@@ -643,7 +643,7 @@ association::
 
 The example above will find all articles that were not tagged with the word
 ``boring``.  You can apply this method to HasMany associations as well. You could,
-for example,  find all the authors with no published articles in the last 10
+for example, find all the authors with no published articles in the last 10
 days::
 
     $query = $authorsTable

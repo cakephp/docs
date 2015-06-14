@@ -259,7 +259,7 @@ calls.
 Selecting All Fields From a Table
 ---------------------------------
 
-By default a query will select all fields from a table, the exception is whe you
+By default a query will select all fields from a table, the exception is when you
 call the ``select()`` function yourself and pass certain fields::
 
     // Only select id and title from the articles table
