@@ -526,11 +526,21 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
     ]);
 
 If you have limited the fields you are loading with ``select()`` but also want to
-load fields off of contained associations, you can use ``autoFields()``::
+load fields off of contained associations, you can pass the association object
+to ``select()``::
 
     // Select id & title from articles, but all fields off of Users.
+    $articlesTable
+        ->select(['id', 'title'])
+        ->select($articlesTable->Users)
+        ->contain(['Users']);
+
+Alternatively, if you can multiple associations, you can use ``autoFields()``::
+
+    // Select id & title from articles, but all fields off of Users, Comments
+    // and Tags.
     $query->select(['id', 'title'])
-        ->contain(['Users'])
+        ->contain(['Users', 'Comments', 'Tags'])
         ->autoFields(true);
 
 .. _filtering-by-associated-data:

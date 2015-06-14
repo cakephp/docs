@@ -554,13 +554,22 @@ pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
         ]
     ]);
 
-Si vous avez limité les champs que vous chargez avec ``select()`` mais aussi
-que vous souhaitez charger les champs en dehors d'associations avec contain,
-vous pouvez utiliser ``autoFields()``::
+If you have limited the fields you are loading with ``select()`` but also want to
+load fields off of contained associations, you can pass the association object
+to ``select()``::
 
-    // Select id & title de articles, mais tous les champs de Users.
+    // Select id & title from articles, but all fields off of Users.
+    $articlesTable
+        ->select(['id', 'title'])
+        ->select($articlesTable->Users)
+        ->contain(['Users']);
+
+Alternatively, if you can multiple associations, you can use ``autoFields()``::
+
+    // Select id & title from articles, but all fields off of Users, Comments
+    // and Tags.
     $query->select(['id', 'title'])
-        ->contain(['Users'])
+        ->contain(['Users', 'Comments', 'Tags'])
         ->autoFields(true);
 
 .. _filtering-by-associated-data:
