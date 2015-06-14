@@ -271,6 +271,25 @@ Comme vous pouvez le voir sur les exemples précédents, toutes les méthodes
 qui modifient la requête fournissent une interface fluide, vous permettant
 de construire une requête avec des appels de méthode chaînés.
 
+Selecting All Fields From a Table
+---------------------------------
+
+By default a query will select all fields from a table, the exception is whe you
+call the ``select()`` function yourself and pass certain fields::
+
+    // Only select id and title from the articles table
+    $articles->find()->select(['id', 'title']);
+
+If you wish to still select all fields from a table after having called
+``select($fields)``, you can pass the table instance to ``select()`` for this
+purpose::
+
+    // Only select id and title from the articles table
+    $query = $articlesTable->find();
+    $query
+        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select($articlesTable); // Select all fields from articles
+
 Utiliser les Fonctions SQL
 --------------------------
 
