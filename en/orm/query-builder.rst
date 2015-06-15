@@ -269,11 +269,15 @@ If you wish to still select all fields from a table after having called
 ``select($fields)``, you can pass the table instance to ``select()`` for this
 purpose::
 
-    // Only select id and title from the articles table
+    // Only all fields from the articles table including
+    // a calculated slug field.
     $query = $articlesTable->find();
     $query
         ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
         ->select($articlesTable); // Select all fields from articles
+
+.. versionadded:: 3.1
+    Passing a table object to select() was added in 3.1.
 
 Using SQL Functions
 -------------------
