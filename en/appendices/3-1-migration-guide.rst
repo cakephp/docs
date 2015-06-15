@@ -37,6 +37,19 @@ FlashComponent
   or ``__call()`` method. This means that the structure in the Session for
   stored Flash messages has changed.
 
+ORM
+===
+
+Query
+-----
+
+- ``Query::notMatching()`` was added.
+- ``Query::leftJoinWith()`` was added.
+- ``Query::innerJoinWith()`` was added.
+- ``Query::select()`` now supports ``Table`` and ``Association`` objects as
+  parameters. These parameter types will select all the columns on the provided
+  table or association instance's target table.
+
 View
 ====
 
