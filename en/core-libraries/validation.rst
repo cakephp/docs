@@ -26,8 +26,7 @@ validate::
     $validator
         ->requirePresence('title')
         ->notEmpty('title', 'Please fill this field')
-        ->add('title', [
-            'length' => [
+        ->add('title', 'length', [
                 'rule' => ['minLength', 10],
                 'message' => 'Titles need to be at least 10 characters long',
             ]
@@ -103,16 +102,15 @@ The ``Table`` class provides a validation rule to ensure that a given field
 is unique within a table. For example, if you wanted to make sure that an e-mail
 address is unique, you could do the following::
 
-    $validator->add('email', [
-        'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
+    $validator->add('email', 'unique', [
+        'rule' => 'validateUnique', 'provider' => 'table']
     ]);
 
 If you wish to only ensure uniqueness of a field based on an another field in
 your table, such as a foreign key of an associated table, you can scope it with
 the following::
 
-    $validator->add('email', [
-        'unique' => [
+    $validator->add('email', 'unique', [
             'rule' => ['validateUnique', ['scope' => 'site_id']],
             'provider' => 'table'
         ]
@@ -134,7 +132,7 @@ a specific rule has failed, you can set the ``last`` option to ``true``::
 
     $validator = new Validator();
     $validator
-        ->add('body', [
+        ->add('body', 'length', [
             'minLength' => [
                 'rule' => ['minLength', 10],
                 'last' => true,
