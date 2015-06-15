@@ -197,15 +197,17 @@ You can also optionally use a ``groupPath`` to group results based on a path::
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
     ];
-    
-Finally you can use *closures* to build keys/values/groups paths dynamically, for example when working with entities and dates (converted to ``Cake/Time`` instances by the ORM) you may want to group results by date::
-    
+
+Finally you can use *closures* to build keys/values/groups paths dynamically,
+for example when working with entities and dates (converted to ``Cake/Time``
+instances by the ORM) you may want to group results by date::
+
     $combined = (new Collection($entities))->combine(
         'id',
         function ($entity) { return $entity; },
         function ($entity) { return $entity->date->toDateString(); }
     );
-    
+
     // Result will look like this when converted to array
     [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]

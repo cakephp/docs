@@ -202,6 +202,23 @@ basés sur un chemin::
         'b' => [2 => 'bar']
     ];
 
+Finalement vous pouvez utiliser les *closures* pour construire les
+chemins des clés/valeurs/groupes de façon dynamique, par exemple quand vous
+travaillez avec les entities et les dates (convertis en instances ``Cake/Time``
+par l'ORM) vous pourriez grouper les résultats par date::
+
+    $combined = (new Collection($entities))->combine(
+        'id',
+        function ($entity) { return $entity; },
+        function ($entity) { return $entity->date->toDateString(); }
+    );
+
+    // Le résultat va ressembler à ceci quand il sera converti en tableau
+    [
+        'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+        'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+    ]
+
 .. php:method:: stopWhen(callable $c)
 
 Vous pouvez stopper l'itération à n'importe quel point en utilisant la méthode
