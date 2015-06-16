@@ -1,5 +1,5 @@
-TextHelper
-##########
+Text
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -29,7 +29,7 @@ Sortie::
     Pour plus d'informations sur nos pâtes et desserts fameux,
     contactez <a href="mailto:info@example.com">info@example.com</a>
 
-Cette méthode echappe automatiquement ces inputs. Utilisez l'option
+Cette méthode échappe automatiquement ces inputs. Utilisez l'option
 ``escape`` pour la désactiver si nécessaire.
 
 Lier les URLs

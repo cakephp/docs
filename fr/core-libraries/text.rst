@@ -45,8 +45,8 @@ Générer des UUIDs
 .. php:staticmethod:: uuid()
 
     La méthode UUID est utilisée pour générer des identificateurs uniques comme
-    per :rfc:`4122`. UUID est une chaîne de caractères de 128bit au format
-    485fc381-e790-47a3-9794-1337c0a8fe68. ::
+    per :rfc:`4122`. UUID est une chaîne de caractères de 128-bit au format
+    ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
 
         Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -87,8 +87,8 @@ permettre les remplacements de clé/valeur::
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
 
-Nettoie une chaîne formatée ``Text::insert`` avec $options donnée
-qui dépend de la clé 'clean' dans $options. La méthode par défaut utilisée
+Nettoie une chaîne formatée ``Text::insert`` avec ``$options`` donnée
+qui dépend de la clé 'clean' dans ``$options``. La méthode par défaut utilisée
 est le texte mais html est aussi disponible. Le but de cette fonction est
 de remplacer tous les espaces blancs et les balises non nécessaires autour
 des placeholders qui ne sont pas remplacés par Set::insert.
@@ -130,10 +130,32 @@ on entoure. Les options possibles sont:
 * ``indentAt`` Le nombre de ligne pour commencer l'indentation du texte.
   Par défaut à 0.
 
+.. php:staticmethod:: wrapBlock($text, $options = [])    
+
+Si vous devez vous assurer que la largeur totale du bloc généré ne dépassera
+pas une ceartine largeur y compris si elle contient des indentations, vous
+devez utiliser ``wrapBlock()`` au lieu de ``wrap()``. C'est particulièrement
+utile pour générer du texte dans la console par exemple. Elle accepte les mêmes
+options que ``wrap()``::
+
+    $text = 'Ceci est la chanson qui ne stoppe jamais. Ceci est la chanson qui ne stoppe jamais.';
+    $result = Text::wrapBlock($text, [
+        'width' => 22,
+        'indent' => ' → ',
+        'indentAt' => 1
+    ]);
+
+    // Génère
+    Ceci est la chanson
+     → qui ne stoppe
+     → jamais. Ceci est
+     → la chanson qui ne
+     → stoppe jamais.
+
 .. start-text
 
-Highlighting Substrings
-=======================
+Subrillance de Sous-Chaîne
+==========================
 
 .. php:method:: highlight(string $haystack, string $needle, array $options = [] )
 
@@ -142,9 +164,9 @@ spécifique ``$options['format']`` ou une chaîne par défaut.
 
 Options:
 
--  'format' - chaîne la partie de html avec laquelle la phrase sera mise
-   en excergue.
--  'html' - booléen Si ``true``, va ignorer tous les tags HTML, s'assurant que
+-  ``format`` - chaîne la partie de html avec laquelle la phrase sera mise
+   en exergue.
+-  ``html`` - booléen Si ``true``, va ignorer tous les tags HTML, s'assurant que
    seul le bon texte est mise en avant.
 
 Exemple::
@@ -275,15 +297,15 @@ Sortie::
 
     ...a TV, a C# program that can divide by zero, death metal t-shirts
 
-Extracting an Excerpt
-=====================
+Générer un Extrait
+==================
 
 .. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
-Extrait un excerpt de ``$haystack`` surrounding the ``$needle``
-avec un nombre de caractères de chaque côté determiné par ``$radius``,
-et prefix/suffix with ``$ending``. Cette méthode est spécialement pratique
-pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
+Génère un extrait de ``$haystack`` entourant le ``$needle``
+avec un nombre de caractères de chaque côté déterminé par ``$radius``,
+et préfixé/suffixé avec ``$ellipsis``. Cette méthode est spécialement pratique
+pour les résultats de recherches. La chaîne requêtée ou les mots clés peuvent
 être montrés dans le document résultant. ::
 
     // appelé avec TextHelper
@@ -292,12 +314,11 @@ pour les résultats recherchés. La chaîne requêtée ou les mots clés peuvent
     // appelé avec Text
     use Cake\Utility\Text;
 
-    echo Text::excerpt($lastParagraph, 'method', 50, '...');
+    echo Text::excerpt($lastParagraph, 'méthode', 50, '...');
 
-Sortie::
-
-    ... par $radius, et prefix/suffix avec $ending. Cette méthode est
-    spécialement pratique pour les résultats de recherche. La requête...
+Génère::
+    ...$radius,et préfixé/suffixé avec $ellipsis. Cette méthode est
+    spécialement pratique pour les résultats de r...
 
 Converting an Array to Sentence Form
 ====================================

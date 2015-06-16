@@ -263,7 +263,7 @@ n'est pas déclenché si une transaction est démarrée avant l'appel de delete.
 Behaviors
 =========
 
-.. php:method:: addBehavior($name, $config = [])
+.. php:method:: addBehavior($name, array $options = [])
 
 .. start-behaviors
 

@@ -30,7 +30,7 @@ capable de configurer automatiquement la plupart des choses pour nous quand nous
 réaliserons la connexion de l'utilisateur.
 
 La prochaine étape est de créer notre table Users, qui a la
-responsablilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
+responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -128,7 +128,7 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
     <?= $this->Form->end() ?>
     </div>
 
-Authentification (Connexion et Deconnexion)
+Authentification (Connexion et Déconnexion)
 ===========================================
 
 Nous sommes maintenant prêt à ajouter notre couche d'authentification. Dans
@@ -189,7 +189,7 @@ utilisateurs, de sauvegarder leur nom d'utilisateur et mot de passe, et plus
 important de hasher leur mot de passe afin qu'il ne soit pas stocké en
 clair dans notre base de données. Disons à AuthComponent de laisser
 certains utilisateurs non-authentifiés accéder à la fonction add des
-utilisateurs et de réaliser l'action connexion et deconnexion::
+utilisateurs et de réaliser l'action connexion et déconnexion::
 
     // src/Controller/UsersController.php
 
@@ -367,7 +367,7 @@ peut rien faire d'autre par rapport aux utilisateurs non connectés.
 
 Ce n'est pas exactement ce que nous souhaitions, donc nous avons besoin de
 déterminer et fournir plus de règles à notre méthode ``isAuthorized()``. Mais
-plutôt que de le faire dans AppController, déleguons à chaque controller la
+plutôt que de le faire dans AppController, déléguons à chaque controller la
 gestion de ces règles supplémentaires. Les règles que nous allons ajouter
 à ArticlesController permettront aux auteurs de créer des articles mais
 empêcheront l'édition des articles si l'auteur ne correspond pas. Ouvrez le

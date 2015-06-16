@@ -121,10 +121,10 @@ selon la plateforme de la base de données::
 
     $t = new Table('posts');
     $t->addColumn('id', 'integer')
-        ->addConstraint('primary', [
-            'type' => 'primary',
-            'columns' => ['id']
-        ]);
+    ->addConstraint('primary', [
+        'type' => 'primary',
+        'columns' => ['id']
+    ]);
 
 Dans l'exemple ci-dessus, la colonne ``id`` générerait le SQL suivant dans
 MySQL::

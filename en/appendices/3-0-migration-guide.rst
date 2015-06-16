@@ -391,7 +391,7 @@ Dispatcher Filters Configuration Changed
 Dispatcher filters are no longer added to your application using ``Configure``.
 You now append them with :php:class:`Cake\\Routing\\DispatcherFactory`. This
 means if your application used ``Dispatcher.filters``, you should now use
-php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
 In addition to configuration changes, dispatcher filters have had some
 conventions updated, and features added. See the
@@ -515,8 +515,7 @@ Controller
   models + controllers were far more intertwined.
 - ``Controller::loadModel()`` now loads table objects.
 - The ``Controller::$scaffold`` property has been removed. Dynamic scaffolding
-  has been removed from CakePHP core, and will be provided as a standalone
-  plugin.
+  has been removed from CakePHP core.  An improved scaffolding plugin, named CRUD, can be found here: https://github.com/FriendsOfCake/crud
 - The ``Controller::$ext`` property has been removed. You now have to extend and
   override the ``View::$_ext`` property if you want to use a non-default view file
   extension.
@@ -543,8 +542,9 @@ Scaffold Removed
 ----------------
 
 The dynamic scaffolding in CakePHP has been removed from CakePHP core. It was
-infrequently used, and never intended for production use. It will be replaced by
-a standalone plugin that people requiring that feature can use.
+infrequently used, and never intended for production use. An improved
+scaffolding plugin, named CRUD, can be found here:
+https://github.com/FriendsOfCake/crud
 
 ComponentCollection Replaced
 ----------------------------
@@ -710,7 +710,7 @@ Behaviors
 TreeBehavior
 ------------
 
-The TreeBheavior was completely re-written to use the new ORM. Although it works
+The TreeBehavior was completely re-written to use the new ORM. Although it works
 the same as in 2.x, a few methods were renamed or removed:
 
 - ``TreeBehavior::children()`` is now a custom finder ``find('children')``.

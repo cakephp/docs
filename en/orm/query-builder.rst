@@ -367,6 +367,43 @@ To do this with the query builder, we'd use the following code::
     ])
     ->group('published');
 
+The ``addCase`` function can also chain together multiple statements to create ``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
+
+If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population size, we could do the following::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->addCase(
+                [
+                    $q->newExpr()->lt('population', 100000),
+                    $q->newExpr()->between('population', 100000, 999000),
+                    $q->newExpr()->gte('population', 999001),
+                ],
+                ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions 
+                ['string', 'string', 'string'] # type of each value
+            );
+        });
+    # WHERE CASE
+    #   WHEN population < 100000 THEN 'SMALL'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+    #   WHEN population >= 999001 THEN 'LARGE'
+    #   END
+
+Any time there are fewer values than there are case conditions ``addCase`` will automatically produce an ``if .. then .. else`` statement::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->addCase(
+                [
+                    $q->newExpr()->eq('population', 0),
+                ],
+                ['DESERTED', 'INHABITED'], # values matching conditions
+                ['string', 'string'] # type of each value
+            );
+        });
+    # WHERE CASE
+    #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
+
 Disabling Hydration
 -------------------
 
@@ -567,19 +604,102 @@ Which will generate the following SQL looking like::
 When using the expression objects you can use the following methods to create
 conditions:
 
-- ``eq()`` Creates an equality condition.
-- ``notEq()`` Create an inequality condition
-- ``like()`` Create a condition using the ``LIKE`` operator.
-- ``notLike()`` Create a negated ``LIKE`` condition.
-- ``in()`` Create a condition using ``IN``.
-- ``notIn()`` Create a negated condition using ``IN``.
-- ``gt()`` Create a ``>`` condition.
-- ``gte()`` Create a ``>=`` condition.
-- ``lt()`` Create a ``<`` condition.
-- ``lte()`` Create a ``<=`` condition.
-- ``isNull()`` Create an ``IS NULL`` condition.
-- ``isNotNull()`` Create a negated ``IS NULL`` condition.
-- ``between()`` Create a ``BETWEEN`` condition.
+- ``eq()`` Creates an equality condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->eq('population', '10000');
+        });
+    # WHERE population = 10000
+
+- ``notEq()`` Creates an inequality condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notEq('population', '10000');
+        });
+    # WHERE population != 10000
+
+- ``like()`` Creates a condition using the ``LIKE`` operator::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->like('name', '%A%');
+        });
+    # WHERE name LIKE "%A%"
+
+- ``notLike()`` Creates a negated ``LIKE`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notLike('name', '%A%');
+        });
+    # WHERE name NOT LIKE "%A%"
+
+- ``in()`` Create a condition using ``IN``::
+    
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->in('country_id', ['AFG', 'USA', 'EST']);
+        });
+    # WHERE country_id IN ('AFG', 'USA', 'EST')
+
+- ``notIn()`` Create a negated condition using ``IN``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
+        });
+    # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
+- ``gt()`` Create a ``>`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->gt('population', '10000');
+        });
+    # WHERE population > 100000
+- ``gte()`` Create a ``>=`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->gte('population', '10000');
+        });
+    # WHERE population >= 100000
+- ``lt()`` Create a ``<`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->lt('population', '10000');
+        });
+    # WHERE population < 100000
+- ``lte()`` Create a ``<=`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->lte('population', '10000');
+        });
+    # WHERE population <= 100000
+- ``isNull()`` Create an ``IS NULL`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->isNull('population');
+        });
+    # WHERE (population) IS NULL
+- ``isNotNull()`` Create a negated ``IS NULL`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->isNotNull('population');
+        });
+    # WHERE (population) IS NOT NULL
+- ``between()`` Create a ``BETWEEN`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->between('population', 999, 5000000);
+        });
+    # WHERE population BETWEEN 999 AND 5000000,
 
 Automatically Creating IN Clauses
 ---------------------------------

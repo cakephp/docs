@@ -85,7 +85,7 @@ l'utilisent::
 
 La couche View fournit un certain nombre d'extensions tels que les
 :ref:`Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
-permettre de ré-utiliser facilement votre logique de présentation.
+permettre de réutiliser facilement votre logique de présentation.
 
 La couche View n'est pas seulement limitée au HTML ou à la représentation en
 texte de données. Elle peut aussi être utilisée pour offrir une grande variété
@@ -145,9 +145,9 @@ chaque requête passe par les étapes suivantes:
 #. La requête est d'abord aiguillée par les routes.
 #. Après que la requête a été routée, le dispatcher va sélectionner le bon
    objet controller pour la traiter.
-#. L'action du controller est appellée et le controller interagit avec les
+#. L'action du controller est appelée et le controller interagit avec les
    Models et Components nécessaires.
-#. Le controller delègue la création de la response à la View pour générer
+#. Le controller délègue la création de la response à la View pour générer
    le résultat obtenu à partir des données de model.
 
 Que le Début

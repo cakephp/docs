@@ -14,7 +14,7 @@ Dans CakePHP, l'authentification est gérée par les
 :doc:`/controllers/components`. Les components peuvent être imaginés comme des
 façons de créer des parties réutilisables de code du controller pour une
 fonctionnalité spécifique ou un concept. Les components peuvent aussi se lancer
-dans le cycle de vie de l'event du controller et intéragir avec votre
+dans le cycle de vie de l'event du controller et interagir avec votre
 application de cette façon. Pour commencer, nous ajouterons :doc:`AuthComponent
 </controllers/components/authentication>` à notre application. Nous voulons
 que chaque méthode nécessite l'authentification, donc nous allons ajouter
@@ -242,7 +242,7 @@ pour ressembler à ceci::
                 $this->Flash->success('Le bookmark a été sauvegardé.');
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de rééssayer.');
+            $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de réessayer.');
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
@@ -266,7 +266,7 @@ ceci::
                 $this->Flash->success('Le bookmark a été sauvegardé.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de rééssayer.');
+                $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de réessayer.');
             }
         }
         $tags = $this->Bookmarks->Tags->find('list');
@@ -308,7 +308,7 @@ Ajouter un Champ Computed
 -------------------------
 
 Comme nous voulons un accès simple vers les tags formatés pour une entity, nous
-pouvons ajouter un champ virtuel/computed à l'entity. Dans
+pouvons ajouter un champ virtuel/calculé à l'entity. Dans
 **src/Model/Entity/Bookmark.php** ajoutez ce qui suit::
 
     use Cake\Collection\Collection;
@@ -328,7 +328,7 @@ pouvons ajouter un champ virtuel/computed à l'entity. Dans
         return trim($str, ', ');
     }
 
-Cela nous laissera l'accès à la propriété computed ``$bookmark->tag_string``.
+Cela nous laissera l'accès à la propriété calculée ``$bookmark->tag_string``.
 Nous utiliserons cette propriété dans inputs plus tard. Rappelez-vous
 d'ajouter la propriété ``tag_string`` dans la liste ``_accessible`` de votre
 entity, puisque nous voulons la 'sauvegarder' plus tard.
@@ -402,12 +402,12 @@ Alors que ce code est un peu plus compliqué que ce que nous avons déjà fait,
 il permet de montrer la puissance de l'ORM de CakePHP. Vous pouvez facilement
 manipuler les résultats de requête en utilisant
 les méthodes des :doc:`/core-libraries/collections`, et gérer les
-scenariis où vous créer les entities à la volée avec facilité.
+scenarios où vous créer les entities à la volée avec facilité.
 
 Récapitulatif
 =============
 
-Nous avons élargi notre application de bookmarking pour gérer les scenariis
+Nous avons élargi notre application de bookmarking pour gérer les scenarios
 de contrôle d'authentification et d'autorisation/d'accès basique. Nous avons
 aussi ajouté quelques améliorations UX en tirant parti du FormHelper et des
 capacités de l'ORM.

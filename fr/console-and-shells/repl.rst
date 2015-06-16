@@ -9,7 +9,7 @@ console interactive en utilisant::
     $ bin/cake console
 
 Cela va démarrer votre application et lancer une console interactive. A ce
-niveau-là, vous pouvez intéragir avec le code de votre application et exécuter
+niveau-là, vous pouvez interagir avec le code de votre application et exécuter
 des requêtes en utilisant les models de votre application::
 
     $ bin/cake console
@@ -43,4 +43,4 @@ Vous pouvez aussi tester la génération d'URL::
     >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
 
-Pour quitter le REPL, vous pouver utiliser ``CTRL-C`` ou en tapant ``exit``.
+Pour quitter le REPL, vous pouvez utiliser ``CTRL-C`` ou en tapant ``exit``.

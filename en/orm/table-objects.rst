@@ -242,7 +242,7 @@ The event is not triggered if a transaction is started before calling delete.
 Behaviors
 =========
 
-.. php:method:: addBehavior($name, $config = [])
+.. php:method:: addBehavior($name, array $options = [])
 
 .. start-behaviors
 

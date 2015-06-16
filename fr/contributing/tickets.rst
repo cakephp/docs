@@ -3,7 +3,7 @@ Tickets
 
 Avoir des retours et de l'aide de la communauté sous forme de tickets est une
 partie extrêmement importante dans le processus de développement de CakePHP.
-Tous les tickets CakePHP sont hébérgés sur
+Tous les tickets CakePHP sont hébergés sur
 `Github <https://github.com/cakephp/cakephp/issues>`_.
 
 Rapporter des bugs

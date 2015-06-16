@@ -289,7 +289,12 @@ from CakePHP. Let's implement that missing method now. In
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);
-        $this->set(compact('bookmarks', 'tags'));
+
+        // Pass variables into the view template context.
+        $this->set([
+            'bookmarks' => $bookmarks,
+            'tags' => $tags
+        ]);
     }
 
 Creating the Finder Method
@@ -317,16 +322,20 @@ method has not been implemented yet, so let's do that. In
 
 We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
 a very powerful concept in CakePHP that allows you to package up re-usable
-queries. In our finder we've leveraged the ``matching()`` method which allows us
-to find bookmarks that have a 'matching' tag.
+queries. Finder methods always get a :doc:`/orm/query-builder` object and an
+array of options as parameters. Finders can manipulate the query and add any
+required conditions or criteria. When they are done, finder methods must return
+a modified query object. In our finder we've leveraged the ``distinct()`` and
+``matching()`` methods which allow us to find distinct bookmarks that have
+a 'matching' tag.
 
 Creating the View
 -----------------
 
 Now if you visit the **/bookmarks/tagged** URL, CakePHP will show an error
-letting you know that you have not made a view file. Next, let's build the view
-file for our ``tags()`` action. In **src/Template/Bookmarks/tags.ctp** put the
-following content::
+letting you know that you have not made a view file. Next, let's build the
+view file for our ``tags()`` action. In **src/Template/Bookmarks/tags.ctp**
+put the following content::
 
     <h1>
         Bookmarks tagged with
@@ -336,25 +345,30 @@ following content::
     <section>
     <?php foreach ($bookmarks as $bookmark): ?>
         <article>
+            <!-- Use the HtmlHelper to create a link -->
             <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
             <small><?= h($bookmark->url) ?></small>
+
+            <!-- Use the TextHelper to format text -->
             <?= $this->Text->autoParagraph($bookmark->description) ?>
         </article>
     <?php endforeach; ?>
     </section>
 
-CakePHP expects that our templates follow the naming convention where the
-template has the lower case and underscored version of the controller action
-name.
+In the above code we use the :doc:`/views/helpers/html` and
+:doc:`/views/helpers/text` helpers to assist in generating our view output. We
+also use the :php:func:`h` shortcut function to HTML encode output. You should
+remember to always use ``h()`` when outputting user data to prevent HTML
+injection issues.
+
+The ``tags.ctp`` file we just created follows the CakePHP conventions for view
+template files. The convention is to have the template use the lower case and
+underscored version of the controller action name.
 
 You may notice that we were able to use the ``$tags`` and ``$bookmarks``
 variables in our view. When we use the ``set()`` method in our controller's we
 set specific variables to be sent to the view. The view will make all passed
 variables available in the templates as local variables.
-
-In our view we've used a few of CakePHP's built-in :doc:`helpers
-</views/helpers>`. Helpers are used to make re-usable logic for formatting data,
-creating HTML or other view output.
 
 You should now be able to visit the **/bookmarks/tagged/funny** URL and see all
 the bookmarks tagged with 'funny'.

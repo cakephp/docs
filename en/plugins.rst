@@ -10,7 +10,7 @@ in other applications and share with the community.
 
 The main tie between a plugin and the application it has been
 installed into is the application's configuration (database
-connection, etc.). Otherwise, it operates in its own space,
+connection, etc.). Otherwise it operates in its own space,
 behaving much like it would if it were an application on its own.
 
 In CakePHP 3.0 each plugin defines its own top-level namespace. For example:
@@ -44,7 +44,7 @@ Plugin Map File
 
 When installing plugins via Composer, you may notice that
 ``vendor/cakephp-plugins.php`` is created. This configuration file contains
-a map of plugin names, and their paths on the filesystem. It makes it possible
+a map of plugin names and their paths on the filesystem. It makes it possible
 for plugins to be installed into the standard vendor directory which is outside
 of the normal search paths. The ``Plugin`` class will use this file to locate
 plugins when they are loaded with ``load()`` or ``loadAll()``. You generally
@@ -95,8 +95,8 @@ to contain the following information::
         "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
     }
 
-If you are using vendor namespace for your plugins the namespace to path mapping
-should be like::
+If you are using vendor namespaces for your plugins, the namespace to path mapping
+should resemble the following::
 
     "psr-4": {
         (...)
@@ -104,7 +104,7 @@ should be like::
         "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
     }
 
-Additionally you will need to tell Composer to refresh its autoloading cache::
+Additionally, you will need to tell Composer to refresh its autoloading cache::
 
     $ php composer.phar dumpautoload
 
@@ -120,7 +120,7 @@ Plugin Configuration
 
 There is a lot you can do with the ``load()`` and ``loadAll()`` methods to help
 with plugin configuration and routing. Perhaps you want to load all plugins
-automatically, while specifying custom routes and bootstrap files for
+automatically while specifying custom routes and bootstrap files for
 certain plugins::
 
     Plugin::loadAll([
@@ -129,11 +129,11 @@ certain plugins::
         'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
     ]);
 
-With this style of configuration, you no longer need to manually
+With this style of configuration you no longer need to manually
 ``include()`` or ``require()`` a plugin's configuration or routes file -- it happens
 automatically at the right time and place. The exact same parameters could
 have also been supplied to the ``load()`` method, which would have loaded only those
-three plugins, and not the rest.
+three plugins and not the rest.
 
 Finally, you can also specify a set of defaults for ``loadAll()`` which will
 apply to every plugin that doesn't have a more specific configuration.
@@ -155,7 +155,7 @@ potential warnings by using the ``ignoreMissing`` option::
     ]);
 
 When loading plugins, the plugin name used should match the namespace.
-For example you have a plugin with top level namespace ``Users`` you would load
+For example, if you have a plugin with top level namespace ``Users`` you would load
 it using::
 
     Plugin::load('User');
@@ -236,7 +236,7 @@ Creating a Plugin Using Bake
 The process of creating plugins can be greatly simplified by using the bake
 shell.
 
-In order to bake a plugin please use the following command::
+In order to bake a plugin, use the following command::
 
     $ bin/cake bake plugin ContactManager
 
@@ -289,7 +289,7 @@ Also make the ``AppController`` if you don't have one already::
     }
 
 A plugin's ``AppController`` can hold controller logic common to all controllers
-in a plugin, and is not required if you don't want to use one.
+in a plugin but is not required if you don't want to use one.
 
 Before you can access your controllers, you'll need to ensure the plugin is
 loaded and connect some routes. In your **config/bootstrap.php** add the
@@ -363,7 +363,7 @@ create the table and entity for that controller::
     {
     }
 
-If you need to reference a model within your plugin when building associations,
+If you need to reference a model within your plugin when building associations
 or defining entitiy classes, you need to include the plugin name with the class
 name, separated with a dot. For example::
 
@@ -419,7 +419,7 @@ action, so let's include that as well::
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
-Plugins can provide their own layouts. Add plugin layouts, inside
+Plugins can provide their own layouts. To add plugin layouts, place your template files inside 
 ``plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
@@ -443,7 +443,7 @@ Contacts controller you could make the following file::
 
     src/Template/Plugin/ContactManager/Contacts/index.ctp
 
-Creating this file, would allow you to override
+Creating this file would allow you to override
 **plugins/ContactManager/src/Template/Contacts/index.ctp**.
 
 .. _plugin-assets:
@@ -466,7 +466,7 @@ You may put any type of file in any directory, just like a regular webroot.
 
 .. warning::
 
-    Handling static assets, such as images, JavaScript and CSS files,
+    Handling static assets (such as images, JavaScript and CSS files)
     through the Dispatcher is very inefficient. See :ref:`symlink-assets`
     for more information.
 
@@ -491,7 +491,7 @@ This is only recommended for development. In production you should
 :ref:`symlink plugin assets <symlink-assets>` to improve performance.
 
 If you are not using the helpers, you can prepend /plugin_name/ to the beginning
-of a the URL for an asset within that plugin to serve it. Linking to
+of the URL for an asset within that plugin to serve it. Linking to
 '/contact_manager/js/some_file.js' would serve the asset
 **plugins/ContactManager/webroot/js/some_file.js**.
 
@@ -533,13 +533,13 @@ Expand Your Plugin
 
 This example created a good start for a plugin, but there is a lot
 more that you can do. As a general rule, anything you can do with your
-application, you can do inside of a plugin instead.
+application you can do inside of a plugin as well.
 
-Go ahead, include some third-party libraries in 'Vendor', add some
+Go ahead - include some third-party libraries in 'Vendor', add some
 new shells to the cake console, and don't forget to create test cases
 so your plugin users can automatically test your plugin's functionality!
 
-In our ContactManager example, we might create add/remove/edit/delete
+In our ContactManager example we might create add/remove/edit/delete
 actions in the ContactsController, implement validation in the Contact
 model, and implement the functionality one might expect when managing
 their contacts. It's up to you to decide what to implement in your

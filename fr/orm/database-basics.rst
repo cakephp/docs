@@ -68,7 +68,7 @@ requêtes::
         ->execute()
         ->fetchAll('assoc');
 
-Ecécuter des Instructions Insert
+Exécuter des Instructions Insert
 --------------------------------
 
 Insérer une ligne dans une base de données est habituellement l'affaire
@@ -437,8 +437,21 @@ Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
 notre nouveau type, et la couche de base de données de CakePHP va
 automatiquement convertir nos données JSON lors de la création de requêtes.
 Vous pouvez utiliser les types personnalisés créés en faisant la correspondance
-des types dans la :ref:`méhode _initializeSchema() <saving-complex-types>` de
-votre Table.
+des types dans la :ref:`méthode _initializeSchema() <saving-complex-types>` de
+votre Table::
+
+    use Cake\Database\Schema\Table as Schema;
+
+    class WidgetsTable extends Table
+    {
+
+        protected function _initializeSchema(Schema $schema)
+        {
+            $schema->columnType('widget_prefs', 'json');
+            return $schema;
+        }
+
+    }
 
 Les Classes de Connection
 =========================

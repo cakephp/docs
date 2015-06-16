@@ -137,7 +137,7 @@ caractères de ponctuation, avec une longueur de texte au moins aussi longue.
 - ``^`` Est utilisé pour les sous-sous-sous-sections.
 
 Les en-têtes ne doivent pas être imbriqués sur plus de 5 niveaux de profondeur.
-Les en-têtes doivent être précedés et suivis par une ligne vide.
+Les en-têtes doivent être précédés et suivis par une ligne vide.
 
 Les Paragraphes
 ---------------
@@ -169,7 +169,7 @@ Le balisage interne
     ````PagesController````, ````config()````, etc.
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être
-confondus avec les délimiteurs du balisage interne, ils doivent être echappés
+confondus avec les délimiteurs du balisage interne, ils doivent être échappés
 avec un backslash.
 
 Le balisage interne a quelques restrictions:
@@ -427,7 +427,7 @@ Notes et avertissements
 -----------------------
 
 Il y a souvent des fois où vous voulez informer le lecteur d'une astuce
-importante, une note spécials ou un danger potentiel. Les avertissements
+importante, une note spéciale ou un danger potentiel. Les avertissements
 dans sphinx sont justement utilisés pour cela. Il y a cinq types
 d'avertissements.
 
@@ -456,7 +456,7 @@ Tous les avertissements sont faits de la même façon::
 
     .. note::
 
-        Indenté, précedé et suivi par une ligne vide. Exactement comme
+        Indenté, précédé et suivi par une ligne vide. Exactement comme
         un paragraphe.
 
     Ce texte n'est pas une partie de la note.

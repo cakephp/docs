@@ -135,7 +135,7 @@ Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
 
 Quand les champs ont plusieurs règles, chaque règle de validation sera exécutée
-même si la précédente a echoué. Cela vous permet de recueillir autant d'erreurs
+même si la précédente a échouée. Cela vous permet de recueillir autant d'erreurs
 de validation que vous le pouvez en un seul passage. Si toutefois, vous voulez
 stopper l'exécution après qu'une règle spécifique a échoué, vous pouvez définir
 l'option ``last`` à ``true``::
@@ -180,7 +180,7 @@ a besoin d'utiliser::
     // Utilise un nom de classe. Les méthodes doivent être static.
     $validator->provider('custom', 'App\Model\Validation');
 
-Les providers de Validation peuvnt être des objets, ou des noms de classe. Si
+Les providers de Validation peuvent être des objets, ou des noms de classe. Si
 un nom de classe est utilisé, les méthodes doivent être static. Pour utiliser
 un provider autre que 'default', assurez-vous de définir la clé ``provider()``
 dans votre règle::
@@ -474,6 +474,6 @@ ces conditions limite & options comme suit::
             'rule' => ['range', 1, 5]
         ]);
 
-Les règles du Cœur qui prennnent des paramètres supplémentaires doivent avoir
+Les règles du Cœur qui prennent des paramètres supplémentaires doivent avoir
 un tableau pour la clé ``rule`` qui contient la règle comme premier élément, et
 les paramètres supplémentaires en paramètres restants.

@@ -5,7 +5,7 @@ The registry classes provide a simple way to create and retrieve loaded
 instances of a given object type. There are registry classes for Components,
 Helpers, Tasks, and Behaviors.
 
-While the examples below, will use Components, the same behavior can be expected
+While the examples below will use Components, the same behavior can be expected
 for Helpers, Behaviors, and Tasks in addition to Components.
 
 Loading Objects
@@ -17,12 +17,12 @@ Example::
     $this->loadComponent('Acl.Acl');
     $this->addHelper('Flash')
 
-Will result in the ``Toolbar`` property and ``Flash`` helper being loaded.
+This will result in the ``Toolbar`` property and ``Flash`` helper being loaded.
 Configuration can also be set on-the-fly. Example::
 
     $this->loadComponent('Cookie', ['name' => 'sweet']);
 
-Any keys & values provided will be passed to the Component's constructor.  The
+Any keys and values provided will be passed to the Component's constructor.  The
 one exception to this rule is ``className``.  Classname is a special key that is
 used to alias objects in a registry.  This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
@@ -41,9 +41,9 @@ for your application.
 Disabling Callbacks
 ===================
 
-In previous versions collection objects provided a ``disable()`` method to disable
-objects from recieving callbacks. To do this now, you should use the features in
-the events system. For example you could disable component callbacks in the
+In previous versions, collection objects provided a ``disable()`` method to disable
+objects from receiving callbacks. You should use the features in the events system to
+accomplish this now. For example, you could disable component callbacks in the 
 following way::
 
     // Remove Auth from callbacks.

@@ -16,7 +16,7 @@ Avant d'essayer d'utiliser ou d'étendre bake, assurez-vous qu'il est installé
 dans votre application. Bake est disponible en tant que plugin que vous pouvez
 installer avec Composer::
 
-    composer require --dev cakephp/bake
+    composer require --dev cakephp/bake:~1.0
 
 Ceci va installer bake en tant que dépendance de développement. Cela signifie
 qu'il ne sera pas installé lors d'un déploiement en production. Les sections

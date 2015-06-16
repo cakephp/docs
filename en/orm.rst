@@ -43,7 +43,7 @@ example if we wanted to load some data from our ``articles`` table we could do::
     }
 
 Note that we didn't have to create any code or wire any configuration up.
-The conventions in CakePHP allow us to skip some boilerplate code, and allow the
+The conventions in CakePHP allow us to skip some boilerplate code and allow the
 framework to insert base classes when your application has not created
 a concrete class. If we wanted to customize our ArticlesTable class adding some
 associations or defining some additional methods we would add the following to
