@@ -482,7 +482,7 @@ email we could do the following::
 
 If we wanted to completely separate sending a user their welcome email from our
 application's code, we can have our ``UserMailer`` subscribe to the
-``Model.afterSave`` event. By subcsribing to an event, we can keep our
+``Model.afterSave`` event. By subscribing to an event, we can keep our
 application's user-related classes completely free of email-related logic and
 instructions. For example, we could add the following to our ``UserMailer``::
 
