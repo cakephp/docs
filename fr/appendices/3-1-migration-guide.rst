@@ -51,7 +51,7 @@ Query
 - ``Query::leftJoinWith()`` a été ajoutée.
 - ``Query::innerJoinWith()`` a été ajoutée.
 - ``Query::select()`` supporte maintenant  des objets ``Table`` et ``Association``
-  en paramètre. Ces types de paramètres sélectinoneront toutes les colonnes de
+  en paramètres. Ces types de paramètres sélectionneront toutes les colonnes de
   l'instance de la table ou la table ciblée par l'association.
 
 View
