@@ -418,6 +418,39 @@ need to supply those as part of the options to ``Router::url()``.
     ``_name`` cannot be used twice, even if the names occur inside a different
     routing scope.
 
+When building named routes, you will probably want to stick to some conventions
+for the route names. CakePHP makes building up route names easier by allowing
+you to define name prefixes in each scope::
+
+    Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
+        // This route's name will be `api:ping`
+        $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
+    });
+
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
+        // Connect routes.
+    });
+
+    Router::prefix('Admin', ['_namePrefix' => 'admin:'], function ($routes) {
+        // Connect routes.
+    });
+
+You can also use the ``_namePrefix`` option inside nested scopes and it works as
+you'd expect::
+
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:', function ($routes) {
+        $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
+            // This route's name will be `contacts:api:ping`
+            $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
+        });
+    });
+
+Routes connected in named scopes will only have names added if the route is also
+named. Nameless routes will not have the ``_namePrefix`` applied to them.
+
+.. versionadded:: 3.1
+    The ``_namePrefix`` option was added in 3.1
+
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
 
