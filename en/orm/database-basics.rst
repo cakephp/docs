@@ -25,6 +25,19 @@ Once created, you can access the connection object to start using it::
 
     $connection = ConnectionManager::get('default');
 
+Supported Databases
+-------------------
+
+CakePHP supports the following relational database servers:
+
+* MySQL 5.1+
+* SQLite 3
+* PostgreSQL 8+
+* SQLServer 2008+
+
+You will need the correct PDO extension installed for each of the above database
+drivers. Procedural API's are not supported.
+
 Running Select Statements
 -------------------------
 
