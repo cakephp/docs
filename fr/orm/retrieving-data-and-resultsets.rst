@@ -12,6 +12,20 @@ parle des différentes façons pour trouver et charger les entities, mais vous
 pouvez lire la section :doc:`/orm/entities` pour plus d'informations sur les
 entities.
 
+Débugger les Queries et les ResultSets
+======================================
+
+Since the ORM now returns Collections and Entities, debugging these objects can
+be more complicated than in previous CakePHP versions. There are now various
+ways to inspect the data returned by the ORM.
+
+- ``debug($query)`` Shows the SQL and bound params, does not show results.
+- ``debug($query->all())`` Shows the ResultSet properties (not the results).
+- ``debug($query->toArray())`` An easy way to show each of the results.
+- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
+- ``debug($query->first())`` Show the properties of a single entity.
+- ``debug((string)$query->first())`` Show the properties of a single entity as JSON.
+
 Récupérer une Entity Unique avec une Clé Primaire
 =================================================
 
@@ -185,7 +199,7 @@ Une fois que vous avez créé un objet query, vous pouvez utiliser la méthode
 
     // Dans un controller ou une méthode de table.
     $query = $articles->find('all', [
-        'where' => ['Articles.title LIKE' => '%Ovens%']
+        'conditions' => ['Articles.title LIKE' => '%Ovens%']
     ]);
     $number = $query->count();
 
@@ -359,6 +373,8 @@ pouvez utiliser une fonction :ref:`map-reduce` pour modifier les résultats.
 Les fonctionnalités de map reduce remplacent le callback 'afterFind' qu'on
 avait dans les versions précédentes de CakePHP.
 
+.. _dynamic-finders:
+
 Finders Dynamiques
 ==================
 
@@ -401,6 +417,9 @@ Ce qui est au-dessus se traduirait dans ce qui suit::
     $users->find('trolls', [
         'conditions' => ['username' => 'bro']
     ]);
+
+Une fois que vous avez un objet query à partir d'un finder dynamique, vous
+devrez appeler ``first()`` si vous souhaitez le premier résultat.
 
 .. note::
 
@@ -977,8 +996,8 @@ Stacking Multiple Operations
 ----------------------------
 
 L'utilisation de `mapReduce` dans une requête ne va pas l'exécuter
-immédiatemment. L'opération va être enregistrée pour être lancée dès que
-l'on tentera de réucpérer le premier résultat.
+immédiatement. L'opération va être enregistrée pour être lancée dès que
+l'on tentera de récupérer le premier résultat.
 Ceci vous permet de continuer à chainer les méthodes et les filtres
 à la requête même après avoir ajouté une routine map-reduce::
 
@@ -1032,7 +1051,7 @@ des articles::
 Retirer Toutes les Opérations Map-reduce Empilées
 -------------------------------------------------
 
-Dans les mêmes circonstances vous voulez modifier un objer ``Query`` pour
+Dans les mêmes circonstances vous voulez modifier un objet ``Query`` pour
 que les opérations ``mapReduce`` ne soient pas exécutées du tout. Ceci peut
 être facilement fait en appelant la méthode avec les deux paramètres à
 null et le troisième paramètre (overwrite) à ``true``::

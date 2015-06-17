@@ -26,11 +26,11 @@ Après avoir chargé ``Email``, vous pouvez envoyer un email avec ce qui suit::
 Puisque les méthodes de setter d'``Email`` retournent l'instance de la classe,
 vous pouvez définir ses propriétés avec le chaînage des méthodes.
 
-Choisir l'Emetteur
+Choisir l'émetteur
 ------------------
 
 Quand on envoie des emails de la part d'autre personne, c'est souvent une
-bonne idée de définir l'emetteur original en utilisant le header Sender.
+bonne idée de définir l'émetteur original en utilisant le header Sender.
 Vous pouvez faire ceci en utilisant ``sender()``::
 
     $email = new Email();
@@ -38,7 +38,7 @@ Vous pouvez faire ceci en utilisant ``sender()``::
 
 .. note::
 
-    C'est aussi une bonne idée de définir l'envelope de l'emetteur quand on
+    C'est aussi une bonne idée de définir l'envelope de l'émetteur quand on
     envoie un mail de la part d'une autre personne. Cela les empêche d'obtenir
     tout message sur la délivrance.
 
@@ -52,7 +52,7 @@ La Configuration par défaut pour ``Email`` est créé en utilisant ``config()``
 le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
 d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
-et utilise les méthodes séparement pour définir toutes les configurations
+et utilise les méthodes séparément pour définir toutes les configurations
 ou charger un tableau de configs.
 
 En définissant des profiles et des transports, vous pouvez garder le code de
@@ -121,7 +121,7 @@ valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
         'tls' => true
     ]);
 
-La configuration ci-dessis va activer la communication TLS pour tous les
+La configuration ci-dessus va activer la communication TLS pour tous les
 messages d'email.
 
 .. note::
@@ -157,13 +157,13 @@ avoir autant de profiles que nécessaire. Les clés de configuration suivantes
 sont utilisées:
 
 - ``'from'``: Email ou un tableau d'emmeteur. Regardez ``Email::from()``.
-- ``'sender'``: Email ou un tableau d'emetteur réel. Regardez
+- ``'sender'``: Email ou un tableau d'émetteur réel. Regardez
   ``Email::sender()``.
 - ``'to'``: Email ou un tableau de destination. Regardez ``Email::to()``.
 - ``'cc'``: Email ou un tableau de copy carbon. Regardez ``Email::cc()``.
 - ``'bcc'``: Email ou un tableau de copy carbon blind. Regardez
   ``Email::bcc()``.
-- ``'replyTo'``: Email ou un tableau de repondre à cet e-mail. Regardez
+- ``'replyTo'``: Email ou un tableau de répondre à cet e-mail. Regardez
   ``Email::replyTo()``.
 - ``'readReceipt'``: Adresse Email ou un tableau d'adresses pour recevoir un
   récepissé de lecture. Regardez ``Email::readReceipt()``.
@@ -193,7 +193,7 @@ sont utilisées:
   ``Email::emailFormat()``.
 - ``'transport'``: Nom du Transport. Regardez
   :php:meth:`~Cake\\Mailer\\Email::configTransport()`.
-- ``'log'``: Niveau de Log pour connecter les headers del'email headers et le
+- ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
   message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``.
 - ``'helpers'``: Tableau de helpers utilisés dans le template email.
 
@@ -228,8 +228,8 @@ Les templates pour les emails se placent dans un dossier spécial appelé
 des emails peuvent aussi utiliser les layouts et éléments tout comme les
 templates normales::
 
-    $Email = new Email();
-    $Email->template('welcome', 'fancy')
+    $email = new Email();
+    $email->template('welcome', 'fancy')
         ->emailFormat('html')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -239,8 +239,8 @@ Ce qui est au-dessus utilise **src/Template/Email/html/welcome.ctp** pour la
 vue, et **src/Template/Layout/Email/html/fancy.ctp** pour le layout. Vous pouvez
 aussi envoyer des messages email templaté multipart::
 
-    $Email = new Email();
-    $Email->template('welcome', 'fancy')
+    $email = new Email();
+    $email->template('welcome', 'fancy')
         ->emailFormat('both')
         ->to('bob@example.com')
         ->from('app@domain.com')
@@ -270,7 +270,7 @@ pouvez dans des fichiers de template normaux. Par défaut, seul
 :php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers
 supplémentaires en utilisant la méthode ``helpers()``::
 
-    $Email->helpers(['Html', 'Custom', 'Text']);
+    $email->helpers(['Html', 'Custom', 'Text']);
 
 Quand vous définissez les helpers, assurez vous d'inclure 'Html' ou il sera
 retiré des helpers chargés dans votre template d'email.
@@ -307,17 +307,17 @@ formats différents qui dépendent de quel type de fichier vous avez, et comment
 vous voulez que les noms de fichier apparaissent dans le mail de réception du
 client:
 
-1. Chaîne de caractères: ``$Email->attachments('/full/file/path/file.png')`` va
+1. Chaîne de caractères: ``$email->attachments('/full/file/path/file.png')`` va
    attacher ce fichier avec le nom file.png.
-2. Tableau: ``$Email->attachments(['/full/file/path/file.png'])`` aura le
+2. Tableau: ``$email->attachments(['/full/file/path/file.png'])`` aura le
    même comportement qu'en utilisant une chaîne de caractères.
 3. Tableau avec clé:
-   ``$Email->attachments(['photo.png' => '/full/some_hash.png'])`` va
+   ``$email->attachments(['photo.png' => '/full/some_hash.png'])`` va
    attacher some_hash.png avec le nom photo.png. Le récipiendaire va voir
    photo.png, pas some_hash.png.
 4. Tableaux imbriqués::
 
-    $Email->attachments([
+    $email->attachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
@@ -327,7 +327,7 @@ client:
 
    Ce qui est au-dessus va attacher le fichier avec différent mimetype et avec
    un content ID personnalisé (Quand vous définissez le content ID, la pièce
-   jointe est transformée en inline). Le mimetype et contentId sont optionels
+   jointe est transformée en inline). Le mimetype et contentId sont optionnels
    dans ce formulaire.
 
    4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans
@@ -383,7 +383,7 @@ ressembler à cela::
 
     }
 
-Vous devez intégrer la méthode ``send(Email $Email)`` avec votre
+Vous devez intégrer la méthode ``send(Email $email)`` avec votre
 logique personnalisée. En option, vous pouvez intégrer la méthode
 ``config($config)``. ``config()`` est appelée avant send() et vous permet
 d'accepter les configurations de l'utilisateur. Par défaut, cette méthode
@@ -394,9 +394,9 @@ avant l'envoi, vous pouvez utiliser
 :php:meth:`Cake\\Mailer\\Email::transportClass()` pour obtenir une
 instance du transport. Exemple::
 
-    $yourInstance = $Email->transport('your')->transportClass();
+    $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
-    $Email->send();
+    $email->send();
 
 Faciliter les Règles de Validation des Adresses
 -----------------------------------------------
@@ -458,7 +458,7 @@ vous devez définir manuellement le nom de domaine que Email doit utiliser.
 Il sera utilisé comme nom d'hôte pour l'id du message (puisque il n'y a pas
 de nom d'hôte dans un environnement CLI)::
 
-    $Email->domain('www.example.org');
+    $email->domain('www.example.org');
     // Resulte en ids de message comme ``<UUID@www.example.org>`` (valid)
     // au lieu de `<UUID@>`` (invalid)
 

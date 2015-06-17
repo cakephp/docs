@@ -1,4 +1,4 @@
-Securité
+Sécurité
 ########
 
 CakePHP fournit quelques outils pour sécuriser votre application.
@@ -12,5 +12,5 @@ Les sections suivantes traitent de ces outils:
     controllers/components/security
 
 .. meta::
-    :title lang=fr: Securité
-    :keywords lang=fr: securité, csrf, cross site request forgery component
+    :title lang=fr: Sécurité
+    :keywords lang=fr: sécurité, csrf, cross site request forgery component

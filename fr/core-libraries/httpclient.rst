@@ -206,6 +206,18 @@ déjà votre clé de consommateur et un secret de consommateur::
       ]
     ]);
 
+Authentification OAuth 2
+------------------------
+
+Il n'y a pas d'adapteur d'authentification spécialisé car OAuth2 est souvent
+juste un simple entête. A la place, vous pouvez créer un client avec le token
+d'accès::
+
+    $http = new Client([
+        'headers' => ['Authorization' => 'Bearer ' . $accessToken]
+    ]);
+    $response = $http->get('https://example.com/api/profile/1');
+
 Authentification Proxy
 ----------------------
 
@@ -274,7 +286,7 @@ Configurer et Gérer les Cookies
 Http\\Client peut aussi accepter les cookies quand on fait des requêtes. En plus
 d'accepter les cookies, il va aussi automatiquement stocker les cookies valides
 définis dans les responses. Toute response avec des cookies, les verra
-stockés dans l'instance d'origne de Http\\Client. Les cookies stockés dans une
+stockés dans l'instance d'origine de Http\\Client. Les cookies stockés dans une
 instance Client sont automatiquement inclus dans les futures requêtes vers
 le domaine + combinaisons de chemin qui correspondent::
 

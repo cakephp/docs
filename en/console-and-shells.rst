@@ -82,6 +82,23 @@ Running the Console with no arguments produces this help message::
 The first information printed relates to paths. This is helpful if you're
 running the console from different parts of the filesystem.
 
+You could then run the any of the listed shells by using its name::
+
+    # run server shell
+    bin/cake server
+
+    # run migrations shell
+    bin/cake migrations -h
+
+    # run bake (with plugin prefix)
+    bin/cake bake.bake -h
+
+Plugin shells can be invoked without a plugin prefix if the shell's name does
+not overlap with an application or framework shell. In the case that two plugins
+provide a shell with the same name, the first loaded plugin will get the short
+alias. You can always use the ``plugin.shell`` format to unambiguously reference
+a shell.
+
 .. php:class:: Shell
 
 Creating a Shell

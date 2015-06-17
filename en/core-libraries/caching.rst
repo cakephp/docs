@@ -290,8 +290,8 @@ Clearing Cached Data
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-Destroy all cached values for a cache configuration. In engines like Apc,
-Memcached and Wincache, the cache configuration's prefix is used to remove
+Destroy all cached values for a cache configuration. In engines like: Apc,
+Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
 

@@ -1,7 +1,7 @@
 Filtres du Dispatcher
 #####################
 
-Il y a plusieurs raisons de vouloir éxécuter un bout de code avant que tout
+Il y a plusieurs raisons de vouloir exécuter un bout de code avant que tout
 code de controller ne soit lancé ou juste avant que la réponse ne soit
 envoyée au client, comme la mise en cache de la réponse, le tunning de header,
 une authentification spéciale ou juste pour fournir l'accès à une réponse de
@@ -24,7 +24,12 @@ Les filtres intégrés sont:
   plugin ou du theme, comme un fichier CSS, un fichier JavaScript ou une image
   stockée soit dans le dossier webroot d'un plugin ou celui qui correspond pour
   un Theme. Il va servir le fichier correspondant s'il est trouvé, stoppant le
-  reste du cycle de dispatch.
+  reste du cycle de dispatch::
+
+        // Utilisez options pour définir le cacheTime de vos assets statiques
+        // S'il n'est pas défini, il est de 1 heure (+1 hour) par défaut.
+        DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
+
 * ``RoutingFilter`` applique les règles de routing de l'application pour l'URL
   de la requête. Remplit ``$request->params`` avec les résultats de routing.
 * ``ControllerFactory`` utilise ``$request->params`` pour localiser le
@@ -150,7 +155,7 @@ Alors que notre filtre était relativement simple, il y a quelques autres choses
 intéressantes que nous pouvons réaliser dans les méthodes de filtre. En
 renvoyant un objet ``Response``, vous pouvez court-circuiter le process de
 dispatch et empêcher le controller d'être appelé. Lorsque vous renvoyez une
-response, n'oubliez pas d'appeller ``$event->stopPropagation()`` pour que les
+response, n'oubliez pas d'appeler ``$event->stopPropagation()`` pour que les
 autres filtres ne soient pas appelés.
 
 .. note::

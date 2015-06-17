@@ -30,7 +30,7 @@ d'une ``View``, utilisez la classe ``Time``::
     }
 
 En-dessous, CakePHP utilise `Carbon <https://github.com/briannesbitt/Carbon>`_
-pour construire l'utilitaire Time. Tout ce que vous pouvez faire avec
+pour construire l'utilitaire ``Time``. Tout ce que vous pouvez faire avec
 ``Carbon`` et ``DateTime``, vous pouvez le faire avec ``Time``.
 
 Pour plus d'information sur Carbon, rendez-vous sur
@@ -162,7 +162,7 @@ dans un timezone, mais que vous voulez les afficher dans un timezone propre
 
     $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 
-Laisser le premier paramètre à null va utiliser la chaine de formatage par
+Laisser le premier paramètre à ``null`` va utiliser la chaine de formatage par
 défaut::
 
     $now->i18nFormat(null, 'Europe/Paris');
@@ -178,7 +178,7 @@ Définir la Locale par défaut et la Chaîne Format
 ------------------------------------------------
 
 La locale par défaut avec laquelle les dates sont affichées quand vous utilisez
-``nice`` ``18nFormat`` est prise à partir de la directive
+``nice`` ``i18nFormat`` est prise à partir de la directive
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 Vous pouvez cependant modifier ceci par défaut à la volée::
 

@@ -33,13 +33,13 @@ Nous maintenons 4 versions de CakePHP.
    nouvelle n'est introduite, à moins que ce soit absolument nécessaire.
 -  **Branches de fonctionnalité** : Les branches de fonctionnalité contiennent
    des fonctionnalités non-finies, possiblement instable et sont recommandées
-   uniquement pour les utilisateurs avertis interessés dans la fonctionnalité
+   uniquement pour les utilisateurs avertis intéressés dans la fonctionnalité
    la plus avancée et qui souhaitent contribuer à la communauté. Les branches
    de fonctionnalité sont nommées selon la convention suivante de
    *version-fonctionnalité*. Un exemple serait *1.3-routeur* qui contiendrait
    de nouvelles fonctionnalités pour le Routeur dans 1.3.
 
-Espèrons que cela vous aide à comprendre quelle version est bonne pour vous.
+Espérons que cela vous aide à comprendre quelle version est bonne pour vous.
 Une fois que vous choisissez votre version, vous vous sentirez peut-être
 contraints de contribuer à un report de bug ou de faire des commentaires
 généraux sur le code.

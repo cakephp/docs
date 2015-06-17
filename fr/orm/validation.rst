@@ -26,7 +26,7 @@ retournée::
 
     $article = $articles->newEntity($this->request->data);
     if ($article->errors()) {
-        // validation de l'entity a echoué.
+        // validation de l'entity a échouée.
     }
 
 Quand vous construisez une entity avec la validation activée, les choses
@@ -132,6 +132,22 @@ Vous pouvez également utiliser des closures en tant que règle de validation::
 Les méthodes de validation peuvent renvoyer des messages lorsqu'elles échouent.
 C'est un moyen simple de créer des messages d'erreur dynamiques basés sur la
 valeur fournie.
+
+Classe Validator par Défault
+============================
+
+Comme mentionné ci-dessus, par défaut les méthodes de validation reçoivent
+une instance de ``Cake\Validation\Validator``. Si vous souhaitez utiliser
+une intance d'un validator personnalisé, vous pouvez utiliser l'attribut
+``$_validatorClass`` de table::
+
+
+    // Dans votre class Table
+    public function initialize()
+    {
+        $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
+    }
+
 
 .. _application-rules:
 

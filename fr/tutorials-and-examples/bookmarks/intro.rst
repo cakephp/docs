@@ -144,7 +144,7 @@ tables nécessaires::
 
 Vous avez peut-être remarqué que la table ``bookmarks_tags`` utilisait une
 clé primaire composite. CakePHP accepte les clés primaires composites presque
-partout, facilitant la construction des applications multi-tenanted.
+partout, facilitant la construction des applications à tenant multiples.
 
 La table et les noms de colonnes que nous avons utilisés n'étaient pas
 arbitraires. En utilisant les
@@ -308,7 +308,12 @@ de CakePHP. Intégrons maintenant la méthode manquante. Dans
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);
-        $this->set(compact('bookmarks', 'tags'));
+
+        // Passe les variables au template de vue (view).
+        $this->set([
+            'bookmarks' => $bookmarks,
+            'tags' => $tags
+        ]);
     }
 
 Créer la Méthode Finder
@@ -336,7 +341,11 @@ Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
 
 Nous intégrons juste :ref:`des finders personnalisés <custom-find-methods>`.
 C'est un concept très puissant dans CakePHP qui vous permet de faire un package
-réutilisable de vos requêtes. Dans notre finder nous avons amené la méthode
+réutilisable de vos requêtes. Les finders attendent toujours un objet
+:doc:`/orm/query-builder` et un tableau d'options en paramètre. Les finders
+peuvent manipuler les requêtes et ajouter n'importe quels conditions ou
+critères. Une fois qu'ils ont terminé, les finders doivent retourner l'objet
+Query modifié. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
 qui 'match'.
 
@@ -356,27 +365,32 @@ Construisons donc le fichier de vue pour notre action ``tags()``. Dans
     <section>
     <?php foreach ($bookmarks as $bookmark): ?>
         <article>
+            <!-- Utilise le HtmlHelper pour créer un lien -->
             <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
             <small><?= h($bookmark->url) ?></small>
+
+            <!-- Utilise le TextHelper pour formater le texte -->
             <?= $this->Text->autoParagraph($bookmark->description) ?>
         </article>
     <?php endforeach; ?>
     </section>
 
-CakePHP s'attend à ce que nos templates suivent la convention de nommage où
-le template a la version en minuscule et en underscore du nom de l'action du
-controller.
+Dans le code ci-dessus, nous utilisons le :doc:`Helper HTML </views/helpers/html>`
+et le :doc:`Helper Text </views/helpers/text>` pour aider à la génération
+du contenu de notre vue. Nous utilisons également la fonction :php:func:`h`
+pour encoder la sortie en HTML. Vous devez vous rappeler de toujours utiliser
+``h()`` lorsque vous affichez des données provenant des utilisateurs pour éviter
+les problèmes d'injection HTML.
+
+Le fichier ``tags.ctp`` que nous venons de créer suit la convention de nommage
+de CakePHP pour un ficher de template de vue. La convention d'avoir le nom
+de template en minuscule et en underscore du nom de l'action du controller.
 
 Vous avez peut-être remarqué que nous pouvions utiliser les variables
 ``$tags`` et ``$bookmarks`` dans notre vue. Quand nous utilisons la méthode
 ``set()`` dans notre controller, nous définissons les variables spécifiques à
 envoyer à la vue. La vue va rendre disponible toutes les variables passées
 dans les templates en variables locales.
-
-Dans notre vue, nous avons utilisé quelques uns des :doc:`helpers
-</views/helpers>` intégrés. Les helpers sont utilisés pour rendre de la
-logique réutilisable pour le formatage des données, pour la création de
-HTML ou pour l'affichage d'autre vue.
 
 Vous devriez maintenant pouvoir visiter l'URL **/bookmarks/tagged/funny** et
 voir tous les bookmarks taggés avec 'funny'.

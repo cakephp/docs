@@ -197,7 +197,7 @@ requête n'est pas exécutée jusqu'à ce qu'une des prochaines actions se fasse
   résultats et peut seulement être utilisée avec les instructions ``SELECT``.
 - La méthode ``toArray()`` de query est appelée.
 
-Jusqu'à ce qu'une de ces conditions ne soient rencontrées, la requête peut être
+Jusqu'à ce qu'une de ces conditions soit rencontrée, la requête peut être
 modifiée avec du SQL supplémentaire envoyé à la base de données. Cela signifie
 que si une Query n'a pas été évaluée, aucun SQL ne sera jamais envoyé à la
 base de données. Une fois exécutée, la modification et la ré-évaluation
@@ -390,6 +390,43 @@ Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code suiv
         'number_unpublished' => $query->func()->sum($unpublishedCase)
     ])
     ->group('published');
+
+The ``addCase`` function can also chain together multiple statements to create ``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
+
+If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population size, we could do the following::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->addCase(
+                [
+                    $q->newExpr()->lt('population', 100000),
+                    $q->newExpr()->between('population', 100000, 999000),
+                    $q->newExpr()->gte('population', 999001),
+                ],
+                ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
+                ['string', 'string', 'string'] # type of each value
+            );
+        });
+    # WHERE CASE
+    #   WHEN population < 100000 THEN 'SMALL'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+    #   WHEN population >= 999001 THEN 'LARGE'
+    #   END
+
+Any time there are fewer values than there are case conditions ``addCase`` will automatically produce an ``if .. then .. else`` statement::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->addCase(
+                [
+                    $q->newExpr()->eq('population', 0),
+                ],
+                ['DESERTED', 'INHABITED'], # values matching conditions
+                ['string', 'string'] # type of each value
+            );
+        });
+    # WHERE CASE
+    #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
 Désactiver l'Hydratation
 ------------------------
@@ -602,19 +639,102 @@ Ce qui générerait le code SQL suivant::
 Quand vous utilisez les objets expression, vous pouvez utiliser les méthodes
 suivantes pour créer des conditions:
 
-- ``eq()`` Créé une condition d'égalité.
-- ``notEq()`` Créé une condition d'inégalité
-- ``like()`` Créé une condition en utilisant l'opérateur ``LIKE``.
-- ``notLike()`` Créé une condition négative ``LIKE``.
-- ``in()`` Créé une condition en utilisant ``IN``.
-- ``notIn()`` Créé une condition négative en utilisant ``IN``.
-- ``gt()`` Créé une condition ``>``.
-- ``gte()`` Créé une condition ``>=``.
-- ``lt()`` Créé une condition ``<``.
-- ``lte()`` Créé une condition ``<=``.
-- ``isNull()`` Créé une condition ``IS NULL``.
-- ``isNotNull()`` Créé une condition négative ``IS NULL``.
-- ``between()`` Créé une condition ``BETWEEN``.
+- ``eq()`` Creates an equality condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->eq('population', '10000');
+        });
+    # WHERE population = 10000
+
+- ``notEq()`` Creates an inequality condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notEq('population', '10000');
+        });
+    # WHERE population != 10000
+
+- ``like()`` Creates a condition using the ``LIKE`` operator::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->like('name', '%A%');
+        });
+    # WHERE name LIKE "%A%"
+
+- ``notLike()`` Creates a negated ``LIKE`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notLike('name', '%A%');
+        });
+    # WHERE name NOT LIKE "%A%"
+
+- ``in()`` Create a condition using ``IN``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->in('country_id', ['AFG', 'USA', 'EST']);
+        });
+    # WHERE country_id IN ('AFG', 'USA', 'EST')
+
+- ``notIn()`` Create a negated condition using ``IN``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
+        });
+    # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
+- ``gt()`` Create a ``>`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->gt('population', '10000');
+        });
+    # WHERE population > 100000
+- ``gte()`` Create a ``>=`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->gte('population', '10000');
+        });
+    # WHERE population >= 100000
+- ``lt()`` Create a ``<`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->lt('population', '10000');
+        });
+    # WHERE population < 100000
+- ``lte()`` Create a ``<=`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->lte('population', '10000');
+        });
+    # WHERE population <= 100000
+- ``isNull()`` Create an ``IS NULL`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->isNull('population');
+        });
+    # WHERE (population) IS NULL
+- ``isNotNull()`` Create a negated ``IS NULL`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->isNotNull('population');
+        });
+    # WHERE (population) IS NOT NULL
+- ``between()`` Create a ``BETWEEN`` condition::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->between('population', 999, 5000000);
+        });
+    # WHERE population BETWEEN 999 AND 5000000,
 
 Créer automatiquement des Clauses IN
 ------------------------------------
@@ -817,12 +937,12 @@ générer dynamiquement la clé mise en cache::
     });
 
 La méthode cache facilite l'ajout des résultats mis en cache à vos finders
-personnalisés ou à travers des écouteurs d'événement.
+personnalisés ou à travers des écouteurs d'évènement.
 
 Quand les résultats pour une requête mise en cache sont récupérés, ce qui suit
 va arriver:
 
-1. L'événement ``Model.beforeFind`` est déclenché.
+1. L'évènement ``Model.beforeFind`` est déclenché.
 2. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
 3. La clé du cache va être déterminée et les données du cache vont être lues.
    Si les données du cache sont vides, ces résultats vont être retournés.

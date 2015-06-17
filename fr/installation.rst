@@ -268,7 +268,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        # respect pour lesquels les services et les fonctionnalités sont
        # autorisés et/ou désactivés dans ce répertoire (et ses sous-répertoires).
        #
-       # Premièrement, nous configurons "par défault" pour être un ensemble
+       # Premièrement, nous configurons "par défaut" pour être un ensemble
        # très restrictif de fonctionnalités.
        #
        <Directory />

@@ -41,7 +41,7 @@ utilisateurs enregistrés dans votre application.
 * ``DigestAuthenticate`` vous permet d'identifier les utilisateurs en
   utilisant l'authentification Digest HTTP.
 
-Par défaut Le component Auth (``AutComponent``) utilise ``FormAuthenticate``.
+Par défaut Le component Auth (``AuthComponent``) utilise ``FormAuthenticate``.
 
 Choisir un Type d'Authentification
 ----------------------------------
@@ -122,6 +122,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
   avec les informations de l'utilisateur identifié.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut
   à ``Default``.
+- ``storage`` Classe de stockage. Par défaut à ``Session``.
 
 Pour configurer les différents champs de l'utilisateur dans la méthode
 ``initialize()``::
@@ -249,15 +250,17 @@ Utilisation de l'Authentification Digest et Basic pour la Connexion
 Les authentifications basic et digest sont des schémas d'authentification
 sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
 vous utilisez seulement les authentificateurs basic / digest, vous n'avez pas
-besoin d'action login dans votre controller. Aussi, vous pouvez définir
-``$this->Auth->sessionKey`` à ``false`` pour vous assurer que AuthComponent
-n'essaie pas de lire les infos de l'utilisateur à partir de la session. Vous
-voudrez peut-être aussi définir ``unauthorizedRedirect`` à ``false`` ce qui
-va entraîner l'envoi d'une ``ForbiddenException`` de AuthComponent à la place
-du comportement par défaut de redirection vers le référent. L'authentification
-stateless va re-vérifier les certificats de l'utilisateur à chaque requête,
-créant une petite quantité de charge supplémentaire, mais permet aux clients
-de se connecter sans utiliser les cookies et est parfait pour le APIs.
+besoin d'action login dans votre controller. L'authentication stateless va
+re-vérifier les autorisations de l'utilisateur à chaque requête, ceci créé un
+petit surcoût mais permet aux clients de se connecter sans utiliser les
+cookies et rend AuthComponent plus adapté pour construire des APIs.
+
+Pour des authentificateurs stateless, la config ``storage`` doit être définie
+à ``Memory`` pour que AuthComponent n'utilise pas la session pour stocker
+l'enregistrement utilisateur. Vous pouvez aussi définir la config
+``unauthorizedRedirect`` à ``false`` pour que AuthComponent lance une
+``ForbiddenException`` plutôt que le comportement par défaut qui est de
+rediriger vers la page référente.
 
 Créer des Objets d'Authentification Personnalisés
 -------------------------------------------------
@@ -293,10 +296,10 @@ supporter des authentifications sans cookie ou sans état (stateless). Regardez
 les sections portant sur l'authentification digest et basic plus bas pour plus
 d'information.
 
-``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
+``AuthComponent`` lance maintenant deux évènements``Auth.afterIdentify`` et
 ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
 avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction de
-callback pour ces événements en retournant un tableau de mapping depuis la
+callback pour ces évènements en retournant un tableau de mapping depuis la
 méthode ``implementedEvents()`` de votre classe d'authentification::
 
     public function implementedEvents()
@@ -338,7 +341,7 @@ username et password. Pour chaque requête, ces valeurs sont utilisées pour
 ré-identifier l'utilisateur et s'assurer que c'est un utilisateur valide. Comme
 avec les méthodes d'authentification de l'objet ``authenticate()``, la méthode
 ``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
-succès et ``false`` en cas d'echec. ::
+succès et ``false`` en cas d'échec. ::
 
     public function getUser($request)
     {
@@ -398,7 +401,7 @@ l'authentification échoue::
     $this->Auth->config('authError', "Désolé, vous n'êtes pas autorisés à accéder à cette zone.");
 
 Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
-l'user se soit déja connecté. Vous pouvez supprimer ce message en configurant
+l'user se soit déjà connecté. Vous pouvez supprimer ce message en configurant
 sa valeur avec le booléen ``false``.
 
 Dans le beforeFilter() de votre controller ou dans les configurations du

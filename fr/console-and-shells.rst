@@ -31,7 +31,7 @@ paramètres.
 
 .. note::
 
-    Une installation de PHP contruite avec la ligne de commande (CLI) doit
+    Une installation de PHP construite avec la ligne de commande (CLI) doit
     être disponible sur le système si vous prévoyez d'utiliser la Console.
 
 Avant d'entrer dans les spécificités, assurons-nous que vous pouvez exécuter
@@ -89,6 +89,23 @@ La première information affichée est en rapport avec les chemins. Ceci est
 particulièrement pratique si vous exécutez la Console depuis différents
 endroits de votre système de fichier.
 
+Vous pouvez lancer n'importe quel shell listé en utilisant son nom::
+
+    # lance le shell server
+    bin/cake server
+
+    # lance le shell migrations
+    bin/cake migrations -h
+
+    # lance le shell bake (avec le préfie plugin)
+    bin/cake bake.bake -h
+
+Les shells de plugins peuvent être invoqués sans le préfixe du plugin si le nom
+du shell n'entre pas en collision avec un shell de l'application ou du
+framework. Dans le cas où deux plugins fournissent un shell du même nom, c'est
+le premier chargé qui récupérera l'alias court. Vous pouvez toujours
+utiliser le format ``plugin.shell`` pour référencer un shell sans ambiguïté.
+
 .. php:class:: Shell
 
 Créer un Shell
@@ -113,7 +130,7 @@ dedans::
 
 Les conventions pour les classes de shell sont que les noms de classe doivent
 correspondre au nom du fichier, avec Shell en suffixe. Dans notre shell, nous
-avons crée une méthode ``main()``.
+avons créé une méthode ``main()``.
 Cette méthode est appelée quand un shell est appelé avec aucune commande
 supplémentaire. Nous allons ajouter quelques commandes en plus dans un moment,
 mais pour l'instant lançons juste notre shell. Depuis le répertoire de votre
@@ -130,7 +147,7 @@ Vous devriez voir la sortie suivante::
     ---------------------------------------------------------------
     Hello world.
 
-Comme mentionné prédémment, la méthode ``main()`` dans les shells est une
+Comme mentionné précédemment, la méthode ``main()`` dans les shells est une
 méthode spéciale appelée tant qu'il n'y a pas d'autres commandes ou arguments
 donnés au shell. Comme notre méthode principale n'était pas très intéressante,
 ajoutons une autre commande qui fait quelque chose::
@@ -152,7 +169,7 @@ ajoutons une autre commande qui fait quelque chose::
         }
     }
 
-Après avoir enregistré ce fichier, vous devrize pouvoir lancer la commande
+Après avoir enregistré ce fichier, vous devriez pouvoir lancer la commande
 suivante et voir votre nom affiché::
 
     bin/cake hello hey_there your-name
@@ -166,7 +183,7 @@ Dans notre méthode ``heyThere()``, nous pouvons voir que les arguments de
 position sont envoyés à notre fonction ``heyThere()``. Les arguments de
 position sont aussi disponible dans la propriété ``args``.
 Vous pouvez accéder switches ou aux options des applications du shell, qui sont
-disponbles dans ``$this->params``, mais nous étudierons ce point plus tard.
+disponibles dans ``$this->params``, mais nous étudierons ce point plus tard.
 
 Lorsque vous utilisez la méthode ``main()``, vous ne pouvez pas utiliser
 les arguments de position ou les paramètres. Cela parce que le premier argument
@@ -391,7 +408,7 @@ chemin donné::
 
 Si le Shell est interactif, un avertissement sera généré, et il sera demandé
 à l'utilisateur s'il veut écraser le fichier s'il existe déjà. Si la
-propriété iinteractive du shell est à ``false``, aucune question ne sera
+propriété interactive du shell est à ``false``, aucune question ne sera
 posée et le fichier sera simplement écrasé.
 
 Sortie de la Console
@@ -443,10 +460,10 @@ Niveaux de sortie de la Console
 
 Les Shells ont souvent besoin de différents niveaux de verbosité. Quand vous
 lancez une tâche cron, la plupart des sorties ne sont pas nécessaires. Et il
-y a des fois où vous n'êtes pas interessés dans tout ce qu'un shell a à dire.
+y a des fois où vous n'êtes pas intéressés dans tout ce qu'un shell a à dire.
 Vous pouvez utiliser des niveaux de sortie pour signaler la sortie de façon
 appropriée. L'utilisateur du shell peut ensuite décider pour quel niveau de
-détail ils sont interessés en configurant le bon flag quand on appelle le
+détail ils sont intéressés en configurant le bon flag quand on appelle le
 shell. :php:meth:`Cake\\Console\\Shell::out()` supporte 3 types de sortie par
 défaut.
 
@@ -707,14 +724,14 @@ est appelé. De plus, vous pouvez utiliser ``choices`` pour forcer un argument
 pour qu'il soit une liste de choix valides::
 
     $parser->addArgument('type', [
-        'help' => 'Le type de nœud avec lequel intéragir.',
+        'help' => 'Le type de nœud avec lequel interagir.',
         'required' => true,
         'choices' => ['aro', 'aco']
     ]);
 
 Ce qui est au-dessus va créer un argument qui est nécessaire et a une
 validation sur l'entrée. Si l'argument est soit manquant, soit a une valeur
-incorrecte, une exception sera levée et le shell sera arreté.
+incorrecte, une exception sera levée et le shell sera arrêté.
 
 Ajouter des Options
 -------------------
@@ -774,7 +791,7 @@ Si vous avez un tableau avec plusieurs options, vous pouvez utiliser
         'parent' => ['short' => 'p', 'help' => 'The parent node']
     ]);
 
-Comme avec toutes les méthodes de construcion de ConsoleOptionParser,
+Comme avec toutes les méthodes de construction de ConsoleOptionParser,
 addOptions peut être utilisée comme une partie de la chaîne de méthode courante.
 
 Validation des Options

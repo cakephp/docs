@@ -1,5 +1,5 @@
-FormHelper
-##########
+Form
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -7,7 +7,7 @@ FormHelper
 
 Le Helper Form prend en charge la plupart des opérations lourdes
 de la création de formulaire. Le Helper Form se concentre sur la
-possibilité de créér des formulaires rapidement, d'une manière qui
+possibilité de créer des formulaires rapidement, d'une manière qui
 permettra de rationaliser la validation, la re-population et la mise
 en page (layout). Le Helper Form est aussi flexible - Il va faire à
 peu près tout pour vous en utilisant les conventions, ou vous
@@ -26,7 +26,7 @@ affichera une balise d'ouverture de formulaire.
 Tous les paramètres sont optionnels. Si ``create()`` est appelée sans
 paramètre, CakePHP supposera que vous voulez créer un formulaire en rapport
 avec le controller courant, via l'URL actuelle. par défaut, la méthode de
-soumission par des formulaires est POST. Si vous appellez ``create()`` dans une
+soumission par des formulaires est POST. Si vous appelez ``create()`` dans une
 vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
 
 .. code-block:: html
@@ -34,7 +34,7 @@ vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
     <form method="post" action="/users/add">
 
 L'argument ``$model`` est utilisé comme 'context' du formulaire. Il y a
-plusieurs contextes de formulaires intégrés et vous pouvez ajouter les votres,
+plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres,
 ce que nous allons voir dans la prochaine section. Ceux intégrés
 correspondent aux valeurs suivantes de ``$model``:
 
@@ -92,7 +92,7 @@ qui suit::
     }
 
     // View/Articles/edit.ctp:
-    // Si $article->isNew() est false, nous aurons un formullaire d"'édition
+    // Si $article->isNew() est false, nous aurons un formulaire d'édition
     <?= $this->Form->create($article) ?>
 
 Affichera:
@@ -230,7 +230,7 @@ habituels que vous pouvez rencontrer, vous pouvez avoir besoin de construire
 une nouvelle classe de contexte si vous utilisez un ORM différent. Dans ces
 situations, vous devrez intégrer `Cake\\View\\Form\\ContextInterface
 <http://api.cakephp.org/3.0/class-Cake.View.Form.ContextInterface.html>`_ . Une
-fois que vous avez integré cette interface, vous pouvez connecter votre nouveau
+fois que vous avez intégré cette interface, vous pouvez connecter votre nouveau
 contexte dans le FormHelper. Il est souvent mieux de faire ceci dans un
 event listener ``View.beforeRender``, ou dans une classe de vue de
 l'application::
@@ -1132,8 +1132,8 @@ les champs ``files``,
     type d'envodage du formulaire en définissant l'option type à 'file' dans
     ``$this->Form->create()``.
 
-Crée des Inputs de date et d'heure (date and time inputs)
----------------------------------------------------------
+Crée des Inputs DateTime
+------------------------
 
 .. php:method:: dateTime($fieldName, $options = [])
 
@@ -1163,6 +1163,61 @@ vous pouvez remplacer le template ``dateWidget``. Par défaut le template
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
+Créer des Inputs Time
+---------------------
+
+.. php:method:: time($fieldName, $options = [])
+
+Créé deux éléments select remplis respectivement avec 24 hours et 60 minutes
+pour ``hour`` et ``minute``.
+De plus, les attributs HTML peuvent être fournis dans $options pour chaque
+``type`` spécifique. Si ``$options['empty']`` est ``false``, le select
+n'inclura pas une option vide:
+
+* ``empty`` - Si ``true``, l'option select vide est montrée. Si c'est une
+  chaîne, cette chaîne sera affichée en tant qu'élément vide.
+* ``default`` | ``value`` La valeur par défaut à utiliser pour l'input. Une
+  valeur dans ``$this->request->data`` qui correspond au nom du champ va écraser
+  cette valeur.
+  Si aucune valeur par défaut n'est fournie, ``time()`` sera utilisée.
+* ``timeFormat`` Le format de time à utiliser, soit 12 soit 24. Par défaut à 24.
+* ``second`` Défini à ``true`` pour activer les secondes déroulantes.
+* ``interval`` L'intervalle pour le select minutes. Par défaut à 1.
+
+Par exemple, pour créer un intervalle de temps avec des minutes selectionnables
+toutes les 15 minutes, et pour l'appliquer aux selects, vous pourriez faire
+ceci ::
+
+    echo $this->Form->time('released', [
+        'interval' => 15,
+        'hour' => [
+            'class' => 'foo-class',
+        ],
+        'minute' => [
+            'class' => 'bar-class',
+        ],
+    ]);
+
+Ce qui créerait les deux selects suivants:
+
+.. code-block:: html
+
+    <select name="released[hour]" class="foo-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+        <option value="22">22</option>
+        <option value="23">23</option>
+    </select>
+    <select name="released[minute]" class="bar-class">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
+
 Créer des Inputs Year
 ---------------------
 
@@ -1175,7 +1230,7 @@ Si ``$options['empty']`` est ``false``, le select n'aura pas de choix vide:
 * ``empty`` - Si ``true``, une option select vide est affichée. Si c'est une
   chaine, cette chaine est affichée comme élément vide.
 * ``orderYear`` - Ordre de tri des années dans les options du select.
-  Les valeurs accepteée sont 'asc', 'desc'. 'desc' par défaut.
+  Les valeurs acceptées sont 'asc', 'desc'. 'desc' par défaut.
 * ``value`` La valeur sélectionnée pour l'input.
 * ``maxYear`` L'année la plus lointaine à utiliser dans le select.
 * ``minYear`` L'année la plus ancienne à utiliser dans le select de l'année.
@@ -1494,7 +1549,7 @@ Créer des Boutons Indépendants et des liens POST
     cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
     :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
-    pour créér des boutons à l'intérieur de formulaires ouvert.
+    pour créer des boutons à l'intérieur de formulaires ouvert.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
@@ -1629,7 +1684,7 @@ Générer des Formulaires Entiers
 
 .. php:method:: inputs(mixed $fields = [], $options = [])
 
-Génére un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier les
+Génère un ensemble d'inputs pour un contexte donné. Vous pouvez spécifier les
 champs générés en les incluant::
 
     echo $this->Form->inputs([
@@ -1761,7 +1816,7 @@ Les classes Widget ont une interface requise vraiment simple. Elles doivent
 implémenter la :php:class:`Cake\\View\\Widget\\WidgetInterface`. Cette interface
 nécessite que les méthodes ``render(array $data)`` et
 ``secureFields(array $data)`` soient implémentées. La méthode ``render()``
-attend un tableau de données pour constuire le widget et doit renvoyer une
+attend un tableau de données pour construire le widget et doit renvoyer une
 chaine HTML pour le widget. La méthode ``secureFields()`` attend également un
 tableau de données et doit retourner un tableau contenant la liste des champs à
 sécuriser pour ce widget. Si CakePHP construit votre widget, vous pouvez
@@ -1819,7 +1874,7 @@ les widgets sont définis comme des paramètres::
     ]);
 
 Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces
-dépendances lorsqu'elles sont déclaréees ::
+dépendances lorsqu'elles sont déclarées ::
 
     $this->loadHelper('Form', [
         'widgets' => [
@@ -1840,7 +1895,7 @@ widgets en utilisant la méthode ``addWidget`` resemble à ceci::
     // Utilise une classname.
     $this->Form->addWidget(
         'autocomplete',
-        ['Autocomplete', 'text' 'label']
+        ['Autocomplete', 'text', 'label']
     );
 
     // Utilise une instance - nécessite de résoudre les dépendances.
@@ -1887,7 +1942,7 @@ inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: secure(array $fields = [])
 
-    Génére un champ caché avec un hash de securité basé sur les champs utilisés
+    Génère un champ caché avec un hash de sécurité basé sur les champs utilisés
     dans le formulaire.
 
 

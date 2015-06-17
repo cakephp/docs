@@ -18,16 +18,16 @@ Quand vous supprimez des entities, quelques actions se passent:
 
 1. Les :ref:`règles de suppression <application-rules>` seront appliquées. Si
    les règles échouent, la suppression sera empêchée.
-2. L'événement ``Model.beforeDelete`` est déclenché. Si cet événement est
-   arrêté, la suppression sera abandonnée et les résultats de l'événement seront
+2. L'évènement ``Model.beforeDelete`` est déclenché. Si cet évènement est
+   arrêté, la suppression sera abandonnée et les résultats de l'évènement seront
    retournés.
 3. L'entity sera supprimée.
 4. Toutes les associations dépendantes seront supprimées. Si les associations
-   sont supprimées en tant qu'entities, des événements supplémentaires seront
+   sont supprimées en tant qu'entities, des évènements supplémentaires seront
    dispatchés.
 5. Tout enregistrement de table jointe pour les associations BelongsToMany
    sera retirées.
-6. L'événement ``Model.afterDelete`` sera déclenché.
+6. L'évènement ``Model.afterDelete`` sera déclenché.
 
 Par défaut, toutes les suppressions se passent dans une transaction. Vous
 pouvez désactiver la transaction avec l'option atomic::
@@ -57,7 +57,7 @@ d'association HasMany avec ces deux options activées serait::
     Définir ``cascadeCallbacks`` à ``true``, entrainera  des lenteurs
     supplémentaires des suppressions par rapport aux suppressions de masse.
     L'option cascadeCallbacks doit seulement être activée quand votre
-    application a un travail important de gestion des écouteurs d'événements.
+    application a un travail important de gestion des écouteurs d'évènements.
 
 Suppressions en Masse
 ---------------------
@@ -79,6 +79,6 @@ lignes ont été supprimées.
 
 .. warning::
 
-    deleteAll *ne* va *pas* déclencher les événements beforeDelete/afterDelete.
+    deleteAll *ne* va *pas* déclencher les évènements beforeDelete/afterDelete.
     Si vous avez besoin d'eux, chargez d'abord une collection d'enregistrements
     et supprimez les.

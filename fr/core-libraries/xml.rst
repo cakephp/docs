@@ -12,7 +12,7 @@ tableaux.
 Importer les données vers la classe Xml
 =======================================
 
-.. php:staticmethod:: build($input, $options = [])
+.. php:staticmethod:: build($input, array $options = [])
 
 Vous pouvez utiliser ``Xml::build()`` pour construire des objets XML. Selon
 votre paramètre ``$options``, cette méthode va retourner un objet
@@ -63,7 +63,7 @@ Si votre entrée est invalide, la classe Xml enverra une Exception::
 Transformer une Chaîne de Caractères XML en Tableau
 ===================================================
 
-.. php:staticmethod:: toArray($xml);
+.. php:staticmethod:: toArray($obj);
 
 Convertir des chaînes XML en tableaux est aussi facile avec la classe Xml. Par
 défaut, vous obtiendrez un objet SimpleXml en retour::

@@ -510,7 +510,7 @@ Générer des Url de Pagination
 
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
-Retourne par défault une chaine de l'URL de pagination complète pour utiliser
+Retourne par défaut une chaine de l'URL de pagination complète pour utiliser
 dans contexte non-standard(ex. JavaScript). ::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);

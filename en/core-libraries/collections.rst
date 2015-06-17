@@ -64,12 +64,16 @@ List of Methods
 * :php:meth:`shuffle`
 * :php:meth:`sample`
 * :php:meth:`take`
+* :php:meth:`skip`
+* :php:meth:`first`
+* :php:meth:`last`
+* :php:meth:`isEmpty`
 * :php:meth:`append`
 * :php:meth:`insert`
 * :php:meth:`buffered`
 * :php:meth:`compile`
 * :php:meth:`through`
-* :php:meth:`isEmpty`
+* :php:meth:`zip`
 
 Iterating
 =========
@@ -138,6 +142,32 @@ you can use a callback function to return it::
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
+Often, the properties you need to extract a common key present in multiple
+arrays or objects that are deeply nested inside other structures. For those
+cases you can use the ``{*}`` matcher in the path key::
+
+    $data = [
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-1'],
+                ['number' => 'number-2'],
+                ['number' => 'number-3'],
+            ]
+        ],
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-4'],
+                ['number' => 'number-5'],
+            ]
+        ]
+    ];
+
+    $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
+    $numbers->toList();
+    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
 Collections allow you to create a new collection made from keys and values in
@@ -167,6 +197,22 @@ You can also optionally use a ``groupPath`` to group results based on a path::
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
     ];
+
+Finally you can use *closures* to build keys/values/groups paths dynamically,
+for example when working with entities and dates (converted to ``Cake/Time``
+instances by the ORM) you may want to group results by date::
+
+    $combined = (new Collection($entities))->combine(
+        'id',
+        function ($entity) { return $entity; },
+        function ($entity) { return $entity->date->toDateString(); }
+    );
+
+    // Result will look like this when converted to array
+    [
+        'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+        'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+    ]
 
 .. php:method:: stopWhen(callable $c)
 
@@ -443,6 +489,53 @@ a callback::
         return md5($file);
     });
 
+.. php:method:: zip($elements)
+
+The elements of different collections can be grouped together using the
+``zip()`` method. It will return a new collection containing an array grouping
+the elements from each collection that are placed at the same position::
+
+    $odds = new Collection([1, 3, 5]);
+    $pairs = new Collection([2, 4, 6]);
+    $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
+
+You can also zip multiple collections at once::
+
+    $years = new Collection([2013, 2014, 2015, 2016]);
+    $salaries = [1000, 1500, 2000, 2300];
+    $increments = [0, 500, 500, 300];
+
+    $rows = $years->zip($salaries, $increments)->toList();
+    // Returns:
+    [
+        [2013, 1000, 0],
+        [2014, 1500, 500],
+        [2015, 2000, 500],
+        [2016, 2300, 300]
+    ]
+
+As you can already see, the ``zip()`` method is very useful for transposing
+multidimensional arrays::
+
+    $data = [
+        2014 => ['jan' => 100, 'feb' => 200],
+        2015 => ['jan' => 300, 'feb' => 500],
+        2016 => ['jan' => 400, 'feb' => 600],
+    ]
+
+    // Getting jan and feb data together
+
+    $firstYear = new Collection(array_shift($data));
+    $firstYear->zip($data[0], $data[1])->toList();
+
+    // Or $firstYear->zip(...$data) in PHP >= 5.6
+
+    // Returns
+    [
+        [100, 300, 400],
+        [200, 500, 600]
+    ]
+
 Sorting
 =======
 
@@ -586,6 +679,30 @@ instruct it to only return the leaf elements in the tree::
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
+Once you have converted a tree into a nested list, you can use the ``printer()``
+method to configure how the list output should be formatted::
+
+    $nested->listNested()->printer('name', 'id', '--')->toArray();
+
+    // Returns
+    [
+        3 => 'Eagle',
+        4 => 'Seagull',
+        5 -> '--Clown Fish',
+    ]
+
+The ``printer()`` method also lets you use a callback to generate the keys and
+or values::
+
+    $nested->listNested()->printer(
+        function ($el) {
+            return $el->name;
+        },
+        function ($el) {
+            return $el->id;
+        }
+    );
+
 Other Methods
 =============
 
@@ -656,6 +773,32 @@ the first argument, starting from the position passed in the second argument::
     $nextTopFive = $collection->sortBy('age')->take(5, 4);
 
 Positions are zero-based, therefore the first position number is ``0``.
+
+.. php:method:: skip(int $positions)
+
+While the second argument of ``take()`` can help you skip some elements before
+getting them from the collection, you can also use ``skip()`` for the same
+purpose as a way to take the rest of the elements after a certain position::
+
+    $collection = new Collection([1, 2, 3, 4]);
+    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
+
+.. php:method:: first()
+
+One of the most common uses of ``take()`` is getting the first element in the
+collection. A shortcut method for achieving the same goal is using the
+``first()`` method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->first(); // Returns 5
+
+.. php:method:: last()
+
+Similarly, you can get the last element of a collection using the ``last()``
+method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->last(); // Returns 2
 
 Expanding Collections
 ---------------------
