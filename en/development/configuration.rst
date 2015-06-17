@@ -179,25 +179,33 @@ to multiple directories with the following::
         }
     }
 
-View and Plugin Paths
----------------------
+Plugin, View Template and Locale Paths
+--------------------------------------
 
-Since views and plugins are not classes, they cannot have an autoloader
-configured. CakePHP provides two Configure variables to setup additional paths
-for these resources. In your **config/app.php** you can set these
-variables::
+Since plugins, view templates and locales are not classes, they cannot have an
+autoloader configured. CakePHP provides three Configure variables to setup additional
+paths for these resources. In your **config/app.php** you can set these variables::
 
     return [
         // More configuration
         'App' => [
             'paths' => [
-                'views' => [APP . 'View/', APP . 'View2/'],
-                'plugins' => [ROOT . '/Plugin/', '/path/to/other/plugins/']
+                'plugins' => [
+                    ROOT . DS . 'plugins' . DS,
+                    '/path/to/other/plugins/'
+                ],
+                'templates' => [
+                    APP . 'Template' . DS,
+                    APP . 'Template2' . DS
+                ],
+                'locales' => [
+                    APP . 'Locale' . DS
+                ]
             ]
         ]
     ];
 
-Paths should end in ``/``, or they will not work properly.
+Paths should end with a directory separator, or they will not work properly.
 
 Inflection Configuration
 ========================
