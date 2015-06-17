@@ -426,11 +426,15 @@ you to define name prefixes in each scope::
         // This route's name will be `api:ping`
         $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
     });
+    // Generate a URL for the ping route
+    Router::url(['_name' => 'api:ping']);
 
+    // Use namePrefix with plugin()
     Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         // Connect routes.
     });
 
+    // Or with prefix()
     Router::prefix('Admin', ['_namePrefix' => 'admin:'], function ($routes) {
         // Connect routes.
     });
@@ -444,6 +448,9 @@ you'd expect::
             $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
         });
     });
+
+    // Generate a URL for the ping route
+    Router::url(['_name' => 'contacts:api:ping']);
 
 Routes connected in named scopes will only have names added if the route is also
 named. Nameless routes will not have the ``_namePrefix`` applied to them.
