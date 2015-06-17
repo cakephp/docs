@@ -60,3 +60,16 @@ FlashHelper
 - ``FlashHelper`` can render multiple messages if multiple messages where
   set with the ``FlashComponent``. Each message will be rendered in its own
   element. Messages will be rendered in the order they were set.
+
+Email
+=====
+
+``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
+namespace. Their former namespaces are still usable as class aliases have
+been set for them.
+
+Mailer
+------
+
+The ``Mailer`` class was added. This class helps create reusable emails in an
+application.

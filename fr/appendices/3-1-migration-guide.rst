@@ -63,3 +63,16 @@ FlashHelper
   messages ont été enregistrés avec le ``FlashComponent``. Chaque message
   sera rendu dans son propre élément. Les messages seront rendus dans l'ordre
   dans lequel ils ont été enregistrés.
+
+Email
+=====
+
+``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
+namespace. Their former namespaces are still usable as class aliases have
+been set for them.
+
+Mailer
+------
+
+The ``Mailer`` class was added. This class helps create reusable emails in an
+application.
