@@ -393,7 +393,7 @@ suivant::
     ->group('published');
 
 La fonction ``addCase`` peut aussi chaîner ensemble plusieurs instructions pour
-créer de la logique ``if .. then .. [elseif .. then .. ] [ .. else ]`` dans
+créer une logique ``if .. then .. [elseif .. then .. ] [ .. else ]`` dans
 votre SQL.
 
 Si nous souhaitions classer des villes selon des tailles de population SMALL,

@@ -32,15 +32,15 @@ l'utiliser::
 Bases de Données Supportées
 ---------------------------
 
-CakePHP supporte les serveurs de base de données relationnelles suivantes:
+CakePHP supporte les serveurs de base de données relationnelles suivants:
 
 * MySQL 5.1+
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
 
-Vous devrez corriger l'extension PDO installée pour chacun des drivers des
-bases de données ci-dessus. Les API procédurales ne sont pas supportées.
+Pour chacun des drivers de base de données ci-dessus, assurez-vous d'avoir
+la bonne extension PDO installée. Les API procédurales ne sont pas supportées.
 
 Exécuter des Instructions Select
 --------------------------------
