@@ -8,9 +8,12 @@ faits dans 3.1.
 Routing
 =======
 
-La classe de route par défaut a été changée en ``DashedRoute`` dans le dépôt
-``cakephp/app``. Votre base de code actuelle n'est pas affectée par ceci mais
-il est recommandé d'utiliser cette classe de route à partir de maintenant.
+- La classe de route par défaut a été changée en ``DashedRoute`` dans le dépôt
+  ``cakephp/app``. Votre base de code actuelle n'est pas affectée par ceci mais
+  il est recommandé d'utiliser cette classe de route à partir de maintenant.
+- Les options de nom de préfixe ont été ajoutées aux différentes méthodes de
+  construction de route. Regardez la section :ref:`named-routes` pour plus
+  d'informations.
 
 Console
 =======
