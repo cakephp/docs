@@ -29,18 +29,18 @@ l'utiliser::
 
     $connection = ConnectionManager::get('default');
 
-Supported Databases
--------------------
+Bases de Données Supportées
+---------------------------
 
-CakePHP supports the following relational database servers:
+CakePHP supporte les serveurs de base de données relationnelles suivantes:
 
 * MySQL 5.1+
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
 
-You will need the correct PDO extension installed for each of the above database
-drivers. Procedural API's are not supported.
+Vous devrez corriger l'extension PDO installée pour chacun des drivers des
+bases de données ci-dessus. Les API procédurales ne sont pas supportées.
 
 Exécuter des Instructions Select
 --------------------------------
