@@ -443,7 +443,7 @@ vous aurez besoin de fournir ceux-ci comme options de ``Router::url()``.
 
 Quand vous construisez vos noms de routes, vous voudrez probablement coller
 à certaines conventions pour les noms de route. CakePHP facilite la construction
-des noms de route en vous permetttant de définir des préfixes de nom dans chaque
+des noms de route en vous permtttant de définir des préfixes de nom dans chaque
 scope::
 
     Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
