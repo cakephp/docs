@@ -194,26 +194,35 @@ avec ce qui suit::
         }
     }
 
-Les chemins de View et de Plugin
---------------------------------
+Les chemins de Plugin, View Template et de Locale
+-------------------------------------------------
 
-Puisque les views et plugins ne sont pas des classes, ils ne peuvent pas avoir
-un autoloader configuré. CakePHP fournit deux variables de configuration pour
-configurer des chemins supplémentaires pour vos ressources. Dans votre
-**config/app.php**, vous pouvez définir les variables::
+Puisque les plugins, view templates et locales ne sont pas des classes, ils ne
+peuvent pas avoir un autoloader configuré. CakePHP fournit trois variables de
+configuration pour configurer des chemins supplémentaires pour vos ressources.
+Dans votre **config/app.php**, vous pouvez définir les variables::
 
     return [
         // Plus de configuration
         'App' => [
             'paths' => [
-                'views' => [APP . 'View/', APP . 'View2/'],
-                'plugins' => [ROOT . '/plugins/', '/path/to/other/plugins/']
+                'plugins' => [
+                    ROOT . DS . 'plugins' . DS,
+                    '/path/to/other/plugins/'
+                ],
+                'templates' => [
+                    APP . 'Template' . DS,
+                    APP . 'Template2' . DS
+                ],
+                'locales' => [
+                    APP . 'Locale' . DS
+                ]
             ]
         ]
     ];
 
-Les chemins doivent finir par ``/``, ou ils ne fonctionneront pas
-correctement.
+Les chemins doivent finir par un séparateur de répertoire, ou ils ne
+fonctionneront pas correctement.
 
 Configuration de Inflection
 ===========================
