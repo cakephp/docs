@@ -7,9 +7,11 @@ the changes and improvements made in 3.1.
 Routing
 =======
 
-The default route class has been changed to ``DashedRoute`` in the
-``cakephp/app`` repo. Your current code base is not affected by this, but it is
-recommended to use this route class from now on.
+- The default route class has been changed to ``DashedRoute`` in the
+  ``cakephp/app`` repo. Your current code base is not affected by this, but it is
+  recommended to use this route class from now on.
+- Name prefix options were added to the various route builder methods. See the
+  :ref:`named-routes` section for more information.
 
 Console
 =======
