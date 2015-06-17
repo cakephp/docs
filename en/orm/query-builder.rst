@@ -657,28 +657,28 @@ conditions:
         ->where(function ($exp, $q) {
             return $exp->gt('population', '10000');
         });
-    # WHERE population > 100000
+    # WHERE population > 10000
 - ``gte()`` Create a ``>=`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->gte('population', '10000');
         });
-    # WHERE population >= 100000
+    # WHERE population >= 10000
 - ``lt()`` Create a ``<`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->lt('population', '10000');
         });
-    # WHERE population < 100000
+    # WHERE population < 10000
 - ``lte()`` Create a ``<=`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->lte('population', '10000');
         });
-    # WHERE population <= 100000
+    # WHERE population <= 10000
 - ``isNull()`` Create an ``IS NULL`` condition::
 
     $query = $cities->find()
