@@ -233,7 +233,7 @@ Modification des données
 
 La modification des données est aussi transparente que l'addition
 des données. Si vous modifiez quelque chose, mais ne changez pas
-le champ de l\'id du parent (parent\_id) - la structure de vos données
+le champ de l'id du parent (parent\_id) - la structure de vos données
 restera inchangée. Par exemple::
 
     // pseudo controller code
@@ -386,8 +386,8 @@ de permutations en plus des méthodes find de bases.
     :param $recursive: Nombre du niveau de profondeur pour la récursivité des
       models associés.
 
-    La méthode ``children`` prend la clé primaire (l\'id d'une ligne) et
-    retourne les enfants (children), par défaut dans l'ordre d\'apparition dans
+    La méthode ``children`` prend la clé primaire (l'id d'une ligne) et
+    retourne les enfants (children), par défaut dans l'ordre d'apparition dans
     l'arbre. Le second paramètre optionnel definit si il faut ou non
     retourner seulement les enfants directs. En utilisant l'exemple des données
     de la section précédente::
@@ -407,11 +407,11 @@ de permutations en plus des méthodes find de bases.
     .. php:method:: childCount($id = null, $direct = false)
 
     Comme avec la méthode ``children``, ``childCount`` prend la valeur
-    de la clé primaire (l\'id) d'une ligne et retourne combien d'enfant elle
+    de la clé primaire (l'id) d'une ligne et retourne combien d'enfant elle
     contient.
 
     Le second paramètre optionnel definit si il faut ou non compter
-    les enfants directs. En reprenant l\'exemple ci dessus::
+    les enfants directs. En reprenant l'exemple ci dessus::
 
         $totalChildren = $this->Category->childCount(1); // retournera 11
         // -- ou --
@@ -473,7 +473,7 @@ de permutations en plus des méthodes find de bases.
     * ``valuePath``: Un chemin vers la valeur, par ex "{n}.Post.title".
     * ``spacer``: Le caractère ou les caractères qui seront répétés.
 
-    Un exemple seerait::
+    Un exemple serait::
 
         $results = $this->Category->find('all');
         $results = $this->Category->formatTreeList($results, array(
@@ -492,7 +492,7 @@ de permutations en plus des méthodes find de bases.
     .. php:method:: getPath( $id = null, $fields = null, $recursive = null )
 
     Le 'path' (chemin) quand vous vous réferez à des données hiérarchiques,
-    c'est comment retrouver où vous êtes depuis le sommet.
+    c'est le moyen retrouver où vous êtes depuis le sommet.
     Par exemple le path (chemin) de la catégorie "International" est:
 
     -  My Categories
@@ -537,7 +537,7 @@ inattendus qui pourraient survenir durant le processus.
 
 .. php:method:: moveDown()
 
-Utilisé pour déplacer un seul nœud dans l'arbre. Vous devez fournir l\'
+Utilisé pour déplacer un seul nœud dans l'arbre. Vous devez fournir l'
 ID de l'élément à déplacer et un nombre positif de combien de
 positions le noeud devrait être déplacé vers le bas.
 Tous les nœuds enfants pour le noeud spécifié seront également déplacés.
@@ -573,7 +573,7 @@ de l'élément à déplacer et un nombre positif de combien de positions le
 noeud devrait être déplacé vers le haut. Tous les nœuds enfants seront
 également déplacés.
 
-Voici un exemple d\'un controller action (dans un controller categories)
+Voici un exemple d'un controller action (dans un controller categories)
 déplacant un noeud plus haut dans un arbre::
 
     public function moveup($id = null, $delta = null) {
@@ -618,7 +618,7 @@ Prenons l'arbre suivant au début:
             -  Extreme knitting
             -  Skating
 
-En executant le code suivant avec l\'id de 'Sport'::
+En executant le code suivant avec l'id de 'Sport'::
 
     $this->Node->removeFromTree($id);
 
@@ -638,7 +638,7 @@ Cela démontre le behavior par défaut du ``removeFromTree`` de
 déplacement d'un noeud pour ne plus avoir de parent, et de re-parenter tous
 les enfants.
 
-Si toutefois l'extrait de code suivant était utilisé avec l\'id  'Sport'::
+Si toutefois l'extrait de code suivant était utilisé avec l'id  'Sport'::
 
     $this->Node->removeFromTree($id, true);
 
@@ -662,11 +662,11 @@ direction spécifiée dans les paramètres. Cette méthode ne changera pas le
 parent d'un nœud. ::
 
     $model->reorder(array(
-        //id de l\'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id
+        //id de l'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id
         'id' => ,
         //champ à utiliser pour réordonner, par défaut: $Model->displayField
         'field' => ,
-        //direction de l\'ordonnement, par défaut: 'ASC'
+        //direction de l'ordonnement, par défaut: 'ASC'
         'order' => ,
         //vérifier ou pas l'arbre avant de réordonner, par défaut: true
         'verify' =>
@@ -707,7 +707,7 @@ Options ``$mode`` permises:
 -  ``'tree'`` - utilise  les champs actuels ``lft``et``rght``pour mettre à jour
    le champ ``parent_id``
 
-Les options de ``missingParentActions`` autorisées durant l\'utilisation de
+Les options de ``missingParentActions`` autorisées durant l'utilisation de
 ``mode='parent'``:
 
 -  ``null`` - ne fait rien et continue
@@ -761,7 +761,7 @@ Chaque enregistrement dans le tableau de sortie est un tableau de la forme
 (type, id,message)
 
 -  ``type`` est soit ``'index'`` ou ``'node'``
--  ``'id'`` est l\'id du noeud erroné.
+-  ``'id'`` est l'id du noeud erroné.
 -  ``'message'`` dépend de l'erreur rencontrée
 
 Exemple d'utilisation::
