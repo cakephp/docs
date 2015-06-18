@@ -463,13 +463,19 @@ are a few more tree-orientated permutations at your disposal.
     This method will return data similar to
     :ref:`model-find-list` but with a nested prefix that is specified
     in the ``spacer`` option to show the structure of your data.
-    See generateTreeList() for an example output.
 
     Supported options are:
 
     * ``keyPath``: A string path to the key, i.e. "{n}.Post.id".
     * ``valuePath``: A string path to the value, i.e. "{n}.Post.title".
     * ``spacer``: The character or characters which will be repeated.
+
+    An example would be::
+
+        $results = $this->Category->find('all');
+        $results = $this->Category->formatTreeList($results, array(
+            'spacer' => '--'
+        ));
 
     .. php:method:: getParentNode()
 
