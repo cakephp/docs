@@ -48,6 +48,8 @@ TreeBehavior
   noeuds de l'arbre sera stocké.
 - La nouvelle méthode ``TreeBehavior::getLevel()`` a été ajoutée qui attrape
   le niveau de profondeur d'un noeud.
+- Le formatage de ``TreeBehavior::generateTreeList()`` a été extrait dans une
+  méthode à part entière ``TreeBehavior::formatTreeList()``.
 
 Network
 =======

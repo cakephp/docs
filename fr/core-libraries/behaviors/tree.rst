@@ -48,7 +48,7 @@ Utilisation Basique
 ===================
 
 Le behavior Tree possède beaucoup de fonctionnalités, mais commençons avec un
-exemple simple. Créons la table suivante ::
+exemple simple. Créons la table suivante::
 
     CREATE TABLE categories (
         id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -59,35 +59,85 @@ exemple simple. Créons la table suivante ::
         PRIMARY KEY  (id)
     );
 
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(1, 'My Categories', NULL, 1, 30);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(2, 'Fun', 1, 2, 15);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(3, 'Sport', 2, 3, 8);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(4, 'Surfing', 3, 4, 5);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(5, 'Extreme knitting', 3, 6, 7);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(6, 'Friends', 2, 9, 14);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(7, 'Gerald', 6, 10, 11);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(8, 'Gwendolyn', 6, 12, 13);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(9, 'Work', 1, 16, 29);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(10, 'Reports', 9, 17, 22);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(11, 'Annual', 10, 18, 19);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(12, 'Status', 10, 20, 21);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(13, 'Trips', 9, 23, 28);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(14, 'National', 13, 24, 25);
-    INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(15, 'International', 13, 26, 27);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (1, 'My Categories', NULL, 1, 30);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (2, 'Fun', 1, 2, 15);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (3, 'Sport', 2, 3, 8);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (4, 'Surfing', 3, 4, 5);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (5, 'Extreme knitting', 3, 6, 7);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (6, 'Friends', 2, 9, 14);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (7, 'Gerald', 6, 10, 11);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (8, 'Gwendolyn', 6, 12, 13);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (9, 'Work', 1, 16, 29);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (10, 'Reports', 9, 17, 22);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (11, 'Annual', 10, 18, 19);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (12, 'Status', 10, 20, 21);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (13, 'Trips', 9, 23, 28);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (14, 'National', 13, 24, 25);
+    INSERT INTO
+      `categories` (`id`, `name`, `parent_id`, `lft`, `rght`)
+    VALUES
+      (15, 'International', 13, 26, 27);
 
 Dans le but de vérifier que tout est défini correctement, nous pouvons créer
 une méthode de test et afficher les contenus de notre arbre de catégories,
-pour voir à quoi il ressemble. Avec un simple controller ::
+pour voir à quoi il ressemble. Avec un simple controller::
 
     class CategoriesController extends AppController {
 
         public function index() {
-            $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
+            $data = $this->Category->generateTreeList(
+              null,
+              null,
+              null,
+              '&nbsp;&nbsp;&nbsp;'
+            );
             debug($data); die;
         }
     }
 
-et une définition de model encore plus simple ::
+et une définition de model encore plus simple::
 
     // app/Model/Category.php
     class Category extends AppModel {
@@ -95,7 +145,7 @@ et une définition de model encore plus simple ::
     }
 
 Nous pouvons vérifier à quoi ressemble les données de notre arbre de
-catégories, en visitant /categories. Vous devriez voir quelque chose comme :
+catégories, en visitant /categories. Vous devriez voir quelque chose comme:
 
 -  My Categories
 
@@ -129,7 +179,7 @@ Ajouter des données
 Dans la section précédente, nous avons utilisé des données existantes
 et nous avons vérifié qu'elles semblaient hiérarchiques avec la méthode
 ``generateTreeList``. Toutefois vous devez ajouter vos données de
-la même manière que vous le feriez pour n'importe quel model. Par exemple ::
+la même manière que vous le feriez pour n'importe quel model. Par exemple::
 
     // pseudo controller code
     $data['Category']['parent_id'] = 3;
@@ -183,17 +233,17 @@ Modification des données
 
 La modification des données est aussi transparente que l'addition
 des données. Si vous modifiez quelque chose, mais ne changez pas
-le champ de l\'id du parent (parent\_id) - la structure de vos données
-restera inchangée. Par exemple ::
+le champ de l'id du parent (parent\_id) - la structure de vos données
+restera inchangée. Par exemple::
 
     // pseudo controller code
     $this->Category->id = 5; // id of Extreme knitting
     $this->Category->save(array('name' => 'Extreme fishing'));
 
-Le code ci-dessus n'affecterait pas le champ de l\'id du parent (parent\_id) -
-même si l\'id du parent (parent\_id) est inclue dans les données passées
+Le code ci-dessus n'affecterait pas le champ de l'id du parent (parent\_id) -
+même si l'id du parent (parent\_id) est inclue dans les données passées
 à sauvegarder si les données ne changent pas, pas plus que la structure de
-données. Donc l\'arbre de données devrait maintenant ressembler à:
+données. Donc l'arbre de données devrait maintenant ressembler à:
 
 - My Categories
 
@@ -226,11 +276,14 @@ données. Donc l\'arbre de données devrait maintenant ressembler à:
 
 Déplacer les données autour de votre arbre est aussi une affaire simple.
 Supposons que Extreme fishing n'appartienne pas à Sport, mais devrait se
-trouver plutôt sous "D'autres catégories de gens". Avec le code suivant ::
+trouver plutôt sous "D'autres catégories de gens". Avec le code suivant::
 
-    // pseudo code du controller
-    $this->Category->id = 5; // id de Extreme fishing
-    $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
+    // pseudo controller code
+    $this->Category->id = 5; // id of Extreme fishing
+    $newParentId = $this->Category->field(
+      'id',
+      array('name' => 'Other People\'s Categories')
+    );
     $this->Category->save(array('parent_id' => $newParentId));
 
 Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
@@ -272,7 +325,7 @@ Le behavior Tree fournit un certain nombre de façons de gérer la suppression
 des données. Pour commencer par le plus simple exemple, disons que la
 catégorie des rapports n'est plus utile. Pour l'enlever * et tous les enfants
 qu'il peut avoir * il suffit d'appeler et supprimer comme vous le feriez pour
-n'importe quel model. Par exemple, avec le code suivant ::
+n'importe quel model. Par exemple, avec le code suivant::
 
     // pseudo code du controller
     $this->Category->id = 10;
@@ -333,42 +386,42 @@ de permutations en plus des méthodes find de bases.
     :param $recursive: Nombre du niveau de profondeur pour la récursivité des
       models associés.
 
-La méthode ``children`` prend la clé primaire (l\'id d'une ligne) et
-retourne les enfants (children), par défaut dans l'ordre d\'apparition dans
-l'arbre. Le second paramètre optionnel definit si il faut ou non
-retourner seulement les enfants directs. En utilisant l'exemple des données
-de la section précédente::
+    La méthode ``children`` prend la clé primaire (l'id d'une ligne) et
+    retourne les enfants (children), par défaut dans l'ordre d'apparition dans
+    l'arbre. Le second paramètre optionnel definit si il faut ou non
+    retourner seulement les enfants directs. En utilisant l'exemple des données
+    de la section précédente::
 
-    $allChildren = $this->Category->children(1); // un tableau plat à 11 éléments
-    // -- ou --
-    $this->Category->id = 1;
-    $allChildren = $this->Category->children(); // un tableau plat à 11 éléments
+        $allChildren = $this->Category->children(1); // un tableau plat à 11 éléments
+        // -- ou --
+        $this->Category->id = 1;
+        $allChildren = $this->Category->children(); // un tableau plat à 11 éléments
 
-    // Ne retourne que les enfants directs
-    $directChildren = $this->Category->children(1, true); // un tableau plat avec 2 éléments
+        // Ne retourne que les enfants directs
+        $directChildren = $this->Category->children(1, true); // un tableau plat avec 2 éléments
 
-.. note::
+    .. note::
 
-    Si vous voulez un tableau recursif utilisez ``find('threaded')``
+        Si vous voulez un tableau recursif utilisez ``find('threaded')``
 
-.. php:method:: childCount($id = null, $direct = false)
+    .. php:method:: childCount($id = null, $direct = false)
 
-Comme avec la méthode ``children``, ``childCount`` prend la valeur
-de la clé primaire (l\'id) d'une ligne et retourne combien d'enfant elle
-contient.
+    Comme avec la méthode ``children``, ``childCount`` prend la valeur
+    de la clé primaire (l'id) d'une ligne et retourne combien d'enfant elle
+    contient.
 
-Le second paramètre optionnel definit si il faut ou non compter
-les enfants directs. En reprenant l\'exemple ci dessus ::
+    Le second paramètre optionnel definit si il faut ou non compter
+    les enfants directs. En reprenant l'exemple ci dessus::
 
-    $totalChildren = $this->Category->childCount(1); // retournera 11
-    // -- ou --
-    $this->Category->id = 1;
-    $directChildren = $this->Category->childCount(); //retournera 11
+        $totalChildren = $this->Category->childCount(1); // retournera 11
+        // -- ou --
+        $this->Category->id = 1;
+        $directChildren = $this->Category->childCount(); //retournera 11
 
-    // Seulement les comptes des descendants directs de cette category
-    $numChildren = $this->Category->childCount(1, true); // retournera 2
+        // Seulement les comptes des descendants directs de cette category
+        $numChildren = $this->Category->childCount(1, true); // retournera 2
 
-.. php:method:: generateTreeList ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
+    .. php:method:: generateTreeList ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
 
     :param $conditions: Utilise les mêmes conditions qu'un find().
     :param $keyPath: Chemin du champ à utiliser pour la clé.
@@ -378,13 +431,13 @@ les enfants directs. En reprenant l\'exemple ci dessus ::
     :param $recursive: Le nombre de niveaux de profondeur pour rechercher les
       enregistrements associés.
 
-Cette méthode retourne des données similaires à :ref: `model-find-list`,
-avec un préfixe en retrait pour montrer la structure de vos données. Voici
-un exemple de ce à quoi vous attendre comme retour avec cette méthode ::
+    Cette méthode retourne des données similaires à :ref: `model-find-list`,
+    avec un préfixe en retrait pour montrer la structure de vos données. Voici
+    un exemple de ce à quoi vous attendre comme retour avec cette méthode::
 
-    $treelist = $this->Category->generateTreeList();
+        $treelist = $this->Category->generateTreeList();
 
-Sortie::
+    Sortie::
 
     array(
         [1] =>  "My Categories",
@@ -403,20 +456,44 @@ Sortie::
         [5] =>  "_Extreme fishing"
     )
 
-.. php:method:: getParentNode()
+    .. php:method:: formatTreeList($results, $options=array())
 
-Cette fonction comme son nom l'indique, donne en retour le noeud
-parent d'un nœud, ou *false* si le noeud n'a pas de parent (c'est
-le nœud racine). Par exemple ::
+    .. versionadded:: 2.7
 
-    $parent = $this->Category->getParentNode(2); //<- id de fun
-    // $parent contient toutes les catégories
+    :param $results: Résultats de l'appel de find('all').
+    :param $options: Options à passer.
 
-.. php:method:: getPath( $id = null, $fields = null, $recursive = null )
+    Cette méthode va retourner des données similaires à
+    :ref:`model-find-list` mais avec un préfix imbriqué qui est spécifié
+    dans l'option ``spacer`` pour montrer la structure de vos données.
 
-Le 'path' (chemin) quand vous vous réferez à des données hiérarchiques,
-c'est comment retrouver où vous êtes depuis le sommet.
-Par exemple le path (chemin) de la catégorie "International" est:
+    Les options supportées sont:
+
+    * ``keyPath``: Un chemin vers la clé, par ex "{n}.Post.id".
+    * ``valuePath``: Un chemin vers la valeur, par ex "{n}.Post.title".
+    * ``spacer``: Le caractère ou les caractères qui seront répétés.
+
+    Un exemple serait::
+
+        $results = $this->Category->find('all');
+        $results = $this->Category->formatTreeList($results, array(
+            'spacer' => '--'
+        ));
+
+    .. php:method:: getParentNode()
+
+    Cette fonction comme son nom l'indique, donne en retour le noeud
+    parent d'un nœud, ou *false* si le noeud n'a pas de parent (c'est
+    le nœud racine). Par exemple::
+
+        $parent = $this->Category->getParentNode(2); //<- id de fun
+        // $parent contient toutes les catégories
+
+    .. php:method:: getPath( $id = null, $fields = null, $recursive = null )
+
+    Le 'path' (chemin) quand vous vous réferez à des données hiérarchiques,
+    c'est le moyen retrouver où vous êtes depuis le sommet.
+    Par exemple le path (chemin) de la catégorie "International" est:
 
     -  My Categories
 
@@ -427,21 +504,28 @@ Par exemple le path (chemin) de la catégorie "International" est:
             - ...
             - International
 
-En utilisant l\'id de "international", getPath retournera chacun des
-parents rencontrés (depuis le haut)::
+    En utilisant l'id de "international", getPath retournera chacun des
+    parents rencontrés (depuis le haut)::
 
-    $parents = $this->Category->getPath(15);
+        $parents = $this->Category->getPath(15);
 
-::
+    ::
 
-    // contenu de $parents
-    array(
-        [0] =>  array('Category' => array('id' => 1, 'name' => 'My Categories', ..)),
-        [1] =>  array('Category' => array('id' => 9, 'name' => 'Work', ..)),
-        [2] =>  array('Category' => array('id' => 13, 'name' => 'Trips', ..)),
-        [3] =>  array('Category' => array('id' => 15, 'name' => 'International', ..)),
-    )
-
+      // contenu de $parents
+      array(
+          [0] =>  array(
+            'Category' => array('id' => 1, 'name' => 'My Categories', ..)
+          ),
+          [1] =>  array(
+            'Category' => array('id' => 9, 'name' => 'Work', ..)
+          ),
+          [2] =>  array(
+            'Category' => array('id' => 13, 'name' => 'Trips', ..)
+          ),
+          [3] =>  array(
+            'Category' => array('id' => 15, 'name' => 'International', ..)
+          ),
+      )
 
 Utilisation avancée
 ===================
@@ -453,12 +537,12 @@ inattendus qui pourraient survenir durant le processus.
 
 .. php:method:: moveDown()
 
-Utilisé pour déplacer un seul nœud dans l'arbre. Vous devez fournir l\'
+Utilisé pour déplacer un seul nœud dans l'arbre. Vous devez fournir l'
 ID de l'élément à déplacer et un nombre positif de combien de
 positions le noeud devrait être déplacé vers le bas.
 Tous les nœuds enfants pour le noeud spécifié seront également déplacés.
 
-Voici l\'exemple d'une action d'un controller (dans un controller nommé
+Voici l'exemple d'une action d'un controller (dans un controller nommé
 Category) qui déplace un noeud spécifié vers le bas de l'arbre::
 
     public function movedown($id = null, $delta = null) {
@@ -470,10 +554,13 @@ Category) qui déplace un noeud spécifié vers le bas de l'arbre::
         if ($delta > 0) {
             $this->Category->moveDown($this->Category->id, abs($delta));
         } else {
-            $this->Session->setFlash('Please provide the number of positions the field should be moved down.');
+            $this->Session->setFlash(
+              'Please provide the number of positions the field should be' .
+              'moved down.'
+            );
         }
 
-        $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'index'));
     }
 
 Par exemple, si vous souhaitez déplacer le "Sport" (id de 3) d'une
@@ -486,7 +573,7 @@ de l'élément à déplacer et un nombre positif de combien de positions le
 noeud devrait être déplacé vers le haut. Tous les nœuds enfants seront
 également déplacés.
 
-Voici un exemple d\'un controller action (dans un controller categories)
+Voici un exemple d'un controller action (dans un controller categories)
 déplacant un noeud plus haut dans un arbre::
 
     public function moveup($id = null, $delta = null) {
@@ -498,10 +585,13 @@ déplacant un noeud plus haut dans un arbre::
         if ($delta > 0) {
             $this->Category->moveUp($this->Category->id, abs($delta));
         } else {
-            $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
+            $this->Session->setFlash(
+              'Please provide a number of positions the category should' .
+              'be moved up.'
+            );
         }
 
-        $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'index'));
     }
 
 Par exemple, si vous souhaitez déplacer la catégory "Gwendoline" (id de 8)
@@ -516,7 +606,7 @@ Il offre plus de contrôle que: ref: `model-delete` qui, pour un model
 en utilisant le behavior tree supprimera le noeud spécifié et tous
 ses enfants.
 
-Prenons l'arbre suivant au début::
+Prenons l'arbre suivant au début:
 
 -  My Categories
 
@@ -528,7 +618,7 @@ Prenons l'arbre suivant au début::
             -  Extreme knitting
             -  Skating
 
-En executant le code suivant avec l\'id de 'Sport'::
+En executant le code suivant avec l'id de 'Sport'::
 
     $this->Node->removeFromTree($id);
 
@@ -548,7 +638,7 @@ Cela démontre le behavior par défaut du ``removeFromTree`` de
 déplacement d'un noeud pour ne plus avoir de parent, et de re-parenter tous
 les enfants.
 
-Si toutefois l'extrait de code suivant était utilisé avec l\'id  'Sport'::
+Si toutefois l'extrait de code suivant était utilisé avec l'id  'Sport'::
 
     $this->Node->removeFromTree($id, true);
 
@@ -572,10 +662,14 @@ direction spécifiée dans les paramètres. Cette méthode ne changera pas le
 parent d'un nœud. ::
 
     $model->reorder(array(
-        'id' => ,    //id de l\'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id
-        'field' => , //champ à utiliser pour réordonner, par défaut: $Model->displayField
-        'order' => , //direction de l\'ordonnement, par défaut: 'ASC'
-        'verify' =>  //vérifier ou pas l'arbre avant de réordonner, par défaut: true
+        //id de l'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id
+        'id' => ,
+        //champ à utiliser pour réordonner, par défaut: $Model->displayField
+        'field' => ,
+        //direction de l'ordonnement, par défaut: 'ASC'
+        'order' => ,
+        //vérifier ou pas l'arbre avant de réordonner, par défaut: true
+        'verify' =>
     ));
 
 .. note::
@@ -613,7 +707,7 @@ Options ``$mode`` permises:
 -  ``'tree'`` - utilise  les champs actuels ``lft``et``rght``pour mettre à jour
    le champ ``parent_id``
 
-Les options de ``missingParentActions`` autorisées durant l\'utilisation de
+Les options de ``missingParentActions`` autorisées durant l'utilisation de
 ``mode='parent'``:
 
 -  ``null`` - ne fait rien et continue
@@ -667,7 +761,7 @@ Chaque enregistrement dans le tableau de sortie est un tableau de la forme
 (type, id,message)
 
 -  ``type`` est soit ``'index'`` ou ``'node'``
--  ``'id'`` est l\'id du noeud erroné.
+-  ``'id'`` est l'id du noeud erroné.
 -  ``'message'`` dépend de l'erreur rencontrée
 
 Exemple d'utilisation::
