@@ -73,7 +73,7 @@ que vous pouvez attendre de CakePHP:
 +===============================+==========================+
 | Typehint against the class    | Oui                      |
 +-------------------------------+--------------------------+
-| Créé une nouvelle instance    | Oui                      |
+| Crée une nouvelle instance    | Oui                      |
 +-------------------------------+--------------------------+
 | Etendre la classe             | Oui                      |
 +-------------------------------+--------------------------+

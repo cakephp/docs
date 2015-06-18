@@ -1545,7 +1545,7 @@ Créer des Boutons Indépendants et des liens POST
     Crée une balise ``<button>`` avec un ``<form>`` l'entourant  qui soumet à
     travers POST.
 
-    Cette méthode créé un élément ``<form>``. Donc n'utilisez pas
+    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas
     cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
     :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
@@ -1650,7 +1650,7 @@ Par exemple::
         'radioContainer' => '<div class="form-radio">{{content}}</div>'
     ]);
 
-    // Créé un ensemble d'inputs radio avec notre div personnalisé autour
+    // Crée un ensemble d'inputs radio avec notre div personnalisé autour
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
 Similar to input containers, the ``input()`` method will also attempt to use

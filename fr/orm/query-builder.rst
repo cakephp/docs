@@ -396,7 +396,7 @@ La fonction ``addCase`` peut aussi chaîner ensemble plusieurs instructions pour
 créer de la logique ``if .. then .. [elseif .. then .. ] [ .. else ]`` dans
 votre SQL.
 
-Si nous souhaitons classer des villes selon des tailles de population SMALL,
+Si nous souhaitions classer des villes selon des tailles de population SMALL,
 MEDIUM, ou LARGE, nous pourrions faire ce qui suit::
 
     $query = $cities->find()
@@ -407,7 +407,7 @@ MEDIUM, ou LARGE, nous pourrions faire ce qui suit::
                     $q->newExpr()->between('population', 100000, 999000),
                     $q->newExpr()->gte('population', 999001),
                 ],
-                ['SMALL',  'MEDIUM', 'LARGE'], # les valeurs correspondent aux conditions
+                ['SMALL',  'MEDIUM', 'LARGE'], # les valeurs correspondantes aux conditions
                 ['string', 'string', 'string'] # type de chaque valeur
             );
         });
@@ -417,8 +417,8 @@ MEDIUM, ou LARGE, nous pourrions faire ce qui suit::
     #   WHEN population >= 999001 THEN 'LARGE'
     #   END
 
-A chaque fois qu'il y moins de valeurs que'il y en a dans les conditions case,
-``addCase`` va automatiquement produire une instruction ``if .. then .. else``::
+A chaque fois qu'il y moins de valeurs qu'il n'y a de conditions, ``addCase``
+va automatiquement produire une instruction ``if .. then .. else``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -426,7 +426,7 @@ A chaque fois qu'il y moins de valeurs que'il y en a dans les conditions case,
                 [
                     $q->newExpr()->eq('population', 0),
                 ],
-                ['DESERTED', 'INHABITED'], # valeurs correspondent aux conditions
+                ['DESERTED', 'INHABITED'], # valeurs correspondantes aux conditions
                 ['string', 'string'] # type de chaque valeur
             );
         });
@@ -644,7 +644,7 @@ Ce qui générerait le code SQL suivant::
 Quand vous utilisez les objets expression, vous pouvez utiliser les méthodes
 suivantes pour créer des conditions:
 
-- ``eq()`` Créé une condition d'égalité::
+- ``eq()`` Crée une condition d'égalité::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -652,7 +652,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population = 10000
 
-- ``notEq()`` Créé une condition d'inégalité::
+- ``notEq()`` Crée une condition d'inégalité::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -660,7 +660,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population != 10000
 
-- ``like()`` Créé une condition en utilisant l'opérateur ``LIKE``::
+- ``like()`` Crée une condition en utilisant l'opérateur ``LIKE``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -668,7 +668,7 @@ suivantes pour créer des conditions:
         });
     # WHERE name LIKE "%A%"
 
-- ``notLike()`` Créé une condition négative de type ``LIKE``::
+- ``notLike()`` Crée une condition négative de type ``LIKE``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -676,7 +676,7 @@ suivantes pour créer des conditions:
         });
     # WHERE name NOT LIKE "%A%"
 
-- ``in()`` Créé une condition en utilisant ``IN``::
+- ``in()`` Crée une condition en utilisant ``IN``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -684,7 +684,7 @@ suivantes pour créer des conditions:
         });
     # WHERE country_id IN ('AFG', 'USA', 'EST')
 
-- ``notIn()`` Créé une condition négative en utilisant ``IN``::
+- ``notIn()`` Crée une condition négative en utilisant ``IN``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -692,7 +692,7 @@ suivantes pour créer des conditions:
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
 
-- ``gt()`` Créé une condition ``>``::
+- ``gt()`` Crée une condition ``>``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -700,7 +700,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population > 10000
 
-- ``gte()`` Créé une condition ``>=``::
+- ``gte()`` Crée une condition ``>=``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -708,7 +708,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population >= 10000
 
-- ``lt()`` Créé une condition ``<``::
+- ``lt()`` Crée une condition ``<``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -716,7 +716,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population < 10000
 
-- ``lte()`` Créé une condition ``<=``::
+- ``lte()`` Crée une condition ``<=``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -724,7 +724,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population <= 10000
 
-- ``isNull()`` Créé une condition ``IS NULL``::
+- ``isNull()`` Crée une condition ``IS NULL``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -732,7 +732,7 @@ suivantes pour créer des conditions:
         });
     # WHERE (population) IS NULL
 
-- ``isNotNull()`` Créé une condition négative ``IS NULL``::
+- ``isNotNull()`` Crée une condition négative ``IS NULL``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -740,7 +740,7 @@ suivantes pour créer des conditions:
         });
     # WHERE (population) IS NOT NULL
 
-- ``between()`` Créé une condition ``BETWEEN``::
+- ``between()`` Crée une condition ``BETWEEN``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {

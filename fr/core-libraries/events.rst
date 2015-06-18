@@ -301,7 +301,7 @@ dispatcher les events en utilisant
 instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
 d'un évènement::
 
-    // Créé un nouvel évènement et le dispatch.
+    // Crée un nouvel évènement et le dispatch.
     $event = new Event('Model.Order.afterPlace', $this, [
         'order' => $order
     ]);

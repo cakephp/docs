@@ -45,14 +45,14 @@ Il y a plusieurs façons de créer des instances ``Time``::
 
     use Cake\I18n\Time;
 
-    // Créé à partir d'une chaîne datetime.
+    // Crée à partir d'une chaîne datetime.
     $time = Time::createFromFormat(
         'Y-m-d H:i:s',
         $datetime,
         'America/New_York'
     );
 
-    // Créé à partir d'un timestamp
+    // Crée à partir d'un timestamp
     $time = Time::createFromTimestamp($ts);
 
     // Récupère le temps actuel.
