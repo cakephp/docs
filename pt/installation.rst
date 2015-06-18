@@ -318,10 +318,7 @@ para maiores informações.
    (.htaccess, webroot/.htaccess).
 
    Isso pode ser adicionado na mesma seção com a diretiva RewriteEngine,
-   por exemplo, seu arquivo webroot/.htaccess
-
-   This can be added to the same section with the RewriteEngine
-   directive, so for example, your webroot .htaccess ficaria como::
+   por exemplo, seu arquivo webroot/.htaccess ficaria como:
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
