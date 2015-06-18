@@ -177,7 +177,7 @@ pouvez aussi le faire avec un objet Query::
         ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
         ->toArray(); // Aussi une méthode de la librairie collection
 
-    foreach ($results as $id $trimmedTitle) {
+    foreach ($results as $id => $trimmedTitle) {
         echo "$id : $trimmedTitle";
     }
 
