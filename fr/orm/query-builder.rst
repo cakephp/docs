@@ -417,7 +417,7 @@ MEDIUM, ou LARGE, nous pourrions faire ce qui suit::
     #   WHEN population >= 999001 THEN 'LARGE'
     #   END
 
-A chaque fois qu'il y moins de valeurs qu'il n'y a de conditions, ``addCase``
+A chaque fois qu'il y a moins de conditions qu'il n'y a de valeurs, ``addCase``
 va automatiquement produire une instruction ``if .. then .. else``::
 
     $query = $cities->find()

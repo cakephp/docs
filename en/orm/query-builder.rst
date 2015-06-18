@@ -389,7 +389,8 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
     #   WHEN population >= 999001 THEN 'LARGE'
     #   END
 
-Any time there are fewer values than there are case conditions ``addCase`` will automatically produce an ``if .. then .. else`` statement::
+Any time there are fewer case conditions than values, ``addCase`` will
+automatically produce an ``if .. then .. else`` statement::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
