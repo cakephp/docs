@@ -170,7 +170,7 @@ a Query object::
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
-    foreach ($results as $id $trimmedTitle) {
+    foreach ($results as $id => $trimmedTitle) {
         echo "$id : $trimmedTitle";
     }
 
