@@ -45,6 +45,7 @@ TreeBehavior
   which the depth of tree nodes will be stored.
 - New method ``TreeBehavior::getLevel()`` has been added which fetches depth of
   a node.
+- The formatting of ``TreeBehavior::generateTreeList()`` has been extracted into an own method ``TreeBehavior::formatTreeList()``.
 
 Network
 =======
