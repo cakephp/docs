@@ -27,6 +27,7 @@ extends the ``Cake\View\View`` class included in CakePHP and is defined in
 
 .. code-block:: php
 
+    <?php
     namespace App\View;
 
     use Cake\View\View;
@@ -41,6 +42,7 @@ that is invoked at the end of a View’s constructor for this kind of use:
 
 .. code-block:: php
 
+    <?php
     namespace App\View;
 
     use Cake\View\View;
