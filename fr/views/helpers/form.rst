@@ -702,7 +702,7 @@ Les Options de Datetime
 * ``$options['interval']`` Cette option spécifie l'écart de minutes
   entre chaque option dans la select box minute::
 
-    echo $this->Form->input('Model.time', [
+    echo $this->Form->input('time', [
         'type' => 'time',
         'interval' => 15
     ]);

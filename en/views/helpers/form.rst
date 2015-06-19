@@ -664,7 +664,7 @@ Datetime Options
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
-    echo $this->Form->input('Model.time', [
+    echo $this->Form->input('time', [
         'type' => 'time',
         'interval' => 15
     ]);
