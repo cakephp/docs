@@ -184,7 +184,7 @@ the tree::
         }
     }
 
-In ``src/Template/Categories/index.ctp`` replace the existing content with::
+In **src/Template/Categories/index.ctp** replace the existing content with::
 
     <div class="actions columns large-2 medium-3">
         <h3><?= __('Actions') ?></h3>

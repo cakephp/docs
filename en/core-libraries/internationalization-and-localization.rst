@@ -579,7 +579,7 @@ automatically set the locale based on the current user::
     // Restrict the locales to only en-US, fr-FR
     DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
 
-The ``LocalSelectorFilter`` will use the ``Accept-Language`` header to
+The ``LocaleSelectorFilter`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
 

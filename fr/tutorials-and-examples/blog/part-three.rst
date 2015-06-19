@@ -153,7 +153,7 @@ Réorganiser l'Ordre des Catégories avec le TreeBehavior
 =======================================================
 
 Dans votre fichier de template index des catégories, vous pouvez lister les
-catégories et réorganiser leur ordre.
+catégories et les réordonner.
 
 Modifiez la méthode index dans votre ``CategoriesController.php`` et ajoutez les
 méthodes ``move_up()`` et ``move_down()`` pour pouvoir réorganiser l'ordre des
@@ -193,26 +193,51 @@ catégories dans l'arbre::
         }
     }
 
-Et l'index.ctp::
+Remplacez le contenu existant dand **src/Template/Categories/index.ctp** par ceci::
 
-    <?php foreach ($categories as $category): ?>
-        <tr>
-            <td><?= $this->Number->format($category->id) ?></td>
-            <td><?= $this->Number->format($category->parent_id) ?></td>
-            <td><?= $this->Number->format($category->lft) ?></td>
-            <td><?= $this->Number->format($category->rght) ?></td>
-            <td><?= h($category->name) ?></td>
-            <td><?= h($category->description) ?></td>
-            <td><?= h($category->created) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('Voir'), ['action' => 'view', $category->id]) ?>
-                <?= $this->Html->link(__('Modifier'), ['action' => 'edit', $category->id]) ?>
-                <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $category->id], ['confirm' => __('Etes vous sur de vouloir supprimer # {0}?', $category->id)]) ?>
-                <?= $this->Form->postLink(__('Descendre'), ['action' => 'move_down', $category->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $category->id)]) ?>
-                <?= $this->Form->postLink(__('Monter'), ['action' => 'move_up', $category->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $category->id)]) ?>
-            </td>
-        </tr>
-    <?php endforeach; ?>
+    <div class="actions columns large-2 medium-3">
+        <h3><?= __('Actions') ?></h3>
+        <ul class="side-nav">
+            <li><?= $this->Html->link(__('Nouvelle Categorie'), ['action' => 'add']) ?></li>
+        </ul>
+    </div>
+    <div class="categories index large-10 medium-9 columns">
+        <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Parent Id</th>
+                <th>Title</th>
+                <th>Lft</th>
+                <th>Rght</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($categories as $category): ?>
+            <tr>
+                <td><?= $this->Number->format($category->id) ?></td>
+                <td><?= $this->Number->format($category->parent_id) ?></td>
+                <td><?= $this->Number->format($category->lft) ?></td>
+                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= h($category->name) ?></td>
+                <td><?= h($category->description) ?></td>
+                <td><?= h($category->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('Voir'), ['action' => 'view', $category->id]) ?>
+                    <?= $this->Html->link(__('Editer'), ['action' => 'edit', $category->id]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $category->id], ['confirm' => __('Etes vous sur de vouloir supprimer # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Descendre'), ['action' => 'move_down', $category->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Monter'), ['action' => 'move_up', $category->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $category->id)]) ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+        </table>
+    </div>
 
 Modifier ArticlesController
 ===========================
