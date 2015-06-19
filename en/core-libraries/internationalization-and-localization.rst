@@ -185,7 +185,6 @@ currency at the same time::
     // Returns
     Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 
-
 Numbers in placeholders can be formatted as well with fine grain control of the
 output::
 
@@ -226,6 +225,10 @@ understands the same options as ``date``.
     {age}, etc. And pass the variables in an array having the corresponding key
     names like ``['name' => 'Sara', 'age' => 12]``. This feature is not available
     in PHP 5.4.
+
+    If you are planning on making use of the internationalization features it is
+    a good idea to ensure you are running PHP5.5, and have a version of ICU
+    above 48.x.y. Older versions of PHP and ICU have a number of problems.
 
 Plurals
 -------
