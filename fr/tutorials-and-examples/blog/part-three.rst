@@ -193,7 +193,7 @@ catégories dans l'arbre::
         }
     }
 
-Remplacez le contenu existant dand **src/Template/Categories/index.ctp** par ceci::
+Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par ceci::
 
     <div class="actions columns large-2 medium-3">
         <h3><?= __('Actions') ?></h3>

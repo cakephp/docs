@@ -242,7 +242,7 @@ il comprend les mêmes options que ``date``.
     Si vous prévoyez d'utiliser les fonctionnalités d'internationalisation, il
     est préférable d'utiliser PHP5.5 et une version d'ICU supérieure à 48.x.y.
     Les versions antérieures de PHP et ICU comportent un certain nombre de
-    problème.
+    problèmes.
 
 Pluriels
 --------
