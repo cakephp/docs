@@ -43,6 +43,20 @@ FlashComponent
   méthodes ``set()`` et ``__call()``. Cela signifie que la structure des
   données stockées dans la Session pour les messages Flash a changé.
 
+
+ORM
+===
+
+Query
+-----
+
+- ``Query::notMatching()`` a été ajoutée.
+- ``Query::leftJoinWith()`` a été ajoutée.
+- ``Query::innerJoinWith()`` a été ajoutée.
+- ``Query::select()`` supporte maintenant  des objets ``Table`` et ``Association``
+  en paramètres. Ces types de paramètres sélectionneront toutes les colonnes de
+  l'instance de la table ou la table ciblée par l'association.
+
 View
 ====
 
