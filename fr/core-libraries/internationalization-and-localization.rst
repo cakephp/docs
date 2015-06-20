@@ -239,6 +239,11 @@ il comprend les mêmes options que ``date``.
     ``['name' => 'Sara','age' => 12]``. Cette fonctionnalité n'est pas
     disponible dans PHP 5.4.
 
+    Si vous prévoyez d'utiliser les fonctionnalités d'internationalisation, il
+    est préférable d'utiliser PHP5.5 et une version d'ICU supérieure à 48.x.y.
+    Les versions antérieures de PHP et ICU comportent un certain nombre de
+    problèmes.
+
 Pluriels
 --------
 
@@ -602,7 +607,7 @@ définira automatiquement la locale en se basant sur l'utilisateur actuel::
     // Limite les locale à en-US et fr-FR uniquement
     DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
 
-Le ``LocalSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir
+Le ``LocaleSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir
 automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
 l'option de liste de locale pour limiter quelles locales seront utilisées
 automatiquement.
