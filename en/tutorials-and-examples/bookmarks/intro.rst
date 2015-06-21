@@ -131,7 +131,6 @@ the following SQL to create the necessary tables::
         bookmark_id INT NOT NULL,
         tag_id INT NOT NULL,
         PRIMARY KEY (bookmark_id, tag_id),
-        INDEX tag_idx (tag_id, bookmark_id),
         FOREIGN KEY tag_key(tag_id) REFERENCES tags(id),
         FOREIGN KEY bookmark_key(bookmark_id) REFERENCES bookmarks(id)
     );
