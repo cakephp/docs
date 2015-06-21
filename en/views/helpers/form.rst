@@ -975,7 +975,7 @@ Defaults to ``true``::
 * ``$attributes['multiple']`` If 'multiple' has been set to ``true`` for an
   input that outputs a select, the select will allow multiple selections::
 
-    echo $this->Form->select('Model.field', $options, ['multiple' => true]);
+    echo $this->Form->select('field', $options, ['multiple' => true]);
 
   Alternatively set 'multiple' to 'checkbox' to output a list of
   related check boxes::
@@ -984,7 +984,7 @@ Defaults to ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox'
     ]);
 
@@ -1014,7 +1014,7 @@ Defaults to ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox',
         'disabled' => ['Value 1']
     ]);

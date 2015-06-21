@@ -1016,7 +1016,7 @@ sélectionnées. Par défaut à ``true``::
 * ``$attributes['multiple']`` Si 'multiple' a été défini à ``true`` pour
   un input select, celui ci autorisera les sélections multiples::
 
-    echo $this->Form->select('Model.field', $options, ['multiple' => true]);
+    echo $this->Form->select('field', $options, ['multiple' => true]);
 
   Vous pouvez également définir 'checkbox' à 'multiple' pour afficher une
   liste de check boxes reliés::
@@ -1025,7 +1025,7 @@ sélectionnées. Par défaut à ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox'
     ]);
 
@@ -1055,7 +1055,7 @@ sélectionnées. Par défaut à ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox',
         'disabled' => ['Value 1']
     ]);
