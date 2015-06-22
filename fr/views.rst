@@ -29,6 +29,7 @@ The App View
 
 .. code-block:: php
 
+    <?php
     namespace App\View;
 
     use Cake\View\View;
@@ -44,6 +45,7 @@ type d'utilisation:
 
 .. code-block:: php
 
+    <?php
     namespace App\View;
 
     use Cake\View\View;
