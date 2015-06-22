@@ -121,8 +121,9 @@ are read or set. For example::
 
 Accessors use the convention of ``_get`` followed by the CamelCased version of
 the field name. They receive the basic value stored in the ``_properties`` array
-as their only argument. You can customize how properties get set by defining
-a mutator::
+as their only argument. Accessors will be used when saving entities, so be
+careful when defining methods that format data, as the formatted data will be
+persisted. You can customize how properties get set by defining a mutator::
 
     namespace App\Model\Entity;
 
@@ -502,10 +503,10 @@ This list can be modified at runtime using ``hiddenProperties``::
 Storing Complex Types
 =====================
 
-Entities are not intended to contain the logic for serializing and
-unserializing complex data coming from the database. Refer to the
-:ref:`saving-complex-types` section to understand how your application can store
-more complex data types like arrays and objects.
+Accessor & Mutator methods on entities are not intended to contain the logic for
+serializing and unserializing complex data coming from the database. Refer to
+the :ref:`saving-complex-types` section to understand how your application can
+store more complex data types like arrays and objects.
 
 .. meta::
     :title lang=en: Entities
