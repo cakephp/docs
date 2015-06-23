@@ -177,6 +177,8 @@ ressemble à ceci::
 
     }
 
+.. _creating-a-bake-theme:
+
 Créer un theme de bake
 ======================
 

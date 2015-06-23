@@ -169,6 +169,8 @@ And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
 
     }
 
+.. _creating-a-bake-theme:
+
 Creating a Bake Theme
 =====================
 
