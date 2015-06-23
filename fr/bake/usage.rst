@@ -94,9 +94,9 @@ Themes de Bake
 ==============
 
 L'option theme est commune à toutes les commandes de bake, et permet de changer
-les fichiers de template utilisés lors de la création avec bake. To create your
-own templates, see the :ref:`bake theme creation documentation
-<creating-a-bake-theme>`.
+les fichiers de template utilisés lors de la création avec bake. Pour créer vos
+propres templates, référez-vous :ref:`à la documentation sur la création de
+theme bake <creating-a-bake-theme>`.
 
 .. meta::
     :title lang=fr: Génération de Code avec Bake
