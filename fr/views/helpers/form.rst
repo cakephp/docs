@@ -1825,6 +1825,7 @@ voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
 
     namespace App\View\Widget;
 
+    use Cake\View\Form\ContextInterface;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
@@ -1837,7 +1838,7 @@ voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
             $this->_templates = $templates;
         }
 
-        public function render(array $data)
+        public function render(array $data, ContextInterface $context)
         {
             $data += [
                 'name' => '',
