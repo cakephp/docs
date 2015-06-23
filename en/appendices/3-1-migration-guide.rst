@@ -39,6 +39,17 @@ FlashComponent
   or ``__call()`` method. This means that the structure in the Session for
   stored Flash messages has changed.
 
+Network
+=======
+
+Http\Client
+-----------
+
+- The default mime type used when sending requests has changed. Previously
+  ``multipart/form-data`` would always be used. In 3.1, ``multipart/form-data``
+  is only used when file uploads are present. When there are no file uploads,
+  ``application/x-www-urlencoded`` is used instead.
+
 ORM
 ===
 
