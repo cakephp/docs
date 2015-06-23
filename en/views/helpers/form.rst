@@ -1769,6 +1769,7 @@ could do the following::
 
     namespace App\View\Widget;
 
+    use Cake\View\Form\ContextInterface;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
@@ -1781,7 +1782,7 @@ could do the following::
             $this->_templates = $templates;
         }
 
-        public function render(array $data)
+        public function render(array $data, ContextInterface $context)
         {
             $data += [
                 'name' => '',
