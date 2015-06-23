@@ -46,6 +46,16 @@ If you'd like to disable validation when converting request data, set the
         ['validate' => false]
     );
 
+The same can be said about the ``patchEntity()`` method::
+
+    $article = $articles->patchEntity($article, $newData, [
+        'validate' => false
+    ]);
+
+
+Using A Different Validation Set
+================================
+
 In addition to disabling validation you can choose which validation rule set you
 want applied::
 
@@ -78,6 +88,37 @@ used. A sample validator for our articles table would be::
 You can have as many validation sets as you need. See the :doc:`validation
 chapter </core-libraries/validation>` for more information on building
 validation rule-sets.
+
+Using A Different Validation Set For Associations
+-------------------------------------------------
+
+Validation sets can also be defined per association. When using the
+``newEntity()`` or ``patchEntity()`` methods, you can pass extra options to each
+of the associations to be converted::
+
+   $data = [
+        'title' => 'My title',
+        'body' => 'The text',
+        'user_id' => 1,
+        'user' => [
+            'username' => 'mark'
+        ],
+        'comments' => [
+            ['body' => 'First comment'],
+            ['body' => 'Second comment'],
+        ]
+    ];
+
+    $article = $articles->patchEntity($article, $data, [
+        'validate' => 'update',
+        'associated' => [
+            'Users' => ['validate' => 'signup'],
+            'Comments' => ['validate' => 'custom']
+        ]
+    ]);
+
+Validation Providers
+====================
 
 Validation rules can use functions defined on any known providers. By default
 CakePHP sets up a few providers:

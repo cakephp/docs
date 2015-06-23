@@ -143,6 +143,7 @@ entities from request data. You can convert a single entity using::
 
     // In a controller.
     $articles = TableRegistry::get('Articles');
+    // Validate and convert to an Entity object
     $entity = $articles->newEntity($this->request->data());
 
 The request data should follow the structure of your entities. For example if
@@ -162,6 +163,12 @@ request data should look like::
         ]
     ];
 
+By default, the ``newEntity()`` method validates the data that gets passed to
+it, as explained in the :ref:`_validating-request-data` section. If you wish to
+prevent data from being validated, pass the ``'validate' => false`` option::
+
+    $entity = $articles->newEntity($data, ['validate' => false]);
+
 When building forms that save nested associations, you need to define which
 associations should be marshalled::
 
@@ -180,6 +187,17 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
+    ]);
+
+Associated data is also validated by default unless told otherwise. You may also
+change the validation set to be used per association::
+
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags' => ['validate' => false],
+            'Comments.Users' => ['validate' => 'signup']
+        ]
     ]);
 
 Converting BelongsToMany Data
@@ -339,6 +357,31 @@ persisted. You can merge an array of raw data into an existing entity using the
     $articles->patchEntity($article, $this->request->data());
     $articles->save($article);
 
+
+Validation and patchEntity
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Similar to ``newEntity()``, the ``patchEntity`` method will validate the data
+before it is copied to the entity. The mechanism is explained in the
+:ref:`_validating-request-data` section. If you wish to disable validation while
+patching an entity, pass the ``validate`` option as follows::
+
+    // In a controller.
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->get(1);
+    $articles->patchEntity($article, $data, ['validate' => false]);
+
+You may also change the validation set used for the entity or any of the
+associations::
+
+    $articles->patchEntity($article, $this->request->data(), [
+        'validate' => 'custom',
+        'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
+    ]);
+
+Patching HasMany and BelongsToMany
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 As explained in the previous section, the request data should follow the
 structure of your entity. The ``patchEntity()`` method is equally capable of
 merging associations, by default only the first level of associations are
@@ -389,7 +432,6 @@ If a Product belongsToMany Tag::
         // .. other properties
        'tags' => true,
     ];
-
 
 .. note::
 
@@ -482,6 +524,7 @@ array::
         $this->request->data(),
         ['associated' => ['Tags', 'Comments.Users']]
     );
+
 
 .. _before-marshal:
 
