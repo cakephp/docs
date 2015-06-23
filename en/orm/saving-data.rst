@@ -164,7 +164,7 @@ request data should look like::
     ];
 
 By default, the ``newEntity()`` method validates the data that gets passed to
-it, as explained in the :ref:`_validating-request-data` section. If you wish to
+it, as explained in the :ref:`validating-request-data` section. If you wish to
 prevent data from being validated, pass the ``'validate' => false`` option::
 
     $entity = $articles->newEntity($data, ['validate' => false]);
@@ -363,7 +363,7 @@ Validation and patchEntity
 
 Similar to ``newEntity()``, the ``patchEntity`` method will validate the data
 before it is copied to the entity. The mechanism is explained in the
-:ref:`_validating-request-data` section. If you wish to disable validation while
+:ref:`validating-request-data` section. If you wish to disable validation while
 patching an entity, pass the ``validate`` option as follows::
 
     // In a controller.
