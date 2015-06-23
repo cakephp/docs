@@ -43,6 +43,17 @@ FlashComponent
   méthodes ``set()`` et ``__call()``. Cela signifie que la structure des
   données stockées dans la Session pour les messages Flash a changé.
 
+Network
+=======
+
+Http\Client
+-----------
+
+- Le type mime utilisé pour envoyer les requêtes par défaut a changé.
+  Précédemment, ``multipart/form-data`` était toujours utilisé. Dans 3.1,
+  ``multipart/form-data`` n'est utilisé que lorsque l'envoi de fichiers est
+  nécessaire. Lorsqu'il n'y en pas, ``application/x-www-form-urlencoded`` est
+  utilisé à la place.
 
 ORM
 ===

@@ -48,7 +48,7 @@ Http\Client
 - The default mime type used when sending requests has changed. Previously
   ``multipart/form-data`` would always be used. In 3.1, ``multipart/form-data``
   is only used when file uploads are present. When there are no file uploads,
-  ``application/x-www-urlencoded`` is used instead.
+  ``application/x-www-form-urlencoded`` is used instead.
 
 ORM
 ===
