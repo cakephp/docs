@@ -1637,7 +1637,6 @@ suivantes:
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``submitContainer`` {{content}}
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
