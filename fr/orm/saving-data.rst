@@ -152,6 +152,7 @@ données requêtées. Vous pouvez convertir une entity unique en utilisant::
 
     // Dans un controller.
     $articles = TableRegistry::get('Articles');
+    // Valide et convertit en un objet Entity
     $entity = $articles->newEntity($this->request->data());
 
 Les données requêtées doivent suivre la structure de vos entities. Par
@@ -172,6 +173,12 @@ avez plusieurs commentaires, vos données requêtées devraient ressembler
         ]
     ];
 
+By default, the ``newEntity()`` method validates the data that gets passed to
+it, as explained in the :ref:`validating-request-data` section. If you wish to
+prevent data from being validated, pass the ``'validate' => false`` option::
+
+    $entity = $articles->newEntity($data, ['validate' => false]);
+
 Lors de la construction de formulaires qui sauvegardent des associations
 imbriquées, vous devez définir quelles associations doivent être marshalled::
 
@@ -191,6 +198,17 @@ la notation par point pour être plus bref::
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
+    ]);
+
+Associated data is also validated by default unless told otherwise. You may also
+change the validation set to be used per association::
+
+    $articles = TableRegistry::get('Articles');
+    $entity = $articles->newEntity($this->request->data(), [
+        'associated' => [
+            'Tags' => ['validate' => false],
+            'Comments.Users' => ['validate' => 'signup']
+        ]
     ]);
 
 Convertir des Données BelongsToMany
@@ -354,6 +372,30 @@ méthode ``patchEntity()``::
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
     $articles->save($article);
+
+Validation and patchEntity
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Similar to ``newEntity()``, the ``patchEntity`` method will validate the data
+before it is copied to the entity. The mechanism is explained in the
+:ref:`validating-request-data` section. If you wish to disable validation while
+patching an entity, pass the ``validate`` option as follows::
+
+    // In a controller.
+    $articles = TableRegistry::get('Articles');
+    $article = $articles->get(1);
+    $articles->patchEntity($article, $data, ['validate' => false]);
+
+You may also change the validation set used for the entity or any of the
+associations::
+
+    $articles->patchEntity($article, $this->request->data(), [
+        'validate' => 'custom',
+        'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
+    ]);
+
+Patching HasMany and BelongsToMany
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme expliqué dans la section précédente, les données requêtées doivent suivre
 la structure de votre entity. La méthode ``patchEntity()`` est également capable
