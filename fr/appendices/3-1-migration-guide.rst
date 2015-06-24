@@ -51,10 +51,10 @@ Http\Client
 
 - Le type mime utilisé pour envoyer les requêtes par défaut a changé.
   Précédemment, ``multipart/form-data`` était toujours utilisé. Dans 3.1,
-  ``multipart/form-data`` n'est utilisé que lorsque l'envoi de fichiers est
-  nécessaire. Lorsqu'il n'y en pas, ``application/x-www-form-urlencoded`` est
-  utilisé à la place.
-
+  ``multipart/form-data`` n'est utilisé qu'en cas de transfert de fichiers.
+  Lorsqu'il n'y en pas, ``application/x-www-form-urlencoded`` est utilisé à la
+  place.
+  
 ORM
 ===
 
