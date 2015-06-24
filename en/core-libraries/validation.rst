@@ -98,31 +98,6 @@ An example of these methods in action is::
         ->notEmpty('body', 'A body is required', 'create')
         ->allowEmpty('header_image', 'update');
 
-Unique Fields
--------------
-
-The ``Table`` class provides a validation rule to ensure that a given field
-is unique within a table. For example, if you wanted to make sure that an e-mail
-address is unique, you could do the following::
-
-    $validator->add('email', [
-        'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
-    ]);
-
-If you wish to only ensure uniqueness of a field based on an another field in
-your table, such as a foreign key of an associated table, you can scope it with
-the following::
-
-    $validator->add('email', [
-        'unique' => [
-            'rule' => ['validateUnique', ['scope' => 'site_id']],
-            'provider' => 'table'
-        ]
-    ]);
-
-This will ensure that the provided e-mail address is only unique to other
-records with the same ``site_id``.
-
 Notice that these examples take a ``provider`` key.  Adding ``Validator``
 providers is further explained in the following sections.
 
