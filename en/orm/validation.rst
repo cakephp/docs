@@ -520,7 +520,7 @@ come up when running a CLI script that directly sets properties to entities::
         $rules->add(function ($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
-            $errors = $validator->errors($data);
+            $errors = $validator->errors($data, $entity->isNew());
             $entity->errors($errors);
 
             return empty($errors);
