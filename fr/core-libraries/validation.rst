@@ -7,6 +7,8 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité.
 
+.. _creating-validators:
+
 Créer les Validators
 ====================
 
