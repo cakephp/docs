@@ -24,7 +24,7 @@ elle génère le lien utilisant le controller et l'action. Si ``full`` vaut
     echo $this->Url->build([
         'controller' => 'Posts',
         'action' => 'view',
-        'ba'"
+        'bar'
     ]);
 
     // Affiche
