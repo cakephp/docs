@@ -18,7 +18,7 @@ Avec la tâche `Load` vous pouvez charger les plugins dans votre
 
 Ceci va ajouter ce qui suit dans votre ``config/bootstrap.php``::
 
-    Plugin::load('MyPlugin', ['bootstrap' => false, 'routes' => false, 'autoload' => true]);
+    Plugin::load('MyPlugin', []);
 
 En ajoutant `-r` ou `-b` à votre commande vous pouvez activer les valeurs
 `bootstrap` et `routes`::
@@ -26,12 +26,12 @@ En ajoutant `-r` ou `-b` à votre commande vous pouvez activer les valeurs
     bin/cake plugin load -b MyPlugin
 
     // va retourner
-    Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => false, 'autoload' => true]);
+    Plugin::load('MyPlugin', ['bootstrap' => true]);
 
     bin/cake plugin load -r MyPlugin
 
     // va retourner
-    Plugin::load('MyPlugin', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
+    Plugin::load('MyPlugin', ['routes' => true]);
 
 Décharger les Plugins
 ---------------------

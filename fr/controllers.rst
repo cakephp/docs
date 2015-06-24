@@ -488,6 +488,11 @@ bien tout ce qui est déclaré dans votre ``AppController``.
 
 .. _controller-life-cycle:
 
+.. deprecated:: 3.0
+    Le chargement des helpers depuis le controller est fourni pour des raisons
+    de rétrocompatibilité. Référez-vous à la section suivante pour apprendre à
+    :ref:`configuring-helpers`.
+
 Request Life-cycle callbacks
 ============================
 
