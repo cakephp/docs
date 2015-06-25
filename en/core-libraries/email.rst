@@ -343,6 +343,8 @@ systems (like SwiftMailer). To create your transport, first create the file
 **src/Network/Email/ExampleTransport.php** (where Example is the name of your
 transport). To start off your file should look like::
 
+    namespace App\Network\Email;
+    
     use Cake\Mailer\AbstractTransport;
     use Cake\Mailer\Email;
 
