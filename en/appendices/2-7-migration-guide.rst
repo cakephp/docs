@@ -10,6 +10,8 @@ Console
 - Plugin shells that share a name with their plugin can now be called without
   the plugin prefix. For example ``Console/cake MyPlugin.my_plugin`` can now
   be called with ``Console/cake my_plugin``.
+- ``Shell::param()`` was backported from 3.0 into 2.7. This method provides
+  a notice error free way to read CLI options.
 
 Core
 ====

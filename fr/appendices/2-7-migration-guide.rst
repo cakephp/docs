@@ -11,6 +11,8 @@ Console
   être appelés sans le préfixe de plugin. Par exemple
   ``Console/cake MyPlugin.my_plugin`` peut maintenant être appelé avec
   ``Console/cake my_plugin``.
+- ``Shell::param()`` was backported from 3.0 into 2.7. This method provides
+  a notice error free way to read CLI options.
 
 Core
 ====
