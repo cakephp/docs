@@ -267,8 +267,8 @@ de la méthode ``table()``::
 Notez cependant que ceci ne peut être fait qu'en cas de création de table :
 il n'y a actuellement aucun moyen d'ajouter une colonne avec une ``collation``
 différente de celle de la table ou de la base de données.
-Seul ``MySQL`` et ``SqlServer`` supporte cette option de configuration pour le
-moment.
+Seuls ``MySQL`` et ``SqlServer`` supportent cette option de configuration pour
+le moment.
 
 Appliquer les Migrations
 ========================
