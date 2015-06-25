@@ -36,10 +36,11 @@ pour cette langue. Les sections suivantes sont les premières par lesquelles vou
 devriez commencer puisque ce sont des fichiers qui ne changent pas souvent:
 
 - index.rst
-- intro.rst
-- quickstart.rst
+- cakephp-overview.rst
+- getting-started.rst
 - installation.rst
-- dossier /intro
+- dossier /installation
+- dossier /getting-started
 - dossier /tutorials-and-examples
 
 Note pour les Administrateurs de la Doc
