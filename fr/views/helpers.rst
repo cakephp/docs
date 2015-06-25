@@ -33,52 +33,64 @@ les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 Configurer les Helpers
 ======================
 
-Vous activez les helpers dans CakePHP, en faisant "prendre conscience" à un
-controller qu'ils existent. Chaque controller a une propriété
-:php:attr:`~Cake\\Controller\\Controller::$helpers`, qui liste les helpers
-disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez son nom
-au tableau ``$helpers`` du controller::
+Dans CakePHP, vous activez les helpers en les déclarant dans une classe view.
+Une classe ``AppView`` est fournie avec chaque application CakePHP et est le
+lieu idéal pour charger les helpers::
 
-    class BakeriesController extends AppController
+    class AppView extends View
     {
-        public $helpers = ['Form', 'Html', 'Time'];
-    }
-
-L'ajout des helpers depuis les plugins utilise la :term:`syntaxe de plugin`
-utilisée partout ailleurs dans CakePHP::
-
-    class BakeriesController extends AppController
-    {
-        public $helpers = ['Blog.Comment'];
-    }
-
-Vous pouvez aussi ajouter les helpers depuis une action, dans ce cas,
-ils seront uniquement accessibles pour cette action et dans aucune autre action
-du controller. Ceci économise de la puissance de calcul pour les autres actions
-qui n'utilisent pas le helper, tout en permettant de conserver le controller
-mieux organisé::
-
-    class BakeriesController extends AppController
-    {
-        public function bake()
+        public function initialize()
         {
-            $this->helpers[] = 'Time';
-        }
-        public function mix()
-        {
-            // Le Helper Time n'est pas chargé ici et n'est par conséquent
-            // pas disponible
+            parent::initialize();
+            $this->loadHelper('Html');
+            $this->loadHelper('Form');
+            $this->loadHelper('Flash');
         }
     }
 
-Si vous avez besoin d'activer un helper pour tous les controllers, ajoutez
-son nom dans le tableau ``$helpers`` du fichier
-**src/Controller/AppController.php** (à créer si pas présent). N'oubliez pas
-d'inclure les helpers par défaut Html et Form::
+Le chargement des helpers depuis les plugins utilise la
+:term:`syntaxe de plugin` utilisée partout ailleurs dans CakePHP::
 
-    class AppController extends Controller
+    $this->loadHelper('Blog.Comment');
+
+Vous n'avez pas à charger explicitement les helpers fournis par CakePHP ou
+de votre application. Ces helpers seront chargés paresseusement (lazily) au
+moment de la première utilisation. Par exemple::
+
+    // Charge le FormHelper s'il n'a pas été chargé précédemment.
+    $this->Form->create($article);
+
+A partir d'une vue de plugin, les helpers de plugin peuvent également être
+chargés paresseusement. Par exemple, les templates de vues dans le plugin
+'Blog', peuvent charger paresseusement les helpers provenant du même plugin.
+
+Chargement Conditionnel des Helpers
+-----------------------------------
+
+Vous pouvez utiliser le nom de l'action courante pour charger
+conditionnellement des helpers::
+
+    class AppView extends View
     {
-        public $helpers = ['Form', 'Html', 'Time'];
+        public function initialize()
+        {
+            parent::initialize();
+            if ($this->request->action === 'index') {
+                $this->loadHelper('ListPage');
+            }
+        }
+    }
+
+Vous pouvez également utiliser la méthode ``beforeRender`` de vos controller
+pour charger des helpers::
+
+    class ArticlesController extends AppController
+    {
+        public function beforeRender(Event $event)
+        {
+            parent::beforeRender($event);
+            $this->getView()->loadHelper('MyHelper');
+        }
     }
 
 Options de Configuration
@@ -144,10 +156,11 @@ pouvez les définir dans le callback beforeRender de votre controller::
 
     class PostsController extends AppController
     {
-        public function beforeRender()
+        public function beforeRender(Event $event)
         {
-            parent::beforeRender();
-            $this->helpers['CustomStuff'] = $this->_getCustomStuffConfig();
+            parent::beforeRender($event);
+            $view = $this->getView();
+            $view->loadHelper('CustomStuff', $this->_getCustomStuffConfig());
         }
     }
 
@@ -161,14 +174,15 @@ permet de créer des alias de helpers dans vos vues. Cette fonctionnalité est
 utile quand vous voulez remplacer ``$this->Html`` ou une autre référence du
 Helper habituel avec une implémentation personnalisée::
 
-    // src/Controller/PostsController.php
-    class PostsController extends AppController
+    // src/View/AppView.php
+    class AppView extends View
     {
-        public $helpers = [
-            'Html' => [
+        public function initialize()
+        {
+            $this->loadHelper('Html', [
                 'className' => 'MyHtml'
-            ]
-        ];
+            ]);
+        }
     }
 
     // src/View/Helper/MyHtmlHelper.php
@@ -203,10 +217,12 @@ accéder à n'importe quel helper chargé en utilisant ``$this->{$helperName}``.
 Charger les Helpers à la Volée
 ------------------------------
 
-Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper
-à partir d'une vue. Vous pouvez utiliser la vue du
-:php:class:`Cake\\View\\HelperRegistry` pour le faire::
+Il peut y avoir des cas où vous aurez besoin de charger dynamiquement un helper
+depuis l'intérieur d'une vue. Pour cela, Vous pouvez utiliser le
+:php:class:`Cake\\View\\HelperRegistry` ::
 
+    // Les deux solutions fonctionnent.
+    $mediaHelper = $this->loadHelper('Media', $mediaConfig);
     $mediaHelper = $this->helpers()->load('Media', $mediaConfig);
 
 Le HelperCollection est une :doc:`registry </core-libraries/registry-objects>`
@@ -281,14 +297,19 @@ Utiliser votre Helper
 ---------------------
 
 Une fois que vous avez créé votre helper et l'avez placé dans
-**src/View/Helper/**, vous serez capable de l'inclure dans vos controllers
-en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
+**src/View/Helper/**, vous spouvez le charger dans vos vues::
 
-    class PostsController extends AppController
+    class AppView extends View
     {
-        public $helpers = ['Link'];
+        public function initialize()
+        {
+            parent::initialize();
+            $this->loadHelper('Link');
+        }
     }
 
+Une fois que votre helper est chargé, vous pouvez l'utiliser dans vos vues en
+accédant l'attribut de vue correspondant::
 Une fois que votre controller est au courant de cette nouvelle classe, vous
 pouvez l'utiliser dans vos vues en accédant à un objet nommé d'après le
 helper::
