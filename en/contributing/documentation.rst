@@ -33,10 +33,11 @@ sections are the first one you should consider translating as these
 files don't change often:
 
 - index.rst
-- intro.rst
-- quickstart.rst
+- cakephp-overview.rst
+- getting-started.rst
 - installation.rst
-- /intro folder
+- /installation folder
+- /getting-started folder
 - /tutorials-and-examples folder
 
 Reminder for Docs Administrators
