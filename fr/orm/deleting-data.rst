@@ -74,7 +74,7 @@ suppression en masse pour retirer plusieurs lignes en une fois::
         return $this->deleteAll(['is_spam' => true]);
     }
 
-Une suppression en masse va être considérée comme réussie si 1 ou plusieurs
+Une suppression en masse va être considérée comme réussie si une ou plusieurs
 lignes ont été supprimées.
 
 .. warning::
