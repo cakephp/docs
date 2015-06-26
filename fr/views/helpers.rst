@@ -172,6 +172,8 @@ Helper habituel avec une implémentation personnalisée::
     }
 
     // src/View/Helper/MyHtmlHelper.php
+    namespace App\View\Helper;
+
     use Cake\View\Helper\HtmlHelper;
 
     class MyHtmlHelper extends HtmlHelper
