@@ -177,7 +177,7 @@ pouvez aussi le faire avec un objet Query::
         ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
         ->toArray(); // Aussi une méthode de la librairie collection
 
-    foreach ($results as $id $trimmedTitle) {
+    foreach ($results as $id => $trimmedTitle) {
         echo "$id : $trimmedTitle";
     }
 
@@ -365,7 +365,7 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
         'timeCreated' => $time
     ]);
 
-Entrainera::
+Entraînera::
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
@@ -389,8 +389,8 @@ Instructions Case
 L'ORM offre également l'expression SQL ``case``. L'expression ``case`` permet
 l'implémentation d'une logique ``if ... then ... else`` dans votre SQL. Cela
 peut être utile pour créer des rapports sur des données que vous avez besoin
-d'additionner ou de compter conditionnellement, ou si vous avez besoin de données
-spécifiques basées sur une condition.
+d'additionner ou de compter conditionnellement, ou si vous avez besoin de
+données spécifiques basées sur une condition.
 
 Si vous vouliez savoir combien d'articles sont publiés dans notre base de
 données, vous auriez besoin de générer le SQL suivant::
@@ -398,7 +398,8 @@ données, vous auriez besoin de générer le SQL suivant::
     SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
     FROM articles GROUP BY published
 
-Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code suivant::
+Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code
+suivant::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
@@ -410,9 +411,12 @@ Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code suiv
     ])
     ->group('published');
 
-The ``addCase`` function can also chain together multiple statements to create ``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
+La fonction ``addCase`` peut aussi chaîner ensemble plusieurs instructions pour
+créer une logique ``if .. then .. [elseif .. then .. ] [ .. else ]`` dans
+votre SQL.
 
-If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population size, we could do the following::
+Si nous souhaitions classer des villes selon des tailles de population SMALL,
+MEDIUM, ou LARGE, nous pourrions faire ce qui suit::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -422,8 +426,8 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
                     $q->newExpr()->between('population', 100000, 999000),
                     $q->newExpr()->gte('population', 999001),
                 ],
-                ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
-                ['string', 'string', 'string'] # type of each value
+                ['SMALL',  'MEDIUM', 'LARGE'], # les valeurs correspondantes aux conditions
+                ['string', 'string', 'string'] # type de chaque valeur
             );
         });
     # WHERE CASE
@@ -432,7 +436,8 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
     #   WHEN population >= 999001 THEN 'LARGE'
     #   END
 
-Any time there are fewer values than there are case conditions ``addCase`` will automatically produce an ``if .. then .. else`` statement::
+A chaque fois qu'il y a moins de conditions qu'il n'y a de valeurs, ``addCase``
+va automatiquement produire une instruction ``if .. then .. else``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -440,8 +445,8 @@ Any time there are fewer values than there are case conditions ``addCase`` will 
                 [
                     $q->newExpr()->eq('population', 0),
                 ],
-                ['DESERTED', 'INHABITED'], # values matching conditions
-                ['string', 'string'] # type of each value
+                ['DESERTED', 'INHABITED'], # valeurs correspondantes aux conditions
+                ['string', 'string'] # type de chaque valeur
             );
         });
     # WHERE CASE
@@ -658,7 +663,7 @@ Ce qui générerait le code SQL suivant::
 Quand vous utilisez les objets expression, vous pouvez utiliser les méthodes
 suivantes pour créer des conditions:
 
-- ``eq()`` Creates an equality condition::
+- ``eq()`` Crée une condition d'égalité::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -666,7 +671,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population = 10000
 
-- ``notEq()`` Creates an inequality condition::
+- ``notEq()`` Crée une condition d'inégalité::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -674,7 +679,7 @@ suivantes pour créer des conditions:
         });
     # WHERE population != 10000
 
-- ``like()`` Creates a condition using the ``LIKE`` operator::
+- ``like()`` Crée une condition en utilisant l'opérateur ``LIKE``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -682,7 +687,7 @@ suivantes pour créer des conditions:
         });
     # WHERE name LIKE "%A%"
 
-- ``notLike()`` Creates a negated ``LIKE`` condition::
+- ``notLike()`` Crée une condition négative de type ``LIKE``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -690,7 +695,7 @@ suivantes pour créer des conditions:
         });
     # WHERE name NOT LIKE "%A%"
 
-- ``in()`` Create a condition using ``IN``::
+- ``in()`` Crée une condition en utilisant ``IN``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -698,56 +703,63 @@ suivantes pour créer des conditions:
         });
     # WHERE country_id IN ('AFG', 'USA', 'EST')
 
-- ``notIn()`` Create a negated condition using ``IN``::
+- ``notIn()`` Crée une condition négative en utilisant ``IN``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
-- ``gt()`` Create a ``>`` condition::
+
+- ``gt()`` Crée une condition ``>``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->gt('population', '10000');
         });
-    # WHERE population > 100000
-- ``gte()`` Create a ``>=`` condition::
+    # WHERE population > 10000
+
+- ``gte()`` Crée une condition ``>=``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->gte('population', '10000');
         });
-    # WHERE population >= 100000
-- ``lt()`` Create a ``<`` condition::
+    # WHERE population >= 10000
+
+- ``lt()`` Crée une condition ``<``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->lt('population', '10000');
         });
-    # WHERE population < 100000
-- ``lte()`` Create a ``<=`` condition::
+    # WHERE population < 10000
+
+- ``lte()`` Crée une condition ``<=``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->lte('population', '10000');
         });
-    # WHERE population <= 100000
-- ``isNull()`` Create an ``IS NULL`` condition::
+    # WHERE population <= 10000
+
+- ``isNull()`` Crée une condition ``IS NULL``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->isNull('population');
         });
     # WHERE (population) IS NULL
-- ``isNotNull()`` Create a negated ``IS NULL`` condition::
+
+- ``isNotNull()`` Crée une condition négative ``IS NULL``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->isNotNull('population');
         });
     # WHERE (population) IS NOT NULL
-- ``between()`` Create a ``BETWEEN`` condition::
+
+- ``between()`` Crée une condition ``BETWEEN``::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {

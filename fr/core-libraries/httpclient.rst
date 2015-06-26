@@ -244,7 +244,7 @@ Devoir retaper le nom de domaine, les paramètres d'authentification et de proxy
 peut devenir fastidieux et source d'erreurs. Pour réduire ce risque d'erreur et
 être moins pénible, vous pouvez créer des clients scoped::
 
-    // Créé un client scoped.
+    // Crée un client scoped.
     $http = new Client([
       'host' => 'api.example.com',
       'scheme' => 'https',

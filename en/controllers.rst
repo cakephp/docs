@@ -464,6 +464,10 @@ Each of these variables are merged with their inherited values,
 therefore it is not necessary (for example) to redeclare the
 ``FormHelper``, or anything that is declared in your ``AppController``.
 
+.. deprecated:: 3.0
+    Loading Helpers from the controller is provided for backwards compatibility
+    reasons. You should see :ref:`configuring-helpers` for how to load helpers.
+
 .. _controller-life-cycle:
 
 Request Life-cycle Callbacks

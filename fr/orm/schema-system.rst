@@ -27,7 +27,7 @@ de réflection de schéma::
 
     use Cake\Database\Schema\Table;
 
-    // Créé une table colonne par colonne.
+    // Crée une table colonne par colonne.
     $t = new Table('posts');
     $t->addColumn('id', [
       'type' => 'integer',
@@ -201,7 +201,7 @@ spécifique à la plateforme pour créer ou supprimer une table spécifique::
     $db = ConnectionManager::get('default');
     $schema = new Table('posts', $fields, $indexes);
 
-    // Créé une table
+    // Crée une table
     $queries = $schema->createSql($db);
     foreach ($queries as $sql) {
       $db->execute($sql);
@@ -231,7 +231,7 @@ habituelle de la classe ressemble à::
 
     $db = ConnectionManager::get('default');
 
-    // Créé une collection de schéma.
+    // Crée une collection de schéma.
     $collection = $db->schemaCollection();
 
     // Récupère les noms des tables

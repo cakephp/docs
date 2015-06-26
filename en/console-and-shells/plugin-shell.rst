@@ -18,7 +18,7 @@ Via the `Load` task you are able to load plugins in your
 
 This will add the following to your ``config/bootstrap.php``::
 
-    Plugin::load('MyPlugin', ['bootstrap' => false, 'routes' => false, 'autoload' => true]);
+    Plugin::load('MyPlugin', []);
 
 By adding `-r` or `-b` to your command you can enable to `bootstrap` and
 `routes` value::
@@ -26,12 +26,12 @@ By adding `-r` or `-b` to your command you can enable to `bootstrap` and
     bin/cake plugin load -b MyPlugin
 
     // will return
-    Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => false, 'autoload' => true]);
+    Plugin::load('MyPlugin', ['bootstrap' => true]);
 
     bin/cake plugin load -r MyPlugin
 
     // will return
-    Plugin::load('MyPlugin', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
+    Plugin::load('MyPlugin', ['routes' => true]);
 
 Unloading Plugins
 -----------------

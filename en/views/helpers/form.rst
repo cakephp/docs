@@ -664,7 +664,7 @@ Datetime Options
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
-    echo $this->Form->input('Model.time', [
+    echo $this->Form->input('time', [
         'type' => 'time',
         'interval' => 15
     ]);
@@ -975,7 +975,7 @@ Defaults to ``true``::
 * ``$attributes['multiple']`` If 'multiple' has been set to ``true`` for an
   input that outputs a select, the select will allow multiple selections::
 
-    echo $this->Form->select('Model.field', $options, ['multiple' => true]);
+    echo $this->Form->select('field', $options, ['multiple' => true]);
 
   Alternatively set 'multiple' to 'checkbox' to output a list of
   related check boxes::
@@ -984,7 +984,7 @@ Defaults to ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox'
     ]);
 
@@ -1014,7 +1014,7 @@ Defaults to ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox',
         'disabled' => ['Value 1']
     ]);
@@ -1584,7 +1584,6 @@ A list of the default templates and the variables they can expect are:
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``submitContainer`` {{content}}
 
 In addition to these templates, the ``input()`` method will attempt to use
 distinct templates for each input container. For example, when creating
@@ -1770,6 +1769,7 @@ could do the following::
 
     namespace App\View\Widget;
 
+    use Cake\View\Form\ContextInterface;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
@@ -1782,7 +1782,7 @@ could do the following::
             $this->_templates = $templates;
         }
 
-        public function render(array $data)
+        public function render(array $data, ContextInterface $context)
         {
             $data += [
                 'name' => '',

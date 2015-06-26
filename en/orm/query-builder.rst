@@ -170,7 +170,7 @@ a Query object::
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
-    foreach ($results as $id $trimmedTitle) {
+    foreach ($results as $id => $trimmedTitle) {
         echo "$id : $trimmedTitle";
     }
 
@@ -402,7 +402,7 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
                     $q->newExpr()->between('population', 100000, 999000),
                     $q->newExpr()->gte('population', 999001),
                 ],
-                ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions 
+                ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
                 ['string', 'string', 'string'] # type of each value
             );
         });
@@ -412,7 +412,8 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
     #   WHEN population >= 999001 THEN 'LARGE'
     #   END
 
-Any time there are fewer values than there are case conditions ``addCase`` will automatically produce an ``if .. then .. else`` statement::
+Any time there are fewer case conditions than values, ``addCase`` will
+automatically produce an ``if .. then .. else`` statement::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -660,7 +661,7 @@ conditions:
     # WHERE name NOT LIKE "%A%"
 
 - ``in()`` Create a condition using ``IN``::
-    
+
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->in('country_id', ['AFG', 'USA', 'EST']);
@@ -674,34 +675,39 @@ conditions:
             return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
+
 - ``gt()`` Create a ``>`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->gt('population', '10000');
         });
-    # WHERE population > 100000
+    # WHERE population > 10000
+
 - ``gte()`` Create a ``>=`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->gte('population', '10000');
         });
-    # WHERE population >= 100000
+    # WHERE population >= 10000
+
 - ``lt()`` Create a ``<`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->lt('population', '10000');
         });
-    # WHERE population < 100000
+    # WHERE population < 10000
+
 - ``lte()`` Create a ``<=`` condition::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
             return $exp->lte('population', '10000');
         });
-    # WHERE population <= 100000
+    # WHERE population <= 10000
+
 - ``isNull()`` Create an ``IS NULL`` condition::
 
     $query = $cities->find()
@@ -709,6 +715,7 @@ conditions:
             return $exp->isNull('population');
         });
     # WHERE (population) IS NULL
+
 - ``isNotNull()`` Create a negated ``IS NULL`` condition::
 
     $query = $cities->find()
@@ -716,6 +723,7 @@ conditions:
             return $exp->isNotNull('population');
         });
     # WHERE (population) IS NOT NULL
+
 - ``between()`` Create a ``BETWEEN`` condition::
 
     $query = $cities->find()

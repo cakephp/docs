@@ -93,16 +93,10 @@ options disponibles en utilisant l'option ``--help``::
 Themes de Bake
 ==============
 
-L'option theme est commune à toutes les commandes de bake, et permet de
-changer les fichiers de template utilisés lors de la création avec bake. Pour
-générer vos propres templates, vous devez créer un plugin et ensuite y copier
-le contenu de **plugins/Bake/src/Template/Bake**. Tout
-plugin chargé qui contient un dossier **src/Template/Bake** est automatiquement
-détecté par bake comme un theme de bake disponible, et sera affiché dans la
-sortie d'aide. Par exemple, existe-t-il un plugin appelé ``Special`` qui
-intègre un theme de bake, la sortie d'aide afficherait::
-
-    --theme, -t       Le theme à utiliser pour créer du code avec bake. (Choix: Special)
+L'option theme est commune à toutes les commandes de bake, et permet de changer
+les fichiers de template utilisés lors de la création avec bake. Pour créer vos
+propres templates, référez-vous :ref:`à la documentation sur la création de
+theme bake <creating-a-bake-theme>`.
 
 .. meta::
     :title lang=fr: Génération de Code avec Bake

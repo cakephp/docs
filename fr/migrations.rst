@@ -241,6 +241,35 @@ méthode ``table()``::
 Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisée
 comme clé primaire.
 
+Collations
+----------
+
+Si vous avez besoin de créer une table avec une ``collation`` différente
+de celle par défaut de la base de données, vous pouvez la définir comme option
+de la méthode ``table()``::
+
+        class CreateCategoriesTable extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this
+                    ->table('categories', [
+                        'collation' => 'latin1_german1_ci'
+                    ])
+                    ->addColumn('title', 'string', [
+                        'default' => null,
+                        'limit' => 255,
+                        'null' => false,
+                    ])
+                    ->create();
+            }
+
+Notez cependant que ceci ne peut être fait qu'en cas de création de table :
+il n'y a actuellement aucun moyen d'ajouter une colonne avec une ``collation``
+différente de celle de la table ou de la base de données.
+Seuls ``MySQL`` et ``SqlServer`` supportent cette option de configuration pour
+le moment.
+
 Appliquer les Migrations
 ========================
 

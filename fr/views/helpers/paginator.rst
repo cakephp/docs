@@ -285,7 +285,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 .. php:method:: next($title = 'Next >>', $options = [])
 
     Cette méthode est identique a :php:meth:`~PagintorHelper::prev()` avec
-    quelques exceptions. il créé le lien pointant vers la page suivante au
+    quelques exceptions. il crée le lien pointant vers la page suivante au
     lieu de la précédente. elle utilise aussi ``next`` comme valeur d'attribut
     rel au lieu de ``prev``.
 
@@ -297,7 +297,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
         echo $this->Paginator->first('< first');
 
-    Ceci créé un simple lien pour la première page. Ne retournera rien si vous
+    Ceci crée un simple lien pour la première page. Ne retournera rien si vous
     êtes sur la première page. Vous pouvez aussi utiliser un nombre entier pour
     indiquer combien de premier liens paginés vous voulez générer::
 

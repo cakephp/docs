@@ -702,7 +702,7 @@ Les Options de Datetime
 * ``$options['interval']`` Cette option spécifie l'écart de minutes
   entre chaque option dans la select box minute::
 
-    echo $this->Form->input('Model.time', [
+    echo $this->Form->input('time', [
         'type' => 'time',
         'interval' => 15
     ]);
@@ -1016,7 +1016,7 @@ sélectionnées. Par défaut à ``true``::
 * ``$attributes['multiple']`` Si 'multiple' a été défini à ``true`` pour
   un input select, celui ci autorisera les sélections multiples::
 
-    echo $this->Form->select('Model.field', $options, ['multiple' => true]);
+    echo $this->Form->select('field', $options, ['multiple' => true]);
 
   Vous pouvez également définir 'checkbox' à 'multiple' pour afficher une
   liste de check boxes reliés::
@@ -1025,7 +1025,7 @@ sélectionnées. Par défaut à ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox'
     ]);
 
@@ -1055,7 +1055,7 @@ sélectionnées. Par défaut à ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox',
         'disabled' => ['Value 1']
     ]);
@@ -1545,7 +1545,7 @@ Créer des Boutons Indépendants et des liens POST
     Crée une balise ``<button>`` avec un ``<form>`` l'entourant  qui soumet à
     travers POST.
 
-    Cette méthode créé un élément ``<form>``. Donc n'utilisez pas
+    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas
     cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
     :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
@@ -1637,7 +1637,6 @@ suivantes:
 * ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
 * ``submitContainer`` {{content}}
 * ``textarea``  {{name}}, {{attrs}}, {{value}}
-* ``submitContainer`` {{content}}
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
@@ -1650,7 +1649,7 @@ Par exemple::
         'radioContainer' => '<div class="form-radio">{{content}}</div>'
     ]);
 
-    // Créé un ensemble d'inputs radio avec notre div personnalisé autour
+    // Crée un ensemble d'inputs radio avec notre div personnalisé autour
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
 Similar to input containers, the ``input()`` method will also attempt to use
@@ -1826,6 +1825,7 @@ voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
 
     namespace App\View\Widget;
 
+    use Cake\View\Form\ContextInterface;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
@@ -1838,7 +1838,7 @@ voulez construire un widget Autocomplete, vous pouvez le faire comme ceci::
             $this->_templates = $templates;
         }
 
-        public function render(array $data)
+        public function render(array $data, ContextInterface $context)
         {
             $data += [
                 'name' => '',

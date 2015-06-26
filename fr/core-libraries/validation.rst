@@ -7,6 +7,8 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité.
 
+.. _creating-validators:
+
 Créer les Validators
 ====================
 
@@ -102,31 +104,6 @@ Un exemple de ces méthodes est le suivant::
         ->notEmpty('title', 'Un titre est nécessaire')
         ->notEmpty('body', 'Un body est nécessaire', 'create')
         ->allowEmpty('header_image', 'update');
-
-Champs Uniques
---------------
-
-La classe ``Table`` fournit une règle de validation pour s'assurer qu'un champ
-donné est unique dans une table. Par exemple, si vous souhaitez vous assurer
-que l'adresse email est unique, vous pouvez faire ce qui suit::
-
-    $validator->add('email', [
-        'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
-    ]);
-
-Si vous souhaitez vous assurer de l'unicité d'un champ en se basant sur un autre
-champ dans votre table, comme une clé étrangère sur une table associée, vous
-pouvez la scoper avec ce qui suit::
-
-    $validator->add('email', [
-        'unique' => [
-            'rule' => ['validateUnique', ['scope' => 'site_id']],
-            'provider' => 'table'
-        ]
-    ]);
-
-Cela va s'assurer que l'adresse email fournie est seulement unique pour les
-autres enregistrements avec le même ``site_id``.
 
 Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des
 providers ``Validator`` est expliqué plus loin dans les sections suivantes.

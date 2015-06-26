@@ -226,6 +226,33 @@ adding new tables to the database, you can use the second argument of the
 
 The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
 
+Collations
+----------
+
+If you need to create a table with a different collation than the database
+default one, you can define it with the ``table()`` method, as an option::
+
+        class CreateCategoriesTable extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this
+                    ->table('categories', [
+                        'collation' => 'latin1_german1_ci'
+                    ])
+                    ->addColumn('title', 'string', [
+                        'default' => null,
+                        'limit' => 255,
+                        'null' => false,
+                    ])
+                    ->create();
+            }
+
+Note however this can only be done on table creation : there is currently
+no way of adding a column to an existing table with a different collation than
+the table or the database.
+Only ``MySQL`` and ``SqlServer`` supports this configuration key for the time being.
+
 Applying Migrations
 ===================
 

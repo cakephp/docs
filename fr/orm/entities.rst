@@ -128,8 +128,12 @@ la façon dont les propriétés sont lues ou définies. Par exemple::
 
 Les accesseurs utilisent la convention ``_get`` suivi par la version en camel
 case du nom du champ. Ils reçoivent la valeur basique stockée dans le tableau
-``_properties`` pour seul argument. Vous pouvez personnaliser la façon dont
-les propriétés sont récupérées/définies en définissant un mutateur::
+``_properties`` pour seul argument.
+Les accesseurs seront utilisés lors de la sauvegarde des entities.
+Faites donc attention lorsque vous définissez des méthodes qui formatent les
+données car ce sont ces données formatées qui seront sauvegardées. Vous
+pouvez personnaliser la façon dont les propriétés sont récupérées/définies
+en définissant un mutateur::
 
     namespace App\Model\Entity;
 
@@ -527,8 +531,8 @@ Cette liste peut être modifiée à la volée en utilisant ``hiddenProperties``:
 Stocker des Types Complexes
 ===========================
 
-Les entities n'ont pas pour objectif de contenir de la logique pour sérialiser
-et desérialiser les données complexes venant de la base de données. Consultez
-la section :ref:`saving-complex-types` pour comprendre la façon dont votre
-application peut stocker des types de données complexes comme les tableaux et
-les objets.
+Les méthodes "accesseurs" et "mutateurs" n'ont pas pour objectif de contenir de
+la logique pour sérialiser et desérialiser les données complexes venant de la
+base de données. Consultez la section :ref:`saving-complex-types` pour
+comprendre la façon dont votre application peut stocker des types de données
+complexes comme les tableaux et les objets.
