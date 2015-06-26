@@ -84,13 +84,59 @@ We would also need to create a basic view for our indexed articles::
 You should now be able to submit the form and have a new document added to
 elasticsearch.
 
+Document Objects
+================
 
+Like the ORM, the Elasticsearch ODM, uses :doc:`/orm/entities` like classes. The
+base class you should inherit from is ``Cake\ElasticSearch\Document``. Document
+classes are found in the ``Model\Document`` namespace in your application or
+plugin::
 
+    namespace App\Model\Document;
+
+    class Article extends Document
+    {
+    }
+
+Outside of constructor logic that makes Documents work with data from
+elasticsearch, the interface and functionality provided by ``Document`` are the
+same as those in :doc:`/orm/entities`
+
+Searching Indexed Documents
+===========================
+
+After you've indexed some documents you will want to search through them. The
+elasticsearch plugin provides a query builder that allows you to build search
+queries::
+
+    $query = $this->Articles->find()
+        ->where([
+            'title' => 'special',
+            'or' => [
+                'tags in' => ['cake', 'php'],
+                'tags not in' => ['c#', 'java']
+            ]
+        ]);
+
+    foreach ($query as $article) {
+        echo $article->title;
+    }
+
+You can use the ``FilterBuilder`` to add filtering conditions::
+
+    $query->where(function ($builder) {
+        return $builder->and(
+            $builder->gt('views', 99),
+            $builder->term('author.name', 'sally')
+        );
+    });
+
+The `FilterBuilder source
+<https://github.com/cakephp/elastic-search/blob/master/src/FilterBuilder.php>`_
+has the complete list of methods with examples for many commonly used methods.
 
 .. comment::
     Other sections to add:
-    * Document objects
-    * Searching an index
     * Validation and Application Rules
     * Saving Documents
     * Deleting Documents
