@@ -173,9 +173,9 @@ avez plusieurs commentaires, vos données requêtées devraient ressembler
         ]
     ];
 
-By default, the ``newEntity()`` method validates the data that gets passed to
-it, as explained in the :ref:`validating-request-data` section. If you wish to
-prevent data from being validated, pass the ``'validate' => false`` option::
+Par défaut, la méthode ``newEntity()`` valide les données qui lui sont passées,
+comme expliqué dans la section :ref:`validating-request-data`. Si vous voulez
+empêcher les données d'être validées, passez l'option ``'validate' => false``::
 
     $entity = $articles->newEntity($data, ['validate' => false]);
 
@@ -200,8 +200,9 @@ la notation par point pour être plus bref::
         'associated' => ['Tags', 'Comments.Users']
     ]);
 
-Associated data is also validated by default unless told otherwise. You may also
-change the validation set to be used per association::
+Les données associées sont également validées par défaut à moins que le
+contraire ne lui soit spécifié. Vous pouvez également changer l'ensemble
+de validation utilisé par association::
 
     $articles = TableRegistry::get('Articles');
     $entity = $articles->newEntity($this->request->data(), [
@@ -373,29 +374,30 @@ méthode ``patchEntity()``::
     $articles->patchEntity($article, $this->request->data());
     $articles->save($article);
 
-Validation and patchEntity
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Validation et patchEntity
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Similar to ``newEntity()``, the ``patchEntity`` method will validate the data
-before it is copied to the entity. The mechanism is explained in the
-:ref:`validating-request-data` section. If you wish to disable validation while
-patching an entity, pass the ``validate`` option as follows::
+De la même façon que ``newEntity()``, la méthode ``patchEntity`` validera les
+données avant qu'elles soient copiées dans l'entity. Ce mécanisme est expliqué
+dans la section :ref:`validating-request-data`. Si vous souhaitez désactiver la
+validation lors du patch d'une entity, passez l'option ``validate`` comme
+montré ci-dessous::
 
-    // In a controller.
+    // Dans un controller.
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
-You may also change the validation set used for the entity or any of the
-associations::
+Vous pouvez également changer l'ensemble de validation utilisé pour l'entity
+ou n'importe qu'elle association::
 
     $articles->patchEntity($article, $this->request->data(), [
         'validate' => 'custom',
         'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
     ]);
 
-Patching HasMany and BelongsToMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Patcher des HasMany et BelongsToMany
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme expliqué dans la section précédente, les données requêtées doivent suivre
 la structure de votre entity. La méthode ``patchEntity()`` est également capable
@@ -444,9 +446,9 @@ mais une note importante doit être faîte.
 
 Si Product belongsToMany Tag::
 
-    // in the Product Entity
+    // Dans l'entity Product
     protected $_accessible = [
-        // .. other properties
+        // .. autre propriété
        'tags' => true,
     ];
 
@@ -566,11 +568,12 @@ entities ne soient créées::
 Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
 à la retourner pour changer les données utilisées pour créer les entities.
 
-Validating Data Before Building Entities
-----------------------------------------
+Valider les Données Avant de Construire les Entities
+----------------------------------------------------
 
-The :doc:`/orm/validation` chapter has more information on how to use the
-validation features of CakePHP to ensure your data stays correct and consistent.
+Le chapitre :doc:`/orm/validation` recèle plus d'information sur l'utilisation
+des fonctionnalités de validation de CakePHP pour garantir que vos données
+restent correctes et cohérentes.
 
 Eviter les Attaques d'Assignement en Masse de Propriétés
 --------------------------------------------------------
@@ -586,10 +589,10 @@ propriétaire d'un article, ce qui entraînerait des effets indésirables::
     $entity = $this->patchEntity($entity, $data);
     $this->save($entity);
 
-Il y a deux façons de se protéger pour ce problème. La première est de définir
-les colonnes par défaut qui peuvent être définies en toute sécurité à partir
-d'une requête en utilisant la fonctionnalité d':ref:`entities-mass-assignment`
-dans les entities.
+Il y a deux façons de se protéger contre ce problème. La première est de
+définir les colonnes par défaut qui peuvent être définies en toute sécurité à
+partir d'une requête en utilisant la fonctionnalité
+d':ref:`entities-mass-assignment` dans les entities.
 
 La deuxième façon est d'utiliser l'option ``fieldList`` lors de la création ou
 la fusion de données dans une entity::
@@ -892,23 +895,25 @@ de l'association doit persister::
 
 Sans appel à ``dirty()``, les tags mis à jour ne seront pas sauvegardés.
 
-Often you'll find yourself wanting to make an association between two existing
-entities, eg. a user coauthoring an article. This is done by using the method
-``link()``, like this::
+Vous vous voudrez probablement souvent créer une association entre deux
+entities existantes, par exemple un utilisateur co-auteur d'un article.
+Cela est possible en utilisant la méthode ``link()`` comme ceci::
 
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
 
     $this->Articles->Users->link($article, [$user]);
 
-When saving belongsToMany Associations, it can be relevant to save some
-additional data to the Joint Table.  In the previous example of tags, it could
-be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
-be either ``upvote`` or ``downvote`` and is represented by a string.  The
-relation is between Users and Articles.
+Lors de la sauvegarde d'associations belongsToMany, il peut être pertinent de
+sauvegarder des données additionnelles dans la table de jointure. Dans
+l'exemple précédent des tags, ça pourrait être le type de vote ``vote_type``
+de la personne qui a voté sur cet article. Le ``vote_type`` peut être
+``upvote`` ou ``downvote`` et est représenté par une chaîne de caractères. La
+relation est entre Users et Articles.
 
-Saving that association, and the ``vote_type`` is done by first adding some data
-to ``_joinData`` and then saving the association with ``link()``, example::
+La sauvegarde de cette association et du ``vote_type`` est réalisée en ajoutant
+tout d'abord des données à ``_joinData`` et ensuite en sauvegardant
+l'association avec ``link()``, par exemple::
 
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
@@ -1046,7 +1051,7 @@ des requêtes préparées sous le capot::
         $this->updateAll([$expression], ['published' => true]);
     }
 
-Une mise à jour en masse sera considérée comme un succès si 1 ou plusieurs
+Une mise à jour en masse sera considérée comme un succès si une ou plusieurs
 lignes sont mises à jour.
 
 .. warning::
