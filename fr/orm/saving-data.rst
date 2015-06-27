@@ -397,7 +397,7 @@ ou n'importe qu'elle association::
     ]);
 
 Patcher des HasMany et BelongsToMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme expliqué dans la section précédente, les données requêtées doivent suivre
 la structure de votre entity. La méthode ``patchEntity()`` est également capable
@@ -572,7 +572,7 @@ Valider les Données Avant de Construire les Entities
 ----------------------------------------------------
 
 Le chapitre :doc:`/orm/validation` recèle plus d'information sur l'utilisation
-des fonctionnalité de validation de CakePHP pour garantir que vous données
+des fonctionnalités de validation de CakePHP pour garantir que vos données
 restent correctes et cohérentes.
 
 Eviter les Attaques d'Assignement en Masse de Propriétés
@@ -906,7 +906,7 @@ Cela est possible en utilisant la méthode ``link()`` comme ceci::
 
 Lors de la sauvegarde d'associations belongsToMany, il peut être pertinent de
 sauvegarder des données additionnelles dans la table de jointure. Dans
-l'exemple précédent des tags, ça pourrait être le  type de vote ``vote_type``
+l'exemple précédent des tags, ça pourrait être le type de vote ``vote_type``
 de la personne qui a voté sur cet article. Le ``vote_type`` peut être
 ``upvote`` ou ``downvote`` et est représenté par une chaîne de caractères. La
 relation est entre Users et Articles.

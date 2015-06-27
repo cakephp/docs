@@ -297,7 +297,7 @@ Utiliser votre Helper
 ---------------------
 
 Une fois que vous avez créé votre helper et l'avez placé dans
-**src/View/Helper/**, vous spouvez le charger dans vos vues::
+**src/View/Helper/**, vous pouvez le charger dans vos vues::
 
     class AppView extends View
     {
@@ -309,7 +309,7 @@ Une fois que vous avez créé votre helper et l'avez placé dans
     }
 
 Une fois que votre helper est chargé, vous pouvez l'utiliser dans vos vues en
-accédant l'attribut de vue correspondant::
+accédant à l'attribut de vue correspondant::
 Une fois que votre controller est au courant de cette nouvelle classe, vous
 pouvez l'utiliser dans vos vues en accédant à un objet nommé d'après le
 helper::

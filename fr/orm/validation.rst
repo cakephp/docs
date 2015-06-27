@@ -473,7 +473,7 @@ requête::
         return $validator;
     }
 
-la validation **n'est pas** déclenchée lorsqu'une propriété est définie
+La validation **n'est pas** déclenchée lorsqu'une propriété est définie
 directement dans vos entities::
 
     $userEntity->email = 'pas un email!!';
@@ -499,7 +499,7 @@ fois que ``save()`` ou ``delete()`` sont appelées::
 
 Alors que la validation est conçue pour les données provenant directement
 d'utilisateurs, les règles d'application sont spécifiques aux transitions de
-donnée générées à l'intérieur de l'application::
+données générées à l'intérieur de l'application::
 
     // Dans src/Model/Table/OrdersTable.php
     public function buildRules(RulesChecker $rules)
@@ -522,10 +522,10 @@ donnée générées à l'intérieur de l'application::
 Utiliser la Validation en tant que Règle d'Application
 ------------------------------------------------------
 
-Dans certaines situations, vous voudrez peut-être lancer les mêmes routines de
+Dans certaines situations, vous voudrez peut-être lancer les mêmes routines
 pour des données générées à la fois par un utilisateur et à l'intérieur de
 votre application. Cela peut se produire lorsque vous exécutez un script CLI
-qui défini des propriétés directement dans des entities::
+qui définit des propriétés directement dans des entities::
 
     // Dans src/Model/Table/UsersTable.php
     public function validationDefault(Validator $validator)

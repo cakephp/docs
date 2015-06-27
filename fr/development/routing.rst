@@ -33,7 +33,7 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
     // En utilisant la méthode statique.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-``Router`` fourni deux interfaces pour connecter les routes. La méthode statique
+``Router`` fournit deux interfaces pour connecter les routes. La méthode statique
 est une interface retro-compatible, alors que le builder scopé (lié la portée)
 offre une syntaxe plus laconique pour construire des routes multiples, et de
 meilleures performances.
