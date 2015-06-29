@@ -88,7 +88,7 @@ elasticsearch.
 Document Objects
 ================
 
-Like the ORM, the Elasticsearch ODM uses :doc:`/orm/entities` like classes. The
+Like the ORM, the Elasticsearch ODM uses :doc:`/orm/entities`-like classes. The
 base class you should inherit from is ``Cake\ElasticSearch\Document``. Document
 classes are found in the ``Model\Document`` namespace in your application or
 plugin::
