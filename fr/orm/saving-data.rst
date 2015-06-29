@@ -180,7 +180,8 @@ empêcher les données d'être validées, passez l'option ``'validate' => false`
     $entity = $articles->newEntity($data, ['validate' => false]);
 
 Lors de la construction de formulaires qui sauvegardent des associations
-imbriquées, vous devez définir quelles associations doivent être marshalled::
+imbriquées, vous devez définir quelles associations doivent être prises en
+compte::
 
     // Dans un controller
     $articles = TableRegistry::get('Articles');
@@ -191,7 +192,7 @@ imbriquées, vous devez définir quelles associations doivent être marshalled::
     ]);
 
 Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
-Comments doivent être marshalled. D'une autre façon, vous pouvez utiliser
+Comments doivent être prises en compte. D'une autre façon, vous pouvez utiliser
 la notation par point pour être plus bref::
 
     // Dans un controller.
