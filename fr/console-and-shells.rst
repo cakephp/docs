@@ -198,7 +198,8 @@ de ligne de commande. Dans notre méthode ``hey_there``, nous utilisons aussi
 ``$this->args``, cette propriété contient un tableau de tous les arguments
 de position fournis à une commande. Vous pouvez aussi utiliser des switches
 ou des options sur les shells des applications, ils sont disponibles dans la
-variable ``$this->params``, mais nous verrons ça bientôt.
+variable ``$this->params`` et avec la méthode ``param()``, mais nous verrons
+ça bientôt.
 
 Lorsque vous utilisez la méthode ``main()``, vous n'êtes pas capable d'utiliser
 les arguments de position ou les paramètres. Cela parce que le premier argument
@@ -907,6 +908,13 @@ API de Shell
 .. php:method:: clear()
 
     Efface la sortie courante étant affichée.
+
+.. php:method:: param($name)
+
+    Récupère la valeur d'une option/paramètre. Va retourner null si le
+    paramètre n'existe pas.
+
+    .. versionadded:: 2.7
 
 .. php:method:: createFile($path, $contents)
 
