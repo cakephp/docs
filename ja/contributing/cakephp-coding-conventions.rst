@@ -1,22 +1,27 @@
 コーディング規約
-################
+#################
 
-Cakeの開発者は以下のコーディング規約を使います。
+CakePHP の開発者は以下のコーディング規約を使います。
 
-その他のCakeのコンポーネント(訳注:原文 *CakeIngredients* 、ケーキの材料のこと)の開発でも同じ規約に従うことが推奨されます。
+その他の CakePHP のコンポーネント(訳注:原文 *CakeIngredients* 、ケーキの材料のこと)の開発でも同じ規約に従うことが推奨されます。
 
 `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ を使って、\
 コードが規約に沿っているかどうかをチェックすることができます。
 
+言語
+=====
+
+全てのコードやコメントは、英語で書かなければなりません。
+
 新しい機能の追加
-================
+=================
 
 新しい機能は、そのテストが無い限り、追加してはいけません。
 このテストはレポジトリにコミットされる前にパスする必要があります。
 
 インデント
-==========
+===========
 
 インデントには単一のタブが用いられます。
 
@@ -39,8 +44,19 @@ Cakeの開発者は以下のコーディング規約を使います。
         }
     }
 
+行の長さ
+=========
+
+コードが読みやすいように約 100 文字までに行の長さを保つことを推奨します。
+行の長さは、120 文字以内でなければなりません。
+
+要約すると:
+
+* 100 文字が優し目の上限値。
+* 120 文字が厳し目の上限値。
+
 制御構造
-========
+=========
 
 制御構造は例えば "``if``"、"``for``"、"``foreach``"、"``while``"、"``switch``"などです。
 下記に、 "``if``" の例を示します::
@@ -88,7 +104,7 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 
 三項演算子
-----------
+-----------
 
 三項演算子は、三項演算子全体が1行に収まる場合に許容されます。
 長い三項演算子は ``if else`` ステートメントに分割するべきです。
@@ -103,11 +119,11 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 
 ビューファイル
---------------
+---------------
 
-ビューファイル(拡張子が .ctp のファイル)内では、開発者は、キーワードの制御構造を使用する必要があります。
+ビューファイル (拡張子が .ctp のファイル) 内では、開発者は、キーワードの制御構造を使用する必要があります。
 キーワードの制御構造を使うと、複雑なビューファイルが読みやすくなります。
-制御構造は、大きいPHPブロック内、または別々のPHPタグに含めることができます::
+制御構造は、大きい PHP ブロック内、または別々の PHP タグに含めることができます::
 
     <?php
     if ($isAdmin):
@@ -121,7 +137,7 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 
 比較
-====
+=====
 
 値の比較は、常に可能な限り厳密に行うようにしてください。もし厳格でないテストが意図的なものであれば、
 混乱を避けるためにコメントを残しておいたほうがいいかもしれません。
@@ -145,7 +161,7 @@ Cakeの開発者は以下のコーディング規約を使います。
     }
 
 関数の呼び出し
-==============
+===============
 
 関数は、関数の名前と開き括弧の間に空白を入れて呼び出してはいけません。
 関数呼び出しの引数各々に対して単一の空白がある必要があります::
@@ -155,7 +171,7 @@ Cakeの開発者は以下のコーディング規約を使います。
 上記をご覧の通り、イコール記号(=)の両サイドには単一の空白がある必要があります。
 
 メソッドの定義
-==============
+===============
 
 メソッドの定義の例::
 
@@ -167,7 +183,8 @@ Cakeの開発者は以下のコーディング規約を使います。
     }
 
 デフォルトを用いた引数は、関数の定義の最後に置く必要があります。
-関数は何かを、少なくともtrueかfalseを、関数呼び出しが成功したかどうかを判定できるように、返すように作ってみてください::
+関数は何かを、少なくとも ``true`` か ``false`` を、
+関数呼び出しが成功したかどうかを判定できるように、返すように作ってみてください::
 
     public function connection($dns, $persistent = false) {
         if (is_array($dns)) {
@@ -188,7 +205,7 @@ Cakeの開発者は以下のコーディング規約を使います。
 ------------------
 
 オブジェクトや配列を期待する引数はタイプヒンティングを指定することができます。
-しかしながらタイプヒンティングはコストフリーではないので、publicメソッドにだけ指定します::
+しかしながらタイプヒンティングはコストフリーではないので、public メソッドにだけ指定します::
 
     /**
      * メソッドの説明。
@@ -223,57 +240,180 @@ Cakeの開発者は以下のコーディング規約を使います。
         ->subject('A great message')
         ->send();
 
-コードのコメント
-================
+ドキュメントブロック
+====================
 
 全てのコメントは英語で書かれ、コードのコメントブロックを明確な方法で記述する必要があります。
 
+ファイルヘッダのドキュメントブロック
+------------------------------------
+
+全ての PHP ファイルは、以下のようにファイルヘッダのドキュメントブロックが
+含まれていなければなりません::
+
+    <?php
+    /**
+    * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+    * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    *
+    * Licensed under The MIT License
+    * For full copyright and license information, please see the LICENSE.txt
+    * Redistributions of files must retain the above copyright notice.
+    *
+    * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+    * @link          http://cakephp.org CakePHP(tm) Project
+    * @since         X.Y.Z
+    * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+    */
+
 コメントは以下の `phpDocumentor <http://phpdoc.org>`_ タグを含めることができます:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@license <http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html>`_
+
+クラスのドキュメントブロック
+----------------------------
+
+クラスのドキュメントブロックは以下の通り::
+
+    /**
+     * Short description of the class.
+     *
+     * Long description of class.
+     * Can use multiple lines.
+     *
+     * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+     * @see Bar
+     * @link http://book.cakephp.org/2.0/en/foo.html
+     */
+    class Foo {
+
+    }
+
+クラスのドキュメントブロックは、以下の `phpDocumentor <http://phpdoc.org>`_ タグを
+含めることができます:
+
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+   ``@version <vector> <description>`` を使用して、 ``version`` と ``description`` は必須です。
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+
+プロパティのドキュメントブロック
+--------------------------------
+
+プロパティのドキュメントブロックは以下の通り::
+
+    /**
+     * @var string|null Description of property.
+     *
+     * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use $_bla instead.
+     * @see Bar::$_bla
+     * @link http://book.cakephp.org/2.0/en/foo.html#properties
+     */
+    protected $_bar = null;
+
+プロパティのドキュメントブロックは、以下の `phpDocumentor <http://phpdoc.org>`_ タグを
+含めることができます:
+
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   ``@version <vector> <description>`` を使用して、 ``version`` と ``description`` は必須です。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@var <http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html>`_
 
-PhpDocタグはJavaのJavaDocタグによく似ています。
-タグはドキュメントブロックの行の最初のもののみ処理されます。
-例を挙げます::
+メソッド/関数のドキュメントブロック
+-----------------------------------
 
-    /**
-     * タグの例。
-     *
-     * @author このタグは解析されますが、この@versionは無視されます
-     * @version 1.0 このタグも解析されます
-     */
+メソッドと関数のドキュメントブロックは以下の通り::
 
-::
 
     /**
-     * インラインphpDocタグの例。
+     * Short description of the method.
      *
-     * この関数は世界征服のためにfoo()を使って身を粉にして働きます。
+     * Long description of method.
+     * Can use multiple lines.
      *
-     * @return void
-     */
-    function bar() {
-    }
+     * @param string $param2 first parameter.
+     * @param array|null $param2 Second parameter.
+     * @return array An array of cakes.
+     * @throws Exception If something goes wrong.
+     *
+     * @link http://book.cakephp.org/2.0/en/foo.html#bar
+     * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
+     * @see Bar::baz
+     /*
+     public function bar($param1, $param2 = null) {
+     }
+
+メソッドと関数のドキュメントブロックは、以下の `phpDocumentor <http://phpdoc.org>`_ タグを
+含めることができます:
+
+*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+   ``@version <vector> <description>`` を使用して、 ``version`` と ``description`` は必須です。
+*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
+*  `@return <http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html>`_
+*  `@throws <http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html>`_
+*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@uses <http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html>`_
+
+変数の型
+---------
+
+ドキュメントブロック中で使用する変数の型は:
+
+型
+    説明
+mixed
+    未定義 (もしくは複数) の型の変数。
+int
+    integer 型の変数 (整数)。
+float
+    float 型 (浮動小数点数)。
+bool
+    論理型 (true か false)。
+string
+    文字列型。(" " や ' ' で囲まれた値)
+null
+    ヌル型。通常、他の型と併用します。
+array
+    配列型。
+obuject
+    オブジェクト型。可能であれば定義されたクラス名が使用されるべきです。
+resource
+    リソース型。(例えば、 mysql\_connect() の戻り値)
+    mixied 型として定義した時、不明 (*unknown*) なのか取りうる型なのかを
+    示すべきであることを覚えておいてください。
+callable
+    呼び出し可能な関数。
+
+パイプ文字列を使って型を組み合わせます::
+
+    int|bool
+
+２つ以上の型の場合は、 ``mixed`` を使用することが最も一般的です。
+
+オブジェクト自身が戻り値の場合、例えば連鎖させる場合、代わりに ``$this`` を使うべきです::
 
     /**
      * Foo function.
      *
-     * @return void
+     * @return $this
      */
-    function foo() {
+    public function foo() {
+        return $this;
     }
 
-ファイルの最初のブロック以外のコメントブロックは、常に新しい行を先に置く必要があります。
 
 ファイルの読み込み
 ==================
@@ -292,8 +432,8 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 `require\_once <http://php.net/require_once>`_
 関数のみを常に使用してください。
 
-PHPタグ
-=======
+PHP タグ
+========
 
 常にショートタグ(``<? ?>``)の代わりに、ロングタグ(``<?php ?>``)を使ってください。
 
@@ -321,8 +461,8 @@ PHPタグ
 
 変数名はできる限り説明的に、しかしできる限り短くもしてください。
 通常の変数は小文字で始まり、複数の単語の場合はキャメルバックで書く必要があります。
-オブジェクトを参照する変数は大文字で始まり、何らかの方法で変数がオブジェクトとなっているクラスに関連したものになるべきです。
-例::
+オブジェクトを参照する変数は大文字で始まり、何らかの方法で変数がオブジェクトと
+なっているクラスに関連したものになるべきです。例::
 
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
@@ -332,8 +472,8 @@ PHPタグ
 メンバのアクセス権(*visibility*)
 --------------------------------
 
-メソッドと変数の為の、PHP5のprivateとprotectedキーワードを使用してください。
-加えて、protectedなメソッドまたは変数の名前は単一のアンダースコア(``_``)から始まります。
+メソッドと変数の為の、PHP5 の private と protected キーワードを使用してください。
+加えて、protected なメソッドまたは変数の名前は単一のアンダースコア(``_``)から始まります。
 例::
 
     class A {
@@ -344,7 +484,7 @@ PHPタグ
         }
     }
 
-privateなメソッドまたは変数の名前は二つののアンダースコア(``__``)から始まります。
+private なメソッドまたは変数の名前は二つののアンダースコア(``__``)から始まります。
 例::
 
     class A {
@@ -355,21 +495,22 @@ privateなメソッドまたは変数の名前は二つののアンダースコ�
         }
     }
 
-privateなメソッドまたは変数を回避し、protectedなそれらを用いることを試してみて下さい。
-後者はサブクラスからアクセスや修正が可能です。一方で、privateでは拡張や再利用ができません。
-privateは、テストの実施もより難しくなります。
+private なメソッドまたは変数を回避し、protected なそれらを用いることを試してみて下さい。
+後者はサブクラスからアクセスや修正が可能です。一方で、private では拡張や再利用ができません。
+private は、テストの実施もより難しくなります。
 
 アドレスの例示
 --------------
 
-全てのURLとメールアドレスの例には、「example.com」、「example.org」、「example.net」を使用してください。
-例を挙げます:
+全ての URL とメールアドレスの例には、"example.com"、"example.org"、
+"example.net" を使用してください。例:
 
 *  Eメール: someone@example.com
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-"example.com" ドメインはこの(:rfc:`2606` をみてください)為に予約されており、ドキュメント内の説明や例として使うことが推奨されています。
+"example.com" ドメインはこの(:rfc:`2606` をみてください)為に予約されており、
+ドキュメント内の説明や例として使うことが推奨されています。
 
 ファイル
 --------
@@ -377,41 +518,6 @@ privateは、テストの実施もより難しくなります。
 クラスを含まないファイルの名前は、小文字でアンダースコア化される必要があります。例::
 
     long_file_name.php
-
-変数の型
---------
-
-ドキュメントブロックの中で使う変数の型:
-
-型
-    説明
-mixed
-    未定義(または複数)の型の変数。
-int
-    Integer型の変数(整数)。
-float
-    Float型(小数点数)。
-bool
-    論理型(trueまたはfalse)。
-string
-    文字列型(""か' 'に入る値)。
-null
-    Null型。他の型と一緒に使用することが多いでしょう。
-array
-    配列型。
-object
-    オブジェクト型。可能なら特定のクラス名を指定するべきです。
-resource
-    リソース型(例えばmysql\_connect()による返り値)。
-    型をmixedに指定する場合、不明(*unknown*)なのか、取りうる型が何なのかを指し示すべきということを覚えていてください。
-callable
-    呼び出し可能な関数。
-
-パイプ文字によって複数の型を指定することができます。::
-
-    int|bool
-
-ふたつ以上の型の場合は ``mixed`` を指定するのが良いでしょう。
 
 キャスト
 --------
@@ -421,17 +527,20 @@ callable
 型
     説明
 (bool)
-		booleanにキャスト。
+		boolean にキャスト。
 (int)
-		integerにキャスト。
+		integer にキャスト。
 (float)
-		floatにキャスト。
+		float にキャスト。
 (string)
-		stringにキャスト。
+		string にキャスト。
 (array)
-		arrayにキャスト。
+		array にキャスト。
 (object)
-		objectにキャスト。
+		object にキャスト。
+
+できれば、 ``intval($var)`` の代わりに ``(int)$var`` 、
+``floatval($var)`` の代わりに ``(float)$var`` を使用してください。
 
 定数
 ----
@@ -444,3 +553,8 @@ callable
 例::
 
     define('LONG_NAMED_CONSTANT', 2);
+
+
+.. meta::
+    :title lang=ja: コーディング規約
+    :keywords lang=ja: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers

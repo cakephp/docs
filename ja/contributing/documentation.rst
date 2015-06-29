@@ -44,12 +44,6 @@ CakePHP のドキュメントは、
 
 例えば、 **en/file.rst** に新しい英語のファイルが作られた場合:
 
-..
- - Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
- - Delete the content, but keeping the ``title``, ``meta`` information and
-  eventual ``toc-tree`` elements. The following note will be added while nobody
-  has translated the file::
-
 - 他の全ての言語のファイルを追加します : **fr/file.rst**, **zh/file.rst**, ...
 - ``title`` と ``meta`` 情報と最後に ``toc-tree`` 要素を保ったままで、内容を削除します。
   誰かがファイルを翻訳するまでは、以下の注意書きが追加されます::
@@ -254,7 +248,7 @@ ReST (Re Structured Text) は markdown や textile と同様のプレーンテ�
         続きの内容..
 
     他の場所で、 ``:ref:`ラベル名``` を用いて上記のセクションを参照することができます。
-    リンクのテキストはリンクの先にあるタイトルになります。また、 
+    リンクのテキストはリンクの先にあるタイトルになります。また、
     ``:ref:`リンクテキスト <ラベル名>``` として自由にリンクのテキストを指定することができます。
 
 クラスとその内容を記述する
@@ -416,7 +410,7 @@ sphinx の警告 (*Admonitions*) は、まさにそのために使われます�
   ディレクティブの内容は完結した文章で書かれ、また全ての適切な句読点を含める必要があります。
 * ``.. versionadded:: X.Y.Z`` "version added" 警告は、上記の機能が
   ``X.Y.Z`` バージョンで追加された新しい機能であることを示すために使用されます。
-* ``.. deprecated:: X.Y.Z`` "version added" 警告の反対で、"deprecated" 警告は、 
+* ``.. deprecated:: X.Y.Z`` "version added" 警告の反対で、"deprecated" 警告は、
   ``X.Y.Z`` バージョンから非推奨になった機能の告知のために使用されます。
 
 全ての警告は同じようになります::
