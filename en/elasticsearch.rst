@@ -1,7 +1,7 @@
 ElasticSearch
 #############
 
-The ElasticSearch plugin provides an ORM like abstraction on top of
+The ElasticSearch plugin provides an ORM-like abstraction on top of
 `elasticsearch <https://www.elastic.co/products/elasticsearch>`_. The plugin
 provides features that make testing, indexing documents and searching your
 indexes easier.
@@ -15,12 +15,13 @@ following::
 
     php composer.phar require cakephp/elasticsearch "@stable"
 
-You will need to add the following line to your application's bootstrap.php file::
+You will need to add the following line to your application's
+**config/bootstrap.php** file::
 
     Plugin::load('ElasticSearch', ['bootstrap' => true]);
 
 Additionally, you will need to configure the 'elastic' datasource connection in
-your ``config/app.php`` file. An example configuration would be::
+your **config/app.php** file. An example configuration would be::
 
     // in config/app.php
     'Datasources' => [
@@ -39,8 +40,8 @@ Overview
 
 The elasticsearch plugin makes it easier to interact with an elasticsearch index
 and provides an interface similar to the :doc:`/orm`. To get started you should
-create a 'Type' object. Type objects are the 'Repository' or table like class in
-elasticsearch::
+create a ``Type`` object. ``Type`` objects are the "Repository" or table-like
+class in elasticsearch::
 
     // in src/Model/Type/ArticlesType.php
     namespace App\Model\Type;
@@ -87,7 +88,7 @@ elasticsearch.
 Document Objects
 ================
 
-Like the ORM, the Elasticsearch ODM, uses :doc:`/orm/entities` like classes. The
+Like the ORM, the Elasticsearch ODM uses :doc:`/orm/entities`-like classes. The
 base class you should inherit from is ``Cake\ElasticSearch\Document``. Document
 classes are found in the ``Model\Document`` namespace in your application or
 plugin::
@@ -164,8 +165,8 @@ to marshall using the ``associated`` key::
 
 Saving a document will trigger the following events:
 
-* ``Model.beforeSave`` - Fired before the document is saved. By stopping this
-  event you can prevent the save operation from happening.
+* ``Model.beforeSave`` - Fired before the document is saved. You can prevent the
+  save operation from happening by stopping this event.
 * ``Model.buildRules`` - Fired when the rules checker is built for the first
   time.
 * ``Model.afterSave`` - Fired after the document is saved.
@@ -244,7 +245,7 @@ Getting Type Instances
 ======================
 
 Like the ORM, the elasticsearch plugin provides a factory/registry for getting
-Type instances::
+``Type`` instances::
 
     use Cake\ElasticSearch\TypeRegistry;
 
