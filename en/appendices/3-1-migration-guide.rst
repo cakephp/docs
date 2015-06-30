@@ -39,6 +39,11 @@ FlashComponent
   or ``__call()`` method. This means that the structure in the Session for
   stored Flash messages has changed.
 
+CsrfComponent
+-------------
+
+- CSRF cookie expiry time can now be set as a ``strtotime()`` compatible value.
+
 Network
 =======
 
