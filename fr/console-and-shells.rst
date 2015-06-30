@@ -677,11 +677,10 @@ pour vérifier les flags de boléens::
         // faire quelque chose
     }
 
-    // as of 2.7
+    // Depuis 2.7
     if ($this->param('verbose')) {
-        // do something
+        // faire quelque chose
     }
-
 
 Puisque les options boléennes sont toujours définies à ``true`` ou à
 ``false``, vous pouvez omettre les méthodes de vérification supplémentaires.

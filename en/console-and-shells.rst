@@ -625,9 +625,9 @@ checks for boolean flags::
         // do something
     }
 
-    // Depuis 2.7
+    // as of 2.7
     if ($this->param('verbose')) {
-        // faire quelque chose
+        // do something
     }
 
 Since the boolean options are always defined as ``true`` or
