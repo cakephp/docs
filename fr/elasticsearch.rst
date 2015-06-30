@@ -15,13 +15,13 @@ composer.json), lancez ce qui suit::
 
     php composer.phar require cakephp/elasticsearch "@stable"
 
-Vous devrez ajouter la ligne suivante au fichier bootstrap.php de votre
-application::
+Vous devrez ajouter la ligne suivante au fichier **config/bootstrap.php** de
+votre application::
 
     Plugin::load('ElasticSearch', ['bootstrap' => true]);
 
 De plus, vous devrez configurer la connection à la source de donnée 'elastic'
-dans votre fichier ``config/app.php``. Un exemple de configuration serait::
+dans votre fichier **config/app.php**. Un exemple de configuration serait::
 
     // Dans config/app.php
     'Datasources' => [
@@ -40,8 +40,8 @@ Vue d'Ensemble
 
 Le plugin elasticsearch facilite l'interaction avec un index elasticsearch
 et fournit une interface similaire à celle de l':doc:`/orm`. Pour commencer,
-vous devrez créer un objet 'Type'. Les objets Type sont le 'Repository' ou la
-classe de type table dans elasticsearch::
+vous devrez créer un objet ``Type``. Les objets ``Type`` sont le "Repository"
+ou la classe de type table dans elasticsearch::
 
     // Dans src/Model/Type/ArticlesType.php
     namespace App\Model\Type;
@@ -256,7 +256,7 @@ Récupérer les Instances Type
 ============================
 
 Comme pour l'ORM, le plugin elasticsearch fournit un factory/registre pour
-récupérer les instances Type::
+récupérer les instances ``Type``::
 
     use Cake\ElasticSearch\TypeRegistry;
 
