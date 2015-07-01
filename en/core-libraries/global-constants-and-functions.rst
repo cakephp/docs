@@ -130,6 +130,11 @@ such as debugging and translating content.
 
     Convenience wrapper for ``print_r()``, with the addition of
     wrapping ``<pre>`` tags around the output.
+    
+.. php:function:: pj(mixed $var)
+
+    json pretty print convenience function, with the addition of
+    wrapping ``<pre>`` tags around the output.
 
 Core Definition Constants
 =========================
