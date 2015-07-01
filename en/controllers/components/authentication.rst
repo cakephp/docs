@@ -474,7 +474,7 @@ can configure the AuthComponent as follows::
                         'className' => 'Fallback',
                         'hashers' => [
                           'Default', 
-                          'Weak' => ['type' => 'sha1']
+                          'Weak' => ['hashType' => 'sha1']
                         ]
                     ]
                 ]
