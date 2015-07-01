@@ -125,7 +125,13 @@ such as debugging and translating content.
     does not have a dot, then index 0 will be ``null``.
 
     Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
+ 
+.. php:function:: namespaceSplit(string $class)   
 
+    Split the namespace from the classname.
+    
+    Commonly used like ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
+    
 .. php:function:: pr(mixed $var)
 
     Convenience wrapper for ``print_r()``, with the addition of
@@ -133,8 +139,10 @@ such as debugging and translating content.
     
 .. php:function:: pj(mixed $var)
 
-    json pretty print convenience function, with the addition of
+    JSON pretty print convenience function, with the addition of
     wrapping ``<pre>`` tags around the output.
+    
+    It is meant for debugging the JSON representation of objects and arrays.
 
 Core Definition Constants
 =========================
