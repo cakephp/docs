@@ -500,7 +500,7 @@ aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
         }
     }
 
-Dans notre exemple, nous avons créer deux méthodes, une pour envoyer l'email de
+Dans notre exemple, nous avons créé deux méthodes, une pour envoyer l'email de
 bienvenue et l'autre pour envoyer un email de réinitialisation de mot de passe.
 Chacune de ces méthodes prend une ``Entity`` ``User`` et utilise ses propriétés
 pour configurer chacun des emails.
@@ -520,7 +520,7 @@ chose suivante::
     $this->getMailer('User')->send('welcome', [$user]);
 
 Si vous voulez complétement séparer l'envoi de l'email de bienvenue du code de
-l'application, vous pourriez utiliser votre ``UserMailer`` via l'évènement
+l'application, vous pouvez utiliser votre ``UserMailer`` via l'évènement
 ``Model.afterSave``. En utilisant un évènement, vous pouvez complètement
 séparer la logique d'envoi d'emails du reste de votre logique "utilisateurs".
 Vous pourriez par exemple ajouter ce qui suit à votre ``UserMailer``::
