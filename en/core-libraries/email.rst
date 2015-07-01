@@ -453,14 +453,16 @@ following::
     {
         public function welcome($user)
         {
-            $this->subject = sprintf('Welcome %s', $user->name);
-            $this->to = $user->email;
+            $this->_email->profile('default');
+            $this->_email->to($user->email);
+            $this->_email->subject(sprintf('Welcome %s', $user->name));
         }
 
         public function resetPassword($user)
         {
-            $this->subject = 'Reset password';
-            $this->to = $user->email;
+            $this->_email->profile('default');
+            $this->_email->to($user->email);
+            $this->_email->subject('Reset password');
             $this->set(['token' => $user->token]);
         }
     }
