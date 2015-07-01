@@ -461,7 +461,7 @@ Changing Hashing Algorithms
 
 CakePHP provides a clean way to migrate your users' passwords from one algorithm
 to another, this is achieved through the ``FallbackPasswordHasher`` class.
-Assuming you are using ``LegacyPasswordHasher`` from the previous example, you
+Assuming you are migrating your app from CakePHP 2.x which uses `sha1` password hashes, you
 can configure the AuthComponent as follows::
 
     public function initialize()
@@ -472,7 +472,10 @@ can configure the AuthComponent as follows::
                 'Form' => [
                     'passwordHasher' => [
                         'className' => 'Fallback',
-                        'hashers' => ['Default', 'Legacy']
+                        'hashers' => [
+                          'Default', 
+                          'Weak' => ['hashType' => 'sha1']
+                        ]
                     ]
                 ]
             ]
