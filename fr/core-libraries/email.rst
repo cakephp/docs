@@ -465,18 +465,18 @@ de nom d'hôte dans un environnement CLI)::
 Un id de message valide peut permettre à ce message de ne pas finir dans un
 dossier de spam.
 
-Creating Reusable Emails
-========================
+Créer des emails réutilisables
+==============================
 
-Mailers allow you to create reusable emails throughout your application. They
-can also be used to contain multiple email configurations in one location. This
-helps keep your code DRYer and keeps email configuration noise out of other
-areas in your application.
+Les ``Mailers`` vous permettent de créer des emails réutilisables pour votre
+application. Ils peuvent aussi servir à contenir plusieurs configurations
+d'emails en un seul et même endroit. Cela vous permet de garder votre code
+DRY ainsi que la configuration d'emails en dehors des autres parties
+constituant votre application.
 
-In this example we will be creating a ``Mailer`` that contains user-related
-emails. To create our ``UserMailer``, create the file
-**src/Mailer/UserMailer.php**. The contents of the file should look like the
-following::
+Dans cet exemple, vous allez créer un ``Mailer`` qui contient des emails liés
+aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
+**src/Mailer/UserMailer.php**. Le contenu de ce fichier devra ressembler à ceci::
 
     namespace App\Mailer;
 
@@ -486,25 +486,29 @@ following::
     {
         public function welcome($user)
         {
-            $this->subject = sprintf('Welcome %s', $user->name);
-            $this->to = $user->email;
+            $this->_email->profile('default');
+            $this->_email->to($user->email);
+            $this->_email->subject(sprintf('Welcome %s', $user->name));
         }
 
         public function resetPassword($user)
         {
-            $this->subject = 'Reset password';
-            $this->to = $user->email;
+            $this->_email->profile('default');
+            $this->_email->to($user->email);
+            $this->_email->subject('Reset password');
             $this->set(['token' => $user->token]);
         }
     }
 
-In our example we have created two methods, one for sending a welcome email, and
-another for sending a password reset email. Each of these methods expect a user
-``Entity`` and utilizes its properties for configuring each email.
+Dans notre exemple, nous avons créer deux méthodes, une pour envoyer l'email de
+bienvenue et l'autre pour envoyer un email de réinitialisation de mot de passe.
+Chacune de ces méthodes prend une ``Entity`` ``User`` et utilise ses propriétés
+pour configurer chacun des emails.
 
-We are now able to use our ``UserMailer`` to send out our user-related emails
-from anywhere in our application. For example, if we wanted to send our welcome
-email we could do the following::
+Vous pouvez maintenant utiliser votre ``UserMailer`` pour envoyer tous les
+emails liés aux utilisateurs depuis n'importe où dans l'application. Par
+exemple, si vous souhaitez envoyer l'email de bienvenue, vous pouvez faire la
+chose suivante::
 
     use Cake\Mailer\MailerAwareTrait;
 
@@ -515,11 +519,11 @@ email we could do the following::
 
     $this->getMailer('User')->send('welcome', [$user]);
 
-If we wanted to completely separate sending a user their welcome email from our
-application's code, we can have our ``UserMailer`` subscribe to the
-``Model.afterSave`` event. By subcsribing to an event, we can keep our
-application's user-related classes completely free of email-related logic and
-instructions. For example, we could add the following to our ``UserMailer``::
+Si vous voulez complétement séparer l'envoi de l'email de bienvenue du code de
+l'application, vous pourriez utiliser votre ``UserMailer`` via l'évènement
+``Model.afterSave``. En utilisant un évènement, vous pouvez complètement
+séparer la logique d'envoi d'emails du reste de votre logique "utilisateurs".
+Vous pourriez par exemple ajouter ce qui suit à votre ``UserMailer``::
 
     public function implementedEvents()
     {
