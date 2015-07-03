@@ -820,13 +820,13 @@ instance of the ``MapReduce`` routine it is running::
 
 In the above example ``$mapper`` is calculating the status of an article, either
 published or unpublished, then it calls ``emitIntermediate()`` on the
-``MapReduce`` instance. The method stores the article in the list of articles
+``MapReduce`` instance. This method stores the article in the list of articles
 labelled as either published or unpublished.
 
 The next step in the map-reduce process is to consolidate the final results. For
 each status created in the mapper, the ``$reducer`` function will be called so
 you can do any extra processing. This function will receive the list of articles
-in a particular ``bucket`` as the first parameter, the name of the ``bucket`` it
+in a particular "bucket" as the first parameter, the name of the "bucket" it
 needs to process as the second parameter, and again, as in the ``mapper()``
 function, the instance of the ``MapReduce`` routine as the third parameter. In
 our example, we did not have to do any extra processing, so we just ``emit()``
