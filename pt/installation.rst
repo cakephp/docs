@@ -3,9 +3,9 @@ Instalação
 
 O CakePHP é rápido e fácil de instalar. Os requisitos mínimos são um servidor
 web e uma cópia do CakePHP, só isso! Apesar deste manual focar principalmente na
-configuração do Apache (porquê ele é o mais simples de instalar e configurar),
-o CakePHP vai ser executado em uma série de servidores web como nginx,
-LightHTTPD, ou Microsoft IIS.
+configuração do Apache (porquê ele é o mais simples de instalar
+e configurar), o CakePHP vai ser executado em uma série de servidores web como
+nginx, LightHTTPD, ou Microsoft IIS.
 
 Requisitos
 ==========
@@ -18,19 +18,23 @@ Requisitos
 
 .. note::
 
-    Tanto no XAMPP quanto no WAMP, as extensões mcrypt e mbstring são setadas por padrão.
+    Tanto no XAMPP quanto no WAMP, as extensões mcrypt e mbstring são setadas
+    por padrão.
 
-    Se você estiver usando o XAMPP, já tem a extensão intl inclusa, mas é preciso descomentar a linha 
-    ``extension=php_intl.dll`` no arquivo ``php.ini`` e então, reiniciar o servidor através do painel de controle do XAMPP.
+    Se você estiver usando o XAMPP, já tem a extensão intl inclusa, mas
+    é preciso descomentar a linha ``extension=php_intl.dll`` no arquivo
+    ``php.ini`` e então, reiniciar o servidor através do painel de controle do
+    XAMPP.
 
-    Caso você esteja usando o WAMP, a extensão intl está "ativa" por padrão, mas não está funcional.
-    Para fazê-la funcionar, você deve ir à pasta do php (que por padrão é)
-    ``C:\wamp\bin\php\php{version}``, copiar todos os arquivos que se pareçam com
-    ``icu***.dll`` e colá-los no diretório "bin" do apache
-    ``C:\wamp\bin\apache\apache{version}\bin``. Reiniciando todos os serviços a extensão já deve ficar ok.
+    Caso você esteja usando o WAMP, a extensão intl está "ativa" por padrão, mas
+    não está funcional.  Para fazê-la funcionar, você deve ir à pasta do php
+    (que por padrão é) ``C:\wamp\bin\php\php{version}``, copiar todos os
+    arquivos que se pareçam com ``icu***.dll`` e colá-los no diretório "bin" do
+    apache ``C:\wamp\bin\apache\apache{version}\bin``. Reiniciando todos os
+    serviços a extensão já deve ficar ok.
 
-Apesar de um mecanismo de banco de dados não ser exigido, nós imaginamos que a
-maioria das aplicações irá utilizar um. O CakePHP suporta uma variedade de
+Apesar de um mecanismo de banco de dados não ser exigido, nós imaginamos que
+a maioria das aplicações irá utilizar um. O CakePHP suporta uma variedade de
 mecanismos de armazenamento de banco de dados:
 
 -  MySQL (5.1.10 ou superior)
