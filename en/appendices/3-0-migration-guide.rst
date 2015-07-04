@@ -917,7 +917,7 @@ and reduce the problems people had in the past:
   no longer generate id attributes.
 - The ``inputDefaults`` option has been removed from ``create()``.
 - Options ``default`` and ``onsubmit`` of ``create()`` have been removed. Instead
-  one should use javascript event binding or set all required js code for ``onsubmit``.
+  one should use JavaScript event binding or set all required js code for ``onsubmit``.
 - ``end()`` can no longer make buttons. You should create buttons with
   ``button()`` or ``submit()``.
 - ``FormHelper::tagIsInvalid()`` has been removed. Use ``isFieldError()``
@@ -1036,16 +1036,16 @@ JsHelper
 --------
 
 - ``JsHelper`` and all associated engines have been removed. It could only
-  generate a very small subset of javascript code for selected library and
-  hence trying to generate all javascript code using just the helper often
-  became an impediment. It's now recommended to directly use javascript library
+  generate a very small subset of JavaScript code for selected library and
+  hence trying to generate all JavaScript code using just the helper often
+  became an impediment. It's now recommended to directly use JavaScript library
   of your choice.
 
 CacheHelper Removed
 -------------------
 
 CacheHelper has been removed. The caching functionality it provided was
-non-standard, limited and incompatible with non-html layouts and data views.
+non-standard, limited and incompatible with non-HTML layouts and data views.
 These limitations meant a full rebuild would be necessary. Edge Side Includes
 have become a standardized way to implement the functionality CacheHelper used
 to provide. However, implementing `Edge Side Includes
@@ -1166,7 +1166,7 @@ Inflector
 
 - The default value for ``$replacement`` argument of :php:meth:`Cake\\Utility\\Inflector::slug()`
   has been changed from underscore (``_``) to dash (``-``). Using dashes to
-  separate words in urls is the popular choice and also recommended by Google.
+  separate words in URLs is the popular choice and also recommended by Google.
 
 - Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
   If you use custom transliterations you will need to update your code. Instead

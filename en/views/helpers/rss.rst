@@ -13,7 +13,7 @@ Creating an RSS Feed with the RssHelper
 This example assumes you have a Articles Controller, Articles Table and an
 Article Entity already created and want to make an alternative view for RSS.
 
-Creating an xml/rss version of ``articles/index`` is a snap with CakePHP.
+Creating an XML/RSS version of ``articles/index`` is a snap with CakePHP.
 After a few simple steps you can simply append the desired extension .rss to
 ``articles/index`` making your URL ``articles/index.rss``. Before we jump too
 far ahead trying to get our webservice up and running we need to do a few
@@ -26,7 +26,7 @@ In the call above we've activated the .rss extension. When using
 :php:meth:`Cake\\Routing\\Router::extensions()` you can pass a string or an
 array of extensions as first argument. This will activate each
 extension/content-type for use in your application. Now when the address
-``articles/index.rss`` is requested you will get an xml version of
+``articles/index.rss`` is requested you will get an XML version of
 your ``articles/index``. However, first we need to edit the controller to
 add in the rss-specific code.
 

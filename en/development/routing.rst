@@ -44,7 +44,7 @@ an article's content::
 
     Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-The above route will accept any url looking like ``/articles/15`` and invoke the
+The above route will accept any URL looking like ``/articles/15`` and invoke the
 method ``view(15)`` in the ``ArticlesController``. This will not, though,
 prevent people from trying to access URLs looking like ``/articles/foobar``. If
 you wish, you can restring some parameters to conform to a regular expression::
@@ -56,7 +56,7 @@ you wish, you can restring some parameters to conform to a regular expression::
     );
 
 The previous example changed the star matcher by a new placeholder ``:id``.
-Using placeholders allows us to validate parts of the url, in this case we used
+Using placeholders allows us to validate parts of the URL, in this case we used
 the ``\d+`` regular expression so that only digits are matched. Finally, we told
 the Router to treat the ``id`` placeholder as a function argument to the
 ``view()`` function by specifying the ``pass`` option. More on using this
@@ -205,7 +205,7 @@ made available in the :ref:`passed-arguments` array.
 
 When generating URLs, routes are used too. Using
 ``['controller' => 'Users', 'action' => 'some_action', 5]`` as
-a url will output ``/cooks/some_action/5`` if the above route is the
+a URL will output ``/cooks/some_action/5`` if the above route is the
 first match found.
 
 .. _route-elements:
@@ -237,7 +237,7 @@ identify controller names in URLs. The ``:id`` element is a custom
 route element, and must be further clarified by specifying a
 matching regular expression in the third parameter of connect().
 
-CakePHP does not automatically produce lowercased urls when using the
+CakePHP does not automatically produce lowercased URLs when using the
 ``:controller`` parameter. If you need this, the above example could be
 rewritten like so::
 
