@@ -1166,7 +1166,7 @@ Inflector
 
 - The default value for ``$replacement`` argument of :php:meth:`Cake\\Utility\\Inflector::slug()`
   has been changed from underscore (``_``) to dash (``-``). Using dashes to
-  separate words in urls is the popular choice and also recommended by Google.
+  separate words in URLs is the popular choice and also recommended by Google.
 
 - Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
   If you use custom transliterations you will need to update your code. Instead
