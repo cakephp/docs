@@ -334,6 +334,27 @@ your views. A basic example of session usage would be::
     $session = $this->request->session();
     $name = $session->read('User.name');
 
+In order to access session object in component, you can use :php:class:`Cake\Controller\ComponentRegistry` to get the session object::
+
+    namespace App\Controller\Component;
+
+    use Cake\Controller\Component;
+    use Cake\Controller\ComponentRegistry;
+
+    class CustomComponent extends Component
+    {
+        protected $_session;
+
+        public function __construct(ComponentRegistry $registry, array $config = [])
+        {
+            parent::__construct($registry, $config);
+
+            // get session object.
+            $this->_session = $registry->getController()->request->session();
+            $name = $this->_session->read('User.name');
+        }
+    }
+
 Reading & Writing Session Data
 ==============================
 
