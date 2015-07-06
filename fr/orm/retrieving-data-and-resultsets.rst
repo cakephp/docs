@@ -863,7 +863,7 @@ reçoit une instance de la routine ``MapReduce`` qu'elle lance::
 
 Dans l'exemple ci-dessus, ``$mapper`` calcule le statut d'un article, soit
 publié (published) soit non publié (unpublished), ensuite il appelle
-``emitIntermediate()`` sur l'instance ``MapReduce``. La méthode stocke
+``emitIntermediate()`` sur l'instance ``MapReduce``. Cette méthode stocke
 l'article dans la liste des articles avec pour label soit publié (published)
 ou non publié (unpublished).
 
@@ -871,7 +871,7 @@ La prochaine étape dans le processus de map-reduce  est de consolider les
 résultats finaux. Pour chaque statut créé dans le mapper, la fonction
 ``$reducer`` va être appelée donc vous pouvez faire des traitements
 supplémentaires. Cette fonction va recevoir la liste des articles dans un
-``bucket`` particulier en premier paramètre, le nom du ``bucket`` dont il a
+"bucket" particulier en premier paramètre, le nom du "bucket" dont il a
 besoin pour faire le traitement en second paramètre, et encore une fois, comme
 dans la fonction ``mapper()``, l'instance de la routine ``MapReduce`` en
 troisième paramètre. Dans notre exemple, nous n'avons pas fait de traitement

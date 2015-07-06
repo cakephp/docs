@@ -45,7 +45,7 @@ d'une route pour voir le contenu d'un article::
 
     Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-La route ci-dessus accepte toute url qui ressemble à ``/articles/15`` et appelle
+La route ci-dessus accepte toute URL qui ressemble à ``/articles/15`` et appelle
 la méthode ``view(15)`` dans ``ArticlesController``. En revanche, ceci ne va pas
 empêcher les visiteurs d'accéder à une URLs ressemblant à
 ``/articles/foobar``. Si vous le souhaitez, vous pouvez restreindre certains
@@ -59,7 +59,7 @@ paramètres grâce à une expression régulière::
 
 Dans l'exemple précédent, le caractère jocker ``*`` est remplacé par un
 placeholder ``:id``. Utiliser les placeholders nous permet de valider les
-parties de l'url, dans ce cas, nous utilisons l'expression régulière ``\d+``
+parties de l'URL, dans ce cas, nous utilisons l'expression régulière ``\d+``
 pour que seuls les chiffres fonctionnent. Finalement, nous disons au Router de
 traiter le placeholder ``id`` comme un argument de fonction pour la fonction
 ``view()`` en spécifiant l'option ``pass``. Vous pourrez en voir plus sur leur
@@ -250,7 +250,7 @@ les noms de controller dans les URLs. L'élément ``:id`` est un élément de ro
 personnalisé, et doit être clarifié plus loin en spécifiant une expression
 régulière correspondante dans le troisième paramètre de connect().
 
-CakePHP ne produit pas automatiquement d'urls en minuscule quand vous utilisez
+CakePHP ne produit pas automatiquement d'URLs en minuscule quand vous utilisez
 le paramètre ``:controller``. Si vous avez besoin de ceci, l'exemple ci-dessus
 peut être réécrit en::
 

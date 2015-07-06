@@ -15,7 +15,7 @@ Cet exemple suppose que vous ayez un Controller Articles, une Table Articles
 et une Entity Article déjà créés et que vous voulez créer une vue alternative
 pour les flux RSS.
 
-Créer une version xml/rss de ``articles/index`` est vraiment simple avec
+Créer une version XML/RSS de ``articles/index`` est vraiment simple avec
 CakePHP. Après quelques étapes faciles, vous pouvez tout simplement ajouter
 l'extension .rss demandée à ``articles/index`` pour en faire votre URL
 ``articles/index.rss``. Avant d'aller plus loin en essayant d'initialiser et

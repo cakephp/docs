@@ -101,7 +101,7 @@ Astuces de traducteurs
 - Ne soumettez pas de traductions partielles.
 - Ne modifiez pas une section avec un changement en attente.
 - N'utilisez pas d'
-  `entités html <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `entités HTML <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   pour les caractères accentués, le livre utilise UTF-8.
 - Ne changez pas les balises (HTML) de façon significative ou n'ajoutez pas
   de nouveau contenu.
