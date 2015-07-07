@@ -307,13 +307,8 @@ method has not been implemented yet, so let's do that. In
 
     public function findTagged(Query $query, array $options)
     {
-        $fields = [
-            'Bookmarks.id',
-            'Bookmarks.title',
-            'Bookmarks.url',
-        ];
         return $this->find()
-            ->distinct($fields)
+            ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
