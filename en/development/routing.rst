@@ -1014,7 +1014,7 @@ Calling fallbacks like so::
 Is equivalent to the following explicit calls::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'InflectedRoute']);
 
 .. note::
 
