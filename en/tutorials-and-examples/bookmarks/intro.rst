@@ -298,7 +298,8 @@ add the following::
 
     public function tags()
     {
-        // Get the passed URL parameters from the request.
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
         $tags = $this->request->params['pass'];
 
         // Use the BookmarksTable to find tagged bookmarks.
@@ -312,6 +313,9 @@ add the following::
             'tags' => $tags
         ]);
     }
+
+To access other parts of the request data, consult the :ref:`cake-request`
+section.
 
 Creating the Finder Method
 --------------------------
@@ -341,7 +345,10 @@ array of options as parameters. Finders can manipulate the query and add any
 required conditions or criteria. When complete, finder methods must return
 a modified query object. In our finder we've leveraged the ``distinct()`` and
 ``matching()`` methods which allow us to find distinct bookmarks that have
-a 'matching' tag.
+a 'matching' tag. The ``matching()`` method accepts an `anonymous function
+<http://php.net/manual/en/functions.anonymous.php>`_ that receives a query
+builder as its argument. Inside the callback we use the query builder to define
+conditions that will filter bookmarks that have specific tags.
 
 Creating the View
 -----------------
