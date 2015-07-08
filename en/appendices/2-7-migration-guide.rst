@@ -88,6 +88,12 @@ SessionComponent
 - :php:meth:`SessionComponent::setFlash()` has been deprecated. You should use
   :php:class:`FlashComponent` instead.
 
+RequestHandlerComponent
+-----------------------
+
+- The ``text/plain`` Accept header is no longer automatically mapped to the
+  ``csv`` response type. This is a backport from 3.0
+
 View
 ====
 
