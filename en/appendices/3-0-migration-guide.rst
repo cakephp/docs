@@ -783,7 +783,6 @@ The following View folders have been renamed to avoid naming collisions with con
 
 - ``Layouts`` is now ``Layout``
 - ``Elements`` is now ``Element``
-- ``Scaffolds`` is now ``Scaffold``
 - ``Errors`` is now ``Error``
 - ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
 
