@@ -306,10 +306,12 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use FlashComponent's magic ``__call()`` method to set a message to a session
-variable, which will be displayed on the page after redirection. In the layout
-we have ``<?= $this->Flash->render() ?>`` which displays the message and clears
-the corresponding session variable. The controller's
+We use FlashComponent's ``success()`` and ``error()`` methods to set a message
+to a session variable. These methods are provided using PHP's `magic method
+features <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
+Flash messages will be displayed on the page after redirection. In the layout we
+have ``<?= $this->Flash->render() ?>`` which displays the message and clears the
+corresponding session variable. The controller's
 :php:meth:`Cake\\Controller\\Controller::redirect` function redirects to another
 URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
 index action of the articles controller. You can refer to
