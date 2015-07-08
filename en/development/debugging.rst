@@ -13,7 +13,7 @@ Basic Debugging
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
 The ``debug()`` function is a globally available function that works
-similarly to the PHP function ``print\_r()``. The ``debug()`` function
+similarly to the PHP function ``print_r()``. The ``debug()`` function
 allows you to show the contents of a variable in a number of
 different ways. First, if you'd like data to be shown in an
 HTML-friendly way, set the second parameter to ``true``. The function
@@ -26,7 +26,7 @@ has been set to ``true``.
 .. php:function stackTrace()
 
 The ``stackTrace()`` function is available globally, and allows you to output
-a stack trace whereever the function is called.
+a stack trace wherever the function is called.
 
 Using the Debugger Class
 ========================
