@@ -78,7 +78,7 @@ it on a 2.x application.
 .. warning::
     Make sure you have backups/version control for your application's code.
 
-    It is also a good idea to take backup/commit after each sub-command.
+    It is also a good idea to make a backup/commits after each sub-command.
 
 To start off run the ``locations`` command::
 
