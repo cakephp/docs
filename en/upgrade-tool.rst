@@ -1,9 +1,9 @@
 Upgrade Tool
 ############
 
-Upgrading to CakePHP 3 from CakePHP 2.x requires several mechanical
-transformations, such as adding namespaces. To assist in making these mechanical
-changes easier, CakePHP provides a CLI based upgrade tool.
+Upgrading to CakePHP 3 from CakePHP 2.x requires a number of transformations
+that can easily be automated, such as adding namespaces. To assist in making
+these mechanical changes easier, CakePHP provides a CLI based upgrade tool.
 
 Installation
 ============
