@@ -60,6 +60,7 @@ Contents
     debug-kit
     migrations
     elasticsearch
+    upgrade-tool
     appendices
 
 .. todolist::
