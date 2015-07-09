@@ -185,7 +185,7 @@ Possible keys for hasOne association arrays include:
   hasOne relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with
   '\_id'. In the example above it would default to 'user\_id'.
-- **bindingKey**: The name of the column in the currebt table, that will be used
+- **bindingKey**: The name of the column in the current table, that will be used
   for matching the ``foreignKey``. If not specified, the primary key (for example
   the id column of the ``Users`` table) will be used.
 - **conditions**: an array of find() compatible conditions
