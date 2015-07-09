@@ -202,7 +202,7 @@ utiliser l'application de
 générer rapidement une application basique. Dans votre terminal, lancez
 les commandes suivantes::
 
-    // Sur windows vous devez utiliser bin\cake à la place.
+    // Sur Windows vous devez utiliser bin\cake à la place.
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags

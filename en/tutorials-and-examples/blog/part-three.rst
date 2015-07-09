@@ -111,7 +111,7 @@ The bake tool has created all your files in a snap. You can give them a quick
 read if you want re-familiarize yourself with how CakePHP works.
 
 .. note::
-    If you are on windows remember to use \ instead of /.
+    If you are on Windows remember to use \ instead of /.
 
 Attach TreeBehavior to CategoriesTable
 ======================================
