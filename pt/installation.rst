@@ -145,7 +145,7 @@ Depois de reiniciar seu servidor web, você deve ver as mudanças refletidas em
 
 .. note::
 
-    Se você estiver no windows, separe os caminhos de inclusão com ; ao invés de :
+    Se você estiver no Windows, separe os caminhos de inclusão com ; ao invés de :
 
 Finalizando a definição do seu ``include_path`` suas aplicações devem estar prontas para
 encontrar o CakePHP automaticamente.

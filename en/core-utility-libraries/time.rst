@@ -50,7 +50,7 @@ Formatting
     :rtype: string
 
     Converts a string representing the format for the function
-    strftime and returns a windows safe and i18n aware format.
+    strftime and returns a Windows safe and i18n aware format.
 
 .. php:method:: dayAsSql($dateString, $field_name, $timezone = NULL)
 

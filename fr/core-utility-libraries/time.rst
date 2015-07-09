@@ -51,7 +51,7 @@ Formatage
     :rtype: string
 
     Convertit une chaîne de caractères représentant le format pour la fonction
-    strftime et retourne un format windows safe et i18n aware.
+    strftime et retourne un format Windows safe et i18n aware.
 
 .. php:method:: dayAsSql($dateString, $field_name, $timezone = NULL)
 
