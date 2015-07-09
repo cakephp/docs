@@ -427,7 +427,7 @@ que vous pouvez utiliser:
 * ``ConsoleOutput::COLOR`` - La sortie avec couleur enlève les codes en place.
 
 Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
-de la couleur. Sur les systèmes windows, la sortie simple est mise par défaut
+de la couleur. Sur les systèmes Windows, la sortie simple est mise par défaut
 sauf si la variable d'environnement ``ANSICON`` est présente.
 
 Configurer les options et générer de l'aide
@@ -1021,7 +1021,7 @@ API de Shell
 
     Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
     une sortie colorée.
-    Sur les systèmes windows, la sortie brute est la sortie par défaut sauf si
+    Sur les systèmes Windows, la sortie brute est la sortie par défaut sauf si
     la variable d'environnement ``ANSICON`` est présente.
 
 .. php:method:: overwrite($message = null, $newlines = 1, $size = null)

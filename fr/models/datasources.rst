@@ -310,7 +310,7 @@ pdo_sqlsrv. Cette extension PHP n'est pas inclue dans l'installation de base
 de PHP et doit être installée séparément.
 
 Le Client Native du Serveur SQL doit aussi être installé pour que l'extension
-fonctionne. Puisque le Client Native est disponible seulement pour windows,
+fonctionne. Puisque le Client Native est disponible seulement pour Windows,
 vous ne serez pas capable de l'installer sur Linux, Mac OS X ou FreeBSD.
 
 Donc si les erreurs de la source de données Sqlserver sortent::

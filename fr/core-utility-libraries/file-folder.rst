@@ -62,7 +62,7 @@ API de Folder
 .. php:attr:: mode
 
     Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne
-    fait rien sur les machines windows.
+    fait rien sur les machines Windows.
     
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
@@ -543,7 +543,7 @@ L'API de File
 
     Prépare une chaîne de caractères ascii pour l'écriture. Convertit les
     lignes de fin en un terminator correct pour la plateforme courante. Si
-    c'est windows "\r\n" sera utilisé, toutes les autres plateformes
+    c'est Windows "\r\n" sera utilisé, toutes les autres plateformes
     utiliseront "\n"
 
 .. php:method:: pwd()

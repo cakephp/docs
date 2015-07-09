@@ -123,7 +123,7 @@ CakePHP 应用程序。
 
 .. note::
 
-    如果是在 windows 系统中，用 ; 代替 : 分隔多个包含路径。
+    如果是在 Windows 系统中，用 ; 代替 : 分隔多个包含路径。
 
 一旦设置好 ``include_path`` ，应用程序应当能够自动找到 CakePHP。
 

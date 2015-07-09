@@ -159,7 +159,7 @@ dans ``phpinfo()``.
 
 .. note::
 
-    Si vous êtes sur windows, les chemins d'inclusion sont séparés par des
+    Si vous êtes sur Windows, les chemins d'inclusion sont séparés par des
     ; au lieu de :
 
 Une fois que vous avez configuré votre ``include_path``, vos applications

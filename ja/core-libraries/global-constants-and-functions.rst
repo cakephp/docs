@@ -367,9 +367,9 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
 .. php:const:: DS
 
-    .. Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+    .. Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on Windows.
 
-    PHP の DIRECTORY\_SEPARATOR (Linux の場合は / windows の場合は \\) のショートカット。
+    PHP の DIRECTORY\_SEPARATOR (Linux の場合は / Windows の場合は \\) のショートカット。
 
 .. php:const:: FULL_BASE_URL
 

@@ -62,7 +62,7 @@ Folder API
 .. php:attr:: mode
 
     Mode para ser usado quando criar a pasta. Padrão ``0755``. Isto não vale
-    para ambientes windows.
+    para ambientes Windows.
 
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
@@ -148,7 +148,7 @@ Folder API
 
     :rtype: string
 
-    Retorna o tipo de barras correto $path ('\\' para windows e
+    Retorna o tipo de barras correto $path ('\\' para Windows e
     '/' para outros).
 
 .. php:method:: create(string $pathname, integer $mode = false)

@@ -60,7 +60,7 @@ Folder API
 .. php:attr:: mode
 
     Mode to be used when creating folders. Defaults to ``0755``. Does nothing on
-    windows machines.
+    Windows machines.
 
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
