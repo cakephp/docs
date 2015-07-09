@@ -94,7 +94,7 @@ les tests exécutés et le nombre de tests réussis.
 
 .. note::
 
-    Si vous êtes sur un système windows, vous ne verrez probablement pas les
+    Si vous êtes sur un système Windows, vous ne verrez probablement pas les
     couleurs.
 
 Conventions des cas de Test

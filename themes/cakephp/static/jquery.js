@@ -3073,7 +3073,7 @@ jQuery.event = {
 
 		beforeunload: {
 			setup: function( data, namespaces, eventHandle ) {
-				// We only want to do this special case on windows
+				// We only want to do this special case on a window
 				if ( jQuery.isWindow( this ) ) {
 					this.onbeforeunload = eventHandle;
 				}

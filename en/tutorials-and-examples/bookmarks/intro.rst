@@ -191,7 +191,7 @@ Because our database is following the CakePHP conventions, we can use the
 :doc:`bake console </bake/usage>` application to quickly generate a basic
 application. In your command line run the following commands::
 
-    // On windows you'll need to use bin\cake instead.
+    // On Windows you'll need to use bin\cake instead.
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags
