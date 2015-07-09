@@ -191,9 +191,9 @@ Les clés possibles pour une association hasOne sont:
   relations hasOne multiples. La valeur par défaut de cette clé est le nom du
   model actuel (avec des underscores) suffixé avec '\_id'. Dans l'exemple
   ci-dessus la valeur par défaut aurait été 'user\_id'.
-- **bindingKey**: le nom de la colone dans la table courante, qui sera utilisée
+- **bindingKey**: le nom de la colonne dans la table courante, qui sera utilisée
   pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
-  primaire (par exemple la colone id de la table ``Users``) sera utilisée.
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau des conditions compatibles avec find() ou un
   fragment de code SQL tel que ``['Addresses.primary' => true]``.
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut
@@ -290,9 +290,9 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   C'est particulièrement pratique si vous avez besoin de définir plusieurs
   relations belongsTo au même model. La valeur par défaut pour cette clé est le
   nom au singulier de l'autre model avec des underscores, suffixé avec ``_id``.
-- **bindingKey**: le nom de la colone dans l'autre table, qui sera utilisée
+- **bindingKey**: le nom de la colonne dans l'autre table, qui sera utilisée
   pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
-  primaire (par exemple la colone id de la table ``Users``) sera utilisée.
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles find() ou de chaînes SQL
   comme ``['Users.active' => true]``
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut LEFT
@@ -379,9 +379,9 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   table. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
   du model actuel (avec des underscores) suffixé avec '\_id'.
-- **bindingKey**: le nom de la colone dans lae table courante, qui sera utilisée
+- **bindingKey**: le nom de la colonne dans la table courante, qui sera utilisée
   pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
-  primaire (par exemple la colone id de la table ``Users``) sera utilisée.
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles avec find() ou des
   chaînes SQL comme ``['Comments.visible' => true]``.
 - **sort**  un tableau compatible avec les clauses order de find() ou les
