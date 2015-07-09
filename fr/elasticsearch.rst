@@ -164,7 +164,7 @@ indexé::
     }
 
 Lors de la prise en compte d'un document, vous pouvez spécifier les documents
-integrés que vous souhaitez prendre en compte en utilisant la clé
+intégrés que vous souhaitez prendre en compte en utilisant la clé
 ``associated``::
 
     $article = $this->Articles->newEntity($data, ['associated' => ['Comments']]);
@@ -179,8 +179,8 @@ Sauvegarder un document va récupérer les events suivants:
 * ``Model.afterSave`` - Lancé après que le document est sauvegardé.
 
 .. note::
-    Il n'y a pas d'events pour les documents integrés, puisque le document
-    parent et tous ses documents integrés sont sauvegardés en une opération.
+    Il n'y a pas d'events pour les documents intégrés, puisque le document
+    parent et tous ses documents intégrés sont sauvegardés en une opération.
 
 
 Mettre à Jour les Documents Existants
@@ -208,15 +208,15 @@ spécifiques::
 
     $this->Articles->deleteAll(['user.name' => 'bob']);
 
-Documents Integrés
+Documents Intégrés
 ==================
 
-En définissant les documents integrés, vous pouvez attacher des classes entity
+En définissant les documents intégrés, vous pouvez attacher des classes entity
 à des chemins de propriété spécifique dans vos documents. Ceci vous permet
 de fournir un comportement personnalisé pour les documents dans un document
-parent. Par exemple, vous pouvez vouloir les commentaires integrés à un
+parent. Par exemple, vous pouvez vouloir les commentaires intégrés à un
 article pour avoir des méthodes spécifiques selon l'application. Vous pouvez
-utiliser ``embedOne`` et ``embedMany`` pour définir les documents integrés::
+utiliser ``embedOne`` et ``embedMany`` pour définir les documents intégrés::
 
     // Dans src/Model/Type/ArticlesType.php
     namespace App\Model\Type;
@@ -234,16 +234,16 @@ utiliser ``embedOne`` et ``embedMany`` pour définir les documents integrés::
         }
     }
 
-Ce qui au-dessus va créer deux documents integrés sur le document ``Article``.
-L'``User`` integré va convertir la propriété ``user`` en instances de
-``App\\Model\\Document\\User``. Pour récupérer les Commentaires integrés et
+Ce qui au-dessus va créer deux documents intégrés sur le document ``Article``.
+L'``User`` intégré va convertir la propriété ``user`` en instances de
+``App\\Model\\Document\\User``. Pour récupérer les Commentaires intégrés et
 utiliser un nom de classe qui ne correspond pas au nom de la propriété, nous
 pouvons utiliser l'option ``entityClass`` pour configurer un nom de classe
 personnalisé.
 
-Une fois que vous avez configuré nos documents integrés, les résultats de
+Une fois que vous avez configuré nos documents intégrés, les résultats de
 ``find()`` et ``get()`` vont retourner les objets avec les bonnes classes
-de document integré::
+de document intégré::
 
     $article = $this->Articles->get($id);
     // Instance de App\Model\Document\User
