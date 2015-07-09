@@ -3,11 +3,11 @@ Console Bake
 
 La console Bake de CakePHP est un autre outil permettant de réaliser son
 application rapidement. La console Bake peut créer chacun des ingrédients
-basiques de CakePHP : models, behaviors, views, helpers, components, cas de
-tests, fixtures et plugins. Et nous ne parlons pas seulement des squelettes de
-classes : Bake peut créer une application fonctionnelle complète en seulement
-quelques minutes. En réalité, Bake est une étape naturelle à suivre une fois
-qu'une application a été prototypée.
+basiques de CakePHP : models, behaviors, views, helpers, controllers,
+components, cas de tests, fixtures et plugins. Et nous ne parlons pas
+seulement des squelettes de classes : Bake peut créer une application
+fonctionnelle complète en seulement quelques minutes. En réalité, Bake est une
+étape naturelle à suivre une fois qu'une application a été prototypée.
 
 Installation
 ============

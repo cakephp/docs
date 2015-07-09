@@ -322,10 +322,12 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode magique ``__call()`` du Component Flash pour
-définir un message dans une variable de session et qui sera affiché dans la page
-juste après la redirection. Dans le layout, nous avons
-``<?= $this->Flash->render() ?>`` qui permet
+Nous utilisons les méthodes ``success()`` et ``error()`` pour définir un
+message dans une variable de session. Ces méthodes sont fournies via la
+`méthode magique _call()
+<http://php.net/manual/fr/language.oop5.overloading.php#object.call>`_
+de PHP. Les message Flash seront affichés dans la page juste après la redirection.
+Dans le layout, nous avons ``<?= $this->Flash->render() ?>`` qui permet
 d'afficher et d'effacer la variable correspondante. La méthode
 :php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de
 rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera

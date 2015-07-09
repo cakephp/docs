@@ -1066,7 +1066,7 @@ Appelez fallbacks comme ceci::
 Est équivalent à ces appels explicites::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'InflectedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'InflectedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'InflectedRoute']);
 
 .. note::
 
