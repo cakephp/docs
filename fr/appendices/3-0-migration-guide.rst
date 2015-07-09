@@ -862,7 +862,6 @@ avec les noms de controller:
 
 - ``Layouts`` est maintenant ``Layout``
 - ``Elements`` est maintenant ``Element``
-- ``Scaffolds`` est maintenant ``Scaffold``
 - ``Errors`` est maintenant ``Error``
 - ``Emails`` est maintenant ``Email`` (idem pour ``Email`` dans ``Layout``)
 
