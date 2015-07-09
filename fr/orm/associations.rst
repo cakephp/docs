@@ -1,8 +1,6 @@
 Associations - Lier les Tables Ensemble
 #######################################
 
-.. _table-associations:
-
 Définir les relations entre les différents objets dans votre application
 sera un processus naturel. Par exemple, un article peut avoir plusieurs
 commentaires, et appartenir à un auteur. Les Auteurs peuvent avoir plusieurs
@@ -188,11 +186,14 @@ Les clés possibles pour une association hasOne sont:
 - **className**: le nom de la classe de la table que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User a une Address', la
   valeur associée à la clé 'className' devra être 'Addresses'.
-- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre model.
+- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre table.
   Ceci sera particulièrement pratique si vous avez besoin de définir des
   relations hasOne multiples. La valeur par défaut de cette clé est le nom du
   model actuel (avec des underscores) suffixé avec '\_id'. Dans l'exemple
   ci-dessus la valeur par défaut aurait été 'user\_id'.
+- **bindingKey**: le nom de la colone dans la table courante, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colone id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau des conditions compatibles avec find() ou un
   fragment de code SQL tel que ``['Addresses.primary' => true]``.
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut
@@ -285,10 +286,13 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
 - **className**: le nom de classe du model associé au model courant. Si vous
   définissez une relation 'Profile belongsTo User', la clé className
   devra être 'Users'.
-- **foreignKey**: le nom de la clé étrangère trouvée dans le model courant.
+- **foreignKey**: le nom de la clé étrangère trouvée dans la table courante.
   C'est particulièrement pratique si vous avez besoin de définir plusieurs
   relations belongsTo au même model. La valeur par défaut pour cette clé est le
   nom au singulier de l'autre model avec des underscores, suffixé avec ``_id``.
+- **bindingKey**: le nom de la colone dans l'autre table, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colone id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles find() ou de chaînes SQL
   comme ``['Users.active' => true]``
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut LEFT
@@ -372,9 +376,12 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   (l'User a plusieurs Commentaires), la valeur associée à la clef 'className'
   devra être 'Comment'.
 - **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
-  model. Ceci sera particulièrement pratique si vous avez besoin de définir
+  table. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
-  du model actuel (avec des underscores) suffixé avec '\_id'
+  du model actuel (avec des underscores) suffixé avec '\_id'.
+- **bindingKey**: le nom de la colone dans lae table courante, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colone id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles avec find() ou des
   chaînes SQL comme ``['Comments.visible' => true]``.
 - **sort**  un tableau compatible avec les clauses order de find() ou les
