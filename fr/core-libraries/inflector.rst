@@ -19,16 +19,17 @@ Créer des Formes Pluriel et Singulier
 .. php:staticmethod:: singularize($singular)
 .. php:staticmethod:: pluralize($singular)
 
-Both ``pluralize`` and ``singularize()`` work on most English nouns. If you need
-to support other languages, you can use :ref:`inflection-configuration` to
-customize the rules used::
+``pluralize`` et ``singularize()`` fonctionnent pour la plupart des noms
+Anglais. Si vous devez supporter d'autres langues, vous pouvez utiliser la
+:ref:`inflection-configuration` pour personnaliser les règles utilisées::
 
     // Apples
     echo Inflector::pluralize('Apple');
 
 .. note::
 
-    ``pluralize()`` may not always correctly convert a noun that is already in its plural form.
+    ``pluralize()`` peut ne pas toujours convertir correctement un nom qui est déjà
+    sous sa forme plurielle.
 
 .. code-block:: php
 
@@ -37,7 +38,8 @@ customize the rules used::
 
 .. note::
 
-    ``singularize()`` may not always correctly convert a noun that is already in its singular form.
+    ``singularize()`` peut ne pas toujours convertir correctement un nom qui est déjà
+    sous sa forme singulière.
 
 Créer des Formes en CamelCase et en Underscore
 ==============================================
@@ -45,7 +47,7 @@ Créer des Formes en CamelCase et en Underscore
 .. php:staticmethod:: camelize($underscored)
 .. php:staticmethod:: underscore($camelCase)
 
-These methods are useful when creating class names, or property names::
+Ces méthodes sont utiles lors de la création de noms de classes ou de propriétés::
 
     // ApplePie
     Inflector::camelize('Apple_pie')
@@ -60,8 +62,8 @@ minuscules, mais ne contiendront pas d'underscore.
 Créer des Formes Lisibles par l'Homme
 =====================================
 
-This method is useful when converting underscored forms into "Title Case" forms
-for human readable values::
+Cette méthod eest utile pour convertir des formes avec underscore en forme
+"Title Case" pour être lisible par l'homme::
 
     // Apple Pie
     Inflector::humanize('apple_pie');
