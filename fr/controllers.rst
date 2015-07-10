@@ -318,7 +318,7 @@ rediriger vers un écran affichant le reçu. ::
 
     public function place_order()
     {
-        // Logic for finalizing order goes here
+        // Logique pour finaliser la commande
         if ($success) {
             return $this->redirect(
                 ['controller' => 'Orders', 'action' => 'thanks']
