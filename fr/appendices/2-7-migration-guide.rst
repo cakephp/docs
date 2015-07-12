@@ -91,6 +91,12 @@ SessionComponent
 - :php:meth:`SessionComponent::setFlash()` a été dépréciée. Vous devez utiliser
   :php:class:`FlashComponent` à la place.
 
+RequestHandlerComponent
+-----------------------
+
+- L'en-tête Accept ``text/plain`` n'est plus automatiquement relié à la
+  response de type ``csv``. C'est un portage de la version 3.0.
+
 View
 ====
 
