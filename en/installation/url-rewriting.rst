@@ -186,7 +186,7 @@ you will need PHP running as a FastCGI instance.
         }
     }
 
-If for some exotic reason you cannot change your root diretory and need to run 
+If for some exotic reason you cannot change your root directory and need to run 
 your project from a subfolder like example.com/subfolder/, you will have to inject
 "/webroot" in each request.
 
