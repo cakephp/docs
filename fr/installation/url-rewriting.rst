@@ -58,7 +58,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
    Le répertoire root de CakePHP (a besoin d'être copié dans votre document,
    cela redirige tout vers votre app CakePHP)::
-   
+
        <IfModule mod_rewrite.c>
           RewriteEngine on
           RewriteRule    ^$ app/webroot/    [L]
@@ -67,7 +67,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
    Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de votre
    application avec Bake)::
-   
+
        <IfModule mod_rewrite.c>
           RewriteEngine on
           RewriteRule    ^$    webroot/    [L]
@@ -142,14 +142,14 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
            RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
-       
+
    Ce qui est au-dessus va simplement empêcher les assets incorrects d'être
    envoyés à index.php et à la place d'afficher la page 404 de votre serveur
    web.
-   
+
    De plus, vous pouvez créer une page HTML 404 correspondante, ou utiliser la
    page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument``::
-       
+
        ErrorDocument 404 /404-not-found
 
 De belles URLs sur nginx
@@ -171,11 +171,11 @@ moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/app/webroot/;
         index  index.php;
-        
+
         access_log /var/www/example.com/log/access.log;
         error_log /var/www/example.com/log/error.log;
 
@@ -191,6 +191,21 @@ moins, vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
+
+Si pour une raison exotique vous ne pouvez pas changer votre répertoire racine
+et devez lancer votre projet à partir d'un sous-dossier comme
+example.com/subfolder/, vous devrez injecter "/webroot" dans chaque requête.
+
+::
+
+   location ~ ^/(subfolder)/(.*)? {
+      index  index.php;
+
+      set $new_uri /$1/webroot/$2;
+      try_files $new_uri $new_uri/ /$1/index.php?$args;
+
+      ... php handling ...
+   }
 
 Rewrites d'URL sur IIS7 (serveurs Windows)
 ==========================================
