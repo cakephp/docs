@@ -186,21 +186,20 @@ you will need PHP running as a FastCGI instance.
         }
     }
 
-If for some exotic reason you cannot change your root directory and need to run 
-your project from a subfolder like example.com/subfolder/, you will have to inject
-"/webroot" in each request.
+If for some exotic reason you cannot change your root directory and need to run
+your project from a subfolder like example.com/subfolder/, you will have to
+inject "/webroot" in each request.
 
 ::
 
    location ~ ^/(subfolder)/(.*)? {
       index  index.php;
-   
+
       set $new_uri /$1/webroot/$2;
       try_files $new_uri $new_uri/ /$1/index.php?$args;
-      
+
       ... php handling ...
    }
-
 
 URL Rewrites on IIS7 (Windows hosts)
 ====================================
