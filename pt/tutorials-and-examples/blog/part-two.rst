@@ -219,8 +219,7 @@ agora::
         }
     
         public function view($id = null) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
+            $this->set('post', $this->Post->findById($id));
         }
     }
 
@@ -267,9 +266,7 @@ Primeiramente, comece criando uma action ``add()`` no PostsController::
         }
     
         public function view($id) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
-    
+            $this->set('post', $this->Post->findById($id));
         }
     
         public function add() {
@@ -415,7 +412,7 @@ deve se parecer::
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
-            $this->request->data = $this->Post->read();
+            $this->request->data = $this->Post->findById($id));
         } else {
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash('Your post has been updated.');

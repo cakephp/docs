@@ -83,6 +83,9 @@ to the constructor of ``CakeEmail``::
     //or in constructor::
     $Email = new CakeEmail('default');
 
+    // Implicit 'default' config used as of 2.7
+    $Email = new CakeEmail();
+
 Instead of passing a string which matches the configuration name in ``EmailConfig``
 you can also just load an array of configs::
 

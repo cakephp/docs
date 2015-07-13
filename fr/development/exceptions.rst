@@ -208,7 +208,7 @@ Vous pouvez envoyer n'importe quelle exception HTTP liée à partir des actions
 de votre controller pour indiquer les états d'échec. Par exemple::
 
     public function view($id) {
-        $post = $this->Post->read(null, $id);
+        $post = $this->Post->findById($id);
         if (!$post) {
             throw new NotFoundException();
         }

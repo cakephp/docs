@@ -492,6 +492,14 @@ dans un contexte statique::
     Si $key est laissé à null, toutes les valeurs dans Configure seront
     retournées.
 
+.. php:staticmethod:: consume($key)
+
+    :param string $key: La clé à lire, peut utiliser une
+        valeur en :term:`notation avec points`
+
+    Lit et supprime une clé de Configure. C'est utile quand vous voulez
+    combiner la lecture et la suppression de valeurs en une seule opération.
+
 .. php:staticmethod:: check($key)
 
     :param string $key: La clé à vérifier.

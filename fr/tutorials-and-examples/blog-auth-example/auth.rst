@@ -40,13 +40,13 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'user::
         public $validate = array(
             'username' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'Un nom d\'utilisateur est requis'
                 )
             ),
             'password' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'Un mot de passe est requis'
                 )
             ),
@@ -78,11 +78,10 @@ de génération de code fournis avec CakePHP::
         }
 
         public function view($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
+            if (!$this->User->exists($id)) {
                 throw new NotFoundException(__('User invalide'));
             }
-            $this->set('user', $this->User->read(null, $id));
+            $this->set('user', $this->User->findById($id));
         }
 
         public function add() {
@@ -110,7 +109,7 @@ de génération de code fournis avec CakePHP::
                     $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
                 }
             } else {
-                $this->request->data = $this->User->read(null, $id);
+                $this->request->data = $this->User->findById($id);
                 unset($this->request->data['User']['password']);
             }
         }

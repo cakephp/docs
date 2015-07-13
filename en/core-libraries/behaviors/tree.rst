@@ -453,6 +453,30 @@ are a few more tree-orientated permutations at your disposal.
           [5] =>  "_Extreme fishing"
       )
 
+    .. php:method:: formatTreeList($results, $options=array())
+
+    .. versionadded:: 2.7
+
+    :param $results: Results of a find('all') call.
+    :param $options: Options to pass into.
+
+    This method will return data similar to
+    :ref:`model-find-list` but with a nested prefix that is specified
+    in the ``spacer`` option to show the structure of your data.
+
+    Supported options are:
+
+    * ``keyPath``: A string path to the key, i.e. "{n}.Post.id".
+    * ``valuePath``: A string path to the value, i.e. "{n}.Post.title".
+    * ``spacer``: The character or characters which will be repeated.
+
+    An example would be::
+
+        $results = $this->Category->find('all');
+        $results = $this->Category->formatTreeList($results, array(
+            'spacer' => '--'
+        ));
+
     .. php:method:: getParentNode()
 
     This convenience function will, as the name suggests, return the
@@ -771,6 +795,25 @@ Example output::
             )
     )
 
+Node Level (Depth)
+==================
+
+.. versionadded:: 2.7
+
+Knowing the depth of tree nodes can be useful when you want to retrieve nodes
+only upto a certain level for e.g. when generating menus. You can use the
+``level`` option to specify the field that will save level of each node.
+
+    public $actAs = array('Tree' => array(
+        'level' => 'level', // Defaults to null, i.e. no level saving
+    ));
+
+.. php:method:: getLevel($id)
+
+.. versionadded:: 2.7
+
+If you are not caching the level of nodes using the ``level`` option in settings,
+you can use this method to get level of a particular node.
 
 .. meta::
     :title lang=en: Tree

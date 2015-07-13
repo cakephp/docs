@@ -440,6 +440,8 @@ digest authentication with any other authentication strategies, it's also
 recommended that you store the digest password in a separate column,
 from the normal password hash::
 
+    App::uses('DigestAuthenticate', 'Controller/Component/Auth');
+    
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // make a password for digest auth.

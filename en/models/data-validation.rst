@@ -195,7 +195,7 @@ the login field. If it doesn't, validation will fail. The default
 value for this key is boolean false.
 
 ``required => true`` does not mean the same as the validation rule
-``notEmpty()``. ``required => true`` indicates that the array *key*
+``notBlank()``. ``required => true`` indicates that the array *key*
 must be present - it does not mean it must have a value. Therefore
 validation will fail if the field is not present in the dataset,
 but may (depending on the rule) succeed if the value submitted is
@@ -481,7 +481,7 @@ set. The first one is using the ``add`` method::
 
     // Inside a model class
     $this->validator()->add('password', 'required', array(
-        'rule' => 'notEmpty',
+        'rule' => 'notBlank',
         'required' => 'create'
     ));
 
@@ -491,7 +491,7 @@ multiple calls to add to create as many rules as you like::
     // Inside a model class
     $this->validator()
         ->add('password', 'required', array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ))
         ->add('password', 'size', array(
@@ -503,7 +503,7 @@ It is also possible to add multiple rules at once for a single field::
 
     $this->validator()->add('password', array(
         'required' => array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ),
         'size' => array(
@@ -1071,11 +1071,19 @@ with usage examples.
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
+    .. deprecated:: 2.7
+
+    Use ``notBlank`` instead.
+
+.. php:staticmethod:: notBlank(mixed $check)
+
+    .. versionadded:: 2.7
+
     The basic rule to ensure that a field is not empty. ::
 
         public $validate = array(
             'title' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'This field cannot be left blank'
             )
         );

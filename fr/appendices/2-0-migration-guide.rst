@@ -1227,6 +1227,9 @@ Le driver PDO va automatiquement echapper ces valeurs pour vous.
   MySQL, toutes les valeurs retournées d'un find auraient été numériques dans
   le passé, maintenant elles sont strictement des valeurs boléennes.
 
+Behaviors
+=========
+
 BehaviorCollection
 ------------------
 

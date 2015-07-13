@@ -79,10 +79,23 @@ chemin du répertoire de votre application::
         )
     ));
 
+Si vous utilisez les configurations par défaut de la session de php,
+rappelez-vous que session.gc_maxlifetime peut surcharger la configuration de
+votre timeout. Par défaut, il est à 24 minutes. Changez ceci dans vos
+configurations ini pour avoir des sessions plus longues::
+
+    Configure::write('Session', array(
+        'defaults' => 'php',
+        'timeout' => 2160, // 36 heures
+        'ini' => array(
+            'session.gc_maxlifetime' => 129600 // 36 heures
+        )
+    ));
+
 Gestionnaires de Session intégrés & configuration
 =================================================
 
-CakePHP est fourni avec plusieurs configurations de session intégrées. Vous
+CakePHP dispose de plusieurs configurations de session intégrées. Vous
 pouvez soit utiliser celles-ci comme base pour votre configuration de
 session, soit créer une solution complètement personnalisée.
 Pour utiliser les valeurs par défaut, définissez simplement la clé

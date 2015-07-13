@@ -51,6 +51,11 @@ all Session component methods wherever a name/key is used.
     Retrieve the value Green from the session. Reading data that does not exist
     will return null.
 
+.. php:method:: consume($name)
+
+    Read and delete a value from the Session. This is useful when you want to
+    combine reading and deleting values in a single operation.
+
 .. php:method:: check($name)
 
     Used to check if a Session variable has been set. Returns true on
@@ -84,7 +89,9 @@ Creating notification messages
 
 .. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
 
-    :rtype: void
+    .. deprecated:: 2.7.0
+        You should use :doc:`/core-libraries/components/flash` to
+        create flash messages. The setFlash() method will be removed in 3.0.0.
 
     Often in web applications, you will need to display a one-time notification
     message to the user after processing a form or acknowledging data.

@@ -184,7 +184,7 @@ and see your name printed out. Any public method not prefixed by an ``_`` is all
 called from the command line. In our ``hey_there`` method we also used ``$this->args``, this
 property contains an array of all the positional arguments provided to a command. You can
 also use switches or options on shell applications, these are available at ``$this->params``,
-but we'll cover that in a bit.
+and through the ``param()`` method, but we'll cover that in a bit.
 
 When using a ``main()`` method you won't be able to use the positional arguments
 or parameters. This is because the first positional argument or option is
@@ -625,6 +625,11 @@ checks for boolean flags::
         // do something
     }
 
+    // as of 2.7
+    if ($this->param('verbose')) {
+        // do something
+    }
+
 Since the boolean options are always defined as ``true`` or
 ``false`` you can omit additional check methods.
 
@@ -839,6 +844,13 @@ Shell API
 .. php:method:: clear()
 
     Clears the current output being displayed.
+
+.. php:method:: param($name)
+
+    Get the value of an option/parameter. Will return null if the parameter does
+    not exist.
+
+    .. versionadded:: 2.7
 
 .. php:method:: createFile($path, $contents)
 

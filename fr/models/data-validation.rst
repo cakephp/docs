@@ -192,7 +192,7 @@ données pour le champ 'login'. Dans le cas contraire, la validation
 échouera. La valeur par défaut de cette clé est le booléen 'false'.
 
 ``required => true`` ne signifie pas la même chose que la règle de validation
-``notEmpty()``. ``required => true`` indique que la *clé* du tableau doit être
+``notBlank()``. ``required => true`` indique que la *clé* du tableau doit être
 présente - cela ne veut pas dire qu'elle doit avoir une valeur. Par
 conséquent, la validation échouera si le champ n'est pas présent dans le jeu
 de données, mais pourra réussir (en fonction de la règle) si la valeur soumise
@@ -487,7 +487,7 @@ nouveaux champs à définir. Le premier est l'utilisation de la méthode ``add``
 
     // Dans une classe de model
     $this->validator()->add('password', 'required', array(
-        'rule' => 'notEmpty',
+        'rule' => 'notBlank',
         'required' => 'create'
     ));
 
@@ -498,7 +498,7 @@ souhaitez::
     // Dans une classe de model
     $this->validator()
         ->add('password', 'required', array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ))
         ->add('password', 'size', array(
@@ -511,7 +511,7 @@ champ unique::
 
     $this->validator()->add('password', array(
         'required' => array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ),
         'size' => array(
@@ -1077,11 +1077,19 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
+    .. deprecated:: 2.7
+
+    Utilisez ``notBlank`` à la place.
+
+.. php:staticmethod:: notBlank(mixed $check)
+
+    .. versionadded:: 2.7
+
     La règle de base pour s'assurer qu'un champ n'est pas vide. ::
 
         public $validate = array(
             'titre' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Ce champ ne peut pas rester vide'
             )
         );

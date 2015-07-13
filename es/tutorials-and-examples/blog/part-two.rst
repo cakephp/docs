@@ -221,8 +221,7 @@ Creemos esta acción para evitar el error::
         }
     
         public function view($id = null) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
+            $this->set('post', $this->Post->findById($id));
         }
     }
 
@@ -271,9 +270,7 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
         }
     
         public function view($id) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
-    
+            $this->set('post', $this->Post->findById($id));
         }
     
         public function add() {

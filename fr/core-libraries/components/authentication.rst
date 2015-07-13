@@ -171,8 +171,8 @@ ressemblerait à quelque chose comme. ::
         )
     );
 
-En plus de la configuration courante, l'authentification de base
-prend en charge les clés suivantes:
+En plus de la configuration courante, l'authentification de base prend en charge
+les clés suivantes:
 
 - ``realm`` Le domaine en cours d'authentification. Par défaut à
   ``env('SERVER_NAME')``.
@@ -481,6 +481,8 @@ l'authentification Digest avec d'autres stratégies d'authentifications, il
 est aussi recommandé de stocker le mot de passe  Digest dans une colonne
 séparée, pour le hachage normal de mot de passe::
 
+    App::uses('DigestAuthenticate', 'Controller/Component/Auth');
+
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // fabrique un mot de passe pour l'auth Digest.
@@ -506,9 +508,10 @@ vous connecter.
 
 Création de classes de hachage de mots de passe personnalisées
 --------------------------------------------------------------
-Les classes de hachage de mots de passe personnalisées doivent étendre la classe ``AbstractPasswordHasher``
-et implémenter les méthodes abstraites ``hash()`` et ``check()``.
-Dans ``app/Controller/Component/Auth/CustomPasswordHasher.php``, vous pourriez mettre ceci::
+Les classes de hachage de mots de passe personnalisées doivent étendre la classe
+``AbstractPasswordHasher`` et implémenter les méthodes abstraites ``hash()`` et
+``check()``. Dans ``app/Controller/Component/Auth/CustomPasswordHasher.php``,
+vous pourriez mettre ceci::
 
     App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
@@ -618,12 +621,12 @@ Vous configurez les gestionnaires d'autorisations via
 gestionnaires. L'utilisation de plusieurs gestionnaires vous donne la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés, ils sont appelés
-dans l'ordre dans lequel ils sont déclarés. Les gestionnaires devraient retourner
-false s'ils ne sont pas capables de vérifier les autorisations, ou bien si
-la vérification a échoué. Ils devraient retourner true s'ils
+dans l'ordre dans lequel ils sont déclarés. Les gestionnaires devraient
+retourner false s'ils ne sont pas capables de vérifier les autorisations, ou
+bien si la vérification a échoué. Ils devraient retourner true s'ils
 sont capables de vérifier correctement les autorisations. Les gestionnaires
-seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne true. Si toutes les
-vérifications échouent, l'utilisateur sera redirigé vers la page
+seront appelés dans l'ordre jusqu'à ce que l'un d'entre eux retourne true. Si
+toutes les vérifications échouent, l'utilisateur sera redirigé vers la page
 d'où il vient. Vous pouvez également stopper les autorisations
 en levant une exception. Vous aurez besoin de traiter toutes les exceptions
 levées, et de les manipuler.
@@ -1062,7 +1065,6 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
     Si l'utilisateur courant n'est pas connecté ou que la clé n'existe pas
     ``null`` sera retourné.
-
 
 .. meta::
     :title lang=fr: Authentification

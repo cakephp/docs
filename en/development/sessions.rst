@@ -68,6 +68,20 @@ Session cookie paths default to ``/`` in 2.0, to change this you can use the
         )
     ));
 
+If you are using php's default session settings, take note that
+session.gc_maxlifetime can override your setting for timeout. The default is
+24 minutes. Change this in your ini settings to get it to match longer
+sessions::
+
+    Configure::write('Session', array(
+        'defaults' => 'php',
+        'timeout' => 2160, // 36 hours
+        'ini' => array(
+            'session.gc_maxlifetime' => 129600 // 36 hours
+        )
+    ));
+
+
 Built-in Session handlers & configuration
 =========================================
 

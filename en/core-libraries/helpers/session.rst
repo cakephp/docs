@@ -30,6 +30,13 @@ used.
     Read from the Session. Returns a string or array depending on the
     contents of the session.
 
+.. php:method:: consume($name)
+
+    :rtype: mixed
+
+    Read and delete a value from the Session. This is useful when you want to
+    combine reading and deleting values in a single operation.
+
 .. php:method:: check(string $key)
 
     :rtype: boolean
@@ -54,7 +61,9 @@ Displaying notifications or flash messages
 
 .. php:method:: flash(string $key = 'flash', array $params = array())
 
-    :rtype: string
+    .. deprecated:: 2.7.0
+        You should use :doc:`/core-libraries/helpers/flash` to
+        render flash messages.
 
     As explained in :ref:`creating-notification-messages`, you can
     create one-time notifications for feedback. After creating messages

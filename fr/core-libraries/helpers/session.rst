@@ -15,7 +15,7 @@ Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec la :term:`notation avec points`,
 comme ci-dessous::
 
-    array('User' => 
+    array('User' =>
         array('username' => 'super@example.com')
     );
 
@@ -30,6 +30,13 @@ utilisée.
 
     Lire à partir de la Session. Retourne une chaîne de caractère ou un
     tableau dépendant des contenus de la session.
+
+.. php:method:: consume($name)
+
+    :rtype: mixed
+
+    Lit et supprime une valeur de Session. C'est utile quand vous voulez
+    combiner la lecture et la suppression de valeurs en une seule opération.
 
 .. php:method:: check(string $key)
 
@@ -55,7 +62,9 @@ Affichage de notifications ou de messages flash
 
 .. php:method:: flash(string $key = 'flash', array $params = array())
 
-    :rtype: string
+    .. deprecated:: 2.7.0
+        Vous devez utiliser :doc:`/core-libraries/helpers/flash` pour afficher
+        les messages flash.
 
     Comme expliqué dans :ref:`creating-notification-messages` vous pouvez
     créer des notifications uniques pour le feedback. Après avoir

@@ -198,7 +198,7 @@ You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example::
 
     public function view($id) {
-        $post = $this->Post->read(null, $id);
+        $post = $this->Post->findById($id);
         if (!$post) {
             throw new NotFoundException();
         }

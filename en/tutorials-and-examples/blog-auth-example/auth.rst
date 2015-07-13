@@ -36,13 +36,13 @@ validating any user data::
         public $validate = array(
             'username' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'A username is required'
                 )
             ),
             'password' => array(
                 'required' => array(
-                    'rule' => array('notEmpty'),
+                    'rule' => 'notBlank',
                     'message' => 'A password is required'
                 )
             ),
@@ -80,7 +80,7 @@ with CakePHP::
             if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
             }
-            $this->set('user', $this->User->read(null, $id));
+            $this->set('user', $this->User->findById($id));
         }
 
         public function add() {
@@ -110,7 +110,7 @@ with CakePHP::
                     __('The user could not be saved. Please, try again.')
                 );
             } else {
-                $this->request->data = $this->User->read(null, $id);
+                $this->request->data = $this->User->findById($id);
                 unset($this->request->data['User']['password']);
             }
         }
