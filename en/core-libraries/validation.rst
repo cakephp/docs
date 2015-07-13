@@ -216,6 +216,8 @@ not a particular rule should be applied::
         }
     ]);
 
+You can access the other submitted fields values using the ``$context['data']``
+array.
 The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty. You could also use the
 ``uploadedFile`` validation rule to create optional file upload inputs::
