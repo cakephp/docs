@@ -167,6 +167,21 @@ nginx はポピュラーなサーバーで、Apache よりも少ないシステ�
         }
     }
 
+もし、特殊な理由で、ルートディレクトリが変更できず、example.com/subfolder/ のように
+サブフォルダ以下でプロジェクトを実行する必要があるなら、全てのリクエストに "/webroot" を
+追加しなければなりません。
+
+::
+
+   location ~ ^/(subfolder)/(.*)? {
+      index  index.php;
+
+      set $new_uri /$1/webroot/$2;
+      try_files $new_uri $new_uri/ /$1/index.php?$args;
+
+      ... php handling ...
+   }
+
 IIS7(Windowsホスト)でのURL書き換え
 ==================================
 
