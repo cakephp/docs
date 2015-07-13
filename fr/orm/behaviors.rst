@@ -158,7 +158,7 @@ behavior devrait maintenant ressembler à ceci::
 
     class SluggableBehavior extends Behavior
     {
-        proteted $_defaultConfig = [
+        protected $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',
             'replacement' => '-',
