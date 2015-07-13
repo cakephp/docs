@@ -13,7 +13,7 @@ To install the elasticsearch plugin, you can use ``composer``. From your
 application's ROOT directory (where composer.json file is located) run the
 following::
 
-    php composer.phar require cakephp/elasticsearch "@stable"
+    php composer.phar require cakephp/elastic-search "@stable"
 
 You will need to add the following line to your application's
 **config/bootstrap.php** file::
