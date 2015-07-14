@@ -439,22 +439,22 @@ de permutations en plus des méthodes find de bases.
 
     Sortie::
 
-    array(
-        [1] =>  "My Categories",
-        [2] =>  "_Fun",
-        [3] =>  "__Sport",
-        [4] =>  "___Surfing",
-        [16] => "___Skating",
-        [6] =>  "__Friends",
-        [7] =>  "___Gerald",
-        [8] =>  "___Gwendolyn",
-        [9] =>  "_Work",
-        [13] => "__Trips",
-        [14] => "___National",
-        [15] => "___International",
-        [17] => "Other People's Categories",
-        [5] =>  "_Extreme fishing"
-    )
+        array(
+            [1] =>  "My Categories",
+            [2] =>  "_Fun",
+            [3] =>  "__Sport",
+            [4] =>  "___Surfing",
+            [16] => "___Skating",
+            [6] =>  "__Friends",
+            [7] =>  "___Gerald",
+            [8] =>  "___Gwendolyn",
+            [9] =>  "_Work",
+            [13] => "__Trips",
+            [14] => "___National",
+            [15] => "___International",
+            [17] => "Other People's Categories",
+            [5] =>  "_Extreme fishing"
+        )
 
     .. php:method:: formatTreeList($results, $options=array())
 
@@ -807,7 +807,7 @@ Niveau du Noeud (Profondeur)
 Connaître la profondeur des noeuds d'un arbre peut être utile quand vous
 voulez récupérer les noeuds seulement pour un certain niveau par exemple, quand
 vous générez des menus. Vous pouvez utiliser l'option ``level`` pour spécifier
-le champ qui sauvegardera le niveau de chaque noeud.
+le champ qui sauvegardera le niveau de chaque noeud::
 
     public $actAs = array('Tree' => array(
         'level' => 'level', // Defaults to null, i.e. no level saving
