@@ -113,12 +113,12 @@ a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful::
 
     // Controller code
-    class ArticlesController extends AppController
+    class PostsController extends AppController
     {
         public function index()
         {
-            $articles = $this->paginate('Articles');
-            $this->set(compact('articles'));
+            $articles = $this->paginate('Posts');
+            $this->set(compact('posts'));
         }
     }
 
