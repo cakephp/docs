@@ -117,7 +117,7 @@ JSON response. This is a situation where a view file would be useful::
     {
         public function index()
         {
-            $articles = $this->paginate('Posts');
+            $posts = $this->paginate('Posts');
             $this->set(compact('posts'));
         }
     }
