@@ -617,11 +617,11 @@ Attribute Matching Types
     the deepest number of dimensions of any element in the array::
 
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
-        $result = Hash::maxDimensions($data, true);
+        $result = Hash::maxDimensions($data);
         // $result == 2
 
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Hash::maxDimensions($data, true);
+        $result = Hash::maxDimensions($data);
         // $result == 3
 
 .. php:staticmethod:: map(array $data, $path, $function)
