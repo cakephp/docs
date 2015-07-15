@@ -571,11 +571,11 @@ Les Types d'Attribut Correspondants
     le tableau::
 
         $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
-        $result = Hash::maxDimensions($data, true);
+        $result = Hash::maxDimensions($data);
         // $result == 2
 
         $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
-        $result = Hash::maxDimensions($data, true);
+        $result = Hash::maxDimensions($data);
         // $result == 3
 
 .. php:staticmethod:: map(array $data, $path, $function)
