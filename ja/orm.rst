@@ -65,7 +65,9 @@ ORMの調査を始める前に :ref:`configure your database connections <databa
 
 始めるにあたり、何もコードを書く必要はありません。
 もしデータベースのテーブルがCakePHPの規約に準拠している場合、すぐにORMの利用を開始できます。
-例えば ``articles`` からいくつかデータをロードしたい場合、このように記述できます。::
+例えば ``articles`` からいくつかデータをロードしたい場合、このように記述できます。
+
+::
 
     use Cake\ORM\TableRegistry;
     $articles = TableRegistry::get('Articles');
@@ -74,17 +76,20 @@ ORMの調査を始める前に :ref:`configure your database connections <databa
         echo $row->title;
     }
 
+..
+    Note that we didn't have to create any code or wire any configuration up.
+    The conventions in CakePHP allow us to skip some boilerplate code and allow the
+    framework to insert base classes when your application has not created
+    a concrete class. If we wanted to customize our ArticlesTable class adding some
+    associations or defining some additional methods we would add the following to
+    **src/Model/Table/ArticlesTable.php** after the ``<?php`` opening tag::
 
-
-
-
-
-Note that we didn't have to create any code or wire any configuration up.
-The conventions in CakePHP allow us to skip some boilerplate code and allow the
-framework to insert base classes when your application has not created
-a concrete class. If we wanted to customize our ArticlesTable class adding some
-associations or defining some additional methods we would add the following to
-**src/Model/Table/ArticlesTable.php** after the ``<?php`` opening tag::
+ここで留意すべき点は、何もコードを作ったり設定を書いたりする必要がない点です。
+CakePHPの規約により、お決まりのコード記述をスキップし、
+具象クラスを作っていない状態でベースクラスをフレームワークに登録することができます。
+もし ArticlesTable に幾つかのアソシエーションを加えたりメソッドを定義したい場合、
+下記を **src/Model/Table/ArticlesTable.php** 内、 ``<?php`` の開始タグの後に追加します。
+::
 
     namespace App\Model\Table;
 
@@ -95,18 +100,32 @@ associations or defining some additional methods we would add the following to
 
     }
 
-Table classes use the CamelCased version of the table name with the ``Table``
-suffix as the class name. Once your class has been created you get a reference
-to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
+..
+    Table classes use the CamelCased version of the table name with the ``Table``
+    suffix as the class name. Once your class has been created you get a reference
+    to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
+
+テーブルクラスは、キャメルケースのテーブル名に接尾語 ``Table`` を加えます。
+一度クラスを作成したら、 :php:class:`~Cake\\ORM\\TableRegistry` を利用して参照できます。
+
+::
 
     use Cake\ORM\TableRegistry;
     // Now $articles is an instance of our ArticlesTable class.
     $articles = TableRegistry::get('Articles');
 
-Now that we have a concrete table class, we'll probably want to use a concrete
-entity class. Entity classes let you define accessor and mutator methods, define
-custom logic for individual records and much more. We'll start off by adding the
-following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
+..
+    Now that we have a concrete table class, we'll probably want to use a concrete
+    entity class. Entity classes let you define accessor and mutator methods, define
+    custom logic for individual records and much more. We'll start off by adding the
+    following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
+
+具象テーブルクラスがあると、具象化エンティティクラスが欲しくなります。
+
+
+
+
+::
 
     namespace App\Model\Entity;
 
