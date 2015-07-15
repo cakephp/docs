@@ -36,7 +36,7 @@ Vous pouvez en option activer les extensions json et ou xml avec les
 :ref:`file-extensions`. Ceci va vous permettre d'accéder à ``JSON``, ``XML`` ou
 tout autre format spécial de vue en utilisant une URL personnalisée finissant
 avec le nom du type de réponse en tant qu'extension de fichier comme par
-exemple ``http://example.com/posts.json``.
+exemple ``http://example.com/articles.json``.
 
 Par défaut, quand vous n'activez pas les :ref:`file-extensions`, l'en-tête
 ``Accept`` de la requête est utilisé pour sélectionner le type de format qui
@@ -57,7 +57,7 @@ variables de vue avant la génération de la réponse, vous devrez utiliser les
 fichiers de template. La valeur de ``_serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
-    class PostsController extends AppController
+    class ArticlesController extends AppController
     {
         public function initialize()
         {
@@ -110,12 +110,12 @@ Utilisation d'une Vue de Données avec les Fichiers de Template
 
 Vous devrez utiliser les fichiers de template si vous avez besoin de faire des
 manipulations du contenu de votre vue avant de créer la sortie finale. Par
-exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
+exemple, si vous avez des articles, qui ont un champ contenant du HTML généré,
 vous aurez probablement envie d'omettre ceci à partir d'une réponse JSON.
 C'est une situation où un fichier de vue est utile::
 
     // Code du controller
-    class PostsController extends AppController
+    class ArticlesController extends AppController
     {
         public function index()
         {
@@ -124,11 +124,11 @@ C'est une situation où un fichier de vue est utile::
         }
     }
 
-    // Code de la vue - src/Template/Posts/json/index.ctp
-    foreach ($posts as &$post) {
-        unset($post->generated_html);
+    // Code de la vue - src/Template/Articles/json/index.ctp
+    foreach ($articles as &$article) {
+        unset($article->generated_html);
     }
-    echo json_encode(compact('posts'));
+    echo json_encode(compact('articles'));
 
 Vous pouvez faire des manipulations encore beaucoup plus complexes, comme
 utiliser les helpers pour formater.

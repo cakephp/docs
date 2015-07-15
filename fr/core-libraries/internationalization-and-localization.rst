@@ -379,7 +379,7 @@ un seul domaine et une seule locale::
     I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
-            'default', // The fallback domain
+            'default' // The fallback domain
         );
         $package->setMessages([
             'Dog' => 'Chien',
