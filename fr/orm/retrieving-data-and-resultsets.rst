@@ -579,8 +579,9 @@ vous pouvez utiliser ``autoFields()``::
 
     // Select id & title de articles, mais tous les champs de Users.
     $query->select(['id', 'title'])
-        ->contain(['Users'])
-        ->autoFields(true);
+        ->contain(['Users' => function($q) {
+			return $q->autoFields(true);
+		          }]);
 
 .. _filtering-by-associated-data:
 
