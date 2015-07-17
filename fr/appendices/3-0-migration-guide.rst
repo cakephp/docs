@@ -396,7 +396,7 @@ Router
   puissantes et flexibles.
 * Les paramètres persistants ont été retirés. Ils ont été remplacés par
   :php:meth:`Cake\\Routing\\Router::urlFilter()` qui est une meilleur façon
-  plus flexible pour changer les urls étant routées inversement.
+  plus flexible pour changer les URLs étant routées inversement.
 * La signature de :php:meth:`Cake\\Routing\\Router::parseExtensions()` a changé
   en ``parseExtensions(string|array $extensions = null, $merge = true)``. Elle
   ne prend plus d'arguments variables pour la spécification des extensions.
@@ -421,7 +421,7 @@ Router
   matche un ensemble de paramètres.
 * Les scopes de Routing ont été introduits. Les scopes de Routing vous
   permettent de garder votre fichier de routes DRY et donne au Router des
-  indices sur la façon d'optimiser le parsing et le routing inversé des URLS.
+  indices sur la façon d'optimiser le parsing et le routing inversé des URLs.
 
 Route
 -----
@@ -862,7 +862,6 @@ avec les noms de controller:
 
 - ``Layouts`` est maintenant ``Layout``
 - ``Elements`` est maintenant ``Element``
-- ``Scaffolds`` est maintenant ``Scaffold``
 - ``Errors`` est maintenant ``Error``
 - ``Emails`` est maintenant ``Email`` (idem pour ``Email`` dans ``Layout``)
 
@@ -1009,7 +1008,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   autres ne génèrent plus d'attributs id.
 - L'option ``inputDefaults`` a été retirée de ``create()``.
 - Les options ``default`` et ``onsubmit`` de ``create()`` ont été retirées. A la
-  place, vous devez utiliser le binding d'event javascript ou définir tout le
+  place, vous devez utiliser le binding d'event Javascript ou définir tout le
   code js nécessaire pour ``onsubmit``.
 - ``end()`` ne peut plus faire des boutons. Vous devez créer des buttons avec
   ``button()`` ou ``submit()``.
@@ -1146,10 +1145,10 @@ JsHelper
 --------
 
 - ``JsHelper`` et tous les moteurs associés ont été retirés. il pouvait
-  seulement générer un tout petit nombre de code javascript pour la librairie
-  sélectionnée et essayer de générer tout le code javascript en utilisant
+  seulement générer un tout petit nombre de code Javascript pour la librairie
+  sélectionnée et essayer de générer tout le code Javascript en utilisant
   le helper devenait souvent difficile. Il est maintenant recommandé d'utiliser
-  directement la librairie javascript de votre choix.
+  directement la librairie Javascript de votre choix.
 
 CacheHelper Retiré
 ------------------

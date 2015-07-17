@@ -64,19 +64,9 @@ Définissez --extract-core à yes ou no pour définir le comportement par défau
 
     bin/cake i18n extract --extract-core yes
 
-    ou
+    // ou
 
     bin/cake i18n extract --extract-core no
-
-Créer les Tables utilisées par TranslateBehavior
-================================================
-
-Le shell i18n peut aussi être utilisé pour initialiser les tables par défaut
-utilisées par :php:class:`TranslateBehavior`::
-
-    bin/cake i18n initdb
-
-Cela va créer la table **i18n** utilisée par le behavior Translate.
 
 .. meta::
     :title lang=fr: I18N shell

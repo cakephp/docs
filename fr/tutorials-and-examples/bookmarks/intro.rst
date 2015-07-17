@@ -202,7 +202,7 @@ utiliser l'application de
 générer rapidement une application basique. Dans votre terminal, lancez
 les commandes suivantes::
 
-    // Sur windows vous devez utiliser bin\cake à la place.
+    // Sur Windows vous devez utiliser bin\cake à la place.
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags
@@ -282,9 +282,17 @@ chercher les bookmarks par tag.
 Idéalement, nous aurions une URL qui ressemble à
 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs** Cela nous aide
 à trouver tous les bookmarks qui ont les tags 'funny', 'cat' ou 'gifs'. Avant
-de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
-**config/routes.php**, ajoutez ce qui suit en haut du fichier::
+de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
+**config/routes.php** doit ressembler à ceci::
 
+    <?php
+    use Cake\Routing\Router;
+
+    Router::defaultRouteClass('Route');
+
+    // Nouvelle route ajoutée pour notre action "tagged".
+    // Le caractère `*` en fin de chaîne indique à CakePHP que cette action a
+    // des paramètres passés
     Router::scope(
         '/bookmarks',
         ['controller' => 'Bookmarks'],
@@ -292,6 +300,11 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Dans
             $routes->connect('/tagged/*', ['action' => 'tags']);
         }
     );
+
+    Router::scope('/', function ($routes) {
+        // Connect the default routes.
+        $routes->fallbacks('InflectedRoute');
+    });
 
 Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
 chemin **/bookmarks/tagged/***, vers ``BookmarksController::tags()``. En
@@ -303,7 +316,13 @@ de CakePHP. Intégrons maintenant la méthode manquante. Dans
 
     public function tags()
     {
+        // La clé 'pass' est fournie par CakePHP et contient tous les segments
+        // d'URL de la "request" (instance de \Cake\Network\Request)
         $tags = $this->request->params['pass'];
+
+        // On utilise l'objet "Bookmarks" (une instance de
+        // \App\Model\Table\BookmarksTable) pour récupérer les bookmarks avec
+        // ces tags
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);
@@ -315,6 +334,9 @@ de CakePHP. Intégrons maintenant la méthode manquante. Dans
         ]);
     }
 
+Pour accéder aux autres parties des données de la "request", référez-vous à la
+section :ref:`cake-request`.
+
 Créer la Méthode Finder
 -----------------------
 
@@ -324,15 +346,13 @@ visitez l'URL **/bookmarks/tagged** maintenant, vous verrez une erreur comme
 quoi la méthode ``findTagged()`` n'a pas été encore intégrée, donc faisons-le.
 Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
 
+    // L'argument $query est une instance de \Cake\ORM\Query.
+    // Le tableau $options contiendra les tags que nous avons passé à find('tagged')
+    // dans l'action de notre Controller
     public function findTagged(Query $query, array $options)
     {
-        $fields = [
-            'Bookmarks.id',
-            'Bookmarks.title',
-            'Bookmarks.url',
-        ];
         return $this->find()
-            ->distinct($fields)
+            ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
@@ -346,7 +366,11 @@ peuvent manipuler les requêtes et ajouter n'importe quels conditions ou
 critères. Une fois qu'ils ont terminé, les finders doivent retourner l'objet
 Query modifié. Dans notre finder nous avons amené la méthode
 ``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
-qui 'match'.
+qui 'match'. La méthode ``matching()`` accepte `une fonction anonyme
+<http://php.net/manual/fr/functions.anonymous.php>`_ qui reçoit un constructeur
+de requête comme argument. Dans le callback, nous utilisons le constructeur de
+requête pour définir de nouvelles conditions qui permettront de filtrer les
+bookmarks ayant les tags spécfiques.
 
 Créer la Vue
 ------------

@@ -33,7 +33,7 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
     // En utilisant la méthode statique.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-``Router``fourni deux interfaces pour connecter les routes. La méthode statique
+``Router`` fournit deux interfaces pour connecter les routes. La méthode statique
 est une interface retro-compatible, alors que le builder scopé (lié la portée)
 offre une syntaxe plus laconique pour construire des routes multiples, et de
 meilleures performances.
@@ -45,7 +45,7 @@ d'une route pour voir le contenu d'un article::
 
     Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-La route ci-dessus accepte toute url qui ressemble à ``/articles/15`` et appelle
+La route ci-dessus accepte toute URL qui ressemble à ``/articles/15`` et appelle
 la méthode ``view(15)`` dans ``ArticlesController``. En revanche, ceci ne va pas
 empêcher les visiteurs d'accéder à une URLs ressemblant à
 ``/articles/foobar``. Si vous le souhaitez, vous pouvez restreindre certains
@@ -59,7 +59,7 @@ paramètres grâce à une expression régulière::
 
 Dans l'exemple précédent, le caractère jocker ``*`` est remplacé par un
 placeholder ``:id``. Utiliser les placeholders nous permet de valider les
-parties de l'url, dans ce cas, nous utilisons l'expression régulière ``\d+``
+parties de l'URL, dans ce cas, nous utilisons l'expression régulière ``\d+``
 pour que seuls les chiffres fonctionnent. Finalement, nous disons au Router de
 traiter le placeholder ``id`` comme un argument de fonction pour la fonction
 ``view()`` en spécifiant l'option ``pass``. Vous pourrez en voir plus sur leur
@@ -1189,79 +1189,81 @@ RequestActionTrait
         de controller peut empêcher les balises script et css de fonctionner
         correctement.
 
-    Generally you can avoid dispatching sub-requests by using
-    :doc:`/views/cells`. Cells give you a lightweight way to create re-usable
-    view components when compared to ``requestAction()``.
+    Généralement, vous pouvez éviter le dispatch des sous-requêtes en utilisant
+    :doc:`/views/cells`. Les Cells vous donnent un manière simple de créer des
+    composants de vues réutilisables comparées à ``requestAction()``.
 
-    You should always include checks to make sure your requestAction methods are
-    actually originating from ``requestAction()``.  Failing to do so will allow
-    requestAction methods to be directly accessible from a URL, which is
-    generally undesirable.
-
-    If we now create a simple element to call that function::
+    Vous devez toujours inclure des vérifications pour vous assurer que les
+    méthodes requestAction sont réellement originaires de ``requestAction()``.
+    Ne pas le faire permettra aux méthodes requestAction d'être directement
+    accessibles depuis une URL, ce qui est généralement indésirable.
+    Si nous créons maintenant un simple element pour appeler cette fonction::
 
         // src/View/Element/latest_comments.ctp
         echo $this->requestAction('/comments/latest');
 
-    We can then place that element anywhere to get the output
-    using::
+    Nous pouvons placer cet element n'importe où pour récupérer le résultat en
+    utilisant::
 
         echo $this->element('latest_comments');
 
-    Written in this way, whenever the element is rendered, a request will be
-    made to the controller to get the data, the data will be processed, rendered
-    and returned. However in accordance with the warning above it's best to make
-    use of element caching to prevent needless processing. By modifying the call
-    to element to look like this::
+    Ecris de cette façon,  peu importe quand l'element est rendu, une requête
+    sera faite au controller pour récupérer les données, les données seront
+    traitées, générées et retournées. Toutefois, conformément à
+    l'avertissement ci-dessus, il est préférable d'utiliser la mise en cache
+    d'élément pour éviter des traitements inutiles. En modifiant l'appel à
+    l'élément pour ressembler à ceci::
 
         echo $this->element('latest_comments', [], ['cache' => '+1 hour']);
 
-    The ``requestAction`` call will not be made while the cached
-    element view file exists and is valid.
+    L'appel à ``requestAction`` ne sera pas fait tant que le cache de l'element
+    de vue existe et est valide.
 
-    In addition, requestAction takes routing array URLs::
+    De plus, requestAction accepte les URLS sous forme de tableau de routing::
 
         echo $this->requestAction(
             ['controller' => 'Articles', 'action' => 'featured']
         );
 
     .. note::
+        Contrairement à d'autres endroits où les tableaux d'URLs sont identiques
+        aux chaînes d'URLs, requestAction les traite différemment.
 
-        Unlike other places where array URLs are analogous to string URLs,
-        requestAction treats them differently.
-
-    The URL based array are the same as the ones that
-    :php:meth:`Cake\\Routing\\Router::url()` uses with one difference - if you
-    are using passed parameters, you must put them in a second array and wrap
-    them with the correct key. This is because requestAction merges the extra
-    parameters (requestAction's 2nd parameter) with the ``request->params``
-    member array and does not explicitly place them under the ``pass`` key. Any
-    additional keys in the ``$option`` array will be made available in the
-    requested action's ``request->params`` property::
+    Les URLs issues de tableaux sont les même que celles utilisée par
+    :php:meth:`Cake\\Routing\\Router::url()` à une différence près - Si vous
+    utilisez des paramètres passés, vous devez les mettre dans un second
+    tableau et les envelopper avec les bonnes clés. C'est parce que
+    requestAction fusionne les paramètres additionnels (2ème paramètre de
+    requestAction) avec les éléments du tableau ``request->params`` et ne les
+    place pas explicitement sous la clé ``pass``. Toute clé additionnelle du
+    tableau ``$options`` sera rendu accessible dans la propriété
+    ``request->params`` de l'action requêtée::
 
         echo $this->requestAction('/articles/view/5');
 
-    As an array in the requestAction would then be::
+    Devient ainsi ceci sous la forme d'un tableau::
 
         echo $this->requestAction(
             ['controller' => 'Articles', 'action' => 'view', 5],
         );
 
-    You can also pass querystring arguments, post data or cookies using the
-    appropriate keys. Cookies can be passed using the ``cookies`` key.
-    Get parameters can be set with ``query`` and post data can be sent
-    using the ``post`` key::
+    Vous pouvez également passer des arguments de chaine d'URL, données POST ou
+    des cookies en utilisant la clé appropriée. Les cookies peuvent être
+    passés en utilisant la clé ``cookies``.
+    Les paramètres GET peuvent être définis avec ``query`` et les données POST
+    peuvent être envoyées en utilisant la clé ``post``::
 
         $vars = $this->requestAction('/articles/popular', [
           'query' => ['page' = > 1],
           'cookies' => ['remember_me' => 1],
         ]);
 
-    When using an array URL in conjunction with requestAction() you
-    must specify **all** parameters that you will need in the requested
-    action. This includes parameters like ``$this->request->data``.  In addition
-    to passing all required parameters, passed arguments must be done
-    in the second array as seen above.
+    Lorsque vous utilisez une URL en tableau en conjugaison avec
+    requestAction(), vous devez spécifier **tous** les paramètres dont vous
+    aurez besoin dans l'action requêtée. Cela inclut les paramètres tels que
+    ``$this->request->data``. En plus de passer tous les paramètres
+    nécessaires, les arguments passés doivent être envoyés dans un second
+    tableau tel que vu au dessus.
 
 .. toctree::
     :glob:

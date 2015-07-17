@@ -359,7 +359,7 @@ for a single domain and locale::
     I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
-            'default', // The fallback domain
+            'default'  // The fallback domain
         );
         $package->setMessages([
             'Dog' => 'Chien',
@@ -460,7 +460,7 @@ any language from an external service::
         )
     });
 
-The above example calls an example external service to load a json file with the
+The above example calls an example external service to load a JSON file with the
 translations and then just build a ``Package`` object for any locale that is
 requested in the application.
 

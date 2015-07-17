@@ -507,22 +507,23 @@ propriété ou un callback::
 
 .. php:method:: zip($elements)
 
-The elements of different collections can be grouped together using the
-``zip()`` method. It will return a new collection containing an array grouping
-the elements from each collection that are placed at the same position::
+Les éléments de différentes collections peuvent être groupés ensemble en
+utilisant la méthode ``zip()``. Elle retournera une nouvelle collection
+contenant un tableau regroupant les éléments de chaque collection qui sont
+placés à la même position::
 
     $odds = new Collection([1, 3, 5]);
     $pairs = new Collection([2, 4, 6]);
     $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
 
-You can also zip multiple collections at once::
+Vous pouvez également zipper des cllections multiples d'un coup::
 
     $years = new Collection([2013, 2014, 2015, 2016]);
     $salaries = [1000, 1500, 2000, 2300];
     $increments = [0, 500, 500, 300];
 
     $rows = $years->zip($salaries, $increments)->toList();
-    // Returns:
+    // Retourne:
     [
         [2013, 1000, 0],
         [2014, 1500, 500],
@@ -530,8 +531,8 @@ You can also zip multiple collections at once::
         [2016, 2300, 300]
     ]
 
-As you can already see, the ``zip()`` method is very useful for transposing
-multidimensional arrays::
+Comme vous avez pu le voir, la méthode ``zip()`` est très utile pour transposer
+des tableaux multidimensionnels::
 
     $data = [
         2014 => ['jan' => 100, 'feb' => 200],
@@ -539,14 +540,14 @@ multidimensional arrays::
         2016 => ['jan' => 400, 'feb' => 600],
     ]
 
-    // Getting jan and feb data together
+    // Récupérer les données de jan et fev ensemble
 
     $firstYear = new Collection(array_shift($data));
     $firstYear->zip($data[0], $data[1])->toList();
 
-    // Or $firstYear->zip(...$data) in PHP >= 5.6
+    // Ou $firstYear->zip(...$data) in PHP >= 5.6
 
-    // Returns
+    // Retourne
     [
         [100, 300, 400],
         [200, 500, 600]
@@ -808,26 +809,27 @@ Les positions sont basées sur zéro, donc le premier nombre de la position est
 
 .. php:method:: skip(int $positions)
 
-While the second argument of ``take()`` can help you skip some elements before
-getting them from the collection, you can also use ``skip()`` for the same
-purpose as a way to take the rest of the elements after a certain position::
+Alors que le second argument de ``take()`` peut vous aider à exclure quelques
+éléments avant de les récupérer depuis une collection, vous pouvez également
+utiliser ``skip()`` pour récupérer le reste des éléments après une certaine
+position::
 
     $collection = new Collection([1, 2, 3, 4]);
     $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
 
 .. php:method:: first()
 
-One of the most common uses of ``take()`` is getting the first element in the
-collection. A shortcut method for achieving the same goal is using the
-``first()`` method::
+Un des cas d'utilisation les plus courant de ``take()`` est de récupérer le
+premier élément d'un collection. Une moyen plus rapide d'arriver au même
+résultat est d'utiliser la méthode ``first()``::
 
     $collection = new Collection([5, 4, 3, 2]);
-    $collection->first(); // Returns 5
+    $collection->first(); // Retourne 5
 
 .. php:method:: last()
 
-Similarly, you can get the last element of a collection using the ``last()``
-method::
+De la même manière, vous pouvez récupérer le dernier élément d'une collection
+en utilisant la méthode ``last()``::
 
     $collection = new Collection([5, 4, 3, 2]);
     $collection->last(); // Returns 2

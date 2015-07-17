@@ -564,7 +564,7 @@ que vous pouvez utiliser:
 * ``ConsoleOutput::COLOR`` - La sortie avec couleur enlève les codes en place.
 
 Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
-de la couleur. Sur les systèmes windows, la sortie simple est mise par défaut
+de la couleur. Sur les systèmes Windows, la sortie simple est mise par défaut
 sauf si la variable d'environnement ``ANSICON`` est présente.
 
 Méthodes Hook

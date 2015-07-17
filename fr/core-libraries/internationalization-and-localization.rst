@@ -379,7 +379,7 @@ un seul domaine et une seule locale::
     I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
-            'default', // The fallback domain
+            'default' // The fallback domain
         );
         $package->setMessages([
             'Dog' => 'Chien',
@@ -486,7 +486,7 @@ défaut et pour chaque langue depuis un service externe::
     });
 
 Le code ci-dessus appelle un service externe exemple pour charger un fichier
-json avec les traductions puis construit uniquement un objet ``Package``
+JSON avec les traductions puis construit uniquement un objet ``Package``
 pour chaque locale nécessaire dans l'application.
 
 Pluriels et Contexte dans les Traducteurs Personnalisés

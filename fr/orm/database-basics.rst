@@ -11,7 +11,7 @@ envoyées à la base de données.
 Tour Rapide
 ===========
 
-les fonctions décrites dans ce chapitre illustrent les possibilités de l'API
+Les fonctions décrites dans ce chapitre illustrent les possibilités de l'API
 d'accès à la base de données de plus bas niveau. Si vous souhaitez plutôt en
 apprendre plus sur l'ORM complet, vous pouvez lire les sections portant sur le
 :doc:`/orm/query-builder` et :doc:`/orm/table-objects`.

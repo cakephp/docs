@@ -91,7 +91,7 @@ and number passed.
 
 .. note::
 
-    If you are on a windows system you probably won't see any colours.
+    If you are on a Windows system you probably won't see any colours.
 
 Test Case Conventions
 =====================
@@ -1203,6 +1203,9 @@ check if the returned values are equal to what is expected.
 
 Save this and execute the test. You should see a green bar and messaging
 indicating 1 pass and 4 assertions.
+
+When you are testing a Helper which uses other helpers, be sure to mock the
+View clases ``loadHelpers`` method.
 
 Creating Test Suites
 ====================

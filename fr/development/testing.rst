@@ -94,7 +94,7 @@ les tests exécutés et le nombre de tests réussis.
 
 .. note::
 
-    Si vous êtes sur un système windows, vous ne verrez probablement pas les
+    Si vous êtes sur un système Windows, vous ne verrez probablement pas les
     couleurs.
 
 Conventions des cas de Test
@@ -1258,6 +1258,9 @@ attendons.
 
 Sauvegardons cela et exécutons le test. Vous devriez voir une barre verte et
 un message indiquant 1 passé et 4 assertions.
+
+Lorsque vous testez un Helper qui utilise d'autres Helpers, assurez-vous de
+créer un mock de la méthode ``loadHelpers`` de la classe View.
 
 Créer les Test Suites
 =====================

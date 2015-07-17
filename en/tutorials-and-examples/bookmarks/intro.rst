@@ -191,7 +191,7 @@ Because our database is following the CakePHP conventions, we can use the
 :doc:`bake console </bake/usage>` application to quickly generate a basic
 application. In your command line run the following commands::
 
-    // On windows you'll need to use bin\cake instead.
+    // On Windows you'll need to use bin\cake instead.
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags
@@ -264,9 +264,17 @@ tag.
 Ideally, we'd have a URL that looks like
 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs**. This would let us
 find all the bookmarks that have the 'funny', 'cat' or 'gifs' tags. Before we
-can implement this, we'll add a new route. In **config/routes.php**, add the
-following at the top of the file::
+can implement this, we'll add a new route. Your **config/routes.php** should
+look like::
 
+    <?php
+    use Cake\Routing\Router;
+
+    Router::defaultRouteClass('Route');
+
+    // New route we're adding for our tagged action.
+    // The trailing `*` tells CakePHP that this action has
+    // passed parameters.
     Router::scope(
         '/bookmarks',
         ['controller' => 'Bookmarks'],
@@ -275,16 +283,26 @@ following at the top of the file::
         }
     );
 
-The above defines a new 'route' which connects the **/bookmarks/tagged/***
-path, to ``BookmarksController::tags()``. By defining routes, you can isolate
-how your URLs look, from how they are implemented. If we were to visit
+    Router::scope('/', function ($routes) {
+        // Connect the default routes.
+        $routes->fallbacks('InflectedRoute');
+    });
+
+The above defines a new 'route' which connects the **/bookmarks/tagged/*** path,
+to ``BookmarksController::tags()``. By defining routes, you can isolate how your
+URLs look, from how they are implemented. If we were to visit
 **http://localhost:8765/bookmarks/tagged**, we would see a helpful error page
-from CakePHP. Let's implement that missing method now. In
-**src/Controller/BookmarksController.php** add the following::
+from CakePHP informing you that the controller action does not exist. Let's
+implement that missing method now. In **src/Controller/BookmarksController.php**
+add the following::
 
     public function tags()
     {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
         $tags = $this->request->params['pass'];
+
+        // Use the BookmarksTable to find tagged bookmarks.
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);
@@ -296,6 +314,9 @@ from CakePHP. Let's implement that missing method now. In
         ]);
     }
 
+To access other parts of the request data, consult the :ref:`cake-request`
+section.
+
 Creating the Finder Method
 --------------------------
 
@@ -305,15 +326,13 @@ application's logic in the models. If you were to visit the
 method has not been implemented yet, so let's do that. In
 **src/Model/Table/BookmarksTable.php** add the following::
 
+    // The $query argument is a query builder instance.
+    // The $options array will contain the 'tags' option we passed
+    // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options)
     {
-        $fields = [
-            'Bookmarks.id',
-            'Bookmarks.title',
-            'Bookmarks.url',
-        ];
         return $this->find()
-            ->distinct($fields)
+            ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
@@ -323,10 +342,13 @@ We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
 a very powerful concept in CakePHP that allows you to package up re-usable
 queries. Finder methods always get a :doc:`/orm/query-builder` object and an
 array of options as parameters. Finders can manipulate the query and add any
-required conditions or criteria. When they are done, finder methods must return
+required conditions or criteria. When complete, finder methods must return
 a modified query object. In our finder we've leveraged the ``distinct()`` and
 ``matching()`` methods which allow us to find distinct bookmarks that have
-a 'matching' tag.
+a 'matching' tag. The ``matching()`` method accepts an `anonymous function
+<http://php.net/manual/en/functions.anonymous.php>`_ that receives a query
+builder as its argument. Inside the callback we use the query builder to define
+conditions that will filter bookmarks that have specific tags.
 
 Creating the View
 -----------------

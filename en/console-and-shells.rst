@@ -527,7 +527,7 @@ no styling is done at all. There are three modes you can use.
 * ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
 
 By default on \*nix systems ConsoleOutput objects default to colour output.
-On windows systems, plain output is the default unless the ``ANSICON`` environment
+On Windows systems, plain output is the default unless the ``ANSICON`` environment
 variable is present.
 
 Hook Methods

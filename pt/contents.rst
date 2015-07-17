@@ -59,6 +59,8 @@ Conteúdo
     core-libraries/global-constants-and-functions
     debug-kit
     migrations
+    elasticsearch
+    upgrade-tool
     appendices
 
 .. todolist::

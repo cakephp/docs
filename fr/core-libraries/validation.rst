@@ -230,7 +230,8 @@ ou non, une règle particulière doit être appliquée::
         }
     ]);
 
-
+Vous pouvez accéder aux autres données soumises depuis le formulaire via le
+tableau ``$context['data']``.
 L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
 valeur pour ``show_profile_picture`` est vide. Vous pouvez également utiliser
 la règle de validation ``uploadedFile`` pour créer des inputs optionnelles

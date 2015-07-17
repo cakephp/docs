@@ -559,8 +559,11 @@ Alternatively, if you can multiple associations, you can use ``autoFields()``::
     // Select id & title from articles, but all fields off of Users, Comments
     // and Tags.
     $query->select(['id', 'title'])
-        ->contain(['Users', 'Comments', 'Tags'])
+        ->contain(['Comments', 'Tags'])
         ->autoFields(true);
+        ->contain(['Users' => function($q) {
+            return $q->autoFields(true);
+        }]);
 
 .. versionadded:: 3.1
     Selecting columns via an association object was added in 3.1
@@ -961,13 +964,13 @@ instance of the ``MapReduce`` routine it is running::
 
 In the above example ``$mapper`` is calculating the status of an article, either
 published or unpublished, then it calls ``emitIntermediate()`` on the
-``MapReduce`` instance. The method stores the article in the list of articles
+``MapReduce`` instance. This method stores the article in the list of articles
 labelled as either published or unpublished.
 
 The next step in the map-reduce process is to consolidate the final results. For
 each status created in the mapper, the ``$reducer`` function will be called so
 you can do any extra processing. This function will receive the list of articles
-in a particular ``bucket`` as the first parameter, the name of the ``bucket`` it
+in a particular "bucket" as the first parameter, the name of the "bucket" it
 needs to process as the second parameter, and again, as in the ``mapper()``
 function, the instance of the ``MapReduce`` routine as the third parameter. In
 our example, we did not have to do any extra processing, so we just ``emit()``

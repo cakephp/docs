@@ -477,13 +477,13 @@ Linking to Assets in Plugins
 You can use the :term:`plugin syntax` when linking to plugin assets using the
 :php:class:`~Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods::
 
-    // Generates a url of /contact_manager/css/styles.css
+    // Generates a URL of /contact_manager/css/styles.css
     echo $this->Html->css('ContactManager.styles');
 
-    // Generates a url of /contact_manager/js/widget.js
+    // Generates a URL of /contact_manager/js/widget.js
     echo $this->Html->script('ContactManager.widget');
 
-    // Generates a url of /contact_manager/img/logo.js
+    // Generates a URL of /contact_manager/img/logo.js
     echo $this->Html->image('ContactManager.logo');
 
 Plugin assets are served using the ``AssetFilter`` dispatcher filter by default.

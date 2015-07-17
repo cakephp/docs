@@ -34,7 +34,7 @@ data types.
 You can optionally enable the json and or xml extensions with
 :ref:`file-extensions`. This will allow you to access the ``JSON``, ``XML`` or
 any other special format views by using a custom URL ending with the name of the
-response type as a file extension such as ``http://example.com/posts.json``.
+response type as a file extension such as ``http://example.com/articles.json``.
 
 By default, when not enabling :ref:`file-extensions`, the request the ``Accept``
 header is used for selecting which type of format should be rendered to the
@@ -112,7 +112,7 @@ Using a Data View with Template Files
 =====================================
 
 You should use template files if you need to do some manipulation of your view
-content before creating the final output. For example if we had posts, that had
+content before creating the final output. For example if we had articles, that had
 a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful::
 
@@ -126,11 +126,11 @@ JSON response. This is a situation where a view file would be useful::
         }
     }
 
-    // View code - src/Template/Posts/json/index.ctp
-    foreach ($posts as &$post) {
-        unset($post->generated_html);
+    // View code - src/Template/Articles/json/index.ctp
+    foreach ($articles as &$$article) {
+        unset($article->generated_html);
     }
-    echo json_encode(compact('posts'));
+    echo json_encode(compact('articles'));
 
 You can do more complex manipulations, or use helpers to do formatting as
 well.

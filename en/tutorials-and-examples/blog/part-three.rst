@@ -110,6 +110,9 @@ Create all files by launching bake commands::
 The bake tool has created all your files in a snap. You can give them a quick
 read if you want re-familiarize yourself with how CakePHP works.
 
+.. note::
+    If you are on Windows remember to use \ instead of /.
+
 Attach TreeBehavior to CategoriesTable
 ======================================
 
@@ -121,7 +124,8 @@ for read heavy applications like blogs.
 
 If you open the **src/Model/Table/CategoriesTable.php** file, you'll see
 that the TreeBehavior has been attached to your CategoriesTable in the
-``initialize()`` method::
+``initialize()`` method. Bake adds this behavior to any Tables that contain
+``lft`` and ``rght`` columns::
 
     $this->addBehavior('Tree');
 
