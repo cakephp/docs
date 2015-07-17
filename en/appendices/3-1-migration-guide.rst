@@ -109,3 +109,12 @@ Mailer
 
 The ``Mailer`` class was added. This class helps create reusable emails in an
 application.
+
+I18n
+====
+
+Time
+----
+
+- ``Time::fromNow()`` has been added. This method makes it easier to calculate
+  differences from 'now'.
