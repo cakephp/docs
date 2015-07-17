@@ -129,13 +129,17 @@ The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. At a high level each request goes through the
 following steps:
 
-#. The request is first processed by your routes.
-#. After the request has been routed, the dispatcher will select the
-   correct controller object to handle it.
+#. The webserver rewrite rules direct the request to ``webroot/index.php``.
+#. Your application's autoloader and bootstrap files are executed.
+#. Any :doc:`dispatch filters </development/dispatch-filters>` that are
+   configured can handle the request, and optionally generate a response.
+#. The dispatcher selects the appropriate controller & action based on routing rules.
 #. The controller's action is called and the controller interacts with the
    required Models and Components.
 #. The controller delegates response creation to the View to generate the output
    resulting from the model data.
+#. The view uses Helpers and Cells to generate the response body and headers.
+#. The response is sent back to the client.
 
 Just the Start
 ==============
