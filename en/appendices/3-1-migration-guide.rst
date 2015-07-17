@@ -44,6 +44,13 @@ CsrfComponent
 
 - CSRF cookie expiry time can now be set as a ``strtotime()`` compatible value.
 
+RequestHandlerComponent
+-----------------------
+
+- ``RequestHandlerComponent`` now switches the layout and template based on
+  the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
+  instead of ``startup()``.
+
 Network
 =======
 
