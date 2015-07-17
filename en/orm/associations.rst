@@ -191,7 +191,7 @@ Possible keys for hasOne association arrays include:
 - **conditions**: an array of find() compatible conditions
   such as ``['Addresses.primary' => true]``
 - **joinType**: the type of the join to use in the SQL query, default
-  is INNER. You may want to use LEFT if your hasOne association is optional.
+  is LEFT. You can use INNER if your hasOne association is always present.
 - **dependent**: When the dependent key is set to ``true``, and an
   entity is deleted, the associated model records are also deleted. In this
   case we set it to ``true`` so that deleting a User will also delete her associated

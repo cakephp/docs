@@ -197,8 +197,8 @@ Les clés possibles pour une association hasOne sont:
 - **conditions**: un tableau des conditions compatibles avec find() ou un
   fragment de code SQL tel que ``['Addresses.primary' => true]``.
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut
-  à INNER. Vous voulez peut-être utiliser LEFT si votre association hasOne est
-  optionnelle.
+  à LEFT. Vous voulez peut-être utiliser INNER si votre association hasOne est
+  requis.
 - **dependent**: Quand la clé dependent est définie à ``true``, et qu'une
   entity est supprimée, les enregistrements du model associé sont aussi
   supprimés. Dans ce cas, nous le définissons à ``true`` pour que la
