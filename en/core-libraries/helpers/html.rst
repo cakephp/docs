@@ -1004,7 +1004,7 @@ methods of the HtmlHelper and how to use them.
         /posts/search?foo=bar#first
 
     For further information check
-    `Router::url <http://api.cakephp.org/2.4/class-Router.html#_url>`_
+    `Router::url <http://api.cakephp.org/2.7/class-Router.html#_url>`_
     in the API.
 
 .. php:method:: useTag(string $tag)
