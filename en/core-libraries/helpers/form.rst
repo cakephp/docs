@@ -271,7 +271,7 @@ Closing the Form
         <div class="glass-pill"><input type="submit" value="Update" name="Update">
         </div>
 
-    See the `Form Helper API <http://api.cakephp.org/2.4/class-FormHelper.html>`_ for further details.
+    See the `Form Helper API <http://api.cakephp.org/2.7/class-FormHelper.html>`_ for further details.
 
     .. note::
 
