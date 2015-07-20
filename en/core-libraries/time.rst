@@ -142,9 +142,10 @@ dates. CakePHP makes this a snap::
 
 It is possible to specify the desired format for the string to be displayed.
 You can either pass `IntlDateFormatter constants
-<http://www.php.net/manual/en/class.intldateformatter.php>`_ as the first argument of this
-function, or pass a full ICU date formatting string as specified in the
-following resource: http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+<http://www.php.net/manual/en/class.intldateformatter.php>`_ as the first
+argument of this function, or pass a full ICU date formatting string as
+specified in the following resource:
+http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
 
 .. php:method:: nice()
 
