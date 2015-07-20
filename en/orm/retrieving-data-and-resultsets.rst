@@ -823,7 +823,8 @@ Lazy Loading Associations
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
-:ref:`lazy-load-associations` section for more information.
+:ref:`lazy-load-associations` and :ref:`loading-additional-associations`
+sections for more information.
 
 Working with Result Sets
 ========================
@@ -933,6 +934,21 @@ query::
     // Check results
     $results = $query->all();
     $results->isEmpty();
+
+.. _loading-additional-associations:
+
+Loading Additional Associations
+--------------------------------
+
+Once you've created a result set, you may need to load
+additional associations. This is the perfect time to lazily eager load data. You
+can load additional associations using ``loadInto()``::
+
+    $articles = $this->Articles->find()->all();
+    $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
+
+You can eager load additional data into a single entity, or a collection of
+entities.
 
 .. _map-reduce:
 

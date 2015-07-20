@@ -65,6 +65,11 @@ Http\Client
 ORM
 ===
 
+You can now :ref:`Lazily Eager Load Associations
+<loading-additional-associations>`. This feature allows you to conditionally
+load additional associations into a result set, entity or collection of
+entities.
+
 Query
 -----
 
@@ -74,6 +79,8 @@ Query
 - ``Query::select()`` now supports ``Table`` and ``Association`` objects as
   parameters. These parameter types will select all the columns on the provided
   table or association instance's target table.
+
+
 
 View
 ====
