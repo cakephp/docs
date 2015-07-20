@@ -98,7 +98,9 @@ Join tables, used in BelongsToMany relationships between models, should be named
 after the model tables they will join, arranged in alphabetical order
 (apples\_zebras rather than zebras\_apples).
 
-Rather than using an auto-increment key as the primary key, you may also use char(36). CakePHP will then use a unique 36 character UUID (Text::uuid) whenever you save a new record using the Table::save method.
+Rather than using an auto-increment key as the primary key, you may also use
+char(36). CakePHP will then use a unique 36 character UUID (Text::uuid) whenever
+you save a new record using the ``Table::save()`` method.
 
 View Conventions
 ================
