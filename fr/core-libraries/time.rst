@@ -146,6 +146,12 @@ dates formatées. CakePHP facilite cela::
     // affiche '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
 
+Il est possible de spécifier le format d'affichage désiré. Vous pouvez soit
+passer une `constante IntlDateFormatter
+<http://www.php.net/manual/en/class.intldateformatter.php>`_ ou une chaine
+complète de formatage tel que spécifié dans cette ressource:
+http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+
 .. php:method:: nice()
 
 Affiche un format prédéfini 'nice'::

@@ -142,13 +142,21 @@ Le cycle d'une requête CakePHP typique débute avec une requête utilisateur
 qui demande une page ou une ressource de votre application. À haut niveau
 chaque requête passe par les étapes suivantes:
 
-#. La requête est d'abord aiguillée par les routes.
-#. Après que la requête a été routée, le dispatcher va sélectionner le bon
-   objet controller pour la traiter.
+#. Les règles de réécriture de votre serveur web dirigent la requête vers
+   ``webroot/index.php``.
+#. Les fichiers autoloader et bootstrap de votre application sont exécutés.
+#. Tout :doc:`filtre du dispatcher </development/dispatch-filters>`
+   configuré peut manipuler la requête, et optionnellement générer une réponse.
+#. Le dispatcher sélectionne le controller et l'action appropriée en se basant
+   sur les règle re routage.
 #. L'action du controller est appelée et le controller interagit avec les
    Models et Components nécessaires.
 #. Le controller délègue la création de la response à la View pour générer
    le résultat obtenu à partir des données de model.
+#. Le View utilise les Helpers et les Cells pour générer l'entête et le corps
+   de la réponse.
+#. La réponse est renvoyée au client.
+
 
 Que le Début
 ============
