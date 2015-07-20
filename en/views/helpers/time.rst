@@ -42,6 +42,9 @@ Most of TimeHelper's features are intended as backwards compatible interfaces
 for applications that are upgrading from older versions of CakePHP. Because the
 ORM returns :php:class:`Cake\\I18n\\Time` instances for every ``timestamp``
 and ``datetime`` column, you can use the methods there to do most tasks.
+E.g. to read about the accepted formatting strings take a look at the
+`Cake\\I18n\\Time::i18nFormat() 
+<http://api.cakephp.org/3.0/class-Cake.I18n.Time.html#_i18nFormat>`_ method.
 
 .. meta::
     :title lang=en: TimeHelper

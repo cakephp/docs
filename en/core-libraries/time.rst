@@ -140,6 +140,12 @@ dates. CakePHP makes this a snap::
     // Outputs '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
 
+It is possible to specify the desired format for the string to be displayed.
+You can either pass `IntlDateFormatter constants
+<http://www.php.net/manual/en/class.intldateformatter.php>`_ as the first argument of this
+function, or pass a full ICU date formatting string as specified in the
+following resource: http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+
 .. php:method:: nice()
 
 Print out a predefined 'nice' format::
