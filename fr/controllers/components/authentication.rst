@@ -122,6 +122,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
   avec les informations de l'utilisateur identifié.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut
   à ``Default``.
+- ``storage`` Classe de stockage. Par défaut à ``Session``.
 
 Pour configurer les différents champs de l'utilisateur dans la méthode
 ``initialize()``::
@@ -249,15 +250,17 @@ Utilisation de l'Authentification Digest et Basic pour la Connexion
 Les authentifications basic et digest sont des schémas d'authentification
 sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
 vous utilisez seulement les authentificateurs basic / digest, vous n'avez pas
-besoin d'action login dans votre controller. Aussi, vous pouvez définir
-``$this->Auth->sessionKey`` à ``false`` pour vous assurer que AuthComponent
-n'essaie pas de lire les infos de l'utilisateur à partir de la session. Vous
-voudrez peut-être aussi définir ``unauthorizedRedirect`` à ``false`` ce qui
-va entraîner l'envoi d'une ``ForbiddenException`` de AuthComponent à la place
-du comportement par défaut de redirection vers le référent. L'authentification
-stateless va re-vérifier les certificats de l'utilisateur à chaque requête,
-créant une petite quantité de charge supplémentaire, mais permet aux clients
-de se connecter sans utiliser les cookies et est parfait pour le APIs.
+besoin d'action login dans votre controller. L'authentication stateless va
+re-vérifier les autorisations de l'utilisateur à chaque requête, ceci créé un
+petit surcoût mais permet aux clients de se connecter sans utiliser les
+cookies et rend AuthComponent plus adapté pour construire des APIs.
+
+Pour des authentificateurs stateless, la config ``storage`` doit être définie
+à ``Memory`` pour que AuthComponent n'utilise pas la session pour stocker
+l'enregistrement utilisateur. Vous pouvez aussi définir la config
+``unauthorizedRedirect`` à ``false`` pour que AuthComponent lance une
+``ForbiddenException`` plutôt que le comportement par défaut qui est de
+rediriger vers la page référente.
 
 Créer des Objets d'Authentification Personnalisés
 -------------------------------------------------

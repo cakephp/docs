@@ -545,13 +545,28 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
     ]);
 
 If you have limited the fields you are loading with ``select()`` but also want to
-load fields off of contained associations, you can use ``autoFields()``::
+load fields off of contained associations, you can pass the association object
+to ``select()``::
 
     // Select id & title from articles, but all fields off of Users.
+    $articlesTable
+        ->select(['id', 'title'])
+        ->select($articlesTable->Users)
+        ->contain(['Users']);
+
+Alternatively, if you can multiple associations, you can use ``autoFields()``::
+
+    // Select id & title from articles, but all fields off of Users, Comments
+    // and Tags.
     $query->select(['id', 'title'])
+        ->contain(['Comments', 'Tags'])
+        ->autoFields(true);
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);
+
+.. versionadded:: 3.1
+    Selecting columns via an association object was added in 3.1
 
 .. _filtering-by-associated-data:
 
@@ -606,6 +621,134 @@ The data from the association that is 'matched' will be available on the
 ``_matchingData`` property of entities. If you both match and contain the same
 association, you can expect to get both the ``_matchingData`` and standard
 association properties in your results.
+
+Using innerJoinWith
+~~~~~~~~~~~~~~~~~~~
+
+Using the ``matching()`` function, as we saw already, will create an ``INNER
+JOIN`` with the specified association and will also load the fields into the
+result set.
+
+There may be cases where you want to use ``matching()`` but are not interested
+in loading the fields into the result set. For this purpose, you can use 
+``innerJoinWith()``::
+
+    $query = $articles->find();
+    $query->innerJoinWith('Tags', function ($q) {
+        return $q->where(['Tags.name' => 'CakePHP']);
+    });
+
+The ``innerJoinWith()`` method works the same as ``matching()``, that
+means that you can use dot notation to join deeply nested
+associations::
+
+    $query = $products->find()->innerJoinWith(
+        'Shops.Cities.Countries', function ($q) {
+            return $q->where(['Countries.name' => 'Japan']);
+        }
+    );
+
+Again, the only difference is that no additional columns will be added to the
+result set, and no ``_matchingData`` property will be set.
+
+.. versionadded:: 3.1
+    Query::innerJoinWith() was added in 3.1
+
+Using notMatching
+~~~~~~~~~~~~~~~~~
+
+The opposite of ``matching()`` is ``notMatching()``. This function will change
+the query so that it filters results that have no relation to the specified
+association::
+
+    // In a controller or table method.
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Tags', function ($q) {
+            return $q->where(['Tags.name' => 'boring']);
+        });
+
+The above example will find all articles that were not tagged with the word
+``boring``.  You can apply this method to HasMany associations as well. You could,
+for example, find all the authors with no published articles in the last 10
+days::
+
+    $query = $authorsTable
+        ->find()
+        ->notMatching('Articles', function ($q) {
+            return $q->where(['Articles.created >=' => new \DateTime('-10 days')]);
+        });
+
+It is also possible to use this method for filtering out records not matching
+deep associations. For example, you could find articles that have not been
+commented on by a certain user::
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Comments.Users', function ($q) {
+            return $q->where(['username' => 'jose']);
+        });
+
+Since articles with no comments at all also satisfy the condition above, you may
+want to combine ``matching()`` and ``notMatching()`` in the same query. The
+following example will find articles having at least one comment, but not
+commented by a certain user::
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Comments.Users', function ($q) {
+            return $q->where(['username' => 'jose']);
+        })
+        ->matching('Comments');
+
+.. note::
+
+    As ``notMatching()`` will create a ``LEFT JOIN``, you might want to consider
+    calling ``distinct`` on the find query as you can get duplicate rows
+    otherwise.
+
+Keep in mind that contrary to the ``matching()`` function, ``notMatching()``
+will not add any data to the ``_matchingData`` property in the results.
+
+.. versionadded:: 3.1
+    Query::notMatching() was added in 3.1
+
+Using leftJoinWith
+~~~~~~~~~~~~~~~~~~
+
+On certain occasions you may want to calculate a result based on an association,
+without having to load all the records for it. For example, if you wanted to
+load the total number of comments an article has along with all the article
+data, you can use the ``leftJoinWith()`` function::
+
+    $query = $articlesTable->find();
+    $query->select(['total_comments' => $query->func()->count('Comments.id')])
+        ->leftJoinWith('Comments')
+        ->group(['Articles.id'])
+        ->autoFields(true);
+
+The results for the above query will contain the article data and the
+``total_comments`` property for each of them.
+
+``leftJoinWith()`` can also be used with deeply nested associations. This is
+useful, for example, for bringing the count of articles tagged with a certain
+word, per author::
+
+    $query = $authorsTable->find();
+        ->find()
+        ->select(['total_articles' => $query->func()->count('Articles.id')])
+        ->leftJoinWith('Articles.Tags', function ($q) {
+            return $q->where(['Tags.name' => 'awesome']);
+        })
+        ->group(['Authors.id'])
+        ->autoFields(true);
+
+This function will not load any columns from the specified associations into the
+result set.
+
+.. versionadded:: 3.1
+    Query::leftJoinWith() was added in 3.1
 
 .. end-contain
 
@@ -680,7 +823,8 @@ Lazy Loading Associations
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
-:ref:`lazy-load-associations` section for more information.
+:ref:`lazy-load-associations` and :ref:`loading-additional-associations`
+sections for more information.
 
 Working with Result Sets
 ========================
@@ -790,6 +934,24 @@ query::
     // Check results
     $results = $query->all();
     $results->isEmpty();
+
+.. _loading-additional-associations:
+
+Loading Additional Associations
+--------------------------------
+
+Once you've created a result set, you may need to load
+additional associations. This is the perfect time to lazily eager load data. You
+can load additional associations using ``loadInto()``::
+
+    $articles = $this->Articles->find()->all();
+    $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
+
+You can eager load additional data into a single entity, or a collection of
+entities.
+
+.. versionadded: 3.1
+    Table::loadInto() was added in 3.1
 
 .. _map-reduce:
 

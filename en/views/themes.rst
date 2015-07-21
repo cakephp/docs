@@ -7,17 +7,15 @@ providing template files. In addition to template files, they can also provide
 helpers and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
-To use themes, specify the theme name in your controller::
+To use themes, set the theme name in your controller's action or ``beforeRender()`` callback::
 
     class ExamplesController extends AppController
     {
-        public $theme = 'Modern';
+        public function beforeRender(\Cake\Event\Event $event)
+        {
+            $this->getView()->theme = 'Modern';
+        }
     }
-
-You can also set or change the theme name within an action or within the
-``beforeFilter`` or ``beforeRender`` callback functions::
-
-    $this->theme = 'AnotherExample';
 
 Theme template files need to be within a plugin with the same name. For example,
 the above theme would be found in **plugins/AnotherExample/src/Template**.

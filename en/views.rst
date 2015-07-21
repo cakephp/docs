@@ -18,6 +18,8 @@ common rendering scenarios:
   :ref:`cake-response-file`.
 - To create multiple themed views, you can use :doc:`views/themes`.
 
+.. _app-view:
+
 The App View
 ============
 
@@ -414,7 +416,7 @@ controller actions using the controller or view's
     public function admin_view()
     {
         // Stuff
-        $this->layout = 'admin';
+        $this->getView()->layout('admin');
     }
 
     // From a view file
@@ -432,12 +434,12 @@ using something like::
         public function view_active()
         {
             $this->set('title', 'View Active Users');
-            $this->layout = 'default_small_ad';
+            $this->getView()->layout('default_small_ad');
         }
 
         public function view_image()
         {
-            $this->layout = 'image';
+            $this->getView()->layout('image');
             // Output user image
         }
     }
@@ -462,7 +464,7 @@ Contacts plugin::
     {
         public function view_active()
         {
-            $this->layout = 'Contacts.contact';
+            $this->getView()->layout('Contacts.contact');
         }
     }
 

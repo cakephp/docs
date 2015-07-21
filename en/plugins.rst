@@ -304,24 +304,24 @@ Then create the ContactManager plugin routes. Put the following into
     use Cake\Routing\Router;
 
     Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks('InflectedRoute');
+        $routes->fallbacks('DashedRoute');
     });
 
 The above will connect default routes for you plugin. You can customize this
 file with more specific routes later on.
 
 If you want to access what we've got going thus far, visit
-``/contact_manager/contacts``. You should get a "Missing Model" error
+``/contact-manager/contacts``. You should get a "Missing Model" error
 because we don't have a Contact model defined yet.
 
 If your application includes the default routing CakePHP provides you will be
 able to access your plugin controllers using URLs like::
 
     // Access the index route of a plugin controller.
-    /contact_manager/contacts
+    /contact-manager/contacts
 
     // Any action on a plugin controller.
-    /contact_manager/contacts/view/1
+    /contact-manager/contacts/view/1
 
 If your application defines routing prefixes, CakePHP's default routing will
 also connect routes that use the following pattern::

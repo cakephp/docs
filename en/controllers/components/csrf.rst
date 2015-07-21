@@ -31,6 +31,7 @@ The available configuration options are:
 
 - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
 - ``expiry`` How long the CSRF token should last. Defaults to browser session.
+  Accepts ``strtotime`` values as of 3.1
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.
