@@ -844,7 +844,8 @@ Lazy loading des Associations
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer
-à la section :ref:`lazy-load-associations` pour plus d'informations.
+à les sections :ref:`lazy-load-associations` et
+:ref:`loading-additional-associations` pour plus d'informations.
 
 Travailler avec des Ensembles de Résultat
 =========================================
@@ -960,6 +961,25 @@ objet Query va évaluer la requête::
     // Vérifie les résultats.
     $results = $query->all();
     $results->isEmpty();
+
+.. _loading-additional-associations:
+
+Chargement d'Associations Additionnelles
+----------------------------------------
+
+Une fois que vous avez créé un ensemble de résultats, vous pourriez vouloir
+charger en eager des associations additionnelles. C'est le moment idéal pour charger
+des données. Vous pouvez charger des associations additionnelles en utilisant
+``loadInto()``::
+
+    $articles = $this->Articles->find()->all();
+    $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
+
+Vous pouvez charger en eager des données additionnelles dans une entity unique
+ou une collection d'entites.
+
+.. versionadded: 3.1
+    Table::loadInto() was added in 3.1
 
 .. _map-reduce:
 
