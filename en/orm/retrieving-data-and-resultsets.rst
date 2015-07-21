@@ -950,6 +950,9 @@ can load additional associations using ``loadInto()``::
 You can eager load additional data into a single entity, or a collection of
 entities.
 
+.. versionadded: 3.1
+    Table::loadInto() was added in 3.1
+
 .. _map-reduce:
 
 Modifying Results with Map/Reduce

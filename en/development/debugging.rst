@@ -28,6 +28,21 @@ has been set to ``true``.
 The ``stackTrace()`` function is available globally, and allows you to output
 a stack trace wherever the function is called.
 
+.. php:function breakpoint()
+
+.. versionadded:: 3.1
+
+If you have `Psysh installed <http://psysh.org/>`_ installed you can use this
+function in CLI enviroments to open an interactive console with the current
+local scope::
+
+    // Some code
+    eval(breakpoint());
+
+Will open an interactive console tha can be used used to check local variables
+and execute other code. You can exit the interactive debugger and resume the
+original execution by running ``quit`` in the interactive session.
+
 Using the Debugger Class
 ========================
 
