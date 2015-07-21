@@ -43,6 +43,13 @@ FlashComponent
   méthodes ``set()`` et ``__call()``. Cela signifie que la structure des
   données stockées dans la Session pour les messages Flash a changé.
 
+RequestHandlerComponent
+-----------------------
+
+- ``RequestHandlerComponent`` now switches the layout and template based on
+  the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
+  instead of ``startup()``.
+  
 Network
 =======
 
@@ -95,12 +102,22 @@ FlashHelper
 Email
 =====
 
-``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
-namespace. Their former namespaces are still usable as class aliases have
-been set for them.
+- Les classes ``Email`` et ``Transport`` ont été déplacées sous le namespace
+  ``Cake\Mailer``. Leur ancien namespace est toujours utilisable car des alias
+  ont été créés.
 
 Mailer
 ------
 
-The ``Mailer`` class was added. This class helps create reusable emails in an
-application.
+- La classe ``Mailer`` a été ajoutée. Cette classe aide à créer des emails
+  réutilisables dans une application.
+
+
+I18n
+====
+
+Time
+----
+
+- ``Time::fromNow()`` a été ajoutée. Cette méthode facilite le calcul de
+différence depuis l'instant présent.

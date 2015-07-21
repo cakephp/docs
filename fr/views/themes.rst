@@ -9,17 +9,16 @@ et des cells si votre theme le nécessite. Quand vous utilisez des cells et des
 helpers à partir de votre theme, vous devrez continuer à utiliser la
 :term:`syntaxe de plugin`
 
-Pour utiliser les themes, spécifiez le nom du theme dans votre controller::
+Pour utiliser les themes, définissez le nom du theme dans votre controller ou
+votre callback ``beforeRender()`` ::
 
     class ExempleController extends AppController
     {
-        public $theme = 'Exemple';
+        public function beforeRender(\Cake\Event\Event $event)
++        {
++            $this->getView()->theme = 'Modern';
++        }
     }
-
-Vous pouvez également définir ou modifier le nom du theme dans une action ou
-dans les fonctions de callback ``beforeFilter()`` ou ``beforeRender()``::
-
-    $this->theme = 'AutreExemple';
 
 Les fichiers de template du theme doivent être dans un plugin avec le même nom.
 Par exemple, le theme ci-dessus se trouvera dans

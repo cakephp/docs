@@ -20,6 +20,8 @@ rendu les plus communs:
 - Pour créer plusieurs vues pour un thème, vous pouvez utiliser
   :doc:`views/themes`.
 
+.. _app-view:
+
 The App View
 ============
 
@@ -432,7 +434,7 @@ actions de votre controller en utilisant la propriété
     public function admin_view()
     {
         // stuff
-        $this->layout = 'admin';
+        $this->getView()->layout('admin');
     }
 
     // A partir d'un fichier de vue
@@ -450,12 +452,12 @@ actions du controller en utilisant quelque chose comme::
         public function view_active()
         {
             $this->set('title', 'View Active Users');
-            $this->layout = 'default_small_ad';
+            $this->getView()->layout('default_small_ad');
         }
 
         public function view_image()
         {
-            $this->layout = 'image';
+            $this->getView()->layout('image');
             // Output user image
         }
     }
@@ -481,7 +483,7 @@ contact à partir du plugin Contacts::
     {
         public function view_active()
         {
-            $this->layout = 'Contacts.contact';
+            $this->getView()->layout('Contacts.contact');
         }
     }
 
