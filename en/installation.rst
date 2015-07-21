@@ -12,7 +12,7 @@ Requirements
 
 -  HTTP Server. For example: Apache. mod\_rewrite is preferred, but
    by no means required.
--  PHP 5.2.8 or greater.
+-  PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP 5.2.8 and above).
 
 Technically a database engine isn't required, but we imagine that
 most applications will utilize one. CakePHP supports a variety of
