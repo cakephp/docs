@@ -108,6 +108,11 @@ Les tables de jointure utilisées dans les relations BelongsToMany entre models
 doivent être nommées d'après le nom des tables qu'elles unissent, dans l'ordre
 alphabétique ("pommes\_zebres" plutôt que "zebres\_pommes").
 
+A lieu d'utiliser des clés auto-incrémentées en tant que clés primaires, vous
+voudrez peut-être utiliser char(36). CakePHP utilisera un UUID unique de 36
+caractères (Text::uuid) à chaque fois que vous sauvegarderez un nouvel
+enregistrement en utlisant la méthode ``Table::save()``.
+
 Conventions des Views
 =====================
 

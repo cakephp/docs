@@ -261,23 +261,26 @@ pourriez avoir les chaines suivantes
 
 .. code-block:: pot
 
-     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
-     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
+     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}"
+     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{# resultados}}"
+
+     msgid "{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
+     msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 Et dans votre application utilisez le code suivant pour afficher l'une des
 traductions pour une telle chaine::
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {0} records}}', [0]);
+    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
     // Retourne "Ningún resultado" puisque l'argument {0} est 0
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {0} records}}', [1]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
 
     // Retourne "1 resultado" puisque l'argument {0} est 1
 
-    __('{1,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 2]);
-
-    // Retourne "2 resultados" puisque l'argument {1} est 2
+    __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
+    // Retourne "many resultados" puisque l'argument {placeholder} est 2 et
+    // l'argument {1} est 'many'
 
 Regarder de plus près le format que nous avons juste utilisé, rendra évident
 la méthode de construction des messages::
@@ -287,6 +290,9 @@ la méthode de construction des messages::
 Le ``[count placeholder]`` peut être le numéro de clé du tableau de n'importe
 quelle variable passée à la fonction de traduction. Il sera utilisé pour
 sélectionner la forme plurielle correcte.
+
+Noter faire référence à ``[count placeholder]`` dans ``{message}`` vous devez
+utiliser ``#``.
 
 Vous pouvez bien entendu utiliser des id de messages plus simples si vous ne
 voulez pas taper la séquence plurielle complète dans votre code.
