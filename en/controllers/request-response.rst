@@ -253,9 +253,9 @@ There are several built-in detectors that you can use:
 * ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
 * ``is('requested')`` Check to see whether the request has a query param
   'requested' with value 1.
-* ``is('json')`` Check to see whether the request has 'json' extension add
+* ``is('json')`` Check to see whether the request has 'json' extension and
   accept 'application/json' mimetype.
-* ``is('xml')`` Check to see whether the request has 'xml' extension add accept
+* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
 
 
