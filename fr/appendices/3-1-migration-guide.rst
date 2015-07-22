@@ -23,6 +23,9 @@ Console
 - Les :doc:`/console-and-shells/helpers` ont été ajoutés. Les Shell Helpers vous
   permettent d'empaqueter un logique de sortie complexe d'une manière
   réutilisable.
+- La fonction ``breakpoint()`` a été ajoutée. Cette fonction fournit un snippet
+  de code qui peut être utilisé dans un ``eval()`` pour lancer une console
+  interactive. C'est très utile pour debugger les tests ou tout script CLI.
 
 Controller
 ==========
@@ -65,6 +68,11 @@ Http\Client
 ORM
 ===
 
+Vous pouvez maintenant :ref:`Charger en Eager des Associations
+<loading-additional-associations>`. Cette fonctionnalité vous permet de charger
+des associations conditionnellement dans un ensemble de résultats, une entity
+ou une collection d'entites.
+
 Query
 -----
 
@@ -74,6 +82,7 @@ Query
 - ``Query::select()`` supporte maintenant  des objets ``Table`` et ``Association``
   en paramètres. Ces types de paramètres sélectionneront toutes les colonnes de
   l'instance de la table ou la table ciblée par l'association.
+- ``Table::loadInto()`` a été ajoutée.
 
 View
 ====

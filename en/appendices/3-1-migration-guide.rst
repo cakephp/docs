@@ -20,6 +20,10 @@ Console
   dispatched shell.
 - :doc:`/console-and-shells/helpers` were added. Shell Helpers allow you to
   package up complex output logic in a reusable way.
+- The ``breakpoint()`` helper function has been added. This function provides
+  a snippet of code that can be put into ``eval()`` to trigger an interactive
+  console. This is very helpful when debugging in test cases, or other CLI
+  scripts.
 
 Controller
 ==========
@@ -65,6 +69,11 @@ Http\Client
 ORM
 ===
 
+You can now :ref:`Lazily Eager Load Associations
+<loading-additional-associations>`. This feature allows you to conditionally
+load additional associations into a result set, entity or collection of
+entities.
+
 Query
 -----
 
@@ -74,6 +83,8 @@ Query
 - ``Query::select()`` now supports ``Table`` and ``Association`` objects as
   parameters. These parameter types will select all the columns on the provided
   table or association instance's target table.
+- ``Table::loadInto()`` was added.
+
 
 View
 ====

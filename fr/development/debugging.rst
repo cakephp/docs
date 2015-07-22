@@ -21,10 +21,26 @@ aussi la ligne et le fichier dont ils sont originaires par défaut.
 La sortie de cette fonction est seulement montrée si la variable de ``$debug``
 du cœur a été définie à ``true``.
 
-.. php:function stackTrace()
+.. php:function:: stackTrace()
 
 La fonction ``stackTrace()`` est globalement disponible, et vous permet
 d'afficher une stack trace quelque soit la fonction appelée.
+
+.. php:function:: breakpoint()
+
+.. versionadded:: 3.1
+
+Si vous avez installé `Psysh <http://psysh.org/>`_ vous pouvez utiliser cette
+fonction dans les environnements CLI pour ouvrir une console interactive
+avec le scope local courant::
+
+    // Du code
+    eval(breakpoint());
+
+Ouvrira une console interactive qui peut être utilisée pour vérifier les
+variables locales et exécuter d'autre code. Vous pouvez fermer le debugger
+interactif et reprendre l'exécution du script original en tapant
+``quit`` ou ``q`` dans la session interactive.
 
 Utiliser la Classe Debugger
 ===========================
