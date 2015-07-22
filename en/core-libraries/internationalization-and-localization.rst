@@ -248,7 +248,7 @@ the following strings
 
      msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}"
      msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{# resultados}}"
-     
+
      msgid "{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
      msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
@@ -265,7 +265,8 @@ translations for such string::
 
     __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
 
-    // Returns "many resultados" because the argument {placeholder} is 2 and argument {1} is 'many'
+    // Returns "many resultados" because the argument {placeholder} is 2 and
+    // argument {1} is 'many'
 
 A closer look to the format we just used will make it evident how messages are
 built::
@@ -276,7 +277,8 @@ The ``[count placeholder]`` can be the array key number of any of the variables
 you pass to the translation function. It will be used for selecting the correct
 plural form.
 
-Note that to reference ``[count placeholder]`` within ``{message}`` you have to use ``#``
+Note that to reference ``[count placeholder]`` within ``{message}`` you have to
+use ``#``.
 
 You can of course use simpler message ids if you don't want to type the full
 plural selection sequence in your code
