@@ -174,7 +174,7 @@ beforeRules
 .. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
 The ``Model.beforeRules`` event is fired before an entity has rules applied. By
-stopping this event, you can return the final value of the rules checking
+stopping this event, you can return the value of the rules not checked yet by
 operation.
 
 afterRules
