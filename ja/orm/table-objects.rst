@@ -1,9 +1,14 @@
-Table Objects
+テーブルオブジェクト
 #############
 
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+テーブルオブジェクトは特定のテーブルに保存されたエンティティーのコレクションへのアクセスを提供します。
+それぞれのテーブルは与えられたテーブルによって繋がれた関連付けられたテーブルクラスを持ちます。
+もし、ビヘイビアのテーブルをカスタマイズする必要ないなら、Cakeはテーブルのインスタンスを作ります。
+
+テーブルオブジェクトとORMを作る前に　データベースへの接続がなされているか確かめましょう。
 
 .. note::
     The documentation is not currently supported in Japanese language for this
