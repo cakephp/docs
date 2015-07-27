@@ -116,6 +116,8 @@
 	width: 216px;
 	padding: 2px;
 	margin: 0;
+	height: auto;
+	overflow: hidden;
 }
 /* display on hover */
 #cakephp-global-navigation li:hover .second-level {
