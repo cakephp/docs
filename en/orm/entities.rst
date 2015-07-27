@@ -313,7 +313,7 @@ method::
     on.
 
 When using the ``newEntity()`` and ``patchEntity()`` methods in the ``Table``
-objects you can coustomize mass assignment protection by yourself. Please refer
+objects you can customize mass assignment protection by yourself. Please refer
 to the :ref:`changing-accessible-fields` section for more information.
 
 Bypassing Field Guarding
