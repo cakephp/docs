@@ -1,5 +1,5 @@
 Componentes
-##########
+###########
 
 Los componentes son paquetes de logica que es compartida entre controladores.
 CakePHP incluye un fantastico set de componentes que puedes usar para ayudarte 
@@ -17,7 +17,7 @@ componentes.
 .. _configuring-components:
 
 Configurando componentes
-======================
+========================
 
 Mucho de los componentes principales requieren configuración. Algunos ejemplos de 
 componentes que requieren configuración son 
@@ -41,7 +41,7 @@ controlador::
 El fragmento de código anterior sería un ejemplo de configuración de un componente 
 con el array ``$components``.
 Todos los componentes principales permiten que su configuración sea 
-seteada de ésta forma. A su vez, es posibile configurar el componente 
+seteada de ésta forma. A su vez, es posible configurar el componente 
 a través del método ``beforeFilter()`` de tú controlador. 
 Esto es útil cuando necesitas asignar los resultados de una función a la propiedad de 
 un componente. El código anterior también podría ser expresado como::
@@ -96,7 +96,7 @@ controladores.
     usado, incluyendo dentro de otros componentes.
 
 Usando Componentes
-================
+==================
 
 Una vez que has incluido algunos componentes en tús controladores, usarlos 
 es bastante sensillo. Cada componente que use es expuesto como una propiedad 
@@ -120,7 +120,7 @@ en tú controlador. Si ha cargado :php:class:`SessionComponent` y
     el mismo nombre a un modelo y componente.
 
 Cargar modelos en el acto
------------------------------
+-------------------------
 
 Tal vez no necesite todos los componentes disponibles en cada acción de su 
 controlador. En situaciones como esta puede cargar un componente en tiempo de 
@@ -137,7 +137,7 @@ Desde dentro de un método de un controlador se puede::
 
 
 Callbacks de componentes
-===================
+========================
 
 Los componentes también ofrecen varios callbacks que permiten aumentar 
 el ciclo del request. Vea :ref:`component-api` para más información 
@@ -146,7 +146,7 @@ sobre los callbacks que ofrecen los componentes.
 .. _creating-a-component:
 
 Creando componentes
-====================
+===================
 
 Suponga que nuestra aplicación online necesita llevar a cabo una 
 operación matemática compleja en diferentes partes de la aplicación. 
@@ -205,7 +205,7 @@ las propiedades seran actualizadas con los valores de esas keys.
 
 
 Usando otros componentes en tús componentes
-----------------------------------------
+-------------------------------------------
 
 A veces, algunos de tus componentes pueden necesitar usar otros componentes.
 En estos casos se puede incluir otros componentes en tús componentes de la 
@@ -242,7 +242,7 @@ misma forma que se incluyen en un controlador::
 .. _component-api:
 
 API Componentes
-=============
+===============
 
 .. php:class:: Component
 
