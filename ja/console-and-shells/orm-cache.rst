@@ -1,13 +1,22 @@
-ORM Cache Shell
+ORM キャッシュシェル
 ###############
 
-.. note::
-    The documentation is not currently supported in Japanese language for this
-    page.
+Ormキャッシュシェル 単純なアプリケーションのメタデータカッシュを管理する。CILツールを提供します。
+開発環境ではこれは正しくメタデータキャッシュを既存のデータを消去することなく再構築する助けになります。
+以下のコマンドで可能です。::
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+    bin/cake orm_cache build --connection default
 
-    You can referer to the english version in the select top menu to have
-    information about this page's topic.
+これで ``default`` 設定で接続されている全てのテーブルのメタデータを再構築します。
+一つのテーブルだけ再構築したkれば名前を指定して出来ます。::
+
+    bin/cake orm_cache build --connection default articles
+
+加えて、キャッシュデータを作るために, OrmCacheShell をキャッシュされた
+メタデータを削除するために使えます。::
+
+    # 全メタデータの消去
+    bin/cake orm_cache clear
+
+    # 一つのテーブルだけ消去
+    bin/cake orm_cache clear articles
