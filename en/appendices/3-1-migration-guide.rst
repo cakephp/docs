@@ -25,6 +25,13 @@ Console
   console. This is very helpful when debugging in test cases, or other CLI
   scripts.
 
+Shell Helpers Added
+-------------------
+
+Console applications can now create helper classes that encapsulate re-usable
+blocks of output logic. See the :doc:`/console-and-shells/helpers` section for
+more information.
+
 Controller
 ==========
 

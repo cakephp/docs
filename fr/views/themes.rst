@@ -15,9 +15,9 @@ votre callback ``beforeRender()`` ::
     class ExempleController extends AppController
     {
         public function beforeRender(\Cake\Event\Event $event)
-+        {
-+            $this->getView()->theme = 'Modern';
-+        }
+        {
+            $this->getView()->theme = 'Modern';
+        }
     }
 
 Les fichiers de template du theme doivent être dans un plugin avec le même nom.

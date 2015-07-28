@@ -27,6 +27,13 @@ Console
   de code qui peut être utilisé dans un ``eval()`` pour lancer une console
   interactive. C'est très utile pour debugger les tests ou tout script CLI.
 
+Ajout des Shell Helpers
+-----------------------
+
+Les applications de console peuvent maintenant créer des classes Helper qui
+encapsulent des blocs réutilisables de logique de sortie. Consultez la section
+sur :doc:`/console-and-shells/helpers` pour plus d'informations.
+
 Controller
 ==========
 
@@ -52,7 +59,7 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` now switches the layout and template based on
   the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
   instead of ``startup()``.
-  
+
 Network
 =======
 
@@ -64,7 +71,7 @@ Http\Client
   ``multipart/form-data`` n'est utilisé qu'en cas de transfert de fichiers.
   Lorsqu'il n'y en pas, ``application/x-www-form-urlencoded`` est utilisé à la
   place.
-  
+
 ORM
 ===
 
