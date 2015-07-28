@@ -42,6 +42,10 @@ AuthComponent
   ``AuthComponent`` uses to store user record. By default ``SessionStorage`` is used.
   If using a stateless authenticator you should configure ``AuthComponent`` to
   use ``MemoryStorage`` instead.
+- New config ``checkAuthIn`` has been added. It contains the name of the event
+  for wich auth checks should be done. By defaults ``Controller.startup`` is
+  used but you can set it to ``Controller.initialize`` if you want the check to
+  be done before controller's ``beforeFilter()`` is run.
 
 FlashComponent
 --------------
@@ -54,6 +58,8 @@ CsrfComponent
 -------------
 
 - CSRF cookie expiry time can now be set as a ``strtotime()`` compatible value.
+- Invalid CSRF will now throw a ``Cake\Network\Exception\InvalidCsrfTokenException``
+  instead of the ``Cake\Network\Exception\ForbiddenException``.
 
 RequestHandlerComponent
 -----------------------
@@ -91,6 +97,8 @@ Query
   parameters. These parameter types will select all the columns on the provided
   table or association instance's target table.
 - ``Table::loadInto()`` was added.
+- ``EXTRACT``, ``DATE_ADD`` and ``DAYOFWEEK`` raw SQL functions have been
+  abstracted to ``extract()``, ``dateAdd`` and ``dayOfWeek()``.
 
 
 View
@@ -114,6 +122,12 @@ FlashHelper
 - ``FlashHelper`` can render multiple messages if multiple messages where
   set with the ``FlashComponent``. Each message will be rendered in its own
   element. Messages will be rendered in the order they were set.
+
+FormHelper
+----------
+
+- New option ```templateVars`` has been added. ``templateVars`` allows you to
+  pass additional variables to your custom form control templates.
 
 Email
 =====

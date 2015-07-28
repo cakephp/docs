@@ -144,6 +144,14 @@ exceptions for HTTP methods
 
     Used for doing a 403 Forbidden error.
 
+.. versionadded:: 3.1
+
+    InvalidCsrfTokenException has been added.
+
+.. php:exception:: InvalidCsrfTokenException
+
+    Used for doing a 403 error caused by an invalid CSRF token
+
 .. php:exception:: NotFoundException
 
     Used for doing a 404 Not found error.
