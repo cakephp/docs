@@ -152,3 +152,5 @@ Time
 
 - ``Time::fromNow()`` has been added. This method makes it easier to calculate
   differences from 'now'.
+- ``Time::i18nFormat()`` now supports non-gregorian calendars when formatting
+  dates.
