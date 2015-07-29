@@ -28,9 +28,16 @@ Console
 Shell Helpers Added
 -------------------
 
-Console applications can now create helper classes that encapsulate re-usable
-blocks of output logic. See the :doc:`/console-and-shells/helpers` section for
-more information.
+- Console applications can now create helper classes that encapsulate re-usable
+  blocks of output logic. See the :doc:`/console-and-shells/helpers` section
+  for more information.
+
+RoutesShell
+-----------
+
+- RoutesShell has been added and now provides you a simple to use CLI
+  interface for testing and debugging routes. See the
+  :doc:`/console-and-shells/routes-shell` section for more information.
 
 Controller
 ==========
@@ -128,7 +135,7 @@ FlashHelper
 FormHelper
 ----------
 
-- New option ```templateVars`` has been added. ``templateVars`` allows you to
+- New option ``templateVars`` has been added. ``templateVars`` allows you to
   pass additional variables to your custom form control templates.
 
 Email
