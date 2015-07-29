@@ -38,14 +38,15 @@ Controller
 AuthComponent
 -------------
 
-- New config ``storage`` has been added. It contains the storage class name that
+- New config option ``storage`` has been added. It contains the storage class name that
   ``AuthComponent`` uses to store user record. By default ``SessionStorage`` is used.
   If using a stateless authenticator you should configure ``AuthComponent`` to
   use ``MemoryStorage`` instead.
-- New config ``checkAuthIn`` has been added. It contains the name of the event
-  for wich auth checks should be done. By defaults ``Controller.startup`` is
-  used but you can set it to ``Controller.initialize`` if you want the check to
-  be done before controller's ``beforeFilter()`` is run.
+- New config option ``checkAuthIn`` has been added. It contains the name of the
+  event for which auth checks should be done. By default ``Controller.startup``
+  is used, but you can set it to ``Controller.initialize`` if you want
+  authentication to be checked before you controller's ``beforeFilter()`` method
+  is run.
 
 FlashComponent
 --------------
@@ -58,8 +59,9 @@ CsrfComponent
 -------------
 
 - CSRF cookie expiry time can now be set as a ``strtotime()`` compatible value.
-- Invalid CSRF will now throw a ``Cake\Network\Exception\InvalidCsrfTokenException``
-  instead of the ``Cake\Network\Exception\ForbiddenException``.
+- Invalid CSRF tokens will now throw
+  a ``Cake\Network\Exception\InvalidCsrfTokenException`` instead of the
+  ``Cake\Network\Exception\ForbiddenException``.
 
 RequestHandlerComponent
 -----------------------
