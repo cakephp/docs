@@ -99,8 +99,8 @@ The TableRegistry クラスはテーブルを作るための依存関係を提�
 
 .. _table-callbacks:
 
-ライフサイクル　コールバック
-===================
+コールバックのライフサイクル　
+============================
 
 テーブルオブジェクトがいろいろなイベントを起こすことを上で見たでしょう。
 イベンドは使えるORMをフックしたり、ロジックを、クラスに属させたり
@@ -116,7 +116,7 @@ The TableRegistry クラスはテーブルを作るための依存関係を提�
 単純にメソッド名を以下の様に使います。この詳細とイベントに
 関するシステムの使い方は :doc:`/core-libraries/events` 。
 
-beforeMarshal(整理する前）
+beforeMarshal
 -------------
 
 .. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
@@ -144,7 +144,7 @@ $query インスタンスによってなされた全ての変更はfindに影響
 前のCakeでは　 ``afterFind`` コールバックがありましたが、 :ref:`map-reduce` 
 機能とエンティティーコンストラクターに置き換えられました。
 
-ビルドバリデーター
+buildValidator
 ---------------
 
 .. php:method:: buildValidator(Event $event, Validator $validator, $name)
@@ -152,7 +152,7 @@ $query インスタンスによってなされた全ての変更はfindに影響
 ``Model.buildValidator`` イベントは ``$name`` バリデーターが作られた時に呼ばれます。
 ビヘイビアはこのメソッドを呼ぶために使えます。
 
-ビルドルール
+buildRules
 ----------
 
 .. php:method:: buildRules(Event $event, RulesChecker $rules)
