@@ -140,9 +140,9 @@ dates. CakePHP makes this a snap::
     // Outputs '2014-04-20 22:10'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
 
-As of 3.1.0 you can format dates with non-gregorian calendars::
+You can also format dates with non-gregorian calendars::
 
-    // Outputs 'Thursday, Dey 24, 1388 at 1:59:28 PM GMT'
+    // Outputs 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
     $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
 
 The following calendar types are supported:
@@ -156,6 +156,9 @@ The following calendar types are supported:
 * hebrew
 * coptic
 * ethiopic
+
+.. versionadded:: 3.1
+    Non-gregorian calendar support was added in 3.1
 
 .. php:method:: nice()
 
