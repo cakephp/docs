@@ -18,8 +18,6 @@ Console
 
 - ``Shell::dispatchShell()`` no longer outputs the welcome message from the
   dispatched shell.
-- :doc:`/console-and-shells/helpers` were added. Shell Helpers allow you to
-  package up complex output logic in a reusable way.
 - The ``breakpoint()`` helper function has been added. This function provides
   a snippet of code that can be put into ``eval()`` to trigger an interactive
   console. This is very helpful when debugging in test cases, or other CLI
@@ -28,9 +26,16 @@ Console
 Shell Helpers Added
 -------------------
 
-Console applications can now create helper classes that encapsulate re-usable
-blocks of output logic. See the :doc:`/console-and-shells/helpers` section for
-more information.
+- Console applications can now create helper classes that encapsulate re-usable
+  blocks of output logic. See the :doc:`/console-and-shells/helpers` section
+  for more information.
+
+RoutesShell
+-----------
+
+- RoutesShell has been added and now provides you a simple to use CLI
+  interface for testing and debugging routes. See the
+  :doc:`/console-and-shells/routes-shell` section for more information.
 
 Controller
 ==========
@@ -38,10 +43,15 @@ Controller
 AuthComponent
 -------------
 
-- New config ``storage`` has been added. It contains the storage class name that
+- New config option ``storage`` has been added. It contains the storage class name that
   ``AuthComponent`` uses to store user record. By default ``SessionStorage`` is used.
   If using a stateless authenticator you should configure ``AuthComponent`` to
   use ``MemoryStorage`` instead.
+- New config option ``checkAuthIn`` has been added. It contains the name of the
+  event for which auth checks should be done. By default ``Controller.startup``
+  is used, but you can set it to ``Controller.initialize`` if you want
+  authentication to be checked before you controller's ``beforeFilter()`` method
+  is run.
 
 FlashComponent
 --------------
@@ -54,6 +64,9 @@ CsrfComponent
 -------------
 
 - CSRF cookie expiry time can now be set as a ``strtotime()`` compatible value.
+- Invalid CSRF tokens will now throw
+  a ``Cake\Network\Exception\InvalidCsrfTokenException`` instead of the
+  ``Cake\Network\Exception\ForbiddenException``.
 
 RequestHandlerComponent
 -----------------------
@@ -91,6 +104,8 @@ Query
   parameters. These parameter types will select all the columns on the provided
   table or association instance's target table.
 - ``Table::loadInto()`` was added.
+- ``EXTRACT``, ``DATE_ADD`` and ``DAYOFWEEK`` raw SQL functions have been
+  abstracted to ``extract()``, ``dateAdd`` and ``dayOfWeek()``.
 
 
 View
@@ -115,6 +130,12 @@ FlashHelper
   set with the ``FlashComponent``. Each message will be rendered in its own
   element. Messages will be rendered in the order they were set.
 
+FormHelper
+----------
+
+- New option ``templateVars`` has been added. ``templateVars`` allows you to
+  pass additional variables to your custom form control templates.
+
 Email
 =====
 
@@ -136,3 +157,5 @@ Time
 
 - ``Time::fromNow()`` has been added. This method makes it easier to calculate
   differences from 'now'.
+- ``Time::i18nFormat()`` now supports non-gregorian calendars when formatting
+  dates.
