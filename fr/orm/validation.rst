@@ -207,7 +207,7 @@ provider connu. Par défaut, CakePHP définit quelques providers:
    configurée avec le provider ``default``.
 
 Quand une règle de validation est créée, vous pouvez nommer le provider de cette
-règle. Par exemple, si votre entity a une méthode 'isValidRole', vous pouvez
+règle. Par exemple, si votre table a une méthode ``isValidRole``, vous pouvez
 l'utiliser comme une règle de validation::
 
     use Cake\ORM\Table;
@@ -225,6 +225,11 @@ l'utiliser comme une règle de validation::
                     'provider' => 'table',
                 ]);
             return $validator;
+        }
+
+        public function isValidRole($value, array $context)
+        {
+            return in_array($value, ['admin', 'editor', 'author'], true);
         }
 
     }
