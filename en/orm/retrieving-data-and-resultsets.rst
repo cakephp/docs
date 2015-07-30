@@ -67,6 +67,11 @@ when calling ``get()`` to perform read-through caching::
         'cache' => false
     ]);
 
+Optionally you can ``get()`` an entity using :ref:`custom-find-methods`. For example you may want to get all translations for an entity. You can achieve that by using the ``finder`` option::
+
+    $article = $articles->get($id, [
+        'finder' => 'translations',
+    ]);
 
 Using Finders to Load Data
 ==========================
