@@ -92,7 +92,7 @@ the specific multipart HTTP request you want::
 
     $data = new FormData();
 
-    // Create an xml part
+    // Create an XML part
     $xml = $data->newPart('xml', $xmlString);
     // Set the content type.
     $xml->type('application/xml');
