@@ -18,8 +18,6 @@ Console
 
 - ``Shell::dispatchShell()`` no longer outputs the welcome message from the
   dispatched shell.
-- :doc:`/console-and-shells/helpers` were added. Shell Helpers allow you to
-  package up complex output logic in a reusable way.
 - The ``breakpoint()`` helper function has been added. This function provides
   a snippet of code that can be put into ``eval()`` to trigger an interactive
   console. This is very helpful when debugging in test cases, or other CLI
