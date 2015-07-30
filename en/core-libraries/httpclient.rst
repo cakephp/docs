@@ -81,6 +81,36 @@ a pre-encoded query string from ``http_build_query()``::
         'search' => $this->request->data('search'),
     ]));
 
+Building Multipart Request Bodies by Hand
+-----------------------------------------
+
+There may be times when you need to build a request body in a very specific way.
+In these situations you can often use ``Cake\Network\Http\FormData`` to craft
+the specific multipart HTTP request you want::
+
+    use Cake\Network\Http\FormData;
+
+    $data = new FormData();
+
+    // Create an xml part
+    $xml = $data->newPart('xml', $xmlString);
+    // Set the content type.
+    $xml->type('application/xml');
+    $data->add($xml);
+
+    // Create a file upload with addFile()
+    // This will append the file to the form data as well.
+    $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
+    $file->contentId('abc123');
+    $file->disposition('attachment');
+
+    // Send the request.
+    $response = $http->post(
+        'http://example.com/api',
+        (string)$data,
+        ['headers' => ['Content-Type' => 'multipart/related']]
+    );
+
 Sending Request Bodies
 ======================
 
