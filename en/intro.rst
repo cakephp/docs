@@ -18,7 +18,7 @@ CakePHP provides a basic organizational structure that covers class names,
 filenames, database table names, and other conventions. While the conventions
 take some time to learn, by following the conventions CakePHP provides you can
 avoid needless configuration and make a uniform application structure that makes
-working with various projects a breeze. The :doc:`conventions chapter
+working with various projects smoothly. The :doc:`conventions chapter
 </intro/conventions>` covers the various conventions that CakePHP uses.
 
 
@@ -150,8 +150,7 @@ features in CakePHP are:
 * A :doc:`caching </core-libraries/caching>` framework that integrates with
   Memcache, Redis and other backends.
 * Powerful :doc:`code generation tools
-  </bake/usage>` so you can hit the ground
-  running.
+  </bake/usage>` so you can start immidiately.
 * :doc:`Integrated testing framework </development/testing>` so you can ensure
   your code works perfectly.
 
