@@ -64,7 +64,6 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
 
     use App\Controller\AppController;
     use Cake\Event\Event;
-    use Cake\Network\Exception\NotFoundException;
 
     class UsersController extends AppController
     {
@@ -82,10 +81,6 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('utilisateur non valide'));
-            }
-
             $user = $this->Users->get($id);
             $this->set(compact('user'));
         }
