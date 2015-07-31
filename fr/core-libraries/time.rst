@@ -134,7 +134,7 @@ dates formatées. CakePHP facilite cela::
     // Affiche un stamp datetime localisé.
     echo $now;
 
-    // Affiche '4/20/14, 10:10 PM' pour la locale en-US
+    // Affiche '10/31/14, 12:00 AM' pour la locale en-US
     $now->i18nFormat();
 
     // Utilise la date complète et le format time
@@ -143,7 +143,7 @@ dates formatées. CakePHP facilite cela::
     // Utilise la date complète mais un format court de temps
     $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
-    // affiche '2014-04-20 22:10'
+    // affiche '2014-10-31 00:00:00'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
 
 Il est possible de spécifier le format d'affichage désiré. Vous pouvez soit
