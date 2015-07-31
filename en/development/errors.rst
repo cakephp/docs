@@ -317,7 +317,7 @@ to indicate failure states. For example::
 
     public function view($id)
     {
-        $post = $this->Post->read(null, $id);
+        $post = $this->Post->findById($id)->first();
         if (!$post) {
             throw new NotFoundException();
         }
