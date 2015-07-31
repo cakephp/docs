@@ -137,6 +137,7 @@ Acl components. First add a login and logout action to your
 Then create the following view file for login at
 ``app/View/Users/login.ctp``::
 
+    <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
         'legend' => __('Login'),
@@ -144,6 +145,7 @@ Then create the following view file for login at
         'password'
     ));
     echo $this->Form->end('Login');
+    ?>
 
 Next we'll have to update our User model to hash passwords before they go into
 the database. Storing plaintext passwords is extremely insecure and
