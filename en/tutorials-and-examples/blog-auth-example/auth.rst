@@ -62,7 +62,6 @@ with CakePHP::
 
     use App\Controller\AppController;
     use Cake\Event\Event;
-    use Cake\Network\Exception\NotFoundException;
 
     class UsersController extends AppController
     {
@@ -80,10 +79,6 @@ with CakePHP::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-
             $user = $this->Users->get($id);
             $this->set(compact('user'));
         }

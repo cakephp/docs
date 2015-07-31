@@ -198,7 +198,7 @@ CakePHP sets up a few providers:
    ``default`` provider.
 
 When a validation rule is created you can name the provider of that rule. For
-example, if your entity had a 'isValidRole' method you could use it as
+example, if your table had a ``isValidRole`` method you could use it as
 a validation rule::
 
     use Cake\ORM\Table;
@@ -216,6 +216,11 @@ a validation rule::
                     'provider' => 'table',
                 ]);
             return $validator;
+        }
+
+        public function isValidRole($value, array $context)
+        {
+            return in_array($value, ['admin', 'editor', 'author'], true);
         }
 
     }
