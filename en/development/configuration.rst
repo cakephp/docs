@@ -284,7 +284,7 @@ Checking to see if Configuration Data is Defined
 
 .. php:staticmethod:: check($key)
 
-Used to check if a key/path exists and has not-null value::
+Used to check if a key/path exists and has non-null value::
 
     $exists = Configure::check('Company.name');
 
@@ -330,7 +330,7 @@ need to attach it to Configure using :php:meth:`Configure::config()`::
 
 You can have multiple engines attached to Configure, each reading different
 kinds or sources of configuration files. You can interact with attached engines
-using a few other methods on Configure. To see check which engine aliases are
+using a few other methods on Configure. To check which engine aliases are
 attached you can use :php:meth:`Configure::configured()`::
 
     // Get the array of aliases for attached engines.
