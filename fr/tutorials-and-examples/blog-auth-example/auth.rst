@@ -225,6 +225,12 @@ fichier entity dans **src/Model/Entity/User.php** et ajoutons ce qui suit::
     class User extends Entity
     {
 
+        // Rend les champs assignables en masse sauf pour le champ clé primaire "id".
+        protected $_accessible = [
+            '*' => true,
+            'id' => false
+        ];
+
         // ...
 
         protected function _setPassword($password)

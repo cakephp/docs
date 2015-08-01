@@ -23,8 +23,8 @@ d'une ``View``, utilisez la classe ``Time``::
         {
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
-                // greet user with a happy birthday message
-                $this->Flash->success(__('Happy birthday to you...'));
+                // accueillir l'utilisateur avec un message de bon anniversaire
+                $this->Flash->success(__('Bon anniversaire à toi...'));
             }
         }
     }
@@ -151,6 +151,26 @@ passer une `constante IntlDateFormatter
 <http://www.php.net/manual/en/class.intldateformatter.php>`_ ou une chaine
 complète de formatage tel que spécifié dans cette ressource:
 http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+
+Vous pouvez aussi formater les dates avec des calendriers non-grégoriens::
+
+    // Affiche 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
+    $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
+
+Les types de calendrier suivants sont supportés:
+
+* japanese
+* buddhist
+* chinese
+* persian
+* indian
+* islamic
+* hebrew
+* coptic
+* ethiopic
+
+.. versionadded:: 3.1
+    Le support des calendriers non-grégoriens a été ajouté dans 3.1
 
 .. php:method:: nice()
 

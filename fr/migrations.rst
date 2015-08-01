@@ -120,9 +120,8 @@ L'exécution de la ligne de commande ci-dessus va générer::
             public function change()
             {
                 $table = $this->table('products');
-                $table->addColumn('name', 'string')
-                      ->addColumn('price', 'decimal')
-                      ->save();
+                $table->addColumn('price', 'decimal')
+                      ->update();
             }
 
 Il est également possible d'ajouter des indexes de colonnes::
@@ -138,7 +137,7 @@ va générer::
                 $table = $this->table('products');
                 $table->addColumn('name', 'string')
                       ->addIndex(['name'])
-                      ->save();
+                      ->update();
             }
 
 
