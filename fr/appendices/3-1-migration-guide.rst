@@ -163,6 +163,6 @@ Time
 ----
 
 - ``Time::fromNow()`` a été ajoutée. Cette méthode facilite le calcul de
-différence depuis l'instant présent.
+  différence depuis l'instant présent.
 - ``Time::i18nFormat()`` supporte les calendriers non-grégorien lors du
   formatage des dates.

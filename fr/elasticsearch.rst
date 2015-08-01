@@ -148,9 +148,6 @@ appliquer les règles d'application fonctionne de la même façon que pour
 l'ORM relationnel. Regardez les sections :ref:`validating-request-data`
 et :ref:`application-rules` pour plus d'informations.
 
-.. comment::
-    A besoin d'information sur les validateurs imbriqués.
-
 Sauvegarder les Nouveaux Documents
 ==================================
 
