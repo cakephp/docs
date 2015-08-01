@@ -635,7 +635,7 @@ JOIN`` with the specified association and will also load the fields into the
 result set.
 
 There may be cases where you want to use ``matching()`` but are not interested
-in loading the fields into the result set. For this purpose, you can use 
+in loading the fields into the result set. For this purpose, you can use
 ``innerJoinWith()``::
 
     $query = $articles->find();
@@ -943,7 +943,7 @@ query::
 .. _loading-additional-associations:
 
 Loading Additional Associations
---------------------------------
+-------------------------------
 
 Once you've created a result set, you may need to load
 additional associations. This is the perfect time to lazily eager load data. You
@@ -961,7 +961,7 @@ entities.
 .. _map-reduce:
 
 Modifying Results with Map/Reduce
-==================================
+=================================
 
 More often than not, find operations require post-processing the data that is
 found in the database. While entities' getter methods can take care of most of

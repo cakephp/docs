@@ -150,7 +150,7 @@ exceptions for HTTP methods
 
 .. php:exception:: InvalidCsrfTokenException
 
-    Used for doing a 403 error caused by an invalid CSRF token
+    Used for doing a 403 error caused by an invalid CSRF token.
 
 .. php:exception:: NotFoundException
 

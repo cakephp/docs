@@ -271,24 +271,25 @@ Comme vous pouvez le voir sur les exemples précédents, toutes les méthodes
 qui modifient la requête fournissent une interface fluide, vous permettant
 de construire une requête avec des appels de méthode chaînés.
 
-Selecting All Fields From a Table
----------------------------------
+Sélectionner Tous les Champs d'une Table
+----------------------------------------
 
-By default a query will select all fields from a table, the exception is when you
-call the ``select()`` function yourself and pass certain fields::
+Par défaut, une requête va sélectionner tous les champs d'une table, l'exception
+est quand vous appelez la fonction ``select()`` vous-même et passer certains
+champs::
 
-    // Only select id and title from the articles table
+    // Sélectionne seulement id et title de la table articles
     $articles->find()->select(['id', 'title']);
 
-If you wish to still select all fields from a table after having called
-``select($fields)``, you can pass the table instance to ``select()`` for this
-purpose::
+Si vous souhaitez toujours sélectionner tous les champs d'une table après avoir
+appelé ``select($fields)``, vous pouvez dans cette optique passer l'instance de
+table à ``select()``::
 
-    // Only select id and title from the articles table
+    // Sélectionne seulement id et title de la table articles
     $query = $articlesTable->find();
     $query
         ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
-        ->select($articlesTable); // Select all fields from articles
+        ->select($articlesTable); // Sélectionne tous les champs de articles
 
 Utiliser les Fonctions SQL
 --------------------------
@@ -325,6 +326,15 @@ méthode ``func()``:
   littéral.
 - ``now()`` Prend soit 'time', soit 'date' comme argument vous permettant de
   récupérer soit le time courant, soit la date courante.
+- ``extract()`` Retourne la partie de la date spécifiée de l'expression SQL.
+- ``dateAdd()`` Ajoute l'unité de temps à l'expression de la date.
+- ``dayOfWeek()`` Retourne une FunctionExpression représentant un appel à la
+  fonction SQL WEEKDAY.
+
+.. versionadded:: 3.1
+
+    Les méthodes ``extract()``, ``dateAdd()`` et ``dayOfWeek()`` ont été
+    ajoutées.
 
 Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types
 de paramètres que vous pouvez utiliser; Les arguments littéraux et les

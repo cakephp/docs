@@ -20,9 +20,6 @@ Console
 
 - ``Shell::dispatchShell()`` n'affiche plus le message d'accueil à partir du
   shell dispatché.
-- Les :doc:`/console-and-shells/helpers` ont été ajoutés. Les Shell Helpers vous
-  permettent d'empaqueter un logique de sortie complexe d'une manière
-  réutilisable.
 - La fonction ``breakpoint()`` a été ajoutée. Cette fonction fournit un snippet
   de code qui peut être utilisé dans un ``eval()`` pour lancer une console
   interactive. C'est très utile pour debugger les tests ou tout script CLI.
@@ -30,9 +27,16 @@ Console
 Ajout des Shell Helpers
 -----------------------
 
-Les applications de console peuvent maintenant créer des classes Helper qui
-encapsulent des blocs réutilisables de logique de sortie. Consultez la section
-sur :doc:`/console-and-shells/helpers` pour plus d'informations.
+- Les applications de console peuvent maintenant créer des classes Helper qui
+  encapsulent des blocs réutilisables de logique de sortie. Consultez la section
+  sur :doc:`/console-and-shells/helpers` pour plus d'informations.
+
+RoutesShell
+-----------
+
+- RoutesShell a été ajouté et vous fournit maintenant un moyen simple pour
+  utiliser l'interface CLI pour tester et débugger les routes. Consultez la
+  section :doc:`/console-and-shells/routes-shell` pour plus d'informations.
 
 Controller
 ==========
@@ -40,11 +44,17 @@ Controller
 AuthComponent
 -------------
 
-- Une nouvelle config ``storage`` a été ajoutée. Elle contient le nom de la
-  classe de stockage que ``AuthComponent`` utilise pour stocker l'enregistrement
-  de l'utilisateur. Par défaut ``SessionStorage`` est utilisée.
+- Une nouvelle option de configuration ``storage`` a été ajoutée. Elle contient
+  le nom de la classe de stockage que ``AuthComponent`` utilise pour stocker
+  l'enregistrement de l'utilisateur. Par défaut ``SessionStorage`` est utilisée.
   Si vous utilisez un authentificateur stateless, vous devez configurer
   ``AuthComponent`` avec ``MemoryStorage`` à la place.
+- Une nouvelle option de config ``checkAuthIn`` a été ajoutée. Elle contient
+  le nom de l'event pour lequel les vérifications d'auth doivent être faites.
+  Par défaut ``Controller.startup`` est utilisé, mais vous pouvez la définir
+  dans ``Controller.initialize`` si vous souhaitez que l'authentification
+  soit vérifiée avant que la méthode ``beforeFilter()`` de votre controller ne
+  soit executée.
 
 FlashComponent
 --------------
@@ -53,12 +63,21 @@ FlashComponent
   méthodes ``set()`` et ``__call()``. Cela signifie que la structure des
   données stockées dans la Session pour les messages Flash a changé.
 
+CsrfComponent
+-------------
+
+- Le temps d'expiration du cookie CSRF peut maintenant être défini en une
+  valeur compatible avec ``strtotime()``.
+- Les tokens CSRF invalides vont maintenant lancer une
+  ``Cake\Network\Exception\InvalidCsrfTokenException`` plutôt qu'une
+  ``Cake\Network\Exception\ForbiddenException``.
+
 RequestHandlerComponent
 -----------------------
 
-- ``RequestHandlerComponent`` now switches the layout and template based on
-  the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
-  instead of ``startup()``.
+- ``RequestHandlerComponent`` échange maintenant le layout et le template selon
+  l'extension parsée ou l'en-tête ``Accept-Type`` dans le callback
+  ``beforeRender()`` plutôt que dans ``startup()``.
 
 Network
 =======
@@ -90,6 +109,8 @@ Query
   en paramètres. Ces types de paramètres sélectionneront toutes les colonnes de
   l'instance de la table ou la table ciblée par l'association.
 - ``Table::loadInto()`` a été ajoutée.
+- Les fonctions SQL brutes ``EXTRACT``, ``DATE_ADD`` et ``DAYOFWEEK`` raw ont
+  été ajoutées avec ``extract()``, ``dateAdd()`` et ``dayOfWeek()``.
 
 View
 ====
@@ -115,6 +136,13 @@ FlashHelper
   sera rendu dans son propre élément. Les messages seront rendus dans l'ordre
   dans lequel ils ont été enregistrés.
 
+FormHelper
+----------
+
+- Une nouvelle option ``templateVars`` a été ajoutée. ``templateVars`` vous
+  permet de passer des variables supplémentaires à vos templates de formulaire
+  personnalisés.
+
 Email
 =====
 
@@ -128,7 +156,6 @@ Mailer
 - La classe ``Mailer`` a été ajoutée. Cette classe aide à créer des emails
   réutilisables dans une application.
 
-
 I18n
 ====
 
@@ -137,3 +164,5 @@ Time
 
 - ``Time::fromNow()`` a été ajoutée. Cette méthode facilite le calcul de
 différence depuis l'instant présent.
+- ``Time::i18nFormat()`` supporte les calendriers non-grégorien lors du
+  formatage des dates.

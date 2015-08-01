@@ -150,6 +150,14 @@ les méthodes HTTP.
 
     Utilisée pour faire une erreur 403 Interdite.
 
+.. versionadded:: 3.1
+
+    InvalidCsrfTokenException a été ajoutée.
+
+.. php:exception:: InvalidCsrfTokenException
+
+    Utilisée pour faire une erreur 403 causée par un token CSRF invalide.
+
 .. php:exception:: NotFoundException
 
     Utilisée pour faire une erreur 404 Non Trouvé.

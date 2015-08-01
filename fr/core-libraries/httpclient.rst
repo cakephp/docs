@@ -85,6 +85,37 @@ de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
         'search' => $this->request->data('search'),
     ]));
 
+Construire des Corps de Requête Multipart à la Main
+---------------------------------------------------
+
+Il peut arriver que vous souhaitiez construire un corps de requête d'une
+façon très spécifique. Dans ces situations, vous pouvez utiliser
+``Cake\Network\Http\FormData`` pour fabriquer la requête HTTP multipart
+spécifique que vous souhaitez::
+
+    use Cake\Network\Http\FormData;
+
+    $data = new FormData();
+
+    // Créé une partie XML
+    $xml = $data->newPart('xml', $xmlString);
+    // Définit le type de contenu.
+    $xml->type('application/xml');
+    $data->add($xml);
+
+    // Créé un fichier upload avec addFile()
+    // Ceci va aussi ajouter le fichier aux données du formulaire.
+    $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
+    $file->contentId('abc123');
+    $file->disposition('attachment');
+
+    // Envoie la requête.
+    $response = $http->post(
+        'http://example.com/api',
+        (string)$data,
+        ['headers' => ['Content-Type' => 'multipart/related']]
+    );
+
 Envoyer des Corps de Requête
 ============================
 

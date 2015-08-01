@@ -105,7 +105,7 @@ Query
   table or association instance's target table.
 - ``Table::loadInto()`` was added.
 - ``EXTRACT``, ``DATE_ADD`` and ``DAYOFWEEK`` raw SQL functions have been
-  abstracted to ``extract()``, ``dateAdd`` and ``dayOfWeek()``.
+  abstracted to ``extract()``, ``dateAdd()`` and ``dayOfWeek()``.
 
 
 View

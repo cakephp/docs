@@ -10,7 +10,7 @@ helpers à partir de votre theme, vous devrez continuer à utiliser la
 :term:`syntaxe de plugin`
 
 Pour utiliser les themes, définissez le nom du theme dans votre controller ou
-votre callback ``beforeRender()`` ::
+votre callback ``beforeRender()``::
 
     class ExempleController extends AppController
     {
