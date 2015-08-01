@@ -288,7 +288,7 @@ look like::
         $routes->fallbacks('InflectedRoute');
     });
 
-The above defines a new 'route' which connects the **/bookmarks/tagged/*** path,
+The above defines a new 'route' which connects the **/bookmarks/tagged/** path,
 to ``BookmarksController::tags()``. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
 **http://localhost:8765/bookmarks/tagged**, we would see a helpful error page

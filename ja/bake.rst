@@ -1,5 +1,5 @@
 Bakeコンソール
-############
+################
 
 ..
     CakePHP's bake console is another effort to get you up and running in CakePHP
@@ -15,7 +15,7 @@ bakeでは、簡単にフル機能を備えたアプリケーションを生成�
 また、Scaffoldアプリケーションをbakeで試作してみるという使い方も、一般的です。
 
 インストール手順
-============
+=================
 
 ..
     Before trying to use or extend bake, make sure it is installed in your

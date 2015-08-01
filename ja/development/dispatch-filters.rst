@@ -174,6 +174,5 @@ Cakeでは、 ``PagesController`` によってほとんどの場合提供され�
 
 .. meta::
     :title lang=ja: ディスパッチャーフィルター
-    :description lang=ja: ディスパッチャーフィルターはCakePHPがリクエストやレスポンスが送られる前にそれを編集するための
-    ミドルレイヤー
+    :description lang=ja: ディスパッチャーフィルターはCakePHPがリクエストやレスポンスが送られる前にそれを編集するための ミドルレイヤー
     :keywords lang=ja: middleware, ミドルウェアー,filter, フィルター, ディスパッチャー, request, リクエスト, response, レスポンス, rack, application stack, events, beforeDispatch, afterDispatch, router, ルーター, ルーティング

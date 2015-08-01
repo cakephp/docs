@@ -1,5 +1,5 @@
 ブックマークチュートリアル
-###################
+###########################
 このチュートリアルは簡単なブックマークのためのアプリを作ります。
 始めるためにはCakeのインストールが必要で、加えて早く作るために
 データベースの作成とCakeが提供するツールを使います。
@@ -12,7 +12,7 @@
 はじめましょう。
 
 CakePHPのインストール
-===============
+=======================
 
 最も簡単なインストール方法はComposerを使う方法です.  
 Composerを使うとコマンドラインプロンプトやターミナルを使って
@@ -23,7 +23,7 @@ cURL がインストールされていたら、このコマンドでインスト
 
     curl -s https://getcomposer.org/installer | php
 
-もしくは ``composer.phar`` を`Composer website <https://getcomposer.org/download/>`_ から落として下さい.
+もしくは ``composer.phar`` を`Composer website <https://getcomposer.org/download/>`_ から落として下さい.::
 
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
@@ -70,7 +70,7 @@ Composerを使うメリットは、 自動的に完全なセットアップを�
 :doc:`/intro/cakephp-folder-structure` 
 
 インストールできたか確かめる
-=========================
+===============================
 デフォルトのページで簡単に正しくインストールできたか確かめましょう。
 これをする前に、開発サーバーを起動します。::
 
@@ -127,12 +127,12 @@ Composerを使うメリットは、 自動的に完全なセットアップを�
         FOREIGN KEY bookmark_key(bookmark_id) REFERENCES bookmarks(id)
     );
 
-複合主キーを``bookmarks_tags``で使おうとして注意されると思います。
+複合主キーを ``bookmarks_tags`` で使おうとして注意されると思います。
 Cakeは複合主キーをほとんどどこでもサポートしているので、もっと簡単に複数の
 アプリを一つのアプリで提供できます（マルチテナント）。
 
 テーブルとカラム名は適当に決めずに、CakePHPの
-:doc:`命名規則 </intro/conventions>`に従ったほうがいいです。
+:doc:`命名規則 </intro/conventions>` に従ったほうがいいです。
 非常に簡単に開発できるようになり、いちいち余計な設定しなくて済みます。
 Cakeは十分レガシーなDBに対応できるぐらい柔軟ですが、命名規則に従うことで、時間を節約できます。
 
@@ -176,7 +176,7 @@ able to connect to the database' がチェックされているはずです。
     **config/app.default.php**.
 
 スキャットフォールド（簡易）コードの生成
-========================
+=============================================インストールできたか確かめる
 
 
 CakePHP　の命名規則にDBが従っていれば
@@ -202,7 +202,7 @@ CakePHP　の命名規則にDBが従っていれば
     404　not foundになってしまったら, アパッチの mod_rewrite　モジュールがロードされているか確かめて下さい。
 
 パスワードハッシュを追加
-=======================
+============================
 
 ユーザーを作ると平文でパスワードが保存されてしまいます。セキュリティー上とても良くないので直しましょう
 
@@ -213,7 +213,7 @@ CakePHP　の命名規則にDBが従っていれば
 例えば、パスワードハッシュは個別のレコードで行われ、エンティティーオブジェクトでビヘイビアを操作します。
 なぜなら、毎回パスワードを暗号化するときにmutator/setter　メソッドを使うからです。
 Cakeは規約ベースのセッターメソッドをエンティーにセットします。
-**src/Model/Entity/User.php** にパスワード用のセッターを追加しましょう。
+**src/Model/Entity/User.php** にパスワード用のセッターを追加しましょう。::
 
     namespace App\Model\Entity;
 
@@ -274,8 +274,8 @@ Cakeは規約ベースのセッターメソッドをエンティーにセット�
         $routes->fallbacks('InflectedRoute');
     });
 
-上記は新しい　**/bookmarks/tagged/***で``BookmarksController::tags()``に接続するためのルート
-定義したルートでURLをメソッド名とは別に設定できます。
+上記は新しい　**/bookmarks/tagged/** で ``BookmarksController::tags()``
+に接続するためのルート 定義したルートでURLをメソッド名とは別に設定できます。
 
 もし **http://localhost:8765/bookmarks/tagged** にアクセスしたらCekeによる有益なエラーメッセージ
 (the controller action does not exist == アクションの不存在）のある
