@@ -3,7 +3,7 @@
 
 
 ページネーション
-##########
+################
 
 .. 
     php:namespace:: Cake\Controller\Component
@@ -45,7 +45,8 @@ php:class:: PaginatorComponent
     of pagination links & buttons simple.
 
 
-CakePHPにおけるページネーションは、コントローラーにおけるコンポーネントによって提供され、ページ分けされたクエリーをより簡単にビルドできるようにします。ビューの中のView\Helper\PaginatorHelper は、ページネーションのリンクやボタンを作り出すことを容易にすることに使われます。
+CakePHPにおけるページネーションは、コントローラーにおけるコンポーネントによって提供され、ページ分けされたクエリーをより簡単にビルドできるようにします。ビューの中のView\Helper\PaginatorHelper
+は、ページネーションのリンクやボタンを作り出すことを容易にすることに使われます。
 
 
 .. 
@@ -166,9 +167,9 @@ Paginate プロパティからほとんどの検索オプションを指定す�
                     'tagged' => $customFinderOptions
                 ]
             ];
-    	    
+
             $articles = $this->paginate($this->Articles);
-    	    
+
             $this->set(compact('articles', 'tags'));
         }
     }
@@ -209,7 +210,7 @@ ArticlesやAuthorsのキーの値は、モデル/キーが有する全てのプ�
     added. The controller's paginate method will return the result set of the
     paginated query, and set pagination metadata to the request. You can access the
     pagination metadata at ``$this->request->params['paging']``. A more complete
-    example of using ``paginate()`` would be::
+    example of using ``paginate()`` would be:
 
 
 $paginate プロパティが定義された後、ページネーションデータを作成するためには、Controller\Controller::paginate()メソッドを使用し、PaginatorHelperがまだ加えられていない場合はPaginatorHelperを加えます。Controllerのpaginateメソッドは、ページ分けされた検索結果を返し、ページネーションのメタデータをrequestにセットします。ページネーションのメタデータは、$this->request->params['paging']でアクセスできます。paginate()を使用するもっとまとまった例としては、
@@ -269,7 +270,7 @@ $paginate プロパティが定義された後、ページネーションデー�
 
 
 Paginatorを直接使用する場合
-============================
+===========================
 
 
 .. 
@@ -306,7 +307,7 @@ Paginatorを直接使用する場合
 
 
 並び替えに使用するフィールドをコントロール
-======================================
+==========================================
 
 
 .. 
@@ -343,7 +344,7 @@ Paginatorを直接使用する場合
 
 
 取得できる行数の最大値を設定
-====================================================
+============================
 
 .. 
     The number of results that are fetched is exposed to the user as the
@@ -377,7 +378,7 @@ Paginatorを直接使用する場合
 
 
 追加のアソシエーションをJoinさせる
-===============================
+==================================
 
 
 .. 
@@ -405,7 +406,7 @@ Contain変数を使用することで、ページネーションされたテー�
 
 
 領域外のページリクエスト
-==========================
+========================
 
 .. 
     The PaginatorComponent will throw a ``NotFoundException`` when trying to
@@ -442,7 +443,7 @@ Contain変数を使用することで、ページネーションされたテー�
 
 
 ビューにおけるページネーション
-======================
+==============================
 
 .. 
     Check the :php:class:`~Cake\\View\\Helper\\PaginatorHelper` documentation for
