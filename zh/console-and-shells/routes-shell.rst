@@ -1,5 +1,5 @@
-Models
-######
+Routes Shell
+############
 
 .. note::
     The documentation is not currently supported in Chinese language for this
@@ -11,19 +11,3 @@ Models
 
     You can referer to the english version in the select top menu to have
     information about this page's topic.
-
-.. toctree::
-    :maxdepth: 2
-
-    orm/database-basics
-    orm/query-builder
-    orm/table-objects
-    orm/entities
-    orm/retrieving-data-and-resultsets
-    orm/validation
-    orm/saving-data
-    orm/deleting-data
-    orm/associations
-    orm/behaviors
-    orm/schema-system
-    console-and-shells/orm-cache

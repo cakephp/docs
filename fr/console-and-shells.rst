@@ -1065,8 +1065,9 @@ Plus de sujets
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
-    console-and-shells/upgrade-shell
     console-and-shells/plugin-shell
+    console-and-shells/routes-shell
+    console-and-shells/upgrade-shell
 
 .. meta::
     :title lang=fr: Console et Shells
