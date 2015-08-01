@@ -279,6 +279,8 @@ purpose::
 .. versionadded:: 3.1
     Passing a table object to select() was added in 3.1.
 
+.. _using-sql-functions:
+
 Using SQL Functions
 -------------------
 
@@ -339,8 +341,9 @@ following SQL on MySQL::
 The ``:c0`` value will have the ``' NEW'`` text bound when the query is
 executed.
 
-In addition to the above functions, the ``func()`` method can be used to create any generic SQL function
-such as ``year``, ``date_format``, ``convert``, etc. For example::
+In addition to the above functions, the ``func()`` method can be used to create
+any generic SQL function such as ``year``, ``date_format``, ``convert``, etc.
+For example::
 
     $query = $articles->find();
     $year = $query->func()->year([
@@ -358,6 +361,19 @@ such as ``year``, ``date_format``, ``convert``, etc. For example::
 Would result in::
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
+You should remember to use the function builder whenever you need to put
+untrusted data into SQL functions or stored procedures::
+
+    // Use a stored procedure
+    $query = $articles->find();
+    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
+    $query->where(function ($exp) use ($query) {
+        return $exp->between($lev, 0, $tolerance);
+    });
+
+    // Generated SQL would be
+    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
 
 Aggregates - Group and Having
 -----------------------------
@@ -739,6 +755,12 @@ conditions:
             return $exp->between('population', 999, 5000000);
         });
     # WHERE population BETWEEN 999 AND 5000000,
+
+.. warning::
+
+    The field name used in expressions should **never** contain untrusted content.
+    See the :ref:`using-sql-functions` section for how to safely include
+    untrusted data into function calls.
 
 Automatically Creating IN Clauses
 ---------------------------------
