@@ -71,7 +71,7 @@ Running the Console with no arguments produces this help message::
 
     [Migrations] migrations
 
-    [CORE] i18n, orm_cache, plugin, server
+    [CORE] i18n, orm_cache, plugin, routes, server
 
     [app] behavior_time, console, orm
 
@@ -295,6 +295,12 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
+Shell Helpers
+=============
+
+If you have complex output generation logic, you can use
+:doc:`/console-and-shells/helpers` to encapsulate this logic in a re-usable way.
+
 .. _invoking-other-shells-from-your-shell:
 
 Invoking Other Shells from Your Shell
@@ -315,6 +321,38 @@ as var args or as a string::
 
 The above shows how you can call the schema shell to create the schema for a plugin
 from inside your plugin's shell.
+
+Passing extra parameters to the dispatched Shell
+------------------------------------------------
+
+.. versionadded:: 3.1
+
+It can sometimes be useful to pass on extra parameters (that are not shell arguments)
+to the dispatched Shell. In order to do this, you can now pass an array to
+``dispatchShell()``. The array is expected to have a ``command`` key as well
+as an ``extra`` key::
+
+    // Using a command string
+    $this->dispatchShell([
+       'command' => 'schema create Blog --plugin Blog'
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+    // Using a command array
+    $this->dispatchShell([
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+Parameters passed through ``extra`` will be merged in the ``Shell::$params``
+property and are accessible with the ``Shell::param()`` method.
+By default, a ``requested`` extra param is automatically added when a Shell
+is dispatched using ``dispatchShell()``. This ``requested`` parameter prevents
+the CakePHP console welcome message from being displayed on dispatched shells.
 
 Getting User Input
 ==================
@@ -434,7 +472,7 @@ ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn't support ansi codes. There
 are several built-in styles, and you can create more. The built-in ones are
 
-* ``error`` Error messages. Red underlined text.
+* ``error`` Error messages. Red text.
 * ``warning`` Warning messages. Yellow text.
 * ``info`` Informational messages. Cyan text.
 * ``comment`` Additional text. Blue text.
@@ -958,12 +996,14 @@ More Topics
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
-    console-and-shells/upgrade-shell
     console-and-shells/plugin-shell
+    console-and-shells/routes-shell
+    console-and-shells/upgrade-shell
 
 .. meta::
     :title lang=en: Console and Shells

@@ -77,7 +77,7 @@ Quand vous lancez la Console sans argument, cela affiche ce message d'aide::
 
     [Migrations] migrations
 
-    [CORE] i18n, orm_cache, plugin, server
+    [CORE] i18n, orm_cache, plugin, routes, server
 
     [app] behavior_time, console, orm
 
@@ -310,12 +310,19 @@ Vous pouvez charger les tâches à la volée en utilisant l'objet Task Collectio
 Vous pouvez charger les tâches qui ne sont pas déclarées dans $tasks de cette
 façon::
 
-    $Project = $this->Tasks->load('Project');
+    $project = $this->Tasks->load('Project');
 
 Chargera et retournera une instance ProjectTask. Vous pouvez charger les tâches
 à partir des plugins en utilisant::
 
-    $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+    $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
+
+Shell Helpers
+=============
+
+Si vous avez une logique complexe de génération de sortie, vous pouvez utiliser
+les :doc:`/console-and-shells/helpers` pour encapsuler cette logique d'une manière
+réutilisable.
 
 .. _invoking-other-shells-from-your-shell:
 
@@ -336,6 +343,39 @@ chaînes de caractères::
 
 Ce qui est au-dessus montre comment vous pouvez appeler le shell schema pour un
 plugin à partir du shell de votre plugin.
+
+Passer des paramètres supplémentaires au Shell appelé
+-----------------------------------------------------
+
+.. versionadded:: 3.1
+
+Il peut parfois être utile de passer des paramètres supplémentaires (qui ne
+seraient pas des arguments du Shell) aux Shells appelés.
+Pour ce faire, vous pouvez maintenant passer un tableau à ``dispatchShell()``.
+Le tableau devra avoir une clé ``command`` ainsi qu'une clé ``extra``::
+
+    // En passant la commande via une chaîne
+    $this->dispatchShell([
+       'command' => 'schema create Blog --plugin Blog'
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+    // En passant la commande via un tableau
+    $this->dispatchShell([
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+Les paramètres ajoutés via ``extra`` seront fusionnés dans la propriété
+``Shell::$params`` et accessibles via la méthode ``Shell::param()``.
+Par défaut, un paramètre supplémentaire ``requested`` est automatiquement
+ajouté quand un Shell est appelé via ``dispatchShell()``. Ce paramètre
+empêche la console de CakePHP d'afficher le message de bienvenue à chaque
+Shell appelé via ``dispatchShell()``.
 
 Récupérer les Entrées de l'Utilisateur
 ======================================
@@ -464,7 +504,7 @@ supprimera les tags si vous êtes sur une console qui ne supporte pas les
 codes ansi. Il y a plusieurs styles intégrés, et vous pouvez en créer plus.
 Ceux intégrés sont::
 
-* ``error`` Messages d'Erreur. Texte rouge souligné.
+* ``error`` Messages d'Erreur. Texte rouge.
 * ``warning`` Messages d'avertissement. Texte jaune.
 * ``info`` Messages d'informations. Texte cyan.
 * ``comment`` Texte supplémentaire. Texte bleu.
@@ -1020,6 +1060,7 @@ Plus de sujets
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell

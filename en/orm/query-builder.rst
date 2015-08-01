@@ -256,6 +256,29 @@ As you can see from the examples above, all the methods that modify the query
 provide a fluent interface, allowing you to build a query through chained method
 calls.
 
+Selecting All Fields From a Table
+---------------------------------
+
+By default a query will select all fields from a table, the exception is when you
+call the ``select()`` function yourself and pass certain fields::
+
+    // Only select id and title from the articles table
+    $articles->find()->select(['id', 'title']);
+
+If you wish to still select all fields from a table after having called
+``select($fields)``, you can pass the table instance to ``select()`` for this
+purpose::
+
+    // Only all fields from the articles table including
+    // a calculated slug field.
+    $query = $articlesTable->find();
+    $query
+        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select($articlesTable); // Select all fields from articles
+
+.. versionadded:: 3.1
+    Passing a table object to select() was added in 3.1.
+
 Using SQL Functions
 -------------------
 
@@ -286,6 +309,14 @@ A number of commonly used functions can be created with the ``func()`` method:
   treated as bound parameters unless marked as literal.
 - ``now()`` Take either 'time' or 'date' as an argument allowing you to get
   either the current time, or current date.
+- ``extract()`` Returns the specified date part from the SQL expression.
+- ``dateAdd()`` Add the time unit to the date expression.
+- ``dayOfWeek()`` Returns a FunctionExpression representing a call to SQL
+  WEEKDAY function.
+
+.. versionadded:: 3.1
+
+    ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Literal parameters allow

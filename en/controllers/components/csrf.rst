@@ -12,7 +12,14 @@ are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
 is added containing the CSRF token. During the ``Controller.startup`` event, if
 the request is a POST, PUT, DELETE, PATCH request the component will compare the
 request data & cookie value. If either is missing or the two values mismatch the
-component will throw a :php:class:`Cake\\Network\\Exception\\ForbiddenException`.
+component will throw a
+:php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
+
+.. versionadded:: 3.1
+
+    The exception type changed from
+    :php:class:`Cake\\Network\\Exception\\ForbiddenException` to
+    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
 Using the CsrfComponent
 =======================
@@ -31,6 +38,7 @@ The available configuration options are:
 
 - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
 - ``expiry`` How long the CSRF token should last. Defaults to browser session.
+  Accepts ``strtotime`` values as of 3.1
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.

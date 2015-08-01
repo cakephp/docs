@@ -33,6 +33,14 @@ vous pouvez utiliser la méthode ``set()``::
 
     $this->Flash->set('Ceci est un message');
 
+.. versionadded:: 3.1
+
+    Les messages Flash peuvent maintenant s'empiler. Des appels
+    successifs à ``set()`` et ``__call()`` avec la même clé ajouteront les messages à
+    ``$_SESSION``. Si vous souhaitez conserver l'ancien comportement (un message malgré
+    plusieurs appels successifs), définissez le paramètre ``clear`` à ``true`` quand
+    vous configurez le Component.
+
 Les méthodes ``__call()`` et ``set()`` de FlashComponent prennent de façon
 optionnelle un deuxième paramètre, un tableau d'options:
 
@@ -43,6 +51,12 @@ optionnelle un deuxième paramètre, un tableau d'options:
   pour le rendu.
 * ``params`` Un tableau en option de clés/valeurs pour rendre disponible des
   variables dans un element.
+
+.. versionadded:: 3.1
+
+    Une nouvelle option ``clear`` a été ajoutée. Elle doit être un
+    ``bool`` et vous permet de supprimer tous les messages de la pile pour en commencer
+    une nouvelle.
 
 Un exemple de l'utilisation de ces options::
 
@@ -76,6 +90,7 @@ Le code ci-dessus va utiliser l'element warning.ctp dans
 flash.
 
 .. note::
+
     Par défaut, CakePHP n'échappe pas le HTML dans les messages flash. Si vous
     utilisez une requête ou des données d'utilisateur dans vos messages flash,
     vous devrez les échapper avec :php:func:`h` lors du formatage de vos

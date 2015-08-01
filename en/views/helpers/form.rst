@@ -1610,6 +1610,26 @@ used if it is present. If that template is missing by default each set of label
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
 
+Adding Additional Template Variables to Templates
+-------------------------------------------------
+
+You can add additional template placeholders in custom templates, and populate
+those placeholders when generating inputs::
+
+    // Add a template with the help placeholder.
+    $this->Form->templates([
+        'inputContainer' => '<div class="input {{type}}{{required}}">
+            {{content}} <span class="help">{{help}}</span></div>'
+    ]);
+
+    // Generate an input and populate the help variable
+    echo $this->Form->input('password', [
+        'templateVars' => ['help' => 'At least 8 characters long.']
+    ]);
+
+.. versionadded:: 3.1
+    Additional template variables were added in 3.1.0
+
 Moving Checkboxes & Radios Outside of a Label
 ---------------------------------------------
 

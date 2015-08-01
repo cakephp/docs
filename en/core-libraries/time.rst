@@ -147,6 +147,26 @@ argument of this function, or pass a full ICU date formatting string as
 specified in the following resource:
 http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
 
+You can also format dates with non-gregorian calendars::
+
+    // Outputs 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
+    $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
+
+The following calendar types are supported:
+
+* japanese
+* buddhist
+* chinese
+* persian
+* indian
+* islamic
+* hebrew
+* coptic
+* ethiopic
+
+.. versionadded:: 3.1
+    Non-gregorian calendar support was added in 3.1
+
 .. php:method:: nice()
 
 Print out a predefined 'nice' format::
