@@ -1,5 +1,5 @@
-Models
-######
+Routes Shell
+############
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
@@ -9,22 +9,3 @@ Models
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
-
-More Information
-================
-
-.. toctree::
-    :maxdepth: 2
-
-    orm/database-basics
-    orm/query-builder
-    orm/table-objects
-    orm/entities
-    orm/retrieving-data-and-resultsets
-    orm/validation
-    orm/saving-data
-    orm/deleting-data
-    orm/associations
-    orm/behaviors
-    orm/schema-system
-    console-and-shells/orm-cache
