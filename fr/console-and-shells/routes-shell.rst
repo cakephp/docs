@@ -4,8 +4,8 @@ Shell Routes
 .. versionadded:: 3.1
     RoutesShell a été ajoutée dans 3.1
 
-RoutesShell fournit un moyen simple pour utiliser l'interface CLI pour tester
-et débugger les routes. Vous pouvez l'utiliser pour tester la façon dont les
+RoutesShell fournit une interface CLI simple d'utilisation pour tester et
+débugger les routes. Vous pouvez l'utiliser pour tester la façon dont les
 routes sont parsées et ce que les paramètres de routing des URLs vont générer.
 
 Récupérer une Liste de Toutes les Routes

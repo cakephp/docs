@@ -109,7 +109,7 @@ Query
   en paramètres. Ces types de paramètres sélectionneront toutes les colonnes de
   l'instance de la table ou la table ciblée par l'association.
 - ``Table::loadInto()`` a été ajoutée.
-- Les fonctions SQL brutes ``EXTRACT``, ``DATE_ADD`` et ``DAYOFWEEK`` raw ont
+- Les fonctions SQL brutes ``EXTRACT``, ``DATE_ADD`` et ``DAYOFWEEK`` ont
   été ajoutées avec ``extract()``, ``dateAdd()`` et ``dayOfWeek()``.
 
 View

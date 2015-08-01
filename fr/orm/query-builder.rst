@@ -274,9 +274,8 @@ de construire une requête avec des appels de méthode chaînés.
 Sélectionner Tous les Champs d'une Table
 ----------------------------------------
 
-Par défaut, une requête va sélectionner tous les champs d'une table, l'exception
-est quand vous appelez la fonction ``select()`` vous-même et passer certains
-champs::
+Par défaut, une requête va sélectionner tous les champs d'une table sauf si vous
+appelez la fonction ``select()`` vous-même et passez certains champs::
 
     // Sélectionne seulement id et title de la table articles
     $articles->find()->select(['id', 'title']);
