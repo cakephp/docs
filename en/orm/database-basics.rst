@@ -38,6 +38,8 @@ CakePHP supports the following relational database servers:
 You will need the correct PDO extension installed for each of the above database
 drivers. Procedural API's are not supported.
 
+.. _running-select-statements:
+
 Running Select Statements
 -------------------------
 
