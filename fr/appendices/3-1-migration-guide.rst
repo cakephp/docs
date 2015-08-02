@@ -44,6 +44,24 @@ Controller
 AuthComponent
 -------------
 
+- Les propriétés de Controller suivantes sont maintenant dépréciées:
+
+  * layout
+  * view
+  * theme
+  * autoLayout
+  * viewPath
+  * layoutPath
+
+  Au lieu de définir ces propriétés dans vos controllers, vous devrez les
+  définir dans votre View en utlisant des méthodes de même nom::
+
+    // Dans un controller
+    $this->getView()->layout('advanced');
+
+Ces méthodes doivent être appelée après que vous ayez déterminé quelle classe
+de View sera utilisée par le controller/action.
+
 - Une nouvelle option de configuration ``storage`` a été ajoutée. Elle contient
   le nom de la classe de stockage que ``AuthComponent`` utilise pour stocker
   l'enregistrement de l'utilisateur. Par défaut ``SessionStorage`` est utilisée.
