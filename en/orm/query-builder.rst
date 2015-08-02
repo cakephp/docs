@@ -778,7 +778,8 @@ the ``IS`` operator to automatically create the correct expression::
         ->where(['parent_id IS' => $parentId]);
 
 
-The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on the type of ``$parentId``
+The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on
+the type of ``$parentId``
 
 Automatic IS NOT NULL Creation
 ------------------------------
@@ -790,7 +791,8 @@ the ``IS NOT`` operator to automatically create the correct expression::
         ->where(['parent_id IS NOT' => $parentId]);
 
 
-The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL`` depending on the type of ``$parentId``
+The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL``
+depending on the type of ``$parentId``
 
 Raw Expressions
 ---------------
@@ -1103,6 +1105,34 @@ Instead, create new a query object using ``query()``::
 
 Generally, it is easier to delete data using entities and
 :php:meth:`~Cake\\ORM\\Table::delete()`.
+
+SQL Injection Prevention
+========================
+
+While the ORM and database abstraction layers prevent most SQL injections
+issues, it is still possible to leave yourself vulnerable through improper use.
+When using the expression builder, column names must not contain user data::
+
+    $query->where(function ($exp) use ($userData, $values) {
+        // Column names in all expressions are not safe.
+        return $exp->in($userData, $values);
+    });
+
+When building function expressions, function names should never contain user
+data::
+
+    // Not safe.
+    $query->func()->{$userData}($arg1);
+
+    // Also not safe to use an array of
+    // user data in a function expression
+    $query->func()->coalesce($userData);
+
+Raw expressions are never safe::
+
+    $expr = $query->newExpr()->add($userData);
+    $query->select(['two' => $expr]);
+
 
 More Complex Queries
 ====================

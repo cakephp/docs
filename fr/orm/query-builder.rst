@@ -1166,6 +1166,35 @@ requête en utilisant ``query()``::
 Généralement, il est plus facile de supprimer les données en utilisant les
 entities et :php:meth:`~Cake\\ORM\\Table::delete()`.
 
+Prévention contre les Injections SQL
+====================================
+
+Alors que l'ORM et les couches d'abstraction de base de données empêchent la
+plupart des problèmes relatifs aux injections SQL, il est toujours possible que
+vous soyez vulnérables face à une utilisation incorrecte. Lorsque vous utilisez
+le constructeur de fonctions, les noms de colonnes ne doivent pas contenir de
+données provenant d'utilisateurs::
+
+    $query->where(function ($exp) use ($userData, $values) {
+        // Les noms de colonnes dans toutes les expressions ne sont pas sûrs.
+        return $exp->in($userData, $values);
+    });
+
+Lorsque vous construisez des expressions, les noms de fonctions ne doivent
+jamais contenir de données provenant d'utilisateurs::
+
+    // Non sécurisé.
+    $query->func()->{$userData}($arg1);
+
+    // L'utilisation d'un tableau de données utilisateurs
+    // dans une fonction n'est également pas sécurisée
+    $query->func()->coalesce($userData);
+
+Les expressions brutes ne sont jamais sécurisées::
+
+    $expr = $query->newExpr()->add($userData);
+    $query->select(['two' => $expr]);
+
 Plus de Requêtes Complexes
 ==========================
 

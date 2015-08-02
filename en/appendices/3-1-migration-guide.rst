@@ -40,6 +40,27 @@ RoutesShell
 Controller
 ==========
 
+- The following Controller properties are now deprecated:
+
+  * layout
+  * view
+  * theme
+  * autoLayout
+  * viewPath
+  * layoutPath
+
+  Instead of setting these properties on your controllers, you should set them
+  on the view using methods with matching names::
+
+    // In a controller, instead of
+    $this->layout = ('advanced');
+    
+    // You should use
+    $this->getView()->layout('advanced');
+
+These methods should be called after you've determined which view class will be
+used by a controller/action.
+
 AuthComponent
 -------------
 
