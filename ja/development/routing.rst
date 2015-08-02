@@ -1,36 +1,30 @@
-Routing
+ルーティング
 #######
 
-Routing is a feature that maps URLs to controller actions. It was
-added to CakePHP to make pretty URLs more configurable and
-flexible. Using Apache's mod\_rewrite is not required for using
-routes, but it will make your address bar look much more tidy.
+ルーティングはURLをどコントローラーのアクションと関連付けてマッピングするか決める機能です。
+これはCakePHP でURLをより細かく柔軟に設定できるようにするために作られました。
+ Apache の mod\_rewrite はルーティングのために必要でないです。しかし、これはアドレスバーを綺麗に見せます。
 
-Routing in CakePHP also encompasses the idea of reverse routing,
-where an array of parameters can be reversed into a string URL.
-By using reverse routing, you can easily re-factor your application's
-URL structure without having to update all your code.
+CakePHP でのルーティングはまた 配列による引数を文字列によるURLに変換するリバースルーティングも含みます。
+リバースルーティングによって、簡単にアプリのURLの構造を全部のコードの書き直しをせずにリファクタリングできます。
 
 .. index:: routes.php
 
 .. _routes-configuration:
 
-Routes Configuration
+ルーティングの設定
 ====================
 
-Routes in an application are configured in ``app/Config/routes.php``.
-This file is included by the :php:class:`Dispatcher` when handling routes
-and allows you to define application specific routes you want used. Routes
-declared in this file are processed top to bottom when incoming requests
-are matched. This means that the order you place routes can affect how
-routes are parsed. It's generally a good idea to place most frequently
-visited routes at the top of the routes file if possible. This will
-save having to check a number of routes that won't match on each request.
+ルーティングの設定は ``app/Config/routes.php`` でできます。
+このファイルは必要なルートを制御し特定のルートを指定することを許可するときに :php:class:`Dispatcher` によってインクルードされます。
+リクエストが一致した時にこのファイルの中で宣言されているルートが最初から最後まで生成されます。
+ この意味はルーティングの設定はどのようにルートがパースされるかにちて影響を与えるということです。
+ これは頻繁アクセスするトップのルートファイルにアクセス可能な場合にルーティング（URLを切り替える）する一般的に良いアイディアです。
+ リクエストと一致しないたくさんのルートをチェックする必要性をなくします。
 
-Routes are parsed and matched in the order they are connected in.
-If you define two similar routes, the first defined route will
-have higher priority over the one defined latter. After connecting routes you
-can manipulate the order of routes using :php:meth:`Router::promote()`.
+ルートは接続先に合わせてパースされ一致させられます。
+2つの似たルートを定義する場合、最初に定義されたルートがあとに定義されたものより優先されます。
+接続後ルーティングを :php:meth:`Router::promote()` で設定できます。
 
 CakePHP also comes with a few default routes to get you started. These
 can be disabled later on once you are sure you don't need them.
