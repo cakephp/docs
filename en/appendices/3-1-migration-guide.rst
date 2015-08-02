@@ -103,6 +103,7 @@ Query
 - ``Query::select()`` now supports ``Table`` and ``Association`` objects as
   parameters. These parameter types will select all the columns on the provided
   table or association instance's target table.
+- ``Query::distinct()`` now accepts a string to distinct on a single column.
 - ``Table::loadInto()`` was added.
 - ``EXTRACT``, ``DATE_ADD`` and ``DAYOFWEEK`` raw SQL functions have been
   abstracted to ``extract()``, ``dateAdd()`` and ``dayOfWeek()``.
