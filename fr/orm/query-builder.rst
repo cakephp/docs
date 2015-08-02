@@ -378,7 +378,7 @@ procédures stockées::
     // Utilise une procédure stockée
     $query = $articles->find();
     $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function ($exp) use ($query) {
+    $query->where(function ($exp) use ($lev) {
         return $exp->between($lev, 0, $tolerance);
     });
 

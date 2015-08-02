@@ -368,7 +368,7 @@ untrusted data into SQL functions or stored procedures::
     // Use a stored procedure
     $query = $articles->find();
     $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function ($exp) use ($query) {
+    $query->where(function ($exp) use ($lev) {
         return $exp->between($lev, 0, $tolerance);
     });
 
