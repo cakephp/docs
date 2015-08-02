@@ -151,9 +151,9 @@ might consider creating a route. This allows you link to
 .. note::
 
     Although you can connect alternate routes, the default routes
-    will continue to work. In this setting, you can access 1 contents
-    from 2 different URLs. See :ref:`disabling-default-routes`
-    to disable default routes, and only provide the URLs you define.
+    will continue to work. In this setting, you can access a single piece of
+    content from 2 different URLs. See :ref:`disabling-default-routes` to
+    disable default routes, and only provide the URLs you define.
 
 Another common use for the Router is to define an "alias" for a
 controller. Let's say that instead of accessing our regular URL at
