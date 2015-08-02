@@ -290,6 +290,8 @@ purpose::
         ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
         ->select($articlesTable); // Select all fields from articles
 
+.. _using-sql-functions:
+
 Utiliser les Fonctions SQL
 --------------------------
 
@@ -368,6 +370,20 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
 Entraînera::
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
+Vous devriez penser à utiliser le constructeur de fonctions à chaque fois que
+vous devez mettre des données non fiables dans des fonctions SQL ou des
+procédures stockées::
+
+    // Utilise une procédure stockée
+    $query = $articles->find();
+    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
+    $query->where(function ($exp) use ($query) {
+        return $exp->between($lev, 0, $tolerance);
+    });
+
+    // Le SQL généré serait
+    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
 
 Regroupements - Group et Having
 -------------------------------
@@ -766,6 +782,14 @@ suivantes pour créer des conditions:
             return $exp->between('population', 999, 5000000);
         });
     # WHERE population BETWEEN 999 AND 5000000,
+
+.. warning::
+
+    Les noms de champs utilisés dans les expressions ne doivent **jamais**
+    contenir de contenu non fiable.
+    Référez-vous à la section :ref:`using-sql-functions` pour savoir comment
+    inclure des données non fiables de manière sécurisée dans vos appels de
+    fonctions.
 
 Créer automatiquement des Clauses IN
 ------------------------------------
