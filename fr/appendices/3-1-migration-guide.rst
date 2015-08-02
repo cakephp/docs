@@ -108,6 +108,8 @@ Query
 - ``Query::select()`` supporte maintenant  des objets ``Table`` et ``Association``
   en paramètres. Ces types de paramètres sélectionneront toutes les colonnes de
   l'instance de la table ou la table ciblée par l'association.
+- ``Query::distinct()`` accepte maintenant une chaine de caractères pour les distinct sur
+  une seule colonne.
 - ``Table::loadInto()`` a été ajoutée.
 - Les fonctions SQL brutes ``EXTRACT``, ``DATE_ADD`` et ``DAYOFWEEK`` ont
   été ajoutées avec ``extract()``, ``dateAdd()`` et ``dayOfWeek()``.
