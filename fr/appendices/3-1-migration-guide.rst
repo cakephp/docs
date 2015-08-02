@@ -56,10 +56,13 @@ AuthComponent
   Au lieu de définir ces propriétés dans vos controllers, vous devrez les
   définir dans votre View en utlisant des méthodes de même nom::
 
-    // Dans un controller
+    // Dans un controller au lieu de
+    $this->layout = ('advanced');
+    
+    // Vous devez utiliser
     $this->getView()->layout('advanced');
 
-Ces méthodes doivent être appelée après que vous ayez déterminé quelle classe
+Ces méthodes doivent être appelées après que vous ayez déterminé quelle classe
 de View sera utilisée par le controller/action.
 
 - Une nouvelle option de configuration ``storage`` a été ajoutée. Elle contient

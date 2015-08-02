@@ -1171,7 +1171,7 @@ Prévention contre les Injections SQL
 
 Alors que l'ORM et les couches d'abstraction de base de données empêchent la
 plupart des problèmes relatifs aux injections SQL, il est toujours possible que
-vous soyez vulnérables face à une utilisation abusive. Lorsque vous utilisez
+vous soyez vulnérables face à une utilisation incorrecte. Lorsque vous utilisez
 le constructeur de fonctions, les noms de colonnes ne doivent pas contenir de
 données provenant d'utilisateurs::
 
