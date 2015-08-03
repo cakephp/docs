@@ -105,10 +105,10 @@ keys.
   ``username`` and ``password`` to specify your username and password fields
   respectively.
 - ``userModel`` The model name of the users table; defaults to Users.
-- `finder` The finder method to use to fetch user record. Defaults to 'all'.
+- ``finder`` The finder method to use to fetch a user record. Defaults to 'all'.
 - ``passwordHasher`` Password hasher class; Defaults to ``Default``.
-- Options ``scope`` and ``contain`` have been deprecated since 3.1. Use a custom
-  finder instead to modify the query to fetch a user record.
+- The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
+  a custom finder instead to modify the query to fetch a user record.
 
 To configure different fields for user in your ``initialize()`` method::
 

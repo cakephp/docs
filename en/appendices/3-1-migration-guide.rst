@@ -75,7 +75,7 @@ AuthComponent
   is run.
 - The options ``scope`` and ``contain`` for authenticator classes have been
   deprecated. Instead use the new ``finder`` option to configure a custom finder
-  method and modify the query there.
+  method and modify the query used to find a user there.
 
 FlashComponent
 --------------
