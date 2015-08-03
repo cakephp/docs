@@ -53,7 +53,7 @@ Controller
   on the view using methods with matching names::
 
     // In a controller, instead of
-    $this->layout = ('advanced');
+    $this->layout = 'advanced';
 
     // You should use
     $this->getView()->layout('advanced');
