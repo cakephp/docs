@@ -156,7 +156,6 @@ so already:
     echo $this->Form->input('User.username');
     echo $this->Form->input('User.password');
     echo $this->Form->end('Login');
-    ?>
 
 If a user is already logged in, redirect him by adding this to your
 UsersController::

@@ -99,8 +99,9 @@ app/Controller ディレクトリへコピーする必要があります。
   これらの値は、作成時と更新時のそれぞれでフィールドの値の必要性を定義できます。
 - モデルには ``schemaName`` プロパティが加わりました。もし、あなたの
   アプリケーションが :php:attr:`Model::$useDbConfig` を修正して、データソース
-  を切り替えた場合、 ``schemaName`` も修正することができます。もしくは、
-  :php:meth:`Model::setDataSource()` メソッドを使っても変更可能です。
+  を切り替えている場合は、 ``schemaName`` もあわせて修正するか、これ
+  （訳注： :php:attr:`Model::$useDbConfig` の変更）を行う
+  :php:meth:`Model::setDataSource()` メソッドを使うようにすべきです。
 
 
 CakeSession

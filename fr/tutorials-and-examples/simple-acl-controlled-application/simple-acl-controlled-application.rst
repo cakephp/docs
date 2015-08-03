@@ -355,6 +355,10 @@ Maintenant la table `aros`` va ressembler à ceci::
     +----+-----------+-------+-------------+-------+------+------+
     3 rows in set (0.00 sec)
 
+Note: Si vous avez suivi le tutoriel jusqu'ici, vous devez effacer vos tables,
+y compris ``aros``, ``groups`` et ``users``, et créer les tables groups et users
+à nouveau de zéro pour obtenir la table ``aros`` ci-dessus.
+
 Créer les ACOs (Access Control Objects)
 =======================================
 
