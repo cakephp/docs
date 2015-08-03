@@ -74,8 +74,8 @@ AuthComponent
   authentication to be checked before you controller's ``beforeFilter()`` method
   is run.
 - The options ``scope`` and ``contain`` for authenticator classes have been
-  deprecated. Instead use the new ``finder`` option to configure custom finder
-  method and modify query there.
+  deprecated. Instead use the new ``finder`` option to configure a custom finder
+  method and modify the query there.
 
 FlashComponent
 --------------
