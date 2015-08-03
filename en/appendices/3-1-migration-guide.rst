@@ -53,8 +53,8 @@ Controller
   on the view using methods with matching names::
 
     // In a controller, instead of
-    $this->layout = ('advanced');
-    
+    $this->layout = 'advanced';
+
     // You should use
     $this->getView()->layout('advanced');
 
@@ -73,6 +73,9 @@ AuthComponent
   is used, but you can set it to ``Controller.initialize`` if you want
   authentication to be checked before you controller's ``beforeFilter()`` method
   is run.
+- The options ``scope`` and ``contain`` for authenticator classes have been
+  deprecated. Instead, use the new ``finder`` option to configure a custom finder
+  method and modify the query used to find a user there.
 
 FlashComponent
 --------------

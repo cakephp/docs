@@ -105,11 +105,10 @@ keys.
   ``username`` and ``password`` to specify your username and password fields
   respectively.
 - ``userModel`` The model name of the users table; defaults to Users.
-- ``scope`` Additional conditions to use when looking up and
-  authenticating users, i.e. ``['Users.is_active' => true]``.
-- ``contain`` Extra models to contain and return with identified user's info.
+- ``finder`` The finder method to use to fetch a user record. Defaults to 'all'.
 - ``passwordHasher`` Password hasher class; Defaults to ``Default``.
-- ``storage`` Storage class. Defaults to ``Session``.
+- The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
+  a custom finder instead to modify the query to fetch a user record.
 
 To configure different fields for user in your ``initialize()`` method::
 
@@ -144,7 +143,8 @@ should look like::
                 'Form' => [
                     'fields' => ['username' => 'email']
                 ]
-            ]
+            ],
+            'storage' => 'Session'
         ]);
     }
 
@@ -476,8 +476,8 @@ can configure the AuthComponent as follows::
                     'passwordHasher' => [
                         'className' => 'Fallback',
                         'hashers' => [
-                          'Default',
-                          'Weak' => ['hashType' => 'sha1']
+                            'Default',
+                            'Weak' => ['hashType' => 'sha1']
                         ]
                     ]
                 ]
