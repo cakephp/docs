@@ -443,7 +443,7 @@ RequestHandlerComponent に詳細がありｍす。
 .. _route-conditions:
 
 ルーティング条件に一致したときの追加の条件
------------------------------------------------------------
+------------------------------------------------------------------------------
 
 ルーティングをリクエストと環境の設定によって決まったURLのみに限定したいときがあるでしょう。
  これのよいたとえは、 :doc:`rest` ルーティングです。
@@ -471,7 +471,7 @@ REST ルーティングやほかのリクエストデータ依存情報をカス
 .. _passed-arguments:
 
 渡された引数
-================
+==========================
 
 渡された引数は追加の引数かリクエストを生成するときに使用されるパスセグメントです。
 これらはしばしば、コントローラーメソッドにパラメーターを渡すために使われます。 ::
@@ -532,7 +532,7 @@ URLを :term:`routing array` を使って生成するとき、文字列による
 .. _named-parameters:
 
 名前付きパラメーター
-================
+=================================
 
 パラメーターに名前をつけてURLとして値を送れます。
 ``/posts/view/title:first/category:general`` に対するリクエストが
@@ -574,33 +574,26 @@ PostsController の view()　を呼びます。そのアクションでは、 ti
 カスタムルーティングするときに、よくある落とし穴lは名前付きパラメーターがカスタムルーティングを壊すことです。
 これを解決するためには、ルーターにどのパラメーターが名前付きパラメーターと指定とされているのか伝える必要があります。
 この知識なしでは、ルーターは名前付きパラメーターが本当に名前付きパラメーターなのかルーティングパラメーターなのか区別できません。
-加えて、デフォルトでは、 and defaults to assuming you
-intended them to be routed parameters. To connect named parameters
-in the router use :php:meth:`Router::connectNamed()`::
+加えて、デフォルトでは、 ルーティングパラメーターであるとみなします。
+名前付きパラメーターにルーティングで接続するときには、 :php:meth:`Router::connectNamed()` を使います。::
 
     Router::connectNamed(array('chapter', 'section'));
 
-Will ensure that your chapter and section parameters reverse route
-correctly.
+これは chapter（章） と section（項目） パラメーターを確実に正しくリバースルーティングするようにします。
 
-When generating URLs, using a :term:`routing array` you add named
-parameters as values with string keys matching the name::
+URLを生成するときに、 :term:`routing array` を名前付きパラメーターを文字列キーが名前に一致する値として追加するために使います。 ::
 
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
-Since 'chapter' doesn't match any defined route elements, it's treated
-as a named parameter.
+'chapter' がすべての定義されたルーティング要素に一致しなければ、名前付きパラメーターとして扱われます。
 
 .. note::
 
-    Both named parameters and route elements share the same key-space.
-    It's best to avoid re-using a key for both a route element and a named
-    parameter.
+    療法の名前付きパラメーターとルーティング要素は名前キー空間を共有します。
+    これはルーティング要素と名前付きパラメーターの療法を再使用することを避けるもっともよい方法です。
 
-Named parameters also support using arrays to generate and parse
-URLs. The syntax works very similar to the array syntax used
-for GET parameters. When generating URLs you can use the following
-syntax::
+名前付きパラメーターはまたURLをパースし生成するための配列をサポートします。
+この文法は GET で使われる配列の文法ととても似た働きをします。URLを生成するときに以下の文法を使えます。 ::
 
     $url = Router::url(array(
         'controller' => 'posts',
@@ -611,17 +604,16 @@ syntax::
         )
     ));
 
-The above would generate the URL ``/posts/index/filter[published]:1/filter[frontpage]:1``.
-The parameters are then parsed and stored in your controller's passedArgs variable
-as an array, just as you sent them to :php:meth:`Router::url`::
+``/posts/index/filter[published]:1/filter[frontpage]:1`` というURLが上記のコードで生成されます。
+このパラメーターはコントローラーの passedArgs 変数に :php:meth:`Router::url` に送るために
+配列として保存されパースされます。just as you sent them to ::
 
     $this->passedArgs['filter'] = array(
         'published' => 1,
         'frontpage' => 1
     );
 
-Arrays can be deeply nested as well, allowing you even more flexibility in
-passing arguments::
+配列は渡された引数と同じぐらい柔軟に深くネストできます。 ::
 
     $url = Router::url(array(
         'controller' => 'posts',
@@ -643,15 +635,14 @@ passing arguments::
         'users' => array(1, 2, 3)
     ));
 
-You would end up with a pretty long url like this (wrapped for easy reading)::
+とても長いURLも簡単に読めるようにラップして使えます。 ::
 
     posts/search
       /models[post][order]:asc/models[post][filter][published]:1
       /models[comment][order]:desc/models[comment][filter][spam]:0
       /users[]:1/users[]:2/users[]:3
 
-And the resulting array that would be passed to the controller would match that
-which you passed to the router::
+コントローラーに渡された配列での結果出力以下のルーターに渡された配列と一致します。 ::
 
     $this->passedArgs['models'] = array(
         'post' => array(
@@ -670,44 +661,43 @@ which you passed to the router::
 
 .. _controlling-named-parameters:
 
-Controlling Named Parameters
-----------------------------
+名前付きパラメーターの制御
+-----------------------------------------------
 
-You can control named parameter configuration at the per-route-level
-or control them globally. Global control is done through ``Router::connectNamed()``
-The following gives some examples of how you can control named parameter parsing
-with connectNamed().
+名前付きパラメーターの設定をルーティングごとまたは、全て一度に設定することができます。
+``Router::connectNamed()`` ですべての設定を一土に変えられます。
+下記にいくつかの名前付きパラメーターを  connectNamed() でパースして制御する例を出します。
 
-Do not parse any named parameters::
+すべての名前付きパラメーターをパースしない::
 
     Router::connectNamed(false);
 
-Parse only default parameters used for CakePHP's pagination::
+Cakeのページネーションで使うデフォルトのパラメーターだけパースする。 ::
 
     Router::connectNamed(false, array('default' => true));
 
-Parse only the page parameter if its value is a number::
+数字の **page** パラメーターだけパースする。::
 
     Router::connectNamed(
         array('page' => '[\d]+'),
         array('default' => false, 'greedy' => false)
     );
 
-Parse only the page parameter no matter what::
+すべての **page** パラメーターをパースする::
 
     Router::connectNamed(
         array('page'),
         array('default' => false, 'greedy' => false)
     );
 
-Parse only the page parameter if the current action is 'index'::
+ 'index' アクションが呼ばれた時、**page** パラメーターをパースする::
 
     Router::connectNamed(
         array('page' => array('action' => 'index')),
         array('default' => false, 'greedy' => false)
     );
 
-Parse only the page parameter if the current action is 'index' and the controller is 'pages'::
+  コントローラーが 'pages' で 'index' アクションが呼ばれた時、**page** パラメーターをパースする::
 
     Router::connectNamed(
         array('page' => array('action' => 'index', 'controller' => 'pages')),
@@ -715,42 +705,38 @@ Parse only the page parameter if the current action is 'index' and the controlle
     );
 
 
-connectNamed() supports a number of options:
+connectNamed() は色々なオプションをサポートしています。:
 
-* ``greedy`` Setting this to true will make Router parse all named params.
-  Setting it to false will parse only the connected named params.
-* ``default`` Set this to true to merge in the default set of named parameters.
-* ``reset`` Set to true to clear existing rules and start fresh.
-* ``separator`` Change the string used to separate the key & value in a named
-  parameter. Defaults to `:`
+* ``greedy`` を true に設定すると、すべての名前付きパラメーターをパースするようになります。
+  false にすると、接続された名前付きパラメーターだけパースします。
+* ``default`` を true に設定すると、名前付きパラメーターの集合にマージされます。
+* ``reset`` を true に設定すると、既存のルールを消します。
+* ``separator`` 文字列を変更すると、名前付きパラメーターの区切りを変えられます。デフォルトでは `:` です。
 
-Reverse Routing
+リバースルーティング
 ===============
 
-Reverse routing is a feature in CakePHP that is used to allow you to
-easily change your URL structure without having to modify all your code.
-By using :term:`routing arrays <routing array>` to define your URLs, you can
-later configure routes and the generated URLs will automatically update.
+リバースルーティングは CakePHP のすべてのコードの変更なしにURLの構造を簡単に変更する機能です。
+:term:`ルーティング配列 <routing array>` をURLを定義するために使えます。
+ あとで変更を加えても、生成されたURLは自動的にアップデートされます。
 
-If you create URLs using strings like::
+URLを文字列によって以下のように生成します。::
 
     $this->Html->link('View', '/posts/view/' + $id);
 
-And then later decide that ``/posts`` should really be called
-'articles' instead, you would have to go through your entire
-application renaming URLs. However, if you defined your link like::
+``/posts`` がすべての残りのURLを通して本当に
+'articles' の代わりに呼ばれるかあとで決められます。
+また、リンクを以下のように定義した場合、::
 
     $this->Html->link(
         'View',
         array('controller' => 'posts', 'action' => 'view', $id)
     );
 
-Then when you decided to change your URLs, you could do so by defining a
-route. This would change both the incoming URL mapping, as well as the
-generated URLs.
+そして、URLを変えたいと思ったら、ルーティングを定義することでできます。
+これは両方受け取るURLマッピングも生成するURLも変えます。
 
-When using array URLs, you can define both query string parameters and
-document fragments using special keys::
+配列のURLを使うとき、文字列パラメーターによるクエリと、特定のキーによるドキュメントフラグメントを定義できます。::
 
     Router::url(array(
         'controller' => 'posts',
@@ -759,59 +745,50 @@ document fragments using special keys::
         '#' => 'top'
     ));
 
-    // will generate a URL like.
+    // こんなURLが生成されます
     /posts/index?page=1#top
 
 .. _redirect-routing:
 
-Redirect Routing
-================
+リダイレクトルーティング
+===========================
 
-Redirect routing allows you to issue HTTP status 30x redirects for
-incoming routes, and point them at different URLs. This is useful
-when you want to inform client applications that a resource has moved
-and you don't want to expose two URLs for the same content
+リダイレクトルーティングは入ってくるルーティングに HTTP ステータスの 30x リダイレクトを発行し違うURLに転送することができます。
+これはクライアントアプリケーションにリソースが移動したことを同じコンテンツに対して２つのURLが存在することを知らせずに伝えるために使えます。
 
-Redirection routes are different from normal routes as they perform an actual
-header redirection if a match is found. The redirection can occur to
-a destination within your application or an outside location::
+リダイレクトルーティングは通常のルーティング条件に一致した時の実際のヘッダーリダイレクトと違います。
+これは、 アプリケーションかプリケーションの外に対してのリダイレクトのためにおきます。::
 
     Router::redirect(
         '/home/*',
         array('controller' => 'posts', 'action' => 'view'),
-        // or array('persist'=>array('id')) for default routing where the
-        // view action expects $id as an argument
+        // もしくは$idを引数として受け取るviewアクションデフォルトルーティングのための
+        //array('persist'=>array('id'))
         array('persist' => true)
     );
 
-Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
-``/posts/view``. Using an array as the redirect destination allows
-you to use other routes to define where a URL string should be
-redirected to. You can redirect to external locations using
-string URLs as the destination::
+``/home/*`` から ``/posts/view`` へのリダイレクトと ``/posts/view`` にパラメーターを渡すこと
+配列をルートリダイレクト先を表現するために使うことで、文字列のURLがリダイレクトしている先を定義できるようにします。
+文字列のURLで外部にリダイレクトできます。::
 
     Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
 
-This would redirect ``/posts/*`` to ``http://google.com`` with a
-HTTP status of 302.
+これは、 ``/posts/*`` から ``http://google.com`` へwith a
+HTTP  302　ステータスを出しながらリダイレクトさせます。
 
 .. _disabling-default-routes:
 
-Disabling the Default Routes
+デフォルトルーティングの無効化
 ============================
 
-If you have fully customized all your routes, and want to avoid any
-possible duplicate content penalties from search engines, you can
-remove the default routes that CakePHP offers by deleting them from your
-application's routes.php file.
+フルカスタマイズされたルーティングをして、重複するコンテンツによる検索エンジンのペナルティを回避していた場合、
+ routes.php から削除することで、Cakeのデフォルトルーティングを削除することができます。
 
-This will cause CakePHP to serve errors, when users try to visit
-URLs that would normally be provided by CakePHP but have not
-been connected explicitly.
+これは CakePHP 通常提供するURLに明示的にアクセスしなかった時にがエラーを吐く原因になります。
 
 .. _custom-route-classes:
 
-Custom Route Classes
+カスタムルートクラス
 ====================
 
 Custom route classes allow you to extend and change how individual
