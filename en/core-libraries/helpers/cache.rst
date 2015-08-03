@@ -58,7 +58,7 @@ traffic that needs to be cached::
 
     public $cacheAction = array(
         'view' => 36000,
-        'index'  => 48000
+        'index' => 48000
     );
 
 This will cache the view action 10 hours, and the index action 13 hours. By
