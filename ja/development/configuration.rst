@@ -745,7 +745,7 @@ XML 設定リーダを作ることもできます。::
         );
 
     ファイルに ``$config`` がなかった場合は :php:exc:`ConfigureException`
-    が発生します。
+    が発生します。::
 
     あなたのカスタムの設定ファイルをロードするには、
     app/Config/bootstrap.php に以下のコードを挿入します:
