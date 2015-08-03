@@ -1243,6 +1243,18 @@ les requêtes ensemble, vous pouvez faire des sous-requêtes::
 Les sous-requêtes sont acceptées partout où une expression query peut être
 utilisée. Par exemple, dans les méthodes ``select()`` et ``join()``.
 
+Exécuter des Requêtes Complexes
+-------------------------------
+
+Bien que le constructeur de requêtes facilite la construction de la plupart des
+requêtes, les requêtes très complexes peuvent être fastidieuses et compliquées
+à construire. Vous voudrez surement vous référer à :ref:`l'exécution
+directe du SQL souhaité <running-select-statements>`.
+
+Exécuter directement le SQL vous permet d'affiner la requête qui sera utilisée.
+Cependant, cela vous empêchera d'utiliser ``contain`` ou toute autre
+fonctionnalité de plus haut niveau de l'ORM.
+
 .. _format-results:
 
 Ajouter des Champs Calculés
