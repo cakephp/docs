@@ -1203,6 +1203,17 @@ subqueries::
 Subqueries are accepted anywhere a query expression can be used. For example, in
 the ``select()`` and ``join()`` methods.
 
+Executing Complex Queries
+-------------------------
+
+While the query builder makes it easy to build most queries, very complex
+queries can be tedious and complicated to build. You may want to :ref:`execute
+the desired SQL directly <running-select-statements>`.
+
+Executing SQL directly allows you to fine tune the query that will be run.
+However, doing so doesn't let you use ``contain`` or other higher level ORM
+features.
+
 .. _format-results:
 
 Adding Calculated Fields
