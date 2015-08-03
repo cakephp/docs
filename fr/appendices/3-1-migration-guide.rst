@@ -57,8 +57,8 @@ AuthComponent
   définir dans votre View en utlisant des méthodes de même nom::
 
     // Dans un controller au lieu de
-    $this->layout = ('advanced');
-    
+    $this->layout = 'advanced'
+
     // Vous devez utiliser
     $this->getView()->layout('advanced');
 
