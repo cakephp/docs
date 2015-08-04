@@ -2,7 +2,7 @@
     Database Access & ORM
 
 データベースアクセス & ORM
-#####################
+#################################
 
 ..
     In CakePHP working with data through the database is done with two primary object

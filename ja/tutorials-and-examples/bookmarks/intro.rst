@@ -14,7 +14,7 @@
 CakePHPのインストール
 =======================
 
-最も簡単なインストール方法はComposerを使う方法です.  
+最も簡単なインストール方法はComposerを使う方法です.
 Composerを使うとコマンドラインプロンプトやターミナルを使って
 簡単にインストールできます。
 最初にコンポーザーをインストールする必要があります。
@@ -27,12 +27,12 @@ cURL がインストールされていたら、このコマンドでインスト
 
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
-    
+
 このコマンドでCake のスケルトン（自動生成されるアプリの基礎）を **bookmarker**　ディレクトリに生成します。
 
 
 もし `Composer Windows Installer版
-<https://getcomposer.org/Composer-Setup.exe>`_, 
+<https://getcomposer.org/Composer-Setup.exe>`_,
 を使っていて、例えばここにインストールしていたら、
 C:\\wamp\\www\\dev\\cakephp3)::
 
@@ -67,7 +67,7 @@ Composerを使うメリットは、 自動的に完全なセットアップを�
         README.md
 
 それぞれのディレクトリの役割を知りたければここを見て下さい。
-:doc:`/intro/cakephp-folder-structure` 
+:doc:`/intro/cakephp-folder-structure`
 
 インストールできたか確かめる
 ===============================
@@ -89,7 +89,7 @@ Composerを使うメリットは、 自動的に完全なセットアップを�
 =====================
 
 次にDBをセットアップします。まだしていないのならば、空のDBをこのアプリのために作ります。
-名前は例えば  ``cake_bookmarks`` としておきます. 
+名前は例えば  ``cake_bookmarks`` としておきます.
 以下のSQLで必要なテーブルを作成可能です。::
 
     CREATE TABLE users (
@@ -171,7 +171,7 @@ able to connect to the database' がチェックされているはずです。
 
 .. note::
 
-        
+
     CakePHP　の初期設定ファイルは以下にあります。
     **config/app.default.php**.
 
@@ -231,8 +231,8 @@ Cakeは規約ベースのセッターメソッドをエンティーにセット�
             return $hasher->hash($value);
         }
     }
-    
-    
+
+
 既に作ったユーザーのパスワードを変えたら、前のパスワードに変えて、暗号化されたパスワードが
 表示される。CakePHP `bcrypt<http://codahale.com/how-to-safely-store-a-password/>`
 でハッシュ化するのがデフォルト設定です。
@@ -286,7 +286,7 @@ Cakeは規約ベースのセッターメソッドをエンティーにセット�
     {
         // CakePHPによって提供された'pass' キーは全ての
         // リクエストにある渡されたURLセグメントです。
-        
+
         $tags = $this->request->params['pass'];
 
         // Use the BookmarksTable to find tagged bookmarks.
@@ -342,8 +342,8 @@ Cakeの finderでは、マッチングするタグを持つブックマークを
 -----------------
 
 **/bookmarks/tagged** にアクセスすると、 ビューファイルがないことを知らせるエラーになります。
-次に、ビューファイルを ``tags()`` アクションのために作ります。 
-**src/Template/Bookmarks/tags.ctp**に以下のコードを追加します。::
+次に、ビューファイルを ``tags()`` アクションのために作ります。
+**src/Template/Bookmarks/tags.ctp** に以下のコードを追加します。::
 
     <h1>
         Bookmarks tagged with
@@ -387,4 +387,4 @@ Cakeの finderでは、マッチングするタグを持つブックマークを
 
 次は :doc:`/tutorials-and-examples/bookmarks/part-two` で権限管理を紹介します。
 または、 :doc:`dive into the documentation
-</topics>` で他のことも学べます。::
+</topics>` で他のことも学べます。.

@@ -73,7 +73,7 @@ CakePHP のモデルに対応するテーブル名は、複数形でアンダー
 上記の例で言えば、テーブル名はそれぞれ、 ``people`` 、 ``big_people`` 、 ``really_big_people`` になります。
 
 ユーティリティライブラリの :php:class:`Cake\\Utility\\Inflector` を使って、単語の単数形・複数形を判定することができます。
-より詳しい情報は、 :doc:`/core-utility-libraries/inflector` を読んでください。
+より詳しい情報は、 :doc:`/core-libraries/inflector` を読んでください。
 
 二個以上の単語で構成されるフィールドの名前は、 first\_name のようにアンダースコア記法になります。
 
@@ -92,7 +92,7 @@ categoly\_types のような複数の単語のテーブルでは、外部キー�
 ビューのテンプレートファイルは、それを表示するコントローラの関数に合わせた、アンダースコア記法で名前が付きます。
 PeopleControllerクラスのgetReady()関数は、ビューテンプレートとして、 **src/Template/People/get_ready.ctp** を探すことになります。
 
-基本パターンは、 **src/Template/コントローラ名/アンダースコア記法\_関数名.ctp**です。
+基本パターンは、 **src/Template/コントローラ名/アンダースコア記法\_関数名.ctp** です。
 
 各部分をCakePHPの規約に合わせて命名しておくことで、混乱を招く面倒な設定をしなくても機能的に動作するようになります。
 以下が最後の規約に合った命名の例です

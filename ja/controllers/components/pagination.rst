@@ -1,23 +1,23 @@
-.. 
+..
     Pagination
 
 
 ページネーション
-##########
+###################
 
-.. 
+..
     php:namespace:: Cake\Controller\Component
 
 
 php:namespace::Cake\Controller\Component
 
-.. 
+..
     php:class:: PaginatorComponent
 
 
 php:class:: PaginatorComponent
 
-.. 
+..
     One of the main obstacles of creating flexible and user-friendly web
     applications is designing an intuitive user interface. Many applications tend to
     grow in size and complexity quickly, and designers and programmers alike find
@@ -28,7 +28,7 @@ php:class:: PaginatorComponent
 フレキシブルでかつユーザーフレンドリーなウェブアプリケーションを作成する際の主たる障害の一つとなるのが、直感的なユーザーインターフェイスです。多くのアプリケーションはすぐに巨大となりかつ複雑になり、デザイナーやプログラマーは、何百件、何千件ものレコードが表示されることに対応しきれなくなってきます。リファクタリングするには時間がかかり、パフォーマンスやユーザー満足度が犠牲になることが多いです。
 
 
-..   
+..
     Displaying a reasonable number of records per page has always been a critical
     part of every application and used to cause many headaches for developers.
     CakePHP eases the burden on the developer by providing a quick, easy way to
@@ -38,7 +38,7 @@ php:class:: PaginatorComponent
 一ページあたりに表示されるレコードの数を一定数に抑えることは、すべてのアプリケーションにとって重大な課題であり、ディベロッパーにとって頭の痛い問題でした。CakePHPは素早く、かつ簡単に、データをページ分けする方法を提供することで、ディベロパーへの負担を軽減させます。
 
 
-.. 
+..
     Pagination in CakePHP is offered by a Component in the controller, to make
     building paginated queries easier. In the View
     :php:class:`~Cake\\View\\Helper\\PaginatorHelper` is used to make the generation
@@ -48,14 +48,14 @@ php:class:: PaginatorComponent
 CakePHPにおけるページネーションは、コントローラーにおけるコンポーネントによって提供され、ページ分けされたクエリーをより簡単にビルドできるようにします。ビューの中のView\Helper\PaginatorHelper は、ページネーションのリンクやボタンを作り出すことを容易にすることに使われます。
 
 
-.. 
+..
     Using Controller::paginate()
 
 
 Controller::paginate()の使用
 ============================
 
-..  
+..
     In the controller, we start by defining the default query conditions pagination
     will use in the ``$paginate`` controller variable. These conditions, serve as
     the basis for your pagination queries. They are augmented by the sort, direction
@@ -86,7 +86,7 @@ Controller::paginate()の使用
     }
 
 
-.. 
+..
     You can also include any of the options supported by
     :php:meth:`~Cake\\ORM\\Table::find()`, such as ``fields``::
 
@@ -115,7 +115,7 @@ Controller::paginate()の使用
     }
 
 
-.. 
+..
     While you can pass most of the query options from the paginate property it is
     often cleaner and simpler to bundle up your pagination options into
     a :ref:`custom-find-methods`. You can define the finder pagination uses by
@@ -134,10 +134,10 @@ Paginate プロパティからほとんどの検索オプションを指定す�
             'finder' => 'published',
         ];
     }
- 
 
-.. 
-    Because custom finder methods can also take in options, 
+
+..
+    Because custom finder methods can also take in options,
     this is how you pass in options into a custom finder method within the paginate property::
 
 
@@ -166,15 +166,15 @@ Paginate プロパティからほとんどの検索オプションを指定す�
                     'tagged' => $customFinderOptions
                 ]
             ];
-    	    
+
             $articles = $this->paginate($this->Articles);
-    	    
+
             $this->set(compact('articles', 'tags'));
         }
     }
 
 
-.. 
+..
     In addition to defining general pagination values, you can define more than one
     set of pagination defaults in the controller, you just name the keys of the
     array after the model you wish to configure::
@@ -182,7 +182,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
 
 一般的なページネーションの値を定義することに加え、コントローラーには１セット以上のページネーションに関するデフォルト設定を定義することができます。そのためには、設定を加えたいモデルの後に、配列におけるキー名称を加えるだけです。
 
- 
+
 ::
 
     class ArticlesController extends AppController
@@ -195,14 +195,14 @@ Paginate プロパティからほとんどの検索オプションを指定す�
     }
 
 
-.. 
+..
     The values of the ``Articles`` and ``Authors`` keys could contain all the properties
     that a model/key less ``$paginate`` array could.
 
 
 ArticlesやAuthorsのキーの値は、モデル/キーが有する全てのプロパティから、$paginate配列を差し引いた分だけ、含めることができます。
 
-.. 
+..
     Once the ``$paginate`` property has been defined, we can use the
     :php:meth:`~Cake\\Controller\\Controller::paginate()` method to create the
     pagination data, and add the ``PaginatorHelper`` if it hasn't already been
@@ -227,7 +227,7 @@ $paginate プロパティが定義された後、ページネーションデー�
     }
 
 
-.. 
+..
     By default the ``paginate()`` method will use the default model for
     a controller. You can also pass the resulting query of a find method::
 
@@ -244,7 +244,7 @@ $paginate プロパティが定義された後、ページネーションデー�
     }
 
 
-.. 
+..
     If you want to paginate a different model you can provide a query for it, the
     table object itself, or its name::
 
@@ -264,7 +264,7 @@ $paginate プロパティが定義された後、ページネーションデー�
     $comments = $this->paginate($commentTable);
 
 
-.. 
+..
     Using the Paginator Directly
 
 
@@ -272,7 +272,7 @@ Paginatorを直接使用する場合
 ============================
 
 
-.. 
+..
     If you need to paginate data from another component you may want to use the
     PaginatorComponent directly. It features a similar API to the controller
     method::
@@ -290,7 +290,7 @@ Paginatorを直接使用する場合
     $articles = $this->Paginator->paginate($articleTable, $config);
 
 
-.. 
+..
     The first parameter should be the query object from a find on table object you wish
     to paginate results from. Optionally, you can pass the table object and let the query
     be constructed for you. The second parameter should be the array of settings to use for
@@ -301,15 +301,15 @@ Paginatorを直接使用する場合
 最初のパラメーターは、ページネーションしたい対象のテーブルオブジェクトにおける検索結果のオブジェクトでなければいけません。この代替として、テーブルオブジェクトそのものを引き渡す、という方法もあります。２番目のパラメーターは、ページネーションをするにあたっての設定を示した配列でなければなりません。この配列は、コントローラーにおける$paginateプロパティと同一の構造を有する必要があります。
 
 
-.. 
+..
     Control which Fields Used for Ordering
 
 
 並び替えに使用するフィールドをコントロール
-======================================
+===============================================
 
 
-.. 
+..
     By default sorting can be done on any non-virtual column a table has. This is
     sometimes undesirable as it allows users to sort on un-indexed columns that can
     be expensive to order by. You can set the whitelist of fields that can be sorted
@@ -330,7 +330,7 @@ Paginatorを直接使用する場合
     ];
 
 
-.. 
+..
     Any requests that attempt to sort on fields not in the whitelist will be
     ignored.
 
@@ -338,14 +338,14 @@ Paginatorを直接使用する場合
 ホワイトリストに記載されていないフィールドを並び替えしようとしても、これらは無視されます。
 
 
-.. 
+..
     Limit the Maximum Number of Rows that can be Fetched
 
 
 取得できる行数の最大値を設定
 ====================================================
 
-.. 
+..
     The number of results that are fetched is exposed to the user as the
     ``limit`` parameter. It is generally undesirable to allow users to fetch all
     rows in a paginated set. By default CakePHP limits the maximum number of rows
@@ -364,7 +364,7 @@ Paginatorを直接使用する場合
     ];
 
 
-.. 
+..
     If the request's limit param is greater than this value, it will be reduced to
     the ``maxLimit`` value.
 
@@ -372,15 +372,15 @@ Paginatorを直接使用する場合
 リクエストの制限パラメーターがこの値よりも大きかった場合、このmaxLimitの値に削減されます。
 
 
-.. 
+..
     Joining Additional Associations
 
 
 追加のアソシエーションをJoinさせる
-===============================
+=======================================
 
 
-.. 
+..
     Additional associations can be loaded to the paginated table by using the
     ``contain`` parameter::
 
@@ -400,14 +400,14 @@ Contain変数を使用することで、ページネーションされたテー�
     }
 
 
-.. 
+..
     Out of Range Page Requests
 
 
 領域外のページリクエスト
 ==========================
 
-.. 
+..
     The PaginatorComponent will throw a ``NotFoundException`` when trying to
     access a non-existent page, i.e. page number requested is greater than total
     page count.
@@ -415,7 +415,7 @@ Contain変数を使用することで、ページネーションされたテー�
 
 存在しないページに対してアクセスを試みたり、リクエストされたページ数がトータルのページ数よりも大きかった場合に、Paginatorコンポーネントは、NotFoundExceptionを返します。
 
-.. 
+..
     So you could either let the normal error page be rendered or use a try catch
     block and take appropriate action when a ``NotFoundException`` is caught::
 
@@ -437,14 +437,14 @@ Contain変数を使用することで、ページネーションされたテー�
         }
     }
 
-.. 
+..
     Pagination in the View
 
 
 ビューにおけるページネーション
-======================
+=================================
 
-.. 
+..
     Check the :php:class:`~Cake\\View\\Helper\\PaginatorHelper` documentation for
     how to create links for pagination navigation.
 
@@ -452,7 +452,7 @@ Contain変数を使用することで、ページネーションされたテー�
 ページネーションのナビゲーションのためのリンクを生成する方法については、View\Helper\PaginatorHelperドキュメンテーションを参照のこと。
 
 
-.. 
+..
     meta::
     :title lang=en: Pagination
     :keywords lang=en: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
