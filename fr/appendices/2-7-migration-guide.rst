@@ -4,6 +4,11 @@
 CakePHP 2.7 est une mise à jour complète à partir de l'API de 2.6. Cette page
 souligne les changements et améliorations faits dans 2.7.
 
+Requirements
+============
+
+La version de PHP requise pour CakePHP 2.7 est maintenant la version 5.3.0.
+
 Console
 =======
 

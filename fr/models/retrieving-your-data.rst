@@ -546,8 +546,8 @@ Vous pouvez créer autant de finders personnalisés que vous souhaitez, et ils
 sont une bonne façon de réutiliser du code dans votre application à travers
 les models.
 
-Il est aussi possible de paginer grâce à un type de find personnalisé comme
-suit:
+Il est aussi possible de paginer grâce à un find personnalisé en utilisant
+l'option 'findType' comme suit:
 
 ::
 
@@ -555,7 +555,7 @@ suit:
 
         // Va paginer tous les articles publiés
         public function index() {
-            $this->paginate = array('available');
+            $this->paginate = array('findType' => 'available');
             $articles = $this->paginate();
             $this->set(compact('articles'));
         }

@@ -114,10 +114,10 @@ A présent, vous aurez peut-être envie de jeter un œil aux
 :doc:`/getting-started/cakephp-conventions`. Le nommage correct de vos tables
 (et de quelques colonnes en plus) peut vous rapporter quelques fonctionnalités
 supplémentaires et vous éviter trop de configuration. Par exemple, si vous
-nommer votre table big\_boxes, votre model BigBox, votre controller
+nommer votre table big_boxes, votre model BigBox, votre controller
 BigBoxesController, tout marchera ensemble automatiquement. Par convention,
 utilisez les underscores, les minuscules et les formes plurielles pour les
-noms de vos tables - par exemple : bakers, pastry\_stores, et savory\_cakes.
+noms de vos tables - par exemple : bakers, pastry_stores, et savory_cakes.
 
 .. todo::
 
@@ -829,7 +829,7 @@ Configuration de Inflection
 ===========================
 
 Les conventions de nommage de CakePHP peuvent être vraiment sympas - vous
-pouvez nommer votre table de base de données big\_boxes, votre model BigBox,
+pouvez nommer votre table de base de données big_boxes, votre model BigBox,
 votre controller BigBoxesController, et tout fonctionne ensemble
 automatiquement. La façon dont CakePHP sait comment lier les choses ensemble
 est en *infléctant* les mots entre leurs formes singulière et plurielle.
