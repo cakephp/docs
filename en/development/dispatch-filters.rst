@@ -69,7 +69,7 @@ gives the ability to PHP 5.3 users to attach anonymous functions as filters::
 
 The ``on`` key only takes ``before`` and ``after`` as valid values, and evidently
 means whether the filter should run before or after any controller code is
-executed. Additionally to defining filters with the ``callable`` key, you also
+executed. Additionally to defining filters with the ``priority`` key, you also
 get the chance to define a priority for your filters, if none is specified then
 a default of ``10`` is selected for you
 
