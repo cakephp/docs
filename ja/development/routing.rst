@@ -788,19 +788,17 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
 
 .. _custom-route-classes:
 
-カスタムルートクラス
+カスタムルーティングクラス
 ====================
 
-Custom route classes allow you to extend and change how individual
-routes parse requests and handle reverse routing. A custom route class
-should be created in ``app/Routing/Route`` and should extend
-:php:class:`CakeRoute` and implement one or both of ``match()``
-and/or ``parse()``. ``parse()`` is used to parse requests and
-``match()`` is used to handle reverse routing.
+カスタムルーティングクラスは個別のルーティングが リクエストをパースしてリバースルーティングを扱えるようにします。
+カスタムルーティングクラスは ``app/Routing/Route`` に作られ、
+:php:class:`CakeRoute` を拡張して、 ``match()`` と ``parse()``の一方もしくは両方を使います。
+ ``parse()`` はリクエストをぱーすするために使われ、
+``match()`` はリバースルーティングの制御に使われます。
 
-You can use a custom route class when making a route by using the
-``routeClass`` option, and loading the file containing your route
-before trying to use it::
+カスタムルーティングクラスを ``routeClass`` オプションを使って設定する時と
+、ルーティング設定を含むファイルをルーティングするまえに読み込むことで使えます。::
 
     App::uses('SlugRoute', 'Routing/Route');
 
@@ -810,49 +808,43 @@ before trying to use it::
          array('routeClass' => 'SlugRoute')
     );
 
-This route would create an instance of ``SlugRoute`` and allow you
-to implement custom parameter handling.
+このルーティングは ``SlugRoute`` のインスタンスを生成し、任意のパラメーター制御を提供します。
 
-Router API
+ルーティング API
 ==========
 
 .. php:class:: Router
 
-    Router manages generation of outgoing URLs, and parsing of incoming
-    request uri's into parameter sets that CakePHP can dispatch.
+    ルーティングマネージャーはURを生成し、受け取ったCakeが送信するパラメーターセットの中のリクエストURIをパースします。
+
 
 .. php:staticmethod:: connect($route, $defaults = array(), $options = array())
 
-    :param string $route: A string describing the template of the route
-    :param array $defaults: An array describing the default route parameters.
-        These parameters will be used by default
-        and can supply routing parameters that are not dynamic.
-    :param array $options: An array matching the named elements in the route
-        to regular expressions which that element should match. Also contains
-        additional parameters such as which routed parameters should be
-        shifted into the passed arguments, supplying patterns for routing
-        parameters and supplying the name of a custom routing class.
+    :param string $route: ルーティングテンプレートを表現する文字列
+    :param array $defaults: デフォルトのルーティングパラメーターを表現する配列。
+        これらのパラメーターはデフォルトで使われ、ルーティングパラメーターを静的に提供します。
+    :param array $options: 名前要素に一致した配列かつルーティングの正規表現に一致したもの。
+        また、渡されることになるルーティングパラメーターや、ルーティングパラメーターのパターンや
+        カスタムルーティングクラスの名前の提供ができる追加のパラメーターを含みます。
 
-    Routes are a way of connecting request URLs to objects in your application.
-    At their core routes are a set of regular expressions that are used to
-    match requests to destinations.
+    ルーティングはリクエストされたURLをオブジェクトで制御する方法です。
+	それらのコアルーティングはリクエスト先を一致しさせるための正規表現のセットです。
 
-    Examples::
+
+    例::
 
         Router::connect('/:controller/:action/*');
 
-    The first parameter will be used as a controller name while the second is
-    used as the action name. The '/\*' syntax makes this route greedy in that
-    it will match requests like ``/posts/index`` as well as requests like
-    ``/posts/edit/1/foo/bar`` . ::
+    最初のパラメーターはコントローラー名として、二番目がアクション名を表している時には扱われます。
+    '/\*' は ``/posts/index`` みたいなものにも ``/posts/edit/1/foo/bar`` と同じようにすべて一致する::
 
         Router::connect(
             '/home-page',
             array('controller' => 'pages', 'action' => 'display', 'home')
         );
 
-    The above shows the use of route parameter defaults. And providing routing
-    parameters for a static route. ::
+    上記は、デフォルトのルーティングパラメーターの使い方を示してます。
+    そして、それは静的ルーティングのためのルーティングパラメーターを提供します。
 
         Router::connect(
             '/:lang/:controller/:action/:id',
@@ -860,149 +852,139 @@ Router API
             array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
         );
 
-    Shows connecting a route with custom route parameters as well as providing
-    patterns for those parameters. Patterns for routing parameters do not need
-    capturing groups, as one will be added for each route params.
+    これは、それらのパラメーターために用意されたパターンと同じように
+    カスタムルーティングパラメーターでにルーティング接続する例です。
 
-    $options offers three 'special' keys. ``pass``, ``persist`` and ``routeClass``
-    have special meaning in the $options array.
+    $options は3つの ``pass``, ``persist`` と ``routeClass`` という特殊キーを持ちます。
 
-    * ``pass`` is used to define which of the routed parameters should be
-      shifted into the pass array. Adding a parameter to pass will remove
-      it from the regular route array. Ex. ``'pass' => array('slug')``
+    * ``pass`` はどのパラメーターが配列に渡されるのかを定義するために使われます。
+     渡すためにパラメーターを追加することで、それを正規のルーティング配列から削除できます。
+     例えば、 ``'pass' => array('slug')`` のように。
 
-    * ``persist`` is used to define which route parameters should be automatically
-      included when generating new URLs. You can override persistent parameters
-      by redefining them in a URL or remove them by setting the parameter to
-      ``false``. Ex. ``'persist' => array('lang')``
+    * ``persist`` はURLを新規に生成したときに、どのルーティングパラメーターが
+      自動的にインクルードされるのかを定義するために使われます。
+	  URLで再定義することで一定のパラメーターをオーバーライドしたり、
+      ``false`` に設定することで除去できます。たとえば、 ``'persist' => array('lang')`` のように。
 
-    * ``routeClass`` is used to extend and change how individual routes parse
-      requests and handle reverse routing, via a custom routing class.
-      Ex. ``'routeClass' => 'SlugRoute'``
+    * ``routeClass`` は個別のルーティングがどのようにリクエストをぱーすするのかを
+    拡張し変更するためと、リバースルーティングを ``'routeClass' => 'SlugRoute'``のような
+    カスタムルーティングクラスによって制御するために使われます。
 
-    * ``named`` is used to configure named parameters at the route level.
-      This key uses the same options as :php:meth:`Router::connectNamed()`
+    * ``named`` は名前付きパラメーターをルーティングレベルで設定するために使われます。
+      このキーは :php:meth:`Router::connectNamed()` と同じオプションを使います。
 
 .. php:staticmethod:: redirect($route, $url, $options = array())
 
-    :param string $route: A route template that dictates which URLs should
-        be redirected.
-    :param mixed $url: Either a :term:`routing array` or a string url
-        for the destination of the redirect.
-    :param array $options: An array of options for the redirect.
+    :param string $route: どのURLがリダイレクトされるのかを決めるルーティングテンプレート
+    :param mixed $url: :term:`routing array` かリダイレクト先の文字列URLを入れる。
+    :param array $options: リダイレクトオプションを表す配列。
 
-    Connects a new redirection Route in the router.
-    See :ref:`redirect-routing` for more information.
+    新しいリダイレクトにルーティング接続します。
+    :ref:`redirect-routing` に詳細があります。
 
 .. php:staticmethod:: connectNamed($named, $options = array())
 
-    :param array $named: A list of named parameters. Key value pairs are accepted where
-        values are either regex strings to match, or arrays.
-    :param array $options: Allows control of all settings:
-        separator, greedy, reset, default
+    :param array $named: 名前付きパラメーターのリスト。添字のペアが
+        正規表現に一致するか配列であった時に受け付けられます。
+    :param array $options: separator, greedy, reset, default などの設定をすべてを制御します。
 
-    Specifies what named parameters CakePHP should be parsing out of
-    incoming URLs. By default CakePHP will parse every named parameter
-    out of incoming URLs. See :ref:`controlling-named-parameters` for
-    more information.
+    CakePHP でどの名前付きパラメーターなのか特定するには、入ってきたURLを出力します。
+    デフォルトの CakePHP は全部の入ってきたURLにある名前付きパラメーターをパースします。
+    :ref:`controlling-named-parameters` に詳細があります。
 
 .. php:staticmethod:: promote($which = null)
 
-    :param integer $which: A zero-based array index representing the route to move.
-        For example, if 3 routes have been added, the last route would be 2.
+    :param integer $which: ゼロからはじまる配列の添え字はルーティングの移動先を表しています。
+        例えば、３っつのルートが追加された時、最後の添字は２になります。
 
-    Promote a route (by default, the last one added) to the beginning of the list.
+    リストの先頭にルート (デフォルトでは、最後に追加されたもの)を昇格させます。
 
 .. php:staticmethod:: url($url = null, $full = false)
 
-    :param mixed $url: Cake-relative URL, like "/products/edit/92" or
-        "/presidents/elect/4" or a :term:`routing array`
-    :param mixed $full: If (boolean) true, the full base URL will be prepended
-        to the result. If an array accepts the following keys
+    :param mixed $url:  "/products/edit/92" や "/presidents/elect/4" や :term:`routing array`
+        のようにCakeに関連するURLor
+    :param mixed $full: (boolean) true になっていたら、URLフルパスが出力されます。
+		これは以下のキーを受け付けます。
 
            * escape - used when making URLs embedded in HTML escapes query
              string '&'
-           * full - if true the full base URL will be prepended.
+           * full - true になっていたら、URLフルパスが先頭に追加されて出力されます。
 
-    Generate a URL for the specified action. Returns a URL pointing
-    to a combination of controller and action. $url can be:
+    Generate a URL for the specified action.特定のアクションのためのURLを生成します。
+    コントローラー、アクションもしくは $url の組み合わせて表現可能なURLを返します。
 
-    * Empty - the method will find the address to the actual controller/action.
-    * '/' - the method will find the base URL of application.
-    * A combination of controller/action - the method will find the URL for it.
+    * Empty - このメソッドは実際のコントローラーアクションへのアドレスを見つけます。
+    * '/' - このメソッドは、ベースURLを見つけます。
+    * コントローラーをアクションの組み合わせ - そのためのURLを見つけます。
 
-    There are a few 'special' parameters that can change the final URL string that is generated:
+    いくつかの最後に生成されたURL文字列を変える特殊パラメーターがあります。
 
-    * ``base`` - Set to false to remove the base path from the generated URL.
-      If your application is not in the root directory, this can be used to
-      generate URLs that are 'CakePHP relative'. CakePHP relative URLs are
-      required when using requestAction.
-    * ``?`` - Takes an array of query string parameters
-    * ``#`` - Allows you to set URL hash fragments.
-    * ``full_base`` - If true the value of :php:meth:`Router::fullBaseUrl()` will
-      be prepended to generated URLs.
+    * ``base`` - false にセットすると、ベースURLを除去します。
+      ルートディレクトリに作っているアプリがない場合、 'CakePHP relative' なURLの生成に使えます。
+	  "CakePHP relative" なURLs は requestAction を使うときに必要とされます。.
+    * ``?`` - 文字列クエリの配列を取ります。
+    * ``#`` - URLのハッシュフラグメントをセットします。
+    * ``full_base`` - true にすると、 :php:meth:`Router::fullBaseUrl()` が
+      生成されたURLの前に加えられます。
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 
-    Creates REST resource routes for the given controller(s). See
-    the :doc:`/development/rest` section for more information.
+     与えられたコントローラーのために 渡されたREST をもとにどのようにルーティングするか決めます。
+    詳細は :doc:`/development/rest` ここです。
 
 .. php:staticmethod:: parseExtensions($types)
 
-    Used in routes.php to declare which :ref:`file-extensions` your application
-    supports. By providing no arguments, all file extensions will be supported.
+    routes.php でサポートする拡張子（ :ref:`file-extensions` ）を宣言するために使われます。
+    引数を用意しないことで、すべての拡張子をサポートします。
 
 .. php:staticmethod:: setExtensions($extensions, $merge = true)
 
     .. versionadded:: 2.2
 
-    Set or add valid extensions. To have the extensions parsed, you are still
-    required to call :php:meth:`Router::parseExtensions()`.
+    利用可能な拡張子をセットしたり追加します。これで設定したとしても、
+    拡張子をパースするために :php:meth:`Router::parseExtensions()` を呼ぶ必要があります。.
 
 .. php:staticmethod:: defaultRouteClass($classname)
 
     .. versionadded:: 2.1
 
-    Set the default route to be used when connecting routes in the future.
+    デフォルトルートは接続するときに時に使われます。
 
 .. php:staticmethod:: fullBaseUrl($url = null)
 
     .. versionadded:: 2.4
 
-    Get or set the baseURL used for generating URL's. When setting this value
-    you should be sure to include the fully qualified domain name including
-    protocol.
+    生成するURLをに使われる baseURL 。　この値を設定するときには、
+    確かなプロトコルを含むドメイン名を使う必要があります。
 
-    Setting values with this method will also update ``App.fullBaseUrl`` in
-    :php:class:`Configure`.
+    このメソッドで値をセットすると、
+    :php:class:`Configure` の ``App.fullBaseUrl`` をアップデートします。.
 
 .. php:class:: CakeRoute
 
-    The base class for custom routes to be based on.
+    カスタムルーティングのためのベースクラス。
 
 .. php:method:: parse($url)
 
     :param string $url: The string URL to parse.
 
-    Parses an incoming URL, and generates an array of request parameters
-    that Dispatcher can act upon. Extending this method allows you to customize
-    how incoming URLs are converted into an array. Return ``false`` from
-    URL to indicate a match failure.
+    ディスパッチャーがそれを使って動くように、受け取ったURLをパースとリクエストパラメーターの配列を生成する。
+    このメソッドを確証することで、受け取ったURLが配列に変換される方法をカスタマイズできます。
+    URLから一致さなかったときに ``false`` を返されます。
 
 .. php:method:: match($url)
 
     :param array $url: The routing array to convert into a string URL.
 
-    Attempt to match a URL array. If the URL matches the route parameters
-    and settings, then return a generated string URL. If the URL doesn't
-    match the route parameters, false will be returned. This method handles
-    the reverse routing or conversion of URL arrays into string URLs.
+     URLは、ルートパラメータと設定に一致する場合、生成された文字列のURLを返します。
+    URLがルートパラメーターと一致しない場合 ``false`` が返されます。このメソッドは、
+    文字列のURLへの逆ルーティングまたはURL配列の変換をします。。
 
 .. php:method:: compile()
 
-    Force a route to compile its regular expression.
+    正規表現をコンパイルすることを強制します。
 
 
 .. meta::
-    :title lang=en: Routing
+    :title lang=ja: ルーティング
     :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
