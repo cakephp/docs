@@ -174,7 +174,7 @@ CakePHP は命名規則でテーブルクラスとエンティティクラスを
     See the chapters on :doc:`/orm/table-objects` and :doc:`/orm/entities` for more
     information on how to use table objects and entities in your application.
 
- :doc:`/orm/table-objects` と :doc:`/orm/entities` の章に、
+:doc:`/orm/table-objects` と :doc:`/orm/entities` の章に、
 テーブルオブジェクトとエンティティの使い方が詳しく記述されています。
 
 ..
@@ -184,17 +184,17 @@ CakePHP は命名規則でテーブルクラスとエンティティクラスを
 ================
 
 .. toctree::
-:maxdepth: 2
+    :maxdepth: 2
 
-        orm/database-basics
-        orm/query-builder
-        orm/table-objects
-        orm/entities
-        orm/retrieving-data-and-resultsets
-        orm/validation
-        orm/saving-data
-        orm/deleting-data
-        orm/associations
-        orm/behaviors
-        orm/schema-system
-        console-and-shells/orm-cache
+    orm/database-basics
+    orm/query-builder
+    orm/table-objects
+    orm/entities
+    orm/retrieving-data-and-resultsets
+    orm/validation
+    orm/saving-data
+    orm/deleting-data
+    orm/associations
+    orm/behaviors
+    orm/schema-system
+    console-and-shells/orm-cache
