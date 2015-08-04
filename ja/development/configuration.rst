@@ -12,7 +12,6 @@ CakePHP アプリケーションの設定は非常に簡単です。CakePHP の
 ルール(inflection)を追加／変更したりできます。
 
 .. index:: database.php, database.php.default
-.. 
 .. _database-configuration:
 
 データベース設定
