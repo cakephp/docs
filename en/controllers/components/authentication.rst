@@ -351,7 +351,7 @@ valid user. As with authentication object's ``authenticate()`` method, the
 ``getUser()`` method should return an array of user information on success or
 ``false`` on failure. ::
 
-    public function getUser($request)
+    public function getUser(Request $request)
     {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
