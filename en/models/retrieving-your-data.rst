@@ -530,7 +530,7 @@ requires you to return the $results array (modified or not).
 You can create as many custom finders as you like, and they are a great way of reusing code in
 your application across models.
 
-It is also possible to paginate via a custom find type as follows:
+It is also possible to paginate via a custom find type using the 'findType' option as follows:
 
 ::
 
@@ -538,12 +538,13 @@ It is also possible to paginate via a custom find type as follows:
 
         // Will paginate all published articles
         public function index() {
-            $this->paginate = array('available');
+            $this->paginate = array('findType' => 'available');
             $articles = $this->paginate();
             $this->set(compact('articles'));
         }
 
     }
+    
 
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
