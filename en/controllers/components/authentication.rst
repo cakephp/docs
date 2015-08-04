@@ -180,7 +180,7 @@ option in authenticate class config::
         ]);
     }
 
-This will require your ``UsersTable`` to have finder method ``findAuth()`.
+This will require your ``UsersTable`` to have finder method ``findAuth()``.
 In the example shown below the query is modified to fetch only required fields
 and add condition::
 
