@@ -417,6 +417,8 @@ controller actions using the controller or view's
     {
         // Stuff
         $this->getView()->layout('admin');
+        // or the following before 3.1
+        $this->layout = 'admin';
     }
 
     // From a view file
@@ -435,11 +437,16 @@ using something like::
         {
             $this->set('title', 'View Active Users');
             $this->getView()->layout('default_small_ad');
+            // or the following before 3.1
+            $this->layout = 'default_small_ad';
         }
 
         public function view_image()
         {
             $this->getView()->layout('image');
+            // or the following before 3.1
+            $this->layout = 'image';
+
             // Output user image
         }
     }
@@ -465,6 +472,8 @@ Contacts plugin::
         public function view_active()
         {
             $this->getView()->layout('Contacts.contact');
+            // or the following before 3.1
+            $this->layout = 'Contacts.contact';
         }
     }
 
