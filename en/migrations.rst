@@ -314,3 +314,79 @@ execution to the migrations relative to that plugin::
 
         bin/cake migrations migrate -p PluginName
 
+
+Running Migrations in a non-shell environment
+=============================================
+
+.. versionadded:: cakephp/migrations 1.2.0
+
+Since the release of 1.2 version of the migrations plugin, you can run
+migrations from a non-shell environment, directly from an app, by using the new
+``Migrations`` class. This can be handy in case you are developing a plugin
+installer for a CMS for instance.
+The ``Migrations`` class allows you to run the following commands from the
+migrations shell :
+
+* migrate
+* rollback
+* markMigrated
+* status
+
+Each of these commands has a method defined in the ``Migrations`` class.
+
+Here is how to use it::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations();
+
+    // Will return an array of all migrations and their status
+    $status = $migrations->status();
+
+    // Will return true if success. If an error occurred, an exception will be thrown
+    $migrate = $migrations->migrate();
+
+    // Will return true if success. If an error occurred, an exception will be thrown
+    $rollback = $migrations->rollback();
+
+    // Will return true if success. If an error occurred, an exception will be thrown
+    $markMigrated = $migrations->markMigrated(20150804222900);
+
+The methods can accept an array of parameters that should match options from
+the commands::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations();
+
+    // Will return an array of all migrations and their status
+    $status = $migrations->status(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
+
+You can pass any options the shell commands would take.
+The only exception in the ``markMigrated`` command which is expecting the
+version number of the migrations to mark as migrated as first argument. Pass
+the array of parameters as the second argument for this method.
+
+Optionally, you can pass these parameters in the constructor of the class.
+They will be used as default and this will prevent you from having to pass
+them on each method call::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
+
+    // All the following calls will be done with the parameters passed to the Migrations class constructor
+    $status = $migrations->status();
+    $migrate = $migrations->migrate();
+
+If you need to override one or more default parameters for one call, you can
+pass them to the method::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
+
+    // This call will be made with the "custom" connection
+    $status = $migrations->status();
+    // This one with the "default" connection
+    $migrate = $migrations->migrate(['connection' => 'default']);
