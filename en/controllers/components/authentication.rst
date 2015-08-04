@@ -162,6 +162,41 @@ the following keys:
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
   to ``md5($config['realm'])``
 
+Customizing find query
+----------------------
+
+You can customize the query used to fetch the user record using the ``finder``
+option in authenticate class config::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'finder' => 'auth'
+                ]
+            ],
+        ]);
+    }
+
+This will require your ``UsersTable`` to have finder method ``findAuth()``.
+In the example shown below the query is modified to fetch only required fields
+and add condition::
+
+    public function findAuth(\Cake\ORM\Query $query, array $option)
+    {
+        $query
+            ->select(['id', 'username', 'password'])
+            ->where(['Users.active' => 1]);
+
+        return $query;
+    }
+
+.. note::
+    ``finder`` option is available since 3.1. Prior to that you can use ``scope``
+    and ``contain`` options to modify query.
+
 Identifying Users and Logging Them In
 -------------------------------------
 
