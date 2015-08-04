@@ -1,4 +1,7 @@
-Database Access & ORM
+..
+    Database Access & ORM
+
+データベースアクセス & ORM
 #####################
 
 ..
@@ -121,9 +124,9 @@ CakePHPの規約により、お決まりのコード記述をスキップし、
     following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
 
 具象テーブルクラスがあると、具象化エンティティクラスが欲しくなります。
-
-
-
+エンティティクラスはアクセサーとミューテーターメソッドを定義でき、
+個別や複数レコードにカスタムロジックを定義できます。
+下記を **src/Model/Entity/Article.php** 内、 ``<?php`` の開始タグの後に追加します。
 
 ::
 
@@ -136,9 +139,16 @@ CakePHPの規約により、お決まりのコード記述をスキップし、
 
     }
 
-Entities use the singular CamelCase version of the table name as their class
-name by default. Now that we have created our entity class, when we
-load entities from the database we'll get instances of our new Article class::
+..
+    Entities use the singular CamelCase version of the table name as their class
+    name by default. Now that we have created our entity class, when we
+    load entities from the database we'll get instances of our new Article class
+
+エンティティはデフォルトで単数形キャメルケースのテーブル名を利用します。
+前の手順でエンティティクラスはすでに作ったので、データベースからエンティティをロードした時に、
+新しい Article クラスのインスタンスが生成されます。
+
+::
 
     use Cake\ORM\TableRegistry;
 
@@ -151,14 +161,26 @@ load entities from the database we'll get instances of our new Article class::
         echo $row->title;
     }
 
-CakePHP uses naming conventions to link the Table and Entity class together. If
-you need to customize which entity a table uses you can use the
-``entityClass()`` method to set a specific classname.
+..
+    CakePHP uses naming conventions to link the Table and Entity class together. If
+    you need to customize which entity a table uses you can use the
+    ``entityClass()`` method to set a specific classname.
 
-See the chapters on :doc:`/orm/table-objects` and :doc:`/orm/entities` for more
-information on how to use table objects and entities in your application.
+CakePHP は命名規則でテーブルクラスとエンティティクラスを関連づけます。
+もしテーブルにどのエンティティを利用するかカスタマイズする必要があれば、
+``entityClass()`` のメソッドを特定のクラス名にセットします。
 
-More Information
+..
+    See the chapters on :doc:`/orm/table-objects` and :doc:`/orm/entities` for more
+    information on how to use table objects and entities in your application.
+
+ :doc:`/orm/table-objects` と :doc:`/orm/entities` の章に、
+テーブルオブジェクトとエンティティの使い方が詳しく記述されています。
+
+..
+    More Information
+
+詳細
 ================
 
 .. toctree::
