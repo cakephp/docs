@@ -250,6 +250,8 @@ you wanted to create an OpenID authentication object. In
     namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
+    use Cake\Network\Request;
+    use Cake\Network\Response;
 
     class OpenidAuthenticate extends BaseAuthenticate
     {
