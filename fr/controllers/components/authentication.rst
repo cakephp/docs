@@ -116,13 +116,14 @@ Les objets d'authentification supportent les clés de configuration suivante.
   utiliser les mots clés ``username`` et ``password`` pour spécifier le champ de
   nom d'utilisateur et le mot de passe respectivement.
 - ``userModel`` Le nom du model de la table users, par défaut Users.
-- ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
-  l'authentification des utilisateurs, ex ``['Users.is_active' => true]``.
-- ``contain`` Les models supplémentaires à mettre dans contain et à retourner
-  avec les informations de l'utilisateur identifié.
+- ``finder`` la méthode finder à utiliser pour récupérer l'enregistrement de
+  l'utilisateur. 'all' par défaut.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut
   à ``Default``.
 - ``storage`` Classe de stockage. Par défaut à ``Session``.
+- Les options ``scope`` et ``contain`` sont dépréciées dans 3.1. Utilisez
+  un finder personnalisé à la place pour modifier la requête qui récupère
+  l'utilisateur.
 
 Pour configurer les différents champs de l'utilisateur dans la méthode
 ``initialize()``::
@@ -158,7 +159,8 @@ ci-dessus avec d'autres configurations ressemblerait à quelque chose comme::
                 'Form' => [
                     'fields' => ['username' => 'email']
                 ]
-            ]
+            ],
+            'storage' => 'Session'
         ]);
     }
 
@@ -177,6 +179,43 @@ les clés suivantes:
 - ``qop`` Par défaut à auth, pas d'autre valeur supportée pour le moment.
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
+
+Customizing find query
+----------------------
+
+Vous pouvez personnaliser la requête utilisée pour pour chercher l'utilisateur
+en utilisant l'option ``finder`` dans la configuration de la classe
+d'authentification::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'finder' => 'auth'
+                ]
+            ],
+        ]);
+    }
+
+Cela nécessitera que votre table ``UsersTable`` ait une méthode ``findAuth()``.
+Dans l'exemple ci-dessous, la requête est modifiée pour récupérer uniquement
+les champs et ajouter une condition::
+
+    public function findAuth(\Cake\ORM\Query $query, array $option)
+    {
+        $query
+            ->select(['id', 'username', 'password'])
+            ->where(['Users.active' => 1]);
+
+        return $query;
+    }
+
+.. note::
+    L'option ``finder`` est disponible depuis 3.1. Pour les versions
+    antérieures, vous pouvez utiliser les options ``scope`` et ``contain``
+    pour modifier la requête.
 
 Identifier les Utilisateurs et les Connecter
 --------------------------------------------
@@ -273,6 +312,8 @@ Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
     namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
+    use Cake\Network\Request;
+    use Cake\Network\Response;
 
     class OpenidAuthenticate extends BaseAuthenticate
     {
@@ -337,13 +378,27 @@ typique regarde l'environnement de la requête (request/environnement) et
 utilise les informations contenues pour confirmer l'identité de l'utilisateur.
 L'authentification HTTP Basic utilise par exemple
 ``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
-username et password. Pour chaque requête, ces valeurs sont utilisées pour
-ré-identifier l'utilisateur et s'assurer que c'est un utilisateur valide. Comme
-avec les méthodes d'authentification de l'objet ``authenticate()``, la méthode
+username et password.
+
+.. note::
+
+    Dans le cas ou l'authentification ne fonctionne pas tel qu'espéré,
+    vérifiez si les requêtes sont exécutées (voir
+    ``BaseAuthenticate::_query($username)``). Dans le cas où aucune
+    requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
+    ``$_SERVER['PHP_AUTH_PW']`` sont renseignés par le serveur web.
+    Si vous utilisez Apache avec PHP-FastCGI, vous devrez peut être ajouter
+    cette ligne dans le **.htaccess** de votre webroot ::
+
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
+l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
+méthodes d'authentification de l'objet ``authenticate()``, la méthode
 ``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
 succès et ``false`` en cas d'échec. ::
 
-    public function getUser($request)
+    public function getUser(Request $request)
     {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -514,8 +569,8 @@ configurer le AuthComponent comme suit::
                     'passwordHasher' => [
                         'className' => 'Fallback',
                         'hashers' => [
-                          'Default',
-                          'Weak' => ['hashType' => 'sha1']
+                            'Default',
+                            'Weak' => ['hashType' => 'sha1']
                         ]
                     ]
                 ]

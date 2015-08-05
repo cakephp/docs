@@ -354,11 +354,11 @@ authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
     In case no queries are executed check if
     ``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
     If you are using Apache with FastCGI-PHP you might need to add this line
-    to your .htaccess file in webroot.
-    
+    to your **.htaccess** file in webroot ::
+
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 
-    
+
 On each request, these values, PHP_AUTH_USER and PHP_AUTH_PW, are used to
 re-identify the user and ensure they are valid user. As with authentication
 object's ``authenticate()`` method, the ``getUser()`` method should return
