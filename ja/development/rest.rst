@@ -236,6 +236,18 @@ connect()メソッドの第2引数に渡しているオプション項目の配�
 [method]というキーがあり、このキーがセットされると、
 HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可能になります。
 
+.. versionadded:: 2.5
+
+:php:meth:`Router::mapResources()`  の ``$options`` 配列の ``connectOptions``
+キーで :php:meth:`Router::connect()`` を使った設定ができます。  ::
+
+    Router::mapResources('books', array(
+        'connectOptions' => array(
+            'routeClass' => 'ApiRoute',
+        )
+    ));
+
+
 
 .. meta::
     :title lang=ja: REST
