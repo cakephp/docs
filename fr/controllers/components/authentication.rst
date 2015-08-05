@@ -378,9 +378,23 @@ typique regarde l'environnement de la requête (request/environnement) et
 utilise les informations contenues pour confirmer l'identité de l'utilisateur.
 L'authentification HTTP Basic utilise par exemple
 ``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
-username et password. Pour chaque requête, ces valeurs sont utilisées pour
-ré-identifier l'utilisateur et s'assurer que c'est un utilisateur valide. Comme
-avec les méthodes d'authentification de l'objet ``authenticate()``, la méthode
+username et password.
+
+.. note::
+
+    Dans le cas ou l'authentification ne fonctionne pas tel qu'espéré,
+    vérifiez si les requêtes sont exécutées (voir
+    ``BaseAuthenticate::_query($username)``). Dans le cas où aucune
+    requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
+    ``$_SERVER['PHP_AUTH_PW']`` sont renseignés par le serveur web.
+    Si vous utilisez Apache avec PHP-FastCGI, vous devrez peut être ajouter
+    cette ligne dans le **.htaccess** de votre webroot ::
+
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
+l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
+méthodes d'authentification de l'objet ``authenticate()``, la méthode
 ``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
 succès et ``false`` en cas d'échec. ::
 
