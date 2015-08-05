@@ -345,11 +345,24 @@ used to support user login systems that don't rely on cookies. A
 typical getUser method looks at the request/environment and uses the
 information there to confirm the identity of the user. HTTP Basic
 authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
-``$_SERVER['PHP_AUTH_PW']`` for the username and password fields. On each
-request, these values are used to re-identify the user and ensure they are
-valid user. As with authentication object's ``authenticate()`` method, the
-``getUser()`` method should return an array of user information on success or
-``false`` on failure. ::
+``$_SERVER['PHP_AUTH_PW']`` for the username and password fields.
+
+.. note::
+
+    In case authentication does not work like expected, check if queries
+    are executed at all (see ``BaseAuthenticate::_query($username)``).
+    In case no queries are executed check if
+    ``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
+    If you are using Apache with FastCGI-PHP you might need to add this line
+    to your .htaccess file in webroot.
+    
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+    
+On each request, these values, PHP_AUTH_USER and PHP_AUTH_PW, are used to
+re-identify the user and ensure they are valid user. As with authentication
+object's ``authenticate()`` method, the ``getUser()`` method should return
+an array of user information on success or ``false`` on failure. ::
 
     public function getUser(Request $request)
     {
