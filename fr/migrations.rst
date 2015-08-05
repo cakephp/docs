@@ -344,7 +344,7 @@ Effectuer des Migrations en dehors d'un environnement Console
 
 .. versionadded:: cakephp/migrations 1.2.0
 
-Depuis la sortie de la version 1.2 du plugins migrations, vous pouvez effectuer
+Depuis la sortie de la version 1.2 du plugin migrations, vous pouvez effectuer
 des migrations en dehors d'un environnement Console, directement depuis une
 application, en utilisant la nouvelle classe ``Migrations``.
 Cela peut être pratique si vous développez un installeur de plugins pour un CMS
@@ -395,7 +395,7 @@ version de la migration à marquer comme "migrée" comme premier argument.
 Passez le tableau de paramètres en second argument pour cette méthode.
 
 En option, vous pouvez passer ces paramètres au constructeur de la classe.
-Ils seront utilisés comme paramètres par défaut et vous éviterons ainsi d'avoir
+Ils seront utilisés comme paramètres par défaut et vous éviteront ainsi d'avoir
 à les passer à chaque appel de méthode::
 
     use Migrations\Migrations;
