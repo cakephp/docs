@@ -338,3 +338,82 @@ installer. Toutes les commandes du plugin Migrations supportent l'option
         bin/cake migrations status -p PluginName
 
         bin/cake migrations migrate -p PluginName
+
+Effectuer des Migrations en dehors d'un environnement Console
+=============================================================
+
+.. versionadded:: cakephp/migrations 1.2.0
+
+Depuis la sortie de la version 1.2 du plugins migrations, vous pouvez effectuer
+des migrations en dehors d'un environnement Console, directement depuis une
+application, en utilisant la nouvelle classe ``Migrations``.
+Cela peut être pratique si vous développez un installeur de plugins pour un CMS
+par exemple.
+La classe ``Migrations`` vous permet de lancer les commandes de la console de
+migrations suivantes :
+
+* migrate
+* rollback
+* markMigrated
+* status
+
+Chacune de ces commandes possède une méthode définie dans la classe
+``Migrations``.
+
+Voici comment l'utiliser::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations();
+
+    // Va retourner un tableau des migrations et leur statut
+    $status = $migrations->status();
+
+    // Va retourner true en cas de succès. Si une erreur se produit, une exception est lancée
+    $migrate = $migrations->migrate();
+
+    // Va retourner true en cas de succès. Si une erreur se produit, une exception est lancée
+    $rollback = $migrations->rollback();
+
+    // Va retourner true en cas de succès. Si une erreur se produit, une exception est lancée
+    $markMigrated = $migrations->markMigrated(20150804222900);
+
+Ces méthodes acceptent un tableau de paramètres qui doivent correspondre aux
+options de chacune des commandes::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations();
+
+    // Va retourner un tableau des migrations et leur statut
+    $status = $migrations->status(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
+
+Vous pouvez passer n'importe quelle option que la commande de la console
+accepterait.
+La seule exception étant la commande ``markMigrated`` qui attend le numéro de
+version de la migration à marquer comme "migrée" comme premier argument. 
+Passez le tableau de paramètres en second argument pour cette méthode.
+
+En option, vous pouvez passer ces paramètres au constructeur de la classe.
+Ils seront utilisés comme paramètres par défaut et vous éviterons ainsi d'avoir
+à les passer à chaque appel de méthode::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
+
+    // Tous les appels suivant seront faits avec les paramètres passés au constructeur de la classe Migrations
+    $status = $migrations->status();
+    $migrate = $migrations->migrate();
+
+Si vous avez besoin d'écraser un ou plusieurs paramètres pour un appel, vous
+pouvez les passer à la méthode::
+
+    use Migrations\Migrations;
+
+    $migrations = new Migrations(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
+
+    // Cet appel sera fait avec la connexion "custom"
+    $status = $migrations->status();
+    // Cet appel avec la connexion "default"
+    $migrate = $migrations->migrate(['connection' => 'default']);
