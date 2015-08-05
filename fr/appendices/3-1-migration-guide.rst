@@ -76,6 +76,10 @@ de View sera utilisée par le controller/action.
   dans ``Controller.initialize`` si vous souhaitez que l'authentification
   soit vérifiée avant que la méthode ``beforeFilter()`` de votre controller ne
   soit executée.
+- Les options ``scope`` et ``contain`` de la classe d'authentification sont
+  dépréciées. A la place, utilisez la nouvelle option ``finder`` pour configurer
+  une méthode de finder personnalisée pour modifier le requête utilisée pour
+  chercher l'utilisateur.
 
 FlashComponent
 --------------

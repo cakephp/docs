@@ -435,6 +435,8 @@ actions de votre controller en utilisant la propriété
     {
         // stuff
         $this->getView()->layout('admin');
+        // ou ce qui suit avant 3.1
+        $this->layout = 'admin';
     }
 
     // A partir d'un fichier de vue
@@ -453,11 +455,15 @@ actions du controller en utilisant quelque chose comme::
         {
             $this->set('title', 'View Active Users');
             $this->getView()->layout('default_small_ad');
+            // ou ce qui suit avant 3.1
+            $this->layout = 'default_small_ad';
         }
 
         public function view_image()
         {
             $this->getView()->layout('image');
+            // ou ce qui suit avant 3.1
+            $this->layout = 'image';
             // Output user image
         }
     }
@@ -484,6 +490,8 @@ contact à partir du plugin Contacts::
         public function view_active()
         {
             $this->getView()->layout('Contacts.contact');
+            // ou ce qui suit avant 3.1
+            $this->layout = 'Contacts.contact';
         }
     }
 
