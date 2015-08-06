@@ -603,8 +603,8 @@ SEOに親和性があるルーティング
 前それに接続されたすべてのルートは、拡張機能を継承しません。
 デフォルトでは、渡した拡張子は存在する拡張子のリストとマージされます。
 ``false`` 既存の拡張子のリストをオーバーライドするためにを第二引数として渡せます。
-ｋCalling the method without arguments will return existing list of
-extensions. You can set extensions per scope as well::
+引数なしでこのメソッドを呼ぶと、既存の拡張子のリストが返ってきます。
+スコープごとにこのように拡張子を設定できます。::
 
     Router::scope('/api', function ($routes) {
         $routes->extensions(['json', 'xml']);
@@ -612,13 +612,12 @@ extensions. You can set extensions per scope as well::
 
 .. note::
 
-    Setting the extensions should be the first thing you do in a scope, as the
-    extensions will only be applied to routes connected **after** the extensions
-    are set.
+    拡張子がセットされた後でのみ拡張子がルーティングに適用されるので、
+    拡張子を設定することはスコープの中で一番最初にやるべきことです。
 
-By using extensions, you tell the router to remove any matching file extensions,
-and then parse what remains. If you want to create a URL such as
-/page/title-of-page.html you would create your route using::
+拡張子を使うことで、一致したファイルの拡張子を除去し、残りをパースするように
+伝えられます。もし /page/title-of-page.html のようなURLを生成したいなら、
+以下を使ってルートを設定します。::
 
     Router::scope('/page', function ($routes) {
         $routes->extensions(['json', 'xml', 'html']);
