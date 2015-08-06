@@ -351,8 +351,8 @@ authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
 
     In case authentication does not work like expected, check if queries
     are executed at all (see ``BaseAuthenticate::_query($username)``).
-    In case no queries are executed check if
-    ``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
+    In case no queries are executed check if ``$_SERVER['PHP_AUTH_USER']``
+    and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
     If you are using Apache with FastCGI-PHP you might need to add this line
     to your **.htaccess** file in webroot::
 
