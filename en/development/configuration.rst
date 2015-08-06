@@ -461,9 +461,9 @@ anywhere within your application, in a static context::
         //yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-    If $key is left null, all values in Configure will be returned.
-    
-    If the value corresponding to the specified $key does not exist then null will be returned
+    If $key is left null, all values in Configure will be returned. If the value
+    corresponding to the specified $key does not exist then null will be
+    returned.
 
 .. php:staticmethod:: consume($key)
 
