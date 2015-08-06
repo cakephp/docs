@@ -52,9 +52,7 @@ CakePHP でのルーティングはまた 配列による引数を文字列に�
 
 上の例は新しいプレースホルダ ``:id``　によるスターマッチャーを変えました。
 プレースホルダを使うことで、URLの部分バリデーションができます。
-このケースでは
- in this case we used
-the ``\d+`` という正規表現を使いました。なので、0-9 のみが一致します。
+このケースでは ``\d+`` という正規表現を使いました。なので、0-9 のみが一致します。
 最後に、ルーターに ``id`` プレースホルダを ``view()`` 関数に ``pass``
 オプションで特定した引数を渡すように伝えます。
 このオプションの詳細は後で説明します。
@@ -107,7 +105,7 @@ CakePHP はリバースルーティングできます。それは、URL文字列
 
 .. php:staticmethod:: connect($route, $defaults = [], $options = [])
 
-コードを :term:`DRY` に保つために、 'routing scopes' を使いましょう。
+コードを :term:`DRY` に保つために 'routing scopes' を使いましょう。
 ルーティングスコープはコードをDRYに保つためだけではなく、ルーターの動きをオプティマイズします。
 上記を参照すると、 ``Router::connect()`` をルートを接続するために使えることがわかります。
  ``/`` スコープにこのメソッドはデフォルトに設定されています。スコー雨を作りいくつかのルートを接続するために、
@@ -304,7 +302,7 @@ CakePHP にコントローラー名が必要なことを伝えています。
   現在のスキーマにデフォルト設定されています。
 * ``_host`` リンクのためのホストを設定します。デフォルトは、現在のホストです。
 * ``_port`` 非スタンダートなポートにリンクを生成するときにポートを設定します。
-* ``_full``  true にすると、 `FULL_BASE_URL` 定数 が
+* ``_full`` ``true`` にすると `FULL_BASE_URL` 定数が
       生成されたURLの前に加えられます。
 * ``#`` URLのハッシュフラグメントをセットします。
 * ``_ssl`` ``true`` にすると普通の URL から https に変換します。
@@ -887,11 +885,10 @@ URLを文字列によって以下のように生成します。:
     // こんなURLが生成されます
     /articles/index?page=1#top
 
-Router will also convert any unknown parameters in a routing array to
-querystring parameters.  The ``?`` is offered for backwards compatibility with
-older versions of CakePHP.
+ルーターはすべての配列の中のアンノウンパラメーターをクエリ文字列パラメーターに変換します。
+``?`` は古いCakeに対して後方互換性があります。
 
-You can also use any of the special route elements when generating URLs:
+URLを生成するときに、特殊なルーティング要素も使えます。:
 
 * ``_ext``  :ref:`file-extensions` （拡張子）ルーティングにつかいます。.
 * ``_base`` false にセットすると、ベースURLを除去します。
