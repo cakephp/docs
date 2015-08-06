@@ -1628,7 +1628,7 @@ those placeholders when generating inputs::
     ]);
 
 .. versionadded:: 3.1
-    Additional template variables were added in 3.1.0
+    The templateVars option was added in 3.1.0
 
 Moving Checkboxes & Radios Outside of a Label
 ---------------------------------------------
