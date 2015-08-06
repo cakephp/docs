@@ -183,7 +183,7 @@ les clés suivantes:
 Customizing find query
 ----------------------
 
-Vous pouvez personnaliser la requête utilisée pour pour chercher l'utilisateur
+Vous pouvez personnaliser la requête utilisée pour chercher l'utilisateur
 en utilisant l'option ``finder`` dans la configuration de la classe
 d'authentification::
 
@@ -388,7 +388,7 @@ username et password.
     requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
     ``$_SERVER['PHP_AUTH_PW']`` sont renseignés par le serveur web.
     Si vous utilisez Apache avec PHP-FastCGI, vous devrez peut être ajouter
-    cette ligne dans le **.htaccess** de votre webroot ::
+    cette ligne dans le **.htaccess** de votre webroot::
 
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 
