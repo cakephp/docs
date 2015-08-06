@@ -75,7 +75,7 @@ file with a newly updated pot file.
 
 The three-character locale codes conform to the
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
-standard, although if you create regional locales (en\_US, en\_GB,
+standard, although if you create regional locales (`en\_US`, `en\_GB`,
 etc.) cake will use them if appropriate.
 
 .. warning::
@@ -121,7 +121,7 @@ Internationalizing CakePHP Plugins
 If you want to include translation files within your application you'll need to
 follow a few conventions.
 
-Instead of __() and __n() you will have to use __d() and __dn(). The D means
+Instead of `__()` and `__n()` you will have to use `__d()` and `__dn()`. The D means
 domain. So if you have a plugin called 'DebugKit' you would have to do this::
 
     __d('debug_kit', 'My example text');
@@ -164,7 +164,7 @@ do is the following::
     Configure::write('Config.language', 'fra');
 
 This tells CakePHP which locale to use (if you use a regional locale, such as
-fr\_FR, it will use the `ISO 639-2
+`fr\_FR`, it will use the `ISO 639-2
 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale as a fallback
 if it doesn't exist), you can change the language at any time during a request.
 e.g. in your bootstrap if you're setting the application default language, in
