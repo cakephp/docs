@@ -39,7 +39,7 @@ Controller's ``initialize()`` method or via the ``$components`` array::
         {
             parent::initialize();
             $this->loadComponent('Auth', [
-                'authorize' => ['controller'],
+                'authorize' => 'Controller',
                 'loginAction' => ['controller' => 'Users', 'action' => 'login']
             ]);
             $this->loadComponent('Cookie', ['expiry' => '1 day']);
