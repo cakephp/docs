@@ -358,8 +358,7 @@ authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
 
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 
-
-On each request, these values, PHP_AUTH_USER and PHP_AUTH_PW, are used to
+On each request, these values, `PHP_AUTH_USER` and `PHP_AUTH_PW`, are used to
 re-identify the user and ensure they are valid user. As with authentication
 object's ``authenticate()`` method, the ``getUser()`` method should return
 an array of user information on success or ``false`` on failure. ::
