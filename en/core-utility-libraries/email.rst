@@ -97,8 +97,8 @@ you can also just load an array of configs::
     
 .. note::
     
-    Use $Email->config() or the constructor to set the log level to log email headers and message.
-    Using $Email->config(array('log' => true)); will use LOG_DEBUG.  See also CakeLog::write()
+    Use ``$Email->config()`` or the constructor to set the log level to log email headers and message.
+    Using ``$Email->config(array('log' => true));`` will use LOG_DEBUG.  See also ``CakeLog::write()``
 
 You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with
 ``'ssl://'`` and configure the port value accordingly. Example::
