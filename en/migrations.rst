@@ -320,7 +320,7 @@ Running Migrations in a non-shell environment
 
 .. versionadded:: cakephp/migrations 1.2.0
 
-Since the release of 1.2 version of the migrations plugin, you can run
+Since the release of version 1.2 of the migrations plugin, you can run
 migrations from a non-shell environment, directly from an app, by using the new
 ``Migrations`` class. This can be handy in case you are developing a plugin
 installer for a CMS for instance.
@@ -363,7 +363,7 @@ the commands::
     $status = $migrations->status(['connection' => 'custom', 'source' => 'MyMigrationsFolder']);
 
 You can pass any options the shell commands would take.
-The only exception in the ``markMigrated`` command which is expecting the
+The only exception is the ``markMigrated`` command which is expecting the
 version number of the migrations to mark as migrated as first argument. Pass
 the array of parameters as the second argument for this method.
 
