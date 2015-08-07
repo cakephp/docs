@@ -52,7 +52,7 @@ que vous changez les chaînes traduisibles dans votre code.
 Le(s) fichier(s) pot eux mêmes ne sont pas utilisés par CakePHP, ils sont les
 templates utilisés pour créer ou mettre à jour vos fichiers po,
 `po files <http://en.wikipedia.org/wiki/Gettext>`_ qui contiennent les
-traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants ::
+traductions. CakePHP cherchera vos fichiers po dans les dossiers suivants::
 
     /app/Locale/<locale>/LC_MESSAGES/<domain>.po
 
@@ -77,7 +77,7 @@ nouvellement mis à jour.
 
 Les codes des locales en trois caractères suivent la norme
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
-mais si vous créez des locales régionales (en\_US, en\_GB, etc.)
+mais si vous créez des locales régionales (`en\_US`, `en\_GB`, etc.)
 CakePHP les utilisera dans les cas appropriés.
 
 .. warning::
@@ -90,7 +90,7 @@ CakePHP les utilisera dans les cas appropriés.
 Souvenez-vous que les fichiers po sont utiles pour des messages courts.
 Si vous pensez que vous aurez à traduire de longs paragraphes,
 ou des pages entières, vous devriez penser à l'implémentation
-d'une solution différente. Par ex ::
+d'une solution différente. Par ex::
 
     // Code du fichier App Controller.
     public function beforeFilter() {
@@ -127,15 +127,16 @@ Internationaliser les plugins CakePHP
 Si vous souhaitez inclure des fichiers traduits dans votre application, vous
 aurez besoin de suivre quelques conventions.
 
-Au lieu de __() et __n() vous devrez uiliser __d() et __dn(). Le D signifie
-domain. Donc si vous avez un plugin appelé 'DebugKit' vous devrez faire ceci::
+Au lieu de `__()` et `__n()` vous devrez utiliser `__d()` et `__dn()`. Le D
+signifie domain. Donc si vous avez un plugin appelé 'DebugKit' vous devrez faire
+ceci::
 
     __d('debug_kit', 'My example text');
 
 Utiliser la syntaxe en underscore est important, si vous ne l'utilisez pas,
 CakePHP ne trouvera pas votre fichier de traduction.
 
-Votre fichier de traduction pour cet exemple devra être dans ::
+Votre fichier de traduction pour cet exemple devra être dans::
 
     /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 
@@ -172,7 +173,7 @@ vous avez à faire est dans la partie suivante::
     Configure::write('Config.language', 'fra');
 
 Ceci signale à CakePHP quelle locale utiliser (si vous utilisez une locale
-régionale, comme fr\_FR, la locale
+régionale, comme `fr\_FR`, la locale
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
 utilisée au cas où cela n'existerait pas), vous pouvez changer la langue
 à n'importe quel moment pendant une requête. Ex: dans votre bootstrap
