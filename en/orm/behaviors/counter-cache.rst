@@ -87,3 +87,15 @@ a callback method. This callable must return the count value to be stored::
             }
         ]
     ]);
+
+
+.. note::
+
+    CounterCache behavior works for BelongsTo associations only. That is, for the
+    following setup: "Comments belongsTo Articles", you need to add CounterCache
+    behavior to the ``CommentsTable`` in order to generate ``comment_count`` for 
+    Articles table.
+    
+    It is possible though to make this work for BelongsToMany associations. You need to
+    enable CounterCache behavior in a custom ``through`` table configured in association options.
+    
