@@ -90,8 +90,7 @@ Créer des Noms de Variable
 .. php:staticmethod:: variable($underscored)
 
 Les noms de variable sont souvent utiles quand vous faîtes des tâches
-meta-programming qui impliquent la génération de code ou que vous faîtes
-du travail selon des conventions::
+meta-programming qui impliquent la génération de code ou des opérations basées sur les conventions::
 
     // applePie
     Inflector::variable('apple_pie');
