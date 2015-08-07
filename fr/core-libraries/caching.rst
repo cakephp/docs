@@ -182,7 +182,7 @@ stocker les résultats des 'finds' de vos models::
         Cache::write('posts', $posts);
     }
 
-Utiliser ``Cache :: write()`` et ``Cache :: read ()`` réduira facilement le
+Utiliser ``Cache::write()`` et ``Cache::read()`` réduira facilement le
 nombre d'allers-retours effectués vers la base de données pour récupérer les
 messages.
 
@@ -479,7 +479,7 @@ Si vous avez un moteur de cache nommé ``MyCustomCacheEngine`` il devra
 comme une app/libs ou dans
 ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` faisant parti d'un
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
-notation par points de plugin. ::
+notation par points de plugin::
 
     Cache::config('custom', [
         'engine' => 'CachePack.MyCustomCache',

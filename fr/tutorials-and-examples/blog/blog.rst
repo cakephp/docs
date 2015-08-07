@@ -39,7 +39,7 @@ Ou vous pouvez télécharger ``composer.phar`` du
 
 Ensuite tapez simplement la ligne suivante dans votre terminal depuis votre
 répertoire d'installation pour installer le squelette d'application de CakePHP
-dans le répertoire [app_name]. ::
+dans le répertoire [app_name]::
 
     php composer.phar create-project --prefer-dist cakephp/app [app_name]
 

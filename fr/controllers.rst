@@ -314,7 +314,7 @@ La méthode de contrôle de flux que vous utiliserez le plus souvent est
 ``Controller::redirect()``. Cette méthode prend son premier
 paramètre sous la forme d'une URL relative à votre application CakePHP.
 Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-rediriger vers un écran affichant le reçu. ::
+rediriger vers un écran affichant le reçu::
 
     public function place_order()
     {

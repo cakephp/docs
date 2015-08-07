@@ -942,7 +942,7 @@ de plus de quelques lignes.
 Il y a aussi des cas où la logique utilisée pour les méthodes de Collection peut
 être réutilisée dans plusieurs parties de votre application. Il est préférable
 d'envisager d'éclater la logique d'ensemble complexe dans des classes séparées.
-Par exemple, imaginez une longue restriction comme celle-ci.::
+Par exemple, imaginez une longue restriction comme celle-ci::
 
         $collection
                 ->map(function ($row, $key) {

@@ -317,7 +317,7 @@ Log
 * Les moteurs de Log se chargent maintenant automatiquement à la première
   écriture dans les logs.
 * :php:meth:`Cake\\Log\\Log::engine()` a été ajoutée.
-* Les méthodes suivantes ont été retirées de :php:class:`Cake\\Log\\Log` ::
+* Les méthodes suivantes ont été retirées de :php:class:`Cake\\Log\\Log`::
   ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
 * Vous ne pouvez plus créer de niveaux personnalisés en utilisant
   ``Log::levels()``.

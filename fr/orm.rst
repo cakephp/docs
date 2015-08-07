@@ -54,7 +54,7 @@ framework d'insérer des classes de base lorsque votre application n'a pas cré�
 de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
 ajouterions ce qui suit dans **src/Model/Table/ArticlesTable.php** après la
-balise d'ouverture ``<?php`` ::
+balise d'ouverture ``<?php``::
 
     namespace App\Model\Repository;
 
@@ -79,7 +79,7 @@ probablement vouloir utiliser une classe entity concrète. Les classes Entity
 vous laissent définir les méthodes accesseurs et mutateurs, définissant la
 logique personnalisée pour des enregistrements individuels et plus encore. Nous
 commencerons par ajouter ce qui suit à **src/Model/Entity/Article.php** après la
-balise d'ouverture ``<?php`` ::
+balise d'ouverture ``<?php``::
 
     namespace App\Model\Entity;
 

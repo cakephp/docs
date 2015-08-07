@@ -813,10 +813,11 @@ renommer vos actions::
 Le code ci-dessus va utiliser ``edit()`` pour l'action update, et ``create()``
 au lieu de ``add()``.
 
-Mapping Additional Resource Routes
-----------------------------------
+Mapper des Routes de Ressource Supplémentaires
+----------------------------------------------
 
-You can map additional resource methods using the ``map`` option::
+Vous pouvez mapper des méthodes de ressource supplémentaires en utilisant
+l'option ``map``::
 
      $routes->resources('Articles', [
         'map' => [
@@ -826,11 +827,12 @@ You can map additional resource methods using the ``map`` option::
             ]
         ]
      ]);
-     // This would connect /articles/deleteAll
+     // Ceci connecterait /articles/deleteAll
 
-In addition to the default routes, this would also connect a route for
-`/articles/delete_all`. By default the path segment will match the key name. You
-can use the 'path' key inside the resource definition to customize the path name::
+En plus des routes par défaut, ceci connecterait aussi une route pour
+`/articles/delete_all`. Par défaut le segment de chemin va matcher le nom
+de la clé. Vous pouvez utiliser la clé 'path' à l'intérieur de la définition
+de la ressource pour personnaliser le nom de chemin::
 
 
     $routes->resources('Articles', [
@@ -842,9 +844,10 @@ can use the 'path' key inside the resource definition to customize the path name
             ],
         ]
     ]);
-    // This would connect /articles/update_many
+    // Ceci connecterait /articles/update_many
 
-If you define 'only' and 'map', make sure that your mapped methods are also in the 'only' list.
+Si vous définissez 'only' et 'map', assurez-vous que vos méthodes mappées sont
+aussi dans la liste 'only'.
 
 .. _custom-rest-routing:
 
@@ -871,7 +874,7 @@ Arguments Passés
 
 Les arguments passés sont des arguments supplémentaires ou des segments
 du chemin qui sont utilisés lors d'une requête. Ils sont souvent utilisés
-pour transmettre des paramètres aux méthodes de vos controllers. ::
+pour transmettre des paramètres aux méthodes de vos controllers::
 
     http://localhost/calendars/view/recent/mark
 

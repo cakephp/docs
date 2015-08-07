@@ -129,7 +129,7 @@ En spécifiant 'file' cela changera la méthode de soumission à 'post', et
 ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
 Vous devez l'utiliser si vous avez des demandes de fichiers dans
 votre formulaire. L'absence de cet attribut enctype empêchera le
-fonctionnement de l'envoi de fichiers. ::
+fonctionnement de l'envoi de fichiers::
 
     echo $this->Form->create($article, ['type' => 'file']);
 
@@ -745,7 +745,7 @@ Créer des Inputs Password
 
 .. php:method:: password(string $fieldName, array $options)
 
-Création d'un champ password. ::
+Création d'un champ password::
 
     echo $this->Form->password('password');
 
@@ -775,7 +775,7 @@ Créer des Textareas
 
 .. php:method:: textarea(string $fieldName, array $options)
 
-Crée un champ input textarea (zone de texte). ::
+Crée un champ input textarea (zone de texte)::
 
     echo $this->Form->textarea('notes');
 
@@ -832,7 +832,7 @@ Créer des Checkboxes
 
 Crée un élément de formulaire checkbox. Cette méthode génère également un
 input de formulaire caché pour forcer la soumission de données pour le champ
-spécifié. ::
+spécifié::
 
     echo $this->Form->checkbox('done');
 
@@ -1682,7 +1682,7 @@ inputs::
     ]);
 
 .. versionadded:: 3.1
-    Les variables de template supplémentaires ont été ajoutées dans 3.1.0
+    L'option templateVars a été ajoutée dans 3.1.0
 
 Déplacer les Checkboxes & Boutons Radios à l'Extérieur du Label
 ---------------------------------------------------------------
