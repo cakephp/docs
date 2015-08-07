@@ -490,7 +490,8 @@ dans un contexte statique::
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     Si $key est laissé à null, toutes les valeurs dans Configure seront
-    retournées.
+    retournées. Si la valeur correspondant à la $key spécifiée n'existe pas
+    alors null sera retourné.
 
 .. php:staticmethod:: consume($key)
 
