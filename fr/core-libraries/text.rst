@@ -46,7 +46,7 @@ Générer des UUIDs
 
     La méthode UUID est utilisée pour générer des identificateurs uniques comme
     per :rfc:`4122`. UUID est une chaîne de caractères de 128-bit au format
-    ``485fc381-e790-47a3-9794-1337c0a8fe68``. ::
+    ``485fc381-e790-47a3-9794-1337c0a8fe68``::
 
         Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
@@ -130,7 +130,7 @@ on entoure. Les options possibles sont:
 * ``indentAt`` Le nombre de ligne pour commencer l'indentation du texte.
   Par défaut à 0.
 
-.. php:staticmethod:: wrapBlock($text, $options = [])    
+.. php:staticmethod:: wrapBlock($text, $options = [])
 
 Si vous devez vous assurer que la largeur totale du bloc généré ne dépassera
 pas une ceartine largeur y compris si elle contient des indentations, vous
@@ -306,7 +306,7 @@ Génère un extrait de ``$haystack`` entourant le ``$needle``
 avec un nombre de caractères de chaque côté déterminé par ``$radius``,
 et préfixé/suffixé avec ``$ellipsis``. Cette méthode est spécialement pratique
 pour les résultats de recherches. La chaîne requêtée ou les mots clés peuvent
-être montrés dans le document résultant. ::
+être montrés dans le document résultant::
 
     // appelé avec TextHelper
     echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
@@ -326,7 +326,7 @@ Converting an Array to Sentence Form
 .. php:method:: toList(array $list, $and='and')
 
 Crée une liste séparée avec des virgules, où les deux derniers items sont
-joins avec 'and'. ::
+joins avec 'and'::
 
     // appelé avec TextHelper
     echo $this->Text->toList($colors);

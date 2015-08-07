@@ -396,7 +396,7 @@ Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
 l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
 méthodes d'authentification de l'objet ``authenticate()``, la méthode
 ``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
-succès et ``false`` en cas d'échec. ::
+succès et ``false`` en cas d'échec::
 
     public function getUser(Request $request)
     {

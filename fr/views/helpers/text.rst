@@ -18,7 +18,7 @@ Lier les Adresses Email
 
 Ajoute les liens aux adresses email bien formées dans $text, selon toutes
 les options définies dans ``$options`` (regardez
-:php:meth:`HtmlHelper::link()`). ::
+:php:meth:`HtmlHelper::link()`)::
 
     $myText = 'Pour plus d'informations sur nos pâtes et desserts fameux,
         contactez info@example.com';
@@ -62,7 +62,7 @@ Convertir du Texte en Paragraphes
 .. php:method:: autoParagraph(string $text)
 
 Ajoute <p> autour du texte où la double ligne retourne et <br> où une
-simple ligne retourne, sont trouvés. ::
+simple ligne retourne, sont trouvés::
 
     $myText = 'For more information
     regarding our world-famous pastries and desserts.

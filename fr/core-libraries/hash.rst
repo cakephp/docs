@@ -94,7 +94,7 @@ Les Types d'Attribut Correspondants
     récupérer les données à partir des tableaux, le long des chemins
     arbitraires rapidement sans avoir à parcourir les structures de données.
     A la place, vous utilisez les expressions de chemin pour qualifier
-    les éléments que vous souhaitez retourner ::
+    les éléments que vous souhaitez retourner::
 
         // Utilisation habituelle:
         $users = [
@@ -133,7 +133,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
-    Retire tous les éléments d'un tableau qui matche avec $path. ::
+    Retire tous les éléments d'un tableau qui matche avec $path::
 
         $a = [
             'pages' => ['name' => 'page'],
@@ -159,7 +159,7 @@ Les Types d'Attribut Correspondants
     les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
     valeurs seront initialisées à null. Vous pouvez grouper en option les
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans
-    $groupPath. ::
+    $groupPath::
 
         $a = [
             [

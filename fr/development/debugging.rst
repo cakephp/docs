@@ -102,7 +102,7 @@ Generating Stack Traces
 .. php:staticmethod:: trace($options)
 
 Retourne le stack trace courant. Chaque ligne des traces inclut la méthode
-appelée, incluant chaque fichier et ligne d'où est originaire l'appel. ::
+appelée, incluant chaque fichier et ligne d'où est originaire l'appel::
 
     //Dans PostsController::index()
     pr( Debugger::trace() );
@@ -124,7 +124,7 @@ Getting an Excerpt From a File
 
 Récupérer un extrait du fichier dans $path (qui est un chemin de fichier
 absolu), mettant en évidence le numéro de la ligne $line avec le nombre
-de lignes $context autour. ::
+de lignes $context autour::
 
     pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
 

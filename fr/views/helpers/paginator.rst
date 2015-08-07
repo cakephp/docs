@@ -223,7 +223,7 @@ Les options supportées sont:
   :php:meth:`~PaginatorHelper::last()` à utiliser séparément si vous le voulez.
 
 Bien que cette méthode permette beaucoup de personnalisation pour ses sorties,
-elle peut aussi être appelée sans aucun paramètre. ::
+elle peut aussi être appelée sans aucun paramètre::
 
     echo $this->Paginator->numbers();
 
@@ -511,7 +511,7 @@ Générer des Url de Pagination
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
 Retourne par défaut une chaine de l'URL de pagination complète pour utiliser
-dans contexte non-standard(ex. JavaScript). ::
+dans contexte non-standard(ex. JavaScript)::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 
