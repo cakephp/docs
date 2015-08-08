@@ -13,6 +13,9 @@ CakeTime
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. start-caketime
+.. end-caketime
+
 .. meta::
     :title lang=ja: CakeTime
     :description lang=ja: CakeTime class helps you format time and test time.
