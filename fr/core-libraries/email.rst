@@ -510,14 +510,27 @@ emails liés aux utilisateurs depuis n'importe où dans l'application. Par
 exemple, si vous souhaitez envoyer l'email de bienvenue, vous pouvez faire la
 chose suivante::
 
+
+    namespace App\Controller;
+
     use Cake\Mailer\MailerAwareTrait;
 
-    // ...
+    class UsersController extends AppController
+    {
+        use MailerAwareTrait;
 
-    $users = TableRegistry::get('Users');
-    $user = $users->get($id);
-
-    $this->getMailer('User')->send('welcome', [$user]);
+        public function register()
+        {
+            $user = $this->Users->newEntity();
+            if ($this->request->is('post')) {
+                $user = $this->Users->patchEntitiy($user, $this->request->data())
+                if ($this->Users->save($user)) {
+                    $this->getMailer('User')->send('welcome', [$user]);
+                }
+            }
+            $this->set('user', $user);
+        }
+    }
 
 Si vous voulez complétement séparer l'envoi de l'email de bienvenue du code de
 l'application, vous pouvez utiliser votre ``UserMailer`` via l'évènement

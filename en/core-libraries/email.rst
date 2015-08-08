@@ -475,14 +475,26 @@ We are now able to use our ``UserMailer`` to send out our user-related emails
 from anywhere in our application. For example, if we wanted to send our welcome
 email we could do the following::
 
+    namespace App\Controller;
+
     use Cake\Mailer\MailerAwareTrait;
 
-    // ...
+    class UsersController extends AppController
+    {
+        use MailerAwareTrait;
 
-    $users = TableRegistry::get('Users');
-    $user = $users->get($id);
-
-    $this->getMailer('User')->send('welcome', [$user]);
+        public function register()
+        {
+            $user = $this->Users->newEntity();
+            if ($this->request->is('post')) {
+                $user = $this->Users->patchEntitiy($user, $this->request->data())
+                if ($this->Users->save($user)) {
+                    $this->getMailer('User')->send('welcome', [$user]);
+                }
+            }
+            $this->set('user', $user);
+        }
+    }
 
 If we wanted to completely separate sending a user their welcome email from our
 application's code, we can have our ``UserMailer`` subscribe to the
