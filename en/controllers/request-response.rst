@@ -152,7 +152,7 @@ into a DOMDocument object, :php:meth:`~Cake\\Network\\Request::input()` supports
 in additional parameters as well::
 
     // Get Xml encoded data submitted to a PUT/POST action
-    $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
+    $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
 Path Information
 ----------------
