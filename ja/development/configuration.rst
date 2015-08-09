@@ -48,7 +48,7 @@ $default 配列と同様の形式で新しいデータベース $legacy を作�
 datasource
     この設定配列が依存するデータソースの名前。
     例：Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite
-    プラグインに含まれるデータソースを使う場合は :term:`plugin syntax`
+    プラグインに含まれるデータソースを使う場合は :term:`プラグイン記法`
     という書式で指定します。
 persistent
     データベースへの永続的接続を使うかどうか
@@ -423,7 +423,7 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
 
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: 書き込むキー。 :term:`dot notation` 値が使えます。
+    :param string $key: 書き込むキー。 :term:`ドット記法` が使えます。
     :param mixed $value: 保存する値
 
     アプリケーションの設定の中で ``write()`` を使ってデータを格納します::
@@ -433,7 +433,7 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
 
     .. note::
 
-        ``$key`` パラメーターで使われる :term:`dot notation` により、
+        ``$key`` パラメーターで使われる :term:`ドット記法` により、
         あなたの構成設定値を論理的にグループ化できます。
 
     直前の例は、以下のような単一の呼び出しとしても書けます::
@@ -453,7 +453,7 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: 読み込むキー。 :term:`dot notation` 値が使えます。
+    :param string $key: 読み込むキー。 :term:`ドット記法` が使えます。
 
     アプリケーションから設定データを読み込むのに使います。デフォルトは
     CakePHP で重要な debug 値です。何らかのキーが指定されたらその
@@ -482,7 +482,7 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: 削除するキー。 :term:`dot notation` 値が使えます。
+    :param string $key: 削除するキー。 :term:`ドット記法` が使えます。
 
     アプリケーションの設定から情報を削除します::
 
@@ -726,7 +726,7 @@ XML 設定リーダを作ることもできます。::
 
     これを使うと、プレーンな PHP ファイルとして保存されている設定
     ファイルを読み込むことができます。これはファイルを ``app/Config``
-    から読み込むか、または :term:`plugin syntax` を使ってプラグインの
+    から読み込むか、または :term:`プラグイン記法` を使ってプラグインの
     設定ディレクトリから読み込むことができます。これらのファイルには
     ``$config`` 変数が含まれて **いなければなりません** 。設定
     ファイルの読み込みの例を以下に示します。::
