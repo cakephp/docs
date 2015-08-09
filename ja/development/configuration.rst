@@ -469,7 +469,8 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
         // 返される値:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-    $key を指定しない場合、 Configure にあるすべての値が返されます。
+    $key を指定しない場合、 Configure にあるすべての値を返します。指定された $key に関連する
+    値が存在しない場合、 null を返します。
 
 .. php:staticmethod:: check($key)
 
