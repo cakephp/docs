@@ -3,6 +3,11 @@ Email
 
 .. php:namespace:: Cake\Mailer
 
+.. warning::
+    Before version 3.1, the ``Email`` and ``Transport`` classes were under
+    the ``Cake\Network\Email`` namespace instead of the ``Cake\Mailer``
+    namespace.
+
 .. php:class:: Email(mixed $profile = null)
 
 ``Email`` is a new class to send email. With this
