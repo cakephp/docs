@@ -244,6 +244,17 @@ method::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be used
+when you need to sort on complex expressions::
+
+    // As of 3.0.12 orderAsc & orderDesc are available.
+    $query = $articles->find();
+    $concat = $query->newExpr()->func()->concat([
+        'title' => 'literal',
+        'synopsis' => 'literal'
+    ]);
+    $query->orderAsc($concat);
+
 To limit the number of rows or set the row offset you can use the ``limit()``
 and ``page()`` methods::
 
