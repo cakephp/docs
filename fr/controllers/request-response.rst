@@ -528,6 +528,27 @@ chaine::
         return $this->response;
     }
 
+Streaming Resources
+-------------------
+
+Vous pouvez utiliser une fonction de rappel avec ``body()`` pour convertir
+facilement des flux de ressources en réponses::
+
+    $file = fopen('/some/file.png', 'r');
+    $this->response->body(function () use ($file) {
+        rewind($file);
+        fpassthru($file);
+        fclose($file);
+    });
+
+Les fonctions de rappel peuvent également renvoyer le body en tant que chaîne
+de caractères::
+
+    $path = '/some/file.png';
+    $this->response->body(function () use ($path) {
+        return file_get_contents($path);
+    });
+
 Définir les En-têtes
 --------------------
 
