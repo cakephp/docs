@@ -3,6 +3,11 @@ Email
 
 .. php:namespace:: Cake\Mailer
 
+.. warning::
+    Before version 3.1, the ``Email`` and ``Transport`` classes were under
+    the ``Cake\Network\Email`` namespace instead of the ``Cake\Mailer``
+    namespace.
+
 .. php:class:: Email(mixed $profile = null)
 
 ``Email`` is a new class to send email. With this
@@ -434,6 +439,8 @@ A valid message id can help to prevent emails ending up in spam folders.
 
 Creating Reusable Emails
 ========================
+
+.. versionadded:: 3.1.0
 
 Mailers allow you to create reusable emails throughout your application. They
 can also be used to contain multiple email configurations in one location. This
