@@ -435,6 +435,8 @@ A valid message id can help to prevent emails ending up in spam folders.
 Creating Reusable Emails
 ========================
 
+.. versionadded:: 3.1.0
+
 Mailers allow you to create reusable emails throughout your application. They
 can also be used to contain multiple email configurations in one location. This
 helps keep your code DRYer and keeps email configuration noise out of other
