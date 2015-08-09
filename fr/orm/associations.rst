@@ -575,6 +575,8 @@ suit sera générée::
       AND article_id IN (SELECT id FROM articles)
     );
 
+.. _using-the-through-option:
+
 Utiliser l'Option 'through'
 ---------------------------
 

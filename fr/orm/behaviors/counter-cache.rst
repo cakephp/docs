@@ -92,3 +92,16 @@ compteur à stocker::
             }
         ]
     ]);
+
+.. note::
+
+    Le comportement CounterCache fonctionne uniquement pour les associations
+    ``belongsTo``. Par exemple pour "Comments belongsTo Articles", vous devez
+    ajouter le behavior CounterCache à la ``CommentsTable`` pour pouvoir
+    générer ``comment_count`` pour la table Articles.
+    
+    Il est cependant possible de le faire fonctionner pour les associations
+    ``belongsToMany``. Vous devez activer le comportement CounterCache dans
+    une table ``through`` personnalisée configurée en tant qu'option
+    d'association. Référez-vous à la configuration des tables de jointure en
+    :ref:`utilisant l'option 'through' <using-the-through-option>`.

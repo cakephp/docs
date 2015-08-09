@@ -291,8 +291,8 @@ Le ``[count placeholder]`` peut être le numéro de clé du tableau de n'importe
 quelle variable passée à la fonction de traduction. Il sera utilisé pour
 sélectionner la forme plurielle correcte.
 
-Noter faire référence à ``[count placeholder]`` dans ``{message}`` vous devez
-utiliser ``#``.
+Noter que pour faire référence à ``[count placeholder]`` dans ``{message}``
+vous devez utiliser ``#``.
 
 Vous pouvez bien entendu utiliser des id de messages plus simples si vous ne
 voulez pas taper la séquence plurielle complète dans votre code.

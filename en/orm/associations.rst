@@ -549,6 +549,8 @@ generated::
       AND article_id IN (SELECT id FROM articles)
     );
 
+.. _using-the-through-option:
+
 Using the 'through' Option
 --------------------------
 
