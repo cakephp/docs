@@ -900,8 +900,22 @@ articles quite easily::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
+Some other examples of the collection methods being used with result sets are::
+
+    // Filter the rows by a calculated property
+    $filtered = $results->filter(function ($row) {
+        return $row->is_recent;
+    });
+
+    // Create an associative array from result properties
+    $articles = TableRegistry::get('Articles');
+    $results = $articles->find()->contain(['Authors'])->all();
+
+    $authorList = $results->combine('id', 'author.name');
+
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
-done with result sets using the collections features.
+done with result sets using the collections features. The :ref:`format-results`
+section show how you can add calculated fields, or replace the result set.
 
 Getting the First & Last Record From a ResultSet
 ------------------------------------------------

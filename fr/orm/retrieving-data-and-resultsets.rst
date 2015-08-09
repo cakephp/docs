@@ -942,6 +942,20 @@ une liste des tags uniques sur une collection d'articles assez facilement::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
+Ci-dessous quelques autres examples des méthodes de collection utilisées
+avec des ensembles de données::
+
+    // Filtre les lignes sur une propriété calculée
+    $filtered = $results->filter(function ($row) {
+        return $row->is_recent;
+    });
+
+    // Crée un tableau associatif depuis les propriétés du résultat
+    $articles = TableRegistry::get('Articles');
+    $results = $articles->find()->contain(['Authors'])->all();
+
+    $authorList = $results->combine('id', 'author.name');
+
 Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
 ce qui peut être fait avec les ensembles de résultat en utilisant les
 fonctionnalités des collections.

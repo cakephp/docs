@@ -501,6 +501,27 @@ a pdf or an ics generated on the fly from a string::
         return $this->response;
     }
 
+Streaming Resources
+-------------------
+
+You can use a callable with ``body()`` to easily convert resource streams into
+responses::
+
+    $file = fopen('/some/file.png', 'r');
+    $this->response->body(function () use ($file) {
+        rewind($file);
+        fpassthru($file);
+        fclose($file);
+    });
+
+Callbacks can also return the body as a string::
+
+    $path = '/some/file.png';
+    $this->response->body(function () use ($path) {
+        return file_get_contents($path);
+    });
+
+
 Setting Headers
 ---------------
 
