@@ -3,19 +3,11 @@
 
 
 ページネーション
-###################
+##############
 
-..
-    php:namespace:: Cake\Controller\Component
+..  php:namespace:: Cake\Controller\Component
 
-
-php:namespace::Cake\Controller\Component
-
-..
-    php:class:: PaginatorComponent
-
-
-php:class:: PaginatorComponent
+..  php:class:: PaginatorComponent
 
 ..
     One of the main obstacles of creating flexible and user-friendly web
@@ -45,7 +37,7 @@ php:class:: PaginatorComponent
     of pagination links & buttons simple.
 
 
-CakePHPにおけるページネーションは、コントローラーにおけるコンポーネントによって提供され、ページ分けされたクエリーをより簡単にビルドできるようにします。ビューの中のView\Helper\PaginatorHelper は、ページネーションのリンクやボタンを作り出すことを容易にすることに使われます。
+CakePHPにおけるページネーションは、コントローラーにおけるコンポーネントによって提供され、ページ分けされたクエリーをより簡単にビルドできるようにします。ビューの中の :php:class:`~Cake\\View\\Helper\\PaginatorHelper` は、ページネーションのリンクやボタンを作り出すことを容易にすることに使われます。
 
 
 ..
@@ -63,7 +55,7 @@ Controller::paginate()の使用
     that the order key must be defined in an array structure like below::
 
 
-コントローラーにおいては、$paginate変数の中でページネーションが使用するデフォルトの検索条件を定義することから始めます。これらの条件は、ページネーション検索を行うにあたっての基本的な条件となります。これらに対して、URLから指定された、並び替え、件数上限、ページパラメーター等が加えられます。重要なこととして、”表示順”のキーが、以下のような配列構造にとって定義される必要があることを指摘します。
+コントローラーにおいては、$paginateパラメーターの中でページネーションが使用するデフォルトの検索条件を定義することから始めます。これらの条件は、ページネーション検索を行うにあたっての基本的な条件となります。これらに対して、URLから指定された、並び替え、件数上限、ページパラメーター等が加えられます。重要なこととして、”表示順”のキーが、以下のような配列構造にとって定義される必要があることを指摘します。
 
 
 ::
@@ -91,7 +83,7 @@ Controller::paginate()の使用
     :php:meth:`~Cake\\ORM\\Table::find()`, such as ``fields``::
 
 
-またfields:のように、ORM\Table::find()によってサポートされたオプションのいずれも含めることができます。
+また ``fields`` のように、:php:meth:`~Cake\\ORM\\Table::find()` によってサポートされたオプションのいずれも含めることができます。
 
 
 ::
@@ -122,7 +114,7 @@ Controller::paginate()の使用
     setting the ``finder`` option::
 
 
-Paginate プロパティからほとんどの検索オプションを指定することができるものの、「カスタムファインダーメソッド」に含めた方が、綺麗でかつ単純に指定することが可能となります。Finderオプションを設定することで、ページネーションを定義することができます。
+Paginate プロパティからほとんどの検索オプションを指定することができるものの、 :ref:`custom-find-methods` に含めた方が、綺麗でかつ単純に指定することが可能となります。Finderオプションを設定することで、ページネーションを定義することができます。
 
 
 ::
@@ -149,7 +141,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
     class ArticlesController extends AppController
     {
 
-        // find articles by tag
+        // タグごとに記事を検索する
         public function tags()
         {
             $tags = $this->request->params['pass'];
@@ -157,10 +149,11 @@ Paginate プロパティからほとんどの検索オプションを指定す�
             $customFinderOptions = [
                 'tags' => $tags
             ];
-            // the custom finder method is called findTagged inside ArticlesTable.php
-            // it should look like this:
+            
+            // カスタムファインダーメソッドは、ArticlesTable.phpの中で"findTagged"と呼ばれる
+            // 以下のような構文となっている
             // public function findTagged(Query $query, array $options) {
-            // hence you use tagged as the key
+            // そのため、taggedをキーとして使用する
             $this->paginate = [
                 'finder' => [
                     'tagged' => $customFinderOptions
@@ -200,7 +193,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
     that a model/key less ``$paginate`` array could.
 
 
-ArticlesやAuthorsのキーの値は、モデル/キーが有する全てのプロパティから、$paginate配列を差し引いた分だけ、含めることができます。
+``Articles`` や ``Authors`` のキーの値は、モデル/キーが有する全てのプロパティから、 ``$paginate`` 配列を差し引いた分だけ、含めることができます。
 
 ..
     Once the ``$paginate`` property has been defined, we can use the
@@ -212,7 +205,7 @@ ArticlesやAuthorsのキーの値は、モデル/キーが有する全てのプ�
     example of using ``paginate()`` would be::
 
 
-$paginate プロパティが定義された後、ページネーションデータを作成するためには、Controller\Controller::paginate()メソッドを使用し、PaginatorHelperがまだ加えられていない場合はPaginatorHelperを加えます。Controllerのpaginateメソッドは、ページ分けされた検索結果を返し、ページネーションのメタデータをrequestにセットします。ページネーションのメタデータは、$this->request->params['paging']でアクセスできます。paginate()を使用するもっとまとまった例としては、
+``$paginate`` プロパティが定義された後、ページネーションデータを作成するためには、 :php:meth:`~Cake\\Controller\\Controller::paginate()` メソッドを使用し、 ``PaginatorHelper`` がまだ加えられていない場合はPaginatorHelperを加えます。Controllerのpaginateメソッドは、ページ分けされた検索結果を返し、ページネーションのメタデータをrequestにセットします。ページネーションのメタデータは、 ``$this->request->params['paging']`` でアクセスできます。 ``paginate()`` を使用するもっとまとまった例としては、
 
 
 ::
@@ -232,7 +225,7 @@ $paginate プロパティが定義された後、ページネーションデー�
     a controller. You can also pass the resulting query of a find method::
 
 
-デフォルトのpaginate()メソッドは、デフォルトのモデルをコントローラーとして使います。また、findメソッドの検索結果を渡すこともできます。
+デフォルトの ``paginate()`` メソッドは、デフォルトのモデルをコントローラーとして使います。また、findメソッドの検索結果を渡すこともできます。
 
 
 ::
@@ -254,13 +247,13 @@ $paginate プロパティが定義された後、ページネーションデー�
 
 ::
 
-    // Using a query
+    // クエリー（検索結果）を用いる場合
     $comments = $this->paginate($commentsTable->find());
 
-    // Using the model name.
+    // モデル名を用いる場合
     $comments = $this->paginate('Comments');
 
-    // Using a table object.
+    // テーブルオブジェクトを用いる場合
     $comments = $this->paginate($commentTable);
 
 
@@ -269,7 +262,7 @@ $paginate プロパティが定義された後、ページネーションデー�
 
 
 Paginatorを直接使用する場合
-============================
+=========================
 
 
 ..
@@ -298,7 +291,7 @@ Paginatorを直接使用する場合
     property on a controller.
 
 
-最初のパラメーターは、ページネーションしたい対象のテーブルオブジェクトにおける検索結果のオブジェクトでなければいけません。この代替として、テーブルオブジェクトそのものを引き渡す、という方法もあります。２番目のパラメーターは、ページネーションをするにあたっての設定を示した配列でなければなりません。この配列は、コントローラーにおける$paginateプロパティと同一の構造を有する必要があります。
+最初のパラメーターは、ページネーションしたい対象のテーブルオブジェクトにおける検索結果のオブジェクトでなければいけません。この代替として、テーブルオブジェクトそのものを引き渡す、という方法もあります。２番目のパラメーターは、ページネーションをするにあたっての設定を示した配列でなければなりません。この配列は、コントローラーにおける ``$paginate`` プロパティと同一の構造を有する必要があります。
 
 
 ..
@@ -318,7 +311,7 @@ Paginatorを直接使用する場合
     pagination query::
 
 
-テーブルが有するnon-virtualな列であれば、デフォルトではいずれのに対しても並び替えが可能です。しかし、インデックスされていない列でも並び替えが可能となってしまい、負荷がかかってしまいます。これを防ぐため、sortWhitelistオプションを使用することで、並び替えが可能となるフィールドのホワイトリストを設定することができます。ページネーションの検索結果の一部となりうる関係データや、計算されたフィールドを並び替えしたい場合は、このオプションが必要となります。
+テーブルが有するnon-virtualな列であれば、デフォルトではいずれのに対しても並び替えが可能です。しかし、インデックスされていない列でも並び替えが可能となってしまい、負荷がかかってしまいます。これを防ぐため、 ``sortWhitelist`` オプションを使用することで、並び替えが可能となるフィールドのホワイトリストを設定することができます。ページネーションの検索結果の一部となりうる関係データや、計算されたフィールドを並び替えしたい場合は、このオプションが必要となります。
 
 
 ::
@@ -369,7 +362,7 @@ Paginatorを直接使用する場合
     the ``maxLimit`` value.
 
 
-リクエストの制限パラメーターがこの値よりも大きかった場合、このmaxLimitの値に削減されます。
+リクエストの制限パラメーターがこの値よりも大きかった場合、この ``maxLimit`` の値に削減されます。
 
 
 ..
@@ -385,7 +378,7 @@ Paginatorを直接使用する場合
     ``contain`` parameter::
 
 
-Contain変数を使用することで、ページネーションされたテーブルに追加のアソシエーションをロードすることができます。
+``contain`` パラメーターを使用することで、ページネーションされたテーブルに追加のアソシエーションをロードすることができます。
 
 
 ::
@@ -413,14 +406,14 @@ Contain変数を使用することで、ページネーションされたテー�
     page count.
 
 
-存在しないページに対してアクセスを試みたり、リクエストされたページ数がトータルのページ数よりも大きかった場合に、Paginatorコンポーネントは、NotFoundExceptionを返します。
+存在しないページに対してアクセスを試みたり、リクエストされたページ数がトータルのページ数よりも大きかった場合に、Paginatorコンポーネントは、 ``NotFoundException`` を返します。
 
 ..
     So you could either let the normal error page be rendered or use a try catch
     block and take appropriate action when a ``NotFoundException`` is caught::
 
 
-従って、NotFoundExceptionが返されたときは、通常のエラーページが表示されるようにしたり、try-catch構文を活用して、適切な処理をすればよいです。
+従って、 ``NotFoundException`` が返されたときは、通常のエラーページが表示されるようにしたり、try-catch構文を活用して、適切な処理をすればよいです。
 
 
 ::
@@ -449,7 +442,7 @@ Contain変数を使用することで、ページネーションされたテー�
     how to create links for pagination navigation.
 
 
-ページネーションのナビゲーションのためのリンクを生成する方法については、View\Helper\PaginatorHelperドキュメンテーションを参照のこと。
+ページネーションのナビゲーションのためのリンクを生成する方法については、 :php:class:`~Cake\\View\\Helper\\PaginatorHelper` ドキュメンテーションを参照のこと。
 
 
 ..
