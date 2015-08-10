@@ -75,18 +75,8 @@ You are also welcome to make and suggestions for new content as commits in a Git
 Translations
 ------------
 
-Contributing translations requires that you make a new directory using the two letter name for your language.  As content is translated, directories mirroring the english content should be created with localized content.
-
-
-Generating Meta Tags
---------------------
-
-If you are providing translations and want to automatically generate meta tags for the resulting HTML files, a MetatagShell is provided in
-the `scripts` folder of this repo. In order to use it, copy it into any CakePHP 2.0 empty application inside `app/Console/Command`, execute
-`Console/cake metatag` and follow the instructions.
-
-The script will process all the files under one of the translation folders and generate the possible description terms using an external API, 
-it is a good idea to go over the generated terms and clean-up whatever noise it might have generated.
+Contributing translations requires that you make a new directory using the two letter name for your language.
+As content is translated, directories mirroring the english content should be created with localized content.
 
 Making Search Work Locally
 --------------------------
