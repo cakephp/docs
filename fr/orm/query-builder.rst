@@ -259,6 +259,17 @@ vous pouvez utiliser la méthode ``order``::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent être
+utilisées quand vous devez trier selon des expressions complexes::
+
+    // Depuis 3.0.12 orderAsc & orderDesc sont disponibles.
+    $query = $articles->find();
+    $concat = $query->newExpr()->func()->concat([
+        'title' => 'literal',
+        'synopsis' => 'literal'
+    ]);
+    $query->orderAsc($concat);
+
 Pour limiter le nombre de lignes ou définir la ligne offset, vous pouvez
 utiliser les méthodes ``limit()`` et ``page()``::
 
