@@ -131,6 +131,26 @@ Les Types d'Attribut Correspondants
 
         $users = Hash::insert($users, '{n}.new', 'value');
 
+    Les matchers d'attribut fonctionnent aussi avec ``insert()``::
+
+        $data = [
+            0 => ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+            1 => ['Item' => ['id' => 2, 'title' => 'second']],
+            2 => ['Item' => ['id' => 3, 'title' => 'third']],
+            3 => ['up' => true, 'Item' => ['id' => 4, 'title' => 'fourth']],
+            4 => ['Item' => ['id' => 5, 'title' => 'fifth']],
+        ];
+        $result = Hash::insert($data, '{n}[up].Item[id=4].new', 9);
+        /* $result ressemble maintenant à:
+            [
+                ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+                ['Item' => ['id' => 2, 'title' => 'second']],
+                ['Item' => ['id' => 3, 'title' => 'third']],
+                ['up' => true, 'Item' => ['id' => 4, 'title' => 'fourth', 'new' => 9]],
+                ['Item' => ['id' => 5, 'title' => 'fifth']],
+            ]
+        */
+
 .. php:staticmethod:: remove(array $data, $path = null)
 
     Retire tous les éléments d'un tableau qui matche avec $path::
@@ -150,7 +170,25 @@ Les Types d'Attribut Correspondants
         */
 
     L'utilisation de ``{n}`` et ``{s}`` vous autorisera à retirer les valeurs
-    multiples en une fois.
+    multiples en une fois. Vous pouvez aussi utiliser les matchers d'attribut
+    avec ``remove()``::
+
+        $data = [
+            0 => ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+            1 => ['Item' => ['id' => 2, 'title' => 'second']],
+            2 => ['Item' => ['id' => 3, 'title' => 'third']],
+            3 => ['clear' => true, 'Item' => ['id' => 4, 'title' => 'fourth']],
+            4 => ['Item' => ['id' => 5, 'title' => 'fifth']],
+        ];
+        $result = Hash::remove($data, '{n}[clear].Item[id=4]');
+        /* $result ressemble maintenant à:
+            [
+                ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+                ['Item' => ['id' => 2, 'title' => 'second']],
+                ['Item' => ['id' => 3, 'title' => 'third']],
+                ['Item' => ['id' => 5, 'title' => 'fifth']],
+            ]
+        */
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 

@@ -168,7 +168,7 @@ du XML en objet DOMDocument,:php:meth:`~Cake\\Network\\Request::input()`
 supporte aussi le passage de paramètres supplémentaires::
 
     // Obtenir les données encodées en Xml soumises avec une action PUT/POST
-    $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
+    $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
 Informations du Chemin
 ----------------------
