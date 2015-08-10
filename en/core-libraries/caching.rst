@@ -420,9 +420,9 @@ Cache API
 
 .. php:staticmethod:: add($key, $value, $config = 'default')
 
-    Add data to the cache if none exist already. Will write data to the cache
-    only if the key does not exist. In the case that data did exist, this method
-    will return false. Where possible data is checked & set atomically.
+    Add data to the cache, but only if the key does not exist already.
+    In the case that data did exist, this method will return false.
+    Where possible data is checked & set atomically.
 
     .. versionadded:: 2.8
         add method was added in 2.8.0.
