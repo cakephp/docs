@@ -35,7 +35,7 @@ composer.json file for a CakePHP application would look like the following::
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.6.*"
+            "cakephp/cakephp": "2.7.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
