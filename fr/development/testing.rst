@@ -392,7 +392,6 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
           ];
           public $records = [
               [
-                  'id' => 1,
                   'title' => 'First Article',
                   'body' => 'First Article Body',
                   'published' => '1',
@@ -400,7 +399,6 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'modified' => '2007-03-18 10:41:31'
               ],
               [
-                  'id' => 2,
                   'title' => 'Second Article',
                   'body' => 'Second Article Body',
                   'published' => '1',
@@ -408,7 +406,6 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
                   'modified' => '2007-03-18 10:43:31'
               ],
               [
-                  'id' => 3,
                   'title' => 'Third Article',
                   'body' => 'Third Article Body',
                   'published' => '1',
@@ -505,7 +502,6 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
         {
             $this->records = [
                 [
-                    'id' => 1,
                     'title' => 'First Article',
                     'body' => 'First Article Body',
                     'published' => '1',
@@ -558,7 +554,6 @@ Par exemple::
         public $import = ['table' => 'articles'];
         public $records = [
             [
-              'id' => 1,
               'title' => 'First Article',
               'body' => 'First Article Body',
               'published' => '1',
@@ -566,7 +561,6 @@ Par exemple::
               'modified' => '2007-03-18 10:41:31'
             ],
             [
-              'id' => 2,
               'title' => 'Second Article',
               'body' => 'Second Article Body',
               'published' => '1',
@@ -574,7 +568,6 @@ Par exemple::
               'modified' => '2007-03-18 10:43:31'
             ],
             [
-              'id' => 3,
               'title' => 'Third Article',
               'body' => 'Third Article Body',
               'published' => '1',
