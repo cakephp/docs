@@ -109,7 +109,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    Insère $data dans un tableau tel que défini dans ``$path``::
+    Insère ``$data`` dans un tableau tel que défini dans ``$path``::
 
         $a = [
             'pages' => ['name' => 'page']
@@ -153,7 +153,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
-    Retire tous les éléments d'un tableau qui matche avec $path::
+    Retire tous les éléments d'un tableau qui matche avec ``$path``::
 
         $a = [
             'pages' => ['name' => 'page'],
@@ -192,12 +192,12 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
-    Crée un tableau associatif en utilisant $keyPath en clé pour le chemin
-    à construire, et optionnellement $valuePath comme chemin pour récupérer
-    les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
+    Crée un tableau associatif en utilisant ``$keyPath`` en clé pour le chemin
+    à construire, et optionnellement ``$valuePath`` comme chemin pour récupérer
+    les valeurs. Si ``$valuePath`` n'est pas spécifiée, ou ne matche rien, les
     valeurs seront initialisées à null. Vous pouvez grouper en option les
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans
-    $groupPath::
+    ``$groupPath``::
 
         $a = [
             [
@@ -282,7 +282,7 @@ Les Types d'Attribut Correspondants
             ]
         */
 
-    Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si
+    Vous pouvez fournir des tableaux pour les deux ``$keyPath`` et ``$valuePath``. Si
     vous le faîtes, la première valeur sera utilisée comme un format de chaîne
     de caractères, pour les valeurs extraites par les autres chemins::
 
@@ -430,7 +430,7 @@ Les Types d'Attribut Correspondants
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
     Filtre les éléments vides en dehors du tableau, en excluant '0'. Vous
-    pouvez aussi fournir un $callback personnalisé pour filtrer les éléments
+    pouvez aussi fournir un ``$callback`` personnalisé pour filtrer les éléments
     de tableau. Votre callback devrait retourner ``false`` pour retirer
     les éléments du tableau résultant::
 
@@ -618,7 +618,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: map(array $data, $path, $function)
 
-    Crée un nouveau tableau, en extrayant $path, et mappe $function à travers
+    Crée un nouveau tableau, en extrayant ``$path``, et mappe ``$function`` à travers
     les résultats. Vous pouvez utiliser les deux, expression et le matching
     d'éléments avec cette méthode::
 
@@ -633,14 +633,14 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
-    Crée une valeur unique, en extrayant $path, et en réduisant les résultats
-    extraits avec $function. Vous pouvez utiliser les deux, expression et le
+    Crée une valeur unique, en extrayant ``$path``, et en réduisant les résultats
+    extraits avec ``$function``. Vous pouvez utiliser les deux, expression et le
     matching d'éléments avec cette méthode.
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
     Appliquer un callback à un ensemble de valeurs extraites en utilisant
-    $function. La fonction va récupérer les valeurs extraites en premier
+    ``$function``. La fonction va récupérer les valeurs extraites en premier
     argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')

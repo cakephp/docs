@@ -98,7 +98,7 @@ Attribute Matching Types
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    Inserts $data into an array as defined by ``$path``::
+    Inserts ``$data`` into an array as defined by ``$path``::
 
         $a = [
             'pages' => ['name' => 'page']
@@ -141,7 +141,7 @@ Attribute Matching Types
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
-    Removes all elements from an array that match $path. ::
+    Removes all elements from an array that match ``$path``. ::
 
         $a = [
             'pages' => ['name' => 'page'],
@@ -179,11 +179,11 @@ Attribute Matching Types
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
-    Creates an associative array using a $keyPath as the path to build its keys,
-    and optionally $valuePath as path to get the values. If $valuePath is not
+    Creates an associative array using a ``$keyPath`` as the path to build its keys,
+    and optionally ``$valuePath`` as path to get the values. If ``$valuePath`` is not
     specified, or doesn't match anything, values will be initialized to null.
     You can optionally group the values by what is obtained when following the
-    path specified in $groupPath. ::
+    path specified in ``$groupPath``. ::
 
         $a = [
             [
@@ -268,7 +268,7 @@ Attribute Matching Types
             ]
         */
 
-    You can provide array's for both $keyPath and $valuePath. If you do this,
+    You can provide array's for both ``$keyPath`` and ``$valuePath``. If you do this,
     the first value will be used as a format string, for values extracted by the
     other paths::
 
@@ -416,8 +416,8 @@ Attribute Matching Types
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
     Filters empty elements out of array, excluding '0'. You can also supply a
-    custom $callback to filter the array elements. You callback should return
-    ``false`` to remove elements from the resulting array::
+    custom ``$callback`` to filter the array elements. You callback should
+    return ``false`` to remove elements from the resulting array::
 
         $data = [
             '0',
@@ -602,7 +602,7 @@ Attribute Matching Types
 
 .. php:staticmethod:: map(array $data, $path, $function)
 
-    Creates a new array, by extracting $path, and mapping $function
+    Creates a new array, by extracting ``$path``, and mapping ``$function``
     across the results. You can use both expression and matching elements with
     this method::
 
@@ -617,13 +617,13 @@ Attribute Matching Types
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
-    Creates a single value, by extracting $path, and reducing the extracted
-    results with $function. You can use both expression and matching elements
+    Creates a single value, by extracting ``$path``, and reducing the extracted
+    results with ``$function``. You can use both expression and matching elements
     with this method.
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
-    Apply a callback to a set of extracted values using $function. The function
+    Apply a callback to a set of extracted values using ``$function``. The function
     will get the extracted values as the first argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
