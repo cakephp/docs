@@ -521,10 +521,10 @@ Importer les Informations de Table
 
 Définir le schema des fixtures peut être vraiment pratique lorsque vous créez
 des plugins, des librairies ou si vous créez un application qui doit être
-facilement portable. La redéfinition du  schéma dans les fixtures peut devenir
+facilement portable. La redéfinition du schéma dans les fixtures peut devenir
 difficile à maintenir pour les applications de grandes échelles. A cause de
 cela, CakePHP fournit la possibilité d'importer le schema depuis une connexion
-existante et utilise une définition de la table réfléchie  pour créer la
+existante et utilise une définition de la table réfléchie pour créer la
 définition de la table utilisée par la suite de tests.
 
 Commençons par un exemple. Imaginons que vous ayez un model nommé articles
