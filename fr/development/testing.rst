@@ -251,8 +251,8 @@ projet dans un répertoire séparé et installer ses dépendances::
     php ~/composer.phar install
     php ~/phpunit.phar
 
-Filtrer les Cas de Test
------------------------
+Filtrer les Cas de Test (TestCase)
+----------------------------------
 
 Quand vous avez des cas de test plus larges, vous pouvez lancer un
 sous-ensemble de méthodes de test quand vous essayez de travailler sur un
@@ -264,8 +264,8 @@ filtrer les méthodes de test::
 Le paramètre filter est utilisé comme une expression régulière sensible à la
 casse pour filtrer les méthodes de test à lancer.
 
-Générer une Couverture de Code
-------------------------------
+Générer une Couverture de Code (Code Coverage)
+----------------------------------------------
 
 Vous pouvez générer un rapport de couverture de code en une ligne de
 commande en utilisant les outils de couverture de code intégrés à PHPUnit.
@@ -583,8 +583,8 @@ toutes les tables vides créés. En ne définissant ni ``$fields`` ni ``$import`
 une fixture va seulement insérer ces enregistrements et tronquer les
 enregistrements sur chaque méthode de test.
 
-Charger les Fixtures dans vos Cas de Test
------------------------------------------
+Charger les Fixtures dans vos Tests (TestCase)
+----------------------------------------------
 
 Après avoir créé vos fixtures, vous pouvez les utiliser dans vos cas de test.
 Dans chaque cas de test vous devriez charger les fixtures dont vous aurez
