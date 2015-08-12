@@ -57,7 +57,7 @@ Intégration avec le FormHelper
 ==============================
 
 Le CsrfComponent s'intègre de façon transparente avec `` FormHelper``. Chaque
-fois que vous créer un formulaire avec FormHelper, il va insérer un champ caché
+fois que vous créez un formulaire avec FormHelper, il va insérer un champ caché
 contenant le jeton CSRF.
 
 .. note::

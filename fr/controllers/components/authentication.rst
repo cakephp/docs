@@ -290,7 +290,7 @@ Les authentifications basic et digest sont des schémas d'authentification
 sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
 vous utilisez seulement les authentificateurs basic / digest, vous n'avez pas
 besoin d'action login dans votre controller. L'authentication stateless va
-re-vérifier les autorisations de l'utilisateur à chaque requête, ceci créé un
+re-vérifier les autorisations de l'utilisateur à chaque requête, ceci crée un
 petit surcoût mais permet aux clients de se connecter sans utiliser les
 cookies et rend AuthComponent plus adapté pour construire des APIs.
 

@@ -405,7 +405,7 @@ Alors que ce code est un peu plus compliqué que ce que nous avons déjà fait,
 il permet de montrer la puissance de l'ORM de CakePHP. Vous pouvez facilement
 manipuler les résultats de requête en utilisant
 les méthodes des :doc:`/core-libraries/collections`, et gérer les
-scenarios où vous créer les entities à la volée avec facilité.
+scenarios où vous créez les entities à la volée avec facilité.
 
 Récapitulatif
 =============

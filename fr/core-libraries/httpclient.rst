@@ -97,7 +97,7 @@ spécifique que vous souhaitez::
 
     $data = new FormData();
 
-    // Créé une partie XML
+    // Crée une partie XML
     $xml = $data->newPart('xml', $xmlString);
     // Définit le type de contenu.
     $xml->type('application/xml');

@@ -141,7 +141,7 @@ barre de progression HTML. Notre helper ressemblera à cela::
     }
 
 C'est un exemple très simple, mais ce sera utile pour montrer comment vous
-pouvez créer un cas de test simple. Après avoir créer et sauvegardé notre
+pouvez créer un cas de test simple. Après avoir créé et sauvegardé notre
 helper, nous allons créer le fichier de cas de tests dans
 **tests/TestCase/View/Helper/ProgressHelperTest.php**. Dans ce fichier, nous
 allons commencer avec ce qui suit::
@@ -463,7 +463,7 @@ default
     Valeur par défaut que le champ prend.
 
 Nos pouvons définir un ensemble d'enregistrements qui seront remplis après que
-la table de fixture est crée. Le format est assez simple, ``$records`` est un
+la table de fixture est créée. Le format est assez simple, ``$records`` est un
 tableau d'enregistrements. Chaque item dans ``$records`` devrait être une unique
 ligne. A l'intérieur de chaque ligne, il devrait y avoir un tableau associatif
 des colonnes et valeurs pour la ligne. Gardez juste à l'esprit que chaque
