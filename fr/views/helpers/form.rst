@@ -24,7 +24,7 @@ profit du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
 affichera une balise d'ouverture de formulaire.
 
 Tous les paramètres sont optionnels. Si ``create()`` est appelée sans
-paramètre, CakePHP supposera que vous voulez créez un formulaire en rapport
+paramètre, CakePHP supposera que vous voulez créer un formulaire en rapport
 avec le controller courant, via l'URL actuelle. par défaut, la méthode de
 soumission par des formulaires est POST. Si vous appelez ``create()`` dans une
 vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
