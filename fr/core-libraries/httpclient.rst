@@ -19,27 +19,27 @@ ceci::
 
     $http = new Client();
 
-    // Simple get
+    // Simple GET
     $response = $http->get('http://example.com/test.html');
 
-    // Simple get avec querystring
+    // Simple GET avec querystring
     $response = $http->get('http://example.com/search', ['q' => 'widget']);
 
-    // Simple get avec querystring & headers supplémentaires
+    // Simple GET avec querystring & headers supplémentaires
     $response = $http->get('http://example.com/search', ['q' => 'widget'], [
       'headers' => ['X-Requested-With' => 'XMLHttpRequest']
     ]);
 
 Faire des requêtes post et put est également simple::
 
-    // Envoie une requête POST avec des données encodées application/x-www-form-urlencoded
+    // Envoi d'une requête POST avec des données encodées application/x-www-form-urlencoded
     $http = new Client();
     $response = $http->post('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
     ]);
 
-    // Envoie une requête PUT avec des données encodées application/x-www-form-urlencoded
+    // Envoi d'une requête PUT avec des données encodées application/x-www-form-urlencoded
     $response = $http->put('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
@@ -97,19 +97,19 @@ spécifique que vous souhaitez::
 
     $data = new FormData();
 
-    // Crée une partie XML
+    // Créer une partie XML
     $xml = $data->newPart('xml', $xmlString);
     // Définit le type de contenu.
     $xml->type('application/xml');
     $data->add($xml);
 
-    // Créé un fichier upload avec addFile()
+    // Créer un fichier upload avec addFile()
     // Ceci va aussi ajouter le fichier aux données du formulaire.
     $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
     $file->contentId('abc123');
     $file->disposition('attachment');
 
-    // Envoie la requête.
+    // Envoyer la requête.
     $response = $http->post(
         'http://example.com/api',
         (string)$data,
@@ -123,7 +123,7 @@ Lorsque vous utilisez des REST API, vous avez souvent besoin d'envoyer des corps
 de requête qui ne sont pas encodés. Http\\Client le permet grâce à l'option
 type::
 
-    // Send a JSON request body.
+    // Envoi d'un corps JSON.
     $http = new Client();
     $response = $http->post(
       'http://example.com/tasks',
@@ -275,14 +275,14 @@ Devoir retaper le nom de domaine, les paramètres d'authentification et de proxy
 peut devenir fastidieux et source d'erreurs. Pour réduire ce risque d'erreur et
 être moins pénible, vous pouvez créer des clients scoped::
 
-    // Crée un client scoped.
+    // Créer un client scoped.
     $http = new Client([
       'host' => 'api.example.com',
       'scheme' => 'https',
       'auth' => ['username' => 'mark', 'password' => 'testing']
     ]);
 
-    // Fait une requête vers api.example.com
+    // Faire une requête vers api.example.com
     $response = $http->get('/test.php');
 
 Les informations suivantes peuvent être utilisées lors de la création d'un
@@ -334,7 +334,7 @@ le domaine + combinaisons de chemin qui correspondent::
 Vous pouvez toujours remplacer les cookies auto-inclus en les définissant dans
 les paramètres ``$options`` de la requête::
 
-    // Remplace un cookie stocké avec une valeur personnalisée.
+    // Remplacer un cookie stocké avec une valeur personnalisée.
     $response = $http->get('/changelogs', [], [
         'cookies' => ['sessionid' => '123abc']
     ]);
@@ -406,7 +406,7 @@ d'objet pour lire les données à partir des propriétés suivantes:
     $http = new Client(['host' => 'example.com']);
     $response = $http->get('/test');
 
-    // Utilise les accesseurs d'object pour lire les données.
+    // Utiliser les accesseurs d'object pour lire les données.
     debug($response->body);
     debug($response->status);
     debug($response->headers);
@@ -421,12 +421,12 @@ fournissent une utilisation facile d'accéder à la lecture des données décod�
 Les données JSON dans un tableau, alors que les données XML sont décodées dans
 un arbre ``SimpleXMLElement``::
 
-    // Récupérer du XML
+    // Récupérer du XML.
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
     $xml = $response->xml;
 
-    // Récupérer du JSON
+    // Récupérer du JSON.
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
     $json = $response->json;
