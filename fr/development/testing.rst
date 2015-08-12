@@ -362,7 +362,7 @@ Créer les Fixtures
 ------------------
 
 A la création d'une fixture, vous pouvez définir principalement deux choses:
-comment la table est créée (quels champs font parti de la table), et quels
+comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
 Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
