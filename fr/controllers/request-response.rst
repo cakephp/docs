@@ -431,8 +431,7 @@ Cela fera que tous les controllers dans votre application utiliseront
 aussi remplacer l'instance de réponse de la configuration
 ``$this->response`` dans vos controllers. Ecraser l'objet réponse
 est à portée de main pour les tests car il vous permet d'écraser les
-méthodes qui interragissent avec :php:meth:`~CakeResponse::header()`. Voir la
-section sur :ref:`cakeresponse-testing` pour plus d'informations.
+méthodes qui interragissent avec :php:meth:`Cake\\Network\\Response::header()`.
 
 Gérer les Types de Contenu
 --------------------------

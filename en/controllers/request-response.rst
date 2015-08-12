@@ -407,8 +407,7 @@ This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response
 instance by setting ``$this->response`` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
-out the methods that interact with :php:meth:`~CakeResponse::header()`. See the section on
-:ref:`cakeresponse-testing` for more information.
+out the methods that interact with :php:meth:`Cake\\Network\\Response::header()`.
 
 Dealing with Content Types
 --------------------------
