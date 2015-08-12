@@ -56,7 +56,7 @@ dossier webroot principal::
     //Quand un theme avec le nom de 'purple_cupcake'
     $this->Html->css('main.css');
 
-    //Créé un chemin comme
+    //Crée un chemin comme
     /purple_cupcake/css/main.css
 
     // et les liens vers

@@ -142,7 +142,7 @@ Le moteur de ``FileLog`` a quelques nouvelles configurations:
 * ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
   Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
   existant est renommé en ajoutant le timestamp au nom du fichier et un
-  nouveau fichier de log est crée. Peut être une valeur de bytes en entier
+  nouveau fichier de log est créé. Peut être une valeur de bytes en entier
   ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
   Par défaut à 10MB.
 * ``rotate`` Les fichiers de log font une rotation à un temps spécifié

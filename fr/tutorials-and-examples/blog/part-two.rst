@@ -12,7 +12,7 @@ tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 Les fichiers des classes de model de CakePHP sont séparés entre des objets
 ``Table`` et ``Entity``. Les objets ``Table`` fournissent un accès à la
 collection des entities stockées dans une table spécifique et vont dans
-**src/Model/Table**. Le fichier que nous allons créé sera sauvegardé dans
+**src/Model/Table**. Le fichier que nous allons créer sera sauvegardé dans
 **src/Model/Table/ArticlesTable.php**. Le fichier complété devrait ressembler
 à ceci::
 
@@ -326,7 +326,7 @@ Nous utilisons les méthodes ``success()`` et ``error()`` pour définir un
 message dans une variable de session. Ces méthodes sont fournies via la
 `méthode magique _call()
 <http://php.net/manual/fr/language.oop5.overloading.php#object.call>`_
-de PHP. Les messages Flash seront affichés dans la page juste après la 
+de PHP. Les messages Flash seront affichés dans la page juste après la
 redirection. Dans le layout, nous avons ``<?= $this->Flash->render() ?>`` qui
 permet d'afficher et d'effacer la variable correspondante. La méthode
 :php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de

@@ -259,7 +259,7 @@ erreur de validation si besoin. En utilisant les metadonnées dans le contexte
 du formulaire, cette méthode va choisir un type d'input approprié pour chaque
 champ. En interne, ``input()`` utilise les autres méthodes de FormHelper.
 
-Le type d'input créés dépend de la colonne datatype:
+Le type d'input créé dépend de la colonne datatype:
 
 Column Type
     Champ de formulaire résultant
@@ -410,7 +410,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
 * ``$options['type']`` Vous pouvez forcer le type d'un input, remplaçant
   l'introspection du model, en spécifiant un type. En plus des types de
-  champs vus dans :ref:`automagic-form-elements`, vous pouvez aussi créez
+  champs vus dans :ref:`automagic-form-elements`, vous pouvez aussi créer
   des 'fichiers', 'password' et divers types supportés par HTML5::
 
     echo $this->Form->input('field', ['type' => 'file']);
@@ -1168,7 +1168,7 @@ Créer des Inputs Time
 
 .. php:method:: time($fieldName, $options = [])
 
-Créé deux éléments select remplis respectivement avec 24 hours et 60 minutes
+Crée deux éléments select remplis respectivement avec 24 hours et 60 minutes
 pour ``hour`` et ``minute``.
 De plus, les attributs HTML peuvent être fournis dans $options pour chaque
 ``type`` spécifique. Si ``$options['empty']`` est ``false``, le select
@@ -1565,7 +1565,7 @@ Personnaliser les Templates que FormHelper Utilise
 ==================================================
 
 Comme beaucoup de helpers dans CakePHP, FormHelper utilise les string templates
-pour mettre en forme le HTML qu'il créé. Alors que les templates par défaut
+pour mettre en forme le HTML qu'il crée. Alors que les templates par défaut
 sont destinés à être un ensemble raisonnable de valeurs par défaut, vous aurez
 peut-être besoin de personnaliser les templates pour correspondre à votre
 application.

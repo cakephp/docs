@@ -52,7 +52,7 @@ Vous pouvez faire ceci en utilisant ``sender()``::
 Configuration
 =============
 
-La Configuration par défaut pour ``Email`` est créé en utilisant ``config()`` et
+La Configuration par défaut pour ``Email`` est créée en utilisant ``config()`` et
 ``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
 le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration

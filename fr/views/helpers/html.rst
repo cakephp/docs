@@ -61,7 +61,7 @@ Lier des Fichiers CSS
 
 .. php:method:: css(mixed $path, array $options = [])
 
-Créé un ou plusieurs lien(s) vers une feuille de style CSS. Si l'option ``block``
+Crée un ou plusieurs lien(s) vers une feuille de style CSS. Si l'option ``block``
 est définie à ``true``, les balises de liens sont ajoutées au bloc ``css`` qui
 peut être dans la balise head du document.
 
@@ -239,7 +239,7 @@ Lier des Images
 
 .. php:method:: image(string $path, array $options = [])
 
-Créé une balise image formatée. Le chemin fourni devra être relatif à
+Crée une balise image formatée. Le chemin fourni devra être relatif à
 **webroot/img/**::
 
     echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);

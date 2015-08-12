@@ -201,7 +201,7 @@ entities de l'ORM::
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 
-Le code ci-dessus créé un formulaire HTML pour le ``ContactForm`` que nous avons
+Le code ci-dessus crée un formulaire HTML pour le ``ContactForm`` que nous avons
 défini précédemment. Les formulaires HTML créés avec FormHelper utiliseront les
 schema et validator définis pour déterminer les types de champ, leurs longueurs
 et les erreurs de validation.

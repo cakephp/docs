@@ -45,7 +45,7 @@ clés d'une application CakePHP:
 * Les :doc:`conventions <intro/conventions>` que CakePHP
   utilise.
 * Les :doc:`Controllers </controllers>` gèrent les requêtes et coordonnent vos
-  models et les réponses que votre application créé.
+  models et les réponses que votre application crée.
 * Les :doc:`Views </views>` sont la couche de présentation dans votre
   application. Elles vous donnent des outils puissants pour créer le HTML,
   JSON et les autres sorties dont votre application a besoin.
