@@ -97,8 +97,8 @@ les tests exécutés et le nombre de tests réussis.
     Si vous êtes sur un système Windows, vous ne verrez probablement pas les
     couleurs.
 
-Conventions des Cas de Test
-===========================
+Conventions des Cas de Test (TestCase)
+======================================
 
 Comme beaucoup de choses dans CakePHP, les cas de test ont quelques
 conventions. En ce qui concerne les tests:
@@ -464,13 +464,13 @@ default
 
 Nos pouvons définir un ensemble d'enregistrements qui seront remplis après que
 la table de fixture est créée. Le format est assez simple, ``$records`` est un
-tableau d'enregistrements. Chaque item dans ``$records`` devrait être une unique
-ligne. A l'intérieur de chaque ligne, il devrait y avoir un tableau associatif
-des colonnes et valeurs pour la ligne. Gardez juste à l'esprit que chaque
-enregistrement dans le tableau $records doit avoir une clé pour **chaque** champ
-spécifié dans le tableau ``$fields``. Si un champ pour un enregistrement
-particulier a besoin d'avoir une valeur ``null``, spécifiez juste la valeur de
-cette clé à ``null``.
+tableau d'enregistrements. Chaque item dans ``$records`` doit être
+un enregistrement (une seule ligne). A l'intérieur de chaque ligne, il doit y
+avoir un tableau associatif des colonnes et valeurs pour la ligne. Gardez juste
+à l'esprit que chaque enregistrement dans le tableau $records doit avoir une
+clé pour **chaque** champ spécifié dans le tableau ``$fields``. Si un champ
+pour un enregistrement particulier a besoin d'avoir une valeur ``null``,
+spécifiez juste la valeur de cette clé à ``null``.
 
 Les Données Dynamiques et les Fixtures
 --------------------------------------
@@ -520,20 +520,20 @@ refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 Quand vous surchargez ``init()``, rappelez-vous juste de toujours appeler
 ``parent::init()``.
 
-Importer les Informations de Table et les Enregistrements
----------------------------------------------------------
+Importer les Informations de Table
+----------------------------------
 
-Votre application peut avoir déjà des models travaillant avec des données
-réelles associées à eux, et vous pouvez décider de tester votre application
-avec ces données. Ce serait alors un effort dupliqué de devoir définir
-la Table et/ou les enregistrements pour vos fixtures.
-Heureusement, il y a une façon pour vous de faire cette définition de
-table et/ou d'enregistrements pour une fixture particulière venant d'un
-model existant ou d'une table existante.
+Définir le schema des fixtures peut être vraiment pratique lorsque vous créez
+des plugins, des librairies ou si vous créez un application qui doit être
+facilement portable. La redéfinition du  schéma dans les fixtures peut devenir
+difficile à maintenir pour les applications de grandes échelles. A cause de
+cela, CakePHP fournit la possibilité d'importer le schema depuis une connexion
+existante et utilise une définition de la table réfléchie  pour créer la
+définition de la table utilisée par la suite de tests.
 
-Commençons par un exemple. Imaginons que vous ayez un model nommé Article
+Commençons par un exemple. Imaginons que vous ayez un model nommé articles
 disponible dans votre application (qui est lié avec une table nommée
-articles), on changerait le fixture donné dans la section précédente
+articles), on changerait la fixture donnée dans la section précédente
 (**tests/Fixture/ArticlesFixture.php**) en ce qui suit::
 
     class ArticlesFixture extends TestFixture
@@ -691,7 +691,7 @@ répertoire **tests/TestCase/Model/Table**, avec le contenu suivant::
 
 Dans notre variable de cas de test ``$fixtures``, nous définissons l'ensemble
 des fixtures que nous utiliserons. Vous devriez vous rappeler d'inclure tous
-les fixtures qui vont avoir des requêtes lancées sur elles.
+les fixtures sur lesquelles des requêtes vont être lancées.
 
 Créer une Méthode de Test
 -------------------------
@@ -1258,8 +1258,8 @@ un message indiquant 1 passé et 4 assertions.
 Lorsque vous testez un Helper qui utilise d'autres Helpers, assurez-vous de
 créer un mock de la méthode ``loadHelpers`` de la classe View.
 
-Créer les Suites de Test
-========================
+Créer des Suites de Test (Test Suites)
+======================================
 
 Si vous voulez que plusieurs de vos tests s'exécutent en même temps, vous pouvez
 créer une suite de tests. Une suite de test est composée de plusieurs cas de
@@ -1359,7 +1359,7 @@ contienne un listener (écouteur) pour les fixtures::
     </listeners>
 
 Vous devez également vous assurer que vos fixtures sont chargeables.
-Vérifier que le code suivant est présent dans votre fichier ``composer.json``::
+Vérifiez que le code suivant est présent dans votre fichier ``composer.json``::
 
     "autoload-dev": {
         "psr-4": {
