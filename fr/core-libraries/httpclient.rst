@@ -97,19 +97,19 @@ spécifique que vous souhaitez::
 
     $data = new FormData();
 
-    // Créer une partie XML
+    // Création d'une partie XML
     $xml = $data->newPart('xml', $xmlString);
     // Définit le type de contenu.
     $xml->type('application/xml');
     $data->add($xml);
 
-    // Créer un fichier upload avec addFile()
+    // Création d'un fichier upload avec addFile()
     // Ceci va aussi ajouter le fichier aux données du formulaire.
     $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
     $file->contentId('abc123');
     $file->disposition('attachment');
 
-    // Envoyer la requête.
+    // Envoi de la requête.
     $response = $http->post(
         'http://example.com/api',
         (string)$data,
@@ -123,7 +123,7 @@ Lorsque vous utilisez des REST API, vous avez souvent besoin d'envoyer des corps
 de requête qui ne sont pas encodés. Http\\Client le permet grâce à l'option
 type::
 
-    // Envoi d'un corps JSON.
+    // Envoi d'un body JSON.
     $http = new Client();
     $response = $http->post(
       'http://example.com/tasks',
@@ -137,7 +137,7 @@ chaîne de caractères. Si vous faîtes une requête GET qui a besoin des deux
 paramètres querystring et d'un corps de requête, vous pouvez faire comme ce
 qui suit::
 
-    // Envoi d'un corps JSON dans une requête GET avec des paramètres query string.
+    // Envoi d'un body JSON dans une requête GET avec des paramètres query string.
     $http = new Client();
     $response = $http->get(
       'http://example.com/tasks',
@@ -275,7 +275,7 @@ Devoir retaper le nom de domaine, les paramètres d'authentification et de proxy
 peut devenir fastidieux et source d'erreurs. Pour réduire ce risque d'erreur et
 être moins pénible, vous pouvez créer des clients scoped::
 
-    // Créer un client scoped.
+    // Création d'un client scoped.
     $http = new Client([
       'host' => 'api.example.com',
       'scheme' => 'https',
@@ -303,7 +303,7 @@ Chacune de ces options peut être remplacées en les spécifiant quand vous
 faîtes des requêtes.
 host, scheme, proxy, port sont remplacées dans l'URL de la requête::
 
-    // Utiliser le client scoped que nous avons créé précédemment.
+    // Utilisation du client scoped que nous avons créé précédemment.
     $response = $http->get('http://foo.com/test.php');
 
 Ce qui est au-dessus va remplacer le domaine, le scheme, et le port. Cependant,
@@ -325,7 +325,7 @@ le domaine + combinaisons de chemin qui correspondent::
         'host' => 'cakephp.org'
     ]);
 
-    // Faire une requête qui définit des cookies
+    // Création d'une requête qui définit des cookies
     $response = $http->get('/');
 
     // Cookies à partir de la première requête seront inclus par défaut.
@@ -334,7 +334,7 @@ le domaine + combinaisons de chemin qui correspondent::
 Vous pouvez toujours remplacer les cookies auto-inclus en les définissant dans
 les paramètres ``$options`` de la requête::
 
-    // Remplacer un cookie stocké avec une valeur personnalisée.
+    // Personalisation d'un cookie existant.
     $response = $http->get('/changelogs', [], [
         'cookies' => ['sessionid' => '123abc']
     ]);
@@ -406,7 +406,7 @@ d'objet pour lire les données à partir des propriétés suivantes:
     $http = new Client(['host' => 'example.com']);
     $response = $http->get('/test');
 
-    // Utiliser les accesseurs d'object pour lire les données.
+    // Utlisation des accesseurs d'objet pour lire les données.
     debug($response->body);
     debug($response->status);
     debug($response->headers);
@@ -421,12 +421,12 @@ fournissent une utilisation facile d'accéder à la lecture des données décod�
 Les données JSON dans un tableau, alors que les données XML sont décodées dans
 un arbre ``SimpleXMLElement``::
 
-    // Récupérer du XML.
+    // Récupération du XML.
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
     $xml = $response->xml;
 
-    // Récupérer du JSON.
+    // Récupération du JSON.
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
     $json = $response->json;
