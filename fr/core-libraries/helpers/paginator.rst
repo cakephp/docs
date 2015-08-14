@@ -419,7 +419,7 @@ supportées sont:
   l'appel de pagination  AJAX. Si cela n'est pas spécifié, des liens réguliers
   seront créés::
 
-    $this->Paginator->options('update' => '#content');
+    $this->Paginator->options(array('update' => '#content'));
 
   Ceci est utile lors de l'utilisation de la pagination AJAX
   :ref:`ajax-pagination`. Gardez à l'esprit que la valeur actualisée peut
