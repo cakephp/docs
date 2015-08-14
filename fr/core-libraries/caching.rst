@@ -448,7 +448,8 @@ l'API de Cache
 
     Ajoute des données au cache, mais seulement si la clé n'existe pas déjà.
     Dans le cas où cette donnée existe, cette méthode va retourner false.
-    Quand les données possibles sont vérifiées et définies de façon atomique.
+    Lorsque c'est possible, les données sont vérifiées et définies de façon
+    atomique.
 
     .. versionadded:: 2.8
         La méthode add a été ajoutée dans 2.8.0.
