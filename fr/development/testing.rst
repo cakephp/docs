@@ -415,6 +415,12 @@ Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
           ];
      }
 
+.. note::
+
+    Il est recommandé de ne pas ajouter manuellement les valeurs aux colonnes
+    qui s'incrémentent automatiquement car cela interfère avec la génération
+    de séquence dans postgres et sqlserver.
+
 La propriété ``$connection`` définit la source de données que la fixture
 va utiliser. Si votre application utilise plusieurs sources de données, vous
 devriez faire correspondre les fixtures avec les sources de données du model,
