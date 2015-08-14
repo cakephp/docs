@@ -51,7 +51,7 @@ These methods are useful when creating class names, or property names::
     Inflector::camelize('Apple_pie')
 
     // apple_pie
-    Inflector::undescore('ApplePie');
+    Inflector::underscore('ApplePie');
 
 It should be noted that underscore will only convert camelCase
 formatted words. Words that contains spaces will be lower-cased,
