@@ -396,7 +396,7 @@ in your **tests/Fixture** directory, with the following content::
 .. note::
 
     It is recommended to not manually add values to auto incremental columns,
-    as it interferes with the sequence generation in postgres and sqlserver.
+    as it interferes with the sequence generation in PostgreSQL and SQLServer.
 
 The ``$connection`` property defines the datasource of which the fixture will
 use.  If your application uses multiple datasources, you should make the

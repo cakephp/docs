@@ -160,7 +160,7 @@ at least these fields::
 
     CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
-      `data` VARBINARY, -- or BYTEA for postgres
+      `data` VARBINARY, -- or BYTEA for PostgreSQL
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
