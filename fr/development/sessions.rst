@@ -176,7 +176,7 @@ moins ces champs::
 
     CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
-      `data` VARBINARY, -- or BYTEA for PostgreSQL
+      `data` VARBINARY, -- ou BYTEA pour PostgreSQL
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
