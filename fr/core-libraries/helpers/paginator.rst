@@ -125,7 +125,7 @@ Les options supportées sont:
   courante, par défaut à 8.
 * ``separator`` Séparateur, par défaut à `` | ``
 * ``tag`` La balise dans laquelle envelopper les liens, par défaut à 'span'.
-* ``class`` Le nom de classe de la balise enveloppante.
+* ``class`` Le nom de classe de la balise entourante.
 * ``currentClass`` Le nom de classe à utiliser sur le lien courant/actif. Par
   défaut à *current*.
 * ``first`` Si vous voulez que les premiers liens soit générés, définit à un
@@ -139,11 +139,7 @@ Les options supportées sont:
   entier pour définir le nombre de 'dernier' liens à générer. Par défaut à
   false. Suit la même logique que l'option ``first``. il y a méthode
   :php:meth:`~PaginatorHelper::last()` à utiliser séparément si vous le voulez.
-
 * ``ellipsis`` Contenu des suspensions, par défaut à '...'
-* ``class`` Le nom de classe utilisé sur une balise entourante.
-* ``currentClass`` Le nom de classe à utiliser sur le lien courant/actif. Par
-  défaut à *current*.
 * La balise ``currentTag`` à utiliser pour le nombre de page courant, par
   défaut à null.
   Cela vous autorise à générer par exemple le Bootstrap Twitter comme les
