@@ -16,7 +16,7 @@ votre callback ``beforeRender()``::
     {
         public function beforeRender(\Cake\Event\Event $event)
         {
-            $this->getView()->theme = 'Modern';
+            $this->viewBuilder()->theme('Modern');
         }
     }
 

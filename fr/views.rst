@@ -433,9 +433,10 @@ actions de votre controller en utilisant la propriété
     // A partir d'un controller
     public function admin_view()
     {
-        // stuff
-        $this->getView()->layout('admin');
-        // ou ce qui suit avant 3.1
+        // Défini le layout
+        $this->viewBuilder()->layout('admin');
+
+        // Avant 3.1
         $this->layout = 'admin';
     }
 
@@ -454,14 +455,14 @@ actions du controller en utilisant quelque chose comme::
         public function view_active()
         {
             $this->set('title', 'View Active Users');
-            $this->getView()->layout('default_small_ad');
+            $this->viewBuilder()->layout('default_small_ad');
             // ou ce qui suit avant 3.1
             $this->layout = 'default_small_ad';
         }
 
         public function view_image()
         {
-            $this->getView()->layout('image');
+            $this->viewBuilder()->layout('image');
             // ou ce qui suit avant 3.1
             $this->layout = 'image';
             // Output user image
@@ -489,7 +490,7 @@ contact à partir du plugin Contacts::
     {
         public function view_active()
         {
-            $this->getView()->layout('Contacts.contact');
+            $this->viewBuilder()->layout('Contacts.contact');
             // ou ce qui suit avant 3.1
             $this->layout = 'Contacts.contact';
         }

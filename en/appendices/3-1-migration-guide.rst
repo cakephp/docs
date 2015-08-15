@@ -56,7 +56,7 @@ Controller
     $this->layout = 'advanced';
 
     // You should use
-    $this->getView()->layout('advanced');
+    $this->viewBuilder()->layout('advanced');
 
 These methods should be called after you've determined which view class will be
 used by a controller/action.

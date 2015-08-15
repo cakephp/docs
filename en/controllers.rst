@@ -213,6 +213,25 @@ assign a set of information to the view::
 
     $this->set($data);
 
+Setting View Options
+--------------------
+
+If you want to customize the view class, layout/template paths, helpers or the
+theme that will be used when rendering the view, you can use the
+``viewBuilder()`` method to get a builder. This builder can be used to define
+properties of the view before it is created::
+
+    $this->viewBuilder()
+        ->helpers(['MyCustom'])
+        ->theme('Modern')
+        ->className('Modern.Admin');
+
+The above shows how you can load custom helpers, set the theme and use a custom
+view class.
+
+.. versionadded:: 3.1
+    ViewBuilder was added in 3.1
+
 Rendering a View
 ----------------
 

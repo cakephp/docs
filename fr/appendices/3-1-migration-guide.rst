@@ -41,9 +41,6 @@ RoutesShell
 Controller
 ==========
 
-AuthComponent
--------------
-
 - Les propriétés de Controller suivantes sont maintenant dépréciées:
 
   * layout
@@ -60,10 +57,13 @@ AuthComponent
     $this->layout = 'advanced'
 
     // Vous devez utiliser
-    $this->getView()->layout('advanced');
+    $this->viewBuilder()->layout('advanced');
 
 Ces méthodes doivent être appelées après que vous ayez déterminé quelle classe
 de View sera utilisée par le controller/action.
+
+AuthComponent
+-------------
 
 - Une nouvelle option de configuration ``storage`` a été ajoutée. Elle contient
   le nom de la classe de stockage que ``AuthComponent`` utilise pour stocker
