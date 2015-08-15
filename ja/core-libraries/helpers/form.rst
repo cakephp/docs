@@ -3,29 +3,28 @@ FormHelper
 
 .. php:class:: FormHelper(View $view, array $settings = array())
 
-FormHelperはフォーム作成時の力作業のほとんどを代行してくれます。
+FormHelper はフォーム作成時の力作業のほとんどを代行してくれます。
 フォームをすばやく作成する機能に特化して、バリデーション
 （入力値の妥当性検査）や部品の配置、レイアウトを効率化します。
-FormHelperはまた柔軟でもあります。
+FormHelper はまた柔軟でもあります。
 通常は組み込まれた規則に沿ってほとんどのことをやってくれますが、
 特定のメソッドを使って必要な機能だけを使うこともできます。
 
 フォームの作成
 ==============
 
-FormHelperの利点を活用するために最初に使うメソッドは ``create()``
+FormHelper の利点を活用するために最初に使うメソッドは ``create()``
 です。この特別なメソッドはフォームの開始タグを出力します。
-
 
 .. php:method:: create(string $model = null, array $options = array())
 
-    パラメータはすべてオプションです。パラメータなしで呼ばれた場合、
-    現在のURLを通して現在のコントローラーにサブミット（提出）するための
-    フォームを作ろうとしているものとみなします。フォームをサブミット
-    するためのデフォルトのメソッドはPOSTです。フォームの要素は DOM ID
-    とともに返されますが、このIDはモデル名とコントローラーのアクション
+    パラメータはすべてオプションです。 もし ``create()`` が、パラメータなしで
+    呼ばれたなら、現在の URL を元に現在のコントローラーに送信するための
+    フォームを作ろうとしているものとみなします。フォームを送信するための
+    デフォルトのメソッドは POST です。フォームの要素は DOM ID
+    とともに返されますが、この ID はモデル名とコントローラーのアクション
     名をキャメルケースにしたものとして生成されます。たとえば
-    UsersControllerビューの中から ``create()`` を呼んだ場合、
+    UsersController ビューの中から ``create()`` を呼んだ場合、
     以下のように描画されたビューが得られます：
 
     .. code-block:: html
@@ -48,23 +47,22 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
     関連付けられます。モデルを指定しない場合、現在のコントローラー
     のデフォルトモデルを使っていると見なされます::
 
-
         // たとえば /recipes/add にいるとして、
         echo $this->Form->create('Recipe');
 
-    出力:
+    出力結果:
 
     .. code-block:: php
 
         <form id="RecipeAddForm" method="post" action="/recipes/add">
 
-    これはフォームデータをRecipesControllerの ``add()`` アクションに
-    POSTします。なお、これと同じロジックを使って編集フォームを作ることも
-    できます。FormHelperはフォームの追加や編集のどちらなのかを自動的に
+    これはフォームデータを RecipesController の ``add()`` アクションに
+    POST します。なお、これと同じロジックを使って編集フォームを作ることも
+    できます。FormHelper はフォームの追加や編集のどちらなのかを自動的に
     検出し、 ``$this->request->data`` を適切に利用します。もし
     ``$this->request->data`` にフォームのモデルに関連する名前がついた
     配列要素が含まれていて、かつその配列に含まれるモデルのプライマリキー
-    の値が空でなければ、FormHelperはそのレコードの編集用フォームを作成
+    の値が空でなければ、FormHelper はそのレコードの編集用フォームを作成
     します。たとえば http://site.com/recipes/edit/5 にアクセスすると、
     以下の様な出力が得られます::
 
@@ -82,7 +80,7 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
         // になるので編集フォームを作る
         <?php echo $this->Form->create('Recipe'); ?>
 
-    出力:
+    出力結果:
 
     .. code-block:: html
 
@@ -94,7 +92,7 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
         これは編集フォームなので hidden の入力項目が生成され、
         デフォルトの HTTP メソッドは上書きされます。
 
-    プラグイン内のモデル用にフォームを作る場合は、常に :term:`plugin syntax`
+    プラグイン内のモデル用にフォームを作る場合は、常に :term:`プラグイン記法`
     を使います。これで以下のように適切なフォームが生成されます::
 
         echo $this->Form->create('ContactManager.Contact');
@@ -109,10 +107,10 @@ FormHelperの利点を活用するために最初に使うメソッドは ``crea
         なりました。このデフォルトを変更するには、 ``$this->Form->create()``
         の第二引数の中に ``$options['url']`` を指定します。
 
-create()のオプション
---------------------
+create() のオプション
+---------------------
 
-create()には多くのオプションがあります:
+create() には多くのオプションがあります:
 
 * ``$options['type']`` このキーは生成するフォームのタイプを指定します。
   有効な値は 'post', 'get', 'file', 'put', 'delete' です。
@@ -121,11 +119,11 @@ create()には多くのオプションがあります:
 
       echo $this->Form->create('User', array('type' => 'get'));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
-  <form id="UserAddForm" method="get" action="/users/add">
+     <form id="UserAddForm" method="get" action="/users/add">
 
   タイプ 'file' はフォームの送信用メソッドを 'post' にして、かつフォーム
   タグに "multipart/form-data" という enctype を追加します。これはフォーム
@@ -134,7 +132,7 @@ create()には多くのオプションがあります:
 
       echo $this->Form->create('User', array('type' => 'file'));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -142,7 +140,7 @@ create()には多くのオプションがあります:
         method="post" action="/users/add">
 
   'put' や 'delete' を使う場合、そのフォームは機能的に 'post' と同じですが、
-  サブミットされる際、HTTP のリクエストメソッドが 'PUT' または 'DELETE'
+  送信される際、HTTP のリクエストメソッドが 'PUT' または 'DELETE'
   に上書きされます。これにより、Web ブラウザにおける REST サポートを
   CakePHP がエミュレートできるようになります。
 
@@ -153,7 +151,7 @@ create()には多くのオプションがあります:
 
     echo $this->Form->create('User', array('action' => 'login'));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -168,7 +166,7 @@ create()には多くのオプションがあります:
         'url' => array('controller' => 'recipes', 'action' => 'add')
     ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -181,7 +179,7 @@ create()には多くのオプションがあります:
         'type' => 'get'
     ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -207,8 +205,8 @@ create()には多くのオプションがあります:
         )
     ));
 
-  これ以降に生成される入力項目は、すべてinputDefaultsで宣言された
-  オプションを継承します。defaultOptionsを上書きするには
+  これ以降に生成される入力項目は、すべて inputDefaults で宣言された
+  オプションを継承します。デフォルトのオプションを上書きするには
   input() 呼び出しで以下のようにオプションを指定します::
 
     echo $this->Form->input('password'); // div も label も持たない
@@ -223,7 +221,7 @@ create()には多くのオプションがあります:
 
 .. php:method:: end($options = null, $secureAttributes = array())
 
-    FormHelperにはフォームを完成させる ``end()`` メソッドがあります。
+    FormHelper にはフォームを完成させる ``end()`` メソッドがあります。
     多くの場合 ``end()`` はフォームの閉じタグを出力するだけですが、
     :php:class:`SecurityComponent` が要求する hidden のフォーム要素を
     FormHelper に挿入させることもできます:
@@ -236,13 +234,13 @@ create()には多くのオプションがあります:
 
         <?php echo $this->Form->end(); ?>
 
-    ``end()`` の第一パラメータで文字列が与えられると、FormHelperは
+    ``end()`` の第一パラメータで文字列が与えられると、FormHelper は
     フォームの綴じタグと一緒にその文字列の名前のついた submit ボタンを
     出力します::
 
         <?php echo $this->Form->end('Finish'); ?>
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -261,7 +259,7 @@ create()には多くのオプションがあります:
         );
         echo $this->Form->end($options);
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -269,7 +267,7 @@ create()には多くのオプションがあります:
         </div>
 
     詳細は
-    `Form Helper API <http://api.cakephp.org/2.4/class-FormHelper.html>`_
+    `Form Helper API <http://api.cakephp.org/2.7/class-FormHelper.html>`_
     を参照してください。
 
     .. note::
@@ -285,10 +283,10 @@ create()には多くのオプションがあります:
 フォーム要素の生成
 ==================
 
-FormHelperでフォームのinput要素を作る方法はいくつかあります。まずは
+FormHelper でフォームの input 要素を作る方法はいくつかあります。まずは
 ``input()`` に注目してみましょう。このメソッドは与えられたモデル内の
 項目を自動的に調べて、それらの項目に対応する適切な入力項目を作ります。
-内部的には ``input()`` はFormHelper内で他のメソッドに処理を委託します。
+内部的には ``input()`` は FormHelper 内で他のメソッドに処理を委託します。
 
 .. php:method:: input(string $fieldName, array $options = array())
 
@@ -299,7 +297,7 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
     * Input 要素
     * 適用できる場合はメッセージを含むエラー要素
 
-    生成されるinputの型は（テーブルの）カラムのデータ型に依存します:
+    生成される input の型は（テーブルの）カラムのデータ型に依存します:
 
     カラムの型
         フォーム項目の型
@@ -313,7 +311,7 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
         password
     text, with name of email
         email
-    text, with name of tel, telephone, or phone
+    text, with name of tel, telephone, または phone
         tel
     date
         day, month, and year selects
@@ -341,7 +339,7 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
 
     .. _html5-required:
 
-    2.3 から、バリデーションルールに基いて、HTML5の ``required`` 属性がinputに
+    2.3 から、バリデーションルールに基いて、HTML5 の ``required`` 属性が input に
     付加されるようになりました。options 配列で明示的に ``required`` キーを
     セットしてその項目の定義を上書きすることもできます。フォーム全体を
     トリガーすることでブラウザによるバリデーションをスキップするためには、
@@ -349,7 +347,6 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
     オプションに ``'formnovalidate' => true``  を指定するか、もしくは
     :php:meth:`FormHelper::create()` の options で ``'novalidate' => true``
     をセットします。
-
 
     たとえば、あなたの User モデルには username (varchar), password (varchar),
     approved (datetime) , quote (text) という項目があるとします。
@@ -377,7 +374,7 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
 
     ``input()`` のオプションでは、後述する特別なオプションの他にも、
     input のタイプについての任意のオプションや、（たとえば onfocus
-    のように）任意のHTML属性を指定できます。``$options`` と
+    のように）任意の HTML 属性を指定できます。``$options`` と
     ``$htmlAttributes`` に関する詳細は :doc:`/core-libraries/helpers/html`
     を参照してください。
 
@@ -447,7 +444,7 @@ FormHelperでフォームのinput要素を作る方法はいくつかありま�
 項目名の命名規則
 ----------------
 
-フォームヘルパーは結構よくできています。フォームヘルパーのメソッドで
+FormHelper は結構よくできています。FormHelper のメソッドで
 項目名を指定すれば、常に自動的に現在のモデル名を使って以下のような
 書式で input タグを作ってくれます:
 
@@ -494,7 +491,7 @@ FormHelper は日時項目の入力を生成する際、内部的に複数の �
 
 ``FormHelper::input()`` は非常に多数のオプションをサポートしています。
 それ自身のオプション以外にも、 ``input()`` は生成された input のタイプや
-HTML アトリビュートなどもオプションとして設定可能です。ここでは
+HTML 属性などもオプションとして設定可能です。ここでは
 ``FormHelper::input()`` に特化したオプションを記載しています。
 
 * ``$options['type']`` タイプを指定することで、モデルが推測したものに
@@ -530,7 +527,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
         'div' => 'class_name'
     ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -549,7 +546,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
         )
     ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -559,25 +556,24 @@ HTML アトリビュートなどもオプションとして設定可能です。
         <input name="data[User][name]" type="text" value="" id="UserName" />
     </div>
 
-  div 出力の抑制::
+  div の出力抑制::
 
     echo $this->Form->input('User.name', array('div' => false)); ?>
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
     <label for="UserName">Name</label>
     <input name="data[User][name]" type="text" value="" id="UserName" />
 
-* ``$options['label']`` input とともに指定されることの多い label
-  タグのテキストを文字列で指定します::
+* ``$options['label']`` input とともに指定されることの多い label のテキストを文字列で指定します::
 
     echo $this->Form->input('User.name', array(
         'label' => 'The User Alias'
     ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -590,7 +586,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
 
     echo $this->Form->input('User.name', array('label' => false));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -598,7 +594,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
         <input name="data[User][name]" type="text" value="" id="UserName" />
     </div>
 
-  これを配列で指定することで、 ``label`` エレメントに対する追加
+  これを配列で指定することで、 ``label`` 要素に対する追加
   オプションを指定できます。この場合、label のテキストをカスタマイズ
   するには ``text`` キーを使います::
 
@@ -609,7 +605,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
         )
     ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -621,7 +617,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
 * ``$options['error']`` このキーを使うと、モデルが持つデフォルトの
   エラーメッセージを上書きしたり、また、たとえば i18n メッセージを
   セットしたりできます。これには多数のサブオプションがあり、これを
-  使って外側のエレメントやそのクラス名をコントロールしたり、
+  使って外側の要素やそのクラス名をコントロールしたり、
   エラーメッセージの中の HTML をエスケープするかどうかなどを指定
   できます。
 
@@ -635,7 +631,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
 
     $this->Form->input('Model.field', array('errorMessage' => false));
 
-  外側のエレメントのタイプやそのクラスを変更するには以下の書式を
+  外側の要素のタイプやそのクラスを変更するには以下の書式を
   使います::
 
     $this->Form->input('Model.field', array(
@@ -653,7 +649,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
         )
     ));
 
-  モデルのエラーメッセージをオーバーライドするには、
+  モデルのエラーメッセージを上書きするには、
   バリデーションの rule 名にマッチしたキーを持つ配列を使います::
 
     $this->Form->input('Model.field', array(
@@ -679,7 +675,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
           'between' => '--between---'
       ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -702,7 +698,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
           'options' => array('1', '2')
       ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -717,12 +713,12 @@ HTML アトリビュートなどもオプションとして設定可能です。
       --after--
       </div>
 
-  ``date`` および ``datetime`` 型のエレメントでは、'separator'
-  属性を使って select エレメントの間の文字列を変更できます。
+  ``date`` および ``datetime`` 型の要素では、'separator'
+  属性を使って select 要素の間の文字列を変更できます。
   デフォルトは '-' です。
 
 * ``$options['format']`` FormHelper が生成する HTML の順序もまた制御可能
-  です。'format' オプションは文字列の配列を取り、希望するエレメントの
+  です。'format' オプションは文字列の配列を取り、希望する要素の
   並び順を表すテンプレートを指定します。サポートされている配列キーは
   以下の通りです:
   ``array('before', 'input', 'between', 'label', 'after','error')``
@@ -745,7 +741,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
     // div も label もなし
     echo $this->Form->input('password');
 
-    // label エレメントあり
+    // label 要素あり
     echo $this->Form->input('username', array('label' => 'Username'));
 
   ここより先のデフォルトを変更するには
@@ -766,7 +762,7 @@ HTML アトリビュートなどもオプションとして設定可能です。
 一般的なオプション
 ------------------
 
-input エレメントに関連するメソッドの多くは、一般的なオプションの
+input 要素に関連するメソッドの多くは、一般的なオプションの
 組合せをサポートしています。これらのオプションはすべて ``input()``
 でもサポートされています。繰り返しを減らすために、すべての input
 メソッドで使える共通オプションを以下に示します:
@@ -808,9 +804,9 @@ input エレメントに関連するメソッドの多くは、一般的なオ�
     使われます。そのため ``'default' => false`` では何の値もセット
     されません。この場合は ``'default' => 0`` としてください。
 
-前述のオプションに加えて、任意の HTML アトリビュートを混在させる
-ことができます。特に規定のないオプション名は HTML アトリビュートとして
-扱われ、生成された HTML の input エレメントに反映されます。
+前述のオプションに加えて、任意の HTML 属性を混在させる
+ことができます。特に規定のないオプション名は HTML 属性として
+扱われ、生成された HTML の input 要素に反映されます。
 
 select, checkbox, radio に関するオプション
 ------------------------------------------
@@ -843,7 +839,7 @@ select, checkbox, radio に関するオプション
           'empty' => '(choose one)'
       ));
 
-  出力はこうなります:
+  出力結果:
 
   .. code-block:: html
 
@@ -881,7 +877,7 @@ select, checkbox, radio に関するオプション
 
     echo $this->Form->checkbox('published', array('hiddenField' => false));
 
-  出力は以下のようになります:
+  出力結果:
 
   .. code-block:: html
 
@@ -893,8 +889,7 @@ select, checkbox, radio に関するオプション
   使うべきです。ページ上の複数の場所に hidden input がある場合は
   最後のグループの input の値が保存されます。
 
-  この例では Tertiary Colors だけが渡され、Primary Colors は
-  オーバーライドされます:
+  この例では Tertiary Colors だけが渡され、Primary Colors は上書きされます:
 
   .. code-block:: html
 
@@ -969,34 +964,34 @@ select, checkbox, radio に関するオプション
 フォーム要素固有のメソッド
 ==========================
 
-これまでの例では、すべてのエレメントが ``User`` モデルのフォームの配下で
+これまでの例では、すべての要素が ``User`` モデルのフォームの配下で
 作られていました。このため、生成された HTML のコードには User モデルを
-参照するアトリビュートが含まれます。
+参照する属性が含まれます。
 例：name=data[User][username], id=UserUsername
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
-    label エレメントを作ります。``$fieldName`` は DOM id を生成する
+    label 要素を作ります。``$fieldName`` は DOM id を生成する
     のに使われます。``$text`` が指定されない場合は ``$fieldName``
     を活用することで label テキストが作られます::
 
         echo $this->Form->label('User.name');
         echo $this->Form->label('User.name', 'Your username');
 
-    出力はこのようになります:
+    出力結果:
 
     .. code-block:: html
 
         <label for="UserName">Name</label>
         <label for="UserName">Your username</label>
 
-    ``$options`` は HTML アトリビュートの配列、またはクラス名として
+    ``$options`` は HTML 属性の配列、またはクラス名として
     使われる文字列のいずれかを指定します::
 
         echo $this->Form->label('User.name', null, array('id' => 'user-label'));
         echo $this->Form->label('User.name', 'Your username', 'highlight');
 
-    出力はこのようになります:
+    出力結果:
 
     .. code-block:: html
 
@@ -1006,14 +1001,14 @@ select, checkbox, radio に関するオプション
 .. php:method:: text(string $name, array $options)
 
     FormHelper で利用可能なメソッドには、さらに特定のフォーム
-    エレメントを作成するものがあります。これらのメソッドの多くでは、
+    要素を生成するものがあります。これらのメソッドの多くでは、
     特別な $options パラメータを指定できます。ただしこの場合、
-    $options は主に（フォームのエレメントの DOM id の値のような）
-    HTML タグのアトリビュートを指定するために使われます::
+    $options は主に（フォームの要素の DOM id の値のような）
+    HTML タグの属性を指定するために使われます::
 
         echo $this->Form->text('username', array('class' => 'users'));
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1022,11 +1017,11 @@ select, checkbox, radio に関するオプション
 
 .. php:method:: password(string $fieldName, array $options)
 
-    パスワードフィールドを作成します::
+    パスワードフィールドを生成します::
 
         echo $this->Form->password('password');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1035,11 +1030,11 @@ select, checkbox, radio に関するオプション
 
 .. php:method:: hidden(string $fieldName, array $options)
 
-    hidden フォーム input を作成します。例::
+    hidden フィールドを生成します。例::
 
         echo $this->Form->hidden('id');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1055,7 +1050,7 @@ select, checkbox, radio に関するオプション
         <input name="data[User][id]" id="UserId" type="hidden" value="10" />
 
     .. versionchanged:: 2.0
-        hidden フィールドは class アトリビュートを削除しなくなりました。
+        hidden フィールドは class 属性を削除しなくなりました。
         これにより、hidden フィールドでバリデーションエラーが発生した場合、
         error-field というクラス名が適用されるようになります。
 
@@ -1065,7 +1060,7 @@ select, checkbox, radio に関するオプション
 
         echo $this->Form->textarea('notes');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1084,7 +1079,7 @@ select, checkbox, radio に関するオプション
 
     .. note::
 
-        ``textarea`` input タイプでは ``$options`` アトリビュートの
+        ``textarea`` input タイプでは ``$options`` 属性の
         ``'escape'`` キーにより、textarea の内容をエスケープするか
         どうかを指定できます。デフォルトは ``true`` です。
 
@@ -1098,7 +1093,7 @@ select, checkbox, radio に関するオプション
         );
 
 
-    **Options**
+    **オプション**
 
     textarea() は :ref:`general-input-options` 以外にもいくつか
     特定のオプションをサポートしています:
@@ -1111,9 +1106,9 @@ select, checkbox, radio に関するオプション
             array('rows' => '5', 'cols' => '5')
         );
 
-      出力は以下のようになります:
+      出力結果:
 
-    .. code-block:: html
+      .. code-block:: html
 
         <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea">
         </textarea>
@@ -1121,34 +1116,33 @@ select, checkbox, radio に関するオプション
 .. php:method:: checkbox(string $fieldName, array $options)
 
     フォームのチェックボックス要素を生成します。このメソッドはまた、
-    そのフィールドについて送信される input データを制限するための
-    hidden 項目を生成します。::
+    そのフィールドについてデータの送信を強制するための hidden 項目を生成します。::
 
         echo $this->Form->checkbox('done');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
         <input type="hidden" name="data[User][done]" value="0" id="UserDone_" />
         <input type="checkbox" name="data[User][done]" value="1" id="UserDone" />
 
-    配列 $options を使って checkbox の値を指定することもできます::
+    $options 配列を使って checkbox の値を指定することもできます::
 
         echo $this->Form->checkbox('done', array('value' => 555));
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
         <input type="hidden" name="data[User][done]" value="0" id="UserDone_" />
         <input type="checkbox" name="data[User][done]" value="555" id="UserDone" />
 
-    FormHelper に hidden input を生成させたくない場合::
+    FormHelper で hidden 項目を生成したくない場合::
 
         echo $this->Form->checkbox('done', array('hiddenField' => false));
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1159,7 +1153,7 @@ select, checkbox, radio に関するオプション
 
     radio ボタンの組み合わせを生成します。
 
-    **Options**
+    **オプション**
 
     * ``$attributes['value']`` デフォルトで選択される値を設定します。
 
@@ -1172,15 +1166,15 @@ select, checkbox, radio に関するオプション
     * ``$attributes['disabled']`` これを ``true`` または ``'disabled'``
       にすると、生成されたすべてのラジオボタンを無効にします。
 
-    * ``$attributes['legend']`` radio エレメントはデフォルトでは label
-      とフィールドセットで囲まれます。 ``$attributes['legend']`` を
+    * ``$attributes['legend']`` radio 要素はデフォルトでは label
+      と fieldset で囲まれます。 ``$attributes['legend']`` を
       false にするとこれらを取り除きます::
 
         $options = array('M' => 'Male', 'F' => 'Female');
         $attributes = array('legend' => false);
         echo $this->Form->radio('gender', $options, $attributes);
 
-      以下が出力されます:
+      出力結果:
 
       .. code-block:: html
 
@@ -1204,13 +1198,13 @@ select, checkbox, radio に関するオプション
 
     select 要素を作成します。 ``$options`` で項目を定義し、デフォルトで
     選択される値を ``$attributes['value']`` で指定します。``$attributes``
-    変数に '空の' キーを作って false を設定することで、デフォルトの
+    変数に 'empty' キーを作って false を設定することで、デフォルトの
     empty オプションを無効にします。::
 
         $options = array('M' => 'Male', 'F' => 'Female');
         echo $this->Form->select('gender', $options);
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1234,7 +1228,7 @@ select, checkbox, radio に関するオプション
 
         echo $this->Form->select('field', array(1,2,3,4,5));
 
-      出力は以下のようになります:
+      出力結果:
 
       .. code-block:: html
 
@@ -1254,7 +1248,7 @@ select, checkbox, radio に関するオプション
             'Value 3' => 'Label 3'
         ));
 
-      出力は以下のようになります:
+      出力結果:
 
       .. code-block:: html
 
@@ -1279,7 +1273,7 @@ select, checkbox, radio に関するオプション
         );
         echo $this->Form->select('field', $options);
 
-      出力は以下のようになります:
+      出力結果:
 
       .. code-block:: html
 
@@ -1313,7 +1307,7 @@ select, checkbox, radio に関するオプション
             'multiple' => 'checkbox'
         ));
 
-      出力は以下のようになります:
+      出力結果:
 
       .. code-block:: html
 
@@ -1347,7 +1341,7 @@ select, checkbox, radio に関するオプション
             'disabled' => array('Value 1')
         ));
 
-      出力は以下のようになります:
+      出力結果:
 
       .. code-block:: html
 
@@ -1434,12 +1428,12 @@ select, checkbox, radio に関するオプション
         return false;
     }
 
-file input を生成します::
+file タイプの入力フィールドを生成::
 
     echo $this->Form->create('User', array('type' => 'file'));
     echo $this->Form->file('avatar');
 
-以下が出力されます:
+出力結果:
 
 .. code-block:: html
 
@@ -1452,8 +1446,8 @@ file input を生成します::
     の中の type オプションを 'file' に設定することで、フォームの
     エンコーディングのタイプを設定できます。
 
-ボタンとsubmit要素の生成
-========================
+ボタンと submit 要素の生成
+==========================
 
 .. php:method:: submit(string $caption, array $options)
 
@@ -1466,7 +1460,7 @@ file input を生成します::
 
         echo $this->Form->submit();
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1477,7 +1471,7 @@ file input を生成します::
 
         echo $this->Form->submit('ok.png');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1500,7 +1494,7 @@ file input を生成します::
         echo $this->Form->button('Reset the Form', array('type' => 'reset'));
         echo $this->Form->button('Submit Form', array('type' => 'submit'));
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1521,27 +1515,36 @@ file input を生成します::
 
 .. php:method:: postButton(string $title, mixed $url, array $options = array ())
 
-    POST 経由でサブミットするための、 ``<form>`` で囲まれた  ``<button>``
-    タグを生成します。
+    POST で送信するための、 ``<form>`` で囲まれた  ``<button>`` タグを生成します。
 
-    このメソッドは ``<form>`` エレメントを作成します。そのため、この
+    このメソッドは ``<form>`` 要素を作成します。そのため、この
     メソッドを開いているフォームの中では使わないでください。
     開いているフォームの中でボタンを生成するには、代わりに
     :php:meth:`FormHelper::submit()` または
     :php:meth:`FormHelper::button()` を使ってください。
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
+.. php:method:: postLink(string $title, mixed $url = null, array $options = array ())
 
     HTML のリンクを作りますが、その URL へのアクセス方法を POST にします。
     ブラウザで JavaScript を有効にする場合はこれが必要です。
 
-    このメソッドは ``<form>`` エレメントを作成します。そのため、この
+    このメソッドは ``<form>`` 要素を作成します。そのため、この
     メソッドを既存のフォームの中では使わないでください。その代わり、
     :php:meth:`FormHelper::submit()` を使って submit ボタンを追加
     してください。
 
     .. versionchanged:: 2.3
         ``method`` オプションが追加されました。
+
+    .. versionchanged:: 2.5
+        ``inline`` と ``block`` オプションが追加されました。これらは、リンクを返す代わりに
+        生成されたフォームタグのバッファリングができます。これは、ネストされたフォームタグを
+        避けることを助けます。 ``'inline' => true`` 設定は、 フォームタグを ``postLink``
+        コンテントブロックもしくは、 ``block`` オプションで指定したカスタムブロックに追加します。
+
+    .. versionchanged:: 2.6
+        引数 ``$confirmMessage`` は非推奨です。 代わりに ``$options`` の中の
+        ``confirm`` キーを使用してください。
 
 日付と時刻入力の生成
 ====================
@@ -1559,13 +1562,13 @@ file input を生成します::
 .. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
 
     ``$minYear`` と ``$maxYear`` の範囲で年の select 要素を生成します。
-    $attributes の中で HTML アトリビュートを指定可能です。
+    $attributes の中で HTML 属性を指定可能です。
     ``$attributes['empty']`` を false にすると、空のオプションが
     含まれなくなります::
 
         echo $this->Form->year('purchased', 2000, date('Y'));
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1589,7 +1592,7 @@ file input を生成します::
 
         echo $this->Form->month('mob');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1629,7 +1632,7 @@ file input を生成します::
 
         echo $this->Form->day('created');
 
-    以下が出力されます:
+    出力結果:
 
     .. code-block:: html
 
@@ -1659,13 +1662,13 @@ file input を生成します::
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
-    $text で指定された入力項目について、バリデーションエラーが発生
-    した場合にバリデーションエラーメッセージを表示します。
+    $text で指定された入力項目について、バリデーションエラーが発生した場合に
+    バリデーションエラーメッセージを表示します。
 
     オプション:
 
     -  'escape' ブール値：エラーコンテンツを HTML エスケープするかどうか。
-    -  'wrap' mixed : エラーメッセージを div で囲うかどうか。
+    -  'wrap' mixed: エラーメッセージを div で囲うかどうか。
        文字列の場合、HTML タグとして使われます。
     -  'class' 文字列：エラーメッセージのクラス名
 
@@ -1680,8 +1683,7 @@ file input を生成します::
 
     .. note::
 
-        :php:meth:`FormHelper::input()` を使う場合、デフォルトでは
-        エラーが描画されます。
+        :php:meth:`FormHelper::input()` を使う場合、デフォルトではエラーが表示されます。
 
 .. php:method:: tagIsInvalid()
 
@@ -1707,7 +1709,7 @@ file input を生成します::
 
 その時点以降に生成された input 項目はすべて inputDefaults で宣言された
 オプションを継承します。input() の呼び出し時に option を指定することで、
-デフォルトのオプションをオーバーライドできます::
+デフォルトのオプションを上書きできます::
 
     echo $this->Form->input('password'); // No div, no label with class 'fancy'
     // has a label element same defaults
@@ -1746,7 +1748,7 @@ SecurityComponent を利用する際は、前述のようにフォームを閉�
 2.0 アップデート内容
 ====================
 
-**$selected parameter removed**
+**$selected パラメータは削除されました**
 
 FormHelper のいくつかのメソッドから ``$selected`` パラメータが
 削除されました。現在はすべてのメソッドで ``$attributes['value']``
@@ -1764,17 +1766,15 @@ FormHelper のいくつかのメソッドから ``$selected`` パラメータが
     * FormHelper::minute()
     * FormHelper::meridian()
 
-**Default URLs on forms is the current action**
+**フォーム上のデフォルトの URL は、現在のアクションです**
 
-すべてのフォームに関するデフォルトの URL は、現時点では現在の
-URL に渡されたパラメータ、名前が付けられパラメータ、そして
-クエリー文字列が付加されたものになっています。 ``$this->Form->create()``
-の第二パラメータである ``$options['url']`` を指定することで、
-このデフォルト動作をオーバーライドできます。
+すべてのフォームに関するデフォルトの URL は、現在の pass パラメータ、named パラメータ、
+クエリー文字列を含みます。 ``$this->Form->create()`` の第二パラメータである
+``$options['url']`` を指定することで、このデフォルト動作を変更できます。
 
 **FormHelper::hidden()**
 
-hidden フィールドは、もはや class アトリビュートを削除しません。
+hidden フィールドは、class 属性を削除しなくなりました。
 つまり、hidden フィールドにバリデーションエラーがあった場合、
 クラス名として error-field が適用されます。
 
