@@ -767,3 +767,8 @@ You can also configure the metadata caching at runtime with the
 
 CakePHP also includes a CLI tool for managing metadata caches. See the
 :doc:`/console-and-shells/orm-cache` chapter for more information.
+
+
+.. meta::
+    :title lang=en: Database Basics
+    :keywords lang=en: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching
