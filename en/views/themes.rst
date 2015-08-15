@@ -13,7 +13,7 @@ To use themes, set the theme name in your controller's action or ``beforeRender(
     {
         public function beforeRender(\Cake\Event\Event $event)
         {
-            $this->getView()->theme = 'Modern';
+            $this->viewBuilder()->theme('Modern');
         }
     }
 

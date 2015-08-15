@@ -85,7 +85,7 @@ You can also use your controller's ``beforeRender`` method to load helpers::
         public function beforeRender(Event $event)
         {
             parent::beforeRender($event);
-            $this->getView()->loadHelper('MyHelper');
+            $this->viewBuilder()->helpers(['MyHelper']);
         }
     }
 
@@ -152,8 +152,10 @@ you can set those in your controller's beforeRender callback::
         public function beforeRender(Event $event)
         {
             parent::beforeRender($event);
-            $view = $this->getView();
-            $view->loadHelper('CustomStuff', $this->_getCustomStuffConfig());
+            $builder = $this->viewBuilder();
+            $builder->helpers([
+                'CustomStuff' => $this->_getCustomStuffConfig(),
+            ]);
         }
     }
 

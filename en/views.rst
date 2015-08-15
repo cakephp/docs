@@ -415,9 +415,10 @@ controller actions using the controller or view's
     // From a controller
     public function admin_view()
     {
-        // Stuff
-        $this->getView()->layout('admin');
-        // or the following before 3.1
+        // Set the layout.
+        $this->viewBuilder()->layout('admin');
+
+        // Before 3.1
         $this->layout = 'admin';
     }
 
@@ -436,14 +437,15 @@ using something like::
         public function view_active()
         {
             $this->set('title', 'View Active Users');
-            $this->getView()->layout('default_small_ad');
+            $this->viewBuilder()->layout('default_small_ad');
+
             // or the following before 3.1
             $this->layout = 'default_small_ad';
         }
 
         public function view_image()
         {
-            $this->getView()->layout('image');
+            $this->viewBuilder()->layout('image');
             // or the following before 3.1
             $this->layout = 'image';
 
@@ -471,7 +473,7 @@ Contacts plugin::
     {
         public function view_active()
         {
-            $this->getView()->layout('Contacts.contact');
+            $this->viewBuilder()->layout('Contacts.contact');
             // or the following before 3.1
             $this->layout = 'Contacts.contact';
         }
