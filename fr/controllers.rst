@@ -236,7 +236,7 @@ création::
         ->theme('Modern')
         ->className('Modern.Admin');
 
-le code ci-dessus montre comment charger des helpers personnalisés, définir un
+Le code ci-dessus montre comment charger des helpers personnalisés, définir un
 thème et utiliser une classe de vue personnalisée.
 
 .. versionadded:: 3.1
