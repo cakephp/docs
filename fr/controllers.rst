@@ -221,6 +221,27 @@ rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
     $this->set($data);
 
+
+Définir les Options d'une View
+------------------------------
+
+Si vous voulez personnaliser la classe de vue, les dossiers de layout/template,
+les helpers ou le thème qui seront utilisés lors du rendu de la vue, vous
+pouvez utiliser la méthode ``viewBuilder()`` pour récupérer un constructeur. Ce
+constructeur peut être utilisé pour définir les propriétés de la vue avant sa
+création::
+
+    $this->viewBuilder()
+        ->helpers(['MyCustom'])
+        ->theme('Modern')
+        ->className('Modern.Admin');
+
+le code ci-dessus montre comment charger des helpers personnalisés, définir un
+thème et utiliser une classe de vue personnalisée.
+
+.. versionadded:: 3.1
+    ViewBuilder a été ajouté dans 3.1
+
 Rendre une View
 ---------------
 

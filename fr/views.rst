@@ -433,9 +433,10 @@ actions de votre controller en utilisant la propriété
     // A partir d'un controller
     public function admin_view()
     {
-        // aprés 3.1
+        // Défini le layout
         $this->viewBuilder()->layout('admin');
-        // ou ce qui suit avant 3.1
+
+        // Avant 3.1
         $this->layout = 'admin';
     }
 
