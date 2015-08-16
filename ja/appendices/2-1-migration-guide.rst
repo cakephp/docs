@@ -408,7 +408,7 @@ HtmlHelper
   - :php:meth:`HtmlHelper::image()` now has a ``fullBase`` option.
   - :php:meth:`HtmlHelper::media()` has been added.  You can use this method to
     create HTML5 audio/video elements.
-  - :term:`plugin syntax` support has been added for
+  - :term:`プラグイン記法` support has been added for
     :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, :php:meth:`HtmlHelper::image()`.
     You can now easily link to plugin assets using ``Plugin.asset``.
   - :php:meth:`HtmlHelper::getCrumbList()` had the ``$startText`` parameter added.

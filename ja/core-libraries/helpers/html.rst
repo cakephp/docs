@@ -72,7 +72,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     :param mixed $path: リンクしたいCSSファイルのパスを含む文字列か複数のファイルパスを含む配列
     :param string $rel: 生成されるタグの rel 属性を設定します。 null にすると 'stylesheet'
         が設定されます。
-    :param array $options: :term:`html attributes` で説明した配列です。
+    :param array $options: :term:`HTML属性` で説明した配列です。
 
     CSS のスタイルシートの link タグを生成します。 ``$options`` パラメータのキー 'inline' を
     false に設定すると link タグは HTML文書の head タグ内にある ``css`` ブロック
@@ -104,7 +104,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    ロードしたプラグインからも :term:`plugin syntax` を使うことで CSS ファイルを
+    ロードしたプラグインからも :term:`プラグイン記法` を使うことで CSS ファイルを
     インクルードすることができます。 ``app/Plugin/DebugKit/webroot/css/toolbar.css``
     という CSS ファイルをインクルードするには以下のようにします。::
 
@@ -118,13 +118,13 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     .. versionchanged:: 2.1
         ``block`` オプションが追加されました。
-        :term:`plugin syntax` のサポートが追加されました。
+        :term:`プラグイン記法` のサポートが追加されました。
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: 必要な meta タグのタイプを指定します。
-    :param mixed $url: meta タグのための URL です。文字列か :term:`routing array` を指定します。
-    :param array $options: :term:`html attributes` で説明した配列です。
+    :param mixed $url: meta タグのための URL です。文字列か :term:`ルーティング配列` を指定します。
+    :param array $options: :term:`HTML属性` で説明した配列です。
 
     このメソッドは、 RSS または Atom フィードや、 favicon といった外部リソースとリンクする際に有用です。
     ``css()`` メソッド同様、 ``array('inline' => false)`` という風に ``$attributes`` の 'inline'
@@ -268,7 +268,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 .. php:method:: image(string $path, array $options = array())
 
     :param string $path: 画像のパス。
-    :param array $options: :term:`html attributes` の配列
+    :param array $options: :term:`HTML属性` の配列
 
     書式にのっとった image タグを作成します。画像のパスは ``/app/webroot/img/``
     からの相対パスを指定してください。::
@@ -308,7 +308,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
-    :term:`plugin syntax` を使うことで、ロードしたプラグインの画像を
+    :term:`プラグイン記法` を使うことで、ロードしたプラグインの画像を
     インクルードできます。 ``app/Plugin/DebugKit/webroot/img/icon.png``
     をインクルードするには以下のようにします。::
 
@@ -322,13 +322,13 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     .. versionchanged:: 2.1
         ``fullBase`` オプションが追加されました。
-        :term:`plugin syntax` のサポートが追加されました。
+        :term:`プラグイン記法` のサポートが追加されました。
 
 .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
     :param string $title: リンクを本文に表示する際のテキストを設定します。
-    :param mixed $url: 文字列または :term:`routing array` によってリンク先のURLを設定します。
-    :param array $options: :term:`html attributes` の配列を設定します。
+    :param mixed $url: 文字列または :term:`ルーティング配列` によってリンク先のURLを設定します。
+    :param array $options: :term:`HTML属性` の配列を設定します。
 
     一般的な HTML のハイパーリンクを作成するためのメソッドです。
     ``$options`` は、タグの属性や、 ``$title`` をエスケープするかどうかの設定に使います。::
@@ -459,7 +459,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param string $tag: 生成するタグの名前
     :param string $text: タグの内容
-    :param array $options: :term:`html attributes` の配列
+    :param array $options: :term:`HTML属性` の配列
 
     text を囲った tag 指定したタグを返します。textを指定しなかった場合、
     <tag> という開始タグのみを返します。
@@ -492,7 +492,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param string $class: div タグのクラス名を設定します。
     :param string $text: div タグに含まれる内容を設定します。
-    :param array $options: :term:`html attributes` の配列を設定します。
+    :param array $options: :term:`HTML属性` の配列を設定します。
 
     div タグで囲ったセクションを作成するために使います。最初の引数で
     CSS のクラスを設定し、次の引数でdivタグで囲うテキストを設定します。
@@ -514,7 +514,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param string $class: 段落のクラス名です。
     :param string $text: 段落に含める内容です。
-    :param array $options: :term:`html attributes` の配列です。
+    :param array $options: :term:`HTML属性` の配列です。
 
     text を含め、 CSS のクラスを指定した <p> タグを出力します。
     text に何も指定しなかった場合は <p> の開始タグのみを出力します。
@@ -532,7 +532,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param mixed $url: 単一の Javascript ファイルを指定する文字列、または
         複数のファイルを指定する文字列の配列です。
-    :param array $options: :term:`html attributes` の配列です。
+    :param array $options: :term:`HTML属性` の配列です。
 
     ローカルファイルまたは URL で指定したリモートファイルをインクルードします。
 
@@ -596,7 +596,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         echo $this->fetch('scriptBottom');
 
-    :term:`plugin syntax` を使うことにより、ロードしたプラグインのスクリプトを
+    :term:`プラグイン記法` を使うことにより、ロードしたプラグインのスクリプトを
     使うことができます。 ``app/Plugin/DebugKit/webroot/js/toolbar.js`` を
     インクルードするには以下のようにします。::
 
@@ -610,12 +610,12 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     .. versionchanged:: 2.1
         ``block`` オプションが追加されました。
-        :term:`plugin syntax` のサポートが追加されました。
+        :term:`プラグイン記法` のサポートが追加されました。
 
 .. php:method::  scriptBlock($code, $options = array())
 
     :param string $code: script タグ内に含めるコード。
-    :param array $options: :term:`html attributes` の配列。
+    :param array $options: :term:`HTML属性` の配列。
 
     ``$code`` を含めた <script> タグを生成します。
     ``$options['inline']`` を false 設定すると、コードブロックはビューブロックの
@@ -625,7 +625,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
 .. php:method:: scriptStart($options = array())
 
-    :param array $options: :term:`html attributes` の配列を設定します。
+    :param array $options: :term:`HTML属性` の配列を設定します。
         これは scriptEnd が呼び出されたときに使われます。
 
     コードブロックのバッファリングを始めます。コードブロックは
@@ -692,8 +692,8 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
     :param array $names: テーブルのヘッダー行を生成するためテキストの配列です。
-    :param array $trOptions: <tr> の設定のための :term:`html attributes` の配列です。
-    :param array $thOptions: それぞれの <th> タグ要素のための :term:`html attributes` の配列です。
+    :param array $trOptions: <tr> の設定のための :term:`HTML属性` の配列です。
+    :param array $thOptions: それぞれの <th> タグ要素のための :term:`HTML属性` の配列です。
 
     <table> タグ内に置くためのヘッダー行を作成します。::
 
@@ -752,8 +752,8 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
 
     :param array $data: 行データの配列の2次元配列。
-    :param array $oddTrOptions: 奇数行の <tr> タグの設定をするための :term:`html attributes` の配列。
-    :param array $evenTrOptions: 偶数行の <tr> タグの設定をするための :term:`html attributes` の配列。
+    :param array $oddTrOptions: 奇数行の <tr> タグの設定をするための :term:`HTML属性` の配列。
+    :param array $evenTrOptions: 偶数行の <tr> タグの設定をするための :term:`HTML属性` の配列。
     :param boolean $useCount: "column-$i" というクラスを追加するかどうかを指定します。
     :param boolean $continueOddEven: false に設定すると、奇数偶数のカウントを
         static でない $count を変数として使います。
@@ -813,7 +813,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-    :param mixed $url: :term:`routing array` 。
+    :param mixed $url: :term:`ルーティング配列` 。
     :param mixed $full: :php:meth:`Router::url()` のためのオプションを設定する配列または
         ドメイン名を出力するかどうかを指定する boolean 型変数
 
@@ -955,7 +955,7 @@ HtmlHelper を使ったパンくずリストの作成
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
-    :param array $options: ``<ul>`` タグに含めたい :term:`html attributes`
+    :param array $options: ``<ul>`` タグに含めたい :term:`HTML属性`
         の配列です。 'separator' と 'firstClass' 、 'lastClass' の
         オプションも含めることができます。
     :param string|array $startText: リストの先頭に表示するテキスト、または要素

@@ -209,6 +209,7 @@ CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてく�
 デフォルトのリソースマップを上書きする際は、 ``mapResources()`` メソッドを呼ぶと、
 新しい定義が利用できます。
 
+.. _custom-rest-routing:
 
 カスタムRESTルーティング
 ========================

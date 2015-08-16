@@ -521,7 +521,7 @@ REST ルーティングやほかのリクエストデータ依存情報をカス
 
     $this->passedArgs は名前付きパラメーターを、渡された引数と併せて名前付きの配列として含みます。
 
-URLを :term:`routing array` を使って生成するとき、文字列による添え字なしで配列に引数を加えます::
+URLを :term:`ルーティング配列` を使って生成するとき、文字列による添え字なしで配列に引数を加えます::
 
     array('controller' => 'posts', 'action' => 'view', 5)
 
@@ -581,7 +581,7 @@ PostsController の view()　を呼びます。そのアクションでは、 ti
 
 これは chapter（章） と section（項目） パラメーターを確実に正しくリバースルーティングするようにします。
 
-URLを生成するときに、 :term:`routing array` を名前付きパラメーターを文字列キーが名前に一致する値として追加するために使います。 ::
+URLを生成するときに、 :term:`ルーティング配列` を名前付きパラメーターを文字列キーが名前に一致する値として追加するために使います。 ::
 
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
@@ -717,7 +717,7 @@ connectNamed() は色々なオプションをサポートしています。:
 =====================
 
 リバースルーティングは CakePHP のすべてのコードの変更なしにURLの構造を簡単に変更する機能です。
-:term:`ルーティング配列 <routing array>` をURLを定義するために使えます。
+:term:`ルーティング配列 <ルーティング配列>` をURLを定義するために使えます。
 あとで変更を加えても、生成されたURLは自動的にアップデートされます。
 
 URLを文字列によって以下のように生成します。::
@@ -876,7 +876,7 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
 .. php:staticmethod:: redirect($route, $url, $options = array())
 
     :param string $route: どのURLがリダイレクトされるのかを決めるルーティングテンプレート
-    :param mixed $url: :term:`routing array` かリダイレクト先の文字列URLを入れる。
+    :param mixed $url: :term:`ルーティング配列` かリダイレクト先の文字列URLを入れる。
     :param array $options: リダイレクトオプションを表す配列。
 
     新しいリダイレクトにルーティング接続します。
@@ -901,7 +901,7 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
 
 .. php:staticmethod:: url($url = null, $full = false)
 
-    :param mixed $url:  "/products/edit/92" や "/presidents/elect/4" や :term:`routing array`
+    :param mixed $url:  "/products/edit/92" や "/presidents/elect/4" や :term:`ルーティング配列`
         のようにCakeに関連するURLor
     :param mixed $full: (boolean) true になっていたら、URLフルパスが出力されます。
 		これは以下のキーを受け付けます。
