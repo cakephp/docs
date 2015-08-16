@@ -258,8 +258,9 @@ returned is as per following rules:
   ``loginRedirect`` value is returned.
 - If there is no session and no ``loginRedirect``, / is returned.
 
-Using Digest and Basic Authentication for Logging In
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Creating Stateless Authentication Systems
+-----------------------------------------
 
 Basic and digest are stateless authentication schemes and don't require an
 initial POST or a form. If using only basic / digest authenticators you don't
@@ -273,6 +274,163 @@ so that AuthComponent does not use session to storage user record. You may also
 want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
 throws a ``ForbiddenException`` instead of default behavior of redirecting to
 referrer.
+
+Authentication objects can implement a ``getUser()`` method that can be used to
+support user login systems that don't rely on cookies. A typical getUser method
+looks at the request/environment and uses the information there to confirm the
+identity of the user. HTTP Basic authentication for example uses
+``$_SERVER['PHP_AUTH_USER']`` and ``$_SERVER['PHP_AUTH_PW']`` for the username
+and password fields.
+
+.. note::
+
+    In case authentication does not work like expected, check if queries
+    are executed at all (see ``BaseAuthenticate::_query($username)``).
+    In case no queries are executed check if ``$_SERVER['PHP_AUTH_USER']``
+    and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
+    If you are using Apache with FastCGI-PHP you might need to add this line
+    to your **.htaccess** file in webroot::
+
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+On each request, these values, ``PHP_AUTH_USER`` and ``PHP_AUTH_PW``, are used to
+re-identify the user and ensure they are valid user. As with authentication
+object's ``authenticate()`` method, the ``getUser()`` method should return
+an array of user information on success or ``false`` on failure. ::
+
+    public function getUser(Request $request)
+    {
+        $username = env('PHP_AUTH_USER');
+        $pass = env('PHP_AUTH_PW');
+
+        if (empty($username) || empty($pass)) {
+            return false;
+        }
+        return $this->_findUser($username, $pass);
+    }
+
+The above is how you could implement getUser method for HTTP basic
+authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
+and identifies a user based on a username and password.
+
+Using Basic Authentication
+--------------------------
+
+Basic authentication allows you to create a stateless authentication that can be
+used in intranet applications or for simple API scenarios. Basic authentication
+credentials will be rechecked on each request. 
+
+.. warning::
+    Basic authentication transmits credentials in plain-text. You should use
+    HTTPS when using Basic authentication.
+
+
+To use basic authentication, you'll need to configure AuthComponent::
+
+    $this->Auth->config('authenticate', [
+        'Basic' => [
+            'fields' => ['username' => 'username', 'password' => 'api_key']
+            'userModel' => 'Users'
+        ],
+    ]);
+
+Here we're using username + API key as our fields, and use the Users model.
+
+Creating API Keys for Basic Authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Because basic HTTP sends credentials in plain-text, it is unwise to have user's
+send their login password. Instead an opaque API key is generally used. You can
+generate these API tokens randomly using libraries from CakePHP::
+
+    namespace App\Model\Table;
+
+    use Cake\Utility\Text;
+    use Cake\Utility\Security;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table
+    {
+        public function beforeSave(Event $event)
+        {
+            $entity = $event->data['entity'];
+
+            if ($entity->isNew()) {
+                $entity->api_key = Security::hash(Text::uuid());
+            }
+            return true;
+        }
+    }
+
+The above generates a random hash for each user as they are saved. Using this
+key instead of a password, means that even over plain HTTP, your user's don't
+have to send their password in API requests. You can also write additional logic
+to regenerate the API key at the user's request.
+
+Using Digest Authentication
+---------------------------
+
+Digest authentication offers an improved security model over basic
+authentication, as the user's credentials are never sent in the request header.
+Instead a hash is sent.
+
+To use digest authentication, you'll need to configure AuthComponent::
+
+    $this->Auth->config('authenticate', [
+        'Digest' => [
+            'fields' => ['username' => 'username', 'password' => 'digest_hash']
+            'userModel' => 'Users'
+        ],
+    ]);
+
+Here we're using username + digest_hash as our fields, and use the Users model.
+
+
+Hashing Passwords For Digest Authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Because Digest authentication requires a password hashed in the format
+defined by the RFC, in order to correctly hash a password for use with
+Digest authentication you should use the special password hashing
+function on ``DigestAuthenticate``. If you are going to be combining
+digest authentication with any other authentication strategies, it's also
+recommended that you store the digest password in a separate column,
+from the normal password hash::
+
+    namespace App\Model\Table;
+
+    use Cake\Auth\DigestAuthenticate;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table
+    {
+        public function beforeSave(Event $event)
+        {
+            $entity = $event->data['entity'];
+
+            // Make a password for digest auth.
+            $entity->digest_hash = DigestAuthenticate::password(
+                $entity->username,
+                $entity->plain_password,
+                env('SERVER_NAME')
+            );
+            return true;
+        }
+    }
+
+Passwords for digest authentication need a bit more information than
+other password hashes, based on the RFC for digest authentication.
+
+.. note::
+
+    The third parameter of DigestAuthenticate::password() must match the
+    'realm' config value defined when DigestAuthentication was
+    configured in AuthComponent::$authenticate. This defaults to
+    ``env('SCRIPT_NAME')``. You may wish to use a static string if you
+    want consistent hashes in multiple environments.
+
 
 Creating Custom Authentication Objects
 --------------------------------------
@@ -336,47 +494,6 @@ by including them in AuthComponents authenticate array::
     Note that when using simple notation there's no 'Authenticate' word when
     initiating the authentication object. Instead, if using namespaces, you'll need
     to set the full namespace of the class, including the 'Authenticate' word.
-
-Creating Stateless Authentication Systems
------------------------------------------
-
-Authentication objects can implement a ``getUser()`` method that can be
-used to support user login systems that don't rely on cookies. A
-typical getUser method looks at the request/environment and uses the
-information there to confirm the identity of the user. HTTP Basic
-authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
-``$_SERVER['PHP_AUTH_PW']`` for the username and password fields.
-
-.. note::
-
-    In case authentication does not work like expected, check if queries
-    are executed at all (see ``BaseAuthenticate::_query($username)``).
-    In case no queries are executed check if ``$_SERVER['PHP_AUTH_USER']``
-    and ``$_SERVER['PHP_AUTH_PW']`` do get populated by the webserver.
-    If you are using Apache with FastCGI-PHP you might need to add this line
-    to your **.htaccess** file in webroot::
-
-        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
-
-On each request, these values, `PHP_AUTH_USER` and `PHP_AUTH_PW`, are used to
-re-identify the user and ensure they are valid user. As with authentication
-object's ``authenticate()`` method, the ``getUser()`` method should return
-an array of user information on success or ``false`` on failure. ::
-
-    public function getUser(Request $request)
-    {
-        $username = env('PHP_AUTH_USER');
-        $pass = env('PHP_AUTH_PW');
-
-        if (empty($username) || empty($pass)) {
-            return false;
-        }
-        return $this->_findUser($username, $pass);
-    }
-
-The above is how you could implement getUser method for HTTP basic
-authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
-and identifies a user based on a username and password.
 
 Handling Unauthenticated Requests
 ---------------------------------
@@ -564,51 +681,6 @@ function accordingly::
 As you can see we are just setting the plain password again so the setter
 function in the entity will hash the password as shown in the previous example and
 then save the entity.
-
-Hashing Passwords For Digest Authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Because Digest authentication requires a password hashed in the format
-defined by the RFC, in order to correctly hash a password for use with
-Digest authentication you should use the special password hashing
-function on ``DigestAuthenticate``. If you are going to be combining
-digest authentication with any other authentication strategies, it's also
-recommended that you store the digest password in a separate column,
-from the normal password hash::
-
-    namespace App\Model\Table;
-
-    use Cake\Auth\DigestAuthenticate;
-    use Cake\Event\Event;
-    use Cake\ORM\Table;
-
-    class UsersTable extends Table
-    {
-
-        public function beforeSave(Event $event)
-        {
-            $entity = $event->data['entity'];
-
-            // Make a password for digest auth.
-            $entity->digest_hash = DigestAuthenticate::password(
-                $entity->username,
-                $entity->plain_password,
-                env('SERVER_NAME')
-            );
-            return true;
-        }
-    }
-
-Passwords for digest authentication need a bit more information than
-other password hashes, based on the RFC for digest authentication.
-
-.. note::
-
-    The third parameter of DigestAuthenticate::password() must match the
-    'realm' config value defined when DigestAuthentication was
-    configured in AuthComponent::$authenticate. This defaults to
-    ``env('SCRIPT_NAME')``. You may wish to use a static string if you
-    want consistent hashes in multiple environments.
 
 Manually Logging Users In
 -------------------------
