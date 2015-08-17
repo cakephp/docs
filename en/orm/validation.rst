@@ -497,7 +497,7 @@ for data transitions generated inside your application::
 
     // Elsewhere in application code
     $order->price = 50;
-    $oder->shipping_mode = 'free';
+    $order->shipping_mode = 'free';
     $ordersTable->save($order); // Returns false
 
 
