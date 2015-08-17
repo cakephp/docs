@@ -184,3 +184,10 @@ Time
   differences from 'now'.
 - ``Time::i18nFormat()`` now supports non-gregorian calendars when formatting
   dates.
+
+Validation
+==========
+
+- ``Validation::geoCoordinate()`` was added.
+- ``Validation::latitude()`` was added.
+- ``Validation::longitude()`` was added.

@@ -193,3 +193,10 @@ Time
   différence depuis l'instant présent.
 - ``Time::i18nFormat()`` supporte les calendriers non-grégorien lors du
   formatage des dates.
+
+Validation
+==========
+
+- ``Validation::geoCoordinate()`` a été ajoutée.
+- ``Validation::latitude()`` a été ajoutée.
+- ``Validation::longitude()`` a été ajoutée.
