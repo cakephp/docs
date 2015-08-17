@@ -379,7 +379,7 @@ methods of the HtmlHelper and how to use them.
         echo $this->Html->link(
             'Delete',
             array('controller' => 'recipes', 'action' => 'delete', 6),
-            array('confirm' => 'Are you sure you wish to delete this recipe?'),
+            array('confirm' => 'Are you sure you wish to delete this recipe?')
         );
 
     Will output:
