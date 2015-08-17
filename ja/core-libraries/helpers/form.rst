@@ -724,7 +724,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
   ``array('before', 'input', 'between', 'label', 'after','error')``
 
 * ``$options['inputDefaults']`` 複数の input() コールで同じオプションを
-  使いたい場合、 `inputDefaults`` を使うことで繰り返し指定を避ける事が
+  使いたい場合、 ``inputDefaults`` を使うことで繰り返し指定を避ける事が
   できます::
 
     echo $this->Form->create('User', array(
