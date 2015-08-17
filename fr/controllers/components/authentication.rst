@@ -180,8 +180,8 @@ les clés suivantes:
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
 
-Customizing find query
-----------------------
+Personnaliser la Requête de Recherche
+-------------------------------------
 
 Vous pouvez personnaliser la requête utilisée pour chercher l'utilisateur
 en utilisant l'option ``finder`` dans la configuration de la classe
@@ -283,8 +283,8 @@ d'authentification. L'URL retournée correspond aux règles suivantes:
 - S'il n'y a pas de valeur en session et pas de ``loginRedirect``, ``/``
   est retournée.
 
-Utilisation de l'Authentification Digest et Basic pour la Connexion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Création de Systèmes d'Authentification Stateless
+-------------------------------------------------
 
 Les authentifications basic et digest sont des schémas d'authentification
 sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
@@ -300,6 +300,174 @@ l'enregistrement utilisateur. Vous pouvez aussi définir la config
 ``unauthorizedRedirect`` à ``false`` pour que AuthComponent lance une
 ``ForbiddenException`` plutôt que le comportement par défaut qui est de
 rediriger vers la page référente.
+
+Les objets d'authentification peuvent implémenter une méthode ``getUser()``
+qui peut être utilisée pour supporter les systèmes de connexion des
+utilisateurs qui ne reposent pas sur les cookies. Une méthode getUser
+typique regarde l'environnement de la requête (request/environnement) et
+utilise les informations contenues pour confirmer l'identité de l'utilisateur.
+L'authentification HTTP Basic utilise par exemple
+``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
+username et password.
+
+.. note::
+
+    Dans le cas ou l'authentification ne fonctionne pas tel qu'espéré,
+    vérifiez si les requêtes sont exécutées (voir
+    ``BaseAuthenticate::_query($username)``). Dans le cas où aucune
+    requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
+    ``$_SERVER['PHP_AUTH_PW']`` sont renseignés par le serveur web.
+    Si vous utilisez Apache avec PHP-FastCGI, vous devrez peut être ajouter
+    cette ligne dans le **.htaccess** de votre webroot::
+
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
+l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
+méthodes d'authentification de l'objet ``authenticate()``, la méthode
+``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
+succès et ``false`` en cas d'échec::
+
+    public function getUser(Request $request)
+    {
+        $username = env('PHP_AUTH_USER');
+        $pass = env('PHP_AUTH_PW');
+
+        if (empty($username) || empty($pass)) {
+            return false;
+        }
+        return $this->_findUser($username, $pass);
+    }
+
+Le contenu ci-dessus montre comment vous pourriez mettre en œuvre la méthode
+getUser pour les authentifications HTTP Basic.
+La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
+utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
+
+Utiliser l'Authentification Basic
+---------------------------------
+
+L'Authentification Basic vous permet de créer une authentification stateless
+qui peut être utilisée pour des applications en intranet ou pour des scénarios
+d'API simple. Les certificats d'identification de l'authentification Basic
+seront revérifiés à chaque requête.
+
+.. warning::
+    L'authentification Basic transmet les certificats d'identification en clair.
+    Vous devez utiliser HTTPS quand vous utilisez l'authentification Basic.
+
+
+Pour utiliser l'authentification basic, vous devez configurer AuthComponent::
+
+    $this->Auth->config('authenticate', [
+        'Basic' => [
+            'fields' => ['username' => 'username', 'password' => 'api_key']
+            'userModel' => 'Users'
+        ],
+    ]);
+
+Ici nous voulons utiliser le username + clé API pour nos champs, et utiliser le
+model Users.
+
+Créer des clés d'API pour une Authentification Basic
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comme le HTTP basic envoie les certificats d'identification en clair, il n'est
+pas sage que les utilisateurs envoient leur mot de passe de connexion. A la
+place, une clé d'API opaque est généralement utilisée. Vous pouvez générer
+de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
+
+    namespace App\Model\Table;
+
+    use Cake\Utility\Text;
+    use Cake\Utility\Security;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table
+    {
+        public function beforeSave(Event $event)
+        {
+            $entity = $event->data['entity'];
+
+            if ($entity->isNew()) {
+                $entity->api_key = Security::hash(Text::uuid());
+            }
+            return true;
+        }
+    }
+
+Ce qui est au-dessus va générer un hash aléatoire pour chaque utilisateur quand
+il est sauvegardé. Utiliser cette clé plutôt que le mot de passe, signifie que
+même en HTTP en clair, vos utilisateurs n'ont pas à envoyer leur mot de passe
+dans les requêtes d'API. Vous pouvez aussi écrire de la logique supplémentaire
+pour regénérer la clé d'API à la demande de l'utilisateur.
+
+Utiliser l'Authentification Digest
+----------------------------------
+
+L'authentification Digest est un modèle qui améliore la sécurité par rapport
+à l'authentification basic, puisque les certificats d'identification de
+l'utilisateur ne sont jamais envoyés dans l'en-tête de la requête. A la place,
+un hash est envoyé.
+
+Pour utiliser l'authentification digest, vous devez configurer AuthComponent::
+
+    $this->Auth->config('authenticate', [
+        'Digest' => [
+            'fields' => ['username' => 'username', 'password' => 'digest_hash']
+            'userModel' => 'Users'
+        ],
+    ]);
+
+Ici nous utilisons le username + digest_hash pour nos champs, et nous
+utilisons le model Users.
+
+Hasher les Mots de Passe pour l'Authentification Digest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comme l'authentification Digest nécessite un mot de passe hashé au format
+défini par la RFC, afin de correctement hasher un mot de passe pour pouvoir
+l'utiliser avec l'authentification Digest, vous devez utiliser la fonction
+de hashage de mot de passe spéciale dans ``DigestAuthenticate``. Si vous allez
+combiner l'authentification digest avec une autre stratégie d'authentication,
+il est aussi recommandé que vous stockiez le mot de passe digest dans une
+colonne séparée du mot de passe standard hashé::
+
+    namespace App\Model\Table;
+
+    use Cake\Auth\DigestAuthenticate;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table
+    {
+        public function beforeSave(Event $event)
+        {
+            $entity = $event->data['entity'];
+
+            // Make a password for digest auth.
+            $entity->digest_hash = DigestAuthenticate::password(
+                $entity->username,
+                $entity->plain_password,
+                env('SERVER_NAME')
+            );
+            return true;
+        }
+    }
+
+Les mots de passe pour l'authentification digest ont besoin d'un peu plus
+d'informations que les autres mots de passe hashés, selon la RFC sur
+l'authentification digest.
+
+.. note::
+
+    Le troisième paramètre de DigestAuthenticate::password() doit correspondre
+    à la valeur de config 'realm' définie quand DigestAuthentication a été
+    configurée dans AuthComponent::$authenticate. Celle-ci est
+    ``env('SCRIPT_NAME')`` par défaut. Vous pouvez souhaiter utiliser une
+    chaîne static si vous voulez des hashs cohérents dans plusieurs
+    environnements.
 
 Créer des Objets d'Authentification Personnalisés
 -------------------------------------------------
@@ -367,52 +535,6 @@ en les incluant dans le tableau d'authentification AuthComponents::
     'Authenticate' lors de l'instantiation de l'objet d'authentification. A la
     place, si vous utilisez les namespaces, vous devrez définir le namespace
     complet de la classe (y compris le mot 'Authenticate').
-
-Création de Systèmes d'Authentification Stateless
--------------------------------------------------
-
-Les objets d'authentification peuvent implémenter une méthode ``getUser()``
-qui peut être utilisée pour supporter les systèmes de connexion des
-utilisateurs qui ne reposent pas sur les cookies. Une méthode getUser
-typique regarde l'environnement de la requête (request/environnement) et
-utilise les informations contenues pour confirmer l'identité de l'utilisateur.
-L'authentification HTTP Basic utilise par exemple
-``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
-username et password.
-
-.. note::
-
-    Dans le cas ou l'authentification ne fonctionne pas tel qu'espéré,
-    vérifiez si les requêtes sont exécutées (voir
-    ``BaseAuthenticate::_query($username)``). Dans le cas où aucune
-    requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
-    ``$_SERVER['PHP_AUTH_PW']`` sont renseignés par le serveur web.
-    Si vous utilisez Apache avec PHP-FastCGI, vous devrez peut être ajouter
-    cette ligne dans le **.htaccess** de votre webroot::
-
-        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
-
-Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
-l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
-méthodes d'authentification de l'objet ``authenticate()``, la méthode
-``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
-succès et ``false`` en cas d'échec::
-
-    public function getUser(Request $request)
-    {
-        $username = env('PHP_AUTH_USER');
-        $pass = env('PHP_AUTH_PW');
-
-        if (empty($username) || empty($pass)) {
-            return false;
-        }
-        return $this->_findUser($username, $pass);
-    }
-
-Le contenu ci-dessus montre comment vous pourriez mettre en œuvre la méthode
-getUser  pour les authentifications HTTP Basic.
-La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
-utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
 Gestion des Requêtes non Authentifiées
 --------------------------------------
@@ -610,8 +732,8 @@ Comme vous pouvez le voir, nous définissons le mot de passe en clair à nouveau
 pour que la fonction directrice (setter) dans l'entity hashe le mot de passe
 comme montré dans les exemples précédents et sauvegarde ensuite l'entity.
 
-Hachage de Mots de Passe pour l'Authentification Digest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Hachage des Mots de Passe pour l'Authentification Digest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Puisque l'authentification Digest nécessite un mot de passe haché dans un
 format défini par la RFC, afin d'hacher correctement un mot de

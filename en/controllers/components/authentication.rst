@@ -160,7 +160,7 @@ the following keys:
 - ``nonce`` A nonce used for authentication. Defaults to ``uniqid()``.
 - ``qop`` Defaults to auth; no other values are supported at this time.
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
-  to ``md5($config['realm'])``
+  to ``md5($config['realm'])``.
 
 Customizing find query
 ----------------------
@@ -318,7 +318,7 @@ Using Basic Authentication
 
 Basic authentication allows you to create a stateless authentication that can be
 used in intranet applications or for simple API scenarios. Basic authentication
-credentials will be rechecked on each request. 
+credentials will be rechecked on each request.
 
 .. warning::
     Basic authentication transmits credentials in plain-text. You should use
