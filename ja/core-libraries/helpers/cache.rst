@@ -33,7 +33,7 @@ URL がリクエストされると、CakePHP はそのリクエストされた�
         public $helpers = array('Cache');
     }
 
-また、 bootstrap に CacheDispacher をディスパッチャフィルタへ追加する必要があります。 ::
+また、 bootstrap に CacheDispatcher をディスパッチャフィルタへ追加する必要があります。 ::
 
     Configure::write('Dispatcher.filters', array(
         'CacheDispatcher'
