@@ -180,8 +180,8 @@ les clés suivantes:
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
 
-Personnaliser la find query
----------------------------
+Personnaliser la Requête de Recherche
+-------------------------------------
 
 Vous pouvez personnaliser la requête utilisée pour chercher l'utilisateur
 en utilisant l'option ``finder`` dans la configuration de la classe
@@ -340,7 +340,7 @@ succès et ``false`` en cas d'échec::
     }
 
 Le contenu ci-dessus montre comment vous pourriez mettre en œuvre la méthode
-getUser  pour les authentifications HTTP Basic.
+getUser pour les authentifications HTTP Basic.
 La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
 utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
@@ -432,7 +432,7 @@ l'utiliser avec l'authentification Digest, vous devez utiliser la fonction
 de hashage de mot de passe spéciale dans ``DigestAuthenticate``. Si vous allez
 combiner l'authentification digest avec une autre stratégie d'authentication,
 il est aussi recommandé que vous stockiez le mot de passe digest dans une
-colonne séparée du mot de passe hashé normal::
+colonne séparée du mot de passe standard hashé::
 
     namespace App\Model\Table;
 
@@ -457,7 +457,7 @@ colonne séparée du mot de passe hashé normal::
     }
 
 Les mots de passe pour l'authentification digest ont besoin d'un peu plus
-d'information que les autres mots de passe hashés, selon la RFC sur
+d'informations que les autres mots de passe hashés, selon la RFC sur
 l'authentification digest.
 
 .. note::
@@ -466,7 +466,7 @@ l'authentification digest.
     à la valeur de config 'realm' définie quand DigestAuthentication a été
     configurée dans AuthComponent::$authenticate. Celle-ci est
     ``env('SCRIPT_NAME')`` par défaut. Vous pouvez souhaiter utiliser une
-    chaîne static si vous voulez des hashs consistants dans plusieurs
+    chaîne static si vous voulez des hashs cohérents dans plusieurs
     environnements.
 
 Créer des Objets d'Authentification Personnalisés
