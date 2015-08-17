@@ -180,7 +180,7 @@ les clés suivantes:
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
 
-Personnalisez la find query
+Personnaliser la find query
 ---------------------------
 
 Vous pouvez personnaliser la requête utilisée pour chercher l'utilisateur
