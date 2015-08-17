@@ -828,3 +828,8 @@ méthode ``cacheMetadata()``::
 CakePHP intègre aussi un outil CLI pour gérer les mises en cache de metadata.
 Consultez le chapitre :doc:`/console-and-shells/orm-cache` pour plus
 d'information.
+
+
+.. meta::
+    :title lang=fr: Notions de Base de Base de Données
+    :keywords lang=fr: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,base de données,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,cache

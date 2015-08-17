@@ -54,7 +54,7 @@ propriétés::
     Inflector::camelize('Apple_pie')
 
     // apple_pie
-    Inflector::undescore('ApplePie');
+    Inflector::underscore('ApplePie');
 
 Il doit être noté que les underscores vont seulement convertir les mots
 formatés en camelCase. Les mots qui contiennent des espaces seront en

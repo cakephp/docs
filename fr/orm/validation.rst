@@ -521,7 +521,7 @@ données générées à l'intérieur de l'application::
 
     // Autre part dans le code de l'application
     $order->price = 50;
-    $oder->shipping_mode = 'free';
+    $order->shipping_mode = 'free';
     $ordersTable->save($order); // Retourne false
 
 Utiliser la Validation en tant que Règle d'Application
