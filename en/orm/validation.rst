@@ -16,7 +16,7 @@ Validating Data Before Building Entities
 ========================================
 
 When marshalling data into entities, you can validate data. Validating data
-allows you to check the type, shape, and size of data. By default request data
+allows you to check the type, shape and size of data. By default request data
 will be validated before it is converted into entities.
 If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
@@ -30,7 +30,7 @@ When building an entity with validation enabled the following occurs:
 
 1. The validator object is created.
 2. The ``table`` and ``default`` validation provider are attached.
-3. The named validation method is invoked (e.g., ``validationDefault``).
+3. The named validation method is invoked. For example ``validationDefault``.
 4. The ``Model.buildValidator`` event will be triggered.
 5. Request data will be validated.
 6. Request data will be type-cast into types that match the column types.
@@ -84,13 +84,13 @@ To create a default validation object in your table, create the
         }
     }
 
-The available validation methods and rules come from the ``Validator`` class and 
+The available validation methods and rules come from the ``Validator`` class and
 are documented in the :ref:`creating-validators` section.
 
 .. note::
 
-    Validation objects are intended primarily for validating user input (i.e.,
-    forms and any other posted request data).
+    Validation objects are intended primarily for validating user input, i.e.
+    forms and any other posted request data.
 
 
 Using A Different Validation Set
@@ -297,22 +297,22 @@ class::
     {
         // Add a rule that is applied for create and update operations
         $rules->add(function ($entity, $options) {
-            // Return a boolean to indicate pass/fail
+            // Return a boolean to indicate pass/failure
         }, 'ruleName');
 
         // Add a rule for create.
         $rules->addCreate(function ($entity, $options) {
-            // Return a boolean to indicate pass/fail
+            // Return a boolean to indicate pass/failure
         }, 'ruleName');
 
         // Add a rule for update
         $rules->addUpdate(function ($entity, $options) {
-            // Return a boolean to indicate pass/fail        
+            // Return a boolean to indicate pass/failure
         }, 'ruleName');
 
         // Add a rule for the deleting.
         $rules->addDelete(function ($entity, $options) {
-            // Return a boolean to indicate pass/fail        
+            // Return a boolean to indicate pass/failure
         }, 'ruleName');
 
         return $rules;
@@ -443,7 +443,7 @@ Validation is defined using the ``validationCustomName()`` methods::
 
 Validation is meant for forms and request data. This means that validation rule
 sets can assume things about the structure of a form and validate fields not in
-the schema of the database. Validation assumes strings or arrays are passed
+the schema of the database. Validation assumes strings or array are passed
 since that is what is received from any request::
 
     // In src/Model/Table/UsersTable.php
