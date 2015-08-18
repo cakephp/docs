@@ -123,9 +123,11 @@ This will generate the following file in `config/Migrations`::
     }
 
 Now that the migrations file are created, you can edit them before creating
-your tables.
+your tables. We need to change the `'null' => false` for the `parent_id` field
+with `'null' => true` beacause a top-level category has a null `parent_id`.
 
-Once the files fits your envy, you can run the following command to create your tables::
+Once the files fits your envy, you can run the following command to create your
+tables::
 
     bin/cake migrations migrate
 
@@ -174,6 +176,10 @@ read if you want re-familiarize yourself with how CakePHP works.
 .. note::
     If you are on Windows remember to use \ instead of /.
 
+You'll need to edit the following in **src/Template/Categories/index.ctp**::
+
+    echo $this->Form->input('parent_id', ['options' => $parentCategories, 'empty' => 'No Parent']);
+
 Attach TreeBehavior to CategoriesTable
 ======================================
 
@@ -219,9 +225,10 @@ the tree::
     {
         public function index()
         {
-            $categories = $this->Categories->find('threaded')
+            $categories = $this->Categories->find()
                 ->order(['lft' => 'ASC']);
             $this->set(compact('categories'));
+            $this->set('_serialize', ['categories']);
         }
 
         public function moveUp($id = null)
