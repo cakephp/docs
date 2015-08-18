@@ -37,8 +37,8 @@ section will be in bash, but the CakePHP Console is Windows-compatible as well.
 This example assumes that the user is currently logged into a bash prompt and is
 currently at the root of a CakePHP application.
 
-CakePHP applications contain a ``Console`` directory that contains all the
-shells and tasks for an application. It also comes with an executable::
+A CakePHP application contains ``src/Shell`` and ``src/Shell/Task`` directories that contain all of its 
+shells and tasks. It also comes with an executable in the ``bin`` directory::
 
     $ cd /path/to/app
     $ bin/cake
