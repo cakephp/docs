@@ -1,28 +1,48 @@
-Security
+..
+    Security
+
+セキュリティ
 ########
 
 .. php:namespace:: Cake\Utility
 
 .. php:class:: Security
 
-The `security library
-<http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_
-handles basic security measures such as providing methods for
-hashing and encrypting data.
+..
+    The `security library
+    <http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_
+    handles basic security measures such as providing methods for
+    hashing and encrypting data.
 
-Encrypting and Decrypting Data
+`security library
+<http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_ は、
+データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
+
+..
+    Encrypting and Decrypting Data
+
+データの暗号化と復号化
 ==============================
 
 .. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
 
-Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
-lots of variance in the data much like a good password. The returned result
-will be the encrypted value with an HMAC checksum.
+..
+    Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
+    lots of variance in the data much like a good password. The returned result
+    will be the encrypted value with an HMAC checksum.
 
-This method will use either `openssl <http://php.net/openssl>`_ or `mcrypt
-<http://php.net/mcrypt>`_ based on what is available on your system. Data
-encrypted in one implementation is portable to the other.
+``$text`` の暗号化には AES-256 を利用します。 ``$key`` は例えば「よいパスワード」のように、
+沢山の分散された値であるべきです。返却される結果は HMAC チェックサム（checksum）つきの暗号化された値となります。
+
+..
+    This method will use either `openssl <http://php.net/openssl>`_ or `mcrypt
+    <http://php.net/mcrypt>`_ based on what is available on your system. Data
+    encrypted in one implementation is portable to the other.
+
+このメソッドは、 `openssl <http://php.net/openssl>`_ か `mcrypt <http://php.net/mcrypt>`_ のいずれかを利用し、
+あなたのシステムで有効であることが基準になります。
+いずれかの実装で暗号化されたデータは、もう一方の実装に移植できます。
 
 This method should **never** be used to store passwords.  Instead you should use
 the one way hashing methods provided by
