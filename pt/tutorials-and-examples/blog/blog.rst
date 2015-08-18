@@ -56,7 +56,7 @@ o Composer, confira a seção :doc:`/installation`.
 Independentemente de como você baixou o CakePHP, uma vez que sua instalação
 for concluída, a estrutura dos diretórios deve ficar parecida com o seguinte::
 
-    /bookmarker
+    /nome_do_app
         /bin
         /config
         /logs
