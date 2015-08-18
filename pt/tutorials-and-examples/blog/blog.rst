@@ -1,23 +1,25 @@
-Tutorial de Blog
-################
+Tutorial - Criando um Blog
+##########################
 
-Este tutorial irá orientá-lo através da criação de um aplicativo simples de blog.
-Estaremos instalando o CakePHP, criando um banco de dados e gerando a lógica de
-aplicação capaz de listar, adicionar, editar e apagar posts.
+Este tutorial irá orientá-lo através da criação de um simples blog.
+Faremos a instalação do CakePHP, criaremos um banco de dados e implementaremos a
+lógica capaz de listar, adicionar, editar e apagar postagens do blog.
 
 Aqui está o que você vai precisar:
 
-#. Um servidor web rodando. Vamos supor que você está usando o Apache,
-   embora as instruções para usar outros servidores sejam muito semelhantes.
-   Poderíamos ter que brincar um pouco com a configuração do servidor, mas a
+#. Um servidor web em funcionamento. Nós iremos assumir que você esteja usando
+   o Apache, embora as instruções para outros servidores sejam bem similares.
+   Talvez seja preciso alterar um pouco a configuração do servidor, mas a
    maioria das pessoas pode ter o CakePHP instalado e funcionando sem qualquer
    trabalho extra. Certifique-se de que você tem o PHP 5.4.16 ou superior,
-   e que as extensões ``mbstring`` e ``intl`` estão habilitadas no PHP.
+   e que as extensões *mbstring* e *intl* estejam habilitadas no PHP.
+   Caso não saiba a versão do PHP que está instalada, utilize a função
+   ``phpinfo()`` ou digite ``php -v`` no seu terminal de comando.
 
-#. Um servidor de banco de dados. Nós vamos usar o servidor MySQL neste
-   tutorial. Você precisa saber o suficiente sobre SQL para criar um banco de
-   dados: O CakePHP vai tomar as rédeas a partir daí. Por nós estarmos
-   usando o MySQL, também certifique-se que você tem a extensão ``pdo_mysql`
+#. Um servidor de banco de dados. Nós vamos usar o servidor *MySQL* neste
+   tutorial. Você precisa saber o mínimo sobre SQL para então criar um banco de
+   dados, depois disso o CakePHP vai assumir as rédeas. Já que usaremos
+   o *MySQL*, também certifique-se que a extensão ``pdo_mysql`` está
    habilitada no PHP.
 
 #. Conhecimento básico sobre PHP.
@@ -28,28 +30,28 @@ Instalação do CakePHP
 =====================
 
 A maneira mais fácil de instalar o CakePHP é usando Composer, um gerenciador
-de dependências para o PHP. É uma forma simples de instalar o CakePHP a
-partir de seu terminal ou prompt de comando. Primeiro, você precisa baixar e
-instalar o Composer. Se você tiver instalada a extensão cURL do PHP, execute
-o seguinte comando::
+de dependências para o PHP. Se trata de uma forma simples de instalar o
+CakePHP a partir de seu terminal ou prompt de comando. Primeiro, você
+precisa baixar e instalar o Composer. Se possuir instalada a extensão *cURL*
+do PHP, execute o seguinte comando::
 
     curl -s https://getcomposer.org/installer | php
 
-Ao invés disso, você também pode baixar o arquivo ``composer.phar`` do
-`site <https://getcomposer.org/download/>`_ oficial.
+Você também pode baixar o arquivo ``composer.phar`` do
+`site <https://getcomposer.org/download/>`_ oficial do Composer.
 
-Em seguida, basta digitar a seguinte linha no seu terminal a partir do diretório
-onde se localiza o arquivo ``composer.phar`` para instalar o esqueleto de
-aplicações do CakePHP no diretório ``bookmarker``. ::
+Em seguida, basta digitar a seguinte linha de comando no seu terminal a partir
+do diretório onde se localiza o arquivo ``composer.phar`` para instalar o
+esqueleto da aplicação do CakePHP no diretório [nome_do_app]. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app [nome_do_app]
 
-A vantagem de usar Composer é que ele irá completar automaticamente um conjunto
-importante de tarefas, como configurar as permissões de arquivo e criar a sua
-``config/app.php``.
+A vantagem de usar o Composer é que ele irá completar automaticamente um conjunto
+importante de tarefas, como configurar corretamente as permissões de pastas
+e criar o ``config/app.php`` para você.
 
 Há outras maneiras de instalar o CakePHP. Se você não puder ou não quiser usar
-Composer, veja a seção :doc:`/installation`.
+o Composer, confira a seção :doc:`/installation`.
 
 Independentemente de como você baixou o CakePHP, uma vez que sua instalação
 for concluída, a estrutura dos diretórios deve ficar parecida com o seguinte::
@@ -76,16 +78,17 @@ for concluída, a estrutura dos diretórios deve ficar parecida com o seguinte::
 Agora pode ser um bom momento para aprender sobre como a estrutura de diretórios
 do CakePHP funciona: Confira a seção :doc:`/intro/cakephp-folder-structure`.
 
-Directory Permissions on tmp and logs
-=====================================
+Permissões dos diretórios tmp e logs
+====================================
 
-Os diretórios ``tmp`` e ``logs`` precisa ter permissões adequadas para serem
-escritos pelo seu servidor web. Se você usou Composer para a instalação, ele deve
-ter feito isso para você e confirmado com uma mensagem "Permissions set on <folder>".
-Se você ao invés disso, recebeu uma mensagem de erro ou se quiser fazê-lo manualmente,
-a melhor forma seria descobrir por qual usuário o seu servidor web é executado
-(``<?= `whoami`; ?>``) e alterar a propriedade desses dois diretórios para este usuário.
-O comando final a ser executado (em \*nix) poderia ser algo como::
+Os diretórios **tmp** e **logs** precisam ter permissões adequadas para que
+possam ser alterados pelo seu servidor web. Se você usou o Composer na
+instalação, ele deve ter feito isso por você e confirmado com uma mensagem
+"Permissions set on <folder>". Se você ao invés disso, recebeu uma mensagem de
+erro ou se quiser fazê-lo manualmente, a melhor forma seria descobrir por qual
+usuário o seu servidor web é executado (``<?= 'whoami'; ?>``) e alterar o
+proprietário desses dois diretórios para este usuário.
+Os comandos finais a serem executados (em \*nix) podem ser algo como::
 
     chown -R www-data tmp
     chown -R www-data logs
@@ -93,22 +96,22 @@ O comando final a ser executado (em \*nix) poderia ser algo como::
 Se por alguma razão o CakePHP não puder escrever nesses diretórios, você será
 informado por uma advertência enquanto não estiver em modo de produção.
 
-Embora não seja recomendado, se você é incapaz de definir as permissões
-compatíveis com o seu servidor web, você pode simplesmente definir
-permissões de gravação diretamente no diretório, executando::
+Embora não seja recomendado, se você é incapaz de redefinir as permissões
+do seu servidor web, você pode simplesmente alterar as permissões de gravação
+diretamente nos diretórios, executando os seguintes comandos::
 
     chmod 777 -R tmp
     chmod 777 -R logs
 
-Criando o banco de dados
-========================
+Criando o banco de dados do Blog
+================================
 
-Em seguida, vamos criar o banco de dados para a nossa aplicação. Se você
-ainda não tiver feito isso, crie um banco de dados vazio para uso
-nesse tutorial, com um nome de sua escolha, por exemplo, ``cake_blog``.
-Você pode executar o seguinte SQL para criar as tabelas necessárias::
+Em seguida, vamos configurar o banco de dados para o nosso blog. Se você
+ainda não tiver feito isto, crie um banco de dados vazio para usar
+neste tutorial, com um nome de sua escolha, por exemplo, ``cake_blog``.
+Agora, vamos criar uma tabela para armazenar nossos artigos::
 
-    /* Primeiro, criamos nossa tabela articles: */
+    /* Primeiro, criamos a tabela articles: */
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -117,7 +120,10 @@ Você pode executar o seguinte SQL para criar as tabelas necessárias::
         modified DATETIME DEFAULT NULL
     );
 
-    /* Então inserimos articles para teste: */
+Nós vamos também inserir alguns artigos para usarmos em nossos testes.
+Execute os seguintes comandos SQL em seu banco de dados::
+
+    /* Então inserimos articles para testes: */
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)
@@ -127,24 +133,24 @@ Você pode executar o seguinte SQL para criar as tabelas necessárias::
 
 Os nomes de tabelas e colunas que usamos não foram arbitrárias. Usando
 :doc:`convenções de nomenclatura </intro/conventions>` do CakePHP, podemos
-alavancar o desenvolvimento e evitar ter de configurar o framework. O CakePHP
+alavancar o desenvolvimento e acelerar a configuração do framework. O CakePHP
 é flexível o suficiente para acomodar até mesmo esquemas de banco de dados
 legados inconsistentes, mas aderir às convenções vai lhe poupar tempo.
 
-Configurando o banco de dados
-=============================
+Configurando o banco de dados do Blog
+=====================================
 
-Em seguida, vamos dizer ao CakePHP onde o nosso banco de dados está como se
-conectar a ele. Para muitos, esta será a primeira e última vez que você vai
-precisar configurar qualquer coisa.
+Em seguida, vamos dizer ao CakePHP onde nosso banco de dados está e como se
+conectar a ele. Para muitos, esta será a primeira e última vez que será
+necessário configurar algo.
 
-A configuração é bem simples: basta alterar os valores do array
-``Datasources.default`` no arquivo ``config/app.php`` pelos que se
-aplicam à sua configuração. A amostra completa da gama de configurações pode
-ser algo como o seguinte::
+A configuração é bem simples e objetiva: basta alterar os valores no array
+``Datasources.default`` localizado no arquivo **config/app.php**, pelos valores
+que se aplicam à sua configuração. Um exemplo completo de configurações deve
+se parecer como o seguinte::
 
     return [
-        // More configuration above.
+        // Mais configurações acima.
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
@@ -159,47 +165,48 @@ ser algo como o seguinte::
                 'cacheMetadata' => true,
             ],
         ],
-        // More configuration below.
+        // Mais configurações abaixo.
     ];
 
-Depois de salvar o seu arquivo ``config/app.php``, você deve notar que a
-mensagem 'CakePHP is able to connect to the database' tem uma marca de
-verificação.
+Depois de salvar o arquivo **config/app.php**, você deve notar a
+mensagem *CakePHP is able to connect to the database* ao acessar o Blog pelo
+seu navegador.
 
 .. note::
+    Uma cópia do arquivo de configuração padrão do CakePHP pode ser encontrada
+    em **config/app.default.php**.
 
-    Uma cópia do arquivo de configuração padrão do CakePHP é encontrado em
-    ``config/app.default.php``.
+Configurações opcionais
+=======================
 
-Optional Configuration
-======================
+Há alguns outros itens que podem ser configurados. Muitos desenvolvedores
+completam esta lista de itens, mas os mesmos não são obrigatórios para este
+tutorial. Um deles é definir uma sequência personalizada (ou "salt") para uso em
+hashes de segurança.
 
-There are a few other items that can be configured. Most developers
-complete these laundry-list items, but they're not required for
-this tutorial. One is defining a custom string (or "salt") for use
-in security hashes.
-
-The security salt is used for generating hashes. If you used Composer this too is taken
-care of for you during the install. Else you'd need to change the default salt value
-by editing ``config/app.php``. It doesn't matter much what the new value is, as long as
-it's not easily guessed::
+A sequência personalizada (ou salt) é utilizada para gerar hashes de segurança.
+Se você utilizou o Composer, ele cuidou disso para você durante a instalação.
+Apesar disso, você precisa alterar a sequência personalizada padrão editando
+o arquivo **config/app.php**. Não importa qual será o novo valor, somente deverá ser
+algo difícil de descobrir::
 
     'Security' => [
-        'salt' => 'something long and containing lots of different values.',
+        'salt' => 'algum valor longo contendo uma mistura aleatória de valores.',
     ],
 
+Observação sobre o mod_rewrite
+==============================
 
-A Note on mod\_rewrite
-======================
+Ocasionalmente, novos usuários irão se atrapalhar com problemas de mod_rewrite.
+Por exemplo, se a página de boas vindas do CakePHP parecer estranha (sem
+imagens ou estilos CSS). Isto provavelmente significa que o mod_rewrite não está
+funcionando em seu servidor. Por favor, verifique a seção
+:doc:`/installation#url-rewriting` para obter ajuda e resolver qualquer
+problema relacionado.
 
-Occasionally new users will run into mod\_rewrite issues. For example
-if the CakePHP welcome page looks a little funny (no images or CSS styles).
-This probably means mod\_rewrite is not functioning on your system. Please refer
-to the :ref:`url-rewriting` section to help resolve any issues you are having.
-
-Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building
-your first CakePHP application.
+Agora continue o tutorial em :doc:`/tutorials-and-examples/blog/part-two` e
+inicie a construção do seu Blog com o CakePHP.
 
 .. meta::
-    :title lang=en: Blog Tutorial
-    :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads
+    :title lang=pt: Tutorial - Criando um Blog
+    :keywords lang=en: tutorial, guide, blog
