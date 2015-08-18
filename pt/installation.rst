@@ -3,9 +3,9 @@ Instalação
 
 O CakePHP é rápido e fácil de instalar. Os requisitos mínimos são um servidor
 web e uma cópia do CakePHP, só isso! Apesar deste manual focar principalmente na
-configuração do Apache (porquê ele é o mais simples de instalar e configurar),
-o CakePHP vai ser executado em uma série de servidores web como nginx,
-LightHTTPD, ou Microsoft IIS.
+configuração do Apache (porquê ele é o mais simples de instalar
+e configurar), o CakePHP vai ser executado em uma série de servidores web como
+nginx, LightHTTPD, ou Microsoft IIS.
 
 Requisitos
 ==========
@@ -18,22 +18,23 @@ Requisitos
 
 .. note::
 
-    In both XAMPP and WAMP, mcrypt and mbstring extensions are working by
-    default.
+    Tanto no XAMPP quanto no WAMP, as extensões mcrypt e mbstring são setadas
+    por padrão.
 
-    In XAMPP, intl extension is included but you have to uncomment
-    ``extension=php_intl.dll`` in ``php.ini`` and restart the server through
-    the XAMPP Control Panel.
+    Se você estiver usando o XAMPP, já tem a extensão intl inclusa, mas
+    é preciso descomentar a linha ``extension=php_intl.dll`` no arquivo
+    ``php.ini`` e então, reiniciar o servidor através do painel de controle do
+    XAMPP.
 
-    In WAMP, the intl extension is "activated" by default but not working.
-    To make it work you have to go to php folder (by default)
-    ``C:\wamp\bin\php\php{version}``, copy all the files that looks like
-    ``icu***.dll`` and paste them into the apache bin directory
-    ``C:\wamp\bin\apache\apache{version}\bin``. Then restart all services and
-    it should be OK.
+    Caso você esteja usando o WAMP, a extensão intl está "ativa" por padrão, mas
+    não está funcional.  Para fazê-la funcionar, você deve ir à pasta do php
+    (que por padrão é) ``C:\wamp\bin\php\php{version}``, copiar todos os
+    arquivos que se pareçam com ``icu***.dll`` e colá-los no diretório "bin" do
+    apache ``C:\wamp\bin\apache\apache{version}\bin``. Reiniciando todos os
+    serviços a extensão já deve ficar ok.
 
-Apesar de um mecanismo de banco de dados não ser exigido, nós imaginamos que a
-maioria das aplicações irá utilizar um. O CakePHP suporta uma variedade de
+Apesar de um mecanismo de banco de dados não ser exigido, nós imaginamos que
+a maioria das aplicações irá utilizar um. O CakePHP suporta uma variedade de
 mecanismos de armazenamento de banco de dados:
 
 -  MySQL (5.1.10 ou superior)
@@ -70,11 +71,11 @@ do LEIA-ME `aqui <https://github.com/composer/windows-setup>`_.
 Agora que você baixou e instalou o Composer, você pode receber uma nova
 aplicação CakePHP executando::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 Ou se o Composer estiver instalado globalmente::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Uma vez que o Composer terminar de baixar o esqueleto da aplicação e o núcleo
 da biblioteca CakePHP, você deve ter uma aplicação funcional
@@ -91,7 +92,7 @@ Se você quer se manter atualizado com as últimas mudanças no CakePHP, você p
 adicionar o seguinte ao ``composer.json`` de sua aplicação::
 
     "require": {
-        "cakephp/cakephp": "3.0.*-dev"
+        "cakephp/cakephp": "dev-master"
     }
 
 Onde ``<branch>`` é o nome do branch que você segue. Toda vez que você executar
@@ -318,10 +319,7 @@ para maiores informações.
    (.htaccess, webroot/.htaccess).
 
    Isso pode ser adicionado na mesma seção com a diretiva RewriteEngine,
-   por exemplo, seu arquivo webroot/.htaccess
-
-   This can be added to the same section with the RewriteEngine
-   directive, so for example, your webroot .htaccess ficaria como::
+   por exemplo, seu arquivo webroot/.htaccess ficaria como:
 
        <IfModule mod_rewrite.c>
            RewriteEngine On

@@ -61,7 +61,6 @@ with CakePHP::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Network\Exception\ForbiddenException;
     use Cake\Event\Event;
 
     class UsersController extends AppController
@@ -80,18 +79,15 @@ with CakePHP::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-
             $user = $this->Users->get($id);
             $this->set(compact('user'));
         }
 
         public function add()
         {
-            $user = $this->Users->newEntity($this->request->data);
+            $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
+                $user = $this->Users->patchEntity($user, $this->request->data);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'add']);
@@ -133,15 +129,15 @@ the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
 for requiring login for certain actions, handling user login and logout, and
 also authorizing logged-in users to the actions they are allowed to reach.
 
-To add this component to your application open your ``src/Controller/AppController.php``
+To add this component to your application open your **src/Controller/AppController.php**
 file and add the following lines::
 
     // src/Controller/AppController.php
 
     namespace App\Controller;
 
-    use Cake\Event\Event;
     use Cake\Controller\Controller;
+    use Cake\Event\Event;
 
     class AppController extends Controller
     {
@@ -174,8 +170,8 @@ There is not much to configure, as we used the conventions for the users table.
 We just set up the URLs that will be loaded after the login and logout actions is
 performed, in our case to ``/articles/`` and ``/`` respectively.
 
-What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
-require a login for all ``index`` and ``view`` actions, in every controller. We want
+What we did in the ``beforeFilter()`` function was to tell the AuthComponent to not
+require a login for all ``index()`` and ``view()`` actions, in every controller. We want
 our visitors to be able to read and list the entries without registering in the
 site.
 
@@ -213,20 +209,23 @@ the users add function and implement the login and logout action::
     }
 
 Password hashing is not done yet, we need an Entity class for our User in order
-to handle its own specific logic. Create the ``src/Model/Entity/User.php`` entity file
+to handle its own specific logic. Create the **src/Model/Entity/User.php** entity file
 and add the following::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
-    use Cake\ORM\Entity;
     use Cake\Auth\DefaultPasswordHasher;
+    use Cake\ORM\Entity;
 
     class User extends Entity
     {
 
-        // Make all fields mass assignable for now.
-        protected $_accessible = ['*' => true];
+        // Make all fields mass assignable except for primary key field "id".
+        protected $_accessible = [
+            '*' => true,
+            'id' => false
+        ];
 
         // ...
 
@@ -240,7 +239,7 @@ and add the following::
 
 Now every time the password property is assigned to the user it will be hashed
 using the ``DefaultPasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your ``src/Template/Users/login.ctp`` file
+file for the login function. Open up your **src/Template/Users/login.ctp** file
 and add the following lines:
 
 .. code-block:: php
@@ -265,11 +264,11 @@ any other URL that was not explicitly allowed such as ``/articles/add``, you wil
 that the application automatically redirects you to the login page.
 
 And that's it! It looks too simple to be true. Let's go back a bit to explain what
-happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
-login for the ``add`` action in addition to the ``index`` and ``view`` actions that were
-already allowed in the AppController's ``beforeFilter`` function.
+happened. The ``beforeFilter()`` function is telling the AuthComponent to not require a
+login for the ``add()`` action in addition to the ``index()`` and ``view()`` actions
+that were already allowed in the AppController's ``beforeFilter()`` function.
 
-The ``login`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
+The ``login()`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
 and it works without any further config because we are following conventions as
 mentioned earlier. That is, having a Users table with a username and a password
 column, and use a form posted to a controller with the user data. This function
@@ -297,8 +296,9 @@ logged in user as a reference for the created article::
 
     public function add()
     {
-        $article = $this->Articles->newEntity($this->request->data);
+        $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
+            $article = $this->Articles->patchEntity($article, $this->request->data);
             // Added this line
             $article->user_id = $this->Auth->user('id');
             // You could also do the following

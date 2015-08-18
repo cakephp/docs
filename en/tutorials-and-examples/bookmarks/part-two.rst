@@ -52,7 +52,7 @@ AppController::
 We've just told CakePHP that we want to load the ``Flash`` and ``Auth``
 components. In addition, we've customized the configuration of AuthComponent, as
 our users table uses ``email`` as the username. Now, if you go to any URL you'll
-be kicked to ``/users/login``, which will show an error page as we have
+be kicked to **/users/login**, which will show an error page as we have
 not written that code yet. So let's create the login action::
 
     // In src/Controller/UsersController.php
@@ -69,7 +69,7 @@ not written that code yet. So let's create the login action::
         }
     }
 
-And in ``src/Template/Users/login.ctp`` add the following::
+And in **src/Template/Users/login.ctp** add the following::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -107,8 +107,8 @@ Now you can visit ``/users/logout`` to log out and be sent to the login page.
 Enabling Registrations
 ======================
 
-If you aren't logged in and you try to visit ``/users/add`` you will be kicked
-to the login page. We should fix that as we'll if we want people to sign up for
+If you aren't logged in and you try to visit **/users/add** you will be kicked
+to the login page. We should fix that as we want to allow people to sign up for
 our application. In the ``UsersController`` add the following::
 
     public function beforeFilter(\Cake\Event\Event $event)
@@ -116,9 +116,9 @@ our application. In the ``UsersController`` add the following::
         $this->Auth->allow(['add']);
     }
 
-The above tells ``AuthComponent`` that the ``add`` action does *not* require
+The above tells ``AuthComponent`` that the ``add()`` action does *not* require
 authentication or authorization. You may want to take the time to clean up the
-``Users/add.ctp`` and remove the misleading links, or continue on to the next
+**Users/add.ctp** and remove the misleading links, or continue on to the next
 section. We won't be building out user editing, viewing or listing in this
 tutorial so they will not work as ``AuthComponent`` will deny you access to those
 controller actions.
@@ -143,7 +143,7 @@ Also, add the following to the configuration for ``Auth`` in your
 
     'authorize' => 'Controller',
 
-Your ``initialize`` method should now look like::
+Your ``initialize()`` method should now look like::
 
         public function initialize()
         {
@@ -158,10 +158,11 @@ Your ``initialize`` method should now look like::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
-                ]
+                ],
+                'unauthorizedRedirect' => $this->referer()
             ]);
 
             // Allow the display action so our pages controller
@@ -216,14 +217,16 @@ While view and delete are working, edit, add and index have a few problems:
 #. The list page shows bookmarks from other users.
 
 Let's tackle the add form first. To begin with remove the ``input('user_id')``
-from ``src/Template/Bookmarks/add.ctp``. With that removed, we'll also update
-the add method to look like::
+from **src/Template/Bookmarks/add.ctp**. With that removed, we'll also update
+the ``add()`` action from **src/Controller/BookmarksController.php** to look
+like::
 
     public function add()
     {
-        $bookmark = $this->Bookmarks->newEntity($this->request->data);
-        $bookmark->user_id = $this->Auth->user('id');
+        $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
@@ -232,11 +235,13 @@ the add method to look like::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
+        $this->set('_serialize', ['bookmark']);
     }
 
 By setting the entity property with the session data, we remove any possibility
 of the user modifying which user a bookmark is for. We'll do the same for the
-edit form and action. Your edit action should look like::
+edit form and action. Your ``edit()`` action from
+**src/Controller/BookmarksController.php** should look like::
 
     public function edit($id = null)
     {
@@ -254,14 +259,15 @@ edit form and action. Your edit action should look like::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
+        $this->set('_serialize', ['bookmark']);
     }
 
 List View
 ---------
 
 Now, we only need to show bookmarks for the currently logged in user. We can do
-that by updating the call to ``paginate()``. Make your index() action look
-like::
+that by updating the call to ``paginate()``. Make your ``index()`` action from
+**src/Controller/BookmarksController.php** look like::
 
     public function index()
     {
@@ -271,6 +277,7 @@ like::
             ]
         ];
         $this->set('bookmarks', $this->paginate($this->Bookmarks));
+        $this->set('_serialize', ['bookmarks']);
     }
 
 We should also update the ``tags()`` action and the related finder method, but
@@ -289,7 +296,7 @@ Adding a Computed Field
 
 Because we'll want a simple way to access the formatted tags for an entity, we
 can add a virtual/computed field to the entity. In
-``src/Model/Entity/Bookmark.php`` add the following::
+**src/Model/Entity/Bookmark.php** add the following::
 
     use Cake\Collection\Collection;
 
@@ -313,35 +320,37 @@ use this property in inputs later on. Remember to add the ``tag_string``
 property to the ``_accessible`` list in your entity, as we'll want to 'save' it
 later on.
 
-In ``src/Model/Entity/Bookmark.php`` add the ``tag_string`` to ``_accessible`` this way::
+In **src/Model/Entity/Bookmark.php** add the ``tag_string`` to ``$_accessible``
+this way::
 
-	protected $_accessible = [
-		'user_id' => true,
-		'title' => true,
-		'description' => true,
-		'url' => true,
-		'user' => true,
-		'tags' => true,
-		'tag_string' => true,
-	];
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
 
 
 Updating the Views
 ------------------
 
-With the entity updated we can add a new input for our tags. In the add and
-edit view, replace the existing ``tags._ids`` input with the following::
+With the entity updated we can add a new input for our tags. In
+**src/Template/Bookmarks/add.ctp** and **src/Template/Bookmarks/edit.ctp**,
+replace the existing ``tags._ids`` input with the following::
 
-    <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
+    echo $this->Form->input('tag_string', ['type' => 'text']);
 
 Persisting the Tag String
 -------------------------
 
 Now that we can view existing tags as a string, we'll want to save that data as
 well. Because we marked the ``tag_string`` as accessible, the ORM will copy that
-data from the request into our entity. We can use a ``beforeSave`` hook method
+data from the request into our entity. We can use a ``beforeSave()`` hook method
 to parse the tag string and find/build the related entities. Add the following
-to ``src/Model/Table/BookmarksTable.php``::
+to **src/Model/Table/BookmarksTable.php**::
 
 
     public function beforeSave($event, $entity, $options)
@@ -388,5 +397,6 @@ We've expanded our bookmarking application to handle authentication and basic
 authorization/access control scenarios. We've also added some nice UX
 improvements by leveraging the FormHelper and ORM capabilities.
 
-Thanks for taking the time to explore CakePHP. Next, you can learn more about
-the :doc:`/orm`, or you can peruse the :doc:`/topics`.
+Thanks for taking the time to explore CakePHP. Next, you can complete the
+:doc:`/tutorials-and-examples/blog/blog`, learn more about the
+:doc:`/orm`, or you can peruse the :doc:`/topics`.

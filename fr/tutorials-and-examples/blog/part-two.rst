@@ -12,8 +12,8 @@ tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 Les fichiers des classes de model de CakePHP sont séparés entre des objets
 ``Table`` et ``Entity``. Les objets ``Table`` fournissent un accès à la
 collection des entities stockées dans une table spécifique et vont dans
-``src/Model/Table``. Le fichier que nous allons créé sera sauvegardé dans
-``src/Model/Table/ArticlesTable.php``. Le fichier complété devrait ressembler
+**src/Model/Table**. Le fichier que nous allons créer sera sauvegardé dans
+**src/Model/Table/ArticlesTable.php**. Le fichier complété devrait ressembler
 à ceci::
 
     // src/Model/Table/ArticlesTable.php
@@ -38,8 +38,8 @@ de la base de données appelée ``articles``.
 .. note::
 
     CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
-    pas le fichier correspondant dans ``src/Model/Table``. Cela veut aussi dire que
-    si vous n'avez pas nommé correctement votre fichier (par ex.
+    pas le fichier correspondant dans **src/Model/Table**. Cela veut aussi dire
+    que si vous n'avez pas nommé correctement votre fichier (par ex.
     articlestable.php ou ArticleTable.php). CakePHP ne reconnaîtra pas votre
     configuration et utilisera les objets par défaut.
 
@@ -54,7 +54,7 @@ Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
-``ArticlesController.php`` à l'intérieur du dossier ``src/Controller``. Voici
+``ArticlesController.php`` à l'intérieur du dossier **src/Controller**. Voici
 à quoi devrait ressembler le controller de base ::
 
     // src/Controller/ArticlesController.php
@@ -130,10 +130,10 @@ la variable 'articles' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre l'objet query à la vue  pour être invoqué par une
 itération ``foreach``.
 
-Les fichiers de template de CakePHP sont stockés dans ``src/Template`` à
+Les fichiers de template de CakePHP sont stockés dans **src/Template** à
 l'intérieur d'un dossier dont le nom correspond à celui du controller (nous
-aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme les
-données de ces articles dans un joli tableau, le code de notre vue devrait
+aurons à créer un dossier appelé 'Articles' dans ce cas). Pour mettre en forme
+les données de ces articles dans un joli tableau, le code de notre vue devrait
 ressembler à quelque chose comme cela:
 
 .. code-block:: php
@@ -199,7 +199,7 @@ tarder dans le Controller Articles::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -211,9 +211,6 @@ tarder dans le Controller Articles::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Article invalide'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -229,16 +226,17 @@ Si un utilisateur demande ``/articles/view/3``, alors la valeur '3' est
 transmise à la variable ``$id``.
 
 Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
-utilisateur accède bien à l'enregsitrement. Si un utilisateur requête
+utilisateur accède bien à l'enregistrement. Si un utilisateur requête
 ``/articles/view``, nous lancerons un ``NotFoundException`` et laisserons
 le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. En utilisant
-la fonction ``get()`` dans la table Articles, nous faisons aussi une vérification
-similaire pour nous assurer que l'utilisateur a accès à l'enregistrement qui
-existe. Dans le cas où l'article requêté n'est pas présent dans la base de
-données, la fonction ``get()`` va lancer une ``NotFoundException``.
+la fonction ``get()`` dans la table Articles, nous faisons aussi une
+vérification similaire pour nous assurer que l'utilisateur a accès à
+l'enregistrement qui existe. Dans le cas où l'article requêté n'est pas présent
+dans la base de données, la fonction ``get()`` va lancer une
+``NotFoundException``.
 
 Maintenant, créons la vue pour notre nouvelle action 'view' et plaçons-la
-dans ``src/Template/Articles/view.ctp``.
+dans **src/Template/Articles/view.ctp**.
 
 .. code-block:: php
 
@@ -264,7 +262,7 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Network\Exception\NotFoundException;
+    use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
@@ -281,12 +279,7 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Article invalide'));
-            }
-
             $article = $this->Articles->get($id);
-
             $this->set(compact('article'));
         }
 
@@ -329,11 +322,13 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode magique ``__call`` du Component Flash pour
-définir un message dans une variable de session et qui sera affiché dans la page
-juste après la redirection. Dans le layout, nous avons
-``<?= $this->Flash->render() ?>`` qui permet
-d'afficher et d'effacer la variable correspondante. La méthode
+Nous utilisons les méthodes ``success()`` et ``error()`` pour définir un
+message dans une variable de session. Ces méthodes sont fournies via la
+`méthode magique _call()
+<http://php.net/manual/fr/language.oop5.overloading.php#object.call>`_
+de PHP. Les messages Flash seront affichés dans la page juste après la
+redirection. Dans le layout, nous avons ``<?= $this->Flash->render() ?>`` qui
+permet d'afficher et d'effacer la variable correspondante. La méthode
 :php:meth:`Cake\\Controller\\Controller::redirect` du controller permet de
 rediriger vers une autre URL. Le paramètre ``['action' => 'index']`` sera
 traduit vers l'URL /articles, c'est à dire l'action "index" du controller
@@ -350,7 +345,7 @@ Valider les Données
 ===================
 
 Cake place la barre très haute pour briser la monotonie de la validation des
-champs de formulaires. Tout le monde déteste le dévelopement de formulaires
+champs de formulaires. Tout le monde déteste le développement de formulaires
 interminables et leurs routines de validations. Cake rend tout cela plus facile
 et plus rapide.
 
@@ -399,7 +394,7 @@ champs cachés si la protection de falsification de formulaire et/ou CRSF est
 activée.
 
 A présent, revenons en arrière et modifions notre vue
-``src/Template/Articles/index.ctp`` pour ajouter un lien "Ajouter un article".
+**src/Template/Articles/index.ctp** pour ajouter un lien "Ajouter un article".
 Ajoutez la ligne suivante avant ``<table>`` ::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
@@ -429,7 +424,7 @@ ajustements::
         }
     }
 
-Le méthode ``validationDefault`` indique à CakePHP comment valider vos données
+Le méthode ``validationDefault()`` indique à CakePHP comment valider vos données
 lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les
 deux champs "body" et "title" ne doivent pas être vides. Le moteur de
 validation de CakePHP est puissant, il dispose d'un certain nombre de
@@ -457,10 +452,6 @@ devrait ressembler::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Article invalide'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
@@ -569,8 +560,8 @@ confirmation après l'avoir redirigé sur ``/articles``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de
 CakePHP et un joli message d'erreur est affiché. Il y a plusieurs
-:doc:`Exceptions </development/errors>` intégrées qui peuvent être utilisées pour
-indiquer les différentes erreurs HTTP que votre application pourrait
+:doc:`Exceptions </development/errors>` intégrées qui peuvent être utilisées
+pour indiquer les différentes erreurs HTTP que votre application pourrait
 rencontrer.
 
 Etant donné que nous exécutons juste un peu de logique et de redirection,
@@ -645,7 +636,7 @@ de votre site (par ex: http://www.exemple.com) vers le controller Pages
 cela, nous voudrions la remplacer avec notre controller Articles
 (ArticlesController).
 
-Le routage de CakePHP se trouve dans ``config/routes.php``. Vous devrez
+Le routage de CakePHP se trouve dans **config/routes.php**. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
 ressemble à cela:
 
@@ -701,7 +692,7 @@ Prochaines lectures suggérées
 Voici les différents chapitres que les gens veulent souvent lire après:
 
 1. :ref:`view-layouts`: Personnaliser les Layouts de votre application.
-2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues.
+2. :ref:`view-elements`: Inclure et réutiliser les portions de vues.
 3. :doc:`/bake/usage` Générer un code CRUD basique.
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur l'enregistrement et la connexion d'utilisateurs.
 

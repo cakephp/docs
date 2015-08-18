@@ -10,16 +10,16 @@ Le but de cette présentation est d'introduire les concepts généraux de CakePH
 et de vous donner un aperçu rapide de la façon dont ces concepts sont mis en
 œuvre dans CakePHP. Si vous êtes impatient de démarrer un projet, vous pouvez
 :doc:`commencer avec le tutoriel </tutorials-and-examples/bookmarks/intro>`, ou
-:doc:`plonger dans la documentation </topics>`.
+:doc:`vous plonger dans la documentation </topics>`.
 
 Conventions plutôt que Configuration
 ====================================
 
 CakePHP fournit une structure organisationnelle de base qui comprend les noms
 de classes, les noms de fichiers, les noms de table de base de données, et
-d'autres conventions. Même si les conventions prennent du temps à apprendre, en
-suivant les conventions offertes par CakePHP, vous pouvez éviter les
-configurations inutiles et construire une structure d'application uniforme
+d'autres conventions. Même si les conventions peuvent paraître longues à
+apprendre, en suivant les conventions offertes par CakePHP, vous pouvez éviter
+les configurations inutiles et construire une structure d'application uniforme
 ce qui facilite le travail quand vous travaillez sur de multiples projets. Le
 :doc:`chapitre sur les conventions </intro/conventions>` couvre les différentes
 conventions utilisées par CakePHP.
@@ -37,7 +37,7 @@ Dans le cas d'un réseau social, la couche Model s'occuperait des tâches telles
 que sauvegarder les données utilisateur, sauvegarder les associations d'amis,
 enregistrer et récupérer les photos des utilisateurs, trouver des suggestions
 de nouveaux amis, etc ...
-Tandis que les objets Models seront "Friend", "User", "Comment", "Photo".
+Tandis que les objets Models seraient "Friend", "User", "Comment", "Photo".
 Si nous voulions charger des données depuis notre table ``users``, nous
 pourrions faire::
 
@@ -85,7 +85,7 @@ l'utilisent::
 
 La couche View fournit un certain nombre d'extensions tels que les
 :ref:`Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
-permettre de ré-utiliser facilement votre logique de présentation.
+permettre de réutiliser facilement votre logique de présentation.
 
 La couche View n'est pas seulement limitée au HTML ou à la représentation en
 texte de données. Elle peut aussi être utilisée pour offrir une grande variété
@@ -142,13 +142,21 @@ Le cycle d'une requête CakePHP typique débute avec une requête utilisateur
 qui demande une page ou une ressource de votre application. À haut niveau
 chaque requête passe par les étapes suivantes:
 
-#. La requête est d'abord aiguillée par les routes.
-#. Après que la requête a été routée, le dispatcher va sélectionner le bon
-   objet controller pour la traiter.
-#. L'action du controller est appellée et le controller interagit avec les
+#. Les règles de réécriture de votre serveur web dirigent la requête vers
+   ``webroot/index.php``.
+#. Les fichiers autoloader et bootstrap de votre application sont exécutés.
+#. Tout :doc:`filtre du dispatcher </development/dispatch-filters>`
+   configuré peut manipuler la requête, et optionnellement générer une réponse.
+#. Le dispatcher sélectionne le controller et l'action appropriée en se basant
+   sur les règle re routage.
+#. L'action du controller est appelée et le controller interagit avec les
    Models et Components nécessaires.
-#. Le controller delègue la création de la response à la View pour générer
+#. Le controller délègue la création de la response à la View pour générer
    le résultat obtenu à partir des données de model.
+#. Le View utilise les Helpers et les Cells pour générer l'entête et le corps
+   de la réponse.
+#. La réponse est renvoyée au client.
+
 
 Que le Début
 ============
@@ -160,7 +168,7 @@ fonctionnalités de CakePHP sont:
   Memcache, Redis et d'autres.
 * Un :doc:`outil de génération de code
   </bake/usage>` puissant pour partir sur les chapeaux de roue.
-* Un :doc:`framework de tests intégéré</development/testing>` pour vous assurer
+* Un :doc:`framework de tests intégré</development/testing>` pour vous assurer
   que votre code fonctionne correctement.
 
 Les prochaines étapes évidentes sont de :doc:`télécharger CakePHP </installation>`

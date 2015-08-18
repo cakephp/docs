@@ -26,8 +26,18 @@ customize the rules used::
     // Apples
     echo Inflector::pluralize('Apple');
 
+.. note::
+
+    ``pluralize()`` may not always correctly convert a noun that is already in its plural form.
+
+.. code-block:: php
+
     // Person
     echo Inflector::singularize('People');
+    
+.. note::
+
+    ``singularize()`` may not always correctly convert a noun that is already in its singular form.
 
 Creating CamelCase and under_scored Forms
 =========================================
@@ -41,7 +51,7 @@ These methods are useful when creating class names, or property names::
     Inflector::camelize('Apple_pie')
 
     // apple_pie
-    Inflector::undescore('ApplePie');
+    Inflector::underscore('ApplePie');
 
 It should be noted that underscore will only convert camelCase
 formatted words. Words that contains spaces will be lower-cased,
@@ -121,7 +131,7 @@ Loading Custom Inflections
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
 Define new inflection and transliteration rules for Inflector to use.  Often,
-this method is used in your ``config/bootstrap.php``::
+this method is used in your **config/bootstrap.php**::
 
     Inflector::rules('singular', ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta']);
     Inflector::rules('uninflected', ['singulars']);

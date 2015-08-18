@@ -1,8 +1,8 @@
-Plugin Assets Shell
-###################
+Upgrade Tool
+############
 
 .. note::
-    The documentation is not currently supported in Chinese language for this
+    The documentation is not currently supported in Japanese language for this
     page.
 
     Please feel free to send us a pull request on
@@ -11,7 +11,3 @@ Plugin Assets Shell
 
     You can referer to the english version in the select top menu to have
     information about this page's topic.
-
-.. meta::
-    :title lang=zh: Plugin Assets Shell
-    :keywords lang=zh: plugin,assets

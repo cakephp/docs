@@ -1,15 +1,14 @@
 Vues JSON et XML
 ################
 
-Les views ``XmlView`` et
-``JsonView`` vous laissent créer facilement des réponses XML et JSON,
-et sont intégrées à
+Les views ``JsonView`` et ``XmlView`` vous permettent de créer facilement des
+réponses JSON et XML, et sont intégrées à
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 En activant ``RequestHandlerComponent`` dans votre application, et en activant
-le support pour les extensions ``xml`` et/ou ``json``, vous pouvez
-automatiquement vous appuyer sur les nouvelles classes de vue. ``XmlView`` et
-``JsonView`` feront référence aux vues de données pour le reste de cette page.
+le support pour les extensions ``json`` et/ou ``xml``, vous pouvez
+automatiquement vous appuyer sur les nouvelles classes de vue. ``JsonView`` et
+``XmlView`` feront référence aux vues de données pour le reste de cette page.
 
 Il y a deux façons de générer des vues de données. La première est en utilisant
 la clé ``_serialize``, et la seconde en créant des fichiers de template normaux.
@@ -17,37 +16,48 @@ la clé ``_serialize``, et la seconde en créant des fichiers de template normau
 Activation des Vues de Données dans votre Application
 =====================================================
 
-Avant que vous puissiez utiliser les classes de vue de données, vous aurez
-besoin de faire un peu de configuration:
+Avant que vous ne puissiez utiliser les classes de vue de données, vous devrez
+charger :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` dans
+votre controller::
 
-#. Activez les extensions json et/ou xml avec :ref:`file-extensions`.
-   Cela permettra au Router de gérer plusieurs extensions.
-#. Ajoutez le :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
-   à la liste de components de votre controller. Cela activera automatiquement
-   le changement de la classe de vue pour les types de contenu. Vous pouvez
-   également paramétrer les components avec ``viewClassMap``, pour mapper des
-   types vers vos classes personnalisées et/ou mapper d'autres types.
+    public function initialize()
+    {
+        ...
+        $this->loadComponent('RequestHandler');
+    }
 
-Après avoir activé :ref:`le routing des extensions de fichier <file-extensions>`,
-CakePHP changera automatiquement les classes de vue quand une requête
-sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
-``application/json``.
+Ceci peut être fait dans votre `AppController` et va activer automatiquement
+la classe de vue en s'adaptant selon les types de contenu. Vous pouvez aussi
+configurer le component avec le paramètre ``viewClassMap``, pour faire
+correspondre les types à vos classes personnalisées et/ou les faire correspondre
+à d'autres types de données.
+
+Vous pouvez en option activer les extensions json et ou xml avec les
+:ref:`file-extensions`. Ceci va vous permettre d'accéder à ``JSON``, ``XML`` ou
+tout autre format spécial de vue en utilisant une URL personnalisée finissant
+avec le nom du type de réponse en tant qu'extension de fichier comme par
+exemple ``http://example.com/articles.json``.
+
+Par défaut, quand vous n'activez pas les :ref:`file-extensions`, l'en-tête
+``Accept`` de la requête est utilisé pour sélectionner le type de format qui
+doit être rendu à l'utilisateur. Un exemple de format ``Accept`` utilisé pour
+rendre les réponses ``JSON`` est ``application/json``.
 
 Utilisation des Vues de Données avec la Clé Serialize
 =====================================================
 
 La clé ``_serialize`` est une variable de vue spéciale qui indique quelle(s)
 autre(s) variable(s) de vue devrai(en)t être sérialisée(s) quand on utilise la
-vue de données. Cela vous permet de sauter la définition des fichiers de template
-pour vos actions de controller si vous n'avez pas besoin de faire un formatage
-avant que vos données ne soient converties en json/xml.
+vue de données. Cela vous permet de sauter la définition des fichiers de
+template pour vos actions de controller si vous n'avez pas besoin de faire un
+formatage avant que vos données ne soient converties en json/xml.
 
 Si vous avez besoin de faire tout type de formatage ou de manipulation de vos
 variables de vue avant la génération de la réponse, vous devrez utiliser les
 fichiers de template. La valeur de ``_serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
-    class PostsController extends AppController
+    class ArticlesController extends AppController
     {
         public function initialize()
         {
@@ -57,7 +67,10 @@ caractère, soit un tableau de variables de vue à sérialiser::
 
         public function index()
         {
+            // Défini les variables de vues qui doivent être sérialisées.
             $this->set('articles', $this->paginate());
+
+            // Spécifie quelles variables de vues JsonView doit sérialiser.
             $this->set('_serialize', ['articles']);
         }
     }
@@ -76,7 +89,11 @@ combiner::
         public function index()
         {
             // Some code that created $articles and $comments
+
+            // Défini les variables de vues qui doivent être sérialisées.
             $this->set(compact('articles', 'comments'));
+
+            // Spécifie quelles variables de vues JsonView doit sérialiser.
             $this->set('_serialize', ['articles', 'comments']);
         }
     }
@@ -88,17 +105,23 @@ automatiquement un élément de top-niveau ``<response>`` en utilisant
 élément unique de top-niveau. Sans un élément de top-niveau, le Xml ne pourra
 être généré.
 
+.. versionadded:: 3.1.0
+
+    Vous pouvez maintenant définir ``_serialized`` à ``true`` pour
+    pour sérialiser toutes les variables de vue au lieu de les spécifier
+    explicitement.
+
 Utilisation d'une Vue de Données avec les Fichiers de Template
 ==============================================================
 
 Vous devrez utiliser les fichiers de template si vous avez besoin de faire des
 manipulations du contenu de votre vue avant de créer la sortie finale. Par
-exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
+exemple, si vous avez des articles, qui ont un champ contenant du HTML généré,
 vous aurez probablement envie d'omettre ceci à partir d'une réponse JSON.
 C'est une situation où un fichier de vue est utile::
 
     // Code du controller
-    class PostsController extends AppController
+    class ArticlesController extends AppController
     {
         public function index()
         {
@@ -107,11 +130,11 @@ C'est une situation où un fichier de vue est utile::
         }
     }
 
-    // Code de la vue - src/Template/Posts/json/index.ctp
-    foreach ($posts as &$post) {
-        unset($post->generated_html);
+    // Code de la vue - src/Template/Articles/json/index.ctp
+    foreach ($articles as &$article) {
+        unset($article->generated_html);
     }
-    echo json_encode(compact('posts'));
+    echo json_encode(compact('articles'));
 
 Vous pouvez faire des manipulations encore beaucoup plus complexes, comme
 utiliser les helpers pour formater.
@@ -131,13 +154,17 @@ variables de vue sérialisées avec un nœud ``<response>``. Vous pouvez
 définir un nom personnalisé pour ce nœud en utilisant la variable de vue
 ``_rootNode``.
 
+La classe XmlView intègre la variable ``_xmlOptions`` qui vous permet de
+personnaliser les options utilisées pour générer le XML, par exemple ``tags``
+au lieu d'``attributes``.
+
 Créer des Views JSON
 ====================
 
 .. php:class:: JsonView
 
 La classe JsonView intègre la variable ``_jsonOptions`` qui vous permet de
-personnaliser le bit-mask utilisé pour générer le JSON. Regardez la
+personnaliser le masque utilisé pour générer le JSON. Regardez la
 documentation `json_encode <http://php.net/json_encode>`_ sur les valeurs
 valides de cette option.
 
@@ -147,7 +174,7 @@ Réponse JSONP
 Quand vous utilisez ``JsonView``, vous pouvez utiliser la variable de vue
 spéciale ``_jsonp`` pour retourner une réponse JSONP. La définir à ``true``
 fait que la classe de vue vérifie si le paramètre de chaine de la requête
-nommée "callback" est défini et si c'est la cas, permet d'envelopper la réponse
+nommée "callback" est défini et si c'est le cas, permet d'envelopper la réponse
 json dans le nom de la fonction fournie. Si vous voulez utiliser un nom
 personnalisé de paramètre de requête à la place de "callback", définissez
 ``_jsonp`` avec le nom requis à la place de ``true``.

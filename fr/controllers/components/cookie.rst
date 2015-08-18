@@ -5,9 +5,9 @@ CookieComponent
 
 .. php:class:: CookieComponent(ComponentRegistry $collection, array $config = [])
 
-Le component Cookie est un conteneur de la méthode native de PHP ``setcookie``.
-Il simplifie la manipulation des cookies et chiffre automatiquement les données
-du cookie.
+Le component Cookie est un conteneur de la méthode native de PHP
+``setcookie()``. Il simplifie la manipulation des cookies et chiffre
+automatiquement les données du cookie.
 
 Paramétrage des Cookies
 =======================
@@ -93,7 +93,7 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 .. php:method:: read(mixed $key = null)
 
     Cette méthode est utilisée pour lire la valeur d'une variable de cookie
-    avec le nom spécifié dans $key. ::
+    avec le nom spécifié dans $key::
 
         // Sortie "Larry"
         echo $this->Cookie->read('name');
@@ -115,15 +115,14 @@ Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
 .. php:method:: delete(mixed $key)
 
-    Efface une variable de cookie dont le nom est défini dans $key. Fonctionne avec la
-    notation par point::
+    Efface une variable de cookie dont le nom est défini dans $key. Fonctionne
+    avec la notation par point::
 
         // Efface une variable
         $this->Cookie->delete('bar');
 
         // Efface la variable bar du cookie, mais rien d'autre sous foo.
         $this->Cookie->delete('foo.bar');
-
 
 .. meta::
     :title lang=fr: Cookie

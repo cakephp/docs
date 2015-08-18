@@ -31,8 +31,10 @@ use the ``Time`` class::
 
 
 Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
-to power its Time utility. Anything you can do with ``Carbon`` and
+to power its ``Time`` utility. Anything you can do with ``Carbon`` and
 ``DateTime``, you can do with ``Time``.
+
+For details on Carbon please see `their documentation <http://carbon.nesbot.com/docs/>`_.
 
 .. start-time
 
@@ -61,11 +63,11 @@ There are a few ways to create ``Time`` instances::
 
     $time = new Time('2 hours ago');
 
-The ``Time`` class constructor can take any paramenter the internal ``DateTime``
+The ``Time`` class constructor can take any parameter that the internal ``DateTime``
 PHP class can. When passing a number or numeric string, it will be interpreted
 as a UNIX timestamp.
 
-In test cases, you can easily mock out ``now()`` using ``setTestNow()``::
+In test cases you can easily mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
     $now = new Time('2014-04-12 12:22:30');
@@ -126,7 +128,7 @@ dates. CakePHP makes this a snap::
     // Prints a localized datetime stamp.
     echo $now;
 
-    // Outputs '4/20/14, 10:10 PM' for the en-US locale
+    // Outputs '10/31/14, 12:00 AM' for the en-US locale
     $now->i18nFormat();
 
     // Use the full date and time format
@@ -135,8 +137,35 @@ dates. CakePHP makes this a snap::
     // Use full date but short time format
     $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
-    // Outputs '2014-04-20 22:10'
+    // Outputs '2014-10-31 00:00:00'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
+
+It is possible to specify the desired format for the string to be displayed.
+You can either pass `IntlDateFormatter constants
+<http://www.php.net/manual/en/class.intldateformatter.php>`_ as the first
+argument of this function, or pass a full ICU date formatting string as
+specified in the following resource:
+http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+
+You can also format dates with non-gregorian calendars::
+
+    // Outputs 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
+    $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
+
+The following calendar types are supported:
+
+* japanese
+* buddhist
+* chinese
+* persian
+* indian
+* islamic
+* hebrew
+* coptic
+* ethiopic
+
+.. versionadded:: 3.1
+    Non-gregorian calendar support was added in 3.1
 
 .. php:method:: nice()
 
@@ -144,7 +173,7 @@ Print out a predefined 'nice' format::
 
     $now = Time::parse('2014-10-31');
 
-    // Outputs 'Oct 31, 2014 12:32pm' in en-US
+    // Outputs 'Oct 31, 2014 12:00 AM' in en-US
     echo $now->nice();
 
 You can alter the timezone in which the date is displayed without altering the
@@ -153,7 +182,7 @@ want to display them in a user's own timezone::
 
     $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 
-Leaving the first parameter as null will use the default formatting string::
+Leaving the first parameter as ``null`` will use the default formatting string::
 
     $now->i18nFormat(null, 'Europe/Paris');
 
@@ -167,13 +196,13 @@ Setting the Default Locale and Format String
 --------------------------------------------
 
 The default locale in which dates are displayed when using ``nice``
-``18nFormat`` is taken from the directive
+``i18nFormat`` is taken from the directive
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 You can, however, modify this default at runtime::
 
     Time::$defaultLocale = 'es-ES';
 
-From now on, dates will be displayed in the Spanish preferred format, unless
+From now on, dates will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
 
 Likewise, it is possible to alter the default formatting string to be used for
@@ -197,7 +226,7 @@ Often it is useful to print times relative to the present::
 
     $now = new Time('Aug 22, 2011');
     echo $now->timeAgoInWords(
-        ['format' => 'F jS, Y', 'end' => '+1 year']
+        ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 

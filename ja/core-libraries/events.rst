@@ -172,7 +172,7 @@ CakePHP 2.1 以前の何人かの開発者は、この問題を解決するた�
 この実装の詳細をいかにして攻略するかは、後ほど検討します。
 
 ..
-  The ``getEventManager`` method returns an instance of :php:class:`CakeEventManager`,
+  The ``getEventManager()`` method returns an instance of :php:class:`CakeEventManager`,
   and to dispatch events you use :php:meth:`CakeEventManager::dispatch()` which
   receives an instance of the :php:class:`CakeEvent` class. Let's dissect now the
   process of dispatching an event::

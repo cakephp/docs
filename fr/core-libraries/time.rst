@@ -23,15 +23,18 @@ d'une ``View``, utilisez la classe ``Time``::
         {
             $time = new Time($this->Auth->user('date_of_birth'));
             if ($time->isToday()) {
-                // greet user with a happy birthday message
-                $this->Flash->success(__('Happy birthday to you...'));
+                // accueillir l'utilisateur avec un message de bon anniversaire
+                $this->Flash->success(__('Bon anniversaire à toi...'));
             }
         }
     }
 
 En-dessous, CakePHP utilise `Carbon <https://github.com/briannesbitt/Carbon>`_
-pour construire l'utilitaire Time. Tout ce que vous pouvez faire avec
+pour construire l'utilitaire ``Time``. Tout ce que vous pouvez faire avec
 ``Carbon`` et ``DateTime``, vous pouvez le faire avec ``Time``.
+
+Pour plus d'information sur Carbon, rendez-vous sur
+`leur documentation <http://carbon.nesbot.com/docs/>`_.
 
 .. start-time
 
@@ -42,14 +45,14 @@ Il y a plusieurs façons de créer des instances ``Time``::
 
     use Cake\I18n\Time;
 
-    // Créé à partir d'une chaîne datetime.
+    // Crée à partir d'une chaîne datetime.
     $time = Time::createFromFormat(
         'Y-m-d H:i:s',
         $datetime,
         'America/New_York'
     );
 
-    // Créé à partir d'un timestamp
+    // Crée à partir d'un timestamp
     $time = Time::createFromTimestamp($ts);
 
     // Récupère le temps actuel.
@@ -131,7 +134,7 @@ dates formatées. CakePHP facilite cela::
     // Affiche un stamp datetime localisé.
     echo $now;
 
-    // Affiche '4/20/14, 10:10 PM' pour la locale en-US
+    // Affiche '10/31/14, 12:00 AM' pour la locale en-US
     $now->i18nFormat();
 
     // Utilise la date complète et le format time
@@ -140,8 +143,34 @@ dates formatées. CakePHP facilite cela::
     // Utilise la date complète mais un format court de temps
     $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
-    // affiche '2014-04-20 22:10'
+    // affiche '2014-10-31 00:00:00'
     $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
+
+Il est possible de spécifier le format d'affichage désiré. Vous pouvez soit
+passer une `constante IntlDateFormatter
+<http://www.php.net/manual/en/class.intldateformatter.php>`_ ou une chaine
+complète de formatage tel que spécifié dans cette ressource:
+http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+
+Vous pouvez aussi formater les dates avec des calendriers non-grégoriens::
+
+    // Affiche 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
+    $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
+
+Les types de calendrier suivants sont supportés:
+
+* japanese
+* buddhist
+* chinese
+* persian
+* indian
+* islamic
+* hebrew
+* coptic
+* ethiopic
+
+.. versionadded:: 3.1
+    Le support des calendriers non-grégoriens a été ajouté dans 3.1
 
 .. php:method:: nice()
 
@@ -159,7 +188,7 @@ dans un timezone, mais que vous voulez les afficher dans un timezone propre
 
     $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 
-Laisser le premier paramètre à null va utiliser la chaine de formatage par
+Laisser le premier paramètre à ``null`` va utiliser la chaine de formatage par
 défaut::
 
     $now->i18nFormat(null, 'Europe/Paris');
@@ -175,7 +204,7 @@ Définir la Locale par défaut et la Chaîne Format
 ------------------------------------------------
 
 La locale par défaut avec laquelle les dates sont affichées quand vous utilisez
-``nice`` ``18nFormat`` est prise à partir de la directive
+``nice`` ``i18nFormat`` est prise à partir de la directive
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 Vous pouvez cependant modifier ceci par défaut à la volée::
 
@@ -206,7 +235,7 @@ Souvent, il est utile d'afficher les temps liés au présent::
 
     $now = new Time('Aug 22, 2011');
     echo $now->timeAgoInWords(
-        ['format' => 'F jS, Y', 'end' => '+1 year']
+        ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
     // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 
@@ -251,7 +280,8 @@ Comparer Avec le Present
 .. php:method:: isThisMonth()
 .. php:method:: isThisYear()
 
-Vous pouvez comparer une instance ``Time`` avec le présent de plusieurs façons::
+Vous pouvez comparer une instance ``Time`` avec le temps présent de plusieurs
+façons::
 
     $time = new Time('2014-06-15');
 
@@ -260,15 +290,15 @@ Vous pouvez comparer une instance ``Time`` avec le présent de plusieurs façons
     echo $time->isThisMonth();
     echo $time->isThisYear();
 
-Chacune des méthodes ci-dessus va retourner ``true``/``false`` selon si oui ou non
-l'instance ``Time`` correspond au présent.
+Chacune des méthodes ci-dessus va retourner ``true``/``false`` selon si oui ou
+non l'instance ``Time`` correspond au temps présent.
 
 Comparer Avec les Intervals
 ===========================
 
 .. php:method:: isWithinNext($interval)
 
-Vous pouvez regarder si une instance ``Time`` tombe dans un interval en
+Vous pouvez regarder si une instance ``Time`` tombe dans un intervalle en
 utilisant ``wasWithinLast()`` et ``isWithinNext()``::
 
     $time = new Time('2014-06-15');
@@ -281,7 +311,8 @@ utilisant ``wasWithinLast()`` et ``isWithinNext()``::
 
 .. php:method:: wasWithinPast($interval)
 
-Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé::
+Vous pouvez aussi comparer une instance ``Time`` dans un intervalle dans le
+passé::
 
     // Dans les 2 derniers jours.
     echo $time->wasWithinPast(2);
@@ -291,8 +322,8 @@ Vous pouvez aussi comparer une instance ``Time`` dans un interval dans le passé
 
 .. end-time
 
-Accepter des Données de Request Localisées
-==========================================
+Accepter des Données Requêtées Localisées
+=========================================
 
 Quand vous créez des inputs de texte qui manipulent des dates, vous voudrez
 probablement accepter et parser des chaînes datetime localisées. Consultez

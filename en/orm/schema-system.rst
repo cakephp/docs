@@ -115,10 +115,10 @@ platform::
 
     $t = new Table('posts');
     $t->addColumn('id', 'integer')
-        ->addConstraint('primary', [
-            'type' => 'primary',
-            'columns' => ['id']
-        ]);
+    ->addConstraint('primary', [
+        'type' => 'primary',
+        'columns' => ['id']
+    ]);
 
 In the above example the ``id`` column would generate the following SQL in
 MySQL::

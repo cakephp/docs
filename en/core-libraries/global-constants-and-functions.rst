@@ -36,19 +36,6 @@ such as debugging and translating content.
         :doc:`/core-libraries/internationalization-and-localization`
         section for more information.
 
-.. php:function:: __c(string $msg, integer $category, mixed $args = null)
-
-    Note that the category must be specified with an I18n class constant, instead of
-    only the constant name. The values are:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
     Allows you to override the current domain for a single message lookup.
@@ -56,51 +43,51 @@ such as debugging and translating content.
     Useful when internationalizing a plugin:
     ``echo __d('PluginName', 'This is my plugin');``
 
-.. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
-
-    Allows you to override the current domain for a single message lookup. It
-    also allows you to specify a category.
-
-    Note that the category must be specified with an I18n class constant, instead of
-    only the constant name. The values are:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
-.. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
-
-    Allows you to override the current domain for a single plural message
-    lookup. It also allows you to specify a category. Returns correct plural
-    form of message identified by $singular and $plural for count $count from
-    domain $domain.
-
-    Note that the category must be specified with an I18n class constant, instead of
-    only the constant name. The values are:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
     Allows you to override the current domain for a single plural message
-    lookup. Returns correct plural form of message identified by $singular and
-    $plural for count $count from domain $domain.
+    lookup. Returns correct plural form of message identified by ``$singular``
+    and ``$plural`` for count ``$count`` from domain ``$domain``.
+
+.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
+
+    Allows you to override the current domain for a single message lookup. It
+    also allows you to specify a context.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+
+.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Allows you to override the current domain for a single plural message
+    lookup. It also allows you to specify a context. Returns correct plural
+    form of message identified by ``$singular`` and ``$plural`` for count
+    ``$count`` from domain ``$domain``. Some languages have more than one form
+    for plural messages dependent on the count.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
-    Returns correct plural form of message identified by $singular and $plural
-    for count $count. Some languages have more than one form for plural
+    Returns correct plural form of message identified by ``$singular`` and ``$plural``
+    for count ``$count``. Some languages have more than one form for plural
     messages dependent on the count.
+
+.. php:function:: __x(string $context, string $msg, mixed $args = null)
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
+
+.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Returns correct plural form of message identified by ``$singular`` and
+    ``$plural`` for count ``$count`` from domain ``$domain``. It also allows you
+    to specify a context. Some languages have more than one form for plural
+    messages dependent on the count.
+
+    The context is a unique identifier for the translations string that makes it
+    unique within the same domain.
 
 .. php:function:: collection(mixed $items)
 
@@ -110,7 +97,7 @@ such as debugging and translating content.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    If the core ``$debug`` variable is ``true``, $var is printed out.
+    If the core ``$debug`` variable is ``true``, ``$var`` is printed out.
     If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
     browser-friendly.
     If ``$showFrom`` is not set to ``false``, the debug output will start with the line from
@@ -122,7 +109,7 @@ such as debugging and translating content.
     Gets an environment variable from available sources. Used as a
     backup if ``$_SERVER`` or ``$_ENV`` are disabled.
 
-    This function also emulates PHP\_SELF and DOCUMENT\_ROOT on
+    This function also emulates ``PHP_SELF`` and ``DOCUMENT_ROOT`` on
     unsupporting servers. In fact, it's a good idea to always use
     ``env()`` instead of ``$_SERVER`` or ``getenv()`` (especially if
     you plan to distribute the code), since it's a full emulation
@@ -134,15 +121,28 @@ such as debugging and translating content.
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and class name. If $name
-    does not have a dot, then index 0 will be null.
+    Splits a dot syntax plugin name into its plugin and class name. If ``$name``
+    does not have a dot, then index 0 will be ``null``.
 
     Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
+ 
+.. php:function:: namespaceSplit(string $class)   
 
+    Split the namespace from the classname.
+    
+    Commonly used like ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
+    
 .. php:function:: pr(mixed $var)
 
     Convenience wrapper for ``print_r()``, with the addition of
-    wrapping <pre> tags around the output.
+    wrapping ``<pre>`` tags around the output.
+    
+.. php:function:: pj(mixed $var)
+
+    JSON pretty print convenience function, with the addition of
+    wrapping ``<pre>`` tags around the output.
+    
+    It is meant for debugging the JSON representation of objects and arrays.
 
 Core Definition Constants
 =========================
@@ -176,7 +176,8 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: DS
 
-    Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+    Short for PHP's ``DIRECTORY_SEPARATOR``, which is ``/`` on Linux and ``\\``
+    on Windows.
 
 .. php:const:: LOGS
 

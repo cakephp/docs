@@ -178,7 +178,7 @@ PHPUnitをインストールし、テストケースをいくつか書いたら�
 ブラウザからテストを実行する
 ----------------------------
 
-CakePHPはテストを実行する���めのwebベースのインタフェースを提供しており、ブラウザを通して
+CakePHPはテストを実行するためのwebベースのインタフェースを提供しており、ブラウザを通して
 テストを実行することができます。Webランナーには ``http://localhost/your_app/test.php`` から
 アクセスすることができます。test.phpの実際の場所は、あなたのセットアップのしかたによって変わるものの、
 ``index.php`` と同じ階層にあります。
@@ -302,12 +302,12 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
               'body' => 'text',
               'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
               'created' => 'datetime',
-              'updated' => 'datetime'
+              'modified' => 'datetime'
           );
           public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31')
           );
      }
 
@@ -326,7 +326,7 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 テーブルの定義で特に重要な変数を以下に示します。
 
 ``type``
-    CakePHPの内部型定義です。���在サポートしているのは以下の型です
+    CakePHPの内部型定義です。現在サポートしているのは以下の型です
         - ``string``: ``VARCHAR`` と対応
         - ``text``: ``TEXT`` と対応
         - ``integer``: ``INT`` と対応
@@ -358,7 +358,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 レコードのフィクスチャをクラスプロパティとして定義すると、関数を使ったり、フィクスチャの定義に
 他の動的なデータを使用することは易しいものではありません。
 解決策として、 ``$records`` をフィクスチャクラスの関数 init() で定義するという方法があります。
-たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、
+たとえば、「created」と「modified」のタイムスタンプに今日の日付を反映させたいのであれば、
 以下のようにするとよいでしょう。::
 
     class ArticlesFixture extends CakeTestFixture
@@ -370,7 +370,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
             'body' => 'text',
             'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
             'created' => 'datetime',
-            'updated' => 'datetime'
+            'modified' => 'datetime'
         );
 
         public function init()
@@ -382,7 +382,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ),
             );
             parent::init();
@@ -454,9 +454,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     {
         public $import = 'Article';
         public $records = array(
-            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31'),
+            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31'),
+            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31')
         );
     }
 
@@ -788,7 +788,7 @@ returnする値の選択
 テストアクションによるモックの使用
 ----------------------------------
 
-コンポーネントやモデルの一部または全部をモックにより置き換えた���時があるでしょう。
+コンポーネントやモデルの一部または全部をモックにより置き換えたい時があるでしょう。
 そういったときは :php:meth:`ControllerTestCase::generate()` を使うとよいでしょう。
 ``generate()`` はコントローラーにおいてモックを作成する強力なワークアウトを持ちます。
 テストで使われるコントローラーを決定したら、同時にモデルとコンポーネントの

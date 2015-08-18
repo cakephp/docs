@@ -71,7 +71,7 @@ will be appended to. By default it will append to the ``css`` block.
 If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
 
 This method of CSS inclusion assumes that the CSS file specified
-resides inside the ``webroot/css`` directory if path doesn't start with a '/'. ::
+resides inside the **webroot/css** directory if path doesn't start with a '/'. ::
 
     echo $this->Html->css('forms');
 
@@ -94,14 +94,14 @@ Will output:
     <link rel="stylesheet" href="/css/menu.css" />
 
 You can include CSS files from any loaded plugin using
-:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/css/toolbar.css``
+:term:`plugin syntax`. To include **plugins/DebugKit/webroot/css/toolbar.css**
 you could use the following::
 
     echo $this->Html->css('DebugKit.toolbar.css');
 
 If you want to include a CSS file which shares a name with a loaded
 plugin you can do the following. For example if you had a ``Blog`` plugin,
-and also wanted to include ``webroot/css/Blog.common.css``, you would::
+and also wanted to include **webroot/css/Blog.common.css**, you would::
 
     echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
@@ -240,7 +240,7 @@ Linking to Images
 
 
 Creates a formatted image tag. The path supplied should be relative
-to ``webroot/img/``. ::
+to **webroot/img/**. ::
 
     echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
 
@@ -278,7 +278,7 @@ Will output:
     <img src="http://example.com/img/logo.jpg" alt="" />
 
 You can include image files from any loaded plugin using
-:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/img/icon.png``
+:term:`plugin syntax`. To include **plugins/DebugKit/webroot/img/icon.png**
 You could use the following::
 
     echo $this->Html->image('DebugKit.icon.png');
@@ -395,7 +395,7 @@ Will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check :php:meth:`Cake\View\Helper\UrlHelper::build()` method
+Also check :php:meth:`Cake\\View\\Helper\\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 Linking to Videos and Audio Files
@@ -466,7 +466,7 @@ generated script tag. If an array of script tags is used, the
 attributes will be applied to all of the generated script tags.
 
 This method of JavaScript file inclusion assumes that the
-JavaScript file specified resides inside the ``webroot/js``
+JavaScript file specified resides inside the **webroot/js**
 directory::
 
     echo $this->Html->script('scripts');
@@ -478,7 +478,7 @@ Will output:
     <script src="/js/scripts.js"></script>
 
 You can link to files with absolute paths as well to link files
-that are not in ``webroot/js``::
+that are not in **webroot/js**::
 
     echo $this->Html->script('/otherdir/script_file');
 
@@ -514,7 +514,7 @@ In your layout you can output all the script tags added to 'scriptBottom'::
     echo $this->fetch('scriptBottom');
 
 You can include script files from any loaded plugin using
-:term:`plugin syntax`. To include ``plugins/DebugKit/webroot/js/toolbar.js``
+:term:`plugin syntax`. To include **plugins/DebugKit/webroot/js/toolbar.js**
 You could use the following::
 
     echo $this->Html->script('DebugKit.toolbar.js');
@@ -563,7 +563,7 @@ Build a nested list (UL/OL) out of an associative array::
                 'American',
                 'Canadian',
                 'British',
-            [,
+            ],
             'Spanish',
             'German',
         ]
@@ -772,6 +772,7 @@ Creating Breadcrumb Trails with HtmlHelper
 
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
+.. php:method:: getCrumbList(array $options = [], $startText = false)
 
 Many applications have breadcrumb trails to ease end user navigations. You can
 create a breadcrumb trail in your app with some help from HtmlHelper. To make
@@ -798,12 +799,26 @@ breadcrumb trails on each of the pages::
     $this->Html->addCrumb('Users', '/users');
     $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
 
-This will add the output of "**Home > Users > Add User**" in your
-layout where ``getCrumbs`` was added.
+This will add the output of "**Home > Users > Add User**" in your layout where
+``getCrumbs`` was added.
 
 You can also fetch the crumbs formatted inside an HTML list::
 
     echo $this->Html->getCrumbList();
+
+As options you can use regular HTML parameter that fits in the ``<ul>``
+(Unordered List) such as ``class`` and for the specific options, you have:
+``separator`` (will be between the ``<li>`` elements), ``firstClass`` and
+``lastClass`` like::
+
+    echo $this->Html->getCrumbList(
+        [
+            'firstClass' => false,
+            'lastClass' => 'active',
+            'class' => 'breadcrumb'
+        ],
+        'Home'
+    );
 
 This method uses :php:meth:`Cake\\View\\Helper\\HtmlHelper::tag()` to generate
 list and its elements. Works similar to

@@ -5,7 +5,7 @@ Les correctifs et les pull requests sont les meilleures façons de contribuer
 au code de CakePHP. Les pull requests peuvent être créés sur Github, et sont
 préférés aux correctifs attachés aux tickets.
 
-Configuration initiale
+Configuration Initiale
 ======================
 
 Avant de travailler sur les correctifs pour CakePHP, c'est une bonne idée de
@@ -24,12 +24,12 @@ adresse e-mail de travail::
 
 .. note::
 
-    Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
-    excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
+    Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire
+    l'excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
 
 Récupérez un clone du code source de CakePHP sous github.:
 
-* Si vous n'avez pas de compte `github <http://github.com>`_ , créez en un.
+* Si vous n'avez pas de compte `github <http://github.com>`_ , créez-en un.
 * Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
   sur le bouton **Fork**.
 
@@ -46,9 +46,9 @@ permettra de rester à jour avec CakePHP::
 
 Maintenant que vous avez configuré CakePHP, vous devriez être en mesure
 de définir une :ref:`connexion à la base <database-configuration>` ``$test``,
-et :ref:`exécuter tous les tests de <running-tests>`.
+et :ref:`d'exécuter tous les tests <running-tests>`.
 
-Travailler sur un correctif
+Travailler sur un Correctif
 ===========================
 
 A chaque fois que vous voulez travailler sur un bug, une fonctionnalité ou
@@ -68,7 +68,7 @@ future de vos changements::
 
     Utiliser un nom descriptif pour vos branches, en référence au ticket ou
     au nom de la fonctionnalité, est une bonne convention. Ex: ticket-1234,
-    fonctionnalité-géniale.
+    great-fonctionnality.
 
 Ce qui précède va créer une branche locale basée sur la branche (CakePHP) 2.3
 en amont. Travaillez sur votre correctif, et faîtes autant de commits que vous
@@ -80,7 +80,7 @@ le souhaitez; mais gardez à l'esprit ce qui suit:
 * Faîtes des commits logiques, et écrivez des messages de commit bien clairs
   et concis.
 
-Soumettre un pull request
+Soumettre un Pull Request
 =========================
 
 Une fois que vos changements sont faits et que vous êtes prêts pour la fusion
@@ -109,14 +109,14 @@ Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branch
 
 Une fois que votre branche est sur github, vous pouvez discuter de cela sur la
 mailing-liste `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
-soumettre une pull request sur github.
+soumettre un pull request sur github.
 
 Choisir l'Emplacement dans lequel vos Changements seront Fusionnés
 ------------------------------------------------------------------
 
 Quand vous faîtes vos pull requests, vous devez vous assurer de sélectionner
 la bonne branche de base, puisque vous ne pouvez pas l'éditer une fois que
-la pull request est créée.
+le pull request est créée.
 
 * Si votre changement est un **bugfix** et n'introduit pas de nouvelles
   fonctionnalités et corrige seulement un comportement existant qui est présent
@@ -126,7 +126,7 @@ la pull request est créée.
   au framework, alors vous devez choisir la branche avec le nombre de la version
   prochaine. Par exemple si la version stable courante est ``2.2.2``, la branche
   acceptant les nouvelles fonctionnalités sera ``2.3``.
-* Si votre changement est une défailance d'une fonctionnalité existante, ou de
+* Si votre changement est une défaillance d'une fonctionnalité existante, ou de
   l'API, alors vous devrez choisir la prochaine version majeure. Par exemple,
   si la version courante est ``2.2.2`` alors la prochaine fois qu'un
   comportement peut être cassé sera dans ``3.0`` ainsi vous devez cibler
@@ -134,12 +134,12 @@ la pull request est créée.
 
 .. note::
 
-    Rappelez vous que tout le code auquel vous contribuez pour CakePHP sera
+    Rappelez-vous que tout le code auquel vous contribuez pour CakePHP sera
     sous Licence MIT, et la
     `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
     suivre les `Guidelines de la Communauté CakePHP <http://community.cakephp.org/guidelines>`_.
-   
+
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).
 

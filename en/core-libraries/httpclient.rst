@@ -52,17 +52,64 @@ Doing post and put requests is equally simple::
 Creating Multipart Requests with Files
 ======================================
 
-You can include files in request bodies by including them in the data array::
+You can include files in request bodies by including a filehandle in the array::
 
     $http = new Client();
     $response = $http->post('http://example.com/api', [
-      'image' => '@/path/to/a/file',
-      'logo' => $fileHandle
+      'image' => fopen('/path/to/a/file', 'r'),
     ]);
 
-By prefixing data values with ``@`` or including a filehandle in the data.  If
-a filehandle is used, the filehandle will be read until its end, it will not be
-rewound before being read.
+The filehandle will be read until its end; it will not be rewound before being read.
+
+.. warning::
+
+    For compatibility reasons, strings beginning with ``@`` will be evaluated
+    as local or remote file paths.
+
+This functionality is deprecated as of CakePHP 3.0.5
+and will be removed in a future version. Until that happens, user data being passed
+to the Http Client must be sanitized as follows::
+
+    $response = $http->post('http://example.com/api', [
+        'search' => ltrim($this->request->data('search'), '@'),
+    ]);
+
+If it is necessary to preserve leading ``@`` characters in query strings, you can pass
+a pre-encoded query string from ``http_build_query()``::
+
+    $response = $http->post('http://example.com/api', http_build_query([
+        'search' => $this->request->data('search'),
+    ]));
+
+Building Multipart Request Bodies by Hand
+-----------------------------------------
+
+There may be times when you need to build a request body in a very specific way.
+In these situations you can often use ``Cake\Network\Http\FormData`` to craft
+the specific multipart HTTP request you want::
+
+    use Cake\Network\Http\FormData;
+
+    $data = new FormData();
+
+    // Create an XML part
+    $xml = $data->newPart('xml', $xmlString);
+    // Set the content type.
+    $xml->type('application/xml');
+    $data->add($xml);
+
+    // Create a file upload with addFile()
+    // This will append the file to the form data as well.
+    $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
+    $file->contentId('abc123');
+    $file->disposition('attachment');
+
+    // Send the request.
+    $response = $http->post(
+        'http://example.com/api',
+        (string)$data,
+        ['headers' => ['Content-Type' => 'multipart/related']]
+    );
 
 Sending Request Bodies
 ======================
@@ -179,6 +226,17 @@ key and consumer secret::
         'realm' => 'tickets',
       ]
     ]);
+
+OAuth 2 Authentication
+----------------------
+
+Because OAuth2 is often just a simple header, there is not a specialized
+authentication adapter. Instead you can create a client with the access token::
+
+    $http = new Client([
+        'headers' => ['Authorization' => 'Bearer ' . $accessToken]
+    ]);
+    $response = $http->get('https://example.com/api/profile/1');
 
 Proxy Authentication
 --------------------

@@ -20,7 +20,7 @@ il sera ajouté au tableau des helpers des Controllers. Enfin, si une donnée
 XML/JSON est POST'ée vers vos Controllers, elle sera décomposée dans un
 tableau qui est assigné à ``$this->request->data``, et pourra alors être
 sauvegardée comme une donnée de model. Afin d'utiliser le Request Handler, il
-doit être inclu dans votre tableau méthode ``initialize()``::
+doit être inclus dans votre tableau méthode ``initialize()``::
 
     class WidgetController extends AppController
     {
@@ -66,7 +66,7 @@ contenu que le client accepte. Par exemple::
                     // Execute uniquement le code XML
                 }
                 if ($this->RequestHandler->accepts(['xml', 'rss', 'atom'])) {
-                    // Execute si le client accetpte l'une des réponses 
+                    // Execute si le client accepte l'une des réponses
                     // ci-dessus: XML, RSS ou Atom.
                 }
             }
@@ -261,7 +261,7 @@ la configuration ``viewClassMap``::
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent(''RequestHandler', [
+        $this->loadComponent('RequestHandler', [
             'viewClassMap' => [
                 'json' => 'ApiKit.MyJson',
                 'xml' => 'ApiKit.MyXml',

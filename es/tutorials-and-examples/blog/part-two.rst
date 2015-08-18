@@ -192,8 +192,6 @@ contrario, la crearemos ahora en nuestro controlador de artículos::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
-
     class ArticlesController extends AppController
     {
 
@@ -204,9 +202,6 @@ contrario, la crearemos ahora en nuestro controlador de artículos::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -255,8 +250,6 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
-
     class ArticlesController extends AppController
     {
         public $components = ['Flash'];
@@ -268,10 +261,6 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
-
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -377,7 +366,7 @@ campos ocultos si la CSRF/prevención de manipulación de formularios ha sido
 habilitada.
 
 Volvamos atrás un minuto y actualicemos nuestra vista
-``src/Template/Articles/index.ctp`` para añadir un enlace de "Añadir Artículo".
+**src/Template/Articles/index.ctp** para añadir un enlace de "Añadir Artículo".
 Justo antes del tag <table> añade la siguiente línea::
 
     <?= $this->Html->link(
@@ -433,10 +422,6 @@ ser la acción ``edit()`` del controlador ``ArticlesController``::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Artículo no válido'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);

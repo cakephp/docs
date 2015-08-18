@@ -22,7 +22,7 @@ Now open your application's ``composer.json`` file. Normally you would see that
 the migrations plugin is already under ``require``. If not add it as follows::
 
     "require": {
-        "cakephp/migrations": "dev-master"
+        "cakephp/migrations": "~1.0"
     }
 
 Then run ``composer update``. The migrations plugin will now be in your
@@ -78,7 +78,7 @@ We suppose you already have the files (Tables, Controllers and Templates of
 Articles) from part 2. So we'll just add the references to categories.
 
 We need to associated the Articles and Categories tables together. Open
-the ``src/Model/Table/ArticlesTable.php`` file and add the following::
+the **src/Model/Table/ArticlesTable.php** file and add the following::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -105,10 +105,13 @@ Create all files by launching bake commands::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
-    bin/cake bake view Categories
+    bin/cake bake template Categories
 
 The bake tool has created all your files in a snap. You can give them a quick
 read if you want re-familiarize yourself with how CakePHP works.
+
+.. note::
+    If you are on Windows remember to use \ instead of /.
 
 Attach TreeBehavior to CategoriesTable
 ======================================
@@ -119,9 +122,10 @@ structures in database table. It uses the `MPTT logic
 MPTT tree structures are optimized for reads, which often makes them a good fit
 for read heavy applications like blogs.
 
-If you open the ``src/Model/Table/CategoriesTable.php`` file, you'll see
+If you open the **src/Model/Table/CategoriesTable.php** file, you'll see
 that the TreeBehavior has been attached to your CategoriesTable in the
-``initialize`` method::
+``initialize()`` method. Bake adds this behavior to any Tables that contain
+``lft`` and ``rght`` columns::
 
     $this->addBehavior('Tree');
 
@@ -143,11 +147,11 @@ Using your web browser, add some new categories using the
 Reordering Categories with TreeBehavior
 ========================================
 
-In your categories index template file, you can list the categories and ordering
+In your categories index template file, you can list the categories and re-order
 them.
 
 Let's modify the index method in your ``CategoriesController.php`` and add
-``move_up`` and ``move_down`` methods to be able to reorder the categories in
+``move_up()`` and ``move_down()`` methods to be able to reorder the categories in
 the tree::
 
     class CategoriesController extends AppController
@@ -184,26 +188,52 @@ the tree::
         }
     }
 
-And the index.ctp::
+In **src/Template/Categories/index.ctp** replace the existing content with::
 
-    <?php foreach ($categories as $category): ?>
-        <tr>
-            <td><?= $this->Number->format($category->id) ?></td>
-            <td><?= $this->Number->format($category->parent_id) ?></td>
-            <td><?= $this->Number->format($category->lft) ?></td>
-            <td><?= $this->Number->format($category->rght) ?></td>
-            <td><?= h($category->name) ?></td>
-            <td><?= h($category->description) ?></td>
-            <td><?= h($category->created) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $category->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
-                <?= $this->Form->postLink(__('Move down'), ['action' => 'move_down', $category->id], ['confirm' => __('Are you sure you want to move down # {0}?', $category->id)]) ?>
-                <?= $this->Form->postLink(__('Move up'), ['action' => 'move_up', $category->id], ['confirm' => __('Are you sure you want to move up # {0}?', $category->id)]) ?>
-            </td>
-        </tr>
-    <?php endforeach; ?>
+    <div class="actions columns large-2 medium-3">
+        <h3><?= __('Actions') ?></h3>
+        <ul class="side-nav">
+            <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?></li>
+        </ul>
+    </div>
+    <div class="categories index large-10 medium-9 columns">
+        <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Parent Id</th>
+                <th>Title</th>
+                <th>Lft</th>
+                <th>Rght</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($categories as $category): ?>
+            <tr>
+                <td><?= $this->Number->format($category->id) ?></td>
+                <td><?= $this->Number->format($category->parent_id) ?></td>
+                <td><?= $this->Number->format($category->lft) ?></td>
+                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= h($category->name) ?></td>
+                <td><?= h($category->description) ?></td>
+                <td><?= h($category->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $category->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Move down'), ['action' => 'move_down', $category->id], ['confirm' => __('Are you sure you want to move down # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Move up'), ['action' => 'move_up', $category->id], ['confirm' => __('Are you sure you want to move up # {0}?', $category->id)]) ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+        </table>
+    </div>
+
 
 Modifying the ArticlesController
 ================================
@@ -225,8 +255,9 @@ it::
 
         public function add()
         {
-            $article = $this->Articles->newEntity($this->request->data);
+            $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);

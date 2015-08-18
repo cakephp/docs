@@ -19,7 +19,7 @@ many to one   belongsTo             Many articles belong to a user.
 many to many  belongsToMany         Tags belong to many articles.
 ============= ===================== =======================================
 
-Associations are defined during the ``inititalize()`` method of your table
+Associations are defined during the ``initialize()`` method of your table
 object. Methods matching the association type allow you to define the
 associations in your application. For example if we wanted to define a belongsTo
 association in our ArticlesTable::
@@ -181,14 +181,17 @@ Possible keys for hasOne association arrays include:
   the current model. If you're defining a 'User hasOne Address'
   relationship, the className key should equal 'Addresses'.
 - **foreignKey**: the name of the foreign key found in the other
-  model. This is especially handy if you need to define multiple
+  table. This is especially handy if you need to define multiple
   hasOne relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with
   '\_id'. In the example above it would default to 'user\_id'.
+- **bindingKey**: The name of the column in the current table, that will be used
+  for matching the ``foreignKey``. If not specified, the primary key (for example
+  the id column of the ``Users`` table) will be used.
 - **conditions**: an array of find() compatible conditions
   such as ``['Addresses.primary' => true]``
 - **joinType**: the type of the join to use in the SQL query, default
-  is INNER. You may want to use LEFT if your hasOne association is optional.
+  is LEFT. You can use INNER if your hasOne association is always present.
 - **dependent**: When the dependent key is set to ``true``, and an
   entity is deleted, the associated model records are also deleted. In this
   case we set it to ``true`` so that deleting a User will also delete her associated
@@ -272,10 +275,13 @@ Possible keys for belongsTo association arrays include:
 - **className**: the class name of the model being associated to
   the current model. If you're defining a 'Profile belongsTo User'
   relationship, the className key should equal 'Users'.
-- **foreignKey**: the name of the foreign key found in the current model. This
+- **foreignKey**: the name of the foreign key found in the current table. This
   is especially handy if you need to define multiple belongsTo relationships to
   the same model. The default value for this key is the underscored, singular
   name of the other model, suffixed with ``_id``.
+- **bindingKey**: The name of the column in the other table, that will be used
+  for matching the ``foreignKey``. If not specified, the primary key (for example
+  the id column of the ``Users`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Users.active' => true]``
 - **joinType**: the type of the join to use in the SQL query, default
@@ -355,10 +361,13 @@ Possible keys for hasMany association arrays include:
   the current model. If you're defining a 'User hasMany Comment'
   relationship, the className key should equal 'Comment'.
 - **foreignKey**: the name of the foreign key found in the other
-  model. This is especially handy if you need to define multiple
+  table. This is especially handy if you need to define multiple
   hasMany relationships. The default value for this key is the
   underscored, singular name of the actual model, suffixed with
   '\_id'.
+- **bindingKey**: The name of the column in the current table, that will be used
+  for matching the ``foreignKey``. If not specified, the primary key (for example
+  the id column of the ``Articles`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Comments.visible' => true]``
 - **sort**  an array of find() compatible order clauses or SQL
@@ -373,7 +382,7 @@ Possible keys for hasMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & plural name of the association so ``comments`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The other
+- **strategy**: Defines the query strategy to use. Defaults to 'select'. The other
   valid value is 'subquery', which replaces the ``IN`` list with an equivalent
   subquery.
 - **finder**: The finder method to use when loading associated records.
@@ -404,6 +413,11 @@ load all the records just to count them. For example, the comment count on any
 given article is often cached to make generating lists of articles more
 efficient. You can use the :doc:`CounterCacheBehavior
 </orm/behaviors/counter-cache>` to cache counts of associated records.
+
+You should make sure that your database tables do not contain columns that match
+association property names. If for example you have counter fields that conflict
+with association properties, you must either rename the association property, or
+the column name.
 
 BelongsToMany Associations
 ==========================
@@ -483,6 +497,8 @@ Possible keys for belongsToMany association arrays include:
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it.
 - **sort** an array of find() compatible order clauses.
+- **dependent**: When the dependent key is set to ``false``, and an entity is
+  deleted, the data of the join table will not be deleted.
 - **through** Allows you to provide a either the name of the Table instance you
   want used on the join table, or the instance itself. This makes customizing
   the join table keys possible, and allows you to customize the behavior of the
@@ -495,7 +511,7 @@ Possible keys for belongsToMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & plural name of the association, so ``tags`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'SELECT'. The
+- **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the ``IN`` list with an
   equivalent subquery.
 - **saveStrategy**: Either 'append' or 'replace'. Indicates the mode to be used
@@ -532,6 +548,8 @@ generated::
       tags.id = article_tags.tag_id
       AND article_id IN (SELECT id FROM articles)
     );
+
+.. _using-the-through-option:
 
 Using the 'through' Option
 --------------------------
@@ -602,17 +620,15 @@ Default Association Conditions
 The ``finder`` option allows you to use a :ref:`custom finder
 <custom-find-methods>` to load associated record data. This lets you encapsulate
 your queries better and keep your code DRY'er. There are some limitations when
-using finders to load associated records for associations that are loaded using
+using finders to load data in associations that are loaded using
 joins (belongsTo/hasOne). Only the following aspects of the query will be
 applied to the root query:
 
-- WHERE conditions
-- Additional joins
-- Contained associations
-- Map/Reduce functions
-- Result formatters
+- WHERE conditions.
+- Additional joins.
+- Contained associations.
 
 Other aspects of the query, such as selected columns, order, group by, having and
 other sub-statements, will not be applied to the root query. Associations that
 are *not* loaded through joins (hasMany/belongsToMany), do not have the above
-restrictions.
+restrictions and can also use result formatters or map/reduce functions.

@@ -1,5 +1,5 @@
-TextHelper
-##########
+Text
+####
 
 .. php:namespace:: Cake\View\Helper
 
@@ -18,7 +18,7 @@ Lier les Adresses Email
 
 Ajoute les liens aux adresses email bien formées dans $text, selon toutes
 les options définies dans ``$options`` (regardez
-:php:meth:`HtmlHelper::link()`). ::
+:php:meth:`HtmlHelper::link()`)::
 
     $myText = 'Pour plus d'informations sur nos pâtes et desserts fameux,
         contactez info@example.com';
@@ -29,7 +29,7 @@ Sortie::
     Pour plus d'informations sur nos pâtes et desserts fameux,
     contactez <a href="mailto:info@example.com">info@example.com</a>
 
-Cette méthode echappe automatiquement ces inputs. Utilisez l'option
+Cette méthode échappe automatiquement ces inputs. Utilisez l'option
 ``escape`` pour la désactiver si nécessaire.
 
 Lier les URLs
@@ -62,7 +62,7 @@ Convertir du Texte en Paragraphes
 .. php:method:: autoParagraph(string $text)
 
 Ajoute <p> autour du texte où la double ligne retourne et <br> où une
-simple ligne retourne, sont trouvés. ::
+simple ligne retourne, sont trouvés::
 
     $myText = 'For more information
     regarding our world-famous pastries and desserts.

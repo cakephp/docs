@@ -152,7 +152,7 @@ into a DOMDocument object, :php:meth:`~Cake\\Network\\Request::input()` supports
 in additional parameters as well::
 
     // Get Xml encoded data submitted to a PUT/POST action
-    $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
+    $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
 Path Information
 ----------------
@@ -242,16 +242,21 @@ There are several built-in detectors that you can use:
 
 * ``is('get')`` Check to see whether the current request is a GET.
 * ``is('put')`` Check to see whether the current request is a PUT.
+* ``is('patch')`` Check to see whether the current request is a PATCH.
 * ``is('post')`` Check to see whether the current request is a POST.
 * ``is('delete')`` Check to see whether the current request is a DELETE.
 * ``is('head')`` Check to see whether the current request is HEAD.
 * ``is('options')`` Check to see whether the current request is OPTIONS.
 * ``is('ajax')`` Check to see whether the current request came with
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Check to see whether the request is via SSL
-* ``is('flash')`` Check to see whether the request has a User-Agent of Flash
-* ``is('mobile')`` Check to see whether the request came from a common list
-  of mobile agents.
+* ``is('ssl')`` Check to see whether the request is via SSL.
+* ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
+* ``is('requested')`` Check to see whether the request has a query param
+  'requested' with value 1.
+* ``is('json')`` Check to see whether the request has 'json' extension and
+  accept 'application/json' mimetype.
+* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
+  'application/xml' or 'text/xml' mimetype.
 
 
 Session Data
@@ -396,14 +401,13 @@ Changing the Response Class
 
 CakePHP uses ``Response`` by default. ``Response`` is a flexible and
 transparent class. If you need to override it with your own application-specific class,
-you can replace ``Response`` in ``webroot/index.php``.
+you can replace ``Response`` in **webroot/index.php**.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`Cake\\Network\\Response`. You can also replace the response
 instance by setting ``$this->response`` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
-out the methods that interact with :php:meth:`~CakeResponse::header()`. See the section on
-:ref:`cakeresponse-testing` for more information.
+out the methods that interact with :php:meth:`Cake\\Network\\Response::header()`.
 
 Dealing with Content Types
 --------------------------
@@ -446,7 +450,7 @@ You can accomplish that by using :php:meth:`Cake\\Network\\Response::file()`::
 
     public function sendFile($id)
     {
-        $file = $this->Attachment->getFile($id);
+        $file = $this->Attachments->getFile($id);
         $this->response->file($file['path']);
         // Return response object to prevent controller from trying to render
         // a view.
@@ -484,7 +488,7 @@ a pdf or an ics generated on the fly from a string::
 
     public function sendIcs()
     {
-        $icsString = $this->Calendar->generateIcs();
+        $icsString = $this->Calendars->generateIcs();
         $this->response->body($icsString);
         $this->response->type('ics');
 
@@ -495,6 +499,27 @@ a pdf or an ics generated on the fly from a string::
         // a view.
         return $this->response;
     }
+
+Streaming Resources
+-------------------
+
+You can use a callable with ``body()`` to easily convert resource streams into
+responses::
+
+    $file = fopen('/some/file.png', 'r');
+    $this->response->body(function () use ($file) {
+        rewind($file);
+        fpassthru($file);
+        fclose($file);
+    });
+
+Callbacks can also return the body as a string::
+
+    $path = '/some/file.png';
+    $this->response->body(function () use ($path) {
+        return file_get_contents($path);
+    });
+
 
 Setting Headers
 ---------------
@@ -660,8 +685,8 @@ To take advantage of this header, you must either call the
 
     public function index()
     {
-        $articles = $this->Article->find('all');
-        $this->response->etag($this->Article->generateHash($articles));
+        $articles = $this->Articles->find('all');
+        $this->response->etag($this->Articles->generateHash($articles));
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
@@ -684,8 +709,8 @@ To take advantage of this header, you must either call the
 
     public function view()
     {
-        $article = $this->Article->find('first');
-        $this->response->modified($article['Article']['modified']);
+        $article = $this->Articles->find()->first();
+        $this->response->modified($article->modified);
         if ($this->response->checkNotModified($this->request)) {
             return $this->response;
         }
@@ -727,27 +752,6 @@ Sending the Response
 Once you are done creating a response, calling ``send()`` will send all
 the set headers as well as the body. This is done automatically at the
 end of each request by ``Dispatcher``.
-
-
-.. _cakeresponse-testing:
-
-Response and Testing
---------------------
-
-The ``Response`` class helps make testing controllers and components easier.
-By having a single place to mock/stub headers you can more easily test
-controllers and components::
-
-    public function testSomething()
-    {
-        $this->controller->response = $this->getMock('Cake\Network\Response');
-        $this->controller->response->expects($this->once())->method('header');
-        // ...
-    }
-
-Additionally, you can run tests from the command line more easily, as you can use
-mocks to avoid the 'headers sent' errors that can occur when trying to set
-headers in CLI.
 
 .. meta::
     :title lang=en: Request and Response objects

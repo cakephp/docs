@@ -33,7 +33,7 @@ use the ``Number`` class::
 
 .. start-cakenumber
 
-All of these functions return the formatted number; They do not
+All of these functions return the formatted number; they do not
 automatically echo the output into the view.
 
 Formatting Currency Values
@@ -75,7 +75,7 @@ output. The following options are available:
 +---------------------+----------------------------------------------------+
 | after               | Text to display before the rendered number.        |
 +---------------------+----------------------------------------------------+
-| zero                | The text to use for zero values, can be a string   |
+| zero                | The text to use for zero values; can be a string   |
 |                     | or a number. ie. 0, 'Free!'.                       |
 +---------------------+----------------------------------------------------+
 | places              | Number of decimal places to use, ie. 2             |
@@ -97,7 +97,7 @@ output. The following options are available:
 |                     | with the international currency code.              |
 +---------------------+----------------------------------------------------+
 
-If $currency value is ``null``, the default currency will be retrieved form
+If $currency value is ``null``, the default currency will be retrieved from
 :php:meth:`Cake\\I18n\\Number::defaultCurrency()`
 
 
@@ -216,17 +216,17 @@ resides.
 +=====================+====================================================+
 | places              | Number of decimal places to use, ie. 2             |
 +---------------------+----------------------------------------------------+
-| precision           | Maximal number of decimal places to use, ie. 2     |
+| precision           | Maximum number of decimal places to use, ie. 2     |
 +---------------------+----------------------------------------------------+
 | pattern             | An ICU number pattern to use for formatting the    |
 |                     | number ie. #,###.00                                |
 +---------------------+----------------------------------------------------+
-| locale              | The locale name to use for formating number,       |
+| locale              | The locale name to use for formatting number,      |
 |                     | ie. "fr_FR".                                       |
 +---------------------+----------------------------------------------------+
 | before              | Text to display before the rendered number.        |
 +---------------------+----------------------------------------------------+
-| after               | Text to display before the rendered number.        |
+| after               | Text to display after the rendered number.         |
 +---------------------+----------------------------------------------------+
 
 Example::
@@ -283,14 +283,14 @@ The ``$options`` parameter takes the same keys as :php:meth:`Number::format()` i
 +=====================+====================================================+
 | places              | Number of decimal places to use, ie. 2             |
 +---------------------+----------------------------------------------------+
-| precision           | Maximal number of decimal places to use, ie. 2     |
+| precision           | Maximum number of decimal places to use, ie. 2     |
 +---------------------+----------------------------------------------------+
-| locale              | The locale name to use for formating number,       |
+| locale              | The locale name to use for formatting number,      |
 |                     | ie. "fr_FR".                                       |
 +---------------------+----------------------------------------------------+
 | before              | Text to display before the rendered number.        |
 +---------------------+----------------------------------------------------+
-| after               | Text to display before the rendered number.        |
+| after               | Text to display after the rendered number.         |
 +---------------------+----------------------------------------------------+
 
 Example::

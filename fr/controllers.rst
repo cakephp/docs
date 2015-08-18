@@ -25,7 +25,7 @@ gère.
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
 :php:class:`Controller` du cœur. La classe ``AppController`` peut être définie
-dans ``src/Controller/AppController.php`` et elle devra contenir les
+dans **src/Controller/AppController.php** et elle devra contenir les
 méthodes partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
@@ -44,7 +44,7 @@ Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
 elle-même la classe :php:class:`Cake\\Controller\\Controller` incluse dans la
 librairie du cœur de CakePHP. ``AppController`` est définie dans
-``src/Controller/AppController.php`` comme ceci::
+**src/Controller/AppController.php** comme ceci::
 
     namespace App\Controller;
 
@@ -110,7 +110,7 @@ Par convention, CakePHP rend une vue avec une version inflectée du nom de
 l'action. Revenons à notre boulangerie en ligne par exemple, notre
 RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans
-``src/Controller/RecipesController.php`` et contiendrait::
+**src/Controller/RecipesController.php** et contiendrait::
 
     // src/Controller/RecipesController.php
 
@@ -132,8 +132,8 @@ RecipesController pourrait contenir les actions
         }
     }
 
-Les fichiers de template pour ces actions seraient ``src/Template/Recipes/view.ctp``,
-``src/Template/Recipes/share.ctp``, et ``src/Template/Recipes/search.ctp``. Le
+Les fichiers de template pour ces actions seraient **src/Template/Recipes/view.ctp**,
+**src/Template/Recipes/share.ctp**, et **src/Template/Recipes/search.ctp**. Le
 nom du fichier de vue est par convention le nom de l'action en minuscules et
 avec des underscores.
 
@@ -221,6 +221,27 @@ rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
     $this->set($data);
 
+
+Définir les Options d'une View
+------------------------------
+
+Si vous voulez personnaliser la classe de vue, les dossiers de layout/template,
+les helpers ou le thème qui seront utilisés lors du rendu de la vue, vous
+pouvez utiliser la méthode ``viewBuilder()`` pour récupérer un constructeur. Ce
+constructeur peut être utilisé pour définir les propriétés de la vue avant sa
+création::
+
+    $this->viewBuilder()
+        ->helpers(['MyCustom'])
+        ->theme('Modern')
+        ->className('Modern.Admin');
+
+Le code ci-dessus montre comment charger des helpers personnalisés, définir un
+thème et utiliser une classe de vue personnalisée.
+
+.. versionadded:: 3.1
+    ViewBuilder a été ajouté dans 3.1
+
 Rendre une View
 ---------------
 
@@ -235,7 +256,7 @@ tout à l'utilisateur final.
 
 Le fichier de vue utilisé par défaut est déterminé par convention.
 Ainsi, si l'action ``search()`` de notre controller RecipesController
-est demandée, le fichier de vue situé dans ``src/Template/Recipes/search.ctp``
+est demandée, le fichier de vue situé dans **src/Template/Recipes/search.ctp**
 sera utilisé::
 
     namespace App\Controller;
@@ -258,7 +279,7 @@ alternatif en précisant le nom d'un fichier de vue en premier argument de la
 méthode ``Controller::render()``.
 
 Si ``$view`` commence par un '/' on suppose que c'est un fichier de
-vue ou un élément dont le chemin est relatif au dossier ``src/Template``.
+vue ou un élément dont le chemin est relatif au dossier **src/Template**.
 Cela permet un affichage direct des éléments, ce qui est très pratique lors
 d'appels AJAX::
 
@@ -286,8 +307,8 @@ directement ``Controller::render()``. Une fois que vous avez appelé
         }
     }
 
-Cela rendrait ``src/Template/Posts/custom_file.ctp`` au lieu de
-``src/Template/Posts/my_action.ctp``.
+Cela rendrait **src/Template/Posts/custom_file.ctp** au lieu de
+**src/Template/Posts/my_action.ctp**.
 
 Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -303,7 +324,7 @@ Par exemple::
         }
     }
     
-Cela rendrait la vue ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
+Cela rendrait la vue **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Rediriger vers d'Autres Pages
 =============================
@@ -314,11 +335,11 @@ La méthode de contrôle de flux que vous utiliserez le plus souvent est
 ``Controller::redirect()``. Cette méthode prend son premier
 paramètre sous la forme d'une URL relative à votre application CakePHP.
 Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-rediriger vers un écran affichant le reçu. ::
+rediriger vers un écran affichant le reçu::
 
     public function place_order()
     {
-        // Logic for finalizing order goes here
+        // Logique pour finaliser la commande
         if ($success) {
             return $this->redirect(
                 ['controller' => 'Orders', 'action' => 'thanks']
@@ -389,7 +410,7 @@ Chargement des Models Supplémentaires
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
-La fonction ``loadModel`` devient pratique quand
+La fonction ``loadModel()`` devient pratique quand
 vous avez besoin d'utiliser une table de model/collection qui n'est pas le
 model du controller par défaut ou un de ses models associés::
 
@@ -410,7 +431,7 @@ connectant sa méthode factory::
         ['ElasticIndexes', 'factory']
     );
 
-Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel``
+Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel()``
 pour charger les instances::
 
     // Dans une méthode de controller.
@@ -457,7 +478,7 @@ pour eux::
     {
         parent::initialize();
         $this->loadComponent('Csrf');
-        $this->loadComponent('Comments', Configure:read('Comments'));
+        $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
 .. php:attr:: components
@@ -483,10 +504,15 @@ les classes MVC supplémentaires::
     }
 
 Chacune de ces variables sont fusionnées avec leurs valeurs héritées,
-ains'il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
+ainsi il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
 bien tout ce qui est déclaré dans votre ``AppController``.
 
 .. _controller-life-cycle:
+
+.. deprecated:: 3.0
+    Le chargement des helpers depuis le controller est fourni pour des raisons
+    de rétrocompatibilité. Référez-vous à la section suivante pour apprendre à
+    :ref:`configuring-helpers`.
 
 Request Life-cycle callbacks
 ============================
@@ -509,7 +535,7 @@ ou juste après que les actions du controller ont été effectuées :
 
     Cette méthode est appelée après l'action du controller mais avant
     que la vue ne soit rendue. Ce callback n'est pas souvent utilisé,
-    mais peut-être nécessaire si vous appellez :php:meth:`~Controller::render()`
+    mais peut-être nécessaire si vous appelez :php:meth:`~Controller::render()`
     manuellement à la fin d'une action donnée.
 
 .. php:method:: afterFilter(Event $event)

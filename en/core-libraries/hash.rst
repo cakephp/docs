@@ -86,14 +86,19 @@ Attribute Matching Types
     want returned ::
 
         // Common Usage:
-        $users = $this->User->find("all");
-        $results = Hash::extract($users, '{n}.User.id');
+        $users = [
+            ['id' => 1, 'name' => 'mark'],
+            ['id' => 2, 'name' => 'jane'],
+            ['id' => 3, 'name' => 'sally'],
+            ['id' => 4, 'name' => 'jose'],
+        ];
+        $results = Hash::extract($users, '{n}.id');
         // $results equals:
-        // [1,2,3,4,5,...];
+        // [1,2,3,4];
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    Inserts $data into an array as defined by ``$path``::
+    Inserts ``$data`` into an array as defined by ``$path``::
 
         $a = [
             'pages' => ['name' => 'page']
@@ -112,12 +117,31 @@ Attribute Matching Types
     You can use paths using ``{n}`` and ``{s}`` to insert data into multiple
     points::
 
-        $users = $this->User->find('all');
-        $users = Hash::insert($users, '{n}.User.new', 'value');
+        $users = Hash::insert($users, '{n}.new', 'value');
+
+    Attribute matchers work with ``insert()`` as well::
+
+        $data = [
+            0 => ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+            1 => ['Item' => ['id' => 2, 'title' => 'second']],
+            2 => ['Item' => ['id' => 3, 'title' => 'third']],
+            3 => ['up' => true, 'Item' => ['id' => 4, 'title' => 'fourth']],
+            4 => ['Item' => ['id' => 5, 'title' => 'fifth']],
+        ];
+        $result = Hash::insert($data, '{n}[up].Item[id=4].new', 9);
+        /* $result now looks like:
+            [
+                ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+                ['Item' => ['id' => 2, 'title' => 'second']],
+                ['Item' => ['id' => 3, 'title' => 'third']],
+                ['up' => true, 'Item' => ['id' => 4, 'title' => 'fourth', 'new' => 9]],
+                ['Item' => ['id' => 5, 'title' => 'fifth']],
+            ]
+        */
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
-    Removes all elements from an array that match $path. ::
+    Removes all elements from an array that match ``$path``. ::
 
         $a = [
             'pages' => ['name' => 'page'],
@@ -134,15 +158,32 @@ Attribute Matching Types
         */
 
     Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
+    You can also use attribute matchers with ``remove()``::
 
+        $data = [
+            0 => ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+            1 => ['Item' => ['id' => 2, 'title' => 'second']],
+            2 => ['Item' => ['id' => 3, 'title' => 'third']],
+            3 => ['clear' => true, 'Item' => ['id' => 4, 'title' => 'fourth']],
+            4 => ['Item' => ['id' => 5, 'title' => 'fifth']],
+        ];
+        $result = Hash::remove($data, '{n}[clear].Item[id=4]');
+        /* $result now looks like:
+            [
+                ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
+                ['Item' => ['id' => 2, 'title' => 'second']],
+                ['Item' => ['id' => 3, 'title' => 'third']],
+                ['Item' => ['id' => 5, 'title' => 'fifth']],
+            ]
+        */
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
-    Creates an associative array using a $keyPath as the path to build its keys,
-    and optionally $valuePath as path to get the values. If $valuePath is not
+    Creates an associative array using a ``$keyPath`` as the path to build its keys,
+    and optionally ``$valuePath`` as path to get the values. If ``$valuePath`` is not
     specified, or doesn't match anything, values will be initialized to null.
     You can optionally group the values by what is obtained when following the
-    path specified in $groupPath. ::
+    path specified in ``$groupPath``. ::
 
         $a = [
             [
@@ -227,7 +268,7 @@ Attribute Matching Types
             ]
         */
 
-    You can provide array's for both $keyPath and $valuePath. If you do this,
+    You can provide array's for both ``$keyPath`` and ``$valuePath``. If you do this,
     the first value will be used as a format string, for values extracted by the
     other paths::
 
@@ -375,8 +416,8 @@ Attribute Matching Types
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
     Filters empty elements out of array, excluding '0'. You can also supply a
-    custom $callback to filter the array elements. You callback should return
-    ``false`` to remove elements from the resulting array::
+    custom ``$callback`` to filter the array elements. You callback should
+    return ``false`` to remove elements from the resulting array::
 
         $data = [
             '0',
@@ -552,16 +593,16 @@ Attribute Matching Types
     the deepest number of dimensions of any element in the array::
 
         $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
-        $result = Hash::maxDimensions($data, true);
+        $result = Hash::maxDimensions($data);
         // $result == 2
 
         $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
-        $result = Hash::maxDimensions($data, true);
+        $result = Hash::maxDimensions($data);
         // $result == 3
 
 .. php:staticmethod:: map(array $data, $path, $function)
 
-    Creates a new array, by extracting $path, and mapping $function
+    Creates a new array, by extracting ``$path``, and mapping ``$function``
     across the results. You can use both expression and matching elements with
     this method::
 
@@ -576,13 +617,13 @@ Attribute Matching Types
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
-    Creates a single value, by extracting $path, and reducing the extracted
-    results with $function. You can use both expression and matching elements
+    Creates a single value, by extracting ``$path``, and reducing the extracted
+    results with ``$function``. You can use both expression and matching elements
     with this method.
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
-    Apply a callback to a set of extracted values using $function. The function
+    Apply a callback to a set of extracted values using ``$function``. The function
     will get the extracted values as the first argument.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
@@ -737,7 +778,6 @@ Attribute Matching Types
 .. php:staticmethod:: nest(array $data, array $options = [])
 
     Takes a flat array set, and creates a nested, or threaded data structure.
-    Used by methods like ``Table::find('threaded')``.
 
     **Options:**
 
@@ -749,53 +789,53 @@ Attribute Matching Types
       Should be compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.parent_id``
     - ``root`` The id of the desired top-most result.
 
-    Example::
+    For example, if you had the following array of data::
 
         $data = [
-            ['ModelName' => ['id' => 1, 'parent_id' => null]],
-            ['ModelName' => ['id' => 2, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 3, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 4, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 5, 'parent_id' => 1]],
-            ['ModelName' => ['id' => 6, 'parent_id' => null]],
-            ['ModelName' => ['id' => 7, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 8, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 9, 'parent_id' => 6]],
-            ['ModelName' => ['id' => 10, 'parent_id' => 6]]
+            ['ThreadPost' => ['id' => 1, 'parent_id' => null]],
+            ['ThreadPost' => ['id' => 2, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 3, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 4, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 5, 'parent_id' => 1]],
+            ['ThreadPost' => ['id' => 6, 'parent_id' => null]],
+            ['ThreadPost' => ['id' => 7, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 8, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 9, 'parent_id' => 6]],
+            ['ThreadPost' => ['id' => 10, 'parent_id' => 6]]
         ];
 
         $result = Hash::nest($data, ['root' => 6]);
         /* $result now looks like:
             [
                 (int) 0 => [
-                    'ModelName' => [
+                    'ThreadPost' => [
                         'id' => (int) 6,
                         'parent_id' => null
                     ],
                     'children' => [
                         (int) 0 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 7,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 1 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 8,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 2 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 9,
                                 'parent_id' => (int) 6
                             ],
                             'children' => []
                         ],
                         (int) 3 => [
-                            'ModelName' => [
+                            'ThreadPost' => [
                                 'id' => (int) 10,
                                 'parent_id' => (int) 6
                             ],

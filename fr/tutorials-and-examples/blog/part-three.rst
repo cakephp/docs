@@ -7,7 +7,7 @@ Créer une Catégorie en Arbre (Tree)
 Continuons notre application de blog et imaginons que nous souhaitions
 catégoriser nos articles. Nous souhaitons que les catégories soit triées, et
 pour cela, nous allons utiliser le :doc:`behavior Tree </orm/behaviors/tree>`
-pour nous aide à organiser les catégories.
+pour nous aider à organiser les catégories.
 
 Mais d'abord, nous devons modifier nos tables.
 
@@ -24,7 +24,7 @@ Normalement vous devriez voir que le plugin migrations est déjà dans
 ``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
 
     "require": {
-        "cakephp/migrations": "dev-master"
+        "cakephp/migrations": "~1.0"
     }
 
 Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
@@ -84,7 +84,7 @@ Templates des Articles) de la partie 2. Donc nous allons juste ajouter les
 références aux categories.
 
 Nous devons associer ensemble les tables Articles et Categories. Ouvrez le
-fichier ``src/Model/Table/ArticlesTable.php`` et ajoutez ce qui suit::
+fichier **src/Model/Table/ArticlesTable.php** et ajoutez ce qui suit::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -111,11 +111,14 @@ Créez tous les fichiers en lançant les commandes de bake suivantes::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
-    bin/cake bake view Categories
+    bin/cake bake template Categories
 
 L'outil bake a créé tous les fichiers en un clin d'œil. Vous pouvez les
 lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de
 CakePHP.
+
+.. note::
+    Si vous utilisez Windows, pensez à utiliser \ à la place de /.
 
 Attacher TreeBehavior à CategoriesTable
 =======================================
@@ -127,9 +130,10 @@ gérer les données. Les structures en arbre MPTT sont optimisées pour lire des
 données ce qui les rend souvent pratique pour lire des applications lourdes
 comme les blogs.
 
-Si vous ouvrez le fichier ``src/Model/Table/CategoriesTable.php``, vous verrez
+Si vous ouvrez le fichier **src/Model/Table/CategoriesTable.php**, vous verrez
 que le TreeBehavior a été attaché à votre CategoriesTable dans la méthode
-``initialize``::
+``initialize()``. Bake ajoute automatiquement ce behavior à toutes les Tables
+qui contiennent les colonnes ``lft`` and ``rght``::
 
     $this->addBehavior('Tree');
 
@@ -153,10 +157,10 @@ Réorganiser l'Ordre des Catégories avec le TreeBehavior
 =======================================================
 
 Dans votre fichier de template index des catégories, vous pouvez lister les
-catégories et réorganiser leur ordre.
+catégories et les réordonner.
 
 Modifiez la méthode index dans votre ``CategoriesController.php`` et ajoutez les
-méthodes ``move_up`` et ``move_down`` pour pouvoir réorganiser l'ordre des
+méthodes ``move_up()`` et ``move_down()`` pour pouvoir réorganiser l'ordre des
 catégories dans l'arbre::
 
     class CategoriesController extends AppController
@@ -193,26 +197,51 @@ catégories dans l'arbre::
         }
     }
 
-Et l'index.ctp::
+Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par ceci::
 
-    <?php foreach ($categories as $category): ?>
-        <tr>
-            <td><?= $this->Number->format($category->id) ?></td>
-            <td><?= $this->Number->format($category->parent_id) ?></td>
-            <td><?= $this->Number->format($category->lft) ?></td>
-            <td><?= $this->Number->format($category->rght) ?></td>
-            <td><?= h($category->name) ?></td>
-            <td><?= h($category->description) ?></td>
-            <td><?= h($category->created) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('Voir'), ['action' => 'view', $category->id]) ?>
-                <?= $this->Html->link(__('Modifier'), ['action' => 'edit', $category->id]) ?>
-                <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $category->id], ['confirm' => __('Etes vous sur de vouloir supprimer # {0}?', $category->id)]) ?>
-                <?= $this->Form->postLink(__('Descendre'), ['action' => 'move_down', $category->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $category->id)]) ?>
-                <?= $this->Form->postLink(__('Monter'), ['action' => 'move_up', $category->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $category->id)]) ?>
-            </td>
-        </tr>
-    <?php endforeach; ?>
+    <div class="actions columns large-2 medium-3">
+        <h3><?= __('Actions') ?></h3>
+        <ul class="side-nav">
+            <li><?= $this->Html->link(__('Nouvelle Categorie'), ['action' => 'add']) ?></li>
+        </ul>
+    </div>
+    <div class="categories index large-10 medium-9 columns">
+        <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Parent Id</th>
+                <th>Title</th>
+                <th>Lft</th>
+                <th>Rght</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($categories as $category): ?>
+            <tr>
+                <td><?= $this->Number->format($category->id) ?></td>
+                <td><?= $this->Number->format($category->parent_id) ?></td>
+                <td><?= $this->Number->format($category->lft) ?></td>
+                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= h($category->name) ?></td>
+                <td><?= h($category->description) ?></td>
+                <td><?= h($category->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('Voir'), ['action' => 'view', $category->id]) ?>
+                    <?= $this->Html->link(__('Editer'), ['action' => 'edit', $category->id]) ?>
+                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $category->id], ['confirm' => __('Etes vous sur de vouloir supprimer # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Descendre'), ['action' => 'move_down', $category->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Monter'), ['action' => 'move_up', $category->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $category->id)]) ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+        </table>
+    </div>
 
 Modifier ArticlesController
 ===========================
@@ -234,8 +263,9 @@ lorsque l'on va le créer ou le modifier::
 
         public function add()
         {
-            $article = $this->Articles->newEntity($this->request->data);
+            $article = $this->Articles->newEntity();
             if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
                     return $this->redirect(['action' => 'index']);
@@ -250,7 +280,6 @@ lorsque l'on va le créer ou le modifier::
             $this->set(compact('categories'));
         }
     }
-
 
 Modifier les Templates des Articles
 ===================================

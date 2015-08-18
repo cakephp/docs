@@ -25,7 +25,7 @@ Configuration des flux d'un log (journal)
 =========================================
 
 La configuration de ``Log`` doit être faite pendant la phase de bootstrap
-de votre application. Le fichier ``config/app.php`` est justement prévu pour
+de votre application. Le fichier **config/app.php** est justement prévu pour
 ceci. Vous pouvez définir autant de jounaux que votre application nécessite.
 Les journaux doivent être configurés en utilisant :php:class:`Cake\\Core\\Log`.
 Un exemple serait::
@@ -50,7 +50,7 @@ Un exemple serait::
 
 Ce qui est au-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
 ``error``. Chacun est configuré pour gérer différents niveaux de message. Ils
-stockent aussi leurs messages de journal dans des fichiers séparés, ains'il
+stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il
 est facile de séparer les logs de debug/notice/info des erreurs plus sérieuses.
 Regardez la section sur :ref:`logging-levels` pour plus d'informations sur les
 différents niveaux et ce qu'ils signifient.
@@ -61,7 +61,7 @@ place, vous devez retirer la configuration et la re-créer en utilisant
 :php:meth:`Cake\\Log\\Log::config()`.
 
 Il est aussi possible de créer des loggers en fournissant une closure. C'est
-utile quand vous devez avoir un contôle complet sur la façon dont l'objet est
+utile quand vous devez avoir un contrôle complet sur la façon dont l'objet est
 construit. La closure doit retourner l'instance de logger construite. Par
 exemple::
 
@@ -89,9 +89,9 @@ Les gestionnaires de flux de log peuvent faire partie de votre application,
 ou parti d'un plugin. Si par exemple vous avez un enregistreur de logs de
 base de données appelé ``DatabaseLog``. Comme faisant partie de votre
 application il devrait être placé dans
-``src/Log/Engine/DatabaseLog.php``. Comme faisant partie d'un plugin
+**src/Log/Engine/DatabaseLog.php**. Comme faisant partie d'un plugin
 il devrait être placé dans
-``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. Pour configurer des
+**plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. Pour configurer des
 flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::config()`. Par
 example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 
@@ -112,7 +112,7 @@ example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 Lorsque vous configurez le flux d'un log le paramètre de ``className`` est
 utilisé pour localiser et charger le handler de log. Toutes les autres
 propriétés de configuration sont passées au constructeur des flux de log comme
-un tableau. ::
+un tableau::
 
     namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
@@ -130,7 +130,7 @@ un tableau. ::
         }
     }
 
-CakePHP a besoin que tous les adaptateurs de logging intégrent
+CakePHP a besoin que tous les adaptateurs de logging intègrent
 ``Psr\Log\LoggerInterface``. La classe :php:class:`Cake\Log\Engine\BaseLog` est
 un moyen facile de satisfaire l'interface puisqu'elle nécessite seulement
 que vous intégriez la méthode ``log()``.
@@ -142,7 +142,7 @@ Le moteur de ``FileLog`` a quelques nouvelles configurations:
 * ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
   Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
   existant est renommé en ajoutant le timestamp au nom du fichier et un
-  nouveau fichier de log est crée. Peut être une valeur de bytes en entier
+  nouveau fichier de log est créé. Peut être une valeur de bytes en entier
   ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
   Par défaut à 10MB.
 * ``rotate`` Les fichiers de log font une rotation à un temps spécifié
@@ -154,14 +154,14 @@ Le moteur de ``FileLog`` a quelques nouvelles configurations:
 
 .. warning::
 
-    Les moteurs ont le suffix ``Log``. Vous devrez éviter les noms de classe
-    comme ``SomeLogLog`` qui inclut le suffix deux fois à la fin.
+    Les moteurs ont le suffixe ``Log``. Vous devrez éviter les noms de classe
+    comme ``SomeLogLog`` qui inclut le suffixe deux fois à la fin.
 
 .. note::
 
     Vous devrez configurer les loggers pendant le bootstrapping.
-    ``config/app.php`` est l'endroit par convention pour configurer les
-    adaptaters de log.
+    **config/app.php** est l'endroit par convention pour configurer les
+    adaptateurs de log.
 
     En mode debug, les répertoires manquants vont maintenant être
     automatiquement créés pour éviter le lancement des erreurs non nécessaires

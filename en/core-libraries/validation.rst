@@ -6,6 +6,8 @@ Validation
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease.
 
+.. _creating-validators:
+
 Creating Validators
 ===================
 
@@ -96,31 +98,6 @@ An example of these methods in action is::
         ->notEmpty('body', 'A body is required', 'create')
         ->allowEmpty('header_image', 'update');
 
-Unique Fields
--------------
-
-The ``Table`` class provides a validation rule to ensure that a given field
-is unique within a table. For example, if you wanted to make sure that an e-mail
-address is unique, you could do the following::
-
-    $validator->add('email', [
-        'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
-    ]);
-
-If you wish to only ensure uniqueness of a field based on an another field in
-your table, such as a foreign key of an associated table, you can scope it with
-the following::
-
-    $validator->add('email', [
-        'unique' => [
-            'rule' => ['validateUnique', ['scope' => 'site_id']],
-            'provider' => 'table'
-        ]
-    ]);
-
-This will ensure that the provided e-mail address is only unique to other
-records with the same ``site_id``.
-
 Notice that these examples take a ``provider`` key.  Adding ``Validator``
 providers is further explained in the following sections.
 
@@ -159,7 +136,7 @@ Validator instances come with a 'default' provider setup automatically. The
 default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
 class. This makes it simple to use the methods on that class as validation
 rules. When using Validators and the ORM together, additional providers are
-configured for the table and entity objects. You can use the ``provider`` method
+configured for the table and entity objects. You can use the ``provider()`` method
 to add any additional providers your application needs::
 
     $validator = new Validator();
@@ -239,6 +216,8 @@ not a particular rule should be applied::
         }
     ]);
 
+You can access the other submitted fields values using the ``$context['data']``
+array.
 The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty. You could also use the
 ``uploadedFile`` validation rule to create optional file upload inputs::
@@ -265,6 +244,42 @@ met::
 
 In the above example, the ``email_frequency`` field cannot be left empty if the
 the user wants to receive the newsletter.
+
+Nesting Validators
+------------------
+
+.. versionadded:: 3.0.5
+
+When validating :doc:`/core-libraries/form` with nested data, or when working
+with models that contain array data types, it is necessary to validate the
+nested data you have. CakePHP makes it simple to add validators to specific
+attributes. For example, assume you are working with a non-relational database
+and need to store an article and its comments::
+
+    $data = [
+        'title' => 'Best article',
+        'comments' => [
+            ['comment' => '']
+        ]
+    ];
+
+To validate the comments you would use a nested validator::
+
+    $validator = new Validator();
+    $validator->add('title', 'not-blank', ['rule' => 'notBlank']);
+
+    $commentValidator = new Validator();
+    $commentValidator->add('comment', 'not-blank', ['rule' => 'notBlank']);
+
+    // Connect the nested validators.
+    $validator->addNestedMany('comments', $commentValidator);
+
+    // Get all errors including those from nested validators.
+    $validator->errors($data);
+
+You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
+with ``addNestedMany()``. With both methods, the nested validator's errors will
+contribute to the parent validator's errors and influence the final result.
 
 .. _reusable-validators:
 

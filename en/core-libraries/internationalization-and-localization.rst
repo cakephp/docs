@@ -40,7 +40,7 @@ Language Files
 Translations can be made available by using language files stored in your
 application. The default format for CakePHP translation files is the
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
-placed under ``src/Locale/`` and within this directory, there should be
+placed under **src/Locale/** and within this directory, there should be
 a subfolder for each language the application needs to support::
 
     /src
@@ -94,7 +94,7 @@ the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
 Setting the Default Locale
 --------------------------
 
-The default locale can be set in your ``config/bootstrap.php`` folder by using
+The default locale can be set in your **config/bootstrap.php** folder by using
 the following line::
 
     ini_set('intl.default_locale', 'fr_FR');
@@ -162,6 +162,16 @@ All translation functions support placeholder replacements::
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
+The ``'`` (single quote) character acts as an escape code in translation
+messages. Any variables between single quotes will not be replaced and is
+treated as literal text. For example::
+
+    __("This variable '{0}' be replaced.", 'will not');
+
+By using two adjacent quotes your variables will be replaced properly::
+
+    __("This variable ''{0}'' be replaced.", 'will');
+
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
 so you can translate messages and localize dates, numbers and
@@ -174,7 +184,6 @@ currency at the same time::
 
     // Returns
     Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
-
 
 Numbers in placeholders can be formatted as well with fine grain control of the
 output::
@@ -217,6 +226,10 @@ understands the same options as ``date``.
     names like ``['name' => 'Sara', 'age' => 12]``. This feature is not available
     in PHP 5.4.
 
+    If you are planning on making use of the internationalization features it is
+    a good idea to ensure you are running PHP5.5, and have a version of ICU
+    above 48.x.y. Older versions of PHP and ICU have a number of problems.
+
 Plurals
 -------
 
@@ -233,23 +246,27 @@ the following strings
 
 .. code-block:: pot
 
-     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
-     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
+     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}"
+     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{# resultados}}"
+
+     msgid "{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
+     msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 And in your application use the following code to output either of the
 translations for such string::
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
+    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
     // Returns "Ningún resultado" as the argument {0} is 0
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [1]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
 
     // Returns "1 resultado" because the argument {0} is 1
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [2, 2]);
+    __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
 
-    // Returns "2 resultados" because the argument {0} is 2
+    // Returns "many resultados" because the argument {placeholder} is 2 and
+    // argument {1} is 'many'
 
 A closer look to the format we just used will make it evident how messages are
 built::
@@ -259,6 +276,9 @@ built::
 The ``[count placeholder]`` can be the array key number of any of the variables
 you pass to the translation function. It will be used for selecting the correct
 plural form.
+
+Note that to reference ``[count placeholder]`` within ``{message}`` you have to
+use ``#``.
 
 You can of course use simpler message ids if you don't want to type the full
 plural selection sequence in your code
@@ -346,7 +366,7 @@ for a single domain and locale::
     I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
-            'default', // The fallback domain
+            'default'  // The fallback domain
         );
         $package->setMessages([
             'Dog' => 'Chien',
@@ -358,7 +378,7 @@ for a single domain and locale::
         return $package;
     });
 
-The above code can be added to your ``config/bootstrap.php`` so that
+The above code can be added to your **config/bootstrap.php** so that
 translations can be found before any translation function is used. The absolute
 minimum that is required for creating a translator is that the loader function
 should return a ``Aura\Intl\Package`` object. Once the code is in place you can
@@ -402,9 +422,9 @@ class::
         }
     }
 
-The file should be created in the ``src/I18n/Parser`` directory of your
+The file should be created in the **src/I18n/Parser** directory of your
 application. Next, create the translations file under
-``src/Locale/fr_FR/animals.yaml``
+**src/Locale/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 
@@ -447,7 +467,7 @@ any language from an external service::
         )
     });
 
-The above example calls an example external service to load a json file with the
+The above example calls an example external service to load a JSON file with the
 translations and then just build a ``Package`` object for any locale that is
 requested in the application.
 
@@ -490,7 +510,7 @@ by the ICU message formatting, CakePHP also provides the ``sprintf`` formatter::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-The messages to be translated will be passed to the ``sprintf`` function for
+The messages to be translated will be passed to the ``sprintf()`` function for
 interpolating the variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);
@@ -500,6 +520,75 @@ CakePHP before they are used for the first time. This does not include manually
 created translators using the ``translator()`` and ``config()`` methods::
 
     I18n::defaultFormatter('sprintf');
+
+Localizing Dates and Numbers
+============================
+
+When outputting Dates and Numbers in your application, you will often need that
+they are formatted according to the preferred format for the country or region
+that you wish your page to be displayed.
+
+In order to change how dates and numbers are displayed you just need to change
+the current locale setting and use the right classes::
+
+    use Cake\I18n\I18n;
+    use Cake\I18n\Time;
+    use Cake\I18n\Number;
+
+    I18n::locale('fr-FR');
+
+    $date = new Time('2015-04-05 23:00:00');
+
+    echo $date; // Displays 05/04/2015 23:00
+
+    echo Number::format(524.23); // Displays 524,23
+
+Make sure you read the :doc:`/core-libraries/time` and :doc:`/core-libraries/number`
+sections to learn more about formatting options.
+
+By default dates returned for the ORM results use the ``Cake\I18n\Time`` class,
+so displaying them directly in you application will be affected by changing the
+current locale.
+
+.. _parsing-localized-dates:
+
+Parsing Localized Datetime Data
+-------------------------------
+
+When accepting localized data from the request, it is nice to accept datetime
+information in a user's localized format. In a controller, or
+:doc:`/development/dispatch-filters` you can configure the Date, Time, and
+DateTime types to parse localized formats::
+
+    use Cake\Database\Type;
+
+    // Enable default locale format parsing.
+    Type::build('datetime')->useLocaleParser();
+
+    // Configure a custom datetime format parser format.
+    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+
+    // You can also use IntlDateFormatter constants.
+    Type::build('datetime')->useLocaleParser()
+        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
+
+The default parsing format is the same as the default string format.
+
+Automatically Choosing the Locale Based on Request Data
+=======================================================
+
+By using the ``LocaleSelectorFilter`` in your application, CakePHP will
+automatically set the locale based on the current user::
+
+    // in config/bootstrap.php
+    DispatcherFactory::add('LocaleSelector');
+
+    // Restrict the locales to only en-US, fr-FR
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+
+The ``LocaleSelectorFilter`` will use the ``Accept-Language`` header to
+automatically set the user's preferred locale. You can use the locale list
+option to restrict which locales will automatically be used.
 
 .. meta::
     :title lang=en: Internationalization & Localization

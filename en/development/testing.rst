@@ -45,9 +45,9 @@ tests::
 Test Database Setup
 ===================
 
-Remember to have debug enabled in your ``config/app.php`` file before running
+Remember to have debug enabled in your **config/app.php** file before running
 any tests.  Before running any tests you should be sure to add a ``test``
-datasource configuration to ``config/app.php``. This configuration is used by
+datasource configuration to **config/app.php**. This configuration is used by
 CakePHP for fixture tables and data::
 
     'Datasources' => [
@@ -73,9 +73,6 @@ After installing PHPUnit and setting up your ``test`` datasource configuration
 you can make sure you're ready to write and run your own tests by running your
 application's tests::
 
-    // For system wide PHPUnit
-    $ phpunit
-
     // For phpunit.phar
     $ php phpunit.phar
 
@@ -87,14 +84,14 @@ To run a specific test you can supply the path to the test as a parameter to
 PHPUnit. For example, if you had a test case for ArticlesTable class you could
 run it with::
 
-    $ phpunit tests/TestCase/Model/Table/ArticlesTableTest
+    $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
 You should see a green bar with some additional information about the tests run,
 and number passed.
 
 .. note::
 
-    If you are on a windows system you probably won't see any colours.
+    If you are on a Windows system you probably won't see any colours.
 
 Test Case Conventions
 =====================
@@ -123,7 +120,9 @@ Our helper looks like::
 
     namespace App\View\Helper;
 
-    class ProgressHelper extends AppHelper
+    use Cake\View\Helper;
+
+    class ProgressHelper extends Helper
     {
         public function bar($value)
         {
@@ -137,7 +136,7 @@ Our helper looks like::
 
 This is a very simple example, but it will be useful to show how you can create
 a simple test case. After creating and saving our helper, we'll create the test
-case file in ``tests/TestCase/View/Helper/ProgressHelperTest.php``. In that file
+case file in **tests/TestCase/View/Helper/ProgressHelperTest.php**. In that file
 we'll start with the following::
 
     namespace App\Test\TestCase\View\Helper;
@@ -211,13 +210,34 @@ Once you have PHPUnit installed and some test cases written, you'll want to run
 the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
-By using ``phpunit`` you can run your application and plugin tests. To run your
+By using ``phpunit`` you can run your application tests. To run your
 application's tests you can simply run::
 
-    $ phpunit
+    // composer installs
+    $ vendor/bin/phpunit
 
-From your application's root directory. To run a plugin's tests, first ``cd``
-into the plugin directory, then use ``phpunit`` to run the tests.
+    // phar file
+    php phpunit.phar
+
+From your application's root directory. To run tests for a plugin that is part
+of your application source, first ``cd`` into the plugin directory, then use
+``phpunit`` command that matches how you installed phpunit::
+
+    cd plugins
+
+    // Using composer installed phpunit
+    ../vendor/bin/phpunit
+
+    // Using phar file
+    php ../phpunit.phar
+
+To run tests on a standalone plugin, you should first install the project in
+a separate directory and install its dependencies::
+
+    git clone git://github.com/cakephp/debug_kit.git
+    cd debug_kit
+    php ~/composer.phar install
+    php ~/phpunit.phar
 
 Filtering Test Cases
 --------------------
@@ -293,7 +313,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``test`` in your ``config/datasources.php``
+CakePHP uses the connection named ``test`` in your **config/datasources.php**
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -325,7 +345,7 @@ When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
 used to test our own Article model. Create a file named ``ArticlesFixture.php``
-in your ``tests/Fixture`` directory, with the following content::
+in your **tests/Fixture** directory, with the following content::
 
     namespace App\Test\Fixture;
 
@@ -343,38 +363,40 @@ in your ``tests/Fixture`` directory, with the following content::
               'body' => 'text',
               'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
               'created' => 'datetime',
-              'updated' => 'datetime',
+              'modified' => 'datetime',
               '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']]
               ]
           ];
           public $records = [
               [
-                  'id' => 1,
                   'title' => 'First Article',
                   'body' => 'First Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:39:23',
-                  'updated' => '2007-03-18 10:41:31'
+                  'modified' => '2007-03-18 10:41:31'
               ],
               [
-                  'id' => 2,
                   'title' => 'Second Article',
                   'body' => 'Second Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:41:23',
-                  'updated' => '2007-03-18 10:43:31'
+                  'modified' => '2007-03-18 10:43:31'
               ],
               [
-                  'id' => 3,
                   'title' => 'Third Article',
                   'body' => 'Third Article Body',
                   'published' => '1',
                   'created' => '2007-03-18 10:43:23',
-                  'updated' => '2007-03-18 10:45:31'
+                  'modified' => '2007-03-18 10:45:31'
               ]
           ];
      }
+
+.. note::
+
+    It is recommended to not manually add values to auto incremental columns,
+    as it interferes with the sequence generation in PostgreSQL and SQLServer.
 
 The ``$connection`` property defines the datasource of which the fixture will
 use.  If your application uses multiple datasources, you should make the
@@ -431,7 +453,7 @@ Dynamic Data and Fixtures
 Since records for a fixture are declared as a class property, you cannot easily
 use functions or other dynamic data to define fixtures. To solve this problem,
 you can define ``$records`` in the init() function of your fixture. For example
-if you wanted all the created and updated timestamps to reflect today's date you
+if you wanted all the created and modified timestamps to reflect today's date you
 could do the following::
 
     namespace App\Test\Fixture;
@@ -447,7 +469,7 @@ could do the following::
             'body' => 'text',
             'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
             'created' => 'datetime',
-            'updated' => 'datetime',
+            'modified' => 'datetime',
             '_constraints' => [
                 'primary' => ['type' => 'primary', 'columns' => ['id']],
             ]
@@ -457,12 +479,11 @@ could do the following::
         {
             $this->records = [
                 [
-                    'id' => 1,
                     'title' => 'First Article',
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ],
             ];
             parent::init();
@@ -483,7 +504,7 @@ create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
-(``tests/Fixture/ArticlesFixture.php``) to::
+(**tests/Fixture/ArticlesFixture.php**) to::
 
 
     class ArticlesFixture extends TestFixture
@@ -508,28 +529,25 @@ as it was shown on previous section. For example::
         public $import = ['table' => 'articles'];
         public $records = [
             [
-              'id' => 1,
               'title' => 'First Article',
               'body' => 'First Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:39:23',
-              'updated' => '2007-03-18 10:41:31'
+              'modified' => '2007-03-18 10:41:31'
             ],
             [
-              'id' => 2,
               'title' => 'Second Article',
               'body' => 'Second Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:41:23',
-              'updated' => '2007-03-18 10:43:31'
+              'modified' => '2007-03-18 10:43:31'
             ],
             [
-              'id' => 3,
               'title' => 'Third Article',
               'body' => 'Third Article Body',
               'published' => '1',
               'created' => '2007-03-18 10:43:23',
-              'updated' => '2007-03-18 10:45:31'
+              'modified' => '2007-03-18 10:45:31'
             ]
         ];
     }
@@ -595,7 +613,7 @@ Testing Table Classes
 =====================
 
 Let's say we already have our Articles Table class defined in
-``src/Model/Table/ArticlesTable.php``, and it looks like::
+**src/Model/Table/ArticlesTable.php**, and it looks like::
 
     namespace App\Model\Table;
 
@@ -615,11 +633,11 @@ Let's say we already have our Articles Table class defined in
     }
 
 We now want to set up a test that will test this table class. Let's now create
-a file named ``ArticlesTableTest.php`` in your ``tests/TestCase/Model/Table`` directory,
+a file named ``ArticlesTableTest.php`` in your **tests/TestCase/Model/Table** directory,
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
-    
+
     use App\Model\Table\ArticlesTable;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
@@ -637,7 +655,7 @@ Creating a Test Method
 ----------------------
 
 Let's now add a method to test the function published() in the Article model.
-Edit the file ``tests/TestCase/Model/Table/ArticlesTableTest.php`` so it now
+Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it now
 looks like this::
 
     namespace App\Test\TestCase\Model\Table;
@@ -676,7 +694,7 @@ creating an instance of our ``ArticlesTable`` class, and then run our
 ``find('published')`` method. In ``$expected`` we set what we expect should be
 the proper result (that we know since we have defined which records are
 initially populated to the article table.) We test that the result equals our
-expectation by using the ``assertEquals`` method. See the :ref:`running-tests`
+expectation by using the ``assertEquals()`` method. See the :ref:`running-tests`
 section for more information on how to run your test case.
 
 
@@ -696,6 +714,10 @@ with reflected properties that normal mocks have::
 
         $model->verifyEmail('test@example.com');
     }
+
+In your ``tearDown()`` method be sure to remove the mock with::
+
+    TableRegistry::clear();
 
 .. _integration-testing:
 
@@ -750,7 +772,7 @@ model. The controller code looks like::
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
-``tests/TestCase/Controller`` directory and put the following inside::
+**tests/TestCase/Controller** directory and put the following inside::
 
     namespace App\Test\TestCase\Controller;
 
@@ -837,7 +859,7 @@ to configure the requests you will send to your application under test::
         'headers' => ['Accept' => 'application/json']
     ]);
 
-The state set by these helper methods is reset in the ``tearDown`` method.
+The state set by these helper methods is reset in the ``tearDown()`` method.
 
 .. _testing-authentication:
 
@@ -903,6 +925,9 @@ make testing responses much simpler. Some examples are::
     // Check that no Location header has been set
     $this->assertNoRedirect();
 
+    // Check a part of the Location header
+    $this->assertRedirectContains('/articles/edit/');
+
     // Assert not empty response content
     $this->assertResponseNotEmpty();
 
@@ -914,6 +939,7 @@ make testing responses much simpler. Some examples are::
 
     // Assert partial response content
     $this->assertResponseContains('You won!');
+    $this->assertResponseNotContains('You lost!');
 
     // Assert layout
     $this->assertLayout('default');
@@ -931,7 +957,16 @@ make testing responses much simpler. Some examples are::
     $this->assertEquals('jose', $this->viewVariable('user.username'));
 
     // Assert cookies in the response
-    $this->assertEquals('1', $this->cookies());
+    $this->assertCookie('1', 'thingid');
+
+    // Check the content type
+    $this->assertContentType('application/json');
+
+In addition to the above assertion methods, you can also use all of the
+assertions in `TestSuite
+<http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
+found in `PHPUnit
+<https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
 
 
 Testing a JSON Responding Controller
@@ -959,7 +994,7 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``tests/TestCase/Controller/MarkersControllerTest.php``
+Now we create the file **tests/TestCase/Controller/MarkersControllerTest.php**
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase
@@ -994,8 +1029,8 @@ often results in fragile, difficult to maintain test suites that are prone to
 breaking. When writing functional tests using :php:class:`IntegrationTestCase`
 you can inspect the rendered view content by setting the ``return`` option to
 'view'. While it is possible to test view content using IntegrationTestCase,
-a more robust and maintable integration/view testing can be accomplished using
-tools like `Selenium webdriver <http://seleniumhq.org>`_.
+a more robust and maintainable integration/view testing can be accomplished
+using tools like `Selenium webdriver <http://seleniumhq.org>`_.
 
 
 Testing Components
@@ -1004,7 +1039,7 @@ Testing Components
 Let's pretend we have a component called PagematronComponent in our application.
 This component helps us set the pagination limit value across all the
 controllers that use it. Here is our example component located in
-``app/Controller/Component/PagematronComponent.php``::
+**src/Controller/Component/PagematronComponent.php**::
 
     class PagematronComponent extends Component
     {
@@ -1041,17 +1076,17 @@ controllers that use it. Here is our example component located in
     }
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being
-set correctly by the ``adjust`` method in our component. We create the file
-``tests/TestCase/Controller/Component/PagematronComponentTest.php``::
+set correctly by the ``adjust()`` method in our component. We create the file
+**tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 
     namespace App\Test\TestCase\Controller\Component;
 
     use App\Controller\Component\PagematronComponent;
-    use Cake\TestSuite\TestCase;
     use Cake\Controller\Controller;
     use Cake\Controller\ComponentRegistry;
     use Cake\Network\Request;
     use Cake\Network\Response;
+    use Cake\TestSuite\TestCase;
 
     class PagematronComponentTest extends TestCase
     {
@@ -1140,8 +1175,8 @@ Now we create our tests::
         public function setUp()
         {
             parent::setUp();
-            $view = new View();
-            $this->helper = new CurrencyRendererHelper($view);
+            $View = new View();
+            $this->helper = new CurrencyRendererHelper($View);
         }
 
         // Testing the usd() function
@@ -1167,6 +1202,9 @@ check if the returned values are equal to what is expected.
 Save this and execute the test. You should see a green bar and messaging
 indicating 1 pass and 4 assertions.
 
+When you are testing a Helper which uses other helpers, be sure to mock the
+View clases ``loadHelpers`` method.
+
 Creating Test Suites
 ====================
 
@@ -1190,7 +1228,7 @@ would be
 ``CakeTestSuite`` offers several methods for easily creating test suites based
 on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
-would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
+would create **tests/TestCase/AllModelTest.php**. Put the following in it::
 
     class AllModelTest extends TestSuite
     {
@@ -1202,13 +1240,13 @@ would create ``tests/TestCase/AllModelTest.php``. Put the following in it::
     }
 
 The code above will group all test cases found in the
-``tests/TestCase/Model/`` folder. To add an individual file, use
+**tests/TestCase/Model/** folder. To add an individual file, use
 ``$suite->addTestFile($filename);``. You can recursively add a directory
 for all tests using::
 
     $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
-Would recursively add all test cases in the ``tests/TestCase/``
+Would recursively add all test cases in the **tests/TestCase/**
 directory.
 
 Creating Tests for Plugins
@@ -1271,8 +1309,7 @@ present in your ``composer.json`` file::
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "tests",
-            "MyPlugin\\Test\\Fixture\\": "tests/Fixture"
+            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
         }
     }
 
@@ -1351,7 +1388,7 @@ a *shell script step* to the build that contains the following:
     ];
     CONFIG
 
-Then uncomment the following line in your ``config/bootstrap.php`` file::
+Then uncomment the following line in your **config/bootstrap.php** file::
 
     //Configure::load('app_local', 'default');
 

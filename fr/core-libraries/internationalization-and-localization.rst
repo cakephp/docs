@@ -40,7 +40,7 @@ Fichiers de Langues
 Les traductions peuvent être mises à disposition en utilisant des fichiers
 de langue stockés dans votre application. Le format par défaut pour ces
 fichiers est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
-Ces fichiers doivent être placés dans ``src/Locale/`` et dans ce répertoire,
+Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire,
 il devrait y avoir un sous-dossier par langue que l'application doit prendre
 en charge::
 
@@ -56,12 +56,13 @@ en charge::
                 default.po
 
 Le domaine par défaut est 'default', votre dossier ``locale`` devrait donc
-contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se réfère à un regroupement
-arbitraire de messages de traduction. Si aucun groupe n'est utilisé, le groupe par défaut
-est sélectionné.
+contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se
+réfère à un regroupement arbitraire de messages de traduction. Si aucun groupe
+n'est utilisé, le groupe par défaut est sélectionné.
 
-Les plugins peuvent également contenir des fichiers de traduction, la convention est d'utiliser la version
-``under_scored`` du nom du plugin comme domaine de la traduction des messages::
+Les plugins peuvent également contenir des fichiers de traduction, la convention
+est d'utiliser la version ``under_scored`` du nom du plugin comme domaine de la
+traduction des messages::
 
     MyPlugin
         /src
@@ -71,9 +72,9 @@ Les plugins peuvent également contenir des fichiers de traduction, la conventio
                 /de
                     my_plugin.po
 
-Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO de
-la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``, ``da_DK``,
-qui contient en même temps la langue et le pays où elle est parlée.
+Les dossiers de traduction peuvent être composées d'un code à deux lettres ISO
+de la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``,
+``da_DK``, qui contient en même temps la langue et le pays où elle est parlée.
 
 Un fichier de traduction pourrait ressembler à ceci :
 
@@ -97,13 +98,13 @@ plus.
 Définir la Locale par Défaut
 ----------------------------
 
-La ``locale`` par défaut se détermine dans le fichier ``config/bootstrap.php``
+La ``locale`` par défaut se détermine dans le fichier **config/bootstrap.php**
 via::
 
     ini_set('intl.default_locale', 'fr_FR');
 
-Cela permet de contrôler plusieurs aspects de votre application, incluant la langue
-de traduction par défaut, le format des dates, des nombres, et devises
+Cela permet de contrôler plusieurs aspects de votre application, incluant la
+langue de traduction par défaut, le format des dates, des nombres, et devises
 à chaque fois qu'un de ces éléments s'affiche, en utilisant les bibliothèques
 de localisation fournies par CakePHP.
 
@@ -171,6 +172,18 @@ Toutes les fonctions de traduction intègrent le remplacement de placeholder::
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
+le caractère ``'`` (guillemet simple ou apostrophe) agit comme un caractère
+d'échappement dans les messages de traduction. Chaque variable entourée de
+guillemets simples ne sera pas remplacée et sera traitée en tant que texte
+littéral. Par exemple::
+
+    __("This variable '{0}' be replaced.", 'will not');
+
+En utilisant deux guillemets  simples côte à côte, vos variables seront
+remplacées correctement::
+
+    __("This variable ''{0}'' be replaced.", 'will');
+
 Ces fonctions profitent des avantages du `MessageFormatter ICU
 <http://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
 traduire des messages, des dates, des nombres et des devises en même temps::
@@ -226,6 +239,11 @@ il comprend les mêmes options que ``date``.
     ``['name' => 'Sara','age' => 12]``. Cette fonctionnalité n'est pas
     disponible dans PHP 5.4.
 
+    Si vous prévoyez d'utiliser les fonctionnalités d'internationalisation, il
+    est préférable d'utiliser PHP5.5 et une version d'ICU supérieure à 48.x.y.
+    Les versions antérieures de PHP et ICU comportent un certain nombre de
+    problèmes.
+
 Pluriels
 --------
 
@@ -243,23 +261,26 @@ pourriez avoir les chaines suivantes
 
 .. code-block:: pot
 
-     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
-     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
+     msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}"
+     msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{# resultados}}"
+
+     msgid "{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
+     msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 Et dans votre application utilisez le code suivant pour afficher l'une des
 traductions pour une telle chaine::
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found {1} records}}', [0]);
+    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
     // Retourne "Ningún resultado" puisque l'argument {0} est 0
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [1]);
+    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
 
     // Retourne "1 resultado" puisque l'argument {0} est 1
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [2, 2]);
-
-    // Retourne "2 resultados" puisque l'argument {0} est 2
+    __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
+    // Retourne "many resultados" puisque l'argument {placeholder} est 2 et
+    // l'argument {1} est 'many'
 
 Regarder de plus près le format que nous avons juste utilisé, rendra évident
 la méthode de construction des messages::
@@ -269,6 +290,9 @@ la méthode de construction des messages::
 Le ``[count placeholder]`` peut être le numéro de clé du tableau de n'importe
 quelle variable passée à la fonction de traduction. Il sera utilisé pour
 sélectionner la forme plurielle correcte.
+
+Noter que pour faire référence à ``[count placeholder]`` dans ``{message}``
+vous devez utiliser ``#``.
 
 Vous pouvez bien entendu utiliser des id de messages plus simples si vous ne
 voulez pas taper la séquence plurielle complète dans votre code.
@@ -361,7 +385,7 @@ un seul domaine et une seule locale::
     I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
             'default', // The formatting strategy (ICU)
-            'default', // The fallback domain
+            'default' // The fallback domain
         );
         $package->setMessages([
             'Dog' => 'Chien',
@@ -373,7 +397,7 @@ un seul domaine et une seule locale::
         return $package;
     });
 
-Le code ci-dessus peut être ajouté à votre ``config/bootstrap.php`` pour
+Le code ci-dessus peut être ajouté à votre **config/bootstrap.php** pour
 que les traductions soient ajoutées avant qu'une fonction de traduction ne soit
 utilisée. Le minimum absolu nécessaire pour créer un traducteur est que la
 fonction loader doit retourner un objet ``Aura\Intl\Package``. Une fois que le
@@ -421,9 +445,9 @@ Par exemple, si vous vouliez charger les messages de traduction en utilisant
         }
     }
 
-Le fichier doit être créé dans le dossier ``src/I18n/Parser`` de votre
+Le fichier doit être créé dans le dossier **src/I18n/Parser** de votre
 application. Ensuite, créez les fichiers de traduction sous
-``src/Locale/fr_FR/animals.yaml``
+**src/Locale/fr_FR/animals.yaml**
 
 .. code-block:: yaml
 
@@ -468,7 +492,7 @@ défaut et pour chaque langue depuis un service externe::
     });
 
 Le code ci-dessus appelle un service externe exemple pour charger un fichier
-json avec les traductions puis construit uniquement un objet ``Package``
+JSON avec les traductions puis construit uniquement un objet ``Package``
 pour chaque locale nécessaire dans l'application.
 
 Pluriels et Contexte dans les Traducteurs Personnalisés
@@ -512,7 +536,7 @@ formateur ``sprintf``::
 
     return Package('sprintf', 'fallback_domain', $messages);
 
-Les messages à traduire seront passés à la fonction ``sprintf`` pour
+Les messages à traduire seront passés à la fonction ``sprintf()`` pour
 interpoler les variables::
 
     __('Hello, my name is %s and I am %d years old', 'José', 29);
@@ -524,6 +548,75 @@ n'inclut pas les traducteurs créés manuellement en utilisant les méthodes
 
     I18n::defaultFormatter('sprintf');
 
+Localiser les Dates et les Nombres
+==================================
+
+Lorsque vous affichez des dates et des nombres dans votre application, vous
+voudrez souvent qu'elles soient formatées conformément au format du pays ou
+de la région dans lequel vous souhaitez afficher la page.
+
+Pour changer l'affichage des dates et des nombres, vous devez uniquement changer
+la locale et utiliser les bonnes classes::
+
+    use Cake\I18n\I18n;
+    use Cake\I18n\Time;
+    use Cake\I18n\Number;
+
+    I18n::locale('fr-FR');
+
+    $date = new Time('2015-04-05 23:00:00');
+
+    echo $date; // Affiche 05/04/2015 23:00
+
+    echo Number::format(524.23); // Displays 524,23
+
+Assurez vous de lire les sections :doc:`/core-libraries/time` et
+:doc:`/core-libraries/number` pour en apprendre plus sur les options de formatage.
+
+Par défaut, les dates renvoyées par l'ORM utilisent la classe ``Cake\I18n\Time``,
+donc leur l'affichage direct dans votre application sera affecté par le
+changement de la locale.
+
+.. _parsing-localized-dates:
+
+Parser les Données Datetime Localisées
+--------------------------------------
+
+Quand vous acceptez les données localisées, c'est sympa d'accepter les
+informations de type datetime dans un format localisé pour l'utilisateur. Dans
+un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
+les types Date, Time, et DateTime pour parser les formats localisés::
+
+    use Cake\Database\Type;
+
+    // Permet de parser avec le format de locale par défaut.
+    Type::build('datetime')->useLocaleParser();
+
+    // Configure un parser personnalisé du format de datetime.
+    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+
+    // Vous pouvez aussi utiliser les constantes IntlDateFormatter.
+    Type::build('datetime')->useLocaleParser()
+        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
+
+Le parsing du format par défaut est le même que le format de chaîne par défaut.
+
+Sélection Automatique de Locale Basée sur les Données de Requêtes
+=================================================================
+
+En utilisant le ``LocaleSelectorFilter`` dans votre application, CakePHP
+définira automatiquement la locale en se basant sur l'utilisateur actuel::
+
+    // dans config/bootstrap.php
+    DispatcherFactory::add('LocaleSelector');
+
+    // Limite les locale à en-US et fr-FR uniquement
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+
+Le ``LocaleSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir
+automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
+l'option de liste de locale pour limiter quelles locales seront utilisées
+automatiquement.
 
 .. meta::
     :title lang=fr: Internationalization & Localization

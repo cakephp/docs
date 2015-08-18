@@ -252,7 +252,7 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
         // 渲染 /View/Elements/ajaxreturn.ctp 中的元素
         $this->render('/Elements/ajaxreturn');
 
-    :php:attr:`~View::$layout` 参数用来指定视图渲染所使用的布局。
+    :php:attr:`~View::$layout` 参数用来指定视图渲染所使用���布局。
 
 渲染某个视图
 ~~~~~~~~~~~~
@@ -744,5 +744,5 @@ $components、$helpers 和 $uses
     controllers/components
 
 .. meta::
-    :title lang=zh_CN: Controllers
-    :keywords lang=zh_CN: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=zh: Controllers
+    :keywords lang=zh: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes

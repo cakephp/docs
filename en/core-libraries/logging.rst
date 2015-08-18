@@ -24,7 +24,7 @@ Logging Configuration
 =====================
 
 Configuring ``Log`` should be done during your application's bootstrap phase.
-The ``config/app.php`` file is intended for just this.  You can define
+The **config/app.php** file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
 configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
@@ -48,7 +48,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
 The above creates two loggers.  One named ``debug`` the other named ``error``.
 Each is configured to handle different levels of messages. They also store their
-log messages in separate files, so its easy to separate debug/notice/info logs
+log messages in separate files, so it's easy to separate debug/notice/info logs
 from more serious errors. See the section on :ref:`logging-levels` for more
 information on the different levels and what they mean.
 
@@ -81,8 +81,8 @@ Creating Log Adapters
 Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLog``. As part of your application it would be placed in
-``src/Log/Engine/DatabaseLog.php``. As part of a plugin it would be placed in
-``plugins/LoggingPack/src/Log/Engine/DatabaseLog.php``. To configure log
+**src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
+**plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. To configure log
 adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example
 configuring our DatabaseLog would look like::
 
@@ -144,7 +144,7 @@ interface as it only requires you to implement the ``log()`` method.
 
 .. note::
 
-    You should configure loggers during bootstrapping. ``config/app.php`` is the
+    You should configure loggers during bootstrapping. **config/app.php** is the
     conventional place to configure log adapters.
 
     In debug mode missing directories will be automatically created to avoid unnecessary
@@ -155,7 +155,7 @@ Error and Exception Logging
 
 Errors and Exceptions can also be logged. By configuring the co-responding
 values in your app.php file.  Errors will be displayed when debug > 0 and logged
-when debug is ``false``. To log uncaugh exceptions, set the ``log`` option to
+when debug is ``false``. To log uncaught exceptions, set the ``log`` option to
 ``true``. See :doc:`/development/configuration` for more information.
 
 Interacting with Log Streams

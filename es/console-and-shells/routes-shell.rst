@@ -1,5 +1,5 @@
-Plugin Assets Shell
-###################
+Routes Shell
+############
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
@@ -9,7 +9,3 @@ Plugin Assets Shell
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
-
-.. meta::
-    :title lang=es: Plugin Assets Shell
-    :keywords lang=es: plugin,assets

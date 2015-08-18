@@ -36,8 +36,8 @@ customize multiple templates and keep your code DRY::
         'Paginator' => ['templates' => 'paginator-templates']
     ];
 
-This will load the file located at ``config/paginator-templates.php`` and
-read templates from the ``$config`` variable within that file. You can also load
+This will load the file located at ``config/paginator-templates.php``. See the
+example below for how the file should look like. You can also load
 templates from a plugin using :term:`plugin syntax`::
 
     // In a controller.
@@ -425,7 +425,7 @@ which can be easily integrated into your table column headers:
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
         </tr>
-           <?php foreach ($recipies as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
             <td><?= $recipe->id ?> </td>
             <td><?= h($recipe->title) ?> </td>
@@ -446,7 +446,7 @@ It is also possible to sort a column based on associations:
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
             <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
         </tr>
-           <?php foreach ($recipies as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
             <td><?= h($recipe->title) ?> </td>
             <td><?= h($recipe->name) ?> </td>

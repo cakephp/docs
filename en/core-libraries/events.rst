@@ -121,41 +121,6 @@ along. The listeners will handle all the extra logic around the
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
 
-Dispatching Events
-==================
-
-Once you have obtained an instance of an event manager you can dispatch events
-using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an instance
-of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event::
-
-    // Create a new event and dispatch it.
-    $event = new Event('Model.Order.afterPlace', $this, [
-        'order' => $order
-    ]);
-    $this->eventManager()->dispatch($event);
-
-:php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The first one is
-the event name, you should try to keep this name as unique as possible, while
-making it readable. We suggest a convention as follows: ``Layer.eventName`` for
-general events happening at a layer level (e.g. ``Controller.startup``,
-``View.beforeRender``) and ``Layer.Class.eventName`` for events happening in
-specific classes on a layer, for example ``Model.User.afterRegister`` or
-``Controller.Courses.invalidAccess``.
-
-The second argument is the ``subject``, meaning the object associated to the event,
-usually when it is the same class triggering events about itself, using ``$this``
-will be the most common case. Although a Component could trigger
-controller events too. The subject class is important because listeners will get
-immediate access to the object properties and have the chance to inspect or
-change them on the fly.
-
-Finally, the third argument is any additional event data.This can be any data you consider
-useful to pass around so listeners can act upon it. While this can be an argument
-of any type, we recommend passing an associative array.
-
-The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
-object as an argument and notifies all subscribed listeners.
-
 Registering Listeners
 =====================
 
@@ -193,9 +158,9 @@ necessary. Our ``UserStatistics`` listener might start out like::
     $statistics = new UserStatistic();
     $this->Orders->eventManager()->on($statistics);
 
-As you can see in the above code, the ``on`` function will accept instances
+As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
-``implementedEvents`` to attach the correct callbacks.
+``implementedEvents()`` to attach the correct callbacks.
 
 Registering Anonymous Listeners
 -------------------------------
@@ -245,8 +210,8 @@ below this default will work. On the other hand if you desire to run the
 callback after the others, using a number above ``10`` will do.
 
 If two callbacks happen to have the same priority value, they will be executed
-with a the order they were attached. You set priorities using the ``attach``
-method for callbacks, and declaring it in the ``implementedEvents`` function for
+with a the order they were attached. You set priorities using the ``attach()``
+method for callbacks, and declaring it in the ``implementedEvents()`` function for
 event listeners::
 
     // Setting priority for a callback
@@ -301,6 +266,41 @@ order.
     Unlike in 2.x, converting event data to listener arguments is the default
     behavior and cannot be disabled.
 
+Dispatching Events
+==================
+
+Once you have obtained an instance of an event manager you can dispatch events
+using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an instance
+of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event::
+
+    // An event listener has to be instantiated before dispatching an event.
+    // Create a new event and dispatch it.
+    $event = new Event('Model.Order.afterPlace', $this, [
+        'order' => $order
+    ]);
+    $this->eventManager()->dispatch($event);
+
+:php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The first one is
+the event name, you should try to keep this name as unique as possible, while
+making it readable. We suggest a convention as follows: ``Layer.eventName`` for
+general events happening at a layer level (e.g. ``Controller.startup``,
+``View.beforeRender``) and ``Layer.Class.eventName`` for events happening in
+specific classes on a layer, for example ``Model.User.afterRegister`` or
+``Controller.Courses.invalidAccess``.
+
+The second argument is the ``subject``, meaning the object associated to the event,
+usually when it is the same class triggering events about itself, using ``$this``
+will be the most common case. Although a Component could trigger
+controller events too. The subject class is important because listeners will get
+immediate access to the object properties and have the chance to inspect or
+change them on the fly.
+
+Finally, the third argument is any additional event data.This can be any data you consider
+useful to pass around so listeners can act upon it. While this can be an argument
+of any type, we recommend passing an associative array.
+
+The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
+object as an argument and notifies all subscribed listeners.
 
 Stopping Events
 ---------------
@@ -311,7 +311,7 @@ listeners from being notified. You can see this in action during model callbacks
 the code detects it cannot proceed any further.
 
 In order to stop events you can either return ``false`` in your callbacks or call
-the ``stopPropagation`` method on the event object::
+the ``stopPropagation()`` method on the event object::
 
     public function doSomething($event)
     {

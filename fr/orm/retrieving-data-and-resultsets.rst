@@ -12,6 +12,20 @@ parle des différentes façons pour trouver et charger les entities, mais vous
 pouvez lire la section :doc:`/orm/entities` pour plus d'informations sur les
 entities.
 
+Débugger les Queries et les ResultSets
+======================================
+
+Since the ORM now returns Collections and Entities, debugging these objects can
+be more complicated than in previous CakePHP versions. There are now various
+ways to inspect the data returned by the ORM.
+
+- ``debug($query)`` Shows the SQL and bound params, does not show results.
+- ``debug($query->all())`` Shows the ResultSet properties (not the results).
+- ``debug($query->toArray())`` An easy way to show each of the results.
+- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
+- ``debug($query->first())`` Show the properties of a single entity.
+- ``debug((string)$query->first())`` Show the properties of a single entity as JSON.
+
 Récupérer une Entity Unique avec une Clé Primaire
 =================================================
 
@@ -32,7 +46,7 @@ Vous pouvez faire ceci facilement en utilisant ``get()``::
     ]);
 
 Si l'opération get ne trouve aucun résultat, une
-``Cake\ORM\Error\RecordNotFoundException`` sera levée. Vous pouvez soit
+``Cake\Datasource\Exception\RecordNotFoundException`` sera levée. Vous pouvez soit
 attraper cette exception vous-même, ou permettre à CakePHP de la convertir en
 une erreur 404.
 
@@ -56,6 +70,14 @@ Comme ``find()``, get a un cache intégré. Vous pouvez utiliser l'option
         'cache' => false
     ]);
 
+En option, vous pouvez faire un ``get()`` d'une entity en utilisant
+:ref:`custom-find-methods`. Par exemple vous souhaitez récupérer toutes les
+traductions pour une entity. Vous pouvez le faire en utilisant l'option
+``finder``::
+
+    $article = $articles->get($id, [
+        'finder' => 'translations',
+    ]);
 
 Utiliser les Finders pour Charger les Données
 =============================================
@@ -93,6 +115,9 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
+    // Once we have a result set we can get all the rows
+    $data = $results->toArray();
+
     // Convertir la requête en tableau va l'exécuter.
     $results = $query->toArray();
 
@@ -103,7 +128,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     plus complexes, d'ajouter des conditions supplémentaires, des limites,
     ou d'inclure des associations en utilisant l'interface courante.
 
-.. code-block:: php
+::
 
     // Dans un controller ou dans une méthode table.
     $query = $articles->find('all')
@@ -182,7 +207,7 @@ Une fois que vous avez créé un objet query, vous pouvez utiliser la méthode
 
     // Dans un controller ou une méthode de table.
     $query = $articles->find('all', [
-        'where' => ['Articles.title LIKE' => '%Ovens%']
+        'conditions' => ['Articles.title LIKE' => '%Ovens%']
     ]);
     $number = $query->count();
 
@@ -224,12 +249,13 @@ table pour configurer le champ à afficher sur une table::
     }
 
 Quand vous appelez ``list``, vous pouvez configurer les champs utilisés pour
-la clé et la valeur avec respectivement les options ``idField`` et
+la clé et la valeur avec respectivement les options ``keyField`` et
 ``valueField``::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title'
+        'keyField' => 'slug',
+        'valueField' => 'title'
     ]);
     $data = $query->toArray();
 
@@ -245,8 +271,9 @@ elements ``<optgroup>`` avec FormHelper::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
-        'idField' => 'slug', 'valueField' => 'title',
-        'groupField' => ['author_id']
+        'keyField' => 'slug',
+        'valueField' => 'title',
+        'groupField' => 'author_id'
     ]);
     $data = $query->toArray();
 
@@ -260,6 +287,14 @@ elements ``<optgroup>`` avec FormHelper::
             // Plus de données.
         ]
     ];
+
+Vous pouvez aussi créer une liste de données à partir des associations qui
+peuvent être atteintes avec les jointures::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'author.name'
+    ])->contain(['Authors']);
 
 Trouver des Données Threaded
 ============================
@@ -275,7 +310,7 @@ un ``parent_id`` donné sont placées sous l'attribut ``children``::
 
     // Expanded les valeurs par défaut
     $query = $comments->find('threaded', [
-        'idField' => $comments->primaryKey(),
+        'keyField' => $comments->primaryKey(),
         'parentField' => 'parent_id'
     ]);
     $results = $query->toArray();
@@ -283,7 +318,7 @@ un ``parent_id`` donné sont placées sous l'attribut ``children``::
     echo count($results[0]->children);
     echo $results[0]->children[0]->comment;
 
-Les clés ``parentField`` et ``idField`` peuvent être utilisées pour définir
+Les clés ``parentField`` et ``keyField`` peuvent être utilisées pour définir
 les champs sur lesquels le threading va être.
 
 .. tip::
@@ -346,6 +381,8 @@ pouvez utiliser une fonction :ref:`map-reduce` pour modifier les résultats.
 Les fonctionnalités de map reduce remplacent le callback 'afterFind' qu'on
 avait dans les versions précédentes de CakePHP.
 
+.. _dynamic-finders:
+
 Finders Dynamiques
 ==================
 
@@ -354,6 +391,13 @@ vous permettent de facilement exprimer des requêtes simples sans aucun code
 supplémentaire. Par exemple si vous vouliez trouver un utilisateur selon son
 username, vous pourriez faire::
 
+    // Dans un controller
+    // Les deux appels suivants sont équivalents.
+    $query = $this->Users->findByUsername('joebob');
+    $query = $this->Users->findAllByUsername('joebob');
+
+    // Dans une méthode de table
+    $users = TableRegistry::get('Users');
     // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -382,10 +426,40 @@ Ce qui est au-dessus se traduirait dans ce qui suit::
         'conditions' => ['username' => 'bro']
     ]);
 
+Une fois que vous avez un objet query à partir d'un finder dynamique, vous
+devrez appeler ``first()`` si vous souhaitez le premier résultat.
+
 .. note::
 
     Alors que les finders dynamiques facilitent la gestion des requêtes, ils
     entraînent des coûts de performance supplémentaires.
+
+Récupérer les Données Associées
+===============================
+
+Quand vous voulez récupérer des données associées, ou filtrer selon les données
+associées, il y a deux façons:
+
+- utiliser les fonctions query de l'ORM de CakePHP comme ``contain()`` et
+  ``matching()``
+- utiliser les fonctions de jointures comme ``innerJoin()``, ``leftJoin()``, et
+  ``rightJoin()``
+
+Vous pouvez utiliser ``contain()`` quand vous voulez charger le model primaire
+et ses données associées. Alors que ``contain()`` va vous laisser appliquer
+des conditions supplémentaires aux associations chargées, vous ne pouvez pas
+donner des contraintes au model primaire selon les associations. Pour plus de
+détails sur ``contain()``, consultez :ref:`eager-loading-associations`.
+
+Vous pouvez utiliser ``matching()`` quand vous souhaitez donner des contraintes
+au model primaire selon les associations. Par exemple, vous voulez charger tous
+les articles qui ont un tag spécifique. Pour plus de détails sur ``matching()``,
+consultez :ref:`filtering-by-associated-data`.
+
+Si vous préférez utiliser les fonctions de jointure, vous pouvez consulter
+:ref:`adding-joins` pour plus d'informations.
+
+.. _eager-loading-associations:
 
 Eager Loading des Associations
 ==============================
@@ -507,14 +581,32 @@ pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
         ]
     ]);
 
-Si vous avez limité les champs que vous chargez avec ``select()`` mais aussi
-que vous souhaitez charger les champs en dehors d'associations avec contain,
-vous pouvez utiliser ``autoFields()``::
+Si vous avez limité les champs que vous chargez avec ``select()`` mais que
+vous souhaitez aussi charger les champs enlevés des associations avec contain,
+vous pouvez passer l'objet association à ``select()``::
 
-    // Select id & title de articles, mais tous les champs de Users.
+    // Sélectionne id & title de articles, mais tous les champs enlevés pour Users.
+    $articlesTable
+        ->select(['id', 'title'])
+        ->select($articlesTable->Users)
+        ->contain(['Users']);
+
+D'une autre façon, si vous pouvez faire des associations multiples, vous
+pouvez utiliser ``autoFields()``::
+
+    // Sélectionne id & title de articles, mais tous les champs enlevés de
+    // Users, Comments et Tags.
     $query->select(['id', 'title'])
-        ->contain(['Users'])
+        ->contain(['Comments', 'Tags'])
         ->autoFields(true);
+        ->contain(['Users' => function($q) {
+            return $q->autoFields(true);
+        }]);
+
+.. versionadded:: 3.1
+    La sélection des colonnes via un objet association a été ajouté dans 3.1
+
+.. _filtering-by-associated-data:
 
 Filtrer par les Données Associées
 ---------------------------------
@@ -572,39 +664,236 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 à la fois la propriété ``_matchingData`` et la propriété standard d'association
 dans vos résultats.
 
+Using innerJoinWith
+~~~~~~~~~~~~~~~~~~~
+
+Using the ``matching()`` function, as we saw already, will create an ``INNER
+JOIN`` with the specified association and will also load the fields into the
+result set.
+
+There may be cases where you want to use ``matching()`` but are not interested
+in loading the fields into the result set. For this purpose, you can use
+``innerJoinWith()``::
+
+    $query = $articles->find();
+    $query->innerJoinWith('Tags', function ($q) {
+        return $q->where(['Tags.name' => 'CakePHP']);
+    });
+
+The ``innerJoinWith()`` method works the same as ``matching()``, that
+means that you can use dot notation to join deeply nested
+associations::
+
+    $query = $products->find()->innerJoinWith(
+        'Shops.Cities.Countries', function ($q) {
+            return $q->where(['Countries.name' => 'Japan']);
+        }
+    );
+
+Again, the only difference is that no additional columns will be added to the
+result set, and no ``_matchingData`` property will be set.
+
+.. versionadded:: 3.1
+    Query::innerJoinWith() was added in 3.1
+
+Using notMatching
+~~~~~~~~~~~~~~~~~
+
+The opposite of ``matching()`` is ``notMatching()``. This function will change
+the query so that it filters results that have no relation to the specified
+association::
+
+    // In a controller or table method.
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Tags', function ($q) {
+            return $q->where(['Tags.name' => 'boring']);
+        });
+
+The above example will find all articles that were not tagged with the word
+``boring``.  You can apply this method to HasMany associations as well. You could,
+for example, find all the authors with no published articles in the last 10
+days::
+
+    $query = $authorsTable
+        ->find()
+        ->notMatching('Articles', function ($q) {
+            return $q->where(['Articles.created >=' => new \DateTime('-10 days')]);
+        });
+
+It is also possible to use this method for filtering out records not matching
+deep associations. For example, you could find articles that have not been
+commented on by a certain user::
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Comments.Users', function ($q) {
+            return $q->where(['username' => 'jose']);
+        });
+
+Since articles with no comments at all also satisfy the condition above, you may
+want to combine ``matching()`` and ``notMatching()`` in the same query. The
+following example will find articles having at least one comment, but not
+commented by a certain user::
+
+    $query = $articlesTable
+        ->find()
+        ->notMatching('Comments.Users', function ($q) {
+            return $q->where(['username' => 'jose']);
+        })
+        ->matching('Comments');
+
+.. note::
+
+    As ``notMatching()`` will create a ``LEFT JOIN``, you might want to consider
+    calling ``distinct`` on the find query as you can get duplicate rows
+    otherwise.
+
+Keep in mind that contrary to the ``matching()`` function, ``notMatching()``
+will not add any data to the ``_matchingData`` property in the results.
+
+.. versionadded:: 3.1
+    Query::notMatching() was added in 3.1
+
+Using leftJoinWith
+~~~~~~~~~~~~~~~~~~
+
+On certain occasions you may want to calculate a result based on an association,
+without having to load all the records for it. For example, if you wanted to
+load the total number of comments an article has along with all the article
+data, you can use the ``leftJoinWith()`` function::
+
+    $query = $articlesTable->find();
+    $query->select(['total_comments' => $query->func()->count('Comments.id')])
+        ->leftJoinWith('Comments')
+        ->group(['Articles.id'])
+        ->autoFields(true);
+
+The results for the above query will contain the article data and the
+``total_comments`` property for each of them.
+
+``leftJoinWith()`` can also be used with deeply nested associations. This is
+useful, for example, for bringing the count of articles tagged with a certain
+word, per author::
+
+    $query = $authorsTable->find();
+        ->find()
+        ->select(['total_articles' => $query->func()->count('Articles.id')])
+        ->leftJoinWith('Articles.Tags', function ($q) {
+            return $q->where(['Tags.name' => 'awesome']);
+        })
+        ->group(['Authors.id'])
+        ->autoFields(true);
+
+This function will not load any columns from the specified associations into the
+result set.
+
+.. versionadded:: 3.1
+    Query::leftJoinWith() was added in 3.1
+
 .. end-contain
+
+Changing Fetching Strategies
+----------------------------
+
+As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
+using a ``JOIN`` in the main finder query. While this improves query and
+fetching speed and allows for creating more expressive conditions when
+retrieving data, this may be a problem when you want to apply certain clauses to
+the finder query for the association, such as ``order()`` or ``limit()``.
+
+For example, if you wanted to get the first comment of an article as an
+association::
+
+   $articles->hasOne('FirstComment', [
+        'className' => 'Comments',
+        'foreignKey' => 'article_id'
+   ]);
+
+In order to correctly fetch the data from this association, we will need to tell
+the query to use the ``select`` strategy, since we want order by a particular
+column::
+
+    $query = $articles->find()->contain([
+        'FirstComment' => [
+                'strategy' => 'select',
+                'queryBuilder' => function ($q) {
+                    return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
+                }
+        ]
+    ]);
+
+Dynamically changing the strategy in this way will only apply to a specific
+query. If you want to make the strategy change permanent you can do::
+
+    $articles->FirstComment->strategy('select');
+
+Using the ``select`` strategy is also a great way of making associations with
+tables in another database, since it would not be possible to fetch records
+using ``joins``.
+
+Fetching With The Subquery Strategy
+-----------------------------------
+
+As your tables grow in size, fetching associations from them can become
+slower, especially if you are querying big batches at once. A good way of
+optimizing association loading for ``hasMany`` and ``belongsToMany``
+associations is by using the ``subquery`` strategy::
+
+    $query = $articles->find()->contain([
+        'Comments' => [
+                'strategy' => 'subquery',
+                'queryBuilder' => function ($q) {
+                    return $q->where(['Comments.approved' => true]);
+                }
+        ]
+    ]);
+
+The result will remain the same as with using the default strategy, but this
+can greatly improve the query and fetching time in some databases, in
+particular it will allow to fetch big chunks of data at the same time in
+databases that limit the amount of bound parameters per query, such as
+**Microsoft SQL Server**.
+
+You can also make the strategy permanent for the association by doing::
+
+    $articles->Comments->strategy('subquery');
 
 Lazy loading des Associations
 -----------------------------
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer
-à la section :ref:`lazy-load-associations` pour plus d'informations.
+à les sections :ref:`lazy-load-associations` et
+:ref:`loading-additional-associations` pour plus d'informations.
 
 Travailler avec des Ensembles de Résultat
 =========================================
 
 Une fois qu'une requête est exécutée avec ``all()``, vous récupèrerez une
-instance de :php:class:`Cake\\ORM\ResultSet`. Cet objet offre des manières
-puissantes de manipuler les données résultantes à partir de vos requêtes.
+instance de :php:class:`Cake\\ORM\\ResultSet`. Cet objet permet de manipuler les
+données résultantes de vos requêtes. Comme les objets Query, les ensembles de
+résultats sont une :doc:`Collection </core-libraries/collections>` et vous
+pouvez utiliser toute méthode de collection sur des objets ResultSet.
 
-Les objets d'ensemble de résultat vont charger lazily les lignes à partir
-de la requête préparée underlying.
-Par défaut, les résultats seront buffered dans la mémoire vous permettant
+Les objets ResultSet vont charger lazily les lignes à partir de la requête
+préparée sous-jacente.
+Par défaut, les résultats seront mis en mémoire vous permettant
 d'itérer un ensemble de résultats plusieurs fois, ou de mettre en cache et
 d'itérer les résultats. Si vous devez travailler sur un ensemble de données qui
-ne rentre pas dans la mémoire, vous pouvez désactiver le buffering sur la
-requête pour stream les résultats::
+ne rentre pas dans la mémoire, vous pouvez désactiver la mise en mémoire sur la
+requête pour faire un stream des résultats::
 
     $query->bufferResults(false);
 
-Stopper le buffering nécessite quelques mises en garde:
+Stopper la mise en mémoire tampon nécessite quelques mises en garde:
 
 #. Vous ne pourrez plus itérer un ensemble de résultats plus d'une fois.
 #. Vous ne pourrez plus aussi itérer et mettre en cache les résultats.
-#. Le buffering ne peut pas être désactivé pour les requêtes qui chargent en
-   eager les associations hasMany ou belongsToMany, puisque ces types
-   d'association nécessitent le chargement en eager de tous les résultats
+#. La mise en mémoire tampon ne peut pas être désactivé pour les requêtes qui
+   chargent en eager les associations hasMany ou belongsToMany, puisque ces
+   types d'association nécessitent le chargement en eager de tous les résultats
    pour que les requêtes dépendantes puissent être générées. Cette
    limitation n'est pas présente lorsque l'on utilise la stratégie ``subquery``
    pour ces associations.
@@ -653,6 +942,304 @@ une liste des tags uniques sur une collection d'articles assez facilement::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
+Ci-dessous quelques autres examples des méthodes de collection utilisées
+avec des ensembles de données::
+
+    // Filtre les lignes sur une propriété calculée
+    $filtered = $results->filter(function ($row) {
+        return $row->is_recent;
+    });
+
+    // Crée un tableau associatif depuis les propriétés du résultat
+    $articles = TableRegistry::get('Articles');
+    $results = $articles->find()->contain(['Authors'])->all();
+
+    $authorList = $results->combine('id', 'author.name');
+
 Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
 ce qui peut être fait avec les ensembles de résultat en utilisant les
 fonctionnalités des collections.
+
+Récupérer le Premier & Dernier enregistrement à partir d'un ResultSet
+---------------------------------------------------------------------
+
+Vous pouvez utiliser les méthodes ``first()`` et ``last()`` pour récupérer
+les enregistrements respectifs à partir d'un ensemble de résultats::
+
+    $result = $articles->find('all')->all();
+
+    // Récupère le premier et/ou le dernier résultat.
+    $row = $result->first();
+    $row = $result->last();
+
+Récupérer un Index arbitraire à partir d'un ResultSet
+-----------------------------------------------------
+
+Vous pouvez utiliser ``skip()`` et ``first()`` pour récupérer un enregistrement
+arbitraire à partir d'un ensemble de résultats::
+
+    $result = $articles->find('all')->all();
+
+    // Récupère le 5ème enregistrement
+    $row = $result->skip(4)->first();
+
+Vérifier si une Requête Query ou un ResultSet est vide
+------------------------------------------------------
+
+Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
+pour voir si il contient au moins une colonne. Appeler ``isEmpty()`` sur un
+objet Query va évaluer la requête::
+
+    // VérifieCheck une requête.
+    $query->isEmpty();
+
+    // Vérifie les résultats.
+    $results = $query->all();
+    $results->isEmpty();
+
+.. _loading-additional-associations:
+
+Chargement d'Associations Additionnelles
+----------------------------------------
+
+Une fois que vous avez créé un ensemble de résultats, vous pourriez vouloir
+charger en eager des associations additionnelles. C'est le moment idéal pour charger
+des données. Vous pouvez charger des associations additionnelles en utilisant
+``loadInto()``::
+
+    $articles = $this->Articles->find()->all();
+    $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
+
+Vous pouvez charger en eager des données additionnelles dans une entity unique
+ou une collection d'entites.
+
+.. versionadded: 3.1
+    Table::loadInto() was added in 3.1
+
+.. _map-reduce:
+
+Modifier les Résultats avec Map/Reduce
+======================================
+
+La plupart du temps, les opérations ``find`` nécessitent un traitement
+postérieur des données qui se trouvent dans la base de données. Alors que les
+méthodes ``getter`` des ``entities`` peuvent s'occuper de la plupart de la
+génération de propriété virtuelle ou un formatage de données spéciales, parfois
+vous devez changer la structure des données d'une façon plus fondamentale.
+
+Pour ces cas, l'objet ``Query`` offre la méthode ``mapReduce()``, qui est une
+façon de traiter les résultats une fois qu'ils ont été récupérés dans la
+base de données.
+
+Un exemple habituel de changement de structure de données est le groupement de
+résultats basé sur certaines conditions. Pour cette tâche, nous
+pouvons utiliser la fonction ``mapReduce()``. Nous avons besoin de deux
+fonctions appelables ``$mapper`` et ``$reducer``.
+La callable ``$mapper`` reçoit le résultat courant de la base de données en
+premier argument, la clé d'itération en second paramètre et finalement elle
+reçoit une instance de la routine ``MapReduce`` qu'elle lance::
+
+    $mapper = function ($article, $key, $mapReduce) {
+        $status = 'published';
+        if ($article->isDraft() || $article->isInReview()) {
+            $status = 'unpublished';
+        }
+        $mapReduce->emitIntermediate($article, $status);
+    };
+
+Dans l'exemple ci-dessus, ``$mapper`` calcule le statut d'un article, soit
+publié (published) soit non publié (unpublished), ensuite il appelle
+``emitIntermediate()`` sur l'instance ``MapReduce``. Cette méthode stocke
+l'article dans la liste des articles avec pour label soit publié (published)
+ou non publié (unpublished).
+
+La prochaine étape dans le processus de map-reduce  est de consolider les
+résultats finaux. Pour chaque statut créé dans le mapper, la fonction
+``$reducer`` va être appelée donc vous pouvez faire des traitements
+supplémentaires. Cette fonction va recevoir la liste des articles dans un
+"bucket" particulier en premier paramètre, le nom du "bucket" dont il a
+besoin pour faire le traitement en second paramètre, et encore une fois, comme
+dans la fonction ``mapper()``, l'instance de la routine ``MapReduce`` en
+troisième paramètre. Dans notre exemple, nous n'avons pas fait de traitement
+supplémentaire, donc nous avons juste ``emit()`` les résultats finaux::
+
+    $reducer = function ($articles, $status, $mapReduce) {
+        $mapReduce->emit($articles, $status);
+    };
+
+Finalement, nous pouvons mettre ces deux fonctions ensemble pour faire le
+groupement::
+
+    $articlesByStatus = $articles->find()
+        ->where(['author_id' => 1])
+        ->mapReduce($mapper, $reducer);
+
+    foreach ($articlesByStatus as $status => $articles) {
+        echo sprintf("The are %d %s articles", count($articles), $status);
+    }
+
+Ce qui est au-dessus va afficher les lignes suivantes::
+
+    There are 4 published articles
+    There are 5 unpublished articles
+
+Bien sûr, ceci est un exemple simple qui pourrait être solutionné d'une autre
+façon sans l'aide d'un traitement map-reduce. Maintenant, regardons un autre
+exemple dans lequel la fonction reducer sera nécessaire pour faire quelque
+chose de plus que d'émettre les résultats.
+
+Calculer les mots mentionnés le plus souvent, où les articles contiennent
+l'information sur CakePHP, comme d'habitude nous avons besoin d'une fonction
+mapper::
+
+    $mapper = function ($article, $key, $mapReduce) {
+        if (stripos('cakephp', $article['body']) === false) {
+            return;
+        }
+
+        $words = array_map('strtolower', explode(' ', $article['body']));
+        foreach ($words as $word) {
+            $mapReduce->emitIntermediate($article['id'], $word);
+        }
+    };
+
+Elle vérifie d'abord si le mot "cakephp" est dans le corps de l'article, et
+ensuite coupe le corps en mots individuels. Chaque mot va créer son propre
+``bucket`` où chaque id d'article sera stocké. Maintenant réduisons nos
+résultats pour extraire seulement le compte::
+
+    $reducer = function ($occurrences, $word, $mapReduce) {
+        $mapReduce->emit(count($occurrences), $word);
+    }
+
+Finalement, nous mettons tout ensemble::
+
+    $articlesByStatus = $articles->find()
+        ->where(['published' => true])
+        ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
+        ->hydrate(false)
+        ->mapReduce($mapper, $reducer);
+
+Ceci pourrait retourner un tableau très grand si nous ne nettoyons pas les mots
+interdits, mais il pourrait ressembler à ceci::
+
+    [
+        'cakephp' => 100,
+        'awesome' => 39,
+        'impressive' => 57,
+        'outstanding' => 10,
+        'mind-blowing' => 83
+    ]
+
+Un dernier exemple et vous serez un expert de map-reduce. Imaginez que vous
+avez une table de ``friends`` et que vous souhaitiez trouver les "fake friends"
+dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
+mutuellement. Commençons avec notre fonction ``mapper()``::
+
+    $mapper = function ($rel, $key, $mr) {
+        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
+        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
+    };
+
+Nous avons juste dupliqué nos données pour avoir une liste d'utilisateurs que
+chaque utilisateur suit. Maintenant, il est temps de la réduire. Pour chaque
+appel au reducer, il va recevoir une liste de followers par utilisateur::
+
+    // liste de $friends ressemblera à des nombres répétés
+    // ce qui signifie que les relations existent dans les deux directions
+    [2, 5, 100, 2, 4]
+
+    $reducer = function ($friendsList, $user, $mr) {
+        $friends = array_count_values($friendsList);
+        foreach ($friends as $friend => $count) {
+            if ($count < 2) {
+                $mr->emit($friend, $user);
+            }
+        }
+    }
+
+Et nous fournissons nos fonctions à la requête::
+
+    $fakeFriends = $friends->find()
+        ->hydrate(false)
+        ->mapReduce($mapper, $reducer)
+        ->toArray();
+
+Ceci retournerait un tableau similaire à ceci::
+
+    [
+        1 => [2, 4],
+        3 => [6]
+        ...
+    ]
+
+Les tableaux résultants signifient, par exemple, que l'utilisateur avec l'id
+``1`` suit les utilisateurs ``2`` and ``4``, mais ceux-ci ne suivent pas
+``1`` de leur côté.
+
+
+Stacking Multiple Operations
+----------------------------
+
+L'utilisation de `mapReduce` dans une requête ne va pas l'exécuter
+immédiatement. L'opération va être enregistrée pour être lancée dès que
+l'on tentera de récupérer le premier résultat.
+Ceci vous permet de continuer à chainer les méthodes et les filtres
+à la requête même après avoir ajouté une routine map-reduce::
+
+   $query = $articles->find()
+        ->where(['published' => true])
+        ->mapReduce($mapper, $reducer);
+
+    // Plus loin dans votre app:
+    $query->where(['created >=' => new DateTime('1 day ago')]);
+
+C'est particulièrement utile pour construire des méthodes finder personnalisées
+ comme décrit dans la section :ref:`custom-find-methods`::
+
+    public function findPublished(Query $query, array $options)
+    {
+        return $query->where(['published' => true]);
+    }
+
+    public function findRecent(Query $query, array $options)
+    {
+        return $query->where(['created >=' => new DateTime('1 day ago')]);
+    }
+
+    public function findCommonWords(Query $query, array $options)
+    {
+        // Same as in the common words example in the previous section
+        $mapper = ...;
+        $reducer = ...;
+        return $query->mapReduce($mapper, $reducer);
+    }
+
+    $commonWords = $articles
+        ->find('commonWords')
+        ->find('published')
+        ->find('recent');
+
+En plus, il est aussi possible d'empiler plus d'une opération ``mapReduce``
+pour une requête unique. Par exemple, si nous souhaitons avoir les mots les
+plus couramment utilisés pour les articles, mais ensuite les filtrer pour
+seulement retourner les mots qui étaient mentionnés plus de 20 fois tout au long
+des articles::
+
+    $mapper = function ($count, $word, $mr) {
+        if ($count > 20) {
+            $mr->emit($count, $word);
+        }
+    };
+
+    $articles->find('commonWords')->mapReduce($mapper);
+
+Retirer Toutes les Opérations Map-reduce Empilées
+-------------------------------------------------
+
+Dans les mêmes circonstances vous voulez modifier un objet ``Query`` pour
+que les opérations ``mapReduce`` ne soient pas exécutées du tout. Ceci peut
+être facilement fait en appelant la méthode avec les deux paramètres à
+null et le troisième paramètre (overwrite) à ``true``::
+
+    $query->mapReduce(null, null, true);

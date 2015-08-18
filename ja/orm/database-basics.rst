@@ -1,5 +1,5 @@
-Database Basics
-###############
+データベースの基本
+###################
 
 .. note::
     The documentation is not currently supported in Japanese language for this

@@ -21,5 +21,5 @@ CakePHP 自带 ``PagesController.php`` 作为默认的控制器。这是一个�
 
 
 .. meta::
-    :title lang=zh_CN: The Pages Controller
-    :keywords lang=zh_CN: pages controller,default controller,lib,cakephp,ships,php,file folder
+    :title lang=zh: The Pages Controller
+    :keywords lang=zh: pages controller,default controller,lib,cakephp,ships,php,file folder

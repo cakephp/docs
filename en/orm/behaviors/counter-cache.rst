@@ -9,7 +9,9 @@ Often times web applications need to display counts of related objects. For
 example, when showing a list of articles you may want to display how many
 comments it has. Or when showing a user you might want to show how many
 friends/followers she has. The CounterCache behavior is intended for these
-situations.
+situations. CounterCache will update a field in the associated models assigned
+in the options when it is invoked. The fields should exist in the database and
+be of the type INT.
 
 Basic Usage
 ===========
@@ -48,7 +50,7 @@ counter value::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'findType' => 'published'
+                'finder' => 'published'
             ]
         ]
     ]);
@@ -64,6 +66,17 @@ to find records instead::
         ]
     ]);
 
+If you want CounterCache to update multiple fields, for example both showing a
+conditional count and a basic count you can add these fields in the array::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => ['comment_count',
+            'published_comment_count' => [
+                'finder' => 'published'
+            ]
+        ]
+    ]);
+
 Lastly, if a custom finder and conditions are not suitable you can provide
 a callback method. This callable must return the count value to be stored::
 
@@ -74,3 +87,16 @@ a callback method. This callable must return the count value to be stored::
             }
         ]
     ]);
+
+
+.. note::
+
+    The CounterCache behavior works for ``belongsTo`` associations only. For
+    example for "Comments belongsTo Articles", you need to add the CounterCache
+    behavior to the ``CommentsTable`` in order to generate ``comment_count`` for
+    Articles table.
+    
+    It is possible though to make this work for ``belongsToMany`` associations.
+    You need to enable the CounterCache behavior in a custom ``through`` table
+    configured in association options. See how to configure a custom join table
+    :ref:`using-the-through-option`.

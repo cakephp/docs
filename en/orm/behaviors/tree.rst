@@ -24,8 +24,8 @@ Requirements
 This behavior requires the following columns in your table:
 
 - ``parent_id`` (nullable) The column holding the ID of the parent row
-- ``lft`` (integer) Used to maintain the tree structure
-- ``rght`` (integer) Used to maintain the tree structure
+- ``lft`` (integer, signed) Used to maintain the tree structure
+- ``rght`` (integer, signed) Used to maintain the tree structure
 
 You can configure the name of those fields should you need to customize them.
 More information on the meaning of the fields and how they are used can be found
@@ -108,6 +108,23 @@ The output will be similar to::
     __National
     __International
 
+The ``treeList`` finder takes a number of options:
+
+* ``keyPath``: A dot separated path to fetch the field to use for the array key,
+  or a closure to return the key out of the provided row.
+* ``valuePath``: A dot separated path to fetch the field to use for the array
+  value, or a closure to return the value out of the provided row.
+* ``spacer``: A string to be used as prefix for denoting the depth in the tree
+  for each item
+
+An example of all options in use is::
+
+    $query = $categories->find('treeList', [
+        'keyPath' => 'url',
+        'valuePath' => 'id',
+        'spacer' => ' '
+    ]);
+
 One very common task is to find the tree path from a particular node to the root
 of the tree. This is useful, for example, for adding the breadcrumbs list for
 a menu structure::
@@ -155,7 +172,7 @@ Node Level (Depth)
 
 Knowing the depth of tree nodes can be useful when you want to retrieve nodes
 only upto a certain level for e.g. when generating menus. You can use the
-``level`` option to specify the field that will save level of each node.
+``level`` option to specify the field that will save level of each node::
 
     $this->addBehavior('Tree', [
         'level' => 'level', // Defaults to null, i.e. no level saving
@@ -231,7 +248,7 @@ the tree) is trivial::
     $categoriesTable->delete($aCategory);
 
 The TreeBehavior will take care of all internal deleting operations for you. It
-is also possible to Only delete one node and re-assign all children to the
+is also possible to only delete one node and re-assign all children to the
 immediately superior parent node in the tree::
 
     $aCategory = $categoriesTable->get(10);
@@ -239,3 +256,21 @@ immediately superior parent node in the tree::
     $categoriesTable->delete($aCategory);
 
 All children nodes will be kept and a new parent will be assigned to them.
+
+The deletion of a node is based off of the lft and rght values of the entity. This
+is important to note when looping through the various children of a node for
+conditional deletes::
+
+    $descendants = $teams->find('children', ['for' => 1]);
+    
+    foreach ($descendants as $descendant) {
+        $team = $teams->get($descendant->id); // search for the up-to-date entity object
+        if ($team->expired) {
+            $teams->delete($team); // deletion reorders the lft and rght of database entries
+        }
+    }
+    
+The TreeBehavior reorders the lft and rght values of records in the table when a node
+is deleted. As such, the lft and rght values of the entities inside ``$descendants``
+(saved before the delete operation) will be inaccurate. Entities will have to be loaded
+and modified on the fly to prevent inconsistencies in the table.

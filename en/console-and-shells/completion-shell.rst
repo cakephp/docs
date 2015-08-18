@@ -11,7 +11,7 @@ Sub Commands
 ============
 
 The Completion Shell consists of a number of sub commands to assist the
-developer creating it's completion script. Each for a different step in the
+developer creating its completion script. Each for a different step in the
 autocompletion process.
 
 Commands
@@ -44,7 +44,7 @@ Returns::
     controller db_config fixture model plugin project test view
 
 options
---------
+-------
 
 As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)

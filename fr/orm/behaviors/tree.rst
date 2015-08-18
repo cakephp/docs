@@ -1,11 +1,11 @@
-TreeBehavior
-############
+Tree
+####
 
 .. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TreeBehavior
 
-Il est courant de vouloir stocker des données hierarchisées dans une table de
+Il est courant de vouloir stocker des données hiérarchisées dans une table de
 base de données. Des exemples de ce type de données pourrait être des catégories
 sans limite de sous-catégories, les données liées à un système de menu
 multi-niveau ou une représentation littérale de la hiérarchie comme un
@@ -16,9 +16,10 @@ stockage et la récupération de ce type de données, mais il y a quelques
 techniques connues qui les rendent possible pour fonctionner avec une
 information multi-niveau.
 
-Le TreeBehavior vous aide à maintenir une structure de données hierarchisée
+Le TreeBehavior vous aide à maintenir une structure de données hiérarchisée
 dans la base de données qui peut être requêtée facilement et aide à reconstruire
 les données en arbre pour trouver et afficher les processus.
+
 Pré-Requis
 ==========
 
@@ -26,8 +27,8 @@ Ce behavior nécessite que les colonnes suivantes soient présentes dans votre
 table:
 
 - ``parent_id`` (nullable) La colonne contenant l'ID de la ligne parente
-- ``lft`` (integer) Utilisé pour maintenir la structure en arbre
-- ``rght`` (integer) Utilisé pour maintenir la structure en arbre
+- ``lft`` (integer, signed) Utilisé pour maintenir la structure en arbre
+- ``rght`` (integer, signed) Utilisé pour maintenir la structure en arbre
 
 Vous pouvez configurer le nom de ces champs.
 Plus d'informations sur la signification des champs et comment ils sont utilisés
@@ -36,13 +37,13 @@ peuvent être trouvées dans cet article décrivant la
 
 .. warning::
 
-    TreeBehavior ne supporte pas les clés primaire composite pour le moment.
+    TreeBehavior ne supporte pas les clés primaires composites pour le moment.
 
 Un Aperçu Rapide
 ================
 
 Vous activez le behavior Tree en l'ajoutant à la Table où vous voulez stocker
-les données hierarchisées dans::
+les données hiérarchisées dans::
 
     class CategoriesTable extends Table
     {
@@ -73,7 +74,7 @@ Obtenir une liste aplatie des descendants pour un nœud est également facile::
     }
 
 Si à la place, vous avez besoin d'une liste liée, où les enfants pour
-chaque nœud sont imbriqués dans une hierarchie, vous pouvez utiliser le
+chaque nœud sont imbriqués dans une hiérarchie, vous pouvez utiliser le
 finder 'threaded'::
 
     $children = $categories
@@ -112,9 +113,29 @@ La sortie sera similaire à ceci::
     __National
     __International
 
+Le finder ``treeList`` accepte un certain nombre d'options:
+
+* ``keyPath``: Le chemin séparé par des points pour récupérer le champ à
+  utiliser en clé de tableau, ou une closure qui retourne la clé de la ligne
+  fournie.
+* ``valuePath``:
+* ``keyPath``: Le chemin séparé par des points pour récupérer le champ à
+  utiliser en valeur de tableau, ou une closure qui retourne la valeur de la
+  ligne fournie.
+* ``spacer``: Une chaîne de caractères utilisée en tant que préfixe pour
+  désigner la profondeur dans l'arbre pour chaque item.
+
+Un exemple d'utilisation de toutes les options serait::
+
+    $query = $categories->find('treeList', [
+        'keyPath' => 'url',
+        'valuePath' => 'id',
+        'spacer' => ' '
+    ]);
+
 Une tâche classique est de trouver le chemin de l'arbre à partir d'un nœud en
-particulier vers le racine de l'arbre. C'est utile, par exemple, pour ajouter
-la liste des breadcrumbs pour une strcture de menu::
+particulier vers la racine de l'arbre. C'est utile, par exemple, pour ajouter
+la liste des breadcrumbs pour une structure de menu::
 
     $nodeId = 5;
     $crumbs = $categories->find('path', ['for' => $nodeId]);
@@ -154,6 +175,22 @@ correspondent pas à votre schéma, vous pouvez leur fournir des alias::
         ]);
     }
 
+Niveau des Nœuds (profondeur)
+=============================
+
+Connaître la profondeur d'une structure arbre peut être utile lorsque vous
+voulez récupérer des nœuds jusqu'à un certain niveau uniquement par exemple
+lorsque pour générer un menu. Vous pouvez utiliser l'option ``level`` pour
+spécifier les champs qui sauvegarderont la profondeur de chaque nœud::
+
+    $this->addBehavior('Tree', [
+        'level' => 'level', // Defaults to null, i.e. no level saving
+    ]);
+
+Si vous ne souhaitez pas mettre en cache le niveau en utilisant un champ
+de base de données, vous pouvez utiliser la méthode ``TreeBehavior::getLevel()``
+pour connaître le niveau d'un nœuds.
+
 Scoping et Arbres Multiples
 ===========================
 
@@ -191,7 +228,7 @@ Sauvegarder les Données Hiérarchisées
 =====================================
 
 Quand vous utilisez le behavior Tree, vous n'avez habituellement pas besoin
-de vous soucier de la représentation interne de la structure hierarchisée. Les
+de vous soucier de la représentation interne de la structure hiérarchisée. Les
 positions où les nœuds sont placés dans l'arbre se déduisent de la colonne
 'parent_id' dans chacune de vos entities::
 
@@ -212,21 +249,40 @@ Vous pouvez faire un nœud à la racine de l'arbre en configurant la colonne
 
 Les enfants pour un nouveau nœud à la racine seront préservés.
 
-Supprimer les nœuds
-====================
+Supprimer les Nœuds
+===================
 
-Supprimer un nœud et tous son sous-arbre (tout enfant qu'il peut avoir à tout
+Supprimer un nœud et tout son sous-arbre (tout enfant qu'il peut avoir à tout
 niveau dans l'arbre) est facile::
 
     $aCategory = $categoriesTable->get(10);
     $categoriesTable->delete($aCategory);
 
 TreeBehavior va s'occuper de toutes les opérations internes de suppression.
-Il est aussi possible de Seulement supprimer un nœud et de réassigner tous les
-enfants au nœud parent immédiatemment supérieur dans l'arbre::
+Il est aussi possible de supprimer seulement un nœud et de réassigner tous les
+enfants au nœud parent immédiatement supérieur dans l'arbre::
 
     $aCategory = $categoriesTable->get(10);
     $categoriesTable->removeFromTree($aCategory);
     $categoriesTable->delete($aCategory);
 
 Tous les nœuds enfant seront conservés et un nouveau parent leur sera assigné.
+
+La suppression d'un noeud est basée sur les valeurs lft et rght de l'entity.
+C'est important de le noter quand on fait une boucle des différents enfants
+d'un noeud pour des suppressions conditionnelles::
+
+    $descendants = $teams->find('children', ['for' => 1]);
+
+    foreach ($descendants as $descendant) {
+        $team = $teams->get($descendant->id); // cherche l'objet entity mis à jour
+        if ($team->expired) {
+            $teams->delete($team); // la suppression re-trie les entrées lft et rght de la base de données
+        }
+    }
+
+TreeBehavior re-trie les valeurs lft et rght des enregistrements de la table
+quand un noeud est supprimé. Telles quelles, les valeurs lft et rght des
+entities dans ``$descendants`` (sauvegardées avant l'opération de suppression)
+seront erronées. Les entities devront être chargées et modifiées à la volée
+pour éviter les incohérences dans la table.
