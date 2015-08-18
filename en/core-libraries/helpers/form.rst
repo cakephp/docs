@@ -1101,7 +1101,7 @@ Ex: name=data[User][username], id=UserUsername
 
       Output:
 
-    .. code-block:: html
+      .. code-block:: html
 
         <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea">
         </textarea>
