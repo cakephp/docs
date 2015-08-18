@@ -209,4 +209,4 @@ inicie a construção do seu Blog com o CakePHP.
 
 .. meta::
     :title lang=pt: Tutorial - Criando um Blog
-    :keywords lang=en: tutorial, guide, blog
+    :keywords lang=pt: tutorial, guide, blog
