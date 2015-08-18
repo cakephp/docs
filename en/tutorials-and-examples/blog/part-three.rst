@@ -70,7 +70,7 @@ A migration file will be generated in the ``/config/Migrations`` folder with the
         }
     }
 
-Run another command to create a categories table::
+Run another command to create a ``categories`` table::
 
     bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
 
@@ -122,9 +122,10 @@ This will generate the following file in `config/Migrations`::
         }
     }
 
-Now that the migrations file are created, you can edit them before creating
-your tables. We need to change the `'null' => false` for the `parent_id` field
-with `'null' => true` beacause a top-level category has a null `parent_id`.
+Now that the migration files are created, you can edit them before creating
+your tables. We need to change the ``'null' => false`` for the ``parent_id``
+field with ``'null' => true`` because a top-level category has a null
+``parent_id``.
 
 Once the files fits your envy, you can run the following command to create your
 tables::
