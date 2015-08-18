@@ -1,97 +1,106 @@
 Security
 ########
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: Security
 
-`security library
-<http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_ は、\
-データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
+The `security library
+<http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_
+handles basic security measures such as providing methods for
+hashing and encrypting data.
 
-Security API
+Encrypting and Decrypting Data
+==============================
+
+.. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
+.. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
+
+Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
+lots of variance in the data much like a good password. The returned result
+will be the encrypted value with an HMAC checksum.
+
+This method will use either `openssl <http://php.net/openssl>`_ or `mcrypt
+<http://php.net/mcrypt>`_ based on what is available on your system. Data
+encrypted in one implementation is portable to the other.
+
+This method should **never** be used to store passwords.  Instead you should use
+the one way hashing methods provided by
+:php:meth:`~Cake\\Utility\\Security::hash()`. An example use would be::
+
+    // Assuming key is stored somewhere it can be re-used for
+    // decryption later.
+    $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+    $result = Security::encrypt($value, $key);
+
+If you do not supply an HMAC salt, the ``Security.salt`` value will be used.
+Encrypted values can be decrypted using
+:php:meth:`Cake\\Utility\\Security::decrypt()`.
+
+Decrypt a previously encrypted value. The ``$key`` and ``$hmacSalt``
+parameters must match the values used to encrypt or decryption will fail. An
+example use would be::
+
+    // Assuming the key is stored somewhere it can be re-used for
+    // Decryption later.
+    $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+
+    $cipher = $user->secrets;
+    $result = Security::decrypt($cipher, $key);
+
+If the value cannot be decrypted due to changes in the key or HMAC salt
+``false`` will be returned.
+
+.. _force-mcrypt:
+
+Choosing a Specific Crypto Implementation
+-----------------------------------------
+
+If you are upgrading an application from CakePHP 2.x, data encrypted in 2.x is
+not compatible with openssl. This is because the encrypted data is not fully AES
+compliant. If you don't want to go through the trouble of re-encrypting your
+data, you can force CakePHP to use ``mcrypt`` using the ``engine()`` method::
+
+    // In config/bootstrap.php
+    use Cake\Utility\Crypto\Mcrypt;
+
+    Security::engine(new Mcrypt());
+
+The above will allow you to seamlessly read data from older versions of CakePHP,
+and encrypt new data to be compatible with OpenSSL.
+
+Hashing Data
 ============
-
-.. php:staticmethod:: cipher( $text, $key )
-
-    :rtype: string
-
-    Encrypts/Decrypts a text using the given key.::
-    与えられたキーにを利用してテキストを暗号化・復号する。\ ::
-
-        // 'my_key' で秘密のパスワードを暗号化する
-        $secret = Security::cipher('my secret password', 'my_key');
-
-        // その後、秘密のパスワードを復号する
-        $nosecret = Security::cipher($secret, 'my_key');
-
-    ``cipher()`` は、 **脆弱な** XOR 暗号を利用しています。従って、重要で機密性の高いデータへ **使うべきではありません** 。
-
-.. php:staticmethod:: rijndael($text, $key, $mode)
-
-    :param string $text: 暗号化するテキスト
-    :param string $key: 暗号化に利用するキー。32バイトより長くする必要があります。
-    :param string $mode: モード。'encrypt' もしくは 'decrypt'
-
-    rijndael-256 暗号を使って、テキストの暗号化・復号を行います。
-    このメソッドを使うには `mcrypt extension <http://php.net/mcrypt>`
-    がインストールされている必要があります。\ ::
-
-        // データを暗号化
-        $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');
-
-        // その後、復号
-        $decrypted = Security::rijndael($encrypted, Configure::read('Security.key'), 'decrypt');
-
-    .. versionadded:: 2.2
-        ``Security::rijndael()`` は、2.2 で追加されました。
-
-.. php:staticmethod:: generateAuthKey( )
-
-    :rtype: string
-
-        認可用のハッシュを生成します。
-
-.. php:staticmethod:: getInstance( )
-
-    :rtype: object
-
-    オブジェクトのインスタンスを返す、シングルトン実装です。
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
-    :rtype: string
+Create a hash from string using given method. Fallback on next
+available method. If ``$salt`` is set to ``true``, the applications salt
+value will be used::
 
-    与えられたハッシュ用メソッドを利用して、文字列からハッシュを生成します。
-    指定されなかった場合は、順次利用可能なメソッドで生成を試みます。
-    ``$salt`` を true にした場合、アプリケーションに設定した salt が利用されます。
+    // Using the application's salt value
+    $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
-    ::
+    // Using a custom salt value
+    $sha1 = Security::hash('CakePHP Framework', 'sha1', 'my-salt');
 
-        //アプリケーションの salt 値を利用します。
-        $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
+    // Using the default hash algorithm
+    $hash = Security::hash('CakePHP Framework');
 
-        //独自の salt 値を利用する場合
-        $md5 = Security::hash('CakePHP Framework', 'md5', 'my-salt');
+The ``hash()`` method supports the following hashing strategies:
 
-        //デフォルトのハッシュアルゴリズムを利用する場合
-        $hash = Security::hash('CakePHP Framework');
+- md5
+- sha1
+- sha256
 
-.. php:staticmethod:: setHash( $hash )
+And any other hash algorithmn that PHP's ``hash()`` function supports.
 
-    :rtype: void
+.. warning::
 
-    Security オブジェクトがデフォルトで利用するハッシュ化メソッドを設定します。
-    この操作は、 Security::hash() を利用する全てのオブジェクトへ影響します。
-
-.. php:staticmethod:: validateAuthKey( $authKey )
-
-    :rtype: boolean
-
-    認可用ハッシュを検証します。
-
-.. todo::
-
-    もっと例を追加してください :|
+    You should not be using ``hash()`` for passwords in new applications.
+    Instead you should use the ``DefaultPasswordHasher`` class which uses bcrypt
+    by default.
 
 .. meta::
-    :title lang=ja: Security
-    :keywords lang=ja: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security
+    :title lang=en: Security
+    :keywords lang=en: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security
