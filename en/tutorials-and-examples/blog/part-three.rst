@@ -31,40 +31,101 @@ your application's bootstrap.php file.
 
 Once the plugin is loaded, run the following command to create a migration file::
 
-    bin/cake migrations create Initial
+    bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
 
-A migration file will be generated in the ``/config/Migrations`` folder. You can
-open your new migration file and add the following::
+A migration file will be generated in the ``/config/Migrations`` folder with the following::
 
     <?php
 
     use Phinx\Migration\AbstractMigration;
 
-    class Initial extends AbstractMigration
+    class CreateArticlesTable extends AbstractMigration
     {
         public function change()
         {
-            $articles = $this->table('articles');
-            $articles->addColumn('title', 'string', ['limit' => 50])
-                ->addColumn('body', 'text', ['null' => true, 'default' => null])
-                ->addColumn('category_id', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('created', 'datetime')
-                ->addColumn('modified', 'datetime', ['null' => true, 'default' => null])
-                ->save();
-
-            $categories = $this->table('categories');
-            $categories->addColumn('parent_id', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('lft', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('rght', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('name', 'string', ['limit' => 255])
-                ->addColumn('description', 'string', ['limit' => 255, 'null' => true, 'default' => null])
-                ->addColumn('created', 'datetime')
-                ->addColumn('modified', 'datetime', ['null' => true, 'default' => null])
-                ->save();
+            $table = $this->table('articles');
+            $table->addColumn('title', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('body', 'text', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('category_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->create();
         }
     }
 
-Now run the following command to create your tables::
+Run another command to create a categories table::
+
+    bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
+
+This will generate the following file in `config/Migrations`::
+
+    <?php
+
+    use Phinx\Migration\AbstractMigration;
+
+    class CreateCategoriesTable extends AbstractMigration
+    {
+        public function change()
+        {
+            $table = $this->table('categories');
+            $table->addColumn('parent_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('lft', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('rght', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('name', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('description', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->create();
+        }
+    }
+
+Now that the migrations file are created, you can edit them before creating
+your tables.
+
+Once the files fits your envy, you can run the following command to create your tables::
 
     bin/cake migrations migrate
 
@@ -151,7 +212,7 @@ In your categories index template file, you can list the categories and re-order
 them.
 
 Let's modify the index method in your ``CategoriesController.php`` and add
-``move_up()`` and ``move_down()`` methods to be able to reorder the categories in
+``moveUp()`` and ``moveDown()`` methods to be able to reorder the categories in
 the tree::
 
     class CategoriesController extends AppController
@@ -163,7 +224,7 @@ the tree::
             $this->set(compact('categories'));
         }
 
-        public function move_up($id = null)
+        public function moveUp($id = null)
         {
             $this->request->allowMethod(['post', 'put']);
             $category = $this->Categories->get($id);
@@ -175,7 +236,7 @@ the tree::
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
-        public function move_down($id = null)
+        public function moveDown($id = null)
         {
             $this->request->allowMethod(['post', 'put']);
             $category = $this->Categories->get($id);
@@ -190,7 +251,7 @@ the tree::
 
 In **src/Template/Categories/index.ctp** replace the existing content with::
 
-    <div class="actions columns large-2 medium-3">
+    <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
         <ul class="side-nav">
             <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?></li>
@@ -225,8 +286,8 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
                     <?= $this->Html->link(__('View'), ['action' => 'view', $category->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
-                    <?= $this->Form->postLink(__('Move down'), ['action' => 'move_down', $category->id], ['confirm' => __('Are you sure you want to move down # {0}?', $category->id)]) ?>
-                    <?= $this->Form->postLink(__('Move up'), ['action' => 'move_up', $category->id], ['confirm' => __('Are you sure you want to move up # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Move down'), ['action' => 'moveDown', $category->id], ['confirm' => __('Are you sure you want to move down # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Move up'), ['action' => 'moveUp', $category->id], ['confirm' => __('Are you sure you want to move up # {0}?', $category->id)]) ?>
                 </td>
             </tr>
         <?php endforeach; ?>
