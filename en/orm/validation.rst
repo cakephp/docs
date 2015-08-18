@@ -5,8 +5,8 @@ Before you :doc:`save your data</orm/saving-data>` you
 will probably want to ensure the data is correct and consistent. In CakePHP we
 have two stages of validation:
 
-1. Before request data is converted into entities validation rules around
-   data types, and formatting can be applied.
+1. Before request data is converted into entities, validation rules around
+   data types and formatting can be applied.
 2. Before data is saved, domain or application rules can be applied. These rules
    help ensure that your application's data remains consistent.
 
@@ -16,7 +16,7 @@ Validating Data Before Building Entities
 ========================================
 
 When marshalling data into entities, you can validate data. Validating data
-allows you to check the type, shape and size of data. By default request data
+allows you to check the type, shape, and size of data. By default request data
 will be validated before it is converted into entities.
 If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
@@ -26,17 +26,17 @@ fields with errors will not be present in the returned entity::
         // Entity failed validation.
     }
 
-When building an entity with validation enabled the following things happen:
+When building an entity with validation enabled the following occurs:
 
 1. The validator object is created.
 2. The ``table`` and ``default`` validation provider are attached.
-3. The named validation method is invoked. For example, ``validationDefault``.
+3. The named validation method is invoked (e.g., ``validationDefault``).
 4. The ``Model.buildValidator`` event will be triggered.
 5. Request data will be validated.
-6. Request data will be type cast into types that match the column types.
+6. Request data will be type-cast into types that match the column types.
 7. Errors will be set into the entity.
 8. Valid data will be set into the entity, while fields that failed validation
-   will be left out.
+   will be excluded.
 
 If you'd like to disable validation when converting request data, set the
 ``validate`` option to false::
@@ -55,8 +55,8 @@ The same can be said about the ``patchEntity()`` method::
 Creating A Default Validation Set
 =================================
 
-Validation rules are defined in the Table classes for convenience. This helps
-find what data should be validated in correspondence to where it will be saved.
+Validation rules are defined in the Table classes for convenience. This defines
+what data should be validated in conjunction with where it will be saved.
 
 
 To create a default validation object in your table, create the
@@ -84,13 +84,13 @@ To create a default validation object in your table, create the
         }
     }
 
-The available validation methods and rules come from the ``Validator`` class and
-they are documented in the :ref:`creating-validators` section.
+The available validation methods and rules come from the ``Validator`` class and 
+are documented in the :ref:`creating-validators` section.
 
 .. note::
 
-    Validation objects are mainly meant to be used to validate user input, i.e.
-    forms and any other posted request data.
+    Validation objects are intended primarily for validating user input (i.e.,
+    forms and any other posted request data).
 
 
 Using A Different Validation Set
@@ -106,7 +106,7 @@ want applied::
 
 The above would call the ``validationUpdate()`` method on the table instance to
 build the required rules. By default the ``validationDefault()`` method will be
-used. A sample validator for our articles table would be::
+used. An example validator for our articles table would be::
 
     class ArticlesTable extends Table
     {
@@ -125,7 +125,7 @@ used. A sample validator for our articles table would be::
         }
     }
 
-You can have as many validation sets as you need. See the :doc:`validation
+You can have as many validation sets as necessary. See the :doc:`validation
 chapter </core-libraries/validation>` for more information on building
 validation rule-sets.
 
@@ -160,7 +160,7 @@ of the associations to be converted::
 Combining Validators
 ====================
 
-Because of the way validator objects are built, it is easy to beak their
+Because of how validator objects are built, it is easy to break their
 construction process into multiple reusable steps::
 
     // UsersTable.php
@@ -184,7 +184,7 @@ construction process into multiple reusable steps::
     }
 
 Given the above setup, when using the ``hardened`` validation set, it will also
-contain the rules from the ``default`` set.
+contain the validation rules declared in the ``default`` set.
 
 Validation Providers
 ====================
@@ -192,13 +192,13 @@ Validation Providers
 Validation rules can use functions defined on any known providers. By default
 CakePHP sets up a few providers:
 
-1. Methods on the table class, or its behaviors are available on the ``table``
+1. Methods on the table class or its behaviors are available on the ``table``
    provider.
 2. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
    ``default`` provider.
 
 When a validation rule is created you can name the provider of that rule. For
-example, if your table had a ``isValidRole`` method you could use it as
+example, if your table has an ``isValidRole`` method you can use it as
 a validation rule::
 
     use Cake\ORM\Table;
@@ -276,8 +276,8 @@ rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
 before entities are persisted. Some example domain rules are:
 
 * Ensuring email uniqueness
-* State transitions or workflow steps, for example updating an invoice's status.
-* Preventing modification of soft deleted items.
+* State transitions or workflow steps (e.g., updating an invoice's status).
+* Preventing the modification of soft deleted items.
 * Enforcing usage/rate limit caps.
 
 Domain rules are checked when calling the Table ``save()`` and ``delete()`` methods.
@@ -302,20 +302,23 @@ class::
 
         // Add a rule for create.
         $rules->addCreate(function ($entity, $options) {
+            // Return a boolean to indicate pass/fail
         }, 'ruleName');
 
         // Add a rule for update
         $rules->addUpdate(function ($entity, $options) {
+            // Return a boolean to indicate pass/fail        
         }, 'ruleName');
 
         // Add a rule for the deleting.
         $rules->addDelete(function ($entity, $options) {
+            // Return a boolean to indicate pass/fail        
         }, 'ruleName');
 
         return $rules;
     }
 
-Your rules functions can expect to get the Entity being checked, and an array of
+Your rules functions can expect to get the Entity being checked and an array of
 options. The options array will contain ``errorField``, ``message``, and
 ``repository``. The ``repository`` option will contain the table class the rules
 are attached to. Because rules accept any ``callable``, you can also use
@@ -327,7 +330,7 @@ or callable classes::
 
     $rules->addCreate(new IsUnique(['email']), 'uniqueEmail');
 
-When adding rules you can define the field the rule is for, and the error
+When adding rules you can define the field the rule is for and the error
 message as options::
 
     $rules->add([$this, 'isValidState'], 'validState', [
@@ -335,7 +338,7 @@ message as options::
         'message' => 'This invoice cannot be moved to that status.'
     ]);
 
-The error will be visible when calling the ``errors()`` method in the entity::
+The error will be visible when calling the ``errors()`` method on the entity::
 
     $entity->errors(); // Contains the domain rules error messages
 
@@ -428,7 +431,7 @@ As you already discovered, the first layer is done through the ``Validator``
 objects when calling ``newEntity()`` or ``patchEntity()``::
 
     $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
 
 Validation is defined using the ``validationCustomName()`` methods::
 
@@ -438,10 +441,10 @@ Validation is defined using the ``validationCustomName()`` methods::
         return $validator;
     }
 
-Validation is meant for forms, and request data. This means that validation rule
-sets can assume things about the structure of a form, and validate fields not in
-the schema of the database. Validation assumes strings or array are passed as
-that is what is received from any request::
+Validation is meant for forms and request data. This means that validation rule
+sets can assume things about the structure of a form and validate fields not in
+the schema of the database. Validation assumes strings or arrays are passed
+since that is what is received from any request::
 
     // In src/Model/Table/UsersTable.php
     public function validatePasswords($validator)
@@ -455,7 +458,7 @@ that is what is received from any request::
         return $validator;
     }
 
-Validation is **not** triggered when directly setting properties to your
+Validation is **not** triggered when directly setting properties on your
 entities::
 
     $userEntity->email = 'not an email!!';
@@ -463,9 +466,9 @@ entities::
 
 In the above example the entity will be saved as validation is only
 triggered for the ``newEntity()`` and ``patchEntity()`` methods. The second
-level of validation is meant to deal with this situation.
+level of validation is meant to address this situation.
 
-Application rules, as explained above will be checked whenever ``save()`` or
+Application rules as explained above will be checked whenever ``save()`` or
 ``delete()`` are called::
 
     // In src/Model/Table/UsersTable.php
@@ -475,9 +478,9 @@ Application rules, as explained above will be checked whenever ``save()`` or
         return $rules;
     }
 
-    // Elsewhere in application code
-    $useEntity->email = 'a@duplicated.email';
-    $usersTable->save($entity); // Returns false
+    // Elsewhere in your application code
+    $userEntity->email = 'a@duplicated.email';
+    $usersTable->save($userEntity); // Returns false
 
 While Validation is meant for direct user input, application rules are specific
 for data transitions generated inside your application::
@@ -485,12 +488,12 @@ for data transitions generated inside your application::
     // In src/Model/Table/OrdersTable.php
     public function buildRules(RulesChecker $rules)
     {
-        $check = function ($order) {
+        $check = function($order) {
             return $order->price < 100 && $order->shipping_mode === 'free';
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
-            'message' => 'No free shipping for order under 100!'
+            'message' => 'No free shipping for orders under 100!'
         ]);
         return $rules;
     }
@@ -506,7 +509,7 @@ Using Validation as Application Rules
 
 In certain situations you may want to run the same data validation routines for
 data that was both generated by users and inside your application. This could
-come up when running a CLI script that directly sets properties to entities::
+come up when running a CLI script that directly sets properties on entities::
 
     // In src/Model/Table/UsersTable.php
     public function validationDefault(Validator $validator)
@@ -522,7 +525,7 @@ come up when running a CLI script that directly sets properties to entities::
     public function buildRules(RulesChecker $rules)
     {
         // Add validation rules
-        $rules->add(function ($entity) {
+        $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
             $errors = $validator->errors($data, $entity->isNew());
@@ -536,8 +539,8 @@ come up when running a CLI script that directly sets properties to entities::
         return $rules;
     }
 
-When executed, the following code will fail saving thanks to the new application
-rule that was added::
+When executed the save will fail thanks to the new application rule that 
+was added::
 
     $userEntity->email = 'not an email!!!';
     $usersTable->save($userEntity);
