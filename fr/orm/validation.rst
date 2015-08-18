@@ -320,14 +320,17 @@ ajouter des règles au vérificateur pour une classe de Table donnée::
 
         // Ajoute une règle pour la création.
         $rules->addCreate(function ($entity, $options) {
-        }, 'ruleName');
 
+        }, 'ruleName');
+            // Retourne un booléen pour indiquer si succès/échec
         // Ajoute une règle pour la mise à jour.
         $rules->addUpdate(function ($entity, $options) {
+            // Retourne un booléen pour indiquer si succès/échec
         }, 'ruleName');
 
         // Ajoute une règle pour la suppression.
         $rules->addDelete(function ($entity, $options) {
+            // Retourne un booléen pour indiquer si succès/échec
         }, 'ruleName');
 
         return $rules;
@@ -448,7 +451,7 @@ réalisée via l'objet ``Validator`` lors de l'appel à ``newEntity()`` ou
 ``patchEntity()``::
 
     $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
 
 La validation est définie en utilisant les méthodes
 ``validationCustomName()``::
@@ -498,9 +501,9 @@ fois que ``save()`` ou ``delete()`` sont appelées::
         return $rules;
     }
 
-    // Autre part dans le code de l'application
-    $useEntity->email = 'a@duplicated.email';
-    $usersTable->save($entity); // Retourne false
+    // Autre part dans le code de votre application
+    $userEntity->email = 'a@duplicated.email';
+    $usersTable->save($userEntity); // Retourne false
 
 Alors que la validation est conçue pour les données provenant directement
 d'utilisateurs, les règles d'application sont spécifiques aux transitions de

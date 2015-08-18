@@ -145,6 +145,12 @@ View
 - Vous pouvez maintenant définir ``_serialized`` à ``true`` pour ``JsonView``
   et ``XmlView`` pour sérialiser toutes les variables de vue au lieu de les
   spécifier explicitement.
+- ``View::$viewPath`` est déprécié. Vous devez utilisez ``View::templatePath()``
+  à la place.
+- ``View::$view`` est déprécié. Vous devez utilisez ``View::template()``
+  à la place.
+- ``View::TYPE_VIEW`` est déprécié. Vous devez utilisez ``View::TYPE_TEMPLATE``
+  à la place.
 
 Helper
 ======

@@ -721,7 +721,7 @@ classes de vue ont quelques conventions:
 * Les classes de View doivent être suffixées avec ``View``. Par exemple
   ``PdfView``.
 * Quand vous référencez les noms de classe de vue, vous devez omettre le
-  suffixe ``View``. Par exemple ``$this->viewClass = 'Pdf';``.
+  suffixe ``View``. Par exemple ``$builder->viewClass('Pdf');``.
 
 Vous voudrez aussi étendre ``View`` pour vous assurer que les choses
 fonctionnent correctement::

@@ -41,9 +41,9 @@ CakePHP est également compatible avec Windows. Exécutons le programme Console
 depuis le bash. Cet exemple suppose que l'utilisateur est actuellement
 connecté dans l'invité bash et qu'il est en root sur une installation CakePHP.
 
-Les applications CakePHP contiennent un répertoire ``Console`` qui contient
-tous les shells et les tâches pour une application. Il est aussi livré avec
-un exécutable::
+Une application CakePHP contient les répertoires ``src/Shell`` et
+``src/Shell/Task`` qui contiennent tous ses shells et tasks. Il est aussi livré
+avec un exécutable dans le répertoire ``bin``::
 
     $ cd /path/to/app
     $ bin/cake
