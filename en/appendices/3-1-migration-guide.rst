@@ -138,6 +138,12 @@ View
 
 - You can now set ``_serialized`` to ``true`` for ``JsonView`` and ``XmlView``
   to serialize all view variables instead of explicitly specifying them.
+- ``View::$viewPath`` is deprecated. You should use ``View::templatePath()``
+  instead.
+- ``View::$view`` is deprecated. You should use ``View::template()``
+  instead.
+- ``View::TYPE_VIEW`` is deprecated. You should use ``View::TYPE_TEMPLATE``
+  instead.
 
 Helper
 ======
