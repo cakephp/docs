@@ -263,7 +263,6 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
             <tr>
                 <th>id</th>
                 <th>Parent Id</th>
-                <th>Title</th>
                 <th>Lft</th>
                 <th>Rght</th>
                 <th>Name</th>
