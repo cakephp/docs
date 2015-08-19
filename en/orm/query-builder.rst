@@ -1110,6 +1110,7 @@ queries::
         ->values($select)
         ->execute();
 
+:ref:query-builder-updating-data
 Updating Data
 =============
 
