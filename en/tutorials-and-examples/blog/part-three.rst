@@ -18,7 +18,7 @@ We will use the `migrations plugin <https://github.com/cakephp/migrations>`_ to
 create a table in our database. If you already have an articles table in your
 database, erase it.
 
-Now open your application's ``composer.json`` file. Normally you would see that
+Now open your application's **composer.json** file. Normally you would see that
 the migrations plugin is already under ``require``. If not add it as follows::
 
     "require": {
@@ -26,14 +26,14 @@ the migrations plugin is already under ``require``. If not add it as follows::
     }
 
 Then run ``composer update``. The migrations plugin will now be in your
-application's ``plugins`` folder. Also add ``Plugin::load('Migrations');`` in
+application's **plugins** folder. Also add ``Plugin::load('Migrations');`` in
 your application's bootstrap.php file.
 
 Once the plugin is loaded, run the following command to create a migration file::
 
     bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
 
-A migration file will be generated in the ``/config/Migrations`` folder with the following::
+A migration file will be generated in the **/config/Migrations** folder with the following::
 
     <?php
 
@@ -74,7 +74,7 @@ Run another command to create a ``categories`` table::
 
     bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
 
-This will generate the following file in `config/Migrations`::
+This will generate the following file in **config/Migrations**::
 
     <?php
 
@@ -218,7 +218,7 @@ Reordering Categories with TreeBehavior
 In your categories index template file, you can list the categories and re-order
 them.
 
-Let's modify the index method in your ``CategoriesController.php`` and add
+Let's modify the index method in your **CategoriesController.php** and add
 ``moveUp()`` and ``moveDown()`` methods to be able to reorder the categories in
 the tree::
 
