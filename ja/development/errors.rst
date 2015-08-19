@@ -29,7 +29,7 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
   Error configuration
 
 エラーの設定はあなたのアプリケーションの ``config/core.php`` の中で行われています。
-あなたのアプリケーションが PHP エラー（例外については :doc:`/development/exceptions` にて別で説明します）を発生させるたびに呼び出されるコールバックを定義することができます。
+あなたのアプリケーションが PHP エラー（例外については  にて別で説明します）を発生させるたびに呼び出されるコールバックを定義することができます。
 コールバックは PHP が呼ぶことができるものなら無名関数であってもかまいません。
 エラーをハンドルするデフォルトの設定は以下のようになっています::
 
@@ -186,5 +186,5 @@ CakePHP 2.2 以降、``Error.handler`` は致命的(fatal)なエラーコード�
   from your custom handler.
 
 .. meta::
-    :title lang=en: Error Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :title lang=ja: Error Handling
+    :keywords lang=ja: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error

@@ -6,6 +6,16 @@
 Welcome
 #######
 
+
+.. .. warning::
+..
+..    This version of the documentation is for CakePHP 3.0. Go `here for the
+..    CakePHP 2.x documentation <http://book.cakephp.org/2.0/ja>`_.
+.. warning::
+    このドキュメントのバージョンはCakePHP3.0用のものです。
+    `CakePHP2.xのドキュメントがここにあります <http://book.cakephp.org/2.0/ja>`_ 。
+
+
 CakePHP cookbookは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
 
@@ -24,7 +34,7 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
 ====
 
 ブログの作成
-------------
+--------------
 
 :doc:`ブログチュートリアル</tutorials-and-examples/blog/blog>` を使用した入門。
 基本的なブログの構築の過程を通して、CakePHPの基本を学びます。
@@ -32,35 +42,36 @@ CakePHP cookbookは、オープンに開発されている、コミュニティ�
 規約
 ----
 
-CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエスト
-</getting-started/a-typical-cakephp-request>`
-と、 :doc:`規約
-</getting-started/cakephp-conventions>`
+CakePHPの動力となっている、典型的な :doc:`規約 </intro/conventions>`
 を学びましょう。
 
 コントローラ
-------------
+--------------
 
 コントローラはリクエストを取り扱い、調和の手助けとクライアントへのレスポンスの準備をします。
 詳細は :doc:`/controllers` を見てください。
 
 ビュー
-------
+---------
 
 ビューはCakePHPのプレゼンテーション層です。
 これはモデルから取得したデータをクライアントがリクエストした出力フォーマットに変換します。
 詳細は :doc:`/views` を見てください。
 
 モデル
-------
+-------
 
 モデルはアプリケーションの心臓部分です。
 これはバリデーション、ストレージ、データの検索を取り扱います。
-詳細は :doc:`/models` を見てください。
+詳細は :doc:`/orm` を見てください。
 
 助けの求め方
-============
+=============
 
 もし何か困っていたら、 :doc:`いくつもの助けを求められる場所
-</cakephp-overview/where-to-get-help>`
+</intro/where-to-get-help>`
 があります。
+
+.. meta::
+    :title lang=ja: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=ja: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

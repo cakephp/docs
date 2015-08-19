@@ -13,8 +13,179 @@ sous-requêtes avec facilité.
 Sous le capot, le constructeur de requête utilise les requêtes préparées de
 PDO qui protègent contre les attaques d'injection SQL.
 
-Les objets Query sont lazily evaluated. Cela signifie qu'une requête n'est
-pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
+L'Objet Query
+=============
+
+La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()``
+à partir d'un objet ``Table``. Cette méthode va retourner une requête
+incomplète prête à être modifiée. Vous pouvez aussi utiliser un objet table
+connection pour accéder au niveau inférieur du constructeur de Requête
+qui n'inclut pas les fonctionnalités de l'ORM, si nécessaire. Consultez la
+section :ref:`database-queries` pour plus d'informations::
+
+    use Cake\ORM\TableRegistry;
+    $articles = TableRegistry::get('Articles');
+
+    // Commence une nouvelle requête.
+    $query = $articles->find();
+
+Depuis un controller, vous pouvez utiliser la variable de table créée
+automatiquement par le système de conventions::
+
+    // Inside ArticlesController.php
+
+    $query = $this->Articles->find();
+
+Récupérer les Lignes d'une Table
+--------------------------------
+
+::
+
+    use Cake\ORM\TableRegistry;
+
+    $query = TableRegistry::get('Articles')->find();
+
+    foreach ($query as $article) {
+        debug($article->title);
+    }
+
+Pour les exemples restants, imaginez que ``$articles`` est une
+:php:class:`~Cake\\ORM\\Table`. Quand vous êtes dans des controllers, vous
+pouvez utiliser ``$this->Articles`` plutôt que ``$articles``.
+
+Presque chaque méthode dans un objet ``Query`` va retourner la même requête,
+cela signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à
+moins que vous lui disiez de le faire::
+
+    $query->where(['id' => 1]); // Retourne le même objet query
+    $query->order(['title' => 'DESC']); // Toujours le même objet, aucun SQL exécuté
+
+Vous pouvez bien sûr chainer les méthodes que vous appelez sur les objets
+Query::
+
+    $query = $articles
+        ->find()
+        ->select(['id', 'name'])
+        ->where(['id !=' => 1])
+        ->order(['created' => 'DESC']);
+
+    foreach ($query as $article) {
+        debug($article->created);
+    }
+
+Si vous essayez d'appeler ``debug()`` sur un objet Query, vous verrez son état
+interne et le SQL qui sera exécuté dans la base de données::
+
+    debug($articles->find()->where(['id' => 1]));
+
+    // Affiche
+    // ...
+    // 'sql' => 'SELECT * FROM articles where id = ?'
+    // ...
+
+Vous pouvez exécuter une requête directement sans avoir à utiliser ``foreach``.
+La façon la plus simple est d'appeler les méthodes ``all()`` ou ``toArray()``::
+
+    $resultsIteratorObject = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->all();
+
+    foreach ($resultsIteratorObject as $article) {
+        debug($article->id);
+    }
+
+    $resultsArray = $articles
+        ->find()
+        ->where(['id >' => 1])
+        ->toArray();
+
+    foreach ($resultsArray as $article) {
+        debug($article->id);
+    }
+
+    debug($resultsArray[0]->title);
+
+Dans l'exemple ci-dessus, ``$resultsIteratorObject`` sera une instance de
+``Cake\ORM\ResultSet``, un objet que vous pouvez itérer et sur lequel vous
+pouvez appliquer plusieurs méthodes d'extractions ou de traversement.
+
+Souvent, il n'y a pas besoin d'appeler ``all()``, vous pouvez juste itérer
+l'objet Query pour récupérer ses résultats. les objets Query peuvent également
+être utilisés directement en tant qu'objet résultat; Essayer d'itérer la requête
+en utilisant ``toArray()`` ou n'importe qu'elle méthode héritée de
+:ref:`Collection <collection-objects>`, aura pour résultat l'exécution de la
+requête et la récupération des résultats.
+
+Récupérez une Ligne Unique d'une Table
+--------------------------------------
+
+Vous pouvez utilisez la méthode ``first()`` pour récupérer le premier résultat
+dans la requête::
+
+    $article = $articles
+        ->find()
+        ->where(['id' => 1])
+        ->first();
+
+    debug($article->title);
+
+Récupérer une Liste de Valeurs à Partir d'une Colonne
+-----------------------------------------------------
+
+::
+
+    // Utilise la méthode extract() à partir de la libraire collections
+    // Ceci exécute aussi la requête
+    $allTitles = $articles->find()->extract('title');
+
+    foreach ($allTitles as $title) {
+        echo $title;
+    }
+
+Vous pouvez aussi récupérer une liste de clé-valeur à partir d'un résultat d'une
+requête::
+
+    $list = $articles->find('list')->select(['id', 'title']);
+
+    foreach ($list as $id => $title) {
+        echo "$id : $title"
+    }
+
+Les Requêtes sont des Objets Collection
+---------------------------------------
+
+Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
+fortement recommandé que vous consultiez la section
+:ref:`Collection<collection-objects>` pour améliorer vos compétences dans
+le traversement efficace de données. En résumé, il est important de se
+rappeler que tout ce que vous pouvez appeler sur un objet Collection, vous
+pouvez aussi le faire avec un objet Query::
+
+    // Utilise la méthode combine() à partir de la libraire collection
+    // Ceci est équivalent au find('list')
+    $keyValueList = $articles->find()->combine('id', 'title');
+
+    // Un exemple avancé
+    $results = $articles->find()
+        ->where(['id >' => 1])
+        ->order(['title' => 'DESC'])
+        ->map(function ($row) { // map() est une méthode de collection, elle exécute la requête
+            $row->trimmedTitle = trim($row->title);
+            return $row;
+        })
+        ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
+        ->toArray(); // Aussi une méthode de la librairie collection
+
+    foreach ($results as $id => $trimmedTitle) {
+        echo "$id : $trimmedTitle";
+    }
+
+Comment les Requêtes sont Évaluées Lazily
+-----------------------------------------
+
+Les objets Query sont évalués "lazily" (paresseusement). Cela signifie qu'une
+requête n'est pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
 
 - La requête est itérée avec ``foreach()``.
 - La méthode ``execute()`` de query est appelée. Elle retourne l'objet
@@ -26,120 +197,15 @@ pas exécutée jusqu'à ce qu'une des prochaines actions se fasse:
   résultats et peut seulement être utilisée avec les instructions ``SELECT``.
 - La méthode ``toArray()`` de query est appelée.
 
-Jusqu'à ce qu'une de ces conditions ne soient rencontrées, la requête peut être
+Jusqu'à ce qu'une de ces conditions soit rencontrée, la requête peut être
 modifiée avec du SQL supplémentaire envoyé à la base de données. Cela signifie
 que si une Query n'a pas été évaluée, aucun SQL ne sera jamais envoyé à la
 base de données. Une fois exécutée, la modification et la ré-évaluation
 d'une requête va entraîner l'exécution de SQL supplémentaire.
 
-Si vous souhaitez jeter un oeil sur le SQL que CakePHP génère, vous pouvez
+Si vous souhaitez jeter un œil sur le SQL que CakePHP génère, vous pouvez
 activer les :ref:`logs de requête <database-query-logging>` de la base de
 données.
-
-L'Objet Query
-=============
-
-La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()``
-à partir d'un objet ``Table``. Cette méthode va retourner une requête
-incomplète prête à être modifiée. Vous pouvez aussi utiliser un objet table
-connection pour accéder au niveau inférieur du constructeur de Requête
-qui n'inclut pas les fonctionnalités de l'ORM, si nécessaire. Consultez la
-section :ref:`database-queries` pour plus d'informations. Pour les exemples
-suivants, en supposant que ``$articles`` est une
-:php:class:`~Cake\\ORM\\Table`::
-
-    // Commence une nouvelle requête.
-    $query = $articles->find();
-
-Presque chaque méthode dans un objet ``Query`` va retourner la même requête, cela
-signifie que les objets ``Query`` sont lazy, et ne seront pas exécutés à moins
-que vous lui disiez de le faire::
-
-    $query->where(['id' => 1]); // Retourne le même objet query
-    $query->order(['title' => 'DESC']); // Toujours le même objet, aucun SQL exécuté
-
-Vous pouvez bien sûr chainer les méthodes que vous appelez sur les objets Query::
-
-    $query = $articles
-        ->find()
-        ->select(['id', 'name'])
-        ->where(['id !=' => 1])
-        ->order(['created' => 'DESC']);
-
-Si vous essayez d'appeler ``debug()`` sur un objet Query, vous verrez son état
-interne et le SQL qui sera executé dans la base de données::
-
-    debug($articles->find()->where(['id' => 1]));
-
-    // Affiche
-    // ...
-    // 'sql' => 'SELECT * FROM articles where id = ?'
-    // ...
-
-Une fois que vous êtes satisfaits avec la Query, vous pouvez l'exécuter. La
-façon la plus simple est de soit appeler la méthode ``first()``, soit la
-méthode ``all()``::
-
-    $firstArticle = $articles
-        ->find()
-        ->where(['id' => 1])
-        ->first();
-
-    $allResults = $articles
-        ->find()
-        ->where(['id >' => 1])
-        ->all();
-
-Dans l'exemple ci-dessus, ``$allResults`` sera une instance de
-``Cake\ORM\ResultSet``, un objet que vous pouvez itérer et appliquer
-plusieurs extractions et traverser les méthodes. Souvent, il n'y a pas besoin
-d'appeler ``all()``, vous pouvez juste itérer l'objet Query pour récupérer
-ses résultats::
-
-    // Itére les résultats
-    foreach ($allResults as $result) {
-     ...
-    }
-
-    // Ceci est équivalent à
-    $query = $articles->find()->where(['id' => 1]);
-    foreach ($query as $result) {
-     ...
-    }
-
-Les objets Query peuvent aussi être utilisés directement comme un objet
-résultat; en essayant d'itérer la requête, appeler ``toArray`` ou une méthode
-héritée de :ref:`Collection<collection-objects>`, cela va entraîner l'exécution
-de la requête et les résultats vous seront retournés::
-
-    // Ceci exécute la requête et retourne un tableau de résultats
-    $resultsIntoAnArray = $articles->find()->where(['id >' => 1])->toArray();
-
-    // Utilise la méthode combine() à partir de la librairie collections
-    // This executes the query
-    $keyValueList = $articles->find()->combine('id', 'title');
-
-    // Utilise la méthode extract() à partir de la librairie collections
-    // Ceci exécute aussi la requête
-    $allTitles = $articles->find()->extract('title');
-
-Une fois que vous êtes familié avec les méthodes de l'objet Query, il est
-fortement recommandé que vous consultiez la section
-:ref:`Collection<collection-objects>` pour améliorer vos compétences dans
-le traversement efficace de données. En résumé, il est important de se
-rappeler que tout ce que vous pouvez appeler sur un objet Collection, vous
-pouvez aussi le faire avec un objet Query::
-
-    // Un exemple avancé
-    $results = $articles->find()
-        ->where(['id >' => 1])
-        ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() est une méthode de collection, elle exécute la requête
-            $row->trimmedTitle = trim($row->title);
-            return $row;
-        });
-        ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
-        ->toArray(); // Aussi une méthode de la librairie collections
 
 Les sections suivantes vont vous montrer tout ce qu'il faut savoir sur
 l'utilisation et la combinaison des méthodes de l'objet Query pour construire
@@ -193,6 +259,17 @@ vous pouvez utiliser la méthode ``order``::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
+En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent être
+utilisées quand vous devez trier selon des expressions complexes::
+
+    // Depuis 3.0.12 orderAsc & orderDesc sont disponibles.
+    $query = $articles->find();
+    $concat = $query->newExpr()->func()->concat([
+        'title' => 'literal',
+        'synopsis' => 'literal'
+    ]);
+    $query->orderAsc($concat);
+
 Pour limiter le nombre de lignes ou définir la ligne offset, vous pouvez
 utiliser les méthodes ``limit()`` et ``page()``::
 
@@ -204,6 +281,27 @@ utiliser les méthodes ``limit()`` et ``page()``::
 Comme vous pouvez le voir sur les exemples précédents, toutes les méthodes
 qui modifient la requête fournissent une interface fluide, vous permettant
 de construire une requête avec des appels de méthode chaînés.
+
+Sélectionner Tous les Champs d'une Table
+----------------------------------------
+
+Par défaut, une requête va sélectionner tous les champs d'une table sauf si vous
+appelez la fonction ``select()`` vous-même et passez certains champs::
+
+    // Sélectionne seulement id et title de la table articles
+    $articles->find()->select(['id', 'title']);
+
+Si vous souhaitez toujours sélectionner tous les champs d'une table après avoir
+appelé ``select($fields)``, vous pouvez dans cette optique passer l'instance de
+table à ``select()``::
+
+    // Sélectionne seulement id et title de la table articles
+    $query = $articlesTable->find();
+    $query
+        ->select(['slug' => $query->func()->concat(['title', '-', 'id'])])
+        ->select($articlesTable); // Sélectionne tous les champs de articles
+
+.. _using-sql-functions:
 
 Utiliser les Fonctions SQL
 --------------------------
@@ -240,6 +338,15 @@ méthode ``func()``:
   littéral.
 - ``now()`` Prend soit 'time', soit 'date' comme argument vous permettant de
   récupérer soit le time courant, soit la date courante.
+- ``extract()`` Retourne la partie de la date spécifiée de l'expression SQL.
+- ``dateAdd()`` Ajoute l'unité de temps à l'expression de la date.
+- ``dayOfWeek()`` Retourne une FunctionExpression représentant un appel à la
+  fonction SQL WEEKDAY.
+
+.. versionadded:: 3.1
+
+    Les méthodes ``extract()``, ``dateAdd()`` et ``dayOfWeek()`` ont été
+    ajoutées.
 
 Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types
 de paramètres que vous pouvez utiliser; Les arguments littéraux et les
@@ -280,14 +387,28 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
         'timeCreated' => $time
     ]);
 
-Entrainera::
+Entraînera::
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+
+Vous devriez penser à utiliser le constructeur de fonctions à chaque fois que
+vous devez mettre des données non fiables dans des fonctions SQL ou des
+procédures stockées::
+
+    // Utilise une procédure stockée
+    $query = $articles->find();
+    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
+    $query->where(function ($exp) use ($lev) {
+        return $exp->between($lev, 0, $tolerance);
+    });
+
+    // Le SQL généré serait
+    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
 
 Regroupements - Group et Having
 -------------------------------
 
-Quand vous utilisez les fonctions d'aggrégation comme ``count`` et ``sum``, vous
+Quand vous utilisez les fonctions d'agrégation comme ``count`` et ``sum``, vous
 pouvez utiliser les clauses ``group by`` et ``having``::
 
     $query = $articles->find();
@@ -298,31 +419,14 @@ pouvez utiliser les clauses ``group by`` et ``having``::
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Désactiver l'Hydration
-----------------------
-
-Alors que les ensembles de résultats en objet de l'ORM sont puissants,
-l'hydratation des entities n'est parfois pas nécessaire. Par exemple, quand
-vous accédez aux données aggrégées, la construction d'une Entity peut ne pas
-être utile. Dans ces situations, vous pouvez désactiver l'hydratation d'une
-entity::
-
-    $query = $articles->find();
-    $query->hydrate(false);
-
-.. note::
-
-    Quand l'hydration est désactivée, les résultats seront retournés en
-    tableaux basiques.
-
 Instructions Case
 -----------------
 
 L'ORM offre également l'expression SQL ``case``. L'expression ``case`` permet
 l'implémentation d'une logique ``if ... then ... else`` dans votre SQL. Cela
 peut être utile pour créer des rapports sur des données que vous avez besoin
-d'additionner ou de compter conditionnellement, ou si vous avez besoin de données
-spécifiques basées sur une condition.
+d'additionner ou de compter conditionnellement, ou si vous avez besoin de
+données spécifiques basées sur une condition.
 
 Si vous vouliez savoir combien d'articles sont publiés dans notre base de
 données, vous auriez besoin de générer le SQL suivant::
@@ -330,7 +434,8 @@ données, vous auriez besoin de générer le SQL suivant::
     SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
     FROM articles GROUP BY published
 
-Pour faire ceci avec le générateur de requêtes , vous utiliseriez le code suivant::
+Pour faire ceci avec le générateur de requêtes, vous utiliseriez le code
+suivant::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
@@ -341,6 +446,64 @@ Pour faire ceci avec le générateur de requêtes , vous utiliseriez le code sui
         'number_unpublished' => $query->func()->sum($unpublishedCase)
     ])
     ->group('published');
+
+La fonction ``addCase`` peut aussi chaîner ensemble plusieurs instructions pour
+créer une logique ``if .. then .. [elseif .. then .. ] [ .. else ]`` dans
+votre SQL.
+
+Si nous souhaitions classer des villes selon des tailles de population SMALL,
+MEDIUM, ou LARGE, nous pourrions faire ce qui suit::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->addCase(
+                [
+                    $q->newExpr()->lt('population', 100000),
+                    $q->newExpr()->between('population', 100000, 999000),
+                    $q->newExpr()->gte('population', 999001),
+                ],
+                ['SMALL',  'MEDIUM', 'LARGE'], # les valeurs correspondantes aux conditions
+                ['string', 'string', 'string'] # type de chaque valeur
+            );
+        });
+    # WHERE CASE
+    #   WHEN population < 100000 THEN 'SMALL'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+    #   WHEN population >= 999001 THEN 'LARGE'
+    #   END
+
+A chaque fois qu'il y a moins de conditions qu'il n'y a de valeurs, ``addCase``
+va automatiquement produire une instruction ``if .. then .. else``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->addCase(
+                [
+                    $q->newExpr()->eq('population', 0),
+                ],
+                ['DESERTED', 'INHABITED'], # valeurs correspondantes aux conditions
+                ['string', 'string'] # type de chaque valeur
+            );
+        });
+    # WHERE CASE
+    #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
+
+Désactiver l'Hydratation
+------------------------
+
+Alors que les ensembles de résultats en objet de l'ORM sont puissants,
+l'hydratation des entities n'est parfois pas nécessaire. Par exemple, quand
+vous accédez aux données agrégées, la construction d'une Entity peut ne pas
+être utile. Dans ces situations, vous pouvez désactiver l'hydratation d'une
+entity::
+
+    $query = $articles->find();
+    $query->hydrate(false);
+
+.. note::
+
+    Quand l'hydratation est désactivée, les résultats seront retournés en
+    tableaux basiques.
 
 .. _advanced-query-conditions:
 
@@ -536,25 +699,124 @@ Ce qui générerait le code SQL suivant::
 Quand vous utilisez les objets expression, vous pouvez utiliser les méthodes
 suivantes pour créer des conditions:
 
-- ``eq()`` Créé une condition d'égalité.
-- ``notEq()`` Créé une condition d'inégalité
-- ``like()`` Créé une condition en utilisant l'opérateur ``LIKE``.
-- ``notLike()`` Créé une condition négative ``LIKE``.
-- ``in()`` Créé une condition en utilisant ``IN``.
-- ``notIn()`` Créé une condition négative en utilisant ``IN``.
-- ``gt()`` Créé une condition ``>``.
-- ``gte()`` Créé une condition ``>=``.
-- ``lt()`` Créé une condition ``<``.
-- ``lte()`` Créé une condition ``<=``.
-- ``isNull()`` Créé une condition ``IS NULL``.
-- ``isNotNull()`` Créé une condition négative ``IS NULL``.
+- ``eq()`` Crée une condition d'égalité::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->eq('population', '10000');
+        });
+    # WHERE population = 10000
+
+- ``notEq()`` Crée une condition d'inégalité::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notEq('population', '10000');
+        });
+    # WHERE population != 10000
+
+- ``like()`` Crée une condition en utilisant l'opérateur ``LIKE``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->like('name', '%A%');
+        });
+    # WHERE name LIKE "%A%"
+
+- ``notLike()`` Crée une condition négative de type ``LIKE``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notLike('name', '%A%');
+        });
+    # WHERE name NOT LIKE "%A%"
+
+- ``in()`` Crée une condition en utilisant ``IN``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->in('country_id', ['AFG', 'USA', 'EST']);
+        });
+    # WHERE country_id IN ('AFG', 'USA', 'EST')
+
+- ``notIn()`` Crée une condition négative en utilisant ``IN``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
+        });
+    # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
+
+- ``gt()`` Crée une condition ``>``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->gt('population', '10000');
+        });
+    # WHERE population > 10000
+
+- ``gte()`` Crée une condition ``>=``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->gte('population', '10000');
+        });
+    # WHERE population >= 10000
+
+- ``lt()`` Crée une condition ``<``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->lt('population', '10000');
+        });
+    # WHERE population < 10000
+
+- ``lte()`` Crée une condition ``<=``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->lte('population', '10000');
+        });
+    # WHERE population <= 10000
+
+- ``isNull()`` Crée une condition ``IS NULL``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->isNull('population');
+        });
+    # WHERE (population) IS NULL
+
+- ``isNotNull()`` Crée une condition négative ``IS NULL``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->isNotNull('population');
+        });
+    # WHERE (population) IS NOT NULL
+
+- ``between()`` Crée une condition ``BETWEEN``::
+
+    $query = $cities->find()
+        ->where(function ($exp, $q) {
+            return $exp->between('population', 999, 5000000);
+        });
+    # WHERE population BETWEEN 999 AND 5000000,
+
+.. warning::
+
+    Les noms de champs utilisés dans les expressions ne doivent **jamais**
+    contenir de contenu non fiable.
+    Référez-vous à la section :ref:`using-sql-functions` pour savoir comment
+    inclure des données non fiables de manière sécurisée dans vos appels de
+    fonctions.
 
 Créer automatiquement des Clauses IN
 ------------------------------------
 
 Quand vous construisez des requêtes en utilisant l'ORM, vous n'avez
 généralement pas besoin d'indiquer les types de données des colonnes avec
-lesquelles vous intéragissez, puisque CakePHP peut déduire les types en se
+lesquelles vous interagissez, puisque CakePHP peut déduire les types en se
 basant sur les données du schéma. Si dans vos requêtes, vous souhaitez que
 CakePHP convertisse automatiquement l'égalité en comparaisons ``IN``, vous
 devez indiquer les types de données des colonnes::
@@ -612,8 +874,8 @@ Raw Expressions
 ---------------
 
 Quand vous ne pouvez pas construire le code SQL, vous devez utiliser le
-constructeur de requête, vous pouvez utiliser les objets ``Expression`` pour ajouter
-des extraits de code SQL à vos requêtes::
+constructeur de requête, vous pouvez utiliser les objets ``Expression`` pour
+ajouter des extraits de code SQL à vos requêtes::
 
     $query = $articles->find();
     $expr = $query->newExpr()->add('1 + 1');
@@ -643,8 +905,8 @@ résultantes. Il y a plusieurs façons de faire ceci::
     // Récupérer les résultats
     $results = $query->all();
 
-Vous pouvez utiliser les méthodes
-:doc:`any of the collection </core-libraries/collections>` sur vos objets
+Vous pouvez utiliser toutes les méthodes
+:doc:`des Collections </core-libraries/collections>` sur vos objets
 query pour traiter préalablement ou transformer les résultats::
 
     // Utilise une des méthodes collection.
@@ -656,7 +918,7 @@ query pour traiter préalablement ou transformer les résultats::
         return $max->age;
     });
 
-Vous pouvez utiliser ``first`` ou ``firstOrFail`` pour récupérer un
+Vous pouvez utiliser ``first()`` ou ``firstOrFail()`` pour récupérer un
 enregistrement unique. Ces méthodes vont modifier la requête en ajoutant
 une clause ``LIMIT 1``::
 
@@ -750,12 +1012,12 @@ générer dynamiquement la clé mise en cache::
     });
 
 La méthode cache facilite l'ajout des résultats mis en cache à vos finders
-personnalisés ou à travers des écouteurs d'événement.
+personnalisés ou à travers des écouteurs d'évènement.
 
 Quand les résultats pour une requête mise en cache sont récupérés, ce qui suit
 va arriver:
 
-1. L'événement ``Model.beforeFind`` est déclenché.
+1. L'évènement ``Model.beforeFind`` est déclenché.
 2. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
 3. La clé du cache va être déterminée et les données du cache vont être lues.
    Si les données du cache sont vides, ces résultats vont être retournés.
@@ -780,6 +1042,8 @@ d'autres tables est appelé **eager loading**.
 .. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-contain
     :end-before: end-contain
+
+.. _adding-joins:
 
 Ajouter des Jointures
 ---------------------
@@ -814,9 +1078,9 @@ associatif avec plusieurs ``join``::
             ]
         ]);
 
-Comme vu précédemment, lors de l'ajout de ``join``, l'alias peut être la clé du tableau
-externe. Les conditions ``join`` peuvent être aussi exprimées en tableau de
-conditions::
+Comme vu précédemment, lors de l'ajout de ``join``, l'alias peut être la clé du
+tableau externe. Les conditions ``join`` peuvent être aussi exprimées en tableau
+de conditions::
 
     $query = $articles->find()
         ->hydrate(false)
@@ -835,8 +1099,8 @@ conditions::
 Lors de la création de ``join`` à la main, et l'utilisation d'un tableau basé
 sur les conditions, vous devez fournir les types de données pour chaque colonne
 dans les conditions du ``join``. En fournissant les types de données pour les
-conditions de ``join``, l'ORM peut convertir correctement les types de données en
-code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
+conditions de ``join``, l'ORM peut convertir correctement les types de données
+en code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
 ``leftJoin()`` et ``innerJoin()`` pour créer les jointures::
 
     // Jointure avec un alias et des conditions
@@ -857,6 +1121,25 @@ code SQL. En plus de ``join()`` vous pouvez utiliser ``rightJoin()``,
         ],
         ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']
     );
+
+Notez que si vous définissez l'option ``quoteIdentifiers`` à ``true`` quand vous
+configurez votre ``Connection``, les conditions mettant en relation deux champs
+de tables différentes doivent être définies de cette manière::
+
+    $query = $articles->find()
+        ->join([
+            'c' => [
+                'table' => 'comments',
+                'type' => 'LEFT',
+                'conditions' => [
+                    'c.article_id' => new \Cake\Database\Expression\IdentifierExpression('articles.id')
+                ]
+            ],
+        ]);
+
+Cela permet de s'assurer que tous les ``identifiers`` sont bien quotés dans la
+requête générée, permettant d'éviter des erreurs avec certains drivers
+(PostgreSQL notamment).
 
 Insérer des Données
 ===================
@@ -918,6 +1201,35 @@ requête en utilisant ``query()``::
 Généralement, il est plus facile de supprimer les données en utilisant les
 entities et :php:meth:`~Cake\\ORM\\Table::delete()`.
 
+Prévention contre les Injections SQL
+====================================
+
+Alors que l'ORM et les couches d'abstraction de base de données empêchent la
+plupart des problèmes relatifs aux injections SQL, il est toujours possible que
+vous soyez vulnérables face à une utilisation incorrecte. Lorsque vous utilisez
+le constructeur de fonctions, les noms de colonnes ne doivent pas contenir de
+données provenant d'utilisateurs::
+
+    $query->where(function ($exp) use ($userData, $values) {
+        // Les noms de colonnes dans toutes les expressions ne sont pas sûrs.
+        return $exp->in($userData, $values);
+    });
+
+Lorsque vous construisez des expressions, les noms de fonctions ne doivent
+jamais contenir de données provenant d'utilisateurs::
+
+    // Non sécurisé.
+    $query->func()->{$userData}($arg1);
+
+    // L'utilisation d'un tableau de données utilisateurs
+    // dans une fonction n'est également pas sécurisée
+    $query->func()->coalesce($userData);
+
+Les expressions brutes ne sont jamais sécurisées::
+
+    $expr = $query->newExpr()->add($userData);
+    $query->select(['two' => $expr]);
+
 Plus de Requêtes Complexes
 ==========================
 
@@ -938,7 +1250,7 @@ Les unions sont créées en composant une ou plusieurs requêtes select ensemble
     $unpublished->union($inReview);
 
 Vous pouvez créer les requêtes ``UNION ALL`` en utilisant la méthode
-``unionAll``::
+``unionAll()``::
 
     $inReview = $articles->find()
         ->where(['need_review' => true]);
@@ -966,6 +1278,18 @@ les requêtes ensemble, vous pouvez faire des sous-requêtes::
 Les sous-requêtes sont acceptées partout où une expression query peut être
 utilisée. Par exemple, dans les méthodes ``select()`` et ``join()``.
 
+Exécuter des Requêtes Complexes
+-------------------------------
+
+Bien que le constructeur de requêtes facilite la construction de la plupart des
+requêtes, les requêtes très complexes peuvent être fastidieuses et compliquées
+à construire. Vous voudrez surement vous référer à :ref:`l'exécution
+directe du SQL souhaité <running-select-statements>`.
+
+Exécuter directement le SQL vous permet d'affiner la requête qui sera utilisée.
+Cependant, cela vous empêchera d'utiliser ``contain`` ou toute autre
+fonctionnalité de plus haut niveau de l'ORM.
+
 .. _format-results:
 
 Ajouter des Champs Calculés
@@ -978,7 +1302,7 @@ façon légère de mapper les ensembles de résultats. Si vous avez besoin de pl
 contrôle sur le processus, ou que vous souhaitez réduire les résultats, vous
 devriez utiliser la fonctionnalité de :ref:`Map/Reduce <map-reduce>` à la
 place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
-facilement calculer leur âge avec le formatteur de résultats::
+facilement calculer leur âge avec le formateur de résultats::
 
     // En supposant que nous avons construit les champs, les conditions et les contain.
     $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
@@ -988,17 +1312,17 @@ facilement calculer leur âge avec le formatteur de résultats::
         });
     });
 
-Comme vous pouvez le voir dans l'exemple ci-dessus, les callbacks de formattage
+Comme vous pouvez le voir dans l'exemple ci-dessus, les callbacks de formatage
 récupéreront un ``ResultSetDecorator`` en premier argument. Le second argument
-sera l'instance Query sur laquelle le formatteur a été attaché. L'argument
+sera l'instance Query sur laquelle le formateur a été attaché. L'argument
 ``$results`` peut être traversé et modifié autant que nécessaire.
 
-Les formatteurs de résultat sont nécessaires pour retourner un objet itérateur,
+Les formateurs de résultat sont nécessaires pour retourner un objet itérateur,
 qui sera utilisé comme valeur retournée pour la requête. Les fonctions de
-formatteurs sont appliquées après que toutes les routines
-Map/Reduce soient exécutées. Les formatteurs de résultat peuvent aussi être
+formateurs sont appliquées après que toutes les routines
+Map/Reduce soient exécutées. Les formateurs de résultat peuvent aussi être
 appliqués dans les associations ``contain``. CakePHP va s'assurer que vos
-formatteurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
+formateurs sont bien scopés. Par exemple, faire ce qui suit fonctionnera
 comme vous pouvez vous y attendre::
 
     // Dans une méthode dans la table Articles
@@ -1017,235 +1341,7 @@ comme vous pouvez vous y attendre::
     // Affiche 29
     echo $results->first()->author->age;
 
-Comme vu précédemment, les formatteurs attachés aux constructeurs de requête
+Comme vu précédemment, les formateurs attachés aux constructeurs de requête
 associées sont limités pour agir seulement sur les données dans l'association.
 CakePHP va s'assurer que les valeurs calculées soient insérées dans la bonne
-``entity``.
-
-.. _map-reduce:
-
-Modifier les Résultats avec Map/Reduce
-======================================
-
-La plupart du temps, les opérations ``find`` nécessitent un traitement postérieur
-des données qui se trouvent dans la base de données. Alors que les méthodes
-``getter`` des ``entities`` peuvent s'occuper de la plupart de la génération de
-propriété virtuelle ou un formattage de données spéciales, parfois vous devez
-changer la structure des données d'une façon plus fondamentale.
-
-Pour ces cas, l'objet ``Query`` offre la méthode ``mapReduce()``, qui est une
-façon de traiter les résultats une fois qu'ils ont été récupérés dans la
-base de données.
-
-Un exemple habituel de changement de structure de données est le groupement de
-résultats basé sur certaines conditions. Pour cette tâche, nous
-pouvons utiliser la fonction ``mapReduce()``. Nous avons besoin de deux
-fonctions appelables ``$mapper`` et ``$reducer``.
-La callable ``$mapper`` reçoit le résultat courant de la base de données en
-premier argument, la clé d'itération en second paramètre et finalement elle
-reçoit une instance de la routine ``MapReduce`` qu'elle lance::
-
-    $mapper = function ($article, $key, $mapReduce) {
-        $status = 'published';
-        if ($article->isDraft() || $article->isInReview()) {
-            $status = 'unpublished';
-        }
-        $mapReduce->emitIntermediate($article, $status);
-    };
-
-Dans l'exemple ci-dessus, ``$mapper`` calcule le statut d'un article, soit
-publié (published) soit non publié (unpublished), ensuite il appelle
-``emitIntermediate()`` sur l'instance ``MapReduce``. La méthode stocke
-l'article dans la liste des articles avec pour label soit publié (published)
-ou non publié (unpublished).
-
-La prochaine étape dans le processus de map-reduce  est de consolider les
-résultats finaux. Pour chaque statut créé dans le mapper, la fonction
-``$reducer`` va être appelée donc vous pouvez faire des traitements
-supplémentaires. Cette fonction va recevoir la liste des articles dans un
-``bucket`` particulier en premier paramètre, le nom du ``bucket`` dont il a
-besoin pour faire le traitement en second paramètre, et encore une fois, comme
-dans la fonction ``mapper()``, l'instance de la routine ``MapReduce`` en
-troisième paramètre. Dans notre exemple, nous n'avons pas fait de traitement
-supplémentaire, donc nous avons juste ``emit()`` les résultats finaux::
-
-    $reducer = function ($articles, $status, $mapReduce) {
-        $mapReduce->emit($articles, $status);
-    };
-
-Finalement, nous pouvons mettre ces deux fonctions ensemble pour faire le
-groupement::
-
-    $articlesByStatus = $articles->find()
-        ->where(['author_id' => 1])
-        ->mapReduce($mapper, $reducer);
-
-    foreach ($articlesByStatus as $status => $articles) {
-        echo sprintf("The are %d %s articles", count($articles), $status);
-    }
-
-Ce qui est au-dessus va afficher les lignes suivantes::
-
-    There are 4 published articles
-    There are 5 unpublished articles
-
-Bien sûr, ceci est un exemple simple qui pourrait être solutionné d'une autre
-façon sans l'aide d'un traitement map-reduce. Maintenant, regardons un autre
-exemple dans lequel la fonction reducer sera nécessaire pour faire quelque
-chose de plus que d'émettre les résultats.
-
-Calculer les mots mentionnés le plus souvent, où les articles contiennent
-l'information sur CakePHP, comme d'habitude nous avons besoin d'une fonction
-mapper::
-
-    $mapper = function ($article, $key, $mapReduce) {
-        if (stripos('cakephp', $article['body']) === false) {
-            return;
-        }
-
-        $words = array_map('strtolower', explode(' ', $article['body']));
-        foreach ($words as $word) {
-            $mapReduce->emitIntermediate($article['id'], $word);
-        }
-    };
-
-Elle vérifie d'abord si le mot "cakephp" est dans le corps de l'article, et
-ensuite coupe le corps en mots individuels. Chaque mot va créer son propre
-``bucket`` où chaque id d'article sera stocké. Maintenant réduisons nos
-résultats pour extraire seulement le compte::
-
-    $reducer = function ($occurrences, $word, $mapReduce) {
-        $mapReduce->emit(count($occurrences), $word);
-    }
-
-Finalement, nous mettons tout ensemble::
-
-    $articlesByStatus = $articles->find()
-        ->where(['published' => true])
-        ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer);
-
-Ceci pourrait retourner un tableau très grand si nous ne nettoyons pas les mots
-interdits, mais il pourrait ressembler à ceci::
-
-    [
-        'cakephp' => 100,
-        'awesome' => 39,
-        'impressive' => 57,
-        'outstanding' => 10,
-        'mind-blowing' => 83
-    ]
-
-Un dernier exemple et vous serez un expert de map-reduce. Imaginez que vous
-avez une table de ``friends`` et que vous souhaitiez trouver les "fake friends"
-dans notre base de données ou, autrement dit, les gens qui ne se suivent pas
-mutuellement. Commençons avec notre fonction ``mapper``::
-
-    $mapper = function ($rel, $key, $mr) {
-        $mr->emitIntermediate($rel['source_user_id'], $rel['target_user_id']);
-        $mr->emitIntermediate($rel['target_user_id'], $rel['source_target_id']);
-    };
-
-Nous avons juste dupliqué nos données pour avoir une liste d'utilisateurs que
-chaque utilisateur suit. Maintenant, il est temps de la réduire. Pour chaque
-appel au reducer, il va recevoir une liste de followers par utilisateur::
-
-    // liste de $friends ressemblera à des nombres répétés
-    // ce qui signifie que les relations existent dans les deux directions
-    [2, 5, 100, 2, 4]
-
-    $reducer = function ($friendsList, $user, $mr) {
-        $friends = array_count_values($friendsList);
-        foreach ($friends as $friend => $count) {
-            if ($count < 2) {
-                $mr->emit($friend, $user);
-            }
-        }
-    }
-
-Et nous fournissons nos fonctions à la requête::
-
-    $fakeFriends = $friends->find()
-        ->hydrate(false)
-        ->mapReduce($mapper, $reducer)
-        ->toArray();
-
-Ceci retournerait un tableau similaire à ceci::
-
-    [
-        1 => [2, 4],
-        3 => [6]
-        ...
-    ]
-
-Les tableaux résultants signifient, par exemple, que l'utilisateur avec l'id
-``1`` suit les utilisateurs ``2`` and ``4``, mais ceux-ci ne suivent pas
-``1`` de leur côté.
-
-
-Stacking Multiple Operations
-----------------------------
-
-L'utilisation de `mapReduce` dans une requête ne va pas l'exécuter
-immédiatemment. L'opération va être enregistrée pour être lancée dès que
-l'on tentera de réucpérer le premier résultat.
-Ceci vous permet de continuer à chainer les méthodes et les filtres
-à la requête même après avoir ajouté une routine map-reduce::
-
-   $query = $articles->find()
-        ->where(['published' => true])
-        ->mapReduce($mapper, $reducer);
-
-    // Plus loin dans votre app:
-    $query->where(['created >=' => new DateTime('1 day ago')]);
-
-C'est particulièrement utile pour construire des méthodes finder personnalisées
- comme décrit dans la section :ref:`custom-find-methods`::
-
-    public function findPublished(Query $query, array $options])
-    {
-        return $query->where(['published' => true]);
-    }
-
-    public function findRecent(Query $query, array $options)
-    {
-        return $query->where(['created >=' => new DateTime('1 day ago')]);
-    }
-
-    public function findCommonWords(Query $query, array $options)
-    {
-        // Same as in the common words example in the previous section
-        $mapper = ...;
-        $reducer = ...;
-        return $query->mapReduce($mapper, $reducer);
-    }
-
-    $commonWords = $articles
-        ->find('commonWords')
-        ->find('published')
-        ->find('recent');
-
-En plus, il est aussi possible d'empiler plus d'une opération ``mapReduce``
-pour une requête unique. Par exemple, si nous souhaitons avoir les mots les
-plus couramment utilisés pour les articles, mais ensuite les filtrer pour
-seulement retourner les mots qui étaient mentionnés plus de 20 fois tout au long
-des articles::
-
-    $mapper = function ($count, $word, $mr) {
-        if ($count > 20) {
-            $mr->emit($count, $word);
-        }
-    };
-
-    $articles->find('commonWords')->mapReduce($mapper);
-
-Retirer Toutes les Opérations Map-reduce Empilées
--------------------------------------------------
-
-Dans les mêmes circonstances vous voulez modifier un objer ``Query`` pour
-que les opérations ``mapReduce`` ne soient pas exécutées du tout. Ceci peut
-être facilement fait en appelant la méthode avec les deux paramètres à
-null et le troisième paramètre (overwrite) à ``true``::
-
-    $query->mapReduce(null, null, true);
+entity.

@@ -1,14 +1,14 @@
-SessionHelper
-#############
+Session
+#######
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: SessionHelper(View $view, array $config = [])
 
-Le Helper Session offre la majorité des fonctionnalités du component et les
-rend disponible dans votre vue.
+Le Helper Session offre la majorité des fonctionnalités de l'objet Session et
+les rend disponible dans votre vue.
 
-La grande différence entre le Component Session et le Helper Session est que ce
+La grande différence entre l'objet Session et le Helper Session est que ce
 dernier *ne peut pas* écrire dans la session.
 
 Comme pour le Component Session, les données sont écrites et lues en

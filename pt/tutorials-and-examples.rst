@@ -6,15 +6,17 @@ ver como todas as peças se encaixam.
 
 Como alternativa, você pode preferir visitar o repositório não oficial de
 plugins para o CakePHP `CakePackages <http://plugins.cakephp.org/>`_ e a
-`Bakery (Padaria) <http://bakery.cakephp.org/>`_ para conhecer aplicações e componentes
-existentes.
+`Bakery (Padaria) <http://bakery.cakephp.org/>`_ para conhecer aplicações e
+componentes existentes.
 
 .. toctree::
-    :glob:
     :maxdepth: 1
 
+    tutorials-and-examples/bookmarks/intro
+    tutorials-and-examples/bookmarks/part-two
     tutorials-and-examples/blog/blog
     tutorials-and-examples/blog/part-two
+    tutorials-and-examples/blog/part-three
     tutorials-and-examples/blog-auth-example/auth
 
 

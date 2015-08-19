@@ -2,7 +2,13 @@ Contents
 ########
 
 .. toctree::
-   :maxdepth: 3
+   :hidden:
+
+   index
+   topics
+
+.. toctree::
+    :maxdepth: 3
 
     intro
     quickstart
@@ -17,17 +23,19 @@ Contents
     controllers
     views
     orm
-    development/errors
 
+    controllers/components/authentication
+    bake
     core-libraries/caching
     console-and-shells
     development/debugging
     deployment
     core-libraries/email
+    development/errors
     core-libraries/events
     core-libraries/internationalization-and-localization
     core-libraries/logging
-    controllers/components/authentication
+    core-libraries/form
     controllers/components/pagination
     plugins
     development/rest
@@ -44,15 +52,19 @@ Contents
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/string
+    core-libraries/text
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
+    migrations
+    elasticsearch
+    upgrade-tool
     appendices
 
 .. todolist::
 
 .. meta::
-    :title lang=zh_CN: Contents
-    :keywords lang=zh_CN: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=zh: Contents
+    :keywords lang=zh: core libraries,ref search,shells,deployment,appendices,glossary,models

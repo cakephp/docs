@@ -194,10 +194,6 @@ CakePHPはテストを実行するためのwebベースのインタフェース�
 また、将来テストを追加するべきか決定するときにも有用ですし、テストの進捗率を計測する
 指標のひとつとしても一役買ってくれます。
 
-.. |Code Coverage| image:: /_static/img/code-coverage.png
-
-|Code Coverage|
-
 インラインコードカバレッジでは緑色の行は実行したことを示しています。緑色の行にポインタを置くと、
 どのテストがカバーしているか示してくれます。実行されなかった行は赤で示されます。これはテストが
 うまく働かなかったことを示します。
@@ -306,12 +302,12 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
               'body' => 'text',
               'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
               'created' => 'datetime',
-              'updated' => 'datetime'
+              'modified' => 'datetime'
           );
           public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31')
           );
      }
 
@@ -362,7 +358,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 レコードのフィクスチャをクラスプロパティとして定義すると、関数を使ったり、フィクスチャの定義に
 他の動的なデータを使用することは易しいものではありません。
 解決策として、 ``$records`` をフィクスチャクラスの関数 init() で定義するという方法があります。
-たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、
+たとえば、「created」と「modified」のタイムスタンプに今日の日付を反映させたいのであれば、
 以下のようにするとよいでしょう。::
 
     class ArticlesFixture extends CakeTestFixture
@@ -374,7 +370,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
             'body' => 'text',
             'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
             'created' => 'datetime',
-            'updated' => 'datetime'
+            'modified' => 'datetime'
         );
 
         public function init()
@@ -386,7 +382,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
-                    'updated' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
                 ),
             );
             parent::init();
@@ -458,9 +454,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     {
         public $import = 'Article';
         public $records = array(
-            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'modified' => '2007-03-18 10:41:31'),
+            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'modified' => '2007-03-18 10:43:31'),
+            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'modified' => '2007-03-18 10:45:31')
         );
     }
 
@@ -1256,5 +1252,5 @@ Clover coverageとjUnitの結果を使えれば、Jenkinsが正しく設定で�
 
 .. meta::
     :title lang=ja: テスト
-    :keywords lang=en: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :keywords lang=ja: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
     :keywords lang=ja: PHPUnit,テストデータベース,データベース設定,データベースのセットアップ,データベースのテスト,テストフレームワーク,テストのセットアップ,デファクトスタンダード,pear,ランナー,array,データベース,cakephp,php,統合

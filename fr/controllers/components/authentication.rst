@@ -41,7 +41,7 @@ utilisateurs enregistrés dans votre application.
 * ``DigestAuthenticate`` vous permet d'identifier les utilisateurs en
   utilisant l'authentification Digest HTTP.
 
-Par défaut Le component Auth (``AutComponent``) utilise ``FormAuthenticate``.
+Par défaut Le component Auth (``AuthComponent``) utilise ``FormAuthenticate``.
 
 Choisir un Type d'Authentification
 ----------------------------------
@@ -113,17 +113,20 @@ remplaceront la clé correspondante dans la clé 'all'.
 Les objets d'authentification supportent les clés de configuration suivante.
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.  Vous pouvez
-  utiliser les mots clés ``username`` et ``password`` pour spécifier le champ de nom
-  d'utilisateur et le mot de passe respectivement.
+  utiliser les mots clés ``username`` et ``password`` pour spécifier le champ de
+  nom d'utilisateur et le mot de passe respectivement.
 - ``userModel`` Le nom du model de la table users, par défaut Users.
-- ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
-  l'authentification des utilisateurs, ex ``['Users.is_active' => true]``.
-- ``contain`` Les models supplémentaires à mettre dans contain et à retourner
-  avec les informations de l'utilisateur identifié.
+- ``finder`` la méthode finder à utiliser pour récupérer l'enregistrement de
+  l'utilisateur. 'all' par défaut.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut
   à ``Default``.
+- ``storage`` Classe de stockage. Par défaut à ``Session``.
+- Les options ``scope`` et ``contain`` sont dépréciées dans 3.1. Utilisez
+  un finder personnalisé à la place pour modifier la requête qui récupère
+  l'utilisateur.
 
-Pour configurer les différents champs de l'utilisateur dans la méthode ``initialize()``::
+Pour configurer les différents champs de l'utilisateur dans la méthode
+``initialize()``::
 
     public function initialize()
     {
@@ -138,8 +141,8 @@ Pour configurer les différents champs de l'utilisateur dans la méthode ``initi
     }
 
 Ne mettez pas d'autre clés de configuration de Auth (comme authError,
-loginAction, ...) au sein d'élément ``authenticate`` ou ``Form``. Ils doivent 
-se trouver au même niveau que la clé d'authentification. La configuration 
+loginAction, ...) au sein d'élément ``authenticate`` ou ``Form``. Ils doivent
+se trouver au même niveau que la clé d'authentification. La configuration
 ci-dessus avec d'autres configurations ressemblerait à quelque chose comme::
 
     public function initialize()
@@ -156,7 +159,8 @@ ci-dessus avec d'autres configurations ressemblerait à quelque chose comme::
                 'Form' => [
                     'fields' => ['username' => 'email']
                 ]
-            ]
+            ],
+            'storage' => 'Session'
         ]);
     }
 
@@ -175,6 +179,43 @@ les clés suivantes:
 - ``qop`` Par défaut à auth, pas d'autre valeur supportée pour le moment.
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($config['realm'])``.
+
+Personnaliser la Requête de Recherche
+-------------------------------------
+
+Vous pouvez personnaliser la requête utilisée pour chercher l'utilisateur
+en utilisant l'option ``finder`` dans la configuration de la classe
+d'authentification::
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'finder' => 'auth'
+                ]
+            ],
+        ]);
+    }
+
+Cela nécessitera que votre table ``UsersTable`` ait une méthode ``findAuth()``.
+Dans l'exemple ci-dessous, la requête est modifiée pour récupérer uniquement
+les champs et ajouter une condition::
+
+    public function findAuth(\Cake\ORM\Query $query, array $option)
+    {
+        $query
+            ->select(['id', 'username', 'password'])
+            ->where(['Users.active' => 1]);
+
+        return $query;
+    }
+
+.. note::
+    L'option ``finder`` est disponible depuis 3.1. Pour les versions
+    antérieures, vous pouvez utiliser les options ``scope`` et ``contain``
+    pour modifier la requête.
 
 Identifier les Utilisateurs et les Connecter
 --------------------------------------------
@@ -235,28 +276,198 @@ Si aucun paramètre n'est passé, elle obtient l'URL de redirection
 d'authentification. L'URL retournée correspond aux règles suivantes:
 
 - Retourne l'URL normalisée de valeur ``Auth.redirect`` si elle est
-  présente en session et pour le même domaine que celui sur lequel 
+  présente en session et pour le même domaine que celui sur lequel
   application est exécuté.
 - S'il n'y a pas de valeur en session et qu'il y a une configuration
   ``loginRedirect``, la valeur de ``loginRedirect`` est retournée.
 - S'il n'y a pas de valeur en session et pas de ``loginRedirect``, ``/``
   est retournée.
 
-Utilisation de l'Authentification Digest et Basic pour la Connexion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Création de Systèmes d'Authentification Stateless
+-------------------------------------------------
 
 Les authentifications basic et digest sont des schémas d'authentification
-sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si 
+sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
 vous utilisez seulement les authentificateurs basic / digest, vous n'avez pas
-besoin d'action login dans votre controller. Aussi, vous pouvez définir 
-``$this->Auth->sessionKey`` à ``false`` pour vous assurer que AuthComponent 
-n'essaie pas de lire les infos de l'utilisateur à partir de la session. Vous
-voudrez peut-être aussi définir ``unauthorizedRedirect`` à ``false`` ce qui
-va entraîner l'envoi d'une ``ForbiddenException`` de AuthComponent à la place
-du comportement par défaut de redirection vers le référent. L'authentification 
-stateless va re-vérifier les certificats de l'utilisateur à chaque requête, 
-créant une petite quantité de charge supplémentaire, mais permet aux clients 
-de se connecter sans utiliser les cookies et est parfait pour le APIs.
+besoin d'action login dans votre controller. L'authentication stateless va
+re-vérifier les autorisations de l'utilisateur à chaque requête, ceci crée un
+petit surcoût mais permet aux clients de se connecter sans utiliser les
+cookies et rend AuthComponent plus adapté pour construire des APIs.
+
+Pour des authentificateurs stateless, la config ``storage`` doit être définie
+à ``Memory`` pour que AuthComponent n'utilise pas la session pour stocker
+l'enregistrement utilisateur. Vous pouvez aussi définir la config
+``unauthorizedRedirect`` à ``false`` pour que AuthComponent lance une
+``ForbiddenException`` plutôt que le comportement par défaut qui est de
+rediriger vers la page référente.
+
+Les objets d'authentification peuvent implémenter une méthode ``getUser()``
+qui peut être utilisée pour supporter les systèmes de connexion des
+utilisateurs qui ne reposent pas sur les cookies. Une méthode getUser
+typique regarde l'environnement de la requête (request/environnement) et
+utilise les informations contenues pour confirmer l'identité de l'utilisateur.
+L'authentification HTTP Basic utilise par exemple
+``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
+username et password.
+
+.. note::
+
+    Dans le cas ou l'authentification ne fonctionne pas tel qu'espéré,
+    vérifiez si les requêtes sont exécutées (voir
+    ``BaseAuthenticate::_query($username)``). Dans le cas où aucune
+    requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
+    ``$_SERVER['PHP_AUTH_PW']`` sont renseignés par le serveur web.
+    Si vous utilisez Apache avec PHP-FastCGI, vous devrez peut être ajouter
+    cette ligne dans le **.htaccess** de votre webroot::
+
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
+l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
+méthodes d'authentification de l'objet ``authenticate()``, la méthode
+``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
+succès et ``false`` en cas d'échec::
+
+    public function getUser(Request $request)
+    {
+        $username = env('PHP_AUTH_USER');
+        $pass = env('PHP_AUTH_PW');
+
+        if (empty($username) || empty($pass)) {
+            return false;
+        }
+        return $this->_findUser($username, $pass);
+    }
+
+Le contenu ci-dessus montre comment vous pourriez mettre en œuvre la méthode
+getUser pour les authentifications HTTP Basic.
+La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
+utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
+
+Utiliser l'Authentification Basic
+---------------------------------
+
+L'Authentification Basic vous permet de créer une authentification stateless
+qui peut être utilisée pour des applications en intranet ou pour des scénarios
+d'API simple. Les certificats d'identification de l'authentification Basic
+seront revérifiés à chaque requête.
+
+.. warning::
+    L'authentification Basic transmet les certificats d'identification en clair.
+    Vous devez utiliser HTTPS quand vous utilisez l'authentification Basic.
+
+
+Pour utiliser l'authentification basic, vous devez configurer AuthComponent::
+
+    $this->Auth->config('authenticate', [
+        'Basic' => [
+            'fields' => ['username' => 'username', 'password' => 'api_key']
+            'userModel' => 'Users'
+        ],
+    ]);
+
+Ici nous voulons utiliser le username + clé API pour nos champs, et utiliser le
+model Users.
+
+Créer des clés d'API pour une Authentification Basic
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comme le HTTP basic envoie les certificats d'identification en clair, il n'est
+pas sage que les utilisateurs envoient leur mot de passe de connexion. A la
+place, une clé d'API opaque est généralement utilisée. Vous pouvez générer
+de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
+
+    namespace App\Model\Table;
+
+    use Cake\Utility\Text;
+    use Cake\Utility\Security;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table
+    {
+        public function beforeSave(Event $event)
+        {
+            $entity = $event->data['entity'];
+
+            if ($entity->isNew()) {
+                $entity->api_key = Security::hash(Text::uuid());
+            }
+            return true;
+        }
+    }
+
+Ce qui est au-dessus va générer un hash aléatoire pour chaque utilisateur quand
+il est sauvegardé. Utiliser cette clé plutôt que le mot de passe, signifie que
+même en HTTP en clair, vos utilisateurs n'ont pas à envoyer leur mot de passe
+dans les requêtes d'API. Vous pouvez aussi écrire de la logique supplémentaire
+pour regénérer la clé d'API à la demande de l'utilisateur.
+
+Utiliser l'Authentification Digest
+----------------------------------
+
+L'authentification Digest est un modèle qui améliore la sécurité par rapport
+à l'authentification basic, puisque les certificats d'identification de
+l'utilisateur ne sont jamais envoyés dans l'en-tête de la requête. A la place,
+un hash est envoyé.
+
+Pour utiliser l'authentification digest, vous devez configurer AuthComponent::
+
+    $this->Auth->config('authenticate', [
+        'Digest' => [
+            'fields' => ['username' => 'username', 'password' => 'digest_hash']
+            'userModel' => 'Users'
+        ],
+    ]);
+
+Ici nous utilisons le username + digest_hash pour nos champs, et nous
+utilisons le model Users.
+
+Hasher les Mots de Passe pour l'Authentification Digest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comme l'authentification Digest nécessite un mot de passe hashé au format
+défini par la RFC, afin de correctement hasher un mot de passe pour pouvoir
+l'utiliser avec l'authentification Digest, vous devez utiliser la fonction
+de hashage de mot de passe spéciale dans ``DigestAuthenticate``. Si vous allez
+combiner l'authentification digest avec une autre stratégie d'authentication,
+il est aussi recommandé que vous stockiez le mot de passe digest dans une
+colonne séparée du mot de passe standard hashé::
+
+    namespace App\Model\Table;
+
+    use Cake\Auth\DigestAuthenticate;
+    use Cake\Event\Event;
+    use Cake\ORM\Table;
+
+    class UsersTable extends Table
+    {
+        public function beforeSave(Event $event)
+        {
+            $entity = $event->data['entity'];
+
+            // Make a password for digest auth.
+            $entity->digest_hash = DigestAuthenticate::password(
+                $entity->username,
+                $entity->plain_password,
+                env('SERVER_NAME')
+            );
+            return true;
+        }
+    }
+
+Les mots de passe pour l'authentification digest ont besoin d'un peu plus
+d'informations que les autres mots de passe hashés, selon la RFC sur
+l'authentification digest.
+
+.. note::
+
+    Le troisième paramètre de DigestAuthenticate::password() doit correspondre
+    à la valeur de config 'realm' définie quand DigestAuthentication a été
+    configurée dans AuthComponent::$authenticate. Celle-ci est
+    ``env('SCRIPT_NAME')`` par défaut. Vous pouvez souhaiter utiliser une
+    chaîne static si vous voulez des hashs cohérents dans plusieurs
+    environnements.
 
 Créer des Objets d'Authentification Personnalisés
 -------------------------------------------------
@@ -264,9 +475,13 @@ Créer des Objets d'Authentification Personnalisés
 Comme les objets d'authentification sont modulaires, vous pouvez créer des
 objets d'authentification personnalisés pour votre application ou plugins.
 Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
-``src/Auth/OpenidAuthenticate.php``, vous pourriez mettre ce qui suit::
+**src/Auth/OpenidAuthenticate.php**, vous pourriez mettre ce qui suit::
+
+    namespace App\Auth;
 
     use Cake\Auth\BaseAuthenticate;
+    use Cake\Network\Request;
+    use Cake\Network\Response;
 
     class OpenidAuthenticate extends BaseAuthenticate
     {
@@ -282,17 +497,18 @@ Si par exemple vous vouliez créer un objet d'authentification OpenID, dans
 Les objets d'authentification devraient retourner ``false`` s'ils ne peuvent
 identifier l'utilisateur et un tableau d'information utilisateur s'ils le
 peuvent. Il n'est pas utile d'étendre ``BaseAuthenticate``, simplement
-votre objet d'identification doit implémenter la méthode ``authenticate()``.
-La class ``BaseAuthenticate`` fournit un nombre de méthode très utiles
-communément utilisées. Vous pouvez aussi implémenter une méthode ``getUser()``
-si votre objet d'identification doit supporter des authentifications sans
-cookie ou sans état (stateless). Regardez les sections portant sur
-l'authentification digest et basic plus bas pour plus d'information.
+votre objet d'identification doit implémenter
+``Cake\Event\EventListenerInterface``. La class ``BaseAuthenticate`` fournit un
+nombre de méthode très utiles communément utilisées. Vous pouvez aussi
+implémenter une méthode ``getUser()`` si votre objet d'identification doit
+supporter des authentifications sans cookie ou sans état (stateless). Regardez
+les sections portant sur l'authentification digest et basic plus bas pour plus
+d'information.
 
-``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
+``AuthComponent`` lance maintenant deux évènements``Auth.afterIdentify`` et
 ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
 avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction de
-callback pour ces événements en retournant un tableau de mapping depuis la
+callback pour ces évènements en retournant un tableau de mapping depuis la
 méthode ``implementedEvents()`` de votre classe d'authentification::
 
     public function implementedEvents()
@@ -311,48 +527,22 @@ en les incluant dans le tableau d'authentification AuthComponents::
 
     $this->Auth->config('authenticate', [
         'Openid', // objet d'authentification de app
-        'AuthBag.Combo', // objet d'identification de plugin.
+        'AuthBag.Openid', // objet d'identification de plugin.
     ]);
 
-Création de Systèmes d'Authentification Stateless
--------------------------------------------------
-
-Les objets d'authentification peuvent implémenter une méthode ``getUser()``
-qui peut être utilisée pour supporter les systèmes de connexion des
-utilisateurs qui ne reposent pas sur les cookies. Une méthode getUser
-typique regarde l'environnement de la requête (request/environnement) et
-utilise les informations contenues pour confirmer l'identité de l'utilisateur.
-L'authentification HTTP Basic utilise par exemple
-``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
-username et password. Pour chaque requête, ces valeurs sont utilisées pour
-ré-identifier l'utilisateur et s'assurer que c'est un utilisateur valide. Comme
-avec les méthodes d'authentification de l'objet ``authenticate()``, la méthode
-``getuser()`` devrait retourner un tableau d'information utilisateur en cas de 
-succès et ``false`` en cas d'echec. ::
-
-    public function getUser($request)
-    {
-        $username = env('PHP_AUTH_USER');
-        $pass = env('PHP_AUTH_PW');
-
-        if (empty($username) || empty($pass)) {
-            return false;
-        }
-        return $this->_findUser($username, $pass);
-    }
-
-Le contenu ci-dessus montre comment vous pourriez mettre en œuvre la méthode
-getUser  pour les authentifications HTTP Basic.
-La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
-utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
+.. note::
+    Notez qu'en utilisant la notation simple, il n'y a pas le mot
+    'Authenticate' lors de l'instantiation de l'objet d'authentification. A la
+    place, si vous utilisez les namespaces, vous devrez définir le namespace
+    complet de la classe (y compris le mot 'Authenticate').
 
 Gestion des Requêtes non Authentifiées
 --------------------------------------
 
-Quand un utilisateur non authentifié essaie d'accéder à une page protégée en 
+Quand un utilisateur non authentifié essaie d'accéder à une page protégée en
 premier, la méthode ``unauthenticated()`` du dernier authentificateur dans la
-chaîne est appelée. L'objet d'authentification peut gérer la réponse d'envoi 
-ou la redirection appropriée en retournant l'objet response pour indiquer 
+chaîne est appelée. L'objet d'authentification peut gérer la réponse d'envoi
+ou la redirection appropriée en retournant l'objet response pour indiquer
 qu'aucune action suivante n'est nécessaire du fait de l'ordre dans lequel vous
 spécifiez l'objet d'authentification dans les propriétés de ``authenticate``.
 
@@ -365,7 +555,7 @@ Afficher les Messages Flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
-suivantes au fichier ``src/Template/Layouts/default.ctp`` dans la section body::
+suivantes au fichier **src/Template/Layouts/default.ctp** dans la section body::
 
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
@@ -375,8 +565,9 @@ component Auth ``AuthComponent`` utilise. En utilisant ``flash``,
 vous pouvez configurer les paramètres que le component Auth utilise pour
 envoyer des messages flash. Les clés disponibles sont
 
-- ``key`` - La clé à utiliser, 'auth' par défaut
-- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par défaut
+- ``key`` - La clé à utiliser, 'auth' par défaut.
+- ``params`` - Le tableau des paramètres supplémentaires à utiliser, [] par
+  défaut.
 
 En plus des paramètres de message flash, vous pouvez personnaliser les autres
 messages d'erreurs que le component AuthComponent utilise. Dans la partie
@@ -387,7 +578,7 @@ l'authentification échoue::
     $this->Auth->config('authError', "Désolé, vous n'êtes pas autorisés à accéder à cette zone.");
 
 Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
-l'user se soit déja connecté. Vous pouvez supprimer ce message en configurant
+l'user se soit déjà connecté. Vous pouvez supprimer ce message en configurant
 sa valeur avec le booléen ``false``.
 
 Dans le beforeFilter() de votre controller ou dans les configurations du
@@ -425,8 +616,8 @@ directrice (setter) dans votre entity User::
     }
 
 AuthComponent est configuré par défaut pour utiliser ``DefaultPasswordHasher``
-lors de la validation des informations d'identification de l'utilisateur si 
-aucune configuration supplémentaire est requise afin d'authentifier les 
+lors de la validation des informations d'identification de l'utilisateur si
+aucune configuration supplémentaire est requise afin d'authentifier les
 utilisateurs.
 
 ``DefaultPasswordHasher`` utilise l'algorithme de hashage bcrypt en interne,
@@ -439,8 +630,8 @@ Créer des Classes de Hash de Mot de Passe Personnalisé
 ------------------------------------------------------
 
 Pour utiliser un hasher de mot de passe différent, vous devez créer la classe
-dans ``src/Auth/LegacyPasswordHasher.php`` et intégrer les méthodes ``hash`` et
-``check``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
+dans **src/Auth/LegacyPasswordHasher.php** et intégrer les méthodes ``hash()``
+et ``check()``. Cette classe doit étendre la classe ``AbstractPasswordHasher``::
 
     namespace App\Auth;
 
@@ -487,9 +678,9 @@ Changer les Algorithmes de Hashage
 
 CakePHP fournit un moyen propre de migrer vos mots de passe utilisateurs
 d'un algorithme vers un autre, ceci est possible avec la classe
-``FallbackPasswordHasher``. Supposons que vous utilisiez ``LegacyPasswordHasher``
-à partir de l'exemple précédent, vous pouvez configurer AuthComponent comme
-suit::
+``FallbackPasswordHasher``. Supposons que vous migriez votre application depuis
+CakePHP 2.x qui utilise des hash de mot de passe ``sha1``, vous pouvez
+configurer le AuthComponent comme suit::
 
     public function initialize()
     {
@@ -499,7 +690,10 @@ suit::
                 'Form' => [
                     'passwordHasher' => [
                         'className' => 'Fallback',
-                        'hashers' => ['Default', 'Legacy']
+                        'hashers' => [
+                            'Default',
+                            'Weak' => ['hashType' => 'sha1']
+                        ]
                     ]
                 ]
             ]
@@ -535,11 +729,11 @@ pouvez changer la fonction login selon::
     }
 
 Comme vous pouvez le voir, nous définissons le mot de passe en clair à nouveau
-pour que la fonction directrice (setter) dans l'entity hashe le mot de passe comme montré
-dans les exemples précédents et sauvegarde ensuite l'entity.
+pour que la fonction directrice (setter) dans l'entity hashe le mot de passe
+comme montré dans les exemples précédents et sauvegarde ensuite l'entity.
 
-Hachage de Mots de Passe pour l'Authentification Digest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Hachage des Mots de Passe pour l'Authentification Digest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Puisque l'authentification Digest nécessite un mot de passe haché dans un
 format défini par la RFC, afin d'hacher correctement un mot de
@@ -625,7 +819,7 @@ accéder à l'utilisateur en cours de connexion en utilisant
     // Depuis l'intérieur du controler
     $this->Auth->user('id');
 
-Si l'utilisateur courant n'est pas connecté ou que la clé n'existe pas, 
+Si l'utilisateur courant n'est pas connecté ou que la clé n'existe pas,
 la valeur null sera retournée.
 
 Déconnexion des Utilisateurs
@@ -661,7 +855,7 @@ S'il est activé, ``ÀuthComponent`` peut vérifier automatiquement des
 gestionnaires d'autorisations et veiller à ce que les utilisateurs connectés
 soient autorisés à accéder aux ressources qu'ils demandent.
 Il y a plusieurs gestionnaires d'autorisations intégrés et vous
-pouvez créer vos propres gestionnaires pour votre application ou comme 
+pouvez créer vos propres gestionnaires pour votre application ou comme
 faisant partie d'un plugin par exemple.
 
 - ``ControllerAuthorize`` appelle ``isAuthorized()`` sur le controller actif
@@ -680,9 +874,9 @@ Configurer les Gestionnaires d'Autorisation
 Vous configurez les gestionnaires d'autorisation en utilisant la clé de config
 ``authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires pour l'autorisation. L'utilisation de plusieurs gestionnaires
-vous donne la possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
-Quand les gestionnaires d'autorisation sont vérifiés, ils sont appelés
-dans l'ordre où ils sont déclarés. Les gestionnaires devraient retourner
+vous donne la possibilité d'utiliser plusieurs moyens de vérifier les
+autorisations. Quand les gestionnaires d'autorisation sont vérifiés, ils sont
+appelés dans l'ordre où ils sont déclarés. Les gestionnaires devraient retourner
 ``false``, s'il ne sont pas capable de vérifier les autorisations ou bien si
 la vérification a échoué. Les gestionnaires devraient retourner ``true`` s'ils
 sont capables de vérifier avec succès les autorisations. Les gestionnaires
@@ -734,7 +928,7 @@ Création d'Objets Authorize Personnalisés
 
 Parce que les objets authorize sont modulables, vous pouvez créer des objets
 authorize personnalisés dans votre application ou plugins. Si par exemple
-vous voulez créer un objet authorize LDAP dans ``src/Auth/LdapAuthorize.php``,
+vous voulez créer un objet authorize LDAP dans **src/Auth/LdapAuthorize.php**,
 vous pourriez mettre cela::
 
     namespace App\Auth;
@@ -750,11 +944,11 @@ vous pourriez mettre cela::
         }
     }
 
-Les objets Authorize devraient retourner ``false`` si l'utilisateur se voit 
-refuser l'accès ou si l'objet est incapable de faire un contrôle. Si l'objet 
-est capable de vérifier l'accès de l'utilisateur, ``true`` devrait être 
-retourné. Il n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut 
-simplement que votre objet authorize implémente la méthode ``authorize()``. 
+Les objets Authorize devraient retourner ``false`` si l'utilisateur se voit
+refuser l'accès ou si l'objet est incapable de faire un contrôle. Si l'objet
+est capable de vérifier l'accès de l'utilisateur, ``true`` devrait être
+retourné. Il n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut
+simplement que votre objet authorize implémente la méthode ``authorize()``.
 La classe ``BaseAuthorize`` fournit un nombre intéressant de méthodes utiles
 qui sont communément utilisées.
 

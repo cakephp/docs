@@ -103,6 +103,10 @@ French
 ------
 - `French CakePHP Community <http://cakephp-fr.org>`_
 
+Brazilian Portuguese
+--------------------
+- `Brazilian CakePHP Community <http://cakephp-br.org>`_
+
 
 .. meta::
     :title lang=en: Where to Get Help

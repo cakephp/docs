@@ -74,7 +74,7 @@ Vous pouvez aussi inclure d'autres options
 
 Alors que vous pouvez passer la plupart des options de query à partir de la
 propriété paginate, il est souvent plus propre et simple de mettre vos options
-de pagination dans une :ref:`custom-find-methods`. Vous pouver définir
+de pagination dans une :ref:`custom-find-methods`. vous pouvez définir
 l'utilisation de la pagination du finder en configurant l'option ``findType``::
 
     class ArticlesController extends AppController
@@ -85,13 +85,14 @@ l'utilisation de la pagination du finder en configurant l'option ``findType``::
         ];
     }
 
-Because custom finder methods can also take in options,
-this is how you pass in options into a custom finder method within the paginate property::
+Comme les méthodes finder personnalisées peuvent aussi être prises en options,
+voici comment vous pouvez passer des options  dans une méthode de finder
+personnalisée dans la propriété paginate::
 
     class ArticlesController extends AppController
     {
 
-        // find articles by tag
+        // trouve les articles selon les tags
         public function tags()
         {
             $tags = $this->request->params['pass'];
@@ -99,10 +100,11 @@ this is how you pass in options into a custom finder method within the paginate 
             $customFinderOptions = [
                 'tags' => $tags
             ];
-            // the custom finder method is called findTagged inside ArticlesTable.php
-            // it should look like this:
+            // la méthode de finder personnalisée est appelée findTagged dans
+            // ArticlesTable.php
+            // elle devrait ressembler à ceci:
             // public function findTagged(Query $query, array $options) {
-            // hence you use tagged as the key
+            // ainsi vous utilisez tagged en clé
             $this->paginate = [
                 'finder' => [
                     'tagged' => $customFinderOptions
@@ -215,7 +217,7 @@ Limiter le Nombre Maximum de Lignes qui peuvent être Récupérées
 Le nombre de résultat qui sont récupérés est montré à l'utilisateur dans le
 paramètre ``limit``. Il est généralement non souhaité de permettre aux
 utilisateurs de récupérer toutes les lignes d'un ensemble paginé. Par défaut,
-CakePHP limite le nombre maximum de lignes qui peuvent être réupérées à
+CakePHP limite le nombre maximum de lignes qui peuvent être récupérées à
 100. Si par défaut ce n'est pas approprié pour votre application, vous pouvez
 l'ajuster dans les options de pagination::
 
@@ -224,7 +226,7 @@ l'ajuster dans les options de pagination::
         'maxLimit' => 10
     ];
 
-Si le paramêtre de limite de la requête est plus grand que cette valeur, elle
+Si le paramètre de limite de la requête est plus grand que cette valeur, elle
 sera réduit à la valeur ``maxLimit``.
 
 Faire des Jointures d'Associations Supplémentaires
@@ -261,7 +263,7 @@ un bloc try catch et faire des actions appropriées quand une
             $this->paginate();
         } catch (NotFoundException $e) {
             // Faire quelque chose ici comme rediriger vers la première ou dernière page.
-            // $this->request->params['paging'] vous donnera les onfos demandées.
+            // $this->request->params['paging'] vous donnera les infos demandées.
         }
     }
 
@@ -270,7 +272,6 @@ Pagination dans la Vue
 
 Regardez la documentation :php:class:`~Cake\\View\\Helper\\PaginatorHelper`
 pour savoir comment créer des liens de navigation paginés.
-
 
 .. meta::
     :title lang=fr: Pagination

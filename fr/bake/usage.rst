@@ -17,7 +17,7 @@ base de données est configurée. Regardez la section dans
 d'informations.
 
 Si vous exécutez la commande sans argument, ``bin/cake bake`` affichera la liste
-des tâches disponibles. Vous devriez voir quelquechose comme ceci::
+des tâches disponibles. Vous devriez voir quelque chose comme ceci::
 
     $ bin/cake bake
 
@@ -32,18 +32,18 @@ des tâches disponibles. Vous devriez voir quelquechose comme ceci::
     Les commandes disponibles de bake:
 
     - all
-    - fixture
-    - test
-    - view
     - behavior
-    - helper
-    - shell
-    - controller
-    - model
-    - plugin
-    - project
     - cell
     - component
+    - controller
+    - fixture
+    - form
+    - helper
+    - model
+    - plugin
+    - shell
+    - template
+    - test
 
     En utilisant `cake bake [name]` vous pouvez faire appel à une tâche
     spécifique de bake.
@@ -93,14 +93,10 @@ options disponibles en utilisant l'option ``--help``::
 Themes de Bake
 ==============
 
-L'option theme est commune à toutes les commandes de bake, et permet de
-changer les fichiers de template utilisés lors de la création avec bake. Tout
-plugin chargé qui contient un dossier ``src/Template/Bake`` est automatiquement
-détecté par bake comme un theme de bake disponible, et sera affiché dans la
-sortie d'aide. Par exemple, existe-t-il un plugin appelé ``Special`` qui
-intègre un theme de bake, la sortie d'aide afficherait::
-
-    --theme, -t       Le theme à utiliser pour créer du code avec bake. (Choix: Special)
+L'option theme est commune à toutes les commandes de bake, et permet de changer
+les fichiers de template utilisés lors de la création avec bake. Pour créer vos
+propres templates, référez-vous :ref:`à la documentation sur la création de
+theme bake <creating-a-bake-theme>`.
 
 .. meta::
     :title lang=fr: Génération de Code avec Bake

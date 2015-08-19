@@ -20,7 +20,7 @@ La configuration est généralement stockée soit dans les fichiers PHP ou INI,
 et chargée pendant le bootstrap de l'application. CakePHP est fourni avec un
 fichier de configuration par défaut, mais si cela et nécessaire, vous pouvez
 ajouter des fichiers supplémentaires de configuration et les charger dans
-``config/bootstrap.php``. :php:class:`Cake\\Core\\Configure` est utilisée
+**config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` est utilisée
 pour la configuration générale, et les classes d'adaptateur fournissent
 les méthodes ``config()`` pour faciliter la configuration et la rendre plus
 transparente.
@@ -30,8 +30,8 @@ Charger les Fichiers de Configuration Supplémentaires
 
 Si votre application a plusieurs options de configuration, il peut être utile
 de séparer la configuration dans plusieurs fichiers. Après avoir créé chacun
-des fichiers dans votre répertoire ``config/``, vous pouvez les charger
-dans ``bootstrap.php``::
+des fichiers dans votre répertoire **config/**, vous pouvez les charger
+dans **bootstrap.php**::
 
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
@@ -41,7 +41,7 @@ dans ``bootstrap.php``::
     Configure::load('other_config', 'default');
 
 Vous pouvez aussi utiliser des fichiers de configuration supplémentaires pour
-surcharger un environement spécifique. Chaque fichier chargé après ``app.php``
+surcharger un environnement spécifique. Chaque fichier chargé après **app.php**
 peut redéfinir les valeurs déclarées précédemment ce qui vous permet de
 personnaliser la configuration pour les environnements de développement ou
 intermédiaires.
@@ -62,7 +62,7 @@ App.namespace
     .. note::
 
         Quand vous changez le namespace dans votre configuration, vous devez
-        aussi mettre à jour le fichier ``composer.json`` pour utiliser aussi
+        aussi mettre à jour le fichier **composer.json** pour utiliser aussi
         ce namespace. De plus, créer un nouvel autoloader en lançant
         ``php composer.phar dumpautoload``.
 
@@ -73,12 +73,12 @@ App.baseUrl
     le mod\_rewrite d'Apache avec CakePHP. N'oubliez pas aussi de retirer vos
     fichiers .htaccess.
 App.base
-    Le répertoire de base où l'app se trouve. Si à ``false``, il sera detecté
+    Le répertoire de base où l'app se trouve. Si à ``false``, il sera détecté
     automatiquement.
 App.encoding
     Définit l'encodage que votre application utilise. Cet encodage est utilisé
     pour générer le charset dans le layout, et les entities encodés. Cela
-    doit correspondre aux valeurs d'encodage spécifiés pour votre base de
+    doit correspondre aux valeurs d'encodage spécifiées pour votre base de
     données.
 App.webroot
     Le répertoire webroot.
@@ -103,7 +103,7 @@ App.paths
     Les chemins de Configure pour les ressources non basées sur les classes.
     Accepte les sous-clés ``plugins``, ``templates``, ``locales``, qui
     permettent la définition de chemins respectivement pour les plugins, les
-    templates de view et les fichiers locale.
+    templates de view et les fichiers de locales.
 App.jsBaseUrl
     Le chemin Web vers le répertoire public des js dans webroot. Si vous
     utilisez un :term:`CDN`, vous devriez définir cette valeur vers la
@@ -132,37 +132,37 @@ données.
 Configuration de la Mise en Cache
 ---------------------------------
 
-Regardez :ref:`cache-configuration` pour plus d'informations sur la
+Consultez :ref:`cache-configuration` pour plus d'informations sur la
 configuration de la mise en cache dans CakePHP.
 
 Configuration de Gestion des Erreurs et des Exceptions
 ------------------------------------------------------
 
-Regardez les sections sur :ref:`error-configuration` pour des informations sur
+Consultez les sections sur :ref:`error-configuration` pour des informations sur
 la configuration des gestionnaires d'erreur et d'exception.
 
 Configuration du Logging
 ------------------------
 
-Regardez :ref:`log-configuration` pour des informations sur la configuration
+Consultez :ref:`log-configuration` pour des informations sur la configuration
 du logging dans CakePHP.
 
 Configuration de Email
 ----------------------
 
-Regardez :ref:`email-configuration` pour des informations sur la configuration
+Consultez :ref:`email-configuration` pour des informations sur la configuration
 prédéfini d'email dans CakePHP.
 
 Configuration de Session
 ------------------------
 
-Regardez :ref:`session-configuration` pour avoir des informations sur la
+Consultez :ref:`session-configuration` pour avoir des informations sur la
 configuration de la gestion des sessions dans CakePHP.
 
 Configuration du Routing
 ------------------------
 
-Regardez :ref:`routes-configuration` pour plus d'informations sur la
+Consultez :ref:`routes-configuration` pour plus d'informations sur la
 configuration du routing et de la création de routes pour votre application.
 
 .. _additional-class-paths:
@@ -194,26 +194,35 @@ avec ce qui suit::
         }
     }
 
-Les chemins de View et de Plugin
---------------------------------
+Les chemins de Plugin, View Template et de Locale
+-------------------------------------------------
 
-Puisque les views et plugins ne sont pas des classes, ils ne peuvent pas avoir
-un autoloader configuré. CakePHP fournit deux variables de configuration pour
-configurer des chemins supplémentaires pour vos ressources. Dans votre
-``config/app.php``, vous pouvez définir les variables::
+Puisque les plugins, view templates et locales ne sont pas des classes, ils ne
+peuvent pas avoir un autoloader configuré. CakePHP fournit trois variables de
+configuration pour configurer des chemins supplémentaires pour vos ressources.
+Dans votre **config/app.php**, vous pouvez définir les variables::
 
     return [
         // Plus de configuration
         'App' => [
             'paths' => [
-                'views' => [APP . 'View/', APP . 'View2/'],
-                'plugins' => [ROOT . '/plugins/', '/path/to/other/plugins/']
+                'plugins' => [
+                    ROOT . DS . 'plugins' . DS,
+                    '/path/to/other/plugins/'
+                ],
+                'templates' => [
+                    APP . 'Template' . DS,
+                    APP . 'Template2' . DS
+                ],
+                'locales' => [
+                    APP . 'Locale' . DS
+                ]
             ]
         ]
     ];
 
-Les chemins doivent finir par ``/``, ou ils ne fonctionneront pas
-correctement.
+Les chemins doivent finir par un séparateur de répertoire, ou ils ne
+fonctionneront pas correctement.
 
 Configuration de Inflection
 ===========================
@@ -267,7 +276,7 @@ L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
 Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir
 les modes de debug et de production à la volée. C'est particulièrement
-pratique pour les intéractions JSON quand les informations de debug
+pratique pour les interactions JSON quand les informations de debug
 peuvent entraîner des problèmes de parsing.
 
 Lire les Données de Configuration
@@ -296,7 +305,7 @@ Vérifier si les Données de Configuration sont Définies
 
 .. php:staticmethod:: check($key)
 
-Utilisé pour vérifier si une clé/chemin existe et a une valeur non-null::
+Utilisée pour vérifier si une clé/chemin existe et a une valeur non-null::
 
     $exists = Configure::check('Company.name');
 
@@ -316,7 +325,7 @@ Lire & Supprimer les Données de Configuration
 .. php:staticmethod:: consume($key)
 
 Lit et supprime une clé de Configure. C'est utile quand vous voulez combiner
-la lecture et la suppresssion de valeurs en une seule opération.
+la lecture et la suppression de valeurs en une seule opération.
 
 Lire et Ecrire les Fichiers de Configuration
 ============================================
@@ -341,7 +350,7 @@ en utilisant :php:meth:`Configure::config()`::
 
 Vous pouvez avoir plusieurs readers attachés à Configure, chacun lisant
 différents types de fichiers de configuration, ou lisant à partir de
-différents types de sources. Vous pouvez intéragir avec les readers attachés
+différents types de sources. Vous pouvez interagir avec les readers attachés
 en utilisant quelques autres méthodes de Configure. Pour voir, vérifier
 quels alias de reader sont attachés, vous pouvez utiliser
 :php:meth:`Configure::configured()`::
@@ -474,13 +483,13 @@ pour votre application::
             return Xml::toArray($xml);
         }
 
-        public function dump($key, $data)
+        public function dump($key, array $data)
         {
             // Code to dump data to file
         }
     }
 
-Dans votre ``config/bootstrap.php``, vous pouvez attacher ce reader et
+Dans votre **config/bootstrap.php**, vous pouvez attacher ce reader et
 l'utiliser::
 
     use App\Configure\Engine\XmlConfig;
@@ -519,6 +528,8 @@ d'informations de configuration que la ressource nommé ``$key`` contient.
 Moteurs de Configuration intégrés
 =================================
 
+.. php:namespace:: Cake\Core\Configure\Engine
+
 Fichiers de Configuration PHP
 -----------------------------
 
@@ -526,22 +537,22 @@ Fichiers de Configuration PHP
 
 Vous permet de lire les fichiers de configuration de votre application qui
 sont stockés en fichiers PHP simples. Vous pouvez lire soit les fichiers à
-partir de votre ``config``, soit des répertoires configs du plugin en utilisant
+partir de votre config, soit des répertoires configs du plugin en utilisant
 la :term:`syntaxe de plugin`. Les fichiers **doivent** retourner un tableau.
 Un fichier de configuration d'exemple ressemblerait à cela::
 
     return [
-      	'debug' => 0,
-      	'Security' => [
-      	    'salt' => 'its-secret'
-      	],
-      	'App' => [
-      	    'namespace' => 'App'
-      	]
+        'debug' => 0,
+        'Security' => [
+            'salt' => 'its-secret'
+        ],
+        'App' => [
+            'namespace' => 'App'
+        ]
     ];
 
 Chargez votre fichier de configuration personnalisé en insérant ce qui suit
-dans ``config/bootstrap.php``::
+dans **config/bootstrap.php**::
 
     Configure::load('customConfig');
 
@@ -552,7 +563,7 @@ Fichiers de Configuration Ini
 
 Vous permet de lire les fichiers de configuration qui sont stockés en
 fichiers .ini simples. Les fichiers ini doivent être compatibles avec la
-fonction php ``parse_ini_file``, et bénéficie des améliorations suivantes:
+fonction php ``parse_ini_file()``, et bénéficie des améliorations suivantes:
 
 * Les valeurs séparées par des points sont étendues dans les tableaux.
 * Les valeurs de la famille des booléens comme 'on' et 'off' sont converties
@@ -579,10 +590,10 @@ Json Configuration Files
 
 .. php:class:: JsonConfig
 
-Allows you to read / dump configuration files that are stored as JSON encoded
-strings in .json files.
+Vous permet de lire / effacer les fichiers de configuration qui sont
+stockés en chaînes encodées JSON dans des fichiers .json.
 
-An example JSON file would look like::
+Un exemple de fichier JSON ressemblerait à ceci::
 
     {
         "debug": false,
@@ -598,8 +609,8 @@ Bootstrapping CakePHP
 =====================
 
 Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
-bootstrap de CakePHP dans ``config/bootstrap.php``. Ce fichier est
-inclu juste avant chaque requête et commande CLI.
+bootstrap de CakePHP dans **config/bootstrap.php**. Ce fichier est
+inclus juste avant chaque requête et commande CLI.
 
 Ce fichier est idéal pour un certain nombre de tâches de bootstrapping
 courantes:
@@ -616,7 +627,6 @@ fonctions de formatage ici afin de les utiliser dans vos controllers.
 Comme vous le verrez dans les sections :doc:`/controllers` et
 :doc:`/views`, il y a de meilleurs moyens d'ajouter de la logique personnalisée
 à votre application.
-
 
 .. meta::
     :title lang=fr: Configuration

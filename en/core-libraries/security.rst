@@ -5,7 +5,8 @@ Security
 
 .. php:class:: Security
 
-The `security library <http://api.cakephp.org/class/security>`_
+The `security library
+<http://api.cakephp.org/3.0/class-Cake.Utility.Security.html>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
@@ -25,7 +26,7 @@ encrypted in one implementation is portable to the other.
 
 This method should **never** be used to store passwords.  Instead you should use
 the one way hashing methods provided by
-:php:meth:`~Cake\Utility\Security::hash()`. An example use would be::
+:php:meth:`~Cake\\Utility\\Security::hash()`. An example use would be::
 
     // Assuming key is stored somewhere it can be re-used for
     // decryption later.
@@ -86,7 +87,7 @@ value will be used::
     // Using the default hash algorithm
     $hash = Security::hash('CakePHP Framework');
 
-The ``hash`` method supports the following hashing strategies:
+The ``hash()`` method supports the following hashing strategies:
 
 - md5
 - sha1
@@ -97,7 +98,7 @@ And any other hash algorithmn that PHP's ``hash()`` function supports.
 .. warning::
 
     You should not be using ``hash()`` for passwords in new applications.
-    Instead you should use the ``DefaultPasswordHasher`` class which uses bcrpyt
+    Instead you should use the ``DefaultPasswordHasher`` class which uses bcrypt
     by default.
 
 .. meta::

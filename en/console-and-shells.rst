@@ -37,11 +37,15 @@ section will be in bash, but the CakePHP Console is Windows-compatible as well.
 This example assumes that the user is currently logged into a bash prompt and is
 currently at the root of a CakePHP application.
 
-CakePHP applications contain a ``Console`` directory that contains all the
-shells and tasks for an application. It also comes with an executable::
+A CakePHP application contains ``src/Shell`` and ``src/Shell/Task`` directories that contain all of its 
+shells and tasks. It also comes with an executable in the ``bin`` directory::
 
     $ cd /path/to/app
     $ bin/cake
+
+.. note::
+
+    For Windows, the command needs to be ``bin\cake`` (note the backslash).
 
 Running the Console with no arguments produces this help message::
 
@@ -63,7 +67,11 @@ Running the Console with no arguments produces this help message::
 
     Available Shells:
 
-    [CORE] bake, i18n, server, test
+    [Bake] bake
+
+    [Migrations] migrations
+
+    [CORE] i18n, orm_cache, plugin, routes, server
 
     [app] behavior_time, console, orm
 
@@ -73,6 +81,23 @@ Running the Console with no arguments produces this help message::
 
 The first information printed relates to paths. This is helpful if you're
 running the console from different parts of the filesystem.
+
+You could then run the any of the listed shells by using its name::
+
+    # run server shell
+    bin/cake server
+
+    # run migrations shell
+    bin/cake migrations -h
+
+    # run bake (with plugin prefix)
+    bin/cake bake.bake -h
+
+Plugin shells can be invoked without a plugin prefix if the shell's name does
+not overlap with an application or framework shell. In the case that two plugins
+provide a shell with the same name, the first loaded plugin will get the short
+alias. You can always use the ``plugin.shell`` format to unambiguously reference
+a shell.
 
 .. php:class:: Shell
 
@@ -204,7 +229,7 @@ almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` pr
 You can use tasks from plugins using the standard :term:`plugin syntax`.
 Tasks are stored in ``Shell/Task/`` in files named after their classes. So if
 we were to create a new 'FileGenerator' task, you would create
-``src/Shell/Task/FileGeneratorTask.php``.
+**src/Shell/Task/FileGeneratorTask.php**.
 
 Each task must at least implement a ``main()`` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like::
@@ -221,7 +246,7 @@ will call this method when the task is invoked. A task class looks like::
         }
     }
 
-A shell can also access it's tasks as properties, which makes tasks great for
+A shell can also access its tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     // Found in src/Shell/SeaShell.php
@@ -270,6 +295,12 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
+Shell Helpers
+=============
+
+If you have complex output generation logic, you can use
+:doc:`/console-and-shells/helpers` to encapsulate this logic in a re-usable way.
+
 .. _invoking-other-shells-from-your-shell:
 
 Invoking Other Shells from Your Shell
@@ -290,6 +321,38 @@ as var args or as a string::
 
 The above shows how you can call the schema shell to create the schema for a plugin
 from inside your plugin's shell.
+
+Passing extra parameters to the dispatched Shell
+------------------------------------------------
+
+.. versionadded:: 3.1
+
+It can sometimes be useful to pass on extra parameters (that are not shell arguments)
+to the dispatched Shell. In order to do this, you can now pass an array to
+``dispatchShell()``. The array is expected to have a ``command`` key as well
+as an ``extra`` key::
+
+    // Using a command string
+    $this->dispatchShell([
+       'command' => 'schema create Blog --plugin Blog'
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+    // Using a command array
+    $this->dispatchShell([
+       'command' => ['schema', 'create', 'Blog', '--plugin', 'Blog']
+       'extra' => [
+            'foo' => 'bar'
+        ]
+    ]);
+
+Parameters passed through ``extra`` will be merged in the ``Shell::$params``
+property and are accessible with the ``Shell::param()`` method.
+By default, a ``requested`` extra param is automatically added when a Shell
+is dispatched using ``dispatchShell()``. This ``requested`` parameter prevents
+the CakePHP console welcome message from being displayed on dispatched shells.
 
 Getting User Input
 ==================
@@ -409,7 +472,7 @@ ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn't support ansi codes. There
 are several built-in styles, and you can create more. The built-in ones are
 
-* ``error`` Error messages. Red underlined text.
+* ``error`` Error messages. Red text.
 * ``warning`` Warning messages. Yellow text.
 * ``info`` Informational messages. Cyan text.
 * ``comment`` Additional text. Blue text.
@@ -464,7 +527,7 @@ no styling is done at all. There are three modes you can use.
 * ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
 
 By default on \*nix systems ConsoleOutput objects default to colour output.
-On windows systems, plain output is the default unless the ``ANSICON`` environment
+On Windows systems, plain output is the default unless the ``ANSICON`` environment
 variable is present.
 
 Hook Methods
@@ -846,7 +909,7 @@ Getting Help as XML
 -------------------
 
 When building automated tools or development tools that need to interact
-with CakePHP shells, its nice to have help available in a machine parse-able
+with CakePHP shells, it's nice to have help available in a machine parse-able
 format. The ConsoleOptionParser can provide help in xml by setting an
 additional argument::
 
@@ -933,12 +996,14 @@ More Topics
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
+    console-and-shells/plugin-shell
+    console-and-shells/routes-shell
     console-and-shells/upgrade-shell
-    console-and-shells/plugin-assets
 
 .. meta::
     :title lang=en: Console and Shells

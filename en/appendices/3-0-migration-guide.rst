@@ -45,7 +45,7 @@ Namespaces
 ==========
 
 All of CakePHP's core classes are now namespaced and follow PSR-4 autoloading
-specifications. For example ``src/Cache/Cache.php`` is namespaced as
+specifications. For example **src/Cache/Cache.php** is namespaced as
 ``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
@@ -263,9 +263,10 @@ BakeShell / TemplateTask
 
 - Bake is no longer part of the core source and is superseded by
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
-- Bake templates have been moved under ``src/Template/Bake``.
+- Bake templates have been moved under **src/Template/Bake**.
 - The syntax of Bake templates now uses erb-style tags (``<% %>``) to denote
   templating logic, allowing php code to be treated as plain text.
+- The ``bake view`` command has been renamed ``bake template``.
 
 Event
 =====
@@ -390,7 +391,7 @@ Dispatcher Filters Configuration Changed
 Dispatcher filters are no longer added to your application using ``Configure``.
 You now append them with :php:class:`Cake\\Routing\\DispatcherFactory`. This
 means if your application used ``Dispatcher.filters``, you should now use
-php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
 In addition to configuration changes, dispatcher filters have had some
 conventions updated, and features added. See the
@@ -514,8 +515,7 @@ Controller
   models + controllers were far more intertwined.
 - ``Controller::loadModel()`` now loads table objects.
 - The ``Controller::$scaffold`` property has been removed. Dynamic scaffolding
-  has been removed from CakePHP core, and will be provided as a standalone
-  plugin.
+  has been removed from CakePHP core.  An improved scaffolding plugin, named CRUD, can be found here: https://github.com/FriendsOfCake/crud
 - The ``Controller::$ext`` property has been removed. You now have to extend and
   override the ``View::$_ext`` property if you want to use a non-default view file
   extension.
@@ -542,8 +542,9 @@ Scaffold Removed
 ----------------
 
 The dynamic scaffolding in CakePHP has been removed from CakePHP core. It was
-infrequently used, and never intended for production use. It will be replaced by
-a standalone plugin that people requiring that feature can use.
+infrequently used, and never intended for production use. An improved
+scaffolding plugin, named CRUD, can be found here:
+https://github.com/FriendsOfCake/crud
 
 ComponentCollection Replaced
 ----------------------------
@@ -579,9 +580,9 @@ CookieComponent
 
 - Uses :php:meth:`Cake\\Network\\Request::cookie()` to read cookie data,
   this eases testing, and allows for ControllerTestCase to set cookies.
-- Cookies encrypted in previous versions of CakePHP using the ``cipher`` method
+- Cookies encrypted in previous versions of CakePHP using the ``cipher()`` method
   are now un-readable because ``Security::cipher()`` has been removed. You will
-  need to re-encrypt cookies with the ``rijndael`` or ``aes`` method before upgrading.
+  need to re-encrypt cookies with the ``rijndael()`` or ``aes()`` method before upgrading.
 - ``CookieComponent::type()`` has been removed and replaced with configuration
   data accessed through ``config()``.
 - ``write()`` no longer takes ``encryption`` or ``expires`` parameters. Both of
@@ -683,7 +684,7 @@ new ORM.
 ConnectionManager
 -----------------
 
-- ConnectionManager has been moved to the ``Cake\Database`` namespace.
+- ConnectionManager has been moved to the ``Cake\Datasource`` namespace.
 - ConnectionManager has had the following methods removed:
 
   - ``sourceList``
@@ -709,7 +710,7 @@ Behaviors
 TreeBehavior
 ------------
 
-The TreeBheavior was completely re-written to use the new ORM. Although it works
+The TreeBehavior was completely re-written to use the new ORM. Although it works
 the same as in 2.x, a few methods were renamed or removed:
 
 - ``TreeBehavior::children()`` is now a custom finder ``find('children')``.
@@ -775,14 +776,13 @@ Both these issues are solved by converting themes into plugins.
 View Folders Renamed
 --------------------
 
-The folders containing view files now go under ``src/Template`` instead of ``src/View``.
+The folders containing view files now go under **src/Template** instead of **src/View**.
 This was done to separate the view files from files containing php classes (eg. Helpers, View classes).
 
 The following View folders have been renamed to avoid naming collisions with controller names:
 
 - ``Layouts`` is now ``Layout``
 - ``Elements`` is now ``Element``
-- ``Scaffolds`` is now ``Scaffold``
 - ``Errors`` is now ``Error``
 - ``Emails`` is now ``Email`` (same for ``Email`` inside ``Layout``)
 
@@ -834,6 +834,12 @@ JsonView
   variable. This allows you to configure the bit-mask options used when generating
   JSON.
 
+XmlView
+-------
+
+- :php:class:`Cake\\View\\XmlView` now supports the ``_xmlOptions`` view
+  variable. This allows you to configure the options used when generating
+  XML.
 
 View\\Helper
 ============
@@ -910,7 +916,7 @@ and reduce the problems people had in the past:
   no longer generate id attributes.
 - The ``inputDefaults`` option has been removed from ``create()``.
 - Options ``default`` and ``onsubmit`` of ``create()`` have been removed. Instead
-  one should use javascript event binding or set all required js code for ``onsubmit``.
+  one should use JavaScript event binding or set all required js code for ``onsubmit``.
 - ``end()`` can no longer make buttons. You should create buttons with
   ``button()`` or ``submit()``.
 - ``FormHelper::tagIsInvalid()`` has been removed. Use ``isFieldError()``
@@ -936,7 +942,7 @@ and reduce the problems people had in the past:
 - The ``submit()`` has had the ``div``, ``before`` and ``after`` options
   removed. You can customize the ``submitContainer`` template to modify this
   content.
-- The ``inputs`` method no longer accepts ``legend`` and ``fieldset`` in the
+- The ``inputs()`` method no longer accepts ``legend`` and ``fieldset`` in the
   ``$fields`` parameter, you must use the ``$options`` parameter.
   It now also requires ``$fields`` parameter to be an array. The ``$blacklist``
   parameter has been removed, the functionality has been replaced by specifying
@@ -1021,23 +1027,24 @@ NumberHelper
 SessionHelper
 -------------
 
-- ``SessionHelper::flash()`` is deprecated. You should use
-  :doc:`/views/helpers/flash` instead.
+- The ``SessionHelper`` has been deprecated. You can use ``$this->request->session()`` directly,
+  and the flash message functionality has been moved into :doc:`/views/helpers/flash` instead.
+
 
 JsHelper
 --------
 
 - ``JsHelper`` and all associated engines have been removed. It could only
-  generate a very small subset of javascript code for selected library and
-  hence trying to generate all javascript code using just the helper often
-  became an impediment. It's now recommended to directly use javascript library
+  generate a very small subset of JavaScript code for selected library and
+  hence trying to generate all JavaScript code using just the helper often
+  became an impediment. It's now recommended to directly use JavaScript library
   of your choice.
 
 CacheHelper Removed
 -------------------
 
 CacheHelper has been removed. The caching functionality it provided was
-non-standard, limited and incompatible with non-html layouts and data views.
+non-standard, limited and incompatible with non-HTML layouts and data views.
 These limitations meant a full rebuild would be necessary. Edge Side Includes
 have become a standardized way to implement the functionality CacheHelper used
 to provide. However, implementing `Edge Side Includes
@@ -1158,7 +1165,7 @@ Inflector
 
 - The default value for ``$replacement`` argument of :php:meth:`Cake\\Utility\\Inflector::slug()`
   has been changed from underscore (``_``) to dash (``-``). Using dashes to
-  separate words in urls is the popular choice and also recommended by Google.
+  separate words in URLs is the popular choice and also recommended by Google.
 
 - Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
   If you use custom transliterations you will need to update your code. Instead

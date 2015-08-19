@@ -1,8 +1,8 @@
 コンテンツ
-##########
+############
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
     intro
     quickstart
@@ -17,16 +17,19 @@
     controllers
     views
     orm
-    development/errors
 
+    controllers/components/authentication
+    bake
     core-libraries/caching
     console-and-shells
     development/debugging
     deployment
     core-libraries/email
+    development/errors
     core-libraries/events
     core-libraries/internationalization-and-localization
     core-libraries/logging
+    core-libraries/form
     controllers/components/pagination
     plugins
     development/rest
@@ -43,12 +46,17 @@
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/string
+    core-libraries/text
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
+    migrations
     appendices
 
 .. todolist::
 
+.. meta::
+    :title lang=ja: Contents
+    :keywords lang=ja: core libraries,ref search,shells,deployment,appendices,glossary,models

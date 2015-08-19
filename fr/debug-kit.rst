@@ -12,7 +12,7 @@ le retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui
 suit à partir du répertoire ROOT de votre application (où le fichier
 composer.json est localisé)::
 
-    php composer.phar require cakephp/debug_kit "3.0.*-dev"
+    php composer.phar require --dev cakephp/debug_kit "~3.0"
 
 Stockage de DebugKit
 ====================
@@ -29,7 +29,7 @@ Par défaut DebugKit va stocker les données du panneau dans une base de donnée
 SQLite dans le répertoire ``tmp`` de votre application. Si vous ne pouvez pas
 installer pdo_sqlite, vous pouvez configurer DebugKit pour utiliser une base
 de données différente en définissant une connexion ``debug_kit`` dans votre
-fichier ``config/app.php``.
+fichier **config/app.php**.
 
 Utilisation de la Toolbar
 =========================
@@ -95,9 +95,9 @@ Créer une Classe Panel
 ----------------------
 
 Les Classes Panel doivent simplement être placées dans le répertoire
-``src/Panel``. Le nom de fichier doit correspondre au nom de la classe, pour
+**src/Panel**. Le nom de fichier doit correspondre au nom de la classe, pour
 que la classe ``MyCustomPanel`` s'attende à avoir un fichier au nom
-``src/Panel/MyCustomPanel.php``::
+**src/Panel/MyCustomPanel.php**::
 
     namespace App\Panel;
 
@@ -121,8 +121,8 @@ Par défaut, les objets Panel ont deux callbacks, leur permettant de s'insérer
 dans la requête actuelle. Les panneaux s'inscrivent aux events
 ``Controller.initialize`` et ``Controller.shutdown``. Si votre panneau doit
 s'inscrire à des events supplémentaires, vous pouvez utiliser la méthode
-``implementedEvents`` pour définir tous les events auxquels votre panneau
-doit s'interesser.
+``implementedEvents()`` pour définir tous les events auxquels votre panneau
+doit s'intéresser.
 
 Vous devez vous référer aux panneaux intégrés pour avoir quelques exemples sur
 la façon de construire des panneaux.
@@ -135,7 +135,7 @@ panneau. Le nom de l'element doit être avec une inflection en underscore du
 nom de la classe.
 Par exemple ``SessionPanel`` a un element nommé ``session_panel.ctp``, et
 SqllogPanel a un element nommé ``sqllog_panel.ctp``. Ces elements doivent être
-localisés à la racine de votre répertoire ``src/Template/Element``.
+localisés à la racine de votre répertoire **src/Template/Element**.
 
 Titres Personnalisés et Elements
 --------------------------------
@@ -148,6 +148,22 @@ comportement de votre panneau:
 - ``title()`` - Configure le titre qui est affiché dans la toolbar.
 - ``elementName()`` Configure l'element qui doit être utilisé pour un panneau
   donné.
+
+Méthodes de Hook pour Panneaux
+------------------------------
+
+Vous pouvez également implémenter les méthodes suivantes pour personnaliser
+la manière dont votre panneau se comporte et s'affiche:
+
+* ``shutdown(Event $event)`` Cette méthode collecte et prépare les données pour
+  panneau. Les données sont généralement stockées dans ``$this->_data``.
+* ``summary()`` Peut retourner une chaine de caractères contenu un résumé de
+  données qui sera affiché dans la barre lorsque le panneau est replié. C'est
+  souvent un compteur ou un court résumé.
+* ``data()`` Retourne les données du panneau pour être utilisées dans un
+  element. Cette méthode vous laisse manipuler les données collectées dans
+  la méthode ``shutdown()``. cette méthode **doit** retourner des données
+  sérializables.
 
 Panneaux dans d'autres Plugins
 ------------------------------
@@ -170,10 +186,9 @@ que les elements du panneau puissent être localisés au moment de les afficher:
 Pour utiliser un panneau de plugin ou de l'application, mettez à jour
 la configuration du DebugKit de votre application pour ajouter le panneau::
 
-    Configure::write(
-        'DebugKit.panels',
-        array_merge(Configure::read('DebugKit.panels'), ['MyCustomPanel'])
-    );
+    // dans config/bootstrap.php
+    Configure::write('DebugKit.panels', ['App', 'MyPlugin.MyCustom']);
+    Plugin::load('DebugKit', ['bootstrap' => true]);
 
 Ce qui est au-dessus charge tous les panneaux par défaut ainsi que le panneau
-personnalisé dans ``MyPlugin``.
+``AppPanel``et le panneau ``MyCustomPanel`` depuis ``MyPlugin``.

@@ -13,8 +13,6 @@ couvrent les différentes manières de contribuer à CakePHP:
     contributing/cakephp-coding-conventions
     contributing/backwards-compatibility
 
-
-
 .. meta::
     :title lang=fr: Contribuer
     :keywords lang=fr: conventions de programmation,documentation,maxdepth

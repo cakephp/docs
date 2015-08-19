@@ -1,11 +1,11 @@
-CookieComponent
-###############
+Cookie
+######
 
 .. php:namespace:: Cake\Controller\Component
 
 .. php:class:: CookieComponent(ComponentRegistry $collection, array $config = [])
 
-The CookieComponent is a wrapper around the native PHP ``setcookie`` method. It
+The CookieComponent is a wrapper around the native PHP ``setcookie()`` method. It
 makes it easier to manipulate cookies, and automatically encrypt cookie data.
 
 Configuring Cookies

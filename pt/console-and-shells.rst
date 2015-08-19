@@ -11,15 +11,16 @@ As aplicações de console do CakePHP permitem a vocë reutilizar suas classes
 de aplicação a partir da linha de comando.
 
 O CakePHP traz consigo algumas aplicações de console nativas. Algumas dessas
-aplicações são utilizadas em conjunto com outros recursos do CakePHP (como i18n),
-e outros de uso geral para aceleração de trabalho.
+aplicações são utilizadas em conjunto com outros recursos do CakePHP
+(como i18n), e outros de uso geral para aceleração de trabalho.
 
 O Console do CakePHP
 ====================
 
 Esta seção provê uma introdução à linha de comando do CakePHP.
 Ferramentas de console são ideais para uso em cron jobs, ou utilitários
-baseados em linha de comando que não precisam ser acessíveis por um navegador web.
+baseados em linha de comando que não precisam ser acessíveis por um navegador
+web.
 
 O PHP provê um cliente CLI que faz interface com o seu
 sistema de arquivos e aplicações de forma muito mais suave. O console do CakePHP
@@ -31,11 +32,12 @@ tipo dispatcher para carregar uma shell ou tarefa, e prover seus parâmetros.
     Uma linha de comando (CLI) constutuída a partir do PHP deve estar
     disponível no sistema se você planeja utilizr o Console.
 
-Antes de entrar em detalhes, vamos ter certeza de que você pode executar o console do CakePHP.
-Primeiro, você vai precisar executar um sistema shell. Os exemplos apresentados nesta
-seção serão em bash, mas o Console do CakePHP é compatível com o Windows também.
-Este exemplo assume que o usuário está conectado em um prompt do bash e está
-atualmente na raiz de uma aplicação CakePHP.
+Antes de entrar em detalhes, vamos ter certeza de que você pode executar o
+console do CakePHP. Primeiro, você vai precisar executar um sistema shell. Os
+exemplos apresentados nesta seção serão em bash, mas o Console do CakePHP é
+compatível com o Windows também. Este exemplo assume que o usuário está
+conectado em um prompt do bash e está atualmente na raiz de uma aplicação
+CakePHP.
 
 Aplicações CakePHP possuem um diretório `Console``` que contém todas as
 shells e tarefas para uma aplicação. Ele também vem com um executável::
@@ -63,7 +65,11 @@ Executar o Console sem argumentos produz esta mensagem de ajuda::
 
     Available Shells:
 
-    [CORE] bake, i18n, server, test
+    [Bake] bake
+
+    [Migrations] migrations
+
+    [CORE] i18n, orm_cache, plugin, server
 
     [app] behavior_time, console, orm
 
@@ -94,11 +100,12 @@ código dentro do arquivo recem criado::
         }
     }
 
-As convenções para as classes de shell são de que o nome da classe deve corresponder
-ao nome do arquivo, com o sufixo de Shell. No nosso shell criamos um método ``main()``.
-Este método é chamado quando um shell é chamado sem comandos adicionais. Vamos adicionar
-alguns comandos daqui a pouco, mas por agora vamos executar a nossa shell. A partir do diretório
-da aplicação, execute::
+As convenções para as classes de shell são de que o nome da classe deve
+corresponder ao nome do arquivo, com o sufixo de Shell. No nosso shell criamos
+um método ``main()``. Este método é chamado quando um shell é chamado sem
+comandos adicionais. Vamos adicionar alguns comandos daqui a pouco, mas por
+agora vamos executar a nossa shell. A partir do diretório da aplicação,
+execute::
 
     bin/cake hello
 
@@ -111,9 +118,10 @@ Você deve ver a seguinte saída::
     ---------------------------------------------------------------
     Hello world.
 
-Como mencionado antes, o método ``main()`` em shells é um método especial chamado
-sempre que não há outros comandos ou argumentos dados para uma shell. Por nosso
-método principal não ser muito interessante, vamos adicionar outro comando que faz algo::
+Como mencionado antes, o método ``main()`` em shells é um método especial
+chamado sempre que não há outros comandos ou argumentos dados para uma shell.
+Por nosso método principal não ser muito interessante, vamos adicionar outro
+comando que faz algo::
 
     namespace App\Shell;
 
@@ -137,20 +145,22 @@ ver o seu nome impresso::
 
     bin/cake hello hey_there your-name
 
-Qualquer método público não prefixado por um ``_`` é permitido para ser chamado a partir da
-linha de comando. Como você pode ver, os métodos invocados a partir da linha de comando são
-transformados do argumento prefixado para a forma correta do nome camel-cased (camelizada)
+Qualquer método público não prefixado por um ``_`` é permitido para ser chamado
+a partir da linha de comando. Como você pode ver, os métodos invocados a partir
+da linha de comando são transformados do argumento prefixado para a forma
+correta do nome camel-cased (camelizada)
 na classe.
 
-No nosso método ``heyThere()`` podemos ver que os argumentos posicionais são providos para nossa
-função ``heyThere()``. Argumentos posicionais também estão disponívels na propriedade ``args``.
-Você pode acessar switches ou opções em aplicações shell, estando disponíveis em ``$this->params``,
-mas nós iremos cobrir isso daqui a pouco.
+No nosso método ``heyThere()`` podemos ver que os argumentos posicionais são
+providos para nossa função ``heyThere()``. Argumentos posicionais também estão
+disponívels na propriedade ``args``. Você pode acessar switches ou opções em
+aplicações shell, estando disponíveis em ``$this->params``, mas nós iremos
+cobrir isso daqui a pouco.
 
 Quando utilizando um método ``main()`` você não estará liberado para utilizar
-argumentos posicionais. Isso se deve ao primeiro argumento posicional ou opção ser
-interpretado(a) como o nome do comando. Se você quer utilizar argumentos, você
-deve usar métodos diferentes de ``main()``.
+argumentos posicionais. Isso se deve ao primeiro argumento posicional ou opção
+ser interpretado(a) como o nome do comando. Se você quer utilizar argumentos,
+você deve usar métodos diferentes de ``main()``.
 
 Usando Models em suas shells
 ----------------------------
@@ -190,10 +200,10 @@ Tasks de Shell
 ==============
 
 Haverão momentos construindo aplicações mais avançadas de console que você vai
-querer compor funcionalidades em classes reutilizáveis que podem ser compartilhadas
-através de muitas shells. Tasks permitem que você extraia comandos em classes. Por exemplo,
-o ``bake`` é feito quase que completamente de tasks. Você define tasks para uma shell usando
-a propriedade ``$tasks``::
+querer compor funcionalidades em classes reutilizáveis que podem ser
+compartilhadas através de muitas shells. Tasks permitem que você extraia
+comandos em classes. Por exemplo, o ``bake`` é feito quase que completamente de
+tasks. Você define tasks para uma shell usando a propriedade ``$tasks``::
 
     class UserShell extends Shell
     {
@@ -201,9 +211,9 @@ a propriedade ``$tasks``::
     }
 
 Você pode utilizar tasks de plugins utilizando o padrão :term:`plugin syntax`.
-Tasks são armazenadas sob ``Shell/Task/`` em arquivos nomeados depois de suas classes.
-Então se nós estivéssemos criando uma nova task 'FileGenerator', você deveria criar
-``src/Shell/Task/FileGeneratorTask.php``.
+Tasks são armazenadas sob ``Shell/Task/`` em arquivos nomeados depois de suas
+classes. Então se nós estivéssemos criando uma nova task 'FileGenerator', você
+deveria criar **src/Shell/Task/FileGeneratorTask.php**.
 
 Cada task deve ao menos implementar um método ``main()``. O ShellDispatcher,
 vai chamar esse método quando a task é invocada. Uma classe task se parece com::
@@ -219,8 +229,9 @@ vai chamar esse método quando a task é invocada. Uma classe task se parece com
         }
     }
 
-Uma shell também pode prover acesso a suas tasks como propriedades, que fazem tasks
-serem ótimas para criar punhados de funcionalidade reutilizáveis similares a :doc:`/controllers/components`::
+Uma shell também pode prover acesso a suas tasks como propriedades, que fazem
+tasks serem ótimas para criar punhados de funcionalidade reutilizáveis similares
+a :doc:`/controllers/components`::
 
     // Localizado em src/Shell/SeaShell.php
     class SeaShell extends Shell
@@ -249,12 +260,13 @@ Você também pode acessar tasks diretamente da linha de comando::
 Carregando Tasks em tempo-real com TaskRegistry
 -----------------------------------------------
 
-Você pode carregar arquivos em tempo-real utilizando o Task registry object. Você pode
-carregar tasks que não foram declaradas no $tasks dessa forma::
+Você pode carregar arquivos em tempo-real utilizando o Task registry object.
+Você pode carregar tasks que não foram declaradas no $tasks dessa forma::
 
     $project = $this->Tasks->load('Project');
 
-Carregará e retornará uma instância ProjectTask. Você pode carregar tasks de plugins usando::
+Carregará e retornará uma instância ProjectTask. Você pode carregar tasks de
+plugins usando::
 
     $progressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
@@ -265,10 +277,10 @@ Invocando outras Shells a partir da sua Shell
 
 .. php:method:: dispatchShell($args)
 
-Existem ainda muitos casos onde você vai querer invocar uma shell a partir de outra.
-``Shell::dispatchShell()`` lhe dá a habilidade de chamar outras shells ao providenciar o
-``argv`` para a sub shell. Você pode providenciar argumentos e opções tanto como variáveis ou
-como strings::
+Existem ainda muitos casos onde você vai querer invocar uma shell a partir de
+outra. ``Shell::dispatchShell()`` lhe dá a habilidade de chamar outras shells
+ao providenciar o ``argv`` para a sub shell. Você pode providenciar argumentos
+e opções tanto como variáveis ou como strings::
 
     // Como uma string
     $this->dispatchShell('schema create Blog --plugin Blog');
@@ -300,15 +312,16 @@ Criando Arquivos
 
 .. php:method:: createFile($path, $contents)
 
-Muitas aplicações Shell auxiliam tarefas de desenvolvimento e implementação. Criar
-arquivos é frequentemente importante nestes casos de uso. O CakePHP oferece uma forma
-fácil de criar um arquivo em um determinado diretório::
+Muitas aplicações Shell auxiliam tarefas de desenvolvimento e implementação.
+Criar arquivos é frequentemente importante nestes casos de uso. O CakePHP
+oferece uma forma fácil de criar um arquivo em um determinado diretório::
 
     $this->createFile('bower.json', $stuff);
 
 Se a Shell for interativa, um alerta vai ser gerado, e o usuário questionado se
-ele quer sobreescrever o arquivo caso já exista. Se a propriedade de interação da shell
-for ``false``, nenhuma questão será disparada e o arquivo será simplesmente sobreescrito.
+ele quer sobreescrever o arquivo caso já exista. Se a propriedade de interação
+da shell for ``false``, nenhuma questão será disparada e o arquivo será
+simplesmente sobreescrito.
 
 Saída de dados do Console
 =========================
@@ -357,17 +370,18 @@ uma vez que uma nova linha tenha sido exibida.
 Console Output Levels
 ---------------------
 
-Shells frequentemente precisam de diferentes níveis de verbosidade. Quando executadas
-como cron jobs, muitas saídas são desnecessárias. E há ocasiões que você não estará
-interessado em tudo que uma shell tenha a dizer. Você pode usar os níveis de saída
-para sinalizar saídas apropriadamente. O usuário da shell, pode então decidir qual
-nível de detalhe ele está interessado ao sinalizar o chamado da shell.
-:php:meth:`Cake\\Console\\Shell::out()` suporta 3 tipos de saída por padrão.
+Shells frequentemente precisam de diferentes níveis de verbosidade. Quando
+executadas como cron jobs, muitas saídas são desnecessárias. E há ocasiões que
+você não estará interessado em tudo que uma shell tenha a dizer. Você pode usar
+os níveis de saída para sinalizar saídas apropriadamente. O usuário da shell,
+pode então decidir qual nível de detalhe ele está interessado ao sinalizar o
+chamado da shell. :php:meth:`Cake\\Console\\Shell::out()` suporta 3 tipos de
+saída por padrão.
 
 * QUIET - Apenas informação absolutamente importante deve ser sinalizada.
 * NORMAL - O nível padrão, e uso normal.
-* VERBOSE - Sinalize mensagens que podem ser irritantes em demasia para uso diário, mas informativas
-  para depuração como VERBOSE.
+* VERBOSE - Sinalize mensagens que podem ser irritantes em demasia para uso
+  diário, mas informativas para depuração como VERBOSE.
 
 Você pode sinalizar a saíde da seguinte forma::
 
@@ -384,16 +398,17 @@ Você pode sinalizar a saíde da seguinte forma::
     $this->out('extra message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-Você pode controlar o nível de saída das shells, ao usar as opções ``--quiet`` e ``--verbose``.
-Estas opções são adicionadas por padrão, e permitem a você controlar consistentemente
-níveis de saída dentro das suas shells do CakePHP.
+Você pode controlar o nível de saída das shells, ao usar as opções ``--quiet``
+e ``--verbose``. Estas opções são adicionadas por padrão, e permitem a você
+controlar consistentemente níveis de saída dentro das suas shells do CakePHP.
 
 Estilizando a saída de dados
 ----------------------------
 
-Estilizar a saída de dados é feito ao incluir tags - como no HTML - em sua saída.
-O ConsoleOutput irá substituir estas tags com a seqüência correta de código ansi.
-Hão diversos estilos nativos, e você pode criar mais. Os nativos são:
+Estilizar a saída de dados é feito ao incluir tags - como no HTML - em sua
+saída. O ConsoleOutput irá substituir estas tags com a seqüência correta de
+código ansi. Hão diversos estilos nativos, e você pode criar mais. Os nativos
+são:
 
 * ``error`` Mensagens de erro. Texto sublinhado vermelho.
 * ``warning`` Mensagens de alerta. Texto amarelo.
@@ -401,8 +416,8 @@ Hão diversos estilos nativos, e você pode criar mais. Os nativos são:
 * ``comment`` Texto adicional. Texto azul.
 * ``question`` Texto que é uma questão, adicionado automaticamente pela shell.
 
-Você pode criar estilos adicionais usando ``$this->stdout->styles()``. Para declarar
-um novo estilo de saíde você pode fazer::
+Você pode criar estilos adicionais usando ``$this->stdout->styles()``. Para
+declarar um novo estilo de saíde você pode fazer::
 
     $this->_io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
@@ -421,39 +436,39 @@ Quando definir estilos você pode usar as seguintes cores para os atributos
 * cyan
 * white
 
-Você também pode usar as seguintes opções através de valores boleanos, defini-los
-com valor positivo os habilita.
+Você também pode usar as seguintes opções através de valores boleanos,
+defini-los com valor positivo os habilita.
 
 * bold
 * underline
 * blink
 * reverse
 
-Adicionar um estilo o torna disponível para todas as instâncias do ConsoleOutput,
-então você não tem que redeclarar estilos para os objetos stdout e stderr
-respectivamente.
+Adicionar um estilo o torna disponível para todas as instâncias do
+ConsoleOutput, então você não tem que redeclarar estilos para os objetos stdout
+e stderr respectivamente.
 
 Desabilitando a colorização
 ---------------------------
 
-Mesmo que a colorização seja incrível, haverão ocasiões que você quererá desabilitá-la,
-ou forçá-la::
+Mesmo que a colorização seja incrível, haverão ocasiões que você quererá
+desabilitá-la, ou forçá-la::
 
     $this->_io->outputAs(ConsoleOutput::RAW);
 
 O citado irá colocar o objeto de saída em modo raw. Em modo raw,
 nenhum estilo é aplicado. Existem três modos que você pode usar.
 
-* ``ConsoleOutput::RAW`` - Saída raw, nenhum estilo ou formatação serão aplicados.
-  Este é um modo indicado se você estiver exibindo XML ou, quiser depurar porquê
-  seu estilo não está funcionando.
+* ``ConsoleOutput::RAW`` - Saída raw, nenhum estilo ou formatação serão
+  aplicados. Este é um modo indicado se você estiver exibindo XML ou, quiser
+  depurar porquê seu estilo não está funcionando.
 * ``ConsoleOutput::PLAIN`` - Saída de texto simples, tags conhecidas de estilo
   serão removidas da saída.
 * ``ConsoleOutput::COLOR`` - Saída onde a cor é removida.
 
-Por padrão em sistemas \*nix objetos ConsoleOutput padronizam-se a a saída de cores.
-Em sistemas Windows, a saída simples é padrão a não ser que a variável de ambiente
-``ANSICON`` esteja presente.
+Por padrão em sistemas \*nix objetos ConsoleOutput padronizam-se a a saída de
+cores. Em sistemas Windows, a saída simples é padrão a não ser que a variável de
+ambiente ``ANSICON`` esteja presente.
 
 Opções de configuração e Geração de ajuda
 =========================================
@@ -469,8 +484,8 @@ permite prover documentação, que é usada para gerar arquivos de ajuda bem
 formatados.
 
 O console framework no CakePHP recebe as opções do seu interpetador shell ao
-chamar ``$this->getOptionParser()``. Sobreescrever esse método permite configurar
-o OptionParser para definir as entradas aguardadas da sua shell.
+chamar ``$this->getOptionParser()``. Sobreescrever esse método permite
+configurar o OptionParser para definir as entradas aguardadas da sua shell.
 Você também pode configurar interpetadores de subcomandos, que permitem ter
 diferentes interpretadores para subcomandos e tarefas.
 O ConsoleOptionParser implementa uma interface fluida e inclui métodos para
@@ -563,8 +578,8 @@ Você pode usar as seguintes opções ao criar um argumento:
   colocado no final dos argumentos. Se você definir o mesmo índice duas vezes,
   a primeira opção será sobreescrita.
 * ``choices`` Um array de opções válidas para esse argumento. Se deixado vazio,
-  todos os valores são válidos. Uma exceção será lançada quando parse() encontrar
-  um valor inválido.
+  todos os valores são válidos. Uma exceção será lançada quando parse()
+  encontrar um valor inválido.
 
 Argumentos que forem definidos como requisito lançarão uma exceção quando
 interpretarem o comando se eles forem omitidos. Então você não tem que lidar
@@ -572,8 +587,8 @@ com isso em sua shell.
 
 .. php:method:: addArguments(array $args)
 
-Se você tem um array com múltiplos argumentos você pode usar ``$parser->addArguments()``
-para adicioná-los de uma vez.::
+Se você tem um array com múltiplos argumentos você pode usar
+``$parser->addArguments()`` para adicioná-los de uma vez.::
 
     $parser->addArguments([
         'node' => ['help' => 'The node to create', 'required' => true],
@@ -620,9 +635,9 @@ boleanos. Opções são criadas tanto com
 
 O código citado permite a você usar tanto ``cake myshell --connection=other``,
 ``cake myshell --connection other``, ou ``cake myshell -c other``
-quando invocando a shell. Você também criar ativadores boleanos. Estes ativadores não
-consumem valores, e suas presenças apenas os habilitam nos parâmetros
-interpretados.::
+quando invocando a shell. Você também criar ativadores boleanos. Estes
+ativadores não consumem valores, e suas presenças apenas os habilitam nos
+parâmetros interpretados.::
 
     $parser->addOption('no-commit', ['boolean' => true]);
 
@@ -635,17 +650,21 @@ usam essa funcionalidade.
 Ao criar opções você pode usar os seguintes argumentos para definir
 o seu comportamento:
 
-* ``short`` - A variação de letra única para essa opção, deixe indefinido para none.
+* ``short`` - A variação de letra única para essa opção, deixe indefinido para
+  none.
 * ``help`` - Texto de ajuda para essa opção. Usado ao gerar ajuda para a opção.
-* ``default`` - O valor padrão para essa opção. Se não estiver definido o valor padrão será ``true``.
-* ``boolean`` - A opção não usa valor, é apenas um ativador boleano. Por padrão ``false``.
-* ``choices`` - Um array de escolhas válidas para essa opção. Se deixado vazio, todos os
-  valores são considerados válidos. Uma exceção será lançada quando parse() encontrar um valor inválido.
+* ``default`` - O valor padrão para essa opção. Se não estiver definido o valor
+  padrão será ``true``.
+* ``boolean`` - A opção não usa valor, é apenas um ativador boleano. Por padrão
+  ``false``.
+* ``choices`` - Um array de escolhas válidas para essa opção. Se deixado vazio,
+  todos os valores são considerados válidos. Uma exceção será lançada quando
+  parse() encontrar um valor inválido.
 
 .. php:method:: addOptions(array $options)
 
-Se você tem um array com múltiplas opções, você pode usar ``$parser->addOptions()``
-para adicioná-las de uma vez.::
+Se você tem um array com múltiplas opções, você pode usar
+``$parser->addOptions()`` para adicioná-las de uma vez.::
 
     $parser->addOptions([
         'node' => ['short' => 'n', 'help' => 'The node to create'],
@@ -658,9 +677,10 @@ pode ser usado como parte de um método fluente encadeado.
 Validando opções
 ----------------
 
-Opções podem ser fornecidas com um conjunto de escolhas bem como argumentos posicionais
-podem ser. Quando uma opção define escolhas, essas são as únicas opções válidas
-para uma opção. Todos os outros valores irão gerar um ``InvalidArgumentException``::
+Opções podem ser fornecidas com um conjunto de escolhas bem como argumentos
+posicionais podem ser. Quando uma opção define escolhas, essas são as únicas
+opções válidas para uma opção. Todos os outros valores irão gerar um
+``InvalidArgumentException``::
 
     $parser->addOption('accept', [
         'help' => 'What version to accept.',
@@ -670,10 +690,11 @@ para uma opção. Todos os outros valores irão gerar um ``InvalidArgumentExcept
 Usando opções boleanas
 ----------------------
 
-As opções podem ser definidas como opções boleanas, que são úteis quando você precisa criar
-algumas opções de marcação. Como opções com padrões, opções boleanas sempre irão incluir
--se nos parâmetros analisados. Quando as marcações estão presentes elas são definidas
-para ``true``, quando elas estão ausentes, são definidas como ``false``::
+As opções podem ser definidas como opções boleanas, que são úteis quando você
+precisa criar algumas opções de marcação. Como opções com padrões, opções
+boleanas sempre irão incluir -se nos parâmetros analisados. Quando as marcações
+estão presentes elas são definidas para ``true``, quando elas estão ausentes,
+são definidas como ``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',
@@ -681,8 +702,8 @@ para ``true``, quando elas estão ausentes, são definidas como ``false``::
     ]);
 
 A opção seguinte resultaria em ``$this->params['verbose']`` sempre
-estando disponível. Isso permite a você omitir verificações ``empty()`` ou ``isset()``
-em marcações boleanas::
+estando disponível. Isso permite a você omitir verificações ``empty()`` ou
+``isset()`` em marcações boleanas::
 
     if ($this->params['verbose']) {
         // Do something.
@@ -696,44 +717,46 @@ Adicionando subcomandos
 
 .. php:method:: addSubcommand($name, $options = [])
 
-Aplicativos de console são muitas vezes feitas de subcomandos, e esses subcomandos
-podem exigir a análise de opções especiais e terem a sua própria ajuda. Um perfeito
-exemplo disso é ``bake``. Bake é feita de muitas tarefas separadas e todas
-têm a sua própria ajuda e opções. ``ConsoleOptionParser`` permite
-definir subcomandos e fornecer comandos analisadores de opção específica, de modo que a
-shell sabe como analisar os comandos para as suas funções ::
+Aplicativos de console são muitas vezes feitas de subcomandos, e esses
+subcomandos podem exigir a análise de opções especiais e terem a sua própria
+ajuda. Um perfeito exemplo disso é ``bake``. Bake é feita de muitas tarefas
+separadas e todas têm a sua própria ajuda e opções. ``ConsoleOptionParser``
+permite definir subcomandos e fornecer comandos analisadores de opção
+específica, de modo que a shell sabe como analisar os comandos para as suas
+funções::
 
     $parser->addSubcommand('model', [
         'help' => 'Bake a model',
         'parser' => $this->Model->getOptionParser()
     ]);
 
-A descrição acima é um exemplo de como você poderia fornecer ajuda e um especializado
-interpretador de opção para a tarefa de uma shell. Ao chamar a tarefa de ``getOptionParser()``
-não temos de duplicar a geração do interpretador de opção, ou misturar preocupações
-no nosso shell. Adicionar subcomandos desta forma tem duas vantagens.
-Primeiro, ele permite que o seu shell documente facilmente seus subcomandos na
-ajuda gerada. Ele também dá fácil acesso ao subcomando
-help. Com o subcomando acima criado você poderia chamar
+A descrição acima é um exemplo de como você poderia fornecer ajuda e um
+especializado interpretador de opção para a tarefa de uma shell. Ao chamar a
+tarefa de ``getOptionParser()`` não temos de duplicar a geração do interpretador
+de opção, ou misturar preocupações no nosso shell. Adicionar subcomandos desta
+forma tem duas vantagens. Primeiro, ele permite que o seu shell documente
+facilmente seus subcomandos na ajuda gerada. Ele também dá fácil acesso ao
+subcomando help. Com o subcomando acima criado você poderia chamar
 ``cake myshell --help`` e ver a lista de subcomandos, e
 também executar o ``cake myshell model --help`` para exibir a ajuda
 apenas o modelo de tarefa.
 
 .. note::
 
-    Uma vez que seu Shell define subcomandos, todos os subcomandos deve ser explicitamente
-    definidos.
+    Uma vez que seu Shell define subcomandos, todos os subcomandos deve ser
+    explicitamente definidos.
 
 Ao definir um subcomando, você pode usar as seguintes opções:
 
 * ``help`` - Texto de ajuda para o subcomando.
 * ``parser`` - Um ConsoleOptionParser para o subcomando. Isso permite que você
-   crie métodos analisadores de opção específios. Quando a ajuda é gerada por um
-   subcomando, se um analisador está presente ele vai ser usado. Você também pode
-   fornecer o analisador como uma matriz que seja compatível com
+  crie métodos analisadores de opção específios. Quando a ajuda é gerada por um
+  subcomando, se um analisador está presente ele vai ser usado. Você também
+  pode fornecer o analisador como uma matriz que seja compatível com
   :php:meth:`Cake\\Console\\ConsoleOptionParser::buildFromArray()`
 
-Adicionar subcomandos pode ser feito como parte de uma cadeia de métodos fluente.
+Adicionar subcomandos pode ser feito como parte de uma cadeia de métodos
+fluente.
 
 Construir uma ConsoleOptionParser de uma matriz
 -----------------------------------------------
@@ -741,8 +764,9 @@ Construir uma ConsoleOptionParser de uma matriz
 .. php:method:: buildFromArray($spec)
 
 Como mencionado anteriormente, ao criar interpretadores de opção de subcomando,
-você pode definir a especificação interpretadora como uma matriz para esse método. Isso pode ajudar
-fazer analisadores mais facilmente, já que tudo é um array::
+você pode definir a especificação interpretadora como uma matriz para esse
+método. Isso pode ajudar fazer analisadores mais facilmente, já que tudo é um
+array::
 
     $parser->addSubcommand('check', [
         'help' => __('Check the permissions between an ACO and ARO.'),
@@ -760,12 +784,14 @@ fazer analisadores mais facilmente, já que tudo é um array::
         ]
     ]);
 
-Dentro da especificação do interpretador, você pode definir as chaves para ``arguments``, ``options``,
-``description`` e ``epilog``. Você não pode definir ``subcommands`` dentro de um
-construtor estilo array. Os valores para os argumentos e opções, devem seguir o
-formato que :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` e
-:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` usam. Você também pode usar
-buildFromArray por conta própria, para construir um interpretador de opção::
+Dentro da especificação do interpretador, você pode definir as chaves para
+``arguments``, ``options``, ``description`` e ``epilog``. Você não pode definir
+``subcommands`` dentro de um construtor estilo array. Os valores para os
+argumentos e opções, devem seguir o formato que
+:php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` e
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` usam. Você também
+pode usar buildFromArray por conta própria, para construir um interpretador de
+opção::
 
     public function getOptionParser()
     {
@@ -788,8 +814,8 @@ Recebendo ajuda das Shells
 
 Com a adição de ConsoleOptionParser receber ajuda de shells é feito
 de uma forma consistente e uniforme. Ao usar a opção ``--help`` ou ``-h`` você
-pode visualizar a ajuda para qualquer núcleo shell, e qualquer shell que implementa
-um ConsoleOptionParser::
+pode visualizar a ajuda para qualquer núcleo shell, e qualquer shell que
+implementa um ConsoleOptionParser::
 
     cake bake --help
     cake bake -h
@@ -805,10 +831,10 @@ Isso deve fornecer a você a ajuda específica para a tarefa bake dos models.
 Recebendo ajuda como XML
 ------------------------
 
-Quando a construção de ferramentas automatizadas ou ferramentas de desenvolvimento
-que necessitam interagir com shells do CakePHP, é bom ter ajuda disponível em uma máquina
-capaz interpretar formatos. O ConsoleOptionParser pode fornecer ajuda em xml, definindo um
-argumento adicional::
+Quando a construção de ferramentas automatizadas ou ferramentas de
+desenvolvimento que necessitam interagir com shells do CakePHP, é bom ter ajuda
+disponível em uma máquina capaz interpretar formatos. O ConsoleOptionParser pode
+fornecer ajuda em xml, definindo um argumento adicional::
 
     cake bake --help xml
     cake bake -h xml
@@ -870,22 +896,24 @@ seria algo como:
 Roteamento em Shells / CLI
 ==========================
 
-Na interface de linha de comando (CLI), especificamente suas shells e tarefas, ``env('HTTP_HOST')`` e
-outras variáveis de ambiente webbrowser específica, não estão definidas.
+Na interface de linha de comando (CLI), especificamente suas shells e tarefas,
+``env('HTTP_HOST')`` e outras variáveis de ambiente webbrowser específica, não
+estão definidas.
 
-Se você gerar relatórios ou enviar e-mails que fazem uso de ``Router::url()``, estes conterão
-a máquina padrão ``http://localhost/`` e resultando assim em URLs inválidas. Neste caso, você precisa
-especificar o domínio manualmente.
-Você pode fazer isso usando o valor de configuração ``App.fullBaseURL`` no seu bootstrap ou na sua configuração,
-por exemplo.
+Se você gerar relatórios ou enviar e-mails que fazem uso de ``Router::url()``,
+estes conterão a máquina padrão ``http://localhost/`` e resultando assim em
+URLs inválidas. Neste caso, você precisa especificar o domínio manualmente.
+Você pode fazer isso usando o valor de configuração ``App.fullBaseURL`` no seu
+bootstrap ou na sua configuração, por exemplo.
 
-Para enviar e-mails, você deve fornecer a classe CakeEmail com o host que você deseja enviar o e-mail::
+Para enviar e-mails, você deve fornecer a classe CakeEmail com o host que você
+deseja enviar o e-mail::
 
     $Email = new CakeEmail();
     $Email->domain('www.example.org');
 
-Iste afirma que os IDs de mensagens geradas são válidos e adequados para o domínio a partir do qual os e-mails são
-enviados.
+Iste afirma que os IDs de mensagens geradas são válidos e adequados para o
+domínio a partir do qual os e-mails são enviados.
 
 Métodos enganchados
 ===================
@@ -893,28 +921,30 @@ Métodos enganchados
 .. php:method:: initialize()
 
     Inicializa a Shell para atua como construtor de subclasses e permite
-    configuração de tarefas antes de desenvolver a execução.
+    configuração de tarefas antes de desenvolver a execução.
 
 .. php:method:: startup()
 
     Inicia-se a Shell e exibe a mensagem de boas-vindas. Permite a verificação
-    e configuração antes de comandar ou da execução principal.
+    e configuração antes de comandar ou da execução principal.
 
-    Substitua este método se você quiser remover as informações de boas-vindas, ou
-    outra forma modificar o fluxo de pré-comando.
+    Substitua este método se você quiser remover as informações de boas-vindas,
+    ou outra forma modificar o fluxo de pré-comando.
 
 Mais tópicos
 ============
 
 .. toctree::
-:maxdepth: 1
+    :maxdepth: 1
 
-        console-and-shells/code-generation-with-bake
-        console-and-shells/repl
-        console-and-shells/cron-jobs
-        console-and-shells/i18n-shell
-        console-and-shells/completion-shell
-        console-and-shells/upgrade-shell
+    console-and-shells/helpers
+    console-and-shells/repl
+    console-and-shells/cron-jobs
+    console-and-shells/i18n-shell
+    console-and-shells/completion-shell
+    console-and-shells/plugin-shell
+    console-and-shells/routes-shell
+    console-and-shells/upgrade-shell
 
 .. meta::
     :title lang=pt: Console e Shells

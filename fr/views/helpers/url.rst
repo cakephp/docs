@@ -1,16 +1,16 @@
-UrlHelper
-##########
+Url
+###
 
 .. php:namespace:: Cake\View\UrlHelper
 
 .. php:class:: UrlHelper(View $view, array $config = [])
 
-UrlHelper vous permez de générer facilement des liens pour vos autres Helpers.
+UrlHelper vous permet de générer facilement des liens pour vos autres Helpers.
 C'est aussi un endroit unique pour personnaliser la façon dont les URLs sont
 générées en surchargeant le helper du cœur avec celui d'une application.
 Regardez la section :ref:`aliasing-helpers` pour voir comment faire.
 
-Genérer des URLs
+Générer des URLs
 ================
 
 .. php:method:: build(mixed $url = NULL, boolean $full = false)
@@ -22,9 +22,9 @@ elle génère le lien utilisant le controller et l'action. Si ``full`` vaut
 ``true``, le lien fourni contiendra le chemin complet menant à la page::
 
     echo $this->Url->build([
-        "controller" => "posts",
-        "action" => "view",
-        "bar"
+        'controller' => 'Posts',
+        'action' => 'view',
+        'bar'
     ]);
 
     // Affiche
@@ -35,9 +35,9 @@ D'autres exemples d'utilisation:
 URL avec des paramètres nommés::
 
     echo $this->Url->build([
-        "controller" => "posts",
-        "action" => "view",
-        "foo" => "bar"
+        'controller' => 'Posts',
+        'action' => 'view',
+        'foo' => 'bar'
     ]);
 
     // Affiche
@@ -46,9 +46,9 @@ URL avec des paramètres nommés::
 URL avec une extension::
 
     echo $this->Url->build([
-        "controller" => "posts",
-        "action" => "list",
-        "_ext" => "rss"
+        'controller' => 'Posts',
+        'action' => 'list',
+        '_ext' => 'rss'
     ]);
 
     // Affiche
@@ -64,10 +64,10 @@ URL (commençant par '/') avec le chemin complet::
 URL avec des paramètres GET et des paramètres nommés (Ancre)::
 
     echo $this->Url->build([
-        "controller" => "posts",
-        "action" => "search",
-        "?" => ["foo" => "bar"],
-        "#" => "first"
+        'controller' => 'Posts',
+        'action' => 'search',
+        '?' => ['foo'=> 'bar'],
+        '#' => 'first'
     ]);
 
     // Affiche
@@ -81,7 +81,7 @@ URL utilisant une route labellisée ::
     // $router->connect(
     //     '/produits/:slug',
     //     [
-    //         'controller' => 'produits',
+    //         'controller' => 'Produits',
     //         'action' => 'view'
     //     ],
     //     [
@@ -90,7 +90,7 @@ URL utilisant une route labellisée ::
     // );
     /produits/i-m-slug
 
-Pour de plus amples informations, voir 
+Pour de plus amples informations, voir
 `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
 dans l'API.
 

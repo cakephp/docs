@@ -18,7 +18,7 @@ Basic Usage
 ===========
 
 To get started, create a Table class. These classes live in
-``src/Model/Table``. Tables are a type model collection specific to relational
+**src/Model/Table**. Tables are a type model collection specific to relational
 databases, and the main interface to your database in CakePHP's ORM. The most
 basic table class would look like::
 
@@ -74,7 +74,7 @@ By default table objects use an entity class based on naming conventions. For
 example if your table class is called ``ArticlesTable`` the entity would be
 ``Article``. If the table class was ``PurchaseOrdersTable`` the entity would be
 ``PurchaseOrder``. If however, you want to use an entity that doesn't follow the
-conventions you can use the ``entityClass`` method to change things up::
+conventions you can use the ``entityClass()`` method to change things up::
 
     class PurchaseOrdersTable extends Table
     {
@@ -115,7 +115,7 @@ overriding methods. Event listeners can be defined in table or behavior classes.
 You can also use a table's event manager to bind listeners in.
 
 When using callback methods behaviors attached in the
-``initialize`` method will have their listeners fired **before** the table
+``initialize()`` method will have their listeners fired **before** the table
 callback methods are triggered. This follows the same sequencing as controllers
 & components.
 
@@ -174,8 +174,8 @@ beforeRules
 .. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
 The ``Model.beforeRules`` event is fired before an entity has rules applied. By
-stopping this event, you can return the final value of the rules checking
-operation.
+stopping this event, you can short circuit the rules checking and set the result
+of applying rules'.
 
 afterRules
 --------------
@@ -202,6 +202,17 @@ afterSave
 
 The ``Model.afterSave`` event is fired after an entity is saved.
 
+afterSaveCommit
+---------------
+
+.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+
+The ``Model.afterSaveCommit`` event is fired after the transaction in which the
+save operation is wrapped has been committed. It's also triggered for non atomic
+saves where database operations are implicitly committed. The event is triggered
+only for the primary table on which ``save()`` is directly called. The event is
+not triggered if a transaction is started before calling save.
+
 beforeDelete
 ------------
 
@@ -215,12 +226,23 @@ afterDelete
 
 .. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
 
-The ``Model.beforeDelete`` event is fired after an entity has been deleted.
+The ``Model.afterDelete`` event is fired after an entity has been deleted.
+
+afterDeleteCommit
+-----------------
+
+.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+
+The ``Model.afterDeleteCommit`` event is fired after the transaction in which the
+delete operation is wrapped has been is committed. It's also triggered for non
+atomic deletes where database operations are implicitly committed. The event is
+triggered only for the primary table on which ``delete()`` is directly called.
+The event is not triggered if a transaction is started before calling delete.
 
 Behaviors
 =========
 
-.. php:method:: addBehavior($name, $config = [])
+.. php:method:: addBehavior($name, array $options = [])
 
 .. start-behaviors
 
@@ -229,8 +251,8 @@ related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
 would allow for re-usable pieces of logic, they would complicate binding events.
 
-To add a behavior to your table you can call the ``addBehavior`` method.
-Generally the best place to do this is in the ``initialize`` method::
+To add a behavior to your table you can call the ``addBehavior()`` method.
+Generally the best place to do this is in the ``initialize()`` method::
 
     namespace App\Model\Table;
 
@@ -278,7 +300,7 @@ Configuring Connections
 
 By default all table instances use the ``default`` database connection. If your
 application uses multiple database connections you will want to configure which
-tables use which connections. This is the ``defaultConnectionName`` method::
+tables use which connections. This is the ``defaultConnectionName()`` method::
 
     namespace App\Model\Table;
 
@@ -293,7 +315,7 @@ tables use which connections. This is the ``defaultConnectionName`` method::
 
 .. note::
 
-    The ``defaultConnectionName`` method **must** be static.
+    The ``defaultConnectionName()`` method **must** be static.
 
 .. _table-registry-usage:
 
@@ -317,12 +339,16 @@ use mock objects by providing an ``$options`` array::
     $articles = TableRegistry::get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
-        'connection' => $connection,
+        'connection' => $connectionObject,
         'schema' => $schemaObject,
         'entityClass' => 'Custom\EntityClass',
         'eventManager' => $eventManager,
         'behaviors' => $behaviorRegistry
     ]);
+
+Pay attention to the connection and schema configuration settings, they aren't
+string values but objects. The connection will take an object of
+``Cake\Database\Connection`` and schema ``Cake\Database\Schema\Collection``.
 
 .. note::
 

@@ -51,7 +51,7 @@ Les Cas de Test
 Si vous avez toujours le sentiment que l'information fournie par
 l'API est insuffisante, regardez le code des cas de test fournis avec CakePHP.
 Ils peuvent servir d'exemples pratiques pour l'utilisation d'une fonction et de
-données membres d'une classe. ::
+données membres d'une classe::
 
     tests/TestCase/
 
@@ -105,6 +105,9 @@ Française
 ---------
 - `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
 
+Portugais brésilien
+-------------------
+- `Communauté de CakePHP brésilienne <http://cakephp-br.org>`_
 
 .. meta::
     :title lang=fr: Où trouver de l'aide

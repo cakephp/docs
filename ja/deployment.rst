@@ -1,53 +1,17 @@
 デプロイ
-########
+#########
 
-アプリケーションが完成したら、またはその前に、それをデプロイしたいと思うことでしょう。
-CakePHPアプリケーションをデプロイする際には、いくつかやっておかなければならないことがあります。
+.. note::
+    The documentation is not currently supported in Japanese language for this
+    page.
 
-セキュリティの確認
-==================
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
 
-もしあなたが荒野にアプリケーションを解き放とうとするなら、何か抜け穴がないかを確認しておくことを\
-お勧めします。 CSRF攻撃や、フォームの改ざんなどを防ぐために :doc:`/core-libraries/components/security-component`
-をチェックしてください。 :doc:`/models/data-validation` を行うこと、そして
-:doc:`/core-utility-libraries/sanitize` は、\
-XSS攻撃からデータベースを保護する素晴らしいアイデアです。 ``webroot`` ディレクトリだけが\
-公開され、あなたの秘密(アプリケーションのsaltとセキュリティキーなど)は\
-プライベートでユニークなことを確認してください!
+    You can referer to the english version in the select top menu to have
+    information about this page's topic.
 
-ドキュメントルートの指定
-========================
-
-アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、またアプリケーションを安全に保つために重要なステップの内の一つです。
-CakePHPのアプリケーションは、アプリケーションの ``app/webroot`` にドキュメントルートを指定する必要があります。
-これによってアプリケーション、設定のファイルがURLを通してアクセスすることができなくなります。
-ドキュメントルートの指定の仕方はWEBサーバーごとに異なります。
-WEBサーバー特有の情報についていは :doc:`/installation/url-rewriting` ドキュメントを見てください。
-
-どの場合においても ``app/webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
-
-
-core.phpの更新
-==============
-
-core.phpの更新、とりわけ ``debug`` 値は非常に重要です。
-debug = 0 にすることで、広くインターネットに晒されることがあってはならない多くの開発用の機能を無効にできます。
-debugの無効化は以下の種々のものごとに変更を与えます:
-
-* :php:func:`pr()` と :php:func:`debug()` で生成されるデバッグメッセージが無効化されます。
-* CakePHPコアのキャッシュが、開発時の10秒ごとの代わりに999日ごとに破棄されるようになります。
-* Errorビューが吐く情報が少なくなり、代わりに共通のエラーメッセージが与えられます。
-* エラーが表示されなくなります。
-* 例外のスタックトレースが無効になります。
-
-上記に加えて、プラグインやアプリケーションの拡張が ``debug`` を用いてその挙動を変えます。
-
-
-アプリケーションのパフォーマンスの向上
-==============================================
-
-プラグインの画像や JavaScript、CSS ファイルなどの静的なアセットを扱う場合、ディスパッチャを通すことはかなりの非効率です。
-
-本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。 ::
-
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+.. meta::
+    :title lang=ja: デプロイ
+    :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

@@ -1,24 +1,34 @@
 助件
 ####
 
-
 助件(*Helper*)对于应用程序中表现层的作用，就像组件对于控制器的作用。助件包含的表
-现层逻辑，在多个视图、元素或布局间共享。本章将展示如何创建你自己的助件，并概述 
+现层逻辑，在多个视图、元素或布局间共享。本章将展示如何创建你自己的助件，并概述
 CakePHP 的核心助件能帮助你实现的基本任务。
 
 CakePHP 包含了一些有助于创建视图的助件。助件帮助创建完整格式的标记代码
-(*markup*)(包括表单)，帮助格式化文本、时间和数字，甚至加速 AJAX 功能。欲知 
+(*markup*)(包括表单)，帮助格式化文本、时间和数字，甚至加速 AJAX 功能。欲知
 CakePHP 中助件的更多信息，请查看 :ref:`core-helpers`。
 
-.. include:: /core-libraries/toc-helpers.rst
-    :start-line: 8
+.. toctree::
+    :maxdepth: 1
+
+    /views/helpers/flash
+    /views/helpers/form
+    /views/helpers/html
+    /views/helpers/number
+    /views/helpers/paginator
+    /views/helpers/rss
+    /views/helpers/session
+    /views/helpers/text
+    /views/helpers/time
+    /views/helpers/url
 
 .. _configuring-helpers:
 
 使用和配置助件
 ==============
 
-在 CakePHP 中，你可以通过让控制器知道助件来启用助件。 每个控制器有一个 
+在 CakePHP 中，你可以通过让控制器知道助件来启用助件。 每个控制器有一个
 :php:attr:`~Controller::$helpers` 属性，列出视图中可以使用的助件。要在视图中启用
 一个助件，就把助件的名字添加到控制器的 ``$helpers`` 数组中::
 
@@ -49,8 +59,8 @@ CakePHP 中助件的更多信息，请查看 :ref:`core-helpers`。
         }
     }
 
-如果需要在所有的控制器中启用一个助件，把助件的名字加入 
-``/app/Controller/AppController.php`` 文件(如果不存在就创建它)的 ``$helpers`` 
+如果需要在所有的控制器中启用一个助件，把助件的名字加入
+``/app/Controller/AppController.php`` 文件(如果不存在就创建它)的 ``$helpers``
 数组中。记住，要引入缺省的 Html 和 Form 助件::
 
     class AppController extends Controller
@@ -122,18 +132,18 @@ CakePHP 中助件的更多信息，请查看 :ref:`core-helpers`。
     echo $this->Html->css('styles');
 
 上面的代码调用了 HtmlHelper 的 ``css`` 方法。可以使用 ``$this->{$helperName}`` 访
-问任何已加载的助件。有时你可能需要从视图中动态加载助件。你可以使用视图的 
+问任何已加载的助件。有时你可能需要从视图中动态加载助件。你可以使用视图的
 :php:class:`HelperCollection` 来做到这一点::
 
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
-HelperCollection 是 :doc:`collection </core-libraries/collections>`，如同在 
+HelperCollection 是 :doc:`collection </core-libraries/collections>`，如同在
 CakePHP 的其它地方的用法一样支持集合 API。
 
 回调方法
 ========
 
-助件有若干回调方法，让你可以增强对视图渲染过程(的控制)。欲知更多信息，请参见 
+助件有若干回调方法，让你可以增强对视图渲染过程(的控制)。欲知更多信息，请参见
 :ref:`helper-api` 和 :doc:`/core-libraries/collections` 的文档。
 
 创建助件
@@ -143,7 +153,7 @@ CakePHP 的其它地方的用法一样支持集合 API。
 建(自己的)助件。
 
 比方说我们想要创建一个助件，可用于在应用程序中许多不同地方输出你需要的一个具有特
-定 CSS 样式的链接。为了使你的逻辑融入 CakePHP 已有的助件结构，你需要在 
+定 CSS 样式的链接。为了使你的逻辑融入 CakePHP 已有的助件结构，你需要在
 ``/app/View/Helper`` 目录中创建一个新的类。让我们把我们的助件叫做 LinkHelper 助件。
 实际的 PHP 类文件将类似于::
 
@@ -160,7 +170,7 @@ CakePHP 的其它地方的用法一样支持集合 API。
 
 .. note::
 
-    助件必须继承 ``AppHelper`` 或者 :php:class:`Helper`，或者实现 
+    助件必须继承 ``AppHelper`` 或者 :php:class:`Helper`，或者实现
     :ref:`helper-api` 中的全部回调。
 
 引入其它助件
@@ -193,7 +203,7 @@ CakePHP 的其它地方的用法一样支持集合 API。
 使用你的助件
 ------------
 
-一旦创建了助件，并放进了 ``/app/View/Helper/`` 目录，就可以在控制器中用特别的变量 
+一旦创建了助件，并放进了 ``/app/View/Helper/`` 目录，就可以在控制器中用特别的变量
 :php:attr:`~Controller::$helpers` 来引用它了::
 
     class PostsController extends AppController
@@ -211,7 +221,7 @@ CakePHP 的其它地方的用法一样支持集合 API。
 ==================
 
 所有的助件都继承自一个特殊类 AppHelper (就象所有的模型都继承自 AppModel，而所有的
-控制器都继承自 AppController 一样)。要为所有的助件创建功能，创建 
+控制器都继承自 AppController 一样)。要为所有的助件创建功能，创建
 ``/app/View/Helper/AppHelper.php`` 这个文件::
 
     App::uses('Helper', 'View');
@@ -284,5 +294,5 @@ Callbacks
     在完成渲染布局之后调用。接收布局文件名作为参数。
 
 .. meta::
-    :title lang=zh_CN: Helpers
-    :keywords lang=zh_CN: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=zh: Helpers
+    :keywords lang=zh: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins

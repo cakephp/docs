@@ -1,24 +1,27 @@
-Bookmarker Tutorial Part 2
-##########################
+Tutorial de Bookmarker Parte 2
+##############################
 
-After finishing :doc:`the first part of this tutorial
-</tutorials-and-examples/bookmarks/intro>` you should have a very basic
-bookmarking application. In this chapter we'll be adding authentication and
-restricting the bookmarks each user can see/modify to only the ones they own.
+Depois de terminar a :doc:`primeira parte deste tutorial
+</tutorials-and-examples/bookmarks/intro>`, você deve ter uma
+aplicação muito básica. Neste capítulo iremos adicionar autenticação e
+restringir as bookmarks para que cada usuário possa ver/modificar somente
+aquelas que possuam.
 
-Adding Login
-============
+Adicionando login
+=================
 
-In CakePHP, authentication is handled by :doc:`/controllers/components`.
-Components can be thought of as ways to create reusable chunks of controller
-code related to a specific feature or concept. Components can also hook into the
-controller's event life-cycle and interact with your application that way. To
-get started, we'll add the :doc:`AuthComponent
-</controllers/components/authentication>` to our application. We'll pretty much
-want every method to require authentication, so we'll add AuthComponent in our
+No CakePHP, a autenticação é feita por :doc:`/controllers/components`. Os
+Components podem ser considerados como formas de criar pedaços reutilizáveis
+de código relacionado a controllers com uma característica específica ou
+conceito. Os components também podem ligar-se ao evento do ciclo de vida do
+controller e interagir com a sua aplicação. Para começar, vamos
+adicionar o AuthComponent a nossa aplicação. Nós vamos querer muito que
+cada método exija autenticação, por isso vamos acrescentar o
+:doc:`AuthComponent</controllers/components/authentication>` em nosso
 AppController::
 
-    // In src/Controller/AppController.php
+
+    // Em src/Controller/AppController.php
     namespace App\Controller;
 
     use Cake\Controller\Controller;
@@ -37,25 +40,26 @@ AppController::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
                 ]
             ]);
 
-            // Allow the display action so our pages controller
-            // continues to work.
+            // Permite a ação display, assim nosso pages controller
+            // continua a funcionar.
             $this->Auth->allow(['display']);
         }
     }
 
-We've just told CakePHP that we want to load the ``Flash`` and ``Auth``
-components. In addition, we've customized the configuration of AuthComponent, as
-our users table uses ``email`` as the username. Now, if you go to any URL you'll
-be kicked to ``/users/login``, which will show an error page as we have
-not written that code yet. So let's create the login action::
+Acabamos de dizer ao CakePHP que queremos carregar os components ``Flash`` e
+``Auth``. Além disso, temos a configuração personalizada do AuthComponent,
+assim a nossa tabela users pode usar ``email`` como username. Agora, se você for
+a qualquer URL, você vai ser chutado para ``/users/login``, que irá
+mostrar uma página de erro já que não escrevemos o código ainda.
+Então, vamos criar a ação de login::
 
-    // In src/Controller/UsersController.php
+    // Em src/Controller/UsersController.php
 
     public function login()
     {
@@ -69,7 +73,7 @@ not written that code yet. So let's create the login action::
         }
     }
 
-And in ``src/Template/Users/login.ctp`` add the following::
+E em **src/Template/Users/login.ctp** adicione o seguinte::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -78,23 +82,24 @@ And in ``src/Template/Users/login.ctp`` add the following::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-Now that we have a simple login form, we should be able to log in with one of
-the users that has a hashed password.
+Agora que temos um simples formulário de login, devemos ser capazes de efetuar
+login com um dos users que tenham senha criptografada.
 
 .. note::
 
-    If none of your users have hashed passwords, comment the
-    ``loadComponent('Auth')`` line. Then go and edit the user,
-    saving a new password for them.
+    Se nenhum de seus users tem senha criptografada, comente a linha
+    ``loadComponent('Auth')``. Então vá e edite o user, salvando uma nova
+    senha para ele.
 
-You should now be able to log in. If not, make sure you are using a user that
-has a hashed password.
+Agora você deve ser capaz de entrar. Se não, certifique-se que você está
+usando um user que tenha senha criptografada.
 
-Adding Logout
-=============
+Adicionando logout
+==================
 
-Now that people can log in, you'll probably want to provide a way to log out as
-well. Again, in the ``UsersController``, add the following code::
+Agora que as pessoas podem efetuar o login, você provavelmente vai querer
+fornecer uma maneira de encerrar a sessão também. Mais uma vez, no
+``UsersController``, adicione o seguinte código::
 
     public function logout()
     {
@@ -102,48 +107,51 @@ well. Again, in the ``UsersController``, add the following code::
         return $this->redirect($this->Auth->logout());
     }
 
-Now you can visit ``/users/logout`` to log out and be sent to the login page.
+Agora você pode visitar ``/users/logout`` para sair e ser enviado à
+página de login.
 
-Enabling Registrations
-======================
+Ativando inscrições
+===================
 
-If you aren't logged in and you try to visit ``/users/add`` you will be kicked
-to the login page. We should fix that as we'll if we want people to sign up for
-our application. In the ``UsersController`` add the following::
+Se você não estiver logado e tentar visitar / usuários / adicionar você vai
+ser expulso para a página de login. Devemos corrigir isso se
+quisermos que as pessoas se inscrevam em nossa aplicação. No
+UsersController adicione o seguinte::
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Auth->allow(['add']);
     }
 
-The above tells ``AuthComponent`` that the ``add`` action does *not* require
-authentication or authorization. You may want to take the time to clean up the
-``Users/add.ctp`` and remove the misleading links, or continue on to the next
-section. We won't be building out user editing, viewing or listing in this
-tutorial so they will not work as ``AuthComponent`` will deny you access to those
-controller actions.
+O texto acima diz ao ``AuthComponent`` que a ação ``add`` não requer
+autenticação ou autorização. Você pode querer dedicar algum tempo para limpar a
+``/users/add`` e  remover os links enganosos, ou continuar para a próxima
+seção. Nós não estaremos construindo a edição do usuário, visualização ou
+listagem neste tutorial, então eles não vão funcionar, já que o
+``AuthComponent`` vai negar-lhe acesso a essas ações do controller.
 
-Restricting Bookmark Access
-===========================
+Restringindo acesso
+===================
 
-Now that users can log in, we'll want to limit the bookmarks they can see to the
-ones they made. We'll do this using an 'authorization' adapter. Since our
-requirements are pretty simple, we can write some simple code in our
-``BookmarksController``. But before we do that, we'll want to tell the
-AuthComponent how our application is going to authorize actions. In your
-``AppController`` add the following::
+Agora que os usuários podem conectar-se, nós vamos querer limitar os
+bookmarks que podem ver para aqueles que fizeram. Nós vamos fazer isso
+usando um adaptador de 'autorização'. Sendo os nossos requisitos
+bastante simples, podemos escrever um código em nossa
+``BookmarksController``. Mas antes de fazer isso, vamos querer dizer ao
+AuthComponent como nossa aplicação vai autorizar ações. Em seu ``AppController``
+adicione o seguinte::
 
     public function isAuthorized($user)
     {
         return false;
     }
 
-Also, add the following to the configuration for ``Auth`` in your
+Além disso, adicione o seguinte à configuração para ``Auth`` em seu
 ``AppController``::
 
     'authorize' => 'Controller',
 
-Your ``initialize`` method should now look like::
+Seu método ``initialize`` agora deve parecer com::
 
         public function initialize()
         {
@@ -158,35 +166,36 @@ Your ``initialize`` method should now look like::
                         ]
                     ]
                 ],
-                'unauthorizedRedirect' => [
+                'loginAction' => [
                     'controller' => 'Users',
                     'action' => 'login'
-                ]
+                ],
+                'unauthorizedRedirect' => $this->referer()
             ]);
 
-            // Allow the display action so our pages controller
-            // continues to work.
+            // Permite a ação display, assim nosso pages controller
+            // continua a funcionar.
             $this->Auth->allow(['display']);
         }
 
-We'll default to denying access, and incrementally grant access where it makes
-sense. First, we'll add the authorization logic for bookmarks. In your
-``BookmarksController`` add the following::
+Vamos usar como padrão, negação do acesso, e de forma incremental conceder
+acesso onde faça sentido. Primeiro, vamos adicionar a lógica de autorização
+para os bookmarks. Em seu ``BookmarksController`` adicione o seguinte::
 
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
 
-        // The add and index actions are always allowed.
+        // As ações add e index são permitidas sempre.
         if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
-        // All other actions require an id.
+        // Todas as outras ações requerem um id.
         if (empty($this->request->params['pass'][0])) {
             return false;
         }
 
-        // Check that the bookmark belongs to the current user.
+        // Checa se o bookmark pertence ao user atual.
         $id = $this->request->params['pass'][0];
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
@@ -195,35 +204,37 @@ sense. First, we'll add the authorization logic for bookmarks. In your
         return parent::isAuthorized($user);
     }
 
-
-Now if you try to view, edit or delete a bookmark that does not belong to you,
-you should be redirected back to the page you came from. However, there is no
-error message being displayed, so let's rectify that next::
+Agora, se você tentar visualizar, editar ou excluir um bookmark que não
+pertença a você, você deve ser redirecionado para a página de onde veio. No
+entanto, não há nenhuma mensagem de erro sendo exibida, então vamos
+corrigir isso a seguir::
 
     // In src/Template/Layout/default.ctp
     // Under the existing flash message.
     <?= $this->Flash->render('auth') ?>
 
-You should now see the authorization error messages.
+Agora você deve ver as mensagens de erro de autorização.
 
-Fixing List view and Forms
-==========================
+Corrigindo a view de listagem e formulários
+===========================================
 
-While view and delete are working, edit, add and index have a few problems:
+Enquanto view e delete estão trabalhando, edit, add e index tem
+alguns problemas:
 
-#. When adding a bookmark you can choose the user.
-#. When editing a bookmark you can choose the user.
-#. The list page shows bookmarks from other users.
+#. Ao adicionar um bookmark, você pode escolher o user.
+#. Ao editar um bookmark, você pode escolher o user.
+#. A página de listagem mostra os bookmarks de outros users.
 
-Let's tackle the add form first. To begin with remove the ``input('user_id')``
-from ``src/Template/Bookmarks/add.ctp``. With that removed, we'll also update
-the add method to look like::
+Vamos enfrentar o formulário de adição em primeiro lugar. Para começar
+remova o ``input('user_id')`` a partir de **src/Template/Bookmarks/add.ctp**.
+Com isso removido, nós também vamos atualizar o método add::
 
     public function add()
     {
-        $bookmark = $this->Bookmarks->newEntity($this->request->data);
-        $bookmark->user_id = $this->Auth->user('id');
+        $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
@@ -234,9 +245,10 @@ the add method to look like::
         $this->set(compact('bookmark', 'tags'));
     }
 
-By setting the entity property with the session data, we remove any possibility
-of the user modifying which user a bookmark is for. We'll do the same for the
-edit form and action. Your edit action should look like::
+Ao definir a propriedade da entidade com os dados da sessão, nós removemos
+qualquer possibilidade do user modificar de que outro user um bookmark
+seja. Nós vamos fazer o mesmo para o formulário edit e action edit. Sua
+ação edit deve ficar assim::
 
     public function edit($id = null)
     {
@@ -256,12 +268,12 @@ edit form and action. Your edit action should look like::
         $this->set(compact('bookmark', 'tags'));
     }
 
-List View
----------
+View de listagem
+----------------
 
-Now, we only need to show bookmarks for the currently logged in user. We can do
-that by updating the call to ``paginate()``. Make your index() action look
-like::
+Agora, nós precisamos apenas exibir bookmarks para o user logado.
+Nós podemos fazer isso ao atualizar a chamada para ``paginate()``. Altere sua
+ação index::
 
     public function index()
     {
@@ -273,23 +285,24 @@ like::
         $this->set('bookmarks', $this->paginate($this->Bookmarks));
     }
 
-We should also update the ``tags()`` action and the related finder method, but
-we'll leave that as an exercise you can complete on your own.
+Nós também devemos atualizar a action ``tags()`` e o método localizador relacionado,
+mas vamos deixar isso como um exercício para que você conclua por sí.
 
-Improving the Tagging Experience
-================================
+Melhorando a experiência com as tags
+====================================
 
-Right now, adding new tags is a difficult process, as the ``TagsController``
-disallows all access. Instead of allowing access, we can improve the tag
-selection UI by using a comma separated text field. This will let us give
-a better experience to our users, and use some more great features in the ORM.
+Agora, adicionar novas tags é um processo difícil, pois o ``TagsController``
+proíbe todos os acessos. Em vez de permitir o acesso, podemos melhorar a
+interface do usuário para selecionar tags usando um campo de texto separado por
+vírgulas. Isso permitirá dar uma melhor experiência para os nossos
+usuários, e usar mais alguns grandes recursos no ORM.
 
-Adding a Computed Field
------------------------
+Adicionando um campo computado
+------------------------------
 
-Because we'll want a simple way to access the formatted tags for an entity, we
-can add a virtual/computed field to the entity. In
-``src/Model/Entity/Bookmark.php`` add the following::
+Porque nós queremos uma maneira simples de acessar as tags formatados
+para uma entidade, podemos adicionar um campo virtual/computado para a
+entidade. Em **src/Model/Entity/Bookmark.php** adicione o seguinte::
 
     use Cake\Collection\Collection;
 
@@ -308,41 +321,40 @@ can add a virtual/computed field to the entity. In
         return trim($str, ', ');
     }
 
-This will let us access the ``$bookmark->tag_string`` computed property. We'll
-use this property in inputs later on. Remember to add the ``tag_string``
-property to the ``_accessible`` list in your entity, as we'll want to 'save' it
-later on.
+Isso vai nos deixar acessar a propriedade computada ``$bookmark->tag_string``.
+Vamos usar essa propriedade em inputs mais tarde. Lembre-se de adicionar a
+propriedade ``tag_string`` a lista ``_accessible`` em sua entidade.
 
-In ``src/Model/Entity/Bookmark.php`` add the ``tag_string`` to ``_accessible`` this way::
+Em **src/Model/Entity/Bookmark.php** adicione o ``tag_string`` ao
+``_accessible`` desta forma::
 
-	protected $_accessible = [
-		'user_id' => true,
-		'title' => true,
-		'description' => true,
-		'url' => true,
-		'user' => true,
-		'tags' => true,
-		'tag_string' => true,
-	];
+    protected $_accessible = [
+        'user_id' => true,
+        'title' => true,
+        'description' => true,
+        'url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
+    ];
 
+Atualizando as views
+--------------------
 
-Updating the Views
-------------------
-
-With the entity updated we can add a new input for our tags. In the add and
-edit view, replace the existing ``tags._ids`` input with the following::
+Com a entidade atualizado, podemos adicionar uma nova entrada para as nossas
+tags. Nas views add e edit, substitua ``tags._ids`` pelo seguinte::
 
     <?= $this->Form->input('tag_string', ['type' => 'text']) ?>
 
-Persisting the Tag String
--------------------------
+Persistindo a string tag
+------------------------
 
-Now that we can view existing tags as a string, we'll want to save that data as
-well. Because we marked the ``tag_string`` as accessible, the ORM will copy that
-data from the request into our entity. We can use a ``beforeSave`` hook method
-to parse the tag string and find/build the related entities. Add the following
-to ``src/Model/Table/BookmarksTable.php``::
-
+Agora que podemos ver as tags como uma string existente, vamos querer salvar
+os dados também. Por marcar o ``tag_string`` como acessível, o ORM irá
+copiar os dados do pedido em nossa entidade. Podemos usar um método
+``beforeSave`` para analisar a cadeia tag e encontrar/construir as
+entidades relacionadas. Adicione o seguinte em
+**src/Model/Table/BookmarksTable.php**::
 
     public function beforeSave($event, $entity, $options)
     {
@@ -358,35 +370,36 @@ to ``src/Model/Table/BookmarksTable.php``::
         $query = $this->Tags->find()
             ->where(['Tags.title IN' => $new]);
 
-        // Remove existing tags from the list of new tags.
+        // Remove tags existentes da lista de novas tags.
         foreach ($query->extract('title') as $existing) {
             $index = array_search($existing, $new);
             if ($index !== false) {
                 unset($new[$index]);
             }
         }
-        // Add existing tags.
+        // Adiciona tags existentes.
         foreach ($query as $tag) {
             $out[] = $tag;
         }
-        // Add new tags.
+        // Adiciona novas tags.
         foreach ($new as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
         return $out;
     }
 
-While this code is a bit more complicated than what we've done so far, it helps
-to showcase how powerful the ORM in CakePHP is. You can easily manipulate query
-results using the :doc:`/core-libraries/collections` methods, and handle
-scenarios where you are creating entities on the fly with ease.
+Embora esse código seja um pouco mais complicado do que o que temos feito até
+agora, ele ajuda a mostrar o quão poderosa a ORM do CakePHP é. Você pode
+facilmente manipular resultados da consulta usando os métodos de
+:doc:`/core-libraries/collections`, e lidar com situações em que você está
+criando entidades sob demanda com facilidade.
 
-Wrapping Up
-===========
+Terminando
+==========
 
-We've expanded our bookmarking application to handle authentication and basic
-authorization/access control scenarios. We've also added some nice UX
-improvements by leveraging the FormHelper and ORM capabilities.
+Nós expandimos nossa aplicação bookmarker para lidar com situações de
+autenticação e controle de autorização/acesso básico. Nós também adicionamos
+algumas melhorias agradáveis à UX, aproveitando os recursos FormHelper e ORM.
 
-Thanks for taking the time to explore CakePHP. Next, you can learn more about
-the :doc:`/orm`, or you can peruse the :doc:`/topics`.
+Obrigado por dispor do seu tempo para explorar o CakePHP. Em seguida, você pode
+saber mais sobre o :doc:`/orm`, ou você pode ler os :doc:`/topics`.

@@ -1,49 +1,52 @@
-Bookmarker Tutorial
-###################
+Tutorial de Bookmarker
+######################
 
-This tutorial will walk you through the creation of a simple bookmarking
-application (bookmarker). To start with, we'll be installing CakePHP, creating
-our database, and using the tools CakePHP provides to get our application up
-fast.
+Esse tutorial vai guiar você através da criação de uma simples aplicação de
+marcação (bookmarker). Para começar, nós vamos instalar o CakePHP, criar
+nosso banco de dados, e usar as ferramentas que o CakePHP fornece para obter
+nossa aplicação de pé rápido.
 
-Here's what you'll need:
+Aqui está o que você vai precisar:
 
-#. A database server. We're going to be using MySQL server in this tutorial.
-   You'll need to know enough about SQL in order to create a database: CakePHP
-   will be taking the reins from there. Since we're using MySQL, also make sure
-   that you have ``pdo_mysql`` enabled in PHP.
-#. Basic PHP knowledge.
+#. Um servidor de banco de dados. Nós vamos usar o servidor MySQL neste
+   tutorial. Você precisa saber o suficiente sobre SQL para criar um banco de
+   dados: O CakePHP vai tomar as rédeas a partir daí. Por nós estarmos
+   usando o MySQL, também certifique-se que você tem a extensão ``pdo_mysql``
+   habilitada no PHP.
 
-Let's get started!
+#. Conhecimento básico sobre PHP.
 
-Getting CakePHP
-===============
+Vamos começar!
 
-The easiest way to install CakePHP is to use Composer.  Composer is a simple way
-of installing CakePHP from your terminal or command line prompt.  First, you'll
-need to download and install Composer if you haven't done so already. If you
-have cURL installed, it's as easy as running the following::
+Instalação do CakePHP
+=====================
+
+A maneira mais fácil de instalar o CakePHP é usando Composer, um gerenciador
+de dependências para o PHP. É uma forma simples de instalar o CakePHP a
+partir de seu terminal ou prompt de comando. Primeiro, você precisa baixar e
+instalar o Composer. Se você tiver instalada a extensão cURL do PHP, execute
+o seguinte comando::
 
     curl -s https://getcomposer.org/installer | php
 
-Or, you can download ``composer.phar`` from the
-`Composer website <https://getcomposer.org/download/>`_.
+Ao invés disso, você também pode baixar o arquivo ``composer.phar`` do
+`site <https://getcomposer.org/download/>`_ oficial.
 
-Then simply type the following line in your terminal from your
-installation directory to install the CakePHP application skeleton
-in the [app_name] directory. ::
+Em seguida, basta digitar a seguinte linha no seu terminal a partir do diretório
+onde se localiza o arquivo ``composer.phar`` para instalar o esqueleto de
+aplicações do CakePHP no diretório ``bookmarker``. ::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
-The advantage to using Composer is that it will automatically complete some
-important set up tasks, such as setting the correct file permissions and
-creating your ``config/app.php`` file for you.
+A vantagem de usar Composer é que ele irá completar automaticamente um conjunto
+importante de tarefas, como configurar as permissões de arquivo e criar a sua
+``config/app.php``.
 
-There are other ways to install CakePHP. If you cannot or don't want to use
-Composer, check out the :doc:`/installation` section.
+Há outras maneiras de instalar o CakePHP. Se você não puder ou não quiser usar
+Composer, veja a seção :doc:`/installation`.
 
-Regardless of how you downloaded and installed CakePHP, once your set up is
-completed, your directory setup should look something like the following::
+Independentemente de como você baixou o CakePHP, uma vez que sua instalação
+for concluída, a estrutura dos diretórios deve ficar parecida com o seguinte::
 
     /bookmarker
         /bin
@@ -64,37 +67,38 @@ completed, your directory setup should look something like the following::
         phpunit.xml.dist
         README.md
 
-Now might be a good time to learn a bit about how CakePHP's directory structure
-works: check out the :doc:`/intro/cakephp-folder-structure` section.
+Agora pode ser um bom momento para aprender sobre como a estrutura de diretórios
+do CakePHP funciona: Confira a seção :doc:`/intro/cakephp-folder-structure`.
 
-Checking our Installation
-=========================
+Verificando nossa instalação
+============================
 
-We can quickly check that our installation is correct, by checking the default
-home page. Before you can do that, you'll need to start the development server::
+Podemos checar rapidamente que a nossa instalação está correta, verificando a
+página inicial padrão. Antes que você possa fazer isso, você vai precisar
+iniciar o servidor de desenvolvimento::
 
     bin/cake server
 
-This will start PHP's built-in webserver on port 8765. Open up
-``http://localhost:8765`` in your web browser to see the welcome page. All the
-bullet points should be checkmarks other than CakePHP being able to connect to
-your database. If not, you may need to install additional PHP extensions, or set
-directory permissions.
+Isto irá iniciar o servidor embutido do PHP na porta 8765. Abra
+``http://localhost:8765`` em seu navegador para ver a página de boas-vindas.
+Todas as verificações devem estar checadas corretamente, a não ser a conexão com
+banco de dados do CakePHP. Se não, você pode precisar instalar extensões do PHP
+adicionais, ou definir permissões de diretório.
 
-Creating the Database
-=====================
+Criando o banco de dados
+========================
 
-Next, let's set up the database for our bookmarking application. If you
-haven't already done so, create an empty database for use in this
-tutorial, with a name of your choice, e.g. ``cake_bookmarks``. You can execute
-the following SQL to create the necessary tables::
+Em seguida, vamos criar o banco de dados para a nossa aplicação. Se você
+ainda não tiver feito isso, crie um banco de dados vazio para uso
+nesse tutorial, com um nome de sua escolha, por exemplo, ``cake_bookmarks``.
+Você pode executar o seguinte SQL para criar as tabelas necessárias::
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created DATETIME,
-        updated DATETIME
+        modified DATETIME
     );
 
     CREATE TABLE bookmarks (
@@ -104,7 +108,7 @@ the following SQL to create the necessary tables::
         description TEXT,
         url TEXT,
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         FOREIGN KEY user_key (user_id) REFERENCES users(id)
     );
 
@@ -112,7 +116,7 @@ the following SQL to create the necessary tables::
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         UNIQUE KEY (title)
     );
 
@@ -125,30 +129,30 @@ the following SQL to create the necessary tables::
         FOREIGN KEY bookmark_key(bookmark_id) REFERENCES bookmarks(id)
     );
 
-You may have noticed that the ``bookmarks_tags`` table used a composite primary
-key. CakePHP supports composite primary keys almost everywhere, making it easier
-to build multi-tenanted applications.
+Você deve ter notado que a tabela ``bookmarks_tags`` utilizada uma chave
+primária composta. O CakePHP suporta chaves primárias compostas quase todos os
+lugares, tornando mais fácil construir aplicações multi-arrendados.
 
-The table and column names we used were not arbitrary. By using CakePHP's
-:doc:`naming conventions </intro/conventions>`, we can leverage CakePHP better
-and avoid having to configure the framework. CakePHP is flexible enough to
-accommodate even inconsistent legacy database schemas, but adhering to the
-conventions will save you time.
+Os nomes de tabelas e colunas que usamos não foram arbitrárias. Usando
+:doc:`convenções de nomenclatura </intro/conventions>` do CakePHP, podemos
+alavancar o desenvolvimento e evitar ter de configurar o framework. O CakePHP
+é flexível o suficiente para acomodar até mesmo esquemas de banco de dados
+legados inconsistentes, mas aderir às convenções vai lhe poupar tempo.
 
-Database Configuration
-======================
+Configurando o banco de dados
+=============================
 
-Next, let's tell CakePHP where our database is and how to connect to it.
-For many, this will be the first and last time you will need to configure
-anything.
+Em seguida, vamos dizer ao CakePHP onde o nosso banco de dados está como se
+conectar a ele. Para muitos, esta será a primeira e última vez que você vai
+precisar configurar qualquer coisa.
 
-The configuration should be pretty straightforward: just replace the
-values in the ``Datasources.default`` array in the ``config/app.php`` file
-with those that apply to your setup. A sample completed configuration
-array might look something like the following::
+A configuração é bem simples: basta alterar os valores do array
+``Datasources.default`` no arquivo ``config/app.php`` pelos que se
+aplicam à sua configuração. A amostra completa da gama de configurações pode
+ser algo como o seguinte::
 
     return [
-        // More configuration above.
+        // Mais configuração acima.
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
@@ -163,55 +167,56 @@ array might look something like the following::
                 'cacheMetadata' => true,
             ],
         ],
-        // More configuration below.
+        // Mais configuração abaixo.
     ];
 
-Once you've saved your ``config/app.php`` file, you should the 'CakePHP is able
-to connect to the database' section have a checkmark.
+Depois de salvar o seu arquivo ``config/app.php``, você deve notar que a
+mensagem 'CakePHP is able to connect to the database' tem uma marca de
+verificação.
 
 .. note::
 
-    A copy of CakePHP's default configuration file is found in
+    Uma cópia do arquivo de configuração padrão do CakePHP é encontrado em
     ``config/app.default.php``.
 
-Generating Scaffold Code
-========================
+Gerando o código base
+=====================
 
-Because our database is following the CakePHP conventions, we can use the
-:doc:`bake console </bake/usage>` application to quickly generate a basic application. In your
-command line run the following commands::
+Devido a nosso banco de dados seguir as convenções do CakePHP, podemos usar o
+:doc:`bake console </bake/usage>` para gerar rapidamente uma aplicação básica
+. Em sua linha de comando execute::
 
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags
 
-This will generate the controllers, models, views, their corresponding test
-cases, and fixtures for our users, bookmarks and tags resources. If you've
-stopped your server, restart it and go to ``http://localhost:8765/bookmarks``.
+Isso irá gerar os controllers, models, views, seus casos de teste
+correspondentes, e fixtures para os nossos users, bookmarks e tags. Se você
+parou seu servidor, reinicie-o e vá para ``http://localhost:8765/bookmarks``.
 
-You should see a basic but functional application providing data access to your
-application's database tables. Once you're at the list of bookmarks, add a few
-users, bookmarks, and tags.
+Você deverá ver uma aplicação que dá acesso básico, mas funcional a tabelas
+de banco de dados. Adicione alguns users, bookmarks e tags.
 
-Adding Password Hashing
-=======================
+Adicionando criptografia de senha
+=================================
 
-When you created your users, you probably noticed that the passwords were stored
-in plain text. This is pretty bad from a security point of view, so let's get
-that fixed.
+Quando você criou seus users, você deve ter notado que as senhas foram
+armazenadas como texto simples. Isso é muito ruim do ponto de vista da
+segurança, por isso vamos consertar isso.
 
-This is also a good time to talk about the model layer in CakePHP. In CakePHP,
-we separate the methods that operate on a collection of objects, and a single
-object into different classes. Methods that operate on the collection of
-entities are put in the *Table* class, while features belonging to a single
-record are put on the *Entity* class.
+Este também é um bom momento para falar sobre a camada de modelo. No CakePHP,
+separamos os métodos que operam em uma coleção de objetos, e um único objeto
+em diferentes classes. Métodos que operam na recolha de entidades são
+colocadas na classe *Table*, enquanto as características pertencentes a um
+único registro são colocados na classe *Entity*.
 
-For example, password hashing is done on the individual record, so we'll
-implement this behavior on the entity object. Because, we want to hash the
-password each time it is set, we'll use a mutator/setter method. CakePHP will
-call convention based setter methods any time a property is set in one of your
-entities. Let's add a setter for the password. In ``src/Model/Entity/User.php``
-add the following::
+Por exemplo, a criptografia de senha é feita no registro individual, por
+isso vamos implementar esse comportamento no objeto entidade. Dada a
+circunstância de nós querermos criptografar a senha cada vez que é
+definida, vamos usar um método modificador/definidor. O CakePHP vai chamar
+métodos de definição baseados em convenções a qualquer momento que uma
+propriedade é definida em uma de suas entidades. Vamos adicionar um definidor
+para a senha. Em **src/Model/Entity/User.php** adicione o seguinte::
 
     namespace App\Model\Entity;
 
@@ -230,26 +235,27 @@ add the following::
         }
     }
 
-Now update one of the users you created earlier, if you change their password,
-you should see a hashed password instead of the original value on the list or
-view pages. CakePHP hashes passwords with `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_ by default. You can also
-use sha1 or md5 if you're working with an existing database.
+Agora atualize um dos usuários que você criou anteriormente, se você alterar
+sua senha, você deve ver um senha criptografada ao invés do valor original nas
+páginas de lista ou visualização. O CakePHP criptografa senhas com
+`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ por padrão.
+Você também pode usar sha1 ou md5 caso venha a trabalhar com um
+banco de dados existente.
 
-Getting Bookmarks with a Specific Tag
-=====================================
+Recuperando bookmarks com uma tag específica
+============================================
 
-Now that we're storing passwords safely, we can build out some more interesting
-features in our application. Once you've amassed a collection of bookmarks, it
-is helpful to be able to search through them by tag. Next we'll implement
-a route, controller action, and finder method to search through bookmarks by
-tag.
+Agora que estamos armazenando senhas com segurança, podemos construir algumas
+características mais interessantes em nossa aplicação. Uma vez que você
+acumulou uma coleção de bookmarks, é útil ser capaz de pesquisar através
+deles por tag. Em seguida, vamos implementar uma rota, a ação do controller, e
+um método localizador para pesquisar através de bookmarks por tag.
 
-Ideally, we'd have a URL that looks like
-``http://localhost:8765/bookmarks/tagged/funny/cat/gifs`` This would let us find
-all the bookmarks that have the 'funny', 'cat' and 'gifs' tags. Before we can
-implement this, we'll add a new route. In ``config/routes.php``, add the
-following at the top of the file::
+Idealmente, nós teríamos uma URL que se parece com
+``http://localhost:8765/bookmarks/tagged/funny/cat/gifs``. Isso deveria nos
+permitir a encontrar todos os bookmarks que têm as tags 'funny', 'cat' e
+'gifs'. Antes de podermos implementar isso, vamos adicionar uma nova rota. Em
+``config/routes.php``, adicione o seguinte na parte superior do arquivo::
 
     Router::scope(
         '/bookmarks',
@@ -259,12 +265,12 @@ following at the top of the file::
         }
     );
 
-The above defines a new 'route' which connects the ``/bookmarks/tagged/*`` path,
-to ``BookmarksController::tags()``. By defining routes, you can isolate how your
-URLs look, from how they are implemented. If we were to visit
-``http://localhost:8765/bookmarks/tagged``, we would see a helpful error page
-from CakePHP. Let's implement that missing method now. In
-``src/Controller/BookmarksController.php`` add the following::
+O acima define uma nova "rota" que liga o caminho ``/bookmarks/tagged/*``, a
+``BookmarksController::tags()``. Ao definir rotas, você pode isolar como
+suas URLs parecerão, de como eles são implementadas. Se fôssemos visitar
+``http://localhost:8765/bookmarks/tagged``, deveriamos ver uma página de erro
+informativa do CakePHP. Vamos implementar esse método ausente agora. Em
+**src/Controller/BookmarksController.php** adicione o seguinte::
 
     public function tags()
     {
@@ -275,14 +281,14 @@ from CakePHP. Let's implement that missing method now. In
         $this->set(compact('bookmarks', 'tags'));
     }
 
-Creating the Finder Method
---------------------------
+Criando o método localizador
+============================
 
-In CakePHP we like to keep our controller actions slim, and put most of our
-application's logic in the models. If you were to visit the
-``/bookmarks/tagged`` URL now you would see an error that the ``findTagged``
-method has not been implemented yet, so let's do that. In
-``src/Model/Table/BookmarksTable.php`` add the following::
+No CakePHP nós gostamos de manter as nossas ações do controller enxutas, e
+colocar a maior parte da lógica de nossa aplicação nos modelos. Se você fosse
+visitar a URL ``/bookmarks/tagged`` agora, você veria um erro sobre o
+método ``findTagged`` não estar implementado ainda, então vamos fazer isso. Em
+**src/Model/Table/BookmarksTable.php** adicione o seguinte::
 
     public function findTagged(Query $query, array $options)
     {
@@ -298,18 +304,19 @@ method has not been implemented yet, so let's do that. In
             });
     }
 
-We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
-a very powerful concept in CakePHP that allows you to package up re-usable
-queries. In our finder we've leveraged the ``matching()`` method which allows us
-to find bookmarks that have a 'matching' tag.
+Nós implementamos um método
+:ref:`localizador customizado <custom-find-methods>`. Este é um conceito
+muito poderoso no CakePHP que lhe permite construir consultas reutilizáveis.
+Em nossa pesquisa, nós alavancamos o método ``matching()`` que nos habilita
+encontrar bookmarks que têm uma tag 'correspondente'.
 
-Creating the View
------------------
+Criando a view
+==============
 
-Now if you visit the ``/bookmarks/tagged`` URL, CakePHP will show an error
-letting you know that you have not made a view file. Next, let's build the view
-file for our ``tags`` action. In ``src/Template/Bookmarks/tags.ctp`` put the
-following content::
+Agora, se você visitar a URL ``/bookmarks/tagged``, o CakePHP irá mostrar um
+erro e deixá-lo saber que você ainda não fez um arquivo view. Em seguida,
+vamos construir o arquivo view para a nossa ação ``tags``. Em
+**src/Template/Bookmarks/tags.ctp** coloque o seguinte conteúdo::
 
     <h1>
         Bookmarks tagged with
@@ -326,27 +333,28 @@ following content::
     <?php endforeach; ?>
     </section>
 
-CakePHP expects that our templates follow the naming convention where the
-template has the lower case and underscored version of the controller action
-name.
+O CakePHP espera que os nossos templates sigam a convenção de nomenclatura onde
+o nome do template é a versão minúscula e grifada do nome da ação do
+controller.
 
-You may notice that we were able to use the ``$tags`` and ``$bookmarks``
-variables in our view. When we use the ``set()`` method in our controller's we
-set specific variables to be sent to the view. The view will make all passed
-variables available in the templates as local variables.
+Você pode perceber que fomos capazes de utilizar as variáveis ``$tags`` e
+``bookmarks`` em nossa view. Quando usamos o método ``set()`` em nosso
+controller, automaticamente definimos variáveis específicas que devem ser
+enviadas para a view. A view vai tornar todas as variáveis passadas
+disponíveis nos templates como variáveis locais.
 
-In our view we've used a few of CakePHP's built-in :doc:`helpers
-</views/helpers>`. Helpers are used to make re-usable logic for formatting data,
-creating HTML or other view output.
+Em nossa view, usamos alguns dos :doc:`helpers </views/helpers>` nativos do
+CakePHP. Helpers são usados para criar lógica re-utilizável para a
+formatação de dados, a criação de HTML ou outra saída da view.
 
-You should now be able to visit the ``/bookmarks/tagged/funny`` URL and see all
-the bookmarks tagged with 'funny'.
+Agora você deve ser capaz de visitar a URL ``/bookmarks/tagged/funny`` e ver
+todas os bookmarks com a tag 'funny'.
 
-So far, we've created a basic application to manage bookmarks, tags and users.
-However, everyone can see everyone else's tags. In the next chapter, we'll
-implement authentication and restrict the visible bookmarks to only those that
-belong to the current user.
+Até agora, nós criamos uma aplicação básica para gerenciar bookmarks, tags e
+users. No entanto, todos podem ver as tags de toda a gente. No próximo
+capítulo, vamos implementar a autenticação e restringir os bookmarks visíveis
+para somente aqueles que pertencem ao usuário atual.
 
-Now continue to :doc:`/tutorials-and-examples/bookmarks/part-two` to
-continue building your application or :doc:`dive into the documentation
-</topics>` to learn more about what CakePHP can do for you.
+Agora vá a :doc:`/tutorials-and-examples/bookmarks/part-two` para continuar a
+construir sua aplicação ou :doc:`mergulhe na documentação </topics>` para
+saber mais sobre o que CakePHP pode fazer por você.

@@ -98,16 +98,20 @@ Join tables, used in BelongsToMany relationships between models, should be named
 after the model tables they will join, arranged in alphabetical order
 (apples\_zebras rather than zebras\_apples).
 
+Rather than using an auto-increment key as the primary key, you may also use
+char(36). CakePHP will then use a unique 36 character UUID (Text::uuid) whenever
+you save a new record using the ``Table::save()`` method.
+
 View Conventions
 ================
 
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-``src/Template/People/get_ready.ctp``.
+**src/Template/People/get_ready.ctp**.
 
 The basic pattern is
-``src/Template/Controller/underscored_function_name.ctp``.
+**src/Template/Controller/underscored_function_name.ctp**.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -115,11 +119,11 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 -  Database table: "people"
--  Table class: "PeopleTable", found at ``src/Model/Table/PeopleTable.php``
--  Entity class: "Person", found at ``src/Model/Entity/Person.php``
+-  Table class: "PeopleTable", found at **src/Model/Table/PeopleTable.php**
+-  Entity class: "Person", found at **src/Model/Entity/Person.php**
 -  Controller class: "PeopleController", found at
-   ``src/Controller/PeopleController.php``
--  View template, found at ``src/Template/People/index.ctp``
+   **src/Controller/PeopleController.php**
+-  View template, found at **src/Template/People/index.ctp**
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the ``index()`` function

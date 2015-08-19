@@ -1,4 +1,4 @@
-Http Client
+Client Http
 ###########
 
 .. php:namespace:: Cake\Network\Http
@@ -12,33 +12,34 @@ services webs et des APIs distantes.
 Faire des Requêtes
 ==================
 
-Faire des requêtes est simple et direct. Faire une requête get ressemble à ceci::
+Faire des requêtes est simple et direct. Faire une requête get ressemble à
+ceci::
 
     use Cake\Network\Http\Client;
 
     $http = new Client();
 
-    // Simple get
+    // Simple GET
     $response = $http->get('http://example.com/test.html');
 
-    // Simple get avec querystring
+    // Simple GET avec querystring
     $response = $http->get('http://example.com/search', ['q' => 'widget']);
 
-    // Simple get avec querystring & headers supplémentaires
+    // Simple GET avec querystring & headers supplémentaires
     $response = $http->get('http://example.com/search', ['q' => 'widget'], [
       'headers' => ['X-Requested-With' => 'XMLHttpRequest']
     ]);
 
 Faire des requêtes post et put est également simple::
 
-    // Envoie une requête POST avec des données encodées application/x-www-form-urlencoded
+    // Envoi d'une requête POST avec des données encodées application/x-www-form-urlencoded
     $http = new Client();
     $response = $http->post('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
     ]);
 
-    // Envoie une requête PUT avec des données encodées application/x-www-form-urlencoded
+    // Envoi d'une requête PUT avec des données encodées application/x-www-form-urlencoded
     $response = $http->put('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
@@ -52,19 +53,68 @@ Faire des requêtes post et put est également simple::
 Créer des Requêtes Multipart avec des Fichiers
 ==============================================
 
-Vous pouvez inclure des fichiers dans des corps de requête en les incluant
-dans le tableau de données::
+Vous pouvez inclure des fichiers dans des corps de requête en incluant un
+gestionnaire de fichier dans le tableau de données::
 
     $http = new Client();
     $response = $http->post('http://example.com/api', [
-      'image' => '@/path/to/a/file',
-      'logo' => $fileHandle
+      'image' => fopen('/path/to/a/file', 'r'),
     ]);
 
-En préfixant les valeurs des données par ``@`` ou en inclluant un gestionnaire
-de fichier dans les données. Si un gestionnaire de fichier est utilisé, le
-gestionnaire de fichier sera lu jusqu'à sa fin, il ne sera pas rembobiné avant
-d'être lu.
+Le gestionnaire de fichiers sera lu jusqu'à sa fin, il ne sera pas rembobiné
+avant d'être lu.
+
+.. warning::
+
+    Pour des raisons de compatibilité, les chaînes commençant par ``@`` seront
+    considérées comme locales ou des chemins de fichier d'un dépôt.
+
+Cette fonctionnalité est dépréciée depuis CakePHP 3.0.5 et sera retirée dans une
+version future. Avant que cela n'arrive, les données d'utilisateur passées
+au Client Http devront être nettoyées comme suit::
+
+    $response = $http->post('http://example.com/api', [
+        'search' => ltrim($this->request->data('search'), '@'),
+    ]);
+
+Si il est nécessaire de garder les caractères du début ``@`` dans les chaînes
+de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
+``http_build_query()``::
+
+    $response = $http->post('http://example.com/api', http_build_query([
+        'search' => $this->request->data('search'),
+    ]));
+
+Construire des Corps de Requête Multipart à la Main
+---------------------------------------------------
+
+Il peut arriver que vous souhaitiez construire un corps de requête d'une
+façon très spécifique. Dans ces situations, vous pouvez utiliser
+``Cake\Network\Http\FormData`` pour fabriquer la requête HTTP multipart
+spécifique que vous souhaitez::
+
+    use Cake\Network\Http\FormData;
+
+    $data = new FormData();
+
+    // Création d'une partie XML
+    $xml = $data->newPart('xml', $xmlString);
+    // Définit le type de contenu.
+    $xml->type('application/xml');
+    $data->add($xml);
+
+    // Création d'un fichier upload avec addFile()
+    // Ceci va aussi ajouter le fichier aux données du formulaire.
+    $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
+    $file->contentId('abc123');
+    $file->disposition('attachment');
+
+    // Envoi de la requête.
+    $response = $http->post(
+        'http://example.com/api',
+        (string)$data,
+        ['headers' => ['Content-Type' => 'multipart/related']]
+    );
 
 Envoyer des Corps de Requête
 ============================
@@ -73,7 +123,7 @@ Lorsque vous utilisez des REST API, vous avez souvent besoin d'envoyer des corps
 de requête qui ne sont pas encodés. Http\\Client le permet grâce à l'option
 type::
 
-    // Send a JSON request body.
+    // Envoi d'un body JSON.
     $http = new Client();
     $response = $http->post(
       'http://example.com/tasks',
@@ -87,11 +137,11 @@ chaîne de caractères. Si vous faîtes une requête GET qui a besoin des deux
 paramètres querystring et d'un corps de requête, vous pouvez faire comme ce
 qui suit::
 
-    // Envoi d'un corps JSON dans une requête GET avec des paramètres query string.
+    // Envoi d'un body JSON dans une requête GET avec des paramètres query string.
     $http = new Client();
     $response = $http->get(
       'http://example.com/tasks',
-      ['q' => 'test', '_content' => json_encode($data)], 
+      ['q' => 'test', '_content' => json_encode($data)],
       ['type' => 'json']
     );
 
@@ -108,15 +158,15 @@ utilisées dans ``$options``:
 - ``cookie`` - Tableau de cookies à utiliser.
 - ``proxy`` - Tableau d'informations proxy.
 - ``auth`` - Tableau de données d'authentification, la clé ``type`` est utilisée
-  pour déleguer à une stratégie d'authentification. Par défaut l'Auth Basic est
+  pour déléguer à une stratégie d'authentification. Par défaut l'Auth Basic est
   utilisée.
 - ``ssl_verify_peer`` - par défaut à ``true``. Définie à ``false`` pour
   désactiver la certification SSL (non conseillé)
 - ``ssl_verify_depth`` - par défaut à 5. Depth to traverse in the CA chain.
 - ``ssl_verify_host`` - par défaut à ``true``. Valide le certificat SSL pour un
   nom d'hôte.
-- ``ssl_cafile`` - par défaut pour construire dans cafile. Overwrite to use
-  custom CA bundles.
+- ``ssl_cafile`` - par défaut pour construire dans cafile. Ecrasez-le pour
+  utiliser des bundles CA personnalisés.
 - ``timeout`` - Durée d'attente avant timing out.
 - ``type`` - Envoi un corps de requête dans un type de contenu personnalisé.
   Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
@@ -124,7 +174,7 @@ utilisées dans ``$options``:
 
 Le paramètre options est toujours le 3ème paramètre dans chaque méthode HTTP.
 Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des
-:ref:`scoped clients <http_client_scoped_client>`.
+:ref:`clients scoped <http_client_scoped_client>`.
 
 Authentification
 ================
@@ -146,7 +196,6 @@ Un exemple simple d'authentification::
 
 Par défaut Http\\Client va utiliser l'authentification basic s'il n'y a pas
 de clé ``'type'`` dans l'option auth.
-
 
 Utiliser l'Authentification Digest
 ----------------------------------
@@ -188,7 +237,19 @@ déjà votre clé de consommateur et un secret de consommateur::
       ]
     ]);
 
-Authentification Proxy 
+Authentification OAuth 2
+------------------------
+
+Il n'y a pas d'adapteur d'authentification spécialisé car OAuth2 est souvent
+juste un simple entête. A la place, vous pouvez créer un client avec le token
+d'accès::
+
+    $http = new Client([
+        'headers' => ['Authorization' => 'Bearer ' . $accessToken]
+    ]);
+    $response = $http->get('https://example.com/api/profile/1');
+
+Authentification Proxy
 ----------------------
 
 Certains proxies ont besoin d'une authentification pour les utiliser.
@@ -214,14 +275,14 @@ Devoir retaper le nom de domaine, les paramètres d'authentification et de proxy
 peut devenir fastidieux et source d'erreurs. Pour réduire ce risque d'erreur et
 être moins pénible, vous pouvez créer des clients scoped::
 
-    // Créé un client scoped.
+    // Création d'un client scoped.
     $http = new Client([
       'host' => 'api.example.com',
       'scheme' => 'https',
       'auth' => ['username' => 'mark', 'password' => 'testing']
     ]);
 
-    // Fait une requête vers api.example.com
+    // Faire une requête vers api.example.com
     $response = $http->get('/test.php');
 
 Les informations suivantes peuvent être utilisées lors de la création d'un
@@ -239,17 +300,16 @@ client scoped:
 * ssl_verify_host
 
 Chacune de ces options peut être remplacées en les spécifiant quand vous
-faîtes des requêtes. 
+faîtes des requêtes.
 host, scheme, proxy, port sont remplacées dans l'URL de la requête::
 
-    // Utiliser le client scoped que nous avons créé précédemment.
+    // Utilisation du client scoped que nous avons créé précédemment.
     $response = $http->get('http://foo.com/test.php');
 
 Ce qui est au-dessus va remplacer le domaine, le scheme, et le port. Cependant,
 cette requête va continuer à utiliser toutes les autres options définies quand
-le client scoped a été créé. Regardez :ref:`http_client_request_options`
+le client scoped a été créé. Consultez :ref:`http_client_request_options`
 pour plus d'informations sur les options intégrées.
-
 
 Configurer et Gérer les Cookies
 ===============================
@@ -257,7 +317,7 @@ Configurer et Gérer les Cookies
 Http\\Client peut aussi accepter les cookies quand on fait des requêtes. En plus
 d'accepter les cookies, il va aussi automatiquement stocker les cookies valides
 définis dans les responses. Toute response avec des cookies, les verra
-stockés dans l'instance d'origne de Http\\Client. Les cookies stockés dans une
+stockés dans l'instance d'origine de Http\\Client. Les cookies stockés dans une
 instance Client sont automatiquement inclus dans les futures requêtes vers
 le domaine + combinaisons de chemin qui correspondent::
 
@@ -265,7 +325,7 @@ le domaine + combinaisons de chemin qui correspondent::
         'host' => 'cakephp.org'
     ]);
 
-    // Faire une requête qui définit des cookies
+    // Création d'une requête qui définit des cookies
     $response = $http->get('/');
 
     // Cookies à partir de la première requête seront inclus par défaut.
@@ -274,7 +334,7 @@ le domaine + combinaisons de chemin qui correspondent::
 Vous pouvez toujours remplacer les cookies auto-inclus en les définissant dans
 les paramètres ``$options`` de la requête::
 
-    // Remplace un cookie stocké avec une valeur personnalisée.
+    // Personalisation d'un cookie existant.
     $response = $http->get('/changelogs', [], [
         'cookies' => ['sessionid' => '123abc']
     ]);
@@ -321,8 +381,8 @@ de réponse.
 .. php:method:: cookie($name = null, $all = false)
 
     Récupère un cookie unique à partir de response. Par défaut, seule la valeur
-    d'un cookie est retourné. Si vous définissez le deuxième paramètre à ``true``,
-    toutes les propriétés définies dans la response seront retournées.
+    d'un cookie est retourné. Si vous définissez le deuxième paramètre à
+    ``true``, toutes les propriétés définies dans la response seront retournées.
 
 .. php:method:: statusCode()
 
@@ -346,7 +406,7 @@ d'objet pour lire les données à partir des propriétés suivantes:
     $http = new Client(['host' => 'example.com']);
     $response = $http->get('/test');
 
-    // Utilise les accesseurs d'object pour lire les données.
+    // Utlisation des accesseurs d'objet pour lire les données.
     debug($response->body);
     debug($response->status);
     debug($response->headers);
@@ -361,12 +421,12 @@ fournissent une utilisation facile d'accéder à la lecture des données décod�
 Les données JSON dans un tableau, alors que les données XML sont décodées dans
 un arbre ``SimpleXMLElement``::
 
-    // Récupérer du XML
+    // Récupération du XML.
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
     $xml = $response->xml;
 
-    // Récupérer du JSON
+    // Récupération du JSON.
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
     $json = $response->json;

@@ -231,4 +231,4 @@ HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可
 
 .. meta::
     :title lang=ja: REST
-    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :keywords lang=ja: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api

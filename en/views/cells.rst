@@ -18,8 +18,8 @@ with ``requestAction()``.
 Creating a Cell
 ===============
 
-To create a cell, define a class in ``src/View/Cell`` and a template in
-``src/Template/Cell/``. In this example, we'll be making a cell to display the
+To create a cell, define a class in **src/View/Cell** and a template in
+**src/Template/Cell/**. In this example, we'll be making a cell to display the
 number of messages in a user's notification inbox. First, create the class file.
 Its contents should look like::
 
@@ -36,7 +36,7 @@ Its contents should look like::
 
     }
 
-Save this file into ``src/View/Cell/InboxCell.php``. As you can see, like other
+Save this file into **src/View/Cell/InboxCell.php**. As you can see, like other
 classes in CakePHP, Cells have a few conventions:
 
 * Cells live in the ``App\View\Cell`` namespace. If you are making a cell in
@@ -46,7 +46,7 @@ classes in CakePHP, Cells have a few conventions:
 
 We added an empty ``display()`` method to our cell; this is the conventional
 default method when rendering a cell. We'll cover how to use other methods later
-in the docs. Now, create the file ``src/Template/Cell/Inbox/display.ctp``. This
+in the docs. Now, create the file **src/Template/Cell/Inbox/display.ctp**. This
 will be our template for our new cell.
 
 You can generate this stub code quickly using ``bake``::
@@ -91,10 +91,10 @@ following::
 
 .. note::
 
-    Cell templates have an isolated scope do not share the same View instance
-    as the one used to render template and layout for the current controller
-    action or other cells. Hence they are unaware of any helper calls made or
-    blocks set in the action's template / layout and vice versa.
+    Cell templates have an isolated scope that does not share the same View
+    instance as the one used to render template and layout for the current
+    controller action or other cells. Hence they are unaware of any helper calls
+    made or blocks set in the action's template / layout and vice versa.
 
 Loading Cells
 =============

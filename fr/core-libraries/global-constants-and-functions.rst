@@ -37,19 +37,6 @@ CakePHP, comme le débogage et la traduction de contenu.
         :doc:`/core-libraries/internationalization-and-localization`
         pour plus d'information.
 
-.. php:function:: __c(string $msg, integer $category, mixed $args = null)
-
-    Notez que la catégorie doit être spécifiée avec une constante de classe
-    I18n, au lieu d'un nom de constante. Les valeurs sont:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
     Vous permet de remplacer le domaine courant lors de la recherche d'un
@@ -58,53 +45,51 @@ CakePHP, comme le débogage et la traduction de contenu.
     Utile pour internationaliser un plugin:
      ``echo __d('PluginName', 'Ceci est mon plugin');``
 
-.. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
-
-    Vous permet de remplacer le domaine courant pour la recherche d'un message.
-    Permet également de spécifier une catégorie.
-
-    Notez que la catégorie doit être spécifiée avec une constante de classe I18n
-    au lieu du nom de la constante. Les valeurs sont:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
-.. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
-
-    Vous permet de remplacer le domaine courant pour la recherche simple au
-    pluriel d'un message. Cela permet également de spécifier une catégorie.
-    Retourne la forme correcte d'un message identifié par $singular et $plural
-    pour le compteur $count depuis le domaine $domain. Certaines langues ont
-    plus d'une forme de pluriel dépendant du compteur.
-
-    Notez que la catégorie doit être spécifiée avec des une constante de classe
-    I18n, au lieu des noms de constantes. Les valeurs sont:
-
-    - I18n::LC_ALL - LC_ALL
-    - I18n::LC_COLLATE - LC_COLLATE
-    - I18n::LC_CTYPE - LC_CTYPE
-    - I18n::LC_MONETARY - LC_MONETARY
-    - I18n::LC_NUMERIC - LC_NUMERIC
-    - I18n::LC_TIME - LC_TIME
-    - I18n::LC_MESSAGES - LC_MESSAGES
-
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Vous permet de redéfinir le domaine courant pour une recherche simple
-    au pluriel d'un message. Retourne la forme pluriel correcte d'un
-    message identifié par $singular et $plural pour le compteur $count
-    depuis le domaine $domain.
+    Vous permet de redéfinir le domaine courant pour une recherche simple au
+    pluriel d'un message. Retourne la forme pluriel correcte d'un message
+    identifié par ``$singular`` et ``$plural`` pour le compteur ``$count``
+    depuis le domaine ``$domain``.
+
+.. php:function:: __dx(string $domain, string $context, string $msg, mixed $args = null)
+
+    Vous permet de remplacer le domaine courant pour la recherche d'un message.
+    Permet également de spécifier une contexte.
+
+    Le contexte est un identifiant unique pour la chaîne de traductions qui le
+    rend unique dans le même domaine.
+
+.. php:function:: __dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Vous permet de remplacer le domaine courant pour la recherche simple au
+    pluriel d'un message. Cela permet également de spécifier une contexte.
+    Retourne la forme correcte d'un message identifié par ``$singular`` et
+    ``$plural`` pour le compteur ``$count`` depuis le domaine ``$domain``.
+    Certaines langues ont plus d'une forme de pluriel dépendant du compteur.
+
+    Le contexte est un identifiant unique pour la chaîne de traductions qui le
+    rend unique dans le même domaine.
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
-    Retourne la forme correcte d'un message identifié par $singular et $plural
-    pour le compteur $count. Certaines langues ont plus d'une forme de pluriel
-    dépendant du compteur
+    Retourne la forme correcte d'un message identifié par ``$singular`` et
+    ``$plural`` pour le compteur ``$count``. Certaines langues ont plus d'une forme de pluriel dépendant du compteur.
+
+.. php:function:: __x(string $context, string $msg, mixed $args = null)
+
+    Le contexte est un identifiant unique pour la chaîne de traductions qui le
+    rend unique dans le même domaine.
+
+.. php:function:: __xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Retourne la forme correcte d'un message identifié par ``$singular`` et
+    ``$plural`` pour le compteur ``$count``. Cela permet également de spécifier
+    une contexte. Certaines langues ont plus d'une forme de pluriel dépendant du
+    compteur.
+
+    Le contexte est un identifiant unique pour la chaîne de traductions qui le
+    rend unique dans le même domaine.
 
 .. php:function:: collection(mixed $items)
 
@@ -127,7 +112,7 @@ CakePHP, comme le débogage et la traduction de contenu.
     Récupère une variable d'environnement depuis les sources disponibles.
     Utilisé en secours si ``$_SERVER`` ou ``$_ENV`` sont désactivés.
 
-    Cette fonction émule également PHP\_SELF et DOCUMENT\_ROOT sur
+    Cette fonction émule également ``PHP_SELF`` et ``DOCUMENT_ROOT`` sur
     les serveurs ne les supportant pas. En fait, c'est une bonne idée
     de toujours utiliser ``env()`` plutôt que ``$_SERVER`` ou ``getenv()``
     (notamment si vous prévoyez de distribuer le code), puisque
@@ -140,16 +125,30 @@ CakePHP, comme le débogage et la traduction de contenu.
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
     Divise le nom d'un plugin en notation par point en plugin et classname
-    (nom de classe). Si $name de contient pas de point, alors l'index 0 sera
-    null.
+    (nom de classe). Si ``$name`` de contient pas de point, alors l'index 0 sera
+    ``null``.
 
     Communément utilisé comme ceci
     ``list($plugin, $name) = pluginSplit('Users.User');``
 
+.. php:function:: namespaceSplit(string $class)
+
+    Divise le namespace du nom de la classe.
+
+    Communément utilisé comme ceci
+    ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
+
 .. php:function:: pr(mixed $var)
 
-    Raccourci pratique pour ``print_r()``, avec un ajout de balises <pre>
+    Raccourci pratique pour ``print_r()``, avec un ajout de balises ``<pre>``
     autour de la sortie.
+
+.. php:function:: pj(mixed $var)
+
+    JSON pretty print convenience function, with the addition of
+    wrapping ``<pre>`` tags around the output.
+
+    It is meant for debugging the JSON representation of objects and arrays.
 
 Définitions des constantes du noyau
 ===================================
@@ -184,8 +183,8 @@ dans votre application.
 
 .. php:const:: DS
 
-    Raccourci pour la constante PHP DIRECTORY\_SEPARATOR, qui est égale à /
-    pour Linux et \\ pour Windows.
+    Raccourci pour la constante PHP ``DIRECTORY_SEPARATOR``, qui est égale à
+    ``/`` pour Linux et ``\\`` pour Windows.
 
 .. php:const:: LOGS
 
@@ -242,7 +241,6 @@ Définition de Constantes de Temps
 .. php:const:: YEAR
 
     Égale à 31536000
-
 
 .. meta::
     :title lang=fr: Constantes Globales et Fonctions

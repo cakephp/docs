@@ -85,9 +85,18 @@ your production server once the application is deployed::
 
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
-recommended to symlink them for production. For example like this::
+recommended to symlink them for production. This can be done easily using 
+the ``plugin`` shell::
 
-    ln -s Plugin/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+    bin/cake plugin assets symlink
+    
+The above command will symlink the ``webroot`` directory of all loaded plugins to
+appropriate path in the app's ``webroot`` directory.
+
+If your filesystem doesn't allow creating symlinks the directories will be copied
+instead of being symlinked. You can also explicitly copy the directories using::
+
+    bin/cake plugin assets copy
 
 .. meta::
     :title lang=en: Deployment

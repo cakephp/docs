@@ -18,7 +18,7 @@ CakePHP provides a basic organizational structure that covers class names,
 filenames, database table names, and other conventions. While the conventions
 take some time to learn, by following the conventions CakePHP provides you can
 avoid needless configuration and make a uniform application structure that makes
-working with various projects a breeze. The :doc:`conventions chapter
+working with various projects simple. The :doc:`conventions chapter
 </intro/conventions>` covers the various conventions that CakePHP uses.
 
 
@@ -129,13 +129,17 @@ The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. At a high level each request goes through the
 following steps:
 
-#. The request is first processed by your routes.
-#. After the request has been routed, the dispatcher will select the
-   correct controller object to handle it.
+#. The webserver rewrite rules direct the request to ``webroot/index.php``.
+#. Your application's autoloader and bootstrap files are executed.
+#. Any :doc:`dispatch filters </development/dispatch-filters>` that are
+   configured can handle the request, and optionally generate a response.
+#. The dispatcher selects the appropriate controller & action based on routing rules.
 #. The controller's action is called and the controller interacts with the
    required Models and Components.
 #. The controller delegates response creation to the View to generate the output
    resulting from the model data.
+#. The view uses Helpers and Cells to generate the response body and headers.
+#. The response is sent back to the client.
 
 Just the Start
 ==============
@@ -146,8 +150,7 @@ features in CakePHP are:
 * A :doc:`caching </core-libraries/caching>` framework that integrates with
   Memcache, Redis and other backends.
 * Powerful :doc:`code generation tools
-  </bake/usage>` so you can hit the ground
-  running.
+  </bake/usage>` so you can start immediately.
 * :doc:`Integrated testing framework </development/testing>` so you can ensure
   your code works perfectly.
 

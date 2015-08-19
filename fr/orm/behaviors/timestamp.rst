@@ -1,12 +1,12 @@
-Behavior Timestamp
-##################
+Timestamp
+#########
 
 .. php:namespace:: Cake\ORM\Behavior
 
 .. php:class:: TimestampBehavior
 
 Le behavior timestamp permet à vos objets de table de mettre à jour un ou
-plusieurs timestamps sur chaque evenement de model. C'est principalement utilisé
+plusieurs timestamps sur chaque évènement de model. C'est principalement utilisé
 pour remplir les données dans les champs ``created`` et ``modified``.
 Cependant, avec quelques configurations supplémentaires, vous pouvez mettre à
 jour la colonne timestamp/datetime sur chaque évènement qu'une table publie.
@@ -35,7 +35,7 @@ Utiliser et Configurer le Behavior
 ==================================
 
 Si vous avez besoin de modifier les champs avec des noms différents, ou si vous
-souhaitez mettre à jour le timestamp supplémentaire sur des evenements
+souhaitez mettre à jour le timestamp supplémentaire sur des évènements
 personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
 
     class OrdersTable extends Table
@@ -56,7 +56,7 @@ personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
         }
     }
 
-Comme vous pouvez le voir au-dessus, en plus de l'evenement standard
+Comme vous pouvez le voir au-dessus, en plus de l'évènement standard
 ``Model.beforeSave``, nous mettons aussi à jour la colonne ``completed_at``
 quand les ordres sont complétés.
 
@@ -68,10 +68,10 @@ sans changer aucune autre propriété. On fait parfois référence au
 'touching' d'un enregistrement. Dans CakePHP, vous pouvez utiliser la méthode
 ``touch()`` pour faire exactement ceci::
 
-    // Touch basé sur l'evenement Model.beforeSave.
+    // Touch basé sur l'évènement Model.beforeSave.
     $articles->touch($article);
 
-    // Touch basé sur un evenement spécifique.
+    // Touch basé sur un évènement spécifique.
     $orders->touch($order, 'Orders.completed');
 
 Toucher les enregistrements peut être utile quand vous souhaitez signaler

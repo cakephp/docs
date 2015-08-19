@@ -11,4 +11,4 @@ cronjobとして実行します。
 
 .. meta::
     :title lang=ja: cronjobに登録してシェルを実行する
-    :keywords lang=en: cronjob,bash script,crontab
+    :keywords lang=ja: cronjob,bash script,crontab

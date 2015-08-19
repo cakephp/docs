@@ -2,9 +2,13 @@ Appendices
 ##########
 
 .. note::
-    Esta página todavía no ha sido traducida y pertenece a la documentación de
-    CakePHP 2.X. Si te animas puedes ayudarnos `traduciendo la documentación
-    desde Github <https://github.com/cakephp/docs>`_.
+    La documentación no es compatible actualmente con el idioma español en esta página.
+
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
+
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.
 
 Appendices contain information regarding the new features
 introduced in each version and the migration path between versions.
@@ -12,14 +16,19 @@ introduced in each version and the migration path between versions.
 3.0 Migration Guide
 ===================
 
-3.0 is still under development, and any documented changes
-will only be available in the ``3.0`` branch in git.
-
 .. toctree::
     :maxdepth: 1
 
     appendices/3-0-migration-guide
     appendices/orm-migration
+
+3.1 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/3-1-migration-guide
 
 General Information
 ===================
@@ -30,7 +39,6 @@ General Information
     appendices/cakephp-development-process
     appendices/glossary
 
-
 .. meta::
-    :title lang=en: Appendices
-    :keywords lang=en: migration guide,migration path,new features,glossary
+    :title lang=es: Appendices
+    :keywords lang=es: migration guide,migration path,new features,glossary

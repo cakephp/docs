@@ -1,14 +1,13 @@
 Déploiement
 ###########
 
-Une fois que votre application est terminée, ou même avant que vous
-souhaitiez la déployer. Il y a quelques choses que vous devriez faire quand
-vous déployez une application CakePHP.
+Une fois que votre application CakePHP est terminée, ou même avant que
+vous souhaitiez la déployer, il y a certains points à vérifier.
 
 Mise à jour de config/app.php
 =============================
 
-Mettre à jour core.php, spécialement la valeur de ``debug`` est extrêmement
+Mettre à jour app.php, spécialement la valeur de ``debug`` est extrêmement
 important. Mettre debug = ``false`` désactive un certain nombre de
 fonctionnalités de développement qui ne devraient jamais être exposées sur
 internet. Désactiver le debug change les types de choses suivantes:
@@ -81,7 +80,7 @@ soient exécutés en-dehors du répertoire webroot.
 
 .. _symlink-assets:
 
-Améliorer les performances de votre application
+Améliorer les Performances de votre Application
 ===============================================
 
 Le chargement des classes peut facilement prendre une bonne part du temps
@@ -91,12 +90,23 @@ que l'application est déployée::
 
     php composer.phar dumpautoload -o
 
-Comme la gestion des éléments statiques, comme les images, le Javascript et
-les fichiers CSS des plugins à travers le Dispatcher est incroyablement
-inefficace, il est chaudement recommandé de les symlinker pour la
-production. Par exemple comme ceci::
+Étant donné que la gestion des éléments statiques, comme les images, le
+Javascript et les fichiers CSS des plugins à travers le ``Dispatcher`` est
+incroyablement inefficace, il est chaudement recommandé d'utiliser les liens
+symboliques pour la production. Ceci peut être fait facilement en utilisant
+le shell ``plugin``::
 
-    ln -s plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+    bin/cake plugin assets symlink
+
+La commande ci-dessus va faire un lien symbolique du répertoire ``webroot``
+de tous les plugins chargés vers les chemins appropriés dans le répertoire
+``webroot`` de l'application.
+
+Si votre système de fichier ne permet pas de créer des liens symboliques, les
+répertoires seront copiés à la place des liens symboliques. Vous pouvez aussi
+explicitement copier les répertoires en utilisant::
+
+    bin/cake plugin assets copy
 
 .. meta::
     :title lang=fr: Déploiement

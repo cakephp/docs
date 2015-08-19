@@ -1,8 +1,6 @@
 Associations - Lier les Tables Ensemble
 #######################################
 
-.. _table-associations:
-
 Définir les relations entre les différents objets dans votre application
 sera un processus naturel. Par exemple, un article peut avoir plusieurs
 commentaires, et appartenir à un auteur. Les Auteurs peuvent avoir plusieurs
@@ -188,25 +186,28 @@ Les clés possibles pour une association hasOne sont:
 - **className**: le nom de la classe de la table que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User a une Address', la
   valeur associée à la clé 'className' devra être 'Addresses'.
-- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre model.
+- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre table.
   Ceci sera particulièrement pratique si vous avez besoin de définir des
   relations hasOne multiples. La valeur par défaut de cette clé est le nom du
   model actuel (avec des underscores) suffixé avec '\_id'. Dans l'exemple
   ci-dessus la valeur par défaut aurait été 'user\_id'.
+- **bindingKey**: le nom de la colonne dans la table courante, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau des conditions compatibles avec find() ou un
   fragment de code SQL tel que ``['Addresses.primary' => true]``.
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut
-  à INNER. Vous voulez peut-être utiliser LEFT si votre association hasOne est
-  optionnelle.
+  à LEFT. Vous voulez peut-être utiliser INNER si votre association hasOne est
+  requis.
 - **dependent**: Quand la clé dependent est définie à ``true``, et qu'une
   entity est supprimée, les enregistrements du model associé sont aussi
   supprimés. Dans ce cas, nous le définissons à ``true`` pour que la
   suppression d'un User supprime aussi son Address associée.
 - **cascadeCallbacks**: Quand ceci et **dependent** sont à ``true``, les
   suppressions en cascade vont charger et supprimer les entities pour que les
-  callbacks soient lancés correctement. Quand il est à ``false``. ``deleteAll()``
-  est utilisée pour retirer les données associées et que aucun callback ne soit
-  lancé.
+  callbacks soient lancés correctement. Quand il est à ``false``.
+  ``deleteAll()`` est utilisée pour retirer les données associées et que aucun
+  callback ne soit lancé.
 - **propertyName**: Le nom de la propriété qui doit être rempli avec les données
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans
@@ -285,10 +286,13 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
 - **className**: le nom de classe du model associé au model courant. Si vous
   définissez une relation 'Profile belongsTo User', la clé className
   devra être 'Users'.
-- **foreignKey**: le nom de la clé étrangère trouvée dans le model courant.
+- **foreignKey**: le nom de la clé étrangère trouvée dans la table courante.
   C'est particulièrement pratique si vous avez besoin de définir plusieurs
   relations belongsTo au même model. La valeur par défaut pour cette clé est le
   nom au singulier de l'autre model avec des underscores, suffixé avec ``_id``.
+- **bindingKey**: le nom de la colonne dans l'autre table, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles find() ou de chaînes SQL
   comme ``['Users.active' => true]``
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut LEFT
@@ -372,9 +376,12 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   (l'User a plusieurs Commentaires), la valeur associée à la clef 'className'
   devra être 'Comment'.
 - **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
-  model. Ceci sera particulièrement pratique si vous avez besoin de définir
+  table. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
-  du model actuel (avec des underscores) suffixé avec '\_id'
+  du model actuel (avec des underscores) suffixé avec '\_id'.
+- **bindingKey**: le nom de la colonne dans la table courante, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles avec find() ou des
   chaînes SQL comme ``['Comments.visible' => true]``.
 - **sort**  un tableau compatible avec les clauses order de find() ou les
@@ -391,7 +398,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   celui-ci est le nom au pluriel et avec des underscores de l'association donc
   ``comments`` dans notre exemple.
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
+  'select'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
@@ -424,6 +431,11 @@ n'importe quel article donné est souvent mis en cache pour rendre la générati
 des lists d'article plus efficace. Vous pouvez utiliser
 :doc:`CounterCacheBehavior </orm/behaviors/counter-cache>` pour
 mettre en cache les compteurs des enregistrements associés.
+
+Assurez-vous que vos tables de base de données ne contiennent pas de colonnes
+du même nom que les attributs d'association. Si par exemple vous avez un champs
+counter en collision avec une propriété d'association, vous devez soit renommer
+l'association ou le nom de la colonne.
 
 Associations BelongsToMany
 ==========================
@@ -507,6 +519,9 @@ sont:
   des conditions sur une table associée, vous devriez utiliser un model
   'through' et lui définir les associations belongsTo nécessaires.
 - **sort** un tableau de clauses order compatible avec find().
+- **dependent**: Quand la clé dependent est définie à ``false`` et qu'une entity
+  est supprimée, les enregistrements de la table de jointure ne seront pas
+  supprimés.
 - **through** Vous permet de fournir soit le nom de l'instance de la Table
   que vous voulez utiliser, soit l'instance elle-même. Cela rend possible la
   personnalisation des clés de la table de jointure, et vous permet de
@@ -522,7 +537,7 @@ sont:
   c'est le nom au pluriel, avec des underscores de l'association, donc ``tags``
   dans notre exemple.
 - **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'SELECT'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
+  'select'. L'autre valeur valide est 'subquery', qui remplace la liste ``IN``
   avec une sous-requête équivalente.
 - **saveStrategy**: Soit 'append' ou bien 'replace'. Indique le mode à utiliser
   pour sauvegarder les entities associées. Le premier va seulement créer des
@@ -559,6 +574,8 @@ suit sera générée::
       tags.id = article_tags.tag_id
       AND article_id IN (SELECT id FROM articles)
     );
+
+.. _using-the-through-option:
 
 Utiliser l'Option 'through'
 ---------------------------
@@ -632,17 +649,16 @@ L'option ``finder`` vous permet d'utiliser un
 :ref:`finder personnalisé <custom-find-methods>` pour charger les données
 associées. Ceci permet de mieux encapsuler vos requêtes et de garder votre code
 plus DRY. Il y a quelques limitations lors de l'utilisation de finders pour
-charger les enregistrements associés pour les associations qui sont chargées en
+charger les données dans les associations qui sont chargées en
 utilisant les jointures (belongsTo/hasOne). Les seuls aspects de la requête
 qui seront appliqués à la requête racine sont les suivants:
 
-- WHERE conditions
-- Jointures supplémentaires
-- Associations avec Contain
-- Fonctions Map/Reduce
-- Result formatters
+- WHERE conditions.
+- Additional joins.
+- Contained associations.
 
 Les autres aspects de la requête, comme les colonnes sélectionnées, l'order,
 le group by, having et les autres sous-instructions, ne seront pas appliqués à
 la requête racine. Les associations qui *ne* sont *pas* chargées avec les
-jointures (hasMany/belongsToMany), n'ont pas les restrictions ci-dessus.
+jointures (hasMany/belongsToMany), n'ont pas les restrictions ci-dessus et
+peuvent aussi utiliser les formateurs de résultats ou les fonctions map/reduce.

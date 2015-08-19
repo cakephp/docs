@@ -15,11 +15,12 @@ comme:
 Comme tous les components, il est configuré au travers de plusieurs paramètres
 configurables.
 Toutes ces propriétés peuvent être définies directement ou au travers de
-"méthodes setter" du même nom dans la partie ``beforeFilter`` de votre controller.
+"méthodes setter" du même nom dans la partie ``beforeFilter()`` de votre
+controller.
 
-En utilisant le Component Security vous obtenez automatiquement une protection contre la falsification de formulaire.
-Des jetons de champs cachés seront automatiquement insérés dans les
-formulaires et vérifiés par le component Security.
+En utilisant le Component Security vous obtenez automatiquement une protection
+contre la falsification de formulaire. Des jetons de champs cachés seront
+automatiquement insérés dans les formulaires et vérifiés par le component Security.
 
 Si vous utilisez la fonctionnalité de protection des formulaires
 par le component Security et que d'autres components traitent des données
@@ -55,7 +56,7 @@ Vous pouvez configurer ce comportement, en définissant l'option de configuratio
 dans le controller.
 
 En configurant la fonction de rappel, vous pouvez personnaliser le processus
- de mise en trou noir (blackhole callback)::
+de mise en trou noir (blackhole callback)::
 
     public function beforeFilter(Event $event)
     {
@@ -201,11 +202,11 @@ Cette exemple forcera toutes les actions qui proviennent de la
             return $this->redirect('https://' . env('SERVER_NAME') . $this->request->here);
         }
     }
-    
+
 Cet exemple forcera toutes les actions qui proviennent de la "route"
 admin à requérir des requêtes sécurisés SSL. Quand la requête est placée
 dans un trou noir, elle appellera le callback ``forceSSL()`` qui redirigera
-les requêtes non sécurisées vers les requêtes sécurisées automatiquement.
+automatiquement les requêtes non sécurisées vers les requêtes sécurisées.
 
 .. _security-csrf:
 
@@ -216,7 +217,7 @@ CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour
 les applications Web. Cela permet à un attaquant de capturer et de rejouer
 une requête, et parfois de soumettre des demandes de données en utilisant
 les balises images ou des ressources sur d'autres domaines.
-Pour activer la protection CSRF, utilisez 
+Pour activer la protection CSRF, utilisez
 :doc:`/controllers/components/csrf`.
 
 Désactiver le Component Security pour des Actions Spécifiques
@@ -225,7 +226,7 @@ Désactiver le Component Security pour des Actions Spécifiques
 Il peut arriver que vous souhaitiez désactiver toutes les vérifications de
 sécurité pour une action (ex. ajax request).
 Vous pouvez "délocker" ces actions en les listant dans
-``$this->Security->unlockedActions`` dans votre ``beforeFilter``. La propriété
+``$this->Security->unlockedActions`` dans votre ``beforeFilter()``. La propriété
 ``unlockedActions`` **ne** va **pas** avoir d'effets sur les autres
 fonctionnalités de ``SecurityComponent``::
 
@@ -253,5 +254,5 @@ Cet exemple désactiverait toutes les vérifications de sécurité pour une acti
 edit.
 
 .. meta::
-    :title lang=fr: Security (Securité)
+    :title lang=fr: Security (Sécurité)
     :keywords lang=fr: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class

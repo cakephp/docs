@@ -10,6 +10,20 @@ CakePHPにはビューの作成に役立ついくつかの特徴的なヘルパ�
 整形式のマークアップ(フォーム含む)、テキスト、時間、数値の整形に役立ったり、Ajax機能をスピードアップさせたりします。
 CakePHPのヘルパーに関するさらなる情報は :ref:`core-helpers` を見て下さい。
 
+.. toctree::
+    :maxdepth: 1
+
+    /views/helpers/flash
+    /views/helpers/form
+    /views/helpers/html
+    /views/helpers/number
+    /views/helpers/paginator
+    /views/helpers/rss
+    /views/helpers/session
+    /views/helpers/text
+    /views/helpers/time
+    /views/helpers/url
+
 .. _configuring-helpers:
 
 ヘルパーの設定と使用
@@ -210,7 +224,7 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 すべてのヘルパーのための機能を作成する
 ======================================
 
-すべてのヘルパーは特別なクラスAppHelperを(モデルがAppModelを継承し、コントローラがAppControllerを継承するのと同じように）継承します。
+すべてのヘルパーは特別なクラスAppHelperを(モデルがAppModelを継承し、コントローラがAppControllerを継承するの同じように）継承します。
 すべてのヘルパーで利用できる機能を作成するためには、 ``/app/View/Helper/AppHelper.php`` を作成して下さい。::
 
     App::uses('Helper', 'View');
@@ -279,30 +293,7 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 
     レイアウトの描画が完了した時に呼び出されます。レイアウトファイル名を引数として受け取ります。
 
-コアヘルパー
-============
-
-:doc:`/core-libraries/helpers/cache`
-    ビューコンテンツをキャッシュするためのコアによって使われます。
-:doc:`/core-libraries/helpers/form`
-    HTMLフォームと自動生成されるフォームエレメントを作成します。また、バリデーション問題をハンドリングします。
-:doc:`/core-libraries/helpers/html`
-    整形式のマークアップを作るための便利なメソッドです。画像、リンク、ヘッダタグなど。
-:doc:`/core-libraries/helpers/js`
-    様々なJavascriptライブラリと互換のあるJavascriptを作成するために使われます。
-:doc:`/core-libraries/helpers/number`
-    数値と通貨を整形します。
-:doc:`/core-libraries/helpers/paginator`
-    モデルデータのページ切り替えと並び替え。
-:doc:`/core-libraries/helpers/rss`
-    RSSフィードとXMLデータを出力するための便利なメソッドです。
-:doc:`/core-libraries/helpers/session`
-    ビューでセッションの値を読み込んでアクセスします。
-:doc:`/core-libraries/helpers/text`
-    スマートリンク、ハイライト、ワードスマートトランケート。
-:doc:`/core-libraries/helpers/time`
-    近傍検出(来年かどうか？)や、素晴らしい文字列整形(Today, 10:30 am)とタイムゾーンの変換をします。
 
 .. meta::
-    :title lang=en: Helpers
-    :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=ja: Helpers
+    :keywords lang=ja: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins

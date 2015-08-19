@@ -1,6 +1,10 @@
 Bienvenido
 ##########
 
+.. warning::
+    This version of the documentation is for CakePHP 3.0. Go `here for the
+    CakePHP 2.x documentation <http://book.cakephp.org/2.0/es>`_.
+
 El manual de CakePHP es un proyecto de documentación abierto, editable y
 mantenido por la comunidad. Toma en cuenta el botón de "Improve this doc"
 en la parte superior derecha; te llevará al editor online de Github de la
@@ -22,17 +26,17 @@ a la documentación actual.
 Empezando con CakePHP
 =====================
 
-Aprender un nuevo framework puede ser intimidante y divertido al mismo tiempo. 
+Aprender un nuevo framework puede ser intimidante y divertido al mismo tiempo.
 Para ayudarte hemos creado un recetario lleno de ejemplos y recetas que te
-van a ayudar a realizar tareas básicas. Si eres nuevo, es recomendado que comiences 
-con el :doc:`/tutorials-and-examples/blog/blog` porque te dará un tour inicial 
+van a ayudar a realizar tareas básicas. Si eres nuevo, es recomendado que comiences
+con el :doc:`/tutorials-and-examples/blog/blog` porque te dará un tour inicial
 de CakePHP, cómo funciona y lo que puede hacer por ti.
 
 Después de terminar el Tutorial del Blog, puedes conocer mejor los elementos claves
 que conforman una aplicación de CakePHP:
 
-* El :doc:`CakePHP request cycle </getting-started/a-typical-cakephp-request>`
-* Las :doc:`Convenciones </getting-started/cakephp-conventions>` utilizadas por CakePHP.
+* The :ref:`CakePHP request cycle <request-cycle>`.
+* Las :doc:`Convenciones </intro/conventions>` utilizadas por CakePHP.
 * Los :doc:`Controladores </controllers>` que manejan los http requests, coordinan los modelos
   y generan las respuestas que la aplicación necesita.
 * Las :doc:`Vistas </views>` son la capa de presentación de tu aplicación. Proveen
@@ -45,7 +49,7 @@ Getting Help
 ============
 
 Si te atascas, hay muchos sitios en los que :doc:`puedes obtener ayuda
-</cakephp-overview/where-to-get-help>`.
+</intro/where-to-get-help>`.
 
 
 .. meta::

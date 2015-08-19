@@ -43,9 +43,9 @@ Désactiver les Callbacks
 ========================
 
 Dans les versions précédentes, les objets collection fournissaient une méthode
-``disable`` pour désactiver les objets à partir des callbacks reçus. Pour le
+``disable()`` pour désactiver les objets à partir des callbacks reçus. Pour le
 faire maintenant, vous devez utiliser les fonctionnalités dans le système
-d'evènements. Par exemple, vous pouvez désactiver les callbacks du component
+d'évènements. Par exemple, vous pouvez désactiver les callbacks du component
 de la façon suivante::
 
     // Retire Auth des callbacks.
@@ -53,7 +53,6 @@ de la façon suivante::
 
     // Re-active Auth pour les callbacks.
     $this->eventManager()->on($this->Auth);
-
 
 .. meta::
     :title lang=fr: Objet Registry

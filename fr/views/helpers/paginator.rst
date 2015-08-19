@@ -40,9 +40,9 @@ votre code DRY::
     ];
 
 Cela va charger le fichier qui se trouve dans
-``config/paginator-templates.php`` et lire les templates à partir de la
-variable ``$config`` à l'intérieur de ce fichier. Vous pouvez aussi charger
-les templates à partir d'un plugin en utilisant :term:`syntaxe de plugin`::
+``config/paginator-templates.php``. Regardez l'exemple ci-dessous pour voir à
+quoi doit ressembler le fichier. Vous pouvez aussi charger les templates à
+partir d'un plugin en utilisant la :term:`syntaxe de plugin`::
 
     // Dans un controller.
     public $helpers = [
@@ -123,8 +123,10 @@ Les clés acceptées pour ``$options``:
 
 * ``escape`` Si vous voulez que le contenu soit encodé en HTML, ``true`` par
   défaut.
-* ``model`` Le model à utiliser, par défaut à :php:meth:`PaginatorHelper::defaultModel()`.
-* ``direction`` La direction par défaut à utiliser quand ce lien n'est pas actif.
+* ``model`` Le model à utiliser, par défaut à
+  :php:meth:`PaginatorHelper::defaultModel()`.
+* ``direction`` La direction par défaut à utiliser quand ce lien n'est pas
+  actif.
 * ``lock`` Verrouiller la direction. Va seulement utiliser la direction par
   défaut, par défaut à ``false``.
 
@@ -210,8 +212,8 @@ Les options supportées sont:
   courante, par défaut à 8.
 * ``first`` Si vous voulez que les premiers liens soit générés, définit à un
   entier pour définir le nombre de 'premier' liens à générer. Par défaut à
-  ``false``. Si une chaîne est définie un lien pour la première page sera générée
-  avec la valeur comme titre::
+  ``false``. Si une chaîne est définie un lien pour la première page sera
+  générée avec la valeur comme titre::
 
       echo $this->Paginator->numbers(['first' => 'First page']);
 
@@ -221,7 +223,7 @@ Les options supportées sont:
   :php:meth:`~PaginatorHelper::last()` à utiliser séparément si vous le voulez.
 
 Bien que cette méthode permette beaucoup de personnalisation pour ses sorties,
-elle peut aussi être appelée sans aucun paramètre. ::
+elle peut aussi être appelée sans aucun paramètre::
 
     echo $this->Paginator->numbers();
 
@@ -251,7 +253,8 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     * ``escape`` Si vous voulez que le contenu soit encodé en HTML,
       par défaut à ``true``.
-    * ``model`` Le model à utiliser, par défaut :php:meth:`PaginatorHelper::defaultModel()`.
+    * ``model`` Le model à utiliser, par défaut
+      :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTitle`` Le texte à utiliser quand le lien est désactivé. Par
       défaut, la valeur du paramètre ``$title``.
 
@@ -282,7 +285,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 .. php:method:: next($title = 'Next >>', $options = [])
 
     Cette méthode est identique a :php:meth:`~PagintorHelper::prev()` avec
-    quelques exceptions. il créé le lien pointant vers la page suivante au
+    quelques exceptions. il crée le lien pointant vers la page suivante au
     lieu de la précédente. elle utilise aussi ``next`` comme valeur d'attribut
     rel au lieu de ``prev``.
 
@@ -294,7 +297,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
         echo $this->Paginator->first('< first');
 
-    Ceci créé un simple lien pour la première page. Ne retournera rien si vous
+    Ceci crée un simple lien pour la première page. Ne retournera rien si vous
     êtes sur la première page. Vous pouvez aussi utiliser un nombre entier pour
     indiquer combien de premier liens paginés vous voulez générer::
 
@@ -339,8 +342,8 @@ Vérifier l'Etat de la Pagination
 
 .. php:method:: hasPage(string $model = null, integer $page = 1)
 
-    Retourne ``true`` si l'ensemble de résultats fourni a le numéro de page fourni
-    par ``$page``.
+    Retourne ``true`` si l'ensemble de résultats fourni a le numéro de page
+    fourni par ``$page``.
 
 Création d'un compteur de page
 ==============================
@@ -445,16 +448,16 @@ intégrées dans vos en-têtes de colonne de table:
 
 .. code-block:: php
 
-    <!-- src/View/Posts/index.ctp -->
+    <!-- src/Template/Posts/index.ctp -->
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
         </tr>
-           <?php foreach ($data as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
-            <td><?= $recipe['Recipe']['id'] ?> </td>
-            <td><?= h($recipe['Recipe']['title']) ?> </td>
+            <td><?= $recipe->id ?> </td>
+            <td><?= h($recipe->title) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -471,12 +474,11 @@ Il est aussi possible de trier une colonne basée sur des associations:
         <tr>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
             <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
-
         </tr>
-           <?php foreach ($data as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
-            <td><?= h($recipe['Recipe']['title']) ?> </td>
-            <td><?= h($recipe['Author']['name']) ?> </td>
+            <td><?= h($recipe->title) ?> </td>
+            <td><?= h($recipe->name) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -508,8 +510,8 @@ Générer des Url de Pagination
 
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
-Retourne par défault une chaine de l'URL de pagination complète pour utiliser
-dans contexte non-standard(ex. JavaScript). ::
+Retourne par défaut une chaine de l'URL de pagination complète pour utiliser
+dans contexte non-standard(ex. JavaScript)::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
 

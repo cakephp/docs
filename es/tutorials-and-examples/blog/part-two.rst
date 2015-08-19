@@ -1,6 +1,16 @@
 Tutorial de desarrollo del Blog - Añadiendo una capa
 ####################################################
 
+.. note::
+    The documentation is currently partially supported in es language for this
+    page.
+
+    Por favor, siéntase libre de enviarnos un pull request en
+    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
+
+    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
+    para obtener información sobre el tema de esta página.
+
 Crear un modelo Artículo (``Article``)
 ======================================
 
@@ -182,8 +192,6 @@ contrario, la crearemos ahora en nuestro controlador de artículos::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
-
     class ArticlesController extends AppController
     {
 
@@ -194,9 +202,6 @@ contrario, la crearemos ahora en nuestro controlador de artículos::
 
         public function view($id = null)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -245,8 +250,6 @@ ArticlesController::
 
     namespace App\Controller;
 
-    use Cake\Error\NotFoundException;
-
     class ArticlesController extends AppController
     {
         public $components = ['Flash'];
@@ -258,10 +261,6 @@ ArticlesController::
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid article'));
-            }
-
             $article = $this->Articles->get($id);
             $this->set(compact('article'));
         }
@@ -367,7 +366,7 @@ campos ocultos si la CSRF/prevención de manipulación de formularios ha sido
 habilitada.
 
 Volvamos atrás un minuto y actualicemos nuestra vista
-``src/Template/Articles/index.ctp`` para añadir un enlace de "Añadir Artículo".
+**src/Template/Articles/index.ctp** para añadir un enlace de "Añadir Artículo".
 Justo antes del tag <table> añade la siguiente línea::
 
     <?= $this->Html->link(
@@ -423,10 +422,6 @@ ser la acción ``edit()`` del controlador ``ArticlesController``::
 
     public function edit($id = null)
     {
-        if (!$id) {
-            throw new NotFoundException(__('Artículo no válido'));
-        }
-
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->data);
@@ -643,7 +638,7 @@ real. Empieza tu nuevo proyecto y lee el resto del :doc:`Cookbook </index>` así
 como la `API <http://api.cakephp.org>`_.
 
 Si necesitas ayuda, hay muchos modos de encontrar la ayuda que buscas - por
-favor, míralo en la página :doc:`/cakephp-overview/where-to-get-help`.
+favor, míralo en la página :doc:`/intro/where-to-get-help`.
 ¡Bienvenido a CakePHP!
 
 Lectura sugerida para continuar desde aquí
@@ -654,5 +649,5 @@ aprender después:
 
 1. :ref:`view-layouts`: Personaliza la plantilla *layout* de tu aplicación
 2. :ref:`view-elements` Incluír vistas y reutilizar trozos de código
-3. :doc:`/console-and-shells/code-generation-with-bake` Generación básica de CRUDs
+3. :doc:`/bake/usage`: Generación básica de CRUDs
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticación y permisos

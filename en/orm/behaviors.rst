@@ -41,7 +41,7 @@ This behavior will allow us to populate a slug field with the results of
 Before we create our behavior we should understand the conventions for
 behaviors:
 
-- Behavior files are located in ``src/Model/Behavior``, or
+- Behavior files are located in **src/Model/Behavior**, or
   ``MyPlugin\Model\Behavior``.
 - Behavior classes should be in the ``App\Model\Behavior`` namespace, or
   ``MyPlugin\Model\Behavior`` namespace.
@@ -49,7 +49,7 @@ behaviors:
 - Behaviors extend ``Cake\ORM\Behavior``.
 
 To create our sluggable behavior. Put the following into
-``src/Model/Behavior/SluggableBehavior.php``::
+**src/Model/Behavior/SluggableBehavior.php**::
 
     namespace App\Model\Behavior;
 
@@ -117,9 +117,9 @@ public methods as mixin methods. In these cases you can use the
 ``implementedMethods`` configuration key to rename or exclude mixin methods. For
 example if we wanted to prefix our slug() method we could do the following::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ];
 
@@ -134,7 +134,7 @@ rename/remove mixin methods when adding a behavior to a table. For example::
     // In a table's initialize() method.
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ]);
 
@@ -220,7 +220,7 @@ these cases you can use the ``implementedFinders`` configuration key to rename
 or exclude finder methods. For example if we wanted to rename our ``find(slug)``
 method we could do the following::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]
@@ -241,6 +241,13 @@ rename/remove finder methods when adding a behavior to a table. For example::
         ]
     ]);
 
+Removing Loaded Behaviors
+=========================
+
+To remove a behavior from your table you can call the ``removeBehavior()`` method::
+
+    // Remove the loaded behavior
+    $this->removeBehavior('Sluggable');
 
 Accessing Loaded Behaviors
 ==========================

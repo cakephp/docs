@@ -2,7 +2,7 @@ Conteúdo
 ########
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
     intro
     quickstart
@@ -17,16 +17,19 @@ Conteúdo
     controllers
     views
     orm
-    development/errors
 
+    controllers/components/authentication
+    bake
     core-libraries/caching
     console-and-shells
     development/debugging
     deployment
     core-libraries/email
+    development/errors
     core-libraries/events
     core-libraries/internationalization-and-localization
     core-libraries/logging
+    core-libraries/form
     controllers/components/pagination
     plugins
     development/rest
@@ -43,13 +46,14 @@ Conteúdo
     core-libraries/inflector
     core-libraries/number
     core-libraries/registry-objects
-    core-libraries/string
+    core-libraries/text
     core-libraries/time
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    debug-kit
+    migrations
     appendices
-
 
 Índices e Tabelas
 =================
