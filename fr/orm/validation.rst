@@ -320,9 +320,9 @@ ajouter des règles au vérificateur pour une classe de Table donnée::
 
         // Ajoute une règle pour la création.
         $rules->addCreate(function ($entity, $options) {
-
-        }, 'ruleName');
             // Retourne un booléen pour indiquer si succès/échec
+        }, 'ruleName');
+
         // Ajoute une règle pour la mise à jour.
         $rules->addUpdate(function ($entity, $options) {
             // Retourne un booléen pour indiquer si succès/échec
