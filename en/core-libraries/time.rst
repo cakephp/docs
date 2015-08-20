@@ -118,6 +118,15 @@ It is also allowed to directly assign those properties to modify the date::
 Formatting
 ==========
 
+.. php:method:: setToJSONFormat($format)
+
+This method sets the default format used when converting an object to json::
+
+    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');
+
+.. note::
+    This method must be called statically.
+
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
 A very common thing to do with ``Time`` instances is to print out formatted
