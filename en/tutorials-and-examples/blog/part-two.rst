@@ -40,11 +40,20 @@ be used in the ArticlesController, and will be tied to a database table called
     cannot find a corresponding file in **src/Model/Table**. This also means
     that if you accidentally name your file wrong (i.e. articlestable.php or
     ArticleTable.php), CakePHP will not recognize any of your settings and will
-    use the a generated model instead.
+    use the generated model instead.
 
 For more on models, such as callbacks, and validation, check out the :doc:`/orm`
 chapter of the Manual.
 
+.. note::
+
+    If you completed Part 1 of the Blog Tutorial and created the Articles table
+    in your Blog database you can leverage CakePHP's bake console and it's code
+    generation capabilities to create the ArticlesTable model.
+    
+    bin/cake bake model Articles
+
+For more on bake and it's code generation features please visit :doc:`/bake/usage`.
 
 Create the Articles Controller
 ==============================
@@ -101,6 +110,16 @@ The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
 sets the view variable called 'articles' equal to the return value of
 the ``find('all')`` method of the Articles table object.
+
+.. note::
+
+    If you completed Part 1 of the Blog Tutorial and created the Articles table
+    in your Blog database you can leverage CakePHP's bake console and it's code
+    generation capabilities to create the ArticlesController class.
+    
+    bin/cake bake controller Articles
+
+For more on bake and it's code generation features please visit :doc:`/bake/usage`.
 
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
