@@ -1110,6 +1110,7 @@ queries::
         ->values($select)
         ->execute();
 
+.. _query-builder-updating-data:
 Updating Data
 =============
 
