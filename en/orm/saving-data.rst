@@ -1007,4 +1007,4 @@ A bulk-update will be considered successful if 1 or more rows are updated.
             ->execute();
     }
     
-Also see: :ref:'query-builder-updating-data\'.
+Also see: :ref:'query-builder-updating-data'.
