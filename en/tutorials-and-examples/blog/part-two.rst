@@ -48,12 +48,12 @@ chapter of the Manual.
 .. note::
 
     If you completed Part 1 of the Blog Tutorial and created the Articles table
-    in your Blog database you can leverage CakePHP's bake console and it's code
+    in your Blog database you can leverage CakePHP's bake console and its code
     generation capabilities to create the ArticlesTable model.
     
     bin/cake bake model Articles
 
-For more on bake and it's code generation features please visit :doc:`/bake/usage`.
+For more on bake and its code generation features please visit :doc:`/bake/usage`.
 
 Create the Articles Controller
 ==============================
@@ -114,12 +114,12 @@ the ``find('all')`` method of the Articles table object.
 .. note::
 
     If you completed Part 1 of the Blog Tutorial and created the Articles table
-    in your Blog database you can leverage CakePHP's bake console and it's code
+    in your Blog database you can leverage CakePHP's bake console and its code
     generation capabilities to create the ArticlesController class.
     
     bin/cake bake controller Articles
 
-For more on bake and it's code generation features please visit :doc:`/bake/usage`.
+For more on bake and its code generation features please visit :doc:`/bake/usage`.
 
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
