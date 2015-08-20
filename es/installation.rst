@@ -14,7 +14,6 @@ Requisitos
   no requerido.
 - PHP 5.4.16 o mayor.
 - extensión mbstring.
-- extensión mcrypt.
 - extensión intl.
 
 Técnicamente una base de datos no es necesaria, pero imaginamos que la
