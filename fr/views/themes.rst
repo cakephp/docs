@@ -7,13 +7,16 @@ sont simplement des plugins qui se focalisent sur la livraison de fichiers
 de template. En plus des fichiers de template, ils peuvent fournir des helpers
 et des cells si votre theme le nécessite. Quand vous utilisez des cells et des
 helpers à partir de votre theme, vous devrez continuer à utiliser la
-:term:`syntaxe de plugin`
+:term:`syntaxe de plugin`.
 
 Pour utiliser les themes, définissez le nom du theme dans votre controller ou
-votre callback ``beforeRender()``::
+dans votre callback ``beforeRender()``::
 
-    class ExempleController extends AppController
+    class ExamplesController extends AppController
     {
+        // Pour CakePHP avant 3.1
+        public $theme = 'Modern';
+
         public function beforeRender(\Cake\Event\Event $event)
         {
             $this->viewBuilder()->theme('Modern');
