@@ -14,7 +14,6 @@ Gereksinimler
   olması tercih edilir ama zorunlu değildir.
 - PHP 5.4.16 veya daha yüksek.
 - mbstring eklentisi
-- mcrypt eklentisi
 - intl eklentisi
 
 Bir veritabanı olması zorunlu olmasa dahi, birçok uygulamanın veritabanı kullandığını
