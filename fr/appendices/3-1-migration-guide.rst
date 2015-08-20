@@ -80,6 +80,14 @@ AuthComponent
   dépréciées. A la place, utilisez la nouvelle option ``finder`` pour configurer
   une méthode de finder personnalisée pour modifier le requête utilisée pour
   chercher l'utilisateur.
+- La logique responsable de définir la variable de session ``Auth.redirect``,
+  qui est utilisée pour récupérer l'URL de redirection après la connexion
+  (login) a été modifiée. Elle est maintenant définie uniquement lorsque l'on
+  essaye d'accéder directement à une URL protégée sans authentification. Ainsi
+  ``Auth::redirectUrl()`` renvoie l'URL protégée après le login. Dans la
+  plupart des cas, lorsqu'un utilisateur accède directement à la page de
+  connexion, ``Auth::redirectUrl()`` renvoie la valeur définie par la
+  configuration de ``loginRedirect``.
 
 FlashComponent
 --------------
