@@ -18,7 +18,7 @@ Conditions requises
 
 .. note::
 
-    Avec XAMPP et WAMP, l'extension fonctionne par défaut.
+    Avec XAMPP et WAMP, l'extension mbstring fonctionne par défaut.
 
     Dans XAMPP, l'extension intl est incluse mais vous devez décommenter
     ``extension=php_intl.dll`` dans **php.ini** et redémarrer le serveur dans
