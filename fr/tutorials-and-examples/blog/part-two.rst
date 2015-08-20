@@ -46,6 +46,17 @@ de la base de données appelée ``articles``.
 Pour plus d'informations sur les models, comme les callbacks et la validation,
 consultez le chapitre :doc:`/orm` du manuel.
 
+.. note::
+
+    Si vous avez terminé la :doc:`Partie 1 du Tutoriel du blog
+    </tutorials-and-examples/blog/blog>` et créé la table ``articles`` dans
+    notre base de données Blog, vous pouvez utiliser la console bake de CakePHP
+    et la possibilité de générer du code pour créer le model ArticlesTable::
+
+        bin/cake bake model Articles
+
+Pour plus d'informations sur bake et les fonctionnalités de génération de code,
+vous pouvez allez voir :doc:`/bake/usage`.
 
 Créer le controller Articles
 ============================
@@ -105,6 +116,18 @@ La seule instruction que cette action utilise est ``set()``, pour transmettre
 les données du controller à la vue (que nous créerons à la prochaine étape).
 La ligne définit la variable de vue appelée 'articles' qui est égale à la valeur
 de retour de la méthode ``find('all')`` de l'objet table Articles.
+
+.. note::
+
+    Si vous avez terminé la :doc:`Partie 1 du Tutoriel du blog
+    </tutorials-and-examples/blog/blog>` et créé la table ``articles`` dans
+    notre base de données Blog, vous pouvez utiliser la console bake de CakePHP
+    et la possibilité de générer du code pour créer le model ArticlesTable::
+
+        bin/cake bake model Articles
+
+Pour plus d'informations sur bake et les fonctionnalités de génération de code,
+vous pouvez allez voir :doc:`/bake/usage`.
 
 Pour en apprendre plus sur les controllers de CakePHP, consultez le chapitre
 :doc:`/controllers`.
