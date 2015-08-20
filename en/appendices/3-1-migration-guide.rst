@@ -76,12 +76,12 @@ AuthComponent
 - The options ``scope`` and ``contain`` for authenticator classes have been
   deprecated. Instead, use the new ``finder`` option to configure a custom finder
   method and modify the query used to find a user there.
-- The logic for setting ``Auth.redirect`` session variable which is used to get
-  the URL to be redirected to after login has been changed. It is now set only when
+- The logic for setting ``Auth.redirect`` session variable, which is used to get
+  the URL to be redirected to after login, has been changed. It is now set only when
   trying to access a protected URL without authentication. So ``Auth::redirectUrl()``
-  returns the protected URL after login. Under normal circumstances when user
-  directly accesses login page, ``Auth::redirectUrl()`` returns the value set for
-  ``loginRedirect`` config.
+  returns the protected URL after login. Under normal circumstances, when a user
+  directly accesses the login page, ``Auth::redirectUrl()`` returns the value set
+  for ``loginRedirect`` config.
 
 FlashComponent
 --------------
