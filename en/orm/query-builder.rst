@@ -1111,6 +1111,7 @@ queries::
         ->execute();
 
 .. _query-builder-updating-data:
+
 Updating Data
 =============
 

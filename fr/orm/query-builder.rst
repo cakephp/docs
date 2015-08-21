@@ -1170,6 +1170,8 @@ entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
         ->values($select)
         ->execute();
 
+.. _query-builder-updating-data:
+
 Mettre à Jour les Données
 =========================
 
