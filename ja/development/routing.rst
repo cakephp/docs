@@ -722,7 +722,7 @@ connectNamed() は色々なオプションをサポートしています。:
 
 URLを文字列によって以下のように生成します。::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/posts/view/' . $id);
 
 ``/posts`` がすべての残りのURLを通して本当に
 'articles' の代わりに呼ばれるかあとで決められます。
