@@ -1,5 +1,5 @@
 Métodos e Propriedades Adicionais (Additional Methods and Properties)
-#################################
+#####################################################################
 
 Enquanto as funções do modelo (model) do CakePHP's levam você onde você precisa, não esqueça que as classes modelos são apenas: classes que permitem a você escrever seus próprios métodos ou definir suas próprias propriedades.
 
