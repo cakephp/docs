@@ -512,8 +512,8 @@ instructions. For example, we could add the following to our ``UserMailer``::
     public function implementedEvents()
     {
         return [
-            'Model.afterSave' => 'onRegistration',
-        ;
+            'Model.afterSave' => 'onRegistration'
+        ];
     }
 
     public function onRegistration(Event $event, Entity $entity, ArrayObject $options)
