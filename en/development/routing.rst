@@ -807,7 +807,7 @@ later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/posts/view/' . $id);
 
 And then later decide that ``/posts`` should really be called
 'articles' instead, you would have to go through your entire
