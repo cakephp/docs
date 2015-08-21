@@ -378,12 +378,16 @@ Formatting
        Returns a timezone object from a string or the user's timezone object. If the function is called
        without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
 
-.. php:method:: listTimezones($filter = null, $country = null, $group = true)
+.. php:method:: listTimezones($filter = null, $country = null, $options = array())
 
     :rtype: array
 
     .. versionadded:: 2.2
        Returns a list of timezone identifiers.
+
+    .. versionchanged:: 2.8
+       ``$options`` now accepts array with ``group``, ``abbr``, ``before``, and ``after`` keys.
+       Specify ``abbr => true`` will append the timezone abbreviation in the ``<option>`` text.
 
 Testing Time
 ============
