@@ -203,3 +203,6 @@ Validation
 - ``Validation::geoCoordinate()`` was added.
 - ``Validation::latitude()`` was added.
 - ``Validation::longitude()`` was added.
+- ``Validation::isInteger()`` was added.
+- ``Validation::ascii()`` was added.
+- ``Validation::utf8()`` was added.
