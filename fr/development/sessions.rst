@@ -115,7 +115,7 @@ configuration de session 'php'. Les configurations intégrées sont:
 * ``php`` - Sauvegarde les sessions avec les configurations standard dans
   votre fichier php.ini.
 * ``cake`` - Sauvegarde les sessions en tant que fichiers à l'intérieur de
-  ``app/tmp/sessions``. Ceci est une bonne option lorsque les hôtes ne
+  ``tmp/sessions``. Ceci est une bonne option lorsque les hôtes ne
   vous autorisent pas à écrire en dehors de votre propre répertoire home.
 * ``database`` - Utilise les sessions de base de données intégrées.
   Regardez ci-dessous pour plus d'informations.

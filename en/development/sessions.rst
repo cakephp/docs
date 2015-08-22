@@ -105,7 +105,7 @@ The above overrides the timeout and cookie name for the 'php' session
 configuration. The built-in configurations are:
 
 * ``php`` - Saves sessions with the standard settings in your php.ini file.
-* ``cake`` - Saves sessions as files inside ``app/tmp/sessions``. This is a
+* ``cake`` - Saves sessions as files inside ``tmp/sessions``. This is a
   good option when on hosts that don't allow you to write outside your own home
   dir.
 * ``database`` - Use the built-in database sessions. See below for more
