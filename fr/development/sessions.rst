@@ -1,20 +1,20 @@
 Sessions
 ########
 
-CakePHP fournit des fonctionnalités en plus et un ensemble d'outils qui
-s'ajoutent à l'extension native ``session`` de PHP. Les Sessions vous permettent
-d'identifier les utilisateurs uniques pendant leurs requêtes et de stocker les
-données persistantes pour les utilisateurs spécifiques. Au contraire des
-Cookies, les données de session ne sont pas disponibles du côté client.
+CakePHP fournit des fonctionnalités et un ensemble d'outils qui s'ajoutent à
+l'extension native ``session`` de PHP. Les Sessions vous permettent d'identifier
+les utilisateurs uniques pendant leurs requêtes et de stocker les données
+persistantes pour les utilisateurs spécifiques. Au contraire des Cookies, les
+données de session ne sont pas disponibles du côté client.
 L'utilisation de ``$_SESSION`` est généralement à éviter dans CakePHP, et à
 la place l'utilisation des classes de Session est préférable.
 
 .. _session-configuration:
 
-Session Configuration
-=====================
+Configuration de Session
+========================
 
-La configuration de Session est stockée dans ``Configure`` dans la clé de top
+La configuration de Session est stockée dans ``Configure`` dans la clé de haut
 niveau ``Session``, et un certain nombre d'options sont disponibles:
 
 * ``Session.timeout`` - Le nombre de *minutes* avant que le gestionnaire de
@@ -100,9 +100,8 @@ Session::
         'defaults' => 'php'
     ]);
 
-Le code ci-dessus va utiliser la configuration de session intégrée dans
-'php'. Vous pourriez augmenter tout ou partie de celle-ci en faisant
-ce qui suit::
+Le code ci-dessus va utiliser la configuration de session intégrée dans 'php'.
+Vous pourriez augmenter tout ou partie de celle-ci en faisant ce qui suit::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -117,7 +116,7 @@ configuration de session 'php'. Les configurations intégrées sont:
   votre fichier php.ini.
 * ``cake`` - Sauvegarde les sessions en tant que fichiers à l'intérieur de
   ``app/tmp/sessions``. Ceci est une bonne option lorsque les hôtes ne
-  vous autorisent pas à écrire en dehors de votre propre dir home.
+  vous autorisent pas à écrire en dehors de votre propre répertoire home.
 * ``database`` - Utilise les sessions de base de données intégrées.
   Regardez ci-dessous pour plus d'informations.
 * ``cache`` - Utilise les sessions de cache intégrées. Regardez
@@ -402,7 +401,7 @@ Détruire la Session
 
 .. php:method:: destroy()
 
-Détruire la session est utile quand les utilisateurs de déconnectent. Pour
+Détruire la session est utile quand les utilisateurs se déconnectent. Pour
 détruire une session, utilisez la méthode ``destroy()``::
 
     $session->destroy();

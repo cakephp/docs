@@ -515,7 +515,7 @@ pas dans la liste::
 
     // Dans un controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($article->comments))->extract('id');
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -1075,5 +1075,5 @@ lignes sont mises à jour.
             ->where(['published' => 'false'])
             ->execute();
     }
-    
+
 Reportez-vous sur :ref:`query-builder-updating-data`.
