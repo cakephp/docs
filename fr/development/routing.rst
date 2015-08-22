@@ -808,7 +808,7 @@ pouvez configurer les routes plus tard et les URLs générés vont automatiqueme
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/posts/view/' . $id);
 
 Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être
 appelé 'articles' à la place, vous devrez aller dans toute votre application

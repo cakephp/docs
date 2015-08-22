@@ -702,7 +702,7 @@ connectNamed() 方法支持一些选项：
 
 如果象下面这样用字符串创建网址::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/posts/view/' . $id);
 
 而后来决定 ``/posts`` 实际上应该叫做 'articles'，你就不得不查看整个应用程序的代
 码，替换网址。然而，如果象下面这样定义链接::
