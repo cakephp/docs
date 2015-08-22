@@ -82,7 +82,8 @@ also just load an array of options::
 
 .. versionchanged:: 3.1
 
-The ``default`` email profile is automatically set when ``Email`` instance is created.
+The ``default`` email profile is automatically set when an ``Email`` instance is
+created.
 
 Configuring Transports
 ----------------------

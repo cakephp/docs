@@ -179,8 +179,8 @@ Email
 - ``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
   namespace. Their former namespaces are still usable as class aliases have
   been set for them.
-- The ``default`` email profile is now automatically set when ``Email`` instance
-  is created. This behavior is similar to what is done in 2.x.
+- The ``default`` email profile is now automatically set when an ``Email``
+  instance is created. This behavior is similar to what is done in 2.x.
 
 Mailer
 ------
