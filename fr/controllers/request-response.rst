@@ -177,8 +177,8 @@ compatible avec les utilisations anciennes::
 
 Les deux méthodes appelées vont retourner la même valeur. Pour l'instant,
 les méthodes sont toujours disponibles dans
-:php:class:`RequestHandlerComponent`, mais sont depréciées et pourraient être
-retirées avant la version finale. Vous pouvez aussi facilement étendre les
+:php:class:`RequestHandlerComponent`, mais sont depréciées et seront
+retirées dans 3.0.0. Vous pouvez aussi facilement étendre les
 détecteurs de la requête qui sont disponibles, en utilisant
 :php:meth:`CakeRequest::addDetector()` pour créer de nouveaux types de
 détecteurs. Il y a quatre différents types de détecteurs que vous pouvez créer:
