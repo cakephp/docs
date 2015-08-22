@@ -11,7 +11,7 @@ utilisateurs peuvent télécharger sont aussi de la responsabilité de la
 couche View.
 
 CakePHP a quelques classes de vue déjà construites pour gérer les scénarios
-d'affichage les plus communs:
+de rendu les plus communs:
 
 - Pour créer des services web XML ou JSON, vous pouvez utiliser
   :doc:`views/json-and-xml-views`.
@@ -694,7 +694,7 @@ Mettre en Cache des Sections de votre View
 .. php:method:: cache(callable $block, array $options = [])
 
 Parfois, générer une section de l'affichage de votre view peut être coûteux
-à cause de l'affichage des :doc:`/views/cells` ou du fait d'opérations de helper
+à cause du rendu des :doc:`/views/cells` ou du fait d'opérations de helper
 coûteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
 un moyen de mettre en cache des sections de view::
 
@@ -713,7 +713,7 @@ Créer vos propres Classes de View
 
 Vous avez peut-être besoin de créer vos propres classes de vue pour activer des
 nouveaux types de données de vue, ou ajouter de la logique supplémentaire
-pour l'affichage de vue personnalisée. Comme la plupart des components de
+pour le rendu de vue personnalisée. Comme la plupart des components de
 CakePHP, les classes de vue ont quelques conventions:
 
 * Les fichiers de classe de View doivent être mis dans **src/View**. Par
