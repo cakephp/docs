@@ -264,7 +264,7 @@ Assignement de Masse
 Alors que la définition des propriétés des entities en masse est simple et
 pratique, elle peut créer des problèmes importants de sécurité.
 Assigner en masse les données d'utilisateur à partir de la requête dans une
-entity permet à l'utilisateur de modifier n'importe qu'elles (voir toutes) les
+entity permet à l'utilisateur de modifier n'importe quelles (voir toutes) les
 colonnes. Quand vous utilisez les classes entity anonymes, CakePHP ne protège
 pas contre l'assignement en masse. Vous pouvez facilement vous protéger de
 l'assignement de masse en utilisant :doc:`la commande bake </bake>` pour

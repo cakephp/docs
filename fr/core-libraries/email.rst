@@ -82,6 +82,10 @@ vous pouvez aussi juste charger un tableau d'options::
     //or dans le constructeur::
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
+.. versionchanged:: 3.1
+    Le profil d'email ``default`` est automatiquement défini quand une instance
+    ``Email`` est créée.
+
 Configurer les Transports
 -------------------------
 
@@ -375,17 +379,17 @@ d'abord le fichier **src/Network/Email/ExampleTransport.php** (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 
+    namespace App\Network\Email;
+
     use Cake\Mailer\AbstractTransport;
     use Cake\Mailer\Email;
 
     class ExampleTransport extends AbstractTransport
     {
-
         public function send(Email $email)
         {
-            // Magie à l'intérieur!
+            // Magie à l'intérieur !
         }
-
     }
 
 Vous devez intégrer la méthode ``send(Email $email)`` avec votre
@@ -548,8 +552,8 @@ Vous pourriez par exemple ajouter ce qui suit à votre ``UserMailer``::
     public function implementedEvents()
     {
         return [
-            'Model.afterSave' => 'onRegistration',
-        ;
+            'Model.afterSave' => 'onRegistration'
+        ];
     }
 
     public function onRegistration(Event $event, Entity $entity, ArrayObject $options)

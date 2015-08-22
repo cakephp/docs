@@ -64,10 +64,10 @@ Préfixe de Routage et Messages Flash
 .. versionadded:: 3.0.1
 
 Si vous avez configuré un préfixe de Routage, vous pouvez maintenant stocker vos
-Elements de messages Flash dans **src/Template/{Prefix}/Element/Flash**. De
-cette manière, vous pouvez avoir des gabarits de messages spécifiques en
+elements de messages Flash dans **src/Template/{Prefix}/Element/Flash**. De
+cette manière, vous pouvez avoir des layouts de messages spécifiques en
 fonction des différentes parties de votre application (par exemple, avoir des
-gabarits différents pour votre front-end et votre administration).
+layouts différents pour votre front-end et votre administration).
 
 Les Messages Flash et les Themes
 ================================
