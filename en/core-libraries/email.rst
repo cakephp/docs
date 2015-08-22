@@ -81,9 +81,8 @@ also just load an array of options::
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
 .. versionchanged:: 3.1
-
-The ``default`` email profile is automatically set when an ``Email`` instance is
-created.
+    The ``default`` email profile is automatically set when an ``Email``
+    instance is created.
 
 Configuring Transports
 ----------------------
