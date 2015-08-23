@@ -127,7 +127,8 @@ CakePHP konsoluna, web sunucusunu belirttiğiniz adres veya portta çalışrmas�
 
 Bu komut uygulamanızı ``http://192.168.13.37:5673/`` adresinde çalıştıracaktır.
 
-İşte bu kadar! CakePHP uygulamanız web sunucusu kurulumuna ihityaç duymadan çalışıyor.
+That's it! Your CakePHP application is up and running without having to
+configure a web server.
 
 .. warning::
 
@@ -148,8 +149,9 @@ kurmanıza ve uygulamanın http://www.example.com adresinden erişebilmenize yar
 edecektir. Bu kurulumun apache sunucularda ``DocumentRoot`` dizinine yazma
 hakkı gerektirdiğine dikkat edin.
 
-Uygulamanızı kurduktan sonra, /cake_install gibi bir dizininiz olduğunu
-düşünürsek, canlı sisteminiz dosya sisteminizde şu şekilde görünmelidir::
+After installing your application using one of the methods above into the
+directory of your choosing - we'll assume you chose /cake_install - your
+production setup will look like this on the file system::
 
     /cake_install/
         bin/
@@ -169,13 +171,13 @@ düşünürsek, canlı sisteminiz dosya sisteminizde şu şekilde görünmelidir
         phpunit.xml.dist
         README.md
 
-Apache kullanan geliştiriciler alan için ``DocumentRoot`` yönergesini
-ayarlamalılar::
+Developers using Apache should set the ``DocumentRoot`` directive
+for the domain to::
 
     DocumentRoot /cake_install/webroot
 
-Eğer web sunucunuz doğru ayarlandıysa, cakePHP uygulamanız
-http://www.example.com adresinde erişilebilir olacaktır.
+If your web server is configured correctly, you should now find
+your CakePHP application accessible at http://www.example.com.
 
 
 Fire It Up
