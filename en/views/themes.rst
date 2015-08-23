@@ -7,30 +7,31 @@ providing template files. In addition to template files, they can also provide
 helpers and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
-To use themes, specify the theme name in your controller::
+To use themes, set the theme name in your controller's action or ``beforeRender()`` callback::
 
     class ExamplesController extends AppController
     {
+        // For CakePHP before 3.1
         public $theme = 'Modern';
+
+        public function beforeRender(\Cake\Event\Event $event)
+        {
+            $this->viewBuilder()->theme('Modern');
+        }
     }
 
-You can also set or change the theme name within an action or within the
-``beforeFilter`` or ``beforeRender`` callback functions::
-
-    $this->theme = 'AnotherExample';
-
 Theme template files need to be within a plugin with the same name. For example,
-the above theme would be found in ``plugins/AnotherExample/src/Template``.
+the above theme would be found in **plugins/AnotherExample/src/Template**.
 It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
-that, the folder structure within the ``plugins/AnotherExample/src/Template`` folder is
-exactly the same as ``src/Template/``.
+that, the folder structure within the **plugins/AnotherExample/src/Template** folder is
+exactly the same as **src/Template/**.
 
 For example, the view file for an edit action of a Posts controller would reside
-at ``plugins/Modern/src/Template/Posts/edit.ctp``. Layout files would reside in
-``plugins/Modern/src/Template/Layout/``.
+at **plugins/Modern/src/Template/Posts/edit.ctp**. Layout files would reside in
+**plugins/Modern/src/Template/Layout/**.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the ``src/Template/`` folder. This way, you can create master template files
+file in the **src/Template/** folder. This way, you can create master template files
 and simply override them on a case-by-case basis within your theme folder.
 
 Theme Assets

@@ -29,7 +29,7 @@ your application:
   finding where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
   exceptions. If you choose a custom class you should place the file for that
-  class in ``src/Error``. This class needs to implement a ``render()`` method.
+  class in **src/Error**. This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When ``true``, exceptions + their stack traces will be
   logged to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
@@ -103,7 +103,7 @@ standard error page, you can override it like::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError
+    class AppError extends BaseErrorHandler
     {
         // Other methods.
 
@@ -143,6 +143,14 @@ exceptions for HTTP methods
 .. php:exception:: ForbiddenException
 
     Used for doing a 403 Forbidden error.
+
+.. versionadded:: 3.1
+
+    InvalidCsrfTokenException has been added.
+
+.. php:exception:: InvalidCsrfTokenException
+
+    Used for doing a 403 error caused by an invalid CSRF token.
 
 .. php:exception:: NotFoundException
 
@@ -317,7 +325,7 @@ to indicate failure states. For example::
 
     public function view($id)
     {
-        $post = $this->Post->read(null, $id);
+        $post = $this->Post->findById($id)->first();
         if (!$post) {
             throw new NotFoundException();
         }

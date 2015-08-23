@@ -22,8 +22,8 @@ is ``create()``. This method outputs an opening form tag.
 All parameters are optional. If ``create()`` is called with no parameters
 supplied, it assumes you are building a form that submits to the current
 controller, via the current URL. The default method for form submission is POST.
-If you were to call ``create()`` inside the view for UsersController::add(), you would see
-something like the following output in the rendered view:
+If you were to call ``create()`` inside the view for UsersController::add(), you
+would see something like the following output in the rendered view:
 
 .. code-block:: html
 
@@ -189,6 +189,22 @@ rules that only apply when an account is being registered::
         'context' => ['validator' => 'register']
     ]);
 
+The above will use the ``register`` validator for the ``$user`` and all related
+associations. If you are creating a form for associated entities, you can define
+validation rules for each association by using an array::
+
+    echo $this->Form->create($user, [
+        'context' => [
+            'validator' => [
+                'Users' => 'register',
+                'Comments' => 'default'
+            ]
+        ]
+    ]);
+
+The above would use ``register`` for the user, and ``default`` for the user's
+comments.
+
 Creating context classes
 ------------------------
 
@@ -313,6 +329,15 @@ Afterwards, add the following to your view template::
 
     echo $this->Form->input('group_id', ['options' => $groups]);
 
+To make a select box for a belongsToMany Groups association you can add the
+following to your UsersController::
+
+    $this->set('groups', $this->Users->Groups->find('list'));
+
+Afterwards, add the following to your view template::
+
+    echo $this->Form->input('groups._ids', ['options' => $groups]);
+
 If your model name consists of two or more words, e.g.,
 "UserGroup", when passing the data using set() you should name your
 data in a pluralised and camelCased format as follows::
@@ -428,9 +453,7 @@ HTML attributes. The following will cover the options specific to
     </div>
 
 * ``$options['error']`` Using this key allows you to override the default model
-  error messages and can be used, for example, to set i18n messages. It has a
-  number of suboptions which control the wrapping element, wrapping element
-  class name, and whether HTML in the error message will be escaped.
+  error messages and can be used, for example, to set i18n messages.
 
   To disable error message output & field classes set the error key to ``false``::
 
@@ -492,20 +515,19 @@ common options shared by all input methods are as follows:
     Date and datetime fields' default values can be set by using the
     'selected' key.
 
-    Beware of using ``false`` to assign a default value. A ``false`` value is used to
-    disable/exclude options of an input field, so ``'default' => false`` would
-    not set any value at all. Instead use ``'default' => 0``.
+    Beware of using ``false`` to assign a default value. A ``false`` value is
+    used to disable/exclude options of an input field, so ``'default' => false``
+    would not set any value at all. Instead use ``'default' => 0``.
 
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
 
-
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------
 
 * ``$options['value']`` Used in combination with a select-type input (i.e.
-  For types select, date, time, datetime). Set 'selected' to the value of the
+  For types select, date, time, datetime). Set 'value' to the value of the
   item you wish to be selected by default when the input is rendered::
 
     echo $this->Form->time('close_time', [
@@ -516,6 +538,15 @@ Options for Select, Checkbox and Radio Inputs
 
     The value key for date and datetime inputs may also be a UNIX
     timestamp, or a DateTime object.
+
+  For select input where you set the ``multiple`` attribute to true,
+  you can use an array of the values you want to select by default::
+
+    echo $this->Form->select('rooms', [
+        'multiple' => true,
+        // options with values 1 and 3 will be selected as default
+        'default' => [1, 3]
+    ]);
 
 * ``$options['empty']`` If set to ``true``, forces the input to remain empty.
 
@@ -633,7 +664,7 @@ Datetime Options
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
-    echo $this->Form->input('Model.time', [
+    echo $this->Form->input('time', [
         'type' => 'time',
         'interval' => 15
     ]);
@@ -641,11 +672,12 @@ Datetime Options
   Would create 4 options in the minute select. One for each 15
   minutes.
 
-* ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
-  Defaults to null which rounds half up according to `interval`.
+* ``$options['round']`` Can be set to `up` or `down` to force rounding in either
+  direction. Defaults to null which rounds half up according to `interval`.
 
-* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead of text.
-  If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]`` then the given array will be used.
+* ``$options['monthNames']`` If ``false``, 2 digit numbers will be used instead
+  of text. If it is given an array like ``['01' => 'Jan', '02' => 'Feb', ...]``
+  then the given array will be used.
 
 Creating Input Elements
 =======================
@@ -803,7 +835,7 @@ Creating Radio Buttons
 
 Creates a set of radio button inputs.
 
-**Options**
+**Attributes**
 
 * ``value`` - Indicates the value when this radio button is checked.
 * ``label`` - boolean to indicate whether or not labels for widgets should be
@@ -816,6 +848,33 @@ Creates a set of radio button inputs.
 * ``empty`` - Set to ``true`` to create an input with the value '' as the first
   option. When ``true`` the radio label will be 'empty'. Set this option to
   a string to control the label value.
+
+Generally ``$options`` is a simple key => value pair. However, if you need to
+put custom attributes on your radio buttons you can use an expanded format::
+
+    echo $this->Form->radio(
+        'favorite_color',
+        [
+            ['value' => 'r', 'text' => 'Red', 'style' => 'color:red;'],
+            ['value' => 'u', 'text' => 'Blue', 'style' => 'color:blue;'],
+            ['value' => 'g', 'text' => 'Green', 'style' => 'color:green;'],
+        ]
+    );
+
+    // Will output
+    <input type="hidden" name="favorite_color" value="">
+    <label for="favorite-color-r">
+        <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
+        Red
+    </label>
+    <label for="favorite-color-u">
+        <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
+        Blue
+    </label>
+    <label for="favorite-color-g">
+        <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
+        Green
+    </label>
 
 Creating Select Pickers
 -----------------------
@@ -848,9 +907,9 @@ Defaults to ``true``::
     $options = ['M' => 'Male', 'F' => 'Female'];
     echo $this->Form->select('gender', $options, ['escape' => false]);
 
-* ``$attributes['options']`` This key allows you to manually specify options for a
-  select input, or for a radio group. Unless the 'type' is specified as 'radio',
-  the FormHelper will assume that the target output is a select input::
+* ``$attributes['options']`` This key allows you to manually specify options for
+  a select input, or for a radio group. Unless the 'type' is specified as
+  'radio', the FormHelper will assume that the target output is a select input::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
 
@@ -916,7 +975,7 @@ Defaults to ``true``::
 * ``$attributes['multiple']`` If 'multiple' has been set to ``true`` for an
   input that outputs a select, the select will allow multiple selections::
 
-    echo $this->Form->select('Model.field', $options, ['multiple' => true]);
+    echo $this->Form->select('field', $options, ['multiple' => true]);
 
   Alternatively set 'multiple' to 'checkbox' to output a list of
   related check boxes::
@@ -925,7 +984,7 @@ Defaults to ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox'
     ]);
 
@@ -955,7 +1014,7 @@ Defaults to ``true``::
         'Value 1' => 'Label 1',
         'Value 2' => 'Label 2'
     ];
-    echo $this->Form->select('Model.field', $options, [
+    echo $this->Form->select('field', $options, [
         'multiple' => 'checkbox',
         'disabled' => ['Value 1']
     ]);
@@ -1030,8 +1089,8 @@ way PHP handles data passed via file fields
     encoding-type, by setting the type option to 'file' in
     ``$this->Form->create()``.
 
-Creating Date and Time Inputs
------------------------------
+Creating DateTime Inputs
+------------------------
 
 .. php:method:: dateTime($fieldName, $options = [])
 
@@ -1045,9 +1104,11 @@ of options:
 * ``interval`` The interval for the minutes select. Defaults to 1
 * ``empty`` - If ``true``, the empty select option is shown. If a string,
   that string is displayed as the empty element.
-* ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either direction. Defaults to null.
-* ``default`` The default value to be used by the input. A value in ``$this->request->data``
-  matching the field name will override this value. If no default is provided ``time()`` will be used.
+* ``round`` - Set to ``up`` or ``down`` if you want to force rounding in either
+  direction. Defaults to null.
+* ``default`` The default value to be used by the input. A value in
+  ``$this->request->data`` matching the field name will override this value. If
+  no default is provided ``time()`` will be used.
 * ``timeFormat`` The time format to use, either 12 or 24.
 * ``second`` Set to ``true`` to enable seconds drop down.
 
@@ -1056,6 +1117,60 @@ can override the ``dateWidget`` template. By default the ``dateWidget`` template
 is::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+
+Creating Time Inputs
+--------------------
+
+.. php:method:: time($fieldName, $options = [])
+
+Creates two select elements populated with 24 hours and 60 minutes for ``hour``
+and ``minute``, respectively.
+Additionally, HTML attributes may be supplied in $options for each specific
+``type``. If ``$options['empty']`` is ``false``, the select will not include an
+empty option:
+
+* ``empty`` - If ``true``, the empty select option is shown. If a string,
+  that string is displayed as the empty element.
+* ``default`` | ``value`` The default value to be used by the input. A value in
+  ``$this->request->data`` matching the field name will override this value.
+  If no default is provided ``time()`` will be used.
+* ``timeFormat`` The time format to use, either 12 or 24. Defaults to 24.
+* ``second`` Set to ``true`` to enable seconds drop down.
+* ``interval`` The interval for the minutes select. Defaults to 1.
+
+For example, to create a time range with minutes selectable in 15 minute
+increments, and to apply classes to the select boxes, you could do the
+following::
+
+    echo $this->Form->time('released', [
+        'interval' => 15,
+        'hour' => [
+            'class' => 'foo-class',
+        ],
+        'minute' => [
+            'class' => 'bar-class',
+        ],
+    ]);
+
+Which would create the following two selects:
+
+.. code-block:: html
+
+    <select name="released[hour]" class="foo-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+        <option value="22">22</option>
+        <option value="23">23</option>
+    </select>
+    <select name="released[minute]" class="bar-class">
+        <option value="" selected="selected"></option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+    </select>
 
 Creating Year Inputs
 --------------------
@@ -1244,9 +1359,6 @@ Options:
 
 -  'escape' bool Whether or not to HTML escape the contents of the
    error.
--  'wrap' mixed Whether or not the error message should be wrapped
-   in a div. If a string, will be used as the HTML tag to use.
--  'class' string The class name for the error message
 
 .. TODO:: Add examples.
 
@@ -1386,8 +1498,9 @@ Creating Standalone Buttons and POST links
     POST.
 
     This method creates a ``<form>`` element. So do not use this method in some
-    opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` or
-    :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons inside opened forms.
+    opened form. Instead use :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
+    or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons
+    inside opened forms.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = [])
 
@@ -1414,7 +1527,7 @@ option when including the helper in your controller::
         'templates' => 'app_form',
     ]);
 
-This would load the tags in ``config/app_form.php``. This file should
+This would load the tags in **config/app_form.php**. This file should
 contain an array of templates indexed by name::
 
     // in config/app_form.php
@@ -1445,8 +1558,8 @@ A list of the default templates and the variables they can expect are:
 
 * ``button`` {{attrs}}, {{text}}
 * ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxFormGroup`` {{input}}, {{label}}, {{error}}
-* ``checkboxWrapper`` {{input}}, {{label}}
+* ``checkboxFormGroup`` {{label}}
+* ``checkboxWrapper`` {{label}}
 * ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
 * ``error`` {{content}}
 * ``errorList`` {{content}}
@@ -1461,6 +1574,8 @@ A list of the default templates and the variables they can expect are:
 * ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
 * ``inputSubmit`` {{type}}, {{attrs}}
 * ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
+* ``nestingLabel`` {{hidden}}, {{attrs}}, {{input}}, {{text}}
+* ``legend`` {{text}}
 * ``option`` {{value}}, {{attrs}}, {{text}}
 * ``optgroup`` {{label}}, {{attrs}}, {{content}}
 * ``radio`` {{name}}, {{value}}, {{attrs}}
@@ -1482,10 +1597,38 @@ example::
     ]);
 
     // Create a radio set with our custom wrapping div.
-    echo $this->Form->radio('User.email_notifications', [
-        'options' => ['y', 'n'],
-        'type' => 'radio'
+    echo $this->Form->radio('User.email_notifications', ['y', 'n']);
+
+Similar to input containers, the ``input()`` method will also attempt to use
+distinct templates for each form group. A form group is a combo of label and
+input. For example, when creating a radio input the ``radioFormGroup`` will be
+used if it is present. If that template is missing by default each set of label
+& input is rendered using the ``formGroup`` template. For example::
+
+    // Add custom radio form group
+    $this->Form->templates([
+        'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
+
+Adding Additional Template Variables to Templates
+-------------------------------------------------
+
+You can add additional template placeholders in custom templates, and populate
+those placeholders when generating inputs::
+
+    // Add a template with the help placeholder.
+    $this->Form->templates([
+        'inputContainer' => '<div class="input {{type}}{{required}}">
+            {{content}} <span class="help">{{help}}</span></div>'
+    ]);
+
+    // Generate an input and populate the help variable
+    echo $this->Form->input('password', [
+        'templateVars' => ['help' => 'At least 8 characters long.']
+    ]);
+
+.. versionadded:: 3.1
+    The templateVars option was added in 3.1.0
 
 Moving Checkboxes & Radios Outside of a Label
 ---------------------------------------------
@@ -1528,8 +1671,9 @@ You can customize the generated inputs by defining additional options in the
 When customizing, ``fields``, you can use the ``$options`` parameter to
 control the generated legend/fieldset.
 
-- ``fieldset`` Set to ``false`` to disable the fieldset. If a string is supplied
-  it will be used as the class name for the fieldset element.
+- ``fieldset`` Set to ``false`` to disable the fieldset. You can also pass an
+  array of parameters to be applied as HTML attributes to the fieldset tag. If
+  you pass an empty array, the fieldset will be displayed without attributes.
 - ``legend`` Set to ``false`` to disable the legend for the generated input set.
   Or supply a string to customize the legend text.
 
@@ -1591,6 +1735,13 @@ create the following inputs::
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
 
+    // Multiple select element for belongsToMany
+    echo $this->Form->input('tags._ids', [
+        'type' => 'select',
+        'multiple' => true,
+        'options' => $tagList,
+    ]);
+
     // Inputs for the joint table (articles_tags)
     echo $this->Form->input('tags.0._joinData.starred');
     echo $this->Form->input('tags.1._joinData.starred');
@@ -1626,11 +1777,11 @@ Building a Widget Class
 
 Widget classes have a very simple required interface. They must implement the
 :php:class:`Cake\\View\\Widget\\WidgetInterface`. This interface requires
-the ``render(array $data)`` and ``secureFields(array $data)`` methods to be implemented.
-The ``render`` method expects an array of data to build the widget and is expected to return a string
-of HTML for the widget.
-The ``secureFields`` method expects an array of data as well and is expected to return an
-array containing the list of fields to secure for this widget.
+the ``render(array $data)`` and ``secureFields(array $data)`` methods to be
+implemented. The ``render()`` method expects an array of data to build the
+widget and is expected to return a string of HTML for the widget.
+The ``secureFields()`` method expects an array of data as well and is expected
+to return an array containing the list of fields to secure for this widget.
 If CakePHP is constructing your widget you can expect to
 get a ``Cake\View\StringTemplate`` instance as the first argument, followed by
 any dependencies you define. If we wanted to build an Autocomplete widget you
@@ -1638,6 +1789,7 @@ could do the following::
 
     namespace App\View\Widget;
 
+    use Cake\View\Form\ContextInterface;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
@@ -1650,7 +1802,7 @@ could do the following::
             $this->_templates = $templates;
         }
 
-        public function render(array $data)
+        public function render(array $data, ContextInterface $context)
         {
             $data += [
                 'name' => '',
@@ -1706,7 +1858,7 @@ widgets using the ``addWidget()`` method would look like::
     // Using a classname.
     $this->Form->addWidget(
         'autocomplete',
-        ['Autocomplete', 'text' 'label']
+        ['Autocomplete', 'text', 'label']
     );
 
     // Using an instance - requires you to resolve dependencies.

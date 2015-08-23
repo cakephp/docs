@@ -73,7 +73,7 @@ Então, vamos criar a ação de login::
         }
     }
 
-E em ``src/Template/Users/login.ctp`` adicione o seguinte::
+E em **src/Template/Users/login.ctp** adicione o seguinte::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -226,14 +226,15 @@ alguns problemas:
 #. A página de listagem mostra os bookmarks de outros users.
 
 Vamos enfrentar o formulário de adição em primeiro lugar. Para começar
-remova o ``input('user_id')`` a partir de ``src/Template/Bookmarks/add.ctp``.
+remova o ``input('user_id')`` a partir de **src/Template/Bookmarks/add.ctp**.
 Com isso removido, nós também vamos atualizar o método add::
 
     public function add()
     {
-        $bookmark = $this->Bookmarks->newEntity($this->request->data);
-        $bookmark->user_id = $this->Auth->user('id');
+        $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
                 return $this->redirect(['action' => 'index']);
@@ -301,7 +302,7 @@ Adicionando um campo computado
 
 Porque nós queremos uma maneira simples de acessar as tags formatados
 para uma entidade, podemos adicionar um campo virtual/computado para a
-entidade. Em ``src/Model/Entity/Bookmark.php`` adicione o seguinte::
+entidade. Em **src/Model/Entity/Bookmark.php** adicione o seguinte::
 
     use Cake\Collection\Collection;
 
@@ -324,7 +325,7 @@ Isso vai nos deixar acessar a propriedade computada ``$bookmark->tag_string``.
 Vamos usar essa propriedade em inputs mais tarde. Lembre-se de adicionar a
 propriedade ``tag_string`` a lista ``_accessible`` em sua entidade.
 
-Em ``src/Model/Entity/Bookmark.php`` adicione o ``tag_string`` ao
+Em **src/Model/Entity/Bookmark.php** adicione o ``tag_string`` ao
 ``_accessible`` desta forma::
 
     protected $_accessible = [
@@ -353,7 +354,7 @@ os dados também. Por marcar o ``tag_string`` como acessível, o ORM irá
 copiar os dados do pedido em nossa entidade. Podemos usar um método
 ``beforeSave`` para analisar a cadeia tag e encontrar/construir as
 entidades relacionadas. Adicione o seguinte em
-``src/Model/Table/BookmarksTable.php``::
+**src/Model/Table/BookmarksTable.php**::
 
     public function beforeSave($event, $entity, $options)
     {

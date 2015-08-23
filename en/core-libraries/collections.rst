@@ -11,7 +11,7 @@ The collection classes provide a set of tools to manipulate arrays or
 ``Traversable`` objects. If you have ever used underscore.js,
 you have an idea of what you can expect from the collection classes.
 
-Collection instances are immutable, modifying a collection will instead generate
+Collection instances are immutable; modifying a collection will instead generate
 a new collection. This makes working with collection objects more predictable as
 operations are side-effect free.
 
@@ -40,34 +40,40 @@ application as well.
 List of Methods
 ===============
 
-* :php:meth:`each`
-* :php:meth:`map`
-* :php:meth:`extract`
-* :php:meth:`combine`
-* :php:meth:`stopWhen`
-* :php:meth:`unfold`
-* :php:meth:`filter`
-* :php:meth:`reject`
-* :php:meth:`every`
-* :php:meth:`some`
-* :php:meth:`match`
-* :php:meth:`reduce`
-* :php:meth:`min`
-* :php:meth:`max`
-* :php:meth:`groupBy`
-* :php:meth:`countBy`
-* :php:meth:`indexBy`
-* :php:meth:`sortBy`
-* :php:meth:`nest`
-* :php:meth:`listNested`
-* :php:meth:`contains`
-* :php:meth:`shuffle`
-* :php:meth:`sample`
-* :php:meth:`take`
 * :php:meth:`append`
-* :php:meth:`insert`
 * :php:meth:`buffered`
+* :php:meth:`combine`
 * :php:meth:`compile`
+* :php:meth:`contains`
+* :php:meth:`countBy`
+* :php:meth:`each`
+* :php:meth:`every`
+* :php:meth:`extract`
+* :php:meth:`filter`
+* :php:meth:`first`
+* :php:meth:`groupBy`
+* :php:meth:`indexBy`
+* :php:meth:`insert`
+* :php:meth:`isEmpty`
+* :php:meth:`last`
+* :php:meth:`listNested`
+* :php:meth:`map`
+* :php:meth:`match`
+* :php:meth:`max`
+* :php:meth:`min`
+* :php:meth:`nest`
+* :php:meth:`reduce`
+* :php:meth:`reject`
+* :php:meth:`sample`
+* :php:meth:`shuffle`
+* :php:meth:`skip`
+* :php:meth:`some`
+* :php:meth:`sortBy`
+* :php:meth:`stopWhen`
+* :php:meth:`take`
+* :php:meth:`through`
+* :php:meth:`unfold`
+* :php:meth:`zip`
 
 Iterating
 =========
@@ -99,7 +105,7 @@ callback being applied to each object in the original collection::
         return $value * 2;
     });
 
-    // $result contains [2, 4, 6];
+    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
 
 The ``map()`` method will create a new iterator which lazily creates
@@ -136,6 +142,32 @@ you can use a callback function to return it::
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
+Often, the properties you need to extract a common key present in multiple
+arrays or objects that are deeply nested inside other structures. For those
+cases you can use the ``{*}`` matcher in the path key::
+
+    $data = [
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-1'],
+                ['number' => 'number-2'],
+                ['number' => 'number-3'],
+            ]
+        ],
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-4'],
+                ['number' => 'number-5'],
+            ]
+        ]
+    ];
+
+    $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
+    $numbers->toList();
+    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
 Collections allow you to create a new collection made from keys and values in
@@ -166,6 +198,22 @@ You can also optionally use a ``groupPath`` to group results based on a path::
         'b' => [2 => 'bar']
     ];
 
+Finally you can use *closures* to build keys/values/groups paths dynamically,
+for example when working with entities and dates (converted to ``Cake/Time``
+instances by the ORM) you may want to group results by date::
+
+    $combined = (new Collection($entities))->combine(
+        'id',
+        function ($entity) { return $entity; },
+        function ($entity) { return $entity->date->toDateString(); }
+    );
+
+    // Result will look like this when converted to array
+    [
+        'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+        'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+    ]
+
 .. php:method:: stopWhen(callable $c)
 
 You can stop the iteration at any point using the ``stopWhen()`` method. Calling
@@ -188,14 +236,14 @@ passed callable returns false for one of the elements::
 Sometimes the internal items of a collection will contain arrays or iterators
 with more items. If you wish to flatten the internal structure to iterate once
 over all elements you can use the ``unfold()`` method. It will create a new
-collection that will yield the every single element nested in the collection::
+collection that will yield every single element nested in the collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
-    $allElements = $collection->unfold();
+    $new = $collection->unfold();
 
     // $result contains [1, 2, 3, 4, 5];
-    $result = $new->toArray(false);
+    $result = $new->toList();
 
 When passing a callable to ``unfold()`` you can control what elements will be
 unfolded from each item in the original collection. This is useful for returning
@@ -208,7 +256,20 @@ data from paginated services::
         return MyService::fetchPage($page)->toArray();
     });
 
-    $allPagesItems = $items->toArray(false);
+    $allPagesItems = $items->toList();
+
+If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
+to return as many elements for each item in the collection as you may need::
+
+    $oddNumbers = [1, 3, 5, 7];
+    $collection = new Collection($oddNumbers);
+    $new = $collection->unfold(function ($oddNumber) {
+        yield $oddNumber;
+        yield $oddNumber + 1;
+    });
+
+    // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
+    $result = $new->toList();
 
 Filtering
 =========
@@ -297,7 +358,7 @@ collection::
 
 In the above example, ``$totalPrice`` will be the sum of all single prices
 contained in the collection. Note the second argument for the ``reduce()``
-function, it takes the initial value for the reduce operation you are
+function takes the initial value for the reduce operation you are
 performing::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
@@ -313,13 +374,13 @@ not just the smallest value found::
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
-    echo $yougest->name;
+    echo $youngest->name;
 
 You are also able to express the property to compare by providing a path or a
 callback function::
 
     $collection = new Collection($people);
-    $personYougestChild = $collection->min(function ($person) {
+    $personYoungestChild = $collection->min(function ($person) {
         return $person->child->age;
     });
 
@@ -341,7 +402,7 @@ element from the collection having the highest property value::
 
 .. php:method:: sumOf(string|callable $callback)
 
-Finally, the ``sumOf`` method will return the sum of a property of all
+Finally, the ``sumOf()`` method will return the sum of a property of all
 elements::
 
     $collection = new Collection($people);
@@ -427,6 +488,53 @@ a callback::
     $filesByHash = $files->indexBy(function ($file) {
         return md5($file);
     });
+
+.. php:method:: zip($elements)
+
+The elements of different collections can be grouped together using the
+``zip()`` method. It will return a new collection containing an array grouping
+the elements from each collection that are placed at the same position::
+
+    $odds = new Collection([1, 3, 5]);
+    $pairs = new Collection([2, 4, 6]);
+    $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
+
+You can also zip multiple collections at once::
+
+    $years = new Collection([2013, 2014, 2015, 2016]);
+    $salaries = [1000, 1500, 2000, 2300];
+    $increments = [0, 500, 500, 300];
+
+    $rows = $years->zip($salaries, $increments)->toList();
+    // Returns:
+    [
+        [2013, 1000, 0],
+        [2014, 1500, 500],
+        [2015, 2000, 500],
+        [2016, 2300, 300]
+    ]
+
+As you can already see, the ``zip()`` method is very useful for transposing
+multidimensional arrays::
+
+    $data = [
+        2014 => ['jan' => 100, 'feb' => 200],
+        2015 => ['jan' => 300, 'feb' => 500],
+        2016 => ['jan' => 400, 'feb' => 600],
+    ]
+
+    // Getting jan and feb data together
+
+    $firstYear = new Collection(array_shift($data));
+    $firstYear->zip($data[0], $data[1])->toList();
+
+    // Or $firstYear->zip(...$data) in PHP >= 5.6
+
+    // Returns
+    [
+        [100, 300, 400],
+        [200, 500, 600]
+    ]
 
 Sorting
 =======
@@ -539,7 +647,7 @@ rendering menus or traversing elements up to certain level in the tree.
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
 The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
-a tree structure back into a linear structure. It takes two parameters, the
+a tree structure back into a linear structure. It takes two parameters; the
 first one is the traversing mode (asc, desc or leaves), and the second one is
 the name of the property containing the children for each element in the
 collection.
@@ -571,8 +679,44 @@ instruct it to only return the leaf elements in the tree::
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
+Once you have converted a tree into a nested list, you can use the ``printer()``
+method to configure how the list output should be formatted::
+
+    $nested->listNested()->printer('name', 'id', '--')->toArray();
+
+    // Returns
+    [
+        3 => 'Eagle',
+        4 => 'Seagull',
+        5 -> '--Clown Fish',
+    ]
+
+The ``printer()`` method also lets you use a callback to generate the keys and
+or values::
+
+    $nested->listNested()->printer(
+        function ($el) {
+            return $el->name;
+        },
+        function ($el) {
+            return $el->id;
+        }
+    );
+
 Other Methods
 =============
+
+.. php:method:: isEmpty()
+
+Allows you to see if a collection contains any elements::
+
+    $collection = new Collection([]);
+    // Returns true
+    $collection->isEmpty();
+
+    $collection = new Collection([1]);
+    // Returns false
+    $collection->isEmpty();
 
 .. php:method:: contains($value)
 
@@ -594,7 +738,7 @@ position, use the ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
-    // This could return ['b' => 2, 'c' => 3, 'a' => 1]
+    // This could return [2, 3, 1]
     $collection->shuffle()->toArray();
 
 Withdrawing Elements
@@ -630,6 +774,32 @@ the first argument, starting from the position passed in the second argument::
 
 Positions are zero-based, therefore the first position number is ``0``.
 
+.. php:method:: skip(int $positions)
+
+While the second argument of ``take()`` can help you skip some elements before
+getting them from the collection, you can also use ``skip()`` for the same
+purpose as a way to take the rest of the elements after a certain position::
+
+    $collection = new Collection([1, 2, 3, 4]);
+    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
+
+.. php:method:: first()
+
+One of the most common uses of ``take()`` is getting the first element in the
+collection. A shortcut method for achieving the same goal is using the
+``first()`` method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->first(); // Returns 5
+
+.. php:method:: last()
+
+Similarly, you can get the last element of a collection using the ``last()``
+method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->last(); // Returns 2
+
 Expanding Collections
 ---------------------
 
@@ -655,7 +825,7 @@ collection containing the values from both sources::
     This can present a problem when converting a collection to an array using
     ``toArray()``. If you do not want values from one collection to override
     others in the previous one based on their key, make sure that you call
-    ``toArray(false)`` in order to drop the keys and preserve all values.
+    ``toList()`` in order to drop the keys and preserve all values.
 
 Modifiying Elements
 -------------------
@@ -720,6 +890,94 @@ first one, then the target property will be filled with ``null`` values::
 
 The ``insert()`` method can operate array elements or objects implementing the
 ``ArrayAccess`` interface.
+
+Making Collection Methods Reusable
+----------------------------------
+
+Using closures for collection methods is great when the work to be done is small
+and focused, but it can get messy very quickly. This becomes more obvious when
+a lot of different methods need to be called or when the length of the closure
+methods is more than just a few lines.
+
+There are also cases when the logic used for the collection methods can be
+reused in multiple parts of your application. It is recommended that you
+consider extracting complex collection logic to separate classes. For example,
+imagine a lengthy closure like this one::
+
+        $collection
+                ->map(function ($row, $key) {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                });
+
+This can be refactored by creating another class::
+
+        class TotalOrderCalculator
+        {
+
+                public function __invoke($row, $key)
+                {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                }
+        }
+
+        // Use the logic in your map() call
+        $collection->map(new TotalOrderCalculator)
+
+
+.. php:method:: through(callable $c)
+
+Sometimes a chain of collection method calls can become reusable in other parts
+of your application, but only if they are called in that specific order. In
+those cases you can use ``through()`` in combination with a class implementing
+``__invoke`` to distribute your handy data processing calls::
+
+        $collection
+                ->map(new ShippingCostCalculator)
+                ->map(new TotalOrderCalculator)
+                ->map(new GiftCardPriceReducer)
+                ->buffered()
+               ...
+
+The above method calls can be extracted into a new class so they don't need to
+be repeated every time::
+
+        class FinalCheckOutRowProcessor
+        {
+
+                public function __invoke($collection)
+                {
+                        return $collection
+                                ->map(new ShippingCostCalculator)
+                                ->map(new TotalOrderCalculator)
+                                ->map(new GiftCardPriceReducer)
+                                ->buffered()
+                               ...
+                }
+        }
+
+
+        // Now you can use the through() method to call all methods at once
+        $collection->through(new FinalCheckOutRowProcessor);
 
 Optimizing Collections
 ----------------------
@@ -816,4 +1074,4 @@ places at the same time. In order to clone a collection out of another use the
 
 .. meta::
     :title lang=en: Collections
-    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold
+    :keywords lang=en: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold, through

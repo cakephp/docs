@@ -105,7 +105,7 @@ The above overrides the timeout and cookie name for the 'php' session
 configuration. The built-in configurations are:
 
 * ``php`` - Saves sessions with the standard settings in your php.ini file.
-* ``cake`` - Saves sessions as files inside ``app/tmp/sessions``. This is a
+* ``cake`` - Saves sessions as files inside ``tmp/sessions``. This is a
   good option when on hosts that don't allow you to write outside your own home
   dir.
 * ``database`` - Use the built-in database sessions. See below for more
@@ -114,10 +114,10 @@ configuration. The built-in configurations are:
 
 The accepted values are:
 
-* - defaults: either 'php', 'database', 'cache' or 'cake' as explained above.
-* - handler: An array containing the handler configuration
-* - ini: A list of php.ini directives to set before the session starts.
-* - timeout: The time in minutes the session should stay active
+* defaults - either 'php', 'database', 'cache' or 'cake' as explained above.
+* handler - An array containing the handler configuration
+* ini - A list of php.ini directives to set before the session starts.
+* timeout - The time in minutes the session should stay active
 
 Session Handlers
 ----------------
@@ -142,47 +142,45 @@ The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
 expect to find your class in the ``Network\Session`` namespace. For example, if
 you had a ``AppSessionHandler`` class,  the file should be
-``src/Network/Session/AppSessionHandler.php``, and the class name should be
+**src/Network/Session/AppSessionHandler.php**, and the class name should be
 ``App\\Network\\Session\\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
 Database Sessions
 -----------------
 
-The changes in session configuration change how you define database sessions.
-Most of the time you will only need to set ``Session.handler.model`` in your
-configuration as well as choose the database defaults::
+If you you need to use a database to store your session data, configure as follows::
 
-    Configure::write('Session', [
-        'defaults' => 'database',
-        'handler' => [
-            'model' => 'CustomSessions'
-        ]
-    ]);
-
-The above will tell Session to use the built-in 'database' defaults, and
-specify that a model called ``CustomSessions`` will be the delegate for saving
-session information to the database.
-
-If you do not need a fully custom session handler, but still require
-database-backed session storage, you can simplify the above code to::
-
-    Configure::write('Session', [
+    'Session' => [
         'defaults' => 'database'
-    ]);
+    ]
 
 This configuration will require a database table to be added with
 at least these fields::
 
     CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
-      `data` text,
+      `data` VARBINARY, -- or BYTEA for PostgreSQL
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
 
 You can find a copy of the schema for the sessions table in the application
 skeleton.
+
+You can also use your own ``Table`` class to handle the saving of the sessions::
+
+    'Session' => [
+        'defaults' => 'database',
+        'handler' => [
+            'engine' => 'Database',
+            'model' => 'CustomSessions'
+        ]
+    ]
+
+The above will tell Session to use the built-in 'database' defaults, and
+specify that a Table called ``CustomSessions`` will be the delegate for saving
+session information to the database.
 
 Cache Sessions
 --------------
@@ -235,7 +233,7 @@ example we'll create a session handler that stores sessions both in the Cache
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
-``src/Network/Session/ComboSession.php``. The class should look
+**src/Network/Session/ComboSession.php**. The class should look
 something like::
 
     namespace App\Network\Session;

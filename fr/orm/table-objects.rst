@@ -19,7 +19,7 @@ Utilisation Basique
 ===================
 
 Pour commencer, créez une classe Table. Ces classes se trouvent dans
-``src/Model/Table``. Les Tables sont une collection de type model spécifique
+**src/Model/Table**. Les Tables sont une collection de type model spécifique
 aux bases de données relationnelles, et sont l'interface principale pour
 votre base de données dans l'ORM de CakePHP. La classe table la plus
 basique devrait ressembler à ceci::
@@ -79,7 +79,7 @@ conventions de nommage. Par exemple, si votre classe de table est appelée
 ``ArticlesTable`` l'entity sera ``Article``. Si la classe table est
 ``PurchaseOrdersTable`` l'entity sera ``PurchaseOrder``. Cependant si vous
 souhaitez utiliser une entity qui ne suit pas les conventions, vous pouvez
-utiliser la méthode ``entityClass`` pour changer les choses::
+utiliser la méthode ``entityClass()`` pour changer les choses::
 
     class PurchaseOrdersTable extends Table
     {
@@ -124,7 +124,7 @@ table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'event
 de table pour lier les écouteurs dedans.
 
 Lors de l'utilisation des méthodes callback des behaviors attachés dans la
-méthode ``initialize`` va voir ses écouteurs lancés **avant** que les
+méthode ``initialize()`` va voir ses écouteurs lancés **avant** que les
 méthodes de callback de la table ne soient déclenchées. Ceci suit la même
 séquence que les controllers & les components.
 
@@ -227,7 +227,7 @@ afterSaveCommit
 L'event ``Model.afterSaveCommit`` est lancé après que la transaction, dans
 laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
 déclenché pour des sauvegardes non atomic, quand les opérations sur la base de
-données sont implicitement committées. L'event est décenché seulement pour
+données sont implicitement committées. L'event est déclenché seulement pour
 la table primaire sur laquelle ``save()`` est directement appelée. L'event
 n'est pas déclenché si une transaction est démarrée avant l'appel de save.
 
@@ -263,7 +263,7 @@ n'est pas déclenché si une transaction est démarrée avant l'appel de delete.
 Behaviors
 =========
 
-.. php:method:: addBehavior($name, $config = [])
+.. php:method:: addBehavior($name, array $options = [])
 
 .. start-behaviors
 
@@ -275,8 +275,8 @@ permettent de réutiliser des parties de logique, ils compliqueraient la
 liaison des events.
 
 Pour ajouter un behavior à votre table, vous pouvez appeler la méthode
-``addBehavior``. Généralement, le meilleur endroit pour le faire est dans la
-méthode ``initialize``::
+``addBehavior()``. Généralement, le meilleur endroit pour le faire est dans la
+méthode ``initialize()``::
 
     namespace App\Model\Table;
 
@@ -325,7 +325,7 @@ Configurer les Connexions
 Par défaut, toutes les instances de table utilisent la connexion à la base
 de données ``default``. Si votre application utilise plusieurs connexions à la
 base de données, vous voudrez peut-être configurer quelles tables utilisent
-quelles connexions. C'est avec la méthode ``defaultConnectionName``::
+quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
 
     namespace App\Model\Table;
 
@@ -340,7 +340,7 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName``::
 
 .. note::
 
-    La méthode ``defaultConnectionName`` **doit** être statique.
+    La méthode ``defaultConnectionName()`` **doit** être statique.
 
 .. _table-registry-usage:
 
@@ -350,7 +350,7 @@ Utiliser le TableRegistry
 .. php:class:: TableRegistry
 
 Comme nous l'avons vu précédemment, la classe TableRegistry fournit un
-registre/fabrique facile d'utilisation pour accéder aux instances des table
+registre/fabrique facile d'utilisation pour accéder aux instances des tables
 de vos applications. Elle fournit aussi quelques autres fonctionnalités utiles.
 
 Configurer les Objets Table
@@ -365,12 +365,17 @@ leurs dépendances, ou utiliser les objets factices en fournissant un tableau
     $articles = TableRegistry::get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
-        'connection' => $connection,
+        'connection' => $connectionObject,
         'schema' => $schemaObject,
         'entityClass' => 'Custom\EntityClass',
         'eventManager' => $eventManager,
         'behaviors' => $behaviorRegistry
     ]);
+
+Remarquez les paramètres de configurations de la connexion et du schéma, ils
+ne sont pas des valeurs de type string mais des objets. La connection va
+prendre un objet ``Cake\Database\Connection`` et un schéma
+``Cake\Database\Schema\Collection``.
 
 .. note::
 

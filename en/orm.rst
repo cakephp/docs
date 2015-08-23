@@ -1,17 +1,16 @@
-Models
-######
+Database Access & ORM
+#####################
 
-Models are the classes that sit as the business layer in your application.
-This means that they should be responsible for managing almost everything
-that happens regarding your data, its validity, interactions and evolution
-of the information workflow in your domain of work.
-
-In CakePHP your application's domain model gets split into 2 primary object
+In CakePHP working with data through the database is done with two primary object
 types. The first are **repositories** or **table objects**. These objects
 provide access to collections of data. They allow you to save new records,
 modify/delete existing ones, define relations, and perform bulk operations. The
 second type of objects are **entities**. Entities represent individual records
 and allow you to define row/record level behavior & functionality.
+
+These two classes are usually responsible for managing almost everything
+that happens regarding your data, its validity, interactions and evolution
+of the information workflow in your domain of work.
 
 CakePHP's built-in ORM specializes in relational databases, but can be extended
 to support alternative datasources.
@@ -44,11 +43,11 @@ example if we wanted to load some data from our ``articles`` table we could do::
     }
 
 Note that we didn't have to create any code or wire any configuration up.
-The conventions in CakePHP allow us to skip some boilerplate code, and allow the
+The conventions in CakePHP allow us to skip some boilerplate code and allow the
 framework to insert base classes when your application has not created
 a concrete class. If we wanted to customize our ArticlesTable class adding some
 associations or defining some additional methods we would add the following to
-``src/Model/Table/ArticlesTable.php`` after the ``<?php`` opening tag::
+**src/Model/Table/ArticlesTable.php** after the ``<?php`` opening tag::
 
     namespace App\Model\Table;
 
@@ -70,7 +69,7 @@ to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
 Now that we have a concrete table class, we'll probably want to use a concrete
 entity class. Entity classes let you define accessor and mutator methods, define
 custom logic for individual records and much more. We'll start off by adding the
-following to ``src/Model/Entity/Article.php`` after the ``<?php`` opening tag::
+following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
 
     namespace App\Model\Entity;
 
@@ -110,10 +109,11 @@ More Information
     :maxdepth: 2
 
     orm/database-basics
+    orm/query-builder
     orm/table-objects
     orm/entities
     orm/retrieving-data-and-resultsets
-    orm/query-builder
+    orm/validation
     orm/saving-data
     orm/deleting-data
     orm/associations

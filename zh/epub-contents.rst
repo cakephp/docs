@@ -17,19 +17,20 @@ Contents
     controllers
     views
     orm
-    development/errors
 
+    controllers/components/authentication
+    bake
     core-libraries/caching
     console-and-shells
-    bake
     development/debugging
     deployment
     core-libraries/email
+    development/errors
     core-libraries/events
     core-libraries/internationalization-and-localization
     core-libraries/logging
-    controllers/components/pagination
     core-libraries/form
+    controllers/components/pagination
     plugins
     development/rest
     security
@@ -51,10 +52,11 @@ Contents
 
     core-libraries/global-constants-and-functions
     debug-kit
+    migrations
     appendices
 
 .. todolist::
 
 .. meta::
-    :title lang=zh_CN: Contents
-    :keywords lang=zh_CN: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=zh: Contents
+    :keywords lang=zh: core libraries,ref search,shells,deployment,appendices,glossary,models

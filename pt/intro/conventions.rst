@@ -117,11 +117,11 @@ Aqui está um exemplo final que enlaça as convenções juntas:
 
 -  Table: "people"
 -  Classe Table: "PeopleTable", encontrada em
-   ``src/Model/Table/PeopleTable.php``
--  Classe Entity: "Person", encontrada em ``src/Model/Entity/Person.php``
+   **src/Model/Table/PeopleTable.php**
+-  Classe Entity: "Person", encontrada em **src/Model/Entity/Person.php**
 -  Classe Controller: "PeopleController", encontrada em
-   ``src/Controller/PeopleController.php``
--  View template, encontrado em ``src/Template/People/index.ctp``
+   **src/Controller/PeopleController.php**
+-  View template, encontrado em **src/Template/People/index.ctp**
 
 Utilizando estas convenções, o CakePHP sabe que uma requisição para
 http://example.com/people/ mapeia para uma chamada da função ``index()``

@@ -16,10 +16,11 @@ Models
     :maxdepth: 2
 
     orm/database-basics
+    orm/query-builder
     orm/table-objects
     orm/entities
     orm/retrieving-data-and-resultsets
-    orm/query-builder
+    orm/validation
     orm/saving-data
     orm/deleting-data
     orm/associations

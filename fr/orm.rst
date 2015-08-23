@@ -1,19 +1,19 @@
-Models (Modèles)
-################
+Accès Base de Données & ORM
+###########################
 
-Les Models sont les classes qui représentent la couche de logique dans votre
-application. Cela signifie qu'ils sont responsables de la gestion de presque
-tout ce qui concerne les données, leur validité, les interactions et
-l'évolution du flux d'informations dans votre domaine de travail.
-
-Dans CakePHP, le domaine d'application du model est séparé en 2 types d'objet
-principaux. Les premiers sont des **repositories** ou **table objects**.
+La manipulation de données de la base de donnés dans CakePHP est réalisée
+avec deux types d'objets principaux. Les premiers sont des **repositories** ou
+**table objects**.
 Ces objets fournissent un accès aux collections de données. Ils vous permettent
 de sauvegarder de nouveaux enregistrements, de modifier/supprimer des
 enregistrements existants, définir des relations et d'effectuer des opérations
-en masse. Les seconds types d'objet sont des **entities**. Les Entities
+en masse. Les seconds types d'objets sont les **entities**. Les Entities
 représentent des enregistrements individuels et vous permettent de définir
 des comportements et des fonctionnalités au niveau des lignes/enregistrements.
+
+Ces deux classes sont habituellement responsables de la gestion de presque
+tout ce qui concerne les données, leur validité, les interactions et
+l’évolution du flux d’informations dans votre domaine de travail.
 
 L'ORM intégré dans CakePHP se spécialise dans les bases de données
 relationnelles, mais peut être étendu pour supporter des sources de données
@@ -30,8 +30,8 @@ connexion à la base de données <database-configuration>`.
 .. note::
 
     Si vous êtes familier avec les versions précédentes de CakePHP, vous devriez
-    lire le :doc:`/appendices/orm-migration` pour voir les différences importantes
-    entre CakePHP 3.0 et les versions antérieures de CakePHP.
+    lire le :doc:`/appendices/orm-migration` pour voir les différences
+    importantes entre CakePHP 3.0 et les versions antérieures de CakePHP.
 
 Exemple Rapide
 ==============
@@ -53,8 +53,8 @@ conventions dans CakePHP nous permettent d'éviter un code bancal et permettent 
 framework d'insérer des classes de base lorsque votre application n'a pas créé
 de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
 ajoutant des associations ou en définissant des méthodes supplémentaires, nous
-ajouterions ce qui suit dans ``src/Model/Table/ArticlesTable.php`` après la
-balise d'ouverture ``<?php`` ::
+ajouterions ce qui suit dans **src/Model/Table/ArticlesTable.php** après la
+balise d'ouverture ``<?php``::
 
     namespace App\Model\Repository;
 
@@ -78,8 +78,8 @@ Maintenant que nous avons une classe de table concrète, nous allons
 probablement vouloir utiliser une classe entity concrète. Les classes Entity
 vous laissent définir les méthodes accesseurs et mutateurs, définissant la
 logique personnalisée pour des enregistrements individuels et plus encore. Nous
-commencerons par ajouter ce qui suit à ``src/Model/Entity/Article.php`` après la
-balise d'ouverture ``<?php`` ::
+commencerons par ajouter ce qui suit à **src/Model/Entity/Article.php** après la
+balise d'ouverture ``<?php``::
 
     namespace App\Model\Entity;
 
@@ -122,10 +122,11 @@ Pour en savoir plus sur les Models
     :maxdepth: 2
 
     orm/database-basics
+    orm/query-builder
     orm/table-objects
     orm/entities
     orm/retrieving-data-and-resultsets
-    orm/query-builder
+    orm/validation
     orm/saving-data
     orm/deleting-data
     orm/associations

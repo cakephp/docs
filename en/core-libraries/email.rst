@@ -1,7 +1,12 @@
 Email
 #####
 
-.. php:namespace:: Cake\Network\Email
+.. php:namespace:: Cake\Mailer
+
+.. warning::
+    Before version 3.1, the ``Email`` and ``Transport`` classes were under
+    the ``Cake\Network\Email`` namespace instead of the ``Cake\Mailer``
+    namespace.
 
 .. php:class:: Email(mixed $profile = null)
 
@@ -13,7 +18,7 @@ Basic Usage
 
 First of all, you should ensure the class is loaded::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
 After you've loaded ``Email``, you can send an email with the following::
 
@@ -48,9 +53,9 @@ Configuration
 
 Configuration for ``Email`` defaults is created using ``config()`` and
 ``configTransport()``. You should put your email presets in the
-``config/app.php`` file.  The ``config/app.php.default`` file is an
+**config/app.php** file.  The ``config/app.php.default`` file is an
 example of this file. It is not required to define email configuration in
-``config/app.php``. ``Email`` can be used without it and use the respective
+**config/app.php**. ``Email`` can be used without it and use the respective
 methods to set all configurations separately or load an array of configs.
 
 By defining profiles and transports, you can keep your application code free of
@@ -75,6 +80,10 @@ also just load an array of options::
     // Or in constructor
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
+.. versionchanged:: 3.1
+    The ``default`` email profile is automatically set when an ``Email``
+    instance is created.
+
 Configuring Transports
 ----------------------
 
@@ -86,7 +95,7 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     // Sample Mail configuration
     Email::configTransport('default', [
@@ -106,11 +115,11 @@ You can configure SSL SMTP servers, like Gmail. To do so, put the ``ssl://``
 prefix in the host and configure the port value accordingly. You can also
 enable TLS SMTP using the ``tls`` option::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     Email::configTransport('gmail', [
         'host' => 'smtp.gmail.com',
-        'port' => 465,
+        'port' => 587,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'className' => 'Smtp',
@@ -175,7 +184,7 @@ following configuration keys are used:
 - ``'attachments'``: List of files to attach. See ``Email::attachments()``.
 - ``'emailFormat'``: Format of email (html, text or both). See ``Email::emailFormat()``.
 - ``'transport'``: Transport configuration name. See
-  :php:meth:`~Cake\\Network\\Email\\Email::configTransport()`.
+  :php:meth:`~Cake\\Mailer\\Email::configTransport()`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
   LOG_DEBUG. See also ``CakeLog::write()``
 - ``'helpers'``: Array of helpers used in the email template.
@@ -215,8 +224,8 @@ and elements just like normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``src/Template/Email/html/welcome.ctp`` for the view
-and ``src/Template/Layout/Email/html/fancy.ctp`` for the layout. You can
+The above would use **src/Template/Email/html/welcome.ctp** for the view
+and **src/Template/Layout/Email/html/fancy.ctp** for the layout. You can
 send multipart templated email messages as well::
 
     $email = new Email();
@@ -228,10 +237,10 @@ send multipart templated email messages as well::
 
 This would use the following template files:
 
-* ``src/Template/Email/text/welcome.ctp``
-* ``src/Template/Layout/Email/text/fancy.ctp``
-* ``src/Template/Email/html/welcome.ctp``
-* ``src/Template/Layout/Email/html/fancy.ctp``
+* **src/Template/Email/text/welcome.ctp**
+* **src/Template/Layout/Email/text/fancy.ctp**
+* **src/Template/Email/html/welcome.ctp**
+* **src/Template/Layout/Email/html/fancy.ctp**
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -249,7 +258,7 @@ You can use helpers in emails as well, much like you can in normal template file
 By default only the ``HtmlHelper`` is loaded. You can load additional
 helpers using the ``helpers()`` method::
 
-    $Email->helpers(['Html', 'Custom', 'Text']);
+    $email->helpers(['Html', 'Custom', 'Text']);
 
 When setting helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
@@ -273,7 +282,7 @@ You can do this using themes by telling Email to use appropriate theme using
 This allows you to override the ``new_comment`` template in your theme without
 modifying the Blog plugin. The template file needs to be created in the
 following path:
-``src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp``.
+**src/Template/Plugin/TestTheme/Blog/Email/text/new_comment.ctp**.
 
 Sending Attachments
 ===================
@@ -284,17 +293,17 @@ You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
-1. String: ``$Email->attachments('/full/file/path/file.png')`` will attach this
+1. String: ``$email->attachments('/full/file/path/file.png')`` will attach this
    file with the name file.png.
-2. Array: ``$Email->attachments(['/full/file/path/file.png'])`` will have
+2. Array: ``$email->attachments(['/full/file/path/file.png'])`` will have
    the same behavior as using a string.
 3. Array with key:
-   ``$Email->attachments(['photo.png' => '/full/some_hash.png'])`` will
+   ``$email->attachments(['photo.png' => '/full/some_hash.png'])`` will
    attach some_hash.png with the name photo.png. The recipient will see
    photo.png, not some_hash.png.
 4. Nested arrays::
 
-    $Email->attachments([
+    $email->attachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
@@ -323,7 +332,7 @@ Using Transports
 Transports are classes designed to send the e-mail over some protocol or method.
 CakePHP supports the Mail (default), Debug and SMTP transports.
 
-To configure your method, you must use the :php:meth:`Cake\\Network\Email\\Email::transport()`
+To configure your method, you must use the :php:meth:`Cake\\Mailer\\Email::transport()`
 method or have the transport in your configuration::
 
     $email = new Email();
@@ -340,19 +349,20 @@ Creating Custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``src/Network/Email/ExampleTransport.php`` (where Example is the name of your
+**src/Network/Email/ExampleTransport.php** (where Example is the name of your
 transport). To start off your file should look like::
 
-    use Cake\Network\Email\AbstractTransport;
+    namespace App\Network\Email;
+
+    use Cake\Mailer\AbstractTransport;
+    use Cake\Mailer\Email;
 
     class ExampleTransport extends AbstractTransport
     {
-
         public function send(Email $email)
         {
             // Magic inside!
         }
-
     }
 
 You must implement the method ``send(Email $email)`` with your custom logic.
@@ -361,12 +371,12 @@ called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute ``$_config``.
 
 If you need to call additional methods on the transport before send, you can use
-:php:meth:`Cake\\Network\\Email\\Email::transportClass()` to get an instance of the transport.
+:php:meth:`Cake\\Mailer\\Email::transportClass()` to get an instance of the transport.
 Example::
 
-    $yourInstance = $Email->transport('your')->transportClass();
+    $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
-    $Email->send();
+    $email->send();
 
 Relaxing Address Validation Rules
 ---------------------------------
@@ -389,10 +399,10 @@ Sending Messages Quickly
 
 Sometimes you need a quick way to fire off an email, and you don't necessarily
 want do setup a bunch of configuration ahead of time.
-:php:meth:`Cake\\Network\Email\\Email::deliver()` is intended for that purpose.
+:php:meth:`Cake\\Mailer\\Email::deliver()` is intended for that purpose.
 
 You can create your configuration using
-:php:meth:`Cake\\Network\\Email\\Email::config()`, or use an array with all
+:php:meth:`Cake\\Mailer\\Email::config()`, or use an array with all
 options that you need and use the static method ``Email::deliver()``.
 Example::
 
@@ -401,7 +411,7 @@ Example::
 This method will send an email to "you@example.com", from "me@example.com" with
 subject "Subject" and content "Message".
 
-The return of ``deliver()`` is a :php:class:`Cake\\Email\\Email` instance with all
+The return of ``deliver()`` is a :php:class:`Cake\\Mailer\\Email` instance with all
 configurations set. If you do not want to send the email right away, and wish
 to configure a few things before sending, you can pass the 5th parameter as
 ``false``.
@@ -424,11 +434,99 @@ When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment)::
 
-    $Email->domain('www.example.org');
+    $email->domain('www.example.org');
     // Results in message ids like ``<UUID@www.example.org>`` (valid)
     // Instead of `<UUID@>`` (invalid)
 
 A valid message id can help to prevent emails ending up in spam folders.
+
+
+Creating Reusable Emails
+========================
+
+.. versionadded:: 3.1.0
+
+Mailers allow you to create reusable emails throughout your application. They
+can also be used to contain multiple email configurations in one location. This
+helps keep your code DRYer and keeps email configuration noise out of other
+areas in your application.
+
+In this example we will be creating a ``Mailer`` that contains user-related
+emails. To create our ``UserMailer``, create the file
+**src/Mailer/UserMailer.php**. The contents of the file should look like the
+following::
+
+    namespace App\Mailer;
+
+    use Cake\Mailer\Mailer;
+
+    class UserMailer extends Mailer
+    {
+        public function welcome($user)
+        {
+            $this->_email->profile('default');
+            $this->_email->to($user->email);
+            $this->_email->subject(sprintf('Welcome %s', $user->name));
+        }
+
+        public function resetPassword($user)
+        {
+            $this->_email->profile('default');
+            $this->_email->to($user->email);
+            $this->_email->subject('Reset password');
+            $this->set(['token' => $user->token]);
+        }
+    }
+
+In our example we have created two methods, one for sending a welcome email, and
+another for sending a password reset email. Each of these methods expect a user
+``Entity`` and utilizes its properties for configuring each email.
+
+We are now able to use our ``UserMailer`` to send out our user-related emails
+from anywhere in our application. For example, if we wanted to send our welcome
+email we could do the following::
+
+    namespace App\Controller;
+
+    use Cake\Mailer\MailerAwareTrait;
+
+    class UsersController extends AppController
+    {
+        use MailerAwareTrait;
+
+        public function register()
+        {
+            $user = $this->Users->newEntity();
+            if ($this->request->is('post')) {
+                $user = $this->Users->patchEntitiy($user, $this->request->data())
+                if ($this->Users->save($user)) {
+                    $this->getMailer('User')->send('welcome', [$user]);
+                }
+            }
+            $this->set('user', $user);
+        }
+    }
+
+If we wanted to completely separate sending a user their welcome email from our
+application's code, we can have our ``UserMailer`` subscribe to the
+``Model.afterSave`` event. By subscribing to an event, we can keep our
+application's user-related classes completely free of email-related logic and
+instructions. For example, we could add the following to our ``UserMailer``::
+
+    public function implementedEvents()
+    {
+        return [
+            'Model.afterSave' => 'onRegistration'
+        ];
+    }
+
+    public function onRegistration(Event $event, Entity $entity, ArrayObject $options)
+    {
+        if ($entity->isNew()) {
+            $this->send('welcome', [$entity]);
+        }
+    }
+
 
 .. meta::
     :title lang=en: Email

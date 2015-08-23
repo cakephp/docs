@@ -65,7 +65,11 @@ Executar o Console sem argumentos produz esta mensagem de ajuda::
 
     Available Shells:
 
-    [CORE] bake, i18n, server, test
+    [Bake] bake
+
+    [Migrations] migrations
+
+    [CORE] i18n, orm_cache, plugin, server
 
     [app] behavior_time, console, orm
 
@@ -209,7 +213,7 @@ tasks. Você define tasks para uma shell usando a propriedade ``$tasks``::
 Você pode utilizar tasks de plugins utilizando o padrão :term:`plugin syntax`.
 Tasks são armazenadas sob ``Shell/Task/`` em arquivos nomeados depois de suas
 classes. Então se nós estivéssemos criando uma nova task 'FileGenerator', você
-deveria criar ``src/Shell/Task/FileGeneratorTask.php``.
+deveria criar **src/Shell/Task/FileGeneratorTask.php**.
 
 Cada task deve ao menos implementar um método ``main()``. O ShellDispatcher,
 vai chamar esse método quando a task é invocada. Uma classe task se parece com::
@@ -933,12 +937,14 @@ Mais tópicos
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
+    console-and-shells/plugin-shell
+    console-and-shells/routes-shell
     console-and-shells/upgrade-shell
-    console-and-shells/plugin-assets
 
 .. meta::
     :title lang=pt: Console e Shells

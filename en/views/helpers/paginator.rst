@@ -345,7 +345,7 @@ There are a number of options for ``counter()``. The supported ones are:
   -  ``{{current}}`` - current number of records being shown.
   -  ``{{count}}`` - the total number of records in the result set.
   -  ``{{start}}`` - number of the first record being displayed.
-  -  ``{{end}`` - number of the last record being displayed.
+  -  ``{{end}}`` - number of the last record being displayed.
   -  ``{{model}}`` - The pluralized human form of the model name.
      If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
 
@@ -425,7 +425,7 @@ which can be easily integrated into your table column headers:
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
         </tr>
-           <?php foreach ($recipies as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
             <td><?= $recipe->id ?> </td>
             <td><?= h($recipe->title) ?> </td>
@@ -446,7 +446,7 @@ It is also possible to sort a column based on associations:
             <th><?= $this->Paginator->sort('title', 'Title') ?></th>
             <th><?= $this->Paginator->sort('Authors.name', 'Author') ?></th>
         </tr>
-           <?php foreach ($recipies as $recipe): ?>
+           <?php foreach ($recipes as $recipe): ?>
         <tr>
             <td><?= h($recipe->title) ?> </td>
             <td><?= h($recipe->name) ?> </td>

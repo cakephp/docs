@@ -14,7 +14,6 @@ Gereksinimler
   olması tercih edilir ama zorunlu değildir.
 - PHP 5.4.16 veya daha yüksek.
 - mbstring eklentisi
-- mcrypt eklentisi
 - intl eklentisi
 
 Bir veritabanı olması zorunlu olmasa dahi, birçok uygulamanın veritabanı kullandığını
@@ -27,15 +26,15 @@ düşünüyoruz. CakePHP bir çok veritabanını desteklemektedir.
 
 .. note::
 
-    Tüm gömülü sürücüler PDO'ya ihtiyaç duyarlar. 
+    Tüm gömülü sürücüler PDO'ya ihtiyaç duyarlar.
     All built-in drivers require PDO. PDO eklentisinin kurulu
     olduğundan emin olmalısınız.
 
 CakePHP'yi kurmak
 ===================
 
-CakePHP resmi olarak desteklenen kurulum aracı olarak PHP 5.3+ 
-için bağımlılık yönetici aracı olan `Composer <http://getcomposer.org>` 
+CakePHP resmi olarak desteklenen kurulum aracı olarak PHP 5.3+
+için bağımlılık yönetici aracı olan `Composer <http://getcomposer.org>`
 kullanmaktadır.
 
 İlk olarak eğer yapmadıysanız, Composer'i indirip kurmalısınız. Eğer
@@ -54,11 +53,11 @@ talimatlerı bulabilirsiniz.
 Şimdi Composer'i indirip kurduğunuza göre, taze bir CakePHP uygulamasını şu
 komutları çalıştırarak elde edebilirsiniz:
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 Eğer composer tüm sistemde yüklü ise::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Composer uygulama iskeletini ve çekirdek CakePHP kütüphanesini indirdiğinde,
 elinizde Composer ile yüklenmiş çalışan bir CakePHP uygulaması olacaktır.
@@ -78,7 +77,7 @@ uygulamanızın ``composer.json`` aşağıdaki kodu ekleyebilirsiniz::
         "cakephp/cakephp": "3.0.*-dev"
     }
 
-Burada ``<branch>`` güncel kalmasını sitediğiniz dalın ismidir. 
+Burada ``<branch>`` güncel kalmasını sitediğiniz dalın ismidir.
 ``php composer.phar update`` komutunu her çalıştırdığınızda, seçilmiş
 olan daldaki en son değişiklikleri alacaksınız.
 
@@ -91,7 +90,7 @@ dizini ise Log işlemleri için ``FileLog`` motoru tarafından kullanılmaktadı
 
 Bu nedenle, CakePHP kurulumunuzdaki ``logs``, ``tmp`` dizinleri ve altdizinlerinin
 web sunucusu kullanıcısı tarafından yazılabilir olduklarından emin olmalısınız.
-Composer'in kurulum işlemi, işleri hızlıca halletmek için ``tmp`` ve alt dizinlerini 
+Composer'in kurulum işlemi, işleri hızlıca halletmek için ``tmp`` ve alt dizinlerini
 heryerden yazılabilir yapar, ancak daha iyi güvenlik ve sadece web sunucusu kullanıcısı
 tarafından yazılabilir olması için izinleri güncelleyebilirsiniz.
 

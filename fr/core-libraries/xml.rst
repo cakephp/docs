@@ -6,18 +6,19 @@ Xml
 .. php:class:: Xml
 
 La classe Xml vous permet de facilement transformer des tableaux en
-SimpleXMLElement ou en objets DOMDocument, et de nouveau les transformer en tableaux.
+SimpleXMLElement ou en objets DOMDocument, et de nouveau les transformer en
+tableaux.
 
 Importer les données vers la classe Xml
 =======================================
 
-.. php:staticmethod:: build($input, $options = [])
+.. php:staticmethod:: build($input, array $options = [])
 
-Vous pouvez utiliser ``Xml::build()`` pour construire des objets XML. Selon votre paramètre
-``$options``, cette méthode va retourner un objet SimpleXMLElement (default)
-ou un objet DOMDocument. Vous pouvez utiliser ``Xml::build()`` pour construire les objets
-XML à partir d'une variété de sources. Par exemple, vous pouvez charger le XML à partir
-de chaînes::
+Vous pouvez utiliser ``Xml::build()`` pour construire des objets XML. Selon
+votre paramètre ``$options``, cette méthode va retourner un objet
+SimpleXMLElement (default) ou un objet DOMDocument. Vous pouvez utiliser
+``Xml::build()`` pour construire les objets XML à partir d'une variété de
+sources. Par exemple, vous pouvez charger le XML à partir de chaînes::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
@@ -62,7 +63,7 @@ Si votre entrée est invalide, la classe Xml enverra une Exception::
 Transformer une Chaîne de Caractères XML en Tableau
 ===================================================
 
-.. php:staticmethod:: toArray($xml);
+.. php:staticmethod:: toArray($obj);
 
 Convertir des chaînes XML en tableaux est aussi facile avec la classe Xml. Par
 défaut, vous obtiendrez un objet SimpleXml en retour::
@@ -99,9 +100,10 @@ Des Exemples de tableaux invalides::
         'key2' => 'autre valeur'
     ];
 
-Par défaut les valeurs de tableau vont être sorties en tags XML, si vous souhaitez
-définir les attributs ou les valeurs de texte, vous pouvez préfixer les clés qui
-sont supposées être des attributs avec ``@``. Pour value text, utilisez ``@`` en clé::
+Par défaut les valeurs de tableau vont être sorties en tags XML, si vous
+souhaitez définir les attributs ou les valeurs de texte, vous pouvez préfixer
+les clés qui sont supposées être des attributs avec ``@``. Pour value text,
+utilisez ``@`` en clé::
 
     $xmlArray = [
         'project' => [
@@ -158,8 +160,9 @@ La valeur de ``$xml1`` et ``$xml2`` sera, respectivement::
 Créer un enfant
 ---------------
 
-Après avoir créé votre document XML, vous utilisez seulement les interfaces natives pour
-votre type de document à ajouter, à retirer, ou manipuler les noeuds enfant::
+Après avoir créé votre document XML, vous utilisez seulement les interfaces
+natives pour votre type de document à ajouter, à retirer, ou manipuler les
+noeuds enfant::
 
     // Utilisation de SimpleXML
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';

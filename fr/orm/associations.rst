@@ -1,8 +1,6 @@
 Associations - Lier les Tables Ensemble
 #######################################
 
-.. _table-associations:
-
 Définir les relations entre les différents objets dans votre application
 sera un processus naturel. Par exemple, un article peut avoir plusieurs
 commentaires, et appartenir à un auteur. Les Auteurs peuvent avoir plusieurs
@@ -188,25 +186,28 @@ Les clés possibles pour une association hasOne sont:
 - **className**: le nom de la classe de la table que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User a une Address', la
   valeur associée à la clé 'className' devra être 'Addresses'.
-- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre model.
+- **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre table.
   Ceci sera particulièrement pratique si vous avez besoin de définir des
   relations hasOne multiples. La valeur par défaut de cette clé est le nom du
   model actuel (avec des underscores) suffixé avec '\_id'. Dans l'exemple
   ci-dessus la valeur par défaut aurait été 'user\_id'.
+- **bindingKey**: le nom de la colonne dans la table courante, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau des conditions compatibles avec find() ou un
   fragment de code SQL tel que ``['Addresses.primary' => true]``.
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut
-  à INNER. Vous voulez peut-être utiliser LEFT si votre association hasOne est
-  optionnelle.
+  à LEFT. Vous voulez peut-être utiliser INNER si votre association hasOne est
+  requis.
 - **dependent**: Quand la clé dependent est définie à ``true``, et qu'une
   entity est supprimée, les enregistrements du model associé sont aussi
   supprimés. Dans ce cas, nous le définissons à ``true`` pour que la
   suppression d'un User supprime aussi son Address associée.
 - **cascadeCallbacks**: Quand ceci et **dependent** sont à ``true``, les
   suppressions en cascade vont charger et supprimer les entities pour que les
-  callbacks soient lancés correctement. Quand il est à ``false``. ``deleteAll()``
-  est utilisée pour retirer les données associées et que aucun callback ne soit
-  lancé.
+  callbacks soient lancés correctement. Quand il est à ``false``.
+  ``deleteAll()`` est utilisée pour retirer les données associées et que aucun
+  callback ne soit lancé.
 - **propertyName**: Le nom de la propriété qui doit être rempli avec les données
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans
@@ -285,10 +286,13 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
 - **className**: le nom de classe du model associé au model courant. Si vous
   définissez une relation 'Profile belongsTo User', la clé className
   devra être 'Users'.
-- **foreignKey**: le nom de la clé étrangère trouvée dans le model courant.
+- **foreignKey**: le nom de la clé étrangère trouvée dans la table courante.
   C'est particulièrement pratique si vous avez besoin de définir plusieurs
   relations belongsTo au même model. La valeur par défaut pour cette clé est le
   nom au singulier de l'autre model avec des underscores, suffixé avec ``_id``.
+- **bindingKey**: le nom de la colonne dans l'autre table, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles find() ou de chaînes SQL
   comme ``['Users.active' => true]``
 - **joinType**: le type de join à utiliser dans la requête SQL, par défaut LEFT
@@ -372,9 +376,12 @@ Les clés possibles pour les tableaux d'association hasMany sont:
   (l'User a plusieurs Commentaires), la valeur associée à la clef 'className'
   devra être 'Comment'.
 - **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
-  model. Ceci sera particulièrement pratique si vous avez besoin de définir
+  table. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
-  du model actuel (avec des underscores) suffixé avec '\_id'
+  du model actuel (avec des underscores) suffixé avec '\_id'.
+- **bindingKey**: le nom de la colonne dans la table courante, qui sera utilisée
+  pour correspondre à la ``foreignKey``. S'il n'est pas spécifié, la clé
+  primaire (par exemple la colonne id de la table ``Users``) sera utilisée.
 - **conditions**: un tableau de conditions compatibles avec find() ou des
   chaînes SQL comme ``['Comments.visible' => true]``.
 - **sort**  un tableau compatible avec les clauses order de find() ou les
@@ -424,6 +431,11 @@ n'importe quel article donné est souvent mis en cache pour rendre la générati
 des lists d'article plus efficace. Vous pouvez utiliser
 :doc:`CounterCacheBehavior </orm/behaviors/counter-cache>` pour
 mettre en cache les compteurs des enregistrements associés.
+
+Assurez-vous que vos tables de base de données ne contiennent pas de colonnes
+du même nom que les attributs d'association. Si par exemple vous avez un champs
+counter en collision avec une propriété d'association, vous devez soit renommer
+l'association ou le nom de la colonne.
 
 Associations BelongsToMany
 ==========================
@@ -507,6 +519,9 @@ sont:
   des conditions sur une table associée, vous devriez utiliser un model
   'through' et lui définir les associations belongsTo nécessaires.
 - **sort** un tableau de clauses order compatible avec find().
+- **dependent**: Quand la clé dependent est définie à ``false`` et qu'une entity
+  est supprimée, les enregistrements de la table de jointure ne seront pas
+  supprimés.
 - **through** Vous permet de fournir soit le nom de l'instance de la Table
   que vous voulez utiliser, soit l'instance elle-même. Cela rend possible la
   personnalisation des clés de la table de jointure, et vous permet de
@@ -559,6 +574,8 @@ suit sera générée::
       tags.id = article_tags.tag_id
       AND article_id IN (SELECT id FROM articles)
     );
+
+.. _using-the-through-option:
 
 Utiliser l'Option 'through'
 ---------------------------

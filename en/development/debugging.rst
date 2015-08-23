@@ -13,7 +13,7 @@ Basic Debugging
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
 The ``debug()`` function is a globally available function that works
-similarly to the PHP function ``print\_r()``. The ``debug()`` function
+similarly to the PHP function ``print_r()``. The ``debug()`` function
 allows you to show the contents of a variable in a number of
 different ways. First, if you'd like data to be shown in an
 HTML-friendly way, set the second parameter to ``true``. The function
@@ -23,10 +23,25 @@ default.
 Output from this function is only shown if the core ``$debug`` variable
 has been set to ``true``.
 
-.. php:function stackTrace()
+.. php:function:: stackTrace()
 
 The ``stackTrace()`` function is available globally, and allows you to output
-a stack trace whereever the function is called.
+a stack trace wherever the function is called.
+
+.. php:function:: breakpoint()
+
+.. versionadded:: 3.1
+
+If you have `Psysh <http://psysh.org/>`_ installed you can use this
+function in CLI enviroments to open an interactive console with the current
+local scope::
+
+    // Some code
+    eval(breakpoint());
+
+Will open an interactive console that can be used to check local variables
+and execute other code. You can exit the interactive debugger and resume the
+original execution by running ``quit`` or ``q`` in the interactive session.
 
 Using the Debugger Class
 ========================

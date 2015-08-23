@@ -14,7 +14,6 @@ Requisitos
   no requerido.
 - PHP 5.4.16 o mayor.
 - extensión mbstring.
-- extensión mcrypt.
 - extensión intl.
 
 Técnicamente una base de datos no es necesaria, pero imaginamos que la
@@ -64,11 +63,11 @@ instrucciones acerca de esto, puedes leer el README del instalador de Windows
 Ya que has decargado e instalado Composer puedes generar una aplicación
 CakePHP ejecutando::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
 O si tienes Composer definido globalmente::
 
-    composer create-project --prefer-dist -s dev cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app [app_name]
 
 Una vez que Composer termine de descargar el esqueleto y la librería core
 de CakePHP, deberías tener una aplicación funcional de CakePHP instalada
@@ -85,7 +84,7 @@ Si quieres mantenerte al corriente de los últimos cambios en CakePHP puedes
 añadir las siguientes líneas al ``composer.json`` de tu aplicación::
 
     "require": {
-        "cakephp/cakephp": "dev-<branch>"
+        "cakephp/cakephp": "dev-master"
     }
 
 Donde ``<branch>`` es el nombre del branch que quieres seguir. Cada vez que

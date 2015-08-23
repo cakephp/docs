@@ -126,13 +126,13 @@ utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 
     Gardez à l'esprit que le chargement d'un component à la volée n'appellera
     pas les callbacks manquants. Si vous souhaitez que les callbacks
-    ``initialize`` ou ``startup`` soient appelés, vous devrez les appeler
+    ``initialize()`` ou ``startup()`` soient appelées, vous devrez les appeler
     manuellement selon le moment où vous chargez votre component.
 
 Utiliser les Components
 =======================
 
-Une fois que vous avez inclu quelques components dans votre controller,
+Une fois que vous avez inclus quelques components dans votre controller,
 les utiliser est très simple. Chaque component que vous utilisez est enregistré
 comme propriété dans votre controller. Si vous avez chargé la
 :php:class:`Cake\\Controller\\Component\\FlashComponent` et le
@@ -280,8 +280,8 @@ variable ``$components``::
 
 .. note::
 
-    Au contraire d'un component inclu dans un controller, aucun callback
-    ne sera attrapé pour un component inclu dans un component.
+    Au contraire d'un component inclus dans un controller, aucun callback
+    ne sera attrapé pour un component inclus dans un component.
 
 Accéder au Controller du  Component
 -----------------------------------
@@ -326,8 +326,8 @@ qui vous permettent d'augmenter le cycle de la requête.
     Est invoquée quand la méthode de redirection du controller est appelée,
     mais avant toute action qui suit. Si cette méthode retourne ``false``, le
     controller ne continuera pas à rediriger la requête. Les paramètres $url et
-    $response vous permettent d'inspecter et de modifier la localisation ou toutes
-    autres entêtes dans la réponse.
+    $response vous permettent d'inspecter et de modifier la localisation ou
+    toutes autres entêtes dans la réponse.
 
 .. meta::
     :title lang=fr: Components (Composants)

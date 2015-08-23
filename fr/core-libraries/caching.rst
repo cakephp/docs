@@ -7,11 +7,11 @@ La mise en cache
 
 La mise en cache est fréquemment utilisée pour réduire le temps pris pour créer
 ou lire depuis une autre ressource. La mise en cache est souvent utilisée pour
-rendre la lecture de ressources consommatrices en temps et en ressources moins
+rendre la lecture de ressources consommatrices en temps, en ressources moins
 consommatrice. Vous pouvez aisément stocker en cache les résultats de requêtes
 consommatrices en ressources ou les accès à distance à des services web qui ne
 changent pas fréquemment. Une fois mis en cache, re-lire les ressources
-stockées depuis le cache est moins consommateur en ressource qu'un accès a une
+stockées depuis le cache est moins consommateur en ressource qu'un accès à une
 ressource distante.
 
 La mise en cache dans CakePHP se fait principalement par la classe
@@ -46,8 +46,8 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre
 application interagit avec :php:class:`Cake\\Cache\\Cache` de manière cohérente.
-Cela signifie que vous pouvez aisément permuter les moteurs de cache en fonction de
-l'évolution de votre application.
+Cela signifie que vous pouvez aisément permuter les moteurs de cache en fonction
+de l'évolution de votre application.
 
 .. _cache-configuration:
 
@@ -58,7 +58,7 @@ Configuration de la classe Cache
 
 La configuration de la classe Cache peut être effectuée n'importe où, mais
 généralement vous voudrez configurer le cache pendant la phase de bootstrap.
-le fichier ``config/app.php`` est le lieu approprié pour cette configuration.
+le fichier **config/app.php** est le lieu approprié pour cette configuration.
 Vous pouvez configurer autant de configurations de cache dont vous avez besoin,
 et vous pouvez utiliser tous les mélanges de
 moteurs de cache. CakePHP utilise deux configurations de cache en interne.
@@ -73,7 +73,7 @@ autre application.
 
 L'utilisation de plusieurs configurations vous permet également de changer le
 stockage comme vous l'entendez. Par exemple vous pouvez mettre ceci dans votre
-``config/app.php``::
+**config/app.php**::
 
     // ...
     'Cache' => [
@@ -131,7 +131,7 @@ Vous pouvez également configurer les moteurs de cache pendant l'exécution::
     Vous devez spécifier le moteur à utiliser. Il ne met **pas** File par
     défaut.
 
-En insérant le code ci-dessus dans votre ``config/app.php`` vous
+En insérant le code ci-dessus dans votre **config/app.php** vous
 aurez deux configurations de cache supplémentaires. Le nom de ces
 configurations 'short' ou 'long' est utilisé comme paramètre ``$config``
 pour :php:meth:`Cake\\Cache\\Cache::write()` et
@@ -139,13 +139,13 @@ pour :php:meth:`Cake\\Cache\\Cache::write()` et
 de cache, vous pouvez vous référer au nom de la classe en utilisant les
 syntaxes suivantes:
 
-* Un nom racourci sans 'Engine' ou namespace (espace de nom).  Il déduira que
+* Un nom raccourci sans 'Engine' ou namespace (espace de nom).  Il déduira que
   que vous voulez utiliser ``Cake\Cache\Engine`` ou ``App\Cache\Engine``.
 * Utiliser la :term:`syntaxe de plugin` qui permet de charger des moteurs
   depuis un plugin spécifique.
 * Utiliser un nom de classe complet incluant le namespace. Cela vous permet
   d'utiliser des classes situées en dehors des emplacements classiques.
-* tiliser un objet qui étend la classe ``CacheEngine``
+* Utiliser un objet qui étend la classe ``CacheEngine``
 
 .. note::
 
@@ -182,12 +182,13 @@ stocker les résultats des 'finds' de vos models::
         Cache::write('posts', $posts);
     }
 
-Utiliser ``Cache :: write()`` et ``Cache :: read ()`` réduira facilement le nombre
-d'allers-retours effectués vers la base de données pour récupérer les messages.
+Utiliser ``Cache::write()`` et ``Cache::read()`` réduira facilement le
+nombre d'allers-retours effectués vers la base de données pour récupérer les
+messages.
 
 .. note::
 
-    Si vous prevoyez de mettre en cache le résulat de requêtes faites avec
+    Si vous prévoyez de mettre en cache le résultat de requêtes faites avec
     l'ORM de CakePHP, il est préférable d'utiliser les fonctionnalités de cache
     intégrées dans l'objet Query, telles que décrites dans la section
     :ref:`mettre les résultats de requête en cache <caching-query-results>`
@@ -223,7 +224,7 @@ et les résultats stockés dans le cache pour la clé fournie.
 Par exemple, vous souhaitez souvent mettre en cache les résultats du appel à un
 service distant. Vous pouvez utiliser ``remember()`` pour faciliter cela::
 
-    class IssueService 
+    class IssueService
     {
 
         function allIssues($repo)
@@ -474,11 +475,11 @@ ou dans un plugin en utilisant ``$plugin\Cache\Engine``.
 Les moteurs de cache src/plugin peuvent aussi remplacer les moteurs
 du cœur. Les adaptateurs de cache doivent être dans un répertoire cache.
 Si vous avez un moteur de cache nommé ``MyCustomCacheEngine`` il devra
-être placé soit dans ``src/Cache/Engine/MyCustomCacheEngine.php``
+être placé soit dans **src/Cache/Engine/MyCustomCacheEngine.php**
 comme une app/libs ou dans
 ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` faisant parti d'un
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
-notation par points de plugin. ::
+notation par points de plugin::
 
     Cache::config('custom', [
         'engine' => 'CachePack.MyCustomCache',
@@ -546,7 +547,6 @@ L'API requise pour CacheEngine est
     Non requise, mais utilisée pour faire du nettoyage quand les ressources
     expirent. Le moteur FileEngine utilise cela pour effacer les fichiers
     qui contiennent des contenus expirés.
-
 
 .. meta::
     :title lang=fr: Mise en cache

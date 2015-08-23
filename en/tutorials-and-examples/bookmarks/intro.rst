@@ -31,9 +31,16 @@ Or, you can download ``composer.phar`` from the
 
 Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
-in the **bookmarker** directory. ::
+in the **bookmarker** directory::
 
-    php composer.phar create-project --prefer-dist -s dev cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+
+If you downloaded and ran the `Composer Windows Installer
+<https://getcomposer.org/Composer-Setup.exe>`_, then type the following line in
+your terminal from your installation directory (ie.
+C:\\wamp\\www\\dev\\cakephp3)::
+
+    composer create-project --prefer-dist cakephp/app bookmarker
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -75,6 +82,10 @@ home page. Before you can do that, you'll need to start the development server::
 
     bin/cake server
 
+.. note::
+
+    For Windows, the command needs to be ``bin\cake`` (note the backslash).
+
 This will start PHP's built-in webserver on port 8765. Open up
 **http://localhost:8765** in your web browser to see the welcome page. All the
 bullet points should be checkmarks other than CakePHP being able to connect to
@@ -94,7 +105,7 @@ the following SQL to create the necessary tables::
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         created DATETIME,
-        updated DATETIME
+        modified DATETIME
     );
 
     CREATE TABLE bookmarks (
@@ -104,7 +115,7 @@ the following SQL to create the necessary tables::
         description TEXT,
         url TEXT,
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         FOREIGN KEY user_key (user_id) REFERENCES users(id)
     );
 
@@ -112,7 +123,7 @@ the following SQL to create the necessary tables::
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255),
         created DATETIME,
-        updated DATETIME,
+        modified DATETIME,
         UNIQUE KEY (title)
     );
 
@@ -120,7 +131,6 @@ the following SQL to create the necessary tables::
         bookmark_id INT NOT NULL,
         tag_id INT NOT NULL,
         PRIMARY KEY (bookmark_id, tag_id),
-        INDEX tag_idx (tag_id, bookmark_id),
         FOREIGN KEY tag_key(tag_id) REFERENCES tags(id),
         FOREIGN KEY bookmark_key(bookmark_id) REFERENCES bookmarks(id)
     );
@@ -178,9 +188,10 @@ Generating Scaffold Code
 ========================
 
 Because our database is following the CakePHP conventions, we can use the
-:doc:`bake console </bake/usage>` application to quickly generate a basic application. In your
-command line run the following commands::
+:doc:`bake console </bake/usage>` application to quickly generate a basic
+application. In your command line run the following commands::
 
+    // On Windows you'll need to use bin\cake instead.
     bin/cake bake all users
     bin/cake bake all bookmarks
     bin/cake bake all tags
@@ -192,6 +203,11 @@ stopped your server, restart it and go to **http://localhost:8765/bookmarks**.
 You should see a basic but functional application providing data access to your
 application's database tables. Once you're at the list of bookmarks, add a few
 users, bookmarks, and tags.
+
+.. note::
+
+    If you see a Not Found (404) page, confirm that the Apache mod_rewrite
+    module is loaded.
 
 Adding Password Hashing
 =======================
@@ -247,10 +263,18 @@ tag.
 
 Ideally, we'd have a URL that looks like
 **http://localhost:8765/bookmarks/tagged/funny/cat/gifs**. This would let us
-find all the bookmarks that have the 'funny', 'cat' and 'gifs' tags. Before we
-can implement this, we'll add a new route. In **config/routes.php**, add the
-following at the top of the file::
+find all the bookmarks that have the 'funny', 'cat' or 'gifs' tags. Before we
+can implement this, we'll add a new route. Your **config/routes.php** should
+look like::
 
+    <?php
+    use Cake\Routing\Router;
+
+    Router::defaultRouteClass('Route');
+
+    // New route we're adding for our tagged action.
+    // The trailing `*` tells CakePHP that this action has
+    // passed parameters.
     Router::scope(
         '/bookmarks',
         ['controller' => 'Bookmarks'],
@@ -259,21 +283,39 @@ following at the top of the file::
         }
     );
 
-The above defines a new 'route' which connects the **/bookmarks/tagged/***
-path, to ``BookmarksController::tags()``. By defining routes, you can isolate
-how your URLs look, from how they are implemented. If we were to visit
+    Router::scope('/', function ($routes) {
+        // Connect the default routes.
+        $routes->fallbacks('InflectedRoute');
+    });
+
+The above defines a new 'route' which connects the **/bookmarks/tagged/** path,
+to ``BookmarksController::tags()``. By defining routes, you can isolate how your
+URLs look, from how they are implemented. If we were to visit
 **http://localhost:8765/bookmarks/tagged**, we would see a helpful error page
-from CakePHP. Let's implement that missing method now. In
-**src/Controller/BookmarksController.php** add the following::
+from CakePHP informing you that the controller action does not exist. Let's
+implement that missing method now. In **src/Controller/BookmarksController.php**
+add the following::
 
     public function tags()
     {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
         $tags = $this->request->params['pass'];
+
+        // Use the BookmarksTable to find tagged bookmarks.
         $bookmarks = $this->Bookmarks->find('tagged', [
             'tags' => $tags
         ]);
-        $this->set(compact('bookmarks', 'tags'));
+
+        // Pass variables into the view template context.
+        $this->set([
+            'bookmarks' => $bookmarks,
+            'tags' => $tags
+        ]);
     }
+
+To access other parts of the request data, consult the :ref:`cake-request`
+section.
 
 Creating the Finder Method
 --------------------------
@@ -284,15 +326,13 @@ application's logic in the models. If you were to visit the
 method has not been implemented yet, so let's do that. In
 **src/Model/Table/BookmarksTable.php** add the following::
 
+    // The $query argument is a query builder instance.
+    // The $options array will contain the 'tags' option we passed
+    // to find('tagged') in our controller action.
     public function findTagged(Query $query, array $options)
     {
-        $fields = [
-            'Bookmarks.id',
-            'Bookmarks.title',
-            'Bookmarks.url',
-        ];
         return $this->find()
-            ->distinct($fields)
+            ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
@@ -300,16 +340,23 @@ method has not been implemented yet, so let's do that. In
 
 We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
 a very powerful concept in CakePHP that allows you to package up re-usable
-queries. In our finder we've leveraged the ``matching()`` method which allows us
-to find bookmarks that have a 'matching' tag.
+queries. Finder methods always get a :doc:`/orm/query-builder` object and an
+array of options as parameters. Finders can manipulate the query and add any
+required conditions or criteria. When complete, finder methods must return
+a modified query object. In our finder we've leveraged the ``distinct()`` and
+``matching()`` methods which allow us to find distinct bookmarks that have
+a 'matching' tag. The ``matching()`` method accepts an `anonymous function
+<http://php.net/manual/en/functions.anonymous.php>`_ that receives a query
+builder as its argument. Inside the callback we use the query builder to define
+conditions that will filter bookmarks that have specific tags.
 
 Creating the View
 -----------------
 
 Now if you visit the **/bookmarks/tagged** URL, CakePHP will show an error
-letting you know that you have not made a view file. Next, let's build the view
-file for our ``tags()`` action. In **src/Template/Bookmarks/tags.ctp** put the
-following content::
+letting you know that you have not made a view file. Next, let's build the
+view file for our ``tags()`` action. In **src/Template/Bookmarks/tags.ctp**
+put the following content::
 
     <h1>
         Bookmarks tagged with
@@ -319,25 +366,30 @@ following content::
     <section>
     <?php foreach ($bookmarks as $bookmark): ?>
         <article>
+            <!-- Use the HtmlHelper to create a link -->
             <h4><?= $this->Html->link($bookmark->title, $bookmark->url) ?></h4>
             <small><?= h($bookmark->url) ?></small>
+
+            <!-- Use the TextHelper to format text -->
             <?= $this->Text->autoParagraph($bookmark->description) ?>
         </article>
     <?php endforeach; ?>
     </section>
 
-CakePHP expects that our templates follow the naming convention where the
-template has the lower case and underscored version of the controller action
-name.
+In the above code we use the :doc:`/views/helpers/html` and
+:doc:`/views/helpers/text` helpers to assist in generating our view output. We
+also use the :php:func:`h` shortcut function to HTML encode output. You should
+remember to always use ``h()`` when outputting user data to prevent HTML
+injection issues.
+
+The ``tags.ctp`` file we just created follows the CakePHP conventions for view
+template files. The convention is to have the template use the lower case and
+underscored version of the controller action name.
 
 You may notice that we were able to use the ``$tags`` and ``$bookmarks``
 variables in our view. When we use the ``set()`` method in our controller's we
 set specific variables to be sent to the view. The view will make all passed
 variables available in the templates as local variables.
-
-In our view we've used a few of CakePHP's built-in :doc:`helpers
-</views/helpers>`. Helpers are used to make re-usable logic for formatting data,
-creating HTML or other view output.
 
 You should now be able to visit the **/bookmarks/tagged/funny** URL and see all
 the bookmarks tagged with 'funny'.

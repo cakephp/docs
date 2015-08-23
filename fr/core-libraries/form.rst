@@ -18,7 +18,7 @@ Créer un Formulaire
 Généralement lorsque vous utilisez la classe Form, vous voudrez utiliser une
 sous classe pour définir votre formulaire. Cela rend les tests plus faciles et
 vous permet de réutiliser votre formulaire. Les formulaires sont situés dans
-``src/Form`` et ont habituellement ``Form`` comme suffixe de classe. Par
+**src/Form** et ont habituellement ``Form`` comme suffixe de classe. Par
 exemple, un simple formulaire de contact ressemblerait à ceci::
 
     // Dans src/Form/ContactForm.php
@@ -62,8 +62,9 @@ les formulaires:
 * ``_buildSchema`` et utilisé pour définir le schema des données utilisé par
   FormHelper pour créer le formulaire HTML. Vous pouvez définir le type de
   champ, la longueur et la précision.
-* ``_buildValidator`` Récupère une instance de :php:class:`Cake\\Validation\\Validator`
-  à laquelle vous pouvez attacher des validateurs.
+* ``_buildValidator`` Récupère une instance de
+  :php:class:`Cake\\Validation\\Validator` à laquelle vous pouvez attacher des
+  validateurs.
 * ``_execute`` vous permet de définir le comportement que vous souhaitez lorsque
   ``execute()`` est appelée et que les données sont valides.
 
@@ -106,6 +107,44 @@ de requête::
 
     $isValid = $form->validate($this->request->data);
 
+Définir des Valeurs pour le Formulaire
+======================================
+
+Pour définir les valeurs d'un formulaire sans model, vous pouvez utiliser
+``$this->request->data`` comme dans tous formulaires créés par le FormHelper::
+
+    // Dans uncontroller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->data)) {
+                    $this->Flash->success('Nous reviendrons vers vous rapidement.');
+                } else {
+                    $this->Flash->error('Il y a eu un problème lors de la soumission de votre formulaire.');
+                }
+            }
+
+            if ($this->request->is('get')) {
+                //Values from the User Model e.g.
+                $this->request->data['name'] = 'John Doe';
+                $this->request->data['email'] = 'john.doe@example.com';
+            }
+
+            $this->set('contact', $contact);
+        }
+    }
+
+Les valeurs ne doivent être définies que si la méthode de requête est GET,
+sinon vous allez surcharger les données POST qui auraient pu être incorrectes
+et non sauvegardées.
 
 Récupérer les Erreurs d'un Formulaire
 =====================================
@@ -162,7 +201,7 @@ entities de l'ORM::
     echo $this->Form->button('Submit');
     echo $this->Form->end();
 
-Le code ci-dessus créé un formulaire HTML pour le ``ContactForm`` que nous avons
+Le code ci-dessus crée un formulaire HTML pour le ``ContactForm`` que nous avons
 défini précédemment. Les formulaires HTML créés avec FormHelper utiliseront les
 schema et validator définis pour déterminer les types de champ, leurs longueurs
 et les erreurs de validation.

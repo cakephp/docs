@@ -1,10 +1,122 @@
-Database Basics
-###############
+Notions de Base de Base de Données
+##################################
 
-L'ORM et l'accès à la base de données dans CakePHP a été totalement reconstruit
-pour la version 3.0. Il amène une nouvelle API pour la construction des
-requêtes, améliore la génération/reflection de schema, un système de type flexible
-et plus encore.
+La couche d'accès à la base de données de CakePHP fournit une abstraction et
+aide avec la plupart des aspects du traitement des bases de données
+relationnelles telles que, le maintien des connexions au serveur, la
+construction de requêtes, la protection contre les injections SQL, l'inspection
+et la modification des schémas, et avec le débogage et le profilage les requêtes
+envoyées à la base de données.
+
+Tour Rapide
+===========
+
+Les fonctions décrites dans ce chapitre illustrent les possibilités de l'API
+d'accès à la base de données de plus bas niveau. Si vous souhaitez plutôt en
+apprendre plus sur l'ORM complet, vous pouvez lire les sections portant sur le
+:doc:`/orm/query-builder` et :doc:`/orm/table-objects`.
+
+La manière la plus simple de créer une connexion à la base de données est
+d'utiliser une chaine ``DSN``::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $dsn = 'mysql://root:password@localhost/my_database';
+    ConnectionManager::config('default', ['url' => $dsn]);
+
+Une fois créé, vous pouvez accéder à l'objet Connection pour commencer à
+l'utiliser::
+
+    $connection = ConnectionManager::get('default');
+
+Bases de Données Supportées
+---------------------------
+
+CakePHP supporte les serveurs de base de données relationnelles suivants:
+
+* MySQL 5.1+
+* SQLite 3
+* PostgreSQL 8+
+* SQLServer 2008+
+
+Pour chacun des drivers de base de données ci-dessus, assurez-vous d'avoir
+la bonne extension PDO installée. Les API procédurales ne sont pas supportées.
+
+.. _running-select-statements:
+
+Exécuter des Instructions Select
+--------------------------------
+
+Exécuter une instruction SQL pur est un jeu d'enfant::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
+
+Vous pouvez utiliser des instructions préparées pour insérer des paramètres::
+
+    $results = $connection
+        ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
+        ->fetchAll('assoc');
+
+il est également possible d'utiliser des types de données complexes en tant
+qu'arguments::
+
+    $results = $connection
+        ->execute(
+            'SELECT * FROM articles WHERE created >= :created',
+            ['created' => DateTime('1 day ago')],
+            ['created' => 'datetime']
+        )
+        ->fetchAll('assoc');
+
+Au lieu d'écrire du SQL manuellement, vous pouvez utiliser le générateur de
+requêtes::
+
+    $results = $connection
+        ->newQuery()
+        ->select('*')
+        ->from('articles')
+        ->where(['created >' => new DateTime('1 day ago'), ['created' => 'datetime']])
+        ->order(['title' => 'DESC'])
+        ->execute()
+        ->fetchAll('assoc');
+
+Exécuter des Instructions Insert
+--------------------------------
+
+Insérer une ligne dans une base de données est habituellement l'affaire
+de quelques lignes::
+
+    use Cake\Datasource\ConnectionManager;
+
+    $connection = ConnectionManager::get('default');
+    $connection->insert('articles', [
+        'title' => 'A New Article',
+        'created' => new DateTime('now')
+    ], ['created' => 'datetime']);
+
+Exécuter des Instructions Update
+--------------------------------
+
+Mettre à jour une ligne de base de données est aussi intuitif, l'exemple suivant
+procédera à la mise à jour de l'article comportant l'**id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
+
+Exécuter des Instructions Delete
+--------------------------------
+
+De même, la méthode ``delete()`` est utilisée pour supprimer des lignes de la
+base de données, l'exemple suivant procédera à suppression de l'article
+comportant l'**id** 10::
+
+    use Cake\Datasource\ConnectionManager;
+    $connection = ConnectionManager::get('default');
+    $connection->delete('articles', ['id' => 10]);
 
 .. _database-configuration:
 
@@ -12,10 +124,10 @@ Configuration
 =============
 
 Par convention, les connexions à la base de données sont configurées dans
-``config/app.php``. L'information de connexion définie dans ce fichier
+**config/app.php**. L'information de connexion définie dans ce fichier
 est envoyée au :php:class:`Cake\\DataSource\\ConnectionManager` créant la
 configuration de la connexion que votre application utilisera. Un exemple
-d'information sur la connexion se trouve dans ``config/app.default.php``.
+d'information sur la connexion se trouve dans **config/app.default.php**.
 Un exemple d'information sur la configuration ressemblera à ceci::
 
     'Datasources' => [
@@ -67,7 +179,7 @@ Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/optio
 supplémentaires en tant qu'arguments de query string.
 
 Par défaut, tous les objets Table vont utiliser la connexion ``default``. Pour
-utiliser une autre connexion, reportez vous à
+utiliser une autre connexion, reportez-vous à
 :ref:`la configuration des connexions<configuring-table-connections>`.
 
 Il y a un certain nombre de clés supportées dans la configuration de la base
@@ -98,8 +210,8 @@ database
 port (*optionnel*)
     Le port TCP ou le socket Unix utilisé pour se connecter au serveur.
 encoding
-    Indique le jeu de caractères à utiliser lors de l'envoi d'instructions SQL au
-    serveur. L'encodage par défaut est celui de la base de données
+    Indique le jeu de caractères à utiliser lors de l'envoi d'instructions SQL
+    au serveur. L'encodage par défaut est celui de la base de données
     pour toutes les bases de données autres que DB2. Si vous souhaitez utiliser
     l'encodage UTF-8 avec les connexions MySQL, vous devez utiliser
     'utf8' sans trait d'union.
@@ -123,8 +235,7 @@ ssl_ca
     seulement par MySQL).
 init
     Une liste de requêtes qui doivent être envoyées au serveur de la base de
-    données lorsque la connexion est créée. Cette option est seulement
-    supportée par MySQL, PostgreSQL, et SQL Server pour le moment.
+    données lorsque la connexion est créée.
 log
     Défini à ``true`` pour activer les logs des requêtes. Si activé,
     les requêtes seront écrites au niveau ``debug`` avec le scope
@@ -216,9 +327,9 @@ utiliser avec la couche de la base de données. Les types supportés par CakePHP
 sont:
 
 string
-    Généralement construit en colonnes CHAR ou VARCHAR. Utiliser l'option ``fixed``
-    va forcer une colonne CHAR. Dans SQL Server, les types NCHAR et NVARCHAR sont
-    utilisés.
+    Généralement construit en colonnes CHAR ou VARCHAR. Utiliser l'option
+    ``fixed`` va forcer une colonne CHAR. Dans SQL Server, les types NCHAR et
+    NVARCHAR sont utilisés.
 text
     Correspond aux types TEXT
 uuid
@@ -230,9 +341,11 @@ biginteger
     Correspond au type BIGINT fourni par la base de données.
 float
     Correspond soit à DOUBLE, soit à FLOAT selon la base de données.
-    L'option ``precision`` peut être utilisée pour définir la précision utilisée.
+    L'option ``precision`` peut être utilisée pour définir la précision
+    utilisée.
 decimal
-    Correspond au type DECIMAL. Supporte les options ``length`` et  ``precision``.
+    Correspond au type DECIMAL. Supporte les options ``length`` et
+    ``precision``.
 boolean
     Correspond au BOOLEAN sauf pour MySQL, où TINYINT(1) est utilisé pour
     représenter les booléens.
@@ -251,9 +364,9 @@ timestamp
 time
     Correspond au type TIME dans toutes les bases de données.
 
-Ces types sont utilisés à la fois pour les fonctionnalités de reflection de schema
-fournies par CakePHP, et pour les fonctionnalités de génération de schema que CakePHP
-utilise lors des fixtures de test.
+Ces types sont utilisés à la fois pour les fonctionnalités de reflection de
+schema fournies par CakePHP, et pour les fonctionnalités de génération de schema
+que CakePHP utilise lors des fixtures de test.
 
 Chaque type peut aussi fournir des fonctions de traduction entre les
 représentations PHP et SQL. Ces méthodes sont invoquées selon le type hints
@@ -278,10 +391,11 @@ les méthodes suivantes:
 * toPHP
 * toDatabase
 * toStatement
+* marshal
 
 Une façon facile de remplir l'interface basique est d'étendre
-:php:class:`Cake\Database\Type`. Par exemple, si vous souhaitez ajouter un type
-JSON, nous pourrions faire la classe type suivante::
+:php:class:`Cake\\Database\\Type`. Par exemple, si vous souhaitez ajouter un
+type JSON, nous pourrions faire la classe type suivante::
 
     // Dans src/Database/Type/JsonType.php
 
@@ -298,6 +412,14 @@ JSON, nous pourrions faire la classe type suivante::
         {
             if ($value === null) {
                 return null;
+            }
+            return json_decode($value, true);
+        }
+
+        public function marshal($value)
+        {
+            if (is_array($value) || $value === null) {
+                return $value;
             }
             return json_decode($value, true);
         }
@@ -330,32 +452,21 @@ Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
 notre nouveau type, et la couche de base de données de CakePHP va
 automatiquement convertir nos données JSON lors de la création de requêtes.
 Vous pouvez utiliser les types personnalisés créés en faisant la correspondance
-des types dans la :ref:`méhode _initializeSchema() <saving-complex-types>` de
-votre Table.
+des types dans la :ref:`méthode _initializeSchema() <saving-complex-types>` de
+votre Table::
 
-.. _parsing-localized-dates:
+    use Cake\Database\Schema\Table as Schema;
 
-Parser les Données Datetime Localisées
---------------------------------------
+    class WidgetsTable extends Table
+    {
 
-Quand vous acceptez les données localisées, c'est sympa d'accepter les
-informations de type datetime dans un format localisé pour l'utilisateur. Dans
-un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
-les types Date, Time, et DateTime pour parser les formats localisés::
+        protected function _initializeSchema(Schema $schema)
+        {
+            $schema->columnType('widget_prefs', 'json');
+            return $schema;
+        }
 
-    use Cake\Database\Type;
-
-    // Permet de parser avec le format de locale par défaut.
-    Type::build('datetime')->useLocaleParser();
-
-    // Configure un parser personnalisé du format de datetime.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
-
-    // Vous pouvez aussi utiliser les constantes IntlDateFormatter.
-    Type::build('datetime')->useLocaleParser()
-        ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
-
-Le parsing du format par défaut est le même que le format de chaîne par défaut.
+    }
 
 Les Classes de Connection
 =========================
@@ -375,7 +486,7 @@ L'exécution des Requêtes
 
 .. php:method:: query($sql)
 
-Une fois que vous avez un objet connection, vous voudrez probablement réaliser
+Une fois que vous avez un objet Connection, vous voudrez probablement réaliser
 quelques requêtes avec. La couche d'abstraction de CakePHP fournit des
 fonctionnalités au-dessus de PDO et des drivers natifs. Ces fonctionnalités
 fournissent une interface similaire à PDO. Il y a quelques différentes façons
@@ -665,9 +776,9 @@ a quelques inconvénients:
   identifiers.
 
 Si vous utilisez un schema datant un peu qui nécessite de quoter les
-identifiers, vous pouvez l'activer en utilisant le paramètre ``quoteIdentifiers``
-dans votre :ref:`database-configuration`. Vous pouvez aussi activer cette
-fonctionnalité à la volée::
+identifiers, vous pouvez l'activer en utilisant le paramètre
+``quoteIdentifiers`` dans votre :ref:`database-configuration`. Vous pouvez
+aussi activer cette fonctionnalité à la volée::
 
     $conn->driver()->autoQuoting(true);
 
@@ -717,3 +828,8 @@ méthode ``cacheMetadata()``::
 CakePHP intègre aussi un outil CLI pour gérer les mises en cache de metadata.
 Consultez le chapitre :doc:`/console-and-shells/orm-cache` pour plus
 d'information.
+
+
+.. meta::
+    :title lang=fr: Notions de Base de Base de Données
+    :keywords lang=fr: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,base de données,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,cache

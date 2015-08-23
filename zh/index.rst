@@ -1,10 +1,9 @@
-.. CakePHP Cookbook documentation master file, created by
-   sphinx-quickstart on Tue Jan 18 12:54:14 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 欢迎
 #######
+
+.. warning::
+    This version of the documentation is for CakePHP 3.0. Go `here for the
+    CakePHP 2.x documentation <http://book.cakephp.org/2.0/zh>`_.
 
 CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。我们希望把文档的质量、有效性和准确性都保持在一个较高的水平。请注意在右上角的“改善本
 文档”按钮; 它会引导您进入当前页面的 GitHub 在线编辑器，让您可以轻松地为文档贡献任何添加、删除或更正。
@@ -57,5 +56,5 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
 
 .. meta::
-    :title lang=zh_CN: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=zh_CN: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=zh: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=zh: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

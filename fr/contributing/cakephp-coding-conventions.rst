@@ -1,8 +1,9 @@
 Normes de codes
 ###############
 
-Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code PSR-2
-<http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code suivantes.
+Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code
+PSR-2 <http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code
+suivantes.
 
 Il est recommandé que les autres personnes qui développent des Ingrédients de
 Cake suivent les mêmes normes.
@@ -59,13 +60,13 @@ Structures de Contrôle
 Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. Ci-dessous, un exemple avec "``if``"::
 
-    if ((expr_1) || (expr_2)) { 
+    if ((expr_1) || (expr_2)) {
         // action_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // action_2; 
+        // action_2;
     } else {
-        // default_action; 
-    } 
+        // default_action;
+    }
 
 *  Dans les structures de contrôle, il devrait y avoir 1 (un) espace avant la
    première parenthèse et 1 (un) espace entre les dernières parenthèses et
@@ -85,11 +86,11 @@ Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
 ::
 
     // mauvais = pas d'accolades, déclaration mal placée
-    if (expr) statement; 
+    if (expr) statement;
 
     // mauvais = pas d'accolades
-    if (expr) 
-        statement; 
+    if (expr)
+        statement;
 
     // bon
     if (expr) {
@@ -122,7 +123,6 @@ vérifiée de l'opération pour rendre le code plus clair::
     // Imbrications des ternaires est mauvaise
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-
 Fichiers de Template
 --------------------
 
@@ -153,7 +153,7 @@ Pour tester si une variable est null, il est recommandé d'utiliser une
 vérification stricte::
 
     if ($value === null) {
-    	  // ...
+          // ...
     }
 
 La valeur avec laquelle on vérifie devra être placée sur le côté droit::
@@ -175,7 +175,7 @@ Les fonctions doivent être appelées sans espace entre le nom de la fonction et
 la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre
 d'un appel de fonction::
 
-    $var = foo($bar, $bar2, $bar3); 
+    $var = foo($bar, $bar2, $bar3);
 
 Comme vous pouvez le voir, il doit y avoir un espace des deux côtés des
 signes égal (=).
@@ -194,7 +194,7 @@ Exemple d'une définition de méthode::
     }
 
 Les paramètres avec une valeur par défaut, doivent être placés en dernier
-dans la défintion de la fonction. Essayez de faire en sorte que vos fonctions
+dans la définition de la fonction. Essayez de faire en sorte que vos fonctions
 retournent quelque chose, au moins ``true`` ou ``false``, ainsi cela peut
 déterminer si l'appel de la fonction est un succès::
 
@@ -218,8 +218,8 @@ Typehinting
 -----------
 
 Les arguments qui attendent des objets, des tableaux ou des callbacks
-(appelables) peuvent être typés. Nous ne typons que les méthodes publiques car
-le typage prend du temps::
+(fonctions de rappel) peuvent être typés. Nous ne typons que les méthodes
+publiques car le typage prend du temps::
 
     /**
      * Some method description.
@@ -357,7 +357,7 @@ resource
     Rappelez vous que quand vous spécifiez un type en mixed, vous devez
     indiquer s'il est inconnu, ou les types possibles.
 callable
-    Function appelable.
+    Fonction de rappel.
 
 Vous pouvez aussi combiner les types en utilisant le caractère pipe::
 
@@ -402,13 +402,13 @@ Les Balises PHP
 
 Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
 courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de
-template (``.ctp``) lorque cela est nécessaire.
+template (``.ctp``) lorsque cela est nécessaire.
 
 Echo court
 ----------
 
 L'echo court doit être utilisé dans les fichiers de vue à la place de
-``<?php echo``. Il doit être immédiatemment suivi par un espace unique, la
+``<?php echo``. Il doit être immédiatement suivi par un espace unique, la
 variable ou la valeur de la fonction pour faire un ``echo``, un espace unique,
 et la balise de fermeture de php::
 
@@ -447,16 +447,15 @@ Variables
 ---------
 
 Les noms de variable doivent être aussi descriptifs que possible, mais
-aussi courts que possible. Les variables normales doivent démarrer
-avec une lettre minuscule, et doivent être écrites en camelBack s'il y a
-plusieurs mots. Les variables contenant des objets doivent démarrer
-avec une majuscule, et d'une certaine manière être associées à la classe d'où
-elles proviennent. Exemple::
+aussi courts que possible. Tous les noms de variables doivent démarrer
+avec une lettre minuscule, et doivent être écrites en camelBack si il y a
+plusieurs mots. Les variables contenant des objets doivent d'une certaine
+manière être associées à la classe d'où elles proviennent. Exemple::
 
     $user = 'John';
     $users = ['John', 'Hans', 'Arne'];
 
-    $Dispatcher = new Dispatcher();
+    $dispatcher = new Dispatcher();
 
 Visibilité des Membres
 ----------------------
@@ -490,9 +489,9 @@ Les noms de méthodes et variables privées commencent avec un underscore double
 
 Essayez cependant d'éviter les méthodes et variables privées et privilégiez
 plutôt les variables protégées.
-Ainsi elles pourront être accessibles ou modifiées par les sous-classes, alors que
-celles privées empêchent l'extension ou leur réutilisation. La visibilité privée
-rend aussi le test beaucoup plus difficile.
+Ainsi elles pourront être accessibles ou modifiées par les sous-classes, alors
+que celles privées empêchent l'extension ou leur réutilisation. La visibilité
+privée rend aussi le test beaucoup plus difficile.
 
 Exemple d'Adresses
 ------------------
@@ -523,17 +522,17 @@ Pour le casting, nous utilisons:
 Type
     Description
 (bool)
-		Cast pour boolean.
+        Cast pour boolean.
 (int)
-		Cast pour integer.
+        Cast pour integer.
 (float)
-		Cast pour float.
+        Cast pour float.
 (string)
-		Cast pour string.
+        Cast pour string.
 (array)
-		Cast pour array.
+        Cast pour array.
 (object)
-		Cast pour object.
+        Cast pour object.
 
 Constantes
 ----------
@@ -549,4 +548,4 @@ caractère underscore, par exemple::
 
 .. meta::
     :title lang=fr: Normes de code
-    :keywords lang=fr: accolades,niveau d'indentation,erreurs logiques,structures de contrôle,structure de contôle,expr,normes de code,parenthèses,foreach,Lecture possible,moose,nouvelles fonctionnalités,dépôt,developpeurs
+    :keywords lang=fr: accolades,niveau d'indentation,erreurs logiques,structures de contrôle,structure de contrôle,expr,normes de code,parenthèses,foreach,Lecture possible,moose,nouvelles fonctionnalités,dépôt,developpeurs

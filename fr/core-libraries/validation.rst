@@ -7,6 +7,8 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité.
 
+.. _creating-validators:
+
 Créer les Validators
 ====================
 
@@ -64,7 +66,7 @@ méthode ``requirePresence()`` a 4 modes:
 * ``false`` La présence du champ n'est pas requise.
 * ``create`` La présence du champ est requise lorsque vous validez une
   opération **create**.
-* ``update`` La présence du champ est requise lorque vous validez une
+* ``update`` La présence du champ est requise lorsque vous validez une
   opération **update**.
 
 Par défaut ``true`` est utilisée. La présence de la clé est vérifiée pour
@@ -103,39 +105,14 @@ Un exemple de ces méthodes est le suivant::
         ->notEmpty('body', 'Un body est nécessaire', 'create')
         ->allowEmpty('header_image', 'update');
 
-Champs Uniques
---------------
-
-La classe ``Table`` fournit une règle de validation pour s'assurer qu'un champ
-donné est unique dans une table. Par exemple, si vous souhaitez vous assurer
-que l'adresse email est unique, vous pouvez faire ce qui suit::
-
-    $validator->add('email', [
-        'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
-    ]);
-
-Si vous souhaitez vous assurer de l'unicité d'un champ en se basant sur un autre
-champ dans votre table, comme une clé étrangère sur une table associée, vous
-pouvez la scoper avec ce qui suit::
-
-    $validator->add('email', [
-        'unique' => [
-            'rule' => ['validateUnique', ['scope' => 'site_id']],
-            'provider' => 'table'
-        ]
-    ]);
-
-Cela va s'assurer que l'adresse email fournie est seulement unique pour les
-autres enregistrements avec le même ``site_id``.
-
-Remarquez que ces exemples prennent une clé ``provider``. L'ajout des providers
-``Validator`` est expliqué plus loin dans les sections suivantes.
+Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des
+providers ``Validator`` est expliqué plus loin dans les sections suivantes.
 
 Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
 
 Quand les champs ont plusieurs règles, chaque règle de validation sera exécutée
-même si la précédente a echoué. Cela vous permet de recueillir autant d'erreurs
+même si la précédente a échouée. Cela vous permet de recueillir autant d'erreurs
 de validation que vous le pouvez en un seul passage. Si toutefois, vous voulez
 stopper l'exécution après qu'une règle spécifique a échoué, vous pouvez définir
 l'option ``last`` à ``true``::
@@ -169,7 +146,7 @@ classe :php:class:`~Cake\\Validation\\Validation`. Cela facilite l'utilisation
 des méthodes de cette classe en règles de validation. Lors de l'utilisation
 conjointe de Validators et de l'ORM, des providers supplémentaires sont
 configurés pour la table et les objets entity. Vous pouvez utiliser la méthode
-``provider`` pour ajouter un provider supplémentaire que votre application
+``provider()`` pour ajouter un provider supplémentaire que votre application
 a besoin d'utiliser::
 
     $validator = new Validator();
@@ -180,9 +157,9 @@ a besoin d'utiliser::
     // Utilise un nom de classe. Les méthodes doivent être static.
     $validator->provider('custom', 'App\Model\Validation');
 
-Les providers de Validation peuvnt être des objets, ou des noms de classe. Si
+Les providers de Validation peuvent être des objets, ou des noms de classe. Si
 un nom de classe est utilisé, les méthodes doivent être static. Pour utiliser
-un provider autre que 'default', assurez-vous de définir la clé ``provider``
+un provider autre que 'default', assurez-vous de définir la clé ``provider()``
 dans votre règle::
 
     // Utilise une règle à partir du provider de la table
@@ -253,7 +230,8 @@ ou non, une règle particulière doit être appliquée::
         }
     ]);
 
-
+Vous pouvez accéder aux autres données soumises depuis le formulaire via le
+tableau ``$context['data']``.
 L'exemple ci-dessus va rendre la règle pour 'picture' optionnelle selon si la
 valeur pour ``show_profile_picture`` est vide. Vous pouvez également utiliser
 la règle de validation ``uploadedFile`` pour créer des inputs optionnelles
@@ -281,6 +259,45 @@ conditions sont vérifiées::
 
 Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
 si l'utilisateur veut recevoir la newsletter.
+
+Imbriquer des Validators
+------------------------
+
+.. versionadded:: 3.0.5
+
+Lorsque vous validez des :doc:`/core-libraries/form` avec des données
+imbriquées, ou lorsque vous travaillez avec des modèles qui contiennent des
+données de type tableau, il est nécessaire de valider les données imbriquées
+dont vous disposez. CakePHP permet facilement d'ajouter des validators sur des
+attributs spécifiques. Par exemple, imaginez que vous travailliez avec une base
+de données non relationnelle et que vous ayez besoin d'enregistrer un article
+et ses commentaires::
+
+    $data = [
+        'title' => 'Meilleur article',
+        'comments' => [
+            ['comment' => '']
+        ]
+    ];
+
+Pour valider les commentaires, vous utiliseriez un validator imbriqué::
+
+    $validator = new Validator();
+    $validator->add('title', 'not-blank', ['rule' => 'notBlank']);
+
+    $commentValidator = new Validator();
+    $commentValidator->add('comment', 'not-blank', ['rule' => 'notBlank']);
+
+    // Connecte les validators imbriqués.
+    $validator->addNestedMany('comments', $commentValidator);
+
+    // Récupère toutes erreurs y compris celles des validators imbriqués.
+    $validator->errors($data);
+
+Vous pouvez créer des 'relations' 1:1 avec ``addNested()`` et  des 'relations'
+1:N avec ``addNestedMany()``. Avec ces deux méthodes, les erreurs des
+validators contribuerons aux erreurs du validator parent and influeront sur le
+résultat final.
 
 .. _reusable-validators:
 
@@ -435,6 +452,6 @@ ces conditions limite & options comme suit::
             'rule' => ['range', 1, 5]
         ]);
 
-Les règles du Cœur qui prennnent des paramètres supplémentaires doivent avoir
+Les règles du Cœur qui prennent des paramètres supplémentaires doivent avoir
 un tableau pour la clé ``rule`` qui contient la règle comme premier élément, et
 les paramètres supplémentaires en paramètres restants.

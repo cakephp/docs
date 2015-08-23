@@ -10,8 +10,8 @@ HTML, XML ou JSON, mais le streaming de fichiers et la création de PDFs que les
 utilisateurs peuvent télécharger sont aussi de la responsabilité de la
 couche View.
 
-CakePHP a quelques classes de vue déjà construites pour gérer les scénarios de
-rendu les plus communs:
+CakePHP a quelques classes de vue déjà construites pour gérer les scénarios
+de rendu les plus communs:
 
 - Pour créer des services web XML ou JSON, vous pouvez utiliser
   :doc:`views/json-and-xml-views`.
@@ -20,15 +20,18 @@ rendu les plus communs:
 - Pour créer plusieurs vues pour un thème, vous pouvez utiliser
   :doc:`views/themes`.
 
+.. _app-view:
+
 The App View
 ============
 
 ``AppView`` est la classe View par défaut de votre application. ``AppView``
-étend lui même la classe ``Cake\View\View`` de CakePHP et est définie dans
-``src/View/AppView.php`` comme suit:
+étend elle-même la classe ``Cake\View\View`` de CakePHP et est définie dans
+**src/View/AppView.php** comme suit:
 
 .. code-block:: php
 
+    <?php
     namespace App\View;
 
     use Cake\View\View;
@@ -44,6 +47,7 @@ type d'utilisation:
 
 .. code-block:: php
 
+    <?php
     namespace App\View;
 
     use Cake\View\View;
@@ -68,18 +72,18 @@ navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut .ctp
-(Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la logique
-de présentation nécessaire à l'organisation des données reçues du controller,
-dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
-utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
-fera le pont entre votre langage de template et CakePHP.
+Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut
+.ctp (Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la
+logique de présentation nécessaire à l'organisation des données reçues du
+controller, dans un format qui satisfasse l'audience que vous recherchez. Si
+vous préférez utiliser un langage de template comme Twig, ou Smarty, une
+sous-classe de View fera le pont entre votre langage de template et CakePHP.
 
-Un fichier de template est stocké dans ``src/Template/``, dans un sous-dossier
+Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
 correspondant à son action. Par exemple, le fichier de vue pour l'action
 "view()" du controller Products devra normalement se trouver dans
-``src/Template/Products/view.ctp``.
+**src/Template/Products/view.ctp**.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différents usages qui seront présentés dans ce
@@ -88,7 +92,7 @@ chapitre :
 - **views**: Les Views sont la partie de la page qui est unique pour l'action
   lancée. Elles sont la substance de la réponse de votre application.
 - **elements** : morceaux de code de view plus petits, réutilisables. Les
-  éléments sont habituellement rendus dans les vues.
+  elements sont habituellement rendus dans les vues.
 - **layouts** : fichiers de template contenant le code de présentation qui se
   retrouve dans plusieurs interfaces de votre application. La plupart des
   vues sont rendues à l'intérieur d'un layout.
@@ -103,7 +107,8 @@ chapitre :
 Variables de Vue
 ----------------
 
-Toute variable que vous définissez dans votre controller avec ``set()`` sera disponible à la fois dans la vue et dans le layout que votre action utilise.
+Toute variable que vous définissez dans votre controller avec ``set()`` sera
+disponible à la fois dans la vue et dans le layout que votre action utilise.
 En plus, toute variable définie sera aussi disponible dans tout element.
 Si vous avez besoin de passer des variables supplémentaires de la
 vue vers le layout, vous pouvez soit appeler ``set()`` dans le template de vue,
@@ -123,7 +128,7 @@ Définir les Variables de Vue
 Les vues ont une méthode ``set()`` qui fonctionne de la même façon que
 ``set()`` qui se trouve dans les objets Controller. Utiliser set() à
 partir de la vue va ajouter les variables au layout et aux elements qui seront
-affichés plus tard. Regardez :ref:`setting-view_variables` pour plus
+rendus plus tard. Regardez :ref:`setting-view_variables` pour plus
 d'informations sur l'utilisation de ``set()``.
 
 Dans votre fichier de vue, vous pouvez faire::
@@ -179,14 +184,14 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post['Post']['id']
+        $post->id'
     ]); ?>
     </li>
     <?php $this->end(); ?>
 
     // The remaining content will be available as the 'content' block
     // In the parent view.
-    <?= h($post['Post']['body']) ?>
+    <?= h($post->body) ?>
 
 L'exemple ci-dessus vous montre comment vous pouvez étendre une vue, et
 remplir un ensemble de blocks. Tout contenu qui ne serait pas déjà dans un block
@@ -359,12 +364,12 @@ Tout ce que vous voulez voir dans toutes vos vues devra être placé dans un
 layout.
 
 Le fichier de layout par défaut de CakePHP est placé dans
-``src/Template/Layout/default.ctp``. Si vous voulez changer entièrement le
+**src/Template/Layout/default.ctp**. Si vous voulez changer entièrement le
 look de votre application, alors c'est le bon endroit pour commencer, parce que
 le code de vue de rendu du controller est placé à l'intérieur du layout par
 défaut quand la page est rendue.
 
-Les autres fichiers de layout devront être placés dans ``src/Template/Layout``.
+Les autres fichiers de layout devront être placés dans **src/Template/Layout**.
 Quand vous créez un layout, vous devez dire à CakePHP où placer
 la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple de ce à quoi un layout pourrait
@@ -386,16 +391,16 @@ ressembler:
    </head>
    <body>
 
-   <!-- Si vous voulez qu'un menu soit affiché pour toutes vos vues,
+   <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues,
    incluez le ici -->
    <div id="header">
        <div id="menu">...</div>
    </div>
 
-   <!-- C'est ici que je veux voir mes vues être affichées -->
+   <!-- C'est ici que je veux voir mes vues être rendues -->
    <?= $this->fetch('content') ?>
 
-   <!-- Ajoute un footer pour chaque page affichée -->
+   <!-- Ajoute un footer pour chaque page rendue -->
    <div id="footer">...</div>
 
    </body>
@@ -421,14 +426,17 @@ d'un fichier de vue::
     $this->assign('title', $titleContent);
 
 Vous pouvez créer autant de layouts que vous souhaitez: placez les juste dans
-le répertoire ``src/Template/Layout``, et passez de l'un à l'autre depuis les
+le répertoire **src/Template/Layout**, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 
     // A partir d'un controller
     public function admin_view()
     {
-        // stuff
+        // Défini le layout
+        $this->viewBuilder()->layout('admin');
+
+        // Avant 3.1
         $this->layout = 'admin';
     }
 
@@ -447,11 +455,15 @@ actions du controller en utilisant quelque chose comme::
         public function view_active()
         {
             $this->set('title', 'View Active Users');
+            $this->viewBuilder()->layout('default_small_ad');
+            // ou ce qui suit avant 3.1
             $this->layout = 'default_small_ad';
         }
 
         public function view_image()
         {
+            $this->viewBuilder()->layout('image');
+            // ou ce qui suit avant 3.1
             $this->layout = 'image';
             // Output user image
         }
@@ -478,6 +490,8 @@ contact à partir du plugin Contacts::
     {
         public function view_active()
         {
+            $this->viewBuilder()->layout('Contacts.contact');
+            // ou ce qui suit avant 3.1
             $this->layout = 'Contacts.contact';
         }
     }
@@ -503,8 +517,8 @@ pour rendre une vue plus lisible, en plaçant le rendu d'éléments répétitifs
 dans ses propres fichiers. Ils peuvent aussi vous aider à réutiliser des
 fragments de contenu dans votre application.
 
-Les elements se trouvent dans le dossier ``src/Template/Element/``, et ont une
-extension .ctp. Ils sont affichés en utilisant la méthode element de la vue::
+Les elements se trouvent dans le dossier **src/Template/Element/**, et ont une
+extension .ctp. Ils sont rendus en utilisant la méthode element de la vue::
 
     echo $this->element('helpbox');
 
@@ -521,7 +535,7 @@ Dans le fichier element, toutes les variables passés sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
 de template). Dans l'exemple ci-dessus, le fichier
-``src/Template/Element/helpbox.ctp`` peut utiliser la variable ``$helptext``::
+**src/Template/Element/helpbox.ctp** peut utiliser la variable ``$helptext``::
 
     // A l'intérieur de src/Template/Element/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
@@ -639,7 +653,7 @@ habituelle. Si la vue est rendue pour un controller/action d'un plugin, le nom
 du plugin va automatiquement être préfixé pour tous les elements utilisés, à
 moins qu'un autre nom de plugin ne soit présent.
 Si l'element n'existe pas dans le plugin, il ira voir dans le dossier principal
-APP. ::
+APP::
 
     echo $this->element('Contacts.helpbox');
 
@@ -651,21 +665,37 @@ Contacts::
     // et
     echo $this->element('Contacts.helpbox');
 
-Sont équivalents et résulteront au même element rendu.
+Sont équivalents et résulteront à l'affichage du même element.
 
 Pour les elements dans le sous-dossier d'un plugin
-(e.g., ``plugins/Contacts/sidebar/helpbox.ctp``), utilisez ce qui suit::
+(e.g., **plugins/Contacts/sidebar/helpbox.ctp**), utilisez ce qui suit::
 
     echo $this->element('Contacts.sidebar/helpbox');
+
+Préfix de Routing et Elements
+-----------------------------
+
+.. versionadded:: 3.0.1
+
+Si vous avez configuré un préfix de routage, la résolution des chemins d'accès
+aux Elements peut chercher dans un chemin préfixé, comme les Layouts et les vues
+d'Action le font déjà.
+En partant du postulat que vous avez configuré le préfix "Admin" et que vous
+appelez::
+
+    echo $this->element('my_element');
+
+L'element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un
+tel fichier n'existe pas, il sera ensuite cherché dans le chemin par défaut.
 
 Mettre en Cache des Sections de votre View
 ------------------------------------------
 
 .. php:method:: cache(callable $block, array $options = [])
 
-Parfois, générer une section de l'affichage de votre view peut être couteux
+Parfois, générer une section de l'affichage de votre view peut être coûteux
 à cause du rendu des :doc:`/views/cells` ou du fait d'opérations de helper
-couteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
+coûteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
 un moyen de mettre en cache des sections de view::
 
     // En supposant l'existence des variables locales
@@ -683,15 +713,15 @@ Créer vos propres Classes de View
 
 Vous avez peut-être besoin de créer vos propres classes de vue pour activer des
 nouveaux types de données de vue, ou ajouter de la logique supplémentaire
-de rendu de vue personnalisée. Comme la plupart des components de CakePHP, les
-classes de vue ont quelques conventions:
+pour le rendu de vue personnalisée. Comme la plupart des components de
+CakePHP, les classes de vue ont quelques conventions:
 
-* Les fichiers de classe de View doivent être mis dans ``src/View``. Par
-  exemple ``src/View/PdfView.php``.
+* Les fichiers de classe de View doivent être mis dans **src/View**. Par
+  exemple **src/View/PdfView.php**.
 * Les classes de View doivent être suffixées avec ``View``. Par exemple
   ``PdfView``.
 * Quand vous référencez les noms de classe de vue, vous devez omettre le
-  suffixe ``View``. Par exemple ``$this->viewClass = 'Pdf';``.
+  suffixe ``View``. Par exemple ``$builder->viewClass('Pdf');``.
 
 Vous voudrez aussi étendre ``View`` pour vous assurer que les choses
 fonctionnent correctement::
@@ -720,7 +750,6 @@ En savoir plus sur les vues
     views/themes
     views/json-and-xml-views
     views/helpers
-
 
 .. meta::
     :title lang=fr: Views (Vues)

@@ -42,34 +42,40 @@ d'intégrer des fonctionnalités semblables aux Collections pour tout objet
 Liste des Méthodes
 ==================
 
-* :php:meth:`each`
-* :php:meth:`map`
-* :php:meth:`extract`
-* :php:meth:`combine`
-* :php:meth:`stopWhen`
-* :php:meth:`unfold`
-* :php:meth:`filter`
-* :php:meth:`reject`
-* :php:meth:`every`
-* :php:meth:`some`
-* :php:meth:`match`
-* :php:meth:`reduce`
-* :php:meth:`min`
-* :php:meth:`max`
-* :php:meth:`groupBy`
-* :php:meth:`countBy`
-* :php:meth:`indexBy`
-* :php:meth:`sortBy`
-* :php:meth:`nest`
-* :php:meth:`listNested`
-* :php:meth:`contains`
-* :php:meth:`shuffle`
-* :php:meth:`sample`
-* :php:meth:`take`
 * :php:meth:`append`
-* :php:meth:`insert`
 * :php:meth:`buffered`
+* :php:meth:`combine`
 * :php:meth:`compile`
+* :php:meth:`contains`
+* :php:meth:`countBy`
+* :php:meth:`each`
+* :php:meth:`every`
+* :php:meth:`extract`
+* :php:meth:`filter`
+* :php:meth:`first`
+* :php:meth:`groupBy`
+* :php:meth:`indexBy`
+* :php:meth:`insert`
+* :php:meth:`isEmpty`
+* :php:meth:`last`
+* :php:meth:`listNested`
+* :php:meth:`map`
+* :php:meth:`match`
+* :php:meth:`max`
+* :php:meth:`min`
+* :php:meth:`nest`
+* :php:meth:`reduce`
+* :php:meth:`reject`
+* :php:meth:`sample`
+* :php:meth:`shuffle`
+* :php:meth:`skip`
+* :php:meth:`some`
+* :php:meth:`sortBy`
+* :php:meth:`stopWhen`
+* :php:meth:`take`
+* :php:meth:`through`
+* :php:meth:`unfold`
+* :php:meth:`zip`
 
 Faire une Itération
 ===================
@@ -101,7 +107,7 @@ callback étant appliqué à chaque objet dans la collection originelle::
         return $value * 2;
     });
 
-    // $result contient [2, 4, 6];
+    // $result contient ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
 
 La méthode ``map()`` va créer un nouvel itérateur, qui va créer automatiquement
@@ -139,6 +145,32 @@ vous pouvez utiliser une fonction de callback pour la retourner::
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
+Often, the properties you need to extract a common key present in multiple
+arrays or objects that are deeply nested inside other structures. For those
+cases you can use the ``{*}`` matcher in the path key::
+
+    $data = [
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-1'],
+                ['number' => 'number-2'],
+                ['number' => 'number-3'],
+            ]
+        ],
+        [
+            'name' => 'James',
+            'phone_numbers' => [
+                ['number' => 'number-4'],
+                ['number' => 'number-5'],
+            ]
+        ]
+    ];
+
+    $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
+    $numbers->toList();
+    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
 Les collections vous permettent de créer une nouvelle collection à partir des
@@ -170,6 +202,23 @@ basés sur un chemin::
         'b' => [2 => 'bar']
     ];
 
+Finalement vous pouvez utiliser les *closures* pour construire les
+chemins des clés/valeurs/groupes de façon dynamique, par exemple quand vous
+travaillez avec les entities et les dates (convertis en instances ``Cake/Time``
+par l'ORM) vous pourriez grouper les résultats par date::
+
+    $combined = (new Collection($entities))->combine(
+        'id',
+        function ($entity) { return $entity; },
+        function ($entity) { return $entity->date->toDateString(); }
+    );
+
+    // Le résultat va ressembler à ceci quand il sera converti en tableau
+    [
+        'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+        'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+    ]
+
 .. php:method:: stopWhen(callable $c)
 
 Vous pouvez stopper l'itération à n'importe quel point en utilisant la méthode
@@ -198,10 +247,10 @@ unique imbriqué dans la collection::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
-    $allElements = $collection->unfold();
+    $new = $collection->unfold();
 
     // $result contient [1, 2, 3, 4, 5];
-    $result = $new->toArray(false);
+    $result = $new->toList();
 
 Quand vous passez un callable à ``unfold()``, vous pouvez contrôler les éléments
 qui vont être révélés à partir de chaque item dans la collection originale.
@@ -214,7 +263,21 @@ C'est utile pour retourner les données à partir des services paginés::
         return MyService::fetchPage($page)->toArray();
     });
 
-    $allPagesItems = $items->toArray(false);
+    $allPagesItems = $items->toList();
+
+Si vous utilisez PHP 5.5+, vous pouvez utiliser le mot clé ``yield`` à l'intérieur
+de ``unfold()`` pour renvoyer autant d'éléments pour chaque item dans la collection
+que besoin::
+
+    $oddNumbers = [1, 3, 5, 7];
+    $collection = new Collection($oddNumbers);
+    $new = $collection->unfold(function ($oddNumber) {
+        yield $oddNumber;
+        yield $oddNumber + 1;
+    });
+
+    // $result contient [1, 2, 3, 4, 5, 6, 7, 8];
+    $result = $new->toList();
 
 Filtrer
 =======
@@ -297,7 +360,7 @@ Agrégation
 
 .. php:method:: reduce(callable $c)
 
-La contrepartie de l'opération ``map()`` est habituellemt un ``reduce``. Cette
+La contrepartie de l'opération ``map()`` est habituellement un ``reduce``. Cette
 fonction va vous aider à construire un résultat unique à partir de tous les
 éléments d'une collection::
 
@@ -317,19 +380,19 @@ pour la fonction ``reduce()``, il prend la valeur initiale pour l'opération
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
 Pour extraire la valeur minimum pour une collection basée sur une propriété,
-utilisez juste la fontion ``min()``. Celle-ci va retourner l'élément complet
+utilisez juste la fonction ``min()``. Celle-ci va retourner l'élément complet
 à partir de la collection et pas seulement la plus petite valeur trouvée::
 
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
-    echo $yougest->name;
+    echo $youngest->name;
 
 Vous pouvez aussi exprimer la propriété à comparer en fournissant un chemin ou
 une fonction callback::
 
     $collection = new Collection($people);
-    $personYougestChild = $collection->min(function ($person) {
+    $personYoungestChild = $collection->min(function ($person) {
         return $person->child->age;
     });
 
@@ -352,7 +415,7 @@ La même chose peut être appliquée à la fonction ``max()``, qui retourne un
 
 .. php:method:: sumOf(string|callable $callback)
 
-Pour finir, la méthode ``sumOf`` va retourner la somme d'une propriété de tous
+Pour finir, la méthode ``sumOf()`` va retourner la somme d'une propriété de tous
 les éléments::
 
     $collection = new Collection($people);
@@ -421,7 +484,7 @@ Result could look like this when converted to array:
 
 Il y aura des cas où vous savez qu'un élément est unique pour la
 propriété selon laquelle vous souhaitez faire un ``groupBy()``. Si vous
-souhaitez un unique résultat par groupe, vous pouvez utiliser la fontion
+souhaitez un unique résultat par groupe, vous pouvez utiliser la fonction
 ``indexBy()``::
 
     $usersById = $users->indexBy('id');
@@ -442,13 +505,61 @@ propriété ou un callback::
         return md5($file);
     });
 
+.. php:method:: zip($elements)
+
+Les éléments de différentes collections peuvent être groupés ensemble en
+utilisant la méthode ``zip()``. Elle retournera une nouvelle collection
+contenant un tableau regroupant les éléments de chaque collection qui sont
+placés à la même position::
+
+    $odds = new Collection([1, 3, 5]);
+    $pairs = new Collection([2, 4, 6]);
+    $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
+
+Vous pouvez également zipper des cllections multiples d'un coup::
+
+    $years = new Collection([2013, 2014, 2015, 2016]);
+    $salaries = [1000, 1500, 2000, 2300];
+    $increments = [0, 500, 500, 300];
+
+    $rows = $years->zip($salaries, $increments)->toList();
+    // Retourne:
+    [
+        [2013, 1000, 0],
+        [2014, 1500, 500],
+        [2015, 2000, 500],
+        [2016, 2300, 300]
+    ]
+
+Comme vous avez pu le voir, la méthode ``zip()`` est très utile pour transposer
+des tableaux multidimensionnels::
+
+    $data = [
+        2014 => ['jan' => 100, 'feb' => 200],
+        2015 => ['jan' => 300, 'feb' => 500],
+        2016 => ['jan' => 400, 'feb' => 600],
+    ]
+
+    // Récupérer les données de jan et fev ensemble
+
+    $firstYear = new Collection(array_shift($data));
+    $firstYear->zip($data[0], $data[1])->toList();
+
+    // Ou $firstYear->zip(...$data) in PHP >= 5.6
+
+    // Retourne
+    [
+        [100, 300, 400],
+        [200, 500, 600]
+    ]
+
 Trier
 =====
 
 .. php:method:: sortBy($callback)
 
 Les valeurs de collection peuvent être triées par ordre croissant ou
-décroissant basé sur une colonnne ou une fonction personnalisée. Pour créer une
+décroissant basé sur une colonne ou une fonction personnalisée. Pour créer une
 nouvelle collection triée à partir de valeurs d'une autre, vous pouvez utiliser
 ``sortBy``::
 
@@ -499,7 +610,7 @@ Par défaut, ``SORT_NUMERIC`` est utilisée::
 
 .. warning::
 
-    Il est souvent couteux d'itérer les collections triées plus d'une fois. Si
+    Il est souvent coûteux d'itérer les collections triées plus d'une fois. Si
     vous voulez le faire, pensez à convertir la collection en tableau ou
     utilisez simplement la méthode ``compile()`` dessus.
 
@@ -596,8 +707,44 @@ Par défaut, l'arbre est traversé de la racine vers les feuilles. Vous pouvez
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
+Once you have converted a tree into a nested list, you can use the ``printer()``
+method to configure how the list output should be formatted::
+
+    $nested->listNested()->printer('name', 'id', '--')->toArray();
+
+    // Returns
+    [
+        3 => 'Eagle',
+        4 => 'Seagull',
+        5 -> '--Clown Fish',
+    ]
+
+The ``printer()`` method also lets you use a callback to generate the keys and
+or values::
+
+    $nested->listNested()->printer(
+        function ($el) {
+            return $el->name;
+        },
+        function ($el) {
+            return $el->id;
+        }
+    );
+
 Autres Méthodes
 ===============
+
+.. php:method:: isEmpty()
+
+Vous permet de voir si une collection contient un élément::
+
+    $collection = new Collection([]);
+    // Returns true
+    $collection->isEmpty();
+
+    $collection = new Collection([1]);
+    // Returns false
+    $collection->isEmpty();
 
 .. php:method:: contains($value)
 
@@ -620,7 +767,7 @@ dans une position au hasard, utilisez ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
-    // Ceci pourrait retourner ['b' => 2, 'c' => 3, 'a' => 1]
+    // Ceci pourrait retourner [2, 3, 1]
     $collection->shuffle()->toArray();
 
 Retrait d'Eléments
@@ -647,7 +794,7 @@ hasard.
 
 .. php:method:: take(int $size, int $from)
 
-Quand vous souhaitez prendre une parite d'une collection, utilisez la fonction
+Quand vous souhaitez prendre une partie d'une collection, utilisez la fonction
 ``take()``, cela va créer une nouvelle collection avec au moins le nombre de
 valeurs que vous spécifiez dans le premier argument, en commençant par la
 position passée dans le second argument::
@@ -659,6 +806,33 @@ position passée dans le second argument::
 
 Les positions sont basées sur zéro, donc le premier nombre de la position est
 ``0``.
+
+.. php:method:: skip(int $positions)
+
+Alors que le second argument de ``take()`` peut vous aider à exclure quelques
+éléments avant de les récupérer depuis une collection, vous pouvez également
+utiliser ``skip()`` pour récupérer le reste des éléments après une certaine
+position::
+
+    $collection = new Collection([1, 2, 3, 4]);
+    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
+
+.. php:method:: first()
+
+Un des cas d'utilisation les plus courant de ``take()`` est de récupérer le
+premier élément d'un collection. Une moyen plus rapide d'arriver au même
+résultat est d'utiliser la méthode ``first()``::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->first(); // Retourne 5
+
+.. php:method:: last()
+
+De la même manière, vous pouvez récupérer le dernier élément d'une collection
+en utilisant la méthode ``last()``::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->last(); // Returns 2
 
 Agrandir les Collections
 ------------------------
@@ -687,7 +861,7 @@ des deux sources::
     convertissez une collection en un tableau en utilisant ``toArray()``. Si
     vous ne voulez pas que des valeurs d'une collection surchargent les autres
     dans la précédente basée sur leur clé, assurez-vous que vous appelez
-    ``toArray(false)`` afin de supprimer les clés et de préserver toutes les
+    ``toList()`` afin de supprimer les clés et de préserver toutes les
     valeurs.
 
 Modification d'Eléments
@@ -719,7 +893,7 @@ d'une autre collection::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-Quand converti en un tableau, la collection ``$merged`` va ressmebler à ceci::
+Une fois convertie en un tableau, la collection ``$merged`` va ressembler à ceci::
 
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
@@ -732,7 +906,7 @@ points des propriétés à suivre pour que les éléments puissent être insér�
 cette position. Le second argument est tout ce qui peut être converti en
 objets collection.
 
-Merci de remarquer que les éléments sont insérés par la position dans laquelle
+Veuillez noter que les éléments sont insérés par la position dans laquelle
 ils sont trouvés, ainsi le premier élément de la deuxième collection est
 fusionné dans le premier élément de la première collection.
 
@@ -756,6 +930,96 @@ alors la propriété cible va être remplie avec les valeurs ``null``::
 La méthode ``insert()`` peut opérer sur des éléments tableau ou des objets qui
 implémentent l'interface ``ArrayAccess``.
 
+Créer des Méthodes de Collection Réutilisables
+----------------------------------------------
+
+Utiliser une ``Closure`` pour les méthodes de Collection est optimal lorsque le
+travail à accomplir est petit et ciblé, mais cela peut devenir gênant très
+rapidement. Cela devient plus évident quand beaucoup de méthodes différentes
+doivent être appelées ou lorsque la longueur des méthodes de la ``Closure`` est
+de plus de quelques lignes.
+
+Il y a aussi des cas où la logique utilisée pour les méthodes de Collection peut
+être réutilisée dans plusieurs parties de votre application. Il est préférable
+d'envisager d'éclater la logique d'ensemble complexe dans des classes séparées.
+Par exemple, imaginez une longue restriction comme celle-ci::
+
+        $collection
+                ->map(function ($row, $key) {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                });
+
+Cela peut être remodeler en créant une autre classe::
+
+        class TotalOrderCalculator
+        {
+
+                public function __invoke($row, $key)
+                {
+                    if (!empty($row['items'])) {
+                        $row['total'] = collection($row['items'])->sumOf('price');
+                    }
+
+                    if (!empty($row['total'])) {
+                        $row['tax_amount'] = $row['total'] * 0.25;
+                    }
+
+                    // More code here...
+
+                    return $modifiedRow;
+                }
+        }
+
+        // Use the logic in your map() call
+        $collection->map(new TotalOrderCalculator)
+
+
+.. php:method:: through(callable $c)
+
+Parfois une suite d'appels de méthodes de Collection peut devenir réutilisable
+dans d'autres parties de votre application, mais seulement si elles sont
+appelées dans cet ordre précis. Dans ces cas, vous pouvez utiliser les
+``through()`` en combinaison avec une classe implémentant ``__invoke`` pour
+répartir vos traitements de données::
+
+        $collection
+                ->map(new ShippingCostCalculator)
+                ->map(new TotalOrderCalculator)
+                ->map(new GiftCardPriceReducer)
+                ->buffered()
+               ...
+
+Les appels aux méthodes ci-dessus, peuvent être regroupés dans une nouvelle
+classe permettant de ne pas être répétés à chaque fois::
+
+        class FinalCheckOutRowProcessor
+        {
+
+                public function __invoke($collection)
+                {
+                        return $collection
+                                ->map(new ShippingCostCalculator)
+                                ->map(new TotalOrderCalculator)
+                                ->map(new GiftCardPriceReducer)
+                                ->buffered()
+                               ...
+                }
+        }
+
+
+        // Maintenant vous pouvez utiliser la méthode through() pour appeler toutes les méthodes en une fois
+        $collection->through(new FinalCheckOutRowProcessor);
+
 Optimiser les Collections
 -------------------------
 
@@ -763,14 +1027,14 @@ Optimiser les Collections
 
 Les collections effectuent souvent la plupart des opérations que vous créez
 en utilisant ses fonctions de façon lazy. Ceci signifie que même si vous pouvez
-appeler une fonction, cela ne signifie pas qu'elle est executée de la bonne
+appeler une fonction, cela ne signifie pas qu'elle est exécutée de la bonne
 manière. C'est vrai pour une grande quantité de fonctions de cette classe.
 L'évaluation lazy vous permet de gagner des ressources dans des situations
 où vous n'utilisez pas toutes les valeurs d'une collection. Vous pouvez ne pas
 utiliser toutes les valeurs quand l'itération stoppe rapidement, ou quand une
 exception/un échec se produit rapidement.
 
-De plus, l'évaluation lazy aide à accélerer certaines operations. Considerez
+De plus, l'évaluation lazy aide à accélérer certaines operations. Considérez
 l'exemple suivant::
 
     $collection = new Collection($oneMillionItems);
@@ -806,7 +1070,7 @@ collections sont immutables et l'opération d'extraction lazy serait fait pour
 les deux filtres.
 
 Heureusement, nous pouvons passer outre ce problème avec une simple fonction. Si
-vous planifiez de réutilser les valeurs à partir de certaines opérations plus
+vous planifiez de réutiliser les valeurs à partir de certaines opérations plus
 d'une fois, vous pouvez compiler les résultats dans une autre collection en
 utilisant la fonction ``buffered()``::
 
@@ -854,4 +1118,4 @@ utilisez la méthode ``compile()``::
 
 .. meta::
     :title lang=fr: Collections
-    :keywords lang=fr: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold
+    :keywords lang=fr: collections, cakephp, append, sort, compile, contains, countBy, each, every, extract, filter, first, firstMatch, groupBy, indexBy, jsonSerialize, map, match, max, min, reduce, reject, sample, shuffle, some, random, sortBy, take, toArray, insert, sumOf, stopWhen, unfold, through

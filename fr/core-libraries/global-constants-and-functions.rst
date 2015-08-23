@@ -131,10 +131,24 @@ CakePHP, comme le débogage et la traduction de contenu.
     Communément utilisé comme ceci
     ``list($plugin, $name) = pluginSplit('Users.User');``
 
+.. php:function:: namespaceSplit(string $class)
+
+    Divise le namespace du nom de la classe.
+
+    Communément utilisé comme ceci
+    ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
+
 .. php:function:: pr(mixed $var)
 
     Raccourci pratique pour ``print_r()``, avec un ajout de balises ``<pre>``
     autour de la sortie.
+
+.. php:function:: pj(mixed $var)
+
+    JSON pretty print convenience function, with the addition of
+    wrapping ``<pre>`` tags around the output.
+
+    It is meant for debugging the JSON representation of objects and arrays.
 
 Définitions des constantes du noyau
 ===================================
@@ -227,7 +241,6 @@ Définition de Constantes de Temps
 .. php:const:: YEAR
 
     Égale à 31536000
-
 
 .. meta::
     :title lang=fr: Constantes Globales et Fonctions

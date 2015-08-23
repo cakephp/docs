@@ -12,7 +12,7 @@ Debug Basique
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
 La fonction ``debug()`` est une fonction disponible partout qui fonctionne de la
-même manière que la fonction PHP ``print\_r()``. La fonction ``debug()`` vous
+même manière que la fonction PHP ``print_r()``. La fonction ``debug()`` vous
 permet de montrer les contenus d'un variable de différentes façons.
 Premièrement, si vous voulez que vos données soient montrées d'une façon
 sympa en HTML, définissez le deuxième paramètre à ``true``. La fonction affiche
@@ -21,10 +21,26 @@ aussi la ligne et le fichier dont ils sont originaires par défaut.
 La sortie de cette fonction est seulement montrée si la variable de ``$debug``
 du cœur a été définie à ``true``.
 
-.. php:function stackTrace()
+.. php:function:: stackTrace()
 
 La fonction ``stackTrace()`` est globalement disponible, et vous permet
 d'afficher une stack trace quelque soit la fonction appelée.
+
+.. php:function:: breakpoint()
+
+.. versionadded:: 3.1
+
+Si vous avez installé `Psysh <http://psysh.org/>`_ vous pouvez utiliser cette
+fonction dans les environnements CLI pour ouvrir une console interactive
+avec le scope local courant::
+
+    // Du code
+    eval(breakpoint());
+
+Ouvrira une console interactive qui peut être utilisée pour vérifier les
+variables locales et exécuter d'autre code. Vous pouvez fermer le debugger
+interactif et reprendre l'exécution du script original en tapant
+``quit`` ou ``q`` dans la session interactive.
 
 Utiliser la Classe Debugger
 ===========================
@@ -86,7 +102,7 @@ Generating Stack Traces
 .. php:staticmethod:: trace($options)
 
 Retourne le stack trace courant. Chaque ligne des traces inclut la méthode
-appelée, incluant chaque fichier et ligne d'où est originaire l'appel. ::
+appelée, incluant chaque fichier et ligne d'où est originaire l'appel::
 
     //Dans PostsController::index()
     pr( Debugger::trace() );
@@ -108,7 +124,7 @@ Getting an Excerpt From a File
 
 Récupérer un extrait du fichier dans $path (qui est un chemin de fichier
 absolu), mettant en évidence le numéro de la ligne $line avec le nombre
-de lignes $context autour. ::
+de lignes $context autour::
 
     pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
 
@@ -145,8 +161,8 @@ Ce qui est au-dessus écrit ``Got here`` dans le log de debug. Vous pouvez
 utiliser les logs (log entries) pour faciliter le debug des méthodes qui
 impliquent des redirections ou des boucles compliquées. Vous pouvez aussi
 utiliser :php:meth:`Cake\\Log\\Log::write()`` pour écrire les messages de log.
-Cette méthode peut être appelée statiquement partout dans votre application où CakeLog
-a été chargée::
+Cette méthode peut être appelée statiquement partout dans votre application où
+CakeLog a été chargée::
 
     // Au début du fichier dans lequel vous voulez logger.
     use Cake\Log\Log;
@@ -162,7 +178,6 @@ fournit principalement une barre d'outils dans le HTML rendu, qui fournit
 une pléthore d'informations sur votre application et la requête courante.
 Consultez le chapitre sur :doc:`/debug-kit` pour plus d'information sur son
 installation et son utilisation.
-
 
 .. meta::
     :title lang=fr: Debugger

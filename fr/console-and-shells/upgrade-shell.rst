@@ -11,7 +11,6 @@ Cette mise à jour est fournie par le
 au fichier README pour avoir toutes les informations sur la façon de mettre
 à jour votre application.
 
-
 .. meta::
     :title lang=fr: Shell de Mise à Jour
     :keywords lang=fr: api docs,shell,upgrade

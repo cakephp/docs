@@ -2,11 +2,12 @@ Gestion des Erreurs & Exceptions
 ################################
 
 Un grand nombre de méthodes internes à PHP utilisent les erreurs pour
-communiquer les échecs. Ces erreurs devront être récupérées et traitées.
-CakePHP fournit une récupération d'erreurs par défaut qui les affiche
-et/ou les logger lorsqu'elles se produisent. Ce gestionnaire d'erreur est
-utilisé pour capturer les exceptions non interceptées par les controllers et
-d'autres parties de votre application.
+communiquer les échecs. Ces erreurs doivent être récupérées et traitées.
+CakePHP fournit un récupérateur d'erreurs qui les affiche
+et/ou les écrit dans des fichiers de log par défaut lorsqu'elles se
+produisent. Ce gestionnaire d'erreurs est utilisé pour capturer les
+exceptions non interceptées par les controllers et par les autres
+parties de votre application.
 
 .. _error-configuration:
 
@@ -15,10 +16,10 @@ Configuration des Erreurs et des Exceptions
 
 La configuration des Erreurs est faite à l'intérieur du fichier
 **config/app.php** de votre application. Par défaut CakePHP utilise la classe
-``ErrorHandler`` ou ``ConsoleErrorHandler`` pour capturer et afficher/logger
-les erreurs. Vous pouvez remplacer ce comportement en changeant le gestionnaire
-d'erreur par défaut. Le gestionnaire d'erreur par défaut gère également les
-exceptions non interceptées.
+``ErrorHandler`` ou ``ConsoleErrorHandler`` pour capturer et afficher/mettre
+les erreurs dans des fichiers de log. Vous pouvez remplacer ce comportement
+en changeant le gestionnaire d'erreurs par défaut. Le gestionnaire d'erreurs
+par défaut gère également les exceptions non interceptées.
 
 La gestion des erreurs accepte quelques options qui vous permettent de
 personnaliser la gestion des erreurs pour votre application:
@@ -32,13 +33,13 @@ personnaliser la gestion des erreurs pour votre application:
   générées.
 * ``exceptionRenderer`` - string - La classe responsable de rendre les
   exceptions non interceptées. Si vous choisissez une classe personnalisée,
-  vous devrez placer le fichier de cette classe dans le dossier ``src/Error``.
+  vous devrez placer le fichier de cette classe dans le dossier **src/Error**.
   Cette classe doit implémenter une méthode ``render()``.
 * ``log`` - boolean - Si ``true``, les exceptions et leur stack traces seront
   loguées vers :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - Un tableau des noms de classe d'exception qui ne
-  doivent pas être loguées. C'est utile pour supprimer les NotFoundExceptions
-  ou toute autre message de log sans intérêt.
+  doivent pas être mises dans des fichiers de log. C'est utile pour supprimer
+  les NotFoundExceptions ou toute autre message de log sans intérêt.
 
 ErrorHandler affiche par défaut les erreurs quand ``debug`` est ``true`` et
 les erreurs de logs quand ``debug`` est ``false``. Le type d'erreurs capté dans
@@ -46,18 +47,18 @@ les deux cas est contrôlé par ``errorLevel``. Le gestionnaire d'erreurs fatale
 va être appelé indépendamment de ``debug`` ou de la configuration de
 ``errorLevel``, mais le résultat va être différent, basé sur le niveau de
 ``debug``. Le comportement par défaut pour les erreurs fatales est d'afficher
-une page de défaut interne serveur (``debug`` désactivé) ou une page avec le
-message, le fichier et la ligne (``debug`` activé).
+une page avec une erreur interne du serveur (``debug`` désactivé) ou une page
+avec le message, le fichier et la ligne (``debug`` activé).
 
 .. note::
 
-    Si vous utilisez un gestionnaire d'erreur personnalisé, les options
+    Si vous utilisez un gestionnaire d'erreurs personnalisé, les options
     supportées dépendent de votre gestionnaire.
 
 Créer vos Propres Gestionnaires d'Erreurs
 =========================================
 
-Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type
+Vous pouvez créer un gestionnaire d'erreurs à partir de n'importe quel type
 de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError``
 pour gérer vos erreurs. En étendant ``BaseErrorHandler``, vous pouvez fournir
 une logique de gestion des erreurs personnalisée. Un exemple serait::
@@ -92,7 +93,7 @@ utilisée lorsque les erreurs sont déclenchées. La méthode
 Changer le Comportement des Erreurs Fatales
 ===========================================
 
-Le gestionnaire d'erreur par défaut convertit les erreurs fatales en exceptions
+Le gestionnaire d'erreurs par défaut convertit les erreurs fatales en exceptions
 et réutilise la logique de traitement d'exception pour afficher une page
 d'erreur. Si vous ne voulez pas montrer la page d'erreur standard, vous pouvez
 la surcharger comme ceci::
@@ -108,7 +109,7 @@ la surcharger comme ceci::
 
     use Cake\Error\BaseErrorHandler;
 
-    class AppError
+    class AppError extends BaseErrorHandler
     {
         // Autre méthode.
 
@@ -148,6 +149,14 @@ les méthodes HTTP.
 .. php:exception:: ForbiddenException
 
     Utilisée pour faire une erreur 403 Interdite.
+
+.. versionadded:: 3.1
+
+    InvalidCsrfTokenException a été ajoutée.
+
+.. php:exception:: InvalidCsrfTokenException
+
+    Utilisée pour faire une erreur 403 causée par un token CSRF invalide.
 
 .. php:exception:: NotFoundException
 
@@ -327,7 +336,7 @@ de votre controller pour indiquer les états d'échec. Par exemple::
 
     public function view($id)
     {
-        $post = $this->Post->read(null, $id);
+        $post = $this->Post->findById($id)->first();
         if (!$post) {
             throw new NotFoundException();
         }
@@ -433,7 +442,7 @@ niveaux de contrôle sur le processus de gestion d'exception.
 
 - Créer et enregistrer votre propre gestionnaire d'erreurs.
 - Etendre le ``BaseErrorHandler`` fourni par CakePHP.
-- Configurer l'option ``exceptionRenderer`` dans le gestionnaire d'erreur par
+- Configurer l'option ``exceptionRenderer`` dans le gestionnaire d'erreurs par
   défaut.
 
 Dans les prochaines sections, nous allons détailler les différentes approches
@@ -536,7 +545,7 @@ vous pouvez utiliser n'importe quel controller de votre choix::
     // ...
 
 Le controller d'erreur, qu'il soit conventionnel ou personnalisé, est utilisé
-pour rendre la vue de page d'erreurs et reçoit tous les événements standards
+pour rendre la vue de page d'erreurs et reçoit tous les évènements standards
 du cycle de vie des requêtes.
 
 Logger les Exceptions

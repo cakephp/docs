@@ -27,7 +27,7 @@ de réflection de schéma::
 
     use Cake\Database\Schema\Table;
 
-    // Créé une table colonne par colonne.
+    // Crée une table colonne par colonne.
     $t = new Table('posts');
     $t->addColumn('id', [
       'type' => 'integer',
@@ -75,15 +75,14 @@ Les colonnes sont soit ajoutées en argument du constructeur, soit via
     // Récupère la liste de toutes les colonnes.
     $cols = $t->columns();
 
-
 Index et Contraintes
-----------------------
+--------------------
 
 Les index sont ajoutés en utilisant ``addIndex()``. Les contraintes sont
-ajoutées en utilisant ``addConstraint()``.  Les index & contraintes ne 
+ajoutées en utilisant ``addConstraint()``.  Les index & contraintes ne
 peuvent pas être ajoutés pour les colonnes qui n'existent pas puisque cela
-donnerait un état invalide. Les index sont différents des contraintes et 
-des exceptions seront levées si vous essayez de mélanger les types entre 
+donnerait un état invalide. Les index sont différents des contraintes et
+des exceptions seront levées si vous essayez de mélanger les types entre
 les méthodes. Un exemple des deux méthodes est::
 
     $t = new Table('posts');
@@ -122,10 +121,10 @@ selon la plateforme de la base de données::
 
     $t = new Table('posts');
     $t->addColumn('id', 'integer')
-        ->addConstraint('primary', [
-            'type' => 'primary',
-            'columns' => ['id']
-        ]);
+    ->addConstraint('primary', [
+        'type' => 'primary',
+        'columns' => ['id']
+    ]);
 
 Dans l'exemple ci-dessus, la colonne ``id`` générerait le SQL suivant dans
 MySQL::
@@ -155,7 +154,7 @@ L'option ``autoIncrement`` ne fonctionne qu'avec les colonnes ``integer`` et
 ``biginteger``.
 
 Lire les Index et les Contraintes
------------------------------------
+---------------------------------
 
 Les index et les contraintes peuvent être lus d'un objet table en utilisant
 les méthodes d'accesseur. En supposant que ``$t`` est une instance de table
@@ -202,7 +201,7 @@ spécifique à la plateforme pour créer ou supprimer une table spécifique::
     $db = ConnectionManager::get('default');
     $schema = new Table('posts', $fields, $indexes);
 
-    // Créé une table
+    // Crée une table
     $queries = $schema->createSql($db);
     foreach ($queries as $sql) {
       $db->execute($sql);
@@ -232,7 +231,7 @@ habituelle de la classe ressemble à::
 
     $db = ConnectionManager::get('default');
 
-    // Créé une collection de schéma.
+    // Crée une collection de schéma.
     $collection = $db->schemaCollection();
 
     // Récupère les noms des tables

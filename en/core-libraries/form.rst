@@ -15,7 +15,7 @@ Creating a Form
 
 Generally when using the Form class you'll want to use a subclass to define your
 form. This makes testing easier, and lets you re-use your form. Forms are put
-into ``src/Form`` and usually have ``Form`` as a class suffix. For example,
+into **src/Form** and usually have ``Form`` as a class suffix. For example,
 a simple contact form would look like::
 
     // in src/Form/ContactForm.php
@@ -98,6 +98,45 @@ accordingly. We could have also used the ``validate()`` method to only validate
 the request data::
 
     $isValid = $form->validate($this->request->data);
+    
+Setting Form Values
+===================
+
+In order to set the values for the fields of a modelless form, one can define
+the values using ``$this->request->data``, like in all other forms created by the FormHelper::
+
+    // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->data)) {
+                    $this->Flash->success('We will get back to you soon.');
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+            
+            if ($this->request->is('get')) {
+                //Values from the User Model e.g.
+                $this->request->data['name'] = 'John Doe';
+                $this->request->data['email'] = 'john.doe@example.com';
+            }
+            
+            $this->set('contact', $contact);
+        }
+    }
+    
+Values should only be defined if the request method is GET, otherwise
+you will overwrite your previous POST Data which might have been incorrect
+and not been saved.
 
 Getting Form Errors
 ===================

@@ -41,7 +41,7 @@ résultats de ``Inflector::slug()`` basé sur un autre champ.
 Avant de créer notre behavior, nous devrions comprendre les conventions pour
 les behaviors:
 
-- Les fichiers Behavior sont localisés dans ``src/Model/Behavior``, ou dans
+- Les fichiers Behavior sont localisés dans **src/Model/Behavior**, ou dans
   ``MyPlugin\Model\Behavior``.
 - Les classes de Behavior devraient être dans le namespace
   ``App\Model\Behavior``, ou le namespace ``MyPlugin\Model\Behavior``.
@@ -49,7 +49,7 @@ les behaviors:
 - Les Behaviors étendent ``Cake\ORM\Behavior``.
 
 Pour créer notre behavior sluggable. Mettez ce qui suit dans
-``src/Model/Behavior/SluggableBehavior.php``::
+**src/Model/Behavior/SluggableBehavior.php**::
 
     namespace App\Model\Behavior;
 
@@ -68,8 +68,8 @@ pouvez mettre le code d'initialisation, si nécessaire::
     }
 
 Nous pouvons maintenant ajouter ce behavior à l'une de nos classes de table.
-Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque les articles
-ont souvent des propriétés slug pour créer de belles URLs::
+Dans cet exemple, nous allons utiliser un ``ArticlesTable``, puisque les
+articles ont souvent des propriétés slug pour créer de belles URLs::
 
     namespace App\Model\Table;
 
@@ -85,7 +85,7 @@ ont souvent des propriétés slug pour créer de belles URLs::
     }
 
 Notre nouveau behavior ne fait pas beaucoup plus pour le moment. Ensuite, nous
-allons ajouter une méthode mixin et un event listener pour que lorque nous
+allons ajouter une méthode mixin et un event listener pour que lorsque nous
 sauvegarderons les entities, nous puissions automatiquement slugger un champ.
 
 Définir les Méthodes Mixin
@@ -117,9 +117,9 @@ pouvez utiliser la clé de configuration ``implementedMethods`` pour renommer
 ou exclure les méthodes mixin. Par exemple si nous voulions préfixer notre
 méthode slug(), nous pourrions faire ce qui suit::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ];
 
@@ -132,10 +132,10 @@ Alors que les méthodes montrées sont définies par configuration, vous pouvez
 aussi renommer/retirer les méthodes mixin lors de l'ajout d'un behavior à la
 table. Par exemple::
 
-    // Dans une méhode initialize() de la table.
+    // Dans une méthode initialize() de la table.
     $this->addBehavior('Sluggable', [
         'implementedMethods' => [
-            'slug' => 'superSlug',
+            'superSlug' => 'slug',
         ]
     ]);
 
@@ -158,7 +158,7 @@ behavior devrait maintenant ressembler à ceci::
 
     class SluggableBehavior extends Behavior
     {
-        proteted $_defaultConfig = [
+        protected $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',
             'replacement' => '-',
@@ -178,7 +178,7 @@ behavior devrait maintenant ressembler à ceci::
 
     }
 
-Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors:
+Le code ci-dessus montre quelques fonctionnalités intéressantes des behaviors:
 
 - Les Behaviors peuvent définir des méthodes callback en définissant des
   méthodes qui suivent les conventions des :ref:`table-callbacks`.
@@ -187,7 +187,7 @@ Le code ci-dessus montre quelques fonctionnalités intéréssantes des behaviors
   attaché à la table.
 
 Pour empêcher l'enregistrement de continuer, arrêtez simplement la propagation
-de l'événement dans votre callback::
+de l'évènement dans votre callback::
 
     public function beforeSave(Event $event, Entity $entity)
     {
@@ -226,7 +226,7 @@ la clé de configuration ``implementedFinders`` pour renommer ou exclure les
 méthodes find. Par exemple, si vous vouliez renommer votre méthode
 ``find(slug)``, vous pourriez faire ce qui suit::
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'implementedFinders' => [
             'slugged' => 'findSlug',
         ]
@@ -252,7 +252,7 @@ Retirer les Behaviors Chargés
 =============================
 
 Pour retirer un behavior de votre table, vous pouvez appeler la méthode
-``removeBehavior``::
+``removeBehavior()``::
 
     // Retire le behavior chargé
     $this->removeBehavior('Sluggable');

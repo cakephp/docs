@@ -7,9 +7,8 @@ changements faits dans le cœur depuis la branche CakePHP 2.x. Assurez-vous de
 bien lire les autres pages de ce guide pour toutes les nouvelles
 fonctionnalités et les changements de l'API.
 
-
-Pré-requis
-==========
+Prérequis
+=========
 
 - CakePHP 3.x a besoin de la Version 5.4.16 ou supérieur de PHP.
 - CakePHP 3.x a besoin de l'extension mbstring.
@@ -17,7 +16,7 @@ Pré-requis
 
 .. warning::
 
-    CakePHP 3.0 ne fonctionnera pas si vous n'avez pas les pré-requis ci-dessus.
+    CakePHP 3.0 ne fonctionnera pas si vous n'avez pas les prérequis ci-dessus.
 
 Outil d'Upgrade
 ===============
@@ -49,9 +48,10 @@ Namespaces (Espaces de Noms)
 
 Toutes les classes du cœur de CakePHP sont maintenant dans des namespaces et
 suivent les spécifications du chargement PSR-4. Par exemple
-``src/Cache/Cache.php`` est dans le namespace ``Cake\Cache\Cache``. Les constantes
-globales et les méthodes de helper comme :php:meth:`__()` et :php:meth:`debug()`
-ne sont pas mis dans un namespace pour des raisons de commodité.
+**src/Cache/Cache.php** est dans le namespace ``Cake\Cache\Cache``. Les
+constantes globales et les méthodes de helper comme :php:meth:`__()` et
+:php:meth:`debug()` ne sont pas mis dans un namespace pour des raisons de
+commodité.
 
 Constantes retirées
 ===================
@@ -80,10 +80,10 @@ supplémentaires en utilisant l'autoloader de votre application. Regardez la
 section sur :ref:`additional-class-paths` pour plus d'informations.
 
 Trois nouvelles variables de configuration fournissent la configuration
-de chemin pour les plugins, les views et les fichiers locale. Vous pouvez
+de chemin pour les plugins, les views et les fichiers de locales. Vous pouvez
 ajouter plusieurs chemins à ``App.paths.templates``, ``App.paths.plugins`` et
 ``App.paths.locales`` pour configurer des chemins multiples pour respectivement
-les templates, les plugins et les fichiers locales.
+les templates, les plugins et les fichiers de locales.
 
 La clé de configuration ``www_root`` a été renommée ``wwwRoot`` par cohérence.
 Merci d'ajuster votre fichier de configuration ``app.php`` ainsi que chaque
@@ -190,7 +190,7 @@ Configure
 - ``Cake\Configure\ConfigReaderInterface`` renommé en
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - :php:meth:`Cake\\Core\\Configure::consume()` a été ajoutée.
-- :php:meth:`Cake\\Core\\Configure::load()` attend maintenant un suffix du nom
+- :php:meth:`Cake\\Core\\Configure::load()` attend maintenant un suffixe du nom
   du fichier sans extension puisque celui-ci peut venir d'un moteur. Par
   exemple, l'utilisation de PhpConfig utilise ``app`` pour charger ``app.php``.
 - Définir une variable ``$config`` dans un fichier PHP de config est déprécié.
@@ -204,15 +204,15 @@ Object
 
 La classe ``Object`` a été retirée. Elle contenait au début un tas de méthodes
 qui étaient utilisées dans plusieurs endroits à travers le framework. Les
-méthodes les plus utiles qui étaient utilisées ont été extraites dans des traits.
-Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la méthode
-``log()``. :php:trait:`Cake\\Routing\\RequestActionTrait` fournit
+méthodes les plus utiles qui étaient utilisées ont été extraites dans des
+traits. Vous pouvez utiliser :php:trait:`Cake\\Log\\LogTrait` pour accéder à la
+méthode ``log()``. :php:trait:`Cake\\Routing\\RequestActionTrait` fournit
 ``requestAction()``.
 
 Console
 =======
 
-L'exécutable ``cake`` a été déplacée du répertoire ``app/Console`` vers le
+L'exécutable ``cake`` a été déplacé du répertoire ``app/Console`` vers le
 répertoire ``bin`` dans le squelette de l'application. Vous pouvez maintenant
 lancer la console de CakePHP avec ``bin/cake``.
 
@@ -267,8 +267,8 @@ SchemaShell Removed
 -------------------
 
 SchemaShell a été retiré puisqu'il n'a jamais été une implémentation
-d'une migrations de base de données complète et de meilleurs outils comme
-`Phinx <https://phinx.org/>`_ ont emergé. Il a été remplacé par
+de migrations de base de données complète et de meilleurs outils comme
+`Phinx <https://phinx.org/>`_ ont émergé. Il a été remplacé par
 le `Plugin de Migrations pour CakePHP <https://github.com/cakephp/migrations>`_
 qui permet l'utilisation de `Phinx <https://phinx.org/>`_ avec CakePHP.
 
@@ -284,7 +284,7 @@ BakeShell / TemplateTask
 
 - Bake ne fait plus partie du code source du core et est remplacé par le
   `Plugin CakePHP Bake <https://github.com/cakephp/bake>`_
-- Les templates de bake ont été déplacés vers ``src/Template/Bake``.
+- Les templates de bake ont été déplacés vers **src/Template/Bake**.
 - La syntaxe des templates Bake utilise maintenant des balises de type erb
   (``<% %>``) pour désigner le templating.
 - La commande ``bake view`` a été renommée ``bake template``.
@@ -317,7 +317,7 @@ Log
 * Les moteurs de Log se chargent maintenant automatiquement à la première
   écriture dans les logs.
 * :php:meth:`Cake\\Log\\Log::engine()` a été ajoutée.
-* Les méthodes suivantes ont été retirées de :php:class:`Cake\\Log\\Log` ::
+* Les méthodes suivantes ont été retirées de :php:class:`Cake\\Log\\Log`::
   ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
 * Vous ne pouvez plus créer de niveaux personnalisés en utilisant
   ``Log::levels()``.
@@ -353,7 +353,7 @@ que le bénéfice visuel est discutable, les problèmes engendrés par les
 paramètres nommés ne le sont pas.
 
 Les paramètres nommés nécessitaient une gestion spéciale dans CakePHP ainsi
-que toute librairie PHP ou JavaScript qui avaient besoin d'intéragir avec eux,
+que toute librairie PHP ou JavaScript qui avaient besoin d'interagir avec eux,
 puisque les paramètres nommés ne sont implémentés ou compris par aucune
 librairie *exceptée* CakePHP. La complexité supplémentaire et le code nécessaire
 pour supporter les paramètres nommés ne justifiaient pas leur existence, et
@@ -396,7 +396,7 @@ Router
   puissantes et flexibles.
 * Les paramètres persistants ont été retirés. Ils ont été remplacés par
   :php:meth:`Cake\\Routing\\Router::urlFilter()` qui est une meilleur façon
-  plus flexible pour changer les urls étant routées inversement.
+  plus flexible pour changer les URLs étant routées inversement.
 * La signature de :php:meth:`Cake\\Routing\\Router::parseExtensions()` a changé
   en ``parseExtensions(string|array $extensions = null, $merge = true)``. Elle
   ne prend plus d'arguments variables pour la spécification des extensions.
@@ -421,7 +421,7 @@ Router
   matche un ensemble de paramètres.
 * Les scopes de Routing ont été introduits. Les scopes de Routing vous
   permettent de garder votre fichier de routes DRY et donne au Router des
-  indices sur la façon d'optimiser le parsing et le routing inversé des URLS.
+  indices sur la façon d'optimiser le parsing et le routing inversé des URLs.
 
 Route
 -----
@@ -438,7 +438,7 @@ Les filtres de Dispatcher ne sont plus ajoutés à votre application en utilisan
 ``Configure``. Vous les ajoutez maintenant avec
 :php:class:`Cake\\Routing\\DispatcherFactory`. Cela signifie que si votre
 application utilisait ``Dispatcher.filters``, vous devrez maintenant utiliser
-php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
 En plus des changements de configuration, les filtres du dispatcher ont vu
 leurs conventions mises à jour, et des fonctionnalités ont été ajoutées.
@@ -451,7 +451,7 @@ Filter\AssetFilter
 * Les assets des Plugin & theme gérés par AssetFilter ne sont plus lus via
   ``include``, à la place ils sont traités comme de simples fichiers texte. Cela
   règle un certain nombre de problèmes avec les librairies JavaScript comme
-  TinyMCE et les environments avec short_tags activé.
+  TinyMCE et les environnements avec short_tags activé.
 * Le support pour la configuration de ``Asset.filter`` et les hooks ont été
   retirés. Cette fonctionnalité peut être facilement remplacée par un plugin
   ou un filtre dispatcher.
@@ -470,7 +470,7 @@ Request
   la chose plus facile pour mettre les applications CakePHP derrière les
   load balancers.
 * :php:attr:`Cake\\Network\\Request::$data` n'est plus fusionnée avec la clé
-  de données préfixés, puisque ce prefix a été retiré.
+  de données préfixés, puisque ce préfixe a été retiré.
 * :php:meth:`Cake\\Network\\Request::env()` a été ajoutée.
 * :php:meth:`Cake\\Network\\Request::acceptLanguage()` a été changée d'une
   méthode static en non static.
@@ -539,7 +539,7 @@ Network\\Email
 * :php:meth:`Cake\\Network\\Email\\Email::configTransport()` a été ajoutée pour
   permettre la définition de configurations de transport. Ce changement retire
   les options de transport des profiles de livraison et vous permet de
-  facilement ré-utiliser les transports à travers les profiles d'email.
+  facilement réutiliser les transports à travers les profiles d'email.
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` a été ajoutée pour
   permettre le retrait de la configuration du transport.
 
@@ -571,7 +571,8 @@ Controller
   liées.
 - ``Controller::loadModel()`` charge maintenant les objets table.
 - La propriété ``Controller::$scaffold`` a été retirée. Le scaffolding dynamique
-  a été retiré du cœur de CakePHP, et sera fourni en tant que plugin autonome.
+  a été retiré du cœur de CakePHP. Un plugin de scaffolding appelé CRUD se
+  trouve ici: https://github.com/FriendsOfCake/crud
 - La propriété ``Controller::$ext`` a été retirée. Vous devez maintenant étendre
   et surcharger la propriété ``View::$_ext`` si vous voulez utiliser une
   extension de fichier de view autre que celle par défaut.
@@ -587,7 +588,7 @@ Controller
   ``action`` et ``params`` ont été retirées. Vous pouvez accéder à toutes ces
   propriétés dans ``$this->request`` à la place.
 - Les méthodes préfixées avec underscore des controllers comme ``_someMethod()``
-  ne sont plus considerées comme des méthodes privées. Utilisez les bons mots
+  ne sont plus considérées comme des méthodes privées. Utilisez les bons mots
   clés de visibilité à la place. Seules les méthodes publiques peuvent être
   utilisées comme action de controller.
 
@@ -596,8 +597,8 @@ Scaffold retiré
 
 Le scaffolding dynamique dans CakePHP a été retiré du cœur de CakePHP. Il
 était peu fréquemment utilisé, et n'avait jamais pour intention d'être
-utilisé en mode production. Il sera remplacé par un plugin autonome que les
-gens désireux d'avoir cette fonctionnalité pourront utiliser.
+utilisé en mode production. Un plugin de scaffolding appelé CRUD se trouve ici:
+https://github.com/FriendsOfCake/crud
 
 ComponentCollection remplacée
 -----------------------------
@@ -636,9 +637,9 @@ CookieComponent
   cookie, ceci facilite les tests, et permet de définir les cookies pour
   ControllerTestCase.
 - Les Cookies chiffrés dans les versions précédentes de CakePHP utilisant la
-  méthode ``cipher`` sont maintenant illisible parce que ``Security::cipher()``
+  méthode ``cipher()`` sont maintenant illisible parce que ``Security::cipher()``
   a été retirée. Vous aurez besoin de re-chiffrer les cookies avec la méthode
-  ``rijndael`` ou ``aes`` avant mise à jour.
+  ``rijndael()`` ou ``aes()`` avant mise à jour.
 - ``CookieComponent::type()`` a été retirée et remplacée par la donnée de
   configuration accessible avec ``config()``.
 - ``write()`` ne prend plus de paramètres ``encryption`` ou ``expires``. Ces
@@ -670,15 +671,15 @@ AuthComponent
   Pour connecter un utilisateur, vous devez maintenant appeler ``identify()``
   qui retourne les informations d'utilisateur en cas de succès d'identification
   et utilise ensuite ``setUser()`` pour sauvegarder les informations de session
-  pour la persistence au cours des différentes requêtes.
+  pour la persistance au cours des différentes requêtes.
 
 - ``BaseAuthenticate::_password()`` a été retirée. Utilisez ``PasswordHasher``
   à la place.
 - ``BaseAuthenticate::logout()`` a été retirée.
-- ``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
+- ``AuthComponent`` lance maintenant deux évènements``Auth.afterIdentify`` et
   ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
   avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction
-  de callback pour ces événements en retournant un tableau de mapping depuis la
+  de callback pour ces évènements en retournant un tableau de mapping depuis la
   méthode ``implementedEvents()`` de votre classe d'authentification.
 
 Les classes liées à ACL ont été déplacées dans un plugin séparé. Les hashers
@@ -752,7 +753,7 @@ pour plus d'informations sur la façon d'utiliser le nouvel ORM.
 ConnectionManager
 -----------------
 
-- ConnectionManager a été déplacée dans le namespace ``Cake\\Database``.
+- ConnectionManager a été déplacée dans le namespace ``Cake\\Datasource``.
 - ConnectionManager a eu les méthodes suivantes retirées:
 
   - ``sourceList``
@@ -779,7 +780,7 @@ Behaviors
 TreeBehavior
 ------------
 
-TreeBheavior a été complètement réécrit pour utiliser le nouvel ORM. Bien qu'il
+TreeBehavior a été complètement réécrit pour utiliser le nouvel ORM. Bien qu'il
 fonctionne de la même manière que dans 2.x, certaines méthodes ont été renommées
 ou retirées:
 
@@ -828,7 +829,7 @@ avoir une méthode d'API assert cohérente avec ``$expected`` en premier argumen
 
 Les méthodes d'assertion suivantes ont été ajoutées:
 
-- ``assertNotWithinRange()`` comme contre partie de ``assertWithinRange()``
+- ``assertNotWithinRange()`` comme contrepartie de ``assertWithinRange()``
 
 View
 ====
@@ -851,8 +852,8 @@ Ces deux problèmes sont résolus en convertissant les themes en plugins.
 Les Dossiers de View Renommés
 -----------------------------
 
-Les dossiers contenant les fichiers de vue vont maintenant dans ``src/Template``
-à la place de ``src/View``.
+Les dossiers contenant les fichiers de vue vont maintenant dans **src/Template**
+à la place de **src/View**.
 Ceci a été fait pour séparer les fichiers de vue des fichiers contenant des
 classes php (par ex les classes Helpers et View).
 
@@ -861,7 +862,6 @@ avec les noms de controller:
 
 - ``Layouts`` est maintenant ``Layout``
 - ``Elements`` est maintenant ``Element``
-- ``Scaffolds`` est maintenant ``Scaffold``
 - ``Errors`` est maintenant ``Error``
 - ``Emails`` est maintenant ``Email`` (idem pour ``Email`` dans ``Layout``)
 
@@ -916,9 +916,15 @@ JsonView
   Ceci empêche les problèmes possible de XSS quand le contenu de la view
   JSON est intégrée dans les fichiers HTML.
 - :php:class:`Cake\\View\\JsonView` supporte maintenant la variable de view
-  ``_jsonOptions``. Ceci vous permet de configurer les options bit-mask
-  utilisées lors de la génération de JSON.
+  ``_jsonOptions``. Ceci vous permet de configurer le masque utilisé lors de la
+  génération de JSON.
 
+XmlView
+-------
+
+- :php:class:`Cake\\View\\XmlView` supporte maintenant la variable de view
+  ``_xmlOptions``. Ceci vous permet de configurer les options utilisées lors de
+  la génération de XML.
 
 View\\Helper
 ============
@@ -927,7 +933,7 @@ View\\Helper
   accessible via la méthode ``config()``.
 - Les options de configuration ne sont plus définies en propriété public.
 - ``Helper::clean()`` a été retirée. Il n'était jamais assez
-  robuste pour complètement empêcher XSS. A la place, vous devez echapper
+  robuste pour complètement empêcher XSS. A la place, vous devez échapper
   le contenu avec :php:func:`h` ou utiliser une librairie dédiée comme
   HTMLPurifier.
 - ``Helper::output()`` a été retirée. Cette méthode a été
@@ -985,7 +991,7 @@ changements:
 * FormHelper fonctionne avec le nouvel ORM. Mais il a un système extensible pour
   être intégré avec d'autres ORMs ou sources de données.
 * FormHelper dispose d'une fonctionnalité de système de widget extensible qui
-  vous permet de créer de nouveaux input widgets personnalisés et de facilement
+  vous permet de créer de nouveaux widgets d'input personnalisés et de facilement
   améliorer ceux intégrés.
 * Les templates de chaîne sont un élément fondateur du helper. Au lieu de
   tableaux imbriqués ensemble partout, la plupart du HTML que FormHelper génère
@@ -1002,7 +1008,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   autres ne génèrent plus d'attributs id.
 - L'option ``inputDefaults`` a été retirée de ``create()``.
 - Les options ``default`` et ``onsubmit`` de ``create()`` ont été retirées. A la
-  place, vous devez utiliser le binding d'event javascript ou définir tout le
+  place, vous devez utiliser le binding d'event Javascript ou définir tout le
   code js nécessaire pour ``onsubmit``.
 - ``end()`` ne peut plus faire des boutons. Vous devez créer des buttons avec
   ``button()`` ou ``submit()``.
@@ -1014,8 +1020,8 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
 - L'option ``showParents`` a été retirée de select().
 - Les options ``div``, ``before``, ``after``, ``between`` et ``errorMessage``
   ont été retirées de ``input()``. Vous pouvez utiliser les templates pour
-  mettre à jour le HTML qui l'entoure. L'option ``templates`` vous permet de surcharger
-  les templates chargés pour un input.
+  mettre à jour le HTML qui l'entoure. L'option ``templates`` vous permet de
+  surcharger les templates chargés pour un input.
 - Les options ``separator``, ``between``, et ``legend`` ont été retirées de
   ``radio()``. Vous pouvez maintenant utiliser les templates pour changer le
   HTML qui l'entoure.
@@ -1028,7 +1034,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   l'ordre dans lequel les inputs doivent être affichés.
 - ``submit()`` a eu les options ``div``, ``before`` and ``after`` retirées. Vous
   pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
-- La méthode ``inputs`` n'accepte plus ``legend`` et ``fieldset`` dans le
+- La méthode ``inputs()`` n'accepte plus ``legend`` et ``fieldset`` dans le
   paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.
   Elle nécessite aussi que le paramètre ``$fields`` soit un tableau. Le
   paramètre ``$blacklist`` a été retiré, la fonctionnalité a été remplacée en
@@ -1047,9 +1053,10 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   compatibilité avec les librairies CSS populaires telles que
   `Bootstrap <http://getbootstrap.com/>`_ et
   `Foundation <http://foundation.zurb.com/>`_.
-- Les tags de templates sont maintenant tous écrits en *camelBack*. Les tags pre-3.0 ``formstart``,
-  ``formend``, ``hiddenblock`` et ``inputsubmit`` sont maintenant ``formStart``, ``formEnd``, ``hiddenBlock``
-  et ``inputSubmit``. Pensez à bien les changer s'ils sont personnalisés dans votre application.
+- Les tags de templates sont maintenant tous écrits en *camelBack*. Les tags
+  pre-3.0 ``formstart``, ``formend``, ``hiddenblock`` et ``inputsubmit`` sont
+  maintenant ``formStart``, ``formEnd``, ``hiddenBlock`` et ``inputSubmit``.
+  Pensez à bien les changer s'ils sont personnalisés dans votre application.
 
 Il est recommandé que vous regardiez la documentation
 :doc:`/views/helpers/form` pour plus de détails sur la façon d'utiliser
@@ -1073,7 +1080,7 @@ HtmlHelper
   ``$options``.
 - ``HtmlHelper::nestedList()`` nécessite maintenant que ``$options`` soit un
   tableau. Le quatrième argument pour le niveau de tag a été retiré et il a été
-  inclu dans le tableau ``$options``.
+  inclus dans le tableau ``$options``.
 - L'argument ``$confirmMessage`` de
   :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()` a été retiré. Vous devez
   maintenant utiliser la clé ``confirm`` dans ``$options`` pour spécifier
@@ -1103,7 +1110,7 @@ PaginatorHelper
 - ``url()`` a été renommée en ``generateUrl()`` pour éviter des clashes de
   déclaration de méthode avec ``Helper::url()``.
 
-Par défaut, tous les liens et le text inactif sont entourés d'elements ``<li>``.
+Par défaut, tous les liens et le texte inactif sont entourés d'elements ``<li>``.
 Ceci aide à écrire plus facilement du CSS, et améliore la compatibilité avec
 des frameworks populaires.
 
@@ -1130,17 +1137,18 @@ NumberHelper
 SessionHelper
 -------------
 
-- ``SessionHelper::flash()`` est déprécié. Vous devez utiliser
-  :doc:`/views/helpers/flash` à la place.
+- ``SessionHelper`` est déprécié. Vous pouvez utiliser
+  ``$this->request->session()`` directement, et la fonctionnalité de message
+  flash a été déplacée dans :doc:`/views/helpers/flash` à la place.
 
 JsHelper
 --------
 
 - ``JsHelper`` et tous les moteurs associés ont été retirés. il pouvait
-  seulement générer un tout petit nombre de code javascript pour la librairie
-  sélectionnée et essayer de générer tout le code javascript en utilisant
+  seulement générer un tout petit nombre de code Javascript pour la librairie
+  sélectionnée et essayer de générer tout le code Javascript en utilisant
   le helper devenait souvent difficile. Il est maintenant recommandé d'utiliser
-  directement la librairie javascript de votre choix.
+  directement la librairie Javascript de votre choix.
 
 CacheHelper Retiré
 ------------------
@@ -1153,8 +1161,8 @@ fonctionnalités que CacheHelper fournissait. Cependant, implémenter `Edge Side
 Includes <http://fr.wikipedia.org/wiki/Edge_Side_Includes>`_ en PHP présente un
 grand nombre de limitations. Au lieu de construire une solution de qualité
 inférieure, nous recommandons aux développeurs ayant besoin d'un cache global
-d'utiliser `Varnish <http://varnish-cache.org>`_ ou `Squid <http://squid-cache.org>`_
-à la place.
+d'utiliser `Varnish <http://varnish-cache.org>`_ ou
+`Squid <http://squid-cache.org>`_ à la place.
 
 I18n
 ====
@@ -1236,7 +1244,7 @@ Testing
 
 - ``TestShell`` a été retiré. CakePHP, le squelette d'application et les plugins
   nouvellement créés utilisent tous ``phpunit`` pour exécuter les tests.
-- L'executeur via le navigateur (webroot/test.php) a été retiré. L'adoption
+- L'exécuteur via le navigateur (webroot/test.php) a été retiré. L'adoption
   de CLI a beaucoup augmenté depuis les premières versions de 2.x. De plus,
   les exécuteurs CLI ont une meilleure intégration avec les outils des IDE et
   autres outils automatisés.
@@ -1248,8 +1256,8 @@ Testing
   le navigateur.
 
 - ``ControllerTestCase`` est dépréciée et sera supprimée de CAKEPHP 3.0.0.
-  Vous devez utiliser les nouvelles fonctionnalités de :ref:`integration-testing`
-  à la place.
+  Vous devez utiliser les nouvelles fonctionnalités de
+  :ref:`integration-testing` à la place.
 - Les fixtures doivent maintenant être référencées sous leur forme plurielle::
 
     // Au lieu de
@@ -1279,15 +1287,15 @@ Inflector
 ---------
 
 - la valeur par défaut pour l'argument ``$replacement`` de la méthode
-  :php:meth:`Cake\\Utility\\Inflector::slug()` a été modifée de underscore (``_``)
-  au tirêt (``-``). utiliser des tirêts pour séparer les mots dans les url
-  est le choix le plus courant et également celui recommandé par Google.
+  :php:meth:`Cake\\Utility\\Inflector::slug()` a été modifiée de underscore
+  (``_``) au tiret (``-``). utiliser des tirets pour séparer les mots dans les
+  url est le choix le plus courant et également celui recommandé par Google.
 
 - Les translitérations pour :php:meth:`Cake\\Utility\\Inflector::slug()` ont
-  changé. Si vous utilisez des translitérations  personnalisées, vous devrez mettre
-  à jour votre code. A la place des expressions régulières, les translitérations
-  utilisent le remplacement par chaîne simple. Cela a donné des améliorations de
-  performances significatives::
+  changé. Si vous utilisez des translitérations  personnalisées, vous devrez
+  mettre à jour votre code. A la place des expressions régulières, les
+  translitérations utilisent le remplacement par chaîne simple. Cela a donné
+  des améliorations de performances significatives::
 
     // Au lieu de
     Inflector::rules('transliteration', [

@@ -50,7 +50,7 @@ counter value::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'findType' => 'published'
+                'finder' => 'published'
             ]
         ]
     ]);
@@ -72,9 +72,7 @@ conditional count and a basic count you can add these fields in the array::
     $this->addBehavior('CounterCache', [
         'Articles' => ['comment_count',
             'published_comment_count' => [
-                'conditions' => [
-                    'findType' => 'published'
-                ]
+                'finder' => 'published'
             ]
         ]
     ]);
@@ -89,3 +87,16 @@ a callback method. This callable must return the count value to be stored::
             }
         ]
     ]);
+
+
+.. note::
+
+    The CounterCache behavior works for ``belongsTo`` associations only. For
+    example for "Comments belongsTo Articles", you need to add the CounterCache
+    behavior to the ``CommentsTable`` in order to generate ``comment_count`` for
+    Articles table.
+    
+    It is possible though to make this work for ``belongsToMany`` associations.
+    You need to enable the CounterCache behavior in a custom ``through`` table
+    configured in association options. See how to configure a custom join table
+    :ref:`using-the-through-option`.
