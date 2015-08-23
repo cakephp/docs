@@ -12,6 +12,13 @@ Cache
   Memcached, Memcache, APC and Redis. Other cache backends will do non-atomic
   operations.
 
+CakeTime
+========
+
+- ``CakeTime::listTimezones()`` has been changed to accept array in the last
+  argument. Valid values for the ``$options`` argument are: ``group``,
+  ``abbr``, ``before``, and ``after``.
+
 I18nShell
 =========
 
