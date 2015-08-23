@@ -179,7 +179,10 @@ read if you want re-familiarize yourself with how CakePHP works.
 You'll need to edit the following in **src/Template/Categories/add.ctp**
 and **src/Template/Categories/edit.ctp**::
 
-    echo $this->Form->input('parent_id', ['options' => $parentCategories, 'empty' => true]);
+    echo $this->Form->input('parent_id', [
+        'options' => $parentCategories,
+        'empty' => 'No parent category'
+    ]);
 
 Attach TreeBehavior to CategoriesTable
 ======================================
