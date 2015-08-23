@@ -177,7 +177,7 @@ read if you want re-familiarize yourself with how CakePHP works.
 .. note::
     If you are on Windows remember to use \ instead of /.
 
-You'll need to edit the following in **src/Template/Categories/index.ctp**::
+You'll need to edit the following in **src/Template/Categories/add.ctp**::
 
     echo $this->Form->input('parent_id', ['options' => $parentCategories, 'empty' => 'No Parent']);
 
