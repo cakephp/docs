@@ -3,7 +3,7 @@ XML
 
 .. php:class:: Xml
 
-Xml クラスはすべてリファクタリングされました。 PHP5 には
+Xml クラスはすべてリファクタリングされました。 PHP 5 には
 `SimpleXML <http://php.net/simplexml>`_ と
 `DOMDocument <http://php.net/domdocument>`_ があり、
 CakePHP で XML パーサーを再実装する必要がないからです。
@@ -19,27 +19,29 @@ CakePHP 2.0 では、 :php:meth:`Xml::build()` を使うことで可能になり
 Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDocument
 オブジェクトを返します。オブジェクトのクラスはオプションのパラメータに依存し、
 既定では SimpleEMLElement を返します。以下のサンプルは URL から
-データをインポートする方法を示しています。::
+データをインポートする方法を示しています。 ::
 
-    <?php
+    //はじめにユーティリティクラスをロードします。
+    App::uses('Xml', 'Utility');
+
     // 今までの方法:
-    $xml = new Xml('http://bakery.cakephp.org/articles/rss');
+    $xml = new Xml('http://bakery.cakephp.org/articles.rss');
 
     // SimpleXML を使った新しい方法:
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
     // このとき、 $xml は SimpleXMLElement のインスタンスです。
 
     // もしくは
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'simplexml'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
     // このときも、 $xml は SimpleXMLElement のインスタンスです。
 
     // DOMDocument を使った新しい方法:
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'domdocument'));
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
     // このとき、 $xml は DOMDocument のインスタンスです。
 
-:php:meth:`Xml::build()` を使うことで、多様なソースから XML オブジェクトを作成することができます。たとえば、文字列から XMLオブジェクトを作成することができます。::
+:php:meth:`Xml::build()` を使うことで、多様なソースから XML オブジェクトを
+作成することができます。たとえば、文字列から XML オブジェクトを作成することができます。 ::
 
-    <?php
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
         <id>1</id>
@@ -51,16 +53,14 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
 ローカルやリモートにあるファイルからも Xml オブジェクトを作成することができます。
 リモートのファイルは :php:class:`HttpSocket` を使って取得します。 ::
 
-    <?php
     // ローカルにあるファイル
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
     // リモートにあるファイル
-    $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
+    $xml = Xml::build('http://bakery.cakephp.org/articles.rss');
 
-配列を使っても Xml オブジェクトを作成できます。::
+配列を使っても Xml オブジェクトを作成できます。 ::
 
-    <?php
     $data = array(
         'post' => array(
             'id' => 1,
@@ -70,9 +70,8 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
     );
     $xml = Xml::build($data);
 
-入力が正しくない場合、 Xml クラスは例外をスローします。::
+入力が正しくない場合、 Xml クラスは例外をスローします。 ::
 
-    <?php
     $xmlString = 'What is XML?'
     try {
         $xmlObject = Xml::build($xmlString); // ここで例外をスローする
@@ -90,9 +89,8 @@ XML 文字列から配列への変換
 ==========================
 
 XML から配列への変換は Xml クラスを使うのと同じくらい簡単です。
-既定では SimpleXML オブジェクトが返り値として得られます。::
+既定では SimpleXML オブジェクトが返り値として得られます。 ::
 
-    <?php
     // 今までの方法:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlObject = new Xml($xmlString);
@@ -109,7 +107,6 @@ XML が正しくなければ例外がスローされます。
 
 ::
 
-    <?php
     // 今までの方法:
     $xmlArray = array('root' => array('child' => 'value'));
     $xmlObject = new Xml($xmlArray, array('format' => 'tags'));
@@ -122,9 +119,8 @@ XML が正しくなければ例外がスローされます。
 
 引数にとる配列は、「トップレベル」に数値でないキーを持つ要素をひとつだけ
 持つものでなければなりません。この条件を満たさない場合、
-Xml クラスは例外をスローします。以下は正しくない例です。::
+Xml クラスは例外をスローします。以下は正しくない例です。 ::
 
-    <?php
     // 数値のキーを用いたトップレベル要素
     array(
         array('key' => 'value')
@@ -148,7 +144,6 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 
 ::
 
-    <?php
     $xmlArray = array(
         'project' => array(
             '@id' => 1,
@@ -174,7 +169,6 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 
 ::
 
-    <?php
     $oldArray = array(
         'Projects' => array(
             array(
@@ -203,7 +197,7 @@ Xml クラスは例外をスローします。以下は正しくない例です�
         )
     );
 
-どちらの例も、以下のような XML になります。::
+どちらの例も、以下のような XML になります。 ::
 
     <?xml version="1.0"?>
     <projects>
@@ -230,9 +224,8 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 
 配列で XML 名前空間を定義するには、デフォルト名前空間は ``xmlns:`` という名前のキー、
 カスタム名前空間は ``xmlns:`` から始まる名前のキーを用いた要素を作成します。
-以下の例を見てください。::
+以下の例を見てください。 ::
 
-    <?php
     $xmlArray = array(
         'root' => array(
             'xmlns:' => 'http://cakephp.org',
@@ -254,7 +247,7 @@ Xml クラスは例外をスローします。以下は正しくない例です�
     );
     $xml2 = Xml::fromArray($xmlArray);
 
-``$xml1`` と ``$xml2`` の値は、それぞれ次のようになるでしょう。::
+``$xml1`` と ``$xml2`` の値は、それぞれ次のようになるでしょう。 ::
 
     <?xml version="1.0"?>
     <root xmlns="http://cakephp.org"><child>value</child>
@@ -269,9 +262,8 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 CakePHP 2.0 の Xml クラスはコンテンツの操作をするメソッドを提供しません。
 これらの操作は SimpleXMLElement または DOMDocument を使ってしなければなりません。
 しかし CakePHP は非常に親切な作りになっています。
-以下のように、子ノードを作成するためにはいくつか段階を踏みます。::
+以下のように、子ノードを作成するためにはいくつか段階を踏みます。 ::
 
-    <?php
     // CakePHP 1.3
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = new Xml($myXmlOriginal, array('format' => 'tags'));
@@ -307,27 +299,22 @@ factory クラスまたは変換クラスです。
 
     文字列から XML を作成する::
 
-        <?php
         $xml = Xml::build('<example>text</example>');
 
     文字列から XML を作成し、 DOMDocument クラスのオブジェクトとして出力する::
 
-        <?php
         $xml = Xml::build('<example>text</example>', array('return' => 'domdocument'));
 
     ローカルのファイルパスから XML を作成する::
 
-        <?php
         $xml = Xml::build('/path/to/an/xml/file.xml');
 
-    リモートURLから作成する::
+    リモート URL から作成する::
 
-        <?php
         $xml = Xml::build('http://example.com/example.xml');
 
     配列から作成する::
 
-        <?php
         $value = array(
             'tags' => array(
                 'tag' => array(
