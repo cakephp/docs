@@ -27,7 +27,7 @@ Glossary
             // Would generate
             checked="checked"
 
-    plugin syntax
+    eklenti sözdizimi
         Plugin syntax refers to the dot separated class name indicating classes
         are part of a plugin::
 
