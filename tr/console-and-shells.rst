@@ -37,7 +37,7 @@ Bu örnek, kullanıcının bir bash istemcisinde oturumu olduğunu ve CakePHP
 uygulamasının kök dizininde olduğunu varsaymaktadır.
 
 CakePHP uygulamaları bir uygulama için tüm kabuk ve görevleri içeren ``Console``
-dizini içerirler. Ayrıca çalıştırılabilir uygulama da mevcuttur:
+dizini içerirler. Ayrıca çalıştırılabilir uygulama da mevcuttur::
 
     $ cd /path/to/app
     $ bin/cake
