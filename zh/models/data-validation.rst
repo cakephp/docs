@@ -158,7 +158,7 @@ required
 传给模型的 save() 方法的数据中必须含有 login 字段的数据，否则验证就会失败。该键
 的缺省值为布尔类型 false。
 
-``required => true`` 和验证规则 ``notEmpty()`` 并不是一回事。
+``required => true`` 和验证规则 ``notBlank()`` 并不是一回事。
 ``required => true`` 意味着数组的 *键* 必须存在 - 这不代表必须有值。所以，如果字
 段在数据集中不存在，验证就会失败，但如果提交的值为空('')，验证有可能(取决于规则)
 会成功。
@@ -403,7 +403,7 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
 
     // 在一个模型类中
     $this->validator()->add('password', 'required', array(
-        'rule' => 'notEmpty',
+        'rule' => 'notBlank',
         'required' => 'create'
     ));
 
@@ -413,7 +413,7 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
     // 在一个模型类中
     $this->validator()
         ->add('password', 'required', array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ))
         ->add('password', 'size', array(
@@ -425,7 +425,7 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
 
     $this->validator()->add('password', array(
         'required' => array(
-            'rule' => 'notEmpty',
+            'rule' => 'notBlank',
             'required' => 'create'
         ),
         'size' => array(
@@ -932,11 +932,19 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
+    .. deprecated:: 2.7
+
+    不要再使用，而是用 ``notBlank``。
+
+.. php:staticmethod:: notBlank(mixed $check)
+
+    .. versionadded:: 2.7
+
     确保一个字段不为空的基本规则。 ::
 
         public $validate = array(
             'title' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'This field cannot be left blank'
             )
         );

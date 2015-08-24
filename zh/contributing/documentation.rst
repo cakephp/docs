@@ -6,13 +6,99 @@
 甚至可以在 GitHub 上在线地编辑文档，而完全不用下载文件--在任何页面上的"Improve 
 this Doc"按键将会引导你进入该页面的 GitHub 在线编辑器。
 
+CakePHP文档是
+`持续集成 <http://en.wikipedia.org/wiki/Continuous_integration>`_ 的，所以你可以
+在任何时候在Jenkins服务器上查看 `各种构建 <http://ci.cakephp.org>`_ 的状态。
+
 翻译
 ====
 
 发邮件给文档小组(docs at cakephp dot org)，或者通过 IRC(freenode上的#cakephp)，
 来讨论任何你想参与的翻译工作。
 
-关于翻译的一些忠告:
+新的翻译语言
+------------------------
+
+New Translation Language
+------------------------
+
+我们想要提供尽可能完整的翻译。然而，有时候某个翻译的文件没有更新。你应当总是认为
+英文版本是最权威的版本。
+
+We want to provide translations that are as complete as possible. However, there
+may be times where a translation file is not up-to-date. You should always
+consider the English version as the authoritative version.
+
+如果你的语言没有出现在现有的语言中，请通过Github与我们联系，我们会考虑为该语言
+创建一个目录骨架。下面的部分是你应当考虑首先翻译的，因为这些文件不经常变化：
+
+If your language is not in the current languages, please contact us through
+Github and we will consider creating a skeleton folder for it. The following
+sections are the first one you should consider translating as these
+files don't change often:
+
+- index.rst
+- cakephp-overview.rst
+- getting-started.rst
+- installation.rst
+- /installation folder
+- /getting-started folder
+- /tutorials-and-examples folder
+
+对文档管理员的提醒
+--------------------------------
+
+Reminder for Docs Administrators
+--------------------------------
+
+所有语言的目录结构应当遵循英文的目录结构。如果英文版本的结构发生了变化，我们应当
+在其它语言做相同的改变。
+
+The structure of all language folders should mirror the English folder
+structure. If the structure changes for the English version, we should apply
+those changes in the other languages.
+
+例如，如果创建了一个新的英文文件 **en/file.rst**，我们应当：
+
+For example, if a new English file is created in **en/file.rst**, we should:
+
+- 在所有其它语言中添加该文件：**fr/file.rst**，**zh/file.rst**，......
+- 删除内容，但是保留 ``title``， ``meta`` 信息和最终的 ``toc-tree`` 元素。当文件
+  没有人翻译时会添加下面的说明::
+
+- Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
+- Delete the content, but keeping the ``title``, ``meta`` information and
+  eventual ``toc-tree`` elements. The following note will be added while nobody
+  has translated the file::
+
+    File Title
+    ##########
+
+    .. note::
+        The documentation is not currently supported in XX language for this
+        page.
+
+        Please feel free to send us a pull request on
+        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+        button to directly propose your changes.
+
+        You can refer to the English version in the select top menu to have
+        information about this page's topic.
+
+    // If toc-tree elements are in the English version
+    .. toctree::
+        :maxdepth: 1
+
+        one-toc-file
+        other-toc-file
+
+    .. meta::
+        :title lang=xx: File Title
+        :keywords lang=xx: title, description,...
+
+
+对译者的提示
+---------------
 
 - 用要翻译的语言来进行浏览、编辑 - 否则你将无法看到哪些已经翻译了。
 - 如果你选择的语言在本书中已经存在，请自行加入。
@@ -37,7 +123,7 @@ this Doc"按键将会引导你进入该页面的 GitHub 在线编辑器。
 这份新的 CakePHP 文档是以
 `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。
 ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。为保持
-一致性，请遵循(下面)这些准则，来你格式化和组织你的文字。
+一致性，建议在添加到CakePHP文档时，请遵循(下面)这些准则，来你格式化和组织你的文字。
 
 每行的长度
 ----------
@@ -66,16 +152,25 @@ ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记
 ------------------
 
 * 一个星号： *文字* 为强调(斜体)
+  我们把它用于通常的标记／强调。
 
-  * ``*text*``
+  * ``*text*``。
 
 * 两个星号： **文字** 为高度强调(粗体)
+  我们把它用于工作目录，列表的标题，表格名称，但不包括下面的单词“table”。
+  We'll use it for working directories, bullet list subject, table names and
+  excluding the following word "table".
 
-  * ``**text**``
+  * ``**/config/Migrations**``，``**文章**``，等等。
 
 * 反引号： ``文字`` 为代码样本
+  我们把它用于方法选项的名称，表格列的名称，对象名称，但不包括下面的单词“object”和方法／函数名称－－包括“()”。
+  We'll use it for names of method options, names of table columns, object
+  names, excluding the following word "object" and for method/function
+  names -- include "()".
 
-  * ````text````
+  * ````cascadeCallbacks````，````true````，````id````，
+    ````PagesController````，````config()````，等等。
 
 如果星号或反引号出现在文字中，并易与内嵌标记分隔符混淆，则必须用一个反斜杠转义。
 
@@ -133,7 +228,7 @@ ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记
 
     `外部链接 <http://example.com>`_
 
-上面会产生一个指向 http://example.com 的链接。
+这会产生一个指向http://example.com的链接。
 
 链接到其他页面
 ~~~~~~~~~~~~~~
@@ -307,7 +402,7 @@ CakePHP 文档使用
 ----------
 
 有很多时候，你会想告诉读者一个重要的提示、特别的说明或者可能的危险。sphinx 中的
-告诫(*Admonition*)正是为了这个目的。有三种类型的告诫。
+告诫(*Admonition*)正是为了这个目的。有五种类型的告诫。
 
 * ``.. tip::`` 提示用于说明或重申有趣或者重要的信息。应当使用完整的句子以及任何
   适当的标点符号。
@@ -315,6 +410,10 @@ CakePHP 文档使用
   点符号。
 * ``.. warning::`` 警告用于描述潜在的障碍，或与安全有关的信息。应当使用完整的句
   子以及任何适当的标点符号。
+* ``.. versionadded:: X.Y.Z`` “增加的版本”告诫用来显示在一特定版本中增加的新功能，
+  ``X.Y.Z`` 就是新增提到的功能的版本。
+* ``.. deprecated:: X.Y.Z`` 与“增加的版本”告诫相反，“作废”告诫用来告知作废的功能，
+  ``X.Y.Z`` 就是提到的功能作废的版本。
 
 所有告诫都是相同的::
 
