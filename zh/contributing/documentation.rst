@@ -19,23 +19,11 @@ CakePHP文档是
 新的翻译语言
 ------------------------
 
-New Translation Language
-------------------------
-
 我们想要提供尽可能完整的翻译。然而，有时候某个翻译的文件没有更新。你应当总是认为
 英文版本是最权威的版本。
 
-We want to provide translations that are as complete as possible. However, there
-may be times where a translation file is not up-to-date. You should always
-consider the English version as the authoritative version.
-
 如果你的语言没有出现在现有的语言中，请通过Github与我们联系，我们会考虑为该语言
 创建一个目录骨架。下面的部分是你应当考虑首先翻译的，因为这些文件不经常变化：
-
-If your language is not in the current languages, please contact us through
-Github and we will consider creating a skeleton folder for it. The following
-sections are the first one you should consider translating as these
-files don't change often:
 
 - index.rst
 - cakephp-overview.rst
@@ -48,28 +36,14 @@ files don't change often:
 对文档管理员的提醒
 --------------------------------
 
-Reminder for Docs Administrators
---------------------------------
-
 所有语言的目录结构应当遵循英文的目录结构。如果英文版本的结构发生了变化，我们应当
 在其它语言做相同的改变。
 
-The structure of all language folders should mirror the English folder
-structure. If the structure changes for the English version, we should apply
-those changes in the other languages.
-
 例如，如果创建了一个新的英文文件 **en/file.rst**，我们应当：
-
-For example, if a new English file is created in **en/file.rst**, we should:
 
 - 在所有其它语言中添加该文件：**fr/file.rst**，**zh/file.rst**，......
 - 删除内容，但是保留 ``title``， ``meta`` 信息和最终的 ``toc-tree`` 元素。当文件
   没有人翻译时会添加下面的说明::
-
-- Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
-- Delete the content, but keeping the ``title``, ``meta`` information and
-  eventual ``toc-tree`` elements. The following note will be added while nobody
-  has translated the file::
 
     File Title
     ##########
