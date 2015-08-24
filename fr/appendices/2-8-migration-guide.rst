@@ -16,7 +16,8 @@ CakeTime
 ========
 
 - ``CakeTime::listTimezones()`` a été changée pour accepter un tableau pour le
-  dernier argument. Les valeurs valides pour l'argument ``$options`` sont: ``group``, ``abbr``, ``before``, and ``after``.
+  dernier argument. Les valeurs valides pour l'argument ``$options`` sont:
+  ``group``, ``abbr``, ``before``, and ``after``.
 
 I18nShell
 =========
