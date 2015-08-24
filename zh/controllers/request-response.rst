@@ -146,14 +146,12 @@ post 文件体(*body*)的方式交换数据。这时可以用 :php:meth:`CakeReq
 ::
 
     $this->request->is('post');
-    $this->request->isPost(); // 已废弃 deprecated
+    $this->request->isPost(); // 已废弃
 
 两种方法调用都会返回相同的值。暂时这些方法仍然在 
-:php:class:`RequestHandlerComponent` 中可以使用，但已经被废弃，在最终发布前仍然
-可能会被去掉。(译注：这可能是指某个特定版本的发布，有可能是最初的 2.0 版本的发布，
-但原文并没有指明，故不能确定。你仍然应当以所使用版本的 CakePHP API 或源代码为依
-据。)通过使用 :php:meth:`CakeRequest::addDetector()` 创建新的检测器(*detectors*)，
-可以很容易地扩展现有的请求检测。可以创建四种不同种类的检测器:
+:php:class:`RequestHandlerComponent` 中可以使用，但已经被废弃，并会在3.0.0版本中
+被去掉。通过使用 :php:meth:`CakeRequest::addDetector()` 创建新的检测器
+(*detectors*)，可以很容易地扩展现有的请求检测。可以创建四种不同种类的检测器:
 
 * 环境值比较 —— 比较从 :php:func:`env()` 取得的值与给定值是否相等。
 * 模式值比较 —— 模式值比较可以把从 :php:func:`env()` 取得的值和正则表达式进行

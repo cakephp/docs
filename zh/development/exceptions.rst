@@ -182,7 +182,7 @@ RESTful 响应。
 你可以从控制器动作中抛出任何 HTTP 相关的异常来表示错误状态。例如::
 
     public function view($id) {
-        $post = $this->Post->read(null, $id);
+        $post = $this->Post->findById($id);
         if (!$post) {
             throw new NotFoundException();
         }

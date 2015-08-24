@@ -12,6 +12,7 @@ CakePHP 包含了一些有助于建立视图的助件。助件帮助创建完整
     :maxdepth: 1
 
     /core-libraries/helpers/cache
+    /core-libraries/helpers/flash
     /core-libraries/helpers/form
     /core-libraries/helpers/html
     /core-libraries/helpers/js

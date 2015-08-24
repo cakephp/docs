@@ -59,6 +59,18 @@ CakePHP 在 PHP 的 ``session`` 扩展之上，提供了封装和一套工具。
         )
     ));
 
+如果你使用PHP的默认会话设置，注意session.gc_maxlifetime会覆盖你对超时的设置。
+默认值为24分钟。在ini设置中改变该设置来获得较长时间的会话::
+
+    Configure::write('Session', array(
+        'defaults' => 'php',
+        'timeout' => 2160, // 36 小时
+        'ini' => array(
+            'session.gc_maxlifetime' => 129600 // 36 小时
+        )
+    ));
+
+
 内置会话处理器和配置
 ====================
 

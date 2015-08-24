@@ -340,7 +340,7 @@ CakePHP 开发人员将使用下面的编码规范。
      * @link http://book.cakephp.org/2.0/en/foo.html#bar
      * @deprecated 3.0.0 在 2.5.0 版本中作废。将在 3.0.0 版本中移除。使用 Bar::baz 代替。
      * @see Bar::baz
-     /*
+     */
      public function bar($param1, $param2 = null) {
      }
 

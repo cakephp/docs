@@ -404,7 +404,14 @@ CakePHP 的 Configure 类可以用来保存和读取应用程序或运行时相�
         //得到：
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-    如果 $key 为 null，返回 Configure 中所有的值。
+    如果$key为null，返回Configure中所有的值。如果对应制定的键$key的值不存在，则
+    返回null。
+
+.. php:staticmethod:: consume($key)
+
+    :param string $key: 读取的键名，可以是 :term:`dot notation` 值。
+
+    从Configure读取并删除键。当你想要合并读取和删除值为单一操作时，这比较有用。
 
 .. php:staticmethod:: check($key)
 
