@@ -1,5 +1,9 @@
-CakePHP at a Glance
-###################
+Time
+####
+
+.. php:namespace:: Cake\View\Helper
+
+.. php:class:: TimeHelper(View $view, array $config = [])
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +11,7 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
-
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: TimeHelper
+    :description lang=tr: The Time Helper will help you format time and test time.
+    :keywords lang=tr: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

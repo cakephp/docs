@@ -1,5 +1,9 @@
-CakePHP at a Glance
-###################
+App Class
+#########
+
+.. php:namespace:: Cake\Core
+
+.. php:class:: App
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +11,6 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
-
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: App Class
+    :keywords lang=tr: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

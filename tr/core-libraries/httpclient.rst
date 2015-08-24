@@ -1,5 +1,9 @@
-CakePHP at a Glance
-###################
+Http Client
+###########
+
+.. php:namespace:: Cake\Network\Http
+
+.. php:class:: Client(mixed $config = [])
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +11,6 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
-
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: HttpClient
+    :keywords lang=tr: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results

@@ -1,5 +1,9 @@
-CakePHP at a Glance
-###################
+Email
+#####
+
+.. php:namespace:: Cake\Mailer
+
+.. php:class:: Email(mixed $profile = null)
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +11,6 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
-
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: Email
+    :keywords lang=tr: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

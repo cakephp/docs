@@ -1,5 +1,9 @@
-CakePHP at a Glance
-###################
+Session
+#######
+
+.. php:namespace:: Cake\View\Helper
+
+.. php:class:: SessionHelper(View $view, array $config = [])
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +11,7 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
-
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: SessionHelper
+    :description lang=tr: The Session Helper replicates most of the functionality and making it available in your view.
+    :keywords lang=tr: session helper,flash messages,session flash,session read,session check

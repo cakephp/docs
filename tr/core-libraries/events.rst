@@ -1,5 +1,5 @@
-CakePHP at a Glance
-###################
+Events System
+#############
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -10,13 +10,11 @@ Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftak
 Additional Reading
 ==================
 
-.. toctree::
-    :maxdepth: 1
+* :doc:`/orm/behaviors`
+* :doc:`/controllers/components`
+* :doc:`/views/helpers`
 
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
 
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: Events system
+    :keywords lang=tr: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

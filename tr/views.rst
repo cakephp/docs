@@ -1,5 +1,8 @@
-CakePHP at a Glance
-###################
+Views
+#####
+.. php:namespace:: Cake\View
+
+.. php:class:: View
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +10,17 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
+More About Views
+================
 
 .. toctree::
     :maxdepth: 1
 
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
+    views/cells
+    views/themes
+    views/json-and-xml-views
+    views/helpers
 
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: Views
+    :keywords lang=tr: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

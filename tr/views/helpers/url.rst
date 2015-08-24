@@ -1,5 +1,9 @@
-CakePHP at a Glance
-###################
+Url
+###
+
+.. php:namespace:: Cake\View\UrlHelper
+
+.. php:class:: UrlHelper(View $view, array $config = [])
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
@@ -7,16 +11,7 @@ Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek y
 
 Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /intro/where-to-get-help
-    /intro/conventions
-    /intro/cakephp-folder-structure
-
 .. meta::
-    :title lang=tr: Getting Started
-    :keywords lang=tr: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=tr: UrlHelper
+    :description lang=tr: The role of the UrlHelper in CakePHP is to help build urls.
+    :keywords lang=tr: url helper,url
