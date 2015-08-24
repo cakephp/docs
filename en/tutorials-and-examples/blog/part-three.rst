@@ -176,8 +176,12 @@ read if you want re-familiarize yourself with how CakePHP works.
 .. note::
     If you are on Windows remember to use \ instead of /.
 
+<<<<<<< HEAD
+You'll need to edit the following in **src/Template/Categories/add.ctp**::
+=======
 You'll need to edit the following in **src/Template/Categories/add.ctp**
 and **src/Template/Categories/edit.ctp**::
+>>>>>>> upstream/3.0
 
     echo $this->Form->input('parent_id', [
         'options' => $parentCategories,
