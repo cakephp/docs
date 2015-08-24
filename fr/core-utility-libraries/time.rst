@@ -147,13 +147,13 @@ Formatage
 
     :rtype: string
 
-    Prend une chaîne et utilise `strtotime <http://us.php.net/manual/en/function.date.php>`_ 
+    Prend une chaîne et utilise `strtotime <http://us.php.net/manual/en/function.date.php>`_
     pour la convertir en une date integer::
 
         // Appelé avec TimeHelper
         echo $this->Time->fromString('Aug 22, 2011');
         // 1313971200
-        
+
         echo $this->Time->fromString('+1 days');
         // 1321074066 (+1 day from current date)
 
@@ -327,7 +327,7 @@ Formatage
         // Appelé avec TimeHelper
         echo $this->Time->toQuarter('Aug 22, 2011');
         // Afficherait 3
-        
+
         $arr = $this->Time->toQuarter('Aug 22, 2011', true);
         /*
         Array
@@ -355,7 +355,7 @@ Formatage
 
     :rtype: string
 
-    Va retourner une chaîne de date au format RSS "Sat, 12 Jan 2008 
+    Va retourner une chaîne de date au format RSS "Sat, 12 Jan 2008
     00:00:00 -0500"
 
     .. versionchanged:: 2.2
@@ -395,12 +395,18 @@ Formatage
        paramètres, elle essaie d'obtenir le timezone de la variable de
        configuration 'Config.timezone'.
 
-.. php:method:: listTimezones($filter = null, $country = null, $group = true)
+.. php:method:: listTimezones($filter = null, $country = null, $options = array())
 
     :rtype: array
 
     .. versionadded:: 2.2
        Retourne une liste des identificateurs de timezone.
+
+    .. versionchanged:: 2.8
+       ``$options`` accepte maintenant un tableau avec les clés ``group``,
+       ``abbr``, ``before``, et ``after``.
+       Spécifier ``abbr => true`` va ajouter l'abréviation de la timezone
+       dans le texte ``<option>``.
 
 Tester Time
 ===========
