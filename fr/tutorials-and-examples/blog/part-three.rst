@@ -132,8 +132,7 @@ avant de créer vos tables. Nous devons changer ``'null' => false`` pour
 le champ ``parent_id`` par ``'null' => true`` car une catégorie de niveau
 supérieur a un ``parent_id`` null.
 
-Une fois que les fichiers vous conviennent, vous pouvez exécuter la commande
-suivante pour créer vos tables::
+Exécutez la commande suivante pour créer vos tables::
 
     bin/cake migrations migrate
 
@@ -162,7 +161,7 @@ fichier **src/Model/Table/ArticlesTable.php** et ajoutez ce qui suit::
         public function initialize(array $config)
         {
             $this->addBehavior('Timestamp');
-            // Just add the belongsTo relation with CategoriesTable
+            // Ajoute juste la relation belongsTo avec CategoriesTable
             $this->belongsTo('Categories', [
                 'foreignKey' => 'category_id',
             ]);
@@ -185,6 +184,14 @@ CakePHP.
 .. note::
     Si vous utilisez Windows, pensez à utiliser \ à la place de /.
 
+Vous devrez modifier ce qui suit dans **src/Template/Categories/add.ctp**
+et **src/Template/Categories/edit.ctp**::
+
+    echo $this->Form->input('parent_id', [
+        'options' => $parentCategories,
+        'empty' => 'Pas de catégorie parente'
+    ]);
+
 Attacher TreeBehavior à CategoriesTable
 =======================================
 
@@ -198,7 +205,7 @@ comme les blogs.
 Si vous ouvrez le fichier **src/Model/Table/CategoriesTable.php**, vous verrez
 que le TreeBehavior a été attaché à votre CategoriesTable dans la méthode
 ``initialize()``. Bake ajoute automatiquement ce behavior à toutes les Tables
-qui contiennent les colonnes ``lft`` and ``rght``::
+qui contiennent les colonnes ``lft`` et ``rght``::
 
     $this->addBehavior('Tree');
 
@@ -211,6 +218,26 @@ de template add et edit::
 
     echo $this->Form->input('lft');
     echo $this->Form->input('rght');
+
+De plus, vous devez désactiver ou retirer les requirePresence du validateur
+pour lft et rght dans votre model CategoriesTable::
+
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->add('id', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('id', 'create');
+
+        $validator
+            ->add('lft', 'valid', ['rule' => 'numeric'])
+        //    ->requirePresence('lft', 'create')
+            ->notEmpty('lft');
+
+        $validator
+            ->add('rght', 'valid', ['rule' => 'numeric'])
+        //    ->requirePresence('rght', 'create')
+            ->notEmpty('rght');
+    }
 
 Ces champs sont automatiquement gérés par le TreeBehavior quand
 une catégorie est sauvegardée.
@@ -232,9 +259,10 @@ catégories dans l'arbre::
     {
         public function index()
         {
-            $categories = $this->Categories->find('threaded')
+            $categories = $this->Categories->find()
                 ->order(['lft' => 'ASC']);
             $this->set(compact('categories'));
+            $this->set('_serialize', ['categories']);
         }
 
         public function moveUp($id = null)
@@ -262,7 +290,8 @@ catégories dans l'arbre::
         }
     }
 
-Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par ceci::
+Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par
+ceci::
 
     <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
@@ -276,7 +305,6 @@ Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par cec
             <tr>
                 <th>id</th>
                 <th>Parent Id</th>
-                <th>Title</th>
                 <th>Lft</th>
                 <th>Rght</th>
                 <th>Name</th>

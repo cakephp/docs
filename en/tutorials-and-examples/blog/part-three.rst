@@ -210,19 +210,19 @@ edit template files::
     echo $this->Form->input('rght');
 
 In addition you should disable or remove the requirePresence from the validator
-for both lft and rght in your CategoriesTable model:
+for both lft and rght in your CategoriesTable model::
 
     public function validationDefault(Validator $validator)
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
         //    ->requirePresence('lft', 'create')
             ->notEmpty('lft');
-            
+
         $validator
             ->add('rght', 'valid', ['rule' => 'numeric'])
         //    ->requirePresence('rght', 'create')
