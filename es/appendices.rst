@@ -13,6 +13,14 @@ Appendices
 Appendices contain information regarding the new features
 introduced in 2.x, and the migration path from 1.3 to 2.0.
 
+2.7 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-7-migration-guide
+
 2.6 Migration Guide
 ===================
 
