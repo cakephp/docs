@@ -405,7 +405,7 @@ Formatage
     .. versionchanged:: 2.8
        ``$options`` accepte maintenant un tableau avec les clés ``group``,
        ``abbr``, ``before``, et ``after``.
-       Spécifiez ``abbr => true`` va ajouter l'abréviation de la timezone
+       Spécifier ``abbr => true`` va ajouter l'abréviation de la timezone
        dans le texte ``<option>``.
 
 Tester Time

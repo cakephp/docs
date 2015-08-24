@@ -15,7 +15,7 @@ Cache
 CakeTime
 ========
 
-- ``CakeTime::listTimezones()`` a été changée pour accepter un tableau pour le
+- ``CakeTime::listTimezones()`` a été changée pour accepter un tableau en
   dernier argument. Les valeurs valides pour l'argument ``$options`` sont:
   ``group``, ``abbr``, ``before``, and ``after``.
 
