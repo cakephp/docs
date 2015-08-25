@@ -76,6 +76,12 @@ AuthComponent
 - The options ``scope`` and ``contain`` for authenticator classes have been
   deprecated. Instead, use the new ``finder`` option to configure a custom finder
   method and modify the query used to find a user there.
+- The logic for setting ``Auth.redirect`` session variable, which is used to get
+  the URL to be redirected to after login, has been changed. It is now set only when
+  trying to access a protected URL without authentication. So ``Auth::redirectUrl()``
+  returns the protected URL after login. Under normal circumstances, when a user
+  directly accesses the login page, ``Auth::redirectUrl()`` returns the value set
+  for ``loginRedirect`` config.
 
 FlashComponent
 --------------
@@ -173,6 +179,8 @@ Email
 - ``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
   namespace. Their former namespaces are still usable as class aliases have
   been set for them.
+- The ``default`` email profile is now automatically set when an ``Email``
+  instance is created. This behavior is similar to what is done in 2.x.
 
 Mailer
 ------
@@ -197,3 +205,6 @@ Validation
 - ``Validation::geoCoordinate()`` was added.
 - ``Validation::latitude()`` was added.
 - ``Validation::longitude()`` was added.
+- ``Validation::isInteger()`` was added.
+- ``Validation::ascii()`` was added.
+- ``Validation::utf8()`` was added.

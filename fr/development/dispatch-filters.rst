@@ -208,5 +208,5 @@ tout code de gestionnaire de requête à votre application.
 
 .. meta::
     :title lang=fr: Filtres du Dispatcher
-    :description lang=fr: Les filtres du Dispatcher sont une couche middleware pour CakePHP permettant de modifier la requête ou la réponse avant qu'elles soit envoyées
+    :description lang=fr: Les filtres du Dispatcher sont une couche middleware pour CakePHP permettant de modifier la requête ou la réponse avant qu'elles ne soit envoyées
     :keywords lang=fr: middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router

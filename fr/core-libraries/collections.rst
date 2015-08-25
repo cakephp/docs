@@ -610,7 +610,7 @@ Par défaut, ``SORT_NUMERIC`` est utilisée::
 
 .. warning::
 
-    Il est souvent couteux d'itérer les collections triées plus d'une fois. Si
+    Il est souvent coûteux d'itérer les collections triées plus d'une fois. Si
     vous voulez le faire, pensez à convertir la collection en tableau ou
     utilisez simplement la méthode ``compile()`` dessus.
 

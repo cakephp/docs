@@ -80,6 +80,14 @@ AuthComponent
   dépréciées. A la place, utilisez la nouvelle option ``finder`` pour configurer
   une méthode de finder personnalisée pour modifier le requête utilisée pour
   chercher l'utilisateur.
+- La logique responsable de définir la variable de session ``Auth.redirect``,
+  qui est utilisée pour récupérer l'URL de redirection après la connexion
+  (login) a été modifiée. Elle est maintenant définie uniquement lorsque l'on
+  essaye d'accéder directement à une URL protégée sans authentification. Ainsi
+  ``Auth::redirectUrl()`` renvoie l'URL protégée après le login. Dans la
+  plupart des cas, lorsqu'un utilisateur accède directement à la page de
+  connexion, ``Auth::redirectUrl()`` renvoie la valeur définie par la
+  configuration de ``loginRedirect``.
 
 FlashComponent
 --------------
@@ -182,6 +190,8 @@ Email
 - Les classes ``Email`` et ``Transport`` ont été déplacées sous le namespace
   ``Cake\Mailer``. Leur ancien namespace est toujours utilisable car des alias
   ont été créés.
+- Le profil d'email ``default`` est maintenant automatiquement défini quand une
+  instance ``Email`` est créée. Ce comportement est le même que dans 2.x.
 
 Mailer
 ------
@@ -206,3 +216,6 @@ Validation
 - ``Validation::geoCoordinate()`` a été ajoutée.
 - ``Validation::latitude()`` a été ajoutée.
 - ``Validation::longitude()`` a été ajoutée.
+- ``Validation::isInteger()`` a été ajoutée.
+- ``Validation::ascii()`` a été ajoutée.
+- ``Validation::utf8()`` a été ajoutée.

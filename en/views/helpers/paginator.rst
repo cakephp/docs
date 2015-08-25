@@ -345,7 +345,7 @@ There are a number of options for ``counter()``. The supported ones are:
   -  ``{{current}}`` - current number of records being shown.
   -  ``{{count}}`` - the total number of records in the result set.
   -  ``{{start}}`` - number of the first record being displayed.
-  -  ``{{end}`` - number of the last record being displayed.
+  -  ``{{end}}`` - number of the last record being displayed.
   -  ``{{model}}`` - The pluralized human form of the model name.
      If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
 

@@ -492,7 +492,7 @@ delete for those not in the list::
 
     // In a controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($entity->comments))->extract('id');
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -973,9 +973,11 @@ many rows at once::
     // Publish all the unpublished articles.
     function publishAllUnpublished()
     {
-        $this->updateAll(['published' => true], ['published' => false]);
+        $this->updateAll(
+            ['published' => true], // fields
+            ['published' => false]); // conditions
     }
-
+    
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
@@ -991,3 +993,18 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
+
+
+``updateAll()`` is for convenience only. You can use this more flexible interface as well::
+
+    // Publish all the unpublished articles.
+    function publishAllUnpublished()
+    {
+        $this->query()
+            ->update()
+            ->set(['published' => 'true])
+            ->where(['published' => 'false'])
+            ->execute();
+    }
+    
+Also see: :ref:`query-builder-updating-data`.

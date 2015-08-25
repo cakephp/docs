@@ -197,7 +197,7 @@ utilisé ce qui à pour effet d'écrire dans le log error. Le chemin par défaut
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
 
-    // Aboutit à ce que cela soit ajouté à  app/tmp/logs/error.log
+    // Aboutit à ce que cela soit ajouté à tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Quelque chose ne fonctionne pas!
 
 Le répertoire configuré doit être accessible en écriture par le serveur web de

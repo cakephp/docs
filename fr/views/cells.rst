@@ -14,7 +14,7 @@ Les Cells sont idéales pour la construction de components de page réutilisable
 qui nécessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
 ou un menu de navigation selon des données dans un CMS. Puisque les cells ne
-dispatchent pas les sous-requêtes, elles évitent toute la charge couteuse
+dispatchent pas les sous-requêtes, elles évitent toute la charge coûteuse
 de ``requestAction()``.
 
 Créer une Cell

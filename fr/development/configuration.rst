@@ -460,7 +460,7 @@ définit une méthode de lecture, comme seule méthode requise. Si vous aimez
 vraiment les fichiers XML, vous pouvez créer un reader de config simple Xml
 pour votre application::
 
-    // Dans app/Lib/Configure/Engine/XmlConfig.php
+    // Dans src/Configure/Engine/XmlConfig.php
     namespace App\Configure\Engine;
 
     use Cake\Core\Configure\ConfigEngineInterface;

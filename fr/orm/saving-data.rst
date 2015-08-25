@@ -515,7 +515,7 @@ pas dans la liste::
 
     // Dans un controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($article->comments))->extract('id');
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -1039,7 +1039,9 @@ mise à jour en masse pour modifier plusieurs lignes en une fois::
     // Publie tous les articles non publiés.
     function publishAllUnpublished()
     {
-        $this->updateAll(['published' => true], ['published' => false]);
+        $this->updateAll([
+            'published' => true], //champ
+            ['published' => false]); //condition
     }
 
 Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
@@ -1060,3 +1062,18 @@ lignes sont mises à jour.
     updateAll *ne* va *pas* déclencher d'events beforeSave/afterSave. Si
     vous avez besoin de ceux-ci, chargez d'abord une collection
     d'enregistrements et mettez les à jour.
+
+``updateAll()`` est uniquement une fonction de commodité. Vous pouvez
+également utiliser cette interface plus flexible::
+
+    // Publication de tous les articles non publiés.
+    function publishAllUnpublished()
+    {
+        $this->query()
+            ->update()
+            ->set(['published' => 'true])
+            ->where(['published' => 'false'])
+            ->execute();
+    }
+
+Reportez-vous sur :ref:`query-builder-updating-data`.

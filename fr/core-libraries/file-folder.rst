@@ -158,7 +158,7 @@ API de Folder
     Retourne un tableau de tous les fichiers correspondants dans le répertoire
     courant::
 
-        // Trouve tous les .png dans votre dossier app/webroot/img/ et range les résultats
+        // Trouve tous les .png dans votre dossier webroot/img/ et range les résultats
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
         /*
@@ -189,12 +189,12 @@ API de Folder
         /*
         Array
         (
-            [0] => /var/www/cake/app/webroot/index.php
-            [1] => /var/www/cake/app/webroot/test.php
-            [2] => /var/www/cake/app/webroot/img/test-skip-icon.png
-            [3] => /var/www/cake/app/webroot/img/test-fail-icon.png
-            [4] => /var/www/cake/app/webroot/img/test-error-icon.png
-            [5] => /var/www/cake/app/webroot/img/test-pass-icon.png
+            [0] => /var/www/cake/webroot/index.php
+            [1] => /var/www/cake/webroot/test.php
+            [2] => /var/www/cake/webroot/img/test-skip-icon.png
+            [3] => /var/www/cake/webroot/img/test-fail-icon.png
+            [4] => /var/www/cake/webroot/img/test-error-icon.png
+            [5] => /var/www/cake/webroot/img/test-pass-icon.png
         )
         */
 
@@ -208,10 +208,10 @@ API de Folder
 
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
-        // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
+        // $result = true, /var/www/example/ est dans /var/www/example/webroot/
 
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
-        // $result = true, /var/www/example/app/webroot/ est dans /var/www/example/app/webroot/img/
+        // $result = true, /var/www/example/webroot/ est dans /var/www/example/webroot/img/
 
 .. php:staticmethod:: isAbsolute(string $path)
 

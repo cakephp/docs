@@ -592,7 +592,7 @@ You can control when your fixtures are loaded by setting
 
         public function testMyFunction()
         {
-            $this->loadFixtures('Article', 'Comment');
+            $this->loadFixtures('Articles', 'Comments');
         }
     }
 

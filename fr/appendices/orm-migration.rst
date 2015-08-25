@@ -545,7 +545,7 @@ Identifier Quoting Désactivé par Défaut
 
 Dans le passé, CakePHP a toujours quoté les identifieurs. Parser les bouts de
 code SQL et tenter de quoter les identifiers étaient tous les deux des source
-d'erreurs et couteuses. Si vous suivez les conventions que CakePHP définit,
+d'erreurs et coûteuses. Si vous suivez les conventions que CakePHP définit,
 les coûts du identifier quoting l'emporte sur tout avantage qu'il fournisse.
 Puisque ce identifier quoting a été désactivé par défaut dans 3.0. Vous devriez
 seulement activer le identifier quoting si vous utilisez les noms de colonne ou
