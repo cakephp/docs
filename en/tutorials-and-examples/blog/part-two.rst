@@ -50,7 +50,7 @@ chapter of the Manual.
     If you completed :doc:`Part 1 of the Blog Tutorial
     </tutorials-and-examples/blog/blog>` and created the ``articles`` table in
     our Blog database you can leverage CakePHP's bake console and its code
-    generation capabilities to create the ``ArticlesTable`` model::
+    generation capabilities to create the `ArticlesTable`` model::
 
         bin/cake bake model Articles
 
@@ -94,7 +94,7 @@ articles. The code for that action would look like this::
         }
     }
 
-By defining function ``index()`` in our ArticlesController, users can now
+By defining function ``index()`` in our ``ArticlesController``, users can now
 access the logic there by requesting www.example.com/articles/index. Similarly,
 if we were to define a function called ``foobar()``, users would be able to
 access that at www.example.com/articles/foobar.
