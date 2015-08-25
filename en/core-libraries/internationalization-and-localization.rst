@@ -583,8 +583,8 @@ automatically set the locale based on the current user::
     // in config/bootstrap.php
     DispatcherFactory::add('LocaleSelector');
 
-    // Restrict the locales to only en-US, fr-FR
-    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+    // Restrict the locales to only en_US, fr_FR
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en_US', 'fr_FR']]);
 
 The ``LocaleSelectorFilter`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
