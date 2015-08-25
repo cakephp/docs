@@ -26,7 +26,7 @@ yarayan bir uygulama çatısı sunar. Konsol, bir kabuğu veya görevi yüklemek
 sevk-tarzı kurulum kurulum kullanır ve paramaterlerini getirir.
 
 .. note::
-    
+
     Konsolu kullanmayı amaçlıyorsanız bir PHP comput satırı (CLI) derlemesi
     sisteminizde mevcut olmalıdır.
 
@@ -143,7 +143,7 @@ Gördüğünüz gibi komut satırından çağırılan metodlar, altçizgili kabu
 camel-case metod adına dönüşmektedirler.
 
 ``heyThere()`` metodumuzda, pozisyona bağlı argümanların metodumuza gönderildiğini
-görmekteyiz. Pozisyona bağlı argümanlar, ``args`` özelliğinde de mevcutturlar. 
+görmekteyiz. Pozisyona bağlı argümanlar, ``args`` özelliğinde de mevcutturlar.
 
 In our ``heyThere()`` method we can see that positional arguments are provided to our
 ``heyThere()`` function. Positional arguments are also available in the ``args`` property.
@@ -203,7 +203,7 @@ görevlerden oluşmuştur. ``$tasks`` özelliğini kullanarak bir görev tanıma
     }
 
 Standart :term:`eklenti sözdizimi` kullanarak, eklenti görevlerini kullanabilirsiniz.
-Görevler, kendi sınıflarının ismini alan ``Shell/Task/`` dizinlerinde bulunurlar. 
+Görevler, kendi sınıflarının ismini alan ``Shell/Task/`` dizinlerinde bulunurlar.
 Örneğin yeni bir 'FileGenerator' görevi yaratmak isteseydik ``src/Shell/Task/FileGeneratorTask.php``
 dosyasını yaratmanız gerekecekti.
 
@@ -221,7 +221,7 @@ görev her çalıştırıldığında bu metodu çağıracaktır. Bir görev sın
         }
     }
 
-Bir kabuk, kendi görevinin özelliklerine de erişebilir ki, bu da görevleri, 
+Bir kabuk, kendi görevinin özelliklerine de erişebilir ki, bu da görevleri,
 yeniden kullanılabilir işlevleri :doc:`/controllers/components` gibi
 kullanabilmemizi sağlar::
 
@@ -288,7 +288,7 @@ olarak sunabilirsiniz::
     // Dizi olarak
     $this->dispatchShell('schema', 'create', 'Blog', '--plugin', 'Blog');
 
-Yukarıdaki örnek şema kabuğunu eklenti kabuğunda çağırarak bir eklenti için nasıl 
+Yukarıdaki örnek şema kabuğunu eklenti kabuğunda çağırarak bir eklenti için nasıl
 yeni bir şema oluşturabileceğinizi göstermektedir.
 
 Kullanıcı Girdisi Almak
@@ -318,7 +318,7 @@ biridir. CakePHP verilen yolda dosyayı yaratmanın kolay bir yolunu sunar::
 
     $this->createFile('bower.json', $stuff);
 
-Eğer kabuk etkileşimli ise, bir uyarı üretilecektir ve eğer dosya mevcutsa, 
+Eğer kabuk etkileşimli ise, bir uyarı üretilecektir ve eğer dosya mevcutsa,
 kullanıcıya dosyanın üzerine yazıp yazmamak istediği sorulacaktır. Eğer
 kabuğun etkileşim özelliği ``false`` ise, soru sorulmayacak ve dosya doğrudan
 üzerine yazılacaktır.
@@ -421,7 +421,7 @@ Ek şekillednirmeleri ``$this->stdout->styles()`` kullanarak yaratabilirsiniz. Y
     $this->_io->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
 Bu kabuk çıktılarınızda ``<flashy>`` etiketi kullanmanıza izin verecektir ve eğer ansi
-renkleri etkinleştirildiyse, bu kod yanıp sönen aflatun renkli metin olarak gösterilecektir 
+renkleri etkinleştirildiyse, bu kod yanıp sönen aflatun renkli metin olarak gösterilecektir
 ``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. Şekillendirmeleri
 belirlerken ``text`` ve ``background`` özellikleri için şu renkleri kullanabilirsiniz:
 
@@ -441,7 +441,7 @@ Ayrıca şu seçenekleri de etkinleştirip kullanabilirsiniz.
 * blink (yanıp sönen)
 * reverse (ters)
 
-Bir şekillendirme eklendiğine, tüm ConsoleOutput örneklerinden erişilir olur, 
+Bir şekillendirme eklendiğine, tüm ConsoleOutput örneklerinden erişilir olur,
 bu sayede stdout ve stderr nesnelerinde yeniden tanımlanmaları gerekmez.
 
 Renklendirmeyi Kapatmak
@@ -470,7 +470,7 @@ Kanca metodları
 ================
 
 .. php:method:: initialize()
-    
+
     Kabuğu başlatır, alt sınıflar için yapıcı metod olarak çalışır ve
     kabuk çalıştırılmadan önceki görevlerin yürütülmesini yapılandırır.
 
@@ -483,24 +483,24 @@ Kanca metodları
     bu metodu aşırı yükleyiniz.
 
 Seçenekleri Yapılandırmak ve Yardım Üretmek
-==========================================
+===========================================
 
 .. php:class:: ConsoleOptionParser
 
 ``ConsoleOptionParser`` bir komut satırı seçeneği sağlar ve argüman ayrıştırıcıdır.
 
 OptionParser, sizin aynı anda iki hedefi gerçekleştirmenize olanak sağlar. İllin
-komutunuzdaki seçenekleri ve agümanları tanımlamanıza izin verir. Bu basit girdi 
+komutunuzdaki seçenekleri ve agümanları tanımlamanıza izin verir. Bu basit girdi
 doğrulamasını ve metod argümanlarını ayırmanızı sağlar. İkincisi, iyi biçimlendirilmiş
 bir doküman sunmanıza olanak verir.
 
-CakePHP'deki konsol çerçevesi, kabuğun yapılandırma ayrıştırıcısını, 
+CakePHP'deki konsol çerçevesi, kabuğun yapılandırma ayrıştırıcısını,
 ``$this->getOptionParser()`` çağırarak elde eder. Bu metodu aşırı yüklemek,
 OptionPArseri, beklenen kabuk girdisine göre yapılandırmanızı sağlar.
 Ayrıca altkomutlar ve görevler için farklı yapılandırmalar kullanabilmek için
 alkomut yapılandırması ayrıştırıcıları da yanımlayabilirsiniz.
 ConsoleOptionParser akıcı bir arayüz sağlar ve kolayca birden fazla
-yapılandırma/argüman ayarlamanızı sağlayan metodları içerir.
+yapılandırma/argüman ayarlamanızı sağlayan metodları içerir::
 
     public function getOptionParser() {
         $parser = parent::getOptionParser();
@@ -513,7 +513,7 @@ Akıcı Arayüz ile Bir Seçenek Ayrıştırıcıyı Yapılandırmak
 
 Tüm seçenek ayrıştırıcı metodları zincirli olabilir (art arda gelebilir),
 bu sizin, tek bir dizi metod çağrısı haline tüm seçenek yapılandırıcısını
-tanımlanamanıza olanak sağlar.
+tanımlanamanıza olanak sağlar::
 
     public function getOptionParser()
     {
@@ -544,7 +544,7 @@ Zincirlemede izin verilen metodlar şunlardır:
 .. php:method:: description($text = null)
 
 Seçenek ayrıştırıcısının açıklamasını gösterir ya da ayarlar. Açıklama
-aşağıdaki argüman ve seçenek bilgisini gösterir. Bir metin veya dizi 
+aşağıdaki argüman ve seçenek bilgisini gösterir. Bir metin veya dizi
 göndererek, açıklamayı değiştirebilirsiniz. Argümanlarla çağırmak
 hali hazırdaki değeri döndürecektir::
 
@@ -557,7 +557,7 @@ hali hazırdaki değeri döndürecektir::
 .. php:method:: epilog($text = null)
 
 Seçenek ayrıştırıcısının sonuç bölümünü döndürür. Sonuç bölümü
-argüman ya da seçenek bilgisinden sonra gösterilir. Bir metin veya dizi 
+argüman ya da seçenek bilgisinden sonra gösterilir. Bir metin veya dizi
 göndererek, sonuç bölümünü değiştirebilirsiniz. Argümanlarla çağırmak
 hali hazırdaki değeri döndürecektir::
 
@@ -574,8 +574,8 @@ Argümanları Eklemek
 
 Konuma bağlı argümanlar, komut satırı araçları tarafından
 sıklıkla kullanılırlar ve ``ConsoleOptionParser`` konuma bağlı
-argümanları tanımlamanızı ve gerekli kılmanızı sağlar. 
-``$parser->addArgument();`` ile bir seferde bir defa, ya da 
+argümanları tanımlamanızı ve gerekli kılmanızı sağlar.
+``$parser->addArgument();`` ile bir seferde bir defa, ya da
 ``$parser->addArguments();`` ile bir seferde birden fazla argüman
 ekleyebilirsiniz::
 
@@ -586,9 +586,9 @@ Argüman yaratırken şu seçenekleri de kullanabilirsiniz:
 * ``help`` Argüman için gösterilecek yardım metni
 * ``required`` Bu parametre gerekli ise.
 * ``index`` Argüman için dizin, eğer tanımsız ise, argüman, diğer argümanların
-  sonuna konacaktır. Eğer aynı dizini birden fazla tanımlarsanız, ilkinin üzerine 
-  yazılacaktır. 
-* ``choices`` Bu argüman için geçerli seçenekler dizisi. Boş bırakılmışsa, bütün 
+  sonuna konacaktır. Eğer aynı dizini birden fazla tanımlarsanız, ilkinin üzerine
+  yazılacaktır.
+* ``choices`` Bu argüman için geçerli seçenekler dizisi. Boş bırakılmışsa, bütün
   değerler geçerlidir. parse() geçersiz bir değerle karşılaşırsa bir istisna (Exception)
   fırlatılacaktır.
 
@@ -606,7 +606,7 @@ tek seferde eklemek için ``$parser->addArguments()`` kullanabilirsiniz. ::
     ]);
 
 ConsoleOptionParser'daki tüm yapıcı sınıflar gibi addArguments, akıcı
-bir metod zincirinin bir parçası olarak kullanılabilir. 
+bir metod zincirinin bir parçası olarak kullanılabilir.
 
 Argümanları Doğrulamak
 ----------------------
@@ -622,8 +622,8 @@ be from a list of valid choices::
         'choices' => ['aro', 'aco']
     ]);
 
-Bu örnek, girdi üzerinde doğrulaması bulunan gerekli bir argüman 
-oluşturacaktır. Argüman yoksa veya hatalı bir değere sahipse, 
+Bu örnek, girdi üzerinde doğrulaması bulunan gerekli bir argüman
+oluşturacaktır. Argüman yoksa veya hatalı bir değere sahipse,
 bir istisna fırlatılacak ve kabuk duracaktır.
 
 Seçenekleri Eklemek
@@ -634,7 +634,7 @@ Seçenekleri Eklemek
 Seçenekler veya bayraklar da sıklıkla komut satırı araçlarında
 kullanılırlar. ``ConsoleOptionParser`` uzun veya kısa takma adlar
 kullanan ayarlar oluşturmayı, varsayılanlar ve boole anahtarları
-sunarak, sağlar. Seçenkler ``$parser->addOption()`` veya 
+sunarak, sağlar. Seçenkler ``$parser->addOption()`` veya
 ``$parser->addOptions()`` kullanılarak yaratılabilirler. ::
 
     $parser->addOption('connection', [
@@ -643,7 +643,7 @@ sunarak, sağlar. Seçenkler ``$parser->addOption()`` veya
         'default' => 'default',
     ]);
 
-Buradaki örnek, kabuğu çağırdığınızda ``cake myshell --connection=other``, 
+Buradaki örnek, kabuğu çağırdığınızda ``cake myshell --connection=other``,
 ``cake myshell --connection other``, veya ``cake myshell -c other`` kullanmanızı
 sağlamaktadır. Boole anahtarları da oluşturabilirsiniz. Bu anahtartlar, değerleri
 tüketmezler ve varlıkları ayrıştırılan parametrede etkinleştirilmelerini sağlar. ::
@@ -652,7 +652,7 @@ tüketmezler ve varlıkları ayrıştırılan parametrede etkinleştirilmelerini
 
 Bu seçenek ile, bir kabuğu ``cake myshell --no-commit something`` şeklinde
 çağırdığınıza, no-commit parametresi ``true`` değerini alacak ve 'something'
-konumsal argüman olarak değerlendirilecektir. Hazır olan ``--help``, ``--verbose``, 
+konumsal argüman olarak değerlendirilecektir. Hazır olan ``--help``, ``--verbose``,
 ve ``--quiet`` seçenekleri bu özelliği kullanırlar.
 
 Seçenekleri yaratırken, seçenek davranışını belirlemek için şu seçenekleri
@@ -661,15 +661,15 @@ kullanabilirsiniz:
 * ``short`` - Bu seçenek için tek harf alternatifi. Boş bırakılabilir veya none.
 * ``help`` - Bu seçenek için yardım metni. Seçenk için yardım metni yaratılırken kullanılır.
 * ``default`` - Bu seçenek için varsayılan değer. Tanımlanmadıysa, varsayılan değer ``true`` olacaktır.
-* ``boolean`` - Bu seçenek, değer kullanmaz, sadece bir boole anahtarıdır. 
+* ``boolean`` - Bu seçenek, değer kullanmaz, sadece bir boole anahtarıdır.
   Varsayılan olarak ``false``.
-* ``choices`` - Bu seçenek için geçerli bir seçimler dizisi. Eğer boş bırakıldıysa, 
+* ``choices`` - Bu seçenek için geçerli bir seçimler dizisi. Eğer boş bırakıldıysa,
   tüm değerler geçerlidir. Eğer parse() geçersiz bir değerler karşılaşırse bir istisna
   fırlatılacaktır.
 
 .. php:method:: addOptions(array $options)
 
-Birden fazla seçenek içeren bir diziye sahipseniz, birden fazla seçeneği tek 
+Birden fazla seçenek içeren bir diziye sahipseniz, birden fazla seçeneği tek
 seferde eklemek için ``$parser->addOptions()`` kullanabilirsiniz. ::
 
     $parser->addOptions([
@@ -697,7 +697,7 @@ Boole Seçenekler Eklemek
 ------------------------
 
 Bazı bayrak seçenekleri tanımlamak istediğinizde boole kullanabilirsiniz.
-Varsayılana sahip olan seçenekler gibi, boole seçenekleri, her zaman 
+Varsayılana sahip olan seçenekler gibi, boole seçenekleri, her zaman
 kendilerini ayrıştırılan parametreler içinde tanımlarlar. Eğer bir bayrak
 mevcutsa değeri ``true``, eğer bayrak yoksa değeri ``false`` olur::
 
@@ -726,7 +726,7 @@ Konsol uygulamaları genellikle altkomutlardan oluşurlar ve bu altkomutlar
 özel seçenek ayrıştıma ve kendi yardım metodlarını ihtiyaç duyabilirler.
 Bunun için en mükemmel örnek ``bake`` dir. Bake, kendine ait yardım ve
 seçenekleri içeren görevlerden oluşur. ``ConsoleOptionParser`` size
-alkomutlarını tanımlama ve komuta özel seçenek ayrıştırıcıları sunmanız 
+alkomutlarını tanımlama ve komuta özel seçenek ayrıştırıcıları sunmanız
 olanağını sağlar. Bu sayede kabuk görevler için komutların nasıl
 ayrıştırılacağını bilecektir::
 
@@ -735,10 +735,10 @@ ayrıştırılacağını bilecektir::
         'parser' => $this->Model->getOptionParser()
     ]);
 
-Üstteki örnek, bir kabuk görevi için, nasıl yardım ve özelleştirilmiş 
+Üstteki örnek, bir kabuk görevi için, nasıl yardım ve özelleştirilmiş
 seçenek ayrıştırıcısı sunacağınızı göstermektedir. Görevin ``getOptionParser()``
 metodunu çağırarak, seçenek ayrıştırıcısı üretimini iki kere çalıştırmamış ve
-birşeyleri karıştırmaktan endişe duymamış oluyoruz. Altkomutları 
+birşeyleri karıştırmaktan endişe duymamış oluyoruz. Altkomutları
 bu şekilde eklemenin iki avantajı mevcuttur. İlk olarak, oluşturulan
 yardım içerisinde kabuğunuzun altkomutlarını kolayca dokümante etmesini
 sağlar. Aynı zamanda, altkomut yardımına kolay erişim sağlar. Şu komut ile
@@ -746,8 +746,8 @@ sağlar. Aynı zamanda, altkomut yardımına kolay erişim sağlar. Şu komut il
 çalıştırarak da, yardımı veya sadece model görevi görüntüleyebilirsiniz.
 
 .. note::
-    
-    Bir kez Kabuk altkomutları tanımladığında, tüm altkomutlar açıkça 
+
+    Bir kez Kabuk altkomutları tanımladığında, tüm altkomutlar açıkça
     tanımlanmalıdırlar.
 
 Bir altkomutu tanımlarken şu seçenekleri kullanabilirsiniz:
@@ -768,7 +768,7 @@ Bir Diziden ConsoleOptionParser Oluşturmak
 
 Daha önceden belirtildiği üzere, alkomut seçenek ayrıştırıcısı yaratırken,
 ayrıştırıcı tanımlamasını, o metod için bir dizi olarak tanımlayabilirsiniz.
-Bu altkomut ayrıştırıcılarının yapılmasını, herşeyi bir dizi içine atmak kadar 
+Bu altkomut ayrıştırıcılarının yapılmasını, herşeyi bir dizi içine atmak kadar
 kolaylaştırır::
 
     $parser->addSubcommand('check', [
@@ -829,7 +829,7 @@ Kabuklardan Yardım Almak
 
 ConsoleOptionParser eklenmesiyle, kabuklardan yardım almak tutarlı ve muntazam bir
 şekilde yapılmaktadır. ``--help`` veya -``h`` seçeneğini kullanarak, herhangi bir
-çekirdek veya ConsoleOptionParser uygulayan herhangi bir kabuktaki 
+çekirdek veya ConsoleOptionParser uygulayan herhangi bir kabuktaki
 yardımı görüntüleyebilirsiniz::
 
     cake bake --help
@@ -934,12 +934,14 @@ Diğer Konular
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/repl
     console-and-shells/cron-jobs
     console-and-shells/i18n-shell
     console-and-shells/completion-shell
+    console-and-shells/plugin-shell
+    console-and-shells/routes-shell
     console-and-shells/upgrade-shell
-
 
 .. meta::
     :title lang=tr: Konsol ve Kabuklar
