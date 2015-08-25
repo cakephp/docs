@@ -143,7 +143,7 @@ them, but for now, let's just use the default.
 
 Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
-object to the view to be invoked with a ``foreach`` iteration.
+object collection to the view to be invoked with a ``foreach`` iteration.
 
 CakePHP's template files are stored in **src/Template** inside a folder
 named after the controller they correspond to (we'll have to create
