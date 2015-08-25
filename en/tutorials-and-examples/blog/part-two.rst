@@ -102,9 +102,9 @@ access that at www.example.com/articles/foobar.
 .. warning::
 
     You may be tempted to name your controllers and actions a certain
-    way to obtain a certain URL. Resist that temptation. Follow CakePHP
-    conventions (capitalization, plural names, etc.) and create readable,
-    understandable action names. You can map URLs to your code using
+    way to obtain a certain URL. Resist that temptation. Follow
+    :doc:`/intro/conventions` (capitalization, plural names, etc.) and create
+    readable, understandable action names. You can map URLs to your code using
     "routes" covered later on.
 
 The single instruction in the action uses ``set()`` to pass data
