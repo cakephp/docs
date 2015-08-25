@@ -123,8 +123,8 @@ A variável é definida como 'articles', sendo igual ao valor retornado do méto
 Para mais informações sobre o bake e suas características sobre geração de
 código, visite o capítulo :doc:`/bake/usage` do manual.
 
-Criando as Articles Views
-=========================
+Criando as Article Views
+========================
 
 Agora que nós temos nossos dados fluindo pelo nosso model, e nossa lógica da
 aplicação está definida pelo nosso controller, vamos criar uma view
