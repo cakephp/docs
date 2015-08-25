@@ -110,7 +110,7 @@ access that at www.example.com/articles/foobar.
 The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
 sets the view variable called 'articles' equal to the return value of
-the ``find('all')`` method of the Articles table object.
+the ``find('all')`` method of the ``ArticlesTable`` object.
 
 .. note::
 
