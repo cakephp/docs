@@ -1,13 +1,13 @@
 Tutorial - Criando um Blog - Parte 2
 ####################################
 
-Criando o Article Model
-=======================
+Criando um Article Model
+========================
 
 Ao criar um model (modelo) no CakePHP, nós teremos a fundação necessária para
 interagirmos com o banco de dados e executar operações posteriormente.
 
-Os arquivos de classes correspondentes aos models no CakePHP estão divididos
+Os arquivos de classes, correspondentes aos models, no CakePHP estão divididos
 entre os objetos ``Table`` e ``Entity``. Objetos ``Table`` provêm acesso à
 coleção de entities (entidades) armazenada em uma tabela específica e são
 alocados em **src/Model/Table**.
@@ -52,6 +52,73 @@ capítulo :doc:`/orm` do manual.
     ``ArticlesTable``::
 
         bin/cake bake model Articles
+
+Para mais informações sobre o bake e suas características sobre geração de
+código, visite o capítulo :doc:`/bake/usage` do manual.
+
+Criando o Articles Controller
+=============================
+
+A seguir, criaremos um controller (controlador) para nossos articles. O
+controller é responsável pela lógica de interação com dados. É o lugar onde você
+utilizará as regras contidas nos models e executará tarefas relacionadas aos
+articles. Criaremos um arquivo chamado ``ArticlesController.php`` no diretório
+**src/Controller**::
+
+    // src/Controller/ArticlesController.php
+
+    namespace App\Controller;
+
+    class ArticlesController extends AppController
+    {
+    }
+
+Agora, vamos adicionar uma action (ação) ao nosso controller. Actions
+frequentemente, representam uma função ou interface em uma aplicação.
+Por exemplo, quando os usuários requisitarem www.example.com/articles/index
+(sendo o mesmo que www.example.com/articles/), eles esperam ver uma lista de
+articles::
+
+    // src/Controller/ArticlesController.php
+
+    namespace App\Controller;
+
+    class ArticlesController extends AppController
+    {
+
+        public function index()
+        {
+            $articles = $this->Articles->find('all');
+            $this->set(compact('articles'));
+        }
+    }
+
+Ao definir a função ``index()`` em nosso ``ArticlesController``, os usuários
+podem acessá-la requisitando www.example.com/articles/index. Similarmente, se
+definíssemos uma função chamada ``foobar()``, os usuários poderiam acessá-la em
+www.example.com/articles/foobar.
+
+.. warning::
+
+    Vocês podem ser tentados a nomear seus controllers e actions de certa forma
+    para obter uma certa URL. Resista a essa tentação. Siga as
+    :doc:`/intro/conventions` e crie nomes de action legíveis e compreensíveis.
+    Você pode mapear URLs para o seu código utilizando
+    :doc:`/development/routing`.
+
+A instrução na action usa ``set()`` para passar dados do controller para a view.
+A variável é definida como 'articles', sendo igual ao valor retornado do método
+``find('all')`` do objeto ``ArticlesTable``.
+
+.. note::
+
+    Se você completou a
+    :doc:`primeira parte </tutorials-and-examples/blog/blog>` do tutorial e
+    criou a tabela ``articles``, você pode tomar proveito da capacidade de
+    geração de código do bake console do CakePHP para criar o controller
+    ``ArticlesController``::
+
+        bin/cake bake controller Articles
 
 Para mais informações sobre o bake e suas características sobre geração de
 código, visite o capítulo :doc:`/bake/usage` do manual.
