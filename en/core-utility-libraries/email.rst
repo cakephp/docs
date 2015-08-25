@@ -108,12 +108,14 @@ You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with
         );
     }
 
+You can also use ``tls://`` to prefer TLS for connection level encryption.
+
 .. note::
 
-    To use this feature, you will need to have the SSL configured in your PHP
-    install.
+    To use either the ssl:// or tls:// feature, you will need to have the SSL
+    configured in your PHP install.
 
-As of 2.3.0 you can also enable TLS SMTP using the ``tls`` option::
+As of 2.3.0 you can also enable STARTTLS SMTP extension using the ``tls`` option::
 
     class EmailConfig {
         public $gmail = array(
@@ -126,9 +128,9 @@ As of 2.3.0 you can also enable TLS SMTP using the ``tls`` option::
         );
     }
 
-The above configuration would enable TLS communication for email messages.
+The above configuration would enable STARTTLS communication for email messages.
 
-.. versionadded: 2.3
+.. versionadded:: 2.3
     Support for TLS delivery was added in 2.3
 
 
