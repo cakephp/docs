@@ -40,11 +40,11 @@ de classe. Vous pouvez ré-écrire le code ci-dessous::
         ->subject('About')
         ->send('Mon message');
 
-Choisir l'emetteur
+Choisir l'émetteur
 ------------------
 
 Quand on envoie des emails de la part d'autre personne, c'est souvent une
-bonne idée de définir l'emetteur original en utilisant le header Sender.
+bonne idée de définir l'émetteur original en utilisant le header Sender.
 Vous pouvez faire ceci en utilisant ``sender()`` ::
 
     $Email = new CakeEmail();
@@ -53,7 +53,7 @@ Vous pouvez faire ceci en utilisant ``sender()`` ::
 
 .. note::
 
-    C'est aussi une bonne idée de définir l'envelope de l'emetteur quand on
+    C'est aussi une bonne idée de définir l'enveloppe de l'émetteur quand on
     envoie un mail de la part d'une autre personne. Cela les empêche d'obtenir
     tout message sur la délivrance.
 
@@ -115,12 +115,15 @@ selon. Exemple::
         );
     }
 
+Vous pouvez également utiliser ``tls://`` pour spécifier TLS pour le chiffrement
+au niveau de la connexion.
+
 .. note::
 
-    Pour utiliser cette fonctionnalité, vous aurez besoin d'avoir SSL configuré
-    dans votre installation PHP.
+    Pour utiliser les fonctionnalités ssl:// ou tls://, vous aurez besoin
+    d'avoir SSL configuré dans votre installation PHP.
 
-Depuis 2.3.0, vous pouvez aussi activer TLS SMTP en utilisant l'option
+Depuis 2.3.0, vous pouvez aussi activer STARTTLS SMTP en utilisant l'option
 ``tls``::
 
     class EmailConfig {
@@ -134,10 +137,10 @@ Depuis 2.3.0, vous pouvez aussi activer TLS SMTP en utilisant l'option
         );
     }
 
-La configuration ci-dessus va activer la communication TLS pour les messages
-emails.
+La configuration ci-dessus va activer la communication STARTTLS pour les
+messages emails.
 
-.. versionadded: 2.3
+.. versionadded:: 2.3
     Le support pour le delivery TLS a été ajouté dans 2.3.
 
 
@@ -149,7 +152,7 @@ Configurations
 La clés de configuration suivantes sont utilisées:
 
 - ``'from'``: Email ou un tableau d'emmeteur. Regardez ``CakeEmail::from()``.
-- ``'sender'``: Email ou un tableau d'emetteur réel. Regardez
+- ``'sender'``: Email ou un tableau d'émetteur réel. Regardez
   ``CakeEmail::sender()``.
 - ``'to'``: Email ou un tableau de destination. Regardez ``CakeEmail::to()``.
 - ``'cc'``: Email ou un tableau de copy carbon. Regardez ``CakeEmail::cc()``.
@@ -198,7 +201,7 @@ port et autres configurations.
 
     Les valeurs des clés ci-dessus utilisant Email ou un tableau, comme from,
     to, cc etc. seront passées en premier paramètre des méthodes
-    correspondantes. L'equivalent pour
+    correspondantes. L'équivalent pour
     ``CakeEmail::from('my@example.com', 'My Site')`` sera défini comme
     ``'from' => array('my@example.com' => 'My Site')`` dans votre config.
 
@@ -214,7 +217,7 @@ Regardez ``CakeEmail::setHeaders()`` et ``CakeEmail::addHeaders()``
 Envoyer les emails templatés
 ----------------------------
 
-Les Emails sont souvent bien plus que de simples message textes. Afin de
+Les Emails sont souvent bien plus que de simples messages textes. Afin de
 faciliter cela, CakePHP fournit une façon d'envoyer les emails en utilisant la
 :doc:`view layer </views>` de CakePHP.
 
