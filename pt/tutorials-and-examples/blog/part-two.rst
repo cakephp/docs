@@ -122,3 +122,22 @@ A variável é definida como 'articles', sendo igual ao valor retornado do méto
 
 Para mais informações sobre o bake e suas características sobre geração de
 código, visite o capítulo :doc:`/bake/usage` do manual.
+
+Criando as Articles Views
+=========================
+
+Agora que nós temos nossos dados fluindo pelo nosso model, e nossa lógica da
+aplicação está definida pelo nosso controller, vamos criar uma view
+(visualização) para a action index criada acima.
+
+As views do CakePHP são camadas de apresentação que se encaixam nos layouts
+da aplicação. Para a maioria das aplicações, elas são uma mescla entre HTML e
+PHP, mas também podem ser distribuídas como XML, CSV, ou ainda dados binários.
+
+Um layout é um conjunto de códigos encontrado ao redor das views. Múltiplos
+layouts podem ser definidos, e você pode alterar entre eles, mas agora, vamos
+usar o default.
+
+Lembra que na última sessão atribuímos a variável 'articles' a view usando o
+método ``set()``? Isso levará a coleção de objetos gerada pela query a ser
+invocada uma iteração ``foreach``.
