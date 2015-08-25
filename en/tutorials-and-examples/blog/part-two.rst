@@ -31,7 +31,7 @@ look like this::
 
 Naming conventions are very important in CakePHP. By naming our Table object
 ``ArticlesTable``, CakePHP can automatically infer that this Table object will
-be used in the ArticlesController, and will be tied to a database table called
+be used in the ``ArticlesController``, and will be tied to a database table called
 ``articles``.
 
 .. note::
