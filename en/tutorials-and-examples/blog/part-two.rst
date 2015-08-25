@@ -105,7 +105,7 @@ access that at www.example.com/articles/foobar.
     way to obtain a certain URL. Resist that temptation. Follow
     :doc:`/intro/conventions` (capitalization, plural names, etc.) and create
     readable, understandable action names. You can map URLs to your code using
-    "routes" covered later on.
+    :doc:`/development/routing` covered later on.
 
 The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
