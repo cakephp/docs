@@ -353,8 +353,9 @@ validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use CakePHP's
-FormHelper in your views. The :php:class:`Cake\\View\\Helper\\FormHelper` is
-available by default to all views at ``$this->Form``.
+:doc:`/helpers/form` helper in your views. The
+:php:class:`Cake\\View\\Helper\\FormHelper` is available by default to all views
+at ``$this->Form``.
 
 Here's our add view:
 
