@@ -327,18 +327,100 @@ Chamar o método ``save()`` vai checar erros de validação e abortar o processo
 caso os encontre. Nós vamos abordar como esses erros são tratados nas sessões
 a seguir.
 
+Validação de dados
+==================
 
+O CakePHP torna mais prática e menos monótona a validação de dados de
+formulário.
 
+Para tirar proveito dos recursos de validação, você vai precisar usar o
+:doc:`/helpers/form` helper em suas views. O
+:php:class:`Cake\\View\\Helper\\FormHelper` está disponível por padrão em todas
+as views pelo ``$this->Form``.
 
+Segue a view correspondente a action add:
 
+.. code-block:: php
 
+    <!-- File: src/Template/Articles/add.ctp -->
 
+    <h1>Add Article</h1>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Salvar artigo'));
+        echo $this->Form->end();
+    ?>
 
+Nós usamos o ``FormHelper`` para gerar a tag de abertura HTML de um formulário.
+Segue o HTML gerado por ``$this->Form->create()``::
 
+.. code-block:: html
 
+    <form method="post" action="/articles/add">
 
+Se ``create()`` é chamado sem parâmetros fornecidos, assume-se a construção de
+um formulário que submete dados via POST para a action ``add()`` (ou ``edit()``
+no caso de um ``id`` estar incluído nos dados do formulário).
 
+O método ``$this->Form->input()`` é usado para criar elementos do formulário do
+mesmo nome. O primeiro parâmetro diz ao CakePHP qual é o campo correspondente, e
+o segundo parâmetro permite que você especifique um vasto array de opções -
+nesse, o número de linhas para o textarea. ``input()`` vai gerar diferentes
+elementos de formulários baseados no tipo de campo do model especificado.
 
+O ``$this->Form->end()`` fecha o formulário, entregando elementos ocultos se
+a prevenção contra CSRF/Form Tampering estiver habilitada.
+
+Agora vamos voltar e atualizar nossa view **src/Template/Articles/index.ctp**
+para incluir um novo link chamado "Adicionar artigo". Antes do ``<table>``,
+adicione a seguinte linha::
+
+    <?= $this->Html->link('Adicionar artigo', ['action' => 'add']) ?>
+
+Você deve estar se perguntando: como eu digo ao CakePHP minhas necessidades de
+validação? Regras de validação são definidas no model. Vamos fazer alguns
+ajustes no nosso Articles model::
+
+    // src/Model/Table/ArticlesTable.php
+
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Timestamp');
+        }
+
+        public function validationDefault(Validator $validator)
+        {
+            $validator
+                ->notEmpty('title')
+                ->notEmpty('body');
+
+            return $validator;
+        }
+    }
+
+O método ``validationDefault()`` diz ao CakePHP como validar seus dados quando
+o método ``save()`` for solicitado. Aqui, estamos especificando que tanto o
+campo body quanto title não devem ser vazios. O CakePHP possui muitos recursos
+de validação e um bom número de regras pré-determinadas (número de cartões,
+endereços de email, etc) e flexibilidade para adicionar suas próprias regras de
+validação. Para mais informações sobre essa configuração, visite a documentação
+de :doc:`/core-libraries/validation`.
+
+Agora que suas regras de validação estão definidas, use a aplicação e tente
+adicionar um artigo sem definir o campo title e body para ver como funciona.
+Desde que tenhamos usado o método
+:php:meth:`Cake\\View\\Helper\\FormHelper::input()` do ``FormHelper`` para criar
+nossos elementos, nossas mensagens de erro de validação serão exibidas
+automaticamente.
 
 
 
