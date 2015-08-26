@@ -336,7 +336,7 @@ have ``<?= $this->Flash->render() ?>`` which displays the message and clears the
 corresponding session variable. The controller's
 :php:meth:`Cake\\Controller\\Controller::redirect` function redirects to another
 URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
-index action of the articles controller. You can refer to
+index action of the ``ArticlesController``. You can refer to
 :php:func:`Cake\\Routing\\Router::url()` function on the `API
 <http://api.cakephp.org>`_ to see the formats in which you can specify a URL for
 various CakePHP functions.
