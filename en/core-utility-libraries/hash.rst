@@ -691,6 +691,10 @@ Attribute Matching Types
       sort ``foo10`` below ``foo2`` as an example. Natural sorting
       requires PHP 5.4 or greater.
 
+    .. versionadded:: 2.8
+        The ``$type`` option now supports an array and the ``ignoreCase`` option
+        enabled case-insensitive sorting.
+
 .. php:staticmethod:: diff(array $data, array $compare)
 
     :rtype: array

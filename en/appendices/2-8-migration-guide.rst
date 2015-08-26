@@ -24,3 +24,9 @@ I18nShell
 
 - A new option ``no-locations`` has been added. When enabled, this option will
   disable the generation of location references in your POT files.
+
+Hash
+====
+
+- ``Hash::sort()`` now supports case-insensitive sorting via the ``ignoreCase``
+  option.
