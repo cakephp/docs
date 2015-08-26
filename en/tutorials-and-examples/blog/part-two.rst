@@ -204,7 +204,7 @@ you were probably informed by CakePHP that the action hasn't yet
 been defined. If you were not so informed, either something has
 gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
-ArticlesController now::
+``ArticlesController`` now::
 
     // src/Controller/ArticlesController.php
 
