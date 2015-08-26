@@ -448,7 +448,7 @@ Editing Articles
 
 Post editing: here we go. You're a CakePHP pro by now, so you
 should have picked up a pattern. Make the action, then the view.
-Here's what the ``edit()`` action of the ArticlesController would look
+Here's what the ``edit()`` action of the `ArticlesController`` would look
 like::
 
     // src/Controller/ArticlesController.php
@@ -470,12 +470,13 @@ like::
 
 This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$id`` parameter, or the article does not
-exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
+exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take
+care of.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST data to update our article entity by using the
-'patchEntity' method.  Finally we use the table object to save the entity back
-or kick back and show the user validation errors.
+``patchEntit()`` method.  Finally we use the table object to save the entity
+back or kick back and show the user validation errors.
 
 The edit view might look something like this:
 
@@ -538,7 +539,7 @@ Deleting Articles
 =================
 
 Next, let's make a way for users to delete articles. Start with a
-``delete()`` action in the ArticlesController::
+``delete()`` action in the `ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
@@ -553,14 +554,14 @@ Next, let's make a way for users to delete articles. Start with a
         }
     }
 
-This logic deletes the article specified by $id, and uses
+This logic deletes the article specified by ``$id``, and uses
 ``$this->Flash->success()`` to show the user a confirmation
 message after redirecting them on to ``/articles``. If the user attempts to
-do a delete using a GET request, the 'allowMethod' will throw an Exception.
-Uncaught exceptions are captured by CakePHP's exception handler, and a nice error page is
-displayed. There are many built-in :doc:`Exceptions </development/errors>` that can
-be used to indicate the various HTTP errors your application might need
-to generate.
+do a delete using a GET request, the ``allowMethod()`` will throw an Exception.
+Uncaught exceptions are captured by CakePHP's exception handler, and a nice
+error page is displayed. There are many built-in
+:doc:`Exceptions </development/errors>` that can be used to indicate the various
+HTTP errors your application might need to generate.
 
 Because we're just executing some logic and redirecting, this
 action has no view. You might want to update your index view with
@@ -605,13 +606,16 @@ links that allow users to delete articles, however:
     </table>
 
 Using :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
-that uses JavaScript to do a POST request deleting our article.  Allowing content
-to be deleted using GET requests is dangerous, as web crawlers could
-accidentally delete all your content.
+that uses JavaScript to do a POST request deleting our article.
+
+.. warning::
+
+    Allowing content to be deleted using GET requests is dangerous, as web
+    crawlers could accidentally delete all your content.
 
 .. note::
 
-    This view code also uses the FormHelper to prompt the user with a
+    This view code also uses the ``FormHelper`` to prompt the user with a
     JavaScript confirmation dialog before they attempt to delete an
     article.
 
@@ -628,7 +632,7 @@ For more information on advanced routing techniques, see
 :ref:`routes-configuration`.
 
 By default, CakePHP responds to a request for the root of your site
-(e.g., http://www.example.com) using its PagesController, rendering
+(e.g., http://www.example.com) using its ``PagesController``, rendering
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 
