@@ -580,7 +580,7 @@ Posts (PostsController) ::
             );
         } else {
             $this->Session->setFlash(
-                __('Le post avec l\'id: %s n'a pas pu être supprimé.', h($id))
+                __('Le post avec l\'id: %s n\'a pas pu être supprimé.', h($id))
             );
         }
 
