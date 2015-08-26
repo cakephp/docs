@@ -237,7 +237,7 @@ the requested URL. If a user requests ``/articles/view/3``, then the value
 We also do a bit of error checking to ensure a user is actually accessing
 a record. By using the ``get()`` function in the Articles table, we make sure
 the user has accessed a record that exists. In case the requested article is not
-present in the database, or the id is falsey the ``get()`` function will throw
+present in the database, or the id is false the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
