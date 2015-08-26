@@ -325,8 +325,8 @@ method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
 information is available in ``$this->request->data``. You can use the
-:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
-what it looks like.
+:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
+see what it looks like.
 
 We use FlashComponent's ``success()`` and ``error()`` methods to set a message
 to a session variable. These methods are provided using PHP's `magic method
