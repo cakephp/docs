@@ -511,11 +511,86 @@ Você pode atualizar sua view index com os links para editar artigos específico
 
     </table>
 
+Deleting Articles
+=================
 
+A seguir, vamos criar uma forma de deletar artigos. Comece com uma action
+``delete()`` no ``ArticlesController``:`
 
+    // src/Controller/ArticlesController.php
 
+    public function delete($id)
+    {
+        $this->request->allowMethod(['post', 'delete']);
 
+        $article = $this->Articles->get($id);
+        if ($this->Articles->delete($article)) {
+            $this->Flash->success(__('O artigo com id: {0} foi deletado.', h($id)));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
 
+Essa lógica deleta o artigo especificado pelo ``$id`` e usa
+``$this->Flash->success()`` para exibir uma mensagem de confirmação após
+redirecionar para ``/articles``. Tentar excluir um registro usando uma
+requisição GET, fará com que o ``allowMethod()`` lance uma exceção. Exceções
+são capturadas pelo gerenciador de exceções do CakePHP e uma página de erro é
+exibida. Existem muitos :doc:`Exceptions </development/errors>` embutidos que
+podem indicar vários erros HTTP que sua aplicação possa precisar.
+
+Por estarmos executando apenas alguma lógica e redirecionando, essa action não
+tem uma view. Vamos atualizar nossa view index com links para excluir artigos:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/index.ctp (delete links added) -->
+
+    <h1>Blog articles</h1>
+    <p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+
+    <!-- Aqui é onde iremos iterar através de nosso objeto de solicitação $articles, exibindo informações de artigos -->
+
+        <?php foreach ($articles as $article): ?>
+        <tr>
+            <td><?= $article->id ?></td>
+            <td>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+            </td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Form->postLink(
+                    'Deletar',
+                    ['action' => 'delete', $article->id],
+                    ['confirm' => 'Tem certeza?'])
+                ?>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+Usar :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` vai criar um link
+que usa JavaScript para criar uma requisição POST afim de deletar um artigo.
+
+.. warning::
+
+    Permitir que registros sejam deletados usando requisições GET é perigoso,
+    pois rastreadores da web podem acidentalmente deletar todo o seu conteúdo.
+
+.. note::
+
+    Esse código da view também usa o ``FormHelper`` para confirmar a action
+    através de JavaScript.
 
 
 
