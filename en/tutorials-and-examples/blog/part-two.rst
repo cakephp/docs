@@ -253,7 +253,8 @@ Now let's create the view for our new 'view' action and place it in
 
 
 Verify that this is working by trying the links at ``/articles/index`` or
-manually requesting an article by accessing ``/articles/view/1``.
+manually requesting an article by accessing ``/articles/view/{id}``, replacing
+``{id}`` by an article 'id'.
 
 Adding Articles
 ===============
