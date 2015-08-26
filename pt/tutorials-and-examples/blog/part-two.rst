@@ -141,3 +141,223 @@ usar o default.
 Lembra que na última sessão atribuímos a variável 'articles' a view usando o
 método ``set()``? Isso levará a coleção de objetos gerada pela query a ser
 invocada uma iteração ``foreach``.
+
+Arquivos de template do CakePHP são armazenados em **src/Template** dentro de
+uma pasta com o nome do controller correspondente (nós teremos que criar a
+pasta 'Articles' nesse caso). Para formatar os dados de artigo em uma tabela,
+nossa view ficará assim:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/index.ctp -->
+
+    <h1>Blog articles</h1>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created</th>
+        </tr>
+
+        <!-- Here is where we iterate through our $articles query object, printing out article info -->
+
+        <?php foreach ($articles as $article): ?>
+        <tr>
+            <td><?= $article->id ?></td>
+            <td>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+            </td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+Você deve ter notado o uso de um objeto chamado ``$this->Html``, uma
+instância da classe :php:class:`Cake\\View\\Helper\\HtmlHelper` do CakePHP.
+O CakePHP vem com um conjunto de view helpers que simplificam tarefas como gerar
+links e formulários. Você pode aprender como usá-los em :doc:`/views/helpers`,
+mas o que é importante notar é que o método ``link()`` irá gerar um link HTML
+com o referido título (primeiro parâmetro) e URL (segundo parâmetro).
+
+Quando se especifíca URLs no CakePHP, é recomendado o uso do formato de array.
+Isto será melhor explicado posteriormente na seção Routes. Usando o formato de
+array para URLs, você toma vantagem das capacidades de roteamento
+reverso do CakePHP. Você também pode especificar URLs relativas a base da
+aplicação com o formato ``/controller/action/param1/param2`` ou usar
+:ref:`named routes <named-routes>`.
+
+Nesse ponto, você pode visitar http://www.example.com/articles/index no seu
+navegador. Você deve ver sua view corretamente formatada listando os articles.
+
+Se você clicar no link do título de um article listado, provavelmente será
+informado pelo CakePHP que a action ainda não foi definida, então vamos criá-la
+no ``ArticlesController`` agora::
+
+    // src/Controller/ArticlesController.php
+
+    namespace App\Controller;
+
+    class ArticlesController extends AppController
+    {
+
+        public function index()
+        {
+             $this->set('articles', $this->Articles->find('all'));
+        }
+
+        public function view($id = null)
+        {
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
+        }
+    }
+
+A chamada do ``set()`` deve parecer familiar. Repare que você está usando
+``get()`` ao invés de ``find('all')`` porquê nós queremos a informação de apenas
+um article.
+
+Repare que nossa action recebe um parâmetro: o ID do article que gostariamos de
+visualizar. Este parâmetro é entregue para a action através da URL solicitada.
+Se o usuário requisitar ``/articles/view/3``, então o valor '3' é passado como
+``$id`` para a action.
+
+Fazemos também algumas verificações para garantir que o usuário realmente está
+acessando um registro existente ao usar a função ``get()``, caso contrário, ou
+se o ``$id`` é falso, a função irá lançar uma ``NotFoundException``.
+
+Agora vamos criar a view para nossa action em
+**src/Template/Articles/view.ctp**
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/view.ctp -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    <p><small>Criado: <?= $article->created->format(DATE_RFC850) ?></small></p>
+
+Verifique se está tudo funcionando acessando os links em ``/articles/index`` ou
+manualmente requisite um article acessando ``articles/view/{id}``, substituindo
+``{id}`` por uma 'id' de um article.
+
+Adicionando Articles
+====================
+
+Primeiro, comece criando a action ``add()`` no ``ArticlesController``::
+
+    // src/Controller/ArticlesController.php
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+
+    class ArticlesController extends AppController
+    {
+
+        public function initialize()
+        {
+            parent::initialize();
+
+            $this->loadComponent('Flash'); // Include the FlashComponent
+        }
+
+        public function index()
+        {
+            $this->set('articles', $this->Articles->find('all'));
+        }
+
+        public function view($id)
+        {
+            $article = $this->Articles->get($id);
+            $this->set(compact('article'));
+        }
+
+        public function add()
+        {
+            $article = $this->Articles->newEntity();
+            if ($this->request->is('post')) {
+                $article = $this->Articles->patchEntity($article, $this->request->data);
+                if ($this->Articles->save($article)) {
+                    $this->Flash->success(__('Seu artigo foi salvo.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('Não é possível adicionar o seu artigo.'));
+            }
+            $this->set('article', $article);
+        }
+    }
+
+.. note::
+
+    Você precisa incluir o :doc:`/components/flash` component em qualquer
+    controller em que vá usá-lo. Se necessário, inclua no ``AppController``.
+
+A action ``add()`` checa se o método HTTP da solicitação era POST, tenta salvar
+os dados utilizando o model Articles. Se por alguma razão ele não salvar, apenas
+renderiza a view. Isto nos dá a chance de exibir erros de validação ou outros
+alertas.
+
+Cada requisição do CakePHP instancia um objeto ``Request`` que é acessível
+usando ``$this->request``. O objeto contém informações úteis sobre a requisição
+que foi recebida e pode ser usado para controlar o fluxo de sua aplicação. Nesse
+caso, nós usamos o método :php:meth:`Cake\\Network\\Request::is()` para checar
+se a requisição é do tipo HTTP POST.
+
+Quando se usa um formulário para postar dados para a sua aplicação, essa
+informação está disponível em ``$this->request->data``. Você pode usar as
+funções :php:func:`pr()` ou :php:func:`debug()` para exibir esses dados caso
+queira verificar.
+
+Usamos os métodos ``success()`` e ``error()`` do ``FlashComponent`` para definir
+uma mensagem numa variável de sessão. Esses métodos são gerados usando os
+`recursos de métodos mágicos
+<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_ do PHP.
+Mensagens flash serão exibidas na página após um redirecionamento. No layout nós
+temos ``<?= $this->Flash->render() ?>``que exibe a mensagem e limpa a variável
+de sessão. A função do controller
+:php:meth:`Cake\\Controller\\Controller::redirect` redireciona para qualquer
+outra URL. O parâmetro ``['action' => 'index']`` correspondo a URL /articles,
+isto é, a action index do ``ArticlesController``. Você pode consultar a função
+:php:func:`Cake\\Routing\\Router::url()` na `API <http://api.cakephp.org>`_ para
+checar os formatos nos quais você pode montar uma URL.
+
+Chamar o método ``save()`` vai checar erros de validação e abortar o processo
+caso os encontre. Nós vamos abordar como esses erros são tratados nas sessões
+a seguir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
