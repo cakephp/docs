@@ -263,7 +263,7 @@ Reading from the database and showing us the articles is a great
 start, but let's allow for the adding of new articles.
 
 First, start by creating an ``add()`` action in the
-ArticlesController::
+``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
