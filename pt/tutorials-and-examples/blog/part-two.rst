@@ -422,12 +422,94 @@ Desde que tenhamos usado o método
 nossos elementos, nossas mensagens de erro de validação serão exibidas
 automaticamente.
 
+Editando Articles
+=================
 
+Edição: Aí vamos nós. Você já é um profissional do CakePHP agora, então
+possivelmente detectou um padrão. Cria-se a action e então a view. Aqui segue
+a action ``edit()`` do ``ArticlesController``::
 
+    // src/Controller/ArticlesController.php
 
+    public function edit($id = null)
+    {
+        $article = $this->Articles->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $this->Articles->patchEntity($article, $this->request->data);
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your article.'));
+        }
 
+        $this->set('article', $article);
+    }
 
+Essa action primeiramente certifica-se que o registro apontado existe. Se o
+parâmetro ``$id`` não foi passado ou se o registro é inexistente, uma
+``NotFoundException`` é lançada pelo ``ErrorHandler`` do CakePHP.
 
+Em seguida, a action verificar se a requisição é POST ou PUT e caso seja, os
+dados do POST são usados para atualizar a entidade article em questão, ao usar
+o método ``patchEntity()``. Finalmente utilizamos o ``ArticlesTable`` para
+salvar a entidade.
+
+Segue a view correspondente a action edit:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/edit.ctp -->
+
+    <h1>Edit Article</h1>
+    <?php
+        echo $this->Form->create($article);
+        echo $this->Form->input('title');
+        echo $this->Form->input('body', ['rows' => '3']);
+        echo $this->Form->button(__('Salvar artigo'));
+        echo $this->Form->end();
+    ?>
+
+Essa view retorna o formulário de edição com os valores populados, juntamente
+com qualquer mensagem de erro de validações.
+
+O CakePHP irá determinar se o ``save()`` vai inserir ou atualizar um registro
+baseado no estado da entidade.
+
+Você pode atualizar sua view index com os links para editar artigos específicos:
+
+.. code-block:: php
+
+    <!-- File: src/Template/Articles/index.ctp  (edit links added) -->
+
+    <h1>Blog articles</h1>
+    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Action</th>
+        </tr>
+
+    <!-- Aqui é onde iremos iterar através de nosso objeto de solicitação $articles, exibindo informações de artigos -->
+
+    <?php foreach ($articles as $article): ?>
+        <tr>
+            <td><?= $article->id ?></td>
+            <td>
+                <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+            </td>
+            <td>
+                <?= $article->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Editar', ['action' => 'edit', $article->id]) ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+    </table>
 
 
 
