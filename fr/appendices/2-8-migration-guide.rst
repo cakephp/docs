@@ -25,3 +25,9 @@ I18nShell
 - Une nouvelle option ``no-locations`` a été ajoutée. Quand elle est activée,
   cette option va désactiver la génération des références de localisation dans
   vos fichiers POT.
+
+Hash
+====
+
+- ``Hash::sort()`` supporte maintenant le tri sans sensibilité à la casse grâce
+  à l'option ``ignoreCase``.

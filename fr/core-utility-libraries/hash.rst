@@ -710,6 +710,10 @@ Les Types d'Attribut Correspondants
       ``foo10`` en-dessous de ``foo2`` par exemple. Le tri naturel
       a besoin de PHP 5.4 ou supérieur.
 
+    .. versionadded:: 2.8
+        L'option ``$type`` accepte maintenant un tableau et l'option ``ignoreCase`` 
+        active le tri sans sensibilité à la casse.
+
 .. php:staticmethod:: diff(array $data, array $compare)
 
     :rtype: array
