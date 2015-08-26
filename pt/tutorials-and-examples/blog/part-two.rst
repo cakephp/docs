@@ -592,8 +592,23 @@ que usa JavaScript para criar uma requisição POST afim de deletar um artigo.
     Esse código da view também usa o ``FormHelper`` para confirmar a action
     através de JavaScript.
 
+Routes
+======
 
+Para muitos o roteamento padrão do CakePHP funciona bem o suficiente.
+Desenvolvedores que consideram facilidade de uso e SEO irão apreciar a forma
+como o CakePHP mapeia determinadas URLs para actions específicas. Vamos realizar
+uma pequena mudança nas rotas neste tutorial.
 
+Para mais informações sobre técnicas avançadas de roteamento visite
+:ref:`routes-configuration`.
+
+Por padrão, o CakePHP responde a uma requisição pela raíz do seu site usando o
+``PagesController`` ao renderizar uma view chamada "home". Alternativamente,
+nós vamos substituir esse comportamento pelo ``ArticlesController``ao criar uma
+regra de roteamento.
+
+A configuração de
 
 
 
