@@ -495,7 +495,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
         public function testMyFunction()
         {
-            $this->loadFixtures('Article', 'Comment');
+            $this->loadFixtures('Articles', 'Comments');
         }
     }
 
