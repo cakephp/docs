@@ -309,8 +309,8 @@ First, start by creating an ``add()`` action in the
 
 .. note::
 
-    You need to include the FlashComponent in any controller where you will use
-    it. If necessary, include it in your AppController.
+    You need to include the :doc:`/components/flash` component in any controller
+    where you will use it. If necessary, include it in your ``AppController``.
 
 Here's what the ``add()`` action does: if the HTTP method of the
 request was POST, try to save the data using the Articles model. If for some
