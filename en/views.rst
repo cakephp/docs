@@ -3,7 +3,7 @@ Views
 
 Views are the **V** in MVC. Views are responsible for generating
 the specific output required for the request. Often this is in the
-form of HTML, XML, or JSON, but streaming files and creating PDF's
+form of HTML, XML, or JSON, but streaming files and creating PDFs
 that users can download are also responsibilities of the View
 Layer.
 
@@ -147,7 +147,7 @@ Blocks can be defined in two ways: either as a capturing block, or by direct
 assignment. The ``start()``, ``append()`` and ``end()`` methods allow you to
 work with capturing blocks::
 
-    // create the sidebar block.
+    // Create the sidebar block.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
@@ -224,7 +224,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // in app/View/Layouts/default.ctp
+    // In app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -260,7 +260,7 @@ when used with the ``inline = false`` option:
 .. code-block:: php
 
     <?php
-    // in your view file
+    // In your view file
     $this->Html->script('carousel', array('inline' => false));
     $this->Html->css('carousel', array('inline' => false));
     ?>
@@ -273,15 +273,15 @@ when used with the ``inline = false`` option:
         <?php echo $this->fetch('script'); ?>
         <?php echo $this->fetch('css'); ?>
         </head>
-        // rest of the layout follows
+        // Rest of the layout follows
 
 The :php:meth:`HtmlHelper` also allows you to control which block the scripts
 and CSS go to::
 
-    // in your view
+    // In your view
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
 
-    // in your layout
+    // In your layout
     echo $this->fetch('scriptBottom');
 
 .. _view-layouts:
@@ -369,13 +369,13 @@ You can create as many layouts as you wish: just place them in the
 controller actions using the controller or view's
 :php:attr:`~View::$layout` property::
 
-    // from a controller
+    // From a controller
     public function admin_view() {
-        // stuff
+        // Stuff
         $this->layout = 'admin';
     }
 
-    // from a view file
+    // From a view file
     $this->layout = 'loggedin';
 
 For example, if a section of my site included a smaller ad banner
@@ -391,7 +391,7 @@ using something like::
 
        public function view_image() {
            $this->layout = 'image';
-           //output user image
+           // Output user image
        }
    }
 
@@ -459,8 +459,8 @@ members of the parameter array (in the same way that
 above example, the ``/app/View/Elements/helpbox.ctp`` file can use the
 ``$helptext`` variable::
 
-    // inside app/View/Elements/helpbox.ctp
-    echo $helptext; //outputs "Oh, this text is very helpful."
+    // Inside app/View/Elements/helpbox.ctp
+    echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
@@ -470,9 +470,9 @@ The options supported are 'cache' and 'callbacks'. An example::
             "foobar" => "This is passed to the element as $foobar",
         ),
         array(
-            // uses the "long_view" cache configuration
+            // Uses the "long_view" cache configuration
             "cache" => "long_view",
-            // set to true to have before/afterRender called for the element
+            // Set to true to have before/afterRender called for the element
             "callbacks" => true
         )
     );
@@ -616,12 +616,12 @@ components of CakePHP, view classes have a few conventions:
 
 You'll also want to extend ``View`` to ensure things work correctly::
 
-    // in App/View/PdfView.php
+    // In App/View/PdfView.php
 
     App::uses('View', 'View');
     class PdfView extends View {
         public function render($view = null, $layout = null) {
-            // custom logic here.
+            // Custom logic here.
         }
     }
 
@@ -689,7 +689,7 @@ To call any view method use ``$this->method()``
           'form',
           array('controller' => 'posts', 'action' => 'index')
         );
-        //$uuid contains 'form0425fe3bad'
+        // $uuid contains 'form0425fe3bad'
 
 .. php:method:: addScript(string $name, string $content)
 

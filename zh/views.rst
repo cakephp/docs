@@ -347,7 +347,7 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 
     // 从一个控制器
     public function admin_view() {
-        // stuff
+        // 代码
         $this->layout = 'admin';
     }
 
@@ -365,7 +365,7 @@ CakePHP 的缺省布局位于 ``/app/View/Layouts/default.ctp``。如果你想�
 
        public function view_image() {
            $this->layout = 'image';
-           //输出用户图像
+           // 输出用户图像
        }
    }
 
@@ -535,7 +535,7 @@ element 方法来输出::
 ``ContactsController`` 中，下面的::
 
     echo $this->element('helpbox');
-    // and
+    // 和
     echo $this->element('Contacts.helpbox');
 
 是一样的，会导致同一个元素被渲染。
@@ -558,13 +558,11 @@ element 方法来输出::
 为使其正常工作，你应当扩展 ``View``::
 
     // 在 App/View/PdfView.php 中
-    // in App/View/PdfView.php
 
     App::uses('View', 'View');
     class PdfView extends View {
         public function render($view = null, $layout = null) {
             // 这里为定制逻辑。
-            // custom logic here.
         }
     }
 
@@ -623,8 +621,7 @@ element 方法来输出::
           'form',
           array('controller' => 'posts', 'action' => 'index')
         );
-        //$uuid 含有 'form0425fe3bad'
-        //$uuid contains 'form0425fe3bad'
+        // $uuid 含有 'form0425fe3bad'
 
 .. php:method:: addScript(string $name, string $content)
 

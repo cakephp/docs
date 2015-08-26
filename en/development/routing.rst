@@ -27,7 +27,7 @@ routes are parsed. It's generally a good idea to place most frequently
 visited routes at the top of the routes file if possible. This will
 save having to check a number of routes that won't match on each request.
 
-Routes are parsed and matched in the order they are connected in.
+Routes are parsed and matched, in the order they are connected in.
 If you define two similar routes, the first defined route will
 have higher priority over the one defined latter. After connecting routes you
 can manipulate the order of routes using :php:meth:`Router::promote()`.
@@ -151,9 +151,9 @@ might consider creating a route. This allows you link to
 .. note::
 
     Although you can connect alternate routes, the default routes
-    will continue to work. This could create situations, where
-    content could end up with 2 URLs. See :ref:`disabling-default-routes`
-    to disable default routes, and only provide the URLs you define.
+    will continue to work. In this setting, you can access a single piece of
+    content from 2 different URLs. See :ref:`disabling-default-routes` to
+    disable default routes, and only provide the URLs you define.
 
 Another common use for the Router is to define an "alias" for a
 controller. Let's say that instead of accessing our regular URL at
@@ -807,7 +807,7 @@ later configure routes and the generated URLs will automatically update.
 
 If you create URLs using strings like::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/posts/view/' . $id);
 
 And then later decide that ``/posts`` should really be called
 'articles' instead, you would have to go through your entire

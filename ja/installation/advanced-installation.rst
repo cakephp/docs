@@ -32,7 +32,7 @@ CakePHP アプリケーションのための composer.json ファイルは次の
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.6.*"
+            "cakephp/cakephp": "2.7.*"
         },
         "config": {
             "vendor-dir": "Vendor/"

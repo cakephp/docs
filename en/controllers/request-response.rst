@@ -161,8 +161,8 @@ usage::
     $this->request->isPost(); // deprecated
 
 Both method calls will return the same value. For the time being, the methods
-are still available on :php:class:`RequestHandlerComponent`, but are deprecated and still might be
-removed before the final release. You can also easily extend the request
+are still available on :php:class:`RequestHandlerComponent`, but are deprecated and
+will be removed in 3.0.0. You can also easily extend the request
 detectors that are available by using :php:meth:`CakeRequest::addDetector()`
 to create new kinds of detectors. There are four different types of detectors
 that you can create:

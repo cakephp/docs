@@ -351,7 +351,7 @@ Contacts controllerにはこのファイルを作ります。
         アセットのパスの前に **/your_plugin/** に付けるのが重要です。魔法のようなことが起きます！
 
 .. versionchanged:: 2.1
-    アセットのリクエストには :term:`plugin syntax` を使用してください。View での利用方法:
+    アセットのリクエストには :term:`プラグイン記法` を使用してください。View での利用方法:
     <?php echo $this->Html->css("ContactManager.style"); ?>
 
 コンポーネント、ヘルパーとビヘイビア

@@ -61,11 +61,11 @@ soit cachée. La valeur du temps peut être exprimé dans le format
 ``strtotime()``. (ex. "1 hour", ou "3 minutes").
 
 En utilisant l'exemple d'un controller d'articles ArticlesController,
-qui reçoit beaucoup de trafics qui ont besoins d'être mise en cache:: 
+qui reçoit beaucoup de trafic qui ont besoins d'être mise en cache::
 
     public $cacheAction = array(
         'view' => 36000,
-        'index'  => 48000
+        'index' => 48000
     );
 
 Ceci mettra en cache l'action view 10 heures et l'action index 13 heures.

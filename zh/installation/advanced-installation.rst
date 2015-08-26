@@ -31,7 +31,7 @@ Composer 是一个适用于 PHP 5.3+ 的依赖管理工具，解决了通过 PEA
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.6.*"
+            "cakephp/cakephp": "2.7.*"
         },
         "config": {
             "vendor-dir": "Vendor/"

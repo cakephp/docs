@@ -461,7 +461,9 @@ anywhere within your application, in a static context::
         //yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-    If $key is left null, all values in Configure will be returned.
+    If $key is left null, all values in Configure will be returned. If the value
+    corresponding to the specified $key does not exist then null will be
+    returned.
 
 .. php:staticmethod:: consume($key)
 
@@ -776,7 +778,7 @@ Inflection Configuration
 ========================
 
 CakePHP's naming conventions can be really nice - you can name your
-database table big\_boxes, your model BigBox, your controller
+database table big_boxes, your model BigBox, your controller
 BigBoxesController, and everything just works together
 automatically. The way CakePHP knows how to tie things together is
 by *inflecting* the words between their singular and plural forms.

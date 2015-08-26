@@ -118,6 +118,7 @@ ACO(*Access Control Object*)的生成。
 
 然后，为 login 动作创建如下所示的视图文件 ``app/View/Users/login.ctp``::
 
+    <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
         'legend' => __('Login'),
@@ -125,6 +126,7 @@ ACO(*Access Control Object*)的生成。
         'password'
     ));
     echo $this->Form->end('Login');
+    ?>
 
 接下来，我们需要更新我们的 User 模型，在保存到数据库之前先将密码散列化。存储普通
 文本格式的密码是极其危险的，并且 AuthComponent 组件会期望你的密码是经过散列化过
@@ -263,7 +265,7 @@ http://example.com/users/add，使用自动生成的表单添加一些组和用�
 -  users
 
 我同时也在每个组中创建了一个用户，这样每个不同访问权限组都有一个用户，用于之后的
-测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 mysql 
+测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 MySQL 
 提示符后运行 ``SELECT * FROM aros;``，应该可以看到象下面这样的记录::
 
     +----+-----------+-------+-------------+-------+------+------+
@@ -310,6 +312,9 @@ http://example.com/users/add，使用自动生成的表单添加一些组和用�
     |  3 |      NULL | Group |           3 | NULL  |    5 |    6 |
     +----+-----------+-------+-------------+-------+------+------+
     3 rows in set (0.00 sec)
+
+注意：如果你到这里一直跟随此教程，你需要删除你的表，包括 ``aros``，``groups`` 和 
+``users``，然后从头重新创建组和用户，才能得到上面的 ``aros`` 表。
 
 创建 ACO (Access Control Objects)
 ======================================

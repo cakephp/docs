@@ -496,7 +496,7 @@ find 方法一样，其它元素仍然允许。(例如：如果模型采用 cont
 
 可以创建任意多想要的自定义查找，这也是复用应用程序各个模型代码的好方法。
 
-还可以通过如下自定义的类型对结果进行分页：
+还可以象下面这样使用'findType'选项，通过自定义的查找类型对结果进行分页：
 
 ::
 
@@ -504,12 +504,13 @@ find 方法一样，其它元素仍然允许。(例如：如果模型采用 cont
 
         // 将会对所有已发布的文章进行分页
         public function index() {
-            $this->paginate = array('available');
+            $this->paginate = array('findType' => 'available');
             $articles = $this->paginate();
             $this->set(compact('articles'));
         }
 
     }
+
 
 象上面这样设置控制器的 ``$this->paginate`` 属性，会导致查找的 ``type`` 变成 
 ``available``，而且也让你可以继续修改查找结果。

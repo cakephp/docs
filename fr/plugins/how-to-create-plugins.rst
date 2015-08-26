@@ -339,7 +339,7 @@ Choisissez un nom de package avec une sémantique qui a du sens. Il devra
 idéalement être préfixé avec la dépendance, dans ce cas "cakephp" comme le
 framework.
 Le nom de vendor sera habituellement votre nom d'utilisateur sous GitHub.
-**N'**utilisez **pas** le namespace CakePHP (cakephp) puisqu'il est reservé
+**N'utilisez pas** le namespace CakePHP (cakephp) puisqu'il est reservé
 aux plugins appartenant à CakePHP.
 La convention est d'utiliser les lettres en minuscule et les tirets en
 séparateur.

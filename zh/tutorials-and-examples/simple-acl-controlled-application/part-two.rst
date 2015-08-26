@@ -138,7 +138,6 @@ posts 和 widgets 控制器中添加如下代码::
     echo $this->Form->input('User.username');
     echo $this->Form->input('User.password');
     echo $this->Form->end('Login');
-    ?>
 
 如果一个用户已经登录了，添加这个方法到 UsersController 来重定向::
 

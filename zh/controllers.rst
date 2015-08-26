@@ -19,7 +19,6 @@
 公有方法都是动作，可通过网址(*URL*)访问。动作负责解释请求并生成响应。通常响应是
 以渲染视图的方式产生，但也可以用其他的方式来生成。
 
-
 .. _app-controller:
 
 App 控制器
@@ -164,8 +163,8 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
 控制器方法
 ==========
 
-如果想要知道控制器方法的完整列表和描述，请查阅 
-`CakePHP API <http://api.cakephp.org/2.4/class-Controller.html>`_ 。
+欲知控制器方法的完整列表及其描述，请参看 
+`CakePHP API <http://api.cakephp.org/2.7/class-Controller.html>`_ 。
 
 与视图交互
 ----------
@@ -228,8 +227,8 @@ CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段
         }
 
     虽然 CakePHP 会在每个动作的逻辑之后自动调用它(除非设置了 ``$this->autoRender`` 
-    为 false)，仍然可以用该方法通过用 ``$view`` 指定一个控制器的动作来指定另外
-    一个视图文件。
+    为 false)，仍然可以用该方法通过用 ``$view`` 指定一个视图名称来指定另外一个
+    视图文件。
 
     如果 ``$view`` 以 '/' 开头，就被认为是相对于 ``/app/View`` 的视图或者元素文
     件。这可以直接渲染元素，在 AJAX 请求中很有用。
@@ -601,7 +600,7 @@ CakePHP 就不会试图再次渲染该视图了::
 ==========
 
 欲知控制器属性的完整列表及其描述，请参看 
-`CakePHP API <http://api.cakephp.org/2.4/class-Controller.html>`_ 。
+`CakePHP API <http://api.cakephp.org/2.7/class-Controller.html>`_ 。
 
 .. php:attr:: name
 

@@ -36,8 +36,8 @@ Well-Formatted な要素の挿入
 HtmlHelper の果たすもっとも重要なタスクは、適切に定義された
 マークアップの生成です。 CakePHP はレンダリングと送信にかかる
 CPU のサイクルを減らすために、ビューをキャッシュすることが
-できます。この節では、いくつかのHtmlHelperのメソッドと、その
-使用方法について説明します。
+できます。この節では、いくつかの HtmlHelper のメソッドと、
+その使用方法について説明します。
 
 .. php:method:: charset($charset=null)
 
@@ -51,7 +51,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         echo $this->Html->charset();
 
-    出力結果
+    出力結果:
 
     .. code-block:: html
 
@@ -61,18 +61,18 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         echo $this->Html->charset('ISO-8859-1');
 
-    以下のようになります。:
+    出力結果:
 
     .. code-block:: html
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-.. php:method:: css(mixed $path, string $rel = null, array $options = array())
+.. php:method:: css(mixed $path, array $options = array())
 
-    :param mixed $path: リンクしたいCSSファイルのパスを含む文字列か複数のファイルパスを含む配列
-    :param string $rel: 生成されるタグの rel 属性を設定します。 null にすると 'stylesheet'
-        が設定されます。
-    :param array $options: :term:`html attributes` で説明した配列です。
+    .. versionchanged:: 2.4
+
+    :param mixed $path: リンクしたい CSS ファイルのパスを含む文字列か複数のファイルパスを含む配列
+    :param array $options: :term:`HTML属性` で説明した配列です。
 
     CSS のスタイルシートの link タグを生成します。 ``$options`` パラメータのキー 'inline' を
     false に設定すると link タグは HTML文書の head タグ内にある ``css`` ブロック
@@ -81,22 +81,24 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     ``block`` オプションを使用することで、 link タグが追加されるブロックを制御できます。
     既定では ``css`` ブロックに追加されます。
 
-    ``/app/webroot/css`` ディレクトリ以下にある特定の CSS ファイルをインクルードするには
-    以下のようにします。::
+    ``$options`` 配列の 'rel' キーに 'import' が設定されていた場合、スタイルシートはインポートされます。
+
+    パスが '/' から始まらない場合、CSS をインクルードするこのメソッドは、
+    指定した CSS ファイルが /app/webroot/css ディレクトリ以下にあると仮定します。 ::
 
         echo $this->Html->css('forms');
 
-    このコードの出力は以下のようになります。
+    出力結果:
 
     .. code-block:: html
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
 
-    最初の引数は複数のファイルをインクルードするために配列を使用できます。::
+    最初の引数は複数のファイルをインクルードするために配列を使用できます。 ::
 
         echo $this->Html->css(array('forms', 'tables', 'menu'));
 
-    上の例は以下のようになります。
+    出力結果:
 
     .. code-block:: html
 
@@ -104,27 +106,29 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    ロードしたプラグインからも :term:`plugin syntax` を使うことで CSS ファイルを
+    ロードしたプラグインからも :term:`プラグイン記法` を使うことで CSS ファイルを
     インクルードすることができます。 ``app/Plugin/DebugKit/webroot/css/toolbar.css``
-    という CSS ファイルをインクルードするには以下のようにします。::
+    という CSS ファイルをインクルードするには以下のようにします。 ::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
     ロードしたプラグインと名前が共通する CSS ファイルをインクルードするときは
     次のようにします。たとえば ``Blog`` プラグインを使っているときに、
-    ``app/webroot/css/Blog.common.css`` をインクルードしたい場合は以下のようにします。::
+    ``app/webroot/css/Blog.common.css`` をインクルードしたい場合は以下のようにします。 ::
 
-        echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
+    .. versionchanged:: 2.4
+
+        echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
     .. versionchanged:: 2.1
         ``block`` オプションが追加されました。
-        :term:`plugin syntax` のサポートが追加されました。
+        :term:`プラグイン記法` のサポートが追加されました。
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: 必要な meta タグのタイプを指定します。
-    :param mixed $url: meta タグのための URL です。文字列か :term:`routing array` を指定します。
-    :param array $options: :term:`html attributes` で説明した配列です。
+    :param mixed $url: meta タグのための URL です。文字列か :term:`ルーティング配列` を指定します。
+    :param array $options: :term:`HTML属性` で説明した配列です。
 
     このメソッドは、 RSS または Atom フィードや、 favicon といった外部リソースとリンクする際に有用です。
     ``css()`` メソッド同様、 ``array('inline' => false)`` という風に ``$attributes`` の 'inline'
@@ -199,7 +203,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     独自の meta タグを出力するときは、配列を最初の引数として渡します。
     クローラにインデックスを作成させないよう指定するタグを出力する例を
-    以下に示します。::
+    以下に示します。 ::
 
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));
 
@@ -236,13 +240,17 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     ::
 
         echo $this->Html->docType();
-        // 出力結果: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        // 出力結果:
+        // <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        //    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
         echo $this->Html->docType('html5');
         // 出力結果: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
-        // 出力結果: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        // 出力結果:
+        // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        //    "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
         2.1では既定で出力される DOCTYPE タグが HTML5 のものになりました。
@@ -253,7 +261,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     :param boolean $oneline: 内容を1行にするかどうか
 
     メソッドに渡した配列のキーと値から CSS のスタイル定義を作成します。
-    特に動的な CSS の作成に有用です。::
+    特に動的な CSS の作成に有用です。 ::
 
         echo $this->Html->style(array(
             'background' => '#633',
@@ -261,35 +269,35 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             'padding' => '10px'
         ));
 
-    出力は以下のようになります。::
+    出力結果::
 
         background:#633; border-bottom:1px solid #000; padding:10px;
 
 .. php:method:: image(string $path, array $options = array())
 
     :param string $path: 画像のパス。
-    :param array $options: :term:`html attributes` の配列
+    :param array $options: :term:`HTML属性` の配列
 
     書式にのっとった image タグを作成します。画像のパスは ``/app/webroot/img/``
-    からの相対パスを指定してください。::
+    からの相対パスを指定してください。 ::
 
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
-    出力は以下のとおりです。
+    出力結果:
 
     .. code-block:: html
 
         <img src="/img/cake_logo.png" alt="CakePHP" />
 
     リンク付き画像を作成するには、リンク先を ``$htmlAttributes`` の
-    ``url`` オプションに設定します。::
+    ``url`` オプションに設定します。 ::
 
         echo $this->Html->image("recipes/6.jpg", array(
             "alt" => "ブラウニー",
             'url' => array('controller' => 'recipes', 'action' => 'view', 6)
         ));
 
-    出力は以下のとおりです。
+    出力結果:
 
     .. code-block:: html
 
@@ -298,80 +306,92 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         </a>
 
     電子メールで画像を使用したいときや、絶対パスで画像を指定したいときは
-    ``fullBase`` オプションを設定します。::
+    ``fullBase`` オプションを設定します。 ::
 
         echo $this->Html->image("logo.png", array('fullBase' => true));
 
-    出力は以下のとおりです。
+    出力結果:
 
     .. code-block:: html
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
-    :term:`plugin syntax` を使うことで、ロードしたプラグインの画像を
+    :term:`プラグイン記法` を使うことで、ロードしたプラグインの画像を
     インクルードできます。 ``app/Plugin/DebugKit/webroot/img/icon.png``
-    をインクルードするには以下のようにします。::
+    をインクルードするには以下のようにします。 ::
 
         echo $this->Html->image('DebugKit.icon.png');
 
     ロードしたプラグインと名前が共通する画像をインクルードするときは
     次のようにします。たとえば ``Blog`` プラグインを使っているときに、
-    ``app/webroot/js/Blog.icon.png`` をインクルードしたい場合は次のようにします。::
+    ``app/webroot/js/Blog.icon.png`` をインクルードしたい場合は次のようにします。 ::
 
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
 
     .. versionchanged:: 2.1
         ``fullBase`` オプションが追加されました。
-        :term:`plugin syntax` のサポートが追加されました。
+        :term:`プラグイン記法` のサポートが追加されました。
 
-.. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = array())
 
     :param string $title: リンクを本文に表示する際のテキストを設定します。
-    :param mixed $url: 文字列または :term:`routing array` によってリンク先のURLを設定します。
-    :param array $options: :term:`html attributes` の配列を設定します。
+    :param mixed $url: 文字列または :term:`ルーティング配列` によってリンク先の URL を設定します。
+    :param array $options: :term:`HTML属性` の配列を設定します。
 
     一般的な HTML のハイパーリンクを作成するためのメソッドです。
-    ``$options`` は、タグの属性や、 ``$title`` をエスケープするかどうかの設定に使います。::
+    ``$options`` は、タグの属性や、 ``$title`` をエスケープするかどうかの設定に使います。 ::
 
-        echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
+        echo $this->Html->link(
+            'Enter',
+            '/pages/home',
+            array('class' => 'button', 'target' => '_blank')
+        );
 
-    出力は以下のようになります。
+    出力結果:
 
     .. code-block:: html
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
-    ``'full_base'=>true`` オプションを設定すると、URLをフルパスで出力します。::
+    ``'full_base'=>true`` オプションを設定すると、URLをフルパスで出力します。 ::
 
         echo $this->Html->link(
             'Dashboard',
-            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+            array(
+                'controller' => 'dashboards',
+                'action' => 'index',
+                'full_base' => true
+            )
         );
 
-    出力は以下のようになります。
+    出力結果:
 
     .. code-block:: html
 
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    ``$confirmMessage`` を指定すると、JavaScript の ``confirm()``
+    オプションに ``confirm`` キーを指定すると、JavaScript の ``confirm()``
     で表示するダイアログのメッセージを設定できます。::
 
         echo $this->Html->link(
             '削除',
             array('controller' => 'recipes', 'action' => 'delete', 6),
-            array(),
-            "本当にこのレシピを削除しますか?"
+            array('confirm' => '本当にこのレシピを削除しますか?')
         );
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
-        <a href="/recipes/delete/6" onclick="return confirm('本当にこのレシピを削除しますか?');">削除</a>
+        <a href="/recipes/delete/6"
+            onclick="return confirm(
+                '本当にこのレシピを削除しますか?'
+            );">
+            削除
+        </a>
 
-    クエリ文字列も ``link()`` で作成できます。::
+    クエリ文字列も ``link()`` で作成できます。 ::
 
         echo $this->Html->link('画像を表示する', array(
             'controller' => 'images',
@@ -380,11 +400,35 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             '?' => array('height' => 400, 'width' => 500))
         );
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
         <a href="/images/view/1?height=400&width=500">画像を表示する</a>
+
+    名前付きパラメータを使用している場合、配列構文を使用するか URL 中に
+    全てのパラメータ名を含めてください。パラメータ付きの文字列構文 (たとえば
+    "recipes/view/6/comments:false") は、コロン文字列が
+    HTML エスケープされるので、リンクが希望通りに働きません。 ::
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
+            array(
+                'controller' => 'recipes',
+                'action' => 'view',
+                'id' => 6,
+                'comments' => false
+            )
+        );
+
+    出力結果:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/id:6/comments:false">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
 
     HTML で特殊な意味を持つ文字が ``$title`` に含まれていた場合は、 HTML
     エンティティに変換されます。これを無効にするには、 ``$options``
@@ -397,7 +441,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('escape' => false)
         );
 
-    出力は以下のようになります。
+    出力結果:
 
     .. code-block:: html
 
@@ -405,18 +449,43 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-    そのほかの種類のURLについては、 :php:meth:`HtmlHelper::url`
+    ``escape`` を false に設定することで、リンクの属性のエスケープ処理を無効化します。
+    2.4 から、 ``escapeTitle`` オプションを使用して、title 属性以外のエスケープ処理を
+    無効化できます。 ::
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image('recipes/6.jpg', array('alt' => 'Brownies')),
+            'recipes/view/6',
+            array('escapeTitle' => false, 'title' => 'hi "howdy"')
+        );
+
+    出力結果:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/6" title="hi &quot;howdy&quot;">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
+    .. versionchanged:: 2.4
+        ``escapeTitle`` オプションが追加されました。
+
+    .. versionchanged:: 2.6
+        ``$confirmMessage`` 変数は非推奨です。 代わりに ``$options`` の
+        ``confirm`` キーを使用してください。
+
+    そのほかの種類の URL については、 :php:meth:`HtmlHelper::url`
     メソッドの項目も参考にしてください。
 
 .. php:method:: media(string|array $path, array $options)
 
-    :param string|array $path: Path to the video file, relative to the
-        `webroot/{$options['pathPrefix']}` directory. Or an array where each
-        item itself can be a path string or an associate array containing keys
-        `src` and `type`.
+    :param string|array $path: 動画ファイルへの
+        `webroot/{$options['pathPrefix']}` ディレクトリからの相対的なパス。
+        または自身がパス文字列の配列、または `src` や `type` キーを含む連想配列。
     :param array $options: HTML の属性や特別なオプションを設定します。
 
-        Options:
+        オプション:
 
         - `type` メディアタグを作成する際の種類を指定します。有効な値は "audio"
           か "video" です。指定しなかった場合はファイルの MIME タイプから判別します。
@@ -445,23 +514,30 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
        <?php echo $this->Html->media(
-            array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+            array(
+                'video.mp4',
+                array(
+                    'src' => 'video.ogg',
+                    'type' => "video/ogg; codecs='theora, vorbis'"
+                )
+            ),
             array('autoplay')
         ); ?>
 
         // 出力結果
         <video autoplay="autoplay">
             <source src="/files/video.mp4" type="video/mp4"/>
-            <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
+            <source src="/files/video.ogg" type="video/ogg;
+                codecs='theora, vorbis'"/>
         </video>
 
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
 
     :param string $tag: 生成するタグの名前
     :param string $text: タグの内容
-    :param array $options: :term:`html attributes` の配列
+    :param array $options: :term:`HTML属性` の配列
 
-    text を囲った tag 指定したタグを返します。textを指定しなかった場合、
+    text を囲った tag 指定したタグを返します。text を指定しなかった場合、
     <tag> という開始タグのみを返します。
 
     .. code-block:: php
@@ -492,7 +568,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param string $class: div タグのクラス名を設定します。
     :param string $text: div タグに含まれる内容を設定します。
-    :param array $options: :term:`html attributes` の配列を設定します。
+    :param array $options: :term:`HTML属性` の配列を設定します。
 
     div タグで囲ったセクションを作成するために使います。最初の引数で
     CSS のクラスを設定し、次の引数でdivタグで囲うテキストを設定します。
@@ -514,7 +590,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param string $class: 段落のクラス名です。
     :param string $text: 段落に含める内容です。
-    :param array $options: :term:`html attributes` の配列です。
+    :param array $options: :term:`HTML属性` の配列です。
 
     text を含め、 CSS のクラスを指定した <p> タグを出力します。
     text に何も指定しなかった場合は <p> の開始タグのみを出力します。
@@ -532,7 +608,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     :param mixed $url: 単一の Javascript ファイルを指定する文字列、または
         複数のファイルを指定する文字列の配列です。
-    :param array $options: :term:`html attributes` の配列です。
+    :param array $options: :term:`HTML属性` の配列です。
 
     ローカルファイルまたは URL で指定したリモートファイルをインクルードします。
 
@@ -544,41 +620,40 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     ``$options['once']`` は、一回のリクエストで一度だけの読み込みにするか、
     何度も読み込みをするかを制御します。デフォルトは true です。
 
-
     $options を使って、生成する script タグの属性を設定することができます。
     この設定は、配列を使ってファイルを指定した場合、
     生成されるすべての script タグに適用されます。
 
     このメソッドは、指定された JavaScript ファイルが ``/app/webroot/js``
-    というディレクトリにあると仮定して動作します。::
+    というディレクトリにあると仮定して動作します。 ::
 
         echo $this->Html->script('scripts');
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
         <script type="text/javascript" href="/js/scripts.js"></script>
 
-    ``app/webroot/js`` にないファイルをリンクする際は絶対パスを指定します。::
+    ``app/webroot/js`` にないファイルをリンクする際は絶対パスを指定します。 ::
 
         echo $this->Html->script('/otherdir/script_file');
 
-    リモート URL のリンクを指定することもできます。::
+    リモート URL のリンクを指定することもできます。 ::
 
         echo $this->Html->script('http://code.jquery.com/jquery.min.js');
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
         <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
 
-    最初の引数を複数のファイル名を含む配列にすることもできます。::
+    最初の引数を複数のファイル名を含む配列にすることもできます。 ::
 
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
@@ -596,7 +671,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         echo $this->fetch('scriptBottom');
 
-    :term:`plugin syntax` を使うことにより、ロードしたプラグインのスクリプトを
+    :term:`プラグイン記法` を使うことにより、ロードしたプラグインのスクリプトを
     使うことができます。 ``app/Plugin/DebugKit/webroot/js/toolbar.js`` を
     インクルードするには以下のようにします。::
 
@@ -610,12 +685,12 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     .. versionchanged:: 2.1
         ``block`` オプションが追加されました。
-        :term:`plugin syntax` のサポートが追加されました。
+        :term:`プラグイン記法` のサポートが追加されました。
 
 .. php:method::  scriptBlock($code, $options = array())
 
     :param string $code: script タグ内に含めるコード。
-    :param array $options: :term:`html attributes` の配列。
+    :param array $options: :term:`HTML属性` の配列。
 
     ``$code`` を含めた <script> タグを生成します。
     ``$options['inline']`` を false 設定すると、コードブロックはビューブロックの
@@ -625,7 +700,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
 .. php:method:: scriptStart($options = array())
 
-    :param array $options: :term:`html attributes` の配列を設定します。
+    :param array $options: :term:`HTML属性` の配列を設定します。
         これは scriptEnd が呼び出されたときに使われます。
 
     コードブロックのバッファリングを始めます。コードブロックは
@@ -638,7 +713,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     出力します。コードブロックをオープンする際、 ``inline => false``
     としていた場合は nullを返します。
 
-    ``scriptStart()`` と ``scriptEnd()`` の使用例を示します。::
+    ``scriptStart()`` と ``scriptEnd()`` の使用例を示します。 ::
 
         $this->Html->scriptStart(array('inline' => false));
 
@@ -653,7 +728,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     :param array $itemOptions: リストアイテムのタグについての HTML 属性を設定します。
     :param string $tag: リストのタグに ol か ul のどちらを使うか指定します。
 
-    ネストしたリストを、連想配列から作成します。::
+    ネストしたリストを、連想配列から作成します。 ::
 
         $list = array(
             'Languages' => array(
@@ -668,7 +743,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         );
         echo $this->Html->nestedList($list);
 
-    Output:
+    出力結果:
 
     .. code-block:: html
 
@@ -692,14 +767,14 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
     :param array $names: テーブルのヘッダー行を生成するためテキストの配列です。
-    :param array $trOptions: <tr> の設定のための :term:`html attributes` の配列です。
-    :param array $thOptions: それぞれの <th> タグ要素のための :term:`html attributes` の配列です。
+    :param array $trOptions: <tr> の設定のための :term:`HTML属性` の配列です。
+    :param array $thOptions: それぞれの <th> タグ要素のための :term:`HTML属性` の配列です。
 
-    <table> タグ内に置くためのヘッダー行を作成します。::
+    <table> タグ内に置くためのヘッダー行を作成します。 ::
 
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
@@ -717,7 +792,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('class' => 'product_table')
         );
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
@@ -731,7 +806,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         ``tableHeaders()`` はセルごとの属性を設定できます。以下をご覧ください。
 
     バージョン 2.2 からは、カラムごとに属性を設定できます。
-    既定では ``$thOptions`` で設定した値が使われます。::
+    既定では ``$thOptions`` で設定した値が使われます。 ::
 
         echo $this->Html->tableHeaders(array(
             'id',
@@ -739,7 +814,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('Date' => array('class' => 'sortable'))
         ));
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
@@ -752,15 +827,15 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
 
     :param array $data: 行データの配列の2次元配列。
-    :param array $oddTrOptions: 奇数行の <tr> タグの設定をするための :term:`html attributes` の配列。
-    :param array $evenTrOptions: 偶数行の <tr> タグの設定をするための :term:`html attributes` の配列。
+    :param array $oddTrOptions: 奇数行の <tr> タグの設定をするための :term:`HTML属性` の配列。
+    :param array $evenTrOptions: 偶数行の <tr> タグの設定をするための :term:`HTML属性` の配列。
     :param boolean $useCount: "column-$i" というクラスを追加するかどうかを指定します。
     :param boolean $continueOddEven: false に設定すると、奇数偶数のカウントを
         static でない $count を変数として使います。
 
     奇数行と偶数行で異なる属性を割り当てた表のセルを作成します。
     array() でひとつのセルを囲うと、特定の <td> タグについて属性を
-    設定できます。::
+    設定できます。 ::
 
         echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', 'Best Brownies', 'Yes'),
@@ -768,7 +843,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
 
-    Output:
+    出力結果:
 
     .. code-block:: html
 
@@ -779,18 +854,58 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     ::
 
         echo $this->Html->tableCells(array(
-            array('Jul 7th, 2007', array('Best Brownies', array('class' => 'highlight')) , 'Yes'),
+            array(
+                'Jul 7th, 2007',
+                array(
+                    'Best Brownies',
+                    array('class' => 'highlight')
+                ),
+                'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
-            array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
+            array(
+                'Aug 1st, 2006',
+                'Anti-Java Cake',
+                array('No', array('id' => 'special'))
+            ),
         ));
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
-        <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
-        <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
-        <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
+        <tr>
+            <td>
+                Jul 7th, 2007
+            </td>
+            <td class="highlight">
+                Best Brownies
+            </td>
+            <td>
+                Yes
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Jun 21st, 2007
+            </td>
+            <td>
+                Smart Cookies
+            </td>
+            <td>
+                Yes
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Aug 1st, 2006
+            </td>
+            <td>
+                Anti-Java Cake
+            </td>
+            <td id="special">
+                No
+            </td>
+        </tr>
 
     ::
 
@@ -803,7 +918,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('class' => 'darker')
         );
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
@@ -813,14 +928,14 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-    :param mixed $url: :term:`routing array` 。
+    :param mixed $url: :term:`ルーティング配列`
     :param mixed $full: :php:meth:`Router::url()` のためのオプションを設定する配列または
         ドメイン名を出力するかどうかを指定する boolean 型変数
 
     コントローラーとアクションの組み合わせが指し示す URL を返します。
     $url を指定しなかった場合は REQUEST\_URI を、それ以外のときは
     コントローラーとアクションの組み合わせから URL を生成して出力します。
-    full に true を設定すると、出力結果に ドメイン名を追加します。::
+    full に true を設定すると、出力結果に ドメイン名を追加します。 ::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -833,7 +948,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     以下に更なる使用例を示します。
 
-    名前付き引数と URL の指定::
+    名前付きパラメータの URL::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -862,7 +977,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         // 出力結果
         http://somedomain.com/posts
 
-    GET パラメーターとアンカーつきの URL::
+    GET パラメータとアンカーつきの URL::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -875,12 +990,12 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         /posts/search?foo=bar#first
 
     より詳しい情報は、API 集の
-    `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
+    `Router::url <http://api.cakephp.org/2.7/class-Router.html#_url>`_
     を確認してください。
 
 .. php:method:: useTag(string $tag)
 
-    フォーマットされた既存の ``$tag`` のブロックを返します。::
+    フォーマットされた既存の ``$tag`` のブロックを返します。 ::
 
         $this->Html->useTag(
             'form',
@@ -888,7 +1003,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('method' => 'post', 'class' => 'myform')
         );
 
-    結果は以下の通りです。
+    出力結果:
 
     .. code-block:: html
 
@@ -902,7 +1017,7 @@ HtmlHelper が出力するタグの変更
     :php:class:`HtmlHelper` 組み込みのタグ設定は、 XH|TML に準拠したものです。
     そのため、 HTML5 に準拠した HTML を生成するためには、新しいタグの設定を
     作成して読み込む必要があります。出力されるタグを変更するためには、
-    ``app/Config/html5_tags.php`` というファイルを作成し、以下の内容を記述します。::
+    ``app/Config/html5_tags.php`` というファイルを作成し、以下の内容を記述します。 ::
 
         $config = array('tags' => array(
             'css' => '<link rel="%s" href="%s" %s>',
@@ -923,12 +1038,12 @@ HtmlHelper を使ったパンくずリストの作成
 .. php:method:: getCrumbs(string $separator = '&raquo;', string|array|bool $startText = false)
 
     CakePHP はパンくずリストを自動生成する組み込みメソッドを持っています。
-    設置するにはまず、レイアウトテンプレートに以下のようなコードを追加します。::
+    設置するにはまず、レイアウトテンプレートに以下のようなコードを追加します。 ::
 
         echo $this->Html->getCrumbs(' > ', 'Home');
 
     ``$startText`` のオプションは1つの配列も受け付けます。
-    これにより、生成された最初のリンクへのさらなる制御を可能にします。::
+    これにより、生成された最初のリンクへのさらなる制御を可能にします。 ::
 
         echo $this->Html->getCrumbs(' > ', array(
             'text' => $this->Html->image('home.png'),
@@ -945,7 +1060,7 @@ HtmlHelper を使ったパンくずリストの作成
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
     ビューでページのそれぞれにパンくずリストを作るため、
-    以下のコードを加えたとします。::
+    以下のコードを加えたとします。 ::
 
         $this->Html->addCrumb('ユーザー', '/users');
         $this->Html->addCrumb('ユーザーの追加', array('controller' => 'users', 'action' => 'add'));
@@ -955,8 +1070,8 @@ HtmlHelper を使ったパンくずリストの作成
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
-    :param array $options: ``<ul>`` タグに含めたい :term:`html attributes`
-        の配列です。 'separator' と 'firstClass' 、 'lastClass' の
+    :param array $options: ``<ul>`` タグに含めたい :term:`HTML属性`
+        の配列です。 'separator' と 'firstClass' 、 'lastClass' 、 'escape' の
         オプションも含めることができます。
     :param string|array $startText: リストの先頭に表示するテキスト、または要素
 
@@ -975,6 +1090,9 @@ HtmlHelper を使ったパンくずリストの作成
 
     .. versionchanged:: 2.3
         'separator'と 'firstClass' 、 'lastClass' のオプションが追加されました。
+
+    .. versionchanged:: 2.5
+        'escape' オプションが追加されました。
 
 
 .. meta::

@@ -367,7 +367,7 @@ Les DocBlocks de méthode ou de fonctions doivent ressembler à ceci::
      * @link http://book.cakephp.org/2.0/en/foo.html#bar
      * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
      * @see Bar::baz
-     /*
+     */
      public function bar($param1, $param2 = null) {
      }
 

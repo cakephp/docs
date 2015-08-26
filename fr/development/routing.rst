@@ -52,7 +52,7 @@ application. Vous pouvez accéder à une action directement par l'URL en
 mettant son nom dans la requête. Vous pouvez aussi passer des paramètres aux
 actions de votre controller en utilisant l'URL. ::
 
-        modèle URL des routes par défaut: 
+        modèle URL des routes par défaut:
         http://example.com/controller/action/param1/param2/param3
 
 L'URL /posts/view mappe à l'action view() de
@@ -154,10 +154,10 @@ pourriez considérer la création d'une route. Cela vous permet de vous lier
 à ``/government`` plutôt qu'à ``/pages/display/5``.
 
 .. note::
-    
+
     Bien que vous puissiez connecter des routes alternatives, les routes par
-    défaut vont continuer à fonctionner. Ceci pourrait créer des situations,
-    où le contenu pourrait finir avec 2 URLs. Regardez
+    défaut vont continuer à fonctionner. Avec cette configuration, vous
+    pouvez accéder à 1 contenu à partir de 2 URLs différentes. Regardez
     :ref:`disabling-default-routes` pour désactiver les routes par défaut,
     et fournir seulement les URLs que vous définissez.
 
@@ -241,7 +241,7 @@ tous les URLs aux actions dans votre controller. Par exemple, pour mapper
 toutes les URLs aux actions du controller ``home``, par ex avoir des URLs
 comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
-    Router::connect('/:action', array('controller' => 'home')); 
+    Router::connect('/:action', array('controller' => 'home'));
 
 Si vous souhaitez fournir une URL non sensible à la casse, vous pouvez utiliser
 les modificateurs en ligne d'expression régulière::
@@ -399,7 +399,7 @@ Le fichier de vue correspondant devra être
 Vous pouvez faire correspondre l'URL /admin à votre action ``admin_index``
 du controller Pages en utilisant la route suivante::
 
-    Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)); 
+    Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 
 Vous pouvez aussi configurer le Router pour utiliser plusieurs préfixes.
 En ajoutant des valeurs supplémentaires dans ``Routing.prefixes``. Si vous
@@ -566,7 +566,7 @@ Les valeurs dans le tableau pass sont indicées numériquement basé sur l'ordre
 dans lequel elles apparaissent dans l'URL appelé::
 
     debug($this->request->params['pass']);
-    debug($this->passedArgs); 
+    debug($this->passedArgs);
 
 Les deux du dessus sortiraient::
 
@@ -781,7 +781,7 @@ le controller est 'pages'::
     Router::connectNamed(
         array('page' => array('action' => 'index', 'controller' => 'pages')),
         array('default' => false, 'greedy' => false)
-    ); 
+    );
 
 
 connectNamed() supporte un certain nombre d'options:
@@ -808,14 +808,14 @@ pouvez configurer les routes plus tard et les URLs générés vont automatiqueme
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
-    $this->Html->link('View', '/posts/view/' + $id);
+    $this->Html->link('View', '/posts/view/' . $id);
 
 Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être
 appelé 'articles' à la place, vous devrez aller dans toute votre application
 en renommant les URLs. Cependant, si vous définissiez votre lien comme::
 
     $this->Html->link(
-        'View', 
+        'View',
         array('controller' => 'posts', 'action' => 'view', $id)
     );
 
@@ -833,7 +833,7 @@ spéciales::
         '?' => array('page' => 1),
         '#' => 'top'
     ));
-    
+
     // va générer une URL comme.
     /posts/index?page=1#top
 
@@ -854,8 +854,8 @@ La redirection peut survenir vers une destination dans votre application
 ou une localisation en-dehors::
 
     Router::redirect(
-        '/home/*', 
-        array('controller' => 'posts', 'action' => 'view', 
+        '/home/*',
+        array('controller' => 'posts', 'action' => 'view',
         array('persist' => true) // ou array('persist'=>array('id')) pour un routing par défaut où la vue de l'action attend un argument $id
     );
 
@@ -893,7 +893,7 @@ Les classes de route personnalisées vous permettent d'étendre et de modifier l
 façon dont certaines routes parsent les demandes et de traiter le routing
 inversé. Une classe personnalisée  de route devrait être créée dans
 ``app/Routing/Route`` et étendre
-:php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou 
+:php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou
 ``parse()``. ``parse()`` est utilisée pour
 analyser les demandes et correspondance et ``match()`` est utilisée pour
 traiter les routes inversées.
@@ -905,7 +905,7 @@ le fichier contenant votre routes avant d'essayer de l'utiliser::
     App::uses('SlugRoute', 'Routing/Route');
 
     Router::connect(
-         '/:slug', 
+         '/:slug',
          array('controller' => 'posts', 'action' => 'view'),
          array('routeClass' => 'SlugRoute')
     );
@@ -923,7 +923,7 @@ API du Router
     peut dispatcher.
 
 .. php:staticmethod:: connect($route, $defaults = array(), $options = array())
-    
+
     :param string $route: Une chaîne décrivant le template de la route.
     :param array $defaults: Un tableau décrivant les paramètres de la route
         par défaut. Ces paramètres seront utilisés par défaut et peuvent
@@ -939,40 +939,40 @@ API du Router
     votre application. Dans les routes du coeur, il y a un ensemble
     d'expressions régulières qui sont utilisées pour matcher les requêtes
     aux destinations.
-    
+
     Exemples::
-    
+
         Router::connect('/:controller/:action/*');
-    
+
     Le premier paramètre va être utilisé comme nom de controller alors que
     le second est utilisé en nom d'action. La syntaxe '/\*' rend cette route
     greedy puisqu'elle ca matcher les requêtes comme `/posts/index` ainsi que
     les requêtes comme ``/posts/edit/1/foo/bar`` . ::
-    
+
         Router::connect('/home-page', array('controller' => 'pages', 'action' => 'display', 'home'));
-    
+
     Ce qui est au-dessus montre l'utilisation d'un paramètre de route par
     défaut. Et fournit les paramètres de routing pour une route statique. ::
-    
+
         Router::connect(
             '/:lang/:controller/:action/:id',
             array(),
             array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
         );
-    
+
     Montre la connexion d'une route avec les paramètres de route personnalisé
     ainsi que fournit les patterns pour ces paramètres. Les patterns pour les
     paramètres de routing n'ont pas besoin de capturer les groupes, puisque
     l'un d'eux sera ajouté pour chaque paramètre de route.
-    
+
     $options propose trois clés 'special'. ``pass``, ``persist`` et
     ``routeClass`` ont une signification spéciale dans le tableau
     $options.
-    
+
     * ``pass`` est utilisé pour définir lesquels des paramètres routés devrait
       être passé dans le tableau pass. Ajouter un paramètre à pass le retirera
       du tableau de route régulière. Ex. ``'pass' => array('slug')``.
-    
+
     * ``persist`` est utilisé pour définir lesquels des paramètres de route
       devrait être automatiquement inclus quand on génère les nouvels URLs.
       Vous pouvez écraser les paramètres persistentes en les redéfinissant
@@ -987,7 +987,7 @@ API du Router
     * ``named`` est utilisé pour configurer les paramètres nommés au niveau
       de la route. Cette clé utilise les mêmes options que
       :php:meth:`Router::connectNamed()`.
-    
+
 .. php:staticmethod:: redirect($route, $url, $options = array())
 
     :param string $route: Un template de route qui dicte quels URLs devraient
@@ -1006,14 +1006,14 @@ API du Router
         matcher, soit des tableaux.
     :param array $options: Permet le contrôle de toutes les configurations:
         separator, greedy, reset, default.
-    
+
     Spécifie quels paramètres nommés CakePHP devrait parsés en URLs entrantes
     Par défaut, CakePHP va parser tout paramètre nommé en-dehors des URLS
     entrantes. Regardez :ref:`controlling-named-parameters` pour plus
     d'informations.
 
 .. php:staticmethod:: promote($which = null)
-    
+
     :param integer $which: Un indice de tableau à 0 représentant la route
         à déplacer. Par exemple, si 3 routes ont été ajoutée, la dernière
         route serait 2.
@@ -1026,7 +1026,7 @@ API du Router
         "/presidents/elect/4" ou un :term:`tableau de routing`.
     :param mixed $full: Si (boolean) à true, l'URL entièrement basée sera
         précédée au résultat. Si un tableau accepte les clés suivantes.
-        
+
            * escape - utilisé quand on fait les URLs intégrées dans les
              chaînes de requête HTML échappées '&'.
            * full - Si à true, l'URL de base complète sera précédée.
@@ -1061,7 +1061,7 @@ API du Router
     Utilisé dans routes.php pour déclarer quelle :ref:`file-extensions` de
     votre application supporte. En ne fournissant aucun argument, toutes les
     extensions de fichiers seront supportées.
-    
+
     .. versionadded:: 2.1
 
 .. php:staticmethod:: setExtensions($extensions, $merge = true)
@@ -1094,7 +1094,7 @@ API du Router
 .. php:method:: parse($url)
 
     :param string $url: La chaîne URL à parser.
-    
+
     Parse une URL entrante, et génère un tableau de paramètres requêtés sur
     lequel le Dispatcher peut agir. Etendre cette méthode vous permet de
     personnaliser comment les URLs entrantes sont converties en un tableau.
@@ -1103,7 +1103,7 @@ API du Router
 .. php:method:: match($url)
 
     :param array $url: Le tableau de routing à convertir dans une chaîne URL.
-    
+
     Tente de matcher un tableau URL. Si l'URL matche les paramètres de route
     et les configurations, alors retourne une chaîne URL générée. Si l'URL ne
     match pas les paramètres de route, false sera retourné. Cette méthode gère
