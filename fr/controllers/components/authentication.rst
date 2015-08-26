@@ -203,7 +203,7 @@ Cela nécessitera que votre table ``UsersTable`` ait une méthode ``findAuth()``
 Dans l'exemple ci-dessous, la requête est modifiée pour récupérer uniquement
 les champs et ajouter une condition::
 
-    public function findAuth(\Cake\ORM\Query $query, array $option)
+    public function findAuth(\Cake\ORM\Query $query, array $options)
     {
         $query
             ->select(['id', 'username', 'password'])
