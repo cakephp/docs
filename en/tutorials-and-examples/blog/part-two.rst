@@ -31,7 +31,7 @@ look like this::
 
 Naming conventions are very important in CakePHP. By naming our Table object
 ``ArticlesTable``, CakePHP can automatically infer that this Table object will
-be used in the ``ArticlesController`, and will be tied to a database table called
+be used in the ``ArticlesController``, and will be tied to a database table called
 ``articles``.
 
 .. note::
@@ -50,7 +50,7 @@ chapter of the Manual.
     If you completed :doc:`Part 1 of the Blog Tutorial
     </tutorials-and-examples/blog/blog>` and created the ``articles`` table in
     our Blog database you can leverage CakePHP's bake console and its code
-    generation capabilities to create the `ArticlesTable`` model::
+    generation capabilities to create the ``ArticlesTable`` model::
 
         bin/cake bake model Articles
 
@@ -539,7 +539,7 @@ Deleting Articles
 =================
 
 Next, let's make a way for users to delete articles. Start with a
-``delete()`` action in the `ArticlesController``::
+``delete()`` action in the ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
