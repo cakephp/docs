@@ -133,9 +133,9 @@ methods of the HtmlHelper and how to use them.
     This method is handy for linking to external resources like RSS/Atom feeds
     and favicons. Like css(), you can specify whether or not you'd like this tag
     to appear inline or appended to the ``meta`` block by setting the 'inline'
-    key in the $attributes parameter to false, ie - ``array('inline' => false)``.
+    key in the $options parameter to false, ie - ``array('inline' => false)``.
 
-    If you set the "type" attribute using the $attributes parameter,
+    If you set the "type" attribute using the $options parameter,
     CakePHP contains a few shortcuts:
 
     ======== ======================
