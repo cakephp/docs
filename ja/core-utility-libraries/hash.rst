@@ -5,41 +5,27 @@ Hash
 
 .. versionadded:: 2.2
 
-配列マネジメントはとても強力かつ便利なツールであり、適切に使いさえすれば、よりスマートでより最適化されたコードを書くことができるようになるものです。
-CakePHP ではとても便利なユーティリティ群を Hash クラスの中に static で用意しており、まさにこれをするのに使えます。
+配列マネジメントはとても強力かつ便利なツールであり、適切に使いさえすれば、
+よりスマートでより最適化されたコードを書くことができるようになるものです。
+CakePHP ではとても便利なユーティリティ群を Hash クラスの中に
+static で用意しており、まさにこれをするのに使えます。
 
-..
-  Array management, if done right, can be a very powerful and useful
-  tool for building smarter, more optimized code. CakePHP offers a
-  very useful set of static utilities in the Hash class that allow you
-  to do just that.
-
-CakePHP の Hash クラスは Inflector クラスと同様で、どのモデルやコントローラからでも呼ぶことができます。 例: :php:meth:`Hash::combine()`。
-
-..
-  CakePHP's Hash class can be called from any model or controller in
-  the same way Inflector is called. Example: :php:meth:`Hash::combine()`.
+CakePHP の Hash クラスは Inflector クラスと同様で、どのモデルや
+コントローラからでも呼ぶことができます。 例: :php:meth:`Hash::combine()`。
 
 .. _hash-path-syntax:
 
 Hash パス構文
 =============
 
-..
-  Hash path syntax
-
 下記のパス構文は ``Hash`` が持つすべてのメソッドで使われるものです。
 ただし、すべてのパス構文が、すべてのメソッドで使用可能であるとは限りません。
-パスの式はいくつものトークンで構成されます。
-トークンは、配列データの移動に使う『式』と、要素を絞り込む『マッチャ』の２つのグループに大きく分けられます。
-マッチャは要素の式に対して適用することができます。
+パスの式はいくつものトークンで構成されます。トークンは、配列データの移動に使う『式』と、
+要素を絞り込む『マッチャー』の２つのグループに大きく分けられます。
+マッチャーは要素の式に対して適用することができます。
 
-..
-  The path syntax described below is used by all the methods in ``Hash``. Not all
-  parts of the path syntax are available in all methods.  A path expression is
-  made of any number of tokens.  Tokens are composed of two groups.  Expressions,
-  are used to traverse the array data, while matchers are used to qualify
-  elements.  You apply matchers to expression elements.
+式の種類
+----------------
 
 +--------------------------------+--------------------------------------------+
 | 式                             | 説明                                       |
@@ -53,28 +39,17 @@ Hash パス構文
 | ``Foo``                        | 完全に同じ値だった場合のみ一致する。       |
 +--------------------------------+--------------------------------------------+
 
-..
-  +--------------------------------+--------------------------------------------+
-  | Expression                     | Definition                                 |
-  +================================+============================================+
-  | ``{n}``                        | Represents a numeric key.  Will match      |
-  |                                | any string or numeric key.                 |
-  +--------------------------------+--------------------------------------------+
-  | ``{s}``                        | Represents a string.  Will match any       |
-  |                                | any string value including numeric string  |
-  |                                | values.                                    |
-  +--------------------------------+--------------------------------------------+
-  | ``Foo``                        | Matches keys with the exact same value.    |
-  +--------------------------------+--------------------------------------------+
+要素の式はいずれも、すべてのメソッドで使うことができます。特定のメソッドでは、
+要素の式に加え、 属性で絞り込むこともできます。該当するメソッドは、
+``extract()``,　``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
+``apply()``, ``sort()``, ``insert()``, ``remove()`` と ``nest()`` です。
 
-要素の式はいずれも、すべてのメソッドで使うことができます。要素の式に加え、 ``extract()`` のようなメソッドで属性で絞り込むこともできます。
 
-..
-  All expression elements are supported all methods.  In addition to expression
-  elements you can use attribute matching with methods like ``extract()``.
+属性の絞り込み種別
+------------------------
 
 +--------------------------------+--------------------------------------------+
-| マッチャ                       | 説明                                       |
+| マッチャー                     | 説明                                       |
 +================================+============================================+
 | ``[id]``                       | 記述されたキーと一致する要素に絞り込む。   |
 +--------------------------------+--------------------------------------------+
@@ -94,49 +69,24 @@ Hash パス構文
 |                                | 要素に絞り込む。                           |
 +--------------------------------+--------------------------------------------+
 
-..
-  +--------------------------------+--------------------------------------------+
-  | Matcher                        | Definition                                 |
-  +================================+============================================+
-  | ``[id]``                       | Match elements with a given array key.     |
-  +--------------------------------+--------------------------------------------+
-  | ``[id=2]``                     | Match elements with id equal to 2.         |
-  +--------------------------------+--------------------------------------------+
-  | ``[id!=2]``                    | Match elements with id not equal to 2.     |
-  +--------------------------------+--------------------------------------------+
-  | ``[id>2]``                     | Match elements with id greater than 2.     |
-  +--------------------------------+--------------------------------------------+
-  | ``[id>=2]``                    | Match elements with id greater than        |
-  |                                | or equal to 2.                             |
-  +--------------------------------+--------------------------------------------+
-  | ``[id<2]``                     | Match elements with id less than 2         |
-  +--------------------------------+--------------------------------------------+
-  | ``[id<=2]``                    | Match elements with id less than           |
-  |                                | or equal to 2.                             |
-  +--------------------------------+--------------------------------------------+
-  | ``[text=/.../]``               | Match elements that have values matching   |
-  |                                | the regular expression inside ``...``.     |
-  +--------------------------------+--------------------------------------------+
+.. versionchanged:: 2.5
+    ``insert()`` と ``remove()`` にマッチャーのサポートが追加されました。
 
-.. php:staticmethod:: get(array $data, $path)
+.. php:staticmethod:: get(array $data, $path, $default = null)
 
     :rtype: mixed
 
     ``get()`` は ``extract()`` のシンプル版で、直接的に指定するパス式のみがサポートされます。
-    ``{n}`` や ``{s}`` 、マッチャを使ったパスはサポートされません。
+    ``{n}`` や ``{s}`` 、マッチャーを使ったパスはサポートされません。
     配列から１つの値だけを取り出したい場合に ``get()`` を使ってください。
-
-..
-  ``get()`` is a simplified version of ``extract()``, it only supports direct
-  path expressions.  Paths with ``{n}``, ``{s}`` or matchers are not
-  supported.  Use ``get()`` when you want exactly one value out of an array.
 
 .. php:staticmethod:: extract(array $data, $path)
 
     :rtype: array
 
-    ``Hash::extract()`` は :ref:`hash-path-syntax` にあるすべての式とマッチャをサポートします。
-    extract を使うことで、配列から好きなパスに沿ったデータを手早く取り出すことができます。もはやデータ構造をループする必要はありません。
+    ``Hash::extract()`` は :ref:`hash-path-syntax` にあるすべての式とマッチャーを
+    サポートします。extract を使うことで、配列から好きなパスに沿ったデータを手早く
+    取り出すことができます。もはやデータ構造をループする必要はありません。
     その代わりに欲しい要素を絞り込むパス式を使うのです::
 
         // 共通の使い方:
@@ -145,18 +95,11 @@ Hash パス構文
         // $results は以下のとおり:
         // array(1,2,3,4,5,...);
 
-..
-  ``Hash::extract()`` supports all expression, and matcher components of
-  :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays,
-  along arbitrary paths quickly without having to loop through the data
-  structures.  Instead you use path expressions to qualify which elements you
-  want returned ::
-
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
     :rtype: array
 
-    $data を $path の定義に従って配列の中に挿入します。このメソッドは :ref:`hash-path-syntax` にある『式』タイプだけをサポートします::
+    $data を ``$path`` の定義に従って配列の中に挿入します。　::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -176,25 +119,20 @@ Hash パス構文
         )
 
 
-    ``{n}`` や ``{s}`` を使ったパスを使うことで、複数のポイントにデータを挿入することができます::
+    ``{n}`` や ``{s}`` を使ったパスを使うことで、複数のポイントにデータを挿入することが
+    できます::
 
         $users = $this->User->find('all');
         $users = Hash::insert($users, '{n}.User.new', 'value');
 
-..
-  Inserts $data into an array as defined by $path. This method only supports
-  the expression types of :ref:`hash-path-syntax`::
+    .. versionchanged:: 2.5
+        2.5.0 から、 insert() で属性のマッチャー表現が動作します。
 
-..
-  You can use paths using ``{n}`` and ``{s}`` to insert data into multiple
-  points::
-
-.. php:staticmethod:: remove(array $data, $path = null)
+.. php:staticmethod:: remove(array $data, $path)
 
     :rtype: array
 
-    $path に合致するすべての要素を配列から削除します。
-    このメソッドは :ref:`hash-path-syntax` にあるすべての式をサポートします::
+    $path に合致するすべての要素を配列から削除します。 ::
 
         $a = array(
             'pages' => array('name' => 'page'),
@@ -214,12 +152,8 @@ Hash パス構文
 
     ``{n}`` や ``{s}`` を使うことで、複数の値を一度に削除することができます。
 
-..
-    Removes all elements from an array that match $path. This method supports
-    all the expression elements of :ref:`hash-path-syntax`::
-
-..
-    Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
+    .. versionchanged:: 2.5
+       2.5.0 から、 insert() で属性のマッチャー表現が動作します。
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
@@ -326,7 +260,8 @@ Hash パス構文
         */
 
     $keyPath と $valuePath の両方とも、配列を指定することができます。
-    その場合は、配列の１要素目はフォーマット文字列とみなされ、２要素目以降のパスで取得された値のために使われます::
+    その場合は、配列の１要素目はフォーマット文字列とみなされ、
+    ２要素目以降のパスで取得された値のために使われます::
 
         $result = Hash::combine(
             $a,
@@ -360,18 +295,6 @@ Hash パス構文
                 [phpnut: Larry E. Masters] => 14
             )
         */
-
-..
-    Creates an associative array using a $keyPath as the path to build its keys,
-    and optionally $valuePath as path to get the values. If $valuePath is not
-    specified, or doesn't match anything, values will be initialized to null.
-    You can optionally group the values by what is obtained when following the
-    path specified in $groupPath.::
-
-..
-    You can provide array's for both $keyPath and $valuePath.  If you do this,
-    the first value will be used as a format string, for values extracted by the
-    other paths::
 
 .. php:staticmethod:: format(array $data, array $paths, $format)
 
@@ -429,10 +352,6 @@ Hash パス構文
         )
         */
 
-..
-    Returns a series of values extracted from an array, formatted with a
-    format string::
-
 .. php:staticmethod:: contains(array $data, array $needle)
 
     :rtype: boolean
@@ -456,10 +375,6 @@ Hash パス構文
         // false
         $result = Hash::contains($b, $a);
         // true
-
-..
-    Determines if one Hash or array contains the exact keys and values
-    of another::
 
 .. php:staticmethod:: check(array $data, string $path = null)
 
@@ -494,9 +409,6 @@ Hash パス構文
         $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
         // $result == False
 
-..
-    Checks if a particular path is set in an array::
-
 .. php:staticmethod:: filter(array $data, $callback = array('Hash', 'filter'))
 
     :rtype: array
@@ -528,11 +440,6 @@ Hash パス構文
             )
         */
 
-..
-    Filters empty elements out of array, excluding '0'. You can also supply a
-    custom $callback to filter the array elements. You callback should return
-    ``false`` to remove elements from the resulting array::
-
 .. php:staticmethod:: flatten(array $data, string $separator = '.')
 
     :rtype: array
@@ -562,9 +469,6 @@ Hash パス構文
                 [1.Author.user] => Crystal
             )
         */
-
-..
-    Collapses a multi-dimensional array into a single dimension::
 
 .. php:staticmethod:: expand(array $data, string $separator = '.')
 
@@ -596,20 +500,19 @@ Hash パス構文
         );
         */
 
-..
-    Expands an array that was previously flattened with
-    :php:meth:`Hash::flatten()`::
-
 .. php:staticmethod:: merge(array $data, array $merge[, array $n])
 
     :rtype: array
 
-    この関数は PHP の ``array_merge`` と ``array_merge_recursive`` の両方の機能を持っていると考えることができます。
-    この２つの関数との違いは、一方の配列キーがもう一方に含まれていた場合には（``array_merge`` と違って） recursive （再帰的）に動きますが、含まれていなかった場合には（``array_merge_recursive`` と違って）recursive には動きません。
+    この関数は PHP の ``array_merge`` と ``array_merge_recursive`` の
+    両方の機能を持っていると考えることができます。この２つの関数との違いは、一方の配列キーが
+    もう一方に含まれていた場合には (``array_merge`` と違って) 再帰的に動きますが、
+    含まれていなかった場合には (``array_merge_recursive`` と違って) 再帰的には動きません。
 
     .. note::
 
-        この関数の引数の個数に制限はありません。また、配列以外が引数に指定された場合は配列へとキャストされます。
+        この関数の引数の個数に制限はありません。また、配列以外が引数に指定された場合は
+        配列へとキャストされます。
 
     ::
 
@@ -653,18 +556,6 @@ Hash パス構文
         )
         */
 
-..
-    This function can be thought of as a hybrid between PHP's
-    ``array_merge`` and ``array_merge_recursive``. The difference to the two
-    is that if an array key contains another array then the function
-    behaves recursive (unlike ``array_merge``) but does not do if for keys
-    containing strings (unlike ``array_merge_recursive``).
-
-..
-    .. note::
-        This function will work with an unlimited amount of arguments and
-        typecasts non-array parameters into arrays.
-
 .. php:staticmethod:: numeric(array $data)
 
     :rtype: boolean
@@ -678,9 +569,6 @@ Hash パス構文
         $data = array(1 => 'one');
         $res = Hash::numeric($data);
         // $res は false
-
-..
-    Checks to see if all the values in the array are numeric::
 
 .. php:staticmethod:: dimensions (array $data)
 
@@ -709,10 +597,6 @@ Hash パス構文
         $result = Hash::countDim($data);
         // $result == 2
 
-..
-    Counts the dimensions of an array. This method will only
-    consider the dimension of the first element in the array::
-
 .. php:staticmethod:: maxDimensions(array $data)
 
     :php:meth:`~Hash::dimensions()` に似ていますが、このメソッドは配列内にあるもっとも大きな次元数を返します::
@@ -725,27 +609,15 @@ Hash パス構文
         $result = Hash::countDim($data, true);
         // $result == 3
 
-..
-    Similar to :php:meth:`~Hash::dimensions()`, however this method returns,
-    the deepest number of dimensions of any element in the array::
-
 .. php:staticmethod:: map(array $data, $path, $function)
 
-    $path で抽出し、各要素に $function を割り当て（map）ることで新たな配列を作ります。このメソッドでは式とマッチャの両方を使うことができます。
-
-..
-    Creates a new array, by extracting $path, and mapping $function
-    across the results. You can use both expression and matching elements with
-    this method.
+    $path で抽出し、各要素に $function を割り当て（map）ることで新たな配列を作ります。
+    このメソッドでは式とマッチャーの両方を使うことができます。
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
-    $path で抽出し、抽出結果を $function で縮小（reduce）することでを単一の値を作ります。このメソッドでは式とマッチャの両方を使うことができます。
-
-..
-    Creates a single value, by extracting $path, and reducing the extracted
-    results with $function. You can use both expression and matching elements
-    with this method.
+    $path で抽出し、抽出結果を $function で縮小（reduce）することでを単一の値を作ります。
+    このメソッドでは式とマッチャーの両方を使うことができます。
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
@@ -785,23 +657,8 @@ Hash パス構文
     * ``regular`` : 通常のソート。
     * ``numeric`` : 数値とみなしてソート。
     * ``string``  : 文字列としてソート。
-    * ``natural`` : ヒューマン・フレンドリー・ソート。例えば、 ``foo10`` が ``foo2`` の下に配置される。このソートには PHP 5.4 以上が必要。
-
-..
-    Sorts an array by any value, determined by a :ref:`hash-path-syntax`
-    Only expression elements are supported by this method::
-
-..
-    ``$dir`` can be either ``asc`` or ``desc``.  ``$type``
-    can be one of the following values:
-
-..
-    * ``regular`` for regular sorting.
-    * ``numeric`` for sorting values as their numeric equivalents.
-    * ``string`` for sorting values as their string value.
-    * ``natural`` for sorting values in a human friendly way.  Will
-      sort ``foo10`` below ``foo2`` as an example. Natural sorting
-      requires PHP 5.4 or greater.
+    * ``natural`` : ヒューマン・フレンドリー・ソート。例えば、 ``foo10`` が ``foo2``
+      の下に配置される。このソートには PHP 5.4 以上が必要。
 
 .. php:staticmethod:: diff(array $data, array $compare)
 
@@ -829,9 +686,6 @@ Hash パス構文
                     )
             )
         */
-
-..
-    Computes the difference between two arrays::
 
 .. php:staticmethod:: mergeDiff(array $data, array $compare)
 
@@ -880,17 +734,13 @@ Hash パス構文
             )
         */
 
-..
-    This function merges two arrays and pushes the differences in
-    data to the bottom of the resultant array.
-
 .. php:staticmethod:: normalize(array $data, $assoc = true)
 
     :rtype: array
 
-    配列をノーマライズします。``$assoc`` が true なら、連想配列へとノーマライズされた配列が返ります。
-    値を持つ数値キーは null を持つ文字列キーへと変換されます。
-    配列をノーマライズすると、 :php:meth:`Hash::merge()` で扱いやすくなります::
+    配列を正規化します。 ``$assoc`` が true なら、連想配列へと正規化された配列が
+    返ります。値を持つ数値キーは null を持つ文字列キーへと変換されます。
+    配列を正規化すると、 :php:meth:`Hash::merge()` で扱いやすくなります::
 
         $a = array('Tree', 'CounterCache',
             'Upload' => array(
@@ -939,12 +789,6 @@ Hash パス構文
             )
         */
 
-..
-    Normalizes an array. If ``$assoc`` is true, the resulting array will be
-    normalized to be an associative array.  Numeric keys with values, will be
-    converted to string keys with null values. Normalizing an array, makes using
-    the results with :php:meth:`Hash::merge()` easier::
-
 .. php:staticmethod:: nest(array $data, array $options = array())
 
     平坦な配列から、多次元配列もしくはスレッド状（threaded）の構造化データを生成します。
@@ -953,8 +797,10 @@ Hash パス構文
     **オプション:**
 
     - ``children`` : 子の配列のために使われる戻り値のキー名。デフォルトは 'children'。
-    - ``idPath`` : 各要素を識別するためのキーを指すパス。 :php:meth:`Hash::extract()` と同様に指定する。デフォルトは ``{n}.$alias.id``
-    - ``parentPath`` : 各要素の親を識別するためのキーを指すパス。 :php:meth:`Hash::extract()` と同様に指定する。デフォルトは ``{n}.$alias.parent_id``
+    - ``idPath`` : 各要素を識別するためのキーを指すパス。
+      :php:meth:`Hash::extract()` と同様に指定する。デフォルトは ``{n}.$alias.id``
+    - ``parentPath`` : 各要素の親を識別するためのキーを指すパス。
+      :php:meth:`Hash::extract()` と同様に指定する。デフォルトは ``{n}.$alias.parent_id``
     - ``root`` : 最上位となる要素の id 。
 
     例::
@@ -1013,22 +859,6 @@ Hash パス構文
                 )
             )
             */
-
-..
-    Takes a flat array set, and creates a nested, or threaded data structure.
-    Used by methods like ``Model::find('threaded')``.
-
-..
-    Example::
-
-..
-    - ``children`` The key name to use in the result set for children. Defaults
-      to 'children'.
-    - ``idPath`` The path to a key that identifies each entry. Should be
-      compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.id``
-    - ``parentPath`` The path to a key that identifies the parent of each entry.
-      Should be compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.parent_id``
-    - ``root`` The id of the desired top-most result.
 
 
 .. meta::
