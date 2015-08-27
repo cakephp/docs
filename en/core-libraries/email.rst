@@ -465,7 +465,7 @@ following::
         public function welcome($user)
         {
             $this
-                ->to($user->email);
+                ->to($user->email)
                 ->subject(sprintf('Welcome %s', $user->name))
                 ->template('welcome_mail') // By default template with same name as method name is used.
                 ->layout('custom');
@@ -474,8 +474,8 @@ following::
         public function resetPassword($user)
         {
             $this
-                ->to($user->email);
-                ->subject('Reset password');
+                ->to($user->email)
+                ->subject('Reset password')
                 ->set(['token' => $user->token]);
         }
     }
