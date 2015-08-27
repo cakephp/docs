@@ -457,7 +457,7 @@ like::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntiyty($article, $this->request->data);
+            $this->Articles->patchEntity($article, $this->request->data);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
