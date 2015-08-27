@@ -131,11 +131,11 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     :param array $options: :term:`HTML属性` で説明した配列です。
 
     このメソッドは、 RSS または Atom フィードや、 favicon といった外部リソースとリンクする際に有用です。
-    ``css()`` メソッド同様、 ``array('inline' => false)`` という風に ``$attributes`` の 'inline'
+    ``css()`` メソッド同様、 ``array('inline' => false)`` という風に ``$options`` の 'inline'
     というキーに false を設定することで、タグをインラインで出力するか  ``meta`` ブロックに追加するかを
     指定することができます。
 
-    $attributes のパラメータを使って "type" 属性を設定するとき、 CakePHP では
+    $options のパラメータを使って "type" 属性を設定するとき、 CakePHP では
     少しですがショートカットを用意しています。
 
     ========= ======================
