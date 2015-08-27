@@ -652,8 +652,8 @@ with this one:
 
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-This should connect users requesting '/' to the index() action of
-our ArticlesController.
+This should connect users requesting '/' to the ``index()`` action of
+our ``ArticlesController``.
 
 .. note::
 
@@ -691,7 +691,8 @@ These are common tasks people learning CakePHP usually want to study next:
 1. :ref:`view-layouts`: Customizing your website layout
 2. :ref:`view-elements`: Including and reusing view snippets
 3. :doc:`/bake/usage`: Generating basic CRUD code
-4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
+4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication
+and authorization tutorial
 
 
 .. meta::
