@@ -309,7 +309,7 @@ First, start by creating an ``add()`` action in the
 
 .. note::
 
-    You need to include the :doc:`/components/flash` component in any controller
+    You need to include the :doc:`/controllers/components/flash` component in any controller
     where you will use it. If necessary, include it in your ``AppController``.
 
 Here's what the ``add()`` action does: if the HTTP method of the
@@ -353,7 +353,7 @@ validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use CakePHP's
-:doc:`/helpers/form` helper in your views. The
+:doc:`/views/helpers/form` helper in your views. The
 :php:class:`Cake\\View\\Helper\\FormHelper` is available by default to all views
 at ``$this->Form``.
 
@@ -457,7 +457,7 @@ like::
     {
         $article = $this->Articles->get($id);
         if ($this->request->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->data);
+            $this->Articles->patchEntiyty($article, $this->request->data);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
@@ -475,7 +475,7 @@ care of.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST data to update our article entity by using the
-``patchEntit()`` method.  Finally we use the table object to save the entity
+``patchEntity()`` method.  Finally we use the table object to save the entity
 back or kick back and show the user validation errors.
 
 The edit view might look something like this:
