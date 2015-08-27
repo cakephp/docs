@@ -608,10 +608,61 @@ Por padrão, o CakePHP responde a uma requisição pela raíz do seu site usando
 nós vamos substituir esse comportamento pelo ``ArticlesController``ao criar uma
 regra de roteamento.
 
-A configuração de
+A configuração de rotas do CakePHP pode ser encontrada em **config/routes.php**.
+Você deve comentar ou remover a linha que define o roteamento padrão:
 
+.. code-block:: php
 
+    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
+Essa linha conecta a URL '/' com a página padrão do CakePHP. Nós queremos que
+ela conecte-se ao nosso próprio controller, então a substitua por esta:
 
+.. code-block:: php
 
+    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
+Isso irá conectar requisições por '/' a action ``index()`` do nosso
+``ArticlesController``
+
+.. note::
+
+    O CakePHP aproveita-se do uso de roteamento reverso. Se com a rota anterior
+    definida você gerar um link com a seguinte estrutura de array:
+    ``['controller' => 'Articles', 'action' => 'index']``, a URL resultante
+    será '/'. Portanto, é uma boa ideia sempre usar arrays para URLs, pois assim
+    suas rotas definem o endereço gerado e certificam-se que os links apontem
+    sempre para o mesmo lugar.
+
+Conclusão
+=========
+
+Simples, não é? Tenha em mente que esse foi um tutorial básico. O CakePHP tem
+*muito* mais recursos a oferecer. Não abordamos outros tópicos aqui para manter
+a simplicidade. Use o restante do manual como um guia para criar aplicações
+mais ricas.
+
+Agora que você criou uma aplicação básica no CakePHP, você pode continuar no
+:doc:`/tutorials-and-examples/blog/part-three`, ou começar seu próprio projeto.
+Você também pode folhear os :doc:`/topics` ou a
+`API <http://api.cakephp.org/3.0>` para aprender mais sobre o CakePHP.
+
+Se você precisar de ajuda, há mais formas de conseguir a ajuda que você precisa,
+por favor, visite a página :doc:`/intro/where-to-get-help` e bem-vindo(a) ao
+CakePHP!
+
+Leitura complementar
+--------------------
+
+Existem tópicos comuns que as pessoas que estão estudando o CakePHP normalmente
+visitam a seguir:
+
+1. :ref:`view-layouts`: Customizando o layout do website
+2. :ref:`view-elements`: Inclusão e reutilização de blocos de view
+3. :doc:`/bake/usage`: Gerando código CRUD
+4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de
+autorização e autenticação
+
+.. meta::
+    :title lang=pt: Tutorial - Criando um Blog - Parte 2
+    :keywords lang=en: actions,view,add,edit,delete,validation,model,post,request,validate,error
