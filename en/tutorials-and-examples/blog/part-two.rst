@@ -448,7 +448,7 @@ Editing Articles
 
 Post editing: here we go. You're a CakePHP pro by now, so you
 should have picked up a pattern. Make the action, then the view.
-Here's what the ``edit()`` action of the `ArticlesController`` would look
+Here's what the ``edit()`` action of the ``ArticlesController`` would look
 like::
 
     // src/Controller/ArticlesController.php
