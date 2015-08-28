@@ -15,16 +15,20 @@ entities.
 Débugger les Queries et les ResultSets
 ======================================
 
-Since the ORM now returns Collections and Entities, debugging these objects can
-be more complicated than in previous CakePHP versions. There are now various
-ways to inspect the data returned by the ORM.
+Etant donné que l'ORM retourne maintenant les Collections et les Entities,
+débugger ces objets peut être plus compliqué qu'avec les versions précédentes
+de CakePHP. Il y a maintenant plusieurs façons d'inspecter les données
+retournées par l'ORM.
 
-- ``debug($query)`` Shows the SQL and bound params, does not show results.
-- ``debug($query->all())`` Shows the ResultSet properties (not the results).
-- ``debug($query->toArray())`` An easy way to show each of the results.
-- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
-- ``debug($query->first())`` Show the properties of a single entity.
-- ``debug((string)$query->first())`` Show the properties of a single entity as JSON.
+- ``debug($query)`` Montre le SQL et les paramètres liés, ne montre pas les
+  résultats.
+- ``debug($query->all())`` Montre les propriétés de ResultSet (pas les
+  résultats).
+- ``debug($query->toArray())`` Une façon facile de montrer chacun des résultats.
+- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` Résultats plus lisibles.
+- ``debug($query->first())`` Montre les propriétés d'une entity unique.
+- ``debug((string)$query->first())`` Montre les propriétés d'une entity unique
+  en JSON.
 
 Récupérer une Entity Unique avec une Clé Primaire
 =================================================
@@ -664,25 +668,25 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 à la fois la propriété ``_matchingData`` et la propriété standard d'association
 dans vos résultats.
 
-Using innerJoinWith
-~~~~~~~~~~~~~~~~~~~
+Utiliser innerJoinWith
+~~~~~~~~~~~~~~~~~~~~~~
 
-Using the ``matching()`` function, as we saw already, will create an ``INNER
-JOIN`` with the specified association and will also load the fields into the
-result set.
+Utiliser la fonction ``matching()``, comme nous l'avons vu précédemment, va
+créer un ``INNER JOIN`` avec l'association spécifiée et va aussi charger les
+champs dans un ensemble de résultats.
 
-There may be cases where you want to use ``matching()`` but are not interested
-in loading the fields into the result set. For this purpose, you can use
-``innerJoinWith()``::
+Il peut arriver que vous vouliez utiliser ``matching()`` mais que vous n'êtes
+pas interessé par le chargement des champs dans un ensemble de résultats. Dans
+ce cas, vous pouvez utiliser ``innerJoinWith()``::
 
     $query = $articles->find();
     $query->innerJoinWith('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
 
-The ``innerJoinWith()`` method works the same as ``matching()``, that
-means that you can use dot notation to join deeply nested
-associations::
+La méthode ``innerJoinWith()`` fonctionne de la même manière que ``matching()``,
+ce qui signifie que vous pouvez utiliser la notation par points pour faire des
+jointures pour les associations imbriquées profondémment::
 
     $query = $products->find()->innerJoinWith(
         'Shops.Cities.Countries', function ($q) {
@@ -690,20 +694,21 @@ associations::
         }
     );
 
-Again, the only difference is that no additional columns will be added to the
-result set, and no ``_matchingData`` property will be set.
+De même, la seule différence est qu'aucune colonne supplémentaire ne sera
+ajoutée à l'ensemble de résultats et aucune propriété ``_matchingData`` ne sera
+définie.
 
 .. versionadded:: 3.1
-    Query::innerJoinWith() was added in 3.1
+    Query::innerJoinWith() a été ajoutée dans 3.1
 
-Using notMatching
-~~~~~~~~~~~~~~~~~
+Utiliser notMatching
+~~~~~~~~~~~~~~~~~~~~
 
-The opposite of ``matching()`` is ``notMatching()``. This function will change
-the query so that it filters results that have no relation to the specified
-association::
+L'opposé de ``matching()`` est ``notMatching()``. Cette fonction va changer
+la requête pour qu'elle filtre les résultats qui n'ont pas de relation avec
+l'association spécifiée::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
 
     $query = $articlesTable
         ->find()
@@ -711,10 +716,10 @@ association::
             return $q->where(['Tags.name' => 'boring']);
         });
 
-The above example will find all articles that were not tagged with the word
-``boring``.  You can apply this method to HasMany associations as well. You could,
-for example, find all the authors with no published articles in the last 10
-days::
+L'exemple ci-dessus va trouver tous les articles qui n'étaient pas taggés avec
+le mot ``boring``. Vous pouvez aussi utiliser cette méthode avec les
+associations HasMany. Vous pouvez, par exemple, trouver tous les auteurs qui
+n'ont aucun article dans les 10 derniers jours::
 
     $query = $authorsTable
         ->find()
@@ -722,9 +727,9 @@ days::
             return $q->where(['Articles.created >=' => new \DateTime('-10 days')]);
         });
 
-It is also possible to use this method for filtering out records not matching
-deep associations. For example, you could find articles that have not been
-commented on by a certain user::
+Il est aussi possible d'utiliser cette méthode pour filtrer les enregistrements
+qui ne matchent pas les associations profondes. Par exemple, vous pouvez
+trouver les articles qui n'ont pas été commentés par un utilisateur précis::
 
     $query = $articlesTable
         ->find()
@@ -732,10 +737,10 @@ commented on by a certain user::
             return $q->where(['username' => 'jose']);
         });
 
-Since articles with no comments at all also satisfy the condition above, you may
-want to combine ``matching()`` and ``notMatching()`` in the same query. The
-following example will find articles having at least one comment, but not
-commented by a certain user::
+Puisque les articles avec aucun commentaire satisfont aussi la condition
+du dessus, vous pouvez combiner ``matching()`` et ``notMatching()`` dans la
+même requête. L'exemple suivant va trouver les articles ayant au moins un
+commentaire, mais non commentés par un utilisateur précis::
 
     $query = $articlesTable
         ->find()
@@ -746,15 +751,16 @@ commented by a certain user::
 
 .. note::
 
-    As ``notMatching()`` will create a ``LEFT JOIN``, you might want to consider
-    calling ``distinct`` on the find query as you can get duplicate rows
-    otherwise.
+    Comme ``notMatching()`` va créer un ``LEFT JOIN``, vous pouvez envisager
+    d'appeler ``distinct`` sur la requête find puisque sinon vous allez avoir
+    des lignes dupliquées.
 
-Keep in mind that contrary to the ``matching()`` function, ``notMatching()``
-will not add any data to the ``_matchingData`` property in the results.
+Gardez à l'esprit que le contraire de la fonction ``matching()``,
+``notMatching()`` ne va pas ajouter toutes les données à la propriété
+``_matchingData`` dans les résultats.
 
 .. versionadded:: 3.1
-    Query::notMatching() was added in 3.1
+    Query::notMatching() a été ajoutée dans 3.1
 
 Using leftJoinWith
 ~~~~~~~~~~~~~~~~~~
