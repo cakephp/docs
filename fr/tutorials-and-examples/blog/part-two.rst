@@ -632,7 +632,7 @@ articles, ainsi :
     </table>
 
 Utiliser :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` permet de
-créer un lien qui utilise du JavaScript pour supprimer notre post en faisant
+créer un lien qui utilise du JavaScript pour supprimer notre article en faisant
 une requête POST.
 
 .. warning::
