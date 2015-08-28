@@ -428,6 +428,15 @@ La classe ``Shell`` fournit quelques méthodes pour afficher le contenu::
     // Ecrire avec stderr et arrêter le processus
     $this->error('Erreur Fatale');
 
+Elle fournit aussi deux méthodes pratiques en ce qui concerne le niveau de
+sortie::
+
+    // Apparaîtrait seulement quand la sortie verbeuse est activée (-v)
+    $this->verbose('Message verbeux');
+
+    // Apparaîtrait à tous les niveaux.
+    $this->quiet('Message silencieux');
+
 Le Shell a aussi quelques méthodes pour nettoyer la sortie, créer des lignes
 blanches, ou dessiner une ligne de tirets::
 
