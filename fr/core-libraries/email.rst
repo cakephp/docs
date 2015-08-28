@@ -497,17 +497,19 @@ aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
     {
         public function welcome($user)
         {
-            $this->_email->profile('default');
-            $this->_email->to($user->email);
-            $this->_email->subject(sprintf('Welcome %s', $user->name));
+            $this
+                ->to($user->email)
+                ->subject(sprintf('Welcome %s', $user->name))
+                ->template('welcome_mail') // By default template with same name as method name is used.
+                ->layout('custom');
         }
 
         public function resetPassword($user)
         {
-            $this->_email->profile('default');
-            $this->_email->to($user->email);
-            $this->_email->subject('Reset password');
-            $this->set(['token' => $user->token]);
+            $this
+                ->to($user->email)
+                ->subject('Reset password')
+                ->set(['token' => $user->token]);
         }
     }
 
