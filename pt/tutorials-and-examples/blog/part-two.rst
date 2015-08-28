@@ -514,7 +514,7 @@ Deletando artigos
 =================
 
 A seguir, vamos criar uma forma de deletar artigos. Comece com uma action
-``delete()`` no ``ArticlesController``:`
+``delete()`` no ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
