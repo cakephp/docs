@@ -1,5 +1,5 @@
-Tutorial - Criando um Blog
-##########################
+Tutorial - Criando um Blog - Parte 1
+####################################
 
 Este tutorial irá orientá-lo através da criação de um simples blog.
 Faremos a instalação do CakePHP, criaremos um banco de dados e implementaremos a
