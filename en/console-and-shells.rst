@@ -205,7 +205,7 @@ properties attached to your shell::
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
