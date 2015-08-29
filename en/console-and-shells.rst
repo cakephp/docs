@@ -37,7 +37,7 @@ section will be in bash, but the CakePHP Console is Windows-compatible as well.
 This example assumes that the user is currently logged into a bash prompt and is
 currently at the root of a CakePHP application.
 
-A CakePHP application contains ``src/Shell`` and ``src/Shell/Task`` directories that contain all of its 
+A CakePHP application contains ``src/Shell`` and ``src/Shell/Task`` directories that contain all of its
 shells and tasks. It also comes with an executable in the ``bin`` directory::
 
     $ cd /path/to/app
@@ -205,7 +205,7 @@ properties attached to your shell::
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
@@ -402,6 +402,14 @@ The ``Shell`` class provides a few methods for outputting content::
 
     // Write to stderr and stop the process
     $this->error('Fatal error');
+
+It also provides two convenience methods regarding the output level::
+
+    // Would only appear when verbose output is enabled (-v)
+    $this->verbose('Verbose message');
+
+    // Would appear at all levels.
+    $this->quiet('Quiet message');
 
 Shell also includes methods for clearing output, creating blank lines, or
 drawing a line of dashes::

@@ -627,7 +627,7 @@ les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
         public function testMyFunction()
         {
-            $this->loadFixtures('Article', 'Comment');
+            $this->loadFixtures('Articles', 'Comments');
         }
     }
 

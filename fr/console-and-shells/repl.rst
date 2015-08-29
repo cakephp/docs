@@ -23,7 +23,7 @@ des requêtes en utilisant les models de votre application::
     // object(Cake\ORM\Table)(
     //
     // )
-    >>> $articles->find();
+    >>> $articles->find()->all();
 
 Puisque votre application a été démarrée, vous pouvez aussi tester le routing
 en utilisant le REPL::

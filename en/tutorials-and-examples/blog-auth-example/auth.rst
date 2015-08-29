@@ -5,7 +5,7 @@ Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wante
 secure access to certain URLs, based on the logged-in
 user. We also have another requirement: to allow our blog to have multiple authors
 who can create, edit, and delete their own articles while
-disallowing other authors to make any changes to articles they do not own.
+disallowing other authors from making changes to articles they do not own.
 
 Creating All User-Related Code
 ==============================
@@ -26,7 +26,7 @@ taking advantage of another convention: By using the username and password
 columns in a users table, CakePHP will be able to auto-configure most things for
 us when implementing the user login.
 
-Next step is to create our Users table, responsible for finding, saving and
+Next step is to create our UsersTable class, responsible for finding, saving and
 validating any user data::
 
     // src/Model/Table/UsersTable.php
@@ -99,7 +99,7 @@ with CakePHP::
 
     }
 
-In the same way we created the views for our articles or by using the code
+In the same way we created the views for our articles by using the code
 generation tool, we can implement the user views. For the purpose of this
 tutorial, we will show just the add.ctp:
 
@@ -353,17 +353,17 @@ config::
         return false;
     }
 
-We just created a very simple authorization mechanism. In this case the users
-with role ``admin`` will be able to access any URL in the site when logged in,
-but the rest of them (i.e the role ``author``) can't do anything different from
-not logged in users.
+We just created a simple authorization mechanism. Users with the ``admin``
+role will be able to access any URL in the site when logged-in. All other
+users -- those with the ``author`` role -- will have the same access as
+users who aren't logged-in.
 
-This is not exactly what we wanted, so we need to supply more rules to
-our ``isAuthorized()`` method. But instead of doing it in AppController, let's
-delegate each controller to supply those extra rules. The rules we're going to
-add to ArticlesController should allow authors to create articles but prevent the
-edition of articles if the author does not match. Open the file ``ArticlesController.php``
-and add the following content::
+This is not exactly what we want. We need to supply more rules to our
+``isAuthorized()`` method. However instead of doing it in AppController,
+we'll delegate supplying those extra rules to each individual controller.
+The rules we're going to add to ArticlesController should permit authors
+to create articles but prevent authors form editing articles they do not
+own.  Add the following content to your ``ArticlesController.php``::
 
     // src/Controller/ArticlesController.php
 

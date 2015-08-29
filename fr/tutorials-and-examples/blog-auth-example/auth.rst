@@ -29,7 +29,7 @@ nom d'utilisateur et du mot de passe dans une table users, CakePHP sera
 capable de configurer automatiquement la plupart des choses pour nous quand nous
 réaliserons la connexion de l'utilisateur.
 
-La prochaine étape est de créer notre table Users, qui a la
+La prochaine étape est de créer notre classe ``UsersTable``, qui a la
 responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
 
     // src/Model/Table/UsersTable.php
@@ -361,18 +361,18 @@ config de Auth::
         return false;
     }
 
-Nous venons de créer un mécanisme très simple d'autorisation. Dans ce cas, les
-utilisateurs avec le role ``admin`` sera capable d'accéder à tout URL dans le
-site quand ils sont connectés, mais les autres (par ex le role ``author``) ne
-peut rien faire d'autre par rapport aux utilisateurs non connectés.
+Nous venons de créer un mécanisme très simple d'autorisation. Les utilisateurs
+avec le role ``admin`` pourront accéder à toutes les URL du site quand ils
+sont connectés. Tous les autres utilisateurs -- ceux avec le role ``author`` --
+auront le même accès que les utilisateurs qui ne sont pas loggés.
 
-Ce n'est pas exactement ce que nous souhaitions, donc nous avons besoin de
-déterminer et fournir plus de règles à notre méthode ``isAuthorized()``. Mais
-plutôt que de le faire dans AppController, déléguons à chaque controller la
-gestion de ces règles supplémentaires. Les règles que nous allons ajouter
-à ArticlesController permettront aux auteurs de créer des articles mais
-empêcheront l'édition des articles si l'auteur ne correspond pas. Ouvrez le
-fichier ``ArticlesController.php`` et ajoutez le contenu suivant::
+Ce n'est pas exactement ce que nous souhaitons. Nous devons fournir plus de
+règles à notre méthode ``isAuthorized()``. Cependant au lieu de le faire
+dans AppController, nous déléguons la gestion de ces règles supplémentaires
+à chaque controller individuellement. Les règles que nous allons ajouter à
+ArticlesController devraient permettre aux auteurs de créer des articles mais
+évitent aux auteurs de modifier les articles qui ne leur appartiennent pas.
+Ajoutez le contenu suivant à votre ``ArticlesController.php``::
 
     // src/Controller/ArticlesController.php
 

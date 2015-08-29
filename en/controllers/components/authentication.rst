@@ -184,7 +184,7 @@ This will require your ``UsersTable`` to have finder method ``findAuth()``.
 In the example shown below the query is modified to fetch only required fields
 and add condition::
 
-    public function findAuth(\Cake\ORM\Query $query, array $option)
+    public function findAuth(\Cake\ORM\Query $query, array $options)
     {
         $query
             ->select(['id', 'username', 'password'])

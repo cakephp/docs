@@ -143,7 +143,7 @@ Database 設定
 次にDBがどこにありどうやって接続するのかCakeに教えます。
 殆どの場合これっきり設定はいじりません。
 
-この設定はとてもわかりやすいはずです。 ``Datasources.default`` のなかにある 配列を in the **config/app.php** にコピペして、
+この設定はとてもわかりやすいはずです。 ``Datasources.default`` のなかにある 配列を **config/app.php** にコピペして、
 設定します。設定例は以下になります。::
 
     return [

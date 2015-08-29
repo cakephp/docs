@@ -104,7 +104,7 @@ Francês
 
 Português brasileiro
 --------------------
-- `Comunidade CakePHP brasileira <http://cakephp-fr.org>`_
+- `Comunidade CakePHP brasileira <http://cakephp-br.org>`_
 
 .. meta::
     :title lang=pt: Onde conseguir ajuda

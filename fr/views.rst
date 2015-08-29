@@ -726,9 +726,11 @@ CakePHP, les classes de vue ont quelques conventions:
 Vous voudrez aussi étendre ``View`` pour vous assurer que les choses
 fonctionnent correctement::
 
-    // dans src/View/PdfView.php
+    // Dans src/View/PdfView.php
+    namespace App\View;
 
-    App::uses('View', 'View');
+    use Cake\View\View;
+
     class PdfView extends View
     {
         public function render($view = null, $layout = null)
