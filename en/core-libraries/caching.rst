@@ -238,7 +238,7 @@ Counters for various things are easily stored in a cache. For example, a simple
 countdown for remaining 'slots' in a contest could be stored in Cache. The
 Cache class exposes atomic ways to increment/decrement counter values in an easy
 way. Atomic operations are important for these values as it reduces the risk of
-contention, and ability for two users to simultaneously lower the value by one,
+contention, a scenario where two users simultaneously lower the value by one,
 resulting in an incorrect value.
 
 After setting an integer value, you can manipulate it using
