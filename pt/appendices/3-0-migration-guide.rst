@@ -118,3 +118,32 @@ Especificações/Configurações de objetos
   de configuração-de-instância. Os códigos que anteriormente acessavam, por exemplo
   ``$object->settings``, devem ser atualizados para usar ``$object->config()``
   alternativamente.
+
+Cache
+=====
+
+* ``Memcache`` foi removido, use
+  :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached` alternativamente.
+* Cache engines são carregados sob demanda no primeiro uso.
+* :php:meth:`Cake\\Cache\\Cache::engine()` foi adicionado.
+* :php:meth:`Cake\\Cache\\Cache::enabled()` foi adicionado. Substituindo a
+  opção de configuração ``Cache.disable``.
+* :php:meth:`Cake\\Cache\\Cache::enable()` foi adicionado.
+* :php:meth:`Cake\\Cache\\Cache::disable()` foi adicionado.
+* Configuração de cache agora é imutável. Se você precisa alterar a
+  configuração, será necessário desfazer-se da configuração e recriá-la. Isso
+  previne problemas de sincronização com as opções de configuração.
+* ``Cache::set()`` foi removido. É recomendado criar múltiplas configurações de
+  cache para substituir ajustes de configuração em tempo de execução
+  anteriormente possíveis com ``Cache::set()``.
+* Todas as subclasses ``CacheEngine`` agora implementam um método ``config()``.
+* :php:meth:`Cake\\Cache\\Cache::readMany()`,
+  :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
+  e :php:meth:`Cake\\Cache\\Cache::writeMany()` foram adicionados.
+
+Todos os métodos :php:class:`Cake\\Cache\\Cache\\CacheEngine` agora são
+responsáveis por manipular o prefixo chave configurado. O
+:php:meth:`Cake\\Cache\\CacheEngine::write()` não mais permite definir a
+duração na escrita, a duração é captada pela configuração de tempo de execução
+do mecanismo de cache. Chamar um método cache com uma chuva vazia irá lançar
+uma :php:class:`InvalidArgumentException` ao invés de retornar ``false``.
