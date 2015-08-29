@@ -147,3 +147,30 @@ responsáveis por manipular o prefixo chave configurado. O
 duração na escrita, a duração é captada pela configuração de tempo de execução
 do mecanismo de cache. Chamar um método cache com uma chuva vazia irá lançar
 uma :php:class:`InvalidArgumentException` ao invés de retornar ``false``.
+
+Core
+====
+
+App
+---
+
+- ``App::pluginPath()`` foi removido. Use ``CakePlugin::path()``
+  alternativamente.
+- ``App::build()`` foi removido.
+- ``App::location()`` foi removido.
+- ``App::paths()`` foi removido.
+- ``App::load()`` foi removido.
+- ``App::objects()`` foi removido.
+- ``App::RESET`` foi removido.
+- ``App::APPEND`` foi removido.
+- ``App::PREPEND`` foi removido.
+- ``App::REGISTER`` foi removido.
+
+Plugin
+------
+
+- :php:meth:`Cake\\Core\\Plugin::load()` não configura um autoloader a não ser
+  que você defina a opção ``autoload`` para ``true``.
+- Quando carregando plugins, você não pode mais prover um callable.
+- Quando carregando plugins, você não pode mais prover um array de arquivos de
+  configuração para carregar.
