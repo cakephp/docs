@@ -169,8 +169,45 @@ App
 Plugin
 ------
 
-- :php:meth:`Cake\\Core\\Plugin::load()` não configura um autoloader a não ser
-  que você defina a opção ``autoload`` para ``true``.
-- Quando carregando plugins, você não pode mais prover um callable.
-- Quando carregando plugins, você não pode mais prover um array de arquivos de
-  configuração para carregar.
+- O :php:meth:`Cake\\Core\\Plugin::load()` não configura a carga automática 
+  a menos que você defina a opção ``autoload`` como ``true``.
+- Quanto estiver carregando plugins você não pode mais fornecer um ``callable``.
+- Quanto estiver carregando plugins você não pode mais fornecer um array de
+  arquivos de configuração para carregar.
+  
+
+Configure
+---------
+
+- O ``Cake\Configure\PhpReader`` foi renomeado para
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
+- O ``Cake\Configure\IniReader`` foi renomeado para
+  :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
+- O ``Cake\Configure\ConfigReaderInterface`` foi renomeado para
+  :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
+- O :php:meth:`Cake\\Core\\Configure::consume()` foi adicionado.
+- O :php:meth:`Cake\\Core\\Configure::load()` agora espera o nome de arquivo 
+  sem o sufixo de extensão como isso pode ser derivado do mecanismo.
+  Ex.: para usar o PhpConfig use ``app`` para carregar ``app.php``.
+- Definir uma variável ``$config`` no arquivo PHP config está obsoleto.
+  :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` agora espera que o
+  arquivo de configuração retorne um array.
+- Um novo mecanismo de configuração :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig` 
+  foi adicionado.
+
+Object
+------
+
+A classe ``Object`` foi removida. Ela anteriormente continha 
+um monte de métodos que eram utilizados em vários locais no framework. 
+O mais útil destes métodos foi extraido como um ``trait``.
+Você pode usar o :php:trait:`Cake\\Log\\LogTrait` para acessar o método
+``log()``. O :php:trait:`Cake\\Routing\\RequestActionTrait` fornece o
+método ``requestAction()``.
+
+Console
+=======
+
+O executável ``cake`` foi movido do diretório ``app/Console`` para o diretório
+``bin`` dentro do esqueleto da aplicação. Você pode agora invocar o console do
+CakePHP com ``bin/cake``.
