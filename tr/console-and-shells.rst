@@ -180,7 +180,7 @@ yüklediğiniz gibi, kabuklarda da yükleyebilirsiniz. Yüklenmiş modeller, kab
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }

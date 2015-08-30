@@ -188,7 +188,7 @@ são definidos como propriedades anexas à sua shell::
             if (empty($this->args[0])) {
                 return $this->error('Por favor, indique um nome de usuário.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
