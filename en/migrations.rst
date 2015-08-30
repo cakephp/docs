@@ -85,7 +85,7 @@ Let's imagine that you'd like to add a new ``products`` table::
 
 .. note:
 
-        You may also choose to use the underscore_from as migration label i.e.::
+        You may also choose to use the underscore_form as migration label i.e.::
         
         bin/cake bake migration create_products name:string description:text created modified
 
