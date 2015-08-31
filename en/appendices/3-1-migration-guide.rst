@@ -107,8 +107,8 @@ RequestHandlerComponent
 - ``addInputType()`` and ``viewClassMap()`` are deprecated. You should use
   ``config()`` to modify this configuration data at runtime.
 - When ``inputTypeMap`` or ``viewClassMap`` are defined in the component
-  settings they will *overwrite* the default values. This change makes it
-  possible to remove default configuration.
+  settings, they will *overwrite* the default values. This change makes it
+  possible to remove the default configuration.
 
 Network
 =======
