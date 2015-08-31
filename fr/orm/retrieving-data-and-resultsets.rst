@@ -767,7 +767,7 @@ Utiliser leftJoinWith
 ~~~~~~~~~~~~~~~~~~~~~
 
 Dans certaines situations, vous aurez à calculer un résultat selon une
-association, sans avoir à charger tous les enregistrements pour cela. Par
+association, sans avoir à charger tous les enregistrements. Par
 exemple, si vous voulez charger le nombre total de commentaires qu'un article
 a, ainsi que toutes les données de l'article, vous pouvez utiliser la fonction
 ``leftJoinWith()``::
@@ -778,10 +778,10 @@ a, ainsi que toutes les données de l'article, vous pouvez utiliser la fonction
         ->group(['Articles.id'])
         ->autoFields(true);
 
-Les résultats pour la requête ci-dessus va contenir les données de l'article et
+Le résultate de la requête ci-dessus va contenir les données de l'article et
 la propriété ``total_comments`` pour chacun d'eux.
 
-``leftJoinWith()`` peut aussi être utilisé avec des associations profondes.
+``leftJoinWith()`` peut aussi être utilisée avec des associations profondes.
 C'est utile par exemple pour rapporter le nombre d'articles taggés par l'auteur
 avec un certain mot::
 
