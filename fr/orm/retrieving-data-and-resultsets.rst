@@ -677,7 +677,7 @@ créer un ``INNER JOIN`` avec l'association spécifiée et va aussi charger les
 champs dans un ensemble de résultats.
 
 Il peut arriver que vous vouliez utiliser ``matching()`` mais que vous n'êtes
-pas interessé par le chargement des champs dans un ensemble de résultats. Dans
+pas intéressé par le chargement des champs dans un ensemble de résultats. Dans
 ce cas, vous pouvez utiliser ``innerJoinWith()``::
 
     $query = $articles->find();
@@ -687,7 +687,7 @@ ce cas, vous pouvez utiliser ``innerJoinWith()``::
 
 La méthode ``innerJoinWith()`` fonctionne de la même manière que ``matching()``,
 ce qui signifie que vous pouvez utiliser la notation par points pour faire des
-jointures pour les associations imbriquées profondémment::
+jointures pour les associations imbriquées profondément::
 
     $query = $products->find()->innerJoinWith(
         'Shops.Cities.Countries', function ($q) {
@@ -778,7 +778,7 @@ a, ainsi que toutes les données de l'article, vous pouvez utiliser la fonction
         ->group(['Articles.id'])
         ->autoFields(true);
 
-Le résultate de la requête ci-dessus va contenir les données de l'article et
+Le résultat de la requête ci-dessus va contenir les données de l'article et
 la propriété ``total_comments`` pour chacun d'eux.
 
 ``leftJoinWith()`` peut aussi être utilisée avec des associations profondes.
@@ -807,7 +807,7 @@ Changer les Stratégies de Récupération
 
 Comme vous le savez peut-être déjà, les associations ``belongsTo`` et ``hasOne``
 sont chargées en utilisant un ``JOIN`` dans la requête du finder principal.
-Alors que ceci améliore la requête et la vitesse de récupération des données et
+Bien que ceci améliore la requête et la vitesse de récupération des données et
 permet de créer des conditions plus parlantes lors de la récupération des
 données, cela peut devenir un problème quand vous devez appliquer certaines
 clauses à la requête finder pour l'association, comme ``order()`` ou
@@ -878,7 +878,7 @@ Lazy loading des Associations
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer
-à les sections :ref:`lazy-load-associations` et
+aux sections :ref:`lazy-load-associations` et
 :ref:`loading-additional-associations` pour plus d'informations.
 
 Travailler avec des Ensembles de Résultat
@@ -955,7 +955,7 @@ une liste des tags uniques sur une collection d'articles assez facilement::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
-Ci-dessous quelques autres examples des méthodes de collection utilisées
+Ci-dessous quelques autres exemples des méthodes de collection utilisées
 avec des ensembles de données::
 
     // Filtre les lignes sur une propriété calculée
