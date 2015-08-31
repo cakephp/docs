@@ -92,6 +92,13 @@ commande. Imaginons que vous souhaitez ajouter une nouvelle table ``products``::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
+.. note:
+
+        Vous pouvez aussi choisir d'utiliser la forme_en_underscore pour nommer
+        le label de migration, par exemple::
+
+        bin/cake bake migration create_products name:string description:text created modified
+
 La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci::
 
         class CreateProductsTable extends AbstractMigration
@@ -391,7 +398,7 @@ options de chacune des commandes::
 Vous pouvez passer n'importe quelle option que la commande de la console
 accepterait.
 La seule exception étant la commande ``markMigrated`` qui attend le numéro de
-version de la migration à marquer comme "migrée" comme premier argument. 
+version de la migration à marquer comme "migrée" comme premier argument.
 Passez le tableau de paramètres en second argument pour cette méthode.
 
 En option, vous pouvez passer ces paramètres au constructeur de la classe.
