@@ -104,6 +104,11 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` now switches the layout and template based on
   the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
   instead of ``startup()``.
+- ``addInputType()`` and ``viewClassMap()`` are deprecated. You should use
+  ``config()`` to modify this configuration data at runtime.
+- When ``inputTypeMap`` or ``viewClassMap`` are defined in the component
+  settings they will *overwrite* the default values. This change makes it
+  possible to remove default configuration.
 
 Network
 =======
