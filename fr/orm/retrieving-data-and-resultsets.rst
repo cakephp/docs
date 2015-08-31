@@ -15,7 +15,7 @@ entities.
 Débugger les Queries et les ResultSets
 ======================================
 
-Etant donné que l'ORM retourne maintenant les Collections et les Entities,
+Etant donné que l'ORM retourne maintenant des Collections et des Entities,
 débugger ces objets peut être plus compliqué qu'avec les versions précédentes
 de CakePHP. Il y a maintenant plusieurs façons d'inspecter les données
 retournées par l'ORM.
@@ -26,9 +26,10 @@ retournées par l'ORM.
   résultats).
 - ``debug($query->toArray())`` Une façon facile de montrer chacun des résultats.
 - ``debug(json_encode($query, JSON_PRETTY_PRINT))`` Résultats plus lisibles.
-- ``debug($query->first())`` Montre les propriétés d'une entity unique.
-- ``debug((string)$query->first())`` Montre les propriétés d'une entity unique
-  en JSON.
+- ``debug($query->first())`` Montre les propriétés de la première entity que
+  votre requête retournera.
+- ``debug((string)$query->first())`` Montre les propriétés de la première entity
+  que votre requête retournera en JSON.
 
 Récupérer une Entity Unique avec une Clé Primaire
 =================================================
@@ -637,7 +638,7 @@ avec les articles récemment publiés en utilisant ce qui suit::
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtrer des associations profondes est étonnement facile, et la syntaxe doit
+Filtrer des associations imbriquées est étonnamment facile, et la syntaxe doit
 déjà vous être familière::
 
     // Dans un controller ou une table de méthode.
