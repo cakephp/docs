@@ -187,7 +187,7 @@ Checking if an Entity Has Been Modified
 .. php:method:: dirty($field = null, $dirty = null)
 
 You may want to make code conditional based on whether or not properties have
-changed in an entity. For example, may only want to validate fields when they
+changed in an entity. For example, you may only want to validate fields when they
 change::
 
     // See if the title has been modified.
@@ -200,7 +200,7 @@ array properties::
     $article->comments[] = $newComment;
     $article->dirty('comments', true);
 
-In addition you can also base you conditional code on the original properties values
+In addition you can also base your conditional code on the original property values
 by using the ``getOriginal()`` method. This method will either return the original
 value of the property if it has been modified or its actual value.
 
@@ -282,7 +282,7 @@ fallback behavior if a field is not specifically named::
         ];
     }
 
-If the ``*`` property is not defined it will default to ``false``.
+.. note:: If the ``*`` property is not defined it will default to ``false``.
 
 Avoiding Mass Assignment Protection
 -----------------------------------
@@ -318,7 +318,7 @@ to the :ref:`changing-accessible-fields` section for more information.
 Bypassing Field Guarding
 ------------------------
 
-There are sometimes situations when you want to allow mass-assignment to guarded
+There are some situations when you want to allow mass-assignment to guarded
 fields::
 
     $article->set($properties, ['guard' => false]);
