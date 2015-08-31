@@ -211,3 +211,72 @@ Console
 O executável ``cake`` foi movido do diretório ``app/Console`` para o diretório
 ``bin`` dentro do esqueleto da aplicação. Você pode agora invocar o console do
 CakePHP com ``bin/cake``.
+
+TaskCollection Substituído
+--------------------------
+
+Essa classe foi renomeada para :php:class:`Cake\\Console\\TaskRegistry`.
+Veja a seção em :doc:`/core-libraries/registry-objects` para mais informações
+sobre funcionalidades fornecidas pela nova classe. Você pode usar o ``cake 
+upgrade rename_collections`` para ajuda ao atualizar seu código. Tarefas não
+tem mais acesso a callbacks, como nunca houve nenhum callback para se usar.
+
+Shell
+-----
+
+- O ``Shell::__construct()`` foi alterado. Ele agora usa uma instância de
+  :php:class:`Cake\\Console\\ConsoleIo`.
+- O ``Shell::param()`` foi adicionado como um acesso conveniente aos parâmetros.
+
+Adicionalmente todos os métodos shell serão transformados em camel case quando 
+invocados. Por exemplo, se você tem um método ``hello_world()`` dentro de um
+shell e chama ele com ``bin/cake my_shell hello_world``, você terá que renomear
+o método para ``helloWorld``. Não há necessidade de mudanças no modo que você
+chama os métodos/comandos.
+
+ConsoleOptionParser
+-------------------
+
+- O ``ConsoleOptionParser::merge()`` foi adicionado para mesclar os parsers.
+
+ConsoleInputArgument
+--------------------
+
+- O ``ConsoleInputArgument::isEqualTo()`` foi adicionado para comparar dois argumentos.
+
+Shell / Tarefa
+==============
+
+Os Shells e Tarefas foram movidas de ``Console/Command`` e
+``Console/Command/Task`` para ``Shell`` e ``Shell/Task``, respectivamente.
+
+ApiShell Removido
+-----------------
+
+O ApiShell foi removido pois ele não fornecia nenhum beneficio além do
+próprio arquivo fonte e da documentação/`API <http://api.cakephp.org/>`_ online.
+
+SchemaShell Removido
+--------------------
+
+O SchemaShell foi removido como ele nunca foi uma implementação completa de migração de
+banco de dados e surgiram ferramentas melhores como o `Phinx <https://phinx.org/>`_. 
+Ele foi substituído pelo `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_ 
+que funciona como um empacotamento entre o CakePHP e o `Phinx <https://phinx.org/>`_.
+
+ExtractTask
+-----------
+
+- O ``bin/cake i18n extract`` não inclui mais mensagens de validação sem tradução.
+  Se você quiser mensagens de validação traduzidas você deve encapsula-las com
+  chamadas `__()` como qualquer outro conteúdo.
+
+BakeShell / TemplateTask
+------------------------
+
+- O Bake não faz mais parte do fonte do núcleo e é suplantado pelo 
+  `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
+- Os templates do Bake foram movidos para **src/Template/Bake**.
+- A sintaxe dos templates do Bake agora usam tags estilo erb (``<% %>``) para denotar
+  lógica de template, permitindo código php ser tratado como texto plano.
+- O comando ``bake view`` foi renomeado para ``bake template``.
