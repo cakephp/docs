@@ -848,7 +848,7 @@ Récupération Avec la Stratégie de Sous-Requête
 ----------------------------------------------
 
 Avec la taille de vos tables qui grandit, la récupération des associations
-peut s'avérer lente, spécialement si vous faîtes des grandes requêtes en une
+peut devenir lente, spécialement si vous faîtes des grandes requêtes en une
 fois. Un bon moyen d'optimiser le chargement des associations ``hasMany`` et
 ``belongsToMany`` est d'utiliser la stratégie ``subquery``::
 
@@ -861,11 +861,12 @@ fois. Un bon moyen d'optimiser le chargement des associations ``hasMany`` et
         ]
     ]);
 
-Le résultat va rester le même comme en utilisant la stratégie par défaut, mais
+Le résultat va rester le même que pour la stratégie par défaut, mais
 ceci peut grandement améliorer la requête et son temps de récupération dans
 certaines bases de données, en particulier cela va permettre de récupérer des
-grandes portions de données en même temps dans des bases de données qui limitent
-le nombre de paramètres liés par requête, comme le **Serveur Microsoft SQL**.
+grandes portions de données en même temps, dans des bases de données qui
+limitent le nombre de paramètres liés par requête, comme le **Serveur Microsoft
+SQL**.
 
 Vous pouvez aussi rendre la stratégie pour les associations permanente en
 faisant::
