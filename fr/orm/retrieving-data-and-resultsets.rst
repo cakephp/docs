@@ -763,13 +763,14 @@ Gardez à l'esprit que le contraire de la fonction ``matching()``,
 .. versionadded:: 3.1
     Query::notMatching() a été ajoutée dans 3.1
 
-Using leftJoinWith
-~~~~~~~~~~~~~~~~~~
+Utiliser leftJoinWith
+~~~~~~~~~~~~~~~~~~~~~
 
-On certain occasions you may want to calculate a result based on an association,
-without having to load all the records for it. For example, if you wanted to
-load the total number of comments an article has along with all the article
-data, you can use the ``leftJoinWith()`` function::
+Dans certaines situations, vous aurez à calculer un résultat selon une
+association, sans avoir à charger tous les enregistrements pour cela. Par
+exemple, si vous voulez charger le nombre total de commentaires qu'un article
+a, ainsi que toutes les données de l'article, vous pouvez utiliser la fonction
+``leftJoinWith()``::
 
     $query = $articlesTable->find();
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
@@ -777,12 +778,12 @@ data, you can use the ``leftJoinWith()`` function::
         ->group(['Articles.id'])
         ->autoFields(true);
 
-The results for the above query will contain the article data and the
-``total_comments`` property for each of them.
+Les résultats pour la requête ci-dessus va contenir les données de l'article et
+la propriété ``total_comments`` pour chacun d'eux.
 
-``leftJoinWith()`` can also be used with deeply nested associations. This is
-useful, for example, for bringing the count of articles tagged with a certain
-word, per author::
+``leftJoinWith()`` peut aussi être utilisé avec des associations profondes.
+C'est utile par exemple pour rapporter le nombre d'articles taggés par l'auteur
+avec un certain mot::
 
     $query = $authorsTable->find();
         ->find()
@@ -793,34 +794,36 @@ word, per author::
         ->group(['Authors.id'])
         ->autoFields(true);
 
-This function will not load any columns from the specified associations into the
-result set.
+Cette fonction ne va charger aucune colonne des associations spécifiées dans
+l'ensemble de résultats.
 
 .. versionadded:: 3.1
-    Query::leftJoinWith() was added in 3.1
+    Query::leftJoinWith() a été ajoutée dans 3.1
 
 .. end-contain
 
-Changing Fetching Strategies
-----------------------------
+Changer les Stratégies de Récupération
+--------------------------------------
 
-As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
-using a ``JOIN`` in the main finder query. While this improves query and
-fetching speed and allows for creating more expressive conditions when
-retrieving data, this may be a problem when you want to apply certain clauses to
-the finder query for the association, such as ``order()`` or ``limit()``.
+Comme vous le savez peut-être déjà, les associations ``belongsTo`` et ``hasOne``
+sont chargées en utilisant un ``JOIN`` dans la requête du finder principal.
+Alors que ceci améliore la requête et la vitesse de récupération des données et
+permet de créer des conditions plus parlantes lors de la récupération des
+données, cela peut devenir un problème quand vous devez appliquer certaines
+clauses à la requête finder pour l'association, comme ``order()`` ou
+``limit()``.
 
-For example, if you wanted to get the first comment of an article as an
-association::
+Par exemple, si vous souhaitez récupérer le premier commentaire d'un article
+en association::
 
    $articles->hasOne('FirstComment', [
         'className' => 'Comments',
         'foreignKey' => 'article_id'
    ]);
 
-In order to correctly fetch the data from this association, we will need to tell
-the query to use the ``select`` strategy, since we want order by a particular
-column::
+Afin de récupérer correctement les données de cette association, nous devrons
+dire à la requête d'utiliser la stratégie ``select``, puisque nous voulons
+trier selon une colonne en particulier::
 
     $query = $articles->find()->contain([
         'FirstComment' => [
@@ -831,22 +834,23 @@ column::
         ]
     ]);
 
-Dynamically changing the strategy in this way will only apply to a specific
-query. If you want to make the strategy change permanent you can do::
+Changer la stratégie de façon dynamique de cette façon va seulement l'appliquer
+pour une requête spécifique. Si vous souhaitez rendre le changement de stratégie
+permanent, vous pouvez faire::
 
     $articles->FirstComment->strategy('select');
 
-Using the ``select`` strategy is also a great way of making associations with
-tables in another database, since it would not be possible to fetch records
-using ``joins``.
+Utiliser la stratégie ``select`` est aussi une bonne façon de faire des
+associations avec des tables d'une autre base de données, puisqu'il ne serait
+pas possible de récupérer des enregistrements en utilisant ``joins``.
 
-Fetching With The Subquery Strategy
------------------------------------
+Récupération Avec la Stratégie de Sous-Requête
+----------------------------------------------
 
-As your tables grow in size, fetching associations from them can become
-slower, especially if you are querying big batches at once. A good way of
-optimizing association loading for ``hasMany`` and ``belongsToMany``
-associations is by using the ``subquery`` strategy::
+Avec la taille de vos tables qui grandit, la récupération des associations
+peut s'avérer lente, spécialement si vous faîtes des grandes requêtes en une
+fois. Un bon moyen d'optimiser le chargement des associations ``hasMany`` et
+``belongsToMany`` est d'utiliser la stratégie ``subquery``::
 
     $query = $articles->find()->contain([
         'Comments' => [
@@ -857,13 +861,14 @@ associations is by using the ``subquery`` strategy::
         ]
     ]);
 
-The result will remain the same as with using the default strategy, but this
-can greatly improve the query and fetching time in some databases, in
-particular it will allow to fetch big chunks of data at the same time in
-databases that limit the amount of bound parameters per query, such as
-**Microsoft SQL Server**.
+Le résultat va rester le même comme en utilisant la stratégie par défaut, mais
+ceci peut grandement améliorer la requête et son temps de récupération dans
+certaines bases de données, en particulier cela va permettre de récupérer des
+grandes portions de données en même temps dans des bases de données qui limitent
+le nombre de paramètres liés par requête, comme le **Serveur Microsoft SQL**.
 
-You can also make the strategy permanent for the association by doing::
+Vous pouvez aussi rendre la stratégie pour les associations permanente en
+faisant::
 
     $articles->Comments->strategy('subquery');
 
