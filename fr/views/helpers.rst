@@ -316,7 +316,7 @@ Une fois que votre helper est chargé, vous pouvez l'utiliser dans vos vues en
 accédant à l'attribut de vue correspondant::
 
     <!-- fait un lien en utilisant le nouveau helper -->
-    <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
+    <?= $this->Link->makeEdit('Changez cette Recette', '/recipes/edit/5') ?>
 
 .. _helper-api:
 

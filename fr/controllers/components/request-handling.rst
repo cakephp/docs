@@ -170,7 +170,7 @@ au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
     $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
-    // Après 3.1.0, vous devez utiliser
+    // Depuis 3.1.0, vous devez utiliser
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
 Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
