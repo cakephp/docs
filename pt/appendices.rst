@@ -17,7 +17,7 @@ estará disponível apenas no branch ``3.0`` do git.
     appendices/orm-migration
 
 Guia de Migração para a versão 3.1
-===================
+==================================
 
 .. toctree::
     :maxdepth: 1
