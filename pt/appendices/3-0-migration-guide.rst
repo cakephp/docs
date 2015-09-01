@@ -280,3 +280,71 @@ BakeShell / TemplateTask
 - A sintaxe dos templates do Bake agora usam tags estilo erb (``<% %>``) para denotar
   lógica de template, permitindo código php ser tratado como texto plano.
 - O comando ``bake view`` foi renomeado para ``bake template``.
+
+
+Eventos
+=======
+
+O método ``getEventManager()``, foi removido de todos os objetos que continham.
+Um método ``eventManager()`` é agora fornecido pelo ``EventManagerTrait``. O
+``EventManagerTrait`` contém a lógica de instanciação e manutenção de uma
+referência para um gerenciador local de eventos.
+
+O subsistema ``Event`` teve um monte de funcionalidades opcionais removidas.
+Quando despachar eventos você não poderá mais usar as seguintes opções:
+
+* ``passParams`` Essa opção está agora ativada sempre implicitamente. Você
+  não pode desliga-la.
+* ``break`` Essa opção foi removida. Você deve agora parar os eventos.
+* ``breakOn`` Essa opção foi removida. Você deve agora parar os eventos.
+
+Log
+===
+
+* As configurações do Log agora não imutáveis. Se você precisa alterar a configuração
+  você deve primeiro derrubar a configuração e então recria-la. Isso previne problemas
+  de sincronização com opções de configuração.
+* Os mecanismos de Log agora são carregados tardiamente após a primeira escrita nos logs.
+* O :php:meth:`Cake\\Log\\Log::engine()` foi adicionado.
+* Os seguintes métodos foram removidos de :php:class:`Cake\\Log\\Log` ::
+  ``defaultLevels()``, ``enabled()``, ``enable()``, ``disable()``.
+* Você não pode mais criar níveis personalizados usando ``Log::levels()``.
+* Quando configurar os loggers você deve usar ``'levels'`` ao invés de ``'types'``.
+* Você não pode mais especificar níveis personalizados de log. Você deve usar o conjunto
+  padrão de níveis de log. Você deve usar escopos de log para criar arquivos de log
+  personalizados ou manipulações específicas para diferentes seções de sua aplicação.
+  Usando um nível de log não padrão irá lançar uma exceção.
+* O :php:trait:`Cake\\Log\\LogTrait` foi adicionado. Você pode usar este trait em suas
+  classes para adicionar o método ``log()``.
+* O escopo de log passado para :php:meth:`Cake\\Log\\Log::write()` é agora
+  encaminhado para o método ``write()`` dos mecanismos de log de maneira a fornecer
+  um melhor contexto para os mecanismos.
+* Os mecanismos de Log agora são necessários para implementar ``Psr\Log\LogInterface`` invés do
+  próprio ``LogInterface`` do Cake. Em geral, se você herdou o :php:class:`Cake\\Log\\Engine\\BaseEngine`
+  você só precisa renomear o método ``write()`` para ``log()``.
+* O :php:meth:`Cake\\Log\\Engine\\FileLog` agora grava arquivos em ``ROOT/logs`` no lugar de ``ROOT/tmp/logs``.
+
+Roteamento
+==========
+
+Parâmetros Nomeados
+-------------------
+
+Os parâmetros nomeados foram removidos no 3.0. Os parâmetros nomeados foram
+adicionados no 1.2.0 como uma versão 'bonita' de parâmetros de requisição.
+Enquanto o benefício visual é discutível, os problemas criados pelos parâmetros
+nomeados não são.
+
+Os parâmetros nomeados necessitam manipulação especial no CakePHP assim como
+em qualquer biblioteca PHP ou JavaScript que necessite interagir com eles,
+os parâmetros nomeados não são implementados ou entendidos por qualquer biblioteca
+*exceto* o CakePHP.  A complexidade adicionada e o código necessário para dar suporte
+aos parâmetros nomeados não justificam a sua existência, e eles foram removidos.
+No lugar deles, você deve agora usar o padrão de parâmetros de requisição
+(querystring) ou argumentos passados configurados nas rotas. Por padrão 
+o ``Router`` irá tratar qualquer parâmetro adicional ao ``Router::url()`` 
+como argumentos de requisição.
+
+Como muitas aplicações ainda precisarão analisar URLs contendo parâmetros nomeados,
+o :php:meth:`Cake\\Routing\\Router::parseNamedParams()` foi adicionado para
+permitir compatibilidade com URLs existentes.
