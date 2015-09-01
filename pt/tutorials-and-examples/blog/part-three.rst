@@ -1,5 +1,5 @@
-Blog Tutorial - Part 3
-######################
+Tutorial - Criando um Blog - Parte 3
+####################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

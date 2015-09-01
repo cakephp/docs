@@ -1,5 +1,5 @@
-Tutorial de Bookmarker Parte 2
-##############################
+Tutorial - Criando um Bookmarker - Parte 2
+##########################################
 
 Depois de terminar a :doc:`primeira parte deste tutorial
 </tutorials-and-examples/bookmarks/intro>`, você deve ter uma

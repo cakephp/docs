@@ -1,5 +1,5 @@
-Blog Tutorial - Authentication and Authorization
-################################################
+Tutorial - Criando um Blog - Autenticação e Autorização
+#######################################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
