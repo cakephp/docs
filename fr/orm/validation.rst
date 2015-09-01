@@ -66,7 +66,7 @@ Cela aide à trouver les données qui doivent être validées en correspondance
 avec l'endroit où elles seront sauvegardées.
 
 Pour créer un objet validation dans votre table, créez la fonction
-``validationDefault()`` ::
+``validationDefault()``::
 
     use Cake\ORM\Table;
     use Cake\Validation\Validator;

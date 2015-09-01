@@ -81,7 +81,7 @@ conditionnellement des helpers::
         }
     }
 
-Vous pouvez également utiliser la méthode ``beforeRender`` de vos controller
+Vous pouvez également utiliser la méthode ``beforeRender()`` de vos controllers
 pour charger des helpers::
 
     class ArticlesController extends AppController
@@ -152,7 +152,7 @@ L'utilisation de la configuration du helper vous permet de configurer de manièr
 déclarative vos helpers et de garder la logique de configuration en dehors des
 actions de votre controller. Si vous avez des options de configuration qui ne
 peuvent pas être inclues comme une partie de la classe de déclaration, vous
-pouvez les définir dans le callback beforeRender de votre controller::
+pouvez les définir dans le callback ``beforeRender()`` de votre controller::
 
     class PostsController extends AppController
     {
@@ -222,8 +222,8 @@ Charger les Helpers à la Volée
 ------------------------------
 
 Il peut y avoir des cas où vous aurez besoin de charger dynamiquement un helper
-depuis l'intérieur d'une vue. Pour cela, Vous pouvez utiliser le
-:php:class:`Cake\\View\\HelperRegistry` ::
+depuis l'intérieur d'une vue. Pour cela, vous pouvez utiliser le
+:php:class:`Cake\\View\\HelperRegistry`::
 
     // Les deux solutions fonctionnent.
     $mediaHelper = $this->loadHelper('Media', $mediaConfig);
@@ -285,8 +285,8 @@ feriez dans un controller::
 
         public function makeEdit($title, $url)
         {
-            // Utilise le Helper Html pour afficher the HTML helper to output
-            // les données formatées:
+            // Utilise le Helper Html pour afficher la sortie
+            // des données formatées:
 
             $link = $this->Html->link($title, $url, ['class' => 'edit']);
 
@@ -314,12 +314,9 @@ Une fois que vous avez créé votre helper et l'avez placé dans
 
 Une fois que votre helper est chargé, vous pouvez l'utiliser dans vos vues en
 accédant à l'attribut de vue correspondant::
-Une fois que votre controller est au courant de cette nouvelle classe, vous
-pouvez l'utiliser dans vos vues en accédant à un objet nommé d'après le
-helper::
 
     <!-- fait un lien en utilisant le nouveau helper -->
-   <?= $this->Link->makeEdit('Changez cette Recette', '/recipes/edit/5'); ?>
+    <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
 
 .. _helper-api:
 
@@ -351,9 +348,9 @@ aucune des méthodes de callback.
 
 .. php:method:: beforeRender(Event $event, $viewFile)
 
-    La méthode beforeRender est appelée après la méthode beforeRender du
-    controller, mais avant les rendus du controller de la vue et du layout
-    Reçoit le fichier à rendre en argument.
+    La méthode ``beforeRender()`` est appelée après la méthode
+   ``beforeRender()`` du controller, mais avant les rendus du controller de la
+    vue et du layout. Reçoit le fichier à rendre en argument.
 
 .. php:method:: afterRender(Event $event, $viewFile)
 

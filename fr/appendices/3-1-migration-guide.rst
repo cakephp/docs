@@ -111,6 +111,11 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` échange maintenant le layout et le template selon
   l'extension parsée ou l'en-tête ``Accept-Type`` dans le callback
   ``beforeRender()`` plutôt que dans ``startup()``.
+- ``addInputType()`` et ``viewClassMap()`` sont dépréciées. Vous devez utiliser
+  ``config()`` pour modifier ces données de configuration à la volée.
+- Quand ``inputTypeMap`` ou ``viewClassMap`` sont définies dans les
+  configurations du component, elles vont *surcharger* les valeurs par défaut.
+  Ce changement rend possible la suppression de la configuration par défaut.
 
 Network
 =======

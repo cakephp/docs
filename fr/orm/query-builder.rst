@@ -1159,7 +1159,7 @@ en utilisant ``query()``::
 Généralement, il est plus facile d'insérer des données en utilisant les
 entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
 ``SELECT`` et ``INSERT`` ensemble, vous pouvez créer des requêtes de style
-``INSERT INTO ... SELECT`` ::
+``INSERT INTO ... SELECT``::
 
     $select = $articles->find()
         ->select(['title', 'body', 'published'])

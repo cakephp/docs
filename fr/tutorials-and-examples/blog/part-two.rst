@@ -66,7 +66,7 @@ l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
 ``ArticlesController.php`` à l'intérieur du dossier **src/Controller**. Voici
-à quoi devrait ressembler le controller de base ::
+à quoi devrait ressembler le controller de base::
 
     // src/Controller/ArticlesController.php
 
@@ -418,7 +418,7 @@ activée.
 
 A présent, revenons en arrière et modifions notre vue
 **src/Template/Articles/index.ctp** pour ajouter un lien "Ajouter un article".
-Ajoutez la ligne suivante avant ``<table>`` ::
+Ajoutez la ligne suivante avant ``<table>``::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
 

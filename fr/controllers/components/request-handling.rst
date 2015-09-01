@@ -139,23 +139,30 @@ non-AJAX., le code suivant vous permettra de le faire::
 Décoder Automatiquement les Données de la Requête
 =================================================
 
-.. php:method:: addInputType($type, $handler)
+Ajoute une requête de décodage de données. Le gestionnaire devrait contenir un
+callback, et tour autre argument supplémentaire pour le callback. Le callback
+devrait retourner un tableau de données contenues dans la requête. Par exemple,
+ajouter un gestionnaire de CSV pourrait ressembler à ceci::
 
-
-Ajoute une requête de décodage de données. Le gestionnaire devrait
-contenir un callback, et tour autre argument supplémentaire pour le
-callback. Le callback devrait retourner un tableau de données contenues
-dans la requête. Par exemple, ajouter un gestionnaire de CSV dans le
-callback beforeFilter de votre controller pourrait ressembler à ceci ::
-
-    $parser = function ($data) {
-        $rows = str_getcsv($data, "\n");
-        foreach ($rows as &$row) {
-            $row = str_getcsv($row, ',');
+    class ArticlesController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $parser = function ($data) {
+                $rows = str_getcsv($data, "\n");
+                foreach ($rows as &$row) {
+                    $row = str_getcsv($row, ',');
+                }
+                return $rows;
+            };
+            $this->loadComponent('RequestHandler', [
+                'inputTypeMap' => [
+                    'csv' => [$parser]
+                ]
+            ]);
         }
-        return $rows;
-    };
-    $this->RequestHandler->addInputType('csv', [$parser]);
+    }
 
 Vous pouvez utiliser n'importe quel `callback <http://php.net/callback>`_ pour
 la fonction de gestion. Vous pouvez aussi passer des arguments supplémentaires
@@ -163,9 +170,16 @@ au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
     $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
+    // Après 3.1.0, vous devez utiliser
+    $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
+
 Le contenu ci-dessus créera ``$this->request->data`` un tableau des données
 d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
 d'objets ``StdClass``.
+
+.. deprecated:: 3.1.0
+    Depuis 3.1.0 la méthode ``addInputType()`` est dépréciée. Vous devez
+    utiliser ``config()`` pour ajouter des types d'input à la volée.
 
 Vérifier les Préférences de Content-Type
 ========================================
@@ -248,8 +262,6 @@ Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 Utiliser les ViewClasses personnalisées
 =======================================
 
-.. php:method:: viewClassMap($type, $viewClass)
-
 Quand vous utilisez JsonView/XmlView, vous aurez envie peut-être de surcharger
 la serialization par défaut avec une classe View par défaut, ou ajouter des
 classes View pour d'autres types.
@@ -269,6 +281,10 @@ la configuration ``viewClassMap``::
             ]
         ]);
     }
+
+.. deprecated:: 3.1.0
+    Depuis 3.1.0, la méthode ``viewClassMap()`` est dépréciée. Vous devez
+    utiliser ``config()`` pour changer viewClassMap à la volée.
 
 .. meta::
     :title lang=fr: Request Handling (Gestion des requêtes)

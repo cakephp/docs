@@ -180,10 +180,10 @@ comme ceci::
     $statistics = new UserStatistic();
     $this->Order->eventManager()->on($statistics);
 
-Comme vous pouvez le voir dans le code ci-dessus, la fonction ``attach`` va
+Comme vous pouvez le voir dans le code ci-dessus, la fonction ``on()`` va
 accepter les instances de l'interface ``EventListener``. En interne, le
 gestionnaire d'évènement va utiliser ``implementedEvents()`` pour attacher
-les bonnes callbacks.
+les bons callbacks.
 
 Enregistrer des Listeners Anonymes
 ----------------------------------
@@ -236,7 +236,7 @@ après les autres, utiliser un nombre au-dessus de ``10`` le fera.
 
 Si deux callbacks ont la même valeur de priorité, elles seront exécutées selon
 l'ordre dans lequel elles ont été attachées. Vous définissez les priorités en
-utilisant la méthode ``attach`` pour les callbacks et en la déclarant dans
+utilisant la méthode ``on`` pour les callbacks et en la déclarant dans
 la fonction ``implementedEvents()`` pour les listeners d'évènement::
 
     // Définir la priorité pour une callback
