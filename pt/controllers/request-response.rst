@@ -1,5 +1,5 @@
-Request & Response Objects
-##########################
+Objetos de requisição e resposta
+################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

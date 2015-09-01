@@ -1,5 +1,5 @@
-JSON and XML views
-##################
+Views JSON & XML
+################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

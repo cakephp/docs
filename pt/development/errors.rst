@@ -1,5 +1,5 @@
-Error & Exception Handling
-##########################
+Erros & Exceções
+################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

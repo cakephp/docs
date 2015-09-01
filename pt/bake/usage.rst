@@ -1,5 +1,5 @@
-Code Generation with Bake
-#########################
+Geração de código com o Bake
+############################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
