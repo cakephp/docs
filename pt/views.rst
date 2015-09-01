@@ -1,5 +1,5 @@
-Views (Visão)
-#############
+Views (Visualização)
+####################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
