@@ -223,7 +223,7 @@ Charger les Helpers à la Volée
 
 Il peut y avoir des cas où vous aurez besoin de charger dynamiquement un helper
 depuis l'intérieur d'une vue. Pour cela, Vous pouvez utiliser le
-:php:class:`Cake\\View\\HelperRegistry` ::
+:php:class:`Cake\\View\\HelperRegistry`::
 
     // Les deux solutions fonctionnent.
     $mediaHelper = $this->loadHelper('Media', $mediaConfig);

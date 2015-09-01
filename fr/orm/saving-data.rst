@@ -244,7 +244,7 @@ Vos données de requête doivent ressembler à ceci::
     ];
 
 Si vous souhaitez lier des entrées belongsToMany existantes et en créer de
-nouvelles en même temps, vous pouvez utiliser la forme étendue ::
+nouvelles en même temps, vous pouvez utiliser la forme étendue::
 
     $data = [
         'title' => 'My title',
@@ -647,7 +647,7 @@ L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
 non une insertion ou une mise à jour doit être faite. Si la méthode
 ``isNew()`` retourne ``true`` et que l'entity a une valeur de clé primaire,
 une requête 'exists' sera faîte. La requête 'exists' peut être supprimée en
-passant ``'checkExisting' => false`` à l'argument ``$options`` ::
+passant ``'checkExisting' => false`` à l'argument ``$options``::
 
     $articles->save($article, ['checkExisting' => false]);
 

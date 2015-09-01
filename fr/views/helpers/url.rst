@@ -73,7 +73,7 @@ URL avec des paramètres GET et des paramètres nommés (Ancre)::
     // Affiche
     /posts/search?foo=bar#first
 
-URL utilisant une route labellisée ::
+URL utilisant une route labellisée::
 
     echo $this->Url->build(['_name' => 'produit-page', 'slug' => 'i-m-slug']);
 

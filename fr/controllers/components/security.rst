@@ -174,7 +174,7 @@ au démarrage::
     }
 
 Cette exemple forcera toutes les actions qui proviennent de la
-"route" Admin à être effectuées via des requêtes sécurisées ::
+"route" Admin à être effectuées via des requêtes sécurisées::
 
     namespace App\Controller;
 
