@@ -1,5 +1,5 @@
-Running Shells as Cron Jobs
-###########################
+Executando Shells como Cron Jobs
+################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
