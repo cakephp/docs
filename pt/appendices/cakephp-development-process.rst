@@ -1,5 +1,5 @@
-CakePHP Development Process
-###########################
+Processo de desenvolvimento no CakePHP
+######################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

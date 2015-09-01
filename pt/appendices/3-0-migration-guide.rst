@@ -1,5 +1,5 @@
-3.0 Migration Guide
-###################
+3.0 Guia de migração
+####################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
