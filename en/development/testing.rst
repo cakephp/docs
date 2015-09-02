@@ -19,7 +19,7 @@ through using either a `PHAR package <http://phpunit.de/#download>`_ or `Compose
 Install PHPUnit with Composer
 -----------------------------
 
-To install PHPUnit with Composer
+To install PHPUnit with Composer::
 
     $ php composer.phar require --dev phpunit/phpunit
     
