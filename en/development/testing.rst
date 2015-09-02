@@ -19,15 +19,11 @@ through using either a `PHAR package <http://phpunit.de/#download>`_ or `Compose
 Install PHPUnit with Composer
 -----------------------------
 
-To install PHPUnit with Composer, add the following to you application's
-``require`` section in its ``composer.json``::
+To install PHPUnit with Composer
 
-    "phpunit/phpunit": "*",
-
-After updating your composer.json, run Composer again inside your application
-directory::
-
-    $ php composer.phar install
+    $ php composer.phar require --dev phpunit/phpunit
+    
+This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
 
