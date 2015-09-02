@@ -153,10 +153,10 @@ pouvez ensuite lire ces valeurs à partir de votre gestionnaire::
 Le code ci-dessus montre comment vous pouvez configurer le gestionnaire
 de session de la Base de Données avec un model de l'application. Lors de
 l'utilisation de noms de classe comme handler.engine, CakePHP va s'attendre
-à trouver votre classe dans le namespace ``Network\\Session``. Par exemple,
+à trouver votre classe dans le namespace ``Network\Session``. Par exemple,
 si vous aviez une classe ``AppSessionHandler``, le fichier doit être
 **src/Network/Session/AppSessionHandler.php**, et le nom de classe doit être
-``App\\Network\\Session\\AppSessionHandler``. Vous pouvez aussi utiliser les
+``App\Network\Session\AppSessionHandler``. Vous pouvez aussi utiliser les
 gestionnaires de session à partir des plugins. En configurant le moteur
 avec ``MyPlugin.PluginSessionHandler``.
 

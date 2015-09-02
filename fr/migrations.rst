@@ -92,12 +92,12 @@ commande. Imaginons que vous souhaitez ajouter une nouvelle table ``products``::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
-.. note:
+.. note::
 
         Vous pouvez aussi choisir d'utiliser la forme_en_underscore pour nommer
         le label de migration, par exemple::
 
-        bin/cake bake migration create_products name:string description:text created modified
+            bin/cake bake migration create_products name:string description:text created modified
 
 La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci::
 

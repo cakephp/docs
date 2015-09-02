@@ -83,11 +83,11 @@ Let's imagine that you'd like to add a new ``products`` table::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
-.. note:
+.. note::
 
         You may also choose to use the underscore_form as migration label i.e.::
-        
-        bin/cake bake migration create_products name:string description:text created modified
+
+            bin/cake bake migration create_products name:string description:text created modified
 
 The above line will create a migration file looking like this::
 

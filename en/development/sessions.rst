@@ -143,7 +143,7 @@ application model. When using class names as your handler.engine, CakePHP will
 expect to find your class in the ``Network\Session`` namespace. For example, if
 you had a ``AppSessionHandler`` class,  the file should be
 **src/Network/Session/AppSessionHandler.php**, and the class name should be
-``App\\Network\\Session\\AppSessionHandler``. You can also use session handlers
+``App\Network\Session\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
 Database Sessions
