@@ -285,6 +285,8 @@ seront lancées à partir de certains components du cœur de CakePHP:
 
     Une behavior du model n'a pas pu être trouvé.
 
+.. php:namespace:: Cake\Datasource\Exception
+
 .. php:exception:: RecordNotFoundException
 
     L'enregistrement demandé n'a pas pu être trouvé.
