@@ -348,3 +348,97 @@ como argumentos de requisição.
 Como muitas aplicações ainda precisarão analisar URLs contendo parâmetros nomeados,
 o :php:meth:`Cake\\Routing\\Router::parseNamedParams()` foi adicionado para
 permitir compatibilidade com URLs existentes.
+
+
+RequestActionTrait
+------------------
+
+- O :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` teve algumas de 
+  suas opções extras alteradas:
+
+  - o ``options[url]`` é agora ``options[query]``.
+  - o ``options[data]`` é agora ``options[post]``.
+  - os parâmetros nomeados não são mais suportados.
+
+Roteador
+--------
+
+* Os parâmetros nomeados foram removidos, veja acima para mais informações.
+* A opção ``full_base`` foi substituída com a opção ``_full``.
+* A opção ``ext`` foi substituída com a opção ``_ext``.
+* As opções ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext`` 
+  foram adicionadas.
+* As URLs em strings não são mais modificados pela adição de 
+  plugin/controller/nomes de prefixo.
+* A manipulação da rota padrão de ``fallback`` foi removida. Se nenhuma rota
+  combinar com o conjunto de parâmetros, o ``/`` será retornado.
+* As classes de rota são responsáveis por *toda* geração de URLs
+  incluindo parâmetros de requisição (query string). Isso faz com que as
+  rotas sejam muito mais poderosas e flexíveis.
+* Parâmetros persistentes foram removidos. Eles foram substituídos pelo
+  :php:meth:`Cake\\Routing\\Router::urlFilter()` que permite um jeito
+  mais flexível para mudar URLs sendo roteadas reversamente.
+* O ``Router::parseExtensions()`` foi removido. Use o 
+  :php:meth:`Cake\\Routing\\Router::extensions()` no lugar. Esse método
+  **deve** ser chamado antes das rotas serem conectadas. Ele não irá modificar
+  rotas existentes.
+* O ``Router::setExtensions()`` foi removido. Use o
+  :php:meth:`Cake\\Routing\\Router::extensions()` no lugar.
+* O ``Router::resourceMap()`` foi removido.
+* A opção ``[method]`` foi renomeada para ``_method``.
+* A habilidade de combinar cabeçalhos arbitrários com parâmetros no estilo
+  ``[]`` foi removida. Se você precisar combinar/analisar em condições 
+  arbitrárias considere usar classes personalizadas de roteamento.
+* O ``Router::promote()`` foi removido.
+* O ``Router::parse()`` irá agora lançar uma exceção quando uma URL não puder
+  ser atendida por nenhuma rota.
+* O ``Router::url()`` agora irá lançar uma exceção quando nenhuma rota combinar
+  com um conjunto de parâmetros.
+* Os escopos de rotas foram adicionados. Escopos de rotas permitem você
+  manter seu arquivo de rotas limpo e dar dicas de rotas em como otimizar
+  análise e reversão de rotas de URL.
+
+Route
+-----
+
+* O ``CakeRoute`` foi renomeado para ``Route``.
+* A assinatura de ``match()`` mudou para ``match($url, $context = [])``.
+  Veja :php:meth:`Cake\\Routing\\Route::match()` para mais informações sobre
+  a nova assinatura.
+
+Configuração de Filtros do Dispatcher Mudaram
+---------------------------------------------
+
+Os filtros do Dispatcher não são mais adicionados em sua aplicação usando
+o ``Configure``. Você deve agora anexa-los com 
+:php:class:`Cake\\Routing\\DispatcherFactory`. Isso significa que sua 
+aplicação usava ``Dispatcher.filters``, você deve usar agora o método
+:php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
+
+Além das mudanças de configuração, os filtros do dispatcher tiveram algumas
+convenções atualizadas e novas funcionalidades. Veja a documentação em
+:doc:`/development/dispatch-filters` para mais informações.
+
+
+Rede
+====
+
+Requisição
+----------
+
+* O ``CakeRequest`` foi renomeada para :php:class:`Cake\\Network\\Request`.
+* O :php:meth:`Cake\\Network\\Request::port()` foi adicionado.
+* O :php:meth:`Cake\\Network\\Request::scheme()` foi adicionado.
+* O :php:meth:`Cake\\Network\\Request::cookie()` foi adicionado.
+* O :php:attr:`Cake\\Network\\Request::$trustProxy` foi adicionado. Isso torna mais fácil
+  colocar aplicações CakePHP atrás de balanceadores de carga.
+* O :php:attr:`Cake\\Network\\Request::$data` não é mais mesclado com a chave de dados
+  prefixada, pois esse prefixo foi removido.
+* O :php:meth:`Cake\\Network\\Request::env()` foi adicionado.
+* O :php:meth:`Cake\\Network\\Request::acceptLanguage()` mudou de um método estático
+  para não-estático.
+* O detector de requisição para dispositivos móveis foi removido do núcleo. Agora o app
+  template adiciona detectores para dispositivos móveis usando a biblioteca ``MobileDetect``.
+* O método ``onlyAllow()`` foi renomeado para ``allowMethod()`` e não aceita mais "argumentos var".
+  Todos os nomes d emétodos precisam ser passados como primeiro argumento,
+  seja como string ou como array de strings.
