@@ -406,19 +406,28 @@ Route
   Veja :php:meth:`Cake\\Routing\\Route::match()` para mais informações sobre
   a nova assinatura.
 
-Configuração de Filtros do Dispatcher Mudaram
----------------------------------------------
+Configuração de Filtros do Despachante Mudaram
+----------------------------------------------
 
-Os filtros do Dispatcher não são mais adicionados em sua aplicação usando
+Os filtros do despachante não são mais adicionados em sua aplicação usando
 o ``Configure``. Você deve agora anexa-los com 
 :php:class:`Cake\\Routing\\DispatcherFactory`. Isso significa que sua 
 aplicação usava ``Dispatcher.filters``, você deve usar agora o método
 :php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
-Além das mudanças de configuração, os filtros do dispatcher tiveram algumas
+Além das mudanças de configuração, os filtros do despachante tiveram algumas
 convenções atualizadas e novas funcionalidades. Veja a documentação em
 :doc:`/development/dispatch-filters` para mais informações.
 
+Filter\AssetFilter
+------------------
+
+* Os itens de plugins e temas manipulados pelo AssetFilter não são mais lidos via
+  ``include``, ao invés disso eles são tratados como arquivos de texto plano.
+  Isso corrige um número de problemas com bibliotecas javascript como 
+  TinyMCE e ambientes com short_tags ativadas.
+* O suporte para a configuração ``Asset.filter`` e ganchos foram removidos. Essa
+  funcionalidade pode ser facilmente substituída  com um plugin ou filtro de despachante.
 
 Rede
 ====
