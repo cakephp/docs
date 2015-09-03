@@ -21,7 +21,7 @@ magique ``__call`` et sa méthode ``set()``.
 Pour utiliser le gestionnaire de message flash par défaut, vous pouvez utiliser
 la méthode ``set()``::
 
-    $this->Flash->set('This is a message');
+    $this->Flash->set('Ceci est un message');
 
 Pour créer des elements Flash personnalisés, la méthode magique ``__call``
 de FlashComponent vous permet d'utiliser un nom de méthode qui est lié à un
