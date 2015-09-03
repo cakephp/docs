@@ -440,5 +440,14 @@ Requisição
 * O detector de requisição para dispositivos móveis foi removido do núcleo. Agora o app
   template adiciona detectores para dispositivos móveis usando a biblioteca ``MobileDetect``.
 * O método ``onlyAllow()`` foi renomeado para ``allowMethod()`` e não aceita mais "argumentos var".
-  Todos os nomes d emétodos precisam ser passados como primeiro argumento,
+  Todos os nomes de métodos precisam ser passados como primeiro argumento,
   seja como string ou como array de strings.
+
+Resposta
+--------
+
+* O mapeamento do mimetype ``text/plain`` para extensão ``csv`` foi removido.
+  Como consequência o :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
+  não define a extensão para ``csv`` se o cabeçalho ``Accept`` tiver o mimetype ``text/plain``
+  que era um problema comum quando recebia uma requisição XHR do jQuery.
+  
