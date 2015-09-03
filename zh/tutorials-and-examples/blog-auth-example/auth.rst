@@ -20,8 +20,8 @@
         modified DATETIME DEFAULT NULL
     );
 
-我们遵循 CakePHP 的约定来给表命名，同时我们也利用了另一个约定：在表 users 表中
-使用 username 和 password 列，CakePHP 能够自动配置好实现用户登录的大部分工作。
+我们遵循CakePHP的约定来给表命名，同时我们也利用了另一个约定：在users表中使用
+username和password列，CakePHP能够自动配置好实现用户登录的大部分工作。
 
 下一步是创建 User 模型，负责查询、保存和验证任何用户数据::
 
