@@ -257,6 +257,20 @@ Example::
     ]);
     // Output '123 456,79 !'
 
+.. php:method:: ordinal(mixed $value)
+
+This method will output an ordinal number.
+
+Example::
+
+    echo Number::ordinal(1);
+    // Output '1st'
+
+    echo Number::ordinal(2);
+    // Output '2nd'
+
+    echo Number::ordinal(410);
+    // Output '410th'
 
 Format Differences
 ==================
