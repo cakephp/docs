@@ -22,7 +22,7 @@ Install PHPUnit with Composer
 To install PHPUnit with Composer::
 
     $ php composer.phar require --dev phpunit/phpunit
-    
+
 This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
@@ -167,7 +167,7 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-Calling the parent method is important in test cases, as TestCase::setUp()
+Calling the parent method is important in test cases, as ``TestCase::setUp()``
 does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
 storing the paths in :php:class:`~Cake\\Core\\App`.
 
@@ -448,9 +448,9 @@ Dynamic Data and Fixtures
 
 Since records for a fixture are declared as a class property, you cannot easily
 use functions or other dynamic data to define fixtures. To solve this problem,
-you can define ``$records`` in the init() function of your fixture. For example
-if you wanted all the created and modified timestamps to reflect today's date you
-could do the following::
+you can define ``$records`` in the ``init()`` function of your fixture. For
+example if you wanted all the created and modified timestamps to reflect today's
+date you could do the following::
 
     namespace App\Test\Fixture;
 
@@ -650,9 +650,9 @@ queries run against them.
 Creating a Test Method
 ----------------------
 
-Let's now add a method to test the function published() in the Article model.
-Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it now
-looks like this::
+Let's now add a method to test the function ``published()`` in the Articles
+table. Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it
+now looks like this::
 
     namespace App\Test\TestCase\Model\Table;
 

@@ -21,15 +21,12 @@ le `PHAR package <http://phpunit.de/#download>`_ ou avec
 Installer PHPUnit avec Composer
 -------------------------------
 
-Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
-``require`` de votre application dans son ``composer.json``::
+Pour installer PHPUnit avec Composer::
 
-    "phpunit/phpunit": "*",
+    $ php composer.phar require --dev phpunit/phpunit
 
-Après avoir mis à jour votre composer.json, lancez à nouveau Composer dans votre
-répertoire d'application::
-
-    $ php composer.phar install
+Ceci va ajouter la dépendance à la section ``require-dev`` de votre
+``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
 
 Vous pouvez maintenant lancer PHPUnit en utilisant::
 
@@ -46,11 +43,11 @@ lancer vos tests::
 Tester la Configuration de la Base de Données
 =============================================
 
-Souvenez-vous qu'il faut avoir debug activé dans votre fichier **config/app.php**
-avant de lancer des tests. Vous devrez aussi vous
-assurer d'ajouter une configuration de base de données ``test`` dans
-**config/app.php**. Cette configuration est utilisée par CakePHP pour les
-tables de fixture et les données::
+Souvenez-vous qu'il faut avoir debug activé dans votre fichier
+**config/app.php** avant de lancer des tests. Vous devrez aussi vous assurer
+d'ajouter une configuration de base de données ``test`` dans **config/app.php**.
+Cette configuration est utilisée par CakePHP pour les tables de fixture et les
+données::
 
     'Datasources' => [
         'test' => [
@@ -72,9 +69,9 @@ tables de fixture et les données::
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
-la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lançant un de ceux présents dans le cœur::
+Après avoir installé PHPUnit et configuré le ``test`` de la configuration de la
+base de données, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
+vos propres tests en lançant un de ceux présents dans le cœur::
 
     // Pour phpunit.phar
     $ php phpunit.phar
@@ -165,9 +162,9 @@ allons commencer avec ce qui suit::
         }
     }
 
-Nous compléterons ce squelette dans une minute. Nous avons ajouté deux
-méthodes pour commencer. Tout d'abord ``setUp()``. Cette méthode est
-appelée avant chaque méthode de *test* dans une classe de cas de test.
+Nous compléterons ce squelette dans une minute. Nous avons ajouté deux méthodes
+pour commencer. Tout d'abord ``setUp()``. Cette méthode est appelée avant chaque
+méthode de *test* dans une classe de cas de test.
 Les méthodes de configuration devraient initialiser les objets souhaités
 pour le test, et faire toute configuration souhaitée. Dans notre configuration
 nous ajouterons ce qui suit::
@@ -180,8 +177,8 @@ nous ajouterons ce qui suit::
     }
 
 Appeler la méthode parente est importante dans les cas de test, puisque
-TestCase::setUp() fait un certain nombre de choses comme fabriquer les valeurs
-dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
+``TestCase::setUp()`` fait un certain nombre de choses comme fabriquer les
+valeurs dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
 :php:class:`~Cake\\Core\\App`.
 
 Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques
@@ -198,10 +195,10 @@ assertions pour nous assurer que notre code crée la sortie que nous attendons::
     }
 
 Le test ci-dessus est simple mais montre le potentiel bénéfique de l'utilisation
-des cas de test. Nous utilisons ``assertContains()`` pour nous assurer que
-notre helper retourne une chaîne qui contient le contenu que nous attendons.
-Si le résultat ne contient pas le contenu attendu le test sera un échec, et
-nous savons que notre code est incorrect.
+des cas de test. Nous utilisons ``assertContains()`` pour nous assurer que notre
+helper retourne une chaîne qui contient le contenu que nous attendons. Si le
+résultat ne contient pas le contenu attendu le test sera un échec, et nous
+savons que notre code est incorrect.
 
 En utilisant les cas de test, vous pouvez facilement décrire la relation entre
 un ensemble d'entrées connues et leur sortie attendue. Cela vous aide à être
@@ -481,9 +478,9 @@ Les Données Dynamiques et les Fixtures
 Depuis que les enregistrements pour une fixture sont déclarés en propriété
 de classe, vous ne pouvez pas facilement utiliser les fonctions ou autres
 données dynamiques pour définir les fixtures. Pour résoudre ce problème,
-vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
-exemple, si vous voulez que tous les timestamps soient créés et mis à jours pour
-refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
+vous pouvez définir ``$records`` dans la fonction ``init()`` de votre fixture.
+Par exemple, si vous voulez que tous les timestamps soient créés et mis à jours
+pour refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     namespace App\Test\Fixture;
 
@@ -695,8 +692,8 @@ les fixtures sur lesquelles des requêtes vont être lancées.
 Créer une Méthode de Test
 -------------------------
 
-Ajoutons maintenant une méthode pour tester la fonction published() dans le
-model Article. Modifions le fichier
+Ajoutons maintenant une méthode pour tester la fonction ``published()`` dans la
+table Articles. Modifions le fichier
 **tests/TestCase/Model/Table/ArticlesTableTest.php** afin qu'il ressemble
 maintenant à ceci::
 
