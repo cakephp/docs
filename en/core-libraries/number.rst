@@ -327,6 +327,20 @@ Example::
 
 .. end-cakenumber
 
+Configure formatters
+====================
+
+.. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
+
+This method allows you to configure formatter defaults which persist across calls
+to various methods.
+
+Example::
+
+    Number::config('en_IN', \NumberFormatter::CURRENCY, [
+        'pattern' => '¤ #,##,##0'
+    ]);
+
 .. meta::
     :title lang=en: NumberHelper
     :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
