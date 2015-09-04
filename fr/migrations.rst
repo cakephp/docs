@@ -247,6 +247,48 @@ méthode ``table()``::
 Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisée
 comme clé primaire.
 
+Depuis Migrations 1.3, une nouvelle manière de gérer les clés primaires a été
+introduite. Pour l'utiliser, votre classe de migration devra étendre la
+nouvelle classe ``Migrations\AbstractMigration``.
+Vous pouvez définir la propriété ``autoId`` à ``false`` dans la classe de
+Migration, ce qui désactivera la création automatique de la colonne ``id``.
+Vous aurez cependant besoin de manuellement créer la colonne qui servira de clé
+primaire et devrez l'ajouter à la déclaration de la table::
+
+        use Migrations\AbstractMigration;
+
+        class CreateProductsTable extends AbstractMigration
+        {
+
+            public $autoId = false;
+
+            public function up()
+            {
+                $table = $this->table('products');
+                $table
+                    ->addColumn('id', 'integer', [
+                        'autoIncrement' => true,
+                        'limit' => 11
+                    ])
+                    ->addPrimaryKey('id')
+                    ->addColumn('name', 'string')
+                    ->addColumn('description', 'text')
+                    ->create();
+            }
+
+Comparée à la méthode précédente de gestion des clés primaires, cette méthode
+vous donne un plus grand contrôle sur la définition de la colonne de la clé
+primaire : signée ou non, limite, commentaire, etc.
+
+Toutes les migrations et les snapshots créés avec ``bake`` utiliseront cette
+nouvelle méthode si nécessaire.
+
+.. warning::
+
+    Gérer les clés primaires ne peut être fait que lors des opérations de
+    créations de tables. Ceci est dû à des limitations pour certains serveurs
+    de base de données supportés par le plugin.
+
 Collations
 ----------
 
