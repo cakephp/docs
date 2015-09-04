@@ -257,17 +257,22 @@ Example::
     ]);
     // Output '123 456,79 !'
 
-.. php:method:: ordinal(mixed $value)
+.. php:method:: ordinal(mixed $value, array $options = [])
 
 This method will output an ordinal number.
 
-Example::
+Examples::
 
     echo Number::ordinal(1);
     // Output '1st'
 
     echo Number::ordinal(2);
     // Output '2nd'
+
+    echo Number::ordinal(2, [
+        'locale' => 'fr_FR'
+    ]);
+    // Output '2e'
 
     echo Number::ordinal(410);
     // Output '410th'
