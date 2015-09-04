@@ -350,7 +350,7 @@ compatible syntax::
 
     $session->write('Config.language', 'eng');
     
-You may also specify one or multiple hashes like so:
+You may also specify one or multiple hashes like so::
 
     $session->write([
       'Config.theme', 'blue',
