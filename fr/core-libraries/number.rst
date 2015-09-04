@@ -262,6 +262,20 @@ Le paramètre ``$options`` est là où réside la réelle magie de cette méthod
     ]);
     // Sortie '123 456,79 !'
 
+.. php:method:: ordinal(mixed $value)
+
+Cette méthode va afficher un nombre ordinal.
+
+Example::
+
+    echo Number::ordinal(1);
+    // Affiche '1st'
+
+    echo Number::ordinal(2);
+    // Affiche '2nd'
+
+    echo Number::ordinal(410);
+    // Affiche '410th'
 
 Formatage Des Différences
 =========================
