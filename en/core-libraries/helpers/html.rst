@@ -108,15 +108,17 @@ methods of the HtmlHelper and how to use them.
 
     You can include CSS files from any loaded plugin using
     :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
-    You could use the following::
+    you could use the following::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
     If you want to include a CSS file which shares a name with a loaded
     plugin you can do the following. For example if you had a ``Blog`` plugin,
-    and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
+    and also wanted to include ``app/webroot/css/Blog.common.css``, you would:
 
     .. versionchanged:: 2.4
+
+    .. code-block:: php
 
         echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
@@ -127,7 +129,8 @@ methods of the HtmlHelper and how to use them.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: The type meta tag you want.
-    :param mixed $url: The URL for the meta tag, either a string or a :term:`routing array`.
+    :param mixed $url: The URL for the meta tag, either a string or a
+        :term:`routing array`.
     :param array $options: An array of :term:`html attributes`.
 
     This method is handy for linking to external resources like RSS/Atom feeds
@@ -291,7 +294,7 @@ methods of the HtmlHelper and how to use them.
         <img src="/img/cake_logo.png" alt="CakePHP" />
 
     To create an image link specify the link destination using the
-    ``url`` option in ``$htmlAttributes``. ::
+    ``url`` option in ``$options``. ::
 
         echo $this->Html->image("recipes/6.jpg", array(
             "alt" => "Brownies",
@@ -325,7 +328,7 @@ methods of the HtmlHelper and how to use them.
 
     If you want to include a image file which shares a name with a loaded
     plugin you can do the following. For example if you had a ``Blog`` plugin,
-    and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
+    and also wanted to include ``app/webroot/img/Blog.icon.png``, you would::
 
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
 
@@ -410,7 +413,7 @@ methods of the HtmlHelper and how to use them.
 
     When using named parameters, use the array syntax and include
     names for ALL parameters in the URL. Using the string syntax for
-    paramters (i.e. "recipes/view/6/comments:false" will result in
+    paramters (i.e. "recipes/view/6/comments:false") will result in
     the colon characters being HTML escaped and the link will not work
     as desired. ::
 
@@ -483,7 +486,7 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: media(string|array $path, array $options)
 
-    :param string|array $path: Path to the video file, relative to the
+    :param string|array $path: Path to the media file, relative to the
         `webroot/{$options['pathPrefix']}` directory. Or an array where each
         item itself can be a path string or an associate array containing keys
         `src` and `type`.
@@ -494,10 +497,10 @@ methods of the HtmlHelper and how to use them.
         - `type` Type of media element to generate, valid values are "audio"
           or "video". If type is not provided media type is guessed based on
           file's mime type.
-        - `text` Text to include inside the video tag
+        - `text` Text to include inside the audio/video tag
         - `pathPrefix` Path prefix to use for relative URLs, defaults to
           'files/'
-        - `fullBase` If provided the src attribute will get a full address
+        - `fullBase` If set to true, the src attribute will get a full address
           including domain name
 
     .. versionadded:: 2.1
@@ -576,10 +579,10 @@ methods of the HtmlHelper and how to use them.
     :param string $text: The content inside the div.
     :param array $options: An array of :term:`html attributes`.
 
-    Used for creating div-wrapped sections of markup. The first
-    parameter specifies a CSS class, and the second is used to supply
-    the text to be wrapped by div tags. If the last parameter has been
-    set to true, $text will be printed HTML-escaped.
+    Used for creating div-wrapped sections of markup. The first parameter
+    specifies a CSS class, and the second is used to supply the text to be
+    wrapped by div tags. If the 'escape' key has been to true in the last
+    parameter, $text will be printed HTML-escaped.
 
     If no text is specified, only an opening div tag is returned.:
 
@@ -624,9 +627,8 @@ methods of the HtmlHelper and how to use them.
     If you wish to override which block name is used, you can do so by setting
     ``$options['block']``.
 
-    ``$options['once']`` controls whether or
-    not you want to include this script once per request or more than
-    once. This defaults to true.
+    ``$options['once']`` controls whether or not you want to include this
+    script once per request or more than once. This defaults to true.
 
     You can use $options to set additional properties to the
     generated script tag. If an array of script tags is used, the
@@ -682,8 +684,8 @@ methods of the HtmlHelper and how to use them.
         echo $this->fetch('scriptBottom');
 
     You can include script files from any loaded plugin using
-    :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
-    You could use the following::
+    :term:`plugin syntax`. To include 
+    ``app/Plugin/DebugKit/webroot/js/toolbar.js`` you could use the following::
 
         echo $this->Html->script('DebugKit.toolbar.js');
 
@@ -702,10 +704,9 @@ methods of the HtmlHelper and how to use them.
     :param string $code: The code to go in the script tag.
     :param array $options: An array of :term:`html attributes`.
 
-    Generate a code block containing ``$code`` set
-    ``$options['inline']`` to false to have the script block appear in
-    the ``script`` view block. Other options defined will be added as attributes
-    to script tags.
+    Generate a code block containing ``$code``. Set ``$options['inline']`` to
+    false to have the script block appear in the ``script`` view block. Other
+    options defined will be added as attributes to script tags.
     ``$this->Html->scriptBlock('stuff', array('defer' => true));`` will
     create a script tag with ``defer="defer"`` attribute.
 
@@ -944,7 +945,7 @@ methods of the HtmlHelper and how to use them.
 
     :param mixed $url: A :term:`routing array`.
     :param mixed $full: Either a boolean to indicate whether or not the base path should
-        be included on an array of options for :php:meth:`Router::url()`
+        be included or an array of options for :php:meth:`Router::url()`
 
     Returns a URL pointing to a combination of controller and action.
     If $url is empty, it returns the REQUEST\_URI, otherwise it
