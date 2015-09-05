@@ -262,17 +262,22 @@ Le paramètre ``$options`` est là où réside la réelle magie de cette méthod
     ]);
     // Sortie '123 456,79 !'
 
-.. php:method:: ordinal(mixed $value)
+.. php:method:: ordinal(mixed $value, array $options = [])
 
 Cette méthode va afficher un nombre ordinal.
 
-Example::
+Exemples::
 
     echo Number::ordinal(1);
     // Affiche '1st'
 
     echo Number::ordinal(2);
     // Affiche '2nd'
+
+    echo Number::ordinal(2, [
+        'locale' => 'fr_FR'
+    ]);
+    // Affiche '2e'
 
     echo Number::ordinal(410);
     // Affiche '410th'
@@ -334,6 +339,20 @@ Example::
     // Sortie '[+123,456.79]'
 
 .. end-cakenumber
+
+Configurer le Formattage
+========================
+
+.. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
+
+Cette méthode vous permet de configurer le formattage par défaut qui sera
+utilisé de façon persistante à travers toutes les méthodes.
+
+Par exemple::
+
+    Number::config('en_IN', \NumberFormatter::CURRENCY, [
+        'pattern' => '¤ #,##,##0'
+    ]);
 
 .. meta::
     :title lang=fr: NumberHelper

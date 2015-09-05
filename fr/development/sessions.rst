@@ -373,6 +373,13 @@ compatible :php:meth:`Hash::extract()`::
 
      $session->write('Config.language', 'eng');
 
+Vous pouvez également spécifier un ou plusieurs hash de la manière suivante::
+
+    $session->write([
+      'Config.theme' => 'blue',
+      'Config.language' => 'eng',
+    ]);
+
 .. php:staticmethod:: delete($key)
 
 Quand vous avez besoin de supprimer des données de la session, vous pouvez
