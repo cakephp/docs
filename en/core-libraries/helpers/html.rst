@@ -326,7 +326,7 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->image('DebugKit.icon.png');
 
-    If you want to include a image file which shares a name with a loaded
+    If you want to include an image file which shares a name with a loaded
     plugin you can do the following. For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/img/Blog.icon.png``, you would::
 
@@ -358,7 +358,7 @@ methods of the HtmlHelper and how to use them.
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
-    Use ``'full_base'=>true`` option for absolute URLs::
+    Use ``'full_base' => true`` option for absolute URLs::
 
         echo $this->Html->link(
             'Dashboard',
@@ -376,7 +376,7 @@ methods of the HtmlHelper and how to use them.
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    Specify ``confirm`` key in options to display a JavaScript ``confirm()``
+    Specify ``confirm`` key in $options to display a JavaScript ``confirm()``
     dialog::
 
         echo $this->Html->link(
@@ -540,7 +540,7 @@ methods of the HtmlHelper and how to use them.
                 codecs='theora, vorbis'"/>
         </video>
 
-.. php:method:: tag(string $tag, string $text, array $htmlAttributes)
+.. php:method:: tag(string $tag, string $text, array $options)
 
     :param string $tag: The tag name being generated.
     :param string $text: The contents for the tag.
