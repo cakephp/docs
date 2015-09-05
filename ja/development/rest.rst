@@ -1,38 +1,38 @@
 REST
 ####
 
-最近のアプリケーションプログラマーは、サービスのコア機能を\
+最近のアプリケーションプログラマーは、サービスのコア機能を
 ユーザにオープンにする必要があると気付き始めています。
 簡単に提供でき、自由にコアAPIにアクセスできれば、広く受け入れられ、
 マッシュアップされたり、簡単に他のシステムと統合できます。
 
 簡単にあなたの作ったアプリケーションロジックにアクセスさせる方法は色々ありますが、
-RESTはその中でもすばらしい方法でしょう。
-とてもシンプルで、大抵はXMLベース(SOAPのようなものではなく、単純なXMLのこと)で、
-HTTPヘッダによって制御されます。
-CakePHPを使ってRESTのAPIを提供するのはすごく簡単です。
+REST はその中でもすばらしい方法でしょう。とてもシンプルで、大抵は XML ベース
+(SOAP のようなものではなく、単純な XML のこと) で、HTTP ヘッダによって制御されます。
+CakePHP を使って REST の API を提供するのはすごく簡単です。
 
 簡単なセットアップ
 ==================
 
-RESTを動かすための手っ取り早い方法は、 app/Config/routes.php ファイルに数行追記することです。
-Routerオブジェクトは、 ``mapResources()`` というメソッドを提供していて、
-これはコントローラへのRESTアクセスのために、いくつかのデフォルトルートを設定するものです。
-``mapResources()`` は、routes.phpの最後にある ``require CAKE . 'Config' . DS . 'routes.php';`` の記述や、
-routesをオーバーライドする他のroutesよりも前に呼び出す必要があります。
-例えば、レシピ(recipe)データベースにアクセスするRESTは、下記のようにします ::
+REST を動かすための手っ取り早い方法は、 app/Config/routes.php ファイルに数行追記することです。
+Router オブジェクトは、 ``mapResources()`` というメソッドを提供していて、
+これはコントローラへの REST アクセスのために、いくつかのデフォルトルートを設定するものです。
+``mapResources()`` は、routes.php の最後にある
+``require CAKE . 'Config' . DS . 'routes.php';`` の記述や、
+routes をオーバーライドする他の routes よりも前に呼び出す必要があります。
+例えば、レシピ (recipe) データベースにアクセスする REST は、下記のようにします ::
 
     //In app/Config/routes.php...
 
     Router::mapResources('recipes');
     Router::parseExtensions();
 
-最初の行は、簡単にRESTアクセス可能にするために、いくつかのデフォルトルートをセットしています。
-アクセス対象のメソッドには、最終的に受け取りたいフォーマット (例えば xml, json, rss) の指定が必要です。
-これらのルーティングは、HTTPリクエストメソッドに対応しています。
+最初の行は、簡単に REST アクセス可能にするために、いくつかのデフォルトルートをセットしています。
+``parseExtensions()`` メソッドで、最終的に受け取りたいフォーマット (例えば xml, json, rss) の
+指定が必要です。これらのルーティングは、HTTP リクエストメソッドに対応しています。
 
 =========== ===================== ==============================
-HTTP format URL.format            対応するコントローラアクション
+HTTP format URL format            対応するコントローラアクション
 =========== ===================== ==============================
 GET         /recipes.format       RecipesController::index()
 ----------- --------------------- ------------------------------
@@ -47,19 +47,18 @@ PUT         /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-CakePHPのルータクラスは、いくつかの異なる方法でHTTPリクエストメソッドを判定します。
+CakePHP のルータクラスは、いくつかの異なる方法で HTTP リクエストメソッドを判定します。
 下記がその判定順序です。
 
 #. POSTリクエストの中で、 *\_method* が存在する場合それを利用
 #. X\_HTTP\_METHOD\_OVERRIDE
 #. REQUEST\_METHOD ヘッダ
 
-POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウザを使ったRESTクライアントの場合に便利です。
-単純にPOSTメソッドの中で、\_methodキーの値にHTTPメソッド名を入れるだけです。
+POST リクエストの中の、 *\_method* の値を使う方法は、ブラウザを使った REST クライアントの場合に
+便利です。単純に POST メソッドの中で、\_method キーの値に HTTP メソッド名を入れるだけです。
 
-ルータがRESTリクエストを、コントローラのアクションにマッピングすると、
-そのアクションに移動します。
-基本的なコントローラのサンプルは下記のようになります ::
+ルータが REST リクエストを、コントローラのアクションにマッピングすると、
+そのアクションに移動します。基本的なコントローラのサンプルは下記のようになります ::
 
     // Controller/RecipesController.php
     class RecipesController extends AppController {
@@ -123,16 +122,16 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
 
 :php:meth:`Router::parseExtensions()` の呼出しを追加したので、
 ルータはリクエストの種類ごとに異なるビューファイルを扱います。
-RESTリクエストが処理できるようになったので、XMLビューなどが作成できます。
-CakePHPに標準搭載している JSONビュー( :doc:`/views/json-and-xml-views` )も簡単に扱えます。
+REST リクエストが処理できるようになったので、XML ビューなどが作成できます。
+CakePHP に標準搭載している JSON ビュー ( :doc:`/views/json-and-xml-views` ) も簡単に扱えます。
 :php:class:`XmlView` を扱うために、 ``_serialize`` というビュー変数を定義します。
-この特別なビュー変数は、 ``XmlView`` の中に取り込まれ、出力結果がXMLに変換されます。
+この特別なビュー変数は、 ``XmlView`` の中に取り込まれ、出力結果が XML に変換されます。
 
-XMLデータに変換する前にデータを修正したい場合は、 ``_serialize`` ビュー変数ではなく、
+XML データに変換する前にデータを修正したい場合は、 ``_serialize`` ビュー変数ではなく、
 ビューファイルを使いましょう。
-RecipesControllerに対するビューファイルを  ``app/View/recipes/xml`` 以下に置きます。
-:php:class:`Xml` クラスを使えば、このビューファイル内で簡単に素早くXMLを出力させることができます。
-下記にindexビューの例を載せます。
+RecipesController に対するビューファイルを  ``app/View/recipes/xml`` 以下に置きます。
+:php:class:`Xml` クラスを使えば、このビューファイル内で簡単に素早く XML を出力させることができます。
+下記に index ビューの例を載せます。
 
 ::
 
@@ -143,13 +142,13 @@ RecipesControllerに対するビューファイルを  ``app/View/recipes/xml`` 
     echo $xml->asXML();
 
 parseExtensions() を使って、特定のコンテンツタイプを扱う場合、
-CakePHPは自動的にそのタイプに対応するビューヘルパーを探します。
-ここではコンテンツタイプとしてXMLを利用していて、
+CakePHP は自動的にそのタイプに対応するビューヘルパーを探します。
+ここではコンテンツタイプとして XML を利用していて、
 標準のビルトインヘルパーは存在しないのですが、
-もし自作のヘルパーがあればCakePHPはそれを自動読込みして利用可能にします。
+もし自作のヘルパーがあれば CakePHP はそれを自動読込みして利用可能にします。
 
 
-レンダリングされたXMLは下記のような感じになります::
+レンダリングされた XML は下記のような感じになります::
 
     <recipes>
         <recipe id="234" created="2008-06-13" modified="2008-06-14">
@@ -163,33 +162,32 @@ CakePHPは自動的にそのタイプに対応するビューヘルパーを探�
     </recipes>
 
 
-Editアクションのロジックを作るのは少しだけトリッキーです。
-XML出力のAPIをクライアントに提供する場合、入力もXMLで受付けるほうが自然です。
+Edit アクションのロジックを作るのは少しだけトリッキーです。
+XML 出力の API をクライアントに提供する場合、入力も XML で受付けるほうが自然です。
 心配せずとも、 :php:class:`RequestHandler` と :php:class:`Router` クラスが
 楽に取り計らってくれます。
-POSTもしくはPUTリクエストのコンテンツタイプがXMLであれば、入力データは
-Cakeの :php:class:`Xml` クラスに渡され、配列に変換され、
+POST もしくは PUT リクエストのコンテンツタイプが XML であれば、入力データは
+CakePHP の :php:class:`Xml` クラスに渡され、配列に変換され、
 ``$this->request->data`` に入ります。
-この機能によって、XMLとPOSTデータのハンドリングはシームレスになるのです。
-コントローラもモデルもXMLの入力を気にせずに、 ``$this->request->data`` のみを扱えば良いのです。
-
+この機能によって、 XML と POST データのハンドリングはシームレスになるのです。
+コントローラもモデルも XML の入力を気にせずに、 ``$this->request->data`` のみを扱えば良いのです。
 
 他のフォーマットのインプットデータ
 ==================================
 
-RESTアプリケーションの場合、様々なフォーマットのデータを扱います。
-CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてくれます。
-デフォルトでは、POSTやPUTで送られてくるJSON/XMLの入力データはデコードされ、
+REST アプリケーションの場合、様々なフォーマットのデータを扱います。
+CakePHP では、 :php:class:`RequestHandlerComponent` クラスが助けてくれます。
+デフォルトでは、POST や PUT で送られてくる JSON/XML の入力データはデコードされ、
 配列に変換されてから ``$this->request->data`` に格納されます。
 独自のデコード処理も :php:meth:`RequestHandler::addInputType()` を利用すれば追加可能です。
 
 
-デフォルトのRESTルーティングの修正
-==================================
+デフォルトの REST ルーティングの修正
+====================================
 
 .. versionadded:: 2.1
 
-デフォルトで用意しているRESTのルーティングではうまく動かない場合、
+デフォルトで用意している REST のルーティングではうまく動かない場合、
 :php:meth:`Router::resourceMap()` を使って変更することができます。
 このメソッドは、デフォルトのルーティングマップを再定義し、 :php:meth:`Router::mapResources()`
 によって定義が適用されます。
@@ -211,31 +209,13 @@ CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてく�
 
 .. _custom-rest-routing:
 
-カスタムRESTルーティング
-========================
+カスタム REST ルーティング
+==========================
 
 :php:meth:`Router::mapResources()` で生成したデフォルトルーティングがうまく動かない場合は、
-:php:meth:`Router::connect()` メソッドを使い、RESTルーティングのカスタムセットを定義します。
-``connect()`` メソッドは、URLごとに異なる数のオプションがある場合の定義に利用できます。
-第1引数はURL、第2引数はオプション項目、第3引数はURLに含まれる文字列パターンの正規表現です。
-
-下記に簡単な例を示します。この例は汎用的で幅広くRESTful URLに使えるでしょう。
-Editアクション用RESTのルーティングはこのようになります。
-:php:meth:`Router::mapResources()` は必要ありません。
-
-::
-
-    Router::connect(
-        "/:controller/:id",
-        array("action" => "edit", "[method]" => "PUT"),
-        array("id" => "[0-9]+")
-    );
-
-ルーティングに関する詳細は他の章で扱かっていますので、
-ここでは最も重要な点だけに絞って解説します。
-connect()メソッドの第2引数に渡しているオプション項目の配列に、
-[method]というキーがあり、このキーがセットされると、
-HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可能になります。
+:php:meth:`Router::connect()` メソッドを使い、REST ルーティングのカスタムセットを定義します。
+``connect()`` メソッドは、URL ごとに異なる数のオプションがある場合の定義に利用できます。
+詳しくは :ref:`route-conditions` セクションをご覧ください。
 
 .. versionadded:: 2.5
 
@@ -247,7 +227,6 @@ HTTPリクエストメソッド(GET, DELETEなど)による動作の指定が可
             'routeClass' => 'ApiRoute',
         )
     ));
-
 
 
 .. meta::
