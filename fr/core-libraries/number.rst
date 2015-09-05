@@ -340,12 +340,12 @@ Example::
 
 .. end-cakenumber
 
-Configurer le Formattage
-========================
+Configurer le Formatage
+=======================
 
 .. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
 
-Cette méthode vous permet de configurer le formattage par défaut qui sera
+Cette méthode vous permet de configurer le formatage par défaut qui sera
 utilisé de façon persistante à travers toutes les méthodes.
 
 Par exemple::
