@@ -438,7 +438,7 @@ Overriding Plugin Templates from Inside Your Application
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the template files of the
 plugin with application specific view logic by creating files using the
-following template ``src/Template/Plugin/[Plugin]/[Controller]/[view].ctp``. For the
+following template **src/Template/Plugin/[Plugin]/[Controller]/[view].ctp**. For the
 Contacts controller you could make the following file::
 
     src/Template/Plugin/ContactManager/Contacts/index.ctp

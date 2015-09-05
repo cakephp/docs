@@ -1388,7 +1388,7 @@ Then uncomment the following line in your **config/bootstrap.php** file::
 
     //Configure::load('app_local', 'default');
 
-By creating an ``app_local.php`` file, you have an easy way to define
+By creating an **app_local.php** file, you have an easy way to define
 configuration specific to Jenkins. You can use this same configuration file to
 override any other configuration files you need on Jenkins.
 
