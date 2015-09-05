@@ -621,6 +621,6 @@ counter() メソッドによる説明文の表示についても、
 
 
 .. meta::
-    :title lang=en: PaginatorHelper
-    :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
-    :keywords lang=en: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter
+    :title lang=ja: PaginatorHelper
+    :description lang=ja: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
+    :keywords lang=ja: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter
