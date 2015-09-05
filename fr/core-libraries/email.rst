@@ -31,6 +31,19 @@ Après avoir chargé ``Email``, vous pouvez envoyer un email avec ce qui suit::
 Puisque les méthodes de setter d'``Email`` retournent l'instance de la classe,
 vous pouvez définir ses propriétés avec le chaînage des méthodes.
 
+``Email`` comporte plusieurs méthodes pour définir les destinataires - ``to()``,
+``cc()``, ``bcc()``, ``addTo()``, ``addCc()`` et ``addBcc()``. La principale
+différence est que les trois premières méthodes vont réinitialiser ce qui était
+déjà défini et les suivantes vont ajouter plus de destinataires dans leur champs
+respectifs::
+
+    $email = new Email();
+    $email->to('to@example.com', 'To Example');
+    $email->addTo('to2@example.com', 'To2 Example');
+    // Les destinaitres de l'email sont: to@example.com et to2@example.com
+    $email->to('test@example.com', 'ToTest Example');
+    // Le destinaitre de l'email est: test@example.com
+
 Choisir l'émetteur
 ------------------
 
