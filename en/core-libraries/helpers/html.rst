@@ -107,8 +107,8 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
     You can include CSS files from any loaded plugin using
-    :term:`plugin syntax`. To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
-    you could use the following::
+    :term:`plugin syntax`. To include 
+    ``app/Plugin/DebugKit/webroot/css/toolbar.css`` you could use the following::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
@@ -581,7 +581,7 @@ methods of the HtmlHelper and how to use them.
 
     Used for creating div-wrapped sections of markup. The first parameter
     specifies a CSS class, and the second is used to supply the text to be
-    wrapped by div tags. If the 'escape' key has been to true in the last
+    wrapped by div tags. If the 'escape' key has been set to true in the last
     parameter, $text will be printed HTML-escaped.
 
     If no text is specified, only an opening div tag is returned.:
