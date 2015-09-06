@@ -129,7 +129,7 @@ The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. At a high level each request goes through the
 following steps:
 
-#. The webserver rewrite rules direct the request to ``webroot/index.php``.
+#. The webserver rewrite rules direct the request to **webroot/index.php**.
 #. Your application's autoloader and bootstrap files are executed.
 #. Any :doc:`dispatch filters </development/dispatch-filters>` that are
    configured can handle the request, and optionally generate a response.

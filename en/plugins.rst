@@ -28,13 +28,13 @@ would do the following::
     php composer.phar require cakephp/debug_kit
 
 This would install the latest version of DebugKit and update your
-``composer.json``, ``composer.lock`` file, update
-``vendor/cakephp-plugins.php``, and update your autoloader.
+**composer.json**, **composer.lock** file, update
+**vendor/cakephp-plugins.php**, and update your autoloader.
 
 If the plugin you want to install is not available on
-packagist.org, you can clone or copy the plugin code into your ``plugins``
+packagist.org, you can clone or copy the plugin code into your **plugins**
 directory. Assuming you want to install a plugin named 'ContactManager', you
-should have a folder in ``plugins`` named 'ContactManager'. In this directory
+should have a folder in **plugins** named 'ContactManager'. In this directory
 are the plugin's src, tests and any other directories.
 
 .. index:: vendor/cakephp-plugins.php
@@ -43,7 +43,7 @@ Plugin Map File
 ---------------
 
 When installing plugins via Composer, you may notice that
-``vendor/cakephp-plugins.php`` is created. This configuration file contains
+**vendor/cakephp-plugins.php** is created. This configuration file contains
 a map of plugin names and their paths on the filesystem. It makes it possible
 for plugins to be installed into the standard vendor directory which is outside
 of the normal search paths. The ``Plugin`` class will use this file to locate
@@ -75,7 +75,7 @@ plugins you explicitly specify.
 .. note::
 
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
-    defined in ``vendor/cakephp-plugins.php``.
+    defined in **vendor/cakephp-plugins.php**.
 
 .. _autoloading-plugin-classes:
 
@@ -333,7 +333,7 @@ See the section on :ref:`plugin-configuration` for information on how to load
 plugin specific route files.
 
 For plugins you did not create with bake, you will also need to edit the
-``composer.json`` file to add your plugin to the autoload classes, this can be
+**composer.json** file to add your plugin to the autoload classes, this can be
 done as per the documentation :ref:`autoloading-plugin-classes`.
 
 .. _plugin-models:

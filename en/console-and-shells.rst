@@ -106,7 +106,7 @@ Creating a Shell
 
 Let's create a shell for use in the Console. For this example,
 we'll create a simple Hello world shell. In your application's
-``Shell`` directory create ``HelloShell.php``. Put the following
+**src/Shell** directory create **HelloShell.php**. Put the following
 code inside it::
 
     namespace App\Shell;
