@@ -129,6 +129,10 @@ You can now :ref:`Lazily Eager Load Associations
 load additional associations into a result set, entity or collection of
 entities.
 
+The ``patchEntity()`` and ``newEntity()`` method now support the ``onlyIds``
+option. This option allows you to restrict hasMany/belongsToMany association
+marshalling to only use the ``_ids`` list. This option defaults to ``false``.
+
 Query
 -----
 

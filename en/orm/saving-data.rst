@@ -248,6 +248,13 @@ When the above data is converted into entities, you will have 4 tags. The first
 two will be new objects, and the second two will be references to existing
 records.
 
+When converting belongsToMany data, you can disable the new entity creation, by
+using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
+marshalling to only use the ``_ids`` key and ignore all other data.
+
+.. versionadded:: 3.1.0
+    The ``onlyIds`` option was added in 3.1.0
+
 Converting HasMany Data
 -----------------------
 
@@ -262,6 +269,13 @@ a new parent record you can use the ``_ids`` format::
             '_ids' => [1, 2, 3, 4]
         ]
     ];
+
+When converting hasMany data, you can disable the new entity creation, by
+using the ``onlyIds`` option. When enabled, this option restricts hasMany
+marshalling to only use the ``_ids`` key and ignore all other data.
+
+.. versionadded:: 3.1.0
+    The ``onlyIds`` option was added in 3.1.0
 
 Converting Multiple Records
 ---------------------------
