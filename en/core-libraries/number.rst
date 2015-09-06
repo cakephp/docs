@@ -343,7 +343,7 @@ to various methods.
 Example::
 
     Number::config('en_IN', \NumberFormatter::CURRENCY, [
-        'pattern' => '¤ #,##,##0'
+        'pattern' => '#,##,##0'
     ]);
 
 .. meta::
