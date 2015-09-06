@@ -36,7 +36,7 @@ customize multiple templates and keep your code DRY::
         'Paginator' => ['templates' => 'paginator-templates']
     ];
 
-This will load the file located at ``config/paginator-templates.php``. See the
+This will load the file located at **config/paginator-templates.php**. See the
 example below for how the file should look like. You can also load
 templates from a plugin using :term:`plugin syntax`::
 

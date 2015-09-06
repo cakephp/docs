@@ -63,7 +63,7 @@ Next, we'll create a controller for our articles. The controller is
 where all interaction with articles will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
 related to articles done. We'll place this new controller in a file called
-``ArticlesController.php`` inside the **src/Controller** directory. Here's
+**ArticlesController.php** inside the **src/Controller** directory. Here's
 what the basic controller should look like::
 
     // src/Controller/ArticlesController.php

@@ -68,7 +68,7 @@ views will be showing (X)HTML documents to browsers, but you might also need to
 reply to a remote application via JSON, or output a CSV file for a user.
 
 By default CakePHP template files are written in plain PHP and have a default
-extension of ``.ctp`` (CakePHP Template). These files contain all the
+extension of **.ctp** (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you're
 serving to. If you'd prefer using a templating language like
@@ -198,7 +198,7 @@ processed next::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-The above will result in ``/Common/index.ctp`` being rendered as the parent view
+The above will result in **/Common/index.ctp** being rendered as the parent view
 to the current view.
 
 You can nest extended views as many times as necessary. Each view can extend

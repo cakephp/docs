@@ -363,7 +363,7 @@ This is not exactly what we want. We need to supply more rules to our
 we'll delegate supplying those extra rules to each individual controller.
 The rules we're going to add to ArticlesController should permit authors
 to create articles but prevent authors form editing articles they do not
-own.  Add the following content to your ``ArticlesController.php``::
+own.  Add the following content to your **ArticlesController.php**::
 
     // src/Controller/ArticlesController.php
 
