@@ -79,7 +79,7 @@ views and locale files. You can add multiple paths to ``App.paths.templates``,
 templates, plugins and locale files respectively.
 
 The config key ``www_root`` has been changed to ``wwwRoot`` for consistency. Please adjust
-your ``app.php`` config file as well as any usage of ``Configure::read('App.wwwRoot')``.
+your **app.php** config file as well as any usage of ``Configure::read('App.wwwRoot')``.
 
 New ORM
 =======
@@ -177,7 +177,7 @@ Configure
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
 - :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without
   extension suffix as this can be derived from the engine. E.g. using PhpConfig
-  use ``app`` to load ``app.php``.
+  use ``app`` to load **app.php**.
 - Setting a ``$config`` variable in PHP config file is deprecated.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
   file to return an array.
@@ -196,8 +196,8 @@ of these methods have been extracted into traits. You can use the
 Console
 =======
 
-The ``cake`` executable has been moved from the ``app/Console`` directory to the
-``bin`` directory within the application skeleton. You can now invoke CakePHP's
+The ``cake`` executable has been moved from the **app/Console** directory to the
+**bin** directory within the application skeleton. You can now invoke CakePHP's
 console with ``bin/cake``.
 
 TaskCollection Replaced
