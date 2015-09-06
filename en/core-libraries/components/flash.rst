@@ -15,23 +15,24 @@ and should be used instead of that method.
 Setting Flash Messages
 ======================
 
-FlashComponent provides two ways to set flash messages: its ``__call`` magic
-method and its ``set()`` method.  To furnish your application with verbosity,
-FlashComponent's ``__call`` magic method allows you use a method name that maps
-to an element located under the ``app/View/Elements/Flash`` directory. By
-convention, camelcased methods will map to the lowercased and underscored
-element name::
+FlashComponent provides two ways to set flash messages: its ``__call``
+magic method and its ``set()`` method.
+
+To use the default flash message handler, you can use the ``set()``
+method::
+
+    $this->Flash->set('This is a message');
+
+To create custom Flash elements, FlashComponent's ``__call`` magic
+method allows you use a method name that maps to an element located under
+the ``app/View/Elements/Flash`` directory. By convention, camelcased
+methods will map to the lowercased and underscored element name::
 
     // Uses app/View/Elements/Flash/success.ctp
     $this->Flash->success('This was successful');
 
     // Uses app/View/Elements/Flash/great_success.ctp
     $this->Flash->greatSuccess('This was greatly successful');
-
-Alternatively, to set a plain-text message without rendering an element, you can
-use the ``set()`` method::
-
-    $this->Flash->set('This is a message');
 
 FlashComponent's ``__call`` and ``set()`` methods optionally take a second
 parameter, an array of options:
