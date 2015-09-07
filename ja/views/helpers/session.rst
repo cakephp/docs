@@ -145,10 +145,10 @@
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
     ..
-      This would use ``View/Elements/failure.ctp`` to render the message.  The
+      This would use **View/Elements/failure.ctp** to render the message.  The
       message text would be available as ``$message`` in the element.
 
-    これは ``View/Elements/failure.ctp`` を使ってメッセージを書きます。\
+    これは **View/Elements/failure.ctp** を使ってメッセージを書きます。\
     メッセージテキストは html 要素内の ``$message`` として使用可能です。
 
     ..

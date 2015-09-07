@@ -36,7 +36,7 @@ configuration Apache::
     SetEnv CAKEPHP_DEBUG 1
 
 Et ensuite vous pouvez définir le niveau de debug dynamiquement dans
-``app.php``::
+**config/app.php**::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 

@@ -444,7 +444,7 @@ Não posso utilizar Reescrita de URL
 
 Se você não quer ou não pode ter mod\_rewrite (ou algum outro módulo compatível)
 funcionando no seu servidor, você precisará utilizar as URLs amigáveis natívas
-do CakePHP. No ``config/app.php``, descomente a linha que se parece como::
+do CakePHP. No **config/app.php**, descomente a linha que se parece como::
 
     'App' => [
         // ...

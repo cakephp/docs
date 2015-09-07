@@ -111,7 +111,7 @@ de notre flux.
 
 Ensuite il y a le fichier de vue pour mes articles/index. Un peu comme le
 fichier de layout que nous avons créé, nous devons créer un répertoire
-**src/Template/Posts/rss/** et un nouveau fichier ``index.ctp`` à l'intérieur
+**src/Template/Posts/rss/** et un nouveau fichier **index.ctp** à l'intérieur
 de celui-ci. Les contenus du fichier sont ci-dessous.
 
 View

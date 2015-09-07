@@ -143,7 +143,7 @@ qui demande une page ou une ressource de votre application. À haut niveau
 chaque requête passe par les étapes suivantes:
 
 #. Les règles de réécriture de votre serveur web dirigent la requête vers
-   ``webroot/index.php``.
+   **webroot/index.php**.
 #. Les fichiers autoloader et bootstrap de votre application sont exécutés.
 #. Tout :doc:`filtre du dispatcher </development/dispatch-filters>`
    configuré peut manipuler la requête, et optionnellement générer une réponse.

@@ -8,7 +8,7 @@ colocar em produção uma aplicação CakePHP.
 Atualizar config/app.php
 ========================
 
-Atualizar o arquivo ``core.php``, especificamente o valor do ``debug`` é de
+Atualizar o arquivo **core.php**, especificamente o valor do ``debug`` é de
 extrema importância. Tornar o debug igual a ``false`` desabilita muitos recursos
 do processo de desenvolvimento que nunca devem ser expostos ao mundo.
 Desabilitar o debug, altera as seguintes coisas:
@@ -30,7 +30,7 @@ Apache::
 
     SetEnv CAKEPHP_DEBUG 1
 
-E então você pode definir o level de debug dinamicamente no ``app.php``::
+E então você pode definir o level de debug dinamicamente no **config/app.php**::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 

@@ -65,7 +65,7 @@ Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
-``ArticlesController.php`` à l'intérieur du dossier **src/Controller**. Voici
+**ArticlesController.php** à l'intérieur du dossier **src/Controller**. Voici
 à quoi devrait ressembler le controller de base::
 
     // src/Controller/ArticlesController.php

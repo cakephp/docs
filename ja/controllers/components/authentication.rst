@@ -465,14 +465,14 @@ HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値と�
   Displaying auth related flash messages
 
 Auth が生成するセッションエラーメッセージを表示するためには、次のコードをあなたのレイアウトに加えなければなりません。
-``app/View/Layouts/default.ctp`` ファイルに次の２行を加えてください。content_for_layout 行の前にある body 部の中がよいでしょう::
+**app/View/Layouts/default.ctp** ファイルに次の２行を加えてください。content_for_layout 行の前にある body 部の中がよいでしょう::
 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
 
 ..
   In order to display the session error messages that Auth generates, you need to add the following code to your layout.
-  Add the following two lines to the ``app/View/Layouts/default.ctp`` file in the body section preferable before the content_for_layout line.::
+  Add the following two lines to the **app/View/Layouts/default.ctp** file in the body section preferable before the content_for_layout line.::
 
 AuthComponent の flash 設定を使うことでエラーメッセージをカスタマイズすることができます。
 ``$this->Auth->flash`` を使うことで、AuthComponent がフラッシュメッセージのために使うパラメータを設定することができます。

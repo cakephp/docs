@@ -62,7 +62,7 @@ Criando o controller
 A seguir, criaremos um controller (controlador) para nossos artigos. O
 controller é responsável pela lógica de interação da aplicação. É o lugar onde
 você utilizará as regras contidas nos models e executará tarefas relacionadas
-aos artigos. Criaremos um arquivo chamado ``ArticlesController.php`` no
+aos artigos. Criaremos um arquivo chamado **ArticlesController.php** no
 diretório **src/Controller**::
 
     // src/Controller/ArticlesController.php
@@ -603,7 +603,7 @@ Para mais informações sobre técnicas avançadas de roteamento, visite
 :ref:`routes-configuration`.
 
 Por padrão, o CakePHP responde a uma requisição pela raíz do seu site usando o
-``PagesController``, ao renderizar uma view chamada ``home.ctp``.
+``PagesController``, ao renderizar uma view chamada **home.ctp**.
 Alternativamente, nós vamos substituir esse comportamento pelo
 ``ArticlesController`` ao criar uma regra de roteamento.
 

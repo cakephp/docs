@@ -477,7 +477,7 @@ du cœur. Les adaptateurs de cache doivent être dans un répertoire cache.
 Si vous avez un moteur de cache nommé ``MyCustomCacheEngine`` il devra
 être placé soit dans **src/Cache/Engine/MyCustomCacheEngine.php**
 comme une app/libs ou dans
-``$plugin/Cache/Engine/MyCustomCacheEngine.php`` faisant parti d'un
+**plugin/Cache/Engine/MyCustomCacheEngine.php** faisant parti d'un
 plugin. Les configurations de cache venant d'un plugin doivent utiliser la
 notation par points de plugin::
 

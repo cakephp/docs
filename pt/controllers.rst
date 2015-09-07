@@ -24,7 +24,7 @@ ter controllers que usam mais de um model.
 Os controllers da sua aplicação são classes que estendem a classe
 ``AppController``, a qual por sua vez estende a classe do core
 :php:class:`Controller`. A classe ``AppController`` pode ser definida em
-``/src/Controller/AppController.php`` e deve conter métodos que são
+**src/Controller/AppController.php** e deve conter métodos que são
 compartilhados entre todos os controllers de sua aplicação.
 
 Os controllers fornecem uma série de métodos que lidam com requisições. Estas
@@ -43,7 +43,7 @@ Como mencionado anteriormente, a classe ``AppController`` é a mãe de todos os
 outros controllers da sua aplicação. A própria ``AppController`` é estendida da
 classe :php:class:`Cake\\Controller\\Controller` incluída no CakePHP.
 Assim sendo, ``AppController`` é definida em
-``/src/Controller/AppController.php`` como a seguir::
+**src/Controller/AppController.php** como a seguir::
 
     namespace App\Controller;
 
@@ -110,7 +110,7 @@ Por convenção, o CakePHP renderiza uma view com uma versão flexionada do nome
 da action. Retornando ao nosso exemplo da padaria online, nosso
 ``RecipesController`` poderia abrigar as actions ``view()``, ``share()`` e
 ``search()``. O controller seria encontrado em
-``/src/Controller/RecipesController.php`` contendo::
+**src/Controller/RecipesController.php** contendo::
 
     // src/Controller/RecipesController.php
 
@@ -232,7 +232,7 @@ a view em ``View::$layout``, e serve de volta para o usuário final.
 
 O arquivo view usado pelo método ``Controller::render()`` é determinado por
 convenção. Se a action ``search()`` do controller ``RecipesController`` é
-requisitada, o arquivo view encontrado em ``/src/Template/Recipes/search.ctp``
+requisitada, o arquivo view encontrado em **src/Template/Recipes/search.ctp**
 será renderizado::
 
     namespace App\Controller;
@@ -282,8 +282,8 @@ convencional. Você pode fazer isso chamando o método
         }
     }
 
-Isto renderizaria o arquivo ``src/Template/Posts/custom_file.ctp`` ao invés de
-``src/Template/Posts/my_action.ctp``
+Isto renderizaria o arquivo **src/Template/Posts/custom_file.ctp** ao invés de
+**src/Template/Posts/my_action.ctp**
 
 Você também pode renderizar views de plugins utilizando a seguinte sintaxe:
 ``$this->render('PluginName.PluginController/custom_file')``.
@@ -299,7 +299,7 @@ Por exemplo::
         }
     }
     
-Isto renderizaria ``plugins/Users/src/Template/UserDetails/custom_file.ctp``
+Isto renderizaria **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 
 Redirecionando para outras páginas
 ==================================
