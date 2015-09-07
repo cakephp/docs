@@ -1028,10 +1028,10 @@ the Model::save() to always do it for you::
 
     }
 
-When saving with a ``fieldList`` if the created and modified fields are not
-present in the whitelist, the fields will continue to have the values
-automatically assigned. When included in the ``fieldList``, the created and
-modified fields work like any other field.
+If you are saving data with a ``fieldList`` and the ``created`` and ``modified``
+fields are not present in the whitelist, the fields will continue to have the values
+automatically assigned. When included in the ``fieldList``, the ``created`` and
+``modified`` fields work like any other field.
 
 .. meta::
     :title lang=en: Saving Your Data
