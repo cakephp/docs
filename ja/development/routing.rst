@@ -1142,5 +1142,5 @@ requestAction() と併せてURL配列を使うときに
     /development/dispatch-filters
 
 .. meta::
-    :title lang=en: Routing
-    :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
+    :title lang=ja: Routing
+    :keywords lang=ja: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

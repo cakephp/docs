@@ -485,4 +485,4 @@ JSON/配列フォーマットで出力したくないフィールドがある場
 
 .. meta::
     :title lang=ja: エンティティー
-    :keywords lang=en: エンティティー, 個別, レコード
+    :keywords lang=ja: エンティティー, 個別, レコード

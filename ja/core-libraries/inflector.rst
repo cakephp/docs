@@ -66,7 +66,6 @@ Example:
     rulesはInflectorに対して新しい変換ルールを定義します。
     :ref:`inflection-configuration` により詳細な情報があります。
 
-
 .. meta::
     :title lang=ja: Inflector
     :keywords lang=ja: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

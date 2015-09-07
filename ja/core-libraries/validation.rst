@@ -1,23 +1,15 @@
-..
-    Validation
-
-
 バリデーション
 ##################
 
 .. php:namespace:: Cake\Validation
 
-..
-    The validation package in CakePHP provides features to build validators that can
-    validate arbitrary arrays of data with ease.
+The validation package in CakePHP provides features to build validators that can
+validate arbitrary arrays of data with ease.
 
 
 CakePHPにおけるバリデーションは、任意の配列データに対するバリデーションを簡単に行うためのバリデータ構築のパッケージを提供する。
 
 .. _creating-validators:
-
-..
-    Creating Validators
 
 バリデータを作成する
 ===========================
@@ -718,4 +710,3 @@ CakePHPは ``Validation`` クラス内にバリデーションメソッドに関
 
 
 追加のパラメーターが設定できるコアなルールには、``rule`` キーの中に、最初の要素としてルールそのものを含むような配列が設定されるべきであり、その後のパラメーターには、残りのパラメーターを含ませるべきです。
-
