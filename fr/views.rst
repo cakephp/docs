@@ -204,7 +204,7 @@ va outrepasser les précédents::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-Le code précédent va définir ``/Common/index.ctp`` comme étant la vue parente
+Le code précédent va définir **/Common/index.ctp** comme étant la vue parente
 de la vue actuelle.
 
 Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est

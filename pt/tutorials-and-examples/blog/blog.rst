@@ -48,7 +48,7 @@ esqueleto da aplicação do CakePHP no diretório [nome_do_app]. ::
 
 A vantagem de usar o Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar corretamente as permissões de pastas
-e criar o ``config/app.php`` para você.
+e criar o **config/app.php** para você.
 
 Há outras maneiras de instalar o CakePHP. Se você não puder ou não quiser usar
 o Composer, confira a seção :doc:`/installation`.

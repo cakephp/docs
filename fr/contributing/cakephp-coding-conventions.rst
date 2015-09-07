@@ -402,7 +402,7 @@ Les Balises PHP
 
 Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
 courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de
-template (``.ctp``) lorsque cela est nécessaire.
+template (**.ctp**) lorsque cela est nécessaire.
 
 Echo court
 ----------

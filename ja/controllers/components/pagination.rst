@@ -3,7 +3,7 @@
 
 
 ページネーション
-##############
+####################
 
 ..  php:namespace:: Cake\Controller\Component
 
@@ -149,7 +149,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
             $customFinderOptions = [
                 'tags' => $tags
             ];
-            
+
             // カスタムファインダーメソッドは、ArticlesTable.phpの中で"findTagged"と呼ばれる
             // 以下のような構文となっている
             // public function findTagged(Query $query, array $options) {
@@ -262,7 +262,7 @@ Paginate プロパティからほとんどの検索オプションを指定す�
 
 
 Paginatorを直接使用する場合
-=========================
+================================
 
 
 ..

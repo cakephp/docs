@@ -12,11 +12,11 @@ Charger les Plugins
 -------------------
 
 Avec la tâche `Load` vous pouvez charger les plugins dans votre
-``config/bootstrap.php``. Vous pouvez aussi le faire en lançant::
+**config/bootstrap.php**. Vous pouvez aussi le faire en lançant::
 
     bin/cake plugin load MyPlugin
 
-Ceci va ajouter ce qui suit dans votre ``config/bootstrap.php``::
+Ceci va ajouter ce qui suit dans votre **config/bootstrap.php**::
 
     Plugin::load('MyPlugin', []);
 
@@ -41,7 +41,7 @@ Vous pouvez décharger un plugin en spécifiant son nom::
     bin/cake plugin unload MyPlugin
 
 Ceci va retirer la ligne ``Plugin::load('MyPlugin',...`` de votre
-``config/bootstrap.php``.
+**config/bootstrap.php**.
 
 Assets des Plugins
 ------------------

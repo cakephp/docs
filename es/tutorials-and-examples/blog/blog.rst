@@ -156,8 +156,8 @@ conectarnos a ella. Seguramente esta sea la primera y última vez que configuras
 nada.
 
 Una copia del fichero de configuración de CakePHP puede ser hallado en
-``config/app.default.php``. Copia este fichero en su mismo directorio, pero
-nómbralo ``app.php``.
+**config/app.default.php**. Copia este fichero en su mismo directorio, pero
+nómbralo **app.php**.
 
 El fichero de configuración debería de ser bastante sencillo: simplemente
 reemplaza los valores en la matriz `` Datasources.default`` con los que
@@ -182,7 +182,7 @@ parecerse a esto::
         // Más configuración abajo
     ];
 
-En cuanto guardes tu nuevo fichero ``app.php`` deberías de ser capaz de acceder
+En cuanto guardes tu nuevo fichero **app.php** deberías de ser capaz de acceder
 mediante tu navegador web y ver la página de bienvenida de CakePHP. También
 debería decirte que se ha encontrado el fichero de configuración así como que
 ha podido conectarse a la base de datos.
@@ -200,7 +200,7 @@ tutorial. Uno de ellos es definir un string de seguridad (security salt) para re
 los 'hash' de seguridad.
 
 El string de seguridad se utiliza para generar 'hashes'. Cambia el valor por
-defecto editando el fichero ``/config/app.php``. No importa mucho el valor que
+defecto editando el fichero **config/app.php**. No importa mucho el valor que
 contenga, cuanto más largo más difícil de averiguar::
 
     'Security' => [
@@ -237,7 +237,7 @@ de URLs para poder poner en marcha la aplicación:
 
 Si no puedes (o no quieres) configurar mod\_rewrite o algún otro módulo
 compatible, necesitarás activar las url amigables en CakePHP. En el fichero
-``/config/app.php``, quita el comentario a la línea::
+**config/app.php**, quita el comentario a la línea::
 
     'App' => [
         // ...

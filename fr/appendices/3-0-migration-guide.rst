@@ -86,7 +86,7 @@ ajouter plusieurs chemins à ``App.paths.templates``, ``App.paths.plugins`` et
 les templates, les plugins et les fichiers de locales.
 
 La clé de configuration ``www_root`` a été renommée ``wwwRoot`` par cohérence.
-Merci d'ajuster votre fichier de configuration ``app.php`` ainsi que chaque
+Merci d'ajuster votre fichier de configuration **app.php** ainsi que chaque
 utilisation de``Configure::read('App.wwwRoot')``.
 
 Nouvel ORM
@@ -192,7 +192,7 @@ Configure
 - :php:meth:`Cake\\Core\\Configure::consume()` a été ajoutée.
 - :php:meth:`Cake\\Core\\Configure::load()` attend maintenant un suffixe du nom
   du fichier sans extension puisque celui-ci peut venir d'un moteur. Par
-  exemple, l'utilisation de PhpConfig utilise ``app`` pour charger ``app.php``.
+  exemple, l'utilisation de PhpConfig utilise ``app`` pour charger **app.php**.
 - Définir une variable ``$config`` dans un fichier PHP de config est déprécié.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` attend maintenant le
   fichier de config pour retourner un tableau.

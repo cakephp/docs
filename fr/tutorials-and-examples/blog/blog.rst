@@ -194,14 +194,13 @@ chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
 hashs.
 
 Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant ``/config/app.php``.
+défaut en modifiant **config/app.php**.
 La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
 difficile à deviner::
 
     'Security' => [
         'salt' => 'something long and containing lots of different values.',
     ],
-
 
 Une note sur mod\_rewrite
 =========================

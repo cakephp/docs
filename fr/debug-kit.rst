@@ -133,8 +133,8 @@ Elements de Panneau
 Chaque panneau s'attend à avoir un element de view qui rend le contenu du
 panneau. Le nom de l'element doit être avec une inflection en underscore du
 nom de la classe.
-Par exemple ``SessionPanel`` a un element nommé ``session_panel.ctp``, et
-SqllogPanel a un element nommé ``sqllog_panel.ctp``. Ces elements doivent être
+Par exemple ``SessionPanel`` a un element nommé **session_panel.ctp**, et
+SqllogPanel a un element nommé **sqllog_panel.ctp**. Ces elements doivent être
 localisés à la racine de votre répertoire **src/Template/Element**.
 
 Titres Personnalisés et Elements

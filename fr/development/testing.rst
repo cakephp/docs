@@ -102,12 +102,12 @@ conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests doivent être dans votre répertoire
    ``tests/TestCase/[Type]``.
-#. Les noms de ces fichiers doivent finir par ``Test.php`` plutôt que juste
-   ``.php``.
+#. Les noms de ces fichiers doivent finir par **Test.php** plutôt que juste
+   **.php**.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
-   correspondre au nom de fichier. ``RouterTest.php`` doit contenir
+   correspondre au nom de fichier. **RouterTest.php** doit contenir
    ``class RouterTest extends TestCase``.
 #. Le nom de toute méthode contenant un test (par ex: contenant une assertion)
    doit commencer par ``test``, comme dans ``testPublished()``.
@@ -362,7 +362,7 @@ A la création d'une fixture, vous pouvez définir principalement deux choses:
 comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
+Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
 **tests/Fixture** avec le contenu suivant::
 
     namespace App\Test\Fixture;
@@ -671,7 +671,7 @@ le model. Le test suite de CakePHP charge un petit ensemble minimum de fichiers
 (pour garder les tests isolés), ainsi nous devons commencer par charger notre
 model - dans ce cas le model Article que nous avons déjà défini.
 
-Créons maintenant un fichier nommé ``ArticlesTableTest.php`` dans notre
+Créons maintenant un fichier nommé **ArticlesTableTest.php** dans notre
 répertoire **tests/TestCase/Model/Table**, avec le contenu suivant::
 
     namespace App\Test\TestCase\Model\Table;
@@ -814,7 +814,7 @@ correspondant. Le code du controller ressemble à ceci::
         }
     }
 
-Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
+Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
 **tests/TestCase/Controller** et mettez ce qui suit à l'intérieur::
 
     namespace App\Test\TestCase\Controller;
@@ -1448,7 +1448,7 @@ Ensuite, décommentez la ligne suivante dans votre fichier
 
     //Configure::load('app_local', 'default');
 
-En créant un fichier ``app_local.php``, vous avez un moyen facile de définir une
+En créant un fichier **app_local.php**, vous avez un moyen facile de définir une
 configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de
 configuration pour remplacer tous les autres fichiers de configuration dont vous
 avez besoin sur Jenkins.

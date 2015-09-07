@@ -18,15 +18,15 @@
 
     $this->theme = 'AnotherExample';
 
-テーマのビューファイルは ``/app/View/Themed/`` フォルダに配置する必要があります。
+テーマのビューファイルは **/app/View/Themed/** フォルダに配置する必要があります。
 Themed フォルダの中にテーマ名のフォルダを作成して下さい。上記の例でいうと、テーマは
 ``/app/View/Themed/AnotherExample`` に配置するかたちになります。
 これは大事なことなのですが、CakePHPはCamelCaseのテーマ名を期待しているということを覚えておいてください。
-さらに、``/app/View/Themed/Example/``
-以下は ``/app/View/`` と全く同じ構造にして下さい。
+さらに、**/app/View/Themed/Example/**
+以下は **/app/View/** と全く同じ構造にして下さい。
 
-例えば、Postsコントローラのeditアクションのためのビューファイルは ``/app/View/Themed/Example/Posts/edit.ctp``
-となります。また、レイアウトファイルは ``/app/View/Themed/Example/Layouts/`` に配置されます。
+例えば、Postsコントローラのeditアクションのためのビューファイルは **/app/View/Themed/Example/Posts/edit.ctp**
+となります。また、レイアウトファイルは **/app/View/Themed/Example/Layouts/** に配置されます。
 
 
 ビューファイルがテーマに見つからない時、CakePHPは ``/app/View/`` フォルダの中を探します。

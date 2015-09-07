@@ -40,7 +40,7 @@ aplicações do CakePHP no diretório ``bookmarker``. ::
 
 A vantagem de usar Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar as permissões de arquivo e criar a sua
-``config/app.php``.
+**config/app.php**.
 
 Há outras maneiras de instalar o CakePHP. Se você não puder ou não quiser usar
 Composer, veja a seção :doc:`/installation`.
@@ -147,7 +147,7 @@ conectar a ele. Para muitos, esta será a primeira e última vez que você vai
 precisar configurar qualquer coisa.
 
 A configuração é bem simples: basta alterar os valores do array
-``Datasources.default`` no arquivo ``config/app.php`` pelos que se
+``Datasources.default`` no arquivo **config/app.php** pelos que se
 aplicam à sua configuração. A amostra completa da gama de configurações pode
 ser algo como o seguinte::
 
@@ -170,14 +170,14 @@ ser algo como o seguinte::
         // Mais configuração abaixo.
     ];
 
-Depois de salvar o seu arquivo ``config/app.php``, você deve notar que a
+Depois de salvar o seu arquivo **config/app.php**, você deve notar que a
 mensagem 'CakePHP is able to connect to the database' tem uma marca de
 verificação.
 
 .. note::
 
     Uma cópia do arquivo de configuração padrão do CakePHP é encontrado em
-    ``config/app.default.php``.
+    **config/app.default.php**.
 
 Gerando o código base
 =====================
@@ -255,7 +255,7 @@ Idealmente, nós teríamos uma URL que se parece com
 ``http://localhost:8765/bookmarks/tagged/funny/cat/gifs``. Isso deveria nos
 permitir a encontrar todos os bookmarks que têm as tags 'funny', 'cat' e
 'gifs'. Antes de podermos implementar isso, vamos adicionar uma nova rota. Em
-``config/routes.php``, adicione o seguinte na parte superior do arquivo::
+**config/routes.php**, adicione o seguinte na parte superior do arquivo::
 
     Router::scope(
         '/bookmarks',
