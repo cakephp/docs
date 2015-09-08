@@ -472,4 +472,4 @@ Utilisez des méthodes similaires pour configurer un logger différent pour la c
 .. meta::
     :title lang=fr: Journalisation (Logging)
     :description lang=fr: Journal Log de CakePHP de données du disque pour vous aider à debugger votre application sur des longues périodes de temps.
-    :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs
+    :keywords lang=fr: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

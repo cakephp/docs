@@ -663,4 +663,4 @@ autorização e autenticação
 
 .. meta::
     :title lang=pt: Tutorial - Criando um Blog - Parte 2
-    :keywords lang=en: actions,view,add,edit,delete,validation,model,post,request,validate,error
+    :keywords lang=pt: actions,view,add,edit,delete,validation,model,post,request,validate,error
