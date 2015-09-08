@@ -262,6 +262,14 @@ Quand les données ci-dessus seront converties en entities, il y aura 4 tags.
 Les deux premiers seront de nouveaux objets, et les deux seconds seront des
 références à des tags existants.
 
+Quand les données de belongsToMany sont converties, vous pouvez désactiver la
+création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
+est activée, cette option restreint la conversion des données de belongsToMany
+pour utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
+
+.. versionadded:: 3.1.0
+    L'option ``onlyIds`` a été ajoutée dans 3.1.0
+
 Convertir des Données HasMany
 -----------------------------
 
@@ -276,6 +284,14 @@ existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
             '_ids' => [1, 2, 3, 4]
         ]
     ];
+
+Quand les données de hasMany sont converties, vous pouvez désactiver la
+création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
+est activée, cette option restreint la conversion des données hasMany pour
+utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
+
+.. versionadded:: 3.1.0
+    L'option ``onlyIds`` a été ajoutée dans 3.1.0
 
 Convertir des Enregistrements Multiples
 ---------------------------------------

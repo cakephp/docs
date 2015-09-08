@@ -137,6 +137,11 @@ Vous pouvez maintenant :ref:`Charger en Eager des Associations
 des associations conditionnellement dans un ensemble de résultats, une entity
 ou une collection d'entites.
 
+Les méthodes ``patchEntity()`` et ``newEntity()`` supportent maintenant
+l'option ``onlyIds``. Cette option vous permet de restreindre la conversion des
+données des associations hasMany/belongsToMany pour utiliser uniquement la liste
+des ``_ids``. Cette option est par défaut à ``false``.
+
 Query
 -----
 
