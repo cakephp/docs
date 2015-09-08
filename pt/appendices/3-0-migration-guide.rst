@@ -460,3 +460,29 @@ Resposta
   não define a extensão para ``csv`` se o cabeçalho ``Accept`` tiver o mimetype ``text/plain``
   que era um problema comum quando recebia uma requisição XHR do jQuery.
   
+
+Sessões
+=======
+
+A classe de sessão não é mais estática, agora a sessão (session) pode ser
+acessada através do objeto de requisição (request). Veja a documentação em
+:doc:`/development/sessions` para ver como usar o objeto de sessão.
+
+* O :php:class:`Cake\\Network\\Session` e classes de sessão relacionadas 
+  foram movidas para o namespace ``Cake\Network``.
+* O ``SessionHandlerInterface`` foi removido em favor ao fornecido pelo
+  próprio PHP.
+* A propriedade ``Session::$requestCountdown`` foi removida.
+* O funcionalidade de sessão ``checkAgent`` foi removida. Ela causava um 
+  monte de bugs quando quadros do chrome e o flash player estavam envolvidos.
+* A convenção de nome para a tabela de sessão no banco de dados agora é
+  ``sessions`` ao invés de ``cake_sessions``.
+* O cookie de tempo limite da sessão é atualizado automaticamente em conjunto 
+  com o tempo limite dos dados de sessão.
+* O caminho padrão para o cookie de sessão agora é o caminho base da aplicação,
+  ao invés de "/". Além disso, uma nova variável de configuração ``Session.cookiePath`` 
+  foi adicionada para facilitar a personalização do caminho para os cookies.
+* Um novo método conveniente :php:meth:`Cake\\Network\\Session::consume()` foi adicionado
+  para permitir a leitura e exclusão de dados de sessão em um único passo.
+* O valor padrão do argumento ``$renew`` de :php:meth:`Cake\\Network\\Session::clear()`
+  mudou de ``true`` para ``false``.
