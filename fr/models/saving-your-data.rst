@@ -1071,9 +1071,9 @@ surcharger Model::save() pour toujours le faire pour vous::
 
 Si vous sauvegardez des données avec un ``fieldList`` et que les champs
 ``created`` et ``modified`` ne sont pas présents dans la liste blanche, les
-valeurs pour ces champs vont continuer à être automatiquement remplies. Quand
-les champs ``created`` et ``modified`` sont dans ``fieldList``, ils
-fonctionnent comme n'importe quels autres champs.
+valeurs pour ces champs vont continuer à être automatiquement remplies. Si les
+champs ``created`` et ``modified`` sont dans ``fieldList``, ils fonctionneront
+comme n'importe quels autres champs.
 
 .. meta::
     :title lang=fr: Sauvegarder vos Données
