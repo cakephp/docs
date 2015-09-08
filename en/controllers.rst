@@ -155,7 +155,7 @@ the request type before returning::
         public function popular()
         {
             $popular = $this->Recipes->find('popular');
-            if (!$this->request->is('requested')) {
+            if ($this->request->is('requested')) {
                 $this->response->body(json_encode($popular));
                 return $this->response;
             }
