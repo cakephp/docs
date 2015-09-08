@@ -486,3 +486,30 @@ acessada através do objeto de requisição (request). Veja a documentação em
   para permitir a leitura e exclusão de dados de sessão em um único passo.
 * O valor padrão do argumento ``$renew`` de :php:meth:`Cake\\Network\\Session::clear()`
   mudou de ``true`` para ``false``.
+
+Network\\Http
+=============
+
+* O ``HttpSocket`` agora é :php:class:`Cake\\Network\\Http\\Client`.
+* O Http\Client foi reescrito do zero. Ele tem uma API mais simples/fácil
+  de usar, suporta novos sistemas de autenticação como OAuth, e uploads de arquivos.
+  Ele usa as API de stream do PHP de modo que não há requerimentp para o cURL. Veja a
+  documentação :doc:`/core-libraries/httpclient` para mais informações.
+
+Network\\Email
+==============
+
+* O :php:meth:`Cake\\Network\\Email\\Email::config()` agora é usado para definir
+  perfis de configuração. Isso substitui as classes ``EmailConfig`` nas versões
+  anteriores.
+* O :php:meth:`Cake\\Network\\Email\\Email::profile()` substitui o ``config()`` 
+  como modo de modificar opções de configuração por instância.
+* O :php:meth:`Cake\\Network\\Email\\Email::drop()` foi adicionado para permitir a 
+  remoção de configurações de email.
+* O :php:meth:`Cake\\Network\\Email\\Email::configTransport()` foi adicionado para
+  permitir a definição de configurações de transporte. Essa mudança retira as opções
+  de transporte dos perfis de entrega e permite a você reusar facilmente os transportes
+  através de perfis de e-mails.
+* O :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` foi adicionado para permitir
+  a remoção de configurações de transporte.
+  
