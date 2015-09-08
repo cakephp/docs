@@ -37,6 +37,9 @@ Make sure /usr/local/bin is in your php.ini file's include_path::
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
+.. note::
+    In CakePHP 2.5.7 and later you can place the phar directly in your vendors or App/Vendor directory.
+    
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6+. Add the ``--debug``
