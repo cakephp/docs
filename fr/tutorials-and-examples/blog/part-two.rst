@@ -436,25 +436,31 @@ ajustements::
 
     class ArticlesTable extends Table
     {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Timestamp');
+        }
 
         public function validationDefault(Validator $validator)
         {
             $validator
-                ->allowEmpty('title', false)
-                ->allowEmpty('body', false);
+                ->notEmpty('title')
+                ->requirePresence('title')
+                ->notEmpty('body')
+                ->requirePresence('body');
 
             return $validator;
         }
     }
 
 Le méthode ``validationDefault()`` indique à CakePHP comment valider vos données
-lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les
-deux champs "body" et "title" ne doivent pas être vides. Le moteur de
-validation de CakePHP est puissant, il dispose d'un certain nombre de
-règles intégrées (code de carte bancaire, adresse emails, etc.)
-et d'une souplesse pour ajouter vos propres règles de validation. Pour
-plus d'informations sur cette configuration, consultez le chapitre
-:doc:`/core-libraries/validation`.
+lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les deux
+champs "body" et "title" ne doivent pas être vides et que ces champs sont requis
+à la fois pour les opérations de création et de mise à jour. Le moteur de
+validation de CakePHP est puissant, il dispose d'un certain nombre de règles
+intégrées (code de carte bancaire, adresse emails, etc.) et d'une souplesse pour
+ajouter vos propres règles de validation. Pour plus d'informations sur cette
+configuration, consultez le chapitre :doc:`/core-libraries/validation`.
 
 Maintenant que vos règles de validation sont en place, utilisez l'application
 pour essayer d'ajouter un article avec un titre et un contenu vide afin de voir
