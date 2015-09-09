@@ -383,7 +383,7 @@ Destroying the Session
 
 .. php:method:: destroy()
 
-Destroying the session is useful when users logout. To destroy a session, use
+Destroying the session is useful when users log out. To destroy a session, use
 the ``destroy()`` method::
 
     $session->destroy();
