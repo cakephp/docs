@@ -41,6 +41,9 @@ fichier php.ini ::
     Selon la configuration de votre système, vous devrez lancer les commandes
     précédentes avec ``sudo``.
 
+.. note::
+    A  partir de 2.5.7, vous pouvez placer le phar directement dans votre
+    dossier vendors ou App/Vendor.
 
 .. tip::
 
