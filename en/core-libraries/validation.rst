@@ -153,7 +153,7 @@ the ``provider`` key in your rule::
 
     // Use a rule from the table provider
     $validator->add('title', 'unique', [
-        'rule' => 'uniqueTitle',
+        'rule' => 'validateUnique',
         'provider' => 'table'
     ]);
 
