@@ -423,18 +423,20 @@ back at our Articles model and make a few adjustments::
         {
             $validator
                 ->notEmpty('title')
-                ->notEmpty('body');
+                ->requirePresence('title')
+                ->notEmpty('body')
+                ->requirePresence('title');
 
             return $validator;
         }
     }
 
-The ``validationDefault()`` method tells CakePHP how to validate your data
-when the ``save()`` method is called. Here, we've specified that
-both the body and title fields must not be empty. CakePHP's
-validation engine is strong, with a number of pre-built rules
-(credit card numbers, email addresses, etc.) and flexibility for
-adding your own validation rules. For more information on that
+The ``validationDefault()`` method tells CakePHP how to validate your data when
+the ``save()`` method is called. Here, we've specified that both the body and
+title fields must not be empty, and are required for both create and update
+operations. CakePHP's validation engine is strong, with a number of pre-built
+rules (credit card numbers, email addresses, etc.) and flexibility for adding
+your own validation rules. For more information on that
 setup, check the :doc:`/core-libraries/validation` documentation.
 
 Now that your validation rules are in place, use the app to try to add
