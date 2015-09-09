@@ -2,7 +2,7 @@ Sessions
 ########
 
 CakePHP provides a wrapper and suite of utility features on top of PHP's native
-``session`` extension. Sessions allow you to identify unique users across the
+``session`` extension. Sessions allow you to identify unique users across
 requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side. Usage of ``$_SESSION`` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
@@ -18,7 +18,7 @@ level ``Session`` key, and a number of options are available:
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session
   handler expires the session.
 
-* ``Session.defaults`` - Allows you to use one the built-in default session
+* ``Session.defaults`` - Allows you to use the built-in default session
   configurations as a base for your session configuration. See below for the
   built-in defaults.
 
@@ -44,7 +44,7 @@ this::
     ]);
 
 The session cookie path defaults to app's base path. To change this you can use
-the ``session.cookie_path`` ini value. For e.g. if you want your session to
+the ``session.cookie_path`` ini value. For example if you want your session to
 persist across all subdomains you can do::
 
     Configure::write('Session', [
@@ -141,7 +141,7 @@ You can then read those values out from inside your handler::
 The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
 expect to find your class in the ``Network\Session`` namespace. For example, if
-you had a ``AppSessionHandler`` class,  the file should be
+you had an ``AppSessionHandler`` class,  the file should be
 **src/Network/Session/AppSessionHandler.php**, and the class name should be
 ``App\Network\Session\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
@@ -149,7 +149,7 @@ from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 Database Sessions
 -----------------
 
-If you you need to use a database to store your session data, configure as follows::
+If you need to use a database to store your session data, configure as follows::
 
     'Session' => [
         'defaults' => 'database'
@@ -186,7 +186,7 @@ Cache Sessions
 --------------
 
 The Cache class can be used to store sessions as well. This allows you to store
-sessions in a cache like APC, memcache, or Xcache. There are some caveats to
+sessions in a cache like APC, Memcached, or XCache. There are some caveats to
 using cache sessions, in that if you exhaust the cache space, sessions will
 start to expire as records are evicted.
 
@@ -229,7 +229,7 @@ Creating a Custom Session Handler
 
 Creating a custom session handler is straightforward in CakePHP. In this
 example we'll create a session handler that stores sessions both in the Cache
-(apc) and the database. This gives us the best of fast IO of apc,
+(APC) and the database. This gives us the best of fast IO of APC,
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
@@ -303,7 +303,7 @@ block look like the following::
         'apc' => ['engine' => 'Apc']
     ]
 
-Now our application will start using our custom session handler for reading &
+Now our application will start using our custom session handler for reading and
 writing session data.
 
 
@@ -383,7 +383,7 @@ Destroying the Session
 
 .. php:method:: destroy()
 
-Destroying the session is useful when users log out. To destroy a session, use
+Destroying the session is useful when users logout. To destroy a session, use
 the ``destroy()`` method::
 
     $session->destroy();
@@ -397,7 +397,7 @@ Rotating Session Identifiers
 .. php:method:: renew()
 
 While ``AuthComponent`` automatically renews the session id when users login and
-out, you may need to rotate the session id's manually. To do this use the
+logout, you may need to rotate the session id's manually. To do this use the
 ``renew()`` method::
 
     $session->renew();
