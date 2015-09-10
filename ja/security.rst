@@ -1,8 +1,13 @@
-Security
+..
+    Security
+セキュリティ
 ########
+..
+    CakePHP provides you some tools to secure your application.
+    The following sections cover those tools:
 
-CakePHP provides you some tools to secure your application.
-The following sections cover those tools:
+CakePHPはあなたのアプリケーションをセキュアにする幾つかのツールを提供します。
+以下のセクションにこれらのツールを記載します。
 
 .. toctree::
     :maxdepth: 1
