@@ -54,9 +54,3 @@ Contents
     debug-kit
     migrations
     appendices
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`

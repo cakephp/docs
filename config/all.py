@@ -201,7 +201,7 @@ latex_show_urls = 'footnote'
 #latex_appendices = []
 
 # If false, no module index is generated.
-# latex_domain_indices = True
+latex_domain_indices = True
 
 
 preamb = ur'''
