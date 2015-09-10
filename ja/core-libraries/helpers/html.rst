@@ -9,9 +9,9 @@ CakePHP における HtmlHelper の役割は、 HTML に関連するオプショ
 そしてドメインのルートが置かれている場所に関して、よりフレキシブル
 なものになるでしょう。
 
-HtmlHelper にある多くのメソッドは ``$htmlAttributes`` という
+HtmlHelper にある多くのメソッドは ``$options`` という
 引数を持っています。これにより、いかなる追加属性もタグに
-付け加えることができます。これは ``$htmlAttributes`` を使う
+付け加えることができます。これは ``$options`` を使う
 方法についての簡単な例です。
 
 .. code-block:: html
@@ -114,9 +114,11 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     ロードしたプラグインと名前が共通する CSS ファイルをインクルードするときは
     次のようにします。たとえば ``Blog`` プラグインを使っているときに、
-    ``app/webroot/css/Blog.common.css`` をインクルードしたい場合は以下のようにします。 ::
+    ``app/webroot/css/Blog.common.css`` をインクルードしたい場合は以下のようにします。
 
     .. versionchanged:: 2.4
+
+    .. code-block:: php
 
         echo $this->Html->css('Blog.common.css', array('plugin' => false));
 
@@ -289,7 +291,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         <img src="/img/cake_logo.png" alt="CakePHP" />
 
-    リンク付き画像を作成するには、リンク先を ``$htmlAttributes`` の
+    リンク付き画像を作成するには、リンク先を ``$options`` の
     ``url`` オプションに設定します。 ::
 
         echo $this->Html->image("recipes/6.jpg", array(
@@ -324,7 +326,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     ロードしたプラグインと名前が共通する画像をインクルードするときは
     次のようにします。たとえば ``Blog`` プラグインを使っているときに、
-    ``app/webroot/js/Blog.icon.png`` をインクルードしたい場合は次のようにします。 ::
+    ``app/webroot/img/Blog.icon.png`` をインクルードしたい場合は次のようにします。 ::
 
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
 
@@ -353,7 +355,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
-    ``'full_base'=>true`` オプションを設定すると、URLをフルパスで出力します。 ::
+    ``'full_base' => true`` オプションを設定すると、URL をフルパスで出力します。 ::
 
         echo $this->Html->link(
             'Dashboard',
@@ -371,7 +373,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    オプションに ``confirm`` キーを指定すると、JavaScript の ``confirm()``
+    $options に ``confirm`` キーを指定すると、JavaScript の ``confirm()``
     で表示するダイアログのメッセージを設定できます。::
 
         echo $this->Html->link(
@@ -480,7 +482,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
 .. php:method:: media(string|array $path, array $options)
 
-    :param string|array $path: 動画ファイルへの
+    :param string|array $path: メディアファイルへの
         `webroot/{$options['pathPrefix']}` ディレクトリからの相対的なパス。
         または自身がパス文字列の配列、または `src` や `type` キーを含む連想配列。
     :param array $options: HTML の属性や特別なオプションを設定します。
@@ -489,7 +491,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         - `type` メディアタグを作成する際の種類を指定します。有効な値は "audio"
           か "video" です。指定しなかった場合はファイルの MIME タイプから判別します。
-        - `text` video タグに含めるテキストを設定します。
+        - `text` audio/video タグに含めるテキストを設定します。
         - `pathPrefix` 相対的な URL のパスに使うプレフィックスを設定します。既定では
           'files/' が使われます。
         - `fullBase` ドメイン名を含めた完全なアドレスを src 属性に指定したい場合に設定します。
@@ -531,7 +533,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
                 codecs='theora, vorbis'"/>
         </video>
 
-.. php:method:: tag(string $tag, string $text, array $htmlAttributes)
+.. php:method:: tag(string $tag, string $text, array $options)
 
     :param string $tag: 生成するタグの名前
     :param string $text: タグの内容
@@ -560,7 +562,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     .. note::
 
         text は既定ではエスケープされませんが、
-        ``$htmlOptions['escape'] = true`` と設定することでエスケープすることができます。
+        ``$options['escape'] = true`` と設定することでエスケープすることができます。
         以前のバージョンでは、4つ目の引数に ``boolean $escape = false``
         と設定することで行います。
 
@@ -572,7 +574,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     div タグで囲ったセクションを作成するために使います。最初の引数で
     CSS のクラスを設定し、次の引数でdivタグで囲うテキストを設定します。
-    最後の引数を ``true`` に設定すると、 ``$text`` をエスケープされた
+    最後の引数の ``escape`` キーに ``true`` を設定すると、 ``$text`` がエスケープされた
     HTML で出力します。
 
     text を指定しなかった場合は開始タグのみを返します。
