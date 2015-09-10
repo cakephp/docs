@@ -563,7 +563,9 @@ database, the easiest way is to use a setter function in your User entity::
 
         protected function _setPassword($password)
         {
-            return (new DefaultPasswordHasher)->hash($password);
+            if (!empty($password)) {
+              return (new DefaultPasswordHasher)->hash($password);
+            }
         }
 
         // ...
