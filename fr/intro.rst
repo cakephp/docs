@@ -165,7 +165,7 @@ Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres gra
 fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` qui s'intègre à
-  Memcache, Redis et d'autres.
+  Memcached, Redis et d'autres.
 * Un :doc:`outil de génération de code
   </bake/usage>` puissant pour partir sur les chapeaux de roue.
 * Un :doc:`framework de tests intégré</development/testing>` pour vous assurer

@@ -28,7 +28,7 @@ The Model Layer
 The Model layer represents the part of your application that implements the
 business logic. It is responsible for retrieving data and converting it into the
 primary meaningful concepts in your application. This includes processing,
-validating, associating or other tasks related to handling data. 
+validating, associating or other tasks related to handling data.
 
 In the case of a social network, the Model layer would take care of
 tasks such as saving the user data, saving friends' associations, storing
@@ -45,7 +45,7 @@ The model objects can be thought of as "Friend", "User", "Comment", or
     }
 
 You may notice that we didn't have to write any code before we could start
-working with our data. By using conventions, CakePHP will use standard classes 
+working with our data. By using conventions, CakePHP will use standard classes
 for table and entity classes that have not yet been defined.
 
 If we wanted to make a new user and save it (with validation) we would do
@@ -148,7 +148,7 @@ Hopefully this quick overview has piqued your interest. Some other great
 features in CakePHP are:
 
 * A :doc:`caching </core-libraries/caching>` framework that integrates with
-  Memcache, Redis and other backends.
+  Memcached, Redis and other backends.
 * Powerful :doc:`code generation tools
   </bake/usage>` so you can start immediately.
 * :doc:`Integrated testing framework </development/testing>` so you can ensure

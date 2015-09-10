@@ -37,11 +37,10 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
 * ``MemcachedEngine`` Utilise l'extension
-  `Memcached <http://php.net/memcached>`_. Il est aussi une interface avec
-  memcache mais il fournit une meilleur performance.
+  `Memcached <http://php.net/memcached>`_.
 * ``RedisEngine`` Utilise l'extension
   `phpredis <https://github.com/nicolasff/phpredis>`_. Redis fournit un système
-  de cache cohérent et rapide similaire à memcached et il permet aussi les
+  de cache cohérent et rapide similaire à Memcached et il permet aussi les
   opérations atomiques.
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre
@@ -66,7 +65,7 @@ moteurs de cache. CakePHP utilise deux configurations de cache en interne.
 et les résultats parsés des fichiers de
 :doc:`traduction </core-libraries/internationalization-and-localization>` .
 ``_cake_model_`` est utilisé pour stocker les schémas des models de vos
-applications. Si vous utilisez APC ou Memcache
+applications. Si vous utilisez APC ou Memcached
 vous devrez vous assurer de définir des clés uniques pour les caches du noyau.
 Ceci vous évitera qu'une application vienne réécrire les données cache d'une
 autre application.
@@ -321,7 +320,7 @@ Effacer les Données du Cache
 .. php:staticmethod:: clear($check, $config = 'default')
 
 Détruit toute les valeurs pour une configuration de cache. Pour les moteurs
-tels que Apc, Memcached et Wincache, le préfixe de la configuration du cache
+tels que APC, Memcached et Wincache, le préfixe de la configuration du cache
 est utilisé pour supprimer les données de cache. Assurez-vous que les
 différentes configurations de cache ont des préfixes différents::
 

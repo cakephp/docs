@@ -126,7 +126,7 @@ CakePHPのリクエスト循環
 
 この文章があなたの興味を惹くことを願っています。Cakeには他にもとてもいい特徴があります。:
 
-* Memcache, Redis や他のバックエンドと統合された :doc:`キャッシュ </core-libraries/caching>` フレームワーク。
+* Memcached, Redis や他のバックエンドと統合された :doc:`キャッシュ </core-libraries/caching>` フレームワーク。
 * 強力な :doc:`コード生成ツールbake</bake/usage>` ですぐに簡単なモックを作ってプロジェクトを始める。
 * :doc:`統合されたテストフレームワーク </development/testing>` でコードが完璧に動いているか確かめられる。
 

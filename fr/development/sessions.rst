@@ -203,7 +203,7 @@ Les Sessions de Cache
 ---------------------
 
 La classe Cache peut aussi être utilisée pour stocker les sessions. Cela vous
-permet de stocker les sessions dans un cache comme APC, memcache, ou Xcache.
+permet de stocker les sessions dans un cache comme APC, Memcached, ou XCache.
 Il y a quelques bémols dans l'utilisation des sessions en cache, puisque si
 vous avez épuisé l'espace de cache, les sessions vont commencer à expirer
 tandis que les enregistrements sont supprimés.
@@ -251,8 +251,8 @@ Créer un Gestionnaire de Session Personnalisé
 
 Créer un gestionnaire de session personnalisé est simple dans CakePHP. Dans cet
 exemple, nous allons créer un gestionnaire de session qui stocke les sessions
-à la fois dans le Cache (apc) et la base de données. Cela nous donne le
-meilleur du IO rapide de apc, sans avoir à se soucier des sessions disparaissent
+à la fois dans le Cache (APC) et la base de données. Cela nous donne le
+meilleur du IO rapide de APC, sans avoir à se soucier des sessions disparaissent
 quand le cache se remplit.
 
 D'abord, nous aurons besoin de créer notre classe personnalisée et de la
@@ -328,7 +328,7 @@ le block de session qui suit::
     ]
 
 Maintenant notre application va se lancer en utilisant notre gestionnaire
-de session personnalisé pour la lecture & l'écriture des données de session.
+de session personnalisé pour la lecture et l'écriture des données de session.
 
 .. php:class:: Session
 
