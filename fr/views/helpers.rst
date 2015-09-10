@@ -349,7 +349,7 @@ aucune des méthodes de callback.
 .. php:method:: beforeRender(Event $event, $viewFile)
 
     La méthode ``beforeRender()`` est appelée après la méthode
-   ``beforeRender()`` du controller, mais avant les rendus du controller de la
+    ``beforeRender()`` du controller, mais avant les rendus du controller de la
     vue et du layout. Reçoit le fichier à rendre en argument.
 
 .. php:method:: afterRender(Event $event, $viewFile)
