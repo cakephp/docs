@@ -44,23 +44,45 @@
 あなたのシステムで有効であることが基準になります。
 いずれかの実装で暗号化されたデータは、もう一方の実装に移植できます。
 
-This method should **never** be used to store passwords.  Instead you should use
-the one way hashing methods provided by
-:php:meth:`~Cake\\Utility\\Security::hash()`. An example use would be::
+..
+    This method should **never** be used to store passwords.  Instead you should use
+    the one way hashing methods provided by
+    :php:meth:`~Cake\\Utility\\Security::hash()`. An example use would be::
 
+このメソッドは **決して** パスワードの保存に使ってはいけません。
+代わりに一方通行のハッシュ化メソッド :php:meth:`~Cake\\Utility\\Security::hash()` を利用すべきです。
+以下に一例を挙げます。
+
+..
     // Assuming key is stored somewhere it can be re-used for
     // decryption later.
     $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
     $result = Security::encrypt($value, $key);
 
-If you do not supply an HMAC salt, the ``Security.salt`` value will be used.
-Encrypted values can be decrypted using
-:php:meth:`Cake\\Utility\\Security::decrypt()`.
+::
 
-Decrypt a previously encrypted value. The ``$key`` and ``$hmacSalt``
-parameters must match the values used to encrypt or decryption will fail. An
-example use would be::
+    // キーがどこかに保存されたと仮定すれば、あとで復号のために再利用されることが可能
+    $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+    $result = Security::encrypt($value, $key);
 
+..
+    If you do not supply an HMAC salt, the ``Security.salt`` value will be used.
+    Encrypted values can be decrypted using
+    :php:meth:`Cake\\Utility\\Security::decrypt()`.
+
+もしあなたが HMAC ソルトを提供しなければ、 ``Security.salt`` の値が利用されます。
+暗号化された値は :php:meth:`Cake\\Utility\\Security::decrypt()` を利用して復号できます。
+
+..
+    Decrypt a previously encrypted value. The ``$key`` and ``$hmacSalt``
+    parameters must match the values used to encrypt or decryption will fail. An
+    example use would be::
+
+すでに暗号化された値を復号します。 ``$key`` と ``$hmacSalt`` のパラメーターは、
+暗号化時に利用された各々の値と一致する必要があり、さもなければ復号化は失敗します。
+以下に一例を挙げます。
+
+..
     // Assuming the key is stored somewhere it can be re-used for
     // Decryption later.
     $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
@@ -68,35 +90,67 @@ example use would be::
     $cipher = $user->secrets;
     $result = Security::decrypt($cipher, $key);
 
-If the value cannot be decrypted due to changes in the key or HMAC salt
-``false`` will be returned.
+::
+
+    // キーがどこかに保存されたと仮定すれば、あとで復号のために再利用されることが可能
+    $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
+
+    $cipher = $user->secrets;
+    $result = Security::decrypt($cipher, $key);
+
+..
+    If the value cannot be decrypted due to changes in the key or HMAC salt
+    ``false`` will be returned.
+
+キーや HMAC ソルトの変更により値が復号化できない場合、 ``false`` が返却されます。
+
 
 .. _force-mcrypt:
 
-Choosing a Specific Crypto Implementation
+..
+    Choosing a Specific Crypto Implementation
+
+暗号化を一つに特定する実装
 -----------------------------------------
 
-If you are upgrading an application from CakePHP 2.x, data encrypted in 2.x is
-not compatible with openssl. This is because the encrypted data is not fully AES
-compliant. If you don't want to go through the trouble of re-encrypting your
-data, you can force CakePHP to use ``mcrypt`` using the ``engine()`` method::
+..
+    If you are upgrading an application from CakePHP 2.x, data encrypted in 2.x is
+    not compatible with openssl. This is because the encrypted data is not fully AES
+    compliant. If you don't want to go through the trouble of re-encrypting your
+    data, you can force CakePHP to use ``mcrypt`` using the ``engine()`` method::
+
+もし CakePHP 2.x からアプリケーションをアップグレードするならば、 2.x で暗号化されたデータは openssl では互換性がありません。
+これは、暗号化されたデータはAESに完全には準拠していないからです。
+もしデータを再度暗号化するときにトラブルを避けたければ、 ``engine()`` メソッドを使用して強制的に ``mcrypt`` を利用できます。
+
+::
 
     // In config/bootstrap.php
     use Cake\Utility\Crypto\Mcrypt;
 
     Security::engine(new Mcrypt());
 
-The above will allow you to seamlessly read data from older versions of CakePHP,
-and encrypt new data to be compatible with OpenSSL.
+..
+    The above will allow you to seamlessly read data from older versions of CakePHP,
+    and encrypt new data to be compatible with OpenSSL.
 
-Hashing Data
+上記は古いバージョンのCakePHPのデータのシームレスな読み込みを許可し、新しいデータを暗号化すると openssl 互換となります。
+
+..
+    Hashing Data
+
+ハッシュデータ
 ============
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
-Create a hash from string using given method. Fallback on next
-available method. If ``$salt`` is set to ``true``, the applications salt
-value will be used::
+..
+    Create a hash from string using given method. Fallback on next
+    available method. If ``$salt`` is set to ``true``, the applications salt
+    value will be used::
+
+このメソッドで文字列からハッシュを作成します。次の有効なメソッドを頼ってください。
+
 
     // Using the application's salt value
     $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
