@@ -144,8 +144,7 @@ documents. Validating request data, and applying application rules works the
 same as it does with the relational ORM. See the :ref:`validating-request-data`
 and :ref:`application-rules` sections for more information.
 
-.. comment::
-    Need information on nested validators.
+.. Need information on nested validators.
 
 Saving New Documents
 ====================
