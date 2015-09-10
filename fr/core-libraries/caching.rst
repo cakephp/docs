@@ -321,7 +321,7 @@ Effacer les Données du Cache
 .. php:staticmethod:: clear($check, $config = 'default')
 
 Détruit toute les valeurs pour une configuration de cache. Pour les moteurs
-tels que Apc, Memcached et Wincache, le préfixe de la configuration du cache
+tels que APC, Memcached et Wincache, le préfixe de la configuration du cache
 est utilisé pour supprimer les données de cache. Assurez-vous que les
 différentes configurations de cache ont des préfixes différents::
 
