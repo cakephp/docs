@@ -113,7 +113,7 @@ Inflection Configuration
 ========================
 
 CakePHP's naming conventions can be really nice - you can name your
-database table ``big\_boxes``, your model ``BigBoxes``, your controller
+database table ``big_boxes``, your model ``BigBoxes``, your controller
 ``BigBoxesController``, and everything just works together
 automatically. The way CakePHP knows how to tie things together is
 by *inflecting* the words between their singular and plural forms.
