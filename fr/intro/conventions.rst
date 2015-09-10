@@ -43,6 +43,16 @@ la convention est que vos URLs soient en minuscules avec des tirets en utilisant
 la classe ``DashedRoute``, donc ``/red-apples/go-pick`` est la bonne forme
 pour accéder à l'action ``RedApplesController::goPick()``.
 
+Quand vous créez des liens en utilisant ``this->Html->link()``, vous pouvez
+utiliser les conventions suivantes pour le tableau d'url::
+
+    $this->Html->link('link-title', [
+        'prefix' => 'my-prefix // unmodified
+        'plugin' => 'MyPlugin, // camelCased
+        'controller' => 'ControllerName', // camelCased
+        'action' => 'actionName' // camelBacked
+    ]
+
 Pour plus d'informations sur les URLs de CakePHP et la gestion des paramètres,
 allez voir :ref:`routes-configuration`.
 

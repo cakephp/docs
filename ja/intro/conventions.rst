@@ -35,6 +35,16 @@ CakePHPでの開発にはこれらの規約の利用をお勧めしますが、�
 は全て、 RedApples コントローラの index アクションとして解決されます。
 しかしながら、 URL  ``DashedRoute`` クラスで使っているダッシュとアンダースコアを用いるというのが規約であり、 ``RedApplesController::go_pick`` アクションにアクセスするための正しい形式は ``/red-apples/go-pick`` となります。
 
+When you create links using ``this->Html->link()``, you can use the following
+conventions for the url array::
+
+    $this->Html->link('link-title', [
+        'prefix' => 'my-prefix // unmodified
+        'plugin' => 'MyPlugin, // camelCased
+        'controller' => 'ControllerName', // camelCased
+        'action' => 'actionName' // camelBacked
+    ]
+
 CakePHP の URL とパラメータの取り扱いに関するより詳細な情報は、 :ref:`routes-configuration` を参照してください。
 
 .. _file-and-classname-conventions:
