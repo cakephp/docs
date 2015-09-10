@@ -185,7 +185,7 @@
 ..
     And any other hash algorithmn that PHP's ``hash()`` function supports.
 
-また、その他PHPの ``hash()`` 関数のハッシュアルゴリズムもサポートします。
+そして、他のどんなハッシュアルゴリズムであれ、PHPの ``hash()`` 関数がサポートしているハッシュアルゴリズムもサポートします。
 
 ..
     You should not be using ``hash()`` for passwords in new applications.
@@ -194,8 +194,8 @@
 
 .. warning::
 
-    新しいアプリケーションに ``hash()`` をパスワードとして利用すべきではありません。
-    代わりに ``DefaultPasswordHasher`` クラスをデフォルトでハッシュ化に利用すべきです。
+    新しいアプリケーションのパスワード用に ``hash()`` を利用すべきではありません。
+    代わりにデフォルトで bcrypt を利用する ``DefaultPasswordHasher`` クラスを利用すべきです。
 
 .. meta::
     :title lang=en: Security
