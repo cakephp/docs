@@ -550,7 +550,9 @@ application, provide a unique cache key value using the following format::
         ]
     );
 
-If you need more logic in your element, such as dynamic data from a datasource, consider using a View Cell instead of an element, :doc:`find out more about View Cells </views/cells>`
+If you need more logic in your element, such as dynamic data from a datasource,
+consider using a View Cell instead of an element, :doc:`find out more about View
+Cells </views/cells>`
 
 Caching Elements
 ----------------
