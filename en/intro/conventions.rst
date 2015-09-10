@@ -47,8 +47,8 @@ conventions for the url array::
 
     $this->Html->link('link-title', [
         'prefix' => 'my-prefix // unmodified
-        'plugin' => 'MyPlugin, // camelCased
-        'controller' => 'ControllerName', // camelCased
+        'plugin' => 'MyPlugin, // CamelCased
+        'controller' => 'ControllerName', // CamelCased
         'action' => 'actionName' // camelBacked
     ]
 
