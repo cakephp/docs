@@ -18,7 +18,7 @@ düzeltmeler yapabilmeniz için Gihub çevrimiçi düzenleyicisine yönlendirece
     cihazda, hem de çevrimdışı olarak okuyabilmeniz için PDF ve EPUB olarak da
     mevcuttur.
 
-    - `PDF <../_downloads/tr/CakePHPCookbook.pdf>`_
+    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/tr/CakePHPCookbook.epub>`_
     - `Orijinal Kaynak <http://github.com/cakephp/docs>`_
 
