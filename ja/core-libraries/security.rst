@@ -150,8 +150,9 @@
     value will be used::
 
 このメソッドで文字列からハッシュを作成します。次の有効なメソッドを頼ってください。
+もし ``$salt`` が ``true`` にセットされていた場合、アプリケーションのソルト値が利用されます。
 
-
+..
     // Using the application's salt value
     $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
@@ -161,19 +162,40 @@
     // Using the default hash algorithm
     $hash = Security::hash('CakePHP Framework');
 
-The ``hash()`` method supports the following hashing strategies:
+::
+
+    // アプリケーションのソルト値を利用
+    $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
+
+    // カスタムソルト値を利用
+    $sha1 = Security::hash('CakePHP Framework', 'sha1', 'my-salt');
+
+    // デフォルトのハッシュアルゴリズムを利用
+    $hash = Security::hash('CakePHP Framework');
+
+..
+    The ``hash()`` method supports the following hashing strategies:
+
+ ``hash()`` メソッドは以下のハッシュ方法をサポートします。
 
 - md5
 - sha1
 - sha256
 
-And any other hash algorithmn that PHP's ``hash()`` function supports.
+..
+    And any other hash algorithmn that PHP's ``hash()`` function supports.
 
-.. warning::
+また、その他PHPの ``hash()`` 関数のハッシュアルゴリズムもサポートします。
 
+..
     You should not be using ``hash()`` for passwords in new applications.
     Instead you should use the ``DefaultPasswordHasher`` class which uses bcrypt
     by default.
+
+.. warning::
+
+    新しいアプリケーションに ``hash()`` をパスワードとして利用すべきではありません。
+    代わりに ``DefaultPasswordHasher`` クラスをデフォルトでハッシュ化に利用すべきです。
 
 .. meta::
     :title lang=en: Security
