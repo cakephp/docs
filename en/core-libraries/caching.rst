@@ -32,7 +32,7 @@ to implement your own caching systems. The built-in caching engines are:
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
-  extension. It also interfaces with Memcached but provides better performance.
+  extension.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   Memcached, also provides atomic operations.

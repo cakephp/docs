@@ -37,8 +37,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
 * ``MemcachedEngine`` Utilise l'extension
-  `Memcached <http://php.net/memcached>`_. Il est aussi une interface avec
-  Memcached mais il fournit une meilleur performance.
+  `Memcached <http://php.net/memcached>`_.
 * ``RedisEngine`` Utilise l'extension
   `phpredis <https://github.com/nicolasff/phpredis>`_. Redis fournit un système
   de cache cohérent et rapide similaire à Memcached et il permet aussi les
