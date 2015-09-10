@@ -203,7 +203,7 @@ Les Sessions de Cache
 ---------------------
 
 La classe Cache peut aussi être utilisée pour stocker les sessions. Cela vous
-permet de stocker les sessions dans un cache comme APC, Memcache, ou XCache.
+permet de stocker les sessions dans un cache comme APC, Memcached, ou XCache.
 Il y a quelques bémols dans l'utilisation des sessions en cache, puisque si
 vous avez épuisé l'espace de cache, les sessions vont commencer à expirer
 tandis que les enregistrements sont supprimés.

@@ -149,7 +149,7 @@ Esperamos que essa rápida visão geral tenha despertado seu interesse.
 Alguns outros grandes recursos no CakePHP são:
 
 * :doc:`Framework de cache </core-libraries/caching>` que integra com
-  Memcache, Redis e outros backends.
+  Memcached, Redis e outros backends.
 * Poderosas :doc:`ferramentas de geração de código </bake>` para você sair em
   disparada.
 * :doc:`Framework de teste integrado </development/testing>` para você
