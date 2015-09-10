@@ -341,7 +341,8 @@ Les DocBlocks des attributs peuvent contenir les tags
 `phpDocumentor <http://phpdoc.org>`_ suivants:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+   en utilisant le format ``@version <vector> <description>``, où ``version`` et
+   ``description`` sont obligatoires.
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
@@ -375,7 +376,8 @@ Les DocBlocks des méthodes/fonctions peuvent contenir les tags
 `phpDocumentor <http://phpdoc.org>`_ suivants:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+   en utilisant le format ``@version <vector> <description>``, où ``version`` et
+   ``description`` sont obligatoires.
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_

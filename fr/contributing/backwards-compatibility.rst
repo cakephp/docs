@@ -71,7 +71,7 @@ que vous pouvez attendre de CakePHP:
 +-------------------------------+--------------------------+
 | Si vous...                    | Backwards compatibility? |
 +===============================+==========================+
-| Typehint against the class    | Oui                      |
+| Typehint sur une classe       | Oui                      |
 +-------------------------------+--------------------------+
 | Créé une nouvelle instance    | Oui                      |
 +-------------------------------+--------------------------+
