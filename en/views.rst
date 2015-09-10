@@ -550,48 +550,6 @@ application, provide a unique cache key value using the following format::
         ]
     );
 
-You can take full advantage of elements by using
-``requestAction()``, which fetches view
-variables from a controller action and returns them as an array.
-This enables your elements to perform in true MVC style. Create a
-controller action that prepares the view variables for your
-elements, then call ``requestAction()`` inside the second parameter
-of ``element()`` to feed the element the view variables from your
-controller.
-
-To do this, in your controller add something like the following for
-the Post example::
-
-    namespace App\Controller;
-
-    class PostsController extends AppController
-    {
-        // ...
-        public function index()
-        {
-            $posts = $this->paginate();
-            if ($this->request->is('requested')) {
-                return $posts;
-            } else {
-                $this->set('posts', $posts);
-            }
-        }
-    }
-
-And then in the element we can access the paginated posts model. To
-get the latest five posts in an ordered list, we would do something
-like the following:
-
-.. code-block:: php
-
-    <h2>Latest Posts</h2>
-    <?php $posts = $this->requestAction('posts/index?sort=created&direction=asc&limit=5'); ?>
-    <ol>
-    <?php foreach ($posts as $post): ?>
-          <li><?= $post['Post']['title'] ?></li>
-    <?php endforeach; ?>
-    </ol>
-
 Caching Elements
 ----------------
 
