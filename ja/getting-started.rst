@@ -25,3 +25,8 @@ CakePHPを体験し学ぶ最良の方法は腰を据えて何かを作ること�
     getting-started/cakephp-conventions
     getting-started/cakephp-folder-structure
     getting-started/cakephp-structure
+
+
+.. meta::
+    :title lang=ja: 入門
+    :keywords lang=ja: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
