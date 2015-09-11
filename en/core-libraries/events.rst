@@ -476,18 +476,6 @@ de-couple application code and make extensible plugins.
 Keep in mind that with great power comes great responsibility. Using too many
 events can make debugging harder and require additional integration testing.
 
-Additional Reading
-==================
-
-.. toctree::
-    :maxdepth: 1
-
-    /core-libraries/collections
-    /models/behaviors
-    /controllers/components
-    /views/helpers
-
-
 .. meta::
     :title lang=en: Events system
     :keywords lang=en: events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php

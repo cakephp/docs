@@ -16,7 +16,7 @@ formatting numbers.
    class and you can call it as you would call a normal helper method:
    ``$this->Number->method($args);``.
 
-.. include:: ../../core-utility-libraries/number.rst
+.. include:: ../../core-libraries/number.rst
     :start-after: start-cakenumber
     :end-before: end-cakenumber
 

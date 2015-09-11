@@ -90,7 +90,7 @@ Creating notification messages
 .. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
 
     .. deprecated:: 2.7.0
-        You should use :doc:`/core-libraries/components/flash` to
+        You should use :doc:`/controllers/components/flash` to
         create flash messages. The setFlash() method will be removed in 3.0.0.
 
     Often in web applications, you will need to display a one-time notification

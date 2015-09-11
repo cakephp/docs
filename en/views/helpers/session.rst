@@ -62,7 +62,7 @@ Displaying notifications or flash messages
 .. php:method:: flash(string $key = 'flash', array $params = array())
 
     .. deprecated:: 2.7.0
-        You should use :doc:`/core-libraries/helpers/flash` to
+        You should use :doc:`/views/helpers/flash` to
         render flash messages.
 
     As explained in :ref:`creating-notification-messages`, you can

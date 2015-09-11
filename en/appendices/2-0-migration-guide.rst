@@ -320,13 +320,13 @@ AuthComponent
 The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
 developer confusion and frustration. In addition, AuthComponent was made more
 flexible and extensible. You can find out more in
-the :doc:`/core-libraries/components/authentication` guide.
+the :doc:`/controllers/components/authentication` guide.
 
 EmailComponent
 --------------
 
 The EmailComponent has been deprecated and has created a new library class to
-send e-mails. See :doc:`/core-utility-libraries/email` Email changes for more details.
+send e-mails. See :doc:`/core-libraries/email` Email changes for more details.
 
 SessionComponent
 ----------------
@@ -847,7 +847,7 @@ exists, and serves as a convenience method for loading and using the
 :php:class:`PaginatorComponent`.
 
 For more information on the new features offered by pagination in 2.0, see the
-:doc:`/core-libraries/components/pagination` documentation.
+:doc:`/controllers/components/pagination` documentation.
 
 View
 ====

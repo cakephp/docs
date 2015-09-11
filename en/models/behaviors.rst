@@ -34,8 +34,13 @@ In essence, Behaviors are
 There are a number of Behaviors included in CakePHP. To find out more about each
 one, reference the chapters below:
 
-.. include:: /core-libraries/toc-behaviors.rst
-    :start-line: 10
+.. toctree::
+    :maxdepth: 1
+
+    /models/behaviors/acl
+    /models/behaviors/containable
+    /models/behaviors/translate
+    /models/behaviors/tree
 
 Using Behaviors
 ===============

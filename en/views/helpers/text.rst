@@ -85,7 +85,7 @@ truncating long stretches of text.
 
     .. versionadded:: 2.4
 
-.. include:: ../../core-utility-libraries/string.rst
+.. include:: ../../core-libraries/string.rst
     :start-after: start-string
     :end-before: end-string
 

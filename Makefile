@@ -10,7 +10,7 @@ ES_HOST =
 # Languages that can be built.
 LANGS = en es fr ja pt zh
 
-# pdflatex does not like ja for some reason.
+# pdflatex does not like ja & zh for some reason.
 PDF_LANGS = en es fr pt
 
 DEST = website
@@ -21,7 +21,7 @@ SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
 # Copy-paste the English Makefile everywhere it's needed (if non existing).
 %/Makefile: en/Makefile
-	cp -n $< $@
+	cp $< $@
 
 #
 # The various formats the documentation can be created in.

@@ -8,7 +8,21 @@ yourself wanting to copy and paste things between controllers, you should
 consider creating your own component to contain the functionality. Creating
 components keeps controller code clean and allows you to reuse code between projects.
 
-Each of the core components is detailed in its own chapter. See :doc:`/core-libraries/toc-components`.
+Each of the core components is detailed in its own chapter:
+
+.. toctree::
+    :maxdepth: 1
+
+    /controllers/components/pagination
+    /controllers/components/flash
+    /controllers/components/email
+    /controllers/components/sessions
+    /controllers/components/authentication
+    /controllers/components/security-component
+    /controllers/components/request-handling
+    /controllers/components/cookie
+    /controllers/components/access-control-lists
+
 This section describes how to configure and use components, and how to create
 your own components.
 
@@ -19,7 +33,7 @@ Configuring Components
 
 Many of the core components require configuration. Some examples of
 components requiring configuration are
-:doc:`/core-libraries/components/authentication` and :doc:`/core-libraries/components/cookie`.
+:doc:`/controllers/components/authentication` and :doc:`/controllers/components/cookie`.
 Configuration for these components, and for components in general, is usually done in the
 ``$components`` array or your controller's ``beforeFilter()``
 method::
