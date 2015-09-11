@@ -1,7 +1,7 @@
 PHPUnitへの移行のヒント
 #######################
 
-テストケースの `PHPUnit 3.5 <http://www.phpunit.de/manual/current/ja/>`_ への移行は、うまくいけばかなり苦痛の無い遷移となります。
+テストケースの `PHPUnit 3.7 <http://www.phpunit.de/manual/current/ja/>`_ への移行は、うまくいけばかなり苦痛の無い遷移となります。
 しかしながら、PHPUnitと `SimpleTest <http://www.simpletest.org/>`_ の間では、いくつかの既知の違いがあります。
 
 PHPUnitのインストール

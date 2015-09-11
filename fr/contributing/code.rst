@@ -14,7 +14,7 @@ Vous aurez besoin du logiciel suivant:
 
 * Git
 * PHP 5.2.8 or greater
-* PHPUnit 3.5.10 or greater
+* PHPUnit 3.5.10 or greater (3.7.38 recommended)
 
 Mettez en place vos informations d'utilisateur avec votre nom / titre et
 adresse e-mail de travail ::

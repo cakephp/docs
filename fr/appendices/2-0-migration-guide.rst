@@ -1080,7 +1080,7 @@ PHPUnit plutôt que SimpleTest
 =============================
 
 Tous les cas de test du coeur et les infrastructures supportant ont été portés
-pour utiliser PHPUnit 3.5. Bien sur, vous pouvez continuer à utiliser
+pour utiliser PHPUnit 3.7. Bien sur, vous pouvez continuer à utiliser
 SimpleTest dans votre application en remplaçant les fichiers liés. Pas plus de
 support ne sera donné pour SimpleTest et il est recommandé que vous migriez
 vers PHPUnit aussi. Pour plus d'informations sur la façon de migrer vos tests,

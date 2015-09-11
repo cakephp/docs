@@ -1,7 +1,7 @@
 PHPUnit Migration Hints
 #######################
 
-Migrating your test cases to `PHPUnit 3.5 <http://www.phpunit.de/manual/current/en/>`_
+Migrating your test cases to `PHPUnit 3.7 <http://www.phpunit.de/manual/current/en/>`_
 will hopefully be a fairly pain free transition. However, there are a few known
 differences between test cases under PHPUnit and
 `SimpleTest <http://www.simpletest.org/>`_.

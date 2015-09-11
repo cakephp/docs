@@ -13,7 +13,7 @@ Você vai precisar dos seguintes softwares:
 
 * Git
 * PHP 5.2.6 ou superior
-* PHPUnit 3.5.10 ou superior
+* PHPUnit 3.5.10 ou superior (3.7.38 recommended)
 
 Configure suas informações pessoais com seu nome e e-mail::
 
