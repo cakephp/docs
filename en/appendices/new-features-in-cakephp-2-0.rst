@@ -130,7 +130,7 @@ Xml
 ---
 
 :php:class:`Xml` has had a number of changes. Read more about
-:doc:`/core-utility-libraries/xml` class.
+:doc:`/core-libraries/xml` class.
 
 New Lib features
 ================

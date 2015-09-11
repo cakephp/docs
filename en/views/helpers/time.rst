@@ -45,7 +45,7 @@ posts using the Time Helper::
 Most of the Time Helper methods have a $timezone parameter. The $timezone parameter
 accepts a valid timezone identifier string or an instance of `DateTimeZone` class.
 
-.. include:: ../../core-utility-libraries/time.rst
+.. include:: ../../core-libraries/time.rst
     :start-after: start-caketime
     :end-before: end-caketime
 

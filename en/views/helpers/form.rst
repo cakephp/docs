@@ -375,7 +375,7 @@ field. Internally ``input()`` delegates to other methods in FormHelper.
     Besides the specific options for ``input()`` found below, you can specify
     any option for the input type & any HTML attribute (for instance onfocus).
     For more information on ``$options`` and ``$htmlAttributes`` see
-    :doc:`/core-libraries/helpers/html`.
+    :doc:`/views/helpers/html`.
 
     Assuming that User hasAndBelongsToMany Group. In your controller, set a
     camelCase plural variable (group -> groups in this case, or ExtraFunkyModel

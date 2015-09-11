@@ -43,7 +43,7 @@ Below some examples of using ``EmailComponent ($component)`` and now with
 -  From ``$sent = $component->httpMessage;`` to
    ``$sent = $lib->message(CakeEmail::MESSAGE_HTML);``
 
-For more information you should read the :doc:`/core-utility-libraries/email`
+For more information you should read the :doc:`/core-libraries/email`
 documentation.
 
 

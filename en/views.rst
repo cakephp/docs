@@ -699,8 +699,8 @@ To call any view method use ``$this->method()``
     directly to the layout. Keep in mind that scripts added from the
     layout and elements in the layout will not be added to
     ``$scripts_for_layout``. This method is most often used from inside
-    helpers, such as the :doc:`/core-libraries/helpers/js` and
-    :doc:`/core-libraries/helpers/html` Helpers.
+    helpers, such as the :doc:`/views/helpers/js` and
+    :doc:`/views/helpers/html` Helpers.
 
     .. deprecated:: 2.1
         Use the :ref:`view-blocks` features instead.
@@ -800,7 +800,7 @@ More about Views
 ================
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     views/themes
     views/media-view

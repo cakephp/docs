@@ -348,8 +348,8 @@ When you need to delete data from the session, you can use delete::
     CakeSession::delete('Config.language');
 
 You should also see the documentation on
-:doc:`/core-libraries/components/sessions` and
-:doc:`/core-libraries/helpers/session` for how to access Session data
+:doc:`/controllers/components/sessions` and
+:doc:`/views/helpers/session` for how to access Session data
 in the controller and view.
 
 

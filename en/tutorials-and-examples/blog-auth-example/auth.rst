@@ -428,14 +428,14 @@ You could also be more creative and code something more general in AppController
 on your own rules.
 
 Should you need more control, we suggest you read the complete Auth guide in the
-:doc:`/core-libraries/components/authentication` section where you will find more
+:doc:`/controllers/components/authentication` section where you will find more
 about configuring the component, creating custom Authorization classes, and much more.
 
 Suggested Follow-up Reading
 ---------------------------
 
 1. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
-2. :doc:`/core-libraries/components/authentication`: User registration and login
+2. :doc:`/controllers/components/authentication`: User registration and login
 
 
 .. meta::

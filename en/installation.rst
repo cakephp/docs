@@ -153,8 +153,8 @@ After restarting your webserver, you should see the changes reflected in
 
     If you are on Windows, separate include paths with ; instead of :
 
-Having finished setting up your ``include_path`` your applications should be able to
-find CakePHP automatically.
+Having finished setting up your ``include_path`` your applications should be
+able to find CakePHP automatically.
 
 Production
 ==========
