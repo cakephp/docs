@@ -9,9 +9,9 @@ helper will enable your application to be more light on its feet,
 and more flexible on where it is placed in relation to the root of
 a domain.
 
-Many HtmlHelper methods include a ``$htmlAttributes`` parameter,
+Many HtmlHelper methods include a ``$options`` parameter,
 that allow you to tack on any extra attributes on your tags. Here
-are a few examples of how to use the $htmlAttributes parameter:
+are a few examples of how to use the $options parameter:
 
 .. code-block:: html
 
@@ -569,7 +569,7 @@ methods of the HtmlHelper and how to use them.
     .. note::
 
         Text is not escaped by default but you may use
-        ``$htmlOptions['escape'] = true`` to escape your text. This
+        ``$options['escape'] = true`` to escape your text. This
         replaces a fourth parameter ``boolean $escape = false`` that was
         available in previous versions.
 
