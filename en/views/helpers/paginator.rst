@@ -413,7 +413,7 @@ assume a tabular layout, but the PaginatorHelper available in views
 doesn't always need to be restricted as such.
 
 See the details on
-`PaginatorHelper <http://api.cakephp.org/3.0/class/paginator-helper>`_
+`PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
 in the API. As mentioned, the PaginatorHelper also offers sorting features
 which can be easily integrated into your table column headers:
 
