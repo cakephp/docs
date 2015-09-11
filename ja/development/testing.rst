@@ -24,9 +24,9 @@ PHPUnit の最新バージョンは、 今のところ cake では動作しま�
 ファイルを直接ダウンロードします。まず、 http://phar.phpunit.de/ から適切なバージョンを取得しておきます。
 そして php.ini ファイルの include_path に /usr/local/bin を加えてください。::
 
-    wget https://phar.phpunit.de/phpunit-3.7.38.phar
-    chmod +x phpunit-3.7.38.phar
-    mv phpunit-3.7.38.phar /usr/local/bin/phpunit
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
+    chmod +x phpunit.phar
+    mv phpunit.phar /usr/local/bin/phpunit
 
 .. note::
 
@@ -40,7 +40,7 @@ PHPUnit の最新バージョンは、 今のところ cake では動作しま�
 
 .. tip::
 
-    PHPUnit 3.6 以上では全ての出力が非表示になります。表示するためには、コマンドラインから
+    PHPUnit 3.7 以上では全ての出力が非表示になります。表示するためには、コマンドラインから
     実行するときに ``--debug`` オプションをつけるか、Web ランナーを使うときに ``&debug=1``
     を URL に付け足してください。
 

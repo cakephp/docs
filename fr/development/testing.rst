@@ -30,9 +30,9 @@ récupérer la bonne version depuis https://phar.phpunit.de/.
 Assurez-vous également que /usr/local/bin est dans le include_path de votre
 fichier php.ini ::
 
-    wget https://phar.phpunit.de/phpunit-3.7.38.phar
-    chmod +x phpunit-3.7.38.phar
-    mv phpunit-3.7.38.phar /usr/local/bin/phpunit
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
+    chmod +x phpunit.phar
+    mv phpunit.phar /usr/local/bin/phpunit
 
 .. note::
 
