@@ -31,8 +31,8 @@ Assurez-vous également que /usr/local/bin est dans le include_path de votre
 fichier php.ini ::
 
     wget https://phar.phpunit.de/phpunit-3.7.38.phar
-    chmod +x phpunit.phar
-    mv phpunit.phar /usr/local/bin/phpunit
+    chmod +x phpunit-3.7.38.phar
+    mv phpunit-3.7.38.phar /usr/local/bin/phpunit
 
 .. note::
 
