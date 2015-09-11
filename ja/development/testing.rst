@@ -25,8 +25,8 @@ PHPUnit の最新バージョンは、 今のところ cake では動作しま�
 そして php.ini ファイルの include_path に /usr/local/bin を加えてください。::
 
     wget https://phar.phpunit.de/phpunit-3.7.38.phar
-    chmod +x phpunit.phar
-    mv phpunit.phar /usr/local/bin/phpunit
+    chmod +x phpunit-3.7.38.phar
+    mv phpunit-3.7.38.phar /usr/local/bin/phpunit
 
 .. note::
 
