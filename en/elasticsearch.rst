@@ -226,7 +226,7 @@ use ``embedOne`` and ``embedMany`` to define embedded documents::
 
 The above would create two embedded documents on the ``Article`` document. The
 ``User`` embed will convert the ``user`` property to instances of
-``App\\Model\\Document\\User``. To get the Comments embed to use a class name
+``App\Model\Document\User``. To get the Comments embed to use a class name
 that does not match the property name, we can use the ``entityClass`` option to
 configure a custom class name.
 
