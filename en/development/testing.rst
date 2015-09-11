@@ -27,8 +27,8 @@ You can also download the file directly. Just make sure you get the correct vers
 Make sure /usr/local/bin is in your php.ini file's include_path::
 
     wget https://phar.phpunit.de/phpunit-3.7.38.phar
-    chmod +x phpunit.phar
-    mv phpunit.phar /usr/local/bin/phpunit
+    chmod +x phpunit-3.7.38.phar
+    mv phpunit-3.7.38.phar /usr/local/bin/phpunit
 
 .. note::
 
