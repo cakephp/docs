@@ -1,6 +1,10 @@
 Session
 #######
 
+.. php:namespace:: Cake\View\Helper
+
+.. php:class:: SessionHelper(View $view, array $config = [])
+
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.

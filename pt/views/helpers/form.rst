@@ -1,6 +1,10 @@
 Form
 ####
 
+.. php:namespace:: Cake\View\Helper
+
+.. php:class:: FormHelper(View $view, array $config = [])
+
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.
