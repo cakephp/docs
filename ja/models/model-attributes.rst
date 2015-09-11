@@ -162,7 +162,41 @@ data
 各フィールドは次のようになっています:
 
 -  name
--  type (integer, string, datetime, etc.)
+-  type
+
+The types CakePHP supports are:
+
+string
+    Generally backed by CHAR or VARCHAR columns. In SQL Server, NCHAR and
+    NVARCHAR types are used.
+text
+    Maps to TEXT, MONEY types.
+uuid
+    Maps to the UUID type if a database provides one, otherwise this will
+    generate a CHAR(36) field.
+integer
+    Maps to the INTEGER, SMALLINT types provided by the database.
+biginteger
+    Maps to the BIGINT type provided by the database.
+decimal
+    Maps to the DECIMAL, NUMERIC types.
+float
+    Maps to the REAL, DOUBLE PRECISION types.
+boolean
+    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
+    booleans.
+binary
+    Maps to the BLOB or BYTEA type provided by the database.
+date
+    Maps to a timezone naive DATE column type.
+datetime
+    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL
+    Server this turns into a TIMESTAMP or TIMESTAMPTZ type.
+timestamp
+    Maps to the TIMESTAMP type.
+time
+    Maps to a TIME type in all databases.
+
 -  null
 -  default value
 -  length

@@ -3,14 +3,14 @@
 
 模型属性让你可以改变默认的模型行为。
 
-欲知完整的模型属性列表及描述请，请访问 
+欲知完整的模型属性列表及描述请，请访问
 `CakePHP API <http://api.cakephp.org/2.7/class-Model.html>`_。
 
 useDbConfig
 ===========
 
 ``useDbConfig`` 属性为指定数据库连接的名称的字符串，用来绑定模型类和关联的数据库
-表。可以设置为任意在数据库配置文件中定义的数据库连接。数据库配置文件位于 
+表。可以设置为任意在数据库配置文件中定义的数据库连接。数据库配置文件位于
 /app/Config/database.php。
 
 ``useDbConfig`` 属性的默认值是 'default'。
@@ -58,7 +58,7 @@ tablePrefix
 primaryKey
 ==========
 
-每个表通常会有一个主键，``id``。可以改变模型用作主键的字段名称。当设置 CakePHP 
+每个表通常会有一个主键，``id``。可以改变模型用作主键的字段名称。当设置 CakePHP
 来使用在一个已经存在的数据库表时，这很常见。
 
 用法示例::
@@ -83,8 +83,8 @@ displayField
         public $displayField = 'username';
     }
 
-多个字段名不能结合成一个显示字段(*display field*)。比如，你不能指定 
-``array('first_name', 'last_name')`` 作为显示字段。但是，可以利用模型的 
+多个字段名不能结合成一个显示字段(*display field*)。比如，你不能指定
+``array('first_name', 'last_name')`` 作为显示字段。但是，可以利用模型的
 virtualField 属性生成一个虚拟字段。
 
 recursive
@@ -112,7 +112,7 @@ recursive 属性决定 CakePHP 用 ``find()`` 和 ``read()`` 方法读取关联�
 .. tip::
 
     建议的 recursive 级别应当为 -1。这可以防止读取不必要的、甚至不需要的关联数据。
-    这最有可能发生在大部分 find() 方法调用中。只在需要时候提高该级别，要么使用 
+    这最有可能发生在大部分 find() 方法调用中。只在需要时候提高该级别，要么使用
     Containable 行为 。
 
     可以把它添加到 AppModel 中来实现::
@@ -143,7 +143,41 @@ data
 包含描述数据库表的字段的元数据。每个字段被描述为：
 
 -  name
--  type ( 整数、字符串、datetime，等)
+-  type
+
+The types CakePHP supports are:
+
+string
+    Generally backed by CHAR or VARCHAR columns. In SQL Server, NCHAR and
+    NVARCHAR types are used.
+text
+    Maps to TEXT, MONEY types.
+uuid
+    Maps to the UUID type if a database provides one, otherwise this will
+    generate a CHAR(36) field.
+integer
+    Maps to the INTEGER, SMALLINT types provided by the database.
+biginteger
+    Maps to the BIGINT type provided by the database.
+decimal
+    Maps to the DECIMAL, NUMERIC types.
+float
+    Maps to the REAL, DOUBLE PRECISION types.
+boolean
+    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
+    booleans.
+binary
+    Maps to the BLOB or BYTEA type provided by the database.
+date
+    Maps to a timezone naive DATE column type.
+datetime
+    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL
+    Server this turns into a TIMESTAMP or TIMESTAMPTZ type.
+timestamp
+    Maps to the TIMESTAMP type.
+time
+    Maps to a TIME type in all databases.
+
 -  null
 -  default value
 -  length
@@ -194,7 +228,7 @@ MySQL 的用法示例::
 在之后的 find 操作，User 结果会包含一个 ``name`` 键，对应为拼接的结果。创建一个与数据库中已经存在的字段同名的虚字段是不明智的，这
 会导致 SQL 错误。
 
-欲知有关 ``virtualFields`` 属性、它的正确用法、以及限制，请参见 
+欲知有关 ``virtualFields`` 属性、它的正确用法、以及限制，请参见
 :doc:`/models/virtual-fields`。
 
 name
