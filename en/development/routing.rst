@@ -827,13 +827,35 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
     Router::scope('/', function ($routes) {
-        $routes->resources('books', [
+        $routes->resources('Books', [
             'connectOptions' => [
                 'routeClass' => 'ApiRoute',
             ]
         ];
     });
 
+URL inflection for Resource Routes
+----------------------------------
+
+By default for multi-worded controllers the URL fragment is underscored
+form of controller name. Eg. For ``BlogPosts`` URL fragment would be ``/blog_posts``.
+
+You can specify an alternative inflection type using the ``inflect`` option::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', [
+            'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
+        ];
+    })
+    
+The above will generate URLs of style ``/blog-posts/*``.
+
+.. note::
+
+    As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as default
+    route class. So using ``'inflect' => 'dasherize'`` option when connecting
+    resource routes is recommended for URL fragment inflection consistency.
+    
 .. index:: passed arguments
 .. _passed-arguments:
 
