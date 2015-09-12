@@ -80,6 +80,14 @@ AuthComponent
   dépréciées. A la place, utilisez la nouvelle option ``finder`` pour configurer
   une méthode de finder personnalisée pour modifier le requête utilisée pour
   chercher l'utilisateur.
+- La logique responsable de définir la variable de session ``Auth.redirect``,
+  qui est utilisée pour récupérer l'URL de redirection après la connexion
+  (login) a été modifiée. Elle est maintenant définie uniquement lorsque l'on
+  essaye d'accéder directement à une URL protégée sans authentification. Ainsi
+  ``Auth::redirectUrl()`` renvoie l'URL protégée après le login. Dans la
+  plupart des cas, lorsqu'un utilisateur accède directement à la page de
+  connexion, ``Auth::redirectUrl()`` renvoie la valeur définie par la
+  configuration de ``loginRedirect``.
 
 FlashComponent
 --------------
@@ -103,6 +111,11 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` échange maintenant le layout et le template selon
   l'extension parsée ou l'en-tête ``Accept-Type`` dans le callback
   ``beforeRender()`` plutôt que dans ``startup()``.
+- ``addInputType()`` et ``viewClassMap()`` sont dépréciées. Vous devez utiliser
+  ``config()`` pour modifier ces données de configuration à la volée.
+- Quand ``inputTypeMap`` ou ``viewClassMap`` sont définies dans les
+  configurations du component, elles vont *surcharger* les valeurs par défaut.
+  Ce changement rend possible la suppression de la configuration par défaut.
 
 Network
 =======
@@ -123,6 +136,11 @@ Vous pouvez maintenant :ref:`Charger en Eager des Associations
 <loading-additional-associations>`. Cette fonctionnalité vous permet de charger
 des associations conditionnellement dans un ensemble de résultats, une entity
 ou une collection d'entites.
+
+Les méthodes ``patchEntity()`` et ``newEntity()`` supportent maintenant
+l'option ``onlyIds``. Cette option vous permet de restreindre la conversion des
+données des associations hasMany/belongsToMany pour utiliser uniquement la liste
+des ``_ids``. Cette option est par défaut à ``false``.
 
 Query
 -----
@@ -145,6 +163,12 @@ View
 - Vous pouvez maintenant définir ``_serialized`` à ``true`` pour ``JsonView``
   et ``XmlView`` pour sérialiser toutes les variables de vue au lieu de les
   spécifier explicitement.
+- ``View::$viewPath`` est déprécié. Vous devez utilisez ``View::templatePath()``
+  à la place.
+- ``View::$view`` est déprécié. Vous devez utilisez ``View::template()``
+  à la place.
+- ``View::TYPE_VIEW`` est déprécié. Vous devez utilisez ``View::TYPE_TEMPLATE``
+  à la place.
 
 Helper
 ======
@@ -176,6 +200,8 @@ Email
 - Les classes ``Email`` et ``Transport`` ont été déplacées sous le namespace
   ``Cake\Mailer``. Leur ancien namespace est toujours utilisable car des alias
   ont été créés.
+- Le profil d'email ``default`` est maintenant automatiquement défini quand une
+  instance ``Email`` est créée. Ce comportement est le même que dans 2.x.
 
 Mailer
 ------
@@ -200,3 +226,6 @@ Validation
 - ``Validation::geoCoordinate()`` a été ajoutée.
 - ``Validation::latitude()`` a été ajoutée.
 - ``Validation::longitude()`` a été ajoutée.
+- ``Validation::isInteger()`` a été ajoutée.
+- ``Validation::ascii()`` a été ajoutée.
+- ``Validation::utf8()`` a été ajoutée.

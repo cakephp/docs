@@ -124,6 +124,16 @@ date::
 Formatage
 =========
 
+.. php:staticmethod:: setToJSONFormat($format)
+
+Cette méthode définit le format par défaut utilisé lors de la conversion d'un
+objet en json::
+
+    Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');
+
+.. note::
+    Cette méthode doit être appelée statiquement.
+
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
 Une chose habituelle à faire avec les instances ``Time`` est d'afficher les

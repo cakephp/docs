@@ -363,7 +363,7 @@ Ensuite, ajouter les lignes suivantes à votre template de vue::
 Si votre nom de model est composé de deux mots ou plus,
 ex. "UserGroup", quand vous passez les données en utilisant set()
 vous devrez nommer vos données dans un format CamelCase
-(les Majuscules séparent les mots) et au pluriel comme ceci ::
+(les Majuscules séparent les mots) et au pluriel comme ceci::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
 
@@ -948,7 +948,7 @@ sélectionnées. Par défaut à ``true``::
   manuellement des options pour un input select (menu de sélection),
   ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
   le Helper Form supposera que la cible est un input select (menu de
-  sélection) ::
+  sélection)::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
 
@@ -1186,7 +1186,7 @@ n'inclura pas une option vide:
 
 Par exemple, pour créer un intervalle de temps avec des minutes selectionnables
 toutes les 15 minutes, et pour l'appliquer aux selects, vous pourriez faire
-ceci ::
+ceci::
 
     echo $this->Form->time('released', [
         'interval' => 15,
@@ -1895,7 +1895,7 @@ les widgets sont définis comme des paramètres::
     ]);
 
 Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces
-dépendances lorsqu'elles sont déclarées ::
+dépendances lorsqu'elles sont déclarées::
 
     $this->loadHelper('Form', [
         'widgets' => [

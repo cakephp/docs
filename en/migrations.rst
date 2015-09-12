@@ -83,6 +83,12 @@ Let's imagine that you'd like to add a new ``products`` table::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
+.. note::
+
+        You may also choose to use the underscore_form as migration label i.e.::
+
+            bin/cake bake migration create_products name:string description:text created modified
+
 The above line will create a migration file looking like this::
 
         class CreateProductsTable extends AbstractMigration
@@ -224,6 +230,46 @@ adding new tables to the database, you can use the second argument of the
             }
 
 The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
+
+Additionally, since Migrations 1.3, a new way to deal with primary key was
+introduced. To do so, your migration class should extend the new
+``Migrations\AbstractMigration`` class.
+You can specify a ``autoId`` property in the Migration class and set it to
+``false``, which will turn off the automatic ``id`` column creation. You will
+need to manually create the column that will be used as a primary key and add
+it to the table declaration::
+
+        use Migrations\AbstractMigration;
+
+        class CreateProductsTable extends AbstractMigration
+        {
+
+            public $autoId = false;
+
+            public function up()
+            {
+                $table = $this->table('products');
+                $table
+                    ->addColumn('id', 'integer', [
+                        'autoIncrement' => true,
+                        'limit' => 11
+                    ])
+                    ->addPrimaryKey('id')
+                    ->addColumn('name', 'string')
+                    ->addColumn('description', 'text')
+                    ->create();
+            }
+
+Compared to the previous way of dealing with primary key, this method gives you
+the ability to have more control over the primary key column definition :
+unsigned or not, limit, comment, etc.
+
+All baked migrations and snapshot will use this new way when necessary.
+
+.. warning::
+
+    Dealing with primary key can only be done on table creation operations.
+    This is due to limitations for some database servers the plugin supports.
 
 Collations
 ----------

@@ -2,7 +2,7 @@ Sessions
 ########
 
 CakePHP provides a wrapper and suite of utility features on top of PHP's native
-``session`` extension. Sessions allow you to identify unique users across the
+``session`` extension. Sessions allow you to identify unique users across
 requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side. Usage of ``$_SESSION`` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
@@ -18,7 +18,7 @@ level ``Session`` key, and a number of options are available:
 * ``Session.timeout`` - The number of *minutes* before CakePHP's session
   handler expires the session.
 
-* ``Session.defaults`` - Allows you to use one the built-in default session
+* ``Session.defaults`` - Allows you to use the built-in default session
   configurations as a base for your session configuration. See below for the
   built-in defaults.
 
@@ -44,7 +44,7 @@ this::
     ]);
 
 The session cookie path defaults to app's base path. To change this you can use
-the ``session.cookie_path`` ini value. For e.g. if you want your session to
+the ``session.cookie_path`` ini value. For example if you want your session to
 persist across all subdomains you can do::
 
     Configure::write('Session', [
@@ -105,7 +105,7 @@ The above overrides the timeout and cookie name for the 'php' session
 configuration. The built-in configurations are:
 
 * ``php`` - Saves sessions with the standard settings in your php.ini file.
-* ``cake`` - Saves sessions as files inside ``app/tmp/sessions``. This is a
+* ``cake`` - Saves sessions as files inside ``tmp/sessions``. This is a
   good option when on hosts that don't allow you to write outside your own home
   dir.
 * ``database`` - Use the built-in database sessions. See below for more
@@ -141,15 +141,15 @@ You can then read those values out from inside your handler::
 The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
 expect to find your class in the ``Network\Session`` namespace. For example, if
-you had a ``AppSessionHandler`` class,  the file should be
+you had an ``AppSessionHandler`` class,  the file should be
 **src/Network/Session/AppSessionHandler.php**, and the class name should be
-``App\\Network\\Session\\AppSessionHandler``. You can also use session handlers
+``App\Network\Session\AppSessionHandler``. You can also use session handlers
 from inside plugins. By setting the engine to ``MyPlugin.PluginSessionHandler``.
 
 Database Sessions
 -----------------
 
-If you you need to use a database to store your session data, configure as follows::
+If you need to use a database to store your session data, configure as follows::
 
     'Session' => [
         'defaults' => 'database'
@@ -186,7 +186,7 @@ Cache Sessions
 --------------
 
 The Cache class can be used to store sessions as well. This allows you to store
-sessions in a cache like APC, memcache, or Xcache. There are some caveats to
+sessions in a cache like APC, Memcached, or XCache. There are some caveats to
 using cache sessions, in that if you exhaust the cache space, sessions will
 start to expire as records are evicted.
 
@@ -229,7 +229,7 @@ Creating a Custom Session Handler
 
 Creating a custom session handler is straightforward in CakePHP. In this
 example we'll create a session handler that stores sessions both in the Cache
-(apc) and the database. This gives us the best of fast IO of apc,
+(APC) and the database. This gives us the best of fast IO of APC,
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
@@ -287,7 +287,7 @@ Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
 all of its logic and behavior. We wrap each operation with
 a :php:class:`Cake\\Cache\\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
-Using this session handler is also easy. In your ``app.php`` make the session
+Using this session handler is also easy. In your **app.php** make the session
 block look like the following::
 
     'Session' => [
@@ -303,7 +303,7 @@ block look like the following::
         'apc' => ['engine' => 'Apc']
     ]
 
-Now our application will start using our custom session handler for reading &
+Now our application will start using our custom session handler for reading and
 writing session data.
 
 
@@ -350,6 +350,13 @@ compatible syntax::
 
     $session->write('Config.language', 'eng');
 
+You may also specify one or multiple hashes like so::
+
+    $session->write([
+      'Config.theme' => 'blue',
+      'Config.language' => 'eng',
+    ]);
+
 .. php:method:: delete($key)
 
 When you need to delete data from the session, you can use ``delete()``::
@@ -390,7 +397,7 @@ Rotating Session Identifiers
 .. php:method:: renew()
 
 While ``AuthComponent`` automatically renews the session id when users login and
-out, you may need to rotate the session id's manually. To do this use the
+logout, you may need to rotate the session id's manually. To do this use the
 ``renew()`` method::
 
     $session->renew();

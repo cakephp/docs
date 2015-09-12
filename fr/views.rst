@@ -10,8 +10,8 @@ HTML, XML ou JSON, mais le streaming de fichiers et la création de PDFs que les
 utilisateurs peuvent télécharger sont aussi de la responsabilité de la
 couche View.
 
-CakePHP a quelques classes de vue déjà construites pour gérer les scénarios de
-rendu les plus communs:
+CakePHP a quelques classes de vue déjà construites pour gérer les scénarios
+de rendu les plus communs:
 
 - Pour créer des services web XML ou JSON, vous pouvez utiliser
   :doc:`views/json-and-xml-views`.
@@ -26,7 +26,7 @@ The App View
 ============
 
 ``AppView`` est la classe View par défaut de votre application. ``AppView``
-étend lui même la classe ``Cake\View\View`` de CakePHP et est définie dans
+étend elle-même la classe ``Cake\View\View`` de CakePHP et est définie dans
 **src/View/AppView.php** comme suit:
 
 .. code-block:: php
@@ -92,7 +92,7 @@ chapitre :
 - **views**: Les Views sont la partie de la page qui est unique pour l'action
   lancée. Elles sont la substance de la réponse de votre application.
 - **elements** : morceaux de code de view plus petits, réutilisables. Les
-  éléments sont habituellement rendus dans les vues.
+  elements sont habituellement rendus dans les vues.
 - **layouts** : fichiers de template contenant le code de présentation qui se
   retrouve dans plusieurs interfaces de votre application. La plupart des
   vues sont rendues à l'intérieur d'un layout.
@@ -128,7 +128,7 @@ Définir les Variables de Vue
 Les vues ont une méthode ``set()`` qui fonctionne de la même façon que
 ``set()`` qui se trouve dans les objets Controller. Utiliser set() à
 partir de la vue va ajouter les variables au layout et aux elements qui seront
-affichés plus tard. Regardez :ref:`setting-view_variables` pour plus
+rendus plus tard. Regardez :ref:`setting-view_variables` pour plus
 d'informations sur l'utilisation de ``set()``.
 
 Dans votre fichier de vue, vous pouvez faire::
@@ -204,7 +204,7 @@ va outrepasser les précédents::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-Le code précédent va définir ``/Common/index.ctp`` comme étant la vue parente
+Le code précédent va définir **/Common/index.ctp** comme étant la vue parente
 de la vue actuelle.
 
 Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est
@@ -391,16 +391,16 @@ ressembler:
    </head>
    <body>
 
-   <!-- Si vous voulez qu'un menu soit affiché pour toutes vos vues,
+   <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues,
    incluez le ici -->
    <div id="header">
        <div id="menu">...</div>
    </div>
 
-   <!-- C'est ici que je veux voir mes vues être affichées -->
+   <!-- C'est ici que je veux voir mes vues être rendues -->
    <?= $this->fetch('content') ?>
 
-   <!-- Ajoute un footer pour chaque page affichée -->
+   <!-- Ajoute un footer pour chaque page rendue -->
    <div id="footer">...</div>
 
    </body>
@@ -518,7 +518,7 @@ dans ses propres fichiers. Ils peuvent aussi vous aider à réutiliser des
 fragments de contenu dans votre application.
 
 Les elements se trouvent dans le dossier **src/Template/Element/**, et ont une
-extension .ctp. Ils sont affichés en utilisant la méthode element de la vue::
+extension .ctp. Ils sont rendus en utilisant la méthode element de la vue::
 
     echo $this->element('helpbox');
 
@@ -567,44 +567,10 @@ fournissez une valeur unique de la clé cache en utilisant le format suivant::
         ]
     );
 
-Vous pouvez tirer profit des elements en utilisant ``requestAction()``. La
-fonction ``requestAction()`` récupère les variables de vues à partir
-d'une action d'un controller et les retourne en tableau. Cela permet à vos
-elements de fonctionner dans un style MVC pur. Créez une action du controller
-qui prépare les variables de la vue pour vos elements, ensuite appelez
-``requestAction()`` depuis l'intérieur du deuxième paramètre de ``element()``
-pour alimenter en variables de vues l'element depuis votre controller.
-
-Pour ce faire, ajoutez quelque chose comme ce qui suit dans votre controller,
-en reprenant l'exemple du Post::
-
-    class PostsController extends AppController
-    {
-        // ...
-        public function index()
-        {
-            $posts = $this->paginate();
-            if ($this->request->is('requested')) {
-                return $posts;
-            } else {
-                $this->set('posts', $posts);
-            }
-        }
-    }
-
-Et ensuite dans l'element, nous pouvons accéder au model des posts paginés.
-Pour obtenir les cinq derniers posts dans une liste ordonnée, nous ferions
-ce qui suit:
-
-.. code-block:: php
-
-    <h2>Latest Posts</h2>
-    <?php $posts = $this->requestAction('posts/index?sort=created&direction=asc&limit=5'); ?>
-    <ol>
-    <?php foreach ($posts as $post): ?>
-          <li><?= $post['Post']['title'] ?></li>
-    <?php endforeach; ?>
-    </ol>
+Si vous avez besoin de plus de logique dans votre element, comme des données
+dynamiques à partir d'une source de données, pensez à utiliser une View Cell
+plutôt qu'un element. Vous pouvez en savoir plus en consultant :doc:`les View
+Cells </views/cells>`.
 
 Mise en cache des Elements
 --------------------------
@@ -665,15 +631,15 @@ Contacts::
     // et
     echo $this->element('Contacts.helpbox');
 
-Sont équivalents et résulteront au même element rendu.
+Sont équivalents et résulteront à l'affichage du même element.
 
 Pour les elements dans le sous-dossier d'un plugin
 (e.g., **plugins/Contacts/sidebar/helpbox.ctp**), utilisez ce qui suit::
 
     echo $this->element('Contacts.sidebar/helpbox');
 
-Routing prefix and Elements
----------------------------------
+Préfix de Routing et Elements
+-----------------------------
 
 .. versionadded:: 3.0.1
 
@@ -685,7 +651,7 @@ appelez::
 
     echo $this->element('my_element');
 
-L'Element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un
+L'element va d'abord être cherché dans **src/Template/Admin/Element/**. Si un
 tel fichier n'existe pas, il sera ensuite cherché dans le chemin par défaut.
 
 Mettre en Cache des Sections de votre View
@@ -693,9 +659,9 @@ Mettre en Cache des Sections de votre View
 
 .. php:method:: cache(callable $block, array $options = [])
 
-Parfois, générer une section de l'affichage de votre view peut être couteux
+Parfois, générer une section de l'affichage de votre view peut être coûteux
 à cause du rendu des :doc:`/views/cells` ou du fait d'opérations de helper
-couteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
+coûteuses. Pour que votre application s'exécute plus rapidement, CakePHP fournit
 un moyen de mettre en cache des sections de view::
 
     // En supposant l'existence des variables locales
@@ -713,22 +679,24 @@ Créer vos propres Classes de View
 
 Vous avez peut-être besoin de créer vos propres classes de vue pour activer des
 nouveaux types de données de vue, ou ajouter de la logique supplémentaire
-de rendu de vue personnalisée. Comme la plupart des components de CakePHP, les
-classes de vue ont quelques conventions:
+pour le rendu de vue personnalisée. Comme la plupart des components de
+CakePHP, les classes de vue ont quelques conventions:
 
 * Les fichiers de classe de View doivent être mis dans **src/View**. Par
   exemple **src/View/PdfView.php**.
 * Les classes de View doivent être suffixées avec ``View``. Par exemple
   ``PdfView``.
 * Quand vous référencez les noms de classe de vue, vous devez omettre le
-  suffixe ``View``. Par exemple ``$this->viewClass = 'Pdf';``.
+  suffixe ``View``. Par exemple ``$builder->viewClass('Pdf');``.
 
 Vous voudrez aussi étendre ``View`` pour vous assurer que les choses
 fonctionnent correctement::
 
-    // dans src/View/PdfView.php
+    // Dans src/View/PdfView.php
+    namespace App\View;
 
-    App::uses('View', 'View');
+    use Cake\View\View;
+
     class PdfView extends View
     {
         public function render($view = null, $layout = null)

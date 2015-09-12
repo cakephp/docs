@@ -19,7 +19,7 @@ Nous voulons utiliser le
 créer une table dans notre base de données. Si vous avez déjà une table
 articles dans votre base de données, supprimez-la.
 
-Maintenant ouvrez le fichier ``composer.json`` de votre application.
+Maintenant ouvrez le fichier **composer.json** de votre application.
 Normalement vous devriez voir que le plugin migrations est déjà dans
 ``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
 
@@ -28,47 +28,111 @@ Normalement vous devriez voir que le plugin migrations est déjà dans
     }
 
 Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
-le dossier ``plugins`` de votre application. Ajoutez aussi
+le dossier **plugins** de votre application. Ajoutez aussi
 ``Plugin::load('Migrations');`` dans le fichier bootstrap.php de votre
 application.
 
 Une fois que le plugin est chargé, lancez la commande suivante pour créer un
 fichier de migration::
 
-    bin/cake migrations create Initial
+    bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
 
-Un fichier de migration sera généré dans le dossier ``config/Migrations``. Vous
-pouvez ouvrir votre nouveau fichier de migration et ajouter ce qui suit::
+Un fichier de migration sera généré dans le dossier **config/Migrations** avec
+ce qui suit::
 
     <?php
 
     use Phinx\Migration\AbstractMigration;
 
-    class Initial extends AbstractMigration
+    class CreateArticlesTable extends AbstractMigration
     {
         public function change()
         {
-            $articles = $this->table('articles');
-            $articles->addColumn('title', 'string', ['limit' => 50])
-                ->addColumn('body', 'text', ['null' => true, 'default' => null])
-                ->addColumn('category_id', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('created', 'datetime')
-                ->addColumn('modified', 'datetime', ['null' => true, 'default' => null])
-                ->save();
-
-            $categories = $this->table('categories');
-            $categories->addColumn('parent_id', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('lft', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('rght', 'integer', ['null' => true, 'default' => null])
-                ->addColumn('name', 'string', ['limit' => 255])
-                ->addColumn('description', 'string', ['limit' => 255, 'null' => true, 'default' => null])
-                ->addColumn('created', 'datetime')
-                ->addColumn('modified', 'datetime', ['null' => true, 'default' => null])
-                ->save();
+            $table = $this->table('articles');
+            $table->addColumn('title', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('body', 'text', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('category_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->create();
         }
     }
 
-Maintenant lancez la commande suivante pour créer vos tables::
+Exécutez une autre commande pour créer une table ``categories``::
+
+    bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
+
+Ceci va générer le fichier suivant dans **config/Migrations**::
+
+    <?php
+
+    use Phinx\Migration\AbstractMigration;
+
+    class CreateCategoriesTable extends AbstractMigration
+    {
+        public function change()
+        {
+            $table = $this->table('categories');
+            $table->addColumn('parent_id', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('lft', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('rght', 'integer', [
+                'default' => null,
+                'limit' => 11,
+                'null' => false,
+            ]);
+            $table->addColumn('name', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('description', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->create();
+        }
+    }
+
+Maintenant que les fichiers de migration sont créés, vous pouvez les modifier
+avant de créer vos tables. Nous devons changer ``'null' => false`` pour
+le champ ``parent_id`` par ``'null' => true`` car une catégorie de niveau
+supérieur a un ``parent_id`` null.
+
+Exécutez la commande suivante pour créer vos tables::
 
     bin/cake migrations migrate
 
@@ -97,7 +161,7 @@ fichier **src/Model/Table/ArticlesTable.php** et ajoutez ce qui suit::
         public function initialize(array $config)
         {
             $this->addBehavior('Timestamp');
-            // Just add the belongsTo relation with CategoriesTable
+            // Ajoute juste la relation belongsTo avec CategoriesTable
             $this->belongsTo('Categories', [
                 'foreignKey' => 'category_id',
             ]);
@@ -120,6 +184,14 @@ CakePHP.
 .. note::
     Si vous utilisez Windows, pensez à utiliser \ à la place de /.
 
+Vous devrez modifier ce qui suit dans **src/Template/Categories/add.ctp**
+et **src/Template/Categories/edit.ctp**::
+
+    echo $this->Form->input('parent_id', [
+        'options' => $parentCategories,
+        'empty' => 'Pas de catégorie parente'
+    ]);
+
 Attacher TreeBehavior à CategoriesTable
 =======================================
 
@@ -133,7 +205,7 @@ comme les blogs.
 Si vous ouvrez le fichier **src/Model/Table/CategoriesTable.php**, vous verrez
 que le TreeBehavior a été attaché à votre CategoriesTable dans la méthode
 ``initialize()``. Bake ajoute automatiquement ce behavior à toutes les Tables
-qui contiennent les colonnes ``lft`` and ``rght``::
+qui contiennent les colonnes ``lft`` et ``rght``::
 
     $this->addBehavior('Tree');
 
@@ -147,6 +219,26 @@ de template add et edit::
     echo $this->Form->input('lft');
     echo $this->Form->input('rght');
 
+De plus, vous devez désactiver ou retirer les requirePresence du validateur
+pour lft et rght dans votre model CategoriesTable::
+
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->add('id', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('id', 'create');
+
+        $validator
+            ->add('lft', 'valid', ['rule' => 'numeric'])
+        //    ->requirePresence('lft', 'create')
+            ->notEmpty('lft');
+
+        $validator
+            ->add('rght', 'valid', ['rule' => 'numeric'])
+        //    ->requirePresence('rght', 'create')
+            ->notEmpty('rght');
+    }
+
 Ces champs sont automatiquement gérés par le TreeBehavior quand
 une catégorie est sauvegardée.
 
@@ -159,20 +251,21 @@ Réorganiser l'Ordre des Catégories avec le TreeBehavior
 Dans votre fichier de template index des catégories, vous pouvez lister les
 catégories et les réordonner.
 
-Modifiez la méthode index dans votre ``CategoriesController.php`` et ajoutez les
-méthodes ``move_up()`` et ``move_down()`` pour pouvoir réorganiser l'ordre des
+Modifiez la méthode index dans votre **CategoriesController.php** et ajoutez les
+méthodes ``moveUp()`` et ``moveDown()`` pour pouvoir réorganiser l'ordre des
 catégories dans l'arbre::
 
     class CategoriesController extends AppController
     {
         public function index()
         {
-            $categories = $this->Categories->find('threaded')
+            $categories = $this->Categories->find()
                 ->order(['lft' => 'ASC']);
             $this->set(compact('categories'));
+            $this->set('_serialize', ['categories']);
         }
 
-        public function move_up($id = null)
+        public function moveUp($id = null)
         {
             $this->request->allowMethod(['post', 'put']);
             $category = $this->Categories->get($id);
@@ -184,7 +277,7 @@ catégories dans l'arbre::
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
-        public function move_down($id = null)
+        public function moveDown($id = null)
         {
             $this->request->allowMethod(['post', 'put']);
             $category = $this->Categories->get($id);
@@ -197,9 +290,10 @@ catégories dans l'arbre::
         }
     }
 
-Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par ceci::
+Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par
+ceci::
 
-    <div class="actions columns large-2 medium-3">
+    <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
         <ul class="side-nav">
             <li><?= $this->Html->link(__('Nouvelle Categorie'), ['action' => 'add']) ?></li>
@@ -211,7 +305,6 @@ Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par cec
             <tr>
                 <th>id</th>
                 <th>Parent Id</th>
-                <th>Title</th>
                 <th>Lft</th>
                 <th>Rght</th>
                 <th>Name</th>
@@ -234,8 +327,8 @@ Remplacez le contenu existant dans **src/Template/Categories/index.ctp** par cec
                     <?= $this->Html->link(__('Voir'), ['action' => 'view', $category->id]) ?>
                     <?= $this->Html->link(__('Editer'), ['action' => 'edit', $category->id]) ?>
                     <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $category->id], ['confirm' => __('Etes vous sur de vouloir supprimer # {0}?', $category->id)]) ?>
-                    <?= $this->Form->postLink(__('Descendre'), ['action' => 'move_down', $category->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $category->id)]) ?>
-                    <?= $this->Form->postLink(__('Monter'), ['action' => 'move_up', $category->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Descendre'), ['action' => 'moveDown', $category->id], ['confirm' => __('Etes vous sur de vouloir descendre # {0}?', $category->id)]) ?>
+                    <?= $this->Form->postLink(__('Monter'), ['action' => 'moveUp', $category->id], ['confirm' => __('Etes vous sur de vouloir monter # {0}?', $category->id)]) ?>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -294,7 +387,7 @@ Le fichier add des articles devrait ressembler à quelque chose comme:
     <?php
     echo $this->Form->create($article);
     // just added the categories input
-    echo $this->Form->input('categories');
+    echo $this->Form->input('category_id');
     echo $this->Form->input('title');
     echo $this->Form->input('body', ['rows' => '3']);
     echo $this->Form->button(__('Save Article'));

@@ -19,15 +19,11 @@ through using either a `PHAR package <http://phpunit.de/#download>`_ or `Compose
 Install PHPUnit with Composer
 -----------------------------
 
-To install PHPUnit with Composer, add the following to you application's
-``require`` section in its ``composer.json``::
+To install PHPUnit with Composer::
 
-    "phpunit/phpunit": "*",
+    $ php composer.phar require --dev phpunit/phpunit
 
-After updating your composer.json, run Composer again inside your application
-directory::
-
-    $ php composer.phar install
+This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
 
@@ -36,7 +32,7 @@ You can now run PHPUnit using::
 Using the PHAR File
 -------------------
 
-After you have downloaded the ``phpunit.phar`` file, you can use it to run your
+After you have downloaded the **phpunit.phar** file, you can use it to run your
 tests::
 
     php phpunit.phar
@@ -101,12 +97,12 @@ tests:
 
 #. PHP files containing tests should be in your
    ``tests/TestCase/[Type]`` directories.
-#. The filenames of these files should end in ``Test.php`` instead
+#. The filenames of these files should end in **Test.php** instead
    of just .php.
 #. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\IntegrationTestCase`` or ``\PHPUnit_Framework_TestCase``.
 #. Like other classnames, the test case classnames should match the filename.
-   ``RouterTest.php`` should contain ``class RouterTest extends TestCase``.
+   **RouterTest.php** should contain ``class RouterTest extends TestCase``.
 #. The name of any method containing a test (i.e. containing an
    assertion) should begin with ``test``, as in ``testPublished()``.
    You can also use the ``@test`` annotation to mark methods as test methods.
@@ -171,7 +167,7 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-Calling the parent method is important in test cases, as TestCase::setUp()
+Calling the parent method is important in test cases, as ``TestCase::setUp()``
 does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
 storing the paths in :php:class:`~Cake\\Core\\App`.
 
@@ -271,7 +267,7 @@ Combining Test Suites for Plugins
 Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
+additional ``<testsuite>`` sections to your application's **phpunit.xml** file::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -344,7 +340,7 @@ Creating Fixtures
 When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
-used to test our own Article model. Create a file named ``ArticlesFixture.php``
+used to test our own Article model. Create a file named **ArticlesFixture.php**
 in your **tests/Fixture** directory, with the following content::
 
     namespace App\Test\Fixture;
@@ -452,9 +448,9 @@ Dynamic Data and Fixtures
 
 Since records for a fixture are declared as a class property, you cannot easily
 use functions or other dynamic data to define fixtures. To solve this problem,
-you can define ``$records`` in the init() function of your fixture. For example
-if you wanted all the created and modified timestamps to reflect today's date you
-could do the following::
+you can define ``$records`` in the ``init()`` function of your fixture. For
+example if you wanted all the created and modified timestamps to reflect today's
+date you could do the following::
 
     namespace App\Test\Fixture;
 
@@ -592,7 +588,7 @@ You can control when your fixtures are loaded by setting
 
         public function testMyFunction()
         {
-            $this->loadFixtures('Article', 'Comment');
+            $this->loadFixtures('Articles', 'Comments');
         }
     }
 
@@ -633,7 +629,7 @@ Let's say we already have our Articles Table class defined in
     }
 
 We now want to set up a test that will test this table class. Let's now create
-a file named ``ArticlesTableTest.php`` in your **tests/TestCase/Model/Table** directory,
+a file named **ArticlesTableTest.php** in your **tests/TestCase/Model/Table** directory,
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
@@ -654,9 +650,9 @@ queries run against them.
 Creating a Test Method
 ----------------------
 
-Let's now add a method to test the function published() in the Article model.
-Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it now
-looks like this::
+Let's now add a method to test the function ``published()`` in the Articles
+table. Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it
+now looks like this::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -771,7 +767,7 @@ model. The controller code looks like::
         }
     }
 
-Create a file named ``ArticlesControllerTest.php`` in your
+Create a file named **ArticlesControllerTest.php** in your
 **tests/TestCase/Controller** directory and put the following inside::
 
     namespace App\Test\TestCase\Controller;
@@ -1210,8 +1206,8 @@ Creating Test Suites
 
 If you want several of your tests to run at the same time, you can create a test
 suite. A test suite is composed of several test cases.  You can either create
-test suites in your application's ``phpunit.xml`` file, or by creating suite
-classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
+test suites in your application's **phpunit.xml** file, or by creating suite
+classes using ``CakeTestSuite``. Using **phpunit.xml** is good when you only
 need simple include/exclude rules to define your test suite. A simple example
 would be
 
@@ -1305,7 +1301,7 @@ contains the fixture listener::
     </listeners>
 
 You should also ensure that your fixtures are loadable. Ensure the following is
-present in your ``composer.json`` file::
+present in your **composer.json** file::
 
     "autoload-dev": {
         "psr-4": {
@@ -1392,7 +1388,7 @@ Then uncomment the following line in your **config/bootstrap.php** file::
 
     //Configure::load('app_local', 'default');
 
-By creating an ``app_local.php`` file, you have an easy way to define
+By creating an **app_local.php** file, you have an easy way to define
 configuration specific to Jenkins. You can use this same configuration file to
 override any other configuration files you need on Jenkins.
 

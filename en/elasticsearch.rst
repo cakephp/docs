@@ -18,7 +18,7 @@ following::
 You will need to add the following line to your application's
 **config/bootstrap.php** file::
 
-    Plugin::load('ElasticSearch', ['bootstrap' => true]);
+    Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
 
 Additionally, you will need to configure the 'elastic' datasource connection in
 your **config/app.php** file. An example configuration would be::
@@ -144,8 +144,7 @@ documents. Validating request data, and applying application rules works the
 same as it does with the relational ORM. See the :ref:`validating-request-data`
 and :ref:`application-rules` sections for more information.
 
-.. comment::
-    Need information on nested validators.
+.. Need information on nested validators.
 
 Saving New Documents
 ====================
@@ -227,7 +226,7 @@ use ``embedOne`` and ``embedMany`` to define embedded documents::
 
 The above would create two embedded documents on the ``Article`` document. The
 ``User`` embed will convert the ``user`` property to instances of
-``App\\Model\\Document\\User``. To get the Comments embed to use a class name
+``App\Model\Document\User``. To get the Comments embed to use a class name
 that does not match the property name, we can use the ``entityClass`` option to
 configure a custom class name.
 

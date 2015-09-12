@@ -11,7 +11,7 @@ FlashHelper fournit une façon de rendre les messages flash qui sont définis da
 utilisent principalement des elements pour rendre les messages flash. Les
 elements flash se trouvent dans le répertoire **src/Template/Element/Flash**.
 Vous remarquerez que le template de l'App de CakePHP est livré avec deux
-elements flash: ``success.ctp`` et ``error.ctp``.
+elements flash: **success.ctp** et **error.ctp**.
 
 Rendre les Messages Flash
 =========================
@@ -64,10 +64,10 @@ Préfixe de Routage et Messages Flash
 .. versionadded:: 3.0.1
 
 Si vous avez configuré un préfixe de Routage, vous pouvez maintenant stocker vos
-Elements de messages Flash dans **src/Template/{Prefix}/Element/Flash**. De
-cette manière, vous pouvez avoir des gabarits de messages spécifiques en
+elements de messages Flash dans **src/Template/{Prefix}/Element/Flash**. De
+cette manière, vous pouvez avoir des layouts de messages spécifiques en
 fonction des différentes parties de votre application (par exemple, avoir des
-gabarits différents pour votre front-end et votre administration).
+layouts différents pour votre front-end et votre administration).
 
 Les Messages Flash et les Themes
 ================================

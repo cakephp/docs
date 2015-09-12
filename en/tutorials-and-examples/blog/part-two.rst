@@ -31,7 +31,7 @@ look like this::
 
 Naming conventions are very important in CakePHP. By naming our Table object
 ``ArticlesTable``, CakePHP can automatically infer that this Table object will
-be used in the ArticlesController, and will be tied to a database table called
+be used in the ``ArticlesController``, and will be tied to a database table called
 ``articles``.
 
 .. note::
@@ -40,11 +40,21 @@ be used in the ArticlesController, and will be tied to a database table called
     cannot find a corresponding file in **src/Model/Table**. This also means
     that if you accidentally name your file wrong (i.e. articlestable.php or
     ArticleTable.php), CakePHP will not recognize any of your settings and will
-    use the a generated model instead.
+    use the generated model instead.
 
 For more on models, such as callbacks, and validation, check out the :doc:`/orm`
 chapter of the Manual.
 
+.. note::
+
+    If you completed :doc:`Part 1 of the Blog Tutorial
+    </tutorials-and-examples/blog/blog>` and created the ``articles`` table in
+    our Blog database you can leverage CakePHP's bake console and its code
+    generation capabilities to create the ``ArticlesTable`` model::
+
+        bin/cake bake model Articles
+
+For more on bake and its code generation features please visit :doc:`/bake/usage`.
 
 Create the Articles Controller
 ==============================
@@ -53,7 +63,7 @@ Next, we'll create a controller for our articles. The controller is
 where all interaction with articles will happen. In a nutshell, it's the place
 where you play with the business logic contained in the models and get work
 related to articles done. We'll place this new controller in a file called
-``ArticlesController.php`` inside the **src/Controller** directory. Here's
+**ArticlesController.php** inside the **src/Controller** directory. Here's
 what the basic controller should look like::
 
     // src/Controller/ArticlesController.php
@@ -84,7 +94,7 @@ articles. The code for that action would look like this::
         }
     }
 
-By defining function ``index()`` in our ArticlesController, users can now
+By defining function ``index()`` in our ``ArticlesController``, users can now
 access the logic there by requesting www.example.com/articles/index. Similarly,
 if we were to define a function called ``foobar()``, users would be able to
 access that at www.example.com/articles/foobar.
@@ -92,15 +102,26 @@ access that at www.example.com/articles/foobar.
 .. warning::
 
     You may be tempted to name your controllers and actions a certain
-    way to obtain a certain URL. Resist that temptation. Follow CakePHP
-    conventions (capitalization, plural names, etc.) and create readable,
-    understandable action names. You can map URLs to your code using
-    "routes" covered later on.
+    way to obtain a certain URL. Resist that temptation. Follow
+    :doc:`/intro/conventions` (capitalization, plural names, etc.) and create
+    readable, understandable action names. You can map URLs to your code using
+    :doc:`/development/routing` covered later on.
 
 The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
 sets the view variable called 'articles' equal to the return value of
-the ``find('all')`` method of the Articles table object.
+the ``find('all')`` method of the ``ArticlesTable`` object.
+
+.. note::
+
+    If you completed :doc:`Part 1 of the Blog Tutorial
+    </tutorials-and-examples/blog/blog>` and created the ``articles`` table in
+    your Blog database you can leverage CakePHP's bake console and its code
+    generation capabilities to create the ArticlesController class::
+
+        bin/cake bake controller Articles
+
+For more on bake and its code generation features please visit :doc:`/bake/usage`.
 
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
@@ -122,7 +143,7 @@ them, but for now, let's just use the default.
 
 Remember in the last section how we assigned the 'articles' variable
 to the view using the ``set()`` method? That would hand down the query
-object to the view to be invoked with a ``foreach`` iteration.
+object collection to the view to be invoked with a ``foreach`` iteration.
 
 CakePHP's template files are stored in **src/Template** inside a folder
 named after the controller they correspond to (we'll have to create
@@ -183,7 +204,7 @@ you were probably informed by CakePHP that the action hasn't yet
 been defined. If you were not so informed, either something has
 gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
-ArticlesController now::
+``ArticlesController`` now::
 
     // src/Controller/ArticlesController.php
 
@@ -216,7 +237,7 @@ the requested URL. If a user requests ``/articles/view/3``, then the value
 We also do a bit of error checking to ensure a user is actually accessing
 a record. By using the ``get()`` function in the Articles table, we make sure
 the user has accessed a record that exists. In case the requested article is not
-present in the database, or the id is falsey the ``get()`` function will throw
+present in the database, or the id is false the ``get()`` function will throw
 a ``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
@@ -232,7 +253,8 @@ Now let's create the view for our new 'view' action and place it in
 
 
 Verify that this is working by trying the links at ``/articles/index`` or
-manually requesting an article by accessing ``/articles/view/1``.
+manually requesting an article by accessing ``/articles/view/{id}``, replacing
+``{id}`` by an article 'id'.
 
 Adding Articles
 ===============
@@ -241,7 +263,7 @@ Reading from the database and showing us the articles is a great
 start, but let's allow for the adding of new articles.
 
 First, start by creating an ``add()`` action in the
-ArticlesController::
+``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
@@ -287,8 +309,8 @@ ArticlesController::
 
 .. note::
 
-    You need to include the FlashComponent in any controller where you will use
-    it. If necessary, include it in your AppController.
+    You need to include the :doc:`/controllers/components/flash` component in any controller
+    where you will use it. If necessary, include it in your ``AppController``.
 
 Here's what the ``add()`` action does: if the HTTP method of the
 request was POST, try to save the data using the Articles model. If for some
@@ -303,8 +325,8 @@ method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
 information is available in ``$this->request->data``. You can use the
-:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
-what it looks like.
+:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
+see what it looks like.
 
 We use FlashComponent's ``success()`` and ``error()`` methods to set a message
 to a session variable. These methods are provided using PHP's `magic method
@@ -314,7 +336,7 @@ have ``<?= $this->Flash->render() ?>`` which displays the message and clears the
 corresponding session variable. The controller's
 :php:meth:`Cake\\Controller\\Controller::redirect` function redirects to another
 URL. The param ``['action' => 'index']`` translates to URL /articles i.e the
-index action of the articles controller. You can refer to
+index action of the ``ArticlesController``. You can refer to
 :php:func:`Cake\\Routing\\Router::url()` function on the `API
 <http://api.cakephp.org>`_ to see the formats in which you can specify a URL for
 various CakePHP functions.
@@ -331,8 +353,9 @@ validation. Everyone hates coding up endless forms and their
 validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use CakePHP's
-FormHelper in your views. The :php:class:`Cake\\View\\Helper\\FormHelper` is
-available by default to all views at ``$this->Form``.
+:doc:`/views/helpers/form` helper in your views. The
+:php:class:`Cake\\View\\Helper\\FormHelper` is available by default to all views
+at ``$this->Form``.
 
 Here's our add view:
 
@@ -400,18 +423,20 @@ back at our Articles model and make a few adjustments::
         {
             $validator
                 ->notEmpty('title')
-                ->notEmpty('body');
+                ->requirePresence('title')
+                ->notEmpty('body')
+                ->requirePresence('body');
 
             return $validator;
         }
     }
 
-The ``validationDefault()`` method tells CakePHP how to validate your data
-when the ``save()`` method is called. Here, we've specified that
-both the body and title fields must not be empty. CakePHP's
-validation engine is strong, with a number of pre-built rules
-(credit card numbers, email addresses, etc.) and flexibility for
-adding your own validation rules. For more information on that
+The ``validationDefault()`` method tells CakePHP how to validate your data when
+the ``save()`` method is called. Here, we've specified that both the body and
+title fields must not be empty, and are required for both create and update
+operations. CakePHP's validation engine is strong, with a number of pre-built
+rules (credit card numbers, email addresses, etc.) and flexibility for adding
+your own validation rules. For more information on that
 setup, check the :doc:`/core-libraries/validation` documentation.
 
 Now that your validation rules are in place, use the app to try to add
@@ -425,7 +450,7 @@ Editing Articles
 
 Post editing: here we go. You're a CakePHP pro by now, so you
 should have picked up a pattern. Make the action, then the view.
-Here's what the ``edit()`` action of the ArticlesController would look
+Here's what the ``edit()`` action of the ``ArticlesController`` would look
 like::
 
     // src/Controller/ArticlesController.php
@@ -447,12 +472,13 @@ like::
 
 This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$id`` parameter, or the article does not
-exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
+exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take
+care of.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST data to update our article entity by using the
-'patchEntity' method.  Finally we use the table object to save the entity back
-or kick back and show the user validation errors.
+``patchEntity()`` method.  Finally we use the table object to save the entity
+back or kick back and show the user validation errors.
 
 The edit view might look something like this:
 
@@ -515,7 +541,7 @@ Deleting Articles
 =================
 
 Next, let's make a way for users to delete articles. Start with a
-``delete()`` action in the ArticlesController::
+``delete()`` action in the ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
@@ -530,14 +556,14 @@ Next, let's make a way for users to delete articles. Start with a
         }
     }
 
-This logic deletes the article specified by $id, and uses
+This logic deletes the article specified by ``$id``, and uses
 ``$this->Flash->success()`` to show the user a confirmation
 message after redirecting them on to ``/articles``. If the user attempts to
-do a delete using a GET request, the 'allowMethod' will throw an Exception.
-Uncaught exceptions are captured by CakePHP's exception handler, and a nice error page is
-displayed. There are many built-in :doc:`Exceptions </development/errors>` that can
-be used to indicate the various HTTP errors your application might need
-to generate.
+do a delete using a GET request, the ``allowMethod()`` will throw an Exception.
+Uncaught exceptions are captured by CakePHP's exception handler, and a nice
+error page is displayed. There are many built-in
+:doc:`Exceptions </development/errors>` that can be used to indicate the various
+HTTP errors your application might need to generate.
 
 Because we're just executing some logic and redirecting, this
 action has no view. You might want to update your index view with
@@ -582,13 +608,16 @@ links that allow users to delete articles, however:
     </table>
 
 Using :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
-that uses JavaScript to do a POST request deleting our article.  Allowing content
-to be deleted using GET requests is dangerous, as web crawlers could
-accidentally delete all your content.
+that uses JavaScript to do a POST request deleting our article.
+
+.. warning::
+
+    Allowing content to be deleted using GET requests is dangerous, as web
+    crawlers could accidentally delete all your content.
 
 .. note::
 
-    This view code also uses the FormHelper to prompt the user with a
+    This view code also uses the ``FormHelper`` to prompt the user with a
     JavaScript confirmation dialog before they attempt to delete an
     article.
 
@@ -605,7 +634,7 @@ For more information on advanced routing techniques, see
 :ref:`routes-configuration`.
 
 By default, CakePHP responds to a request for the root of your site
-(e.g., http://www.example.com) using its PagesController, rendering
+(e.g., http://www.example.com) using its ``PagesController``, rendering
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 
@@ -625,8 +654,8 @@ with this one:
 
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-This should connect users requesting '/' to the index() action of
-our ArticlesController.
+This should connect users requesting '/' to the ``index()`` action of
+our ``ArticlesController``.
 
 .. note::
 
@@ -664,7 +693,8 @@ These are common tasks people learning CakePHP usually want to study next:
 1. :ref:`view-layouts`: Customizing your website layout
 2. :ref:`view-elements`: Including and reusing view snippets
 3. :doc:`/bake/usage`: Generating basic CRUD code
-4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
+4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication
+   and authorization tutorial
 
 
 .. meta::

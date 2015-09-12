@@ -211,7 +211,7 @@ a completely different storage for your logs.
 Using syslog is pretty much like using the default FileLog engine, you just need
 to specify ``Syslog`` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
-be done in the ``bootstrap.php`` file::
+be done in the **bootstrap.php** file::
 
     Log::config('default', [
         'engine' => 'Syslog'

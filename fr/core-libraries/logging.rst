@@ -197,7 +197,7 @@ utilisé ce qui à pour effet d'écrire dans le log error. Le chemin par défaut
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
 
-    // Aboutit à ce que cela soit ajouté à  app/tmp/logs/error.log
+    // Aboutit à ce que cela soit ajouté à tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Quelque chose ne fonctionne pas!
 
 Le répertoire configuré doit être accessible en écriture par le serveur web de
@@ -472,4 +472,4 @@ Utilisez des méthodes similaires pour configurer un logger différent pour la c
 .. meta::
     :title lang=fr: Journalisation (Logging)
     :description lang=fr: Journal Log de CakePHP de données du disque pour vous aider à debugger votre application sur des longues périodes de temps.
-    :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs
+    :keywords lang=fr: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

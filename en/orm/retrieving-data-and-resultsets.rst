@@ -565,7 +565,7 @@ Alternatively, if you can multiple associations, you can use ``autoFields()``::
     // and Tags.
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->autoFields(true);
+        ->autoFields(true)
         ->contain(['Users' => function($q) {
             return $q->autoFields(true);
         }]);

@@ -133,7 +133,7 @@ associative array with all event names that the class will handle.
 To continue our previous example, let's imagine we have a UserStatistic class
 responsible for calculating a user's purchasing history, and compiling into
 global site statistics. This is a great place to use a listener class. Doing so
-allows you concentrate the statistics logic in one place and react to events as
+allows you to concentrate the statistics logic in one place and react to events as
 necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListenerInterface;
@@ -196,9 +196,9 @@ Establishing Priorities
 -----------------------
 
 In some cases you might want to control the order that listeners are invoked.
-For instance, if we go back to our user statistics example. It would ideal if
+For instance, if we go back to our user statistics example. It would be ideal if
 this listener was called at the end of the stack. By calling it at the end of
-the listener stack, we can ensure that the event was not canceled, and that no
+the listener stack, we can ensure that the event was not cancelled, and that no
 other listeners raised exceptions. We can also get the final state of the
 objects in the case that other listeners have modified the subject or event
 object.
@@ -210,7 +210,7 @@ below this default will work. On the other hand if you desire to run the
 callback after the others, using a number above ``10`` will do.
 
 If two callbacks happen to have the same priority value, they will be executed
-with a the order they were attached. You set priorities using the ``attach()``
+with a the order they were attached. You set priorities using the ``on()``
 method for callbacks, and declaring it in the ``implementedEvents()`` function for
 event listeners::
 
@@ -238,7 +238,7 @@ event listeners::
 
 As you see, the main difference for ``EventListener`` objects is that you need
 to use an array for specifying the callable method and the priority preference.
-The ``callable`` key is an special array entry that the manager will read to know
+The ``callable`` key is a special array entry that the manager will read to know
 what function in the class it should be calling.
 
 Getting Event Data as Function Parameters

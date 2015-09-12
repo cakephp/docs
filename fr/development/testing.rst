@@ -21,15 +21,12 @@ le `PHAR package <http://phpunit.de/#download>`_ ou avec
 Installer PHPUnit avec Composer
 -------------------------------
 
-Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
-``require`` de votre application dans son ``composer.json``::
+Pour installer PHPUnit avec Composer::
 
-    "phpunit/phpunit": "*",
+    $ php composer.phar require --dev phpunit/phpunit
 
-Après avoir mis à jour votre composer.json, lancez à nouveau Composer dans votre
-répertoire d'application::
-
-    $ php composer.phar install
+Ceci va ajouter la dépendance à la section ``require-dev`` de votre
+``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
 
 Vous pouvez maintenant lancer PHPUnit en utilisant::
 
@@ -46,11 +43,11 @@ lancer vos tests::
 Tester la Configuration de la Base de Données
 =============================================
 
-Souvenez-vous qu'il faut avoir debug activé dans votre fichier **config/app.php**
-avant de lancer des tests. Vous devrez aussi vous
-assurer d'ajouter une configuration de base de données ``test`` dans
-**config/app.php**. Cette configuration est utilisée par CakePHP pour les
-tables de fixture et les données::
+Souvenez-vous qu'il faut avoir debug activé dans votre fichier
+**config/app.php** avant de lancer des tests. Vous devrez aussi vous assurer
+d'ajouter une configuration de base de données ``test`` dans **config/app.php**.
+Cette configuration est utilisée par CakePHP pour les tables de fixture et les
+données::
 
     'Datasources' => [
         'test' => [
@@ -72,9 +69,9 @@ tables de fixture et les données::
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
-la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lançant un de ceux présents dans le cœur::
+Après avoir installé PHPUnit et configuré le ``test`` de la configuration de la
+base de données, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
+vos propres tests en lançant un de ceux présents dans le cœur::
 
     // Pour phpunit.phar
     $ php phpunit.phar
@@ -105,12 +102,12 @@ conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests doivent être dans votre répertoire
    ``tests/TestCase/[Type]``.
-#. Les noms de ces fichiers doivent finir par ``Test.php`` plutôt que juste
-   ``.php``.
+#. Les noms de ces fichiers doivent finir par **Test.php** plutôt que juste
+   **.php**.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
-   correspondre au nom de fichier. ``RouterTest.php`` doit contenir
+   correspondre au nom de fichier. **RouterTest.php** doit contenir
    ``class RouterTest extends TestCase``.
 #. Le nom de toute méthode contenant un test (par ex: contenant une assertion)
    doit commencer par ``test``, comme dans ``testPublished()``.
@@ -165,9 +162,9 @@ allons commencer avec ce qui suit::
         }
     }
 
-Nous compléterons ce squelette dans une minute. Nous avons ajouté deux
-méthodes pour commencer. Tout d'abord ``setUp()``. Cette méthode est
-appelée avant chaque méthode de *test* dans une classe de cas de test.
+Nous compléterons ce squelette dans une minute. Nous avons ajouté deux méthodes
+pour commencer. Tout d'abord ``setUp()``. Cette méthode est appelée avant chaque
+méthode de *test* dans une classe de cas de test.
 Les méthodes de configuration devraient initialiser les objets souhaités
 pour le test, et faire toute configuration souhaitée. Dans notre configuration
 nous ajouterons ce qui suit::
@@ -180,8 +177,8 @@ nous ajouterons ce qui suit::
     }
 
 Appeler la méthode parente est importante dans les cas de test, puisque
-TestCase::setUp() fait un certain nombre de choses comme fabriquer les valeurs
-dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
+``TestCase::setUp()`` fait un certain nombre de choses comme fabriquer les
+valeurs dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
 :php:class:`~Cake\\Core\\App`.
 
 Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques
@@ -198,10 +195,10 @@ assertions pour nous assurer que notre code crée la sortie que nous attendons::
     }
 
 Le test ci-dessus est simple mais montre le potentiel bénéfique de l'utilisation
-des cas de test. Nous utilisons ``assertContains()`` pour nous assurer que
-notre helper retourne une chaîne qui contient le contenu que nous attendons.
-Si le résultat ne contient pas le contenu attendu le test sera un échec, et
-nous savons que notre code est incorrect.
+des cas de test. Nous utilisons ``assertContains()`` pour nous assurer que notre
+helper retourne une chaîne qui contient le contenu que nous attendons. Si le
+résultat ne contient pas le contenu attendu le test sera un échec, et nous
+savons que notre code est incorrect.
 
 En utilisant les cas de test, vous pouvez facilement décrire la relation entre
 un ensemble d'entrées connues et leur sortie attendue. Cela vous aide à être
@@ -365,7 +362,7 @@ A la création d'une fixture, vous pouvez définir principalement deux choses:
 comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
+Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
 **tests/Fixture** avec le contenu suivant::
 
     namespace App\Test\Fixture;
@@ -481,9 +478,9 @@ Les Données Dynamiques et les Fixtures
 Depuis que les enregistrements pour une fixture sont déclarés en propriété
 de classe, vous ne pouvez pas facilement utiliser les fonctions ou autres
 données dynamiques pour définir les fixtures. Pour résoudre ce problème,
-vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
-exemple, si vous voulez que tous les timestamps soient créés et mis à jours pour
-refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
+vous pouvez définir ``$records`` dans la fonction ``init()`` de votre fixture.
+Par exemple, si vous voulez que tous les timestamps soient créés et mis à jours
+pour refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     namespace App\Test\Fixture;
 
@@ -627,7 +624,7 @@ les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
         public function testMyFunction()
         {
-            $this->loadFixtures('Article', 'Comment');
+            $this->loadFixtures('Articles', 'Comments');
         }
     }
 
@@ -674,7 +671,7 @@ le model. Le test suite de CakePHP charge un petit ensemble minimum de fichiers
 (pour garder les tests isolés), ainsi nous devons commencer par charger notre
 model - dans ce cas le model Article que nous avons déjà défini.
 
-Créons maintenant un fichier nommé ``ArticlesTableTest.php`` dans notre
+Créons maintenant un fichier nommé **ArticlesTableTest.php** dans notre
 répertoire **tests/TestCase/Model/Table**, avec le contenu suivant::
 
     namespace App\Test\TestCase\Model\Table;
@@ -695,8 +692,8 @@ les fixtures sur lesquelles des requêtes vont être lancées.
 Créer une Méthode de Test
 -------------------------
 
-Ajoutons maintenant une méthode pour tester la fonction published() dans le
-model Article. Modifions le fichier
+Ajoutons maintenant une méthode pour tester la fonction ``published()`` dans la
+table Articles. Modifions le fichier
 **tests/TestCase/Model/Table/ArticlesTableTest.php** afin qu'il ressemble
 maintenant à ceci::
 
@@ -817,7 +814,7 @@ correspondant. Le code du controller ressemble à ceci::
         }
     }
 
-Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
+Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
 **tests/TestCase/Controller** et mettez ce qui suit à l'intérieur::
 
     namespace App\Test\TestCase\Controller;
@@ -1451,7 +1448,7 @@ Ensuite, décommentez la ligne suivante dans votre fichier
 
     //Configure::load('app_local', 'default');
 
-En créant un fichier ``app_local.php``, vous avez un moyen facile de définir une
+En créant un fichier **app_local.php**, vous avez un moyen facile de définir une
 configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de
 configuration pour remplacer tous les autres fichiers de configuration dont vous
 avez besoin sur Jenkins.

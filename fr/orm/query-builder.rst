@@ -967,7 +967,7 @@ enregistrements associés::
 Parfois, vous voulez fournir une méthode alternative pour compter le nombre
 total d'enregistrements d'une requête. Un cas d'utilisation courante pour ceci
 est pour fournir une valeur mise en cache ou un nombre estimé total de lignes,
-ou pour modifier la requête pour retirer les parties couteuses non nécessaires
+ou pour modifier la requête pour retirer les parties coûteuses non nécessaires
 comme les left joins. Ceci devient particulièrement pratique quand vous utilisez
 le système de pagination intégré à CakePHP qui appelle la méthode ``count()``::
 
@@ -1159,7 +1159,7 @@ en utilisant ``query()``::
 Généralement, il est plus facile d'insérer des données en utilisant les
 entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
 ``SELECT`` et ``INSERT`` ensemble, vous pouvez créer des requêtes de style
-``INSERT INTO ... SELECT`` ::
+``INSERT INTO ... SELECT``::
 
     $select = $articles->find()
         ->select(['title', 'body', 'published'])
@@ -1169,6 +1169,8 @@ entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
         ->insert(['title', 'body', 'published'])
         ->values($select)
         ->execute();
+
+.. _query-builder-updating-data:
 
 Mettre à Jour les Données
 =========================

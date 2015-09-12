@@ -1,5 +1,5 @@
-Internationalization & Localization
-###################################
+Internacionalização e Localização
+#################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

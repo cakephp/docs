@@ -1,5 +1,5 @@
-Upgrade Tool
-############
+Ferramenta de atualização
+#########################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

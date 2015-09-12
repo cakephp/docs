@@ -56,7 +56,7 @@ request::
 Intégration avec le FormHelper
 ==============================
 
-Le CsrfComponent s'intègre de façon transparente avec `` FormHelper``. Chaque
+Le CsrfComponent s'intègre de façon transparente avec ``FormHelper``. Chaque
 fois que vous créez un formulaire avec FormHelper, il va insérer un champ caché
 contenant le jeton CSRF.
 
@@ -64,21 +64,21 @@ contenant le jeton CSRF.
 
     Lorsque vous utilisez le CsrfComponent vous devez toujours commencer vos
     formulaires avec le FormHelper. Si vous ne le faites pas, vous devrez créer
-    manuellement les champs cachées dans chacun de vos formulaires.
+    manuellement les champs cachés dans chacun de vos formulaires.
 
 Protection CSRF et Requêtes AJAX
 ================================
 
 En plus des paramètres de données de requête, les jetons CSRF peuvent être
 soumis par le biais d'un en-tête spécial ``X-CSRF-Token``. Utiliser un en-tête
-rend souvent plus simple l'intégration des jetons CSRF avec de lourdes
-applications Javascript, ou des API basées sur XML/JSON.
+facilite souvent l'intégration des jetons CSRF pour les applications Javascript
+lourdes ou pour les API basées sur XML/JSON.
 
 Désactiver le Component CSRF pour des Actions Spécifiques
 =========================================================
 
 Bien que non recommandé, vous pouvez désactiver le CsrfComponent pour certaines
-requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'évènement du
+requêtes. Vous pouvez réalisez ceci en utilisant le dispatcheur d'event du
 controller, au cours de la méthode ``beforeFilter()``::
 
     public function beforeFilter(Event $event)
@@ -88,4 +88,4 @@ controller, au cours de la méthode ``beforeFilter()``::
 
 .. meta::
     :title lang=fr: Csrf
-    :keywords lang=fr: configurable parameters,security component,configuration parameters,invalid request,csrf,submission
+    :keywords lang=fr: paramètres configurables,component security,paramètres de configuration,requête invalide,csrf,soumettre

@@ -201,7 +201,7 @@ latex_show_urls = 'footnote'
 #latex_appendices = []
 
 # If false, no module index is generated.
-# latex_domain_indices = True
+latex_domain_indices = True
 
 
 preamb = ur'''
@@ -296,7 +296,7 @@ epub_tocdup = False
 epub_use_index = False
 
 # Languages available.
-languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh']
+languages = ['en', 'pt', 'es', 'ja', 'fr', 'zh', 'tr']
 
 # The GitHub branch name for this version of the docs
 branch = '3.0'

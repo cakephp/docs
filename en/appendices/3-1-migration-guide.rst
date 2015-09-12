@@ -76,6 +76,12 @@ AuthComponent
 - The options ``scope`` and ``contain`` for authenticator classes have been
   deprecated. Instead, use the new ``finder`` option to configure a custom finder
   method and modify the query used to find a user there.
+- The logic for setting ``Auth.redirect`` session variable, which is used to get
+  the URL to be redirected to after login, has been changed. It is now set only when
+  trying to access a protected URL without authentication. So ``Auth::redirectUrl()``
+  returns the protected URL after login. Under normal circumstances, when a user
+  directly accesses the login page, ``Auth::redirectUrl()`` returns the value set
+  for ``loginRedirect`` config.
 
 FlashComponent
 --------------
@@ -98,6 +104,11 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` now switches the layout and template based on
   the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
   instead of ``startup()``.
+- ``addInputType()`` and ``viewClassMap()`` are deprecated. You should use
+  ``config()`` to modify this configuration data at runtime.
+- When ``inputTypeMap`` or ``viewClassMap`` are defined in the component
+  settings, they will *overwrite* the default values. This change makes it
+  possible to remove the default configuration.
 
 Network
 =======
@@ -117,6 +128,10 @@ You can now :ref:`Lazily Eager Load Associations
 <loading-additional-associations>`. This feature allows you to conditionally
 load additional associations into a result set, entity or collection of
 entities.
+
+The ``patchEntity()`` and ``newEntity()`` method now support the ``onlyIds``
+option. This option allows you to restrict hasMany/belongsToMany association
+marshalling to only use the ``_ids`` list. This option defaults to ``false``.
 
 Query
 -----
@@ -138,6 +153,12 @@ View
 
 - You can now set ``_serialized`` to ``true`` for ``JsonView`` and ``XmlView``
   to serialize all view variables instead of explicitly specifying them.
+- ``View::$viewPath`` is deprecated. You should use ``View::templatePath()``
+  instead.
+- ``View::$view`` is deprecated. You should use ``View::template()``
+  instead.
+- ``View::TYPE_VIEW`` is deprecated. You should use ``View::TYPE_TEMPLATE``
+  instead.
 
 Helper
 ======
@@ -167,6 +188,8 @@ Email
 - ``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
   namespace. Their former namespaces are still usable as class aliases have
   been set for them.
+- The ``default`` email profile is now automatically set when an ``Email``
+  instance is created. This behavior is similar to what is done in 2.x.
 
 Mailer
 ------
@@ -191,3 +214,6 @@ Validation
 - ``Validation::geoCoordinate()`` was added.
 - ``Validation::latitude()`` was added.
 - ``Validation::longitude()`` was added.
+- ``Validation::isInteger()`` was added.
+- ``Validation::ascii()`` was added.
+- ``Validation::utf8()`` was added.

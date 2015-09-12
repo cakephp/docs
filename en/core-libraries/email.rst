@@ -28,8 +28,19 @@ After you've loaded ``Email``, you can send an email with the following::
         ->subject('About')
         ->send('My message');
 
-Since ``Email``'s setter methods return the instance of the class, you are able
-to set its properties with method chaining.
+Since ``Email``'s setter methods return the instance of the class, you are able to set its properties with method chaining.
+
+``Email`` has several methods for defining recepients - ``to()``, ``cc()``,
+``bcc()``, ``addTo()``, ``addCc()`` and ``addBcc()``. The main difference being
+that the first three will overwrite what was already set and the later will just
+add more recepients to their respective field::
+
+    $email = new Email();
+    $email->to('to@example.com', 'To Example');
+    $email->addTo('to2@example.com', 'To2 Example');
+    // The email's To recepients are: to@example.com and to2@example.com
+    $email->to('test@example.com', 'ToTest Example');
+    // The email's To recepient is: test@example.com
 
 Choosing the Sender
 -------------------
@@ -53,7 +64,7 @@ Configuration
 
 Configuration for ``Email`` defaults is created using ``config()`` and
 ``configTransport()``. You should put your email presets in the
-**config/app.php** file.  The ``config/app.php.default`` file is an
+**config/app.php** file.  The **config/app.php.default** file is an
 example of this file. It is not required to define email configuration in
 **config/app.php**. ``Email`` can be used without it and use the respective
 methods to set all configurations separately or load an array of configs.
@@ -79,6 +90,10 @@ also just load an array of options::
 
     // Or in constructor
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
+
+.. versionchanged:: 3.1
+    The ``default`` email profile is automatically set when an ``Email``
+    instance is created.
 
 Configuring Transports
 ----------------------
@@ -349,7 +364,7 @@ systems (like SwiftMailer). To create your transport, first create the file
 transport). To start off your file should look like::
 
     namespace App\Network\Email;
-    
+
     use Cake\Mailer\AbstractTransport;
     use Cake\Mailer\Email;
 
@@ -460,23 +475,25 @@ following::
     {
         public function welcome($user)
         {
-            $this->_email->profile('default');
-            $this->_email->to($user->email);
-            $this->_email->subject(sprintf('Welcome %s', $user->name));
+            $this
+                ->to($user->email)
+                ->subject(sprintf('Welcome %s', $user->name))
+                ->template('welcome_mail') // By default template with same name as method name is used.
+                ->layout('custom');
         }
 
         public function resetPassword($user)
         {
-            $this->_email->profile('default');
-            $this->_email->to($user->email);
-            $this->_email->subject('Reset password');
-            $this->set(['token' => $user->token]);
+            $this
+                ->to($user->email)
+                ->subject('Reset password')
+                ->set(['token' => $user->token]);
         }
     }
 
 In our example we have created two methods, one for sending a welcome email, and
 another for sending a password reset email. Each of these methods expect a user
-``Entity`` and utilizes its properties for configuring each email. 
+``Entity`` and utilizes its properties for configuring each email.
 
 We are now able to use our ``UserMailer`` to send out our user-related emails
 from anywhere in our application. For example, if we wanted to send our welcome
@@ -512,8 +529,8 @@ instructions. For example, we could add the following to our ``UserMailer``::
     public function implementedEvents()
     {
         return [
-            'Model.afterSave' => 'onRegistration',
-        ;
+            'Model.afterSave' => 'onRegistration'
+        ];
     }
 
     public function onRegistration(Event $event, Entity $entity, ArrayObject $options)

@@ -18,7 +18,7 @@ Requirements
 
 .. note::
 
-    In both XAMPP and WAMP, mcrypt and mbstring extensions are working by
+    In both XAMPP and WAMP, the mbstring extension is working by
     default.
 
     In XAMPP, intl extension is included but you have to uncomment

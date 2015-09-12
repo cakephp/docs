@@ -1,5 +1,5 @@
-Coding Standards
-################
+Padrões de código
+#################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

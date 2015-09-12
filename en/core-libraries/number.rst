@@ -257,6 +257,25 @@ Example::
     ]);
     // Output '123 456,79 !'
 
+.. php:method:: ordinal(mixed $value, array $options = [])
+
+This method will output an ordinal number.
+
+Examples::
+
+    echo Number::ordinal(1);
+    // Output '1st'
+
+    echo Number::ordinal(2);
+    // Output '2nd'
+
+    echo Number::ordinal(2, [
+        'locale' => 'fr_FR'
+    ]);
+    // Output '2e'
+
+    echo Number::ordinal(410);
+    // Output '410th'
 
 Format Differences
 ==================
@@ -312,6 +331,20 @@ Example::
     // Output '[+123,456.79]'
 
 .. end-cakenumber
+
+Configure formatters
+====================
+
+.. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
+
+This method allows you to configure formatter defaults which persist across calls
+to various methods.
+
+Example::
+
+    Number::config('en_IN', \NumberFormatter::CURRENCY, [
+        'pattern' => '#,##,##0'
+    ]);
 
 .. meta::
     :title lang=en: NumberHelper

@@ -20,8 +20,8 @@ facilidad cada ítem de ese modelo.
 
 Los modelos están separados entre los objetos ``Tabla`` (``Table``) y ``Entidad``
 (``Entity``). Los objetos ``Tabla`` proporcionan acceso a la coleción de
-entidades almacenada en una tabla específica y va en ``/src/Model/Table``. El
-fichero que crearemos se guardará en ``/src/Model/Table/ArticlesTable.php``. El
+entidades almacenada en una tabla específica y va en **src/Model/Table**. El
+fichero que crearemos se guardará en **src/Model/Table/ArticlesTable.php**. El
 fichero completo debería tener este aspecto::
 
     namespace App\Model\Table;
@@ -44,7 +44,7 @@ en nuestra base de datos llamada ``articles``.
 .. note::
 
     CakePHP creará dinámicamente un objeto para el modelo si no encuentra el
-    fichero correspondiente en /src/Model/Table. Esto significa que si te
+    fichero correspondiente en **src/Model/Table**. Esto significa que si te
     equivocas al nombrar el fichero (por ejemplo lo llamas articlestable.php —en
     minúscula— o ArticleTable.php —en singular) CakePHP no va a reconocer la
     configuración que escribas en ese fichero y utilizará valores por defecto.
@@ -60,7 +60,7 @@ Vamos a crear ahora un controlador para nuestros artículos. En el controlador e
 donde escribiremos el código para interactuar con nuestros artículos. Es donde
 se utilizan los modelos para llevar a cabo el trabajo que queramos hacer con
 nuestros artículos. Vamos a crear un nuevo fichero llamado
-``ArticlesController.php`` dentro del directorio ``/src/Controller``. A
+**ArticlesController.php** dentro del directorio **src/Controller**. A
 continuación puedes ver el aspecto básico que debería tener este controlador::
 
     namespace App\Controller;
@@ -226,7 +226,7 @@ solicitado no esté presente en la base de datos, el método ``get()`` lanzará
 una excepción ``NotFoundException``.
 
 Ahora vamos a definir la vista para esta nueva función 'view' ubicándola en
-``/src/Template/Articles/view.ctp``.
+**src/Template/Articles/view.ctp**.
 
 .. code-block:: php
 
@@ -597,7 +597,7 @@ http://www.example.com) usando el controlador PagesController, mostrando una vis
 llamada "home". En lugar de eso, lo reemplazaremos con nuestro controlador
 ``ArticlesController`` creando una nueva ruta.
 
-Las reglas de enrutamiento están en ``/config/routes.php``. Querrás eliminar o
+Las reglas de enrutamiento están en **config/routes.php**. Querrás eliminar o
 comentar la línea que define la raíz por defecto. Dicha ruta se parece a esto:
 
 .. code-block:: php

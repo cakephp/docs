@@ -5,12 +5,12 @@ Session
 
 .. php:class:: SessionHelper(View $view, array $config = [])
 
-As a natural counterpart to the Session Component, the Session
-Helper replicates most of the component's functionality and makes it
+As a natural counterpart to the Session object, the Session
+Helper replicates most of the object's functionality and makes it
 available in your view.
 
 The major difference between the Session Helper and the Session
-Component is that the helper does *not* have the ability to write
+object is that the helper does *not* have the ability to write
 to the session.
 
 As with the session object, data is read by using

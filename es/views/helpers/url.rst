@@ -1,7 +1,7 @@
 UrlHelper
 ##########
 
-.. php:namespace:: Cake\View\UrlHelper
+.. php:namespace:: Cake\View\Helper
 
 .. php:class:: UrlHelper(View $view, array $config = [])
 

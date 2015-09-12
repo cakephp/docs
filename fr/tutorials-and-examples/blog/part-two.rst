@@ -32,8 +32,8 @@ collection des entities stockées dans une table spécifique et vont dans
 
 La convention de nommage est vraiment très importante dans CakePHP. En nommant
 notre objet Table ``ArticlesTable``, CakePHP va automatiquement supposer que
-cet objet Table sera utilisé dans le ArticlesController, et sera lié à une table
-de la base de données appelée ``articles``.
+cet objet Table sera utilisé dans le ``ArticlesController``, et sera lié à une
+table de la base de données appelée ``articles``.
 
 .. note::
 
@@ -46,6 +46,17 @@ de la base de données appelée ``articles``.
 Pour plus d'informations sur les models, comme les callbacks et la validation,
 consultez le chapitre :doc:`/orm` du manuel.
 
+.. note::
+
+    Si vous avez terminé la :doc:`Partie 1 du Tutoriel du blog
+    </tutorials-and-examples/blog/blog>` et créé la table ``articles`` dans
+    notre base de données Blog, vous pouvez utiliser la console bake de CakePHP
+    et la possibilité de générer du code pour créer le model ``ArticlesTable``::
+
+        bin/cake bake model Articles
+
+Pour plus d'informations sur bake et les fonctionnalités de génération de code,
+vous pouvez allez voir :doc:`/bake/usage`.
 
 Créer le controller Articles
 ============================
@@ -54,8 +65,8 @@ Nous allons maintenant créer un controller pour nos articles. Le controller est
 l'endroit où toute interaction avec les articles va se faire. En un mot, c'est
 l'endroit où vous jouerez avec les models et où vous ferez les tâches liées aux
 articles. Nous placerons ce nouveau controller dans un fichier appelé
-``ArticlesController.php`` à l'intérieur du dossier **src/Controller**. Voici
-à quoi devrait ressembler le controller de base ::
+**ArticlesController.php** à l'intérieur du dossier **src/Controller**. Voici
+à quoi devrait ressembler le controller de base::
 
     // src/Controller/ArticlesController.php
 
@@ -86,7 +97,7 @@ ressembler à quelque chose comme ça::
         }
     }
 
-En définissant la fonction ``index()`` dans notre ArticlesController, les
+En définissant la fonction ``index()`` dans notre ``ArticlesController``, les
 utilisateurs peuvent maintenant accéder à cette logique en demandant
 www.exemple.com/articles/index. De la même façon, si nous devions définir une
 fonction appelée ``foobar()``, les utilisateurs pourrait y accéder en demandant
@@ -96,15 +107,27 @@ www.exemple.com/articles/foobar.
 
     Vous pourriez être tenté de nommer vos controllers et vos actions d'une
     certaine manière pour obtenir une certaine URL. Résistez à cette tentation.
-    Suivez les conventions CakePHP (le nom des controllers au pluriel, etc.) et
-    nommez vos actions de façon lisible et compréhensible. Vous pouvez lier les
-    URLs à votre code en utilisant ce qu'on appelle des "routes", on le verra
-    plus tard.
+    Suivez les :doc:`/intro/conventions` de CakePHP (le nom des controllers au
+    pluriel, etc.) et nommez vos actions de façon lisible et compréhensible.
+    Vous pouvez lier les URLs à votre code en utilisant ce qu'on appelle le
+    :doc:`/development/routing`, on le verra plus tard.
 
 La seule instruction que cette action utilise est ``set()``, pour transmettre
 les données du controller à la vue (que nous créerons à la prochaine étape).
 La ligne définit la variable de vue appelée 'articles' qui est égale à la valeur
 de retour de la méthode ``find('all')`` de l'objet table Articles.
+
+.. note::
+
+    Si vous avez terminé la :doc:`Partie 1 du Tutoriel du blog
+    </tutorials-and-examples/blog/blog>` et créé la table ``articles`` dans
+    notre base de données Blog, vous pouvez utiliser la console bake de CakePHP
+    et la possibilité de générer du code pour créer le model ArticlesTable::
+
+        bin/cake bake model Articles
+
+Pour plus d'informations sur bake et les fonctionnalités de génération de code,
+vous pouvez allez voir :doc:`/bake/usage`.
 
 Pour en apprendre plus sur les controllers de CakePHP, consultez le chapitre
 :doc:`/controllers`.
@@ -247,7 +270,7 @@ dans **src/Template/Articles/view.ctp**.
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
 Vérifiez que cela fonctionne en testant les liens de la page ``/articles/index``
-ou en affichant manuellement un article via ``/articles/view/1``.
+ou en affichant manuellement un article via ``/articles/view/{id}``.
 
 Ajouter des Articles
 ====================
@@ -256,7 +279,7 @@ Lire depuis la base de données et nous afficher les articles est un bon début,
 mais lançons-nous dans l'ajout de nouveaux articles.
 
 Premièrement, commençons par créer une action ``add()`` dans le
-ArticlesController::
+``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
@@ -300,9 +323,9 @@ ArticlesController::
 
 .. note::
 
-   Vous avez besoin d'inclure le component Flash (FlashComponent) dans
-   chaque controller où vous voulez les utiliser. Si nécessaire, incluez-les
-   dans le controller principal (AppController).
+   Vous avez besoin d'inclure le component :doc:`/controllers/components/flash`
+   dans chaque controller où vous voulez les utiliser. Si nécessaire,
+   incluez-les dans le controller principal (``AppController``).
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST,
 essayez de sauvegarder les données en utilisant le model "Articles". Si pour une
@@ -395,7 +418,7 @@ activée.
 
 A présent, revenons en arrière et modifions notre vue
 **src/Template/Articles/index.ctp** pour ajouter un lien "Ajouter un article".
-Ajoutez la ligne suivante avant ``<table>`` ::
+Ajoutez la ligne suivante avant ``<table>``::
 
     <?= $this->Html->link('Ajouter un article', ['action' => 'add']) ?>
 
@@ -413,25 +436,31 @@ ajustements::
 
     class ArticlesTable extends Table
     {
+        public function initialize(array $config)
+        {
+            $this->addBehavior('Timestamp');
+        }
 
         public function validationDefault(Validator $validator)
         {
             $validator
-                ->allowEmpty('title', false)
-                ->allowEmpty('body', false);
+                ->notEmpty('title')
+                ->requirePresence('title')
+                ->notEmpty('body')
+                ->requirePresence('body');
 
             return $validator;
         }
     }
 
 Le méthode ``validationDefault()`` indique à CakePHP comment valider vos données
-lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les
-deux champs "body" et "title" ne doivent pas être vides. Le moteur de
-validation de CakePHP est puissant, il dispose d'un certain nombre de
-règles intégrées (code de carte bancaire, adresse emails, etc.)
-et d'une souplesse pour ajouter vos propres règles de validation. Pour
-plus d'informations sur cette configuration, consultez le chapitre
-:doc:`/core-libraries/validation`.
+lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les deux
+champs "body" et "title" ne doivent pas être vides et que ces champs sont requis
+à la fois pour les opérations de création et de mise à jour. Le moteur de
+validation de CakePHP est puissant, il dispose d'un certain nombre de règles
+intégrées (code de carte bancaire, adresse emails, etc.) et d'une souplesse pour
+ajouter vos propres règles de validation. Pour plus d'informations sur cette
+configuration, consultez le chapitre :doc:`/core-libraries/validation`.
 
 Maintenant que vos règles de validation sont en place, utilisez l'application
 pour essayer d'ajouter un article avec un titre et un contenu vide afin de voir
@@ -445,7 +474,7 @@ Editer des Articles
 
 L'édition de articles : nous y voilà. Vous êtes un pro de CakePHP maintenant,
 vous devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue.
-Voici à quoi l'action ``edit()`` du controller Articles (ArticlesController)
+Voici à quoi l'action ``edit()`` du controller Articles (``ArticlesController``)
 devrait ressembler::
 
     // src/Controller/ArticlesController.php
@@ -472,9 +501,9 @@ gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 
 Ensuite l'action vérifie si la requête est une requête POST ou PUT. Si elle
 l'est, alors nous utilisons les données POST pour mettre à jour notre
-entity article en utilisant la méthode 'patchEntity'. Finalement nous utilisons
-l'objet table pour sauvegarder l'entity back ou kick back et montrer les erreurs
-de validation de l'utilisateur.
+entity article en utilisant la méthode ``patchEntity()``. Finalement nous
+utilisons l'objet table pour sauvegarder l'entity back ou kick back et montrer
+les erreurs de validation de l'utilisateur.
 
 La vue d'édition devrait ressembler à quelque chose comme cela:
 
@@ -539,7 +568,7 @@ Supprimer des Articles
 
 A présent, mettons en place un moyen de supprimer les articles pour les
 utilisateurs. Démarrons avec une action ``delete()`` dans le controller
-Articles (ArticlesController)::
+Articles (``ArticlesController``)::
 
     // src/Controller/ArticlesController.php
 
@@ -554,7 +583,7 @@ Articles (ArticlesController)::
         }
     }
 
-Cette logique supprime l'article spécifié par $id, et utilise
+Cette logique supprime l'article spécifié par ``$id``, et utilise
 ``$this->Flash->success()`` pour afficher à l'utilisateur un message de
 confirmation après l'avoir redirigé sur ``/articles``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exception est levée.
@@ -609,14 +638,18 @@ articles, ainsi :
     </table>
 
 Utiliser :php:meth:`~Cake\\View\\Helper\\FormHelper::postLink()` permet de
-créer un lien qui utilise du Javascript pour supprimer notre post en faisant
-une requête POST. Autoriser la suppression par une requête GET est dangereux à
-cause des robots d'indexation qui peuvent tous les supprimer.
+créer un lien qui utilise du JavaScript pour supprimer notre article en faisant
+une requête POST.
+
+.. warning::
+
+    Autoriser la suppression par une requête GET est dangereux à cause des
+    robots d'indexation qui peuvent tous les supprimer.
 
 .. note::
 
-    Ce code de vue utilise aussi le helper "Form" pour demander à l'utilisateur
-    une confirmation avant de supprimer un article.
+    Ce code de vue utilise aussi le helper ``FormHelper`` pour demander à
+    l'utilisateur une confirmation JavaScript avant de supprimer un article.
 
 Routes
 ======
@@ -632,9 +665,9 @@ Pour plus d'informations sur les techniques de routages, consultez le chapitre
 
 Par défaut, CakePHP effectue une redirection d'une personne visitant la racine
 de votre site (par ex: http://www.exemple.com) vers le controller Pages
-(PagesController) et affiche le rendu de la vue appelée "home". Au lieu de
+(``PagesController``) et affiche le rendu de la vue appelée "home". Au lieu de
 cela, nous voudrions la remplacer avec notre controller Articles
-(ArticlesController).
+(``ArticlesController``).
 
 Le routage de CakePHP se trouve dans **config/routes.php**. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
@@ -653,7 +686,7 @@ la ligne par celle-ci:
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 Cela devrait connecter les utilisateurs demandant '/' à l'action ``index()`` de
-notre controller Articles (ArticlesController).
+notre controller Articles (``ArticlesController``).
 
 .. note::
 

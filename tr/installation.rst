@@ -14,7 +14,6 @@ Gereksinimler
   olması tercih edilir ama zorunlu değildir.
 - PHP 5.4.16 veya daha yüksek.
 - mbstring eklentisi
-- mcrypt eklentisi
 - intl eklentisi
 
 Bir veritabanı olması zorunlu olmasa dahi, birçok uygulamanın veritabanı kullandığını
@@ -420,7 +419,7 @@ I Can't Use URL Rewriting
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``config/app.php``,
+use CakePHP's built in pretty URLs. In **config/app.php**,
 uncomment the line that looks like::
 
     'App' => [
@@ -441,5 +440,5 @@ than www.example.com/controllername/actionname/param.
 .. _Composer: http://getcomposer.org
 
 .. meta::
-    :title lang=en: Installation
-    :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
+    :title lang=tr: Installation
+    :keywords lang=tr: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate

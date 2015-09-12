@@ -14,7 +14,7 @@ Les Cells sont idéales pour la construction de components de page réutilisable
 qui nécessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
 ou un menu de navigation selon des données dans un CMS. Puisque les cells ne
-dispatchent pas les sous-requêtes, elles évitent toute la charge couteuse
+dispatchent pas les sous-requêtes, elles évitent toute la charge coûteuse
 de ``requestAction()``.
 
 Créer une Cell
@@ -163,7 +163,7 @@ l'afficher. La façon la plus simple pour rendre une cell est de faire une echo:
     <?= $cell ?>
 
 Ceci va afficher le template correspondant à la version en minuscule et avec des
-underscores de notre nom d'action, par exemple ``display.ctp``.
+underscores de notre nom d'action, par exemple **display.ctp**.
 
 Puisque les cells utilisent ``View`` pour afficher les templates, vous pouvez
 charger les cells supplémentaires dans un template de cell si nécessaire.

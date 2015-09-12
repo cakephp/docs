@@ -40,7 +40,7 @@ votre code DRY::
     ];
 
 Cela va charger le fichier qui se trouve dans
-``config/paginator-templates.php``. Regardez l'exemple ci-dessous pour voir à
+**config/paginator-templates.php**. Regardez l'exemple ci-dessous pour voir à
 quoi doit ressembler le fichier. Vous pouvez aussi charger les templates à
 partir d'un plugin en utilisant la :term:`syntaxe de plugin`::
 
@@ -368,7 +368,7 @@ supportées sont:
   -  ``{{current}}`` - le nombre actuel d'enregistrements affichés.
   -  ``{{count}}`` - le nombre total d'enregistrements dans le jeu de résultat.
   -  ``{{start}}`` - le nombre de premier enregistrement affichés.
-  -  ``{{end}`` - le nombre de dernier enregistrements affichés.
+  -  ``{{end}}`` - le nombre de dernier enregistrements affichés.
   -  ``{{model}}`` - La forme plurielle du nom de model.
      Si votre model était 'RecettePage', ``{{model}}`` devrait être
      'recipe pages'.
@@ -377,8 +377,8 @@ supportées sont:
   utilisant les jetons autorisés. Par exemple::
 
       echo $this->Paginator->counter(
-          'Page {:page} of {:pages}, showing {:current} records out of
-           {:count} total, starting on record {:start}, ending on {:end}'
+          'Page {{page}} of {{pages}}, showing {{current}} records out of
+           {{count}} total, starting on record {{start}}, ending on {{end}}'
       );
 
   En définissant 'format' à 'range' donnerait en sortie '1 - 3 of 13'::

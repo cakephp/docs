@@ -12,11 +12,11 @@ Loading Plugins
 ---------------
 
 Via the `Load` task you are able to load plugins in your
-``config/bootstrap.php``. You can do this by running::
+**config/bootstrap.php**. You can do this by running::
 
     bin/cake plugin load MyPlugin
 
-This will add the following to your ``config/bootstrap.php``::
+This will add the following to your **config/bootstrap.php**::
 
     Plugin::load('MyPlugin', []);
 
@@ -41,7 +41,7 @@ You can unload a plugin by specifying its name::
     bin/cake plugin unload MyPlugin
 
 This will remove the line ``Plugin::load('MyPlugin',...`` from your
-``config/bootstrap.php``.
+**config/bootstrap.php**.
 
 Plugin Assets
 -------------

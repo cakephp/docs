@@ -383,7 +383,6 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
 
     31536000 と等しい
 
-
 .. meta::
     :title lang=ja: Global Constants and Functions
     :keywords lang=ja: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations

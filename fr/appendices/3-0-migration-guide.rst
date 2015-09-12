@@ -86,7 +86,7 @@ ajouter plusieurs chemins à ``App.paths.templates``, ``App.paths.plugins`` et
 les templates, les plugins et les fichiers de locales.
 
 La clé de configuration ``www_root`` a été renommée ``wwwRoot`` par cohérence.
-Merci d'ajuster votre fichier de configuration ``app.php`` ainsi que chaque
+Merci d'ajuster votre fichier de configuration **app.php** ainsi que chaque
 utilisation de``Configure::read('App.wwwRoot')``.
 
 Nouvel ORM
@@ -192,7 +192,7 @@ Configure
 - :php:meth:`Cake\\Core\\Configure::consume()` a été ajoutée.
 - :php:meth:`Cake\\Core\\Configure::load()` attend maintenant un suffixe du nom
   du fichier sans extension puisque celui-ci peut venir d'un moteur. Par
-  exemple, l'utilisation de PhpConfig utilise ``app`` pour charger ``app.php``.
+  exemple, l'utilisation de PhpConfig utilise ``app`` pour charger **app.php**.
 - Définir une variable ``$config`` dans un fichier PHP de config est déprécié.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` attend maintenant le
   fichier de config pour retourner un tableau.
@@ -1345,16 +1345,18 @@ Security
   les hashs de blowfish. La librairie compatible
   `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
   qui est installée avec CakePHP fournit ces fonctions pour PHP < 5.5.
-- OpenSSL is now used over mcrypt when encrypting/decrypting data. This change
-  provides better performance and future proofs CakePHP against distros dropping
-  support for mcrypt.
-- ``Security::rijndael()`` is deprecated and only available when using mcrypt.
+- OpenSSL est maintenant utilisé à la place de mcrypt pour le
+  chiffrement/déchiffrement des données. Ce changement fournit de meilleurs
+  performances et une avancée dans la supression du support de mcrypt.
+- ``Security::rijndael()`` est dépréciée et elle est seulement disponible quand
+  vous utilisez mcrypt.
 
 .. warning::
 
-    Data encrypted with Security::encrypt() in previous versions is not
-    compatible with the openssl implementation. You should :ref:`set the
-    implementation to mcrypt <force-mcrypt>` when upgrading.
+    Les données chiffrées avec ``Security::encrypt()`` dans les versions
+    précédentes sont compatibles avec l'implémentation de openssl. Vous devez
+    :ref:`définir l'implémentation pour mcrypt <force-mcrypt>` lors de la mise
+    à jour.
 
 Time
 ----

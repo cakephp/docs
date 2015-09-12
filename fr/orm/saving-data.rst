@@ -244,7 +244,7 @@ Vos données de requête doivent ressembler à ceci::
     ];
 
 Si vous souhaitez lier des entrées belongsToMany existantes et en créer de
-nouvelles en même temps, vous pouvez utiliser la forme étendue ::
+nouvelles en même temps, vous pouvez utiliser la forme étendue::
 
     $data = [
         'title' => 'My title',
@@ -262,6 +262,14 @@ Quand les données ci-dessus seront converties en entities, il y aura 4 tags.
 Les deux premiers seront de nouveaux objets, et les deux seconds seront des
 références à des tags existants.
 
+Quand les données de belongsToMany sont converties, vous pouvez désactiver la
+création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
+est activée, cette option restreint la conversion des données de belongsToMany
+pour utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
+
+.. versionadded:: 3.1.0
+    L'option ``onlyIds`` a été ajoutée dans 3.1.0
+
 Convertir des Données HasMany
 -----------------------------
 
@@ -276,6 +284,14 @@ existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
             '_ids' => [1, 2, 3, 4]
         ]
     ];
+
+Quand les données de hasMany sont converties, vous pouvez désactiver la
+création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
+est activée, cette option restreint la conversion des données hasMany pour
+utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
+
+.. versionadded:: 3.1.0
+    L'option ``onlyIds`` a été ajoutée dans 3.1.0
 
 Convertir des Enregistrements Multiples
 ---------------------------------------
@@ -515,7 +531,7 @@ pas dans la liste::
 
     // Dans un controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($article->comments))->extract('id');
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -647,7 +663,7 @@ L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
 non une insertion ou une mise à jour doit être faite. Si la méthode
 ``isNew()`` retourne ``true`` et que l'entity a une valeur de clé primaire,
 une requête 'exists' sera faîte. La requête 'exists' peut être supprimée en
-passant ``'checkExisting' => false`` à l'argument ``$options`` ::
+passant ``'checkExisting' => false`` à l'argument ``$options``::
 
     $articles->save($article, ['checkExisting' => false]);
 
@@ -1039,7 +1055,9 @@ mise à jour en masse pour modifier plusieurs lignes en une fois::
     // Publie tous les articles non publiés.
     function publishAllUnpublished()
     {
-        $this->updateAll(['published' => true], ['published' => false]);
+        $this->updateAll([
+            'published' => true], //champ
+            ['published' => false]); //condition
     }
 
 Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
@@ -1060,3 +1078,18 @@ lignes sont mises à jour.
     updateAll *ne* va *pas* déclencher d'events beforeSave/afterSave. Si
     vous avez besoin de ceux-ci, chargez d'abord une collection
     d'enregistrements et mettez les à jour.
+
+``updateAll()`` est uniquement une fonction de commodité. Vous pouvez
+également utiliser cette interface plus flexible::
+
+    // Publication de tous les articles non publiés.
+    function publishAllUnpublished()
+    {
+        $this->query()
+            ->update()
+            ->set(['published' => 'true])
+            ->where(['published' => 'false'])
+            ->execute();
+    }
+
+Reportez-vous sur :ref:`query-builder-updating-data`.

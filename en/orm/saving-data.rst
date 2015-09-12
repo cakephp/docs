@@ -248,6 +248,13 @@ When the above data is converted into entities, you will have 4 tags. The first
 two will be new objects, and the second two will be references to existing
 records.
 
+When converting belongsToMany data, you can disable the new entity creation, by
+using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
+marshalling to only use the ``_ids`` key and ignore all other data.
+
+.. versionadded:: 3.1.0
+    The ``onlyIds`` option was added in 3.1.0
+
 Converting HasMany Data
 -----------------------
 
@@ -262,6 +269,13 @@ a new parent record you can use the ``_ids`` format::
             '_ids' => [1, 2, 3, 4]
         ]
     ];
+
+When converting hasMany data, you can disable the new entity creation, by
+using the ``onlyIds`` option. When enabled, this option restricts hasMany
+marshalling to only use the ``_ids`` key and ignore all other data.
+
+.. versionadded:: 3.1.0
+    The ``onlyIds`` option was added in 3.1.0
 
 Converting Multiple Records
 ---------------------------
@@ -492,7 +506,7 @@ delete for those not in the list::
 
     // In a controller.
     $comments = TableRegistry::get('Comments');
-    $present = (new Collection($entity->comments))->extract('id');
+    $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
         'id NOT IN' => $present
@@ -973,9 +987,11 @@ many rows at once::
     // Publish all the unpublished articles.
     function publishAllUnpublished()
     {
-        $this->updateAll(['published' => true], ['published' => false]);
+        $this->updateAll(
+            ['published' => true], // fields
+            ['published' => false]); // conditions
     }
-
+    
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
@@ -991,3 +1007,18 @@ A bulk-update will be considered successful if 1 or more rows are updated.
 
     updateAll will *not* trigger beforeSave/afterSave events. If you need those
     first load a collection of records and update them.
+
+
+``updateAll()`` is for convenience only. You can use this more flexible interface as well::
+
+    // Publish all the unpublished articles.
+    function publishAllUnpublished()
+    {
+        $this->query()
+            ->update()
+            ->set(['published' => 'true])
+            ->where(['published' => 'false'])
+            ->execute();
+    }
+    
+Also see: :ref:`query-builder-updating-data`.

@@ -1,7 +1,7 @@
 Utilizando o CakePHP
 ####################
 
-Introdução às partes chaves do CakePHP:
+Introdução aos principais tópicos do CakePHP:
 
 * :doc:`/installation`
 * :doc:`/development/configuration`

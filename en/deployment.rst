@@ -32,7 +32,7 @@ For example, you can set an environment variable in your Apache configuration::
 
     SetEnv CAKEPHP_DEBUG 1
 
-And then you can set the debug level dynamically in ``app.php``::
+And then you can set the debug level dynamically in **app.php**::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 

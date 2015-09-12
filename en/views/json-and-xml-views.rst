@@ -105,7 +105,7 @@ element the Xml will fail to generate.
 
 .. versionadded:: 3.1.0
 
-    You can also set ``_serialized`` to ``true`` to serialize all view variables
+    You can also set ``_serialize`` to ``true`` to serialize all view variables
     instead of explicitly specifying them.
 
 Using a Data View with Template Files
