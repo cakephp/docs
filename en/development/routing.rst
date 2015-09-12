@@ -827,12 +827,28 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
     Router::scope('/', function ($routes) {
-        $routes->resources('books', [
+        $routes->resources('Books', [
             'connectOptions' => [
                 'routeClass' => 'ApiRoute',
             ]
         ];
     });
+
+Url inflection for Resourse Routes
+----------------------------------
+
+By default for multi-worded controllers the url fragment is underscored
+form of controller name. Eg. For ``BlogPosts`` url fragment would be ``/blog_posts``.
+
+You can specify an alternative inflection type using the ``inflect`` option::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', [
+            'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
+        ];
+    })
+    
+The above will generate urls of style ``/blog-posts/*``.
 
 .. index:: passed arguments
 .. _passed-arguments:
