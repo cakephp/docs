@@ -272,6 +272,16 @@ Les liens croisés de référencement
     lien. Vous pouvez aussi fournir un texte de lien sur mesure en utilisant
     ``:ref:`Texte de lien <nom-label>```.
 
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a file is not referenced in a toc-tree. It's
+a great way to ensure that all files have a link directed to them, but
+sometimes, you don't need to insert a link for a file, eg. for our
+`epub-contents` and `pdf-contents` files. In those cases, you can add
+``:orphan:`` at the top of the file, and the warnings will stop to alert you
+that the file is not in the toc-tree.
+
 Description des classes et de leur contenu
 ------------------------------------------
 
@@ -357,6 +367,19 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 .. rst:directive:: .. php:attr:: name
 
    Décrit une propriété/attribut sur une classe.
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a function is referenced in multiple files. It's
+a great way to ensure that you did not add a function two times, but
+sometimes, you actually want to write a function in two or more files, eg.
+`debug object` is referenced in `/development/debugging` and in
+`/core-libraries/global-constants-and-functions`. In this case, you can add
+``:noindex:`` under the function debug, and the warnings will stop to alert you::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
 
 Référencement croisé
 ~~~~~~~~~~~~~~~~~~~~

@@ -11,6 +11,7 @@ Debug basique
 =============
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+    :noindex:
 
     :param mixed $var: Les contenus à afficher. Les tableaux et objets
         fonctionnent bien.

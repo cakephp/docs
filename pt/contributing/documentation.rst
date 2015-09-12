@@ -2,17 +2,17 @@ Documentação
 ############
 
 Contribuir na documentação é simples. Os arquivos estão
-no https://github.com/cakephp/docs. Sinta-se livre para fazer 
-um fork e adicionar suas alterações/melhorias/traduções e enviar 
+no https://github.com/cakephp/docs. Sinta-se livre para fazer
+um fork e adicionar suas alterações/melhorias/traduções e enviar
 através de um pull request.
-Você também pode editar os arquivos online através do github, 
+Você também pode editar os arquivos online através do github,
 sem precisar fazer o download dos arquivos.
 
 Traduções
 =========
 
 Envie um email para o equipe da documentação (docs [at] cakephp dot org)
-ou entre no IRC(#cakephp on freenode) para discutir algum processo de 
+ou entre no IRC(#cakephp on freenode) para discutir algum processo de
 tradução que você queira participar.
 
 Algumas dicas:
@@ -23,7 +23,7 @@ Algumas dicas:
 - Utilize a
   `linguagem informal <http://pt.wikipedia.org/wiki/Linguagem_coloquial>`_.
 - Traduza o conteúdo e o título ao mesmo tempo.
-- Faça uma comparação com o Inglês antes de enviar uma correção. 
+- Faça uma comparação com o Inglês antes de enviar uma correção.
   (Se você corrigir alguma coisa, mas não sincroniza com o 'upstream' a
   alteração não será aceita.)
 - Se você precisa escrever termos em Inglês, utilize a tag ``<em>``.
@@ -81,7 +81,7 @@ Marcações
 * Dois asteriscos: **text** para dar ênfase forte (negrito), e
 * crases: ``text`` para exemplos de código.
 
-Se asteriscos ou crases devem aparecer no texto elas devem ser precidadas por uma barra 
+Se asteriscos ou crases devem aparecer no texto elas devem ser precidadas por uma barra
 invertida (\\) para serem escapadas.
 
 Restrições para a marcação:
@@ -99,13 +99,13 @@ começam a linha com um asterisco seguido de um espaço. Listas númericas
 podem ser criadas com os números na frente ou ``#`` para númerar automaticamente::
 
     * Isso é uma linha
-    * Essa também. 
+    * Essa também.
       Mas tem duas linhas
-      
-      
+
+
     1. Primeira linha
     2. Segunda linha
-    
+
     #. Númeração automatica
     #. Vai salvar seu tempo.
 
@@ -114,10 +114,10 @@ elas por uma linha em branco::
 
     * Primeira linha
     * Segunda linha
-    
+
         * Indo mais um nível
         * Wow!
-    
+
     * De volta para o primeiro nível.
 
 Listas de definição pode ser criadas da seguinte forma::
@@ -168,17 +168,27 @@ Links de referência cruzada
     melhor usar ``class-method`` como *label* do link.
 
     A forma mais comum de usar *labels* é acima de títulos. Exemplo::
-    
+
         .. _label-name:
-        
+
         Título de seção
         ---------------
-        
+
         Restante do conteúdo
-    
+
     Em qualquer lugar você pode referenciar a seção acima usando ``:ref:`label-name```.
     O texto do link será título da seção. Você também pode informar um texto personalizado
     usando ``:ref: `Link text <label-name>```.
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a file is not referenced in a toc-tree. It's
+a great way to ensure that all files have a link directed to them, but
+sometimes, you don't need to insert a link for a file, eg. for our
+`epub-contents` and `pdf-contents` files. In those cases, you can add
+``:orphan:`` at the top of the file, and the warnings will stop to alert you
+that the file is not in the toc-tree.
 
 Descrevendo classes e seus conteúdos
 ------------------------------------
@@ -206,7 +216,7 @@ Cada diretiva alimenta o índice e/ou o *namespace* do índice.
 
    Essa diretiva declara uma constante, você também pode usar
    dentro de uma classe para declarar uma constante da classe.
-   
+
 .. rst:directive:: .. php:exception:: name
 
    Essa diretiva declara um nova *Exception* no *namespace* atual.
@@ -218,38 +228,38 @@ Cada diretiva alimenta o índice e/ou o *namespace* do índice.
    devem ser declaradas dentro dessa diretiva::
 
         .. php:class:: MyClass
-        
+
             Class description
-        
+
            .. php:method:: method($argument)
-        
+
            Method description
 
    Atributos, métodos e constante não precisam estar um nível abaixo.
    Podem ser declaradas no mesmo nível da classe::
 
         .. php:class:: MyClass
-        
+
             Text about the class
-        
+
         .. php:method:: methodName()
-        
+
             Text about the method
-        
+
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
 .. rst:directive:: .. php:method:: name(signature)
 
    Descreve um método da classe, seus argumentos, valor retornado e *exceptions*::
-   
+
         .. php:method:: instanceMethod($one, $two)
-        
+
             :param string $one: Primeiro parâmetro.
             :param string $two: Segundo parâmetro.
             :returns: Um array com várias coisas.
             :throws: InvalidArgumentException
-        
+
            Isso é um método de instância.
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
@@ -260,6 +270,19 @@ Cada diretiva alimenta o índice e/ou o *namespace* do índice.
 .. rst:directive:: .. php:attr:: name
 
    Descreve um propriedade/atributo de uma classe.
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a function is referenced in multiple files. It's
+a great way to ensure that you did not add a function two times, but
+sometimes, you actually want to write a function in two or more files, eg.
+`debug object` is referenced in `/development/debugging` and in
+`/core-libraries/global-constants-and-functions`. In this case, you can add
+``:noindex:`` under the function debug, and the warnings will stop to alert you::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
 
 Referências Cruzadas
 ~~~~~~~~~~~~~~~~~~~~
@@ -274,12 +297,12 @@ se alguma diretiva for encontrada:
 .. rst:role:: php:global
 
    Cria uma referência para uma variável global que comece com ``$``.
-   
+
 .. rst:role:: php:const
 
    Cria uma referência para um constante ou uma contante de uma classe. As constantes da classe
    devem ser precedidas com o nome da classe::
-   
+
         DateTime tem uma constante :php:const:`DateTime::ATOM`.
 
 .. rst:role:: php:class
@@ -291,14 +314,14 @@ se alguma diretiva for encontrada:
 .. rst:role:: php:meth
 
    Cria uma referência para um método da classe. Essa função suporta os dois métodos::
-   
+
      :php:meth:`DateTime::setDate`
      :php:meth:`Classname::staticMethod`
 
 .. rst:role:: php:attr
 
    Cria uma referência para a propriedade de um objeto::
-   
+
       :php:attr:`ClassName::$propertyName`
 
 .. rst:role:: php:exc
@@ -313,11 +336,11 @@ Blocos de códigos literais são criados terminando um paragrafo com ``::``.
 O bloco deve ser indentado e como todos os parágrafos ser separados por uma linha::
 
     Isso é um parágrafo::
-        
+
         while ($i--) {
             doStuff()
         }
-    
+
     Isso é um resto normal denovo.
 
 Textos literais não são modificados ou formatados, salvo quando o level de indentação é removido.
@@ -335,15 +358,15 @@ Existe três tipos de *admonitions*.
 * ``.. note::`` Notes são usadas para especificar uma parte importante da informação.
   O conteúdo deve ter as sentenças corretas e pontuação apropriada.
 * ``.. warning::`` Warnings são usados para informar potenciais obstáculos
-  ou informações sobre segurança. O conteúdo deve ter as sentenças corretas 
+  ou informações sobre segurança. O conteúdo deve ter as sentenças corretas
   e pontuação apropriada.
-  
+
 Todos os *admonitions* são declarados da mesma forma::
 
     .. note::
-    
+
         Indentado e precedido por uma linha branca. Como uma parágrafo.
-    
+
     Esse texto não pertence a nota.
 
 Exemplos

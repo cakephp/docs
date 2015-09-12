@@ -5,7 +5,6 @@ Uma vez que sua aplicação está completa, ou mesmo antes quando você quiser
 colocá-la no ar. Existem algumas poucas coisas que você deve fazer quando
 colocar em produção uma aplicação CakePHP.
 
-
 Definindo a Raiz
 ================
 
@@ -35,7 +34,6 @@ as coisas a seguir mudarão:
 
 Além dos itens citados acima, muitos plugins e extensões usam o valor do
 ``debug`` para modificarem seus comportamentos.
-
 
 Multiplas aplicações usando o mesmo core do CakePHP
 ===================================================

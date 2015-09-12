@@ -30,8 +30,7 @@ Configurando Componentes
 Muitos dos componentes incluídos no Cake requerem alguma configuração. Exemplos
 de componentes que requerem configuração são:
 :doc:`/core-libraries/components/authentication`,
-:doc:`/core-libraries/components/cookie` e
-:doc:`/core-libraries/components/email`.
+:doc:`/core-libraries/components/cookie`.
 As configurações para estes componentes, e outros em geral, são feitas no array
 ``$components`` ou no método ``beforeFilter()`` do seu controller::
 
@@ -54,7 +53,7 @@ exemplo acima também pode ser expressado da seguinte maneira::
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-        
+
         $this->Cookie->name = 'CookieMonster';
     }
 
@@ -78,7 +77,7 @@ no seu controller, você pode acessá-los da seguinte maneira::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
-        
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
@@ -99,7 +98,7 @@ Você pode não precisar de todos os componentes disponibilizados em cada ação
 dos controllers. Nestas situações você pode carregar um componente em tempo de
 execução usando o :doc:`Component Collection </core-libraries/collections>`.
 Dentro de um controller você pode fazer o seguinte::
-    
+
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -123,7 +122,7 @@ O primeiro passo é criar um novo arquivo para a classe do componente.
 Crie o arquivo em ``/app/Controller/Component/MathComponent.php``. A estrutura
 básica para o componente irá se parecer com algo assim::
 
-    
+
     class MathComponent extends Component {
         function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -186,12 +185,12 @@ em controllers, usando o atributo ``$components``::
     // app/Controller/Component/CustomComponent.php
     class CustomComponent extends Component {
         // O outro componente que seu componente utiliza
-        public $components = array('Existing'); 
-    
+        public $components = array('Existing');
+
         function initialize(Controller $controller) {
             $this->Existing->foo();
         }
-    
+
         function bar() {
             // ...
        }
@@ -199,11 +198,11 @@ em controllers, usando o atributo ``$components``::
 
     // app/Controller/Component/ExistingComponent.php
     class ExistingComponent extends Component {
-    
+
         function initialize(Controller $controller) {
             $this->Parent->bar();
         }
-     
+
         function foo() {
             // ...
        }

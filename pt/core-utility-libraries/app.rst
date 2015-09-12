@@ -1,8 +1,6 @@
 App Class
 #########
 
-.. php:class:: App
-
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.
