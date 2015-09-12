@@ -18,7 +18,7 @@ following::
 You will need to add the following line to your application's
 **config/bootstrap.php** file::
 
-    Plugin::load('ElasticSearch', ['bootstrap' => true]);
+    Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
 
 Additionally, you will need to configure the 'elastic' datasource connection in
 your **config/app.php** file. An example configuration would be::
