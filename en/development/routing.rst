@@ -854,7 +854,7 @@ The above will generate URLs styled like: **/blog-posts/\***.
 .. note::
 
     As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as its
-    default route class. So using the ``'inflect' => 'dasherize'`` option when
+    default route class. Using the ``'inflect' => 'dasherize'`` option when
     connecting resource routes is recommended for URL consistency.
     
 .. index:: passed arguments
