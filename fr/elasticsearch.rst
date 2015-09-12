@@ -233,7 +233,7 @@ utiliser ``embedOne`` et ``embedMany`` pour définir les documents intégrés::
 
 Ce qui au-dessus va créer deux documents intégrés sur le document ``Article``.
 L'``User`` intégré va convertir la propriété ``user`` en instances de
-``App\\Model\\Document\\User``. Pour récupérer les Commentaires intégrés et
+``App\Model\Document\User``. Pour récupérer les Commentaires intégrés et
 utiliser un nom de classe qui ne correspond pas au nom de la propriété, nous
 pouvons utiliser l'option ``entityClass`` pour configurer un nom de classe
 personnalisé.
