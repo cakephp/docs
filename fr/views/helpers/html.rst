@@ -536,8 +536,10 @@ Génère un bloc de code contenant ``code`` et définit ``$options['inline']``
 à ``true`` pour voir le bloc de script apparaître dans le bloc de vue
 ``script``. D'autres options définies seront ajoutées comme attributs dans
 les balises de script.
-``$this->Html->scriptBlock('stuff', ['defer' => true]);`` va créer une
-balise script avec l'attribut ``defer="defer"``.
+Par exemple, le code ci-dessous va créer une balise script avec l'attribut
+``defer="defer"``::
+
+    $this->Html->scriptBlock('stuff', ['defer' => true]);
 
 Créer des Blocs Javascript
 --------------------------
@@ -551,7 +553,7 @@ et créer une balise script. Les options sont les mêmes que celles de
 ``scriptEnd()`` serait::
 
     $this->Html->scriptStart(['block' => true]);
-    echo "alert('I am in the JavaScript');"
+    echo "alert('I am in the JavaScript');";
     $this->Html->scriptEnd();
 
 Créer des Listes Imbriquées

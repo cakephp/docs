@@ -533,8 +533,10 @@ Creating Inline Javascript Blocks
 Generate a code block containing ``$code`` set ``$options['block']`` to ``true``
 to have the script block appear in the ``script`` view block. Other options
 defined will be added as attributes to script tags.
-``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will create
-a script tag with ``defer="defer"`` attribute.
+The following code example will create a script tag with ``defer="defer"``
+attribute::
+
+    $this->Html->scriptBlock('stuff', ['defer' => true]);
 
 Creating Javascript Blocks
 ---------------------------
@@ -547,7 +549,7 @@ same as ``scriptBlock()``. An example of using ``scriptStart()`` and
 ``scriptEnd()`` would be::
 
     $this->Html->scriptStart(['block' => true]);
-    echo "alert('I am in the JavaScript');"
+    echo "alert('I am in the JavaScript');";
     $this->Html->scriptEnd();
 
 Creating Nested Lists
