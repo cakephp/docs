@@ -11,3 +11,10 @@ Segurança
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. toctree::
+    :maxdepth: 1
+
+    core-libraries/security
+    controllers/components/csrf
+    controllers/components/security

@@ -5,6 +5,8 @@ Text
 
 .. php:class:: Text
 
+.. start-text
+
 .. note::
     The documentation is not currently supported in Japanese language for this
     page.
@@ -15,6 +17,8 @@ Text
 
     You can referer to the english version in the select top menu to have
     information about this page's topic.
+
+.. end-text
 
 .. meta::
     :title lang=ja: Text

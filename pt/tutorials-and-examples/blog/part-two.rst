@@ -290,7 +290,7 @@ Primeiro, comece criando a action ``add()`` no ``ArticlesController``::
 
 .. note::
 
-    Você precisa incluir o :doc:`/components/flash` component em qualquer
+    Você precisa incluir o :doc:`/controllers/components/flash` component em qualquer
     controller que vá usá-lo. Se necessário, inclua no ``AppController`` e
     assim o ``FlashComponent`` estará disponível para todos os controllers da
     aplicação.
@@ -335,7 +335,7 @@ O CakePHP torna mais prática e menos monótona a validação de dados de
 formulário.
 
 Para tirar proveito dos recursos de validação, você vai precisar usar o
-:doc:`/helpers/form` helper em suas views. O
+:doc:`/views/helpers/form` helper em suas views. O
 :php:class:`Cake\\View\\Helper\\FormHelper` está disponível por padrão em todas
 as views pelo uso do ``$this->Form``.
 
@@ -659,7 +659,7 @@ visitam a seguir:
 2. :ref:`view-elements`: Inclusão e reutilização de elementos na view
 3. :doc:`/bake/usage`: Gerando código CRUD
 4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de
-autorização e autenticação
+    autorização e autenticação
 
 .. meta::
     :title lang=pt: Tutorial - Criando um Blog - Parte 2

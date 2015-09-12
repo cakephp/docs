@@ -11,6 +11,7 @@ Basic Debugging
 ===============
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+    :noindex:
 
 The ``debug()`` function is a globally available function that works
 similarly to the PHP function ``print_r()``. The ``debug()`` function

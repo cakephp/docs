@@ -369,6 +369,19 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
    Décrit une propriété/attribut sur une classe.
 
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a function is referenced in multiple files. It's
+a great way to ensure that you did not add a function two times, but
+sometimes, you actually want to write a function in two or more files, eg.
+`debug object` is referenced in `/development/debugging` and in
+`/core-libraries/global-constants-and-functions`. In this case, you can add
+``:noindex:`` under the function debug, and the warnings will stop to alert you::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
+
 Référencement croisé
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -413,7 +426,6 @@ si une directive assortie est trouvée:
 .. rst:role:: php:exc
 
    Référence une exception.
-
 
 Code source
 -----------

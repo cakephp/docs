@@ -4,6 +4,7 @@ Deleting Data
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 

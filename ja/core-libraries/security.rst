@@ -2,7 +2,7 @@
     Security
 
 セキュリティ
-########
+############
 
 .. php:namespace:: Cake\Utility
 
@@ -140,7 +140,7 @@
     Hashing Data
 
 ハッシュデータ
-============
+===============
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
