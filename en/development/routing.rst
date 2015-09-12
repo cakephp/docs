@@ -850,6 +850,12 @@ You can specify an alternative inflection type using the ``inflect`` option::
     
 The above will generate urls of style ``/blog-posts/*``.
 
+.. note::
+
+    As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as default
+    route class. So using ``'inflect' => 'dasherize'`` option when connecting
+    resource routes is recommended for url fragment inflection consistency.
+    
 .. index:: passed arguments
 .. _passed-arguments:
 
