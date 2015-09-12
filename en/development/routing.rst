@@ -834,7 +834,7 @@ You can provide ``connectOptions`` key in the ``$options`` array for
         ];
     });
 
-URL inflection for Resourse Routes
+URL inflection for Resource Routes
 ----------------------------------
 
 By default for multi-worded controllers the URL fragment is underscored
