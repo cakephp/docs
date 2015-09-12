@@ -11,6 +11,7 @@ Basic Debugging
 ===============
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+    :noindex:
 
     :param mixed $var: The contents to print out. Arrays and objects work well.
     :param boolean $showHTML: Set to true, to enable escaping. Escaping is enabled

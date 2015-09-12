@@ -2,7 +2,7 @@ Desenvolvimento
 ###############
 
 Nesta seção vamos cobrir os vários aspectos do desenvolvimento de uma aplicação
-CakePHP. Temas como configuração, manipulação de erros e exceções, depuração e 
+CakePHP. Temas como configuração, manipulação de erros e exceções, depuração e
 testes serão abordados.
 
 .. toctree::
@@ -16,3 +16,4 @@ testes serão abordados.
     development/debugging
     development/testing
     development/rest
+    development/dispatch-filters

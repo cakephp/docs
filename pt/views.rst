@@ -692,9 +692,18 @@ Para chamar qualquer método de uma *view* use ``$this->method()``.
     Uma instância de :php:class:`ViewBlock`. Usada para prover um bloco
     de funcionalidades de *view* na *view* renderizada.
 
+    .. versionadded:: 2.1
 
-.. versionadded:: 2.1
+More about Views
+================
 
+.. toctree::
+    :maxdepth: 1
+
+    views/themes
+    views/media-view
+    views/json-and-xml-views
+    views/helpers
 
 .. meta::
     :title lang=pt: Views

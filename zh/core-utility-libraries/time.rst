@@ -3,6 +3,8 @@ CakeTime
 
 .. php:class:: CakeTime()
 
+.. start-caketime
+
 .. note::
     The documentation is not currently supported in zh language for this page.
 
@@ -12,6 +14,8 @@ CakeTime
 
     You can referer to the english version in the select top menu to have
     information about this page's topic.
+
+.. end-caketime
 
 .. meta::
     :title lang=zh: CakeTime

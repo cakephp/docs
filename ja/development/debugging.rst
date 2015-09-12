@@ -10,6 +10,7 @@ CakePHP は IDE やエディタと直接連携するようなツールは提供�
 ================
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+    :noindex:
 
     :param mixed $var: 出力する内容。配列やオブジェクトを渡してもうまく動作します。
     :param boolean $showHTML: true をセットしたならエスケープが有効になります。2.0 では、

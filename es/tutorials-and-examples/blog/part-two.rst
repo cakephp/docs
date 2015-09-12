@@ -43,8 +43,8 @@ nuestros artículos. Vamos a crear un nuevo fichero llamado
 ``PostsController.php`` dentro de la ruta ``/app/Controller``. El contenido de
 este fichero será::
 
-    class PostsController extends AppController { 
-        public $helpers = array('Html','Form'); 
+    class PostsController extends AppController {
+        public $helpers = array('Html','Form');
     }
 
 Y vamos a añadir una acción a nuestro nuevo controlador. Las acciones
@@ -58,7 +58,7 @@ defecto de cada controlador es index por convención) esperan ver un listado de
 
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
-    
+
         function index() {
             $this->set('posts', $this->Post->find('all'));
         }
@@ -113,7 +113,7 @@ variable en la vista con esta pinta:
 ::
 
     // print_r($posts) output:
-    
+
     Array
     (
         [0] => Array
@@ -159,7 +159,7 @@ tendremos algo como esto:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Blog posts</h1>
     <table>
         <tr>
@@ -167,20 +167,20 @@ tendremos algo como esto:
             <th>Title</th>
             <th>Created</th>
         </tr>
-    
+
         <!-- Here is where we loop through our $posts array, printing out post info -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], 
+                <?php echo $this->Html->link($post['Post']['title'],
     array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 Esto debería ser sencillo de comprender.
@@ -215,11 +215,11 @@ Creemos esta acción para evitar el error::
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
-    
+
         public function index() {
              $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id = null) {
             $this->set('post', $this->Post->findById($id));
         }
@@ -240,17 +240,17 @@ index() salvo que el nombre ahora será ``/app/View/Posts/view.ctp``.
 .. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
-    
+
     <h1><?php echo $post['Post']['title']?></h1>
-    
+
     <p><small>Created: <?php echo $post['Post']['created']?></small></p>
-    
+
     <p><?php echo $post['Post']['body']?></p>
 
 Verifica que ahora funciona el enlace que antes daba un error desde
 ``/posts/index`` o puedes ir manualmente si escribes ``/posts/view/1``.
 
- 
+
 Añadiendo artículos (*posts*)
 =============================
 
@@ -264,15 +264,15 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
     class PostsController extends AppController {
         public $name = 'Posts';
         public $components = array('Session');
-    
+
         public function index() {
             $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id) {
             $this->set('post', $this->Post->findById($id));
         }
-    
+
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Post->save($this->request->data)) {
@@ -330,8 +330,8 @@ Nuestra vista sería así
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/add.ctp -->   
-        
+    <!-- File: /app/View/Posts/add.ctp -->
+
     <h1>Add Post</h1>
     <?php
     echo $this->Form->create('Post');
@@ -379,7 +379,7 @@ Abre el modelo Post y vamos a escribir allí algunas reglas sencillas ::
 
     class Post extends AppModel {
         public $name = 'Post';
-    
+
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
@@ -448,13 +448,13 @@ La vista quedará así:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
-        
+
     <h1>Edit Post</h1>
     <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden')); 
+        echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
 
 Mostramos el formulario de edición (con los valores actuales de ese artículo),
@@ -535,7 +535,7 @@ querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
     <table>
@@ -545,9 +545,9 @@ querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
                     <th>Actions</th>
             <th>Created</th>
         </tr>
-    
+
     <!-- Here's where we loop through our $posts array, printing out post info -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
@@ -556,15 +556,15 @@ querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
             </td>
             <td>
             <?php echo $this->Form->postLink(
-                'Delete', 
+                'Delete',
                 array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?')); 
+                array('confirm' => 'Are you sure?'));
             ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 .. note::
@@ -607,7 +607,7 @@ regla por esta otra:
 Ahora la URL '/' nos llevará al controlador 'posts' y la acción 'index'.
 
 .. note::
-   
+
     CakePHP también calcula las rutas a la inversa. Si en tu código pasas el
     array ``array('controller' => 'posts', 'action' => 'index')`` a una
     función que espera una url, el resultado será '/'. Es buena idea usar
@@ -637,4 +637,4 @@ Lectura sugerida para continuar desde aquí
 2. :ref:`view-elements` Incluír vistas y reutilizar trozos de código
 3. :doc:`/controllers/scaffolding`: Prototipos antes de trabajar en el código final
 4. :doc:`/console-and-shells/code-generation-with-bake` Generación básica de CRUDs
-5. :doc:`/core-libraries/components/authentication`: Gestión de usuarios y permisos 
+5. :doc:`/core-libraries/components/authentication`: Gestión de usuarios y permisos

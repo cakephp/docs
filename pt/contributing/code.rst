@@ -2,7 +2,6 @@ Código
 ######
 
 Patches e pull requests são as melhores formas de colaborar com o CakePHP.
-Você pode anexar patchs nos tickets do `github <http://github.com/cakephp/cakephp/issues>`_.
 Pull requests podem ser feitos através do github e geralmente é a melhor forma de contribuir.
 
 Configuração Inicial
@@ -28,21 +27,21 @@ Configure suas informações pessoais com seu nome e e-mail::
 Faça o clone do código do CakePHP diretamente do github:
 
 * Se você não tem uma conta no `github <http://github.com>`_, crie uma.
-* Faça um Fork do `repositório CakePHP <http://github.com/cakephp/cakephp>`_ clicando 
+* Faça um Fork do `repositório CakePHP <http://github.com/cakephp/cakephp>`_ clicando
   no botão **Fork**.
 
 Depois clone o fork feito para sua máquina local::
 
     git clone git@github.com:YOURNAME/cakephp.git
 
-Adicione o repositório oficial do CakePHP como repositório remoto. 
+Adicione o repositório oficial do CakePHP como repositório remoto.
 Assim você mantém seu Fork atualizado com o repositório oficial::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
 Agora que está tudo configurado, você poderá definir a conexão ``$test``
-:ref:`database connection <database-configuration>`, e 
+:ref:`database connection <database-configuration>`, e
 :ref:`run all the tests <running-tests>`.
 
 Trabalhando em um Patch
@@ -84,29 +83,29 @@ mas antes de enviar você precisa atualizar suas *branchs*::
     git rebase 2.0
 
 O trecho acima vai pegar todas as alterações que ocorreram no repositório oficial
-desde que você começou sua branch local e fazer o *merge*. E depois faz um *rebase* 
+desde que você começou sua branch local e fazer o *merge*. E depois faz um *rebase*
 - replicando suas alterações no código atualizado. Podem acontecer conflitos durante
-o ``rebase``. Caso ocorra um conflito você poderá ver quais arquivos estão com conflitos 
+o ``rebase``. Caso ocorra um conflito você poderá ver quais arquivos estão com conflitos
 com ``git status``.
 Resolva cada conflito e continue seu *rebase*::
 
     git add <filename> # faça isso para cada arquivo com conflito.
     git rebase --continue
 
-Verifique se todos os seus testes (*test case*) estão passando. Então envie 
-sua branch para seu fork:: 
+Verifique se todos os seus testes (*test case*) estão passando. Então envie
+sua branch para seu fork::
 
     git push origin <branch-name>
 
-Agora que sua branch está no github, você pode discutir as alterações 
+Agora que sua branch está no github, você pode discutir as alterações
 na lista de discussão `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
 enviar um pull request no github.
 
 .. note::
 
-	Lembre-se de que todo o código contribuido para o CakePHP será licenciado sob 
+	Lembre-se de que todo o código contribuido para o CakePHP será licenciado sob
 	a licença MIT, e a Cake Software Foundation se tornará proprietária de qualquer
-	código contribuido, além de que todo código contribuido está sujeito ao 
+	código contribuido, além de que todo código contribuido está sujeito ao
 	`Contrato de licença de contribuidores <http://cakefoundation.org/pages/cla>`_.
 
 Todos as correções de bugs serão aplicadas em um branch de manutenção que será aplicado

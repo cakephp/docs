@@ -3,6 +3,8 @@ CakeTime
 
 .. php:class:: CakeTime()
 
+.. start-caketime
+
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
 
@@ -11,6 +13,8 @@ CakeTime
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
+
+.. end-caketime
 
 .. meta::
     :title lang=es: CakeTime
