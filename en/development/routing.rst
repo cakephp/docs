@@ -834,11 +834,11 @@ You can provide ``connectOptions`` key in the ``$options`` array for
         ];
     });
 
-Url inflection for Resourse Routes
+URL inflection for Resourse Routes
 ----------------------------------
 
-By default for multi-worded controllers the url fragment is underscored
-form of controller name. Eg. For ``BlogPosts`` url fragment would be ``/blog_posts``.
+By default for multi-worded controllers the URL fragment is underscored
+form of controller name. Eg. For ``BlogPosts`` URL fragment would be ``/blog_posts``.
 
 You can specify an alternative inflection type using the ``inflect`` option::
 
@@ -848,13 +848,13 @@ You can specify an alternative inflection type using the ``inflect`` option::
         ];
     })
     
-The above will generate urls of style ``/blog-posts/*``.
+The above will generate URLs of style ``/blog-posts/*``.
 
 .. note::
 
     As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as default
     route class. So using ``'inflect' => 'dasherize'`` option when connecting
-    resource routes is recommended for url fragment inflection consistency.
+    resource routes is recommended for URL fragment inflection consistency.
     
 .. index:: passed arguments
 .. _passed-arguments:
