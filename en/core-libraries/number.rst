@@ -82,7 +82,7 @@ output. The following options are available:
 +---------------------+----------------------------------------------------+
 | precision           | Maximal number of decimal places to use, ie. 2     |
 +---------------------+----------------------------------------------------+
-| locale              | The locale name to use for formating number,       |
+| locale              | The locale name to use for formatting number,      |
 |                     | ie. "fr_FR".                                       |
 +---------------------+----------------------------------------------------+
 | fractionSymbol      | String to use for fraction numbers, ie. ' cents'.  |
@@ -146,7 +146,7 @@ Formatting Percentages
 Like :php:meth:`Cake\\I18n\\Number::precision()`, this method formats a number
 according to the supplied precision (where numbers are rounded to meet the
 given precision). This method also expresses the number as a percentage
-and prepends the output with a percent sign. ::
+and appends the output with a percent sign. ::
 
     // Called as NumberHelper. Output: 45.69%
     echo $this->Number->toPercentage(45.691873645);
