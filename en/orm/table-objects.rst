@@ -4,6 +4,7 @@ Table Objects
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Table objects provide access to the collection of entities stored in a specific
 table. Each table in your application should have an associated Table class

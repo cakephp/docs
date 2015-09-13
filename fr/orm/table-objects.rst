@@ -4,6 +4,7 @@ Les Objets Table
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Les objets Table fournissent un accès à la collection des entities stockées
 dans une table spécifique. Chaque table dans votre application devra avoir une

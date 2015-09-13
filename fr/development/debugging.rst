@@ -10,6 +10,7 @@ Debug Basique
 =============
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+    :noindex:
 
 La fonction ``debug()`` est une fonction disponible partout qui fonctionne de la
 même manière que la fonction PHP ``print_r()``. La fonction ``debug()`` vous

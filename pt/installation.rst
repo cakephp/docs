@@ -319,7 +319,7 @@ para maiores informações.
    (.htaccess, webroot/.htaccess).
 
    Isso pode ser adicionado na mesma seção com a diretiva RewriteEngine,
-   por exemplo, seu arquivo webroot/.htaccess ficaria como:
+   por exemplo, seu arquivo webroot/.htaccess ficaria como::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On

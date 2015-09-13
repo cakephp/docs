@@ -4,6 +4,7 @@ Supprimer des Données
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 .. php:method:: delete(Entity $entity, $options = [])
 

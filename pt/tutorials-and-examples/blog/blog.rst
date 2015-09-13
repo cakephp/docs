@@ -201,8 +201,7 @@ Ocasionalmente, novos usuários irão se atrapalhar com problemas de mod_rewrite
 Por exemplo, se a página de boas vindas do CakePHP parecer estranha (sem
 imagens ou estilos CSS). Isto provavelmente significa que o mod_rewrite não está
 funcionando em seu servidor. Por favor, verifique a seção
-:doc:`/installation#url-rewriting` para obter ajuda e resolver qualquer
-problema relacionado.
+:ref:`url-rewriting` para obter ajuda e resolver qualquer problema relacionado.
 
 Agora continue o tutorial em :doc:`/tutorials-and-examples/blog/part-two` e
 inicie a construção do seu Blog com o CakePHP.

@@ -4,10 +4,10 @@ Saving Data
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 After you have :doc:`loaded your data</orm/retrieving-data-and-resultsets>` you
 will probably want to update & save the changes.
-
 
 A Glance Over Saving Data
 =========================
@@ -991,7 +991,7 @@ many rows at once::
             ['published' => true], // fields
             ['published' => false]); // conditions
     }
-    
+
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
@@ -1020,5 +1020,5 @@ A bulk-update will be considered successful if 1 or more rows are updated.
             ->where(['published' => 'false'])
             ->execute();
     }
-    
+
 Also see: :ref:`query-builder-updating-data`.

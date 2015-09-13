@@ -11,3 +11,14 @@ Views (Visualização)
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+More About Views
+================
+
+.. toctree::
+    :maxdepth: 1
+
+    views/cells
+    views/themes
+    views/json-and-xml-views
+    views/helpers

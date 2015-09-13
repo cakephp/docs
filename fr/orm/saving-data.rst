@@ -4,6 +4,7 @@ Sauvegarder les Données
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
 voudrez probablement mettre à jour & sauvegarder les changements.

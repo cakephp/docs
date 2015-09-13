@@ -496,7 +496,7 @@ The connected route would have the ``plugin`` and ``prefix`` route elements set.
 
 上記のコードは、 ``/manager/admin/:controller``のようなルーティングテンプレートを生成します。
 ルーティングは ``prefix`` というルーティング要素を ``manager/admin`` に設定します。
- なので、 ``/manager/posts/add`` は ``PostsController::manager_add()`` に対してマップされています。
+なので、 ``/manager/posts/add`` は ``PostsController::manager_add()`` に対してマップされています。
 
 加えて、現在のプレフィックスはコントローラーのメソッドから ``$this->request->params['prefix']`` を通して利用可能です。
 
