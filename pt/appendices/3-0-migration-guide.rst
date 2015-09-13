@@ -513,3 +513,110 @@ Network\\Email
 * O :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` foi adicionado para permitir
   a remoção de configurações de transporte.
   
+
+Controlador
+===========
+
+Controlador
+-----------
+
+- As propriedades ``$helpers`` e ``$components`` agora estão mescladas
+  com **todas** classes pai, não apenas a ``AppController`` e o plugin de
+  AppController. As propriedades são mescladas de modo diferente agora também.
+  No lugar de todas as configurações em todas as classes serem mescladas juntas, 
+  as configurações definidas nas classes filho serão usadas. Isso quer dizer 
+  que se você tem alguma configurações definida no seu AppController, 
+  e alguma configuração definida em uma a subclasse, apenas a configuração na
+  subclasse será usada.
+- O ``Controller::httpCodes()`` foi removido, use o
+  :php:meth:`Cake\\Network\\Response::httpCodes()` no lugar.
+- O ``Controller::disableCache()`` foi removido, use o
+  :php:meth:`Cake\\Network\\Response::disableCache()` no lugar.
+- O ``Controller::flash()`` foi removido. Esse método era raramente usado em
+  aplicações reais e não tinha mais propósito algum.
+- O ``Controller::validate()`` e ``Controller::validationErrors()`` foram
+  removidos. Eles eram restos dos dias do 1.x onde as preocupações com os
+  modelos + controladores eram muito mais entrelaçados.
+- O ``Controller::loadModel()`` agora carrega uma tabela de objetos.
+- A propriedade ``Controller::$scaffold`` foi removida. O scaffolding dinâmico
+  foi removido do núcleo do CakePHP.  Um plugin de scaffolding melhorado, 
+  chamado CRUD, pode ser encontrado em: https://github.com/FriendsOfCake/crud
+- A propriedade ``Controller::$ext`` foi removida. Você deve agora estender e
+  sobrescrever a propriedade ``View::$_ext`` se você deseja usar uma extensão
+  de  arquivo de visão não padrão.
+- A propriedade ``Controller::$methods`` foi removida. Você deve usar o
+  ``Controller::isAction()`` para determinar quando ou não um nome de método
+  é uma ação. Essa mudança foi feita para permitir personalizações mais fáceis
+  do que vai contar ou não como uma ação.
+- A propriedade ``Controller::$Components`` foi removida e substituída pelo
+  ``_components``. Se você precisar carregar componentes em tempo de execução
+  você deve usar o ``$this->loadComponent()`` em seu controlador.
+- A assinatura do :php:meth:`Cake\\Controller\\Controller::redirect()` mudou
+  para ``Controller::redirect(string|array $url, int $status = null)``.
+  O terceiro argumento ``$exit`` foi removido. O método não pode mais enviar
+  resposta e sair do script, no lugar ele retorna uma instância de ``Response``
+  com os cabeçalhos apropriados definidos.
+- As propriedades mágicas ``base``, ``webroot``, ``here``, ``data``,  ``action``,
+  e ``params`` foram removidas. Você deve acessar todas essas propriedades em 
+  ``$this->request`` no lugar.
+- Métodos de controlar prefixados com sublinhado como ``_someMethod()`` não são
+  mais tratados como métodos privados. Use as palavras chaves de visibilidade
+  apropriadas no lugar. Somente métodos públicos podem ser usados como ação
+  de controladores.
+
+Scaffold Removido
+-----------------
+
+O scaffolding dinâmico no CakePHP foi removido do núcleo do CakePHP. Ele não era
+usado com frequência, e não era voltado para uso em produção. Um plugin melhorado
+de scaffolding, chamado CRUD, pode ser encontrado em:
+https://github.com/FriendsOfCake/crud
+
+ComponentCollection Substituído
+-------------------------------
+
+Essa classe foi renomeada para :php:class:`Cake\\Controller\\ComponentRegistry`.
+Veja a seção em :doc:`/core-libraries/registry-objects` para mais informações
+sobre as funcionalidades fornecidas pela nova classe. Você pode usar o 
+``cake upgrade rename_collections`` para ajudar você a atualizar o seu
+código.
+
+Componentes
+-----------
+
+* A propriedade ``_Collection`` é agora ``_registry``. Ela contém uma instância 
+  do :php:class:`Cake\\Controller\\ComponentRegistry` agora.
+* Todos componentes devem agora usar o método ``config()`` para obter/definir
+  configurações.
+* A configuração padrão para componentes deve ser definido na propriedade
+  ``$_defaultConfig``. Essa propriedade é automaticamente mesclada com qualquer 
+  configuração fornecida pelo construtor.
+* Opções de configuração não são mais definidas como propriedades públicas.
+* O método ``Component::initialize()`` não é mais um ``event listener``
+  (ouvinte de eventos).
+  Ao invés disso, ele é um gancho pós-construtor como o ``Table::initialize()`` e
+  ``Controller::initialize()``. O novo método ``Component::beforeFilter()`` é
+  ligado ao mesmo evento que o ``Component::initialize()`` costumava ser. O
+  método de inicialização deve ter a seguinte assinatura ``initialize(array
+  $config)``.
+
+Controller\\Components
+======================
+
+CookieComponent
+---------------
+
+- Ele usa o :php:meth:`Cake\\Network\\Request::cookie()` para ler os dados de
+  cookies, isso facilita os testes, e permite o ControllerTestCase definir os
+  cookies.
+- Os Cookies encriptados pelas versões anteriores do CakePHP usando o método 
+  ``cipher()``, agora não podem ser lidos, pois o ``Security::cipher()`` foi 
+  removido. Você precisará reencriptar os cookies com o método ``rijndael()`` ou 
+  ``aes()`` antes de atualizar.
+- O ``CookieComponent::type()`` foi removido e substituído com dados de 
+  configuração acessados através de ``config()``.
+- O ``write()`` não aceita mais os parâmetros ``encryption`` ou ``expires``.
+  Os dois agora são gerenciados através de dados de configuração.
+  Veja :doc:`/controllers/components/cookie` para mais informações.
+- O caminho padrão para os cookies agora é o caminho base da aplicação, ao 
+  invés de "/".
