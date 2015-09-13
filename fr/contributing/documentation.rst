@@ -378,7 +378,8 @@ plusieurs fichiers. C'est un bon moyen de s'assurer que vous n'avez pas ajouter
 une fonction deux fois, mais parfois vous voulez en fait écrire une fonction
 dans deux ou plusieurs fichiers, par exemple `debug object` est référencé dans
 `/development/debugging` et dans
-`/core-libraries/global-constants-and-functions`. Dans ce cas, vous pouvez ajouter ``:noindex:`` sous la fonction debug pour supprimer les avertissements::
+`/core-libraries/global-constants-and-functions`. Dans ce cas, vous pouvez
+ajouter ``:noindex:`` sous la fonction debug pour supprimer les avertissements::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
         :noindex:
