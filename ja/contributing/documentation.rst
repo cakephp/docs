@@ -262,7 +262,8 @@ a great way to ensure that you did not add a function two times, but
 sometimes, you actually want to write a function in two or more files, eg.
 `debug object` is referenced in `/development/debugging` and in
 `/core-libraries/global-constants-and-functions`. In this case, you can add
-``:noindex:`` under the function debug, and the warnings will stop to alert you::
+``:noindex:`` under the function debug to suppress warnings. Keep only
+one reference **without** ``:no-index:`` to still have the function referenced::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
         :noindex:
