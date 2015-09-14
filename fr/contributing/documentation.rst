@@ -273,15 +273,16 @@ Les liens croisés de référencement
     lien. Vous pouvez aussi fournir un texte de lien sur mesure en utilisant
     ``:ref:`Texte de lien <nom-label>```.
 
-Prevent Sphinx to Output Warnings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Eviter l'Affichage d'Avertissements de Sphinx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a file is not referenced in a toc-tree. It's
-a great way to ensure that all files have a link directed to them, but
-sometimes, you don't need to insert a link for a file, eg. for our
-`epub-contents` and `pdf-contents` files. In those cases, you can add
-``:orphan:`` at the top of the file, and the warnings will stop to alert you
-that the file is not in the toc-tree.
+Sphinx va afficher des avertissements si un fichier n'est pas référencé dans
+un toc-tree. C'est un bon moyen de s'assurer que tous les fichiers ont un
+lien pointé vers eux, mais parfois vous n'avez pas besoin d'insérer un lien
+pour un fichier, par exemple pour nos fichiers `epub-contents` et
+`pdf-contents`. Dans ces cas, vous pouvez ajouter ``:orphan:`` en haut du
+fichier pour supprimer les avertissements disant que le fichier n'est pas dans
+le toc-tree.
 
 Description des classes et de leur contenu
 ------------------------------------------
@@ -369,15 +370,18 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
    Décrit une propriété/attribut sur une classe.
 
-Prevent Sphinx to Output Warnings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Eviter l'Affichage d'Avertissements de Sphinx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a function is referenced in multiple files. It's
-a great way to ensure that you did not add a function two times, but
-sometimes, you actually want to write a function in two or more files, eg.
-`debug object` is referenced in `/development/debugging` and in
-`/core-libraries/global-constants-and-functions`. In this case, you can add
-``:noindex:`` under the function debug, and the warnings will stop to alert you::
+Sphinx va afficher des avertissements si une fonction est référencée dans
+plusieurs fichiers. C'est un bon moyen de s'assurer que vous n'avez pas ajouté
+une fonction deux fois, mais parfois vous voulez en fait écrire une fonction
+dans deux ou plusieurs fichiers, par exemple `debug object` est référencé dans
+`/development/debugging` et dans
+`/core-libraries/global-constants-and-functions`. Dans ce cas, vous pouvez
+ajouter ``:noindex:`` sous la fonction debug pour supprimer les avertissements.
+Gardez uniquement une référence **sans** ``:no-index:`` pour que la fonction
+soit référencée::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
         :noindex:

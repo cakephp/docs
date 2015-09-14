@@ -866,6 +866,31 @@ utilisée par ``connect()``::
         ];
     });
 
+Inflection de l'URL pour les Routes Ressource
+---------------------------------------------
+
+Par défaut pour les controllers à plusieurs mots le fragment d'URL est la
+forme en underscore du nom du controller. Par exemple, le fragment d'URL pour
+``BlogPosts`` serait ``/blog_posts``.
+
+Vous pouvez spécifier un type d'inflection alternatif en utilisant l'option
+``inflect``::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', [
+            'inflect' => 'dasherize' // Utilisera ``Inflector::dasherize()``
+        ];
+    })
+
+Ce qui est au-dessus va générer des URLs de style ``/blog-posts/*``.
+
+.. note::
+
+    Depuis CakePHP 3.1, le squelette de l'app officiel utilise ``DashedRoute``
+    comme classe de route par défaut. Donc il est recommandé d'utiliser l'option
+    ``'inflect' => 'dasherize'`` pour connecter les routes resssource afin de
+    garder la cohérence de l'inflection du fragment d'URL.
+
 .. index:: passed arguments
 .. _passed-arguments:
 
