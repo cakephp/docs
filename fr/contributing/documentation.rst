@@ -374,7 +374,7 @@ Eviter l'Affichage d'Avertissements de Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sphinx va afficher des avertissements si une fonction est référencée dans
-plusieurs fichiers. C'est un bon moyen de s'assurer que vous n'avez pas ajouter
+plusieurs fichiers. C'est un bon moyen de s'assurer que vous n'avez pas ajouté
 une fonction deux fois, mais parfois vous voulez en fait écrire une fonction
 dans deux ou plusieurs fichiers, par exemple `debug object` est référencé dans
 `/development/debugging` et dans
