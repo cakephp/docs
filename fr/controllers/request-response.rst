@@ -633,7 +633,7 @@ Une des façons les meilleures et les plus simples de rendre votre application
 plus rapide est d'utiliser le cache HTTP. Avec la mise en cache des models,
 vous n'avez qu'à aider les clients à décider si ils doivent utiliser une
 copie mise en cache de la réponse en configurant un peu les en-têtes comme les
-temps modifiés, les balise d'entité de réponse et autres.
+temps modifiés, les balises d'entité de réponse et autres.
 
 Opposé à l'idée d'avoir à coder la logique de mise en cache et de sa nullité
 (rafraîchissement) une fois que les données ont changé, HTPP utilise deux

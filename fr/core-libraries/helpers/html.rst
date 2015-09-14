@@ -188,8 +188,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             rel="alternate"
         />
 
-    Cette méthode peut aussi être utilisée pour ajouter les balise de mots clés
-    et les descriptions. Exemple:
+    Cette méthode peut aussi être utilisée pour ajouter les balises de mots
+    clés et les descriptions. Exemple:
 
     .. code-block:: php
 
@@ -420,7 +420,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tableau et incluez les noms pour TOUS les paramètres dans l'URL. En
     utilisant la syntaxe en chaîne pour les paramètres (par ex
     "recipes/view/6/comments:false" va résulter à ce que les caractères
-    seront echappés du HTML et le lien ne fonctionnera pas comme souhaité. ::
+    seront échappés du HTML et le lien ne fonctionnera pas comme souhaité. ::
 
         <?php
         echo $this->Html->link(
@@ -551,7 +551,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param string $text: Le contenu de la balise.
     :param array $options: Un tableau d'attributs html :term:`attributs html`.
 
-    Retourne des textes enveloppé dans une balise spécifiée. Si il n'y a
+    Retourne des textes enveloppés dans une balise spécifiée. Si il n'y a
     pas de texte spécifié alors le contenu du <tag> sera retourné::
 
     .. code-block:: php
@@ -585,7 +585,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
     Utilisé pour les sections de balisage enveloppés dans des div. Le premier
-    paramètre spécifie une clasee CSS, et le second est utilisé pour fournir
+    paramètre spécifie une classe CSS, et le second est utilisé pour fournir
     le texte à envelopper par les balises div. Si le dernier paramètre à été
     défini à true, $text sera affiché en HTML-échappé.
 
@@ -715,7 +715,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Génère un bloc de code contenant des options ``$options['inline']``
     définies de ``$code`` à mettre à false pour voir le bloc de script
-    apparaître dans le bloc de ``script`` de la vue. D'autre options définies
+    apparaître dans le bloc de ``script`` de la vue. D'autres options définies
     seront ajoutées comme attributs dans les balises de script.
     ``$this->Html->scriptBlock('stuff', array('defer' => true));`` créera une
     balise script avec l'attribut ``defer="defer"``.
@@ -1010,10 +1010,10 @@ Changer la restitution des balises avec le Helper Html
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
 
     Les jeux de balises pour le Helper Html :php:class:`HtmlHelper` sont
-    conforme au standard XHTML, toutefois si vous avez besoin de générer
+    conformes au standard XHTML, toutefois si vous avez besoin de générer
     du HTML pour les standards HTML5 vous aurez besoin de créer et de charger
     un nouveau fichier de configuration de balise contenant les balises
-    que vous aimeriez utiliser. Pour changer les balises utilisées créez
+    que vous aimeriez utiliser. Pour changer les balises utilisées, créez
     un fichier ``app/Config/html5_tags.php`` contenant::
 
         $config = array('tags' => array(

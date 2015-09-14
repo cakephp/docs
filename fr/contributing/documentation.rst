@@ -164,7 +164,7 @@ Le balisage interne
   * ````text````
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être
-confondus avec les délimiteurs du balisage interne, ils doivent être echappés
+confondus avec les délimiteurs du balisage interne, ils doivent être échappés
 avec un backslash.
 
 Le balisage interne a quelques restrictions:
