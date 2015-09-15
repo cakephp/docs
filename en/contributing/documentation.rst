@@ -238,20 +238,6 @@ Links to Other Pages
     ``:doc:`/core-helpers```, it would always reference ``/core-helpers``
     regardless of where it was used.
 
-Prevent Sphinx to Output Warnings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Sphinx will output warnings if a function is referenced in multiple files. It's
-a great way to ensure that you did not add a function two times, but
-sometimes, you actually want to write a function in two or more files, eg.
-`debug object` is referenced in `/development/debugging` and in
-`/core-libraries/global-constants-and-functions`. In this case, you can add
-``:noindex:`` under the function debug to suppress warnings. Keep only
-one reference **without** ``:no-index:`` to still have the function referenced::
-
-    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
-        :noindex:
-
 Cross Referencing Links
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -365,6 +351,20 @@ Each directive populates the index, and or the namespace index.
 .. rst:directive:: .. php:attr:: name
 
    Describe an property/attribute on a class.
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a function is referenced in multiple files. It's
+a great way to ensure that you did not add a function two times, but
+sometimes, you actually want to write a function in two or more files, eg.
+`debug object` is referenced in `/development/debugging` and in
+`/core-libraries/global-constants-and-functions`. In this case, you can add
+``:noindex:`` under the function debug to suppress warnings. Keep only
+one reference **without** ``:no-index:`` to still have the function referenced::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
 
 Cross Referencing
 ~~~~~~~~~~~~~~~~~
