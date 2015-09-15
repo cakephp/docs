@@ -109,9 +109,10 @@ Paramétrage de la Devise par Défaut
 .. php:method:: defaultCurrency(string $currency)
 
 Setter/getter pour la monnaie par défaut. Ceci retire la nécessité de
-toujours passer la monnaie à :php:meth:`Cake\\I18n\\Number::currency()` et change
-toutes les sorties de monnaie en définissant les autres par défaut.
-Si ``$currency`` est ``false``, cela effacera la valeur actuellement enregistrée.
+toujours passer la monnaie à :php:meth:`Cake\\I18n\\Number::currency()` et
+change toutes les sorties de monnaie en définissant les autres par défaut.
+Si ``$currency`` est ``false``, cela effacera la valeur actuellement
+enregistrée.
 Par défaut, cette fonction retourne la valeur ``intl.default_locale`` si définie
 et 'en_US' sinon.
 
@@ -120,9 +121,8 @@ Formatage Des Nombres A Virgules Flottantes
 
 .. php:method:: precision(float $value, int $precision = 3, array $options = [])
 
-Cette méthode affiche un nombre avec la précision spécifiée
-(place de la décimale). Elle arrondira afin de maintenir le niveau de
-précision défini::
+Cette méthode affiche un nombre avec la précision spécifiée (place de la
+décimale). Elle arrondira afin de maintenir le niveau de précision défini::
 
     // Appelé avec NumberHelper
     echo $this->Number->precision(456.91873645, 2 );
@@ -150,7 +150,7 @@ Formatage Des Pourcentages
 Comme :php:meth:`Cake\\I18n\\Number::precision()`, cette méthode formate un
 nombre selon la précision fournie (où les nombres sont arrondis pour parvenir
 à ce degré de précision). Cette méthode exprime aussi le nombre en tant que
-pourcentage et préfixe la sortie avec un signe de pourcent::
+pourcentage et ajoute un signe de pourcent à la sortie::
 
     // appelé avec NumberHelper. Sortie: 45.69%
     echo $this->Number->toPercentage(45.691873645);

@@ -5,13 +5,12 @@ Form
 
 .. php:class:: FormHelper(View $view, array $config = [])
 
-Le Helper Form prend en charge la plupart des opérations lourdes
-de la création de formulaire. Le Helper Form se concentre sur la
-possibilité de créer des formulaires rapidement, d'une manière qui
-permettra de rationaliser la validation, la re-population et la mise
-en page (layout). Le Helper Form est aussi flexible - Il va faire à
-peu près tout pour vous en utilisant les conventions, ou vous
-pouvez utiliser des méthodes spécifiques pour ne prendre
+Le Helper Form prend en charge la plupart des opérations lourdes de la création
+de formulaire. Le Helper Form se concentre sur la possibilité de créer des
+formulaires rapidement, d'une manière qui permettra de rationaliser la
+validation, la re-population et la mise en page (layout). Le Helper Form est
+aussi flexible - Il va faire à peu près tout pour vous en utilisant les
+conventions, ou vous pouvez utiliser des méthodes spécifiques pour ne prendre
 uniquement que ce dont vous avez besoin.
 
 Création de Formulaire
@@ -23,11 +22,11 @@ La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
 profit du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
 affichera une balise d'ouverture de formulaire.
 
-Tous les paramètres sont optionnels. Si ``create()`` est appelée sans
-paramètre, CakePHP supposera que vous voulez créer un formulaire en rapport
-avec le controller courant, via l'URL actuelle. par défaut, la méthode de
-soumission par des formulaires est POST. Si vous appelez ``create()`` dans une
-vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
+Tous les paramètres sont optionnels. Si ``create()`` est appelée sans paramètre,
+CakePHP supposera que vous voulez créer un formulaire en rapport avec le
+controller courant, via l'URL actuelle. par défaut, la méthode de soumission par
+des formulaires est POST. Si vous appelez ``create()`` dans une vue pour
+UsersController::add(), vous verrez la sortie suivante dans la vue:
 
 .. code-block:: html
 
@@ -35,8 +34,8 @@ vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
 
 L'argument ``$model`` est utilisé comme 'context' du formulaire. Il y a
 plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres,
-ce que nous allons voir dans la prochaine section. Ceux intégrés
-correspondent aux valeurs suivantes de ``$model``:
+ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
+aux valeurs suivantes de ``$model``:
 
 * Une instance ``Entity`` ou un iterateur qui mappe vers ``EntityContext``, ce
   contexte permet au FormHelper de fonctionner avec les résultats à partir de
@@ -70,15 +69,13 @@ Affichera:
 
     <form method="post" action="/articles/add">
 
-Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
-ArticlesController.
-Cependant, vous pouvez utiliser la même logique pour créer
-un formulaire d'édition. Le FormHelper utilise la propriété
-``$this->request->data`` pour detecter automatiquement s'il faut créer un
-formulaire d'ajout (add) ou un d'édition (edit). Si l'entity fournie n'est pas
-'nouvelle', le form va être créé comme un formulaire d'édition. Par exemple, si
-nous naviguons vers http://example.org/articles/edit/5, nous pourrions faire ce
-qui suit::
+Celui-ci va POSTer les données de formulaire à l'action ``add()`` de ``ArticlesController``.
+Cependant, vous pouvez utiliser la même logique pour créer un formulaire
+d'édition. Le FormHelper utilise la propriété ``$this->request->data`` pour
+détecter automatiquement s'il faut créer un formulaire d'ajout (add) ou un
+d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être créé
+comme un formulaire d'édition. Par exemple, si nous naviguons vers
+**http://example.org/articles/edit/5**, nous pourrions faire ce qui suit::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
@@ -127,9 +124,9 @@ Affichera:
 
 En spécifiant 'file' cela changera la méthode de soumission à 'post', et
 ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
-Vous devez l'utiliser si vous avez des demandes de fichiers dans
-votre formulaire. L'absence de cet attribut enctype empêchera le
-fonctionnement de l'envoi de fichiers::
+Vous devez l'utiliser si vous avez des demandes de fichiers dans votre
+formulaire. L'absence de cet attribut enctype empêchera le fonctionnement de
+l'envoi de fichiers::
 
     echo $this->Form->create($article, ['type' => 'file']);
 
@@ -1163,6 +1160,35 @@ vous pouvez remplacer le template ``dateWidget``. Par défaut le template
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
+Pour créer un input datetime avec des classes/attributs personnalisés pour une
+select box spécifique, vous pouvez utiliser les options dans chaque component::
+
+    echo $this->Form->datetime('released', [
+        'year' => [
+            'class' => 'year-classname',
+        ],
+        'month' => [
+            'class' => 'month-class',
+            'data-type' => 'month',
+        ],
+    ]);
+
+Ce qui créerait les deux selects suivants:
+
+.. code-block:: html
+
+    <select name="released[year]" class="year-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+    <select name="released[month]" class="month-class" data-type="month">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+
 Créer des Inputs Time
 ---------------------
 
@@ -1965,7 +1991,6 @@ inputs spéciales ``_Token`` soient générées.
 
     Génère un champ caché avec un hash de sécurité basé sur les champs utilisés
     dans le formulaire.
-
 
 .. meta::
     :title lang=fr: FormHelper

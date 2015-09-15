@@ -66,7 +66,7 @@ However, you can also use the same logic to create an edit form. The FormHelper
 uses the ``$this->request->data`` property to automatically detect whether to
 create an add or edit form. If the provided entity is not 'new', the form will
 be created as an edit form.  For example, if we browse to
-http://example.org/articles/edit/5, we could do the following::
+**http://example.org/articles/edit/5**, we could do the following::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
