@@ -5,6 +5,11 @@ Session
 
 .. php:class:: SessionHelper(View $view, array $config = [])
 
+.. deprecated:: 3.0.0
+    The SessionHelper is deprecated in 3.x. Instead you should use either the
+    :doc:`FlashHelper </views/helpers/flash>` or :ref:`access the
+    session via the request <accessing-session-object>`.
+
 As a natural counterpart to the Session object, the Session
 Helper replicates most of the object's functionality and makes it
 available in your view.
