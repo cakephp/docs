@@ -1118,8 +1118,8 @@ is::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
-To create a datetime inputs with custom classes/attributes on specific select boxes, you
-can use the options in each component::
+To create a datetime inputs with custom classes/attributes on a specific select
+box, you can use the options in each component::
 
     echo $this->Form->datetime('released', [
         'year' => [
