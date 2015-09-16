@@ -309,7 +309,7 @@ Une fois qu'un plugin a été installé dans /app/Plugin/, vous pouvez y accéde
 ContactManager, nous accédons à notre ContactsController à l'adresse
 /contact_manager/contacts.
 
-Quelques astuces de fin lorque vous travaillez avec les plugins dans vos
+Quelques astuces de fin lorsque vous travaillez avec les plugins dans vos
 applications CakePHP:
 
 -  Si vous n'avez pas un [Plugin]AppController et
