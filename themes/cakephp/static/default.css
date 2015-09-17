@@ -195,6 +195,7 @@ body {
 	padding: 5px 10px;
 	border-bottom: 1px solid #eee;
 }
+.tt-cursor,
 .tt-suggestion:focus,
 .tt-suggestion:hover {
 	background: #eee;
@@ -202,7 +203,7 @@ body {
 
 /* tablet and smaller */
 @media only screen and (max-width: 767px) {
-	.masthead .button { 
+	.masthead .button {
 		display: inline !important;
 	}
 

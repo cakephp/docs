@@ -107,10 +107,9 @@ App.InlineSearch = (function () {
 	};
 
 	var init = function () {
-
 		var input = $('.masthead .search-input');
 		input.typeahead(
-			{minLength: 3, highlight: true},
+			{minLength: 3, hint: false, highlight: true},
 			{
 				name: 'es',
 				source: doSearch,
@@ -138,6 +137,18 @@ App.InlineSearch = (function () {
 		input.on('typeahead:idle', function () {
 			var _gaq = _gaq || [];
 			_gaq.push(['_trackEvent', 'Search', 'Search in ' + window.lang, lastValue]);
+		});
+
+		// 'click' the link.
+		input.on('typeahead:select', function(event, suggestion) {
+			input.typeahead('val', suggestion.title);
+			window.location = base + suggestion.url;
+			return false;
+		});
+
+		// update the input preview so it doesn't contain a blob of JSON.
+		input.on('typeahead:cursorchange', function(event, suggestion) {
+			input.parents('.twitter-typeahead').find('.tt-input').val(suggestion.title);
 		});
 	};
 
