@@ -214,6 +214,20 @@ as the scope::
         return $query->where(['country_name' => $country]);
     });
 
+Recovering with custom sort field
+=================================
+
+By default the recover method sorts the items using the primary key. This works great
+if this is a numeric (auto increment) column, but can lead to weird results if you
+use UUID's.
+
+If you need custom sorting for the recovery, you can set a
+custom order clause in your config::
+
+        $this->addBehavior('Tree', [
+            'recoverOrder' => ['country_name' => 'DESC'],
+        ]);
+
 Saving Hierarchical Data
 ========================
 
