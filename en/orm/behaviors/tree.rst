@@ -219,7 +219,7 @@ Recovering with custom sort field
 
 By default, recover() sorts the items using the primary key. This works great
 if this is a numeric (auto increment) column, but can lead to weird results if you
-use UUID's.
+use UUIDs.
 
 If you need custom sorting for the recovery, you can set a
 custom order clause in your config::
