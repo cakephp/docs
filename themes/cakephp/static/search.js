@@ -64,4 +64,4 @@ App.Search = (function () {
 	};
 })();
 
-$(App.Search.init);
+$(document).ready(App.Search.init);

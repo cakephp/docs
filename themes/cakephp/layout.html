@@ -21,7 +21,7 @@ window.lang = "{{ language }}";
 </script>
 {% endblock %}
 
-{%- set script_files = script_files + ["_static/app.js", "_static/modernizr.foundation.js", "_static/foundation.js"] -%}
+{%- set script_files = script_files + ["_static/app.js", "_static/typeahead.js", "_static/modernizr.foundation.js", "_static/foundation.js"] -%}
 
 {# Use the header block to insert the CSF navbar #}
 {%- block header %}
@@ -78,7 +78,9 @@ window.lang = "{{ language }}";
 
 {%- block relbar1 %}
 <div class="masthead">
-	<div class="header-backing"></div>
+	<div class="header-backing-trap">
+		<div class="header-backing"></div>
+	</div>
 	<div class="searchbar row">
 		<div class="columns three phone-one">
 			<a class="logo" href="{{ pathto(master_doc) }}">
