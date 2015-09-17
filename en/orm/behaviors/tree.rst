@@ -217,7 +217,7 @@ as the scope::
 Recovering with custom sort field
 =================================
 
-By default the recover method sorts the items using the primary key. This works great
+By default, recover() sorts the items using the primary key. This works great
 if this is a numeric (auto increment) column, but can lead to weird results if you
 use UUID's.
 
