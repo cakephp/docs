@@ -734,3 +734,21 @@ ConnectionManager
   com uma API mais padrão e consistente.
 - O ``ConnectionManager::create()`` foi removido.
   Ele pode ser substituído por ``config($name, $config)`` e ``get($name)``.
+
+Comportamentos
+--------------
+- Os métodos de comportamentos (behavior) prefixados com sublinhado como ``_someMethod()``
+  não são mais tratados como métodos privados. Use as palavras chaves de visibilidade.
+
+TreeBehavior
+------------
+
+O TreeBehavior foi completamente reescrito para usar o novo ORM. Embora ele funcione
+do mesmo modo que no 2.x, alguns métodos foram renomeados ou removidos:
+
+- ``TreeBehavior::children()`` é agora uma busca personalizada ``find('children')``.
+- ``TreeBehavior::generateTreeList()`` é agora uma busca personalizada ``find('treeList')``.
+- ``TreeBehavior::getParentNode()`` foi removido.
+- ``TreeBehavior::getPath()`` é agora uma busca personalizada ``find('path')``.
+- ``TreeBehavior::reorder()`` foi removido.
+- ``TreeBehavior::verify()`` foi removido.
