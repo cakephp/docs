@@ -268,7 +268,8 @@ options may be used:
 * ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
 * ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-* ``deep``: (since 2.1) If set to true, also associated data is saved; see also :ref:`saveAssociated() <Model-saveAssociated>`
+* ``deep``: (since 2.1) If set to true, also associated data is saved; see also
+  :ref:`saveAssociated() <Model-saveAssociated>`
 * ``callbacks`` Set to false to disable callbacks. Using 'before' or 'after'
   will enable only those callbacks.
 * ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
@@ -331,14 +332,17 @@ one you just need to add the primary key index to the data row::
 Method used to save multiple model associations at once. The following
 options may be used:
 
-* ``validate``: Set to false to disable validation, true to validate each record before saving,
-  'first' to validate *all* records before any are saved (default),
-* ``atomic``: If true (default), will attempt to save all records in a single transaction.
-  Should be set to false if database/table does not support transactions.
+* ``validate``: Set to false to disable validation, true to validate each record
+  before saving, 'first' to validate *all* records before any are saved
+  (default),
+* ``atomic``: If true (default), will attempt to save all records in a single
+  transaction.  Should be set to false if database/table does not support
+  transactions.
 * ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-* ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
-  but deeper nested associated data as well. Defaults to false.
-* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
+* ``deep``: (since 2.1) If set to true, not only directly associated data is
+  saved, but deeper nested associated data as well. Defaults to false.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if
+  any)
 
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
@@ -360,8 +364,8 @@ association, the data array should be like this::
         ),
     );
 
-And for saving a record along with its related records having hasMany with more than two
-levels deep associations, the data array should be as follow::
+And for saving a record along with its related records having hasMany with more
+than two levels deep associations, the data array should be as follow::
 
     $data = array(
         'User' => array('email' => 'john-doe@cakephp.org'),
@@ -390,14 +394,6 @@ levels deep associations, the data array should be as follow::
     If successful, the foreign key of the main model will be stored in
     the related models' id field, i.e. ``$this->RelatedModel->id``.
 
-.. warning::
-
-    Be careful when checking saveAssociated calls with atomic option set to
-    false. It returns an array instead of boolean.
-
-.. versionchanged:: 2.1
-    You can now save deeper associated data as well with setting ``$options['deep'] = true;``
-
 For saving a record along with its related records having hasMany
 association and deeper associated Comment belongsTo User data as well,
 the data array should be like this::
@@ -417,8 +413,10 @@ And save this data with::
 
     $Article->saveAssociated($data, array('deep' => true));
 
-.. versionchanged:: 2.1
-    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models.
+.. warning::
+
+    Be careful when checking saveAssociated calls with atomic option set to
+    false. It returns an array instead of boolean.
 
 Example of using ``fieldList`` with multiple models::
 
@@ -431,6 +429,12 @@ Example of using ``fieldList`` with multiple models::
 
 The fieldList will be an array of model aliases as keys and arrays with fields as values.
 The model names are not nested like in the data to be saved.
+
+.. versionchanged:: 2.1
+    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models.
+
+    You can now save deeper associated data as well with setting ``$options['deep'] = true;``
+
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
