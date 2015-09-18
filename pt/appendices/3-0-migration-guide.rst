@@ -620,3 +620,117 @@ CookieComponent
   Veja :doc:`/controllers/components/cookie` para mais informações.
 - O caminho padrão para os cookies agora é o caminho base da aplicação, ao 
   invés de "/".
+
+AuthComponent
+-------------
+
+- O ``Default`` é agora o hasher de senhas padrão usado pelas classes de 
+  autenticação. Ele usa exclusivamente o algoritmo de hash bcrypt. Se você
+  desejar continuar usando o hash SHA1 usado no 2.x, use ``'passwordHasher' => 'Weak'`` nas configurações de seu autenticador.
+- O novo ``FallbackPasswordHasher`` foi adicionado para ajudar os usuários
+  migrar senhas antigas de um algoritmo para o outro. Veja a documentação do
+  AuthComponent para mais informações.
+- A classe ``BlowfishAuthenticate`` foi removida. Apenas use ``FormAuthenticate``.
+- A classe ``BlowfishPasswordHasher`` foi removida. Use o 
+  ``DefaultPasswordHasher`` no lugar.
+- O método ``loggedIn()`` foi removido. Use o ``user()`` no lugar.
+- As opções de configuração não são mais definidas como propriedades públicas.
+- Os métodos ``allow()`` e ``deny()`` não aceitam mais "var args". Todos os 
+  nomes de métodos precisam ser passados como primeiro argumento, seja como 
+  string ou array de strings.
+- O método ``login()`` foi removido e substituído por ``setUser()``.
+  Para logar um usuário agora você deve chamar ``identify()`` que retorna
+  as informações do usuário caso identificado com sucesso e então usar 
+  ``setUser()`` para salvar as informações na sessão de maneira persistente 
+  entre as requisições.
+- O ``BaseAuthenticate::_password()`` foi removido. Use a classe ``PasswordHasher``
+  no lugar.
+- O ``BaseAuthenticate::logout()`` foi removido.
+- O ``AuthComponent`` agora dispara dois eventos ``Auth.afterIdentify`` e
+  ``Auth.logout`` após um usuário ser identificado e antes de um usuário ser
+  deslogado respectivamente. Você pode definir funções de callback para esses 
+  eventos retornando um array mapeado no método ``implementedEvents()`` de
+  sua classe de autenticação.
+
+Classes relacionadas a ACL foram movidas para um plugin separado. 
+Hashers de senha, fornecedores de Autenticação e Autorização foram
+movidos para o namespace ``\Cake\Auth``. Você DEVE mover seus fornecedores
+e hashers para o namespace ``App\Auth`` também.
+
+RequestHandlerComponent
+-----------------------
+
+- Os seguintes métodos foram removidos do componente RequestHandler:
+  ``isAjax()``, ``isFlash()``, ``isSSL()``, ``isPut()``, ``isPost()``, ``isGet()``, ``isDelete()``.
+  Use o método :php:meth:`Cake\\Network\\Request::is()` no lugar com o argumento relevante.
+- O ``RequestHandler::setContent()`` foi removido, use :php:meth:`Cake\\Network\\Response::type()` no lugar.
+- O ``RequestHandler::getReferer()`` foi removido, use :php:meth:`Cake\\Network\\Request::referer()` no lugar.
+- O ``RequestHandler::getClientIP()`` foi removido, use :php:meth:`Cake\\Network\\Request::clientIp()` no lugar.
+- O ``RequestHandler::getAjaxVersion()`` foi removido.
+- O ``RequestHandler::mapType()`` foi removido, use :php:meth:`Cake\\Network\\Response::mapType()` no lugar.
+- As opções de configuração não são mais definidas como propriedades públicas.
+
+SecurityComponent
+-----------------
+
+- Os seguintes métodos e as propriedades relacionadas foram removidas do componente
+  Security: ``requirePost()``, ``requireGet()``, ``requirePut()``, ``requireDelete()``.
+  Use o :php:meth:`Cake\\Network\\Request::allowMethod()` no lugar.
+- ``SecurityComponent::$disabledFields()`` foi removido, use o
+  ``SecurityComponent::$unlockedFields()``.
+- As funções relacionadas ao CSRF no SecurityComponent foram extraídas e movidas em
+  separado no CsrfComponent. Isso permite que você use a proteção CSRF facilmente
+  sem ter que usar prevenção de adulteração de formulários.
+- As opções de configuração não são mais definidas como propriedades públicas.
+- Os métodos ``requireAuth()`` e ``requireSecure()`` não aceitam mais "var args".
+  Todos os nomes de métodos precisam ser passados como primeiro argumento, seja como 
+  string ou array de strings.
+
+SessionComponent
+----------------
+
+- O ``SessionComponent::setFlash()`` está obsoleto. Você deve usar o
+  :doc:`/controllers/components/flash` no lugar.
+
+Error
+-----
+
+ExceptionRenderers personalizados agora espera-se que retornem ou um objeto
+:php:class:`Cake\\Network\\Response` ou uma string quando renderizando erros. 
+Isso significa que qualquer método que manipule exceções específicas devem retornar
+uma resposta ou valor de string.
+
+Modelo
+======
+
+A camada de Modelo do 2.x foi completamente reescrita e substituída.
+Você deve revisar o :doc:`/appendices/orm-migration` para saber como
+usar o novo ORM.
+
+- A classe ``Model`` foi removida.
+- A classe ``BehaviorCollection`` foi removida.
+- A classe ``DboSource`` foi removida.
+- A classe ``Datasource`` foi removida.
+- As várias classes de fonte de dados foram removidas.
+
+ConnectionManager
+-----------------
+
+- O ConnectionManager (gerenciador de conexão) foi movido para o namespace
+  ``Cake\Datasource``.
+- O ConnectionManager teve os seguintes métodos removidos:
+
+  - ``sourceList``
+  - ``getSourceName``
+  - ``loadDataSource``
+  - ``enumConnectionObjects``
+
+- O :php:meth:`~Cake\\Database\\ConnectionManager::config()` foi adicionado e
+  é agora o único jeito de configurar conexões.
+- O :php:meth:`~Cake\\Database\\ConnectionManager::get()` foi adicionado. Ele
+  substitui o ``getDataSource()``.
+- O :php:meth:`~Cake\\Database\\ConnectionManager::configured()` foi adicionado.
+  Ele junto com ``config()`` substitui o ``sourceList()`` e ``enumConnectionObjects()`` 
+  com uma API mais padrão e consistente.
+- O ``ConnectionManager::create()`` foi removido.
+  Ele pode ser substituído por ``config($name, $config)`` e ``get($name)``.
