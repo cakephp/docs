@@ -167,6 +167,7 @@ body {
 }
 .standalone-search .search-input {
 	border: 1px solid #ccc;
+	width: 80%;
 }
 .search-submit {
 	margin: 0;
@@ -598,6 +599,9 @@ dt tt {
 }
 
 /* -- pagination -- */
+#search-pagination {
+	margin-bottom: 1em;
+}
 #search-pagination a {
 	display: inline-block;
 	width: 20px;
