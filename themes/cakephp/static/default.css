@@ -226,7 +226,7 @@ body {
 		margin: 10px 10px 0;
 		clear: none;
 	}
-	.search-input {
+	.searchbar .twitter-typeahead {
 		width: 96%;
 	}
 	#tablet-nav,
