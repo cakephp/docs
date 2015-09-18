@@ -7,8 +7,8 @@ CakePHP features a schema system that is capable of reflecting and generating
 schema information for tables in SQL datastores. The schema system can
 generate/reflect a schema for any SQL platform that CakePHP supports.
 
-The main pieces of the schema system are ``Cake\Database\Schema\Table`` and
-``Cake\Database\Schema\Collection``. These classes give you access to
+The main pieces of the schema system are ``Cake\Database\Schema\Collection`` and
+``Cake\Database\Schema\Table``. These classes give you access to
 database-wide and individual Table object features respectively.
 
 The primary use of the schema system is for :ref:`test-fixtures`. However, it
@@ -44,7 +44,7 @@ in a database. This object is returned by the schema reflection features::
     // Schema\Table classes could also be created with array data
     $t = new Table('posts', $columns);
 
-``Schema\Table`` objects allow you build up information about a table's schema. It helps to
+``Schema\Table`` objects allow you to build up information about a table's schema. It helps to
 normalize and validate the data used to describe a table. For example, the
 following two forms are equivalent::
 
@@ -74,9 +74,9 @@ Indexes and Constraints
 -----------------------
 
 Indexes are added using the ``addIndex()``. Constraints are added using
-``addConstraint()``.  Indexes & constraints cannot be added for columns that do
+``addConstraint()``.  Indexes and constraints cannot be added for columns that do
 not exist, as it would result in an invalid state. Indexes are different from
-constraints and exceptions will be raised if you try to mix types between the
+constraints, and exceptions will be raised if you try to mix types between the
 methods. An example of both methods is::
 
     $t = new Table('posts');
@@ -172,7 +172,7 @@ following::
 Adding Table Options
 --------------------
 
-Some drivers (primarily MySQL) support & require additional table metadata. In
+Some drivers (primarily MySQL) support and require additional table metadata. In
 the case of MySQL the ``CHARSET``, ``COLLATE`` and ``ENGINE`` properties are
 required for maintaining a table's structure in MySQL. The following could be
 used to add table options::
