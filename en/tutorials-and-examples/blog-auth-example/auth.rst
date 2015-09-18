@@ -87,10 +87,10 @@ with CakePHP::
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(
+                $this->Flash->error(
                     __('The user could not be saved. Please, try again.')
                 );
             }
@@ -103,10 +103,10 @@ with CakePHP::
             }
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(
+                $this->Flash->error(
                     __('The user could not be saved. Please, try again.')
                 );
             } else {
@@ -126,10 +126,10 @@ with CakePHP::
                 throw new NotFoundException(__('Invalid user'));
             }
             if ($this->User->delete()) {
-                $this->Session->setFlash(__('User deleted'));
+                $this->Flash->success(__('User deleted'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('User was not deleted'));
+            $this->Flash->error(__('User was not deleted'));
             return $this->redirect(array('action' => 'index'));
         }
 
@@ -177,7 +177,7 @@ file and add the following lines::
         //...
 
         public $components = array(
-            'Session',
+            'Flash',
             'Auth' => array(
                 'loginRedirect' => array(
                     'controller' => 'posts',
@@ -229,7 +229,7 @@ the users add function and implement the login and logout action::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Session->setFlash(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
 
@@ -277,7 +277,7 @@ following lines:
     //app/View/Users/login.ctp
 
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
+    <?php echo $this->Flash->render('auth'); ?>
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend>
@@ -330,7 +330,7 @@ logged in user as a reference for the created post::
             //Added this line
             $this->request->data['Post']['user_id'] = $this->Auth->user('id');
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been saved.'));
+                $this->Flash->success(__('Your post has been saved.'));
                 return $this->redirect(array('action' => 'index'));
             }
         }
@@ -349,7 +349,7 @@ config::
     // app/Controller/AppController.php
 
     public $components = array(
-        'Session',
+        'Flash',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
             'logoutRedirect' => array(

@@ -266,8 +266,8 @@ First, start by creating an ``add()`` action in the
 PostsController::
 
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form', 'Session');
-        public $components = array('Session');
+        public $helpers = array('Html', 'Form', 'Flash');
+        public $components = array('Flash');
 
         public function index() {
             $this->set('posts', $this->Post->find('all'));
@@ -289,10 +289,10 @@ PostsController::
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your post has been saved.'));
+                    $this->Flash->success(__('Your post has been saved.'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('Unable to add your post.'));
+                $this->Flash->error(__('Unable to add your post.'));
             }
         }
     }
@@ -307,7 +307,7 @@ PostsController::
 
 .. note::
 
-    You need to include the SessionComponent - and SessionHelper - in
+    You need to include the FlashComponent - and FlashHelper - in
     any controller where you will use it. If necessary, include it in
     your AppController.
 
@@ -326,10 +326,10 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use the SessionComponent's :php:meth:`SessionComponent::setFlash()`
+We use the FlashComponent's :php:meth:`FlashComponent::success()`
 method to set a message to a session variable to be displayed on the page after
 redirection. In the layout we have
-:php:func:`SessionHelper::flash` which displays the
+:php:func:`FlashHelper::render()` which displays the
 message and clears the corresponding session variable. The
 controller's :php:meth:`Controller::redirect` function
 redirects to another URL. The param ``array('action' => 'index')``
@@ -457,10 +457,10 @@ like::
         if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been updated.'));
+                $this->Flash->success(__('Your post has been updated.'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to update your post.'));
+            $this->Flash->error(__('Unable to update your post.'));
         }
 
         if (!$this->request->data) {
@@ -560,11 +560,11 @@ Next, let's make a way for users to delete posts. Start with a
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(
+            $this->Flash->success(
                 __('The post with id: %s has been deleted.', h($id))
             );
         } else {
-            $this->Session->setFlash(
+            $this->Flash->error(
                 __('The post with id: %s could not be deleted.', h($id))
             );
         }
@@ -573,7 +573,7 @@ Next, let's make a way for users to delete posts. Start with a
     }
 
 This logic deletes the post specified by $id, and uses
-``$this->Session->setFlash()`` to show the user a confirmation
+``$this->Flash->success()`` to show the user a confirmation
 message after redirecting them on to ``/posts``. If the user attempts to
 do a delete using a GET request, we throw an Exception. Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is
