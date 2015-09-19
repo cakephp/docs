@@ -147,11 +147,15 @@ body {
 	margin: 24px 0;
 	clear: right;
 }
-.search-input {
+.searchbar .twitter-typeahead {
 	width: 80%;
+	height: 32px;
+	margin:  0 3% 0 0;
+}
+.search-input {
+	width: 100%;
 	font-size: 16px;
 	padding: 5px 5px;
-	margin:  0 3% 0 0;
 	height: 32px;
 	border: none;
 	-webkit-appearance: textfield;
@@ -163,6 +167,7 @@ body {
 }
 .standalone-search .search-input {
 	border: 1px solid #ccc;
+	width: 80%;
 }
 .search-submit {
 	margin: 0;
@@ -171,8 +176,10 @@ body {
 	width: 90px;
 	vertical-align: top;
 }
+
 /* Search results */
-#inline-search-results {
+.tt-menu {
+	width: 100%;
 	position: absolute;
 	background: #fff;
 	z-index: 10;
@@ -182,26 +189,22 @@ body {
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 	border-top: 1px solid #333;
 }
-#inline-search-results ul {
-	list-style: none;
-	margin: 0;
-}
-#inline-search-results li {
-	border-bottom: 1px solid #eee;
-	margin: 0;
-}
-#inline-search-results a {
+
+.tt-menu .empty-result,
+.tt-menu .tt-suggestion {
 	display: block;
 	padding: 5px 10px;
+	border-bottom: 1px solid #eee;
 }
-#inline-search-results a:focus,
-#inline-search-results a:hover {
+.tt-cursor,
+.tt-suggestion:focus,
+.tt-suggestion:hover {
 	background: #eee;
 }
 
 /* tablet and smaller */
 @media only screen and (max-width: 767px) {
-	.masthead .button { 
+	.masthead .button {
 		display: inline !important;
 	}
 
@@ -223,7 +226,7 @@ body {
 		margin: 10px 10px 0;
 		clear: none;
 	}
-	.search-input {
+	.searchbar .twitter-typeahead {
 		width: 96%;
 	}
 	#tablet-nav,
@@ -596,6 +599,9 @@ dt tt {
 }
 
 /* -- pagination -- */
+#search-pagination {
+	margin-bottom: 1em;
+}
 #search-pagination a {
 	display: inline-block;
 	width: 20px;
