@@ -2,7 +2,7 @@ App = window.App || {};
 
 App.Search = (function () {
 	var searchInput,
-		base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 2).join('/') + '/',
+		base = App.InlineSearch.baseUrl,
 		searchResults,
 		limit = 25,
 		paginationContainer;
@@ -22,10 +22,7 @@ App.Search = (function () {
 		xhr.done(function (response) {
 			var results;
 			searchResults.empty().append('<ul></ul>');
-			results = response.data;
-			if (limit) {
-				results = response.data.slice(0, limit);
-			}
+			results = response.data.slice(0, limit);
 			createResults(results);
 			createPagination(response.total, response.page);
 		});

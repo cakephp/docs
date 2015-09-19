@@ -152,10 +152,7 @@ App.InlineSearch = (function () {
 
 	return {
 		init: init,
-		delay: function() {},
-		searchUrl: App.config.url,
-		createSearch: function() {},
-		executeSearch: function() {}
+		baseUrl: base
 	};
 })();
 

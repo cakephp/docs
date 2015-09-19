@@ -21,7 +21,16 @@ window.lang = "{{ language }}";
 </script>
 {% endblock %}
 
-{%- set script_files = script_files + ["_static/app.js", "_static/typeahead.js", "_static/modernizr.foundation.js", "_static/foundation.js"] -%}
+{%- set script_files = [
+	"_static/jquery.js",
+	"_static/underscore.js",
+	"_static/doctools.js",
+	"_static/app.js",
+	"_static/search.js",
+	"_static/typeahead.js",
+	"_static/modernizr.foundation.js",
+	"_static/foundation.js"
+] -%}
 
 {# Use the header block to insert the CSF navbar #}
 {%- block header %}
