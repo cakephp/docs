@@ -1065,6 +1065,10 @@ Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
 vous devrez utiliser un objet expression puisque ``updateAll()`` utilise
 des requêtes préparées sous le capot::
 
+    use Cake\Database\Expression\QueryExpression;
+
+    ...
+
     function incrementCounters()
     {
         $expression = new QueryExpression('view_count = view_count + 1');
