@@ -82,10 +82,10 @@ básica `cozida` usando a ferramenta de geração de códigos presente no CakePH
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
             }
         }
@@ -97,10 +97,10 @@ básica `cozida` usando a ferramenta de geração de códigos presente no CakePH
             }
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
             } else {
                 $this->request->data = $this->User->findById($id);
@@ -117,10 +117,10 @@ básica `cozida` usando a ferramenta de geração de códigos presente no CakePH
                 throw new NotFoundException(__('Invalid user'));
             }
             if ($this->User->delete()) {
-                $this->Session->setFlash(__('User deleted'));
+                $this->Flash->success(__('User deleted'));
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('User was not deleted'));
+            $this->Flash->error(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
 
@@ -159,9 +159,9 @@ e adicione as seguintes linhas::
     // app/Controller/AppController.php
     class AppController extends Controller {
         //...
-        
+
         public $components = array(
-            'Session',
+            'Flash',
             'Auth' => array(
                 'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
                 'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
@@ -198,7 +198,7 @@ add e implementar a ação de login e logout::
         if ($this->Auth->login()) {
             $this->redirect($this->Auth->redirect());
         } else {
-            $this->Session->setFlash(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
 
@@ -206,15 +206,15 @@ add e implementar a ação de login e logout::
         $this->redirect($this->Auth->logout());
     }
 
-Hash da senha não foi feito ainda, abra o seu arquivo de model ``app/Model/User.php`` 
+Hash da senha não foi feito ainda, abra o seu arquivo de model ``app/Model/User.php``
 e adicione o seguinte::
 
     // app/Model/User.php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
-        
+
     // ...
-    
+
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
             $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
@@ -230,7 +230,7 @@ classe AuthComponent. Está faltando somente um arquivo view para a função de 
 .. code-block:: php
 
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
+    <?php echo $this->Flash->render('auth'); ?>
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
@@ -242,24 +242,24 @@ classe AuthComponent. Está faltando somente um arquivo view para a função de 
     </div>
 
 Você pode registrar um novo usuário acessando a url ``/users/add`` e autenticar com
-as credenciais do usuário recém criado indo para a url ``/users/login``. Tente também 
-acessar qualquer outra url sem que a permisão tenha sido explicitada, como em ``/posts/add``, 
+as credenciais do usuário recém criado indo para a url ``/users/login``. Tente também
+acessar qualquer outra url sem que a permisão tenha sido explicitada, como em ``/posts/add``,
 você verá que a aplicação irá redirecioná-lo automaticamente para a página de login.
 
-E é isso! Parece simples demais para ser verdade. Vamos voltar um pouco para explicar o que 
+E é isso! Parece simples demais para ser verdade. Vamos voltar um pouco para explicar o que
 aconteceu. A função ``beforeFilter``  está falando para o AuthComponent não solicitar um
 login para a ação ``add`` em adição as ações ``index`` e ``view`` que foram
 prontamente autorizadas na função ``beforeFilter`` do AppController.
 
 A ação de ``login`` chama a função ``$this->Auth->login()`` do AuthComponent,
-e ele funciona sem qualquer configuração adicional porque seguimos as convenções 
-mencionadas anteriormente. Isso é, temos um model User com uma coluna username e uma password, 
+e ele funciona sem qualquer configuração adicional porque seguimos as convenções
+mencionadas anteriormente. Isso é, temos um model User com uma coluna username e uma password,
 e usamos um form para postar os dados do usuário para o controller. Essa função
-retorna se o login foi bem sucedido ou não, e caso ela retorne sucesso, então nós redirecionamos 
+retorna se o login foi bem sucedido ou não, e caso ela retorne sucesso, então nós redirecionamos
 o usuário para a url que configuramos quando adicionamos o AuthComponent em nossa aplicação.
 
-O logout funciona exatamente quando acessamos a url ``/users/logout`` e irá redirecionar 
-o usuário para a url configurada em logoutUrl anteriormente descrita. Essa url é acionada quando 
+O logout funciona exatamente quando acessamos a url ``/users/logout`` e irá redirecionar
+o usuário para a url configurada em logoutUrl anteriormente descrita. Essa url é acionada quando
 a função ``AuthComponent::logout()`` obtém sucesso.
 
 Autorização (quem tem permissão de acessar o que)
@@ -279,13 +279,13 @@ post criado::
         if ($this->request->is('post')) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id'); // Adicionada essa linha
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been saved.');
+                $this->Flash->success('Your post has been saved.');
                 $this->redirect(array('action' => 'index'));
             }
         }
     }
 
-A função ``user()`` fornecida pelo component retorna qualquer coluna do usuário logado no 
+A função ``user()`` fornecida pelo component retorna qualquer coluna do usuário logado no
 momento. Nós usamos esse metódo para adicionar a informação dentro de request data para que
 ela seja salva.
 
@@ -297,7 +297,7 @@ Abra novamente a classe AppController e adicione um pouco mais de opções para 
     // app/Controller/AppController.php
 
     public $components = array(
-        'Session',
+        'Flash',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
@@ -319,7 +319,7 @@ dos usuários não logados.
 
 Isso não é exatamente o que nós queremos, por isso precisamos corrigir nosso metódo ``isAuthorized()``
 para fornecer mais regras. Mas ao invés de fazer isso no AppController, vamos
-delegar a cada controller para suprir essas regras extras. As regras que adicionaremos para o 
+delegar a cada controller para suprir essas regras extras. As regras que adicionaremos para o
 add de PostsController deve permitir ao autores criarem os posts mas evitar a
 edição de posts que não sejam deles. Abra o arquivo ``PostsController.php``
 e adicione o seguinte conteúdo::
@@ -357,11 +357,11 @@ então implementar essa função::
 
 Isso conclui então nossa autorização simples e nosso tutorial de autorização. Para garantir
 o UsersController você pode seguir as mesmas técnicas que usamos para PostsController,
-você também pode ser mais criativo e codificar algumas coisas mais gerais no AppController 
+você também pode ser mais criativo e codificar algumas coisas mais gerais no AppController
 para suas próprias regras baseadas em papéis.
 
-Se precisar de mais controle, nós sugerimos que leia o guia completo do Auth 
-:doc:`/core-libraries/components/authentication` seção onde você encontrará mais 
+Se precisar de mais controle, nós sugerimos que leia o guia completo do Auth
+:doc:`/core-libraries/components/authentication` seção onde você encontrará mais
 sobre a configuração do componente, criação de classes de Autorização customizadas, e muito mais.
 
 Sugerimos as seguintes leituras

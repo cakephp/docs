@@ -75,10 +75,10 @@ UsersControllerもまた作成しましょう。
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
             }
         }
@@ -90,10 +90,10 @@ UsersControllerもまた作成しましょう。
             }
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->Flash->success(__('The user has been saved'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
             } else {
                 $this->request->data = $this->User->findById($id);
@@ -109,10 +109,10 @@ UsersControllerもまた作成しましょう。
                 throw new NotFoundException(__('Invalid user'));
             }
             if ($this->User->delete()) {
-                $this->Session->setFlash(__('User deleted'));
+                $this->Flash->success(__('User deleted'));
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('User was not deleted'));
+            $this->Flash->error(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
 
@@ -153,7 +153,7 @@ CakePHPではこれを :php:class:`AuthComponent` で処理します。
         //...
 
         public $components = array(
-            'Session',
+            'Flash',
             'Auth' => array(
                 'loginRedirect' => array(
                     'controller' => 'posts',
@@ -200,7 +200,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash(__('Invalid username or password, try again'));
+                $this->Flash->error(__('Invalid username or password, try again'));
             }
         }
     }
@@ -213,7 +213,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 ``app/Model/User.php`` のモデルファイルを開いて、以下のものを追加してください::
 
     // app/Model/User.php
-    
+
     App::uses('AppModel', 'Model');
     App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
@@ -232,7 +232,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
     }
 
     // ...
-    
+
 .. note::
 
     BlowfishPasswordHasherはSimplePasswordHasherより強いハッシュアルゴリズム(bcrypt) を使い、
@@ -248,7 +248,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
     //app/View/Users/login.ctp
 
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
+    <?php echo $this->Flash->render('auth'); ?>
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
@@ -288,7 +288,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
         if ($this->request->is('post')) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been saved.'));
+                $this->Flash->success(__('Your post has been saved.'));
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -304,7 +304,7 @@ Authコンポーネントの ``user()`` 関数は現在ログインしている�
     // app/Controller/AppController.php
 
     public $components = array(
-        'Session',
+        'Flash',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
             'logoutRedirect' => array(

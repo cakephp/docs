@@ -88,10 +88,10 @@ de génération de code fournis avec CakePHP::
             if ($this->request->is('post')) {
                 $this->User->create();
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('L\'user a été sauvegardé'));
+                    $this->Flash->success(__('L\'user a été sauvegardé'));
                     return $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
+                    $this->Flash->error(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
                 }
             }
         }
@@ -103,10 +103,10 @@ de génération de code fournis avec CakePHP::
             }
             if ($this->request->is('post') || $this->request->is('put')) {
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('L\'user a été sauvegardé'));
+                    $this->Flash->success(__('L\'user a été sauvegardé'));
                     return $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
+                    $this->Flash->error(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
                 }
             } else {
                 $this->request->data = $this->User->findById($id);
@@ -125,10 +125,10 @@ de génération de code fournis avec CakePHP::
                 throw new NotFoundException(__('User invalide'));
             }
             if ($this->User->delete()) {
-                $this->Session->setFlash(__('User supprimé'));
+                $this->Flash->success(__('User supprimé'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('L\'user n\'a pas été supprimé'));
+            $this->Flash->error(__('L\'user n\'a pas été supprimé'));
             return $this->redirect(array('action' => 'index'));
         }
 
@@ -177,7 +177,7 @@ Pour ajouter ce component à votre application, ouvrez votre fichier
         //...
 
         public $components = array(
-            'Session',
+            'Flash',
             'Auth' => array(
                 'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
                 'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
@@ -220,7 +220,7 @@ et de réaliser l'action connexion et deconnexion::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Session->setFlash(__("Nom d'user ou mot de passe invalide, réessayer"));
+                $this->Flash->error(__("Nom d'user ou mot de passe invalide, réessayer"));
             }
         }
     }
@@ -262,7 +262,7 @@ juste un fichier template de vue pour la fonction de connexion:
     //app/View/Users/login.ctp
 
     <div class="users form">
-    <?php echo $this->Session->flash('auth'); ?>
+    <?php echo $this->Flash->render('auth'); ?>
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend>
@@ -318,7 +318,7 @@ l'user connecté courant en référence pour le post créé::
         if ($this->request->is('post')) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Ligne ajoutée
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Votre post a été sauvegardé.'));
+                $this->Flash->success(__('Votre post a été sauvegardé.'));
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -338,7 +338,7 @@ config de Auth::
     // app/Controller/AppController.php
 
     public $components = array(
-        'Session',
+        'Flash',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
             'logoutRedirect' => array(

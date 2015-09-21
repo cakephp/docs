@@ -262,8 +262,8 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
 ::
 
     class PostsController extends AppController {
-        public $name = 'Posts';
-        public $components = array('Session');
+        public $helpers = array('Html', 'Form', 'Flash');
+        public $components = array('Flash');
 
         public function index() {
             $this->set('posts', $this->Post->find('all'));
@@ -276,7 +276,7 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
+                    $this->Flash->success('Your post has been saved.');
                     $this->redirect(array('action' => 'index'));
                 }
             }
@@ -285,7 +285,7 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
 
 .. note::
 
-    Necesitas incluír el SessionComponent y SessionHelper en el controlador
+    Necesitas incluír el FlashComponent y FlashHelper en el controlador
     para poder utilizarlo. Si lo prefieres, puedes añadirlo en AppController
     y será compartido para todos los controladores que hereden de él.
 
@@ -299,11 +299,11 @@ información puedes accederla en ``$this->request->data``. Puedes usar la funci�
 :php:func:`pr()` o :php:func:`debug()` para mostrar el contenido de esa variable
 y ver la pinta que tiene.
 
-Utilizamos el SessionComponent, concretamente el método
-:php:meth:`SessionComponent::setFlash()` para guardar el mensaje en la sesión y
+Utilizamos el FlashComponent, concretamente el método
+:php:meth:`FlashComponent::success()` para guardar el mensaje en la sesión y
 poder recuperarlo posteriormente en la vista y mostrarlo al usuario, incluso
 después de haber redirigido a otra página mediante el método redirect(). Esto se
-realiza a través de la función :php:func:`SessionHelper::flash` que está en el
+realiza a través de la función :php:func:`FlashHelper::render()` que está en el
 layout, que muestra el mensaje y lo borra de la sesión para que sólo se vea una
 vez. El método :php:meth:`Controller::redirect <redirect>` del controlador nos
 permite redirigir a otra página de nuestra aplicación, traduciendo el parámetro
@@ -425,10 +425,10 @@ Aquí está el método edit():
 	    if ($this->request->is(array('post', 'put'))) {
 	        $this->Post->id = $id;
 	        if ($this->Post->save($this->request->data)) {
-	            $this->Session->setFlash(__('Your post has been updated.'));
+	            $this->Flash->success(__('Your post has been updated.'));
 	            return $this->redirect(array('action' => 'index'));
 	        }
-	        $this->Session->setFlash(__('Unable to update your post.'));
+	        $this->Flash->error(__('Unable to update your post.'));
 	    }
 
 	    if (!$this->request->data) {
@@ -515,13 +515,13 @@ nuestro controlador:
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
+            $this->Flash->success('The post with id: ' . $id . ' has been deleted.');
             $this->redirect(array('action' => 'index'));
         }
     }
 
 Este método borra un artículo cuyo 'id' enviamos como parámetro y usa
-``$this->Session->setFlash()`` para mostrar un mensaje si ha sido borrado. Luego
+``$this->Flash->success()`` para mostrar un mensaje si ha sido borrado. Luego
 redirige a '/posts/index'. Si el usuario intenta borrar un artículo mediante una
 llamada GET, generaremos una excepción. Las excepciónes que no se traten, serán
 procesadas por CakePHP de forma genérica, mostrando una bonita página de error.

@@ -14,7 +14,7 @@ Os arquivos de classe do tipo model do CakePHP ficam em ``/app/Model`` e o
 arquivo que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo
 completo deste arquivo deve ficar assim::
 
-    
+
     class Post extends AppModel {
         public $name = 'Post';
     }
@@ -25,7 +25,7 @@ model será usado num PostsController, e que manipulará os dados de uma tabela 
 banco chamada de ``posts``.
 
 .. note::
-    
+
     O CakePHP irá criar um objeto (instância) do model dinamicamente para você,
     se não encontrar um arquivo correspondente na pasta /app/Model. Isto também
     significa que, se você acidentalmente der um nome errado ao seu arquivo
@@ -60,7 +60,7 @@ código para tal ação deve se parecer com algo assim::
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
-    
+
         function index() {
             $this->set('posts', $this->Post->find('all'));
         }
@@ -110,7 +110,7 @@ o método ``set()``? Com aquilo, os dados foram repassados para a view num
 formato parecido com este::
 
     // print_r($posts) output:
-    
+
     Array
     (
         [0] => Array
@@ -156,7 +156,7 @@ adequado de tabela, o código de nossa view deve ser algo como:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Posts do Blog</h1>
     <table>
         <tr>
@@ -164,21 +164,21 @@ adequado de tabela, o código de nossa view deve ser algo como:
             <th>Título</th>
             <th>Data de Criação</th>
         </tr>
-    
+
         <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
              as informações dos posts -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], 
+                <?php echo $this->Html->link($post['Post']['title'],
     array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 Isto é tão simples quanto parece!
@@ -213,11 +213,11 @@ agora::
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
-    
+
         public function index() {
              $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id = null) {
             $this->set('post', $this->Post->findById($id));
         }
@@ -238,11 +238,11 @@ Agora vamos criar a view para nossa nova action 'view' e colocá-la em
 .. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
-    
+
     <h1><?php echo $post['Post']['title']?></h1>
-    
+
     <p><small>Created: <?php echo $post['Post']['created']?></small></p>
-    
+
     <p><?php echo $post['Post']['body']?></p>
 
 Confira se está funcionando tentando acessar os links em ``/posts/index`` ou
@@ -257,22 +257,21 @@ precisamos permitir também que os usuários adicionem novos posts.
 Primeiramente, comece criando uma action ``add()`` no PostsController::
 
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
-        public $name = 'Posts';
-        public $components = array('Session');
-    
+        public $helpers = array('Html', 'Form', 'Flash');
+        public $components = array('Flash');
+
         public function index() {
             $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id) {
             $this->set('post', $this->Post->findById($id));
         }
-    
+
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
+                    $this->Flash->success('Your post has been saved.');
                     $this->redirect(array('action' => 'index'));
                 }
             }
@@ -281,7 +280,7 @@ Primeiramente, comece criando uma action ``add()`` no PostsController::
 
 .. note::
 
-    Você precisa incluir o componente SessionComponent e o helper SessionHelper
+    Você precisa incluir o componente FlashComponent e o helper FlashHelper
     em qualquer controller que você manipula variáveis de sessão. Neste caso,
     incluímos apenas o componente porque ele carrega o helper automaticamente.
     Se você sempre utiliza sessões, inclua o componente no seu arquivo
@@ -298,10 +297,10 @@ aplicação, esta informação fica disponível em ``$this->request->data``.Voc�
 usar as funções :php:func:`pr()` ou :php:func:`debug()` para exibir os dados se
 você quiser conferir como eles se parecem.
 
-Nós usamos o método :php:meth:`SessionComponent::setFlash()` do componente
-SessionComponent para definir uma variável de sessão com uma mensagem a ser
+Nós usamos o método :php:meth:`FlashComponent::success()` do componente
+FlashComponent para definir uma variável de sessão com uma mensagem a ser
 exibida na página depois de ser redirecionada. No layout, nós temos
-:php:func:`SessionHelper::flash` que exibe a mensagem e limpa a variável de
+:php:func:`FlashHelper::render()` que exibe a mensagem e limpa a variável de
 sessão correspondente. O método :php:meth:`Controller::redirect <redirect>` do
 controller redireciona para outra URL. O parâmetro ``array('action' => 'index')``
 é convertido para a URL /posts, em outras palavras, a action index do controller
@@ -327,8 +326,8 @@ Aqui está nossa view add:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/add.ctp -->   
-    
+    <!-- File: /app/View/Posts/add.ctp -->
+
     <h1>Add Post</h1>
     <?php
     echo $this->Form->create('Post');
@@ -344,7 +343,7 @@ está o HTML gerado pelo ``$this->Form->create()``:
     <form id="PostAddForm" method="post" action="/posts/add">
 
 Se o método ``create()`` for chamado sem quaisquer parâmetros, o CakePHP assume
-que você está criando um formulário que submete para a action ``add()`` do 
+que você está criando um formulário que submete para a action ``add()`` do
 controller atual (ou para a action ``edit()`` se um campo id for incluído nos
 dados do formulário), via POST.
 
@@ -374,7 +373,7 @@ de volta nosso model Post e fazer alguns pequenos ajustes::
 
     class Post extends AppModel {
         public $name = 'Post';
-    
+
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
@@ -408,14 +407,14 @@ CakePHP, então você deve ter identificado um padrão. Criar a action e então
 criar a view. Aqui está como o código da action ``edit()`` do PostsController
 deve se parecer::
 
-    
+
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
             $this->request->data = $this->Post->findById($id));
         } else {
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been updated.');
+                $this->Flash->success('Your post has been updated.');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -432,13 +431,13 @@ A view edit pode ser algo parecido com isto:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
-    
+
     <h1>Edit Post</h1>
     <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden')); 
+        echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
 
 Esta view exibe o formulário de edição (com os valores populados), juntamente
@@ -501,12 +500,12 @@ uma action ``delete()`` no PostsController::
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
+            $this->Flash->success('The post with id: ' . $id . ' has been deleted.');
             $this->redirect(array('action' => 'index'));
         }
     }
 
-Esta lógica exclui o post dado por $id, e utiliza ``$this->Session->setFlash()``
+Esta lógica exclui o post dado por $id, e utiliza ``$this->Flash->success()``
 para mostrar uma mensagem de confirmação para o usuário depois de redirecioná-lo
 para ``/posts``.
 
@@ -526,7 +525,7 @@ helper FormHelper fornece o método ``postLink()``:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
     <table>
@@ -536,10 +535,10 @@ helper FormHelper fornece o método ``postLink()``:
                     <th>Actions</th>
             <th>Created</th>
         </tr>
-    
+
     <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
     as informações dos posts -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
@@ -548,15 +547,15 @@ helper FormHelper fornece o método ``postLink()``:
             </td>
             <td>
             <?php echo $this->Form->postLink(
-                'Delete', 
+                'Delete',
                 array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?')); 
+                array('confirm' => 'Are you sure?'));
             ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 .. note::

@@ -7,7 +7,7 @@
 模型类是 CakePHP 应用程序的基础。通过创建一个能够和数据库交互的 CakePHP 模型，我
 们可以有足够的基础，便于以后进行查看、添加、编辑和删除的操作。
 
-CakePHP 的模型类文件应该在 ``/app/Model`` 目录中，我们要创建的文件将保存为 
+CakePHP 的模型类文件应该在 ``/app/Model`` 目录中，我们要创建的文件将保存为
 ``/app/Model/Post.php``。该文件的完整内容应为::
 
     class Post extends AppModel {
@@ -51,8 +51,8 @@ CakePHP 的模型类文件应该在 ``/app/Model`` 目录中，我们要创建�
         }
     }
 
-通过在 PostsController 中定义方法 ``index()``，用户现在可以通过请求 
-www.example.com/posts/index 来访问该方法中的商业逻辑。同样的，如果定义一个方法 
+通过在 PostsController 中定义方法 ``index()``，用户现在可以通过请求
+www.example.com/posts/index 来访问该方法中的商业逻辑。同样的，如果定义一个方法
 ``foobar()`` ，用户将可以通过请求 www.example.com/posts/foobar 来访问。
 
 .. warning::
@@ -62,7 +62,7 @@ www.example.com/posts/index 来访问该方法中的商业逻辑。同样的，�
     动作名称。你可以使用"路由(*routes*)"将网址与你的代码映射起来，这个后面会讲到。
 
 在该动作中唯一的语句使用 ``set()`` 方法从控制器中把数据传递到视图(*view*)中(我们
-会在下一步创建视图)。该行代码设置名为'posts'的视图变量为 Post 模型的 
+会在下一步创建视图)。该行代码设置名为'posts'的视图变量为 Post 模型的
 ``find('all')`` 方法的返回值。我们的 Post 模型自动可以通过 ``$this->Post`` 来访问，
 是因为我们遵循了 CakePHP 的命名规范。
 
@@ -155,7 +155,7 @@ CakePHP 的视图保存在 ``/app/View`` 目录中，在一个与相应的控制
 
 你也许已经注意到，我们使用了 ``$this->Html`` 这个对象。这是 CakePHP 的
 :php:class:`HtmlHelper` 类的一个实例。CakePHP 提供了一组视图助件(*view helper*)，
-从而使得链接、表单输出、JavaScript 和 AJAX 这些事情易如反掌。你可以在 
+从而使得链接、表单输出、JavaScript 和 AJAX 这些事情易如反掌。你可以在
 :doc:`/views/helpers` 一章了解到如何使用它们，但在这里值得注意的是，``link()`` 方
 法会产生一个带有标题(第一个参数)和网址(第二个参数)的 HTML 链接。
 
@@ -166,9 +166,9 @@ CakePHP 的视图保存在 ``/app/View`` 目录中，在一个与相应的控制
 现在，你可以在浏览器中输入地址 http://www.example.com/posts/index。你应该可以看到
 你的视图正确地显示，带有标题，以及表格中的文章列表。
 
-如果你在点击了我们在这个视图中创建的链接(用文章标题指向网址 /posts/view/some\_id 
+如果你在点击了我们在这个视图中创建的链接(用文章标题指向网址 /posts/view/some\_id
 的链接)，CakePHP 将会告诉你这个动作尚未定义。如果你没有看到这个错误，那就是什么地
-方出错了，或者你实际上已经定义了，那你可够贼的。如果还没有，现在就让我们在 
+方出错了，或者你实际上已经定义了，那你可够贼的。如果还没有，现在就让我们在
 PostsController 中创建这个动作吧::
 
     // File: /app/Controller/PostsController.php
@@ -192,15 +192,15 @@ PostsController 中创建这个动作吧::
         }
     }
 
-你对 ``set()`` 方法应该已经很熟悉了。请注意我们使用 ``findById()`` 方法，而不是 
+你对 ``set()`` 方法应该已经很熟悉了。请注意我们使用 ``findById()`` 方法，而不是
 ``find('all')`` 方法，因为我们只想要一篇文章的数据。
 
 注意到我们的视图动作接受一个参数，我们要查看的文章的 ID。这个参数是通过请求的网址
 来传递给动作的。如果用户请求 ``/posts/view/3``，那么数据 '3' 就会作为 ``$id`` 传
 入。
 
-我们也做了些错误检查来确保用户确实是要访问一条记录。如果用户请求 
-``/posts/view`` ，我们就抛出一个 ``NotFoundException`` 异常，让 CakePHP 的 
+我们也做了些错误检查来确保用户确实是要访问一条记录。如果用户请求
+``/posts/view`` ，我们就抛出一个 ``NotFoundException`` 异常，让 CakePHP 的
 ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的记录是存在的。
 
 现在让我们创建我们的新动作 'view' 的视图，并保存为 ``/app/View/Posts/view.ctp``。
@@ -226,8 +226,8 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
 首先，从在 PostsController 中创建 ``add()`` 动作开始::
 
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form', 'Session');
-        public $components = array('Session');
+        public $helpers = array('Html', 'Form', 'Flash');
+        public $components = array('Flash');
 
         public function index() {
             $this->set('posts', $this->Post->find('all'));
@@ -249,24 +249,24 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your post has been saved.'));
+                    $this->Flash->success(__('Your post has been saved.'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('Unable to add your post.'));
+                $this->Flash->error(__('Unable to add your post.'));
             }
         }
     }
 
 .. note::
 
-    ``$this->request->is()`` 方法接受一个参数，可以是请求方法(``get`` 、 
+    ``$this->request->is()`` 方法接受一个参数，可以是请求方法(``get`` 、
     ``put`` 、 ``post`` 、 ``delete``)或者请求标识(``ajax``)。这 **不** 是检查特定
     提交数据(*posted data*)的方法。比如，如果提交了书(*book*)的数据，
     ``$this->request->is('book')`` 不会返回 true。
 
 .. note::
 
-    在会用到 SessionComponent 以及 SessionHelper 的控制器中，你要引入它们。如果必
+    在会用到 FlashComponent 以及 FlashHelper 的控制器中，你要引入它们。如果必
     要的话，在你的 AppController 中引入。
 
 这是 ``add()`` 动作所做的：如果这个请求的 HTTP 方法是 POST，将试图使用 Post (文
@@ -275,17 +275,17 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
 
 每个 CakePHP 请求包括一个 ``CakeRequest`` 对象，可以通过 ``$this->request`` 来访
 问。该请求对象包含了刚收到的请求的有用信息，并且能够用来控制应用程序的流程。在这
-里，我们使用 :php:meth:`CakeRequest::is()` 方法来检查这个请求是否是一个 HTTP POST 
+里，我们使用 :php:meth:`CakeRequest::is()` 方法来检查这个请求是否是一个 HTTP POST
 请求。
 
-当用户在应用程序中使用一个表单提交(*POST*)数据时，该数据可以通过 
-``$this->request->data`` 访问。如果你想看到这些数据，你可以使用 :php:func:`pr()` 
+当用户在应用程序中使用一个表单提交(*POST*)数据时，该数据可以通过
+``$this->request->data`` 访问。如果你想看到这些数据，你可以使用 :php:func:`pr()`
 或 :php:func:`debug()` 函数显示出来。
 
-我们使用 SessionComponent 的 :php:meth:`SessionComponent::setFlash()` 方法在一个
-会话(*session*)变量中设置一条信息，在重定向后在页面中显示该信息。在布局中我们用 
-:php:func:`SessionHelper::flash` 方法来显示这条信息并清空相应的会话变量。控制器的 
-:php:meth:`Controller::redirect` 方法重定向页面到另一个网址。参数 
+我们使用 FlashComponent 的 :php:meth:`FlashComponent::setFlash()` 方法在一个
+会话(*session*)变量中设置一条信息，在重定向后在页面中显示该信息。在布局中我们用
+:php:func:`FlashHelper::render()` 方法来显示这条信息并清空相应的会话变量。控制器的
+:php:meth:`Controller::redirect` 方法重定向页面到另一个网址。参数
 ``array('action' => 'index')`` 就是网址 /posts (即 posts 控制器的 index 动作)。你
 可以参阅在 `API <http://api.cakephp.org>`_ 中的 :php:func:`Router::url()` 方法，
 来了解可用来为 CakePHP 函数指定网址的各种格式。
@@ -294,7 +294,7 @@ ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的�
 的小节里讨论如何处理这些错误。
 
 我们首先调用 ``create()`` 方法，来重置模型的状态，以保存新的数据。这不会真的在数
-据库中创建一条记录，而是清空 Model::$id 并根据数据库字段的缺省值来设置 
+据库中创建一条记录，而是清空 Model::$id 并根据数据库字段的缺省值来设置
 Model::$data。
 
 数据验证
@@ -320,7 +320,7 @@ CakePHP 经过长期的努力来摆脱验证表单输入的千篇一律。每个
     echo $this->Form->end('Save Post');
     ?>
 
-我们使用 FormHelper 来生成一个 HTML 表单的起始标签。下面是 
+我们使用 FormHelper 来生成一个 HTML 表单的起始标签。下面是
 ``$this->Form->create()`` 生成的 HTML：
 
 .. code-block:: html
@@ -328,16 +328,16 @@ CakePHP 经过长期的努力来摆脱验证表单输入的千篇一律。每个
     <form id="PostAddForm" method="post" action="/posts/add">
 
 如果调用 ``create()`` 方法时不带参数，那么就认为你要创建一个表单，用 POST 方法来
-提交到当前控制器的 ``add()`` 动作(或者当表单数据中包含 ``id`` 时，提交到 
+提交到当前控制器的 ``add()`` 动作(或者当表单数据中包含 ``id`` 时，提交到
 ``edit()`` 动作)。
 
-``$this->Form->input()`` 方法用于创建同名的(即 input)表单元素。第一个参数告诉 
-CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——在这里，我们定义 textarea 
+``$this->Form->input()`` 方法用于创建同名的(即 input)表单元素。第一个参数告诉
+CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——在这里，我们定义 textarea
 的行数。在这里有一点自省和自动魔法(*introspection and automagic*)： ``input()`` 方法将会根据指定的模型字段输出不同的表单元素。
 
 对 ``$this->Form->end()`` 方法的调用生成一个提交按钮并结束表单。如果 ``end()`` 方
 法的第一个参数传入一个字符串，那么 FormHelper 输出的提交按钮将以该字符串为提交按钮
-上的文字，并输出表单的结束标签。再次，关于助件(*helper*)的更多信息请参阅 
+上的文字，并输出表单的结束标签。再次，关于助件(*helper*)的更多信息请参阅
 :doc:`/views/helpers`。
 
 现在让我们回去并更新我们的 ``/app/View/Posts/index.ctp`` 视图，添加 "Add Post" 链
@@ -368,7 +368,7 @@ CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——
 查看 :doc:`/models/data-validation`。
 
 现在你已经完成了验证规则，使用应用程序来尝试添加一篇文章，空着 title 或者 body，
-看看验证规则如何起作用。因为我们已经使用了 FormHelper 的 
+看看验证规则如何起作用。因为我们已经使用了 FormHelper 的
 :php:meth:`FormHelper::input()` 方法来创建我们的表单元素，我们的验证错误信息将会
 自动显示出来。
 
@@ -392,10 +392,10 @@ CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——
         if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been updated.'));
+                $this->Flash->success(__('Your post has been updated.'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to update your post.'));
+            $this->Flash->error(__('Unable to update your post.'));
         }
 
         if (!$this->request->data) {
@@ -482,7 +482,7 @@ edit 视图会是这样:
 删除文章(*Post*)
 ================
 
-接下来，让我们为用户增加删除文章(*post*)的功能。先在 PostsController 中添加 
+接下来，让我们为用户增加删除文章(*post*)的功能。先在 PostsController 中添加
 ``delete()`` 动作::
 
     public function delete($id) {
@@ -491,11 +491,11 @@ edit 视图会是这样:
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(
+            $this->Flash->success(
                 __('The post with id: %s has been deleted.', h($id))
             );
         } else {
-            $this->Session->setFlash(
+            $this->Flash->error(
                 __('The post with id: %s could not be deleted.', h($id))
             );
         }
@@ -503,13 +503,13 @@ edit 视图会是这样:
         return $this->redirect(array('action' => 'index'));
     }
 
-这个逻辑删除 `$id` 指定的文章(*post*)，然后使用 ``$this->Session->setFlash()``，
+这个逻辑删除 `$id` 指定的文章(*post*)，然后使用 ``$this->Flash->success()``，
 在重定向到 ``/posts`` 后，给用户显示确认信息。如果用户尝试通过 GET 请求删除文章
 (*post*)，我们就抛出异常。未捕获的异常将被 CakePHP 的异常处理捕获，并显示漂亮的错
 误页面。有许多内置的 :doc:`/development/exceptions`，可以用来表示应用程序需要生成
 的各种 HTTP 错误。
 
-因为我们仅仅是执行一些逻辑和重定向，所以这个动作没有视图。不过，你可能想要修改 
+因为我们仅仅是执行一些逻辑和重定向，所以这个动作没有视图。不过，你可能想要修改
 index 视图，添加让用户删除文章(*post*)的链接:
 
 .. code-block:: php
@@ -567,7 +567,7 @@ index 视图，添加让用户删除文章(*post*)的链接:
 
 .. note::
 
-    这个视图的代码也使用了 FormHelper，当用户试图删除一篇文章(*post*)时，显示一个 
+    这个视图的代码也使用了 FormHelper，当用户试图删除一篇文章(*post*)时，显示一个
     JavaScript 确认对话框供用户确认。
 
 路由(*Route*)
@@ -579,7 +579,7 @@ index 视图，添加让用户删除文章(*post*)的链接:
 
 关于高级路由技术的更多信息，请参阅 :ref:`routes-configuration`。
 
-缺省情况下，CakePHP 对于网站根目录的请求(例如 http://www.example.com)，使用 
+缺省情况下，CakePHP 对于网站根目录的请求(例如 http://www.example.com)，使用
 PagesController 来响应，并渲染 "home" 视图。这里，我们会增加一条路由规则，将其替
 换为我们的 PostsController。
 
@@ -615,10 +615,10 @@ CakePHP 的路由设置在 ``/app/Config/routes.php`` 文件中。你应当注�
 于篇幅无法在这里详述。本手册余下的部分，可以指导你创建更加功能丰富的应用程序。
 
 既然你已经创建了一个基本的 CakePHP 应用程序，那么你已经可以开始真的做点儿东西了。
-启动你自己的项目吧，别忘记阅读 :doc:`Cookbook </index>` 的其余部分，以及 
+启动你自己的项目吧，别忘记阅读 :doc:`Cookbook </index>` 的其余部分，以及
 `API <http://api.cakephp.org>`_ 。
 
-如果需要，有很多方法可以获得你需要的帮助——请查看 
+如果需要，有很多方法可以获得你需要的帮助——请查看
 :doc:`/cakephp-overview/where-to-get-help` 页面。欢迎加入 CakePHP！
 
 延伸阅读的建议

@@ -234,8 +234,8 @@ CakePHPのErrorHandlerに処理が引き継がれます。
 まず、PostsControllerの中に、 ``add()`` アクションを作ります::
 
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form', 'Session');
-        public $components = array('Session');
+        public $helpers = array('Html', 'Form', 'Flash');
+        public $components = array('Flash');
 
         public function index() {
             $this->set('posts', $this->Post->find('all'));
@@ -257,17 +257,17 @@ CakePHPのErrorHandlerに処理が引き継がれます。
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your post has been saved.'));
+                    $this->Flash->success(__('Your post has been saved.'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('Unable to add your post.'));
+                $this->Flash->error(__('Unable to add your post.'));
             }
         }
     }
 
 .. note::
 
-    SessionComponentとSessionHelperを、使うコントローラで読み込む必要があります。
+    FlashComponentとFlashHelperを、使うコントローラで読み込む必要があります。
     必要不可欠なら、AppControllerで読み込むようにしてください。
 
 ``add()`` アクションの動作は次のとおりです:
@@ -283,8 +283,8 @@ CakePHPのErrorHandlerに処理が引き継がれます。
 ユーザがフォームを使ってデータをPOSTした場合、その情報は、 ``$this->request->data`` の中に入ってきます。
 :php:func:`pr()` や :php:func:`debug()` を使うと、内容を画面に表示させて、確認することができます。
 
-SessionComponentの :php:meth:`SessionComponent::setFlash()` メソッドを使ってセッション変数にメッセージをセットすることによって、リダイレクト後のページでこれを表示します。
-レイアウトでは :php:func:`SessionHelper::flash` を用いて、メッセージを表示し、対応するセッション変数を削除します。
+FlashComponentの :php:meth:`FlashComponent::success()` メソッドを使ってセッション変数にメッセージをセットすることによって、リダイレクト後のページでこれを表示します。
+レイアウトでは :php:func:`FlashHelper::render()` を用いて、メッセージを表示し、対応するセッション変数を削除します。
 コントローラの :php:meth:`Controller::redirect` 関数は別のURLにリダイレクトを行います。
 ``array('action' => 'index')`` パラメータは/posts、つまりpostsコントローラのindexアクションを表すURLに解釈されます。
 多くのCakeの関数で指定できるURLのフォーマットについては、 `API <http://api20.cakephp.org>`_ の :php:func:`Router::url()` 関数を参考にすることができます。
@@ -392,10 +392,10 @@ PostsControllerの ``edit()`` アクションはこんな形になります::
         if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been updated.'));
+                $this->Flash->success(__('Your post has been updated.'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to update your post.'));
+            $this->Flash->error(__('Unable to update your post.'));
         }
 
         if (!$this->request->data) {
@@ -480,11 +480,11 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(
+            $this->Flash->success(
                 __('The post with id: %s has been deleted.', h($id))
             );
         } else {
-            $this->Session->setFlash(
+            $this->Flash->error(
                 __('The post with id: %s could not be deleted.', h($id))
             );
         }
@@ -493,7 +493,7 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
     }
 
 このロジックは、$idで指定された記事を削除し、
-``$this->Session->setFlash()``
+``$this->Flash->success()``
 を使って、ユーザに確認メッセージを表示し、それから ``/posts`` にリダイレクトします。
 ユーザーがGETリクエストを用いて削除を試みようとすると、例外を投げます。
 捕捉されない例外はCakePHPの例外ハンドラーによって捕まえられ、気の利いたエラーページが表示されます。
