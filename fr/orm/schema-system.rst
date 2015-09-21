@@ -8,8 +8,8 @@ les informations de schéma des tables dans les stockages de données SQL. Le
 système de schéma peut générer/montrer un schéma pour toute plateforme SQL
 que CakePHP supporte.
 
-Les principales parties du système de schéma sont ``Cake\Database\Schema\Table``
-et ``Cake\Database\Schema\Collection``. Ces classes vous donnent accès
+Les principales parties du système de schéma sont ``Cake\Database\Schema\Collection``
+et ``Cake\Database\Schema\Table``. Ces classes vous donnent accès
 respectivement à la base de donnée toute entière et aux fonctionnalités de
 l'objet Table.
 
@@ -79,7 +79,7 @@ Index et Contraintes
 --------------------
 
 Les index sont ajoutés en utilisant ``addIndex()``. Les contraintes sont
-ajoutées en utilisant ``addConstraint()``.  Les index & contraintes ne
+ajoutées en utilisant ``addConstraint()``. Les index et contraintes ne
 peuvent pas être ajoutés pour les colonnes qui n'existent pas puisque cela
 donnerait un état invalide. Les index sont différents des contraintes et
 des exceptions seront levées si vous essayez de mélanger les types entre
@@ -177,7 +177,7 @@ remplie, vous pourriez faire ce qui suit::
 Ajouter des Options de Table
 ----------------------------
 
-Certains drivers (principalement MySQL) supportent & nécessitent des
+Certains drivers (principalement MySQL) supportent et nécessitent des
 meta données de table supplémentaires. Dans le cas de MySQL, les propriétés
 ``CHARSET``, ``COLLATE`` et ``ENGINE`` sont nécessaires pour maintenir une
 structure de table dans MySQL. Ce qui suit pourra être utilisé pour ajouter
