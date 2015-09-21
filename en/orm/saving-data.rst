@@ -995,6 +995,10 @@ many rows at once::
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
+    use Cake\Database\Expression\QueryExpression;
+    
+    ...
+    
     function incrementCounters()
     {
         $expression = new QueryExpression('view_count = view_count + 1');
