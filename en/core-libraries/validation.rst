@@ -196,7 +196,7 @@ containing data related to the validation process:
 - **providers**: The complete list of rule provider objects, useful if you
   need to create complex rules by calling multiple providers.
 - **newRecord**: Whether the validation call is for a new record or
-  a pre-existent one.
+  a preexisting one.
 
 Conditional Validation
 ----------------------
@@ -216,7 +216,7 @@ not a particular rule should be applied::
         }
     ]);
 
-You can access the other submitted fields values using the ``$context['data']``
+You can access the other submitted field values using the ``$context['data']``
 array.
 The above example will make the rule for 'picture' optional depending on whether
 the value for ``show_profile_picture`` is empty. You could also use the
@@ -228,7 +228,7 @@ the value for ``show_profile_picture`` is empty. You could also use the
 
 The ``allowEmpty()`` and ``notEmpty()`` methods will also accept a callback
 function as their last argument. If present, the callback determines whether or
-not the rule should be applied. For example, a field can be sometimes allowed
+not the rule should be applied. For example, a field is sometimes allowed
 to be empty::
 
     $validator->allowEmpty('tax', function ($context) {
@@ -308,7 +308,7 @@ Validating Data
 ===============
 
 Now that you've created a validator and added the rules you want to it, you can
-start using it to validate data. Validators are able to validate array based
+start using it to validate data. Validators are able to validate array
 data. For example, if you wanted to validate a contact form before creating and
 sending an email you could do the following::
 
@@ -382,8 +382,8 @@ use the ``newEntities()`` method::
         }
     }
 
-The ``newEntity()``, ``patchEntity()`` and ``newEntities()`` methods
-allow you to specify which associations are validated, and which
+The ``newEntity()``, ``patchEntity()``, ``newEntities()`` and ``patchEntities()``
+methods allow you to specify which associations are validated, and which
 validation sets to apply using the ``options`` parameter::
 
     $valid = $this->Articles->newEntity($article, [
@@ -407,7 +407,7 @@ Core Validation Rules
 
 CakePHP provides a basic suite of validation methods in the ``Validation``
 class. The Validation class contains a variety of static methods that provide
-validators for a several common validation situations.
+validators for several common validation situations.
 
 The `API documentation
 <http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ for the
@@ -415,7 +415,7 @@ The `API documentation
 available, and their basic usage.
 
 Some of the validation methods accept additional parameters to define boundary
-conditions or valid options. You can provide these boundary conditions & options
+conditions or valid options. You can provide these boundary conditions and options
 as follows::
 
     $validator = new Validator();
