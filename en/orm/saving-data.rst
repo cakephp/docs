@@ -1020,8 +1020,8 @@ A bulk-update will be considered successful if 1 or more rows are updated.
     {
         $this->query()
             ->update()
-            ->set(['published' => 'true])
-            ->where(['published' => 'false'])
+            ->set(['published' => true])
+            ->where(['published' => false])
             ->execute();
     }
 
