@@ -1056,9 +1056,9 @@ mise à jour en masse pour modifier plusieurs lignes en une fois::
     // Publie tous les articles non publiés.
     function publishAllUnpublished()
     {
-        $this->updateAll([
-            'published' => true], //champ
-            ['published' => false]); //condition
+        $this->updateAll(
+            ['published' => true], // champs
+            ['published' => false]); // conditions
     }
 
 Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
@@ -1092,8 +1092,8 @@ lignes sont mises à jour.
     {
         $this->query()
             ->update()
-            ->set(['published' => 'true])
-            ->where(['published' => 'false'])
+            ->set(['published' => true])
+            ->where(['published' => false])
             ->execute();
     }
 

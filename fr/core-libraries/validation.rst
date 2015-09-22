@@ -105,8 +105,6 @@ Un exemple de ces méthodes est le suivant::
         ->notEmpty('body', 'Un body est nécessaire', 'create')
         ->allowEmpty('header_image', 'update');
 
-Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des
-providers ``Validator`` est expliqué plus loin dans les sections suivantes.
 
 Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
@@ -404,9 +402,9 @@ en une fois, vous pouvez utiliser la méthode ``newEntities()``::
         }
     }
 
-Les méthodes ``newEntity()``, ``patchEntity()`` et ``newEntities()``
-vous permettent de spécifier les associations à valider, et les ensembles de
-validation à appliquer en utilisant le paramètre ``options``::
+Les méthodes ``newEntity()``, ``patchEntity()``, ``newEntities()`` et
+``patchEntities()`` vous permettent de spécifier les associations à valider, et
+les ensembles de validation à appliquer en utilisant le paramètre ``options``::
 
     $valid = $this->Articles->newEntity($article, [
       'associated' => [
@@ -427,7 +425,7 @@ consultant la section
 :ref:`Appliquer les Règles d'Application <application-rules>`.
 
 Règles de Validation du Cœur
-=============================
+============================
 
 CakePHP fournit une suite basique de méthodes de validation dans la classe
 ``Validation``. La classe Validation contient un ensemble de méthodes static
@@ -441,7 +439,7 @@ disponibles, et leur utilisation basique.
 
 Certaines des méthodes de validation acceptent des paramètres supplémentaires
 pour définir des conditions limites ou des options valides. Vous pouvez fournir
-ces conditions limite & options comme suit::
+ces conditions limite et options comme suit::
 
     $validator = new Validator();
     $validator
