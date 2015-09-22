@@ -98,9 +98,6 @@ An example of these methods in action is::
         ->notEmpty('body', 'A body is required', 'create')
         ->allowEmpty('header_image', 'update');
 
-Notice that these examples take a ``provider`` key.  Adding ``Validator``
-providers is further explained in the following sections.
-
 Marking Rules as the Last to Run
 --------------------------------
 
