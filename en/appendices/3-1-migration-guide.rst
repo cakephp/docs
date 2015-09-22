@@ -43,10 +43,10 @@ Controller
 - The following Controller properties are now deprecated:
 
   * layout
-  * view
+  * view - replaced with ``template``
   * theme
   * autoLayout
-  * viewPath
+  * viewPath - replaced with ``templatePath``
   * layoutPath
 
   Instead of setting these properties on your controllers, you should set them
