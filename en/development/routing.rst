@@ -1060,7 +1060,7 @@ option for each route. For example using::
 
     Router::defaultRouteClass('InflectedRoute');
 
-will cause all routes connected after this to use the ``DashedRoute`` route class.
+will cause all routes connected after this to use the ``InflectedRoute`` route class.
 Calling the method without an argument will return current default route class.
 
 Fallbacks Method
