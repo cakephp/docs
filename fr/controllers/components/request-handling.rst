@@ -132,7 +132,7 @@ débogage. Cependant, si vous voulez utiliser le cache pour les requêtes
 non-AJAX., le code suivant vous permettra de le faire::
 
         if ($this->request->is('ajax')) {
-            $this->disableCache();
+            $this->response->disableCache();
         }
         // Continue l'action du controller
 

@@ -44,10 +44,10 @@ Controller
 - Les propriétés de Controller suivantes sont maintenant dépréciées:
 
   * layout
-  * view
+  * view - remplacée par ``template``
   * theme
   * autoLayout
-  * viewPath
+  * viewPath - remplacée par ``templatePath``
   * layoutPath
 
   Au lieu de définir ces propriétés dans vos controllers, vous devrez les
