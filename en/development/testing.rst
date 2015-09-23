@@ -48,7 +48,7 @@ tests::
     
     phpunit --version
     
-    Please refer to the PHPUnit documenation for instructions regarding
+    Please refer to the PHPUnit documentation for instructions regarding
     `Globally installing the PHPUnit PHAR on Windows http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`_.
 
 Test Database Setup
