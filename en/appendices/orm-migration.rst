@@ -189,7 +189,7 @@ the results taken from the database is not actually required::
         });
 
 Queries can be seen as the result object, trying to iterate the query, calling
-``toArray()`` or any method inherited from :ref:`collection <collection-objects>`,
+``toArray()`` or any method inherited from :doc:`collection </core-libraries/collections>`,
 will result in the query being executed and results returned to you.
 
 The biggest difference you will find when coming from CakePHP 2.x is that
@@ -250,7 +250,8 @@ finder methods in 3.0::
 As you can see, they are pretty straightforward, they get a Query object instead
 of an array and must return a Query object back. For 2.x users that implemented
 afterFind logic in custom finders, you should check out the :ref:`map-reduce`
-section, or use the features found on the :ref:`collection-objects`. If in your
+section, or use the features found on the
+:doc:`collection objects </core-libraries/collections>`. If in your
 models you used to rely on having an afterFind for all find operations you can
 migrate this code in one of a few ways:
 
