@@ -881,7 +881,7 @@ JSON respects hidden & virtual field settings on all entity objects
 within a result set.
 
 In addition to making serialization easy, result sets are a 'Collection' object and
-support the same methods that :ref:`collection objects<collection-objects>`
+support the same methods that :doc:`collection objects </core-libraries/collections>`
 do. For example, you can extract a list of unique tags on a collection of
 articles quite easily::
 
