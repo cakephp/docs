@@ -22,6 +22,8 @@ Console
   a snippet of code that can be put into ``eval()`` to trigger an interactive
   console. This is very helpful when debugging in test cases, or other CLI
   scripts.
+- The ``--verbose`` and ``--quiet`` console options now control stdout/stderr
+  logging output levels.
 
 Shell Helpers Added
 -------------------
