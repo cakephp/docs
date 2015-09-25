@@ -474,7 +474,7 @@ You can control the output level of shells, by using the ``--quiet`` and
 consistently control output levels inside your CakePHP shells.
 
 The ``--quiet`` and ``--verbose`` options also control how logging data is
-output to stdout/stderr. Normally info and higher log messages are output
+output to stdout/stderr. Normally info and higher log messages are output to
 stdout/stderr. When ``--verbose`` is used, debug logs will be output to stdout.
 When ``--quiet`` is used, only warning and higher log messages will be output to
 stderr.
