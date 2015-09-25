@@ -143,6 +143,7 @@ tags::
         <p>You are the admin user.</p>
     <?php endif; ?>
 
+We allow PHP closing tags (``?>``) at the end of .ctp files.
 
 Comparison
 ==========
