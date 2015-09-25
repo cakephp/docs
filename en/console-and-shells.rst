@@ -448,7 +448,8 @@ appropriately. The user of the shell, can then decide what level of detail
 they are interested in by setting the correct flag when calling the shell.
 :php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
-* QUIET - Only absolutely important information should be marked for quiet output.
+* QUIET - Only absolutely important information should be marked for quiet
+  output.
 * NORMAL - The default level, and normal usage.
 * VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
   for debugging as VERBOSE.
@@ -468,9 +469,15 @@ You can mark output as follows::
     $this->out('extra message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-You can control the output level of shells, by using the ``--quiet`` and ``--verbose``
-options. These options are added by default, and allow you to consistently control
-output levels inside your CakePHP shells.
+You can control the output level of shells, by using the ``--quiet`` and
+``--verbose`` options. These options are added by default, and allow you to
+consistently control output levels inside your CakePHP shells.
+
+The ``--quiet`` and ``--verbose`` options also control how logging data is
+output to stdout/stderr. Normally info and higher log messages are output
+stdout/stderr. When ``--verbose`` is used, debug logs will be output to stdout.
+When ``--quiet`` is used, only warning and higher log messages will be output to
+stderr.
 
 Styling Output
 --------------
