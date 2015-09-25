@@ -214,6 +214,16 @@ dl.docutils {
 .masthead {
 	background: #417282 url(header-bg.png) repeat-x;
 	position: relative;
+}
+/* This differs from other sites because the search results need to overflow the
+ * masthead element. The book has an additional wrapping div in .header-backing
+ * to trap the halftone pattern
+ */
+.header-backing-trap {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
 	overflow: hidden;
 }
 .header-backing {
