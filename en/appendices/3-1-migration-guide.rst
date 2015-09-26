@@ -49,6 +49,7 @@ Controller
   * theme
   * autoLayout
   * viewPath - replaced with ``templatePath``
+  * viewClass - replaced with ``className``
   * layoutPath
 
   Instead of setting these properties on your controllers, you should set them
