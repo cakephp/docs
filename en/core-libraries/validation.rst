@@ -223,10 +223,10 @@ the value for ``show_profile_picture`` is empty. You could also use the
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-The ``allowEmpty()`` and ``notEmpty()`` methods will also accept a callback
-function as their last argument. If present, the callback determines whether or
-not the rule should be applied. For example, a field is sometimes allowed
-to be empty::
+The ``allowEmpty()``, ``notEmpty()`` and ``requirePresence()`` methods will also
+accept a callback function as their last argument. If present, the callback
+determines whether or not the rule should be applied. For example, a field is
+sometimes allowed to be empty::
 
     $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
@@ -241,6 +241,21 @@ met::
 
 In the above example, the ``email_frequency`` field cannot be left empty if the
 the user wants to receive the newsletter.
+
+Further it's also possible to require a field to be present under certain
+conditions only::
+
+    $validator->requirePresence('full_name', function ($context) {
+        return $context['data']['action'] === 'subscribe';
+    });
+    $validator->requirePresence('email');
+
+This would require the ``full_name`` field to be present only in case the user
+wants to create a subscription, while the ``email`` field would always be
+required, since it would also be needed when canceling a subscription.
+
+.. versionadded:: 3.1.1
+    The callable support for ``requirePresence()`` was added in 3.1.1
 
 Nesting Validators
 ------------------
