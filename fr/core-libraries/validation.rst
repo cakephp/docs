@@ -239,10 +239,10 @@ d'upload de fichiers::
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-Les méthodes de validation ``allowEmpty()`` et ``notEmpty()`` prennent
-également une fonction appelable en dernier argument, ce qui determine si oui
-ou non la règle doit être appliquée. Par exemple on peut autoriser parfois à
-un champ à être vide::
+Les méthodes de validation ``allowEmpty()``, ``notEmpty()`` et
+``requirePresence()`` prennent également une fonction appelable en dernier
+argument, ce qui determine si oui ou non la règle doit être appliquée. Par
+exemple on peut autoriser parfois à un champ à être vide::
 
     $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
@@ -257,6 +257,21 @@ conditions sont vérifiées::
 
 Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
 si l'utilisateur veut recevoir la newsletter.
+
+Further it's also possible to require a field to be present under certain
+conditions only::
+
+    $validator->requirePresence('full_name', function ($context) {
+        return $context['data']['action'] === 'subscribe';
+    });
+    $validator->requirePresence('email');
+
+This would require the ``full_name`` field to be present only in case the user
+wants to create a subscription, while the ``email`` field would always be
+required, since it would also be needed when canceling a subscription.
+
+.. versionadded:: 3.1.1
+The callable support for ``requirePresence()`` was added in 3.1.1
 
 Imbriquer des Validators
 ------------------------
