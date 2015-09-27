@@ -23,6 +23,8 @@ Console
 - La fonction ``breakpoint()`` a été ajoutée. Cette fonction fournit un snippet
   de code qui peut être utilisé dans un ``eval()`` pour lancer une console
   interactive. C'est très utile pour debugger les tests ou tout script CLI.
+- Les options de console ``--verbose`` et ``--quiet`` controllent maintenant
+  les niveaux de log de stdout/stderr.
 
 Ajout des Shell Helpers
 -----------------------
@@ -48,6 +50,7 @@ Controller
   * theme
   * autoLayout
   * viewPath - remplacée par ``templatePath``
+  * viewClass - remplacée par ``className``
   * layoutPath
 
   Au lieu de définir ces propriétés dans vos controllers, vous devrez les

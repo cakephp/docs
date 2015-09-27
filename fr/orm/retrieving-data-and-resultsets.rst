@@ -937,7 +937,7 @@ entity dans un ensemble de résultat.
 
 En plus de faciliter la sérialisation, les ensembles de résultats sont un
 objet 'Collection' et supportent les mêmes méthodes que les
-:ref:`objets collection<collection-objects>`. Par exemple, vous pouvez extraire
+:doc:`objets collection </core-libraries/collections>`. Par exemple, vous pouvez extraire
 une liste des tags uniques sur une collection d'articles assez facilement::
 
     // Dans un controller ou une méthode de table.

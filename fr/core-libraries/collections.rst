@@ -1,9 +1,7 @@
-.. php:namespace:: Cake\Collection
-
-.. _collection-objects:
-
 Collections
 ###########
+
+.. php:namespace:: Cake\Collection
 
 .. php:class:: Collection
 

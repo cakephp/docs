@@ -502,6 +502,13 @@ options ``--quiet`` et ``--verbose``. Ces options sont ajoutées par défaut,
 et vous autorise à contrôler la cohérence du niveau de sortie à l'intérieur
 de vos shells CakePHP.
 
+Les options de console ``--quiet`` et ``--verbose`` contrôlent également
+les données sont loguées sont envoyées à stdout/stderr. Normalement, info et les
+message de log de plus haut niveau sont envoyés vers stdout/stderr. Lorsque
+``--verbose`` est utilisé, les logs de debug seront envoyés à stdout. Lorsque
+``--quiet`` est utilisé, seulement les warning et messages plus haut seront
+envoyés à stderr.
+
 Style de sortie
 ===============
 
