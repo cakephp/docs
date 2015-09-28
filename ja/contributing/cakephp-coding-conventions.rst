@@ -6,7 +6,7 @@ CakePHP の開発者は以下のコーディング規約を使います。
 その他の CakePHP のコンポーネント(訳注:原文 *CakeIngredients* 、ケーキの材料のこと)の開発でも同じ規約に従うことが推奨されます。
 
 `CakePHP Code Sniffer
-<https://github.com/cakephp/cakephp-codesniffer>`_ を使って、\
+<https://github.com/cakephp/cakephp-codesniffer>`_ を使って、
 コードが規約に沿っているかどうかをチェックすることができます。
 
 言語
@@ -135,6 +135,7 @@ CakePHP の開発者は以下のコーディング規約を使います。
         <p>You are the admin user.</p>
     <?php endif; ?>
 
+.ctp ファイルの末尾に PHP の終了タグ (``?>``) を使用できます。
 
 比較
 =====
