@@ -40,13 +40,11 @@ tests::
 .. tip::
 
     As a convenience you can make phpunit.phar available globally
-    on Unix or Linux with the following:
+    on Unix or Linux with the following::
     
-    chmod +x phpunit.phar
-    
-    sudo mv phpunit.phar /usr/local/bin/phpunit
-    
-    phpunit --version
+      chmod +x phpunit.phar
+      sudo mv phpunit.phar /usr/local/bin/phpunit
+      phpunit --version
     
     Please refer to the PHPUnit documentation for instructions regarding
     `Globally installing the PHPUnit PHAR on Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`_.

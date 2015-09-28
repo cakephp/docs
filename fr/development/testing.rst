@@ -35,10 +35,22 @@ Vous pouvez maintenant lancer PHPUnit en utilisant::
 Utiliser le fichier PHAR
 ------------------------
 
-Après avoir téléchargé le fichier ``phpunit.phar``, vous pouvez l'utiliser pour
+Après avoir téléchargé le fichier **phpunit.phar**, vous pouvez l'utiliser pour
 lancer vos tests::
 
     php phpunit.phar
+
+.. tip::
+
+    Par souci de commodité vous pouvez rendre phpunit.phar disponible
+    globalement sur Unix ou Linux via les commandes suivantes::
+    
+      chmod +x phpunit.phar
+      sudo mv phpunit.phar /usr/local/bin/phpunit
+      phpunit --version
+    
+    Référez vous à la documentation de PHPUnit pour les instructions concernant
+    `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`_.
 
 Tester la Configuration de la Base de Données
 =============================================

@@ -213,8 +213,8 @@ données qui n'est en fait pas nécessaire::
 
 Les requêtes peuvent être vues comme un objet de résultat, essayant d'itérer la
 requête, appelant ``toArray()`` ou toute méthode héritée de
-:ref:`collection <collection-objects>`, va faire que la requête sera exécutée
-et les résultats vous seront retournés.
+:doc:`collection </core-libraries/collections>`, va faire que la requête sera
+exécutée et les résultats vous seront retournés.
 
 La plus grande différence que vous trouverez quand vous venez de CakePHP 2.x est
 que ``find('first')`` n'existe plus. Il existe un remplacement trivial pour
@@ -276,9 +276,9 @@ Comme vous pouvez le voir, ils sont assez simples, ils obtiennent un objet
 Query à la place d'un tableau et doivent retourner un objet Query en retour.
 Pour 2.x, les utilisateurs qui implémentaient la logique afterFind dans les
 finders personnalisés, vous devez regarder la section :ref:`map-reduce`, ou
-utiliser les :ref:`collection-objects`. Si dans vos models, vous aviez pour
-habitude d'avoir un afterFind pour toutes les opérations de find, vous
-pouvez migrer ce code d'une des façons suivantes:
+utiliser les :doc:`collections </core-libraries/collections>`. Si dans vos
+models, vous aviez pour habitude d'avoir un afterFind pour toutes les
+opérations de find, vous pouvez migrer ce code d'une des façons suivantes:
 
 1. Surcharger la méthode constructeur de votre entity et faire le formatage supplémentaire ici.
 2. Créer des méthodes accesseurs dans votre entity pour créer les propriétés virtuelles.

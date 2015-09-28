@@ -76,7 +76,7 @@ commentaires approuvés et ceux qui n'ont pas encore été modérés::
             $this->hasMany('UnapprovedComments', [
                 'className' => 'Comments',
                 'conditions' => ['approved' => false],
-                'propertyName' => 'unnaproved_comments'
+                'propertyName' => 'unapproved_comments'
             ]);
         }
     }

@@ -271,7 +271,7 @@ wants to create a subscription, while the ``email`` field would always be
 required, since it would also be needed when canceling a subscription.
 
 .. versionadded:: 3.1.1
-The callable support for ``requirePresence()`` was added in 3.1.1
+    The callable support for ``requirePresence()`` was added in 3.1.1
 
 Imbriquer des Validators
 ------------------------
