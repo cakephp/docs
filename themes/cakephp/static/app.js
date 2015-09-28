@@ -123,7 +123,11 @@ App.InlineSearch = (function () {
 							link.append('<strong>' + item.title + '</strong><br />');
 						}
 						var span = $('<span></span>');
-						span.text(item.contents.join("\n"));
+						var text = item.contents;
+						if (text.join) {
+							text = text.join("\n");
+						}
+						span.text(text);
 						div.append(link.append(span));
 						return div.html();
 					}
