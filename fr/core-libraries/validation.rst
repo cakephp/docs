@@ -258,20 +258,22 @@ conditions sont vérifiées::
 Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
 si l'utilisateur veut recevoir la newsletter.
 
-Further it's also possible to require a field to be present under certain
-conditions only::
+De plus il est aussi possible de demander à ce qu'un champ soit présent sous
+certaines conditions seulement::
 
     $validator->requirePresence('full_name', function ($context) {
         return $context['data']['action'] === 'subscribe';
     });
     $validator->requirePresence('email');
 
-This would require the ``full_name`` field to be present only in case the user
-wants to create a subscription, while the ``email`` field would always be
-required, since it would also be needed when canceling a subscription.
+Ceci demanderait à ce que le champ ``full_name`` soit présent seulement dans le
+cas où l'utilisateur veut créer une inscription, alors que le champ ``email``
+est toujours requis puisqu'il serait aussi demandée lors de l'annulation d'une
+inscription.
 
 .. versionadded:: 3.1.1
-    The callable support for ``requirePresence()`` was added in 3.1.1
+    La possibilité de faire un callable pour ``requirePresence()`` a été ajoutée
+    dans 3.1.1.
 
 Imbriquer des Validators
 ------------------------
