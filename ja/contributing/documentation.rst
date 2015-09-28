@@ -251,15 +251,15 @@ ReST (Re Structured Text) は markdown や textile と同様のプレーンテ�
     リンクのテキストはリンクの先にあるタイトルになります。また、
     ``:ref:`リンクテキスト <ラベル名>``` として自由にリンクのテキストを指定することができます。
 
-Prevent Sphinx to Output Warnings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sphinx からの警告の出力を防ぐ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a file is not referenced in a toc-tree. It's
-a great way to ensure that all files have a link directed to them, but
-sometimes, you don't need to insert a link for a file, eg. for our
-`epub-contents` and `pdf-contents` files. In those cases, you can add
-``:orphan:`` at the top of the file, to suppress warnings that the file is not
-in the toc-tree.
+Sphinx は、 ファイルが toc-tree 内で参照されない場合、警告を出力します。
+それは、全てのファイルがそれらを指すリンクを持っていることを保証する素晴らしい方法です。
+しかし、時には、ファイルへのリンクの挿入が必要無いこともあります。例えば、
+`epub-contents` や `pdf-contents` ファイルなどです。そんなとき、
+ファイルの先頭に ``:orphan:`` を追加することで、 ファイルが
+toc-tree に無い警告を抑制することができます。
 
 クラスとその内容を記述する
 --------------------------
@@ -343,16 +343,16 @@ CakePHP のドキュメントは `phpdomain
 
    クラスのプロパティ・属性を記述します。
 
-Prevent Sphinx to Output Warnings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sphinx からの警告の出力を防ぐ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a function is referenced in multiple files. It's
-a great way to ensure that you did not add a function two times, but
-sometimes, you actually want to write a function in two or more files, eg.
-`debug object` is referenced in `/development/debugging` and in
-`/core-libraries/global-constants-and-functions`. In this case, you can add
-``:noindex:`` under the function debug to suppress warnings. Keep only
-one reference **without** ``:no-index:`` to still have the function referenced::
+ひとつの関数が複数のファイルで参照されている場合、Sphinx は警告を出力します。
+それは、ひとつの関数を何度も追加されないようにすることを保証する素晴らしい方法です。しかし、
+ときには２つ以上のファイルで、ひとつの関数を書きたいこともあります。
+例えば、 `debug 関数` は、 `/development/debugging` と
+`/core-libraries/global-constants-and-functions` で参照されています。
+この場合、警告を抑えるために debug 関数の下に ``:noindex:`` を追加します。
+関数に対する ``:no-index:`` を **付けない** 参照はひとつだけにキープしてください。 ::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
         :noindex:
