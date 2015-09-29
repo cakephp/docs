@@ -19,15 +19,12 @@ create a table in our database. If you already have an articles table in your
 database, erase it.
 
 Now open your application's **composer.json** file. Normally you would see that
-the migrations plugin is already under ``require``. If not add it as follows::
+the migrations plugin is already under ``require``. If not add using::
 
-    "require": {
-        "cakephp/migrations": "~1.0"
-    }
+    composer require cakephp/migrations:~1.0
 
-Then run ``composer update``. The migrations plugin will now be in your
-application's **plugins** folder. Also add ``Plugin::load('Migrations');`` in
-your application's bootstrap.php file.
+The migrations plugin will now be in your application's **plugins** folder.
+Also add ``Plugin::load('Migrations');`` in your application's bootstrap.php file.
 
 Once the plugin is loaded, run the following command to create a migration file::
 
@@ -292,7 +289,7 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
         <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th>id</th>
+                <th>Id</th>
                 <th>Parent Id</th>
                 <th>Lft</th>
                 <th>Rght</th>
@@ -305,10 +302,10 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
         <tbody>
         <?php foreach ($categories as $category): ?>
             <tr>
-                <td><?= $this->Number->format($category->id) ?></td>
-                <td><?= $this->Number->format($category->parent_id) ?></td>
-                <td><?= $this->Number->format($category->lft) ?></td>
-                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= $category->id ?></td>
+                <td><?= $category->parent_id ?></td>
+                <td><?= $category->lft ?></td>
+                <td><?= $category->rght ?></td>
                 <td><?= h($category->name) ?></td>
                 <td><?= h($category->description) ?></td>
                 <td><?= h($category->created) ?></td>
