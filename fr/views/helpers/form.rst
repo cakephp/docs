@@ -883,8 +883,9 @@ Crée un jeu d'inputs radios.
   première option. Quand à ``true``, le label radio sera 'vide'. Définissez
   cette option pour contrôler la valeur du label.
 
-Generally ``$options`` is a simple key => value pair. However, if you need to
-put custom attributes on your radio buttons you can use an expanded format::
+Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
+vous avez besoin de mettre des attributs personnaliés sur vos boutons radio,
+vous pouvez utiliser le format étendu::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -895,7 +896,7 @@ put custom attributes on your radio buttons you can use an expanded format::
         ]
     );
 
-    // Will output
+    // Affichera
     <input type="hidden" name="favorite_color" value="">
     <label for="favorite-color-r">
         <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
@@ -1678,13 +1679,15 @@ Par exemple::
     // Crée un ensemble d'inputs radio avec notre div personnalisé autour
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
-Similar to input containers, the ``input()`` method will also attempt to use
-distinct templates for each form group. A form group is a combo of label and
-input. For example, when creating a radio input the ``radioFormGroup`` will be
-used if it is present. If that template is missing by default each set of label
-& input is rendered using the ``formGroup`` template. For example::
+De la même manière qu'avec les conteneurs d'input, la méthode ``ìnput()``
+essayera d'utiliser différents templates pour chaque groupe de formulaire
+(formGroup). Un group de formulaire est un combo d'un label et d'une input.
+Par exemple, lorsque vous créez des inputs de type radio, le template
+``radioFormGroup`` sera utilisé s'il est présent. Si ce template est manquant,
+par défaut chaque ensemble label & input sera généré en utilisant le template
+``formGroup``::
 
-    // Add custom radio form group
+    // Ajoute un groupe de formulaire pour radio personnalisé
     $this->Form->templates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
@@ -1785,8 +1788,9 @@ générées, définissez les à ``false`` dans le paramètre fields::
 Créer des Inputs pour les Données Associées
 ===========================================
 
-Creating forms for associated data is straightforward and is closely related to
-the paths in your entity's data. Assuming the following table relations:
+Créer des formulaires pour les données associées est assez simple et est
+étroitement lié au chemins des données de votre entity. Imaginons les
+relations suivantes:
 
 * Authors HasOne Profiles
 * Authors HasMany Articles
@@ -1794,20 +1798,20 @@ the paths in your entity's data. Assuming the following table relations:
 * Articles BelongsTo Authors
 * Articles BelongsToMany Tags
 
-If we were editing an article with its associations loaded we could
-create the following inputs::
+Si nous éditions un article avec ces associations chargées, nous pourrions
+créer les inputs suivantes::
 
     $this->Form->create($article);
 
-    // Article inputs.
+    // Inputs article
     echo $this->Form->input('title');
 
-    // Author inputs (belongsTo)
+    // Inputs auteur (belongsTo)
     echo $this->Form->input('author.id');
     echo $this->Form->input('author.first_name');
     echo $this->Form->input('author.last_name');
 
-    // Author profile (belongsTo + hasOne)
+    // Profile de l'auteur (belongsTo + hasOne)
     echo $this->Form->input('author.profile.id');
     echo $this->Form->input('author.profile.username');
 
@@ -1817,25 +1821,25 @@ create the following inputs::
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
 
-    // Multiple select element for belongsToMany
+    // Select multiple pour belongsToMany
     echo $this->Form->input('tags._ids', [
         'type' => 'select',
         'multiple' => true,
         'options' => $tagList,
     ]);
 
-    // Inputs for the joint table (articles_tags)
+    // Inputs pour la table de jointure (articles_tags)
     echo $this->Form->input('tags.0._joinData.starred');
     echo $this->Form->input('tags.1._joinData.starred');
 
-    // Comments inputs (hasMany)
+    // Inputs commentaires (hasMany)
     echo $this->Form->input('comments.0.id');
     echo $this->Form->input('comments.0.comment');
     echo $this->Form->input('comments.1.id');
     echo $this->Form->input('comments.1.comment');
 
-The above inputs could then be marshalled into a completed entity graph using
-the following code in your controller::
+Le code ci-dessus pourrait ensuite être converti en un graph d'entity en
+utilisant le code suivant dans votre controller::
 
     $article = $this->Articles->patchEntity($article, $this->request->data, [
         'associated' => [
