@@ -289,7 +289,7 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
         <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th>id</th>
+                <th>Id</th>
                 <th>Parent Id</th>
                 <th>Lft</th>
                 <th>Rght</th>
@@ -302,10 +302,10 @@ In **src/Template/Categories/index.ctp** replace the existing content with::
         <tbody>
         <?php foreach ($categories as $category): ?>
             <tr>
-                <td><?= $this->Number->format($category->id) ?></td>
-                <td><?= $this->Number->format($category->parent_id) ?></td>
-                <td><?= $this->Number->format($category->lft) ?></td>
-                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= $category->id ?></td>
+                <td><?= $category->parent_id ?></td>
+                <td><?= $category->lft ?></td>
+                <td><?= $category->rght ?></td>
                 <td><?= h($category->name) ?></td>
                 <td><?= h($category->description) ?></td>
                 <td><?= h($category->created) ?></td>
