@@ -104,7 +104,7 @@ such as debugging and translating content.
     which it was called.
     Also see :doc:`/development/debugging`
 
-.. php:function:: env(string $key)
+.. php:function:: env(string $key, string $default = null)
 
     Gets an environment variable from available sources. Used as a
     backup if ``$_SERVER`` or ``$_ENV`` are disabled.
