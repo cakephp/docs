@@ -884,7 +884,7 @@ Crée un jeu d'inputs radios.
   cette option pour contrôler la valeur du label.
 
 Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
-vous avez besoin de mettre des attributs personnaliés sur vos boutons radio,
+vous avez besoin de mettre des attributs personnalisés sur vos boutons radio,
 vous pouvez utiliser le format étendu::
 
     echo $this->Form->radio(
