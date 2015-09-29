@@ -107,7 +107,7 @@ CakePHP, comme le débogage et la traduction de contenu.
     la ligne depuis laquelle il a été appelé.
     Voir aussi  :doc:`/development/debugging`
 
-.. php:function:: env(string $key)
+.. php:function:: env(string $key, string $default = null)
 
     Récupère une variable d'environnement depuis les sources disponibles.
     Utilisé en secours si ``$_SERVER`` ou ``$_ENV`` sont désactivés.

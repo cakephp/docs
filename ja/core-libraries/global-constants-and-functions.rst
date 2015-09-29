@@ -192,7 +192,7 @@ CakePHPを使った皆さんの日常のほとんどの業務ではコアクラ�
     ``$showFrom`` が ``false`` にセットされない場合、それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
     :doc:`/development/debugging` も参照して下さい
 
-.. php:function:: env(string $key)
+.. php:function:: env(string $key, string $default = null)
 
     ..
         Gets an environment variable from available sources. Used as a
