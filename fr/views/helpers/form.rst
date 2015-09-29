@@ -883,8 +883,9 @@ Crée un jeu d'inputs radios.
   première option. Quand à ``true``, le label radio sera 'vide'. Définissez
   cette option pour contrôler la valeur du label.
 
-Generally ``$options`` is a simple key => value pair. However, if you need to
-put custom attributes on your radio buttons you can use an expanded format::
+Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
+vous avez besoin de mettre des attributs personnaliés sur vos boutons radio,
+vous pouvez utiliser le format étendu::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -895,7 +896,7 @@ put custom attributes on your radio buttons you can use an expanded format::
         ]
     );
 
-    // Will output
+    // Affichera
     <input type="hidden" name="favorite_color" value="">
     <label for="favorite-color-r">
         <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
