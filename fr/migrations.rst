@@ -247,6 +247,14 @@ méthode ``table()``::
 Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisée
 comme clé primaire.
 
+.. note::
+
+        Quand vous spécifiez une clé primaire personnalisée avec les lignes de
+        commande, vous devez la noter comme clé primaire dans le champ id,
+        sinon vous obtiendrez une erreur de champs id dupliqués, par exemple::
+
+            bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
+
 Depuis Migrations 1.3, une nouvelle manière de gérer les clés primaires a été
 introduite. Pour l'utiliser, votre classe de migration devra étendre la
 nouvelle classe ``Migrations\AbstractMigration``.
