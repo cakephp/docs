@@ -210,7 +210,7 @@ les commandes suivantes::
 Ceci va générer les controllers, models, views, leurs cas de tests
 correspondants et les fixtures pour nos ressources users, bookmarks et tags.
 Si vous avez stoppé votre serveur, relancez-le et allez sur
-**http://localhost:8765/bookmarks**.
+**http://localhost:8765/bookmarker/bookmarks**.
 
 Vous devriez voir une application basique mais fonctionnelle fournissant
 des accès aux données vers les tables de la base de données de votre
