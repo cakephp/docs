@@ -21,16 +21,13 @@ articles dans votre base de données, supprimez-la.
 
 Maintenant ouvrez le fichier **composer.json** de votre application.
 Normalement vous devriez voir que le plugin migrations est déjà dans
-``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
+``require``. Si ce n'est pas le cas, ajoutez-le en utilisant::
 
-    "require": {
-        "cakephp/migrations": "~1.0"
-    }
+    composer require cakephp/migrations:~1.0
 
-Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
-le dossier **plugins** de votre application. Ajoutez aussi
-``Plugin::load('Migrations');`` dans le fichier bootstrap.php de votre
-application.
+Le plugin migrations va maintenant être dans le dossier **plugins** de votre
+application. Ajoutez aussi ``Plugin::load('Migrations');`` dans le fichier
+bootstrap.php de votre application.
 
 Une fois que le plugin est chargé, lancez la commande suivante pour créer un
 fichier de migration::
@@ -303,7 +300,7 @@ ceci::
         <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th>id</th>
+                <th>Id</th>
                 <th>Parent Id</th>
                 <th>Lft</th>
                 <th>Rght</th>
@@ -316,10 +313,10 @@ ceci::
         <tbody>
         <?php foreach ($categories as $category): ?>
             <tr>
-                <td><?= $this->Number->format($category->id) ?></td>
-                <td><?= $this->Number->format($category->parent_id) ?></td>
-                <td><?= $this->Number->format($category->lft) ?></td>
-                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= $category->id ?></td>
+                <td><?= $category->parent_id ?></td>
+                <td><?= $category->lft ?></td>
+                <td><?= $category->rght ?></td>
                 <td><?= h($category->name) ?></td>
                 <td><?= h($category->description) ?></td>
                 <td><?= h($category->created) ?></td>
