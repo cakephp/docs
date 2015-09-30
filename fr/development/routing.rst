@@ -1131,7 +1131,7 @@ Appelez fallbacks comme ceci::
 Est équivalent à ces appels explicites::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
 
 .. note::
 

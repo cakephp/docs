@@ -848,7 +848,7 @@ You can specify an alternative inflection type using the ``inflect`` option::
             'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
         ];
     })
-    
+
 The above will generate URLs styled like: **/blog-posts/\***.
 
 .. note::
@@ -856,7 +856,7 @@ The above will generate URLs styled like: **/blog-posts/\***.
     As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as its
     default route class. Using the ``'inflect' => 'dasherize'`` option when
     connecting resource routes is recommended for URL consistency.
-    
+
 .. index:: passed arguments
 .. _passed-arguments:
 
@@ -1079,7 +1079,7 @@ Calling fallbacks like so::
 Is equivalent to the following explicit calls::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
 
 .. note::
 

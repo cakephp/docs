@@ -1014,7 +1014,7 @@ URLパラメーターがルートに一尉しない時は、 ``false`` が返り
 これは正規の呼び出しに従うのと同じです。::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
 
 .. note::
 
