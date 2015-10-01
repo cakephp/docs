@@ -384,6 +384,14 @@ Notez que lorsque vous faites un snapshot avec la commande
 ``cake bake migration_snapshot``, la migration créée sera automatiquement marquée
 comme "migrée".
 
+.. versionadded:: cakephp/migrations 1.3.1
+
+Une nouvelle valeur spéciale ``all`` a été ajoutée pour l'argument version de
+la commande ``mark_migrated``. Si vous l'utilisez, toutes les migrations
+trouvées seront marquées comme "migrées"::
+
+    bin/cake migrations mark_migrated all
+
 Utiliser Migrations dans les Plugins
 ====================================
 
