@@ -143,7 +143,7 @@ vous pouvez utiliser une fonction de callback pour la retourner::
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
-Vous aurez souvent besoin d'extraire une clé habituelle présente dans plusieurs
+Vous aurez souvent besoin d'extraire une clé commune présente dans plusieurs
 tableaux ou objets qui sont imbriqués profondément dans d'autres structures.
 Dans ces cas-là, vous pouvez utilisez le matcher ``{*}`` dans la clé du chemin.
 Ce matcher est souvent utile quand vous faîtes correspondre des données
@@ -174,7 +174,7 @@ d'association HasMany et BelongsToMany::
 Ce dernier exemple utilise ``toList()`` au contraire des autres exemples, ce qui
 est important quand vous récupérez des résultats avec de possibles clés
 dupliquées. En utilisant ``toList()``, nous aurons la garantie de récupérer
-toutes les valeurs même si il y a des clés dupliquées.
+toutes les valeurs même s'il y a des clés dupliquées.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
@@ -793,7 +793,7 @@ appliquer des tests A/B, vous pouvez utiliser la fonction ``sample()``::
     $testSubjects = $collection->sample(20);
 
 ``sample()`` va prendre au moins le nombre de valeurs que vous spécifiez dans
-le premier argument. Si il n'y a pas assez d'éléments dans la collection qui
+le premier argument. S'il n'y a pas assez d'éléments dans la collection qui
 satisfont le sample, la collection sera retournée en entier dans un ordre au
 hasard.
 
@@ -915,7 +915,7 @@ Veuillez noter que les éléments sont insérés par la position dans laquelle
 ils sont trouvés, ainsi le premier élément de la deuxième collection est
 fusionné dans le premier élément de la première collection.
 
-Si il y a assez d'éléments de la seconde collection à insérer dans la première,
+S'il y a assez d'éléments de la seconde collection à insérer dans la première,
 alors la propriété cible va être remplie avec les valeurs ``null``::
 
     $languages = [
