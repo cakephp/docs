@@ -143,9 +143,11 @@ vous pouvez utiliser une fonction de callback pour la retourner::
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
-Often, the properties you need to extract a common key present in multiple
-arrays or objects that are deeply nested inside other structures. For those
-cases you can use the ``{*}`` matcher in the path key::
+Vous aurez souvent besoin d'extraire une clé habituelle présente dans plusieurs
+tableaux ou objets qui sont imbriqués profondément dans d'autres structures.
+Dans ces cas-là, vous pouvez utilisez le matcher ``{*}`` dans la clé du chemin.
+Ce matcher est souvent utile quand vous faîtes correspondre des données
+d'association HasMany et BelongsToMany::
 
     $data = [
         [
@@ -167,7 +169,12 @@ cases you can use the ``{*}`` matcher in the path key::
 
     $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
     $numbers->toList();
-    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+    // Retourne ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+
+Ce dernier exemple utilise ``toList()`` au contraire des autres exemples, ce qui
+est important quand vous récupérez des résultats avec de possibles clés
+dupliquées. En utilisant ``toList()``, nous aurons la garantie de récupérer
+toutes les valeurs même si il y a des clés dupliquées.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
