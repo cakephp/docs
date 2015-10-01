@@ -77,7 +77,7 @@ au Client Http devront être nettoyées comme suit::
         'search' => ltrim($this->request->data('search'), '@'),
     ]);
 
-Si il est nécessaire de garder les caractères du début ``@`` dans les chaînes
+S'il est nécessaire de garder les caractères du début ``@`` dans les chaînes
 de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
 ``http_build_query()``::
 

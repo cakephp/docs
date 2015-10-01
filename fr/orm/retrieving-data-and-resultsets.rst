@@ -1000,7 +1000,7 @@ Vérifier si une Requête Query ou un ResultSet est vide
 ------------------------------------------------------
 
 Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
-pour voir si il contient au moins une colonne. Appeler ``isEmpty()`` sur un
+pour voir s'il contient au moins une colonne. Appeler ``isEmpty()`` sur un
 objet Query va évaluer la requête::
 
     // VérifieCheck une requête.
