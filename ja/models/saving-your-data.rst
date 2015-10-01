@@ -375,14 +375,6 @@ hasMany アソシエーションの関連レコードを保存するには、
     メインのモデルの外部キーは、関連モデルのidフィールドに保存されます。
     (``$this->RelatedModel->id`` のように)
 
-.. warning::
-
-    bool 値の代わりに配列を戻り値としたい場合は、
-    saveAssociated を呼ぶ時に、$options の atomic キーに false をセットしてください。
-
-.. versionchanged:: 2.1
-    ``$options['deep'] = true`` とすることで、2階層以上のデータを保存できるようになりました。
-
 hasMany アソシエーションの関連レコードを保存して、同時に Comment belongsTo User という
 アソシエーションのデータも保存するには、以下のようなデータ配列を準備します。 ::
 
@@ -401,9 +393,10 @@ hasMany アソシエーションの関連レコードを保存して、同時に
 
     $Article->saveAssociated($data, array('deep' => true));
 
-.. versionchanged:: 2.1
-    ``Model::saveAll()`` とそれに関連するメソッドは、複数モデルに対応する `fieldList` を
-    受け取ることができるようになりました。
+.. warning::
+
+    bool 値の代わりに配列を戻り値としたい場合は、
+    saveAssociated を呼ぶ時に、$options の atomic キーに false をセットしてください。
 
 このようにして、複数モデルに対応する ``fieldList`` を渡すことができます。 ::
 
@@ -416,6 +409,12 @@ hasMany アソシエーションの関連レコードを保存して、同時に
 
 fieldList はキーにモデルのエイリアスを、値にフィールドの値一覧を配列で指定します。
 モデル名はネストしません。
+
+.. versionchanged:: 2.1
+    ``Model::saveAll()`` とそれに関連するメソッドは、複数モデルに対応する `fieldList` を
+    受け取ることができるようになりました。
+
+    ``$options['deep'] = true`` とすることで、2階層以上のデータを保存できるようになりました。
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
