@@ -170,7 +170,7 @@ not defined defaults for your database fields, Model::$data will be set to an em
 If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database
 field defaults and the model instance will be ready to save with that data (accessible at ``$this->data``).
 
-If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array.
+If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::$data will be set to an empty array.
 
 .. tip::
 
