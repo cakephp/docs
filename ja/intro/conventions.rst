@@ -76,7 +76,7 @@ their filenames:
 モデルとデータベースの規約
 ==========================
 
-モデルのクラス名は複数形でキャメル記法です。
+テーブルのクラス名は複数形でキャメル記法です。
 People, BigPeople, ReallyBigPeople などは規約に合ったモデル名です。
 
 CakePHP のモデルに対応するテーブル名は、複数形でアンダースコア記法です。
@@ -89,7 +89,7 @@ CakePHP のモデルに対応するテーブル名は、複数形でアンダー
 
 hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連するモデルの(単数形の)名前に \_id を付けたものとして認識されます。
 ケーキ職人(Backer)がケーキ(Cake)を複数持っている(hasMany)としたら、cakes テーブルは、baker\_id を外部キーとして bakers テーブルのデータを参照します。
-categoly\_types のような複数の単語のテーブルでは、外部キーは categoty\_type\_id のようになるでしょう。
+category\_types のような複数の単語のテーブルでは、外部キーは category\_type\_id のようになるでしょう。
 
 モデル間の BelongsToMany の関係で使用される join テーブルは、join するテーブルに合わせて、アルファベット順に（zebras\_apples ではなく、apples\_zebras）並べた名前にしてください。
 
