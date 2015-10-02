@@ -179,7 +179,7 @@ est passé, il sera fusionné avec les champs par défaut de la base de données
 et l'instance du model sera prête à être sauvegardée avec ces données
 (accessible dans ``$this->data``).
 
-Si ``false`` ou ``null`` sont passés pour le paramètre ``$data``, Model::data
+Si ``false`` ou ``null`` sont passés pour le paramètre ``$data``, Model::$data
 sera défini comme un tableau vide.
 
 .. tip::
