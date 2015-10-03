@@ -35,7 +35,7 @@ méthode :php:meth:`Datasource::begin()`. La transaction va seulement finir
 quand le nombre de `commit` et de `rollback` correspond à ceux du début::
 
     $dataSource->begin();
-    // Execute quelques tâches
+    // Exécute quelques tâches
     $dataSource->begin();
     // Quelques tâches en plus
     if (/*la dernière tâche ok*/) {
