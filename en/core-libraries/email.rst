@@ -360,10 +360,10 @@ Creating Custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-**src/Network/Email/ExampleTransport.php** (where Example is the name of your
+**src/Mailer/Transport/ExampleTransport.php** (where Example is the name of your
 transport). To start off your file should look like::
 
-    namespace App\Network\Email;
+    namespace App\Mailer\Transport;
 
     use Cake\Mailer\AbstractTransport;
     use Cake\Mailer\Email;

@@ -388,11 +388,11 @@ Créer des Transports Personnalisés
 
 Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres
 systèmes email (comme SwiftMailer). Pour créer votre transport, créez tout
-d'abord le fichier **src/Network/Email/ExampleTransport.php** (où
+d'abord le fichier **src/Mailer/Transport/ExampleTransport.php** (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 
-    namespace App\Network\Email;
+    namespace App\Mailer\Transport;
 
     use Cake\Mailer\AbstractTransport;
     use Cake\Mailer\Email;
