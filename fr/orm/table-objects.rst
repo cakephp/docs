@@ -86,7 +86,7 @@ utiliser la méthode ``entityClass()`` pour changer les choses::
     {
         public function initialize(array $config)
         {
-            $this->entityClass('App\Model\PO');
+            $this->entityClass('App\Model\Entity\PO');
         }
     }
 

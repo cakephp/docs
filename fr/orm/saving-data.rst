@@ -7,7 +7,7 @@ Sauvegarder les Données
     :noindex:
 
 Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
-voudrez probablement mettre à jour & sauvegarder les changements.
+voudrez probablement mettre à jour et sauvegarder les changements.
 
 Coup d'Oeil sur Enregistrement des Données
 ==========================================
@@ -46,7 +46,7 @@ but::
     use Cake\ORM\TableRegistry;
 
     $articlesTable = TableRegistry::get('Articles');
-    $article = $articlesTable->get(12); // article avec l'id 12
+    $article = $articlesTable->get(12); // Retourne l'article avec l'id 12
 
     $article->title = 'Un nouveau titre pour cet article';
     $articlesTable->save($article);
@@ -186,6 +186,8 @@ compte::
 
     // Dans un controller
     $articles = TableRegistry::get('Articles');
+
+    // Nouvelle entity avec des associations imbriquées
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
@@ -196,8 +198,11 @@ Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
 Comments doivent être prises en compte. D'une autre façon, vous pouvez utiliser
 la notation par point pour être plus bref::
 
-    // Dans un controller.
+    // Dans un controller
     $articles = TableRegistry::get('Articles');
+
+    // Nouvelle entity avec des associations imbriquées en utilisant
+    // la notation par point
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
@@ -206,7 +211,11 @@ Les données associées sont également validées par défaut à moins que le
 contraire ne lui soit spécifié. Vous pouvez également changer l'ensemble
 de validation utilisé par association::
 
+    // Dans un controller
     $articles = TableRegistry::get('Articles');
+
+    // Ne fait pas la validation pour l'association Tags et
+    // appelle l'ensemble de validation 'signup' pour Comments.Users
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
             'Tags' => ['validate' => false],

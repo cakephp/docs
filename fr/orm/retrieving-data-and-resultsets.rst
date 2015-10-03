@@ -524,7 +524,7 @@ définir le second argument à ``true``::
 Passer des Conditions à Contain
 -------------------------------
 
-Avec l'utilisation de ``contain``, vous pouvez restreindre les données
+Avec l'utilisation de ``contain()``, vous pouvez restreindre les données
 retournées par les associations et les filtrer par conditions::
 
     // Dans un controller ou une méthode de table.
@@ -555,7 +555,7 @@ en utilisant la notation par point::
     ]);
 
 Si vous avez défini certaines méthodes de finder personnalisées dans votre table
-associée, vous pouvez les utiliser à l'intérieur de ``contain``::
+associée, vous pouvez les utiliser à l'intérieur de ``contain()``::
 
     // Récupère tous les articles, mais récupère seulement les commentaires qui
     // sont approuvés et populaires.
@@ -573,7 +573,7 @@ associée, vous pouvez les utiliser à l'intérieur de ``contain``::
     utiliser chaque clause que l'objet query fournit.
 
 Si vous devez prendre le contrôle total d'une requête qui est générée, vous
-pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
+pouvez appeler ``contain()`` pour ne pas ajouter les contraintes ``foreignKey``
 à la requête générée. Dans ce cas, vous devez utiliser un tableau en passant
 ``foreignKey`` et ``queryBuilder``::
 
