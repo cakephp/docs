@@ -921,7 +921,7 @@ kullanarak yapabilirsiniz.
 
 Eposta göndermek için Email sınıfını maili göndermek istediğiniz ana makine ile getirmelisiniz::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     $email = new Email();
     $email->domain('www.example.org');

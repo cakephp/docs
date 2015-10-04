@@ -998,7 +998,7 @@ You can do that using the Configure value ``App.fullBaseURL`` from your bootstra
 
 For sending emails, you should provide Email class with the host you want to send the email with::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     $email = new Email();
     $email->domain('www.example.org');
