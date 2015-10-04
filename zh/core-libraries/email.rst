@@ -1,7 +1,7 @@
 Email
 #####
 
-.. php:namespace:: Cake\Network\Email
+.. php:namespace:: Cake\Mailer
 
 .. php:class:: Email(mixed $profile = null)
 

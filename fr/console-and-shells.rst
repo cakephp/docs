@@ -1062,7 +1062,7 @@ config, par exemple.
 Pour envoyer des emails, vous devrez fournir à la classe Email l'hôte avec
 lequel vous souhaitez envoyer l'email en faisant::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     $email = new Email();
     $email->domain('www.example.org');
