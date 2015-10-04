@@ -163,7 +163,7 @@ use TranslateBehavior with ``find('list')``::
     // Data will contain
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
 
-It's recommended to use the same language abbreviations as required for Internationalization and Localization: Either the two letter ISO code of the language like ``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the language and the country where it is spoken. Thus you are consistent and switching the language works identical for both, the Translate Behaviour and Internationalization and Localization.
+It's recommended to use the same language abbreviations as required for :doc:`Internationalization and Localization </core-libraries/internationalization-and-localization>`: Either the two letter ISO code of the language like ``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the language and the country where it is spoken. Thus you are consistent and switching the language works identical for both, the ``Translate Behaviour`` and ``Internationalization and Localization``.
 
 Retrieve All Translations For An Entity
 ---------------------------------------
