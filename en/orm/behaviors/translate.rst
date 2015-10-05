@@ -32,8 +32,8 @@ Table object you want to make translatable::
 Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations::
 
-    // In a controller. Change the locale
-    I18n::locale('spa');
+    // In a controller. Change the locale, e.g. to Spanish
+    I18n::locale('es');
     $this->loadModel('Articles');
 
 Then, get an existing entity::
@@ -65,14 +65,14 @@ in your Entity class::
 Now you can find all translations for a single entity::
 
     $article = $this->Articles->find('translations')->first();
-    echo $article->translation('spa')->title; // 'Un Artículo'
+    echo $article->translation('es')->title; // 'Un Artículo'
 
-    echo $article->translation('eng')->title; // 'An Article';
+    echo $article->translation('en')->title; // 'An Article';
 
 It is equally easy to save multiple translations at once::
 
-    $article->translation('spa')->title = 'Otro Título';
-    $article->translation('fre')->title = 'Un autre Titre';
+    $article->translation('es')->title = 'Otro Título';
+    $article->translation('fr')->title = 'Un autre Titre';
     $this->Articles->save($articles);
 
 If you want to go deeper on how it works or how to tune the
@@ -148,7 +148,7 @@ Reading Translated Content
 As shown above you can use the ``locale()`` method to choose the active
 translation for entities that are loaded::
 
-    I18n::locale('spa');
+    I18n::locale('es');
     $this->loadModel('Articles');
 
     // All entities in results will contain spanish translation
@@ -157,11 +157,13 @@ translation for entities that are loaded::
 This method works with any finder in your tables. For example, you can
 use TranslateBehavior with ``find('list')``::
 
-    I18n::locale('spa');
+    I18n::locale('es');
     $data = $this->Articles->find('list')->toArray();
 
     // Data will contain
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
+
+It's recommended to use the same language abbreviations as required for :doc:`Internationalization and Localization </core-libraries/internationalization-and-localization>`: Either the two letter ISO code of the language like ``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the language and the country where it is spoken. Thus you are consistent and switching the language works identical for both, the ``Translate Behaviour`` and ``Internationalization and Localization``.
 
 Retrieve All Translations For An Entity
 ---------------------------------------
@@ -177,14 +179,14 @@ In the example above you will get a list of entities back that have a
 ``_translations`` property set. This property will contain a list of translation
 data entities. For example the following properties would be accessible::
 
-    // Outputs 'eng'
-    echo $article->_translations['eng']->locale;
+    // Outputs 'en'
+    echo $article->_translations['en']->locale;
 
     // Outputs 'title'
-    echo $article->_translations['eng']->field;
+    echo $article->_translations['en']->field;
 
     // Outputs 'My awesome post!'
-    echo $article->_translations['eng']->body;
+    echo $article->_translations['en']->body;
 
 A more elegant way for dealing with this data is by adding a trait to the entity
 class that is used for your table::
@@ -201,10 +203,10 @@ This trait contains a single method called ``translation``, which lets you
 access or create new translation entities on the fly::
 
     // Outputs 'title'
-    echo $article->translation('eng')->title;
+    echo $article->translation('en')->title;
 
     // Adds a new translation data entity to the article
-    $article->translation('deu')->title = 'Wunderbar';
+    $article->translation('de')->title = 'Wunderbar';
 
 Limiting the Translations to be Retrieved
 -----------------------------------------
@@ -213,11 +215,11 @@ You can limit the languages that are fetched from the database for a particular
 set of records::
 
     $results = $this->Articles->find('translations', [
-        'locales' => ['eng', 'spa']
+        'locales' => ['en', 'es']
     ]);
     $article = $results->first();
-    $spanishTranslation = $article->translation('spa');
-    $englishTranslation = $article->translation('eng');
+    $spanishTranslation = $article->translation('es');
+    $englishTranslation = $article->translation('en');
 
 Preventing Retrieval of Empty Translations
 ------------------------------------------
@@ -265,15 +267,15 @@ simply uses the query builder function for the ``contain`` clause to use the
 Retrieving one language without using I18n::locale
 --------------------------------------------------
 
-calling ``I18n::locale('spa');`` changes the default locale for all translated
+calling ``I18n::locale('es');`` changes the default locale for all translated
 finds, there may be times you wish to retrieve translated content without
 modifying the application's state. For these scenarios use the behavior
 ``locale()`` method::
 
-    I18n::locale('eng'); // reset for illustration
+    I18n::locale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    $this->Articles->locale('spa'); // specific locale
+    $this->Articles->locale('es'); // specific locale
 
     $article = $this->Articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
@@ -282,11 +284,11 @@ Note that this only changes the locale of the Articles table, it would not
 affect the langauge of associated data. To affect associated data it's necessary
 to call locale on each table for example::
 
-    I18n::locale('eng'); // reset for illustration
+    I18n::locale('en'); // reset for illustration
 
     $this->loadModel('Articles');
-    $this->Articles->locale('spa');
-    $this->Articles->Categories->locale('spa');
+    $this->Articles->locale('es');
+    $this->Articles->Categories->locale('es');
 
     $data = $this->Articles->find('all', ['contain' => ['Categories']]);
 
@@ -330,7 +332,7 @@ So, after you save your first article, you can now save a translation for it,
 there are a couple ways to do it. The first one is setting the language directly
 into the entity::
 
-    $article->_locale = 'spa';
+    $article->_locale = 'es';
     $article->title = 'Mi primer Artículo';
 
     $this->Articles->save($article);
@@ -354,7 +356,7 @@ can be retrieved as usual::
 The second way to use for saving entities in another language is to set the
 default language directly to the table::
 
-    I18n::locale('spa');
+    I18n::locale('es');
     $article->title = 'Mi Primer Artículo';
     $this->Articles->save($article);
 
@@ -380,8 +382,8 @@ any database record at the same time. This can be easily done using the
 Now, You can populate translations before saving them::
 
     $translations = [
-        'fra' => ['title' => "Un article"],
-        'spa' => ['title' => 'Un artículo']
+        'fr' => ['title' => "Un article"],
+        'es' => ['title' => 'Un artículo']
     ];
 
     foreach ($translations as $lang => $data) {
