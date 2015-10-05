@@ -1,9 +1,12 @@
 チュートリアルと例
 ##################
 
-このセクションで、典型的なCakePHPアプリケーションのデモンストレーションを行い、全てのピースがどう組み合わさっていくかを学ぶことができます。
+このセクションで、典型的な CakePHP アプリケーションのデモンストレーションを行い、
+全てのピースがどう組み合わさっていくかを学ぶことができます。
 
-その他にも、既存のアプリケーションやコンポーネントについて、非公式のCakePHPプラグイン倉庫 `CakePackages <http://plugins.cakephp.org/>`_ や、 `Bakery <http://bakery.cakephp.org/>`_ を参考にすることもできます。
+その他にも、既存のアプリケーションやコンポーネントについて、非公式の CakePHP プラグイン倉庫
+`CakePackages <http://plugins.cakephp.org/>`_ や、
+`Bakery <http://bakery.cakephp.org/>`_ を参考にすることもできます。
 
 .. toctree::
     :glob:
@@ -15,3 +18,7 @@
     tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application
     tutorials-and-examples/simple-acl-controlled-application/part-two
 
+
+.. meta::
+    :title lang=ja: Tutorials & Examples
+    :keywords lang=ja: application tutorials,glob,bakery,repository,applications,blog,acl
