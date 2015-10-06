@@ -156,10 +156,9 @@ Plus d'informations sur les spécificités de la fonction:
 Emplacement de la Classe et constantes changées
 ===============================================
 
-Les constantes ``APP`` et ``CORE_PATH``
-ont des valeur cohérentes entre le web et les environnement de la console.
-Dans les précedentes versions de CakePHP, ces valeurs changeaient selon
-l'environnement.
+Les constantes ``APP`` et ``CORE_PATH`` ont des valeur cohérentes entre le web
+et les environnement de la console. Dans les précedentes versions de CakePHP,
+ces valeurs changeaient selon l'environnement.
 
 Basics.php
 ==========
@@ -210,10 +209,10 @@ CakeRequest
 Cette nouvelle classe encapsule les paramètres et fonctions liées aux requêtes
 entrantes. Elle remplace plusieurs fonctionnalités de ``Dispatcher``,
 ``RequestHandlerComponent`` et Controller. Elle remplace aussi le tableau
-``$this->params`` à tout endroit. ``CakeRequest`` implémente
-``ArrayAccess`` donc la plupart des interactions avec les anciens tableaux
-params n'ont pas besoin de changement. Voir les nouvelles fonctionnalités de
-CakeRequest pour plus d'informations.
+``$this->params`` à tout endroit. ``CakeRequest`` implémente ``ArrayAccess``
+donc la plupart des interactions avec les anciens tableaux params n'ont pas
+besoin de changement. Voir les nouvelles fonctionnalités de CakeRequest pour
+plus d'informations.
 
 Gestion des Requêtes, $_GET['url'] et fichiers .htaccess
 ========================================================
@@ -1302,8 +1301,8 @@ un grand nombre de questions suivantes:
 -  Les tâches des Plugins n'étaient pas joignables.
 -  Objets avec trop de responsabilités.
 
-Backwards incompatible Shell API changes
-----------------------------------------
+Changements Rétro-incompatibles de l'API du Shell
+-------------------------------------------------
 
 -  ``Shell`` n'a plus d'instance ``AppModel``. Cette instance ``AppModel``
    n'était pas correctement construite et était problématique.
@@ -1323,8 +1322,8 @@ Backwards incompatible Shell API changes
    besoin de dispatcher d'autres shells, regardez la section sur 'invoquer
    d'autres shells à partir de votre shell'.
 
-Backwards incompatible ShellDispatcher API changes
---------------------------------------------------
+Changements Rétro-incompatibles de l'API du ShellDispatcher
+-----------------------------------------------------------
 
 -  ``ShellDispatcher`` n'a plus de fichiers de gestion stdout, stdin, stderr.
 -  ``ShellDispatcher::$shell`` a été retirée.
@@ -1337,8 +1336,8 @@ Backwards incompatible ShellDispatcher API changes
    statut spécial. A la place, utilisez les options ``--help/-h``, et un
    parseur d'option.
 
-Backwards incompatible Shell Changes
-------------------------------------
+Changements Rétro-incompatibles du Shell
+----------------------------------------
 
 - Bake's ControllerTask ne prend plus ``public`` et ``admin`` comme arguments
   passés. Ce sont maintenant des options, indiquées par ``--admin`` et
@@ -1361,17 +1360,17 @@ ConnectionManager
 =================
 
 ``ConnectionManager::enumConnectionObjects()`` va maintenant retourner la
-configuration courante pour chaque connexion créée, au lieu d'un tableau avec
-un nom de fichier, d'un nom de classe et d'un plugin, qui n'était pas
-réellement utiles.
+configuration courante pour chaque connexion créée, au lieu d'un tableau avec un
+nom de fichier, d'un nom de classe et d'un plugin, qui n'était pas réellement
+utiles.
 
-Quand vous définirez les connexions à la base de données, vous aurez besoin
-de faire quelques changements dans la façon dont les configs ont été définies
-dans le passé. Basiquement dans classe de configuration de la base de données,
-la clé "driver" n'est plus acceptée, seulement "datasource", afin de la rendre
-plus cohérente. Aussi, comme les sources de données ont été déplacées vers les
-packages, vous aurez besoin de passer le package dans lequel ils sont
-localisés. Exemple::
+Quand vous définirez les connexions à la base de données, vous aurez besoin de
+faire quelques changements dans la façon dont les configs ont été définies dans
+le passé. Basiquement dans classe de configuration de la base de données, la clé
+"driver" n'est plus acceptée, seulement "datasource", afin de la rendre plus
+cohérente. Aussi, comme les sources de données ont été déplacées vers les
+packages, vous aurez besoin de passer le package dans lequel ils sont localisés.
+Exemple::
 
     public $default = array(
         'datasource' => 'Database/Mysql',

@@ -339,4 +339,3 @@ Router
   :php:const:`FULL_BASE_URL` qui est maintenant dépréciée.
 - :php:meth:`Router::parse()` parse maintenant les arguments de chaîne de
   requête.
-
