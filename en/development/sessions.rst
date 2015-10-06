@@ -348,13 +348,13 @@ compatible syntax::
 
 ``$key`` should be the dot separated path you wish to write ``$value`` to::
 
-    $session->write('Config.language', 'eng');
+    $session->write('Config.language', 'en');
 
 You may also specify one or multiple hashes like so::
 
     $session->write([
       'Config.theme' => 'blue',
-      'Config.language' => 'eng',
+      'Config.language' => 'en',
     ]);
 
 .. php:method:: delete($key)
