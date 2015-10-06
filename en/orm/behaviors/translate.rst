@@ -99,7 +99,7 @@ manually running the following SQL script in your database:
         INDEX I18N_FIELD(model, foreign_key, field)
     );
 
-The schema is also available as sql file in **app/config/schema/i18n.sql**.
+The schema is also available as sql file in **/config/schema/i18n.sql**.
 
 A note on language abbreviations: The Translate Behavior doesn't impose any restrictions on the language identifier, the possible values are only restricted by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in case you want to use abbreviations like ``es-419`` (Spanish for Latin America, language abbreviation with area code `UN M.49 <https://en.wikipedia.org/wiki/UN_M.49>`_).
 
