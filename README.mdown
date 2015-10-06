@@ -1,6 +1,9 @@
 CakePHP Documentation
 =====================
 
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
+[![Build Status](https://img.shields.io/travis/cakephp/docs/master.svg?style=flat-square)](https://travis-ci.org/cakephp/docs)
+
 This is the official documentation for the CakePHP project. It is available online in HTML, PDF and EPUB formats at http://book.cakephp.org.
 
 Requirements
@@ -30,13 +33,13 @@ After installing the required packages, you can build the documentation using `m
 
 	# Create all the HTML docs. Including all the languages.
 	make html
-	
+
 	# Create just the English HTML docs.
 	make html-en
-	
+
 	# Create all the EPUB (e-book) docs.
 	make epub
-	
+
 	# Create just the English EPUB docs.
 	make epub-en
 
@@ -90,4 +93,3 @@ Making Search Work Locally
 * Start elasticsearch with the default configuration.
 * Populate the search index using `make populate-index`.
 * You should now be able to search the docs using elasticsearch.
-
