@@ -752,3 +752,258 @@ do mesmo modo que no 2.x, alguns métodos foram renomeados ou removidos:
 - ``TreeBehavior::getPath()`` é agora uma busca personalizada ``find('path')``.
 - ``TreeBehavior::reorder()`` foi removido.
 - ``TreeBehavior::verify()`` foi removido.
+
+
+Suíte de Testes
+===============
+
+Casos de Teste
+--------------
+
+- O ``_normalizePath()`` foi adicionado para permitir testes de comparação de caminhos
+  para executar em todos os sistemas operacionais, independente de sua configuração
+  (``\`` no Windows vs ``/`` no UNIX, por exemplo).
+
+Os seguintes métodos de asserção foram removidos já que eles estavam há muito obsoletos
+e foram substituídos pelo seu equivalente no PHPUnit:
+
+- ``assertEqual()`` é substituído por ``assertEquals()``
+- ``assertNotEqual()`` é substituído por ``assertNotEquals()``
+- ``assertIdentical()`` é substituído por ``assertSame()``
+- ``assertNotIdentical()`` é substituído por ``assertNotSame()``
+- ``assertPattern()`` é substituído por ``assertRegExp()``
+- ``assertNoPattern()`` é substituído por ``assertNotRegExp()``
+- ``assertReference()`` é substituído por ``assertSame()``
+- ``assertIsA()`` é substituído por ``assertInstanceOf()``
+
+Note que alguns métodos tiveram a ordem dos argumentos trocada, ex. ``assertEqual($is, $expected)`` 
+deve ser agora ``assertEquals($expected, $is)``.
+
+Os seguintes métodos de asserção estão obsoletos e serão removidos no futuro:
+
+- ``assertWithinMargin()`` é substituído por ``assertWithinRange()``
+- ``assertTags()`` é substituído por ``assertHtml()``
+
+Em ambas as substituições dos métodos também mudaram a ordem dos argumentos para manter a
+consistência na API com ``$expected`` como primeiro argumento.
+
+Os seguintes métodos de asserção foram adicionados:
+
+- ``assertNotWithinRange()`` em contrapartida ao ``assertWithinRange()``
+
+
+Visão
+=====
+
+Temas são agora Plugins Básicos
+-------------------------------
+
+Ter os temas e plugins de modo a criar componentes modulares da aplicação
+se provou limitado e confuso. No CakePHP 3.0, temas não residem mais
+**dentro** da aplicação. Ao invés disso, eles são plugins independentes.
+Isso resolveu alguns problemas com temas:
+
+- Você não podia colocar temas *nos* plugins.
+- Temas não podiam fornecer ajudantes (helpers), ou classes de visão personalizadas.
+
+Esses dois problemas foram resolvidos ao converter os temas em plugins.
+
+Pasta das Visões Renomeado
+------------------------------
+
+As pastas contendo os arquivos de visões agora ficam em **src/Template** no lugar de 
+**src/View**. Isso foi feito para separar os arquivos de visão dos arquivos contendo
+classes php. (ex. Ajudantes, Classes de visão).
+
+As seguintes pastas de Visão foram renomeadas para evitar colisão de nomes com nomes
+de controladores:
+
+- ``Layouts`` agora é ``Layout``
+- ``Elements`` agora é ``Element``
+- ``Errors`` agora é ``Error``
+- ``Emails`` agora é ``Email`` (o mesmo para ``Email`` dentro de ``Layout``)
+
+Coleção de Ajudantes Substituída
+--------------------------------
+
+Essa classe foi renomeada para :php:class:`Cake\\View\\HelperRegistry`.
+Veja a seção em :doc:`/core-libraries/registry-objects` para mais informações
+sobre as funcionalidades fornecidas pela nova classe. Você pode usar o 
+``cake upgrade rename_collections`` para ajudar você a atualizar seu código.
+
+Classe de Visão
+---------------
+
+- A chave ``plugin`` foi removida do argumento ``$options`` de 
+  :php:meth:`Cake\\View\\View::element()`. Especifique o nome do elemento
+  como ``AlgumPlugin.nome_do_elemento`` no lugar.
+- O ``View::getVar()`` foi removido, use o :php:meth:`Cake\\View\\View::get()` no lugar.
+- O ``View::$ext`` foi removido e no lugar uma propriedade protegida ``View::$_ext``
+  foi adicionada.
+- O ``View::addScript()`` foi removido. Use o :ref:`view-blocks` no lugar.
+- As propriedades mágicas ``base``, ``webroot``, ``here``, ``data``,  ``action``, 
+  e ``params`` foram removidas. Ao invés disso, você deve acessar todas essas 
+  propriedades no ``$this->request``.
+- O ``View::start()`` não se liga mais a um bloco existente. Ao invés disso ele irá
+  sobrescrever o conteúdo do bloco quando o ``end()`` for chamado. Se você precisa
+  combinar o conteúdo de um bloco você deverá buscar o conteúdo do bloco quando 
+  chamar o start uma segunda vez, ou usar o modo de captura de ``append()``.
+- O ``View::prepend()`` não tem mais um modo de captura.
+- O ``View::startIfEmpty()`` foi removido. Agora que o start() sempre sobrescreve,
+  o startIfEmpty não tem mais propósito.
+- A propriedade ``View::$Helpers`` foi removida e substituída com ``_helpers``. 
+  Se você precisar carregar ajudantes em tempo de execução você deve usar o 
+  ``$this->addHelper()`` em seus arquivos de visão.
+- O ``View`` agora irá lançar ``Cake\View\Exception\MissingTemplateException`` quando
+  templates estiverem faltando, ao invés de ``MissingViewException``.
+
+ViewBlock
+---------
+
+- O ``ViewBlock::append()`` foi removido, use o :php:meth:`Cake\\View\ViewBlock::concat()` 
+  no lugar. Entretanto o ``View::append()`` ainda existe.
+
+JsonView
+--------
+
+- Agora os dados JSON terão as entidades HTML codificadas por padrão. Isso previne
+  possíveis problemas de XSS quando o conteúdo de visão JSON está encapsulado em arquivos HTML.
+- O :php:class:`Cake\\View\\JsonView` agora suporta a variável de visão ``_jsonOptions``.
+  Isso permite a você configurar as opções de máscara de bits usadas ao gerar JSON.
+
+XmlView
+-------
+
+- A :php:class:`Cake\\View\\XmlView` agora suporta a variável de visão ``_xmlOptions``.
+  Isso permite a você configurar as opções usadas quando gerar XML.
+
+View\\Helper
+============
+
+- A propriedade ``$settings`` é agora chamada ``$_config`` e deve ser acessada 
+  através do método ``config()``.
+- As opções de configuração não são mais definidas como propriedades públicas.
+- O ``Helper::clean()`` foi removido. Ele nunca foi robusto o suficiente para 
+  prevenir completamente XSS. Ao invés disso você deve escapar o conteúdo com 
+  :php:func:`h` ou ou usar uma biblioteca dedicada como o htmlPurifier.
+- O ``Helper::output()`` foi removido. Esse método estava obsoleto no 2.x.
+- Os métodos ``Helper::webroot()``, ``Helper::url()``, ``Helper::assetUrl()``,
+  ``Helper::assetTimestamp()`` foram movidos para o novo ajudante 
+  :php:class:`Cake\\View\\Helper\\UrlHelper`. O ``Helper::url()`` está agora
+  disponível como :php:meth:`Cake\\View\\Helper\\UrlHelper::build()`.
+- Os Assessores Mágicos a propriedades obsoletas foram removidos. A seguinte
+  propriedade agora deve ser acessada a partir do objeto de requisição:
+
+  - base
+  - here
+  - webroot
+  - data
+  - action
+  - params
+
+
+Ajudantes
+---------
+
+A classe Helper teve os seguintes métodos removidos:
+
+* ``Helper::setEntity()``
+* ``Helper::entity()``
+* ``Helper::model()``
+* ``Helper::field()``
+* ``Helper::value()``
+* ``Helper::_name()``
+* ``Helper::_initInputField()``
+* ``Helper::_selectedArray()``
+
+Esses métodos eram partes usadas apenas pelo FormHelper, e parte de uma
+funcionalidade de persistência de campos que se mostrou problemática com
+o tempo. O FormHelper não precisa mais destes métodos e a complexidades 
+que eles provêm não é mais necessária.
+
+Os seguintes métodos foram removidos:
+
+* ``Helper::_parseAttributes()``
+* ``Helper::_formatAttribute()``
+
+Esses métodos podem agora ser encontrados na classe ``StringTemplate`` 
+que os ajudantes usam com frequência. Veja o ``StringTemplateTrait`` 
+para um jeito fácil de integrar os templates de string em seus 
+próprios ajudantes.
+
+FormHelper
+----------
+
+O FormHelper foi completamente reescrito para o 3.0. 
+Ele teve algumas grandes mudanças:
+
+* O FormHelper trabalha junto com o novo ORM. Mas também possui um sistema 
+  extensível para integrar com outros ORMs e fontes de dados.
+* O FormHelper possui um sistema de widgets extensível que permite a você
+  criar novos widgets de entrada personalizados e expandir facilmente aqueles
+  inclusos no framework.
+* Os Templates de String são a fundação deste ajudante. Ao invés de encher de
+  arrays por toda parte, a maioria do HTML que o FormHelper gera pode ser
+  personalizado em um lugar central usando conjuntos de templates.  
+
+
+Além dessas grandes mudanças, foram feitas algumas mudanças menores que
+causaram rompendo algumas coisas da versão anterior.
+Essas mudanças devem simplificar o HTML que o FormHelper gera e reduzir
+os problemas que as pessoas tinham no passado:
+
+- O prefixo ``data[`` foi removido de todas as entradas geradas. O prefixo não 
+  tem mais propósito.
+- Os vários métodos de entradas independentes, como ``text()``, ``select()`` e 
+  outros, não geram mais atributos id.
+- A opção ``inputDefaults`` foi removida de ``create()``.
+- As opções ``default`` e ``onsubmit`` do ``create()`` foram removidas. No lugar
+  você deve usar JavaScript event binding ou definir todos os códigos js necessários
+  para o ``onsubmit``.
+- O ``end()`` não gerará mais botões. Você deve criar botões com ``button()`` 
+  ou ``submit()``.
+- O ``FormHelper::tagIsInvalid()`` foi removido. Use ``isFieldError()``
+  no lugar.
+- O ``FormHelper::inputDefaults()`` foi removido. Você pode usar ``templates()``
+  para definir/expandir os templates que o FormHelper usa.
+- As opções ``wrap`` e ``class`` foram removidas do método ``error()``.
+- A opção ``showParents`` foi removida do select().
+- As opções ``div``, ``before``, ``after``, ``between`` e ``errorMessage`` 
+  foram removidas do ``input()``. Você pode usar templates para atualizar o
+  HTML envoltório. A opção ``templates`` permite você sobrescrever os 
+  templates carregados para uma entrada.
+- As opções ``separator``, ``between``, e ``legend`` foram removidas do
+  ``radio()``. Você pode usar templates para mudar o HTML envoltório agora.
+- O parâmetro ``format24Hours`` foi removido de ``hour()``.
+  Ele foi substituído pela opção ``format``.
+- Os parâmetros ``minYear`` e ``maxYear`` foram removidos do ``year()``.
+  Ambos podem ser fornecidos como opções.
+- Os parâmetros ``dateFormat`` e ``timeFormat`` foram removidos do
+  ``datetime()``. Você pode usar o template para definir a ordem que
+  as entradas devem ser exibidas.
+- O ``submit()`` teve as opções ``div``, ``before`` e ``after`` removidas.
+  Você pode personalizar o template ``submitContainer`` para modificar esse
+  conteúdo.
+- O método ``inputs()`` não aceita mais ``legend`` e ``fieldset`` no parâmetro
+  ``$fields``, você deve usar o parâmetro ``$options``.
+  Ele também exige que o parâmetro ``$fields`` seja um array. O parâmetro
+  ``$blacklist`` foi removido, a funcionalidade foi substituída pela especificação
+  de ``'field' => false`` no parâmetro ``$fields``.
+- O parâmetro ``inline`` foi removido do método postLink().
+  Você deve usar a opção ``block`` no lugar. Definindo ``block => true`` irá
+  emular o comportamento anterior.
+- O parâmetro ``timeFormat`` para ``hour()``, ``time()`` e ``dateTime()`` agora é
+  24 por padrão, em cumprimento ao ISO 8601.
+- O argumento ``$confirmMessage`` de :php:meth:`Cake\\View\\Helper\\FormHelper::postLink()`
+  foi removido. Você deve usar agora a chave ``confirm`` no ``$options`` para
+  especificar a mensagem.
+- As entradas do tipo Checkbox e radio são agora renderizadas *dentro* de elementos
+  do tipo label por padrão. Isso ajuda a aumentar a compatibilidade com bibliotecas CSS 
+  populares como `Bootstrap <http://getbootstrap.com/>`_ e `Foundation <http://foundation.zurb.com/>`_.
+- As tags de template agora são todas camelBacked (primeira letra minúscula e inicio de 
+  novas palavras em maiúsculo). As tags pré-3.0 ``formstart``, ``formend``, ``hiddenblock``
+  e ``inputsubmit`` são agora ``formStart``, ``formEnd``, ``hiddenBlock`` e ``inputSubmit``.
+  Certifique-se de altera-las se elas estiverem personalizando sua aplicação.
+
+É recomendado que você revise a documentação :doc:`/views/helpers/form`
+para mais detalhes sobre como usar o FormHelper no 3.0.
