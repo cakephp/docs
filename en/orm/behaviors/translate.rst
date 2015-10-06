@@ -258,7 +258,7 @@ operation::
     ])->first();
 
     // Outputs 'Programación'
-    echo $article->categories[0]->translation('spa')->name;
+    echo $article->categories[0]->translation('es')->name;
 
 This assumes that ``Categories`` has the TranslateBehavior attached to it. It
 simply uses the query builder function for the ``contain`` clause to use the

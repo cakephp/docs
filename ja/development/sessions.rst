@@ -507,7 +507,7 @@ ini 指示子の設定
 
 ``$key`` はドット区切りで ``$value`` の書き込み先を指定します::
 
-    CakeSession::write('Config.language', 'eng');
+    CakeSession::write('Config.language', 'en');
 
 .. php:staticmethod:: delete($key)
 

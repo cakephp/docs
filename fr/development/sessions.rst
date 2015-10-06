@@ -371,13 +371,13 @@ compatible :php:meth:`Hash::extract()`::
 
 ``$key`` devrait être le chemin séparé de point et ``$value`` sa valeur::
 
-     $session->write('Config.language', 'eng');
+     $session->write('Config.language', 'en');
 
 Vous pouvez également spécifier un ou plusieurs hash de la manière suivante::
 
     $session->write([
       'Config.theme' => 'blue',
-      'Config.language' => 'eng',
+      'Config.language' => 'en',
     ]);
 
 .. php:staticmethod:: delete($key)
