@@ -11,7 +11,7 @@ If you need help, run::
 Loading Plugins
 ---------------
 
-Via the `Load` task you are able to load plugins in your
+Via the ``Load`` task you are able to load plugins in your
 **config/bootstrap.php**. You can do this by running::
 
     bin/cake plugin load MyPlugin
@@ -20,8 +20,8 @@ This will add the following to your **config/bootstrap.php**::
 
     Plugin::load('MyPlugin');
 
-Adding the `-b` or `-r` switch to the load task will enable loading of the plugin's
-`bootstrap` and `routes` values::
+Adding the ``-b`` or ``-r`` switch to the load task will enable loading of the plugin's
+``bootstrap`` and ``routes`` values::
 
     bin/cake plugin load -b MyPlugin
 
