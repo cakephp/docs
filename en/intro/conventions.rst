@@ -81,6 +81,8 @@ their filenames:
 
 Each file would be located in the appropriate folder/namespace in your app folder.
 
+.. _model-and-database-conventions:
+
 Model and Database Conventions
 ==============================
 
