@@ -183,7 +183,7 @@ used to add table options::
     ]);
 
 Platform dialects only handle the keys they are interested in
-and ignore the rest. Not all options are support on all platforms.
+and ignore the rest. Not all options are supported on all platforms.
 
 Converting Tables into SQL
 --------------------------
