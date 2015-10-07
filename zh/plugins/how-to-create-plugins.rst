@@ -3,6 +3,9 @@ How To Create Plugins
 
 .. _plugin-models:
 
+Plugin Models
+=============
+
 .. note::
     The documentation is not currently supported in zh language for this page.
 

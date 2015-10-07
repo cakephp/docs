@@ -133,7 +133,7 @@ Folder API
     * ``Folder::MERGE`` mescla os diretórios destinatario/destino. Arquivos do
       diretório de origem irá substituir os arquivos no diretório de destino. Os
       conteudos serão mesclados.
-    * ``Folder::OVERWRITE``sobreescreve arquivos existentes e diretórios no
+    * ``Folder::OVERWRITE`` sobreescreve arquivos existentes e diretórios no
       diretório de destino com os arquivos de origem. Se ambos os diretórios
       possuem um mesmo sub-diretório o sub-diretório de origem sera removido
       e o de destino entrara no lugar dele.

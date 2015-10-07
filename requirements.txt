@@ -1,0 +1,2 @@
+sphinx==1.2.3
+sphinxcontrib-phpdomain

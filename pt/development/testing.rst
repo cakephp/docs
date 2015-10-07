@@ -12,6 +12,11 @@ Testing
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
 
+.. _running-tests:
+
+Running Tests
+=============
+
 .. meta::
     :title lang=pt: Testing
     :keywords lang=pt: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

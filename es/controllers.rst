@@ -10,6 +10,11 @@ Controllers
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
+.. _controller-methods:
+
+Controller Methods
+==================
+
 .. toctree::
     :maxdepth: 1
 

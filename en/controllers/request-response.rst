@@ -123,7 +123,7 @@ below for how you can access those request bodies.
 Accessing XML or JSON data
 ==========================
 
-Applications employing :doc:`/development/rest` often exchange data in non-URL-encoded 
+Applications employing :doc:`/development/rest` often exchange data in non-URL-encoded
 post bodies. You can read input data in any format using
 :php:meth:`CakeRequest::input()`. By providing a decoding function, you can
 receive the content in a deserialized format::
@@ -168,7 +168,7 @@ to create new kinds of detectors. There are four different types of detectors
 that you can create:
 
 * Environment value comparison - Compares a
-  value fetched from :php:func:`env()` for equality 
+  value fetched from :php:func:`env()` for equality
   with the provided value.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
@@ -234,7 +234,7 @@ CakeRequest and RequestHandlerComponent
 Since many of the features :php:class:`CakeRequest` offers used to be the realm of
 :php:class:`RequestHandlerComponent`, some rethinking was required to figure out how it
 still fits into the picture. For 2.0, :php:class:`RequestHandlerComponent`
-provides a layer of sugar, such as switching layout 
+provides a layer of sugar, such as switching layout
 and views based on content, on top of the utility that
 :php:class:`CakeRequest` affords.
 This separation of utility and sugar between the two classes lets you
@@ -437,8 +437,8 @@ Changing the response class
 ===========================
 
 CakePHP uses :php:class:`CakeResponse` by default. :php:class:`CakeResponse` is a flexible and
-transparent class. If you need to override it with your own application-specific class, 
-you can replace :php:class:`CakeResponse` in ``app/webroot/index.php``. 
+transparent class. If you need to override it with your own application-specific class,
+you can replace :php:class:`CakeResponse` in ``app/webroot/index.php``.
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`. You can also replace the response
 instance by setting ``$this->response`` in your controllers. Overriding the

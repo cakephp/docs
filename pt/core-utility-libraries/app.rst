@@ -12,6 +12,11 @@ App Class
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
 
+.. _app-build-register:
+
+Add new packages to an application
+----------------------------------
+
 .. meta::
     :title lang=pt: App Class
     :keywords lang=pt: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded
