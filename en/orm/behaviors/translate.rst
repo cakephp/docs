@@ -101,13 +101,24 @@ manually running the following SQL script in your database:
 
 The schema is also available as sql file in **/config/schema/i18n.sql**.
 
-A note on language abbreviations: The Translate Behavior doesn't impose any restrictions on the language identifier, the possible values are only restricted by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in case you want to use abbreviations like ``es-419`` (Spanish for Latin America, language abbreviation with area code `UN M.49 <https://en.wikipedia.org/wiki/UN_M.49>`_).
+A note on language abbreviations: The Translate Behavior doesn't impose any
+restrictions on the language identifier, the possible values are only restricted
+by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in
+case you want to use abbreviations like ``es-419`` (Spanish for Latin America,
+language abbreviation with area code `UN M.49
+<https://en.wikipedia.org/wiki/UN_M.49>`_).
 
 .. tip::
 
-    It's wise to use the same language abbreviations as required for :doc:`Internationalization and Localization </core-libraries/internationalization-and-localization>`. Thus you are consistent and switching the language works identical for both, the ``Translate Behaviour`` and ``Internationalization and Localization``.
-    
-So it's recommended to use either the two letter ISO code of the language like ``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains both the language and the country where it is spoken.
+    It's wise to use the same language abbreviations as required for
+    :doc:`Internationalization and Localization
+    </core-libraries/internationalization-and-localization>`. Thus you are
+    consistent and switching the language works identical for both, the
+    ``Translate Behaviour`` and ``Internationalization and Localization``.
+
+So it's recommended to use either the two letter ISO code of the language like
+``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``,
+``da_DK`` which contains both the language and the country where it is spoken.
 
 Attaching the Translate Behavior to Your Tables
 ===============================================
