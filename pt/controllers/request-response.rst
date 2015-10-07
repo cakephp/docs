@@ -571,3 +571,6 @@ API do CakeResponse
     automaticamente no final de cada requisição pelo :php:class:`Dispatcher`.
 
 .. _cake-response-caching:
+
+Fine tuning HTTP cache
+======================

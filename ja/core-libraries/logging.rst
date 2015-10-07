@@ -11,6 +11,18 @@ Logging
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _logging-scopes:
+
+Logging Scopes
+==============
+
+.. _file-log:
+
+.. _syslog-log:
+
+Logging to Syslog
+=================
+
 .. meta::
     :title lang=ja: Logging
     :description lang=ja: Log CakePHP data to the disk to help debug your application over longer periods of time.
