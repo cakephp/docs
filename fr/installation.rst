@@ -61,9 +61,9 @@ Ou vous pouvez télécharger ``composer.phar`` à partir de son
 `site <https://getcomposer.org/download/>`_.
 
 Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
-Composer `ici <https://github.com/composer/windows-setup/releases/>`_. D'autres
+Composer `ici <https://github.com/composer/windows-setup/releases/>`__. D'autres
 instructions pour l'installeur Windows de Composer se trouvent dans le
-`README <https://github.com/composer/windows-setup>`_.
+`README <https://github.com/composer/windows-setup>`__.
 
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
 une nouvelle application CakePHP en lançant::
@@ -85,7 +85,7 @@ votre application CakePHP et voir les feux de signalisations de configuration.
 
 Bien que composer soit la méthode d'installation recommandée, il existe des
 versions pré-installables disponibles sur
-`Github <https://github.com/cakephp/cakephp/tags>`_
+`Github <https://github.com/cakephp/cakephp/tags>`__.
 Ces téléchargements contiennent le squelette d'une app avec tous les packages
 installés dans vendor.
 Aussi le ``composer.phar`` est inclus donc vous avez tout ce dont vous avez

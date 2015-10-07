@@ -11,3 +11,11 @@ Salvando dados
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. _changing-accessible-fields:
+
+.. _before-marshal:
+
+.. _saving-entities:
+
+.. _saving-complex-types:

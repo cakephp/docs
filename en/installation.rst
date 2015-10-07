@@ -63,7 +63,7 @@ Or, you can download ``composer.phar`` from the
 For Windows systems, you can download Composer's Windows installer
 `here <https://github.com/composer/windows-setup/releases/>`__.  Further
 instructions for Composer's Windows installer can be found within the README
-`here <https://github.com/composer/windows-setup>`_.
+`here <https://github.com/composer/windows-setup>`__.
 
 Now that you've downloaded and installed Composer, you can get a new CakePHP
 application by running::
@@ -84,7 +84,7 @@ see the setup traffic lights.
 
 Although composer is the recommended installation method, there are
 pre-installed downloads available on
-`Github <https://github.com/cakephp/cakephp/tags>`_.
+`Github <https://github.com/cakephp/cakephp/tags>`__.
 Those downloads contain the app skeleton with all vendor packages installed.
 Also it includes the ``composer.phar`` so you have everything you need for
 further use.

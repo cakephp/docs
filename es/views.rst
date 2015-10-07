@@ -14,6 +14,10 @@ Views
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
+.. _view-layouts:
+
+.. _view-elements:
+
 More About Views
 ================
 

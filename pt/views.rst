@@ -12,6 +12,10 @@ Views (Visualização)
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
 
+.. _view-layouts:
+
+.. _view-elements:
+
 More About Views
 ================
 

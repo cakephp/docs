@@ -11,3 +11,9 @@ Objetos de requisição e resposta
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. index:: $this->request
+.. _cake-request:
+
+Request
+=======
