@@ -31,13 +31,17 @@ database connections <database-configuration>`.
 Quick Example
 =============
 
-To get started you don't have to write any code. If you've followed the CakePHP
-conventions for your database tables you can just start using the ORM. For
-example if we wanted to load some data from our ``articles`` table we could do::
+To get started you don't have to write any code. If you've followed the :doc:`CakePHP
+conventions for your database tables </intro/conventions.html#model-and-database-conventions>`
+you can just start using the ORM. For example if we wanted to load some data from our ``articles``
+table we could do::
 
     use Cake\ORM\TableRegistry;
+    
     $articles = TableRegistry::get('Articles');
+    
     $query = $articles->find();
+    
     foreach ($query as $row) {
         echo $row->title;
     }
@@ -63,6 +67,7 @@ suffix as the class name. Once your class has been created you get a reference
 to it using the :php:class:`~Cake\\ORM\\TableRegistry` as before::
 
     use Cake\ORM\TableRegistry;
+    
     // Now $articles is an instance of our ArticlesTable class.
     $articles = TableRegistry::get('Articles');
 
