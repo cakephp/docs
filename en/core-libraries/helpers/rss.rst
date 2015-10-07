@@ -1,5 +1,5 @@
-RSS
-###
+RssHelper
+#########
 
 .. php:class:: RssHelper(View $view, array $settings = array())
 
