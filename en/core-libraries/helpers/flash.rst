@@ -1,5 +1,5 @@
 FlashHelper
-#####
+###########
 
 .. php:class:: FlashHelper(View $view, array $config = array())
 
