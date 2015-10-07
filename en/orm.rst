@@ -31,8 +31,8 @@ database connections <database-configuration>`.
 Quick Example
 =============
 
-To get started you don't have to write any code. If you've followed the :doc:`CakePHP
-conventions for your database tables </intro/conventions.html#model-and-database-conventions>`
+To get started you don't have to write any code. If you've followed the :ref:`CakePHP
+conventions for your database tables <model-and-database-conventions>`
 you can just start using the ORM. For example if we wanted to load some data from our ``articles``
 table we could do::
 
