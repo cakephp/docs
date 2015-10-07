@@ -611,10 +611,14 @@ pouvez utiliser ``autoFields()``::
 .. versionadded:: 3.1
     La sélection des colonnes via un objet association a été ajouté dans 3.1
 
+.. end-contain
+
 .. _filtering-by-associated-data:
 
 Filtrer par les Données Associées
 ---------------------------------
+
+.. start-filtering
 
 Un cas de requête couramment fait avec les associations est de trouver les
 enregistrements qui 'matchent' les données associées spécifiques. Par exemple
@@ -800,7 +804,7 @@ l'ensemble de résultats.
 .. versionadded:: 3.1
     Query::leftJoinWith() a été ajoutée dans 3.1
 
-.. end-contain
+.. end-filtering
 
 Changer les Stratégies de Récupération
 --------------------------------------

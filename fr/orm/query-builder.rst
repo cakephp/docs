@@ -1043,6 +1043,13 @@ d'autres tables est appelé **eager loading**.
     :start-after: start-contain
     :end-before: end-contain
 
+Filtering by Associated Data
+----------------------------
+
+.. include:: ./retrieving-data-and-resultsets.rst
+    :start-after: start-filtering
+    :end-before: end-filtering
+
 .. _adding-joins:
 
 Ajouter des Jointures
