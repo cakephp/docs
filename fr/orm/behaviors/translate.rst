@@ -99,6 +99,30 @@ en lançant manuellement le script SQL suivant dans votre base de données:
         INDEX I18N_FIELD(model, foreign_key, field)
     );
 
+Le schéma est aussi disponible sous la forme d'un fichier sql dans
+**/config/schema/i18n.sql**.
+
+Une remarque sur les abréviations des langues: Le behavior Translate n'impose
+aucune restriction sur l'identifieur de langues, les valeurs possibles sont
+seulement restreintes par le type/la taille de la colonne ``locale``. ``locale``
+est définie avec ``varchar(6)`` dans le cas où vous souhaitez utiliser les
+abréviations comme ``es-419`` (Espagnol pour l'Amérique Latine, l'abréviation
+des langues avec le code de zone
+`UN M.49 <https://en.wikipedia.org/wiki/UN_M.49>`_).
+
+.. tip::
+
+    Il est sage d'utiliser les mêmes abréviations de langue que celles requises
+    pour :doc:`l'Internationalisation et la Localisation
+    </core-libraries/internationalization-and-localization>`. Ainsi vous êtes
+    cohérent et le changement de langue fonctionne de la même manière à la fois
+    pour le ``Translate Behaviour`` et ``l'Internationalisation et la
+    Localisation``.
+
+Il est donc recommandé d'utiliser soit le code ISO à 2 lettres de la langue,
+comme ``en``, ``fr``, ``de``, soit le nom de la locale complète comme ``fr_FR``,
+``es_AR``, ``da_DK`` qui contient à la fois la langue et le pays où elle est
+parlée.
 
 Attacher le Behavior Translate à Vos Tables
 ===========================================
