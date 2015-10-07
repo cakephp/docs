@@ -1,0 +1,15 @@
+language: python
+
+python:
+ - "2.7"
+
+install:
+    - pip install sphinx==1.2.3
+    - pip install sphinxcontrib-phpdomain
+
+script: "make html"
+
+sudo: false
+
+notifications:
+    email: false
