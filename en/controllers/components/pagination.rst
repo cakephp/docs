@@ -80,9 +80,9 @@ setting the ``finder`` option::
             'finder' => 'published',
         ];
     }
-    
-Because custom finder methods can also take in options, 
-this is how you pass in options into a custom finder method within the paginate property::
+
+Because custom finder methods can also take in options, this is how you pass in
+options into a custom finder method within the paginate property::
 
     class ArticlesController extends AppController
     {
@@ -104,9 +104,7 @@ this is how you pass in options into a custom finder method within the paginate 
                     'tagged' => $customFinderOptions
                 ]
             ];
-    	    
             $articles = $this->paginate($this->Articles);
-    	    
             $this->set(compact('articles', 'tags'));
         }
     }
@@ -177,11 +175,13 @@ method::
     // Or
     $articles = $this->Paginator->paginate($articleTable, $config);
 
-The first parameter should be the query object from a find on table object you wish
-to paginate results from. Optionally, you can pass the table object and let the query
-be constructed for you. The second parameter should be the array of settings to use for
-pagination. This array should have the same structure as the ``$paginate``
-property on a controller.
+The first parameter should be the query object from a find on table object you
+wish to paginate results from. Optionally, you can pass the table object and let
+the query be constructed for you. The second parameter should be the array of
+settings to use for pagination. This array should have the same structure as the
+``$paginate`` property on a controller. When paginating a ``Query`` object, the
+``finder`` option will be ignored. It is assumed that you are passing in
+the query you want paginated.
 
 Control which Fields Used for Ordering
 ======================================
