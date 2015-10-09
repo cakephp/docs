@@ -83,6 +83,8 @@ quelques exemples de noms de classes et de fichiers:
 Chaque fichier sera situé dans le répertoire/namespace approprié dans le
 dossier de votre application.
 
+.. _model-and-database-conventions:
+
 Conventions pour les Models et les Bases de Données
 ===================================================
 
