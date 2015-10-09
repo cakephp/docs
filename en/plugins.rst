@@ -364,7 +364,7 @@ create the table and entity for that controller::
     }
 
 If you need to reference a model within your plugin when building associations
-or defining entitiy classes, you need to include the plugin name with the class
+or defining entity classes, you need to include the plugin name with the class
 name, separated with a dot. For example::
 
     // plugins/ContactManager/src/Model/Table/ContactsTable.php:
@@ -483,7 +483,7 @@ You can use the :term:`plugin syntax` when linking to plugin assets using the
     // Generates a URL of /contact_manager/js/widget.js
     echo $this->Html->script('ContactManager.widget');
 
-    // Generates a URL of /contact_manager/img/logo.js
+    // Generates a URL of /contact_manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
 Plugin assets are served using the ``AssetFilter`` dispatcher filter by default.
