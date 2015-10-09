@@ -501,7 +501,7 @@ en utilisant les méthodes script, image ou css de
     // Génère une URL de /contact_manager/js/widget.js
     echo $this->Html->script('ContactManager.widget');
 
-    // Génère une URL de /contact_manager/img/logo.js
+    // Génère une URL de /contact_manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
 Les assets de Plugin sont servis en utilisant le filtre du dispatcheur
