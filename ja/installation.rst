@@ -19,11 +19,11 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
     XAMPP / WAMP のいずれでも、mcrypt 拡張も mbstring 拡張も初期インストール状態で
     動きます。
 
-    XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll`` 
+    XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll``
     という行をコメントアウトして XAMPP コントロールパネルからサーバの再起動を行う必要はあります。
 
     WAMP では intl 拡張は最初からアクティブになっているのですが動作しません。
-    動作させるためには php フォルダ（初期状態では **C:\\wamp\\bin\\php\\php{version}** ）にある 
+    動作させるためには php フォルダ（初期状態では **C:\\wamp\\bin\\php\\php{version}** ）にある
     **icu*.dll** というファイルを全て、apache の bin ディレクトリ
     （ **C:\\wamp\\bin\\apache\\apache{version}\\bin** ）にコピーしてから、
     全てのサービスを再起動すれば動くようになります。
@@ -45,7 +45,7 @@ CakePHPは種々のデータベース・ストレージのエンジンをサポ�
 CakePHP のインストール
 ======================
 
-CakePHP の公式のインストール方法としては、PHP 5.3 以降での依存管理ツールである 
+CakePHP の公式のインストール方法としては、PHP 5.3 以降での依存管理ツールである
 `Composer <http://getcomposer.org>`_ を使用します。
 
 もしまだなら、最初に Composer をダウンロードしてインストールしなければなりません。
@@ -53,12 +53,12 @@ CakePHP の公式のインストール方法としては、PHP 5.3 以降での�
 
     curl -s https://getcomposer.org/installer | php
 
-さもなくば `Composer のウェブサイト <https://getcomposer.org/download/>`_ から 
+さもなくば `Composer のウェブサイト <https://getcomposer.org/download/>`_ から
 ``composer.phar`` をダウンロードすることもできます。
 
 Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
-Windows インストーラをダウンロードできます。Composer の Windows  インストーラについての詳細は、 
-`README <https://github.com/composer/windows-setup>`_ をご覧ください。
+Windows インストーラをダウンロードできます。Composer の Windows  インストーラについての詳細は、
+`README <https://github.com/composer/windows-setup>`__ をご覧ください。
 
 Composer をインストールしたら、CakePHP の新しいアプリケーションを下記のコマンドで作れるようになります。::
 
@@ -76,7 +76,7 @@ Composer をインストールしたら、CakePHP の新しいアプリケーシ
 これでインストールした CakePHP アプリケーションにアクセスして、設定状況を
 見ることができるようになりました。
 
-composer によるインストールが推奨されますが、 `Github <https://github.com/cakephp/cakephp/tags>`_ 
+composer によるインストールが推奨されますが、 `Github <https://github.com/cakephp/cakephp/tags>`__
 にはプリインストール版もあります。
 このファイルにはアプリケーションの雛形と全てのベンダーパッケージが同梱されています。
 また、``composer.phar`` も入っていますので、あなたのさらなる使用のために必要なものは
@@ -91,11 +91,11 @@ CakePHPの変更に合わせて最新の状態に保つ
         "cakephp/cakephp": "~3.0"
     }
 
-あなたが ``php composer.phar update`` と実行するたびに、デフォルトのバージョン制約 
+あなたが ``php composer.phar update`` と実行するたびに、デフォルトのバージョン制約
 ``~3.0`` を使って最新の安定リリース版が手に入ります。
 アップデート時には、3.x系のバグ修正とマイナーバージョンアップだけが適用されます。
 
-もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの 
+もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの
 **composer.json** を下記のように変更します::
 
     "require": {
@@ -111,13 +111,13 @@ CakePHPの変更に合わせて最新の状態に保つ
 ==============
 
 CakePHP は、幾つかの操作のために **tmp** ディレクトリを使用します。
-モデルの定義や、ビューのキャッシュ、セッション情報などです。 
+モデルの定義や、ビューのキャッシュ、セッション情報などです。
 **logs** ディレクトリは、デフォルトの ``FileLog`` エンジンがログファイルを
 出力するために使われます。
 
 そのため、 CakePHP をインストールしたら **logs**, **tmp** ディレクトリと
 その全てのサブディレクトリに、ウェブサーバーの実行ユーザによる書き込み権限があることを
-必ず確認してください。composer によるインストール処理では、なるべく早く動かせるように 
+必ず確認してください。composer によるインストール処理では、なるべく早く動かせるように
 **tmp** フォルダとそのサブフォルダに全ユーザーが書き込みできるようにしますが、
 これをウェブサーバの実行ユーザーだけが書き込みできるようにパーミッション設定を変更すれば、
 より良いセキュリティ状態にすることができます。
@@ -211,12 +211,12 @@ Apache を利用している開発者は、当該ドメインの ``DocumentRoot`
 始動
 ==========
 
-さぁ、CakePHP の動作を見てみましょう。あなたが選んだ方法に応じて、ブラウザから 
+さぁ、CakePHP の動作を見てみましょう。あなたが選んだ方法に応じて、ブラウザから
 http://example.com/ あるいは http://localhost:8765/ にアクセスしてください。
 これで CakePHP のデフォルトのホーム画面と、データベースへの接続状態を表すメッセージが
 表示されるでしょう。
 
-おめでとうございます！これでもう :doc:`最初の CakePHP アプリケーション作成 </quickstart>` 
+おめでとうございます！これでもう :doc:`最初の CakePHP アプリケーション作成 </quickstart>`
 の準備ができました。
 
 .. _url-rewriting:
@@ -230,7 +230,7 @@ Apache
 CakePHP は、展開した状態では mod_rewrite を使用するようになっており、自分のシステムで
 うまく動作するまで苦労するユーザもいます。
 
-ここでは、正しく動作させるために行うことをいくつか示します。 
+ここでは、正しく動作させるために行うことをいくつか示します。
 まず始めに httpd.conf を見てください（ユーザーやサイト個別の httpd.conf ではなく、
 必ずシステムの httpd.conf を編集してください）。
 
@@ -289,10 +289,10 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
        </IfModule>
 
    まだあなたの CakePHP サイトで mod\_rewrite の問題が起きているなら、
-   仮想ホスト(virtualhosts)の設定の変更を試してみるといいかもしれません。 
+   仮想ホスト(virtualhosts)の設定の変更を試してみるといいかもしれません。
    Ubuntu 上なら、**/etc/apache2/sites-available/default** (場所は
    ディストリビューションによる)のファイルを編集してください。
-   このファイルの中で ``AllowOverride None`` が ``AllowOverride All`` 
+   このファイルの中で ``AllowOverride None`` が ``AllowOverride All``
    に変更されているかを確かめてください。 つまり以下のようになるでしょう:::
 
        <Directory />
@@ -307,14 +307,14 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
        </Directory>
 
    Mac OSX上での別解は、仮想ホストをフォルダに向けさせるのに、
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ 
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
    ツールを使うことが挙げられます。
 
    多くのホスティングサービス (GoDaddy、1and1) では、実際にウェブサーバーが
-   既に mod\_rewrite を使っているユーザディレクトリから配信されます。 
+   既に mod\_rewrite を使っているユーザディレクトリから配信されます。
    CakePHP をユーザディレクトリ (http://example.com/~username/cakephp/) または
-   既に mod\_rewrite を活用しているその他の URL 構造にインストールしているなら、 
-   RewriteBase ステートメントを CakePHP が使う .htaccess ファイル 
+   既に mod\_rewrite を活用しているその他の URL 構造にインストールしているなら、
+   RewriteBase ステートメントを CakePHP が使う .htaccess ファイル
    (/.htaccess、/app/.htaccess、/app/webroot/.htaccess) に追加する必要があります。
 
    これは RewriteEngine ディレクティブと同じセクションに追加でき、
@@ -331,7 +331,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
    含まれることがあります。
    詳しくは Apache のオンラインドキュメントを参照するようにしてください。
 
-#. (オプション) 公開環境の設定では、必要ないリクエストは CakePHP で処理されないようにしましょう。 
+#. (オプション) 公開環境の設定では、必要ないリクエストは CakePHP で処理されないようにしましょう。
    webroot の .htaccess ファイルを次のように修正してください::
 
        <IfModule mod_rewrite.c>
@@ -423,9 +423,9 @@ nginx は Apache のような .htaccess ファイルを利用しませんので�
 IIS7 (Windows hosts)
 --------------------
 
-IIS7 はネイティブで .htaccess ファイルをサポートしていません。 
-このサポートを追加できるアドオンがありますが、CakePHP のネイティブな書き換えを使うように 
-IIS に htaccess のルールをインポートすることもできます。 
+IIS7 はネイティブで .htaccess ファイルをサポートしていません。
+このサポートを追加できるアドオンがありますが、CakePHP のネイティブな書き換えを使うように
+IIS に htaccess のルールをインポートすることもできます。
 これをするには、以下のステップを踏んでください:
 
 
@@ -484,8 +484,8 @@ URL リライティングを使わない場合
     /.htaccess
     webroot/.htaccess
 
-これで URL は 
-www.example.com/index.php/controllername/actionname/param ではなく 
+これで URL は
+www.example.com/index.php/controllername/actionname/param ではなく
 www.example.com/controllername/actionname/param という書式になるでしょう。
 
 .. _GitHub: http://github.com/cakephp/cakephp

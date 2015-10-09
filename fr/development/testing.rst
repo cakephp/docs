@@ -15,7 +15,7 @@ CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait
 ce que vous pensez qu'il doit faire. PHPUnit peut être installé avec
-le `PHAR package <http://phpunit.de/#download>`_ ou avec
+le `PHAR package <http://phpunit.de/#download>`__ ou avec
 `Composer <http://getcomposer.org>`_.
 
 Installer PHPUnit avec Composer
@@ -44,13 +44,13 @@ lancer vos tests::
 
     Par souci de commodité vous pouvez rendre phpunit.phar disponible
     globalement sur Unix ou Linux via les commandes suivantes::
-    
+
       chmod +x phpunit.phar
       sudo mv phpunit.phar /usr/local/bin/phpunit
       phpunit --version
-    
+
     Référez vous à la documentation de PHPUnit pour les instructions concernant
-    `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`_.
+    `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Tester la Configuration de la Base de Données
 =============================================
@@ -1023,7 +1023,8 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
 toutes les assertions de `TestSuite
 <http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
-de `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
+de
+`PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------

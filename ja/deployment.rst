@@ -12,6 +12,8 @@
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _symlink-assets:
+
 .. meta::
     :title lang=ja: デプロイ
     :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

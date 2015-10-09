@@ -15,3 +15,13 @@ Retrieving Data & Results Sets
 
     You can referer to the english version in the select top menu to have
     information about this page's topic.
+
+.. _custom-find-methods:
+
+Custom Finder Methods
+=====================
+
+.. _map-reduce:
+
+Modifying Results with Map/Reduce
+=================================

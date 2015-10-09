@@ -53,8 +53,7 @@ release = '3.x'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = [
-    'themes',
-    'core-libraries/components/email.rst'
+    'themes'
 ]
 
 # The reST default role (used for this markup: `text`) to

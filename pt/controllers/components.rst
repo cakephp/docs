@@ -12,6 +12,11 @@ Components (Componentes)
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
 
+.. _configuring-components:
+
+Configuring Components
+======================
+
 .. toctree::
     :maxdepth: 1
 

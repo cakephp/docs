@@ -990,6 +990,13 @@ to fetch associated data from other tables is called **eager loading**.
     :start-after: start-contain
     :end-before: end-contain
 
+Filtering by Associated Data
+----------------------------
+
+.. include:: ./retrieving-data-and-resultsets.rst
+    :start-after: start-filtering
+    :end-before: end-filtering
+
 .. _adding-joins:
 
 Adding Joins

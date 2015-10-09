@@ -11,3 +11,7 @@ Requisitando dados e conjuntos de resultados
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+    .. _custom-find-methods:
+
+    .. _map-reduce:

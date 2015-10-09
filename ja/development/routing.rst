@@ -863,7 +863,7 @@ The above will generate URLs of style ``/blog-posts/*``.
         [1] => mark
     )
 
-URLを :term:`routing array` を使って生成するとき、文字列による添え字なしで配列に引数を加えます::
+URLを :term:`ルーティング配列` を使って生成するとき、文字列による添え字なしで配列に引数を加えます::
 
     ['controller' => 'Articles', 'action' => 'view', 5]
 
@@ -875,7 +875,7 @@ URLの生成
 .. php:staticmethod:: url($url = null, $full = false)
 
 URLの生成やリバースルーティングは CakePHP のすべてのコードの変更なしにURLの構造を簡単に変更する機能です。
-:term:`ルーティング配列 <routing array>` をURLを定義するために使えます。
+:term:`ルーティング配列 <ルーティング配列>` をURLを定義するために使えます。
 あとで変更を加えても、生成されたURLは自動的にアップデートされます。
 
 URLを文字列によって以下のように生成します。:

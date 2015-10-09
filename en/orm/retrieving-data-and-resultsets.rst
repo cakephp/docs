@@ -573,10 +573,14 @@ Alternatively, if you have multiple associations, you can use ``autoFields()``::
 .. versionadded:: 3.1
     Selecting columns via an association object was added in 3.1
 
+.. end-contain
+
 .. _filtering-by-associated-data:
 
 Filtering by Associated Data
 ----------------------------
+
+.. start-filtering
 
 A fairly common query case with associations is finding records 'matching'
 specific associated data. For example if you have 'Articles belongsToMany Tags'
@@ -755,7 +759,7 @@ result set.
 .. versionadded:: 3.1
     Query::leftJoinWith() was added in 3.1
 
-.. end-contain
+.. end-filtering
 
 Changing Fetching Strategies
 ----------------------------
