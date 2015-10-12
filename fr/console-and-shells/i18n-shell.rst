@@ -44,7 +44,7 @@ Messages de Validation de Model
 -------------------------------
 
 Vous pouvez définir le domaine à utiliser pour les messages de validation
-extraits dans vos models. Si le model a toujours une propriété 
+extraits dans vos models. Si le model a toujours une propriété
 ``$validationDomain``, le domaine de validation donnée va être ignoré::
 
     ./Console/cake i18n extract --validation-domain validation_errors
@@ -67,7 +67,7 @@ Eviter l'écrasement des avertissements pour les fichiers POT existants
 ----------------------------------------------------------------------
 .. versionadded:: 2.2
 
-En ajoutant --overwrite, le script de shell ne va plus vous avertir si un
+En ajoutant ``--overwrite``, le script de shell ne va plus vous avertir si un
 fichier POT existe déjà et va écraser par défaut::
 
     ./Console/cake i18n extract --overwrite
@@ -78,7 +78,8 @@ Extraire les messages des librairies du coeur de CakePHP
 
 Par défaut, le script de shell d'extraction va vous demander si vous souhaitez
 extraire les messages utilisés dans les librairies du coeur de CakePHP.
-Définissez --extract-core à yes ou no pour définir le comportement par défaut.
+Définissez ``--extract-core`` à ``yes`` ou ``no`` pour définir le comportement
+par défaut.
 
 ::
 
