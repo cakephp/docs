@@ -180,6 +180,10 @@ dans votre application.
 
     Chemin vers la racine du répertoire lib.
 
+.. php:const:: CONFIG
+
+   Chemin vers le répertoire config.
+
 .. php:const:: CORE_PATH
 
    Chemin vers le répertoire racine avec un slash à la fin.

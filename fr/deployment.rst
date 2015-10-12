@@ -51,9 +51,9 @@ Vérifier Votre Sécurité
 Si vous sortez votre application dans la nature, il est bon de vous assurer
 qu'elle n'a pas de fuites:
 
-* Assurez-vous que vous utilisez le
+* Assurez-vous que vous utilisez le component
   :doc:`/controllers/components/csrf` activé.
-* Vous pouvez activer :doc:`/controllers/components/security`.
+* Vous pouvez activer le component :doc:`/controllers/components/security`.
   Il évite plusieurs types de form tampering et réduit la possibilité
   des problèmes de mass-assignment.
 * Assurez-vous que vos models ont les bonnes règles de
