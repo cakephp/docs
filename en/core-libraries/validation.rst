@@ -4,7 +4,9 @@ Validation
 .. php:namespace:: Cake\Validation
 
 The validation package in CakePHP provides features to build validators that can
-validate arbitrary arrays of data with ease.
+validate arbitrary arrays of data with ease. You can find a `list of available
+Validation rules in the API
+<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
