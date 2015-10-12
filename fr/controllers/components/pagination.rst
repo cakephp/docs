@@ -190,7 +190,7 @@ l'objet table et laisser la query être construite pour vous. Le second paramèt
 doit être le tableau des configurations à utiliser pour la pagination. Ce
 tableau doit avoir la même structure que la propriété ``$paginate``
 dans un controller. Quand on pagine un objet ``Query``, l'option ``finder``
-sera ignorée. Il faut que vous passiez dans la query que vous souhaitez voir
+sera ignorée. Il faut que vous passiez la query que vous souhaitez voir
 paginée.
 
 Contrôle les Champs Utilisés pour le Tri
