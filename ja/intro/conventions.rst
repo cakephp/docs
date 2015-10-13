@@ -39,8 +39,8 @@ When you create links using ``this->Html->link()``, you can use the following
 conventions for the url array::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix // CamelCased
-        'plugin' => 'MyPlugin, // CamelCased
+        'prefix' => 'MyPrefix' // CamelCased
+        'plugin' => 'MyPlugin', // CamelCased
         'controller' => 'ControllerName', // CamelCased
         'action' => 'actionName' // camelBacked
     ]

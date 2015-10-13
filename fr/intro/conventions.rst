@@ -47,8 +47,8 @@ Quand vous créez des liens en utilisant ``this->Html->link()``, vous pouvez
 utiliser les conventions suivantes pour le tableau d'url::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix // CamelCased
-        'plugin' => 'MyPlugin, // CamelCased
+        'prefix' => 'MyPrefix' // CamelCased
+        'plugin' => 'MyPlugin', // CamelCased
         'controller' => 'ControllerName', // CamelCased
         'action' => 'actionName' // camelBacked
     ]
