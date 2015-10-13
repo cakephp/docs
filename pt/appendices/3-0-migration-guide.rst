@@ -1007,3 +1007,332 @@ os problemas que as pessoas tinham no passado:
 
 É recomendado que você revise a documentação :doc:`/views/helpers/form`
 para mais detalhes sobre como usar o FormHelper no 3.0.
+
+HtmlHelper
+----------
+
+- O ``HtmlHelper::useTag()`` foi removido, use ``tag()`` no lugar.
+- O ``HtmlHelper::loadConfig()`` foi removido. As tags podem ser personalizadas
+  usando ``templates()`` ou as configurações de ``templates``.
+- O segundo parâmetro ``$options`` para ``HtmlHelper::css()`` agora sempre irá exigir um array.
+- O primeiro parâmetro ``$data`` para ``HtmlHelper::style()`` agora sempre irá exigir um array.
+- O parâmetro ``inline`` foi removido dos métodos meta(), css(), script() e scriptBlock().
+  Ao invés disso, você deve usar a opção ``block``. Definindo ``block =>
+  true`` irá emular o comportamento anterior.
+- O ``HtmlHelper::meta()`` agora exige que o ``$type`` seja uma string. Opções adicionais podem
+  ser passadas como ``$options``.
+- O ``HtmlHelper::nestedList()`` agora exige que o ``$options`` seja um array. O quarto
+  argumento para o tipo tag foi removido e incluido no array ``$options``.
+- O argumento ``$confirmMessage`` de :php:meth:`Cake\\View\\Helper\\HtmlHelper::link()`
+  foi removido. Você deve usar agora a chave ``confirm`` no ``$options`` para especificar
+  a menssagem.
+
+PaginatorHelper
+---------------
+
+- O ``link()`` foi removido. Ele não era mais usado internamente pelo ajudante.
+  Ele era pouco usado em códigos de usuários e não se encaixava mais nos objetivos do ajudante.
+- O ``next()`` não tem mais as opções 'class' ou 'tag'. Ele não tem mais argumentos
+  desabilitados. Ao invés disso são usados templates.
+- O ``prev()`` não tem mais as opções 'class' ou 'tag'. Ele não tem mais argumentos
+  desabilitados. Ao invés disso são usados templates.
+- O ``first()`` não tem mais as opções 'after', 'ellipsis', 'separator', 'class' ou 'tag'.
+- O ``last()`` não tem mais as opções 'after', 'ellipsis', 'separator', 'class' ou 'tag'.
+- O ``numbers()`` não tem mais as opções 'separator', 'tag', 'currentTag', 'currentClass',
+  'class', 'tag' e 'ellipsis'. Essas opções são agora facilitadas pelos templates.
+  Ele também exige que agora o parâmetro ``$options``  seja um array.
+- O espaço reservado de estilo ``%page%`` foi removido de :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
+  Use o espaço reservado de estilo ``{{page}}`` no lugar.
+- O ``url()`` foi renomeada para ``generateUrl()`` para evitar colisão de declaração de 
+  método com ``Helper::url()``.
+
+Por padrão todos os links e textos inativos são encapsulados em elementos ``<li>``. Isso
+ajuda a fazer o CSS mais fácil de escrever, e aumenta a compatibilidade com frameworks
+de CSS populares.
+
+Ao invés de várias opções em cada método, você deve usar a funcionalidade de templates.
+Veja a documentação :ref:`paginator-templates` para informações de como se usar templates.
+
+TimeHelper
+----------
+
+- ``TimeHelper::__set()``, ``TimeHelper::__get()``, e  ``TimeHelper::__isset()`` foram
+  removidos. Eles eram métodos mágicos para atributos obsoletos.
+- O ``TimeHelper::serverOffset()`` foi removido. Ele provia práticas incorretas de operações
+  com tempo.
+- O ``TimeHelper::niceShort()`` foi removido.
+
+NumberHelper
+------------
+
+- O :php:meth:`NumberHelper::format()` agora exige que ``$options`` seja um array.
+
+SessionHelper
+-------------
+
+- O ``SessionHelper`` está obsoleto. Você pode usar ``$this->request->session()`` diretamente,
+  e a funcionalidade de mensagens flash foi movida para :doc:`/views/helpers/flash`.
+
+
+JsHelper
+--------
+
+- O ``JsHelper`` e todos motores associados foram removidos. Ele podia gerar
+  somente um subconjunto muito pequeno de códigos JavaScript para biblioteca
+  selecionada e consequentemente tentar gerar todo código JavaScript usando
+  apenas o ajudante se tornava um impedimento com frequência. É recomendado
+  usar diretamente sua biblioteca JavaScript preferida.
+
+CacheHelper Removido
+--------------------
+
+O CacheHelper foi removido. A funcionalidade de cache que ele fornecia
+não era padrão, limitada e incompatível com layouts não-HTML e visões de dados.
+Essas limitações significavam que uma reconstrução completa era necessária.
+O ESI (Edge Side Includes) se tornou uma maneira padronizada para implementar
+a funcionalidade que o CacheHelper costumava fornecer. Entretanto, implementando
+`Edge Side Includes <http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ em PHP 
+tem várias limitações e casos. Ao invés de construir uma solução ruim,
+é recomendado que os desenvolvedores que precisem de cache de resposta completa
+use o `Varnish <http://varnish-cache.org>`_ ou `Squid <http://squid-cache.org>`_ 
+no lugar.
+
+I18n
+====
+
+O subsistema de internacionalização foi completamente reescrito. Em geral, 
+você pode esperar o mesmo comportamento que nas versões anteriores,
+especialmente se você está usando a família de funções ``__()``.
+
+Internamente, a classe ``I18n`` usa ``Aura\Intl``, e métodos apropriados são
+expostos para dar acesso a funções específicas da biblioteca. Por esta razão
+a maior parte dos métodos dentro de ``I18n`` foram removidos ou renomeados.
+
+Devido ao uso do ``ext/intl``, a classe L10n foi removida completamente. 
+Ela fornecia dados incompletos e desatualizados em comparação com os dados
+disponíveis na classe ``Locale`` do PHP.
+
+O idioma padrão da aplicação não será mais alterado automaticamente pelos
+idiomas aceitos pelo navegador nem por ter o valor ``Config.language`` definido
+na sessão do navegador. Você pode, entretanto, usar um filtro no despachante 
+para trocar o idioma automaticamente a partir do cabeçalho ``Accept-Language``
+enviado pelo navegador::
+
+    // No config/bootstrap.php
+    DispatcherFactory::addFilter('LocaleSelector');
+
+Não há nenhum substituto incluso para selecionar automaticamente o idioma
+a partir de um valor configurado na sessão do usuário.
+
+A função padrão para formatação de mensagens traduzidas não é mais a 
+``sprintf``, mas a mais avançada e funcional classe ``MessageFormatter``.
+Em geral você pode reescrever os espaços reservados nas mensagens como
+segue::
+
+    // Antes:
+    __('Hoje é um dia %s na %s', 'Ensolarado', 'Espanha');
+
+    // Depois:
+    __('Hoje é um dia {0} na {1}', 'Ensolarado', 'Espanha');
+
+Você pode evitar ter de reescrever suas mensagens usando o antigo formatador
+``sprintf``::
+
+    I18n::defaultFormatter('sprintf');
+
+Adicionalmente, o valor ``Config.language`` foi removido e ele não pode mais
+ser usado para controlar o idioma atual da aplicação. Ao invés disso, você
+pode usar a classe ``I18n``::
+
+    // Antes
+    Configure::write('Config.language', 'fr_FR');
+
+    // Agora
+    I18n::locale('en_US');
+
+- Os métodos abaixo foram movidos:
+
+    - De ``Cake\I18n\Multibyte::utf8()`` para ``Cake\Utility\Text::utf8()``
+    - De ``Cake\I18n\Multibyte::ascii()`` para ``Cake\Utility\Text::ascii()``
+    - De ``Cake\I18n\Multibyte::checkMultibyte()`` para ``Cake\Utility\Text::isMultibyte()``
+
+- Como agora o CakePHP requer a extensão mbstring, a classe
+  ``Multibyte`` foi removida.
+- As mensagens de erro por todo o CakePHP não passam mais através das funções
+  de internacionalização. Isso foi feito para simplificar o núcleo do CakePHP e
+  reduzir a sobrecarga. As mensagens apresentadas aos desenvolvedores são raramente,
+  isso quando, são de fato traduzidas - de modo que essa sobrecarga adicional 
+  trás pouco beneficio.
+
+Localização
+===========
+
+- Agora o construtor de :php:class:`Cake\\I18n\\L10n` recebe uma instância de
+  :php:class:`Cake\\Network\\Request` como argumento.
+
+
+Testes
+======
+
+- O ``TestShell`` foi removido. O CakePHP, o esqueleto da aplicação e novos
+  plugins "cozinhados", todos usam o ``phpunit`` para rodar os testes.
+- O webrunner (webroot/test.php) foi removido. A adoção do CLI aumentou
+  grandemente desde o release inicial do 2.x. Adicionalmente, os CLI de execução
+  oferecem integração superior com IDE's e outras ferramentas automáticas.
+
+  Se você sentir necessidade de um jeito de executar os testes a partir de um
+  navegador, você deve verificar o `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_.
+  Ele oferece muitas funcionalidades adicionais que o antigo webrunner.
+- O ``ControllerTestCase`` está obsoleto e será removido no CakePHP 3.0.0.
+  Ao invés disso, você deve usar a nova funcionalidade :ref:`integration-testing`.
+- As Fixtures devem agora ser referenciadas usando sua forma no plural::
+
+    // No lugar de
+    $fixtures = ['app.artigo'];
+
+    // Você deve usar
+    $fixtures = ['app.artigos'];
+
+Utilitários
+===========
+
+Classe Set Removida
+-------------------
+
+A classe Set foi removida, agora você deve usar a classe Hash no lugar dela.
+
+Pasta & Arquivos
+-------------
+
+As classes de pastas e arquivos foram renomeadas:
+
+- O ``Cake\Utility\File`` foi renomeado para :php:class:`Cake\\Filesystem\\File`
+- O ``Cake\Utility\Folder`` foi renomeado para :php:class:`Cake\\Filesystem\\Folder`
+
+Inflexão
+--------
+
+- O valor padrão para o argumento ``$replacement`` do :php:meth:`Cake\\Utility\\Inflector::slug()`
+  foi alterado do sublinhado (``_``) para o traço (``-``). Usando traços para 
+  separar palavras nas URLs é a escolha popular e também recomendada pelo Google.
+
+- As transliterações para :php:meth:`Cake\\Utility\\Inflector::slug()` foram alteradas.
+  Se você usa transliterações personalizadas você terá que atualizar seu código.
+  No lugar de expressões regulares, as transliterações usam simples substituições de
+  string. Isso rendeu melhorias de performance significativas::
+
+    // No lugar de
+    Inflector::rules('transliteration', [
+        '/ä|æ/' => 'ae',
+        '/å/' => 'aa'
+    ]);
+
+    // Você deve usar
+    Inflector::rules('transliteration', [
+        'ä' => 'ae',
+        'æ' => 'ae',
+        'å' => 'aa'
+    ]);
+
+- Os conjuntos distintos de regras de não-inflexões e irregulares para 
+  pluralização e singularização foram removidos. No lugar agora temos
+  uma lista comum para cada. Quando usar :php:meth:`Cake\\Utility\\Inflector::rules()`
+  com o tipo 'singular' e 'plural' você não poderá mais usar chaves como 'uninflected' 
+  e 'irregular' no array de argumentos ``$rules``.
+
+  Você pode adicionar / sobrescrever a lista de regras de não-inflexionados e 
+  irregulares usando :php:meth:`Cake\\Utility\\Inflector::rules()` com valores 
+  'uninflected' e 'irregular' para o argumento ``$type``.
+
+Sanitize
+--------
+
+- A classe ``Sanitize`` foi removida.
+
+Segurança
+---------
+
+- O ``Security::cipher()`` foi removido. Ele era inseguro e promovia práticas
+  ruins de criptografia. Você deve usar o :php:meth:`Security::encrypt()`
+  no lugar.
+- O valor de configuração ``Security.cipherSeed`` não é mais necessário. Com a
+  remoção de ``Security::cipher()`` ele não tem utilidade.
+- A retrocompatibilidade do :php:meth:`Cake\\Utility\\Security::rijndael()` para
+  valores encriptados antes do CakePHP 2.3.1 foi removido. Você deve reencriptar
+  os valores usando ``Security::encrypt()`` e uma versão recente do CakePHP 2.x 
+  antes de migrar.
+- A habilidade para gerar um hash do tipo blowfish foi removido. Você não pode mais
+  usar o tipo "blowfish" em ``Security::hash()``. Deve ser usado apenas o `password_hash()`
+  do PHP e `password_verify()` para gerar e verificar hashes blowfish. A compabilidade
+  da biblioteca `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
+  que é instalado junto com o CakePHP fornece essas funções para versões de 
+  PHP menor que 5.5.
+- O OpenSSL é usado agora no lugar do mcrypt ao encriptar/desencriptar dados.
+  Esse alteração fornece uma melhor performance e deixa o CakePHP a prova de 
+  futuros abandonos de suporte das distribuições ao mcrypt.
+- O ``Security::rijndael()`` está obsoleto e apenas disponível quando se usa
+  o mcrypt.
+
+.. aviso::
+
+    Dados encriptados com Security::encrypt() em versões anteriores não são
+    compatíveis com a implementação openssl. Você deve :ref:`definir a
+    implementação como mcrypt <force-mcrypt>` quando fizer atualização.
+
+Data e Hora
+-----------
+
+- O ``CakeTime`` foi renomeado para :php:class:`Cake\\I18n\\Time`.
+- O ``CakeTime::serverOffset()`` foi removido. Ele provia práticas incorretas de operações
+  com tempo.
+- O ``CakeTime::niceShort()`` foi removido.
+- O ``CakeTime::convert()`` foi removido.
+- O ``CakeTime::convertSpecifiers()`` foi removido.
+- O ``CakeTime::dayAsSql()`` foi removido.
+- O ``CakeTime::daysAsSql()`` foi removido.
+- O ``CakeTime::fromString()`` foi removido.
+- O ``CakeTime::gmt()`` foi removido.
+- O ``CakeTime::toATOM()`` foi renomeado para ``toAtomString``.
+- O ``CakeTime::toRSS()`` foi renomeado para ``toRssString``.
+- O ``CakeTime::toUnix()`` foi renomeado para ``toUnixString``.
+- O ``CakeTime::wasYesterday()`` foi renomeado para ``isYesterday`` para combinar com o
+  resto da renomeação de métodos.
+- O ``CakeTime::format()`` não usa mais o formato do ``sprintf``, ao invés disso você 
+  deve usar o formato ``i18nFormat``.
+- O :php:meth:`Time::timeAgoInWords()` agora exige que o ``$options`` seja um array.
+
+A classe Time não é mais uma coleção de métodos estáticos, ela estende o ``DateTime`` para
+herdar todos seus métodos e adicionar funções de formatação baseado em localização com 
+ajuda da extensão ``intl``.
+
+Em geral, expressões assim::
+
+    CakeTime::aMethod($date);
+
+Podem ser migradas reescrevendo para::
+
+    (new Time($date))->aMethod();
+
+Números
+-------
+
+A biblioteca Number foi reescrita para usar internamente a classe ``NumberFormatter``.
+
+- O ``CakeNumber`` foi renomeada para :php:class:`Cake\\I18n\\Number`.
+- O :php:meth:`Number::format()` agora exige que o ``$options`` seja um array.
+- O :php:meth:`Number::addFormat()` foi removido.
+- O ``Number::fromReadableSize()`` foi movido para :php:meth:`Cake\\Utility\\Text::parseFileSize()`.
+
+Validação
+---------
+
+- A faixa de valores para :php:meth:`Validation::range()` agora é inclusiva se ``$lower`` e
+  ``$upper`` forem fornecidos.
+- O ``Validation::ssn()`` foi removido.
+
+Xml
+---
+
+- O :php:meth:`Xml::build()` agora exige que o ``$options`` seja um array.
+- O ``Xml::build()`` não aceita mais uma URL. Se você precisar criar um documento XML
+  a partir de uma URL, use o 
