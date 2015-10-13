@@ -956,6 +956,24 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
+Testing Actions Protected by CsrfComponent or SecurityComponent
+---------------------------------------------------------------
+
+When testing actions protected by either SecurityComponent or CsrfComponent you
+can enable automatic token generation to ensure your tests won't fail due to
+token mismatches::
+
+    public function testAdd()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        $this->post('/posts/add', ['title' => 'Exciting news!']);
+    }
+
+.. versionadded:: 3.1.2
+    The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
+    in 3.1.2
+
 Méthodes d'Assertion
 --------------------
 
