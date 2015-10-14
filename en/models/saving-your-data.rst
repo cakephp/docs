@@ -235,8 +235,8 @@ model methods was calling ``updateAll()`` you would do the following::
     $db = $this->getDataSource();
     $value = $db->value($value, 'string');
     $this->updateAll(
-        array('Baker.approved' => true),
-        array('Baker.created <=' => $value)
+        array('Baker.status' => $value),
+        array('Baker.status' => 'old')
     );
 
 .. note::
