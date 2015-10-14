@@ -191,7 +191,7 @@ un nouveau template de bake, faîtes ce qui suit:
    Bake
 #. Créez un nouveau répertoire **plugins/[name]/src/Template/Bake/Template/**.
 #. Copiez tout template que vous souhaitez changer à partir de
-   **vendor/cakephp/cakephp/src/Template/Bake/Template/** vers les
+   **vendor/cakephp/src/Template/Bake/Template/** vers les
    fichiers correspondants dans votre plugin.
 #. Quand vous lancez bake, utilisez l'option ``--theme`` pour spécifier le
    theme de bake que vous souhaitez utiliser.
