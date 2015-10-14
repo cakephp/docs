@@ -171,7 +171,7 @@ The bake tool has created all your files in a snap. You can give them a quick
 read if you want re-familiarize yourself with how CakePHP works.
 
 .. note::
-    If you are on Windows remember to use \ instead of /.
+    If you are on Windows remember to use \\ instead of /.
 
 You'll need to edit the following in **src/Template/Categories/add.ctp**
 and **src/Template/Categories/edit.ctp**::
