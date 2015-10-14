@@ -200,15 +200,15 @@ saveField 方法也有另一种语法::
     );
 
 
-``$fields`` 数组可接受 SQL 表达式。常量(*literal*)值应当使用 
-:php:meth:`DboSource::value()` 手动引用。例如，如果一个模型方法调用 
+``$fields`` 数组可接受 SQL 表达式。常量(*literal*)值应当使用
+:php:meth:`DboSource::value()` 手动引用。例如，如果一个模型方法调用
 ``updateAll()``，应该这样::
 
     $db = $this->getDataSource();
     $value = $db->value($value, 'string');
     $this->updateAll(
-        array('Baker.approved' => true),
-        array('Baker.created <=' => $value)
+        array('Baker.status' => $value),
+        array('Baker.status' => 'old')
     );
 
 .. note::
