@@ -179,7 +179,7 @@ lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de
 CakePHP.
 
 .. note::
-    Si vous utilisez Windows, pensez à utiliser \ à la place de /.
+    Si vous utilisez Windows, pensez à utiliser \\ à la place de /.
 
 Vous devrez modifier ce qui suit dans **src/Template/Categories/add.ctp**
 et **src/Template/Categories/edit.ctp**::
