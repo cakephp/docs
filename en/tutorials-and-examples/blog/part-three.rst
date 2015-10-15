@@ -34,7 +34,7 @@ A migration file will be generated in the **/config/Migrations** folder with the
 
     <?php
 
-    use Phinx\Migration\AbstractMigration;
+    use Migrations\AbstractMigration;
 
     class CreateArticlesTable extends AbstractMigration
     {
@@ -67,15 +67,16 @@ A migration file will be generated in the **/config/Migrations** folder with the
         }
     }
 
-Run another command to create a ``categories`` table::
+Run another command to create a ``categories`` table. If you need to specify
+a field length, you can do it within brackets in the field type, ie::
 
-    bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
+    bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
 
 This will generate the following file in **config/Migrations**::
 
     <?php
 
-    use Phinx\Migration\AbstractMigration;
+    use Migrations\AbstractMigration;
 
     class CreateCategoriesTable extends AbstractMigration
     {
@@ -89,17 +90,17 @@ This will generate the following file in **config/Migrations**::
             ]);
             $table->addColumn('lft', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => 10,
                 'null' => false,
             ]);
             $table->addColumn('rght', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => 10,
                 'null' => false,
             ]);
             $table->addColumn('name', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 100,
                 'null' => false,
             ]);
             $table->addColumn('description', 'string', [

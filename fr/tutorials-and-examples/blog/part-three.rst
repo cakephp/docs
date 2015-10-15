@@ -39,7 +39,7 @@ ce qui suit::
 
     <?php
 
-    use Phinx\Migration\AbstractMigration;
+    use Migrations\AbstractMigration;
 
     class CreateArticlesTable extends AbstractMigration
     {
@@ -72,15 +72,17 @@ ce qui suit::
         }
     }
 
-Exécutez une autre commande pour créer une table ``categories``::
+Exécutez une autre commande pour créer une table ``categories``. Si vous voulez
+spécifier une longueur de champ, vous pouvez le faire entre crochets dans le
+type du champ, par exemple::
 
-    bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
+    bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
 
 Ceci va générer le fichier suivant dans **config/Migrations**::
 
     <?php
 
-    use Phinx\Migration\AbstractMigration;
+    use Migrations\AbstractMigration;
 
     class CreateCategoriesTable extends AbstractMigration
     {
@@ -94,17 +96,17 @@ Ceci va générer le fichier suivant dans **config/Migrations**::
             ]);
             $table->addColumn('lft', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => 10,
                 'null' => false,
             ]);
             $table->addColumn('rght', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => 10,
                 'null' => false,
             ]);
             $table->addColumn('name', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 100,
                 'null' => false,
             ]);
             $table->addColumn('description', 'string', [

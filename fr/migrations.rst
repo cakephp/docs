@@ -42,6 +42,10 @@ de données.
 
 Ci-dessous un exemple de migration::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             /**
@@ -60,6 +64,7 @@ Ci-dessous un exemple de migration::
                       ->addColumn('created', 'datetime')
                       ->create();
             }
+        }
 
 
 Cette migration ajoute une table appelée ``products`` avec une colonne de type
@@ -101,6 +106,10 @@ commande. Imaginons que vous souhaitez ajouter une nouvelle table ``products``::
 
 La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -112,6 +121,7 @@ La ligne ci-dessus va créer un fichier de migration qui ressemble à ceci::
                       ->addColumn('modified', 'datetime')
                       ->create();
             }
+        }
 
 Si le nom de la migration dans la ligne de commande est de la forme
 "AddXXXToYYY" ou "RemoveXXXFromYYY" et est suivie d'une liste de noms de
@@ -122,6 +132,10 @@ création ou le retrait des colonnes sera généré::
 
 L'exécution de la ligne de commande ci-dessus va générer::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class AddPriceToProducts extends AbstractMigration
         {
             public function change()
@@ -130,12 +144,17 @@ L'exécution de la ligne de commande ci-dessus va générer::
                 $table->addColumn('price', 'decimal')
                       ->update();
             }
+        }
 
 Il est également possible d'ajouter des indexes de colonnes::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index
 
 va générer::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class AddNameIndexToProducts extends AbstractMigration
         {
@@ -146,6 +165,7 @@ va générer::
                       ->addIndex(['name'])
                       ->update();
             }
+        }
 
 
 Lors de l'utilisation des champs dans la ligne de commande, il est utile de se
@@ -169,6 +189,10 @@ colonne en utilisant la ligne de commande::
 
 crée le fichier::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class RemovePriceFromProducts extends AbstractMigration
         {
             public function change()
@@ -176,8 +200,9 @@ crée le fichier::
                 $table = $this->table('products');
                 $table->removeColumn('price');
             }
+        }
 
-Les noms des migration peuvent suivre l'un des motifs suivants:
+Les noms des migrations peuvent suivre l'un des motifs suivants:
 
 * Créer une table: (``/^(Create)(.*)/``) Crée la table spécifiée.
 * Supprimer une table: (``/^(Drop)(.*)/``) Supprime la table spécifiée. Ignore les arguments de champ spécifié.
@@ -232,6 +257,10 @@ Pour personnaliser la création automatique de la clé primaire ``id`` lors
 de l'ajout de nouvelles tables, vous pouvez utiliser le deuxième argument de la
 méthode ``table()``::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -243,6 +272,7 @@ méthode ``table()``::
                       ->addColumn('description', 'text')
                       ->create();
             }
+        }
 
 Le code ci-dessus va créer une colonne ``CHAR(36)`` ``id`` également utilisée
 comme clé primaire.
@@ -262,6 +292,8 @@ Vous pouvez définir la propriété ``autoId`` à ``false`` dans la classe de
 Migration, ce qui désactivera la création automatique de la colonne ``id``.
 Vous aurez cependant besoin de manuellement créer la colonne qui servira de clé
 primaire et devrez l'ajouter à la déclaration de la table::
+
+        <?php
 
         use Migrations\AbstractMigration;
 
@@ -283,6 +315,7 @@ primaire et devrez l'ajouter à la déclaration de la table::
                     ->addColumn('description', 'text')
                     ->create();
             }
+        }
 
 Comparée à la méthode précédente de gestion des clés primaires, cette méthode
 vous donne un plus grand contrôle sur la définition de la colonne de la clé
@@ -304,6 +337,10 @@ Si vous avez besoin de créer une table avec une ``collation`` différente
 de celle par défaut de la base de données, vous pouvez la définir comme option
 de la méthode ``table()``::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateCategoriesTable extends AbstractMigration
         {
             public function change()
@@ -319,6 +356,7 @@ de la méthode ``table()``::
                     ])
                     ->create();
             }
+        }
 
 Notez cependant que ceci ne peut être fait qu'en cas de création de table :
 il n'y a actuellement aucun moyen d'ajouter une colonne avec une ``collation``

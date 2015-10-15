@@ -37,6 +37,10 @@ indexes and even insert data into the database.
 
 Here's an example of a migration::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             /**
@@ -55,6 +59,7 @@ Here's an example of a migration::
                       ->addColumn('created', 'datetime')
                       ->create();
             }
+        }
 
 
 This migration adds a table called products with a string column called ``name``, a text
@@ -91,6 +96,10 @@ Let's imagine that you'd like to add a new ``products`` table::
 
 The above line will create a migration file looking like this::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -102,6 +111,7 @@ The above line will create a migration file looking like this::
                       ->addColumn('modified', 'datetime')
                       ->create();
             }
+        }
 
 If the migration name in the command line is of the form "AddXXXToYYY" or "RemoveXXXFromYYY"
 and is followed by a list of column names and types then a migration file
@@ -111,6 +121,10 @@ containing the code for creating or dropping the columns will be generated::
 
 Executing the command line above will generate::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class AddPriceToProducts extends AbstractMigration
         {
             public function change()
@@ -119,12 +133,17 @@ Executing the command line above will generate::
                 $table->addColumn('price', 'decimal')
                       ->update();
             }
+        }
 
 It is also possible to add indexes to columns::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index
 
 will generate::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class AddNameIndexToProducts extends AbstractMigration
         {
@@ -135,7 +154,7 @@ will generate::
                       ->addIndex(['name'])
                       ->update();
             }
-
+        }
 
 When using fields in the command line it may be handy to remember that they
 follow the following pattern::
@@ -157,6 +176,10 @@ command line::
 
 creates the file::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class RemovePriceFromProducts extends AbstractMigration
         {
             public function change()
@@ -164,6 +187,7 @@ creates the file::
                 $table = $this->table('products');
                 $table->removeColumn('price');
             }
+        }
 
 Migration Names can follow any of the following patterns:
 
@@ -217,6 +241,10 @@ If you need to avoid the automatic creation of the ``id`` primary key when
 adding new tables to the database, you can use the second argument of the
 ``table()`` method::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -228,6 +256,7 @@ adding new tables to the database, you can use the second argument of the
                       ->addColumn('description', 'text')
                       ->create();
             }
+        }
 
 The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
 
@@ -245,6 +274,8 @@ You can specify a ``autoId`` property in the Migration class and set it to
 ``false``, which will turn off the automatic ``id`` column creation. You will
 need to manually create the column that will be used as a primary key and add
 it to the table declaration::
+
+        <?php
 
         use Migrations\AbstractMigration;
 
@@ -266,6 +297,7 @@ it to the table declaration::
                     ->addColumn('description', 'text')
                     ->create();
             }
+        }
 
 Compared to the previous way of dealing with primary key, this method gives you
 the ability to have more control over the primary key column definition :
@@ -284,6 +316,10 @@ Collations
 If you need to create a table with a different collation than the database
 default one, you can define it with the ``table()`` method, as an option::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateCategoriesTable extends AbstractMigration
         {
             public function change()
@@ -299,6 +335,7 @@ default one, you can define it with the ``table()`` method, as an option::
                     ])
                     ->create();
             }
+        }
 
 Note however this can only be done on table creation : there is currently
 no way of adding a column to an existing table with a different collation than
