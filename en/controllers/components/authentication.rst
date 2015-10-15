@@ -329,7 +329,7 @@ To use basic authentication, you'll need to configure AuthComponent::
 
     $this->Auth->config('authenticate', [
         'Basic' => [
-            'fields' => ['username' => 'username', 'password' => 'api_key']
+            'fields' => ['username' => 'username', 'password' => 'api_key'],
             'userModel' => 'Users'
         ],
     ]);
