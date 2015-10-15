@@ -9,7 +9,7 @@ Migrations
 スキーマ変更のSQLを書く代わりに、このプラグインでは、直観的にデータベースの変更を
 実現するための手段を使用することができます。
 
-このプラグインは、データベースマイグレーションライブラリの 
+このプラグインは、データベースマイグレーションライブラリの
 `Phinx <https://phinx.org/>`_ のラッパーです。
 
 インストール
@@ -38,6 +38,10 @@ migration は、基本的にはデータベースに「バージョン」を記�
 
 ここにマイグレーションの例があります。::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             /**
@@ -55,8 +59,9 @@ migration は、基本的にはデータベースに「バージョン」を記�
                       ->addColumn('created', 'datetime')
                       ->create();
             }
+        }
 
-このマイグレーションは products というテーブルに、 ``name`` という string 項目と 
+このマイグレーションは products というテーブルに、 ``name`` という string 項目と
 ``description`` という text 項目と ``created`` という datetime 形式の項目を
 作成します。プライマリキーの ``id`` という項目は、暗黙のうちに作成されます。
 
@@ -72,9 +77,9 @@ migration は、基本的にはデータベースに「バージョン」を記�
 マイグレーションファイルの作成
 ==============================
 
-マイグレーションファイルは、あなたのアプリケーションの **config/Migration** 
+マイグレーションファイルは、あなたのアプリケーションの **config/Migration**
 ディレクトリに配置します。
-マイグレーションファイルの名前には、先頭に **YYYYMMDDHHMMSS_my_new_migration.php** 
+マイグレーションファイルの名前には、先頭に **YYYYMMDDHHMMSS_my_new_migration.php**
 というように作成した日付を付けます。
 
 移行ファイルを作成する最も簡単な方法は、コマンドラインを使用することです。
@@ -90,6 +95,10 @@ migration は、基本的にはデータベースに「バージョン」を記�
 
 上の行は、下記のようなマイグレーションファイルを作成します::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -101,6 +110,7 @@ migration は、基本的にはデータベースに「バージョン」を記�
                       ->addColumn('modified', 'datetime')
                       ->create();
             }
+        }
 
 もしコマンドラインのマイグレーション名が "AddXXXToYYY" や "RemoveXXXFromYYY" といった
 書式で、その後にカラム名と型が続けば、項目の追加・削除を行うコードを含んだ
@@ -110,6 +120,10 @@ migration は、基本的にはデータベースに「バージョン」を記�
 
 コマンドラインを実行すると下記のようなファイルが生成されます。::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class AddPriceToProducts extends AbstractMigration
         {
             public function change()
@@ -118,12 +132,44 @@ migration は、基本的にはデータベースに「バージョン」を記�
                 $table->addColumn('price', 'decimal')
                       ->update();
             }
+        }
 
+.. versionadded:: cakephp/migrations 1.4
+
+If you need to specify a field length, you can do it within brackets in the
+field type, ie::
+
+        bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
+
+Executing the command line above will generate::
+
+        <?php
+
+        use Migrations\AbstractMigration;
+
+        class AddFullDescriptionToProducts extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this->table('products');
+                $table->addColumn('full_description', 'string', [
+                        'default' => null,
+                        'limit' => 60,
+                        'null' => false,
+                     ])
+                      ->update();
+            }
+        }
+        
 インデックスに項目を追加することも可能です。::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index
 
 このようなファイルが生成されます。::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class AddNameIndexToProducts extends AbstractMigration
         {
@@ -134,7 +180,7 @@ migration は、基本的にはデータベースに「バージョン」を記�
                       ->addIndex(['name'])
                       ->update();
             }
-
+        }
 
 コマンドラインのフィールドを使用する場合には、下記のようなパターンに従っている事を
 覚えておくと便利かもしれません::
@@ -156,6 +202,10 @@ migration は、基本的にはデータベースに「バージョン」を記�
 
 このようなファイルが生成されます。::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class RemovePriceFromProducts extends AbstractMigration
         {
             public function change()
@@ -163,6 +213,7 @@ migration は、基本的にはデータベースに「バージョン」を記�
                 $table = $this->table('products');
                 $table->removeColumn('price');
             }
+        }
 
 マイグレーション名は下記のパターンに従うことができます。:
 
@@ -193,8 +244,8 @@ migration は、基本的にはデータベースに「バージョン」を記�
 
         bin/cake migrations create MyCustomMigration
 
-マイグレーションファイルに記述可能なメソッドの一覧については、オフィシャルの 
-`Phinx ドキュメント <http://docs.phinx.org/en/latest/migrations.html>`_ 
+マイグレーションファイルに記述可能なメソッドの一覧については、オフィシャルの
+`Phinx ドキュメント <http://docs.phinx.org/en/latest/migrations.html>`_
 をご覧ください。
 
 既存のデータベースからマイグレーションファイルを作成する
@@ -215,6 +266,10 @@ migration は、基本的にはデータベースに「バージョン」を記�
 あなたがデータベースに新しいテーブルを作成する時、 ``id`` を主キーとして
 自動生成したくない場合、 ``table()`` メソッドの第２引数を使うことができます。::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -226,15 +281,18 @@ migration は、基本的にはデータベースに「バージョン」を記�
                       ->addColumn('description', 'text')
                       ->create();
             }
+        }
 
 上記の例では、 ``CHAR(36)`` ``id`` というカラムを主キーとして作成します。
 
 さらに、Migrations 1.3 以降では 主キーに対処するための新しい方法が導入されました。
-これを行うには、あなたのマイグレーションクラスは新しい ``Migrations\AbstractMigration`` 
+これを行うには、あなたのマイグレーションクラスは新しい ``Migrations\AbstractMigration``
 クラスを継承する必要があります。
 あなたは Migration クラスの ``autoId`` プロパティに ``false`` を設定することで、
 自動的な ``id`` 項目の生成をオフにすることができます。
 あなたは手動で主キー項目を作成し、テーブル宣言に追加する必要があります。::
+
+        <?php
 
         use Migrations\AbstractMigration;
 
@@ -256,6 +314,7 @@ migration は、基本的にはデータベースに「バージョン」を記�
                     ->addColumn('description', 'text')
                     ->create();
             }
+        }
 
 主キーを扱うこれまでの方法と比較すると、この方法は、unsigned や not や limit や comment など
 さらに多くの主キーの定義を操作することができるようになっています。
@@ -271,8 +330,12 @@ Bake で生成されたマイグレーションファイルとスナップショ
 照合順序
 ----------
 
-もしデータベースのデフォルトとは別の照合順序を持つテーブルを作成する必要がある場合は、 
+もしデータベースのデフォルトとは別の照合順序を持つテーブルを作成する必要がある場合は、
 ``table()`` メソッドのオプションとして定義することができます。::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class CreateCategoriesTable extends AbstractMigration
         {
@@ -289,6 +352,7 @@ Bake で生成されたマイグレーションファイルとスナップショ
                     ])
                     ->create();
             }
+        }
 
 ですが、これはテーブル作成時にしかできず、既存のテーブルに対して項目を追加する時に
 テーブルやデータベースと異なる照合順序を指定する方法がないことに注意してください。
@@ -297,7 +361,7 @@ Bake で生成されたマイグレーションファイルとスナップショ
 マイグレーションを適用する
 ==========================
 
-マイグレーションファイルを生成したり記述したら、下記のコマンドを実行して 
+マイグレーションファイルを生成したり記述したら、下記のコマンドを実行して
 変更をデータベースに適用しましょう。::
 
         bin/cake migrations migrate
@@ -350,7 +414,7 @@ Statusコマンドは、現在の状況とすべてのマイグレーション�
 
 プラグインはマイグレーションファイルも提供することができます。
 これはプラグインの移植性とインストールの容易さを高め、配布しやすくなるように意図されています。
-Migrations プラグインの全てのコマンドは、プラグイン関連のマイグレーションを行うための 
+Migrations プラグインの全てのコマンドは、プラグイン関連のマイグレーションを行うための
 ``--plugin`` か ``-p`` オプションをサポートしています。::
 
         bin/cake migrations status -p PluginName
@@ -363,9 +427,9 @@ Migrations プラグインの全てのコマンドは、プラグイン関連の
 
 .. versionadded:: cakephp/migrations 1.2.0
 
-migrations プラグインのバージョン 1.2 から、非シェル環境でも app から直接 
+migrations プラグインのバージョン 1.2 から、非シェル環境でも app から直接
 ``Migrations`` クラスを使ってマイグレーションを実行できるようになりました。
-これは CMS のプラグインインストーラを作る時などに便利です。 
+これは CMS のプラグインインストーラを作る時などに便利です。
 ``Migrations`` クラスを使用すると、マイグレーションシェルから下記のコマンドを
 実行することができます。:
 
