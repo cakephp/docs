@@ -204,23 +204,31 @@ saveField メソッドは、別の構文を持っています::
 ==============================================================
 
 このメソッドは、1度の呼び出しで複数のレコードを更新できます。
-更新対象のレコードは ``$conditions`` で、更新対象のフィールドとその値は
-``$fields`` で指定します。
+更新対象のフィールドとその値は ``$fields`` 配列で指定します。
+更新対象のレコードは ``$conditions`` 配列で指定します。
+もし ``$conditions`` 引数が指定していない場合や、
+``true`` が設定されている場合、全てのレコードが更新されます。
 
 たとえば、1年以上前にメンバーになった baker を承認するには、
 以下のようにメソッドを呼び出します。 ::
 
-    $this_year = date('Y-m-d H:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approved' => true),
-        array('Baker.created <=' => $this_year)
+        array('Baker.created <=' => $thisYear)
     );
 
-.. tip::
+``$fields`` 配列は SQL も指定できます。リテラル値は :php:meth:`DboSource::value()`
+を使用して、自分でクォートしなければなりません。例えば、モデルのメソッドの中で
+``updateAll()`` が呼び出された場合、以下のようにします。 ::
 
-    $fields には SQL も指定できます。
-    リテラルは :php:meth:`Sanitize::escape()` を使って手動でクォートしてください。
+    $db = $this->getDataSource();
+    $value = $db->value($value, 'string');
+    $this->updateAll(
+        array('Baker.status' => $value),
+        array('Baker.status' => 'old')
+    );
 
 .. note::
 
