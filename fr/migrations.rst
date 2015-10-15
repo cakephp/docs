@@ -146,6 +146,33 @@ L'exécution de la ligne de commande ci-dessus va générer::
             }
         }
 
+.. versionadded:: cakephp/migrations 1.4
+
+Si vous voulez spécifier une longueur de champ, vous pouvez le faire entre
+crochets dans le type du champ, par exemple::
+
+        bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
+
+L'exécution de la ligne de commande ci-dessus va générer::
+
+        <?php
+
+        use Migrations\AbstractMigration;
+
+        class AddFullDescriptionToProducts extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this->table('products');
+                $table->addColumn('full_description', 'string', [
+                        'default' => null,
+                        'limit' => 60,
+                        'null' => false,
+                     ])
+                      ->update();
+            }
+        }
+
 Il est également possible d'ajouter des indexes de colonnes::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index

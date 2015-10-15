@@ -134,6 +134,33 @@ migration は、基本的にはデータベースに「バージョン」を記�
             }
         }
 
+.. versionadded:: cakephp/migrations 1.4
+
+If you need to specify a field length, you can do it within brackets in the
+field type, ie::
+
+        bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
+
+Executing the command line above will generate::
+
+        <?php
+
+        use Migrations\AbstractMigration;
+
+        class AddFullDescriptionToProducts extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this->table('products');
+                $table->addColumn('full_description', 'string', [
+                        'default' => null,
+                        'limit' => 60,
+                        'null' => false,
+                     ])
+                      ->update();
+            }
+        }
+        
 インデックスに項目を追加することも可能です。::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index
