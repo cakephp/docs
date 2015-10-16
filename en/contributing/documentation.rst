@@ -219,11 +219,11 @@ There are several kinds of links, each with their own uses.
 External Links
 ~~~~~~~~~~~~~~
 
-Links to external documents can be with the following::
+Links to external documents can be done with the following::
 
-    `External Link <http://example.com>`_
+    `External Link to php.net <http://php.net>`_
 
-The above would generate a link pointing to http://example.com
+The resulting link would look like this: `External Link to php.net <http://php.net>`_
 
 Links to Other Pages
 ~~~~~~~~~~~~~~~~~~~~
