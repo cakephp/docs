@@ -932,6 +932,18 @@ LeadersController::
                 )
             )
         );
+        
+        // If we need keep this association after model reset
+        // we will pass a second boolean parameter like this:
+        $this->Leader->bindModel(
+            array('hasMany' => array(
+                    'Principle' => array(
+                        'className' => 'Principle'
+                    )
+                )
+            ),
+            false
+        );
 
         // Now that we're associated correctly,
         // we can use a single find function to fetch
