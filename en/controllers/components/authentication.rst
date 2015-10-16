@@ -374,7 +374,7 @@ The above generates a random hash for each user as they are saved. The above
 code assumes you have two columns ``api_key`` - to store the hashed API key, and
 ``api_key_plain`` - to the plaintext version of the API key, so we can display
 it to the user later on. Using a key instead of a password, means that even over
-plain HTTP, your user's can use an opaque token instead of their original
+plain HTTP, your users can use an opaque token instead of their original
 password. It is also wise to include logic allowing API keys to be regenerated
 at a user's request.
 
