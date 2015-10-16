@@ -238,7 +238,7 @@ sur le model User récupèrent également les enregistrements Profile
 liés s'il en existe::
 
     //Exemple de résultats d'un appel à $this->User->find().
-    
+
     Array
     (
         [User] => Array
@@ -341,7 +341,7 @@ Une fois que cette association a été définie, les opérations de find sur le
 model Profile vont aussi récupérer un enregistrement lié de User si il existe::
 
     //Exemples de résultats d'un appel de $this->Profile->find().
-    
+
     Array
     (
        [Profile] => Array
@@ -350,7 +350,7 @@ model Profile vont aussi récupérer un enregistrement lié de User si il existe
                 [user_id] => 121
                 [skill] => Baking Cakes
                 [created] => 2007-05-01 10:31:01
-            )    
+            )
         [User] => Array
             (
                 [id] => 121
@@ -428,7 +428,7 @@ cela::
     }
 
 .. _multiple-counterCache:
-    
+
 Multiple counterCache
 =====================
 
@@ -538,7 +538,7 @@ Les clés possibles pour les tableaux d'association hasMany sont :
    Si une de vos requêtes a besoin d'une référence à l'ID du model associé,
    utilisez le marqueur spécial ``{$__cakeID__$}`` dans la requête. Par
    exemple, si votre model Pomme hasMany Orange, la requête devrait
-   ressembler à ça : 
+   ressembler à ça :
    ``SELECT Orange.* from oranges as Orange WHERE Orange.pomme_id = {$__cakeID__$};``
 
 
@@ -547,9 +547,9 @@ sur le model User récupèreront également les Comments liés si
 ils existent::
 
     //Exemple de résultats d'un appel à $this->User->find().
-    
+
     Array
-    (  
+    (
         [User] => Array
             (
                 [id] => 121
@@ -737,9 +737,9 @@ sur le model Recipe récupèreront également les Ingredients liés si ils
 existent::
 
     // Exemple de résultats d'un appel a $this->Recipe->find().
-    
+
     Array
-    (  
+    (
         [Recipe] => Array
             (
                 [id] => 2745
@@ -832,7 +832,7 @@ créer un nouveau model CourseMembership. Regardez les models suivants. ::
                 public $hasMany = array(
                     'CourseMembership'
                 );
-            }      
+            }
 
             // Course.php
 
@@ -948,7 +948,7 @@ opération find). Cette fonction apparaît dans le controller LeadersController:
         // dans le fichier de model Leader.php, ainsi un find
         // situé ici ne récupèrera que les Leaders.
         $this->Leader->find('all');
-     
+
         // Utilisons bindModel() pour ajouter une nouvelle association
         // au model Leader :
         $this->Leader->bindModel(
@@ -958,6 +958,18 @@ opération find). Cette fonction apparaît dans le controller LeadersController:
                     )
                 )
             )
+        );
+
+        // Si nous devons garder cette association après la réinitialisation du
+        // model, nous allons passer booléen en deuxième paramètre, comme ceci:
+        $this->Leader->bindModel(
+            array('hasMany' => array(
+                    'Principle' => array(
+                        'className' => 'Principle'
+                    )
+                )
+            ),
+            false
         );
 
         // Maintenant que nous les avons associés correctement,
@@ -1027,14 +1039,14 @@ ci-dessous::
 
     class Post extends AppModel {
         public $name = 'Post';
-        
+
         public $belongsTo = array(
             'Parent' => array(
                 'className' => 'Post',
                 'foreignKey' => 'parent_id'
             )
         );
-    
+
         public $hasMany = array(
             'Children' => array(
                 'className' => 'Post',
@@ -1086,7 +1098,7 @@ Par exemple::
             )
         )
     );
-    
+
     $Item->find('all', $options);
 
 .. note::
