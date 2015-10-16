@@ -874,6 +874,18 @@ LeadersController で次のようにします。 ::
             )
         );
 
+        // モデルのリセット後にも、このアソシエーションを継続したい場合、
+        // 第２引数を以下のように設定します。
+        $this->Leader->bindModel(
+            array('hasMany' => array(
+                    'Principle' => array(
+                        'className' => 'Principle'
+                    )
+                )
+            ),
+            false
+        );
+
         // アソシエーションが正しく追加されました。
         // これで Leader と、それに関連する Principle を取得することができます。
         $this->Leader->find('all');
