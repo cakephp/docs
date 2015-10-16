@@ -436,23 +436,50 @@ migrations qui ont été exécutées::
 Marqué une migration comme "migrée"
 ===================================
 
-.. versionadded:: cakephp/migrations 1.1.0
+.. versionadded:: 1.4.0
 
-Il peut parfois être utile de marquer une migration comme "migrée" sans avoir
-à exécuter la migration.
-Pour ce faire, vous pouvez utiliser la commande ``mark_migrated``. Cette commande
-attend le numéro de version de la migration comme argument::
+Il peut parfois être utile de marquer une série de migrations comme "migrées"
+sans avoir à les exécuter.
+Pour ce faire, vous pouvez utiliser la commande ``mark_migrated``.
+Cette commande fonctionne de la même manière que les autres commandes.
+
+Vous pouvez marquer toutes les migrations comme migrées en utilisant cette
+commande::
+
+    bin/cake migrations mark_migrated
+
+Vous pouvez également marquer toutes les migrations jusqu'à une version
+spécifique en utilisant l'option ``--target``
+
+    bin/cake migrations mark_migrated --target=20151016204000
+
+Si vous ne souhaitez pas que la migration "cible" soit marquée, vous pouvez
+utiliser le _flag_ ``--exclude``::
+
+    bin/cake migrations mark_migrated --target=20151016204000 --exclude
+
+Enfin, si vous souhaitez marquer seulement une migration, vous pouvez utiliser
+le _flag_ ``--only``::
+
+    bin/cake migrations mark_migrated --target=20151016204000 --only
+
+.. note::
+
+    Lorsque vous créez un snapshot avec la commande
+    ``cake bake migration_snapshot``, la migration créée sera automatiquement
+    marquée comme "migrée".
+
+.. deprecated:: 1.4.0
+
+    Les instructions suivantes ont été dépréciées. Utilisez les seulement si
+    vous utilisez une version du plugin inférieure à 1.4.0.
+
+La commande attend le numéro de version de la migration comme argument::
 
     bin/cake migrations mark_migrated 20150420082532
 
-Notez que lorsque vous faites un snapshot avec la commande
-``cake bake migration_snapshot``, la migration créée sera automatiquement marquée
-comme "migrée".
-
-.. versionadded:: cakephp/migrations 1.3.1
-
-Une nouvelle valeur spéciale ``all`` a été ajoutée pour l'argument version de
-la commande ``mark_migrated``. Si vous l'utilisez, toutes les migrations
+Si vous souhaitez marquer toutes les migrations comme "migrées", vous pouvez
+utiliser la valeur spéciale ``all``. Si vous l'utilisez, toutes les migrations
 trouvées seront marquées comme "migrées"::
 
     bin/cake migrations mark_migrated all
