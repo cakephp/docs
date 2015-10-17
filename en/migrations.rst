@@ -408,23 +408,48 @@ You can use this command to determine which migrations have been run::
 Marking a migration as migrated
 ===============================
 
-.. versionadded:: cakephp/migrations 1.1.0
+.. versionadded:: 1.4.0
 
-It can sometimes be useful to mark a migration as migrated without actually
-running it.
-In order to do this, you can use the ``mark_migrated`` command. This command
-expects the migration version number as argument::
+It can sometimes be useful to mark a set of migrations as migrated without
+actually running them.
+In order to do this, you can use the ``mark_migrated`` command.
+The command works seamlessly as the other commands.
+
+You can mark all migrations as migrated using this command::
+
+    bin/cake migrations mark_migrated
+
+You can also mark all migrations up to a specific version as migrated using
+the ``--target`` option::
+
+    bin/cake migrations mark_migrated --target=20151016204000
+
+If you do not want the targeted migration to be marked as migrated during the
+process, you can use the ``--exclude`` flag with it::
+
+    bin/cake migrations mark_migrated --target=20151016204000 --exclude
+
+Finally, if you wish to mark only the targeted migration as migrated, you can
+use the ``--only`` flag::
+
+    bin/cake migrations mark_migrated --target=20151016204000 --only
+
+.. note::
+
+    When you bake a snapshot with the ``cake bake migration_snapshot``
+    command, the created migration will automatically be marked as migrated.
+
+.. deprecated:: 1.4.0
+
+    The following way of using the command has been deprecated. Use it only
+    if you are using a version of the plugin < 1.4.0.
+
+This command expects the migration version number as argument::
 
     bin/cake migrations mark_migrated 20150420082532
 
-Note that when you bake a snapshot with the ``cake bake migration_snapshot``
-command, the created migration will automatically be marked as migrated.
-
-.. versionadded:: cakephp/migrations 1.3.1
-
-A new ``all`` special value was added to the version argument of the
-``mark_migrated`` command. If you use it, it will mark all found migrations as
-migrated::
+If you wish to mark all migrations as migrated, you can use the ``all`` special
+value. If you use it, it will mark all found migrations as migrated::
 
     bin/cake migrations mark_migrated all
 
