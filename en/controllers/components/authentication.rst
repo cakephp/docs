@@ -73,7 +73,7 @@ You can configure authentication handlers in your controller's
 configuration information into each authentication object using an
 array::
 
-    // Basic setup
+    // Simple setup
     $this->Auth->config('authenticate', ['Form']);
 
     // Pass settings in
@@ -329,7 +329,7 @@ To use basic authentication, you'll need to configure AuthComponent::
 
     $this->Auth->config('authenticate', [
         'Basic' => [
-            'fields' => ['username' => 'username', 'password' => 'api_key']
+            'fields' => ['username' => 'username', 'password' => 'api_key'],
             'userModel' => 'Users'
         ],
     ]);
@@ -345,8 +345,8 @@ generate these API tokens randomly using libraries from CakePHP::
 
     namespace App\Model\Table;
 
+    use Cake\Auth\DefaultPasswordHasher;
     use Cake\Utility\Text;
-    use Cake\Utility\Security;
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
@@ -357,16 +357,26 @@ generate these API tokens randomly using libraries from CakePHP::
             $entity = $event->data['entity'];
 
             if ($entity->isNew()) {
-                $entity->api_key = Security::hash(Text::uuid());
+                $hasher = new DefaultPasswordHasher();
+
+                // Generate an API 'token'
+                $entity->api_key_plain = sha1(Text::uuid());
+
+                // Bcrypt the token so BasicAuthenticate can check
+                // it during login.
+                $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
             return true;
         }
     }
 
-The above generates a random hash for each user as they are saved. Using this
-key instead of a password, means that even over plain HTTP, your user's don't
-have to send their password in API requests. You can also write additional logic
-to regenerate the API key at the user's request.
+The above generates a random hash for each user as they are saved. The above
+code assumes you have two columns ``api_key`` - to store the hashed API key, and
+``api_key_plain`` - to the plaintext version of the API key, so we can display
+it to the user later on. Using a key instead of a password, means that even over
+plain HTTP, your users can use an opaque token instead of their original
+password. It is also wise to include logic allowing API keys to be regenerated
+at a user's request.
 
 Using Digest Authentication
 ---------------------------
