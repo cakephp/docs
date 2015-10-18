@@ -197,7 +197,7 @@ finale de l'opération de vérification des règles.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
+.. php:method:: afterRules(Event $event, Entity $entity, ArrayObject $options, bool $result, $operation)
 
 L'event ``Model.afterRules`` est déclenché après que les règles soient
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur

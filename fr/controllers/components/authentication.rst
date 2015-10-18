@@ -81,7 +81,7 @@ Vous pouvez configurer le gestionnaire d'authentification dans la méthode
 l'information de configuration dans chaque objet d'authentification en utilisant
 un tableau::
 
-    // Configuration de base
+    // Configuration simple
     $this->Auth->config('authenticate', ['Form']);
 
     // Passer la configuration
@@ -357,7 +357,7 @@ Pour utiliser l'authentification basic, vous devez configurer AuthComponent::
 
     $this->Auth->config('authenticate', [
         'Basic' => [
-            'fields' => ['username' => 'username', 'password' => 'api_key']
+            'fields' => ['username' => 'username', 'password' => 'api_key'],
             'userModel' => 'Users'
         ],
     ]);
@@ -375,8 +375,8 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
 
     namespace App\Model\Table;
 
+    use Cake\Auth\DefaultPasswordHasher;
     use Cake\Utility\Text;
-    use Cake\Utility\Security;
     use Cake\Event\Event;
     use Cake\ORM\Table;
 
@@ -387,17 +387,27 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
             $entity = $event->data['entity'];
 
             if ($entity->isNew()) {
-                $entity->api_key = Security::hash(Text::uuid());
+                $hasher = new DefaultPasswordHasher();
+
+                // Generate an API 'token'
+                $entity->api_key_plain = sha1(Text::uuid());
+
+                // Bcrypt the token so BasicAuthenticate can check
+                // it during login.
+                $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
             return true;
         }
     }
 
 Ce qui est au-dessus va générer un hash aléatoire pour chaque utilisateur quand
-il est sauvegardé. Utiliser cette clé plutôt que le mot de passe, signifie que
-même en HTTP en clair, vos utilisateurs n'ont pas à envoyer leur mot de passe
-dans les requêtes d'API. Vous pouvez aussi écrire de la logique supplémentaire
-pour regénérer la clé d'API à la demande de l'utilisateur.
+il est sauvegardé. Le code ci-dessus fait l'hypothèse que vous avez deux
+``api_key`` - pour stocker la clé API hashée, et ``api_key_plain`` - vers la
+version en clair de la clé API, donc vous pouvez l'afficher à l'utilisateur
+plus tard. Utiliser une clé plutôt qu'un mot de passe, signifie que même
+en HTTP en clair, vos utilisateurs peuvent utiliser un token opaque plutôt que
+leur mot de passe original. Il est aussi sage d'inclure la logique permettant
+aux clés API d'être régénérées lors de la requête d'un utilisateur.
 
 Utiliser l'Authentification Digest
 ----------------------------------
