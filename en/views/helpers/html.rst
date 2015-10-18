@@ -530,27 +530,32 @@ Creating Inline Javascript Blocks
 
 .. php:method:: scriptBlock($code, $options = [])
 
-Generate a code block containing ``$code`` set ``$options['block']`` to ``true``
-to have the script block appear in the ``script`` view block. Other options
-defined will be added as attributes to script tags.
-The following code example will create a script tag with ``defer="defer"``
-attribute::
+To generate Javascript blocks from PHP view code, you can use one of the script
+block methods. Scripts can either be output in place, or buffered into a block::
 
-    $this->Html->scriptBlock('stuff', ['defer' => true]);
+    // Define a script block all at once, with the defer attribute.
+    $this->Html->scriptBlock('alert("hi")', ['defer' => true]);
 
-Creating Javascript Blocks
----------------------------
+    // Buffer a script block to be output later.
+    $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 
 .. php:method:: scriptStart($options = [])
+.. php:method:: scriptEnd()
 
-Begin a buffering code block. This code block will capture all output between
-``scriptStart()`` and ``scriptEnd()`` and create an script tag. Options are the
-same as ``scriptBlock()``. An example of using ``scriptStart()`` and
-``scriptEnd()`` would be::
+You can use the ``scriptStart()`` method to create a capturing block that will
+output into a ``<script>`` tag. Captured script snippets can be output inline,
+or buffered into a block::
 
+    // Append into the 'script' block.
     $this->Html->scriptStart(['block' => true]);
     echo "alert('I am in the JavaScript');";
     $this->Html->scriptEnd();
+
+Once you have buffered javascript, you can output it as you would any other
+:ref:`View Block <view-blocks>`::
+
+    // In your layout
+    echo $this->fetch('script');
 
 Creating Nested Lists
 ---------------------
