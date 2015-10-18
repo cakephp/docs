@@ -181,7 +181,7 @@ of applying rules'.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
+.. php:method:: afterRules(Event $event, Entity $entity, ArrayObject $options, bool $result, $operation)
 
 The ``Model.afterRules`` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
