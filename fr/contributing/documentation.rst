@@ -228,11 +228,11 @@ Il y a plusieurs types de liens, chacun avec ses propres utilisations.
 Liens externes
 ~~~~~~~~~~~~~~
 
-Les liens vers les documents externes peuvent être les suivants::
+Les liens vers les documents externes peuvent être faits avec ce qui suit::
 
-    `Lien externe <http://exemple.com>`_
+    `Lien externe vers php.net <http://php.net>`_
 
-Le lien ci-dessus générera un lien pointant vers http://example.com
+Le lien résultant ressemblerait à ceci: `Lien externe vers php.net <http://php.net>`_
 
 Lien vers les autres pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

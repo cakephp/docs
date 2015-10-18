@@ -57,8 +57,9 @@ ajoutées::
     // Utilisez les options pour définir la priorité
     DispatcherFactory::add('Asset', ['priority' => 1]);
 
-Les filtres Dispatcher avec une priorité importante seront les premiers
-exécutés. La priorité est par défaut à ``10``.
+Les filtres Dispatcher avec une priorité ``priority`` supérieure (nombres les
+plus faibles) - seront exécutés les premiers. La priorité est par défaut à
+``10``.
 
 Alors qu'utiliser le nom de la chaîne est pratique, vous pouvez aussi passer les
 instances dans ``add()``::
