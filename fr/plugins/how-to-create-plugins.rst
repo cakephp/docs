@@ -240,6 +240,7 @@ servira l'asset
     chemin de l'asset. Et la magie opére!
 
 .. versionchanged:: 2.1
+
     Utilisez la :term:`syntaxe de plugin` pour accéder aux assets. Par exemple
     dans votre View::
 
