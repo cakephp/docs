@@ -166,17 +166,17 @@ buildRules
 
 .. php:method:: buildRules(Event $event, RulesChecker $rules)
 
-The ``Model.buildRules`` event is fired before after a rules instance has been
-created and the table's ``beforeRules()`` method has been called.
+The ``Model.buildRules`` event is fired after a rules instance has been
+created and after the table's ``buildRules()`` method has been called.
 
 beforeRules
 --------------
 
 .. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
-The ``Model.beforeRules`` event is fired before an entity has rules applied. By
-stopping this event, you can short circuit the rules checking and set the result
-of applying rules'.
+The ``Model.beforeRules`` event is fired before an entity has had rules applied. By
+stopping this event, you can halt the rules checking and set the result
+of applying rules.
 
 afterRules
 --------------
