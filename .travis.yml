@@ -5,10 +5,13 @@ python:
 
 install:
     - pip install -r requirements.txt
+    - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
 
-script: 'make html SPHINXOPTS="-W"'
-
-sudo: false
+script:
+    - 'make html SPHINXOPTS="-W"'
+    - 'make latex'
+    - 'make epub'
+    - 'make pdf'
 
 notifications:
     email: false
