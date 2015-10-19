@@ -10,6 +10,8 @@ install:
 script:
     - 'make html SPHINXOPTS="-W"'
     - 'make latex'
+    - 'make epub'
+    - 'make pdf'
 
 notifications:
     email: false
