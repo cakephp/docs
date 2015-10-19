@@ -6,13 +6,13 @@ LABEL Description="This image is used to create an environment to contribute to 
 
 RUN apt-get update && apt-get install -y \
   python-pip \
-  texlive-full
+  texlive-latex-recommended \
+  texlive-latex-extra \
+  texlive-fonts-recommended
 
-RUN pip install sphinx==1.2.3
-RUN pip install sphinxcontrib-phpdomain
+ADD ./requirements.txt /tmp/requirements.txt
+RUN pip install -qr /tmp/requirements.txt
 
-VOLUME ["/data"]
+WORKDIR /data
 
-WORKDIR ["/data"]
-
-CMD ["make", "html"]
+CMD ["/bin/bash"]

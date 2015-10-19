@@ -12,17 +12,14 @@ cookbook](http://book.cakephp.org/3.0/en/contributing/documentation.html) for
 help. You can read all of the documentation within as its just in plain text
 files, marked up with ReST text formatting.
 
-Tools required to Build the Documentation
------------------------------------------
+There are two ways for building the documentation: with Docker, or by installing
+the packages directly on your OS.
 
-You can either use docker to create a container with all packages needed to
-build the docs, or you can manually install the packages depending on your
-OS. We'll explain both methods in the next sub-parts.
+Build the Documentation with Docker
+-----------------------------------
 
-With Docker
-~~~~~~~~~~~
-
-You need to have docker installed, see the [official docs of
+Docker will let you create a container with all packages needed to build the
+docs. You need to have docker installed, see the [official docs of
 docker](http://docs.docker.com/mac/started/) for more information.
 
 There is a Dockerfile included at the root of this repository. You can build
@@ -30,21 +27,39 @@ an image using::
 
 	docker build -t cakephp/docs .
 
-Now that the image is build, you can run::
+This can take a little while, because all packages needs to be downloaded, but
+you'll only need to do this once.
 
-	docker run -t -i cakephp/docs
+Now that the image is build, you can run all the commands to build the docs::
 
-With Manual Installation
-~~~~~~~~~~~~~~~~~~~~~~~~
+	# To build the html
+	docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make html
 
-To build the documentation you'll need the following:
+	# To build the epub
+	docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make epub
+
+	# To build the latex
+	docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make latex
+
+	# To build the pdf
+	docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make pdf
+
+All the commands below will create and start containers and build the docs in
+the `build` folder. Be aware that each time you run a command, a container is
+created.
+
+Build the Documentation Manually
+--------------------------------
+
+Installing the needed Packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To build the documentation you'll need the following for linux/OS X:
 
 * Make
 * Python
 * Sphinx 1.2.* (currently the make commands will not work with 1.3.* versions and up)
 * PhpDomain for sphinx
-
-- On linux/OS X
 
 You can install sphinx using:
 
@@ -57,7 +72,7 @@ You can install the phpdomain using:
 *To run the pip command, python-pip package must be previously installed.*
 
 Building the Documentation
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After installing the required packages, you can build the documentation using `make`.
 
@@ -82,7 +97,7 @@ This will generate all the documentation in an HTML form.  Other output such as
 After making changes to the documentation, you can build the HTML version of the docs by using `make html` again.  This will build only the HTML files that have had changes made to them.
 
 Building the PDF
-----------------
+~~~~~~~~~~~~~~~~
 
 Building the PDF is a non-trivial task.
 
