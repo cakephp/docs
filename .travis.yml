@@ -9,7 +9,7 @@ install:
 
 script:
     - 'make html SPHINXOPTS="-W"'
-    - 'make pdf-latex'
+    - 'make latex'
 
 notifications:
     email: false
