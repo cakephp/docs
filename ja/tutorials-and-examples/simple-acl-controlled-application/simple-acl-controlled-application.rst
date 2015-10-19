@@ -42,8 +42,8 @@ https://github.com/cakephp/cakephp/tags) にアクセスし、安定版のリリ
 
     git clone git://github.com/cakephp/cakephp.git
 
-CakePHP の最新のコピーを取得したら、2.0 リリースの最新のブランチに変更し、database.php
-を設定し、app/Config/core.php の Security.salt の値を変更してください。
+CakePHP の最新のコピーを取得したら、2.0 リリースの最新のブランチに変更し、 ``database.php``
+を設定し、 ``app/Config/core.php`` の Security.salt の値を変更してください。
 それから、アプリケーションを構築するための簡単なデータベーススキーマを作成しましょう。
 次の SQL 文をデータベースに実行してください::
 
