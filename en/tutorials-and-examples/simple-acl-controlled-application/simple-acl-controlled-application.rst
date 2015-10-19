@@ -232,7 +232,7 @@ shell run the following::
 
     ./Console/cake schema create DbAcl
 
-This schema may prompt you to drop and create the tables. Say yes
+This schema will prompt you to drop and create the tables. Say yes
 to dropping and creating the tables.
 
 If you don't have shell access, or are having trouble using the
