@@ -532,29 +532,34 @@ Créer des Blocs Javascript Inline
 
 .. php:method:: scriptBlock($code, $options = [])
 
-Génère un bloc de code contenant ``code`` et définit ``$options['inline']``
-à ``true`` pour voir le bloc de script apparaître dans le bloc de vue
-``script``. D'autres options définies seront ajoutées comme attributs dans
-les balises de script.
-Par exemple, le code ci-dessous va créer une balise script avec l'attribut
-``defer="defer"``::
+Pour générer des blocks Javascript à partir d'un code de vue en PHP, vous pouvez
+utiliser une des méthodes de script de blocks. Les scripts peuvent soit être
+affichés à l'endroit où ils sont écrits, soit être mis en mémoire tampon dans un
+block::
 
-    $this->Html->scriptBlock('stuff', ['defer' => true]);
+    // Définit un block de script en une fois, avec l'attribut defer.
+    $this->Html->scriptBlock('alert("hi")', ['defer' => true]);
 
-Créer des Blocs Javascript
---------------------------
+    // Mis en mémoire d'un block de script pour être affiché plus tard.
+    $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 
 .. php:method:: scriptStart($options = [])
+.. php:method:: scriptEnd()
 
-Débute la mise en mémoire tampon d'un block de code. Ce block de code
-va capturer toutes les sorties entre ``scriptStart()`` et ``scriptEnd()``
-et créer une balise script. Les options sont les mêmes que celles de
-``scriptBlock()``. Un exemple d'utilisation de ``scriptStart()`` et
-``scriptEnd()`` serait::
+Vous pouvez utiliser la méthode ``scriptStart()`` pour créer un block capturant
+qui va être affiché dans une balise ``<script>``. Les bouts de code de script
+capturés peuvent être affichés inline, ou mis en mémoire tampon dans un block::
 
+    // Ajoute dans le block 'script'.
     $this->Html->scriptStart(['block' => true]);
-    echo "alert('I am in the JavaScript');";
+    echo "alert('Je suis dans le JavaScript');";
     $this->Html->scriptEnd();
+
+Une fois que vous avez mis en mémoire tampon le javascript, vous pouvez
+l'afficher comme vous le feriez pour tout autre :ref:`Block de vue <view-blocks>`::
+
+    // Dans votre layout
+    echo $this->fetch('script');
 
 Créer des Listes Imbriquées
 ---------------------------
