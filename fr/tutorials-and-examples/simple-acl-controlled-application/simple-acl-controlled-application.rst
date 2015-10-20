@@ -223,8 +223,8 @@ Initialiser les tables Acl dans la BdD
 
 Avant de créer des users et groups, nous voulons les connecter à l'Acl.
 Cependant, nous n'avons pour le moment aucune table d'Acl et si vous essayez
-de visualiser les pages maintenant, vous aurez une erreur de table manquante
-("Error: Database table acos for model Aco was not found.").
+de visualiser les pages maintenant, vous aurez peut-être une erreur de table
+manquante ("Error: Database table acos for model Aco was not found.").
 Pour supprimer ces erreurs, nous devons exécuter un fichier de schéma. Dans un
 shell, exécutez la commande suivante::
 
