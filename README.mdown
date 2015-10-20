@@ -52,8 +52,7 @@ created.
 Build the Documentation Manually
 --------------------------------
 
-Installing the needed Packages
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Installing the needed Packages ###
 
 To build the documentation you'll need the following for linux/OS X:
 
@@ -72,10 +71,10 @@ You can install the phpdomain using:
 
 *To run the pip command, python-pip package must be previously installed.*
 
-Building the Documentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Building the Documentation ###
 
-After installing the required packages, you can build the documentation using `make`.
+After installing the required packages, you can build the documentation using
+`make`.
 
 	# Create all the HTML docs. Including all the languages.
 	make html
@@ -95,10 +94,11 @@ After installing the required packages, you can build the documentation using `m
 This will generate all the documentation in an HTML form.  Other output such as
 'htmlhelp' are not fully complete at this time.
 
-After making changes to the documentation, you can build the HTML version of the docs by using `make html` again.  This will build only the HTML files that have had changes made to them.
+After making changes to the documentation, you can build the HTML version of the
+docs by using `make html` again.  This will build only the HTML files that have
+had changes made to them.
 
-Building the PDF
-~~~~~~~~~~~~~~~~
+### Building the PDF ###
 
 Building the PDF is a non-trivial task.
 
@@ -111,18 +111,25 @@ At this point the completed PDF should be in build/latex/en/CakePHPCookbook.pdf.
 Contributing
 ------------
 
-There are currently a number of outstanding issues that need to be addressed.  We've tried to flag these with `.. todo::` where possible.  To see all the outstanding todo's add the following to your `config/all.py`
+There are currently a number of outstanding issues that need to be addressed.
+We've tried to flag these with `.. todo::` where possible. To see all the
+outstanding todo's add the following to your `config/all.py`
 
 	todo_include_todos = True
 
-After rebuilding the HTML content, you should see a list of existing todo items at the bottom of the table of contents.
+After rebuilding the HTML content, you should see a list of existing todo items
+at the bottom of the table of contents.
 
-You are also welcome to make and suggestions for new content as commits in a GitHub fork.  Please make any totally new sections in a separate branch.  This makes changes far easier to integrate later on.
+You are also welcome to make and suggestions for new content as commits in a
+GitHub fork.  Please make any totally new sections in a separate branch. This
+makes changes far easier to integrate later on.
 
 Translations
 ------------
 
-Contributing translations requires that you make a new directory using the two letter name for your language. As content is translated, directories mirroring the english content should be created with localized content.
+Contributing translations requires that you make a new directory using the two
+letter name for your language. As content is translated, directories mirroring
+the english content should be created with localized content.
 
 Making Search Work Locally
 --------------------------
