@@ -177,7 +177,7 @@ bloque existente::
 El método ``startIfEmpty()`` puede ser usado para empezar un bloque **sólo**
 si este está vacío o no definido. Si el bloque ya existe, el contenido
 capturado será descartado. Esto es útil cuando se quiere definir condicionalmente
-contenido predeterminado para un bloque si no existe todavía::
+contenido predeterminado para un bloque si no existe todavía:
 
 .. code-block:: php
 
