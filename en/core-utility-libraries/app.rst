@@ -39,11 +39,15 @@ Loading classes
 
     Some examples for common types of classes are:
 
-    Controller
+    Console Commands
+        ``App::uses('AppShell', 'Console/Command');``
+    Console Tasks
+        ``App::uses('BakeTask', 'Console/Command/Task');``
+    Controllers
         ``App::uses('PostsController', 'Controller');``
-    Component
+    Components
         ``App::uses('AuthComponent', 'Controller/Component');``
-    Model
+    Models
         ``App::uses('MyModel', 'Model');``
     Behaviors
         ``App::uses('TreeBehavior', 'Model/Behavior');``
@@ -55,7 +59,7 @@ Loading classes
         ``App::uses('PaymentProcessor', 'Lib');``
     Vendors
         ``App::uses('Textile', 'Vendor');``
-    Utility
+    Utilities
         ``App::uses('String', 'Utility');``
 
     So basically the second param should simply match the folder path of the class file in core or app.
