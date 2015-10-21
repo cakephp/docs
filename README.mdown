@@ -31,7 +31,32 @@ an image using:
 This can take a little while, because all packages needs to be downloaded, but
 you'll only need to do this once.
 
-Now that the image is build, you can run all the commands to build the docs:
+You can run `docker images` to check that the image has been correctly built,
+you should see this output:
+
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+cakephp/docs        latest              9783ad2c375b        3 hours ago         125.2 MB
+debian              jessie              3d88cbf54477        12 days ago         125.2 MB
+```
+
+If you can't see an image called `cakephp/docs`, it can mean that the image has
+been wrongly built. If you notice an image called <none> like the following:
+
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+<none>              <none>              9783ad2c375b        3 hours ago         125.2 MB
+debian              jessie              3d88cbf54477        12 days ago         125.2 MB
+```
+
+Run the following command (with your image id of course):
+
+    // to remove the image
+    docker rmi 9783ad2c375b
+    // re-run the build command
+    docker build -t cakephp/docs .
+
+Now that the image is built, you can run all the commands to build the docs:
 
     # To build the html
     docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make html
