@@ -200,11 +200,10 @@ Modifier les routes REST par défaut
 
 .. versionadded:: 2.1
 
-Si les routes REST par défaut ne fonctionnent pas pour votre application
-application, vous pouvez les modifier en utilisant
-:php:meth:`Router::resourceMap()`. Cette méthode vous permet de définir les
-routes par défaut qui récupèrent l'ensemble avec
-:php:meth:`Router::mapResources()`. Quand vous utilisez cette méthode vous
+Si les routes REST par défaut ne fonctionnent pas pour votre application, vous
+pouvez les modifier en utilisant :php:meth:`Router::resourceMap()`. Cette
+méthode vous permet de définir les routes par défaut qui récupèrent l'ensemble
+avec :php:meth:`Router::mapResources()`. Quand vous utilisez cette méthode vous
 devez définir *toutes* les valeurs par défaut que vous voulez utiliser::
 
     Router::resourceMap(array(

@@ -11,4 +11,5 @@ As seções abaixo irão tratar deste assunto:
     contributing/tickets
     contributing/code
     contributing/cakephp-coding-conventions
-
+    contributing/backwards-compatibility
+    contributing/cakephp-development-process

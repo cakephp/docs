@@ -1,8 +1,8 @@
 Nouvelles caractéristiques dans CakePHP 1.3
 -------------------------------------------
 
-CakePHP 1.3 introduit un nombre de nouvelles fonctionnalités. Ce guide 
-tente de résumer ces changements et de pointer vers la documentation 
+CakePHP 1.3 introduit un nombre de nouvelles fonctionnalités. Ce guide
+tente de résumer ces changements et de pointer vers la documentation
 nouvelle quand c'est nécessaire.
 
 Components
@@ -10,8 +10,8 @@ Components
 
 **SecurityComponent**
 
-Les différentes méthodes requireXX comme ``requireGet`` et 
-``requirePost`` acceptent maintenant un tableau unique en argument ainsi 
+Les différentes méthodes requireXX comme ``requireGet`` et
+``requirePost`` acceptent maintenant un tableau unique en argument ainsi
 qu'une collection de noms en chaînes de caractère.
 
 ::
@@ -20,9 +20,9 @@ qu'une collection de noms en chaînes de caractère.
 
 **Paramètres du Component**
 
-Les paramètres du Component pour tous les components du coeur peuvent 
-maintenant être définis à partir du tableau ``$components``. Un peu 
-comme les behaviors, vous pouvez déclarer les paramètres pour les 
+Les paramètres du Component pour tous les components du coeur peuvent
+maintenant être définis à partir du tableau ``$components``. Un peu
+comme les behaviors, vous pouvez déclarer les paramètres pour les
 components quand vous déclarer le component.
 
 ::
@@ -37,14 +37,14 @@ components quand vous déclarer le component.
         )
     );
 
-Ceci devrait réduire le désordre dans vos méthodes ``beforeFilter()`` de 
+Ceci devrait réduire le désordre dans vos méthodes ``beforeFilter()`` de
 Controller.
 
 **EmailComponent**
 
--  Vous pouvez maintenant récupérer les contenus rendus des messages Email 
-   envoyés, en lisant ``$this->Email->htmlMessage`` et 
-   ``$this->Email->textMessage``. Ces propriétés contiendront le contenu de 
+-  Vous pouvez maintenant récupérer les contenus rendus des messages Email
+   envoyés, en lisant ``$this->Email->htmlMessage`` et
+   ``$this->Email->textMessage``. Ces propriétés contiendront le contenu de
    l'email rendu correspondant à son nom.
 -  Many of EmailComponent's private methods have been made
    protected for easier extension.
@@ -56,13 +56,13 @@ Controller.
 View & Helpers
 ~~~~~~~~~~~~~~
 
-Les Helpers peuvent maintenant être traités par ``$this->Helper->func()`` en 
-plus de ``$helper->func()``. Cela permet aux variables de vue et aux helpers 
+Les Helpers peuvent maintenant être traités par ``$this->Helper->func()`` en
+plus de ``$helper->func()``. Cela permet aux variables de vue et aux helpers
 de partager les noms et de ne pas créer de collisions.
 
 **Le nouveau JsHelper et les nouvelles fonctionnalités dans HtmlHelper**
 
-Regardez la :doc:`documentation de JsHelper </core-libraries/helpers/js>` 
+Regardez la :doc:`documentation de JsHelper </core-libraries/helpers/js>`
 pour plus d'informations.
 
 **Pagination Helper**
@@ -77,18 +77,18 @@ des tags span par défaut, au lieu de divs.
 ``Helper::assetTimestamp()`` a été ajoutée. Elle ajoutera des timestamps
 à tout asset sous WWW\_ROOT. Elle fonctionne avec
 ``Configure::read('Asset.timestamp');`` comme avant, mais la fonctionnalité
-utilisée dans les helpers Html et Javascript a été rendué disponible pour 
+utilisée dans les helpers Html et Javascript a été rendué disponible pour
 tous les helpers. En supposant que ``Asset.timestamp == force``
 
 ::
 
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
-    
+
     //$stamped contient 'css/cake.generic.css?5632934892'
 
-Le timestamp ajouté contient la dernière modification de temps du fichier. 
-Depuis que cette méthode est définie dans ``Helper``, elle est disponible à 
+Le timestamp ajouté contient la dernière modification de temps du fichier.
+Depuis que cette méthode est définie dans ``Helper``, elle est disponible à
 toutes les sous-classes.
 
 **TextHelper**
@@ -98,7 +98,7 @@ highlight() accepte maintenant un tableau de mots à surligner.
 **NumberHelper**
 
 Une nouvelle méthode ``addFormat()`` a été ajoutée. Cette méthode vous permet
-de configurer des ensembles de paramètres de monnaie, pour que vous n'ayez pas 
+de configurer des ensembles de paramètres de monnaie, pour que vous n'ayez pas
 à les retaper.
 
 ::
@@ -108,30 +108,30 @@ de configurer des ensembles de paramètres de monnaie, pour que vous n'ayez pas
 
 **FormHelper**
 
-Le helper form a eu un certain nombre d'améliorations et de modifications de 
+Le helper form a eu un certain nombre d'améliorations et de modifications de
 l'API, regardez `les améliorations du Hemper Form <http://book.cakephp.org/view/1616/x1-3-improvements>`_
 pour plus d'informations.
 
 Logging
 ~~~~~~~
 
-La connexion et ``CakeLog`` ont été améliorés considérablement, les deux dans 
-les fonctionnalités et la flexibilité. Regardez 
-`New Logging features <http://book.cakephp.org/view/1194/Logging>`_ pour plus 
+La connexion et ``CakeLog`` ont été améliorés considérablement, les deux dans
+les fonctionnalités et la flexibilité. Regardez
+`New Logging features <http://book.cakephp.org/view/1194/Logging>`_ pour plus
 d'informations.
 
 Caching
 ~~~~~~~
 
-Les moteurs de Cache ont été fabriqués plus flexibles dans 1.3. Vous pouvez 
-maintenant fournir des adapters de ``Cache`` personnalisés dans ``app/libs`` 
-ainsi que dans les plugins en utilisant ``$plugin/libs``. Les moteurs de 
-cache App/plugin peuvent aussi surcharger les moteurs du coeur. Les adapters 
-de Cache doivent être dans un répertoire de cache. Si vous aviez un moteur 
+Les moteurs de Cache ont été fabriqués plus flexibles dans 1.3. Vous pouvez
+maintenant fournir des adapters de ``Cache`` personnalisés dans ``app/libs``
+ainsi que dans les plugins en utilisant ``$plugin/libs``. Les moteurs de
+cache App/plugin peuvent aussi surcharger les moteurs du coeur. Les adapters
+de Cache doivent être dans un répertoire de cache. Si vous aviez un moteur
 de cache nommé ``MyCustomCacheEngine``, cela serait placé soit dans
-``app/libs/cache/my_custom_cache.php``, soit dans app/libs. Ou dans 
-``$plugin/libs/cache/my_custom_cache.php`` appartenant à un plugin. Les 
-configs de Cache à partir des plugins ont besoin d'utiliser la syntaxe avec 
+``app/libs/cache/my_custom_cache.php``, soit dans app/libs. Ou dans
+``$plugin/libs/cache/my_custom_cache.php`` appartenant à un plugin. Les
+configs de Cache à partir des plugins ont besoin d'utiliser la syntaxe avec
 des points des plugins.
 
 ::
@@ -147,7 +147,7 @@ ils ne fonctionneront pas correctement.
 
 **Nouvelles méthodes de Cache**
 
-Cache a quelques nouvelles méthodes pour 1.3 ce qui rend l'introspection et 
+Cache a quelques nouvelles méthodes pour 1.3 ce qui rend l'introspection et
 le test bien plus facile.
 
 
@@ -166,9 +166,9 @@ Models, Behaviors and Datasource
 
 **App::import(), datasources & datasources from plugins**
 
-Les sources de données peuvent maintenant être inclues chargées avec 
-``App::import()`` et être inclues dans les plugins! Pour inclure 
-un source de données dans votre plugin, vous pouvez la mettre 
+Les sources de données peuvent maintenant être inclues chargées avec
+``App::import()`` et être inclues dans les plugins! Pour inclure
+un source de données dans votre plugin, vous pouvez la mettre
 dans ``my_plugin/models/datasources/your_datasource.php``. Pour
 importer une Source de données à partir d'un plugin, utilisez
 ``App::import('Datasource', 'MyPlugin.YourDatasource');``
@@ -176,8 +176,8 @@ importer une Source de données à partir d'un plugin, utilisez
 **Utiliser les sources de données dans votre database.php**
 
 Vous pouvez utiliser les sources de données de plugin en configurant la clé
-de la source de données avec le nom du plugin. Par exemple, si vous avez un 
-plugin WebservicePack avec une source de données LastFm 
+de la source de données avec le nom du plugin. Par exemple, si vous avez un
+plugin WebservicePack avec une source de données LastFm
 (plugin/webservice\_pack/models/datasources/last\_fm.php), vous pouvez faire:
 
 ::
@@ -477,7 +477,7 @@ updated to allow the scaffolding of any one prefix.
 ::
 
     Configure::write('Routing.prefixes', array('admin', 'member'));
-    
+
     class PostsController extends AppController {
         var $scaffold = 'member';
     }

@@ -45,14 +45,14 @@ CakePHP :
 -  Système de `template <http://en.wikipedia.org/wiki/Web_template_system>`_
    rapide et souple (syntaxe PHP avec des Helpers).
 -  Helpers (assistants) de vue pour AJAX, JavaScript, formulaires HTML...
--  Components (composants) intégrés : Email, Cookie, Security, Session et 
+-  Components (composants) intégrés : Email, Cookie, Security, Session et
    Request Handling.
--  Système de contrôle d'accès 
+-  Système de contrôle d'accès
    `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_  flexible.
 -  Nettoyage des données.
 -  Système de `cache <http://en.wikipedia.org/wiki/Web_cache>`_ souple.
 -  Localisation et internationalisation.
--  Fonctionne sur n'importe quelle arborescence de site web, avec un zest de 
+-  Fonctionne sur n'importe quelle arborescence de site web, avec un zest de
    configuration `Apache <http://httpd.apache.org/>`_ pas très compliquée.
 
 

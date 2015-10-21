@@ -991,7 +991,7 @@ PHPUnit instead of SimpleTest
 =============================
 
 All of the core test cases and supporting infrastructure have been ported to use
-PHPUnit 3.5. Of course you can continue to use SimpleTest in your application by
+PHPUnit 3.7. Of course you can continue to use SimpleTest in your application by
 replacing the related files. No further support will be given for SimpleTest and
 it is recommended that you migrate to PHPUnit as well. For some additional
 information on how to migrate your tests see PHPUnit migration hints.

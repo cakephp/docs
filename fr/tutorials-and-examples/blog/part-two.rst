@@ -273,8 +273,8 @@ Premièrement, commençons par créer une action ``add()`` dans le
 PostsController ::
 
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form', 'Session');
-        public $components = array('Session');
+        public $helpers = array('Html', 'Form', 'Flash');
+        public $components = array('Flash');
 
         public function index() {
             $this->set('posts', $this->Post->find('all'));
@@ -296,10 +296,10 @@ PostsController ::
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash(__('Your post has been saved.'));
+                    $this->Flash->success(__('Your post has been saved.'));
                     return $this->redirect(array('action' => 'index'));
                 }
-                $this->Session->setFlash(__('Unable to add your post.'));
+                $this->Flash->error(__('Unable to add your post.'));
             }
         }
     }
@@ -314,8 +314,8 @@ PostsController ::
 
 .. note::
 
-   Vous avez besoin d'inclure le component Session (SessionComponent) et
-   le helper Session (SessionHelper) dans chaque controller que vous
+   Vous avez besoin d'inclure le component Flash (FlashComponent) et
+   le helper Flash (FlashHelper) dans chaque controller que vous
    utiliserez. Si nécessaire, incluez-les dans le controller principal
    (AppController) pour qu'ils soient accessibles à tous les controllers.
 
@@ -336,10 +336,10 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode :php:meth:`SessionComponent::setFlash()` du component
-Session (SessionComponent) pour définir un message dans une variable session
+Nous utilisons la méthode :php:meth:`FlashComponent::success()` du component
+Flash (FlashComponent) pour définir un message dans une variable session
 et qui sera affiché dans la page juste après la redirection. Dans le layout,
-nous trouvons la fonction :php:func:`SessionHelper::flash` qui permet
+nous trouvons la fonction :php:func:`FlashHelper::render()` qui permet
 d'afficher et de nettoyer la variable correspondante. La méthode
 :php:meth:`Controller::redirect` du controller permet de rediriger vers une
 autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL
@@ -473,10 +473,10 @@ ressembler ::
         if ($this->request->is(array('post', 'put'))) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been updated.'));
+                $this->Flash->success(__('Your post has been updated.'));
                 return $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('Unable to update your post.'));
+            $this->Flash->error(__('Unable to update your post.'));
         }
 
         if (!$this->request->data) {
@@ -575,12 +575,12 @@ Posts (PostsController) ::
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(
+            $this->Flash->success(
                 __('Le post avec id : %s a été supprimé.', h($id))
             );
         } else {
-            $this->Session->setFlash(
-                __('Le post avec l\'id: %s n'a pas pu être supprimé.', h($id))
+            $this->Flash->error(
+                __('Le post avec l\'id: %s n\'a pas pu être supprimé.', h($id))
             );
         }
 
@@ -588,7 +588,7 @@ Posts (PostsController) ::
     }
 
 Cette logique supprime le Post spécifié par $id, et utilise
-``$this->Session->setFlash()`` pour afficher à l'utilisateur un message de
+``$this->Flash->success()`` pour afficher à l'utilisateur un message de
 confirmation après l'avoir redirigé sur ``/posts``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de

@@ -45,11 +45,11 @@ You can also clone the repository using
 
     git clone git://github.com/cakephp/cakephp.git
 
-Once you've got a fresh copy of CakePHP setup your database.php config
-file, and change the value of Security.salt in your
-app/Config/core.php. From there we will build a simple database
-schema to build our application on. Execute the following SQL
-statements into your database::
+Once you've got a fresh copy of CakePHP change your branch to the
+latest 2.0 release, setup your ``database.php`` config file, and change
+the value of Security.salt in your ``app/Config/core.php``.
+From there we will build a simple database schema to build our
+application on. Execute the following SQL statements into your database::
 
    CREATE TABLE users (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -225,7 +225,7 @@ Initialize the Db Acl tables
 
 Before we create any users or groups we will want to connect them
 to the Acl. However, we do not at this time have any Acl tables and
-if you try to view any pages right now, you will get a missing
+if you try to view any pages right now, you may get a missing
 table error ("Error: Database table acos for model Aco was not
 found."). To remove these errors we need to run a schema file. In a
 shell run the following::

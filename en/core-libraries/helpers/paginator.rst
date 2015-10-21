@@ -1,5 +1,5 @@
-Paginator
-#########
+PaginatorHelper
+###############
 
 .. php:class:: PaginatorHelper(View $view, array $settings = array())
 

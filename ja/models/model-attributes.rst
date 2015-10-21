@@ -1,11 +1,11 @@
 モデルの属性
 ############
 
-モデルの属性を用いて、
-デフォルトのモデルの働きを上書きできるプロパティーを設定することができます。
+モデルの属性を用いて、デフォルトのモデルの振る舞いを上書きできるプロパティを
+設定することができます。
 
-モデルの属性の完全なリストと説明については、CakePHP APIを見てください。
-`http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_
+モデルの属性の完全なリストと説明については、
+`CakePHP API <http://api.cakephp.org/2.7/class-Model.html>`_ をご覧ください。
 
 useDbConfig
 ===========
@@ -17,9 +17,7 @@ useDbConfig
 
 ``useDbConfig`` プロパティの初期値は「default」データベース・コネクションになります。
 
-使用例:
-
-::
+使用例::
 
     class Example extends AppModel {
         public $useDbConfig = 'alternate';
@@ -49,11 +47,10 @@ useTable
 tablePrefix
 ===========
 
-モデルで使われるテーブルの接頭辞(*prefix*)の名前です。
-テーブル接頭辞は /app/Config/database.php
-にあるデータベース・コネクションのファイルで初期値が設定されます。
-デフォルトでは接頭辞はありません。
-モデルで ``tablePrefix`` 属性を設定することで初期値を上書きすることができます。
+モデルで使われるテーブルの接頭辞 (*prefix*) の名前です。テーブル接頭辞は
+/app/Config/database.php にあるデータベース・コネクションのファイルで初期値が設定されます。
+デフォルトでは接頭辞はありません。モデルで ``tablePrefix`` 属性を設定することで初期値を
+上書きすることができます。
 
 使用例::
 
@@ -66,14 +63,15 @@ tablePrefix
 primaryKey
 ==========
 
-各々のテーブルは通常、``id`` という主キーを持ちますが、
+各々のテーブルは通常、 ``id`` という主キーを持ちますが、
 モデルがどのフィールド名を主キーとして使うか変えることができます。
-これはCakePHPに既存のデータベース・テーブルを使用させる場合、よくあることです。
+これは CakePHP に既存のデータベース・テーブルを使用させる場合、よくあることです。
 
 使用例::
 
     class Example extends AppModel {
-        public $primaryKey = 'example_id'; // example_idはデータベースのフィールド名
+        // example_idは データベースのフィールド名
+        public $primaryKey = 'example_id';
     }
 
 
@@ -82,9 +80,9 @@ primaryKey
 displayField
 ============
 
-``displayField`` 属性はどのデータベースのフィールドがレコードの表題(*label*)として使われるべきかを指定します。
-この表題はスキャフォールディングと ``find('list')`` の呼び出しで用いられます。
-モデルはデフォルトで、 ``name`` か ``title`` を使います。
+``displayField`` 属性はどのデータベースのフィールドがレコードの表題 (*label*) として
+使われるべきかを指定します。この表題はスキャフォールディングと ``find('list')`` の呼び出しで
+用いられます。モデルはデフォルトで、 ``name`` か ``title`` を使います。
 
 例えば、 ``username`` フィールドを使うには以下のようにします::
 
@@ -92,52 +90,54 @@ displayField
         public $displayField = 'username';
     }
 
-複数のフィールド名は組み合わせて一つのディスプレイフィールド(*display field*)にk結合することはできません。
-例えば、 ``array('first_name', 'last_name')`` をディスプレイフィールドとして指定することはできません。
-代わりにモデルの属性であるvirtualFieldsでバーチャルフィールドを作成してください。
+複数のフィールド名は組み合わせて一つのディスプレイフィールド (*display field*) に
+結合することはできません。例えば、 ``array('first_name', 'last_name')`` を
+ディスプレイフィールドとして指定することはできません。
+代わりにモデルの属性である virtualFields でバーチャルフィールドを作成してください。
 
 recursive
 =========
 
-recursiveプロパティはCakePHPが ``find()`` 、 ``findAll()`` 、 ``read()``
-らのメソッドを通して、どのぐらい深く関連モデルのデータを取得すべきか、
-を定義します。
+recursive プロパティは CakePHP が ``find()`` 、 ``read()``
+メソッドを通して、どのぐらい深く関連モデルのデータを取得すべきかを定義します。
 
-アプリケーションががあるドメインに属しているGroupがあり(belongsTo)、Groupが多くのUserをもち(hasMany)、同様にUserが多くのArticleを持っているとします。
-$this->Group->find()を呼び出し、取得したいデータ量に基づいて、$recursiveに異なる値を設定することができます:
+アプリケーションががあるドメインに属している Group があり (belongsTo)、
+Group が多くの User を持ち (hasMany)、同様に User が多くの Article を持っているとします。
+$this->Group->find() を呼び出し、取得したいデータ量に基づいて、$recursive に異なる値を
+設定することができます:
 
-* -1 CakeはGroupのデータだけを取得します。joinしません。
-* 0  CakeはGroupのデータとそのドメインを取得します。
-* 1  Cake は１つのGroupとそのドメインとそれに関連したUserを取得します。
-* 2  Cake は１つのGroupとそのドメインとそれに関連したUserと各Userに関連したArticleを取得します。
+* -1 CakePHP は Group のデータだけを取得します。join しません。
+* 0  CakePHP は Group のデータとそのドメインを取得します。
+* 1  CakePHP は１つの Group とそのドメインとそれに関連した User を取得します。
+* 2  CakePHP は１つの Group とそのドメインとそれに関連した User と各 User に関連した
+  Article を取得します。
 
-必要以上に高く設定しないでください。
-CakePHPがデータを取得する際に、
+必要以上に高く設定しないでください。CakePHP がデータを取得する際に、
 不必要にアプリケーションを遅くしたくないでしょう。
-また、recursiveレベルの初期値が1であることも覚えていてください。
+また、recursive レベルの初期値が 1 であることも覚えていてください。
 
 .. note::
 
-    $recursiveと ``fields`` の機能を組み合わせたい場合、
+    $recursive と ``fields`` の機能を組み合わせたい場合、
     手動で ``fields`` 配列に必要な外部キーを含むカラムを追加しなければなりません。
     上記の例では、 ``domain_id`` を追加することになります。
 
 .. tip::
 
-    recursiveレベルは-1にしておいたほうがよいでしょう。
+    recursive レベルは -1 にしておいたほうがよいでしょう。
     こうしておくと、不要な関連データを取得してしまうのを回避できます。
     これは、おそらく find() を呼び出すほとんどの場合に望ましい結果になります。
-    必要な場合にのみrecursiveレベルを設定して関連データを取得させるか、もしくはContainableビヘイビアを使いましょう。
+    必要な場合にのみ recursive レベルを設定して関連データを取得させるか、もしくは
+    Containable ビヘイビアを使いましょう。
 
-    AppModelに次のような設定を追加します。::
+    AppModel に次のような設定を追加します。::
 
         public $recursive = -1;
 
 order
 =====
 
-find操作のデフォルトのデータの順番。
-下記のような設定が可能です。::
+find 操作のデフォルトのデータの順番。下記のような設定が可能です。 ::
 
     $order = "field"
     $order = "Model.field";
@@ -149,20 +149,52 @@ find操作のデフォルトのデータの順番。
 data
 ====
 
-モデルの取得したデータ用のコンテナになります。
-モデルクラスから返されたデータは通常find()
-呼び出しの返り値として使用されますが、
-モデルのコールバック内で$data
-に保存された情報にアクセスする必要がある場合があります。
+モデルの取得したデータ用のコンテナになります。モデルクラスから返されたデータは通常 find()
+呼び出しの返り値として使用されますが、モデルのコールバック内で $data に保存された情報に
+アクセスする必要がある場合があります。
 
 \_schema
 ========
 
-デルのデータベーステーブルフィールドの詳細であるメタデータをもちます。
+データベーステーブルフィールドの詳細であるメタデータをもちます。
 各フィールドは次のようになっています:
 
 -  name
--  type (integer, string, datetime, etc.)
+-  type
+
+The types CakePHP supports are:
+
+string
+    Generally backed by CHAR or VARCHAR columns. In SQL Server, NCHAR and
+    NVARCHAR types are used.
+text
+    Maps to TEXT, MONEY types.
+uuid
+    Maps to the UUID type if a database provides one, otherwise this will
+    generate a CHAR(36) field.
+integer
+    Maps to the INTEGER, SMALLINT types provided by the database.
+biginteger
+    Maps to the BIGINT type provided by the database.
+decimal
+    Maps to the DECIMAL, NUMERIC types.
+float
+    Maps to the REAL, DOUBLE PRECISION types.
+boolean
+    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
+    booleans.
+binary
+    Maps to the BLOB or BYTEA type provided by the database.
+date
+    Maps to a timezone naive DATE column type.
+datetime
+    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL
+    Server this turns into a TIMESTAMP or TIMESTAMPTZ type.
+timestamp
+    Maps to the TIMESTAMP type.
+time
+    Maps to a TIME type in all databases.
+
 -  null
 -  default value
 -  length
@@ -194,38 +226,36 @@ validate
 
 .. note::
 
-    save()はデータを実際に保存する前に自動的にバリデーションを行うので、
-    save()の前にvalidate()を呼ぶ必要はありません。
+    save() はデータを実際に保存する前に自動的にバリデーションを行うので、
+    save() の前に validate() を呼ぶ必要はありません。
 
-バリデーションに関する詳しい情報は、このマニュアルの後にある `/models/data-validation` をみてください。
+バリデーションに関する詳しい情報は、このマニュアルの後にある `/models/data-validation` を
+ご覧ください。
 
 virtualFields
 =============
 
-モデルが持つバーチャルフィールドの配列です。
-バーチャルフィールドはSQL表現へのエイリアスです。
-このプロパティに追加されたフィールドは、
-他のモデルフィールドと同じように読み込まれますが、保存することはできません。
+モデルが持つバーチャルフィールドの配列です。バーチャルフィールドは SQL 表現へのエイリアスです。
+このプロパティに追加されたフィールドは、他のモデルフィールドと同じように読み込まれますが、
+保存することはできません。
 
-MySQLでの使用例::
-Example usage for MySQL::
+MySQL での使用例::
 
     public $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
-これを行った後、find操作で取得したデータのUserには ``name`` キーに連結された結果が格納されているでしょう。
-データベースにバーチャルフィールドと同じ名前のカラムを作成するのは賢明ではありません。
-これはSQLエラーを引き起こす場合があります。
+これを行った後、find 操作で取得したデータの User には ``name`` キーに連結された結果が
+格納されているでしょう。データベースにバーチャルフィールドと同じ名前のカラムを作成するのは
+賢明ではありません。これは SQL エラーを引き起こす場合があります。
 
 ``virtualFields`` プロパティに関する詳しい情報、正しい用法、また制限については、
-:doc:`/models/virtual-fields` を見てください。
+:doc:`/models/virtual-fields` をご覧ください。
 
 name
 ====
 
-モデルの名前。
-モデルのファイルでこれを指定しない場合、コンストラクタでクラス名が設定されます。
+モデルの名前。モデルのファイルでこれを指定しない場合、コンストラクタでクラス名が設定されます。
 
 使用例::
 
@@ -236,6 +266,11 @@ name
 cacheQueries
 ============
 
-trueを設定すると、モデルによって取得されたデータは１つのリクエストの間キャッシュされます。
+true を設定すると、モデルによって取得されたデータは１つのリクエストの間キャッシュされます。
 このキャッシュはメモリ内のみで、リクエストの間のみ持続します。
 同じデータに対する重複したリクエストはキャッシュによって処理されます。
+
+
+.. meta::
+    :title lang=ja: Model Attributes
+    :keywords lang=ja: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example

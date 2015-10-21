@@ -626,7 +626,7 @@ pour définir le comportement de l'option:
   boléen.
   Par défaut à false.
 * ``choices`` Un tableau de choix valides pour cette option. Si elle est vide,
-  toutes les valeurs sont valides. Une exception sera lancée lorque parse()
+  toutes les valeurs sont valides. Une exception sera lancée lorsque parse()
   rencontre une valeur non valide.
 
 .. php:method:: addOptions(array $options)

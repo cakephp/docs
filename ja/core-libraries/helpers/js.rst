@@ -13,6 +13,11 @@ JsHelper
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _ajax-pagination:
+
+AJAX Pagination
+===============
+
 .. meta::
     :title lang=ja: JsHelper
     :description lang=ja: The Js Helper supports the JavaScript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.

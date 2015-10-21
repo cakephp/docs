@@ -164,7 +164,7 @@ Le balisage interne
   * ````text````
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être
-confondus avec les délimiteurs du balisage interne, ils doivent être echappés
+confondus avec les délimiteurs du balisage interne, ils doivent être échappés
 avec un backslash.
 
 Le balisage interne a quelques restrictions:
@@ -272,6 +272,17 @@ Les liens croisés de référencement
     lien. Vous pouvez aussi fournir un texte de lien sur mesure en utilisant
     ``:ref:`Texte de lien <nom-label>```.
 
+Eviter l'Affichage d'Avertissements de Sphinx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx va afficher des avertissements si un fichier n'est pas référencé dans
+un toc-tree. C'est un bon moyen de s'assurer que tous les fichiers ont un
+lien pointé vers eux, mais parfois vous n'avez pas besoin d'insérer un lien
+pour un fichier, par exemple pour nos fichiers `epub-contents` et
+`pdf-contents`. Dans ces cas, vous pouvez ajouter ``:orphan:`` en haut du
+fichier pour supprimer les avertissements disant que le fichier n'est pas dans
+le toc-tree.
+
 Description des classes et de leur contenu
 ------------------------------------------
 
@@ -357,6 +368,22 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 .. rst:directive:: .. php:attr:: name
 
    Décrit une propriété/attribut sur une classe.
+
+Eviter l'Affichage d'Avertissements de Sphinx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx va afficher des avertissements si une fonction est référencée dans
+plusieurs fichiers. C'est un bon moyen de s'assurer que vous n'avez pas ajouté
+une fonction deux fois, mais parfois vous voulez en fait écrire une fonction
+dans deux ou plusieurs fichiers, par exemple `debug object` est référencé dans
+`/development/debugging` et dans
+`/core-libraries/global-constants-and-functions`. Dans ce cas, vous pouvez
+ajouter ``:noindex:`` sous la fonction debug pour supprimer les avertissements.
+Gardez uniquement une référence **sans** ``:no-index:`` pour que la fonction
+soit référencée::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
 
 Référencement croisé
 ~~~~~~~~~~~~~~~~~~~~

@@ -49,7 +49,7 @@ Foram criadas várias maneiras de acessar os parâmetros para facilitar a migra�
 de aplicações existentes que utilizam versões antigas do Cake.
 Todos os :ref:`route-elements` podem ser acessados por esta interface.
 
-além dos :ref:`route-elements`, muitas vezes você precisará ter acesso aos 
+além dos :ref:`route-elements`, muitas vezes você precisará ter acesso aos
 :ref:`passed-arguments` e os :ref:`named-parameters`.  Ambos estarão disponíveis
 no objeto da classe CakeRequest::
 
@@ -103,7 +103,7 @@ Por exemplo::
 
     // Uma tag input com o atributo "name" igual a 'data[Post][title]' é
     acessavel em:
-    
+
     $this->request->data['Post']['title'];
 
 você pode acessar a propriedade data como também pode usar o método
@@ -178,16 +178,16 @@ Alguns exemplos de uso::
 
     // Adiciona um detector baseado em variáveis do ambiente
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
-    
+
     // Adicionar um detector usando expressões regulares
     $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
-    
+
     // Adicionar um detector baseado em uma lista de opções
     $this->request->addDetector('internalIp', array(
-        'env' => 'CLIENT_IP', 
+        'env' => 'CLIENT_IP',
         'options' => array('192.168.0.101, '192.168.0.100')
     ));
-    
+
     // Adiciona um detector callback. Pode ser tanto uma função anônima
     // quanto o nome de uma função a ser chamada.
     $this->request->addDetector('awesome', function ($request) {
@@ -207,7 +207,7 @@ Existem vários detectores inclusos no Cake que você já pode usar:
 * ``is('delete')`` Verifica se a requisição corrente é do tipo DELETE.
 * ``is('head')`` Verifica se a requisição corrente é do tipo HEAD.
 * ``is('options')`` Verifica se a requisição corrente é do tipo OPTIONS.
-* ``is('ajax')`` Verifica se a requisição corrente acompanha o cabeçalho 
+* ``is('ajax')`` Verifica se a requisição corrente acompanha o cabeçalho
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Verifica se a requisição corrente é via SSL.
 * ``is('flash')`` Verifica se a requisição foi feita por um objeto do Flash.
@@ -251,24 +251,24 @@ API do CakeRequest
 
     Retorna o nome do domínio onde sua aplicação esta sendo executada.
 
-.. php:method:: subdomains() 
+.. php:method:: subdomains()
 
     Retorna os subdomínios de onde sua aplicação está sendo executada em um
     formato de array.
 
-.. php:method:: host() 
+.. php:method:: host()
 
     Retorna o host em que sua aplicação esta sendo executada.
 
-.. php:method:: method() 
+.. php:method:: method()
 
     Retorna o método HTTP em que a requisição foi feita.
 
-.. php:method:: referer() 
+.. php:method:: referer()
 
     Retorna o endereço que referenciou a requisição.
 
-.. php:method:: clientIp() 
+.. php:method:: clientIp()
 
     Retorna o endereço IP do visitante corrente.
 
@@ -288,7 +288,7 @@ API do CakeRequest
     para a função de decodificação podem ser passadas como argumentos para
     ``input()``.
 
-.. php:method:: data($key) 
+.. php:method:: data($key)
 
     Fornece acesso aos dados da requisição numa notação pontuada, permitindo a
     leitura e modificação dos dados da requisição. Chamadas também podem ser
@@ -298,7 +298,7 @@ API do CakeRequest
         // previamente alguns campos dos formulários.
         $this->request->data('Post.title', 'New post')
             ->data('Comment.1.author', 'Mark');
-            
+
         // Você também pode ler os dados.
         $value = $this->request->data('Post.title');
 
@@ -320,9 +320,9 @@ API do CakeRequest
 
     Obtém todos os tipos::
 
-        <?php 
+        <?php
         $this->request->accepts();
- 
+
     Verifica apenas um tipo::
 
         $this->request->accepts('application/json');
@@ -334,11 +334,11 @@ API do CakeRequest
 
     Obtém uma lista dos idiomas aceitos::
 
-        CakeRequest::acceptLanguage(); 
+        CakeRequest::acceptLanguage();
 
     Verifica se um idioma específico é aceito::
 
-        CakeRequest::acceptLanguage('es-es'); 
+        CakeRequest::acceptLanguage('es-es');
 
 .. php:attr:: data
 
@@ -419,7 +419,7 @@ mapear estes tipos utilizando o método ``type()``::
     $this->response->type('vcf');
 
 Normalmente você vai querer mapear os tipos de conteúdo adicionais no callback
-``beforeFilter`` do seu controller, assim, se você estiver usando o 
+``beforeFilter`` do seu controller, assim, se você estiver usando o
 :php:class:`RequestHandlerComponent`, poderá tirar proveito da funcionalidade
 de troca de views baseado no tipo do conteúdo.
 
@@ -472,7 +472,7 @@ Você também poderá dizer ao cliente para fazer cache da resposta. Usando
         $this->response->cache(time(), '+5 days');
     }
 
-O código acima diz aos clientes para armazenar em cache a resposta resultante 
+O código acima diz aos clientes para armazenar em cache a resposta resultante
 por cinco dias, podendo acelerar a experiência dos seus visitantes.
 
 Definindo Cabeçalhos
@@ -524,16 +524,16 @@ API do CakeResponse
     A classe ``CakeResponse`` fornece vários métodos úteis para interagir com
     as respostas que você envia para um cliente.
 
-.. php:method:: header() 
+.. php:method:: header()
 
     Permite você definir diretamente um ou muitos cabeçalhos para serem enviados
     com a resposta.
 
-.. php:method:: charset() 
+.. php:method:: charset()
 
     Define o mapa de caracteres (`charset`) que será usado na resposta.
 
-.. php:method:: type($type) 
+.. php:method:: type($type)
 
     Define o tipo de conteúdo para a resposta. Você pode usar um apelido de
     um tipo conhecido de conteúdo ou usar um nome completo para o tipo
@@ -552,11 +552,11 @@ API do CakeResponse
 
     Habilita a compressão gzip para o envio da resposta.
 
-.. php:method:: download() 
+.. php:method:: download()
 
     Permite você enviar a resposta como um anexo e definir o nome do arquivo.
 
-.. php:method:: statusCode() 
+.. php:method:: statusCode()
 
     Permite você alterar o código do status da resposta.
 
@@ -569,3 +569,8 @@ API do CakeResponse
     Após ter criado a resposta, chamar o método ``send()`` irá enviar os todos
     cabeçalhos definidos assim como o corpo da resposta. Isto é feito
     automaticamente no final de cada requisição pelo :php:class:`Dispatcher`.
+
+.. _cake-response-caching:
+
+Fine tuning HTTP cache
+======================

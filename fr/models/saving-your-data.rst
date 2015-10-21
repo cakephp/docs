@@ -179,7 +179,7 @@ est passé, il sera fusionné avec les champs par défaut de la base de données
 et l'instance du model sera prête à être sauvegardée avec ces données
 (accessible dans ``$this->data``).
 
-Si ``false`` ou ``null`` sont passés pour le paramètre ``$data``, Model::data
+Si ``false`` ou ``null`` sont passés pour le paramètre ``$data``, Model::$data
 sera défini comme un tableau vide.
 
 .. tip::
@@ -249,8 +249,8 @@ vous feriez ce qui suit::
     $db = $this->getDataSource();
     $value = $db->value($value, 'string');
     $this->updateAll(
-        array('Baker.approved' => true),
-        array('Baker.created <=' => $value)
+        array('Baker.status' => $value),
+        array('Baker.status' => 'old')
     );
 
 .. note::
@@ -1068,6 +1068,12 @@ surcharger Model::save() pour toujours le faire pour vous::
         }
 
     }
+
+Si vous sauvegardez des données avec un ``fieldList`` et que les champs
+``created`` et ``modified`` ne sont pas présents dans la liste blanche, les
+valeurs pour ces champs vont continuer à être automatiquement remplies. Si les
+champs ``created`` et ``modified`` sont dans ``fieldList``, ils fonctionneront
+comme n'importe quels autres champs.
 
 .. meta::
     :title lang=fr: Sauvegarder vos Données

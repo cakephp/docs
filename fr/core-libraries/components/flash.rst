@@ -15,24 +15,25 @@ et doit être utilisé à la place de cette méthode.
 Définir les Messages Flash
 ==========================
 
-FlashComponent fournit deux façons de définir des messages flash : sa méthode
-magique ``__call`` et sa méthode ``set()``. Pour remplir votre application
-sématiquement, la méthode magique ``__call`` de FlashComponent vous permet
-d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
-répertoire ``app/View/Elements/Flash``. Par convention, les méthodes en
-camelcase vont être liées à un nom d'element en minuscule et avec des
-underscores (_)::
+FlashComponent fournit deux façons pour définir les messages flash: sa méthode
+magique ``__call`` et sa méthode ``set()``.
+
+Pour utiliser le gestionnaire de message flash par défaut, vous pouvez utiliser
+la méthode ``set()``::
+
+    $this->Flash->set('Ceci est un message');
+
+Pour créer des elements Flash personnalisés, la méthode magique ``__call``
+de FlashComponent vous permet d'utiliser un nom de méthode qui est lié à un
+element qui se trouve dans le répertoire ``app/View/Elements/Flash``. Par
+convention, les méthodes en camelcase vont être liées à un nom d'element en
+minuscule et avec des underscores (_)::
 
     // Utilise app/View/Elements/Flash/success.ctp
     $this->Flash->success('C\'était un succès');
 
     // Utilise app/View/Elements/Flash/great_success.ctp
     $this->Flash->greatSuccess('C\'était un grand succès');
-
-De façon alternative, pour définir un message sans rendre un element,
-vous pouvez utiliser la méthode ``set()``::
-
-    $this->Flash->set('Ceci est un message');
 
 Les méthodes ``__call`` et ``set()`` de FlashComponent prennent de façon
 optionnelle un deuxième paramètre, un tableau d'options:

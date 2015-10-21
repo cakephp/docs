@@ -30,7 +30,7 @@ récupérer la bonne version depuis https://phar.phpunit.de/.
 Assurez-vous également que /usr/local/bin est dans le include_path de votre
 fichier php.ini ::
 
-    wget https://phar.phpunit.de/phpunit-3.7.38.phar
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
     chmod +x phpunit.phar
     mv phpunit.phar /usr/local/bin/phpunit
 
@@ -41,6 +41,9 @@ fichier php.ini ::
     Selon la configuration de votre système, vous devrez lancer les commandes
     précédentes avec ``sudo``.
 
+.. note::
+    A  partir de 2.5.7, vous pouvez placer le phar directement dans votre
+    dossier vendors ou App/Vendor.
 
 .. tip::
 

@@ -1,34 +1,8 @@
 PHPUnitへの移行のヒント
 #######################
 
-テストケースの `PHPUnit 3.5 <http://www.phpunit.de/manual/current/ja/>`_ への移行は、うまくいけばかなり苦痛の無い遷移となります。
+テストケースの `PHPUnit 3.7 <http://www.phpunit.de/manual/current/ja/>`_ への移行は、うまくいけばかなり苦痛の無い遷移となります。
 しかしながら、PHPUnitと `SimpleTest <http://www.simpletest.org/>`_ の間では、いくつかの既知の違いがあります。
-
-PHPUnitのインストール
-=====================
-
-PEARからのインストール (推奨)
------------------------------
-
-PHPUnitはPEARのインストーラーを通してインストールすることを推奨しており、これは以下のコマンドを走らせることでできます::
-
-    pear channel-discover pear.phpunit.de
-    pear channel-discover components.ez.no
-    pear channel-discover pear.symfony-project.com
-
-これは一回だけする必要があります。
-今、 `PEAR Installer <http://pear.php.net/>`_ でPHPUnitチャンネルからパッケージをインストールできるようになりました::
-
-    pear install phpunit/PHPUnit
-
-手動インストール
-----------------
-
-PEARに加えて、CakePHPは全ての依存関係と共にPHPUnitを外部(*vendors*)ディレクトリの一つの中に置くことをサポートします。
-これは、PHPUnitが多くのPEARパッケージで構成される複雑なインストールが成されるので、一般には推奨されていないことです。
-PEARインストーラーでのインストールは早くて簡単です。
-
-もしPHPUnitを手動でインストールしたいなら、PHPUnitとその全ての依存関係をアプリケーションの ``Vendor`` ディレクトリの中に配置する必要があります。
 
 SimpleTestとの違い
 ==================

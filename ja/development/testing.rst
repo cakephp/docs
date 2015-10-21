@@ -24,7 +24,7 @@ PHPUnit の最新バージョンは、 今のところ cake では動作しま�
 ファイルを直接ダウンロードします。まず、 http://phar.phpunit.de/ から適切なバージョンを取得しておきます。
 そして php.ini ファイルの include_path に /usr/local/bin を加えてください。::
 
-    wget https://phar.phpunit.de/phpunit-3.7.38.phar
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
     chmod +x phpunit.phar
     mv phpunit.phar /usr/local/bin/phpunit
 
@@ -34,9 +34,13 @@ PHPUnit の最新バージョンは、 今のところ cake では動作しま�
 
     システムの設定によっては、上記のコマンドを実行する際、 ``sudo`` を各行の前につける必要があります。
 
+.. note::
+    CakePHP 2.5.7 以上では、 vendors もしくは app/Vendor ディレクトリに直接 phar パッケージを
+    置くことができます。
+
 .. tip::
 
-    PHPUnit 3.6 以上では全ての出力が非表示になります。表示するためには、コマンドラインから
+    PHPUnit 3.7 以上では全ての出力が非表示になります。表示するためには、コマンドラインから
     実行するときに ``--debug`` オプションをつけるか、Web ランナーを使うときに ``&debug=1``
     を URL に付け足してください。
 
@@ -860,7 +864,7 @@ returnする値の選択
 上の例では ``isAuthorized`` というメソッドをスタブにしている ``PostsController`` のモックを作成しました。
 付属されたPostモデルはスタブの ``save()`` メソッドを持っていて、
 付属されたコンポーネントも、めいめいにスタブされたメソッドを持っています。
-上の例での Session のように、メッソドがパスしないことにより、すべてのクラスのスタブを選ぶことができます。
+上の例での Session のように、メソッドがパスしないことにより、すべてのクラスのスタブを選ぶことができます。
 
 生成されたコントローラーはテストのために自動的に使われます。
 自動的な生成を有効にするには、テストケースの ``autoMock`` という変数にtrueを設定します。

@@ -15,8 +15,8 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
 
 .. note::
 
-    上記以外にも、
-    `CakePHP DataSources repository on GitHub <https://github.com/cakephp/datasources/tree/2.0>`
+    上記以外にも、 `GitHub 上の CakePHP データソースリポジトリ
+    <https://github.com/cakephp/datasources/tree/2.0>`_
     にコミュニティが開発しているデータソースがあります。
 
 ``app/Config/database.php`` でデータベースの接続設定を行うと、
@@ -45,7 +45,7 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
 さらに、もしリードオンリーのデータソースが必要なら、
 ``create``, ``update``, ``delete`` これら３つの存在意義はありません。
 
-すべてのCRUD(CREATE/READ/UPDATE/DELETE)メソッドのために
+すべての CRUD (CREATE/READ/UPDATE/DELETE) メソッドのために
 実装しなければならないメソッド:
 
 -  ``describe($model)``
@@ -78,7 +78,7 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
 いつもの ``Model::find()/save()/delete()`` メソッドを使って
 サードパーティの API にアクセスしたいという場合です。
 ここでは架空のリモート JSON ベースの API にアクセスする
-データソースを書いてみましょう。``FarAwaySource`` という名前で
+データソースを書いてみましょう。 ``FarAwaySource`` という名前で
 ``app/Model/Datasource/FarAwaySource.php`` に置くことにします::
 
     App::uses('HttpSocket', 'Network/Http');
@@ -160,7 +160,7 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
      * calculate() はレコード数のカウント方法を決定します。これは
      * ``update()`` と ``delete()`` の動作を決めるのに必要です。
      *
-     * ここでは実際にはレコードのカウントはせず、``read()`` に渡されるべき
+     * ここでは実際にはレコードのカウントはせず、 ``read()`` に渡されるべき
      * 文字列を返します。これが実際のカウント処理を行います。
      * 最も簡単なのは、ここでは単に 'COUNT' という文字列を返しておき、
      * ``read()`` の中で ``$data['fields'] === 'COUNT'`` かどうかを
@@ -306,8 +306,8 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
         'apiKey'     => 'abcd1234',
     );
 
-SQL Serverに接続する
-====================
+SQL Server に接続する
+=====================
 
 SQL Server のデータソースは、pdo_sqlsrv と呼ばれるマイクロソフトの
 PHP エクステンションに依存しています。この PHP エクステンションは

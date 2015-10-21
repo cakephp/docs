@@ -116,7 +116,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
-- ``contain`` options de Containable lorque l'enregistrement de l'utilisateur
+- ``contain`` options de Containable lorsque l'enregistrement de l'utilisateur
   est chargé. Si vous souhaitez utiliser cette option, vous devrez vous assurer
   que votre model a le behavior Containable attaché.
 

@@ -1,3 +1,5 @@
+:orphan:
+
 Contents
 ########
 
@@ -20,4 +22,3 @@ Contents
    appendices
 
 .. todolist::
-

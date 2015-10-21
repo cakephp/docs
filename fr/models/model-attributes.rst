@@ -175,7 +175,41 @@ Contient les metadata décrivant les champs de la table de la base de données
 du model. Chaque champ est décrit par:
 
 -  name
--  type (integer, string, datetime, etc.)
+-  type
+
+Les types supportés par CakePHP sont:
+
+string
+    Généralement construit en colonnes CHAR ou VARCHAR. Dans SQL Server, les
+    types NCHAR et NVARCHAR sont utilisés.
+text
+    Correspond aux types TEXT et MONEY.
+uuid
+    Correspond au type UUID si une base de données en fournit un, sinon cela
+    générera un champ CHAR(36).
+integer
+    Correspond aux types INTEGER et SMALLINT fournis par la base de données.
+biginteger
+    Correspond au type BIGINT fourni par la base de données.
+decimal
+    Correspond aux types DECIMAL et NUMERIC.
+float
+    Correspond aux types REAL et DOUBLE PRECISION.
+boolean
+    Correspond au BOOLEAN sauf pour MySQL, où TINYINT(1) est utilisé pour
+    représenter les booléens.
+binary
+    Correspond aux types BLOB ou BYTEA fournis par la base de données.
+date
+    Correspond au type de colonne DATE sans timezone.
+datetime
+    Correspond au type de colonne DATETIME sans timezone. Dans PostgreSQL et SQL
+    Server, ceci retourne un type TIMESTAMP ou TIMESTAMPTZ.
+timestamp
+    Correspond au type TIMESTAMP.
+time
+    Correspond au type TIME dans toutes les bases de données.
+
 -  null
 -  default value
 -  length

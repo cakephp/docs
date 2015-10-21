@@ -459,7 +459,7 @@ l'API de Cache
     Détruit toutes les valeurs en cache pour une configuration de cache. Dans
     les moteurs comme Apc, Memcache et Wincache le préfixe de configuration de
     cache est utilisé pour enlever les entrées de cache.
-    Assurez-vous que les différentes configuration de cache ont un préfixe
+    Assurez-vous que les différentes configurations de cache ont un préfixe
     différent.
 
 .. php:method:: clearGroup($group, $config = 'default')

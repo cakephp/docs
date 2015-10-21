@@ -13,6 +13,11 @@ Security
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _security-csrf:
+
+CSRF protection
+===============
+
 .. meta::
     :title lang=ja: Security
     :keywords lang=ja: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions

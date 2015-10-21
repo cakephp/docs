@@ -1,13 +1,12 @@
 Folder & File
 #############
 
-
 Os utilitários de Folder(Pasta) e File(Arquivo) são classes convenientes para
 ajudar você a escrever/inserir mudanças em arquivos; listar arquivos em uma
 pasta e outro diretório comum em tarefas relacionadas.
 
 Usabilidade básica
-===========
+==================
 
 Garanta que as classes estão sendo carregadas usando :php:meth:`App::uses()`::
 
@@ -98,8 +97,8 @@ Folder API
 .. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
 
     :rtype: boolean
-    Muda o mode(Permissão) de uma estrutura de diretórios recursivamente. Isso
-    inclui mudança no mode(Permissão) dos arquivos também::
+     Muda o mode(Permissão) de uma estrutura de diretórios recursivamente. Isso
+     inclui mudança no mode(Permissão) dos arquivos também::
 
         <?php
         $dir = new Folder();
@@ -131,12 +130,10 @@ Folder API
 
     * ``Folder::SKIP`` ignora copiando/movendo arquivos e diretórios caso exista
       na pasta de destino.
-
     * ``Folder::MERGE`` mescla os diretórios destinatario/destino. Arquivos do
       diretório de origem irá substituir os arquivos no diretório de destino. Os
       conteudos serão mesclados.
-
-    * ``Folder::OVERWRITE``sobreescreve arquivos existentes e diretórios no
+    * ``Folder::OVERWRITE`` sobreescreve arquivos existentes e diretórios no
       diretório de destino com os arquivos de origem. Se ambos os diretórios
       possuem um mesmo sub-diretório o sub-diretório de origem sera removido
       e o de destino entrara no lugar dele.
@@ -192,7 +189,7 @@ Folder API
 .. php:method:: find(string $regexpPattern = '.*', boolean $sort = false)
 
     :rtype: array
-   Retorna um array de todos os arquivos correspondentes no diretório atual::
+     Retorna um array de todos os arquivos correspondentes no diretório atual::
 
         <?php
         // Busca todos .png na sua app/webroot/img/ pasta e ordena todos os resultados.
@@ -390,7 +387,7 @@ File API
 .. php:attr:: lock
 
     Ativa bloqueio para leitura e escrita de arquivos.
-     
+
 .. php:attr:: path
 
     O caminho absoluto dos arquivos atuais.
@@ -475,7 +472,7 @@ File API
     :rtype: integer|false
 
     Retorna a ultima modificação, ou falso em caso de erro.
-    
+
 .. php:method:: md5(integer|boolean $maxsize = 5)
 
     :rtype: string
@@ -516,7 +513,7 @@ File API
 
     :rtype: string
 
-    
+
     Prepara uma string ascii para escrever. Converte o final da linha para
     o terminador correto para a plataforma atual. Para Windows "\r\n" vai
     ser usado, "\n" para todas as plataformas.
@@ -532,7 +529,7 @@ File API
     :rtype: string|boolean
 
     Retorna os conteudos do arquivo atual como string ou retorna falso se falhar.
-    
+
 .. php:method:: readable()
 
     :rtype: boolean

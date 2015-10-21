@@ -819,9 +819,7 @@ répétitions les options communes partagées par toutes les méthodes input son
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut HTML
 que vous souhaitez utiliser. Chacun des nom d'options non-special sera
-traité comme un attribut HTML, et appliqué a l'élément HTML input généré.
-NdT. celui qui capte cette phrase gagne un giroTermoOnduleur a double
-convection.
+traité comme un attribut HTML, et appliqué a l'élément HTML généré.
 
 Les options pour  select, checkbox et inputs radio
 --------------------------------------------------

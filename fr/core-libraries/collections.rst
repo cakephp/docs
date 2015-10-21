@@ -62,7 +62,7 @@ pour contrôler comment les callbacks sont tués:
   stopper la propagation. Peut être une valeur scalaire, ou un tableau de
   valeur à stopper. ``False`` par défaut.
 
-- ``break`` Défini à true pour valider l'arrêt. Quand un déclancheur est
+- ``break`` Défini à true pour valider l'arrêt. Quand un déclencheur est
   cassé, la dernière valeur sera retournée. Si utilisé en combinaison avec
   ``collectReturn` les résultats collectés seront retournés. ``False`` par
   défaut.

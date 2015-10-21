@@ -24,7 +24,7 @@ CakePHP 使用 PHPUnit 作为其底层测试框架。PHPUnit 是 PHP 单元测�
 你也可以直接下载文件。只是要注意从 https://phar.phpunit.de/ 得到了正确的版本。
 确保 /usr/local/bin 位于 php.ini 文件的 include_path 中::
 
-    wget https://phar.phpunit.de/phpunit-3.7.32.phar
+    wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
     chmod +x phpunit.phar
     mv phpunit.phar /usr/local/bin/phpunit
 

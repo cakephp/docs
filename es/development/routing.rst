@@ -10,6 +10,11 @@ Routing
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
+.. _routes-configuration:
+
+Routes Configuration
+====================
+
 .. meta::
     :title lang=es: Routing
     :keywords lang=es: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

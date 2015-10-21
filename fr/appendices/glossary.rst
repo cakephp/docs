@@ -6,11 +6,11 @@ Glossaire
     tableau de routing
         Un tableau des attributs qui sont passés au :php:meth:`Router::url()`.
         Typiquement, il ressemble à cela::
-        
+
             array('controller' => 'posts', 'action' => 'view', 5)
 
     attributs HTML
-        Un tableau de clé => valeurs qui sont composées dans les attributs 
+        Un tableau de clé => valeurs qui sont composées dans les attributs
         HTML. Par exemple::
 
             // Par exemple
@@ -19,23 +19,23 @@ Glossaire
             // générerait
             class="ma-classe" _target="blank"
 
-        Si une option peut être minimisée ou a le même nom que sa valeur, alors 
+        Si une option peut être minimisée ou a le même nom que sa valeur, alors
         ``true`` peut être utilisée::
 
             // Par exemple
             array('checked' => true)
-            
+
             // Générerait
             checked="checked"
 
     syntaxe de plugin
-        La syntaxe de Plugin fait référence au nom de la classe avec un point 
+        La syntaxe de Plugin fait référence au nom de la classe avec un point
         en séparation indiquant que les classes sont une partie d'un plugin.
         Par ex: ``DebugKit.Toolbar``, le plugin est DebugKit,
         et le nom de classe est Toolbar.
 
     notation avec points
-        La notation avec points définit un chemin de tableau, en séparant les 
+        La notation avec points définit un chemin de tableau, en séparant les
         niveaux imbriqués avec ``.``
         Par exemple::
 
@@ -52,21 +52,21 @@ Glossaire
             )
 
     CSRF
-        Les Requêtes de site croisées de Contrefaçon. Empêche les attaques de 
-        replay, les soumissions doubles et les requêtes contrefaîtes provenant 
+        Les Requêtes de site croisées de Contrefaçon. Empêche les attaques de
+        replay, les soumissions doubles et les requêtes contrefaîtes provenant
         d'autres domaines.
 
     routes.php
         Un fichier dans APP/Config qui contient la configuration de routing.
         Ce fichier est inclus avant que chaque requête soit traitée.
-        Il devrait connecter toutes les routes dont votre application a besoin 
-        afin que les requêtes puissent être routées aux contrôleurs + actions 
+        Il devrait connecter toutes les routes dont votre application a besoin
+        afin que les requêtes puissent être routées aux contrôleurs + actions
         correctes.
 
     DRY
-        Ne vous répétez pas vous-même. Est un principe de développement de 
-        logiciel qui a pour objectif de réduire les répétitions d'information 
-        de tout type. Dans CakePHP, DRY est utilisé pout vous permettre de 
+        Ne vous répétez pas vous-même. Est un principe de développement de
+        logiciel qui a pour objectif de réduire les répétitions d'information
+        de tout type. Dans CakePHP, DRY est utilisé pout vous permettre de
         coder des choses et de les ré-utiliser à travers votre application.
 
 

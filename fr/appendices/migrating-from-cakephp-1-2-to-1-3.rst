@@ -1,15 +1,15 @@
 Migrer de CakePHP 1.2 vers 1.3
 ##############################
 
-Ce guide résume plusieurs des changements nécessaires quand on migre 
-du coeur de CakePHP 1.2 vers 1.3. Chaque section contient des informations 
-pertinentes pour les modifications faîtes aux méthodes existantes 
+Ce guide résume plusieurs des changements nécessaires quand on migre
+du coeur de CakePHP 1.2 vers 1.3. Chaque section contient des informations
+pertinentes pour les modifications faîtes aux méthodes existantes
 ainsi que toute méthode qui a été retirée/renommée.
 
 **Remplacements du fichier App (important)**
 
 
--  webroot/index.php: Doit être remplacé à cause des changements dans le 
+-  webroot/index.php: Doit être remplacé à cause des changements dans le
    processus de bootstrapping.
 -  config/core.php: Des configurations additionnelles ont été mise en place
    qui sont requises pour PHP 5.3.
@@ -21,8 +21,8 @@ Constantes retirées
 Les constantes suivantes ont été retirées de CakePHP. Si votre application
 dépend d'eux, vous devez les définir dans ``app/config/bootstrap.php``
 
--  ``CIPHER_SEED`` - Cela a été remplacé par la variable 
-   ``Security.cipherSeed`` de la classe de configuration qui doit être changée 
+-  ``CIPHER_SEED`` - Cela a été remplacé par la variable
+   ``Security.cipherSeed`` de la classe de configuration qui doit être changée
    dans ``app/config/core.php``
 -  ``PEAR``
 -  ``INFLECTIONS``
@@ -36,10 +36,10 @@ Configuration et bootstrapping de l'application
 
 **Chemins de bootstrapping en plus.**
 
-Dans votre fichier app/config/bootstrap.php il se peut que vous ayez des 
+Dans votre fichier app/config/bootstrap.php il se peut que vous ayez des
 variables telles que ``$pluginPaths`` ou ``$controllerPaths``.
-Il y a une nouvelle façon d'ajouter ces chemins. Comme dans la 1.3 RC1, les 
-variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser 
+Il y a une nouvelle façon d'ajouter ces chemins. Comme dans la 1.3 RC1, les
+variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser
 ``App::build()`` pour modifier les chemins.
 
 ::
@@ -61,17 +61,17 @@ variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser
 
 Ce qui a aussi changé est l'ordre dans lequel apparait le bootstrapping.
 Dans le passé, ``app/config/core.php`` était chargé **après**
-``app/config/bootstrap.php``. Cela entraînait que n'importe quel 
-``App::import()`` dans le bootstrap d'une application n'était plus en cache 
-et ralentissait considérablement par rapport à une inclusion en cache. Dans 
-1.3, le fichier core.php est chargé et les configurations du coeur mises en 
+``app/config/bootstrap.php``. Cela entraînait que n'importe quel
+``App::import()`` dans le bootstrap d'une application n'était plus en cache
+et ralentissait considérablement par rapport à une inclusion en cache. Dans
+1.3, le fichier core.php est chargé et les configurations du coeur mises en
 cache sont créées **avant** que bootstrap.php soit chargé.
 
 **Chargement des inflections**
 
-``inflections.php`` a été retiré, c'était un fichier non nécessaire et les 
-fonctionnalités liées ont été reconstruites dans une méthode pour augmenter 
-leur flexibilité. Vous pouvez maintenant utiliser ``Inflector::rules()`` pour 
+``inflections.php`` a été retiré, c'était un fichier non nécessaire et les
+fonctionnalités liées ont été reconstruites dans une méthode pour augmenter
+leur flexibilité. Vous pouvez maintenant utiliser ``Inflector::rules()`` pour
 charger les différentes inflections.
 
 ::
@@ -82,7 +82,7 @@ charger les différentes inflections.
         'irregular' => array('spins' => 'spinor')
     ));
 
-Fusionnera les règles fournies dans un ensemble d'inflections, avec les règles 
+Fusionnera les règles fournies dans un ensemble d'inflections, avec les règles
 ajoutées prenant le pas sur les règles de base.
 
 Renommages de fichier et changements internes
@@ -92,36 +92,36 @@ Renommages de fichier et changements internes
 
 Les librairies du coeur de libs/session.php, libs/socket.php,
 libs/model/schema.php et libs/model/behavior.php ont été renommées
-afin qu'il y ait une meilleure correspondance entre les noms de fichiers 
-et les principales classes contenues (ainsi que la gestion avec les problèmes 
+afin qu'il y ait une meilleure correspondance entre les noms de fichiers
+et les principales classes contenues (ainsi que la gestion avec les problèmes
 d'espaces de noms):
 
 -  session.php -> cake\_session.php
 
-   
+
    -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
 -  socket.php -> cake\_socket.php
 
-   
+
    -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
 -  schema.php -> cake\_schema.php
 
-   
+
    -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
 -  behavior.php -> model\_behavior.php
 
-   
+
    -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
 
-Dans la plupart des cas, le renommage ci-dessus, n'affectera pas les codes 
+Dans la plupart des cas, le renommage ci-dessus, n'affectera pas les codes
 existants.
 
 **Héritage de Object**
@@ -135,7 +135,7 @@ Les classes suivantes ne vont plus étendre Object:
 -  Cache
 -  CacheEngine
 
-Si vous utilisiez les méthodes de Object à partir de ces classes, vous devrez 
+Si vous utilisiez les méthodes de Object à partir de ces classes, vous devrez
 ne plus utiliser ces méthodes.
 
 Controllers & Components
@@ -150,7 +150,7 @@ Controllers & Components
 
 -  ``Controller::set('title', $var)`` ne fixe plus
    ``$title_for_layout`` quand il rend le layout.
-   ``$title_for_layout`` est toujours rempli par défaut. Mais si vous voulez 
+   ``$title_for_layout`` est toujours rempli par défaut. Mais si vous voulez
    le modifier, utilisez
    ``$this->set('title_for_layout', $var)``.
 
@@ -158,12 +158,12 @@ Controllers & Components
    ``$this->set('title_for_layout', $var);`` à la place.
 
 -  Controller a deux nouvelles méthodes ``startupProcess`` et
-   ``shutdownProcess``. Ces méthodes sont responsables de la gestion du startup 
+   ``shutdownProcess``. Ces méthodes sont responsables de la gestion du startup
    du controller et des processus de shutdown.
-   
+
 **Component**
 
-- ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
+- ``Component::triggerCallback`` a été ajouté. C'est un hook générique
   dans le processus de callback du component. Il supplante
   ``Component::startup()``, ``Component::shutdown()`` et
   ``Component::beforeRender()`` comme manière préférentielle pour
@@ -175,8 +175,8 @@ Controllers & Components
 
 **AclComponent + DbAcl**
 
-La vérification de la référence du Noeud faite avec les chemins sont 
-maintenant moins gourmands et ne consommeront plus les noeuds intermédiaires 
+La vérification de la référence du Noeud faite avec les chemins sont
+maintenant moins gourmands et ne consommeront plus les noeuds intermédiaires
 quand on fait des recherches. Dans le passé, étant donné la structure:
 
 ::
@@ -186,8 +186,8 @@ quand on fait des recherches. Dans le passé, étant donné la structure:
               Users/
                     edit
 
-Le chemin ``ROOT/Users`` correspondrait au dernier noeud Users 
-au lieu du premier. Dans 1.3, si vous vous attenidez à obtenir le dernier 
+Le chemin ``ROOT/Users`` correspondrait au dernier noeud Users
+au lieu du premier. Dans 1.3, si vous vous attenidez à obtenir le dernier
 noeud, vous deviez utiliser le chemin ``ROOT/Users/Users``
 
 **RequestHandlerComponent**
@@ -200,10 +200,10 @@ noeud, vous deviez utiliser le chemin ``ROOT/Users/Users``
 
 -  ``del`` est déprecié, utilisez ``delete``
 
-``SessionComponent::setFlash()`` Le second paramètre utilisé habituellement 
+``SessionComponent::setFlash()`` Le second paramètre utilisé habituellement
 pour configurer le layout et par conséquence le rendu du fichier layout.
-Cela a été modifié pour utiliser un élément. Si vous spécifiez des flash de 
-session dans vos applications vous aurez besoin de faire les changements 
+Cela a été modifié pour utiliser un élément. Si vous spécifiez des flash de
+session dans vos applications vous aurez besoin de faire les changements
 suivants.
 
 #. Déplacer les fichiers de layout requis dans app/views/elements
@@ -213,7 +213,7 @@ suivants.
 ``SessionComponent`` et ``SessionHelper`` ne sont pas chargés automatiquement.
 Les deux helpers ``SessionComponent`` et ``SessionHelper`` ne sont plus inclus
 automatiquement sans que vous le demandiez. SessionHelper
-et SessionComponent se comportent maintenant comme chaque autre component et 
+et SessionComponent se comportent maintenant comme chaque autre component et
 doivent être déclarés comme tout autre helper/component. Vous devriez mettre
 à jour ``AppController::$components`` et ``AppController::$helpers`` pour
 inclure ces classes pour conserver les behaviors existants.
@@ -243,9 +243,9 @@ Classes de Librairie
 **SessionComponent**
 
 
--  ``SessionComponent::setFlash()`` utilise maintenant un *élément* 
-   au lieu d'un *layout* en second paramètre. Assurez vous de déplacer 
-   tout flash layout de app/views/layouts vers app/views/elements et de 
+-  ``SessionComponent::setFlash()`` utilise maintenant un *élément*
+   au lieu d'un *layout* en second paramètre. Assurez vous de déplacer
+   tout flash layout de app/views/layouts vers app/views/elements et de
    changer les instances de $content\_for\_layout en $message.
 
 **Folder**
@@ -269,24 +269,24 @@ Classes de Librairie
 
 **Router**
 
-``Routing.admin`` est déprecié. Il fournit un behavior incompatible avec 
-les autres styles de prefix de routes puisqu'il était traité différemment. 
-A la place, vous devez utiliser ``Routing.prefixes``. Les préfixes de routes 
-dans 1.3 ne nécessitent pas la déclaration manuelle de routes supplémentaires. 
-Tous les préfixes de routes seront générés automatiquement. Pour mettre à 
+``Routing.admin`` est déprecié. Il fournit un behavior incompatible avec
+les autres styles de prefix de routes puisqu'il était traité différemment.
+A la place, vous devez utiliser ``Routing.prefixes``. Les préfixes de routes
+dans 1.3 ne nécessitent pas la déclaration manuelle de routes supplémentaires.
+Tous les préfixes de routes seront générés automatiquement. Pour mettre à
 jour, changez simplement votre core.php.
 
 ::
 
     //Forme ancienne:
     Configure::write('Routing.admin', 'admin');
-    
+
     //à changer en:
     Configure::write('Routing.prefixes', array('admin'));
 
 Voir le guide des nouvelles fonctionnalités pour plus d'informations
 sur l'utilisation des préfixes de routes.
-Un petit changement a aussi été fait pour router les paramètres. Les 
+Un petit changement a aussi été fait pour router les paramètres. Les
 paramètres routés doivent maintenant seulement être des caractères
 alphanumériques, - et \_ ou ``/[A-Z0-9-_+]+/``.
 
@@ -295,24 +295,24 @@ alphanumériques, - et \_ ou ``/[A-Z0-9-_+]+/``.
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
 
-Dans 1.3, les entrailles du Router étaient hautement reconstruites pour 
-améliorer la performance et réduire le fouillis du code. L'effet secondaire 
-de cela est que deux fonctions rarement utilisées ont été supprimées, car ils 
-étaient problématique et entraînait des bugs même avec le code de base 
-existant. Les premiers segments de chemin utilisant les expressions régulières 
+Dans 1.3, les entrailles du Router étaient hautement reconstruites pour
+améliorer la performance et réduire le fouillis du code. L'effet secondaire
+de cela est que deux fonctions rarement utilisées ont été supprimées, car ils
+étaient problématique et entraînait des bugs même avec le code de base
+existant. Les premiers segments de chemin utilisant les expressions régulières
 ont été retirés. Vous ne pouvez plus créer des routes comme::
 
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
-Ces routes compliquent la compilation des routes et rendent impossibles les 
-routes inversées. Si vous avez besoin de routes comme cela, il est recommandé 
-que vous utilisiez les paramètres de route avec des patrons de capture. Le 
-support de la next mid-route greedy star a été retirée. Il a été précedemment 
+Ces routes compliquent la compilation des routes et rendent impossibles les
+routes inversées. Si vous avez besoin de routes comme cela, il est recommandé
+que vous utilisiez les paramètres de route avec des patrons de capture. Le
+support de la next mid-route greedy star a été retirée. Il a été précedemment
 possible d'utiliser une greedy star dans le milieu de la route::
 
     Router::connect(
         '/pages/*/:event',
-        array('controller' => 'pages', 'action' => 'display'), 
+        array('controller' => 'pages', 'action' => 'display'),
         array('event' => '[a-z0-9_-]+')
     );
 
@@ -321,10 +321,10 @@ erratically, and complicated route compiling. Outside of these two
 edge-case features and the above changes the router behaves exactly
 as it did in 1.2.
 
-Aussi, les personnes utilisant la clé 'id' dans les URLs en forme de tableau 
-remarqueront que Router::url() traite maintenant ceci en paramètre nommé. Si 
-vous utilisiez précedemment cette approche pour passer le paramètre ID aux 
-actions, vous aurez besoin de réécrire tous vos appels $html->link() et 
+Aussi, les personnes utilisant la clé 'id' dans les URLs en forme de tableau
+remarqueront que Router::url() traite maintenant ceci en paramètre nommé. Si
+vous utilisiez précedemment cette approche pour passer le paramètre ID aux
+actions, vous aurez besoin de réécrire tous vos appels $html->link() et
 $this->redirect() pour refléter ce changement::
 
     // format ancien:
@@ -342,33 +342,33 @@ $this->redirect() pour refléter ce changement::
 
 **Dispatcher**
 
-``Dispatcher`` n'est plus capable de définir un layout/viewPath de controller 
-avec les paramètres de requête. Le Contrôle de ces propriétés devrait être 
-géré par le Controller, pas le Dispatcher. Cette fonctionnalité n'était aussi 
+``Dispatcher`` n'est plus capable de définir un layout/viewPath de controller
+avec les paramètres de requête. Le Contrôle de ces propriétés devrait être
+géré par le Controller, pas le Dispatcher. Cette fonctionnalité n'était aussi
 pas documenté, et pas testé.
 
 **Debugger**
 
 
--  ``Debugger::checkSessionKey()`` a été renommé au profit de 
+-  ``Debugger::checkSessionKey()`` a été renommé au profit de
    ``Debugger::checkSecurityKeys()``
--  Calling ``Debugger::output("text")`` ne fonctionne plus. Utilisez 
+-  Calling ``Debugger::output("text")`` ne fonctionne plus. Utilisez
    ``Debugger::output("txt")``.
 
 **Object**
 
 
--  ``Object::$_log`` a été retiré. ``CakeLog::write`` est maintenant appelé 
+-  ``Object::$_log`` a été retiré. ``CakeLog::write`` est maintenant appelé
    statiquement. Regardez :doc:`/core-libraries/logging`
    pour plus d'informations sur les changements faits pour se connecter.
 
 **Sanitize**
 
 
--  ``Sanitize::html()`` retourne en général toujours des chaînes de caractère 
+-  ``Sanitize::html()`` retourne en général toujours des chaînes de caractère
    echappées. Dans le passé, utiliser le paramètre ``$remove`` would skip
    entity encoding, en retournant possiblement le contenu dangereux.
--  ``Sanitize::clean()`` a maintenant une option ``remove_html``. Cela 
+-  ``Sanitize::clean()`` a maintenant une option ``remove_html``. Cela
    déclenchera la fonctionnalité ``strip_tags`` de ``Sanitize::html()``,
    et doit être utilisé en conjonction avec le paramètre ``encode``.
 
@@ -580,7 +580,7 @@ being sorted, either asc or desc.
    create hidden fieldset elements. Instead they create hidden div
    elements. This improves validation with HTML4.
 
-Also be sure to check the :ref:`form-improvements-1-3` for additional changes and 
+Also be sure to check the :ref:`form-improvements-1-3` for additional changes and
 new features in the FormHelper.
 
 **HtmlHelper**

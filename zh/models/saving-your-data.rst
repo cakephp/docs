@@ -149,7 +149,7 @@ Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没
 如果传入了 ``$data`` 参数(使用上面描述的数组格式)，这会和数据库字段的默认值合并，
 并准备好模型实例来保存这些数据(可由 ``$this->data`` 访问)。
 
-如果传入 ``false`` 或 ``null`` 给 ``$data`` 参数，Model::data 会被设置为空数组。
+如果传入 ``false`` 或 ``null`` 给 ``$data`` 参数，Model::$data 会被设置为空数组。
 
 .. tip::
 
@@ -200,15 +200,15 @@ saveField 方法也有另一种语法::
     );
 
 
-``$fields`` 数组可接受 SQL 表达式。常量(*literal*)值应当使用 
-:php:meth:`DboSource::value()` 手动引用。例如，如果一个模型方法调用 
+``$fields`` 数组可接受 SQL 表达式。常量(*literal*)值应当使用
+:php:meth:`DboSource::value()` 手动引用。例如，如果一个模型方法调用
 ``updateAll()``，应该这样::
 
     $db = $this->getDataSource();
     $value = $db->value($value, 'string');
     $this->updateAll(
-        array('Baker.approved' => true),
-        array('Baker.created <=' => $value)
+        array('Baker.status' => $value),
+        array('Baker.status' => 'old')
     );
 
 .. note::
