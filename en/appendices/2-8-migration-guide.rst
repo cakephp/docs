@@ -30,3 +30,9 @@ Hash
 
 - ``Hash::sort()`` now supports case-insensitive sorting via the ``ignoreCase``
   option.
+
+Validation
+==========
+
+- ``Validation::uploadedFile()`` was backported from 3.x.
+
