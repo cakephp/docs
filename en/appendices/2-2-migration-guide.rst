@@ -186,7 +186,7 @@ Hash
 
 The :php:class:`Hash` class was added in 2.2. It replaced Set providing a more
 consistent, reliable and performant API to doing many of the same tasks Set
-does. See the :doc:`/core-utility-libraries/hash` page for more detail.
+does. See the :doc:`/core-libraries/hash` page for more detail.
 
 CakeTime
 --------

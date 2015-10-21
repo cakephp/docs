@@ -123,7 +123,7 @@ respectively.
 
 You can use the utility library :php:class:`Inflector` to check the
 singular/plural of words. See the
-:doc:`/core-utility-libraries/inflector` for more
+:doc:`/core-libraries/inflector` for more
 information.
 
 Field names with two or more words are underscored:

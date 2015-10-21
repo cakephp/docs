@@ -296,7 +296,7 @@ model data to build nested results. Below are a couple of simple
 
 .. tip::
 
-    A better way to deal with nested data is using the :doc:`/core-libraries/behaviors/tree`
+    A better way to deal with nested data is using the :doc:`/models/behaviors/tree`
     behavior
 
 In the above code example, ``$allCategories`` will contain a nested

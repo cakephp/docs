@@ -12,51 +12,12 @@ General purpose libraries are available and reused in many places across
 CakePHP.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    core-libraries/toc-general-purpose
-
-.. _core-behaviors:
-
-Behaviors
-=========
-
-.. include:: /core-libraries/toc-behaviors.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/toc-behaviors
-
-.. _core-components:
-
-Components
-==========
-
-.. include:: /core-libraries/toc-components.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    /core-libraries/toc-components
-
-.. _core-helpers:
-
-Helpers
-=======
-
-.. include:: /core-libraries/toc-helpers.rst
-    :start-line: 3
-    :end-before: toctree
-
-.. toctree::
-    :maxdepth: 2
-
-    /core-libraries/toc-helpers
+    core-libraries/global-constants-and-functions
+    core-libraries/app
+    core-libraries/events
+    core-libraries/collections
 
 Utilities
 =========
@@ -66,10 +27,24 @@ classes that help you do everything from webservice requests, to caching, to
 logging, internationalization and more.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    core-libraries/toc-utilities
-
+    core-libraries/caching
+    core-libraries/email
+    core-libraries/file-folder
+    core-libraries/hash
+    core-libraries/httpsocket
+    core-libraries/inflector
+    core-libraries/internationalization-and-localization
+    core-libraries/logging
+    core-libraries/number
+    core-libraries/router
+    core-libraries/sanitize
+    core-libraries/security
+    core-libraries/set
+    core-libraries/string
+    core-libraries/time
+    core-libraries/xml
 
 .. meta::
     :title lang=en: Core Libraries

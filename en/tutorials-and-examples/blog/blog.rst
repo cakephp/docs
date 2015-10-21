@@ -188,17 +188,11 @@ A Note on mod\_rewrite
 Occasionally new users will run into mod\_rewrite issues. For example
 if the CakePHP welcome page looks a little funny (no images or CSS styles),
 it probably means mod\_rewrite is not functioning on your system. Please refer
-to one of the sections below about URL rewriting for your webserver to get
-you up and running:
-
-.. toctree::
-    :maxdepth: 1
-
-    /installation/url-rewriting
-
+to the
+:doc:`following section about URL rewriting </installation/url-rewriting>` for
+your webserver to get you up and running.
 
 Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
-
 
 .. meta::
     :title lang=en: Blog Tutorial

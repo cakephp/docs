@@ -62,7 +62,7 @@ helpers to share names and not create collisions.
 
 **New JsHelper and new features in HtmlHelper**
 
-See :doc:`JsHelper documentation </core-libraries/helpers/js>` for more information
+See :doc:`JsHelper documentation </views/helpers/js>` for more information
 
 **Pagination Helper**
 

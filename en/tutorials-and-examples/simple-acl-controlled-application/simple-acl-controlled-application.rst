@@ -8,8 +8,8 @@ Simple Acl controlled Application
     framework's features before trying out this tutorial.
 
 In this tutorial you will create a simple application with
-:doc:`/core-libraries/components/authentication` and
-:doc:`/core-libraries/components/access-control-lists`. This
+:doc:`/controllers/components/authentication` and
+:doc:`/controllers/components/access-control-lists`. This
 tutorial assumes you have read the :doc:`/tutorials-and-examples/blog/blog`
 tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
