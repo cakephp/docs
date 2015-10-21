@@ -56,7 +56,7 @@ Run the following command (with your image id of course):
     // re-run the build command
     docker build -t cakephp/docs .
 
-Now that the image is build, you can run all the commands to build the docs:
+Now that the image is built, you can run all the commands to build the docs:
 
     # To build the html
     docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make html
