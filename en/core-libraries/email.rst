@@ -176,7 +176,7 @@ following configuration keys are used:
 - ``'replyTo'``: Email or array to reply the e-mail. See ``Email::replyTo()``.
 - ``'readReceipt'``: Email address or an array of addresses to receive the
   receipt of read. See ``Email::readReceipt()``.
-- ``'returnPath'``: Email address or and array of addresses to return if have
+- ``'returnPath'``: Email address or an array of addresses to return if have
   some error. See ``Email::returnPath()``.
 - ``'messageId'``: Message ID of e-mail. See ``Email::messageId()``.
 - ``'subject'``: Subject of the message. See ``Email::subject()``.
