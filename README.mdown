@@ -40,7 +40,7 @@ debian              jessie              3d88cbf54477        12 days ago         
 ```
 
 If you can't see an image called `cakephp/docs`, it can mean that the image has
-been wrongly built. If you notice an image called <none llike this:
+been wrongly built. If you notice an image called <none> like the following:
 
 ```
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
