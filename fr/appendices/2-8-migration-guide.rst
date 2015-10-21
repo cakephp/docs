@@ -31,3 +31,8 @@ Hash
 
 - ``Hash::sort()`` supporte maintenant le tri sans sensibilité à la casse grâce
   à l'option ``ignoreCase``.
+
+Validation
+==========
+
+- ``Validation::uploadedFile()`` est un portage de la version 3.0.
