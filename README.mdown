@@ -31,7 +31,8 @@ an image using:
 This can take a little while, because all packages needs to be downloaded, but
 you'll only need to do this once.
 
-You can run `docker images` to check that the image has been correctly built.
+You can run `docker images` to check that the image has been correctly built,
+you should see this output:
 
 ```
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
