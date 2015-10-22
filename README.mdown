@@ -59,19 +59,23 @@ Run the following command (with your image id of course):
 Now that the image is built, you can run all the commands to build the docs:
 
     # To build the html
-    docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make html
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp/docs make html
 
     # To build the epub
-    docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make epub
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp/docs make epub
 
     # To build the latex
-    docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make latex
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp/docs make latex
 
     # To build the pdf
-    docker run -i -t -v /full-path-to-your-local-docs-cakephp/:/data cakephp/docs make pdf
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
 
 All the commands below will create and start containers and build the docs in
-the `build` folder. Be aware that each time you run a command, a container is
+the `build` folder. The `--rm` flag will delete the container after run.
 created.
 
 Build the Documentation Manually
