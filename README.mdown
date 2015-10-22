@@ -76,7 +76,6 @@ Now that the image is built, you can run all the commands to build the docs:
 
 All the commands below will create and start containers and build the docs in
 the `build` folder. The `--rm` flag will delete the container after run.
-created.
 
 Build the Documentation Manually
 --------------------------------
