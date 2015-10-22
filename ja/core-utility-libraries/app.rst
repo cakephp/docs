@@ -37,11 +37,15 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
 
     一般的なクラスの例をいくつか挙げます:
 
-    Controller
+    Console Commands
+        ``App::uses('AppShell', 'Console/Command');``
+    Console Tasks
+        ``App::uses('BakeTask', 'Console/Command/Task');``
+    Controllers
         ``App::uses('PostsController', 'Controller');``
-    Component
+    Components
         ``App::uses('AuthComponent', 'Controller/Component');``
-    Model
+    Models
         ``App::uses('MyModel', 'Model');``
     Behaviors
         ``App::uses('TreeBehavior', 'Model/Behavior');``
@@ -53,7 +57,7 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
         ``App::uses('PaymentProcessor', 'Lib');``
     Vendors
         ``App::uses('Textile', 'Vendor');``
-    Utility
+    Utilities
         ``App::uses('String', 'Utility');``
 
     つまり基本的に、第二パラメータは、コアまたはアプリ内のクラスファイルのフォルダパスと単純に
