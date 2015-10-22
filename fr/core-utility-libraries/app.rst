@@ -43,11 +43,15 @@ Chargement des classes
 
     Quelques exemples pour les types courants de classes sont:
 
-    Controller
+    Console Commands
+        ``App::uses('AppShell', 'Console/Command');``
+    Console Tasks
+        ``App::uses('BakeTask', 'Console/Command/Task');``
+    Controllers
         ``App::uses('PostsController', 'Controller');``
-    Component
+    Components
         ``App::uses('AuthComponent', 'Controller/Component');``
-    Model
+    Models
         ``App::uses('MyModel', 'Model');``
     Behaviors
         ``App::uses('TreeBehavior', 'Model/Behavior');``
@@ -59,7 +63,7 @@ Chargement des classes
         ``App::uses('PaymentProcessor', 'Lib');``
     Vendors
         ``App::uses('Textile', 'Vendor');``
-    Utility
+    Utilities
         ``App::uses('String', 'Utility');``
 
     Donc au fond, le deuxième paramètre devrait simplement correspondre
@@ -149,10 +153,10 @@ Ajoutez des chemins dans App pour trouver des packages
         App::build(array('Model' => array('/a/full/path/to/models/')));
 
         //Va configurer le chemin comme le seule chemin valide pour chercher les models
-        App::build(array('Model' => array('/path/to/models/')), App::RESET); 
+        App::build(array('Model' => array('/path/to/models/')), App::RESET);
 
         //Va configurer les chemins de recherche multiple pour les helpers
-        App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/'))); 
+        App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/')));
 
 
     Si reset est défini à true, tous les plugins chargés seront oubliés et ils
@@ -274,10 +278,10 @@ Inclure les fichiers avec App::import()
 
         // La même chose que require('Controller/UsersController.php');
         App::import('Controller', 'Users');
-        
+
         // Nous avons besoin de charger la classe
         $Users = new UsersController;
-        
+
         // Si nous voulons que les associations de model, les components, etc
         soient chargées
         $Users->constructClasses();
