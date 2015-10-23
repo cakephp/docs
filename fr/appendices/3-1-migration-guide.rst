@@ -31,14 +31,14 @@ Ajout des Shell Helpers
 
 - Les applications de console peuvent maintenant créer des classes Helper qui
   encapsulent des blocs réutilisables de logique de sortie. Consultez la section
-  sur :doc:`/console-and-shells/helpers` pour plus d'informations.
+  sur :doc:`/console-shells-and-tasks/helpers` pour plus d'informations.
 
 RoutesShell
 -----------
 
 - RoutesShell a été ajouté et vous fournit maintenant un moyen simple pour
   utiliser l'interface CLI pour tester et débugger les routes. Consultez la
-  section :doc:`/console-and-shells/routes-shell` pour plus d'informations.
+  section :doc:`/console-shells-and-tasks/routes-shell` pour plus d'informations.
 
 Controller
 ==========

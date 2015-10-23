@@ -934,14 +934,14 @@ Diğer Konular
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/helpers
-    console-and-shells/repl
-    console-and-shells/cron-jobs
-    console-and-shells/i18n-shell
-    console-and-shells/completion-shell
-    console-and-shells/plugin-shell
-    console-and-shells/routes-shell
-    console-and-shells/upgrade-shell
+    console-shells-and-tasks/helpers
+    console-shells-and-tasks/repl
+    console-shells-and-tasks/cron-jobs
+    console-shells-and-tasks/i18n-shell
+    console-shells-and-tasks/completion-shell
+    console-shells-and-tasks/plugin-shell
+    console-shells-and-tasks/routes-shell
+    console-shells-and-tasks/upgrade-shell
 
 .. meta::
     :title lang=tr: Konsol ve Kabuklar

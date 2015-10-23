@@ -40,6 +40,6 @@ Using CakePHP
 * :doc:`/core-libraries/validation`
 * :doc:`/development/testing`
 * :doc:`/deployment`
-* :doc:`/console-and-shells`
+* :doc:`/console-shells-and-tasks`
 * :doc:`/contributing`
 * :doc:`/tutorials-and-examples`
