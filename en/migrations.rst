@@ -79,7 +79,7 @@ able to execute the following command to create the table in your database::
 Creating Migrations
 ===================
 
-Migration files are stored in the **config/Migration** directory of your
+Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
 which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**.
 
