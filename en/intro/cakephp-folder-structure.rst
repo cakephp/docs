@@ -54,7 +54,7 @@ development. Let's look a little closer at the folders inside
 
 Console
     Contains the console commands and console tasks for your application.
-    For more information see :doc:`/console-shells-and-tasks`.
+    For more information see :doc:`/console-and-shells`.
 Controller
     Contains your application's controllers and their components.
 Locale

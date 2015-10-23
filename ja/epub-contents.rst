@@ -23,7 +23,7 @@
     controllers/components/authentication
     bake
     core-libraries/caching
-    console-shells-and-tasks
+    console-and-shells
     development/debugging
     deployment
     core-libraries/email

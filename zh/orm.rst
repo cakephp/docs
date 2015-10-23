@@ -26,4 +26,4 @@ Models
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-shells-and-tasks/orm-cache
+    console-and-shells/orm-cache

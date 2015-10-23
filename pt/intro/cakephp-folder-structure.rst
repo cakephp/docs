@@ -55,7 +55,7 @@ de sua aplicação. Vamos ver mais de perto a estrutura de pastas dentro de *src
 
 Console
     Contém os comandos e tarefas de console para sua aplicação.
-    Para mais informações veja :doc:`/console-shells-and-tasks`.
+    Para mais informações veja :doc:`/console-and-shells`.
 Controller
     Contém os controllers de sua aplicação e seus componentes.
 Locale

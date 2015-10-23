@@ -1,5 +1,5 @@
-Console Shells & Tasks
-######################
+Console & Shells
+################
 
 .. php:namespace:: Cake\Console
 
@@ -299,7 +299,7 @@ Shell Helpers
 =============
 
 If you have complex output generation logic, you can use
-:doc:`/console-shells-and-tasks/helpers` to encapsulate this logic in a re-usable way.
+:doc:`/console-and-shells/helpers` to encapsulate this logic in a re-usable way.
 
 .. _invoking-other-shells-from-your-shell:
 
@@ -1011,14 +1011,14 @@ More Topics
 .. toctree::
     :maxdepth: 1
 
-    console-shells-and-tasks/helpers
-    console-shells-and-tasks/repl
-    console-shells-and-tasks/cron-jobs
-    console-shells-and-tasks/i18n-shell
-    console-shells-and-tasks/completion-shell
-    console-shells-and-tasks/plugin-shell
-    console-shells-and-tasks/routes-shell
-    console-shells-and-tasks/upgrade-shell
+    console-and-shells/helpers
+    console-and-shells/repl
+    console-and-shells/cron-jobs
+    console-and-shells/i18n-shell
+    console-and-shells/completion-shell
+    console-and-shells/plugin-shell
+    console-and-shells/routes-shell
+    console-and-shells/upgrade-shell
 
 .. meta::
     :title lang=en: Console and Shells

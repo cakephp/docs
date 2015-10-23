@@ -762,7 +762,7 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
     $connection->cacheMetadata('orm_metadata');
 
 CakePHP にはメタデータキャッシュを管理するための CLI ツールも同梱しています。
-詳細については :doc:`/console-shells-and-tasks/orm-cache` を参照してください。
+詳細については :doc:`/console-and-shells/orm-cache` を参照してください。
 
 
 .. meta::
