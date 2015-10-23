@@ -51,7 +51,7 @@ srcフォルダ
 
 Console
     あなたのアプリケーションで使うコンソールコマンドやコンソールタスクが入ります。
-    詳細は :doc:`/console-and-shells` を確認してください。
+    詳細は :doc:`/console-shells-and-tasks` を確認してください。
 Controller
     アプリケーションのコントローラとコンポーネントが入ります。
 Locale

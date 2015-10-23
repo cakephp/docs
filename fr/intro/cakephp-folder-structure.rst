@@ -58,7 +58,7 @@ du développement de votre application. Regardons d'un peu plus près les dossie
 Console
     Contient les commandes de la console et les Tasks de la console pour votre
     application. Pour plus d'informations, regardez
-    :doc:`/console-and-shells`.
+    :doc:`/console-shells-and-tasks`.
 Controller
     Contient les Controllers et les Components de votre application.
 Locale

@@ -826,7 +826,7 @@ méthode ``cacheMetadata()``::
     $connection->cacheMetadata('orm_metadata');
 
 CakePHP intègre aussi un outil CLI pour gérer les mises en cache de metadata.
-Consultez le chapitre :doc:`/console-and-shells/orm-cache` pour plus
+Consultez le chapitre :doc:`/console-shells-and-tasks/orm-cache` pour plus
 d'information.
 
 
