@@ -51,7 +51,7 @@ the AppModel allows you to define functionality that should be made
 available to all models within your application. To do so, you need
 to create your own ``AppModel.php`` file that resides in the Model folder,
 as do all other models in your application. Creating a project using
-:doc:`Bake <console-and-shells/code-generation-with-bake>` will automatically
+:doc:`Bake <console-shells-and-tasks/code-generation-with-bake>` will automatically
 generate this file for you.
 
 See also :doc:`Behaviors <models/behaviors>` for more information on

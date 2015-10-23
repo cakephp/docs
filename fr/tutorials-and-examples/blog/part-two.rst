@@ -733,7 +733,7 @@ Voici les différents chapitres que les gens veulent souvent lire après :
 2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues.
 3. :doc:`/controllers/scaffolding`: Construire une ébauche d'application
    sans avoir à coder.
-4. :doc:`/console-and-shells/code-generation-with-bake` Générer un code
+4. :doc:`/console-shells-and-tasks/code-generation-with-bake` Générer un code
    CRUD basique.
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutoriel sur
    l\'enregistrement et la connexion d'utilisateurs.

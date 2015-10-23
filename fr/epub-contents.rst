@@ -14,7 +14,7 @@ Contenu
    models
    core-libraries
    plugins
-   console-and-shells
+   console-shells-and-tasks
    development
    deployment
    tutorials-and-examples/blog-auth-example/auth

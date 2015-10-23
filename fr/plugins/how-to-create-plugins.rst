@@ -65,7 +65,7 @@ s'appliquent au reste de votre app. Par exemple - baking controllers::
     user@host$ cake bake controller Contacts --plugin ContactManager
 
 Consultez le chapitre
-:doc:`/console-and-shells/code-generation-with-bake` si vous avez le moindre
+:doc:`/console-shells-and-tasks/code-generation-with-bake` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande.
 
 .. warning::

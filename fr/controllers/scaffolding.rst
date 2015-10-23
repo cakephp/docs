@@ -26,7 +26,7 @@ ne l'utiliser qu'au début d'un projet. Il n'a pas été conçu pour être
 flexible, mais uniquement pour être un moyen temporaire de mettre en place
 votre application. A partir du moment où vous voudrez adapter les fonctions
 et les vues associées, il vous faudra désactiver le scaffolding et écrire
-votre propre code. :doc:`bake console </console-and-shells>` de CakePHP, que
+votre propre code. :doc:`bake console </console-shells-and-tasks>` de CakePHP, que
 vous pourrez apprendre à connaître dans la prochaine section, est une bonne
 alternative : il va générer tout le code équivalent à ce que ferait le
 scaffolding.

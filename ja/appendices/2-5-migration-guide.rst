@@ -28,7 +28,7 @@ SchemaShell
 CompletionShell
 ---------------
 
-- :doc:`CompletionShell </console-and-shells/completion-shell>` が追加されました。
+- :doc:`CompletionShell </console-shells-and-tasks/completion-shell>` が追加されました。
   bash や zsh のようなシェル環境上のための自動補完ライブラリ作成を補助することが狙いです。
   CakePHP にはシェルスクリプトは含まれていませんが、基礎となるツールを用意しました。
 

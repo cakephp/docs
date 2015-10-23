@@ -655,8 +655,8 @@ You should replace
    ``$html->scriptStart()`` and ``$html->scriptEnd()`` depending on
    your usage.
 
-Console and shells
-~~~~~~~~~~~~~~~~~~
+Console Shells and Tasks
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Shell**
 

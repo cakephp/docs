@@ -10,7 +10,7 @@ Simple Authentication and Authorization Application
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
-1. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
+1. :doc:`/console-shells-and-tasks/code-generation-with-bake` Generating basic CRUD code
 2. :doc:`/core-libraries/components/authentication`: User registration and login
 
 .. meta::

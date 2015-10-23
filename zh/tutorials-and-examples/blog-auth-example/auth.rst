@@ -398,7 +398,7 @@ AppController 控制器中添加更普遍的规则。
 后续阅读的建议
 --------------
 
-1. :doc:`/console-and-shells/code-generation-with-bake` 生成基本的 CRUD 代码
+1. :doc:`/console-shells-and-tasks/code-generation-with-bake` 生成基本的 CRUD 代码
 2. :doc:`/core-libraries/components/authentication`: 用户注册和登录
 
 

@@ -23,9 +23,9 @@ of a project in order to get started. It isn't meant to be
 completely flexible, it's meant as a temporary way to get up and
 going. If you find yourself really wanting to customize your logic
 and your views, it's time to pull your scaffolding down in order to
-write some code. CakePHP's :doc:`bake console </console-and-shells>`, covered in the next
-section, is a great next step: it generates all the code that would
-produce the same result as the most current scaffold.
+write some code. CakePHP's :doc:`bake console </console-shells-and-tasks>`,
+covered in the next section, is a great next step: it generates all the
+code that would produce the same result as the most current scaffold.
 
 Scaffolding is a great way of getting the early parts of developing
 a web application started. Early database schemas are subject to

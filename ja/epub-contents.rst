@@ -14,7 +14,7 @@
    models
    core-libraries
    plugins
-   console-and-shells
+   console-shells-and-tasks
    development
    deployment
    tutorials-and-examples

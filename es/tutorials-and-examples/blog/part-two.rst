@@ -636,5 +636,5 @@ Lectura sugerida para continuar desde aquí
 1. :ref:`view-layouts`: Personaliza la plantilla *layout* de tu aplicación
 2. :ref:`view-elements` Incluír vistas y reutilizar trozos de código
 3. :doc:`/controllers/scaffolding`: Prototipos antes de trabajar en el código final
-4. :doc:`/console-and-shells/code-generation-with-bake` Generación básica de CRUDs
-5. :doc:`/core-libraries/components/authentication`: Gestión de usuarios y permisos
+4. :doc:`/console-shells-and-tasks/code-generation-with-bake` Generación básica de CRUDs
+5. :doc:`/core-libraries/components/authentication`: Gestión de usuarios y permisos 

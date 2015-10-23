@@ -12,7 +12,7 @@ In this tutorial you will create a simple application with
 :doc:`/core-libraries/components/access-control-lists`. This
 tutorial assumes you have read the :doc:`/tutorials-and-examples/blog/blog`
 tutorial, and you are familiar with
-:doc:`/console-and-shells/code-generation-with-bake`. You should have
+:doc:`/console-shells-and-tasks/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
 :php:class:`AuthComponent` and :php:class:`AclComponent`.
@@ -86,7 +86,7 @@ application on. Execute the following SQL statements into your database::
 These are the tables we will be using to build the rest of our
 application. Once we have the table structure in the database we
 can start cooking. Use
-:doc:`/console-and-shells/code-generation-with-bake` to quickly
+:doc:`/console-shells-and-tasks/code-generation-with-bake` to quickly
 create your models, controllers, and views.
 
 To use cake bake, call ``cake bake all`` and this will list the 4
