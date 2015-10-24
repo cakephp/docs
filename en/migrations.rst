@@ -377,7 +377,7 @@ following command to apply the changes to your database::
 
         bin/cake migrations migrate
 
-To migrate to a specific version then use the --target parameter or -t for short::
+To migrate to a specific version then use the \-\-target parameter or -t for short::
 
         bin/cake migrations migrate -t 20150103081132
 
