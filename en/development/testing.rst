@@ -696,7 +696,7 @@ now looks like this::
         }
     }
 
-You can see we have added a method called ``testPublished()``. We start by
+You can see we have added a method called ``testFindPublished()``. We start by
 creating an instance of our ``ArticlesTable`` class, and then run our
 ``find('published')`` method. In ``$expected`` we set what we expect should be
 the proper result (that we know since we have defined which records are
