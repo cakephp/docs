@@ -212,7 +212,7 @@ FooTask.php file should look like::
 
         public function name()
         {
-            return 'shell';
+            return 'foo';
         }
 
         public function fileName($name)
@@ -246,6 +246,32 @@ You should now see your new task in the output of ``bin/cake bake``. You can
 run your new task by running ``bin/cake bake foo Example``.
 This will generate a new ``ExampleFoo`` class in **src/Foo/ExampleFoo.php**
 for your application to use.
+
+If you want the ``bake`` call to also create a test file for your
+``ExampleFoo`` class, you need to overwrite the ``bakeTest()`` method in the
+``FooTask`` class to register the class suffix and namespace for your custom
+command name:
+
+  public function bakeTest($className)
+  {
+      if (!isset($this->Test->classSuffixes[$this->name()])) {
+          $this->Test->classSuffixes[$this->name()] = 'Foo';
+      }
+
+      $name = ucfirst($this->name());
+      if (!isset($this->Test->classTypes[$name])) {
+          $this->Test->classTypes[$name] = 'Foo';
+      }
+
+      return parent::bakeTest($className);
+  }
+
+- The **class suffix** will be appened to the name provided in your ``bake``
+call. In the previous example, it would create a ``ExampleFooTest.php`` file.
+- The **class type** will be the sub-namespace used that will lead to your
+file (relative to the app or the plugin you are baking into). In the previous
+example, it would create your test with the namespace ``App\Test\TestCase\Foo``
+.
 
 .. meta::
     :title lang=en: Extending Bake
