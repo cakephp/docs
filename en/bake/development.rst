@@ -266,12 +266,12 @@ command name::
         return parent::bakeTest($className);
     }
 
-- The **class suffix** will be appened to the name provided in your ``bake``
-call. In the previous example, it would create a ``ExampleFooTest.php`` file.
-- The **class type** will be the sub-namespace used that will lead to your
-file (relative to the app or the plugin you are baking into). In the previous
-example, it would create your test with the namespace ``App\Test\TestCase\Foo``
-.
+* The **class suffix** will be appened to the name provided in your ``bake``
+  call. In the previous example, it would create a ``ExampleFooTest.php`` file.
+* The **class type** will be the sub-namespace used that will lead to your
+  file (relative to the app or the plugin you are baking into). In the previous
+  example, it would create your test with the namespace ``App\Test\TestCase\Foo``
+  .
 
 .. meta::
     :title lang=en: Extending Bake

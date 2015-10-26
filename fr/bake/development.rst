@@ -280,12 +280,12 @@ classe de votre nom de commande personnalisée::
         return parent::bakeTest($className);
     }
 
-- Le **suffixe de classe** sera ajouté après le nom passé à ``bake``. Dans le
-cadre de l'exemple ci-dessus, cela créerait un fichier ``ExampleFooTest.php``.
-- Le **type de classe** sera le sous-namespace utilisé pour atteindre votre
-fichier (relatif à l'application ou au plugin dans lequel vous faites le
-``bake``). Dans le cadre de l'exemple ci-dessus, cela créerait le test avec le
-namespace ``App\Test\TestCase\Foo``.
+* Le **suffixe de classe** sera ajouté après le nom passé à ``bake``. Dans le
+  cadre de l'exemple ci-dessus, cela créerait un fichier ``ExampleFooTest.php``.
+* Le **type de classe** sera le sous-namespace utilisé pour atteindre votre
+  fichier (relatif à l'application ou au plugin dans lequel vous faites le
+  ``bake``). Dans le cadre de l'exemple ci-dessus, cela créerait le test avec le
+  namespace ``App\Test\TestCase\Foo``.
 
 .. meta::
     :title lang=fr: Etendre Bake
