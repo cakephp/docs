@@ -400,8 +400,8 @@ données::
 
         bin/cake migrations migrate
 
-Pour migrer vers une version spécifique, utilisez le paramètre --target ou -t
-(version courte)::
+Pour migrer vers une version spécifique, utilisez le paramètre ``--target`` ou
+-t (version courte)::
 
         bin/cake migrations migrate -t 20150103081132
 

@@ -740,15 +740,15 @@ maintenant à ceci::
         }
     }
 
-Vous pouvez voir que nous avons ajouté une méthode appelée ``testPublished()``.
-Nous commençons par créer une instance de notre model ``Article``, et lançons
-ensuite notre méthode ``published()``. Dans ``$expected``, nous définissons
-ce que nous en attendons, ce qui devrait être le résultat approprié (que nous
-connaissons depuis que nous avons défini les enregistrements qui sont remplis
-initialement dans la table articles.). Nous testons que les résultats
-correspondent à nos attentes en utilisant la méthode ``assertEquals()``.
-Regardez la section sur les :ref:`running-tests` pour plus d'informations
-sur la façon de lancer les cas de test.
+Vous pouvez voir que nous avons ajouté une méthode appelée
+``testFindPublished()``. Nous commençons par créer une instance de notre model
+``Article``, et lançons ensuite notre méthode ``published()``. Dans
+``$expected``, nous définissons ce que nous en attendons, ce qui devrait être le
+résultat approprié (que nous connaissons depuis que nous avons défini les
+enregistrements qui sont remplis initialement dans la table articles.). Nous
+testons que les résultats correspondent à nos attentes en utilisant la méthode
+``assertEquals()``. Regardez la section sur les :ref:`running-tests` pour plus
+d'informations sur la façon de lancer les cas de test.
 
 Méthodes de Mocking des Models
 ------------------------------
