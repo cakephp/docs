@@ -250,21 +250,21 @@ for your application to use.
 If you want the ``bake`` call to also create a test file for your
 ``ExampleFoo`` class, you need to overwrite the ``bakeTest()`` method in the
 ``FooTask`` class to register the class suffix and namespace for your custom
-command name:
+command name::
 
-  public function bakeTest($className)
-  {
-      if (!isset($this->Test->classSuffixes[$this->name()])) {
+    public function bakeTest($className)
+    {
+        if (!isset($this->Test->classSuffixes[$this->name()])) {
           $this->Test->classSuffixes[$this->name()] = 'Foo';
-      }
+        }
 
-      $name = ucfirst($this->name());
-      if (!isset($this->Test->classTypes[$name])) {
+        $name = ucfirst($this->name());
+        if (!isset($this->Test->classTypes[$name])) {
           $this->Test->classTypes[$name] = 'Foo';
-      }
+        }
 
-      return parent::bakeTest($className);
-  }
+        return parent::bakeTest($className);
+    }
 
 - The **class suffix** will be appened to the name provided in your ``bake``
 call. In the previous example, it would create a ``ExampleFooTest.php`` file.

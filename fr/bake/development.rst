@@ -266,19 +266,19 @@ pour la classe ``ExampleFoo``, vous devrez surcharger la méthode ``bakeTest()``
 dans la classe ``FooTask`` pour y définir le suffixe et le namespace de la
 classe de votre nom de commande personnalisée::
 
-  public function bakeTest($className)
-  {
-      if (!isset($this->Test->classSuffixes[$this->name()])) {
+    public function bakeTest($className)
+    {
+        if (!isset($this->Test->classSuffixes[$this->name()])) {
           $this->Test->classSuffixes[$this->name()] = 'Foo';
-      }
+        }
 
-      $name = ucfirst($this->name());
-      if (!isset($this->Test->classTypes[$name])) {
+        $name = ucfirst($this->name());
+        if (!isset($this->Test->classTypes[$name])) {
           $this->Test->classTypes[$name] = 'Foo';
-      }
+        }
 
-      return parent::bakeTest($className);
-  }
+        return parent::bakeTest($className);
+    }
 
 - Le **suffixe de classe** sera ajouté après le nom passé à ``bake``. Dans le
 cadre de l'exemple ci-dessus, cela créerait un fichier ``ExampleFooTest.php``.
