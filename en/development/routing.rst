@@ -291,7 +291,7 @@ One more example, and you'll be a routing pro::
         ]
     );
 
-This is rather involved, but shows how powerful routes can be The URL supplied
+This is rather involved, but shows how powerful routes can be. The URL supplied
 has four route elements. The first is familiar to us: it's a default route
 element that tells CakePHP to expect a controller name.
 
