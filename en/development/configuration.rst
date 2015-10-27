@@ -107,7 +107,7 @@ Asset.timestamp
     Valid values:
 
     - (bool) ``false`` - Doesn't do anything (default)
-    - (bool) ``true`` - Appends the timestamp when debug is ``false``
+    - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
 
 Database Configuration
