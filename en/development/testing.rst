@@ -764,11 +764,11 @@ model. The controller code looks like::
                 }
             }
             if (!empty($short)) {
-                $result = $this->Article->find('all', [
+                $result = $this->Articles->find('all', [
                     'fields' => ['id', 'title']
                 ]);
             } else {
-                $result = $this->Article->find();
+                $result = $this->Articles->find();
             }
 
             $this->set([
