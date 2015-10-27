@@ -119,7 +119,7 @@ Asset.timestamp
     Valeurs valides:
 
     - (bool) ``false`` - Ne fait rien (par défaut)
-    - (bool) ``true`` - Ajoute le timestamp quand debug est à ``false``
+    - (bool) ``true`` - Ajoute le timestamp quand debug est à ``true``
     - (string) 'force' - Toujours ajouter le timestamp.
 
 Configuration de la Base de Données
