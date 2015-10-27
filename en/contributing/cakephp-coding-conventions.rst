@@ -260,7 +260,7 @@ Method Chaining
 ===============
 
 Method chaining should have multiple methods spread across separate lines, and
-indented with one tab::
+indented with four spaces::
 
     $email->from('foo@example.com')
         ->to('bar@example.com')
