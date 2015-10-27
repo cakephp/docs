@@ -72,7 +72,7 @@ Query String Parameters
 Query string parameters can be read using :php:attr:`~Cake\\Network\\Request::$query`::
 
     // URL is /posts/index?page=1&sort=title
-    $this->request->query['page'];
+    $this->request->query('page');
 
 You can either directly access the query property, or you can use
 ``query()`` method to read the URL query array in an error-free manner.
