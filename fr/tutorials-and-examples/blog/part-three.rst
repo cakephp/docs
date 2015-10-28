@@ -219,7 +219,7 @@ de template add et edit::
     echo $this->Form->input('rght');
 
 De plus, vous devez désactiver ou retirer les requirePresence du validateur
-pour lft et rght dans votre model CategoriesTable::
+pour ``lft`` et ``rght`` dans votre model CategoriesTable::
 
     public function validationDefault(Validator $validator)
     {

@@ -265,7 +265,7 @@ Chaînage des Méthodes
 =====================
 
 Le chaînage des méthodes doit avoir plusieurs méthodes réparties sur des
-lignes distinctes et indentées avec une tabulation::
+lignes distinctes et indentées avec quatre espaces::
 
     $email->from('foo@example.com')
         ->to('bar@example.com')

@@ -87,7 +87,7 @@ base de données::
 Création de Migrations
 ======================
 
-Les fichiers de migrations sont stockés dans le répertoire **config/Migration**
+Les fichiers de migrations sont stockés dans le répertoire **config/Migrations**
 de votre application. Le nom des fichiers de migration est précédés de la
 date/heure du jour de création, dans le format
 **YYYYMMDDHHMMSS_my_new_migration.php**.
