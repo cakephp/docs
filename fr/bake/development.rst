@@ -223,7 +223,7 @@ FooTask.php devra ressembler à ceci::
 
         public function name()
         {
-            return 'shell';
+            return 'foo';
         }
 
         public function fileName($name)
@@ -260,6 +260,32 @@ Vous devriez maintenant voir votre nouvelle tâche dans l'affichage de
 Cela va générer une nouvelle classe ``ExampleFoo`` dans
 **src/Foo/ExampleFoo.php** que votre application va
 pouvoir utiliser.
+
+Si vous souhaitez que votre appel à ``bake`` crée également un fichier de test
+pour la classe ``ExampleFoo``, vous devrez surcharger la méthode ``bakeTest()``
+dans la classe ``FooTask`` pour y définir le suffixe et le namespace de la
+classe de votre nom de commande personnalisée::
+
+    public function bakeTest($className)
+    {
+        if (!isset($this->Test->classSuffixes[$this->name()])) {
+          $this->Test->classSuffixes[$this->name()] = 'Foo';
+        }
+
+        $name = ucfirst($this->name());
+        if (!isset($this->Test->classTypes[$name])) {
+          $this->Test->classTypes[$name] = 'Foo';
+        }
+
+        return parent::bakeTest($className);
+    }
+
+* Le **suffixe de classe** sera ajouté après le nom passé à ``bake``. Dans le
+  cadre de l'exemple ci-dessus, cela créerait un fichier ``ExampleFooTest.php``.
+* Le **type de classe** sera le sous-namespace utilisé pour atteindre votre
+  fichier (relatif à l'application ou au plugin dans lequel vous faites le
+  ``bake``). Dans le cadre de l'exemple ci-dessus, cela créerait le test avec le
+  namespace ``App\Test\TestCase\Foo``.
 
 .. meta::
     :title lang=fr: Etendre Bake
