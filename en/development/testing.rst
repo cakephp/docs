@@ -320,7 +320,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``test`` in your **config/datasources.php**
+CakePHP uses the connection named ``test`` in your **config/app.php**
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
