@@ -759,6 +759,23 @@ is another solution that works for some clients.
 
 .. _authorization-objects:
 
+
+Deciding when to run authentication
+-----------------
+
+In some cases you want to be able to use ``$this->Auth->user()`` in the
+``beforeFilter(Event $event)`` method. This is achievable by using the
+``checkAuthIn`` config key. The following changes which event for which
+initial auth checks should be done.
+
+    //Set up AuthComponent to authenticate in initialize()
+    $this->Auth->config('checkAuthIn', 'Controller.initialize');
+
+
+Default value for ``checkAuthIn`` is ``'Controller.startup'`` - but by using
+``'Controller.initialize'`` initial auth is done before ``beforeFilter()`` method.
+
+
 Authorization
 =============
 
