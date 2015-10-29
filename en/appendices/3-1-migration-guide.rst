@@ -29,7 +29,7 @@ Shell Helpers Added
 -------------------
 
 - Console applications can now create helper classes that encapsulate re-usable
-  blocks of output logic. See the :doc:`/console-and-shells/helpers` section
+  blocks of output logic. See the :doc:`/console-shells-and-tasks/helpers` section
   for more information.
 
 RoutesShell
@@ -37,7 +37,7 @@ RoutesShell
 
 - RoutesShell has been added and now provides you a simple to use CLI
   interface for testing and debugging routes. See the
-  :doc:`/console-and-shells/routes-shell` section for more information.
+  :doc:`/console-shells-and-tasks/routes-shell` section for more information.
 
 Controller
 ==========

@@ -92,7 +92,7 @@ Extraire les Fichiers Pot avec le Shell I18n
 Pour créer les fichiers pot à partir de `__()` et des autres types de
 messages internationalisés qui se trouvent dans votre code, vous pouvez
 utiliser le shell i18n. Vous pouvez consulter le
-:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir
+:doc:`chapitre suivant </console-shells-and-tasks/i18n-shell>` pour en savoir
 plus.
 
 Définir la Locale par Défaut
