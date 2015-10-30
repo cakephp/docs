@@ -238,7 +238,7 @@ Agora vamos criar a view para nossa action em
     <p><small>Criado: <?= $article->created->format(DATE_RFC850) ?></small></p>
 
 Verifique se está tudo funcionando acessando os links em ``/articles/index`` ou
-manualmente solciite a visualização um artigo acessando ``articles/view/{id}``.
+manualmente solicite a visualização de um artigo acessando ``articles/view/{id}``.
 Lembre-se de substituir ``{id}`` por um 'id' de um artigo.
 
 Adicionando artigos
