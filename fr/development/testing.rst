@@ -342,7 +342,7 @@ pouvez commencer à tester votre code avant de développer réellement en live l
 contenu pour une application.
 
 CakePHP utilise la connexion nommée ``test`` dans votre fichier de configuration
-**config/datasources.php**. Si la connexion n'est pas utilisable, une exception
+**config/app.php**. Si la connexion n'est pas utilisable, une exception
 sera levée et vous ne pourrez pas utiliser les fixtures de la base de données.
 
 CakePHP effectue ce qui suit pendant le chemin d'une fixture basée sur un cas
