@@ -1,5 +1,5 @@
-Console and Shells
-##################
+Console Shells and Tasks
+########################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
@@ -15,15 +15,15 @@ Console and Shells
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/cron-jobs
-    console-and-shells/completion-shell
-    console-and-shells/code-generation-with-bake
-    console-and-shells/schema-management-and-migrations
-    console-and-shells/i18n-shell
-    console-and-shells/acl-shell
-    console-and-shells/testsuite-shell
-    console-and-shells/upgrade-shell
+    console-shells-and-tasks/cron-jobs
+    console-shells-and-tasks/completion-shell
+    console-shells-and-tasks/code-generation-with-bake
+    console-shells-and-tasks/schema-management-and-migrations
+    console-shells-and-tasks/i18n-shell
+    console-shells-and-tasks/acl-shell
+    console-shells-and-tasks/testsuite-shell
+    console-shells-and-tasks/upgrade-shell
 
 .. meta::
-    :title lang=pt: Console and Shells
+    :title lang=pt: Console Shells and Tasks
     :keywords lang=pt: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

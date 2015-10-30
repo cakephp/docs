@@ -1,5 +1,5 @@
-Console et Shells
-#################
+Console Shells et Tasks
+#######################
 
 CakePHP ne dispose pas seulement d'un framework web mais aussi d'une console
 de framework pour la création d'applications. Les applications par la console
@@ -1097,16 +1097,16 @@ Plus de sujets
 .. toctree::
     :maxdepth: 1
 
-    console-and-shells/cron-jobs
-    console-and-shells/completion-shell
-    console-and-shells/code-generation-with-bake
-    console-and-shells/schema-management-and-migrations
-    console-and-shells/i18n-shell
-    console-and-shells/acl-shell
-    console-and-shells/testsuite-shell
-    console-and-shells/upgrade-shell
+    console-shells-and-tasks/cron-jobs
+    console-shells-and-tasks/completion-shell
+    console-shells-and-tasks/code-generation-with-bake
+    console-shells-and-tasks/schema-management-and-migrations
+    console-shells-and-tasks/i18n-shell
+    console-shells-and-tasks/acl-shell
+    console-shells-and-tasks/testsuite-shell
+    console-shells-and-tasks/upgrade-shell
 
 
 .. meta::
-    :title lang=fr: Console et Shells
+    :title lang=fr: Console Shells et Tasks
     :keywords lang=fr: scripts de shell,système shell,classes application,tâches de fond,script en ligne,tâche cron,réponse requête request response,système path,acl,nouveaux projets,shells,spécifiques,paramètres,i18n,cakephp,répertoire,maintenance,idéal,applications,mvc

@@ -43,7 +43,7 @@ est de créer votre fichier pot
 `pot file <http://en.wikipedia.org/wiki/Gettext>`_,
 qui est le template pour toutes les chaînes traduisibles de votre application.
 Pour générer votre (vos) fichier(s) pot, tout ce que vous avez à faire est de
-lancer la tâche i18n :doc:`i18n console task </console-and-shells>` de la
+lancer la tâche i18n :doc:`i18n console task </console-shells-and-tasks>` de la
 console Cake, qui va chercher partout dans votre code où vous avez utilisé une
 fonction de traduction, et générer le(s) fichier(s) pot pour vous.
 Vous pouvez (et devez) relancer cette tâche console à chaque fois
@@ -237,7 +237,7 @@ la commande ``locale -a`` dans un terminal.
 Traduire les erreurs de validation de model
 ===========================================
 CakePHP va automatiquement extraire l'erreur de validation quand vous utilisez
-:doc:`i18n console task </console-and-shells>`. Par défaut, le domaine default
+:doc:`i18n console task </console-shells-and-tasks>`. Par défaut, le domaine default
 est utilisé. Ceci peut être surchargé en configurant la propriété
 ``$validationDomain`` dans votre model::
 

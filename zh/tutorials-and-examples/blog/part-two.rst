@@ -629,7 +629,7 @@ CakePHP 的路由设置在 ``/app/Config/routes.php`` 文件中。你应当注�
 1. :ref:`view-layouts`：定制网站的布局
 2. :ref:`view-elements`：导入和重用视图片段
 3. :doc:`/controllers/scaffolding`：在着手写代码前，先创建原型。
-4. :doc:`/console-and-shells/code-generation-with-bake`：生成 CRUD 代码
+4. :doc:`/console-shells-and-tasks/code-generation-with-bake`：生成 CRUD 代码
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`：用户身份验证和授权的教程
 
 

@@ -40,7 +40,7 @@ Console
     Contient les commandes de la console et les Tasks de la console pour votre
     application. Ce répertoire peut aussi contenir un répertoire ``Templates``
     pour personnaliser la sortie de bake. Pour plus d'informations, regardez
-    :doc:`/console-and-shells`.
+    :doc:`/console-shells-and-tasks`.
 Controller
     Contient vos Controllers et leurs Components.
 Lib

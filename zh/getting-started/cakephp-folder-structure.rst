@@ -30,7 +30,7 @@ Config
     (*bootstrapping*)，核心配置文件以及其他配置文件，都应该放在这里。
 Console
     包含应用程序的控制台命令和控制台任务。此目录还可以包含一个 ``Templates`` 目录，
-    来定制 bake 的输出。欲了解更多信息，请参阅 :doc:`/console-and-shells` 。
+    来定制 bake 的输出。欲了解更多信息，请参阅 :doc:`/console-shells-and-tasks` 。
 Controller
     包含应用程序的控制器和它们的组件。
 Lib

@@ -367,7 +367,7 @@ sobre a configuração do componente, criação de classes de Autorização cust
 Sugerimos as seguintes leituras
 -------------------------------
 
-1. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
+1. :doc:`/console-shells-and-tasks/code-generation-with-bake` Generating basic CRUD code
 2. :doc:`/core-libraries/components/authentication`: User registration and login
 
 

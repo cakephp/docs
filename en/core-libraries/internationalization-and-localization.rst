@@ -41,7 +41,7 @@ With your code ready to be multilingual, the next step is to create
 your `pot file <http://en.wikipedia.org/wiki/Gettext>`_, which is
 the template for all translatable strings in your application. To
 generate your pot file(s), all you need to do is run the
-:doc:`i18n console task </console-and-shells>`,
+:doc:`i18n console task </console-shells-and-tasks>`,
 which will look for where you've used a translate function in your
 code and generate your pot file(s) for you. You can and should
 re-run this console task any time you change the translations in
@@ -223,7 +223,7 @@ Translating model validation errors
 ===================================
 
 CakePHP will automatically extract the validation error when you are using the
-:doc:`i18n console task </console-and-shells>`. By default, the default domain is used.
+:doc:`i18n console task </console-shells-and-tasks>`. By default, the default domain is used.
 This can be overwritten by setting the ``$validationDomain`` property in your model::
 
     class User extends AppModel {

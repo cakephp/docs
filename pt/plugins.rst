@@ -173,7 +173,7 @@ sua aplicação. Por exemplo - assando controllers::
     user@host$ cake bake controller Contacts --plugin ContactManager
 
 Por favor consulte o capítulo
-:doc:`/console-and-shells/code-generation-with-bake` se você tiver quaisquer
+:doc:`/console-and-shells/code-generation-with-bake` se você tiver quaisquer 
 problemas com o uso da linha de comando.
 
 

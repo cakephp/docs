@@ -428,7 +428,7 @@ personnalisée, et bien plus encore.
 Lectures suivantes suggérées
 ----------------------------
 
-1. :doc:`/console-and-shells/code-generation-with-bake` Génération basique CRUD de code
+1. :doc:`/console-shells-and-tasks/code-generation-with-bake` Génération basique CRUD de code
 2. :doc:`/core-libraries/components/authentication`: Inscription d'user et connexion
 
 

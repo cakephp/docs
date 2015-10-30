@@ -10,7 +10,7 @@
 在这个教程中，你将会使用 :doc:`/core-libraries/components/authentication` 和
 :doc:`/core-libraries/components/access-control-lists` 创建一个简单的应用。这个
 教程假设你已经阅读过 :doc:`/tutorials-and-examples/blog/blog`，并且熟悉 
-:doc:`/console-and-shells/code-generation-with-bake`。你应该对 CakePHP 有了一些
+:doc:`/console-shells-and-tasks/code-generation-with-bake`。你应该对 CakePHP 有了一些
 经验, 并且熟悉 MVC 概念。这个教程是对 :php:class:`AuthComponent` 和 
 :php:class:`AclComponent` 的一个简单介绍。
 
@@ -78,7 +78,7 @@ app/Config/core.php 文件中的 Security.salt 的值。在此我们将为应用
    );
 
 这些是我们构建应用程序的其余部分要用到的表。一旦数据库中有了表结构，我们就可以
-开始了。使用 :doc:`/console-and-shells/code-generation-with-bake` 快速创建你的
+开始了。使用 :doc:`/console-shells-and-tasks/code-generation-with-bake` 快速创建你的
 模型、控制器和视图。
 
 要使用 cake bake，调用 ``cake bake all``，这会列出你插入到 MySQL 中的4个表，选择

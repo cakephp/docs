@@ -37,7 +37,7 @@
 这个中间的类 AppModel 是空的。如果你没有自己创建，则会从 CakePHP 内核文件夹中取得。
 重载 AppModel，让你可以定义应用程序中所有的模型都具备的功能。为此，你需要在 Model 
 文件夹中创建自己的 ``AppModel.php``，就象应用程序中所有其他的模型一样。使用 
-:doc:`Bake <console-and-shells/code-generation-with-bake>` 创建项目，就会为你自动
+:doc:`Bake <console-shells-and-tasks/code-generation-with-bake>` 创建项目，就会为你自动
 生成这个文件。
 
 欲知如何在多个模型中使用相似的逻辑的更多信息，也可参看 

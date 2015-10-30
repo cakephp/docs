@@ -678,7 +678,7 @@ CakePHP を学習する人が次に学びたいと思う共通のタスクがい
 1. :ref:`view-layouts`: ウェブサイトのレイアウトをカスタマイズする
 2. :ref:`view-elements` ビューのスニペットを読み込んで再利用する
 3. :doc:`/controllers/scaffolding`: コードを作成する前のプロトタイピング
-4. :doc:`/console-and-shells/code-generation-with-bake` 基本的な CRUD コードの生成
+4. :doc:`/console-and-shells/code-generation-with-bake` 基本的なCRUDコードの生成
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: ユーザの認証と承認のチュートリアル
 
 

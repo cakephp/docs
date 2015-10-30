@@ -64,7 +64,7 @@ of your app. For example - baking controllers::
     user@host$ cake bake controller Contacts --plugin ContactManager
 
 Please refer to the chapter
-:doc:`/console-and-shells/code-generation-with-bake` if you
+:doc:`/console-shells-and-tasks/code-generation-with-bake` if you
 have any problems with using the command line.
 
 .. warning::

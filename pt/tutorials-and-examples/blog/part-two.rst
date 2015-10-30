@@ -629,5 +629,5 @@ estudar:
 1. :ref:`view-layouts`: Customizando o layout do seu website
 2. :ref:`view-elements` Incluindo e reutilizando trechos de código
 3. :doc:`/controllers/scaffolding`: Prototipando antes de programar
-4. :doc:`/console-and-shells/code-generation-with-bake` Gerando código CRUD básico
+4. :doc:`/console-shells-and-tasks/code-generation-with-bake` Gerando código CRUD básico
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticação e autorização de usuários

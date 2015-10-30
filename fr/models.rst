@@ -53,7 +53,7 @@ de définir des fonctionnalités qui doivent être rendues disponibles pour tous
 les models de votre application. Pour faire cela, vous avez besoin de créer
 votre propre fichier ``AppModel.php`` qui se loge dans le dossier Model, comme
 tous les autres models de votre application. À la création d'un projet en
-utilisant :doc:`Bake <console-and-shells/code-generation-with-bake>`, ce
+utilisant :doc:`Bake <console-shells-and-tasks/code-generation-with-bake>`, ce
 fichier sera automatiquement créé pour vous.
 
 Voir aussi :doc:`Behaviors <models/behaviors>` pour plus d'informations sur la
