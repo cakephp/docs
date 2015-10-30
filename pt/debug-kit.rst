@@ -15,6 +15,10 @@ composer.json está localizado)::
 
     php composer.phar require --dev cakephp/debug_kit "~3.0"
 
+Then, you need to enable the plugin by executing the following line::
+
+    bin/cake plugin load DebugKit
+
 Armazenamento do DebugKit
 =========================
 
