@@ -1,24 +1,32 @@
 Tutorial - Criando um Blog - Parte 3
 ####################################
+
 Criar uma arvore de Categoria
 =============================
-Vamos continuar o nosso aplicativo de blog e imaginar que queremos categorizar os nossos artigos. Queremos que as categorias sejam ordenadas, e para isso, vamos usar o comportamento de árvore para nos ajudar a organizar as categorias.
+
+Vamos continuar o nosso aplicativo de blog e imaginar que queremos categorizar
+os nossos artigos. Queremos que as categorias sejam ordenadas, e para isso,
+vamos usar o comportamento de árvore para nos ajudar a organizar as categorias.
 
 Mas primeiro, precisamos modificar nossas tabelas.
 
 Migração de Plugin
 ==================
 
-Nós vamos usar o plugin de migrações para criar uma tabela em nosso banco de dados. Se você tem a tabela articles no seu banco de dados, apague.
-Agora abra o arquivo composer.json do seu aplicativo.
-Normalmente, você veria que o plugin de migração já está requisitando. Se não, addicione atráves da execução.
+Nós vamos usar o plugin de migrações para criar uma tabela em nosso banco de
+dados. Se você tem a tabela articles no seu banco de dados, apague.  Agora abra
+o arquivo composer.json do seu aplicativo.  Normalmente, você veria que o plugin
+de migração já está requisitando. Se não, addicione atráves da execução::
 
-composer require cakephp/migrations:~1.0
+    composer require cakephp/migrations:~1.0
 
-O plugin de migração agora está na pasta de sua aplicação. Também, adicionar Plugin :: load ('Migrations'); para o arquivo bootstrap.php do seu aplicativo.
-Uma vez que o plugin está carregado, execute o seguinte comando para criar um arquivo de migração:
+O plugin de migração agora está na pasta de sua aplicação. Também, adicionar
+``Plugin::load('Migrations');`` para o arquivo bootstrap.php do seu aplicativo.
 
-bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
+Uma vez que o plugin está carregado, execute o seguinte comando para criar um
+arquivo de migração::
+
+    bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
 
 Um arquivo de migração será gerado na pasta /config/Migrations com o seguinte:
 
@@ -59,9 +67,11 @@ Um arquivo de migração será gerado na pasta /config/Migrations com o seguinte
         }
     }
 
-Executar outro comando para criar uma tabela de categorias. Se você precisar especificar um comprimento de campo, você pode fazê-lo dentro de colchetes no tipo de campo, ou seja:
+Executar outro comando para criar uma tabela de categorias. Se você precisar
+especificar um comprimento de campo, você pode fazê-lo dentro de colchetes no
+tipo de campo, ou seja::
 
-bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
+    bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
 
 Isso irá gerar o seguinte arquivo no config/Migrations:
 
@@ -113,7 +123,9 @@ Isso irá gerar o seguinte arquivo no config/Migrations:
         }
     }
 
-Agora que os arquivos de migração estão criadas, você pode editá-los antes de criar suas tabelas. Precisamos mudar o 'null' => false para o campo parent_id com 'null' => true porque uma categoria de nível superior tem null no parent_id
+Agora que os arquivos de migração estão criadas, você pode editá-los antes de
+criar suas tabelas. Precisamos mudar o 'null' => false para o campo parent_id
+com ``'null' => true`` porque uma categoria de nível superior tem null no parent_id
 
 Execute o seguinte comando para criar suas tabelas::
 
@@ -122,20 +134,22 @@ Execute o seguinte comando para criar suas tabelas::
 Modificando as Tabelas
 ======================
 
-Com nossas tabelas configuradas, agora podemos nos concentrar em categorizar os nossos artigos.
+Com nossas tabelas configuradas, agora podemos nos concentrar em categorizar os
+nossos artigos.
 
-Supomos que você já tem os arquivos (Tabelas, controladores e modelos dos artigos) da parte 2. Então vamos adicionar as referências a categorias.
+Supomos que você já tem os arquivos (Tabelas, controladores e modelos dos
+artigos) da parte 2. Então vamos adicionar as referências a categorias.
 
-Precisamos associar os artigos e categorias juntos nas tabelas. Abra o arquivo src/Model/Table/ArticlesTable.php e adicione o seguinte:
-	
+Precisamos associar os artigos e categorias juntos nas tabelas. Abra o arquivo
+src/Model/Table/ArticlesTable.php e adicione o seguinte:
+
 .. code-block:: php
 
     // src/Model/Table/ArticlesTable.php
-    
     namespace App\Model\Table;
-    
+
     use Cake\ORM\Table;
-    
+
     class ArticlesTable extends Table
     {
         public function initialize(array $config)
@@ -157,12 +171,14 @@ Crie todos os arquivos pelo comando bake::
     bin/cake bake controller Categories
     bin/cake bake template Categories
 
-A ferramenta bake criou todos os seus arquivos em um piscar de olhos. Você pode fazer uma leitura rápida se quiser familiarizar como o CakePHP funciona.
+A ferramenta bake criou todos os seus arquivos em um piscar de olhos. Você pode
+fazer uma leitura rápida se quiser familiarizar como o CakePHP funciona.
 
 .. note::
     Se você estiver no Windows lembre-se de usar \ em vez de /.
 
-Você vai precisar editar o seguinte em **src/Template/Categories/add.ctp** e **src/Template/Categories/edit.ctp**::
+Você vai precisar editar o seguinte em **src/Template/Categories/add.ctp**
+e **src/Template/Categories/edit.ctp**::
 
     echo $this->Form->input('parent_id', [
         'options' => $parentCategories,
@@ -172,19 +188,29 @@ Você vai precisar editar o seguinte em **src/Template/Categories/add.ctp** e **
 Anexar árvore de compartamento para CategoriesTable
 ===================================================
 
-O :doc:`TreeBehavior </orm/behaviors/tree>` ajuda você a gerenciar as estruturas de árvore hierárquica na tabela do banco de dados. Usa a lógica MPTT para gerenciar os dados. Estruturas de árvore MPTT são otimizados para lê, o que muitas vezes torna uma boa opção para aplicações pesadas, como ler blogs.
-Se você abrir o arquivo src/Model/Table/CategoriesTable.php, você verá que o TreeBehavior foi anexado a sua CategoriesTable no método initialize(). Bake acrescenta esse comportamento para todas as tabelas que contêm lft e colunas rght::
+O :doc:`TreeBehavior </orm/behaviors/tree>` ajuda você a gerenciar as estruturas
+de árvore hierárquica na tabela do banco de dados. Usa a lógica MPTT para
+gerenciar os dados. Estruturas de árvore MPTT são otimizados para lê, o que
+muitas vezes torna uma boa opção para aplicações pesadas, como ler blogs.
+
+Se você abrir o arquivo src/Model/Table/CategoriesTable.php, você verá que
+o TreeBehavior foi anexado a sua CategoriesTable no método initialize(). Bake
+acrescenta esse comportamento para todas as tabelas que contêm lft e colunas
+rght::
 
     $this->addBehavior('Tree');
 
-Com o TreeBehavior anexado você vai ser capaz de acessar alguns recursos como a reordenação das categorias. Vamos ver isso em um momento.
+Com o TreeBehavior anexado você vai ser capaz de acessar alguns recursos como
+a reordenação das categorias. Vamos ver isso em um momento.
 
-Mas, por agora, você tem que remover as seguintes entradas em seus Categorias de adicionar e editar arquivos de modelo::
+Mas, por agora, você tem que remover as seguintes entradas em seus Categorias de
+adicionar e editar arquivos de modelo::
 
     echo $this->Form->input('lft');
     echo $this->Form->input('rght');
 
-Além disso, você deve desabilitar ou remover o requirePresence do validador, tanto para a ''lft'' e ''rght'' nas colunas em seu modelo CategoriesTable:
+Além disso, você deve desabilitar ou remover o requirePresence do validador,
+tanto para a ``lft`` e ``rght`` nas colunas em seu modelo CategoriesTable:
 
 .. code-block:: php
 
@@ -193,27 +219,32 @@ Além disso, você deve desabilitar ou remover o requirePresence do validador, t
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-    
+
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
         //    ->requirePresence('lft', 'create')
             ->notEmpty('lft');
-    
+
         $validator
             ->add('rght', 'valid', ['rule' => 'numeric'])
         //    ->requirePresence('rght', 'create')
             ->notEmpty('rght');
     }
 
-Esses campos são automaticamente gerenciados pelo TreeBehavior quando uma categoria é salvo.
+Esses campos são automaticamente gerenciados pelo TreeBehavior quando uma
+categoria é salvo.
 
-Usando seu navegador, adicione algumas novas categorias usando os ''/yoursite/categories/add'' ação do controlador.
+Usando seu navegador, adicione algumas novas categorias usando os
+``/yoursite/categories/add`` ação do controlador.
 
 Reordenar categorias com TreeBahavior
 =====================================
 
-Em seu arquivo de modelo de índices de categorias, você pode listar as categorias e reordená-los.
-Vamos modificar o método de índice em sua CategoriesController.php e adicionar moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
+Em seu arquivo de modelo de índices de categorias, você pode listar as
+categorias e reordená-los.
+
+Vamos modificar o método de índice em sua CategoriesController.php e adicionar
+moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
 
 .. code-block:: php
 
@@ -226,7 +257,7 @@ Vamos modificar o método de índice em sua CategoriesController.php e adicionar
             $this->set(compact('categories'));
             $this->set('_serialize', ['categories']);
         }
-    
+
         public function moveUp($id = null)
         {
             $this->request->allowMethod(['post', 'put']);
@@ -238,7 +269,7 @@ Vamos modificar o método de índice em sua CategoriesController.php e adicionar
             }
             return $this->redirect($this->referer(['action' => 'index']));
         }
-    
+
         public function moveDown($id = null)
         {
             $this->request->allowMethod(['post', 'put']);
@@ -251,11 +282,11 @@ Vamos modificar o método de índice em sua CategoriesController.php e adicionar
             return $this->redirect($this->referer(['action' => 'index']));
         }
     }
-    
+
 Em src/Template/Categories/index.ctp substituir o conteúdo existente com:
-    
+
 .. code-block:: php
-    
+
     <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
         <ul class="side-nav">
@@ -302,21 +333,21 @@ Em src/Template/Categories/index.ctp substituir o conteúdo existente com:
 Modificando o ArticlesController
 ================================
 
-Em nossa ArticlesController, vamos obter a lista de todas as categorias. Isto irá permitir-nos para escolher uma categoria para um artigo ao criar ou editar ele:
+Em nossa ArticlesController, vamos obter a lista de todas as categorias. Isto
+irá permitir-nos para escolher uma categoria para um artigo ao criar ou editar
+ele:
 
 .. code-block:: php
 
     // src/Controller/ArticlesController.php
-    
     namespace App\Controller;
-    
+
     use Cake\Network\Exception\NotFoundException;
-    
+
     class ArticlesController extends AppController
     {
-    
         // ...
-    
+
         public function add()
         {
             $article = $this->Articles->newEntity();
@@ -329,7 +360,7 @@ Em nossa ArticlesController, vamos obter a lista de todas as categorias. Isto ir
                 $this->Flash->error(__('Unable to add your article.'));
             }
             $this->set('article', $article);
-    
+
             // Just added the categories list to be able to choose
             // one category for an article
             $categories = $this->Articles->Categories->find('treeList');
@@ -357,16 +388,6 @@ O artigo adicionado deveria se parecer como isto:
     echo $this->Form->end();
 
 
-Quando você vai para o endereço  /yoursite/articles/add você deve ver uma lista de categorias para escolher.
+Quando você vai para o endereço ``/yoursite/articles/add`` você deve ver uma lista
+de categorias para escolher.
 
-
-.. note::
-    A documentação não é atualmente suportada pela lingua portuguesa nesta
-    página.
-
-    Por favor, sinta-se a vontade para nos enviar um pull request no
-    `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **Improve This Doc** para propor suas mudanças diretamente.
-
-    Você pode referenciar-se à versão inglesa no menu de seleção superior
-    para obter informações sobre o tópico desta página.
