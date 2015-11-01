@@ -18,7 +18,7 @@ Enabling Data Views in Your Application
 
 Before you can use the data view classes, you'll first need to load the
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
-contoller::
+controller::
 
     public function initialize()
     {
