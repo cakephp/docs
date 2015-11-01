@@ -128,7 +128,7 @@ Will output::
 Creating meta Tags
 ------------------
 
-.. php:method:: meta(string $type, string $url = null, array $options = [])
+.. php:method:: meta(string|array $type, string $url = null, array $options = [])
 
 This method is handy for linking to external resources like RSS/Atom feeds
 and favicons. Like css(), you can specify whether or not you'd like this tag
@@ -194,6 +194,18 @@ descriptions. Example::
     // Output
     <meta name="description" content="enter any meta description here" />
 
+In addition to making predefined meta tags, you can create link elements::
+
+    <?= $this->Html->meta([
+        'link' => 'http://example.com/manifest',
+        'rel' => 'manifest'
+    ]);
+    ?>
+    // Output
+    <link href="http://example.com/manifest" rel="manifest"/>
+
+Any attributes provided to meta() when called this way will be added to the
+generated link tag.
 
 Creating Doctype Tags
 ---------------------
