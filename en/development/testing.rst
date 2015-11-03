@@ -226,11 +226,9 @@ application's tests you can simply run::
     // phar file
     php phpunit.phar
 
-.. tip::
-    
-    If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
-    and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
-    command prior to running ``phpunit`` so that any dependencies are installed:
+If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
+and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
+command prior to running ``phpunit`` so that any dependencies are installed:
     
     $ composer install --dev
     
