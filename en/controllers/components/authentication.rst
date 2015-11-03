@@ -757,6 +757,21 @@ for the duration they are still open. Some clients can be forced to
 logout by sending a 401 status code. Changing the authentication realm
 is another solution that works for some clients.
 
+Deciding When to run Authentication
+-----------------------------------
+
+In some cases you may want to use ``$this->Auth->user()`` in the
+``beforeFilter(Event $event)`` method. This is achievable by using the
+``checkAuthIn`` config key. The following changes which event for which initial
+authentication checks should be done::
+
+    //Set up AuthComponent to authenticate in initialize()
+    $this->Auth->config('checkAuthIn', 'Controller.initialize');
+
+Default value for ``checkAuthIn`` is ``'Controller.startup'`` - but by using
+``'Controller.initialize'`` initial authentication is done before ``beforeFilter()``
+method.
+
 .. _authorization-objects:
 
 Authorization
