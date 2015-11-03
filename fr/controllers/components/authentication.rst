@@ -852,6 +852,21 @@ Certains navigateurs peuvent être forcés en envoyant un code 401. Le
 changement du realm de l'authentification est une autre solution qui
 fonctionne pour certain clients.
 
+Décider quand lancer l'Authentification
+---------------------------------------
+
+Dans certains cas, vous aurez peut-être envie d'utiliser ``$this->Auth->user()``
+dans la méthode ``beforeFilter(Event $event)``. C'est possible en utilisant la
+clé de config ``checkAuthIn``. Ce qui suit modifie les vérifications initiales
+d'authentification qui doivent être faites pour un event en particulier::
+
+    //Définit AuthComponent pour authentifier dans initialize()
+    $this->Auth->config('checkAuthIn', 'Controller.initialize');
+
+La valeur par défaut pour ``checkAuthIn`` est ``'Controller.startup'`` - mais en
+utilisant ``'Controller.initialize'``, l'authentification initiale est faite
+avant la méthode ``beforeFilter()``.
+
 .. _authorization-objects:
 
 Autorisation
