@@ -103,7 +103,7 @@ execute until you start fetching rows, convert it to an array, or when the
     foreach ($query as $row) {
     }
 
-    // Calling execute will execute the query
+    // Calling all() will execute the query
     // and return the result set.
     $results = $query->all();
 
