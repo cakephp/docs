@@ -239,7 +239,14 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer::
     // avec le fichier phar
     php phpunit.phar
 
-A partir du répertoire racine de votre application. Pour lancer les tests pour
+Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
+et que vous souhaitez exécuter les tests unitaires de CakePHP, n'oubliez pas
+d'exécuter la commande suivante de ``Composer`` avant de lancer ``phpunit`` pour
+que toutes les dépendances soient installées::
+
+    $ composer install --dev
+
+À partir du répertoire racine de votre application. Pour lancer les tests pour
 un plugin qui fait parti de la source de votre application, d'abord faîtes la
 commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
 ``phpunit`` qui correspond à la façon dont vous avez installé phpunit::
