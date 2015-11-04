@@ -228,10 +228,10 @@ application's tests you can simply run::
 
 If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
 and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
-command prior to running ``phpunit`` so that any dependencies are installed:
-    
+command prior to running ``phpunit`` so that any dependencies are installed::
+
     $ composer install --dev
-    
+
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
 ``phpunit`` command that matches how you installed phpunit::
