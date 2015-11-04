@@ -1272,7 +1272,7 @@ Segurança
 - O ``Security::rijndael()`` está obsoleto e apenas disponível quando se usa
   o mcrypt.
 
-.. aviso::
+.. warning::
 
     Dados encriptados com Security::encrypt() em versões anteriores não são
     compatíveis com a implementação openssl. Você deve :ref:`definir a
