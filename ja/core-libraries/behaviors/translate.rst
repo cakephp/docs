@@ -339,5 +339,5 @@ $translateTable を定義します。 ::
 
 
 .. meta::
-    :title lang=en: Translate
-    :keywords lang=en: invalid sql,correct layout,translation table,layout changes,database tables,array,queries,cakephp,models,translate,public name
+    :title lang=ja: Translate
+    :keywords lang=ja: invalid sql,correct layout,translation table,layout changes,database tables,array,queries,cakephp,models,translate,public name

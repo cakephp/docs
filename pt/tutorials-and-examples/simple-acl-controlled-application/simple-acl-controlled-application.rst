@@ -412,5 +412,5 @@ Para continuar o tutorial acesse :doc:`part-two`.
 
 
 .. meta::
-    :title lang=en: Simple Acl controlled Application
-    :keywords lang=en: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache
+    :title lang=pt: Simple Acl controlled Application
+    :keywords lang=pt: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache
