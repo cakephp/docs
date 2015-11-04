@@ -1,5 +1,5 @@
-3.0 Guia de migração
-####################
+3.0 - Guia de migração
+######################
 
 Esta página resume as alterações do CakePHP 2.x e irá auxiliar na migração
 do seu projeto para a versão 3.0, e também será uma referência para atualizá-lo
@@ -514,11 +514,11 @@ Network\\Email
   a remoção de configurações de transporte.
   
 
-Controlador
-===========
+Controller
+==========
 
-Controlador
------------
+Controller
+----------
 
 - As propriedades ``$helpers`` e ``$components`` agora estão mescladas
   com **todas** classes pai, não apenas a ``AppController`` e o plugin de
@@ -536,7 +536,7 @@ Controlador
   aplicações reais e não tinha mais propósito algum.
 - O ``Controller::validate()`` e ``Controller::validationErrors()`` foram
   removidos. Eles eram restos dos dias do 1.x onde as preocupações com os
-  modelos + controladores eram muito mais entrelaçados.
+  models + controllers eram muito mais entrelaçados.
 - O ``Controller::loadModel()`` agora carrega uma tabela de objetos.
 - A propriedade ``Controller::$scaffold`` foi removida. O scaffolding dinâmico
   foi removido do núcleo do CakePHP.  Um plugin de scaffolding melhorado, 
@@ -550,7 +550,7 @@ Controlador
   do que vai contar ou não como uma ação.
 - A propriedade ``Controller::$Components`` foi removida e substituída pelo
   ``_components``. Se você precisar carregar componentes em tempo de execução
-  você deve usar o ``$this->loadComponent()`` em seu controlador.
+  você deve usar o ``$this->loadComponent()`` em seu controller.
 - A assinatura do :php:meth:`Cake\\Controller\\Controller::redirect()` mudou
   para ``Controller::redirect(string|array $url, int $status = null)``.
   O terceiro argumento ``$exit`` foi removido. O método não pode mais enviar
@@ -562,7 +562,7 @@ Controlador
 - Métodos de controlar prefixados com sublinhado como ``_someMethod()`` não são
   mais tratados como métodos privados. Use as palavras chaves de visibilidade
   apropriadas no lugar. Somente métodos públicos podem ser usados como ação
-  de controladores.
+  de controllers.
 
 Scaffold Removido
 -----------------
@@ -581,14 +581,14 @@ sobre as funcionalidades fornecidas pela nova classe. Você pode usar o
 ``cake upgrade rename_collections`` para ajudar você a atualizar o seu
 código.
 
-Componentes
------------
+Components
+----------
 
 * A propriedade ``_Collection`` é agora ``_registry``. Ela contém uma instância 
   do :php:class:`Cake\\Controller\\ComponentRegistry` agora.
-* Todos componentes devem agora usar o método ``config()`` para obter/definir
+* Todos components devem agora usar o método ``config()`` para obter/definir
   configurações.
-* A configuração padrão para componentes deve ser definido na propriedade
+* A configuração padrão para components deve ser definido na propriedade
   ``$_defaultConfig``. Essa propriedade é automaticamente mesclada com qualquer 
   configuração fornecida pelo construtor.
 * Opções de configuração não são mais definidas como propriedades públicas.
@@ -700,10 +700,10 @@ ExceptionRenderers personalizados agora espera-se que retornem ou um objeto
 Isso significa que qualquer método que manipule exceções específicas devem retornar
 uma resposta ou valor de string.
 
-Modelo
-======
+Model
+=====
 
-A camada de Modelo do 2.x foi completamente reescrita e substituída.
+A camada de model do 2.x foi completamente reescrita e substituída.
 Você deve revisar o :doc:`/appendices/orm-migration` para saber como
 usar o novo ORM.
 
@@ -735,9 +735,9 @@ ConnectionManager
 - O ``ConnectionManager::create()`` foi removido.
   Ele pode ser substituído por ``config($name, $config)`` e ``get($name)``.
 
-Comportamentos
---------------
-- Os métodos de comportamentos (behavior) prefixados com sublinhado como ``_someMethod()``
+Behaviors
+---------
+- Os métodos de comportamentos (behaviors) prefixados com sublinhado como ``_someMethod()``
   não são mais tratados como métodos privados. Use as palavras chaves de visibilidade.
 
 TreeBehavior
@@ -792,47 +792,47 @@ Os seguintes métodos de asserção foram adicionados:
 - ``assertNotWithinRange()`` em contrapartida ao ``assertWithinRange()``
 
 
-Visão
-=====
+View
+====
 
 Temas são agora Plugins Básicos
 -------------------------------
 
-Ter os temas e plugins de modo a criar componentes modulares da aplicação
+Ter os temas e plugins de modo a criar components modulares da aplicação
 se provou limitado e confuso. No CakePHP 3.0, temas não residem mais
 **dentro** da aplicação. Ao invés disso, eles são plugins independentes.
 Isso resolveu alguns problemas com temas:
 
 - Você não podia colocar temas *nos* plugins.
-- Temas não podiam fornecer ajudantes (helpers), ou classes de visão personalizadas.
+- Temas não podiam fornecer helpers (helpers), ou classes de visão personalizadas.
 
 Esses dois problemas foram resolvidos ao converter os temas em plugins.
 
-Pasta das Visões Renomeado
-------------------------------
+Pasta das views renomeada
+-------------------------
 
-As pastas contendo os arquivos de visões agora ficam em **src/Template** no lugar de 
+As pastas contendo os arquivos de views agora ficam em **src/Template** no lugar de
 **src/View**. Isso foi feito para separar os arquivos de visão dos arquivos contendo
-classes php. (ex. Ajudantes, Classes de visão).
+classes php. (ex. helpers, Classes de visão).
 
 As seguintes pastas de Visão foram renomeadas para evitar colisão de nomes com nomes
-de controladores:
+de controllers:
 
 - ``Layouts`` agora é ``Layout``
 - ``Elements`` agora é ``Element``
 - ``Errors`` agora é ``Error``
 - ``Emails`` agora é ``Email`` (o mesmo para ``Email`` dentro de ``Layout``)
 
-Coleção de Ajudantes Substituída
---------------------------------
+Coleção de Helpers Substituída
+------------------------------
 
 Essa classe foi renomeada para :php:class:`Cake\\View\\HelperRegistry`.
 Veja a seção em :doc:`/core-libraries/registry-objects` para mais informações
 sobre as funcionalidades fornecidas pela nova classe. Você pode usar o 
 ``cake upgrade rename_collections`` para ajudar você a atualizar seu código.
 
-Classe de Visão
----------------
+Classe View
+-----------
 
 - A chave ``plugin`` foi removida do argumento ``$options`` de 
   :php:meth:`Cake\\View\\View::element()`. Especifique o nome do elemento
@@ -852,7 +852,7 @@ Classe de Visão
 - O ``View::startIfEmpty()`` foi removido. Agora que o start() sempre sobrescreve,
   o startIfEmpty não tem mais propósito.
 - A propriedade ``View::$Helpers`` foi removida e substituída com ``_helpers``. 
-  Se você precisar carregar ajudantes em tempo de execução você deve usar o 
+  Se você precisar carregar helpers em tempo de execução você deve usar o 
   ``$this->addHelper()`` em seus arquivos de visão.
 - O ``View`` agora irá lançar ``Cake\View\Exception\MissingTemplateException`` quando
   templates estiverem faltando, ao invés de ``MissingViewException``.
@@ -901,9 +901,8 @@ View\\Helper
   - action
   - params
 
-
-Ajudantes
----------
+Helpers
+-------
 
 A classe Helper teve os seguintes métodos removidos:
 
@@ -927,9 +926,9 @@ Os seguintes métodos foram removidos:
 * ``Helper::_formatAttribute()``
 
 Esses métodos podem agora ser encontrados na classe ``StringTemplate`` 
-que os ajudantes usam com frequência. Veja o ``StringTemplateTrait`` 
+que os helpers usam com frequência. Veja o ``StringTemplateTrait`` 
 para um jeito fácil de integrar os templates de string em seus 
-próprios ajudantes.
+próprios helpers.
 
 FormHelper
 ----------
@@ -1087,7 +1086,7 @@ CacheHelper Removido
 --------------------
 
 O CacheHelper foi removido. A funcionalidade de cache que ele fornecia
-não era padrão, limitada e incompatível com layouts não-HTML e visões de dados.
+não era padrão, limitada e incompatível com layouts não-HTML e views de dados.
 Essas limitações significavam que uma reconstrução completa era necessária.
 O ESI (Edge Side Includes) se tornou uma maneira padronizada para implementar
 a funcionalidade que o CacheHelper costumava fornecer. Entretanto, implementando
@@ -1201,8 +1200,8 @@ Classe Set Removida
 
 A classe Set foi removida, agora você deve usar a classe Hash no lugar dela.
 
-Pasta & Arquivos
--------------
+Pastas & Arquivos
+-----------------
 
 As classes de pastas e arquivos foram renomeadas:
 
