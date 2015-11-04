@@ -744,7 +744,7 @@ The results for the above query will contain the article data and the
 useful, for example, for bringing the count of articles tagged with a certain
 word, per author::
 
-    $query = $authorsTable->find();
+    $query = $authorsTable
         ->find()
         ->select(['total_articles' => $query->func()->count('Articles.id')])
         ->leftJoinWith('Articles.Tags', function ($q) {
