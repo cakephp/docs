@@ -1,5 +1,5 @@
-Console and Shells
-##################
+Shells, Tasks & Console Tools
+#############################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
@@ -25,5 +25,5 @@ Console and Shells
     console-and-shells/upgrade-shell
 
 .. meta::
-    :title lang=pt: Console and Shells
+    :title lang=pt: Shells, Tasks & Console Tools
     :keywords lang=pt: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

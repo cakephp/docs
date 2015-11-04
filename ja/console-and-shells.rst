@@ -1025,5 +1025,5 @@ eメールを送る場合は、CakeEmailクラスでメールを送る際のホ�
     console-and-shells/upgrade-shell
 
 .. meta::
-    :title lang=ja: Console and Shells
+    :title lang=ja: Shells, Tasks & Console Tools
     :keywords lang=ja: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

@@ -256,7 +256,7 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
 選択であるはずです。
 
 .. meta::
-    :title lang=en: Dispatcher Filters
-    :description lang=en: Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent
-    :keywords lang=en: middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router
+    :title lang=ja: Dispatcher Filters
+    :description lang=ja: Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent
+    :keywords lang=ja: middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router
 

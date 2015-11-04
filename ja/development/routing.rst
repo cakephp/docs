@@ -987,4 +987,4 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
 
 .. meta::
     :title lang=ja: ルーティング
-    :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
+    :keywords lang=ja: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
