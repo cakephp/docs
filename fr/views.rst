@@ -204,7 +204,7 @@ va outrepasser les précédents::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-Le code précédent va définir ``/Common/index.ctp`` comme étant la vue parente
+Le code précédent va définir **/Common/index.ctp** comme étant la vue parente
 de la vue actuelle.
 
 Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est
@@ -567,44 +567,10 @@ fournissez une valeur unique de la clé cache en utilisant le format suivant::
         ]
     );
 
-Vous pouvez tirer profit des elements en utilisant ``requestAction()``. La
-fonction ``requestAction()`` récupère les variables de vues à partir
-d'une action d'un controller et les retourne en tableau. Cela permet à vos
-elements de fonctionner dans un style MVC pur. Créez une action du controller
-qui prépare les variables de la vue pour vos elements, ensuite appelez
-``requestAction()`` depuis l'intérieur du deuxième paramètre de ``element()``
-pour alimenter en variables de vues l'element depuis votre controller.
-
-Pour ce faire, ajoutez quelque chose comme ce qui suit dans votre controller,
-en reprenant l'exemple du Post::
-
-    class PostsController extends AppController
-    {
-        // ...
-        public function index()
-        {
-            $posts = $this->paginate();
-            if ($this->request->is('requested')) {
-                return $posts;
-            } else {
-                $this->set('posts', $posts);
-            }
-        }
-    }
-
-Et ensuite dans l'element, nous pouvons accéder au model des posts paginés.
-Pour obtenir les cinq derniers posts dans une liste ordonnée, nous ferions
-ce qui suit:
-
-.. code-block:: php
-
-    <h2>Latest Posts</h2>
-    <?php $posts = $this->requestAction('posts/index?sort=created&direction=asc&limit=5'); ?>
-    <ol>
-    <?php foreach ($posts as $post): ?>
-          <li><?= $post['Post']['title'] ?></li>
-    <?php endforeach; ?>
-    </ol>
+Si vous avez besoin de plus de logique dans votre element, comme des données
+dynamiques à partir d'une source de données, pensez à utiliser une View Cell
+plutôt qu'un element. Vous pouvez en savoir plus en consultant :doc:`les View
+Cells </views/cells>`.
 
 Mise en cache des Elements
 --------------------------
@@ -726,9 +692,11 @@ CakePHP, les classes de vue ont quelques conventions:
 Vous voudrez aussi étendre ``View`` pour vous assurer que les choses
 fonctionnent correctement::
 
-    // dans src/View/PdfView.php
+    // Dans src/View/PdfView.php
+    namespace App\View;
 
-    App::uses('View', 'View');
+    use Cake\View\View;
+
     class PdfView extends View
     {
         public function render($view = null, $layout = null)

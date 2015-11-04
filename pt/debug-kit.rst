@@ -15,6 +15,10 @@ composer.json está localizado)::
 
     php composer.phar require --dev cakephp/debug_kit "~3.0"
 
+Then, you need to enable the plugin by executing the following line::
+
+    bin/cake plugin load DebugKit
+
 Armazenamento do DebugKit
 =========================
 
@@ -30,7 +34,7 @@ Por padrão, o DebugKit armazenará os dados do painel em um banco de dados SQLi
 no diretório ``/tmp`` de sua aplicação. Se você não puder instalar a extensão
 do PHP pdo_sqlite, você pode configurar o DebugKit para usar um banco de dados
 diferente ao definir uma conexão ``debug_kit`` em seu arquivo
-``config/app.php``.
+**config/app.php**.
 
 Uso da barra de ferramentas
 ===========================
@@ -131,8 +135,8 @@ Elementos do painel
 
 Cada painel deve ter um elemento view que renderiza o conteúdo do mesmo.
 O nome do elemento deve ser sublinhado e flexionado a partir do nome da classe.
-Por exemplo ``SessionPanel`` possui um elemento nomeado ``session_panel.ctp``, e
-SqllogPanel possui um elemento nomeado ``sqllog_panel.ctp``. Estes elementos
+Por exemplo ``SessionPanel`` possui um elemento nomeado **session_panel.ctp**, e
+SqllogPanel possui um elemento nomeado **sqllog_panel.ctp**. Estes elementos
 devem estar localizados na raiz do seu diretório **src/Template/Element**.
 
 Títulos personalizados e Elementos

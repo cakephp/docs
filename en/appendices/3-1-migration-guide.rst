@@ -22,6 +22,8 @@ Console
   a snippet of code that can be put into ``eval()`` to trigger an interactive
   console. This is very helpful when debugging in test cases, or other CLI
   scripts.
+- The ``--verbose`` and ``--quiet`` console options now control stdout/stderr
+  logging output levels.
 
 Shell Helpers Added
 -------------------
@@ -43,10 +45,11 @@ Controller
 - The following Controller properties are now deprecated:
 
   * layout
-  * view
+  * view - replaced with ``template``
   * theme
   * autoLayout
-  * viewPath
+  * viewPath - replaced with ``templatePath``
+  * viewClass - replaced with ``className``
   * layoutPath
 
   Instead of setting these properties on your controllers, you should set them
@@ -104,6 +107,11 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` now switches the layout and template based on
   the parsed extension or ``Accept-Type`` header in the ``beforeRender()`` callback
   instead of ``startup()``.
+- ``addInputType()`` and ``viewClassMap()`` are deprecated. You should use
+  ``config()`` to modify this configuration data at runtime.
+- When ``inputTypeMap`` or ``viewClassMap`` are defined in the component
+  settings, they will *overwrite* the default values. This change makes it
+  possible to remove the default configuration.
 
 Network
 =======
@@ -123,6 +131,10 @@ You can now :ref:`Lazily Eager Load Associations
 <loading-additional-associations>`. This feature allows you to conditionally
 load additional associations into a result set, entity or collection of
 entities.
+
+The ``patchEntity()`` and ``newEntity()`` method now support the ``onlyIds``
+option. This option allows you to restrict hasMany/belongsToMany association
+marshalling to only use the ``_ids`` list. This option defaults to ``false``.
 
 Query
 -----

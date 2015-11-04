@@ -14,6 +14,17 @@ Routing
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
+
+.. _routes-configuration:
+
+Connecting Routes
+=================
+
+.. _named-routes:
+
+Using Named Routes
+------------------
+
 .. toctree::
     :glob:
     :maxdepth: 1

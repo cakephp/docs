@@ -496,7 +496,7 @@ The connected route would have the ``plugin`` and ``prefix`` route elements set.
 
 上記のコードは、 ``/manager/admin/:controller``のようなルーティングテンプレートを生成します。
 ルーティングは ``prefix`` というルーティング要素を ``manager/admin`` に設定します。
- なので、 ``/manager/posts/add`` は ``PostsController::manager_add()`` に対してマップされています。
+なので、 ``/manager/posts/add`` は ``PostsController::manager_add()`` に対してマップされています。
 
 加えて、現在のプレフィックスはコントローラーのメソッドから ``$this->request->params['prefix']`` を通して利用可能です。
 
@@ -792,6 +792,28 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
         ];
     });
 
+URL inflection for Resource Routes
+----------------------------------
+
+By default for multi-worded controllers the URL fragment is underscored
+form of controller name. Eg. For ``BlogPosts`` URL fragment would be ``/blog_posts``.
+
+You can specify an alternative inflection type using the ``inflect`` option::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', [
+            'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
+        ];
+    })
+
+The above will generate URLs of style ``/blog-posts/*``.
+
+.. note::
+
+    As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as default
+    route class. So using ``'inflect' => 'dasherize'`` option when connecting
+    resource routes is recommended for URL fragment inflection consistency.
+
 .. index:: passed arguments
 .. _passed-arguments:
 
@@ -841,7 +863,7 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
         [1] => mark
     )
 
-URLを :term:`routing array` を使って生成するとき、文字列による添え字なしで配列に引数を加えます::
+URLを :term:`ルーティング配列` を使って生成するとき、文字列による添え字なしで配列に引数を加えます::
 
     ['controller' => 'Articles', 'action' => 'view', 5]
 
@@ -853,7 +875,7 @@ URLの生成
 .. php:staticmethod:: url($url = null, $full = false)
 
 URLの生成やリバースルーティングは CakePHP のすべてのコードの変更なしにURLの構造を簡単に変更する機能です。
-:term:`ルーティング配列 <routing array>` をURLを定義するために使えます。
+:term:`ルーティング配列 <ルーティング配列>` をURLを定義するために使えます。
 あとで変更を加えても、生成されたURLは自動的にアップデートされます。
 
 URLを文字列によって以下のように生成します。:
@@ -992,7 +1014,7 @@ URLパラメーターがルートに一尉しない時は、 ``false`` が返り
 これは正規の呼び出しに従うのと同じです。::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
 
 .. note::
 
@@ -1142,5 +1164,5 @@ requestAction() と併せてURL配列を使うときに
     /development/dispatch-filters
 
 .. meta::
-    :title lang=en: Routing
-    :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
+    :title lang=ja: Routing
+    :keywords lang=ja: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

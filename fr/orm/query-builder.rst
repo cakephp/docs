@@ -114,8 +114,8 @@ Souvent, il n'y a pas besoin d'appeler ``all()``, vous pouvez juste itérer
 l'objet Query pour récupérer ses résultats. les objets Query peuvent également
 être utilisés directement en tant qu'objet résultat; Essayer d'itérer la requête
 en utilisant ``toArray()`` ou n'importe qu'elle méthode héritée de
-:ref:`Collection <collection-objects>`, aura pour résultat l'exécution de la
-requête et la récupération des résultats.
+:doc:`Collection </core-libraries/collections>`, aura pour résultat l'exécution
+de la requête et la récupération des résultats.
 
 Récupérez une Ligne Unique d'une Table
 --------------------------------------
@@ -157,8 +157,8 @@ Les Requêtes sont des Objets Collection
 
 Une fois que vous êtes familier avec les méthodes de l'objet Query, il est
 fortement recommandé que vous consultiez la section
-:ref:`Collection<collection-objects>` pour améliorer vos compétences dans
-le traversement efficace de données. En résumé, il est important de se
+:doc:`Collection </core-libraries/collections>` pour améliorer vos compétences
+dans le traversement efficace de données. En résumé, il est important de se
 rappeler que tout ce que vous pouvez appeler sur un objet Collection, vous
 pouvez aussi le faire avec un objet Query::
 
@@ -1043,6 +1043,13 @@ d'autres tables est appelé **eager loading**.
     :start-after: start-contain
     :end-before: end-contain
 
+Filtering by Associated Data
+----------------------------
+
+.. include:: ./retrieving-data-and-resultsets.rst
+    :start-after: start-filtering
+    :end-before: end-filtering
+
 .. _adding-joins:
 
 Ajouter des Jointures
@@ -1159,7 +1166,7 @@ en utilisant ``query()``::
 Généralement, il est plus facile d'insérer des données en utilisant les
 entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
 ``SELECT`` et ``INSERT`` ensemble, vous pouvez créer des requêtes de style
-``INSERT INTO ... SELECT`` ::
+``INSERT INTO ... SELECT``::
 
     $select = $articles->find()
         ->select(['title', 'body', 'published'])

@@ -53,7 +53,7 @@ Si tienes instalado cURL, es tan fácil como correr esto en un terminal::
     curl -s https://getcomposer.org/installer | php
 
 O, puedes descargar ``composer.phar`` desde el sitio web de
-`Composer <https://getcomposer.org/download/>`_.
+`Composer <https://getcomposer.org/download/>`__.
 
 Para sistemas Windows, puedes descargar el Instalador de Composer para Windows
 `aquí <https://github.com/composer/windows-setup/releases/>`__.  Para más

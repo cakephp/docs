@@ -291,7 +291,7 @@ One more example, and you'll be a routing pro::
         ]
     );
 
-This is rather involved, but shows how powerful routes can be The URL supplied
+This is rather involved, but shows how powerful routes can be. The URL supplied
 has four route elements. The first is familiar to us: it's a default route
 element that tells CakePHP to expect a controller name.
 
@@ -827,12 +827,35 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 ``resources()`` to provide custom setting used by ``connect()``::
 
     Router::scope('/', function ($routes) {
-        $routes->resources('books', [
+        $routes->resources('Books', [
             'connectOptions' => [
                 'routeClass' => 'ApiRoute',
             ]
         ];
     });
+
+URL Inflection for Resource Routes
+----------------------------------
+
+By default, multi-worded controllers' URL fragments are the underscored
+form of the controller's name. E.g., ``BlogPostsController``'s URL fragment
+would be **/blog_posts**.
+
+You can specify an alternative inflection type using the ``inflect`` option::
+
+    Router::scope('/', function ($routes) {
+        $routes->resources('BlogPosts', [
+            'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
+        ];
+    })
+
+The above will generate URLs styled like: **/blog-posts/\***.
+
+.. note::
+
+    As of CakePHP 3.1 the official app skeleton uses ``DashedRoute`` as its
+    default route class. Using the ``'inflect' => 'dasherize'`` option when
+    connecting resource routes is recommended for URL consistency.
 
 .. index:: passed arguments
 .. _passed-arguments:
@@ -1037,7 +1060,7 @@ option for each route. For example using::
 
     Router::defaultRouteClass('InflectedRoute');
 
-will cause all routes connected after this to use the ``DashedRoute`` route class.
+will cause all routes connected after this to use the ``InflectedRoute`` route class.
 Calling the method without an argument will return current default route class.
 
 Fallbacks Method
@@ -1056,7 +1079,7 @@ Calling fallbacks like so::
 Is equivalent to the following explicit calls::
 
     $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);
-    $routes->connect('/:controller/:action/*', [], , ['routeClass' => 'DashedRoute']);
+    $routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);
 
 .. note::
 

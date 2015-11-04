@@ -9,7 +9,6 @@ App.config = {
 };
 
 App.Book = (function() {
-
 	function init() {
 		// Make top nav responsive.
 		$('#cakephp-global-navigation').menuSelect({'class': 'nav-select'});
@@ -47,6 +46,9 @@ App.Book = (function() {
 			showing = false;
 
 		var positionBackToTop = function() {
+			if (offset === undefined) {
+				return;
+			}
 			if (!showing && doc.scrollTop() > offset.top + sidebarHeight) {
 				showing = true;
 				backToTop.css({
@@ -80,118 +82,81 @@ App.Book = (function() {
 
 // Inline search form, and standalone search form.
 App.InlineSearch = (function () {
-
-	var segments = location.pathname.split('/');
 	var base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 2).join('/') + '/';
-	var searchResults;
-	var searchInput;
-	var doSearch;
 
-	var delay = (function(){
-		var timer;
-		return function(callback, ms){
-			clearTimeout(timer);
-			timer = setTimeout(callback, ms);
-		};
-	})();
+	// Track the last search value
+	var lastValue;
 
-	var positionElement = function (to, element) {
-		var position = to.offset();
-		var height = to.outerHeight();
-		var width = to.outerWidth();
-
-		element.css({
-			position: 'absolute',
-			top: position.top + height + window.scrollY + 'px',
-			left: position.left + 'px',
-			width: width + 'px'
-		});
-	};
-
-	var handleKeyEvent = function (event) {
-		if ($(this).val() === '') {
-			searchResults.fadeOut('fast');
-		} else {
-			var _this = $(this);
-			delay(function() {
-				positionElement(_this, searchResults);
-				searchResults.show();
-				doSearch(_this.val());
-			}, 200);
-		}
-	};
-
-	// escape key
-	var handleEscape = function (event) {
-		if (event.keyCode == 27) {
-			searchResults.fadeOut('fast');
-		}
-	};
-
-	// Returns a function that is used for executing searches.
-	// Allows re-use between inline and standalone search page.
-	var createSearch = function (searchResult, limit) {
-		return function (value) {
-			executeSearch(value, searchResult, limit);
-		};
-	};
-
-	var executeSearch = function (value, searchResults, limit, page) {
+	// Send the query to search app and get results.
+	var doSearch = function (value, syncResults, asyncResults) {
 		var query = {lang: window.lang, q: value, version: App.config.version};
-		if (page) {
-			query.page = page;
-		}
 		var url = App.config.url + '?' + jQuery.param(query);
+
+		lastValue = value;
+
 		var xhr = $.ajax({
 			url: url,
 			dataType: 'json',
 			type: 'GET'
 		});
-
 		xhr.done(function (response) {
-			var results;
-			searchResults.empty().append('<ul></ul>');
-			results = response.data;
-			if (limit) {
-				results = response.data.slice(0, limit);
-			}
-			var ul = searchResults.find('ul');
-			$.each(results, function(index, item) {
-				var li = $('<li></li>');
-				var link = $('<a></a>');
-				link.attr('href', base + item.url);
-				if (item.title) {
-					link.append('<strong>' + item.title + '</strong><br />');
-				}
-				var span = $('<span></span>');
-				span.text(item.contents.join("\n"));
-				link.append(span);
-				li.append(link);
-				ul.append(li);
-			});
-			$(document).trigger('search.complete', [response]);
+			asyncResults(response.data);
 		});
-
-		var _gaq = _gaq || [];
-		_gaq.push(['_trackEvent', 'Search', 'Search in ' + window.lang, value]);
 	};
 
 	var init = function () {
-		searchInput = $('.masthead .search-input');
-		searchResults = $('#inline-search-results');
+		var input = $('.masthead .search-input');
+		input.typeahead(
+			{minLength: 3, hint: false, highlight: true},
+			{
+				name: 'es',
+				source: doSearch,
+				async: true,
+				limit: 10,
+				templates: {
+					empty: '<div class="empty-result">No matches found</div>',
+					suggestion: function(item) {
+						var div = $('<div></div>');
+						var link = $('<a></a>');
+						link.attr('href', base + item.url);
+						if (item.title) {
+							link.append('<strong>' + item.title + '</strong><br />');
+						}
+						var span = $('<span></span>');
+						var text = item.contents;
+						if (text.join) {
+							text = text.join("\n");
+						}
+						span.text(text);
+						div.append(link.append(span));
+						return div.html();
+					}
+				}
+			}
+		);
 
-		searchInput.keyup(handleKeyEvent);
-		$(document).keyup(handleEscape);
-	
-		doSearch = createSearch(searchResults, 10);
+		// When a search completes, poke GA.
+		input.on('typeahead:idle', function () {
+			var _gaq = _gaq || [];
+			_gaq.push(['_trackEvent', 'Search', 'Search in ' + window.lang, lastValue]);
+		});
+
+		// 'click' the link.
+		input.on('typeahead:select', function(event, suggestion) {
+			input.typeahead('val', suggestion.title);
+			window.location = base + suggestion.url;
+			return false;
+		});
+
+		// update the input preview so it doesn't contain a blob of JSON.
+		input.on('typeahead:cursorchange', function(event, suggestion) {
+			input.parents('.twitter-typeahead').find('.tt-input').val(suggestion.title);
+		});
 	};
 
 	return {
 		init: init,
-		delay: delay,
-		searchUrl: App.config.url,
-		createSearch: createSearch,
-		executeSearch: executeSearch
+		baseUrl: base
 	};
 })();
 
@@ -270,5 +235,5 @@ $.fn.menuSelect = function (options) {
 };
 } (jQuery));
 
-$(App.Book.init);
-$(App.InlineSearch.init);
+$(document).ready(App.Book.init);
+$(document).ready(App.InlineSearch.init);

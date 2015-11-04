@@ -104,7 +104,10 @@ such as debugging and translating content.
     which it was called.
     Also see :doc:`/development/debugging`
 
-.. php:function:: env(string $key)
+.. php:function:: env(string $key, string $default = null)
+
+    .. versionadded:: 3.1.1
+        The ``$default`` parameter has been added.
 
     Gets an environment variable from available sources. Used as a
     backup if ``$_SERVER`` or ``$_ENV`` are disabled.
@@ -125,23 +128,23 @@ such as debugging and translating content.
     does not have a dot, then index 0 will be ``null``.
 
     Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
- 
-.. php:function:: namespaceSplit(string $class)   
+
+.. php:function:: namespaceSplit(string $class)
 
     Split the namespace from the classname.
-    
+
     Commonly used like ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
-    
+
 .. php:function:: pr(mixed $var)
 
     Convenience wrapper for ``print_r()``, with the addition of
     wrapping ``<pre>`` tags around the output.
-    
+
 .. php:function:: pj(mixed $var)
 
     JSON pretty print convenience function, with the addition of
     wrapping ``<pre>`` tags around the output.
-    
+
     It is meant for debugging the JSON representation of objects and arrays.
 
 Core Definition Constants
@@ -169,6 +172,10 @@ Most of the following constants refer to paths in your application.
 .. php:const:: CAKE_CORE_INCLUDE_PATH
 
     Path to the root lib directory.
+
+.. php:const:: CONFIG
+
+   Path to the config directory.
 
 .. php:const:: CORE_PATH
 

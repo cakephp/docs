@@ -37,6 +37,10 @@ indexes and even insert data into the database.
 
 Here's an example of a migration::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             /**
@@ -55,6 +59,7 @@ Here's an example of a migration::
                       ->addColumn('created', 'datetime')
                       ->create();
             }
+        }
 
 
 This migration adds a table called products with a string column called ``name``, a text
@@ -74,7 +79,7 @@ able to execute the following command to create the table in your database::
 Creating Migrations
 ===================
 
-Migration files are stored in the **config/Migration** directory of your
+Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
 which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**.
 
@@ -83,7 +88,17 @@ Let's imagine that you'd like to add a new ``products`` table::
 
         bin/cake bake migration CreateProducts name:string description:text created modified
 
+.. note::
+
+        You may also choose to use the underscore_form as migration label i.e.::
+
+            bin/cake bake migration create_products name:string description:text created modified
+
 The above line will create a migration file looking like this::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class CreateProductsTable extends AbstractMigration
         {
@@ -96,6 +111,7 @@ The above line will create a migration file looking like this::
                       ->addColumn('modified', 'datetime')
                       ->create();
             }
+        }
 
 If the migration name in the command line is of the form "AddXXXToYYY" or "RemoveXXXFromYYY"
 and is followed by a list of column names and types then a migration file
@@ -105,6 +121,10 @@ containing the code for creating or dropping the columns will be generated::
 
 Executing the command line above will generate::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class AddPriceToProducts extends AbstractMigration
         {
             public function change()
@@ -113,12 +133,44 @@ Executing the command line above will generate::
                 $table->addColumn('price', 'decimal')
                       ->update();
             }
+        }
+
+.. versionadded:: cakephp/migrations 1.4
+
+If you need to specify a field length, you can do it within brackets in the
+field type, ie::
+
+        bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
+
+Executing the command line above will generate::
+
+        <?php
+
+        use Migrations\AbstractMigration;
+
+        class AddFullDescriptionToProducts extends AbstractMigration
+        {
+            public function change()
+            {
+                $table = $this->table('products');
+                $table->addColumn('full_description', 'string', [
+                        'default' => null,
+                        'limit' => 60,
+                        'null' => false,
+                     ])
+                      ->update();
+            }
+        }
 
 It is also possible to add indexes to columns::
 
         bin/cake bake migration AddNameIndexToProducts name:string:index
 
 will generate::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class AddNameIndexToProducts extends AbstractMigration
         {
@@ -129,7 +181,7 @@ will generate::
                       ->addIndex(['name'])
                       ->update();
             }
-
+        }
 
 When using fields in the command line it may be handy to remember that they
 follow the following pattern::
@@ -151,6 +203,10 @@ command line::
 
 creates the file::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class RemovePriceFromProducts extends AbstractMigration
         {
             public function change()
@@ -158,6 +214,7 @@ creates the file::
                 $table = $this->table('products');
                 $table->removeColumn('price');
             }
+        }
 
 Migration Names can follow any of the following patterns:
 
@@ -211,6 +268,10 @@ If you need to avoid the automatic creation of the ``id`` primary key when
 adding new tables to the database, you can use the second argument of the
 ``table()`` method::
 
+        <?php
+
+        use Migrations\AbstractMigration;
+
         class CreateProductsTable extends AbstractMigration
         {
             public function change()
@@ -222,14 +283,69 @@ adding new tables to the database, you can use the second argument of the
                       ->addColumn('description', 'text')
                       ->create();
             }
+        }
 
 The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
+
+.. note::
+
+        When specifying a custom primary key on the command line, you must note it as the primary key in the id field, otherwise you may get an error regarding duplicate id fields, i.e.::
+
+            bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
+
+
+Additionally, since Migrations 1.3, a new way to deal with primary key was
+introduced. To do so, your migration class should extend the new
+``Migrations\AbstractMigration`` class.
+You can specify a ``autoId`` property in the Migration class and set it to
+``false``, which will turn off the automatic ``id`` column creation. You will
+need to manually create the column that will be used as a primary key and add
+it to the table declaration::
+
+        <?php
+
+        use Migrations\AbstractMigration;
+
+        class CreateProductsTable extends AbstractMigration
+        {
+
+            public $autoId = false;
+
+            public function up()
+            {
+                $table = $this->table('products');
+                $table
+                    ->addColumn('id', 'integer', [
+                        'autoIncrement' => true,
+                        'limit' => 11
+                    ])
+                    ->addPrimaryKey('id')
+                    ->addColumn('name', 'string')
+                    ->addColumn('description', 'text')
+                    ->create();
+            }
+        }
+
+Compared to the previous way of dealing with primary key, this method gives you
+the ability to have more control over the primary key column definition :
+unsigned or not, limit, comment, etc.
+
+All baked migrations and snapshot will use this new way when necessary.
+
+.. warning::
+
+    Dealing with primary key can only be done on table creation operations.
+    This is due to limitations for some database servers the plugin supports.
 
 Collations
 ----------
 
 If you need to create a table with a different collation than the database
 default one, you can define it with the ``table()`` method, as an option::
+
+        <?php
+
+        use Migrations\AbstractMigration;
 
         class CreateCategoriesTable extends AbstractMigration
         {
@@ -246,6 +362,7 @@ default one, you can define it with the ``table()`` method, as an option::
                     ])
                     ->create();
             }
+        }
 
 Note however this can only be done on table creation : there is currently
 no way of adding a column to an existing table with a different collation than
@@ -260,7 +377,7 @@ following command to apply the changes to your database::
 
         bin/cake migrations migrate
 
-To migrate to a specific version then use the --target parameter or -t for short::
+To migrate to a specific version then use the ``--target`` parameter or -t for short::
 
         bin/cake migrations migrate -t 20150103081132
 
@@ -291,16 +408,50 @@ You can use this command to determine which migrations have been run::
 Marking a migration as migrated
 ===============================
 
-.. versionadded:: cakephp/migrations 1.1.0
+.. versionadded:: 1.4.0
 
-It can sometimes be useful to mark a migration as migrated without actually running it.
-In order to do this, you can use the ``mark_migrated`` command. This command
-expects the migration version number as argument::
+It can sometimes be useful to mark a set of migrations as migrated without
+actually running them.
+In order to do this, you can use the ``mark_migrated`` command.
+The command works seamlessly as the other commands.
+
+You can mark all migrations as migrated using this command::
+
+    bin/cake migrations mark_migrated
+
+You can also mark all migrations up to a specific version as migrated using
+the ``--target`` option::
+
+    bin/cake migrations mark_migrated --target=20151016204000
+
+If you do not want the targeted migration to be marked as migrated during the
+process, you can use the ``--exclude`` flag with it::
+
+    bin/cake migrations mark_migrated --target=20151016204000 --exclude
+
+Finally, if you wish to mark only the targeted migration as migrated, you can
+use the ``--only`` flag::
+
+    bin/cake migrations mark_migrated --target=20151016204000 --only
+
+.. note::
+
+    When you bake a snapshot with the ``cake bake migration_snapshot``
+    command, the created migration will automatically be marked as migrated.
+
+.. deprecated:: 1.4.0
+
+    The following way of using the command has been deprecated. Use it only
+    if you are using a version of the plugin < 1.4.0.
+
+This command expects the migration version number as argument::
 
     bin/cake migrations mark_migrated 20150420082532
 
-Note that when you bake a snapshot with the ``cake bake migration_snapshot``
-command, the created migration will automatically be marked as migrated.
+If you wish to mark all migrations as migrated, you can use the ``all`` special
+value. If you use it, it will mark all found migrations as migrated::
+
+    bin/cake migrations mark_migrated all
 
 Using Migrations In Plugins
 ===========================

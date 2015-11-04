@@ -35,6 +35,16 @@ CakePHPでの開発にはこれらの規約の利用をお勧めしますが、�
 は全て、 RedApples コントローラの index アクションとして解決されます。
 しかしながら、 URL  ``DashedRoute`` クラスで使っているダッシュとアンダースコアを用いるというのが規約であり、 ``RedApplesController::go_pick`` アクションにアクセスするための正しい形式は ``/red-apples/go-pick`` となります。
 
+When you create links using ``this->Html->link()``, you can use the following
+conventions for the url array::
+
+    $this->Html->link('link-title', [
+        'prefix' => 'MyPrefix' // CamelCased
+        'plugin' => 'MyPlugin', // CamelCased
+        'controller' => 'ControllerName', // CamelCased
+        'action' => 'actionName' // camelBacked
+    ]
+
 CakePHP の URL とパラメータの取り扱いに関するより詳細な情報は、 :ref:`routes-configuration` を参照してください。
 
 .. _file-and-classname-conventions:
@@ -66,7 +76,7 @@ their filenames:
 モデルとデータベースの規約
 ==========================
 
-モデルのクラス名は複数形でキャメル記法です。
+テーブルのクラス名は複数形でキャメル記法です。
 People, BigPeople, ReallyBigPeople などは規約に合ったモデル名です。
 
 CakePHP のモデルに対応するテーブル名は、複数形でアンダースコア記法です。
@@ -79,7 +89,7 @@ CakePHP のモデルに対応するテーブル名は、複数形でアンダー
 
 hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連するモデルの(単数形の)名前に \_id を付けたものとして認識されます。
 ケーキ職人(Backer)がケーキ(Cake)を複数持っている(hasMany)としたら、cakes テーブルは、baker\_id を外部キーとして bakers テーブルのデータを参照します。
-categoly\_types のような複数の単語のテーブルでは、外部キーは categoty\_type\_id のようになるでしょう。
+category\_types のような複数の単語のテーブルでは、外部キーは category\_type\_id のようになるでしょう。
 
 モデル間の BelongsToMany の関係で使用される join テーブルは、join するテーブルに合わせて、アルファベット順に（zebras\_apples ではなく、apples\_zebras）並べた名前にしてください。
 

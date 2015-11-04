@@ -4,6 +4,7 @@ Saving Data
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 .. note::
     The documentation is not currently supported in Chinese language for this

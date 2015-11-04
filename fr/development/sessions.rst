@@ -153,10 +153,10 @@ pouvez ensuite lire ces valeurs à partir de votre gestionnaire::
 Le code ci-dessus montre comment vous pouvez configurer le gestionnaire
 de session de la Base de Données avec un model de l'application. Lors de
 l'utilisation de noms de classe comme handler.engine, CakePHP va s'attendre
-à trouver votre classe dans le namespace ``Network\\Session``. Par exemple,
+à trouver votre classe dans le namespace ``Network\Session``. Par exemple,
 si vous aviez une classe ``AppSessionHandler``, le fichier doit être
 **src/Network/Session/AppSessionHandler.php**, et le nom de classe doit être
-``App\\Network\\Session\\AppSessionHandler``. Vous pouvez aussi utiliser les
+``App\Network\Session\AppSessionHandler``. Vous pouvez aussi utiliser les
 gestionnaires de session à partir des plugins. En configurant le moteur
 avec ``MyPlugin.PluginSessionHandler``.
 
@@ -175,7 +175,7 @@ moins ces champs::
 
     CREATE TABLE `sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
-      `data` VARBINARY, -- ou BYTEA pour PostgreSQL
+      `data` BLOB, -- ou BYTEA pour PostgreSQL
       `expires` int(11) DEFAULT NULL,
       PRIMARY KEY (`id`)
     );
@@ -203,13 +203,13 @@ Les Sessions de Cache
 ---------------------
 
 La classe Cache peut aussi être utilisée pour stocker les sessions. Cela vous
-permet de stocker les sessions dans un cache comme APC, memcache, ou Xcache.
+permet de stocker les sessions dans un cache comme APC, Memcached, ou XCache.
 Il y a quelques bémols dans l'utilisation des sessions en cache, puisque si
 vous avez épuisé l'espace de cache, les sessions vont commencer à expirer
 tandis que les enregistrements sont supprimés.
 
 Pour utiliser les sessions basées sur le Cache, vous pouvez configurer votre
-config Session comme ceci ::
+config Session comme ceci::
 
     Configure::write('Session', [
         'defaults' => 'cache',
@@ -251,8 +251,8 @@ Créer un Gestionnaire de Session Personnalisé
 
 Créer un gestionnaire de session personnalisé est simple dans CakePHP. Dans cet
 exemple, nous allons créer un gestionnaire de session qui stocke les sessions
-à la fois dans le Cache (apc) et la base de données. Cela nous donne le
-meilleur du IO rapide de apc, sans avoir à se soucier des sessions disparaissent
+à la fois dans le Cache (APC) et la base de données. Cela nous donne le
+meilleur du IO rapide de APC, sans avoir à se soucier des sessions disparaissent
 quand le cache se remplit.
 
 D'abord, nous aurons besoin de créer notre classe personnalisée et de la
@@ -311,8 +311,8 @@ pas dupliquer toute sa logique et son comportement. Nous entourons chaque
 opération avec une opération :php:class:`Cake\\Cache\\Cache`. Cela nous permet
 de récupérer les sessions de la mise en cache rapide, et nous évite de nous
 inquiéter sur ce qui arrive quand nous remplissons le cache. Utiliser le
-gestionnaire de session est aussi facile. Dans votre ``app.php`` imitez le
-block de session ressemblant à ce qui suit::
+gestionnaire de session est aussi facile. Dans votre **config/app.php**, imitez
+le block de session qui suit::
 
     'Session' => [
         'defaults' => 'database',
@@ -328,7 +328,7 @@ block de session ressemblant à ce qui suit::
     ]
 
 Maintenant notre application va se lancer en utilisant notre gestionnaire
-de session personnalisé pour la lecture & l'écriture des données de session.
+de session personnalisé pour la lecture et l'écriture des données de session.
 
 .. php:class:: Session
 
@@ -371,7 +371,14 @@ compatible :php:meth:`Hash::extract()`::
 
 ``$key`` devrait être le chemin séparé de point et ``$value`` sa valeur::
 
-     $session->write('Config.language', 'eng');
+     $session->write('Config.language', 'en');
+
+Vous pouvez également spécifier un ou plusieurs hash de la manière suivante::
+
+    $session->write([
+      'Config.theme' => 'blue',
+      'Config.language' => 'en',
+    ]);
 
 .. php:staticmethod:: delete($key)
 

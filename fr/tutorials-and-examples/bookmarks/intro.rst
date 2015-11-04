@@ -88,7 +88,7 @@ démarrer le serveur de développement::
 
 .. note::
 
-    Sur Windows, cette commande doit être ``bin\cake`` (notez l'antislash).
+    Sur Windows, cette commande doit être ``bin\cake server`` (notez l'antislash).
 
 Ceci va lancer le serveur web intégré de PHP sur le port 8765. Ouvrez
 **http://localhost:8765** dans votre navigateur web pour voir la page d'accueil.
@@ -405,7 +405,7 @@ pour encoder la sortie en HTML. Vous devez vous rappeler de toujours utiliser
 ``h()`` lorsque vous affichez des données provenant des utilisateurs pour éviter
 les problèmes d'injection HTML.
 
-Le fichier ``tags.ctp`` que nous venons de créer suit la convention de nommage
+Le fichier **tags.ctp** que nous venons de créer suit la convention de nommage
 de CakePHP pour un ficher de template de vue. La convention d'avoir le nom
 de template en minuscule et en underscore du nom de l'action du controller.
 

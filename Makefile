@@ -5,12 +5,12 @@
 PYTHON = python
 ES_HOST =
 
-.PHONY: all clean html latexpdf epub htmlhelp website website-dirs
+.PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
 
 # Languages that can be built.
 LANGS = en es fr ja pt zh tr
 
-# pdflatex does not like ja for some reason.
+# pdflatex does not like ja, zh & tr for some reason.
 PDF_LANGS = en es fr pt
 
 DEST = website
@@ -36,6 +36,7 @@ pdf: $(foreach lang, $(PDF_LANGS), pdf-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 populate-index: $(foreach lang, $(LANGS), populate-index-$(lang))
 server: $(foreach lang, $(LANGS), server-$(lang))
+rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
 
 # Make the HTML version of the documentation with correctly nested language folders.
@@ -58,6 +59,10 @@ server-%: $(SPHINX_DEPENDENCIES)
 	cd build/html/$* && python -m SimpleHTTPServer
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
+	php scripts/populate_search_index.php $* $(ES_HOST)
+
+rebuild-index-%: $(SPHINX_DEPENDENCIES)
+	curl -XDELETE $(ES_HOST)/documentation/3-0-$*
 	php scripts/populate_search_index.php $* $(ES_HOST)
 
 website-dirs:

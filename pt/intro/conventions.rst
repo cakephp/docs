@@ -43,6 +43,16 @@ a forma correta é que suas URLs sejam minúsculas e separadas por sublinhado,
 portanto /red\_apples/go\_pick é a forma correta de acessar a action
 ``RedApplesController::go_pick``.
 
+When you create links using ``this->Html->link()``, you can use the following
+conventions for the url array::
+
+    $this->Html->link('link-title', [
+        'prefix' => 'MyPrefix' // CamelCased
+        'plugin' => 'MyPlugin', // CamelCased
+        'controller' => 'ControllerName', // CamelCased
+        'action' => 'actionName' // camelBacked
+    ]
+
 Para mais informações sobre o manuseio de URLs e parâmetros do CakePHP,
 veja :ref:`routes-configuration`.
 
@@ -108,8 +118,8 @@ Convenções para Views
 Arquivos de template views são nomeadas seguindo as funções
 que a exibem do controller, separadas por sublinhado. A função
 getReady() da classe PeopleController buscará por um template view em
-``src/Template/People/get\_ready.ctp``. O padrão é
-``src/Template/Controller/underscored\_function\_name.ctp``.
+**src/Template/People/get\_ready.ctp**. O padrão é
+**src/Template/Controller/underscored\_function\_name.ctp**.
 
 Por nomear as partes de sua aplicação utilizando as convenções do CakePHP,
 você ganha funcionalidades sem luta e sem amarras de configuração.

@@ -4,22 +4,22 @@ Saving Data
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 After you have :doc:`loaded your data</orm/retrieving-data-and-resultsets>` you
-will probably want to update & save the changes.
-
+will probably want to update and save the changes.
 
 A Glance Over Saving Data
 =========================
 
-Applications will usually have a couple ways in which data is saved. The first
+Applications will usually have a couple of ways in which data is saved. The first
 one is obviously though web forms and the other is by directly generating or
 changing data in the code to be sent to the database.
 
 Inserting Data
 --------------
 
-The easiest way to insert data in the database is creating a new entity and
+The easiest way to insert data in the database is by creating a new entity and
 passing it to the ``save()`` method in the ``Table`` class::
 
     use Cake\ORM\TableRegistry;
@@ -31,25 +31,25 @@ passing it to the ``save()`` method in the ``Table`` class::
     $article->body = 'This is the body of the article';
 
     if ($articlesTable->save($article)) {
-        // The $article entity contain the id now
+        // The $article entity contains the id now
         $id = $article->id;
     }
 
 Updating Data
 -------------
 
-Updating is equally easy, and the ``save()`` method is also used for that
+Updating your data is equally easy, and the ``save()`` method is also used for that
 purpose::
 
     use Cake\ORM\TableRegistry;
 
     $articlesTable = TableRegistry::get('Articles');
-    $article = $articlesTable->get(12); // article with id 12
+    $article = $articlesTable->get(12); // Return article with id 12
 
-    $article->title = 'A new title for the article';
+    $article->title = 'CakePHP is THE best PHP framework!';
     $articlesTable->save($article);
 
-CakePHP will know whether to do an insert or an update based on the return value
+CakePHP will know whether to perform an insert or an update based on the return value
 of the ``isNew()`` method. Entities that were retrieved with ``get()`` or
 ``find()`` will always return ``false`` when ``isNew()`` is called on them.
 
@@ -73,10 +73,10 @@ By default the ``save()`` method will also save one level of associations::
 The ``save()`` method is also able to create new records for associations::
 
     $firstComment = $articlesTable->Comments->newEntity();
-    $firstComment->body = 'This is a great article';
+    $firstComment->body = 'The CakePHP features are outstanding';
 
     $secondComment = $articlesTable->Comments->newEntity();
-    $secondComment->body = 'I like reading this!';
+    $secondComment->body = 'CakePHP performance is terrific!';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag2 = $articlesTable->Tags->newEntity();
@@ -91,8 +91,8 @@ The ``save()`` method is also able to create new records for associations::
 Associate Many To Many Records
 ------------------------------
 
-In the code above there was already an example of linking an article to
-a couple tags. There is another way of doing the same by using the ``link()``
+The previous example demonstrates how to associate a few tags to an article.
+Another way of accomplishing the same thing is by using the ``link()``
 method in the association::
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
@@ -109,7 +109,7 @@ property. This property should be an Entity instance from the join Table class::
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
-    $tag1->_joinData->tagComment = 'I think this is related to cake';
+    $tag1->_joinData->tagComment = 'The CakePHP ORM is so powerful!';
 
     $articlesTable->Tags->link($article, [$tag1]);
 
@@ -128,7 +128,7 @@ Unlinking many to many records is done via the ``unlink()`` method::
 
 When modifying records by directly setting or changing the properties no
 validation happens, which is a problem when accepting form data. The following
-sections will show you how to efficiently convert form data into entities so
+sections will demonstrate how to efficiently convert form data into entities so
 that they can be validated and saved.
 
 .. _converting-request-data:
@@ -136,36 +136,37 @@ that they can be validated and saved.
 Converting Request Data into Entities
 =====================================
 
-Before editing and saving data back into the database, you'll need to convert
+Before editing and saving data back to your database, you'll need to convert
 the request data from the array format held in the request, and the entities
-that the ORM uses. The Table class provides an easy way to convert one or many
-entities from request data. You can convert a single entity using::
+that the ORM uses. The Table class provides an easy and efficient way to convert
+one or many entities from request data. You can convert a single entity using::
 
-    // In a controller.
+    // In a controller
     $articles = TableRegistry::get('Articles');
+    
     // Validate and convert to an Entity object
     $entity = $articles->newEntity($this->request->data());
 
 The request data should follow the structure of your entities. For example if
-you had an article, which belonged to a user, and had many comments, your
-request data should look like::
+you have an article, which belonged to a user, and had many comments, your
+request data should resemble::
 
     $data = [
-        'title' => 'My title',
-        'body' => 'The text',
+        'title' => 'CakePHP For the Win',
+        'body' => 'Baking with CakePHP makes web development fun!',
         'user_id' => 1,
         'user' => [
             'username' => 'mark'
         ],
         'comments' => [
-            ['body' => 'First comment'],
-            ['body' => 'Second comment'],
+            ['body' => 'The CakePHP features are outstanding'],
+            ['body' => 'CakePHP performance is terrific!'],
         ]
     ];
 
 By default, the ``newEntity()`` method validates the data that gets passed to
 it, as explained in the :ref:`validating-request-data` section. If you wish to
-prevent data from being validated, pass the ``'validate' => false`` option::
+bypass data validation pass the ``'validate' => false`` option::
 
     $entity = $articles->newEntity($data, ['validate' => false]);
 
@@ -174,6 +175,8 @@ associations should be marshalled::
 
     // In a controller
     $articles = TableRegistry::get('Articles');
+
+    // New entity with nested associations
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
@@ -183,8 +186,10 @@ associations should be marshalled::
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
-    // In a controller.
+    // In a controller
     $articles = TableRegistry::get('Articles');
+
+    // New entity with nested associations using dot notation
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
@@ -192,7 +197,11 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
 Associated data is also validated by default unless told otherwise. You may also
 change the validation set to be used per association::
 
+    // In a controller
     $articles = TableRegistry::get('Articles');
+
+    // Bypass validation on Tags association and
+    // Designate 'signup' validation set for Comments.Users
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
             'Tags' => ['validate' => false],
@@ -248,6 +257,13 @@ When the above data is converted into entities, you will have 4 tags. The first
 two will be new objects, and the second two will be references to existing
 records.
 
+When converting belongsToMany data, you can disable the new entity creation, by
+using the ``onlyIds`` option. When enabled, this option restricts belongsToMany
+marshalling to only use the ``_ids`` key and ignore all other data.
+
+.. versionadded:: 3.1.0
+    The ``onlyIds`` option was added in 3.1.0
+
 Converting HasMany Data
 -----------------------
 
@@ -262,6 +278,13 @@ a new parent record you can use the ``_ids`` format::
             '_ids' => [1, 2, 3, 4]
         ]
     ];
+
+When converting hasMany data, you can disable the new entity creation, by
+using the ``onlyIds`` option. When enabled, this option restricts hasMany
+marshalling to only use the ``_ids`` key and ignore all other data.
+
+.. versionadded:: 3.1.0
+    The ``onlyIds`` option was added in 3.1.0
 
 Converting Multiple Records
 ---------------------------
@@ -977,10 +1000,14 @@ many rows at once::
             ['published' => true], // fields
             ['published' => false]); // conditions
     }
-    
+
 If you need to do bulk updates and use SQL expressions, you will need to use an
 expression object as ``updateAll()`` uses prepared statements under the hood::
 
+    use Cake\Database\Expression\QueryExpression;
+    
+    ...
+    
     function incrementCounters()
     {
         $expression = new QueryExpression('view_count = view_count + 1');
@@ -1002,9 +1029,9 @@ A bulk-update will be considered successful if 1 or more rows are updated.
     {
         $this->query()
             ->update()
-            ->set(['published' => 'true])
-            ->where(['published' => 'false'])
+            ->set(['published' => true])
+            ->where(['published' => false])
             ->execute();
     }
-    
+
 Also see: :ref:`query-builder-updating-data`.

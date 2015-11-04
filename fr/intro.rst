@@ -143,7 +143,7 @@ qui demande une page ou une ressource de votre application. À haut niveau
 chaque requête passe par les étapes suivantes:
 
 #. Les règles de réécriture de votre serveur web dirigent la requête vers
-   ``webroot/index.php``.
+   **webroot/index.php**.
 #. Les fichiers autoloader et bootstrap de votre application sont exécutés.
 #. Tout :doc:`filtre du dispatcher </development/dispatch-filters>`
    configuré peut manipuler la requête, et optionnellement générer une réponse.
@@ -165,7 +165,7 @@ Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres gra
 fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` qui s'intègre à
-  Memcache, Redis et d'autres.
+  Memcached, Redis et d'autres.
 * Un :doc:`outil de génération de code
   </bake/usage>` puissant pour partir sur les chapeaux de roue.
 * Un :doc:`framework de tests intégré</development/testing>` pour vous assurer

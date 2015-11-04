@@ -277,6 +277,8 @@ be thrown from a number of CakePHP core components:
 
     A model's behavior could not be found.
 
+.. php:namespace:: Cake\Datasource\Exception
+
 .. php:exception:: RecordNotFoundException
 
    The requested record could not be found.

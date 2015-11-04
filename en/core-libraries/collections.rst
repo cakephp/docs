@@ -1,9 +1,7 @@
-.. php:namespace:: Cake\Collection
-
-.. _collection-objects:
-
 Collections
 ###########
+
+.. php:namespace:: Cake\Collection
 
 .. php:class:: Collection
 
@@ -144,7 +142,8 @@ you can use a callback function to return it::
 
 Often, the properties you need to extract a common key present in multiple
 arrays or objects that are deeply nested inside other structures. For those
-cases you can use the ``{*}`` matcher in the path key::
+cases you can use the ``{*}`` matcher in the path key. This matcher is often
+helpful when matching HasMany and BelongsToMany association data::
 
     $data = [
         [
@@ -167,6 +166,13 @@ cases you can use the ``{*}`` matcher in the path key::
     $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
     $numbers->toList();
     // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+
+This last example uses ``toList()`` unlike other examples, which is important
+when we're getting results with possibly duplicate keys. By using ``toList()``
+we'll be guaranteed to get all values even if there are duplicate keys.
+
+Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
+``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 

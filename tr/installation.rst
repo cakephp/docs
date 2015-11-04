@@ -419,7 +419,7 @@ I Can't Use URL Rewriting
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In ``config/app.php``,
+use CakePHP's built in pretty URLs. In **config/app.php**,
 uncomment the line that looks like::
 
     'App' => [

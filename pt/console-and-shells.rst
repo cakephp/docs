@@ -85,7 +85,7 @@ Criando uma Shell
 
 Vamos criar uma shell para utilizar no Console. Para este exemplo,
 criaremos uma simples Hello World (Olá Mundo) shell. No diretório
-``Shell`` de sua aplicação crie ``HelloShell.php``. Coloque o seguinte
+**src/Shell** de sua aplicação crie **HelloShell.php**. Coloque o seguinte
 código dentro do arquivo recem criado::
 
     namespace App\Shell;
@@ -188,7 +188,7 @@ são definidos como propriedades anexas à sua shell::
             if (empty($this->args[0])) {
                 return $this->error('Por favor, indique um nome de usuário.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }

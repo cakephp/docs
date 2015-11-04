@@ -128,7 +128,7 @@ Will output::
 Creating meta Tags
 ------------------
 
-.. php:method:: meta(string $type, string $url = null, array $options = [])
+.. php:method:: meta(string|array $type, string $url = null, array $options = [])
 
 This method is handy for linking to external resources like RSS/Atom feeds
 and favicons. Like css(), you can specify whether or not you'd like this tag
@@ -194,6 +194,18 @@ descriptions. Example::
     // Output
     <meta name="description" content="enter any meta description here" />
 
+In addition to making predefined meta tags, you can create link elements::
+
+    <?= $this->Html->meta([
+        'link' => 'http://example.com/manifest',
+        'rel' => 'manifest'
+    ]);
+    ?>
+    // Output
+    <link href="http://example.com/manifest" rel="manifest"/>
+
+Any attributes provided to meta() when called this way will be added to the
+generated link tag.
 
 Creating Doctype Tags
 ---------------------
@@ -530,25 +542,32 @@ Creating Inline Javascript Blocks
 
 .. php:method:: scriptBlock($code, $options = [])
 
-Generate a code block containing ``$code`` set ``$options['block']`` to ``true``
-to have the script block appear in the ``script`` view block. Other options
-defined will be added as attributes to script tags.
-``$this->Html->scriptBlock('stuff', ['defer' => true]);`` will create
-a script tag with ``defer="defer"`` attribute.
+To generate Javascript blocks from PHP view code, you can use one of the script
+block methods. Scripts can either be output in place, or buffered into a block::
 
-Creating Javascript Blocks
----------------------------
+    // Define a script block all at once, with the defer attribute.
+    $this->Html->scriptBlock('alert("hi")', ['defer' => true]);
+
+    // Buffer a script block to be output later.
+    $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 
 .. php:method:: scriptStart($options = [])
+.. php:method:: scriptEnd()
 
-Begin a buffering code block. This code block will capture all output between
-``scriptStart()`` and ``scriptEnd()`` and create an script tag. Options are the
-same as ``scriptBlock()``. An example of using ``scriptStart()`` and
-``scriptEnd()`` would be::
+You can use the ``scriptStart()`` method to create a capturing block that will
+output into a ``<script>`` tag. Captured script snippets can be output inline,
+or buffered into a block::
 
+    // Append into the 'script' block.
     $this->Html->scriptStart(['block' => true]);
-    echo "alert('I am in the JavaScript');"
+    echo "alert('I am in the JavaScript');";
     $this->Html->scriptEnd();
+
+Once you have buffered javascript, you can output it as you would any other
+:ref:`View Block <view-blocks>`::
+
+    // In your layout
+    echo $this->fetch('script');
 
 Creating Nested Lists
 ---------------------

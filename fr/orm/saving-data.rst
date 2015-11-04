@@ -4,9 +4,10 @@ Sauvegarder les Données
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Après avoir :doc:`chargé vos données</orm/retrieving-data-and-resultsets>` vous
-voudrez probablement mettre à jour & sauvegarder les changements.
+voudrez probablement mettre à jour et sauvegarder les changements.
 
 Coup d'Oeil sur Enregistrement des Données
 ==========================================
@@ -45,7 +46,7 @@ but::
     use Cake\ORM\TableRegistry;
 
     $articlesTable = TableRegistry::get('Articles');
-    $article = $articlesTable->get(12); // article avec l'id 12
+    $article = $articlesTable->get(12); // Retourne l'article avec l'id 12
 
     $article->title = 'Un nouveau titre pour cet article';
     $articlesTable->save($article);
@@ -185,6 +186,8 @@ compte::
 
     // Dans un controller
     $articles = TableRegistry::get('Articles');
+
+    // Nouvelle entity avec des associations imbriquées
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
             'Tags', 'Comments' => ['associated' => ['Users']]
@@ -195,8 +198,11 @@ Ce qui est au-dessus indique que les 'Tags', 'Comments' et 'Users' pour les
 Comments doivent être prises en compte. D'une autre façon, vous pouvez utiliser
 la notation par point pour être plus bref::
 
-    // Dans un controller.
+    // Dans un controller
     $articles = TableRegistry::get('Articles');
+
+    // Nouvelle entity avec des associations imbriquées en utilisant
+    // la notation par point
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => ['Tags', 'Comments.Users']
     ]);
@@ -205,7 +211,11 @@ Les données associées sont également validées par défaut à moins que le
 contraire ne lui soit spécifié. Vous pouvez également changer l'ensemble
 de validation utilisé par association::
 
+    // Dans un controller
     $articles = TableRegistry::get('Articles');
+
+    // Ne fait pas la validation pour l'association Tags et
+    // appelle l'ensemble de validation 'signup' pour Comments.Users
     $entity = $articles->newEntity($this->request->data(), [
         'associated' => [
             'Tags' => ['validate' => false],
@@ -244,7 +254,7 @@ Vos données de requête doivent ressembler à ceci::
     ];
 
 Si vous souhaitez lier des entrées belongsToMany existantes et en créer de
-nouvelles en même temps, vous pouvez utiliser la forme étendue ::
+nouvelles en même temps, vous pouvez utiliser la forme étendue::
 
     $data = [
         'title' => 'My title',
@@ -262,6 +272,14 @@ Quand les données ci-dessus seront converties en entities, il y aura 4 tags.
 Les deux premiers seront de nouveaux objets, et les deux seconds seront des
 références à des tags existants.
 
+Quand les données de belongsToMany sont converties, vous pouvez désactiver la
+création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
+est activée, cette option restreint la conversion des données de belongsToMany
+pour utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
+
+.. versionadded:: 3.1.0
+    L'option ``onlyIds`` a été ajoutée dans 3.1.0
+
 Convertir des Données HasMany
 -----------------------------
 
@@ -276,6 +294,14 @@ existants à un nouveau parent, vous pouvez utiliser le format ``_ids``::
             '_ids' => [1, 2, 3, 4]
         ]
     ];
+
+Quand les données de hasMany sont converties, vous pouvez désactiver la
+création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
+est activée, cette option restreint la conversion des données hasMany pour
+utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
+
+.. versionadded:: 3.1.0
+    L'option ``onlyIds`` a été ajoutée dans 3.1.0
 
 Convertir des Enregistrements Multiples
 ---------------------------------------
@@ -647,7 +673,7 @@ L'ORM utilise la méthode ``isNew()`` sur une entity pour déterminer si oui ou
 non une insertion ou une mise à jour doit être faite. Si la méthode
 ``isNew()`` retourne ``true`` et que l'entity a une valeur de clé primaire,
 une requête 'exists' sera faîte. La requête 'exists' peut être supprimée en
-passant ``'checkExisting' => false`` à l'argument ``$options`` ::
+passant ``'checkExisting' => false`` à l'argument ``$options``::
 
     $articles->save($article, ['checkExisting' => false]);
 
@@ -1039,14 +1065,18 @@ mise à jour en masse pour modifier plusieurs lignes en une fois::
     // Publie tous les articles non publiés.
     function publishAllUnpublished()
     {
-        $this->updateAll([
-            'published' => true], //champ
-            ['published' => false]); //condition
+        $this->updateAll(
+            ['published' => true], // champs
+            ['published' => false]); // conditions
     }
 
 Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
 vous devrez utiliser un objet expression puisque ``updateAll()`` utilise
 des requêtes préparées sous le capot::
+
+    use Cake\Database\Expression\QueryExpression;
+
+    ...
 
     function incrementCounters()
     {
@@ -1071,8 +1101,8 @@ lignes sont mises à jour.
     {
         $this->query()
             ->update()
-            ->set(['published' => 'true])
-            ->where(['published' => 'false'])
+            ->set(['published' => true])
+            ->where(['published' => false])
             ->execute();
     }
 

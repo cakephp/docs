@@ -224,6 +224,22 @@ closure au scope::
         return $query->where(['country_name' => $country]);
     });
 
+Récupération avec un Tri Personnalisé du Champ
+==============================================
+
+.. versionadded:: 3.0.14
+
+Par défaut, recover() trie les items en utilisant la clé primaire. Ceci
+fonctionne bien s'il s'agit d'une colonne numérique (avec incrémentation auto),
+mais cela peut entraîner des résultats étranges si vous utilisez les UUIDs.
+
+Si vous avez besoin de tri personnalisé pour la récupération, vous pouvez
+définir une clause order personnalisée dans votre config::
+
+        $this->addBehavior('Tree', [
+            'recoverOrder' => ['country_name' => 'DESC'],
+        ]);
+
 Sauvegarder les Données Hiérarchisées
 =====================================
 

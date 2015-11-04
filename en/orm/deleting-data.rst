@@ -4,6 +4,7 @@ Deleting Data
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 .. php:method:: delete(Entity $entity, $options = [])
 
@@ -37,7 +38,7 @@ Cascading Deletes
 When deleting entities, associated data can also be deleted. If your HasOne and
 HasMany associations are configured as ``dependent``, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
-are removed using :php:meth:`~Cake\\ORM\Table::deleteAll()`. You can elect to
+are removed using :php:meth:`Cake\\ORM\\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
 ``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::

@@ -42,6 +42,16 @@ the convention is that your URLs are lowercase and dashed using the
 ``DashedRoute`` class, therefore ``/red-apples/go-pick`` is the correct form
 to access the ``RedApplesController::goPick()`` action.
 
+When you create links using ``this->Html->link()``, you can use the following
+conventions for the url array::
+
+    $this->Html->link('link-title', [
+        'prefix' => 'MyPrefix' // CamelCased
+        'plugin' => 'MyPlugin', // CamelCased
+        'controller' => 'ControllerName', // CamelCased
+        'action' => 'actionName' // camelBacked
+    ]
+
 For more information on CakePHP URLs and parameter handling, see
 :ref:`routes-configuration`.
 
@@ -70,6 +80,8 @@ their filenames:
    named **BestEverHelper.php**
 
 Each file would be located in the appropriate folder/namespace in your app folder.
+
+.. _model-and-database-conventions:
 
 Model and Database Conventions
 ==============================

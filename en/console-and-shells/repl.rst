@@ -22,7 +22,7 @@ application's models::
     // object(Cake\ORM\Table)(
     //
     // )
-    >>> $articles->find();
+    >>> $articles->find()->all();
 
 Since your application has been bootstrapped you can also test routing using the
 REPL::

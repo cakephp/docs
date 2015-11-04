@@ -13,21 +13,17 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either a `PHAR package <http://phpunit.de/#download>`_ or `Composer
+through using either a `PHAR package <http://phpunit.de/#download>`__ or `Composer
 <http://getcomposer.org>`_.
 
 Install PHPUnit with Composer
 -----------------------------
 
-To install PHPUnit with Composer, add the following to you application's
-``require`` section in its ``composer.json``::
+To install PHPUnit with Composer::
 
-    "phpunit/phpunit": "*",
+    $ php composer.phar require --dev phpunit/phpunit
 
-After updating your composer.json, run Composer again inside your application
-directory::
-
-    $ php composer.phar install
+This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
 
@@ -36,11 +32,22 @@ You can now run PHPUnit using::
 Using the PHAR File
 -------------------
 
-After you have downloaded the ``phpunit.phar`` file, you can use it to run your
+After you have downloaded the **phpunit.phar** file, you can use it to run your
 tests::
 
     php phpunit.phar
 
+.. tip::
+
+    As a convenience you can make phpunit.phar available globally
+    on Unix or Linux with the following::
+
+      chmod +x phpunit.phar
+      sudo mv phpunit.phar /usr/local/bin/phpunit
+      phpunit --version
+
+    Please refer to the PHPUnit documentation for instructions regarding
+    `Globally installing the PHPUnit PHAR on Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Test Database Setup
 ===================
@@ -101,12 +108,12 @@ tests:
 
 #. PHP files containing tests should be in your
    ``tests/TestCase/[Type]`` directories.
-#. The filenames of these files should end in ``Test.php`` instead
+#. The filenames of these files should end in **Test.php** instead
    of just .php.
 #. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\IntegrationTestCase`` or ``\PHPUnit_Framework_TestCase``.
 #. Like other classnames, the test case classnames should match the filename.
-   ``RouterTest.php`` should contain ``class RouterTest extends TestCase``.
+   **RouterTest.php** should contain ``class RouterTest extends TestCase``.
 #. The name of any method containing a test (i.e. containing an
    assertion) should begin with ``test``, as in ``testPublished()``.
    You can also use the ``@test`` annotation to mark methods as test methods.
@@ -171,7 +178,7 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-Calling the parent method is important in test cases, as TestCase::setUp()
+Calling the parent method is important in test cases, as ``TestCase::setUp()``
 does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
 storing the paths in :php:class:`~Cake\\Core\\App`.
 
@@ -218,6 +225,12 @@ application's tests you can simply run::
 
     // phar file
     php phpunit.phar
+
+If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
+and wish to run CakePHP's unit-tests don't forget to execute the following ``Composer``
+command prior to running ``phpunit`` so that any dependencies are installed::
+
+    $ composer install --dev
 
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
@@ -271,7 +284,7 @@ Combining Test Suites for Plugins
 Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's ``phpunit.xml`` file::
+additional ``<testsuite>`` sections to your application's **phpunit.xml** file::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -313,7 +326,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``test`` in your **config/datasources.php**
+CakePHP uses the connection named ``test`` in your **config/app.php**
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -344,7 +357,7 @@ Creating Fixtures
 When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
 initially populated to the table. Let's create our first fixture, that will be
-used to test our own Article model. Create a file named ``ArticlesFixture.php``
+used to test our own Article model. Create a file named **ArticlesFixture.php**
 in your **tests/Fixture** directory, with the following content::
 
     namespace App\Test\Fixture;
@@ -452,9 +465,9 @@ Dynamic Data and Fixtures
 
 Since records for a fixture are declared as a class property, you cannot easily
 use functions or other dynamic data to define fixtures. To solve this problem,
-you can define ``$records`` in the init() function of your fixture. For example
-if you wanted all the created and modified timestamps to reflect today's date you
-could do the following::
+you can define ``$records`` in the ``init()`` function of your fixture. For
+example if you wanted all the created and modified timestamps to reflect today's
+date you could do the following::
 
     namespace App\Test\Fixture;
 
@@ -633,7 +646,7 @@ Let's say we already have our Articles Table class defined in
     }
 
 We now want to set up a test that will test this table class. Let's now create
-a file named ``ArticlesTableTest.php`` in your **tests/TestCase/Model/Table** directory,
+a file named **ArticlesTableTest.php** in your **tests/TestCase/Model/Table** directory,
 with the following contents::
 
     namespace App\Test\TestCase\Model\Table;
@@ -654,9 +667,9 @@ queries run against them.
 Creating a Test Method
 ----------------------
 
-Let's now add a method to test the function published() in the Article model.
-Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it now
-looks like this::
+Let's now add a method to test the function ``published()`` in the Articles
+table. Edit the file **tests/TestCase/Model/Table/ArticlesTableTest.php** so it
+now looks like this::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -689,7 +702,7 @@ looks like this::
         }
     }
 
-You can see we have added a method called ``testPublished()``. We start by
+You can see we have added a method called ``testFindPublished()``. We start by
 creating an instance of our ``ArticlesTable`` class, and then run our
 ``find('published')`` method. In ``$expected`` we set what we expect should be
 the proper result (that we know since we have defined which records are
@@ -757,11 +770,11 @@ model. The controller code looks like::
                 }
             }
             if (!empty($short)) {
-                $result = $this->Article->find('all', [
+                $result = $this->Articles->find('all', [
                     'fields' => ['id', 'title']
                 ]);
             } else {
-                $result = $this->Article->find();
+                $result = $this->Articles->find();
             }
 
             $this->set([
@@ -771,7 +784,7 @@ model. The controller code looks like::
         }
     }
 
-Create a file named ``ArticlesControllerTest.php`` in your
+Create a file named **ArticlesControllerTest.php** in your
 **tests/TestCase/Controller** directory and put the following inside::
 
     namespace App\Test\TestCase\Controller;
@@ -898,6 +911,25 @@ required authentication, you could write the following tests::
         // Other assertions.
     }
 
+Testing Actions Protected by CsrfComponent or SecurityComponent
+---------------------------------------------------------------
+
+When testing actions protected by either SecurityComponent or CsrfComponent you
+can enable automatic token generation to ensure your tests won't fail due to
+token mismatches::
+
+    public function testAdd()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        $this->post('/posts/add', ['title' => 'Exciting news!']);
+    }
+
+.. versionadded:: 3.1.2
+    The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
+    in 3.1.2
+
+
 Assertion methods
 -----------------
 
@@ -966,8 +998,7 @@ In addition to the above assertion methods, you can also use all of the
 assertions in `TestSuite
 <http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ and those
 found in `PHPUnit
-<https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
-
+<https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
 Testing a JSON Responding Controller
 ------------------------------------
@@ -1210,8 +1241,8 @@ Creating Test Suites
 
 If you want several of your tests to run at the same time, you can create a test
 suite. A test suite is composed of several test cases.  You can either create
-test suites in your application's ``phpunit.xml`` file, or by creating suite
-classes using ``CakeTestSuite``. Using ``phpunit.xml`` is good when you only
+test suites in your application's **phpunit.xml** file, or by creating suite
+classes using ``CakeTestSuite``. Using **phpunit.xml** is good when you only
 need simple include/exclude rules to define your test suite. A simple example
 would be
 
@@ -1305,7 +1336,7 @@ contains the fixture listener::
     </listeners>
 
 You should also ensure that your fixtures are loadable. Ensure the following is
-present in your ``composer.json`` file::
+present in your **composer.json** file::
 
     "autoload-dev": {
         "psr-4": {
@@ -1392,7 +1423,7 @@ Then uncomment the following line in your **config/bootstrap.php** file::
 
     //Configure::load('app_local', 'default');
 
-By creating an ``app_local.php`` file, you have an easy way to define
+By creating an **app_local.php** file, you have an easy way to define
 configuration specific to Jenkins. You can use this same configuration file to
 override any other configuration files you need on Jenkins.
 

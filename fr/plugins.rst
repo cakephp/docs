@@ -28,8 +28,8 @@ feriez ce qui suit::
     php composer.phar require cakephp/debug_kit
 
 Ceci installe la dernière version de DebugKit et met à jour vos
-fichiers ``composer.json``, ``composer.lock``, met à jour
-``vendor/cakephp-plugins.php`` et met à jour votre autoloader.
+fichiers **composer.json**, **composer.lock**, met à jour
+**vendor/cakephp-plugins.php** et met à jour votre autoloader.
 
 Si le plugin que vous voulez installer n'est pas disponible sur
 packagist.org. Vous pouvez cloner ou copier le code du plugin dans votre
@@ -44,7 +44,7 @@ Plugin Map File
 ---------------
 
 Lorsque vous installez des plugins via Composer, vous pouvez voir que
-``vendor/cakephp-plugins.php`` est créé. Ce fichier de configuration contient
+**vendor/cakephp-plugins.php** est créé. Ce fichier de configuration contient
 une carte des noms de plugin et leur chemin dans le système de fichiers.
 Cela ouvre la possibilité pour un plugin d'être installé dans le dossier vendor
 standard qui est à l'extérieur des dossiers de recherche standards. La classe
@@ -78,7 +78,7 @@ explicitement.
 .. note::
 
     ``Plugin::loadAll()`` ne va pas charger les plugins se trouvant dans vendor
-    qui ne sont pas définis dans ``vendor/cakephp-plugins.php``.
+    qui ne sont pas définis dans **vendor/cakephp-plugins.php**.
 
 .. _autoloading-plugin-classes:
 
@@ -454,7 +454,7 @@ votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
 'ContactManager', vous pouvez redéfinir les fichiers de template du plugin avec
 une logique de vue de l'application plus spécifique, en créant des fichiers en
 utilisant le template suivant
-``src/Template/plugins/[Plugin]/[Controller]/[view].ctp``. Pour le controller
+**src/Template/plugins/[Plugin]/[Controller]/[view].ctp**. Pour le controller
 Contacts, vous pouvez faire le fichier suivant::
 
     src/Template/plugins/src/ContactManager/Contacts/index.ctp
@@ -501,7 +501,7 @@ en utilisant les méthodes script, image ou css de
     // Génère une URL de /contact_manager/js/widget.js
     echo $this->Html->script('ContactManager.widget');
 
-    // Génère une URL de /contact_manager/img/logo.js
+    // Génère une URL de /contact_manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
 Les assets de Plugin sont servis en utilisant le filtre du dispatcheur

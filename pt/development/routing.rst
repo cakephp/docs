@@ -1,5 +1,5 @@
-Routing
-#######
+Roteamento
+##########
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
@@ -11,6 +11,19 @@ Routing
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. index:: :controller, :action, :plugin
+.. index:: greedy star, trailing star
+.. _connecting-routes:
+.. _routes-configuration:
+
+Connecting Routes
+=================
+
+.. _named-routes:
+
+Using Named Routes
+------------------
 
 .. toctree::
     :glob:

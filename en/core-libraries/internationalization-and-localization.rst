@@ -54,7 +54,7 @@ a subfolder for each language the application needs to support::
                 default.po
 
 The default domain is 'default', therefore your locale folder should at least
-contain the ``default.po`` file as shown above. A domain refers to any arbitrary
+contain the **default.po** file as shown above. A domain refers to any arbitrary
 grouping of translation messages. When no group is used, then the default group
 is selected.
 
@@ -391,7 +391,7 @@ As you see, ``Package`` objects take translation messages as an array. You can
 pass the ``setMessages()`` method however you like: with inline code, including
 another file, calling another function, etc. CakePHP provides a few loader
 functions you can reuse if you just need to change where messages are loaded.
-For example, you can still use ``.po`` files, but loaded from another location::
+For example, you can still use **.po** files, but loaded from another location::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
@@ -583,8 +583,8 @@ automatically set the locale based on the current user::
     // in config/bootstrap.php
     DispatcherFactory::add('LocaleSelector');
 
-    // Restrict the locales to only en-US, fr-FR
-    DispatcherFactory::add('LocaleSelector', ['locales' => ['en-US', 'fr-FR']]);
+    // Restrict the locales to only en_US, fr_FR
+    DispatcherFactory::add('LocaleSelector', ['locales' => ['en_US', 'fr_FR']]);
 
 The ``LocaleSelectorFilter`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list

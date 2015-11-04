@@ -15,16 +15,21 @@ entities.
 Débugger les Queries et les ResultSets
 ======================================
 
-Since the ORM now returns Collections and Entities, debugging these objects can
-be more complicated than in previous CakePHP versions. There are now various
-ways to inspect the data returned by the ORM.
+Etant donné que l'ORM retourne maintenant des Collections et des Entities,
+débugger ces objets peut être plus compliqué qu'avec les versions précédentes
+de CakePHP. Il y a maintenant plusieurs façons d'inspecter les données
+retournées par l'ORM.
 
-- ``debug($query)`` Shows the SQL and bound params, does not show results.
-- ``debug($query->all())`` Shows the ResultSet properties (not the results).
-- ``debug($query->toArray())`` An easy way to show each of the results.
-- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
-- ``debug($query->first())`` Show the properties of a single entity.
-- ``debug((string)$query->first())`` Show the properties of a single entity as JSON.
+- ``debug($query)`` Montre le SQL et les paramètres liés, ne montre pas les
+  résultats.
+- ``debug($query->all())`` Montre les propriétés de ResultSet (pas les
+  résultats).
+- ``debug($query->toArray())`` Une façon facile de montrer chacun des résultats.
+- ``debug(json_encode($query, JSON_PRETTY_PRINT))`` Résultats plus lisibles.
+- ``debug($query->first())`` Montre les propriétés de la première entity que
+  votre requête retournera.
+- ``debug((string)$query->first())`` Montre les propriétés de la première entity
+  que votre requête retournera en JSON.
 
 Récupérer une Entity Unique avec une Clé Primaire
 =================================================
@@ -519,7 +524,7 @@ définir le second argument à ``true``::
 Passer des Conditions à Contain
 -------------------------------
 
-Avec l'utilisation de ``contain``, vous pouvez restreindre les données
+Avec l'utilisation de ``contain()``, vous pouvez restreindre les données
 retournées par les associations et les filtrer par conditions::
 
     // Dans un controller ou une méthode de table.
@@ -550,7 +555,7 @@ en utilisant la notation par point::
     ]);
 
 Si vous avez défini certaines méthodes de finder personnalisées dans votre table
-associée, vous pouvez les utiliser à l'intérieur de ``contain``::
+associée, vous pouvez les utiliser à l'intérieur de ``contain()``::
 
     // Récupère tous les articles, mais récupère seulement les commentaires qui
     // sont approuvés et populaires.
@@ -568,7 +573,7 @@ associée, vous pouvez les utiliser à l'intérieur de ``contain``::
     utiliser chaque clause que l'objet query fournit.
 
 Si vous devez prendre le contrôle total d'une requête qui est générée, vous
-pouvez appeler ``contain`` pour ne pas ajouter les contraintes ``foreignKey``
+pouvez appeler ``contain()`` pour ne pas ajouter les contraintes ``foreignKey``
 à la requête générée. Dans ce cas, vous devez utiliser un tableau en passant
 ``foreignKey`` et ``queryBuilder``::
 
@@ -606,10 +611,14 @@ pouvez utiliser ``autoFields()``::
 .. versionadded:: 3.1
     La sélection des colonnes via un objet association a été ajouté dans 3.1
 
+.. end-contain
+
 .. _filtering-by-associated-data:
 
 Filtrer par les Données Associées
 ---------------------------------
+
+.. start-filtering
 
 Un cas de requête couramment fait avec les associations est de trouver les
 enregistrements qui 'matchent' les données associées spécifiques. Par exemple
@@ -633,7 +642,7 @@ avec les articles récemment publiés en utilisant ce qui suit::
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtrer des associations profondes est étonnement facile, et la syntaxe doit
+Filtrer des associations imbriquées est étonnamment facile, et la syntaxe doit
 déjà vous être familière::
 
     // Dans un controller ou une table de méthode.
@@ -664,25 +673,25 @@ match et contain sur la même association, vous pouvez vous attendre à recevoir
 à la fois la propriété ``_matchingData`` et la propriété standard d'association
 dans vos résultats.
 
-Using innerJoinWith
-~~~~~~~~~~~~~~~~~~~
+Utiliser innerJoinWith
+~~~~~~~~~~~~~~~~~~~~~~
 
-Using the ``matching()`` function, as we saw already, will create an ``INNER
-JOIN`` with the specified association and will also load the fields into the
-result set.
+Utiliser la fonction ``matching()``, comme nous l'avons vu précédemment, va
+créer un ``INNER JOIN`` avec l'association spécifiée et va aussi charger les
+champs dans un ensemble de résultats.
 
-There may be cases where you want to use ``matching()`` but are not interested
-in loading the fields into the result set. For this purpose, you can use
-``innerJoinWith()``::
+Il peut arriver que vous vouliez utiliser ``matching()`` mais que vous n'êtes
+pas intéressé par le chargement des champs dans un ensemble de résultats. Dans
+ce cas, vous pouvez utiliser ``innerJoinWith()``::
 
     $query = $articles->find();
     $query->innerJoinWith('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
 
-The ``innerJoinWith()`` method works the same as ``matching()``, that
-means that you can use dot notation to join deeply nested
-associations::
+La méthode ``innerJoinWith()`` fonctionne de la même manière que ``matching()``,
+ce qui signifie que vous pouvez utiliser la notation par points pour faire des
+jointures pour les associations imbriquées profondément::
 
     $query = $products->find()->innerJoinWith(
         'Shops.Cities.Countries', function ($q) {
@@ -690,20 +699,21 @@ associations::
         }
     );
 
-Again, the only difference is that no additional columns will be added to the
-result set, and no ``_matchingData`` property will be set.
+De même, la seule différence est qu'aucune colonne supplémentaire ne sera
+ajoutée à l'ensemble de résultats et aucune propriété ``_matchingData`` ne sera
+définie.
 
 .. versionadded:: 3.1
-    Query::innerJoinWith() was added in 3.1
+    Query::innerJoinWith() a été ajoutée dans 3.1
 
-Using notMatching
-~~~~~~~~~~~~~~~~~
+Utiliser notMatching
+~~~~~~~~~~~~~~~~~~~~
 
-The opposite of ``matching()`` is ``notMatching()``. This function will change
-the query so that it filters results that have no relation to the specified
-association::
+L'opposé de ``matching()`` est ``notMatching()``. Cette fonction va changer
+la requête pour qu'elle filtre les résultats qui n'ont pas de relation avec
+l'association spécifiée::
 
-    // In a controller or table method.
+    // Dans un controller ou une méthode de table.
 
     $query = $articlesTable
         ->find()
@@ -711,10 +721,10 @@ association::
             return $q->where(['Tags.name' => 'boring']);
         });
 
-The above example will find all articles that were not tagged with the word
-``boring``.  You can apply this method to HasMany associations as well. You could,
-for example, find all the authors with no published articles in the last 10
-days::
+L'exemple ci-dessus va trouver tous les articles qui n'étaient pas taggés avec
+le mot ``boring``. Vous pouvez aussi utiliser cette méthode avec les
+associations HasMany. Vous pouvez, par exemple, trouver tous les auteurs qui
+n'ont aucun article dans les 10 derniers jours::
 
     $query = $authorsTable
         ->find()
@@ -722,9 +732,9 @@ days::
             return $q->where(['Articles.created >=' => new \DateTime('-10 days')]);
         });
 
-It is also possible to use this method for filtering out records not matching
-deep associations. For example, you could find articles that have not been
-commented on by a certain user::
+Il est aussi possible d'utiliser cette méthode pour filtrer les enregistrements
+qui ne matchent pas les associations profondes. Par exemple, vous pouvez
+trouver les articles qui n'ont pas été commentés par un utilisateur précis::
 
     $query = $articlesTable
         ->find()
@@ -732,10 +742,10 @@ commented on by a certain user::
             return $q->where(['username' => 'jose']);
         });
 
-Since articles with no comments at all also satisfy the condition above, you may
-want to combine ``matching()`` and ``notMatching()`` in the same query. The
-following example will find articles having at least one comment, but not
-commented by a certain user::
+Puisque les articles avec aucun commentaire satisfont aussi la condition
+du dessus, vous pouvez combiner ``matching()`` et ``notMatching()`` dans la
+même requête. L'exemple suivant va trouver les articles ayant au moins un
+commentaire, mais non commentés par un utilisateur précis::
 
     $query = $articlesTable
         ->find()
@@ -746,23 +756,25 @@ commented by a certain user::
 
 .. note::
 
-    As ``notMatching()`` will create a ``LEFT JOIN``, you might want to consider
-    calling ``distinct`` on the find query as you can get duplicate rows
-    otherwise.
+    Comme ``notMatching()`` va créer un ``LEFT JOIN``, vous pouvez envisager
+    d'appeler ``distinct`` sur la requête find puisque sinon vous allez avoir
+    des lignes dupliquées.
 
-Keep in mind that contrary to the ``matching()`` function, ``notMatching()``
-will not add any data to the ``_matchingData`` property in the results.
+Gardez à l'esprit que le contraire de la fonction ``matching()``,
+``notMatching()`` ne va pas ajouter toutes les données à la propriété
+``_matchingData`` dans les résultats.
 
 .. versionadded:: 3.1
-    Query::notMatching() was added in 3.1
+    Query::notMatching() a été ajoutée dans 3.1
 
-Using leftJoinWith
-~~~~~~~~~~~~~~~~~~
+Utiliser leftJoinWith
+~~~~~~~~~~~~~~~~~~~~~
 
-On certain occasions you may want to calculate a result based on an association,
-without having to load all the records for it. For example, if you wanted to
-load the total number of comments an article has along with all the article
-data, you can use the ``leftJoinWith()`` function::
+Dans certaines situations, vous aurez à calculer un résultat selon une
+association, sans avoir à charger tous les enregistrements. Par
+exemple, si vous voulez charger le nombre total de commentaires qu'un article
+a, ainsi que toutes les données de l'article, vous pouvez utiliser la fonction
+``leftJoinWith()``::
 
     $query = $articlesTable->find();
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
@@ -770,12 +782,12 @@ data, you can use the ``leftJoinWith()`` function::
         ->group(['Articles.id'])
         ->autoFields(true);
 
-The results for the above query will contain the article data and the
-``total_comments`` property for each of them.
+Le résultat de la requête ci-dessus va contenir les données de l'article et
+la propriété ``total_comments`` pour chacun d'eux.
 
-``leftJoinWith()`` can also be used with deeply nested associations. This is
-useful, for example, for bringing the count of articles tagged with a certain
-word, per author::
+``leftJoinWith()`` peut aussi être utilisée avec des associations profondes.
+C'est utile par exemple pour rapporter le nombre d'articles taggés par l'auteur
+avec un certain mot::
 
     $query = $authorsTable->find();
         ->find()
@@ -786,34 +798,36 @@ word, per author::
         ->group(['Authors.id'])
         ->autoFields(true);
 
-This function will not load any columns from the specified associations into the
-result set.
+Cette fonction ne va charger aucune colonne des associations spécifiées dans
+l'ensemble de résultats.
 
 .. versionadded:: 3.1
-    Query::leftJoinWith() was added in 3.1
+    Query::leftJoinWith() a été ajoutée dans 3.1
 
-.. end-contain
+.. end-filtering
 
-Changing Fetching Strategies
-----------------------------
+Changer les Stratégies de Récupération
+--------------------------------------
 
-As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
-using a ``JOIN`` in the main finder query. While this improves query and
-fetching speed and allows for creating more expressive conditions when
-retrieving data, this may be a problem when you want to apply certain clauses to
-the finder query for the association, such as ``order()`` or ``limit()``.
+Comme vous le savez peut-être déjà, les associations ``belongsTo`` et ``hasOne``
+sont chargées en utilisant un ``JOIN`` dans la requête du finder principal.
+Bien que ceci améliore la requête et la vitesse de récupération des données et
+permet de créer des conditions plus parlantes lors de la récupération des
+données, cela peut devenir un problème quand vous devez appliquer certaines
+clauses à la requête finder pour l'association, comme ``order()`` ou
+``limit()``.
 
-For example, if you wanted to get the first comment of an article as an
-association::
+Par exemple, si vous souhaitez récupérer le premier commentaire d'un article
+en association::
 
    $articles->hasOne('FirstComment', [
         'className' => 'Comments',
         'foreignKey' => 'article_id'
    ]);
 
-In order to correctly fetch the data from this association, we will need to tell
-the query to use the ``select`` strategy, since we want order by a particular
-column::
+Afin de récupérer correctement les données de cette association, nous devrons
+dire à la requête d'utiliser la stratégie ``select``, puisque nous voulons
+trier selon une colonne en particulier::
 
     $query = $articles->find()->contain([
         'FirstComment' => [
@@ -824,22 +838,23 @@ column::
         ]
     ]);
 
-Dynamically changing the strategy in this way will only apply to a specific
-query. If you want to make the strategy change permanent you can do::
+Changer la stratégie de façon dynamique de cette façon va seulement l'appliquer
+pour une requête spécifique. Si vous souhaitez rendre le changement de stratégie
+permanent, vous pouvez faire::
 
     $articles->FirstComment->strategy('select');
 
-Using the ``select`` strategy is also a great way of making associations with
-tables in another database, since it would not be possible to fetch records
-using ``joins``.
+Utiliser la stratégie ``select`` est aussi une bonne façon de faire des
+associations avec des tables d'une autre base de données, puisqu'il ne serait
+pas possible de récupérer des enregistrements en utilisant ``joins``.
 
-Fetching With The Subquery Strategy
------------------------------------
+Récupération Avec la Stratégie de Sous-Requête
+----------------------------------------------
 
-As your tables grow in size, fetching associations from them can become
-slower, especially if you are querying big batches at once. A good way of
-optimizing association loading for ``hasMany`` and ``belongsToMany``
-associations is by using the ``subquery`` strategy::
+Avec la taille de vos tables qui grandit, la récupération des associations
+peut devenir lente, spécialement si vous faîtes des grandes requêtes en une
+fois. Un bon moyen d'optimiser le chargement des associations ``hasMany`` et
+``belongsToMany`` est d'utiliser la stratégie ``subquery``::
 
     $query = $articles->find()->contain([
         'Comments' => [
@@ -850,13 +865,15 @@ associations is by using the ``subquery`` strategy::
         ]
     ]);
 
-The result will remain the same as with using the default strategy, but this
-can greatly improve the query and fetching time in some databases, in
-particular it will allow to fetch big chunks of data at the same time in
-databases that limit the amount of bound parameters per query, such as
-**Microsoft SQL Server**.
+Le résultat va rester le même que pour la stratégie par défaut, mais
+ceci peut grandement améliorer la requête et son temps de récupération dans
+certaines bases de données, en particulier cela va permettre de récupérer des
+grandes portions de données en même temps, dans des bases de données qui
+limitent le nombre de paramètres liés par requête, comme le **Serveur Microsoft
+SQL**.
 
-You can also make the strategy permanent for the association by doing::
+Vous pouvez aussi rendre la stratégie pour les associations permanente en
+faisant::
 
     $articles->Comments->strategy('subquery');
 
@@ -865,7 +882,7 @@ Lazy loading des Associations
 
 Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer
-à les sections :ref:`lazy-load-associations` et
+aux sections :ref:`lazy-load-associations` et
 :ref:`loading-additional-associations` pour plus d'informations.
 
 Travailler avec des Ensembles de Résultat
@@ -924,7 +941,7 @@ entity dans un ensemble de résultat.
 
 En plus de faciliter la sérialisation, les ensembles de résultats sont un
 objet 'Collection' et supportent les mêmes méthodes que les
-:ref:`objets collection<collection-objects>`. Par exemple, vous pouvez extraire
+:doc:`objets collection </core-libraries/collections>`. Par exemple, vous pouvez extraire
 une liste des tags uniques sur une collection d'articles assez facilement::
 
     // Dans un controller ou une méthode de table.
@@ -942,7 +959,7 @@ une liste des tags uniques sur une collection d'articles assez facilement::
         ->extract('tags.name')
         ->reduce($reducer, []);
 
-Ci-dessous quelques autres examples des méthodes de collection utilisées
+Ci-dessous quelques autres exemples des méthodes de collection utilisées
 avec des ensembles de données::
 
     // Filtre les lignes sur une propriété calculée
@@ -987,7 +1004,7 @@ Vérifier si une Requête Query ou un ResultSet est vide
 ------------------------------------------------------
 
 Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
-pour voir si il contient au moins une colonne. Appeler ``isEmpty()`` sur un
+pour voir s'il contient au moins une colonne. Appeler ``isEmpty()`` sur un
 objet Query va évaluer la requête::
 
     // VérifieCheck une requête.

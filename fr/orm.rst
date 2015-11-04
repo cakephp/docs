@@ -36,14 +36,17 @@ connexion à la base de données <database-configuration>`.
 Exemple Rapide
 ==============
 
-Pour commencer, vous n'avez à écrire aucun code. Si vous suivez les conventions
-de CakePHP pour vos tables de base de données, vous pouvez simplement commencer
-à utiliser l'ORM. Par exemple si vous voulez charger des données de la table
-``articles``, vous pourriez faire::
+Pour commencer, vous n'avez à écrire aucun code. Si vous suivez les
+:ref:`conventions de CakePHP pour vos tables de base de données <model-and-database-conventions>`,
+vous pouvez simplement commencer à utiliser l'ORM. Par exemple si vous voulez
+charger des données de la table ``articles``, vous pourriez faire::
 
     use Cake\ORM\TableRegistry;
+
     $articles = TableRegistry::get('Articles');
+
     $query = $articles->find();
+
     foreach ($query as $row) {
         echo $row->title;
     }
@@ -56,7 +59,7 @@ ajoutant des associations ou en définissant des méthodes supplémentaires, nou
 ajouterions ce qui suit dans **src/Model/Table/ArticlesTable.php** après la
 balise d'ouverture ``<?php``::
 
-    namespace App\Model\Repository;
+    namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
@@ -71,6 +74,7 @@ obtenez une référence vers celle-ci en utilisant
 :php:class:`~Cake\\ORM\\TableRegistry` comme avant::
 
     use Cake\ORM\TableRegistry;
+
     // Maintenant $articles est une instance de notre classe ArticlesTable.
     $articles = TableRegistry::get('Articles');
 

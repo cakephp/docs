@@ -52,7 +52,8 @@ already enabled for all requests; let's take a look at how they are added::
     // Use options to set priority
     DispatcherFactory::add('Asset', ['priority' => 1]);
 
-Dispatcher filters with higher priority will be executed first. Priority defaults to ``10``.
+Dispatcher filters with higher ``priority`` (lower numbers) - will be executed
+first.  Priority defaults to ``10``.
 
 While using the string name is convenient, you can also pass instances into
 ``add()``::

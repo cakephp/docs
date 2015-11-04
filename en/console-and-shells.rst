@@ -37,8 +37,8 @@ section will be in bash, but the CakePHP Console is Windows-compatible as well.
 This example assumes that the user is currently logged into a bash prompt and is
 currently at the root of a CakePHP application.
 
-A CakePHP application contains ``src/Shell`` and ``src/Shell/Task`` directories that contain all of its 
-shells and tasks. It also comes with an executable in the ``bin`` directory::
+A CakePHP application contains **src/Shell** and **src/Shell/Task** directories that contain all of its
+shells and tasks. It also comes with an executable in the **bin** directory::
 
     $ cd /path/to/app
     $ bin/cake
@@ -106,7 +106,7 @@ Creating a Shell
 
 Let's create a shell for use in the Console. For this example,
 we'll create a simple Hello world shell. In your application's
-``Shell`` directory create ``HelloShell.php``. Put the following
+**src/Shell** directory create **HelloShell.php**. Put the following
 code inside it::
 
     namespace App\Shell;
@@ -205,7 +205,7 @@ properties attached to your shell::
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
@@ -403,6 +403,14 @@ The ``Shell`` class provides a few methods for outputting content::
     // Write to stderr and stop the process
     $this->error('Fatal error');
 
+It also provides two convenience methods regarding the output level::
+
+    // Would only appear when verbose output is enabled (-v)
+    $this->verbose('Verbose message');
+
+    // Would appear at all levels.
+    $this->quiet('Quiet message');
+
 Shell also includes methods for clearing output, creating blank lines, or
 drawing a line of dashes::
 
@@ -440,7 +448,8 @@ appropriately. The user of the shell, can then decide what level of detail
 they are interested in by setting the correct flag when calling the shell.
 :php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
-* QUIET - Only absolutely important information should be marked for quiet output.
+* QUIET - Only absolutely important information should be marked for quiet
+  output.
 * NORMAL - The default level, and normal usage.
 * VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
   for debugging as VERBOSE.
@@ -460,9 +469,15 @@ You can mark output as follows::
     $this->out('extra message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-You can control the output level of shells, by using the ``--quiet`` and ``--verbose``
-options. These options are added by default, and allow you to consistently control
-output levels inside your CakePHP shells.
+You can control the output level of shells, by using the ``--quiet`` and
+``--verbose`` options. These options are added by default, and allow you to
+consistently control output levels inside your CakePHP shells.
+
+The ``--quiet`` and ``--verbose`` options also control how logging data is
+output to stdout/stderr. Normally info and higher log messages are output to
+stdout/stderr. When ``--verbose`` is used, debug logs will be output to stdout.
+When ``--quiet`` is used, only warning and higher log messages will be output to
+stderr.
 
 Styling Output
 --------------
@@ -983,7 +998,7 @@ You can do that using the Configure value ``App.fullBaseURL`` from your bootstra
 
 For sending emails, you should provide Email class with the host you want to send the email with::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     $email = new Email();
     $email->domain('www.example.org');

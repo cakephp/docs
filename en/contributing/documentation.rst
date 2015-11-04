@@ -219,11 +219,11 @@ There are several kinds of links, each with their own uses.
 External Links
 ~~~~~~~~~~~~~~
 
-Links to external documents can be with the following::
+Links to external documents can be done with the following::
 
-    `External Link <http://example.com>`_
+    `External Link to php.net <http://php.net>`_
 
-The above would generate a link pointing to http://example.com
+The resulting link would look like this: `External Link to php.net <http://php.net>`_
 
 Links to Other Pages
 ~~~~~~~~~~~~~~~~~~~~
@@ -260,6 +260,16 @@ Cross Referencing Links
     Elsewhere you could reference the above section using ``:ref:`label-name```.
     The link's text would be the title that the link preceded. You can also
     provide custom link text using ``:ref:`Link text <label-name>```.
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a file is not referenced in a toc-tree. It's
+a great way to ensure that all files have a link directed to them, but
+sometimes, you don't need to insert a link for a file, eg. for our
+`epub-contents` and `pdf-contents` files. In those cases, you can add
+``:orphan:`` at the top of the file, to suppress warnings that the file is not
+in the toc-tree.
 
 Describing Classes and their Contents
 -------------------------------------
@@ -341,6 +351,20 @@ Each directive populates the index, and or the namespace index.
 .. rst:directive:: .. php:attr:: name
 
    Describe an property/attribute on a class.
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a function is referenced in multiple files. It's
+a great way to ensure that you did not add a function two times, but
+sometimes, you actually want to write a function in two or more files, eg.
+`debug object` is referenced in `/development/debugging` and in
+`/core-libraries/global-constants-and-functions`. In this case, you can add
+``:noindex:`` under the function debug to suppress warnings. Keep only
+one reference **without** ``:no-index:`` to still have the function referenced::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
 
 Cross Referencing
 ~~~~~~~~~~~~~~~~~

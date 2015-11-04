@@ -23,6 +23,8 @@ Console
 - La fonction ``breakpoint()`` a été ajoutée. Cette fonction fournit un snippet
   de code qui peut être utilisé dans un ``eval()`` pour lancer une console
   interactive. C'est très utile pour debugger les tests ou tout script CLI.
+- Les options de console ``--verbose`` et ``--quiet`` controllent maintenant
+  les niveaux de log de stdout/stderr.
 
 Ajout des Shell Helpers
 -----------------------
@@ -44,10 +46,11 @@ Controller
 - Les propriétés de Controller suivantes sont maintenant dépréciées:
 
   * layout
-  * view
+  * view - remplacée par ``template``
   * theme
   * autoLayout
-  * viewPath
+  * viewPath - remplacée par ``templatePath``
+  * viewClass - remplacée par ``className``
   * layoutPath
 
   Au lieu de définir ces propriétés dans vos controllers, vous devrez les
@@ -111,6 +114,11 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` échange maintenant le layout et le template selon
   l'extension parsée ou l'en-tête ``Accept-Type`` dans le callback
   ``beforeRender()`` plutôt que dans ``startup()``.
+- ``addInputType()`` et ``viewClassMap()`` sont dépréciées. Vous devez utiliser
+  ``config()`` pour modifier ces données de configuration à la volée.
+- Quand ``inputTypeMap`` ou ``viewClassMap`` sont définies dans les
+  configurations du component, elles vont *surcharger* les valeurs par défaut.
+  Ce changement rend possible la suppression de la configuration par défaut.
 
 Network
 =======
@@ -131,6 +139,11 @@ Vous pouvez maintenant :ref:`Charger en Eager des Associations
 <loading-additional-associations>`. Cette fonctionnalité vous permet de charger
 des associations conditionnellement dans un ensemble de résultats, une entity
 ou une collection d'entites.
+
+Les méthodes ``patchEntity()`` et ``newEntity()`` supportent maintenant
+l'option ``onlyIds``. Cette option vous permet de restreindre la conversion des
+données des associations hasMany/belongsToMany pour utiliser uniquement la liste
+des ``_ids``. Cette option est par défaut à ``false``.
 
 Query
 -----

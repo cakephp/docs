@@ -31,6 +31,19 @@ Après avoir chargé ``Email``, vous pouvez envoyer un email avec ce qui suit::
 Puisque les méthodes de setter d'``Email`` retournent l'instance de la classe,
 vous pouvez définir ses propriétés avec le chaînage des méthodes.
 
+``Email`` comporte plusieurs méthodes pour définir les destinataires - ``to()``,
+``cc()``, ``bcc()``, ``addTo()``, ``addCc()`` et ``addBcc()``. La principale
+différence est que les trois premières méthodes vont réinitialiser ce qui était
+déjà défini et les suivantes vont ajouter plus de destinataires dans leur champs
+respectifs::
+
+    $email = new Email();
+    $email->to('to@example.com', 'To Example');
+    $email->addTo('to2@example.com', 'To2 Example');
+    // Les destinaitres de l'email sont: to@example.com et to2@example.com
+    $email->to('test@example.com', 'ToTest Example');
+    // Le destinaitre de l'email est: test@example.com
+
 Choisir l'émetteur
 ------------------
 
@@ -375,11 +388,11 @@ Créer des Transports Personnalisés
 
 Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres
 systèmes email (comme SwiftMailer). Pour créer votre transport, créez tout
-d'abord le fichier **src/Network/Email/ExampleTransport.php** (où
+d'abord le fichier **src/Mailer/Transport/ExampleTransport.php** (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait
 ressembler à cela::
 
-    namespace App\Network\Email;
+    namespace App\Mailer\Transport;
 
     use Cake\Mailer\AbstractTransport;
     use Cake\Mailer\Email;
@@ -497,17 +510,19 @@ aux utilisateurs. Pour créer votre ``UserMailer``, créez un fichier
     {
         public function welcome($user)
         {
-            $this->_email->profile('default');
-            $this->_email->to($user->email);
-            $this->_email->subject(sprintf('Welcome %s', $user->name));
+            $this
+                ->to($user->email)
+                ->subject(sprintf('Welcome %s', $user->name))
+                ->template('welcome_mail') // Par défaut le template avec le même nom que le nom de la méthode est utilisé.
+                ->layout('custom');
         }
 
         public function resetPassword($user)
         {
-            $this->_email->profile('default');
-            $this->_email->to($user->email);
-            $this->_email->subject('Reset password');
-            $this->set(['token' => $user->token]);
+            $this
+                ->to($user->email)
+                ->subject('Reset password')
+                ->set(['token' => $user->token]);
         }
     }
 

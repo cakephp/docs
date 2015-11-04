@@ -4,6 +4,7 @@ Table Objects
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Table objects provide access to the collection of entities stored in a specific
 table. Each table in your application should have an associated Table class
@@ -80,7 +81,7 @@ conventions you can use the ``entityClass()`` method to change things up::
     {
         public function initialize(array $config)
         {
-            $this->entityClass('App\Model\PO');
+            $this->entityClass('App\Model\Entity\PO');
         }
     }
 
@@ -165,22 +166,22 @@ buildRules
 
 .. php:method:: buildRules(Event $event, RulesChecker $rules)
 
-The ``Model.buildRules`` event is fired before after a rules instance has been
-created and the table's ``beforeRules()`` method has been called.
+The ``Model.buildRules`` event is fired after a rules instance has been
+created and after the table's ``buildRules()`` method has been called.
 
 beforeRules
 --------------
 
 .. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
-The ``Model.beforeRules`` event is fired before an entity has rules applied. By
-stopping this event, you can short circuit the rules checking and set the result
-of applying rules'.
+The ``Model.beforeRules`` event is fired before an entity has had rules applied. By
+stopping this event, you can halt the rules checking and set the result
+of applying rules.
 
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
+.. php:method:: afterRules(Event $event, Entity $entity, ArrayObject $options, bool $result, $operation)
 
 The ``Model.afterRules`` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking

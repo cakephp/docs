@@ -15,21 +15,18 @@ CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait
 ce que vous pensez qu'il doit faire. PHPUnit peut être installé avec
-le `PHAR package <http://phpunit.de/#download>`_ ou avec
+le `PHAR package <http://phpunit.de/#download>`__ ou avec
 `Composer <http://getcomposer.org>`_.
 
 Installer PHPUnit avec Composer
 -------------------------------
 
-Pour installer PHPUnit avec Composer, ajoutez ce qui suit à la section
-``require`` de votre application dans son ``composer.json``::
+Pour installer PHPUnit avec Composer::
 
-    "phpunit/phpunit": "*",
+    $ php composer.phar require --dev phpunit/phpunit
 
-Après avoir mis à jour votre composer.json, lancez à nouveau Composer dans votre
-répertoire d'application::
-
-    $ php composer.phar install
+Ceci va ajouter la dépendance à la section ``require-dev`` de votre
+``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
 
 Vous pouvez maintenant lancer PHPUnit en utilisant::
 
@@ -38,19 +35,31 @@ Vous pouvez maintenant lancer PHPUnit en utilisant::
 Utiliser le fichier PHAR
 ------------------------
 
-Après avoir téléchargé le fichier ``phpunit.phar``, vous pouvez l'utiliser pour
+Après avoir téléchargé le fichier **phpunit.phar**, vous pouvez l'utiliser pour
 lancer vos tests::
 
     php phpunit.phar
 
+.. tip::
+
+    Par souci de commodité vous pouvez rendre phpunit.phar disponible
+    globalement sur Unix ou Linux via les commandes suivantes::
+
+      chmod +x phpunit.phar
+      sudo mv phpunit.phar /usr/local/bin/phpunit
+      phpunit --version
+
+    Référez vous à la documentation de PHPUnit pour les instructions concernant
+    `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
+
 Tester la Configuration de la Base de Données
 =============================================
 
-Souvenez-vous qu'il faut avoir debug activé dans votre fichier **config/app.php**
-avant de lancer des tests. Vous devrez aussi vous
-assurer d'ajouter une configuration de base de données ``test`` dans
-**config/app.php**. Cette configuration est utilisée par CakePHP pour les
-tables de fixture et les données::
+Souvenez-vous qu'il faut avoir debug activé dans votre fichier
+**config/app.php** avant de lancer des tests. Vous devrez aussi vous assurer
+d'ajouter une configuration de base de données ``test`` dans **config/app.php**.
+Cette configuration est utilisée par CakePHP pour les tables de fixture et les
+données::
 
     'Datasources' => [
         'test' => [
@@ -72,9 +81,9 @@ tables de fixture et les données::
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré le ``test`` de la configuration de
-la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
-lancer vos propres tests en lançant un de ceux présents dans le cœur::
+Après avoir installé PHPUnit et configuré le ``test`` de la configuration de la
+base de données, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
+vos propres tests en lançant un de ceux présents dans le cœur::
 
     // Pour phpunit.phar
     $ php phpunit.phar
@@ -105,12 +114,12 @@ conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests doivent être dans votre répertoire
    ``tests/TestCase/[Type]``.
-#. Les noms de ces fichiers doivent finir par ``Test.php`` plutôt que juste
-   ``.php``.
+#. Les noms de ces fichiers doivent finir par **Test.php** plutôt que juste
+   **.php**.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\ControllerTestCase`` ou ``\PHPUnit_Framework_TestCase``.
 #. Comme les autres noms de classe, les noms de classe des cas de test doivent
-   correspondre au nom de fichier. ``RouterTest.php`` doit contenir
+   correspondre au nom de fichier. **RouterTest.php** doit contenir
    ``class RouterTest extends TestCase``.
 #. Le nom de toute méthode contenant un test (par ex: contenant une assertion)
    doit commencer par ``test``, comme dans ``testPublished()``.
@@ -165,9 +174,9 @@ allons commencer avec ce qui suit::
         }
     }
 
-Nous compléterons ce squelette dans une minute. Nous avons ajouté deux
-méthodes pour commencer. Tout d'abord ``setUp()``. Cette méthode est
-appelée avant chaque méthode de *test* dans une classe de cas de test.
+Nous compléterons ce squelette dans une minute. Nous avons ajouté deux méthodes
+pour commencer. Tout d'abord ``setUp()``. Cette méthode est appelée avant chaque
+méthode de *test* dans une classe de cas de test.
 Les méthodes de configuration devraient initialiser les objets souhaités
 pour le test, et faire toute configuration souhaitée. Dans notre configuration
 nous ajouterons ce qui suit::
@@ -180,8 +189,8 @@ nous ajouterons ce qui suit::
     }
 
 Appeler la méthode parente est importante dans les cas de test, puisque
-TestCase::setUp() fait un certain nombre de choses comme fabriquer les valeurs
-dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
+``TestCase::setUp()`` fait un certain nombre de choses comme fabriquer les
+valeurs dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
 :php:class:`~Cake\\Core\\App`.
 
 Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques
@@ -198,10 +207,10 @@ assertions pour nous assurer que notre code crée la sortie que nous attendons::
     }
 
 Le test ci-dessus est simple mais montre le potentiel bénéfique de l'utilisation
-des cas de test. Nous utilisons ``assertContains()`` pour nous assurer que
-notre helper retourne une chaîne qui contient le contenu que nous attendons.
-Si le résultat ne contient pas le contenu attendu le test sera un échec, et
-nous savons que notre code est incorrect.
+des cas de test. Nous utilisons ``assertContains()`` pour nous assurer que notre
+helper retourne une chaîne qui contient le contenu que nous attendons. Si le
+résultat ne contient pas le contenu attendu le test sera un échec, et nous
+savons que notre code est incorrect.
 
 En utilisant les cas de test, vous pouvez facilement décrire la relation entre
 un ensemble d'entrées connues et leur sortie attendue. Cela vous aide à être
@@ -230,7 +239,14 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer::
     // avec le fichier phar
     php phpunit.phar
 
-A partir du répertoire racine de votre application. Pour lancer les tests pour
+Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
+et que vous souhaitez exécuter les tests unitaires de CakePHP, n'oubliez pas
+d'exécuter la commande suivante de ``Composer`` avant de lancer ``phpunit`` pour
+que toutes les dépendances soient installées::
+
+    $ composer install --dev
+
+À partir du répertoire racine de votre application. Pour lancer les tests pour
 un plugin qui fait parti de la source de votre application, d'abord faîtes la
 commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
 ``phpunit`` qui correspond à la façon dont vous avez installé phpunit::
@@ -333,7 +349,7 @@ pouvez commencer à tester votre code avant de développer réellement en live l
 contenu pour une application.
 
 CakePHP utilise la connexion nommée ``test`` dans votre fichier de configuration
-**config/datasources.php**. Si la connexion n'est pas utilisable, une exception
+**config/app.php**. Si la connexion n'est pas utilisable, une exception
 sera levée et vous ne pourrez pas utiliser les fixtures de la base de données.
 
 CakePHP effectue ce qui suit pendant le chemin d'une fixture basée sur un cas
@@ -365,7 +381,7 @@ A la création d'une fixture, vous pouvez définir principalement deux choses:
 comment la table est créée (quels champs font partie de la table), et quels
 enregistrements seront remplis initialement dans la table. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
-Créez un fichier nommé ``ArticlesFixture.php`` dans votre répertoire
+Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
 **tests/Fixture** avec le contenu suivant::
 
     namespace App\Test\Fixture;
@@ -481,9 +497,9 @@ Les Données Dynamiques et les Fixtures
 Depuis que les enregistrements pour une fixture sont déclarés en propriété
 de classe, vous ne pouvez pas facilement utiliser les fonctions ou autres
 données dynamiques pour définir les fixtures. Pour résoudre ce problème,
-vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
-exemple, si vous voulez que tous les timestamps soient créés et mis à jours pour
-refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
+vous pouvez définir ``$records`` dans la fonction ``init()`` de votre fixture.
+Par exemple, si vous voulez que tous les timestamps soient créés et mis à jours
+pour refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     namespace App\Test\Fixture;
 
@@ -627,7 +643,7 @@ les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
         public function testMyFunction()
         {
-            $this->loadFixtures('Article', 'Comment');
+            $this->loadFixtures('Articles', 'Comments');
         }
     }
 
@@ -674,7 +690,7 @@ le model. Le test suite de CakePHP charge un petit ensemble minimum de fichiers
 (pour garder les tests isolés), ainsi nous devons commencer par charger notre
 model - dans ce cas le model Article que nous avons déjà défini.
 
-Créons maintenant un fichier nommé ``ArticlesTableTest.php`` dans notre
+Créons maintenant un fichier nommé **ArticlesTableTest.php** dans notre
 répertoire **tests/TestCase/Model/Table**, avec le contenu suivant::
 
     namespace App\Test\TestCase\Model\Table;
@@ -695,8 +711,8 @@ les fixtures sur lesquelles des requêtes vont être lancées.
 Créer une Méthode de Test
 -------------------------
 
-Ajoutons maintenant une méthode pour tester la fonction published() dans le
-model Article. Modifions le fichier
+Ajoutons maintenant une méthode pour tester la fonction ``published()`` dans la
+table Articles. Modifions le fichier
 **tests/TestCase/Model/Table/ArticlesTableTest.php** afin qu'il ressemble
 maintenant à ceci::
 
@@ -731,15 +747,15 @@ maintenant à ceci::
         }
     }
 
-Vous pouvez voir que nous avons ajouté une méthode appelée ``testPublished()``.
-Nous commençons par créer une instance de notre model ``Article``, et lançons
-ensuite notre méthode ``published()``. Dans ``$expected``, nous définissons
-ce que nous en attendons, ce qui devrait être le résultat approprié (que nous
-connaissons depuis que nous avons défini les enregistrements qui sont remplis
-initialement dans la table articles.). Nous testons que les résultats
-correspondent à nos attentes en utilisant la méthode ``assertEquals()``.
-Regardez la section sur les :ref:`running-tests` pour plus d'informations
-sur la façon de lancer les cas de test.
+Vous pouvez voir que nous avons ajouté une méthode appelée
+``testFindPublished()``. Nous commençons par créer une instance de notre model
+``Article``, et lançons ensuite notre méthode ``published()``. Dans
+``$expected``, nous définissons ce que nous en attendons, ce qui devrait être le
+résultat approprié (que nous connaissons depuis que nous avons défini les
+enregistrements qui sont remplis initialement dans la table articles.). Nous
+testons que les résultats correspondent à nos attentes en utilisant la méthode
+``assertEquals()``. Regardez la section sur les :ref:`running-tests` pour plus
+d'informations sur la façon de lancer les cas de test.
 
 Méthodes de Mocking des Models
 ------------------------------
@@ -817,7 +833,7 @@ correspondant. Le code du controller ressemble à ceci::
         }
     }
 
-Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire
+Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
 **tests/TestCase/Controller** et mettez ce qui suit à l'intérieur::
 
     namespace App\Test\TestCase\Controller;
@@ -947,6 +963,24 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
+Tester les Actions Protégées par CsrfComponent ou SecurityComponent
+-------------------------------------------------------------------
+
+Quand vous testez les actions protégées par SecurityComponent ou CsrfComponent,
+vous pouvez activer la génération automatique de token pour vous assurer que vos
+tests ne vont pas être en échec à cause d'un token non présent::
+
+    public function testAdd()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        $this->post('/posts/add', ['title' => 'News excitante!']);
+    }
+
+.. versionadded:: 3.1.2
+    Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
+    ajoutées dans la version 3.1.2.
+
 Méthodes d'Assertion
 --------------------
 
@@ -1014,7 +1048,8 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
 toutes les assertions de `TestSuite
 <http://api.cakephp.org/3.0/class-Cake.TestSuite.TestCase.html>`_ et celles
-de `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`_
+de
+`PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
@@ -1451,7 +1486,7 @@ Ensuite, décommentez la ligne suivante dans votre fichier
 
     //Configure::load('app_local', 'default');
 
-En créant un fichier ``app_local.php``, vous avez un moyen facile de définir une
+En créant un fichier **app_local.php**, vous avez un moyen facile de définir une
 configuration spécifique pour Jenkins. Vous pouvez utiliser ce même fichier de
 configuration pour remplacer tous les autres fichiers de configuration dont vous
 avez besoin sur Jenkins.

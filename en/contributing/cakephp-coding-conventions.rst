@@ -260,7 +260,7 @@ Method Chaining
 ===============
 
 Method chaining should have multiple methods spread across separate lines, and
-indented with one tab::
+indented with four spaces::
 
     $email->from('foo@example.com')
         ->to('bar@example.com')
@@ -391,7 +391,7 @@ PHP Tags
 ========
 
 Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``). The short echo
-should be used in template files (``.ctp``) where appropriate.
+should be used in template files (**.ctp**) where appropriate.
 
 Short Echo
 ----------

@@ -18,42 +18,33 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
     - `EPUB <../_downloads/zh/CakePHPCookbook.epub>`_
     - `原文出处 <http://github.com/cakephp/docs>`_
 
-入门指南
-===============
-
-创建一个博客
-------------
-
-从 :doc:`博客教程</tutorials-and-examples/blog/blog>` 开始。您会了解 CakePHP 的基本知识，并在此过程中建立一
-个基本的博客。
-
-约定
------------
-
-了解驱动 CakePHP 的典型的 :doc:`CakePHP 请求 </getting-started/a-typical-cakephp-request>`
-和 :doc:`约定 </getting-started/cakephp-conventions>`。
-
-控制器(Controllers)
--------------------
-
-控制器用来处理请求，并且帮助协调和准备对客户端的响应。详情见 :doc:`/controllers`。
-
-视图(Views)
------------
-
-视图是 CakePHP 的表现层。它们负责把获取自模型的数据转换成客户所请求的输出格式。详情见 :doc:`/views`。
-
-模型(Models)
-------------
-
-模型是应用程序的核心, 它们负责数据的验证、存储和读取。详情见:doc:`/models`。
-
 获取帮助
 ============
 
-如果你遇到困难，有一些地方 :doc:`你可以获取帮助 </cakephp-overview/where-to-get-help>`。
+如果你遇到困难，有一些地方 :doc:`你可以获取帮助 </intro/where-to-get-help>`。
 
+First Steps
+===========
 
+Learning a new framework can be intimidating and exciting at the same time. To
+help you along, we have created a cookbook packed with examples and recipes to
+get the common tasks completed. If you are new, you should start off with the
+:doc:`/quickstart` as it will give you a quick tour of what
+CakePHP has to offer and how it works.
+
+After you've finished the Bookmarker Tutorial, you can brush up on the key
+elements in a CakePHP application:
+
+* The :ref:`CakePHP request cycle <request-cycle>`
+* The :doc:`conventions <intro/conventions>` that CakePHP
+  uses.
+* :doc:`Controllers </controllers>` handle requests and co-ordinate your models
+  and the responses your application creates.
+* :doc:`Views </views>` are the presentation layer in your application. They
+  give you powerful tools to create HTML, JSON and the other outputs your
+  application needs.
+* :doc:`Models </orm>` are the key ingredient in any application. They handle
+  validation, and domain logic within your application.
 
 .. meta::
     :title lang=zh: .. CakePHP Cookbook documentation master file, created by

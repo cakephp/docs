@@ -1,9 +1,9 @@
-TimeHelper
-##########
+Text
+####
 
 .. php:namespace:: Cake\View\Helper
 
-.. php:class:: TimeHelper(View $view, array $config = [])
+.. php:class:: TextHelper(View $view, array $config = [])
 
 .. note::
     The documentation is not currently supported in Japanese language for this
@@ -16,7 +16,11 @@ TimeHelper
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. include:: /core-libraries/text.rst
+    :start-after: start-text
+    :end-before: end-text
+
 .. meta::
-    :title lang=ja: TimeHelper
-    :description lang=ja: The Time Helper will help you format time and test time.
-    :keywords lang=ja: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=ja: TextHelper
+    :description lang=ja: The Text Helper contains methods to make text more usable and friendly in your views.
+    :keywords lang=ja: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text

@@ -1,5 +1,5 @@
-Constants & Functions
-#####################
+Constantes e Funções
+####################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

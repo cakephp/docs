@@ -1,5 +1,5 @@
-Query Builder
-#############
+Construtor de queries
+#####################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

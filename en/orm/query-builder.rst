@@ -110,8 +110,8 @@ and traversing methods on.
 Often, there is no need to call ``all()``, you can simply iterate the
 Query object to get its results. Query objects can also be used directly as the
 result object; trying to iterate the query, calling ``toArray()`` or some of the
-methods inherited from :ref:`Collection <collection-objects>`, will result in the
-query being executed and results returned to you.
+methods inherited from :doc:`Collection </core-libraries/collections>`, will
+result in the query being executed and results returned to you.
 
 Selecting A Single Row From A Table
 -----------------------------------
@@ -150,10 +150,10 @@ Queries Are Collection Objects
 ------------------------------
 
 Once you get familiar with the Query object methods, it is strongly encouraged
-that you visit the :ref:`Collection <collection-objects>` section to improve
-your skills in efficiently traversing the data. In short, it is important to
-remember that anything you can call on a Collection object, you can also do in
-a Query object::
+that you visit the :doc:`Collection </core-libraries/collections>` section to
+improve your skills in efficiently traversing the data. In short, it is
+important to remember that anything you can call on a Collection object, you
+can also do in a Query object::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
@@ -989,6 +989,13 @@ to fetch associated data from other tables is called **eager loading**.
 .. include:: ./retrieving-data-and-resultsets.rst
     :start-after: start-contain
     :end-before: end-contain
+
+Filtering by Associated Data
+----------------------------
+
+.. include:: ./retrieving-data-and-resultsets.rst
+    :start-after: start-filtering
+    :end-before: end-filtering
 
 .. _adding-joins:
 

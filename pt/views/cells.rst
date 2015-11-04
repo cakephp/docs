@@ -1,5 +1,5 @@
-View Cells
-##########
+View Cells (Células de Visualização)
+####################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

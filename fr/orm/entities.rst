@@ -302,7 +302,7 @@ comportement par défaut si un champ n'est pas nommé spécifiquement::
         ];
     }
 
-Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
+.. note:: Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
 Eviter la Protection Contre l'Assignement de Masse
 --------------------------------------------------

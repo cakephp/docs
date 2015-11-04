@@ -41,9 +41,9 @@ CakePHP est également compatible avec Windows. Exécutons le programme Console
 depuis le bash. Cet exemple suppose que l'utilisateur est actuellement
 connecté dans l'invité bash et qu'il est en root sur une installation CakePHP.
 
-Une application CakePHP contient les répertoires ``src/Shell`` et
-``src/Shell/Task`` qui contiennent tous ses shells et tasks. Il est aussi livré
-avec un exécutable dans le répertoire ``bin``::
+Une application CakePHP contient les répertoires **src/Shell** et
+**src/Shell/Task** qui contiennent tous ses shells et tasks. Il est aussi livré
+avec un exécutable dans le répertoire **bin**::
 
     $ cd /path/to/app
     $ bin/cake
@@ -112,8 +112,8 @@ Créer un Shell
 ==============
 
 Créons un shell pour l'utilisation dans la Console. Pour cet exemple, nous
-créerons un simple shell Hello world. Dans le répertoire ``Shell``
-de votre application, créez ``HelloShell.php``. Mettez le code suivant
+créerons un simple shell Hello world. Dans le répertoire **src/Shell**
+de votre application, créez **HelloShell.php**. Mettez le code suivant
 dedans::
 
     namespace App\Shell;
@@ -218,7 +218,7 @@ propriétés attachées à votre shell::
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
@@ -243,7 +243,7 @@ shell en utilisant la propriété ``$tasks``::
 
 Vous pouvez utiliser les tâches à partir de plugins en utilisant la
 :term:`syntaxe de plugin` standard. Les tâches sont stockées dans
-``Shell/Task/`` dans les fichiers nommées d'après leur
+**src/Shell/Task/** dans les fichiers nommées d'après leur
 classe. Ainsi si vous étiez sur le point de créer une nouvelle
 tâche 'FileGenerator', vous pourriez créer
 **src/Shell/Task/FileGeneratorTask.php**.
@@ -428,6 +428,15 @@ La classe ``Shell`` fournit quelques méthodes pour afficher le contenu::
     // Ecrire avec stderr et arrêter le processus
     $this->error('Erreur Fatale');
 
+Elle fournit aussi deux méthodes pratiques en ce qui concerne le niveau de
+sortie::
+
+    // Apparaîtrait seulement quand la sortie verbeuse est activée (-v)
+    $this->verbose('Message verbeux');
+
+    // Apparaîtrait à tous les niveaux.
+    $this->quiet('Message silencieux');
+
 Le Shell a aussi quelques méthodes pour nettoyer la sortie, créer des lignes
 blanches, ou dessiner une ligne de tirets::
 
@@ -492,6 +501,13 @@ Vous pouvez contrôler le niveau de sortie des shells, en utilisant les
 options ``--quiet`` et ``--verbose``. Ces options sont ajoutées par défaut,
 et vous autorise à contrôler la cohérence du niveau de sortie à l'intérieur
 de vos shells CakePHP.
+
+Les options de console ``--quiet`` et ``--verbose`` contrôlent également
+les données sont loguées sont envoyées à stdout/stderr. Normalement, info et les
+message de log de plus haut niveau sont envoyés vers stdout/stderr. Lorsque
+``--verbose`` est utilisé, les logs de debug seront envoyés à stdout. Lorsque
+``--quiet`` est utilisé, seulement les warning et messages plus haut seront
+envoyés à stderr.
 
 Style de sortie
 ===============
@@ -1046,7 +1062,7 @@ config, par exemple.
 Pour envoyer des emails, vous devrez fournir à la classe Email l'hôte avec
 lequel vous souhaitez envoyer l'email en faisant::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     $email = new Email();
     $email->domain('www.example.org');

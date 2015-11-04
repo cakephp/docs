@@ -18,7 +18,7 @@ Enabling Data Views in Your Application
 
 Before you can use the data view classes, you'll first need to load the
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
-contoller::
+controller::
 
     public function initialize()
     {
@@ -105,7 +105,7 @@ element the Xml will fail to generate.
 
 .. versionadded:: 3.1.0
 
-    You can also set ``_serialized`` to ``true`` to serialize all view variables
+    You can also set ``_serialize`` to ``true`` to serialize all view variables
     instead of explicitly specifying them.
 
 Using a Data View with Template Files

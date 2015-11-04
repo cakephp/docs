@@ -66,7 +66,7 @@ However, you can also use the same logic to create an edit form. The FormHelper
 uses the ``$this->request->data`` property to automatically detect whether to
 create an add or edit form. If the provided entity is not 'new', the form will
 be created as an edit form.  For example, if we browse to
-http://example.org/articles/edit/5, we could do the following::
+**http://example.org/articles/edit/5**, we could do the following::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
@@ -1117,6 +1117,35 @@ can override the ``dateWidget`` template. By default the ``dateWidget`` template
 is::
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+
+To create a datetime inputs with custom classes/attributes on a specific select
+box, you can use the options in each component::
+
+    echo $this->Form->datetime('released', [
+        'year' => [
+            'class' => 'year-classname',
+        ],
+        'month' => [
+            'class' => 'month-class',
+            'data-type' => 'month',
+        ],
+    ]);
+
+Which would create the following two selects:
+
+.. code-block:: html
+
+    <select name="released[year]" class="year-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+    <select name="released[month]" class="month-class" data-type="month">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
 
 Creating Time Inputs
 --------------------

@@ -107,7 +107,7 @@ automatiquement un élément de top-niveau ``<response>`` en utilisant
 
 .. versionadded:: 3.1.0
 
-    Vous pouvez maintenant définir ``_serialized`` à ``true`` pour
+    Vous pouvez maintenant définir ``_serialize`` à ``true`` pour
     pour sérialiser toutes les variables de vue au lieu de les spécifier
     explicitement.
 

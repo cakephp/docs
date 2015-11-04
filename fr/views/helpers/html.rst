@@ -125,10 +125,10 @@ Affichera ::
 
     background:#633; border-bottom:1px solid #000; padding:10px;
 
-Créer des balises meta
+Créer des Balises meta
 ----------------------
 
-.. php:method:: meta(string $type, string $url = null, array $options = [])
+.. php:method:: meta(string|array $type, string $url = null, array $options = [])
 
 Cette méthode est pratique pour faire des liens vers des ressources
 externes comme RSS/Atom feeds et les favicons. Comme avec css(), vous
@@ -195,14 +195,27 @@ clés) et descriptions. Exemple::
     // Affiche
     <meta name="description" content="entrez votre description pour la balise meta ici" />
 
+En plus de faire des balises meta prédéfinies, vous pouvez créer des éléments de
+lien::
 
-Créer une balise Doctype
+    <?= $this->Html->meta([
+        'link' => 'http://example.com/manifest',
+        'rel' => 'manifest'
+    ]);
+    ?>
+    // Affiche
+    <link href="http://example.com/manifest" rel="manifest"/>
+
+Tout attribut fourni à meta() lorsqu'elle est appelée de cette façon, sera
+ajoutée à la balise de lien générée.
+
+Créer une Balise Doctype
 ------------------------
 
 .. php:method:: docType(string $type = 'html5')
 
-Retourne une balise doctype (X)HTML. Fournissez votre doctype selon la
-table suivante:
+Retourne une balise doctype (X)HTML. Fournissez votre doctype selon la table
+suivante:
 
 +--------------------------+----------------------------------+
 | type                     | valeur résultante                |
@@ -227,10 +240,10 @@ table suivante:
 ::
 
     echo $this->Html->docType();
-    // Sortie: <!DOCTYPE html>
+    // Affiche: <!DOCTYPE html>
 
     echo $this->Html->docType('html4-trans');
-    // Sortie:
+    // Affiche:
     // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     //    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -532,27 +545,34 @@ Créer des Blocs Javascript Inline
 
 .. php:method:: scriptBlock($code, $options = [])
 
-Génère un bloc de code contenant ``code`` et définit ``$options['inline']``
-à ``true`` pour voir le bloc de script apparaître dans le bloc de vue
-``script``. D'autres options définies seront ajoutées comme attributs dans
-les balises de script.
-``$this->Html->scriptBlock('stuff', ['defer' => true]);`` va créer une
-balise script avec l'attribut ``defer="defer"``.
+Pour générer des blocks Javascript à partir d'un code de vue en PHP, vous pouvez
+utiliser une des méthodes de script de blocks. Les scripts peuvent soit être
+affichés à l'endroit où ils sont écrits, soit être mis en mémoire tampon dans un
+block::
 
-Créer des Blocs Javascript
---------------------------
+    // Définit un block de script en une fois, avec l'attribut defer.
+    $this->Html->scriptBlock('alert("hi")', ['defer' => true]);
+
+    // Mis en mémoire d'un block de script pour être affiché plus tard.
+    $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 
 .. php:method:: scriptStart($options = [])
+.. php:method:: scriptEnd()
 
-Débute la mise en mémoire tampon d'un block de code. Ce block de code
-va capturer toutes les sorties entre ``scriptStart()`` et ``scriptEnd()``
-et créer une balise script. Les options sont les mêmes que celles de
-``scriptBlock()``. Un exemple d'utilisation de ``scriptStart()`` et
-``scriptEnd()`` serait::
+Vous pouvez utiliser la méthode ``scriptStart()`` pour créer un block capturant
+qui va être affiché dans une balise ``<script>``. Les bouts de code de script
+capturés peuvent être affichés inline, ou mis en mémoire tampon dans un block::
 
+    // Ajoute dans le block 'script'.
     $this->Html->scriptStart(['block' => true]);
-    echo "alert('I am in the JavaScript');"
+    echo "alert('Je suis dans le JavaScript');";
     $this->Html->scriptEnd();
+
+Une fois que vous avez mis en mémoire tampon le javascript, vous pouvez
+l'afficher comme vous le feriez pour tout autre :ref:`Block de vue <view-blocks>`::
+
+    // Dans votre layout
+    echo $this->fetch('script');
 
 Créer des Listes Imbriquées
 ---------------------------

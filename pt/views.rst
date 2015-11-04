@@ -1,5 +1,5 @@
-Views (Visão)
-#############
+Views (Visualização)
+####################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
@@ -11,3 +11,18 @@ Views (Visão)
 
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
+
+.. _view-layouts:
+
+.. _view-elements:
+
+More About Views
+================
+
+.. toctree::
+    :maxdepth: 1
+
+    views/cells
+    views/themes
+    views/json-and-xml-views
+    views/helpers

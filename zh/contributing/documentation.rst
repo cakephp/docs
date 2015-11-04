@@ -3,7 +3,7 @@
 
 给文档做贡献是很简单的。这些文件都托管在 https://github.com/cakephp/docs。请自行
 复制(*fork*)代码仓库，加入你的更改/改进/翻译，然后发出拉取请求来提交你的改动。你
-甚至可以在 GitHub 上在线地编辑文档，而完全不用下载文件--在任何页面上的"Improve 
+甚至可以在 GitHub 上在线地编辑文档，而完全不用下载文件--在任何页面上的"Improve
 this Doc"按键将会引导你进入该页面的 GitHub 在线编辑器。
 
 翻译
@@ -36,7 +36,7 @@ this Doc"按键将会引导你进入该页面的 GitHub 在线编辑器。
 
 这份新的 CakePHP 文档是以
 `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_ 格式写的。
-ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。在为 
+ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记语法。在为
 CakePHP 的文档做出贡献时，为了保持一致性，建议你遵循下面的准则，来你格式化和组织
 你的文字。
 
@@ -168,10 +168,20 @@ CakePHP 的文档做出贡献时，为了保持一致性，建议你遵循下面
     在其他地方你可以用 ``:ref:`标签名称``` 引用上面的小节。链接的文字可以是标签之后的
     标题。你也可以使用 ``:ref:`链接文字 <标签名称>``` 的方式来提供自定义的链接文字。
 
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a file is not referenced in a toc-tree. It's
+a great way to ensure that all files have a link directed to them, but
+sometimes, you don't need to insert a link for a file, eg. for our
+`epub-contents` and `pdf-contents` files. In those cases, you can add
+``:orphan:`` at the top of the file, to suppress warnings that the file is not
+in the toc-tree.
+
 描述类和它们的内容
 ------------------
 
-CakePHP 文档使用 `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ 
+CakePHP 文档使用 `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
 提供自定义指令描述 PHP 对象和结构。我们必须使用这些指令和角色，才能保证正确的索引
 和交叉引用。
 
@@ -242,6 +252,20 @@ CakePHP 文档使用 `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdo
 .. rst:directive:: .. php:attr:: name
 
    描述一个类的属性(*property/attribute*)。
+
+Prevent Sphinx to Output Warnings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx will output warnings if a function is referenced in multiple files. It's
+a great way to ensure that you did not add a function two times, but
+sometimes, you actually want to write a function in two or more files, eg.
+`debug object` is referenced in `/development/debugging` and in
+`/core-libraries/global-constants-and-functions`. In this case, you can add
+``:noindex:`` under the function debug to suppress warnings. Keep only
+one reference **without** ``:no-index:`` to still have the function referenced::
+
+    .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+        :noindex:
 
 交叉引用
 ~~~~~~~~

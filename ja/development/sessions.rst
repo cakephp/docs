@@ -300,12 +300,12 @@ CakeSessionHandlerInterface
 
 ..
   The Cache class can be used to store sessions as well.  This allows you to store
-  sessions in a cache like APC, memcache, or Xcache.  There are some caveats to
+  sessions in a cache like APC, Memcached, or XCache.  There are some caveats to
   using cache sessions, in that if you exhaust the cache space, sessions will
   start to expire as records are evicted.
 
 キャッシュクラスはセッションの格納にも使用されます。これはキャッシュ内の\
-セッションを APC, memcache, または Xcache のように格納することを可能に\
+セッションを APC, Memcached, または Xcache のように格納することを可能に\
 します。キャッシュセッションの使用ではいくつか注意する点があります。
 
 ..
@@ -507,7 +507,7 @@ ini 指示子の設定
 
 ``$key`` はドット区切りで ``$value`` の書き込み先を指定します::
 
-    CakeSession::write('Config.language', 'eng');
+    CakeSession::write('Config.language', 'en');
 
 .. php:staticmethod:: delete($key)
 

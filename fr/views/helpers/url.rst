@@ -1,7 +1,7 @@
 Url
 ###
 
-.. php:namespace:: Cake\View\UrlHelper
+.. php:namespace:: Cake\View\Helper
 
 .. php:class:: UrlHelper(View $view, array $config = [])
 
@@ -73,7 +73,7 @@ URL avec des paramètres GET et des paramètres nommés (Ancre)::
     // Affiche
     /posts/search?foo=bar#first
 
-URL utilisant une route labellisée ::
+URL utilisant une route labellisée::
 
     echo $this->Url->build(['_name' => 'produit-page', 'slug' => 'i-m-slug']);
 

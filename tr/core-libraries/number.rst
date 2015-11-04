@@ -5,11 +5,16 @@ Number
 
 .. php:class:: Number
 
-Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
+.. start-cakenumber
 
-Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek yollayın ya da bu sayfanın üzerinde bulunan "Improve This Doc" butonuna tıklamaktan lütfen çekinmeyin.
+.. note::
+    Bu belge şu anda bu sayfa için Türkçe dilinde desteklenmemektedir.
 
-Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
+    Yapmak istediğiniz değişiklikleri göndermek için, Github üzerinden istek yollayın ya da bu sayfanın üzerinde bulunan "Improve This Doc" butonuna tıklamaktan lütfen çekinmeyin.
+
+    Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
+
+.. end-cakenumber
 
 .. meta::
     :title lang=tr: NumberHelper

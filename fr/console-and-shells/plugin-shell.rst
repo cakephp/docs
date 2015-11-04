@@ -11,26 +11,26 @@ prompteur de commandes. Si vous avez besoin d'aide, lancez::
 Charger les Plugins
 -------------------
 
-Avec la tâche `Load` vous pouvez charger les plugins dans votre
-``config/bootstrap.php``. Vous pouvez aussi le faire en lançant::
+Avec la tâche ``Load`` vous pouvez charger les plugins dans votre
+**config/bootstrap.php**. Vous pouvez aussi le faire en lançant::
 
     bin/cake plugin load MyPlugin
 
-Ceci va ajouter ce qui suit dans votre ``config/bootstrap.php``::
+Ceci va ajouter ce qui suit dans votre **config/bootstrap.php**::
 
-    Plugin::load('MyPlugin', []);
+    Plugin::load('MyPlugin');
 
-En ajoutant `-r` ou `-b` à votre commande vous pouvez activer les valeurs
-`bootstrap` et `routes`::
+Ajouter ``-r`` ou ``-b`` à la tâche de chargement va activer le chargement des
+valeurs ``bootstrap`` et ``routes`` du plugin::
 
     bin/cake plugin load -b MyPlugin
 
-    // va retourner
+    // Charge le bootstrap.php du plugin
     Plugin::load('MyPlugin', ['bootstrap' => true]);
 
     bin/cake plugin load -r MyPlugin
 
-    // va retourner
+    // Charge le routes.php du plugin
     Plugin::load('MyPlugin', ['routes' => true]);
 
 Décharger les Plugins
@@ -40,8 +40,8 @@ Vous pouvez décharger un plugin en spécifiant son nom::
 
     bin/cake plugin unload MyPlugin
 
-Ceci va retirer la ligne ``Plugin::load('MyPlugin',...`` de votre
-``config/bootstrap.php``.
+Ceci va retirer la ligne ``Plugin::load('MyPlugin',...)`` de votre
+**config/bootstrap.php**.
 
 Assets des Plugins
 ------------------

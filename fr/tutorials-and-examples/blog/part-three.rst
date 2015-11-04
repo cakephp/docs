@@ -21,16 +21,13 @@ articles dans votre base de données, supprimez-la.
 
 Maintenant ouvrez le fichier **composer.json** de votre application.
 Normalement vous devriez voir que le plugin migrations est déjà dans
-``require``. Si ce n'est pas le cas, ajoutez-le en faisant comme ce qui suit::
+``require``. Si ce n'est pas le cas, ajoutez-le en utilisant::
 
-    "require": {
-        "cakephp/migrations": "~1.0"
-    }
+    composer require cakephp/migrations:~1.0
 
-Ensuite lancez ``composer update``. Le plugin migrations va maintenant être dans
-le dossier **plugins** de votre application. Ajoutez aussi
-``Plugin::load('Migrations');`` dans le fichier bootstrap.php de votre
-application.
+Le plugin migrations va maintenant être dans le dossier **plugins** de votre
+application. Ajoutez aussi ``Plugin::load('Migrations');`` dans le fichier
+bootstrap.php de votre application.
 
 Une fois que le plugin est chargé, lancez la commande suivante pour créer un
 fichier de migration::
@@ -42,7 +39,7 @@ ce qui suit::
 
     <?php
 
-    use Phinx\Migration\AbstractMigration;
+    use Migrations\AbstractMigration;
 
     class CreateArticlesTable extends AbstractMigration
     {
@@ -75,15 +72,17 @@ ce qui suit::
         }
     }
 
-Exécutez une autre commande pour créer une table ``categories``::
+Exécutez une autre commande pour créer une table ``categories``. Si vous voulez
+spécifier une longueur de champ, vous pouvez le faire entre crochets dans le
+type du champ, par exemple::
 
-    bin/cake bake migration CreateCategories parent_id:integer lft:integer rght:integer name:string description:string created modified
+    bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
 
 Ceci va générer le fichier suivant dans **config/Migrations**::
 
     <?php
 
-    use Phinx\Migration\AbstractMigration;
+    use Migrations\AbstractMigration;
 
     class CreateCategoriesTable extends AbstractMigration
     {
@@ -97,17 +96,17 @@ Ceci va générer le fichier suivant dans **config/Migrations**::
             ]);
             $table->addColumn('lft', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => 10,
                 'null' => false,
             ]);
             $table->addColumn('rght', 'integer', [
                 'default' => null,
-                'limit' => 11,
+                'limit' => 10,
                 'null' => false,
             ]);
             $table->addColumn('name', 'string', [
                 'default' => null,
-                'limit' => 255,
+                'limit' => 100,
                 'null' => false,
             ]);
             $table->addColumn('description', 'string', [
@@ -182,7 +181,7 @@ lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de
 CakePHP.
 
 .. note::
-    Si vous utilisez Windows, pensez à utiliser \ à la place de /.
+    Si vous utilisez Windows, pensez à utiliser \\ à la place de /.
 
 Vous devrez modifier ce qui suit dans **src/Template/Categories/add.ctp**
 et **src/Template/Categories/edit.ctp**::
@@ -220,7 +219,7 @@ de template add et edit::
     echo $this->Form->input('rght');
 
 De plus, vous devez désactiver ou retirer les requirePresence du validateur
-pour lft et rght dans votre model CategoriesTable::
+pour ``lft`` et ``rght`` dans votre model CategoriesTable::
 
     public function validationDefault(Validator $validator)
     {
@@ -303,7 +302,7 @@ ceci::
         <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th>id</th>
+                <th>Id</th>
                 <th>Parent Id</th>
                 <th>Lft</th>
                 <th>Rght</th>
@@ -316,10 +315,10 @@ ceci::
         <tbody>
         <?php foreach ($categories as $category): ?>
             <tr>
-                <td><?= $this->Number->format($category->id) ?></td>
-                <td><?= $this->Number->format($category->parent_id) ?></td>
-                <td><?= $this->Number->format($category->lft) ?></td>
-                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= $category->id ?></td>
+                <td><?= $category->parent_id ?></td>
+                <td><?= $category->lft ?></td>
+                <td><?= $category->rght ?></td>
                 <td><?= h($category->name) ?></td>
                 <td><?= h($category->description) ?></td>
                 <td><?= h($category->created) ?></td>

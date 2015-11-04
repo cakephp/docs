@@ -84,7 +84,7 @@ home page. Before you can do that, you'll need to start the development server::
 
 .. note::
 
-    For Windows, the command needs to be ``bin\cake`` (note the backslash).
+    For Windows, the command needs to be ``bin\cake server`` (note the backslash).
 
 This will start PHP's built-in webserver on port 8765. Open up
 **http://localhost:8765** in your web browser to see the welcome page. All the
@@ -382,7 +382,7 @@ also use the :php:func:`h` shortcut function to HTML encode output. You should
 remember to always use ``h()`` when outputting user data to prevent HTML
 injection issues.
 
-The ``tags.ctp`` file we just created follows the CakePHP conventions for view
+The **tags.ctp** file we just created follows the CakePHP conventions for view
 template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 

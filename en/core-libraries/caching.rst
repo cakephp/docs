@@ -32,10 +32,10 @@ to implement your own caching systems. The built-in caching engines are:
 * ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
-  extension. It also interfaces with memcache but provides better performance.
+  extension.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
-  memcached, also provides atomic operations.
+  Memcached, also provides atomic operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cake\\Cache\\Cache` in a consistent manner.  This means you can
@@ -197,7 +197,7 @@ and the results stored in the cache at the provided key.
 For example, you often want to cache remote service call results. You could use
 ``remember()`` to make this simple::
 
-    class IssueService 
+    class IssueService
     {
 
         public function allIssues($repo)
@@ -441,7 +441,7 @@ as in plugins using ``$plugin\Cache\Engine``. src/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either **src/Cache/Engine/MyCustomCacheEngine.php**
-as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
+as an app/libs. Or in **plugin/Cache/Engine/MyCustomCacheEngine.php** as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. ::
 

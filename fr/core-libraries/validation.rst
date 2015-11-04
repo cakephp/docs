@@ -5,7 +5,9 @@ Validation
 
 Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
-données avec simplicité.
+données avec simplicité. Vous pouvez trouver une `liste des règles de validation
+dans l'API
+<http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -105,8 +107,6 @@ Un exemple de ces méthodes est le suivant::
         ->notEmpty('body', 'Un body est nécessaire', 'create')
         ->allowEmpty('header_image', 'update');
 
-Remarquez que ces exemples prennent une clé ``provider()``. L'ajout des
-providers ``Validator`` est expliqué plus loin dans les sections suivantes.
 
 Marquer les Règles comme étant les Dernières à être exécutées
 -------------------------------------------------------------
@@ -241,10 +241,10 @@ d'upload de fichiers::
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-Les méthodes de validation ``allowEmpty()`` et ``notEmpty()`` prennent
-également une fonction appelable en dernier argument, ce qui determine si oui
-ou non la règle doit être appliquée. Par exemple on peut autoriser parfois à
-un champ à être vide::
+Les méthodes de validation ``allowEmpty()``, ``notEmpty()`` et
+``requirePresence()`` prennent également une fonction appelable en dernier
+argument, ce qui determine si oui ou non la règle doit être appliquée. Par
+exemple on peut autoriser parfois à un champ à être vide::
 
     $validator->allowEmpty('tax', function ($context) {
         return !$context['data']['is_taxable'];
@@ -259,6 +259,23 @@ conditions sont vérifiées::
 
 Dans l'exemple ci-dessus, le champ ``email_frequency`` ne peut être laissé vide
 si l'utilisateur veut recevoir la newsletter.
+
+De plus il est aussi possible de demander à ce qu'un champ soit présent sous
+certaines conditions seulement::
+
+    $validator->requirePresence('full_name', function ($context) {
+        return $context['data']['action'] === 'subscribe';
+    });
+    $validator->requirePresence('email');
+
+Ceci demanderait à ce que le champ ``full_name`` soit présent seulement dans le
+cas où l'utilisateur veut créer une inscription, alors que le champ ``email``
+est toujours requis puisqu'il serait aussi demandée lors de l'annulation d'une
+inscription.
+
+.. versionadded:: 3.1.1
+    La possibilité de faire un callable pour ``requirePresence()`` a été ajoutée
+    dans 3.1.1.
 
 Imbriquer des Validators
 ------------------------
@@ -404,9 +421,9 @@ en une fois, vous pouvez utiliser la méthode ``newEntities()``::
         }
     }
 
-Les méthodes ``newEntity()``, ``patchEntity()`` et ``newEntities()``
-vous permettent de spécifier les associations à valider, et les ensembles de
-validation à appliquer en utilisant le paramètre ``options``::
+Les méthodes ``newEntity()``, ``patchEntity()``, ``newEntities()`` et
+``patchEntities()`` vous permettent de spécifier les associations à valider, et
+les ensembles de validation à appliquer en utilisant le paramètre ``options``::
 
     $valid = $this->Articles->newEntity($article, [
       'associated' => [
@@ -427,7 +444,7 @@ consultant la section
 :ref:`Appliquer les Règles d'Application <application-rules>`.
 
 Règles de Validation du Cœur
-=============================
+============================
 
 CakePHP fournit une suite basique de méthodes de validation dans la classe
 ``Validation``. La classe Validation contient un ensemble de méthodes static
@@ -441,7 +458,7 @@ disponibles, et leur utilisation basique.
 
 Certaines des méthodes de validation acceptent des paramètres supplémentaires
 pour définir des conditions limites ou des options valides. Vous pouvez fournir
-ces conditions limite & options comme suit::
+ces conditions limite et options comme suit::
 
     $validator = new Validator();
     $validator

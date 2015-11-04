@@ -4,6 +4,7 @@
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 テーブルオブジェクトは特定のテーブルに保存されたエンティティーのコレクションへのアクセスを提供します。
 それぞれのテーブルは与えられたテーブルによって繋がれた関連付けられたテーブルクラスを持ちます。
@@ -74,7 +75,7 @@
     {
         public function initialize(array $config)
         {
-            $this->entityClass('App\Model\PO');
+            $this->entityClass('App\Model\Entity\PO');
         }
     }
 

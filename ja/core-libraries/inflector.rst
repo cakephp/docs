@@ -66,6 +66,10 @@ Example:
     rulesはInflectorに対して新しい変換ルールを定義します。
     :ref:`inflection-configuration` により詳細な情報があります。
 
+.. _inflection-configuration:
+
+Inflection Configuration
+========================
 
 .. meta::
     :title lang=ja: Inflector

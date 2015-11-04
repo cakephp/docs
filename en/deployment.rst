@@ -32,7 +32,7 @@ For example, you can set an environment variable in your Apache configuration::
 
     SetEnv CAKEPHP_DEBUG 1
 
-And then you can set the debug level dynamically in ``app.php``::
+And then you can set the debug level dynamically in **app.php**::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 
@@ -47,8 +47,8 @@ Check Your Security
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any obvious leaks:
 
-* Ensure you are using the :doc:`/controllers/components/csrf`.
-* You may want to enable :doc:`/controllers/components/security`.
+* Ensure you are using the :doc:`/controllers/components/csrf` component.
+* You may want to enable the :doc:`/controllers/components/security` component.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.
 * Ensure your models have the correct :doc:`/core-libraries/validation` rules

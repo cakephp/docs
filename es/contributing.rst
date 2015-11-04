@@ -1,5 +1,8 @@
-Contributing
-############
+Contribuye
+##########
+
+Existen varias maneras en las que puedes contribuir con CakePHP. Las siguientes
+secciones cubren las diferentes maneras en las que puedes ayudarnos:
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.

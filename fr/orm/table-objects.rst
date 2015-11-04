@@ -4,6 +4,7 @@ Les Objets Table
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
+    :noindex:
 
 Les objets Table fournissent un accès à la collection des entities stockées
 dans une table spécifique. Chaque table dans votre application devra avoir une
@@ -85,7 +86,7 @@ utiliser la méthode ``entityClass()`` pour changer les choses::
     {
         public function initialize(array $config)
         {
-            $this->entityClass('App\Model\PO');
+            $this->entityClass('App\Model\Entity\PO');
         }
     }
 
@@ -180,23 +181,22 @@ buildRules
 
 .. php:method:: buildRules(Event $event, RulesChecker $rules)
 
-L'event ``Model.buildRules`` est déclenché avant et après qu'une instance
-de règles ait été créée et que la méthode ``beforeRules()`` de la table ait
-été appelée.
+L'event ``Model.buildRules`` est déclenché après qu'une instance de règles a été
+créée et après que la méthode ``buildRules()`` de la table a été appelée.
 
 beforeRules
 --------------
 
 .. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
 
-L'event ``Model.beforeRules`` est déclenché avant que les règles ne soient
+L'event ``Model.beforeRules`` est déclenché avant que les règles n'aient été
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
 finale de l'opération de vérification des règles.
 
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
+.. php:method:: afterRules(Event $event, Entity $entity, ArrayObject $options, bool $result, $operation)
 
 L'event ``Model.afterRules`` est déclenché après que les règles soient
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur

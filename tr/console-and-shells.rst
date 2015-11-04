@@ -80,7 +80,7 @@ Bir Kabuk Yaratmak
 
 Haydi Konsolda kullanmak için bir kabuk yaratalaım. Bu örnek
 için basit bir Merhaba Dünya kabuğu yaratacağız. Uygulamanızın
-``Shell`` dizininde ``HelloShell.php`` dosyasını yaratın. Şu
+**src/Shell** dizininde **HelloShell.php** dosyasını yaratın. Şu
 kodları dosyanın içine ekleyin::
 
     namespace App\Shell;
@@ -180,7 +180,7 @@ yüklediğiniz gibi, kabuklarda da yükleyebilirsiniz. Yüklenmiş modeller, kab
             if (empty($this->args[0])) {
                 return $this->error('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0]);
+            $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
@@ -203,8 +203,8 @@ görevlerden oluşmuştur. ``$tasks`` özelliğini kullanarak bir görev tanıma
     }
 
 Standart :term:`eklenti sözdizimi` kullanarak, eklenti görevlerini kullanabilirsiniz.
-Görevler, kendi sınıflarının ismini alan ``Shell/Task/`` dizinlerinde bulunurlar.
-Örneğin yeni bir 'FileGenerator' görevi yaratmak isteseydik ``src/Shell/Task/FileGeneratorTask.php``
+Görevler, kendi sınıflarının ismini alan **Shell/Task/** dizinlerinde bulunurlar.
+Örneğin yeni bir 'FileGenerator' görevi yaratmak isteseydik **src/Shell/Task/FileGeneratorTask.php**
 dosyasını yaratmanız gerekecekti.
 
 Her görev bir ``main()`` metoduna sahip olmak zorundadır. ShellDispatcher
@@ -921,7 +921,7 @@ kullanarak yapabilirsiniz.
 
 Eposta göndermek için Email sınıfını maili göndermek istediğiniz ana makine ile getirmelisiniz::
 
-    use Cake\Network\Email\Email;
+    use Cake\Mailer\Email;
 
     $email = new Email();
     $email->domain('www.example.org');

@@ -40,7 +40,7 @@ votre code DRY::
     ];
 
 Cela va charger le fichier qui se trouve dans
-``config/paginator-templates.php``. Regardez l'exemple ci-dessous pour voir à
+**config/paginator-templates.php**. Regardez l'exemple ci-dessous pour voir à
 quoi doit ressembler le fichier. Vous pouvez aussi charger les templates à
 partir d'un plugin en utilisant la :term:`syntaxe de plugin`::
 
@@ -441,7 +441,7 @@ tabulaire, mais le Helper Paginator disponible dans les vues
 n'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
-`PaginatorHelper <http://api.cakephp.org/3.0/class/paginator-helper>`_
+`PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator
 offre également des fonctionnalités de tri qui peuvent être facilement
 intégrées dans vos en-têtes de colonne de table:

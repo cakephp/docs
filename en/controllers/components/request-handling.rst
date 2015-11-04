@@ -132,28 +132,37 @@ However, you want to allow caching for non-AJAX requests. The
 following would accomplish that::
 
         if ($this->request->is('ajax')) {
-            $this->disableCache();
+            $this->response->disableCache();
         }
         // Continue Controller action
 
 Automatically Decoding Request Data
 ===================================
 
-.. php:method:: addInputType($type, $handler)
-
 Add a request data decoder. The handler should contain a callback, and any
 additional arguments for the callback. The callback should return
 an array of data contained in the request input. For example adding a CSV
-handler in your controllers' beforeFilter could look like::
+handler could look like::
 
-    $parser = function ($data) {
-        $rows = str_getcsv($data, "\n");
-        foreach ($rows as &$row) {
-            $row = str_getcsv($row, ',');
+    class ArticlesController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+            $parser = function ($data) {
+                $rows = str_getcsv($data, "\n");
+                foreach ($rows as &$row) {
+                    $row = str_getcsv($row, ',');
+                }
+                return $rows;
+            };
+            $this->loadComponent('RequestHandler', [
+                'inputTypeMap' => [
+                    'csv' => [$parser]
+                ]
+            ]);
         }
-        return $rows;
-    };
-    $this->RequestHandler->addInputType('csv', [$parser]);
+    }
 
 You can use any `callable <http://php.net/callback>`_ for the handling function.
 You can also pass additional arguments to the callback, this is useful for
@@ -161,8 +170,15 @@ callbacks like ``json_decode``::
 
     $this->RequestHandler->addInputType('json', ['json_decode', true]);
 
+    // After 3.1.0 you should use
+    $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
+
 The above will make ``$this->request->data`` an array of the JSON input data,
 without the additional ``true`` you'd get a set of ``StdClass`` objects.
+
+.. deprecated:: 3.1.0
+    As of 3.1.0 the ``addInputType()`` method is deprecated. You should use
+    ``config()`` to add input types at runtime.
 
 Checking Content-Type Preferences
 =================================
@@ -242,8 +258,6 @@ setting to ``false``::
 Using custom ViewClasses
 ========================
 
-.. php:method:: viewClassMap($type, $viewClass)
-
 When using JsonView/XmlView you might want to override the default serialization
 with a custom View class, or add View classes for other types.
 
@@ -261,6 +275,10 @@ automatically by using the ``viewClassMap`` setting::
             ]
         ]);
     }
+
+.. deprecated:: 3.1.0
+    As of 3.1.0 the ``viewClassMap()`` method is deprecated. You should use
+    ``config()`` to change the viewClassMap at runtime.
 
 .. meta::
     :title lang=en: Request Handling

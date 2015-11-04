@@ -1,3 +1,5 @@
+:orphan:
+
 Conteúdo
 ########
 
@@ -54,9 +56,3 @@ Conteúdo
     debug-kit
     migrations
     appendices
-
-Índices e Tabelas
-=================
-
-* :ref:`genindex`
-* :ref:`modindex`

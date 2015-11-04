@@ -77,7 +77,7 @@ au Client Http devront être nettoyées comme suit::
         'search' => ltrim($this->request->data('search'), '@'),
     ]);
 
-Si il est nécessaire de garder les caractères du début ``@`` dans les chaînes
+S'il est nécessaire de garder les caractères du début ``@`` dans les chaînes
 de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
 ``http_build_query()``::
 
@@ -262,9 +262,15 @@ une authentification Basic, à moins que la clé type ne soit définie::
       'proxy' => [
         'username' => 'mark',
         'password' => 'testing',
-        'port' => 12345,
+        'proxy' => '127.0.0.1:8080',
       ]
     ]);
+
+Le deuxième paramètre du proxy doit être une chaîne avec une IP ou un domaine
+sans protocole. Le nom d'utilisateur et le mot de passe seront passés dans
+les en-têtes de la requête, alors que la chaîne du proxy sera passée dans
+`stream_context_create()
+<http://php.net/manual/en/function.stream-context-create.php>`_.
 
 .. _http_client_scoped_client:
 

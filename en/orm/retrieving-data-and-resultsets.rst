@@ -489,7 +489,7 @@ to ``true``::
 Passing Conditions to Contain
 -----------------------------
 
-When using ``contain`` you are able to restrict the data returned by the
+When using ``contain()`` you are able to restrict the data returned by the
 associations and filter them by conditions::
 
     // In a controller or table method.
@@ -508,7 +508,7 @@ associations and filter them by conditions::
     ensure that the foreign key columns are selected. Failing to select foreign
     key fields will cause associated data to not be present in the final result.
 
-It is also possible to restrict deeply nested associations using the dot
+It is also possible to restrict deeply-nested associations using the dot
 notation::
 
     $query = $articles->find()->contain([
@@ -519,7 +519,7 @@ notation::
     ]);
 
 If you have defined some custom finder methods in your associated table, you can
-use them inside ``contain``::
+use them inside ``contain()``::
 
     // Bring all articles, but only bring the comments that are approved and
     // popular.
@@ -536,7 +536,7 @@ use them inside ``contain``::
     rest of the association types you can use every clause that the query object
     provides.
 
-If you need full control over the query that is generated, you can tell ``contain``
+If you need full control over the query that is generated, you can tell ``contain()``
 to not append the ``foreignKey`` constraints to the generated query. In that
 case you should use an array passing ``foreignKey`` and ``queryBuilder``::
 
@@ -559,7 +559,7 @@ to ``select()``::
         ->select($articlesTable->Users)
         ->contain(['Users']);
 
-Alternatively, if you can multiple associations, you can use ``autoFields()``::
+Alternatively, if you have multiple associations, you can use ``autoFields()``::
 
     // Select id & title from articles, but all fields off of Users, Comments
     // and Tags.
@@ -573,10 +573,14 @@ Alternatively, if you can multiple associations, you can use ``autoFields()``::
 .. versionadded:: 3.1
     Selecting columns via an association object was added in 3.1
 
+.. end-contain
+
 .. _filtering-by-associated-data:
 
 Filtering by Associated Data
 ----------------------------
+
+.. start-filtering
 
 A fairly common query case with associations is finding records 'matching'
 specific associated data. For example if you have 'Articles belongsToMany Tags'
@@ -755,7 +759,7 @@ result set.
 .. versionadded:: 3.1
     Query::leftJoinWith() was added in 3.1
 
-.. end-contain
+.. end-filtering
 
 Changing Fetching Strategies
 ----------------------------
@@ -881,7 +885,7 @@ JSON respects hidden & virtual field settings on all entity objects
 within a result set.
 
 In addition to making serialization easy, result sets are a 'Collection' object and
-support the same methods that :ref:`collection objects<collection-objects>`
+support the same methods that :doc:`collection objects </core-libraries/collections>`
 do. For example, you can extract a list of unique tags on a collection of
 articles quite easily::
 

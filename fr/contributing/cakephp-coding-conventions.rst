@@ -265,7 +265,7 @@ Chaînage des Méthodes
 =====================
 
 Le chaînage des méthodes doit avoir plusieurs méthodes réparties sur des
-lignes distinctes et indentées avec une tabulation::
+lignes distinctes et indentées avec quatre espaces::
 
     $email->from('foo@example.com')
         ->to('bar@example.com')
@@ -402,7 +402,7 @@ Les Balises PHP
 
 Toujours utiliser les balises longues (``<?php ?>``) plutôt que les balises
 courtes (``<? ?>``). L'echo court doit être utilisé dans les fichiers de
-template (``.ctp``) lorsque cela est nécessaire.
+template (**.ctp**) lorsque cela est nécessaire.
 
 Echo court
 ----------
@@ -448,7 +448,7 @@ Variables
 
 Les noms de variable doivent être aussi descriptifs que possible, mais
 aussi courts que possible. Tous les noms de variables doivent démarrer
-avec une lettre minuscule, et doivent être écrites en camelBack si il y a
+avec une lettre minuscule, et doivent être écrites en camelBack s'il y a
 plusieurs mots. Les variables contenant des objets doivent d'une certaine
 manière être associées à la classe d'où elles proviennent. Exemple::
 

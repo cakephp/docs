@@ -5,13 +5,12 @@ Form
 
 .. php:class:: FormHelper(View $view, array $config = [])
 
-Le Helper Form prend en charge la plupart des opérations lourdes
-de la création de formulaire. Le Helper Form se concentre sur la
-possibilité de créer des formulaires rapidement, d'une manière qui
-permettra de rationaliser la validation, la re-population et la mise
-en page (layout). Le Helper Form est aussi flexible - Il va faire à
-peu près tout pour vous en utilisant les conventions, ou vous
-pouvez utiliser des méthodes spécifiques pour ne prendre
+Le Helper Form prend en charge la plupart des opérations lourdes de la création
+de formulaire. Le Helper Form se concentre sur la possibilité de créer des
+formulaires rapidement, d'une manière qui permettra de rationaliser la
+validation, la re-population et la mise en page (layout). Le Helper Form est
+aussi flexible - Il va faire à peu près tout pour vous en utilisant les
+conventions, ou vous pouvez utiliser des méthodes spécifiques pour ne prendre
 uniquement que ce dont vous avez besoin.
 
 Création de Formulaire
@@ -23,11 +22,11 @@ La première méthode que vous aurez besoin d'utiliser pour tirer pleinement
 profit du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
 affichera une balise d'ouverture de formulaire.
 
-Tous les paramètres sont optionnels. Si ``create()`` est appelée sans
-paramètre, CakePHP supposera que vous voulez créer un formulaire en rapport
-avec le controller courant, via l'URL actuelle. par défaut, la méthode de
-soumission par des formulaires est POST. Si vous appelez ``create()`` dans une
-vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
+Tous les paramètres sont optionnels. Si ``create()`` est appelée sans paramètre,
+CakePHP supposera que vous voulez créer un formulaire en rapport avec le
+controller courant, via l'URL actuelle. par défaut, la méthode de soumission par
+des formulaires est POST. Si vous appelez ``create()`` dans une vue pour
+UsersController::add(), vous verrez la sortie suivante dans la vue:
 
 .. code-block:: html
 
@@ -35,8 +34,8 @@ vue pour UsersController::add(), vous verrez la sortie suivante dans la vue:
 
 L'argument ``$model`` est utilisé comme 'context' du formulaire. Il y a
 plusieurs contextes de formulaires intégrés et vous pouvez ajouter les vôtres,
-ce que nous allons voir dans la prochaine section. Ceux intégrés
-correspondent aux valeurs suivantes de ``$model``:
+ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
+aux valeurs suivantes de ``$model``:
 
 * Une instance ``Entity`` ou un iterateur qui mappe vers ``EntityContext``, ce
   contexte permet au FormHelper de fonctionner avec les résultats à partir de
@@ -70,15 +69,13 @@ Affichera:
 
     <form method="post" action="/articles/add">
 
-Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
-ArticlesController.
-Cependant, vous pouvez utiliser la même logique pour créer
-un formulaire d'édition. Le FormHelper utilise la propriété
-``$this->request->data`` pour detecter automatiquement s'il faut créer un
-formulaire d'ajout (add) ou un d'édition (edit). Si l'entity fournie n'est pas
-'nouvelle', le form va être créé comme un formulaire d'édition. Par exemple, si
-nous naviguons vers http://example.org/articles/edit/5, nous pourrions faire ce
-qui suit::
+Celui-ci va POSTer les données de formulaire à l'action ``add()`` de ``ArticlesController``.
+Cependant, vous pouvez utiliser la même logique pour créer un formulaire
+d'édition. Le FormHelper utilise la propriété ``$this->request->data`` pour
+détecter automatiquement s'il faut créer un formulaire d'ajout (add) ou un
+d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être créé
+comme un formulaire d'édition. Par exemple, si nous naviguons vers
+**http://example.org/articles/edit/5**, nous pourrions faire ce qui suit::
 
     // src/Controller/ArticlesController.php:
     public function edit($id = null)
@@ -127,9 +124,9 @@ Affichera:
 
 En spécifiant 'file' cela changera la méthode de soumission à 'post', et
 ajoutera un enctype "multipart/form-data" dans le tag du formulaire.
-Vous devez l'utiliser si vous avez des demandes de fichiers dans
-votre formulaire. L'absence de cet attribut enctype empêchera le
-fonctionnement de l'envoi de fichiers::
+Vous devez l'utiliser si vous avez des demandes de fichiers dans votre
+formulaire. L'absence de cet attribut enctype empêchera le fonctionnement de
+l'envoi de fichiers::
 
     echo $this->Form->create($article, ['type' => 'file']);
 
@@ -363,7 +360,7 @@ Ensuite, ajouter les lignes suivantes à votre template de vue::
 Si votre nom de model est composé de deux mots ou plus,
 ex. "UserGroup", quand vous passez les données en utilisant set()
 vous devrez nommer vos données dans un format CamelCase
-(les Majuscules séparent les mots) et au pluriel comme ceci ::
+(les Majuscules séparent les mots) et au pluriel comme ceci::
 
     $this->set('userGroups', $this->UserGroups->find('list'));
 
@@ -886,8 +883,9 @@ Crée un jeu d'inputs radios.
   première option. Quand à ``true``, le label radio sera 'vide'. Définissez
   cette option pour contrôler la valeur du label.
 
-Generally ``$options`` is a simple key => value pair. However, if you need to
-put custom attributes on your radio buttons you can use an expanded format::
+Généralement, ``$options`` est une simple paire clé => valeur. Cependant, si
+vous avez besoin de mettre des attributs personnalisés sur vos boutons radio,
+vous pouvez utiliser le format étendu::
 
     echo $this->Form->radio(
         'favorite_color',
@@ -898,7 +896,7 @@ put custom attributes on your radio buttons you can use an expanded format::
         ]
     );
 
-    // Will output
+    // Affichera
     <input type="hidden" name="favorite_color" value="">
     <label for="favorite-color-r">
         <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
@@ -948,7 +946,7 @@ sélectionnées. Par défaut à ``true``::
   manuellement des options pour un input select (menu de sélection),
   ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
   le Helper Form supposera que la cible est un input select (menu de
-  sélection) ::
+  sélection)::
 
     echo $this->Form->select('field', [1,2,3,4,5]);
 
@@ -1163,6 +1161,35 @@ vous pouvez remplacer le template ``dateWidget``. Par défaut le template
 
     {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
 
+Pour créer un input datetime avec des classes/attributs personnalisés pour une
+select box spécifique, vous pouvez utiliser les options dans chaque component::
+
+    echo $this->Form->datetime('released', [
+        'year' => [
+            'class' => 'year-classname',
+        ],
+        'month' => [
+            'class' => 'month-class',
+            'data-type' => 'month',
+        ],
+    ]);
+
+Ce qui créerait les deux selects suivants:
+
+.. code-block:: html
+
+    <select name="released[year]" class="year-class">
+        <option value="" selected="selected"></option>
+        <option value="00">0</option>
+        <option value="01">1</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+    <select name="released[month]" class="month-class" data-type="month">
+        <option value="" selected="selected"></option>
+        <option value="01">January</option>
+        <!-- .. snipped for brevity .. -->
+    </select>
+
 Créer des Inputs Time
 ---------------------
 
@@ -1186,7 +1213,7 @@ n'inclura pas une option vide:
 
 Par exemple, pour créer un intervalle de temps avec des minutes selectionnables
 toutes les 15 minutes, et pour l'appliquer aux selects, vous pourriez faire
-ceci ::
+ceci::
 
     echo $this->Form->time('released', [
         'interval' => 15,
@@ -1652,13 +1679,15 @@ Par exemple::
     // Crée un ensemble d'inputs radio avec notre div personnalisé autour
     echo $this->Form->radio('User.email_notifications', ['y', 'n']);
 
-Similar to input containers, the ``input()`` method will also attempt to use
-distinct templates for each form group. A form group is a combo of label and
-input. For example, when creating a radio input the ``radioFormGroup`` will be
-used if it is present. If that template is missing by default each set of label
-& input is rendered using the ``formGroup`` template. For example::
+De la même manière qu'avec les conteneurs d'input, la méthode ``ìnput()``
+essayera d'utiliser différents templates pour chaque groupe de formulaire
+(formGroup). Un group de formulaire est un combo d'un label et d'une input.
+Par exemple, lorsque vous créez des inputs de type radio, le template
+``radioFormGroup`` sera utilisé s'il est présent. Si ce template est manquant,
+par défaut chaque ensemble label & input sera généré en utilisant le template
+``formGroup``::
 
-    // Add custom radio form group
+    // Ajoute un groupe de formulaire pour radio personnalisé
     $this->Form->templates([
         'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
     ]);
@@ -1759,8 +1788,9 @@ générées, définissez les à ``false`` dans le paramètre fields::
 Créer des Inputs pour les Données Associées
 ===========================================
 
-Creating forms for associated data is straightforward and is closely related to
-the paths in your entity's data. Assuming the following table relations:
+Créer des formulaires pour les données associées est assez simple et est
+étroitement lié au chemins des données de votre entity. Imaginons les
+relations suivantes:
 
 * Authors HasOne Profiles
 * Authors HasMany Articles
@@ -1768,20 +1798,20 @@ the paths in your entity's data. Assuming the following table relations:
 * Articles BelongsTo Authors
 * Articles BelongsToMany Tags
 
-If we were editing an article with its associations loaded we could
-create the following inputs::
+Si nous éditions un article avec ces associations chargées, nous pourrions
+créer les inputs suivantes::
 
     $this->Form->create($article);
 
-    // Article inputs.
+    // Inputs article
     echo $this->Form->input('title');
 
-    // Author inputs (belongsTo)
+    // Inputs auteur (belongsTo)
     echo $this->Form->input('author.id');
     echo $this->Form->input('author.first_name');
     echo $this->Form->input('author.last_name');
 
-    // Author profile (belongsTo + hasOne)
+    // Profile de l'auteur (belongsTo + hasOne)
     echo $this->Form->input('author.profile.id');
     echo $this->Form->input('author.profile.username');
 
@@ -1791,25 +1821,25 @@ create the following inputs::
     echo $this->Form->input('tags.1.id');
     echo $this->Form->input('tags.1.name');
 
-    // Multiple select element for belongsToMany
+    // Select multiple pour belongsToMany
     echo $this->Form->input('tags._ids', [
         'type' => 'select',
         'multiple' => true,
         'options' => $tagList,
     ]);
 
-    // Inputs for the joint table (articles_tags)
+    // Inputs pour la table de jointure (articles_tags)
     echo $this->Form->input('tags.0._joinData.starred');
     echo $this->Form->input('tags.1._joinData.starred');
 
-    // Comments inputs (hasMany)
+    // Inputs commentaires (hasMany)
     echo $this->Form->input('comments.0.id');
     echo $this->Form->input('comments.0.comment');
     echo $this->Form->input('comments.1.id');
     echo $this->Form->input('comments.1.comment');
 
-The above inputs could then be marshalled into a completed entity graph using
-the following code in your controller::
+Le code ci-dessus pourrait ensuite être converti en un graph d'entity en
+utilisant le code suivant dans votre controller::
 
     $article = $this->Articles->patchEntity($article, $this->request->data, [
         'associated' => [
@@ -1895,7 +1925,7 @@ les widgets sont définis comme des paramètres::
     ]);
 
 Si votre widget nécessite d'autres widgets, le FormHelper peut remplir ces
-dépendances lorsqu'elles sont déclarées ::
+dépendances lorsqu'elles sont déclarées::
 
     $this->loadHelper('Form', [
         'widgets' => [
@@ -1965,7 +1995,6 @@ inputs spéciales ``_Token`` soient générées.
 
     Génère un champ caché avec un hash de sécurité basé sur les champs utilisés
     dans le formulaire.
-
 
 .. meta::
     :title lang=fr: FormHelper

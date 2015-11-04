@@ -107,7 +107,10 @@ CakePHP, comme le débogage et la traduction de contenu.
     la ligne depuis laquelle il a été appelé.
     Voir aussi  :doc:`/development/debugging`
 
-.. php:function:: env(string $key)
+.. php:function:: env(string $key, string $default = null)
+
+    .. versionadded:: 3.1.1
+        Le paramètre ``$default`` a été ajouté.
 
     Récupère une variable d'environnement depuis les sources disponibles.
     Utilisé en secours si ``$_SERVER`` ou ``$_ENV`` sont désactivés.
@@ -176,6 +179,10 @@ dans votre application.
 .. php:const:: CAKE_CORE_INCLUDE_PATH
 
     Chemin vers la racine du répertoire lib.
+
+.. php:const:: CONFIG
+
+   Chemin vers le répertoire config.
 
 .. php:const:: CORE_PATH
 

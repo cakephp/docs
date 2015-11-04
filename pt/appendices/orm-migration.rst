@@ -1,5 +1,5 @@
-New ORM Upgrade Guide
-#####################
+Guia de atualização para o novo ORM
+###################################
 
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta

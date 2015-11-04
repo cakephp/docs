@@ -78,9 +78,8 @@ views and locale files. You can add multiple paths to ``App.paths.templates``,
 ``App.paths.plugins``, ``App.paths.locales`` to configure multiple paths for
 templates, plugins and locale files respectively.
 
-The config key ``www_root`` has been changed to ``wwwRoot`` for consistency.
-Please adjust your ``app.php`` config file as well as any usage of
-``Configure::read('App.wwwRoot')``.
+The config key ``www_root`` has been changed to ``wwwRoot`` for consistency. Please adjust
+your **app.php** config file as well as any usage of ``Configure::read('App.wwwRoot')``.
 
 New ORM
 =======
@@ -103,21 +102,20 @@ Basics
 Debugging
 =========
 
-* ``Configure::write('debug', $bool)`` does not support 0/1/2 anymore. A simple
-  boolean is used instead to switch debug mode on or off.
+* ``Configure::write('debug', $bool)`` does not support 0/1/2 anymore. A simple boolean
+  is used instead to switch debug mode on or off.
 
 Object settings/configuration
 =============================
 
-* Objects used in CakePHP now have a consistent instance-configuration
-  storage/retrieval system. Code which previously accessed for example:
-  ``$object->settings`` should instead be updated to use ``$object->config()``.
+* Objects used in CakePHP now have a consistent instance-configuration storage/retrieval
+  system. Code which previously accessed for example: ``$object->settings`` should instead
+  be updated to use ``$object->config()``.
 
 Cache
 =====
 
-* ``Memcache`` engine has been removed, use
-  :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached` instead.
+* ``Memcache`` engine has been removed, use :php:class:`Cake\\Cache\\Cache\\Engine\\Memcached` instead.
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 * :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
@@ -131,16 +129,15 @@ Cache
   cache configurations to replace runtime configuration tweaks previously
   possible with ``Cache::set()``.
 * All ``CacheEngine`` subclasses now implement a ``config()`` method.
-* :php:meth:`Cake\\Cache\\Cache::readMany()`,
-  :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
+* :php:meth:`Cake\\Cache\\Cache::readMany()`, :php:meth:`Cake\\Cache\\Cache::deleteMany()`,
   and :php:meth:`Cake\\Cache\\Cache::writeMany()` were added.
 
-All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are
-responsible for handling the configured key prefix. The
-:php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting the
-duration on write - the duration is taken from the cache engine's runtime
-config. Calling a cache method with an empty key will now throw an
-:php:class:`InvalidArgumentException`, instead of returning ``false``.
+All :php:class:`Cake\\Cache\\Cache\\CacheEngine` methods now honor/are responsible for handling the
+configured key prefix. The :php:meth:`Cake\\Cache\\CacheEngine::write()` no longer permits setting
+the duration on write - the duration is taken from the cache engine's runtime config. Calling a
+cache method with an empty key will now throw an :php:class:`InvalidArgumentException`, instead
+of returning ``false``.
+
 
 Core
 ====
@@ -180,7 +177,7 @@ Configure
 - :php:meth:`Cake\\Core\\Configure::consume()` was added.
 - :php:meth:`Cake\\Core\\Configure::load()` now expects the file name without
   extension suffix as this can be derived from the engine. E.g. using PhpConfig
-  use ``app`` to load ``app.php``.
+  use ``app`` to load **app.php**.
 - Setting a ``$config`` variable in PHP config file is deprecated.
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` now expects the config
   file to return an array.
@@ -199,8 +196,8 @@ of these methods have been extracted into traits. You can use the
 Console
 =======
 
-The ``cake`` executable has been moved from the ``app/Console`` directory to the
-``bin`` directory within the application skeleton. You can now invoke CakePHP's
+The ``cake`` executable has been moved from the **app/Console** directory to the
+**bin** directory within the application skeleton. You can now invoke CakePHP's
 console with ``bin/cake``.
 
 TaskCollection Replaced
