@@ -1,5 +1,5 @@
-Shells & Outils de Console
-##########################
+Shells, Tasks & Outils de Console
+#################################
 
 .. php:namespace:: Cake\Console
 
@@ -1086,5 +1086,5 @@ Plus de sujets
     console-and-shells/upgrade-shell
 
 .. meta::
-    :title lang=fr: Shells & Outils de Console
+    :title lang=fr: Shells, Tasks & Outils de Console
     :keywords lang=fr: scripts de shell,système shell,classes application,tâches de fond,script en ligne,tâche cron,réponse requête request response,système path,acl,nouveaux projets,shells,spécifiques,paramètres,i18n,cakephp,répertoire,maintenance,idéal,applications,mvc

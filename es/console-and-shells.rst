@@ -1,5 +1,5 @@
-Shells & Console Tools
-######################
+Shells, Tasks & Console Tools
+#############################
 
 .. php:namespace:: Cake\Console
 
@@ -28,5 +28,5 @@ More Topics
     console-and-shells/upgrade-shell
 
 .. meta::
-    :title lang=es: Shells & Console Tools
+    :title lang=es: Shells, Tasks & Console Tools
     :keywords lang=es: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
