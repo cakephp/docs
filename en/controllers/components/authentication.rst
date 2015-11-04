@@ -219,12 +219,9 @@ working with a login form could look like::
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Flash->error(
-                    __('Username or password is incorrect'),
-                    'default',
-                    [],
-                    'auth'
-                );
+                $this->Flash->error(__('Username or password is incorrect'), [
+                    'key' => 'auth'
+                ]);
             }
         }
     }
