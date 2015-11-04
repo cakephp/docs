@@ -14,7 +14,7 @@ Requerimentos
 - O CakePHP 3.x precisa da extensão mbstring.
 - O CakePHP 3.x precisa da extensão intl.
 
-.. atenção::
+.. warning::
 
     O CakePHP 3.0 não irá funcionar se você não atender aos requisitos acima.
 
