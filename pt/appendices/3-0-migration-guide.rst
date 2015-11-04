@@ -74,7 +74,7 @@ para ver como a configuração é feita.
 
 Você não pode mais usar o ``App::build()`` para configurar caminhos adicionais
 de classes. Ao invés disso, você deve mapear caminhos adicionais usando o
-autoloader da sua aplicação. Veja a seção :ref:`additional-class-paths` para
+autoloader da sua aplicação. Veja a seção :ref:`Caminhos de Classes Adicionais <additional-class-paths>` para
 mais informações.
 
 Três novas variáveis de configuração fornecem o caminho de configuração para
