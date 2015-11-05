@@ -198,5 +198,5 @@
     代わりにデフォルトで bcrypt を利用する ``DefaultPasswordHasher`` クラスを利用すべきです。
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security
+    :title lang=ja: Security
+    :keywords lang=ja: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security

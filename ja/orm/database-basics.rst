@@ -10,7 +10,7 @@ CakePHPデータベースアクセス層は、リレーショナルデータベ�
 =================
 
 この章で説明する機能は、下位レベルのデータベースアクセスAPIでできることを説明します。
-もし ORM についてもっと詳細に知りたい場合は、 :doc:`クエリービルダー</orm/query-builder>` 
+もし ORM についてもっと詳細に知りたい場合は、 :doc:`クエリービルダー</orm/query-builder>`
 の項か、 :doc:`/orm/table-objects` の項を参照してください。
 
 データベースコネクションを作る一番簡単な方法は、 ``DSN`` 文字列を使います。::
@@ -116,7 +116,7 @@ Delete 文の実行
 =============
 
 慣例として、データベース接続は **config/app.php** に設定します。
-このファイルに定義された接続情報は、アプリケーションが使用する接続構成を生成する 
+このファイルに定義された接続情報は、アプリケーションが使用する接続構成を生成する
 :php:class:`Cake\\Datasource\\ConnectionManager` に引き渡します。
 サンプルとなる接続情報が **config/app.default.php** にあります。
 サンプルの接続設定は、次のようになります。::
@@ -204,7 +204,7 @@ schema
     PostgreSQL データベースで特定のスキーマを使う時に設定します。
 unix_socket
     Unixソケットファイルを経由して接続することをサポートしているドライバによって
-    使用されます。PostgreSQLを使用していて、Unixソケットを使用する場合は、 
+    使用されます。PostgreSQLを使用していて、Unixソケットを使用する場合は、
     host を空白のままにします。
 ssl_key
     SSLキー・ファイルへのファイルパス。 （MySQLのみでサポートされています）。
@@ -219,7 +219,7 @@ log
     有効なクエリーで ``debug`` レベルの時に、 ``queriesLog`` スコープでログ出力されます。
 quoteIdentifiers
     あなたがテーブルやカラム名に予約語や特殊文字を使用している場合は ``true`` に設定します。
-    この設定を有効にすると、SQLを生成する際に :doc:`クエリービルダー</orm/query-builder>` 
+    この設定を有効にすると、SQLを生成する際に :doc:`クエリービルダー</orm/query-builder>`
     によって引用符で囲まれたクエリーが生成されます。
     これはクエリーを実行する前に横断的に処理を行う必要があるため、パフォーマンスを
     低下させることに注意してください。
@@ -236,10 +236,10 @@ cacheMetadata
 この時点で、あなたは :doc:`/intro/conventions` を見たいと思うかもしれません。
 正しいテーブル名（といくつかのカラムの追加）によって、いくつかの機能を獲得して、
 設定を回避することができます。
-例えば、もしデータベースのテーブル名が big\_boxes でしたら、 テーブルクラス 
+例えば、もしデータベースのテーブル名が big\_boxes でしたら、 テーブルクラス
 BigBoxesTable と、コントローラ BigBoxesController は、全て自動的に一緒に
 動作します。
-慣例としてデータベースのテーブル名は、例えば bakers, pastry\_stores, savory\_cakes 
+慣例としてデータベースのテーブル名は、例えば bakers, pastry\_stores, savory\_cakes
 といった具合に、アンダースコア区切り・小文字・複数形とします。
 
 .. php:namespace:: Cake\Datasource
@@ -320,8 +320,8 @@ date
 datetime
     タイムゾーン情報を持たない DATETIME 型に変換されます。
     PostgreSQL と SQL Server では、TIMESTAMP 型に変換されます。
-    この型のデフォルトの戻り値は、内蔵の ``DateTime`` クラスと 
-    `Carbon <https://github.com/briannesbitt/Carbon>`_ を拡張した 
+    この型のデフォルトの戻り値は、内蔵の ``DateTime`` クラスと
+    `Carbon <https://github.com/briannesbitt/Carbon>`_ を拡張した
     :php:class:`Cake\\I18n\\Time` クラスになります。
 timestamp
     TIMESTAMP 型に変換します。
@@ -333,7 +333,7 @@ time
 
 また、各型は PHP と SQL の表現の変換を行う機能も提供します。
 これらのメソッドはクエリー実行時に型のヒントに基づいて呼び出されます。
-例えば、 'datetime' という名前の項目なら、入力パラメータを自動的に ``DateTime`` から 
+例えば、 'datetime' という名前の項目なら、入力パラメータを自動的に ``DateTime`` から
 timestamp か 整形した日付文字列に変換します。
 同様に 'binary' という名前の項目ならファイルハンドラを受け入れ、データを読み込むときには
 ファイルハンドラを生成します。
@@ -408,22 +408,22 @@ Type クラスは次のメソッドを実装することが期待されます。
 
     Type::map('json', 'App\Database\Type\JsonType');
 
-こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に 
+こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に
 JSON データを変換してクエリーを作成します。
 あなたは Table の :ref:`_initializeSchema() メソッド <saving-complex-types>` で、
 新たに作った型のマッピングをすることができます。::
-    
+
     use Cake\Database\Schema\Table as Schema;
 
     class WidgetsTable extends Table
     {
-    
+
         protected function _initializeSchema(Schema $schema)
         {
             $schema->columnType('widget_prefs', 'json');
             return $schema;
         }
-    
+
     }
 
 Connection クラス
@@ -509,7 +509,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 
 コネクションオブジェクトは、データベーストランザクションを行うためのいくつかの簡単な
 方法を提供します。
-トランザクション操作の最も基本的な方法は、SQL構文と同じような ``begin()`` , 
+トランザクション操作の最も基本的な方法は、SQL構文と同じような ``begin()`` ,
 ``commit()`` , ``rollback()`` を使用するものです。::
 
     $conn->begin();
@@ -767,4 +767,4 @@ CakePHP にはメタデータキャッシュを管理するための CLI ツー�
 
 .. meta::
     :title lang=ja: Database Basics
-    :keywords lang=en: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching
+    :keywords lang=ja: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching
