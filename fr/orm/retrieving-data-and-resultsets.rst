@@ -116,7 +116,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     foreach ($query as $row) {
     }
 
-    // Appeler execute va exécuter la requête
+    // Appeler all() va exécuter la requête
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
@@ -789,7 +789,7 @@ la propriété ``total_comments`` pour chacun d'eux.
 C'est utile par exemple pour rapporter le nombre d'articles taggés par l'auteur
 avec un certain mot::
 
-    $query = $authorsTable->find();
+    $query = $authorsTable
         ->find()
         ->select(['total_articles' => $query->func()->count('Articles.id')])
         ->leftJoinWith('Articles.Tags', function ($q) {
