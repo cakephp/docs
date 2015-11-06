@@ -60,6 +60,9 @@ contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se
 réfère à un regroupement arbitraire de messages de traduction. Si aucun groupe
 n'est utilisé, le groupe par défaut est sélectionné.
 
+Les messages du coeur extraits de la libairie cakephp peuvent être stockés
+séparément dans un fichier **cake.po** dans **src/Locale/**.
+
 Les plugins peuvent également contenir des fichiers de traduction, la convention
 est d'utiliser la version ``under_scored`` du nom du plugin comme domaine de la
 traduction des messages::
