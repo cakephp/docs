@@ -2,7 +2,7 @@ Themes
 ######
 
 You can take advantage of themes, making it easy to switch the look and feel of
-your page quickly and easily. Themes in CakePHP are simply plugins that focus on
+your page quickly. Themes in CakePHP are simply plugins that focus on
 providing template files. In addition to template files, they can also provide
 helpers and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.

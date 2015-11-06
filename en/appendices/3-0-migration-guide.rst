@@ -22,9 +22,9 @@ Upgrade Tool
 ============
 
 While this document covers all the breaking changes and improvements made in
-CakePHP 3.0, we've also created a console application to help you easily
-complete some of the time consuming mechanical changes. You can `get the upgrade
-tool from github <https://github.com/cakephp/upgrade>`_.
+CakePHP 3.0, we've also created a console application to help you complete some
+of the time consuming mechanical changes. You can `get the upgrade tool from
+github <https://github.com/cakephp/upgrade>`_.
 
 Application Directory Layout
 ============================
@@ -37,7 +37,7 @@ when updating your application.
 CakePHP should be installed with Composer
 =========================================
 
-Since CakePHP can no longer easily be installed via PEAR, or in a shared
+Since CakePHP can no longer be installed via PEAR, or in a shared
 directory, those options are no longer supported. Instead you should use
 `Composer <http://getcomposer.org>`_ to install CakePHP into your application.
 
@@ -405,7 +405,7 @@ Filter\AssetFilter
   of issues with JavaScript libraries like TinyMCE and environments with
   short_tags enabled.
 * Support for the ``Asset.filter`` configuration and hooks were removed. This
-  feature can easily be replaced with a plugin or dispatcher filter.
+  feature should be replaced with a plugin or dispatcher filter.
 
 
 Network
@@ -457,7 +457,7 @@ for using the session object.
 * The session cookie timeout is automatically updated in tandem with the timeout
   in the session data.
 * The path for session cookie now defaults to app's base path instead of "/".
-  Also new config variable ``Session.cookiePath`` has been added to easily
+  A new configuration variable ``Session.cookiePath`` has been added to
   customize the cookie path.
 * A new convenience method :php:meth:`Cake\\Network\\Session::consume()` has been added
   to allow reading and deleting session data in a single step.
@@ -485,7 +485,7 @@ Network\\Email
   removal of email configuration.
 * :php:meth:`Cake\\Network\\Email\\Email::configTransport()` has been added to allow the
   definition of transport configurations. This change removes transport options
-  from delivery profiles and allows you to easily re-use transports across email
+  from delivery profiles and allows you to re-use transports across email
   profiles.
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` has been added to allow the
   removal of transport configuration.
@@ -648,7 +648,7 @@ SecurityComponent
 - ``SecurityComponent::$disabledFields()`` has been removed, use
   ``SecurityComponent::$unlockedFields()``.
 - The CSRF related features in SecurityComponent have been extracted and moved
-  into a separate CsrfComponent. This allows you more easily use CSRF protection
+  into a separate CsrfComponent. This allows you to use CSRF protection
   without having to use form tampering prevention.
 - Configuration options are no longer set as public properties.
 - The methods ``requireAuth()`` and ``requireSecure()`` no longer accept "var args".
@@ -902,7 +902,7 @@ FormHelper has been entirely rewritten for 3.0. It features a few large changes:
 * FormHelper works with the new ORM. But has an extensible system for
   integrating with other ORMs or datasources.
 * FormHelper features an extensible widget system that allows you to create new
-  custom input widgets and easily augment the built-in ones.
+  custom input widgets and augment the built-in ones.
 * String templates are the foundation of the helper. Instead of munging arrays
   together everywhere, most of the HTML FormHelper generates can be customized
   in one central place using template sets.

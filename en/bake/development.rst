@@ -2,7 +2,7 @@ Extending Bake
 ##############
 
 Bake features an extensible architecture that allows your application or plugins
-to easily modify or add-to the base functionality. Bake makes use of a dedicated
+to modify or add-to the base functionality. Bake makes use of a dedicated
 view class which does not use standard PHP syntax.
 
 Bake Events

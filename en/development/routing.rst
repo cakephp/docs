@@ -11,7 +11,7 @@ are structured.
 
 Routing in CakePHP also encompasses the idea of reverse routing,
 where an array of parameters can be transformed into a URL string.
-By using reverse routing, you can more easily re-factor your application's
+By using reverse routing, you can re-factor your application's
 URL structure without having to update all your code.
 
 .. index:: routes.php
@@ -188,7 +188,7 @@ allows you link to ``/government`` rather than ``/pages/display/5``.
 Another common use for the Router is to define an "alias" for a
 controller. Let's say that instead of accessing our regular URL at
 ``/users/some_action/5``, we'd like to be able to access it by
-``/cooks/some_action/5``. The following route easily takes care of
+``/cooks/some_action/5``. The following route takes care of
 that::
 
     $routes->connect(
@@ -557,7 +557,7 @@ Plugin Routing
 
 .. php:staticmethod:: plugin($name, $options = [], $callback)
 
-Routes for :doc:`/plugins` are most easily created using the ``plugin()``
+Routes for :doc:`/plugins` should be created using the ``plugin()``
 method. This method creates a new routing scope for the plugin's routes::
 
     Router::plugin('DebugKit', function ($routes) {
@@ -724,7 +724,7 @@ preference:
 #. The REQUEST\_METHOD header
 
 The \_method POST variable is helpful in using a browser as a
-REST client (or anything else that can do POST easily). Just set
+REST client (or anything else that can do POST). Just set
 the value of \_method to the name of the HTTP request method you
 wish to emulate.
 
@@ -923,7 +923,7 @@ Generating URLs
 .. php:staticmethod:: url($url = null, $full = false)
 
 Generating URLs or Reverse routing is a feature in CakePHP that is used to
-allow you to easily change your URL structure without having to modify all your
+allow you to change your URL structure without having to modify all your
 code. By using :term:`routing arrays <routing array>` to define your URLs, you
 can later configure routes and the generated URLs will automatically update.
 
@@ -1101,7 +1101,7 @@ Callback filter functions should expect the following parameters:
 
 The URL filter function should *always* return the params even if unmodified.
 
-URL filters allow you to easily implement features like persistent parameters::
+URL filters allow you to implement features like persistent parameters::
 
     Router::addUrlFilter(function ($params, $request) {
         if (isset($request->params['lang']) && !isset($params['lang'])) {

@@ -38,7 +38,7 @@ Using Filters
 =============
 
 Filters are usually enabled in your application's **bootstrap.php** file, but
-you could easily load them any time before the request is dispatched.  Adding
+you could load them any time before the request is dispatched.  Adding
 and removing filters is done through :php:class:`Cake\\Routing\\DispatcherFactory`. By
 default, the CakePHP application template comes with a couple filter classes
 already enabled for all requests; let's take a look at how they are added::

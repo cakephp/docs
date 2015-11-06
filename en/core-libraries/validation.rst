@@ -301,7 +301,7 @@ Creating Reusable Validators
 ----------------------------
 
 While defining validators inline where they are used makes for good example
-code, it doesn't lead to easily maintainable applications. Instead, you should
+code, it doesn't lead to maintainable applications. Instead, you should
 create ``Validator`` sub-classes for your reusable validation logic::
 
     // In src/Model/Validation/ContactValidator.php

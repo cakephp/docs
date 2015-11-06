@@ -5,7 +5,7 @@ Http Client
 
 .. php:class:: Client(mixed $config = [])
 
-CakePHP includes a basic but powerful HTTP client which can be easily used for
+CakePHP includes a basic but powerful HTTP client which can be used for
 making requests. It is a great way to communicate with webservices, and
 remote APIs.
 

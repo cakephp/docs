@@ -274,7 +274,7 @@ an increasing level of severity:
 
 You can refer to these levels by name when configuring loggers, and when writing
 log messages. Alternatively, you can use convenience methods like
-:php:meth:`Cake\\Log\\Log::error()` to clearly and easily indicate the logging
+:php:meth:`Cake\\Log\\Log::error()` to clearly indicate the logging
 level. Using a level that is not in the above levels will result in an
 exception.
 

@@ -532,7 +532,7 @@ The above generates SQL similar to::
     ))
 
 By using functions as the parameters to ``orWhere()`` and ``andWhere()``,
-you can easily compose conditions together with the expression objects::
+you can compose conditions together with the expression objects::
 
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
@@ -1244,7 +1244,7 @@ a few calculated fields or derived data, you can use the ``formatResults()``
 method. This is a lightweight way to map over the result sets. If you need more
 control over the process, or want to reduce results you should use
 the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
-of people, you could easily calculate their age with a result formatter::
+of people, you could calculate their age with a result formatter::
 
     // Assuming we have built the fields, conditions and containments.
     $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {

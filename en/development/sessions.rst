@@ -315,7 +315,7 @@ Accessing the Session Object
 ============================
 
 You can access the session data any place you have access to a request object.
-This means the session is easily accessible from:
+This means the session is accessible from:
 
 * Controllers
 * Views

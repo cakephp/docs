@@ -501,7 +501,7 @@ Components, Helpers and Behaviors
 A plugin can have Components, Helpers and Behaviors just like a regular CakePHP
 application. You can even create plugins that consist only of Components,
 Helpers or Behaviors which can be a great way to build reusable components that
-can easily be dropped into any project.
+can be dropped into any project.
 
 Building these components is exactly the same as building it within a regular
 application, with no special naming convention.

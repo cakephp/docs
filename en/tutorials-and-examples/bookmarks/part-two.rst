@@ -386,7 +386,7 @@ to **src/Model/Table/BookmarksTable.php**::
     }
 
 While this code is a bit more complicated than what we've done so far, it helps
-to showcase how powerful the ORM in CakePHP is. You can easily manipulate query
+to showcase how powerful the ORM in CakePHP is. You can manipulate query
 results using the :doc:`/core-libraries/collections` methods, and handle
 scenarios where you are creating entities on the fly with ease.
 

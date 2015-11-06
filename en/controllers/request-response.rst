@@ -4,7 +4,7 @@ Request & Response Objects
 .. php:namespace:: Cake\Network
 
 The request and response objects provide an abstraction around HTTP requests and
-responses. The request object in CakePHP allows you to easily introspect an
+responses. The request object in CakePHP allows you to introspect an
 incoming request, while the response object allows you to effortlessly create
 HTTP responses from your controllers.
 
@@ -186,7 +186,7 @@ conditions, as well as inspect other application specific request criteria::
 
     $this->request->is('post');
 
-You can also easily extend the request detectors that are available, by using
+You can also extend the request detectors that are available, by using
 :php:meth:`Cake\\Network\\Request::addDetector()` to create new kinds of
 detectors. There are four different types of detectors that you can create:
 
@@ -503,7 +503,7 @@ a pdf or an ics generated on the fly from a string::
 Streaming Resources
 -------------------
 
-You can use a callable with ``body()`` to easily convert resource streams into
+You can use a callable with ``body()`` to convert resource streams into
 responses::
 
     $file = fopen('/some/file.png', 'r');

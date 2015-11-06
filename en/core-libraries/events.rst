@@ -72,7 +72,7 @@ created. To keep your Orders model clean you could use events::
         }
     }
 
-The above code allows you to easily notify the other parts of the application
+The above code allows you to notify the other parts of the application
 that an order has been created. You can then do tasks like send email
 notifications, update stock, log relevant statistics and other tasks in separate
 objects that focus on those concerns.

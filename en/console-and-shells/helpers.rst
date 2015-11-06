@@ -4,7 +4,7 @@ Shell Helpers
 .. versionadded:: 3.1
     Shell Helpers were added in 3.1.0
 
-Shell Helpers let you easily package up complex output generation code. Shell
+Shell Helpers let you package up complex output generation code. Shell
 Helpers can be accessed and used from any shell or task::
 
     // Output some data as a table.

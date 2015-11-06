@@ -188,7 +188,7 @@ in security hashes.
 The security salt is used for generating hashes. If you used Composer this too is taken
 care of for you during the install. Else you'd need to change the default salt value
 by editing **config/app.php**. It doesn't matter much what the new value is, as long as
-it's not easily guessed::
+it's not guessable::
 
     'Security' => [
         'salt' => 'something long and containing lots of different values.',

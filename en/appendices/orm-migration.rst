@@ -541,7 +541,7 @@ differences from behaviors in CakePHP 2.x:
 - The method signatures for mixin methods have changed.
 - The method signatures for callback methods have changed.
 - The base class for behaviors have changed.
-- Behaviors can easily add finder methods.
+- Behaviors can add finder methods.
 
 New Base Class
 --------------

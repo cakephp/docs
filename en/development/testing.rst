@@ -201,9 +201,9 @@ string that contains the content we expect. If the result did not contain the
 expected content the test would fail, and we would know that our code is
 incorrect.
 
-By using test cases you can easily describe the relationship between a set of
+By using test cases you can describe the relationship between a set of
 known inputs and their expected output. This helps you be more confident of the
-code you're writing as you can easily check that the code you wrote fulfills the
+code you're writing as you can ensure that the code you wrote fulfills the
 expectations and assertions your tests make. Additionally because tests are
 code, they are easy to re-run whenever you make a change. This helps prevent
 the creation of new bugs.
@@ -463,7 +463,7 @@ to have a ``null`` value, just specify the value of that key as ``null``.
 Dynamic Data and Fixtures
 -------------------------
 
-Since records for a fixture are declared as a class property, you cannot easily
+Since records for a fixture are declared as a class property, you cannot
 use functions or other dynamic data to define fixtures. To solve this problem,
 you can define ``$records`` in the ``init()`` function of your fixture. For
 example if you wanted all the created and modified timestamps to reflect today's
@@ -509,11 +509,11 @@ Importing Table Information
 ---------------------------
 
 Defining the schema in fixture files can be really handy when creating plugins
-or libraries or if you are creating an application that needs to easily be
-portable. Redefining the schema in fixtures can become difficult to maintain in
-larger applications. Because of this CakePHP provides the ability to import the
-schema from an existing connection and use the reflected table definition to
-create the table definition used in the test suite.
+or libraries or if you are creating an application that needs to be portable
+between database vendors. Redefining the schema in fixtures can become difficult
+to maintain in larger applications. Because of this CakePHP provides the ability
+to import the schema from an existing connection and use the reflected table
+definition to create the table definition used in the test suite.
 
 Let's start with an example. Assuming you have a table named articles available
 in your application, change the example fixture given in the previous section
@@ -740,7 +740,7 @@ Controller Integration Testing
 While you can test controller classes in a similar fashion to Helpers, Models,
 and Components, CakePHP offers a specialized ``IntegrationTestCase`` class.
 Using this class as the base class for your controller test cases allows you to
-more easily do integration testing with your controllers.
+test controllers from a high level.
 
 If you are unfamiliar with integration testing, it is a testing approach that
 makes it easy to test multiple units in concert. The integration testing
@@ -1256,7 +1256,7 @@ would be
       </testsuite>
     </testsuites>
 
-``CakeTestSuite`` offers several methods for easily creating test suites based
+``CakeTestSuite`` offers several methods for creating test suites based
 on the file system. It allows you to run any code you want to prepare your test
 suite. If we wanted to create a test suite for all our model tests we could
 would create **tests/TestCase/AllModelTest.php**. Put the following in it::

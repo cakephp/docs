@@ -399,7 +399,7 @@ which allows the native ``__toString()`` methods to work as normal::
 When caught by the built in exception handler, you would get a ``$widget``
 variable in your error view template. In addition if you cast the exception
 as a string or use its ``getMessage()`` method you will get
-``Seems that Pointy is missing.``. This allows you easily and quickly create
+``Seems that Pointy is missing.``. This allows you to quickly create
 your own rich development errors, just like CakePHP uses internally.
 
 

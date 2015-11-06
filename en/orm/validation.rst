@@ -346,7 +346,7 @@ Creating Unique Field Rules
 ---------------------------
 
 Because unique rules are quite common, CakePHP includes a simple Rule class that
-allows you to easily define unique field sets::
+allows you to define unique field sets::
 
     use Cake\ORM\Rule\IsUnique;
 

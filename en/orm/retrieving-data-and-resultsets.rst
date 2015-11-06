@@ -30,7 +30,7 @@ Getting a Single Entity by Primary Key
 .. php:method:: get($id, $options = [])
 
 It is often convenient to load a single entity from the database when editing or
-view entities and their related data. You can do this easily by using
+view entities and their related data. You can do this by using
 ``get()``::
 
     // In a controller or table method.
@@ -155,9 +155,9 @@ The list of options supported by find() are:
 Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
 ``getOptions()`` method on a query object to retrieve the options used. While you
-can very easily pass query objects to your controllers, we recommend that you
+can pass query objects to your controllers, we recommend that you
 package your queries up as :ref:`custom-find-methods` instead. Using custom
-finder methods will let you re-use your queries more easily and make testing
+finder methods will let you re-use your queries and make testing
 easier.
 
 By default queries and result sets will return :doc:`/orm/entities` objects. You
@@ -283,7 +283,7 @@ Finding Threaded Data
 
 The ``find('threaded')`` finder returns nested entities that are threaded
 together through a key field. By default this field is ``parent_id``. This
-finder allows you to easily access data stored in an 'adjacency list' style
+finder allows you to access data stored in an 'adjacency list' style
 table. All entities matching a given ``parent_id`` are placed under the
 ``children`` attribute::
 
@@ -365,7 +365,7 @@ Dynamic Finders
 ===============
 
 CakePHP's ORM provides dynamically constructed finder methods which allow you to
-easily express simple queries with no additional code. For example if you wanted
+express simple queries with no additional code. For example if you wanted
 to find a user by username you could do::
 
     // In a controller
@@ -867,7 +867,7 @@ Turning buffering off has a few caveats:
     Streaming results will still allocate memory for the entire results when
     using PostgreSQL and SQL Server. This is due to limitations in PDO.
 
-Result sets allow you to easily cache/serialize or JSON encode results for API
+Result sets allow you to cache/serialize or JSON encode results for API
 results::
 
     // In a controller or table method.
@@ -887,7 +887,7 @@ within a result set.
 In addition to making serialization easy, result sets are a 'Collection' object and
 support the same methods that :doc:`collection objects </core-libraries/collections>`
 do. For example, you can extract a list of unique tags on a collection of
-articles quite easily::
+articles by running::
 
     // In a controller or table method.
     $articles = TableRegistry::get('Articles');
@@ -1188,7 +1188,7 @@ Removing All Stacked Map-reduce Operations
 ------------------------------------------
 
 Under some circumstances you may want to modify a ``Query`` object so that no
-``mapReduce`` operations are executed at all. This can be easily done by
+``mapReduce`` operations are executed at all. This can be done by
 calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::
 
