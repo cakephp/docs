@@ -58,6 +58,9 @@ contain the **default.po** file as shown above. A domain refers to any arbitrary
 grouping of translation messages. When no group is used, then the default group
 is selected.
 
+The core strings messages extracted from the cakephp library can be stored
+separately in a file named **cake.po** in **src/Locale/**.
+
 Plugins can also contain translation files, the convention is to use the
 ``under_scored`` version of the plugin name as the domain for the translation
 messages::
