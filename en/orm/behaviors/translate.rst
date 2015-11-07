@@ -51,7 +51,7 @@ You can try now getting your entity again::
     $article = $this->Articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 
-Working with multiple translations can be done easily by using a special trait
+Working with multiple translations can be done by using a special trait
 in your Entity class::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;
@@ -386,7 +386,7 @@ Saving Multiple Translations
 ============================
 
 It is a common requirement to be able to add or edit multiple translations to
-any database record at the same time. This can be easily done using the
+any database record at the same time. This can be done using the
 ``TranslateTrait``::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;

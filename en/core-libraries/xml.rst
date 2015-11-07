@@ -5,7 +5,7 @@ Xml
 
 .. php:class:: Xml
 
-The Xml class allows you to easily transform arrays into SimpleXMLElement or
+The Xml class allows you to transform arrays into SimpleXMLElement or
 DOMDocument objects, and back into arrays again.
 
 

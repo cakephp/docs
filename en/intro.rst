@@ -75,7 +75,7 @@ or a XML formatted result for others to consume::
     <?php endforeach; ?>
 
 The View layer provides a number of extension points like :ref:`view-elements`
-and :doc:`/views/cells` to let you easily re-use your presentation logic.
+and :doc:`/views/cells` to let you re-use your presentation logic.
 
 The View layer is not only limited to HTML or text representation of the data.
 It can be used to deliver common data formats like JSON, XML, and through

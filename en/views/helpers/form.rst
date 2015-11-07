@@ -46,10 +46,9 @@ build forms.
 
 Once a form has been created with a context, all inputs you create will use the
 active context. In the case of an ORM backed form, FormHelper can access
-associated data, validation errors and schema metadata easily making building
-forms simple.  You can close the active context using the ``end()`` method, or
-by calling ``create()`` again. To create a form for an entity, do the
-following::
+associated data, validation errors and schema metadata. You can close the active
+context using the ``end()`` method, or by calling ``create()`` again. To create
+a form for an entity, do the following::
 
     // If you are on /articles/add
     // $article should be an empty Article entity.
@@ -234,7 +233,7 @@ Creating Form Inputs
 
 .. php:method:: input(string $fieldName, array $options = [])
 
-The ``input()`` method lets you easily generate complete form inputs. These
+The ``input()`` method lets you to generate complete form inputs. These
 inputs will include a wrapping div, label, input widget, and validation error if
 necessary. By using the metadata in the form context, this method will choose an
 appropriate input type for each field. Internally ``input()`` uses the other
@@ -1798,7 +1797,7 @@ Adding Custom Widgets
 
 CakePHP makes it easy to add custom input widgets in your application, and use
 them like any other input type. All of the core input types are implemented as
-wigets, which means you can easily override any core widget with your own
+wigets, which means you can override any core widget with your own
 implemenation as well.
 
 Building a Widget Class

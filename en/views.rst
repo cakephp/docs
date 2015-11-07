@@ -295,7 +295,7 @@ want to conditionally show headings or other markup:
     <?php endif; ?>
 
 You can also provide a default value for a block should it not have
-any content. This allows you to easily add placeholder content for empty
+any content. This allows you to add placeholder content for empty
 states. You can provide a default value using the second argument:
 
 .. code-block:: php

@@ -198,7 +198,7 @@ Defining Finders
 ----------------
 
 Now that we are able to save articles with slug values, we should implement
-a finder method so we can easily fetch articles by their slug. Behavior finder
+a finder method so we can fetch articles by their slug. Behavior finder
 methods, use the same conventions as :ref:`custom-find-methods` do. Our
 ``find('slug')`` method would look like::
 

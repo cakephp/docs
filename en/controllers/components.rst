@@ -282,7 +282,7 @@ registry::
 
     $controller = $this->_registry->getController();
 
-You can also easily access the controller in any callback method from the event
+You can access the controller in any callback method from the event
 object::
 
     $controller = $event->subject();

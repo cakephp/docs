@@ -145,7 +145,7 @@ Mutator methods should always return the value that should be stored in the
 property. As you can see above, you can also use mutators to set other
 calculated properties. When doing this, be careful to not introduce any loops,
 as CakePHP will not prevent infinitely looping mutator methods. Mutators allow
-you easily convert properties as they are set, or create calculated data.
+you to convert properties as they are set, or create calculated data.
 Mutators and accessors are applied when properties are read using object
 notation, or using get() and set().
 
@@ -402,7 +402,7 @@ Creating Re-usable Code with Traits
 You may find yourself needing the same logic in multiple entity classes. PHP's
 traits are a great fit for this. You can put your application's traits in
 **src/Model/Entity**. By convention traits in CakePHP are suffixed with
-``Trait`` so they are easily discernible from classes or interfaces. Traits are
+``Trait`` so they can be discernible from classes or interfaces. Traits are
 often a good compliment to behaviors, allowing you to provide functionality for
 the table and entity objects.
 

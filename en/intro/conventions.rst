@@ -6,7 +6,7 @@ bit of time to learn CakePHP's conventions, you save time in the
 long run. By following conventions, you get free functionality, and
 you liberate yourself from the maintenance nightmare of tracking config
 files. Conventions also make for a very uniform development experience,
-allowing other developers to jump in and help more easily.
+allowing other developers to jump in and help.
 
 Controller Conventions
 ======================
@@ -24,7 +24,7 @@ cannot be accessed with routing.
 URL Considerations for Controller Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As you've just seen, single word controllers map easily to a simple
+As you've just seen, single word controllers map to a simple
 lower case URL path. For example, ``ApplesController`` (which would
 be defined in the file name 'ApplesController.php') is accessed
 from http://example.com/apples.

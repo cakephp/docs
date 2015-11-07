@@ -581,7 +581,7 @@ configure the OptionParser to define the expected inputs of your shell.
 You can also configure subcommand option parsers, which allow you to
 have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
-methods for easily setting multiple options/arguments at once::
+methods for setting multiple options/arguments at once::
 
     public function getOptionParser()
     {
@@ -819,7 +819,7 @@ The above is an example of how you could provide help and a specialized
 option parser for a shell's task. By calling the Task's ``getOptionParser()``
 we don't have to duplicate the option parser generation, or mix concerns
 in our shell. Adding subcommands in this way has two advantages.
-First it lets your shell easily document its subcommands in the
+First, it lets your shell document its subcommands in the
 generated help. It also gives easy access to the subcommand
 help. With the above subcommand created you could call
 ``cake myshell --help`` and see the list of subcommands, and

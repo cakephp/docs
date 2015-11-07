@@ -144,7 +144,7 @@ Doctors hasOne Mentors mentors.doctor\_id
 
 .. note::
 
-    It is not mandatory to follow CakePHP conventions, you can easily override
+    It is not mandatory to follow CakePHP conventions, you can override
     the use of any foreignKey in your associations definitions. Nevertheless sticking
     to conventions will make your code less repetitive, easier to read and to maintain.
 

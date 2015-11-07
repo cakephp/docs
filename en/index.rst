@@ -8,7 +8,7 @@ Welcome
 The CakePHP cookbook is an openly developed and community editable documentation
 project. Notice the "Improve this Doc" button in the upper right-hand
 corner; it will direct you to the GitHub online editor of the active page,
-allowing you to easily contribute any additions, deletions, or corrections to
+allowing you to contribute any additions, deletions, or corrections to
 the documentation.
 
 .. container:: offline-download

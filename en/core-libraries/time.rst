@@ -67,7 +67,7 @@ The ``Time`` class constructor can take any parameter that the internal ``DateTi
 PHP class can. When passing a number or numeric string, it will be interpreted
 as a UNIX timestamp.
 
-In test cases you can easily mock out ``now()`` using ``setTestNow()``::
+In test cases you can mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
     $now = new Time('2014-04-12 12:22:30');

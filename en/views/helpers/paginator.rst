@@ -28,7 +28,7 @@ Loading Templates from a File
 -----------------------------
 
 When adding the PaginatorHelper in your controller, you can define the
-'templates' setting to define a template file to load. This allows you easily
+'templates' setting to define a template file to load. This allows you to
 customize multiple templates and keep your code DRY::
 
     // In a controller.
@@ -415,7 +415,7 @@ doesn't always need to be restricted as such.
 See the details on
 `PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
 in the API. As mentioned, the PaginatorHelper also offers sorting features
-which can be easily integrated into your table column headers:
+which can be integrated into your table column headers:
 
 .. code-block:: php
 

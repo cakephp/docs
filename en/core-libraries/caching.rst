@@ -7,7 +7,7 @@ Caching
 
 Caching is frequently used to reduce the time it takes to create or read from
 other resources. Caching is often used to make reading from expensive
-resources less expensive. You can easily store the results of expensive queries,
+resources less expensive. You can store the results of expensive queries,
 or remote webservice access that doesn't frequently change in a cache. Once
 in the cache, re-reading the stored resource from the cache is much cheaper
 than accessing the remote resource.
@@ -38,8 +38,8 @@ to implement your own caching systems. The built-in caching engines are:
   Memcached, also provides atomic operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`Cake\\Cache\\Cache` in a consistent manner.  This means you can
-easily swap cache engines as your application grows.
+:php:class:`Cake\\Cache\\Cache` in a consistent manner. You can swap cache
+engines as your application grows.
 
 .. _cache-configuration:
 
@@ -158,7 +158,7 @@ model finds::
         Cache::write('posts', $posts);
     }
 
-Using ``Cache::write()`` and ``Cache::read()`` to easily reduce the number
+Using ``Cache::write()`` and ``Cache::read()`` to reduce the number
 of trips made to the database to fetch posts.
 
 .. note::
@@ -315,12 +315,12 @@ Using Cache to Store Counters
 
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
 
-Counters for various things are easily stored in a cache. For example, a simple
-countdown for remaining 'slots' in a contest could be stored in Cache. The
-Cache class exposes atomic ways to increment/decrement counter values in an easy
-way. Atomic operations are important for these values as it reduces the risk of
-contention, and ability for two users to simultaneously lower the value by one,
-resulting in an incorrect value.
+Counters in your application are good candidates for storage in a cache.  As an
+example, a simple countdown for remaining 'slots' in a contest could be stored
+in Cache. The Cache class exposes atomic ways to increment/decrement counter
+values in an easy way. Atomic operations are important for these values as it
+reduces the risk of contention, and ability for two users to simultaneously
+lower the value by one, resulting in an incorrect value.
 
 After setting an integer value you can manipulate it using ``increment()`` and
 ``decrement()``::
