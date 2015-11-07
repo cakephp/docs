@@ -88,10 +88,10 @@ You can also define ``_serialize`` as an array of view variables to combine::
         public function index()
         {
             // Some code that created $articles and $comments
-            
+
             // Set the view vars that have to be serialized.
             $this->set(compact('articles', 'comments'));
-            
+
             // Specify which view vars JsonView should serialize.
             $this->set('_serialize', ['articles', 'comments']);
         }
@@ -132,13 +132,15 @@ JSON response. This is a situation where a view file would be useful::
     }
     echo json_encode(compact('articles'));
 
-You can do more complex manipulations, or use helpers to do formatting as
-well.
+You can do more complex manipulations, or use helpers to do formatting as well.
+The data view classes don't support layouts. They assume that the view file will
+output the serialized content.
 
 .. note::
+    As of 3.1.0 AppController, in the application skeleton automatically adds
+    ``'_serialize' => true`` to all XML/JSON requests. You will need to remove
+    this code from the beforeRender callback if you want to use view files.
 
-    The data view classes don't support layouts. They assume that the view file
-    will output the serialized content.
 
 Creating XML Views
 ==================
