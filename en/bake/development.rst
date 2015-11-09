@@ -174,7 +174,7 @@ And the resultant baked class (**src/Shell/FooShell.php**) looks like this::
 Creating a Bake Theme
 =====================
 
-If you wish to modify the default output produced by the "bake" command, you can
+If you wish to modify the output produced by the "bake" command, you can
 create your own bake 'theme' which allows you to replace some or all of the
 templates that bake uses. The best way to do this is:
 
@@ -185,6 +185,19 @@ templates that bake uses. The best way to do this is:
    plugin.
 #. When running bake use the ``--theme`` option to specify the bake-theme you
    want to use.
+
+Customizing the Bake Templates
+==============================
+
+If you wish to modify the default output produced by the "bake" command, you can
+create your own bake templates in your application. This way does not use the 
+``--theme`` option in the command line when baking. The best way to do this is:
+
+#. Create a new directory **/src/Template/Bake/**.
+#. Copy any templates you want to override from
+   **vendor/cakephp/bake/src/Template/Bake/** to matching files in your
+   application.
+
 
 Creating New Bake Command Options
 =================================
