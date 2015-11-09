@@ -12,9 +12,21 @@ Views (Visualização)
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
 
+
+.. _view-blocks:
+
+Using View Blocks
+=================
+
 .. _view-layouts:
 
+Layouts
+=======
+
 .. _view-elements:
+
+Elements
+========
 
 More About Views
 ================

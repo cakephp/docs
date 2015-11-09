@@ -1,6 +1,11 @@
 Segurança
 #########
 
+.. _force-mcrypt:
+
+Choosing a Specific Crypto Implementation
+-----------------------------------------
+
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.

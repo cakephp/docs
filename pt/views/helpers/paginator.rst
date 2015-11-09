@@ -5,6 +5,11 @@ Paginator
 
 .. php:class:: PaginatorHelper(View $view, array $config = [])
 
+.. _paginator-templates:
+
+PaginatorHelper Templates
+=========================
+
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.

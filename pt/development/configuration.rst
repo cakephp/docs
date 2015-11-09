@@ -1,6 +1,11 @@
 Configuração
 ############
 
+.. _additional-class-paths:
+
+Additional Class Paths
+======================
+
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.
