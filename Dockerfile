@@ -5,13 +5,15 @@ ENV DEBIAN_FRONTEND noninteractive
 LABEL Description="This image is used to create an environment to contribute to the cakephp/docs"
 
 RUN apt-get update && apt-get install -y \
-  python-pip \
-  texlive-latex-recommended \
-  texlive-latex-extra \
-  texlive-fonts-recommended
+    python-pip \
+    texlive-latex-recommended \
+    texlive-latex-extra \
+    texlive-fonts-recommended \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
-ADD ./requirements.txt /tmp/requirements.txt
-RUN pip install -qr /tmp/requirements.txt
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
 
 WORKDIR /data
 
