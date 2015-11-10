@@ -53,10 +53,10 @@ facilitant la construction des formulaires.
 
 Une fois qu'un formulaire a été créé avec un contexte, tous les inputs que vous
 créez vont utiliser le contexte actif. Dans le cas d'un formulaire basé sur
-l'ORM, FormHelper peut accéder facilement aux données associées, aux erreurs de
-validation et aux metadata du schema rendant la construction de formulaires
-simples. Vous pouvez fermer le contexte actif en utilisant la méthode ``end()``,
-ou en appelant ``create()`` à nouveau. Pour créer un formulaire pour une entity,
+l'ORM, FormHelper peut accéder aux données associées, aux erreurs de validation
+et aux metadata du schema rendant la construction de formulaires simples. Vous
+pouvez fermer le contexte actif en utilisant la méthode ``end()``, ou en
+appelant ``create()`` à nouveau. Pour créer un formulaire pour une entity,
 faîtes ce qui suit::
 
     // Si vous êtes sur /articles/add
@@ -250,10 +250,10 @@ Création d'éléments de Formulaire
 
 .. php:method:: input(string $fieldName, array $options = [])
 
-La méthode ``input()`` vous laisse facilement générer des inputs de formulaire.
-Ces inputs incluent une div enveloppante, un label, un widget d'input, et une
-erreur de validation si besoin. En utilisant les metadonnées dans le contexte
-du formulaire, cette méthode va choisir un type d'input approprié pour chaque
+La méthode ``input()`` vous laisse générer des inputs de formulaire. Ces inputs
+incluent une div enveloppante, un label, un widget d'input, et une erreur de
+validation si besoin. En utilisant les metadonnées dans le contexte du
+formulaire, cette méthode va choisir un type d'input approprié pour chaque
 champ. En interne, ``input()`` utilise les autres méthodes de FormHelper.
 
 Le type d'input créé dépend de la colonne datatype:
@@ -1853,11 +1853,10 @@ utilisant le code suivant dans votre controller::
 Ajouter des Widgets Personnalisés
 =================================
 
-CakePHP permet d'ajouter facilement des widgets personnalisés dans votre
-application, afin de les utiliser comme n'importe quel input. Tous les types
-d'input que contient le cœur de cake sont implémentés comme des widgets. Ainsi
-vous pouvez facilement remplacer n'importe quel widget de base par votre propre
-implémentation.
+CakePHP permet d'ajouter des widgets personnalisés dans votre application, afin
+de les utiliser comme n'importe quel input. Tous les types d'input que contient
+le cœur de cake sont implémentés comme des widgets. Ainsi vous pouvez remplacer
+n'importe quel widget de base par votre propre implémentation.
 
 Construire une Classe Widget
 ----------------------------

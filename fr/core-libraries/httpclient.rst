@@ -5,9 +5,9 @@ Client Http
 
 .. php:class:: Client(mixed $config = [])
 
-CakePHP intègre un client HTTP basique mais puissant qui peut facilement être
-utilisé pour faire des requêtes. C'est un bon moyen de communiquer avec des
-services webs et des APIs distantes.
+CakePHP intègre un client HTTP basique mais puissant qui peut être utilisé pour
+faire des requêtes. C'est un bon moyen de communiquer avec des services webs et
+des APIs distantes.
 
 Faire des Requêtes
 ==================

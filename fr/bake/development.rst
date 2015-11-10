@@ -2,8 +2,8 @@ Etendre Bake
 ############
 
 Bake dispose d'une architecture extensible qui permet à votre application ou
-à vos plugins de facilement modifier ou ajouter la fonctionnalité de base. Bake
-utilise une classe de vue dédiée qui n'utilise pas la syntaxe PHP standard.
+à vos plugins de modifier ou ajouter la fonctionnalité de base. Bake utilise une
+classe de vue dédiée qui n'utilise pas la syntaxe PHP standard.
 
 Events de Bake
 ==============
@@ -182,10 +182,10 @@ ressemble à ceci::
 Créer un theme de bake
 ======================
 
-Si vous souhaitez modifier la sortie par défaut du HTML produit par la commande
-"bake", vous pouvez créer votre propre 'template' de bake qui vous permet de
-remplacer certaine ou toute partie des templates que bake utilise. Pour créer
-un nouveau template de bake, faîtes ce qui suit:
+Si vous souhaitez modifier la sortie du HTML produit par la commande "bake",
+vous pouvez créer votre propre 'template' de bake qui vous permet de remplacer
+certaine ou toute partie des templates que bake utilise. Pour créer un nouveau
+template de bake, faîtes ce qui suit:
 
 #. Créez un nouveau plugin avec Bake. Le nom du plugin est le nom du 'theme' de
    Bake
@@ -196,7 +196,20 @@ un nouveau template de bake, faîtes ce qui suit:
 #. Quand vous lancez bake, utilisez l'option ``--theme`` pour spécifier le
    theme de bake que vous souhaitez utiliser.
 
-Créer de nouvelles options de commande pour bake
+Personnaliser les Templates de Bake
+===================================
+
+Si vous souhaitez modifier la sortie par défaut produite par la commande "bake",
+vous pouvez créer vos propres templates de bake dans votre application. Cette
+façon n'utilise pas l'option ``--theme`` dans la ligne de commande lors de
+l'éxecution de bake. La meilleure façon de faire est de faire ce qui suit:
+
+#. Créer un nouveau répertoire **/src/Template/Bake/**.
+#. Copier tout template que vous souhaitez surcharger de
+   **vendor/cakephp/bake/src/Template/Bake/** vers les fichiers correspondants
+   dans votre application.
+
+Créer de Nouvelles Options de Commande pour Bake
 ================================================
 
 Il est possible d'ajouter de nouvelles options de commandes de bake, ou de

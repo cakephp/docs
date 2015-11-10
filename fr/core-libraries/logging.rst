@@ -296,10 +296,10 @@ niveau représente un niveau plus fort de sévérité:
 * Debug: messages de niveau-debug
 
 Vous pouvez vous référer à ces niveaux par nom en configurant les journaux, et
-lors de l'écriture des messages de log. Sinon vous pouvez utiliser
-des méthodes pratiques comme :php:meth:`Cake\\Log\\Log::error()` pour
-indiquer clairement et facilement le niveau de journalisation. Utiliser un
-niveau qui n'est pas dans les niveaux ci-dessus va entraîner une exception.
+lors de l'écriture des messages de log. Sinon vous pouvez utiliser des méthodes
+pratiques comme :php:meth:`Cake\\Log\\Log::error()` pour indiquer clairement le
+niveau de journalisation. Utiliser un niveau qui n'est pas dans les niveaux
+ci-dessus va entraîner une exception.
 
 .. _logging-scopes:
 

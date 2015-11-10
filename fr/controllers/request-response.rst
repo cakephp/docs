@@ -5,9 +5,8 @@ Les Objets Request & Response
 
 Les objets ``Request`` et ``Response`` fournissent une abstraction autour de la
 requête et des réponses HTTP. L'objet ``Request`` dans CakePHP vous permet de
-facilement faire une introspection de la requête entrante, tandis que l'objet
-``Response`` vous permet de créer sans effort des réponses HTTP à partir de vos
-controllers.
+faire une introspection de la requête entrante, tandis que l'objet ``Response``
+vous permet de créer sans effort des réponses HTTP à partir de vos controllers.
 
 .. index:: $this->request
 .. _cake-request:
@@ -203,10 +202,10 @@ spécifique à l'application::
 
     $this->request->is('post');
 
-Vous pouvez aussi facilement étendre les détecteurs de la requête qui sont
-disponibles, en utilisant :php:meth:`Cake\\Network\\Request::addDetector()`
-pour créer de nouveaux types de détecteurs. Il y a quatre différents types
-de détecteurs que vous pouvez créer:
+Vous pouvez aussi étendre les détecteurs de la requête qui sont disponibles, en
+utilisant :php:meth:`Cake\\Network\\Request::addDetector()` pour créer de
+nouveaux types de détecteurs. Il y a quatre différents types de détecteurs que
+vous pouvez créer:
 
 * Comparaison avec valeur d'environnement - Compare l'égalité de la valeur
   extraite à partir de :php:func:`env()` avec la valeur fournie.
@@ -529,8 +528,8 @@ chaine::
 Streaming Resources
 -------------------
 
-Vous pouvez utiliser une fonction de rappel avec ``body()`` pour convertir
-facilement des flux de ressources en réponses::
+Vous pouvez utiliser une fonction de rappel avec ``body()`` pour convertir des
+flux de ressources en réponses::
 
     $file = fopen('/some/file.png', 'r');
     $this->response->body(function () use ($file) {

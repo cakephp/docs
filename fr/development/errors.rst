@@ -415,8 +415,8 @@ Lorsque le gestionnaire d'exception intégré attrapera l'exception, vous
 obtiendriez une variable ``$widget`` dans votre template de vue d'erreur.
 De plus, si vous attrapez l'exception en chaîne ou utilisez sa méthode
 ``getMessage()``, vous aurez ``Il semblerait que Pointy soit manquant.``.
-Cela vous permet de créer facilement et rapidement vos propres erreurs
-de développement riches, exactement comme CakePHP le fait en interne.
+Cela vous permet de créer rapidement vos propres erreurs de développement
+riches, exactement comme CakePHP le fait en interne.
 
 Créer des Codes de Statut Personnalisés
 ---------------------------------------

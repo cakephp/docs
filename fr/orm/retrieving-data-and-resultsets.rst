@@ -38,7 +38,7 @@ Récupérer une Entity Unique avec une Clé Primaire
 
 C'est souvent pratique de charger une entity unique à partir de la base de
 données quand vous modifiez ou visualisez les entities et leurs données liées.
-Vous pouvez faire ceci facilement en utilisant ``get()``::
+Vous pouvez faire ceci en utilisant ``get()``::
 
     // Dans un controller ou dans une méthode table.
 
@@ -174,7 +174,7 @@ utilisées. Alors que vous pouvez très facilement passer des objets requête à
 vos controllers, nous recommandons que vous fassiez plutôt des packages de vos
 requêtes en tant que :ref:`custom-find-methods`.
 Utiliser des méthodes finder personnalisées va vous laisser réutiliser vos
-requêtes plus facilement et faciliter les tests.
+requêtes et faciliter les tests.
 
 Par défaut, les requêtes et les ensembles de résultat seront retournés
 en objets :doc:`/orm/entities`. Vous pouvez récupérer des tableaux basiques en
@@ -306,9 +306,9 @@ Trouver des Données Threaded
 
 Le finder ``find('threaded')`` retourne les entities imbriquées qui sont
 threaded ensemble à travers un champ clé. Par défaut, ce champ est
-``parent_id``. Ce finder vous permet d'accéder facilement aux données stockées
-dans une table de style 'liste adjacente'. Toutes les entities qui matchent
-un ``parent_id`` donné sont placées sous l'attribut ``children``::
+``parent_id``. Ce finder vous permet d'accéder aux données stockées dans une
+table de style 'liste adjacente'. Toutes les entities qui matchent un
+``parent_id`` donné sont placées sous l'attribut ``children``::
 
     // Dans un controller ou dans une méthode table.
     $query = $comments->find('threaded');
@@ -392,9 +392,9 @@ Finders Dynamiques
 ==================
 
 L'ORM de CakePHP fournit des méthodes de finder construites dynamiquement qui
-vous permettent de facilement exprimer des requêtes simples sans aucun code
-supplémentaire. Par exemple si vous vouliez trouver un utilisateur selon son
-username, vous pourriez faire::
+vous permettent d'exprimer des requêtes simples sans aucun code supplémentaire.
+Par exemple si vous vouliez trouver un utilisateur selon son username, vous
+pourriez faire::
 
     // Dans un controller
     // Les deux appels suivants sont équivalents.
@@ -941,8 +941,9 @@ entity dans un ensemble de résultat.
 
 En plus de faciliter la sérialisation, les ensembles de résultats sont un
 objet 'Collection' et supportent les mêmes méthodes que les
-:doc:`objets collection </core-libraries/collections>`. Par exemple, vous pouvez extraire
-une liste des tags uniques sur une collection d'articles assez facilement::
+:doc:`objets collection </core-libraries/collections>`. Par exemple, vous
+pouvez extraire une liste des tags uniques sur une collection d'articles en
+exécutant::
 
     // Dans un controller ou une méthode de table.
     $articles = TableRegistry::get('Articles');
@@ -1256,7 +1257,7 @@ Retirer Toutes les Opérations Map-reduce Empilées
 
 Dans les mêmes circonstances vous voulez modifier un objet ``Query`` pour
 que les opérations ``mapReduce`` ne soient pas exécutées du tout. Ceci peut
-être facilement fait en appelant la méthode avec les deux paramètres à
-null et le troisième paramètre (overwrite) à ``true``::
+être fait en appelant la méthode avec les deux paramètres à null et le troisième
+paramètre (overwrite) à ``true``::
 
     $query->mapReduce(null, null, true);

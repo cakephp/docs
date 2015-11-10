@@ -67,7 +67,7 @@ Le constructeur de la classe ``Time`` peut prendre les mêmes paramètres que
 la classe PHP interne ``DateTime``. Quand vous passez un nombre ou une valeur
 numérique, elle sera interprétée comme un timestamp UNIX.
 
-Dans les cas de test, vous pouvez facilement mock out ``now()`` en utilisant
+Dans les cas de test, vous pouvez mock out ``now()`` en utilisant
 ``setTestNow()``::
 
     // Fixe le temps.
@@ -154,7 +154,7 @@ dates formatées. CakePHP facilite cela::
     $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     // affiche '2014-10-31 00:00:00'
-    $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
+    $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 Il est possible de spécifier le format d'affichage désiré. Vous pouvez soit
 passer une `constante IntlDateFormatter
@@ -231,7 +231,7 @@ utiliser pour le format ``i18nFormat``::
 
     Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
-    Time::setToStringFormat('YYYY-MM-dd HH:mm:ss');
+    Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 
 Il est recommandé de toujours utiliser les constantes plutôt que de directement
 passer une date en format chaîne de caractère.

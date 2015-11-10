@@ -82,11 +82,11 @@ des commandes. Vous voulez notifier au reste de l'application qu'une commande a
         }
     }
 
-Le code ci-dessus vous permet de facilement notifier aux autres parties de
-l'application qu'une commande a été créée. Vous pouvez ensuite faire des tâches
-comme envoyer les notifications par mail, mettre à jour le stock, créer un
-fichier de log des statistiques pertinents et d'autres tâches dans les objets
-séparés qui se focalisent sur ces préoccupations.
+Le code ci-dessus vous permet de notifier aux autres parties de l'application
+qu'une commande a été créée. Vous pouvez ensuite faire des tâches comme envoyer
+les notifications par mail, mettre à jour le stock, créer un fichier de log des
+statistiques pertinents et d'autres tâches dans les objets séparés qui se
+focalisent sur ces préoccupations.
 
 Accéder aux Gestionnaires d'Evènement
 =====================================

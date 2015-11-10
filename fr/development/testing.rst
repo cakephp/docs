@@ -212,13 +212,12 @@ helper retourne une chaîne qui contient le contenu que nous attendons. Si le
 résultat ne contient pas le contenu attendu le test sera un échec, et nous
 savons que notre code est incorrect.
 
-En utilisant les cas de test, vous pouvez facilement décrire la relation entre
-un ensemble d'entrées connues et leur sortie attendue. Cela vous aide à être
-plus confiant sur le code que vous écrivez puisque vous pouvez facilement
-vérifier que le code que vous écrivez remplit les attentes et les assertions
-que vos tests font. De plus, puisque les tests sont du code, ils peuvent
-facilement être re-lancés dès que vous faîtes un changement. Cela évite
-la création de nouveaux bugs.
+En utilisant les cas de test, vous pouvez décrire la relation entre un ensemble
+d'entrées connues et leur sortie attendue. Cela vous aide à être plus confiant
+sur le code que vous écrivez puisque vous pouvez vérifier que le code que vous
+écrivez remplit les attentes et les assertions que vos tests font. De plus,
+puisque les tests sont du code, ils peuvent être re-lancés dès que vous faîtes
+un changement. Cela évite la création de nouveaux bugs.
 
 .. _running-tests:
 
@@ -495,11 +494,11 @@ Les Données Dynamiques et les Fixtures
 --------------------------------------
 
 Depuis que les enregistrements pour une fixture sont déclarés en propriété
-de classe, vous ne pouvez pas facilement utiliser les fonctions ou autres
-données dynamiques pour définir les fixtures. Pour résoudre ce problème,
-vous pouvez définir ``$records`` dans la fonction ``init()`` de votre fixture.
-Par exemple, si vous voulez que tous les timestamps soient créés et mis à jours
-pour refléter la date d'aujourd'hui, vous pouvez faire ce qui suit::
+de classe, vous ne pouvez pas utiliser les fonctions ou autres données
+dynamiques pour définir les fixtures. Pour résoudre ce problème, vous pouvez
+définir ``$records`` dans la fonction ``init()`` de votre fixture. Par exemple,
+si vous voulez que tous les timestamps soient créés et mis à jours pour refléter
+la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     namespace App\Test\Fixture;
 
@@ -543,11 +542,11 @@ Importer les Informations de Table
 
 Définir le schema des fixtures peut être vraiment pratique lorsque vous créez
 des plugins, des librairies ou si vous créez un application qui doit être
-facilement portable. La redéfinition du schéma dans les fixtures peut devenir
-difficile à maintenir pour les applications de grandes échelles. A cause de
-cela, CakePHP fournit la possibilité d'importer le schema depuis une connexion
-existante et utilise une définition de la table réfléchie pour créer la
-définition de la table utilisée par la suite de tests.
+portable. La redéfinition du schéma dans les fixtures peut devenir difficile à
+maintenir pour les applications de grandes échelles. A cause de cela, CakePHP
+fournit la possibilité d'importer le schema depuis une connexion existante et
+utilise une définition de la table réfléchie pour créer la définition de la
+table utilisée par la suite de tests.
 
 Commençons par un exemple. Imaginons que vous ayez un model nommé articles
 disponible dans votre application (qui est lié avec une table nommée
@@ -787,8 +786,8 @@ Test d'Intégrations des Controllers
 Alors que vous pouvez tester les controllers de la même manière que les Helpers,
 Models et Components, CakePHP offre une classe spécialisée
 ``IntegrationTestCase``. L'utilisation de cette classe en tant que classe de
-base pour les cas de test de votre controller vous permet de mettre plus
-facilement en place des tests d'intégration pour vos controllers.
+base pour les cas de test de votre controller vous permet de mettre en place des
+tests d'intégration pour vos controllers.
 
 Si vous n'êtes pas familier avec les tests d'intégrations, il s'agit d'une
 approche de test qui facilite le test de plusieurs éléments en même temps. Les
@@ -1311,11 +1310,11 @@ exemple simple serait::
       </testsuite>
     </testsuites>
 
-``CakeTestSuite`` propose plusieurs méthodes pour créer facilement des suites de
-tests basé sur le système de fichiers. Il vous permet d'exécuter n'importe quel
-code que vous voulez pour préparer votre suite de test. Si nous voulions créer
-une suite de tests pour tous nos tests de models, nous pourrions créer le
-fichier **tests/TestCase/AllModelTest.php**, et mettre le code suivant::
+``CakeTestSuite`` propose plusieurs méthodes pour créer des suites de tests basé
+sur le système de fichiers. Il vous permet d'exécuter n'importe quel code que
+vous voulez pour préparer votre suite de test. Si nous voulions créer une suite
+de tests pour tous nos tests de models, nous pourrions créer le fichier
+**tests/TestCase/AllModelTest.php**, et mettre le code suivant::
 
     class AllModelTest extends TestSuite
     {

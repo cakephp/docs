@@ -308,9 +308,9 @@ en-têtes ou autres balises:
     <?php endif; ?>
 
 Vous pouvez aussi fournir une valeur par défaut pour un block
-qui ne devrait pas avoir de contenu. Cela vous permet d'ajouter facilement
-du contenu placeholder, pour des déclarations vides. Vous pouvez fournir
-une valeur par défaut en utilisant le 2ème argument:
+qui ne devrait pas avoir de contenu. Cela vous permet d'ajouter du contenu
+placeholder, pour des déclarations vides. Vous pouvez fournir une valeur par
+défaut en utilisant le 2ème argument:
 
 .. code-block:: php
 

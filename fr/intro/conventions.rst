@@ -2,20 +2,19 @@ Conventions de CakePHP
 ######################
 
 Nous sommes de grands fans des conventions plutôt que de la configuration.
-Bien que cela réclame un peu de temps pour apprendre les conventions de
-CakePHP, à terme vous gagnerez du temps. En suivant les conventions,
-vous aurez des fonctionnalités automatiques et vous vous libérerez du
-cauchemar de la maintenance du suivi des fichiers de configuration.
-Les conventions créent un environnement de développement uniforme,
-permettant à d'autres développeurs de s'investir dans le code plus
-facilement.
+Bien que cela réclame un peu de temps pour apprendre les conventions de CakePHP,
+à terme vous gagnerez du temps. En suivant les conventions, vous aurez des
+fonctionnalités automatiques et vous vous libérerez du cauchemar de la
+maintenance du suivi des fichiers de configuration. Les conventions créent un
+environnement de développement uniforme, permettant à d'autres développeurs de
+s'investir dans le code plus.
 
 Les Conventions des Controllers
 ===============================
 
-Les noms des classes de controller sont au pluriel, en CamelCase et
-se terminent par ``Controller``. ``PeopleController`` et
-``LatestArticlesController`` sont des exemples respectant cette convention.
+Les noms des classes de controller sont au pluriel, en CamelCase et se terminent
+par ``Controller``. ``PeopleController`` et ``LatestArticlesController`` sont
+des exemples respectant cette convention.
 
 les méthodes publiques des controllers sont souvent exposées comme des 'actions'
 accessibles via un navigateur web. Par exemple ``/articles/view`` correspond à
@@ -25,10 +24,10 @@ privées ou protégées ne peuvent pas être accédées avec le routing.
 Considérations concernant les URLs et les Noms des Controllers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Comme vous venez de voir, un controller à mot unique renvoie facilement vers
-un chemin URL en minuscules. Par exemple, ``ApplesController`` (qui serait
-défini dans le nom de fichier 'ApplesController.php') est accessible à
-l'adresse http://exemple.com/apples.
+Comme vous venez de voir, un controller à mot unique renvoie vers un chemin URL
+en minuscules. Par exemple, ``ApplesController`` (qui serait défini dans le nom
+de fichier 'ApplesController.php') est accessible à l'adresse
+http://exemple.com/apples.
 
 Les controllers avec plusieurs mots *peuvent* être de forme "inflecté" qui
 correspondent au nom du controller:

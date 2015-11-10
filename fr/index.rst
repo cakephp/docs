@@ -7,9 +7,9 @@ Bienvenue
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Remarquez le bouton "Improve this Doc" dans le coin en haut
-à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la page active,
-vous permettant de facilement contribuer, d'ajouter, de supprimer ou corriger
-la documentation.
+à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la page
+active, vous permettant de contribuer, d'ajouter, de supprimer ou corriger la
+documentation.
 
 .. container:: offline-download
 

@@ -364,8 +364,7 @@ Créer des Règles de Champ Unique
 --------------------------------
 
 Comme les règles uniques sont couramment utilisées, CakePHP inclut une classe
-de Règle simple qui vous permet de facilement définir des ensembles de champ
-unique::
+de Règle simple qui vous permet de définir des ensembles de champ unique::
 
     use Cake\ORM\Rule\IsUnique;
 

@@ -285,10 +285,10 @@ Imbriquer des Validators
 Lorsque vous validez des :doc:`/core-libraries/form` avec des données
 imbriquées, ou lorsque vous travaillez avec des modèles qui contiennent des
 données de type tableau, il est nécessaire de valider les données imbriquées
-dont vous disposez. CakePHP permet facilement d'ajouter des validators sur des
-attributs spécifiques. Par exemple, imaginez que vous travailliez avec une base
-de données non relationnelle et que vous ayez besoin d'enregistrer un article
-et ses commentaires::
+dont vous disposez. CakePHP permet d'ajouter des validators sur des attributs
+spécifiques. Par exemple, imaginez que vous travailliez avec une base de données
+non relationnelle et que vous ayez besoin d'enregistrer un article et ses
+commentaires::
 
     $data = [
         'title' => 'Meilleur article',

@@ -83,10 +83,10 @@ soient exécutés en-dehors du répertoire webroot.
 Améliorer les Performances de votre Application
 ===============================================
 
-Le chargement des classes peut facilement prendre une bonne part du temps
-d'exécution de votre application. Afin d'éviter ce problème, il est recommandé
-que vous lanciez cette commande dans votre serveur de production une fois
-que l'application est déployée::
+Le chargement des classes peut prendre une bonne part du temps d'exécution de
+votre application. Afin d'éviter ce problème, il est recommandé que vous lanciez
+cette commande dans votre serveur de production une fois que l'application est
+déployée::
 
     php composer.phar dumpautoload -o
 

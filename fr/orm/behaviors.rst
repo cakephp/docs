@@ -202,10 +202,10 @@ Définir des Finders
 -------------------
 
 Maintenant que nous sommes capable de sauvegarder les articles avec les valeurs
-de slug, nous allons implémenter une méthode de find afin de pouvoir
-facilement récupérer les articles par leur slug. Les méthodes find de behavior
-utilisent les mêmes conventions que les :ref:`custom-find-methods`. Notre
-méthode ``find('slug')`` ressemblerait à ceci::
+de slug, nous allons implémenter une méthode de find afin de pouvoir récupérer
+les articles par leur slug. Les méthodes find de behavior utilisent les mêmes
+conventions que les :ref:`custom-find-methods`. Notre méthode ``find('slug')``
+ressemblerait à ceci::
 
     public function findSlug(Query $query, array $options)
     {

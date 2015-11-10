@@ -156,10 +156,10 @@ stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
 aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
 faisant cela, attention à ne pas introduire de boucles, puisque CakePHP
 n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
-mutateurs vous permettent de facilement convertir les propriétés lorsqu'elles
-sont définies ou de créer des données calculées. Les mutateurs et accesseurs
-sont appliqués quand les propriétés sont lues en utilisant la notation objet
-ou en utilisant get() et set().
+mutateurs vous permettent de convertir les propriétés lorsqu'elles sont définies
+ou de créer des données calculées. Les mutateurs et accesseurs sont appliqués
+quand les propriétés sont lues en utilisant la notation objet ou en utilisant
+get() et set().
 
 .. _entities-virtual-properties:
 
@@ -266,9 +266,8 @@ pratique, elle peut créer des problèmes importants de sécurité.
 Assigner en masse les données d'utilisateur à partir de la requête dans une
 entity permet à l'utilisateur de modifier n'importe quelles (voir toutes) les
 colonnes. Quand vous utilisez les classes entity anonymes, CakePHP ne protège
-pas contre l'assignement en masse. Vous pouvez facilement vous protéger de
-l'assignement de masse en utilisant :doc:`la commande bake </bake>` pour
-générer vos entities.
+pas contre l'assignement en masse. Vous pouvez vous protéger de l'assignement de
+masse en utilisant :doc:`la commande bake </bake>` pour générer vos entities.
 
 La propriété ``_accessible`` vous permet de fournir une liste des champs et
 si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
@@ -428,8 +427,8 @@ Vous pouvez vous retrouver dans un cas où vous avez besoin de la même logique
 dans plusieurs classes d'entity. Les traits de PHP sont parfaits pour cela.
 Vous pouvez mettre les traits de votre application dans **src/Model/Entity**.
 Par convention, les traits dans CakePHP sont suffixés avec ``Trait`` pour
-qu'ils soient facilement discernables des classes ou des interfaces. Les traits
-sont souvent un bon allié des behaviors, vous permettant de fournir des
+qu'ils soient discernables des classes ou des interfaces. Les traits sont
+souvent un bon allié des behaviors, vous permettant de fournir des
 fonctionnalités pour la table et les objets entity.
 
 Par exemple si nous avons un plugin SoftDeletable, il pourrait fournir un trait.
