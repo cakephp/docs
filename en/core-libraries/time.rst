@@ -147,7 +147,7 @@ dates. CakePHP makes this a snap::
     $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
     // Outputs '2014-10-31 00:00:00'
-    $now->i18nFormat('YYYY-MM-dd HH:mm:ss');
+    $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 It is possible to specify the desired format for the string to be displayed.
 You can either pass `IntlDateFormatter constants
@@ -221,7 +221,7 @@ Likewise, it is possible to alter the default formatting string to be used for
 
     Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
-    Time::setToStringFormat('YYYY-MM-dd HH:mm:ss');
+    Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 
 It is recommended to always use the constants instead of directly passing a date
 format string.
