@@ -50,7 +50,7 @@ fournies sera ignoré::
 Eviter l'Écrasement des Avertissements pour les Fichiers POT Existants
 ----------------------------------------------------------------------
 
-En ajoutant --overwrite, le script de shell ne va plus vous avertir si un
+En ajoutant ``--overwrite``, le script de shell ne va plus vous avertir si un
 fichier POT existe déjà et va écraser par défaut::
 
     bin/cake i18n extract --overwrite
@@ -60,7 +60,8 @@ Extraire les Messages des Librairies du Cœur de CakePHP
 
 Par défaut le script de shell d'extraction va vous demander si vous souhaitez
 extraire les messages utilisés dans les librairies du cœur de CakePHP.
-Définissez --extract-core à yes ou no pour définir le comportement par défaut::
+Définissez ``--extract-core`` à yes ou no pour définir le comportement par
+défaut::
 
     bin/cake i18n extract --extract-core yes
 

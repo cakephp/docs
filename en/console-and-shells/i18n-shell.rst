@@ -45,8 +45,8 @@ Any path containing a path segment with the provided values will be ignored::
 Skipping Overwrite Warnings for Existing POT Files
 --------------------------------------------------
 
-By adding --overwrite, the shell script will no longer warn you if a POT file
-already exists and will overwrite by default::
+By adding ``--overwrite``, the shell script will no longer warn you if a POT
+file already exists and will overwrite by default::
 
     bin/cake i18n extract --overwrite
 
@@ -54,8 +54,8 @@ Extracting Messages from the CakePHP Core Libraries
 ---------------------------------------------------
 
 By default, the extract shell script will ask you if you like to extract
-the messages used in the CakePHP core libraries. Set --extract-core to yes or
-no to set the default behavior::
+the messages used in the CakePHP core libraries. Set ``--extract-core`` to yes
+or no to set the default behavior::
 
     bin/cake i18n extract --extract-core yes
 
