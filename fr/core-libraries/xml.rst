@@ -5,9 +5,8 @@ Xml
 
 .. php:class:: Xml
 
-La classe Xml vous permet de facilement transformer des tableaux en
-SimpleXMLElement ou en objets DOMDocument, et de nouveau les transformer en
-tableaux.
+La classe Xml vous permet de transformer des tableaux en SimpleXMLElement ou en
+objets DOMDocument, et de nouveau les transformer en tableaux.
 
 Importer les données vers la classe Xml
 =======================================

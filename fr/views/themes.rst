@@ -2,12 +2,11 @@ Themes
 ######
 
 Vous pouvez profiter des themes, ce qui facilite le changement du visuel et
-du ressenti de votre page rapidement et facilement. Les Themes dans CakePHP
-sont simplement des plugins qui se focalisent sur la livraison de fichiers
-de template. En plus des fichiers de template, ils peuvent fournir des helpers
-et des cells si votre theme le nécessite. Quand vous utilisez des cells et des
-helpers à partir de votre theme, vous devrez continuer à utiliser la
-:term:`syntaxe de plugin`.
+du ressenti de votre page rapidement. Les Themes dans CakePHP sont simplement
+des plugins qui se focalisent sur la livraison de fichiers de template. En plus
+des fichiers de template, ils peuvent fournir des helpers et des cells si votre
+theme le nécessite. Quand vous utilisez des cells et des helpers à partir de
+votre theme, vous devrez continuer à utiliser la :term:`syntaxe de plugin`.
 
 Pour utiliser les themes, définissez le nom du theme dans votre controller ou
 dans votre callback ``beforeRender()``::
@@ -44,11 +43,11 @@ Assets du theme
 ---------------
 
 Puisque les themes sont des plugins CakePHP standards, ils peuvent inclure
-tout asset nécessaire dans leur répertoire webroot. Cela permet de facilement
-packager et distribuer les themes. En développement, les requêtes pour les
-assets de theme seront gérées par :php:class:`Cake\\Routing\\Dispatcher`. Pour
-améliorer les performances pour les environnements de production, il est
-recommandé d':ref:`améliorer les performances de votre application.
+tout asset nécessaire dans leur répertoire webroot. Cela permet de packager et
+distribuer les themes. En développement, les requêtes pour les assets de theme
+seront gérées par :php:class:`Cake\\Routing\\Dispatcher`. Pour améliorer les
+performances pour les environnements de production, il est recommandé
+d':ref:`améliorer les performances de votre application.
 <symlink-assets>`.
 
 Tous les helpers intégrés à CakePHP connaissent les themes et seront créés

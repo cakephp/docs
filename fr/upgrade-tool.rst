@@ -2,9 +2,8 @@ Outil d'Upgrade
 ###############
 
 L'upgrade de CakePHP 2.x vers CakePHP 3 nécessite de nombreuses transformations
-qui peuvent facilement être automatisées, comme l'ajout des namespaces. Pour
-faciliter ces changements mécaniques, CakePHP fournit un outil d'upgrade en
-ligne de commande.
+qui peuvent être automatisées, comme l'ajout des namespaces. Pour faciliter ces
+changements mécaniques, CakePHP fournit un outil d'upgrade en ligne de commande.
 
 Installation
 ============

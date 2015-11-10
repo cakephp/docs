@@ -11,8 +11,8 @@ appelée. Votre controller devra gérer l'interprétation des données requêté
 s'assurer que les bons models sont appelés et que la bonne réponse ou vue est
 rendue. Les controllers peuvent être imaginés comme un homme au milieu entre
 le Model et la Vue. Le mieux est de garder des controllers peu chargés, et
-des models plus fournis. Cela vous aidera à réutiliser plus facilement votre
-code et facilitera le test de votre code.
+des models plus fournis. Cela vous aidera à réutiliser votre code et facilitera
+le test de votre code.
 
 Habituellement, les controllers sont utilisés pour gérer la logique autour
 d'un seul model. Par exemple, si vous construisez un site pour gérer une

@@ -621,7 +621,7 @@ Vous pouvez aussi configurer les parsers d'option des sous-commandes, ce qui
 vous permet d'avoir des parsers d'option différents pour les sous-commandes
 et les tâches.
 ConsoleOptionParser implémente une interface courant et inclut les méthodes
-pour configurer facilement les multiple options/arguments en une fois::
+pour configurer les multiple options/arguments en une fois::
 
     public function getOptionParser()
     {
@@ -871,12 +871,11 @@ l'aide et un parser d'option spécialisé pour une tâche du shell. En appelant
 le ``getOptionParser()`` de la tâche, nous n'avons pas à dupliquer la
 génération du parser d'option, ou mixer les tâches concernées dans notre shell.
 Ajoutez des sous-commandes de cette façon a deux avantages.
-Premièrement, cela laisse votre shell documenter facilement ces sous-commandes
-dans l'aide générée, et cela vous permet aussi un accès facile à l'aide de
-la sous-commande. Avec la sous-commande créée ci-dessus, vous pouvez appeler
-``cake myshell --help`` et regarder la liste des sous-commandes, et
-aussi lancer ``cake myshell model --help`` pour voir l'aide uniquement pour
-la tâche model.
+Premièrement, cela laisse votre shell documenter ces sous-commandes dans l'aide
+générée, et cela vous permet aussi un accès facile à l'aide de la sous-commande.
+Avec la sous-commande créée ci-dessus, vous pouvez appeler ``cake myshell
+--help`` et regarder la liste des sous-commandes, et aussi lancer ``cake myshell
+model --help`` pour voir l'aide uniquement pour la tâche model.
 
 .. note::
 

@@ -23,9 +23,9 @@ Outil d'Upgrade
 
 Alors que ce document couvre tous les changements non rétro-compatibles et les
 évolutions faites dans CakePHP 3.0, nous avons également créé une application
-de console pour vous aider à réaliser facilement quelques changements qui
-consomment du temps. Vous pouvez `Récupérer l'outil d'upgrade
-depuis Github <https://github.com/cakephp/upgrade>`_.
+de console pour vous aider à réaliser quelques changements qui consomment du
+temps. Vous pouvez `Récupérer l'outil d'upgrade depuis Github
+<https://github.com/cakephp/upgrade>`_.
 
 Organisation des Répertoires de l'Application
 =============================================
@@ -38,10 +38,10 @@ point de référence lors de la mise à jour de votre application.
 CakePHP doit être installé avec Composer
 ========================================
 
-Puisque CakePHP ne peut plus être facilement installé via PEAR, ou dans
-un répertoire partagé, ces options ne sont plus supportées. A la place, vous
-devez utiliser `Composer <http://getcomposer.org>`_ pour installer CakePHP dans
-votre application.
+Puisque CakePHP ne peut plus être installé via PEAR, ou dans un répertoire
+partagé, ces options ne sont plus supportées. A la place, vous devez utiliser
+`Composer <http://getcomposer.org>`_ pour installer CakePHP dans votre
+application.
 
 Namespaces (Espaces de Noms)
 ============================
@@ -453,8 +453,8 @@ Filter\AssetFilter
   règle un certain nombre de problèmes avec les librairies JavaScript comme
   TinyMCE et les environnements avec short_tags activé.
 * Le support pour la configuration de ``Asset.filter`` et les hooks ont été
-  retirés. Cette fonctionnalité peut être facilement remplacée par un plugin
-  ou un filtre dispatcher.
+  retirés. Cette fonctionnalité peut être remplacée par un plugin ou un filtre
+  dispatcher.
 
 Network
 =======
@@ -510,7 +510,7 @@ La classe session n'est plus statique, à la place, la session est accessible
 * Le chemin pour le cookie de session est maintenant par défaut le chemin de
   l'application plutôt que "/".
   De plus, une nouvelle variable de configuration ``Session.cookiePath`` a été
-  ajoutée pour personnaliser facilement le chemin du cookie.
+  ajoutée pour personnaliser le chemin du cookie.
 * Une nouvelle méthode :php:meth:`Cake\\Network\\Session::consume()` a été ajoutée
   pour permettre de lire et supprimer les données de session en une seule étape.
 
@@ -539,7 +539,7 @@ Network\\Email
 * :php:meth:`Cake\\Network\\Email\\Email::configTransport()` a été ajoutée pour
   permettre la définition de configurations de transport. Ce changement retire
   les options de transport des profiles de livraison et vous permet de
-  facilement réutiliser les transports à travers les profiles d'email.
+  réutiliser les transports à travers les profiles d'email.
 * :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` a été ajoutée pour
   permettre le retrait de la configuration du transport.
 
@@ -714,9 +714,9 @@ SecurityComponent
 - ``SecurityComponent::$disabledFields()`` a été retirée, utilisez
   ``SecurityComponent::$unlockedFields()``.
 - Les fonctionnalités liées au CSRF dans SecurityComponent ont été extraites et
-  déplacées dans un CsrfComponent séparé. Ceci vous permet de plus facilement
-  utiliser une protection CSRF sans avoir à utiliser la prévention de
-  falsification de formulaire.
+  déplacées dans un CsrfComponent séparé. Ceci vous permet d'utiliser une
+  protection CSRF sans avoir à utiliser la prévention de falsification de
+  formulaire.
 - Les options de Configuration ne sont plus définies comme des propriétés
   publiques.
 - Les méthodes ``requireAuth()`` et ``requireSecure()`` n'acceptent plus
@@ -979,8 +979,8 @@ Les méthodes suivantes ont été retirées:
 * ``Helper::_formatAttribute()``
 
 Ces méthodes se trouvent dans la classe ``StringTemplate`` que les helpers
-utilisent fréquemment. Regardez ``StringTemplateTrait`` pour intégrer facilement
-les templates de chaîne dans vos propres helpers.
+utilisent fréquemment. Regardez ``StringTemplateTrait`` pour intégrer les
+templates de chaîne dans vos propres helpers.
 
 FormHelper
 ----------
@@ -991,8 +991,8 @@ changements:
 * FormHelper fonctionne avec le nouvel ORM. Mais il a un système extensible pour
   être intégré avec d'autres ORMs ou sources de données.
 * FormHelper dispose d'une fonctionnalité de système de widget extensible qui
-  vous permet de créer de nouveaux widgets d'input personnalisés et de facilement
-  améliorer ceux intégrés.
+  vous permet de créer de nouveaux widgets d'input personnalisés et d'améliorer
+  ceux intégrés.
 * Les templates de chaîne sont un élément fondateur du helper. Au lieu de
   tableaux imbriqués ensemble partout, la plupart du HTML que FormHelper génère
   peut être personnalisé dans un endroit central en utilisant les ensembles de

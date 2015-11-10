@@ -50,8 +50,8 @@ Vous pouvez maintenant essayer de récupérer à nouveau votre entity::
     $article = $this->Articles->get(12);
     echo $article->title; // Affiche 'Un Artículo', ouah facile!
 
-Travailler avec plusieurs traductions peut être fait facilement en utilisant un
-trait spécial dans votre classe Entity::
+Travailler avec plusieurs traductions peut être fait en utilisant un trait
+spécial dans votre classe Entity::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;
@@ -398,7 +398,7 @@ Sauvegarder Plusieurs Traductions
 
 C'est un prérequis habituel d'être capable d'ajouter ou de modifier plusieurs
 traductions à l'enregistrement de la base de données au même moment. Ceci peut
-être facilement fait en utilisant ``TranslateTrait``::
+être fait en utilisant ``TranslateTrait``::
 
     use Cake\ORM\Behavior\Translate\TranslateTrait;
     use Cake\ORM\Entity;

@@ -150,9 +150,9 @@ Doctors hasOne Mentors mentors.doctor\_id
 .. note::
 
     Il n'est pas obligatoire de suivre les conventions de CakePHP, vous pouvez
-    facilement outrepasser l'utilisation de toute clé étrangère dans les
-    définitions de vos associations. Néanmoins, coller aux conventions donnera
-    un code moins répétitif, plus facile à lire et à maintenir.
+    outrepasser l'utilisation de toute clé étrangère dans les définitions de vos
+    associations. Néanmoins, coller aux conventions donnera un code moins
+    répétitif, plus facile à lire et à maintenir.
 
 Si nous avions les classes ``UsersTable`` et ``AddressesTable``, nous
 pourrions faire l'association avec le code suivant::

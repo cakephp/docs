@@ -586,7 +586,7 @@ de CakePHP 2.x:
 - Les signatures de méthode pour les méthodes mixin a changé.
 - Les signatures de méthode pour les méthodes de callback a changé.
 - La classe de base pour les behaviors a changé.
-- Les Behaviors peuvent facilement ajouter des méthodes find.
+- Les Behaviors peuvent ajouter des méthodes find.
 
 Nouvelle classe de Base
 -----------------------

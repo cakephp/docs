@@ -1,8 +1,8 @@
 Vues JSON et XML
 ################
 
-Les views ``JsonView`` et ``XmlView`` vous permettent de créer facilement des
-réponses JSON et XML, et sont intégrées à
+Les views ``JsonView`` et ``XmlView`` vous permettent de créer des réponses JSON
+et XML, et sont intégrées à
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
 En activant ``RequestHandlerComponent`` dans votre application, et en activant
@@ -137,12 +137,16 @@ C'est une situation où un fichier de vue est utile::
     echo json_encode(compact('articles'));
 
 Vous pouvez faire des manipulations encore beaucoup plus complexes, comme
-utiliser les helpers pour formater.
+utiliser les helpers pour formater. Les classes de vue ded onnées ne supportent
+pas les layouts. Elles supposent que le fichier de vue va afficher le contenu
+sérialisé.
 
 .. note::
 
-    Les classes de vue de données ne supportent pas les layouts. Elles
-    supposent que le fichier de vue va afficher le contenu sérialisé.
+    Depuis 3.1.0, le AppController du squelette d'application ajoute
+    automatiquement ``'_serialize' => true`` à toutes les requêtes XML/JSON.
+    Vous devrez retirer ce code à partir du callback beforeRender si vous
+    souhaitez utiliser les fichiers de vue.
 
 Créer des Views XML
 ===================

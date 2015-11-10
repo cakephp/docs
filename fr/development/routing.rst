@@ -10,9 +10,9 @@ controller. En définissant des routes, vous pouvez séparer la façon dont votr
 application est intégrée de la façon dont ses URLs sont structurées.
 
 Le Routing dans CakePHP englobe aussi l'idée de routing inversé, où un tableau
-de paramètres peut être transformé en une URL. En utilisant le routing
-inversé, vous pouvez facilement reconstruire la structure d'URL de
-votre application sans mettre à jour tous vos codes.
+de paramètres peut être transformé en une URL. En utilisant le routing inversé,
+vous pouvez reconstruire la structure d'URL de votre application sans mettre à
+jour tous vos codes.
 
 .. index:: routes.php
 
@@ -199,7 +199,7 @@ pourriez considérer la création d'une route. Cela vous permet de vous lier
 Une autre utilisation ordinaire pour le Router est de définir un "alias" pour
 un controller. Disons qu'au lieu d'accéder à notre URL régulière à
 ``/users/some_action/5``, nous aimerions être capable de l'accéder avec
-``/cooks/some_action/5``. La route suivante s'occupe facilement de cela::
+``/cooks/some_action/5``. La route suivante s'occupe de cela::
 
     $routes->connect(
         '/cooks/:action/*', ['controller' => 'Users']
@@ -754,9 +754,9 @@ détecter la méthode HTTP utilisée. Voici la liste dans l'ordre de préférenc
 #. Le header REQUEST\_METHOD
 
 La variable POST \_method est utile dans l'utilisation d'un navigateur comme un
-client REST (ou tout ce qui peut faire facilement du POST). Il suffit de
-configurer la valeur de \_method avec le nom de la méthode de requête HTTP que
-vous souhaitez émuler.
+client REST (ou tout ce qui peut faire du POST). Il suffit de configurer la
+valeur de \_method avec le nom de la méthode de requête HTTP que vous souhaitez
+émuler.
 
 Créer des Routes de Ressources Imbriquées
 -----------------------------------------
@@ -961,11 +961,10 @@ Générer des URLs
 .. php:staticmethod:: url($url = null, $full = false)
 
 Le routing inversé est une fonctionnalité dans CakePHP qui est utilisée pour
-vous permettre de changer facilement votre structure d'URL sans avoir à
-modifier tout votre code. En utilisant des
-:term:`tableaux de routing <tableau de routing>` pour définir vos URLs, vous
-pouvez configurer les routes plus tard et les URLs générés vont automatiquement
-être mises à jour.
+vous permettre de changer votre structure d'URL sans avoir à modifier tout votre
+code. En utilisant des :term:`tableaux de routing <tableau de routing>` pour
+définir vos URLs, vous pouvez configurer les routes plus tard et les URLs
+générés vont automatiquement être mises à jour.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
@@ -1156,8 +1155,8 @@ Les fonctions de callback de filtre doivent attendre les paramètres suivants:
 La fonction filtre d'URL doit *toujours* retourner les paramètres même s'ils
 n'ont pas été modifiés.
 
-Les filtres d'URL vous permettent d'implémenter facilement des fonctionnalités
-telles que l'utilisation de paramètres d'URL persistants::
+Les filtres d'URL vous permettent d'implémenter des fonctionnalités telles que
+l'utilisation de paramètres d'URL persistants::
 
     Router::addUrlFilter(function ($params, $request) {
         if (isset($request->params['lang']) && !isset($params['lang'])) {

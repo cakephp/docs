@@ -41,12 +41,11 @@ Utiliser les Filtres
 ====================
 
 Les filtres sont habituellement activés dans le fichier **bootstrap.php** de
-votre application, mais vous pouvez facilement les charger à n'importe quel
-moment avant que la requête ne soit dispatchée. Ajouter et retirer les filtres
-se fait avec :php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le
-template d'une application CakePHP est fourni avec un couple de classes filter
-déjà activées pour toutes les requêtes; Regardons la façon dont elles sont
-ajoutées::
+votre application, mais vous pouvez les charger à n'importe quel moment avant
+que la requête ne soit dispatchée. Ajouter et retirer les filtres se fait avec
+:php:class:`Cake\\Routing\\DispatcherFactory`. Par défaut, le template d'une
+application CakePHP est fourni avec un couple de classes filter déjà activées
+pour toutes les requêtes; Regardons la façon dont elles sont ajoutées::
 
     DispatcherFactory::add('Routing');
     DispatcherFactory::add('ControllerFactory');

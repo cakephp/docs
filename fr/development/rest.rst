@@ -100,11 +100,10 @@ dans nos actions de controller. Un controller basique pourrait ressembler
     }
 
 Les controllers RESTful utilisent souvent les extensions parsées pour servir
-différentes views basées sur différents types de requête. Puisque nous
-gérons les requêtes REST, nous ferons des views XML. Vous pouvez aussi
-facilement faire des views JSON en utilisant les
-:doc:`/views/json-and-xml-views` intégrées à CakePHP. En utilisant
-:php:class:`XmlView` intégré, nous pouvons définir une variable de vue
+différentes views basées sur différents types de requête. Puisque nous gérons
+les requêtes REST, nous ferons des views XML. Vous pouvez aussi faire des views
+JSON en utilisant les :doc:`/views/json-and-xml-views` intégrées à CakePHP. En
+utilisant :php:class:`XmlView` intégré, nous pouvons définir une variable de vue
 ``_serialize``. Cette variable de vue spéciale est utilisée pour définir les
 variables de vue que ``XmlView`` doit sérialiser en XML.
 

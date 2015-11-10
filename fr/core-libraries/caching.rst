@@ -181,9 +181,8 @@ stocker les résultats des 'finds' de vos models::
         Cache::write('posts', $posts);
     }
 
-Utiliser ``Cache::write()`` et ``Cache::read()`` réduira facilement le
-nombre d'allers-retours effectués vers la base de données pour récupérer les
-messages.
+Utiliser ``Cache::write()`` et ``Cache::read()`` réduira le nombre
+d'allers-retours effectués vers la base de données pour récupérer les messages.
 
 .. note::
 
@@ -344,13 +343,13 @@ Utiliser le Cache pour Stocker les Compteurs
 
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
 
-Les compteurs pour diverses choses sont facilement stockées dans un cache. Par
-exemple, un simple compte à rebours pour des places restantes dans un concours
-peut être stocké dans le cache. La classe Cache expose des opérations atomiques
-pour incrémenter/décrémenter les valeurs du compteur de manière simple. Les
-opérations atomiques sont importantes pour ces valeurs, car elle réduisent le
-risque de contention, et la capacité pour deux utilisateurs d'abaisser
-simultanément la valeur, ce qui entraînerait une valeur incorrecte.
+Les compteurs de votre application sont de bons candidats pour le stockage dans
+un cache. Par exemple, un simple compte à rebours pour des places restantes dans
+un concours peut être stocké dans le cache. La classe Cache expose des
+opérations atomiques pour incrémenter/décrémenter les valeurs du compteur de
+manière simple. Les opérations atomiques sont importantes pour ces valeurs, car
+elle réduisent le risque de contention, et la capacité pour deux utilisateurs
+d'abaisser simultanément la valeur, ce qui entraînerait une valeur incorrecte.
 
 Après avoir défini une valeur entière, vous pouvez la manipuler à l'aide des
 fonctions ``increment()`` et ``decrement()``::

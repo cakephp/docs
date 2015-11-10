@@ -562,8 +562,7 @@ Ce qui précède générerait le code SQL::
     ))
 
 En utilisant les fonctions en paramètres pour ``orWhere()`` et ``andWhere()``,
-vous pouvez facilement organiser ensemble les conditions avec les objets
-expression::
+vous pouvez organiser ensemble les conditions avec les objets expression::
 
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
@@ -1311,7 +1310,7 @@ façon légère de mapper les ensembles de résultats. Si vous avez besoin de pl
 contrôle sur le processus, ou que vous souhaitez réduire les résultats, vous
 devriez utiliser la fonctionnalité de :ref:`Map/Reduce <map-reduce>` à la
 place. Si vous faîtes une requête d'une liste de personnes, vous pourriez
-facilement calculer leur âge avec le formateur de résultats::
+calculer leur âge avec le formateur de résultats::
 
     // En supposant que nous avons construit les champs, les conditions et les contain.
     $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {

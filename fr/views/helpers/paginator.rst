@@ -31,8 +31,8 @@ Charger les Templates à partir d'un Fichier
 
 Lors de l'ajout de PaginatorHelper dans votre controller, vous pouvez définir
 la configuration de 'templates' pour définir un fichier de template à charger.
-Cela vous permet de facilement personnaliser plusieurs templates et de garder
-votre code DRY::
+Cela vous permet de personnaliser plusieurs templates et de garder votre code
+DRY::
 
     // Dans un controller.
     public $helpers = [
@@ -443,8 +443,8 @@ n'a pas toujours besoin d'être limité en tant que tel.
 Voir les détails sur
 `PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator
-offre également des fonctionnalités de tri qui peuvent être facilement
-intégrées dans vos en-têtes de colonne de table:
+offre également des fonctionnalités de tri qui peuvent être intégrées dans vos
+en-têtes de colonne de table:
 
 .. code-block:: php
 
