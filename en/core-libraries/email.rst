@@ -71,7 +71,7 @@ methods to set all configurations separately or load an array of configs.
 
 By defining profiles and transports, you can keep your application code free of
 configuration data, and avoid duplication that makes maintenance and deployment
-less difficult.
+more difficult.
 
 To load a predefined configuration, you can use the ``profile()`` method or pass it
 to the constructor of ``Email``::
