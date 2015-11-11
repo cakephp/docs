@@ -9,7 +9,7 @@ Controllers are the 'C' in MVC. After routing has been applied and the correct
 controller has been found, your controller's action is called. Your controller
 should handle interpreting the request data, making sure the correct models
 are called, and the right response or view is rendered. Controllers can be
-thought of as middle man between the Model and View. You want to keep your
+thought of as middle layer between the Model and View. You want to keep your
 controllers thin, and your models fat. This will help you reuse
 your code and makes your code easier to test.
 
