@@ -2,12 +2,13 @@ Themes
 ######
 
 You can take advantage of themes, making it easy to switch the look and feel of
-your page quickly. Themes in CakePHP are simply plugins that focus on
-providing template files. In addition to template files, they can also provide
-helpers and cells if your theming requires that. When using cells and helpers from your
+your page quickly. Themes in CakePHP are simply plugins that focus on providing
+template files. In addition to template files, they can also provide helpers and
+cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
-To use themes, set the theme name in your controller's action or ``beforeRender()`` callback::
+To use themes, set the theme name in your controller's action or
+``beforeRender()`` callback::
 
     class ExamplesController extends AppController
     {
@@ -21,14 +22,18 @@ To use themes, set the theme name in your controller's action or ``beforeRender(
     }
 
 Theme template files need to be within a plugin with the same name. For example,
-the above theme would be found in **plugins/AnotherExample/src/Template**.
+the above theme would be found in **plugins/Modern/src/Template**.
 It's important to remember that CakePHP expects CamelCase plugin/theme names. Beyond
-that, the folder structure within the **plugins/AnotherExample/src/Template** folder is
+that, the folder structure within the **plugins/Modern/src/Template** folder is
 exactly the same as **src/Template/**.
 
 For example, the view file for an edit action of a Posts controller would reside
 at **plugins/Modern/src/Template/Posts/edit.ctp**. Layout files would reside in
-**plugins/Modern/src/Template/Layout/**.
+**plugins/Modern/src/Template/Layout/**. You can provide customized templates
+for plugins with a theme as well. If you had a plugin named 'Cms', that
+contained a TagsController, the Modern theme could provide
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** to replace the edit
+template in the plugin.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
 file in the **src/Template/** folder. This way, you can create master template files
