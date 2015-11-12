@@ -4,14 +4,14 @@ Appendices
 Appendices contain information regarding the new features
 introduced in each version and the migration path between versions.
 
-3.0 Migration Guide
+3.2 Migration Guide
 ===================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-0-migration-guide
-    appendices/orm-migration
+    appendices/3-2-migration-guide
+
 
 3.1 Migration Guide
 ===================
@@ -20,6 +20,15 @@ introduced in each version and the migration path between versions.
     :maxdepth: 1
 
     appendices/3-1-migration-guide
+
+3.0 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/3-0-migration-guide
+    appendices/orm-migration
 
 General Information
 ===================
