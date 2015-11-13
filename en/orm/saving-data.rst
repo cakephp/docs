@@ -13,7 +13,7 @@ A Glance Over Saving Data
 =========================
 
 Applications will usually have a couple of ways in which data is saved. The first
-one is obviously though web forms and the other is by directly generating or
+one is obviously through web forms and the other is by directly generating or
 changing data in the code to be sent to the database.
 
 Inserting Data
