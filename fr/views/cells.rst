@@ -144,9 +144,9 @@ Passer des Arguments à une Cell
 Vous voudrez souvent paramétrer les méthodes cell pour rendre les cells plus
 flexibles. En utilisant les deuxième et troisième arguments de ``cell()``, vous
 pouvez passer des paramètres d'action, et des options supplémentaires à vos
-classes de cell::
+classes de cell, en tableau indexé::
 
-    $cell = $this->cell('Inbox::recent', ['since' => '-3 days']);
+    $cell = $this->cell('Inbox::recent', ['-3 days']);
 
 Ce qui est au-dessus correspondra à la signature de la fonction suivante::
 
@@ -176,7 +176,7 @@ qu'ils exécutent. Si vous avez besoin d'afficher un template de vue différent,
 vous pouvez spécifier le template à utiliser lors de l'affichage de la cell::
 
     // Appel de render() explicitement
-    echo $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages');
+    echo $this->cell('Inbox::recent', ['-3 days'])->render('messages');
 
     // Définit le template avant de faire un echo de la cell.
     $cell = $this->cell('Inbox'); ?>
