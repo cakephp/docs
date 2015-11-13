@@ -479,5 +479,5 @@ sphinxの勧告(*Admonitions*)は、まさにそのために使われます。
 
 
 .. meta::
-:title lang=en: Documentation
-    :keywords lang=en: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
+:title lang=ja: ドキュメンテーション
+    :keywords lang=ja: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
