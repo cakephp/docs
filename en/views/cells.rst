@@ -134,9 +134,9 @@ Passing Arguments to a Cell
 
 You will often want to parameterize cell methods to make cells more flexible.
 By using the second and third arguments of ``cell()``, you can pass action
-parameters and additional options to your cell classes::
+parameters and additional options to your cell classes, as an indexed array::
 
-    $cell = $this->cell('Inbox::recent', ['since' => '-3 days']);
+    $cell = $this->cell('Inbox::recent', ['-3 days']);
 
 The above would match the following function signature::
 
@@ -166,7 +166,7 @@ If you need to render a different view template, you can specify the template
 to use when rendering the cell::
 
     // Calling render() explicitly
-    echo $this->cell('Inbox::recent', ['since' => '-3 days'])->render('messages');
+    echo $this->cell('Inbox::recent', ['-3 days'])->render('messages');
 
     // Set template before echoing the cell.
     $cell = $this->cell('Inbox');
