@@ -133,6 +133,7 @@ like::
             'database' => 'my_app',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
+            'flags' = [],
             'cacheMetadata' => true,
         ]
     ],
@@ -155,6 +156,7 @@ would be::
         'database' => 'my_app',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
+        'flags' = [],
         'cacheMetadata' => true,
     ]);
 
@@ -228,9 +230,11 @@ quoteIdentifiers
     noted that this decreases performance because each query needs to be traversed
     and manipulated before being executed.
 flags
-    An associative array of PDO constants that should be passed to the
-    underlying PDO instance. See the PDO documentation for the flags supported
-    by the driver you are using.
+    An associative array of PDO constants that should be passed to the underlying
+    PDO instance. See the PDO documentation of your database for the flags supported
+    by the driver you are using. An example would be enabling MySQL's ``LOAD DATA LOCAL
+    INFILE`` statements by specifying ``'flags' => [PDO::MYSQL_ATTR_LOCAL_INFILE => true]``.
+    See http://php.net/manual/en/ref.pdo-mysql.php#pdo-mysql.constants for details.
 cacheMetadata
     Either boolean ``true``, or a string containing the cache configuration to store
     meta data in. Having metadata caching disable is not advised and can result
@@ -771,4 +775,4 @@ CakePHP also includes a CLI tool for managing metadata caches. See the
 
 .. meta::
     :title lang=en: Database Basics
-    :keywords lang=en: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching
+    :keywords lang=en: SQL,MySQL,MariaDB,PostGres,Postgres,postgres,PostgreSQL,PostGreSQL,postGreSql,select,insert,update,delete,statement,configuration,connection,database,data,types,custom,,executing,queries,transactions,prepared,statements,binding,fetching,row,count,error,codes,query,logging,identifier,quoting,metadata,caching,pdo,driver options, flags
