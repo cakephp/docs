@@ -3,54 +3,127 @@
 
 ドキュメントへの貢献の方法はシンプルです。
 ファイルは https://github.com/cakephp/docs にホストされています。
-自由にレポジトリをフォークして、変更・改善・翻訳を追加し、プルリクエストを発行してください。
-またファイルをダウンロードせず、GitHubを使ってオンラインでドキュメントを編集することもできます。
+自由にレポジトリをフォークして、変更・改善・翻訳を追加し、
+プルリクエストを発行してください。
+またファイルをダウンロードせず、
+GitHubを使ってオンラインでドキュメントを編集することもできます。
+どのページにも存在している「Improve this Doc」ボタンを押すことで、
+GitHub 上にあるそのページのオンラインエディタに飛ぶことができます。
+
+CakePHP ドキュメンテーションは
+`継続的インテグレーション <https://ja.wikipedia.org/wiki/%E7%B6%99%E7%B6%9A%E7%9A%84%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3>`_
+で行われているので、Jenkins サーバ上でいつでも
+`various builds <http://ci.cakephp.org>`_
+のステータスをチェックすることができます。
 
 翻訳
 ====
 
-ドキュメントチーム(*docs at cakephp dot org*)までEメールを送るか、IRC (#cakephp on freenode)で、参加したい旨を連絡してください。
+ドキュメントチーム(*docs at cakephp dot org*)までEメールを送るか、
+IRC (#cakephp on freenode)で、参加したい旨を連絡してください。
 
-翻訳者tips:
+新たに翻訳する言語
+------------------------
 
-- 翻訳する言語のページで閲覧・編集してください。
-  そうしないと、どこが既に翻訳されているかわからないでしょう。
-- この本の中に読みたい言語を見つけたら、どうぞ遠慮なくご覧ください。
-- `フレンドリーな文体 <http://en.wikipedia.org/wiki/Register_(linguistics)>`_ を使ってください。
+できるだけ完全な翻訳を提供したいのですが、
+翻訳ファイルが最新になっていない部分もありえます。
+常に英語バージョンを正のバージョンと考えてください。
+
+もし、あなたの言語が現在の言語の中に無いなら、
+我々に Github 経由で連絡を頂ければ、我々はスケルトンフォルダの作成を考えます。
+以下のセクションは頻繁に書き換わらないファイルなので
+翻訳を検討するにはもっとも適しています:
+
+- index.rst
+- intro.rst
+- quickstart.rst
+- installation.rst
+- /intro folder
+- /tutorials-and-examples folder
+
+ドキュメント管理者へのリマインド
+--------------------------------
+
+すべての言語フォルダの構造は英語フォルダの構造のミラーであるべきです。
+もし英語版の構造が変わったら、我々はそれらの変更を他の言語にも適用します。
+
+たとえば、新しい英語のファイルが **en/file.rst** に作成されたら、
+我々は次のようにします:
+
+- 他のすべての言語の中にそのファイルを追加します : **fr/file.rst**, **zh/file.rst**, ...
+- 中身を削除します。ただし、``title`` 、 ``meta`` 情報、
+  ``toc-tree`` 要素は残しておきます。
+  次の記述は誰も翻訳していないファイルに記載されるものです::
+
+    File Title
+    ##########
+
+    .. note::
+        The documentation is not currently supported in XX language for this
+        page.
+
+        Please feel free to send us a pull request on
+        `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+        button to directly propose your changes.
+
+        You can refer to the English version in the select top menu to have
+        information about this page's topic.
+
+    // If toc-tree elements are in the English version
+    .. toctree::
+        :maxdepth: 1
+
+        one-toc-file
+        other-toc-file
+
+    .. meta::
+        :title lang=xx: File Title
+        :keywords lang=xx: title, description,...
+
+
+翻訳者tips
+---------------
+
+- 翻訳先の言語のページを閲覧・編集してください。そうしなければ、翻訳済みのものは見えません。
+- 選択した言語が book 上にすでに存在しているなら、遠慮無くその先に飛び込んでください。
+- `堅苦しくない文体 <http://en.wikipedia.org/wiki/Register_(linguistics)>`_
+  を使ってください。
 - タイトルと内容を同時に翻訳してください。
-- 修正を投稿する前に、英語版との比較を行うようにしてください。
-  どこかを修正しても、以前の変更が統合されていなかったら、投稿したものが受け付けられないことがあります。
-- 用語を英語で書く場合には、 ``<em>`` タグで囲んでください。
+- 修正を投稿する前に、英語版との比較を行うようにしてください
+  （何か修正しても、 'upstream' の変更が含まれていないなら、あなたの投稿は受け入れられません）。
+- 用語を英語で書く必要があるなら、 ``<em>`` タグで囲んでください。
   例えば、「asdf asdf *Controller* asdf」 や 「asdf asdf Kontroller (*Controller*) asfd」 などです。
 - 一部だけ翻訳して投稿しないでください。
 - 保留されている項目があるセクションは編集しないでください。
 - アクセント文字のために
   `HTML エンティティ <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   を使用しないでください。
-  この本はUTF-8を使っています。
-- 記述(HTML)の変更や新しいコンテンツを、一度にたくさん加えないでください。
+  この book はUTF-8を使っています。
+- マークアップ(HTML)の変更や新しいコンテンツを絶対に変更しないでください。
 - 元のコンテンツに不備がある場合は、まずそれを編集するようにしてください。
 
 ドキュメントのフォーマットガイド
 ================================
 
-新しいCakePHPのドキュメントはReSTフォーマットテキストで書かれています。
-ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキストのマークアップ記法です。
-一貫性を保持するために、CakePHPドキュメントに追加をする場合、以下のテキストのフォーマットと構造化をする方法のガイドラインに従うことが推奨されます。
+新しいCakePHPのドキュメントは `ReST形式 <https://ja.wikipedia.org/wiki/ReStructuredText>`_ で書かれています。
+ReST(Re Structured Text)はmarkdownやtextileに似たプレーンテキストのマークアップ記法です。
+一貫性を保持するために、CakePHPドキュメントに追加をする際には、
+自分のテキストのフォーマットと構造をこのガイドラインに合わせてください。
 
 行の長さ
 --------
 
-テキストの行は80列でワードラップがかけられるべきです。
+テキストの行は半角 80 列を基準に改行してください。
 例外は長いURLとコードスニペットのみです。
 
 見出しとセクション
 ------------------
 
-セクションの見出しはテキストの長さ以上の区切り文字でタイトルにアンダーラインをつけることで作成されます。
+セクションの見出しはテキストの長さ以上の区切り文字で
+タイトルにアンダーラインをつけることで作成されます。
 
-- ``#`` はページタイトルを意味するのに使われます。
-- ``=`` はページのセクションを意味するのに使われます。
+- ``#`` はページタイトルを示すのに使われます。
+- ``=`` はページ内のセクションを意味するのに使われます。
 - ``-`` はサブセクションを意味するのに使われます。
 - ``~`` はサブ-サブセクションを意味するのに使われます。
 - ``^`` はサブ-サブ-サブセクションを意味するのに使われます。
@@ -61,24 +134,41 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
 段落(*Paragraphs*)
 ------------------
 
-段落は単にテキストの塊で、全ての行に同じレベルのインデントがつけられます。
+段落というのは、全ての行が同じレベルのインデントがつけられた、単純なテキストの塊です。
 段落は1行以上の空行で区切られる必要があります。
 
 インラインマークアップ
 ----------------------
 
-* 単一のアスタリスク: *text* 強調(斜体)、
-* 二つのアスタリスク: **text** 強い強調(太文字)、
-* バッククォート: ``text`` コード例。
+* 単一のアスタリスク: *text* 強調(斜体)
+  我々はこれを一般的なハイライト/強調に使います。
 
-もしアスタリスクやバッククォートがテキストが書かれている中に現れ、インラインマークアップの区切り文字に取り間違えられることがあるなら、バックスラッシュでエスケープする必要があります。
+  * ``*text*``。
+
+* 二つのアスタリスク: **text** 強い強調(太文字)
+  我々はこれを作業ディレクトリ、箇条書きリストのタイトル、
+  テーブル名（後に続く単語 "table" は含めません）に使います。
+
+  * ``**/config/Migrations**``、 ``**articles**`` など。
+
+* ２つのバッククォート: ``text`` コード例。
+  我々はこれをメソッドのオプション名、テーブルの列名、
+  オブジェクト名（後に続く単語 "object" は含めません）、
+  メソッド/関数名（ "()" を含めます ）に使います。
+
+  * ````cascadeCallbacks````、 ````true````、 ````id````、
+    ````PagesController````、 ````config()```` など。
+
+もしアスタリスクやバッククォートが文章の中に現れて、
+インラインマークアップの区切り文字に間違えられうるなら、
+バックスラッシュでエスケープする必要があります。
 
 インラインマークアップは多少の制限があります:
 
-* ネスト **できない場合があります** 。
-* 中身は空白で開始・終了できないでしょう: ``* text*`` は間違いです。
-* 中身は非単語文字で、周囲のテキストから分離されている必要があります。
-  これを回避するためにバックスラッシュでエスケープされた空白を使ってください: ``一つの長い\ *太文字*\ 単語`` 。
+* ネスト **できません** 。
+* マークアップ対象の最初や最後が空白ではいけません: ``* text*`` は間違いです。
+* マークアップ対象は非単語文字（訳注:空白等）で囲まれることで、それ以外と区別されていなければなりません。
+  単語を分けたくない場合はバックスラッシュで空白をエスケープしてください: ``一続きの長い\ *太字部分*\ を含む単語`` 。
 
 リスト
 ------
@@ -114,7 +204,8 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
     CakePHP
         PHPのMVCフレームワーク
 
-項目は1行以上にすることができませんが、定義は複数行にすることができ、全ての行は一貫したインデントをつける必要があります。
+項目は1行以上にすることができませんが、定義は複数行にすることができ、
+全ての行は一貫したインデントをつける必要があります。
 
 リンク
 ------
@@ -126,9 +217,9 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
 
 外部のドキュメントへのリンクは以下のようにできます::
 
-    `外部リンク <http://example.com>`_
+    `php.netへの外部リンク <http://php.net>`_
 
-以上のものはhttp://example.comに向けてのリンクを生成します。
+以上のものは次のようにリンクします: `External Link to php.net <http://php.net>`_
 
 他のページへのリンク
 ~~~~~~~~~~~~~~~~~~~~
@@ -138,8 +229,10 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
     ドキュメントの他のページへ ``:doc:`` ロール(*role*)を使ってリンクします。
     指定するドキュメントへ絶対パスまたは相対パス参照を用いてリンクできます。
     ``.rst`` 拡張子は省く必要があります。
-    例えば、 ``:doc:`form``` が ``core-helpers/html`` に現れたとすると、リンクは ``core-helpers/form`` を参照します。
-    もし参照が ``:doc:`/core-helpers``` であったら、どこで使われるかを厭わずに、常に ``/core-helpers`` を参照します。
+    例えば、 ``:doc:`form``` が ``core-helpers/html`` に書かれていたとすると、
+    リンクは ``core-helpers/form`` を参照します。
+    もし参照が ``:doc:`/core-helpers``` であったら、どこで使われるかを厭わずに、
+    常に ``/core-helpers`` を参照します。
 
 相互参照リンク
 ~~~~~~~~~~~~~~
@@ -148,9 +241,10 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
 
     ``:ref:`` ロールを使って任意のドキュメントに任意のタイトルを相互参照することができます。
     リンクのラベルはドキュメント全体に渡って一意のものに向けられる必要があります。
-    クラスのメソッドのラベルを作る時は、リンクのラベルのフォーマットとして ``class-method`` を使うのがベストです。
+    クラスのメソッドのラベルを作る時は、リンクのラベルのフォーマットとして
+    ``class-method`` を使うのがベストです。
 
-    ラベルの最も一般的な使い方は上記のタイトルです。例::
+    ラベルの最も一般的な使い方はタイトルの上に書くことです。例::
 
         .. _ラベル名:
 
@@ -163,15 +257,15 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
     リンクのテキストはリンクの先にあるタイトルになります。
     また、 ``:ref:`リンクテキスト <ラベル名>``` として自由にリンクのテキストを指定することができます。
 
-Prevent Sphinx to Output Warnings
+Sphinx が出力する警告を防ぐ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a file is not referenced in a toc-tree. It's
-a great way to ensure that all files have a link directed to them, but
-sometimes, you don't need to insert a link for a file, eg. for our
-`epub-contents` and `pdf-contents` files. In those cases, you can add
-``:orphan:`` at the top of the file, to suppress warnings that the file is not
-in the toc-tree.
+Sphinx は toc-tree 内に参照されないファイルがあると警告を出力します。
+これは、すべてのファイルが正しいリンクを持っていることを確認する良い方法ではありますが、
+ファイルへのリンクを挿入する必要がないときもありえます。
+たとえば、 `epub-contents` と `pdf-contents` などがそうです。
+これらのケースでは、ファイルの先頭に ``:orphan:`` を加えることで、
+このファイルが toc-tree にいないという警告を抑えることができます。
 
 クラスとその内容を記述する
 --------------------------
@@ -179,7 +273,7 @@ in the toc-tree.
 CakePHPのドキュメントは `phpdomain
 <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
 を用いてPHPのオブジェクトと構成物を記述するための独自のディレクティブを提供します。
-適切な索引(*index*)と相互参照機能を与えるためにこのディレクティブとロールを必ず使う必要があります。
+適切な索引(*index*)と相互参照機能を与えるためにこのディレクティブとロールの利用は欠かせません。
 
 クラスと構成物を記述する
 ------------------------
@@ -254,16 +348,17 @@ CakePHPのドキュメントは `phpdomain
 
    クラスのプロパティ・属性を記述します。
 
-Prevent Sphinx to Output Warnings
+Sphinx が出力する警告を防ぐ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sphinx will output warnings if a function is referenced in multiple files. It's
-a great way to ensure that you did not add a function two times, but
-sometimes, you actually want to write a function in two or more files, eg.
-`debug object` is referenced in `/development/debugging` and in
-`/core-libraries/global-constants-and-functions`. In this case, you can add
-``:noindex:`` under the function debug to suppress warnings. Keep only
-one reference **without** ``:no-index:`` to still have the function referenced::
+Sphinx は関数が複数のファイルから参照されていると警告を出力します。
+これは、関数を２度追加していないことを確認する良い方法ではありますが、
+実査には複数回にわたって関数を書きたいときももありえます。
+たとえば、 `debug object` が `/development/debugging` と
+`/core-libraries/global-constants-and-functions` から参照されます。
+このケースでは、debug 関数の下に ``:noindex:`` を加えることで、
+警告を抑えることができます。
+その関数が参照されるために ``:no-index:`` の **無い** 参照を１つだけを残して下さい::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
         :noindex:
@@ -334,8 +429,8 @@ one reference **without** ``:no-index:`` to still have the function referenced::
 ----------
 
 重要なヒント、特別な注記、潜在的な危険を読者に知らせるためにしたいことがしばしばあります。
-sphinxの警告(*Admonitions*)は、まさにそのために使われます。
-警告には3つの種類があります。
+sphinxの勧告(*Admonitions*)は、まさにそのために使われます。
+勧告には3つの種類があります。
 
 * ``.. tip::`` tipは面白い情報や重要な情報を文書化、または再反復するために使用されています。
   ディレクティブの内容は完結した文章で書かれ、また全ての適切な句読点を含める必要があります。
@@ -343,8 +438,14 @@ sphinxの警告(*Admonitions*)は、まさにそのために使われます。
   ディレクティブの内容は完結した文章で書かれ、また全ての適切な句読点を含める必要があります。
 * ``.. warning::`` warningは潜在的な障害、またはセキュリティに関する情報を文書化するために使用されています。
   ディレクティブの内容は完結した文章で書かれ、また全ての適切な句読点を含める必要があります。
+* ``.. versionadded:: X.Y.Z`` "バージョン追加" 勧告は特定のバージョンで追加された
+  新機能特有の注記を表示するために使われます。
+  ``X.Y.Z`` はその機能が追加されたバージョンです。
+* ``.. deprecated:: X.Y.Z`` "バージョン追加" 勧告とは反対に, "撤廃" 勧告は、
+  廃止される機能を通知するために使われます。
+  ``X.Y.Z`` はその機能が撤廃されるバージョンです。
 
-全ての警告は同じようになります::
+全ての勧告は同じようになります::
 
     .. note::
 
@@ -366,4 +467,17 @@ sphinxの警告(*Admonitions*)は、まさにそのために使われます。
 
 .. warning::
 
-    危険に晒されるかもしれません。
+    危ないかもしれません。
+
+.. versionadded:: 2.6.3
+
+    すごい機能がバージョン 2.6.3 で追加されました。
+
+.. deprecated:: 2.6.3
+
+    この古い機能はバージョン 2.6.3 で撤廃されます。
+
+
+.. meta::
+:title lang=en: Documentation
+    :keywords lang=en: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission
