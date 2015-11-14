@@ -176,12 +176,11 @@ able to connect to the database' がチェックされているはずです。
     **config/app.default.php**.
 
 スキャットフォールド（簡易）コードの生成
-=============================================インストールできたか確かめる
-
+=============================================
 
 CakePHP　の命名規則にDBが従っていれば
 :doc:`ベイクコンソール </bake/usage>` でアプリの簡単な骨格が作れます
-コマンドは以下です:
+コマンドは以下です::
 
     // On Windows you'll need to use bin\cake instead.
     bin/cake bake all users
