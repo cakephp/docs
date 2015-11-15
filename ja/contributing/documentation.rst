@@ -219,7 +219,7 @@ ReST(Re Structured Text)はmarkdownやtextileに似たプレーンテキスト�
 
     `php.netへの外部リンク <http://php.net>`_
 
-以上のものは次のようにリンクします: `External Link to php.net <http://php.net>`_
+以上のものは次のようにリンクします: `php.net への外部リンク <http://php.net>`_
 
 他のページへのリンク
 ~~~~~~~~~~~~~~~~~~~~
