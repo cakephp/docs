@@ -584,6 +584,6 @@ File API
 
 
 .. meta::
-    :title lang=en: Folder & File
+    :title lang=pt: Folder & File
     :description lang=pt: Os utilitários de Folder(Pasta) e File(Arquivo) são classes convenientes para ajudar você a escrever/inserir mudanças em arquivos; listar arquivos em uma pasta e outro diretório comum em tarefas relacionada.
     :keywords lang=pt: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file,cakephp classe folder, classe file

@@ -1,5 +1,5 @@
-Console and Shells
-##################
+Shells, Tasks & Console Tools
+#############################
 
 CakePHP features not only a web framework but also a console framework
 for creating console applications. Console applications are ideal for handling
@@ -1030,5 +1030,5 @@ More topics
 
 
 .. meta::
-    :title lang=en: Console and Shells
+    :title lang=en: Shells, Tasks & Console Tools
     :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

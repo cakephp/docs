@@ -21,3 +21,8 @@
    appendices
 
 .. todolist::
+
+
+.. meta::
+    :title lang=ja: コンテンツ
+    :keywords lang=ja: コアライブラリ,検索参照,シェル,開発,付録,用語集,モデル
