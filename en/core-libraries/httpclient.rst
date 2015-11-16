@@ -160,6 +160,7 @@ addition request information.  The following keys can be used in ``$options``:
 - ``type`` - Send a request body in a custom content type. Requires ``$data`` to
   either be a string, or the ``_content`` option to be set when doing GET
   requests.
+- ``redirect`` - Number of redirects to follow. Defaults to ``false``.
 
 The options parameter is always the 3rd parameter in each of the HTTP methods.
 They can also be use when constructing ``Client`` to create
