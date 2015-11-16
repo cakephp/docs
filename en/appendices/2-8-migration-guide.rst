@@ -31,6 +31,13 @@ Hash
 - ``Hash::sort()`` now supports case-insensitive sorting via the ``ignoreCase``
   option.
 
+Model
+=====
+
+- Magic finders now support custom finder types. For example if your model
+  implements a ``find('published')`` finder, you can now use ``findPublishedBy``
+  and ``findPublishedByAuthorId`` functions through the magic method interface.
+
 Validation
 ==========
 
