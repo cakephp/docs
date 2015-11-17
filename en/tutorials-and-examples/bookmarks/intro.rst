@@ -14,7 +14,8 @@ Here's what you'll need:
    that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
-Let's get started!
+If you'd like to see the completed application, checkout `cakephp/bookmarker
+<https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
 
 Getting CakePHP
 ===============
