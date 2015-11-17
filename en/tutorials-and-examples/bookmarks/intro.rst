@@ -284,7 +284,17 @@ look like::
     );
 
     Router::scope('/', function ($routes) {
-        // Connect the default routes.
+        // Connect the default home and /pages/* routes.
+        $routes->connect('/', [
+            'controller' => 'Pages',
+            'action' => 'display', 'home'
+        ]);
+        $routes->connect('/pages/*', [
+            'controller' => 'Pages',
+            'action' => 'display'
+        ]);
+
+        // Connect the conventions based default routes.
         $routes->fallbacks('InflectedRoute');
     });
 
@@ -334,6 +344,9 @@ method has not been implemented yet, so let's do that. In
         return $this->find()
             ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
+                if (empty($options['tags'])) {
+                    return $q->where(['Tags.title IS' => null]);
+                }
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
     }
