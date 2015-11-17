@@ -32,6 +32,14 @@ Hash
 - ``Hash::sort()`` supporte maintenant le tri sans sensibilité à la casse grâce
   à l'option ``ignoreCase``.
 
+Model
+=====
+
+- Les finders magiques supportent maintenant des types de finder personnalisé.
+  Par exemple si votre model implémente un finder ``find('published')``, vous
+  pouvez maintenant utiliser les fonctions ``findPublishedBy`` et
+  ``findPublishedByAuthorId`` avec l'interface de la méthode magique.
+
 Validation
 ==========
 
