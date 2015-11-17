@@ -294,12 +294,12 @@ Duck モデルにメソッドあるかのように ``FlyingBehavior`` のメソ�
 
     もし必要であれば、afterValidate でデータのクリーンアップや準備を実行できます。
 
-.. php:method:: beforeSave(Model $Model)
+.. php:method:: beforeSave(Model $Model, array $options = array())
 
     ビヘイビアの beforeSave から false を返すことで、save を中止することができます。
     true を返すことで続行を許可します。
 
-.. php:method:: afterSave(Model $Model, boolean $created)
+.. php:method:: afterSave(Model $Model, boolean $created, array $options = array())
 
     afterSave を使うことで、ビヘイビアに関するクリーンアップ操作を実行することができます。
     $created はレコードが作成された時に true に、レコードが更新された時に false になります。
@@ -315,5 +315,5 @@ Duck モデルにメソッドあるかのように ``FlyingBehavior`` のメソ�
 
 
 .. meta::
-    :title lang=ja: Behaviors
-    :keywords lang=ja: tree manipulation,manipulation methods,model behaviors,access control list,model class,tree structures,php class,business contract,class category,database table,bakery,inheritance,functionality,interaction,logic,cakephp,models,essence
+    :title lang=ja: ビヘイビア
+    :keywords lang=ja: ツリー操作,操作メソッド,モデルビヘイビア,アクセスコントロールリスト,モデルクラス,ツリー構造,php クラス,ビジネスコンタクト,クラスカテゴリ,データベーステーブル,ベーカリー,継承,機能性,相互作用,ロジック,cakephp,モデル,本質
