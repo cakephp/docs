@@ -70,6 +70,8 @@ a record. In CakePHP you can use the ``touch()`` method to do exactly this::
     // Touch based on a specific event.
     $orders->touch($order, 'Orders.completed');
 
+After you have saved the entity, the field is updated.
+
 Touching records can be useful when you want to signal that a parent resource
 has changed when a child resource is created/updated. For example: updating an
 article when a new comment is added.
