@@ -156,7 +156,7 @@ addition request information.  The following keys can be used in ``$options``:
 - ``ssl_verify_depth`` - defaults to 5. Depth to traverse in the CA chain.
 - ``ssl_verify_host`` - defaults to ``true``. Validate the SSL certificate against the host name.
 - ``ssl_cafile`` - defaults to built in cafile. Overwrite to use custom CA bundles.
-- ``timeout`` - Duration to wait before timing out.
+- ``timeout`` - Duration to wait before timing out in seconds.
 - ``type`` - Send a request body in a custom content type. Requires ``$data`` to
   either be a string, or the ``_content`` option to be set when doing GET
   requests.
