@@ -5,20 +5,32 @@ Xml
 
 .. php:class:: Xml
 
-The Xml class allows you to transform arrays into SimpleXMLElement or
-DOMDocument objects, and back into arrays again.
+..
+    The Xml class allows you to transform arrays into SimpleXMLElement or
+    DOMDocument objects, and back into arrays again.
 
+Xmlクラスを利用して、 配列から SimpleXMLElement もしくは DOMDocument オブジェクトに変換を、また配列に戻すことを可能にします。
 
-Importing Data to Xml Class
+..
+    Importing Data to Xml Class
+
+データをXmlクラスにインポートする
 ===========================
 
 .. php:staticmethod:: build($input, array $options = [])
 
-You can load XML-ish data using ``Xml::build()``. Depending on your
-``$options`` parameter, this method will return a SimpleXMLElement (default)
-or DOMDocument object. You can use ``Xml::build()`` to build XML
-objects from a variety of sources.  For example, you can load XML from
-strings::
+..
+    You can load XML-ish data using ``Xml::build()``. Depending on your
+    ``$options`` parameter, this method will return a SimpleXMLElement (default)
+    or DOMDocument object. You can use ``Xml::build()`` to build XML
+    objects from a variety of sources.  For example, you can load XML from
+    strings::
+
+``Xml::build()`` を利用することで、XMLライクなデータの読み込みが可能となります。
+``$options`` により、このメソッドは SimpleXMLElement (デフォルト) もしくは DOMDocument を返却します。
+様々なソースから XML オブジェクトのビルドに ``Xml::build()`` が利用できます。
+例えば、stringからXMLをロードできます。
+::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
@@ -28,12 +40,20 @@ strings::
     </post>';
     $xml = Xml::build($text);
 
-You can also build Xml objects from local files::
+..
+    You can also build Xml objects from local files::
+
+ローカルファイルから Xml オブジェクトにビルドも可能です。
+::
 
     // Local file
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
-You can also build Xml objects using an array::
+..
+    You can also build Xml objects using an array::
+
+配列を利用して Xml オブジェクトのビルドも可能です。
+::
 
     $data = [
         'post' => [
@@ -44,7 +64,11 @@ You can also build Xml objects using an array::
     ];
     $xml = Xml::build($data);
 
-If your input is invalid, the Xml class will throw an exception::
+..
+    If your input is invalid, the Xml class will throw an exception::
+
+もし入力が不正であれば、 Xml クラスは例外を投げます。
+::
 
     $xmlString = 'What is XML?'
     try {
@@ -53,11 +77,21 @@ If your input is invalid, the Xml class will throw an exception::
         throw new InternalErrorException();
     }
 
-.. note::
-
+..
     `DOMDocument <http://php.net/domdocument>`_ and
     `SimpleXML <http://php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
+
+.. note::
+
+    `DOMDocument <http://php.net/domdocument>`_ と `SimpleXML <http://php.net/simplexml>`_ は異なる API を実装します。
+    Xml によって返却されるオブジェクトの正しいメソッドを利用しているか確認してください。
+
+
+
+
+
+
 
 
 Transforming a XML String in Array
