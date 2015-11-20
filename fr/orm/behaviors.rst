@@ -274,3 +274,39 @@ spécifiques en utilisant le ``BehaviorRegistry``::
     // Récupère un behavior chargé
     // N'utilisez pas les préfixes de plugin.
     $table->behaviors()->get('CounterCache');
+
+Re-configurer les Behaviors Chargés
+-----------------------------------
+
+Pour modifier la configuration d'un behavior déjà chargé, vous pouvez combiner
+la commande ``BehaviorRegistry::get`` avec la commande ``config`` fournie par
+le trait ``InstanceConfigTrait``.
+
+Par exemple si une classe parente (par ex ``AppTable``) charge le behavior
+``Timestamp``, vous pouvez faire ce qui suit pour ajouter, modifier ou retirer
+les configurations pour le behavior. Dans ce cas, nous ajouterons un event pour
+lequel nous souhaitons que Timestamp réponde::
+
+    namespace App\Model\Table;
+
+    use App\Model\Table\AppTable; // similar to AppController
+
+    class UsersTable extends AppTable
+    {
+        public function initialize(array $options)
+        {
+            parent::initialize($options);
+
+            // par ex si notre parent appelle $this->addBehavior('Timestamp');
+            // et que nous souhaitons ajouter un event supplémentaire
+            if ($this->behaviors()->has('Timestamp') {
+                $this->behaviors()->get('Timestamp')->config([
+                    'events' => [
+                        'Users.login' => [
+                            'last_login' => 'always'
+                        ],
+                    ],
+                ]);
+            }
+        }
+    }
