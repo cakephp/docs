@@ -4,6 +4,14 @@
 CakePHP 2.8 is a fully API compatible upgrade from 2.7. This page outlines
 the changes and improvements made in 2.8.
 
+Error Handling
+==============
+
+- When handling fatal errors, CakePHP will now adjust the memory limit by 4MB to
+  ensure that the error can be logged correctly. You can disable this behavior
+  by setting ``Error.extraFatalErrorMemory`` to ``0`` in your
+  ``Config/core.php``.
+
 Cache
 =====
 
