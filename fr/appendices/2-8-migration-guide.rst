@@ -4,6 +4,14 @@
 CakePHP 2.8 est une mise à jour complète à partir de l'API de 2.7. Cette page
 souligne les changements et améliorations faits dans 2.8.
 
+Gestion des Erreurs
+===================
+
+- Quand vous gérez des erreurs fatales, CakePHP ne va maintenant plus ajuster la
+  mémoire limite à 4MB pour s'assurer que l'erreur peut être mis correctement
+  en log. Vous pouvez désactiver ce comportement en configurant
+  ``Error.extraFatalErrorMemory`` à ``0`` dans votre ``Config/core.php``.
+
 Cache
 =====
 
