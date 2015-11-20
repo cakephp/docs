@@ -22,15 +22,13 @@ You can also use ``CakeLog::write()`` directly. See :ref:`writing-to-logs`
 Creating and configuring log streams
 ====================================
 
-Log stream handlers can be part of your application, or part of
-plugins. If for example you had a database logger called
-``DatabaseLog`` as part of your application, it would be placed
-in ``app/Lib/Log/Engine/DatabaseLog.php``. If you had a database logger as part of a plugin, it
-would be placed in
-``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLog.php``. When
-configured, ``CakeLog`` will attempt to load Configuring log streams, which
-is done by calling ``CakeLog::config()``. Configuring our
-DatabaseLog would look like::
+Log stream handlers can be part of your application, or part of plugins. If for
+example you had a database logger called ``DatabaseLog`` as part of your
+application, it would be placed in ``app/Lib/Log/Engine/DatabaseLog.php``. If
+you had a database logger as part of a plugin, it would be placed in
+``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLog.php``. When configured,
+``CakeLog`` will attempt to load Configuring log streams, which is done by
+calling ``CakeLog::config()``. Configuring our DatabaseLog would look like::
 
     // for app/Lib
     CakeLog::config('otherFile', array(
@@ -85,9 +83,9 @@ As of 2.4 ``FileLog`` engine takes a few new options:
 * ``size`` Used to implement basic log file rotation. If log file size
   reaches the specified size, the existing file is renamed by appending timestamp
   to filename and a new log file is created. Can be integer bytes value or
-  human readable string values like '10MB', '100KB' etc. Defaults to 10MB. 
+  human readable string values like '10MB', '100KB' etc. Defaults to 10MB.
   Setting size to false will disable the ``rotate`` option below.
-* ``rotate`` Log files are rotated a specified amount of times before being removed.
+* ``rotate`` Log files are rotated a specified number of times before being removed.
   If the value is 0, old versions are removed rather than rotated. Defaults to 10.
 * ``mask`` Set the file permissions for created files. If left empty the default
   permissions are used.
