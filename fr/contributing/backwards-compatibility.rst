@@ -41,9 +41,12 @@ expliquent la stabilité que vous attendez.
 Interfaces
 ----------
 
+Outside of major releases, interfaces provided by CakePHP will **not** have any
+existing methods changed and new methods will **not** be added to any existing interfaces.
+
 En-dehors des versions majeures, les interfaces fournies par CakePHP **ne**
-vont **pas** avoir de méthodes existantes changées. De nouvelles méthodes
-peuvent être ajoutées, mais aucune méthode existante ne sera changée.
+vont **pas** avoir de méthodes existantes changées et les nouvelles méthodes
+**ne** seront pas ajoutées aux interfaces existantes.
 
 Classes
 -------
@@ -174,4 +177,3 @@ Dans une version mineure, vous pouvez:
        C'est généralement évité à moins que le renommage apporte un vrai bénéfice.
 .. [3] Nous essayons d'éviter ceci à tout prix. Tout retrait doit être documenté
        dans le guide de migration.
-

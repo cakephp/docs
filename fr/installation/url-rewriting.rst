@@ -34,6 +34,16 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        #    Deny from all
        </Directory>
 
+   Pour les utilisateurs qui ont apache 2.4 et supérieur, vous devez modifier
+   le fichier de configuration pour votre ``httpd.conf`` ou la configuration de
+   l'hôte virtuel pour ressembler à ce qui suit::
+
+       <Directory /var/www/>
+            Options FollowSymLinks
+            AllowOverride All
+            Require all granted
+       </Directory>
+
 #. Assurez-vous que vous avez chargé correctement mod\_rewrite. Vous devriez
    voir quelque chose comme::
 
