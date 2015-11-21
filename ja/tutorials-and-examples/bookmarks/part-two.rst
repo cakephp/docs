@@ -25,7 +25,7 @@
 .. get started, we'll add the :doc:`AuthComponent
 .. </controllers/components/authentication>` to our application. We'll pretty much
 .. want every method to require authentication, so we'll add AuthComponent in our
-.. AppController::
+.. AppController:
 
 CakePHPでは、認証は :doc:`/controllers/components` によって制御されます。
 コンポーネントは再利用可能な特定の機能や概念を作成するための方法と考えることができます。
@@ -125,7 +125,9 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
 
 .. Now that people can log in, you'll probably want to provide a way to log out as
 .. well. Again, in the ``UsersController``, add the following code::
-これで人々はログインできますので、ログアウトする方法も同じように提供したいでしょう。ここでも ``UsersController`` に以下のコードを追加します::
+
+これで人々はログインできますので、ログアウトする方法も同じように提供したいでしょう。
+ここでも ``UsersController`` に以下のコードを追加します::
 
     public function logout()
     {
@@ -134,6 +136,7 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
     }
 
 .. Now you can visit ``/users/logout`` to log out and be sent to the login page.
+
 これで ``/users/logout`` にアクセスするとログアウトされてログインページに遷移します。
 
 .. Enabling Registrations
@@ -144,7 +147,8 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
 
 .. If you aren't logged in and you try to visit **/users/add** you will be kicked
 .. to the login page. We should fix that as we want to allow people to sign up for
-.. our application. In the ``UsersController`` add the following::
+.. our application. In the ``UsersController`` add the following:
+
 ログインしていない状態で **/users/add** にアクセスした場合、ログインページに遷移してしまうでしょう。
 人々がアプリケーションにサインアップできるように修正しましょう。 ``UsersController`` に以下を追記します::
 
@@ -159,6 +163,7 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
 .. section. We won't be building out user editing, viewing or listing in this
 .. tutorial so they will not work as ``AuthComponent`` will deny you access to those
 .. controller actions.
+
 上記では ``add()`` アクションは認証や許可が不要であることを ``AuthComponent`` に示しています。
 **Users/add.ctp** をクリーンアップする時間を作り、誤解を招くようなリンクを削除しても、このまま次のセクションに進んでもかまいません。
 このチュートリアルではユーザーの編集、表示または一覧は構築しません。 それらのアクションは ``AuthComponent`` が拒否します。
@@ -258,7 +263,8 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
 
 .. Now if you try to view, edit or delete a bookmark that does not belong to you,
 .. you should be redirected back to the page you came from. However, there is no
-.. error message being displayed, so let's rectify that next::
+.. error message being displayed, so let's rectify that next:
+
 これで、自分のものではないブックマークを表示または編集、削除しようとすると、元のページにリダイレクトされるはずです。ただし、何のエラーメッセージはされないでしょう。それでは次のように修正しましょう::
 
     // In src/Template/Layout/default.ctp
@@ -290,7 +296,7 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
 .. Let's tackle the add form first. To begin with remove the ``input('user_id')``
 .. from **src/Template/Bookmarks/add.ctp**. With that removed, we'll also update
 .. the ``add()`` action from **src/Controller/BookmarksController.php** to look
-.. like::
+.. like:
 
 まず追加のフォームから取り組みましょう。はじめに **src/Template/Bookmarks/add.ctp** から ``input('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php** の ``add()`` アクションを以下のように修正します::
 
