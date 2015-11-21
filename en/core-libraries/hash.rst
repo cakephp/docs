@@ -173,6 +173,7 @@ Attribute Matching Types
                 ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
                 ['Item' => ['id' => 2, 'title' => 'second']],
                 ['Item' => ['id' => 3, 'title' => 'third']],
+                ['clear' => true],
                 ['Item' => ['id' => 5, 'title' => 'fifth']],
             ]
         */
