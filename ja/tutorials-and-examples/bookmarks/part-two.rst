@@ -425,7 +425,7 @@ CakePHPでは、認証は :doc:`/controllers/components` によって制御さ�
 計算済みのプロパティ ``$bookmark->tag_string`` にアクセスできるようになります。
 このプロパティはあとで入力時に使用します。 あとで保存するので ``tag_string`` プロパティ をエンティティの ``_accessible`` リストに追加することを忘れないでください。
 
-**src/Model/Entity/Bookmark.php** で ``$_accessible``に ``tag_string`` をこのように追加してください::
+**src/Model/Entity/Bookmark.php** で ``$_accessible`` に ``tag_string`` をこのように追加してください::
 
     protected $_accessible = [
         'user_id' => true,
