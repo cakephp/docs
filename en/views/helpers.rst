@@ -101,9 +101,11 @@ attribute values or modify behavior of a helper::
 
     class AwesomeHelper extends Helper
     {
-        public function __construct(View $view, $config = [])
+    
+        // initialize() hook is available since 3.2. For prior versions you can
+        // override the constructor if required.
+        public function initialize(array $config)
         {
-            parent::__construct($view, $config);
             debug($config);
         }
     }
