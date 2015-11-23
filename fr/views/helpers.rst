@@ -103,6 +103,7 @@ comportement du helper::
     namespace App\View\Helper;
 
     use Cake\View\Helper;
+    use Cake\View\View;
 
     class AwesomeHelper extends Helper
     {
@@ -112,6 +113,18 @@ comportement du helper::
             debug($config);
         }
     }
+
+    class AwesomeController extends AppController
+    {
+        public $helpers = ['Awesome' => ['option1' => 'value1']];
+    }
+
+Les options peuvent être spécifiées lors de la déclaration des helpers dans le
+controller comme montré ci-dessous::
+
+    namespace App\Controller;
+
+    use App\Controller\AppController;
 
     class AwesomeController extends AppController
     {

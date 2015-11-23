@@ -109,7 +109,7 @@ Les Types d'Attribut Correspondants
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    Insère ``$data`` dans un tableau tel que défini dans ``$path``::
+    Insère ``$values`` dans un tableau tel que défini dans ``$path``::
 
         $a = [
             'pages' => ['name' => 'page']
@@ -186,6 +186,7 @@ Les Types d'Attribut Correspondants
                 ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
                 ['Item' => ['id' => 2, 'title' => 'second']],
                 ['Item' => ['id' => 3, 'title' => 'third']],
+                ['clear' => true],
                 ['Item' => ['id' => 5, 'title' => 'fifth']],
             ]
         */
