@@ -583,7 +583,7 @@ The ``beforMarshal`` event is triggered just at the start of the validation proc
         }
     }
 
-Becuase of how the marshalling process works, if a field does not pass validation it will automatically removed from the data array and not be copied into the entity. This is to prevent having inconsistent data in the entity object.
+Because of how the marshalling process works, if a field does not pass validation it will automatically removed from the data array and not be copied into the entity. This is to prevent having inconsistent data in the entity object.
 
 Moreover, the data in ``beforeMarshal`` is a copy of the passed data. This is because it is important to preserve the original user input, as it may be used elsewhere.
 
