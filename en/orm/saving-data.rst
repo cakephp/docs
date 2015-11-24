@@ -562,7 +562,7 @@ request data just before entities are created::
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
        if (isset($data['username'])) {
-           $data['username'] = strtolower($data['username']);
+           $data['username'] = mb_strtolower($data['username']);
        }
     }
 
