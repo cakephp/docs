@@ -573,7 +573,7 @@ The main purpose of ``beforeMarshal`` is to assist the users to pass the
 validation process when simple mistakes can be automatically resolved, or when
 data needs to be restructured so it can be put into the right fields.
 
-The ``beforMarshal`` event is triggered just at the start of the validation
+The ``Model.beforeMarshal`` event is triggered just at the start of the validation
 process, one of the reasons is that ``beforeMarshal`` is allowed to change the
 validation rules and the saving options, such as the field whitelist. Validation
 is triggered just after this event is finished. A common example of changing
@@ -591,7 +591,7 @@ the data before it is validated is trimming all fields before saving::
 
 Because of how the marshalling process works, if a field does not pass
 validation it will automatically be removed from the data array and not be
-copied into the entity. This is to prevent having inconsistent data in the
+copied into the entity. This is to prevent inconsistent data from entering the
 entity object.
 
 Moreover, the data in ``beforeMarshal`` is a copy of the passed data. This is
