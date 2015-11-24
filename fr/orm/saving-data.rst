@@ -601,8 +601,8 @@ automatiquement, ou lorsque les données doivent être restructurées pour être
 mise dans les bons champs.
 
 L'event ``beforMarshal`` est lancé juste au début du process de validation.
-Une des raisons à cela est que ``beforeMarshal`` est autoridé à modifier les
-règles de validation et les options d'enregistrment, telles que la whitelist
+Une des raisons à cela est que ``beforeMarshal`` est autorisé à modifier les
+règles de validation et les options d'enregistrement, telle que la whitelist
 des champs. La validation est lancée juste après que cet événement soit
 terminé. Un exemple commun de modification des données avant qu'elles soient
 validées est la suppression des espaces superflus d'un champ avant
@@ -620,7 +620,7 @@ l'enregistrement ::
 
 A cause de la manière dont le process de marshalling fonctionne, si un champ ne
 passe pas la validation, il sera automatiquement supprimé du tableau de données
-et ne sera pas copié dans l'entité. cela évite d'avoir des données incohérentes
+et ne sera pas copié dans l'entity. cela évite d'avoir des données incohérentes
 dans l'objet entity.
 
 Valider les Données Avant de Construire les Entities
