@@ -561,11 +561,31 @@ request data just before entities are created::
     // In a table or behavior class
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-        $data['username'] .= 'user';
+       if (isset($data['username'])) {
+           $data['username'] = strtolower($data['username']);
+       }
     }
 
 The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
 return it to change the data used to create entities.
+
+The main purpose of ``beforeMarshal`` is to assist the users to pass the validation process when simple mistakes can be automatically resolved, or when data needs to be restructured so it can be put into the right fields.
+
+The ``beforMarshal`` event is triggered just at the start of the validation process, one of the reasons is that ``beforeMarshal`` is allowed to change the validation rules and the saving options, such as the field whitelist. Validation is triggered just after this event is finished. A common example of changing the data before it is validated is trimming all fields before saving::
+
+    // In a table or behavior class
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+        foreach ($data as $key => $value) {
+            if (is_string($value)) {
+                $data[$key] = trim($value);
+            }
+        }
+    }
+
+Becuase of how the marshalling process works, if a field does not pass validation it will automatically removed from the data array and not be copied into the entity. This is to prevent having inconsistent data in the entity object.
+
+Moreover, the data in ``beforeMarshal`` is a copy of the passed data. This is because it is important to preserve the original user input, as it may be used elsewhere.
 
 Validating Data Before Building Entities
 ----------------------------------------
