@@ -54,6 +54,8 @@ datasource
     utiliser.
 persistent
     Indique si l'on doit ou non utiliser une connexion persistante à la base.
+    Si vous utilisez SQLServer, vous ne devriez pas activer les connections
+    persistantes car cela entraîne des problèmes pour diagnostiquer des crashes.
 host
     Le nom du serveur de base de données (ou son adresse IP).
 login
