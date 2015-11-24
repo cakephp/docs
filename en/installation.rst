@@ -15,6 +15,7 @@ Requirements
 - PHP 5.4.16 or greater.
 - mbstring extension
 - intl extension
+- pdo extension
 
 .. note::
 
