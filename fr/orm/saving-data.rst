@@ -589,7 +589,9 @@ entities ne soient créées::
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-        $data['username'] .= 'user';
+       if (isset($data['username'])) {
+           $data['username'] = mb_strtolower($data['username']);
+       }
     }
 
 Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
@@ -598,7 +600,7 @@ Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
 Le but principal de ``beforeMarshal`` est d'aider les utilisateurs à passer
 le process de validation lorsque des erreurs simples peuvent être résolues
 automatiquement, ou lorsque les données doivent être restructurées pour être
-mise dans les bons champs.
+mises dans les bons champs.
 
 L'event ``beforeMarshal`` est lancé juste au début du process de validation.
 Une des raisons à cela est que ``beforeMarshal`` est autorisé à modifier les
