@@ -324,11 +324,15 @@ credentials will be rechecked on each request.
 
 To use basic authentication, you'll need to configure AuthComponent::
 
-    $this->Auth->config('authenticate', [
-        'Basic' => [
-            'fields' => ['username' => 'username', 'password' => 'api_key'],
-            'userModel' => 'Users'
+    $this->loadComponent('Auth', [
+        'authenticate' => [
+            'Basic' => [
+                'fields' => ['username' => 'username', 'password' => 'api_key'],
+                'userModel' => 'Users'
+            ],
         ],
+        'storage' => 'Memory',
+        'unauthorizedRedirect' => false
     ]);
 
 Here we're using username + API key as our fields, and use the Users model.
@@ -384,11 +388,15 @@ Instead a hash is sent.
 
 To use digest authentication, you'll need to configure AuthComponent::
 
-    $this->Auth->config('authenticate', [
-        'Digest' => [
-            'fields' => ['username' => 'username', 'password' => 'digest_hash']
-            'userModel' => 'Users'
+    $this->loadComponent('Auth', [
+        'authenticate' => [
+            'Digest' => [
+                'fields' => ['username' => 'username', 'password' => 'digest_hash'],
+                'userModel' => 'Users'
+            ],
         ],
+        'storage' => 'Memory',
+        'unauthorizedRedirect' => false
     ]);
 
 Here we're using username + digest_hash as our fields, and use the Users model.
