@@ -210,6 +210,9 @@ inject "/webroot" in each request.
 
       ... php handling ...
    }
+   
+.. note::
+   Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php5-fpm.sock;).
 
 URL Rewrites on IIS7 (Windows hosts)
 ====================================
