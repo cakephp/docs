@@ -98,6 +98,7 @@ attribute values or modify behavior of a helper::
     namespace App\View\Helper;
 
     use Cake\View\Helper;
+    use Cake\View\View;
 
     class AwesomeHelper extends Helper
     {
@@ -109,6 +110,12 @@ attribute values or modify behavior of a helper::
             debug($config);
         }
     }
+
+Options can be specified when declaring helpers in controller as shown::
+
+    namespace App\Controller;
+    
+    use App\Controller\AppController;
 
     class AwesomeController extends AppController
     {

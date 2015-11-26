@@ -98,7 +98,7 @@ Attribute Matching Types
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    Inserts ``$data`` into an array as defined by ``$path``::
+    Inserts ``$values`` into an array as defined by ``$path``::
 
         $a = [
             'pages' => ['name' => 'page']
@@ -173,6 +173,7 @@ Attribute Matching Types
                 ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
                 ['Item' => ['id' => 2, 'title' => 'second']],
                 ['Item' => ['id' => 3, 'title' => 'third']],
+                ['clear' => true],
                 ['Item' => ['id' => 5, 'title' => 'fifth']],
             ]
         */

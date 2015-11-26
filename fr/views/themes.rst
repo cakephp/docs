@@ -24,15 +24,20 @@ dans votre callback ``beforeRender()``::
 
 Les fichiers de template du theme doivent être dans un plugin avec le même nom.
 Par exemple, le theme ci-dessus se trouvera dans
-**plugins/AutreExemple/src/Template**. Il est important de se rappeler que
+**plugins/Modern/src/Template**. Il est important de se rappeler que
 CakePHP s'attend à trouver des noms de plugin/theme en CamelCase. En plus de
 cela, la structure de dossier dans le dossier
-**plugins/AutreExemple/src/Template** est exactement la même que
+**plugins/Modern/src/Template** est exactement la même que
 **src/Template/**.
 
 Par exemple, le fichier de vue pour une action edit d'un controller Posts se
-trouvera dans **plugins/AutreExemple/src/Template/Posts/edit.ctp**. Les fichiers
-de layout se trouveront dans **plugins/AutreExemple/src/Template/Layout/**.
+trouvera dans **plugins/Modern/src/Template/Posts/edit.ctp**. Les fichiers
+de layout se trouveront dans **plugins/Modern/src/Template/Layout/**. Vous
+pouvez aussi fournir des templates personnalisés pour les plugins avec un theme.
+Si vous aviez un plugin s'appelant 'Cms', qui contient un TagsController, le
+theme Modern pourrait fournir
+**plugins/Modern/src/Template/Plugin/Cms/Tags/edit.ctp** pour remplacer le
+template edit dans le plugin.
 
 Si un fichier de template ne peut pas être trouvé dans le theme, CakePHP va
 essayer de le trouver dans le dossier **src/Template/**. De cette façon, vous

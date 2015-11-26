@@ -366,9 +366,9 @@ plurielles, le Croate par exemple:
 
     msgid "One file removed"
     msgid_plural "{0} files removed"
-    msgstr[0] "jednom datotekom je uklonjen"
-    msgstr[1] "{0} datoteke uklonjenih"
-    msgstr[2] "{0} slika uklonjenih"
+    msgstr[0] "{0} datoteka je uklonjena"
+    msgstr[1] "{0} datoteke su uklonjene"
+    msgstr[2] "{0} datoteka je uklonjeno"
 
 Merci de visiter la `page des langues Launchpad
 <https://translations.launchpad.net/+languages>`_ pour une explication
