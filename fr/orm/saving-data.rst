@@ -602,7 +602,7 @@ le process de validation lorsque des erreurs simples peuvent être résolues
 automatiquement, ou lorsque les données doivent être restructurées pour être
 mises dans les bons champs.
 
-L'event ``beforeMarshal`` est lancé juste au début du process de validation.
+L'event ``Model.beforeMarshal`` est lancé juste au début du process de validation.
 Une des raisons à cela est que ``beforeMarshal`` est autorisé à modifier les
 règles de validation et les options d'enregistrement, telle que la whitelist
 des champs. La validation est lancée juste après que cet événement soit
