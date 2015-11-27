@@ -746,8 +746,8 @@ deletes the response content, and sends the `304 Not Modified` header::
 
 .. _cors-headers:
 
-Setting Cross Origin Request Headers
-====================================
+Setting Cross Origin Request Headers (CORS)
+===========================================
 
 As of 3.2 you can use the ``cors()`` method to define `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
