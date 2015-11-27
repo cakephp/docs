@@ -785,6 +785,34 @@ il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
         return $this->response;
     }
 
+.. _cors-headers:
+
+Définir les En-têtes de Requête d'Origine Croisée (Cross Origin Request Headers = CORS)
+=======================================================================================
+
+Depuis 3.2, vous pouvez utiliser la méthode ``cors()`` pour définir `le Contrôle
+d'Accès HTTP <https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS>`__
+et ses en-têtes liées avec une interface courante::
+
+    $this->response->cors($this->request)
+        ->allowOrigin(['*.cakephp.org'])
+        ->allowMethods(['GET', 'POST'])
+        ->allowHeaders(['X-CSRF-Token'])
+        ->allowAuthentication()
+        ->exposeHeaders(['Link'])
+        ->maxAge(300)
+        ->build();
+
+Les en-têtes liés au CORS vont seulement être appliqués à la réponse si les
+critères suivants sont vérifiés:
+
+1. La requête a une en-tête ``Origin``.
+2. La valeur ``Origin`` de la requête matche une des valeurs autorisées de
+   Origin.
+
+.. versionadded:: 3.2
+    ``CorsBuilder`` a été ajouté dans 3.2
+
 Envoyer la Réponse
 ------------------
 

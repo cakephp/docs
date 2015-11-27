@@ -16,3 +16,11 @@ Helpers
 =======
 
 Les helpers peuvent maintenant avoir une méthode hook ``initialize(array $config)`` comme tous les autres types de classe.
+
+CorsBuilder Ajouté
+==================
+
+Afin de faciliter la définition des en-têtes liées aux Requêtes de type
+Cross-site (Cross Origin Requests = CORS), un nouveau ``CorsBuilder`` a été
+ajouté. Cette classe vous laisse définir les en-têtes liés au CORS avec une
+interface courante. Consultez :ref:`cors-headers` pour plus d'informations.
