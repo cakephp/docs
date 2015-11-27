@@ -792,7 +792,7 @@ Définir les En-têtes de Requête d'Origine Croisée (Cross Origin Request Head
 
 Depuis 3.2, vous pouvez utiliser la méthode ``cors()`` pour définir `le Contrôle
 d'Accès HTTP <https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS>`__
-et ses en-têtes liés avec une interface courante::
+et ses en-têtes liés avec une interface simple::
 
     $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
@@ -807,7 +807,7 @@ Les en-têtes liés au CORS vont seulement être appliqués à la réponse si le
 critères suivants sont vérifiés:
 
 1. La requête a un en-tête ``Origin``.
-2. La valeur ``Origin`` de la requête matche une des valeurs autorisées de
+2. La valeur ``Origin`` de la requête correspond à une des valeurs autorisées de
    Origin.
 
 .. versionadded:: 3.2
