@@ -16,3 +16,10 @@ Helpers
 
 Helpers can now have an ``initialize(array $config)`` hook method like other
 class types.
+
+CorsBuilder Added
+=================
+
+In order to make setting headers related to Cross Origin Requests (CORS) easier,
+a new ``CorsBuilder`` has been added. This class lets you define CORS related
+headers with a fluent interface. See :ref:`cors-headers` for more information.
