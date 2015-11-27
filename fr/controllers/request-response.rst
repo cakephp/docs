@@ -501,7 +501,7 @@ name
     Le nom vous permet de spécifier un nom de fichier alternatif à envoyer à
     l'utilisateur.
 download
-    Une valeur booléenne indiquant si les en-têtes doivent être définies pour
+    Une valeur booléenne indiquant si les en-têtes doivent être définis pour
     forcer le téléchargement.
 
 Envoyer une Chaîne de Caractères en Fichier
@@ -792,7 +792,7 @@ Définir les En-têtes de Requête d'Origine Croisée (Cross Origin Request Head
 
 Depuis 3.2, vous pouvez utiliser la méthode ``cors()`` pour définir `le Contrôle
 d'Accès HTTP <https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS>`__
-et ses en-têtes liées avec une interface courante::
+et ses en-têtes liés avec une interface courante::
 
     $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
@@ -806,7 +806,7 @@ et ses en-têtes liées avec une interface courante::
 Les en-têtes liés au CORS vont seulement être appliqués à la réponse si les
 critères suivants sont vérifiés:
 
-1. La requête a une en-tête ``Origin``.
+1. La requête a un en-tête ``Origin``.
 2. La valeur ``Origin`` de la requête matche une des valeurs autorisées de
    Origin.
 
