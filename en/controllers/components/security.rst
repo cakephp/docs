@@ -37,6 +37,11 @@ components in your ``initialize()`` method.
     send to the blackhole callback. See the ``$validatePost`` or
     ``$disabledFields`` configuration parameters.
 
+    You should always verify the HTTP method being used before doing with
+    side-effects. You should :ref:`check the HTTP method <check-the-request>` or
+    use :php:meth:`Cake\\Network\\Request::allowMethod()` to ensure the correct
+    HTTP method is used.
+
 Handling Blackhole Callbacks
 ============================
 
