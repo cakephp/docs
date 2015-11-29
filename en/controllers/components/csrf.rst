@@ -16,7 +16,7 @@ component will throw a
 :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
 .. note::
-    You should always verify the HTTP method being used before doing with
+    You should always verify the HTTP method being used before executing
     side-effects. You should :ref:`check the HTTP method <check-the-request>` or
     use :php:meth:`Cake\\Network\\Request::allowMethod()` to ensure the correct
     HTTP method is used.
