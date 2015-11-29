@@ -305,7 +305,7 @@ Then create the ContactManager plugin routes. Put the following into
 
     Router::plugin(
         'ContactManager',
-        ['path' => '/contact-manager]',
+        ['path' => '/contact-manager'],
         function ($routes) {
             $routes->fallbacks('DashedRoute');
         }
