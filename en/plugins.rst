@@ -303,9 +303,13 @@ Then create the ContactManager plugin routes. Put the following into
     <?php
     use Cake\Routing\Router;
 
-    Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks('DashedRoute');
-    });
+    Router::plugin(
+        'ContactManager',
+        ['path' => '/contact-manager',
+        function ($routes) {
+            $routes->fallbacks('DashedRoute');
+        }
+    );
 
 The above will connect default routes for you plugin. You can customize this
 file with more specific routes later on.
