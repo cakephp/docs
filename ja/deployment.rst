@@ -83,7 +83,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Check Your Security
 
 セキュリティをチェックする
-=======================
+=========================
 
 ..
   If you're throwing your application out into the wild, it's a good idea to make
