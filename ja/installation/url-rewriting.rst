@@ -207,6 +207,12 @@ nginx はポピュラーなサーバーで、Apache よりも少ないシステ�
       ... php handling ...
    }
 
+.. note::
+   PHP-FPM の最近の設定は、IP アドレス 127.0.0.1 の 9000 番 TCP ポートの代わりに
+   php-fpm ソケットで受信します。もし、その設定で 502 bad gateway エラーが起こった場合、
+   TCP ポートからソケットパスに fastcgi_pass を書き換えてください。
+   (例: fastcgi_pass unix:/var/run/php5-fpm.sock;)
+
 IIS7 (Windows ホスト) での URL 書き換え
 =======================================
 
