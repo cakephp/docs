@@ -1816,7 +1816,7 @@ Adding Custom Widgets
 
 CakePHP makes it easy to add custom input widgets in your application, and use
 them like any other input type. All of the core input types are implemented as
-wigets, which means you can override any core widget with your own
+widgets, which means you can override any core widget with your own
 implemenation as well.
 
 Building a Widget Class
