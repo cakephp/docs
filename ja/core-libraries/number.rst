@@ -1,12 +1,19 @@
-Number
-######
+..
+  Number
+
+ナンバー
+########
 
 .. php:namespace:: Cake\I18n
 
 .. php:class:: Number
 
-If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
-use the ``Number`` class::
+..
+  If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
+  use the ``Number`` class::
+
+あなたが :php:class:`NumberHelper` 機能外の ``View`` が必要な場合、
+``Number`` クラスを次のように使います::
 
     namespace App\Controller;
 
