@@ -217,6 +217,13 @@ example.com/subfolder/, vous devrez injecter "/webroot" dans chaque requête.
       ... php handling ...
    }
 
+.. note::
+   Les récentes configurations de PHP-FPM sont définies pour écouter sur le
+   socket php-fpm au lieu du port TCP 9000 sur l'adresse 127.0.0.1. Si vous
+   obtenez une erreur 502 de mauvaise passerelle avec la configuration du
+   dessus, essayez de remplacer le port TCP du fastcgi_pass par le chemin du
+   socket (ex: fastcgi_pass unix:/var/run/php5-fpm.sock;).
+
 Rewrites d'URL sur IIS7 (serveurs Windows)
 ==========================================
 
