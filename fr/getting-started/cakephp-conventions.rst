@@ -151,6 +151,9 @@ identifier chaque ligne de manière unique. Si vous souhaitez modéliser une
 table qui n'a pas de clé primaire sur un seul champ, la convention de CakePHP
 veut qu'une clé primaire sur un seul champ soit ajoutée à la table.
 
+Si le nom de la clé primaire n'est pas ``id``, vous devez définir l'attribut
+``Model.primaryKey``.
+
 CakePHP n'accepte pas les clés primaires composées. Dans l'éventualité où vous
 voulez manipuler directement les données de votre table de jointure, cela veut
 dire que vous devez soit utiliser les appels directs à
