@@ -67,7 +67,7 @@ variables used in the bake templates::
 
 You may also scope the ``Bake.beforeRender`` and ``Bake.afterRender`` events to
 a specific generated file. For instance, if you want to add specific actions to
-your UsersController when generating from a ``Controller/controller.ctp`` file,
+your UsersController when generating from a **Controller/controller.ctp** file,
 you can use the following event::
 
     <?php
