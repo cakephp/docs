@@ -68,6 +68,39 @@ de bake::
 
     });
 
+Vous pouvez aussi scoper les events ``Bake.beforeRender`` et
+``Bake.afterRender`` dans un fichier généré spécifique. Par exemple, si vous
+souhaitez ajouter des actions spécifiques à votre UsersController quand vous le
+générez à partir d'un fichier **Controller/controller.ctp**, vous pouvez
+utiliser l'event suivant::
+
+    <?php
+    // config/bootstrap_cli.php
+
+    use Cake\Event\Event;
+    use Cake\Event\EventManager;
+    use Cake\Utility\Hash;
+
+    EventManager::instance()->on(
+        'Bake.beforeRender.Controller.controller',
+        function (Event $event) {
+            if ($view->viewVars['name'] == 'Users') {
+                // ajouter les actions login et logout au controller Users
+                $view->viewVars['actions'] = [
+                    'login',
+                    'logout',
+                    'index',
+                    'view',
+                    'add',
+                    'edit',
+                    'delete'
+                ];
+            }
+        });
+
+En scopant les écouteur d'event vers des templates de bake spécifiques, vous
+pouvez simplifier votre logique d'event liée à bake et fournir des callbacks
+qui sont plus faciles à tester.
 
 Syntaxe de Template de Bake
 ===========================
