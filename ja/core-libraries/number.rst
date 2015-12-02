@@ -12,7 +12,7 @@
   If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
   use the ``Number`` class::
 
-あなたが :php:class:`NumberHelper` 機能外の ``View`` が必要な場合、
+あなたが ``View`` の外で :php:class:`NumberHelper` 機能が必要な場合、
 ``Number`` クラスを次のように使います::
 
     namespace App\Controller;
@@ -40,16 +40,26 @@
 
 .. start-cakenumber
 
-All of these functions return the formatted number; they do not
-automatically echo the output into the view.
+..
+  All of these functions return the formatted number; they do not
+  automatically echo the output into the view.
 
-Formatting Currency Values
+これらの全ての機能は、整形された数値を返します。これらは自動的にビューに出力を表示しません。
+
+..
+  Formatting Currency Values
+
+通貨のフォーマット
 ==========================
 
 .. php:method:: currency(mixed $value, string $currency = null, array $options = [])
 
-This method is used to display a number in common currency formats
-(EUR, GBP, USD). Usage in a view looks like::
+..
+  This method is used to display a number in common currency formats
+  (EUR, GBP, USD). Usage in a view looks like::
+
+このメソッドは、共通通貨フォーマット（ユーロ、英ポンド、米ドル）で数値を表示するために使用されます。
+ビュー内で次のように使います::
 
     // Called as NumberHelper
     echo $this->Number->currency($value, $currency);
@@ -57,13 +67,28 @@ This method is used to display a number in common currency formats
     // Called as Number
     echo Number::currency($value, $currency);
 
-The first parameter, ``$value``, should be a floating point number
-that represents the amount of money you are expressing. The second
-parameter is a string used to choose a predefined currency formatting
-scheme:
+..
+  The first parameter, ``$value``, should be a floating point number
+  that represents the amount of money you are expressing. The second
+  parameter is a string used to choose a predefined currency formatting
+  scheme:
+
+一番目のパラメータ、 ``$value`` は、合計金額をあらわす浮動小数点数でなければいけません。
+二番目のパラメータは、事前定義された通貨フォーマット方式を選択するための文字列です:
+
+..
+  +---------------------+----------------------------------------------------+
+  | $currency           | 1234.56, formatted by currency type                |
+  +=====================+====================================================+
+  | EUR                 | €1.234,56                                          |
+  +---------------------+----------------------------------------------------+
+  | GBP                 | £1,234.56                                          |
+  +---------------------+----------------------------------------------------+
+  | USD                 | $1,234.56                                          |
+  +---------------------+----------------------------------------------------+
 
 +---------------------+----------------------------------------------------+
-| $currency           | 1234.56, formatted by currency type                |
+| $currency           | 通貨の種類によってフォーマットされた 1234.56       |
 +=====================+====================================================+
 | EUR                 | €1.234,56                                          |
 +---------------------+----------------------------------------------------+
@@ -75,14 +100,47 @@ scheme:
 The third parameter is an array of options for further defining the
 output. The following options are available:
 
+三番目のパラメータは、出力を定義するためのオプションの配列です。
+次のオプションが用意されています:
+
+..
+  +---------------------+----------------------------------------------------+
+  | Option              | Description                                        |
+  +=====================+====================================================+
+  | before              | Text to display before the rendered number.        |
+  +---------------------+----------------------------------------------------+
+  | after               | Text to display before the rendered number.        |
+  +---------------------+----------------------------------------------------+
+  | zero                | The text to use for zero values; can be a string   |
+  |                     | or a number. ie. 0, 'Free!'.                       |
+  +---------------------+----------------------------------------------------+
+  | places              | Number of decimal places to use, ie. 2             |
+  +---------------------+----------------------------------------------------+
+  | precision           | Maximal number of decimal places to use, ie. 2     |
+  +---------------------+----------------------------------------------------+
+  | locale              | The locale name to use for formatting number,      |
+  |                     | ie. "fr_FR".                                       |
+  +---------------------+----------------------------------------------------+
+  | fractionSymbol      | String to use for fraction numbers, ie. ' cents'.  |
+  +---------------------+----------------------------------------------------+
+  | fractionPosition    | Either 'before' or 'after' to place the fraction   |
+  |                     | symbol.                                            |
+  +---------------------+----------------------------------------------------+
+  | pattern             | An ICU number pattern to use for formatting the    |
+  |                     | number ie. #,###.00                                |
+  +---------------------+----------------------------------------------------+
+  | useIntlCode         | Set to ``true`` to replace the currency symbol     |
+  |                     | with the international currency code.              |
+  +---------------------+----------------------------------------------------+
+
 +---------------------+----------------------------------------------------+
-| Option              | Description                                        |
+| オプション          | 説明                                               |
 +=====================+====================================================+
-| before              | Text to display before the rendered number.        |
+| before              | レンダリングされた数値の前に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
-| after               | Text to display before the rendered number.        |
+| after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
-| zero                | The text to use for zero values; can be a string   |
+| zero                | 文字列か数値をThe text to use for zero values; can be a string   |
 |                     | or a number. ie. 0, 'Free!'.                       |
 +---------------------+----------------------------------------------------+
 | places              | Number of decimal places to use, ie. 2             |
