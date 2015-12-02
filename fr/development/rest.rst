@@ -1,9 +1,9 @@
 REST
 ####
 
-Beaucoup de programmeurs néophytes d'application réalisent qu'ils ont
+Beaucoup de programmeurs d'applications néophytes réalisent qu'ils ont
 besoin d'ouvrir leurs fonctionnalités principales à un public plus important.
-Fournir facilement, un accès sans entrave à votre API du cœur peut
+Fournir facilement, un accès sans entrave à votre API métier peut
 aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
 
@@ -17,12 +17,12 @@ Mise en place Simple
 ====================
 
 Le moyen le plus rapide pour démarrer avec REST est d'ajouter quelques lignes
-pour configurer :ref:`resource routes <resource-routes>` dans votre fichier
+pour configurer, :ref:`resource routes <resource-routes>`, votre fichier
 config/routes.php.
 
-Une fois que le router a été configuré pour mapper les requêtes REST vers
-certaines actions de controller, nous pouvons continuer et créer la logique
-dans nos actions de controller. Un controller basique pourrait ressembler
+Une fois que le routeur a été configuré pour mapper les requêtes REST vers
+certaines actions de notre contrôleur, nous pouvons continuer et créer la logique
+dans les actions de notre contrôleur. Un contrôleur basique pourrait ressembler
 à ceci::
 
     // src/Controller/RecipesController.php
@@ -99,20 +99,20 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         }
     }
 
-Les controllers RESTful utilisent souvent les extensions parsées pour servir
-différentes views basées sur différents types de requête. Puisque nous gérons
-les requêtes REST, nous ferons des views XML. Vous pouvez aussi faire des views
+Les contrôleurs RESTful utilisent souvent les extensions parsées pour servir
+différentes vues basées sur différentes types de requête. Puisque nous gérons
+les requêtes REST, nous ferons des vues XML. Vous pouvez aussi faire des vues
 JSON en utilisant les :doc:`/views/json-and-xml-views` intégrées à CakePHP. En
 utilisant :php:class:`XmlView` intégré, nous pouvons définir une variable de vue
 ``_serialize``. Cette variable de vue spéciale est utilisée pour définir les
 variables de vue que ``XmlView`` doit sérialiser en XML.
 
 Si nous voulons modifier les données avant qu'elles soient converties en XML,
-nous ne devons pas définir la variable de vue ``_serialize``, et à la place
+nous ne devons pas définir la variable de vue ``_serialize``, et à la place, 
 utiliser les fichiers de template. Nous plaçons les vues REST pour notre
 RecipesController à l'intérieur de **src/Template/Recipes/xml**. Nous pouvons
 aussi utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces
-vues. Voici ce que notre vue index pourrait ressembler à::
+vues. Voici à quoi pourrait ressembler notre vue index::
 
     // src/Template/Recipes/xml/index.ctp
     // Faire du formatage et de la manipulation sur le tableau
