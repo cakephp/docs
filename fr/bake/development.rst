@@ -98,7 +98,7 @@ utiliser l'event suivant::
             }
         });
 
-En scopant les écouteur d'event vers des templates de bake spécifiques, vous
+En scopant les écouteurs d'event vers des templates de bake spécifiques, vous
 pouvez simplifier votre logique d'event liée à bake et fournir des callbacks
 qui sont plus faciles à tester.
 
