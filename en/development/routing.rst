@@ -183,7 +183,7 @@ parameters that are composed of the default values of the route::
 This example shows how you can use the second parameter of ``connect()`` to
 define default parameters. If you built a site that features products for
 different categories of customers, you might consider creating a route. This
-allows you link to ``/government`` rather than ``/pages/display/5``.
+allows you to link to ``/government`` rather than ``/pages/display/5``.
 
 Another common use for the Router is to define an "alias" for a
 controller. Let's say that instead of accessing our regular URL at
