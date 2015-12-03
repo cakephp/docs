@@ -15,7 +15,7 @@ CakePHPアプリケーションをデプロイするにあたり、いくつか�
   Update config/app.php
 
 config/app.phpをアップデートする
-===============================
+=======================================
 
 .. 
   Updating app.php, specifically the value of ``debug`` is extremely important.
@@ -83,7 +83,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Check Your Security
 
 セキュリティをチェックする
-=========================
+===================================
 
 ..
   If you're throwing your application out into the wild, it's a good idea to make
@@ -110,7 +110,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Set Document Root
 
 ドキュメントルートの指定
-=======================
+================================
 
 ..
   Setting the document root correctly on your application is an important step to
@@ -135,7 +135,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Improve Your Application's Performance
 
 アプリケーションのパフォーマンスを改善させる
-========================================
+================================================
 
 .. 
     Class loading can take a big share of your application's processing time.
