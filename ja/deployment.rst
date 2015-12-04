@@ -66,7 +66,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
     SetEnv CAKEPHP_DEBUG 1
 
 ..
-  And then you can set the debug level dynamically in **app.php**::
+  And then you can set the debug level dynamically in **app.php** ::
 
 それから、**app.php**にてデバッグレベルをダイナミックにセットすることができます。
 
