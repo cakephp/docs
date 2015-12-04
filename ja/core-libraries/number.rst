@@ -49,7 +49,7 @@
 ..
   Formatting Currency Values
 
-通貨のフォーマット
+通貨フォーマット
 ==========================
 
 .. php:method:: currency(mixed $value, string $currency = null, array $options = [])
@@ -97,8 +97,9 @@
 | USD                 | $1,234.56                                          |
 +---------------------+----------------------------------------------------+
 
-The third parameter is an array of options for further defining the
-output. The following options are available:
+..
+  The third parameter is an array of options for further defining the
+  output. The following options are available:
 
 三番目のパラメータは、出力を定義するためのオプションの配列です。
 次のオプションが用意されています:
@@ -140,7 +141,7 @@ output. The following options are available:
 +---------------------+----------------------------------------------------+
 | after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
-| zero                | 文字列か数値をThe text to use for zero values; can be a string   |
+| zero                | 文字列か数値The text to use for zero values; can be a string   |
 |                     | or a number. ie. 0, 'Free!'.                       |
 +---------------------+----------------------------------------------------+
 | places              | Number of decimal places to use, ie. 2             |
