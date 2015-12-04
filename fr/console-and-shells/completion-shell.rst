@@ -59,12 +59,18 @@ Retourne::
 
     --help -h --verbose -v --quiet -q --connection -c --template -t
 
-Exemple de Bash
-===============
+Activer l'autocompletion Bash pour la console CakePHP
+=====================================================
 
-L'exemple de bash suivant provient de l'auteur original::
+Avec une distribution Debian
+----------------------------
 
-    # bash completion for CakePHP console
+Créez un fichier **cake** dans **/etc/bash_completion.d/** et placez-y le
+contenu suivant::
+
+    #
+    # Fichier completion Bash pour la console CakePHP
+    #
 
     _cake()
     {
@@ -114,3 +120,35 @@ L'exemple de bash suivant provient de l'auteur original::
     }
 
     complete -F _cake cake bin/cake
+
+Sauvegardez le fichier et rédémarrer la console.
+
+Utilisez l'autocompletion
+=========================
+
+Une fois activée, l'autocompletion peut être utilisée de la même manière que
+pour les autres commandes natives du système, en utilisant la touche **TAB**.
+Trois types d'autocompletion sont fournis. Les examples de retour qui suivent
+proviennent d'une installation fraîche de CakePHP.
+
+#### Commandes::
+
+	$ bin/cake <tab>
+	bake        i18n        orm_cache   routes
+    console     migrations  plugin      server
+
+#### Sous-commandes::
+
+	$ bin/cake bake <tab>
+	behavior            helper              shell
+    cell                mailer              shell_helper
+    component           migration           template
+    controller          migration_snapshot  test
+    fixture             model
+    form                plugin
+
+#### Options::
+
+	$ bin/cake bake -<tab>
+	-c            --everything  --force       --help        --plugin      -q            -t            -v
+    --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose
