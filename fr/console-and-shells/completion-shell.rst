@@ -65,11 +65,12 @@ Activer l'autocompletion Bash pour la console CakePHP
 Avec une distribution Debian
 ----------------------------
 
+Tout d'abord, assurez-vous que la librairie **bash-completion** est installée.
 Créez un fichier **cake** dans **/etc/bash_completion.d/** et placez-y le
 contenu suivant::
 
     #
-    # Fichier completion Bash pour la console CakePHP
+    # Fichier de completion Bash pour la console CakePHP
     #
 
     _cake()
@@ -103,17 +104,16 @@ contenu suivant::
             opts=$(${cake} Completion subcommands $prev)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             if [[ $COMPREPLY = "" ]] ; then
-                COMPREPLY=( $(compgen -df -- ${cur}) )
+                _filedir
                 return 0
             fi
             return 0
         fi
 
-
         opts=$(${cake} Completion fuzzy "${COMP_WORDS[@]:1}")
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
         if [[ $COMPREPLY = "" ]] ; then
-            COMPREPLY=( $(compgen -df -- ${cur}) )
+            _filedir
             return 0
         fi
         return 0;

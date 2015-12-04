@@ -62,6 +62,7 @@ How to enable Bash autocompletion for the CakePHP Console
 Using a Debian distribution
 ---------------------------
 
+First, make sure the **bash-completion** library is installed.
 Create a file named **cake** in **/etc/bash_completion.d/** and put the
 following content inside it::
 
@@ -100,17 +101,16 @@ following content inside it::
             opts=$(${cake} Completion subcommands $prev)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             if [[ $COMPREPLY = "" ]] ; then
-                COMPREPLY=( $(compgen -df -- ${cur}) )
+                _filedir
                 return 0
             fi
             return 0
         fi
 
-
         opts=$(${cake} Completion fuzzy "${COMP_WORDS[@]:1}")
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
         if [[ $COMPREPLY = "" ]] ; then
-            COMPREPLY=( $(compgen -df -- ${cur}) )
+            _filedir
             return 0
         fi
         return 0;
