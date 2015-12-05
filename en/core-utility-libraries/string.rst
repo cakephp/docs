@@ -7,6 +7,10 @@ The String class includes convenience methods for creating and
 manipulating strings and is normally accessed statically. Example:
 ``String::uuid()``.
 
+.. deprecated:: 2.7
+    The String class has been deprecated in 2.7 in favour of the :php:class:`CakeText`
+    class. It offers a more consistent interface and API.
+    
 If you need :php:class:`TextHelper` functionalities outside of a ``View``,
 use the ``String`` class::
 
