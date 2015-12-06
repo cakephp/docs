@@ -23,3 +23,9 @@ CorsBuilder Added
 In order to make setting headers related to Cross Origin Requests (CORS) easier,
 a new ``CorsBuilder`` has been added. This class lets you define CORS related
 headers with a fluent interface. See :ref:`cors-headers` for more information.
+
+ORM
+---
+
+* Containing the same association multiple times now works as expected, and the
+  query builder functions are now stacked.
