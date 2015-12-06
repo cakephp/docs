@@ -1,30 +1,35 @@
-String
-######
+CakeText
+########
 
-.. php:class:: String
+.. php:class:: CakeText
 
-String クラスは文字列の作成や走査に関する便利なクラスです。
-また、スタティックにアクセスすることが可能です。例： ``String::uuid()`` 。
+CakeText クラスは文字列の作成や走査に関する便利なクラスです。
+また、スタティックにアクセスすることが可能です。例： ``CakeText::uuid()`` 。
 
-もし、``View`` 以外で :php:class:`TextHelper` が必要な場合、
-``String`` クラスを使ってください。 ::
+.. deprecated:: 2.7
+    ``String`` クラスは、2.7 で非推奨になりました。 :php:class:`CakeText` クラスを
+    推奨します。 ``String`` クラスは、後方互換のために提供し、 PHP7 や HHVM との
+    互換性に備えて ``CakeText`` の使用をお勧めします。
+
+もし、 ``View`` 以外で :php:class:`TextHelper` が必要な場合、
+``CakeText`` クラスを使ってください。 ::
 
     class UsersController extends AppController {
 
         public $components = array('Auth');
 
         public function afterLogin() {
-            App::uses('String', 'Utility');
+            App::uses('CakeText', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
                 // 新しいメッセージをユーザへ通知
-                $this->Session->setFlash(__('You have a new message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
+                $this->Session->setFlash(__('You have a new message: %s', CakeText::truncate($message['Message']['body'], 255, array('html' => true))));
             }
         }
     }
 
 .. versionchanged:: 2.1
-  :php:class:`TextHelper` のいくつかのメソッドは ``String`` クラスへ移動しています。
+  :php:class:`TextHelper` のいくつかのメソッドは ``CakeText`` クラスへ移動しています。
 
 .. php:staticmethod:: uuid()
 
@@ -32,7 +37,7 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
     UUID とは、485fc381-e790-47a3-9794-1337c0a8fe68 のようなフォーマットの
     128 ビットの文字列のことです。 ::
 
-        String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
+        CakeText::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 .. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
 
@@ -42,7 +47,7 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
     このメソッドは、タグリストのような定形フォーマットのデータを分割するのに便利です。 ::
 
         $data = "cakephp 'great framework' php";
-        $result = String::tokenize($data, ' ', "'", "'");
+        $result = CakeText::tokenize($data, ' ', "'", "'");
         // 結果
         array('cakephp', "'great framework'", 'php');
 
@@ -50,13 +55,13 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     insert メソッドは、テンプレートとキー・バリューの組み合わせから文字列を作成できます。 ::
 
-        String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
+        CakeText::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
         // 生成される文字列: "My name is Bob and I am 65 years old."
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 
     与えられた $options に 'clean' キーが存在した場合、その指定に従って
-    ``String::insert`` をクリーンアップします。
+    ``CakeText::insert`` をクリーンアップします。
     デフォルトでは text を利用しますが、html も用意されています。
     この機能の目的は、 Set::insert では取り除けなかったホワイトスペース、
     および、プレースホルダー周辺で必要がないマークアップを取り除くことにあります。
@@ -77,7 +82,7 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
     単語の途中で改行されたりしないように、賢く折り返しの処理を行います。 ::
 
        $text = 'This is the song that never ends.';
-       $result = String::wrap($text, 22);
+       $result = CakeText::wrap($text, 22);
 
        // 出力
        This is the song
@@ -118,9 +123,9 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
             array('format' => '<span class="highlight">\1</span>')
         );
 
-        // String クラスとして呼び出し
-        App::uses('String', 'Utility');
-        echo String::highlight(
+        // CakeText クラスとして呼び出し
+        App::uses('CakeText', 'Utility');
+        echo CakeText::highlight(
             $lastSentence,
             'using',
             array('format' => '<span class="highlight">\1</span>')
@@ -167,9 +172,9 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
             )
         );
 
-        // String クラスとして利用
-        App::uses('String', 'Utility');
-        echo String::truncate(
+        // CakeText クラスとして利用
+        App::uses('CakeText', 'Utility');
+        echo CakeText::truncate(
             'The killer crept forward and tripped on the rug.',
             22,
             array(
@@ -220,9 +225,9 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
             )
         );
 
-        // String クラスとして利用
-        App::uses('String', 'Utility');
-        echo String::tail(
+        // CakeText クラスとして利用
+        App::uses('CakeText', 'Utility');
+        echo CakeText::tail(
             $sampleText,
             70,
             array(
@@ -250,9 +255,9 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
         // TextHelper として利用
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
-        // String クラスとして利用
-        App::uses('String', 'Utility');
-        echo String::excerpt($lastParagraph, 'method', 50, '...');
+        // CakeText クラスとして利用
+        App::uses('CakeText', 'Utility');
+        echo CakeText::excerpt($lastParagraph, 'method', 50, '...');
 
     出力結果::
 
@@ -269,9 +274,9 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
         // TextHelper として利用
         echo $this->Text->toList($colors);
 
-        // String として利用
-        App::uses('String', 'Utility');
-        echo String::toList($colors);
+        // CakeText として利用
+        App::uses('CakeText', 'Utility');
+        echo CakeText::toList($colors);
 
     出力結果::
 
@@ -280,5 +285,5 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 .. end-string
 
 .. meta::
-    :title lang=ja: String
+    :title lang=ja: CakeText
     :keywords lang=ja: array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
