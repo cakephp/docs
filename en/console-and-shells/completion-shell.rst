@@ -134,14 +134,14 @@ Three type of autocompletion are provided. The following output are from a fresh
 
 #### Commands::
 
-	$ bin/cake <tab>
-	bake        i18n        orm_cache   routes
+    $ bin/cake <tab>
+    bake        i18n        orm_cache   routes
     console     migrations  plugin      server
 
 #### Subcommands::
 
-	$ bin/cake bake <tab>
-	behavior            helper              shell
+    $ bin/cake bake <tab>
+    behavior            helper              shell
     cell                mailer              shell_helper
     component           migration           template
     controller          migration_snapshot  test
@@ -150,6 +150,6 @@ Three type of autocompletion are provided. The following output are from a fresh
 
 #### Options::
 
-	$ bin/cake bake -<tab>
-	-c            --everything  --force       --help        --plugin      -q            -t            -v
+    $ bin/cake bake -<tab>
+    -c            --everything  --force       --help        --plugin      -q            -t            -v
     --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose

@@ -136,14 +136,14 @@ proviennent d'une installation fraîche de CakePHP.
 
 #### Commandes::
 
-	$ bin/cake <tab>
-	bake        i18n        orm_cache   routes
+    $ bin/cake <tab>
+    bake        i18n        orm_cache   routes
     console     migrations  plugin      server
 
-#### Sous-commandes::
+#### Subcommands::
 
-	$ bin/cake bake <tab>
-	behavior            helper              shell
+    $ bin/cake bake <tab>
+    behavior            helper              shell
     cell                mailer              shell_helper
     component           migration           template
     controller          migration_snapshot  test
@@ -152,6 +152,6 @@ proviennent d'une installation fraîche de CakePHP.
 
 #### Options::
 
-	$ bin/cake bake -<tab>
-	-c            --everything  --force       --help        --plugin      -q            -t            -v
+    $ bin/cake bake -<tab>
+    -c            --everything  --force       --help        --plugin      -q            -t            -v
     --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose
