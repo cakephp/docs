@@ -57,7 +57,10 @@ Par exemple::
 
 Retourne::
 
-    --help -h --verbose -v --quiet -q --connection -c --template -t
+    --help -h --verbose -v --quiet -q --everything --connection -c --force -f --plugin -p --prefix --theme -t
+
+Vous pouvez passer un autre argument représentant une sous-commande du shell :
+cela vous retournera les options spécifiques à cette sous-commande.
 
 Activer l'autocompletion Bash pour la console CakePHP
 =====================================================
