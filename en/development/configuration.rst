@@ -380,11 +380,11 @@ a PHP configuration file loadable by the
 Given that the 'default' engine is an instance of PhpConfig.
 Save all data in Configure to the file `my_config.php`::
 
-    Configure::dump('my_config.php', 'default');
+    Configure::dump('my_config', 'default');
 
 Save only the error handling configuration::
 
-    Configure::dump('error.php', 'default', ['Error', 'Exception']);
+    Configure::dump('error', 'default', ['Error', 'Exception']);
 
 ``Configure::dump()`` can be used to either modify or overwrite
 configuration files that are readable with :php:meth:`Configure::load()`
