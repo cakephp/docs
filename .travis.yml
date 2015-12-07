@@ -1,16 +1,16 @@
 sudo: required
 
 services:
-  - docker
+    - docker
 
 before_install:
-  - docker pull cakephpfr/docs
+    - docker pull cakephpfr/docs
 
 script:
-    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make html SPHINXOPTS='-W'
-    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make epub
-    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make latex
-    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make pdf
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html SPHINXOPTS='-W'
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
 
 notifications:
     email: false
