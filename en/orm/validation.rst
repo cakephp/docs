@@ -179,7 +179,7 @@ construction process into multiple reusable steps::
     {
         $validator = $this->validateDefault($validator);
 
-        $validator->add('password', 'length', ['rule' => 'between', 8, 100]);
+        $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
         return $validator;
     }
 

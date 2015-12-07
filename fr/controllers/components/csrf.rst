@@ -17,6 +17,12 @@ la requête et la valeur du cookie. Si l'une des deux est manquantes ou que les
 deux valeurs ne correspondent pas, le component lancera une
 :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
+.. note::
+    Vous devez toujours vérifier les méthodes HTTP utilisées avant d'exécuter
+    d'autre code. Vous devez :ref:`vérifier la méthode HTTP <check-the-request>`
+    ou utiliser :php:meth:`Cake\\Network\\Request::allowMethod()` pour vous
+    assurer que la bonne méthode HTTP est utilisée.
+
 .. versionadded:: 3.1
 
     Le type d'exception a changé de
