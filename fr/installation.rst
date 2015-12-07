@@ -81,7 +81,8 @@ garder les fichiers composer.json et composer.lock avec le reste de votre code
 source.
 
 Vous devriez être maintenant capable de visiter le chemin où vous avez installé
-votre application CakePHP et voir les feux de signalisations de configuration.
+votre application CakePHP et voir la page d'accueil par défaut. Pour changer
+le contenu de cette page, modifiez: **src/Template/Pages/home.ctp**.
 
 Bien que composer soit la méthode d'installation recommandée, il existe des
 versions pré-installables disponibles sur

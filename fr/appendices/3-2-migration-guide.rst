@@ -24,3 +24,10 @@ Afin de faciliter la définition des en-têtes liés aux Requêtes de type
 Cross-site (Cross Origin Requests = CORS), un nouveau ``CorsBuilder`` a été
 ajouté. Cette classe vous laisse définir les en-têtes liés au CORS avec une
 interface simple. Consultez :ref:`cors-headers` pour plus d'informations.
+
+ORM
+---
+
+* Faire un contain avec la même association plusieurs fois fonctionne maintenant
+  de la façon esperée, et les fonctions du constructeur de requête sont
+  maintenant empilées.
