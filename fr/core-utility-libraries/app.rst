@@ -64,7 +64,7 @@ Chargement des classes
     Vendors
         ``App::uses('Textile', 'Vendor');``
     Utilities
-        ``App::uses('String', 'Utility');``
+        ``App::uses('CakeText', 'Utility');``
 
     Donc au fond, le deuxième paramètre devrait simplement correspondre
     au chemin du dossier de la classe de fichier dans core ou app.
