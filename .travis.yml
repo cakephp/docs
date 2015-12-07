@@ -8,6 +8,9 @@ before_install:
 
 script:
     - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make html SPHINXOPTS='-W'
+    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make epub
+    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make latex
+    - docker run -it --rm -v $(pwd):/data -p 127.0.0.1:80:4567 cakephpfr/docs make pdf
 
 notifications:
     email: false
