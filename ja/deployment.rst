@@ -15,7 +15,11 @@ CakePHPアプリケーションをデプロイするにあたり、いくつか�
   Update config/app.php
 
 config/app.phpをアップデートする
+<<<<<<< HEAD
 ================================
+=======
+=====================
+>>>>>>> e3d28ff... deployment translated
 
 .. 
   Updating app.php, specifically the value of ``debug`` is extremely important.
@@ -59,16 +63,26 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ..
   For example, you can set an environment variable in your Apache configuration::
 
+<<<<<<< HEAD
 例えば、Apacheの設定にて、環境変数をセットすることができます。
+=======
+例えば、アパッチの設定にて、環境変数をセットすることができます。
+>>>>>>> e3d28ff... deployment translated
 
 ::
 
     SetEnv CAKEPHP_DEBUG 1
 
 ..
+<<<<<<< HEAD
   And then you can set the debug level dynamically in **app.php** ::
 
 それから、**app.php** にてデバッグレベルをダイナミックにセットすることができます。
+=======
+  And then you can set the debug level dynamically in **app.php**::
+
+それから、**app.php**にてデバッグレベルをダイナミックにセットすることができます。
+>>>>>>> e3d28ff... deployment translated
 
 ::
 
@@ -83,7 +97,11 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Check Your Security
 
 セキュリティをチェックする
+<<<<<<< HEAD
 ==========================
+=======
+===================
+>>>>>>> e3d28ff... deployment translated
 
 ..
   If you're throwing your application out into the wild, it's a good idea to make
@@ -110,7 +128,11 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Set Document Root
 
 ドキュメントルートの指定
+<<<<<<< HEAD
 ========================
+=======
+=================
+>>>>>>> e3d28ff... deployment translated
 
 ..
   Setting the document root correctly on your application is an important step to
@@ -125,7 +147,11 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   ``webroot/``. This removes the possibility of files outside of the webroot
   directory being executed.
 
+<<<<<<< HEAD
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`url-rewriting` ドキュメントを見てください。
+=======
+アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`URLリライティング` ドキュメントを見てください。
+>>>>>>> e3d28ff... deployment translated
 
 どの場合においても ``webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
@@ -135,7 +161,11 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Improve Your Application's Performance
 
 アプリケーションのパフォーマンスを改善させる
+<<<<<<< HEAD
 ============================================
+=======
+======================================
+>>>>>>> e3d28ff... deployment translated
 
 .. 
     Class loading can take a big share of your application's processing time.
@@ -178,5 +208,10 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
     bin/cake plugin assets copy
 
 .. meta::
+<<<<<<< HEAD
     :title lang=ja: Deployment
     :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
+=======
+    :title lang=en: Deployment
+    :keywords lang=en: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
+>>>>>>> e3d28ff... deployment translated
