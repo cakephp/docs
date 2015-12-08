@@ -17,6 +17,7 @@ CakePHPアプリケーションをデプロイするにあたり、いくつか�
 config/app.phpをアップデートする
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ================================
 =======
 =====================
@@ -24,6 +25,9 @@ config/app.phpをアップデートする
 =======
 ===============================
 >>>>>>> dc14979... deployment amended
+=======
+================================
+>>>>>>> 3.0
 
 .. 
   Updating app.php, specifically the value of ``debug`` is extremely important.
@@ -69,6 +73,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 例えば、Apacheの設定にて、環境変数をセットすることができます。
 =======
 例えば、アパッチの設定にて、環境変数をセットすることができます。
@@ -76,12 +81,16 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 =======
 例えば、Apacheの設定にて、環境変数をセットすることができます。
 >>>>>>> dc14979... deployment amended
+=======
+例えば、Apacheの設定にて、環境変数をセットすることができます。
+>>>>>>> 3.0
 
 ::
 
     SetEnv CAKEPHP_DEBUG 1
 
 ..
+<<<<<<< HEAD
 <<<<<<< HEAD
   And then you can set the debug level dynamically in **app.php** ::
 
@@ -91,6 +100,11 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 それから、**app.php**にてデバッグレベルをダイナミックにセットすることができます。
 >>>>>>> e3d28ff... deployment translated
+=======
+  And then you can set the debug level dynamically in **app.php** ::
+
+それから、**app.php** にてデバッグレベルをダイナミックにセットすることができます。
+>>>>>>> 3.0
 
 ::
 
@@ -107,6 +121,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 セキュリティをチェックする
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ==========================
 =======
 ===================
@@ -114,6 +129,9 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 =======
 =======================
 >>>>>>> dc14979... deployment amended
+=======
+==========================
+>>>>>>> 3.0
 
 ..
   If you're throwing your application out into the wild, it's a good idea to make
@@ -142,6 +160,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ドキュメントルートの指定
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ========================
 =======
 =================
@@ -149,6 +168,9 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 =======
 =======================
 >>>>>>> dc14979... deployment amended
+=======
+========================
+>>>>>>> 3.0
 
 ..
   Setting the document root correctly on your application is an important step to
@@ -164,10 +186,14 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   directory being executed.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`url-rewriting` ドキュメントを見てください。
 =======
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`URLリライティング` ドキュメントを見てください。
 >>>>>>> e3d28ff... deployment translated
+=======
+アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`url-rewriting` ドキュメントを見てください。
+>>>>>>> 3.0
 
 どの場合においても ``webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
@@ -179,6 +205,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 アプリケーションのパフォーマンスを改善させる
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ============================================
 =======
 ======================================
@@ -186,6 +213,9 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 =======
 ========================================
 >>>>>>> dc14979... deployment amended
+=======
+============================================
+>>>>>>> 3.0
 
 .. 
     Class loading can take a big share of your application's processing time.
@@ -230,6 +260,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 .. meta::
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     :title lang=ja: Deployment
     :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
 =======
@@ -237,6 +268,8 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
     :keywords lang=en: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
 >>>>>>> e3d28ff... deployment translated
 =======
+=======
+>>>>>>> 3.0
     :title lang=ja: Deployment
     :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
 >>>>>>> dc14979... deployment amended
