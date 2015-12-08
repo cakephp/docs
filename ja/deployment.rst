@@ -16,10 +16,14 @@ CakePHPアプリケーションをデプロイするにあたり、いくつか�
 
 config/app.phpをアップデートする
 <<<<<<< HEAD
+<<<<<<< HEAD
 ================================
 =======
 =====================
 >>>>>>> e3d28ff... deployment translated
+=======
+===============================
+>>>>>>> dc14979... deployment amended
 
 .. 
   Updating app.php, specifically the value of ``debug`` is extremely important.
@@ -64,10 +68,14 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   For example, you can set an environment variable in your Apache configuration::
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 例えば、Apacheの設定にて、環境変数をセットすることができます。
 =======
 例えば、アパッチの設定にて、環境変数をセットすることができます。
 >>>>>>> e3d28ff... deployment translated
+=======
+例えば、Apacheの設定にて、環境変数をセットすることができます。
+>>>>>>> dc14979... deployment amended
 
 ::
 
@@ -98,10 +106,14 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 セキュリティをチェックする
 <<<<<<< HEAD
+<<<<<<< HEAD
 ==========================
 =======
 ===================
 >>>>>>> e3d28ff... deployment translated
+=======
+=======================
+>>>>>>> dc14979... deployment amended
 
 ..
   If you're throwing your application out into the wild, it's a good idea to make
@@ -129,10 +141,14 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 ドキュメントルートの指定
 <<<<<<< HEAD
+<<<<<<< HEAD
 ========================
 =======
 =================
 >>>>>>> e3d28ff... deployment translated
+=======
+=======================
+>>>>>>> dc14979... deployment amended
 
 ..
   Setting the document root correctly on your application is an important step to
@@ -162,10 +178,14 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 アプリケーションのパフォーマンスを改善させる
 <<<<<<< HEAD
+<<<<<<< HEAD
 ============================================
 =======
 ======================================
 >>>>>>> e3d28ff... deployment translated
+=======
+========================================
+>>>>>>> dc14979... deployment amended
 
 .. 
     Class loading can take a big share of your application's processing time.
@@ -209,9 +229,14 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 .. meta::
 <<<<<<< HEAD
+<<<<<<< HEAD
     :title lang=ja: Deployment
     :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
 =======
     :title lang=en: Deployment
     :keywords lang=en: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
 >>>>>>> e3d28ff... deployment translated
+=======
+    :title lang=ja: Deployment
+    :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
+>>>>>>> dc14979... deployment amended
