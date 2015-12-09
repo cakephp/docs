@@ -466,6 +466,26 @@ params you used for attaching it::
     // Detaching all callbacks implemented by a listener
     $this->getEventManager()->detach($listener);
 
+Core events
+===========
+
+There are a number of core events within the framework which your application can listen to.
+
+* beforeMarhsal
+* beforeFind
+* buildValidator
+* buildRules
+* beforeRules
+* afterRules
+* beforeSave
+* afterSave
+* afterSaveCommit
+* beforeDelete
+* afterDelete
+* afterDeleteCommit
+
+You can read more about these events in the :ref:`table-callbacks`.
+
 Conclusion
 ==========
 
