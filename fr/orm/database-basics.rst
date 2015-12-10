@@ -832,12 +832,12 @@ d'information.
 Créer des Bases de Données
 ==========================
 
-Si vous voulez créer une connection sans sélectionner de base de donnée, vous
-pouvez omettre le nom de la base de données::
+Si vous voulez créer une connexion (Connection) sans sélectionner de base de
+données, vous pouvez omettre le nom de la base de données::
 
     $dsn = 'mysql://root:password@localhost/';
 
-Vous pouvez maintenant utiliser votre objet connection pour exécuter des
+Vous pouvez maintenant utiliser votre objet Connection pour exécuter des
 requêtes qui créent/modifient les bases de données. Par exemple pour créer une
 base de données::
 
@@ -845,7 +845,7 @@ base de données::
 
 .. note::
 
-    Lorsque vous créez une base de donnée, il est recommandé de définir le jeu
+    Lorsque vous créez une base de données, il est recommandé de définir le jeu
     de caractères ainsi que les paramètres de collation. Si ces valeurs sont
     manquantes, la base de données utilisera les valeurs par défaut du système
     quelles qu'elles soient.
