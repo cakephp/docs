@@ -829,6 +829,26 @@ CakePHP intègre aussi un outil CLI pour gérer les mises en cache de metadata.
 Consultez le chapitre :doc:`/console-and-shells/orm-cache` pour plus
 d'information.
 
+Créer des Bases de Données
+==========================
+
+Si vous voulez créer une connection sans sélectionner de base de donnée, vous
+pouvez omettre le nom de la base de données::
+
+    $dsn = 'mysql://root:password@localhost/';
+
+Vous pouvez maintenant utiliser votre objet connection pour exécuter des
+requêtes qui créent/modifient les bases de données. Par exemple pour créer une
+base de données::
+
+    $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
+
+.. note::
+
+    Lorsque vous créez une base de donnée, il est recommandé de définir le jeu
+    de caractères ainsi que les paramètres de collation. Si ces valeurs sont
+    manquantes, la base de données utilisera les valeurs par défaut du système
+    quelles qu'elles soient.
 
 .. meta::
     :title lang=fr: Notions de Base de Base de Données
