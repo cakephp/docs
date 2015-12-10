@@ -86,7 +86,7 @@ exceptions for HTTP methods
 
     Used for doing a 501 Not Implemented Errors.
 
-You can throw these exceptions from you controllers to indicate failure states,
+You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
