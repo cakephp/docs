@@ -187,7 +187,7 @@ diviser leur process de construction en de petites étapes réutilisables::
     {
         $validator = $this->validateDefault($validator);
 
-        $validator->add('password', 'length', ['rule' => 'between', 8, 100]);
+        $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
         return $validator;
     }
 

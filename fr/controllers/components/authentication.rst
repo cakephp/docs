@@ -352,11 +352,15 @@ seront revérifiés à chaque requête.
 
 Pour utiliser l'authentification basic, vous devez configurer AuthComponent::
 
-    $this->Auth->config('authenticate', [
-        'Basic' => [
-            'fields' => ['username' => 'username', 'password' => 'api_key'],
-            'userModel' => 'Users'
+    $this->loadComponent('Auth', [
+        'authenticate' => [
+            'Basic' => [
+                'fields' => ['username' => 'username', 'password' => 'api_key'],
+                'userModel' => 'Users'
+            ],
         ],
+        'storage' => 'Memory',
+        'unauthorizedRedirect' => false
     ]);
 
 Ici nous voulons utiliser le username + clé API pour nos champs, et utiliser le
@@ -416,11 +420,15 @@ un hash est envoyé.
 
 Pour utiliser l'authentification digest, vous devez configurer AuthComponent::
 
-    $this->Auth->config('authenticate', [
-        'Digest' => [
-            'fields' => ['username' => 'username', 'password' => 'digest_hash']
-            'userModel' => 'Users'
+    $this->loadComponent('Auth', [
+        'authenticate' => [
+            'Digest' => [
+                'fields' => ['username' => 'username', 'password' => 'digest_hash'],
+                'userModel' => 'Users'
+            ],
         ],
+        'storage' => 'Memory',
+        'unauthorizedRedirect' => false
     ]);
 
 Ici nous utilisons le username + digest_hash pour nos champs, et nous utilisons

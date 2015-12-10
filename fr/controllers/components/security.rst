@@ -43,6 +43,11 @@ le component Security avant ces components dans la méthode ``initialize()``.
     requête. Voir les paramètres de configuration de ``$validatePost`` ou
     ``$disabledFields``.
 
+    Vous devez toujours vérifier les méthodes HTTP utilisées avant d'exécuter
+    d'autre code. Vous devez :ref:`vérifier la méthode HTTP <check-the-request>`
+    ou utiliser :php:meth:`Cake\\Network\\Request::allowMethod()` pour vous
+    assurer que la bonne méthode HTTP est utilisée.
+
 Gestion des callbacks Blackhole
 ===============================
 

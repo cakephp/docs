@@ -73,7 +73,7 @@ output. The following options are available:
 +=====================+====================================================+
 | before              | Text to display before the rendered number.        |
 +---------------------+----------------------------------------------------+
-| after               | Text to display before the rendered number.        |
+| after               | Text to display after the rendered number.         |
 +---------------------+----------------------------------------------------+
 | zero                | The text to use for zero values; can be a string   |
 |                     | or a number. ie. 0, 'Free!'.                       |
