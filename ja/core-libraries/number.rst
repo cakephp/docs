@@ -141,42 +141,53 @@
 +---------------------+----------------------------------------------------+
 | after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
-| zero                | 文字列か数値The text to use for zero values; can be a string   |
-|                     | or a number. ie. 0, 'Free!'.                       |
+| zero                | ゼロ値の場合に使用するテキストで、                 |
+|                     | 文字列か数値が使用できます。例. 0, '無料!'         |
 +---------------------+----------------------------------------------------+
-| places              | Number of decimal places to use, ie. 2             |
+| places              | 小数点以下の桁数を指定します。例. 2                |
 +---------------------+----------------------------------------------------+
-| precision           | Maximal number of decimal places to use, ie. 2     |
+| precision           | 小数点以下の最大桁数を指定します。例. 2            |
 +---------------------+----------------------------------------------------+
-| locale              | The locale name to use for formatting number,      |
-|                     | ie. "fr_FR".                                       |
+| locale              | 数値フォーマットに使用するロケール名。             |
+|                     | 例. "fr_FR".                                       |
 +---------------------+----------------------------------------------------+
-| fractionSymbol      | String to use for fraction numbers, ie. ' cents'.  |
+| fractionSymbol      | 小数に使用する文字列。例. ' cents'                 |
 +---------------------+----------------------------------------------------+
-| fractionPosition    | Either 'before' or 'after' to place the fraction   |
-|                     | symbol.                                            |
+| fractionPosition    | fractionSymbolで指定した文字列を、小数の           |
+|                     | 'before' または 'after' のどちらに配置するか。     |
 +---------------------+----------------------------------------------------+
-| pattern             | An ICU number pattern to use for formatting the    |
-|                     | number ie. #,###.00                                |
+| pattern             | 数値のフォーマットに使用するICU数値パターン。      |
+|                     | 例. #,###.00                                       |
 +---------------------+----------------------------------------------------+
-| useIntlCode         | Set to ``true`` to replace the currency symbol     |
-|                     | with the international currency code.              |
+| useIntlCode         | 通貨記号を国際通貨コードに置き換えるために         |
+|                     | ``true`` を指定する。                              |
 +---------------------+----------------------------------------------------+
 
-If $currency value is ``null``, the default currency will be retrieved from
-:php:meth:`Cake\\I18n\\Number::defaultCurrency()`
+..
+  If $currency value is ``null``, the default currency will be retrieved from
+  :php:meth:`Cake\\I18n\\Number::defaultCurrency()`
 
+$currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cake\\I18n\\Number::defaultCurrency()` によって設定されます。
 
-Setting the Default Currency
+..
+  Setting the Default Currency
+
+デフォルト通貨の設定
 ============================
 
 .. php:method:: defaultCurrency($currency)
 
-Setter/getter for the default currency. This removes the need to always pass the
-currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
-currency outputs by setting other default. If ``$currency`` is set to ``false``,
-it will clear the currently stored value. By default, it will retrieve the
-``intl.default_locale`` if set and 'en_US' if not.
+..
+  Setter/getter for the default currency. This removes the need to always pass the
+  currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
+  currency outputs by setting other default. If ``$currency`` is set to ``false``,
+  it will clear the currently stored value. By default, it will retrieve the
+  ``intl.default_locale`` if set and 'en_US' if not.
+
+デフォルト通貨のsetter/getterは削除されました。これは、常に :php:meth:`Cake\\I18n\\Number::currency()` を通らなくてはならないことと、
+他のデフォルト設定による全ての通貨の出力の変更が必要とされるためです。
+``$currency`` に ``false`` が設定された場合、現在格納されている値をクリアします。
+デフォルトでは、 ``intl.default_locale`` の値、設定されていなければ 'en_US' を設定します。
 
 Formatting Floating Point Numbers
 =================================
