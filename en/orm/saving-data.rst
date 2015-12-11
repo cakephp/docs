@@ -209,6 +209,17 @@ change the validation set to be used per association::
         ]
     ]);
 
+The following diagram gives an overview of what happens inside the
+``newEntity()`` or ``patchEntity()`` method:
+
+.. figure:: /_static/img/validation-cycle.png
+   :align: left
+   :alt: Flow diagram showing the marshalling/validation process.
+
+You can always count on getting an entity back from ``newEntity()``. If
+validation fails your entity will contain errors, and any invalid fields will
+not be populated in the created entity.
+
 Converting BelongsToMany Data
 -----------------------------
 
@@ -712,6 +723,13 @@ When an entity is saved a few things happen:
 8. Child associations are saved. For example, any listed hasMany, hasOne, or
    belongsToMany associations will be saved.
 9. The ``Model.afterSave`` event will be dispatched.
+10. The ``Model.afterSaveCommit`` event will be dispatched.
+
+The following diagram illustrates the above process:
+
+.. figure:: /_static/img/save-cycle.png
+   :align: left
+   :alt: Flow diagram showing the save process.
 
 See the :ref:`application-rules` section for more information on creating and
 using rules.
