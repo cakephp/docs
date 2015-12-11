@@ -970,6 +970,25 @@ Defaults to ``true``::
             <option value="Value 3">Label 3</option>
         </optgroup>
     </select>
+    
+To generate attributes within an option tag::
+
+    $options = [
+        [ 'text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1' ],
+        [ 'text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2' ],
+        [ 'text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value' ],
+    ];
+    echo $this->Form->select('field', $options);
+    
+Output:
+
+.. code-block:: html
+
+    <select name="field">
+        <option value="value 1" attr_name="attr_value 1">Description 1</option>
+        <option value="value 2" attr_name="attr_value 2">Description 2</option>
+        <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
+    </select>
 
 * ``$attributes['multiple']`` If 'multiple' has been set to ``true`` for an
   input that outputs a select, the select will allow multiple selections::
@@ -1797,7 +1816,7 @@ Adding Custom Widgets
 
 CakePHP makes it easy to add custom input widgets in your application, and use
 them like any other input type. All of the core input types are implemented as
-wigets, which means you can override any core widget with your own
+widgets, which means you can override any core widget with your own
 implemenation as well.
 
 Building a Widget Class

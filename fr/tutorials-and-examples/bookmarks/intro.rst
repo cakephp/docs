@@ -14,7 +14,9 @@ Voici ce dont vous allez avoir besoin:
    MySQL, assurez-vous aussi d'avoir ``pdo_mysql`` activé dans PHP.
 #. Des connaissances de base en PHP.
 
-C'est parti !
+Si vous souhaitez voir ce que donne l'application au final, regardez
+`cakephp/bookmarker <https://github.com/cakephp/bookmarker-tutorial>`__. C'est
+parti !
 
 Récupérer CakePHP
 =================
@@ -302,7 +304,17 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
     );
 
     Router::scope('/', function ($routes) {
-        // Connect the default routes.
+        // Connecte la page d'accueil par défaut et les routes /pages/*.
+        $routes->connect('/', [
+            'controller' => 'Pages',
+            'action' => 'display', 'home'
+        ]);
+        $routes->connect('/pages/*', [
+            'controller' => 'Pages',
+            'action' => 'display'
+        ]);
+
+        // Connecte les routes basées sur les conventions par défaut.
         $routes->fallbacks('InflectedRoute');
     });
 
@@ -354,6 +366,9 @@ Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
         return $this->find()
             ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
+                if (empty($options['tags'])) {
+                    return $q->where(['Tags.title IS' => null]);
+                }
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
     }

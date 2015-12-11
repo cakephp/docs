@@ -349,9 +349,9 @@ example Croatian:
 
     msgid "One file removed"
     msgid_plural "{0} files removed"
-    msgstr[0] "jednom datotekom je uklonjen"
-    msgstr[1] "{0} datoteke uklonjenih"
-    msgstr[2] "{0} slika uklonjenih"
+    msgstr[0] "{0} datoteka je uklonjena"
+    msgstr[1] "{0} datoteke su uklonjene"
+    msgstr[2] "{0} datoteka je uklonjeno"
 
 Please visit the `Launchpad languages page <https://translations.launchpad.net/+languages>`_
 for a detailed explanation of the plural form numbers for each language.

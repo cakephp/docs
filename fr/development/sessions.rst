@@ -124,7 +124,7 @@ configuration de session 'php'. Les configurations intégrées sont:
 
 Les valeurs acceptées sont:
 
-* defaults - Soit 'php', 'database', 'cache' oru'cake' comme expliqué ci-dessus.
+* defaults - Soit 'php', 'database', 'cache' ou 'cake' comme expliqué ci-dessus.
 * handler - Un tableau contenant la configuration du gestionnaire.
 * ini - Une liste de directives de php.ini à définir avant le démarrage de la session.
 * timeout - La durée en minute durant laquelle la session doit rester active.

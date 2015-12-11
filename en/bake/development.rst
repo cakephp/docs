@@ -65,6 +65,37 @@ variables used in the bake templates::
 
     });
 
+You may also scope the ``Bake.beforeRender`` and ``Bake.afterRender`` events to
+a specific generated file. For instance, if you want to add specific actions to
+your UsersController when generating from a **Controller/controller.ctp** file,
+you can use the following event::
+
+    <?php
+    // config/bootstrap_cli.php
+
+    use Cake\Event\Event;
+    use Cake\Event\EventManager;
+    use Cake\Utility\Hash;
+
+    EventManager::instance()->on(
+        'Bake.beforeRender.Controller.controller',
+        function (Event $event) {
+            if ($view->viewVars['name'] == 'Users') {
+                // add the login and logout actions to the Users controller
+                $view->viewVars['actions'] = [
+                    'login',
+                    'logout',
+                    'index',
+                    'view',
+                    'add',
+                    'edit',
+                    'delete'
+                ];
+            }
+        });
+
+By scoping event listeners to specific bake templates, you can simplify your
+bake related event logic and provide callbacks that are easier to test.
 
 Bake Template Syntax
 ====================

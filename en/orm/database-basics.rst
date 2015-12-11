@@ -768,6 +768,24 @@ You can also configure the metadata caching at runtime with the
 CakePHP also includes a CLI tool for managing metadata caches. See the
 :doc:`/console-and-shells/orm-cache` chapter for more information.
 
+Creating Databases
+==================
+
+If you want to create a connection without selecting a database you can omit
+the database name::
+
+    $dsn = 'mysql://root:password@localhost/';
+
+You can now use your connection object to execute queries that create/modify
+databases. For example to create a database::
+
+    $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
+
+.. note::
+
+    When creating a database it is a good idea to set the character set and
+    collation parameters. If these values are missing, the database will set
+    whatever system default values it uses.
 
 .. meta::
     :title lang=en: Database Basics

@@ -74,7 +74,7 @@ et utilise les méthodes séparément pour définir toutes les configurations
 ou charger un tableau de configs.
 
 En définissant des profiles et des transports, vous pouvez garder le code de
-votre application sans données de configuration, et éviter de dupliquer ce qui
+votre application sans données de configuration, et éviter de dupliquer, ce qui
 rend la maintenance et le déploiement moins compliqués.
 
 Pour charger une configuration prédéfinie, vous pouvez utiliser la méthode

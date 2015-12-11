@@ -265,3 +265,39 @@ loaded behaviors, or access specific behaviors using the ``BehaviorRegistry``::
     // Get a loaded behavior
     // Remember to omit plugin prefixes
     $table->behaviors()->get('CounterCache');
+
+Re-configuring Loaded Behaviors
+-------------------------------
+
+To modify the configuration of an already loaded behavior you can combine the
+``BehaviorRegistry::get`` command with ``config`` command provided by the
+``InstanceConfigTrait`` trait.
+
+For example if a parent (e.g. an ``AppTable``) class loaded the ``Timestamp``
+behavior you could do the following to add, modify or remove the configurations
+for the behavior. In this case, we will add an event we want Timestamp to
+respond to::
+
+    namespace App\Model\Table;
+
+    use App\Model\Table\AppTable; // similar to AppController
+
+    class UsersTable extends AppTable
+    {
+        public function initialize(array $options)
+        {
+            parent::initialize($options);
+
+            // e.g. if our parent calls $this->addBehavior('Timestamp');
+            // and we want to add an additional event
+            if ($this->behaviors()->has('Timestamp') {
+                $this->behaviors()->get('Timestamp')->config([
+                    'events' => [
+                        'Users.login' => [
+                            'last_login' => 'always'
+                        ],
+                    ],
+                ]);
+            }
+        }
+    }

@@ -404,11 +404,11 @@ un fichier de configuration PHP qu'on pourra charger avec
 Etant donné que le reader 'default' est une instance de PhpReader.
 Sauvegarder toutes les données de Configure  dans le fichier `my_config.php`::
 
-    Configure::dump('my_config.php', 'default');
+    Configure::dump('my_config', 'default');
 
 Sauvegarde seulement les erreurs gérant la configuration::
 
-    Configure::dump('error.php', 'default', ['Error', 'Exception']);
+    Configure::dump('error', 'default', ['Error', 'Exception']);
 
 ``Configure::dump()`` peut être utilisée pour soit modifier, soit surcharger
 les fichiers de configuration qui sont lisibles avec

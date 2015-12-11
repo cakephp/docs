@@ -1011,6 +1011,25 @@ sélectionnées. Par défaut à ``true``::
         </optgroup>
     </select>
 
+Pour générer des attributs avec option dans une balise::
+
+    $options = [
+        [ 'text' => 'Description 1', 'value' => 'value 1', 'attr_name' => 'attr_value 1' ],
+        [ 'text' => 'Description 2', 'value' => 'value 2', 'attr_name' => 'attr_value 2' ],
+        [ 'text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value' ],
+    ];
+    echo $this->Form->select('field', $options);
+
+Affiche:
+
+.. code-block:: html
+
+    <select name="field">
+        <option value="value 1" attr_name="attr_value 1">Description 1</option>
+        <option value="value 2" attr_name="attr_value 2">Description 2</option>
+        <option value="value 3" other_attr_name="other_attr_value">Description 3</option>
+    </select>
+
 * ``$attributes['multiple']`` Si 'multiple' a été défini à ``true`` pour
   un input select, celui ci autorisera les sélections multiples::
 

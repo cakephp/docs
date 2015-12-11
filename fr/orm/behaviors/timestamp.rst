@@ -74,6 +74,8 @@ sans changer aucune autre propriété. On fait parfois référence au
     // Touch basé sur un évènement spécifique.
     $orders->touch($order, 'Orders.completed');
 
+Après avoir sauvegardé l'entity, le champ est mis à jour.
+
 Toucher les enregistrements peut être utile quand vous souhaitez signaler
 qu'une ressource parente a changé quand une ressource enfante est créée/mise
 à jour. Par exemple: mettre à jour un article quand un nouveau commentaire

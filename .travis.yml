@@ -1,17 +1,16 @@
-language: python
+sudo: required
 
-python:
- - "2.7"
+services:
+    - docker
 
-install:
-    - pip install -r requirements.txt
-    - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+before_install:
+    - docker pull cakephpfr/docs
 
 script:
-    - 'make html SPHINXOPTS="-W"'
-    - 'make latex'
-    - 'make epub'
-    - 'make pdf'
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html SPHINXOPTS='-W'
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
+    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
 
 notifications:
     email: false

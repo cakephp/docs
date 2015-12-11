@@ -167,10 +167,11 @@ utilisées dans ``$options``:
   nom d'hôte.
 - ``ssl_cafile`` - par défaut pour construire dans cafile. Ecrasez-le pour
   utiliser des bundles CA personnalisés.
-- ``timeout`` - Durée d'attente avant timing out.
+- ``timeout`` - Durée d'attente avant le timing out en secondes.
 - ``type`` - Envoi un corps de requête dans un type de contenu personnalisé.
   Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
   définie quand vous faîtes des requêtes GET.
+- ``redirect`` - Nombre de redirections à suivre. ``false`` par défaut.
 
 Le paramètre options est toujours le 3ème paramètre dans chaque méthode HTTP.
 Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des

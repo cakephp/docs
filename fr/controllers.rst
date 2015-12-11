@@ -9,7 +9,7 @@ Les Controllers sont le 'C' dans MVC. Après que le routage a été appliqué et
 que le bon controller a été trouvé, l'action de votre controller est
 appelée. Votre controller devra gérer l'interprétation des données requêtées,
 s'assurer que les bons models sont appelés et que la bonne réponse ou vue est
-rendue. Les controllers peuvent être imaginés comme un homme au milieu entre
+rendue. Les controllers peuvent être imaginés comme une couche au milieu entre
 le Model et la Vue. Le mieux est de garder des controllers peu chargés, et
 des models plus fournis. Cela vous aidera à réutiliser votre code et facilitera
 le test de votre code.

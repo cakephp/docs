@@ -104,7 +104,7 @@ que toutes les ressources nécessaires pour accomplir une tâche soient délégu
 aux bonnes personnes. Il attend des requêtes des clients, vérifie leur validité
 selon l'authentification et les règles d'autorisation, délègue la récupération
 et le traitement des données à la couche Model, puis sélectionne les types de
-présentation acceptés par client pour finalement déléguer le processus
+présentation acceptés par le client pour finalement déléguer le processus
 de rendu à la couche View. Un exemple de controller d'enregistrement
 d'utilisateur serait::
 
@@ -148,12 +148,12 @@ chaque requête passe par les étapes suivantes:
 #. Tout :doc:`filtre du dispatcher </development/dispatch-filters>`
    configuré peut manipuler la requête, et optionnellement générer une réponse.
 #. Le dispatcher sélectionne le controller et l'action appropriée en se basant
-   sur les règle re routage.
+   sur les règles de routage.
 #. L'action du controller est appelée et le controller interagit avec les
    Models et Components nécessaires.
 #. Le controller délègue la création de la response à la View pour générer
-   le résultat obtenu à partir des données de model.
-#. Le View utilise les Helpers et les Cells pour générer l'entête et le corps
+   le résultat obtenu à partir des données du model.
+#. Le View utilise les Helpers et les Cells pour générer l'en-tête et le corps
    de la réponse.
 #. La réponse est renvoyée au client.
 
@@ -165,7 +165,7 @@ Espérons que ce bref aperçu ait éveillé votre intérêt. Quelques autres gra
 fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` qui s'intègre à
-  Memcached, Redis et d'autres.
+  Memcached, Redis et d'autres moteurs de cache.
 * Un :doc:`outil de génération de code
   </bake/usage>` puissant pour partir sur les chapeaux de roue.
 * Un :doc:`framework de tests intégré</development/testing>` pour vous assurer

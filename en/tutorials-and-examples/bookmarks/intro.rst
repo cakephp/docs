@@ -14,7 +14,8 @@ Here's what you'll need:
    that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
-Let's get started!
+If you'd like to see the completed application, checkout `cakephp/bookmarker
+<https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
 
 Getting CakePHP
 ===============
@@ -284,7 +285,17 @@ look like::
     );
 
     Router::scope('/', function ($routes) {
-        // Connect the default routes.
+        // Connect the default home and /pages/* routes.
+        $routes->connect('/', [
+            'controller' => 'Pages',
+            'action' => 'display', 'home'
+        ]);
+        $routes->connect('/pages/*', [
+            'controller' => 'Pages',
+            'action' => 'display'
+        ]);
+
+        // Connect the conventions based default routes.
         $routes->fallbacks('InflectedRoute');
     });
 
@@ -334,6 +345,9 @@ method has not been implemented yet, so let's do that. In
         return $this->find()
             ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
+                if (empty($options['tags'])) {
+                    return $q->where(['Tags.title IS' => null]);
+                }
                 return $q->where(['Tags.title IN' => $options['tags']]);
             });
     }

@@ -76,8 +76,9 @@ Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut
 .ctp (Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la
 logique de présentation nécessaire à l'organisation des données reçues du
 controller, dans un format qui satisfasse l'audience que vous recherchez. Si
-vous préférez utiliser un langage de template comme Twig, ou Smarty, une
-sous-classe de View fera le pont entre votre langage de template et CakePHP.
+vous préférez utiliser un langage de template comme
+`Twig <http://twig.sensiolabs.org>`__, une sous-classe de View fera
+le pont entre votre langage de template et CakePHP.
 
 Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier

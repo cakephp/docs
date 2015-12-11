@@ -72,7 +72,7 @@ extension of **.ctp** (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you're
 serving to. If you'd prefer using a templating language like
-Twig, a subclass of View will bridge your templating
+`Twig <http://twig.sensiolabs.org>`__, a subclass of View will bridge your templating
 language and CakePHP.
 
 Template files are stored in **src/Template/**, in a folder named after the

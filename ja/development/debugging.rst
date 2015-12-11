@@ -1,16 +1,246 @@
 デバッグ
 ########
 
-.. note::
-    The documentation is not currently supported in Japanese language for this
-    page.
+..
+  Debugging is an inevitable and necessary part of any development
+  cycle. While CakePHP doesn't offer any tools that directly connect
+  with any IDE or editor, CakePHP does provide several tools to
+  assist in debugging and exposing what is running under the hood of
+  your application.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+デバッグはいかなる開発サイクルにおいても避けることのできない、必要なものです。
+CakePHP は IDE やエディタと直接連携するようなツールは提供しませんが、CakePHP はデバッグ作業やあなたのアプリケーション内部で何が走っているのかを探る作業を助けるためのツールをいくつか提供します。
 
-    You can referer to the english version in the select top menu to have
-    information about this page's topic.
+基本的なデバッグ
+================
+
+.. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
+    :noindex:
+
+..
+    The ``debug()`` function is a globally available function that works
+    similarly to the PHP function ``print_r()``. The ``debug()`` function
+    allows you to show the contents of a variable in a number of
+    different ways. First, if you'd like data to be shown in an
+    HTML-friendly way, set the second parameter to ``true``. The function
+    also prints out the line and file it is originating from by
+    default.
+
+``debug()`` 関数は PHP 関数の ``print_r()`` と同様に、グローバルに利用可能な関数です。 ``debug()`` 関数により、さまざまな方法で変数の内容を出力することができます。
+データを HTML に優しい方法で表示させたいなら、第２引数を ``true`` にしてください。この関数はまた、デフォルトで呼ばれた場所となるファイルと行番号も出力します。
+
+..
+    Output from this function is only shown if the core ``$debug`` variable
+    has been set to ``true``.
+
+この関数からの出力は、core の ``$debug`` 変数が ``true`` の場合のみ行われます。
+
+.. php:function:: stackTrace()
+
+..
+    The ``stackTrace()`` function is available globally, and allows you to output
+    a stack trace wherever the function is called.
+
+``stackTrace()`` 関数はグローバルに使用でき、関数がどこで呼ばれたかのスタックトレースを出力することができます。
+
+.. php:function:: breakpoint()
+
+.. versionadded:: 3.1
+
+..
+    If you have `Psysh <http://psysh.org/>`_ installed you can use this
+    function in CLI enviroments to open an interactive console with the current
+    local scope::
+
+もし `Psysh <http://psysh.org/>`_ をインストールしている場合、この関数をCLI環境で使用することで現在のローカルスコープで対話型コンソールを開くことができます。 ::
+
+    // 実行したいコード
+    eval(breakpoint());
+
+..
+    Will open an interactive console that can be used to check local variables
+    and execute other code. You can exit the interactive debugger and resume the
+    original execution by running ``quit`` or ``q`` in the interactive session.
+
+開いた対話型コンソールでローカル変数のチェックや他のコードの実行をすることができます。対話型デバッガを終了して元の処理に戻りたい時は ``quit`` か ``q`` を入力してください。
+
+Debugger クラスの使用
+========================
+
+.. php:namespace:: Cake\Error
+
+.. php:class:: Debugger
+
+..
+    To use the debugger, first ensure that ``Configure::read('debug')`` is
+    set to ``true``.
+
+Debugger を使用する際にはまず、``Configure::read('debug')`` に ``true`` がセットされていることを確認してください。
+
+値の出力
+========
+
+.. php:staticmethod:: dump($var, $depth = 3)
+
+..
+    Dump prints out the contents of a variable. It will print out all
+    properties and methods (if any) of the supplied variable::
+
+dump は変数の内容を出力します。渡された変数のすべてのプロパティと（可能なら）メソッドを出力します ::
+
+    $foo = [1,2,3];
+
+    Debugger::dump($foo);
+
+    // 出力
+    array(
+        1,
+        2,
+        3
+    )
+
+    // シンプルなオブジェクト
+    $car = new Car();
+
+    Debugger::dump($car);
+
+    // 出力
+    object(Car) {
+        color => 'red'
+        make => 'Toyota'
+        model => 'Camry'
+        mileage => (int)15000
+    }
+
+スタックトレース付きのログ出力
+==============================
+
+.. php:staticmethod:: log($var, $level = 7, $depth = 3)
+
+..
+    Creates a detailed stack trace log at the time of invocation. The
+    ``log()`` method prints out data similar to that done by
+    ``Debugger::dump()``, but to the debug.log instead of the output
+    buffer. Note your **tmp** directory (and its contents) must be
+    writable by the web server for ``log()`` to work correctly.
+
+呼び出されたときに詳細なスタックトレースを生成します。
+``log()`` メソッドは ``Debugger::dump()`` によるものと似たデータを出力しますが、出力バッファにではなく、 debug.log に出力します。
+``log()`` が正常に動作するためには、あなたの **tmp** ディレクトリ（と、その中）はウェブサーバにより書き込み可能でなければならないことに気をつけてください。
+
+スタックトレースの生成
+======================
+
+.. php:staticmethod:: trace($options)
+
+..
+    Returns the current stack trace. Each line of the trace includes
+    the calling method, including which file and line the call
+    originated from::
+
+現在のスタックトレースを返します。トレースの各行には、呼び出しているメソッド、どこから呼ばれたかというファイルと行番号が含まれています。 ::
+
+    // PostsController::index() の中で
+    pr(Debugger::trace());
+
+    // 出力
+    PostsController::index() - APP/Controller/DownloadsController.php, line 48
+    Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 265
+    Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 237
+    [main] - APP/webroot/index.php, line 84
+
+..
+    Above is the stack trace generated by calling ``Debugger::trace()`` in
+    a controller action. Reading the stack trace bottom to top shows
+    the order of currently running functions (stack frames).
+
+上記では、コントローラのアクション内で ``Debugger::trace()`` を呼ぶことで、スタックトレースを生成しています。
+スタックトレースは下から上へと読み、現在走っている関数（スタックフレーム）の順になっています。
+
+ファイルから抜粋を取得
+======================
+
+.. php:staticmethod:: excerpt($file, $line, $context)
+
+..
+    Grab an excerpt from the file at $path (which is an absolute
+    filepath), highlights line number $line with $context number of
+    lines around it. ::
+
+$path（絶対パス）にあるファイルからの抜粋を取得します。$line 行目をハイライトし、$line 行目の前後 $context 行もあわせて取得します。 ::
+
+    pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
+
+    // 下記のように出力されます
+    Array
+    (
+        [0] => <code><span style="color: #000000"> * @access public</span></code>
+        [1] => <code><span style="color: #000000"> */</span></code>
+        [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
+
+        [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
+        [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
+    )
+
+..
+    Although this method is used internally, it can be handy if you're
+    creating your own error messages or log entries for custom
+    situations.
+
+このメソッドは内部的に使われているものですが、あなたが独自のエラーメッセージを生成する場合や独自の状況でログ出力する場合にも使いやすいものです。
+
+.. php:staticmethod:: Debugger::getType($var)
+
+..
+    Get the type of a variable. Objects will return their class name
+
+変数の型を取得します。オブジェクトならクラス名を返します。
+
+ログ出力によるデバッグ
+======================
+
+..
+    Logging messages is another good way to debug applications, and you can use
+    :php:class:`Cake\\Log\\Log` to do logging in your application. All objects that
+    use ``LogTrait`` have an instance method ``log()`` which can be used
+    to log messages::
+
+アプリケーションをデバッグするもう一つの良い方法はログメッセージです。
+:php:class:`Cake\\Log\\Log` を使うことで、あなたのアプリケーションでログ出力をさせることができます。
+``LogTrait`` を use するすべてのオブジェクトは、インスタンスメソッド ``log()`` を持っており、ログメッセージを出力するのに使えます ::
+
+    $this->log('通ったよ', 'debug');
+
+..
+    The above would write ``Got here`` into the debug log. You can use log entries
+    to help debug methods that involve redirects or complicated loops. You can also
+    use :php:meth:`Cake\\Log\\Log::write()` to write log messages. This method can be called
+    statically anywhere in your application one CakeLog has been loaded::
+
+上記では ``通ったよ`` がデバッグログに出力されます。
+ログに出力することで、リダイレクトや複雑なループを含むメソッドをデバッグしやすくなるでしょう。
+また、:php:meth:`Cake\\Log\\Log::write()` を使うことで、ログメッセージを書きだすことも可能です。
+このメソッドは CakeLog がロードされているなら static にあなたのアプリケーション内のどこからでも呼び出すことができるのです ::
+
+    // ログを使用したいファイルの一番最初で
+    use Cake\Log\Log;
+
+    // Log がインポートされている場所で
+    Log::debug('通ったよ');
+
+Debug Kit
+=========
+
+..
+    DebugKit is a plugin that provides a number of good debugging tools. It
+    primarily provides a toolbar in the rendered HTML, that provides a plethora of
+    information about your application and the current request. See the
+    :doc:`/debug-kit` chapter for how to install and use DebugKit.
+
+DebugKit は便利なデバッグツールをたくさん提供してくれるプラグインです。
+まずは、レンダリングされた HTML 内にツールバーを表示して、あなたのアプリケーションや現在のリクエストについての情報を大量に提供してくれます。
+DebugKit のインストールと使用方法については :doc:`/debug-kit` の章を見てください。
+
 
 .. meta::
     :title lang=ja: Debugging

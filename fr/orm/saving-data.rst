@@ -223,6 +223,17 @@ de validation utilisé par association::
         ]
     ]);
 
+Le diagramme suivant donne un aperçu de ce qui se passe à l'intérieur
+de la méthode ``newEntity()`` ou ``patchEntity()``:
+
+.. figure:: /_static/img/validation-cycle.png
+   :align: left
+   :alt: Logigramme montrant le process de conversionen entity/validation.
+
+Vous récupérerez toujours une entity en retour de ``newEntity()``. Si la
+validation échoue, votre entité contiendra des erreurs et tous les champs
+invalides seront absents de l'entity créée.
+
 Convertir des Données BelongsToMany
 -----------------------------------
 
@@ -589,11 +600,41 @@ entities ne soient créées::
     // Dans une classe table ou behavior
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
-        $data['username'] .= 'user';
+       if (isset($data['username'])) {
+           $data['username'] = mb_strtolower($data['username']);
+       }
     }
 
 Le paramètre ``$data`` est une instance ``ArrayObject``, donc vous n'avez pas
 à la retourner pour changer les données utilisées pour créer les entities.
+
+Le but principal de ``beforeMarshal`` est d'aider les utilisateurs à passer
+le process de validation lorsque des erreurs simples peuvent être résolues
+automatiquement, ou lorsque les données doivent être restructurées pour être
+mises dans les bons champs.
+
+L'event ``Model.beforeMarshal`` est lancé juste au début du process de validation.
+Une des raisons à cela est que ``beforeMarshal`` est autorisé à modifier les
+règles de validation et les options d'enregistrement, telle que la whitelist
+des champs. La validation est lancée juste après que cet événement soit
+terminé. Un exemple commun de modification des données avant qu'elles soient
+validées est la suppression des espaces superflus d'un champ avant
+l'enregistrement ::
+
+    // Dans une table ou un behavior
+    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+    {
+        foreach ($data as $key => $value) {
+            if (is_string($value)) {
+                $data[$key] = trim($value);
+            }
+        }
+    }
+
+A cause de la manière dont le process de marshalling fonctionne, si un champ ne
+passe pas la validation, il sera automatiquement supprimé du tableau de données
+et ne sera pas copié dans l'entity. cela évite d'avoir des données incohérentes
+dans l'objet entity.
 
 Valider les Données Avant de Construire les Entities
 ----------------------------------------------------
@@ -717,6 +758,13 @@ Quand une entity est sauvegardée, voici ce qui se passe:
 8. Les associations Enfant sont sauvegardées. Par exemple, toute association
    hasMany, hasOne, ou belongsToMany listée sera sauvegardée.
 9. L'event ``Model.afterSave`` sera dispatché.
+10. L'event ``Model.afterSaveCommit`` sera dispatché.
+
+Le diagramme suivant illustre le procédé ci-dessus:
+
+.. figure:: /_static/img/save-cycle.png
+   :align: left
+   :alt: Logigramme montrant le procédé de sauvegarde.
 
 Consultez la section :ref:`application-rules` pour plus d'informations sur la
 création et l'utilisation des règles.
