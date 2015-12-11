@@ -1,27 +1,50 @@
 ElasticSearch
 #############
 
-The ElasticSearch plugin provides an ORM-like abstraction on top of
-`elasticsearch <https://www.elastic.co/products/elasticsearch>`_. The plugin
-provides features that make testing, indexing documents and searching your
-indexes easier.
+..
+    The ElasticSearch plugin provides an ORM-like abstraction on top of
+    `elasticsearch <https://www.elastic.co/products/elasticsearch>`_. The plugin
+    provides features that make testing, indexing documents and searching your
+    indexes easier.
 
-Installation
+ElasticSearch プラグインは、ORM ライクな抽象を `elasticsearch <https://www.elastic.co/products/elasticsearch>`_ の上部で提供します。
+そのプラグインは、テストの作成、ドキュメントのインデックス作成、インデックスをより簡単に検索、などの機能を提供します。
+
+..
+    Installation
+
+インストール
 ============
 
-To install the elasticsearch plugin, you can use ``composer``. From your
-application's ROOT directory (where composer.json file is located) run the
-following::
+..
+    To install the elasticsearch plugin, you can use ``composer``. From your
+    application's ROOT directory (where composer.json file is located) run the
+    following::
+
+elasticsearch プラグインをインストールするには、 ``composer`` が利用できます。
+あなたのアプリケーションの ROOT ディレクトリ (composer.json ファイルの配置場所) から、以下で実行できます。
+
+::
 
     php composer.phar require cakephp/elastic-search "@stable"
 
-You will need to add the following line to your application's
-**config/bootstrap.php** file::
+..
+    You will need to add the following line to your application's
+    **config/bootstrap.php** file::
+
+以下の1行をあなたのアプリケーションの **config/bootstrap.php** ファイルに追加する必要があります。
+
+::
 
     Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
 
-Additionally, you will need to configure the 'elastic' datasource connection in
-your **config/app.php** file. An example configuration would be::
+..
+    Additionally, you will need to configure the 'elastic' datasource connection in
+    your **config/app.php** file. An example configuration would be::
+
+追加で 'elastic' のデータソースの接続を **config/app.php** ファイルに設定する必要があります。
+
+::
 
     // in config/app.php
     'Datasources' => [
@@ -35,13 +58,23 @@ your **config/app.php** file. An example configuration would be::
         ],
     ]
 
-Overview
+..
+    Overview
+
+概要
 ========
 
-The elasticsearch plugin makes it easier to interact with an elasticsearch index
-and provides an interface similar to the :doc:`/orm`. To get started you should
-create a ``Type`` object. ``Type`` objects are the "Repository" or table-like
-class in elasticsearch::
+..
+    The elasticsearch plugin makes it easier to interact with an elasticsearch index
+    and provides an interface similar to the :doc:`/orm`. To get started you should
+    create a ``Type`` object. ``Type`` objects are the "Repository" or table-like
+    class in elasticsearch::
+
+elasticsearch は elasticsearch インデックスと作用することを簡単にし、 :doc:`/orm` に似たインタフェースを提供します。
+始めるには、 ``Type`` オブジェクトを作成しなければいけません。
+``Type`` オブジェクトは elasticsearch 内では"リポジトリ" もしくはテーブルライクなクラスです。
+
+::
 
     // in src/Model/Type/ArticlesType.php
     namespace App\Model\Type;
@@ -52,12 +85,20 @@ class in elasticsearch::
     {
     }
 
-You can then use your type class in your controllers::
+..
+    You can then use your type class in your controllers::
+
+コントローラーでタイプクラスを利用できます。
+
+..
+    // Load the Type using the 'Elastic' provider.
+
+::
 
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // Load the Type using the 'Elastic' provider.
+        // 'Elastic' プロバイダーを利用して Type を読み込む
         $this->loadModel('Articles', 'Elastic');
     }
 
@@ -73,7 +114,12 @@ You can then use your type class in your controllers::
         $this->set(compact('article'));
     }
 
-We would also need to create a basic view for our indexed articles::
+..
+    We would also need to create a basic view for our indexed articles::
+
+インデックスされた articles の基本的なビューを作成する必要があると思います。
+
+::
 
     // in src/Template/Articles/add.ctp
     <?= $this->Form->create($article) ?>
@@ -82,8 +128,11 @@ We would also need to create a basic view for our indexed articles::
     <?= $this->Form->button('Save') ?>
     <?= $this->Form->end() ?>
 
-You should now be able to submit the form and have a new document added to
-elasticsearch.
+..
+    You should now be able to submit the form and have a new document added to
+    elasticsearch.
+
+今フォームの送信が可能になり、新しいドキュメントが elasticsearch に追加されました。
 
 Document Objects
 ================
