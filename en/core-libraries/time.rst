@@ -1,5 +1,5 @@
-Time
-####
+Date & Time
+###########
 
 .. php:namespace:: Cake\I18n
 
@@ -30,11 +30,16 @@ use the ``Time`` class::
     }
 
 
-Under the hood, CakePHP uses `Carbon <https://github.com/briannesbitt/Carbon>`_
-to power its ``Time`` utility. Anything you can do with ``Carbon`` and
-``DateTime``, you can do with ``Time``.
+Under the hood, CakePHP uses `Chronos <https://github.com/cakephp/chronos>`_
+to power its ``Time`` utility. Anything you can do with ``Chronos`` and
+``DateTime``, you can do with ``Time`` and ``Date``.
 
-For details on Carbon please see `their documentation <http://carbon.nesbot.com/docs/>`_.
+.. note::
+    Prior to 3.2.0 CakePHP used `Carbon
+    <https://github.com/briannesbitt/Carbon>`__.
+
+For more details on Chronos please see `the API documentation
+<http://api.cakephp.org/chronos/1.0/>`_.
 
 .. start-time
 
@@ -318,6 +323,85 @@ You can also compare a ``Time`` instance within a range in the past::
     echo $time->wasWithinLast('2 weeks');
 
 .. end-time
+
+Dates
+=====
+
+.. php:class: Date
+
+.. versionadded:: 3.2
+
+The ``Date`` class in CakePHP implements the same API and methods as
+:php:class:`Cake\\I18n\\Time` does. The main difference between ``Time`` and
+``Date`` is that ``Date`` does not track time components, and are always in UTC.
+As an example::
+
+    use Cake\I18n\Date;
+    $date = new Date('2015-06-15');
+
+    $date->modify('+2 hours');
+    // Outputs 2015-06-15 00:00:00
+    echo $date->format('Y-m-d H:i:s');
+
+    $date->modify('+36 hours');
+    // Outputs 2015-06-15 00:00:00
+    echo $date->format('Y-m-d H:i:s');
+
+Attempts to modify the timezone on a ``Date`` instance are also ignored::
+
+    use Cake\I18n\Date;
+    $date = new Date('2015-06-15');
+    $date->setTimezone(new \DateTimeZone('America/New_York'));
+
+    // Outputs UTC
+    echo $date->format('e');
+
+.. _immutable-time:
+
+Immutable Dates and Times
+=========================
+
+.. php:class:: FrozenTime
+.. php:class:: FrozenDate
+
+CakePHP offers immutable date and time classes that implement the same interface
+as their mutable siblings. Immutable objects are useful when you want to prevent
+accidental changes to data, or when you want to avoid order based dependency
+issues. Take the following code::
+
+    use Cake\I18n\Time;
+    $time = new Time('2015-06-15 08:23:45');
+    $time->modify('+2 hours');
+
+    // This method also modifies the $time instance
+    $this->someOtherFunction($time);
+
+    // Output here is unknown.
+    echo $time->format('Y-m-d H:i:s');
+
+If the method call was re-ordered the output could be unexpected. This is a form
+of temporal coupling. If we use immutable objects we can avoid these issues::
+
+    use Cake\I18n\FrozenTime;
+    $time = new FrozenTime('2015-06-15 08:23:45');
+    $time = $time->modify('+2 hours');
+
+    // This method's modifications don't change $time
+    $this->someOtherFunction($time);
+
+    // Output here is known.
+    echo $time->format('Y-m-d H:i:s');
+
+Immutable dates and times are useful in entity objects as they prevent
+accidental modifications, and force changes to be explicit. Using
+immutable objects helps the ORM to more easily track changes, and ensure that
+date and datetime columns are persisted correctly::
+
+    // This change will be lost when the article is saved.
+    $article->updated->modify('+1 hour');
+
+    // By replacing the time object the property will be saved.
+    $article->updated = $article->updated->modify('+1 hour');
 
 Accepting Localized Request Data
 ================================
