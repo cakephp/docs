@@ -659,8 +659,7 @@ Attribute Matching Types
     * ``numeric`` for sorting values as their numeric equivalents.
     * ``string`` for sorting values as their string value.
     * ``natural`` for sorting values in a human friendly way. Will
-      sort ``foo10`` below ``foo2`` as an example. Natural sorting
-      requires PHP 5.4 or greater.
+      sort ``foo10`` below ``foo2`` as an example.
 
 .. php:staticmethod:: diff(array $data, array $compare)
 
