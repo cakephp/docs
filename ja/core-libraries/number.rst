@@ -50,7 +50,7 @@
   Formatting Currency Values
 
 通貨フォーマット
-==========================
+================
 
 .. php:method:: currency(mixed $value, string $currency = null, array $options = [])
 
@@ -142,7 +142,7 @@
 | after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
 | zero                | ゼロ値の場合に使用するテキストで、                 |
-|                     | 文字列か数値が使用できます。例. 0, '無料!'         |
+|                     | 文字列か数値で指定できます。例. 0, '無料!'         |
 +---------------------+----------------------------------------------------+
 | places              | 小数点以下の桁数を指定します。例. 2                |
 +---------------------+----------------------------------------------------+
@@ -173,7 +173,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
   Setting the Default Currency
 
 デフォルト通貨の設定
-============================
+====================
 
 .. php:method:: defaultCurrency($currency)
 
@@ -184,54 +184,96 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
   it will clear the currently stored value. By default, it will retrieve the
   ``intl.default_locale`` if set and 'en_US' if not.
 
-デフォルト通貨のsetter/getterは削除されました。これは、常に :php:meth:`Cake\\I18n\\Number::currency()` を通らなくてはならないことと、
-他のデフォルト設定による全ての通貨の出力の変更が必要とされるためです。
+デフォルト通貨のためのsetter/getterです。これは、常に :php:meth:`Cake\\I18n\\Number::currency()` に通貨を渡したり、
+他のデフォルトを設定することによって全ての通貨の出力を変更したりする必要がなくなります。
 ``$currency`` に ``false`` が設定された場合、現在格納されている値をクリアします。
-デフォルトでは、 ``intl.default_locale`` の値、設定されていなければ 'en_US' を設定します。
+``$currency`` が設定されていない場合、デフォルトでは、 ``intl.default_locale`` の値、設定されていない場合 'en_US' を設定します。
 
-Formatting Floating Point Numbers
-=================================
+..
+  Formatting Floating Point Numbers
+
+浮動小数点数フォーマット
+========================
 
 .. php:method:: precision(float $value, int $precision = 3, array $options = [])
 
-This method displays a number with the specified amount of
-precision (decimal places). It will round in order to maintain the
-level of precision defined. ::
-
+..
+  This method displays a number with the specified amount of
+  precision (decimal places). It will round in order to maintain the
+  level of precision defined. ::
+..
     // Called as NumberHelper
     echo $this->Number->precision(456.91873645, 2);
-
+..
     // Outputs
     456.92
-
+..
     // Called as Number
     echo Number::precision(456.91873645, 2);
 
+このメソッドは指定された精度(小数点以下)で数値を表示します。
+定義された精度のレベルを維持するために丸めます。 ::
 
-Formatting Percentages
-======================
+    // NumberHelperとしてコール
+    echo $this->Number->precision(456.91873645, 2);
+
+    // 出力
+    456.92
+
+    // Numberとしてコール
+    echo Number::precision(456.91873645, 2);
+
+..
+  Formatting Percentages
+
+パーセンテージフォーマット
+==========================
 
 .. php:method:: toPercentage(mixed $value, int $precision = 2, array $options = [])
 
+..
+  +---------------------+----------------------------------------------------+
+  | Option              | Description                                        |
+  +=====================+====================================================+
+  | multiply            | Boolean to indicate whether the value has to be    |
+  |                     | multiplied by 100. Useful for decimal percentages. |
+  +---------------------+----------------------------------------------------+
+
 +---------------------+----------------------------------------------------+
-| Option              | Description                                        |
+| オプション          | 説明                                               |
 +=====================+====================================================+
-| multiply            | Boolean to indicate whether the value has to be    |
-|                     | multiplied by 100. Useful for decimal percentages. |
+| multiply            | 値を100で乗算しなければならないかどうかを示す      |
+|                     | Boolean値です。少数のパーセンテージに便利です。    |
 +---------------------+----------------------------------------------------+
 
-Like :php:meth:`Cake\\I18n\\Number::precision()`, this method formats a number
-according to the supplied precision (where numbers are rounded to meet the
-given precision). This method also expresses the number as a percentage
-and appends the output with a percent sign. ::
-
+..
+  Like :php:meth:`Cake\\I18n\\Number::precision()`, this method formats a number
+  according to the supplied precision (where numbers are rounded to meet the
+  given precision). This method also expresses the number as a percentage
+  and appends the output with a percent sign. ::
+..
     // Called as NumberHelper. Output: 45.69%
     echo $this->Number->toPercentage(45.691873645);
-
+..
     // Called as Number. Output: 45.69%
     echo Number::toPercentage(45.691873645);
-
+..
     // Called with multiply. Output: 45.7%
+    echo Number::toPercentage(0.45691, 1, [
+        'multiply' => true
+    ]);
+
+このメソッドは :php:meth:`Cake\\I18n\\Number::precision()` のように、
+与えられた精度に応じて(精度を満たすように丸めて)数値をフォーマットします。
+このメソッドはパーセンテージとして数値を表現し、パーセント記号を追加して出力します。 ::
+
+    // NumberHelperとしてコール。 出力: 45.69%
+    echo $this->Number->toPercentage(45.691873645);
+
+    // Numberとしてコール。 出力: 45.69%
+    echo Number::toPercentage(45.691873645);
+
+    // multiplyオプションとともにコール。 出力: 45.7%
     echo Number::toPercentage(0.45691, 1, [
         'multiply' => true
     ]);
