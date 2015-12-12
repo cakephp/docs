@@ -34,10 +34,11 @@ ORM creates instances of ``Date`` when mapping ``DATE`` columns now.
 New Immutable Date and Time Objects
 ===================================
 
-The ``FrozenTime``, and ``FrozenDate`` classes were added. These
-classes offer the same API as the ``Time`` object has. These objects are
-immutable, which helps prevent accidental mutations. Instead of in-place
-modifications, modifier methods return *new* instances::
+The ``FrozenTime``, and ``FrozenDate`` classes were added. These classes offer
+the same API as the ``Time`` object has. The frozen classes provide immutable
+variants of ``Time`` and ``Date``.  By using immutable objects, you can prevent
+accidental mutations. Instead of in-place modifications, modifier methods return
+*new* instances::
 
     use Cake\I18\FrozenTime;
 
@@ -46,8 +47,8 @@ modifications, modifier methods return *new* instances::
 
 In the above code ``$time`` and ``$newTime`` are different objects. The
 ``$time`` object retains its original value, while ``$newTime`` has the modified
-value. See the :ref:`immutable-time` section for more information. You can also
-enable immutable datetime objects in your entities. See the
+value. See the :ref:`immutable-time` section for more information. As of 3.2,
+the ORM can map date/datetime columns into immutable objects. See the
 :ref:`immutable-datetime-mapping` section for more information.
 
 CorsBuilder Added

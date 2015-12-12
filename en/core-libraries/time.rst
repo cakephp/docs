@@ -333,7 +333,7 @@ Dates
 
 The ``Date`` class in CakePHP implements the same API and methods as
 :php:class:`Cake\\I18n\\Time` does. The main difference between ``Time`` and
-``Date`` is that ``Date`` does not track time components, and are always in UTC.
+``Date`` is that ``Date`` does not track time components, and is always in UTC.
 As an example::
 
     use Cake\I18n\Date;
@@ -379,8 +379,9 @@ issues. Take the following code::
     // Output here is unknown.
     echo $time->format('Y-m-d H:i:s');
 
-If the method call was re-ordered the output could be unexpected. This is a form
-of temporal coupling. If we use immutable objects we can avoid these issues::
+If the method call was re-ordered, or if ``someOtherFunction`` changed the
+output could be unexpected. The mutability of our object creates temporal
+coupling. If we were to use immutable objects, we could avoid this issue::
 
     use Cake\I18n\FrozenTime;
     $time = new FrozenTime('2015-06-15 08:23:45');
@@ -392,7 +393,7 @@ of temporal coupling. If we use immutable objects we can avoid these issues::
     // Output here is known.
     echo $time->format('Y-m-d H:i:s');
 
-Immutable dates and times are useful in entity objects as they prevent
+Immutable dates and times are useful in entities as they prevent
 accidental modifications, and force changes to be explicit. Using
 immutable objects helps the ORM to more easily track changes, and ensure that
 date and datetime columns are persisted correctly::
