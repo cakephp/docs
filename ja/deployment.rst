@@ -9,34 +9,21 @@
     There are a few things you should do when deploying a CakePHP application.
 
 アプリケーションが一度完成したら、または、完成する前でさえも、デプロイしたいと思うでしょう。
-CakePHPアプリケーションをデプロイするにあたり、いくつかのことをしなければなりません。　
+CakePHPアプリケーションをデプロイするにあたり、いくつかのことをしなければなりません。
 
 ..
   Update config/app.php
 
 config/app.phpをアップデートする
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ================================
-=======
-=====================
->>>>>>> e3d28ff... deployment translated
-=======
-===============================
->>>>>>> dc14979... deployment amended
-=======
-================================
->>>>>>> 3.0
 
-.. 
+..
   Updating app.php, specifically the value of ``debug`` is extremely important.
   Turning debug = ``false`` disables a number of development features that should never be
   exposed to the Internet at large. Disabling debug changes the following types of
   things:
 
 app.php、特に ``debug`` の値ををアップデートすることは非常に重要なことです。debugを ``false`` に変更することにより、開発に関連する部分で、決して広くインターネットに晒されるべきでない部分を無効にすることができます。デバッグを無効とすることにより、以下の種類のことが変更されます。
-
 
 ..
   * Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
@@ -47,20 +34,19 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   * PHP Errors are not displayed.
   * Exception stack traces are disabled.
 
-
 * :php:func:`pr()` 及び　:php:func:`debug()` により生成されたデバッグメッセージが、無効化されます。
 * CakePHP コアのキャッシュが、開発時の 10 秒ごとの代わりに 毎年(約365日ごとに)破棄されるようになります。
 * エラービューの情報量はもっと少なく、一般的なエラーメッセージしか表示されなくなります。
 * PHPエラーはディスプレイされなくなります。
 * 例外のスタックトレースは無効化されます。
 
-.. 
+..
   In addition to the above, many plugins and application extensions use ``debug``
   to modify their behavior.
 
 上記に加え、多くのプラグインとアプリケーションの拡張機能は、自らの振る舞いを修正するために、 ``debug`` を使用します。
 
-.. 
+..
   You can check against an environment variable to set the debug level dynamically
   between environments. This will avoid deploying an application with debug ``true`` and
   also save yourself from having to change the debug level each time before deploying
@@ -71,40 +57,17 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ..
   For example, you can set an environment variable in your Apache configuration::
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 例えば、Apacheの設定にて、環境変数をセットすることができます。
-=======
-例えば、アパッチの設定にて、環境変数をセットすることができます。
->>>>>>> e3d28ff... deployment translated
-=======
-例えば、Apacheの設定にて、環境変数をセットすることができます。
->>>>>>> dc14979... deployment amended
-=======
-例えば、Apacheの設定にて、環境変数をセットすることができます。
->>>>>>> 3.0
 
 ::
 
     SetEnv CAKEPHP_DEBUG 1
 
 ..
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   And then you can set the debug level dynamically in **app.php** ::
 
 それから、**app.php** にてデバッグレベルをダイナミックにセットすることができます。
-=======
-  And then you can set the debug level dynamically in **app.php**::
-
-それから、**app.php**にてデバッグレベルをダイナミックにセットすることができます。
->>>>>>> e3d28ff... deployment translated
-=======
-  And then you can set the debug level dynamically in **app.php** ::
-
-それから、**app.php** にてデバッグレベルをダイナミックにセットすることができます。
->>>>>>> 3.0
 
 ::
 
@@ -115,23 +78,11 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
         .....
     ];
 
-.. 
+..
   Check Your Security
 
 セキュリティをチェックする
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ==========================
-=======
-===================
->>>>>>> e3d28ff... deployment translated
-=======
-=======================
->>>>>>> dc14979... deployment amended
-=======
-==========================
->>>>>>> 3.0
 
 ..
   If you're throwing your application out into the wild, it's a good idea to make
@@ -147,7 +98,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
     secrets (such as your app salt, and any security keys) are private and unique
     as well.
 
-もしあなたがウェブ上の荒野にアプリケーションを解き放とうとするなら、何か抜け穴がないかを確認しておくことをお勧めします。 
+もしあなたがウェブ上の荒野にアプリケーションを解き放とうとするなら、何か抜け穴がないかを確認しておくことをお勧めします。
 
 * :doc:`/controllers/components/csrf` コンポーネントを使用していることを確認して下さい.
 * :doc:`/controllers/components/security` コンポーネントを有効化しておいた方がいいかもしれません。フォームの改ざんやmass-assignment脆弱性に関する問題の発生可能性を削減することができます。
@@ -158,19 +109,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   Set Document Root
 
 ドキュメントルートの指定
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ========================
-=======
-=================
->>>>>>> e3d28ff... deployment translated
-=======
-=======================
->>>>>>> dc14979... deployment amended
-=======
-========================
->>>>>>> 3.0
 
 ..
   Setting the document root correctly on your application is an important step to
@@ -185,39 +124,19 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   ``webroot/``. This removes the possibility of files outside of the webroot
   directory being executed.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`url-rewriting` ドキュメントを見てください。
-=======
-アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`URLリライティング` ドキュメントを見てください。
->>>>>>> e3d28ff... deployment translated
-=======
-アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`url-rewriting` ドキュメントを見てください。
->>>>>>> 3.0
 
 どの場合においても ``webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
 .. _symlink-assets:
 
-.. 
+..
   Improve Your Application's Performance
 
 アプリケーションのパフォーマンスを改善させる
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ============================================
-=======
-======================================
->>>>>>> e3d28ff... deployment translated
-=======
-========================================
->>>>>>> dc14979... deployment amended
-=======
-============================================
->>>>>>> 3.0
 
-.. 
+..
     Class loading can take a big share of your application's processing time.
     In order to avoid this problem, it is recommended that you run this command in
     your production server once the application is deployed::
@@ -231,21 +150,20 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ..
   Since handling static assets, such as images, JavaScript and CSS files of
   plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
-  recommended to symlink them for production. This can be done by using 
+  recommended to symlink them for production. This can be done by using
   the ``plugin`` shell::
 
 プラグインの画像や JavaScript、CSS ファイルなどの静的なアセットを扱う場合、 ディスパッチャを通すことはかなり非効率です。 本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。これは、 ``plugin`` のシェルを利用することで実行できます。
-
 
 ::
 
     bin/cake plugin assets symlink
 
-..     
+..
   The above command will symlink the ``webroot`` directory of all loaded plugins to
   appropriate path in the app's ``webroot`` directory.
 
-上記コマンドは、アプリケーション内での ``webroot`` ディレクトリの適切なパスに対して、全てのロードされたプラグインの ``webroot``  ディレクトリのシンボリックリンクを貼ることとなります。　　
+上記コマンドは、アプリケーション内での ``webroot`` ディレクトリの適切なパスに対して、全てのロードされたプラグインの ``webroot``  ディレクトリのシンボリックリンクを貼ることとなります。
 
 ..
   If your filesystem doesn't allow creating symlinks the directories will be copied
@@ -258,18 +176,5 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
     bin/cake plugin assets copy
 
 .. meta::
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    :title lang=ja: Deployment
-    :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
-=======
     :title lang=en: Deployment
     :keywords lang=en: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
->>>>>>> e3d28ff... deployment translated
-=======
-=======
->>>>>>> 3.0
-    :title lang=ja: Deployment
-    :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
->>>>>>> dc14979... deployment amended
