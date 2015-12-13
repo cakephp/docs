@@ -57,7 +57,6 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ..
   For example, you can set an environment variable in your Apache configuration::
 
-
 例えば、Apacheの設定にて、環境変数をセットすることができます。
 
 ::
@@ -69,7 +68,6 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   And then you can set the debug level dynamically in **app.php** ::
 
 それから、**app.php** にてデバッグレベルをダイナミックにセットすることができます。
-
 
 ::
 
@@ -113,7 +111,6 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ドキュメントルートの指定
 ========================
 
-
 ..
   Setting the document root correctly on your application is an important step to
   keeping your code secure and your application safer. CakePHP applications
@@ -127,10 +124,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
   ``webroot/``. This removes the possibility of files outside of the webroot
   directory being executed.
 
-
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、 アプリケーションの ``webroot`` にドキュメントルートを指定する必要があります。 これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。 WEBサーバー特有の情報については :ref:`url-rewriting` ドキュメントを見てください。
-
-
 
 どの場合においても ``webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
@@ -141,7 +135,6 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 アプリケーションのパフォーマンスを改善させる
 ============================================
-
 
 ..
     Class loading can take a big share of your application's processing time.
