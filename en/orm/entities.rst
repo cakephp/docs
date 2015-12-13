@@ -262,7 +262,7 @@ indicate whether a field can or cannot be mass-assigned::
     {
         protected $_accessible = [
             'title' => true,
-            'body' => true,
+            'body' => true
         ];
     }
 
