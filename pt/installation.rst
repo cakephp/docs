@@ -54,7 +54,7 @@ estão na página
 Alternativamente você pode obter uma cópia contendo todas as correções de bugs e
 atualizações recentes clonando o repositório do Github::
 
-    git clone git://github.com/cakephp/cakephp.git
+    git clone -b 2.7 git://github.com/cakephp/cakephp.git
 
 Permissões
 ==========

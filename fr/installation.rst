@@ -59,7 +59,7 @@ Sinon, vous pouvez obtenir du code frais avec tous les correctifs de bug
 et à jour des améliorations de dernière minute. Celui-ci peut être
 accessible à partir de github en clonant le répertoire de `Github`_ ::
 
-    git clone git://github.com/cakephp/cakephp.git
+    git clone -b 2.7 git://github.com/cakephp/cakephp.git
 
 
 Permissions
