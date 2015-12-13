@@ -571,7 +571,7 @@ Vous pourriez par exemple ajouter ce qui suit à votre ``UserMailer``::
         ];
     }
 
-    public function onRegistration(Event $event, Entity $entity, ArrayObject $options)
+    public function onRegistration(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         if ($entity->isNew()) {
             $this->send('welcome', [$entity]);

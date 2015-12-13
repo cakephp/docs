@@ -228,7 +228,7 @@ de la méthode ``newEntity()`` ou ``patchEntity()``:
 
 .. figure:: /_static/img/validation-cycle.png
    :align: left
-   :alt: Logigramme montrant le process de conversionen entity/validation.
+   :alt: Logigramme montrant le process de conversion en entity/validation.
 
 Vous récupérerez toujours une entity en retour de ``newEntity()``. Si la
 validation échoue, votre entité contiendra des erreurs et tous les champs
