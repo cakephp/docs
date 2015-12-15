@@ -700,3 +700,42 @@ yourself. What we have above is equivalent to this::
 
 The next section will help us validate our setup by using the plugin
 Acl Component to check the permissions we've just set up.
+
+Checking Permissions: The ACL Component
+---------------------------------------
+
+Let's use the plugin Acl Component to make sure dwarves and elves can't
+remove things from the armory. At this point, we should be able to
+use the Acl Component to make a check between the ACOs and AROs
+we've created. The basic syntax for making a permissions check is::
+
+    $this->Acl->check($aro, $aco, $action = '*');
+
+Let's give it a try inside a controller action::
+
+    public function index()
+    {
+        // These all return true:
+        $this->Acl->check('warriors/Aragorn', 'Weapons');
+        $this->Acl->check('warriors/Aragorn', 'Weapons', 'create');
+        $this->Acl->check('warriors/Aragorn', 'Weapons', 'read');
+        $this->Acl->check('warriors/Aragorn', 'Weapons', 'update');
+        $this->Acl->check('warriors/Aragorn', 'Weapons', 'delete');
+
+        // Remember, we can use the model/id syntax
+        // for our user AROs
+        // /!\ NEED TO VERIFY THAT STILL WORK IN THE 3.0 /!\
+        $this->Acl->check(['User' => ['id' => 2356]], 'Weapons');
+
+        // These also return true:
+        $this->Acl->check('warriors/Legolas', 'Weapons', 'create');
+        $this->Acl->check('warriors/Gimli', 'Weapons', 'read');
+
+        // But these return false:
+        $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');
+        $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');
+    }
+
+The usage here is for demonstration, but this type of checking
+can be used to decide whether to allow an action, show an error message,
+or redirect the user to a login.
