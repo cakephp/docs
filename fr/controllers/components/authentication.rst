@@ -1156,14 +1156,14 @@ unauthorizedRedirect
     Si défini à ``false``, une exception ForbiddenException est lancée au lieu
     de la redirection.
 storage
-    Storage class to use for persisting user record. Lors de l'utilisation
-    d'un authenticator personnalisé, vous devriez définir cette option à
-    ``Memory``. Défaut à ``Session``.
+    Classe de stockage à utiliser pour faire persister les enregistrements
+    utilisateurs. Lors de l'utilisation d'un authenticator personnalisé,
+    vous devriez définir cette option à ``Memory``. Défaut à ``Session``.
 checkAuthIn
     Le nom de l'event pour lequel les vérifications de l'authentification
     doivent être faites. Défaut à ``Controller.startup``. Vous pouvez le
     spécifier à ``Controller.initialize`` si vous souhaitez que les
-    vérifications soient faites avant que l'action beforeFilter() du controller
+    vérifications soient faites avant que l'action ``beforeFilter()`` du controller
     soit executée.
 
 Tester des Actions Protégées par AuthComponent

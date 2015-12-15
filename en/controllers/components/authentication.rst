@@ -1056,7 +1056,7 @@ storage
 checkAuthIn
     Name of event for which initial auth checks should be done. Defaults
     to ``Controller.startup``. You can set it to ``Controller.initialize``
-    if you want the check to be done before controller's beforeFilter() is run.
+    if you want the check to be done before controller's ``beforeFilter()`` is run.
 
 Testing Actions Protected By AuthComponent
 ==========================================
