@@ -743,6 +743,25 @@ HTML attributes. The following will cover the options specific to
   If you need to later change the defaults you can use
   :php:meth:`FormHelper::inputDefaults()`.
 
+GET Form Inputs
+---------------
+
+When using ``FormHelper`` to generate inputs for ``GET`` forms, the input names
+will automatically be shortened to provide more human friendly names. For
+example::
+
+    // Makes <input name="email" type="text" />
+    echo $this->Form->input('User.email');
+
+    // Makes <select name="Tags" multiple="multiple">
+    echo $this->Form->input('Tags.Tags', array('multiple' => true));
+
+If you want to override the generated name attributes you can use the ``name``
+option::
+
+    // Makes the more typical <input name="data[User][email]" type="text" />
+    echo $this->Form->input('User.email', array('name' => 'data[User][email]'));
+
 Generating specific types of inputs
 ===================================
 
