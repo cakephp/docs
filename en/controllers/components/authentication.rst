@@ -1051,6 +1051,16 @@ unauthorizedRedirect
     If set to ``false``, a ForbiddenException exception is thrown instead of
     redirecting.
 
+Also, ``$this->Auth->config()`` allow you to get a configuration value by calling
+only the configuration option::
+
+    $this->Auth->config('loginAction');
+
+    $this->redirect($this->Auth->config('loginAction'));
+
+Useful if you want to redirect an user to the ``login`` route for example. Without
+option, the full configuration will be returned.
+
 Testing Actions Protected By AuthComponent
 ==========================================
 

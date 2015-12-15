@@ -1156,6 +1156,16 @@ unauthorizedRedirect
     Si défini à ``false``, une exception ForbiddenException est lancée au lieu
     de la redirection.
 
+Aussi, ``$this->Auth->config()`` vous permet d'obtenir une valeur de configuration
+en appelant seulement l'option de configuration::
+
+    $this->Auth->config('loginAction');
+
+    $this->redirect($this->Auth->config('loginAction'));
+
+Utile si vous souhaitez rediriger un utilisateur sur la page ``login`` par exemple.
+Sans option, la configuration complète sera retournée.
+
 Tester des Actions Protégées par AuthComponent
 ==============================================
 
