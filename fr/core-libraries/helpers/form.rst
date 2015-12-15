@@ -5,7 +5,7 @@ FormHelper
 
 Le Helper Form prend en charge la plupart des opérations lourdes
 en création du formulaire. Le Helper Form se concentre sur la
-possibilité de créé des formulaires rapidement, d'une manière qui
+possibilité de créer des formulaires rapidement, d'une manière qui
 permettra de rationaliser la validation, la re-population et la mise
 en page (layout). Le Helper Form est aussi flexible - Il va faire à
 peu près tout pour vous en utilisant les conventions, ou vous
@@ -313,7 +313,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     * input de(s) l'élément(s)  (Input element(s))
     * Erreur de l'élément avec un message si c'est applicable.
 
-    Le type d'input créés dépends de la colonne datatype:
+    Le type d'input créé dépends de la colonne datatype:
 
     Column Type
         Champ de formulaire résultant
@@ -764,8 +764,27 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   Si vous avez besoin de changer plus tard les valeurs par défaut, vous
   pourrez utiliser :php:meth:`FormHelper::inputDefaults()`.
 
-Générer des types de inputs spécifiques
-=======================================
+GET Form Inputs
+---------------
+
+Quand vous utilisez ``FormHelper`` pour générer des inputs pour les formulaires
+``GET``, les noms d'input seront automatiquement raccourcis pour que les noms
+soient plus lisibles pour les humains. Par exemple::
+
+    // Crée <input name="email" type="text" />
+    echo $this->Form->input('User.email');
+
+    // Crée <select name="Tags" multiple="multiple">
+    echo $this->Form->input('Tags.Tags', array('multiple' => true));
+
+Si vous voulez surcharger les attributs name générés, vous pouvez utiliser
+l'option ``name``::
+
+    // Crée le plus habituel <input name="data[User][email]" type="text" />
+    echo $this->Form->input('User.email', array('name' => 'data[User][email]'));
+
+Générer des types d'inputs spécifiques
+======================================
 
 En plus de la méthode générique ``input()``, le ``FormHelper`` à des
 méthodes spécifiques pour générer différents types d'inputs. Ceci peut
@@ -1512,7 +1531,7 @@ Création des boutons et des éléments submits
     Crée un tag``<button>`` avec un ``<form>`` l'entourant  qui soumets à
     travers POST.
 
-    Cette méthode créé un élément ``<form>``. Donc n'utilisez pas
+    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas
     pas cette méthode dans un formulaire ouvert. Utilisez plutôt
     :php:meth:`FormHelper::submit() ou :php:meth:`FormHelper::button()`
     pour créer des boutons a l'intérieur de formulaires ouvert.
@@ -1522,7 +1541,7 @@ Création des boutons et des éléments submits
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
     Requiert que JavaScript  soit autorisé dans votre navigateur.
 
-    Cette méthode créée un élément ``<form>``. Donc n'utilisez pas cette
+    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas cette
     méthode dans un formulaire existant. En remplacement vous devriez
     ajouter un bouton submit en utilisant :php:meth:`FormHelper::submit()`.
 
@@ -1755,7 +1774,7 @@ du Helper Form (FormHelper). Toutes les méthodes supportent
 désormais un clé  ``$attributes['value']`` qui devra être utilisée
 en remplacement de ``$selected``. Ce changement simplifie
 les méthodes du Helper Form, en réduisant le nombre d'arguments,
-et réduit les duplications que ``$selected`` créé.
+et réduit les duplications que ``$selected`` crée.
 Les méthodes sont:
 
     * FormHelper::select()
