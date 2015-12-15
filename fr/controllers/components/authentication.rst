@@ -1155,6 +1155,12 @@ unauthorizedRedirect
     non autorisé est redirigé vers l'URL référente, ``loginAction`` ou ``/``.
     Si défini à ``false``, une exception ForbiddenException est lancée au lieu
     de la redirection.
+checkAuthIn
+    Le nom de l'event pour lequel les vérifications de l'authentification
+    doivent être faites. Défaut à ``Controller.startup``. Vous pouvez le
+    spécifier à ``Controller.initialize`` si vous souhaitez que les
+    vérifications soient faites avant que l'action beforeFilter() du controller
+    soit executée.
 
 Tester des Actions Protégées par AuthComponent
 ==============================================
