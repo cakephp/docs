@@ -747,6 +747,23 @@ HTML 属性などもオプションとして設定可能です。ここでは
   ここより先のデフォルトを変更するには
   :php:meth:`FormHelper::inputDefaults()` が使えます。
 
+GET フォーム入力
+----------------
+
+``GET`` フォーム入力を生成するために ``FormHelper`` を使用した時、
+人が読みやすくするために入力名は、自動的に短くなります。例::
+
+    //  <input name="email" type="text" /> になります
+    echo $this->Form->input('User.email');
+
+    // <select name="Tags" multiple="multiple"> になります
+    echo $this->Form->input('Tags.Tags', array('multiple' => true));
+
+もし、生成された name 属性を上書きしたい場合、 ``name`` オプションが使えます。 ::
+
+    // より典型的な <input name="data[User][email]" type="text" /> になります
+    echo $this->Form->input('User.email', array('name' => 'data[User][email]'));
+
 特殊なタイプの入力を生成する
 ============================
 
