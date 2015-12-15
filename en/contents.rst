@@ -59,8 +59,8 @@ Contents
     access-control-list
     appendices
     core-libraries/global-constants-and-functions
-    elasticsearch
     debug-kit
+    elasticsearch
     migrations
     upgrade-tool
 
