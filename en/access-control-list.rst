@@ -317,3 +317,386 @@ permissions information between the two trees).
 
 Now that we're all set up, let's work on creating some ARO and ACO
 trees.
+
+Creating Access Request Objects (AROs) and Access Control Objects (ACOs)
+------------------------------------------------------------------------
+
+When creating new ACL objects (ACOs and AROs), realize that there are
+two main ways to name and access nodes. The *first* method is to
+link an ACL object directly to a record in your database by
+specifying a model name and foreign key value. The *second*
+can be used when an object has no direct relation to a record in
+your database - you can provide a textual alias for the object.
+
+.. note::
+
+    In general, when you're creating a group or higher-level object,
+    use an alias. If you're managing access to a specific item or
+    record in the database, use the model/foreign key method.
+
+You create new ACL objects using the plugin ACL models. In
+doing so, there are a number of fields you'll want to use when
+saving data: ``model``, ``foreign_key``, ``alias``, and
+``parent_id``.
+
+The ``model`` and ``foreign_key`` fields for an ACL object allow
+you to link the object to its corresponding model record (if
+there is one). For example, many AROs will have corresponding User
+records in the database. Setting an ARO's ``foreign_key`` to the
+User's ID will allow you to link up ARO and User information with a
+single User model find() call if you've set up the correct model
+associations. Conversely, if you want to manage edit operation on a
+specific blog post or recipe listing, you may choose to link an ACO
+to that specific model record.
+
+An ``alias`` is just a human-readable label you
+can use to identify an ACL object that has no direct model record
+correlation. Aliases are generally useful in naming user groups or
+ACO collections.
+
+The ``parent_id`` for an ACL object allows you to fill out the tree
+structure. Supply the ID of the parent node in the tree to create a
+new child.
+
+Before we can create new ACL objects, we'll need to load up their
+respective classes. The easiest way to do this is to include the
+ACL Component in the ``initialize()`` controller's method using the
+``$this->loadComponent()`` method::
+
+    class PostsController extends AppController
+    {
+        public function initialize()
+        {
+            parent::initialize();
+
+            $this->loadComponent('Acl.Acl');
+        }
+    }
+
+You can also include the ACL Component in your controller's
+``$components`` array::
+
+    class PostsController extends AppController
+    {
+        public $components = [
+            'Acl.Acl'
+        ];
+    }
+
+.. note::
+
+    More information about loading/configuring Components can be found in the
+    :ref:`Configuring Components <configuring-components>` part.
+
+Once we've got that done, let's see some examples of creating
+these objects. The following code could be placed
+in a controller action:
+
+.. note::
+
+    While the examples here focus on ARO creation, the same techniques
+    can be used to create an ACO tree.
+
+In order, to get our ACO working properly, let's first create our ARO
+groups. Because they won't have specific records tied to them,
+we'll use aliases to create the ACL objects. Here, we create them
+via a controller action, but we could do it elsewhere.
+
+Our approach shouldn't be drastically new - we're just using
+models to save data like we always do::
+
+    public function createAro()
+    {
+        // Load the ARO Table
+        $aro = $this->loadModel('Aros');
+
+        // Here's all of our group info in an array we can iterate through
+        $groups = [
+            [
+                'alias' => 'warriors'
+            ],
+            [
+                'alias' => 'wizards'
+            ],
+            [
+                'alias' => 'hobbits'
+            ],
+            [
+                'alias' => 'visitors'
+            ]
+        ];
+
+        // Iterate and create ARO groups
+        foreach ($groups as $data) {
+            // Create the new entity
+            $entity = $aro->newEntity($data);
+
+            // Save the entity
+            $aro->save($entity);
+        }
+
+        // Other action logic goes here...
+    }
+
+Once we've got the groups, we can use the ACL console
+application to verify the tree structure::
+
+    $ bin/cake acl view aro
+
+    Aro tree:
+    ---------------------------------------------------------------
+      [1]warriors.1
+
+      [2]wizards.2
+
+      [3]hobbits.3
+
+      [4]visitors.4
+
+    ---------------------------------------------------------------
+
+The tree is still simple at this point, but at least we've
+got some verification that we've got four top-level nodes. Let's
+add some children to those ARO nodes by putting our specific user
+AROs under these groups. Every good citizen of Middle Earth has an
+account in our new system, so we'll tie these ARO records to
+specific model records in our database.
+
+.. note::
+
+    When adding child nodes to a tree, make sure to use the ACL node
+    ID, rather than a ``foreign_key`` value.
+
+::
+
+    public function createChildsAro()
+    {
+        // Load the ARO Table
+        $aro = $this->loadModel('Aros');
+
+        // Here are our user records, ready to be linked to new ARO records.
+        // This data could come from a model and be modified, but we're using static
+        // arrays here for demonstration purposes.
+
+        $users = [
+            [
+                'alias' => 'Aragorn',
+                'parent_id' => 1,
+                'model' => 'User',
+                'foreign_key' => 2356,
+            ],
+            [
+                'alias' => 'Legolas',
+                'parent_id' => 1,
+                'model' => 'User',
+                'foreign_key' => 6342,
+            ],
+            [
+                'alias' => 'Gimli',
+                'parent_id' => 1,
+                'model' => 'User',
+                'foreign_key' => 1564,
+            ],
+            [
+                'alias' => 'Gandalf',
+                'parent_id' => 2,
+                'model' => 'User',
+                'foreign_key' => 7419,
+            ],
+            [
+                'alias' => 'Frodo',
+                'parent_id' => 3,
+                'model' => 'User',
+                'foreign_key' => 7451,
+            ],
+            [
+                'alias' => 'Bilbo',
+                'parent_id' => 3,
+                'model' => 'User',
+                'foreign_key' => 5126,
+            ],
+            [
+                'alias' => 'Merry',
+                'parent_id' => 3,
+                'model' => 'User',
+                'foreign_key' => 5144,
+            ],
+            [
+                'alias' => 'Pippin',
+                'parent_id' => 3,
+                'model' => 'User',
+                'foreign_key' => 1211,
+            ],
+            [
+                'alias' => 'Gollum',
+                'parent_id' => 4,
+                'model' => 'User',
+                'foreign_key' => 1337,
+            ]
+        ];
+
+        // Iterate and create AROs (as children)
+        foreach ($users as $data) {
+            // Create the new entity
+            $entity = $aro->newEntity($data);
+
+            // Save the entity
+            $aro->save($entity);
+        }
+
+        // Other action logic goes here...
+    }
+
+.. note::
+
+    Typically you won't supply both an alias and a model/foreign\_key,
+    but we're using both here to make the structure of the tree easier
+    to read for demonstration purposes.
+
+The output of that console application command should now be a
+little more interesting. Let's give it a try:
+
+::
+
+    $ bin/cake acl view aro
+
+    Aro tree:
+    ---------------------------------------------------------------
+      [1]warriors
+
+        [5]Aragorn
+
+        [6]Legolas
+
+        [7]Gimli
+
+      [2]wizards
+
+        [8]Gandalf
+
+      [3]hobbits
+
+        [9]Frodo
+
+        [10]Bilbo
+
+        [11]Merry
+
+        [12]Pippin
+
+      [4]visitors
+
+        [13]Gollum
+
+    ---------------------------------------------------------------
+
+Now that we've got our ARO tree setup properly, let's discuss a
+possible approach for structuring an ACO tree. While we can
+put together a more abstract representation of our ACO's, it's
+often more practical to model an ACO tree after CakePHP's
+Controller/Action setup. We've got five main objects we're handling
+in this Fellowship scenario. The natural setup for this in a
+CakePHP application consists of a group of models, and ultimately the
+controllers that manipulate them. Beyond the controllers themselves,
+we'll want to control access to specific actions in those
+controllers.
+
+Let's set up an ACO tree that will mimic a CakePHP
+app setup. Since we have five ACOs, we'll create an ACO tree that
+should end up looking something like the following:
+
+-  Weapons
+-  Rings
+-  PorkChops
+-  DiplomaticEfforts
+-  Ales
+
+You can create children nodes under each of these five main ACOs,
+but using CakePHP's built-in action management covers basic CRUD
+operations on a given object. Keeping this in mind will make your
+ACO trees smaller and easier to maintain. We'll see how these are
+used later on when we discuss how to assign permissions.
+
+Since you're now a pro at adding AROs, use those same techniques to
+create this ACO tree. Create these upper level groups using the
+core Aco model.
+
+Assigning Permissions
+---------------------
+
+After creating our ACOs and AROs, we can finally assign permissions
+between the two groups. This is done using the plugin Acl
+Component. Let's continue with our example.
+
+Here we'll work with Acl permisions in the context of a controller
+action. Let's set up some basic permissions using the plugin Acl
+Component in an action inside our controller::
+
+    class SomethingsController extends AppController
+    {
+        // You might want to place this in the AppController
+        // instead, but here works great too.
+        public function initialize()
+        {
+            parent::initialize();
+
+            $this->loadComponent('Acl.Acl');
+        }
+
+        public function setPermissions()
+        {
+            // Allow warriors complete access to weapons
+            // Both these examples use the alias syntax
+            $this->Acl->allow('warriors', 'Weapons');
+
+            // Though the King may not want to let everyone
+            // have unfettered access
+            $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
+            $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
+
+            die(print_r('done', 1));
+        }
+
+The first call we make to the Acl Component allows any user under
+the 'warriors' ARO group full access to anything under the
+'Weapons' ACO group. Here we're just addressing ACOs and AROs by
+their aliases.
+
+Notice the usage of the third parameter? One nice thing about the CakePHP
+ACL setup is that permissions contain four built-in properties related
+to CRUD (create, read, update, and delete) actions for convenience. The
+default options for that parameter are ``create``, ``read``, ``update``,
+and ``delete`` but you can add a column in the ``aros_acos``
+database table (prefixed with \_ - for example ``_admin``) and use
+it alongside the defaults.
+
+The second set of calls is an attempt to make a more fine-grained
+permission decision. We want Aragorn to keep his full-access
+privileges, but we want to deny other warriors in the group the ability to
+delete Weapons records. We're using the alias syntax to address the
+AROs above, but you might want to use the model/foreign\_key syntax
+yourself. What we have above is equivalent to this::
+
+    // 6342 = Legolas
+    // 1564 = Gimli
+
+    $this->Acl->deny(
+      ['model' => 'User', 'foreign_key' => 6342],
+      'Weapons',
+      'delete'
+    );
+    $this->Acl->deny(
+      ['model' => 'User', 'foreign_key' => 1564],
+      'Weapons',
+      'delete'
+    );
+
+.. note::
+
+    Addressing a node using the alias syntax uses a slash-delimited
+    ``'/users/employees/developers'``. Addressing a node using
+    model/foreign\_key syntax uses an array with two parameters:
+    ``['model' => 'User', 'foreign_key' => 8282]``.
+
+The next section will help us validate our setup by using the plugin
+Acl Component to check the permissions we've just set up.
