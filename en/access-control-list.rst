@@ -9,6 +9,8 @@ Powerful things require access control. Access Control Lists are a
 way to manage application permissions in a fine-grained, yet easily
 maintainable and manageable way.
 
+This plugin can be found on GitHub `ACL Plugin <https://github.com/cakephp/acl/>`_.
+
 Installation
 ============
 
@@ -23,13 +25,9 @@ You will need to add the following line to your application's
 
     Plugin::load('Acl', ['bootstrap' => true]);
 
-Additionally, you will need to create ACL related tables by running the
-following :doc:`/migrations` command::
-
-    bin/cake migrations migrate -p Acl
-
 Understanding How ACL Works
 ===========================
+
 Access control lists, or ACL, handle two main things: things that
 want stuff, and things that are wanted. In ACL lingo, things (most
 often users) that want to use stuff are represented by access request
@@ -270,3 +268,52 @@ Hobbits                 Allow 'ale'      Allowing access to ale!
 ----------------------- ---------------- -----------------------
 Merry                   Deny Ale         Denying ale.
 ======================= ================ =======================
+
+Defining Permissions: CakePHP's Database ACL
+============================================
+
+By default, this ACL plugin is database-driven. We recommend
+that you use the database backed ACL solution, mostly because of
+its ability to create new ACOs and AROs on the fly.
+
+Getting Started
+---------------
+
+The default ACL permissions implementation is powered by a database.
+CakePHP's database ACL consists of a set of models, behavior,
+component and a console application that comes with the ACL plugin.
+The models and behavior are used by the plugin to interact with your
+database in order to store and retrieve nodes in tree format.
+The console application is used to initialize your database and
+interact with your ACO and ARO trees.
+
+To get started, first you'll need to make sure your
+``config/database.php`` is present and correctly configured.
+
+Once you've done that, you will need to create ACL related tables by
+running the following :doc:`/migrations` command::
+
+    bin/cake migrations migrate -p Acl
+
+Running this command will create the tables necessary to store ACO
+and ARO information in tree format.
+
+.. note::
+
+    This replaces the older command in CakePHP 2.x ``cake schema create DbAcl``.
+
+You can also use the SQL file found in the plugin directory
+`config/Schema/acl.sql <https://github.com/cakephp/acl/blob/master/config/Schema/acl.sql/>`_,
+but that's nowhere near as fun.
+
+When finished, you should have three new database tables in your
+system: acos, aros, and aros\_acos (the join table to create
+permissions information between the two trees).
+
+.. note::
+
+    If you're curious about how work the tree traversal, read up
+    on the :doc:`/orm/behaviors/tree` behavior.
+
+Now that we're all set up, let's work on creating some ARO and ACO
+trees.
