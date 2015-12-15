@@ -1155,6 +1155,10 @@ unauthorizedRedirect
     non autorisé est redirigé vers l'URL référente, ``loginAction`` ou ``/``.
     Si défini à ``false``, une exception ForbiddenException est lancée au lieu
     de la redirection.
+storage
+    Storage class to use for persisting user record. Lors de l'utilisation
+    d'un authenticator personnalisé, vous devriez définir cette option à
+    ``Memory``. Défaut à ``Session``.
 checkAuthIn
     Le nom de l'event pour lequel les vérifications de l'authentification
     doivent être faites. Défaut à ``Controller.startup``. Vous pouvez le
