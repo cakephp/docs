@@ -40,7 +40,7 @@ variants of ``Time`` and ``Date``.  By using immutable objects, you can prevent
 accidental mutations. Instead of in-place modifications, modifier methods return
 *new* instances::
 
-    use Cake\I18\FrozenTime;
+    use Cake\I18n\FrozenTime;
 
     $time = new FrozenTime('2016-01-01 12:23:32');
     $newTime = $time->modify('+1 day');
