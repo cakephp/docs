@@ -56,12 +56,13 @@ Contents
     core-libraries/time
     core-libraries/xml
 
+    access-control-list
+    appendices
     core-libraries/global-constants-and-functions
+    elasticsearch
     debug-kit
     migrations
-    elasticsearch
     upgrade-tool
-    appendices
 
 .. todolist::
 
