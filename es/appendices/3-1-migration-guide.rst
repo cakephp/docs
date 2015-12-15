@@ -124,7 +124,7 @@ Http\Client
 ORM
 ===
 
-Ahora puedes :ref:`Lazily Eager Load Associations`.Esta característica
+Ahora puedes *`Lazily Eager Load Associations`*.Esta característica
 te permite cargar asociaciones adicionales de manera condicional dentro del resultado ajustado,
 entidad o colección de entidades.
 
