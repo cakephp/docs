@@ -7,7 +7,7 @@ contiene los cambios y mejoras hechas en la versión 3.1.
 Enrutamiento
 ============
 
-- La clase por defecto de ruta ha sido cambiada a ``DashedRoute`` en el repositorio ``cakephp/app``.
+- La clase por de ruta por defecto ha sido cambiada a ``DashedRoute`` en el repositorio ``cakephp/app``.
   Tu código base actual no se verá afectado por esto, pero es recomendable usar
   esta clase desde ahora en adelante.
 - Opciones de prefijos de nombre fueron añadidos a varios métodos del constructor de ruta.
@@ -18,9 +18,9 @@ Consola
 
 - ``Shell::dispatchShell()`` ya no imprimirá el mensaje de bienvenida desde el intérprete
   de comandos emisor.
-- La función ayudante ``breakpoint()`` ha sido añadida. Esta funcione provee
-  un *snippet* de código que puede ser puesta en ``eval()`` para disparar una consola
-  interactiva. Este es muy útil cuando se depuran los casos de prueba, o otros scripts desde
+- La función ayudante ``breakpoint()`` ha sido añadida. Esta función provee
+  un *snippet* de código que puede ser puesto en ``eval()`` para disparar una consola
+  interactiva. Esta función es muy útil cuando se depuran los casos de prueba, o otros scripts desde
   la línea de comandos interactiva (CLI).
 - Las opciones de consola ``--verbose`` y ``--quiet`` ahora controlan stdout/stderr
   como niveles de registros de salida.
@@ -50,7 +50,7 @@ Controlador
   * viewClass - reemplazada con ``className``
   * layoutPath
 
-  En su lugar de ajustar estas propiedades en tu controlador, debes ajustarlos
+  En lugar de ajustar estas propiedades en tu controlador, debes ajustarlos
   en la vista usando el método con el nombre de la propiedad::
 
     // En un controlador, en vez de
@@ -59,7 +59,7 @@ Controlador
     // Debes usar
     $this->viewBuilder()->layout('avanzado');
 
-Estos métodos debes ser llamados después de determinar que clase de vista
+Estos métodos deben ser llamados después de determinar que clase de vista
 será usada para un controlador/acción.
 
 AuthComponent
@@ -74,10 +74,10 @@ AuthComponent
   es usado, pero tu puedes ajustar esto en ``Controller.initialize`` si deseas que la autenticación
   compruebe antes del método ``beforeFilter()`` del controlador a ejecutar.
 - Las opciones ``scope`` y ``contain`` para las clases autenticadoras están obsoletas.
-  En su lugar debes usar la opción ``finger`` para configurar un método localizador personalizado
+  En su lugar debes usar la opción ``finder`` para configurar un método localizador personalizado
   y modificar la consulta usada para buscar el usuario allí.
-- La lógica para el ajustar la variable de sesión ``Auth.redirect``, que se usar para obtener
-  la URL de redirección luego de iniciar sesión, ha cambiado. Ahora sólo se establece solo cuando
+- La lógica para ajustar la variable de sesión ``Auth.redirect``, que se usa para obtener
+  la URL de redirección luego de iniciar sesión, ha cambiado. Ahora se establece solo cuando
   se intenta acceder a una URL protegida sin autenticación. Entonces ``Auth::redirectUrl()``
   retornará la URL protegida después de iniciar sesión. Bajo circunstancias normales, cuando un
   usuario accede directamente a la página de inicio de sesión, ``Auth::redirectUrl()`` retornará
@@ -94,7 +94,7 @@ CsrfComponent
 -------------
 
 - El tiempo de expiración de la cookie CSRF ahora se podrá
-  ajustar como un valor compatible de ``strtotime()``.
+  ajustar como un valor compatible con ``strtotime()``.
 - Los tokens inválidos CSRF ahora arrojarán una excepción
   ``Cake\Network\Exception\InvalidCsrfTokenException`` en vez de
   ``Cake\Network\Exception\ForbiddenException``.
@@ -124,7 +124,7 @@ Http\Client
 ORM
 ===
 
-Ahora puedes *`Lazily Eager Load Associations`*.Esta característica
+Ahora puedes *`Lazily Eager Load Associations`*. Esta característica
 te permite cargar asociaciones adicionales de manera condicional dentro del resultado ajustado,
 entidad o colección de entidades.
 
@@ -150,13 +150,13 @@ Query
 Vista
 =====
 
-- Puedes ahora configurar ``_serialized`` a ``true`` para ``JsonView`` y ``XmlView``
+- Ahora puedes configurar ``_serialized`` a ``true`` para ``JsonView`` y ``XmlView``
   y así serializar todas las variables en vez de especificar una por una.
 - ``View::$viewPath`` está obsoleto. Debes usar ``View::templatePath()``
   en su lugar.
 - ``View::$view`` está obsoleto. Debes usar ``View::template()``
   en su lugar.
-- ``View::TYPE_VIEW`` está obsoleto. Tu puedes usar ``View::TYPE_TEMPLATE``
+- ``View::TYPE_VIEW`` está obsoleto. Debes usar ``View::TYPE_TEMPLATE``
   en su lugar.
 
 Helper
@@ -187,12 +187,12 @@ Email
 - Las clases ``Email`` y ``Transport`` han sido movidas bajo el nombre de espacio ``Cake\Mailer``.
   Sus antiguos espacios de nombre aún son utilizables como alias.
 - El perfil ``default`` de email es ahora automáticamente ajustado cuando una instancia de ``Email``
-  es creada. Este comportamiento es similar a como era en la versión 2.x.
+  cuando es creada. Este comportamiento es similar a como era en la versión 2.x.
 
 Mailer
 ------
 
-- La clase ``Mailer`` ha sido añadida. Esta clase ayuda a crear emails reusables
+- La clase ``Mailer`` ha sido añadida. Esta clase ayuda a crear *emails* reusables
   en una aplicación.
 
 I18n
@@ -202,7 +202,7 @@ Tiempo
 ------
 
 - ``Time::fromNow()`` ha sido añadido. Este método hace fácil calcular la diferencia
-  desde 'ahora'.
+  de tiempo desde 'ahora'.
 - ``Time::i18nFormat()`` ahora soporta calendarios no-gregorianos cuando formatea
   fechas.
 
