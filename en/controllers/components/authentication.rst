@@ -1050,6 +1050,13 @@ unauthorizedRedirect
     redirected to the referrer URL or ``loginAction`` or '/'.
     If set to ``false``, a ForbiddenException exception is thrown instead of
     redirecting.
+storage
+    Storage class to use for persisting user record. When using stateless
+    authenticator you should set this to ``Memory``. Defaults to ``Session``.
+checkAuthIn
+    Name of event for which initial auth checks should be done. Defaults
+    to ``Controller.startup``. You can set it to ``Controller.initialize``
+    if you want the check to be done before controller's ``beforeFilter()`` is run.
 
 You can get current configuration values by calling ``$this->Auth->config()``::
 only the configuration option::
