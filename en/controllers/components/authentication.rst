@@ -162,7 +162,7 @@ the following keys:
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
   to ``md5($config['realm'])``.
 
-Customizing find query
+Customizing Find Query
 ----------------------
 
 You can customize the query used to fetch the user record using the ``finder``
@@ -591,7 +591,7 @@ when validating user credentials so no additional configuration is required in
 order to authenticate users.
 
 ``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
-is one of the stronger password hashing solution used in the industry. While it
+is one of the stronger password hashing solutions used in the industry. While it
 is recommended that you use this password hasher class, the case may be that you
 are managing a database of users whose password was hashed differently.
 
@@ -640,7 +640,7 @@ hasher::
 
 Supporting legacy systems is a good idea, but it is even better to keep your
 database with the latest security advancements. The following section will
-explain how to migrate from one hashing algorithm to CakePHP's default
+explain how to migrate from one hashing algorithm to CakePHP's default.
 
 Changing Hashing Algorithms
 ---------------------------
