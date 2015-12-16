@@ -121,7 +121,7 @@ get の操作がどの結果も見つけられない場合は、``Cake\Datasourc
     Using Finders to Load Data
 
 データのロードに Finder を使う
-=============================
+==============================
 
 .. php:method:: find($type, $options = [])
 
@@ -398,7 +398,7 @@ join でつながっている関連テーブルからリストのデータを生
     Finding Threaded Data
 
 スレッド状のデータを検索する
-===========================
+============================
 
 ..
     The ``find('threaded')`` finder returns nested entities that are threaded
@@ -636,7 +636,7 @@ join 関数を使いたい場合の詳細は :ref:`adding-joins` を参照して
 .. _eager-loading-associations:
 
 関連データをイーガーロード(eager load)する
-=========================================
+==========================================
 
 ..
     Eager Loading Associations
@@ -1765,7 +1765,7 @@ reducer が呼ばれるごとに、reducer はユーザごとのフォロワー�
     Removing All Stacked Map-reduce Operations
 
 stack されたすべての MapReduce 操作をを取り除く
-----------------------------------------------
+-----------------------------------------------
 
 ..
     Under some circumstances you may want to modify a ``Query`` object so that no
