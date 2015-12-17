@@ -1,15 +1,89 @@
-Glossary
+Glosario
 ########
 
-.. note::
-    La documentación no es compatible actualmente con el idioma español en esta página.
+.. glossary::
 
-    Por favor, siéntase libre de enviarnos un pull request en
-    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
+    arreglo de rutas
+        Un arreglo de atributos que son pasados a :php:meth:`Router::url()`.
+        Típicamente se ve algo así::
 
-    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
-    para obtener información sobre el tema de esta página.
+            ['controller' => 'Posts', 'action' => 'view', 5]
+
+    Atributos HTML
+        Un arreglo con claves => valores que son colocados en los atributos HTML. Por ejemplo::
+
+            // Dado
+            ['class' => 'mi-clase', 'target' => '_blank']
+
+            // Generará
+            class="mi-clase" target="_blank"
+
+        Si una opción puede usar su nombre como valor, entonces puede ser usado ``true``::
+
+            // Dadp
+            ['checked' => true]
+
+            // Generará
+            checked="checked"
+
+    Sintaxis de plugin
+        La sintáxis de plugin se refiere a el punto que separa los nombres de clases indicando
+        que la clase es parte de un plugin::
+
+            // El plugin es "DebugKit", y el nombre de la clase es "Toolbar".
+            'DebugKit.Toolbar'
+
+            // El plugin es "AcmeCorp/Tools", y el nombre de clase es "Toolbar".
+            'AcmeCorp/Tools.Toolbar'
+
+    Notación de punto
+        La notación de punto define una arreglo de rutas, separando los niveles anidados con ``.``
+        Por ejemplo::
+
+            Cache.default.engine
+
+        Apuntará a el siguiente valor::
+
+            [
+                'Cache' => [
+                    'default' => [
+                        'engine' => 'File'
+                    ]
+                ]
+            ]
+
+    CSRF
+        *Cross Site Request Forgery*. Previene los ataques de replay o playback, peticiones
+        duplicadas y peticiones falsificadas desde otros dominios.
+
+    CDN
+        *Content Delivery Network*. Le puedes pagar a un proveedor para que ayude a distribuir
+        el contenido a centros de datos alrededor del mundo. Esto ayuda a poner elementos
+        estáticos más cerca de tus usuarios geográficamente.
+
+    routes.php
+        Un archivo en el directorio ``config`` que contiene las configuraciones de enrutamiento.
+        Este archivo es incluido antes que cada petición sea procesada.
+        Se deben conectar todas las rutas que necesita tu aplicación para que cada petición sea enrutada
+        correctamente al controlador + acción.
+
+    DRY
+        *Don't repeat yourself*. Es un principio de desarro`llo de software orientado a
+        reducir la repetición de la información de todo tipo. En CakePHP, DRY
+        se utiliza para que pueda escribir las cosas una vez y reutilizarlos
+        a través de su aplicación.
+
+    PaaS
+        *Platform as a Service*. Las Plataforma como proveedores de servicios
+        proporcionará recursos de hosting, bases de datos y almacenamiento
+        en caché basado en la nube. Algunos proveedores populares incluyen
+        Heroku, EngineYard y PagodaBox.
+
+    DSN
+        *Data Source Name*. Una cadena de conexión formateada para que sea como una URI.
+        CakePHP soporta conexiones DSN para Caché, Base de datos, Registro y de E-mail.
+
 
 .. meta::
-    :title lang=es: Glossary
-    :keywords lang=es: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :title lang=es: Glosario
+    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
