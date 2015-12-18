@@ -1,5 +1,5 @@
-Appendices
-##########
+Apéndices
+#########
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
@@ -10,11 +10,11 @@ Appendices
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
-Appendices contain information regarding the new features
-introduced in each version and the migration path between versions.
+En los apéndices encontrarás información relacionada a las nuevas características
+introducidas en cada versión, así como también las guías de migración entre versiones.
 
-3.0 Migration Guide
-===================
+Guía de Migración a 3.0
+=======================
 
 .. toctree::
     :maxdepth: 1
@@ -22,15 +22,15 @@ introduced in each version and the migration path between versions.
     appendices/3-0-migration-guide
     appendices/orm-migration
 
-3.1 Migration Guide
-===================
+Guía de Migración a 3.0
+=======================
 
 .. toctree::
     :maxdepth: 1
 
     appendices/3-1-migration-guide
 
-General Information
+Información General
 ===================
 
 .. toctree::
@@ -40,5 +40,5 @@ General Information
     appendices/glossary
 
 .. meta::
-    :title lang=es: Appendices
+    :title lang=es: Apéndices
     :keywords lang=es: migration guide,migration path,new features,glossary
