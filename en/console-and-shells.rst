@@ -762,6 +762,10 @@ to add multiple options at once. ::
 As with all the builder methods on ConsoleOptionParser, addOptions can be used
 as part of a fluent method chain.
 
+Option values are stored in the ``$this->params`` array. You can also use the
+convenience method ``$this->param()`` to avoid errors when trying to access non-present
+options.
+
 Validating Options
 ------------------
 
@@ -796,7 +800,8 @@ checks for boolean flags::
     }
 
 Since the boolean options are always defined as ``true`` or
-``false`` you can omit additional check methods.
+``false`` you can omit additional check methods when using the array access. The
+``$this->param()`` method makes these checks unnecessary for all cases.
 
 Adding Subcommands
 ------------------
