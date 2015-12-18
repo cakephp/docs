@@ -792,7 +792,7 @@ Create a file named **ArticlesControllerTest.php** in your
 
         public function testIndex()
         {
-            $this->get('/articles?page=1');
+            $this->get('/articles');
 
             $this->assertResponseOk();
             // More asserts.
