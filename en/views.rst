@@ -249,10 +249,19 @@ You can also append into a block using ``append()``::
     // The same as the above.
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
-``assign()`` can be used to clear or overwrite a block at any time::
+If you need to clear or overwrite a block there are a couple of alternatives.
+The ``reset()`` method will clear or overwrite a block at any time. The
+``assign()`` method with an empty string can also be used to clear the
+specified block.::
 
     // Clear the previous content from the sidebar block.
+    $this->reset('sidebar');
+
+    // Assigning an empty string will also clear the sidebar block.
     $this->assign('sidebar', '');
+
+.. versionadded:: 3.2
+    View::reset() was added in 3.2
 
 Assigning a block's content is often useful when you want to convert a view
 variable into a block. For example, you may want to use a block for the page
