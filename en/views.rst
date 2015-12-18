@@ -251,8 +251,8 @@ You can also append into a block using ``append()``::
 
 If you need to clear or overwrite a block there are a couple of alternatives.
 The ``reset()`` method will clear or overwrite a block at any time. The
-``assign()`` method with an empty string can also be used to clear the
-specified block.::
+``assign()`` method with an empty content string can also be used to
+clear the specified block.::
 
     // Clear the previous content from the sidebar block.
     $this->reset('sidebar');
