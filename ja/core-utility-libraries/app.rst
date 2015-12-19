@@ -58,7 +58,7 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
     Vendors
         ``App::uses('Textile', 'Vendor');``
     Utilities
-        ``App::uses('String', 'Utility');``
+        ``App::uses('CakeText', 'Utility');``
 
     つまり基本的に、第二パラメータは、コアまたはアプリ内のクラスファイルのフォルダパスと単純に
     一致させなくてはなりません。

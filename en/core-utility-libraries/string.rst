@@ -1,32 +1,38 @@
-String
-######
+CakeText
+########
 
-.. php:class:: String
+.. php:class:: CakeText
 
-The String class includes convenience methods for creating and
+The CakeText class includes convenience methods for creating and
 manipulating strings and is normally accessed statically. Example:
-``String::uuid()``.
+``CakeText::uuid()``.
+
+.. deprecated:: 2.7
+    The ``String`` class was deprecated in 2.7 in favour of the
+    :php:class:`CakeText` class. While the ``String`` class is still available
+    for backwards compatibility, using ``CakeText`` is recommended as it offers
+    compatibility with PHP7 and HHVM.
 
 If you need :php:class:`TextHelper` functionalities outside of a ``View``,
-use the ``String`` class::
+use the ``CakeText`` class::
 
     class UsersController extends AppController {
 
         public $components = array('Auth');
 
         public function afterLogin() {
-            App::uses('String', 'Utility');
+            App::uses('CakeText', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
                 // notify user of new message
-                $this->Session->setFlash(__('You have a new message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
+                $this->Session->setFlash(__('You have a new message: %s', CakeText::truncate($message['Message']['body'], 255, array('html' => true))));
             }
         }
     }
 
 .. versionchanged:: 2.1
    Several methods from :php:class:`TextHelper` have been moved to
-   ``String`` class.
+   ``CakeText`` class.
 
 .. php:staticmethod:: uuid()
 
@@ -37,7 +43,7 @@ use the ``String`` class::
 
     ::
 
-        String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
+        CakeText::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 
 .. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
@@ -49,7 +55,7 @@ use the ``String`` class::
     formatting such as tag lists::
 
         $data = "cakephp 'great framework' php";
-        $result = String::tokenize($data, ' ', "'", "'");
+        $result = CakeText::tokenize($data, ' ', "'", "'");
         // result contains
         array('cakephp', "'great framework'", 'php');
 
@@ -58,12 +64,12 @@ use the ``String`` class::
     The insert method is used to create string templates and to allow
     for key/value replacements::
 
-        String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
+        CakeText::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
         // generates: "My name is Bob and I am 65 years old."
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 
-    Cleans up a ``String::insert`` formatted string with given $options
+    Cleans up a ``CakeText::insert`` formatted string with given $options
     depending on the 'clean' key in $options. The default method used
     is text but html is also available. The goal of this function is to
     replace all whitespace and unneeded markup around placeholders that
@@ -85,7 +91,7 @@ use the ``String`` class::
     Can intelligently wrap text so words are not sliced across lines::
 
         $text = 'This is the song that never ends.';
-        $result = String::wrap($text, 22);
+        $result = CakeText::wrap($text, 22);
 
         // returns
         This is the song
@@ -126,9 +132,9 @@ use the ``String`` class::
             array('format' => '<span class="highlight">\1</span>')
         );
 
-        // called as String
-        App::uses('String', 'Utility');
-        echo String::highlight(
+        // called as CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::highlight(
             $lastSentence,
             'using',
             array('format' => '<span class="highlight">\1</span>')
@@ -177,9 +183,9 @@ use the ``String`` class::
             )
         );
 
-        // called as String
-        App::uses('String', 'Utility');
-        echo String::truncate(
+        // called as CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::truncate(
             'The killer crept forward and tripped on the rug.',
             22,
             array(
@@ -233,9 +239,9 @@ use the ``String`` class::
             )
         );
 
-        // called as String
-        App::uses('String', 'Utility');
-        echo String::tail(
+        // called as CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::tail(
             $sampleText,
             70,
             array(
@@ -264,9 +270,9 @@ use the ``String`` class::
         // called as TextHelper
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
-        // called as String
-        App::uses('String', 'Utility');
-        echo String::excerpt($lastParagraph, 'method', 50, '...');
+        // called as CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::excerpt($lastParagraph, 'method', 50, '...');
 
     Output::
 
@@ -284,9 +290,9 @@ use the ``String`` class::
         // called as TextHelper
         echo $this->Text->toList($colors);
 
-        // called as String
-        App::uses('String', 'Utility');
-        echo String::toList($colors);
+        // called as CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::toList($colors);
 
     Output::
 
@@ -296,5 +302,5 @@ use the ``String`` class::
 
 
 .. meta::
-    :title lang=en: String
+    :title lang=en: CakeText
     :keywords lang=en: array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates

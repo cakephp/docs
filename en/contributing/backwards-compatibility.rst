@@ -38,8 +38,7 @@ Interfaces
 ----------
 
 Outside of major releases, interfaces provided by CakePHP will **not** have any
-existing methods changed. New methods may be added, but no existing methods will
-be changed.
+existing methods changed and new methods will **not** be added to any existing interfaces.
 
 Classes
 -------

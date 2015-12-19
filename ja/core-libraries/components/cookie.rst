@@ -12,7 +12,8 @@ Cookie コンポーネントを使おうとする前に、コントローラー�
 ============================
 
 Cookie の発行や操作の設定をすることができる値を以下に示します。これらの値によって
-Cookie コンポーネントがどのように動くかは、コントローラーの beforeFilter() メソッドでも特別に設定できます。
+Cookie コンポーネントがどのように動くかは、コントローラーの beforeFilter()
+メソッドでも特別に設定できます。
 
 +-------------------+--------------+----------------------------------------------------------------------+
 | Cookie の変数     | 規定値       | 内容                                                                 |
@@ -52,9 +53,10 @@ Cookie コンポーネントがどのように動くかは、コントローラ�
 以下のサンプルコードは、 Cookie コンポーネントをコントローラーにインクルードする方法と、
 セキュアな接続でのみ、 'example.com' というドメインの ‘/bakers/preferences/’
 というパス以下で、1時間だけ有効な 'baker\_id' という名前の HTTP のみで有効な
-Cookie の初期設定をするための例です。::
+Cookie の初期設定をするための例です。 ::
 
     public $components = array('Cookie');
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
@@ -75,32 +77,30 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    write() は Cookie コンポーネントの中核をなすメソッドです。 $key は必要な Cookie の値につける名前を、
-    $value は保存しておきたい情報を設定します。::
+    write() は Cookie コンポーネントの中核をなすメソッドです。 $key は必要な
+    Cookie の値につける名前を、$value は保存しておきたい情報を設定します。 ::
 
         $this->Cookie->write('name', 'Larry');
 
-    $key にドット記法を使うことで値をグルーピングすることもできます。::
+    $key にドット記法を使うことで値をグルーピングすることもできます。 ::
 
         $this->Cookie->write('User.name', 'Larry');
         $this->Cookie->write('User.role', 'Lead');
 
-    一度に2つ以上の Cookie を書き込みたい場合は、配列を渡すことができます。::
+    一度に2つ以上の Cookie を書き込みたい場合は、配列を渡すことができます。 ::
 
         $this->Cookie->write('User',
             array('name' => 'Larry', 'role' => 'Lead')
         );
 
     すべての Cookie の値は、既定では暗号化されます。平文で値を保存したい場合は、3つ目の引数に
-    false を設定します。 Cookie の値は非常に単純な暗号化システムで暗号化されます。値の暗号化には、
-    Configure クラスで予め定義された値である ``Security.salt`` と ``Security.cipherSeed``
-    が使われます。よりよい暗号化をして Cookie をよりセキュアにするためには、 app/Config/core.php の
-    ``Security.cipherSeed`` を変更することをおすすめします。::
+    false を設定します。 値の暗号化をよりセキュアにするためには暗号化モードを
+    'aes' に設定してください。 ::
 
         $this->Cookie->write('name', 'Larry', false);
 
     最後の引数 $expires は無効になる秒数を数値で指定します。使いやすくするために、
-    PHP の関数 strtotime() が解釈できる文字列を渡すこともできます。::
+    PHP の関数 strtotime() が解釈できる文字列を渡すこともできます。 ::
 
         // いずれの Cookie も1時間で無効になります。
         $this->Cookie->write('first_name', 'Larry', false, 3600);
@@ -108,7 +108,7 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 
 .. php:method:: read(mixed $key = null)
 
-    このメソッドは、 $key で指定した名前をつけた Cookie の値を得るために使われます。::
+    このメソッドは、 $key で指定した名前をつけた Cookie の値を得るために使われます。 ::
 
         // “Larry” を出力します
         echo $this->Cookie->read('name');
@@ -132,12 +132,12 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 
 .. php:method:: delete(mixed $key)
 
-    $key で指定した名前のCookieの値を削除します。ドット記法を使うことができます。::
+    $key で指定した名前の Cookie の値を削除します。ドット記法を使うことができます。 ::
 
         // ひとつの値を削除
         $this->Cookie->delete('bar');
 
-        // barという値を削除しますが、foo以下のすべてを削除するわけではありません
+        // bar という値を削除しますが、foo 以下のすべてを削除するわけではありません
         $this->Cookie->delete('foo.bar');
 
 .. php:method:: destroy()
@@ -146,11 +146,15 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 
 .. php:method:: type($type)
 
-    暗号化の方法を変更することができます。規定では 'cipher' 方式が使われます。しかし、
-    より安全にするためには 'rijndael' 方式を使うべきです。
+    暗号化の方法を変更することができます。デフォルトでは、後方互換性のために
+    'cipher' 方式が使われます。しかし、より安全にするためには 'rijndael' 方式や
+    'aes' 方式を使うべきです。
 
     .. versionchanged:: 2.2
         'rijndael' タイプが追加されました。
+
+    .. versionadded:: 2.5
+        'aes' タイプが追加されました。
 
 
 .. meta::

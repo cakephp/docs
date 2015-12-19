@@ -1,33 +1,39 @@
-String
-######
+CakeText
+########
 
-.. php:class:: String
+.. php:class:: CakeText
 
-La classe String inclut des méthodes pratiques pour la création et la
+La classe CakeText inclut des méthodes pratiques pour la création et la
 manipulation des chaînes de caractères et est normalement accessible
 statiquement. Exemple:
-``String::uuid()``.
+``CakeText::uuid()``.
+
+.. deprecated:: 2.7
+    La classe ``String`` a été dépréciée dans 2.7 en faveur de la classe
+    :php:class:`CakeText`. Bien que la classe ``String`` soit toujours
+    disponible pour garder une rétro-compatibilité, utiliser ``CakeText``
+    est recommandée puisqu'elle offre une compatibilité avec PHP7 et HHVM.
 
 Si vous avez besoin des fonctionnalités de :php:class:`TextHelper` en-dehors
-d'une ``View``, utilisez la classe ``String``::
+d'une ``View``, utilisez la classe ``CakeText``::
 
     class UsersController extends AppController {
 
         public $components = array('Auth');
 
         public function afterLogin() {
-            App::uses('String', 'Utility');
+            App::uses('CakeText', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
                 // notification à l'utilisateur d'un nouveau message
-                $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
+                $this->Session->setFlash(__('Vous avez un message: %s', CakeText::truncate($message['Message']['body'], 255, array('html' => true))));
             }
         }
     }
 
 .. versionchanged:: 2.1
    Plusieurs méthodes de :php:class:`TextHelper` ont été déplacées dans la
-   classe ``String``.
+   classe ``CakeText``.
 
 .. php:staticmethod:: uuid()
 
@@ -37,7 +43,7 @@ d'une ``View``, utilisez la classe ``String``::
 
     ::
 
-        String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
+        CakeText::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 
 .. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
@@ -50,7 +56,7 @@ d'une ``View``, utilisez la classe ``String``::
     régulier comme les listes de tag::
 
         $data = "cakephp 'great framework' php";
-        $result = String::tokenize($data, ' ', "'", "'");
+        $result = CakeText::tokenize($data, ' ', "'", "'");
         // le résultat contient
         array('cakephp', "'great framework'", 'php');
 
@@ -59,12 +65,12 @@ d'une ``View``, utilisez la classe ``String``::
     La méthode insérée est utilisée pour créer des chaînes templates et pour
     permettre les remplacements de clé/valeur::
 
-        String::insert('Mon nom est :name et j'ai :age ans.', array('name' => 'Bob', 'age' => '65'));
+        CakeText::insert('Mon nom est :name et j'ai :age ans.', array('name' => 'Bob', 'age' => '65'));
         // génère: "Mon nom est Bob et j'ai 65 ans."
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 
-    Nettoie une chaîne formatée ``String::insert`` avec $options donnée
+    Nettoie une chaîne formatée ``CakeText::insert`` avec $options donnée
     qui dépend de la clé 'clean' dans $options. La méthode par défaut utilisée
     est le texte mais html est aussi disponible. Le but de cette fonction est
     de remplacer tous les espaces blancs et les balises non nécessaires autour
@@ -88,7 +94,7 @@ d'une ``View``, utilisez la classe ``String``::
     sliced across lines::
 
         $text = 'Ceci est la chanson qui ne stoppe jamais.';
-        $result = String::wrap($text, 22);
+        $result = CakeText::wrap($text, 22);
 
         // retourne
         Ceci est la chanson
@@ -131,9 +137,9 @@ d'une ``View``, utilisez la classe ``String``::
             array('format' => '<span class="highlight">\1</span>')
         );
 
-        // appelé avec String
-        App::uses('String', 'Utility');
-        echo String::highlight(
+        // appelé avec CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::highlight(
             $lastSentence,
             'using',
             array('format' => '<span class="highlight">\1</span>')
@@ -183,9 +189,9 @@ d'une ``View``, utilisez la classe ``String``::
             )
         );
 
-        // appelé avec String
-        App::uses('String', 'Utility');
-        echo String::truncate(
+        // appelé avec CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::truncate(
             'The killer crept forward and tripped on the rug.',
             22,
             array(
@@ -221,7 +227,7 @@ d'une ``View``, utilisez la classe ``String``::
             'ellipsis' => '...',
             'exact' => true
         )
-        
+
     .. versionadded:: 2.3
 
     Exemple::
@@ -239,9 +245,9 @@ d'une ``View``, utilisez la classe ``String``::
             )
         );
 
-        // appelé avec String
-        App::uses('String', 'Utility');
-        echo String::tail(
+        // appelé avec CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::tail(
             $sampleText,
             70,
             array(
@@ -272,9 +278,9 @@ d'une ``View``, utilisez la classe ``String``::
         // appelé avec TextHelper
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
-        // appelé avec String
-        App::uses('String', 'Utility');
-        echo String::excerpt($lastParagraph, 'method', 50, '...');
+        // appelé avec CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::excerpt($lastParagraph, 'method', 50, '...');
 
     Sortie::
 
@@ -292,9 +298,9 @@ d'une ``View``, utilisez la classe ``String``::
         // appelé avec TextHelper
         echo $this->Text->toList($colors);
 
-        // appelé avec String
-        App::uses('String', 'Utility');
-        echo String::toList($colors);
+        // appelé avec CakeText
+        App::uses('CakeText', 'Utility');
+        echo CakeText::toList($colors);
 
     Sortie::
 
@@ -303,5 +309,5 @@ d'une ``View``, utilisez la classe ``String``::
 .. end-string
 
 .. meta::
-    :title lang=fr: String
+    :title lang=fr: CakeText
     :keywords lang=fr: tableau php,tableau name,string options,data options,result string,class string,string data,string class,placeholders,méthode défaut,valeur clé key,markup,rfc,remplacements,convenience,templates

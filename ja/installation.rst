@@ -49,7 +49,7 @@ CakePHPのリリースは `GitHub tags <https://github.com/cakephp/cakephp/tags>
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。
 これらは `GitHub`_ からレポジトリを複製することでアクセスすることができます ::
 
-    git clone git://github.com/cakephp/cakephp.git
+    git clone -b 2.7 git://github.com/cakephp/cakephp.git
 
 
 パーミッション

@@ -148,6 +148,8 @@ a single-field primary key, CakePHP's convention is that a
 single-field primary key is added to the table. You must add a
 single-field primary key if you want to use that table's model.
 
+If primary key's name is not ``id``, then you must set the  ``Model.primaryKey`` attribute.
+
 CakePHP does not support composite primary keys. If you want to
 directly manipulate your join table data, use direct
 :ref:`query <model-query>` calls or add a primary key to act on it

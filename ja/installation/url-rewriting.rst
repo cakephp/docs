@@ -4,15 +4,18 @@ URLリライティング
 Apache と mod\_rewrite (と.htaccess)
 ====================================
 
-CakePHP は、展開した状態では mod\_rewrite を使用するようになっており、自分のシステムでうまく動作するまで苦労するユーザもいます。
+CakePHP は、展開した状態では mod\_rewrite を使用するようになっており、
+自分のシステムでうまく動作するまで苦労するユーザもいます。
 
-ここでは、正しく動作させるために行うことをいくつか示します。
-まず始めに httpd.conf を見てください（ユーザーやサイト独自の httpd.conf ではなく、必ずシステムの httpd.conf を編集してください）。
+ここでは、正しく動作させるために行うことをいくつか示します。まず始めに
+httpd.conf を見てください（ユーザーやサイト独自の httpd.conf ではなく、
+必ずシステムの httpd.conf を編集してください）。
 
 これらのファイルは、ディストリビューションや Apache のバージョンによって異なります。
 詳しくは http://wiki.apache.org/httpd/DistrosDefaultLayout を参照してください。
 
-#. .htaccess のオーバーライドが許可されていること、正確な DocumentRoot に対して AllowOverride が All に設定されていることを確かめてください。
+#. .htaccess のオーバーライドが許可されていること、正確な DocumentRoot に対して
+   AllowOverride が All に設定されていることを確かめてください。
    以下のようなものになるはずです。 ::
 
        # Each directory to which Apache has access can be configured with respect
@@ -29,24 +32,35 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
        #    Deny from all
        </Directory>
 
+   Apache 2.4 以上の場合、 ``httpd.conf`` やバーチャルホストの設定を以下のように
+   更新する必要があります。 ::
+
+       <Directory /var/www/>
+            Options FollowSymLinks
+            AllowOverride All
+            Require all granted
+       </Directory>
+
 #. mod\_rewrite を正しく読み込んでいることを確認してください。
    以下のようになるはずです::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   多くのシステムではこれらはデフォルトで(先頭に# を付けられて)コメントアウトされています。
+   多くのシステムではこれらはデフォルトで (先頭に# を付けられて) コメントアウトされています。
    従って、先頭の # 記号を取り除く必要があるかもしれません。
 
    変更をした後、設定が有効であることを確かめるため Apache を再起動してください。
 
    .htaccess ファイルが実際に正しいディレクトリにあるかを確かめてください。
-   これはコピー時、いくつかのオペレーティングシステムでは「.」で始まるファイルを隠しファイルとして扱うことから、
-   コピーするのに見えなくなってしまうために起こりうることです。
+   これはコピー時、いくつかのオペレーティングシステムでは「.」で始まるファイルを
+   隠しファイルとして扱うことから、コピーするのに見えなくなってしまうために起こりうることです。
 
-#. CakePHP のコピーがサイトのダウンロードセクション、または Git リポジトリからのものであることを確かめてください。
-   また、.htaccess ファイルを確認して正常に解凍されたかどうかも確かめてください。
+#. CakePHP のコピーがサイトのダウンロードセクション、または Git リポジトリからのものであることを
+   確かめてください。また、.htaccess ファイルを確認して正常に解凍されたかどうかも確かめて
+   ください。
 
-   CakePHP のルートディレクトリ(ドキュメントにコピーされる必要があり、CakePHP アプリに全てリダイレクトします)::
+   CakePHP のルートディレクトリ(ドキュメントにコピーされる必要があり、CakePHP アプリに
+   全てリダイレクトします)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -54,7 +68,8 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   CakePHP の app ディレクトリ(bake によってアプリケーションのトップディレクトリにコピーされる)::
+   CakePHP の app ディレクトリ (bake によってアプリケーションのトップディレクトリに
+   コピーされる)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -62,7 +77,8 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   CakePHP の webroot ディレクトリ(bake によってアプリケーションのウェブルートディレクトリにコピーされる)::
+   CakePHP の webroot ディレクトリ (bake によってアプリケーションのウェブルートディレクトリに
+   コピーされる)::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -71,9 +87,11 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
-   まだあなたの CakePHP サイトで mod\_rewrite の問題が起きているなら、仮想ホスト(*virtualhosts*)の設定の変更を試してみるといいかもしれません。
-   Ubuntu 上なら、/etc/apache2/sites-available/default (場所はディストリビューションによる)のファイルを編集してください。
-   このファイルの中で、 ``AllowOverride None`` が ``AllowOverride All`` に変更されているかを確かめてください。
+   まだあなたの CakePHP サイトで mod\_rewrite の問題が起きているなら、仮想ホスト
+   (*virtualhosts*) の設定の変更を試してみるといいかもしれません。Ubuntu 上なら、
+   /etc/apache2/sites-available/default (場所はディストリビューションによる)
+   のファイルを編集してください。このファイルの中で、 ``AllowOverride None`` が
+   ``AllowOverride All`` に変更されているかを確かめてください。
    つまり以下のようになるでしょう::
 
        <Directory />
@@ -87,14 +105,19 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
            Allow from all
        </Directory>
 
-   Mac OSX上での別解は、仮想ホストをフォルダに向けさせるのに、
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ ツールを使うことが挙げられます。
+   Mac OSX 上での別解は、仮想ホストをフォルダに向けさせるのに、
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ ツールを使うことが
+   挙げられます。
 
-   多くのホスティングサービス (GoDaddy、1and1) では、実際にウェブサーバーが既に mod\_rewrite を使っているユーザディレクトリから配信されます。
-   CakePHP をユーザディレクトリ (http://example.com/~username/cakephp/) または既に mod\_rewrite を活用しているその他の URL 構造にインストールしているなら、
-   RewriteBase ステートメントを CakePHP が使う .htaccess ファイル (/.htaccess、/app/.htaccess、/app/webroot/.htaccess) に追加する必要があります。
+   多くのホスティングサービス (GoDaddy、1and1) では、実際にウェブサーバーが既に mod\_rewrite
+   を使っているユーザディレクトリから配信されます。CakePHP をユーザディレクトリ
+   (http://example.com/~username/cakephp/) または既に mod\_rewrite を活用している
+   その他の URL 構造にインストールしているなら、RewriteBase ステートメントを CakePHP が使う
+   .htaccess ファイル (/.htaccess、/app/.htaccess、/app/webroot/.htaccess) に
+   追加する必要があります。
 
-   これは RewriteEngine ディレクティブと同じセクションに追加でき、例えば webroot の .htaccess ファイルは以下のようになります::
+   これは RewriteEngine ディレクティブと同じセクションに追加でき、例えば webroot の
+   .htaccess ファイルは以下のようになります::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -107,8 +130,9 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
    この変更の詳細は設定に依り、CakePHP とは関係ない事柄も含むことがあります。
    詳しくは Apache のオンラインドキュメントを参照するようにしてください。
 
-#. (オプション) プロダクション環境の設定では、CakePHP で処理するのが不適切なアセットは、CakePHP を通さないようにしましょう。
-   webroot の .htaccess ファイルを次のように修正してください ::
+#. (オプション) プロダクション環境の設定では、CakePHP で処理するのが不適切なアセットは、
+   CakePHP を通さないようにしましょう。webroot の .htaccess ファイルを次のように
+   修正してください ::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -119,9 +143,10 @@ CakePHP は、展開した状態では mod\_rewrite を使用するようにな�
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
-   上の例は、正しくないアセットを index.php へ送信せず、ウェブサーバの404ページを表示します。
+   上の例は、正しくないアセットを index.php へ送信せず、ウェブサーバの 404 ページを表示します。
 
-   また、HTML で404ページを作成することもできますし、 ``ErrorDocument`` ディレクティブへ追記することで、CakePHP のビルトインの404ページを使うこともできます。 ::
+   また、HTML で 404 ページを作成することもできますし、 ``ErrorDocument`` ディレクティブへ
+   追記することで、CakePHP のビルトインの 404 ページを使うこともできます。 ::
 
        ErrorDocument 404 /404-not-found
 
@@ -182,18 +207,27 @@ nginx はポピュラーなサーバーで、Apache よりも少ないシステ�
       ... php handling ...
    }
 
-IIS7(Windowsホスト)でのURL書き換え
-==================================
+.. note::
+   PHP-FPM の最近の設定は、IP アドレス 127.0.0.1 の 9000 番 TCP ポートの代わりに
+   php-fpm ソケットで受信します。もし、その設定で 502 bad gateway エラーが起こった場合、
+   TCP ポートからソケットパスに fastcgi_pass を書き換えてください。
+   (例: fastcgi_pass unix:/var/run/php5-fpm.sock;)
 
-IIS7 はネイティブで .htaccess ファイルをサポートしていません。
-このサポートを追加できるアドオンがありますが、CakePHP のネイティブな書き換えを使うように IIS に htaccess のルールをインポートすることもできます。
-これをするには、以下のステップを踏んでください:
+IIS7 (Windows ホスト) での URL 書き換え
+=======================================
+
+IIS7 はネイティブで .htaccess ファイルをサポートしていません。このサポートを追加できる
+アドオンがありますが、CakePHP のネイティブな書き換えを使うように IIS に htaccess の
+ルールをインポートすることもできます。これをするには、以下のステップを踏んでください:
 
 
-#. `MicrosoftのWeb Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ を使って
-   `URL Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ をインストールするか、直接ダウンロードしてください (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
+#. `Microsoft の Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ を使って
+   `URL Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ をインストールするか、
+   直接ダウンロードしてください (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
 #. CakePHP フォルダに web.config という新しいファイルを作成してください。
-#. メモ帳か XML セーフなエディタを使って、以下のコードを真新しい web.config ファイルにコピーしてください。
+#. メモ帳か XML セーフなエディタを使って、以下のコードを真新しい web.config ファイルに
+   コピーしてください。
 
 .. code-block:: xml
 
@@ -229,7 +263,8 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
         </system.webServer>
     </configuration>
 
-一旦 IIS フレンドリーな書き換えルールを含む web.config が作成されれば、CakePHP のリンク、CSS、JS、再ルーティング(*rerouting*)は正しく動作するでしょう。
+一旦 IIS フレンドリーな書き換えルールを含む web.config が作成されれば、CakePHP のリンク、
+CSS、JS、再ルーティング (*rerouting*) は正しく動作するでしょう。
 
 lighttpd での URL 書き換え
 ==========================
@@ -264,7 +299,6 @@ URL リライティングを使わない/使えない場合
 
 もし、URL リライティングを使いたくなかったり使えなかったりする場合は、
 :ref:`core configuration<core-configuration-baseurl>` を参照してください。
-
 
 
 .. meta::

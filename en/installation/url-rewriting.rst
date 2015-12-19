@@ -34,6 +34,16 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        #    Deny from all
        </Directory>
 
+   For users having apache 2.4 and above, you need to modify the configuration
+   file for your ``httpd.conf`` or virtual host configuration to look like the
+   following::
+
+       <Directory /var/www/>
+            Options FollowSymLinks
+            AllowOverride All
+            Require all granted
+       </Directory>
+
 #. Make sure you are loading mod\_rewrite correctly. You should
    see something like::
 
@@ -200,6 +210,9 @@ inject "/webroot" in each request.
 
       ... php handling ...
    }
+   
+.. note::
+   Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php5-fpm.sock;).
 
 URL Rewrites on IIS7 (Windows hosts)
 ====================================
