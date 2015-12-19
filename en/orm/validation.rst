@@ -177,7 +177,7 @@ construction process into multiple reusable steps::
 
     public function validationHardened(Validator $validator)
     {
-        $validator = $this->validateDefault($validator);
+        $validator = $this->validationDefault($validator);
 
         $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
         return $validator;
