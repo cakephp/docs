@@ -810,6 +810,10 @@ Si vous avez un tableau avec plusieurs options, vous pouvez utiliser
 Comme avec toutes les méthodes de construction de ConsoleOptionParser,
 addOptions peut être utilisée comme une partie de la chaîne de méthode courante.
 
+Les valeurs des options sont stockées dans le tableau ``$this->params``. Vous
+pouvez également utilsier la méthode ``$this->param()`` pour éviter les erreurs
+lorsque vous essayez d'accéder à une option qui n'est pas présente.
+
 Validation des Options
 ----------------------
 
@@ -846,7 +850,9 @@ pour vérifier les flags de booléens::
     }
 
 Puisque les options booléennes sont toujours définies à ``true`` ou à
-``false``, vous pouvez omettre les méthodes de vérification supplémentaires.
+``false``, vous pouvez omettre les méthodes de vérification supplémentaires
+lorsque vous utilisez l'accès via le tableau. La méthode ``$this->param()``
+rends ces vérifications inutiles dans tous les cas.
 
 Ajouter des sous-commandes
 --------------------------
