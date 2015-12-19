@@ -12,7 +12,7 @@ Requisitos
 
 - Servidor HTTP. Por ejemplo: Apache. mod\_rewrite es recomendado, pero
   no requerido.
-- PHP 5.4.16 o mayor.
+- PHP 5.5.8 o mayor.
 - extensión mbstring.
 - extensión intl.
 

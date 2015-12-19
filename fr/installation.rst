@@ -12,7 +12,7 @@ Conditions requises
 
 - HTTP Server. Par exemple: Apache. mod\_rewrite est préférable, mais en
   aucun cas nécessaire.
-- PHP 5.4.16 ou plus.
+- PHP 5.5.8 ou plus.
 - extension mbstring
 - extension intl
 
