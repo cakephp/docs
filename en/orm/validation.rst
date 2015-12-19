@@ -165,7 +165,7 @@ construction process into multiple reusable steps::
 
     // UsersTable.php
 
-    public function validateDefault(Validator $validator)
+    public function validationDefault(Validator $validator)
     {
         $validator->notEmpty('username');
         $validator->notEmpty('password');
@@ -175,7 +175,7 @@ construction process into multiple reusable steps::
         return $validator;
     }
 
-    public function validateHardened(Validator $validator)
+    public function validationHardened(Validator $validator)
     {
         $validator = $this->validateDefault($validator);
 
