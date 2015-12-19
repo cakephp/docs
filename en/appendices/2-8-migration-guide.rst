@@ -27,6 +27,13 @@ CakeTime
   argument. Valid values for the ``$options`` argument are: ``group``,
   ``abbr``, ``before``, and ``after``.
 
+Shell Helpers Added
+===================
+
+Console applications can now create helper classes that encapsulate re-usable
+blocks of output logic. See the :doc:`/console-and-shells/helpers` section
+for more information.
+
 I18nShell
 =========
 

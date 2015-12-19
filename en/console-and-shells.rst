@@ -1019,6 +1019,7 @@ More topics
 .. toctree::
     :maxdepth: 1
 
+    console-and-shells/helpers
     console-and-shells/cron-jobs
     console-and-shells/completion-shell
     console-and-shells/code-generation-with-bake
