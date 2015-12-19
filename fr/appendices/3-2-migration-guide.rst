@@ -51,7 +51,7 @@ instances::
 Dans le code ci-dessus, ``$time`` et ``$newTime`` sont des objets différents.
 L'objet ``$time``garde sa valeur originale alors que ``$newTime`` contient la
 valeur modifiée. Pour plus d'informations, référez vous à la section sur les
-:ref:`Temps Immutables <immutable-time`. A partir de 3.2, l'ORM peut mapper les
+:ref:`Temps Immutables <immutable-time>`. A partir de 3.2, l'ORM peut mapper les
 collones date/datetime vers des objets immutables. Regardez la section 
 :ref:`Mapping de DateTime Immutables <immutable-datetime-mapping>` pour plus
 d'information.
