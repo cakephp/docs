@@ -20,7 +20,7 @@ Glosario
 
         Si una opción puede usar su nombre como valor, entonces puede ser usado ``true``::
 
-            // Dadp
+            // Dado
             ['checked' => true]
 
             // Generará
@@ -68,7 +68,7 @@ Glosario
         correctamente al controlador + acción.
 
     DRY
-        *Don't repeat yourself*. Es un principio de desarro`llo de software orientado a
+        *Don't repeat yourself*. Es un principio de desarrollo de software orientado a
         reducir la repetición de la información de todo tipo. En CakePHP, DRY
         se utiliza para que pueda escribir las cosas una vez y reutilizarlos
         a través de su aplicación.
