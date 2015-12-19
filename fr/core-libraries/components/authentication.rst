@@ -729,10 +729,10 @@ l'accès. Vous pouvez marquer des actions comme publique en utilisant
 component Auth ne vérifiera pas la connexion d'un utilisateur, ni
 n'autorisera la vérification des objets ::
 
-    // Permet toutes les actions. CakePHP 2.0
+    // Permet toutes les actions. CakePHP 2.0 (déprécié)
     $this->Auth->allow('*');
 
-    // Permet toutes les actions. CakePHP 2.1
+    // Permet toutes les actions. CakePHP 2.1 et plus
     $this->Auth->allow();
 
     // Ne permet que les actions view et index.
