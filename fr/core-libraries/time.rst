@@ -29,7 +29,7 @@ d'une ``View``, utilisez la classe ``Time``::
         }
     }
 
-Sous le capot, CakePHP utilise `Chronos <https://github.com/cakephp/chronos>`_
+En interne, CakePHP utilise `Chronos <https://github.com/cakephp/chronos>`_
 pour faire fonctionner l'utilitaire ``Time``. Tout ce que vous pouvez faire
 avec ``Chronos`` et ``DateTime``, vous pouvez le faire avec ``Time`` et ``Date``.
 
@@ -37,7 +37,7 @@ avec ``Chronos`` et ``DateTime``, vous pouvez le faire avec ``Time`` et ``Date``
     Avant 3.2.0,  CakePHP utilisait `Carbon
     <https://github.com/briannesbitt/Carbon>`__.
 
-Pour plus d'information sur Chronos, rendez-vous sur
+Pour plus d'informations sur Chronos, rendez-vous sur
 `la documentation de l'API <http://api.cakephp.org/chronos/1.0/>`_.
 
 .. start-time
@@ -345,7 +345,7 @@ Dates
 
 La classe ``Date`` dans CakePHP implémente les mêmes API et méthodes que
 :php:class:`Cake\\I18n\\Time`. La différence principale entre ``Time`` et
-``Date`` et que ``Date`` ne suit pas les composants lié à l'heure et est
+``Date`` est que ``Date`` ne suit pas les composants liés à l'heure et est
 toujours en UTC.
 Par exemple::
 
@@ -378,10 +378,11 @@ Dates et Heures Immutables
 .. php:class:: FrozenTime
 .. php:class:: FrozenDate
 
-CakePHP offre des classes de date et d'heure immutables qui implémente la même
-interface que leurs équivalents mutables. Les objets immutables sont utiles
-pour éviter les modifications accidentelles de données, ou lorsque vous voulez 
-éviter les problèmes liés à l'ordre de dépendances. Prenez le code suivant::
+CakePHP offre des classes de date et d'heure immutables qui implémentent la
+même interface que leurs équivalents mutables. Les objets immutables sont
+utiles pour éviter les modifications accidentelles de données, ou lorsque vous
+voulez éviter les problèmes liés à l'ordre de dépendances. Prenez le code
+suivant::
 
     use Cake\I18n\Time;
     $time = new Time('2015-06-15 08:23:45');
@@ -409,8 +410,8 @@ couplage temporal. Si nous utilisions des objets immutables, nous pourrions
     echo $time->format('Y-m-d H:i:s');
 
 Les Date et heures immutables sont utiles dans les entities car elles
-évitent les modifications accidentelles, et force les modifications à être
-explicitement exprimées. Utiliser des objets immutables aide l'ORM à mieu
+évitent les modifications accidentelles, et forcent les modifications à être
+explicitement exprimées. Utiliser des objets immutables aide l'ORM à mieux
 suivre les modifications et assurer que les colones date/datetime sont
 persistées correctement::
 

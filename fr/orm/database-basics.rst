@@ -488,7 +488,7 @@ fichier **config/bootstrap.php** ::
     Type::build('time')->useImmutable();
 
 .. note::
-    Les nouvelles applications auront les objets immutable activés par défaut.
+    Les nouvelles applications auront les objets immutables activés par défaut.
 
 Les Classes de Connection
 =========================

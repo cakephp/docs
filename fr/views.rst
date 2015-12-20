@@ -260,13 +260,9 @@ Vous pouvez aussi ajouter dans un block en utilisant ``append()``::
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
 Si vous devez nettoyer ou écraser un block, vous avez plusieurs alternatives.
-La méthode ``reset()`` va nettoyer ou écraser un block à n'importequel moment.
+La méthode ``reset()`` va nettoyer ou écraser un block à n'importe quel moment.
 La méthode ``assign()`` avec une chaîne de caractères vide peut également être
 utilisée.::
-If you need to clear or overwrite a block there are a couple of alternatives.
-The ``reset()`` method will clear or overwrite a block at any time. The
-``assign()`` method with an empty content string can also be used to
-clear the specified block.::
 
     // Nettoyer le contenu précédent du block de sidebar
     $this->reset('sidebar');
