@@ -58,7 +58,7 @@
 
     //in app/Lib/AppError.php
     class AppError {
-        public static function handleError($code, $description, $file = null, 
+        public static function handleError($code, $description, $file = null,
             $line = null, $context = null) {
             echo 'There has been an error!';
         }
@@ -87,10 +87,10 @@
 
     //in app/Lib/AppError.php
     class AppError {
-        public static function handleError($code, $description, $file = null, 
+        public static function handleError($code, $description, $file = null,
             $line = null, $context = null) {
             list(, $level) = ErrorHandler::mapErrorCode($code);
-            if ($level === LOG_ERROR) {
+            if ($level === LOG_ERR) {
                 // Ignore fatal error. It will keep the PHP error message only
                 return false;
             }

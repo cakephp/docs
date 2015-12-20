@@ -107,7 +107,7 @@ CakePHP 2.2 以降、 ``Error.handler`` は致命的 (fatal) なエラーコー�
         public static function handleError($code, $description, $file = null,
             $line = null, $context = null) {
             list(, $level) = ErrorHandler::mapErrorCode($code);
-            if ($level === LOG_ERROR) {
+            if ($level === LOG_ERR) {
                 // 致命的エラーを無視する。PHP エラーのメッセージのみとする。
                 return false;
             }
