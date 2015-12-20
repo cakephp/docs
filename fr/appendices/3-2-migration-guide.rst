@@ -29,18 +29,18 @@ Nouvel Objet Date
 =================
 
 La classe ``Date`` vous permet de mapper proprement les colonnes ``DATE`` vers
-des objets PHP. Les instances de Date définieront toujours leur heure à
+des objets PHP. Les instances de Date définiront toujours leur heure à
 ``00:00:00 UTC``. par défaut, l'ORM crée maintenant des instances de ``Date``
 lorsqu'il mappe des colonnes ``DATE``.
 
-Nouveaux Objet Immutables Date et Time
-======================================
+Nouveaux Objets Immutables Date et Time
+=======================================
 
 Les classes ``FrozenTime`` et ``FrozenDate`` ont été ajoutées. Ces classes
 offrent la même API que l'objet ``Time``. Les classes "frozen" (gelées)
 fournissent des variantes immutables de ``Time`` et ``Date``. En utilisant les
 objets immutables, vous pouvez éviter les mutations accidentelles. Au lieu de
-modifications directes,  les méthodes de modification renvoient de *nouvelles*
+modifications directes, les méthodes de modification renvoient de *nouvelles*
 instances::
 
     use Cake\I18n\FrozenTime;
@@ -50,8 +50,8 @@ instances::
 
 Dans le code ci-dessus, ``$time`` et ``$newTime`` sont des objets différents.
 L'objet ``$time`` garde sa valeur originale alors que ``$newTime`` contient la
-valeur modifiée. Pour plus d'informations, référez vous à la section sur les
-:ref:`Temps Immutables <immutable-time>`_. A partir de 3.2, l'ORM peut mapper les
+valeur modifiée. Pour plus d'informations, référez-vous à la section sur les
+:ref:`Temps Immutables <immutable-time>`. A partir de 3.2, l'ORM peut mapper les
 colonnes date/datetime vers des objets immutables. Regardez la section 
 :ref:`immutable-datetime-mapping` pour plus d'informations.
 

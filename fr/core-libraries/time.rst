@@ -34,7 +34,7 @@ pour faire fonctionner l'utilitaire ``Time``. Tout ce que vous pouvez faire
 avec ``Chronos`` et ``DateTime``, vous pouvez le faire avec ``Time`` et ``Date``.
 
 .. note::
-    Avant 3.2.0,  CakePHP utilisait `Carbon
+    Avant 3.2.0, CakePHP utilisait `Carbon
     <https://github.com/briannesbitt/Carbon>`__.
 
 Pour plus d'informations sur Chronos, rendez-vous sur

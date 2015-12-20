@@ -271,7 +271,7 @@ utilisée.::
     $this->assign('sidebar', '');
 
 .. versionadded:: 3.2
-    View::reset() a été ajouté dans 3.2
+    View::reset() a été ajoutée dans 3.2
 
 Assigner le contenu d'un block est souvent utile lorsque vous voulez convertir
 une variable de vue en un block. Par exemple, vous pourriez vouloir utiliser
