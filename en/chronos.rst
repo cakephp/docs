@@ -114,12 +114,84 @@ methods operate at the day resolution::
 Modifier Methods
 ================
 
+Chronos objects provide modifier methods that let you modify the value in
+a fine-grained way::
+
+    // Set components of the datetime value.
+    $halloween = Date::create()
+        ->year(2015)
+        ->month(10)
+        ->day(31)
+        ->hour(20)
+        ->minute(30);
+
+You can also modify parts of a date relatively::
+
+    $future = Date::create()
+        ->addYear(1)
+        ->subMonth(2)
+        ->addDays(15)
+        ->addHours(20)
+        ->subMinutes(2);
 
 Comparison Methods
 ==================
 
+Once you have 2 instances of Chronos date/time objects you can compare them in
+a variety of ways::
+
+    // Full suite of comparators exist
+    // ne, gt, lt, lte.
+    $first->eq($second);
+    $first->gte($second);
+
+    // See if the current object is between two others.
+    $now->between($start, $end);
+
+    // Find which argument is closest or farthest.
+    $now->closest($june, $november);
+    $now->farthest($june, $november);
+
+You can also inquire about where a given value falls on the calendar::
+
+    $now->isToday();
+    $now->isYesterday();
+    $now->isFuture();
+    $now->isPast();
+
+    // Check the day of the week
+    $now->isWeekend();
+
+    // All other weekday methods exist too.
+    $now->isMonday();
+
+You can also find out if a value was within a relative time period::
+
+    $time->wasWithinLast('3 days');
+    $time->isWithinNext('3 hours');
+
 Generating Differences
 ======================
+
+In addition to comparing datetimes, calcuating differences or deltas between to
+values is a common task::
+
+    // Get a DateInterval representing the difference
+    $first->diff($second);
+
+    // Get difference as a count of specific units.
+    $first->diffInDays($second);
+    $first->diffInWeeks($second);
+    $first->diffInYears($second);
+
+You can generate human readable differences suitable for use in a feed or
+timeline::
+
+    // Difference from now.
+    echo $date->diffForHumans();
+
+    // Difference from another point in time.
+    echo $date->diffForHumans($other);
 
 Formatting Strings
 ==================
