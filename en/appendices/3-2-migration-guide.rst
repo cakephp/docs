@@ -14,7 +14,8 @@ librarires.
 Carbon Replaced with Chronos
 ============================
 
-The Carbon library has been replaced with cakephp/chronos. This new library is
+The Carbon library has been replaced with `cakephp/chronos
+<http://api.cakephp.org/chronos/1.0/>`__. This new library is
 a fork of Carbon with no additional dependencies. It also offer a calendar date
 object, and immutable versions of both date and datetime objects.
 
