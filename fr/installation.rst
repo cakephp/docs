@@ -53,7 +53,9 @@ dépendance pour PHP 5.3+, comme la méthode officielle pour l'installation.
 
 Tout d'abord, vous aurez besoin de télécharger et d'installer Composer si vous
 ne l'avez pas encore fait. Si vous avez cURL installé, c'est aussi facile que de
-lancer ce qui suit::
+lancer ce qui suit:
+
+.. code-block:: bash
 
     curl -s https://getcomposer.org/installer | php
 
@@ -66,11 +68,15 @@ instructions pour l'installeur Windows de Composer se trouvent dans le
 `README <https://github.com/composer/windows-setup>`__.
 
 Maintenant que vous avez téléchargé et installé Composer, vous pouvez obtenir
-une nouvelle application CakePHP en lançant::
+une nouvelle application CakePHP en lançant:
+
+.. code-block:: bash
 
     php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
-Ou si Composer est installé globalement::
+Ou si Composer est installé globalement:
+
+.. code-block:: bash
 
     composer create-project --prefer-dist cakephp/app [app_name]
 
@@ -140,7 +146,9 @@ sous-répertoires doivent être accessible en écriture à la fois pour le serve
 web et pour l'utilisateur des lignes de commande. Sur un système UNIX, si
 votre serveur web est différent à partir de l'utilisateur en ligne de commande,
 vous pouvez lancer les commandes suivantes juste une fois dans votre projet
-pour vous assurer que les permissions sont bien configurées::
+pour vous assurer que les permissions sont bien configurées:
+
+.. code-block:: bash
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -154,7 +162,9 @@ Serveur de Développement
 Une installation "développement" est la méthode la plus rapide pour lancer
 CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour exécuter
 le serveur web PHP intégré qui va rendre votre application disponible sur
-**http://host:port**. A partir du répertoire de l'app, lancez::
+**http://host:port**. A partir du répertoire de l'app, lancez:
+
+.. code-block:: bash
 
     bin/cake server
 
@@ -163,7 +173,9 @@ sur **http://localhost:8765/**.
 
 Si vous avez quelque chose qui rentre en conflit avec **localhost** ou le
 port 8765, vous pouvez dire à la console CakePHP de lancer le serveur web
-sur un hôte spécifique et/ou un port utilisant les arguments suivants::
+sur un hôte spécifique et/ou un port utilisant les arguments suivants:
+
+.. code-block:: bash
 
     bin/cake server -H 192.168.13.37 -p 5673
 
@@ -219,7 +231,9 @@ votre système de fichiers::
         README.md
 
 Les développeurs utilisant Apache devront définir la directive
-``DocumentRoot`` pour le domaine à::
+``DocumentRoot`` pour le domaine à:
+
+.. code-block:: apacheconf
 
     DocumentRoot /cake_install/webroot
 
@@ -262,7 +276,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que
    AllowOverride est défini à All pour le bon DocumentRoot. Vous devriez voir
-   quelque chose comme::
+   quelque chose comme:
+
+   .. code-block:: apacheconf
 
        # Chaque répertoire auquel Apache a accès peut être configuré avec
        # respect pour lesquels les services et les fonctionnalités sont
@@ -279,7 +295,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </Directory>
 
 #. Assurez-vous que vous avez chargé correctement mod\_rewrite. Vous devriez
-   voir quelque chose comme::
+   voir quelque chose comme:
+
+   .. code-block:: apacheconf
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
@@ -301,7 +319,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    en vérifiant les fichiers .htaccess.
 
    Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de
-   votre application avec Bake)::
+   votre application avec Bake):
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -310,7 +330,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </IfModule>
 
    Le répertoire webroot de CakePHP (sera copié dans le webroot de votre
-   application avec Bake)::
+   application avec Bake):
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -323,7 +345,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    êtes sur Ubuntu, modifiez le fichier **/etc/apache2/sites-available/default**
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
    que ``AllowOverride None`` a été changé en ``AllowOverride All``, donc vous
-   devez avoir::
+   devez avoir:
+
+   .. code-block:: apacheconf
 
        <Directory />
            Options FollowSymLinks
@@ -349,7 +373,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    utilise (.htaccess, webroot/.htaccess).
 
    Ceci peut être ajouté dans la même section que la directive RewriteEngine,
-   donc par exemple, votre fichier .htaccess dans webroot ressemblerait à ceci::
+   donc par exemple, votre fichier .htaccess dans webroot ressemblerait à ceci:
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -365,7 +391,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. (Optionnel) Pour améliorer la configuration de production, vous devriez
    empêcher les assets invalides d'être parsés par CakePHP. Modifiez votre
-   webroot .htaccess pour quelque chose comme::
+   webroot .htaccess pour quelque chose comme:
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -380,7 +408,9 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
    web.
 
    De plus, vous pouvez créer une page HTML 404 correspondante, ou utiliser la
-   page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument``::
+   page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument``:
+
+   .. code-block:: apacheconf
 
        ErrorDocument 404 /404-not-found
 
@@ -392,7 +422,9 @@ donc nécessaire de créer les URLs réécrites disponibles dans la configuratio
 du site. Ceci se fait habituellement dans
 ``/etc/nginx/sites-available/your_virtual_host_conf_file``. Selon votre
 configuration, vous devrez modifier cela, mais à tout le moins, vous aurez
-besoin de PHP fonctionnant comme une instance FastCGI::
+besoin de PHP fonctionnant comme une instance FastCGI:
+
+.. code-block:: nginx
 
     server {
         listen   80;
@@ -431,7 +463,9 @@ différente de toute façon
 essayer ce qui suit (vous remarquerez que ceci n'est que pour un unique block
 {} de serveur, plutôt que deux, si bien que si vous voulez que example.com
 accède à votre application CakePHP en plus de www.example.com, consultez le
-lien nginx ci-dessus)::
+lien nginx ci-dessus):
+
+.. code-block:: nginx
 
     server {
         listen   80;
@@ -474,7 +508,9 @@ faire, suivez ces étapes:
    `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Créez un nouveau fichier dans votre dossier CakePHP, appelé web.config.
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
-   dans votre nouveau fichier web.config::
+   dans votre nouveau fichier web.config:
+
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>

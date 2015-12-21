@@ -17,7 +17,7 @@ Example::
     $this->loadComponent('Acl.Acl');
     $this->addHelper('Flash')
 
-This will result in the ``Toolbar`` property and ``Flash`` helper being loaded.
+This will result in the ``Acl`` property and ``Flash`` helper being loaded.
 Configuration can also be set on-the-fly. Example::
 
     $this->loadComponent('Cookie', ['name' => 'sweet']);

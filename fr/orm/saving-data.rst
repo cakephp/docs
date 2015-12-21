@@ -223,6 +223,17 @@ de validation utilisé par association::
         ]
     ]);
 
+Le diagramme suivant donne un aperçu de ce qui se passe à l'intérieur
+de la méthode ``newEntity()`` ou ``patchEntity()``:
+
+.. figure:: /_static/img/validation-cycle.png
+   :align: left
+   :alt: Logigramme montrant le process de conversion en entity/validation.
+
+Vous récupérerez toujours une entity en retour de ``newEntity()``. Si la
+validation échoue, votre entité contiendra des erreurs et tous les champs
+invalides seront absents de l'entity créée.
+
 Convertir des Données BelongsToMany
 -----------------------------------
 
@@ -747,6 +758,13 @@ Quand une entity est sauvegardée, voici ce qui se passe:
 8. Les associations Enfant sont sauvegardées. Par exemple, toute association
    hasMany, hasOne, ou belongsToMany listée sera sauvegardée.
 9. L'event ``Model.afterSave`` sera dispatché.
+10. L'event ``Model.afterSaveCommit`` sera dispatché.
+
+Le diagramme suivant illustre le procédé ci-dessus:
+
+.. figure:: /_static/img/save-cycle.png
+   :align: left
+   :alt: Logigramme montrant le procédé de sauvegarde.
 
 Consultez la section :ref:`application-rules` pour plus d'informations sur la
 création et l'utilisation des règles.

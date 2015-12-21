@@ -172,7 +172,7 @@ created and after the table's ``buildRules()`` method has been called.
 beforeRules
 --------------
 
-.. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
+.. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
 
 The ``Model.beforeRules`` event is fired before an entity has had rules applied. By
 stopping this event, you can halt the rules checking and set the result
@@ -181,7 +181,7 @@ of applying rules.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, ArrayObject $options, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)
 
 The ``Model.afterRules`` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
@@ -190,7 +190,7 @@ operation.
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
@@ -199,14 +199,14 @@ of the event will be returned.
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterSave`` event is fired after an entity is saved.
 
 afterSaveCommit
 ---------------
 
-.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterSaveCommit`` event is fired after the transaction in which the
 save operation is wrapped has been committed. It's also triggered for non atomic
@@ -217,7 +217,7 @@ not triggered if a transaction is started before calling save.
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation.
@@ -225,14 +225,14 @@ stopping this event you will abort the delete operation.
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterDelete`` event is fired after an entity has been deleted.
 
 afterDeleteCommit
 -----------------
 
-.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
 The ``Model.afterDeleteCommit`` event is fired after the transaction in which the
 delete operation is wrapped has been is committed. It's also triggered for non
