@@ -196,7 +196,37 @@ timeline::
 Formatting Strings
 ==================
 
+Chronos provides a number of methods for displaying our outputting datetime
+objects::
+
+    // Uses the format controlled by setToStringFormat()
+    echo $date;
+
+    // Different standard formats
+    echo $date->toAtomString();
+    echo $date->toCookieString();
+    echo $date->toIso8601String();
+    echo $date->toRfc822String();
+    echo $date->toRfc850String();
+    echo $date->toRfc1036String();
+    echo $date->toRfc1123String();
+    echo $date->toRfc2822String();
+
+    // Get the quarter
+    echo $date->toQuarter();
 
 Testing Aids
 ============
+
+When writing unit tests, it is helpful to fixate the current time. Chronos lets
+you fix the current time for each class. As part of your test suite's bootstrap
+process you can include the following::
+
+    Chronos::setTestNow(Chronos::now());
+    MutableDateTime::setTestNow(MutableDateTime::now());
+    Date::setTestNow(Date::now());
+    MutableDate::setTestNow(MutableDate::now());
+
+This will fix the current time of all objects to be the point at which the test
+suite started.
 
