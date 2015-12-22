@@ -6,7 +6,7 @@ object. In addition to convenience methods, chronos provides:
 
 * ``Date`` objects for representing calendar dates.
 * Immutable date and datetime objects.
-* An pluggable translation system. Only english translations are included in the
+* A pluggable translation system. Only english translations are included in the
   library. However, ``cakephp/i18n`` can be used for full language support.
 
 Installation
@@ -71,8 +71,8 @@ objects. Immutable objects create copies of objects each time an object is
 modified. Because modifier methods around datetimes are not always transparent,
 data can be modified accidentally or without the developer knowing.
 Immutable objects prevent accidental changes to
-data, and make code free of order based dependency issues. Immutablility
-does mean tha you will need toremember to replace variables when using
+data, and make code free of order based dependency issues. Immutability
+does mean that you will need to remember to replace variables when using
 modifiers::
 
     // This code doesn't work with immutable objects
@@ -173,8 +173,8 @@ You can also find out if a value was within a relative time period::
 Generating Differences
 ======================
 
-In addition to comparing datetimes, calcuating differences or deltas between to
-values is a common task::
+In addition to comparing datetimes, calculating differences or deltas between
+to values is a common task::
 
     // Get a DateInterval representing the difference
     $first->diff($second);
