@@ -4,14 +4,13 @@ Annexes
 Les annexes contiennent des informations sur les nouvelles fonctionnalités
 introduites dans chaque version et le chemin de migration entre les versions.
 
-3.0 Guide de Migration
+3.2 Guide de Migration
 ======================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-0-migration-guide
-    appendices/orm-migration
+    appendices/3-2-migration-guide
 
 3.1 Guide de Migration
 ======================
@@ -20,6 +19,15 @@ introduites dans chaque version et le chemin de migration entre les versions.
     :maxdepth: 1
 
     appendices/3-1-migration-guide
+
+3.0 Guide de Migration
+======================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/3-0-migration-guide
+    appendices/orm-migration
 
 Informations générales
 ======================

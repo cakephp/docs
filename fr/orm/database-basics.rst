@@ -352,13 +352,15 @@ boolean
 binary
     Correspond au type BLOB ou BYTEA fourni par la base de données.
 date
-    Correspond au type de colonne DATE sans timezone.
+    Correspond au type de colonne DATE sans timezone. La valeur de retour de ce
+    type de colonne est :php:class:`Cake\\I18n\\Date` qui étend la classe
+    native ``DateTime``.
 datetime
     Correspond au type de colonne DATETIME sans timezone. Dans PostgreSQL et
     SQL Server, ceci retourne un type TIMESTAMP. La valeur retournée par défaut
     de ce type de colonne est :php:class:`Cake\\I18n\\Time` qui étend
     les classes intégrées ``DateTime`` et
-    `Carbon <https://github.com/briannesbitt/Carbon>`_.
+    `Chronos <https://github.com/cakephp/chronos>`_.
 timestamp
     Correspond au type TIMESTAMP.
 time
@@ -462,11 +464,31 @@ votre Table::
 
         protected function _initializeSchema(Schema $schema)
         {
+
             $schema->columnType('widget_prefs', 'json');
             return $schema;
         }
 
     }
+
+.. _immutable-datetime-mapping:
+
+Activer les Objets DateTime Immutables
+--------------------------------------
+
+.. versionadded:: 3.2
+    les objets date/heure immutables ont été ajoutés en 3.2.
+
+Puisque les objets Date/Time sont facilement mutables en place, CakePHP vous
+permet d'activer les objets immutables. le meilleur endroit pour cela est le 
+fichier **config/bootstrap.php** ::
+
+    Type::build('datetime')->useImmutable();
+    Type::build('date')->useImmutable();
+    Type::build('time')->useImmutable();
+
+.. note::
+    Les nouvelles applications auront les objets immutables activés par défaut.
 
 Les Classes de Connection
 =========================

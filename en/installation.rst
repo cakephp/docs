@@ -12,7 +12,7 @@ Requirements
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
-- PHP 5.4.16 or greater.
+- PHP 5.5.8 or greater.
 - mbstring extension
 - intl extension
 
@@ -86,7 +86,7 @@ installed via Composer. Be sure to keep the composer.json and composer.lock
 files with the rest of your source code.
 
 You can now visit the path to where you installed your CakePHP application and
-see the setup traffic lights.
+see the default home page. To change the content of this page, edit: **src/Template/Pages/home.ctp**.
 
 Although composer is the recommended installation method, there are
 pre-installed downloads available on

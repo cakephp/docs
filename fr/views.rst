@@ -259,11 +259,19 @@ Vous pouvez aussi ajouter dans un block en utilisant ``append()``::
     // Le même que ci-dessus.
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
-``assign()`` peut être utilisée pour nettoyer ou écraser un block en tout
-temps::
+Si vous devez nettoyer ou écraser un block, vous avez plusieurs alternatives.
+La méthode ``reset()`` va nettoyer ou écraser un block à n'importe quel moment.
+La méthode ``assign()`` avec une chaîne de caractères vide peut également être
+utilisée.::
 
     // Nettoyer le contenu précédent du block de sidebar
+    $this->reset('sidebar');
+
+    // Assigner une chaine vide aura le même effet.
     $this->assign('sidebar', '');
+
+.. versionadded:: 3.2
+    View::reset() a été ajoutée dans 3.2
 
 Assigner le contenu d'un block est souvent utile lorsque vous voulez convertir
 une variable de vue en un block. Par exemple, vous pourriez vouloir utiliser
