@@ -249,7 +249,7 @@ when you need to sort on complex expressions::
 
     // As of 3.0.12 orderAsc & orderDesc are available.
     $query = $articles->find();
-    $concat = $query->newExpr()->func()->concat([
+    $concat = $query->func()->concat([
         'title' => 'literal',
         'synopsis' => 'literal'
     ]);
