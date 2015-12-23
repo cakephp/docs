@@ -8,8 +8,24 @@ Minimum PHP 5.5 Required
 ========================
 
 CakePHP 3.2 requires at least PHP 5.5.8. By adopting PHP 5.5 we can provide better
-Date and Time libraries and remove dependencies on password compatiblity
-librarires.
+Date and Time libraries and remove dependencies on password compatibility
+libraries.
+
+Disabling Deprecation Warnings
+==============================
+
+Upon upgrading you may encounter several deprecation warnings. These warnings
+are emitted by methods, options and functionality that will be removed in
+CakePHP 4.x, but will continue to exist throughout the lifetime of 3.x. While we
+recommend addressing deprecation issues as they are encountered, that is not
+always possible. If you'd like to defer fixing deprecation notices, you can
+disable them in your **config/app.php**::
+
+    'Error' => [
+        'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
+    ]
+
+The above error level will suppress deprecation warnings from CakePHP.
 
 Carbon Replaced with Chronos
 ============================
@@ -60,7 +76,14 @@ a new ``CorsBuilder`` has been added. This class lets you define CORS related
 headers with a fluent interface. See :ref:`cors-headers` for more information.
 
 ORM
----
+===
 
 * Containing the same association multiple times now works as expected, and the
   query builder functions are now stacked.
+
+
+Shell
+=====
+
+* ``Shell::info()``, ``Shell::warn()`` and ``Shell::success()`` were added.
+  These helper methods make using commonly used styling simpler.
