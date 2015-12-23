@@ -15,10 +15,10 @@ librairies de compatibilité pour les mots de passe.
 Carbon Remplacé par Chronos
 ===========================
 
-La librairie Carbon a été remplacée par cakephp/chronos. Cette nouvelle
-librairie est un fork de Carbon sans aucune dépendance additionnelle. Elle
-offre également un objet date calendaire, et une version immutable des objets
-date et datime.
+La librairie Carbon a été remplacée par :doc:`cakephp/chronos </chronos>`. Cette
+nouvelle librairie est un fork de Carbon sans aucune dépendance additionnelle.
+Elle offre également un objet date calendaire, et une version immutable des
+objets date et datime.
 
 Helpers
 =======
@@ -52,7 +52,7 @@ Dans le code ci-dessus, ``$time`` et ``$newTime`` sont des objets différents.
 L'objet ``$time`` garde sa valeur originale alors que ``$newTime`` contient la
 valeur modifiée. Pour plus d'informations, référez-vous à la section sur les
 :ref:`Temps Immutables <immutable-time>`. A partir de 3.2, l'ORM peut mapper les
-colonnes date/datetime vers des objets immutables. Regardez la section 
+colonnes date/datetime vers des objets immutables. Regardez la section
 :ref:`immutable-datetime-mapping` pour plus d'informations.
 
 CorsBuilder Ajouté
