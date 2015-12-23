@@ -91,6 +91,10 @@ App.fullBaseUrl
     $_SERVER. Cependant, vous devriez la définir manuellement pour optimiser
     la performance ou si vous êtes inquiets sur le fait que des gens puissent
     manipuler le header ``Host``.
+    Dans un contexte de CLI (à partir des shells), `fullBaseUrl` ne peut pas
+    être lu dans $_SERVER, puisqu'il n'y a aucun serveur web impliqué. Vous
+    devez le spécifier vous-même is vous avez besoin de générer des URLs à
+    partir d'un shell (par exemple pour envoyer des emails).
 App.imageBaseUrl
     Le chemin Web vers le répertoire public des images dans webroot. Si vous
     utilisez un :term:`CDN`, vous devez définir cette valeur vers la
