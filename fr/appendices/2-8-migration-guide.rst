@@ -27,6 +27,11 @@ CakeTime
   dernier argument. Les valeurs valides pour l'argument ``$options`` sont:
   ``group``, ``abbr``, ``before``, and ``after``.
 
+Shell Helpers Ajoutés
+=====================
+
+Les applications de Console peuvent maintenant être des classes de helper qui encapsulent des blocks réutilisables de logique pour l'affichage. Consultez la section :doc:`/console-and-shells/helpers` pour plus d'informations.
+
 I18nShell
 =========
 
