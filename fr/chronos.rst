@@ -1,11 +1,11 @@
 Chronos
 =======
 
-Chronos fournit une collection d'extensions sans aucune extension pour l'objet
-``DateTime``. En plus des méthodes pratiques, chronos fournit:
+Chronos fournit une collection d'extensions sans aucune dépendance pour l'objet
+``DateTime``. En plus de méthodes pratiques, chronos fournit:
 
-* Les objets ``Date`` pour représenter les dates du calendrier.
-* Les objets pour les dates immutables et les datetimes.
+* Des objets ``Date`` pour représenter les dates du calendrier.
+* Des objets immutables pour les dates et les datetimes.
 * Un système de traduction intégrable. Seules les traductions anglaises sont
   inclues dans la librairie. Cependant, ``cakephp/i18n`` peut être utilisé
   pour un support complet d'autres langues.
@@ -24,7 +24,7 @@ Vue d'Ensemble
 
 Chronos fournit un certain nombre d'extensions pour les objets DateTime fournis
 par PHP. Chronos fournit 5 classes qui gèrent les variantes mutables et
-immutables de date/time et les extensions pour ``DateInterval``.
+immutables de date/time et les extensions de ``DateInterval``.
 
 * ``Cake\Chronos\Chronos`` est un objet de *date et time* immutable.
 * ``Cake\Chronos\Date`` est un objet de *date* immutable.
@@ -61,22 +61,22 @@ ayant des arguments différents::
     $date = Chronos::createFromDate(2015, 12, 25);
     $date = Chronos::createFromTime(11, 45, 10);
 
-    // Parse les valeurs formatés.
+    // Parse les valeurs formatées.
     $date = Chronos::createFromFormat('m/d/Y', '06/15/2015');
 
-Travaille avec les Objets Immutables
-====================================
+Travailler avec les Objets Immutables
+=====================================
 
 Si vous avez utilisé les objets ``DateTime`` de PHP, vous êtes à l'aise avec
-les objets *mutable*. Chronos offre des objets mutables, mais elle fournit aussi
-des objets *immutables*. Les objets Immutables créent des copies des objets à
-chaque fois qu'un objet est modifié. Puisque les méthodes de modification
-autour des datetimes ne sont pas toujours transparentes, les données peuvent
-être modifiées accidentellemnt ou sans que le développeur ne le sache. Les
-objets immutables évitent les changements accidentels des données et
-make code free of order based dependency issues. L'immutabilité signifie que
-vous devez vous souvenir de remplacer les variables quand vous utilisez les
-modificateurs::
+les objets *mutable*. Chronos offre des objets mutables, mais elle fournit
+également des objets *immutables*. Les objets Immutables créent des copies des
+objets à chaque fois qu'un objet est modifié. Puisque les méthodes de
+modification autour des datetimes ne sont pas toujours transparentes, les
+données peuvent être modifiées accidentellement ou sans que le développeur ne
+le sache. Les objets immutables évitent les changements accidentels des
+données et permettent de s'affranchir de tout problème lié à l'ordre d'appel
+des fonctions ou des dépendances. L'immutabilité signifie que vous devez vous
+souvenir de remplacer les variables quand vous utilisez les modificateurs::
 
     // Ce code ne fonctionne pas avec les objets immutables
     $time->addDay(1);
@@ -88,9 +88,9 @@ modificateurs::
     $time = doSomething($time);
     return $time
 
-Capturer la valeur de retour pour chaque modification de votre code fonctionnera
-comme souhaité. Si vous avez déjà créé un objet immutable, et que vous souhaitez
-un objet mutable, vous pouvez utiliser ``toMutable()``::
+En capturant la valeur de retour pour chaque modification, votre code
+fonctionnera comme souhaité. Si vous avez déjà créé un objet immutable, et que
+vous souhaitez un objet mutable, vous pouvez utiliser ``toMutable()``::
 
     $inplace = $time->toMutable();
 
@@ -98,10 +98,10 @@ Objets Date
 ===========
 
 PHP fournit seulement un unique objet DateTime. Représenter les dates de
-calendrier peut être un peu génant avec cette classe puisqu'elle inclut les
+calendrier peut être un peu gênant avec cette classe puisqu'elle inclut les
 timezones, et les composants de time qui n'appartiennent pas vraiment
 dans le concept d'un 'jour'. Chronos fournit un objet ``Date`` qui vous permet
-de représenter les dates. Ces time et timezone pour ces objets sont toujours
+de représenter les dates. Les time et timezone pour ces objets sont toujours
 fixés à ``00:00:00 UTC`` et toutes les méthodes de formatage/différence
 fonctionnent au niveau du jour::
 
@@ -141,7 +141,7 @@ Vous pouvez aussi modifier les parties de la date de façon relative::
 Méthodes de Comparaison
 =======================
 
-Une fois que vous avez 2 instances des objets date/time de Chronos, vous pouvez
+Une fois que vous avez 2 instances d'objets date/time de Chronos, vous pouvez
 les comparer de plusieurs façons::
 
     // Suite complète de comparateurs existante
@@ -152,7 +152,7 @@ les comparer de plusieurs façons::
     // Regardez si l'objet courant est entre deux autres.
     $now->between($start, $end);
 
-    // Trouver l'arguement le plus proche ou le plus éloigné.
+    // Trouver l'argument le plus proche ou le plus éloigné.
     $now->closest($june, $november);
     $now->farthest($june, $november);
 
@@ -199,12 +199,12 @@ l'utilisation d'un feed ou d'une timeline::
     echo $date->diffForHumans($other);
 
 Formater les Chaînes
-===================
+====================
 
 Chronos fournit un certain nombre de méthodes pour afficher nos sorties d'objets
 datetime::
 
-    // Utilise le format controllé par setToStringFormat()
+    // Utilise le format contrôlé par setToStringFormat()
     echo $date;
 
     // Différents formats standards
@@ -217,11 +217,11 @@ datetime::
     echo $date->toRfc1123String();
     echo $date->toRfc2822String();
 
-    // Récupère le quarter
+    // Récupère le trimestre
     echo $date->toQuarter();
 
-Testing Aids
-============
+Aides au Tests
+==============
 
 Quand vous écrivez des tests unitaires, il peut être utile de fixer le time
 courant. Chronos vous permet de fixer le time courant pour chaque classe.
@@ -234,4 +234,4 @@ vous pouvez inclure ce qui suit::
     MutableDate::setTestNow(MutableDate::now());
 
 Ceci va fixer le time courant de tous les objets selon le moment où la suite de
-tests a demarré.
+tests a démarré.
