@@ -8,7 +8,7 @@ Chronos fournit une collection d'extensions sans aucune extension pour l'objet
 * Les objets pour les dates immutables et les datetimes.
 * Un système de traduction intégrable. Seules les traductions anglaises sont
   inclues dans la librairie. Cependant, ``cakephp/i18n`` peut être utilisé
-  pour un support complet des langues.
+  pour un support complet d'autres langues.
 
 Installation
 ============
@@ -33,7 +33,7 @@ immutables de date/time et les extensions pour ``DateInterval``.
 * ``Cake\Chronos\ChronosInterval`` est une extension pour l'objet
   ``DateInterval``.
 
-Enfin si vous voulez typehint avec les objets date/time fournis par chronos,
+Enfin si vous voulez typer selon les objets date/time fournis par chronos,
 vous devez utiliser ``Cake\Chronos\ChronosInterface``. Tous les objets date et
 time implémentent cette interface.
 
@@ -75,7 +75,7 @@ autour des datetimes ne sont pas toujours transparentes, les données peuvent
 être modifiées accidentellemnt ou sans que le développeur ne le sache. Les
 objets immutables évitent les changements accidentels des données et
 make code free of order based dependency issues. L'immutabilité signifie que
-vous devez vous souvenir de remplacer les  variables quand vous utilisez les
+vous devez vous souvenir de remplacer les variables quand vous utilisez les
 modificateurs::
 
     // Ce code ne fonctionne pas avec les objets immutables
@@ -88,9 +88,9 @@ modificateurs::
     $time = doSomething($time);
     return $time
 
-En capturant la valeur de retour pour chaque modification de votre code
-fonctionnera comme souhaité. Si vous avez déjà eu un objet immutable, et que
-vous souhaitez un objet mutable, vous pouvez utiliser ``toMutable()``::
+Capturer la valeur de retour pour chaque modification de votre code fonctionnera
+comme souhaité. Si vous avez déjà créé un objet immutable, et que vous souhaitez
+un objet mutable, vous pouvez utiliser ``toMutable()``::
 
     $inplace = $time->toMutable();
 
@@ -189,7 +189,7 @@ des valeurs est une tâche courante::
     $first->diffInWeeks($second);
     $first->diffInYears($second);
 
-Vous pouvez générer des différences lisibles qui vous peuvent servir pour
+Vous pouvez générer des différences lisibles qui peuvent vous servir pour
 l'utilisation d'un feed ou d'une timeline::
 
     // Différence à partir de maintenant.
@@ -234,4 +234,4 @@ vous pouvez inclure ce qui suit::
     MutableDate::setTestNow(MutableDate::now());
 
 Ceci va fixer le time courant de tous les objets selon le moment où la suite de
-tests à demarré.
+tests a demarré.
