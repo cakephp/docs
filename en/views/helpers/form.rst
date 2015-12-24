@@ -133,10 +133,10 @@ proper REST support in web browsers.
 Setting a URL for the Form
 ------------------------------------------
 
-Using the ``url`` option allows you to point the form to a
-specific action in your current controller or in your complete application.
-For example, if you'd like to point the form to the login() action of the current controller, you would
-supply an $options array like the following::
+Using the ``url`` option allows you to point the form to a specific action in
+your current controller or another controller in your application.  For example,
+if you'd like to point the form to the ``login()`` action of the current
+controller, you would supply an $options array like the following::
 
     echo $this->Form->create($article, ['url' => ['action' => 'login']]);
 
@@ -147,8 +147,8 @@ Output:
     <form method="post" action="/users/login">
 
 If the desired form action isn't in the current controller, you can specify
-a complete URL for the form action. The
-supplied URL can be relative to your CakePHP application::
+a complete URL for the form action. The supplied URL can be relative to your
+CakePHP application::
 
     echo $this->Form->create(null, [
         'url' => ['controller' => 'Articles', 'action' => 'publish']
@@ -173,7 +173,7 @@ Output:
 
     <form method="get" action="http://www.google.com/search">
 
-Use ``'url' => false`` if you don't want to output any URL as form action.
+Use ``'url' => false`` if you don't want to output a URL as the form action.
 
 Using Custom Validators
 -----------------------

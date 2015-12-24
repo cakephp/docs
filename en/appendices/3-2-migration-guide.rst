@@ -89,11 +89,11 @@ View
 Helpers
 -------
 
-Helpers can now have an ``initialize(array $config)`` hook method like other
+Helpers can now implement an ``initialize(array $config)`` hook method like other
 class types.
 
 FormHelper
 ----------
 
-The ``action`` key for ``FormHelper::create()`` has been deprecated. You should be using
+The ``action`` key for ``FormHelper::create()`` has been deprecated. You should be use
 the ``url`` key directly.
