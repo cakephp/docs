@@ -35,12 +35,6 @@ new library is a fork of Carbon with no additional dependencies. It also offer
 a calendar date object, and immutable versions of both date and datetime
 objects.
 
-Helpers
-=======
-
-Helpers can now have an ``initialize(array $config)`` hook method like other
-class types.
-
 New Date Object
 ===============
 
@@ -87,3 +81,19 @@ Shell
 
 * ``Shell::info()``, ``Shell::warn()`` and ``Shell::success()`` were added.
   These helper methods make using commonly used styling simpler.
+
+
+View
+====
+
+Helpers
+-------
+
+Helpers can now have an ``initialize(array $config)`` hook method like other
+class types.
+
+FormHelper
+----------
+
+The ``action`` key for ``FormHelper::create()`` has been deprecated. You should be using
+the ``url`` key directly.
