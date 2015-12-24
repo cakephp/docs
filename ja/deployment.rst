@@ -14,6 +14,9 @@
 
 .. _symlink-assets:
 
+Improve Your Application's Performance
+======================================
+
 .. meta::
     :title lang=ja: デプロイ
     :keywords lang=ja: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
