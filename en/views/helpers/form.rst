@@ -173,6 +173,8 @@ Output:
 
     <form method="get" action="http://www.google.com/search">
 
+Use ``'url' => false`` if you don't want to output any URL as form action.
+
 Using Custom Validators
 -----------------------
 
