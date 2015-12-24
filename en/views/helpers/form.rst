@@ -130,15 +130,15 @@ to a 'post' form, but when submitted, the HTTP request method will be overridden
 with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows CakePHP to emulate
 proper REST support in web browsers.
 
-Setting the Controller Action for the Form
+Setting a URL for the Form
 ------------------------------------------
 
-Using the ``action`` option allows  you to point the form to a
-specific action in your current controller. For example, if you'd like to
-point the form to the login() action of the current controller, you would
+Using the ``url`` option allows you to point the form to a
+specific action in your current controller or in your complete application.
+For example, if you'd like to point the form to the login() action of the current controller, you would
 supply an $options array like the following::
 
-    echo $this->Form->create($article, ['action' => 'login']);
+    echo $this->Form->create($article, ['url' => ['action' => 'login']]);
 
 Output:
 
@@ -146,11 +146,8 @@ Output:
 
     <form method="post" action="/users/login">
 
-Setting a URL for the Form
---------------------------
-
 If the desired form action isn't in the current controller, you can specify
-a URL for the form action using the 'url' key of the $options array. The
+a complete URL for the form action. The
 supplied URL can be relative to your CakePHP application::
 
     echo $this->Form->create(null, [
@@ -970,7 +967,7 @@ Defaults to ``true``::
             <option value="Value 3">Label 3</option>
         </optgroup>
     </select>
-    
+
 To generate attributes within an option tag::
 
     $options = [
@@ -979,7 +976,7 @@ To generate attributes within an option tag::
         [ 'text' => 'Description 3', 'value' => 'value 3', 'other_attr_name' => 'other_attr_value' ],
     ];
     echo $this->Form->select('field', $options);
-    
+
 Output:
 
 .. code-block:: html
