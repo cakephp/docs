@@ -310,7 +310,7 @@ tables use which connections. This is the ``defaultConnectionName()`` method::
     class ArticlesTable extends Table
     {
         public static function defaultConnectionName() {
-            return 'slavedb';
+            return 'replica_db';
         }
     }
 

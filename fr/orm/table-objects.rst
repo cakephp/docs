@@ -334,7 +334,7 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
     class ArticlesTable extends Table
     {
         public static function defaultConnectionName() {
-            return 'slavedb';
+            return 'replica_db';
         }
     }
 
