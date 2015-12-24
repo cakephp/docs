@@ -220,8 +220,8 @@ datetime::
     // Récupère le trimestre
     echo $date->toQuarter();
 
-Aides au Tests
-==============
+Aides aux Tests
+===============
 
 Quand vous écrivez des tests unitaires, il peut être utile de fixer le time
 courant. Chronos vous permet de fixer le time courant pour chaque classe.
