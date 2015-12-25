@@ -11,6 +11,9 @@
 ..
   If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
   use the ``Number`` class::
+..
+                // Notify users of quota
+                $this->Flash->success(__('You are using {0} storage', Number::toReadableSize($storageUsed)));
 
 あなたが ``View`` の外で :php:class:`NumberHelper` 機能が必要な場合、
 ``Number`` クラスを次のように使います::
@@ -32,8 +35,8 @@
         {
             $storageUsed = $this->Auth->user('storage_used');
             if ($storageUsed > 5000000) {
-                // Notify users of quota
-                $this->Flash->success(__('You are using {0} storage', Number::toReadableSize($storageUsed)));
+                //  割り当てられたusersに通知
+                $this->Flash->success(__('あなたは {0} ストレージを使用しています', Number::toReadableSize($storageUsed)));
             }
         }
     }
@@ -57,14 +60,17 @@
 ..
   This method is used to display a number in common currency formats
   (EUR, GBP, USD). Usage in a view looks like::
+..
+    // Called as NumberHelper
+    // Called as Number
 
 このメソッドは、共通通貨フォーマット（ユーロ、英ポンド、米ドル）で数値を表示するために使用されます。
 ビュー内で次のように使います::
 
-    // Called as NumberHelper
+    // NumberHelperとしてコール
     echo $this->Number->currency($value, $currency);
 
-    // Called as Number
+    // Numberとしてコール
     echo Number::currency($value, $currency);
 
 ..
@@ -72,20 +78,11 @@
   that represents the amount of money you are expressing. The second
   parameter is a string used to choose a predefined currency formatting
   scheme:
+..
+  | $currency           | 1234.56, formatted by currency type                |
 
 一番目のパラメータ、 ``$value`` は、合計金額をあらわす浮動小数点数でなければいけません。
 二番目のパラメータは、事前定義された通貨フォーマット方式を選択するための文字列です:
-
-..
-  +---------------------+----------------------------------------------------+
-  | $currency           | 1234.56, formatted by currency type                |
-  +=====================+====================================================+
-  | EUR                 | €1.234,56                                          |
-  +---------------------+----------------------------------------------------+
-  | GBP                 | £1,234.56                                          |
-  +---------------------+----------------------------------------------------+
-  | USD                 | $1,234.56                                          |
-  +---------------------+----------------------------------------------------+
 
 +---------------------+----------------------------------------------------+
 | $currency           | 通貨の種類によってフォーマットされた 1234.56       |
@@ -203,13 +200,8 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
   level of precision defined. ::
 ..
     // Called as NumberHelper
-    echo $this->Number->precision(456.91873645, 2);
-..
     // Outputs
-    456.92
-..
     // Called as Number
-    echo Number::precision(456.91873645, 2);
 
 このメソッドは指定された精度(小数点以下)で数値を表示します。
 定義された精度のレベルを維持するために丸めます。 ::
@@ -253,15 +245,8 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
   and appends the output with a percent sign. ::
 ..
     // Called as NumberHelper. Output: 45.69%
-    echo $this->Number->toPercentage(45.691873645);
-..
     // Called as Number. Output: 45.69%
-    echo Number::toPercentage(45.691873645);
-..
     // Called with multiply. Output: 45.7%
-    echo Number::toPercentage(0.45691, 1, [
-        'multiply' => true
-    ]);
 
 このメソッドは :php:meth:`Cake\\I18n\\Number::precision()` のように、
 与えられた精度に応じて(精度を満たすように丸めて)数値をフォーマットします。
@@ -278,31 +263,44 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
         'multiply' => true
     ]);
 
+..
+  Interacting with Human Readable Values
 
-Interacting with Human Readable Values
-======================================
+人が読める形式の値との相互作用
+==============================
 
 .. php:method:: toReadableSize(string $size)
 
+..
 This method formats data sizes in human readable forms. It provides
 a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
 displayed with a two-digit precision level, according to the size
 of data supplied (i.e. higher sizes are expressed in larger
 terms)::
-
+..
     // Called as NumberHelper
+    // Called as Number
+
+このメソッドはデータサイズを人が読める形式にフォーマットします。
+これは、バイト数をKB、MB、GB、およびTBへ変換するための近道を提供します。
+サイズは、データのサイズに応じて小数点以下二桁の精度で表示されます。(例 大きいサイズの表現)::
+
+    // NumberHelperとしてコール
     echo $this->Number->toReadableSize(0); // 0 Byte
     echo $this->Number->toReadableSize(1024); // 1 KB
     echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
     echo $this->Number->toReadableSize(5368709120); // 5 GB
 
-    // Called as Number
+    // Numberとしてコール
     echo Number::toReadableSize(0); // 0 Byte
     echo Number::toReadableSize(1024); // 1 KB
     echo Number::toReadableSize(1321205.76); // 1.26 MB
     echo Number::toReadableSize(5368709120); // 5 GB
 
-Formatting Numbers
+..
+  Formatting Numbers
+
+数字の整形
 ==================
 
 .. php:method:: format(mixed $value, array $options = [])
