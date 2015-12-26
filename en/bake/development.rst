@@ -80,6 +80,7 @@ you can use the following event::
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
         function (Event $event) {
+            $view = $event->subject();
             if ($view->viewVars['name'] == 'Users') {
                 // add the login and logout actions to the Users controller
                 $view->viewVars['actions'] = [
@@ -92,7 +93,8 @@ you can use the following event::
                     'delete'
                 ];
             }
-        });
+        }
+    );
 
 By scoping event listeners to specific bake templates, you can simplify your
 bake related event logic and provide callbacks that are easier to test.
