@@ -71,5 +71,5 @@ usada pelo CakePHP para fixar tabelas e dados::
 
 .. note::
 
-    É uma boa ideia usar bancos de dados diferentes para o banco de testes e para
+	É uma boa ideia usar bancos de dados diferentes para o banco de testes e para 
 	o banco de desenvolvimento. Isto evitara erros mais tarde.
