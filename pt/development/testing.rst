@@ -41,11 +41,11 @@ testes::
 .. tip::
 
     Como conveniência você pode deixar phpunit.phar disponivel globalmente em sistemas 
-	Unix ou Linux com os comandos::
+    Unix ou Linux com os comandos::
 
-      chmod +x phpunit.phar
-      sudo mv phpunit.phar /usr/local/bin/phpunit
-      phpunit --version
+		chmod +x phpunit.phar
+		sudo mv phpunit.phar /usr/local/bin/phpunit
+		phpunit --version
 
     Por favor, consulte a documentação do PHPUnit para instruções sobre
     `como instalar globalmente o PHPUnit PHAR em sistemas Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
