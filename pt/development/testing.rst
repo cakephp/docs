@@ -1,4 +1,4 @@
-Testando
+Testing
 ########
 
 O CakePHP vem com suporte interno para testes e integração para o
@@ -7,18 +7,11 @@ oferece alguns recursos adicionais para fazer testes mais facilmente. Esta seç�
 a instalação do PHPUnit, começando com testes unitários e como você pode usar as extensões
 que o CakePHP oferece.
 
-.. _integration-testing:
+Instalando o PHPUnit
+==================
 
-Controller Integration Testing
-===============================
-
-.. note::
-    A documentação não é atualmente suportada pela lingua portuguesa nesta
-    página.
-
-    Por favor, sinta-se a vontade para nos enviar um pull request no
-    `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **Improve This Doc** para propor suas mudanças diretamente.
-
-    Você pode referenciar-se à versão inglesa no menu de seleção superior
-    para obter informações sobre o tópico desta página.
+O CakePHP usa o PHPUnit como framework de teste básico. O PHPUnit é um padrão para
+testes unitários em PHP. Ele oferece um profundo e poderoso conjunto de recusos
+para você ter certeza que o seu código faz o que você acha que ele faz. O PHPUnit 
+pode ser instalado usando o `PHAR package <http://phpunit.de/#download>`__ ou `Composer
+<http://getcomposer.org>`_.
