@@ -24,7 +24,7 @@ Para instalar o PHPUnit com Composer::
     $ php composer.phar require --dev phpunit/phpunit
 
 Isto adicionará a dependência para a seção ``require-dev`` do seu ``composer.json``, 
-e depois instalará o PHPUnit com qualuer outra dependência.
+e depois instalará o PHPUnit com qualquer outra dependência.
 
 Agora você executa o PHPUnit usando::
 
@@ -41,7 +41,7 @@ testes::
 .. tip::
 
     Como conveniência você pode deixar phpunit.phar disponivel globalmente em sistemas 
-	Unix ou Linux com os comandos:
+	Unix ou Linux com os comandos::
 
       chmod +x phpunit.phar
       sudo mv phpunit.phar /usr/local/bin/phpunit
