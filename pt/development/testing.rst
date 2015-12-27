@@ -11,7 +11,42 @@ Instalando o PHPUnit
 ==================
 
 O CakePHP usa o PHPUnit como framework de teste básico. O PHPUnit é um padrão para
-testes unitários em PHP. Ele oferece um profundo e poderoso conjunto de recusos
+testes unitários em PHP. Ele oferece um profundo e poderoso conjunto de recursos
 para você ter certeza que o seu código faz o que você acha que ele faz. O PHPUnit 
 pode ser instalado usando o `PHAR package <http://phpunit.de/#download>`__ ou `Composer
 <http://getcomposer.org>`_.
+
+Instalando o PHPUnit com Composer
+-----------------------------
+
+Para instalar o PHPUnit com Composer::
+
+    $ php composer.phar require --dev phpunit/phpunit
+
+Isto adicionará a dependência para a seção ``require-dev`` do seu ``composer.json``, 
+e depois instalará o PHPUnit com qualuer outra dependência.
+
+Agora você executa o PHPUnit usando::
+
+    $ vendor/bin/phpunit
+
+Usando o arquivo PHAR 
+-------------------
+
+Depois de ter baixado o arquivo **phpunit.phar** , você pode usar ele para executar seus
+testes::
+
+    php phpunit.phar
+
+.. tip::
+
+    Como conveniência você pode deixar phpunit.phar disponivel globalmente em sistemas 
+	Unix ou Linux com os comandos:
+
+      chmod +x phpunit.phar
+      sudo mv phpunit.phar /usr/local/bin/phpunit
+      phpunit --version
+
+    Por favor, consulte a documentação do PHPUnit para instruções sobre
+    `como instalar globalmente o PHPUnit PHAR em sistemas Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
+
