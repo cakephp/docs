@@ -24,17 +24,20 @@ your application:
 * ``errorLevel`` - int - The level of errors you are interested in capturing.
   Use the built-in php error constants, and bitmasks to select the level of
   error you are interested in.
-* ``trace`` - boolean - Include stack traces for errors in log files. Stack
+* ``trace`` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for
   finding where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
   exceptions. If you choose a custom class you should place the file for that
   class in **src/Error**. This class needs to implement a ``render()`` method.
-* ``log`` - boolean - When ``true``, exceptions + their stack traces will be
+* ``log`` - bool - When ``true``, exceptions + their stack traces will be
   logged to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
   logged. This is useful to remove NotFoundExceptions or other common, but
   uninteresting logs messages.
+* ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
+  the memory limit by when a fatal error is encountered. This allows breathing
+  room to complete logging or error handling.
 
 ErrorHandler by default, displays errors when ``debug`` is ``true``, and logs
 errors when debug is ``false``. The type of errors captured in both cases is

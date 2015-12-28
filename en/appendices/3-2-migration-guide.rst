@@ -97,3 +97,10 @@ FormHelper
 
 The ``action`` key for ``FormHelper::create()`` has been deprecated. You should be use
 the ``url`` key directly.
+
+Fatal Error Memory Limit Handling
+=================================
+
+A new configuration option ``Error.extraFatalErrorMemory`` can be set to the
+number of megabytes to increase the memory limit by when a fatal error is
+encountered. This allows breathing room to complete logging or error handling.
