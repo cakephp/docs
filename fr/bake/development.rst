@@ -84,6 +84,7 @@ utiliser l'event suivant::
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
         function (Event $event) {
+            $view = $event->subject;
             if ($view->viewVars['name'] == 'Users') {
                 // ajouter les actions login et logout au controller Users
                 $view->viewVars['actions'] = [
@@ -96,7 +97,8 @@ utiliser l'event suivant::
                     'delete'
                 ];
             }
-        });
+        }
+    );
 
 En scopant les écouteurs d'event vers des templates de bake spécifiques, vous
 pouvez simplifier votre logique d'event liée à bake et fournir des callbacks
