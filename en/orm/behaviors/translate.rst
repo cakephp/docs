@@ -168,6 +168,10 @@ Reading Translated Content
 As shown above you can use the ``locale()`` method to choose the active
 translation for entities that are loaded::
 
+    // First load i18n core functions at the beginning of your Controller (only once):
+    use Cake\I18n\I18n;
+    
+    // Then you can change the language in your action:
     I18n::locale('es');
     $this->loadModel('Articles');
 
