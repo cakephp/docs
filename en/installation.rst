@@ -53,7 +53,9 @@ for PHP 5.3+, as the officially supported method for installation.
 
 First, you'll need to download and install Composer if you haven't
 done so already. If you have cURL installed, it's as easy as running the
-following::
+following:
+
+.. code-block:: bash
 
     curl -s https://getcomposer.org/installer | php
 
@@ -66,11 +68,15 @@ instructions for Composer's Windows installer can be found within the README
 `here <https://github.com/composer/windows-setup>`__.
 
 Now that you've downloaded and installed Composer, you can get a new CakePHP
-application by running::
+application by running:
+
+.. code-block:: bash
 
     php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
-Or if Composer is installed globally::
+Or if Composer is installed globally:
+
+.. code-block:: bash
 
     composer create-project --prefer-dist cakephp/app [app_name]
 
@@ -131,13 +137,15 @@ One common issue is that **logs** and **tmp** directories and subdirectories mus
 writable both by the web server and the command line user. On a UNIX system, if
 your web server user is different from your command line user, you can run the
 following commands from your application directory just once in your project to
-ensure that permissions will be setup properly::
+ensure that permissions will be setup properly:
 
-   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-   setfacl -R -m u:${HTTPDUSER}:rwx tmp
-   setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
-   setfacl -R -m u:${HTTPDUSER}:rwx logs
-   setfacl -R -d -m u:${HTTPDUSER}:rwx logs
+.. code-block:: bash
+
+    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+    setfacl -R -m u:${HTTPDUSER}:rwx tmp
+    setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
+    setfacl -R -m u:${HTTPDUSER}:rwx logs
+    setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
 Development Server
 ==================
@@ -145,7 +153,9 @@ Development Server
 A development installation is the fastest method to setup CakePHP.  In this
 example, we will be using CakePHP's console to run PHP's built-in web server
 which will make your application available at **http://host:port**. From the app
-directory, execute::
+directory, execute:
+
+.. code-block:: bash
 
     bin/cake server
 
@@ -154,7 +164,9 @@ By default, without any arguments provided, this will serve your application at
 
 If you have something conflicting with **localhost** or port 8765, you can
 tell the CakePHP console to run the web server on a specific host and/or port
-utilizing the following arguments::
+utilizing the following arguments:
+
+.. code-block:: bash
 
     bin/cake server -H 192.168.13.37 -p 5673
 
@@ -205,7 +217,9 @@ production setup will look like this on the file system::
         README.md
 
 Developers using Apache should set the ``DocumentRoot`` directive
-for the domain to::
+for the domain to:
+
+.. code-block:: apacheconf
 
     DocumentRoot /cake_install/webroot
 
@@ -247,7 +261,9 @@ further information.
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
-   should see something similar to::
+   should see something similar to:
+
+   .. code-block:: apacheconf
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
@@ -263,7 +279,9 @@ further information.
        </Directory>
 
 #. Make sure you are loading mod\_rewrite correctly. You should
-   see something like::
+   see something like:
+
+   .. code-block:: apacheconf
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
@@ -282,7 +300,9 @@ further information.
    checking for .htaccess files.
 
    CakePHP app directory (will be copied to the top directory of your
-   application by bake)::
+   application by bake):
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -291,7 +311,9 @@ further information.
        </IfModule>
 
    CakePHP webroot directory (will be copied to your application's web
-   root by bake)::
+   root by bake):
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -303,7 +325,9 @@ further information.
    want to try modifying settings for Virtual Hosts. On Ubuntu,
    edit the file **/etc/apache2/sites-available/default** (location is
    distribution-dependent). In this file, ensure that
-   ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
+   ``AllowOverride None`` is changed to ``AllowOverride All``, so you have:
+
+   .. code-block:: apacheconf
 
        <Directory />
            Options FollowSymLinks
@@ -330,7 +354,9 @@ further information.
 
    This can be added to the same section with the RewriteEngine
    directive, so for example, your webroot .htaccess file would look
-   like::
+   like:
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -345,7 +371,9 @@ further information.
 
 #. (Optional) To improve production setup, you should prevent invalid assets
    from being parsed by CakePHP. Modify your webroot .htaccess to something
-   like::
+   like:
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -359,7 +387,9 @@ further information.
    and instead display your webserver's 404 page.
 
    Additionally you can create a matching HTML 404 page, or use the default
-   built-in CakePHP 404 by adding an ``ErrorDocument`` directive::
+   built-in CakePHP 404 by adding an ``ErrorDocument`` directive:
+
+   .. code-block:: apacheconf
 
        ErrorDocument 404 /404-not-found
 
@@ -370,7 +400,9 @@ nginx does not make use of .htaccess files like Apache, so it is necessary to
 create those rewritten URLs in the site-available configuration. This is usually
 found in ``/etc/nginx/sites-available/your_virtual_host_conf_file``. Depending
 upon your setup, you will have to modify this, but at the very least, you will
-need PHP running as a FastCGI instance::
+need PHP running as a FastCGI instance:
+
+.. code-block:: nginx
 
     server {
         listen   80;
@@ -407,7 +439,9 @@ the box, and the nginx docs recommend a different approach anyway
 (http://nginx.org/en/docs/http/converting_rewrite_rules.html). You might try the
 following (you'll notice this is also just one server {} block, rather than two,
 although if you want example.com to resolve to your CakePHP application in
-addition to www.example.com consult the nginx link above)::
+addition to www.example.com consult the nginx link above):
+
+.. code-block:: nginx
 
     server {
         listen   80;
@@ -450,7 +484,9 @@ these steps:
    `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Create a new file called web.config in your CakePHP root folder.
 #. Using Notepad or any XML-safe editor, copy the following
-   code into your new web.config file::
+   code into your new web.config file:
+
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>

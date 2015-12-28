@@ -173,7 +173,7 @@ Using the FileLog Adapter
 
 As its name implies FileLog writes log messages to files. The level of log
 message being written determines the name of the file the message is stored in.
-If a level is not supplied, :php:const:`LOG_ERROR` is used which writes to the
+If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
 error log. The default log location is ``logs/$level.log``::
 
     // Executing this inside a CakePHP class

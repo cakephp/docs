@@ -165,7 +165,7 @@ buildRules
 ビフォアルール
 --------------
 
-.. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
+.. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
 
 ``Model.beforeRules`` イベントはエンティティにルールが適用される前に呼ばれます。
 イベントが止まると、Cakeによるチェックが入る前の戻り値を得られます。
@@ -173,7 +173,7 @@ buildRules
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, bool $result, $operation)
 
 ``Model.afterRules`` イベントはルールがエンティティーに適用された後に呼ばれます。
 イベントが止まると、設定したルールによってチェックした後の戻り値を得られます。
@@ -181,7 +181,7 @@ afterRules
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.beforeSave`` イベントはエンティティーが保存する前に呼ばれます。
 イベントを止めることによって、保存を停止できます。イベントが停止すると、このイベントの結果が
@@ -190,14 +190,14 @@ beforeSave
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterSave`` は保存した後に呼ばれます。
 
 afterSaveCommit
 ---------------
 
-.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterSaveCommit`` はトランザクション処理でラップされた保存がコミットされた後に、
 これはまた、明示的でないコミットで原子性でない保存のために呼ばれます。
@@ -207,7 +207,7 @@ afterSaveCommit
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.beforeDelete`` は削除する前に呼ばれる。
 イベントを停止することによって、削除を中止できる。
@@ -215,14 +215,14 @@ beforeDelete
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterDelete`` はエンティティーが削除された後に呼ばれる。
 
 afterDeleteCommit
 -----------------
 
-.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterDeleteCommit`` イベントはトランザクション処理でラップされた削除処理が
 コミットされた後に呼ばれます。これはまた、明示的でないコミットで原子性でない保存のために呼ばれます。

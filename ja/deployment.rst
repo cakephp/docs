@@ -130,6 +130,7 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 .. _symlink-assets:
 
+<<<<<<< HEAD
 ..
   Improve Your Application's Performance
 
@@ -174,6 +175,10 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 ::
 
     bin/cake plugin assets copy
+=======
+Improve Your Application's Performance
+======================================
+>>>>>>> 80d29b995076f448170eff6cd238852092e8661d
 
 .. meta::
     :title lang=en: Deployment

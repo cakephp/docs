@@ -173,7 +173,7 @@ diviser leur process de construction en de petites étapes réutilisables::
 
     // UsersTable.php
 
-    public function validateDefault(Validator $validator)
+    public function validationDefault(Validator $validator)
     {
         $validator->notEmpty('username');
         $validator->notEmpty('password');
@@ -183,9 +183,9 @@ diviser leur process de construction en de petites étapes réutilisables::
         return $validator;
     }
 
-    public function validateHardened(Validator $validator)
+    public function validationeHardened(Validator $validator)
     {
-        $validator = $this->validateDefault($validator);
+        $validator = $this->validationeDefault($validator);
 
         $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
         return $validator;

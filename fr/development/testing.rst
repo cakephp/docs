@@ -846,7 +846,7 @@ Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
 
         public function testIndex()
         {
-            $this->get('/articles?page=1');
+            $this->get('/articles');
 
             $this->assertResponseOk();
             // D'autres asserts.

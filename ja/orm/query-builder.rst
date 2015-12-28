@@ -5,6 +5,41 @@ Query Builder
 
 .. php:class:: Query
 
+.. _using-sql-functions:
+
+Using SQL Functions
+-------------------
+
+.. _advanced-query-conditions:
+
+Advanced Conditions
+===================
+
+.. _query-count:
+
+Returning the Total Count of Records
+------------------------------------
+
+.. _caching-query-results:
+
+Caching Loaded Results
+----------------------
+
+.. _adding-joins:
+
+Adding Joins
+------------
+
+.. _query-builder-updating-data:
+
+Updating Data
+=============
+
+.. _format-results:
+
+Adding Calculated Fields
+========================
+
 .. note::
     The documentation is not currently supported in Japanese language for this
     page.
