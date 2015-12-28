@@ -41,8 +41,9 @@ personnaliser la gestion des erreurs pour votre application:
   doivent pas être mises dans des fichiers de log. C'est utile pour supprimer
   les NotFoundExceptions ou toute autre message de log sans intérêt.
 * ``extraFatalErrorMemory`` - int - Définit le nombre de megaoctets duquel doit
-  être augmenté la limite de mémoire en cas d'erreur fatale. Cela permet un
-  petit espace pour la journalisation (logging) ainsi que la gestion d'erreur.
+  être augmenté la limite de mémoire en cas d'erreur fatale. Cela permet
+  d'allouer un petit espace mémoire supplémentaire pour la journalisation
+  (logging) ainsi que la gestion d'erreur.
 
 ErrorHandler affiche par défaut les erreurs quand ``debug`` est ``true`` et
 les erreurs de logs quand ``debug`` est ``false``. Le type d'erreurs capté dans

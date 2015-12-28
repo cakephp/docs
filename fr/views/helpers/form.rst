@@ -145,7 +145,7 @@ dans les navigateurs web.
 Définir l'URL pour le Formulaire
 -------------------------------------------------
 
-Utiliser l'option ``URL`` vous permet de diriger le formulaire vers une
+Utiliser l'option ``url`` vous permet de diriger le formulaire vers une
 action spécifique dans votre controller courant ou dans toute votre application.
 Par exemple, si vous voulez diriger le formulaire vers une action login() du
 controller courant, vous pouvez fournir le tableau $options comme ce qui suit::

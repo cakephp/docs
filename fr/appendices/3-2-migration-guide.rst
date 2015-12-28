@@ -16,7 +16,7 @@ Désactiver les  Avertissements Relatifs à l'Obsolescence
 ========================================================
 
 Après la mise à niveau vous pouvez rencontrer plusieurs avertissements de
-relatifs à l'obsolescence. Ces avertissements sont émis sont par des méthodes,
+relatifs à l'obsolescence. Ces avertissements sont émis par des méthodes,
 options et fonctionnalités qui seront supprimées dans CakePHP 4.x, mais vont
 continuer à exister tout au long du cycle de vie de 3.x. Bien que nous vous
 recommandons de régler les problèmes relatifs à l'obsolescence au fur et à
@@ -111,5 +111,5 @@ Manipulation de la Limite de la Mémoire en cas d'Erreur Fatale
 
 Une nouvelle option de configuration ``Error.extraFatalErrorMemory`` peut être
 définie en nombre de megaoctets, pour augmenter la limite de mémoire en cas
-d'erreur fatale. Cela permet un petit espace pour la journalisation (logging)
-ainsi qu ela gestion d'errueur.
+d'erreur fatale. Cela permet d'allouer un petit espace mémoire supplémentaire
+pour la journalisation (logging) ainsi que la gestion d'erreur.
