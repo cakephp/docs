@@ -27,7 +27,7 @@ personnaliser la gestion des erreurs pour votre application:
 * ``errorLevel`` - int - Le niveau d'erreurs que vous souhaitez pour la
   capture. Utilisez les constantes d'erreur intégrées à PHP et les bitmasks
   pour sélectionner le niveau d'erreur qui vous intéresse.
-* ``trace`` - boolean - Inclut les stack traces (contexte de débuggage) pour les
+* ``trace`` - bool - Inclut les stack traces (contexte de débuggage) pour les
   erreurs dans les fichiers de log. Les Stack traces seront inclus dans le log
   après chaque erreur. Ceci est utile pour trouver où/quand des erreurs sont
   générées.
@@ -35,11 +35,14 @@ personnaliser la gestion des erreurs pour votre application:
   exceptions non interceptées. Si vous choisissez une classe personnalisée,
   vous devrez placer le fichier de cette classe dans le dossier **src/Error**.
   Cette classe doit implémenter une méthode ``render()``.
-* ``log`` - boolean - Si ``true``, les exceptions et leur stack traces seront
+* ``log`` - bool - Si ``true``, les exceptions et leur stack traces seront
   loguées vers :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - Un tableau des noms de classe d'exception qui ne
   doivent pas être mises dans des fichiers de log. C'est utile pour supprimer
   les NotFoundExceptions ou toute autre message de log sans intérêt.
+* ``extraFatalErrorMemory`` - int - Définit le nombre de megaoctets duquel doit
+  être augmenté la limite de mémoire en cas d'erreur fatale. Cela permet un
+  petit espace pour la journalisation (logging) ainsi que la gestion d'erreur.
 
 ErrorHandler affiche par défaut les erreurs quand ``debug`` est ``true`` et
 les erreurs de logs quand ``debug`` est ``false``. Le type d'erreurs capté dans
