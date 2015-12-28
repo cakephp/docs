@@ -264,7 +264,7 @@ utilisées quand vous devez trier selon des expressions complexes::
 
     // Depuis 3.0.12 orderAsc & orderDesc sont disponibles.
     $query = $articles->find();
-    $concat = $query->newExpr()->func()->concat([
+    $concat = $query->func()->concat([
         'title' => 'literal',
         'synopsis' => 'literal'
     ]);
