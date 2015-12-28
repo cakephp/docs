@@ -131,7 +131,7 @@ with 'PUT', 'PATCH' or 'DELETE', respectively.  This allows CakePHP to emulate
 proper REST support in web browsers.
 
 Setting a URL for the Form
-------------------------------------------
+--------------------------
 
 Using the ``url`` option allows you to point the form to a specific action in
 your current controller or another controller in your application.  For example,

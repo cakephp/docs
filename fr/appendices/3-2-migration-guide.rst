@@ -12,18 +12,32 @@ CakePHP 3.2 requiert au moins PHP 5.5.8. En adoptant PHP 5.5, nous pouvons fourn
 des librairies de Date et de Time et retirer les dépendances qui concernent les
 librairies de compatibilité pour les mots de passe.
 
+Désactiver les  Avertissements Relatifs à l'Obsolescence
+========================================================
+
+Après la mise à niveau vous pouvez rencontrer plusieurs avertissements de
+relatifs à l'obsolescence. Ces avertissements sont émis par des méthodes,
+options et fonctionnalités qui seront supprimées dans CakePHP 4.x, mais vont
+continuer à exister tout au long du cycle de vie de 3.x. Bien que nous vous
+recommandons de régler les problèmes relatifs à l'obsolescence au fur et à
+mesure que vous les rencontrez, ce n'est pas toujours possible. Si vous voulez
+reporter la correction de ces avertissements, vous pouvez les désactiver dans
+votre **config/app.php**::
+
+    'Error' => [
+        'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
+    ]
+
+Le niveau d'erreur ci-dessus va supprimer les avertissements relatifs à
+l'obsolescence de CakePHP.
+
 Carbon Remplacé par Chronos
 ===========================
 
 La librairie Carbon a été remplacée par :doc:`cakephp/chronos </chronos>`. Cette
 nouvelle librairie est un fork de Carbon sans aucune dépendance additionnelle.
 Elle offre également un objet date calendaire, et une version immutable des
-objets date et datime.
-
-Helpers
-=======
-
-Les helpers peuvent maintenant avoir une méthode hook ``initialize(array $config)`` comme tous les autres types de classe.
+objets date et datetime.
 
 Nouvel Objet Date
 =================
@@ -64,8 +78,38 @@ ajouté. Cette classe vous laisse définir les en-têtes liés au CORS avec une
 interface simple. Consultez :ref:`cors-headers` pour plus d'informations.
 
 ORM
----
+===
 
 * Faire un contain avec la même association plusieurs fois fonctionne maintenant
-  de la façon esperée, et les fonctions du constructeur de requête sont
+  de la façon espérée, et les fonctions du constructeur de requête sont
   maintenant empilées.
+
+
+Shell
+=====
+
+* ``Shell::info()``, ``Shell::warn()`` et ``Shell::success()`` ont été ajoutées.
+  Ces méthodes de helper facilite l'utilisation des styles communément utilisés.
+
+
+View
+====
+
+Helpers
+-------
+
+Les helpers peuvent maintenant avoir une méthode hook ``initialize(array $config)`` comme tous les autres types de classe.
+
+FormHelper
+----------
+
+La clé ``action`` du ``FormHelper::create()`` a été dépréciée. Vous devez
+utiliser la clé ``url`` directement.
+
+Manipulation de la Limite de la Mémoire en cas d'Erreur Fatale
+==============================================================
+
+Une nouvelle option de configuration ``Error.extraFatalErrorMemory`` peut être
+définie en nombre de megaoctets, pour augmenter la limite de mémoire en cas
+d'erreur fatale. Cela permet d'allouer un petit espace mémoire supplémentaire
+pour la journalisation (logging) ainsi que la gestion d'erreur.
