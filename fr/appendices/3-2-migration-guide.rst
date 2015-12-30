@@ -12,30 +12,30 @@ CakePHP 3.2 requiert au moins PHP 5.5.8. En adoptant PHP 5.5, nous pouvons fourn
 des librairies de Date et de Time et retirer les dépendances qui concernent les
 librairies de compatibilité pour les mots de passe.
 
-Désactiver les  Avertissements Relatifs à l'Obsolescence
-========================================================
+Désactiver les Avertissements Liés à l'Obsolescence
+===================================================
 
-Après la mise à niveau vous pouvez rencontrer plusieurs avertissements de
-relatifs à l'obsolescence. Ces avertissements sont émis par des méthodes,
-options et fonctionnalités qui seront supprimées dans CakePHP 4.x, mais vont
-continuer à exister tout au long du cycle de vie de 3.x. Bien que nous vous
-recommandons de régler les problèmes relatifs à l'obsolescence au fur et à
-mesure que vous les rencontrez, ce n'est pas toujours possible. Si vous voulez
-reporter la correction de ces avertissements, vous pouvez les désactiver dans
-votre **config/app.php**::
+Après la mise à niveau vous pouvez rencontrer plusieurs avertissements liés
+à l'obsolescence. Ces avertissements sont émis par des méthodes, options et
+fonctionnalités qui seront supprimées dans CakePHP 4.x, mais vont continuer à
+exister tout au long du cycle de vie de 3.x. Bien que nous vous recommandons de
+régler les problèmes liés à l'obsolescence au fur et à mesure que vous les
+rencontrez, ce n'est pas toujours possible. Si vous voulez reporter la
+correction de ces avertissements, vous pouvez les désactiver dans votre
+**config/app.php**::
 
     'Error' => [
         'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
     ]
 
-Le niveau d'erreur ci-dessus va supprimer les avertissements relatifs à
+Le niveau d'erreur ci-dessus va supprimer les avertissements liés à
 l'obsolescence de CakePHP.
 
 Carbon Remplacé par Chronos
 ===========================
 
 La librairie Carbon a été remplacée par :doc:`cakephp/chronos </chronos>`. Cette
-nouvelle librairie est un fork de Carbon sans aucune dépendance additionnelle.
+nouvelle librairie est un fork de Carbon sans aucune dépendance supplémentaire.
 Elle offre également un objet date calendaire, et une version immutable des
 objets date et datetime.
 
@@ -89,7 +89,8 @@ Shell
 =====
 
 * ``Shell::info()``, ``Shell::warn()`` et ``Shell::success()`` ont été ajoutées.
-  Ces méthodes de helper facilite l'utilisation des styles communément utilisés.
+  Ces méthodes de helper facilitent l'utilisation des styles communément
+  utilisés.
 
 
 View
