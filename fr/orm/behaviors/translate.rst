@@ -173,6 +173,9 @@ Lire du Contenu Traduit
 Comme montré ci-dessus, vous pouvez utiliser la méthode ``locale`` pour choisir
 la traduction active pour les entities qui sont chargées::
 
+    use Cake\I18n\I18n;
+    
+    // Change la langue dans votre action action
     I18n::locale('es');
     $this->loadModel('Articles');
 
