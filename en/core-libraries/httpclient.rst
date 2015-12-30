@@ -12,7 +12,7 @@ remote APIs.
 Doing Requests
 ==============
 
-Doing requests is simple and straight forward.  Doing a get request looks like::
+Doing requests is simple and straight forward.  Doing a GET request looks like::
 
     use Cake\Network\Http\Client;
 
@@ -29,7 +29,7 @@ Doing requests is simple and straight forward.  Doing a get request looks like::
       'headers' => ['X-Requested-With' => 'XMLHttpRequest']
     ]);
 
-Doing post and put requests is equally simple::
+Doing POST and PUT requests is equally simple::
 
     // Send a POST request with application/x-www-form-urlencoded encoded data
     $http = new Client();
