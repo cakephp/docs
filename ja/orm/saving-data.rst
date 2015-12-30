@@ -6,6 +6,14 @@ Saving Data
 .. php:class:: Table
     :noindex:
 
+.. figure:: /_static/img/validation-cycle.png
+   :align: left
+   :alt: Flow diagram showing the marshalling/validation process.
+
+.. figure:: /_static/img/save-cycle.png
+   :align: left
+   :alt: Flow diagram showing the save process.
+
 .. note::
     The documentation is not currently supported in Japanese language for this
     page.
