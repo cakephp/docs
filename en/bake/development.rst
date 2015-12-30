@@ -33,7 +33,7 @@ be used::
 
     });
 
-If you want to modify bake from within another plugin. Putting your plugin's
+If you want to modify bake from within another plugin, putting your plugin's
 bake events in the plugin ``config/bootstrap.php`` file is a good idea.
 
 Bake events can be handy for making small changes to existing templates.

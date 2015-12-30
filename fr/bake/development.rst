@@ -34,14 +34,14 @@ un autre helper à la classe de vue bake, cet event peut être utilisé::
 
     });
 
-Si vous souhaitez modifier bake à partir d'un autre plugin. Mettre vos events
-de bake du plugin dans le fichier ``config/bootstrap.php`` du plugin est une
-bonne idée.
+Si vous souhaitez modifier bake à partir d'un autre plugin, mettre les events
+de bake de votre plugin dans le fichier ``config/bootstrap.php`` du plugin est
+une bonne idée.
 
-Les events de bake peuvent être pratique pour faire de petits changements dans
-les templates existants. Par exemple, pour changer les noms de variable utilisés
-lors de la création avec bake de fichiers de controller/template, on pourra
-utiliser une fonction qui écoute ``Bake.beforeRender`` pour modifier les
+Les events de bake peuvent être pratiques pour faire de petits changements dans
+les templates existants. Par exemple, pour changer les noms de variables
+utilisés lors de la création avec bake de fichiers de controller/template, on
+pourra utiliser une fonction qui écoute ``Bake.beforeRender`` pour modifier les
 variables utilisées dans les templates de bake::
 
     <?php
@@ -242,7 +242,7 @@ Personnaliser les Templates de Bake
 Si vous souhaitez modifier la sortie par défaut produite par la commande "bake",
 vous pouvez créer vos propres templates de bake dans votre application. Cette
 façon n'utilise pas l'option ``--theme`` dans la ligne de commande lors de
-l'éxecution de bake. La meilleure façon de faire est de faire ce qui suit:
+l'exécution de bake. La meilleure façon de faire est de faire ce qui suit:
 
 #. Créer un nouveau répertoire **/src/Template/Bake/**.
 #. Copier tout template que vous souhaitez surcharger de
