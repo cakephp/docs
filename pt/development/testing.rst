@@ -30,7 +30,7 @@ Agora você executa o PHPUnit usando::
 
     $ vendor/bin/phpunit
 
-Usando o arquivo PHAR 
+Usando o arquivo PHAR
 ---------------------
 
 Depois de ter baixado o arquivo **phpunit.phar** , você pode usar ele para
@@ -40,7 +40,7 @@ executar seus testes::
 
 .. tip::
 
-    Como conveniência você pode deixar phpunit.phar disponivel globalmente em sistemas 
+    Como conveniência você pode deixar phpunit.phar disponivel globalmente em sistemas
     Unix ou Linux com os comandos::
 
         chmod +x phpunit.phar
@@ -55,7 +55,7 @@ Configuração do banco de dados test
 =======================================
 
 Lembre-se de ter o debug abilitado em seu arquivo **config/app.php** antes de
-executar qualquer teste.  Antes de executar quaisquer testes você deve adicionar 
+executar qualquer teste.  Antes de executar quaisquer testes você deve adicionar
 um datasourse ``test`` para o arquivo **config/app.php**. Esta configuração é
 usada pelo CakePHP para fixar tabelas e dados::
 
@@ -69,6 +69,11 @@ usada pelo CakePHP para fixar tabelas e dados::
             'database' => 'test_database'
         ],
     ],
+
+.. _integration-testing:
+
+Controller Integration Testing
+===============================
 
 .. note::
 
