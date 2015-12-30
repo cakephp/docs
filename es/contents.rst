@@ -57,6 +57,7 @@ Contenidos
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    chronos
     debug-kit
     migrations
     elasticsearch
