@@ -34,12 +34,15 @@ un autre helper à la classe de vue bake, cet event peut être utilisé::
 
     });
 
-Les events de Bake peuvent aussi être utiles pour faire des petits
-changements aux templates existants. Par exemple, pour changer les noms de
-variable utilisés lors de la création avec bake de fichiers de
-controller/template, on pourra utiliser une fonction qui écoute
-``Bake.beforeRender`` pour modifier les variables utilisées dans les templates
-de bake::
+Si vous souhaitez modifier bake à partir d'un autre plugin. Mettre vos events
+de bake du plugin dans le fichier ``config/bootstrap.php`` du plugin est une
+bonne idée.
+
+Les events de bake peuvent être pratique pour faire de petits changements dans
+les templates existants. Par exemple, pour changer les noms de variable utilisés
+lors de la création avec bake de fichiers de controller/template, on pourra
+utiliser une fonction qui écoute ``Bake.beforeRender`` pour modifier les
+variables utilisées dans les templates de bake::
 
     <?php
     // config/bootstrap_cli.php
@@ -131,7 +134,9 @@ spécialement quand on essaie de modifier les fichiers de template de bake, est
 de créer avec bake une classe et de comparer le template utilisé avec le
 template déjà présent dans le dossier tmp de votre application.
 
-Ainsi, par exemple, pour créer avec bake un shell comme ceci::
+Ainsi, par exemple, pour créer avec bake un shell comme ceci:
+
+.. code-block:: shell
 
     bin/cake bake shell Foo
 
