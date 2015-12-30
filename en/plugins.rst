@@ -54,7 +54,7 @@ package will manage it for you.
 Loading a Plugin
 ================
 
-After installing a plugin and setting up the autoloader, you may need to load
+After installing a plugin and setting up the autoloader, you should load
 the plugin. You can load plugins one by one, or all of them with a single
 method::
 
@@ -118,27 +118,36 @@ autoloading for your plugin::
 Plugin Configuration
 ====================
 
-There is a lot you can do with the ``load()`` and ``loadAll()`` methods to help
-with plugin configuration and routing. Perhaps you want to load all plugins
-automatically while specifying custom routes and bootstrap files for
-certain plugins::
+The ``load()`` and ``loadAll()`` methods can assist with plugin configuration
+and routing. Perhaps you want to load all plugins automatically while specifying
+custom routes and bootstrap files for certain plugins::
 
+    // in config/bootstrap.php
+
+    // Using loadAll()
     Plugin::loadAll([
         'Blog' => ['routes' => true],
         'ContactManager' => ['bootstrap' => true],
         'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
     ]);
 
-With this style of configuration you no longer need to manually
-``include()`` or ``require()`` a plugin's configuration or routes file -- it happens
-automatically at the right time and place. The exact same parameters could
-have also been supplied to the ``load()`` method, which would have loaded only those
-three plugins and not the rest.
+Or you can load the plugins individually::
 
-Finally, you can also specify a set of defaults for ``loadAll()`` which will
+    // Loading just the blog and include routes
+    Plugin::load('Blog', ['routes' => true]);
+
+    // Include bootstrap configuration/initializer file.
+    Plugin::load('ContactManager', ['bootstrap' => true]);
+
+With either approach you no longer need to manually ``include()`` or
+``require()`` a plugin's configuration or routes file -- it happens
+automatically at the right time and place.
+
+You can specify a set of defaults for ``loadAll()`` which will
 apply to every plugin that doesn't have a more specific configuration.
 
-Load the bootstrap file from all plugins, and additionally the routes from the Blog plugin::
+The following example will load the bootstrap file from all plugins, and
+additionally the routes from the Blog plugin::
 
     Plugin::loadAll([
         ['bootstrap' => true],
@@ -154,8 +163,8 @@ potential warnings by using the ``ignoreMissing`` option::
         'Blog' => ['routes' => true]
     ]);
 
-When loading plugins, the plugin name used should match the namespace.
-For example, if you have a plugin with top level namespace ``Users`` you would load
+When loading plugins, the plugin name used should match the namespace.  For
+example, if you have a plugin with top level namespace ``Users`` you would load
 it using::
 
     Plugin::load('User');
@@ -168,16 +177,15 @@ If you prefer to have your vendor name as top level and have a namespace like
 This will ensure that classnames are resolved properly when using
 :term:`plugin syntax`.
 
-Most plugins will indicate the proper procedure for configuring
-them and setting up the database in their documentation. Some
-plugins will require more setup than others.
+Most plugins will indicate the proper procedure for configuring them and setting
+up the database in their documentation. Some plugins will require more setup
+than others.
 
 Using Plugins
 =============
 
 You can reference a plugin's controllers, models, components,
 behaviors, and helpers by prefixing the name of the plugin before
-the class name.
 
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output some pretty contact information in
@@ -186,7 +194,10 @@ could look like this::
 
     public $helpers = ['ContactManager.ContactInfo'];
 
-You would then be able to access the ContactInfoHelper just like
+.. note::
+    This dot separated class name is referred to as :term:`plugin syntax`.
+
+You would then be able to access the ``ContactInfoHelper`` just like
 any other helper in your view, such as::
 
     echo $this->ContactInfo->address($contact);
@@ -236,19 +247,25 @@ Creating a Plugin Using Bake
 The process of creating plugins can be greatly simplified by using the bake
 shell.
 
-In order to bake a plugin, use the following command::
+In order to bake a plugin, use the following command:
+
+.. code-block:: shell
 
     $ bin/cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
-of your app. For example - baking controllers::
+of your app. For example - baking controllers:
+
+.. code-block:: shell
 
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 Please refer to the chapter
 :doc:`/bake/usage` if you
 have any problems with using the command line. Be sure to re-generate your
-autoloader once you've created your plugin::
+autoloader once you've created your plugin:
+
+.. code-block:: shell
 
     $ php composer.phar dumpautoload
 
