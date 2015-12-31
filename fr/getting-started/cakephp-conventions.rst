@@ -142,8 +142,9 @@ type\_categorie\_id.
 
 Les tables de jointure utilisées dans les relations hasAndBelongsToMany
 (HABTM) entre models doivent être nommées d'après le nom des tables des
-models qu'elles unissent, dans l'ordre alphabétique ("pommes\_zebres" plutôt
-que "zebres\_pommes").
+models qu'elles unissent, par ex des users qui sont liés par une relation HABTM
+avec des groups seraient joints par une table groups_users et ces noms doivent
+être dans l'ordre alphabétique ("pommes\_zebres" plutôt que "zebres\_pommes").
 
 Toutes les tables avec lesquelles les models de CakePHP interagissent (à
 l'exception des tables de jointure), nécessitent une clé primaire simple pour
