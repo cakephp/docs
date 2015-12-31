@@ -137,9 +137,10 @@ table like category\_types whose name contains multiple words,
 the foreign key would be category\_type\_id.
 
 Join tables, used in hasAndBelongsToMany (HABTM) relationships
-between models, should be named after the model tables they will
-join, arranged in alphabetical order (apples\_zebras rather than
-zebras\_apples).
+between models, must be named after the model tables they will
+join, e.g. users HABTM groups would be joined by groups_users, and 
+should be arranged in alphabetical order, e.g. apes\_zoos
+is better than zoos\_apes.
 
 All tables with which CakePHP models interact (with the exception
 of join tables) require a singular primary key to uniquely
