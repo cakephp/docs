@@ -184,8 +184,8 @@ exceptions for HTTP methods
 
     Used for doing a 410 Gone error.
 
-For more details on HTTP 4xx error status codes see <https://tools.ietf.org/html/rfc2616#section-10.4>`_, ``IETF RFC2616 Section 10.4``.
- 
+For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
+
 .. php:exception:: InternalErrorException
 
     Used for doing a 500 Internal Server Error.
@@ -202,7 +202,7 @@ For more details on HTTP 4xx error status codes see <https://tools.ietf.org/html
 
     Used for doing a 503 Service Unavailable error.
 
-For more details on HTTP 5xx error status codes see <https://tools.ietf.org/html/rfc2616#section-10.5>`_, ``IETF RFC2616 Section 10.5``.
+For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
 
 You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
