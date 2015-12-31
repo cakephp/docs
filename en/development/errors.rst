@@ -160,6 +160,32 @@ exceptions for HTTP methods
 
     Used for doing a 405 Method Not Allowed error.
 
+.. versionadded:: 3.1
+
+    NotAcceptableException has been added.
+
+.. php:exception:: NotAcceptableException
+
+    Used for doing a 406 Not Acceptable error.
+
+.. versionadded:: 3.1
+
+    ConflictException has been added.
+
+.. php:exception:: ConflictException
+
+    Used for doing a 409 Conflict error.
+
+.. versionadded:: 3.1
+
+    GoneException has been added.
+
+.. php:exception:: GoneException
+
+    Used for doing a 410 Gone error.
+
+For more details on HTTP 5xx status error codes see <https://tools.ietf.org/html/rfc2616#section-10.4>`_, ``IETF RFC2616 Section 10.4``.
+ 
 .. php:exception:: InternalErrorException
 
     Used for doing a 500 Internal Server Error.
@@ -167,6 +193,16 @@ exceptions for HTTP methods
 .. php:exception:: NotImplementedException
 
     Used for doing a 501 Not Implemented Errors.
+
+.. versionadded:: 3.1
+
+    Service Unavailable has been added.
+
+.. php:exception:: ServiceUnavailableException
+
+    Used for doing a 503 Service Unavailable error.
+
+For more details on HTTP 5xx status error codes see <https://tools.ietf.org/html/rfc2616#section-10.5>`_, ``IETF RFC2616 Section 10.5``.
 
 You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
