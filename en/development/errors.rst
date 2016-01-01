@@ -210,10 +210,11 @@ You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $post = $this->Posts->findById($id)->first();
         if (empty($post)) {
-            throw new \Cake\Network\Exception\NotFoundException(__('Post not found'));
+            throw new \Cake\Network\Exception\NotFoundException(__(' found'));
         }
         $this->set('post', $post);
         $this->set('_serialize', ['post']);
@@ -363,7 +364,8 @@ Using HTTP Exceptions in your Controllers
 You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example::
 
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $post = $this->Posts->findById($id)->first();
         if (empty($post)) {
             throw new \Cake\Network\Exception\NotFoundException(__('Post not found'));
