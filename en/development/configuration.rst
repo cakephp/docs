@@ -282,6 +282,22 @@ data back::
 
 If $key is left null, all values in Configure will be returned.
 
+.. versionadded:: 3.1.7
+
+.. php:staticmethod:: readOrFail($key)
+
+Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read`
+but expects to find a key/value pair. In case the requested pair does not
+exist, a :php:class:`RuntimeException` will be thrown::
+
+    Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
+    Configure::readOrFail('Company.geolocation');  // Will throw an exception
+
+    Configure::readOrFail('Company');
+
+    // Yields:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
 Checking to see if Configuration Data is Defined
 ------------------------------------------------
 
