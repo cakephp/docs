@@ -286,8 +286,8 @@ If $key is left null, all values in Configure will be returned.
 
 .. php:staticmethod:: readOrFail($key)
 
-Reads configuration data just :php:method:`Cake\\Core\\Configure::read` but expects to find a key/value pair.
-In case the requested pair does not exist, a RuntimeException will be thrown.
+Reads configuration data just like :php:method:`Cake\\Core\\Configure::read` but expects to find a key/value pair.
+In case the requested pair does not exist, a :php:class:`RuntimeException` will be thrown.
 
     Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
     Configure::readOrFail('Company.geolocation');  // Will throw an exception
