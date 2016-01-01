@@ -282,7 +282,6 @@ data back::
 
 If $key is left null, all values in Configure will be returned.
 
-.. versionadded:: 3.1.7
 
 .. php:staticmethod:: readOrFail($key)
 
@@ -297,6 +296,9 @@ exist, a :php:class:`RuntimeException` will be thrown::
 
     // Yields:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.1.7
+    ``Configure::readOrFail()`` was added in 3.1.7
 
 Checking to see if Configuration Data is Defined
 ------------------------------------------------
