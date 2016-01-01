@@ -214,7 +214,7 @@ pages for items that have not been found::
     {
         $post = $this->Posts->findById($id)->first();
         if (empty($post)) {
-            throw new \Cake\Network\Exception\NotFoundException(__(' found'));
+            throw new \Cake\Network\Exception\NotFoundException(__('Post not found'));
         }
         $this->set('post', $post);
         $this->set('_serialize', ['post']);
