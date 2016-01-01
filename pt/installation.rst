@@ -12,7 +12,7 @@ Requisitos
 
 - HTTP Server. Por exemplo: Apache. De preferência com mod\_rewrite ativo, mas
   não é obrigatório.
-- PHP 5.5.8 ou superior.
+- PHP 5.5.10 ou superior.
 - extensão mbstring
 - extensão intl
 
