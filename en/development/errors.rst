@@ -319,7 +319,7 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: RecordNotFoundException
 
-   The requested record could not be found. This will also set response headers to 404.
+   The requested record could not be found. This will also set http response headers to 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
