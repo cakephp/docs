@@ -11,7 +11,7 @@ Glossary
             array('controller' => 'posts', 'action' => 'view', 5)
 
     HTML attributes
-    (Atributos HTML)
+        (Atributos HTML)
         Un array de llaves => valores que se compone en HTML attributes(atributos HTML). Por ejemplo::
 
             // Dado
@@ -29,13 +29,13 @@ Glossary
             checked="checked"
 
     plugin syntax
-    (Sintaxis de plugin)
+        (Sintaxis de plugin)
         Plugin syntax(Sintaxis de plugin) se refiere al punto separador del nombre de la clase
         indicación que la clase es parte de un plugin. Por ej.``DebugKit.Toolbar``.
         El plugin es DebugKit y el nombre de la clase es Toolbar.
 
     dot notation
-    (Notación por puntos)
+        (Notación por puntos)
         Dot notation(notación por puntos) define la ruta dentro un array, separando valores anidados con ``.``
         Por ejemplo::
 
@@ -69,5 +69,5 @@ Glossary
 
 
 .. meta::
-:title lang=es: Glosario
+    :title lang=es: Glosario
     :keywords lang=es: atributos html,csrf,dry,repetir,array class,array controller,routing array,glosario,target blank,dot notation,notación de puntos,configuración de enrutamiento,forgery,replay,enrutador,sintaxis,configuración,envios
