@@ -1,16 +1,18 @@
-Glosario
+Glossary
 ########
 
-.. glosario::
+.. glossary::
 
-    Enrutamiento de array
+    routing array
+        (Enrutamiento de array)
         Un array de atributos que son pasados a :php:meth:`Router::url()`.
         Usualmente se tipean de la siguiente manera::
 
             array('controller' => 'posts', 'action' => 'view', 5)
 
-    Atributos HTML
-        Un array de llaves => valores que se compone en atributos HTML. Por ejemplo::
+    HTML attributes
+    (Atributos HTML)
+        Un array de llaves => valores que se compone en HTML attributes(atributos HTML). Por ejemplo::
 
             // Dado
             array('class' => 'my-class', 'target' => '_blank')
@@ -26,13 +28,15 @@ Glosario
             // Generara
             checked="checked"
 
-    Sintaxis de plugin
-        La Sintaxis de plugin se refiere al punto separador del nombre de la clase
+    plugin syntax
+    (Sintaxis de plugin)
+        Plugin syntax(Sintaxis de plugin) se refiere al punto separador del nombre de la clase
         indicación que la clase es parte de un plugin. Por ej.``DebugKit.Toolbar``.
         El plugin es DebugKit y el nombre de la clase es Toolbar.
 
-    Notación por puntos
-        La notación por puntos define la ruta dentro un array, separando valores anidados con ``.``
+    dot notation
+    (Notación por puntos)
+        Dot notation(notación por puntos) define la ruta dentro un array, separando valores anidados con ``.``
         Por ejemplo::
 
             Asset.filter.css
@@ -66,4 +70,4 @@ Glosario
 
 .. meta::
 :title lang=es: Glosario
-    :keywords lang=es: atributos html,csrf,dry,repetir,array class,array controller,glosario,target blank,dot notation,notación de puntos,configuración de enrutamiento,forgery,replay,enrutador,sintaxis,configuración,envios
+    :keywords lang=es: atributos html,csrf,dry,repetir,array class,array controller,routing array,glosario,target blank,dot notation,notación de puntos,configuración de enrutamiento,forgery,replay,enrutador,sintaxis,configuración,envios
