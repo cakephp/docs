@@ -97,7 +97,7 @@ Vous pouvez lancer n'importe quel shell listé en utilisant son nom::
     # lance le shell migrations
     bin/cake migrations -h
 
-    # lance le shell bake (avec le préfie plugin)
+    # lance le shell bake (avec le préfixe plugin)
     bin/cake bake.bake -h
 
 Les shells de plugins peuvent être invoqués sans le préfixe du plugin si le nom
@@ -216,7 +216,8 @@ propriétés attachées à votre shell::
         public function show()
         {
             if (empty($this->args[0])) {
-                return $this->error('Please enter a username.');
+                // Use error() before CakePHP 3.2
+                return $this->abort('Please enter a username.');
             }
             $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
@@ -425,7 +426,10 @@ La classe ``Shell`` fournit quelques méthodes pour afficher le contenu::
     // Ecrire avec stderr
     $this->err('Message d\'erreur');
 
-    // Ecrire avec stderr et arrêter le processus
+    // Ecrire avec stderr et lancer une exception
+    $this->abort('Fatal error');
+
+    // Avant CakePHP 3.2. Ecrire avec stderr et exit()
     $this->error('Erreur Fatale');
 
 Elle fournit aussi deux méthodes pratiques en ce qui concerne le niveau de
@@ -476,11 +480,11 @@ détail ils sont intéressés en configurant le bon flag quand on appelle le
 shell. :php:meth:`Cake\\Console\\Shell::out()` supporte 3 types de sortie par
 défaut.
 
-* QUIET - Seulement des informations importantes doivent être marquées pour
+* ``QUIET`` - Seulement des informations importantes doivent être marquées pour
   une paisible.
-* NORMAL - Le niveau par défaut, et un usage normal.
-* VERBOSE - Les messages marqués qui peuvent être trop ennuyeux pour une
-  utilisation quotidienne, mais aide au debugging en VERBOSE.
+* ``NORMAL`` - Le niveau par défaut, et un usage normal.
+* ``VERBOSE`` - Les messages marqués qui peuvent être trop ennuyeux pour une
+  utilisation quotidienne, mais aide au debugging en ``VERBOSE``.
 
 Vous pouvez marquer la sortie comme suit::
 
@@ -582,6 +586,24 @@ que vous pouvez utiliser:
 Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut
 de la couleur. Sur les systèmes Windows, la sortie simple est mise par défaut
 sauf si la variable d'environnement ``ANSICON`` est présente.
+
+Arrêter l'Exécution d'un Shell
+==============================
+
+Lorsque vos commandes shell ont atteint une condition où vous souhaitez que
+l'exécution s'arrête, vous pouvez utiliser ``abort()`` pour lancer une
+``StopException`` qui arrêtera le process::
+
+    $user = $this->Users->get($this->args[0]);
+    if (!$user) {
+        // Arrête avec un message et un code d'erreur.
+        $this->abort('Utilisateur non trouvé, 128);
+    }
+
+.. versionadded:: 3.2
+    La méthode ``abort()`` a été ajoutée`dans 3.2. Dans les versions
+    précédentes, vous pouvez utiliser ``error()`` pour afficher un message et
+    arrêter l'exécution.
 
 Méthodes Hook
 =============

@@ -104,7 +104,7 @@ Shell
 
 * ``Shell::info()``, ``Shell::warn()`` and ``Shell::success()`` were added.
   These helper methods make using commonly used styling simpler.
-* ``Cake\\Console\\Exception\\StopException`` was added.
+* ``Cake\Console\Exception\StopException`` was added.
 * ``Shell::abort()`` was added to replace ``error()``.
 
 exit() no longer called by _stop() and error()
