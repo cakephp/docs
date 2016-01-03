@@ -29,7 +29,7 @@ replaced with better solutions. Deprecated features will not be removed until
 * ``Cake\\ORM\\ResultSet::_calculateTypeMap()`` is now unused and deprecated.
 * ``Cake\\ORM\\ResultSet::_castValues()`` is now unused and deprecated.
 * The ``action`` key for ``FormHelper::create()`` has been deprecated. You
-  should be use the ``url`` key directly.
+  should use the ``url`` key directly.
 
 Disabling Deprecation Warnings
 ------------------------------
