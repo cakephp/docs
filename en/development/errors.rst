@@ -160,29 +160,25 @@ exceptions for HTTP methods
 
     Used for doing a 405 Method Not Allowed error.
 
-.. versionadded:: 3.1.7
 
-    NotAcceptableException has been added.
 
 .. php:exception:: NotAcceptableException
 
     Used for doing a 406 Not Acceptable error.
-
-.. versionadded:: 3.1.7
-
-    ConflictException has been added.
+    
+    .. versionadded:: 3.1.7 NotAcceptableException has been added.
 
 .. php:exception:: ConflictException
 
     Used for doing a 409 Conflict error.
 
-.. versionadded:: 3.1.7
-
-    GoneException has been added.
+    .. versionadded:: 3.1.7 ConflictException has been added.
 
 .. php:exception:: GoneException
 
     Used for doing a 410 Gone error.
+
+    .. versionadded:: 3.1.7 GoneException has been added.
 
 For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
@@ -194,13 +190,13 @@ For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
     Used for doing a 501 Not Implemented Errors.
 
-.. versionadded:: 3.1.7
 
-    Service Unavailable has been added.
 
 .. php:exception:: ServiceUnavailableException
 
     Used for doing a 503 Service Unavailable error.
+
+    .. versionadded:: 3.1.7 Service Unavailable has been added.
 
 For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
 
