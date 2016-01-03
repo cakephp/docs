@@ -67,7 +67,7 @@ Configuration
 
 La Configuration par défaut pour ``Email`` est créée en utilisant ``config()`` et
 ``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
-le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
+le fichier **config/app.php**. Le fichier **config/app.default.php** est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
 d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
 et utilise les méthodes séparément pour définir toutes les configurations

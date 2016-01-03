@@ -56,9 +56,9 @@ pour vous.
 Charger un Plugin
 =================
 
-Après avoir installé un plugin et mis à jour l'autoloader, vous aurez besoin
-de charger le plugin. Vous pouvez charger les plugins un par un, ou tous d'un
-coup avec une méthode unique::
+Après avoir installé un plugin et mis à jour l'autoloader, vous devrez charger
+le plugin. Vous pouvez charger les plugins un par un, ou tous d'un coup avec une
+méthode unique::
 
     // dans config/bootstrap.php
     // Charge un Plugin unique
@@ -123,29 +123,37 @@ utiliser un autochargement fallback pour votre plugin::
 Configuration du Plugin
 =======================
 
-Vous pouvez faire beaucoup de choses avec les méthodes ``load`` et ``loadAll``
-pour vous aider avec la configuration et le routing d'un plugin. Peut-être
-souhaiterez vous charger tous les plugins automatiquement, en spécifiant
-des routes et des fichiers de bootstrap pour certains plugins::
+Les méthodes ``load`` et ``loadAll`` peuvent vous aider pour la configuration et
+le routing d'un plugin. Peut-être souhaiterez vous charger tous les plugins
+automatiquement, en spécifiant des routes et des fichiers de bootstrap pour
+certains plugins::
 
+    // dans config/bootstrap.php
+
+    // En utilisant loadAll()
     Plugin::loadAll([
         'Blog' => ['routes' => true],
         'ContactManager' => ['bootstrap' => true],
         'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
     ]);
 
-Avec ce type de configuration, vous n'avez plus besoin de faire manuellement un
-``include()`` ou un ``require()`` d'une configuration de plugin ou d'un fichier
-de routes -- Cela arrive automatiquement au bon moment et à la bonne place. Un
-paramètre totalement identique peut avoir été fourni à la méthode load(),
-ce qui aurait chargé seulement ces trois plugins, et pas le reste.
+Ou vous pouvez charger les plugins individuellement::
 
-Au final, vous pouvez aussi spécifier un ensemble de valeurs dans defaults pour
-``loadAll`` qui s'applique à chaque plugin qui n'a pas de configuration
-spécifique.
+    // Charge seulement le blog et inclut les routes
+    Plugin::load('Blog', ['routes' => true]);
 
-Chargez le fichier bootstrap à partir de tous les plugins, et les routes à
-partir du plugin Blog::
+    // Inclut le fichier de démarrage pour la configuration/initialisation.
+    Plugin::load('ContactManager', ['bootstrap' => true]);
+
+Avec ces deux approches, vous n'avez plus à faire manuellement un ``include()``
+ou un ``require()`` du fichier de configuration ou du fichier de routes du
+plugin -- cela arrive automatiquement au bon moment et au bon endroit.
+
+Vous pouvez spécifier un ensemble de valeurs par défaut pour ``loadAll()`` qui
+vont s'appliquer à chaque plugin qui n'a pas de configuration spécifique.
+
+L'exemple suivant va charger le fichier de bootstrap de tous les plugins, et
+aussi les routes du plugin Blog::
 
     Plugin::loadAll([
         ['bootstrap' => true],
@@ -194,7 +202,11 @@ vos vues. Dans votre controller, le tableau ``$helpers`` pourrait ressembler
 
     public $helpers = ['ContactManager.ContactInfo'];
 
-Vous serez ensuite capable d'accéder à ContactInfoHelper comme tout autre
+.. note::
+    Ce nom de classe séparé par un point se réfère à la :term:`syntaxe de
+    plugin`.
+
+Vous serez ensuite capable d'accéder à ``ContactInfoHelper`` comme tout autre
 helper dans votre vue, comme ceci::
 
     echo $this->ContactInfo->address($contact);
@@ -245,19 +257,25 @@ Créer un Plugin en utilisant Bake
 Le processus de création des plugins peut être grandement simplifié en utilisant
 le shell bake.
 
-Pour cuisiner un plugin, utilisez la commande suivante::
+Pour cuisiner un plugin, utilisez la commande suivante:
+
+.. code-block:: shell
 
     $ bin/cake bake plugin ContactManager
 
 Maintenant vous pouvez cuisiner en utilisant les mêmes conventions qui
-s'appliquent au reste de votre app. Par exemple - baking controllers::
+s'appliquent au reste de votre app. Par exemple - baking controllers:
+
+.. code-block:: shell
 
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 Référez-vous au chapitre
 :doc:`/bake/usage` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande. Assurez-vous de
-re-générer votre autoloader une fois que vous avez créé votre plugin::
+re-générer votre autoloader une fois que vous avez créé votre plugin:
+
+.. code-block:: shell
 
     $ php composer.phar dumpautoload
 

@@ -170,13 +170,43 @@ les méthodes HTTP.
 
     Utilisée pour faire une erreur 405 pour les Méthodes Non Autorisées.
 
+.. php:exception:: NotAcceptableException
+
+    Utilisée pour faire une erreur 406 Not Acceptable.
+    
+    .. versionadded:: 3.1.7 NotAcceptableException a été ajoutée.
+
+.. php:exception:: ConflictException
+
+    Utilisée pour faire une erreur 409 Conflict.
+
+    .. versionadded:: 3.1.7 ConflictException a été ajoutée.
+
+.. php:exception:: GoneException
+
+    Utilisée pour faire une erreur 410 Gone.
+
+    .. versionadded:: 3.1.7 GoneException a été ajoutée.
+
+Pour plus de détails sur les codes de statut d'erreur HTTP 4xx, regardez
+:rfc:`2616#section-10.4`.
+
 .. php:exception:: InternalErrorException
 
-    Utilisée pour faire une Erreur 500 du Serveur Interne.
+    Utilisée pour faire une erreur 500 du Serveur Interne.
 
 .. php:exception:: NotImplementedException
 
-    Utilisée pour faire une Erreur 501 Non Implémentée.
+    Utilisée pour faire une erreur 501 Non Implémentée.
+
+.. php:exception:: ServiceUnavailableException
+
+    Utilisée pour faire une erreur 503 Service Unavailable.
+
+    .. versionadded:: 3.1.7 Service Unavailable a été ajoutée.
+
+Pour plus de détails sur les codes de statut d'erreur HTTP 5xx, regardez
+:rfc:`2616#section-10.5`.
 
 Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
 les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
