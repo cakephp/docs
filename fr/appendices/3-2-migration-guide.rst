@@ -91,7 +91,21 @@ Shell
 * ``Shell::info()``, ``Shell::warn()`` et ``Shell::success()`` ont été ajoutées.
   Ces méthodes de helper facilitent l'utilisation des styles communément
   utilisés.
+* ``Cake\Console\Exception\StopException`` ont été ajoutées.
+* ``Shell::abort()`` a été ajoutée pour remplacer ``error()``.
+* ``Shell::error()`` est dépréciée car son nom n'indique pas clairement qu'elle
+  affiche les messages et arrête l'exécution. Utilisez ``Shell::abort()`` à la
+  place.
 
+exit() no longer called by _stop() and error()
+----------------------------------------------
+
+``Shell::_stop()`` et ``Shell::error()`` n'appellent plus ``exit()``. A la place,
+elles lancent une ``Cake\\Console\\Exception\\StopException``. Si vos
+shells/tasks attrapent les ``\Exception`` là où sont lancées ces méthodes, vous
+devrez mettre à jour ces blocs de code pour qu'ils n'attrapent pas les
+``StopException``. En évitant d'utiliser  ``exit()``, tester vos shells sera
+plus facile et nécessitera moins de mocks.
 
 View
 ====
