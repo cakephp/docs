@@ -184,7 +184,7 @@ les méthodes HTTP.
 
     .. versionadded:: 3.1.7 GoneException a été ajoutée.
 
-Pour de détails sur les codes de statut d'erreur HTTP 4xx, regardez
+Pour plus de détails sur les codes de statut d'erreur HTTP 4xx, regardez
 :rfc:`2616#section-10.4`.
 
 .. php:exception:: InternalErrorException
@@ -201,7 +201,7 @@ Pour de détails sur les codes de statut d'erreur HTTP 4xx, regardez
 
     .. versionadded:: 3.1.7 Service Unavailable a été ajoutée.
 
-Pour de détails sur les codes de statut d'erreur HTTP 5xx, regardez
+Pour plus de détails sur les codes de statut d'erreur HTTP 5xx, regardez
 :rfc:`2616#section-10.5`.
 
 Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
