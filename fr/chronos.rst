@@ -11,7 +11,7 @@ Chronos fournit une collection d'extensions sans aucune dépendance pour l'objet
   pour un support complet d'autres langues.
 
 Installation
-============
+------------
 
 Pour installer chronos, vous devez utiliser ``composer``. A partir du répertoire
 ROOT de votre application (où le fichier composer.json se trouve) exécutez ce
@@ -20,7 +20,7 @@ qui suit::
     php composer.phar require cakephp/chronos "@stable"
 
 Vue d'Ensemble
-==============
+--------------
 
 Chronos fournit un certain nombre d'extensions pour les objets DateTime fournis
 par PHP. Chronos fournit 5 classes qui gèrent les variantes mutables et
@@ -38,7 +38,7 @@ vous devez utiliser ``Cake\Chronos\ChronosInterface``. Tous les objets date et
 time implémentent cette interface.
 
 Créer des Instances
-===================
+-------------------
 
 Il y a plusieurs façons d'obtenir une instance de Chronos ou de Date. Il y a
 un certain nombre de méthodes factory qui fonctionnent avec des ensembles
@@ -65,7 +65,7 @@ ayant des arguments différents::
     $date = Chronos::createFromFormat('m/d/Y', '06/15/2015');
 
 Travailler avec les Objets Immutables
-=====================================
+-------------------------------------
 
 Si vous avez utilisé les objets ``DateTime`` de PHP, vous êtes à l'aise avec
 les objets *mutable*. Chronos offre des objets mutables, mais elle fournit
@@ -95,7 +95,7 @@ vous souhaitez un objet mutable, vous pouvez utiliser ``toMutable()``::
     $inplace = $time->toMutable();
 
 Objets Date
-===========
+-----------
 
 PHP fournit seulement un unique objet DateTime. Représenter les dates de
 calendrier peut être un peu gênant avec cette classe puisqu'elle inclut les
@@ -116,7 +116,7 @@ fonctionnent au niveau du jour::
     echo $today;
 
 Méthodes de Modification
-========================
+------------------------
 
 Les objets Chronos fournissent des méthodes de modification qui vous laissent
 modifier la valeur d'une façon assez précise::
@@ -139,7 +139,7 @@ Vous pouvez aussi modifier les parties de la date de façon relative::
         ->subMinutes(2);
 
 Méthodes de Comparaison
-=======================
+-----------------------
 
 Une fois que vous avez 2 instances d'objets date/time de Chronos, vous pouvez
 les comparer de plusieurs façons::
@@ -176,7 +176,7 @@ Vous pouvez aussi trouver si une valeur était dans une période de temps relati
     $time->isWithinNext('3 hours');
 
 Générer des Différences
-=======================
+-----------------------
 
 En plus de comparer les datetimes, calculer les différences ou les deltas entre
 des valeurs est une tâche courante::
@@ -199,7 +199,7 @@ l'utilisation d'un feed ou d'une timeline::
     echo $date->diffForHumans($other);
 
 Formater les Chaînes
-====================
+--------------------
 
 Chronos fournit un certain nombre de méthodes pour afficher nos sorties d'objets
 datetime::
@@ -221,7 +221,7 @@ datetime::
     echo $date->toQuarter();
 
 Aides aux Tests
-===============
+---------------
 
 Quand vous écrivez des tests unitaires, il peut être utile de fixer le time
 courant. Chronos vous permet de fixer le time courant pour chaque classe.

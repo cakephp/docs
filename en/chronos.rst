@@ -10,7 +10,7 @@ object. In addition to convenience methods, chronos provides:
   library. However, ``cakephp/i18n`` can be used for full language support.
 
 Installation
-============
+------------
 
 To install chronos, you should use ``composer``. From your
 application's ROOT directory (where composer.json file is located) run the
@@ -19,7 +19,7 @@ following::
     php composer.phar require cakephp/chronos "@stable"
 
 Overview
-========
+--------
 
 Chronos provides a number of extensions to the DateTime objects provided by PHP.
 Chronos provides 5 classes that cover mutable and immutable date/time variants
@@ -37,7 +37,7 @@ should use ``Cake\Chronos\ChronosInterface``. All of the date and time objects
 implement this interface.
 
 Creating Instances
-==================
+------------------
 
 There are many ways to get an instance of Chronos or Date. There are a number of
 factory methods that work with different argument sets::
@@ -63,7 +63,7 @@ factory methods that work with different argument sets::
     $date = Chronos::createFromFormat('m/d/Y', '06/15/2015');
 
 Working with Immutable Objects
-==============================
+------------------------------
 
 If you've used PHP's ``DateTime`` objects, you're comfortable with *mutable*
 objects. Chronos offer mutable objects, but it also provides *immutable*
@@ -92,7 +92,7 @@ one, you can use ``toMutable()``::
     $inplace = $time->toMutable();
 
 Date Objects
-============
+------------
 
 PHP only provides a single DateTime object. Representing calendar dates can be
 a bit awkward with this class as it includes timezones, and time components that
@@ -112,7 +112,7 @@ methods operate at the day resolution::
     echo $today;
 
 Modifier Methods
-================
+----------------
 
 Chronos objects provide modifier methods that let you modify the value in
 a fine-grained way::
@@ -134,8 +134,23 @@ You can also modify parts of a date relatively::
         ->addHours(20)
         ->subMinutes(2);
 
+It is also possible to make big jumps to defined points in time::
+
+    $time = Chronos::create();
+    $time->startOfDay();
+    $time->startOfMonth();
+    $time->endOfMonth();
+    $time->endOfYear();
+    $time->startOfWeek();
+    $time->endOfWeek();
+
+Or jump to specific days of the week::
+
+    $time->next(CronosInterface::TUESDAY);
+    $time->previous(CronosInterface::MONDAY);
+
 Comparison Methods
-==================
+------------------
 
 Once you have 2 instances of Chronos date/time objects you can compare them in
 a variety of ways::
@@ -171,7 +186,7 @@ You can also find out if a value was within a relative time period::
     $time->isWithinNext('3 hours');
 
 Generating Differences
-======================
+----------------------
 
 In addition to comparing datetimes, calculating differences or deltas between
 to values is a common task::
@@ -180,6 +195,7 @@ to values is a common task::
     $first->diff($second);
 
     // Get difference as a count of specific units.
+    $first->diffInHours($second);
     $first->diffInDays($second);
     $first->diffInWeeks($second);
     $first->diffInYears($second);
@@ -191,10 +207,10 @@ timeline::
     echo $date->diffForHumans();
 
     // Difference from another point in time.
-    echo $date->diffForHumans($other);
+    echo $date->diffForHumans($other) // 1 hour ago;
 
 Formatting Strings
-==================
+------------------
 
 Chronos provides a number of methods for displaying our outputting datetime
 objects::
@@ -203,20 +219,48 @@ objects::
     echo $date;
 
     // Different standard formats
-    echo $date->toAtomString();
-    echo $date->toCookieString();
-    echo $date->toIso8601String();
-    echo $date->toRfc822String();
-    echo $date->toRfc850String();
-    echo $date->toRfc1036String();
-    echo $date->toRfc1123String();
-    echo $date->toRfc2822String();
+    echo $time->toAtomString();      // 1975-12-25T14:15:16-05:00
+    echo $time->toCookieString();    // Thursday, 25-Dec-1975 14:15:16 EST
+    echo $time->toIso8601String();   // 1975-12-25T14:15:16-0500
+    echo $time->toRfc822String();    // Thu, 25 Dec 75 14:15:16 -0500
+    echo $time->toRfc850String();    // Thursday, 25-Dec-75 14:15:16 EST
+    echo $time->toRfc1036String();   // Thu, 25 Dec 75 14:15:16 -0500
+    echo $time->toRfc1123String();   // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toRfc2822String();   // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toRfc3339String();   // 1975-12-25T14:15:16-05:00
+    echo $time->toRssString();       // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toW3cString();       // 1975-12-25T14:15:16-05:00
 
     // Get the quarter
-    echo $date->toQuarter();
+    echo $time->toQuarter()        // 4;
+
+Extracting Date Components
+--------------------------
+
+Getting parts of a date object can be done by directly accessing properties::
+
+    $time = new Chronos('2015-12-31 23:59:58');
+    $time->year;    // 2015
+    $time->month;   // 12
+    $time->day;     // 31
+    $time->hour     // 23
+    $time->minute   // 59
+    $time->second   // 58
+
+Other properties that can be accessed are:
+
+- timezone
+- timezoneName
+- micro
+- dayOfWeek
+- dayOfMonth
+- dayOfYear
+- daysInMonth
+- timesptamp
+- quarter
 
 Testing Aids
-============
+------------
 
 When writing unit tests, it is helpful to fixate the current time. Chronos lets
 you fix the current time for each class. As part of your test suite's bootstrap
@@ -230,3 +274,11 @@ process you can include the following::
 This will fix the current time of all objects to be the point at which the test
 suite started.
 
+For example, if you fixate the ``Chronos`` to some moment in the past, any new
+instance of ``Chronos`` created with ``now`` or a relative time string, will be
+returned relative to the fixated time::
+
+    Chronos::setTestNow(new Chronos('1975-12-25 00:00:00'));
+
+    $time = new Chronos(); // 1975-12-25 00:00:00
+    $time = new Chronos('1 hour ago'); // 1975-12-24 23:00:00
