@@ -219,20 +219,20 @@ objects::
     echo $date;
 
     // Different standard formats
-    echo $dt->toAtomString();      // 1975-12-25T14:15:16-05:00
-    echo $dt->toCookieString();    // Thursday, 25-Dec-1975 14:15:16 EST
-    echo $dt->toIso8601String();   // 1975-12-25T14:15:16-0500
-    echo $dt->toRfc822String();    // Thu, 25 Dec 75 14:15:16 -0500
-    echo $dt->toRfc850String();    // Thursday, 25-Dec-75 14:15:16 EST
-    echo $dt->toRfc1036String();   // Thu, 25 Dec 75 14:15:16 -0500
-    echo $dt->toRfc1123String();   // Thu, 25 Dec 1975 14:15:16 -0500
-    echo $dt->toRfc2822String();   // Thu, 25 Dec 1975 14:15:16 -0500
-    echo $dt->toRfc3339String();   // 1975-12-25T14:15:16-05:00
-    echo $dt->toRssString();       // Thu, 25 Dec 1975 14:15:16 -0500
-    echo $dt->toW3cString();       // 1975-12-25T14:15:16-05:00
+    echo $time->toAtomString();      // 1975-12-25T14:15:16-05:00
+    echo $time->toCookieString();    // Thursday, 25-Dec-1975 14:15:16 EST
+    echo $time->toIso8601String();   // 1975-12-25T14:15:16-0500
+    echo $time->toRfc822String();    // Thu, 25 Dec 75 14:15:16 -0500
+    echo $time->toRfc850String();    // Thursday, 25-Dec-75 14:15:16 EST
+    echo $time->toRfc1036String();   // Thu, 25 Dec 75 14:15:16 -0500
+    echo $time->toRfc1123String();   // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toRfc2822String();   // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toRfc3339String();   // 1975-12-25T14:15:16-05:00
+    echo $time->toRssString();       // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toW3cString();       // 1975-12-25T14:15:16-05:00
 
     // Get the quarter
-    echo $date->toQuarter()        // 4;
+    echo $time->toQuarter()        // 4;
 
 Extracting Date Components
 --------------------------
