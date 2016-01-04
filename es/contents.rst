@@ -12,7 +12,7 @@ Contenidos
 
     intro
     quickstart
-    appendices/3-0-migration-guide
+    appendices/3-x-migration-guide
     tutorials-and-examples
     contributing
 
