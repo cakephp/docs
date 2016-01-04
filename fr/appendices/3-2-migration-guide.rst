@@ -8,7 +8,7 @@ faits dans 3.2.
 PHP 5.5 Requis au Minimum
 =========================
 
-CakePHP 3.2 requiert au moins PHP 5.5.10. En adoptant PHP 5.5, nous pouvons fournir
+CakePHP 3.2 requiert au moins PHP 5.5.9. En adoptant PHP 5.5, nous pouvons fournir
 des librairies de Date et de Time et retirer les dépendances qui concernent les
 librairies de compatibilité pour les mots de passe.
 
