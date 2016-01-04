@@ -488,7 +488,7 @@ For example, consider the following case::
         ]
     ];
     $entity = $articles->newEntity($data);
-    $articles->save($article);
+    $articles->save($entity);
 
     $newData = [
         'comments' => [
@@ -497,7 +497,7 @@ For example, consider the following case::
         ]
     ];
     $articles->patchEntity($entity, $newData);
-    $articles->save($article);
+    $articles->save($entity);
 
 At the end, if the entity is converted back to an array you will obtain the
 following result::
