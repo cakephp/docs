@@ -139,7 +139,7 @@ It is also possible to make big jumps to defined points in time::
     $time = Chronos::create();
     $time->startOfDay();
     $time->startOfMonth();
-    $time->endOfMoth();
+    $time->endOfMonth();
     $time->endOfYear();
     $time->startOfWeek();
     $time->endOfWeek();
