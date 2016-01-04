@@ -303,9 +303,9 @@ want to conditionally show headings or other markup:
     </div>
     <?php endif; ?>
 
-You can also provide a default value for a block does not exist.
-This allows you to add placeholder content for not exist
-states. You can provide a default value using the second argument:
+You can also provide a default value for a block if it does not exist.
+This allows you to add placeholder content when a block does not exist.
+You can provide a default value using the second argument:
 
 .. code-block:: php
 
