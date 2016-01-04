@@ -4,34 +4,17 @@ Apéndices
 En los apéndices encontrarás información relacionada a las nuevas características
 introducidas en cada versión, así como también las guías de migración entre versiones.
 
-Guía de Migración a 3.2
+Guía de Migración a 3.x
 =======================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-2-migration-guide
-
-Guía de Migración a 3.1
-=======================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/3-1-migration-guide
-
-Guía de Migración a 3.0
-=======================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/3-0-migration-guide
-    appendices/orm-migration
+    appendices/3-x-migration-guide
 
 
 Información General
-====================
+===================
 
 .. toctree::
     :maxdepth: 1
