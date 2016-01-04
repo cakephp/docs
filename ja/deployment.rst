@@ -64,7 +64,6 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
     SetEnv CAKEPHP_DEBUG 1
 
 ..
-
   And then you can set the debug level dynamically in **app.php** ::
 
 それから、**app.php** にてデバッグレベルをダイナミックにセットすることができます。
@@ -128,10 +127,10 @@ app.php、特に ``debug`` の値ををアップデートすることは非常�
 
 どの場合においても ``webroot/`` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
-.. _symlink-assets:
-
 ..
   Improve Your Application's Performance
+
+.. _symlink-assets:
 
 アプリケーションのパフォーマンスを改善させる
 ============================================
