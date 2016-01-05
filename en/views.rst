@@ -327,7 +327,7 @@ The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
     <?php
     // In your view file
     $this->Html->script('carousel', ['block' => true]);
-    $this->Html->css('carousel', null, ['block' => true]);
+    $this->Html->css('carousel', ['block' => true]);
     ?>
 
     // In your layout file.
