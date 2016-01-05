@@ -118,6 +118,12 @@ selon. Exemple::
 Vous pouvez également utiliser ``tls://`` pour spécifier TLS pour le chiffrement
 au niveau de la connexion.
 
+.. warning::
+    Vous devrez avoir l'accès aux applications moins sécurisées activé dans votre
+    compte Google pour que cela fonctionne:
+    `Autoriser les applications moins sécurisées à accéder à votre
+    compte <https://support.google.com/accounts/answer/6010255>`__.
+
 .. note::
 
     Pour utiliser les fonctionnalités ssl:// ou tls://, vous aurez besoin
