@@ -146,8 +146,8 @@ It is also possible to make big jumps to defined points in time::
 
 Or jump to specific days of the week::
 
-    $time->next(CronosInterface::TUESDAY);
-    $time->previous(CronosInterface::MONDAY);
+    $time->next(ChronosInterface::TUESDAY);
+    $time->previous(ChronosInterface::MONDAY);
 
 Comparison Methods
 ------------------
@@ -207,7 +207,7 @@ timeline::
     echo $date->diffForHumans();
 
     // Difference from another point in time.
-    echo $date->diffForHumans($other) // 1 hour ago;
+    echo $date->diffForHumans($other); // 1 hour ago;
 
 Formatting Strings
 ------------------
@@ -232,7 +232,7 @@ objects::
     echo $time->toW3cString();       // 1975-12-25T14:15:16-05:00
 
     // Get the quarter
-    echo $time->toQuarter()        // 4;
+    echo $time->toQuarter();         // 4;
 
 Extracting Date Components
 --------------------------
