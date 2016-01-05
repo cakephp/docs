@@ -521,8 +521,17 @@ Par exemple, considérons le cas suivant::
             ['body' => 'A new comment'],
         ]
     ];
-    $articles->patchEntity($article, $newData);
-    $articles->save($article);
+    $entity = $articles->newEntity($data);
+    $articles->save($entity);
+
+    $newData = [
+        'comments' => [
+            ['body' => 'Changed comment', 'id' => 1],
+            ['body' => 'A new comment'],
+        ]
+    ];
+    $articles->patchEntity($entity, $newData);
+    $articles->save($entity);
 
 A la fin, si l'entity est à nouveau convertie en tableau, vous obtiendrez le
 résultat suivant::

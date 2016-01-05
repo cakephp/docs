@@ -140,8 +140,10 @@ enable TLS SMTP using the ``tls`` option::
 The above configuration would enable TLS communication for email messages.
 
 .. warning::
-    You will need to have access for less secure apps enabled in you google account for this to work:
-    `Allowing less secure apps to access your account <https://support.google.com/accounts/answer/6010255>`__.
+    You will need to have access for less secure apps enabled in you Google
+    account for this to work:
+    `Allowing less secure apps to access your
+    account <https://support.google.com/accounts/answer/6010255>`__.
 
 .. note::
 

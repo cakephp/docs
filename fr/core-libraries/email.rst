@@ -146,6 +146,12 @@ valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
 La configuration ci-dessus va activer la communication TLS pour tous les
 messages d'email.
 
+.. warning::
+    Vous devrez avoir l'accès aux applications moins sécurisées activé dans votre
+    compte Google pour que cela fonctionne:
+    `Autoriser les applications moins sécurisées à accéder à votre
+    compte <https://support.google.com/accounts/answer/6010255>`__.
+    
 .. note::
 
     Pour utiliser SSL + SMTP, vous devrez avoir SSL configuré dans votre
