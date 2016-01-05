@@ -151,8 +151,8 @@ temps::
 
 Ou de sauter à un jour spécifique de la semaine::
 
-    $time->next(CronosInterface::TUESDAY);
-    $time->previous(CronosInterface::MONDAY);
+    $time->next(ChronosInterface::TUESDAY);
+    $time->previous(ChronosInterface::MONDAY);
 
 Méthodes de Comparaison
 -----------------------

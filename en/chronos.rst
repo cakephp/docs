@@ -146,8 +146,8 @@ It is also possible to make big jumps to defined points in time::
 
 Or jump to specific days of the week::
 
-    $time->next(CronosInterface::TUESDAY);
-    $time->previous(CronosInterface::MONDAY);
+    $time->next(ChronosInterface::TUESDAY);
+    $time->previous(ChronosInterface::MONDAY);
 
 Comparison Methods
 ------------------
