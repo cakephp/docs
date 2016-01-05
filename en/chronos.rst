@@ -207,7 +207,7 @@ timeline::
     echo $date->diffForHumans();
 
     // Difference from another point in time.
-    echo $date->diffForHumans($other) // 1 hour ago;
+    echo $date->diffForHumans($other); // 1 hour ago;
 
 Formatting Strings
 ------------------
@@ -232,7 +232,7 @@ objects::
     echo $time->toW3cString();       // 1975-12-25T14:15:16-05:00
 
     // Get the quarter
-    echo $time->toQuarter()        // 4;
+    echo $time->toQuarter();         // 4;
 
 Extracting Date Components
 --------------------------

@@ -138,6 +138,22 @@ Vous pouvez aussi modifier les parties de la date de façon relative::
         ->addHours(20)
         ->subMinutes(2);
 
+Il est  également possible de faire des sauts vers des points définis dans le
+temps::
+
+    $time = Chronos::create();
+    $time->startOfDay();
+    $time->startOfMonth();
+    $time->endOfMonth();
+    $time->endOfYear();
+    $time->startOfWeek();
+    $time->endOfWeek();
+
+Ou de sauter à un jour spécifique de la semaine::
+
+    $time->next(CronosInterface::TUESDAY);
+    $time->previous(CronosInterface::MONDAY);
+
 Méthodes de Comparaison
 -----------------------
 
@@ -185,6 +201,7 @@ des valeurs est une tâche courante::
     $first->diff($second);
 
     // Récupère la différence en tant que nombre d'unités spécifiques.
+    $first->diffInHours($second);
     $first->diffInDays($second);
     $first->diffInWeeks($second);
     $first->diffInYears($second);
@@ -196,7 +213,7 @@ l'utilisation d'un feed ou d'une timeline::
     echo $date->diffForHumans();
 
     // Différence à partir d'un autre point du temps.
-    echo $date->diffForHumans($other);
+    echo $date->diffForHumans($other); // 1 hour ago;
 
 Formater les Chaînes
 --------------------
@@ -208,17 +225,46 @@ datetime::
     echo $date;
 
     // Différents formats standards
-    echo $date->toAtomString();
-    echo $date->toCookieString();
-    echo $date->toIso8601String();
-    echo $date->toRfc822String();
-    echo $date->toRfc850String();
-    echo $date->toRfc1036String();
-    echo $date->toRfc1123String();
-    echo $date->toRfc2822String();
+    echo $time->toAtomString();      // 1975-12-25T14:15:16-05:00
+    echo $time->toCookieString();    // Thursday, 25-Dec-1975 14:15:16 EST
+    echo $time->toIso8601String();   // 1975-12-25T14:15:16-0500
+    echo $time->toRfc822String();    // Thu, 25 Dec 75 14:15:16 -0500
+    echo $time->toRfc850String();    // Thursday, 25-Dec-75 14:15:16 EST
+    echo $time->toRfc1036String();   // Thu, 25 Dec 75 14:15:16 -0500
+    echo $time->toRfc1123String();   // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toRfc2822String();   // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toRfc3339String();   // 1975-12-25T14:15:16-05:00
+    echo $time->toRssString();       // Thu, 25 Dec 1975 14:15:16 -0500
+    echo $time->toW3cString();       // 1975-12-25T14:15:16-05:00
 
     // Récupère le trimestre
-    echo $date->toQuarter();
+    echo $time->toQuarter();         // 4;
+
+Extraire des Fragments de Date
+------------------------------
+
+Il est possible de récupérer des parties d'un objet date en accédant directement
+à ses propriétés::
+
+    $time = new Chronos('2015-12-31 23:59:58');
+    $time->year;    // 2015
+    $time->month;   // 12
+    $time->day;     // 31
+    $time->hour     // 23
+    $time->minute   // 59
+    $time->second   // 58
+
+Les autres propriétés accessibles sont:
+
+- timezone
+- timezoneName
+- micro
+- dayOfWeek
+- dayOfMonth
+- dayOfYear
+- daysInMonth
+- timesptamp
+- quarter
 
 Aides aux Tests
 ---------------
@@ -235,3 +281,12 @@ vous pouvez inclure ce qui suit::
 
 Ceci va fixer le time courant de tous les objets selon le moment où la suite de
 tests a démarré.
+
+Par exemple, si vous fixez le ``Chronos`` à un moment du passé, chaque nouvelle
+instance de ``Chronos`` créée avec ``now`` ou une chaine de temps relative, sera
+retournée relativement à la date fixée::
+
+    Chronos::setTestNow(new Chronos('1975-12-25 00:00:00'));
+
+    $time = new Chronos(); // 1975-12-25 00:00:00
+    $time = new Chronos('1 hour ago'); // 1975-12-24 23:00:00
