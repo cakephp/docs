@@ -180,5 +180,5 @@ $xml1 和 $xml2的值分别是：
     $xml->firstChild->appendChild($child);
 
 
-``用SimpleXMLElement or DomDocument处理Xml后，用Xml::toArray()没有问题。`` 
+``用SimpleXMLElement 或者 DomDocument处理Xml后， 可以使用Xml::toArray()。`` 
 
