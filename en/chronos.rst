@@ -2,17 +2,17 @@ Chronos
 =======
 
 Chronos provides a zero-dependency collection of extensions to the ``DateTime``
-object. In addition to convenience methods, chronos provides:
+object. In addition to convenience methods, Chronos provides:
 
 * ``Date`` objects for representing calendar dates.
 * Immutable date and datetime objects.
-* A pluggable translation system. Only english translations are included in the
+* A pluggable translation system. Only English translations are included in the
   library. However, ``cakephp/i18n`` can be used for full language support.
 
 Installation
 ------------
 
-To install chronos, you should use ``composer``. From your
+To install Chronos, you should use ``composer``. From your
 application's ROOT directory (where composer.json file is located) run the
 following::
 
@@ -32,7 +32,7 @@ and extensions to ``DateInterval``.
 * ``Cake\Chronos\ChronosInterval`` is an extension to the ``DateInterval``
   object.
 
-Lastly, if you want to typehint against chronos provided date/time objects you
+Lastly, if you want to typehint against Chronos-provided date/time objects you
 should use ``Cake\Chronos\ChronosInterface``. All of the date and time objects
 implement this interface.
 
@@ -66,12 +66,12 @@ Working with Immutable Objects
 ------------------------------
 
 If you've used PHP's ``DateTime`` objects, you're comfortable with *mutable*
-objects. Chronos offer mutable objects, but it also provides *immutable*
+objects. Chronos offers mutable objects, but it also provides *immutable*
 objects. Immutable objects create copies of objects each time an object is
 modified. Because modifier methods around datetimes are not always transparent,
 data can be modified accidentally or without the developer knowing.
 Immutable objects prevent accidental changes to
-data, and make code free of order based dependency issues. Immutability
+data, and make code free of order-based dependency issues. Immutability
 does mean that you will need to remember to replace variables when using
 modifiers::
 
@@ -115,7 +115,7 @@ Modifier Methods
 ----------------
 
 Chronos objects provide modifier methods that let you modify the value in
-a fine-grained way::
+a granular way::
 
     // Set components of the datetime value.
     $halloween = Date::create()
