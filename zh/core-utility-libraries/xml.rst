@@ -19,7 +19,7 @@ Xml
 
     class Cake\Utility\Xml
 
-Xml类充许将数组转换成SimpleXMLElement或者DOMDocument对象，并且可以转回数组。
+Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对象，并且可以转回数组。
 
 
 导入数据到Xml类中
@@ -28,7 +28,7 @@ Xml类充许将数组转换成SimpleXMLElement或者DOMDocument对象，并且�
 
     static Cake\Utility\Xml::build($input, array $options =[])
 
-你可使用Xml::build() 载入XML-ish数据。取决于你 ``$options`` 的参数，这个方法允许你返回一个SimpleXMLElement (default) or DOMDocument对象，在各种数据来源中，你可使用 Xml::build()去创建一个XML对象。例如，你可以通过下面的设置载入XML。
+你可使用Xml::build() 载入XML-ish数据。取决于你 ``$options`` 的参数，这个方法允许你返回一个 ``SimpleXMLElement (default) or DOMDocument`` 对象，在各种数据来源中，你可使用 ``Xml::build()`` 去创建一个XML对象。例如，你可以通过下面的设置载入XML。
 
 ::
 
@@ -81,7 +81,7 @@ DOMDocument and SimpleXML 继承了不同的API's。你从XML请求的对象，�
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlArray = Xml::toArray(Xml::build($xmlString));
 
-如果你的XML是无效的将会执行Cake\Utility\Exception\XmlException异常。
+如果你的XML是无效的将会执行 ``Cake\Utility\Exception\XmlException`` 异常。
 
 把数组转换成Xml字符串
 =======================
