@@ -179,6 +179,6 @@ $xml1 和 $xml2的值分别是：
     $child = $xml->createElement('young', 'new value');
     $xml->firstChild->appendChild($child);
 
-.. Interpreted Text
-用SimpleXMLElement or DomDocument处理Xml后，用Xml::toArray()没有问题。
+
+ ``用SimpleXMLElement or DomDocument处理Xml后，用Xml::toArray()没有问题。`` 
 
