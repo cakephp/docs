@@ -65,7 +65,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
         throw new InternalErrorException();
     }
 
-DOMDocument and SimpleXML 继承了不同的API's。你从XML请求的对象，一定要使用正确的方法。
+DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，一定要使用正确的方法。
 
 把Xml字符串转换成数组
 ======================
