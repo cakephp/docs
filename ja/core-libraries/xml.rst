@@ -15,7 +15,7 @@ Xmlクラスを利用して、 配列から SimpleXMLElement もしくは DOMDoc
     Importing Data to Xml Class
 
 データをXmlクラスにインポートする
-===========================
+==================================
 
 .. php:staticmethod:: build($input, array $options = [])
 
@@ -215,11 +215,12 @@ XMLテキストを配列に変換するのは、 Xml クラスと同様にシン
     Using Namespaces
 
 名前空間を利用する
-----------------
+-------------------
 
-To use XML Namespaces, create a key in your array with the name ``xmlns:``
-in a generic namespace or input the prefix ``xmlns:`` in a custom namespace. See
-the samples::
+..
+    To use XML Namespaces, create a key in your array with the name ``xmlns:``
+    in a generic namespace or input the prefix ``xmlns:`` in a custom namespace. See
+    the samples::
 
 XML の名前空間を利用するには、配列のキーに包括的な名前空間である ``xmlns:`` を使用するか、
 独自の名前空間に ``xmlns:`` を接頭語として加えたキーを使用して配列を作成します。
