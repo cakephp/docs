@@ -185,6 +185,7 @@ exceptions for HTTP methods
 
 For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
+
 .. php:exception:: InternalErrorException
 
     Used for doing a 500 Internal Server Error.
@@ -203,17 +204,21 @@ For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
 For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
 
-You can throw these exceptions from you controllers to indicate failure states,
+
+You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException('Could not find that post');
+        $post = $this->Posts->findById($id)->first();
+        if (empty($post)) {
+            throw new NotFoundException(__('Post not found'));
         }
         $this->set('post', $post);
+        $this->set('_serialize', ['post']);
     }
 
 By using exceptions for HTTP errors, you can keep your code both clean, and give
@@ -316,7 +321,7 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: RecordNotFoundException
 
-   The requested record could not be found.
+   The requested record could not be found. This will also set HTTP response headers to 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
@@ -360,13 +365,16 @@ Using HTTP Exceptions in your Controllers
 You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id)->first();
-        if (!$post) {
-            throw new NotFoundException();
+        $post = $this->Posts->findById($id)->first();
+        if (empty($post)) {
+            throw new NotFoundException(__('Post not found'));
         }
-        $this->set(compact('post'));
+        $this->set('post', $post);
+        $this->set('_serialize', ['post']);
     }
 
 The above would cause the configured exception handler to catch and
@@ -580,4 +588,4 @@ dealt with by ErrorHandler by setting the ``log`` option to ``true`` in your
 
 .. meta::
     :title lang=en: Error & Exception Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error, http status codes
