@@ -2,15 +2,10 @@
 
 - Xml
 - 通过Xml类导入数据
-
 - 将Xml字符串转换成数组
-
 - 将数据转换成Xml字符串
-
     - 使用命名空间
-    
     - 创建一个子节点
-
 
 Xml
 ==============
@@ -60,6 +55,7 @@ $xml = Xml::build($data);
 如果你的输入是无效的，Xml类会抛出一个异常。
 
 ::
+
     $xmlString = 'What is XML?':
     try {::
         $xmlObject = Xml::build($xmlString); // Here will throw an exception
@@ -71,8 +67,8 @@ DOMDocument and SimpleXML 继承了不同的API's。你从XML请求的对象，�
 
 把Xml字符串转换成数组
 ======================
-::
-    toArray($obj);
+
+ ``toArray($obj);``
 
 用Xml类把Xml字符串转换成数组是非简单的。默认你将获得返回值是SimpleXml对象。
 
