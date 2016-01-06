@@ -1,7 +1,7 @@
 **目录**
 
-**Xml**
-
+Xml
+####
 通过Xml类导入数据
 
 将Xml字符串转换成数组
@@ -13,7 +13,8 @@
 创建一个子节点
 
 
-### Xml
+Xml
+==============
 class Cake\Utility\Xml
 
 Xml类充许将数组转换成SimpleXMLElement或者DOMDocument对象，并且可以转回数组。
@@ -22,8 +23,7 @@ Xml类充许将数组转换成SimpleXMLElement或者DOMDocument对象，并且�
 ### 导入数据到Xml类中
 static Cake\Utility\Xml::build($input, array $options =[])
 
-你可使用Xml::build() 载入XML-ish数据。取决于你$options的参数，这个方法允许你返回一个SimpleXMLElement (default) or DOMDocument对象，在各种数据来源中，你可使用 Xml::build()去创建一个XML对象。例如，你可以通过下面的设置载入XML。
-
+你可使用Xml::build() 载入XML-ish数据。取决于你$options的参数，这个方法允许你返回一个SimpleXMLElement (default) or DOMDocument对象，在各种数据来源中，你可使用 Xml::build()去创建一个XML对象。例如，你可以通过下面的设置载入XML。::
 $text = '<?xml version="1.0" encoding="utf-8"?>
 <post>
     <id>1</id>
@@ -47,7 +47,7 @@ $data = [
 ];
 $xml = Xml::build($data);
 
-如果你的输入是无效的，Xml类会抛出一个异常。
+如果你的输入是无效的，Xml类会抛出一个异常::
 
 $xmlString = 'What is XML?'
 try {
