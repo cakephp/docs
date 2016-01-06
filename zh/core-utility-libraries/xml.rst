@@ -33,7 +33,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
         <body> ... </body>
     </post>';
     $xml = Xml::build($text);
-
+    
 你也可以通过本地文件创建Xml对象：
 
 ::
@@ -43,14 +43,16 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 
 你也可以通可一个数据创建Xml对象：
 
-$data = [
-    'post' => [
-        'id' => 1,
-        'title' => 'Best post',
-        'body' => ' ... '
-    ]
-];
-$xml = Xml::build($data);
+::
+
+    $data = [
+        'post' => [
+            'id' => 1,
+            'title' => 'Best post',
+            'body' => ' ... '
+        ]
+    ];
+    $xml = Xml::build($data);
 
 如果你的输入是无效的，Xml类会抛出一个异常。
 
