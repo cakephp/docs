@@ -220,7 +220,7 @@ Saving a document will trigger the following events:
 * ``Model.afterSave`` - Fired after the document is saved.
 
 .. note::
-There are no events for embedded documents, as the parent document and all
+    There are no events for embedded documents, as the parent document and all
     of its embedded documents are saved as one operation.
 
 
