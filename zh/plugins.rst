@@ -38,14 +38,14 @@ CakePHP 让你可以建立一个控制器、模型和视图的组合，并且把
 如果你想要安装的插件在packagist.org没有。你可以克隆或者复制插件代码到你的插件文件夹中。假如你想安装一个插件名字叫 ``ContactManager`` ，在plugins中你需要一个文件夹名字叫做 ``ContactManager``，这个文件夹中有插件的源码，测试文件和其它的文件夹。
 
 
-Map插件
-Plugin Map File
+**Map插件**
+
 当你用via Composer 安装插件时 ``vendor/cakephp-plugins.php`` 将会被创建，这个配置文件包含Map插件的名字和它在文件系统的路径，它可以使插件安装到这是正常的搜索路径之外的标准vendor目录。当你使用 ``load()`` ``loadAll()`` 插件类会使用这个文件去定位插件。你一般不需要手动编辑这个文件，你可以通过Composer和plugin-install包管理。
 
 
 加载插件
 =========
-当你安装了一个插件并设置了autoloader，你需要载这个插件。你可以一个一个的载入或者通一个方法全部载入：
+当你安装了一个插件并设置了autoloader，你需要加载这个插件。你可以一个一个的载入或者通一个方法全部载入：
 
 ::
 
@@ -61,6 +61,17 @@ Plugin Map File
    
 
 loadAll() 加载所有插件可用，同时允许你为特定的插件设置某些设置。 load() 的工作方式类似，但只加载明确指定的插件。
+
+**Plugin::loadAll() 不能加载在 ``vendor/cakephp-plugins.php`` 中未定义vendor 命名空间的插件。**
+
+
+Autoloading Plugin Classes
+When using bake for creating a plugin or when installing a plugin using Composer, you don’t typically need to make any changes to your application in order to make CakePHP recognize the classes that live inside it.
+
+In any other cases you may need to modify your application’s composer.json file to contain the following information:
+
+
+
 
 
 
