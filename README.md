@@ -160,7 +160,7 @@ Translations
 
 Contributing translations requires that you make a new directory using the two
 letter name for your language. As content is translated, directories mirroring
-the english content should be created with localized content.
+the English content should be created with localized content.
 
 Making Search Work Locally
 --------------------------
