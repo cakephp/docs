@@ -143,7 +143,7 @@ besoin.
 Events du Cœur
 ==============
 
-Il y a de certain nombre d'events du cœur de base dans le framework que votre
+Il y a de certain nombre d'events du cœur du framework que votre
 application peut écouter. Chaque couche de CakePHP émet des events que vous
 pouvez écouter dans votre application.
 

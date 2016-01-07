@@ -557,7 +557,7 @@ events liés si les méthodes sont implémentées dans vos controllers.
 .. php:method:: afterFilter(Event $event)
 
     Cette méthode est appelée pendant l'event ``Controller.shutdown`` qui se
-    produit après chaque action du controller, et après que l'affichage soit
+    produit après chaque action du controller, et après que l'affichage est
     terminé. C'est la dernière méthode du controller qui est exécutée.
 
 En plus des callbacks des controllers, les :doc:`/controllers/components`
