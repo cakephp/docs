@@ -655,7 +655,7 @@ application run faster CakePHP provides a way to cache view sections::
 By default cached view content will go into the ``View::$elementCache`` cache
 config, but you can use the ``config`` option to change this.
 
-.. _view-events::
+.. _view-events:
 
 View Events
 ===========
