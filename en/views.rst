@@ -673,7 +673,7 @@ Event List
 * ``View.beforeLayout``
 * ``View.afterLayout``
 
-You can attach application :doc:`event listeners </events>` to these events or
+You can attach application :doc:`event listeners </core-libraries/events>` to these events or
 use :ref:`Helper Callbacks <helper-api>`.
 
 Creating Your Own View Classes
