@@ -655,6 +655,26 @@ application run faster CakePHP provides a way to cache view sections::
 By default cached view content will go into the ``View::$elementCache`` cache
 config, but you can use the ``config`` option to change this.
 
+.. _view-events:
+
+View Events
+===========
+
+Like Controller, view trigger several events/callbacks that you can use to insert
+logic around the rendering life-cycle:
+
+Event List
+----------
+
+* ``View.beforeRender``
+* ``View.beforeRenderFile``
+* ``View.afterRenderFile``
+* ``View.afterRender``
+* ``View.beforeLayout``
+* ``View.afterLayout``
+
+You can attach application :doc:`event listeners </core-libraries/events>` to these events or
+use :ref:`Helper Callbacks <helper-api>`.
 
 Creating Your Own View Classes
 ==============================

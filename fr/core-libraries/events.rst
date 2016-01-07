@@ -140,6 +140,17 @@ emails, mettre à jour les statistiques d'utilisateur si possible dans des
 objets séparés et même le déléguer à des tâches offline si vous avez ce
 besoin.
 
+Events du Cœur
+==============
+
+Il y a de certain nombre d'events du cœur du framework que votre
+application peut écouter. Chaque couche de CakePHP émet des events que vous
+pouvez écouter dans votre application.
+
+* :ref:`Events de l'ORM et du Model<table-callbacks>`
+* :ref:`Events du Controller<controller-life-cycle>`
+* :ref:`Events de View<view-events>`
+
 Enregistrer les Listeners
 =========================
 

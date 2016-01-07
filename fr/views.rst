@@ -683,6 +683,28 @@ Par défaut, le contenu de la view ira dans la config de cache
 ``View::$elementCache``, mais vous pouvez utiliser l'option ``config`` pour
 changer ceci.
 
+.. _view-events:
+
+Events de View
+==============
+
+Tout comme le Controller, la View lance plusieurs events/callbacks (méthodes de
+rappel) que vous pouvez utiliser pour insérer de la logique durant tout le cycle
+de vie du processus de rendu:
+
+Liste des Events
+----------------
+
+* ``View.beforeRender``
+* ``View.beforeRenderFile``
+* ``View.afterRenderFile``
+* ``View.afterRender``
+* ``View.beforeLayout``
+* ``View.afterLayout``
+
+Vous pouvez attacher les :doc:`listeners d'events </core-libraries/events>` de
+votre application à ces events ou utiliser les :ref:`Callbacks de Helper <helper-api>`.
+
 Créer vos propres Classes de View
 =================================
 
