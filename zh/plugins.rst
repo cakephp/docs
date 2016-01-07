@@ -20,3 +20,21 @@ CakePHP 让你可以建立一个控制器、模型和视图的组合，并且把
 .. meta::
     :title lang=zh_CN: Plugins
     :keywords lang=zh_CN: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
+    
+    在 CakePHP 3.0 每个插件都定义了自己的顶级命名空间，例如：DebugKit. 按照惯例，插件使用他们的包作为他们的命名空间。如果你喜欢使用一个不同的命名空间，当你载入插件时可以配置你的命名空间。
+
+使用Composer安装插件
+======================
+
+在Packagist有很多可用的插件而且可以使用Composer进行安装。要安装DebugKit，你会做以下的事情：
+
+::
+
+   php composer.phar require cakephp/debug_kit
+
+
+这将安装DebugKit最新的版和更新你的 ``composer.json``  ``composer.lock`` 文件，更新 ``vendor/cakephp-plugins.php`` 和你的 ``autoloader`` 。
+
+如果你想要安装的插件在packagist.org没有。你可以克隆或者复制插件代码到你的插件文件夹中。假如你想安装一个插件名字叫 ``ContactManager`` ，在plugins中你需要一个文件夹名字叫做 ``ContactManager``，这个文件夹中有插件的源码，测试文件和其它的文件夹。
+
+    
