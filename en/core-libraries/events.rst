@@ -121,6 +121,28 @@ along. The listeners will handle all the extra logic around the
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
 
+Core Events
+=====================
+
+There are a number of core events within the framework which your application 
+can listen to.
+
+* ``Model.beforeMarshal``
+* ``Model.beforeFind``
+* ``Model.buildValidator``
+* ``Model.buildRules``
+* ``Model.beforeRules``
+* ``Model.afterRules``
+* ``Model.beforeSave``
+* ``Model.afterSave``
+* ``Model.afterSaveCommit``
+* ``Model.beforeDelete``
+* ``Model.afterDelete``
+* ``Model.afterDeleteCommit``
+
+Find out more about the events used by the core and the method signatures in 
+:ref:`table-callbacks`.
+
 Registering Listeners
 =====================
 
