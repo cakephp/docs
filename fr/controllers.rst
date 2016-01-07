@@ -507,25 +507,40 @@ Chacune de ces variables sont fusionnées avec leurs valeurs héritées,
 ainsi il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
 bien tout ce qui est déclaré dans votre ``AppController``.
 
-.. _controller-life-cycle:
-
 .. deprecated:: 3.0
     Le chargement des helpers depuis le controller est fourni pour des raisons
     de rétrocompatibilité. Référez-vous à la section suivante pour apprendre à
     :ref:`configuring-helpers`.
 
-Request Life-cycle callbacks
-============================
+.. _controller-life-cycle:
 
-Les controllers de CakePHP sont livrés par défaut avec des méthodes de rappel
-(ou callback) que vous pouvez utiliser pour insérer de la logique juste avant
-ou juste après que les actions du controller ont été effectuées :
+Cycle de Vie des Callbacks de la Requête
+========================================
+
+Les controllers de CakePHP lancent plusieurs events/callbacks (méthodes de
+rappel) que vous pouvez utiliser pour insérer de la logique durant tout le cycle
+de vie de la requête:
+
+Event List
+----------
+
+* ``Controller.initialize``
+* ``Controller.startup``
+* ``Controller.beforeRedirect``
+* ``Controller.beforeRender``
+* ``Controller.shutdown``
+
+Callback des Controllers
+------------------------
+
+Par défaut, les méthodes de rappel (callbacks) suivantes sont connectées aux
+events liés si les méthodes sont implémentées dans vos controllers.
 
 .. php:method:: beforeFilter(Event $event)
 
-    Cette fonction est exécutée avant chaque action du controller. C'est
-    un endroit pratique pour vérifier le statut d'une session ou les
-    permissions d'un utilisateur.
+    Cette méthode est appelée pendant l'event ``Controller.initialize`` qui se
+    produit avant chaque action du controller. C'est un endroit pratique pour
+    vérifier le statut d'une session ou les permissions d'un utilisateur.
 
     .. note::
 
@@ -533,16 +548,17 @@ ou juste après que les actions du controller ont été effectuées :
 
 .. php:method:: beforeRender(Event $event)
 
-    Cette méthode est appelée après l'action du controller mais avant
-    que la vue ne soit rendue. Ce callback n'est pas souvent utilisé,
-    mais peut-être nécessaire si vous appelez :php:meth:`~Controller::render()`
-    manuellement à la fin d'une action donnée.
+    Cette méthode est appelée pendant l'event ``Controller.beforeRender`` qui
+    se produit après l'action du controller mais avant que la vue ne soit
+    rendue. Ce callback n'est pas souvent utilisé, mais peut-être nécessaire si
+    vous appelez :php:meth:`~Controller::render()` manuellement à la fin d'une
+    action donnée.
 
 .. php:method:: afterFilter(Event $event)
 
-    Cette méthode est appelée après chaque action du controller, et après
-    que l'affichage soit terminé. C'est la dernière méthode du controller
-    qui est exécutée.
+    Cette méthode est appelée pendant l'event ``Controller.shutdown`` qui se
+    produit après chaque action du controller, et après que l'affichage soit
+    terminé. C'est la dernière méthode du controller qui est exécutée.
 
 En plus des callbacks des controllers, les :doc:`/controllers/components`
 fournissent aussi un ensemble similaire de callbacks.

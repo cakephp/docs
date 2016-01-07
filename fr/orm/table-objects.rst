@@ -114,8 +114,8 @@ facilitant la construction de relations et la configuration l'ORM. Regardez
 
 .. _table-callbacks:
 
-Lifecycle Callbacks
-===================
+Callbacks du Cycle de Vie
+=========================
 
 Comme vous l'avez vu ci-dessus les objets table déclenchent un certain nombre
 d'events. Les events sont des hook utiles si vous souhaitez et ajouter de la
@@ -133,6 +133,22 @@ Pour ajouter un écouteur d'event à une classe Table ou un Behavior,
 implémentez simplement les signatures de méthode comme décrit ci-dessus.
 Consultez les :doc:`/core-libraries/events` pour avoir plus de détails sur la
 façon d'utiliser le sous-système d'events.
+
+Liste des Events
+----------------
+
+* ``Model.beforeMarshal``
+* ``Model.beforeFind``
+* ``Model.buildValidator``
+* ``Model.buildRules``
+* ``Model.beforeRules``
+* ``Model.afterRules``
+* ``Model.beforeSave``
+* ``Model.afterSave``
+* ``Model.afterSaveCommit``
+* ``Model.beforeDelete``
+* ``Model.afterDelete``
+* ``Model.afterDeleteCommit``
 
 beforeMarshal
 -------------
