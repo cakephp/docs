@@ -44,7 +44,7 @@ You can directly run the following commands:
     cd /path/to/your/local/docs
     docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
 
-### Build locally the image ###
+### Build the image locally ###
 
 There is a Dockerfile included at the root of this repository. You can build
 an image using:
