@@ -4,6 +4,12 @@
 CakePHP 2.8 est une mise à jour complète à partir de l'API de 2.7. Cette page
 souligne les changements et améliorations faits dans 2.8.
 
+Dépréciations
+=============
+
+* L'option ``action`` dans ``FormHelper::create()`` a été dépréciée. C'est
+  un portage de la version 3.x
+
 Gestion des Erreurs
 ===================
 
