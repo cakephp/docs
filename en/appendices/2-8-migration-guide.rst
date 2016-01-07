@@ -4,6 +4,12 @@
 CakePHP 2.8 is a fully API compatible upgrade from 2.7. This page outlines
 the changes and improvements made in 2.8.
 
+Deprecations
+============
+
+* The ``action`` option in ``FormHelper::create()`` has been deprecated. This is
+  a backport from 3.x
+
 Error Handling
 ==============
 
@@ -57,4 +63,3 @@ Validation
 ==========
 
 - ``Validation::uploadedFile()`` was backported from 3.x.
-
