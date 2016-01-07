@@ -8,7 +8,7 @@ Deprecations
 ============
 
 * The ``action`` option in ``FormHelper::create()`` has been deprecated. This is
-  a backport from 3.x
+  a backport from 3.x.
 
 Error Handling
 ==============
@@ -63,3 +63,12 @@ Validation
 ==========
 
 - ``Validation::uploadedFile()`` was backported from 3.x.
+
+View
+====
+
+FormHelper
+----------
+
+``'url' => false`` is now supported for ``FormHelper::create()`` to allow form tags
+to be created without action attribute. This is a backport fron 3.x.
