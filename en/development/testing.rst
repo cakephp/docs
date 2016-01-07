@@ -532,6 +532,16 @@ If you want to use a different connection use::
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
+.. versionadded:: 3.1.7
+
+Usually, you have a Table class along with your fixture, as well. You can also use that to retrieve the table name::
+
+    class ArticlesFixture extends TestFixture
+    {
+        public $import = ['model' => 'Articles'];
+    }
+
+Since this uses ``TableRegistry::get()``, it also supports plugin syntax.
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
