@@ -220,3 +220,12 @@ Validation
 - ``Validation::isInteger()`` was added.
 - ``Validation::ascii()`` was added.
 - ``Validation::utf8()`` was added.
+
+
+Testing
+=======
+
+TestFixture
+-----------
+
+``model`` key is now supported to retrieve the table name for importing.
