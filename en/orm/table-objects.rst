@@ -124,6 +124,22 @@ To add an event listener to a Table class or Behavior simply implement the
 method signatures as described below. See the :doc:`/core-libraries/events` for
 more detail on how to use the events subsystem.
 
+Event List
+----------
+
+* ``Model.beforeMarshal``
+* ``Model.beforeFind``
+* ``Model.buildValidator``
+* ``Model.buildRules``
+* ``Model.beforeRules``
+* ``Model.afterRules``
+* ``Model.beforeSave``
+* ``Model.afterSave``
+* ``Model.afterSaveCommit``
+* ``Model.beforeDelete``
+* ``Model.afterDelete``
+* ``Model.afterDeleteCommit``
+
 beforeMarshal
 -------------
 
