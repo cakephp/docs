@@ -1,11 +1,9 @@
 Xml
-==============
-::
+===
 
-    class Cake\Utility\Xml
+``class Cake\Utility\Xml``
 
 Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对象，并且可以转回数组。
-
 
 创建XML对象
 ===========
