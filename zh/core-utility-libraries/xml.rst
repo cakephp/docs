@@ -64,6 +64,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 把数组转换成Xml
 ===============
 ::
+
     $xmlArray = ['root' => ['child' => 'value']];
     //你也可以使用 Xml::build().
     $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']);
