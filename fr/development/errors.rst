@@ -213,13 +213,16 @@ les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
 exceptions HTTP pourrait être le rendu de pages 404 pour les items qui n'ont
 pas été trouvés::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException('Could not find that post');
+        $post = $this->Posts->findById($id)->first();
+        if (empty($post)) {
+            throw new NotFoundException(__('Post not found'));
         }
         $this->set('post', $post);
+        $this->set('_serialize', ['post']);
     }
 
 En utilisant les exceptions pour les erreurs HTTP, vous pouvez garder à la
@@ -323,7 +326,8 @@ seront lancées à partir de certains components du cœur de CakePHP:
 
 .. php:exception:: RecordNotFoundException
 
-    L'enregistrement demandé n'a pas pu être trouvé.
+    L'enregistrement demandé n'a pas pu être trouvé. Génère une réponse avec
+    une entête 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
@@ -370,13 +374,16 @@ Utiliser les Exceptions HTTP dans vos Controllers
 Vous pouvez envoyer n'importe quelle exception HTTP liée à partir des actions
 de votre controller pour indiquer les états d'échec. Par exemple::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id)->first();
-        if (!$post) {
-            throw new NotFoundException();
+        $post = $this->Posts->findById($id)->first();
+        if (empty($post)) {
+            throw new NotFoundException(__('Post not found'));
         }
-        $this->set(compact('post'));
+        $this->set('post', $post);
+        $this->set('_serialize', ['post']);
     }
 
 Ce qui précède va faire que le gestionnaire d'exception attrape et traite

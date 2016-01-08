@@ -2,7 +2,7 @@ Chronos
 =======
 
 Chronos fournit une collection d'extensions sans aucune dépendance pour l'objet
-``DateTime``. En plus de méthodes pratiques, chronos fournit:
+``DateTime``. En plus de méthodes pratiques, Chronos fournit:
 
 * Des objets ``Date`` pour représenter les dates du calendrier.
 * Des objets immutables pour les dates et les datetimes.
@@ -13,7 +13,7 @@ Chronos fournit une collection d'extensions sans aucune dépendance pour l'objet
 Installation
 ------------
 
-Pour installer chronos, vous devez utiliser ``composer``. A partir du répertoire
+Pour installer Chronos, vous devez utiliser ``composer``. A partir du répertoire
 ROOT de votre application (où le fichier composer.json se trouve) exécutez ce
 qui suit::
 
@@ -33,7 +33,7 @@ immutables de date/time et les extensions de ``DateInterval``.
 * ``Cake\Chronos\ChronosInterval`` est une extension pour l'objet
   ``DateInterval``.
 
-Enfin si vous voulez typer selon les objets date/time fournis par chronos,
+Enfin si vous voulez typer selon les objets date/time fournis par Chronos,
 vous devez utiliser ``Cake\Chronos\ChronosInterface``. Tous les objets date et
 time implémentent cette interface.
 
