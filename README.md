@@ -7,6 +7,9 @@ CakePHP Documentation
 This is the official documentation for the CakePHP project. It is available
 online in HTML, PDF and EPUB formats at http://book.cakephp.org.
 
+This `master` branch is the documentation for **CakePHP 2.x**.
+For **CakePHP 3.x** please see the `3.0` branch.
+
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
 cookbook](http://book.cakephp.org/2.0/en/contributing/documentation.html) for
@@ -160,7 +163,7 @@ Translations
 
 Contributing translations requires that you make a new directory using the two
 letter name for your language. As content is translated, directories mirroring
-the english content should be created with localized content.
+the English content should be created with localized content.
 
 Making Search Work Locally
 --------------------------
