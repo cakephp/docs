@@ -142,6 +142,9 @@ Il existe plusieurs exceptions intégrées à l'intérieur de CakePHP, en plus
 des exceptions d'infrastructure internes, et il existe plusieurs exceptions pour
 les méthodes HTTP.
 
+Exceptions HTTP
+---------------
+
 .. php:exception:: BadRequestException
 
     Utilisée pour faire une erreur 400 de Mauvaise Requête.
@@ -231,6 +234,9 @@ clientes et aux utilisateurs.
 
 De plus, les exceptions de couche du framework suivantes sont disponibles, et
 seront lancées à partir de certains components du cœur de CakePHP:
+
+Autres Exceptions Intégrées
+---------------------------
 
 .. php:namespace:: Cake\View\Exception
 

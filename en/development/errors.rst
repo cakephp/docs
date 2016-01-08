@@ -131,6 +131,9 @@ Internal Server Error.
 Built in Exceptions for CakePHP
 ===============================
 
+HTTP Exceptions
+---------------
+
 There are several built-in exceptions inside CakePHP, outside of the
 internal framework exceptions, there are several
 exceptions for HTTP methods
@@ -223,6 +226,9 @@ pages for items that have not been found::
 
 By using exceptions for HTTP errors, you can keep your code both clean, and give
 RESTful responses to client applications and users.
+
+Other Built In Exceptions
+-------------------------
 
 In addition, the following framework layer exceptions are available, and will
 be thrown from a number of CakePHP core components:
@@ -321,7 +327,8 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: RecordNotFoundException
 
-   The requested record could not be found. This will also set HTTP response headers to 404.
+   The requested record could not be found. This will also set HTTP response
+   headers to 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
