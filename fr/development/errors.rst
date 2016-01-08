@@ -217,12 +217,12 @@ pas été trouvés::
     
     public function view($id = null)
     {
-        $post = $this->Posts->findById($id)->first();
-        if (empty($post)) {
-            throw new NotFoundException(__('Post not found'));
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 En utilisant les exceptions pour les erreurs HTTP, vous pouvez garder à la
@@ -378,12 +378,12 @@ de votre controller pour indiquer les états d'échec. Par exemple::
     
     public function view($id = null)
     {
-        $post = $this->Posts->findById($id)->first();
-        if (empty($post)) {
-            throw new NotFoundException(__('Post not found'));
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 Ce qui précède va faire que le gestionnaire d'exception attrape et traite

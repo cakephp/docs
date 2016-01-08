@@ -213,12 +213,12 @@ pages for items that have not been found::
     
     public function view($id = null)
     {
-        $post = $this->Posts->findById($id)->first();
-        if (empty($post)) {
-            throw new NotFoundException(__('Post not found'));
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 By using exceptions for HTTP errors, you can keep your code both clean, and give
@@ -369,12 +369,12 @@ to indicate failure states. For example::
     
     public function view($id = null)
     {
-        $post = $this->Posts->findById($id)->first();
-        if (empty($post)) {
-            throw new NotFoundException(__('Post not found'));
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('article', 'article);
+        $this->set('_serialize', ['article']);
     }
 
 The above would cause the configured exception handler to catch and
