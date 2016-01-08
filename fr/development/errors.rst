@@ -142,6 +142,9 @@ Il existe plusieurs exceptions intégrées à l'intérieur de CakePHP, en plus
 des exceptions d'infrastructure internes, et il existe plusieurs exceptions pour
 les méthodes HTTP.
 
+Exceptions HTTP
+---------------
+
 .. php:exception:: BadRequestException
 
     Utilisée pour faire une erreur 400 de Mauvaise Requête.
@@ -217,12 +220,12 @@ pas été trouvés::
     
     public function view($id = null)
     {
-        $post = $this->Posts->findById($id)->first();
-        if (empty($post)) {
-            throw new NotFoundException(__('Post not found'));
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 En utilisant les exceptions pour les erreurs HTTP, vous pouvez garder à la
@@ -231,6 +234,9 @@ clientes et aux utilisateurs.
 
 De plus, les exceptions de couche du framework suivantes sont disponibles, et
 seront lancées à partir de certains components du cœur de CakePHP:
+
+Autres Exceptions Intégrées
+---------------------------
 
 .. php:namespace:: Cake\View\Exception
 
@@ -378,12 +384,12 @@ de votre controller pour indiquer les états d'échec. Par exemple::
     
     public function view($id = null)
     {
-        $post = $this->Posts->findById($id)->first();
-        if (empty($post)) {
-            throw new NotFoundException(__('Post not found'));
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 Ce qui précède va faire que le gestionnaire d'exception attrape et traite
