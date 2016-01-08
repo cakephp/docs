@@ -1,12 +1,3 @@
-
-
-- Xml
-- 创建XML对象
-- 将Xml转换成数组
-- 将数组转换成Xml
-    - 使用命名空间
-    - 创建一个子节点
-
 Xml
 ==============
 ::
@@ -17,14 +8,11 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 
 
 创建XML对象
-=================
-::
+===========
 
-    static Cake\Utility\Xml::build($input, array $options =[])
+``static Cake\Utility\Xml::build($input, array $options =[])``
 
-你可使用Xml::build() 载入XML-ish数据。取决于你 ``$options`` 的参数，这个方法允许你返回一个 ``SimpleXMLElement (default) or DOMDocument`` 对象，在各种数据源中，你可使用 ``Xml::build()`` 去创建一个XML对象。例如，你可以通过下面的设置创建XML。
-
-::
+你可使用Xml::build() 载入XML-ish数据。取决于你 ``$options`` 的参数，这个方法允许你返回一个 ``SimpleXMLElement (default) or DOMDocument`` 对象，在各种数据源中，你可使用 ``Xml::build()`` 去创建一个XML对象。例如，你可以通过下面的设置创建XML::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
@@ -34,16 +22,12 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
     </post>';
     $xml = Xml::build($text);
     
-你也可以通过本地文件创建Xml对象：
-
-::
+你也可以通过本地文件创建Xml对象::
 
     //本地文件
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
-你也可以通可一个数组创建Xml对象：
-
-::
+你也可以通可一个数组创建Xml对象::
 
     $data = [
         'post' => [
@@ -54,9 +38,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
     ];
     $xml = Xml::build($data);
 
-如果你的输入参数是无效的，Xml类会抛出一个异常。
-
-::
+如果你的输入参数是无效的，Xml类会抛出一个异常::
 
     $xmlString = 'What is XML?':
     try {::
@@ -65,16 +47,14 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
         throw new InternalErrorException();
     }
 
-DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，一定要使用正确的方法。
+``DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，一定要使用正确的方法。``
 
 把Xml字符串转换成数组
-======================
+=====================
 
  ``toArray($obj);``
 
-用Xml类把Xml字符串转换成数组是非简单的。默认你将获得返回值是SimpleXml对象。
-
-::
+用Xml类把Xml字符串转换成数组是非简单的。默认你将获得返回值是SimpleXml对象::
 
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlArray = Xml::toArray(Xml::build($xmlString));
@@ -82,24 +62,19 @@ DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，�
 如果你的XML是无效的将会执行 ``Cake\Utility\Exception\XmlException`` 异常类。
 
 把数组转换成Xml
-=======================
+===============
 ::
-
     $xmlArray = ['root' => ['child' => 'value']];
     //你也可以使用 Xml::build().
     $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']);
     $xmlString = $xmlObject->asXML();
 
-
-你数组最上级必须包含一个元素而且不能是数字，如果你的数据不是这种格式，Xml装会抛出一个异常，无效的数组示例：
-::
+你数组最上级必须包含一个元素而且不能是数字，如果你的数据不是这种格式，Xml装会抛出一个异常，无效的数组示例::
 
     // 最上层数组的键名是一个数字
     [
         ['key' => 'value']
     ];
-
-::
 
     // 最上层数组有多个键值
     [
@@ -107,9 +82,7 @@ DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，�
         'key2' => 'other value'
     ];
 
-默认的数组值将作为一个xml标签输出，如果你想自定义一个属性或者文本值，你可以在属性加面加@。文本值用 @作为键名：
-
-::
+默认的数组值将作为一个xml标签输出，如果你想自定义一个属性或者文本值，你可以在属性加面加@。文本值用 @作为键名::
 
     $xmlArray = [
         'project' => [
@@ -124,9 +97,7 @@ DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，�
 使用命名空间
 ============
 
-使用XML命名空间，在数组中创键一个名字是xmlns的键名：在一个通用的命名空间或输入前缀的xmlns：自定义命名空间。 看下面的示例：
-
-::
+使用XML命名空间，在数组中创键一个名字是xmlns的键名：在一个通用的命名空间或输入前缀的xmlns：自定义命名空间。 看下面的示例::
 
     $xmlArray = [
         'root' => [
@@ -149,10 +120,7 @@ DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，�
     );
     $xml2 = Xml::fromArray($xmlArray);
 
-
-$xml1 和 $xml2 的值分别是：
-
-::
+$xml1 和 $xml2 的值分别是::
 
     <?xml version="1.0"?>
     <root xmlns="http://cakephp.org"><child>value</child>
@@ -164,9 +132,7 @@ $xml1 和 $xml2 的值分别是：
 创建一个子节点
 ==============
 
-当你创建一个XML文档，你只需要对你的文档使用原生接口操作增加，移除或者操作子节点：
-
-::
+当你创建一个XML文档，你只需要对你的文档使用原生接口操作增加，移除或者操作子节点::
 
     // 使用 SimpleXML
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
@@ -178,7 +144,6 @@ $xml1 和 $xml2 的值分别是：
     $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
     $child = $xml->createElement('young', 'new value');
     $xml->firstChild->appendChild($child);
-
 
 ``用SimpleXMLElement 或者 DomDocument处理Xml后， 可以使用Xml::toArray()。`` 
 
