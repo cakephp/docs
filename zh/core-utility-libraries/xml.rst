@@ -145,4 +145,3 @@ $xml1 和 $xml2 的值分别是::
     $xml->firstChild->appendChild($child);
 
 ``用SimpleXMLElement 或者 DomDocument处理Xml后， 可以使用Xml::toArray()。`` 
-
