@@ -517,7 +517,7 @@ email we could do the following::
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntitiy($user, $this->request->data())
+                $user = $this->Users->patchEntity($user, $this->request->data())
                 if ($this->Users->save($user)) {
                     $this->getMailer('User')->send('welcome', [$user]);
                 }
