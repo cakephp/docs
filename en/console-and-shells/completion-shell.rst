@@ -55,8 +55,6 @@ For example::
 Returns::
 
     --help -h --verbose -v --quiet -q --everything --connection -c --force -f --plugin -p --prefix --theme -t
-Vous pouvez passer un autre argument représentant une sous-commande du shell :
-cela vous retournera les options spécifiques à cette sous-commande.
 
 You can also pass an additional argument being the shell sub-command : it will
 output the specific options of this sub-command.
@@ -64,12 +62,30 @@ output the specific options of this sub-command.
 How to enable Bash autocompletion for the CakePHP Console
 =========================================================
 
-Using a Debian distribution
----------------------------
+First, make sure the **bash-completion** library is installed. If not, you do it
+with the following command::
 
-First, make sure the **bash-completion** library is installed.
+    apt-get install bash-completion
+
 Create a file named **cake** in **/etc/bash_completion.d/** and put the
-following content inside it::
+:ref:`bash-completion-file-content` inside it.
+
+Save the file, then restart your console.
+
+.. note::
+
+    If you are using MacOS X, you can install the **bash-completion** library
+    using **homebrew** with the command ``brew install bash-completion``.
+    The target directory for the **cake** file will be
+    **/usr/local/etc/bash_completion.d/**.
+
+.. _bash-completion-file-content:
+
+Bash Completion file content
+----------------------------
+
+This is the code you need to put inside the **cake** file in the correct location
+in order to get autocompletion when using the CakePHP console::
 
     #
     # Bash completion file for CakePHP console
@@ -123,7 +139,6 @@ following content inside it::
 
     complete -F _cake cake bin/cake
 
-Save the file, then restart your console.
 
 Using autocompletion
 ====================
@@ -132,13 +147,19 @@ Once enabled, the autocompletion can be used the same way than for other
 built-in commands, using the **TAB** key.
 Three type of autocompletion are provided. The following output are from a fresh CakePHP install.
 
-#### Commands::
+Commands
+--------
+
+Sample output for commands autocompletion::
 
     $ bin/cake <tab>
     bake        i18n        orm_cache   routes
     console     migrations  plugin      server
 
-#### Subcommands::
+Subcommands
+-----------
+
+Sample output for subcommands autocompletion::
 
     $ bin/cake bake <tab>
     behavior            helper              shell
@@ -148,7 +169,10 @@ Three type of autocompletion are provided. The following output are from a fresh
     fixture             model
     form                plugin
 
-#### Options::
+Options
+-------
+
+Sample output for subcommands options autocompletion::
 
     $ bin/cake bake -<tab>
     -c            --everything  --force       --help        --plugin      -q            -t            -v
