@@ -210,7 +210,9 @@ the creation of new bugs.
 
 .. note::
 
-EventManager is refreshed for each test method. Meaning, that when running multiple tests at once, you will loose your event listeners that were registered in config/bootstrap.php as the bootstrap is only executed once.
+    EventManager is refreshed for each test method. Meaning, that when running 
+    multiple tests at once, you will lose your event listeners that were 
+    registered in config/bootstrap.php as the bootstrap is only executed once.
 
 .. _running-tests:
 
