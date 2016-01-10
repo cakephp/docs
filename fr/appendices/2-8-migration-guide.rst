@@ -8,7 +8,11 @@ Dépréciations
 =============
 
 * L'option ``action`` dans ``FormHelper::create()`` a été dépréciée. C'est
-  un portage de la version 3.x
+  un portage de la version 3.x.
+  Notez que cela fait que la clé ``action`` d'un tableau URL est toujours
+  générée l'ID du DOM.
+  Si vous utilisiez la clé dépréciée, vous devrez comparer l'ID généré pour le
+  formulaire avant et après.
 
 Gestion des Erreurs
 ===================
@@ -63,3 +67,13 @@ Validation
 ==========
 
 - ``Validation::uploadedFile()`` est un portage de la version 3.0.
+
+View
+====
+
+FormHelper
+----------
+
+``'url' => false`` est maintenant supporté pour ``FormHelper::create()`` pour
+pouvoir créer des balises de formulaire sans l'attribut HTML ``action``. Ceci
+est un portage de la version 3.x.
