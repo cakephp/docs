@@ -81,7 +81,7 @@ table names or class names::
     // UserProfileSetting
     Inflector::classify('user_profile_settings');
 
-    // user-profile-settings
+    // user-profile-setting
     Inflector::dasherize('UserProfileSetting');
 
     // user_profile_settings
