@@ -71,14 +71,18 @@ for human readable values::
 Creating Table and Class Name Forms
 ===================================
 
-.. php:staticmethod:: tableize($camelCase)
 .. php:staticmethod:: classify($underscored)
+.. php:staticmethod:: dasherize($dashed)
+.. php:staticmethod:: tableize($camelCase)
 
 When generating code, or using CakePHP's conventions you may need to inflect
 table names or class names::
 
     // UserProfileSetting
     Inflector::classify('user_profile_settings');
+
+    // user-profile-settings
+    Inflector::dasherize('UserProfileSetting');
 
     // user_profile_settings
     Inflector::tableize('UserProfileSetting');
