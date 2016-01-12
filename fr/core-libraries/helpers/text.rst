@@ -23,7 +23,7 @@ longues étendues de texte.
         les liens.
 
     Ajoute les liens aux adresses email bien formées dans $text, selon toute
-    les options définies dans ``$htmlOptions`` (regardez
+    les options définies dans ``$options`` (regardez
     :php:meth:`HtmlHelper::link()`). ::
 
         $myText = 'Pour plus d'informations sur nos pâtes et desserts fameux,
@@ -39,10 +39,10 @@ longues étendues de texte.
         Dans 2.1, cette méthode échappe automatiquement ces inputs. Utilisez
         l'option ``escape`` pour la désactiver si nécessaire.
 
-.. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
+.. php:method:: autoLinkUrls(string $text, array $options=array())
 
     :param string $text: Le texte à convertir.
-    :param array $htmlOptions: Un tableau d' :term:`attributs HTML` pour
+    :param array $options: Un tableau d' :term:`attributs HTML` pour
         la génération de liens.
 
     De même que dans ``autoLinkEmails()``, seule cette méthode cherche les
@@ -53,7 +53,7 @@ longues étendues de texte.
         Dans 2.1, cette méthode échappe automatiquement son input. Utilisez
         l'option ``escape`` pour la désactiver si nécessaire.
 
-.. php:method:: autoLink(string $text, array $htmlOptions=array())
+.. php:method:: autoLink(string $text, array $options=array())
 
     :param string $text: Le texte à lier automatiquement.
     :param array $htmlOptions: Un tableau d' :term:`attributs HTML` pour

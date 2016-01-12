@@ -117,7 +117,7 @@ remplacer comme cela::
     class AppError {
         public static function handleError($code, $description, $file = null, $line = null, $context = null) {
             list(, $level) = ErrorHandler::mapErrorCode($code);
-            if ($level === LOG_ERROR) {
+            if ($level === LOG_ERR) {
                 // Ignore l\'erreur fatale. Cela ne va garder seulement le message d\'erreur PHP
                 return false;
             }

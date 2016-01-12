@@ -109,7 +109,7 @@ If you do not want to show the cake error page, you can override it like::
         public static function handleError($code, $description, $file = null,
             $line = null, $context = null) {
             list(, $level) = ErrorHandler::mapErrorCode($code);
-            if ($level === LOG_ERROR) {
+            if ($level === LOG_ERR) {
                 // Ignore fatal error. It will keep the PHP error message only
                 return false;
             }

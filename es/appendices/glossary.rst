@@ -4,41 +4,44 @@ Glossary
 .. glossary::
 
     routing array
-        An array of attributes that are passed to :php:meth:`Router::url()`.
-        They typically look like::
+        (Enrutamiento de array)
+        Un array de atributos que son pasados a :php:meth:`Router::url()`.
+        Usualmente se tipean de la siguiente manera::
 
             array('controller' => 'posts', 'action' => 'view', 5)
 
     HTML attributes
-        An array of key => values that are composed into HTML attributes. For example::
+        (Atributos HTML)
+        Un array de llaves => valores que se compone en HTML attributes(atributos HTML). Por ejemplo::
 
-            // Given
+            // Dado
             array('class' => 'my-class', 'target' => '_blank')
 
-            // Would generate
+            // Generara
             class="my-class" target="_blank"
 
-        If an option can be minimized or accepts it's name as the value, then ``true``
-        can be used::
+        Si un atributo acepta su nombre(de atributo) como valor, se puede usar ``true``::
 
-            // Given
+            // Dado
             array('checked' => true)
 
-            // Would generate
+            // Generara
             checked="checked"
 
     plugin syntax
-        Plugin syntax refers to the dot separated class name indicating classes
-        are part of a plugin. E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
-        and the class name is Toolbar.
+        (Sintaxis de plugin)
+        Plugin syntax(Sintaxis de plugin) se refiere al punto separador del nombre de la clase
+        indicación que la clase es parte de un plugin. Por ej.``DebugKit.Toolbar``.
+        El plugin es DebugKit y el nombre de la clase es Toolbar.
 
     dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
+        (Notación por puntos)
+        Dot notation(notación por puntos) define la ruta dentro un array, separando valores anidados con ``.``
+        Por ejemplo::
 
             Asset.filter.css
 
-        Would point to the following value::
+        Apuntara al siguiente valor::
 
             array(
                 'Asset' => array(
@@ -49,22 +52,22 @@ Glossary
             )
 
     CSRF
-        Cross Site Request Forgery. Prevents replay attacks, double
-        submissions and forged requests from other domains.
+        Cross Site Request Forgery(falsificación de petición en sitios cruzados).
+        Previene ataques de reproducción,doble envío y peticiones falsas de otros dominios.
 
     routes.php
-        A file in APP/Config that contains routing configuration.
-        This file is included before each request is processed.
-        It should connect all the routes your application needs so
-        requests can be routed to the correct controller + action.
+        Un archivo en APP/Config que contiene configuración de enrutamiento.
+        Este archivo es incluido antes de que cualquier petición se procese.
+        Debe conectar todas las rutas que tu aplicación necesita para que las peticiones puedan ser
+        enrutadas al controlador + acción que corresponda.
 
     DRY
-        Don't repeat yourself. Is a principle of software development aimed at
-        reducing repetition of information of all kinds. In CakePHP DRY is used
-        to allow you to code things once and re-use them across your
-        application.
+        Don't repeat yourself(No te repitas a ti mismo). Es un principio del desarrollo de software
+        apuntado a reducir la repetición de información de cualquier tipo.
+        En CakePHP DRY es usado para permitirte programar to código una vez, y re-usarlo en
+        distintas partes de tu aplicación.
 
 
 .. meta::
-    :title lang=es: Glossary
-    :keywords lang=es: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :title lang=es: Glosario
+    :keywords lang=es: atributos html,csrf,dry,repetir,array class,array controller,routing array,glosario,target blank,dot notation,notación de puntos,configuración de enrutamiento,forgery,replay,enrutador,sintaxis,configuración,envios
