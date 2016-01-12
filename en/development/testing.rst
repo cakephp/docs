@@ -1000,6 +1000,24 @@ assertions in `TestSuite
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
+Testing with Encrytped Cookies
+------------------------------
+
+If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
+controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
+helper methods for interacting with encrypted cookies in your test cases::
+
+    // Set a cookie using aes and the default key.
+    $this->cookieEncrypted('my_cookie', 'Some secret values');
+
+    // Assume this action modifies the cookie.
+    $this->get('/bookmarks/index');
+
+    $this->assertCookieEncrypted('my_cookie', 'An updated value');
+
+.. versionadded: 3.1.7
+    ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.
+
 Testing a JSON Responding Controller
 ------------------------------------
 
