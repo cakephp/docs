@@ -44,7 +44,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 
     $xmlString = 'What is XML?':
     try {::
-        $xmlObject = Xml::build($xmlString); // Here will throw an exception
+        $xmlObject = Xml::build($xmlString); // 这儿会抛出一个异常
     } catch (\Cake\Utility\Exception\XmlException $e) {
         throw new InternalErrorException();
     }
