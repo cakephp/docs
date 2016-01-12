@@ -127,6 +127,7 @@ more detail on how to use the events subsystem.
 Event List
 ----------
 
+* ``Model.initialize``
 * ``Model.beforeMarshal``
 * ``Model.beforeFind``
 * ``Model.buildValidator``
@@ -139,6 +140,13 @@ Event List
 * ``Model.beforeDelete``
 * ``Model.afterDelete``
 * ``Model.afterDeleteCommit``
+
+initialize
+----------
+
+.. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
+
+The ``Model.initialize`` event is fired after the constructor and initialize methods are called.
 
 beforeMarshal
 -------------
