@@ -144,7 +144,7 @@ $xml1 和 $xml2 的值分别是::
     $xml = Xml::build($myXmlOriginal);
     $xml->root->addChild('young', 'new value');
     
-    // Using DOMDocument
+    // 使用 DOMDocument
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
     $child = $xml->createElement('young', 'new value');
