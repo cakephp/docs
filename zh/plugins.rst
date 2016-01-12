@@ -8,20 +8,8 @@ CakePHP 让你可以建立一个控制器、模型和视图的组合，并且把
 
 一个插件与一个它安装所在的应用程序之间的主要纽带，是应用程序的配置(数据库连接等)。
 否则，插件就在它自己的小空间内运行，表现地就象自己是一个应用程序一样。
-
-.. toctree::
-   :maxdepth: 1
-
-   plugins/how-to-install-plugins
-   plugins/how-to-use-plugins
-   plugins/how-to-create-plugins
-
-
-.. meta::
-    :title lang=zh_CN: Plugins
-    :keywords lang=zh_CN: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
     
-    在 CakePHP 3.0 每个插件都定义了自己的顶级命名空间，例如：DebugKit. 按照惯例，插件使用他们的包作为他们的命名空间。如果你喜欢使用一个不同的命名空间，当你载入插件时可以配置你的命名空间。
+在 CakePHP 3.0 每个插件都定义了自己的顶级命名空间，例如：DebugKit. 按照惯例，插件使用他们的包作为他们的命名空间。如果你喜欢使用一个不同的命名空间，当你载入插件时可以配置你的命名空间。
 
 使用Composer安装插件
 ====================
@@ -54,4 +42,16 @@ CakePHP 让你可以建立一个控制器、模型和视图的组合，并且把
    
 loadAll() 加载所有插件可用，同时允许你为特定的插件设置某些设置。 load() 的工作方式类似，但只加载明确指定的插件。
 
-**Plugin::loadAll() 不能加载在 ``vendor/cakephp-plugins.php`` 中未定义vendor 命名空间的插件。**
+.. Plugin::loadAll() 不能加载在 ``vendor/cakephp-plugins.php`` 中未定义vendor 命名空间的插件。
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/how-to-install-plugins
+   plugins/how-to-use-plugins
+   plugins/how-to-create-plugins
+
+
+.. meta::
+    :title lang=zh_CN: Plugins
+    :keywords lang=zh_CN: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
