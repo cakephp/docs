@@ -1,5 +1,9 @@
 Xml
-===
+###
+
+.. php:namespace:: Cake\Utility
+
+.. php:class:: Xml
 
 ``class Cake\Utility\Xml``
 
@@ -8,7 +12,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 创建XML对象
 ===========
 
-``static Cake\Utility\Xml::build($input, array $options =[])``
+.. static Cake\Utility\Xml::build($input, array $options =[])
 
 你可使用Xml::build() 载入XML-ish数据。取决于你 ``$options`` 的参数，这个方法允许你返回一个 ``SimpleXMLElement (default) or DOMDocument`` 对象，在各种数据源中，你可使用 ``Xml::build()`` 去创建一个XML对象。例如，你可以通过下面的设置创建XML::
 
@@ -45,12 +49,14 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
         throw new InternalErrorException();
     }
 
-``DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，一定要使用正确的方法。``
+.. 提示::
+
+    DOMDocument 和 SimpleXML 实现了不同的API's。你从XML请求的对象，一定要使用正确的方法。
 
 把Xml字符串转换成数组
 =====================
 
- ``toArray($obj);``
+.. toArray($obj);
 
 用Xml类把Xml字符串转换成数组是非简单的。默认你将获得返回值是SimpleXml对象::
 
@@ -144,4 +150,11 @@ $xml1 和 $xml2 的值分别是::
     $child = $xml->createElement('young', 'new value');
     $xml->firstChild->appendChild($child);
 
-``用SimpleXMLElement 或者 DomDocument处理Xml后， 可以使用Xml::toArray()。`` 
+.. 提示::
+
+    用SimpleXMLElement 或者 DomDocument处理Xml后， 可以使用Xml::toArray()。
+
+.. meta::
+    :title lang=zh: Xml
+    :keywords lang=en: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth
+ 
