@@ -72,14 +72,18 @@ Cette méthode est utile pour convertir des formes avec underscore en forme
 Créer des Formes pour les Tables et les Noms de Classe
 ======================================================
 
-.. php:staticmethod:: tableize($camelCase)
 .. php:staticmethod:: classify($underscored)
+.. php:staticmethod:: dasherize($dashed)
+.. php:staticmethod:: tableize($camelCase)
 
 Quand vous générez du code ou quand vous utilisez les conventions de CakePHP,
 vous pouvez infléchir les noms de table ou les noms de classe::
 
-    // UserProfileSetting
+    // UserProfileSettings
     Inflector::classify('user_profile_settings');
+
+    // user-profile-setting
+    Inflector::dasherize('UserProfileSetting');
 
     // user_profile_settings
     Inflector::tableize('UserProfileSetting');

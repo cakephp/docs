@@ -338,6 +338,29 @@ ressembler à ceci::
         ],
     ];
 
+Une fois que vous avez converti les données requêtées dans des entities, vous
+pouvez leur faire un ``save()`` ou un ``delete()``::
+
+    // Dans un controller.
+    foreach ($entities as $entity) {
+        // Save entity
+        $articles->save($entity);
+
+        // Supprime l'entity
+        $articles->delete($entity);
+    }
+
+Ce qui est au-dessus va lancer une transaction séparée pour chaque entity
+sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
+vous pouvez utiliser ``transactional()``::
+
+    // Dans un controller.
+    $articles->connection()->transactional(function () use ($articles, $entities) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['atomic' => false]);
+        }
+    });
+
 .. _changing-accessible-fields:
 
 Changer les Champs Accessibles
@@ -365,29 +388,6 @@ associations existantes entre certaines entities::
 
 Le code ci-dessus permet de conserver l'association entre Comments et Users pour
 l'entity concernée.
-
-Une fois que vous avez converti les données requêtées dans des entities, vous
-pouvez leur faire un ``save()`` ou un ``delete()``::
-
-    // Dans un controller.
-    foreach ($entities as $entity) {
-        // Save entity
-        $articles->save($entity);
-
-        // Supprime l'entity
-        $articles->delete($entity);
-    }
-
-Ce qui est au-dessus va lancer une transaction séparée pour chaque entity
-sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
-vous pouvez utiliser ``transactional()``::
-
-    // Dans un controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
-        foreach ($entities as $entity) {
-            $articles->save($entity, ['atomic' => false]);
-        }
-    });
 
 .. note::
 
