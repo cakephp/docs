@@ -329,6 +329,14 @@ would do the following::
 
         public function findPublished(Query $query, array $options)
         {
+            /*
+            $options = [
+                'keyField' => 'slug',
+                'valueField' => 'title',
+                'groupField' => 'author_id'
+            ];
+            */
+            // $query->getOptions() to retrieve magic fields like limit, contain etc
             $query->where([
                 'Articles.published' => true,
                 'Articles.moderated' => true
@@ -340,7 +348,12 @@ would do the following::
 
     // In a controller or table method.
     $articles = TableRegistry::get('Articles');
-    $query = $articles->find('published');
+    $query = $articles->find('published', [
+        'limit' => 10,
+        'keyField' => 'slug',
+        'valueField' => 'title',
+        'groupField' => 'author_id'
+    ]);
 
 Finder methods can modify the query as required, or use the
 ``$options`` to customize the finder operation with relevant application logic.
