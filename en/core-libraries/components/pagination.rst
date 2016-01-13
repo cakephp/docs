@@ -90,6 +90,11 @@ array after the model you wish to configure::
 The values of the ``Post`` and ``Author`` keys could contain all the properties
 that a model/key less ``$paginate`` array could.
 
+.. note::
+    The ``$paginate`` variable is not automatically passed to the :php:class:`PaginatorComponent`'s settings. You must explicitly set the :php:class:`PaginatorComponent`'s settings using the following line::
+
+        $this->Paginator->settings = $this->paginate;
+
 Once the ``$paginate`` variable has been defined, we can use the
 :php:class:`PaginatorComponent`'s ``paginate()`` method from our controller
 action. This will return ``find()`` results from the model. It also sets some
