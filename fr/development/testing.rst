@@ -1050,6 +1050,26 @@ toutes les assertions de `TestSuite
 de
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
+Tester avec des Cookies Chiffrés
+--------------------------------
+
+Si vous utilisez :php:class:`Cake\\Controller\\Component\\CookieComponent` dans
+vos controllers, vos cookies sont probablement chiffrés. Depuis 3.1.7, CakePHP
+fournit des méthodes pour intéragir avec les cookies chiffrés dans vos cas de
+test::
+
+    // Définit un cookie en utilisant aes et la clé par défaut.
+    $this->cookieEncrypted('my_cookie', 'Some secret values');
+
+    // En supposant que cette action modifie le cookie.
+    $this->get('/bookmarks/index');
+
+    $this->assertCookieEncrypted('my_cookie', 'Une valeur mise à jour');
+
+.. versionadded: 3.1.7
+    ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans la
+    version 3.1.7.
+
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
 
