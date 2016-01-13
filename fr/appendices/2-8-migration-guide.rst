@@ -4,6 +4,11 @@
 CakePHP 2.8 est une mise à jour complète à partir de l'API de 2.7. Cette page
 souligne les changements et améliorations faits dans 2.8.
 
+Compatibilité avec PHP7
+=======================
+
+CakePHP 2.8 est compatible et testé pour PHP7.
+
 Dépréciations
 =============
 
