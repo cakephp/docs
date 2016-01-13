@@ -329,9 +329,9 @@ would do the following::
 
         public function findOwnedBy(Query $query, array $options)
         {
-            $user = $options['user'];
-	        return $query->where(['user_id' => $user->id]);
-        }
+        	$user = $options['user'];
+        	return $query->where(['author_id' => $user->id]);
+       	}
 
     }
 
