@@ -327,20 +327,17 @@ would do the following::
     class ArticlesTable extends Table
     {
 
-        public function findPublished(Query $query, array $options)
+        public function findOwnedBy(Query $query, array $options)
         {
-            $query->where([
-                'Articles.published' => true,
-                'Articles.moderated' => true
-            ]);
-            return $query;
+            $user = $options['user'];
+	        return $query->where(['user_id' => $user->id]);
         }
 
     }
 
     // In a controller or table method.
     $articles = TableRegistry::get('Articles');
-    $query = $articles->find('published');
+    $query = $articles->find('ownedBy', ['user' => $userEntity]);
 
 Finder methods can modify the query as required, or use the
 ``$options`` to customize the finder operation with relevant application logic.
