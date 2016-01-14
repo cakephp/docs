@@ -146,33 +146,36 @@ initialize
 
 .. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
 
-The ``Model.initialize`` event is fired after the constructor and initialize methods are called. The table classes do not listen to this event by default, instead use an initialize hook method.
+The ``Model.initialize`` event is fired after the constructor and initialize
+methods are called. The table classes do not listen to this event by default,
+and instead use the ``initialize`` hook method.
 
-Eg : Create a listener class which implements `EventListenerInterface`
+To respond to the ``Model.initialize`` event you can reate a listener class
+which implements ``EventListenerInterface``::
 
     use Cake\Event\EventListenerInterface;
-    class ModelInitialzieListener implements EventListenerInterface 
+    class ModelInitialzieListener implements EventListenerInterface
     {
-        public function implementedEvents() 
+        public function implementedEvents()
         {
             return array(
                 'Model.initialize' => 'initializeEvent',
             );
         }
-        public function initializeEvent($event) 
+        public function initializeEvent($event)
         {
             $table = $event->subject();
             // do something here
         }
     }
-    
-and attach the listerner to the `EventManager` as below.
-    
+
+and attach the listerner to the ``EventManager`` as below::
+
     use Cake\Event\EventManager;
     $listener = new ModelInitialzieListener();
     EventManager::instance()->attach($listener);
 
-This will call the `initializeEvent` when ever your Table classes are constructed.
+This will call the ``initializeEvent`` when any Table class is constructed.
 
 beforeMarshal
 -------------
