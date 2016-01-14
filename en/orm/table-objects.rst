@@ -438,13 +438,13 @@ If you have not followed the conventions it is likely that your Table or
 Entity classes will not be detected by CakePHP. In order to fix this, you can
 set a namespace with the ``Cake\Core\Configure::write`` method. As an example::
 
-    src
-    └── App
-        └── My
-            └── Namespace
-                └── Model
-                    ├── Entity
-                    └── Table
+    /src
+        /App
+            /My
+                /Namespace
+                    /Model
+                        /Entity
+                        /Table
 
 Would be configured with::
 
