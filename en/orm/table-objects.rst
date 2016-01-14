@@ -150,7 +150,7 @@ The ``Model.initialize`` event is fired after the constructor and initialize
 methods are called. The table classes do not listen to this event by default,
 and instead use the ``initialize`` hook method.
 
-To respond to the ``Model.initialize`` event you can reate a listener class
+To respond to the ``Model.initialize`` event you can create a listener class
 which implements ``EventListenerInterface``::
 
     use Cake\Event\EventListenerInterface;
@@ -438,13 +438,13 @@ If you have not followed the conventions it is likely that your Table or
 Entity classes will not be detected by CakePHP. In order to fix this, you can
 set a namespace with the ``Cake\Core\Configure::write`` method. As an example::
 
-    src
-    └── App
-        └── My
-            └── Namespace
-                └── Model
-                    ├── Entity
-                    └── Table
+    /src
+        /App
+            /My
+                /Namespace
+                    /Model
+                        /Entity
+                        /Table
 
 Would be configured with::
 
