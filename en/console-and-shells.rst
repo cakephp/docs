@@ -203,7 +203,8 @@ properties attached to your shell::
         public function show()
         {
             if (empty($this->args[0])) {
-                return $this->error('Please enter a username.');
+                // Use error() before CakePHP 3.2
+                return $this->abort('Please enter a username.');
             }
             $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
@@ -400,7 +401,10 @@ The ``Shell`` class provides a few methods for outputting content::
     // Write to stderr
     $this->err('Error message');
 
-    // Write to stderr and stop the process
+    // Write to stderr and raise a stop exception
+    $this->abort('Fatal error');
+
+    // Before CakePHP 3.2. Write to stderr and exit()
     $this->error('Fatal error');
 
 It also provides two convenience methods regarding the output level::
@@ -448,11 +452,11 @@ appropriately. The user of the shell, can then decide what level of detail
 they are interested in by setting the correct flag when calling the shell.
 :php:meth:`Cake\\Console\\Shell::out()` supports 3 types of output by default.
 
-* QUIET - Only absolutely important information should be marked for quiet
+* ``QUIET`` - Only absolutely important information should be marked for quiet
   output.
-* NORMAL - The default level, and normal usage.
-* VERBOSE - Mark messages that may be too noisy for everyday use, but helpful
-  for debugging as VERBOSE.
+* ``NORMAL`` - The default level, and normal usage.
+* ``VERBOSE`` - Mark messages that may be too noisy for everyday use, but
+  helpful for debugging as ``VERBOSE``.
 
 You can mark output as follows::
 
@@ -544,6 +548,23 @@ no styling is done at all. There are three modes you can use.
 By default on \*nix systems ConsoleOutput objects default to colour output.
 On Windows systems, plain output is the default unless the ``ANSICON`` environment
 variable is present.
+
+Stopping Shell Execution
+========================
+
+When your shell commands have reached a condition where you want execution to
+stop, you can use ``abort()`` to raise a ``StopException`` that will halt the
+process::
+
+    $user = $this->Users->get($this->args[0]);
+    if (!$user) {
+        // Halt with an error message and error code.
+        $this->abort('User cannot be found', 128);
+    }
+
+.. versionadded:: 3.2
+    The abort() method was added in 3.2. In prior versions you can use
+    ``error()`` to output a message and stop execution.
 
 Hook Methods
 ============
@@ -762,6 +783,10 @@ to add multiple options at once. ::
 As with all the builder methods on ConsoleOptionParser, addOptions can be used
 as part of a fluent method chain.
 
+Option values are stored in the ``$this->params`` array. You can also use the
+convenience method ``$this->param()`` to avoid errors when trying to access non-present
+options.
+
 Validating Options
 ------------------
 
@@ -796,7 +821,8 @@ checks for boolean flags::
     }
 
 Since the boolean options are always defined as ``true`` or
-``false`` you can omit additional check methods.
+``false`` you can omit additional check methods when using the array access. The
+``$this->param()`` method makes these checks unnecessary for all cases.
 
 Adding Subcommands
 ------------------

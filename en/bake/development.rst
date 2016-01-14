@@ -33,7 +33,10 @@ be used::
 
     });
 
-Bake events can also be useful for making small changes to existing templates.
+If you want to modify bake from within another plugin, putting your plugin's
+bake events in the plugin ``config/bootstrap.php`` file is a good idea.
+
+Bake events can be handy for making small changes to existing templates.
 For example, to change the variable names used when baking controller/template
 files one can use a function listening for ``Bake.beforeRender`` to modify the
 variables used in the bake templates::
@@ -80,6 +83,7 @@ you can use the following event::
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
         function (Event $event) {
+            $view = $event->subject();
             if ($view->viewVars['name'] == 'Users') {
                 // add the login and logout actions to the Users controller
                 $view->viewVars['actions'] = [
@@ -92,7 +96,8 @@ you can use the following event::
                     'delete'
                 ];
             }
-        });
+        }
+    );
 
 By scoping event listeners to specific bake templates, you can simplify your
 bake related event logic and provide callbacks that are easier to test.
@@ -122,7 +127,9 @@ to modify bake template files, is to bake a class and compare the template used
 with the pre-processed template file which is left in the application's tmp
 folder.
 
-So, for example, when baking a shell like so::
+So, for example, when baking a shell like so:
+
+.. code-block:: shell
 
     bin/cake bake shell Foo
 

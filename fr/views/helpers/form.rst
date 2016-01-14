@@ -142,15 +142,15 @@ envoyé, la méthode de requête HTTP sera respectivement réécrite avec 'PUT',
 PATCH' ou 'DELETE'. Cela permettra à CakePHP de créer son propre support REST
 dans les navigateurs web.
 
-Définir l'Action du Controller pour le Formulaire
+Définir l'URL pour le Formulaire
 -------------------------------------------------
 
-Utiliser l'option ``action`` vous permet de diriger le formulaire vers une
-action spécifique dans votre controller courant. Par exemple, si vous voulez
-diriger le formulaire vers une action login() du controller courant, vous
-pouvez fournir le tableau $options comme ce qui suit::
+Utiliser l'option ``url`` vous permet de diriger le formulaire vers une
+action spécifique dans votre controller courant ou dans toute votre application.
+Par exemple, si vous voulez diriger le formulaire vers une action login() du
+controller courant, vous pouvez fournir le tableau $options comme ce qui suit::
 
-    echo $this->Form->create($article, ['action' => 'login']);
+    echo $this->Form->create($article, ['url' => ['action' => 'login']]);
 
 Affichera:
 
@@ -158,13 +158,9 @@ Affichera:
 
     <form method="post" action="/users/login">
 
-Définir une URL pour un Formulaire
-----------------------------------
-
 Si l'action que vous désirez appeler avec le formulaire n'est pas dans le
-controller courant, vous pouvez spécifier une URL dans le formulaire en
-utilisant la clé 'url' de votre tableau $options. L'URL ainsi fournie peut être
-relative à votre application CakePHP::
+controller courant, vous pouvez spécifier une URL dans le formulaire. L'URL
+fournie peut être relative à votre application CakePHP::
 
     echo $this->Form->create(null, [
         'url' => ['controller' => 'Articles', 'action' => 'publish']
@@ -188,6 +184,9 @@ Affichera:
 .. code-block:: html
 
     <form method="get" action="http://www.google.com/search">
+
+Utilisez ``'url' => false`` si vous ne souhaitez pas d'URL en tant qu'action de
+formulaire.
 
 Utiliser des Validateurs Personnalisés
 --------------------------------------

@@ -27,7 +27,7 @@ personnaliser la gestion des erreurs pour votre application:
 * ``errorLevel`` - int - Le niveau d'erreurs que vous souhaitez pour la
   capture. Utilisez les constantes d'erreur intégrées à PHP et les bitmasks
   pour sélectionner le niveau d'erreur qui vous intéresse.
-* ``trace`` - boolean - Inclut les stack traces (contexte de débuggage) pour les
+* ``trace`` - bool - Inclut les stack traces (contexte de débuggage) pour les
   erreurs dans les fichiers de log. Les Stack traces seront inclus dans le log
   après chaque erreur. Ceci est utile pour trouver où/quand des erreurs sont
   générées.
@@ -35,11 +35,15 @@ personnaliser la gestion des erreurs pour votre application:
   exceptions non interceptées. Si vous choisissez une classe personnalisée,
   vous devrez placer le fichier de cette classe dans le dossier **src/Error**.
   Cette classe doit implémenter une méthode ``render()``.
-* ``log`` - boolean - Si ``true``, les exceptions et leur stack traces seront
+* ``log`` - bool - Si ``true``, les exceptions et leur stack traces seront
   loguées vers :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - Un tableau des noms de classe d'exception qui ne
   doivent pas être mises dans des fichiers de log. C'est utile pour supprimer
   les NotFoundExceptions ou toute autre message de log sans intérêt.
+* ``extraFatalErrorMemory`` - int - Définit le nombre de megaoctets duquel doit
+  être augmenté la limite de mémoire en cas d'erreur fatale. Cela permet
+  d'allouer un petit espace mémoire supplémentaire pour la journalisation
+  (logging) ainsi que la gestion d'erreur.
 
 ErrorHandler affiche par défaut les erreurs quand ``debug`` est ``true`` et
 les erreurs de logs quand ``debug`` est ``false``. Le type d'erreurs capté dans
@@ -138,6 +142,9 @@ Il existe plusieurs exceptions intégrées à l'intérieur de CakePHP, en plus
 des exceptions d'infrastructure internes, et il existe plusieurs exceptions pour
 les méthodes HTTP.
 
+Exceptions HTTP
+---------------
+
 .. php:exception:: BadRequestException
 
     Utilisée pour faire une erreur 400 de Mauvaise Requête.
@@ -166,26 +173,59 @@ les méthodes HTTP.
 
     Utilisée pour faire une erreur 405 pour les Méthodes Non Autorisées.
 
+.. php:exception:: NotAcceptableException
+
+    Utilisée pour faire une erreur 406 Not Acceptable.
+    
+    .. versionadded:: 3.1.7 NotAcceptableException a été ajoutée.
+
+.. php:exception:: ConflictException
+
+    Utilisée pour faire une erreur 409 Conflict.
+
+    .. versionadded:: 3.1.7 ConflictException a été ajoutée.
+
+.. php:exception:: GoneException
+
+    Utilisée pour faire une erreur 410 Gone.
+
+    .. versionadded:: 3.1.7 GoneException a été ajoutée.
+
+Pour plus de détails sur les codes de statut d'erreur HTTP 4xx, regardez
+:rfc:`2616#section-10.4`.
+
 .. php:exception:: InternalErrorException
 
-    Utilisée pour faire une Erreur 500 du Serveur Interne.
+    Utilisée pour faire une erreur 500 du Serveur Interne.
 
 .. php:exception:: NotImplementedException
 
-    Utilisée pour faire une Erreur 501 Non Implémentée.
+    Utilisée pour faire une erreur 501 Non Implémentée.
+
+.. php:exception:: ServiceUnavailableException
+
+    Utilisée pour faire une erreur 503 Service Unavailable.
+
+    .. versionadded:: 3.1.7 Service Unavailable a été ajoutée.
+
+Pour plus de détails sur les codes de statut d'erreur HTTP 5xx, regardez
+:rfc:`2616#section-10.5`.
 
 Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
 les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
 exceptions HTTP pourrait être le rendu de pages 404 pour les items qui n'ont
 pas été trouvés::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException('Could not find that post');
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 En utilisant les exceptions pour les erreurs HTTP, vous pouvez garder à la
@@ -194,6 +234,9 @@ clientes et aux utilisateurs.
 
 De plus, les exceptions de couche du framework suivantes sont disponibles, et
 seront lancées à partir de certains components du cœur de CakePHP:
+
+Autres Exceptions Intégrées
+---------------------------
 
 .. php:namespace:: Cake\View\Exception
 
@@ -289,7 +332,8 @@ seront lancées à partir de certains components du cœur de CakePHP:
 
 .. php:exception:: RecordNotFoundException
 
-    L'enregistrement demandé n'a pas pu être trouvé.
+    L'enregistrement demandé n'a pas pu être trouvé. Génère une réponse avec
+    une entête 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
@@ -336,13 +380,16 @@ Utiliser les Exceptions HTTP dans vos Controllers
 Vous pouvez envoyer n'importe quelle exception HTTP liée à partir des actions
 de votre controller pour indiquer les états d'échec. Par exemple::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id)->first();
-        if (!$post) {
-            throw new NotFoundException();
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set(compact('post'));
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 Ce qui précède va faire que le gestionnaire d'exception attrape et traite

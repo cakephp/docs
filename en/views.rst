@@ -249,10 +249,19 @@ You can also append into a block using ``append()``::
     // The same as the above.
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
-``assign()`` can be used to clear or overwrite a block at any time::
+If you need to clear or overwrite a block there are a couple of alternatives.
+The ``reset()`` method will clear or overwrite a block at any time. The
+``assign()`` method with an empty content string can also be used to
+clear the specified block.::
 
     // Clear the previous content from the sidebar block.
+    $this->reset('sidebar');
+
+    // Assigning an empty string will also clear the sidebar block.
     $this->assign('sidebar', '');
+
+.. versionadded:: 3.2
+    View::reset() was added in 3.2
 
 Assigning a block's content is often useful when you want to convert a view
 variable into a block. For example, you may want to use a block for the page
@@ -294,9 +303,9 @@ want to conditionally show headings or other markup:
     </div>
     <?php endif; ?>
 
-You can also provide a default value for a block should it not have
-any content. This allows you to add placeholder content for empty
-states. You can provide a default value using the second argument:
+You can also provide a default value for a block if it does not exist.
+This allows you to add placeholder content when a block does not exist.
+You can provide a default value using the second argument:
 
 .. code-block:: php
 
@@ -646,6 +655,26 @@ application run faster CakePHP provides a way to cache view sections::
 By default cached view content will go into the ``View::$elementCache`` cache
 config, but you can use the ``config`` option to change this.
 
+.. _view-events:
+
+View Events
+===========
+
+Like Controller, view trigger several events/callbacks that you can use to insert
+logic around the rendering life-cycle:
+
+Event List
+----------
+
+* ``View.beforeRender``
+* ``View.beforeRenderFile``
+* ``View.afterRenderFile``
+* ``View.afterRender``
+* ``View.beforeLayout``
+* ``View.afterLayout``
+
+You can attach application :doc:`event listeners </core-libraries/events>` to these events or
+use :ref:`Helper Callbacks <helper-api>`.
 
 Creating Your Own View Classes
 ==============================

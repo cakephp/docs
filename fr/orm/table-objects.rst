@@ -114,8 +114,8 @@ facilitant la construction de relations et la configuration l'ORM. Regardez
 
 .. _table-callbacks:
 
-Lifecycle Callbacks
-===================
+Callbacks du Cycle de Vie
+=========================
 
 Comme vous l'avez vu ci-dessus les objets table déclenchent un certain nombre
 d'events. Les events sont des hook utiles si vous souhaitez et ajouter de la
@@ -133,6 +133,22 @@ Pour ajouter un écouteur d'event à une classe Table ou un Behavior,
 implémentez simplement les signatures de méthode comme décrit ci-dessus.
 Consultez les :doc:`/core-libraries/events` pour avoir plus de détails sur la
 façon d'utiliser le sous-système d'events.
+
+Liste des Events
+----------------
+
+* ``Model.beforeMarshal``
+* ``Model.beforeFind``
+* ``Model.buildValidator``
+* ``Model.buildRules``
+* ``Model.beforeRules``
+* ``Model.afterRules``
+* ``Model.beforeSave``
+* ``Model.afterSave``
+* ``Model.afterSaveCommit``
+* ``Model.beforeDelete``
+* ``Model.afterDelete``
+* ``Model.afterDeleteCommit``
 
 beforeMarshal
 -------------
@@ -187,7 +203,7 @@ créée et après que la méthode ``buildRules()`` de la table a été appelée.
 beforeRules
 --------------
 
-.. php:method:: beforeRules(Event $event, Entity $entity, ArrayObject $options, $operation)
+.. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
 
 L'event ``Model.beforeRules`` est déclenché avant que les règles n'aient été
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
@@ -196,7 +212,7 @@ finale de l'opération de vérification des règles.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, Entity $entity, ArrayObject $options, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)
 
 L'event ``Model.afterRules`` est déclenché après que les règles soient
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
@@ -205,7 +221,7 @@ finale de l'opération de vérification des règles.
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.beforeSave`` est déclenché avant que chaque entity ne soit
 sauvegardée. Stopper cet event va annuler l'opération de sauvegarde. Quand
@@ -214,7 +230,7 @@ l'event est stoppé, le résultat de l'event sera retourné.
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterSave`` est déclenché après qu'une entity ne soit
 sauvegardée.
@@ -222,7 +238,7 @@ sauvegardée.
 afterSaveCommit
 ---------------
 
-.. php:method:: afterSaveCommit(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterSaveCommit`` est lancé après que la transaction, dans
 laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
@@ -234,7 +250,7 @@ n'est pas déclenché si une transaction est démarrée avant l'appel de save.
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.beforeDelete`` est déclenché avant qu'une entity ne soit
 supprimée. En stoppant cet event, vous allez annuler l'opération de
@@ -243,14 +259,14 @@ suppression.
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterDelete`` est déclenché après qu'une entity a été supprimée.
 
 afterDeleteCommit
 -----------------
 
-.. php:method:: afterDeleteCommit(Event $event, Entity $entity, ArrayObject $options)
+.. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterDeleteCommit`` est lancé après que la transaction, dans
 laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
@@ -334,7 +350,7 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
     class ArticlesTable extends Table
     {
         public static function defaultConnectionName() {
-            return 'slavedb';
+            return 'replica_db';
         }
     }
 

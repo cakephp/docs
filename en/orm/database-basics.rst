@@ -323,12 +323,14 @@ boolean
 binary
     Maps to the BLOB or BYTEA type provided by the database.
 date
-    Maps to a timezone naive DATE column type.
+    Maps to a timezone naive DATE column type. The return value of this column
+    type is :php:class:`Cake\\I18n\\Date` which extends the native ``DateTime``
+    class.
 datetime
     Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL Server
     this turns into a TIMESTAMP type. The default return value of this column
     type is :php:class:`Cake\\I18n\\Time` which extends the built-in
-    ``DateTime`` class and `Carbon <https://github.com/briannesbitt/Carbon>`_.
+    ``DateTime`` class and `Chronos <https://github.com/cakephp/chronos>`_.
 timestamp
     Maps to the TIMESTAMP type.
 time
@@ -418,12 +420,12 @@ We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
 your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
-    
+
     use Cake\Database\Schema\Table as Schema;
 
     class WidgetsTable extends Table
     {
-    
+
         protected function _initializeSchema(Schema $schema)
         {
             $schema->columnType('widget_prefs', 'json');
@@ -431,6 +433,25 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
         }
     
     }
+
+.. _immutable-datetime-mapping:
+
+Enabling Immutable DateTime Objects
+-----------------------------------
+
+.. versionadded:: 3.2
+    Immutable date/time objects were added in 3.2.
+
+Because Date/Time objects are easily mutated in place, CakePHP allows you to
+enable immutable value objects. This is best done in your application's
+**config/bootstrap.php** file::
+
+    Type::build('datetime')->useImmutable();
+    Type::build('date')->useImmutable();
+    Type::build('time')->useImmutable();
+
+.. note::
+    New applications will have immutable objects enabled by default.
 
 Connection Classes
 ==================

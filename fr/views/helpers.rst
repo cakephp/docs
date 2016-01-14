@@ -107,9 +107,11 @@ comportement du helper::
 
     class AwesomeHelper extends Helper
     {
-        public function __construct(View $view, $config = [])
+
+        // Le hook initialize() est disponible depuis 3.2. Pour les versions
+        // précédentes, vous pouvez surcharger le constructeur si nécessaire.
+        public function initialize(array $config)
         {
-            parent::__construct($view, $config);
             debug($config);
         }
     }

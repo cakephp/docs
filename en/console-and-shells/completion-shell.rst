@@ -54,14 +54,42 @@ For example::
 
 Returns::
 
-    --help -h --verbose -v --quiet -q --connection -c --template -t
+    --help -h --verbose -v --quiet -q --everything --connection -c --force -f --plugin -p --prefix --theme -t
 
-Bash Example
-============
+You can also pass an additional argument being the shell sub-command : it will
+output the specific options of this sub-command.
 
-The following bash example comes from the original author::
+How to enable Bash autocompletion for the CakePHP Console
+=========================================================
 
-    # bash completion for CakePHP console
+First, make sure the **bash-completion** library is installed. If not, you do it
+with the following command::
+
+    apt-get install bash-completion
+
+Create a file named **cake** in **/etc/bash_completion.d/** and put the
+:ref:`bash-completion-file-content` inside it.
+
+Save the file, then restart your console.
+
+.. note::
+
+    If you are using MacOS X, you can install the **bash-completion** library
+    using **homebrew** with the command ``brew install bash-completion``.
+    The target directory for the **cake** file will be
+    **/usr/local/etc/bash_completion.d/**.
+
+.. _bash-completion-file-content:
+
+Bash Completion file content
+----------------------------
+
+This is the code you need to put inside the **cake** file in the correct location
+in order to get autocompletion when using the CakePHP console::
+
+    #
+    # Bash completion file for CakePHP console
+    #
 
     _cake()
     {
@@ -94,20 +122,58 @@ The following bash example comes from the original author::
             opts=$(${cake} Completion subcommands $prev)
             COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
             if [[ $COMPREPLY = "" ]] ; then
-                COMPREPLY=( $(compgen -df -- ${cur}) )
+                _filedir
                 return 0
             fi
             return 0
         fi
 
-
         opts=$(${cake} Completion fuzzy "${COMP_WORDS[@]:1}")
         COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
         if [[ $COMPREPLY = "" ]] ; then
-            COMPREPLY=( $(compgen -df -- ${cur}) )
+            _filedir
             return 0
         fi
         return 0;
     }
 
     complete -F _cake cake bin/cake
+
+
+Using autocompletion
+====================
+
+Once enabled, the autocompletion can be used the same way than for other
+built-in commands, using the **TAB** key.
+Three type of autocompletion are provided. The following output are from a fresh CakePHP install.
+
+Commands
+--------
+
+Sample output for commands autocompletion::
+
+    $ bin/cake <tab>
+    bake        i18n        orm_cache   routes
+    console     migrations  plugin      server
+
+Subcommands
+-----------
+
+Sample output for subcommands autocompletion::
+
+    $ bin/cake bake <tab>
+    behavior            helper              shell
+    cell                mailer              shell_helper
+    component           migration           template
+    controller          migration_snapshot  test
+    fixture             model
+    form                plugin
+
+Options
+-------
+
+Sample output for subcommands options autocompletion::
+
+    $ bin/cake bake -<tab>
+    -c            --everything  --force       --help        --plugin      -q            -t            -v
+    --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose

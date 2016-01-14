@@ -162,7 +162,7 @@ the following keys:
 - ``opaque`` A string that must be returned unchanged by clients. Defaults
   to ``md5($config['realm'])``.
 
-Customizing find query
+Customizing Find Query
 ----------------------
 
 You can customize the query used to fetch the user record using the ``finder``
@@ -591,7 +591,7 @@ when validating user credentials so no additional configuration is required in
 order to authenticate users.
 
 ``DefaultPasswordHasher`` uses the bcrypt hashing algorithm internally, which
-is one of the stronger password hashing solution used in the industry. While it
+is one of the stronger password hashing solutions used in the industry. While it
 is recommended that you use this password hasher class, the case may be that you
 are managing a database of users whose password was hashed differently.
 
@@ -640,7 +640,7 @@ hasher::
 
 Supporting legacy systems is a good idea, but it is even better to keep your
 database with the latest security advancements. The following section will
-explain how to migrate from one hashing algorithm to CakePHP's default
+explain how to migrate from one hashing algorithm to CakePHP's default.
 
 Changing Hashing Algorithms
 ---------------------------
@@ -1050,6 +1050,24 @@ unauthorizedRedirect
     redirected to the referrer URL or ``loginAction`` or '/'.
     If set to ``false``, a ForbiddenException exception is thrown instead of
     redirecting.
+storage
+    Storage class to use for persisting user record. When using stateless
+    authenticator you should set this to ``Memory``. Defaults to ``Session``.
+checkAuthIn
+    Name of the event in which initial auth checks should be done. Defaults
+    to ``Controller.startup``. You can set it to ``Controller.initialize``
+    if you want the check to be done before controller's ``beforeFilter()``
+    method is run.
+
+You can get current configuration values by calling ``$this->Auth->config()``::
+only the configuration option::
+
+    $this->Auth->config('loginAction');
+
+    $this->redirect($this->Auth->config('loginAction'));
+
+This is useful if you want to redirect an user to the ``login`` route for example. 
+Without a parameter, the full configuration will be returned.
 
 Testing Actions Protected By AuthComponent
 ==========================================

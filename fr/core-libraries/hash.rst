@@ -680,8 +680,7 @@ Les Types d'Attribut Correspondants
       équivalentes.
     * ``string`` pour le tri des valeurs avec leur valeur de chaîne.
     * ``natural`` pour trier les valeurs d'une façon humaine. Va trier
-      ``foo10`` en-dessous de ``foo2`` par exemple. Le tri naturel
-      a besoin de PHP 5.4 ou supérieur.
+      ``foo10`` en-dessous de ``foo2`` par exemple.
 
 .. php:staticmethod:: diff(array $data, array $compare)
 

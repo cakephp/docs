@@ -34,12 +34,15 @@ un autre helper à la classe de vue bake, cet event peut être utilisé::
 
     });
 
-Les events de Bake peuvent aussi être utiles pour faire des petits
-changements aux templates existants. Par exemple, pour changer les noms de
-variable utilisés lors de la création avec bake de fichiers de
-controller/template, on pourra utiliser une fonction qui écoute
-``Bake.beforeRender`` pour modifier les variables utilisées dans les templates
-de bake::
+Si vous souhaitez modifier bake à partir d'un autre plugin, mettre les events
+de bake de votre plugin dans le fichier ``config/bootstrap.php`` du plugin est
+une bonne idée.
+
+Les events de bake peuvent être pratiques pour faire de petits changements dans
+les templates existants. Par exemple, pour changer les noms de variables
+utilisés lors de la création avec bake de fichiers de controller/template, on
+pourra utiliser une fonction qui écoute ``Bake.beforeRender`` pour modifier les
+variables utilisées dans les templates de bake::
 
     <?php
     // config/bootstrap_cli.php
@@ -84,6 +87,7 @@ utiliser l'event suivant::
     EventManager::instance()->on(
         'Bake.beforeRender.Controller.controller',
         function (Event $event) {
+            $view = $event->subject;
             if ($view->viewVars['name'] == 'Users') {
                 // ajouter les actions login et logout au controller Users
                 $view->viewVars['actions'] = [
@@ -96,7 +100,8 @@ utiliser l'event suivant::
                     'delete'
                 ];
             }
-        });
+        }
+    );
 
 En scopant les écouteurs d'event vers des templates de bake spécifiques, vous
 pouvez simplifier votre logique d'event liée à bake et fournir des callbacks
@@ -129,7 +134,9 @@ spécialement quand on essaie de modifier les fichiers de template de bake, est
 de créer avec bake une classe et de comparer le template utilisé avec le
 template déjà présent dans le dossier tmp de votre application.
 
-Ainsi, par exemple, pour créer avec bake un shell comme ceci::
+Ainsi, par exemple, pour créer avec bake un shell comme ceci:
+
+.. code-block:: shell
 
     bin/cake bake shell Foo
 
@@ -235,7 +242,7 @@ Personnaliser les Templates de Bake
 Si vous souhaitez modifier la sortie par défaut produite par la commande "bake",
 vous pouvez créer vos propres templates de bake dans votre application. Cette
 façon n'utilise pas l'option ``--theme`` dans la ligne de commande lors de
-l'éxecution de bake. La meilleure façon de faire est de faire ce qui suit:
+l'exécution de bake. La meilleure façon de faire est de faire ce qui suit:
 
 #. Créer un nouveau répertoire **/src/Template/Bake/**.
 #. Copier tout template que vous souhaitez surcharger de

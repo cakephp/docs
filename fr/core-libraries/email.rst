@@ -67,7 +67,7 @@ Configuration
 
 La Configuration par défaut pour ``Email`` est créée en utilisant ``config()`` et
 ``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
-le fichier **config/app.php**. Le fichier ``config/app.php.default`` est
+le fichier **config/app.php**. Le fichier **config/app.default.php** est
 un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
 d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
 et utilise les méthodes séparément pour définir toutes les configurations
@@ -145,6 +145,12 @@ valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
 
 La configuration ci-dessus va activer la communication TLS pour tous les
 messages d'email.
+
+.. warning::
+    Vous devrez avoir l'accès aux applications moins sécurisées activé dans votre
+    compte Google pour que cela fonctionne:
+    `Autoriser les applications moins sécurisées à accéder à votre
+    compte <https://support.google.com/accounts/answer/6010255>`__.
 
 .. note::
 
@@ -549,7 +555,7 @@ chose suivante::
         {
             $user = $this->Users->newEntity();
             if ($this->request->is('post')) {
-                $user = $this->Users->patchEntitiy($user, $this->request->data())
+                $user = $this->Users->patchEntity($user, $this->request->data())
                 if ($this->Users->save($user)) {
                     $this->getMailer('User')->send('welcome', [$user]);
                 }
@@ -571,7 +577,7 @@ Vous pourriez par exemple ajouter ce qui suit à votre ``UserMailer``::
         ];
     }
 
-    public function onRegistration(Event $event, Entity $entity, ArrayObject $options)
+    public function onRegistration(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         if ($entity->isNew()) {
             $this->send('welcome', [$entity]);

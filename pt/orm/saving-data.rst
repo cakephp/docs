@@ -12,6 +12,14 @@ Salvando dados
     Você pode referenciar-se à versão inglesa no menu de seleção superior
     para obter informações sobre o tópico desta página.
 
+.. figure:: /_static/img/validation-cycle.png
+   :align: left
+   :alt: Flow diagram showing the marshalling/validation process.
+
+.. figure:: /_static/img/save-cycle.png
+   :align: left
+   :alt: Flow diagram showing the save process.
+
 .. _changing-accessible-fields:
 
 .. _before-marshal:

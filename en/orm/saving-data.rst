@@ -319,6 +319,30 @@ In this situation, the request data for multiple articles should look like::
             'published' => 1
         ],
     ];
+    
+Once you've converted request data into entities you can ``save()`` or
+``delete()`` them::
+
+    // In a controller.
+    foreach ($entities as $entity) {
+        // Save entity
+        $articles->save($entity);
+
+        // Delete entity
+        $articles->delete($entity);
+    }
+
+The above will run a separate transaction for each entity saved. If you'd like
+to process all the entities as a single transaction you can use
+``transactional()``::
+
+    // In a controller.
+    $articles->connection()->transactional(function () use ($articles, $entities) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['atomic' => false]);
+        }
+    });
+    
 
 .. _changing-accessible-fields:
 
@@ -346,29 +370,6 @@ ids of associated entities::
 
 The above will keep the association unchanged between Comments and Users for the
 concerned entity.
-
-Once you've converted request data into entities you can ``save()`` or
-``delete()`` them::
-
-    // In a controller.
-    foreach ($entities as $entity) {
-        // Save entity
-        $articles->save($entity);
-
-        // Delete entity
-        $articles->delete($entity);
-    }
-
-The above will run a separate transaction for each entity saved. If you'd like
-to process all the entities as a single transaction you can use
-``transactional()``::
-
-    // In a controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
-        foreach ($entities as $entity) {
-            $articles->save($entity, ['atomic' => false]);
-        }
-    });
 
 .. note::
 
@@ -488,7 +489,7 @@ For example, consider the following case::
         ]
     ];
     $entity = $articles->newEntity($data);
-    $articles->save($article);
+    $articles->save($entity);
 
     $newData = [
         'comments' => [
@@ -497,7 +498,7 @@ For example, consider the following case::
         ]
     ];
     $articles->patchEntity($entity, $newData);
-    $articles->save($article);
+    $articles->save($entity);
 
 At the end, if the entity is converted back to an array you will obtain the
 following result::

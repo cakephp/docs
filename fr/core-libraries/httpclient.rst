@@ -12,7 +12,7 @@ des APIs distantes.
 Faire des Requêtes
 ==================
 
-Faire des requêtes est simple et direct. Faire une requête get ressemble à
+Faire des requêtes est simple et direct. Faire une requête GET ressemble à
 ceci::
 
     use Cake\Network\Http\Client;
@@ -30,7 +30,7 @@ ceci::
       'headers' => ['X-Requested-With' => 'XMLHttpRequest']
     ]);
 
-Faire des requêtes post et put est également simple::
+Faire des requêtes POST et PUT est également simple::
 
     // Envoi d'une requête POST avec des données encodées application/x-www-form-urlencoded
     $http = new Client();

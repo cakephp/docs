@@ -228,7 +228,7 @@ de la méthode ``newEntity()`` ou ``patchEntity()``:
 
 .. figure:: /_static/img/validation-cycle.png
    :align: left
-   :alt: Logigramme montrant le process de conversionen entity/validation.
+   :alt: Logigramme montrant le process de conversion en entity/validation.
 
 Vous récupérerez toujours une entity en retour de ``newEntity()``. Si la
 validation échoue, votre entité contiendra des erreurs et tous les champs
@@ -338,6 +338,29 @@ ressembler à ceci::
         ],
     ];
 
+Une fois que vous avez converti les données requêtées dans des entities, vous
+pouvez leur faire un ``save()`` ou un ``delete()``::
+
+    // Dans un controller.
+    foreach ($entities as $entity) {
+        // Save entity
+        $articles->save($entity);
+
+        // Supprime l'entity
+        $articles->delete($entity);
+    }
+
+Ce qui est au-dessus va lancer une transaction séparée pour chaque entity
+sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
+vous pouvez utiliser ``transactional()``::
+
+    // Dans un controller.
+    $articles->connection()->transactional(function () use ($articles, $entities) {
+        foreach ($entities as $entity) {
+            $articles->save($entity, ['atomic' => false]);
+        }
+    });
+
 .. _changing-accessible-fields:
 
 Changer les Champs Accessibles
@@ -365,29 +388,6 @@ associations existantes entre certaines entities::
 
 Le code ci-dessus permet de conserver l'association entre Comments et Users pour
 l'entity concernée.
-
-Une fois que vous avez converti les données requêtées dans des entities, vous
-pouvez leur faire un ``save()`` ou un ``delete()``::
-
-    // Dans un controller.
-    foreach ($entities as $entity) {
-        // Save entity
-        $articles->save($entity);
-
-        // Supprime l'entity
-        $articles->delete($entity);
-    }
-
-Ce qui est au-dessus va lancer une transaction séparée pour chaque entity
-sauvegardée. Si vous voulez traiter toutes les entities en transaction unique,
-vous pouvez utiliser ``transactional()``::
-
-    // Dans un controller.
-    $articles->connection()->transactional(function () use ($articles, $entities) {
-        foreach ($entities as $entity) {
-            $articles->save($entity, ['atomic' => false]);
-        }
-    });
 
 .. note::
 
@@ -521,8 +521,17 @@ Par exemple, considérons le cas suivant::
             ['body' => 'A new comment'],
         ]
     ];
-    $articles->patchEntity($article, $newData);
-    $articles->save($article);
+    $entity = $articles->newEntity($data);
+    $articles->save($entity);
+
+    $newData = [
+        'comments' => [
+            ['body' => 'Changed comment', 'id' => 1],
+            ['body' => 'A new comment'],
+        ]
+    ];
+    $articles->patchEntity($entity, $newData);
+    $articles->save($entity);
 
 A la fin, si l'entity est à nouveau convertie en tableau, vous obtiendrez le
 résultat suivant::

@@ -744,6 +744,33 @@ deletes the response content, and sends the `304 Not Modified` header::
         return $this->response;
     }
 
+.. _cors-headers:
+
+Setting Cross Origin Request Headers (CORS)
+===========================================
+
+As of 3.2 you can use the ``cors()`` method to define `HTTP Access Control
+<https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
+related headers with a fluent interface::
+
+    $this->response->cors($this->request)
+        ->allowOrigin(['*.cakephp.org'])
+        ->allowMethods(['GET', 'POST'])
+        ->allowHeaders(['X-CSRF-Token'])
+        ->allowAuthentication()
+        ->exposeHeaders(['Link'])
+        ->maxAge(300)
+        ->build();
+
+CORS related headers will only be applied to the response if the following
+criteria are met:
+
+1. The request has an ``Origin`` header.
+2. The request's ``Origin`` value matches one of the allowed Origin values.
+
+.. versionadded:: 3.2
+    The ``CorsBuilder`` was added in 3.2
+
 Sending the Response
 --------------------
 

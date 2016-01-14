@@ -8,22 +8,13 @@ Appendices
 
     Bu sayfanın konusu hakkındaki İngilizce kaynağa erişmek için üst taraftaki seçim menüsünü kullanabilirsiniz.
 
-3.0 Migration Guide
+3.x Migration Guide
 ===================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-0-migration-guide
-    appendices/orm-migration
-
-3.1 Migration Guide
-===================
-
-.. toctree::
-    :maxdepth: 1
-
-    appendices/3-1-migration-guide
+    appendices/3-x-migration-guide
 
 General Information
 ===================

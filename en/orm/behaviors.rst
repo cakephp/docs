@@ -169,7 +169,7 @@ behavior should now look like::
             $entity->set($config['slug'], Inflector::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, Entity $entity)
+        public function beforeSave(Event $event, EntityInterface $entity)
         {
             $this->slug($entity);
         }
@@ -185,7 +185,7 @@ The above code shows a few interesting features of behaviors:
 
 To prevent the saving from continuing simply stop event propagation in your callback::
 
-    public function beforeSave(Event $event, Entity $entity)
+    public function beforeSave(Event $event, EntityInterface $entity)
     {
         if (...) {
             $event->stopPropagation();

@@ -84,6 +84,9 @@ App.fullBaseUrl
     is generated using the $_SERVER environment. However, you should define it
     manually to optimize performance or if you are concerned about people
     manipulating the ``Host`` header.
+    In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
+    as there is no webserver involved. You do need to specify it yourself if
+    you do need to generate URLs from a shell (e.g. when sending emails).
 App.imageBaseUrl
     Web path to the public images directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.
@@ -278,6 +281,24 @@ data back::
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 If $key is left null, all values in Configure will be returned.
+
+
+.. php:staticmethod:: readOrFail($key)
+
+Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read`
+but expects to find a key/value pair. In case the requested pair does not
+exist, a :php:class:`RuntimeException` will be thrown::
+
+    Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
+    Configure::readOrFail('Company.geolocation');  // Will throw an exception
+
+    Configure::readOrFail('Company');
+
+    // Yields:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.1.7
+    ``Configure::readOrFail()`` was added in 3.1.7
 
 Checking to see if Configuration Data is Defined
 ------------------------------------------------

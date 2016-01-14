@@ -259,11 +259,19 @@ Vous pouvez aussi ajouter dans un block en utilisant ``append()``::
     // Le même que ci-dessus.
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
-``assign()`` peut être utilisée pour nettoyer ou écraser un block en tout
-temps::
+Si vous devez nettoyer ou écraser un block, vous avez plusieurs alternatives.
+La méthode ``reset()`` va nettoyer ou écraser un block à n'importe quel moment.
+La méthode ``assign()`` avec une chaîne de caractères vide peut également être
+utilisée.::
 
     // Nettoyer le contenu précédent du block de sidebar
+    $this->reset('sidebar');
+
+    // Assigner une chaine vide aura le même effet.
     $this->assign('sidebar', '');
+
+.. versionadded:: 3.2
+    View::reset() a été ajoutée dans 3.2
 
 Assigner le contenu d'un block est souvent utile lorsque vous voulez convertir
 une variable de vue en un block. Par exemple, vous pourriez vouloir utiliser
@@ -674,6 +682,28 @@ un moyen de mettre en cache des sections de view::
 Par défaut, le contenu de la view ira dans la config de cache
 ``View::$elementCache``, mais vous pouvez utiliser l'option ``config`` pour
 changer ceci.
+
+.. _view-events:
+
+Events de View
+==============
+
+Tout comme le Controller, la View lance plusieurs events/callbacks (méthodes de
+rappel) que vous pouvez utiliser pour insérer de la logique durant tout le cycle
+de vie du processus de rendu:
+
+Liste des Events
+----------------
+
+* ``View.beforeRender``
+* ``View.beforeRenderFile``
+* ``View.afterRenderFile``
+* ``View.afterRender``
+* ``View.beforeLayout``
+* ``View.afterLayout``
+
+Vous pouvez attacher les :doc:`listeners d'events </core-libraries/events>` de
+votre application à ces events ou utiliser les :ref:`Callbacks de Helper <helper-api>`.
 
 Créer vos propres Classes de View
 =================================

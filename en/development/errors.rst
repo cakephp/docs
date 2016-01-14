@@ -24,17 +24,20 @@ your application:
 * ``errorLevel`` - int - The level of errors you are interested in capturing.
   Use the built-in php error constants, and bitmasks to select the level of
   error you are interested in.
-* ``trace`` - boolean - Include stack traces for errors in log files. Stack
+* ``trace`` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for
   finding where/when errors are being raised.
 * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
   exceptions. If you choose a custom class you should place the file for that
   class in **src/Error**. This class needs to implement a ``render()`` method.
-* ``log`` - boolean - When ``true``, exceptions + their stack traces will be
+* ``log`` - bool - When ``true``, exceptions + their stack traces will be
   logged to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
   logged. This is useful to remove NotFoundExceptions or other common, but
   uninteresting logs messages.
+* ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
+  the memory limit by when a fatal error is encountered. This allows breathing
+  room to complete logging or error handling.
 
 ErrorHandler by default, displays errors when ``debug`` is ``true``, and logs
 errors when debug is ``false``. The type of errors captured in both cases is
@@ -128,6 +131,9 @@ Internal Server Error.
 Built in Exceptions for CakePHP
 ===============================
 
+HTTP Exceptions
+---------------
+
 There are several built-in exceptions inside CakePHP, outside of the
 internal framework exceptions, there are several
 exceptions for HTTP methods
@@ -160,6 +166,29 @@ exceptions for HTTP methods
 
     Used for doing a 405 Method Not Allowed error.
 
+
+
+.. php:exception:: NotAcceptableException
+
+    Used for doing a 406 Not Acceptable error.
+    
+    .. versionadded:: 3.1.7 NotAcceptableException has been added.
+
+.. php:exception:: ConflictException
+
+    Used for doing a 409 Conflict error.
+
+    .. versionadded:: 3.1.7 ConflictException has been added.
+
+.. php:exception:: GoneException
+
+    Used for doing a 410 Gone error.
+
+    .. versionadded:: 3.1.7 GoneException has been added.
+
+For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
+
+
 .. php:exception:: InternalErrorException
 
     Used for doing a 500 Internal Server Error.
@@ -168,21 +197,38 @@ exceptions for HTTP methods
 
     Used for doing a 501 Not Implemented Errors.
 
-You can throw these exceptions from you controllers to indicate failure states,
+
+
+.. php:exception:: ServiceUnavailableException
+
+    Used for doing a 503 Service Unavailable error.
+
+    .. versionadded:: 3.1.7 Service Unavailable has been added.
+
+For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
+
+
+You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException('Could not find that post');
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set('post', $post);
+        $this->set('article', $article);
+        $this->set('_serialize', ['article']);
     }
 
 By using exceptions for HTTP errors, you can keep your code both clean, and give
 RESTful responses to client applications and users.
+
+Other Built In Exceptions
+-------------------------
 
 In addition, the following framework layer exceptions are available, and will
 be thrown from a number of CakePHP core components:
@@ -281,7 +327,8 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: RecordNotFoundException
 
-   The requested record could not be found.
+   The requested record could not be found. This will also set HTTP response
+   headers to 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
@@ -325,13 +372,16 @@ Using HTTP Exceptions in your Controllers
 You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example::
 
-    public function view($id)
+    use Cake\Network\Exception\NotFoundException;
+    
+    public function view($id = null)
     {
-        $post = $this->Post->findById($id)->first();
-        if (!$post) {
-            throw new NotFoundException();
+        $article = $this->Articles->findById($id)->first();
+        if (empty($article)) {
+            throw new NotFoundException(__('Article not found'));
         }
-        $this->set(compact('post'));
+        $this->set('article', 'article);
+        $this->set('_serialize', ['article']);
     }
 
 The above would cause the configured exception handler to catch and
@@ -545,4 +595,4 @@ dealt with by ErrorHandler by setting the ``log`` option to ``true`` in your
 
 .. meta::
     :title lang=en: Error & Exception Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error, http status codes

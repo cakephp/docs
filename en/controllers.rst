@@ -492,14 +492,29 @@ therefore it is not necessary (for example) to redeclare the
 Request Life-cycle Callbacks
 ============================
 
-CakePHP controllers come fitted with callbacks you can use to
-insert logic around the request life-cycle:
+CakePHP controllers trigger several events/callbacks that you can use to insert
+logic around the request life-cycle:
+
+Event List
+----------
+
+* ``Controller.initialize``
+* ``Controller.startup``
+* ``Controller.beforeRedirect``
+* ``Controller.beforeRender``
+* ``Controller.shutdown``
+
+Controller Callback Methods
+---------------------------
+
+By default the following callback methods are connected to related events if the
+methods are implemented by your controllers
 
 .. php:method:: beforeFilter(Event $event)
 
-    This function is executed before every action in the controller.
-    It's a handy place to check for an active session or inspect user
-    permissions.
+    Called during the ``Controller.initialize`` event which occurs before every
+    action in the controller.  It's a handy place to check for an active session
+    or inspect user permissions.
 
     .. note::
 
@@ -507,15 +522,17 @@ insert logic around the request life-cycle:
 
 .. php:method:: beforeRender(Event $event)
 
-    Called after controller action logic, but before the view is rendered. This
-    callback is not used often, but may be needed if you are calling
+    Called during the ``Controller.beforeRender`` event which occurs after
+    controller action logic, but before the view is rendered. This callback is
+    not used often, but may be needed if you are calling
     :php:meth:`~Cake\\Controller\\Controller::render()` manually before the end
     of a given action.
 
 .. php:method:: afterFilter(Event $event)
 
-    Called after every controller action, and after rendering is
-    complete. This is the last controller method to run.
+    Called during the ``Controller.shutdown`` event which is triggered after
+    every controller action, and after rendering is complete. This is the last
+    controller method to run.
 
 In addition to controller life-cycle callbacks, :doc:`/controllers/components`
 also provide a similar set of callbacks.

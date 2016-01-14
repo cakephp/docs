@@ -91,6 +91,10 @@ App.fullBaseUrl
     $_SERVER. Cependant, vous devriez la définir manuellement pour optimiser
     la performance ou si vous êtes inquiets sur le fait que des gens puissent
     manipuler le header ``Host``.
+    Dans un contexte de CLI (à partir des shells), `fullBaseUrl` ne peut pas
+    être lu dans $_SERVER, puisqu'il n'y a aucun serveur web impliqué. Vous
+    devez le spécifier vous-même si vous avez besoin de générer des URLs à
+    partir d'un shell (par exemple pour envoyer des emails).
 App.imageBaseUrl
     Le chemin Web vers le répertoire public des images dans webroot. Si vous
     utilisez un :term:`CDN`, vous devez définir cette valeur vers la
@@ -289,8 +293,8 @@ Par défaut, la valeur de debug de CakePHP est au plus important. Si une
 clé est fournie, la donnée est retournée. En utilisant nos exemples du
 write() ci-dessus, nous pouvons lire cette donnée::
 
-    Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-    Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
+    Configure::read('Company.name');    // Renvoie: 'Pizza, Inc.'
+    Configure::read('Company.slogan');  // Renvoie: 'Pizza for your body and soul'
 
     Configure::read('Company');
 
@@ -299,6 +303,24 @@ write() ci-dessus, nous pouvons lire cette donnée::
 
 Si $key est laissé à null, toutes les valeurs dans Configure seront
 retournées.
+
+.. php:staticmethod:: readOrFail($key)
+
+Permet de lire les données de configuration tout comme
+:php:meth:`Cake\\Core\\Configure::read` mais s'attend à trouver une paire
+clé/valeur. Dans le cas où la paire demandée n'existe pas, une
+:php:class:`RuntimeException` sera lancée::
+
+    Configure::readOrFail('Company.name');    // Renvoie: 'Pizza, Inc.'
+    Configure::readOrFail('Company.geolocation');  // Lancera un exception
+
+    Configure::readOrFail('Company');
+
+    //  Renvoie:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+.. versionadded:: 3.1.7
+    ``Configure::readOrFail()`` a été ajoutée dans 3.1.7
 
 Vérifier si les Données de Configuration sont Définies
 ------------------------------------------------------

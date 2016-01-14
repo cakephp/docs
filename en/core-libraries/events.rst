@@ -121,6 +121,17 @@ along. The listeners will handle all the extra logic around the
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
 
+Core Events
+===========
+
+There are a number of core events within the framework which your application 
+can listen to. Each layer of CakePHP emits events that you can use in your
+application.
+
+* :ref:`ORM/Model events <table-callbacks>`
+* :ref:`Controller events <controller-life-cycle>`
+* :ref:`View events <view-events>`
+
 Registering Listeners
 =====================
 
