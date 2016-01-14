@@ -427,17 +427,13 @@ During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
     TableRegistry::clear();
-    
-Adding namespace to locate the Table / Entity
----------------------------------------------
 
-If you have not followed the convention probably the Table classes or Entity may not be detected by Cake orm. Inorder to fix it, you can add a namespace to `Cake\Core\Configure::write` method.
+Configuring the Namespace to Locate ORM classes
+-----------------------------------------------
 
-    Cake\Core\Configure::write('App.namespace', '<namespace>');
-   
-
-Eg :
-
+If you have not followed the conventions it is likely that your Table or
+Entity classes will not be detected by CakePHP. In order to fix this, you can
+set a namespace with the ``Cake\Core\Configure::write`` method. As an example::
 
     src
     └── App
@@ -447,6 +443,6 @@ Eg :
                     ├── Entity
                     └── Table
 
-You can add as 
+Would be configured with::
 
     Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
