@@ -1000,7 +1000,7 @@ assertions in `TestSuite
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
-Testing with Encrytped Cookies
+Testing with Encrypted Cookies
 ------------------------------
 
 If you use the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
