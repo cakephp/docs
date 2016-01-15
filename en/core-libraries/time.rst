@@ -123,7 +123,7 @@ It is also allowed to directly assign those properties to modify the date::
 Formatting
 ==========
 
-.. php:staticmethod:: setToJSONFormat($format)
+.. php:staticmethod:: setJsonEncodeFormat($format)
 
 This method sets the default format used when converting an object to json::
 
