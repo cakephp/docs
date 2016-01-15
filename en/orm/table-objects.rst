@@ -169,7 +169,7 @@ which implements ``EventListenerInterface``::
         }
     }
 
-and attach the listerner to the ``EventManager`` as below::
+and attach the listener to the ``EventManager`` as below::
 
     use Cake\Event\EventManager;
     $listener = new ModelInitialzieListener();

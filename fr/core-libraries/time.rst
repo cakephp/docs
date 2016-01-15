@@ -128,7 +128,7 @@ date::
 Formatage
 =========
 
-.. php:staticmethod:: setToJSONFormat($format)
+.. php:staticmethod:: setJsonEncodeFormat($format)
 
 Cette méthode définit le format par défaut utilisé lors de la conversion d'un
 objet en json::
