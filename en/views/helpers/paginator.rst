@@ -31,19 +31,23 @@ When adding the PaginatorHelper in your controller, you can define the
 'templates' setting to define a template file to load. This allows you to
 customize multiple templates and keep your code DRY::
 
-    // In a controller.
-    public $helpers = [
-        'Paginator' => ['templates' => 'paginator-templates']
-    ];
+    // In your AppView.php
+    public function initialize()
+    {
+        ...
+        $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
+    }
 
 This will load the file located at **config/paginator-templates.php**. See the
 example below for how the file should look like. You can also load
 templates from a plugin using :term:`plugin syntax`::
 
-    // In a controller.
-    public $helpers = [
-        'Paginator' => ['templates' => 'MyPlugin.paginator-templates']
-    ];
+    // In your AppView.php
+    public function initialize()
+    {
+        ...
+        $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
+    }
 
 Whether your templates are in the primary application or a plugin, your
 templates file should look something like::
