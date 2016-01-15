@@ -157,8 +157,8 @@ initialize
 .. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
 
 L'event ``Model.initialize`` est déclenché après que les méthodes de
-constructeur et initialize sont appelées. Les classes table n'écoutent pas cet
-event par défaut, et utilisent plutôt la méthode hook ``initialize``.
+constructeur et initialize sont appelées. Les classes ``Table`` n'écoutent pas
+cet event par défaut, et utilisent plutôt la méthode hook ``initialize``.
 
 Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
 écouteur qui implémente ``EventListenerInterface``::
@@ -185,7 +185,7 @@ et attacher l'écouteur à ``EventManager`` comme ce qui suit::
     $listener = new ModelInitialzieListener();
     EventManager::instance()->attach($listener);
 
-Ceci va appeler ``initializeEvent`` quand une classe Table est construite.
+Ceci va appeler ``initializeEvent`` quand une classe ``Table`` est construite.
 
 beforeMarshal
 -------------
