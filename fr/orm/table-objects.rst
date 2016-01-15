@@ -137,6 +137,7 @@ façon d'utiliser le sous-système d'events.
 Liste des Events
 ----------------
 
+* ``Model.initialize``
 * ``Model.beforeMarshal``
 * ``Model.beforeFind``
 * ``Model.buildValidator``
@@ -149,6 +150,42 @@ Liste des Events
 * ``Model.beforeDelete``
 * ``Model.afterDelete``
 * ``Model.afterDeleteCommit``
+
+initialize
+----------
+
+.. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
+
+L'event ``Model.initialize`` est déclenché après que les méthodes de
+constructeur et initialize sont appelées. Les classes ``Table`` n'écoutent pas
+cet event par défaut, et utilisent plutôt la méthode hook ``initialize``.
+
+Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
+écouteur qui implémente ``EventListenerInterface``::
+
+    use Cake\Event\EventListenerInterface;
+    class ModelInitialzieListener implements EventListenerInterface
+    {
+        public function implementedEvents()
+        {
+            return array(
+                'Model.initialize' => 'initializeEvent',
+            );
+        }
+        public function initializeEvent($event)
+        {
+            $table = $event->subject();
+            // faire quelque chose ici
+        }
+    }
+
+et attacher l'écouteur à ``EventManager`` comme ce qui suit::
+
+    use Cake\Event\EventManager;
+    $listener = new ModelInitialzieListener();
+    EventManager::instance()->attach($listener);
+
+Ceci va appeler ``initializeEvent`` quand une classe ``Table`` est construite.
 
 beforeMarshal
 -------------
@@ -420,3 +457,23 @@ utile quand vous utilisez les objets factices, ou modifiez les dépendances d'un
 table::
 
     TableRegistry::clear();
+
+Configurer le Namespace pour Localiser les Classes de l'ORM
+-----------------------------------------------------------
+
+Si vous n'avez pas suivi les conventions, il est probable que vos classes
+Table ou Entity ne soient pas detectées par CakePHP. Pour régler cela, vous
+pouvez définir un namespace avec la méthode ``Cake\Core\Configure::write``.
+Par exemple::
+
+    /src
+        /App
+            /My
+                /Namespace
+                    /Model
+                        /Entity
+                        /Table
+
+Serait configuré avec::
+
+    Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
