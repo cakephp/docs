@@ -403,7 +403,7 @@ You may find yourself needing the same logic in multiple entity classes. PHP's
 traits are a great fit for this. You can put your application's traits in
 **src/Model/Entity**. By convention traits in CakePHP are suffixed with
 ``Trait`` so they can be discernible from classes or interfaces. Traits are
-often a good compliment to behaviors, allowing you to provide functionality for
+often a good complement to behaviors, allowing you to provide functionality for
 the table and entity objects.
 
 For example if we had SoftDeletable plugin, it could provide a trait. This trait
