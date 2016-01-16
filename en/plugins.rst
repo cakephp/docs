@@ -77,6 +77,14 @@ plugins you explicitly specify.
     ``Plugin::loadAll()`` won't load vendor namespaced plugins that are not
     defined in **vendor/cakephp-plugins.php**.
 
+There is also a handy shell command to enable the plugin. Execute the following line:
+
+.. code-block:: shell
+
+    $ bin/cake plugin load ContactManager
+
+This will put the ``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
+
 .. _autoloading-plugin-classes:
 
 Autoloading Plugin Classes
@@ -440,7 +448,7 @@ action, so let's include that as well::
     <p>Following is a sortable list of your contacts</p>
     <!-- A sortable list of contacts would go here....-->
 
-Plugins can provide their own layouts. To add plugin layouts, place your template files inside 
+Plugins can provide their own layouts. To add plugin layouts, place your template files inside
 ``plugins/[PluginName]/src/Template/Layout``. To use a plugin layout in your controller
 you can do the following::
 
