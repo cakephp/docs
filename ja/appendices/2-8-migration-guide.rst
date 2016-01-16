@@ -1,12 +1,78 @@
-2.8 Migration Guide
-###################
+2.8 移行ガイド
+###############
 
-.. note::
-    The documentation is not currently supported in ja language for this page.
+CakePHP 2.8 は、2.7 の API の完全上位互換です。
+このページでは、2.8 の変更と改善についてのアウトラインを紹介します。
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+PHP7 互換性
+==================
 
-    You can referer to the english version in the select top menu to have
-    information about this page's topic.
+CakePHP 2.8 は、PHP7 互換でテストされています。
+
+非推奨
+============
+
+* ``FormHelper::create()`` の ``action`` オプションが、非推奨になりました。これは、
+  3.x からのバックポートです。
+  配列の ``action`` キーが DOM ID 生成における URL 一貫性を重視したものである点に注意してください。
+  非推奨のキーを使用した場合、フォームに生成された ID をアップグレード前後で比較してみてください。
+
+エラーハンドリング
+==================
+
+- 致命的エラーを扱う際、CakePHP はメモリの上限を 4MB に調整しエラーが確実に記録されるようになりました。
+  この動作を無効化するには、 ``Config/core.php`` で ``Error.extraFatalErrorMemory`` を
+  ``0`` にします。
+
+Cache
+=====
+
+- ``Cache::add()`` が追加されました。このメソッドによりキーが存在していない場合でもデータを
+  キャッシュに追加できます。このメソッドは、自動的に Memcached, Memcache, APC, Redis
+  上で動作します。他のキャッシュでは非アトミックな操作になります。
+
+CakeTime
+========
+
+- ``CakeTime::listTimezones()`` で、最後の引数が配列を受け付けるように調整されました。
+  ``$options`` 引数の有効な値は、 ``group``, ``abbr``, ``before``, ``after`` です。
+
+Shell ヘルパーの追加
+=====================
+
+コンソールアプリケーションは、出力ロジックの再利用可能な部分を集約する
+ヘルパークラスを作成することができるようになりました。詳しくは、
+:doc:`/console-and-shells/helpers` セクションをご覧ください。
+
+I18nShell
+=========
+
+- 新しいオプション ``no-locations`` が追加されました。このオプションを有効化すると、
+  POT ファイルの位置参照の生成が無効化されます。
+
+Hash
+====
+
+- ``Hash::sort()`` で、大文字小文字を区別しない ``ignoreCase`` オプションの追加しました。
+
+モデル
+======
+
+- マジックメソッドで、カスタム検索タイプがサポートされるようになりました。例えば、モデルで
+  ``find(‘published’)`` が実装されている場合、マジックメソッドインターフェースによって
+  ``findPublishedBy`` や ``findPublishedByAuthorId`` が使用できます。
+
+Validation
+==========
+
+- ``Validation::uploadedFile()`` が 3.x からバックポートされました。
+
+ビュー
+======
+
+FormHelper
+----------
+
+HTML の ``action`` 属性なしで form　タグを作成できるように、
+``FormHelper::create()`` に ``'url' => false`` がサポートされました。
+これは、3.x からのバックポートです。
