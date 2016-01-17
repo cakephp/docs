@@ -118,8 +118,10 @@ hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連する
 categoty\_type\_id のようになるでしょう。
 
 モデル間の hasAndBelongsToMany (HABTM) の関係で使用される join テーブルは、
-join するテーブルに合わせて、アルファベット順に（zebras\_apples ではなく、apples\_zebras）
-並べた名前にしてください。
+結合するモデルテーブルに合わせて名づけられなければなりません。例えば、
+"users HABTM groups" は、 groups_users によって結合し、
+アルファベット順に並べた名前にしてください。例えば、 zoos\_apes よりも
+apes\_zoos の方が好ましいです。
 
 CakePHP モデルの相互に作用する全てのテーブル (join テーブルは除く) は、それぞれの列を
 一意に識別する単一フィールドのプライマリーキーが必要です。単一のプライマリーキーを持たないテーブルを
