@@ -88,8 +88,14 @@ CakeEmail の使い方は、 :php:class:`EmailComponent` の使い方に似て�
     $Email = new CakeEmail();
     $Email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-    //or in constructor::
+    //または、コンストラクタ内で::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+
+.. note::
+    
+    email のヘッダーや本文を記録するログレベルを設定するために ``$Email->config()``
+    もしくはコンストラクタを使用してください。 ``$Email->config(array('log' => true));``
+    を使用する時、 LOG_DEBUG を使用します。 ``CakeLog::write()`` をご覧ください。
 
 Gmail のような SSL SMTP サーバの設定ができます。設定するためには、 ``'ssl://'`` のように
 ホストのプレフィックスを付けて、対応するポート番号を設定します。例::
@@ -171,8 +177,6 @@ Gmail のような SSL SMTP サーバの設定ができます。設定するた�
 - ``'emailFormat'``: メールの書式 (html, text または both) ``CakeEmail::emailFormat()``
   を参照。
 - ``'transport'``: トランスポート名。 ``CakeEmail::transport()`` を参照。
-- ``'log'``: メールのヘッダーやメッセージをログに記録するためのログレベル。 ``true`` なら
-  LOG_DEBUG になります。 ``CakeLog::write()`` を参照。
 - ``'helpers'``: メールテンプレート内で使用するヘルパーの配列。
 
 これらの設定の全ては ``'from'`` を除いてオプションです。多くの設定を配列で登録する場合、
