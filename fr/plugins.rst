@@ -80,6 +80,16 @@ explicitement.
     ``Plugin::loadAll()`` ne va pas charger les plugins se trouvant dans vendor
     qui ne sont pas définis dans **vendor/cakephp-plugins.php**.
 
+Il existe aussi une commande shell très pratique qui va activer le plugin.
+Exécutez la ligne suivante:
+
+.. code-block:: shell
+
+    $ bin/cake plugin load ContactManager
+
+Ceci va vous ajouter le bout de code ``Plugin::load('ContactManager');`` dans le
+fichier bootstrap.
+
 .. _autoloading-plugin-classes:
 
 Autochargement des Classes du Plugin

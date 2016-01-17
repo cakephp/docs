@@ -341,7 +341,7 @@ quand il est utilisé avec l'option ``block = true``:
     <?php
     // Dans votre fichier de vue
     $this->Html->script('carousel', ['block' => true]);
-    $this->Html->css('carousel', null, ['block' => true]);
+    $this->Html->css('carousel', ['block' => true]);
     ?>
 
     // Dans votre fichier de layout.

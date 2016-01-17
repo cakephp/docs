@@ -34,20 +34,24 @@ la configuration de 'templates' pour définir un fichier de template à charger.
 Cela vous permet de personnaliser plusieurs templates et de garder votre code
 DRY::
 
-    // Dans un controller.
-    public $helpers = [
-        'Paginator' => ['templates' => 'paginator-templates']
-    ];
+    // Dans votre fichier AppView.php
+    public function initialize()
+    {
+        ...
+        $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
+    }
 
 Cela va charger le fichier qui se trouve dans
 **config/paginator-templates.php**. Regardez l'exemple ci-dessous pour voir à
 quoi doit ressembler le fichier. Vous pouvez aussi charger les templates à
 partir d'un plugin en utilisant la :term:`syntaxe de plugin`::
 
-    // Dans un controller.
-    public $helpers = [
-        'Paginator' => ['templates' => 'MyPlugin.paginator-templates']
-    ];
+    // Dans votre fichier AppView.php
+    public function initialize()
+    {
+        ...
+        $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
+    }
 
 Si vos templates sont dans l'application principale ou dans un plugin, vos
 fichiers de templates devraient ressembler à ceci::
