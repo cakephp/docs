@@ -534,7 +534,8 @@ If you want to use a different connection use::
 
 .. versionadded:: 3.1.7
 
-Usually, you have a Table class along with your fixture, as well. You can also use that to retrieve the table name::
+Usually, you have a Table class along with your fixture, as well. You can also
+use that to retrieve the table name::
 
     class ArticlesFixture extends TestFixture
     {
