@@ -157,8 +157,8 @@ the ``provider`` key in your rule::
     ]);
 
 You can use the `Localized plugin <https://github.com/cakephp/localized>`_ to
-get providers based on languages. With this plugin, you'll be able to validate
-model fields, depending on a language, ie::
+get providers based on countries. With this plugin, you'll be able to validate
+model fields, depending on a country, ie::
 
     namespace App\Model\Table;
 
@@ -179,6 +179,9 @@ model fields, depending on a language, ie::
             ]);
         }
     }
+
+The localized plugin uses the two letter ISO code of the countries for
+validation, like en, fr, de.
 
 There are a few methods that are common to all classes, defined through the
 `ValidationInterface interface <https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php>`_::

@@ -169,8 +169,8 @@ dans votre règle::
     ]);
 
 Vous pouvez utiliser le `plugin Localized <https://github.com/cakephp/localized>`_ pour fournir des providers basés sur
-les langues. Avec ce plugin, vous pourrez vaider les champs de models selon une
-langue, par exemple::
+les pays. Avec ce plugin, vous pourrez valider les champs de models selon un
+pays, par exemple::
 
     namespace App\Model\Table;
 
@@ -191,6 +191,9 @@ langue, par exemple::
             ]);
         }
     }
+
+Le plugin localized utilise le code ISO à 2 lettres des pays pour la validation,
+par exemple en, fr, de.
 
 Il y a quelques méthodes qui sont communes à toutes les classes, définies par
 `l'interface ValidationInterface <https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php>`_::
