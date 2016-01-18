@@ -279,7 +279,7 @@ This example created a good start for a plugin, but there is a lot
 more that you can do. As a general rule, anything you can do with your
 application, you can do inside of a plugin instead.
 
-Go ahead, include some third-party libraries in 'Vendor', add some
+Go ahead, include some third-party libraries in 'vendor', add some
 new shells to the cake console, and don't forget to create test cases
 so your plugin users can automatically test your plugin's functionality!
 
