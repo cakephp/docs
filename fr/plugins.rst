@@ -601,6 +601,31 @@ faut intégrer dans vos plugins. N'oubliez juste pas de partager votre code
 avec la communauté afin que tout le monde puisse bénéficier de votre
 component génial et réutilisable!
 
+Publiez votre Plugin
+====================
+
+Vous pouvez ajouter votre plugin sur
+`plugins.cakephp.org <http://plugins.cakephp.org>`_. De cette façon, il peut
+être facilement utilisé avec Composer.
+Vous pouvez aussi proposer votre plugin à la liste `awesome-cakephp <https://github.com/FriendsOfCake/awesome-cakephp>`_
+
+Aussi, vous pouvez créer un fichier composer.json et publier votre plugin
+sur `packagist.org <https://packagist.org/>`_.
+
+Choisissez un nom de package avec une sémantique qui a du sens. Il devra
+idéalement être préfixé avec la dépendance, dans ce cas "cakephp" comme le
+framework.
+Le nom de vendor sera habituellement votre nom d'utilisateur sous GitHub.
+**N'utilisez pas** le namespace CakePHP (cakephp) puisqu'il est reservé
+aux plugins appartenant à CakePHP.
+La convention est d'utiliser les lettres en minuscule et les tirets en
+séparateur.
+
+Donc si vous créez un plugin "Logging" avec votre compte GitHub "FooBar", un
+bon nom serait `foo-bar/cakephp-logging`.
+Et le plugin "Localized" appartenant à  CakePHP peut être trouvé dans
+`cakephp/localized`.
+
 .. meta::
     :title lang=fr: Plugins
     :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connexion base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications
