@@ -575,6 +575,21 @@ their contacts. It's up to you to decide what to implement in your
 plugins. Just don't forget to share your code with the community so
 that everyone can benefit from your awesome, reusable components!
 
+Publish Your Plugin
+===================
+
+Make sure you add your plugin to `plugins.cakephp.org <http://plugins.cakephp.org>`_. This way other people can use it as composer depdendency.
+You can also propose your plugin to the `awesome-cakephp list` <https://github.com/FriendsOfCake/awesome-cakephp>_.
+
+Choose a semantically meaningful name for the package name. This should ideally be prefixed with the dependency, in this case "cakephp" as the framework.
+The vendor name will usually be your GitHub username.
+Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP owned plugins.
+The convention is to use lowercase letters and dashes as separator.
+
+So if you created a plugin "Logging" with your GitHub account "FooBar", a good name
+would be `foo-bar/cakephp-logging`.
+And the CakePHP owned "Localized" plugin can be found under `cakephp/localized` respectively.
+
 .. meta::
     :title lang=en: Plugins
     :keywords lang=en: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
