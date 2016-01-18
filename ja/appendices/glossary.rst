@@ -74,15 +74,15 @@
         再利用するという形で DRY 原則に従っています。
 
     PaaS
-        Platform as a Service. Platform as a Service providers will provide
-        cloud based hosting, database and caching resources. Some popular
-        providers include Heroku, EngineYard and PagodaBox
+        Platform as a Service の略。クラウドベースのホスティング、データベース、
+        キャッシュリソースを提供します。有名なプロバイダーは、Heroku、EngineYard、
+        PagodaBox などです。
 
     DSN
-        Data Source Name. A connection string format that is formed like a URI.
-        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+        データソース名。URI のような書式の接続文字列フォーマット。CakePHP は、キャッシュ、
+        データベース、ログ、Eメール接続のための DSN に対応します。
 
 
 .. meta::
     :title lang=ja: 用語集
-    :keywords lang=ja: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :keywords lang=ja: HTML属性,配列クラス,配列コントローラ,用語集,target blank,ドット記法,ルーティング設定,forgery,replay,ルーター,シンタックス,config,submissions
