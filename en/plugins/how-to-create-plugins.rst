@@ -318,7 +318,7 @@ applications:
 Publish Your Plugin
 ===================
 
-You can add your plugin to `plugins.cakephp.org <http://plugins.cakephp.org>`_.
+You can add your plugin to `plugins.cakephp.org <http://plugins.cakephp.org>`_ or propose it to the `awesome-cakephp list` <https://github.com/FriendsOfCake/awesome-cakephp>_.
 
 Also, you might want to create a composer.json file and publish your plugin at `packagist.org <https://packagist.org/>`_.
 This way it can easily be used through Composer.
