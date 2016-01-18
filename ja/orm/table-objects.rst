@@ -257,7 +257,7 @@ Behaviors
         }
     }
 
-アソシエーションには :term:`plugin syntax` と追加の設定オプションが使えます。::
+アソシエーションには :term:`プラグイン記法` と追加の設定オプションが使えます。::
 
     namespace App\Model\Table;
 

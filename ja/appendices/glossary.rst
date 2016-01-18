@@ -5,44 +5,45 @@
 
     ルーティング配列
         :php:meth:`Router::url()` に渡される属性の配列。
-        典型的には以下のようになります::
+        典型的には以下のようになります。 ::
 
-            array('controller' => 'posts', 'action' => 'view', 5)
+            ['controller' => 'Posts', 'action' => 'view', 5]
 
     HTML属性
         HTMLの属性を構成するキー => 値の配列。例::
 
             // これを与えると
-            array('class' => 'my-class', '_target' => 'blank')
+            ['class' => 'my-class', 'target' => '_blank']
 
             // これが生成される
             class="my-class" _target="blank"
 
-        オプションが最小化できるか、名前そのもが値として許可される場合は、 ``true`` が利用できます::
+        オプションが最小化できるか、名前そのもが値として許可される場合は、
+        ``true`` が利用できます。 ::
 
             // これを与えると
-            array('checked' => true)
+            ['checked' => true]
 
             // これが生成される
             checked="checked"
 
-    plugin syntax
-        Plugin syntax refers to the dot separated class name indicating classes
-        are part of a plugin::
+    プラグイン記法
+        プラグイン記法はドットで区切られたクラス名で、クラスがプラグインの一部であることを
+        指定しています。 ::
 
-            // The plugin is "DebugKit", and the class name is "Toolbar".
+            // プラグインは "DebugKit", クラス名は "Toolbar".
             'DebugKit.Toolbar'
 
-            // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
+            // プラグインは "AcmeCorp/Tools", クラス名は "Toolbar".
             'AcmeCorp/Tools.Toolbar'
 
-    dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
+    ドット記法
+        ドット記法は、 ``.`` を用いてネストされたレベルを区切ることによって配列のパスを定義します。
+        例::
 
             Cache.default.engine
 
-        Would point to the following value::
+        は以下の値を指し示します。 ::
 
             [
                 'Cache' => [
@@ -57,19 +58,20 @@
         再生攻撃、二重投稿、他ドメインからの偽造リクエストを防止します。
 
     CDN
-        Content Delivery Network. A 3rd party vendor you can pay to help
-        distribute your content to data centers around the world. This helps
-        put your static assets closer to geographically distributed users.
+        Content Delivery Network の略。世界中のデータセンターにあなたのコンテンツを
+        配信するために利用するサードパーティベンダーです。地理的に分散したユーザーの近くの
+        静的なアセットを送信するのに便利です。
 
     routes.php
-        A file in ``config`` directory that contains routing configuration.
-        This file is included before each request is processed.
-        It should connect all the routes your application needs so
-        requests can be routed to the correct controller + action.
+        ``config`` ディレクトリ中のファイルで、ルーティングの設定が入っています。
+        このファイルは全てのリクエストが処理される前に読み込まれます。リクエストが正しい
+        コントローラ+アクションにルーティングされるように、アプリケーションが必要とする
+        全てのルートに接続する必要があります。
 
     DRY
-        同じことを繰り返さない(Don’t repeat yourself)。これはあらゆる情報の繰り返しを少なくするためのソフトウェア開発の原則です。
-        CakePHPでは同じコードは1箇所に書いて再利用するという形でDRY原則に従っています。
+        同じことを繰り返さない (Don’t repeat yourself)。これはあらゆる情報の繰り返しを
+        少なくするためのソフトウェア開発の原則です。CakePHP では同じコードは１カ所に書いて
+        再利用するという形で DRY 原則に従っています。
 
     PaaS
         Platform as a Service. Platform as a Service providers will provide
@@ -79,3 +81,8 @@
     DSN
         Data Source Name. A connection string format that is formed like a URI.
         CakePHP supports DSN's for Cache, Database, Log and Email connections.
+
+
+.. meta::
+    :title lang=ja: 用語集
+    :keywords lang=ja: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

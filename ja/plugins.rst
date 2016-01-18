@@ -157,7 +157,7 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 
     Plugin::load('AcmeCorp/Users');
 
-クラス名は :term:`プラグイン記法 <plugin syntax>` を使うことで、適切に
+クラス名は :term:`プラグイン記法` を使うことで、適切に
 解決されるでしょう。
 
 ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、ドキュメントに書かれています。
@@ -381,7 +381,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
         }
     }
 
-おなじみの :term:`プラグイン記法 <plugin syntax>` を使う事で、プラグインのテーブルを
+おなじみの :term:`プラグイン記法` を使う事で、プラグインのテーブルを
 読み込むために ``TableRegistry`` を使用することができます。::
 
     use Cake\ORM\TableRegistry;
@@ -457,7 +457,7 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 --------------------------------
 
 :php:class:`~Cake\\View\\Helper\\HtmlHelper` の script, image, css メソッドを使って
-プラグイン内のアセットへのリンクを作りたい場合、 :term:`プラグイン記法 <plugin syntax>`
+プラグイン内のアセットへのリンクを作りたい場合、 :term:`プラグイン記法`
 が使えます。::
 
     // /contact_manager/css/styles.css へのURLを生成します
