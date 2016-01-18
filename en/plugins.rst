@@ -579,7 +579,7 @@ Publish Your Plugin
 ===================
 
 Make sure you add your plugin to `plugins.cakephp.org <http://plugins.cakephp.org>`_. This way other people can use it as composer depdendency.
-You can also propose your plugin to the `awesome-cakephp list` <https://github.com/FriendsOfCake/awesome-cakephp>_.
+You can also propose your plugin to the `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
 Choose a semantically meaningful name for the package name. This should ideally be prefixed with the dependency, in this case "cakephp" as the framework.
 The vendor name will usually be your GitHub username.
