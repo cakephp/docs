@@ -164,9 +164,40 @@ dans votre règle::
 
     // Utilise une règle à partir du provider de la table
     $validator->add('title', 'unique', [
-        'rule' => 'uniqueTitle',
+        'rule' => 'validateUnique',
         'provider' => 'table'
     ]);
+
+Vous pouvez utiliser le `plugin Localized <https://github.com/cakephp/localized>`_ pour fournir des providers basés sur
+les langues. Avec ce plugin, vous pourrez vaider les champs de models selon une
+langue, par exemple::
+
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class PostsTable extends Table
+    {
+        public function validationDefault(Validator $validator)
+        {
+            $validator = new Validator();
+            // add the provider to the validator
+            $validator->provider('fr', 'Localized\Validation\FrValidation');
+            // use the provider in a field validation rule
+            $validator->add('phoneField', 'myCustomRuleNameForPhone', [
+                'rule' => 'phone',
+                'provider' => 'fr'
+            ]);
+        }
+    }
+
+Il y a quelques méthodes qui sont communes à toutes les classes, définies par
+`l'interface ValidationInterface <https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php>`_::
+
+    phone() pour vérifier un numéro de téléphone
+    postal() pour vérifier un code postal
+    personId() pour vérifier un ID d'une personne d'un pays
 
 Règles de Validation Personnalisées
 -----------------------------------

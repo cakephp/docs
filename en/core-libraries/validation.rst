@@ -135,8 +135,8 @@ Validator instances come with a 'default' provider setup automatically. The
 default provider is mapped to the :php:class:`~Cake\\Validation\\Validation`
 class. This makes it simple to use the methods on that class as validation
 rules. When using Validators and the ORM together, additional providers are
-configured for the table and entity objects. You can use the ``provider()`` method
-to add any additional providers your application needs::
+configured for the table and entity objects. You can use the ``provider()``
+method to add any additional providers your application needs::
 
     $validator = new Validator();
 
@@ -155,6 +155,37 @@ the ``provider`` key in your rule::
         'rule' => 'validateUnique',
         'provider' => 'table'
     ]);
+
+You can use the `Localized plugin <https://github.com/cakephp/localized>`_ to
+get providers based on languages. With this plugin, you'll be able to validate
+model fields, depending on a language, ie::
+
+    namespace App\Model\Table;
+
+    use Cake\ORM\Table;
+    use Cake\Validation\Validator;
+
+    class PostsTable extends Table
+    {
+        public function validationDefault(Validator $validator)
+        {
+            $validator = new Validator();
+            // add the provider to the validator
+            $validator->provider('fr', 'Localized\Validation\FrValidation');
+            // use the provider in a field validation rule
+            $validator->add('phoneField', 'myCustomRuleNameForPhone', [
+                'rule' => 'phone',
+                'provider' => 'fr'
+            ]);
+        }
+    }
+
+There are a few methods that are common to all classes, defined through the
+`ValidationInterface interface <https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php>`_::
+
+    phone() to check a phone number
+    postal() to check a postal code
+    personId() to check a country specific person ID
 
 Custom Validation Rules
 -----------------------
