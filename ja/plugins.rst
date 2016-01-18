@@ -27,12 +27,12 @@ Composer を使ったプラグインインストール
 
     php composer.phar require cakephp/debug_kit
 
-これによって最新の DebugKit をインストールして、あなたの **composer.json**, **composer.lock** 
+これによって最新の DebugKit をインストールして、あなたの **composer.json**, **composer.lock**
 ファイルを更新し、 **vendor/cakephp-plugins.php** とオートローダも更新します。
 
-もしあなたがインストールしたいプラグインが packagist.org になければ、プラグインコードを 
+もしあなたがインストールしたいプラグインが packagist.org になければ、プラグインコードを
 **plugins** ディレクトリにコピーすることもできます。
-例えば 'ContactManager' という名前のプラグインをインストールするなら、 ``plugins`` フォルダの中に 
+例えば 'ContactManager' という名前のプラグインをインストールするなら、 ``plugins`` フォルダの中に
 'ContactManager' という名前のフォルダを作り、この下にプラグインの src, tests といった
 フォルダを作ります。
 
@@ -44,9 +44,9 @@ Composer を使ったプラグインインストール
 Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` というファイルが
 作られることに気付くかもしれません。この設定ファイルにはプラグイン名とファイルシステム上の
 配置場所の情報が含まれています。これによって、プラグインを vendor ディレクトリなど
-プラグインディレクトリの外に配置することが可能になります。 ``Plugin`` クラスは 
+プラグインディレクトリの外に配置することが可能になります。 ``Plugin`` クラスは
 ``load()`` や ``loadAll()`` でプラグインをロードする時に、このファイルを使って
-場所を特定します。通常あなたはこのファイルを手動で編集する必要はなく、 Composer や 
+場所を特定します。通常あなたはこのファイルを手動で編集する必要はなく、 Composer や
 ``plugin-installer`` パッケージが管理してくれます。
 
 プラグインの読み込み
@@ -166,11 +166,11 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 プラグインの利用
 ================
 
-クラス名の前にプラグイン名を付けることで、プラグインの controllers, models, 
+クラス名の前にプラグイン名を付けることで、プラグインの controllers, models,
 components, behaviors, そして helpers を参照できます。
 
-例えば、あなたの画面で素敵なコンタクト情報を表示するために、 ContactManager プラグインの 
-ContactInfoHelper を使いたいとしましょう。この場合、あなたのコントローラーの 
+例えば、あなたの画面で素敵なコンタクト情報を表示するために、 ContactManager プラグインの
+ContactInfoHelper を使いたいとしましょう。この場合、あなたのコントローラーの
 ``$helpers`` 配列にこのように記述します。::
 
     public $helpers = ['ContactManager.ContactInfo'];
@@ -240,7 +240,7 @@ Bake を使ってプラグインを作成する
 プラグインコントローラー
 ========================
 
-ContactManagerプラグインのコントローラーは、 **plugins/ContactManager/src/Controller/** 
+ContactManagerプラグインのコントローラーは、 **plugins/ContactManager/src/Controller/**
 に設置されます。
 主にやりたい事はcontactsの管理ですので、このプラグインにはContactsControllerが必要です。
 
@@ -280,7 +280,7 @@ ContactManagerプラグインのコントローラーは、 **plugins/ContactMan
 
     Plugin::load('ContactManager', ['routes' => true]);
 
-続いて ContactManager プラグインのルート情報を作成します。 
+続いて ContactManager プラグインのルート情報を作成します。
 **plugins/ContactManager/config/routes.php** に下記のように追加してください。::
 
     <?php
@@ -294,7 +294,7 @@ ContactManagerプラグインのコントローラーは、 **plugins/ContactMan
 このファイルをカスタマイズすることで、後から個別のルートを設定することができます。
 
 これまでのところでアクセスするなら、 ``/contact-manager/contacts`` にアクセスして
-みてください。 "Missing Model" エラーが表示されるでしょうが、これはまだ 
+みてください。 "Missing Model" エラーが表示されるでしょうが、これはまだ
 Contact モデルが定義されていないためです。
 
 もしあなたのアプリケーションが、CakePHPの提供するデフォルトルーティングを含むなら、
@@ -312,12 +312,12 @@ CakePHP のデフォルトルーティングは下記の書式でルーティン
     /:prefix/:plugin/:controller
     /:prefix/:plugin/:controller/:action
 
-特定ファイルにルーティングするようなプラグインロードの方法については、 
+特定ファイルにルーティングするようなプラグインロードの方法については、
 :ref:`プラグインの設定 <plugin-configuration>` の項を参照してください。
 
-bake で作っていないプラグインなら、クラスを自動的に読み込むために 
+bake で作っていないプラグインなら、クラスを自動的に読み込むために
 **composer.json** ファイルを編集して、あなたのプラグインを追加する必要があります。
-これについては :ref:`プラグインクラスの自動読み込み <autoloading-plugin-classes>` 
+これについては :ref:`プラグインクラスの自動読み込み <autoloading-plugin-classes>`
 の項を参照してください。
 
 .. _plugin-models:
@@ -391,7 +391,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 プラグインビュー
 =================
 
-ビューは通常のアプリケーション内と同じように動作します。 
+ビューは通常のアプリケーション内と同じように動作します。
 ``plugins/[PluginName]/src/Template/`` フォルダの中の正しいフォルダ内に配置するだけです。
 我々の ContactManager プラグインでは ``ContactsController::index()`` アクションに
 ビューが必要ですから、このような内容になります。::
@@ -418,7 +418,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 ----------------------------------------------------------------
 
 プラグインのビューはあるパスを使ってオーバーライドできます。
-仮にあなたが 'ContactManager' という名前のプラグインを持っているとして、 
+仮にあなたが 'ContactManager' という名前のプラグインを持っているとして、
 **src/Template/Plugin/[Plugin]/[Controller]/[view].ctp** というファイルを作って
 そこにビューロジックを書いておけば、プラグインのテンプレートファイルをオーバーライド
 することができます。
@@ -457,7 +457,7 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 --------------------------------
 
 :php:class:`~Cake\\View\\Helper\\HtmlHelper` の script, image, css メソッドを使って
-プラグイン内のアセットへのリンクを作りたい場合、 :term:`プラグイン記法 <plugin syntax>` 
+プラグイン内のアセットへのリンクを作りたい場合、 :term:`プラグイン記法 <plugin syntax>`
 が使えます。::
 
     // /contact_manager/css/styles.css へのURLを生成します
@@ -519,7 +519,7 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 この例は、プラグインを作るための一つの良い開始方法であって、他にも色んな方法があります。
 一般的なルールとして、アプリケーションでできることは、プラグインでもできます。
 
-まずは、'Vendor'にサードパーティのライブラリを設置し、
+まずは、'vendor'にサードパーティのライブラリを設置し、
 cake console に新しい shell を追加します。
 さらに、利用者が自動で出来る、プラグインの機能をテストするためのテストケースを
 作成する事を忘れないでください。

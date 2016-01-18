@@ -588,7 +588,7 @@ Cet exemple est un bon début pour un plugin, mais il y a beaucoup plus
 à faire. En règle générale, tout ce que vous pouvez faire avec votre
 application, vous pouvez le faire à l'intérieur d'un plugin à la place.
 
-Continuez, incluez certaines librairies tierces dans 'Vendor', ajoutez
+Continuez, incluez certaines librairies tierces dans 'vendor', ajoutez
 de nouveaux shells à la console de cake, et n'oubliez pas de créer des cas
 de test ainsi les utilisateurs de votre plugin peuvent automatiquement tester
 les fonctionnalités de votre plugin!
