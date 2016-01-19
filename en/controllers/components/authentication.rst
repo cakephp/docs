@@ -109,6 +109,9 @@ keys.
 - ``passwordHasher`` Password hasher class; Defaults to ``Default``.
 - The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
   a custom finder instead to modify the query to fetch a user record.
+  
+.. note::
+    ``finder`` scope and contain are deprecated since 3.1.
 
 To configure different fields for user in your ``initialize()`` method::
 
