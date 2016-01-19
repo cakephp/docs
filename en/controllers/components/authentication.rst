@@ -174,6 +174,7 @@ option in authenticate class config::
         $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
+                    'fields' => ['username' => 'email', 'password' => 'passwd'],
                     'finder' => 'auth'
                 ]
             ],
