@@ -37,7 +37,7 @@ following statement::
         Plugin::load('Migrations');
 
 Additionally, you will need to configure the default database configuration for your 
-application in your **config/app.php* file as explained in the
+application in your **config/app.php** file as explained in the
 :ref:`Database Configuration section <database-configuration>`.
 
 Overview
