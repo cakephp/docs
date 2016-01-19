@@ -109,6 +109,8 @@ keys.
 - ``passwordHasher`` Password hasher class; Defaults to ``Default``.
 - The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
   a custom finder instead to modify the query to fetch a user record.
+- The ``userFields`` option has been deprecated as of 3.1. Use ``select()`` in 
+  your custom finder.
 
 To configure different fields for user in your ``initialize()`` method::
 
@@ -182,7 +184,8 @@ option in authenticate class config::
 
 This will require your ``UsersTable`` to have finder method ``findAuth()``.
 In the example shown below the query is modified to fetch only required fields
-and add condition::
+and add condition. You must ensure that you select the fields you need to 
+authenticate a user, such as ``username`` and ``password``::
 
     public function findAuth(\Cake\ORM\Query $query, array $options)
     {
