@@ -9,7 +9,7 @@ It allows you to evolve your database tables over time. Instead of writing
 schema modifications in SQL, this plugin allows you to use an intuitive set
 of methods to implement your database changes.
 
-This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_
+This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_.
 
 Installation
 ============
@@ -19,14 +19,26 @@ you've removed it and want to re-install it, you can do so by running the
 following from your application's ROOT directory (where composer.json file is
 located)::
 
-        php composer.phar require cakephp/migrations "@stable"
+        $ php composer.phar require cakephp/migrations "@stable"
+        
+        // Or if composer is installed globally
+        
+        $ composer require cakephp/migrations "@stable"
 
-You will need to add the following line to your application's bootstrap.php file::
+To use the plugin you'll need to load it in your application's **config/bootstrap.php** file.
+You can use :ref:`CakePHP's Plugin shell <plugin-shell>` to load and unload plugins from
+your **config/bootstrap.php**::
+
+        $ bin/cake plugin load Migrations
+        
+Or you can load the plugin by editing your **config/bootstrap.php** file and adding the
+following statement::
 
         Plugin::load('Migrations');
 
-Additionally, you will need to configure the default database configuration in your
-config/app.php file as explained in the :ref:`Database Configuration section <database-configuration>`.
+Additionally, you will need to configure the default database configuration for your 
+application in your **config/app.php* file as explained in the
+:ref:`Database Configuration section <database-configuration>`.
 
 Overview
 ========
