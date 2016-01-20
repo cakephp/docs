@@ -61,7 +61,7 @@ n'est utilisé, le groupe par défaut est sélectionné.
 
 Les messages du coeur extraits de la libairie cakephp peuvent être stockés
 séparément dans un fichier **cake.po** dans **src/Locale/**.
-La `librairie localized de CakePHP https://github.com/cakephp/localized`_
+La `librairie localized de CakePHP <https://github.com/cakephp/localized>`_
 contient des traductions des chaînes de caractère du coeur (du domaine cake)
 pour l'interface client. Pour utiliser ces fichiers, liez les ou copiez les au
 bon endroit : **src/Locale/<locale>/cake.po**. Si votre locale est incomplète ou

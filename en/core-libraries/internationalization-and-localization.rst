@@ -60,7 +60,7 @@ is selected.
 
 The core strings messages extracted from the cakephp library can be stored
 separately in a file named **cake.po** in **src/Locale/**.
-The `CakePHP localized library https://github.com/cakephp/localized`_ houses
+The `CakePHP localized library <https://github.com/cakephp/localized>`_ houses
 translations for the client-facing translated strings in the core (the cake
 domain). To use these files, link or copy them into their expected location:
 **src/Locale/<locale>/cake.po**. If your locale is incomplete or incorrect,
