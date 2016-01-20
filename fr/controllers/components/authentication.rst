@@ -121,6 +121,8 @@ suivante.
 - Les options ``scope`` et ``contain`` sont dépréciées dans 3.1. Utilisez un
   finder personnalisé à la place pour modifier la requête qui récupère
   l'utilisateur.
+- L'option ``userFields`` a été dépréciée depuis la version 3.1. Utilisez
+  ``select()`` dans vos finders personnalisés.
 
 Pour configurer les différents champs de l'utilisateur dans la méthode
 ``initialize()``::
@@ -198,7 +200,9 @@ d'authentification::
 
 Cela nécessitera que votre table ``UsersTable`` ait une méthode ``findAuth()``.
 Dans l'exemple ci-dessous, la requête est modifiée pour récupérer uniquement
-les champs et ajouter une condition::
+les champs et ajouter une condition. Vous devez vous assurer que vous avez
+fait un select sur les champs pour lesquels vous souhaitez authentifier un
+utilisateur, par exemple ``username`` et ``password``::
 
     public function findAuth(\Cake\ORM\Query $query, array $options)
     {

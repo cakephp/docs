@@ -11,7 +11,7 @@ d'utiliser un ensemble intuitif de méthodes qui facilite la mise en œuvre des
 modifications au sein de la base de données.
 
 Ce plugin est un wrapper pour la librairie de gestion des migrations de bases de
-données `Phinx <https://phinx.org/>`_
+données `Phinx <https://phinx.org/>`_.
 
 Installation
 ============
@@ -21,16 +21,27 @@ retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit
 à partir du répertoire ROOT de votre application (où le fichier composer.json
 est localisé)::
 
-        php composer.phar require cakephp/migrations "@stable"
+        $ php composer.phar require cakephp/migrations "@stable"
 
-Vous aurez besoin d'ajouter la ligne suivante dans le fichier bootstrap.php de
-votre application::
+        // Or if composer is installed globally
+
+        $ composer require cakephp/migrations "@stable"
+
+Pour utiliser le plugin, vous devrez le charger dans le fichier
+**config/bootstrap.php** de votre application.
+Vous pouvez utiliser :ref:`le shell de Plugin de CakePHP <plugin-shell>` pour
+charger et décharger les plugins de votre **config/bootstrap.php**::
+
+        $ bin/cake plugin load Migrations
+
+Ou vous pouvez charger le plugin en modifiant votre fichier
+**config/bootstrap.php**, en ajoutant ce qui suit::
 
         Plugin::load('Migrations');
 
-De plus, vous devrez configurer la base de données par défaut dans le fichier
-config/app.php comme expliqué dans la section sur la
-:ref:`configuration des bases de données <database-configuration>`.
+De plus, vous devrez configurer la base de données par défaut pour votre
+application dans le fichier **config/app.php** comme expliqué dans la section
+sur la :ref:`configuration des bases de données <database-configuration>`.
 
 Vue d'ensemble
 ==============
