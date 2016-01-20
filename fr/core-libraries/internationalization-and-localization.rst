@@ -44,7 +44,6 @@ Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire,
 il devrait y avoir un sous-dossier par langue que l'application doit prendre
 en charge::
 
-
     /src
         /Locale
             /en_US
@@ -62,6 +61,12 @@ n'est utilisé, le groupe par défaut est sélectionné.
 
 Les messages du coeur extraits de la libairie cakephp peuvent être stockés
 séparément dans un fichier **cake.po** dans **src/Locale/**.
+La `librairie localized de CakePHP https://github.com/cakephp/localized`_
+contient des traductions des chaînes de caractère du coeur (du domaine cake)
+pour l'interface client. Pour utiliser ces fichiers, liez les ou copiez les au
+bon endroit : **src/Locale/<locale>/cake.po**. Si votre locale est incomplète ou
+incorrecte, vous pouvez nous envoyer une PR dans ce dépôt pour corriger les
+erreurs.
 
 Les plugins peuvent également contenir des fichiers de traduction, la convention
 est d'utiliser la version ``under_scored`` du nom du plugin comme domaine de la
