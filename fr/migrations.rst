@@ -23,7 +23,7 @@ est localisé)::
 
         $ php composer.phar require cakephp/migrations "@stable"
 
-        // Or if composer is installed globally
+        // Ou si composer est installé globalement
 
         $ composer require cakephp/migrations "@stable"
 
