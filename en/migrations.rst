@@ -74,7 +74,7 @@ Here's an example of a migration::
         }
 
 
-Th migration will add a table to your database named ``products`` with the following
+The migration will add a table to your database named ``products`` with the following
 column definitions::
 
 - ``id`` column of type ``integer``
