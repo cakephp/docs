@@ -121,9 +121,9 @@ Creating Migrations
 
 Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
-which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**::
+which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**::
 
-        -rw-rw-r-- 1 root root 1066 Aug 21 22:05 20150822030519_create_articles.php
+        -rw-rw-r-- 1 user user  914 Jan 21 10:38 20160121163850_CreateProducts.php
 
 The easiest way to create a migrations file is by using the :doc:`/bake/usage` CLI command.
 The following ``Bake`` command would create a migration to add a ``products`` table::
@@ -145,14 +145,14 @@ i.e. create_products::
 
         $ bin/cake bake migration create_products name:string description:text created modified
     
-        Welcome to CakePHP v3.0.13 Console
+        Welcome to CakePHP v3.1.17 Console
         ---------------------------------------------------------------
         App : src
         Path: /home/user/Work/php/cakeblog/src/
         ---------------------------------------------------------------
         
-        Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_create_products.php
-        Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_create_products.php`
+        Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php
+        Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php`
 
 .. versionadded:: cakephp/migrations 1.5.2
 
