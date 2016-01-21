@@ -5,14 +5,12 @@ Xml
 
 .. php:class:: Xml
 
-``class Cake\Utility\Xml``
-
 Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对象，并且可以转回数组。
 
 创建XML对象
 ===========
 
-.. static Cake\Utility\Xml::build($input, array $options =[])
+.. php:staticmethod:: build($input, array $options = [])
 
 你可使用Xml::build() 载入XML-ish数据。取决于你 ``$options`` 的参数，这个方法允许你返回一个 ``SimpleXMLElement (default) or DOMDocument`` 对象，在各种数据源中，你可使用 ``Xml::build()`` 去创建一个XML对象。例如，你可以通过下面的设置创建XML::
 
@@ -23,7 +21,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
         <body> ... </body>
     </post>';
     $xml = Xml::build($text);
-    
+
 你也可以通过本地文件创建Xml对象::
 
     //本地文件
@@ -42,8 +40,8 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 
 如果你的输入参数是无效的，Xml类会抛出一个异常::
 
-    $xmlString = 'What is XML?':
-    try {::
+    $xmlString = 'What is XML?';
+    try {
         $xmlObject = Xml::build($xmlString); // 这儿会抛出一个异常
     } catch (\Cake\Utility\Exception\XmlException $e) {
         throw new InternalErrorException();
@@ -56,7 +54,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 把Xml字符串转换成数组
 =====================
 
-.. toArray($obj);
+.. php:staticmethod:: toArray($obj);
 
 用Xml类把Xml字符串转换成数组是非简单的。默认你将获得返回值是SimpleXml对象::
 
@@ -67,6 +65,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
 
 把数组转换成Xml
 ===============
+
 ::
 
     $xmlArray = ['root' => ['child' => 'value']];
@@ -99,6 +98,11 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
     $xmlObject = Xml::fromArray($xmlArray);
     $xmlString = $xmlObject->asXML();
 
+The content of ``$xmlString`` will be::
+
+    <?xml version="1.0"?>
+    <project id="1">Value of project<name>Name of project, as tag</name></project>
+
 使用命名空间
 ============
 
@@ -111,7 +115,7 @@ Xml类充许将数组转换成 ``SimpleXMLElement`` 或者 ``DOMDocument`` 对�
         ]
     ];
     $xml1 = Xml::fromArray($xmlArray);
-    
+
     $xmlArray(
         'root' => [
             'tag' => [
@@ -129,8 +133,8 @@ $xml1 和 $xml2 的值分别是::
 
     <?xml version="1.0"?>
     <root xmlns="http://cakephp.org"><child>value</child>
-    
-    
+
+
     <?xml version="1.0"?>
     <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
@@ -143,17 +147,17 @@ $xml1 和 $xml2 的值分别是::
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = Xml::build($myXmlOriginal);
     $xml->root->addChild('young', 'new value');
-    
+
     // 使用 DOMDocument
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
     $child = $xml->createElement('young', 'new value');
     $xml->firstChild->appendChild($child);
 
-.. note::
+.. tip::
 
     用SimpleXMLElement 或者 DomDocument处理Xml后， 可以使用Xml::toArray()。
 
 .. meta::
     :title lang=zh: Xml
-    :keywords lang=en: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth
+    :keywords lang=zh: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth

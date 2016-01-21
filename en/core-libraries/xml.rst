@@ -46,7 +46,7 @@ You can also build Xml objects using an array::
 
 If your input is invalid, the Xml class will throw an exception::
 
-    $xmlString = 'What is XML?'
+    $xmlString = 'What is XML?';
     try {
         $xmlObject = Xml::build($xmlString); // Here will throw an exception
     } catch (\Cake\Utility\Exception\XmlException $e) {
@@ -175,8 +175,8 @@ your document type to add, remove, or manipulate child nodes::
 
 .. tip::
 
-    After manipulating your XML using SimpleXMLElement or DomDocument you can use
-    ``Xml::toArray()`` without a problem.
+    After manipulating your XML using SimpleXMLElement or DomDocument you can
+    use ``Xml::toArray()`` without a problem.
 
 .. meta::
     :title lang=en: Xml

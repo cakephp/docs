@@ -45,7 +45,7 @@ Vous pouvez aussi construire des objets Xml en utilisant un tableau::
 
 Si votre entrée est invalide, la classe Xml enverra une Exception::
 
-    $xmlString = 'What is XML?'
+    $xmlString = 'What is XML?';
     try {
         $xmlObject = Xml::build($xmlString); // Ici une Exception va être lancée
     } catch (\Cake\Utility\Exception\XmlException $e) {
