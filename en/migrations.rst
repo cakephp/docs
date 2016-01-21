@@ -75,13 +75,13 @@ Here's an example of a migration::
 
 
 The migration will add a table to your database named ``products`` with the following
-column definitions::
+column definitions:
 
 - ``id`` column of type ``integer``
 - ``name`` column of type ``string``
 - ``description`` column of type ``text``
 - ``created`` column of type ``datetime``
-        
+
 .. tip::
 
         A primary key column named ``id`` will be added **implicitly**.
