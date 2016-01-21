@@ -10,7 +10,9 @@ façam alterações nos artigos que não lhes pertencem.
 Criando todo o código relacionado ao Usuário
 ============================================
 
-Primeiro, vamos criar uma nova tabela no banco de dados do blog para armazenar dados de nossos usuários::
+Primeiro, vamos criar uma nova tabela no banco de dados do blog para armazenar dados de nossos usuários:
+
+.. code-block:: sql
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -27,7 +29,9 @@ CakePHP será capaz de configurar automaticamente a maioria das coisas para nós
 implementação do login do usuário.
 
 O próximo passo é criar a nossa classe UsersTable, responsável por encontrar, salvar 
-e validar os dados do usuário::
+e validar os dados do usuário:
+
+.. code-block:: php
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -54,7 +58,9 @@ e validar os dados do usuário::
 
 Vamos também criar o nosso UsersController. O conteúdo a seguir corresponde a
 partes de uma classe UsersController básica gerado atráves do utilitário de
-geração de código ``bake`` fornecido com CakePHP::
+geração de código ``bake`` fornecido com CakePHP:
+
+.. code-block:: php
 
     // src/Controller/UsersController.php
 
@@ -101,7 +107,7 @@ geração de código ``bake`` fornecido com CakePHP::
 
 Da mesma maneira que criamos as ``views`` para os nossos artigos usando
 a ferramenta de geração de código, podemos implementar as ``views`` do
-usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp::
+usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp:
 
 .. code-block:: php
 
@@ -130,7 +136,9 @@ classe responsável por exigir o ``login`` para determinadas ações, a manipula
 ``login`` e ``logout`` de usuário, e também permite as ações para que estão autorizados.
 
 Para adicionar este componente em sua aplicação abra o arquivos **src/Controller/AppController.php**
-e adicione as seguintes linha::
+e adicione as seguintes linha:
+
+.. code-block:: php
 
     // src/Controller/AppController.php
 
@@ -179,16 +187,18 @@ registrar-se no site.
 Agora, precisamos ser capaz de registrar novos usuários, salvar seu ``username``
 e ``password``, e mais importante, o hash da senha para que ele não seja armazenado
 como texto simples no nosso banco de dados. Vamos dizer ao ``AuthComponet`` para
-permitir que usuários deslogados acessem a função add e execute as ações de ``login`` e ``logout``::
+permitir que usuários deslogados acessem a função add e execute as ações de ``login`` e ``logout``:
+
+.. code-block:: php
 
     // src/Controller/UsersController.php
 
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // Allow users to register and logout.
-        // You should not add the "login" action to allow list. Doing so would
-        // cause problems with normal functioning of AuthComponent.
+        // Permitir aos usuários se registrarem e efetuar logout.
+        // Você não deve adicionar a ação de "login" a lista de permissões.
+        // Isto pode causar problemas com o funcionamento normal do AuthComponent.
         $this->Auth->allow(['add', 'logout']);
     }
 
@@ -200,7 +210,7 @@ permitir que usuários deslogados acessem a função add e execute as ações de
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Usuário ou senha ínvalido, tente novamente'));
         }
     }
 
@@ -209,9 +219,11 @@ permitir que usuários deslogados acessem a função add e execute as ações de
         return $this->redirect($this->Auth->logout());
     }
 
-Password hashing is not done yet, we need an Entity class for our User in order
-to handle its own specific logic. Create the **src/Model/Entity/User.php** entity file
-and add the following::
+O hashing da senha ainda não está feito, precisamos de uma classe a fim de
+manipular sua geração. Crie o arquivo **src/Model/Entity/User.php**
+e adicione a seguinte trecho:
+
+.. code-block:: php
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -222,7 +234,7 @@ and add the following::
     class User extends Entity
     {
 
-        // Make all fields mass assignable except for primary key field "id".
+        // Gera conjunto de todos os campos exceto o com a chave primária.
         protected $_accessible = [
             '*' => true,
             'id' => false
