@@ -43,36 +43,47 @@ application in your **config/app.php** file as explained in the
 Overview
 ========
 
-A migration is basically a single PHP file that describes a new 'version' of
-the database. A migration file can create tables, add or remove columns, create
-indexes and even insert data into your database.
+A migration is basically a single PHP file that describes a new version of
+the database. A migration file can create or drop tables, add or remove
+columns, create indexes and even insert data into your database.
 
 Here's an example of a migration::
 
         <?php
-
         use Migrations\AbstractMigration;
-
-        class CreateProductsTable extends AbstractMigration
+        
+        class CreateProducts extends AbstractMigration
         {
             /**
-             * This method gets executed when applying the changes to
-             * the database.
+             * Change Method.
              *
-             * Changes to the database can also be reverted without any
-             * additional code for non-destructive operations.
+             * More information on this method is available here:
+             * http://docs.phinx.org/en/latest/migrations.html#the-change-method
+             * @return void
              */
             public function change()
             {
-                // create the table
                 $table = $this->table('products');
-                $table->addColumn('name', 'string')
-                      ->addColumn('description', 'text')
-                      ->addColumn('created', 'datetime')
-                      ->create();
+                $table->addColumn('name', 'string', [
+                    'default' => null,
+                    'limit' => 255,
+                    'null' => false,
+                ]);
+                $table->addColumn('description', 'text', [
+                    'default' => null,
+                    'null' => false,
+                ]);
+                $table->addColumn('created', 'datetime', [
+                    'default' => null,
+                    'null' => false,
+                ]);
+                $table->addColumn('modified', 'datetime', [
+                    'default' => null,
+                    'null' => false,
+                ]);
+                $table->create();
             }
         }
-
 
 The migration will add a table to your database named ``products`` with the following
 column definitions:
@@ -110,9 +121,9 @@ Creating Migrations
 
 Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
-which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**::
+which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**::
 
-        -rw-rw-r-- 1 root root 1066 Aug 21 22:05 20150822030519_create_articles.php
+        -rw-rw-r-- 1 user user  914 Jan 21 10:38 20160121163850_CreateProducts.php
 
 The easiest way to create a migrations file is by using the :doc:`/bake/usage` CLI command.
 The following ``Bake`` command would create a migration to add a ``products`` table::
@@ -129,21 +140,27 @@ The following ``Bake`` command would create a migration to add a ``products`` ta
         Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php
         Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php`
 
-.. note::
+You can also use the ``underscore_form`` as the name for your migrations
+i.e. create_products::
 
-        You can also use the ``underscore_form`` as the name for your migrations
-        i.e. create_products::
+        $ bin/cake bake migration create_products name:string description:text created modified
+    
+        Welcome to CakePHP v3.1.17 Console
+        ---------------------------------------------------------------
+        App : src
+        Path: /home/user/Work/php/cakeblog/src/
+        ---------------------------------------------------------------
+        
+        Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php
+        Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php`
 
-                $ bin/cake bake migration create_products name:string description:text created modified
-            
-                Welcome to CakePHP v3.0.13 Console
-                ---------------------------------------------------------------
-                App : src
-                Path: /home/user/Work/php/cakeblog/src/
-                ---------------------------------------------------------------
-                
-                Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_create_products.php
-                Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_create_products.php`
+.. versionadded:: cakephp/migrations 1.5.2
+
+    Camelizing the name of the migration file was introduced in v1.5.2 of the
+    `migrations plugin <https://github.com/cakephp/migrations/>`_. This version
+    of the plugin is only available with a release of CakePHP >= to 3.1. Prior
+    to this version of the plugin the migration name would be in the 
+    underscore form: 20160121164955_create_products.php.
 
 The command above line will generate a migration file that resembles::
 
