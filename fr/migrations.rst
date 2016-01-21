@@ -48,8 +48,8 @@ Vue d'ensemble
 
 Une migration est simplement un fichier PHP qui décrit une nouvelle 'version' de
 la base de données. Un fichier de migration peut créer des tables, ajouter ou
-supprimer des colonnes, créer des index et même insérer des données dans la base
-de données.
+supprimer des colonnes, créer des index et même insérer des données dans votre
+base de données.
 
 Ci-dessous un exemple de migration::
 
@@ -78,22 +78,38 @@ Ci-dessous un exemple de migration::
         }
 
 
-Cette migration ajoute une table appelée ``products`` avec une colonne de type
-chaîne appelée ``name``, une colonne texte ``description`` et une colonne
-``created`` avec un type datetime. Une colonne de clé primaire appelé ``id``
-sera également ajouté implicitement.
+La migration va ajouter une table à votre base de données nommée ``products``
+avec les définitions de colonne suivantes:
 
-Notez que ce fichier décrit à quoi la base de données devrait ressembler après
-l'application de la migration, à ce stade la table ``products`` n'existe pas,
-mais nous avons créé un fichier qui est à la fois capable de créer la table avec
-les bonnes colonnes mais aussi de supprimer la table en cas de retour en
-arrière.
+- ``id`` colonne de type ``integer``
+- ``name`` colonne de type ``string``
+- ``description`` colonne de type ``text``
+- ``created`` colonne de type ``datetime``
+
+.. tip::
+
+        une colonne avec clé primaire nommée ``id`` sera ajoutée
+        **implicitement**.
+
+.. note::
+
+    Notez que ce fichier décrit ce à quoi la base de données devrait ressembler
+    **après** l'application de la migration. À ce stade la table ``products``
+    n'existe pas dans votre base de données, nous avons simplement créé un
+    fichier qui est à la fois capable de créer la table ``products`` avec les
+    bonnes colonnes mais aussi de supprimer la table quand une opération de
+    ``rollback`` (retour en arrière) de la migration est effectuée.
 
 Une fois que le fichier a été créé dans le dossier **config/Migrations**, vous
-serez capable d'exécuter la commande suivante pour créer la table dans votre
-base de données::
+serez capable d'exécuter la commande ``migrations`` suivante pour créer la table
+dans votre base de données::
 
         bin/cake migrations migrate
+
+La commande ``migrations`` suivante va effectuer un ``rollback`` (retour en
+arrière) et supprimer la table de votre base de données::
+
+        bin/cake migrations rollback
 
 Création de Migrations
 ======================
@@ -460,7 +476,7 @@ commande::
     bin/cake migrations mark_migrated
 
 Vous pouvez également marquer toutes les migrations jusqu'à une version
-spécifique en utilisant l'option ``--target``
+spécifique en utilisant l'option ``--target``::
 
     bin/cake migrations mark_migrated --target=20151016204000
 

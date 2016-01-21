@@ -80,12 +80,13 @@ Les Types d'Attribut Correspondants
 |                                | à l'intérieur de ``...``.                  |
 +--------------------------------+--------------------------------------------+
 
-.. php:staticmethod:: get(array $data, $path)
+.. php:staticmethod:: get(array $data, $path, $default = null)
 
     ``get()`` est une version simplifiée de ``extract()``, elle ne supporte
     que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``
     ou les matchers ne sont pas supportés. Utilisez ``get()`` quand vous
-    voulez exactement une valeur sortie d'un tableau.
+    voulez exactement une valeur sortie d'un tableau. Si un chemin correspondant
+    n'est pas trouvé, la valeur par défaut sera retournée.
 
 .. php:staticmethod:: extract(array $data, $path)
 

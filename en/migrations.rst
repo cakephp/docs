@@ -20,9 +20,9 @@ following from your application's ROOT directory (where composer.json file is
 located)::
 
         $ php composer.phar require cakephp/migrations "@stable"
-        
+
         // Or if composer is installed globally
-        
+
         $ composer require cakephp/migrations "@stable"
 
 To use the plugin you'll need to load it in your application's **config/bootstrap.php** file.
@@ -30,13 +30,13 @@ You can use :ref:`CakePHP's Plugin shell <plugin-shell>` to load and unload plug
 your **config/bootstrap.php**::
 
         $ bin/cake plugin load Migrations
-        
+
 Or you can load the plugin by editing your **config/bootstrap.php** file and adding the
 following statement::
 
         Plugin::load('Migrations');
 
-Additionally, you will need to configure the default database configuration for your 
+Additionally, you will need to configure the default database configuration for your
 application in your **config/app.php** file as explained in the
 :ref:`Database Configuration section <database-configuration>`.
 
@@ -74,8 +74,8 @@ Here's an example of a migration::
         }
 
 
-The migration will add a table to your database named ``products`` with the following
-column definitions:
+The migration will add a table to your database named ``products`` with the
+following column definitions:
 
 - ``id`` column of type ``integer``
 - ``name`` column of type ``string``
@@ -88,11 +88,11 @@ column definitions:
 
 .. note::
 
-        Note that this file describes how the database will look **after** applying
-        the migration. At this point no ``products`` table exists in your database, we
-        have merely created a file that is able to both create the ``products`` table
-        with the specified columns as well as drop it when a ``rollback`` operation of
-        the migration is performed.
+        Note that this file describes how the database will look **after**
+        applying the migration. At this point no ``products`` table exists in
+        your database, we have merely created a file that is able to both create
+        the ``products`` table with the specified columns as well as drop it
+        when a ``rollback`` operation of the migration is performed.
 
 Once the file has been created in the **config/Migrations** folder, you will be
 able to execute the following ``migrations`` command to create the table in
