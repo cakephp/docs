@@ -9,8 +9,8 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 システム要件
 ============
 
--  HTTPサーバー。例: Apache。mod\_rewriteが推奨されますが、必須ではありません。
--  PHP 5.4.16以上。
+-  HTTPサーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
+-  PHP 5.5.9 以上
 -  PHP mbstring 拡張
 -  PHP intl 拡張
 
@@ -30,17 +30,17 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 
 データベースエンジンは必ずしも必要ではありませんが、ほとんどのアプリケーションは
 これを活用することが想像できます。
-CakePHPは種々のデータベース・ストレージのエンジンをサポートしています：
+CakePHP は種々のデータベース・ストレージのエンジンをサポートしています：
 
--  MySQL (5.1.10以上)
+-  MySQL (5.1.10 以上)
 -  PostgreSQL
--  Microsoft SQL Server (2008以上)
+-  Microsoft SQL Server (2008 以上)
 -  SQLite 3
 
 .. note::
 
-    組み込みのドライバは全てPDOを必要とします。
-    正しいPDO拡張モジュールがインストールされているか必ず確かめてください。
+    組み込みのドライバは全て PDO を必要とします。
+    正しい PDO 拡張モジュールがインストールされているか必ず確かめてください。
 
 CakePHP のインストール
 ======================
@@ -49,22 +49,28 @@ CakePHP の公式のインストール方法としては、PHP 5.3 以降での�
 `Composer <http://getcomposer.org>`_ を使用します。
 
 もしまだなら、最初に Composer をダウンロードしてインストールしなければなりません。
-あなたが cURL をインストールしているのであれば、下記の通り簡単に実行できます。::
+あなたが cURL をインストールしているのであれば、下記の通り簡単に実行できます。
+
+.. code-block:: bash
 
     curl -s https://getcomposer.org/installer | php
 
-さもなくば `Composer のウェブサイト <https://getcomposer.org/download/>`_ から
+もしくは `Composer のウェブサイト <https://getcomposer.org/download/>`_ から
 ``composer.phar`` をダウンロードすることもできます。
 
 Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
 Windows インストーラをダウンロードできます。Composer の Windows  インストーラについての詳細は、
 `README <https://github.com/composer/windows-setup>`__ をご覧ください。
 
-Composer をインストールしたら、CakePHP の新しいアプリケーションを下記のコマンドで作れるようになります。::
+Composer をインストールしたら、CakePHP の新しいアプリケーションを下記のコマンドで作れるようになります。
+
+.. code-block:: bash
 
     php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
-または Composer にパスが通っているのであれば下記のコマンドも使えます。::
+または Composer にパスが通っているのであれば下記のコマンドも使えます。
+
+.. code-block:: bash
 
     composer create-project --prefer-dist cakephp/app [app_name]
 
@@ -73,13 +79,15 @@ Composer をインストールしたら、CakePHP の新しいアプリケーシ
 しておくべきです。
 必ず composer.json と composer.lock ファイルは残しておきましょう。
 
-これでインストールした CakePHP アプリケーションにアクセスして、設定状況を
-見ることができるようになりました。
+これでインストールした CakePHP アプリケーションにアクセスして、デフォルトの
+ホームページを見ることができるようになりました。このページの内容を変更するには
+**src/Template/Pages/home.ctp** を編集してください。
 
-composer によるインストールが推奨されますが、 `Github <https://github.com/cakephp/cakephp/tags>`__
+composer によるインストールが推奨されますが、
+`Github <https://github.com/cakephp/cakephp/tags>`__
 にはプリインストール版もあります。
 このファイルにはアプリケーションの雛形と全てのベンダーパッケージが同梱されています。
-また、``composer.phar`` も入っていますので、あなたのさらなる使用のために必要なものは
+また、 ``composer.phar`` も入っていますので、あなたのさらなる使用のために必要なものは
 全てそろっているのです。
 
 CakePHPの変更に合わせて最新の状態に保つ
@@ -93,7 +101,7 @@ CakePHPの変更に合わせて最新の状態に保つ
 
 あなたが ``php composer.phar update`` と実行するたびに、デフォルトのバージョン制約
 ``~3.0`` を使って最新の安定リリース版が手に入ります。
-アップデート時には、3.x系のバグ修正とマイナーバージョンアップだけが適用されます。
+アップデート時には、3.x 系のバグ修正とマイナーバージョンアップだけが適用されます。
 
 もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの
 **composer.json** を下記のように変更します::
@@ -105,7 +113,7 @@ CakePHPの変更に合わせて最新の状態に保つ
 この方法は次のメジャーバージョンがリリースされた時にあなたのアプリケーションが
 動かなくなる可能性がありますので、お奨めできない事に注意してください。
 さらに、composer は開発ブランチをキャッシュしませんので、composer による
-連続したインストール／アップデートには時間がかかります。
+連続したインストール・アップデートには時間がかかります。
 
 パーミッション
 ==============
@@ -124,15 +132,18 @@ CakePHP は、幾つかの操作のために **tmp** ディレクトリを使用
 
 よくある課題として、 **logs** と **tmp** ディレクトリとサブディレクトリは、ウェブサーバと
 コマンドラインユーザの両方で書き込み権限が必要、ということがあります。
-UNIXシステム上で ウェブサーバユーザとコマンドラインユーザが異なる場合、
+UNIX システム上で ウェブサーバユーザとコマンドラインユーザが異なる場合、
 パーミッションのプロパティ設定を確保するために、あなたのプロジェクトのアプリケーション
-ディレクトリで一度だけ以下のコマンドを実行してください。 ::
+ディレクトリで一度だけ以下のコマンドを実行してください。
 
-   HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-   setfacl -R -m u:${HTTPDUSER}:rwx tmp
-   setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
-   setfacl -R -m u:${HTTPDUSER}:rwx logs
-   setfacl -R -d -m u:${HTTPDUSER}:rwx logs
+.. code-block:: bash
+
+    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+    setfacl -R -m u:${HTTPDUSER}:rwx tmp
+    setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
+    setfacl -R -m u:${HTTPDUSER}:rwx logs
+    setfacl -R -d -m u:${HTTPDUSER}:rwx logs
+
 
 開発サーバ
 ==========
@@ -140,15 +151,19 @@ UNIXシステム上で ウェブサーバユーザとコマンドラインユー
 開発用インストールは、CakePHP を最も速くインストールする方法です。
 この例では、CakePHP のコンソールを使って PHP の組み込みウェブサーバを起動して、
 あなたのアプリケーションに **http://host:port** という形式でアクセスできるように
-します。app ディレクトリで下記のコマンドを実行しましょう::
+します。app ディレクトリで下記のコマンドを実行しましょう。
+
+.. code-block:: bash
 
     bin/cake server
 
-引数のないデフォルト状態では、**http://localhost:8765/** であなたのアプリケーションに
+引数のないデフォルト状態では、 **http://localhost:8765/** であなたのアプリケーションに
 アクセスできます。
 
 もしあなたの環境で **localhost** や 8765番ポートが使用済みなら、CakePHP のコンソールから
-下記のような引数を使って特定のホスト名やポート番号でウェブサーバを起動することができます。::
+下記のような引数を使って特定のホスト名やポート番号でウェブサーバを起動することができます。
+
+.. code-block:: bash
 
     bin/cake server -H 192.168.13.37 -p 5673
 
@@ -174,7 +189,7 @@ UNIXシステム上で ウェブサーバユーザとコマンドラインユー
 この方法を使えば、全てのドメインで１つの CakePHP アプリケーションを使う事も可能です。
 今回の例では、あなたがファイルシステムのどこに CakePHP をインストールしたとしても、
 http://www.example.com といったようにアクセスできるようになるでしょう。
-Apache ウェブサーバでこの方法を使う場合は、``DocumentRoot`` を変更する権限が必要に
+Apache ウェブサーバでこの方法を使う場合は、 ``DocumentRoot`` を変更する権限が必要に
 なるかもしれないことに注意が必要です。
 
 これまでに紹介したいずれかの方法で、あなたが指定したディレクトリ（ここでは
@@ -200,7 +215,9 @@ Apache ウェブサーバでこの方法を使う場合は、``DocumentRoot`` �
         README.md
 
 Apache を利用している開発者は、当該ドメインの ``DocumentRoot`` ディレクティブに
-下記のように指定します。::
+下記のように指定します。
+
+.. code-block:: apacheconf
 
     DocumentRoot /cake_install/webroot
 
@@ -240,7 +257,9 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
 
 #. 適切な DocumentRoot に対して .htaccess による設定の上書きを許可するよう、
    AllowOverride に All が設定されている事を確認します。
-   これは下記のように書かれているでしょう。::
+   これは下記のように書かれているでしょう。
+
+   .. code-block:: apacheconf
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
@@ -255,7 +274,9 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
        #    Deny from all
        </Directory>
 
-#. 下記のように mod\_rewrite が正しくロードされている事を確認します。::
+#. 下記のように mod\_rewrite が正しくロードされている事を確認します。
+
+   .. code-block:: apacheconf
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
@@ -272,7 +293,9 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
    解凍できているか、 .htaccess ファイルをチェックします。
 
    CakePHP のアプリケーションディレクトリ（あなたが Bake でコピーした一番上の
-   ディレクトリ）にはこのように書いてあります。::
+   ディレクトリ）にはこのように書いてあります。
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -280,7 +303,9 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   webroot ディレクトリにはこのように書いてあります。::
+   webroot ディレクトリにはこのように書いてあります。
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -289,11 +314,13 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
        </IfModule>
 
    まだあなたの CakePHP サイトで mod\_rewrite の問題が起きているなら、
-   仮想ホスト(virtualhosts)の設定の変更を試してみるといいかもしれません。
+   仮想ホスト (virtualhosts) の設定の変更を試してみるといいかもしれません。
    Ubuntu 上なら、**/etc/apache2/sites-available/default** (場所は
    ディストリビューションによる)のファイルを編集してください。
    このファイルの中で ``AllowOverride None`` が ``AllowOverride All``
-   に変更されているかを確かめてください。 つまり以下のようになるでしょう:::
+   に変更されているかを確かめてください。 つまり以下のようになるでしょう。
+
+   .. code-block:: apacheconf
 
        <Directory />
            Options FollowSymLinks
@@ -318,7 +345,9 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
    (/.htaccess、/app/.htaccess、/app/webroot/.htaccess) に追加する必要があります。
 
    これは RewriteEngine ディレクティブと同じセクションに追加でき、
-   例えば webroot の .htaccess ファイルは以下のようになります::
+   例えば webroot の .htaccess ファイルは以下のようになります。
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -332,7 +361,9 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
    詳しくは Apache のオンラインドキュメントを参照するようにしてください。
 
 #. (オプション) 公開環境の設定では、必要ないリクエストは CakePHP で処理されないようにしましょう。
-   webroot の .htaccess ファイルを次のように修正してください::
+   webroot の .htaccess ファイルを次のように修正してください。
+
+   .. code-block:: apacheconf
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -342,10 +373,12 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
            RewriteRule ^ index.php [L]
        </IfModule>
 
-   上の例は、正しくないアセットを index.php へ送信せず、ウェブサーバの404ページを表示します。
+   上の例は、正しくないアセットを index.php へ送信せず、ウェブサーバの 404 ページを表示します。
 
-   また、HTML で404ページを作成することもできますし、 ``ErrorDocument`` ディレクティブへ
-   追記することで、CakePHP のビルトインの404ページを使うこともできます。::
+   また、HTML で 404 ページを作成することもできますし、 ``ErrorDocument`` ディレクティブへ
+   追記することで、CakePHP のビルトインの 404 ページを使うこともできます。
+
+   .. code-block:: apacheconf
 
        ErrorDocument 404 /404-not-found
 
@@ -356,7 +389,9 @@ nginx は Apache のような .htaccess ファイルを利用しませんので�
 サイトの設定で URLの書き換えルールを作成する必要があります。
 これは大抵  ``/etc/nginx/sites-available/your_virtual_host_conf_file`` に記載します。
 あなたの環境構成に応じて、このファイルを書き換えなければなりませんが、
-少なくとも PHP を FastCGI として稼働させる必要はあるでしょう。::
+少なくとも PHP を FastCGI として稼働させる必要はあるでしょう。
+
+.. code-block:: nginx
 
     server {
         listen   80;
@@ -392,7 +427,9 @@ nginx は Apache のような .htaccess ファイルを利用しませんので�
 ドキュメントでは別の方法 (http://nginx.org/en/docs/http/converting_rewrite_rules.html)を
 推奨しています。
 下記の通り試してみてください。(server{}ブロックが2つではなく1つになっているのが
-お分かりでしょう。)::
+お分かりでしょう。)
+
+.. code-block:: nginx
 
     server {
         listen   80;
@@ -435,7 +472,9 @@ IIS に htaccess のルールをインポートすることもできます。
    `64ビット <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)
 #. CakePHP のルートフォルダに web.config という名前の新しいファイルを作成してください。
 #. メモ帳か XML が編集可能なエディタを使って、以下のコードを今作った web.config ファイルに
-   コピーしてください。::
+   コピーしてください。
+
+.. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
@@ -471,22 +510,21 @@ URL リライティングを使わない場合
 --------------------------------
 
 もしあなたのサーバで mod\_rewrite (かそれと互換性のあるモジュール) を使いたくなかったり
-使えなかったりする場合は、 CakePHP に組み込みのプリティ URL を使う必要があります。
-**config/app.php** の下記のコメントを解除します。::
+使えない場合は、 CakePHP の組み込みのままの URL を使う必要があります。
+**config/app.php** の下記のコメントを解除します。 ::
 
     'App' => [
         // ...
         // 'baseUrl' => env('SCRIPT_NAME'),
     ]
 
-そして、下記の .htaccess ファイルを削除します。::
+そして、下記の .htaccess ファイルを削除します。 ::
 
     /.htaccess
     webroot/.htaccess
 
-これで URL は
-www.example.com/index.php/controllername/actionname/param ではなく
-www.example.com/controllername/actionname/param という書式になるでしょう。
+これで URL は www.example.com/controllername/actionname/param ではなく
+www.example.com/index.php/controllername/actionname/param という書式になるでしょう。
 
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org
