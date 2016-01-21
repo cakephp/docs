@@ -36,6 +36,8 @@ tasks. You should see something like::
     - fixture
     - form
     - helper
+    - migration
+    - migration_snapshot
     - model
     - plugin
     - shell
