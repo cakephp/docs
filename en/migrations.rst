@@ -20,9 +20,9 @@ following from your application's ROOT directory (where composer.json file is
 located)::
 
         $ php composer.phar require cakephp/migrations "@stable"
-
+        
         // Or if composer is installed globally
-
+        
         $ composer require cakephp/migrations "@stable"
 
 To use the plugin you'll need to load it in your application's **config/bootstrap.php** file.
@@ -30,13 +30,13 @@ You can use :ref:`CakePHP's Plugin shell <plugin-shell>` to load and unload plug
 your **config/bootstrap.php**::
 
         $ bin/cake plugin load Migrations
-
+        
 Or you can load the plugin by editing your **config/bootstrap.php** file and adding the
 following statement::
 
         Plugin::load('Migrations');
 
-Additionally, you will need to configure the default database configuration for your
+Additionally, you will need to configure the default database configuration for your 
 application in your **config/app.php** file as explained in the
 :ref:`Database Configuration section <database-configuration>`.
 
@@ -74,8 +74,8 @@ Here's an example of a migration::
         }
 
 
-The migration will add a table to your database named ``products`` with the
-following column definitions:
+The migration will add a table to your database named ``products`` with the following
+column definitions:
 
 - ``id`` column of type ``integer``
 - ``name`` column of type ``string``
@@ -88,11 +88,11 @@ following column definitions:
 
 .. note::
 
-        Note that this file describes how the database will look **after**
-        applying the migration. At this point no ``products`` table exists in
-        your database, we have merely created a file that is able to both create
-        the ``products`` table with the specified columns as well as drop it
-        when a ``rollback`` operation of the migration is performed.
+        Note that this file describes how the database will look **after** applying
+        the migration. At this point no ``products`` table exists in your database, we
+        have merely created a file that is able to both create the ``products`` table
+        with the specified columns as well as drop it when a ``rollback`` operation of
+        the migration is performed.
 
 Once the file has been created in the **config/Migrations** folder, you will be
 able to execute the following ``migrations`` command to create the table in
@@ -110,37 +110,79 @@ Creating Migrations
 
 Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
-which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**.
+which they were created, in the format **YYYYMMDDHHMMSS_my_new_migration.php**::
 
-The easiest way of creating a migrations file is by using the command line.
-Let's imagine that you'd like to add a new ``products`` table::
+        -rw-rw-r-- 1 root root 1066 Aug 21 22:05 20150822030519_create_articles.php
 
-        bin/cake bake migration CreateProducts name:string description:text created modified
+The easiest way to create a migrations file is by using the :doc:`/bake/usage` CLI command.
+The following ``Bake`` command would create a migration to add a ``products`` table::
+
+        $ bin/cake bake migration CreateProducts name:string description:text created modified
+        
+        Welcome to CakePHP v3.1.7 Console
+        ---------------------------------------------------------------
+        App : src
+        Path: /home/user/Work/php/cakeblog/src/
+        PHP : 5.5.28-1+deb.sury.org~precise+1
+        ---------------------------------------------------------------
+        
+        Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php
+        Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php`
 
 .. note::
 
-        You may also choose to use the underscore_form as migration label i.e.::
+        You can also use the ``underscore_form`` as the name for your migrations
+        i.e. create_products::
 
-            bin/cake bake migration create_products name:string description:text created modified
+                $ bin/cake bake migration create_products name:string description:text created modified
+            
+                Welcome to CakePHP v3.0.13 Console
+                ---------------------------------------------------------------
+                App : src
+                Path: /home/user/Work/php/cakeblog/src/
+                ---------------------------------------------------------------
+                
+                Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_create_products.php
+                Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_create_products.php`
 
-The above line will create a migration file looking like this::
+The command above line will generate a migration file that resembles::
 
         <?php
-
         use Migrations\AbstractMigration;
-
-        class CreateProductsTable extends AbstractMigration
+        
+        class CreateProducts extends AbstractMigration
         {
+            /**
+             * Change Method.
+             *
+             * More information on this method is available here:
+             * http://docs.phinx.org/en/latest/migrations.html#the-change-method
+             * @return void
+             */
             public function change()
             {
                 $table = $this->table('products');
-                $table->addColumn('name', 'string')
-                      ->addColumn('description', 'text')
-                      ->addColumn('created', 'datetime')
-                      ->addColumn('modified', 'datetime')
-                      ->create();
+                $table->addColumn('name', 'string', [
+                    'default' => null,
+                    'limit' => 255,
+                    'null' => false,
+                ]);
+                $table->addColumn('description', 'text', [
+                    'default' => null,
+                    'null' => false,
+                ]);
+                $table->addColumn('created', 'datetime', [
+                    'default' => null,
+                    'null' => false,
+                ]);
+                $table->addColumn('modified', 'datetime', [
+                    'default' => null,
+                    'null' => false,
+                ]);
+                $table->create();
             }
         }
+
 
 If the migration name in the command line is of the form "AddXXXToYYY" or "RemoveXXXFromYYY"
 and is followed by a list of column names and types then a migration file
