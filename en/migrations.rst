@@ -156,9 +156,11 @@ i.e. create_products::
 
 .. versionadded:: cakephp/migrations 1.5.2
 
-    Camelizing the file name of the initial migration was introduced in v1.5.2 of the
-    `migrations plugin <https://github.com/cakephp/migrations/>`_. This version of
-    the plugin is only available with a release of CakePHP >= to 3.1.
+    Camelizing the name of the migration file was introduced in v1.5.2 of the
+    `migrations plugin <https://github.com/cakephp/migrations/>`_. This version
+    of the plugin is only available with a release of CakePHP >= to 3.1. Prior
+    to this version of the plugin the migration name would be in the 
+    underscore form: 20160121164955_create_products.php.
 
 The command above line will generate a migration file that resembles::
 
