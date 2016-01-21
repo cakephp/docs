@@ -71,11 +71,12 @@ Attribute Matching Types
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
 
-.. php:staticmethod:: get(array $data, $path)
+.. php:staticmethod:: get(array $data, $path, $default = null)
 
     ``get()`` is a simplified version of ``extract()``, it only supports direct
     path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
-    supported. Use ``get()`` when you want exactly one value out of an array.
+    supported. Use ``get()`` when you want exactly one value out of an array. If
+    a matching path is not found the default value will be returned.
 
 .. php:staticmethod:: extract(array $data, $path)
 
