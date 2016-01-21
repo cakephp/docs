@@ -22,7 +22,7 @@ Primeiro, vamos criar uma nova tabela no banco de dados do blog para armazenar d
     );
 
 Respeitado as convenções do CakePHP para nomear tabelas, mas também aproveitando de
-outras convenção: Usando as colunas 'username' e 'password' da tabela de usuários, 
+outras convenção: Usando as colunas ``username`` e ``password`` da tabela de usuários, 
 CakePHP será capaz de configurar automaticamente a maioria das coisas para nós, na 
 implementação do login do usuário.
 
@@ -46,15 +46,15 @@ e validar os dados do usuário::
                 ->notEmpty('role', 'Função é necessária')
                 ->add('role', 'inList', [
                     'rule' => ['inList', ['admin', 'author']],
-                    'message' => 'Please enter a valid role'
+                    'message' => 'Por favor informe uma função válida'
                 ]);
         }
 
     }
 
-Let's also create our UsersController. The following content corresponds to
-parts of a basic baked UsersController class using the code generation utilities bundled
-with CakePHP::
+Vamos também criar o nosso UsersController. O conteúdo a seguir corresponde a
+partes de uma classe UsersController básica gerado atráves do utilitário de
+geração de código ``bake`` fornecido com CakePHP::
 
     // src/Controller/UsersController.php
 
@@ -89,19 +89,19 @@ with CakePHP::
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->data);
                 if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
+                    $this->Flash->success(__('O usuário foi salvo.'));
                     return $this->redirect(['action' => 'add']);
                 }
-                $this->Flash->error(__('Unable to add the user.'));
+                $this->Flash->error(__('Não é possível adicionar o usuário.'));
             }
             $this->set('user', $user);
         }
 
     }
 
-In the same way we created the views for our articles by using the code
-generation tool, we can implement the user views. For the purpose of this
-tutorial, we will show just the add.ctp:
+Da mesma maneira que criamos as ``views`` para os nossos artigos usando
+a ferramenta de geração de código, podemos implementar as ``views`` do
+usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp::
 
 .. code-block:: php
 
@@ -121,16 +121,16 @@ tutorial, we will show just the add.ctp:
     <?= $this->Form->end() ?>
     </div>
 
-Authentication (Login and Logout)
-=================================
+Autenticação (Login e Logout)
+=============================
 
-We're now ready to add our authentication layer. In CakePHP this is handled by
-the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
-for requiring login for certain actions, handling user login and logout, and
-also authorizing logged-in users to the actions they are allowed to reach.
+Agora estamos prontos para adicionar a nossa camada de autenticação. Em CakePHP
+isso é tratado pelo :php:class:`Cake\\Controller\\Component\\AuthComponent`, uma
+classe responsável por exigir o ``login`` para determinadas ações, a manipulação de
+``login`` e ``logout`` de usuário, e também permite as ações para que estão autorizados.
 
-To add this component to your application open your **src/Controller/AppController.php**
-file and add the following lines::
+Para adicionar este componente em sua aplicação abra o arquivos **src/Controller/AppController.php**
+e adicione as seguintes linha::
 
     // src/Controller/AppController.php
 
@@ -166,19 +166,20 @@ file and add the following lines::
         //...
     }
 
-There is not much to configure, as we used the conventions for the users table.
-We just set up the URLs that will be loaded after the login and logout actions is
-performed, in our case to ``/articles/`` and ``/`` respectively.
+Não há muito para ser configurado, como usamos as convenções para a tabela
+de usuários. Nós apenas configuramos as URLs que serão carregados após o
+``login`` e ``logout``, estás ações são realizadas no nosso caso para os
+``/articles/`` e ``/`` respectivamente.
 
-What we did in the ``beforeFilter()`` function was to tell the AuthComponent to not
-require a login for all ``index()`` and ``view()`` actions, in every controller. We want
-our visitors to be able to read and list the entries without registering in the
-site.
+O que fizemos na função ``beforeFilter()`` foi dizer ao ``AuthComponent`` para
+não exigir ``login`` em todos ``index()`` e ``view()``, em cada controlador.
+Queremos que os nossos visitantes sejam capaz de ler e listar as entradas sem
+registrar-se no site.
 
-Now, we need to be able to register new users, save their username and password,
-and more importantly, hash their password so it is not stored as plain text in
-our database. Let's tell the AuthComponent to let un-authenticated users access
-the users add function and implement the login and logout action::
+Agora, precisamos ser capaz de registrar novos usuários, salvar seu ``username``
+e ``password``, e mais importante, o hash da senha para que ele não seja armazenado
+como texto simples no nosso banco de dados. Vamos dizer ao ``AuthComponet`` para
+permitir que usuários deslogados acessem a função add e execute as ações de ``login`` e ``logout``::
 
     // src/Controller/UsersController.php
 
