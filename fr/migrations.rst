@@ -79,7 +79,7 @@ Ci-dessous un exemple de migration::
 
 
 La migration va ajouter une table à votre base de données nommée ``products``
-avec les définitions de colonne suivants:
+avec les définitions de colonne suivantes:
 
 - ``id`` colonne de type ``integer``
 - ``name`` colonne de type ``string``
@@ -476,7 +476,7 @@ commande::
     bin/cake migrations mark_migrated
 
 Vous pouvez également marquer toutes les migrations jusqu'à une version
-spécifique en utilisant l'option ``--target``
+spécifique en utilisant l'option ``--target``::
 
     bin/cake migrations mark_migrated --target=20151016204000
 
