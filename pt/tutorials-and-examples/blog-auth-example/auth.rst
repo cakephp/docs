@@ -10,9 +10,7 @@ façam alterações nos artigos que não lhes pertencem.
 Criando todo o código relacionado ao Usuário
 ============================================
 
-Primeiro, vamos criar uma nova tabela no banco de dados do blog para armazenar dados de nossos usuários:
-
-.. code-block:: sql
+Primeiro, vamos criar uma nova tabela no banco de dados do blog para armazenar dados de nossos usuários::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -29,9 +27,7 @@ CakePHP será capaz de configurar automaticamente a maioria das coisas para nós
 implementação do login do usuário.
 
 O próximo passo é criar a nossa classe UsersTable, responsável por encontrar, salvar 
-e validar os dados do usuário:
-
-.. code-block:: php
+e validar os dados do usuário::
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -58,9 +54,7 @@ e validar os dados do usuário:
 
 Vamos também criar o nosso UsersController. O conteúdo a seguir corresponde a
 partes de uma classe UsersController básica gerado atráves do utilitário de
-geração de código ``bake`` fornecido com CakePHP:
-
-.. code-block:: php
+geração de código ``bake`` fornecido com CakePHP::
 
     // src/Controller/UsersController.php
 
@@ -136,9 +130,7 @@ classe responsável por exigir o ``login`` para determinadas ações, a manipula
 ``login`` e ``logout`` de usuário, e também permite as ações para que estão autorizados.
 
 Para adicionar este componente em sua aplicação abra o arquivos **src/Controller/AppController.php**
-e adicione as seguintes linha:
-
-.. code-block:: php
+e adicione as seguintes linha::
 
     // src/Controller/AppController.php
 
@@ -187,9 +179,7 @@ registrar-se no site.
 Agora, precisamos ser capaz de registrar novos usuários, salvar seu ``username``
 e ``password``, e mais importante, o hash da senha para que ele não seja armazenado
 como texto simples no nosso banco de dados. Vamos dizer ao ``AuthComponet`` para
-permitir que usuários deslogados acessem a função add e execute as ações de ``login`` e ``logout``:
-
-.. code-block:: php
+permitir que usuários deslogados acessem a função add e execute as ações de ``login`` e ``logout``::
 
     // src/Controller/UsersController.php
 
@@ -221,9 +211,7 @@ permitir que usuários deslogados acessem a função add e execute as ações de
 
 O hashing da senha ainda não está feito, precisamos de uma classe a fim de
 manipular sua geração. Crie o arquivo **src/Model/Entity/User.php**
-e adicione a seguinte trecho:
-
-.. code-block:: php
+e adicione a seguinte trecho::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -300,16 +288,12 @@ Autorização (quem tem permissão para acessar o que)
 
 Como afirmado anteriormente, nós estamos convertendo esse blog em uma ferramenta
 multi usuário de autoria, e para fazer isso, precisamos modificar a tabela de
-artigos um pouco para adicionar a referência à tabela de Usuários:
-
-.. code-block:: sql
+artigos um pouco para adicionar a referência à tabela de Usuários::
 
     ALTER TABLE articles ADD COLUMN user_id INT(11);
 
 Além disso, uma pequena mudança no ArticlesController é necessário para armazenar
-o usuário conectado no momento como uma referência para o artigo criado:
-
-.. code-block:: php
+o usuário conectado no momento como uma referência para o artigo criado::
 
     // src/Controller/ArticlesController.php
 
@@ -340,9 +324,7 @@ Vamos garantir que nossa app evite que alguns autores editem ou apaguem posts de
 outros. Uma regra básica para nossa aplicação é que usuários admin possam acessar
 qualquer url, enquanto usuários normais (o papel author) podem somente acessar as
 actions permitidas. Abra novamente a classe AppController e adicione um pouco mais
-de opções para as configurações do Auth:
-
-.. code-block:: php
+de opções para as configurações do Auth::
 
     // src/Controller/AppController.php
 
@@ -385,9 +367,7 @@ isso no AppController, vamos delegar a cada controller para suprir essas
 regras extras. As regras que adicionaremos para o ``add`` de ArticlesController
 deve permitir ao autores criarem os posts mas evitar a edição de posts que não
 sejam deles. Abra o arquivo **src/Controller/ArticlesController.php** e adicione
-o seguinte conteúdo:
-
-.. code-block: php
+o seguinte conteúdo::
 
     // src/Controller/ArticlesController.php
 
@@ -409,9 +389,7 @@ o seguinte conteúdo:
         return parent::isAuthorized($user);
     }
 
-Estamos sobrescrevendo a chamada ``isAuthorized()``do AppController e internamente verificando na classe pai se o usuário está autorizado. Caso não esteja, então apenas permitem acessar a action ``add``, e condicionalmente action ``edit`` e ``delete``. Uma última coisa não foi implementada. Para dizer ou não se o usuário está autorizado a editar o artigo, nós estamos chamando uma função ``isOwnedBy()`` na tabela artigos. Vamos, então, implementar essa função:
-
-.. code-block:: php
+Estamos sobrescrevendo a chamada ``isAuthorized()``do AppController e internamente verificando na classe pai se o usuário está autorizado. Caso não esteja, então apenas permitem acessar a action ``add``, e condicionalmente action ``edit`` e ``delete``. Uma última coisa não foi implementada. Para dizer ou não se o usuário está autorizado a editar o artigo, nós estamos chamando uma função ``isOwnedBy()`` na tabela artigos. Vamos, então, implementar essa função::
 
     // src/Model/Table/ArticlesTable.php
 
