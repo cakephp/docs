@@ -355,7 +355,7 @@ Segue a view correspondente a action add:
     ?>
 
 Nós usamos o ``FormHelper`` para gerar a tag de abertura HTML de um formulário.
-Segue o HTML gerado por ``$this->Form->create()``::
+Segue o HTML gerado por ``$this->Form->create()``:
 
 .. code-block:: html
 
@@ -375,7 +375,9 @@ O ``$this->Form->end()`` fecha o formulário, entregando também elementos ocult
 caso a prevenção contra CSRF/Form Tampering esteja habilitada.
 
 Agora vamos voltar e atualizar nossa view **src/Template/Articles/index.ctp**
-para incluir um novo link. Antes do ``<table>``, adicione a seguinte linha::
+para incluir um novo link. Antes do ``<table>``, adicione a seguinte linha:
+
+.. code-block:: php
 
     <?= $this->Html->link('Adicionar artigo', ['action' => 'add']) ?>
 
