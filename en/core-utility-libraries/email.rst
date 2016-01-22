@@ -94,6 +94,11 @@ you can also just load an array of configs::
 
     //or in constructor::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+    
+.. note::
+    
+    Use ``$Email->config()`` or the constructor to set the log level to log email headers and message.
+    Using ``$Email->config(array('log' => true));`` will use LOG_DEBUG.  See also ``CakeLog::write()``
 
 You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with
 ``'ssl://'`` and configure the port value accordingly. Example::
@@ -174,8 +179,6 @@ The following configuration keys are used:
 - ``'attachments'``: List of files to attach. See ``CakeEmail::attachments()``.
 - ``'emailFormat'``: Format of email (html, text or both). See ``CakeEmail::emailFormat()``.
 - ``'transport'``: Transport name. See ``CakeEmail::transport()``.
-- ``'log'``: Log level to log the email headers and message. ``true`` will use
-  LOG_DEBUG. See also ``CakeLog::write()``
 - ``'helpers'``: Array of helpers used in the email template.
 
 All of these configurations are optional, except ``'from'``. If you put more

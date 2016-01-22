@@ -683,6 +683,24 @@ findAllBy
 Le résultat retourné est un tableau formaté un peu comme ce que donnerait
 ``find('all')``.
 
+Finders Magiques Personnalisés
+------------------------------
+
+Depuis 2.8, vous pouvez utiliser une méthode finder personnalisée avec
+l'interface de la méthode magique.
+Par exemple, si votre model implémente un finder ``published``, vous pouvez
+utiliser ces finders avec la méthode magique ``findBy``::
+
+    $results = $this->Article->findPublishedByAuthorId(5);
+
+    // Est équivalent à
+    $this->Article->find('published', array(
+        'conditions' => array('Article.author_id' => 5)
+    ));
+
+.. versionadded:: 2.8.0
+    Les finders magiques personnalisés ont été ajoutés dans 2.8.0.
+
 findBy
 ------
 

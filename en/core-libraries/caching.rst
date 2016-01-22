@@ -190,6 +190,14 @@ The required API for a CacheEngine is
     Not required, but used to do clean up when resources expire.
     FileEngine uses this to delete files containing expired content.
 
+.. php:method:: add($key, $value)
+
+    Set a value in the cache if it did not already exist. Should use
+    an atomic check and set where possible.
+
+    .. versionadded:: 2.8
+        add method was added in 2.8.0.
+
 Using Cache to store common query results
 =========================================
 
@@ -409,6 +417,15 @@ Cache API
 
     Atomically decrement a value stored in the cache engine. Ideal for
     modifying counters or semaphore type values.
+
+.. php:staticmethod:: add($key, $value, $config = 'default')
+
+    Add data to the cache, but only if the key does not exist already.
+    In the case that data did exist, this method will return false.
+    Where possible data is checked & set atomically.
+
+    .. versionadded:: 2.8
+        add method was added in 2.8.0.
 
 .. php:staticmethod:: clear($check, $config = 'default')
 

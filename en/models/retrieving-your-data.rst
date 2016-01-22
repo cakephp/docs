@@ -661,6 +661,23 @@ findAllBy
 
 The returned result is an array formatted just as it would be from ``find('all')``.
 
+Custom Magic Finders
+--------------------
+
+As of 2.8, you can use any custom finder method with the magic method interface.
+For example, if your model implements a ``published`` finder, you can use those
+finders with the magic ``findBy`` method::
+
+    $results = $this->Article->findPublishedByAuthorId(5);
+
+    // Is equivalent to
+    $this->Article->find('published', array(
+        'conditions' => array('Article.author_id' => 5)
+    ));
+
+.. versionadded:: 2.8.0
+    Custom magic finders were added in 2.8.0.
+
 findBy
 ------
 

@@ -382,14 +382,18 @@ CakeTime
        もし、パラメータなしで関数が呼ばれた場合、 'Config.timezone' 設定値からタイムゾーンの取得を
        試みます。
 
-.. php:method:: listTimezones($filter = null, $country = null, $group = true)
+.. php:method:: listTimezones($filter = null, $country = null, $options = array())
 
     :rtype: array
 
     .. versionadded:: 2.2
        タイムゾーンの一覧を返します。
 
-Testing Time
+    .. versionchanged:: 2.8
+       ``$options`` は、 ``group``, ``abbr``, ``before``, ``after`` キーを持つ配列を受け付けます。
+       ``abbr => true`` を指定すると、 ``<option>`` テキストにタイムゾーンの省略形が追加されます。
+
+時間のテスト
 ============
 
 .. php:method:: isToday($dateString, $timezone = NULL)

@@ -330,9 +330,10 @@ Publiez votre Plugin
 ====================
 
 Vous pouvez ajouter votre plugin sur
-`plugins.cakephp.org <http://plugins.cakephp.org>`_.
+`plugins.cakephp.org <http://plugins.cakephp.org>`_ ou le proposer à la
+`liste awesome-cakephp <https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
-Aussi, vous pouvez creér un fichier composer.json et publier votre plugin
+Aussi, vous pouvez créer un fichier composer.json et publier votre plugin
 sur `packagist.org <https://packagist.org/>`_.
 De cette façon, il peut être facilement utilisé avec Composer.
 

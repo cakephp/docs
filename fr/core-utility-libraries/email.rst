@@ -101,6 +101,13 @@ Plutôt que de passer une chaîne qui correspond au nom de la configuration dans
     //ou dans un constructeur::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
+.. note::
+
+    Utilisez ``$Email->config()`` ou le constructeur pour définir le niveau de
+    log pour enregistrer l'en-tête d'email et le message dans les logs.
+    Utilisez ``$Email->config(array('log' => true));`` va utiliser LOG_DEBUG.
+    Regardez aussi ``CakeLog::write()``
+
 Vous pouvez configurer les serveurs SSL SMTP, comme Gmail. Pour faire ceci,
 mettez ``'ssl://'`` en préfixe dans le host et configurez la valeur du port
 selon. Exemple::
@@ -193,8 +200,7 @@ La clés de configuration suivantes sont utilisées:
 - ``'emailFormat'``: Format de l'email (html, text ou both). Regardez
   ``CakeEmail::emailFormat()``.
 - ``'transport'``: Nom du Transport. Regardez ``CakeEmail::transport()``.
-- ``'log'``: Niveau de Log pour connecter les headers del'email headers et le
-  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``
+- ``'helpers'``: Tableau de helpers utilisé dans le template d'email.
 
 Toutes ces configurations sont optionnelles, excepté ``'from'``. Si vous mettez
 plus de configurations dans ce tableau, les configurations seront utilisées

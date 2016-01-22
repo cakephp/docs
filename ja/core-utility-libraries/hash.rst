@@ -660,6 +660,10 @@ Hash パス構文
     * ``natural`` : ヒューマン・フレンドリー・ソート。例えば、 ``foo10`` が ``foo2``
       の下に配置される。このソートには PHP 5.4 以上が必要。
 
+    .. versionadded:: 2.8
+        ``$type`` オプションは、配列に対応しました。 ``ignoreCase`` オプションは、
+        大文字小文字の区別しないソートを有効にします。
+
 .. php:staticmethod:: diff(array $data, array $compare)
 
     :rtype: array
