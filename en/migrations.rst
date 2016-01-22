@@ -19,24 +19,25 @@ you've removed it and want to re-install it, you can do so by running the
 following from your application's ROOT directory (where composer.json file is
 located)::
 
-        $ php composer.phar require cakephp/migrations "@stable"
-        
-        // Or if composer is installed globally
-        
-        $ composer require cakephp/migrations "@stable"
+    $ php composer.phar require cakephp/migrations "@stable"
 
-To use the plugin you'll need to load it in your application's **config/bootstrap.php** file.
-You can use :ref:`CakePHP's Plugin shell <plugin-shell>` to load and unload plugins from
+    // Or if composer is installed globally
+
+    $ composer require cakephp/migrations "@stable"
+
+To use the plugin you'll need to load it in your application's
+**config/bootstrap.php** file. You can use
+:ref:`CakePHP's Plugin shell <plugin-shell>` to load and unload plugins from
 your **config/bootstrap.php**::
 
-        $ bin/cake plugin load Migrations
-        
-Or you can load the plugin by editing your **config/bootstrap.php** file and adding the
-following statement::
+    $ bin/cake plugin load Migrations
 
-        Plugin::load('Migrations');
+Or you can load the plugin by editing your **config/bootstrap.php** file and
+adding the following statement::
 
-Additionally, you will need to configure the default database configuration for your 
+    Plugin::load('Migrations');
+
+Additionally, you will need to configure the default database configuration for your
 application in your **config/app.php** file as explained in the
 :ref:`Database Configuration section <database-configuration>`.
 
@@ -49,44 +50,44 @@ columns, create indexes and even insert data into your database.
 
 Here's an example of a migration::
 
-        <?php
-        use Migrations\AbstractMigration;
-        
-        class CreateProducts extends AbstractMigration
-        {
-            /**
-             * Change Method.
-             *
-             * More information on this method is available here:
-             * http://docs.phinx.org/en/latest/migrations.html#the-change-method
-             * @return void
-             */
-            public function change()
-            {
-                $table = $this->table('products');
-                $table->addColumn('name', 'string', [
-                    'default' => null,
-                    'limit' => 255,
-                    'null' => false,
-                ]);
-                $table->addColumn('description', 'text', [
-                    'default' => null,
-                    'null' => false,
-                ]);
-                $table->addColumn('created', 'datetime', [
-                    'default' => null,
-                    'null' => false,
-                ]);
-                $table->addColumn('modified', 'datetime', [
-                    'default' => null,
-                    'null' => false,
-                ]);
-                $table->create();
-            }
-        }
+    <?php
+    use Migrations\AbstractMigration;
 
-The migration will add a table to your database named ``products`` with the following
-column definitions:
+    class CreateProducts extends AbstractMigration
+    {
+        /**
+         * Change Method.
+         *
+         * More information on this method is available here:
+         * http://docs.phinx.org/en/latest/migrations.html#the-change-method
+         * @return void
+         */
+        public function change()
+        {
+            $table = $this->table('products');
+            $table->addColumn('name', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('description', 'text', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->create();
+        }
+    }
+
+The migration will add a table to your database named ``products`` with the
+following column definitions:
 
 - ``id`` column of type ``integer``
 - ``name`` column of type ``string``
@@ -95,26 +96,26 @@ column definitions:
 
 .. tip::
 
-        A primary key column named ``id`` will be added **implicitly**.
+    A primary key column named ``id`` will be added **implicitly**.
 
 .. note::
 
-        Note that this file describes how the database will look **after** applying
-        the migration. At this point no ``products`` table exists in your database, we
-        have merely created a file that is able to both create the ``products`` table
-        with the specified columns as well as drop it when a ``rollback`` operation of
-        the migration is performed.
+    Note that this file describes how the database will look **after**
+    applying the migration. At this point no ``products`` table exists in
+    your database, we have merely created a file that is able to both create
+    the ``products`` table with the specified columns as well as drop it
+    when a ``rollback`` operation of the migration is performed.
 
 Once the file has been created in the **config/Migrations** folder, you will be
 able to execute the following ``migrations`` command to create the table in
 your database::
 
-        bin/cake migrations migrate
+    bin/cake migrations migrate
 
 The following ``migrations`` command will perform a ``rollback`` and drop the
 table from your database::
 
-        bin/cake migrations rollback
+    bin/cake migrations rollback
 
 Creating Migrations
 ===================
@@ -123,158 +124,159 @@ Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
 which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**::
 
-        -rw-rw-r-- 1 user user  914 Jan 21 10:38 20160121163850_CreateProducts.php
+    -rw-rw-r-- 1 user user  914 Jan 21 10:38 20160121163850_CreateProducts.php
 
-The easiest way to create a migrations file is by using the :doc:`/bake/usage` CLI command.
-The following ``Bake`` command would create a migration to add a ``products`` table::
+The easiest way to create a migrations file is by using the
+:doc:`/bake/usage` CLI command. The following ``Bake`` command would create a
+migration to add a ``products`` table::
 
-        $ bin/cake bake migration CreateProducts name:string description:text created modified
-        
-        Welcome to CakePHP v3.1.7 Console
-        ---------------------------------------------------------------
-        App : src
-        Path: /home/user/Work/php/cakeblog/src/
-        PHP : 5.5.28-1+deb.sury.org~precise+1
-        ---------------------------------------------------------------
-        
-        Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php
-        Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php`
+    $ bin/cake bake migration CreateProducts name:string description:text created modified
+
+    Welcome to CakePHP v3.1.7 Console
+    ---------------------------------------------------------------
+    App : src
+    Path: /home/user/Work/php/cakeblog/src/
+    PHP : 5.5.28-1+deb.sury.org~precise+1
+    ---------------------------------------------------------------
+
+    Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php
+    Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php`
 
 You can also use the ``underscore_form`` as the name for your migrations
 i.e. create_products::
 
-        $ bin/cake bake migration create_products name:string description:text created modified
-    
-        Welcome to CakePHP v3.1.17 Console
-        ---------------------------------------------------------------
-        App : src
-        Path: /home/user/Work/php/cakeblog/src/
-        ---------------------------------------------------------------
-        
-        Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php
-        Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php`
+    $ bin/cake bake migration create_products name:string description:text created modified
+
+    Welcome to CakePHP v3.1.17 Console
+    ---------------------------------------------------------------
+    App : src
+    Path: /home/user/Work/php/cakeblog/src/
+    ---------------------------------------------------------------
+
+    Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php
+    Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php`
 
 .. versionadded:: cakephp/migrations 1.5.2
 
     Camelizing the name of the migration file was introduced in v1.5.2 of the
     `migrations plugin <https://github.com/cakephp/migrations/>`_. This version
     of the plugin is only available with a release of CakePHP >= to 3.1. Prior
-    to this version of the plugin the migration name would be in the 
+    to this version of the plugin the migration name would be in the
     underscore form: 20160121164955_create_products.php.
 
 The command above line will generate a migration file that resembles::
 
-        <?php
-        use Migrations\AbstractMigration;
-        
-        class CreateProducts extends AbstractMigration
+    <?php
+    use Migrations\AbstractMigration;
+
+    class CreateProducts extends AbstractMigration
+    {
+        /**
+         * Change Method.
+         *
+         * More information on this method is available here:
+         * http://docs.phinx.org/en/latest/migrations.html#the-change-method
+         * @return void
+         */
+        public function change()
         {
-            /**
-             * Change Method.
-             *
-             * More information on this method is available here:
-             * http://docs.phinx.org/en/latest/migrations.html#the-change-method
-             * @return void
-             */
-            public function change()
-            {
-                $table = $this->table('products');
-                $table->addColumn('name', 'string', [
-                    'default' => null,
-                    'limit' => 255,
-                    'null' => false,
-                ]);
-                $table->addColumn('description', 'text', [
-                    'default' => null,
-                    'null' => false,
-                ]);
-                $table->addColumn('created', 'datetime', [
-                    'default' => null,
-                    'null' => false,
-                ]);
-                $table->addColumn('modified', 'datetime', [
-                    'default' => null,
-                    'null' => false,
-                ]);
-                $table->create();
-            }
+            $table = $this->table('products');
+            $table->addColumn('name', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('description', 'text', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->create();
         }
+    }
 
 
 If the migration name in the command line is of the form "AddXXXToYYY" or "RemoveXXXFromYYY"
 and is followed by a list of column names and types then a migration file
 containing the code for creating or dropping the columns will be generated::
 
-        bin/cake bake migration AddPriceToProducts price:decimal
+    bin/cake bake migration AddPriceToProducts price:decimal
 
 Executing the command line above will generate::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class AddPriceToProducts extends AbstractMigration
+    class AddPriceToProducts extends AbstractMigration
+    {
+        public function change()
         {
-            public function change()
-            {
-                $table = $this->table('products');
-                $table->addColumn('price', 'decimal')
-                      ->update();
-            }
+            $table = $this->table('products');
+            $table->addColumn('price', 'decimal')
+                  ->update();
         }
+    }
 
 .. versionadded:: cakephp/migrations 1.4
 
 If you need to specify a field length, you can do it within brackets in the
 field type, ie::
 
-        bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
+    bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
 
 Executing the command line above will generate::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class AddFullDescriptionToProducts extends AbstractMigration
+    class AddFullDescriptionToProducts extends AbstractMigration
+    {
+        public function change()
         {
-            public function change()
-            {
-                $table = $this->table('products');
-                $table->addColumn('full_description', 'string', [
-                        'default' => null,
-                        'limit' => 60,
-                        'null' => false,
-                     ])
-                      ->update();
-            }
+            $table = $this->table('products');
+            $table->addColumn('full_description', 'string', [
+                    'default' => null,
+                    'limit' => 60,
+                    'null' => false,
+                 ])
+                  ->update();
         }
+    }
 
 It is also possible to add indexes to columns::
 
-        bin/cake bake migration AddNameIndexToProducts name:string:index
+    bin/cake bake migration AddNameIndexToProducts name:string:index
 
 will generate::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class AddNameIndexToProducts extends AbstractMigration
+    class AddNameIndexToProducts extends AbstractMigration
+    {
+        public function change()
         {
-            public function change()
-            {
-                $table = $this->table('products');
-                $table->addColumn('name', 'string')
-                      ->addIndex(['name'])
-                      ->update();
-            }
+            $table = $this->table('products');
+            $table->addColumn('name', 'string')
+                  ->addIndex(['name'])
+                  ->update();
         }
+    }
 
 When using fields in the command line it may be handy to remember that they
 follow the following pattern::
 
-        field:fieldType:indexType:indexName
+    field:fieldType:indexType:indexName
 
 For instance, the following are all valid ways of specifying an email field:
 
@@ -287,22 +289,22 @@ Fields named ``created`` and ``modified`` will automatically be set to the type
 In the same way, you can generate a migration to remove a column by using the
 command line::
 
-         bin/cake bake migration RemovePriceFromProducts price
+    bin/cake bake migration RemovePriceFromProducts price
 
 creates the file::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class RemovePriceFromProducts extends AbstractMigration
+    class RemovePriceFromProducts extends AbstractMigration
+    {
+        public function change()
         {
-            public function change()
-            {
-                $table = $this->table('products');
-                $table->removeColumn('price');
-            }
+            $table = $this->table('products');
+            $table->removeColumn('price');
         }
+    }
 
 Migration Names can follow any of the following patterns:
 
@@ -332,7 +334,7 @@ can be:
 Additionally you can create an empty migrations file if you want full control
 over what needs to be executed::
 
-        bin/cake migrations create MyCustomMigration
+    bin/cake migrations create MyCustomMigration
 
 Please make sure you read the official `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
 in order to know the complete list of methods you can use for writing migration files.
@@ -344,7 +346,7 @@ If you are dealing with a pre-existing database and want to start using
 migrations, or to version control the initial schema of your application's
 database, you can run the ``migration_snapshot`` command::
 
-        bin/cake bake migration_snapshot Initial
+    bin/cake bake migration_snapshot Initial
 
 It will generate a migration file called **Initial** containing all the create
 statements for all tables in your database.
@@ -356,30 +358,32 @@ If you need to avoid the automatic creation of the ``id`` primary key when
 adding new tables to the database, you can use the second argument of the
 ``table()`` method::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class CreateProductsTable extends AbstractMigration
+    class CreateProductsTable extends AbstractMigration
+    {
+        public function change()
         {
-            public function change()
-            {
-                $table = $this->table('products', ['id' => false, 'primary_key' => ['id']]);
-                $table
-                      ->addColumn('id', 'uuid')
-                      ->addColumn('name', 'string')
-                      ->addColumn('description', 'text')
-                      ->create();
-            }
+            $table = $this->table('products', ['id' => false, 'primary_key' => ['id']]);
+            $table
+                  ->addColumn('id', 'uuid')
+                  ->addColumn('name', 'string')
+                  ->addColumn('description', 'text')
+                  ->create();
         }
+    }
 
 The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
 
 .. note::
 
-        When specifying a custom primary key on the command line, you must note it as the primary key in the id field, otherwise you may get an error regarding duplicate id fields, i.e.::
+    When specifying a custom primary key on the command line, you must note
+    it as the primary key in the id field, otherwise you may get an error
+    regarding duplicate id fields, i.e.::
 
-            bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
+        bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
 
 
 Additionally, since Migrations 1.3, a new way to deal with primary key was
@@ -390,29 +394,29 @@ You can specify a ``autoId`` property in the Migration class and set it to
 need to manually create the column that will be used as a primary key and add
 it to the table declaration::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class CreateProductsTable extends AbstractMigration
+    class CreateProductsTable extends AbstractMigration
+    {
+
+        public $autoId = false;
+
+        public function up()
         {
-
-            public $autoId = false;
-
-            public function up()
-            {
-                $table = $this->table('products');
-                $table
-                    ->addColumn('id', 'integer', [
-                        'autoIncrement' => true,
-                        'limit' => 11
-                    ])
-                    ->addPrimaryKey('id')
-                    ->addColumn('name', 'string')
-                    ->addColumn('description', 'text')
-                    ->create();
-            }
+            $table = $this->table('products');
+            $table
+                ->addColumn('id', 'integer', [
+                    'autoIncrement' => true,
+                    'limit' => 11
+                ])
+                ->addPrimaryKey('id')
+                ->addColumn('name', 'string')
+                ->addColumn('description', 'text')
+                ->create();
         }
+    }
 
 Compared to the previous way of dealing with primary key, this method gives you
 the ability to have more control over the primary key column definition :
@@ -431,31 +435,32 @@ Collations
 If you need to create a table with a different collation than the database
 default one, you can define it with the ``table()`` method, as an option::
 
-        <?php
+    <?php
 
-        use Migrations\AbstractMigration;
+    use Migrations\AbstractMigration;
 
-        class CreateCategoriesTable extends AbstractMigration
+    class CreateCategoriesTable extends AbstractMigration
+    {
+        public function change()
         {
-            public function change()
-            {
-                $table = $this
-                    ->table('categories', [
-                        'collation' => 'latin1_german1_ci'
-                    ])
-                    ->addColumn('title', 'string', [
-                        'default' => null,
-                        'limit' => 255,
-                        'null' => false,
-                    ])
-                    ->create();
-            }
+            $table = $this
+                ->table('categories', [
+                    'collation' => 'latin1_german1_ci'
+                ])
+                ->addColumn('title', 'string', [
+                    'default' => null,
+                    'limit' => 255,
+                    'null' => false,
+                ])
+                ->create();
         }
+    }
 
 Note however this can only be done on table creation : there is currently
 no way of adding a column to an existing table with a different collation than
 the table or the database.
-Only ``MySQL`` and ``SqlServer`` supports this configuration key for the time being.
+Only ``MySQL`` and ``SqlServer`` supports this configuration key for the time
+being.
 
 Applying Migrations
 ===================
@@ -463,11 +468,12 @@ Applying Migrations
 Once you have generated or written your migration file, you need to execute the
 following command to apply the changes to your database::
 
-        bin/cake migrations migrate
+    bin/cake migrations migrate
 
-To migrate to a specific version then use the ``--target`` parameter or -t for short::
+To migrate to a specific version then use the ``--target`` parameter or -t for
+short::
 
-        bin/cake migrations migrate -t 20150103081132
+    bin/cake migrations migrate -t 20150103081132
 
 That corresponds to the timestamp that is prefixed to the migrations file name.
 
@@ -479,19 +485,19 @@ plugin. It is the reverse action of the ``migrate`` command.
 
 You can rollback to the previous migration by using the ``rollback`` command::
 
-        bin/cake migrations rollback
+    bin/cake migrations rollback
 
 You can also pass a migration version number to rollback to a specific version::
 
-         bin/cake migrations rollback -t 20150103081132
+    bin/cake migrations rollback -t 20150103081132
 
 Migrations Status
 =================
 
-The Status command prints a list of all migrations, along with their current status.
-You can use this command to determine which migrations have been run::
+The Status command prints a list of all migrations, along with their current
+status. You can use this command to determine which migrations have been run::
 
-        bin/cake migrations status
+    bin/cake migrations status
 
 Marking a migration as migrated
 ===============================
@@ -549,9 +555,9 @@ to be distributed much more portable and easy to install. All commands in the
 Migrations plugin support the ``--plugin`` or ``-p`` option that will scope the
 execution to the migrations relative to that plugin::
 
-        bin/cake migrations status -p PluginName
+    bin/cake migrations status -p PluginName
 
-        bin/cake migrations migrate -p PluginName
+    bin/cake migrations migrate -p PluginName
 
 
 Running Migrations in a non-shell environment

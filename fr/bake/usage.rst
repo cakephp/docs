@@ -39,6 +39,8 @@ des tâches disponibles. Vous devriez voir quelque chose comme ceci::
     - fixture
     - form
     - helper
+    - migration
+    - migration_snapshot
     - model
     - plugin
     - shell
