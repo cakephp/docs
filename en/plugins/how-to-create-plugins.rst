@@ -314,6 +314,8 @@ applications:
 -  If you use requestAction, make sure controller and model names
    are as unique as possible. Otherwise you might get PHP "redefined
    class ..." errors.
+-  When adding routes with extensions to your plugin, ensure you use
+   ``Router::setExtensions()`` so you do not override application routing.
 
 Publish Your Plugin
 ===================
