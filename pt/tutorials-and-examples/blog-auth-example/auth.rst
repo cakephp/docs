@@ -250,10 +250,9 @@ e adicione a seguinte trecho:
         // ...
     }
 
-Now every time the password property is assigned to the user it will be hashed
-using the ``DefaultPasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your **src/Template/Users/login.ctp** file
-and add the following lines:
+Agora, a senha criptografada usando a classe ``DefaultPasswordHasher``.
+Está faltando apenas o arquivo para exibição da tela de login.
+Abra o arquivo **src/Template/Users/login.ctp** e adicione as seguintes linhas:
 
 .. code-block:: php
 
@@ -263,7 +262,7 @@ and add the following lines:
     <?= $this->Flash->render('auth') ?>
     <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?= __('Please enter your username and password') ?></legend>
+            <legend><?= __('Por favor informe seu usuário e senha') ?></legend>
             <?= $this->Form->input('username') ?>
             <?= $this->Form->input('password') ?>
         </fieldset>
@@ -271,39 +270,46 @@ and add the following lines:
     <?= $this->Form->end() ?>
     </div>
 
-You can now register a new user by accessing the ``/users/add`` URL and log in with the
-newly created credentials by going to ``/users/login`` URL. Also, try to access
-any other URL that was not explicitly allowed such as ``/articles/add``, you will see
-that the application automatically redirects you to the login page.
+Agora você pode registrar um novo usuário, acessando a URL ``/users/add``
+e faça login com o usuário recém-criado, indo para a URL ``/users/login``.
+Além disso, tente acessar qualquer outro URL que não tenha sido explicitamente
+permitido, como ``/articles/add``, você vai ver que o aplicativo redireciona
+automaticamente para a página de login.
 
-And that's it! It looks too simple to be true. Let's go back a bit to explain what
-happened. The ``beforeFilter()`` function is telling the AuthComponent to not require a
-login for the ``add()`` action in addition to the ``index()`` and ``view()`` actions
-that were already allowed in the AppController's ``beforeFilter()`` function.
+E é isso! Parece simples demais para ser verdade. Vamos voltar um pouco para
+explicar o que aconteceu. A função ``beforeFilter()`` está falando para o AuthComponent
+não solicitar um login para a ação ``add()`` em adição as ações ``index()`` e ``view()``
+que foram prontamente autorizadas na função ``beforeFilter()`` do AppController.
 
-The ``login()`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
-and it works without any further config because we are following conventions as
-mentioned earlier. That is, having a Users table with a username and a password
-column, and use a form posted to a controller with the user data. This function
-returns whether the login was successful or not, and in the case it succeeds,
-then we redirect the user to the configured redirection URL that we used when
-adding the AuthComponent to our application.
+A ação ``login()`` chama a função ``$this->Auth->identify()`` da AuthComponent, que
+funciona sem qualquer outra configuração porque estamos seguindo convenções, como
+mencionado anteriormente. Ou seja, ter uma tabela de usuários com um ``username``
+e uma coluna de ``password``, e usamos um form para postar os dados do usuário para
+o controller. Esta função retorna se o login foi bem sucedido ou não, e caso
+ela retorne sucesso, então nós redirecionamos o usuário para a URL que configuramos
+quando adicionamos o AuthComponent em nossa aplicação.
 
-The logout works by just accessing the ``/users/logout`` URL and will redirect
-the user to the configured logoutUrl formerly described. This URL is the result
-of the ``AuthComponent::logout()`` function on success.
+O logout funciona quando acessamos a URL ``/users/logout`` que irá redirecionar o
+usuário para a url configurada em logoutUrl. Essa url é acionada quando a função
+``AuthComponent::logout()``.
 
-Authorization (who's allowed to access what)
-============================================
+Autorização (quem tem permissão para acessar o que)
+===================================================
 
-As stated before, we are converting this blog into a multi-user authoring tool,
-and in order to do this, we need to modify the articles table a bit to add the
-reference to the Users table::
+
+
+Como afirmado anteriormente, nós estamos convertendo esse blog em uma ferramenta
+multi usuário de autoria, e para fazer isso, precisamos modificar a tabela de
+artigos um pouco para adicionar a referência à tabela de Usuários:
+
+.. code-block:: sql
 
     ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-Also, a small change in the ArticlesController is required to store the currently
-logged in user as a reference for the created article::
+Além disso, uma pequena mudança no ArticlesController é necessário para armazenar
+o usuário conectado no momento como uma referência para o artigo criado:
+
+.. code-block:: php
 
     // src/Controller/ArticlesController.php
 
@@ -312,29 +318,31 @@ logged in user as a reference for the created article::
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->data);
-            // Added this line
+            // Adicione esta linha
             $article->user_id = $this->Auth->user('id');
-            // You could also do the following
+            // Você também pode fazer o seguinte
             //$newData = ['user_id' => $this->Auth->user('id')];
             //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been saved.'));
+                $this->Flash->success(__('Seu artigo foi salvo.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to add your article.'));
+            $this->Flash->error(__('Não foi possível adicionar seu artigo.'));
         }
         $this->set('article', $article);
     }
 
-The ``user()`` function provided by the component returns any column from the
-currently logged in user. We used this method to add the data into the request
-info that is saved.
+A função ``user()`` fornecida pelo componente retorna qualquer coluna do usuário
+logado no momento. Nós usamos esse metódo para adicionar a informação dentro de
+request data para que ela seja salva.
 
-Let's secure our app to prevent some authors from editing or deleting the
-others' articles. Basic rules for our app are that admin users can access every
-URL, while normal users (the author role) can only access the permitted actions.
-Again, open the AppController class and add a few more options to the Auth
-config::
+Vamos garantir que nossa app evite que alguns autores editem ou apaguem posts de
+outros. Uma regra básica para nossa aplicação é que usuários admin possam acessar
+qualquer url, enquanto usuários normais (o papel author) podem somente acessar as
+actions permitidas. Abra novamente a classe AppController e adicione um pouco mais
+de opções para as configurações do Auth:
+
+.. code-block:: php
 
     // src/Controller/AppController.php
 
@@ -342,7 +350,7 @@ config::
     {
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'authorize' => ['Controller'], // Added this line
+            'authorize' => ['Controller'], // Adicione está linha
             'loginRedirect' => [
                 'controller' => 'Articles',
                 'action' => 'index'
@@ -357,37 +365,40 @@ config::
 
     public function isAuthorized($user)
     {
-        // Admin can access every action
+        // Admin pode acessar todas as actions
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
 
-        // Default deny
+        // Bloqueia acesso por padrão
         return false;
     }
 
-We just created a simple authorization mechanism. Users with the ``admin``
-role will be able to access any URL in the site when logged-in. All other
-users -- those with the ``author`` role -- will have the same access as
-users who aren't logged-in.
+Acabamos de criar um mecanismo de autorização muito simples. Nesse caso os
+usuários com papel ``admin`` poderão acessar qualquer url no site quando
+estiverem logados, mas o restante dos usuários (author) não podem acessar
+qualquer coisa diferente dos usuários não logados.
 
-This is not exactly what we want. We need to supply more rules to our
-``isAuthorized()`` method. However instead of doing it in AppController,
-we'll delegate supplying those extra rules to each individual controller.
-The rules we're going to add to ArticlesController should permit authors
-to create articles but prevent authors from editing articles they do not
-own.  Add the following content to your **ArticlesController.php**::
+Isso não é exatamente o que nós queremos, por isso precisamos corrigir nosso
+metódo ``isAuthorized()`` para fornecer mais regras. Mas ao invés de fazer
+isso no AppController, vamos delegar a cada controller para suprir essas
+regras extras. As regras que adicionaremos para o ``add`` de ArticlesController
+deve permitir ao autores criarem os posts mas evitar a edição de posts que não
+sejam deles. Abra o arquivo **src/Controller/ArticlesController.php** e adicione
+o seguinte conteúdo:
+
+.. code-block: php
 
     // src/Controller/ArticlesController.php
 
     public function isAuthorized($user)
     {
-        // All registered users can add articles
+        // Todos os usuários registrados podem adicionar artigos
         if ($this->request->action === 'add') {
             return true;
         }
 
-        // The owner of an article can edit and delete it
+        // Apenas o proprietário do artigo pode editar e excluí
         if (in_array($this->request->action, ['edit', 'delete'])) {
             $articleId = (int)$this->request->params['pass'][0];
             if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
@@ -398,12 +409,9 @@ own.  Add the following content to your **ArticlesController.php**::
         return parent::isAuthorized($user);
     }
 
-We're now overriding the AppController's ``isAuthorized()`` call and internally
-checking if the parent class is already authorizing the user. If he isn't,
-then just allow him to access the add action, and conditionally access
-edit and delete. One final thing has not been implemented. To tell whether
-or not the user is authorized to edit the article, we're calling a ``isOwnedBy()``
-function in the Articles table. Let's then implement that function::
+Estamos sobrescrevendo a chamada ``isAuthorized()``do AppController e internamente verificando na classe pai se o usuário está autorizado. Caso não esteja, então apenas permitem acessar a action ``add``, e condicionalmente action ``edit`` e ``delete``. Uma última coisa não foi implementada. Para dizer ou não se o usuário está autorizado a editar o artigo, nós estamos chamando uma função ``isOwnedBy()`` na tabela artigos. Vamos, então, implementar essa função:
+
+.. code-block:: php
 
     // src/Model/Table/ArticlesTable.php
 
@@ -412,21 +420,22 @@ function in the Articles table. Let's then implement that function::
         return $this->exists(['id' => $articleId, 'user_id' => $userId]);
     }
 
-This concludes our simple authentication and authorization tutorial. For securing
-the UsersController you can follow the same technique we did for ArticlesController.
-You could also be more creative and code something more general in AppController based
-on your own rules.
+Isso conclui então nossa autorização simples e nosso tutorial de autorização.
+Para garantir o UsersController você pode seguir as mesmas técnicas que usamos
+para ArticlesController, você também pode ser mais criativo e codificar algumas
+coisas mais gerais no AppController para suas próprias regras baseadas em papéis.
 
-Should you need more control, we suggest you read the complete Auth guide in the
-:doc:`/controllers/components/authentication` section where you will find more
-about configuring the component, creating custom Authorization classes, and much more.
+Se precisar de mais controle, nós sugerimos que leia o guia completo do Auth
+:doc:`/core-libraries/components/authentication` seção onde você encontrará mais
+sobre a configuração do componente, criação de classes de Autorização customizadas, e muito mais.
 
-Suggested Follow-up Reading
----------------------------
+Sugerimos as seguintes leituras
+-------------------------------
 
-#. :doc:`/bake/usage` Generating basic CRUD code
-#. :doc:`/controllers/components/authentication`: User registration and login
+1. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
+2. :doc:`/core-libraries/components/authentication`: User registration and login
+
 
 .. meta::
-    :title lang=en: Simple Authentication and Authorization Application
-    :keywords lang=en: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns
+    :title lang=pt: Simple Authentication and Authorization Application
+    :keywords lang=pt: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns
