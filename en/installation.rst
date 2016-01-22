@@ -67,18 +67,17 @@ For Windows systems, you can download Composer's Windows installer
 instructions for Composer's Windows installer can be found within the README
 `here <https://github.com/composer/windows-setup>`__.
 
-Now that you've downloaded and installed Composer, you can get a new CakePHP
-application by running:
+Now that you've downloaded and installed Composer, let's say you want to create a new CakePHP application into my_app_name folder. For this just run the following composer command:
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app my_app_name
 
 Or if Composer is installed globally:
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app my_app_name
 
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application
