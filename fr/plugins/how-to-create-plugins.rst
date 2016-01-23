@@ -325,6 +325,9 @@ applications CakePHP:
 -  Si vous utilisez requestAction, assurez-vous que les noms des controllers
    et des models sont aussi uniques que possibles. Sinon, vous aurez des
    erreurs PHP de type "redefined class ...".
+-  Quand vous ajoutez des routes avec des extensions à votre plugin,
+   assurez-vous d'utilisez ``Router::setExtensions()`` pour ne pas devoir
+   surcharger le routing de l'application.
 
 Publiez votre Plugin
 ====================
