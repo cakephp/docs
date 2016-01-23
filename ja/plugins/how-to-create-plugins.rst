@@ -287,11 +287,15 @@ CakePHP アプリケーションで動作するプラグインの最後の tips 
    と書くと 内部プラグインとコミュニケーションができます。
 -  requestAction を使う際は、コントローラ名とモデル名がユニークであることを確認してください。
    そうしないと、”redefined class ...” エラーが発生します。
+-  拡張子であなたのプラグインへのルーティングを追加するとき、アプリケーションのルーティングを
+   上書きせずに、必ず ``Router::setExtensions()`` を使用してください。
 
 プラグインの公開
 ===================
 
-あなたのプラグインを `plugins.cakephp.org <http://plugins.cakephp.org>`_ に追加できます。
+あなたのプラグインを `plugins.cakephp.org <http://plugins.cakephp.org>`_ に追加できますし、
+`awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_
+に申し込みできます。
 
 また、composer.json ファイルを作成し、あなたのプラグインを
 `packagist.org <https://packagist.org/>`_ に公開してみたくありませんか。
@@ -309,5 +313,5 @@ CakePHP 名前空間 (cakephp) を **使用しない** でください。
 そして、CakePHP 自身の "Localized" プラグンは、 `cakephp/localized` で見つけられます。
 
 .. meta::
-    :title lang=ja: How To Create Plugins
-    :keywords lang=ja: plugin folder,configuration database,management module,little space,webroot,contactmanager,array,config,cakephp,models,php,directories,blog,plugins,applications
+    :title lang=ja: プラグインの作成
+    :keywords lang=ja: プラグインフォルダ,configuration database,管理モジュール,小さな空間,webroot,contactmanager,array,config,cakephp,モデル,php,ディレクトリ,ブログ,プラグイン,アプリケーション
