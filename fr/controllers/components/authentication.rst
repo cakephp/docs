@@ -1162,7 +1162,10 @@ unauthorizedRedirect
 storage
     Classe de stockage à utiliser pour faire persister les enregistrements
     utilisateurs. Lors de l'utilisation d'un authenticator personnalisé,
-    vous devriez définir cette option à ``Memory``. Défaut à ``Session``.
+    vous devriez définir cette option à ``Memory``. Par défaut à ``Session``.
+    Vous pouvez passer des options de config pour stocker une classe en
+    utilisant le format de tableau. Par exemple, pour utiliser une clé de
+    session personnalisée, vous pouvez définir ``storage`` avec ``['className' => 'Storage', 'key' => 'Auth.Admin']``.
 checkAuthIn
     Le nom de l'event pour lequel les vérifications de l'authentification
     doivent être faites. Défaut à ``Controller.startup``. Vous pouvez le
