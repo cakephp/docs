@@ -62,17 +62,18 @@ Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/re
 Windows インストーラをダウンロードできます。Composer の Windows  インストーラについての詳細は、
 `README <https://github.com/composer/windows-setup>`__ をご覧ください。
 
-Composer をインストールしたら、CakePHP の新しいアプリケーションを下記のコマンドで作れるようになります。
+以上で、Composer をダウンロードとインストールしました。my_app_name フォルダに CakePHP
+の新しいアプリケーションを作りたいなら、下記の composer コマンドを実行して作成します。
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app my_app_name
 
 または Composer にパスが通っているのであれば下記のコマンドも使えます。
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app my_app_name
 
 一度 Composer がアプリケーションの雛形とコアライブラリをダウンロードしたら、
 インストールした CakePHP アプリケーションを Composer から操作できるように
