@@ -164,7 +164,7 @@ i.e. create_products::
     to this version of the plugin the migration name would be in the
     underscore form: 20160121164955_create_products.php.
 
-The command above line will generate a migration file that resembles::
+The command line above will generate a migration file that resembles::
 
     <?php
     use Migrations\AbstractMigration;
