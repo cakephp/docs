@@ -10,7 +10,7 @@ trivial to setup, for example::
     # │    │    │    │    │
     # │    │    │    │    │
     # │    │    │    │    \───── day of week (0 - 6) (0 to 6 are Sunday to Saturday,
-      |    |    |    |           or use names)
+    # |    |    |    |           or use names)
     # │    │    │    \────────── month (1 - 12)
     # │    │    \─────────────── day of month (1 - 31)
     # │    \──────────────────── hour (0 - 23)
