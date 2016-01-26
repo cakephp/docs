@@ -1542,9 +1542,12 @@ Creating buttons and submit elements
     Creates an HTML link, but access the URL using method POST. Requires
     JavaScript to be enabled in browser.
 
-    This method creates a ``<form>`` element. So do not use this method inside
-    an existing form. Instead you should add a submit button using
-    :php:meth:`FormHelper::submit()`
+    This method creates a ``<form>`` element. If you want to use this method inside
+    of an existing form, you must use the `inline` or `block` options so that the
+    new form can be rendered outside of its parent.
+
+    If all you are looking for is a button to submit your form, then you should use
+    :php:meth:`FormHelper::submit()` instead.
 
 
     .. versionchanged:: 2.3
@@ -1553,9 +1556,9 @@ Creating buttons and submit elements
     .. versionchanged:: 2.5
         The ``inline`` and ``block`` options were added. They allow buffering
         the generated form tag, instead of returning with the link. This helps
-        avoiding nested form tags. Setting ``'inline' => true`` will add
-        the form tag to ``postLink`` content block or you can use option ``block``
-        to specify a custom block.
+        avoiding nested form tags. Setting ``'inline' => false`` will add
+        the form tag to the ``postLink`` content block, if you want to use a
+        custom block you can specify it using the ``block`` option instead.
 
     .. versionchanged:: 2.6
         The argument ``$confirmMessage`` was deprecated. Use ``confirm`` key

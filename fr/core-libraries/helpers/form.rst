@@ -1553,7 +1553,7 @@ Création des boutons et des éléments submits
         Les options ``inline`` et ``block`` ont été ajoutées. Elles permettent
         de mettre en tampon la balise de form générée au lieu de la retourner
         avec le lien. Ceci permet d'éviter les balises de form imbriquées.
-        Définir ``'inline' => true`` va ajouter la balise de form en block
+        Définir ``'inline' => false`` va ajouter la balise de form en block
         de contenu ``postLink`` ou vous pouvez utiliser l'option ``block``
         pour spécifier un block personnalisé.
 
