@@ -63,8 +63,8 @@ Use this instead::
         $this->_listeners,
         array_flip(
             preg_grep($matchPattern, array_keys($this->_listeners), 0)
-            )
-        );
+        )
+    );
 
 Line Length
 ===========
