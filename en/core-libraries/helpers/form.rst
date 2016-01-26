@@ -1543,7 +1543,7 @@ Creating buttons and submit elements
     JavaScript to be enabled in browser.
 
     This method creates a ``<form>`` element. If you want to use this method inside
-    of an existing form, you must use the `inline` or `block` options so that the
+    of an existing form, you must use the ``inline`` or ``block`` options so that the
     new form can be rendered outside of its parent.
 
     If all you are looking for is a button to submit your form, then you should use
