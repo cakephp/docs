@@ -1553,9 +1553,13 @@ Creating Standalone Buttons and POST links
     Creates an HTML link, but accesses the URL using method POST. Requires
     JavaScript to be enabled in browser.
 
-    This method creates a ``<form>`` element. So do not use this method inside
-    an existing form. Instead you should add a submit button using
-    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`
+    This method creates a ``<form>`` element. If you want to use this method inside
+    of an existing form, you must use the ``block`` option so that the new form is
+    being set to a :ref:`view block <view-blocks>` that can be rendered outside of
+    the main form.
+
+    If all you are looking for is a button to submit your form, then you should use
+    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` instead.
 
 
 Customizing the Templates FormHelper Uses
