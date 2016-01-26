@@ -45,6 +45,30 @@ Ou::
         }
     }
 
+Dans les cas où vous utilisez un appel de fonction multi-lignes, utilisez les
+instructions suivantes:
+
+*  Les parenthèses ouvrantes d'un appel de fonction multi-lignes doivent être
+   le dernier contenu de la ligne.
+*  Seul un argument est permis par ligne dans un appel de fonction multi-lignes.
+*  Les parenthèses fermantes d'un appel de fonction multi-lignes doivent être
+   elles-même sur une ligne.
+
+Par exemple, plutôt qu'utiliser le format suivant::
+
+    $matches = array_intersect_key($this->_listeners,
+                    array_flip(preg_grep($matchPattern,
+                        array_keys($this->_listeners), 0)));
+
+Utilisez ceci à la place::
+
+    $matches = array_intersect_key(
+        $this->_listeners,
+        array_flip(
+            preg_grep($matchPattern, array_keys($this->_listeners), 0)
+        )
+    );
+
 Longueur des lignes
 ===================
 
