@@ -45,6 +45,27 @@ Or::
         }
     }
 
+In cases where you're using a multi-line function call use the following guidelines:
+
+*  Opening parenthesis of a multi-line function call must be the last content on the line.
+*  Only one argument is allowed per line in a multi-line function call.
+*  Closing parenthesis of a multi-line function call must be on a line by itself.
+
+As an example, instead of using the following formatting::
+
+    $matches = array_intersect_key($this->_listeners,
+                    array_flip(preg_grep($matchPattern,
+                        array_keys($this->_listeners), 0)));
+
+Use this instead::
+
+    $matches = array_intersect_key(
+        $this->_listeners,
+        array_flip(
+            preg_grep($matchPattern, array_keys($this->_listeners), 0)
+        )
+    );
+
 Line Length
 ===========
 
