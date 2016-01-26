@@ -1559,6 +1559,7 @@ Creating Standalone Buttons and POST links
     the main form.
 
     If all you are looking for is a button to submit your form, then you should use
+    :php:meth:`Cake\\View\\Helper\\FormHelper::button()` or
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` instead.
 
 
