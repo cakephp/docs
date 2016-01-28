@@ -117,7 +117,7 @@ Bake テーマオプション
     :ref:`bake theme creation documentation <creating-a-bake-theme>`.
 
 テーマオプションは全bakeで一般的です。また、bake テンプレートファイルを変更することができます。
-テーマを作るには、 :ref:`bake theme creation documentation <creating-a-bake-theme>` を参照してください。
+テーマを作るには、 :ref:`Bakeテーマ作成マニュアル <creating-a-bake-theme>` を参照してください。
 
 .. meta::
     :title lang=ja: Code Generation with Bake
