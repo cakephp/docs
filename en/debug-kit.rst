@@ -31,7 +31,26 @@ Database Configuration
 By default DebugKit will store panel data into a SQLite database in your
 application's ``tmp`` directory. If you cannot install pdo_sqlite, you can
 configure DebugKit to use a different database by defining a ``debug_kit``
-connection in your **config/app.php** file.
+connection in your **config/app.php** file. For example::
+
+        /**
+         * The debug_kit connection stores DebugKit meta-data.
+         */
+        'debug_kit' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            //'port' => 'nonstandard_port_number',
+            'username' => 'dbusername',    // Your DB username here
+            'password' => 'dbpassword',    // Your DB password here
+            'database' => 'debug_kit',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
+            'quoteIdentifiers' => false,
+            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+        ],
 
 Toolbar Usage
 =============
