@@ -272,11 +272,11 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 .. php:method:: toReadableSize(string $size)
 
 ..
-This method formats data sizes in human readable forms. It provides
-a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
-displayed with a two-digit precision level, according to the size
-of data supplied (i.e. higher sizes are expressed in larger
-terms)::
+  This method formats data sizes in human readable forms. It provides
+  a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
+  displayed with a two-digit precision level, according to the size
+  of data supplied (i.e. higher sizes are expressed in larger
+  terms)::
 ..
     // Called as NumberHelper
     // Called as Number
@@ -301,49 +301,84 @@ terms)::
   Formatting Numbers
 
 数字の整形
-==================
+==========
 
 .. php:method:: format(mixed $value, array $options = [])
 
-This method gives you much more control over the formatting of
-numbers for use in your views (and is used as the main method by
-most of the other NumberHelper methods). Using this method might
-looks like::
-
+..
+  This method gives you much more control over the formatting of
+  numbers for use in your views (and is used as the main method by
+  most of the other NumberHelper methods). Using this method might
+  looks like::
+..
     // Called as NumberHelper
+    // Called as Number
+
+このメソッドは、ビューで使うための数値のフォーマットより、
+もっと自由に制御できます。(およびその他のNumberHelperのほとんどのメソッドが使用できます。)
+このメソッドは以下のように使用します::
+
+    // NumberHelperとしてコール
     $this->Number->format($value, $options);
 
-    // Called as Number
+    // Numberとしてコール
     Number::format($value, $options);
 
-The ``$value`` parameter is the number that you are planning on
-formatting for output. With no ``$options`` supplied, the number
-1236.334 would output as 1,236. Note that the default precision is
-zero decimal places.
+..
+  The ``$value`` parameter is the number that you are planning on
+  formatting for output. With no ``$options`` supplied, the number
+  1236.334 would output as 1,236. Note that the default precision is
+  zero decimal places.
 
-The ``$options`` parameter is where the real magic for this method
-resides.
+``$value`` パラメーターは、フォーマットして出力したい数値です。
+``$options`` が与えられないと、1236.334という数値は1,236として出力されるでしょう。
+デフォルトの制度は1の位であることに注意してください。
+
+..
+  The ``$options`` parameter is where the real magic for this method
+  resides.
+
+``$options`` パラメーターはこのメソッド
 
 -  If you pass an integer then this becomes the amount of precision
    or places for the function.
 -  If you pass an associated array, you can use the following keys:
 
+..
+  +---------------------+----------------------------------------------------+
+  | Option              | Description                                        |
+  +=====================+====================================================+
+  | places              | Number of decimal places to use, ie. 2             |
+  +---------------------+----------------------------------------------------+
+  | precision           | Maximum number of decimal places to use, ie. 2     |
+  +---------------------+----------------------------------------------------+
+  | pattern             | An ICU number pattern to use for formatting the    |
+  |                     | number ie. #,###.00                                |
+  +---------------------+----------------------------------------------------+
+  | locale              | The locale name to use for formatting number,      |
+  |                     | ie. "fr_FR".                                       |
+  +---------------------+----------------------------------------------------+
+  | before              | Text to display before the rendered number.        |
+  +---------------------+----------------------------------------------------+
+  | after               | Text to display after the rendered number.         |
+  +---------------------+----------------------------------------------------+
+
 +---------------------+----------------------------------------------------+
-| Option              | Description                                        |
+| オプション          | 説明                                               |
 +=====================+====================================================+
-| places              | Number of decimal places to use, ie. 2             |
+| places              | 小数点以下の桁数を指定します。例. 2                |
 +---------------------+----------------------------------------------------+
-| precision           | Maximum number of decimal places to use, ie. 2     |
+| precision           | 小数点以下の最大桁数を指定します。例. 2            |
 +---------------------+----------------------------------------------------+
-| pattern             | An ICU number pattern to use for formatting the    |
-|                     | number ie. #,###.00                                |
+| pattern             | 数値のフォーマットに使用するICU数値パターン。      |
+|                     | 例. #,###.00                                       |
 +---------------------+----------------------------------------------------+
-| locale              | The locale name to use for formatting number,      |
-|                     | ie. "fr_FR".                                       |
+| locale              | 数値フォーマットに使用するロケール名。             |
+|                     | 例. "fr_FR".                                       |
 +---------------------+----------------------------------------------------+
-| before              | Text to display before the rendered number.        |
+| before              | レンダリングされた数値の前に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
-| after               | Text to display after the rendered number.         |
+| after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
 
 Example::
@@ -394,70 +429,120 @@ Examples::
     echo Number::ordinal(410);
     // Output '410th'
 
-Format Differences
-==================
+..
+  Format Differences
+
+フォーマットの差
+================
 
 .. php:method:: formatDelta(mixed $value, array $options = [])
 
-This method displays differences in value as a signed number::
-
+..
+  This method displays differences in value as a signed number::
+..
     // Called as NumberHelper
+    // Called as Number
+
+このメソッドは、符号付き整数としての値の差を表示します。::
+
+    // NumberHelperとしてコール
     $this->Number->formatDelta($value, $options);
 
-    // Called as Number
+    // Numberとしてコール
     Number::formatDelta($value, $options);
 
-The ``$value`` parameter is the number that you are planning on
-formatting for output. With no ``$options`` supplied, the number
-1236.334 would output as 1,236. Note that the default precision is
-zero decimal places.
+..
+  The ``$value`` parameter is the number that you are planning on
+  formatting for output. With no ``$options`` supplied, the number
+  1236.334 would output as 1,236. Note that the default precision is
+  zero decimal places.
 
-The ``$options`` parameter takes the same keys as :php:meth:`Number::format()` itself:
+``$value`` パラメーターは、フォーマットして出力したい数値です。
+``$options`` が与えられないと、1236.334という数値は1,236として出力されるでしょう。
+デフォルトの制度は1の位であることに注意してください。
+
+..
+  The ``$options`` parameter takes the same keys as :php:meth:`Number::format()` itself:
+
+``$options`` パラメーターは :php:meth:`Number::format()` と同じキーを取ります。:
+
+..
+  +---------------------+----------------------------------------------------+
+  | Option              | Description                                        |
+  +=====================+====================================================+
+  | places              | Number of decimal places to use, ie. 2             |
+  +---------------------+----------------------------------------------------+
+  | precision           | Maximum number of decimal places to use, ie. 2     |
+  +---------------------+----------------------------------------------------+
+  | locale              | The locale name to use for formatting number,      |
+  |                     | ie. "fr_FR".                                       |
+  +---------------------+----------------------------------------------------+
+  | before              | Text to display before the rendered number.        |
+  +---------------------+----------------------------------------------------+
+  | after               | Text to display after the rendered number.         |
+  +---------------------+----------------------------------------------------+
 
 +---------------------+----------------------------------------------------+
-| Option              | Description                                        |
+| オプション          | 説明                                               |
 +=====================+====================================================+
-| places              | Number of decimal places to use, ie. 2             |
+| places              | 小数点以下の桁数を指定します。例. 2                |
 +---------------------+----------------------------------------------------+
-| precision           | Maximum number of decimal places to use, ie. 2     |
+| precision           | 小数点以下の最大桁数を指定します。例. 2            |
 +---------------------+----------------------------------------------------+
-| locale              | The locale name to use for formatting number,      |
-|                     | ie. "fr_FR".                                       |
+| locale              | 数値フォーマットに使用するロケール名。             |
+|                     | 例. "fr_FR".                                       |
 +---------------------+----------------------------------------------------+
-| before              | Text to display before the rendered number.        |
+| before              | レンダリングされた数値の前に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
-| after               | Text to display after the rendered number.         |
+| after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
 
-Example::
-
+..
+  Example::
+..
     // Called as NumberHelper
+    // Output '[+123,456.79]'
+    // Called as Number
+    // Output '[+123,456.79]'
+
+例::
+
+    // NumberHelperとしてコール
     echo $this->Number->formatDelta('123456.7890', [
         'places' => 2,
         'before' => '[',
         'after' => ']'
     ]);
-    // Output '[+123,456.79]'
+    // 出力 '[+123,456.79]'
 
-    // Called as Number
+    // Numberとしてコール
     echo Number::formatDelta('123456.7890', [
         'places' => 2,
         'before' => '[',
         'after' => ']'
     ]);
-    // Output '[+123,456.79]'
+    // 出力 '[+123,456.79]'
 
 .. end-cakenumber
 
-Configure formatters
-====================
+..
+  Configure formatters
+
+フォーマッタ設定
+================
 
 .. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
 
-This method allows you to configure formatter defaults which persist across calls
-to various methods.
+..
+  This method allows you to configure formatter defaults which persist across calls
+  to various methods.
 
-Example::
+このメソッドを使用すると、様々なメソッドの呼び出し間で持続的なフォーマッタのデフォルトを設定することができます。
+
+..
+  Example::
+
+例::
 
     Number::config('en_IN', \NumberFormatter::CURRENCY, [
         'pattern' => '#,##,##0'
