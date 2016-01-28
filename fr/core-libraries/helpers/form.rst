@@ -1539,11 +1539,15 @@ Création des boutons et des éléments submits
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array ())
 
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
-    Requiert que JavaScript  soit autorisé dans votre navigateur.
+    Requiert que JavaScript soit autorisé dans votre navigateur.
 
-    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas cette
-    méthode dans un formulaire existant. En remplacement vous devriez
-    ajouter un bouton submit en utilisant :php:meth:`FormHelper::submit()`.
+    Cette méthode crée un élément ``<form>``. Si vous souhaitez utiliser cette
+    méthode dans un formulaire existant, vous devez utiliser les options
+    ``inline`` ou ``block`` pour que le nouveau formulaire soit affiché à
+    l'extérieur de son formulaire parent.
+
+    Si vous cherchez un bouton pour soumettre votre formulaire, vous devrez
+    plutôt utiliser :php:meth:`FormHelper::submit()` instead.
 
     .. versionchanged:: 2.3
 
@@ -1554,8 +1558,8 @@ Création des boutons et des éléments submits
         de mettre en tampon la balise de form générée au lieu de la retourner
         avec le lien. Ceci permet d'éviter les balises de form imbriquées.
         Définir ``'inline' => false`` va ajouter la balise de form en block
-        de contenu ``postLink`` ou vous pouvez utiliser l'option ``block``
-        pour spécifier un block personnalisé.
+        de contenu ``postLink``, si vous voulez utiliser un block personnalisé
+        vous pouvez le spécifier en utilisant plutôt l'option ``block``.
 
     .. versionchanged:: 2.6
         L'argument ``$confirmMessage`` a été dépréciée. Utilisez la clé
