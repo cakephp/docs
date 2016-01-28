@@ -12,6 +12,12 @@ Extending Bake
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+
+.. _creating-a-bake-theme:
+
+Creating a Bake Theme
+---------------------
+
 .. meta::
     :title lang=ja: Extending Bake
     :keywords lang=ja: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags
