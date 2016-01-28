@@ -1601,10 +1601,13 @@ Créer des Boutons Indépendants et des liens POST
     Crée un lien HTML, mais accède à l'Url en utilisant la méthode POST.
     Requiert que JavaScript soit autorisé dans votre navigateur.
 
-    Cette méthode crée un élément ``<form>``. Donc n'utilisez pas cette
-    méthode dans un formulaire existant. En remplacement vous devriez
-    ajouter un bouton submit en utilisant
-    :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+    Cette méthode crée un élément ``<form>``. Si vous souhaitez utiliser cette
+    méthode à l'intérieur d'un formulaire existant, vous devez utiliser l'option
+    ``block`` pour que le nouveau formulaire soit défini en un :ref:`view block <view-blocks>` qui peut être affiché en dehors du formulaire principal.
+
+    Si vous cherchez un bouton pour soumettre votre formulaire, alors vous
+    devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
+    ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
 
 Personnaliser les Templates que FormHelper Utilise
 ==================================================
