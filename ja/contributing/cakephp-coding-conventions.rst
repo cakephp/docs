@@ -389,7 +389,7 @@ null
     ヌル型。通常、他の型と併用します。
 array
     配列型。
-obuject
+object
     オブジェクト型。可能であれば定義されたクラス名が使用されるべきです。
 resource
     リソース型。(例えば、 mysql\_connect() の戻り値)
