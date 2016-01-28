@@ -1,8 +1,5 @@
-..
-  Number
-
-ナンバー
-########
+Number
+######
 
 .. php:namespace:: Cake\I18n
 
@@ -47,7 +44,7 @@
   All of these functions return the formatted number; they do not
   automatically echo the output into the view.
 
-これらの全ての機能は、整形された数値を返します。これらは自動的にビューに出力を表示しません。
+以下の全ての機能は、整形された数値を返します。これらは自動的にビューに出力を表示しません。
 
 ..
   Formatting Currency Values
@@ -65,7 +62,7 @@
     // Called as Number
 
 このメソッドは、共通通貨フォーマット（ユーロ、英ポンド、米ドル）で数値を表示するために使用されます。
-ビュー内で次のように使います::
+ビュー内で次のように使います。::
 
     // NumberHelperとしてコール
     echo $this->Number->currency($value, $currency);
@@ -81,8 +78,8 @@
 ..
   | $currency           | 1234.56, formatted by currency type                |
 
-一番目のパラメータ、 ``$value`` は、合計金額をあらわす浮動小数点数でなければいけません。
-二番目のパラメータは、事前定義された通貨フォーマット方式を選択するための文字列です:
+1つ目のパラメータ ``$value`` は、合計金額をあらわす浮動小数点数でなければいけません。
+2つ目のパラメータは、あらかじめ定義された通貨フォーマット方式を選択するための文字列です。:
 
 +---------------------+----------------------------------------------------+
 | $currency           | 通貨の種類によってフォーマットされた 1234.56       |
@@ -98,8 +95,8 @@
   The third parameter is an array of options for further defining the
   output. The following options are available:
 
-三番目のパラメータは、出力を定義するためのオプションの配列です。
-次のオプションが用意されています:
+3つ目のパラメータは、出力を定義するためのオプションの配列です。
+次のオプションが用意されています。:
 
 ..
   +---------------------+----------------------------------------------------+
@@ -181,10 +178,10 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
   it will clear the currently stored value. By default, it will retrieve the
   ``intl.default_locale`` if set and 'en_US' if not.
 
-デフォルト通貨のためのsetter/getterです。これは、常に :php:meth:`Cake\\I18n\\Number::currency()` に通貨を渡したり、
+デフォルト通貨のためのsetter/getterです。これによって、常に :php:meth:`Cake\\I18n\\Number::currency()` に通貨を渡したり、
 他のデフォルトを設定することによって全ての通貨の出力を変更したりする必要がなくなります。
 ``$currency`` に ``false`` が設定された場合、現在格納されている値をクリアします。
-``$currency`` が設定されていない場合、デフォルトでは、 ``intl.default_locale`` の値、設定されていない場合 'en_US' を設定します。
+デフォルトでは、設定されていれば ``intl.default_locale`` を取得し、そうでない場合は 'en_US' を設定します。
 
 ..
   Formatting Floating Point Numbers
@@ -281,7 +278,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
     // Called as NumberHelper
     // Called as Number
 
-このメソッドはデータサイズを人が読める形式にフォーマットします。
+このメソッドはデータサイズを人が読める形式に整形します。
 これは、バイト数をKB、MB、GB、およびTBへ変換するための近道を提供します。
 サイズは、データのサイズに応じて小数点以下二桁の精度で表示されます。(例 大きいサイズの表現)::
 
@@ -314,8 +311,8 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
     // Called as NumberHelper
     // Called as Number
 
-このメソッドは、ビューで使うための数値のフォーマットより、
-もっと自由に制御できます。(およびその他のNumberHelperのほとんどのメソッドが使用できます。)
+このメソッドは、ビューで使うための数値の整形をより制御しやすくします。
+(および、メインのメソッドとして、NumberHelperのその他のほとんどのメソッドから使用されます。)
 このメソッドは以下のように使用します::
 
     // NumberHelperとしてコール
@@ -330,19 +327,23 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
   1236.334 would output as 1,236. Note that the default precision is
   zero decimal places.
 
-``$value`` パラメーターは、フォーマットして出力したい数値です。
-``$options`` が与えられないと、1236.334という数値は1,236として出力されるでしょう。
+``$value`` パラメータは、出力のために整形しようとしている数値です。
+``$options`` が未指定の場合、1236.334という数値は1,236として出力されるでしょう。
 デフォルトの制度は1の位であることに注意してください。
 
 ..
   The ``$options`` parameter is where the real magic for this method
   resides.
 
-``$options`` パラメーターはこのメソッド
+``$options`` パラメーターはこのメソッドに存在している手品のタネの在りかです。
 
+..
 -  If you pass an integer then this becomes the amount of precision
    or places for the function.
 -  If you pass an associated array, you can use the following keys:
+
+- もし整数を渡した場合、精度もしくは小数点以下の桁数になります。
+- もし連想配列を渡した場合、以下のキーが使用できます。:
 
 ..
   +---------------------+----------------------------------------------------+
@@ -381,58 +382,79 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 | after               | レンダリングされた数値の後に表示されるテキスト。   |
 +---------------------+----------------------------------------------------+
 
-Example::
-
+..
+  Example::
+..
     // Called as NumberHelper
-    echo $this->Number->format('123456.7890', [
-        'places' => 2,
-        'before' => '¥ ',
-        'after' => ' !'
-    ]);
     // Output '¥ 123,456.79 !'
-
-    echo $this->Number->format('123456.7890', [
-        'locale' => 'fr_FR'
-    ]);
     // Output '123 456,79 !'
-
     // Called as Number
+    // Output '¥ 123,456.79 !'
+    // Output '123 456,79 !'
+
+例::
+
+    // NumberHelperとしてコール
+    echo $this->Number->format('123456.7890', [
+        'places' => 2,
+        'before' => '¥ ',
+        'after' => ' !'
+    ]);
+    // 出力 '¥ 123,456.79 !'
+
+    echo $this->Number->format('123456.7890', [
+        'locale' => 'fr_FR'
+    ]);
+    // 出力 '123 456,79 !'
+
+    // Numberとしてコール
     echo Number::format('123456.7890', [
         'places' => 2,
         'before' => '¥ ',
         'after' => ' !'
     ]);
-    // Output '¥ 123,456.79 !'
+    // 出力 '¥ 123,456.79 !'
 
     echo Number::format('123456.7890', [
         'locale' => 'fr_FR'
     ]);
-    // Output '123 456,79 !'
+    // 出力 '123 456,79 !'
 
 .. php:method:: ordinal(mixed $value, array $options = [])
 
-This method will output an ordinal number.
+..
+  This method will output an ordinal number.
 
-Examples::
+このメソッドは序数を出力します。
+
+..
+  Examples::
+..
+    // Output '1st'
+    // Output '2nd'
+    // Output '2e'
+    // Output '410th'
+
+例::
 
     echo Number::ordinal(1);
-    // Output '1st'
+    // 出力 '1st'
 
     echo Number::ordinal(2);
-    // Output '2nd'
+    // 出力 '2nd'
 
     echo Number::ordinal(2, [
         'locale' => 'fr_FR'
     ]);
-    // Output '2e'
+    // 出力 '2e'
 
     echo Number::ordinal(410);
-    // Output '410th'
+    // 出力 '410th'
 
 ..
   Format Differences
 
-フォーマットの差
+差分フォーマット
 ================
 
 .. php:method:: formatDelta(mixed $value, array $options = [])
@@ -443,7 +465,7 @@ Examples::
     // Called as NumberHelper
     // Called as Number
 
-このメソッドは、符号付き整数としての値の差を表示します。::
+このメソッドは、符号付きの数として値の差分を表示します。::
 
     // NumberHelperとしてコール
     $this->Number->formatDelta($value, $options);
@@ -457,8 +479,8 @@ Examples::
   1236.334 would output as 1,236. Note that the default precision is
   zero decimal places.
 
-``$value`` パラメーターは、フォーマットして出力したい数値です。
-``$options`` が与えられないと、1236.334という数値は1,236として出力されるでしょう。
+``$value`` パラメーターは、出力のために整形しようとしている数値です。
+``$options`` が未指定の場合、1236.334という数値は1,236として出力されるでしょう。
 デフォルトの制度は1の位であることに注意してください。
 
 ..
@@ -549,6 +571,6 @@ Examples::
     ]);
 
 .. meta::
-:title lang=en: NumberHelper
-    :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
-        :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers
+    :title lang=ja: NumberHelper
+    :description lang=ja: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
+    :keywords lang=ja: number helper,currency,number format,number precision,format file size,format numbers
