@@ -65,6 +65,8 @@ Model
 - Magic finders now support custom finder types. For example if your model
   implements a ``find('published')`` finder, you can now use ``findPublishedBy``
   and ``findPublishedByAuthorId`` functions through the magic method interface.
+- Find conditions can now use ``NOT IN`` operator in conditions. This allows
+  find expressions to be more forwards compatible with 3.x.
 
 Validation
 ==========
