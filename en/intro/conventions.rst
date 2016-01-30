@@ -91,9 +91,15 @@ Table names corresponding to CakePHP models are plural and underscored. The
 underlying tables for the above mentioned models would be ``people``,
 ``big_people``, and ``really_big_people``, respectively.
 
-You can use the utility library :php:class:`Cake\\Utility\\Inflector` to check
-the singular/plural of words. See the :doc:`/core-libraries/inflector` for more
-information.
+The convention is to use english words for table and column names. If you use
+words in your language, CakePHP might not be able to process the right
+inflections (from singular to plural and vice-versa).
+For some reason, you might need to add your own language rules for some words
+and for that, you can use the utility class
+:php:class:`Cake\\Utility\\Inflector`. Besides defining those custom inflection
+rules, this class will also allows you to check that CakePHP understand your
+custom syntax for plurals and singulars words. See the documentation about
+:doc:`/core-libraries/inflector` for more information.
 
 Field names with two or more words are underscored: first\_name.
 

@@ -95,10 +95,16 @@ le caractère souligné (underscore). Les tables correspondantes aux models
 mentionnés ci-dessus seront donc respectivement : ``people``, ``big_people`` et
 ``really_big_people``.
 
-Note des traducteurs francophones : seul le dernier mot est au pluriel et tous
-les pluriels français ne seront pas compris par CakePHP sans lui indiquer
-précisément (par exemple cheval/chevaux). Pour vous assurer de la syntaxe des mots pluriels et singuliers, vous pouvez utiliser la bibliothèque utilitaire
-:php:class:`Inflector`. Voir la documentation sur
+La convention est d'utiliser des mots anglais pour les noms de colonne et de
+table. Si vous utilisez des mots dans votre langue, CakePHP ne va pas pouvoir
+convertir correctement les bonnes inflections (du singulier vers le pluriel et
+vice-versa).
+Dans certains cas, vous pouvez ajouter vos propres règles pour des mots de votre
+langue, et pour cela vous pouvez utiliser la classe utilitaire
+:php:class:`Cake\\Utility\\Inflector`. En plus de définir ces règles
+d'inflections personnalisées, cette classe va aussi vous permettre de vérifier
+que CakePHP comprend votre syntaxe personnalisée pour les mots pluriels et
+singuliers. Vous pouvez consulter la documentation sur
 :doc:`/core-libraries/inflector` pour plus d'informations.
 
 Les noms des champs avec deux mots ou plus doivent être avec des underscores
