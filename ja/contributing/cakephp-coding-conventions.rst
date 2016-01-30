@@ -3,7 +3,8 @@
 
 CakePHP の開発者は以下のコーディング規約を使います。
 
-その他の CakePHP のコンポーネント(訳注:原文 *CakeIngredients* 、ケーキの材料のこと)の開発でも同じ規約に従うことが推奨されます。
+その他の CakePHP プラグイン等 (訳注:原文 *CakeIngredients* 、ケーキの材料のこと)
+の開発でも同じ規約に従うことが推奨されます。
 
 `CakePHP Code Sniffer
 <https://github.com/cakephp/cakephp-codesniffer>`_ を使って、
@@ -68,13 +69,13 @@ CakePHP の開発者は以下のコーディング規約を使います。
 行の長さ
 =========
 
-コードが読みやすいように約 100 文字までに行の長さを保つことを推奨します。
-行の長さは、120 文字以内でなければなりません。
+コードを読みやすくするために、だいたい 100 文字程度の長さで改行することを推奨します。
+行を 120 文字より長くしてはいけません。
 
 要約すると:
 
-* 100 文字が優し目の上限値。
-* 120 文字が厳し目の上限値。
+* 100 文字がソフトな制限
+* 120 文字がハードな制限
 
 制御構造
 =========
@@ -318,7 +319,7 @@ CakePHP の開発者は以下のコーディング規約を使います。
 含めることができます:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   ``@version <vector> <description>`` を使用して、 ``version`` と ``description`` は必須です。
+   ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description`` は必須です。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@property <http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html>`_
@@ -379,7 +380,7 @@ CakePHP の開発者は以下のコーディング規約を使います。
 含めることができます:
 
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   ``@version <vector> <description>`` を使用して、 ``version`` と ``description`` は必須です。
+   ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description`` は必須です。
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
 *  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
 *  `@param <http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html>`_
@@ -423,9 +424,9 @@ callable
 
     int|bool
 
-２つ以上の型の場合は、 ``mixed`` を使用することが最も一般的です。
+3つ以上の型の場合は、 ``mixed`` を使うほうが最良です。
 
-オブジェクト自身が戻り値の場合、例えば連鎖させる場合、代わりに ``$this`` を使うべきです::
+チェーンのように自分自身のオブジェクトを返すような場合は代わりに ``$this`` を使ってください::
 
     /**
      * Foo function.
@@ -457,7 +458,7 @@ callable
 PHP タグ
 ========
 
-常にショートタグ(``<? ?>``)の代わりに、ロングタグ(``<?php ?>``)を使ってください。
+常にショートタグ (``<? ?>``) の代わりに、ロングタグ (``<?php ?>``) を使ってください。
 
 命名規約
 ========
@@ -531,7 +532,7 @@ private は、テストの実施もより難しくなります。
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-"example.com" ドメインはこの(:rfc:`2606` をみてください)為に予約されており、
+"example.com" ドメインはこの (:rfc:`2606` を見てください) 為に予約されており、
 ドキュメント内の説明や例として使うことが推奨されています。
 
 ファイル
