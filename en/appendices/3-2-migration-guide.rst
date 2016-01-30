@@ -92,26 +92,54 @@ In order to make setting headers related to Cross Origin Requests (CORS) easier,
 a new ``CorsBuilder`` has been added. This class lets you define CORS related
 headers with a fluent interface. See :ref:`cors-headers` for more information.
 
-ORM
----
+RedirectRoute raises an exception on redirect
+---------------------------------------------
+
+``Router::redirect()`` now raises ``Cake\Network\Routing\RedirectException``
+when a redirect condition is reached. This exception is caught by the routing
+filter and converted into a response. This replaces calls to
+``response->send()`` and allows dispatcher filters to interact with redirect
+responses.
+
+
+ORM Improvements
+----------------
 
 * Containing the same association multiple times now works as expected, and the
   query builder functions are now stacked.
+* Function expressions now correctly cast their results. This means that
+  expressions like ``$query->func()->current_date()`` will return datetime
+  instances.
+* Field data that fails validation can now be accessed in entities via the
+  ``invalid()`` method.
+* Entity accessor method lookups are now cached and perform better.
 
 
-Shell
------
+Improved Validator API
+----------------------
+
+The Validator object has a number of new methods that make building validators
+less verbose. For example adding validation rules to a username field can now
+look like::
+
+    $validator->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
+
+Console Improvements
+--------------------
 
 * ``Shell::info()``, ``Shell::warn()`` and ``Shell::success()`` were added.
   These helper methods make using commonly used styling simpler.
 * ``Cake\Console\Exception\StopException`` was added.
 * ``Shell::abort()`` was added to replace ``error()``.
 
-exit() no longer called by _stop() and error()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+StopException Added
+-------------------
 
 ``Shell::_stop()`` and ``Shell::error()`` no longer call ``exit()``. Instead
-they raise ``Cake\\Console\\Exception\\StopException``. If your shells/tasks are
+they raise ``Cake\Console\Exception\StopException``. If your shells/tasks are
 catching ``\Exception`` where these methods would have been called, those catch
 blocks will need to be updated so they don't catch the ``StopException``. By not
 calling ``exit()`` testing shells should be easier and require fewer mocks.
