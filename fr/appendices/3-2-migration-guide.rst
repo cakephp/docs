@@ -77,8 +77,8 @@ Cross-site (Cross Origin Requests = CORS), un nouveau ``CorsBuilder`` a été
 ajouté. Cette classe vous laisse définir les en-têtes liés au CORS avec une
 interface simple. Consultez :ref:`cors-headers` pour plus d'informations.
 
-RedirectRoute lance une exception en case de redirect
------------------------------------------------------
+RedirectRoute lance une Exception en cas de Redirect
+----------------------------------------------------
 
 ``Router::redirect()`` lance maintenant une
 ``Cake\Network\Routing\RedirectException`` quand une condition de redirect
@@ -92,12 +92,12 @@ Améliorations de l'ORM
 * Faire un contain avec la même association plusieurs fois fonctionne maintenant
   de la façon espérée, et les fonctions du constructeur de requête sont
   maintenant empilées.
-* Les expression de fonction cast maintenant correctement leurs résultats. Ceci
-  signifie que les expressions comme ``$query->func()->current_date()`` vont
-  retourner les instances de datetime.
+* Les expression de fonctions transforment maintenant correctement leurs
+  résultats dans le type attendu. Ceci signifie que les expressions comme
+  ``$query->func()->current_date()`` vont retourner des instances de datetime.
 * La donnée du champ qui échoue pendant la validation peut maintenant être
   accessible dans les entities avec la méthode ``invalid()``.
-* Les recherches avec la méthode d'accesseur de l'entity sont maintenant mis
+* Les recherches avec la méthode d'accesseur de l'entity sont maintenant mises
   en cache et ont une meilleur performance.
 
 API du Validator Amélioré
