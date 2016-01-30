@@ -1,13 +1,14 @@
 コーディング規約
 ################
 
-Cakeの開発者はコーディング規約として下記のルールに加え、 `PSR-2 coding style guide
+CakePHP の開発者はコーディング規約として下記のルールに加え、 `PSR-2 coding style guide
 <http://www.php-fig.org/psr/psr-2/>`_ にも従って頂くことになります。
 
-その他のCake関連のプラグイン等(訳注:原文 *CakeIngredients* 、ケーキの材料のこと)の開発でも同じ規約に従うことが推奨されます。
+その他の CakePHP プラグイン等 (訳注:原文 *CakeIngredients* 、ケーキの材料のこと)
+の開発でも同じ規約に従うことが推奨されます。
 
 `CakePHP Code Sniffer
-<https://github.com/cakephp/cakephp-codesniffer>`_ を使って、\
+<https://github.com/cakephp/cakephp-codesniffer>`_ を使って、
 コードが規約に沿っているかどうかをチェックすることができます。
 
 新しい機能の追加
@@ -71,7 +72,6 @@ Cakeの開発者はコーディング規約として下記のルールに加え�
 
 * 100 文字がソフトな制限
 * 120 文字がハードな制限
-
 
 制御構造
 ========
@@ -224,7 +224,7 @@ Cakeの開発者はコーディング規約として下記のルールに加え�
 ------------------
 
 オブジェクトや配列を期待する引数はタイプヒンティングを指定することができます。
-しかしながらタイプヒンティングはコストフリーではないので、publicメソッドにだけ指定します::
+しかしながらタイプヒンティングはコストフリーではないので、public メソッドにだけ指定します::
 
     /**
      * メソッドの説明。
@@ -283,7 +283,7 @@ Cakeの開発者はコーディング規約として下記のルールに加え�
 *  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
 *  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
 *  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
-   Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
+   ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description`` は必須です。
 *  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
 *  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
 *  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
@@ -292,23 +292,23 @@ Cakeの開発者はコーディング規約として下記のルールに加え�
 *  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
 *  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
-PhpDocタグはJavaのJavaDocタグによく似ています。
+PhpDoc タグは Java の JavaDoc タグによく似ています。
 タグはドキュメントブロックの行の最初のもののみ処理されます。
 例を挙げます::
 
     /**
      * タグの例。
      *
-     * @author このタグは解析されますが、この@versionは無視されます
+     * @author このタグは解析されますが、この @version は無視されます
      * @version 1.0 このタグも解析されます
      */
 
 ::
 
     /**
-     * インラインphpDocタグの例。
+     * インライン phpDoc タグの例。
      *
-     * この関数は世界征服のためにfoo()を使って身を粉にして働きます。
+     * この関数は世界征服のために foo() を使って身を粉にして働きます。
      *
      * @return void
      */
@@ -330,7 +330,7 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 変数の型
 --------------
 
-Docブロック(DocBlocks) で使う変数の型:
+ドキュメントブロックで使う変数の型:
 
 型名
     説明
@@ -391,10 +391,10 @@ callable
 `require\_once <http://php.net/require_once>`_
 関数のみを常に使用してください。
 
-PHPタグ
-=======
+PHP タグ
+========
 
-常にショートタグ(``<? ?>``)の代わりに、ロングタグ(``<?php ?>``)を使ってください。
+常にショートタグ (``<? ?>``) の代わりに、ロングタグ (``<?php ?>``) を使ってください。
 テンプレートファイル (**.ctp**) の中では適宜、ショート Echo を使ってください。
 
 ショート Echo
@@ -451,7 +451,7 @@ ini ディレクティブの ``short_open_tag`` にかかわらず有効とな�
 --------------------------------
 
 メソッドと変数には、PHP5 の private と protected キーワードを指定してください。
-加えて、protected なメソッドまたは変数の名前は単一のアンダースコア(``_``)から始めます。
+加えて、非 public なメソッドまたは変数の名前は単一のアンダースコア (``_``) から始めます。
 例::
 
     class A
@@ -460,38 +460,29 @@ ini ディレクティブの ``short_open_tag`` にかかわらず有効とな�
 
         protected function _iAmAProtectedMethod()
         {
-           /*...*/
+           /* ... */
         }
-    }
 
-privateなメソッドまたは変数の名前は二つのアンダースコア(``__``)から始めます。
-例::
+        private $_iAmAPrivateVariable;
 
-    class A
-    {
-        private $__iAmAPrivateVariable;
-
-        private function __iAmAPrivateMethod()
+        private function _iAmAPrivateMethod()
         {
-            /*...*/
+            /* ... */
         }
     }
-
-private なメソッドまたは変数を避けて、protected を使えないか検討してください。
-後者はサブクラスからアクセスや修正が可能です。一方で、private では拡張や再利用ができません。
-private は、テストの実施もより難しくなります。
 
 アドレスの例示
 --------------
 
-全てのURLとメールアドレスの例には、「example.com」、「example.org」、「example.net」を使用してください。
-例を挙げます:
+全ての URL とメールアドレスの例には、「example.com」、「example.org」、
+「example.net」を使用してください。例を挙げます:
 
 *  Eメール: someone@example.com
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-"example.com" ドメインはこの(:rfc:`2606` をみてください)為に予約されており、ドキュメント内の説明や例として使うことが推奨されています。
+"example.com" ドメインはこの (:rfc:`2606` を見てください) 為に予約されており、
+ドキュメント内の説明や例として使うことが推奨されています。
 
 ファイル
 --------
@@ -509,19 +500,20 @@ private は、テストの実施もより難しくなります。
 型
     説明
 (bool)
-        booleanにキャスト。
+        boolean にキャスト。
 (int)
-        integerにキャスト。
+        integer にキャスト。
 (float)
-        floatにキャスト。
+        float にキャスト。
 (string)
-        stringにキャスト。
+        string にキャスト。
 (array)
-        arrayにキャスト。
+        array にキャスト。
 (object)
-        objectにキャスト。
+        object にキャスト。
 
-できるなら ``intval($var)`` よりも ``(int)$var`` を、``floatval($var)`` よりも ``(float)$var`` を使ってください。
+できるなら ``intval($var)`` よりも ``(int)$var`` を、
+``floatval($var)`` よりも ``(float)$var`` を使ってください。
 
 定数
 ----
