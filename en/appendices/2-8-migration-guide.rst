@@ -14,8 +14,10 @@ Deprecations
 
 * The ``action`` option in ``FormHelper::create()`` has been deprecated. This is
   a backport from 3.x.
-  Note that this now makes the ``action`` key of an array URL consistently respected for the generation of the DOM ID.
-  If you used the deprecated key you want to compare the generated ID for the form before and after.
+  Note that this now makes the ``action`` key of an array URL consistently
+  respected for the generation of the DOM ID.
+  If you used the deprecated key you want to compare the generated ID for the
+  form before and after.
 
 Error Handling
 ==============
@@ -79,5 +81,6 @@ View
 FormHelper
 ----------
 
-``'url' => false`` is now supported for ``FormHelper::create()`` to allow form tags
-to be created without HTML ``action`` attribute. This is a backport fron 3.x.
+``'url' => false`` is now supported for ``FormHelper::create()`` to allow form
+tags to be created without HTML ``action`` attribute. This is a backport from
+3.x.

@@ -66,6 +66,9 @@ Model
   Par exemple si votre model implémente un finder ``find('published')``, vous
   pouvez maintenant utiliser les fonctions ``findPublishedBy`` et
   ``findPublishedByAuthorId`` avec l'interface de la méthode magique.
+- Les conditions du find peuvent maintenant utiliser les opérateurs ``IN`` et
+  ``NOT IN``. Ceci permet aux expressions du find d'avoir une meilleur
+  compatibilité avec la version 3.x.
 
 Validation
 ==========
