@@ -151,10 +151,10 @@ notation, or using get() and set().
 
 .. _entities-virtual-properties:
 
-Creating Virtual Properties
----------------------------
+Creating Virtual Fields
+-----------------------
 
-By defining accessors you can provide access to properties that do not
+By defining accessors you can provide access to fields/properties that do not
 actually exist. For example if your users table has ``first_name`` and
 ``last_name`` you could create a method for the full name::
 
@@ -173,12 +173,12 @@ actually exist. For example if your users table has ``first_name`` and
 
     }
 
-You can access virtual properties as if they existed on the entity. The property
+You can access virtual fields as if they existed on the entity. The property
 name will be the lower case and underscored version of the method::
 
     echo $user->full_name;
 
-Do bear in mind that virtual properties cannot be used in finds.
+Do bear in mind that virtual fields cannot be used in finds.
 
 
 Checking if an Entity Has Been Modified
