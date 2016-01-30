@@ -38,11 +38,32 @@ CakePHP の開発者は以下のコーディング規約を使います。
     $booleanVariable = true;
     $stringVariable = '大鹿';
     if ($booleanVariable) {
-        echo '真偽値はtrueです';
+        echo '真偽値は true です';
         if ($stringVariable === '大鹿') {
             echo '大鹿に遭遇しました';
         }
     }
+
+あなたが、複数行にわたる関数呼び出しを使用している場合、以下のガイドラインに従ってください。
+
+*  複数行にわたる関数呼び出しのカッコを開く時には、行末になければなりません。
+*  複数行にわたる関数呼び出しの中の１行ごとに１引数のみ許可します。
+*  複数行にわたる関数呼び出しの閉じカッコは、１行にしなければなりません。
+
+例として、以下の形式が使用されていた場合、 ::
+
+    $matches = array_intersect_key($this->_listeners,
+                    array_flip(preg_grep($matchPattern,
+                        array_keys($this->_listeners), 0)));
+
+代わりに以下を使用してください。 ::
+
+    $matches = array_intersect_key(
+        $this->_listeners,
+        array_flip(
+            preg_grep($matchPattern, array_keys($this->_listeners), 0)
+        )
+    );
 
 行の長さ
 =========
