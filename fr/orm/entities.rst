@@ -163,13 +163,13 @@ get() et set().
 
 .. _entities-virtual-properties:
 
-Créer des Propriétés Virtuelles
--------------------------------
+Créer des Champs Virtuels
+-------------------------
 
-En définissant des accesseurs, vous pouvez fournir un accès aux propriétés
-qui n'existent pas réellement. Par exemple si votre table users a
-``first_name`` et ``last_name``, vous pouvez créer une méthode pour le nom
-complet::
+En définissant des accesseurs, vous pouvez fournir un accès aux
+champs/propriétés qui n'existent pas réellement. Par exemple si votre table
+users a ``first_name`` et ``last_name``, vous pouvez créer une méthode pour le
+nom complet::
 
     namespace App\Model\Entity;
 
@@ -186,14 +186,13 @@ complet::
 
     }
 
-Vous pouvez accéder aux propriétés virtuelles puisqu'elles existent sur
-l'entity. Le nom de la propriété sera la version en minuscule et en underscore
-de la méthode::
+Vous pouvez accéder aux champs virtuels puisqu'ils existent sur l'entity. Le nom
+de la propriété sera la version en minuscule et en underscore de la méthode::
 
     echo $user->full_name;
 
-Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
-les finds.
+Souvenez-vous que les champs virtuels ne peuvent pas être utilisées dans les
+finds.
 
 Vérifier si une Entity a été Modifiée
 =====================================

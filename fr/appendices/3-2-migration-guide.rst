@@ -77,31 +77,54 @@ Cross-site (Cross Origin Requests = CORS), un nouveau ``CorsBuilder`` a été
 ajouté. Cette classe vous laisse définir les en-têtes liés au CORS avec une
 interface simple. Consultez :ref:`cors-headers` pour plus d'informations.
 
-ORM
-===
+RedirectRoute lance une exception en case de redirect
+-----------------------------------------------------
+
+``Router::redirect()`` lance maintenant une
+``Cake\Network\Routing\RedirectException`` quand une condition de redirect
+est atteinte. Cette exception est récupérée par le filtre de routing et
+convertie en une réponse. Ceci remplace les appels à ``response->send()`` et
+permet aux filtres du dispatcher d'intéragir avec les réponses du redirect.
+
+Améliorations de l'ORM
+----------------------
 
 * Faire un contain avec la même association plusieurs fois fonctionne maintenant
   de la façon espérée, et les fonctions du constructeur de requête sont
   maintenant empilées.
+* Les expression de fonction cast maintenant correctement leurs résultats. Ceci
+  signifie que les expressions comme ``$query->func()->current_date()`` vont
+  retourner les instances de datetime.
+* La donnée du champ qui échoue pendant la validation peut maintenant être
+  accessible dans les entities avec la méthode ``invalid()``.
+* Les recherches avec la méthode d'accesseur de l'entity sont maintenant mis
+  en cache et ont une meilleur performance.
 
+API du Validator Amélioré
+-------------------------
 
-Shell
-=====
+L'objet Validator a quelques nouvelles méthodes qui rendent la construction
+des validateurs moins verbeux. Par exemple, ajouter les règles de validation
+pour un champ de nom d'utilisateur peut maintenant ressembler à ceci::
+
+    $validator->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
+
+Améliorations de la Console
+---------------------------
 
 * ``Shell::info()``, ``Shell::warn()`` et ``Shell::success()`` ont été ajoutées.
   Ces méthodes de helper facilitent l'utilisation des styles communément
   utilisés.
 * ``Cake\Console\Exception\StopException`` ont été ajoutées.
 * ``Shell::abort()`` a été ajoutée pour remplacer ``error()``.
-* ``Shell::error()`` est dépréciée car son nom n'indique pas clairement qu'elle
-  affiche les messages et arrête l'exécution. Utilisez ``Shell::abort()`` à la
-  place.
 
-exit() no longer called by _stop() and error()
-----------------------------------------------
+StopException Ajoutée
+---------------------
 
-``Shell::_stop()`` et ``Shell::error()`` n'appellent plus ``exit()``. A la place,
-elles lancent une ``Cake\\Console\\Exception\\StopException``. Si vos
+``Shell::_stop()`` et ``Shell::error()`` n'appellent plus ``exit()``. A la
+place, elles lancent une ``Cake\Console\Exception\StopException``. Si vos
 shells/tasks attrapent les ``\Exception`` là où sont lancées ces méthodes, vous
 devrez mettre à jour ces blocs de code pour qu'ils n'attrapent pas les
 ``StopException``. En évitant d'utiliser  ``exit()``, tester vos shells sera
@@ -113,7 +136,8 @@ View
 Helpers
 -------
 
-Les helpers peuvent maintenant avoir une méthode hook ``initialize(array $config)`` comme tous les autres types de classe.
+Les helpers peuvent maintenant avoir une méthode hook
+``initialize(array $config)`` comme tous les autres types de classe.
 
 FormHelper
 ----------

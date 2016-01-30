@@ -1,14 +1,14 @@
 3.2 Migration Guide
 ###################
 
-CakePHP 3.2 is an API compatible upgrade from 3.1. This page outlines
-the changes and improvements made in 3.2.
+CakePHP 3.2 is an API compatible upgrade from 3.1. This page outlines the
+changes and improvements made in 3.2.
 
 Minimum PHP 5.5 Required
 ========================
 
-CakePHP 3.2 requires at least PHP 5.5.9. By adopting PHP 5.5 we can provide better
-Date and Time libraries and remove dependencies on password compatibility
+CakePHP 3.2 requires at least PHP 5.5.9. By adopting PHP 5.5 we can provide
+better Date and Time libraries and remove dependencies on password compatibility
 libraries.
 
 Deprecations
@@ -21,7 +21,8 @@ replaced with better solutions. Deprecated features will not be removed until
 * ``Shell::error()`` is deprecated because its name does not clearly indicate
   that it both outputs a message and stops execution. Use ``Shell::abort()``
   instead.
-* ``Cake\\Database\\Expression\QueryExpression::type()`` is deprecated. Use ``tieWith()`` instead.
+* ``Cake\\Database\\Expression\QueryExpression::type()`` is deprecated. Use
+  ``tieWith()`` instead.
 * ``Cake\\Database\\Type\\DateTimeType::$dateTimeClass`` is deprecated.  Use
   DateTimeType::useMutable() or DateTimeType::useImmutable() instead.
 * ``Cake\\Database\\Type\\DateType::$dateTimeClass`` is deprecated.  Use
@@ -53,9 +54,9 @@ New Enhancements
 Carbon Replaced with Chronos
 ----------------------------
 
-The Carbon library has been replaced with :doc:`cakephp/chronos </chronos>`. This
-new library is a fork of Carbon with no additional dependencies. It also offer
-a calendar date object, and immutable versions of both date and datetime
+The Carbon library has been replaced with :doc:`cakephp/chronos </chronos>`.
+This new library is a fork of Carbon with no additional dependencies. It also
+offer a calendar date object, and immutable versions of both date and datetime
 objects.
 
 New Date Object
@@ -147,8 +148,8 @@ calling ``exit()`` testing shells should be easier and require fewer mocks.
 Helper initialize() added
 -------------------------
 
-Helpers can now implement an ``initialize(array $config)`` hook method like other
-class types.
+Helpers can now implement an ``initialize(array $config)`` hook method like
+other class types.
 
 Fatal Error Memory Limit Handling
 ---------------------------------

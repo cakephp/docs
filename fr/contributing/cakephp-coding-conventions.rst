@@ -485,37 +485,25 @@ Visibilité des Membres
 ----------------------
 
 Utilisez les mots-clés private et protected de PHP5 pour les méthodes et
-variables. De plus les noms des méthodes et variables protégées commencent
-avec un underscore simple (``_``). Exemple::
+variables. De plus les noms des méthodes et variables qui ne sont pas publics
+commencent par un underscore simple (``_``). Exemple::
 
     class A
     {
-        protected $_jeSuisUneVariableProtegee;
+        protected $_iAmAProtectedVariable;
 
-        protected function _jeSuisUnemethodeProtegee()
+        protected function _iAmAProtectedMethod()
         {
-           /*...*/
+           /* ... */
+        }
+
+        private $_iAmAPrivateVariable;
+
+        private function _iAmAPrivateMethod()
+        {
+            /* ... */
         }
     }
-
-Les noms de méthodes et variables privées commencent avec un underscore double
-(``__``). Exemple::
-
-    class A
-    {
-        private $__iAmAPrivateVariable;
-
-        private function __iAmAPrivateMethod()
-        {
-            /*...*/
-        }
-    }
-
-Essayez cependant d'éviter les méthodes et variables privées et privilégiez
-plutôt les variables protégées.
-Ainsi elles pourront être accessibles ou modifiées par les sous-classes, alors
-que celles privées empêchent l'extension ou leur réutilisation. La visibilité
-privée rend aussi le test beaucoup plus difficile.
 
 Exemple d'Adresses
 ------------------
