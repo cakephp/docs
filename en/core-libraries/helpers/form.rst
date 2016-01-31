@@ -909,6 +909,7 @@ Options for select, checkbox and  radio inputs
         </select>:<select name="data[Contact][date][min]" id="ContactDateMin">
         <option value="">MINUTE</option>
         <option value="00">00</option>
+        // ..
         <option value="59">59</option>
     </select> <select name="data[Contact][date][meridian]" id="ContactDateMeridian">
         <option value="am">am</option>
