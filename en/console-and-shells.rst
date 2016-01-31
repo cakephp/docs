@@ -219,7 +219,7 @@ Shell Tasks
 
 There will be times when building more advanced console applications, you'll want
 to compose functionality into re-usable classes that can be shared across many shells.
-Tasks allow you to extract commands into classes. For example the ``bake`` is made
+Tasks allow you to extract commands into classes. For example the ``bake`` command is made
 almost entirely of tasks. You define a tasks for a shell using the ``$tasks`` property::
 
     class UserShell extends Shell
@@ -358,7 +358,7 @@ the CakePHP console welcome message from being displayed on dispatched shells.
 Getting User Input
 ==================
 
-.. php:method:: in($question, $choices = null, $defaut = null)
+.. php:method:: in($question, $choices = null, $default = null)
 
 When building interactive console applications you'll need to get user input.
 CakePHP provides an easy way to do this::
@@ -508,21 +508,21 @@ colours are enabled, the following would be rendered as blinking magenta text
 styles you can use the following colours for the ``text`` and ``background`` attributes:
 
 * black
-* red
-* green
-* yellow
 * blue
-* magenta
 * cyan
+* green
+* magenta
+* red
 * white
+* yellow
 
 You can also use the following options as boolean switches, setting them to a
 truthy value enables them.
 
-* bold
-* underline
 * blink
+* bold
 * reverse
+* underline
 
 Adding a style makes it available on all instances of ConsoleOutput as well,
 so you don't have to redeclare styles for both stdout and stderr objects.
