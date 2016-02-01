@@ -888,11 +888,54 @@ Les options pour  select, checkbox et inputs radio
 
   .. note::
 
-      Si vous avez besoin de définir la valeur par défaut d'un champ
-      password à vide, utilisez 'value'=> '' (deux fois simple cote) à
-      la place.
+    Si vous avez besoin de définir la valeur par défaut d'un champ password à
+    vide, utilisez 'value'=> '' (deux fois simple cote) à la place.
 
-    Les Options peuvent aussi fournir une paire de clé-valeur.
+    Une liste de paire de clé-valeur peut être fournie pour un champ de type
+    date ou datetime::
+
+        echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+	        array(
+	            'empty' => array(
+                    'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+                    'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
+                )
+            )
+        );
+
+  Affiche:
+
+  .. code-block:: html
+
+    <select name="data[Contact][date][day]" id="ContactDateDay">
+        <option value="">DAY</option>
+        <option value="01">1</option>
+        // ...
+        <option value="31">31</option>
+    </select> - <select name="data[Contact][date][month]" id="ContactDateMonth">
+        <option value="">MONTH</option>
+        <option value="01">January</option>
+        // ...
+        <option value="12">December</option>
+    </select> - <select name="data[Contact][date][year]" id="ContactDateYear">
+        <option value="">YEAR</option>
+        <option value="2036">2036</option>
+        // ...
+        <option value="1996">1996</option>
+    </select> <select name="data[Contact][date][hour]" id="ContactDateHour">
+        <option value="">HOUR</option>
+        <option value="01">1</option>
+        // ...
+        <option value="12">12</option>
+        </select>:<select name="data[Contact][date][min]" id="ContactDateMin">
+        <option value="">MINUTE</option>
+        <option value="00">00</option>
+        // ...
+        <option value="59">59</option>
+    </select> <select name="data[Contact][date][meridian]" id="ContactDateMeridian">
+        <option value="am">am</option>
+        <option value="pm">pm</option>
+    </select>
 
 * ``$options['hiddenField']`` Pour certain types d' input (checkboxes,
   radios) un input caché est créé ainsi la clé dans $this->request->data
