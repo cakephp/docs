@@ -3,17 +3,17 @@ Shells, Tasks & Outils de Console
 
 .. php:namespace:: Cake\Console
 
-CakePHP n'est pas seulement un framework web, c'est aussi une console
-de framework pour la création d'applications. Les applications par la console
-sont idéales pour la gestion des tâches d'arrière-plan comme la
-maintenance et l'achèvement du travail en-dehors du cycle de requête-réponse.
+CakePHP n'est pas seulement un framework web, c'est aussi une console de
+framework pour la création d'applications. Les applications par la console sont
+idéales pour la gestion des tâches d'arrière-plan comme la maintenance et
+l'achèvement du travail en-dehors du cycle de requête-réponse.
 Les applications par la console CakePHP vous permettent de réutiliser les
 classes de votre application à partir de lignes de commande.
 
 CakePHP dispose d'un certain nombre d'applications fournies pour la console.
-Certaines de ces applications sont utilisées de concert avec les
-fonctionnalités de CakePHP (comme i18n), et d'autres sont pour une utilisation
-générale pour que votre travail se fasse plus vite.
+Certaines de ces applications sont utilisées de concert avec les fonctionnalités
+de CakePHP (comme i18n), et d'autres sont pour une utilisation générale pour que
+votre travail se fasse plus vite.
 
 La console de CakePHP
 =====================
@@ -21,13 +21,12 @@ La console de CakePHP
 Cette section est une introduction sur la ligne de commande dans CakePHP.
 Les outils de la Console sont idéals pour l'utilisation de tâches cron, ou pour
 les utilitaires basés sur les lignes de commandes qui n'ont pas besoin d'être
-accessible par un navigateur.
+accessibles par un navigateur.
 
-PHP fournit un puissant client CLI qui rend l'interfaçage avec votre système
-de fichier et vos applications plus facile. La Console CakePHP fournit un
-framework de création de scripts shell. La console utilise un ensemble de
-répartiteur de types pour charger un shell ou une tâche, et lui passer des
-paramètres.
+PHP fournit un puissant client CLI qui rend l'interfaçage avec votre système de
+fichier et vos applications plus facile. La Console CakePHP fournit un framework
+de création de scripts shell. La console utilise un ensemble de répartiteur de
+types pour charger un shell ou une tâche, et lui passer des paramètres.
 
 .. note::
 
@@ -216,8 +215,8 @@ propriétés attachées à votre shell::
         public function show()
         {
             if (empty($this->args[0])) {
-                // Use error() before CakePHP 3.2
-                return $this->abort('Please enter a username.');
+                // Utilisez error() avant CakePHP 3.2
+                return $this->abort("Merci de rentrer un nom d'utilisateur.");
             }
             $user = $this->Users->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
@@ -234,8 +233,8 @@ Il y aura des fois où quand vous construirez des applications plus poussées
 via la console, vous voudrez composer des fonctionnalités dans des classes
 réutilisables qui peuvent être partagées à travers plusieurs shells. Les
 tâches vous permettent d'extraire des commandes dans des classes. Par exemple,
-``bake`` est fait entièrement de tâches. Vous définissez les tâches d'un
-shell en utilisant la propriété ``$tasks``::
+la commande ``bake`` est fait entièrement de tâches. Vous définissez les tâches
+d'un shell en utilisant la propriété ``$tasks``::
 
     class UserShell extends Shell
     {
@@ -244,14 +243,13 @@ shell en utilisant la propriété ``$tasks``::
 
 Vous pouvez utiliser les tâches à partir de plugins en utilisant la
 :term:`syntaxe de plugin` standard. Les tâches sont stockées dans
-**src/Shell/Task/** dans les fichiers nommées d'après leur
-classe. Ainsi si vous étiez sur le point de créer une nouvelle
-tâche 'FileGenerator', vous pourriez créer
-**src/Shell/Task/FileGeneratorTask.php**.
+**src/Shell/Task/** dans les fichiers nommées d'après leur classe. Ainsi si vous
+étiez sur le point de créer une nouvelle tâche 'FileGenerator', vous pourriez
+créer **src/Shell/Task/FileGeneratorTask.php**.
 
-Chaque tâche doit au moins intégrer une méthode ``main()``. Le
-ShellDispatcher appellera cette méthode quand la tâche est invoquée.
-une classe de tâche ressemble à cela::
+Chaque tâche doit au moins intégrer une méthode ``main()``. Le ShellDispatcher
+appellera cette méthode quand la tâche est invoquée. Une classe de tâche
+ressemble à cela::
 
     namespace App\Shell\Task;
 
@@ -265,8 +263,8 @@ une classe de tâche ressemble à cela::
         }
     }
 
-Un shell peut aussi accéder à ses tâches en tant que propriétés, ce qui
-rend les tâches meilleures pour la réutilisation de fonctions identiques à
+Un shell peut aussi accéder à ses tâches en tant que propriétés, ce qui rend les
+tâches meilleures pour la réutilisation de fonctions identiques à
 :doc:`/controllers/components`::
 
     // Dans src/Console/Command/SeaShell.php
@@ -322,19 +320,19 @@ Shell Helpers
 =============
 
 Si vous avez une logique complexe de génération de sortie, vous pouvez utiliser
-les :doc:`/console-and-shells/helpers` pour encapsuler cette logique d'une manière
-réutilisable.
+les :doc:`/console-and-shells/helpers` pour encapsuler cette logique d'une
+manière réutilisable.
 
 .. _invoking-other-shells-from-your-shell:
 
 Appeler d'autres Shells à partir de votre Shell
 ===============================================
 
-Il y a effectivement beaucoup de cas où vous voulez appeler un
-shell à partir d'un autre. ``Shell::dispatchShell()`` vous donne la possibilité
-d'appeler d'autres shells en fournissant le ``argv`` pour le shell sub. Vous
-pouvez fournir des arguments et des options soit en variables args ou en
-chaînes de caractères::
+Il y a effectivement beaucoup de cas où vous voulez appeler un shell à partir
+d'un autre. ``Shell::dispatchShell()`` vous donne la possibilité d'appeler
+d'autres shells en fournissant le ``argv`` pour le shell sub. Vous pouvez
+fournir des arguments et des options soit en variables args ou en chaînes de
+caractères::
 
     // En chaînes de caractère
     $this->dispatchShell('schema create Blog --plugin Blog');
@@ -381,11 +379,10 @@ Shell appelé via ``dispatchShell()``.
 Récupérer les Entrées de l'Utilisateur
 ======================================
 
-.. php:method:: in($question, $choices = null, $defaut = null)
+.. php:method:: in($question, $choices = null, $default = null)
 
 Quand vous construisez des applications pour console, vous avez besoin des
-entrées de l'utilisateur.
-CakePHP a un moyen facile de le faire::
+entrées de l'utilisateur. CakePHP a un moyen facile de le faire::
 
     // Récupère un texte arbitraire de l'utilisateur.
     $color = $this->in('What color do you like?');
@@ -408,9 +405,9 @@ chemin donné::
     $this->createFile('bower.json', $stuff);
 
 Si le Shell est interactif, un avertissement sera généré, et il sera demandé
-à l'utilisateur s'il veut écraser le fichier s'il existe déjà. Si la
-propriété interactive du shell est à ``false``, aucune question ne sera
-posée et le fichier sera simplement écrasé.
+à l'utilisateur s'il veut écraser le fichier s'il existe déjà. Si la propriété
+interactive du shell est à ``false``, aucune question ne sera posée et le
+fichier sera simplement écrasé.
 
 Sortie de la Console
 ====================
@@ -453,8 +450,8 @@ blanches, ou dessiner une ligne de tirets::
     // Dessine une ligne horizontale
     $this->hr();
 
-Enfin, vous pouvez mettre à jour la ligne courante du texte sur l'écran
-en utilisant ``_io->overwrite()``::
+Enfin, vous pouvez mettre à jour la ligne courante du texte sur l'écran en
+utilisant ``_io->overwrite()``::
 
     $this->out('Counting down');
     $this->out('10', 0);
@@ -463,8 +460,8 @@ en utilisant ``_io->overwrite()``::
         $this->_io->overwrite($i, 0, 2);
     }
 
-Il est important de se rappeler que vous ne pouvez pas écraser le texte
-une fois qu'une nouvelle ligne a été affichée.
+Il est important de se rappeler que vous ne pouvez pas écraser le texte une fois
+qu'une nouvelle ligne a été affichée.
 
 .. _shell-output-level:
 
@@ -501,13 +498,13 @@ Vous pouvez marquer la sortie comme suit::
     $this->out('extra message', 1, Shell::VERBOSE);
     $this->verbose('Verbose output');
 
-Vous pouvez contrôler le niveau de sortie des shells, en utilisant les
-options ``--quiet`` et ``--verbose``. Ces options sont ajoutées par défaut,
-et vous autorise à contrôler la cohérence du niveau de sortie à l'intérieur
-de vos shells CakePHP.
+Vous pouvez contrôler le niveau de sortie des shells, en utilisant les options
+``--quiet`` et ``--verbose``. Ces options sont ajoutées par défaut, et vous
+autorise à contrôler la cohérence du niveau de sortie à l'intérieur de vos
+shells CakePHP.
 
-Les options de console ``--quiet`` et ``--verbose`` contrôlent également
-les données sont loguées sont envoyées à stdout/stderr. Normalement, info et les
+Les options de console ``--quiet`` et ``--verbose`` contrôlent également les
+données sont loguées sont envoyées à stdout/stderr. Normalement, info et les
 message de log de plus haut niveau sont envoyés vers stdout/stderr. Lorsque
 ``--verbose`` est utilisé, les logs de debug seront envoyés à stdout. Lorsque
 ``--quiet`` est utilisé, seulement les warning et messages plus haut seront
@@ -544,21 +541,21 @@ vous définissez les styles, vous pouvez utiliser les couleurs suivantes pour
 les attributs ``text`` et ``background``:
 
 * black
-* red
-* green
-* yellow
 * blue
-* magenta
 * cyan
+* green
+* magenta
+* red
 * white
+* yellow
 
-Vous pouvez aussi utiliser les options suivantes en commutateurs booléens,
-en les définissant à une valeur ``true`` qui les active.
+Vous pouvez aussi utiliser les options suivantes en commutateurs booléens, en
+les définissant à une valeur ``true`` qui les active.
 
-* bold
-* underline
 * blink
+* bold
 * reverse
+* underline
 
 Ajouter un style le rend aussi disponible pour toutes les instances de
 ConsoleOutput, donc vous n'avez pas à re-déclarer les styles pour les

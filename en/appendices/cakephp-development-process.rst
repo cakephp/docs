@@ -19,34 +19,32 @@ We currently maintain 4 versions of CakePHP.
   branch for the current release series. ``2.x`` is the maintenance branch for
   the 2.x release series. If you are using a stable release and need fixes that
   haven't made their way into a tagged release check here.
-- **development branches** : Development branches contain leading edge
-  fixes and features. They are named after the major version they are
-  for. E.g *3.next*. Once development branches have reached a stable
-  release point they are merged into the mainline branch.
-- **feature branches** : Feature branches contain unfinished or
-  possibly unstable features and are recommended only for power users
-  interested in the most advanced feature set and willing to contribute
-  back to the community. Feature branches are named with the following
-  convention *version-feature*. An example would be *3.3-router* Which
-  would contain new features for the Router for 3.3.
+- **development branches** : Development branches contain leading edge fixes and
+  features. They are named after the major version they are for. E.g *3.next*.
+  Once development branches have reached a stable release point they are merged
+  into the mainline branch.
+- **feature branches** : Feature branches contain unfinished or possibly
+  unstable features and are recommended only for power users interested in the
+  most advanced feature set and willing to contribute back to the community.
+  Feature branches are named with the following convention *version-feature*. An
+  example would be *3.3-router* Which would contain new features for the Router
+  for 3.3.
 
 Hopefully this will help you understand what version is right for you.
-Once you pick your version you may feel compelled to contribute a bug
-report or make general comments on the code.
+Once you pick your version you may feel compelled to contribute a bug report or
+make general comments on the code.
 
-- If you are using a stable version or maintenance branch, please submit
-  tickets or discuss with us on IRC.
-- If you are using the development branch or feature branch, the first
-  place to go is IRC. If you have a comment and cannot reach us in IRC
-  after a day or two, please submit a ticket.
+- If you are using a stable version or maintenance branch, please submit tickets
+  or discuss with us on IRC.
+- If you are using the development branch or feature branch, the first place to
+  go is IRC. If you have a comment and cannot reach us in IRC after a day or
+  two, please submit a ticket.
 
-If you find an issue, the best answer is to write a test. The best
-advice we can offer in writing tests is to look at the ones included in
-the core.
+If you find an issue, the best answer is to write a test. The best advice we can
+offer in writing tests is to look at the ones included in the core.
 
-As always, if you have any questions or comments, visit us at #cakephp
-on irc.freenode.net.
-
+As always, if you have any questions or comments, visit us at #cakephp on
+irc.freenode.net.
 
 .. meta::
     :title lang=en: CakePHP Development Process

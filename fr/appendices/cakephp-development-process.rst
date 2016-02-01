@@ -1,4 +1,4 @@
-Le processus de développement CakePHP
+Le Processus de Développement CakePHP
 #####################################
 
 Ici, nous tenterons d'expliquer le processus que nous utilisons lors de
@@ -13,43 +13,40 @@ idées.
 
 Nous maintenons 4 versions de CakePHP.
 
--  **stable** : Versions taggées pour la production où la stabilité est plus
-   importante que les fonctionnalités. Les questions déposées pour ces versions
-   seront réglées dans la branche connexe, et feront parties de la prochaine
-   version.
--  **Branches de maintenance** : Les branches de Développement deviennent des
-   branches de maintenance une fois qu'un niveau stable de la version a été
-   atteint. Les branches de maintenance sont les endroits où toutes les
-   corrections de bugs sont committées avant de faire leur chemin vers une
-   version stable. Les branches de maintenance ont le même nom que la version
-   principale pour lesquelles elles sont faites. Par ex: *1.2*. Si vous
-   utilisez une version stable et avez besoin de correctifs qui n'ont pas fait
-   leur chemin vers une version stable, vérifiez ici.
--  **Branches de développement** : Les branches de Développement contiennent
-   des correctifs de pointe et des fonctionnalités. Ils sont nommés d'après le
-   numéro de version pour lesquels ils sont faits. Par ex: *1.3*. Une fois que
-   les branches de développement ont atteint un niveau de version stable, elles
-   deviennent des branches de maintenance, et plus aucune fonctionnalité
-   nouvelle n'est introduite, à moins que ce soit absolument nécessaire.
+-  **version taggée** : Versions taggées pour la production où la stabilité est
+   plus importante que les fonctionnalités. Les questions déposées pour ces
+   versions seront réglées dans la branche connexe, et feront parti de la
+   prochaine version.
+-  **branche principale** : Ces branches contiennent tous les correctifs de bug.
+   Les versions stables sont taggées à partir de ces branches. ``master`` est la
+   branche principale pour les séries de versions actuelles. ``2.x`` est la
+   branche de maintenance pour les séries de la version 2.x. Si vous utilisez
+   une version stable et que vous avez besoin de correctifs qui n'ont pas fait
+   leur chemin dans une version taggée, vérifiez ici.
+-  **Branches de développement** : Les branches de développement contiennent
+   les derniers correctifs et fonctionnalités. Elles sont nommées d'après le
+   numéro de version pour lesquels elles sont faites. Par ex: *3.next*. Une fois
+   que les branches de développement ont atteint un niveau de version stable,
+   elles sont fusionnées dans la branche principale.
 -  **Branches de fonctionnalité** : Les branches de fonctionnalité contiennent
    des fonctionnalités non-finies, possiblement instable et sont recommandées
    uniquement pour les utilisateurs avertis intéressés dans la fonctionnalité
    la plus avancée et qui souhaitent contribuer à la communauté. Les branches
    de fonctionnalité sont nommées selon la convention suivante de
-   *version-fonctionnalité*. Un exemple serait *1.3-routeur* qui contiendrait
-   de nouvelles fonctionnalités pour le Routeur dans 1.3.
+   *version-fonctionnalité*. Un exemple serait *3.3-router* qui contiendrait
+   de nouvelles fonctionnalités pour le Routeur dans 3.3.
 
 Espérons que cela vous aide à comprendre quelle version est bonne pour vous.
 Une fois que vous choisissez votre version, vous vous sentirez peut-être
 contraints de contribuer à un report de bug ou de faire des commentaires
 généraux sur le code.
 
--  Si vous utilisez une version stable ou une branche de maintenance, merci de
-   soumettre des tickets ou discuter avec nous sur IRC.
--  Si vous utilisez la branche de développement ou la branche de
-   fonctionnalité, le premier endroit où aller est IRC. Si vous avez un
-   commentaire et ne pouvez pas nous atteindre sur IRC après un jour ou deux,
-   merci de nous soumettre un ticket.
+- Si vous utilisez une version stable ou une branche de maintenance, merci de
+  soumettre des tickets ou discuter avec nous sur IRC.
+- Si vous utilisez la branche de développement ou la branche de fonctionnalité,
+  le premier endroit où aller est IRC. Si vous avez un commentaire et ne pouvez
+  pas nous atteindre sur IRC après un jour ou deux, merci de nous soumettre un
+  ticket.
 
 Si vous trouvez un problème, la meilleure réponse est d'écrire un test. Le
 meilleur conseil que nous pouvons offrir dans l'écriture des tests est de
