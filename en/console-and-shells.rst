@@ -542,12 +542,12 @@ or force it on::
 The above will put the output object into raw output mode. In raw output mode,
 no styling is done at all. There are three modes you can use.
 
+* ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
+* ``ConsoleOutput::PLAIN`` - Plain text output, known style tags will be stripped
+  from the output.
 * ``ConsoleOutput::RAW`` - Raw output, no styling or formatting will be done.
   This is a good mode to use if you are outputting XML or, want to debug why
   your styling isn't working.
-* ``ConsoleOutput::PLAIN`` - Plain text output, known style tags will be stripped
-  from the output.
-* ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
 
 By default on \*nix systems ConsoleOutput objects default to colour output.
 On Windows systems, plain output is the default unless the ``ANSICON``
@@ -575,7 +575,7 @@ Hook Methods
 
 .. php:method:: initialize()
 
-    Initializes the Shell acts as constructor for subclasses allows
+    Initializes the Shell, acts as constructor for subclasses and allows
     configuration of tasks prior to shell execution.
 
 .. php:method:: startup()
@@ -583,7 +583,9 @@ Hook Methods
     Starts up the Shell and displays the welcome message. Allows for checking
     and configuring prior to command or main execution.
 
-    Override this method if you want to remove the welcome information, or
+.. tip::
+
+    Override the ``startup()`` method if you want to remove the welcome information, or
     otherwise modify the pre-command flow.
 
 Configuring Options and Generating Help
@@ -636,15 +638,15 @@ to define an entire option parser in one series of method calls::
 
 The methods that allow chaining are:
 
-- description()
-- epilog()
-- command()
 - addArgument()
 - addArguments()
 - addOption()
 - addOptions()
 - addSubcommand()
 - addSubcommands()
+- command()
+- description()
+- epilog()
 
 .. php:method:: description($text = null)
 
@@ -659,6 +661,54 @@ return the current value::
     // Read the current value
     $parser->description();
 
+The **src/Shell/ConsoleShell.php** is a good example of the ``description()`` method
+in action::
+
+    /**
+     * Display help for this console.
+     *
+     * @return ConsoleOptionParser
+     */
+    public function getOptionParser()
+    {
+        $parser = new ConsoleOptionParser('console');
+        $parser->description(
+            'This shell provides a REPL that you can use to interact ' .
+            'with your application in an interactive fashion. You can use ' .
+            'it to run adhoc queries with your models, or experiment ' .
+            'and explore the features of CakePHP and your application.' .
+            "\n\n" .
+            'You will need to have psysh installed for this Shell to work.'
+        );
+        return $parser;
+    }
+
+The console's ``description`` output can be seen by executing the following
+command::
+
+    user@ubuntu:~/cakeblog$ bin/cake console --help
+
+    Welcome to CakePHP v3.0.13 Console
+    ---------------------------------------------------------------
+    App : src
+    Path: /home/user/cakeblog/src/
+    ---------------------------------------------------------------
+    This shell provides a REPL that you can use to interact with your
+    application in an interactive fashion. You can use it to run adhoc
+    queries with your models, or experiment and explore the features of
+    CakePHP and your application.
+
+    You will need to have psysh installed for this Shell to work.
+
+    Usage:
+    cake console [-h] [-v] [-q]
+
+    Options:
+
+    --help, -h     Display this help.
+    --verbose, -v  Enable verbose output.
+    --quiet, -q    Enable quiet output.
+
 .. php:method:: epilog($text = null)
 
 Gets or sets the epilog for the option parser. The epilog is displayed after the
@@ -671,6 +721,57 @@ current value::
 
     // Read the current value
     $parser->epilog();
+
+To illustrate the ``epilog()`` method in action lets add a call to the
+``getOptionParser()`` method used above in the **src/Shell/ConsoleShell.php**::
+
+    /**
+     * Display help for this console.
+     *
+     * @return ConsoleOptionParser
+     */
+    public function getOptionParser()
+    {
+        $parser = new ConsoleOptionParser('console');
+        $parser->description(
+            'This shell provides a REPL that you can use to interact ' .
+            'with your application in an interactive fashion. You can use ' .
+            'it to run adhoc queries with your models, or experiment ' .
+            'and explore the features of CakePHP and your application.' .
+            "\n\n" .
+            'You will need to have psysh installed for this Shell to work.'
+        );
+        $parser->epilog('Thank you for baking with CakePHP!');
+        return $parser;
+    }
+
+The text added with the ``epilog()`` method can be seen in the output from
+the following console command::
+
+    user@ubuntu:~/cakeblog$ bin/cake console --help
+
+    Welcome to CakePHP v3.0.13 Console
+    ---------------------------------------------------------------
+    App : src
+    Path: /home/user/cakeblog/src/
+    ---------------------------------------------------------------
+    This shell provides a REPL that you can use to interact with your
+    application in an interactive fashion. You can use it to run adhoc
+    queries with your models, or experiment and explore the features of
+    CakePHP and your application.
+
+    You will need to have psysh installed for this Shell to work.
+
+    Usage:
+    cake console [-h] [-v] [-q]
+
+    Options:
+
+    --help, -h     Display this help.
+    --verbose, -v  Enable verbose output.
+    --quiet, -q    Enable quiet output.
+
+    Thank you for baking with CakePHP!
 
 Adding Arguments
 ----------------
