@@ -1219,7 +1219,7 @@ dans notre component. Nous créons le fichier
             $response = new Response();
             $this->controller = $this->getMock(
                 'Cake\Controller\Controller',
-                [],
+                null,
                 [$request, $response]
             );
             $registry = new ComponentRegistry($this->controller);

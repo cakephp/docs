@@ -1162,7 +1162,7 @@ set correctly by the ``adjust()`` method in our component. We create the file
             $response = new Response();
             $this->controller = $this->getMock(
                 'Cake\Controller\Controller',
-                [],
+                null,
                 [$request, $response]
             );
             $registry = new ComponentRegistry($this->controller);
