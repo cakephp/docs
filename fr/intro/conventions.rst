@@ -96,11 +96,11 @@ mentionnés ci-dessus seront donc respectivement : ``people``, ``big_people`` et
 ``really_big_people``.
 
 La convention est d'utiliser des mots anglais pour les noms de colonne et de
-table. Si vous utilisez des mots dans votre langue, CakePHP ne va pas pouvoir
-convertir correctement les bonnes inflections (du singulier vers le pluriel et
-vice-versa).
-Dans certains cas, vous pouvez ajouter vos propres règles pour des mots de votre
-langue, et pour cela vous pouvez utiliser la classe utilitaire
+table. Si vous utilisez des mots dans une autre langue, CakePHP ne va pas
+pouvoir convertir correctement les bonnes inflections (du singulier vers le
+pluriel et vice-versa).
+Dans certains cas, si vous souhaitez ajouter vos propres règles pour des mots
+d'une autre langue, vous pouvez utiliser la classe utilitaire
 :php:class:`Cake\\Utility\\Inflector`. En plus de définir ces règles
 d'inflections personnalisées, cette classe va aussi vous permettre de vérifier
 que CakePHP comprend votre syntaxe personnalisée pour les mots pluriels et
