@@ -1019,7 +1019,7 @@ contents of a file - for example, when testing the rendered output of a view.
 The ``StringCompareTrait`` adds a simple assert method for this purpose.
 
 Usage involves using the trait, setting the comparison base path and calling
-``assertSameAsFile``:
+``assertSameAsFile``::
 
     use Cake\TestSuite\StringCompareTrait;
     use Cake\TestSuite\TestCase;
