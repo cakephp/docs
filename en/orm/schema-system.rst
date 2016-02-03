@@ -26,13 +26,11 @@ in a database. This object is returned by the schema reflection features::
 
     // Create a table one column at a time.
     $t = new Table('posts');
-    $t->addColumn('id', [
-      'type' => 'integer',
+    $t->addColumn('id', 'integer', [
       'length' => 11,
       'null' => false,
       'default' => null,
-    ])->addColumn('title', [
-      'type' => 'string',
+    ])->addColumn('title', 'string', [
       'length' => 255,
       // Create a fixed length (char field)
       'fixed' => true
@@ -50,8 +48,9 @@ following two forms are equivalent::
 
     $t->addColumn('title', 'string');
     // and
-    $t->addColumn('title', [
-      'type' => 'string'
+    $t->addColumn('title', 'string', [
+      'null' => true,
+      'default' => 'root beer'
     ]);
 
 While equivalent, the 2nd form allows more detail and control. This emulates
@@ -134,8 +133,7 @@ tell the table object which column in the composite key you want to
 auto-increment::
 
     $t = new Table('posts');
-    $t->addColumn('id', [
-        'type' => 'integer',
+    $t->addColumn('id', 'integer', [
         'autoIncrement' => true,
     ])
     ->addColumn('account_id', 'integer')
