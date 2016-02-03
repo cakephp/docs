@@ -15,7 +15,7 @@ CakePHP では、コントローラ・モデル・ビューのコンビをセッ
 あたかもそれ自身がアプリケーションであるかのように振る舞います。
 
 CakePHP 3.0 では、それぞれのプラグインごとに最上位の名前空間 (例えば ``DebugKit`` と
-いったように)を定義します。慣習により、プラグインはそのパッケージ名が名前空間の名前と
+いったように) を定義します。規約により、プラグインはそのパッケージ名が名前空間の名前と
 なります。
 もし別の名前空間名を使いたいなら、プラグインをロードする時に設定することが可能です。
 
@@ -23,7 +23,7 @@ Composer を使ったプラグインインストール
 =======================================
 
 `Packagist <http://packagist.org>`_ には多くのプラグインがあり、 ``Composer`` を
-使ってインストールが可能です。DebugKit をインストールには、下記のコマンドを実行します。::
+使ってインストールが可能です。DebugKit をインストールには、下記のコマンドを実行します。 ::
 
     php composer.phar require cakephp/debug_kit
 
@@ -53,7 +53,7 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 =====================
 
 プラグインをインストールして設定した後、プラグインの読み込みが必要になるかもしれません。
-プラグインを１つずつまたは一括で読み込むメソッドがあります。::
+プラグインを１つずつまたは一括で読み込むメソッドがあります。 ::
 
     // config/bootstrap.php に記述します。
     // 特定のプラグインを読み込みます。
@@ -74,6 +74,14 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
     **vendor/cakephp-plugins.php** に定義されていないプラグインについては
     読み込みません。
 
+また、プラグインを有効にする便利なシェルコマンドがあります。以下の行を実行してください。
+
+.. code-block:: shell
+
+    $ bin/cake plugin load ContactManager
+
+これは、 ``Plugin::load('ContactManager');`` を bootstrap に書き込みます。
+
 .. _autoloading-plugin-classes:
 
 プラグインクラスの自動読み込み
@@ -84,7 +92,7 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 修正する必要はありません。
 
 ですが、それ以外の場合は、あなたのアプリーケーションの composer.json に下記のように
-追記する必要があります。::
+追記する必要があります。 ::
 
     "psr-4": {
         (...)
@@ -93,7 +101,7 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
     }
 
 あなたのプラグインが vendor の名前空間を使うなら、パスマッピングの名前空間は下記のように
-なるでしょう。::
+なるでしょう。 ::
 
     "psr-4": {
         (...)
@@ -101,12 +109,12 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
         "AcmeCorp\\Users\\Test\\": "./plugins/AcmeCorp/Users/tests"
     }
 
-そして、 Composer の自動読み込みキャッシュを初期化する必要があります。::
+そして、 Composer の自動読み込みキャッシュを初期化する必要があります。 ::
 
     $ php composer.phar dumpautoload
 
 もしあなたが何らかの理由で Composer を使う事ができないのなら、代替手段でプラグインの
-自動読み込みをおこなう事ができます。::
+自動読み込みをおこなう事ができます。 ::
 
     Plugin::load('ContactManager', ['autoload' => true]);
 
@@ -115,32 +123,43 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 プラグイン設定
 ================
 
-プラグイン設定とルーティングは、 ``load()`` と ``loadAll()`` メソッドで多くの方法が提供されています。
-特定のカスタムルートや特定プラグインのbootstrapファイルは、おそらく自動で読み込みたいでしょう。::
+``load()`` と ``loadAll()`` メソッドは、プラグイン設定とルーティングを支援します。
+特定のカスタムルートや特定プラグインの bootstrap ファイルは、
+おそらく自動で読み込みたいでしょう。 ::
 
+    // config/bootstrap.php の中で
+
+    // loadAll() を使用
     Plugin::loadAll([
         'Blog' => ['routes' => true],
         'ContactManager' => ['bootstrap' => true],
         'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
     ]);
 
-この設定スタイルは、プラグインの設定やルートを手動で ``include()`` や ``require()`` する必要がなく、
-自動で正しい時間と正しい場所で読み込まれます。
-実際に同じパラメータで ``load()`` メソッドも利用でき、３つのプラグインだけが読み込まれ、
-その他は読み込まれません。
+また、プラグインを個別に読み込むことができます。 ::
 
-最後に、特定の設定の無いプラグインを全て読み込むデフォルトの ``loadAll()`` を設定できます。
+    // blog を読み込み、routes をインクルード
+    Plugin::load('Blog', ['routes' => true]);
 
-全てのプラグインのbootstarpと、追加でBlogプラグインのルートを読み込みます。::
+    // 設定と初期化を行う bootstrap をインクルード
+    Plugin::load('ContactManager', ['bootstrap' => true]);
+
+この設定スタイルは、プラグインの設定やルートを手動で ``include()`` や
+``require()`` する必要がなく、自動で正しい時間と正しい場所で読み込まれます。
+
+特定の設定を持たない全てのプラグインを読み込むデフォルトの ``loadAll()`` を設定できます。
+
+以下の例は、全てのプラグインの bootstarp を読み込み、それに加えて Blog プラグインの
+routes を読み込みます。 ::
 
     Plugin::loadAll([
         ['bootstrap' => true],
         'Blog' => ['routes' => true]
     ]);
 
-プラグインで設定された全てのファイルが実際に存在しないと、phpが読み込めないファイルごとにwarningが出ます。
-これは特に、全てのプラグインのデフォルトとして覚えておく事が重要です。
-あなたはこの潜在的な警告を、 ``ignoreMissing`` オプションを使用して避けることができます。::
+プラグインで設定された全てのファイルが実際に存在しないと、php が読み込めないファイルごとに
+warning が出ます。これは特に、全てのプラグインのデフォルトとして覚えておく事が重要です。
+あなたはこの潜在的な警告を、 ``ignoreMissing`` オプションを使用して避けることができます。 ::
 
     Plugin::loadAll([
         ['ignoreMissing' => true, 'bootstrap' => true],
@@ -148,43 +167,46 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
     ]);
 
 プラグインを読み込むとき、プラグイン名は名前空間名と一致すべきです。
-例えば、最上位の名前空間が ``Users`` のプラグインがあるなら、このように読み込みます。::
+例えば、最上位の名前空間が ``Users`` のプラグインがあるなら、このように読み込みます。 ::
 
     Plugin::load('User');
 
 もしあなたが ``AcmeCorp/Users`` といったように、ベンダー名を最上位の名前空間名に
-したいのなら、このようにプラグインを読み込みます。::
+したいのなら、このようにプラグインを読み込みます。 ::
 
     Plugin::load('AcmeCorp/Users');
 
-クラス名は :term:`プラグイン記法` を使うことで、適切に
-解決されるでしょう。
+クラス名は :term:`プラグイン記法` を使うことで、適切に解決されるでしょう。
 
-ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、ドキュメントに書かれています。
-他よりセットアップが必要なものもあります。
+ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、
+ドキュメントに書かれています。他よりセットアップが必要なものもあります。
 
 プラグインの利用
 ================
 
-クラス名の前にプラグイン名を付けることで、プラグインの controllers, models,
-components, behaviors, そして helpers を参照できます。
+クラス名の前にプラグイン名を付けることで、プラグインのコントローラー、
+モデル、コンポーネント、ビヘイビアとヘルパーを参照できます。
 
 例えば、あなたの画面で素敵なコンタクト情報を表示するために、 ContactManager プラグインの
 ContactInfoHelper を使いたいとしましょう。この場合、あなたのコントローラーの
-``$helpers`` 配列にこのように記述します。::
+``$helpers`` 配列にこのように記述します。 ::
 
     public $helpers = ['ContactManager.ContactInfo'];
 
-すると、あなたが作った他のヘルパー同様に、ContactInfoHelperにアクセスできるようになります。::
+.. note::
+    このドット区切りのクラス名は、 :term:`プラグイン記法` と呼ばれます。
+
+すると、あなたが作った他のヘルパー同様に、 ``ContactInfoHelper`` に
+アクセスできるようになります。 ::
 
     echo $this->ContactInfo->address($contact);
 
 プラグイン作成
 ================
 
-動作サンプルとして、上記を参考にContactManagerを作りましょう。
+動作サンプルとして、上記を参考に ContactManager を作りましょう。
 まず始めに、プラグインの基本ディレクトリ構成を準備します。
-それはこのようになります。::
+それはこのようになります。 ::
 
     /src
     /plugins
@@ -206,12 +228,11 @@ ContactInfoHelper を使いたいとしましょう。この場合、あなた�
                 /Fixture
             /webroot
 
-プラグインフォルダの名前が '**ContactManager**' になっています。
-このフォルダがプラグインと同じ名前になる事が大切です。
+プラグインフォルダの名前が '**ContactManager**' になっています。このフォルダが
+プラグインと同じ名前になる事が大切です。
 
-プラグインフォルダの中は CakePHPアプリケーションと同じような構成であることに気づくかと思いますが、
-それが基本的な構成です。
-使わないフォルダは作る必要はありません。
+プラグインフォルダの中は CakePHP アプリケーションと同じような構成であることに気づく
+思いますが、それが基本的な構成です。使わないフォルダは作る必要はありません。
 コンポーネントとビヘイビアだけで定義されるプラグインもあれば、'Template' ディレクトリが
 完全に省略されるプラグインもあります。
 
@@ -221,30 +242,37 @@ ContactInfoHelper を使いたいとしましょう。この場合、あなた�
 Bake を使ってプラグインを作成する
 ---------------------------------
 
-プラグイン制作の過程は、Bake shellを使えば非常に簡単です。
+プラグイン制作の過程は、Bake shell を使えば非常に簡単です。
 
-プラグインをbakeするのは以下のコマンドになります。::
+プラグインを bake するのは以下のコマンドになります。
+
+.. code-block:: shell
 
     $ bin/cake bake plugin ContactManager
 
 ここからはもういつも通りの記法で  bake ができます。
-例えばコントローラーをbakeするには::
+例えばコントローラーを bake するには
+
+.. code-block:: shell
 
     $ bin/cake bake controller --plugin ContactManager Contacts
 
 もしコマンドラインで問題があれば、 :doc:`/bake/usage` を参照してください。
-また、プラグインを作ったら必ずオートローダを再作成してください。::
+また、プラグインを作ったら必ずオートローダを再作成してください。
+
+.. code-block:: shell
 
     $ php composer.phar dumpautoload
 
 プラグインコントローラー
 ========================
 
-ContactManagerプラグインのコントローラーは、 **plugins/ContactManager/src/Controller/**
-に設置されます。
-主にやりたい事はcontactsの管理ですので、このプラグインにはContactsControllerが必要です。
+ContactManager プラグインのコントローラーは、
+**plugins/ContactManager/src/Controller/** に設置されます。主にやりたい事は
+contacts の管理ですので、このプラグインには ContactsController が必要です。
 
-そこでContactsControllerを **plugins/ContactManager/src/Controller** に設置し、このように書きます。::
+そこで ContactsController を **plugins/ContactManager/src/Controller** に設置し、
+このように書きます。 ::
 
     // plugins/ContactManager/src/Controller/ContactsController.php
     namespace ContactManager\Controller;
@@ -260,7 +288,7 @@ ContactManagerプラグインのコントローラーは、 **plugins/ContactMan
         }
     }
 
-まだ作っていないなら、 ``AppController`` も作りましょう::
+まだ作っていないなら、 ``AppController`` も作りましょう。 ::
 
     // plugins/ContactManager/src/Controller/AppController.php
     namespace ContactManager\Controller;
@@ -275,20 +303,23 @@ ContactManagerプラグインのコントローラーは、 **plugins/ContactMan
 持ちますが、使わないようでしたら作らなくても構いません。
 
 コントローラにアクセスする前に、プラグインをロードして、ルート情報に接続するよう
-設定する必要があります。
-これは **config/bootstrap.php** に下記のように記述します。::
+設定する必要があります。これは **config/bootstrap.php** に下記のように記述します。 ::
 
     Plugin::load('ContactManager', ['routes' => true]);
 
 続いて ContactManager プラグインのルート情報を作成します。
-**plugins/ContactManager/config/routes.php** に下記のように追加してください。::
+**plugins/ContactManager/config/routes.php** に下記のように追加してください。 ::
 
     <?php
     use Cake\Routing\Router;
 
-    Router::plugin('ContactManager', function ($routes) {
-        $routes->fallbacks('DashedRoute');
-    });
+    Router::plugin(
+        'ContactManager',
+        ['path' => '/contact-manager'],
+        function ($routes) {
+            $routes->fallbacks('DashedRoute');
+        }
+    );
 
 上記のようにすれば、プラグインのデフォルトルートに接続できるでしょう。
 このファイルをカスタマイズすることで、後から個別のルートを設定することができます。
@@ -297,8 +328,8 @@ ContactManagerプラグインのコントローラーは、 **plugins/ContactMan
 みてください。 "Missing Model" エラーが表示されるでしょうが、これはまだ
 Contact モデルが定義されていないためです。
 
-もしあなたのアプリケーションが、CakePHPの提供するデフォルトルーティングを含むなら、
-あなたのプラグインコントローラへは下記のような URL でアクセスできます。::
+もしあなたのアプリケーションが、CakePHP の提供するデフォルトルーティングを含むなら、
+あなたのプラグインコントローラへは下記のような URL でアクセスできます。 ::
 
     // プラグインコントローラの index にアクセスする
     /contact-manager/contacts
@@ -307,7 +338,7 @@ Contact モデルが定義されていないためです。
     /contact-manager/contacts/view/1
 
 もしあなたのアプリケーションでルーティングプレフィックスを定義しているなら、
-CakePHP のデフォルトルーティングは下記の書式でルーティングします::
+CakePHP のデフォルトルーティングは下記の書式でルーティングします。 ::
 
     /:prefix/:plugin/:controller
     /:prefix/:plugin/:controller/:action
@@ -326,8 +357,8 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 ==================
 
 プラグインのモデルは **plugins/ContactManager/src/Model** に設置されます。
-既にこのプラグインのContactsControllerは定義してありますから、このコントローラの
-ためのテーブルとエンティティを作成しましょう。::
+既にこのプラグインの ContactsController は定義してありますから、このコントローラの
+ためのテーブルとエンティティを作成しましょう。 ::
 
     // plugins/ContactManager/src/Model/Entity/Contact.php:
     namespace ContactManager\Model\Entity;
@@ -364,7 +395,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
     }
 
 もし関連付け配列のキーにプラグインの接頭語をつけたくないのなら、代わりにこのような
-構文が使えます。::
+構文が使えます。 ::
 
     // plugins/ContactManager/src/Model/Table/ContactsTable.php:
     namespace ContactManager\Model\Table;
@@ -382,7 +413,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
     }
 
 おなじみの :term:`プラグイン記法` を使う事で、プラグインのテーブルを
-読み込むために ``TableRegistry`` を使用することができます。::
+読み込むために ``TableRegistry`` を使用することができます。 ::
 
     use Cake\ORM\TableRegistry;
 
@@ -394,7 +425,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 ビューは通常のアプリケーション内と同じように動作します。
 ``plugins/[PluginName]/src/Template/`` フォルダの中の正しいフォルダ内に配置するだけです。
 我々の ContactManager プラグインでは ``ContactsController::index()`` アクションに
-ビューが必要ですから、このような内容になります。::
+ビューが必要ですから、このような内容になります。 ::
 
     // plugins/ContactManager/src/Template/Contacts/index.ctp:
     <h1>Contacts</h1>
@@ -404,7 +435,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 プラグインは独自のレイアウトを提供することができます。
 プラグインレイアウトを追加するためには、テンプレートファイルを
 ``plugins/[PluginName]/src/Template/Layout`` に配置します。
-プラグインレイアウトをコントローラで使用するには、下記のようにします。::
+プラグインレイアウトをコントローラで使用するには、下記のようにします。 ::
 
     public $layout = 'ContactManager.admin';
 
@@ -412,7 +443,8 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
 .. note::
 
-	プラグインからのエレメントの使い方については、:ref:`view-elements` を参照してください。
+    プラグインからのエレメントの使い方については、
+    :ref:`view-elements` を参照してください。
 
 アプリケーション内からプラグインテンプレートをオーバーライドする
 ----------------------------------------------------------------
@@ -422,7 +454,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 **src/Template/Plugin/[Plugin]/[Controller]/[view].ctp** というファイルを作って
 そこにビューロジックを書いておけば、プラグインのテンプレートファイルをオーバーライド
 することができます。
-Contacts コントローラなら、以下のようなファイルを作成します。::
+Contacts コントローラなら、以下のようなファイルを作成します。 ::
 
     src/Template/Plugin/ContactManager/Contacts/index.ctp
 
@@ -434,8 +466,8 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 プラグインアセット
 ====================
 
-プラグインの Web アセット （PHP以外のファイル）は、メインアプリケーションのアセットと
-同様にプラグインの ``webroot`` ディレクトリを介して配信されます。::
+プラグインの Web アセット （PHP 以外のファイル）は、メインアプリケーションのアセットと
+同様にプラグインの ``webroot`` ディレクトリを介して配信されます。 ::
 
     /plugins/ContactManager/webroot/
                                    css/
@@ -444,11 +476,11 @@ Contacts コントローラなら、以下のようなファイルを作成し�
                                    flash/
                                    pdf/
 
-通常のwebrootと同じようにどのディレクトリにどんなファイルでも置くことができます。
+通常の webroot と同じようにどのディレクトリにどんなファイルでも置くことができます。
 
 .. warning::
 
-    ディスパッチャを介して静的アセット (画像や JavaScript や CSSファイル)を取り扱うことは
+    ディスパッチャを介して静的アセット (画像や JavaScript や CSS ファイル) を取り扱うことは
     非常に非効率です。
     詳細は :ref:`アプリケーションのパフォーマンスの向上 <symlink-assets>` をご覧ください。
 
@@ -457,16 +489,15 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 --------------------------------
 
 :php:class:`~Cake\\View\\Helper\\HtmlHelper` の script, image, css メソッドを使って
-プラグイン内のアセットへのリンクを作りたい場合、 :term:`プラグイン記法`
-が使えます。::
+プラグイン内のアセットへのリンクを作りたい場合、 :term:`プラグイン記法` が使えます。 ::
 
-    // /contact_manager/css/styles.css へのURLを生成します
+    // /contact_manager/css/styles.css への URL を生成します
     echo $this->Html->css('ContactManager.styles');
 
-    // /contact_manager/js/widget.js へのURLを生成します
+    // /contact_manager/js/widget.js への URL を生成します
     echo $this->Html->script('ContactManager.widget');
 
-    // /contact_manager/img/logo.js へのURLを生成します
+    // /contact_manager/img/logo.jpg への URL を生成します
     echo $this->Html->image('ContactManager.logo');
 
 プラグインのアセットは、デフォルトで ``AssetFilter`` というディスパッチャフィルタを
@@ -475,18 +506,16 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 :ref:`プラグインのアセットをシンボリックリンク化 <symlink-assets>` すべきです。
 
 もしあなたがヘルパーを使わないなら、プラグインのアセットを提供するためには URL の先頭に
-プラグイン名を付加します。
-'/contact_manager/js/some_file.js' へのリンクで、
+プラグイン名を付加します。 '/contact_manager/js/some_file.js' へのリンクで、
 **plugins/ContactManager/webroot/js/some_file.js** というアセットを提供します。
 
 コンポーネント、ヘルパーとビヘイビア
 =====================================
 
 プラグインには通常の CakePHP アプリケーションと同じように、コンポーネント、ヘルパー、
-ビヘイビアを持つ事ができます。
-あなたはコンポーネント、ヘルパー、ビヘイビアだけからなるプラグインを作る事もできます。
-これはコンポーネントを他のプロジェクトに簡単に導入すれば再利用可能となるような
-素晴らしい方法です。
+ビヘイビアを持つ事ができます。あなたはコンポーネント、ヘルパー、ビヘイビアだけからなる
+プラグインを作る事もできます。これはコンポーネントを他のプロジェクトに簡単に導入すれば
+再利用可能となるような素晴らしい方法です。
 
 このようなコンポーネントを作る事は、実際、通常のアプリケーションとして作る事と同じであり、
 特別な命名規則もありません。
@@ -519,16 +548,35 @@ Contacts コントローラなら、以下のようなファイルを作成し�
 この例は、プラグインを作るための一つの良い開始方法であって、他にも色んな方法があります。
 一般的なルールとして、アプリケーションでできることは、プラグインでもできます。
 
-まずは、'vendor'にサードパーティのライブラリを設置し、
-cake console に新しい shell を追加します。
-さらに、利用者が自動で出来る、プラグインの機能をテストするためのテストケースを
+まずは、'vendor' にサードパーティのライブラリを設置し、 cake console に新しい shell
+を追加します。さらに、利用者が自動で出来る、プラグインの機能をテストするためのテストケースを
 作成する事を忘れないでください。
 
-ContactManagerの例だと、ContactsController内に add/remove/edit/delete アクションを作り、
-Contact モデルに validation を作成し、contact管理する時に必要な機能を実装します。
-あなたのプラグインをどのように実装するかはあなた次第です。
+ContactManager の例だと、ContactsController 内に add/remove/edit/delete
+アクションを作り、 Contact モデルに validation を作成し、contact 管理する時に必要な機能を
+実装します。あなたのプラグインをどのように実装するかはあなた次第です。
 ただ、誰もがあなたの素晴らしい、再利用可能なコンポーネントの恩恵を受けることが
 できるように、コミュニティであなたのコードを共有することを忘れないでください！
+
+
+プラグインの公開
+===================
+
+あなたのプラグインを `plugins.cakephp.org <http://plugins.cakephp.org>`_ に追加できます。
+こちらでは、他の人々は composer の依存関係として使用することができます。
+`awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_
+に申し込みできます。
+
+パッケージ名にセマンティックな意味のある名前を選んでください。これは、理想を言えば、
+"cakephp" をフレームワークとして依存関係を設定するべきです。
+ベンダー名は、通常あなたの GitHub ユーザー名になります。
+CakePHP 名前空間 (cakephp) を **使用しない** でください。
+これは、CakePHP 自身のプラグインのために予約されています。
+小文字と区切り文字のダッシュを使用することが決まりです。
+
+もし、あなたの GitHub アカウントが "FooBar" で "Logging" プラグインを作成する場合、
+`foo-bar/cakephp-logging` と名付けるといいでしょう。
+そして、CakePHP 自身の "Localized" プラグンは、 `cakephp/localized` で見つけられます。
 
 .. meta::
     :title lang=ja: Plugins
