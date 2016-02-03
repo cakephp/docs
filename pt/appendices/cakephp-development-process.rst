@@ -5,7 +5,7 @@ Aqui tentamos explicar o processo utilizado no desenvolvimento com o framework
 CakePHP. Nós dependemos fortemente da interação por tickets e no canal do IRC.
 O IRC é o melhor lugar para encontrar membros do
 `time de desenvolvimento <https://github.com/cakephp?tab=members>`_ e discutir
-idéias, o ultimo código e fazer comentáriso gerais. Se algo mais formal tem que
+idéias, o ultimo código e fazer comentários gerais. Se algo mais formal tem que
 ser proposto ou exite um problema com uma versão, o sistema de tickets é o
 melhor lugar para compartilhar seus pensamentos.
 
