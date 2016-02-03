@@ -1030,7 +1030,7 @@ Usage involves using the trait, setting the comparison base path and calling
 
         public function setUp()
         {
-            $this->_compareBasePath = APP . 'tests/comparisons/';
+            $this->_compareBasePath = APP . 'tests' . DS . 'comparisons' . DS;
             parent::setUp();
         }
 
