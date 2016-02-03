@@ -1014,10 +1014,9 @@ found in `PHPUnit
 Comparing test results to a file
 --------------------------------
 
-For some types of test, it may be easier to compare the result of a test is the
-same as the contents of a file - for example, when testing the rendered output
-of a view. The ``StringCompareTrait`` adds a simple assert method for this
-purpose.
+For some types of test, it may be easier to compare the result of a test to the
+contents of a file - for example, when testing the rendered output of a view.
+The ``StringCompareTrait`` adds a simple assert method for this purpose.
 
 Usage involves using the trait, setting the comparison base path and calling
 ``assertSameAsFile``:
@@ -1027,6 +1026,7 @@ Usage involves using the trait, setting the comparison base path and calling
 
     class SomeTest extends TestCase
     {
+        use StringCompareTrait;
 
         public function setUp()
         {
@@ -1034,7 +1034,7 @@ Usage involves using the trait, setting the comparison base path and calling
             parent::setUp();
         }
 
-        public function testSomething()
+        public function testExample()
         {
             $result = ...;
             $this->assertSameAsFile('example.php', $result);
