@@ -585,8 +585,8 @@ Hook Methods
 
 .. tip::
 
-    Override the ``startup()`` method if you want to remove the welcome information, or
-    otherwise modify the pre-command flow.
+    Override the ``startup()`` method if you want to remove the welcome
+    information, or otherwise modify the pre-command flow.
 
 Configuring Options and Generating Help
 =======================================
@@ -661,8 +661,8 @@ return the current value::
     // Read the current value
     $parser->description();
 
-The **src/Shell/ConsoleShell.php** is a good example of the ``description()`` method
-in action::
+The **src/Shell/ConsoleShell.php** is a good example of the ``description()``
+method in action::
 
     /**
      * Display help for this console.
