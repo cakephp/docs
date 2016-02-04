@@ -69,9 +69,9 @@ Affichera:
 
     <form method="post" action="/articles/add">
 
-Celui-ci va POSTer les données de formulaire à l'action ``add()`` de ``ArticlesController``.
-Cependant, vous pouvez utiliser la même logique pour créer un formulaire
-d'édition. Le FormHelper utilise la propriété ``$this->request->data`` pour
+Celui-ci va POSTer les données de formulaire à l'action ``add()`` de
+``ArticlesController``. Cependant, vous pouvez utiliser la même logique pour
+créer un formulaire d'édition. Le FormHelper utilise l'objet ``Entity`` pour
 détecter automatiquement s'il faut créer un formulaire d'ajout (add) ou un
 d'édition (edit). Si l'entity fournie n'est pas 'nouvelle', le form va être créé
 comme un formulaire d'édition. Par exemple, si nous naviguons vers
