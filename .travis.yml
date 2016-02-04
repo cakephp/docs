@@ -11,7 +11,8 @@ services:
 
 before_install:
     - docker pull cakephpfr/docs
-    - docker pull cakephpfr/3.x
+    - docker pull cakephpfr/3.x:php70-fpm
+    - docker pull cakephpfr/3.x:nginx
 
 script:
     - chmod +x start.sh; ./start.sh
