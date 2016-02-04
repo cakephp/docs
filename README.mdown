@@ -6,56 +6,108 @@ CakePHP Documentation
 
 This is the official documentation for the CakePHP project. It is available online in HTML, PDF and EPUB formats at http://book.cakephp.org.
 
-Contributing to the documentation is pretty simple. Please read the
-documentation on contributing to the documentation over on [the
-cookbook](http://book.cakephp.org/3.0/en/contributing/documentation.html) for
-help. You can read all of the documentation within as its just in plain text
-files, marked up with ReST text formatting.
+Contributing to the documentation is pretty simple. Please read the documentation on contributing to the documentation over on [the cookbook](http://book.cakephp.org/3.0/en/contributing/documentation.html) for help. You can read all of the documentation within as its just in plain text files, marked up with ReST text formatting.
 
-There are two ways for building the documentation: with Docker, or by installing
-the packages directly on your OS.
+There are three ways for using the documentation:
+- with Docker-compose : To build AND serve the documentation.
+- with Docker : Only if you need to build the documentation.
+- or by installing the packages directly on your OS.
 
-Build the Documentation with Docker
------------------------------------
+## Docker-compose : Build and serve the Documentation
 
-Docker will let you create a container with all packages needed to build the
-docs. You need to have docker installed, see the [official docs of
-docker](http://docs.docker.com/mac/started/) for more information.
+Docker-Compose will create and link multi-containers with all packages needed (including elasticsearch). You need to have [Docker](http://docs.docker.com/mac/started/) and [Docker-compose](https://docs.docker.com/compose/install/) installed.
 
-### Use the image on DockerHub ###
+### A shell to build and serve the docs
 
-The easiest way is to use the image already hosted on [DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
+A `start.sh` script will install all the tools you need to build and serve the docs:
 
-You can directly run the following commands:
+    git clone git@github.com:cakephp-fr/docs-cakephp.git
+    cd docs-cakephp
+    git checkout --track origin/3.0-docker-compose
+    // Just run the `start.sh` script
+    ./start.sh
+
+This can take a little while the first time you run a command because all
+packages need to be downloaded via images created on
+[DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
+
+The script will do the following:
+- The docs_search repo will be cloned at the root and be installed (composer)
+- The host url for search `http://192.168.99.100:8080/search` will be replaced in `themes/cakephp/static/app.js` with the host given by the command `$(docker-machine ip $(docker-machine active))`
+- The docs will be built in `/build` folder
+- `docker-compose up -d` will be run, creating the 5 following containers:
+    - 2 containers with nginx webserver and a php server : it's a Cakephp 3 app which get the docs search results dynamically from the elasticsearch server
+    - 1 container with an nginx server : it is a http server with the static version of the docs
+    - 1 container with all tools useful to build the docs : python and sphinx
+    - 1 elasticsearch server : contains index for the docs search
+
+To see which containers are up and their host and port names, run:
+
+    docker-compose ps
+
+### Rebuild the docs with Docker-compose
+
+If you need to rebuild the docs after changes you've done, run the following:
 
     # To build the html
     cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html
+    docker-compose run --rm docs make html
 
     # To build the epub
     cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
+    docker-compose run --rm docs make epub
 
     # To build the latex
     cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
+    docker-compose run --rm docs make latex
 
     # To build the pdf
     cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
+    docker-compose run --rm docs make pdf
+
+### Repopulate the elasticsearch search index
+
+If you need to repopulate the search index, you can use:
+
+    docker-compose run --rm php /bin/sh -c 'cd /data;make rebuild-index ES_HOST=http://'$(docker-machine ip $(docker-machine active))':9200'
+
+
+## Docker : Build the documentation
+
+Docker will let you create a container with all packages needed to build the docs. You need to have docker installed, see the [official docs of docker](http://docs.docker.com/mac/started/) for more information.
+
+### Use images hosted on Dockerhub
+
+You can run all the following commands to build the docs. This can take a little while the first time you run a command because all packages need to be downloaded via images created on [DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
+
+    # To build the html
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp-fr/docs:light make html
+
+    # To build the epub
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp-fr/docs make epub
+
+    # To build the latex
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp-fr/docs make latex
+
+    # To build the pdf
+    cd /path/to/your/local/docs
+    docker run -it --rm -v $(pwd):/data cakephp-fr/docs make pdf
+
+All the commands below will create and start containers and build the docs in the `build` folder. The `--rm` flag will delete the container after run.
+
 
 ### Build the image locally ###
 
-There is a Dockerfile included at the root of this repository. You can build
-an image using:
+There is a Dockerfile included at the root of this repository. You can build an image using:
 
     docker build -t cakephp/docs .
 
-This can take a little while, because all packages needs to be downloaded, but
-you'll only need to do this once.
+This can take a little while, because all packages needs to be downloaded, but you'll only need to do this once.
 
-You can run `docker images` to check that the image has been correctly built,
-you should see this output:
+You can run `docker images` to check that the image has been correctly built, you should see this output:
 
 ```
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
@@ -63,8 +115,7 @@ cakephp/docs        latest              9783ad2c375b        3 hours ago         
 debian              jessie              3d88cbf54477        12 days ago         125.2 MB
 ```
 
-If you can't see an image called `cakephp/docs`, it can mean that the image has
-been wrongly built. If you notice an image called <none> like the following:
+If you can't see an image called `cakephp/docs`, it can mean that the image has been wrongly built. If you notice an image called <none> like the following:
 
 ```
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
@@ -97,11 +148,10 @@ Now that the image is built, you can run all the commands to build the docs:
     cd /path/to/your/local/docs
     docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
 
-All the commands below will create and start containers and build the docs in
-the `build` folder. The `--rm` flag will delete the container after run.
+All the commands below will create and start containers and build the docs in the `build` folder. The `--rm` flag will delete the container after run.
 
-Build the Documentation Manually
---------------------------------
+
+## Build the Documentation Manually
 
 ### Installing the needed Packages ###
 
@@ -125,8 +175,7 @@ You can install the phpdomain using:
 
 ### Building the Documentation ###
 
-After installing the required packages, you can build the documentation using
-`make`.
+After installing the required packages, you can build the documentation using `make`.
 
     # Create all the HTML docs. Including all the languages.
     make html
@@ -143,12 +192,9 @@ After installing the required packages, you can build the documentation using
     # Populate the search index
     make populate-index
 
-This will generate all the documentation in an HTML form. Other output such as
-'htmlhelp' are not fully complete at this time.
+This will generate all the documentation in an HTML form. Other output such as 'htmlhelp' are not fully complete at this time.
 
-After making changes to the documentation, you can build the HTML version of the
-docs by using `make html` again.  This will build only the HTML files that have
-had changes made to them.
+After making changes to the documentation, you can build the HTML version of the docs by using `make html` again.  This will build only the HTML files that have had changes made to them.
 
 ### Building the PDF ###
 
@@ -162,31 +208,7 @@ Building the PDF is a non-trivial task.
 
 At this point the completed PDF should be in build/latex/en/CakePHPCookbook.pdf.
 
-Contributing
-------------
-
-There are currently a number of outstanding issues that need to be addressed.
-We've tried to flag these with `.. todo::` where possible. To see all the
-outstanding todo's add the following to your `config/all.py`
-
-    todo_include_todos = True
-
-After rebuilding the HTML content, you should see a list of existing todo items
-at the bottom of the table of contents.
-
-You are also welcome to make and suggestions for new content as commits in a
-GitHub fork. Please make any totally new sections in a separate branch. This
-makes changes far easier to integrate later on.
-
-Translations
-------------
-
-Contributing translations requires that you make a new directory using the two
-letter name for your language. As content is translated, directories mirroring
-the english content should be created with localized content.
-
-Making Search Work Locally
---------------------------
+### Making Search Work Locally
 
 * Install elasticsearch. This varies based on your platform, but most
   package managers have a package for it.
@@ -197,3 +219,19 @@ Making Search Work Locally
 * Start elasticsearch with the default configuration.
 * Populate the search index using `make populate-index`.
 * You should now be able to search the docs using elasticsearch.
+
+
+## Contributing
+
+There are currently a number of outstanding issues that need to be addressed. We've tried to flag these with `.. todo::` where possible. To see all the outstanding todo's add the following to your `config/all.py`
+
+    todo_include_todos = True
+
+After rebuilding the HTML content, you should see a list of existing todo items at the bottom of the table of contents.
+
+You are also welcome to make and suggestions for new content as commits in a GitHub fork. Please make any totally new sections in a separate branch. This makes changes far easier to integrate later on.
+
+
+## Translations
+
+Contributing translations requires that you make a new directory using the two letter name for your language. As content is translated, directories mirroring the english content should be created with localized content.
