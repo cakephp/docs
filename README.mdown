@@ -31,6 +31,8 @@ This can take a little while the first time you run a command because all
 packages need to be downloaded via images created on
 [DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
 
+You can now access to the docs server on http://MACHINE_HOST (`$(docker-machine ip $(docker-machine active))` to get it)
+
 The script will do the following:
 - The docs_search repo will be cloned at the root and be installed (composer)
 - The host url for search `http://192.168.99.100:8080/search` will be replaced in `themes/cakephp/static/app.js` with the host given by the command `$(docker-machine ip $(docker-machine active))`

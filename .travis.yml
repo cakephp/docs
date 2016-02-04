@@ -15,11 +15,19 @@ before_install:
     - docker pull cakephpfr/3.x:nginx
 
 script:
-    - chmod +x start.sh; ./start.sh
+    - git clone --depth=50 --branch=docker-compose https://github.com/cakephp-fr/docs_search.git docs_search
+    - cd docs_search
+    - composer install --prefer-dist --no-interaction
+    - cd ..
+    - docker-compose up -d
     - docker-compose run --rm docs make html SPHINXOPTS='-W'
     - docker-compose run --rm docs make epub
     - docker-compose run --rm docs make latex
     - docker-compose run --rm docs make pdf
+
+after_script:
+  - docker-compose stop
+  - docker-compose rm -f
 
 notifications:
     email: false
