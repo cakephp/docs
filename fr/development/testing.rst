@@ -1063,7 +1063,7 @@ toutes les assertions de `TestSuite
 de
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
-Comparer les résultats du test avec un fichier
+Comparer les Résultats du Test avec un Fichier
 ----------------------------------------------
 
 Pour certains types de test, il peut être plus simple de comparer les résultats
