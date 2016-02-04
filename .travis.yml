@@ -1,16 +1,24 @@
 sudo: required
 
+language: php
+
+php:
+  - 7.0
+
 services:
     - docker
+    - docker-compose
 
 before_install:
     - docker pull cakephpfr/docs
+    - docker pull cakephpfr/3.x
 
 script:
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs:light make html SPHINXOPTS='-W'
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make epub
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make latex
-    - docker run -it --rm -v $(pwd):/data cakephpfr/docs make pdf
+    - chmod +x start.sh; ./start.sh
+    - docker-compose run --rm docs make html SPHINXOPTS='-W'
+    - docker-compose run --rm docs make epub
+    - docker-compose run --rm docs make latex
+    - docker-compose run --rm docs make pdf
 
 notifications:
     email: false
