@@ -21,9 +21,9 @@ Docker-Compose will create and link multi-containers with all packages needed (i
 
 A `start.sh` script will install all the tools you need to build and serve the docs:
 
-    git clone git@github.com:cakephp-fr/docs-cakephp.git
-    cd docs-cakephp
-    git checkout --track origin/3.0-docker-compose
+    git clone git@github.com:cakephp/docs.git
+    cd docs
+    git checkout --track origin/3.0
     // Just run the `start.sh` script
     ./start.sh
 

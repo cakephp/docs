@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # clone and initialize docs_search
-git clone --depth=50 --branch=docker-compose https://github.com/cakephp-fr/docs_search.git docs_search
+git clone --depth=50 --branch=master https://github.com/cakephp/docs_search.git docs_search
 cd docs_search
 composer install --prefer-dist --no-interaction
 cd ..
