@@ -1011,6 +1011,62 @@ assertions in `TestSuite
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
+Comparing test results to a file
+--------------------------------
+
+For some types of test, it may be easier to compare the result of a test to the
+contents of a file - for example, when testing the rendered output of a view.
+The ``StringCompareTrait`` adds a simple assert method for this purpose.
+
+Usage involves using the trait, setting the comparison base path and calling
+``assertSameAsFile``::
+
+    use Cake\TestSuite\StringCompareTrait;
+    use Cake\TestSuite\TestCase;
+
+    class SomeTest extends TestCase
+    {
+        use StringCompareTrait;
+
+        public function setUp()
+        {
+            $this->_compareBasePath = APP . 'tests' . DS . 'comparisons' . DS;
+            parent::setUp();
+        }
+
+        public function testExample()
+        {
+            $result = ...;
+            $this->assertSameAsFile('example.php', $result);
+        }
+    }
+
+The above example will compare ``$result`` to the contents of the file
+``APP/tests/comparisons/example.php``.
+
+A mechanism is provided to write/update test files, by setting the environment
+variable ``UPDATE_TEST_COMPARISON_FILES``, which will create and/or update test
+comparison files as they are referenced:
+
+.. code-block:: bash
+
+    phpunit
+    ...
+    FAILURES!
+    Tests: 6, Assertions: 7, Failures: 1
+
+    UPDATE_TEST_COMPARISON_FILES=1 phpunit
+    ...
+    OK (6 tests, 7 assertions)
+
+    git status
+    ...
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #   modified:   tests/comparisons/example.php
+
 Testing with Encrypted Cookies
 ------------------------------
 
