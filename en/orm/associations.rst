@@ -98,9 +98,9 @@ self-associated tables to create parent-child relationships::
         }
     }
 
-You can all setup associations en mass by making a single call to
-``Table::addAssociations()``. It takes an array containing set of
-table names indexed by association type as argument::
+You can also setup associations in mass by making a single call to 
+``Table::addAssociations()`` which accepts an array containing a set of
+table names indexed by association type as an argument::
 
     class PostsTable extends Table
     {
