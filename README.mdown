@@ -15,15 +15,15 @@ There are three ways for using the documentation:
 
 ## Docker-compose : Build and serve the Documentation
 
-Please go to the [docker-compose page](docs/docker-compose.md) for more information.
+Please go to the [docker-compose page](contrib/docker-compose.md) for more information.
 
 ## Docker : Build the documentation
 
-Please go to the [docker page](docs/docker.md) for more information.
+Please go to the [docker page](contrib/docker.md) for more information.
 
 ## Directly install the tools : Build the Documentation
 
-Please go to the [direct install page](docs/direct-install.md) for more information.
+Please go to the [direct install page](contrib/direct-install.md) for more information.
 
 ## Contributing
 
