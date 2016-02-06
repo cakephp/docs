@@ -359,7 +359,7 @@ Possible keys for hasMany association arrays include:
 
 - **className**: the class name of the model being associated to
   the current model. If you're defining a 'User hasMany Comment'
-  relationship, the className key should equal 'Comment'.
+  relationship, the className key should equal 'Comments'.
 - **foreignKey**: the name of the foreign key found in the other
   table. This is especially handy if you need to define multiple
   hasMany relationships. The default value for this key is the
