@@ -1071,8 +1071,8 @@ d'un test avec le contenu d'un fichier - par exemple, quand vous testez la
 sortie rendue d'une view.
 ``StringCompareTrait`` ajoute une méthode d'assertion simple pour cela.
 
-L'utilisation implique l'utiisation d'un trait, définissant le chemin de base
-et appelant ``assertSameAsFile``::
+Pour l'utiliser, vous devez inclure un Trait, définir le chemin de base de
+comparaison et appeler ``assertSameAsFile``::
 
     use Cake\TestSuite\StringCompareTrait;
     use Cake\TestSuite\TestCase;
@@ -1099,8 +1099,8 @@ L'exemple ci-dessus va comparer ``$result`` au contenu du fichier
 
 Un mécanisme est fourni pour écrire/mettre à jour les fichiers de test, en
 définissant la variable d'environment ``UPDATE_TEST_COMPARISON_FILES``, ce qui
-va créer et/ou mettre à jour les fichiers de comparaison de test puisqu'ils
-sont référencés:
+va créer et/ou mettre à jour les fichiers de comparaison de test au fur et à
+mesure où ils sont rendus:
 
 .. code-block:: bash
 
