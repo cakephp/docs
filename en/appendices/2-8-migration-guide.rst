@@ -75,6 +75,14 @@ Validation
 
 - ``Validation::uploadedFile()`` was backported from 3.x.
 
+
+CakeSession
+===========
+
+- The ``Session.cacheLimiter`` configuration option was added. This option lets
+  you define the cache control headers used for the session cookie. The default
+  is ``must-revalidate``.
+
 View
 ====
 
