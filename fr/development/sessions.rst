@@ -54,6 +54,10 @@ niveau ``Session``, et un certain nombre d'options sont disponibles:
   remplace les fonctionnalités de gestionnaire de session personnalisé
   des versions précédentes.
 
+* ``Session.cacheLimiter`` - Vous permet de définir les en-têtes du cache
+  control utilisées pour le cookie de session. La valeur par défaut est
+  ``must-revalidate``. Cette option a été ajoutée dans 2.8.0.
+
 CakePHP met par défaut la configuration de ``session.cookie_secure`` à true,
 quand votre application est sur un protocole SSL. Si votre application
 utilise à la fois les protocoles SSL et non-SSL, alors vous aurez peut-être
@@ -237,7 +241,7 @@ Les Sessions de Cache
 La classe Cache peut aussi être utilisée pour stocker les sessions. Cela vous
 permet de stocker les sessions dans un cache comme APC, memcache, ou Xcache.
 Il y a quelques précautions à prendre dans l'utilisation des sessions en
-cache, puisque si vous avez épuisé l'espace de cache, les sessions vont 
+cache, puisque si vous avez épuisé l'espace de cache, les sessions vont
 commencer à expirer tandis que les enregistrements sont supprimés.
 
 Pour utiliser les sessions basées sur le Cache, vous pouvez configurer votre
@@ -282,7 +286,7 @@ Créer un gestionnaire de session personnalisé
 Créer un gestionnaire de session personnalisé est simple dans CakePHP. Dans cet
 exemple, nous allons créer un gestionnaire de session qui stocke les sessions
 à la fois dans le Cache (apc) et la base de données. Cela nous donne le
-meilleur du IO rapide de apc, sans avoir à se soucier des sessions qui 
+meilleur du IO rapide de apc, sans avoir à se soucier des sessions qui
 disparaissent quand le cache se remplit.
 
 D'abord, nous aurons besoin de créer notre classe personnalisée et de la
@@ -329,7 +333,7 @@ devrait ressembler à::
 
 Notre classe étend la classe intégrée ``DatabaseSession`` donc nous ne devons
 pas dupliquer toute sa logique et son comportement. Nous entourons chaque
-opération avec une opération :php:class:`Cache`. Cela nous permet de récupérer 
+opération avec une opération :php:class:`Cache`. Cela nous permet de récupérer
 les sessions de la mise en cache rapide, et nous évite de nous inquiéter sur ce qui
 arrive quand nous remplissons le cache. Utiliser le gestionnaire de session est
 aussi facile. Dans votre ``core.php`` imitez le block de session ressemblant
