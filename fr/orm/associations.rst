@@ -102,7 +102,7 @@ relations parent-enfant::
     }
 
 Vous pouvez aussi définir les associations en masse via un appel unique
-à la méthode ``Table::addAssociations()``. Elle accepte en paramètre un
+à la méthode ``Table::addAssociations()`` qui accepte en paramètre un
 tableau contenant les noms de tables indexés par association::
 
     class PostsTable extends Table
@@ -374,7 +374,7 @@ Les clés possibles pour les tableaux d'association hasMany sont:
 - **className**: le nom de la classe du model que l'on souhaite associer au
   model actuel. Si l'on souhaite définir la relation 'User hasMany Comment'
   (l'User a plusieurs Commentaires), la valeur associée à la clef 'className'
-  devra être 'Comment'.
+  devra être 'Comments'.
 - **foreignKey**: le nom de la clé étrangère que l'on trouve dans l'autre
   table. Ceci sera particulièrement pratique si vous avez besoin de définir
   plusieurs relations hasMany. La valeur par défaut de cette clé est le nom
