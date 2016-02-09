@@ -22,26 +22,32 @@ You can install the phpdomain using:
 
 ### Building the Documentation ###
 
-After installing the required packages, you can build the documentation using `make`.
+After installing the required packages, you can build the documentation using
+`make`.
 
-    # Create all the HTML docs. Including all the languages.
-    make html
+```bash
+# Create all the HTML docs. Including all the languages.
+make html
 
-    # Create just the English HTML docs.
-    make html-en
+# Create just the English HTML docs.
+make html-en
 
-    # Create all the EPUB (e-book) docs.
-    make epub
+# Create all the EPUB (e-book) docs.
+make epub
 
-    # Create just the English EPUB docs.
-    make epub-en
+# Create just the English EPUB docs.
+make epub-en
 
-    # Populate the search index
-    make populate-index
+# Populate the search index
+make populate-index
+```
 
-This will generate all the documentation in an HTML form. Other output such as 'htmlhelp' are not fully complete at this time.
+This will generate all the documentation in an HTML form. Other output such as
+'htmlhelp' are not fully complete at this time.
 
-After making changes to the documentation, you can build the HTML version of the docs by using `make html` again.  This will build only the HTML files that have had changes made to them.
+After making changes to the documentation, you can build the HTML version of the
+docs by using `make html` again.  This will build only the HTML files that have
+had changes made to them.
 
 ### Building the PDF ###
 

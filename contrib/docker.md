@@ -1,39 +1,52 @@
 ## Docker : Build the documentation
 
-Docker will let you create a container with all packages needed to build the docs. You need to have docker installed, see the [official docs of docker](http://docs.docker.com/mac/started/) for more information.
+Docker will let you create a container with all packages needed to build the
+docs. You need to have docker installed, see the [official docs of
+docker](http://docs.docker.com/mac/started/) for more information.
 
 ### Use images hosted on Dockerhub
 
-You can run all the following commands to build the docs. This can take a little while the first time you run a command because all packages need to be downloaded via images created on [DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
+You can run all the following commands to build the docs. This can take a little
+while the first time you run a command because all packages need to be
+downloaded via images created on
+[DockerHub](https://hub.docker.com/r/cakephpfr/docs/).
 
-    # To build the html
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp-fr/docs:light make html
+```bash
+# To build the html
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp-fr/docs:light make html
 
-    # To build the epub
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp-fr/docs make epub
+# To build the epub
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp-fr/docs make epub
 
-    # To build the latex
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp-fr/docs make latex
+# To build the latex
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp-fr/docs make latex
 
-    # To build the pdf
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp-fr/docs make pdf
+# To build the pdf
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp-fr/docs make pdf
+```
 
-All the commands below will create and start containers and build the docs in the `build` folder. The `--rm` flag will delete the container after run.
+All the commands below will create and start containers and build the docs in
+the `build` folder. The `--rm` flag will delete the container after run.
 
 
 ### Build the image locally ###
 
-There is a Dockerfile included at the root of this repository. You can build an image using:
+There is a Dockerfile included at the root of this repository. You can build an
+image using:
 
-    docker build -t cakephp/docs .
+```bash
+docker build -t cakephp/docs .
+```
 
-This can take a little while, because all packages needs to be downloaded, but you'll only need to do this once.
+This can take a little while, because all packages needs to be downloaded, but
+you'll only need to do this once.
 
-You can run `docker images` to check that the image has been correctly built, you should see this output:
+You can run `docker images` to check that the image has been correctly built,
+you should see this output:
 
 ```
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
@@ -51,27 +64,32 @@ debian              jessie              3d88cbf54477        12 days ago         
 
 Run the following command (with your image id of course):
 
-    // to remove the image
-    docker rmi 9783ad2c375b
-    // re-run the build command
-    docker build -t cakephp/docs .
+```bash
+// to remove the image
+docker rmi 9783ad2c375b
+// re-run the build command
+docker build -t cakephp/docs .
+```
 
 Now that the image is built, you can run all the commands to build the docs:
 
-    # To build the html
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp/docs make html
+```bash
+# To build the html
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp/docs make html
 
-    # To build the epub
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp/docs make epub
+# To build the epub
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp/docs make epub
 
-    # To build the latex
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp/docs make latex
+# To build the latex
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp/docs make latex
 
-    # To build the pdf
-    cd /path/to/your/local/docs
-    docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
+# To build the pdf
+cd /path/to/your/local/docs
+docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
+```
 
-All the commands below will create and start containers and build the docs in the `build` folder. The `--rm` flag will delete the container after run.
+All the commands below will create and start containers and build the docs in
+the `build` folder. The `--rm` flag will delete the container after run.
