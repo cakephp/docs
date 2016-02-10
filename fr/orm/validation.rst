@@ -490,7 +490,7 @@ Dans l'exemple ci-dessus, l'entity sera sauvegardée car la validation n'est
 déclenchée que par les méthodes ``newEntity()`` et ``patchEntity()``. Le second
 niveau de validation est conçu pour gérer cette situation.
 
-Les règle d'application, comme expliqué précédement, seront vérifiée à chaque
+Les règles d'application, comme expliqué précédement, seront vérifiées à chaque
 fois que ``save()`` ou ``delete()`` sont appelées::
 
     // Dans src/Model/Table/UsersTable.php
