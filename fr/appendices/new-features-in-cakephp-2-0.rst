@@ -32,7 +32,6 @@ HtmlHelper
 ----------
 
 * ``getCrumbList()`` Créé un fil d'ariane de liens entourés d'éléments ``<li>``.
-  Regardez `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
 * ``loadConfig()`` a été déplacé de :php:class:`Helper` vers la classe
   :php:class:`HtmlHelper`. Cette méthode utilise maintenant les nouvelles
   classes de lecture (voir 2.0 :php:class:`Configure`)

@@ -71,10 +71,7 @@ CakeSession
 
 .. versionchanged:: 2.1.1
     CakeSession ne fixe plus l'en-tête P3P, puisque cela relève de la
-    responsabilité de votre application. Pour plus d'informations, voyez le
-    ticket
-    `#2515 <http://cakephp.lighthouseapp.com/projects/42648/tickets/2515-cakephp-20-session-p3p-header-doesnt-work-in-an-iframe>`_
-    dans la lighthouse
+    responsabilité de votre application.
 
 Behaviors
 =========
