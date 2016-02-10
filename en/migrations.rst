@@ -122,47 +122,103 @@ Creating Migrations
 
 Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
-which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**::
+which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**.
+Here are examples of migration filenames::
 
-    -rw-rw-r-- 1 user user  914 Jan 21 10:38 20160121163850_CreateProducts.php
+* 20160121163850_CreateProducts.php
+* 20160210133047_AddRatingToProducts.php
 
 The easiest way to create a migrations file is by using the
-:doc:`/bake/usage` CLI command. The following ``Bake`` command would create a
-migration to add a ``products`` table::
+:doc:`/bake/usage` CLI command.
+
+Please make sure you read the official `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
+in order to know the complete list of methods you can use for writing migration files.
+
+Syntax
+------
+
+The ``bake`` command syntax follows the form below::
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
-    Welcome to CakePHP v3.1.7 Console
-    ---------------------------------------------------------------
-    App : src
-    Path: /home/user/Work/php/cakeblog/src/
-    PHP : 5.5.28-1+deb.sury.org~precise+1
-    ---------------------------------------------------------------
+When using ``bake`` to create tables, add columns and so on, to your
+database, you will usually provide two things :
 
-    Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php
-    Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121163249_CreateProducts.php`
+* the name of the migration you will generate (``CreateProducts`` in our
+example)
+* the columns of the table that will be added or removed in the migration
+(``name:string description:text created modified`` in our example)
+
+Additionally you can create an empty migrations file if you want full control
+over what needs to be executed, by ommiting to specify a columns definition::
+
+    $ bin/cake migrations create MyCustomMigration
+
+Migrations file name
+~~~~~~~~~~~~~~~~~~~~
+
+Migration names can follow any of the following patterns:
+
+* **Create a table**: (``/^(Create)(.*)/``) Creates the specified table.
+* **Drop a table**: (``/^(Drop)(.*)/``) Drops the specified table. Ignores specified field arguments.
+* **Add a field**: (``/^(Add).*(?:To)(.*)/``) Adds fields to the specified table.
+* **Remove a field**: (``/^(Remove).*(?:From)(.*)/``) Removes fields from the specified table.
+* **Alter a table**:  (``/^(Alter)(.*)/``) Alters the specified table. An alias for CreateTable and AddField.
 
 You can also use the ``underscore_form`` as the name for your migrations
-i.e. create_products::
-
-    $ bin/cake bake migration create_products name:string description:text created modified
-
-    Welcome to CakePHP v3.1.17 Console
-    ---------------------------------------------------------------
-    App : src
-    Path: /home/user/Work/php/cakeblog/src/
-    ---------------------------------------------------------------
-
-    Creating file /home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php
-    Wrote `/home/user/Work/php/cakeblog/config/Migrations/20160121164955_CreateProducts.php`
+i.e. ``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
-    Camelizing the name of the migration file was introduced in v1.5.2 of the
-    `migrations plugin <https://github.com/cakephp/migrations/>`_. This version
-    of the plugin is only available with a release of CakePHP >= to 3.1. Prior
-    to this version of the plugin the migration name would be in the
-    underscore form: 20160121164955_create_products.php.
+    As of v1.5.2 of the `migrations plugin <https://github.com/cakephp/migrations/>`_,
+    the migration filename will be automatically camelized. This version of the
+    plugin is only available with a release of CakePHP >= to 3.1. Prior to this
+    version of the plugin the migration name would be in the underscore form,
+    i.e. ``20160121164955_create_products.php``.
+
+Columns definition
+~~~~~~~~~~~~~~~~~~
+
+When using columns in the command line, it may be handy to remember that they
+follow the following pattern::
+
+    field:fieldType[length]:indexType:indexName
+
+For instance, the following are all valid ways of specifying an email field:
+
+* ``email:string:unique``
+* ``email:string:unique:EMAIL_INDEX``
+* ``email:string[120]:unique:EMAIL_INDEX``
+
+The ``length`` parameter for the ``fieldType`` is optional and should always be
+written between bracket.
+
+Fields named ``created`` and ``modified`` will automatically be set to the type
+``datetime``.
+
+Field types a those generically made available by the ``Phinx`` library. Those
+can be:
+
+* string
+* text
+* integer
+* biginteger
+* float
+* decimal
+* datetime
+* timestamp
+* time
+* date
+* binary
+* boolean
+* uuid
+
+Creating a table
+----------------
+
+You can use ``bake`` to create a table::
+
+    $ bin/cake bake migration CreateProducts name:string description:text created modified
 
 The command line above will generate a migration file that resembles::
 
@@ -202,17 +258,18 @@ The command line above will generate a migration file that resembles::
         }
     }
 
+Adding columns to an existing table
+-----------------------------------
 
-If the migration name in the command line is of the form "AddXXXToYYY" or "RemoveXXXFromYYY"
-and is followed by a list of column names and types then a migration file
-containing the code for creating or dropping the columns will be generated::
+If the migration name in the command line is of the form "AddXXXToYYY" and is
+followed by a list of column names and types then a migration file containing
+the code for creating the columns will be generated::
 
-    bin/cake bake migration AddPriceToProducts price:decimal
+    $ bin/cake bake migration AddPriceToProducts price:decimal
 
 Executing the command line above will generate::
 
     <?php
-
     use Migrations\AbstractMigration;
 
     class AddPriceToProducts extends AbstractMigration
@@ -225,41 +282,16 @@ Executing the command line above will generate::
         }
     }
 
-.. versionadded:: cakephp/migrations 1.4
-
-If you need to specify a field length, you can do it within brackets in the
-field type, ie::
-
-    bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
-
-Executing the command line above will generate::
-
-    <?php
-
-    use Migrations\AbstractMigration;
-
-    class AddFullDescriptionToProducts extends AbstractMigration
-    {
-        public function change()
-        {
-            $table = $this->table('products');
-            $table->addColumn('full_description', 'string', [
-                    'default' => null,
-                    'limit' => 60,
-                    'null' => false,
-                 ])
-                  ->update();
-        }
-    }
+Adding a column as index to a table
+-----------------------------------
 
 It is also possible to add indexes to columns::
 
-    bin/cake bake migration AddNameIndexToProducts name:string:index
+    $ bin/cake bake migration AddNameIndexToProducts name:string:index
 
 will generate::
 
     <?php
-
     use Migrations\AbstractMigration;
 
     class AddNameIndexToProducts extends AbstractMigration
@@ -273,28 +305,47 @@ will generate::
         }
     }
 
-When using fields in the command line it may be handy to remember that they
-follow the following pattern::
 
-    field:fieldType:indexType:indexName
+Specifying field length
+-----------------------
 
-For instance, the following are all valid ways of specifying an email field:
+.. versionadded:: cakephp/migrations 1.4
 
-* ``email:string:unique``
-* ``email:string:unique:EMAIL_INDEX``
+If you need to specify a field length, you can do it within brackets in the
+field type, ie::
 
-Fields named ``created`` and ``modified`` will automatically be set to the type
-``datetime``.
+    $ bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
+
+Executing the command line above will generate::
+
+    <?php
+    use Migrations\AbstractMigration;
+
+    class AddFullDescriptionToProducts extends AbstractMigration
+    {
+        public function change()
+        {
+            $table = $this->table('products');
+            $table->addColumn('full_description', 'string', [
+                'default' => null,
+                'limit' => 60,
+                'null' => false,
+            ])
+            ->update();
+        }
+    }
+
+Removing a column from a table
+------------------------------
 
 In the same way, you can generate a migration to remove a column by using the
-command line::
+command line, if the migration name is of the form "RemoveXXXFromYYY"::
 
     bin/cake bake migration RemovePriceFromProducts price
 
 creates the file::
 
     <?php
-
     use Migrations\AbstractMigration;
 
     class RemovePriceFromProducts extends AbstractMigration
@@ -305,39 +356,6 @@ creates the file::
             $table->removeColumn('price');
         }
     }
-
-Migration Names can follow any of the following patterns:
-
-* Create a table: (``/^(Create)(.*)/``) Creates the specified table.
-* Drop a table: (``/^(Drop)(.*)/``) Drops the specified table. Ignores specified field arguments.
-* Add a field: (``/^(Add).*(?:To)(.*)/``) Adds fields to the specified table.
-* Remove a field: (``/^(Remove).*(?:From)(.*)/``) Removes fields from the specified table.
-* Alter a table:  (``/^(Alter)(.*)/``) Alters the specified table. An alias for CreateTable and AddField.
-
-Field types a those generically made available by the ``Phinx`` library. Those
-can be:
-
-* string
-* text
-* integer
-* biginteger
-* float
-* decimal
-* datetime
-* timestamp
-* time
-* date
-* binary
-* boolean
-* uuid
-
-Additionally you can create an empty migrations file if you want full control
-over what needs to be executed::
-
-    bin/cake migrations create MyCustomMigration
-
-Please make sure you read the official `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
-in order to know the complete list of methods you can use for writing migration files.
 
 Generating Migrations From Existing Databases
 ---------------------------------------------
@@ -359,7 +377,6 @@ adding new tables to the database, you can use the second argument of the
 ``table()`` method::
 
     <?php
-
     use Migrations\AbstractMigration;
 
     class CreateProductsTable extends AbstractMigration
@@ -383,8 +400,7 @@ The above will create a ``CHAR(36)`` ``id`` column that is also the primary key.
     it as the primary key in the id field, otherwise you may get an error
     regarding duplicate id fields, i.e.::
 
-        bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
-
+        $ bin/cake bake migration CreateProducts id:uuid:primary name:string description:text created modified
 
 Additionally, since Migrations 1.3, a new way to deal with primary key was
 introduced. To do so, your migration class should extend the new
@@ -395,7 +411,6 @@ need to manually create the column that will be used as a primary key and add
 it to the table declaration::
 
     <?php
-
     use Migrations\AbstractMigration;
 
     class CreateProductsTable extends AbstractMigration
@@ -635,3 +650,50 @@ pass them to the method::
     $status = $migrations->status();
     // This one with the "default" connection
     $migrate = $migrations->migrate(['connection' => 'default']);
+
+Seeding your database
+=====================
+
+As of 1.5.5, you can use the ``migrations`` shell to seed your database. This
+leverages the `Phinx library seed feature <http://docs.phinx.org/en/latest/seeding.html>`_.
+By default, seed files will be looked for in the ``config/Seeds`` directory of
+your application. Please make sure you follow `Phinx instructions to build your seed files` <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
+
+As for migrations, a ``bake`` interface is provided for seed files:
+
+```bash
+# This will create a ArticlesSeed.php file in the directory config/Seeds of your application
+# By default, the table the seed will try to alter is the "tableized" version of the seed filename
+bin/cake bake seed Articles
+
+# You specify the name of the table the seed files will alter by using the ``--table`` option
+bin/cake bake seed Articles --table my_articles_table
+
+# You can specify a plugin to bake into
+bin/cake bake seed Articles --plugin PluginName
+
+# You can specify an alternative connection when generating a seeder.
+bin/cake bake seed Articles --connection connection
+```
+
+To seed your database, you can use the ``seed`` subcommand:
+
+```bash
+# Without parameters, the seed subcommand will run all available seeders in the target directory, in alphabetical order.
+bin/cake migrations seed
+
+# You can specify only one seeder to be run using the `--seed` option
+bin/cake migrations seed --seed ArticlesSeed
+
+# You can run seeders from an alternative directory
+bin/cake migrations seed --source AlternativeSeeds
+
+# You can run seeders from a plugin
+bin/cake migrations seed --plugin PluginName
+
+# You can run seeders from a specific connection
+bin/cake migrations seed --connection connection
+```
+
+Be aware that, as opposed to migrations, seeders are not tracked, which means
+that the same seeder can be applied multiple times.
