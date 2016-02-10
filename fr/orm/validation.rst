@@ -565,7 +565,7 @@ qui définit des propriétés directement dans des entities::
 Lors de l'exécution du code suivant, la sauvegarde échouera grâce à la nouvelle
 règle d'application qui a été ajoutée::
 
-    $userEntity->email = Pas un email!!!';
+    $userEntity->email = 'Pas un email!!!';
     $usersTable->save($userEntity);
     $userEntity->errors('email'); // Email invalide
 
