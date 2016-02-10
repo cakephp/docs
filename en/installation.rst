@@ -58,7 +58,7 @@ bug-fixes and up to the minute enhancements.
 These can be accessed from GitHub by cloning the
 `GitHub`_ repository::
 
-    git clone -b 2.7 git://github.com/cakephp/cakephp.git
+    git clone -b 2.x git://github.com/cakephp/cakephp.git
 
 
 Permissions
