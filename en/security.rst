@@ -9,7 +9,7 @@ The following sections cover those tools:
 
     core-libraries/security
     controllers/components/csrf
-    controllers/components/security
+    Security Component <controllers/components/security>
 
 
 .. meta::
