@@ -67,7 +67,6 @@ CakeSession
 
 .. versionchanged:: 2.1.1
     CakeSession no longer sets the P3P header, as this is the responsibility of your application.
-    More info see ticket `#2515 <http://cakephp.lighthouseapp.com/projects/42648/tickets/2515-cakephp-20-session-p3p-header-doesnt-work-in-an-iframe>`_ in lighthouse
 
 Behaviors
 =========

@@ -26,7 +26,6 @@ HtmlHelper
 ----------
 
 * ``getCrumbList()`` は ``<li>`` エレメントでラップされたぱんくずリストのリンクを生成します。
-  `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_ を見てください。
 * ``loadConfig()`` は :php:class:`Helper` から :php:class:`HtmlHelper` に移動しました。
    このメソッドは設定ファイルを読み込むのに新しいリーダークラス（2.0 :php:class:`Configure` をみてください）を使うようになりました。
    省略可能ですが、二番目の引数としてパス（デフォルトは ``app/Config`` ）を渡すことができます。
