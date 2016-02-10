@@ -270,7 +270,7 @@ Attribute Matching Types
             ]
         */
 
-    You can provide array's for both ``$keyPath`` and ``$valuePath``. If you do this,
+    You can provide arrays for both ``$keyPath`` and ``$valuePath``. If you do this,
     the first value will be used as a format string, for values extracted by the
     other paths::
 
