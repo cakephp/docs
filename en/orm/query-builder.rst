@@ -1117,9 +1117,12 @@ queries::
         ->values($select)
         ->execute();
 
-.. _query-builder-updating-data:
+.. note::
+    Inserting records with the query builder will not trigger events such as 
+    ``Model.afterSave``. Instead you should use the :doc:`ORM to save 
+    data </orm/saving-data>`.
 
-Note: Inserting records with the query builder will not trigger the ``Model.afterSave`` event. http://book.cakephp.org/3.0/en/orm/saving-data.html#inserting-data should be used instead if this is required.
+.. _query-builder-updating-data:
 
 Updating Data
 =============
@@ -1136,7 +1139,10 @@ Instead, create new a ``Query`` object using ``query()``::
 Generally, it is easier to update data using entities and
 :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
 
-Note: Updating records with the query builder will not trigger the ``Model.afterSave`` event. http://book.cakephp.org/3.0/en/orm/saving-data.html#updating-data should be used instead if this is required.
+.. note::
+    Updating records with the query builder will not trigger events such as 
+    ``Model.afterSave``. Instead you should use the :doc:`ORM to save 
+    data </orm/saving-data>`.
 
 Deleting Data
 =============
