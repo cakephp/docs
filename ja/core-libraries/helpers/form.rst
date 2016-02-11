@@ -267,7 +267,7 @@ create() には多くのオプションがあります:
         </div>
 
     詳細は
-    `Form Helper API <http://api.cakephp.org/2.7/class-FormHelper.html>`_
+    `Form Helper API <http://api.cakephp.org/2.8/class-FormHelper.html>`_
     を参照してください。
 
     .. note::

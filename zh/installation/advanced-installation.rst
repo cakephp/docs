@@ -24,21 +24,21 @@ CakePHP 发行 PEAR 的安装包，故可以通过 PEAR 安装器安装。用 PE
 ================================
 
 Composer 是一个适用于 PHP 5.3+ 的依赖管理工具，解决了通过 PEAR 安装的很多问题，并
-且简化了对类库的多个版本的管理。由于 CakePHP 有 PEAR 发行包，故而可以使用 
+且简化了对类库的多个版本的管理。由于 CakePHP 有 PEAR 发行包，故而可以使用
 `Composer <http://getcomposer.org>`_ 安装 CakePHP。在安装 CakePHP 之前需要建立
 ``composer.json`` 文件。CakePHP 应用程序的 composer.json 可以象下面这样::
 
     {
         "name": "example-app",
         "require": {
-            "cakephp/cakephp": "2.7.*"
+            "cakephp/cakephp": "2.8.*"
         },
         "config": {
             "vendor-dir": "Vendor/"
         }
     }
 
-把这段 JSON 保存在项目的 APP 目录中的 ``composer.json`` 文件中。接下来把 
+把这段 JSON 保存在项目的 APP 目录中的 ``composer.json`` 文件中。接下来把
 composer.phar 文件下载到项目中。在 ``composer.json`` 所在的目录下运行如下命令::
 
     $ php composer.phar install
@@ -59,7 +59,7 @@ composer.phar 文件下载到项目中。在 ``composer.json`` 所在的目录�
     $ Vendor/bin/cake bake project <path to project>
 
 缺省情况下，``bake`` 把 :php:const:`CAKE_CORE_INCLUDE_PATH` 硬编码了。为了使应用
-程序更具移植性，应当修改 ``webroot/index.php`` ，将 ``CAKE_CORE_INCLUDE_PATH`` 
+程序更具移植性，应当修改 ``webroot/index.php`` ，将 ``CAKE_CORE_INCLUDE_PATH``
 改为相对路径::
 
     define(
@@ -92,7 +92,7 @@ composer.phar 文件下载到项目中。在 ``composer.json`` 所在的目录�
 ====================================================
 
 在某些情况下，你会希望把 CakePHP 的目录放到文件系统的不同地方。这可能是因为共享主
-机的限制，或者你只是想让一些应用程序共享相同的 CakePHP 类库。本节将说明怎样把 
+机的限制，或者你只是想让一些应用程序共享相同的 CakePHP 类库。本节将说明怎样把
 CakePHP 的目录分散到文件系统的的不同地方。
 
 首先，明确 Cake 的应用程序有三个主要部分:
@@ -102,7 +102,7 @@ CakePHP 的目录分散到文件系统的的不同地方。
 #. 应用程序的 webroot，通常位于 /app/webroot 目录。
 
 这里的每个目录，都可以放到文件系统的任何位置，除了 webroot，它必须位于 web 服务器
-能够访问到的地方。甚至可以将 webroot 目录移动到 app 目录外面，只要你告诉 CakePHP 
+能够访问到的地方。甚至可以将 webroot 目录移动到 app 目录外面，只要你告诉 CakePHP
 你把它放在了哪里。
 
 配置 CakePHP 的安装时，需要对下面的文件做一些修改。
@@ -118,14 +118,14 @@ CakePHP 的目录分散到文件系统的的不同地方。
 -  ``APP_DIR`` 应当设置为 app 目录的目录名称(译注：即不包含前面的路径)。
 -  ``CAKE_CORE_INCLUDE_PATH`` 应当设置为 CakePHP 类库目录的路径。
 
-让我们通过下面的例子，让你明白高级安装实际上是怎样的。设想我要象下面这样设置 
+让我们通过下面的例子，让你明白高级安装实际上是怎样的。设想我要象下面这样设置
 CakePHP：
 
 -  CakePHP 的核心类库位于 /usr/lib/cake。
 -  应用程序的 webroot 目录是 /var/www/mysite/。
 -  应用程序的 app 目录是 /home/me/myapp。
 
-鉴于这种类型的设置，我需要编辑 webroot/index.php 文件(在本例中为 
+鉴于这种类型的设置，我需要编辑 webroot/index.php 文件(在本例中为
 /var/www/mysite/index.php)，(让它)像下面这样::
 
     // /app/webroot/index.php (部分代码，删除了注释)
