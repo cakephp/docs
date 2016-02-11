@@ -470,8 +470,8 @@ Créer vos Propres Lecteurs de Configuration
 ===========================================
 
 Comme les lecteurs de configuration sont une partie extensible de CakePHP, vous
-pouvez créer des readers de configuration dans votre application et plugins. Les
-lecteurs de configuration ont besoin d'implémenter l'
+pouvez créer des lecteurs de configuration dans votre application et plugins.
+Les lecteurs de configuration ont besoin d'implémenter l'
 :php:interface:`Cake\\Core\\Configure\\ConfigEngineInterface`. Cette interface
 définit une méthode de lecture, comme seule méthode requise. Si vous aimez
 vraiment les fichiers XML, vous pouvez créer un lecteur de config simple Xml
