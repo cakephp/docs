@@ -45,7 +45,7 @@ tar.bz2)，也可以从 git 库中获取代码。
 另外，你也可以获取未发布的最新代码，包含全部错误修正和最新的增强功能。这可以通过
 克隆 `GitHub`_ 库来获得::
 
-    git clone -b 2.7 git://github.com/cakephp/cakephp.git
+    git clone -b 2.x git://github.com/cakephp/cakephp.git
 
 
 访问权限
