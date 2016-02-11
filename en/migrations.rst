@@ -1,9 +1,9 @@
 Migrations
 ##########
 
-Migrations is another plugin supported by the core team that helps you
-do schema changes in your database by writing PHP files that can be tracked
-using your version control system.
+Migrations is a plugin supported by the core team that helps you do schema
+changes in your database by writing PHP files that can be tracked using your
+version control system.
 
 It allows you to evolve your database tables over time. Instead of writing
 schema modifications in SQL, this plugin allows you to use an intuitive set
@@ -44,8 +44,8 @@ application in your **config/app.php** file as explained in the
 Overview
 ========
 
-A migration is basically a single PHP file that describes a new version of
-the database. A migration file can create or drop tables, add or remove
+A migration is basically a single PHP file that describes the changes to operate
+to the database. A migration file can create or drop tables, add or remove
 columns, create indexes and even insert data into your database.
 
 Here's an example of a migration::
@@ -86,17 +86,18 @@ Here's an example of a migration::
         }
     }
 
-The migration will add a table to your database named ``products`` with the
+This migration will add a table to your database named ``products`` with the
 following column definitions:
 
-- ``id`` column of type ``integer``
+- ``id`` column of type ``integer`` as primary key
 - ``name`` column of type ``string``
 - ``description`` column of type ``text``
 - ``created`` column of type ``datetime``
+- ``modified`` column of type ``datetime``
 
 .. tip::
 
-    A primary key column named ``id`` will be added **implicitly**.
+    The primary key column named ``id`` will be added **implicitly**.
 
 .. note::
 
@@ -123,7 +124,7 @@ Creating Migrations
 Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
 which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**.
-Here are examples of migration filenames::
+Here are examples of migration filenames:
 
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
@@ -132,7 +133,13 @@ The easiest way to create a migrations file is by using the
 :doc:`/bake/usage` CLI command.
 
 Please make sure you read the official `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
-in order to know the complete list of methods you can use for writing migration files.
+in order to know the complete list of methods you can use for writing migration
+files.
+
+.. note::
+
+    When using the ``bake`` option, you can still modify the migration before
+    running them if so desired.
 
 Syntax
 ------
@@ -142,12 +149,15 @@ The ``bake`` command syntax follows the form below::
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
 When using ``bake`` to create tables, add columns and so on, to your
-database, you will usually provide two things :
+database, you will usually provide two things:
 
 * the name of the migration you will generate (``CreateProducts`` in our
-example)
+  example)
 * the columns of the table that will be added or removed in the migration
-(``name:string description:text created modified`` in our example)
+  (``name:string description:text created modified`` in our example)
+
+Due to the conventions, not all schema changes can be performed via these shell
+commands.
 
 Additionally you can create an empty migrations file if you want full control
 over what needs to be executed, by ommiting to specify a columns definition::
@@ -159,11 +169,15 @@ Migrations file name
 
 Migration names can follow any of the following patterns:
 
-* **Create a table**: (``/^(Create)(.*)/``) Creates the specified table.
-* **Drop a table**: (``/^(Drop)(.*)/``) Drops the specified table. Ignores specified field arguments.
-* **Add a field**: (``/^(Add).*(?:To)(.*)/``) Adds fields to the specified table.
-* **Remove a field**: (``/^(Remove).*(?:From)(.*)/``) Removes fields from the specified table.
-* **Alter a table**:  (``/^(Alter)(.*)/``) Alters the specified table. An alias for CreateTable and AddField.
+* (``/^(Create)(.*)/``) Creates the specified table.
+* (``/^(Drop)(.*)/``) Drops the specified table.
+  Ignores specified field arguments
+* (``/^(Add).*(?:To)(.*)/``) Adds fields to the specified
+  table
+* (``/^(Remove).*(?:From)(.*)/``) Removes fields from the
+  specified table
+* (``/^(Alter)(.*)/``) Alters the specified table. An alias
+  for CreateTable and AddField.
 
 You can also use the ``underscore_form`` as the name for your migrations
 i.e. ``create_products``.
@@ -176,13 +190,20 @@ i.e. ``create_products``.
     version of the plugin the migration name would be in the underscore form,
     i.e. ``20160121164955_create_products.php``.
 
+.. warning::
+
+    Migration names are used as migration class names, and thus may collide with
+    other migrations if the class names are not unique. In this case, it may be
+    necessary to manually override the name at a later date, or simply change the
+    name you are specifying.
+
 Columns definition
 ~~~~~~~~~~~~~~~~~~
 
 When using columns in the command line, it may be handy to remember that they
 follow the following pattern::
 
-    field:fieldType[length]:indexType:indexName
+    fieldName:fieldType[length]:indexType:indexName
 
 For instance, the following are all valid ways of specifying an email field:
 
@@ -212,6 +233,12 @@ can be:
 * binary
 * boolean
 * uuid
+
+There are some heuristics to choosing fieldtypes when left unspecified or set to
+an invalid value. Default field type is ``string``:
+
+* id: integer
+* created, modified, updated: datetime
 
 Creating a table
 ----------------
@@ -335,6 +362,12 @@ Executing the command line above will generate::
         }
     }
 
+If no length is specified, lengths for certain type of columns are defaulted:
+
+* string: 255
+* integer: 11
+* biginteger: 20
+
 Removing a column from a table
 ------------------------------
 
@@ -369,7 +402,7 @@ database, you can run the ``migration_snapshot`` command::
 It will generate a migration file called **YYYYMMDDHHMMSS_Initial.php**
 containing all the create statements for all tables in your database.
 
-By default, the snapshot will be created by connection to the database defined
+By default, the snapshot will be created by connecting to the database defined
 in the ``default`` connection configuration.
 If you need to bake a snapshot from a different datasource, you can use the
 ``--connection`` option::
@@ -396,7 +429,7 @@ to the snapshot of your plugin.
 .. note::
 
     When baking a snapshot for a plugin, the migration files will be created
-    in your plugin **config** directory.
+    in your plugin's **config/Migrations** directory.
 
 Be aware that when you bake a snapshot, it is automatically added to the phinx
 log table as migrated.
@@ -410,7 +443,6 @@ The commands
 Once you have generated or written your migration file, you need to execute the
 following command to apply the changes to your database::
 
-```bash
     # Run all the migrations
     $ bin/cake migrations migrate
 
@@ -433,15 +465,13 @@ following command to apply the changes to your database::
     # Migrations can also be run for plugins. Simply use the ``--plugin`` option
     # or ``-p`` for short
     $ bin/cake migrations migrate -p MyAwesomePlugin
-```
 
 ``rollback`` : Reverting Migrations
 -----------------------------------
 
 The Rollback command is used to undo previous migrations executed by this
-plugin. It is the reverse action of the ``migrate`` command.
+plugin. It is the reverse action of the ``migrate`` command::
 
-```bash
     # You can rollback to the previous migration by using the
     # ``rollback`` command::
     $ bin/cake migrations rollback
@@ -449,7 +479,6 @@ plugin. It is the reverse action of the ``migrate`` command.
     # You can also pass a migration version number to rollback
     # to a specific version::
     $ bin/cake migrations rollback -t 20150103081132
-```
 
 You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
 like for the ``migrate`` command.
@@ -529,41 +558,37 @@ leverages the `Phinx library seed feature <http://docs.phinx.org/en/latest/seedi
 By default, seed files will be looked for in the ``config/Seeds`` directory of
 your application. Please make sure you follow `Phinx instructions to build your seed files` <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
-As for migrations, a ``bake`` interface is provided for seed files:
+As for migrations, a ``bake`` interface is provided for seed files::
 
-```bash
-# This will create a ArticlesSeed.php file in the directory config/Seeds of your application
-# By default, the table the seed will try to alter is the "tableized" version of the seed filename
-$ bin/cake bake seed Articles
+    # This will create a ArticlesSeed.php file in the directory config/Seeds of your application
+    # By default, the table the seed will try to alter is the "tableized" version of the seed filename
+    $ bin/cake bake seed Articles
 
-# You specify the name of the table the seed files will alter by using the ``--table`` option
-$ bin/cake bake seed Articles --table my_articles_table
+    # You specify the name of the table the seed files will alter by using the ``--table`` option
+    $ bin/cake bake seed Articles --table my_articles_table
 
-# You can specify a plugin to bake into
-$ bin/cake bake seed Articles --plugin PluginName
+    # You can specify a plugin to bake into
+    $ bin/cake bake seed Articles --plugin PluginName
 
-# You can specify an alternative connection when generating a seeder.
-$ bin/cake bake seed Articles --connection connection
-```
+    # You can specify an alternative connection when generating a seeder.
+    $ bin/cake bake seed Articles --connection connection
 
-To seed your database, you can use the ``seed`` subcommand:
+To seed your database, you can use the ``seed`` subcommand::
 
-```bash
-# Without parameters, the seed subcommand will run all available seeders in the target directory, in alphabetical order.
-$ bin/cake migrations seed
+    # Without parameters, the seed subcommand will run all available seeders in the target directory, in alphabetical order.
+    $ bin/cake migrations seed
 
-# You can specify only one seeder to be run using the `--seed` option
-$ bin/cake migrations seed --seed ArticlesSeed
+    # You can specify only one seeder to be run using the `--seed` option
+    $ bin/cake migrations seed --seed ArticlesSeed
 
-# You can run seeders from an alternative directory
-$ bin/cake migrations seed --source AlternativeSeeds
+    # You can run seeders from an alternative directory
+    $ bin/cake migrations seed --source AlternativeSeeds
 
-# You can run seeders from a plugin
-$ bin/cake migrations seed --plugin PluginName
+    # You can run seeders from a plugin
+    $ bin/cake migrations seed --plugin PluginName
 
-# You can run seeders from a specific connection
-$ bin/cake migrations seed --connection connection
-```
+    # You can run seeders from a specific connection
+    $ bin/cake migrations seed --connection connection
 
 Be aware that, as opposed to migrations, seeders are not tracked, which means
 that the same seeder can be applied multiple times.
@@ -590,7 +615,7 @@ migrations from a non-shell environment, directly from an app, by using the new
 ``Migrations`` class. This can be handy in case you are developing a plugin
 installer for a CMS for instance.
 The ``Migrations`` class allows you to run the following commands from the
-migrations shell :
+migrations shell:
 
 * migrate
 * rollback
@@ -728,7 +753,7 @@ it to the table declaration::
     }
 
 Compared to the previous way of dealing with primary key, this method gives you
-the ability to have more control over the primary key column definition :
+the ability to have more control over the primary key column definition:
 unsigned or not, limit, comment, etc.
 
 All baked migrations and snapshot will use this new way when necessary.
@@ -770,3 +795,12 @@ no way of adding a column to an existing table with a different collation than
 the table or the database.
 Only ``MySQL`` and ``SqlServer`` supports this configuration key for the time
 being.
+
+Updating columns name and using Table objects
+---------------------------------------------
+
+If you use a CakePHP ORM Table object to manipulate values from your database
+along with renaming or removing a column, make sure you create a new instance of
+your Table object after the update() call. The Table object registry is cleared
+after an update() call in order to refresh the schema that is reflected and
+stored in the Table object upon instantiation.
