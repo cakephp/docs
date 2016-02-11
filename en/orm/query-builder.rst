@@ -1119,6 +1119,8 @@ queries::
 
 .. _query-builder-updating-data:
 
+Note: Inserting records with the query builder will not trigger the ``Model.afterSave`` event. http://book.cakephp.org/3.0/en/orm/saving-data.html#inserting-data should be used instead if this is required.
+
 Updating Data
 =============
 
@@ -1133,6 +1135,8 @@ Instead, create new a ``Query`` object using ``query()``::
 
 Generally, it is easier to update data using entities and
 :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
+
+Note: Updating records with the query builder will not trigger the ``Model.afterSave`` event. http://book.cakephp.org/3.0/en/orm/saving-data.html#updating-data should be used instead if this is required.
 
 Deleting Data
 =============
