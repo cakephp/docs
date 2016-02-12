@@ -375,7 +375,7 @@ sending an email you could do the following::
         ->notEmpty('comment', 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
-    if (!empty($errors)) {
+    if (empty($errors)) {
         // Send an email.
     }
 
