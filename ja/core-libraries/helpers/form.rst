@@ -874,14 +874,57 @@ select, checkbox, radio に関するオプション
 
   .. note::
 
-      パスワードフィールドのデフォルト値を空値にしたい場合は、
-      'value' => '' の方を使ってください。
+    パスワードフィールドのデフォルト値を空値にしたい場合は、
+    'value' => '' の方を使ってください。
 
-  オプションはキー・バリューの組み合わせでも指定できます。
+    date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。 ::
 
-* ``$options['hiddenField']`` 一部の input タイプ（チェックボックス、
-  ラジオボタン）では hidden フィールドが生成されるため、
-  $this->request->data の中のキーは値を伴わない形式でも存在します:
+        echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+	        array(
+	            'empty' => array(
+                    'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+                    'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
+                )
+            )
+        );
+
+  出力結果:
+
+  .. code-block:: html
+
+    <select name="data[Contact][date][day]" id="ContactDateDay">
+        <option value="">DAY</option>
+        <option value="01">1</option>
+        // ...
+        <option value="31">31</option>
+    </select> - <select name="data[Contact][date][month]" id="ContactDateMonth">
+        <option value="">MONTH</option>
+        <option value="01">January</option>
+        // ...
+        <option value="12">December</option>
+    </select> - <select name="data[Contact][date][year]" id="ContactDateYear">
+        <option value="">YEAR</option>
+        <option value="2036">2036</option>
+        // ...
+        <option value="1996">1996</option>
+    </select> <select name="data[Contact][date][hour]" id="ContactDateHour">
+        <option value="">HOUR</option>
+        <option value="01">1</option>
+        // ...
+        <option value="12">12</option>
+        </select>:<select name="data[Contact][date][min]" id="ContactDateMin">
+        <option value="">MINUTE</option>
+        <option value="00">00</option>
+        // ...
+        <option value="59">59</option>
+    </select> <select name="data[Contact][date][meridian]" id="ContactDateMeridian">
+        <option value="am">am</option>
+        <option value="pm">pm</option>
+    </select>
+
+* ``$options['hiddenField']`` 一部の input タイプ（チェックボックス、ラジオボタン）では
+  hidden フィールドが生成されるため、 $this->request->data の中のキーは値を伴わない形式でも
+  存在します:
 
   .. code-block:: html
 

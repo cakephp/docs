@@ -69,6 +69,13 @@ Validation
 
 - ``Validation::uploadedFile()`` が 3.x からバックポートされました。
 
+CakeSession
+===========
+
+- ``Session.cacheLimiter`` 設定オプションが追加されました。このオプションは、
+  セッションクッキーで使用するキャッシュ制御ヘッダーを定義します。デフォルトは、
+  ``must-revalidate`` です。
+
 ビュー
 ======
 
