@@ -114,7 +114,7 @@ Logging
 
 Logging and ``CakeLog`` have been enhanced considerably, both in
 features and flexibility. See
-`New Logging features <http://book.cakephp.org/1.3/en/The-Manual/Common-Tasks-With-CakePHP/Logging.html/>`_ for more information.
+`New Logging features <http://book.cakephp.org/1.3/en/The-Manual/Common-Tasks-With-CakePHP/Logging.html>`_ for more information.
 
 Caching
 ~~~~~~~
