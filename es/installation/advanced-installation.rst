@@ -23,7 +23,7 @@ con una estructura de directorios diferente.
 
 -  /app/webroot/index.php
 -  /app/webroot/test.php (si usas tests
-   `Testing <view/1196/Testing>`_ .)
+   `Testing </development/testing>`_ .)
 
 Hay 3 constantes que necesitarás cambiar:  ``ROOT``,
 ``APP_DIR`` y ``CAKE_CORE_INCLUDE_PATH``.
