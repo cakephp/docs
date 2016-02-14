@@ -103,7 +103,7 @@ RequestHandlerComponent
 -----------------------
 
 - ``RequestHandlerComponent`` ahora intercambia el diseño y la plantilla basado en la extensión
-  o la cabecera ``Accept-Type`` en la llamada ``beforeRender()`` en lugar de ``startup()``.
+  o la cabecera ``Accept`` en la llamada ``beforeRender()`` en lugar de ``startup()``.
 - ``addInputType()`` and ``viewClassMap()`` están obsoletos. En su lugar debes usar
   ``config()`` para modificar estas configuraciones en tiempo de ejecución.
 - Cuando ``inputTypeMap`` o ``viewClassMap`` están definidas en el componente de configuraciones,

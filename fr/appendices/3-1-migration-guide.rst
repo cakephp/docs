@@ -112,7 +112,7 @@ RequestHandlerComponent
 -----------------------
 
 - ``RequestHandlerComponent`` échange maintenant le layout et le template selon
-  l'extension parsée ou l'en-tête ``Accept-Type`` dans le callback
+  l'extension parsée ou l'en-tête ``Accept`` dans le callback
   ``beforeRender()`` plutôt que dans ``startup()``.
 - ``addInputType()`` et ``viewClassMap()`` sont dépréciées. Vous devez utiliser
   ``config()`` pour modifier ces données de configuration à la volée.
