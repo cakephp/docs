@@ -9,8 +9,8 @@ CakePHPはあなたのアプリケーションをセキュアにする幾つか�
 
     core-libraries/security
     controllers/components/csrf
-    controllers/components/security
+    Security コンポーネント <controllers/components/security>
 
 .. meta::
-    :title lang=ja: Security
+    :title lang=ja: セキュリティ
     :keywords lang=ja: security, csrf, cross site request forgery component
