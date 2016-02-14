@@ -24,7 +24,6 @@ mejorado.
 
 He aquí una lista rápida de las características que disfrutarás al utilizar CakePHP:
 
-- `Comunidad amigable <http://cakephp.org/feeds>`_
 - `Licencia flexible <http://en.wikipedia.org/wiki/MIT_License>`_
 - Compatible con las versiones de PHP 5.2.6 y superiores.
 - Contiene `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ para la interacción de la base de datos.

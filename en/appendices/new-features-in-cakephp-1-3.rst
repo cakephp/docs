@@ -106,7 +106,7 @@ to set currency parameter sets, so you don't have to retype them::
 
 The form helper has had a number of improvements and API
 modifications, see
-`Form Helper improvements <http://book.cakephp.org/view/1616/x1-3-improvements>`_
+`Form Helper improvements <http://book.cakephp.org/1.3/en/The-Manual/Core-Helpers/Form.html#improvements>`_
 for more information.
 
 Logging
@@ -114,7 +114,7 @@ Logging
 
 Logging and ``CakeLog`` have been enhanced considerably, both in
 features and flexibility. See
-`New Logging features <http://book.cakephp.org/view/1194/Logging>`_ for more information.
+`New Logging features <http://book.cakephp.org/1.3/en/The-Manual/Common-Tasks-With-CakePHP/Logging.html>`_ for more information.
 
 Caching
 ~~~~~~~
@@ -181,8 +181,7 @@ could do::
 
 -  Missing Validation methods now trigger errors, making debugging
    why validation isn't working easier.
--  Models now support
-   `virtual fields <http://book.cakephp.org/view/1608/Virtual-fields>`_
+-  Models now support virtual fields.
 
 **Behaviors**
 
@@ -266,7 +265,7 @@ Console
 
 Bake has had a number of significant changes made to it. Those
 changes are detailed in
-`the bake updates section <http://book.cakephp.org/view/1611/Bake-improvements-in-1-3>`_
+`the bake updates section <http://book.cakephp.org/1.3/en/The-Manual/Core-Helpers/Form.html#improvements>`_
 
 **Subclassing**
 
