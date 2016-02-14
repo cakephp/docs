@@ -370,8 +370,8 @@ Localized プラグインは、バリデーションのための国の２文字�
         ->notEmpty('comment', 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
-    if (!empty($errors)) {
-        // emailを送る。
+    if (empty($errors)) {
+        // email を送る。
     }
 
 ``errors()`` メソッドは、バリデーションエラーがあった場合に、空でない配列を返します。
