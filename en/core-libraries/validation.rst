@@ -392,7 +392,7 @@ the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
     $errors = $validator->errors($this->request->data(), false);
-    if (!empty($errors)) {
+    if (empty($errors)) {
         // Send an email.
     }
 
