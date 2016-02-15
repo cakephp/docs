@@ -851,8 +851,19 @@ plural, underscored version of the association name. For example::
     $articles->save($article);
 
 When saving hasMany associations, associated records will either be updated, or
-inserted. The ORM will not remove or 'sync' a hasMany association. Whenever you
-add new records into an existing association you should always mark the
+inserted. For the case that the record already has associated records in the database,
+you have the choice between two saving strategies:
+
+append
+    Associated records are updated in the database or, if not matching any existing record,
+    inserted.
+replace
+    Any existing records that do not match the records provided will be deleted from the
+    database. Only provided records will remain (or be inserted).
+
+By default the ``append`` strategy is used.
+
+Whenever you add new records into an existing association you should always mark the
 association property as 'dirty'. This lets the ORM know that the association
 property has to be persisted::
 
@@ -888,8 +899,7 @@ of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
 select box or checkbox based form controls for belongs to many associations. See
 the :ref:`converting-request-data` section for more information.
 
-When saving belongsToMany associations, you have the choice between 2 saving
-strategies:
+When saving belongsToMany associations, you have the choice between two saving strategies:
 
 append
     Only new links will be created between each side of this association. This
