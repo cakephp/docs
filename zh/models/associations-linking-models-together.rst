@@ -913,7 +913,7 @@ Recipient 是 User 模型的别名。现在来瞧瞧 User 模型是什么样的:
 
 .. note::
 
-    注意 'join' 数组没有键。
+    注意 'joins' 数组没有键。
 
 在上面的例子中，名为 Item 的模型左连接(*left-join*)到 channels 表。可以用模型名
 作为表的别名，以使读取的数据符合 CakePHP 的数据结构。

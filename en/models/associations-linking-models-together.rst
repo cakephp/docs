@@ -1074,7 +1074,7 @@ example::
 
 .. note::
 
-    Note that the 'join' arrays are not keyed.
+    Note that the 'joins' arrays are not keyed.
 
 In the above example, a model called Item is left-joined to the
 channels table. You can alias the table with the Model name, so the
