@@ -60,6 +60,8 @@ that is invoked at the end of a View’s constructor for this kind of use:
 
     }
 
+.. _view-templates:
+
 View Templates
 ==============
 
