@@ -79,7 +79,7 @@ and :doc:`/views/cells` to let you re-use your presentation logic.
 
 The View layer is not only limited to HTML or text representation of the data.
 It can be used to deliver common data formats like JSON, XML, and through
-a pluggable architecture any other format you may need such as CSV.
+a pluggable architecture any other format you may need, such as CSV.
 
 The Controller Layer
 ====================
