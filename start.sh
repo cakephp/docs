@@ -21,9 +21,6 @@ then
     docs_search/config/app.php
     sed -i 's/127.0.0.1/'$MACHINE_HOST'/' docs_search/config/app.php
     sed -i "s#var base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 2).join('/') + '/';#var base = 'http://"$MACHINE_HOST"/'#" themes/cakephp/static/app.js
-# elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]
-# then
-#     # Do something under Windows NT platform
 fi
 
 # Build the docs once before running the containers

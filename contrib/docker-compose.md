@@ -2,8 +2,10 @@
 
 Docker-Compose will create and link multi-containers with all packages needed
 (including elasticsearch). You need to have
-[Docker](http://docs.docker.com/mac/started/) and
+[Docker](https://docs.docker.com/engine/installation/) and
 [Docker-compose](https://docs.docker.com/compose/install/) installed.
+
+Windows is currently not supported.
 
 ### A shell to build and serve the docs
 
@@ -11,9 +13,8 @@ A `start.sh` script will install all the tools you need to build and serve the
 docs:
 
 ```bash
-git clone git@github.com:cakephp/docs.git
+git clone git@github.com:cakephp/docs.git --branch 3.0
 cd docs
-git checkout --track origin/3.0
 // Just run the `start.sh` script
 ./start.sh
 ```
