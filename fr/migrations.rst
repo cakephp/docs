@@ -3,7 +3,7 @@ Migrations
 
 Migrations est un plugin supporté par la core team pour vous aider à gérer les
 changements dans la base de données en écrivant des fichiers PHP qui peuvent
-être suivis par votre système de gestion de version.
+être versionnés par votre système de gestion de version.
 
 Il vous permet de faire évoluer vos tables au fil du temps.
 Au lieu d'écrire vos modifications de schéma en SQL, ce plugin vous permet
@@ -92,7 +92,7 @@ Ci-dessous un exemple de migration::
 Cette migration va ajouter une table à votre base de données nommée ``products``
 avec les définitions de colonne suivantes:
 
-- ``id`` colonne de type ``integer`` avec clé primaire
+- ``id`` colonne de type ``integer`` comme clé primaire
 - ``name`` colonne de type ``string``
 - ``description`` colonne de type ``text``
 - ``created`` colonne de type ``datetime``
@@ -173,7 +173,7 @@ de colonnes::
 Nom de Fichier des Migrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Les noms des migrations peuvent suivre l'un des motifs suivants:
+Les noms des migrations peuvent suivre l'une des structures suivantes:
 
 * (``/^(Create)(.*)/``) Crée la table spécifiée.
 * (``/^(Drop)(.*)/``) Supprime la table spécifiée. Ignore les arguments de champ spécifié.
@@ -181,8 +181,8 @@ Les noms des migrations peuvent suivre l'un des motifs suivants:
 * (``/^(Remove).*(?:From)(.*)/``) Supprime les champs de la table spécifiée.
 * (``/^(Alter)(.*)/``) Modifie la table spécifiée. Un alias pour CreateTable et AddField.
 
-Vous pouvez aussi utiliser ``underscore_form`` comme nom pour vos migrations
-par exemple ``create_products``.
+Vous pouvez aussi utiliser ``la_forme_avec_underscores`` comme nom pour vos
+migrations par exemple ``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
@@ -190,7 +190,7 @@ par exemple ``create_products``.
     le nom de fichier de migration sera automatiquement avec des majuscules.
     Cette version du plugin est seulement disponible pour une version de
     CakePHP >= to 3.1. Avant cette version du plugin, le nom des migrations
-    doit être sous la forme avec des underscores, par exemple
+    serait sous la forme avec des underscores, par exemple
     ``20160121164955_create_products.php``.
 
 .. warning::
@@ -198,13 +198,13 @@ par exemple ``create_products``.
     Les noms des migrations sont utilisés comme noms de classe de migration, et
     peuvent donc être en conflit avec d'autres migrations si les noms de classe
     ne sont pas uniques. Dans ce cas, il peut être nécessaire de remplacer
-    manuellement le nom à une date supérieure, ou simplement changer le nom
+    manuellement le nom plus tard, ou simplement changer le nom
     que vous avez spécifié.
 
 Définition de Colonnes
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Quand vous utilisez les colonnes avec la ligne de commande, il peut être
+Quand vous définissez des colonnes avec la ligne de commande, il peut être
 pratique de se souvenir qu'elles suivent le modèle suivant::
 
     fieldName:fieldType[length]:indexType:indexName
@@ -240,8 +240,8 @@ Ce sont les suivants:
 * uuid
 
 Il existe quelques heuristiques pour choisir les types de champ quand ils ne
-sont pas spécifiés à gauche ou définis avec une valeur invalide. Par défaut, le
-type est ``string``:
+sont pas spécifiés ou définis avec une valeur invalide. Par défaut, le type est
+``string``:
 
 * id: integer
 * created, modified, updated: datetime
@@ -253,7 +253,7 @@ Vous pouvez utiliser ``bake`` pour créer une table::
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
-La ligne de command ci-dessue va générer un fichier de migration qui ressemble
+La ligne de commande ci-dessus va générer un fichier de migration qui ressemble
 à::
 
     <?php
@@ -296,9 +296,9 @@ Ajouter des Colonnes à une Table Existante
 ------------------------------------------
 
 Si le nom de la migration dans la ligne de commande est de la forme
-"AddXXXToYYY" et est suivie d'une liste de noms de colonnes et les types alors
-un fichier de migration contenant le code pour la création ou le retrait des
-colonnes sera généré::
+"AddXXXToYYY" et est suivie d'une liste de noms de colonnes et de types alors
+un fichier de migration contenant le code pour la création des colonnes sera
+généré::
 
     $ bin/cake bake migration AddPriceToProducts price:decimal
 
@@ -376,8 +376,8 @@ colonnes sont par défaut:
 * integer: 11
 * biginteger: 20
 
-Retirer une Colonne à partir d'un Table
----------------------------------------
+Retirer une Colonne d'un Table
+------------------------------
 
 De la même façon, vous pouvez générer une migration pour retirer une colonne
 en utilisant la ligne de commande, si le nom de la migration est de la forme
@@ -425,7 +425,7 @@ le flag ``--require-table``::
 
     $ bin/cake bake migration_snapshot Initial --require-table
 
-Quand vous utilisez le flag ``--require-table``, le shell va regarder les
+Quand vous utilisez le flag ``--require-table``, le shell va chercher les
 classes ``Table`` de votre application et va seulement ajouter les tables de
 model dans le snapshot.
 
@@ -443,8 +443,8 @@ ajoutées au snapshot de votre plugin.
     Quand vous créez un snapshot pour un plugin, les fichiers de migration sont
     créés dans le répertoire **config/Migrations** de votre plugin.
 
-Notez que quand vous créez un snapshot, il est automatiquement marqué à la table
-de log de phinx comme migré.
+Notez que quand vous créez un snapshot, il est automatiquement marqué dans la
+table de log de phinx comme migré.
 
 Les Commandes
 =============
@@ -545,8 +545,8 @@ le _flag_ ``--only``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+Vous pouvez aussi utilisez les options ``--source``, ``--connection`` et
+``--plugin`` comme pour la commande ``migrate``.
 
 .. note::
 
@@ -569,13 +569,13 @@ trouvées seront marquées comme "migrées"::
 
     $ bin/cake migrations mark_migrated all
 
-``seed`` : Faire un Seed de votre Base de Données
--------------------------------------------------
+``seed`` : Remplir votre Base de Données (Seed)
+-----------------------------------------------
 
-Depuis la version 1.5.5, vous pouvez utiliser le shell ``migrations`` pour faire
-un seed de votre base de données. Cela vient de la `fonctionnalité de seed
+Depuis la version 1.5.5, vous pouvez utiliser le shell ``migrations`` pour
+remplir votre base de données. Cela vient de la `fonctionnalité de seed
 de la librairie Phinx <http://docs.phinx.org/en/latest/seeding.html>`_.
-Par défaut, les fichiers de seed vont regarder dans le répertoire
+Par défaut, les fichiers de seed vont être recherchés dans le répertoire
 ``config/Seeds`` de votre application. Assurez-vous de suivre les
 `instructions de Phinx pour construire les fichiers de seed` <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
