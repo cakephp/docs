@@ -222,7 +222,7 @@ You could improve the above code by moving the cache reading logic into
 a behavior, that read from the cache, or ran the associated model method.
 That is an exercise you can do though.
 
-As of 2.5 you can accomplish the above much more simply using
+As of 2.5 you can accomplish the above much more simple by using
 :php:meth:`Cache::remember()`. Assuming you are using PHP 5.3 or
 newer, using the ``remember()`` method would look like::
 
