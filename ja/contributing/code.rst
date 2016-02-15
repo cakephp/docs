@@ -123,7 +123,7 @@ CakePHP のセットアップを済ませたなら、 ``$test``
 .. note::
 
     CakePHP に寄贈される全てのコードは MIT ライセンスの元にライセンスされ、
-    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ が
+    `Cake Software Foundation <http://cakefoundation.org/>`_ が
     全ての寄贈されたコードの所有者になることに注意してください。貢献者は、
     `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_ に
     従ってください。
