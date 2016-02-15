@@ -1103,7 +1103,7 @@ Par exemple::
 
 .. note::
 
-    Notez que les tableaux 'join' ne sont pas indexés.
+    Notez que les tableaux 'joins' ne sont pas indexés.
 
 Dans l'exemple ci-dessus, un model appelé Item est joint à gauche à la table
 channels. Vous pouvez ajouter un alias à la table, avec le nom du Model,
