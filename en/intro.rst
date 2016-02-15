@@ -72,7 +72,7 @@ or a XML formatted result for others to consume::
         <li class="user">
             <?= $this->element('user', ['user' => $user]) ?>
         </li>
-    <?php endforeach ?>
+    <?php endforeach; ?>
 
 The View layer provides a number of extension points like :ref:`view-templates`, :ref:`view-elements`
 and :doc:`/views/cells` to let you re-use your presentation logic.
