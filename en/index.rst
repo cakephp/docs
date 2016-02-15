@@ -5,13 +5,10 @@ Welcome
     This version of the documentation is for CakePHP 3.0. Go `here for the
     CakePHP 2.x documentation <http://book.cakephp.org/2.0/>`_.
 
-CakePHP 3
-=========
 CakePHP 3 is web development framework running on **PHP 7** (min. PHP 5.5.9).
-Read :doc:`CakePHP at a Glance <intro>` to get a grasp about the very basics of CakePHP 3.
+Read :doc:`CakePHP at a Glance </intro>` to get an introductino to the
+fundamentals of CakePHP 3.
 
-CakePHP Cookbook
-================
 The CakePHP cookbook is an openly developed and community editable documentation
 project. Notice the "Improve this Doc" button in the upper right-hand
 corner; it will direct you to the GitHub online editor of the active page,
