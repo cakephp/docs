@@ -374,7 +374,7 @@ Removing a column from a table
 In the same way, you can generate a migration to remove a column by using the
 command line, if the migration name is of the form "RemoveXXXFromYYY"::
 
-    bin/cake bake migration RemovePriceFromProducts price
+    $ bin/cake bake migration RemovePriceFromProducts price
 
 creates the file::
 
@@ -770,7 +770,6 @@ If you need to create a table with a different collation than the database
 default one, you can define it with the ``table()`` method, as an option::
 
     <?php
-
     use Migrations\AbstractMigration;
 
     class CreateCategoriesTable extends AbstractMigration
@@ -801,6 +800,6 @@ Updating columns name and using Table objects
 
 If you use a CakePHP ORM Table object to manipulate values from your database
 along with renaming or removing a column, make sure you create a new instance of
-your Table object after the update() call. The Table object registry is cleared
-after an update() call in order to refresh the schema that is reflected and
-stored in the Table object upon instantiation.
+your Table object after the ``update()`` call. The Table object registry is
+cleared after an ``update()`` call in order to refresh the schema that is
+reflected and stored in the Table object upon instantiation.
