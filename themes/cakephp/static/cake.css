@@ -495,3 +495,14 @@ a.improve {
     }
 
 }
+
+.docutils.internal-toc td {
+    font-size:1.5em;
+    padding:5px;
+}
+
+
+table.internal-toc {
+    border:0;
+	width:80%;
+}
