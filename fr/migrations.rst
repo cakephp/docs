@@ -152,9 +152,9 @@ La syntaxe de la commande ``bake`` est de la forme suivante::
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
-Quand vous utilisez ``bake`` pour créer des tables, ajouter des colonnes et
-divers autres opérations à votre base de données, vous devez en général fournir
-deux choses:
+Quand vous utilisez ``bake`` pour créer des tables, ajouter des colonnes ou
+effectuer diverses opérations sur votre base de données, vous devez en général
+fournir deux choses:
 
 * le nom de la migration que vous allez générer (``CreateProducts`` dans notre
   exemple)
