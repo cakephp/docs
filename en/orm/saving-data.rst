@@ -12,9 +12,9 @@ will probably want to update and save the changes.
 A Glance Over Saving Data
 =========================
 
-Applications will usually have a couple of ways in which data is saved. The first
-one is obviously through web forms and the other is by directly generating or
-changing data in the code to be sent to the database.
+Applications will usually have a couple of ways in which data is saved. The
+first one is obviously through web forms and the other is by directly generating
+or changing data in the code to be sent to the database.
 
 Inserting Data
 --------------
@@ -38,8 +38,8 @@ passing it to the ``save()`` method in the ``Table`` class::
 Updating Data
 -------------
 
-Updating your data is equally easy, and the ``save()`` method is also used for that
-purpose::
+Updating your data is equally easy, and the ``save()`` method is also used for
+that purpose::
 
     use Cake\ORM\TableRegistry;
 
@@ -49,8 +49,8 @@ purpose::
     $article->title = 'CakePHP is THE best PHP framework!';
     $articlesTable->save($article);
 
-CakePHP will know whether to perform an insert or an update based on the return value
-of the ``isNew()`` method. Entities that were retrieved with ``get()`` or
+CakePHP will know whether to perform an insert or an update based on the return
+value of the ``isNew()`` method. Entities that were retrieved with ``get()`` or
 ``find()`` will always return ``false`` when ``isNew()`` is called on them.
 
 Saving With Associations
@@ -223,9 +223,9 @@ not be populated in the created entity.
 Converting BelongsToMany Data
 -----------------------------
 
-If you are saving belongsToMany associations you can either use a list of
-entity data or a list of ids. When using a list of entity data your request data
-should look like::
+If you are saving belongsToMany associations you can either use a list of entity
+data or a list of ids. When using a list of entity data your request data should
+look like::
 
     $data = [
         'title' => 'My title',
@@ -278,8 +278,8 @@ marshalling to only use the ``_ids`` key and ignore all other data.
 Converting HasMany Data
 -----------------------
 
-If you are saving hasMany associations and want to link existing records to
-a new parent record you can use the ``_ids`` format::
+If you are saving hasMany associations and want to link existing records to a
+new parent record you can use the ``_ids`` format::
 
     $data = [
         'title' => 'My new article',
@@ -290,9 +290,9 @@ a new parent record you can use the ``_ids`` format::
         ]
     ];
 
-When converting hasMany data, you can disable the new entity creation, by
-using the ``onlyIds`` option. When enabled, this option restricts hasMany
-marshalling to only use the ``_ids`` key and ignore all other data.
+When converting hasMany data, you can disable the new entity creation, by using
+the ``onlyIds`` option. When enabled, this option restricts hasMany marshalling
+to only use the ``_ids`` key and ignore all other data.
 
 .. versionadded:: 3.1.0
     The ``onlyIds`` option was added in 3.1.0
@@ -319,7 +319,7 @@ In this situation, the request data for multiple articles should look like::
             'published' => 1
         ],
     ];
-    
+
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
 
@@ -342,7 +342,7 @@ to process all the entities as a single transaction you can use
             $articles->save($entity, ['atomic' => false]);
         }
     });
-    
+
 
 .. _changing-accessible-fields:
 
@@ -585,11 +585,11 @@ The main purpose of ``beforeMarshal`` is to assist the users to pass the
 validation process when simple mistakes can be automatically resolved, or when
 data needs to be restructured so it can be put into the right fields.
 
-The ``Model.beforeMarshal`` event is triggered just at the start of the validation
-process, one of the reasons is that ``beforeMarshal`` is allowed to change the
-validation rules and the saving options, such as the field whitelist. Validation
-is triggered just after this event is finished. A common example of changing
-the data before it is validated is trimming all fields before saving::
+The ``Model.beforeMarshal`` event is triggered just at the start of the
+validation process, one of the reasons is that ``beforeMarshal`` is allowed to
+change the validation rules and the saving options, such as the field whitelist.
+Validation is triggered just after this event is finished. A common example of
+changing the data before it is validated is trimming all fields before saving::
 
     // In a table or behavior class
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
@@ -778,9 +778,9 @@ array::
       ]
     ]);
 
-Your entities should be structured in the same way as they are when
-loaded from the database. See the form helper documentation for :ref:`how to
-build inputs for associations <associated-form-inputs>`.
+Your entities should be structured in the same way as they are when loaded from
+the database. See the form helper documentation for :ref:`how to build inputs
+for associations <associated-form-inputs>`.
 
 If you are building or modifying association data after building your entities
 you will have to mark the association property as modified with ``dirty()``::
@@ -792,8 +792,7 @@ Saving BelongsTo Associations
 -----------------------------
 
 When saving belongsTo associations, the ORM expects a single nested entity at
-the singular, underscored version of the association name. For
-example::
+the singular, underscored version of the association name. For example::
 
     // In a controller.
     $data = [
@@ -851,20 +850,20 @@ plural, underscored version of the association name. For example::
     $articles->save($article);
 
 When saving hasMany associations, associated records will either be updated, or
-inserted. For the case that the record already has associated records in the database,
-you have the choice between two saving strategies:
+inserted. For the case that the record already has associated records in the
+database, you have the choice between two saving strategies:
 
 append
-    Associated records are updated in the database or, if not matching any existing record,
-    inserted.
+    Associated records are updated in the database or, if not matching any
+    existing record, inserted.
 replace
-    Any existing records that do not match the records provided will be deleted from the
-    database. Only provided records will remain (or be inserted).
+    Any existing records that do not match the records provided will be deleted
+    from the database. Only provided records will remain (or be inserted).
 
 By default the ``append`` strategy is used.
 
-Whenever you add new records into an existing association you should always mark the
-association property as 'dirty'. This lets the ORM know that the association
+Whenever you add new records into an existing association you should always mark
+the association property as 'dirty'. This lets the ORM know that the association
 property has to be persisted::
 
     $article->comments[] = $comment;
@@ -875,11 +874,10 @@ Without the call to ``dirty()`` the updated comments will not be saved.
 Saving BelongsToMany Associations
 ---------------------------------
 
-When saving belongsToMany associations, the ORM expects an array of entities at the
-plural, underscored version of the association name. For example::
+When saving belongsToMany associations, the ORM expects an array of entities at
+the plural, underscored version of the association name. For example::
 
     // In a controller.
-
     $data = [
         'title' => 'First Post',
         'tags' => [
@@ -894,12 +892,13 @@ plural, underscored version of the association name. For example::
     $articles->save($article);
 
 When converting request data into entities, the ``newEntity()`` and
-``newEntities()`` methods will handle both arrays of properties, as well as a list
-of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
+``newEntities()`` methods will handle both arrays of properties, as well as a
+list of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
 select box or checkbox based form controls for belongs to many associations. See
 the :ref:`converting-request-data` section for more information.
 
-When saving belongsToMany associations, you have the choice between two saving strategies:
+When saving belongsToMany associations, you have the choice between two saving
+strategies:
 
 append
     Only new links will be created between each side of this association. This
@@ -1023,9 +1022,8 @@ column Types::
     }
 
 The code above maps the ``preferences`` column to the ``json`` custom type.
-This means that when retrieving data for that column, it will be
-unserialized from a JSON string in the database and put into an entity as an
-array.
+This means that when retrieving data for that column, it will be unserialized
+from a JSON string in the database and put into an entity as an array.
 
 Likewise, when saved, the array will be transformed back into its JSON
 representation::
@@ -1082,7 +1080,8 @@ A bulk-update will be considered successful if 1 or more rows are updated.
     first load a collection of records and update them.
 
 
-``updateAll()`` is for convenience only. You can use this more flexible interface as well::
+``updateAll()`` is for convenience only. You can use this more flexible
+interface as well::
 
     // Publish all the unpublished articles.
     function publishAllUnpublished()

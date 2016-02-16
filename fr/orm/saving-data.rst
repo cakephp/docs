@@ -915,11 +915,24 @@ Par exemple::
     $articles->save($article);
 
 Lors de la sauvegarde d'associations hasMany, les enregistrements associés
-seront soit mis à jour, soit insérés. L'ORM ne va pas retirer ou 'synchroniser'
-une association hasMany. Peu importe quand vous ajoutez de nouveaux
-enregistrements dans une association existante, vous devez toujours marquer la
-propriété de l'association comme 'dirty'. Ceci dit à l'ORM que la propriété de
-l'association doit persister::
+seront soit mis à jour, soit insérés. Dans les cas où l'enregistrement a déjà
+des enregistrements associés dans la base de données, vous avez le choix entre
+deux stratégies de sauvegarde:
+
+append
+    Les enregistrements associés sont mis à jour dans la base de données
+    ou, si ils ne correspondent à aucun enregistrement existant, sont insérés.
+replace
+    Tout enregistrement existant qui ne correspond pas aux enregistrements
+    fournis sera supprimé de la base de données. Seuls les enregistrements
+    fournis resteront (ou seront insérés).
+
+Par défaut, la stratégie ``append`` est utilisée.
+
+Peu importe le moment où vous ajoutez de nouveaux enregistrements dans une
+association existante, vous devez toujours marquer la propriété de l'association
+comme 'dirty'. Ceci dit à l'ORM que la propriété de l'association doit
+persister::
 
     $article->comments[] = $comment;
     $article->dirty('comments', true);
@@ -935,7 +948,6 @@ imbriquée unique avec le nom de l'association au pluriel et en underscore.
 Par exemple::
 
     // Dans un controller.
-
     $data = [
         'title' => 'First Post',
         'tags' => [
@@ -951,18 +963,18 @@ Par exemple::
 
 Quand vous convertissez les données requêtées en entities, les méthodes
 ``newEntity()`` et ``newEntities()`` vont gérer les deux tableaux de propriétés,
-ainsi qu'une liste d'ids avec la clé ``_ids``. Utiliser la clé ``_ids``
-facilite la construction d'un box select ou d'un checkbox basé sur les
-contrôles pour les associations belongs to many. Consultez la section
+ainsi qu'une liste d'ids avec la clé ``_ids``. Utiliser la clé ``_ids`` facilite
+la construction d'un box select ou d'un checkbox basé sur les contrôles pour les
+associations belongs to many. Consultez la section
 :ref:`converting-request-data` pour plus d'informations.
 
 Lors de la sauvegarde des associations belongsToMany, vous avez le choix entre
-2 stratégies de sauvegarde:
+deux stratégies de sauvegarde:
 
 append
-    Seuls les nouveaux liens seront créés de chaque côté de cette
-    association. Cette stratégie ne va pas détruire les liens existants même
-    s'ils ne sont pas présents dans le tableau d'entities à sauvegarder.
+    Seuls les nouveaux liens seront créés de chaque côté de cette association.
+    Cette stratégie ne va pas détruire les liens existants même s'ils ne sont
+    pas présents dans le tableau d'entities à sauvegarder.
 replace
     Lors de la sauvegarde, les liens existants seront retirés et les nouveaux
     liens seront créés dans la table de jointure. S'il y a des liens existants
@@ -979,9 +991,9 @@ de l'association doit persister::
 
 Sans appel à ``dirty()``, les tags mis à jour ne seront pas sauvegardés.
 
-Vous vous voudrez probablement souvent créer une association entre deux
-entities existantes, par exemple un utilisateur co-auteur d'un article.
-Cela est possible en utilisant la méthode ``link()`` comme ceci::
+Vous vous voudrez probablement souvent créer une association entre deux entities
+existantes, par exemple un utilisateur co-auteur d'un article. Cela est possible
+en utilisant la méthode ``link()`` comme ceci::
 
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
@@ -991,9 +1003,9 @@ Cela est possible en utilisant la méthode ``link()`` comme ceci::
 Lors de la sauvegarde d'associations belongsToMany, il peut être pertinent de
 sauvegarder des données additionnelles dans la table de jointure. Dans
 l'exemple précédent des tags, ça pourrait être le type de vote ``vote_type``
-de la personne qui a voté sur cet article. Le ``vote_type`` peut être
-``upvote`` ou ``downvote`` et est représenté par une chaîne de caractères. La
-relation est entre Users et Articles.
+de la personne qui a voté sur cet article. Le ``vote_type`` peut être ``upvote``
+ou ``downvote`` et est représenté par une chaîne de caractères. La relation est
+entre Users et Articles.
 
 La sauvegarde de cette association et du ``vote_type`` est réalisée en ajoutant
 tout d'abord des données à ``_joinData`` et ensuite en sauvegardant
@@ -1013,8 +1025,8 @@ aura des colonnes supplémentaires. CakePHP facilite la sauvegarde des
 propriétés dans ces colonnes. Chaque entity dans une association belongsToMany
 a une propriété ``_joinData`` qui contient les colonnes supplémentaires sur la
 table de jointure. Ces données peuvent être soit un tableau, soit une instance
-Entity. Par exemple si les Students BelongsToMany Courses, nous pourrions
-avoir une table de jointure qui ressemble à ceci::
+Entity. Par exemple si les Students BelongsToMany Courses, nous pourrions avoir
+une table de jointure qui ressemble à ceci::
 
     id | student_id | course_id | days_attended | grade
 
@@ -1028,8 +1040,8 @@ propriété ``_joinData``::
     $studentsTable->save($student);
 
 La propriété ``_joinData`` peut être soit une entity, soit un tableau de données
-si vous sauvegardez les entities construites à partir de données
-requêtées. Lorsque vous sauvegardez des données de tables jointes depuis les données
+si vous sauvegardez les entities construites à partir de données requêtées.
+Lorsque vous sauvegardez des données de tables jointes depuis les données
 requêtées, vos données POST doivent ressembler à ceci::
 
     $data = [
@@ -1061,9 +1073,9 @@ Sauvegarder les Types Complexes
 
 Les tables peuvent stocker des données représentées dans des types basiques,
 comme les chaînes, les integers, floats, booleans, etc... Mais elles peuvent
-aussi être étendues pour accepter plus de types complexes comme les tableaux
-ou les objets et sérialiser ces données en types plus simples qui peuvent
-être sauvegardés dans la base de données.
+aussi être étendues pour accepter plus de types complexes comme les tableaux ou
+les objets et sérialiser ces données en types plus simples qui peuvent être
+sauvegardés dans la base de données.
 
 Cette fonctionnalité se fait en utilisant le système personnalisé de types.
 Consulter la section :ref:`adding-custom-database-types` pour trouver comment
@@ -1090,8 +1102,8 @@ construire les Types de colonne personnalisés::
 Le code ci-dessus correspond à la colonne ``preferences`` pour le type
 personnalisé ``json``.
 Cela signifie que quand on récupère des données pour cette colonne, elles seront
-désérialisées à partir d'une chaîne JSON dans la base de données et mises
-dans une entity en tant que tableau.
+désérialisées à partir d'une chaîne JSON dans la base de données et mises dans
+une entity en tant que tableau.
 
 Comme ceci, lors de la sauvegarde, le tableau sera transformé à nouveau en sa
 représentation JSON::
@@ -1105,19 +1117,19 @@ représentation JSON::
     $usersTable->save($user);
 
 Lors de l'utilisation de types complexes, il est important de vérifier que les
-données que vous recevez de l'utilisateur final sont valides. Ne pas
-gérer correctement les données complexes va permettre à des
-utilisateurs mal intentionnés d'être capable de stocker des données qu'ils ne
-pourraient pas stocker normalement.
+données que vous recevez de l'utilisateur final sont valides. Ne pas gérer
+correctement les données complexes va permettre à des utilisateurs mal
+intentionnés d'être capable de stocker des données qu'ils ne pourraient pas
+stocker normalement.
 
 Mises à Jour en Masse
 =====================
 
 .. php:method:: updateAll($fields, $conditions)
 
-Il peut arriver que la mise à jour de lignes individuellement n'est pas
-efficace ou pas nécessaire. Dans ces cas, il est plus efficace d'utiliser une
-mise à jour en masse pour modifier plusieurs lignes en une fois::
+Il peut arriver que la mise à jour de lignes individuellement n'est pas efficace
+ou pas nécessaire. Dans ces cas, il est plus efficace d'utiliser une mise à jour
+en masse pour modifier plusieurs lignes en une fois::
 
     // Publie tous les articles non publiés.
     function publishAllUnpublished()
@@ -1128,8 +1140,8 @@ mise à jour en masse pour modifier plusieurs lignes en une fois::
     }
 
 Si vous devez faire des mises à jour en masse et utiliser des expressions SQL,
-vous devrez utiliser un objet expression puisque ``updateAll()`` utilise
-des requêtes préparées sous le capot::
+vous devrez utiliser un objet expression puisque ``updateAll()`` utilise des
+requêtes préparées sous le capot::
 
     use Cake\Database\Expression\QueryExpression;
 
@@ -1146,12 +1158,12 @@ lignes sont mises à jour.
 
 .. warning::
 
-    updateAll *ne* va *pas* déclencher d'events beforeSave/afterSave. Si
-    vous avez besoin de ceux-ci, chargez d'abord une collection
-    d'enregistrements et mettez les à jour.
+    updateAll *ne* va *pas* déclencher d'events beforeSave/afterSave. Si vous
+    avez besoin de ceux-ci, chargez d'abord une collection d'enregistrements et
+    mettez les à jour.
 
-``updateAll()`` est uniquement une fonction de commodité. Vous pouvez
-également utiliser cette interface plus flexible::
+``updateAll()`` est uniquement une fonction de commodité. Vous pouvez également
+utiliser cette interface plus flexible::
 
     // Publication de tous les articles non publiés.
     function publishAllUnpublished()
@@ -1163,4 +1175,4 @@ lignes sont mises à jour.
             ->execute();
     }
 
-Reportez-vous sur :ref:`query-builder-updating-data`.
+Reportez-vous à la section :ref:`query-builder-updating-data`.

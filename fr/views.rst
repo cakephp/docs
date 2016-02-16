@@ -63,6 +63,8 @@ type d'utilisation:
 
     }
 
+.. _view-templates:
+
 Templates de Vues
 =================
 
