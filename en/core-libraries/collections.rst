@@ -265,6 +265,31 @@ to return as many elements for each item in the collection as you may need::
     // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
 
+
+.. php:method:: chunk($chunkSize)
+
+When dealing with big amounts of items in a collection, it may make sense to
+process the elements in batches instead of one by one. For splitting
+a collection into multiple arrays of a certain size, you can use the ``chunk()``
+function::
+
+    $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    $chunked = collection($items)->chunk(2);
+    $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
+
+The ``chunk`` function is particularly useful when doing batch processing, for
+example with a database result::
+
+    collection($articles)
+        ->map(function ($article) {
+            // Change a property in the article
+            $article->property = 'changed';
+        })
+        ->chunk(20)
+        ->each(function ($batch) {
+            myBulkSave($batch); // This function will be called for each batch
+        });
+
 Filtering
 =========
 
