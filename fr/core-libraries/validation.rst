@@ -398,7 +398,7 @@ d'envoyer un email, vous pouvez faire ce qui suit::
         ->allowEmpty('comment', false, 'You need to give a comment.');
 
     $errors = $validator->errors($this->request->data());
-    if (!empty($errors)) {
+    if (empty($errors)) {
         // Envoi d'un email.
     }
 
@@ -415,7 +415,7 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
 'update' vous pouvez faire ce qui suit::
 
     $errors = $validator->errors($this->request->data(), false);
-    if (!empty($errors)) {
+    if (empty($errors)) {
         // Envoi d'un email.
     }
 

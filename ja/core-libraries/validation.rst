@@ -387,7 +387,7 @@ Localized プラグインは、バリデーションのための国の２文字�
 以下のことが可能となります。 ::
 
     $errors = $validator->errors($this->request->data(), false);
-    if (!empty($errors)) {
+    if (empty($errors)) {
         // email を送る。
     }
 

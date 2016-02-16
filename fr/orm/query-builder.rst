@@ -1176,6 +1176,11 @@ entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
         ->values($select)
         ->execute();
 
+.. note::
+    Ajouter des enregistrements avec le constructeur de requêtes ne va pas
+    déclencher les events comme ``Model.afterSave``. À la place, vous pouvez
+    utiliser :doc:`l'ORM pour sauvegardes les données </orm/saving-data>`.
+
 .. _query-builder-updating-data:
 
 Mettre à Jour les Données
@@ -1193,6 +1198,11 @@ en utilisant ``query()``::
 
 Généralement, il est plus facile de mettre à jour des données en utilisant des
 entities et :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
+
+.. note::
+    Mettre à jour des enregistrements avec le constructeur de requêtes ne va pas
+    déclencher les events comme ``Model.afterSave``. À la place, vous pouvez
+    utiliser :doc:`l'ORM pour sauvegarder des données </orm/saving-data>`.
 
 Suppression des Données
 =======================
