@@ -414,9 +414,10 @@ Utiliser les Routes Nommées
 
 Parfois vous trouvez que taper tous les paramètres de l'URL pour une route est
 trop verbeux, ou bien vous souhaitez tirer avantage des améliorations de la
-performance que les routes nommées permettent. Lorsque vous connectez les routes,
-vous pouvez spécifier une option ``_name``, cette option peut être utilisée
-pour le routing inversé pour identifier la route que vous souhaitez utiliser::
+performance que les routes nommées permettent. Lorsque vous connectez les
+routes, vous pouvez spécifier une option ``_name``, cette option peut être
+utilisée pour le routing inversé pour identifier la route que vous souhaitez
+utiliser::
 
     // Connecter une route avec un nom.
     $routes->connect(
@@ -637,8 +638,8 @@ Routing Favorisant le SEO
 
 Certains développeurs préfèrent utiliser des tirets dans les URLs, car cela
 semble donner un meilleur classement dans les moteurs de recherche.
-La classe ``DashedRoute`` fournit à votre application la possibilité de créer des
-URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
+La classe ``DashedRoute`` fournit à votre application la possibilité de créer
+des URLs avec des tirets pour vos plugins, controllers, et les noms d'action en
 ``camelCase``.
 
 Par exemple, si nous avons un plugin ``ToDo`` avec un controller ``TodoItems``
@@ -1167,6 +1168,22 @@ l'utilisation de paramètres d'URL persistants::
 
 Le fonctions de filtres sont appliquées dans l'ordre dans lequel elles sont
 connectées.
+
+Un autre cas lorsque l'on souhaite changer une route en particulier à la volée
+(pour les routes de plugin par exemple)::
+
+    Router::addUrlFilter(function ($params, $request) {
+        if (empty($params['plugin']) || $params['plugin'] !=== 'MyPlugin') || empty($params['controller'])) {
+            return $params;
+        }
+        if ($params['controller'] === 'Languages' && $params['action'] === 'view') {
+            $params['controller'] = 'Locations';
+            $params['action'] = 'index';
+            $params['language'] = $params[0];
+            unset($params[0]);
+        }
+        return $params;
+    });
 
 Gérer les Paramètres Nommés dans les URLs
 =========================================

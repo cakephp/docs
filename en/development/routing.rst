@@ -1112,7 +1112,8 @@ URL filters allow you to implement features like persistent parameters::
 
 Filter functions are applied in the order they are connected.
 
-Another use case is changing a certain route on runtime (plugin routes for example)::
+Another use case is changing a certain route on runtime (plugin routes for
+example)::
 
     Router::addUrlFilter(function ($params, $request) {
         if (empty($params['plugin']) || $params['plugin'] !=== 'MyPlugin') || empty($params['controller'])) {
