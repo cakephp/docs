@@ -611,8 +611,8 @@ individual elements using ``bindValue``::
     );
 
     // Bind a single value
-    $stmt->bindValue(0, true, 'boolean');
-    $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
+    $stmt->bindValue(1, true, 'boolean');
+    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 When creating statements you can also use named array keys instead of
 positional ones::
