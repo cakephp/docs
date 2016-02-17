@@ -1116,7 +1116,7 @@ Another use case is changing a certain route on runtime (plugin routes for
 example)::
 
     Router::addUrlFilter(function ($params, $request) {
-        if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin') || empty($params['controller'])) {
+        if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin' || empty($params['controller'])) {
             return $params;
         }
         if ($params['controller'] === 'Languages' && $params['action'] === 'view') {
