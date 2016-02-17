@@ -11,13 +11,13 @@ MACHINE_HOST=$(docker-machine ip $(docker-machine active))
 if [ "$(uname)" == "Darwin" ]
 then
     sed -i '' -- 's/search.cakephp.org/'$MACHINE_HOST':8080/' themes/cakephp/static/app.js
-    sed -i '' -- 's/docs.cakephp.org/http:\/\/'$MACHINE_HOST'/' docs_search/config/app.php
+    sed -i '' -- 's/*.cakephp.org/http:\/\/'$MACHINE_HOST'/' docs_search/config/app.php
     sed -i '' -- 's/127.0.0.1/'$MACHINE_HOST'/' docs_search/config/app.php
     sed -i '' -- "s#var base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 2).join('/') + '/';#var base = 'http://"$MACHINE_HOST"/'#" themes/cakephp/static/app.js
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]
 then
     sed -i 's/search.cakephp.org/'$MACHINE_HOST':8080/' themes/cakephp/static/app.js
-    sed -i 's/docs.cakephp.org/http:\/\/'$MACHINE_HOST'/' docs_search/config/app.php
+    sed -i 's/*.cakephp.org/http:\/\/'$MACHINE_HOST'/' docs_search/config/app.php
     docs_search/config/app.php
     sed -i 's/127.0.0.1/'$MACHINE_HOST'/' docs_search/config/app.php
     sed -i "s#var base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 2).join('/') + '/';#var base = 'http://"$MACHINE_HOST"/'#" themes/cakephp/static/app.js

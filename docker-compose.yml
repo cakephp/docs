@@ -26,7 +26,7 @@ php:
         - elasticsearch
         - docs-server
 elasticsearch:
-    image: elasticsearch:2.1
+    image: elasticsearch:2.2
     command: elasticsearch -Des.network.host=0.0.0.0
     ports:
         - "9200:9200"
