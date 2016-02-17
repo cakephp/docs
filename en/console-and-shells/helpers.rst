@@ -8,7 +8,7 @@ Shell Helpers let you package up complex output generation code. Shell
 Helpers can be accessed and used from any shell or task::
 
     // Output some data as a table.
-    $this->helper('table')->output($data);
+    $this->helper('Table')->output($data);
 
     // Get a helper from a plugin.
     $this->helper('Plugin.HelperName')->output($data);
@@ -46,10 +46,10 @@ the following in it::
 We can then use this new helper in one of our shell commands by calling it::
 
     // With ### on either side
-    $this->helper('heading')->output('It works!');
+    $this->helper('Heading')->output('It works!');
 
     // With ~~~~ on either side
-    $this->helper('heading')->output('It works!', '~', 4);
+    $this->helper('Heading')->output('It works!', '~', 4);
 
 Built-In Helpers
 ================
@@ -65,7 +65,7 @@ pretty simple::
             ['short', 'Longish thing', 'short'],
             ['Longer thing', 'short', 'Longest Value'],
         ];
-        $this->helper('table')->output($data);
+        $this->helper('Table')->output($data);
 
         // Outputs
         +--------------+---------------+---------------+
@@ -81,7 +81,7 @@ Progress Helper
 The ProgressHelper can be used in two different ways. The simple mode lets you
 provide a callback that is invoked until the progress is complete::
 
-    $this->helper('progress')->output(function ($progress) {
+    $this->helper('Progress')->output(function ($progress) {
         // Do work here.
         $progress->increment(20);
     });
@@ -96,7 +96,7 @@ You can control the progress bar more by providing additional options:
 
 An example of all the options in use would be::
 
-    $this->helper('progress')->output([
+    $this->helper('Progress')->output([
         'total' => 10,
         'width' => 20,
         'callback' => function ($progress) {
@@ -107,11 +107,11 @@ An example of all the options in use would be::
 The progress helper can also be used manually to increment and re-render the
 progress bar as necessary::
 
-    $progress = $this->helper('progress');
+    $progress = $this->helper('Progress');
     $progress->init([
         'total' => 10,
         'width' => 20,
     ]);
 
-    $this->helper->increment(4);
-    $this->helper->draw();
+    $progress->increment(4);
+    $progress->draw();
