@@ -40,40 +40,28 @@ d'intégrer des fonctionnalités semblables aux Collections pour tout objet
 Liste des Méthodes
 ==================
 
-* :php:meth:`append`
-* :php:meth:`buffered`
-* :php:meth:`combine`
-* :php:meth:`compile`
-* :php:meth:`contains`
-* :php:meth:`countBy`
-* :php:meth:`each`
-* :php:meth:`every`
-* :php:meth:`extract`
-* :php:meth:`filter`
-* :php:meth:`first`
-* :php:meth:`groupBy`
-* :php:meth:`indexBy`
-* :php:meth:`insert`
-* :php:meth:`isEmpty`
-* :php:meth:`last`
-* :php:meth:`listNested`
-* :php:meth:`map`
-* :php:meth:`match`
-* :php:meth:`max`
-* :php:meth:`min`
-* :php:meth:`nest`
-* :php:meth:`reduce`
-* :php:meth:`reject`
-* :php:meth:`sample`
-* :php:meth:`shuffle`
-* :php:meth:`skip`
-* :php:meth:`some`
-* :php:meth:`sortBy`
-* :php:meth:`stopWhen`
-* :php:meth:`take`
-* :php:meth:`through`
-* :php:meth:`unfold`
-* :php:meth:`zip`
+.. table::
+    :class: docutils internal-toc
+
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`append`   | :php:meth:`buffered`   | :php:meth:`combine`  | :php:meth:`compile` |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`contains` | :php:meth:`countBy`    | :php:meth:`chunk`    | :php:meth:`each`    |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`every`    | :php:meth:`extract`    | :php:meth:`filter`   | :php:meth:`first`   |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`groupBy`  | :php:meth:`indexBy`    | :php:meth:`insert`   | :php:meth:`isEmpty` |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`last`     | :php:meth:`listNested` | :php:meth:`map`      | :php:meth:`match`   |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`max`      | :php:meth:`min`        | :php:meth:`nest`     | :php:meth:`reduce`  |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`reject`   | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`some`     | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`take`    |
+    +----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`through`  | :php:meth:`unfold`     | :php:meth:`zip`      |                     |
+    +----------------------+------------------------+----------------------+---------------------+
 
 Faire une Itération
 ===================
@@ -283,6 +271,30 @@ que besoin::
 
     // $result contient [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
+
+.. php:method:: chunk($chunkSize)
+
+Quand vous gérez des grandes quantités d'items dans une collection, il peut
+paraître sensé d'agir sur les éléments en lots plutôt qu'un par un. Pour séparer
+une collection en plusieurs tableaux d'une certaine taille, vous pouvez utiliser
+la fonction ``chunk()``::
+
+    $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    $chunked = collection($items)->chunk(2);
+    $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
+
+La fonction ``chunk`` est particulièrement utile quand vous faîtes des
+opérations en lots, par exemple avec les résultats d'une base de données::
+
+    collection($articles)
+        ->map(function ($article) {
+            // Change une propriété dans l'article
+            $article->property = 'changed';
+        })
+        ->chunk(20)
+        ->each(function ($batch) {
+            myBulkSave($batch); // Cette fonction sera appelée pour chaque lot
+        });
 
 Filtrer
 =======

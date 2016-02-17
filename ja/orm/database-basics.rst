@@ -586,8 +586,8 @@ SQL文を準備したら、あなたは追加のデータをバインドし、�
     );
 
     // １項目ずつのバインド
-    $stmt->bindValue(0, true, 'boolean');
-    $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
+    $stmt->bindValue(1, true, 'boolean');
+    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 ステートメントを作成する時には、項目の通し番号ではなく、項目名の配列をキーに
 使用することもできます。::
