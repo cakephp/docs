@@ -107,7 +107,7 @@ An example of all the options in use would be::
 The progress helper can also be used manually to increment and re-render the
 progress bar as necessary::
 
-    $progress = $this->helper('Progress');
+    $progress = $this->helper('progress');
     $progress->init([
         'total' => 10,
         'width' => 20,
