@@ -509,7 +509,7 @@ expressive queries without having to use platform specific SQL::
 
     $query = $conn->newQuery();
     $query->update('posts')
-        ->set(['publised' => true])
+        ->set(['published' => true])
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
