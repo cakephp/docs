@@ -480,7 +480,7 @@ Activer les Objets DateTime Immutables
     les objets date/heure immutables ont été ajoutés en 3.2.
 
 Puisque les objets Date/Time sont facilement mutables en place, CakePHP vous
-permet d'activer les objets immutables. le meilleur endroit pour cela est le 
+permet d'activer les objets immutables. le meilleur endroit pour cela est le
 fichier **config/bootstrap.php** ::
 
     Type::build('datetime')->useImmutable();
@@ -660,8 +660,8 @@ en utilisant ``bindValue``::
     );
 
     // Lier une valeur unique
-    $stmt->bindValue(0, true, 'boolean');
-    $stmt->bindValue(1, new DateTime('2013-01-01'), 'date');
+    $stmt->bindValue(1, true, 'boolean');
+    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 Lors de la création de requêtes, vous pouvez aussi utiliser les clés nommées
 de tableau plutôt que des clés de position::
