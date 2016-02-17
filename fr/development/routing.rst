@@ -1173,7 +1173,7 @@ Un autre cas lorsque l'on souhaite changer une route en particulier à la volée
 (pour les routes de plugin par exemple)::
 
     Router::addUrlFilter(function ($params, $request) {
-        if (empty($params['plugin']) || $params['plugin'] !=== 'MyPlugin') || empty($params['controller'])) {
+        if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin') || empty($params['controller'])) {
             return $params;
         }
         if ($params['controller'] === 'Languages' && $params['action'] === 'view') {
