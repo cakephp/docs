@@ -198,12 +198,14 @@ callable, including anonymous functions, as validation rules::
 
     // Use a global function
     $validator->add('title', 'custom', [
-        'rule' => 'validate_title'
+        'rule' => 'validate_title',
+        'message' => 'The title is not valid'
     ]);
 
     // Use an array callable that is not in a provider
     $validator->add('title', 'custom', [
-        'rule' => [$this, 'method']
+        'rule' => [$this, 'method'],
+        'message' => 'The title is not valid'
     ]);
 
     // Use a closure
@@ -211,13 +213,15 @@ callable, including anonymous functions, as validation rules::
     $validator->add('title', 'custom', [
         'rule' => function ($value, $context) use ($extra) {
             // Custom logic that returns true/false
-        }
+        },
+        'message' => 'The title is not valid'
     ]);
 
     // Use a rule from a custom provider
     $validator->add('title', 'unique', [
         'rule' => 'uniqueTitle',
-        'provider' => 'custom'
+        'provider' => 'custom',
+        'message' => 'The title is not unique enough'
     ]);
 
 Closures or callable methods will receive 2 arguments when called. The first
