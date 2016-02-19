@@ -448,7 +448,7 @@ data. CakePHP makes this simple::
     // Convert to JSON
     $json = json_encode($user);
 
-When converting an entity to an array/JSON the virtual & hidden field lists are
+When converting an entity to an array/JSON the virtual & hidden field lists aren't
 applied. Entities are converted recursively as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
