@@ -64,22 +64,22 @@ The View layer renders a presentation of modeled data. Being separate from the
 Model objects, it is responsible for using the information it has available
 to produce any presentational interface your application might need.
 
-For example, the view could use model data to render a HTML page containing it,
+For example, the view could use model data to render an HTML view template containing it,
 or a XML formatted result for others to consume::
 
-    // In a view file, we'll render an 'element' for each user.
+    // In a view template file, we'll render an 'element' for each user.
     <?php foreach ($users as $user): ?>
-        <div class="user">
+        <li class="user">
             <?= $this->element('user', ['user' => $user]) ?>
-        </div>
+        </li>
     <?php endforeach; ?>
 
-The View layer provides a number of extension points like :ref:`view-elements`
+The View layer provides a number of extension points like :ref:`view-templates`, :ref:`view-elements`
 and :doc:`/views/cells` to let you re-use your presentation logic.
 
 The View layer is not only limited to HTML or text representation of the data.
 It can be used to deliver common data formats like JSON, XML, and through
-a pluggable architecture any other format you may need.
+a pluggable architecture any other format you may need, such as CSV.
 
 The Controller Layer
 ====================
