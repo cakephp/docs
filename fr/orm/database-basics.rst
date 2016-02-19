@@ -551,7 +551,7 @@ avoir à utiliser une plateforme SQL spécifique::
 
     $query = $conn->newQuery();
     $query->update('posts')
-        ->set(['publised' => true])
+        ->set(['published' => true])
         ->where(['id' => 2]);
     $stmt = $query->execute();
 

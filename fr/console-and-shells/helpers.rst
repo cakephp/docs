@@ -2,14 +2,14 @@ Shell Helpers
 #############
 
 .. versionadded:: 3.1
-    Les Shell Helpers ont été ajoutés dans 3.1.0
+    Les Shell Helpers ont été ajoutés dans la version 3.1.0
 
-Les Shell Helpers vous permettent d'empaqueter un logique de sortie complexe
+Les Shell Helpers vous permettent d'empaqueter une logique de sortie complexe
 d'une manière réutilisable. Les Shell Helpers sont accessibles et utilisables
 depuis n'importe quel shell ou task::
 
     // Affiche des données sous forme de tableau.
-    $this->helper('table')->output($data);
+    $this->helper('Table')->output($data);
 
     // Récupère un helper depuis un plugin.
     $this->helper('Plugin.HelperName')->output($data);
@@ -25,13 +25,10 @@ quelle méthode publique::
 Créer des Helpers
 =================
 
-Alors que CakePHP fournit quelques shell helpers, vous pouvez en créer plus
-dans vos application ou plugins. Par example, nous allons créer un simple helper
-pour générer des entêtes
-While CakePHP comes with a few shell helpers you can create more in your
-application or plugins. As an example, we'll create a simple helper to generate
-fancy fantaisie. Tout d'abord, créez **src/Shell/Helper/HeadingHelper.php**
-et mettez-y le contenu suivant::
+Alors que CakePHP fournit quelques shell helpers, vous pouvez en créer d'autres
+dans vos applications ou plugins. Par example, nous allons créer un simple
+helper pour générer des en-têtes. Tout d'abord, créez
+**src/Shell/Helper/HeadingHelper.php** et mettez-y le contenu suivant::
 
     <?php
     namespace App\Shell\Helper;
@@ -48,30 +45,30 @@ et mettez-y le contenu suivant::
         }
     }
 
-Nous pouvons ensuite utiliser ce nouvel helper dans une de nos commande shell
+Nous pouvons ensuite utiliser ce nouvel helper dans une de nos commandes shell
 en l'appelant::
 
     // Avec ### de chaque côté
-    $this->helper('heading')->output('It works!');
+    $this->helper('Heading')->output('It works!');
 
     // Avec ~~~~ de chaque côté
-    $this->helper('heading')->output('It works!', '~', 4);
+    $this->helper('Heading')->output('It works!', '~', 4);
 
 Helpers Fournis
 ===============
 
-Table Helper
+Helper Table
 ------------
 
-Le TableHelper vous aide à créer des tableau en art ASCII bien formatés. L'utiliser
-est relativement simple::
+Le TableHelper vous aide à créer des tableaux en art ASCII bien formatés.
+L'utiliser est relativement simple::
 
         $data = [
             ['Header 1', 'Header', 'Long Header'],
             ['short', 'Longish thing', 'short'],
             ['Longer thing', 'short', 'Longest Value'],
         ];
-        $this->helper('table')->output($data);
+        $this->helper('Table')->output($data);
 
         // Génère
         +--------------+---------------+---------------+
@@ -81,14 +78,14 @@ est relativement simple::
         | Longer thing | short         | Longest Value |
         +--------------+---------------+---------------+
 
-Progress Helper
+Helper Progress
 ---------------
 
 Le ProgessHelper peut être utilisé de deux manières différentes. Le mode simple
 vous permet de fournir une méthode de rappel qui est invoquée jusqu'à ce que
 l'avancement soit complété::
 
-    $this->helper('progress')->output(function ($progress) {
+    $this->helper('Progress')->output(function ($progress) {
         // Fait quelque chose ici.
         $progress->increment(20);
     });
@@ -96,14 +93,14 @@ l'avancement soit complété::
 Vous pouvez mieux contrôler la barre d'avancement en fournissant des options
 supplémentaires:
 
-- ``total`` Le nombre total d'item dans la barre d'avancement. 100 par défaut.
+- ``total`` Le nombre total d'items dans la barre d'avancement. 100 par défaut.
 - ``width`` Largeur de la barre d'avancement. 80 par défaut.
 - ``callback`` la méthode de rappel qui sera appelée dans une boucle pour faire
   avancer la barre.
 
 Un exemple d'utilisation de toutes les options serait::
 
-    $this->helper('progress')->output([
+    $this->helper('Progress')->output([
         'total' => 10,
         'width' => 20,
         'callback' => function ($progress) {
@@ -120,5 +117,5 @@ et re-rendre la barre d'avancement si besoin::
         'width' => 20,
     ]);
 
-    $this->helper->increment(4);
-    $this->helper->draw();
+    $progress->increment(4);
+    $progress->draw();

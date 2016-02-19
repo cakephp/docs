@@ -30,8 +30,8 @@ La Couche Model (Modèle)
 La couche Model représente la partie de l'application qui exécute la logique
 applicative. Elle est responsable de récupérer les données et de les convertir
 selon des concepts significatifs pour votre application. Cela inclut le
-traitement, la validation, l'association et beaucoup d'autres tâches
-concernant la manipulation des données.
+traitement, la validation, l'association et beaucoup d'autres tâches concernant
+la manipulation des données.
 
 Dans le cas d'un réseau social, la couche Model s'occuperait des tâches telles
 que sauvegarder les données utilisateur, sauvegarder les associations d'amis,
@@ -71,26 +71,27 @@ objets Model, elle est responsable de l'utilisation des informations dont
 elle dispose pour produire n'importe qu'elle interface de présentation
 nécessaire à votre application.
 
-Par exemple, la view pourrait utiliser les données du model pour afficher une
-page HTML les contenant ou un résultat au format XML pour que d'autres
-l'utilisent::
+Par exemple, la view pourrait utiliser les données du model pour afficher un
+template de vue HTML les contenant ou un résultat au format XML pour que
+d'autres l'utilisent::
 
-    // Dans un fichier de view, nous afficherons un 'element' pour chaque utilisateur (user).
+    // Dans un fichier de template de view, nous afficherons un 'element' pour chaque utilisateur (user).
     <?php foreach ($users as $user): ?>
-        <div class="user">
+        <li class="user">
             <?= $this->element('user', ['user' => $user]) ?>
-        </div>
+        </li>
     <?php endforeach; ?>
 
 
 La couche View fournit un certain nombre d'extensions tels que les
-:ref:`Elements <view-elements>` et les :doc:`Cells </views/cells>` pour vous
-permettre de réutiliser votre logique de présentation.
+:ref:`Templates <view-templates>`, les :ref:`Elements <view-elements>` et les
+:doc:`Cells </views/cells>` pour vous permettre de réutiliser votre logique de
+présentation.
 
 La couche View n'est pas seulement limitée au HTML ou à la représentation en
 texte de données. Elle peut aussi être utilisée pour offrir une grande variété
 de formats tels que JSON, XML et grâce à une architecture modulable tout autre
-format dont vous auriez besoin.
+format dont vous auriez besoin, comme CSV par exemple.
 
 La Couche Controller (Contrôleur)
 =================================
@@ -104,9 +105,9 @@ que toutes les ressources nécessaires pour accomplir une tâche soient délégu
 aux bonnes personnes. Il attend des requêtes des clients, vérifie leur validité
 selon l'authentification et les règles d'autorisation, délègue la récupération
 et le traitement des données à la couche Model, puis sélectionne les types de
-présentation acceptés par le client pour finalement déléguer le processus
-de rendu à la couche View. Un exemple de controller d'enregistrement
-d'utilisateur serait::
+présentation acceptés par le client pour finalement déléguer le processus de
+rendu à la couche View. Un exemple de controller d'enregistrement d'utilisateur
+serait::
 
     public function add()
     {
@@ -123,8 +124,8 @@ d'utilisateur serait::
     }
 
 Notez que nous n'avons jamais explicitement rendu de view. Les conventions de
-CakePHP prendront soin de sélectionner la bonne view et de la rendre
-avec les données préparées avec ``set()``.
+CakePHP prendront soin de sélectionner la bonne view et de la rendre avec les
+données préparées avec ``set()``.
 
 .. _request-cycle:
 
@@ -166,13 +167,13 @@ fonctionnalités de CakePHP sont:
 
 * Un framework de :doc:`cache</core-libraries/caching>` qui s'intègre à
   Memcached, Redis et d'autres moteurs de cache.
-* Un :doc:`outil de génération de code
-  </bake/usage>` puissant pour partir sur les chapeaux de roue.
+* Un :doc:`outil de génération de code </bake/usage>` puissant pour partir sur
+  les chapeaux de roue.
 * Un :doc:`framework de tests intégré</development/testing>` pour vous assurer
   que votre code fonctionne correctement.
 
-Les prochaines étapes évidentes sont de :doc:`télécharger CakePHP </installation>`
-, lire le
+Les prochaines étapes évidentes sont de
+:doc:`télécharger CakePHP </installation>`, lire le
 :doc:`tutoriel et construire un truc génial </tutorials-and-examples/bookmarks/intro>`.
 
 Lectures Complémentaires

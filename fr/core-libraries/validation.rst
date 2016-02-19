@@ -211,12 +211,14 @@ validation::
 
     // Utilise une fonction globale
     $validator->add('title', 'custom', [
-        'rule' => 'validate_title'
+        'rule' => 'validate_title',
+        'message' => 'The title is not valid'
     ]);
 
     // Utilise un tableau appelable qui n'est pas un provider
     $validator->add('title', 'custom', [
-        'rule' => [$this, 'method']
+        'rule' => [$this, 'method'],
+        'message' => 'The title is not valid'
     ]);
 
     // Utilise une closure
@@ -224,13 +226,15 @@ validation::
     $validator->add('title', 'custom', [
         'rule' => function ($value, $context) use ($extra) {
             // Logique personnalisée qui retourne true/false
-        }
+        },
+        'message' => 'The title is not valid'
     ]);
 
     // Utilisez une règle à partir d'un provider personnalisé
     $validator->add('title', 'unique', [
         'rule' => 'uniqueTitle',
-        'provider' => 'table'
+        'provider' => 'custom',
+        'message' => 'The title is not unique enough'
     ]);
 
 Les Closures ou les méthodes appelables vont recevoir 2 arguments lors de leur
