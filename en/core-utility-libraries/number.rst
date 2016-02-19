@@ -28,7 +28,7 @@ use the ``CakeNumber`` class::
 All of these functions return the formatted number; They do not
 automatically echo the output into the view.
 
-.. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
+.. php:method:: currency(float $number, string $currency = 'USD', array $options = array())
 
     :param float $number: The value to covert.
     :param string $currency: The known currency format to use.
