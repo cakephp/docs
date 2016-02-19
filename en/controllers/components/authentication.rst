@@ -270,7 +270,7 @@ additional overhead, but allows clients to login without using cookies and
 makes AuthComponent more suitable for building APIs.
 
 For stateless authenticators the ``storage`` config should be set to ``Memory``
-so that AuthComponent does not use session to storage user record. You may also
+so that AuthComponent does not use session to store user record. You may also
 want to set config ``unauthorizedRedirect`` to ``false`` so that AuthComponent
 throws a ``ForbiddenException`` instead of default behavior of redirecting to
 referrer.
