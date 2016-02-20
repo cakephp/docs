@@ -241,25 +241,25 @@ We only typehint public methods, though, as typehinting is not cost-free::
     /**
      * Some method description.
      *
-     * @param Model $Model The model to use.
+     * @param \Cake\ORM\Table $table The table class to use.
      * @param array $array Some array value.
      * @param callable $callback Some callback.
      * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, callable $callback, $boolean)
+    public function foo(Table $table, array $array, callable $callback, $boolean)
     {
     }
 
-Here ``$Model`` must be an instance of ``Model``, ``$array`` must be an ``array`` and
+Here ``$table`` must be an instance of ``\Cake\ORM\Table``, ``$array`` must be an ``array`` and
 ``$callback`` must be of type ``callable`` (a valid callback).
 
-Note that if you want to allow ``$array`` to be also an instance of ``ArrayObject``
+Note that if you want to allow ``$array`` to be also an instance of ``\ArrayObject``
 you should not typehint as ``array`` accepts only the primitive type::
 
     /**
      * Some method description.
      *
-     * @param array|ArrayObject $array Some array value.
+     * @param array|\ArrayObject $array Some array value.
      */
     public function foo($array)
     {
