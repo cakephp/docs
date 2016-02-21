@@ -28,7 +28,7 @@ d'une ``View``, utilisez la classe ``CakeNumber``::
 Toutes ces fonctions retournent le nombre formaté; Elles n'affichent pas
 automatiqement la sortie dans la vue.
 
-.. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
+.. php:method:: currency(float $number, string $currency = 'USD', array $options = array())
 
     :param float $number: La valeur à convertir.
     :param string $currency: Le format de monnaie connu à utiliser.
@@ -131,7 +131,7 @@ automatiqement la sortie dans la vue.
     .. versionadded:: 2.3 Cette méthode a été ajoutée dans 2.3.
 
 .. php:method:: addFormat(string $formatName, array $options)
-    
+
     :param string $formatName: Le nom du format à utiliser dans le futur.
     :param array $options: Le tableau d'options pour ce format. Utilise les
         mêmes clés ``$options`` comme :php:meth:`CakeNumber::currency()`.
@@ -148,7 +148,7 @@ automatiqement la sortie dans la vue.
           nombre sera entouré avec ( et ).
         - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut
           à true.
-        - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres. 
+        - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres.
           ex: ' dollars'.
         - `wholePosition` Soit 'before' soit 'after' pour placer le symbole
           complet.
@@ -200,7 +200,7 @@ automatiqement la sortie dans la vue.
 
     Cette méthode affiche un nombre avec le montant de précision spécifié
     (place de la décimal). Elle arrondira afin de maintenir le niveau de
-    précision défini. :: 
+    précision défini. ::
 
         // appelé avec NumberHelper
         echo $this->Number->precision(456.91873645, 2 );
@@ -231,7 +231,7 @@ automatiqement la sortie dans la vue.
     fournie (où les nombres sont arrondis pour parvenir à ce degré de
     précision). Cette méthode exprime aussi le nombre en tant que
     pourcentage et préfixe la sortie avec un signe de pourcent. ::
-    
+
         // appelé avec NumberHelper. Sortie: 45.69%
         echo $this->Number->toPercentage(45.691873645);
 

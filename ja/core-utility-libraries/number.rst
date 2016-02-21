@@ -28,7 +28,7 @@ CakeNumber
 以下の全ての関数は、整形された数値を返します。
 これらは自動的にビューに出力を表示しません。
 
-.. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
+.. php:method:: currency(float $number, string $currency = 'USD', array $options = array())
 
     :param float $number: 変換する値
     :param string $currency: 使用する通貨フォーマット
