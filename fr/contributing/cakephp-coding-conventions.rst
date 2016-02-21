@@ -169,9 +169,9 @@ dans un block PHP plus large, soit dans des balises PHP séparées::
 Comparaison
 ===========
 
-Toujours essayer d'être aussi strict que possible. Si un test non strict
-est délibéré, il peut être sage de le commenter afin d'éviter de le confondre
-avec une erreur.
+Toujours essayer d'être aussi strict que possible. Si un test non strict est
+délibéré, il peut être sage de le commenter afin d'éviter de le confondre avec
+une erreur.
 
 Pour tester si une variable est null, il est recommandé d'utiliser une
 vérification stricte::
@@ -196,13 +196,13 @@ Appels des Fonctions
 ====================
 
 Les fonctions doivent être appelées sans espace entre le nom de la fonction et
-la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre
-d'un appel de fonction::
+la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre d'un
+appel de fonction::
 
     $var = foo($bar, $bar2, $bar3);
 
-Comme vous pouvez le voir, il doit y avoir un espace des deux côtés des
-signes égal (=).
+Comme vous pouvez le voir, il doit y avoir un espace des deux côtés des signes
+égal (=).
 
 Définition des Méthodes
 =======================
@@ -217,8 +217,8 @@ Exemple d'une définition de méthode::
         return $var;
     }
 
-Les paramètres avec une valeur par défaut, doivent être placés en dernier
-dans la définition de la fonction. Essayez de faire en sorte que vos fonctions
+Les paramètres avec une valeur par défaut, doivent être placés en dernier dans
+la définition de la fonction. Essayez de faire en sorte que vos fonctions
 retournent quelque chose, au moins ``true`` ou ``false``, ainsi cela peut
 déterminer si l'appel de la fonction est un succès::
 
@@ -248,26 +248,27 @@ publiques car le typage prend du temps::
     /**
      * Some method description.
      *
-     * @param Model $Model The model to use.
+     * @param \Cake\ORM\Table $table The table class to use.
      * @param array $array Some array value.
      * @param callable $callback Some callback.
      * @param boolean $boolean Some boolean value.
      */
-    public function foo(Model $Model, array $array, callable $callback, $boolean)
+    public function foo(Table $table, array $array, callable $callback, $boolean)
     {
     }
 
-Ici ``$Model`` doit être une instance de ``Model``, ``$array`` doit être un
-``array`` et ``$callback`` doit être de type ``callable`` (un callback valide).
+Ici ``$table`` doit être une instance de ``\Cake\ORM\Table``, ``$array`` doit
+être un ``array`` et ``$callback`` doit être de type ``callable`` (un callback
+valide).
 
-Notez que si vous souhaitez autoriser que ``$array`` soit aussi une instance
-de ``ArrayObject``, vous ne devez pas typer puisque ``array`` accepte seulement
-le type primitif::
+Notez que si vous souhaitez autoriser que ``$array`` soit aussi une instance de
+``\ArrayObject``, vous ne devez pas typer puisque ``array`` accepte seulement le
+type primitif::
 
     /**
      * Description de la method.
      *
-     * @param array|ArrayObject $array Some array value.
+     * @param array|\ArrayObject $array Some array value.
      */
     public function foo($array)
     {
@@ -350,8 +351,8 @@ ligne DocBlock, par exemple::
     {
     }
 
-Les blocks de commentaires, avec une exception du premier block dans le
-fichier, doivent toujours être précédés par un retour à la ligne.
+Les blocks de commentaires, avec une exception du premier block dans le fichier,
+doivent toujours être précédés par un retour à la ligne.
 
 Types de Variables
 ------------------
@@ -391,7 +392,7 @@ Pour plus de deux types, il est habituellement mieux d'utiliser seulement
 ``mixed``.
 
 Quand vous retournez l'objet lui-même, par ex pour chaîner, vous devriez
-utilisez ``$this`` à la place::
+utiliser ``$this`` à la place::
 
     /**
      * Foo function.
@@ -470,11 +471,11 @@ Les noms de classe doivent être écrits en CamelCase, par exemple::
 Variables
 ---------
 
-Les noms de variable doivent être aussi descriptifs que possible, mais
-aussi courts que possible. Tous les noms de variables doivent démarrer
-avec une lettre minuscule, et doivent être écrites en camelBack s'il y a
-plusieurs mots. Les variables contenant des objets doivent d'une certaine
-manière être associées à la classe d'où elles proviennent. Exemple::
+Les noms de variable doivent être aussi descriptifs que possible, mais aussi
+courts que possible. Tous les noms de variables doivent démarrer avec une lettre
+minuscule, et doivent être écrites en camelBack s'il y a plusieurs mots. Les
+variables contenant des objets doivent d'une certaine manière être associées à
+la classe d'où elles proviennent. Exemple::
 
     $user = 'John';
     $users = ['John', 'Hans', 'Arne'];
