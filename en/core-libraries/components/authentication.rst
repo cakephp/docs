@@ -195,7 +195,11 @@ working with a login form could look like::
                 // Prior to 2.3 use
                 // `return $this->redirect($this->Auth->redirect());`
             }
-            $this->Flash->error(__('Username or password is incorrect'));
+            $this->Flash->error(
+                __('Username or password is incorrect')
+            );
+            // Prior to 2.7 use
+            // $this->Session->setFlash(__('Username or password is incorrect'));
         }
     }
 
@@ -320,8 +324,13 @@ need to add the following code to your layout. Add the following two
 lines to the ``app/View/Layouts/default.ctp`` file in the body section
 preferable before the content_for_layout line. ::
 
+    // CakePHP 2.7+
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
+    
+    // Prior to 2.7 
+    echo $this->Session->flash();
+    echo $this->Session->flash('auth');
 
 You can customize the error messages, and flash settings AuthComponent
 uses. Using ``$this->Auth->flash`` you can configure the parameters
