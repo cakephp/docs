@@ -195,12 +195,11 @@ working with a login form could look like::
                 // Prior to 2.3 use
                 // `return $this->redirect($this->Auth->redirect());`
             }
-            $this->Session->setFlash(
-                __('Username or password is incorrect'),
-                'default',
-                array(),
-                'auth'
+            $this->Flash->error(
+                __('Username or password is incorrect')
             );
+            // Prior to 2.7 use
+            // $this->Session->setFlash(__('Username or password is incorrect'));
         }
     }
 
@@ -325,6 +324,11 @@ need to add the following code to your layout. Add the following two
 lines to the ``app/View/Layouts/default.ctp`` file in the body section
 preferable before the content_for_layout line. ::
 
+    // CakePHP 2.7+
+    echo $this->Flash->render();
+    echo $this->Flash->render('auth');
+    
+    // Prior to 2.7 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
 
@@ -844,7 +848,7 @@ and authentication mechanics in CakePHP.
 .. php:attr:: flash
 
     Settings to use when Auth needs to do a flash message with
-    :php:meth:`SessionComponent::setFlash()`.
+    :php:meth:`FlashComponent::set()`.
     Available keys are:
 
     - ``element`` - The element to use, defaults to 'default'.
@@ -910,11 +914,6 @@ and authentication mechanics in CakePHP.
     as non-public methods. These methods will now require
     authorization. Best used inside your controller's beforeFilter
     method.
-
-.. php:method:: flash($message)
-
-    Set a flash message. Uses the Session component, and values from
-    :php:attr:`AuthComponent::$flash`.
 
 .. php:method:: identify($request, $response)
 
