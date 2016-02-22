@@ -195,14 +195,15 @@ supports::
     The ``matchingListeners`` method returns an array of events matching
     a search pattern.
 
-Assuming several event listeners have been registerd the presence or absence
-of a particular event pattern can be the used as the basis of some action.::
+Assuming several event listeners have been registered the presence or absence
+of a particular event pattern can be used as the basis of some action.::
 
-// Attach some listeners to EventManager and check for match.
+// Attach listeners to EventManager.
 $this->eventManager()->on('User.Registration', [$this, 'userRegistration']);
 $this->eventManager()->on('User.Verification', [$this, 'userVerification']);
 $this->eventManager()->on('User.Authorization', [$this, 'userAuthorization']);
 
+// Somewhere else in your application.
 $events = $this->eventManager()->matchingListeners('Verification');
 if (!empty($events)) {
     // Perform logic related to presence of 'Verification' event listener.
