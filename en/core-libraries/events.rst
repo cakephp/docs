@@ -201,6 +201,33 @@ supports::
         $eventManager->on('Model.Order.afterPlace', $callable);
     }
 
+.. versionadded:: 3.2.3
+
+    The ``matchingListeners`` method returns an array of events matching
+    a search pattern.
+
+Assuming several event listeners have been registered the presence or absence
+of a particular event pattern can be used as the basis of some action.::
+
+    // Attach listeners to EventManager.
+    $this->eventManager()->on('User.Registration', [$this, 'userRegistration']);
+    $this->eventManager()->on('User.Verification', [$this, 'userVerification']);
+    $this->eventManager()->on('User.Authorization', [$this, 'userAuthorization']);
+
+    // Somewhere else in your application.
+    $events = $this->eventManager()->matchingListeners('Verification');
+    if (!empty($events)) {
+        // Perform logic related to presence of 'Verification' event listener.
+        // For example removing the listener if present.
+        $this->eventManager()->off('User.Verification');
+    } else {
+        // Perform logic related to absence of 'Verification' event listener
+    }
+
+.. note::
+
+    The pattern passed to the ``matchingListeners`` method is case sensitive.
+
 .. _event-priorities:
 
 Establishing Priorities
