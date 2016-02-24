@@ -26,8 +26,8 @@ script:
     - docker-compose run --rm docs make pdf
 
 after_script:
-  - docker-compose stop
-  - docker-compose rm -f
+    - docker-compose stop
+    - docker-compose rm -f
 
 notifications:
     email: false
