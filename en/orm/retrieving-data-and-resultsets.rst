@@ -570,6 +570,19 @@ Alternatively, if you have multiple associations, you can use ``autoFields()``::
 .. versionadded:: 3.1
     Selecting columns via an association object was added in 3.1
 
+
+Sorting Contained Associations
+------------------------------
+
+When loading HasMany and BelongsToMany associations, you can use the ``sort``
+option to sort the data in those associations::
+
+    $query->contain([
+        'Comments' => [
+            'sort' => ['Comment.created' => 'DESC']
+        ]
+    ]);
+
 .. end-contain
 
 .. _filtering-by-associated-data:
