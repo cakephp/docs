@@ -88,12 +88,12 @@ combiner::
 
         public function index()
         {
-            // Some code that created $articles and $comments
+            // Du code qui crée created $articles et $comments
 
-            // Défini les variables de vues qui doivent être sérialisées.
+            // Définit les variables de vues qui doivent être sérialisées.
             $this->set(compact('articles', 'comments'));
 
-            // Spécifie quelles variables de vues JsonView doit sérialiser.
+            // Spécifie les variables de vues JsonView à sérialiser.
             $this->set('_serialize', ['articles', 'comments']);
         }
     }

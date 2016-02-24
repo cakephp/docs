@@ -142,7 +142,7 @@ API de Folder
 
         $folder = new Folder('foo');
         if ($folder->delete()) {
-            // Successfully deleted foo and its nested folders
+            // Supprime foo et ses dossiers imbriqués avec succès
         }
 
 .. php:method:: dirsize()
@@ -275,7 +275,7 @@ API de Folder
 
 .. php:method:: realpath(string $path)
 
-    Récupère le vrai chemin (taking ".." and such into account).
+    Récupère le vrai chemin (en prenant en compte ".." etc...).
 
 .. php:staticmethod:: slashTerm(string $path)
 

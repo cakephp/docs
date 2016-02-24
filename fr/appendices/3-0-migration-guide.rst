@@ -1032,7 +1032,7 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
 - Les paramètres ``dateFormat`` et ``timeFormat`` ont été retirés de
   ``datetime()``. Vous pouvez maintenant utiliser les templates pour définir
   l'ordre dans lequel les inputs doivent être affichés.
-- ``submit()`` a eu les options ``div``, ``before`` and ``after`` retirées. Vous
+- ``submit()`` a eu les options ``div``, ``before`` et ``after`` retirées. Vous
   pouvez personnaliser le template ``submitContainer`` pour modifier ce contenu.
 - La méthode ``inputs()`` n'accepte plus ``legend`` et ``fieldset`` dans le
   paramètre ``$fields``, vous devez utiliser le paramètre ``$options``.

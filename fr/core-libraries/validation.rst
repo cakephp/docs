@@ -351,7 +351,7 @@ Pour valider les commentaires, vous utiliseriez un validator imbriqué::
 
 Vous pouvez créer des 'relations' 1:1 avec ``addNested()`` et  des 'relations'
 1:N avec ``addNestedMany()``. Avec ces deux méthodes, les erreurs des
-validators contribuerons aux erreurs du validator parent and influeront sur le
+validators contribuerons aux erreurs du validator parent et influeront sur le
 résultat final.
 
 .. _reusable-validators:

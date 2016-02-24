@@ -4,7 +4,7 @@ Email
 .. php:namespace:: Cake\Mailer
 
 .. warning::
-    Avant la version 3.1, les classes ``Email`` and ``Transport`` étaient
+    Avant la version 3.1, les classes ``Email`` et ``Transport`` étaient
     sous le namespace ``Cake\Network\Email`` au lieu du namespace
     ``Cake\Mailer``.
 

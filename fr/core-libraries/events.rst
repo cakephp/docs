@@ -162,7 +162,7 @@ UserStatistic qui s'occupe de calculer l'historique des achats d'un utilisateur
 et les compile dans des statistiques globales du site. C'est un bon cas pour
 utiliser une classe listener. Faire ceci vous permet aussi de vous concentrer
 sur la logique des statistiques à un endroit et de réagir aux évènements si
-nécessaire. Notre listener ``UserStatistics`` pourrait commencer comme ceci::
+nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
 
     use Cake\Event\EventListenerInterface;
 
@@ -191,7 +191,7 @@ accepter les instances de l'interface ``EventListener``. En interne, le
 gestionnaire d'évènement va utiliser ``implementedEvents()`` pour attacher
 les bons callbacks.
 
-Enregistrer des Listeners Anonymes
+Enregistrer des Écouteurs Anonymes
 ----------------------------------
 
 Alors que les objets listener d'évènement sont généralement une meilleure façon
@@ -219,6 +219,35 @@ que PHP supporte::
     foreach ($events as $callable) {
         $eventManager->on('Model.Order.afterPlace', $callable);
     }
+
+.. versionadded:: 3.2.3
+
+    La méthode ``matchingListeners`` retourne un tableau d'events correspondant
+    à un modèle de recherche.
+
+En supposant que plusieurs écouteurs d'évènements ont été enregistrés, la
+présence ou l'absence d'un modèle d'évènements particulier peut être utilisé
+comme base de certaines actions::
+
+    // Attacher les écouteurs au EventManager.
+    $this->eventManager()->on('User.Registration', [$this, 'userRegistration']);
+    $this->eventManager()->on('User.Verification', [$this, 'userVerification']);
+    $this->eventManager()->on('User.Authorization', [$this, 'userAuthorization']);
+
+    // Quelque part ailleurs dans votre application.
+    $events = $this->eventManager()->matchingListeners('Verification');
+    if (!empty($events)) {
+        // Perform logic related to presence of 'Verification' event listener.
+        // For example removing the listener if present.
+        $this->eventManager()->off('User.Verification');
+    } else {
+        // Logique liée à l'absence de l'écouteur d'event 'Verification'
+    }
+
+.. note::
+
+    Le modèle passé à la méthode ``matchingListeners`` n'est pas sensible à la
+    casse.
 
 .. _event-priorities:
 

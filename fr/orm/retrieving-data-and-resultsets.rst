@@ -611,6 +611,18 @@ pouvez utiliser ``autoFields()``::
 .. versionadded:: 3.1
     La sélection des colonnes via un objet association a été ajouté dans 3.1
 
+Ordonner les Associations Contain
+---------------------------------
+
+Quand vous chargez des associations HasMany et BelongsToMany, vous pouvez
+utiliser l'option ``sort`` pour ordonner les données dans ces associations::
+
+    $query->contain([
+        'Comments' => [
+            'sort' => ['Comment.created' => 'DESC']
+        ]
+    ]);
+
 .. end-contain
 
 .. _filtering-by-associated-data:

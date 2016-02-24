@@ -151,13 +151,14 @@ CakePHP, comme le débogage et la traduction de contenu.
     JSON pretty print convenience function, with the addition of
     wrapping ``<pre>`` tags around the output.
 
-    It is meant for debugging the JSON representation of objects and arrays.
+    Il a pour objectif de debugger la représentation JSON des objets et
+    tableaux.
 
 Définitions des constantes du noyau
 ===================================
 
-La plupart des constantes suivantes font référence aux chemins
-dans votre application.
+La plupart des constantes suivantes font référence aux chemins dans votre
+application.
 
 .. php:const:: APP
 

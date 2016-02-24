@@ -10,8 +10,8 @@ La `librairie security
 gère les mesures basiques de sécurité telles que les méthodes fournies pour
 le hashage et les données chiffrées.
 
-Encrypting and Decrypting Data
-==============================
+Chiffrer et Déchiffrer les Données
+==================================
 
 .. php:staticmethod:: encrypt($text, $key, $hmacSalt = null)
 .. php:staticmethod:: decrypt($cipher, $key, $hmacSalt = null)
