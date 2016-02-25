@@ -50,7 +50,7 @@ can be either a string or an array of view variables to serialize::
         public $components = array('RequestHandler');
 
         public function index() {
-            $this->set('posts', $this->paginate());
+            $this->set('posts', $this->Paginator->paginate());
             $this->set('_serialize', array('posts'));
         }
     }
