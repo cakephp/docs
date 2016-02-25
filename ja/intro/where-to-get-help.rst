@@ -101,7 +101,6 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 日本語
 ------
 
-- `cakephp.jp <http://cakephp.jp>`_
 - `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
 
 
