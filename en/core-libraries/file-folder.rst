@@ -418,7 +418,7 @@ File API
 
 .. php:method:: size()
 
-    Returns the filesize.
+    Returns the filesize in bytes.
 
 .. php:method:: writable()
 
