@@ -48,7 +48,7 @@ CakePHP 2.1 には新しい二つのビュークラスがあります。 ``XmlVi
         public $components = array('RequestHandler');
 
         public function index() {
-            $this->set('posts', $this->paginate());
+            $this->set('posts', $this->Paginator->paginate());
             $this->set('_serialize', array('posts'));
         }
     }

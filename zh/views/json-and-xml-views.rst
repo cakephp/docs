@@ -44,7 +44,7 @@ JSON 和 XML 视图
         public $components = array('RequestHandler');
 
         public function index() {
-            $this->set('posts', $this->paginate());
+            $this->set('posts', $this->Paginator->paginate());
             $this->set('_serialize', array('posts'));
         }
     }

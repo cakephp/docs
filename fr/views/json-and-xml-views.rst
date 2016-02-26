@@ -55,7 +55,7 @@ caractère, soit un tableau de variables de vue à sérialiser::
         public $components = array('RequestHandler');
 
         public function index() {
-            $this->set('posts', $this->paginate());
+            $this->set('posts', $this->Paginator->paginate());
             $this->set('_serialize', array('posts'));
         }
     }
