@@ -15,7 +15,7 @@ standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
 through using either a `PHAR package <http://phpunit.de/#download>`__ or `Composer
 <http://getcomposer.org>`_.
-
+a
 Install PHPUnit with Composer
 -----------------------------
 
@@ -284,7 +284,7 @@ Combining Test Suites for Plugins
 Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's **phpunit.xml** file::
+additional ``<testsuite>`` sections to your application's **phpunit.xml.dist** file::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -299,6 +299,14 @@ additional ``<testsuite>`` sections to your application's **phpunit.xml** file::
 
 Any additional test suites added to the ``<testsuites>`` element will
 automatically be run when you use ``phpunit``.
+
+NOTE : If you are using <testsuites> to run tests on plugins that you installed with composer, then the plugin's composer.json file should add the fixture namespace to the autoload setting.  Example...
+
+    "autoload": {
+        "psr-4": {
+            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+        }
+    },
 
 Test Case Lifecycle Callbacks
 =============================
