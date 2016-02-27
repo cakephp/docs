@@ -15,7 +15,7 @@ standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
 through using either a `PHAR package <http://phpunit.de/#download>`__ or `Composer
 <http://getcomposer.org>`_.
-a
+
 Install PHPUnit with Composer
 -----------------------------
 
