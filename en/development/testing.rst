@@ -300,7 +300,9 @@ additional ``<testsuite>`` sections to your application's **phpunit.xml.dist** f
 Any additional test suites added to the ``<testsuites>`` element will
 automatically be run when you use ``phpunit``.
 
-NOTE : If you are using <testsuites> to run tests on plugins that you installed with composer, then the plugin's composer.json file should add the fixture namespace to the autoload setting.  Example::
+If you are using ``<testsuites>`` to use fixtures from plugins that you have
+installed with composer, the plugin's ``composer.json`` file should add the
+fixture namespace to the autoload section. Example::
 
     "autoload": {
         "psr-4": {
