@@ -316,11 +316,15 @@ Also make the ``AppController`` if you don't have one already::
 A plugin's ``AppController`` can hold controller logic common to all controllers
 in a plugin but is not required if you don't want to use one.
 
-`Plugin::loadAll();` does **not** automatically default to `Plugin::loadAll([['routes' => true]]);`, so before you can access your controllers, you'll need to ensure the plugin is
-loaded and connect some routes. In your **config/bootstrap.php** add the
-following:
+Before you can access your controllers, you'll need to ensure the plugin is
+loaded and the plugin routes are loaded.  In your **config/bootstrap.php** add
+the following::
 
     Plugin::load('ContactManager', ['routes' => true]);
+
+If you are using ``Plugin::loadAll()`` ensure that routes are loaded::
+
+    Plugin::loadAll(['routes' => true]);
 
 Then create the ContactManager plugin routes. Put the following into
 **plugins/ContactManager/config/routes.php**::
