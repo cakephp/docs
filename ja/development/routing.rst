@@ -1054,6 +1054,29 @@ URL フィルターは永続的なパラメーターなどを簡単に扱う機�
 
 フィルター関数は、それらが接続されている順番に適用されます。
 
+別のユースケースでは、実行時に特定のルートを変更しています。 (プラグインルートの例) ::
+
+    Router::addUrlFilter(function ($params, $request) {
+        if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin' || empty($params['controller'])) {
+            return $params;
+        }
+        if ($params['controller'] === 'Languages' && $params['action'] === 'view') {
+            $params['controller'] = 'Locations';
+            $params['action'] = 'index';
+            $params['language'] = $params[0];
+            unset($params[0]);
+        }
+        return $params;
+    });
+    
+これは以下のルートを ::
+
+    Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);
+
+このように置き換えます。 ::
+
+    Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
+
 URL 内での名前付きパラメーターの扱い
 =====================================
 
