@@ -196,12 +196,14 @@ Localized プラグインは、バリデーションのための国の２文字�
 
     //　グローバル関数を利用する
     $validator->add('title', 'custom', [
-        'rule' => 'validate_title'
+        'rule' => 'validate_title',
+        'message' => 'タイトルが正しくありません'
     ]);
 
     //　プロバイダーではないコールバック関数を利用する
     $validator->add('title', 'custom', [
-        'rule' => [$this, 'method']
+        'rule' => [$this, 'method'],
+        'message' => 'タイトルが正しくありません'
     ]);
 
     //　クロージャーを利用する
@@ -209,13 +211,15 @@ Localized プラグインは、バリデーションのための国の２文字�
     $validator->add('title', 'custom', [
         'rule' => function ($value, $context) use ($extra) {
             // true/falseを返すカスタムロジックを記入
-        }
+        },
+	'message' => 'タイトルが正しくありません'
     ]);
 
     // カスタムプロバイダーからのルールを利用する
     $validator->add('title', 'unique', [
         'rule' => 'uniqueTitle',
-        'provider' => 'custom'
+        'provider' => 'custom',
+        'message' => 'タイトルが十分にユニークではありません'
     ]);
 
 クロージャーやコールバックメソッドは、呼び出された際に2つの設定を受けることとなります。
