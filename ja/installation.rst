@@ -10,7 +10,7 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 ============
 
 -  HTTPサーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
--  PHP 5.5.9 以上
+-  PHP 5.5.9 以上 (PHP 7 も含む)
 -  PHP mbstring 拡張
 -  PHP intl 拡張
 
