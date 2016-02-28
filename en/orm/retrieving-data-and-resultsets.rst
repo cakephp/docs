@@ -624,6 +624,7 @@ already familiar to you::
     );
 
     // Bring unique articles that were commented by 'markstory' using passed variable
+    // Dotted matching paths should be used over nested matching() calls
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username]);
@@ -633,7 +634,7 @@ already familiar to you::
 
     As this function will create an ``INNER JOIN``, you might want to consider
     calling ``distinct`` on the find query as you might get duplicate rows if
-    your conditions don't filter them already. This might be the case, for
+    your conditions don't exclude them already. This might be the case, for
     example, when the same users comments more than once on a single article.
 
 The data from the association that is 'matched' will be available on the
