@@ -23,7 +23,7 @@ replaced with better solutions. Deprecated features will not be removed until
   instead.
 * ``Cake\Database\Expression\QueryExpression::type()`` is deprecated. Use
   ``tieWith()`` instead.
-* ``Cake\Database\\Type\DateTimeType::$dateTimeClass`` is deprecated.  Use
+* ``Cake\Database\Type\DateTimeType::$dateTimeClass`` is deprecated.  Use
   DateTimeType::useMutable() or DateTimeType::useImmutable() instead.
 * ``Cake\Database\Type\DateType::$dateTimeClass`` is deprecated.  Use
   ``DateTimeType::useMutable()`` or ``DateType::useImmutable()`` instead.
