@@ -21,14 +21,14 @@ replaced with better solutions. Deprecated features will not be removed until
 * ``Shell::error()`` is deprecated because its name does not clearly indicate
   that it both outputs a message and stops execution. Use ``Shell::abort()``
   instead.
-* ``Cake\\Database\\Expression\QueryExpression::type()`` is deprecated. Use
+* ``Cake\Database\Expression\QueryExpression::type()`` is deprecated. Use
   ``tieWith()`` instead.
-* ``Cake\\Database\\Type\\DateTimeType::$dateTimeClass`` is deprecated.  Use
+* ``Cake\Database\\Type\DateTimeType::$dateTimeClass`` is deprecated.  Use
   DateTimeType::useMutable() or DateTimeType::useImmutable() instead.
-* ``Cake\\Database\\Type\\DateType::$dateTimeClass`` is deprecated.  Use
+* ``Cake\Database\Type\DateType::$dateTimeClass`` is deprecated.  Use
   ``DateTimeType::useMutable()`` or ``DateType::useImmutable()`` instead.
-* ``Cake\\ORM\\ResultSet::_calculateTypeMap()`` is now unused and deprecated.
-* ``Cake\\ORM\\ResultSet::_castValues()`` is now unused and deprecated.
+* ``Cake\ORM\ResultSet::_calculateTypeMap()`` is now unused and deprecated.
+* ``Cake\ORM\ResultSet::_castValues()`` is now unused and deprecated.
 * The ``action`` key for ``FormHelper::create()`` has been deprecated. You
   should use the ``url`` key directly.
 
