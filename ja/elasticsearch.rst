@@ -1,50 +1,24 @@
 ElasticSearch
 #############
 
-..
-    The ElasticSearch plugin provides an ORM-like abstraction on top of
-    `elasticsearch <https://www.elastic.co/products/elasticsearch>`_. The plugin
-    provides features that make testing, indexing documents and searching your
-    indexes easier.
-
-ElasticSearch プラグインは、ORM ライクな抽象を `elasticsearch <https://www.elastic.co/products/elasticsearch>`_ の上部で提供します。
-そのプラグインは、テストの作成、ドキュメントのインデックス作成、インデックスをより簡単に検索、などの機能を提供します。
-
-..
-    Installation
+ElasticSearch プラグインは、`elasticsearch <https://www.elastic.co/products/elasticsearch>`_
+の上に ORM のような抽象化を提供します。そのプラグインは、テストの作成、
+ドキュメントのインデックス作成、インデックスをより簡単に検索などの機能を提供します。
 
 インストール
 ============
 
-..
-    To install the elasticsearch plugin, you can use ``composer``. From your
-    application's ROOT directory (where composer.json file is located) run the
-    following::
-
-elasticsearch プラグインをインストールするには、 ``composer`` が利用できます。
-あなたのアプリケーションの ROOT ディレクトリ (composer.json ファイルの配置場所) から、以下で実行できます。
-
-::
+elasticsearch プラグインをインストールするには、 ``composer`` が利用できます。(composer.json
+ファイルが置かれている) アプリケーションの ROOT ディレクトリから次のコマンドを実行します。 ::
 
     php composer.phar require cakephp/elastic-search "@stable"
 
-..
-    You will need to add the following line to your application's
-    **config/bootstrap.php** file::
-
-以下の1行をあなたのアプリケーションの **config/bootstrap.php** ファイルに追加する必要があります。
-
-::
+以下の1行をあなたのアプリケーションの **config/bootstrap.php** ファイルに追加する必要があります。 ::
 
     Plugin::load('Cake/ElasticSearch', ['bootstrap' => true]);
 
-..
-    Additionally, you will need to configure the 'elastic' datasource connection in
-    your **config/app.php** file. An example configuration would be::
-
 追加で 'elastic' のデータソースの接続を **config/app.php** ファイルに設定する必要があります。
-
-::
+設定例は以下のようになります。 ::
 
     // in config/app.php
     'Datasources' => [
@@ -58,23 +32,13 @@ elasticsearch プラグインをインストールするには、 ``composer`` �
         ],
     ]
 
-..
-    Overview
-
 概要
-========
+====
 
-..
-    The elasticsearch plugin makes it easier to interact with an elasticsearch index
-    and provides an interface similar to the :doc:`/orm`. To get started you should
-    create a ``Type`` object. ``Type`` objects are the "Repository" or table-like
-    class in elasticsearch::
-
-elasticsearch は elasticsearch インデックスと作用することを簡単にし、 :doc:`/orm` に似たインタフェースを提供します。
-始めるには、 ``Type`` オブジェクトを作成しなければいけません。
-``Type`` オブジェクトは elasticsearch 内では"リポジトリ" もしくはテーブルライクなクラスです。
-
-::
+elasticsearch プラグインは elasticsearch インデックスと作用することを簡単にし、
+:doc:`/orm` に似たインタフェースを提供します。まず最初に ``Type`` オブジェクトを
+作成しなければいけません。 ``Type`` オブジェクトは elasticsearch 内では "Repository"
+もしくは Table のようなクラスです。 ::
 
     // in src/Model/Type/ArticlesType.php
     namespace App\Model\Type;
@@ -85,15 +49,7 @@ elasticsearch は elasticsearch インデックスと作用することを簡単
     {
     }
 
-..
-    You can then use your type class in your controllers::
-
-コントローラーでタイプクラスを利用できます。
-
-..
-    // Load the Type using the 'Elastic' provider.
-
-::
+コントローラーで Type クラスを利用できます。 ::
 
     public function beforeFilter(Event $event)
     {
@@ -107,19 +63,14 @@ elasticsearch は elasticsearch インデックスと作用することを簡単
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->data);
-            if ($this->Articles->save($article)) {
+                if ($this->Articles->save($article)) {
                 $this->Flash->success('It saved');
             }
         }
         $this->set(compact('article'));
     }
 
-..
-    We would also need to create a basic view for our indexed articles::
-
-インデックスされた articles の基本的なビューを作成する必要があると思います。
-
-::
+インデックスされた articles の基本的なビューを作成する必要があります。 ::
 
     // in src/Template/Articles/add.ctp
     <?= $this->Form->create($article) ?>
@@ -128,19 +79,14 @@ elasticsearch は elasticsearch インデックスと作用することを簡単
     <?= $this->Form->button('Save') ?>
     <?= $this->Form->end() ?>
 
-..
-    You should now be able to submit the form and have a new document added to
-    elasticsearch.
+これで、フォームの送信が可能になり、新しいドキュメントが elasticsearch に追加されました。
 
-今フォームの送信が可能になり、新しいドキュメントが elasticsearch に追加されました。
+Document オブジェクト
+=====================
 
-Document Objects
-================
-
-Like the ORM, the Elasticsearch ODM uses :doc:`/orm/entities`-like classes. The
-base class you should inherit from is ``Cake\ElasticSearch\Document``. Document
-classes are found in the ``Model\Document`` namespace in your application or
-plugin::
+ORMと同様に、Elasticsearch ODM は :doc:`/orm/entities` のようなクラスを使用しています。
+継承しなければならない基底クラスは ``Cake\ElasticSearch\Document`` です。
+Document クラスは、アプリケーションやプラグイン内の ``Model\Document`` 名前空間に配置します。 ::
 
     namespace App\Model\Document;
 
@@ -148,16 +94,15 @@ plugin::
     {
     }
 
-Outside of constructor logic that makes Documents work with data from
-elasticsearch, the interface and functionality provided by ``Document`` are the
-same as those in :doc:`/orm/entities`
+elasticsearch からのデータで Document を動作させるコンストラクタロジックの外側、
+インターフェースと ``Document`` によって提供される機能は、 :doc:`/orm/entities`
+内にあるものと同じです。
 
-Searching Indexed Documents
-===========================
+インデックス付きドキュメントの検索
+==================================
 
-After you've indexed some documents you will want to search through them. The
-elasticsearch plugin provides a query builder that allows you to build search
-queries::
+いくつかのドキュメントをインデックスに登録した後、あなたはそれらを検索したいと思うでしょう。
+elasticsearch プラグインを使用すると、検索クエリを構築するためのクエリビルダーを提供します。 ::
 
     $query = $this->Articles->find()
         ->where([
@@ -172,7 +117,7 @@ queries::
         echo $article->title;
     }
 
-You can use the ``FilterBuilder`` to add filtering conditions::
+フィルタリング条件を追加するために ``FilterBuilder`` を使用することができます。 ::
 
     $query->where(function ($builder) {
         return $builder->and(
@@ -181,54 +126,52 @@ You can use the ``FilterBuilder`` to add filtering conditions::
         );
     });
 
-The `FilterBuilder source
+`FilterBuilder のソース
 <https://github.com/cakephp/elastic-search/blob/master/src/FilterBuilder.php>`_
-has the complete list of methods with examples for many commonly used methods.
+は、多くの一般的に使用されるメソッドの例となるメソッドの完全なリストを持っています。
 
-Validating Data & Using Application Rules
-=========================================
+データのバリデーションとアプリケーションルールの使用
+====================================================
 
-Like the ORM, the ElasticSearch plugin lets you validate data when marshalling
-documents. Validating request data, and applying application rules works the
-same as it does with the relational ORM. See the :ref:`validating-request-data`
-and :ref:`application-rules` sections for more information.
+ORMと同様に、ElasticSearch プラグインは、ドキュメントをマーシャリングするときに
+データを検証することができます。リクエストデータのバリデート、およびアプリケーションルールの
+適用は、リレーショナルORMと同じ動作をします。詳細については、:ref:`validating-request-data` と
+:ref:`application-rules` のセクションをご覧ください。
 
-.. Need information on nested validators.
+.. ネストされたバリデータに関する情報を必要としています。
 
-Saving New Documents
-====================
+新しいドキュメントの保存
+========================
 
-When you're ready to index some data into elasticsearch, you'll first need to
-convert your data into a ``Document`` that can be indexed::
+elasticsearch にいくつかのデータをインデックスする準備ができたら、最初にインデックスが付けられる
+``Document`` にデータを変換する必要があります。 ::
 
     $article = $this->Articles->newEntity($data);
     if ($this->Articles->save($article)) {
-        // Document was indexed
+        // Document はインデックスされました
     }
 
-When marshalling a document, you can specify which embedded documents you wish
-to marshall using the ``associated`` key::
+ドキュメントをマーシャリングするとき、 ``associated`` キーを使用してマーシャリングしたい
+埋め込みドキュメントを指定することができます。 ::
 
     $article = $this->Articles->newEntity($data, ['associated' => ['Comments']]);
 
-Saving a document will trigger the following events:
+ドキュメントを保存すると、次のイベントがトリガされます：
 
-* ``Model.beforeSave`` - Fired before the document is saved. You can prevent the
-  save operation from happening by stopping this event.
-* ``Model.buildRules`` - Fired when the rules checker is built for the first
-  time.
-* ``Model.afterSave`` - Fired after the document is saved.
+* ``Model.beforeSave`` - ドキュメントが保存される前に発生します。
+  このイベントを停止することによって保存操作を防ぐことができます。
+* ``Model.buildRules`` - ルールチェッカーが最初に構築されているときに発生します。
+* ``Model.afterSave`` - ドキュメントが保存された後に発生します。
 
 .. note::
-    There are no events for embedded documents, as the parent document and all
-    of its embedded documents are saved as one operation.
+    親ドキュメントとすべての埋め込みドキュメントを1つの操作で保存するため、
+    埋め込みドキュメントのためのイベントはありません。
 
 
-Updating Existing Documents
-===========================
+既存ドキュメントの更新
+======================
 
-When you need to re-index data, you can patch existing entities and re-save
-them::
+データの再インデックスが必要な場合、既存のエンティティにパッチを適用すると再保存できます。 ::
 
     $query = $this->Articles->find()->where(['user.name' => 'jill']);
     foreach ($query as $doc) {
@@ -236,26 +179,26 @@ them::
         $this->Articles->save($doc);
     }
 
-Deleting Documents
+ドキュメントの削除
 ==================
 
-After retrieving a document you can delete it::
+ドキュメントを検索した後、それを削除することができます。 ::
 
     $doc = $this->Articles->get($id);
     $this->Articles->delete($doc);
 
-You can also delete documents matching specific conditions::
+また、特定の条件に一致するドキュメントを削除することができます。 ::
 
     $this->Articles->deleteAll(['user.name' => 'bob']);
 
-Embedding Documents
-===================
+埋め込みドキュメント
+====================
 
-By defining embedded documents, you can attach entity classes to specific
-property paths in your documents. This allows you to provide custom behavior to
-the documents within a parent document. For example, you may want the comments
-embedded in an article to have specific application specific methods. You can
-use ``embedOne`` and ``embedMany`` to define embedded documents::
+埋め込みドキュメントを定義することで、ドキュメント内の特定のプロパティのパスに
+エンティティクラスを添付することができます。これは、親ドキュメント内のドキュメントに
+独自の振る舞いを提供することができます。たとえば、あなたが記事に埋め込まれたコメントは、
+特定のアプリケーション固有のメソッドを持っている場合があります。あなたが埋め込みドキュメントを
+定義するために ``embedOne`` と ``embedMany`` を使用することができます。 ::
 
     // in src/Model/Type/ArticlesType.php
     namespace App\Model\Type;
@@ -273,46 +216,45 @@ use ``embedOne`` and ``embedMany`` to define embedded documents::
         }
     }
 
-The above would create two embedded documents on the ``Article`` document. The
-``User`` embed will convert the ``user`` property to instances of
-``App\Model\Document\User``. To get the Comments embed to use a class name
-that does not match the property name, we can use the ``entityClass`` option to
-configure a custom class name.
+上記の ``Article`` ドキュメント上の2つの埋め込みドキュメントを作成します。
+``User`` 埋め込みは ``App\Model\Document\User`` のインスタンスに ``user`` プロパティを変換します。
+プロパティ名と一致していないクラス名を使用する埋め込みコメントを得るためには、カスタムクラス名を
+設定するための ``entityClass`` オプションを使用することができます。
 
-Once we've setup our embedded documents, the results of ``find()`` and ``get()``
-will return objects with the correct embedded document classes::
+埋め込みドキュメントをセットアップしたら、``find()`` と ``get`` の結果は
+正しい埋め込みドキュメントクラスのオブジェクトを返します。 ::
 
     $article = $this->Articles->get($id);
-    // Instance of App\Model\Document\User
+    // App\Model\Document\User のインスタンス
     $article->user;
 
-    // Array of App\Model\Document\Comment instances
+    // App\Model\Document\Comment インスタンスの配列
     $article->comments;
 
-Getting Type Instances
-======================
+Type インスタンスの取得
+=======================
 
-Like the ORM, the elasticsearch plugin provides a factory/registry for getting
-``Type`` instances::
+ORM と同様に、elasticsearch プラグインは ``Type`` のインスタンスを取得するための
+ファクトリ/レジストリを提供します。 ::
 
     use Cake\ElasticSearch\TypeRegistry;
 
     $articles = TypeRegistry::get('Articles');
 
-Flushing the Registry
----------------------
+レジストリのフラッシュ
+----------------------
 
-During test cases you may want to flush the registry. Doing so is often useful
-when you are using mock objects, or modifying a type's dependencies::
+テストケースの中で、レジストリをフラッシュすることができます。
+そうすることでモックオブジェクトを使用したり、Type の依存関係を変更する際に便利です。 ::
 
     TypeRegistry::flush();
 
-Test Fixtures
-=============
+テストフィクスチャ
+==================
 
-The elasticsearch plugin provides seamless test suite integration. Just like
-database fixtures, you can create test fixtures for elasticsearch. We could
-define a test fixture for our Articles type with the following::
+elasticsearch プラグインは、シームレスなテストスイートの統合を提供します。ちょうどデータベースの
+フィクスチャのように、elasticsearch のためのテストフィクスチャを作成することができます。
+次のように Articles タイプのテストフィクスチャを定義することができます。::
 
     namespace App\Test\Fixture;
 
@@ -358,10 +300,10 @@ define a test fixture for our Articles type with the following::
         ];
     }
 
-The ``schema`` property uses the `native elasticsearch mapping format
-<https://www.elastic.co/guide/en/elasticsearch/reference/1.5/mapping.html>`_.
-You can safely omit the type name and top level ``properties`` key. Once your
-fixtures are created you can use them in your test cases by including them in
-your test's ``fixtures`` properties::
+``schema`` プロパティは `ネイティブ elasticsearch マッピングフォーマット
+<https://www.elastic.co/guide/en/elasticsearch/reference/1.5/mapping.html>`_ を使用します。
+安全にタイプ名およびトップレベルの `` properties``キーを省略することができます。
+フィクスチャが作成されたら、あなたのテストの ``fixtures`` プロパティに含めることによって、
+あなたのテストケースで使用することができます。 ::
 
     public $fixtures = ['app.articles'];
