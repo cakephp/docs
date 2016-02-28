@@ -1,5 +1,8 @@
 ビュー
 ######
+.. php:namespace:: Cake\View
+
+.. php:class:: View
 
 .. note::
     The documentation is not currently supported in Japanese language for this
@@ -12,9 +15,40 @@
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _app-view:
+
+The App View
+============
+
+.. _view-templates:
+
+View Templates
+==============
+
+.. _extending-views:
+
+Extending Views
+---------------
+
+.. _view-blocks:
+
+Using View Blocks
+=================
+
 .. _view-layouts:
 
+Layouts
+=======
+
 .. _view-elements:
+
+Elements
+========
+
+.. _view-events:
+
+View Events
+===========
 
 More about Views
 ================
