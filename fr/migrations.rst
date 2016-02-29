@@ -840,3 +840,18 @@ de créer une nouvelle instance de votre objet Table après l'appel à
 ``update()``. Le registre de l'objet Table est nettoyé après un appel à
 ``update()`` afin de rafraîchir le schéma qui est reflèté et stocké dans l'objet
 Table lors de l'instanciation.
+
+Migrations et déploiement
+-------------------------
+Si vous utilisez le plugin dans vos processus de déploiement, assurez-vous de
+vider le cache de l'ORM pour qu'il renouvelle les _metadata_ des colonnes de vos
+tables.
+Autrement, vous pourrez rencontrer des erreurs de colonnes inexistantes quand
+vous effecturez des opérations sur vos nouvelles colonnes.
+Le Core de CakePHP inclus un :doc:`Shell de Cache de l'ORM <orm-cache>` que vous
+pouvez utilisez pour vider le cache::
+
+    $ bin/cake orm_cache clear
+
+Veuillez pour référez à la section du cookbook à propos du :doc:`Shell du Cache de l’ORM <orm-cache>`
+si vous voulez plus de détails à propos de ce shell.
