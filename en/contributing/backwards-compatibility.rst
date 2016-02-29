@@ -95,8 +95,9 @@ expect from CakePHP:
 | Add an argument               | No [1]_                  |
 | to an overridden method       |                          |
 +-------------------------------+--------------------------+
-| Add a default argument        | Yes                      |
+| Add a default argument value  | Yes                      |
 | to an existing method         |                          |
+| argument.                     |                          |
 +-------------------------------+--------------------------+
 
 Working on CakePHP
@@ -150,10 +151,14 @@ In a minor release you can:
 +-------------------------------+--------------------------+
 | Change method name            | Yes [2]_                 |
 +-------------------------------+--------------------------+
-| Add argument with             | Yes                      |
+| Add a new argument with       | Yes                      |
 | default value                 |                          |
 +-------------------------------+--------------------------+
-| Add required argument         | No                       |
+| Add a new required argument   | No                       |
+| to an existing method.        |                          |
++-------------------------------+--------------------------+
+| Remove a default value from   | No                       |
+| an existing argument          |                          |
 +-------------------------------+--------------------------+
 
 
