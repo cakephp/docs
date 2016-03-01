@@ -330,10 +330,15 @@ tous les controllers de votre plugin, et n'est pas obligatoire si vous ne
 souhaitez pas en utiliser.
 
 Avant d'accéder à vos controllers, vous devrez vous assurez que le plugin est
-chargé et connecte des routes. Dans votre **config/bootstrap.php**, ajoutez
-ce qui suit::
+chargé et que les routes du plugin sont chargées. Dans votre
+**config/bootstrap.php**, ajoutez ce qui suit::
 
     Plugin::load('ContactManager', ['routes' => true]);
+
+Si vous utilisez ``Plugin::loadAll()``, assurez-vous que les routes sont
+chargées::
+
+    Plugin::loadAll(['routes' => true]);
 
 Ensuite créez les routes du plugin ContactManager. Mettez ce qui suit dans
 **plugins/ContactManager/config/routes.php**::

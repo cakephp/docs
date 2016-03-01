@@ -3,9 +3,9 @@ Folder & File
 
 .. php:namespace:: Cake\Filesystem
 
-Les utilitaires Folder et File sont des classes pratiques pour la
-lecture, l'écriture/l'ajout de fichiers, lister les fichiers d'un dossier
-et toute autre tâche habituelle liée aux répertoires.
+Les utilitaires Folder et File sont des classes pratiques pour la lecture,
+l'écriture/l'ajout de fichiers, lister les fichiers d'un dossier et toute autre
+tâche habituelle liée aux répertoires.
 
 Utilisation Basique
 ===================
@@ -57,8 +57,8 @@ API de Folder
 
 .. php:attr:: mode
 
-    Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne
-    fait rien sur les machines Windows.
+    Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne fait
+    rien sur les machines Windows.
 
 .. php:staticmethod:: addPathElement(string $path, string $element)
 
@@ -92,8 +92,8 @@ API de Folder
 
 .. php:method:: copy(array|string $options = [])
 
-    Copie de façon récursive un répertoire. Le seul paramètre $options peut
-    être soit un chemin à copier soit un tableau d'options::
+    Copie de façon récursive un répertoire. Le seul paramètre $options peut être
+    soit un chemin à copier soit un tableau d'options::
 
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
@@ -116,20 +116,20 @@ API de Folder
       fichiers dans le répertoire source vont remplacer les fichiers dans le
       répertoire de cible. Les contenus du répertoire seront fusionnés.
     * ``Folder::OVERWRITE`` écrase les fichiers & répertoires existant dans le
-      répertoire cible avec ceux dans le répertoire source. Si la source
-      et la destination contiennent le même sous-répertoire, les contenus du
+      répertoire cible avec ceux dans le répertoire source. Si la source et la
+      destination contiennent le même sous-répertoire, les contenus du
       répertoire de cible vont être retirés et remplacés avec celui de la
       source.
 
 .. php:staticmethod:: correctSlashFor(string $path)
 
-    Retourne un ensemble correct de slashes pour un $path donné. ('\\' pour
-    les chemins Windows et '/' pour les autres chemins).
+    Retourne un ensemble correct de slashes pour un $path donné. ('\\' pour les
+    chemins Windows et '/' pour les autres chemins).
 
 .. php:method:: create(string $pathname, integer $mode = false)
 
-    Crée une structure de répertoire de façon récursive. Peut être utilisée
-    pour créer des structures de chemin profond comme `/foo/bar/baz/shoe/horn`::
+    Crée une structure de répertoire de façon récursive. Peut être utilisée pour
+    créer des structures de chemin profond comme `/foo/bar/baz/shoe/horn`::
 
         $folder = new Folder();
         if ($folder->create('foo' . DS . 'bar' . DS . 'baz' . DS . 'shoe' . DS . 'horn')) {
@@ -174,14 +174,14 @@ API de Folder
 
 .. note::
 
-    Les méthodes find et findRecursive de folder ne trouvent seulement que
-    des fichiers. Si vous voulez obtenir des dossiers et fichiers, regardez
+    Les méthodes find et findRecursive de folder ne trouvent seulement que des
+    fichiers. Si vous voulez obtenir des dossiers et fichiers, regardez
     :php:meth:`Folder::read()` ou :php:meth:`Folder::tree()`.
 
 .. php:method:: findRecursive(string $pattern = '.*', boolean $sort = false)
 
-    Retourne un tableau de tous les fichiers correspondants dans et
-    en-dessous du répertoire courant::
+    Retourne un tableau de tous les fichiers correspondants dans et en-dessous
+    du répertoire courant::
 
         // Trouve de façon récursive les fichiers commençant par test ou index
         $dir = new Folder(WWW_ROOT);
@@ -279,8 +279,8 @@ API de Folder
 
 .. php:staticmethod:: slashTerm(string $path)
 
-    Retourne $path avec le slash ajouté à la fin (corrigé pour
-    Windows ou d'autres OS).
+    Retourne $path avec le slash ajouté à la fin (corrigé pour Windows ou
+    d'autres OS).
 
 .. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
 
@@ -402,10 +402,9 @@ L'API de File
 
 .. php:staticmethod:: prepare(string $data, boolean $forceWindows = false)
 
-    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les
-    lignes de fin en un terminator correct pour la plateforme courante. Si
-    c'est Windows "\r\n" sera utilisé, toutes les autres plateformes
-    utiliseront "\n".
+    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les lignes
+    de fin en un terminator correct pour la plateforme courante. Si c'est
+    Windows "\r\n" sera utilisé, toutes les autres plateformes utiliseront "\n".
 
 .. php:method:: pwd()
 
@@ -413,8 +412,8 @@ L'API de File
 
 .. php:method:: read(string $bytes = false, string $mode = 'rb', boolean $force = false)
 
-    Retourne les contenus du Fichier en chaîne de caractère ou retourne ``false``
-    en cas d'échec.
+    Retourne les contenus du Fichier en chaîne de caractère ou retourne
+    ``false`` en cas d'échec.
 
 .. php:method:: readable()
 
@@ -426,7 +425,7 @@ L'API de File
 
 .. php:method:: size()
 
-    Retourne le Filesize.
+    Retourne le Filesize en bytes.
 
 .. php:method:: writable()
 
@@ -444,8 +443,8 @@ L'API de File
 
 .. php:method:: replaceText( $search, $replace )
 
-    Remplace le texte dans un fichier. Retourne ``false`` en cas d'échec et ``true``
-    en cas de succès.
+    Remplace le texte dans un fichier. Retourne ``false`` en cas d'échec et
+    ``true`` en cas de succès.
 
 .. meta::
     :title lang=fr: Folder & File
