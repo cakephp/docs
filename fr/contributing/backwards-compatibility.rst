@@ -104,8 +104,9 @@ que vous pouvez attendre de CakePHP:
 | Ajouter un argument           | Non [1]_                 |
 | pour une méthode qui surcharge|                          |
 +-------------------------------+--------------------------+
-| Ajouter un argument par défaut| Oui                      |
-| pour une méthode existante    |                          |
+| Ajouter une valeur d'argument | Oui                      |
+| par défautpour une méthode    |                          |
+| existante                     |                          |
 +-------------------------------+--------------------------+
 
 Travailler avec CakePHP
@@ -159,11 +160,16 @@ Dans une version mineure, vous pouvez:
 +-------------------------------+--------------------------+
 | Changer le nom de méthode     | Oui [2]_                 |
 +-------------------------------+--------------------------+
-| Ajouter un argument avec la   | Oui                      |
-| valeur par défaut             |                          |
+| Ajouter un nouvel argument    | Oui                      |
+| avec la valeur par défaut     |                          |
 +-------------------------------+--------------------------+
-| Ajouter une argument          | Non                      |
-| nécessaire                    |                          |
+| Ajouter un nouvel argument    | No                       |
+| requis pour une méthode       |                          |
+| existante.                    |                          |
++-------------------------------+--------------------------+
+| Retirer une valeur par défaut | No                       |
+| à partir d'un argument        |                          |
+| existant                      |                          |
 +-------------------------------+--------------------------+
 
 

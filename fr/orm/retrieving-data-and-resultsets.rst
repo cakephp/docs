@@ -666,6 +666,8 @@ déjà vous être familière::
 
     // Récupère les articles uniques qui étaient commentés par 'markstory'
     // en utilisant la variable passée
+    // Les chemins avec points doivent être utilisées plutôt que les appels
+    // imbriquées de matching()
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username]);
@@ -675,7 +677,7 @@ déjà vous être familière::
 
     Comme cette fonction va créer un ``INNER JOIN``, vous pouvez appeler
     ``distinct`` sur le find de la requête puisque vous aurez des lignes
-    dupliquées si les conditions ne les filtrent pas déjà. Ceci peut être le
+    dupliquées si les conditions ne les excluent pas déjà. Ceci peut être le
     cas, par exemple, quand les mêmes utilisateurs commentent plus d'une fois
     un article unique.
 

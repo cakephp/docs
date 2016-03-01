@@ -1,21 +1,21 @@
 Testing
 #######
 
-CakePHP fournit un support de test intégré compréhensible. CakePHP
-permet l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes
-les fonctionnalités offertes par PHPUnit, CakePHP offre quelques
-fonctionnalités supplémentaires pour faciliter le test. Cette section va
-couvrir l'installation de PHPUnit, comment commencer avec le Test Unitaire,
-et comment vous pouvez utiliser les extensions que CakePHP offre.
+CakePHP fournit un support de test intégré compréhensible. CakePHP permet
+l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes les
+fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
+supplémentaires pour faciliter le test. Cette section va couvrir l'installation
+de PHPUnit, comment commencer avec le Test Unitaire, et comment vous pouvez
+utiliser les extensions que CakePHP offre.
 
 Installer PHPUnit
 =================
 
 CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
-fonctionnalités profondes et puissantes pour s'assurer que votre code fait
-ce que vous pensez qu'il doit faire. PHPUnit peut être installé avec
-le `PHAR package <http://phpunit.de/#download>`__ ou avec
+fonctionnalités profondes et puissantes pour s'assurer que votre code fait ce
+que vous pensez qu'il doit faire. PHPUnit peut être installé avec le `PHAR
+package <http://phpunit.de/#download>`__ ou avec
 `Composer <http://getcomposer.org>`_.
 
 Installer PHPUnit avec Composer
@@ -301,7 +301,7 @@ Souvent, votre application sera composé de plusieurs plugins. Dans ces
 situations, il peut être assez fastidieux d'effectuer des tests pour chaque
 plugin. Vous pouvez faire des tests pour chaque plugin qui compose votre
 application en ajoutant une section ``<testsuite>`` supplémentaire au fichier
-``phpunit.xml`` de votre application::
+``phpunit.xml.dist`` de votre application::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -316,6 +316,16 @@ application en ajoutant une section ``<testsuite>`` supplémentaire au fichier
 
 Les tests supplémentaires ajoutés à l'élément ``<testsuites>`` seront exécutés
 automatiquement quand quand vous utiliserez ``phpunit``.
+
+Si vous utilisez ``<testsuites>`` pour utiliser les fixtures à partir des
+plugins que vous avez installé avec composer, le fichier ``composer.json`` du
+plugin doit ajouter le namespace de la fixture à la section autoload. Exemple::
+
+    "autoload": {
+        "psr-4": {
+            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+        }
+    },
 
 Les Callbacks du Cycle de Vie des Cas de Test
 =============================================
