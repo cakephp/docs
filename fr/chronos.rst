@@ -81,12 +81,12 @@ souvenir de remplacer les variables quand vous utilisez les modificateurs::
     // Ce code ne fonctionne pas avec les objets immutables
     $time->addDay(1);
     doSomething($time);
-    return $time
+    return $time;
 
     // Ceci fonctionne comme vous le souhaitez
     $time = $time->addDay(1);
     $time = doSomething($time);
-    return $time
+    return $time;
 
 En capturant la valeur de retour pour chaque modification, votre code
 fonctionnera comme souhaité. Si vous avez déjà créé un objet immutable, et que
