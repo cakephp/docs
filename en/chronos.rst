@@ -78,12 +78,12 @@ modifiers::
     // This code doesn't work with immutable objects
     $time->addDay(1);
     doSomething($time);
-    return $time
+    return $time;
 
     // This works like you'd expect
     $time = $time->addDay(1);
     $time = doSomething($time);
-    return $time
+    return $time;
 
 By capturing the return value of each modification your code will work as
 expected. If you ever have an immutable object, and want to create a mutable
