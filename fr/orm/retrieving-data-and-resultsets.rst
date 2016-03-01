@@ -666,8 +666,8 @@ déjà vous être familière::
 
     // Récupère les articles uniques qui étaient commentés par 'markstory'
     // en utilisant la variable passée
-    // Les chemins avec points doivent être utilisées plutôt que les appels
-    // imbriquées de matching()
+    // Les chemins avec points doivent être utilisés plutôt que les appels
+    // imbriqués de matching()
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username]);
