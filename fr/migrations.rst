@@ -847,11 +847,11 @@ Si vous utilisez le plugin dans vos processus de déploiement, assurez-vous de
 vider le cache de l'ORM pour qu'il renouvelle les _metadata_ des colonnes de vos
 tables.
 Autrement, vous pourrez rencontrer des erreurs de colonnes inexistantes quand
-vous effecturez des opérations sur vos nouvelles colonnes.
+vous effectuerez des opérations sur vos nouvelles colonnes.
 Le Core de CakePHP inclut un :doc:`Shell de Cache de l'ORM <console-and-shells/orm-cache>`
 que vous pouvez utilisez pour vider le cache::
 
     $ bin/cake orm_cache clear
 
-Veuillez pour référez à la section du cookbook à propos du :doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>`
+Veuillez vous référer à la section du cookbook à propos du :doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>`
 si vous voulez plus de détails à propos de ce shell.
