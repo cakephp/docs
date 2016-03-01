@@ -804,7 +804,7 @@ your Table object after the ``update()`` call. The Table object registry is
 cleared after an ``update()`` call in order to refresh the schema that is
 reflected and stored in the Table object upon instantiation.
 
-Migrations and deployment
+Migrations and Deployment
 -------------------------
 
 If you use the plugin when deploying your application, be sure to clear the ORM
