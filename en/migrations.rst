@@ -803,3 +803,18 @@ along with renaming or removing a column, make sure you create a new instance of
 your Table object after the ``update()`` call. The Table object registry is
 cleared after an ``update()`` call in order to refresh the schema that is
 reflected and stored in the Table object upon instantiation.
+
+Migrations and Deployment
+-------------------------
+
+If you use the plugin when deploying your application, be sure to clear the ORM
+cache so it renews the column metadata of your tables.
+Otherwise, you might end up having errors about columns not existing when
+performing operations on those new columns.
+The CakePHP Core includes a :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
+that you can use to perform this operation::
+
+    $ bin/cake orm_cache clear
+
+Be sure to read the :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
+section of the cookbook if you want to know more about this shell.
