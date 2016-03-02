@@ -75,7 +75,7 @@ Hashing Data
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
 Create a hash from string using given method. Fallback on next
-available method. If ``$salt`` is set to ``true``, the applications salt
+available method. If ``$salt`` is set to ``true``, the application's salt
 value will be used::
 
     // Using the application's salt value
