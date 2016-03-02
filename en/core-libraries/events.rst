@@ -340,6 +340,8 @@ of any type, we recommend passing an associative array.
 The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
 object as an argument and notifies all subscribed listeners.
 
+.. _stopping-events:
+
 Stopping Events
 ---------------
 
@@ -391,10 +393,10 @@ during the ``beforePlace`` process.
 Getting Event Results
 ---------------------
 
-Every time a callback returns a value, it gets stored in the ``$result``
-property of the event object. This is useful when you want to allow callbacks to
-modify the event execution. Let's take again our ``beforePlace`` example and let
-callbacks modify the $order data.
+Every time a callback returns a non-null non-false value, it gets stored in the
+``$result`` property of the event object. This is useful when you want to allow
+callbacks to modify the event execution. Let's take again our ``beforePlace``
+example and let callbacks modify the ``$order`` data.
 
 Event results can be altered either using the event object result property
 directly or returning the value in the callback itself::

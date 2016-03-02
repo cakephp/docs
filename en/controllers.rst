@@ -520,6 +520,10 @@ methods are implemented by your controllers
 
         The beforeFilter() method will be called for missing actions.
 
+    Returning a response from a ``beforeFilter`` method will not prevent other
+    listeners of the same event from being called. You must explicitly
+    :ref:`stop the event <stopping-events>`.
+
 .. php:method:: beforeRender(Event $event)
 
     Called during the ``Controller.beforeRender`` event which occurs after
