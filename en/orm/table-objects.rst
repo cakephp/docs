@@ -105,6 +105,17 @@ a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
 :ref:`table-registry-usage` for more information.
 
+If your table class is in a plugin, be sure to use the correct name for your
+table class. Failing to do so can result in validation rules, or callbacks not
+being triggered as a default class is used instead of your actual class. To
+correctly load plugin table classes use the following::
+
+    // Plugin table
+    $articlesTable = TableRegistry::get('PluginName.Articles');
+
+    // Vendor prefixed plugin table
+    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
+
 .. _table-callbacks:
 
 Lifecycle Callbacks

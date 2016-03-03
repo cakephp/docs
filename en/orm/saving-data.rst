@@ -34,17 +34,6 @@ passing it to the ``save()`` method in the ``Table`` class::
         // The $article entity contains the id now
         $id = $article->id;
     }
-    
-If your model (eg. ArticlesTable.php) is in a plugin you may find that TableRegistry::get() still works but that your validation rules or other callbacks in ArticlesTable.php may not be triggering.  This is because TableRegistry::get() builds a default model for the table. Here are some examples for TableRegistry::get() that you may want to use when your class is in a plugin::
-
-Plugin example (same as above except)::
-
-    $articlesTable = TableRegistry::get('PluginName.Articles');
-    
-Composer installed plugin example (same as above except)::
-
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
-
 
 Updating Data
 -------------
