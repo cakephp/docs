@@ -32,6 +32,12 @@ You can hook custom logic into the delete process using the ``beforeDelete`` and
 ``afterDelete`` callbacks present in both Models and Behaviors. See
 :doc:`/models/callback-methods` for more information.
 
+.. note::
+
+    If you delete a record with dependent records and one of their delete callbacks,
+    e.g. ``beforeDelete`` returns ``false``, it will not stop the further event
+    propagation nor does it change the return value of the initial ``delete``.
+
 .. _model-deleteall:
 
 deleteAll
