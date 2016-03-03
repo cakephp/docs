@@ -35,7 +35,7 @@ passing it to the ``save()`` method in the ``Table`` class::
         $id = $article->id;
     }
     
-If your model (eg. ArticlesTable.php) is in a plugin you may find that TableRegistry::get() still works but that your validation rules or other callbacks in ArticlesTable.php may not be triggering because TableRegistry::get() builds a default model for the table. Here are some examples for TableRegistry::get() that you may use when the class is in a plugin::
+If your model (eg. ArticlesTable.php) is in a plugin you may find that TableRegistry::get() still works but that your validation rules or other callbacks in ArticlesTable.php may not be triggering.  This is because TableRegistry::get() builds a default model for the table. Here are some examples for TableRegistry::get() that you may want to use when your class is in a plugin::
 
 Plugin example (same as above except)::
 
@@ -43,7 +43,7 @@ Plugin example (same as above except)::
     
 Composer installed plugin example (same as above except)::
 
-    $articlesTable = TableRegistry::get('UserName/PluginName.Articles');
+    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 
 Updating Data
