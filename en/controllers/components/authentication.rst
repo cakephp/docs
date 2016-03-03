@@ -343,7 +343,7 @@ Here we're using username + API key as our fields, and use the Users model.
 Creating API Keys for Basic Authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Because basic HTTP sends credentials in plain-text, it is unwise to have user's
+Because basic HTTP sends credentials in plain-text, it is unwise to have users
 send their login password. Instead an opaque API key is generally used. You can
 generate these API tokens randomly using libraries from CakePHP::
 
