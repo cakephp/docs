@@ -45,9 +45,9 @@ attaching hooks to your plugin controllers.
 
 Instead, you can use events to allow you to cleanly separate the concerns of
 your code and allow additional concerns to hook into your plugin using events.
-For example, in your Cart plugin you have an Orders model that deals with creating
-orders. You'd like to notify the rest of the application that an order has been
-created. To keep your Orders model clean you could use events::
+For example, in your Cart plugin you have an Orders model that deals with
+creating orders. You'd like to notify the rest of the application that an order
+has been created. To keep your Orders model clean you could use events::
 
     // Cart/Model/Table/OrdersTable.php
     namespace Cart\Model\Table;
@@ -114,9 +114,9 @@ event object is usually required in any function that gets attached globally in
 order to prevent some bugs. Remember that with the flexibility of using the
 global manager, some additional complexity is incurred.
 
-:php:meth:`Cake\\Event\\EventManager::dispatch()` method accepts the event object
-as an argument and notifies all listener and callbacks passing this object
-along. The listeners will handle all the extra logic around the
+:php:meth:`Cake\\Event\\EventManager::dispatch()` method accepts the event
+object as an argument and notifies all listener and callbacks passing this
+object along. The listeners will handle all the extra logic around the
 ``afterPlace`` event, you can log the time, send emails, update user statistics
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
@@ -124,7 +124,7 @@ the need.
 Core Events
 ===========
 
-There are a number of core events within the framework which your application 
+There are a number of core events within the framework which your application
 can listen to. Each layer of CakePHP emits events that you can use in your
 application.
 
@@ -144,8 +144,8 @@ associative array with all event names that the class will handle.
 To continue our previous example, let's imagine we have a UserStatistic class
 responsible for calculating a user's purchasing history, and compiling into
 global site statistics. This is a great place to use a listener class. Doing so
-allows you to concentrate the statistics logic in one place and react to events as
-necessary. Our ``UserStatistics`` listener might start out like::
+allows you to concentrate the statistics logic in one place and react to events
+as necessary. Our ``UserStatistics`` listener might start out like::
 
     use Cake\Event\EventListenerInterface;
 
@@ -249,8 +249,8 @@ callback after the others, using a number above ``10`` will do.
 
 If two callbacks happen to have the same priority value, they will be executed
 with a the order they were attached. You set priorities using the ``on()``
-method for callbacks, and declaring it in the ``implementedEvents()`` function for
-event listeners::
+method for callbacks, and declaring it in the ``implementedEvents()`` function
+for event listeners::
 
     // Setting priority for a callback
     $callback = [$this, 'doSomething'];
@@ -308,8 +308,9 @@ Dispatching Events
 ==================
 
 Once you have obtained an instance of an event manager you can dispatch events
-using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an instance
-of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event::
+using :php:meth:`~Cake\\Event\\EventManager::dispatch()`. This method takes an
+instance of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching
+an event::
 
     // An event listener has to be instantiated before dispatching an event.
     // Create a new event and dispatch it.
@@ -318,24 +319,24 @@ of the :php:class:`Cake\\Event\\Event` class. Let's look at dispatching an event
     ]);
     $this->eventManager()->dispatch($event);
 
-:php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The first one is
-the event name, you should try to keep this name as unique as possible, while
-making it readable. We suggest a convention as follows: ``Layer.eventName`` for
-general events happening at a layer level (e.g. ``Controller.startup``,
-``View.beforeRender``) and ``Layer.Class.eventName`` for events happening in
-specific classes on a layer, for example ``Model.User.afterRegister`` or
-``Controller.Courses.invalidAccess``.
+:php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The
+first one is the event name, you should try to keep this name as unique as
+possible, while making it readable. We suggest a convention as follows:
+``Layer.eventName`` for general events happening at a layer level (e.g.
+``Controller.startup``, ``View.beforeRender``) and ``Layer.Class.eventName`` for
+events happening in specific classes on a layer, for example
+``Model.User.afterRegister`` or ``Controller.Courses.invalidAccess``.
 
-The second argument is the ``subject``, meaning the object associated to the event,
-usually when it is the same class triggering events about itself, using ``$this``
-will be the most common case. Although a Component could trigger
+The second argument is the ``subject``, meaning the object associated to the
+event, usually when it is the same class triggering events about itself, using
+``$this`` will be the most common case. Although a Component could trigger
 controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
 change them on the fly.
 
-Finally, the third argument is any additional event data.This can be any data you consider
-useful to pass around so listeners can act upon it. While this can be an argument
-of any type, we recommend passing an associative array.
+Finally, the third argument is any additional event data.This can be any data
+you consider useful to pass around so listeners can act upon it. While this can
+be an argument of any type, we recommend passing an associative array.
 
 The :php:meth:`~Cake\\Event\\EventManager::dispatch()` method accepts an event
 object as an argument and notifies all subscribed listeners.
@@ -350,8 +351,8 @@ listeners from being notified. You can see this in action during model callbacks
 (e.g. beforeSave) in which it is possible to stop the saving operation if
 the code detects it cannot proceed any further.
 
-In order to stop events you can either return ``false`` in your callbacks or call
-the ``stopPropagation()`` method on the event object::
+In order to stop events you can either return ``false`` in your callbacks or
+call the ``stopPropagation()`` method on the event object::
 
     public function doSomething($event)
     {

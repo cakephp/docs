@@ -2,17 +2,17 @@ Tutoriel d'un Blog - Authentification et Autorisations
 ######################################################
 
 Suivez notre exemple :doc:`/tutorials-and-examples/blog/blog`, imaginons que
-nous souhaitions sécuriser l'accès de certaines URLs, basées sur la connexion
-de l'utilisateur. Nous avons aussi un autre impératif : permettre à notre
-blog d'avoir plusieurs auteurs, afin que chacun d'eux puisse créer ses propres
+nous souhaitions sécuriser l'accès de certaines URLs, basées sur la connexion de
+l'utilisateur. Nous avons aussi un autre impératif : permettre à notre blog
+d'avoir plusieurs auteurs, afin que chacun d'eux puisse créer ses propres
 articles, les modifier et les supprimer mais ne laisser la possibilité de ne
 modifier que ses propres messages.
 
 Créer le code lié à tous les utilisateurs
 =========================================
 
-Premièrement, créons une nouvelle table dans notre base de données blog
-pour enregistrer les données de notre utilisateur::
+Premièrement, créons une nouvelle table dans notre base de données blog pour
+enregistrer les données de notre utilisateur::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -23,10 +23,10 @@ pour enregistrer les données de notre utilisateur::
         modified DATETIME DEFAULT NULL
     );
 
-Nous avons respecté les conventions de CakePHP pour le nommage des tables,
-mais nous profitons d'une autre convention: en utilisant les colonnes du
-nom d'utilisateur et du mot de passe dans une table users, CakePHP sera
-capable de configurer automatiquement la plupart des choses pour nous quand nous
+Nous avons respecté les conventions de CakePHP pour le nommage des tables, mais
+nous profitons d'une autre convention: en utilisant les colonnes du nom
+d'utilisateur et du mot de passe dans une table users, CakePHP sera capable de
+configurer automatiquement la plupart des choses pour nous quand nous
 réaliserons la connexion de l'utilisateur.
 
 La prochaine étape est de créer notre classe ``UsersTable``, qui a la
@@ -318,6 +318,11 @@ l'utilisateur connecté courant en référence pour l'article créé::
             $this->Flash->error(__("Impossible d'ajouter votre article."));
         }
         $this->set('article', $article);
+
+        // Ajoute seulement la liste des catégories pour pouvoir choisir
+        // une catégorie pour un article
+        $categories = $this->Articles->Categories->find('treeList');
+        $this->set(compact('categories'));
     }
 
 La fonction ``user()`` fournie par le component retourne toute colonne à partir

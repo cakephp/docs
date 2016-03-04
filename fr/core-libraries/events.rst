@@ -367,6 +367,8 @@ type, nous vous recommandons de passer un tableau associatif.
 La méthode :php:meth:`~Cake\\Event\\EventManager::dispatch()` accepte un objet
 event en argument et notifie à tous les écouteurs qui sont abonnés.
 
+.. _stopping-events:
+
 Stopper les Events
 ------------------
 
@@ -418,10 +420,11 @@ stoppé pendant le processus ``beforePlace``.
 Obtenir des Résultats d'Evenement
 ---------------------------------
 
-A chaque fois qu'un callback retourne une valeur, elle sera stockée dans la
-propriété ``$result`` de l'objet event. C'est utile quand vous voulez permettre
-aux callbacks de modifier l'exécution de l'évènement. Prenons à nouveau notre
-exemple ``beforePlace`` et laissons les callbacks modifier la donnée $order.
+A chaque fois qu'un callback retourne une valeur non nulle et non false, elle
+sera stockée dans la propriété ``$result`` de l'objet event. C'est utile quand
+vous voulez permettre aux callbacks de modifier l'exécution de l'évènement.
+Prenons à nouveau notre exemple ``beforePlace`` et laissons les callbacks
+modifier la donnée ``$order``.
 
 Les résultats d'Event peuvent être modifiés soit en utilisant directement la
 propriété de résultat de l'objet event, soit en retournant la valeur dans le

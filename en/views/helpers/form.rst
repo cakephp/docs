@@ -1606,7 +1606,8 @@ You can also change the templates at runtime using the ``templates()`` method::
 List of Templates
 -----------------
 
-A list of the default templates, their default format and the variables they expect are:
+A list of the default templates, their default format and the variables they
+expect are:
 
 * ``button`` : ``<button{{attrs}}>{{text}}</button>``
 * ``checkbox`` : ``<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>``

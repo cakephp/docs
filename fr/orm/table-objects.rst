@@ -8,9 +8,9 @@ Les Objets Table
 
 Les objets Table fournissent un accès à la collection des entities stockées
 dans une table spécifique. Chaque table dans votre application devra avoir une
-classe Table associée qui est utilisée pour interagir avec une table
-donnée. Si vous n'avez pas besoin de personnaliser le behavior d'une table
-donnée, CakePHP va générer une instance Table à utiliser pour vous.
+classe Table associée qui est utilisée pour interagir avec une table donnée. Si
+vous n'avez pas besoin de personnaliser le behavior d'une table donnée, CakePHP
+va générer une instance Table à utiliser pour vous.
 
 Avant d'essayer d'utiliser les objets Table et l'ORM, vous devriez vous assurer
 que vous avez configuré votre
@@ -21,9 +21,9 @@ Utilisation Basique
 
 Pour commencer, créez une classe Table. Ces classes se trouvent dans
 **src/Model/Table**. Les Tables sont une collection de type model spécifique
-aux bases de données relationnelles, et sont l'interface principale pour
-votre base de données dans l'ORM de CakePHP. La classe table la plus
-basique devrait ressembler à ceci::
+aux bases de données relationnelles, et sont l'interface principale pour votre
+base de données dans l'ORM de CakePHP. La classe table la plus basique devrait
+ressembler à ceci::
 
     namespace App\Model\Table;
 
@@ -111,6 +111,18 @@ La classe TableRegistry fournit les divers dépendances pour construire la table
 et maintient un registre de toutes les instances de table construites,
 facilitant la construction de relations et la configuration l'ORM. Regardez
 :ref:`table-registry-usage` pour plus d'informations.
+
+Si votre classe table est dans un plugin, assurez-vous d'utiliser le bon nom
+pour votre classe table. Ne pas le faire peut entraîner des résultats non voulus
+dans les règles de validation, ou que les callbacks ne soient pas récupérés car
+une classe par défaut est utilisée à la place de votre classe souhaitée. Pour
+charger correctement les classes table de votre plugin, utilisez ce qui suit::
+
+    // Table de plugin
+    $articlesTable = TableRegistry::get('PluginName.Articles');
+
+    // Table de plugin préfixé par Vendor
+    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 

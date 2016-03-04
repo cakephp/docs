@@ -546,6 +546,10 @@ events liés si les méthodes sont implémentées dans vos controllers.
 
         La méthode beforeFilter() sera appelée pour les actions manquantes.
 
+    Retourner une réponse à partir d'une méthode ``beforeFilter`` ne va pas
+    empêcher l'appel des autres écouteurs du même event. Vous devez
+    explicitement :ref:`stopper l'event <stopping-events>`.
+
 .. php:method:: beforeRender(Event $event)
 
     Cette méthode est appelée pendant l'event ``Controller.beforeRender`` qui

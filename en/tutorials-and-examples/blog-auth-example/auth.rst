@@ -1,11 +1,11 @@
 Blog Tutorial - Authentication and Authorization
 ################################################
 
-Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
-secure access to certain URLs, based on the logged-in
-user. We also have another requirement: to allow our blog to have multiple authors
-who can create, edit, and delete their own articles while
-disallowing other authors from making changes to articles they do not own.
+Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we
+wanted to secure access to certain URLs, based on the logged-in
+user. We also have another requirement: to allow our blog to have multiple
+authors who can create, edit, and delete their own articles while disallowing
+other authors from making changes to articles they do not own.
 
 Creating All User-Related Code
 ==============================
@@ -129,8 +129,8 @@ the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
 for requiring login for certain actions, handling user login and logout, and
 also authorizing logged-in users to the actions they are allowed to reach.
 
-To add this component to your application open your **src/Controller/AppController.php**
-file and add the following lines::
+To add this component to your application open your
+**src/Controller/AppController.php** file and add the following lines::
 
     // src/Controller/AppController.php
 
@@ -258,23 +258,25 @@ and add the following lines:
     <?= $this->Form->end() ?>
     </div>
 
-You can now register a new user by accessing the ``/users/add`` URL and log in with the
-newly created credentials by going to ``/users/login`` URL. Also, try to access
-any other URL that was not explicitly allowed such as ``/articles/add``, you will see
-that the application automatically redirects you to the login page.
+You can now register a new user by accessing the ``/users/add`` URL and log in
+with the newly created credentials by going to ``/users/login`` URL. Also, try
+to access any other URL that was not explicitly allowed such as
+``/articles/add``, you will see that the application automatically redirects you
+to the login page.
 
-And that's it! It looks too simple to be true. Let's go back a bit to explain what
-happened. The ``beforeFilter()`` function is telling the AuthComponent to not require a
-login for the ``add()`` action in addition to the ``index()`` and ``view()`` actions
-that were already allowed in the AppController's ``beforeFilter()`` function.
+And that's it! It looks too simple to be true. Let's go back a bit to explain
+what happened. The ``beforeFilter()`` function is telling the AuthComponent to
+not require a login for the ``add()`` action in addition to the ``index()`` and
+``view()`` actions that were already allowed in the AppController's
+``beforeFilter()`` function.
 
-The ``login()`` action calls the ``$this->Auth->identify()`` function in the AuthComponent,
-and it works without any further config because we are following conventions as
-mentioned earlier. That is, having a Users table with a username and a password
-column, and use a form posted to a controller with the user data. This function
-returns whether the login was successful or not, and in the case it succeeds,
-then we redirect the user to the configured redirection URL that we used when
-adding the AuthComponent to our application.
+The ``login()`` action calls the ``$this->Auth->identify()`` function in the
+AuthComponent, and it works without any further config because we are following
+conventions as mentioned earlier. That is, having a Users table with a username
+and a password column, and use a form posted to a controller with the user data.
+This function returns whether the login was successful or not, and in the case
+it succeeds, then we redirect the user to the configured redirection URL that we
+used when adding the AuthComponent to our application.
 
 The logout works by just accessing the ``/users/logout`` URL and will redirect
 the user to the configured logoutUrl formerly described. This URL is the result
@@ -289,8 +291,8 @@ reference to the Users table::
 
     ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-Also, a small change in the ArticlesController is required to store the currently
-logged in user as a reference for the created article::
+Also, a small change in the ArticlesController is required to store the
+currently logged in user as a reference for the created article::
 
     // src/Controller/ArticlesController.php
 
@@ -311,7 +313,7 @@ logged in user as a reference for the created article::
             $this->Flash->error(__('Unable to add your article.'));
         }
         $this->set('article', $article);
-        
+
         // Just added the categories list to be able to choose
         // one category for an article
         $categories = $this->Articles->Categories->find('treeList');

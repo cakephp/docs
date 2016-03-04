@@ -1654,37 +1654,38 @@ utilisés avec les valeurs par défaut. Vous pouvez aussi changer les templates
 Liste des Templates
 -------------------
 
-Une liste des templates par défaut et les variables attendues sont les
-suivantes:
+Une liste des templates par défaut, leurs formats par défaut et leurs variables
+attendues sont les suivantes:
 
-* ``button`` {{attrs}}, {{text}}
-* ``checkbox`` {{name}}, {{value}}, {{attrs}}
-* ``checkboxFormGroup`` {{label}}
-* ``checkboxWrapper`` {{label}}
-* ``dateWidget`` {{year}}, {{month}}, {{day}}, {{hour}}, {{minute}}, {{second}}, {{meridian}}
-* ``error`` {{content}}
-* ``errorList`` {{content}}
-* ``errorItem`` {{text}}
-* ``file`` {{name}}, {{attrs}}
-* ``formGroup`` {{label}}, {{input}}, {{error}}
-* ``formStart`` {{attrs}}
-* ``formEnd`` No variables are provided.
-* ``hiddenBlock`` {{content}}
-* ``input`` {{type}}, {{name}}, {{attrs}}
-* ``inputContainer`` {{type}}, {{required}}, {{content}}
-* ``inputContainerError`` {{type}}, {{required}}, {{content}}, {{error}}
-* ``inputSubmit`` {{type}}, {{attrs}}
-* ``label`` {{attrs}}, {{text}}, {{hidden}}, {{input}}
-* ``nestingLabel`` {{hidden}}, {{attrs}}, {{input}}, {{text}}
-* ``legend`` {{text}}
-* ``option`` {{value}}, {{attrs}}, {{text}}
-* ``optgroup`` {{label}}, {{attrs}}, {{content}}
-* ``radio`` {{name}}, {{value}}, {{attrs}}
-* ``radioWrapper``  {{input}}, {{label}}
-* ``select`` {{name}}, {{attrs}}, {{content}}
-* ``selectMultiple`` {{name}}, {{attrs}}, {{content}}
-* ``submitContainer`` {{content}}
-* ``textarea``  {{name}}, {{attrs}}, {{value}}
+* ``button`` : ``<button{{attrs}}>{{text}}</button>``
+* ``checkbox`` : ``<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>``
+* ``checkboxFormGroup`` : ``{{label}}``
+* ``checkboxWrapper`` : ``<div class="checkbox">{{label}}</div>``
+* ``dateWidget`` : ``{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}``
+* ``error`` : ``<div class="error-message">{{content}}</div>``
+* ``errorList`` : ``<ul>{{content}}</ul>``
+* ``errorItem`` : ``<li>{{text}}</li>``
+* ``file`` : ``<input type="file" name="{{name}}"{{attrs}}>``
+* ``fieldset`` : ``<fieldset{{attrs}}>{{content}}</fieldset>``
+* ``formStart`` : ``<form{{attrs}}>``
+* ``formEnd`` : ``</form>``
+* ``formGroup`` : ``{{label}}{{input}}``
+* ``hiddenBlock`` : ``<div style="display:none;">{{content}}</div>``
+* ``input`` : ``<input type="{{type}}" name="{{name}}"{{attrs}}/>``
+* ``inputSubmit`` : ``<input type="{{type}}"{{attrs}}/>``
+* ``inputContainer`` : ``<div class="input {{type}}{{required}}">{{content}}</div>``
+* ``inputContainerError`` : ``<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>``
+* ``label`` : ``<label{{attrs}}>{{text}}</label>``
+* ``nestingLabel`` : ``{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>``
+* ``legend`` : ``<legend>{{text}}</legend>``
+* ``option`` : ``<option value="{{value}}"{{attrs}}>{{text}}</option>``
+* ``optgroup`` : ``<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>``
+* ``select`` : ``<select name="{{name}}"{{attrs}}>{{content}}</select>``
+* ``selectMultiple`` : ``<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>``
+* ``radio`` : ``<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>``
+* ``radioWrapper`` : ``{{label}}``
+* ``textarea`` : ``<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>``
+* ``submitContainer`` : ``<div class="submit">{{content}}</div>``
 
 En plus de ces templates, la méthode ``input()`` va essayer d'utiliser les
 templates pour chaque conteneur d'input. Par exemple, lors de la création
