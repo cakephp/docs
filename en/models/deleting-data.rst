@@ -10,16 +10,16 @@ delete
 
 ``delete(integer $id = null, boolean $cascade = true);``
 
-Deletes the record identified by $id. By default, also deletes
-records dependent on the record specified to be deleted.
+Deletes the record identified by $id. By default, also deletes records dependent
+on the record specified to be deleted.
 
-For example, when deleting a User record that is tied to many
-Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
+For example, when deleting a User record that is tied to many Recipe records
+(User 'hasMany' or 'hasAndBelongsToMany' Recipes):
 
--  if $cascade is set to true, the related Recipe records are also
-   deleted if the model's dependent-value is set to true.
--  if $cascade is set to false, the Recipe records will remain
-   after the User has been deleted.
+-  if $cascade is set to true, the related Recipe records are also deleted if
+   the model's dependent-value is set to true.
+-  if $cascade is set to false, the Recipe records will remain after the User
+   has been deleted.
 
 If your database supports foreign keys and cascading deletes, it's often more
 efficient to rely on that feature than CakePHP's cascading. The one benefit to
@@ -34,9 +34,10 @@ You can hook custom logic into the delete process using the ``beforeDelete`` and
 
 .. note::
 
-    If you delete a record with dependent records and one of their delete callbacks,
-    e.g. ``beforeDelete`` returns ``false``, it will not stop the further event
-    propagation nor does it change the return value of the initial ``delete``.
+    If you delete a record with dependent records and one of their delete
+    callbacks, e.g. ``beforeDelete`` returns ``false``, it will not stop the
+    further event propagation nor does it change the return value of the initial
+    ``delete``.
 
 .. _model-deleteall:
 
@@ -45,14 +46,12 @@ deleteAll
 
 ``deleteAll(mixed $conditions, $cascade = true, $callbacks = false)``
 
-``deleteAll()`` is similar to ``delete()``, except that
-``deleteAll()`` will delete all records that match the supplied
-conditions. The ``$conditions`` array should be supplied as a SQL
-fragment or array.
+``deleteAll()`` is similar to ``delete()``, except that ``deleteAll()`` will
+delete all records that match the supplied conditions. The ``$conditions`` array
+should be supplied as a SQL fragment or array.
 
 * **conditions** Conditions to match
-* **cascade** Boolean, Set to true to delete records that depend on
-  this record
+* **cascade** Boolean, Set to true to delete records that depend on this record
 * **callbacks** Boolean, Run callbacks
 
 Return boolean True on success, false on failure.
