@@ -416,13 +416,16 @@ definition are:
     CakePHP internal data type. Currently supported:
         - ``string``: maps to ``VARCHAR``
         - ``text``: maps to ``TEXT``
+        - ``biginteger``: maps to ``BIGINT``
         - ``integer``: maps to ``INT``
         - ``float``: maps to ``FLOAT``
+        - ``decimal``: maps to ``DECIMAL``
         - ``datetime``: maps to ``DATETIME``
         - ``timestamp``: maps to ``TIMESTAMP``
         - ``time``: maps to ``TIME``
         - ``date``: maps to ``DATE``
         - ``binary``: maps to ``BLOB``
+        - ``boolean``: maps to ``TINYINT``
 ``key``
     Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
     for the table.
