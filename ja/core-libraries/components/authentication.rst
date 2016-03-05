@@ -180,12 +180,11 @@ Auth の他の設定キー(authError や loginAction など) を authenticate �
                 // 2.3より前なら
                 // `return $this->redirect($this->Auth->redirect());`
             }
-            $this->Session->setFlash(
-                __('Username or password is incorrect'),
-                'default',
-                array(),
-                'auth'
+            $this->Flash->error(
+                __('Username or password is incorrect')
             );
+            // 2.7 より前なら
+            // $this->Session->setFlash(__('Username or password is incorrect'));
         }
     }
 
@@ -304,6 +303,11 @@ Auth が生成するセッションエラーメッセージを表示するため
 加えなければなりません。 ``app/View/Layouts/default.ctp`` ファイルに次の２行を
 加えてください。content_for_layout 行の前にある body 部の中がよいでしょう::
 
+    // CakePHP 2.7 以上
+    echo $this->Flash->render();
+    echo $this->Flash->render('auth');
+    
+    // 2.7 より前なら 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
 
@@ -792,7 +796,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
 .. php:attr:: flash
 
-    Auth が :php:meth:`SessionComponent::setFlash()` でフラッシュメッセージを行う
+    Auth が :php:meth:`FlashComponent::set()` でフラッシュメッセージを行う
     必要がある場合に使用する設定。次のキーが利用可能:
 
     - ``element`` - 使用するエレメント。デフォルトで 'default'。
@@ -855,11 +859,6 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
     以前に公開アクションとして宣言されていたアクションを非公開へと変更する。
     こうすることで、これらのアクションも権限判定されることになります。コントローラの
     beforeFilter メソッド内で使ってください。
-
-.. php:method:: flash($message)
-
-    フラッシュメッセージを設定します。セッションコンポーネントを使い、値は
-    :php:attr:`AuthComponent::$flash` から取得します。
 
 .. php:method:: identify($request, $response)
 
