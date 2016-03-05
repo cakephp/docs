@@ -105,12 +105,12 @@ Rester à jour avec les Derniers Changements de CakePHP
 Par défaut c'est ce à quoi le **composer.json** de votre application ressemble::
 
     "require": {
-        "cakephp/cakephp": "~3.0"
+        "cakephp/cakephp": "~3.2"
     }
 
 A chaque fois que vous lancez ``php composer.phar update``, vous allez
 recevoir la dernière version stable quand vous utilisez la contrainte de
-version par défaut ``~3.0``. Seuls les corrections de bug et les versions
+version par défaut ``~3.2``. Seuls les corrections de bug et les versions
 mineures de 3.x seront utilisés lors de la mise à jour.
 
 Si vous voulez rester à jour avec les derniers changements de CakePHP non
