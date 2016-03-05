@@ -1,62 +1,61 @@
 データベースの基本
 ###################
 
-CakePHPデータベースアクセス層は、リレーショナルデータベースを扱うほとんどの面を
-抽象化して、サーバコネクションの保持、クエリーの生成、SQLインジェクションの防止、
+CakePHP データベースアクセス層は、リレーショナルデータベースを扱うほとんどの面を
+抽象化して、サーバコネクションの保持、クエリーの生成、SQL インジェクションの防止、
 スキーマチェックと変更、デバッグとデータベースに送信したクエリーのプロファイリング
 などの支援を提供します。
 
 クイック ツアー
 =================
 
-この章で説明する機能は、下位レベルのデータベースアクセスAPIでできることを説明します。
-もし ORM についてもっと詳細に知りたい場合は、 :doc:`クエリービルダー</orm/query-builder>`
-の項か、 :doc:`/orm/table-objects` の項を参照してください。
+この章で説明する機能は、下位レベルのデータベースアクセス API でできることを説明します。
+もし ORM についてもっと詳細に知りたい場合は、 :doc:`/orm/query-builder`
+や :doc:`/orm/table-objects` のセクションを参照してください。
 
-データベースコネクションを作る一番簡単な方法は、 ``DSN`` 文字列を使います。::
+データベース接続を作る一番簡単な方法は、 ``DSN`` 文字列を使います。 ::
 
     use Cake\Datasource\ConnectionManager;
 
     $dsn = 'mysql://root:password@localhost/my_database';
     ConnectionManager::config('default', ['url' => $dsn]);
 
-作成したら、コネクションオブジェクトにアクセスして使えるようになります。::
+作成したら、コネクションオブジェクトにアクセスして使えるようになります。 ::
 
     $connection = ConnectionManager::get('default');
 
 サポートしているデータベース
 ------------------------------
 
-CakePHP は下記のリレーショナルデータベースをサポートしています。:
+CakePHP は下記のリレーショナルデータベースをサポートしています。
 
 * MySQL 5.1+
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
 
-上記のデータベースそれぞれについて、適切な PDO拡張がインストールされている必要が
-あります。
-プロシージャー型APIはサポートされていません。
+上記のデータベースそれぞれについて、適切な PDO 拡張がインストールされている必要があります。
+プロシージャー型 API はサポートされていません。
 
 .. _running-select-statements:
 
 Select 文の実行
 -------------------------
 
-生の SQL クエリーを実行するのは非常に簡単です。::
+生の SQL クエリーを実行するのは非常に簡単です。 ::
 
     use Cake\Datasource\ConnectionManager;
 
     $connection = ConnectionManager::get('default');
     $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
 
-パラメータを追加するには、プリペアドステートメントを使います。::
+パラメータを追加するには、プリペアドステートメントを使います。 ::
 
     $results = $connection
         ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
         ->fetchAll('assoc');
 
-これは引数として複合データ型を使用することも可能です::
+これは引数として複合データ型を使用することも可能です。 ::
 
     $results = $connection
         ->execute(
@@ -66,7 +65,7 @@ Select 文の実行
         )
         ->fetchAll('assoc');
 
-SQL文を手で書く代わりに、クエリービルダーを使うこともできます。::
+SQL 文を手で書く代わりに、クエリービルダーを使うこともできます。 ::
 
     $results = $connection
         ->newQuery()
@@ -80,7 +79,7 @@ SQL文を手で書く代わりに、クエリービルダーを使うことも�
 Insert 文の実行
 -------------------------
 
-データベースに行を追加するのは、通常は数行の話しです。::
+データベースに行を追加するのは、通常は数行の話しです。 ::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -94,7 +93,7 @@ Update 文の実行
 -------------------------
 
 データベースの行の更新も同様に直感的に可能で、下記の例では article の **id** が 10 の
-データを更新しています。::
+データを更新しています。 ::
 
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
@@ -104,7 +103,7 @@ Delete 文の実行
 -------------------------
 
 同様に ``delete()`` メソッドはデータベースから行を削除するために使われ、
-下記の例では article の **id** が 10 の行を削除しています。::
+下記の例では article の **id** が 10 の行を削除しています。 ::
 
     use Cake\Datasource\ConnectionManager;
     $connection = ConnectionManager::get('default');
@@ -119,7 +118,7 @@ Delete 文の実行
 このファイルに定義された接続情報は、アプリケーションが使用する接続構成を生成する
 :php:class:`Cake\\Datasource\\ConnectionManager` に引き渡します。
 サンプルとなる接続情報が **config/app.default.php** にあります。
-サンプルの接続設定は、次のようになります。::
+サンプルの接続設定は、次のようになります。 ::
 
     'Datasources' => [
         'default' => [
@@ -139,8 +138,7 @@ Delete 文の実行
 上記は指定されたパラメータを持つ 'default' 接続を生成します。
 あなたは設定ファイルに必要な数だけ接続を定義することができます。
 また、 :php:meth:`Cake\\Datasource\\ConnectionManager::config()` を使って
-実行時に追加の設定をおこなうこともできます。
-その一例は次のようになります。::
+実行時に追加の設定をおこなうこともできます。その一例は次のようになります。 ::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -174,8 +172,8 @@ DSN 文字列を使用するときには、クエリー文字列引数として�
 
 className
     データベースサーバへの接続を行うクラスの名前空間名付きの完全クラス名。
-    このクラスは、データベースドライバをロードし、SQLトランザクションメカニズムを提供し、
-    SQLを生成したりといったことを担当しています。
+    このクラスは、データベースドライバをロードし、SQL トランザクションメカニズムを提供し、
+    SQL を生成したりといったことを担当しています。
 driver
     ドライバクラス名は、データベースエンジンのすべての特異性を実装するために使われます。
     これは :term:`プラグイン記法` を用いた短いクラス名でも、
@@ -203,15 +201,15 @@ timezone
 schema
     PostgreSQL データベースで特定のスキーマを使う時に設定します。
 unix_socket
-    Unixソケットファイルを経由して接続することをサポートしているドライバによって
-    使用されます。PostgreSQLを使用していて、Unixソケットを使用する場合は、
+    Unix ソケットファイルを経由して接続することをサポートしているドライバによって
+    使用されます。PostgreSQL を使用していて、Unix ソケットを使用する場合は、
     host を空白のままにします。
 ssl_key
-    SSLキー・ファイルへのファイルパス。 （MySQLのみでサポートされています）。
+    SSL キー・ファイルへのファイルパス。 （MySQL のみでサポートされています）。
 ssl_cert
-    SSL証明書ファイルへのファイルパス。 （MySQLのみでサポートされています）。
+    SSL 証明書ファイルへのファイルパス。 （MySQL のみでサポートされています）。
 ssl_ca
-    SSL証明書の認証局へのファイルパス。 （MySQLのみでサポートされています）。
+    SSL 証明書の認証局へのファイルパス。 （MySQL のみでサポートされています）。
 init
     接続が作成されたときに、データベースサーバに送信されるクエリーのリスト。
 log
@@ -219,7 +217,7 @@ log
     有効なクエリーで ``debug`` レベルの時に、 ``queriesLog`` スコープでログ出力されます。
 quoteIdentifiers
     あなたがテーブルやカラム名に予約語や特殊文字を使用している場合は ``true`` に設定します。
-    この設定を有効にすると、SQLを生成する際に :doc:`クエリービルダー</orm/query-builder>`
+    この設定を有効にすると、SQL を生成する際に :doc:`/orm/query-builder`
     によって引用符で囲まれたクエリーが生成されます。
     これはクエリーを実行する前に横断的に処理を行う必要があるため、パフォーマンスを
     低下させることに注意してください。
@@ -230,7 +228,7 @@ flags
 cacheMetadata
     boolean 型の ``true`` か、メタデータを格納するキャッシュ設定の文字列のどちらか。
     メタデータのキャッシュをオフにする事はお勧めしませんし、パフォーマンスがとても
-    悪化します。詳細は :ref:`メタデータのキャッシュ<database-metadata-cache>` の項を
+    悪化します。詳細は :ref:`database-metadata-cache` のセクションを
     参照してください。
 
 この時点で、あなたは :doc:`/intro/conventions` を見たいと思うかもしれません。
@@ -261,7 +259,7 @@ BigBoxesTable と、コントローラ BigBoxesController は、全て自動的�
 一度設定した接続は、 :php:meth:`Cake\\Datasource\\ConnectionManager::get()` を
 使って取り出すことができます。
 このメソッドはすでに確立しているコネクションを返すか、もしまだ接続していないのであれば
-ロードして接続してから返します。::
+ロードして接続してから返します。 ::
 
     use Cake\Datasource\ConnectionManager;
 
@@ -273,7 +271,7 @@ BigBoxesTable と、コントローラ BigBoxesController は、全て自動的�
 -------------------------------
 
 ``config()`` や ``get()`` を使用して、実行時に設定ファイルに定義されていない
-コネクションを生成することができます。::
+コネクションを生成することができます。 ::
 
     ConnectionManager::config('my_connection', $config);
     $conn = ConnectionManager::get('my_connection');
@@ -316,12 +314,13 @@ boolean
 binary
     データベースに応じて BLOB または BYTEA 型に変換します。
 date
-    タイムゾーン情報を持たない DATE 型に変換されます。
+    タイムゾーン情報を持たない DATE 型に変換されます。この型の戻り値は、ネイティブな
+    ``DateTime`` クラスを拡張した :php:class:`Cake\\I18n\\Date` です。
 datetime
     タイムゾーン情報を持たない DATETIME 型に変換されます。
     PostgreSQL と SQL Server では、TIMESTAMP 型に変換されます。
-    この型のデフォルトの戻り値は、内蔵の ``DateTime`` クラスと
-    `Carbon <https://github.com/briannesbitt/Carbon>`_ を拡張した
+    この型のデフォルトの戻り値は、組込みの ``DateTime`` クラスと
+    `Chronos <https://github.com/cakephp/chronos>`_ を拡張した
     :php:class:`Cake\\I18n\\Time` クラスになります。
 timestamp
     TIMESTAMP 型に変換します。
@@ -355,8 +354,8 @@ Type クラスは次のメソッドを実装することが期待されます。
 * marshal
 
 基本的なインタフェースを満たす簡単な方法は、 :php:class:`Cake\\Database\\Type` を
-拡張することです。例えば、もしあなたが JSON型を追加したいなら、下記のような型クラスを
-作成します。::
+拡張することです。例えば、もしあなたが JSON 型を追加したいなら、下記のような型クラスを
+作成します。 ::
 
     // in src/Database/Type/JsonType.php
 
@@ -402,7 +401,7 @@ Type クラスは次のメソッドを実装することが期待されます。
 
 デフォルトでは ``toStatement()`` メソッドは新しい型の値を文字列として扱います。
 私たちは新しい型を作成したら、型マッピングに追加しなければなりません。
-アプリケーションの bootstrap 時に、次の事を行います。::
+アプリケーションの bootstrap 時に、次の事を行います。 ::
 
     use Cake\Database\Type;
 
@@ -411,7 +410,7 @@ Type クラスは次のメソッドを実装することが期待されます。
 こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に
 JSON データを変換してクエリーを作成します。
 あなたは Table の :ref:`_initializeSchema() メソッド <saving-complex-types>` で、
-新たに作った型のマッピングをすることができます。::
+新たに作った型のマッピングをすることができます。 ::
 
     use Cake\Database\Schema\Table as Schema;
 
@@ -425,6 +424,25 @@ JSON データを変換してクエリーを作成します。
         }
 
     }
+
+.. _immutable-datetime-mapping:
+
+イミュータブル DateTime オブジェクトの有効化
+--------------------------------------------
+
+.. versionadded:: 3.2
+    イミュータブル date/time オブジェクトは、 3.2 で追加されました。
+
+Date/Time オブジェクトは容易に変更されてしまうため、CakePHP はイミュータブルな
+オブジェクトを利用できるようなっています。以下の設定は、 あなたのアプリケーションの
+**config/bootstrap.php** ファイル内で行うのが最適です。 ::
+
+    Type::build('datetime')->useImmutable();
+    Type::build('date')->useImmutable();
+    Type::build('time')->useImmutable();
+
+.. note::
+    新しいアプリケーションは、デフォルトでイミュータブルオブジェクトが有効になります。
 
 Connection クラス
 ==================
@@ -448,14 +466,14 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 これらのラッパーは PDO と似たようなインタフェースを提供します。
 クエリーを実行する方法は、あなたが実行したいクエリーと取得したい結果の種類に応じて
 いくつかあります。
-もっとも基本的な方法は、完全な SQL クエリーの実行を可能にする ``query()`` です。::
+もっとも基本的な方法は、完全な SQL クエリーの実行を可能にする ``query()`` です。 ::
 
     $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
-``query()`` メソッドは追加パラメータを受け付けません。
-もし追加パラメータが必要なら、プレースホルダを使用可能な ``execute()`` メソッドを使用します。::
+``query()`` メソッドは追加パラメータを受け付けません。もし追加パラメータが必要なら、
+プレースホルダを使用可能な ``execute()`` メソッドを使用します。 ::
 
     $stmt = $conn->execute(
         'UPDATE posts SET published = ? WHERE id = ?',
@@ -464,7 +482,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 
 型に関する情報がない場合は、 ``execute`` は全てのプレースホルダを文字列とみなします。
 もし特定の型にバインドする必要があるなら、クエリーを生成する時に型名を指定することが
-できます。::
+できます。 ::
 
     $stmt = $conn->execute(
         'UPDATE posts SET published_date = ? WHERE id = ?',
@@ -474,21 +492,21 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 
 .. php:method:: newQuery()
 
-これはあなたのアプリケーションで豊富なデータ型を使用し、適切にSQL文に変換することができます。
-クエリを作成する最後の、そして最も柔軟な方法は、  :doc:`クエリビルダ</orm/query-builder>` を
+これはあなたのアプリケーションで豊富なデータ型を使用し、適切に SQL 文に変換することができます。
+クエリーを作成する最後の、そして最も柔軟な方法は、  :doc:`/orm/query-builder` を
 使用することです。
-この方法では、プラットフォーム固有のSQLを使用することなく、複雑で表現力豊かなクエリを
-構築することができます::
+この方法では、プラットフォーム固有の SQL を使用することなく、複雑で表現力豊かなクエリーを
+構築することができます。 ::
 
     $query = $conn->newQuery();
     $query->update('posts')
-        ->set(['publised' => true])
+        ->set(['published' => true])
         ->where(['id' => 2]);
     $stmt = $query->execute();
 
-クエリビルダを使用する場合は、 ``execute()`` メソッドを呼ぶまではサーバーにSQLは
+クエリービルダを使用する場合は、 ``execute()`` メソッドを呼ぶまではサーバーに SQL は
 送信されず、メソッド呼び出し後に順次処理されます。
-最初に送信してから、順次結果セットを作成します。::
+最初に送信してから、順次結果セットを作成します。 ::
 
     $query = $conn->newQuery();
     $query->select('*')
@@ -502,7 +520,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 .. note::
 
     もし :php:class:`Cake\\ORM\\Query` のインスタンスを生成しているのなら、
-    SELECT クエリの結果セットを取得するのに ``all()`` を使用できます。
+    SELECT クエリーの結果セットを取得するのに ``all()`` を使用できます。
 
 トランザクションを使う
 --------------------------
@@ -510,7 +528,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 コネクションオブジェクトは、データベーストランザクションを行うためのいくつかの簡単な
 方法を提供します。
 トランザクション操作の最も基本的な方法は、SQL構文と同じような ``begin()`` ,
-``commit()`` , ``rollback()`` を使用するものです。::
+``commit()`` , ``rollback()`` を使用するものです。 ::
 
     $conn->begin();
     $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
@@ -520,15 +538,15 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 .. php:method:: transactional(callable $callback)
 
 このコネクションインスタンスへのインターフェースに加えて、さらに begin/commit/rollback を
-簡単にハンドリングする ``transactional()`` メソッドが提供されています。::
+簡単にハンドリングする ``transactional()`` メソッドが提供されています。 ::
 
     $conn->transactional(function ($conn) {
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
         $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
     });
 
-基本的なクエリに加えて、 :doc:`/orm/query-builder` または :doc:`/orm/table-objects` の
-いずれかを使用してより複雑なクエリを実行することができます。
+基本的なクエリーに加えて、 :doc:`/orm/query-builder` または :doc:`/orm/table-objects` の
+いずれかを使用してより複雑なクエリーを実行することができます。
 トランザクションメソッドは下記のことを実行します。
 
 - ``begin`` を呼び出します。
@@ -544,7 +562,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 よく出てきます。
 これらのオブジェクトで、ドライバから基になるプリペアドステートメントを操作できるように
 なります。
-クエリオブジェクトを生成し実行するか ``execute()`` を実行した後、あなたは
+クエリーオブジェクトを生成し実行するか ``execute()`` を実行した後、あなたは
 ``StatementDecorator`` インスタンスを持つ事になります。
 これはベースとなる基本的なステートメントオブジェクトをラップして、追加の機能を
 提供します。
@@ -554,7 +572,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 
 あなたは ``execute()`` か ``prepare()`` でステートメントオブジェクトを生成できます。
 ``execute()`` メソッドは引き継いだ値をバインドしたステートメントを返します。
-それに対して ``prepare()`` は不完全なステートメントを返します。::
+それに対して ``prepare()`` は不完全なステートメントを返します。 ::
 
     // execute は指定された値でバインドしてSQLステートメントを実行します。
     $stmt = $conn->execute(
@@ -566,14 +584,14 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
     // 実行する前にパラメータをバインドする必要があります。
     $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
 
-SQL文を準備したら、あなたは追加のデータをバインドし、それを実行することができます。
+SQL 文を準備したら、あなたは追加のデータをバインドし、それを実行することができます。
 
 値をバインドする
 --------------------
 
 プリペアドステートメントを作成したら、追加のデータをバインドする必要があります。
 あなたは ``bind()`` メソッドを使って一度に複数の値をバインドする事も、
-``bindValue`` を使って１項目ずつバインドする事もできます。::
+``bindValue`` を使って１項目ずつバインドする事もできます。 ::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
@@ -590,7 +608,7 @@ SQL文を準備したら、あなたは追加のデータをバインドし、�
     $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 ステートメントを作成する時には、項目の通し番号ではなく、項目名の配列をキーに
-使用することもできます。::
+使用することもできます。 ::
 
     $stmt = $conn->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
@@ -616,7 +634,7 @@ SQL文を準備したら、あなたは追加のデータをバインドし、�
 プリペアドステートメントを作成してデータをバインドしたら、実行して行フェッチすることが
 できます。
 ステートメントは ``execute()`` メソッドで実行します。
-一度実行したら、結果は ``fetch()`` か ``fetchAll()`` を使ってフェッチします。::
+一度実行したら、結果は ``fetch()`` か ``fetchAll()`` を使ってフェッチします。 ::
 
     $stmt->execute();
 
@@ -640,7 +658,7 @@ SQL文を準備したら、あなたは追加のデータをバインドし、�
 行数を取得する
 ------------------
 
-ステートメントを実行したら、下記のように対象行数を取得することができます。::
+ステートメントを実行したら、下記のように対象行数を取得することができます。 ::
 
     $rowCount = count($stmt);
     $rowCount = $stmt->rowCount();
@@ -649,9 +667,9 @@ SQL文を準備したら、あなたは追加のデータをバインドし、�
 エラーコードをチェックする
 ---------------------------
 
-あなたのクエリーが成功しなかった場合は、エラー関連情報を ``errorCode()`` と ``errorInfo()`` メソッド
-によって取得することができます。
-このメソッドは PDO で提供されているものと同じように動作します。::
+あなたのクエリーが成功しなかった場合は、エラー関連情報を ``errorCode()`` と ``errorInfo()``
+メソッドによって取得することができます。
+このメソッドは PDO で提供されているものと同じように動作します。 ::
 
     $code = $stmt->errorCode();
     $info = $stmt->errorInfo();
@@ -661,24 +679,24 @@ SQL文を準備したら、あなたは追加のデータをバインドし、�
 
 .. _database-query-logging:
 
-Query Logging
-=============
+クエリーロギング
+================
 
 あなたのコネクションを設定する時に、 ``log`` オプションに ``true`` をセットすると
 クエリーのログを有効にすることができます。
-また、 ``logQueries`` を使って実行中にクエリログを切り替えることができます。::
+また、 ``logQueries`` を使って実行中にクエリーログを切り替えることができます。 ::
 
-    // Turn query logging on.
+    // クエリーログを有効
     $conn->logQueries(true);
 
-    // Turn query logging off
+    // クエリーログを停止
     $conn->logQueries(false);
 
-クエリログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
-:php:class:`Cake\\Log\\Log` にクエリをログ出力します。
+クエリーログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
+:php:class:`Cake\\Log\\Log` にクエリーをログ出力します。
 あなたはこのレベル・スコープを出力するようにログ設定をする必要があります。
 ``stderr`` にログ出力するのはユニットテストの時に便利で、files/syslog に出力するのは
-Web リクエストの時に便利です。::
+Web リクエストの時に便利です。 ::
 
     use Cake\Log\Log;
 
@@ -699,7 +717,7 @@ Web リクエストの時に便利です。::
 
 .. note::
 
-    クエリログは、デバッグまたは開発用途での利用を想定しています。
+    クエリーログは、デバッグまたは開発用途での利用を想定しています。
     アプリケーションのパフォーマンスに悪影響を及ぼしますので、公開サイトでは
     利用すべきではありません。
 
@@ -717,7 +735,7 @@ Web リクエストの時に便利です。::
 もしあなたが引用符が必要な古いスキーマを使用しているなら、
 :ref:`データベースの設定 <database-configuration>` で ``quoteIdentifiers`` を設定すると
 引用符を使うことができます。
-また、実行時にこの機能を有効にすることもできます。::
+また、実行時にこの機能を有効にすることもできます。 ::
 
     $conn->driver()->autoQuoting(true);
 
@@ -738,7 +756,7 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
 このメタデータは頻繁に変更され、アクセスにコストがかかるため、一般的にキャッシュされます。
 デフォルトでは、メタデータは ``_cake_model_`` キャッシュ設定に保存されます。
 あなたはデータベース設定の ``cacheMetatdata`` オプションを使って
-カスタムキャッシュ設定を定義することができます。::
+カスタムキャッシュ設定を定義することができます。 ::
 
     'Datasources' => [
         'default' => [
@@ -750,20 +768,35 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
     ],
 
 実行時に ``cacheMetadata()`` メソッドを使ってメタデータのキャッシュを
-設定することもできます。::
+設定することもできます。 ::
 
-    // Disable the cache
+    // キャッシュを無効化
     $connection->cacheMetadata(false);
 
-    // Enable the cache
+    // キャッシュを有効化
     $connection->cacheMetadata(true);
 
-    // Use a custom cache config
+    // カスタムキャッシュ設定を利用
     $connection->cacheMetadata('orm_metadata');
 
 CakePHP にはメタデータキャッシュを管理するための CLI ツールも同梱しています。
 詳細については :doc:`/console-and-shells/orm-cache` を参照してください。
 
+データベースの作成
+==================
+
+もし、データベースを選択せずに接続したい場合、データベース名を省略してください。 ::
+
+    $dsn = 'mysql://root:password@localhost/';
+
+これでデータベースの作成や変更のクエリーを実行するためにコネクションオブジェクトが使えます。 ::
+
+    $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
+
+.. note::
+
+    データベースを作成する場合、文字コードや照合順序をセットすることをお勧めします。
+    もしこれらの値がなかった場合、データベースはシステムのデフォルト値をセットします。
 
 .. meta::
     :title lang=ja: Database Basics
