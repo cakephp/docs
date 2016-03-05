@@ -422,13 +422,16 @@ la définition de la table sont:
     Type de données interne à CakePHP. Actuellement supportés:
         - ``string``: redirige vers ``VARCHAR``.
         - ``text``: redirige vers ``TEXT``.
+        - ``biginteger``: redirige vers ``BIGINT``.
         - ``integer``: redirige vers ``INT``.
         - ``float``: redirige vers ``FLOAT``.
+        - ``decimal``: redirige vers ``DECIMAL``.
         - ``datetime``: redirige vers ``DATETIME``.
         - ``timestamp``: redirige vers ``TIMESTAMP``.
         - ``time``: redirige vers ``TIME``.
         - ``date``: redirige vers ``DATE``.
         - ``binary``: redirige vers ``BLOB``.
+        - ``boolean``: redirige vers ``TINYINT``.
 ``key``
     Défini à ``primary`` pour que le champ soit en AUTO\_INCREMENT, et une
     PRIMARY KEY pour la table.
