@@ -1,0 +1,20 @@
+3.3 Migration Guide
+###################
+
+CakePHP 3.3 is an API compatible upgrade from 3.2. This page outlines the
+changes and improvements made in 3.3.
+
+Routing
+=======
+
+- ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
+  a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
+  reliance on global state, and necessary for the PSR7 work integration to be done.
+
+
+ORM
+===
+
+- ``Association::unique()`` was added. This method proxies the target table's
+  ``unique()`` method, but ensures that association conditions are applied.
+- ``isUnique`` rules now apply association conditions.
