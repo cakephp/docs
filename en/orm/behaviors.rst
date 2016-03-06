@@ -148,6 +148,7 @@ behavior should now look like::
 
     namespace App\Model\Behavior;
 
+    use Cake\Datasource\EntityInterface;
     use Cake\Event\Event;
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
