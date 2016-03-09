@@ -318,6 +318,10 @@ the matching view property::
     <!-- make a link using the new helper -->
     <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
 
+.. note::
+
+    The ``HelperRegistry`` will attempt to lazy load any helpers not specifically identified in your ``Controller``.
+
 .. _helper-api:
 
 Helper Class
