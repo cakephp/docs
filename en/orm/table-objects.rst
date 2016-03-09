@@ -165,7 +165,7 @@ To respond to the ``Model.initialize`` event you can create a listener class
 which implements ``EventListenerInterface``::
 
     use Cake\Event\EventListenerInterface;
-    class ModelInitialzieListener implements EventListenerInterface
+    class ModelInitializeListener implements EventListenerInterface
     {
         public function implementedEvents()
         {
@@ -183,7 +183,7 @@ which implements ``EventListenerInterface``::
 and attach the listener to the ``EventManager`` as below::
 
     use Cake\Event\EventManager;
-    $listener = new ModelInitialzieListener();
+    $listener = new ModelInitializeListener();
     EventManager::instance()->attach($listener);
 
 This will call the ``initializeEvent`` when any ``Table`` class is constructed.
