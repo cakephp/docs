@@ -148,6 +148,12 @@ Now that you've been introduced to CakePHP's fundamentals, you might try a run
 through the :doc:`/tutorials-and-examples/bookmarks/intro` to see how things fit
 together.
 
+Documentation Typehints
+=======================
+
+Not that for any any function signature documentation such as:
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
+... whenever there you encouter lowercase-only typehints these are meant for documentation purposes only and should not nor cannot be used in CakePHP 3. Support for scalar typehints may arrive in far future (PHP 7 scalar types). Thus, for example, when copying a signature such as ``beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)`` make sure to remove the part ``boolean ``.
 
 .. meta::
     :title lang=en: CakePHP Conventions
