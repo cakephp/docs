@@ -4,10 +4,19 @@ Deployment
 Once your application is complete, or even before that you'll want to deploy it.
 There are a few things you should do when deploying a CakePHP application.
 
-Update config/app.php
+Moving files
+============
+You are encouraged to create a git commit and pull or clone that commit or repository on your server and run ``composer install``.
+While this requires some knowledge about git and an existing install of ``git`` and ``composer`` this process will take care about library dependencies and file and folder permissions. 
+
+Be aware that when deploying via FTP you will at least have to fix file and folder permissions.
+
+You can also use this deployment technique to setup a staging- or demo-server (pre-production) and keep it in sync with your dev box.
+
+Adjust config/app.php
 =====================
 
-Updating app.php, specifically the value of ``debug`` is extremely important.
+Adjusting app.php, specifically the value of ``debug`` is extremely important.
 Turning debug = ``false`` disables a number of development features that should never be
 exposed to the Internet at large. Disabling debug changes the following types of
 things:
@@ -97,6 +106,10 @@ If your filesystem doesn't allow creating symlinks the directories will be copie
 instead of being symlinked. You can also explicitly copy the directories using::
 
     bin/cake plugin assets copy
+
+Deploying an update
+===================
+After deployment of an update you might also want to run ``bin/cake orm_cache clear``, part of the :doc:`/console-and-shells/orm-cache` shell.
 
 .. meta::
     :title lang=en: Deployment
