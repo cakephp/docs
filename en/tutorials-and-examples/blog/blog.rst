@@ -860,7 +860,7 @@ Now that you've created a basic CakePHP application, you can either continue to
 :doc:`/tutorials-and-examples/bookmarks/intro` which covers more features in the
 ORM and utitlizes :doc:`/bake/usage` to generates the code we wrote in this
 tutorial.  You can also peruse the :doc:`/topics` or `API
-<http://api.cakephp.org/3.2>`_ to learn more about CakePHP.
+<http://api.cakephp.org/>`__ to learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the
 :doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!
