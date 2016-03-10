@@ -157,3 +157,13 @@ Fatal Error Memory Limit Handling
 A new configuration option ``Error.extraFatalErrorMemory`` can be set to the
 number of megabytes to increase the memory limit by when a fatal error is
 encountered. This allows breathing room to complete logging or error handling.
+
+Migration Steps
+================
+
+Updating setToStringFormat()
+----------------------------
+
+Before CakePHP 3.2 using Time::setToStringFormat() was working on Date Objects as well.
+After upgrading you will need to add Date::setToStringFormat() in addition to see the formatted Date again.
+
