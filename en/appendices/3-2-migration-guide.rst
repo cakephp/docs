@@ -164,6 +164,6 @@ Migration Steps
 Updating setToStringFormat()
 ----------------------------
 
-Before CakePHP 3.2 using Time::setToStringFormat() was working on Date Objects as well.
-After upgrading you will need to add Date::setToStringFormat() in addition to see the formatted Date again.
-
+Before CakePHP 3.2 using Time::setToStringFormat() was working on Date Objects
+as well. After upgrading you will need to add Date::setToStringFormat() in
+addition to see the formatted Date again.

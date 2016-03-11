@@ -333,6 +333,11 @@ accédant à l'attribut de vue correspondant::
     <!-- fait un lien en utilisant le nouveau helper -->
     <?= $this->Link->makeEdit('Changez cette Recette', '/recipes/edit/5') ?>
 
+.. note::
+
+    ``HelperRegistry`` va tenter de charger automatiquement les helpers qui ne
+    sont pas spécifiquement identifiés dans votre ``Controller``.
+
 .. _helper-api:
 
 Classe Helper

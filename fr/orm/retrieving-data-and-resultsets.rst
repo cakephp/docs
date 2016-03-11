@@ -301,6 +301,17 @@ peuvent être atteintes avec les jointures::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
+Enfin il est possible d'utiliser les closures pour accéder aux méthodes de
+mutation des entities dans vos finds list. Cet exemple vous montre l'utilisation
+de la méthode de mutation ``_getFullName()`` de l'entity Author::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => function ($e) {
+            return $e->author->get('full_name');
+        }
+    ]);
+
 Trouver des Données Threaded
 ============================
 
