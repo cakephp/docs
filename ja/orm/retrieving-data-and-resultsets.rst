@@ -270,6 +270,17 @@ join でつながっている関連テーブルからリストのデータを生
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
+最後に、リストの find の中で、エンティティのミューテーターメソッドにアクセスするために
+クロージャを使用することができます。 この例は、Author エンティティの ``_getFullName()``
+ミューテーターメソッドを使うことを示しています。 ::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => function ($e) {
+            return $e->author->get('full_name');
+        }
+    ]);
+
 スレッド状のデータを検索する
 ============================
 
