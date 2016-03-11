@@ -278,6 +278,17 @@ You can also create list data from associations that can be reached with joins::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
+Lastly it is possible to use closures to access entity mutator methods in your 
+list finds. This example shows using the ``_getFullName()`` mutator method from 
+the Author entity. ::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => function ($e) {
+            return $e->author->get('full_name');
+        }
+    ]);
+
 Finding Threaded Data
 =====================
 
