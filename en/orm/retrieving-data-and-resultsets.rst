@@ -509,6 +509,15 @@ associations and filter them by conditions::
                 ->where(['Comments.approved' => true]);
         }
     ]);
+    
+This also works for pagination at the Controller level::
+
+    $this->paginate['contain'] = [
+        'Comments' => function (\Cake\ORM\Query $query) {
+            return $query->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+        }
+    ];
 
 .. note::
 
