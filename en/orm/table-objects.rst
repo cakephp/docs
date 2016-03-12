@@ -23,6 +23,7 @@ To get started, create a Table class. These classes live in
 databases, and the main interface to your database in CakePHP's ORM. The most
 basic table class would look like::
 
+    // src/Model/Table/Articles.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
