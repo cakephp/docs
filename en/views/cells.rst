@@ -193,3 +193,9 @@ define the ``cache`` option when creating a cell to enable & configure caching::
 
 If a key is generated the underscored version of the cell class and template
 name will be used.
+
+.. note::
+
+    A new ``View`` instance is used to render each cell and they do not share 
+    context with the main template / layout. Each cell is self contained and
+    only has access to variables passed as argument to the ``View::cell()`` call.
