@@ -196,6 +196,7 @@ name will be used.
 
 .. note::
 
-    A new ``View`` instance is used to render each cell and they do not share 
-    context with the main template / layout. Each cell is self contained and
-    only has access to variables passed as argument to the ``View::cell()`` call.
+    A new ``View`` instance is used to render each cell and these new objects
+    do not share context with the main template / layout. Each cell is
+    self-contained and only has access to variables passed as arguments to the
+    ``View::cell()`` call.
