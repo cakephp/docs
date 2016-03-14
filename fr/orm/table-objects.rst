@@ -25,6 +25,7 @@ aux bases de données relationnelles, et sont l'interface principale pour votre
 base de données dans l'ORM de CakePHP. La classe table la plus basique devrait
 ressembler à ceci::
 
+    // src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;

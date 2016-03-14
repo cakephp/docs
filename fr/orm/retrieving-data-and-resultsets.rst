@@ -548,6 +548,15 @@ retournées par les associations et les filtrer par conditions::
         }
     ]);
 
+Cela fonctionne aussi pour la pagination au niveau du Controller::
+
+    $this->paginate['contain'] = [
+        'Comments' => function (\Cake\ORM\Query $query) {
+            return $query->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+        }
+    ];
+
 .. note::
 
     Quand vous limitez les champs qui sont récupérés d'une association, vous

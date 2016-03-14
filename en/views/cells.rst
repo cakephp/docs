@@ -4,7 +4,8 @@ View Cells
 View cells are small mini-controllers that can invoke view logic and render out
 templates. They provide a light-weight modular replacement to
 ``requestAction()``. The idea of cells is borrowed from `cells in Ruby
-<https://github.com/apotonick/cells>`_, where they fulfill a similar role and purpose.
+<https://github.com/apotonick/cells>`_, where they fulfill a similar role and
+purpose.
 
 When to use Cells
 =================

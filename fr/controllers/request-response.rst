@@ -798,7 +798,7 @@ et ses en-têtes liés avec une interface simple::
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
-        ->allowAuthentication()
+        ->allowCredentials()
         ->exposeHeaders(['Link'])
         ->maxAge(300)
         ->build();
