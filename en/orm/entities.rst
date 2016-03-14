@@ -368,7 +368,7 @@ Lazy loading
     iterated.
 
 While lazy loading is not included by CakePHP's ORM, you can just use one of
-the community plugins to do so. We recommend `the LazyLoad Plugin <http://https://github.com/jeremyharris/cakephp-lazyload>`_
+the community plugins to do so. We recommend `the LazyLoad Plugin <https://github.com/jeremyharris/cakephp-lazyload>`_
 
 After adding the plugin to your entity, you will be able to do the following::
 
