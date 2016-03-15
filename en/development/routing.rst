@@ -47,7 +47,7 @@ application. You can access an action directly via the URL by
 putting its name in the request. You can also pass parameters to
 your controller actions using the URL. ::
 
-        URL pattern default routes:
+        // URL pattern default routes:
         http://example.com/controller/action/param1/param2/param3
 
 The URL /posts/view maps to the view() action of the
