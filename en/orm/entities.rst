@@ -367,13 +367,16 @@ Lazy loading
     will frequently emit N queries where N is the number of articles being
     iterated.
 
-While lazy loading is not included by CakePHP's ORM, you can just use one of
-the community plugins to do so. We recommend `the LazyLoad Plugin <https://github.com/jeremyharris/cakephp-lazyload>`_
+While lazy loading is not included by CakePHP's ORM, you can just use one of the
+community plugins to do so. We recommend `the LazyLoad Plugin
+<https://github.com/jeremyharris/cakephp-lazyload>`__
 
 After adding the plugin to your entity, you will be able to do the following::
 
     $article = $this->Articles->findById($id);
-    foreach ($article->comments as $comment) { // The comments property was lazy loaded
+
+    // The comments property was lazy loaded
+    foreach ($article->comments as $comment) {
         echo $comment->body;
     }
 
