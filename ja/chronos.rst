@@ -1,5 +1,5 @@
 ..
-Chronos
+  Chronos
 
 Chronos(クロノス)
 =================
@@ -29,9 +29,9 @@ Chronosは、 ``DateTime`` オブジェクトへの拡張の依存関係の無�
 ------------
 
 ..
-To install Chronos, you should use ``composer``. From your
-application's ROOT directory (where composer.json file is located) run the
-following::
+  To install Chronos, you should use ``composer``. From your
+  application's ROOT directory (where composer.json file is located) run the
+  following::
 
 Chronosをインストールためには、 ``composer`` を利用することができます。
 アプリケーションのROOTディレクトリ（composer.jsonファイルのある場所）で以下のように実行します。::
@@ -49,7 +49,7 @@ Chronosをインストールためには、 ``composer`` を利用すること�
   Chronos provides 5 classes that cover mutable and immutable date/time variants
   and extensions to ``DateInterval``.
 
-ChronosはPHPが提供するDataTimeオブジェクトの拡張の数値を提供します。
+ChronosはPHPが提供するDateTimeオブジェクトの拡張の数値を提供します。
 Chronosは ``DateInterval`` の拡張機能および、
 ミュータブル（変更可能）とイミュータブル（変更不可）な date/time の派生系をカバーする5つのクラスを提供します。
 
@@ -117,8 +117,8 @@ ChronosまたはDateのインスタンスを取得するためには、多くの
 ..
   Working with Immutable Objects
 
-イミュータブルオブジェクトに伴う動作
-------------------------------------
+イミュータブルオブジェクトの動作
+--------------------------------
 
 ..
   If you've used PHP's ``DateTime`` objects, you're comfortable with *mutable*
@@ -139,7 +139,7 @@ Chronosはミュータブルオブジェクトを提供しますが、これは 
 イミュータブルオブジェクトはオブジェクトが変更されるたびにオブジェクトのコピーを作ります。
 なぜなら、日時周りの変更メソッドは必ずしも透明でないため、データが誤って、または開発者が知らない内に変更してしまうからです。
 イミュータブルオブジェクトはデータが誤って変更されることを防止し、順序ベースの依存関係の問題の無いコードを作ります。
-不変性は、以下の修飾子を使用するときに、変数を置き換えるために覚えておく必要があることを意味しています。::
+不変性は、変更時に忘れずに変数を置き換える必要があることを意味しています。::
 
     // このコードはイミュータブルオブジェクトでは動作しません
     $time->addDay(1);
@@ -156,7 +156,7 @@ Chronosはミュータブルオブジェクトを提供しますが、これは 
   one, you can use ``toMutable()``::
 
 各修正の戻り値をキャプチャすることによって、コードは期待通りに動作します。
-イミュータブルオブジェクトを持っていて、ミュータブルオブジェクトが欲しい場合、 ``toMutable()`` が使用できます。::
+イミュータブルオブジェクトを持っていて、ミュータブルオブジェクトを作りたい場合、 ``toMutable()`` が使用できます。::
 
     $inplace = $time->toMutable();
 
@@ -178,10 +178,11 @@ methods operate at the day resolution::
     // Outputs '2015-12-20'
 
 PHPは単純なDateTimeオブジェクトだけを提供します。
-カレンダー日付はタイムゾーンおよび本当に「その日」の概念に属していないタイムコンポーネントを含むため、
-このクラスで表現するには少し厄介なことができます。
+このクラスのカレンダー日付の表現で、タイムゾーンおよび、本当に「日」の概念に属していないタイムコンポーネントを含むと、
+少し厄介な可能性があります。
 Chronosは日時表現のための ``Date`` オブジェクトを提供します。
-これらのオブジェクトの時間とタイムゾーン★::
+これらのオブジェクトの時間とタイムゾーンは常に ``00:00:00 UTC`` に固定されており、
+全ての書式/差分のメソッドは一日単位で動作します。::
 
     use Cake\Chronos\Date;
 
@@ -230,7 +231,7 @@ Chronosオブジェクトは細やかに値を変更できるメソッドを提�
 ..
   It is also possible to make big jumps to defined points in time::
 
-また、ある時間の中で、定義されたポイントにジャンプすることも可能です。::
+また、ある時間の中で、定義された時点に飛ぶことも可能です。::
 
     $time = Chronos::create();
     $time->startOfDay();
@@ -243,7 +244,7 @@ Chronosオブジェクトは細やかに値を変更できるメソッドを提�
 ..
   Or jump to specific days of the week::
 
-また、1週間中の特定の日にもジャンプできます。::
+また、1週間中の特定の日にも飛べます。::
 
     $time->next(ChronosInterface::TUESDAY);
     $time->previous(ChronosInterface::MONDAY);
@@ -264,7 +265,7 @@ Chronosオブジェクトは細やかに値を変更できるメソッドを提�
 
 Chronosの日付/時間オブジェクトの2つのインスタンスを様々な方法で比較することができます。::
 
-    // 既存の比較セット
+    // 比較のフルセットが存在します
     // ne, gt, lt, lte.
     $first->eq($second);
     $first->gte($second);
@@ -292,13 +293,13 @@ Chronosの日付/時間オブジェクトの2つのインスタンスを様々�
     // 曜日をチェック
     $now->isWeekend();
 
-    // 他の全ての曜日のメソッドも存在します。
+    // 他の曜日のメソッドも全て存在します。
     $now->isMonday();
 
 ..
   You can also find out if a value was within a relative time period::
 
-また、値が相対的な期間内にあった場合にも見つけることができます。::
+また、値が相対的な期間内にあったかどうかを見つけることができます。::
 
     $time->wasWithinLast('3 days');
     $time->isWithinNext('3 hours');
@@ -315,7 +316,7 @@ Chronosの日付/時間オブジェクトの2つのインスタンスを様々�
     // Get a DateInterval representing the difference
     // Get difference as a count of specific units.
 
-日時比較に加えて、2つの値の差や変化の計算は一般的な作業です。::
+日時比較に加えて、2つの値の差や変化の計算は一般的なタスクです。::
 
     // 差をあらわすDateIntervalを取得
     $first->diff($second);
@@ -334,7 +335,7 @@ Chronosの日付/時間オブジェクトの2つのインスタンスを様々�
     // Difference from another point in time.
     echo $date->diffForHumans($other); // 1 hour ago;
 
-フィードやタイムラインで使用するのに適した、人間が読める形式の差を生成することができます。::
+フィードやタイムラインで使用するのに適した、人が読める形式の差を生成することができます。::
 
     // 現在からの差
     echo $date->diffForHumans();
@@ -422,7 +423,7 @@ Chronosは、出力した日時オブジェクトを表示するための多く�
   you fix the current time for each class. As part of your test suite's bootstrap
   process you can include the following::
 
-単体テストを書いている場合、現在時刻を固定すると便利です。Chronosは、各クラスの現在時刻を修正することができます。
+単体テストを書いている時、現在時刻を固定すると便利です。Chronosは、各クラスの現在時刻を修正することができます。
 テストスイートのbootstrap処理に以下を含めることができます。::
 
     Chronos::setTestNow(Chronos::now());
@@ -440,7 +441,7 @@ Chronosは、出力した日時オブジェクトを表示するための多く�
 
 これでテストスイートが開始された時点で全てのオブジェクトの現在時刻を修正します。
 
-例えば、過去に何度か ``Chronos`` を固定した場合、新たな ``Chronos`` のインスタンスが生成する ``now`` または相対時刻の文字列は、
+例えば、 ``Chronos`` を過去のある瞬間に固定した場合、新たな ``Chronos`` のインスタンスが生成する ``now`` または相対時刻の文字列は、
 固定された時刻の相対を返却します。::
 
     Chronos::setTestNow(new Chronos('1975-12-25 00:00:00'));
