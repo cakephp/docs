@@ -1,8 +1,15 @@
-Configuration
+..
+    Configuration
+
+構成管理
 #############
 
-While conventions remove the need to configure all of CakePHP, you'll still need
-to configure a few things like your database credentials.
+..
+    While conventions remove the need to configure all of CakePHP, you'll still need
+    to configure a few things like your database credentials.
+
+全ての CakePHP に必要な設定は規約によって取り除かれる一方、
+データベースの認証のようないくつかの設定をする必要があります。
 
 Additionally, there are optional configuration options that allow you to swap
 out default values & implementations with ones tailored to your application.
