@@ -150,6 +150,7 @@ Chronosはミュータブルオブジェクトを提供しますが、これは 
     $time = $time->addDay(1);
     $time = doSomething($time);
     return $time
+
 ..
   By capturing the return value of each modification your code will work as
   expected. If you ever have an immutable object, and want to create a mutable
