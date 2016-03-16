@@ -302,10 +302,14 @@ contacts の管理ですので、このプラグインには ContactsController 
 プラグインの ``AppController`` は、プラグイン内の全コントローラ共通のロジックを
 持ちますが、使わないようでしたら作らなくても構いません。
 
-コントローラにアクセスする前に、プラグインをロードして、ルート情報に接続するよう
-設定する必要があります。これは **config/bootstrap.php** に下記のように記述します。 ::
+コントローラにアクセスする前に、プラグインがロードされ、ルートがロードされる必要があります。
+これは **config/bootstrap.php** に下記のように記述します。 ::
 
     Plugin::load('ContactManager', ['routes' => true]);
+
+``Plugin::loadAll()`` を使用する場合、ルートがロードされる必要があります。 ::
+
+    Plugin::loadAll(['routes' => true]);
 
 続いて ContactManager プラグインのルート情報を作成します。
 **plugins/ContactManager/config/routes.php** に下記のように追加してください。 ::
