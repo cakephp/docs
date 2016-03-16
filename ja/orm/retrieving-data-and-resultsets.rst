@@ -487,6 +487,15 @@ contain に条件を渡す
         }
     ]);
 
+これは、またコントローラレベルでページネーションが働きます。 ::
+
+    $this->paginate['contain'] = [
+        'Comments' => function (\Cake\ORM\Query $query) {
+            return $query->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+        }
+    ];
+
 .. note::
 
     関連によってフェッチされるフィールドを限定する場合、外部キーの列が確実に select
