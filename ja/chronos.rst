@@ -18,7 +18,7 @@ Chronosは、 ``DateTime`` オブジェクトへの拡張の依存関係の無�
     library. However, ``cakephp/i18n`` can be used for full language support.
 
 * カレンダー日付のための ``Date`` オブジェクト
-* イミュータブルなdateとdatetimeオブジェクト
+* イミュータブルな日付と日時オブジェクト
 * プラグインのような翻訳システム。ライブラリは英語のみの翻訳を含んでいます。
   しかし、全ての言語サポートのために、 ``cakephp/i18n`` を使うことができます。
 
@@ -49,9 +49,9 @@ Chronosをインストールためには、 ``composer`` を利用すること�
   Chronos provides 5 classes that cover mutable and immutable date/time variants
   and extensions to ``DateInterval``.
 
-ChronosはPHPが提供するDateTimeオブジェクトの拡張の数値を提供します。
+ChronosはPHPが提供するDateTimeオブジェクトのいくつかの拡張を提供します。
 Chronosは ``DateInterval`` の拡張機能および、
-ミュータブル（変更可能）とイミュータブル（変更不可）な date/time の派生系をカバーする5つのクラスを提供します。
+ミュータブル（変更可能）とイミュータブル（変更不可）な 日付/時刻 の派生系をカバーする5つのクラスを提供します。
 
 ..
   * ``Cake\Chronos\Chronos`` is an immutable *date and time* object.
@@ -72,7 +72,7 @@ Chronosは ``DateInterval`` の拡張機能および、
   should use ``Cake\Chronos\ChronosInterface``. All of the date and time objects
   implement this interface.
 
-最後に、もしあなたがChronosが提供する date/time オブジェクトに反した型宣言を行ないたい場合、
+最後に、もしあなたがChronosが提供する 日付/時刻 のオブジェクトに反した型宣言を行ないたい場合、
 ``Cake\Chronos\ChronosInterface`` を使用することができます。
 全ての日付と時間のオブジェクトはこのインターフェースを実装しています。
 
