@@ -168,12 +168,12 @@ Chronosはミュータブルオブジェクトを提供しますが、これは 
 ------------------
 
 ..
-PHP only provides a single DateTime object. Representing calendar dates can be
-a bit awkward with this class as it includes timezones, and time components that
-don't really belong in the concept of a 'day'. Chronos provides a ``Date``
-object that allows you to represent dates. The time and timezone for these
-objects is always fixed to ``00:00:00 UTC`` and all formatting/difference
-methods operate at the day resolution::
+  PHP only provides a single DateTime object. Representing calendar dates can be
+  a bit awkward with this class as it includes timezones, and time components that
+  don't really belong in the concept of a 'day'. Chronos provides a ``Date``
+  object that allows you to represent dates. The time and timezone for these
+  objects is always fixed to ``00:00:00 UTC`` and all formatting/difference
+  methods operate at the day resolution::
 ..
     // Changes to the time/timezone are ignored.
     // Outputs '2015-12-20'
