@@ -40,7 +40,7 @@ CakePHP のデフォルトルーティングはほかのアプリに比べてと
 一つのアクションに対して直接URLにアクション名を書くことでアクセスできます。
 アクションに対してURLを使って引数も渡すことができます。 ::
 
-        URL pattern default routes:
+        // デフォルトルートの URL パターン:
         http://example.com/controller/action/param1/param2/param3
 
 /posts/view は PostsController の view() アクションに接続することを示しています。
