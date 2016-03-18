@@ -73,7 +73,7 @@ Windows インストーラをダウンロードできます。Composer の Windo
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
 
 一度 Composer がアプリケーションの雛形とコアライブラリをダウンロードしたら、
 インストールした CakePHP アプリケーションを Composer から操作できるように
