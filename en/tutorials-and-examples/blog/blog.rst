@@ -40,7 +40,7 @@ in the [app_name] directory. ::
 
     php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
-In case you have got composer installed globally already you may instead type:
+In case you have got composer installed globally, already you may instead type:
 
     composer self-update && composer create-project --prefer-dist cakephp/app [app_name]
 
