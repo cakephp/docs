@@ -72,7 +72,7 @@ Chronosは ``DateInterval`` の拡張機能および、
   should use ``Cake\Chronos\ChronosInterface``. All of the date and time objects
   implement this interface.
 
-最後に、もしあなたがChronosが提供する 日付/時刻 のオブジェクトに反した型宣言を行ないたい場合、
+最後に、もしあなたがChronosが提供する 日付/時刻 のオブジェクトに対して型宣言を行ないたい場合、
 ``Cake\Chronos\ChronosInterface`` を使用することができます。
 全ての日付と時間のオブジェクトはこのインターフェースを実装しています。
 
@@ -134,7 +134,7 @@ ChronosまたはDateのインスタンスを取得するためには、多くの
       // This code doesn't work with immutable objects
       // This works like you'd expect
 
-もし、PHPの ``DateTime`` オブジェクトを使用したい場合、 *ミュータブル* オブジェクトで簡単にできます。
+もしあなたが、PHPの ``DateTime`` オブジェクトを使用したことがあるなら、 *ミュータブル* オブジェクトは簡単に使用できます。
 Chronosはミュータブルオブジェクトを提供しますが、これは *イミュータブル* オブジェクトにもなります。
 イミュータブルオブジェクトはオブジェクトが変更されるたびにオブジェクトのコピーを作ります。
 なぜなら、日時周りの変更メソッドは必ずしも透明でないため、データが誤って、または開発者が知らない内に変更してしまうからです。
