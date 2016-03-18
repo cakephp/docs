@@ -181,31 +181,40 @@ our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action::
 
     // src/Controller/UsersController.php
+    namespace App\Controller;
 
-    public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        // Allow users to register and logout.
-        // You should not add the "login" action to allow list. Doing so would
-        // cause problems with normal functioning of AuthComponent.
-        $this->Auth->allow(['add', 'logout']);
-    }
+    use App\Controller\AppController;
+    use Cake\Event\Event;
 
-    public function login()
+    class UsersController extends AppController
     {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Invalid username or password, try again'));
+        // Other methods..
+
+        public function beforeFilter(Event $event)
+        {
+            parent::beforeFilter($event);
+            // Allow users to register and logout.
+            // You should not add the "login" action to allow list. Doing so would
+            // cause problems with normal functioning of AuthComponent.
+            $this->Auth->allow(['add', 'logout']);
         }
-    }
 
-    public function logout()
-    {
-        return $this->redirect($this->Auth->logout());
+        public function login()
+        {
+            if ($this->request->is('post')) {
+                $user = $this->Auth->identify();
+                if ($user) {
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+                $this->Flash->error(__('Invalid username or password, try again'));
+            }
+        }
+
+        public function logout()
+        {
+            return $this->redirect($this->Auth->logout());
+        }
     }
 
 Password hashing is not done yet, we need an Entity class for our User in order
