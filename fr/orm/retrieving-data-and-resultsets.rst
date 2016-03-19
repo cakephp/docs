@@ -301,6 +301,17 @@ peuvent être atteintes avec les jointures::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
+Enfin il est possible d'utiliser les closures pour accéder aux méthodes de
+mutation des entities dans vos finds list. Cet exemple vous montre l'utilisation
+de la méthode de mutation ``_getFullName()`` de l'entity Author::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => function ($e) {
+            return $e->author->get('full_name');
+        }
+    ]);
+
 Trouver des Données Threaded
 ============================
 
@@ -536,6 +547,15 @@ retournées par les associations et les filtrer par conditions::
                 ->where(['Comments.approved' => true]);
         }
     ]);
+
+Cela fonctionne aussi pour la pagination au niveau du Controller::
+
+    $this->paginate['contain'] = [
+        'Comments' => function (\Cake\ORM\Query $query) {
+            return $query->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+        }
+    ];
 
 .. note::
 

@@ -11,20 +11,20 @@ Reporting Bugs
 Well written bug reports are very helpful. There are a few steps to help create
 the best bug report possible:
 
-* **Do** `search <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
+* **Do**: Please `search <https://github.com/cakephp/cakephp/search?q=it+is+broken&ref=cmdform&type=Issues>`_
   for a similar existing ticket, and ensure someone hasn't already reported your
   issue, or that it hasn't already been fixed in the repository.
-* **Do** include detailed instructions on **how to reproduce the bug**. This
-  could be in the form of test cases or a code snippet that demonstrates the
-  issue. Not having a way to reproduce an issue, means it's less likely to get
+* **Do**: Please include detailed instructions on **how to reproduce the bug**. This
+  could be in the form of a test-case or a snippet of code that demonstrates the
+  issue. Not having a way to reproduce an issue means it's less likely to get
   fixed.
-* **Do** give as many details as possible about your environment: (OS, PHP
+* **Do**: Please give as many details as possible about your environment: (OS, PHP
   version, CakePHP version).
-* **Don't** use the ticket system to ask support questions. Use the `Google
-  Group <http://groups.google.com/group/cake-php>`_, the #cakephp IRC channel or
-  Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>
-  for that.
-
+* **Don't**: Please don't use the ticket system to ask support questions. The #cakephp IRC channel
+  on `Freenode <https://webchat.freenode.net>`__ has many developers available to help answer
+  your questions. Additional options are CakePHP's
+  `Google Group <http://groups.google.com/group/cake-php>`__ and the always popular
+  `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__.
 
 Reporting Security Issues
 =========================

@@ -5,10 +5,11 @@ Retrieving Data & Results Sets
 
 .. php:class:: Table
 
-While table objects provide an abstraction around a 'repository' or collection of
-objects, when you query for individual records you get 'entity' objects. While
-this section discusses the different ways you can find and load entities, you
-should read the :doc:`/orm/entities` section for more information on entities.
+While table objects provide an abstraction around a 'repository' or collection
+of objects, when you query for individual records you get 'entity' objects.
+While this section discusses the different ways you can find and load entities,
+you should read the :doc:`/orm/entities` section for more information on
+entities.
 
 Debugging Queries and ResultSets
 ================================
@@ -30,8 +31,7 @@ Getting a Single Entity by Primary Key
 .. php:method:: get($id, $options = [])
 
 It is often convenient to load a single entity from the database when editing or
-view entities and their related data. You can do this by using
-``get()``::
+view entities and their related data. You can do this by using ``get()``::
 
     // In a controller or table method.
 
@@ -43,9 +43,10 @@ view entities and their related data. You can do this by using
         'contain' => ['Comments']
     ]);
 
-If the get operation does not find any results
-a ``Cake\Datasource\Exception\RecordNotFoundException`` will be raised. You can either
-catch this exception yourself, or allow CakePHP to convert it into a 404 error.
+If the get operation does not find any results a
+``Cake\Datasource\Exception\RecordNotFoundException`` will be raised. You can
+either catch this exception yourself, or allow CakePHP to convert it into a 404
+error.
 
 Like ``find()`` get has caching integrated. You can use the ``cache`` option
 when calling ``get()`` to perform read-through caching::
@@ -67,7 +68,9 @@ when calling ``get()`` to perform read-through caching::
         'cache' => false
     ]);
 
-Optionally you can ``get()`` an entity using :ref:`custom-find-methods`. For example you may want to get all translations for an entity. You can achieve that by using the ``finder`` option::
+Optionally you can ``get()`` an entity using :ref:`custom-find-methods`. For
+example you may want to get all translations for an entity. You can achieve that
+by using the ``finder`` option::
 
     $article = $articles->get($id, [
         'finder' => 'translations',
@@ -115,9 +118,9 @@ execute until you start fetching rows, convert it to an array, or when the
 
 .. note::
 
-    Once you've started a query you can use the :doc:`/orm/query-builder` interface
-    to build more complex queries, adding additional conditions, limits, or include
-    associations using the fluent interface.
+    Once you've started a query you can use the :doc:`/orm/query-builder`
+    interface to build more complex queries, adding additional conditions,
+    limits, or include associations using the fluent interface.
 
 ::
 
@@ -154,11 +157,10 @@ The list of options supported by find() are:
 
 Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
-``getOptions()`` method on a query object to retrieve the options used. While you
-can pass query objects to your controllers, we recommend that you
-package your queries up as :ref:`custom-find-methods` instead. Using custom
-finder methods will let you re-use your queries and make testing
-easier.
+``getOptions()`` method on a query object to retrieve the options used. While
+you can pass query objects to your controllers, we recommend that you package
+your queries up as :ref:`custom-find-methods` instead. Using custom finder
+methods will let you re-use your queries and make testing easier.
 
 By default queries and result sets will return :doc:`/orm/entities` objects. You
 can retrieve basic arrays by disabling hydration::
@@ -205,9 +207,10 @@ See :ref:`query-count` for additional usage of the ``count()`` method.
 Finding Key/Value Pairs
 =======================
 
-It is often useful to generate an associative array of data from your application's
-data. For example, this is very useful when creating ``<select>`` elements. CakePHP
-provides a simple to use method for generating 'lists' of data::
+It is often useful to generate an associative array of data from your
+application's data. For example, this is very useful when creating ``<select>``
+elements. CakePHP provides a simple to use method for generating 'lists' of
+data::
 
     // In a controller or table method.
     $query = $articles->find('list');
@@ -233,8 +236,8 @@ a table::
         }
     }
 
-When calling ``list`` you can configure the fields used for the key and value with
-the ``keyField`` and ``valueField`` options respectively::
+When calling ``list`` you can configure the fields used for the key and value
+with the ``keyField`` and ``valueField`` options respectively::
 
     // In a controller or table method.
     $query = $articles->find('list', [
@@ -278,14 +281,25 @@ You can also create list data from associations that can be reached with joins::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
+Lastly it is possible to use closures to access entity mutator methods in your
+list finds. This example shows using the ``_getFullName()`` mutator method from
+the Author entity. ::
+
+    $query = $articles->find('list', [
+        'keyField' => 'id',
+        'valueField' => function ($e) {
+            return $e->author->get('full_name');
+        }
+    ]);
+
 Finding Threaded Data
 =====================
 
 The ``find('threaded')`` finder returns nested entities that are threaded
 together through a key field. By default this field is ``parent_id``. This
-finder allows you to access data stored in an 'adjacency list' style
-table. All entities matching a given ``parent_id`` are placed under the
-``children`` attribute::
+finder allows you to access data stored in an 'adjacency list' style table. All
+entities matching a given ``parent_id`` are placed under the ``children``
+attribute::
 
     // In a controller or table method.
     $query = $comments->find('threaded');
@@ -339,11 +353,10 @@ would do the following::
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
 
-Finder methods can modify the query as required, or use the
-``$options`` to customize the finder operation with relevant application logic.
-You can also 'stack' finders, allowing you to express complex queries
-effortlessly. Assuming you have both the 'published' and 'recent' finders, you
-could do the following::
+Finder methods can modify the query as required, or use the ``$options`` to
+customize the finder operation with relevant application logic. You can also
+'stack' finders, allowing you to express complex queries effortlessly. Assuming
+you have both the 'published' and 'recent' finders, you could do the following::
 
     // In a controller or table method.
     $articles = TableRegistry::get('Articles');
@@ -362,8 +375,8 @@ Dynamic Finders
 ===============
 
 CakePHP's ORM provides dynamically constructed finder methods which allow you to
-express simple queries with no additional code. For example if you wanted
-to find a user by username you could do::
+express simple queries with no additional code. For example if you wanted to
+find a user by username you could do::
 
     // In a controller
     // The following two calls are equal.
@@ -384,8 +397,8 @@ You can also create ``OR`` conditions::
 
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
-While you can use either OR or AND conditions, you cannot combine the two in
-a single dynamic finder. Other query options like ``contain`` are also not
+While you can use either OR or AND conditions, you cannot combine the two in a
+single dynamic finder. Other query options like ``contain`` are also not
 supported with dynamic finders. You should use :ref:`custom-find-methods` to
 encapsulate more complex queries.  Lastly, you can also combine dynamic finders
 with custom finders::
@@ -498,6 +511,15 @@ associations and filter them by conditions::
                 ->where(['Comments.approved' => true]);
         }
     ]);
+
+This also works for pagination at the Controller level::
+
+    $this->paginate['contain'] = [
+        'Comments' => function (\Cake\ORM\Query $query) {
+            return $query->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
+        }
+    ];
 
 .. note::
 

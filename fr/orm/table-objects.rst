@@ -25,6 +25,7 @@ aux bases de données relationnelles, et sont l'interface principale pour votre
 base de données dans l'ORM de CakePHP. La classe table la plus basique devrait
 ressembler à ceci::
 
+    // src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -176,7 +177,7 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
 écouteur qui implémente ``EventListenerInterface``::
 
     use Cake\Event\EventListenerInterface;
-    class ModelInitialzieListener implements EventListenerInterface
+    class ModelInitializeListener implements EventListenerInterface
     {
         public function implementedEvents()
         {
@@ -194,7 +195,7 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
 et attacher l'écouteur à ``EventManager`` comme ce qui suit::
 
     use Cake\Event\EventManager;
-    $listener = new ModelInitialzieListener();
+    $listener = new ModelInitializeListener();
     EventManager::instance()->attach($listener);
 
 Ceci va appeler ``initializeEvent`` quand une classe ``Table`` est construite.

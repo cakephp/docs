@@ -169,3 +169,13 @@ Une nouvelle option de configuration ``Error.extraFatalErrorMemory`` peut être
 définie en nombre de megaoctets, pour augmenter la limite de mémoire en cas
 d'erreur fatale. Cela permet d'allouer un petit espace mémoire supplémentaire
 pour la journalisation (logging) ainsi que la gestion d'erreur.
+
+Étapes de Migration
+===================
+
+Mettre à jour setToStringFormat()
+---------------------------------
+
+Avant CakePHP 3.2, Time::setToStringFormat() fonctionnait aussi avec des Objets
+Date. Après la mise à jour, vous devrez ajouter Date::setToStringFormat() en
+plus pour voir de nouveau la Date formatée.

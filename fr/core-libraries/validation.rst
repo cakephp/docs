@@ -248,6 +248,23 @@ un tableau contextuel contenant des données liées au processus de validation:
 - **newRecord**: Selon si l'appel de la validation est pour un nouvel
   enregistrement ou pour un enregistrement existant.
 
+Si vous devez passer des données supplémentaires à vos méthodes de validation
+comme pour les ids des users, vous pouvez utiliser un provider dynamique
+personnalisé dans votre controller::
+
+    $this->Examples->validator('default')->provider('passed', [
+        'count' => $countFromController,
+        'userid' => $this->Auth->user('id')
+    ]);
+
+Ensuite assurez-vous que votre méthode de validation ait le deuxième paramètre
+de contexte::
+
+    public function customValidationMethod($check, array $context)
+    {
+        $userid = $context['providers']['passed']['userid'];
+    }
+
 Validation Conditionnelle
 -------------------------
 

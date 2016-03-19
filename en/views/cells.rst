@@ -4,7 +4,8 @@ View Cells
 View cells are small mini-controllers that can invoke view logic and render out
 templates. They provide a light-weight modular replacement to
 ``requestAction()``. The idea of cells is borrowed from `cells in Ruby
-<https://github.com/apotonick/cells>`_, where they fulfill a similar role and purpose.
+<https://github.com/apotonick/cells>`_, where they fulfill a similar role and
+purpose.
 
 When to use Cells
 =================
@@ -193,3 +194,10 @@ define the ``cache`` option when creating a cell to enable & configure caching::
 
 If a key is generated the underscored version of the cell class and template
 name will be used.
+
+.. note::
+
+    A new ``View`` instance is used to render each cell and these new objects
+    do not share context with the main template / layout. Each cell is
+    self-contained and only has access to variables passed as arguments to the
+    ``View::cell()`` call.

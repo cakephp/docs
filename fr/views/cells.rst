@@ -204,3 +204,10 @@ d'une cell pour activer & configurer la mise en cache::
 
 Si une clé est générée, la version en underscore de la classe cell et le nom
 du template seront utilisés.
+
+.. note::
+
+    Une nouvelle instance de ``View`` est utilisée pour retourner chaque cell
+    et ces nouveaux objets ne partagent pas de contexte avec le template /layout
+    principal. Chaque cell est auto-contenu et a seulement accès aux variables
+    passés en arguments par l'appel de ``View::cell()``.

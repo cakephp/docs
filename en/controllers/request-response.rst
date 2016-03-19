@@ -757,7 +757,7 @@ related headers with a fluent interface::
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
-        ->allowAuthentication()
+        ->allowCredentials()
         ->exposeHeaders(['Link'])
         ->maxAge(300)
         ->build();

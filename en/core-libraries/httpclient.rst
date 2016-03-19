@@ -163,7 +163,7 @@ addition request information.  The following keys can be used in ``$options``:
 - ``redirect`` - Number of redirects to follow. Defaults to ``false``.
 
 The options parameter is always the 3rd parameter in each of the HTTP methods.
-They can also be use when constructing ``Client`` to create
+They can also be used when constructing ``Client`` to create
 :ref:`scoped clients <http_client_scoped_client>`.
 
 Authentication

@@ -234,6 +234,21 @@ containing data related to the validation process:
   need to create complex rules by calling multiple providers.
 - **newRecord**: Whether the validation call is for a new record or
   a preexisting one.
+  
+If you need to pass additional data to your validation methods such as the 
+current users id, you can use a custom dynamic provider from your controller. ::
+
+    $this->Examples->validator('default')->provider('passed', [
+        'count' => $countFromController,
+        'userid' => $this->Auth->user('id')
+    ]);
+    
+Then ensure that your validation method has the second context parameter. ::
+
+    public function customValidationMethod($check, array $context)
+    {
+        $userid = $context['providers']['passed']['userid'];
+    }
 
 Conditional Validation
 ----------------------
