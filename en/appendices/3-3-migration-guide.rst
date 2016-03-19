@@ -10,7 +10,9 @@ Routing
 - ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
   a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
   reliance on global state, and necessary for the PSR7 work integration to be done.
-
+- When building resource routes, you can now define a prefix. This is useful
+  when defining nested resources as you can create specialized controllers for
+  nested resources.
 
 ORM
 ===
