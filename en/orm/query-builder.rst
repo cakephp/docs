@@ -475,7 +475,7 @@ hydration. If you wish to disable this process you can do this::
     $query->hydrate(false); // Results as arrays intead of entities
     $result = $query->toList(); // Execute the query and return the array
     
-After executing those lines, you result should look similar to this::
+After executing those lines, your result should look similar to this::
 
     [
         ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
