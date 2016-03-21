@@ -7,10 +7,10 @@ et flexibles. L'utilisation du mod\_rewrite de Apache n'est pas nécessaire pour
 utiliser les routes, mais cela rendra votre barre d'adresse beaucoup plus
 élégante.
 
-Le Routing dans CakePHP englobe aussi l'idée de routing inversé,
-où un tableau de paramètres peut être inversé en une chaîne URL.
-En utilisant le routing inversé, vous pouvez facilement reconstruire votre
-structure d'URL des applications sans avoir mis à jour tous vos codes.
+Le Routing dans CakePHP englobe aussi l'idée de routing inversé, où un tableau
+de paramètres peut être inversé en une chaîne URL. En utilisant le routing
+inversé, vous pouvez facilement reconstruire votre structure d'URL des
+applications sans avoir mis à jour tous vos codes.
 
 .. index:: routes.php
 
@@ -26,15 +26,15 @@ utiliser. Les Routes déclarées dans ce fichier sont traitées de haut en bas
 quand les requêtes entrantes correspondent. Cela signifie que l'ordre dans
 lequel vous placez les routes peuvent affecter comment les routes sont parsées.
 C'est généralement une bonne idée de placer les routes visitées le plus
-fréquemment en haut du fichier de routes si possible. Cela va permettre de
-ne pas à avoir à vérifier un certain nombre de routes qui ne correspondront
-pas à chaque requête.
+fréquemment en haut du fichier de routes si possible. Cela va permettre de ne
+pas à avoir à vérifier un certain nombre de routes qui ne correspondront pas à
+chaque requête.
 
 Les Routes sont parsées et matchées dans l'ordre dans lequel elles sont
-connectées. Si vous définissez deux routes similaires, la première route
-définie va avoir une priorité plus haute sur celle définie plus tard. Après
-avoir connecté les routes, vous pouvez manipuler l'ordre des routes en
-utilisant :php:meth:`Router::promote()`.
+connectées. Si vous définissez deux routes similaires, la première route définie
+va avoir une priorité plus haute sur celle définie plus tard. Après avoir
+connecté les routes, vous pouvez manipuler l'ordre des routes en utilisant
+:php:meth:`Router::promote()`.
 
 CakePHP vient aussi avec quelques routes par défaut pour commencer. Celles-ci
 peuvent être désactivées plus tard une fois que vous êtes sûr que vous n'en
@@ -45,30 +45,30 @@ désactiver le routing par défaut.
 Routing par Défaut
 ==================
 
-Avant que vous appreniez à configurer vos propres routes, vous devez savoir
-que CakePHP est configuré avec un ensemble de routes par défaut.
-Le routing de CakePHP par défaut va vous faire aller assez loin dans toute
-application. Vous pouvez accéder à une action directement par l'URL en
-mettant son nom dans la requête. Vous pouvez aussi passer des paramètres aux
-actions de votre controller en utilisant l'URL. ::
+Avant que vous appreniez à configurer vos propres routes, vous devez savoir que
+CakePHP est configuré avec un ensemble de routes par défaut. Le routing de
+CakePHP par défaut va vous faire aller assez loin dans toute application. Vous
+pouvez accéder à une action directement par l'URL en mettant son nom dans la
+requête. Vous pouvez aussi passer des paramètres aux actions de votre controller
+en utilisant l'URL. ::
 
-        modèle URL des routes par défaut:
+        // modèle URL des routes par défaut:
         http://example.com/controller/action/param1/param2/param3
 
-L'URL /posts/view mappe à l'action view() de
-PostsController, et /products/view\_clearance mappe vers l'action
-view\_clearance() de ProductsController. Si aucune action n'est spécifiée
-dans l'URL, la méthode index() est supposée.
+L'URL /posts/view mappe à l'action view() de PostsController, et
+/products/view\_clearance mappe vers l'action view\_clearance() de
+ProductsController. Si aucune action n'est spécifiée dans l'URL, la méthode
+index() est supposée.
 
 La configuration du routing par défaut vous permet aussi de passer les
-paramètres à vos actions en utilisant l'URL. Une requête pour
-/posts/view/25 serait équivalente à appeler view(25) dans le PostsController,
-par exemple. Le routing par défaut fournit aussi les routes pour les plugins,
-et les routes préfixées si vous choisissez d'utiliser ces fonctionnalités.
+paramètres à vos actions en utilisant l'URL. Une requête pour /posts/view/25
+serait équivalente à appeler view(25) dans le PostsController, par exemple. Le
+routing par défaut fournit aussi les routes pour les plugins, et les routes
+préfixées si vous choisissez d'utiliser ces fonctionnalités.
 
 Les routes intégrées sont dans ``Cake/Config/routes.php``. Vous pouvez
-désactiver le routing par défaut en les retirant du fichier
-:term:`routes.php` de votre application.
+désactiver le routing par défaut en les retirant du fichier :term:`routes.php`
+de votre application.
 
 .. index:: :controller, :action, :plugin
 .. _connecting-routes:
@@ -77,14 +77,14 @@ Connecter les Routes
 ====================
 
 Définir vos propres routes vous permet de définir la façon dont votre
-application va répondre à une URL donnée. Définir vos propres routes
-dans le fichier ``app/Config/routes.php`` en utilisant la méthode
+application va répondre à une URL donnée. Définir vos propres routes dans le
+fichier ``app/Config/routes.php`` en utilisant la méthode
 :php:meth:`Router::connect()`.
 
-La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
-faire correspondre, les valeurs par défaut pour les éléments de votre
-route, et les règles d'expression régulière pour aider le routeur à
-faire correspondre les éléments dans l'URL.
+La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez faire
+correspondre, les valeurs par défaut pour les éléments de votre route, et les
+règles d'expression régulière pour aider le routeur à faire correspondre les
+éléments dans l'URL.
 
 Le format basique pour une définition de route est::
 
@@ -94,21 +94,21 @@ Le format basique pour une définition de route est::
         array('option' => 'matchingRegex')
     );
 
-Le premier paramètre est utilisé pour dire au routeur quelle sorte d'URL
-vous essayez de contrôler. L'URL est une chaîne normale délimitée par
-des slashes, mais peut aussi contenir une wildcard (\*) ou
-:ref:`route-elements`. Utiliser une wildcard dit au routeur que vous êtes prêt
-à accepter tout argument supplémentaire fourni. Les Routes sans un \* ne
-matchent que le pattern template exact fourni.
+Le premier paramètre est utilisé pour dire au routeur quelle sorte d'URL vous
+essayez de contrôler. L'URL est une chaîne normale délimitée par des slashes,
+mais peut aussi contenir une wildcard (\*) ou :ref:`route-elements`. Utiliser
+une wildcard dit au routeur que vous êtes prêt à accepter tout argument
+supplémentaire fourni. Les Routes sans un \* ne matchent que le pattern template
+exact fourni.
 
 Une fois que vous spécifiez une URL, vous utilisez les deux derniers paramètres
 de ``connect()`` pour dire à CakePHP quoi faire avec une requête une fois
-qu'elle a été matchée. Le deuxième paramètre est un tableau associatif. Les
-clés du tableau devraient être appelées après les éléments de route dans l'URL,
-ou les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``.
-Les valeurs dans le tableau sont les valeurs par défaut pour ces clés.
-Regardons quelques exemples simples avant que nous commencions l'utilisation
-le troisième paramètre de connect()::
+qu'elle a été matchée. Le deuxième paramètre est un tableau associatif. Les clés
+du tableau devraient être appelées après les éléments de route dans l'URL, ou
+les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``. Les
+valeurs dans le tableau sont les valeurs par défaut pour ces clés. Regardons
+quelques exemples simples avant que nous commencions l'utilisation le troisième
+paramètre de connect()::
 
     Router::connect(
         '/pages/*',
@@ -116,15 +116,14 @@ le troisième paramètre de connect()::
     );
 
 Cette route est trouvée dans le fichier routes.php distribué avec CakePHP.
-Cette route matche toute URL commençant par ``/pages/`` et il tend vers
-l'action ``display()`` de ``PagesController();``
-La requête /pages/products serait mappé vers
-``PagesController->display('products')``.
+Cette route matche toute URL commençant par ``/pages/`` et il tend vers l'action
+``display()`` de ``PagesController();``. La requête /pages/products serait mappé
+vers ``PagesController->display('products')``.
 
 En plus de l'étoile greedy ``/*`` il y aussi la syntaxe de l'étoile trailing
-``/**``. Utiliser une étoile double trailing, va capturer le reste de l'URL
-en tant qu'argument unique passé. Ceci est utile quand vous voulez utilisez
-un argument qui incluait un ``/`` dedans::
+``/**``. Utiliser une étoile double trailing, va capturer le reste de l'URL en
+tant qu'argument unique passé. Ceci est utile quand vous voulez utilisez un
+argument qui incluait un ``/`` dedans::
 
     Router::connect(
         '/pages/**',
@@ -150,19 +149,19 @@ de la route::
 Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
-pourriez considérer la création d'une route. Cela vous permet de vous lier
-à ``/government`` plutôt qu'à ``/pages/display/5``.
+pourriez considérer la création d'une route. Cela vous permet de vous lier à
+``/government`` plutôt qu'à ``/pages/display/5``.
 
 .. note::
 
     Bien que vous puissiez connecter des routes alternatives, les routes par
-    défaut vont continuer à fonctionner. Avec cette configuration, vous
-    pouvez accéder à 1 contenu à partir de 2 URLs différentes. Regardez
-    :ref:`disabling-default-routes` pour désactiver les routes par défaut,
-    et fournir seulement les URLs que vous définissez.
+    défaut vont continuer à fonctionner. Avec cette configuration, vous pouvez
+    accéder à 1 contenu à partir de 2 URLs différentes. Regardez
+    :ref:`disabling-default-routes` pour désactiver les routes par défaut, et
+    fournir seulement les URLs que vous définissez.
 
-Une autre utilisation ordinaire pour le Router est de définir un "alias" pour
-un controller. Disons qu'au lieu d'accéder à notre URL régulière à
+Une autre utilisation ordinaire pour le Router est de définir un "alias" pour un
+controller. Disons qu'au lieu d'accéder à notre URL régulière à
 ``/users/some_action/5``, nous aimerions être capable de l'accéder avec
 ``/cooks/some_action/5``. La route suivante s'occupe facilement de cela::
 
@@ -170,22 +169,22 @@ un controller. Disons qu'au lieu d'accéder à notre URL régulière à
         '/cooks/:action/*', array('controller' => 'users')
     );
 
-Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être
-envoyée au controller users. L'action appelée dépendra de la valeur du
-paramètre ``:action``. En utilisant :ref:`route-elements`, vous pouvez
-créer des routes variables, qui acceptent les entrées utilisateur ou les
-variables. La route ci-dessus utilise aussi l'étoile greedy.
-L'étoile greedy indique au :php:class:`Router` que cette route devrait
-accepter tout argument de position supplémentaire donné. Ces arguments
-seront rendus disponibles dans le tableau :ref:`passed-arguments`.
+Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être envoyée
+au controller users. L'action appelée dépendra de la valeur du paramètre
+``:action``. En utilisant :ref:`route-elements`, vous pouvez créer des routes
+variables, qui acceptent les entrées utilisateur ou les variables. La route
+ci-dessus utilise aussi l'étoile greedy. L'étoile greedy indique au
+:php:class:`Router` que cette route devrait accepter tout argument de position
+supplémentaire donné. Ces arguments seront rendus disponibles dans le tableau
+:ref:`passed-arguments`.
 
 Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
-``array('controller' => 'users', 'action' => 'some_action', 5)`` en
-URL va sortir /cooks/some_action/5 si la route ci-dessus est la
-première correspondante trouvée.
+``array('controller' => 'users', 'action' => 'some_action', 5)`` en URL va
+sortir /cooks/some_action/5 si la route ci-dessus est la première correspondante
+trouvée.
 
-Par défaut tous les paramètres nommés passés et les arguments sont extraits
-des URLs qui matchent ces templates gourmands. Cependant, vous pouvez configurer
+Par défaut tous les paramètres nommés passés et les arguments sont extraits des
+URLs qui matchent ces templates gourmands. Cependant, vous pouvez configurer
 comment et quels arguments nommés sont parsés en utilisant
 :php:meth:`Router::connectNamed()` si vous en avez besoin.
 
@@ -194,20 +193,19 @@ comment et quels arguments nommés sont parsés en utilisant
 Les Eléments de Route
 ---------------------
 
-Vous pouvez spécifier vos propres éléments de route et ce faisant
-cela vous donne le pouvoir de définir des places dans l'URL où les
-paramètres pour les actions du controller doivent reposer. Quand
-une requête est faite, les valeurs pour ces éléments de route sont
-trouvées dans ``$this->request->params`` dans le controller.
-Ceci est différent de la façon dont les paramètres sont gérés, donc notez
-la différence: les paramètres nommés (/controller/action/name:value) sont
+Vous pouvez spécifier vos propres éléments de route et ce faisant cela vous
+donne le pouvoir de définir des places dans l'URL où les paramètres pour les
+actions du controller doivent reposer. Quand une requête est faite, les valeurs
+pour ces éléments de route sont trouvées dans ``$this->request->params`` dans le
+controller. Ceci est différent de la façon dont les paramètres sont gérés, donc
+notez la différence: les paramètres nommés (/controller/action/name:value) sont
 trouvés dans ``$this->request->params['named']``, alors que la donnée de
 l'élément de route personnalisé est trouvé dans ``$this->request->params``.
-quand vous définissez un élément de route personnalisé, vous pouvez
-spécifier en option une expression régulière - cela dit à CakePHP comment
-savoir si l'URL est correctement formée ou non. Si vous choisissez de ne
-pas fournir une expression régulière, toute expression non ``/`` sera
-traitée comme une partie du paramètre::
+quand vous définissez un élément de route personnalisé, vous pouvez spécifier en
+option une expression régulière - cela dit à CakePHP comment savoir si l'URL est
+correctement formée ou non. Si vous choisissez de ne pas fournir une expression
+régulière, toute expression non ``/`` sera traitée comme une partie du
+paramètre::
 
     Router::connect(
         '/:controller/:id',
@@ -215,8 +213,8 @@ traitée comme une partie du paramètre::
         array('id' => '[0-9]+')
     );
 
-Cet exemple simple montre comment créer une manière rapide de voir les models
-à partir de tout controller en élaborant une URL qui ressemble à
+Cet exemple simple montre comment créer une manière rapide de voir les models à
+partir de tout controller en élaborant une URL qui ressemble à
 ``/controllername/:id``. L'URL fourni à connect() spécifie deux éléments de
 route: ``:controller`` et ``:id``. L'élément ``:controller`` est l'élément de
 route par défaut de CakePHP, donc le routeur sait comment matcher et identifier
@@ -226,20 +224,20 @@ régulière correspondante dans le troisième paramètre de connect().
 
 .. note::
 
-    Les Patrons utilisés pour les éléments de route ne doivent pas contenir
-    de groupes capturés. Si ils le font, le Router ne va pas fonctionner
+    Les Patrons utilisés pour les éléments de route ne doivent pas contenir de
+    groupes capturés. Si ils le font, le Router ne va pas fonctionner
     correctement.
 
-Une fois que cette route a été définie, requêtant ``/apples/5`` est la même
-que celle requêtant ``/apples/view/5``. Les deux appeleraient la méthode view()
-de ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
+Une fois que cette route a été définie, requêtant ``/apples/5`` est la même que
+celle requêtant ``/apples/view/5``. Les deux appeleraient la méthode view() de
+ApplesController. A l'intérieur de la méthode view(), vous aurez besoin
 d'accéder à l'ID passé à ``$this->request->params['id']``.
 
 Si vous avez un unique controller dans votre application et que vous ne ne
 voulez pas que le nom du controller apparaisse dans l'URL, vous pouvez mapper
-tous les URLs aux actions dans votre controller. Par exemple, pour mapper
-toutes les URLs aux actions du controller ``home``, par ex avoir des URLs
-comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
+tous les URLs aux actions dans votre controller. Par exemple, pour mapper toutes
+les URLs aux actions du controller ``home``, par ex avoir des URLs comme
+``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
     Router::connect('/:action', array('controller' => 'home'));
 
@@ -264,26 +262,26 @@ Un exemple de plus, et vous serez un routing pro::
         )
     );
 
-C'est assez complexe, mais montre comme les routes peuvent vraiment
-devenir puissantes. L'URL fourni a quatre éléments de route. Le premier
-nous est familier: c'est une route par défaut qui dit à CakePHP d'attendre
-un nom de controller.
+C'est assez complexe, mais montre comme les routes peuvent vraiment devenir
+puissantes. L'URL fourni a quatre éléments de route. Le premier nous est
+familier: c'est une route par défaut qui dit à CakePHP d'attendre un nom de
+controller.
 
 Ensuite, nous spécifions quelques valeurs par défaut. Quelque soit le
-controller, nous voulons que l'action index() soit appelée. Nous définissons
-le paramètre jour (le quatrième élément dans l'URL) à null pour le marquer en
+controller, nous voulons que l'action index() soit appelée. Nous définissons le
+paramètre jour (le quatrième élément dans l'URL) à null pour le marquer en
 option.
 
-Finalement, nous spécifions quelques expressions régulières qui vont
-matcher les années, mois et jours sous forme numérique. Notez que les
-parenthèses (le groupement) ne sont pas supportées dans les expressions
-régulières. Vous pouvez toujours spécifier des alternatives, comme
-dessus, mais ne pas grouper avec les parenthèses.
+Finalement, nous spécifions quelques expressions régulières qui vont matcher les
+années, mois et jours sous forme numérique. Notez que les parenthèses (le
+groupement) ne sont pas supportées dans les expressions régulières. Vous pouvez
+toujours spécifier des alternatives, comme dessus, mais ne pas grouper avec les
+parenthèses.
 
 Une fois définie, cette route va matcher ``/articles/2007/02/01``,
-``/posts/2004/11/16``, gérant les requêtes
-pour les actions index() de ses controllers respectifs, avec les paramètres de
-date dans ``$this->request->params``.
+``/posts/2004/11/16``, gérant les requêtes pour les actions index() de ses
+controllers respectifs, avec les paramètres de date dans
+``$this->request->params``.
 
 Il y a plusieurs éléments de route qui ont une signification spéciale dans
 CakePHP, et ne devraient pas être utilisés à moins que vous souhaitiez
@@ -298,11 +296,11 @@ spécifiquement la signification.
 Passer des Paramètres à l'Action
 --------------------------------
 
-Quand vous connectez les routes en utilisant
-:ref:`route-elements` vous voudrez peut-être que des éléments routés
-soient passés aux arguments à la place. En utilisant le 3ème argument de
-:php:meth:`Router::connect()`, vous pouvez définir quels éléments de route
-doivent aussi être rendus disponibles en arguments passés::
+Quand vous connectez les routes en utilisant :ref:`route-elements` vous voudrez
+peut-être que des éléments routés soient passés aux arguments à la place. En
+utilisant le 3ème argument de :php:meth:`Router::connect()`, vous pouvez définir
+quels éléments de route doivent aussi être rendus disponibles en arguments
+passés::
 
     // SomeController.php
     public function view($articleId = null, $slug = null) {
@@ -336,10 +334,10 @@ comme définie dans les routes::
 Paramètres Nommées Per-route
 ----------------------------
 
-Alors que vous pouvez contrôler les paramètres nommés à une grande échelle
-en utilisant :php:meth:`Router::connectNamed()`, vous pouvez aussi contrôler
-le comportement des paramètres nommés au niveau de la route en utilisant
-le 3ème argument de ``Router::connect()``::
+Alors que vous pouvez contrôler les paramètres nommés à une grande échelle en
+utilisant :php:meth:`Router::connectNamed()`, vous pouvez aussi contrôler le
+comportement des paramètres nommés au niveau de la route en utilisant le 3ème
+argument de ``Router::connect()``::
 
     Router::connect(
         '/:controller/:action/*',
@@ -355,8 +353,8 @@ le 3ème argument de ``Router::connect()``::
     );
 
 La définition de la route ci-dessus utilise la clé ``named`` pour définir
-comment plusieurs paramètres nommés devraient être traitées. Regardons
-chacune des différentes règles une par une:
+comment plusieurs paramètres nommés devraient être traitées. Regardons chacune
+des différentes règles une par une:
 
 * 'wibble' n'a pas d'information en plus. Cela signifie qu'il va toujours
   parser si il est trouvé dans une URL matchant cette route.
@@ -383,21 +381,20 @@ De nombreuses applications nécessitent une section d'administration dans
 laquelle les utilisateurs privilégiés peuvent faire des modifications.
 Ceci est souvent réalisé grâce à une URL spéciale telle que
 ``/admin/users/edit/5``. Dans CakePHP, les préfixes de routage peuvent être
-activés depuis le fichier de configuration du cœur en configurant les
-préfixes avec Routing.prefixes. Notez que les prefixes, bien que liés
-au routeur sont configurés dans ``app/Config/core.php``::
+activés depuis le fichier de configuration du cœur en configurant les préfixes
+avec Routing.prefixes. Notez que les prefixes, bien que liés au routeur sont
+configurés dans ``app/Config/core.php``::
 
     Configure::write('Routing.prefixes', array('admin'));
 
 Dans votre controller, toute action avec le préfixe ``admin_`` sera appelée.
-En utilisant notre exemple des users, accéder à l'URL
-``/admin/users/edit/5`` devrait appeler la méthode ``admin_edit``
-de notre ``UsersController`` en passant 5 comme premier paramètre.
-Le fichier de vue correspondant devra être
+En utilisant notre exemple des users, accéder à l'URL ``/admin/users/edit/5``
+devrait appeler la méthode ``admin_edit`` de notre ``UsersController`` en
+passant 5 comme premier paramètre. Le fichier de vue correspondant devra être
 ``app/View/Users/admin\_edit.ctp``.
 
-Vous pouvez faire correspondre l'URL /admin à votre action ``admin_index``
-du controller Pages en utilisant la route suivante::
+Vous pouvez faire correspondre l'URL /admin à votre action ``admin_index`` du
+controller Pages en utilisant la route suivante::
 
     Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));
 
@@ -408,8 +405,8 @@ définissez::
     Configure::write('Routing.prefixes', array('admin', 'manager'));
 
 CakePHP va automatiquement générer les routes pour les deux prefixes admin et
-manager. Chaque préfixe configuré va avoir les routes générées suivantes
-pour cela::
+manager. Chaque préfixe configuré va avoir les routes générées suivantes pour
+cela::
 
     Router::connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
@@ -444,9 +441,8 @@ d'URL::
 
     echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
-Inversement, si la requête active est une requête de plugin et que vous
-voulez créer un lien qui ne pointe pas vers un plugin, vous pouvez faire
-ce qui suit::
+Inversement, si la requête active est une requête de plugin et que vous voulez
+créer un lien qui ne pointe pas vers un plugin, vous pouvez faire ce qui suit::
 
     echo $this->Html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
 
@@ -467,8 +463,8 @@ besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 Ceci indiquera au routeur de supprimer toutes extensions de fichiers
 correspondantes et ensuite d'analyser ce qui reste.
 
-Si vous voulez créer une URL comme /page/titre-de-page.html, vous devriez
-créer votre route comme illustré ci-dessous::
+Si vous voulez créer une URL comme /page/titre-de-page.html, vous devriez créer
+votre route comme illustré ci-dessous::
 
     Router::connect(
         '/page/:title',
@@ -487,21 +483,20 @@ Ensuite pour créer des liens qui s'adapteront aux routes, utilisez simplement::
 
 Les extensions de Fichier sont utilisées par
 :php:class:`RequestHandlerComponent` pour faire automatiquement le changement
-de vue basé sur les types de contenu. Regardez RequestHandlerComponent pour
-plus d'informations.
+de vue basé sur les types de contenu. Regardez RequestHandlerComponent pour plus
+d'informations.
 
 .. _route-conditions:
 
 Utiliser des conditions supplémentaires de correspondance des routes
 --------------------------------------------------------------------
 
-Quand vous créez des routes, vous souhaitez restreindre certaines URL basées
-sur des configurations requête/environnement spécifique. Un bon exemple de
-cela est le routing :doc:`rest`. Vous pouvez spécifier des conditions
-supplémentaires dans l'argument ``$defaults`` pour
-:php:meth:`Router::connect()`. Par défaut, CakePHP propose 3 conditions
-d'environnement, mais vous pouvez en ajouter plus en utilisant
-:ref:`custom-route-classes`. Les options intégrées sont:
+Quand vous créez des routes, vous souhaitez restreindre certaines URL basées sur
+des configurations requête/environnement spécifique. Un bon exemple de cela est
+le routing :doc:`rest`. Vous pouvez spécifier des conditions supplémentaires
+dans l'argument ``$defaults`` pour :php:meth:`Router::connect()`. Par défaut,
+CakePHP propose 3 conditions d'environnement, mais vous pouvez en ajouter plus
+en utilisant :ref:`custom-route-classes`. Les options intégrées sont:
 
 - ``[type]`` Seulement les requêtes correspondantes pour des types de contenu spécifiques.
 - ``[method]`` Seulement les requêtes correspondantes avec des verbes HTTP spécifiques.
@@ -526,22 +521,21 @@ requêtes de données dépendant d'information.
 Arguments Passés
 ================
 
-Les arguments passés sont des arguments supplémentaires ou des segments
-du chemin qui sont utilisés lors d'une requête. Ils sont souvent utilisés
-pour transmettre des paramètres aux méthodes de vos controllers. ::
+Les arguments passés sont des arguments supplémentaires ou des segments du
+chemin qui sont utilisés lors d'une requête. Ils sont souvent utilisés pour
+transmettre des paramètres aux méthodes de vos controllers. ::
 
     http://localhost/calendars/view/recent/mark
 
 Dans l'exemple ci-dessus, ``recent`` et ``mark`` tous deux des arguments passés
 à ``CalendarsController::view()``. Les arguments passés sont transmis aux
-contrôleurs de trois manières. D'abord comme arguments de la méthode de
-l'action appelée, deuxièmement en étant accessibles dans
+controllers de trois manières. D'abord comme arguments de la méthode de l'action
+appelée, deuxièmement en étant accessibles dans
 ``$this->request->params['pass']`` sous la forme d'un tableau indexé
-numériquement. Enfin, il y a ``$this->passedArgs`` disponible de la même
-façon que la deuxième façon. Lorsque vous utilisez des routes personnalisées
-il est possible de forcer des paramètres particuliers comme étant des
-paramètres passés également. Voir passer des paramètres à une action pour plus
-d'informations.
+numériquement. Enfin, il y a ``$this->passedArgs`` disponible de la même façon
+que la deuxième façon. Lorsque vous utilisez des routes personnalisées il est
+possible de forcer des paramètres particuliers comme étant des paramètres passés
+également. Voir passer des paramètres à une action pour plus d'informations.
 
 Si vous alliez visiter l'URL mentionné précédemment, et que vous aviez une
 action de controller qui ressemblait à cela::
@@ -560,10 +554,10 @@ Vous auriez la sortie suivante::
         [1] => mark
     )
 
-La même donnée est aussi disponible dans ``$this->request->params['pass']``
-et dans ``$this->passedArgs`` dans vos controllers, vues, et helpers.
-Les valeurs dans le tableau pass sont indicées numériquement basé sur l'ordre
-dans lequel elles apparaissent dans l'URL appelé::
+La même donnée est aussi disponible dans ``$this->request->params['pass']`` et
+dans ``$this->passedArgs`` dans vos controllers, vues, et helpers. Les valeurs
+dans le tableau pass sont indicées numériquement basé sur l'ordre dans lequel
+elles apparaissent dans l'URL appelé::
 
     debug($this->request->params['pass']);
     debug($this->passedArgs);
@@ -578,7 +572,7 @@ Les deux du dessus sortiraient::
 
 .. note::
 
-    $this->passedArgs peut aussi contenir des paramètres nommés comme jun
+    $this->passedArgs peut aussi contenir des paramètres nommés dans un
     tableau mixte nommé avec des arguments passés.
 
 Quand vous générez des URLs, en utilisant un :term:`tableau de routing`, vous
@@ -597,13 +591,13 @@ Paramètres Nommés
 =================
 
 Vous pouvez nommer les paramètres et envoyer leurs valeurs en utilisant l'URL.
-Une requête pour ``/posts/view/title:first/category:general`` résultera en
-un appel à l'action view() du controller PostsController. Dans cette action,
-vous trouverez les valeurs des paramètres "title" et "category"
-dans ``$this->params['named']``. Vous pouvez également accéder
-aux paramètres nommés depuis ``$this->passedArgs``. Dans les deux cas, vous
-pouvez accéder aux paramètres nommés en utilisant leur nom en index. Si les
-paramètres nommés sont omis, ils ne seront pas définis.
+Une requête pour ``/posts/view/title:first/category:general`` résultera en un
+appel à l'action view() du controller PostsController. Dans cette action, vous
+trouverez les valeurs des paramètres "title" et "category" dans
+``$this->params['named']``. Vous pouvez également accéder aux paramètres nommés
+depuis ``$this->passedArgs``. Dans les deux cas, vous pouvez accéder aux
+paramètres nommés en utilisant leur nom en index. Si les paramètres nommés sont
+omis, ils ne seront pas définis.
 
 Quelques exemples de routes par défaut seront plus parlants.
 
@@ -638,14 +632,13 @@ Quelques exemples pour résumer les routes par défaut peuvent prouver leur aide
     $this->params['named']['chapter'] = 'models';
     $this->params['named']['section'] = 'associations';
 
-Lorsque l'on fait des routes personnalisées, un piège classique est
-d'utiliser des paramètres nommés qui casseront vos routes. Pour résoudre
-cela vous devez informer le Router des paramètres qui sont censés être
-des paramètres nommés. Sans cette information, le Routeur est incapable de
-déterminer si les paramètres nommés doivent en effet être des paramètres
-nommés ou des paramètres à router, et supposera par défaut que ce sont des
-paramètres à router. Pour connecter des paramètres nommés dans le routeur
-utilisez :php:meth:`Router::connectNamed()`::
+Lorsque l'on fait des routes personnalisées, un piège classique est d'utiliser
+des paramètres nommés qui casseront vos routes. Pour résoudre cela vous devez
+informer le Router des paramètres qui sont censés être des paramètres nommés.
+Sans cette information, le Routeur est incapable de déterminer si les paramètres
+nommés doivent en effet être des paramètres nommés ou des paramètres à router,
+et supposera par défaut que ce sont des paramètres à router. Pour connecter des
+paramètres nommés dans le routeur utilisez :php:meth:`Router::connectNamed()`::
 
     Router::connectNamed(array('chapter', 'section'));
 
@@ -653,8 +646,8 @@ Va s'assurer que votre chapitre et les paramètres de section inversent les
 routes correctement.
 
 Quand vous générez les URLs, en utilisant un :term:`tableau de routing`, vous
-ajoutez les paramètres nommés en valeurs avec les clés en chaîne matchant
-le nom::
+ajoutez les paramètres nommés en valeurs avec les clés en chaîne matchant le
+nom::
 
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
@@ -667,10 +660,10 @@ paramètre nommé.
     espace-clé. Il est mieux d'éviter de réutiliser une clé pour les deux,
     élément de route et paramètre nommé.
 
-Les paramètres nommés supportent aussi l'utilisation de tableaux pour
-générer et parser les URLs. La syntaxe fonctionne de façon très similaire à
-la syntaxe de tableau utilisée pour les paramètres GET. Quand vous générez les
-URLs, vous pouvez utiliser la syntaxe suivante::
+Les paramètres nommés supportent aussi l'utilisation de tableaux pour générer et
+parser les URLs. La syntaxe fonctionne de façon très similaire à la syntaxe de
+tableau utilisée pour les paramètres GET. Quand vous générez les URLs, vous
+pouvez utiliser la syntaxe suivante::
 
     $url = Router::url(array(
         'controller' => 'posts',
@@ -682,18 +675,17 @@ URLs, vous pouvez utiliser la syntaxe suivante::
     ));
 
 Ce qui est au-dessus générerait l'URL
-``/posts/index/filter[published]:1/filter[frontpage]:1``. Les paramètres
-sont ensuite parsés et stockés dans la variable passedArgs de votre
-controller en tableau, de la même façon que vous les envoyez au
-:php:meth:`Router::url`::
+``/posts/index/filter[published]:1/filter[frontpage]:1``. Les paramètres sont
+ensuite parsés et stockés dans la variable passedArgs de votre controller en
+tableau, de la même façon que vous les envoyez au :php:meth:`Router::url`::
 
     $this->passedArgs['filter'] = array(
         'published' => 1,
         'frontpage' => 1
     );
 
-Les tableaux peuvent aussi être imbriqués en profondeur, vous autorisant même
-à plus de flexibilité dans les arguments passés::
+Les tableaux peuvent aussi être imbriqués en profondeur, vous autorisant même à
+plus de flexibilité dans les arguments passés::
 
     $url = Router::url(array(
         'controller' => 'posts',
@@ -715,16 +707,16 @@ Les tableaux peuvent aussi être imbriqués en profondeur, vous autorisant même
         'users' => array(1, 2, 3)
     ));
 
-Vous finiriez avec une longue et belle URL comme ceci
-(entouré pour une lecture facile)::
+Vous finiriez avec une longue et belle URL comme ceci (entouré pour une lecture
+facile)::
 
     posts/search
       /models[post][order]:asc/models[post][filter][published]:1
       /models[comment][order]:desc/models[comment][filter][spam]:0
       /users[]:1/users[]:2/users[]:3
 
-Et le tableau résultant qui serait passé au controller matcherait ceci que
-vous avez passé au routeur::
+Et le tableau résultant qui serait passé au controller matcherait ceci que vous
+avez passé au routeur::
 
     $this->passedArgs['models'] = array(
         'post' => array(
@@ -746,10 +738,10 @@ vous avez passé au routeur::
 Contrôler les Paramètres Nommés
 -------------------------------
 
-Vous pouvez contrôler la configuration du paramètre nommé au niveau-par-route
-ou les contrôler globalement. Le contrôle global est fait à travers
-``Router::connectNamed()``. Ce qui suit donne quelques exemples de la façon
-dont vous contrôlez le parsing du paramètre nommé avec connectNamed().
+Vous pouvez contrôler la configuration du paramètre nommé au niveau-par-route ou
+les contrôler globalement. Le contrôle global est fait à travers
+``Router::connectNamed()``. Ce qui suit donne quelques exemples de la façon dont
+vous contrôlez le parsing du paramètre nommé avec connectNamed().
 
 Ne parsez aucun paramètre nommé::
 
@@ -775,8 +767,8 @@ Parsez seulement le paramètre de la page si l'action courante est 'index'::
         array('default' => false, 'greedy' => false)
     );
 
-Parsez seulement le paramètre de la page si l'action courante est 'index' et
-le controller est 'pages'::
+Parsez seulement le paramètre de la page si l'action courante est 'index' et le
+controller est 'pages'::
 
     Router::connectNamed(
         array('page' => array('action' => 'index', 'controller' => 'pages')),
@@ -787,12 +779,12 @@ le controller est 'pages'::
 connectNamed() supporte un certain nombre d'options:
 
 * ``greedy`` Configurer cela à true fera que le Router va parser tous les
-  paramètres nommés. Configurer cela à false va parser seulement les
-  paramètres nommés.
+  paramètres nommés. Configurer cela à false va parser seulement les paramètres
+  nommés.
 * ``default`` Définissez cela à true pour fusionner dans l'ensemble par défaut
   des paramètres nommés.
-* ``reset`` Définissez à true pour effacer les règles existantes et
-  recommencer à zéro.
+* ``reset`` Définissez à true pour effacer les règles existantes et recommencer
+  à zéro.
 * ``separator`` Changez la chaîne utilisée pour séparer la clé & valeur dans un
   paramètre nommé. Par défaut `:`
 
@@ -800,19 +792,18 @@ Routing inversé
 ===============
 
 Le routing inversé est une fonctionnalité dans CakePHP qui est utilisée pour
-vous permettre de changer facilement votre structure d'URL sans avoir à
-modifier tout votre code. En utilisant des
-:term:`tableaux de routing <tableau de routing>` pour définir vos URLs, vous
-pouvez configurer les routes plus tard et les URLs générés vont automatiquement
-être mises à jour.
+vous permettre de changer facilement votre structure d'URL sans avoir à modifier
+tout votre code. En utilisant des :term:`tableaux de routing <tableau de
+routing>` pour définir vos URLs, vous pouvez configurer les routes plus tard et
+les URLs générés vont automatiquement être mises à jour.
 
 Si vous créez des URLs en utilisant des chaînes de caractères comme::
 
     $this->Html->link('View', '/posts/view/' . $id);
 
-Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être
-appelé 'articles' à la place, vous devrez aller dans toute votre application
-en renommant les URLs. Cependant, si vous définissiez votre lien comme::
+Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être appelé
+'articles' à la place, vous devrez aller dans toute votre application en
+renommant les URLs. Cependant, si vous définissiez votre lien comme::
 
     $this->Html->link(
         'View',
@@ -820,8 +811,8 @@ en renommant les URLs. Cependant, si vous définissiez votre lien comme::
     );
 
 Ensuite quand vous décidez de changer vos URLs, vous pouvez le faire en
-définissant une route. Cela changerait à la fois le mapping d'URL entrant,
-ainsi que les URLs générés.
+définissant une route. Cela changerait à la fois le mapping d'URL entrant, ainsi
+que les URLs générés.
 
 Quand vous utilisez les URLs en tableau, vous pouvez définir les paramètres
 chaîne de la requête et les fragments de document en utilisant les clés
@@ -842,16 +833,15 @@ spéciales::
 Routing inversé
 ===============
 
-Rediriger le routing vous permet de délivrer des redirections à l'état HTTP
-30x pour les routes entrantes, et les pointent aux différentes URLs. Ceci
-est utilisé quand vous voulez informer les applications clientes qu'une
-ressource a été déplacée et que vous ne voulez pas avoir deux URLs pour le
-même contenu.
+Rediriger le routing vous permet de délivrer des redirections à l'état HTTP 30x
+pour les routes entrantes, et les pointent aux différentes URLs. Ceci est
+utilisé quand vous voulez informer les applications clientes qu'une ressource a
+été déplacée et que vous ne voulez pas avoir deux URLs pour le même contenu.
 
 Les routes de redirection sont différentes des routes normales puisqu'elles
 effectuent une redirection du header actuel si une correspondance est trouvée.
-La redirection peut survenir vers une destination dans votre application
-ou une localisation en-dehors::
+La redirection peut survenir vers une destination dans votre application ou une
+localisation en-dehors::
 
     Router::redirect(
         '/home/*',
@@ -860,10 +850,10 @@ ou une localisation en-dehors::
     );
 
 Redirige ``/home/*`` vers ``/posts/view`` et passe les paramètres vers
-``/posts/view``. Utiliser un tableau en une destination de redirection
-vous permet d'utiliser d'autres routes pour définir où une chaîne URL
-devrait être redirigée. Vous pouvez rediriger vers des localisations
-externes en utilisant les chaînes URLs en destination::
+``/posts/view``. Utiliser un tableau en une destination de redirection vous
+permet d'utiliser d'autres routes pour définir où une chaîne URL devrait être
+redirigée. Vous pouvez rediriger vers des localisations externes en utilisant
+les chaînes URLs en destination::
 
     Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
 
@@ -875,10 +865,10 @@ HTTP à 302.
 Désactiver les routes par défaut
 ================================
 
-Si vous avez complètement personnalisé toutes les routes, et voulez éviter
-toute pénalité de contenu dupliqué possible des moteurs de recherche, vous
-pouvez retirer les routes par défaut que CakePHP offre en les supprimant
-de votre fichier d'application routes.php.
+Si vous avez complètement personnalisé toutes les routes, et voulez éviter toute
+pénalité de contenu dupliqué possible des moteurs de recherche, vous pouvez
+retirer les routes par défaut que CakePHP offre en les supprimant de votre
+fichier d'application routes.php.
 
 Cela fera en sorte que CakePHP serve les erreurs, quand les utilisateurs
 essaient de visiter les URLs qui seraient normalement fournies par CakePHP mais
@@ -892,15 +882,14 @@ Classes de Route Personnalisées
 Les classes de route personnalisées vous permettent d'étendre et de modifier la
 façon dont certaines routes parsent les demandes et de traiter le routing
 inversé. Une classe personnalisée  de route devrait être créée dans
-``app/Routing/Route`` et étendre
-:php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou
-``parse()``. ``parse()`` est utilisée pour
-analyser les demandes et correspondance et ``match()`` est utilisée pour
-traiter les routes inversées.
+``app/Routing/Route`` et étendre :php:class:`CakeRoute` et mettre en œuvre un ou
+les deux ``match()`` et/ou ``parse()``. ``parse()`` est utilisée pour
+analyser les demandes et correspondance et ``match()`` est utilisée pour traiter
+les routes inversées.
 
-Vous pouvez utiliser une classe de route personnalisée lors d'un création
-d'une route à l'aide des options de la classe ``routeClass``, et en chargeant
-le fichier contenant votre routes avant d'essayer de l'utiliser::
+Vous pouvez utiliser une classe de route personnalisée lors d'un création d'une
+route à l'aide des options de la classe ``routeClass``, et en chargeant le
+fichier contenant votre routes avant d'essayer de l'utiliser::
 
     App::uses('SlugRoute', 'Routing/Route');
 
@@ -910,17 +899,16 @@ le fichier contenant votre routes avant d'essayer de l'utiliser::
          array('routeClass' => 'SlugRoute')
     );
 
-Cette route créerait une instance de ``SlugRoute`` et vous permet
-d'implémenter la gestion de paramètre personnalisée.
+Cette route créerait une instance de ``SlugRoute`` et vous permet d'implémenter
+la gestion de paramètre personnalisée.
 
 API du Router
 =============
 
 .. php:class:: Router
 
-    Le Router gère la génération des URLs sortants, et le parsing de la
-    requête URL entrante dans les ensembles de paramètre que CakePHP
-    peut dispatcher.
+    Le Router gère la génération des URLs sortants, et le parsing de la requête
+    URL entrante dans les ensembles de paramètre que CakePHP peut dispatcher.
 
 .. php:staticmethod:: connect($route, $defaults = array(), $options = array())
 
@@ -937,17 +925,17 @@ API du Router
 
     Les routes ont une façon de connecter les requêtes URLs aux objets dans
     votre application. Dans les routes du coeur, il y a un ensemble
-    d'expressions régulières qui sont utilisées pour matcher les requêtes
-    aux destinations.
+    d'expressions régulières qui sont utilisées pour matcher les requêtes aux
+    destinations.
 
     Exemples::
 
         Router::connect('/:controller/:action/*');
 
-    Le premier paramètre va être utilisé comme nom de controller alors que
-    le second est utilisé en nom d'action. La syntaxe '/\*' rend cette route
-    greedy puisqu'elle ca matcher les requêtes comme `/posts/index` ainsi que
-    les requêtes comme ``/posts/edit/1/foo/bar`` . ::
+    Le premier paramètre va être utilisé comme nom de controller alors que le
+    second est utilisé en nom d'action. La syntaxe '/\*' rend cette route greedy
+    puisqu'elle ca matcher les requêtes comme `/posts/index` ainsi que les
+    requêtes comme ``/posts/edit/1/foo/bar`` . ::
 
         Router::connect('/home-page', array('controller' => 'pages', 'action' => 'display', 'home'));
 
@@ -966,8 +954,7 @@ API du Router
     l'un d'eux sera ajouté pour chaque paramètre de route.
 
     $options propose trois clés 'special'. ``pass``, ``persist`` et
-    ``routeClass`` ont une signification spéciale dans le tableau
-    $options.
+    ``routeClass`` ont une signification spéciale dans le tableau $options.
 
     * ``pass`` est utilisé pour définir lesquels des paramètres routés devrait
       être passé dans le tableau pass. Ajouter un paramètre à pass le retirera
