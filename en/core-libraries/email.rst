@@ -30,17 +30,17 @@ After you've loaded ``Email``, you can send an email with the following::
 
 Since ``Email``'s setter methods return the instance of the class, you are able to set its properties with method chaining.
 
-``Email`` has several methods for defining recepients - ``to()``, ``cc()``,
+``Email`` has several methods for defining recipients - ``to()``, ``cc()``,
 ``bcc()``, ``addTo()``, ``addCc()`` and ``addBcc()``. The main difference being
-that the first three will overwrite what was already set and the later will just
-add more recepients to their respective field::
+that the first three will overwrite what was already set and the latter will just
+add more recipients to their respective field::
 
     $email = new Email();
     $email->to('to@example.com', 'To Example');
     $email->addTo('to2@example.com', 'To2 Example');
-    // The email's To recepients are: to@example.com and to2@example.com
+    // The email's To recipients are: to@example.com and to2@example.com
     $email->to('test@example.com', 'ToTest Example');
-    // The email's To recepient is: test@example.com
+    // The email's To recipient is: test@example.com
 
 Choosing the Sender
 -------------------
