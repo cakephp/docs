@@ -105,13 +105,38 @@ Saving Data To The Join Table
 -----------------------------
 
 Saving data to the join table is done by using the special ``_joinData``
-property. This property should be an Entity instance from the join Table class::
+property. This property should be an ``Entity`` instance from the join Table
+class::
 
+    // Link records for the first time.
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
     $tag1->_joinData->tagComment = 'The CakePHP ORM is so powerful!';
 
     $articlesTable->Tags->link($article, [$tag1]);
+
+    // Update an existing association.
+    $article = $articlesTable->get(1, ['contain' => ['Tags']]);
+    $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
+
+    $articlesTable->save($article, ['associated' => ['Tags']]);
+
+You can also create/update join table information when using ``newEntity()`` or
+``patchEntity()``. Your POST data should look like::
+
+    $data = [
+        'title' => 'My great blog post',
+        'body' => 'Some content that goes on for a bit.',
+        'tags' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'tagComment' => 'Great article!',
+                ]
+            ],
+        ]
+    ];
+    $articlesTable->newEntity($data, ['associated' => ['Tags']]);
 
 Unlink Many To Many Records
 ---------------------------
@@ -906,7 +931,7 @@ append
     in the array of entities to be saved.
 replace
     When saving, existing links will be removed and new links will be created in
-    the joint table. If there are existing link in the database to some of the
+    the junction table. If there are existing link in the database to some of the
     entities intended to be saved, those links will be updated, not deleted and
     then re-saved.
 
@@ -930,7 +955,7 @@ entities, eg. a user coauthoring an article. This is done by using the method
     $this->Articles->Users->link($article, [$user]);
 
 When saving belongsToMany Associations, it can be relevant to save some
-additional data to the Joint Table.  In the previous example of tags, it could
+additional data to the junction Table.  In the previous example of tags, it could
 be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
 be either ``upvote`` or ``downvote`` and is represented by a string.  The
 relation is between Users and Articles.
@@ -944,19 +969,19 @@ to ``_joinData`` and then saving the association with ``link()``, example::
     $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
     $this->Articles->Users->link($article, [$user]);
 
-Saving Additional Data to the Joint Table
------------------------------------------
+Saving Additional Data to the Join Table
+----------------------------------------
 
 In some situations the table joining your BelongsToMany association, will have
 additional columns on it. CakePHP makes it simple to save properties into these
 columns. Each entity in a belongsToMany association has a ``_joinData`` property
-that contains the additional columns on the joint table. This data can be either
-an array or an Entity instance. For example if Students BelongsToMany Courses,
-we could have a joint table that looks like::
+that contains the additional columns on the junction table. This data can be
+either an array or an Entity instance. For example if Students BelongsToMany
+Courses, we could have a junction table that looks like::
 
     id | student_id | course_id | days_attended | grade
 
-When saving data you can populate the additional columns on the joint table by
+When saving data you can populate the additional columns on the junction table by
 setting data to the ``_joinData`` property::
 
     $student->courses[0]->_joinData->grade = 80.12;
@@ -965,7 +990,7 @@ setting data to the ``_joinData`` property::
     $studentsTable->save($student);
 
 The ``_joinData`` property can be either an entity, or an array of data if you
-are saving entities built from request data. When saving joint table data from
+are saving entities built from request data. When saving junction table data from
 request data your POST data should look like::
 
     $data = [
