@@ -70,7 +70,7 @@ views will be rendering HTML/XHTML documents to browsers, but you might also nee
 reply to a remote application via JSON, or output a CSV file for a user.
 
 CakePHP template files have a default extension of **.ctp** (CakePHP Template)
-and utilize `alternative PHP syntax
+and utilize the `alternative PHP syntax
 <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 for control structures and output. These
 files contain the logic necessary to prepare the data received from the
@@ -91,21 +91,20 @@ Alternative Control Structures
 ------------------------------
 
 Control structures, like ``if``, ``for``, ``foreach``, and ``while`` can be
-written in a simplified format as well. The following is an example using
-``foreach``::
+written in a simplified format. Notice that there are no braces. Instead,
+the end brace for the ``foreach`` is replaced with ``endforeach``. Each of
+the control structures listed below has a similar closing syntax: ``endif``,
+``endfor``, ``endforeach``, and ``endwhile``. Also notice that instead of
+using a ``semicolon`` after each structure (except the last one), there is
+a ``colon``.
+
+The following is an example using ``foreach``::
 
   <ul>
   <?php foreach ($todo as $item): ?>
   <li><?=$item?></li>
   <?php endforeach; ?>
   </ul>
-
-Notice that there are no ``braces``. Instead, the end brace is replaced with
-``endforeach``. Each of the control structures listed above has a similar
-closing syntax: ``endif``, ``endfor``, ``endforeach``, and ``endwhile``.
-
-Also notice that instead of using a ``semicolon`` after each structure
-(except the last one), there is a ``colon``.
 
 Another example, using if/elseif/else. Notice the colons::
 
@@ -119,7 +118,8 @@ Another example, using if/elseif/else. Notice the colons::
 
 If you'd prefer using a templating language like
 `Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your templating
-language and CakePHP.
+language and CakePHP. The `TwigView plugin for CakePHP <https://github.com/WyriHaximus/TwigView>`_
+may be helpful.
 
 Template files are stored in **src/Template/**, in a folder named after the
 controller that uses the files, and named after the action it
