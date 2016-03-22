@@ -463,19 +463,25 @@ automatically produce an ``if .. then .. else`` statement::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Disabling Hydration
--------------------
+Getting Arrays Instead of Entities
+----------------------------------
 
-While ORMs and object result sets are powerful, hydrating entities is sometimes
+While ORMs and object result sets are powerful, creating entities is sometimes
 unnecessary. For example, when accessing aggregated data, building an Entity may
-not make sense. In these situations you may want to disable entity hydration::
+not make sense. The process of converting the database results to entities is called
+hydration. If you wish to disable this process you can do this::
 
     $query = $articles->find();
-    $query->hydrate(false);
+    $query->hydrate(false); // Results as arrays intead of entities
+    $result = $query->toList(); // Execute the query and return the array
+    
+After executing those lines, your result should look similar to this::
 
-.. note::
-
-    When hydration is disabled results will be returned as basic arrays.
+    [
+        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+        ...
+    ]
 
 .. _advanced-query-conditions:
 
