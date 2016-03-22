@@ -167,13 +167,13 @@ To add this component to your application open your
     }
 
 There is not much to configure, as we used the conventions for the users table.
-We just set up the URLs that will be loaded after the login and logout actions is
-performed, in our case to ``/articles/`` and ``/`` respectively.
+We just set up the URLs that will be loaded after the login and logout actions
+is performed, in our case to ``/articles/`` and ``/`` respectively.
 
-What we did in the ``beforeFilter()`` function was to tell the AuthComponent to not
-require a login for all ``index()`` and ``view()`` actions, in every controller. We want
-our visitors to be able to read and list the entries without registering in the
-site.
+What we did in the ``beforeFilter()`` function was to tell the AuthComponent to
+not require a login for all ``index()`` and ``view()`` actions, in every
+controller. We want our visitors to be able to read and list the entries without
+registering in the site.
 
 Now, we need to be able to register new users, save their username and password,
 and more importantly, hash their password so it is not stored as plain text in
@@ -218,8 +218,8 @@ the users add function and implement the login and logout action::
     }
 
 Password hashing is not done yet, we need an Entity class for our User in order
-to handle its own specific logic. Create the **src/Model/Entity/User.php** entity file
-and add the following::
+to handle its own specific logic. Create the **src/Model/Entity/User.php**
+entity file and add the following::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
