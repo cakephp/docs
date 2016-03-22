@@ -90,7 +90,7 @@ Using Short Tag support::
 Alternative Control Structures
 ------------------------------
 
-Control structures, like ``if``, ``for``, ``foreach``, and ``while`` can be
+Control structures, like ``if``, ``for``, ``foreach``, ``switch``, and ``while`` can be
 written in a simplified format. Notice that there are no braces. Instead,
 the end brace for the ``foreach`` is replaced with ``endforeach``. Each of
 the control structures listed below has a similar closing syntax: ``endif``,
