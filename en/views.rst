@@ -66,15 +66,59 @@ View Templates
 ==============
 
 The view layer of CakePHP is how you speak to your users. Most of the time your
-views will be showing (X)HTML documents to browsers, but you might also need to
+views will be rendering HTML/XHTML documents to browsers, but you might also need to
 reply to a remote application via JSON, or output a CSV file for a user.
 
-By default CakePHP template files are written in plain PHP and have a default
-extension of **.ctp** (CakePHP Template). These files contain all the
-presentational logic needed to get the data it received from the
-controller in a format that is ready for the audience you're
-serving to. If you'd prefer using a templating language like
-`Twig <http://twig.sensiolabs.org>`__, a subclass of View will bridge your templating
+CakePHP template files have a default extension of **.ctp** (CakePHP Template)
+and utilize `alternative PHP syntax
+<http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+for control structures and output. These
+files contain the logic necessary to prepare the data received from the
+controller into a presentation format that is ready for your audience.
+
+Alternative Echos
+-----------------
+
+Echo, or print a variable in your template::
+
+  <?php echo $variable; ?>
+  
+Using Short Tag support::
+
+  <?= $variable ?>
+
+Alternative Control Structures
+------------------------------
+
+Control structures, like ``if``, ``for``, ``foreach``, and ``while`` can be
+written in a simplified format as well. The following is an example using
+``foreach``::
+
+  <ul>
+  <?php foreach ($todo as $item): ?>
+  <li><?=$item?></li>
+  <?php endforeach; ?>
+  </ul>
+
+Notice that there are no ``braces``. Instead, the end brace is replaced with
+``endforeach``. Each of the control structures listed above has a similar
+closing syntax: ``endif``, ``endfor``, ``endforeach``, and ``endwhile``.
+
+Also notice that instead of using a ``semicolon`` after each structure
+(except the last one), there is a ``colon``.
+
+Another example, using if/elseif/else. Notice the colons::
+
+  <?php if ($username === 'sally'): ?>
+     <h3>Hi Sally</h3>
+  <?php elseif ($username === 'joe'): ?>
+     <h3>Hi Joe</h3>
+  <?php else: ?>
+     <h3>Hi unknown user</h3>
+  <?php endif; ?>
+
+If you'd prefer using a templating language like
+`Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your templating
 language and CakePHP.
 
 Template files are stored in **src/Template/**, in a folder named after the
