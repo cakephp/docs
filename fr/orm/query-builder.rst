@@ -488,22 +488,28 @@ va automatiquement produire une instruction ``if .. then .. else``::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Désactiver l'Hydratation
-------------------------
+Récupérer des Tableaux plutôt que des Entities
+----------------------------------------------
 
-Alors que les ensembles de résultats en objet de l'ORM sont puissants,
-l'hydratation des entities n'est parfois pas nécessaire. Par exemple, quand
-vous accédez aux données agrégées, la construction d'une Entity peut ne pas
-être utile. Dans ces situations, vous pouvez désactiver l'hydratation d'une
-entity::
+Bien que les ensembles de résultats en objet de l'ORM soient puissants, créer
+des entities n'est parfois pas nécessaire. Par exemple, quand vous accédez aux
+données agrégées, la construction d'une Entity peut ne pas être utile. Le
+processus de conversion des résultats de la base de données en entities est
+appelé hydratation. Si vous souhaitez désactiver ce processus, vous pouvez
+faire ceci::
 
     $query = $articles->find();
-    $query->hydrate(false);
+    $query->hydrate(false); // Résultats en tableaux plutôt qu'en entities
+    $result = $query->toList(); // Exécute la requête et retourne le tableau
 
-.. note::
+Après avoir exécuté ces lignes, votre résultat devrait ressembler à quelque
+chose comme ceci::
 
-    Quand l'hydratation est désactivée, les résultats seront retournés en
-    tableaux basiques.
+    [
+        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+        ...
+    ]
 
 .. _advanced-query-conditions:
 
@@ -614,7 +620,7 @@ de conditions combinées avec ``AND``. Le code SQL résultant serait::
     author_id = 2
     AND published = 1
     AND spam != 1
-    AND view_count > 10)
+    AND view_count >= 10)
 
 Cependant, si nous souhaitons utiliser les deux conditions ``AND`` & ``OR``,
 nous pourrions faire ce qui suit::

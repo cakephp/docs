@@ -468,13 +468,13 @@ Getting Arrays Instead of Entities
 
 While ORMs and object result sets are powerful, creating entities is sometimes
 unnecessary. For example, when accessing aggregated data, building an Entity may
-not make sense. The process of converting the database results to entities is called
-hydration. If you wish to disable this process you can do this::
+not make sense. The process of converting the database results to entities is
+called hydration. If you wish to disable this process you can do this::
 
     $query = $articles->find();
     $query->hydrate(false); // Results as arrays intead of entities
     $result = $query->toList(); // Execute the query and return the array
-    
+
 After executing those lines, your result should look similar to this::
 
     [
@@ -1124,8 +1124,8 @@ queries::
         ->execute();
 
 .. note::
-    Inserting records with the query builder will not trigger events such as 
-    ``Model.afterSave``. Instead you should use the :doc:`ORM to save 
+    Inserting records with the query builder will not trigger events such as
+    ``Model.afterSave``. Instead you should use the :doc:`ORM to save
     data </orm/saving-data>`.
 
 .. _query-builder-updating-data:
@@ -1146,8 +1146,8 @@ Generally, it is easier to update data using entities and
 :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
 
 .. note::
-    Updating records with the query builder will not trigger events such as 
-    ``Model.afterSave``. Instead you should use the :doc:`ORM to save 
+    Updating records with the query builder will not trigger events such as
+    ``Model.afterSave``. Instead you should use the :doc:`ORM to save
     data </orm/saving-data>`.
 
 Deleting Data
