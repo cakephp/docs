@@ -610,7 +610,7 @@ Which would generate the SQL similar to::
     WHERE (
     (author_id = 2 OR author_id = 5)
     AND published = 1
-    AND view_count > 10)
+    AND view_count >= 10)
 
 The ``or_()`` and ``and_()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
