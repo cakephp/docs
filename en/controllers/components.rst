@@ -307,7 +307,7 @@ augment the request cycle.
 .. php:method:: beforeRender(Event $event)
 
     Is called after the controller executes the requested action's logic,
-    but before the controller's renders views and layout.
+    but before the controller renders views and layout.
 
 .. php:method:: shutdown(Event $event)
 
