@@ -101,6 +101,23 @@ And any other hash algorithmn that PHP's ``hash()`` function supports.
     Instead you should use the ``DefaultPasswordHasher`` class which uses bcrypt
     by default.
 
+Getting Secure Random Data
+==========================
+
+.. php:staticmethod:: randomBytes($length)
+
+Get ``$length`` number of bytes from a secure random source. This function draws
+data from one of the following sources:
+
+* PHP's ``random_bytes`` function.
+* ``openssl_random_pseudo_bytes`` from the SSL extension.
+
+If neither source is available a warning will be emitted and an unsafe value
+will be used for backwards compatibility reasons.
+
+.. versionadded:: 3.2.3
+    The randomBytes method was added in 3.2.3.
+
 .. meta::
     :title lang=en: Security
     :keywords lang=en: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security
