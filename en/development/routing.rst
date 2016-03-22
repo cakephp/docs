@@ -749,12 +749,30 @@ comments routes will look like::
 
 You can get the ``article_id`` in ``CommentsController`` by::
 
-    $this->request->params['article_id']
+    $this->request->param('article_id');
+
+By default resource routes map to the same prefix as the containing scope. If
+you have both nested and non-nested resource controllers you can use a different
+controller in each context by using prefixes::
+
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
+            $routes->resources('Comments', ['prefix' => 'articles']);
+        });
+    });
+
+The above would map the 'Comments' resource to the
+``App\Controller\Articles\CommentsController``. Having separate controllers lets
+you keep your controller logic simpler. The prefixes created this way are
+compatible with :ref:`prefix-routing`.
 
 .. note::
 
     While you can nest resources as deeply as you require, it is not recommended
     to nest more than 2 resources together.
+
+.. versionadded:: 3.3
+    The ``prefix`` option was added to ``resources()`` in 3.3.
 
 Limiting the Routes Created
 ---------------------------
