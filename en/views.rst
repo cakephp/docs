@@ -118,8 +118,7 @@ Another example, using if/elseif/else. Notice the colons::
 
 If you'd prefer using a templating language like
 `Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your templating
-language and CakePHP. The `TwigView plugin for CakePHP <https://github.com/WyriHaximus/TwigView>`_
-may be helpful.
+language and CakePHP.
 
 Template files are stored in **src/Template/**, in a folder named after the
 controller that uses the files, and named after the action it
