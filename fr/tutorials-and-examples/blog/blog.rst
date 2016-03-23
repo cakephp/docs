@@ -43,7 +43,7 @@ dans le répertoire [app_name]::
 
     php composer.phar create-project --prefer-dist cakephp/app [app_name]
 
-Dans le cas où vous avez déjà composer installé glabalement, vous devrez plutôt
+Dans le cas où vous avez déjà composer installé globalement, vous devrez plutôt
 taper::
 
     composer self-update && composer create-project --prefer-dist cakephp/app [app_name]
