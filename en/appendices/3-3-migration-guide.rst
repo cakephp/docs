@@ -17,6 +17,9 @@ Routing
 ORM
 ===
 
+- A new ``JsonType`` was added. This new type lets you use the native JSON types
+  available in MySQL and Postgres. In other database providers the ``json`` type
+  will map to ``TEXT`` columns.
 - ``Association::unique()`` was added. This method proxies the target table's
   ``unique()`` method, but ensures that association conditions are applied.
 - ``isUnique`` rules now apply association conditions.

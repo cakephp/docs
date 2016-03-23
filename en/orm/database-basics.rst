@@ -335,6 +335,9 @@ timestamp
     Maps to the TIMESTAMP type.
 time
     Maps to a TIME type in all databases.
+json
+    Maps to a JSON type if it's available, otherwise it maps to TEXT. The 'json'
+    type was added in 3.3.0
 
 These types are used in both the schema reflection features that CakePHP
 provides, and schema generation features CakePHP uses when using test fixtures.
