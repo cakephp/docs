@@ -34,9 +34,14 @@ CakePHP supports the following relational database servers:
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
+* Oracle (through community plugin)
 
 You will need the correct PDO extension installed for each of the above database
 drivers. Procedural APIs are not supported.
+
+The Oracle database is supported through the
+`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_ community
+plugin.
 
 .. _running-select-statements:
 
