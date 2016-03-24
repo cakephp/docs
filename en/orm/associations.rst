@@ -636,3 +636,9 @@ Other aspects of the query, such as selected columns, order, group by, having an
 other sub-statements, will not be applied to the root query. Associations that
 are *not* loaded through joins (hasMany/belongsToMany), do not have the above
 restrictions and can also use result formatters or map/reduce functions.
+
+Loading Associations
+--------------------
+
+Once you've defined your associations you can :ref:`eager load associations
+<eager-loading-associations>` when fetching results.
