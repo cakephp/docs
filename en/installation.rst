@@ -55,7 +55,7 @@ Before starting you should make sure that you have got an up to date PHP version
     php -v
     
 You should at least have got installed PHP 5.5.9 (cli) or higher.
-Your webserver's PHP must be 5.5.9 or higher, and should best be
+Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
 the same version your command line interface (cli) PHP version is of.
 
 CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool,
