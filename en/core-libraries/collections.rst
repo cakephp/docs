@@ -35,6 +35,16 @@ The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
 collection-like features into any ``Traversable`` object you have in your
 application as well.
 
+There is a convenience wrapper for instantiating a new :php:class:`Cake\Collection\Collection` object. This method
+can help simplify manipulations of a ``Traversable`` object or arrays, and it does not require a ``use`` to import
+the :php:class:`Cake\Collection\Collection` object::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $overOne = collection($items)->filter(function ($value) {
+        return $value > 1;
+    });
+
+
 List of Methods
 ===============
 
@@ -78,24 +88,6 @@ collection, but will allow you to modify any objects within the collection::
 
 The return of ``each()`` will be the collection object. Each will iterate the
 collection immediately applying the callback to each value in the collection.
-
-.. php:method:: map(callable $c)
-
-The ``map()`` method will create a new collection based on the output of the
-callback being applied to each object in the original collection::
-
-    $items = ['a' => 1, 'b' => 2, 'c' => 3];
-    $collection = new Collection($items);
-
-    $new = $collection->map(function ($value, $key) {
-        return $value * 2;
-    });
-
-    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
-    $result = $new->toArray();
-
-The ``map()`` method will create a new iterator which lazily creates
-the resulting items when iterated.
 
 .. php:method:: extract($matcher)
 
@@ -162,6 +154,30 @@ we'll be guaranteed to get all values even if there are duplicate keys.
 Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
 ``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
 
+.. php:method:: chunk($chunkSize)
+
+When dealing with big amounts of items in a collection, it may make sense to
+process the elements in batches instead of one by one. For splitting
+a collection into multiple arrays of a certain size, you can use the ``chunk()``
+function::
+
+    $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    $chunked = collection($items)->chunk(2);
+    $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
+
+The ``chunk`` function is particularly useful when doing batch processing, for
+example with a database result::
+
+    collection($articles)
+        ->map(function ($article) {
+            // Change a property in the article
+            $article->property = 'changed';
+        })
+        ->chunk(20)
+        ->each(function ($batch) {
+            myBulkSave($batch); // This function will be called for each batch
+        });
+
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
 Collections allow you to create a new collection made from keys and values in
@@ -207,6 +223,25 @@ instances by the ORM) you may want to group results by date::
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
     ]
+
+
+.. php:method:: map(callable $c)
+
+The ``map()`` method will create a new collection based on the output of the
+callback being applied to each object in the original collection::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
+
+    $new = $collection->map(function ($value, $key) {
+        return $value * 2;
+    });
+
+    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
+    $result = $new->toArray();
+
+The ``map()`` method will create a new iterator which lazily creates
+the resulting items when iterated.
 
 .. php:method:: stopWhen(callable $c)
 
@@ -266,32 +301,20 @@ to return as many elements for each item in the collection as you may need::
     $result = $new->toList();
 
 
-.. php:method:: chunk($chunkSize)
-
-When dealing with big amounts of items in a collection, it may make sense to
-process the elements in batches instead of one by one. For splitting
-a collection into multiple arrays of a certain size, you can use the ``chunk()``
-function::
-
-    $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    $chunked = collection($items)->chunk(2);
-    $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
-
-The ``chunk`` function is particularly useful when doing batch processing, for
-example with a database result::
-
-    collection($articles)
-        ->map(function ($article) {
-            // Change a property in the article
-            $article->property = 'changed';
-        })
-        ->chunk(20)
-        ->each(function ($batch) {
-            myBulkSave($batch); // This function will be called for each batch
-        });
 
 Filtering
 =========
+
+.. php:method:: every(callable $c)
+
+You can do truth tests with filter functions. To see if every element in
+a collection matches a test you can use ``every()``::
+
+    $collection = new Collection($people);
+    $allYoungPeople = $collection->every(function ($person) {
+        return $person->age < 21;
+    });
+
 
 .. php:method:: filter(callable $c)
 
@@ -306,44 +329,6 @@ collection of elements matching a criteria callback::
     $guys = $collection->filter(function ($person, $key) {
         return $person->gender === 'male';
     });
-
-.. php:method:: reject(callable $c)
-
-The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
-removing elements that match the filter function::
-
-    $collection = new Collection($people);
-    $ladies = $collection->reject(function ($person, $key) {
-        return $person->gender === 'male';
-    });
-
-.. php:method:: every(callable $c)
-
-You can do truth tests with filter functions. To see if every element in
-a collection matches a test you can use ``every()``::
-
-    $collection = new Collection($people);
-    $allYoungPeople = $collection->every(function ($person) {
-        return $person->age < 21;
-    });
-
-.. php:method:: some(callable $c)
-
-You can see if the collection contains at least one element matching a filter
-function using the ``some()`` method::
-
-    $collection = new Collection($people);
-    $hasYoungPeople = $collection->some(function ($person) {
-        return $person->age < 21;
-    });
-
-.. php:method:: match(array $conditions)
-
-If you need to extract a new collection containing only the elements that
-contain a given set of properties, you should use the ``match()`` method::
-
-    $collection = new Collection($comments);
-    $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
@@ -362,27 +347,53 @@ to provide multiple conditions to match on. In addition, the conditions can be
 for different paths, allowing you to express complex conditions to match
 against.
 
+.. php:method:: match(array $conditions)
+
+If you need to extract a new collection containing only the elements that
+contain a given set of properties, you should use the ``match()`` method::
+
+    $collection = new Collection($comments);
+    $commentsFromMark = $collection->match(['user.name' => 'Mark']);
+
+
+.. php:method:: reject(callable $c)
+
+The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
+removing elements that match the filter function::
+
+    $collection = new Collection($people);
+    $ladies = $collection->reject(function ($person, $key) {
+        return $person->gender === 'male';
+    });
+
+
+.. php:method:: some(callable $c)
+
+You can see if the collection contains at least one element matching a filter
+function using the ``some()`` method::
+
+    $collection = new Collection($people);
+    $hasYoungPeople = $collection->some(function ($person) {
+        return $person->age < 21;
+    });
+
+
 Aggregation
 ===========
 
-.. php:method:: reduce(callable $c)
+.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
-The counterpart of a ``map()`` operation is usually a ``reduce``. This
-function will help you build a single result out of all the elements in a
-collection::
+The same can be applied to the ``max()`` function, which will return a single
+element from the collection having the highest property value::
 
-    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
-        return $accumulated + $orderLine->price;
-    }, 0);
+    $collection = new Collection($people);
+    $oldest = $collection->max('age');
 
-In the above example, ``$totalPrice`` will be the sum of all single prices
-contained in the collection. Note the second argument for the ``reduce()``
-function takes the initial value for the reduce operation you are
-performing::
+    $personOldestChild = $collection->max(function ($person) {
+        return $person->child->age;
+    });
 
-    $allTags = $collection->reduce(function ($accumulated, $article) {
-        return array_merge($accumulated, $article->tags);
-    }, []);
+    $personWithOldestDad = $collection->min('dad.age');
 
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
@@ -405,19 +416,24 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: reduce(callable $c)
 
-The same can be applied to the ``max()`` function, which will return a single
-element from the collection having the highest property value::
+The counterpart of a ``map()`` operation is usually a ``reduce``. This
+function will help you build a single result out of all the elements in a
+collection::
 
-    $collection = new Collection($people);
-    $oldest = $collection->max('age');
+    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
+        return $accumulated + $orderLine->price;
+    }, 0);
 
-    $personOldestChild = $collection->max(function ($person) {
-        return $person->child->age;
-    });
+In the above example, ``$totalPrice`` will be the sum of all single prices
+contained in the collection. Note the second argument for the ``reduce()``
+function takes the initial value for the reduce operation you are
+performing::
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $allTags = $collection->reduce(function ($accumulated, $article) {
+        return array_merge($accumulated, $article->tags);
+    }, []);
 
 .. php:method:: sumOf(string|callable $callback)
 
@@ -435,6 +451,20 @@ elements::
 
 Grouping and Counting
 ---------------------
+
+.. php:method:: countBy($callback)
+
+If you only wish to know the number of occurrences per group, you can do so by
+using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
+should be already familiar to you::
+
+    $classResults = $students->countBy(function ($student) {
+        return $student->grade > 6 ? 'approved' : 'denied';
+    });
+
+    // Result could look like this when converted to array:
+    ['approved' => 70, 'denied' => 20]
+
 
 .. php:method:: groupBy($callback)
 
@@ -470,19 +500,6 @@ properties or your own callback function to generate the groups dynamically::
     $classResults = $students->groupBy(function ($student) {
         return $student->grade > 6 ? 'approved' : 'denied';
     });
-
-.. php:method:: countBy($callback)
-
-If you only wish to know the number of occurrences per group, you can do so by
-using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
-should be already familiar to you::
-
-    $classResults = $students->countBy(function ($student) {
-        return $student->grade > 6 ? 'approved' : 'denied';
-    });
-
-    // Result could look like this when converted to array:
-    ['approved' => 70, 'denied' => 20]
 
 .. php:method:: indexBy($callback)
 
@@ -616,53 +633,6 @@ By default, ``SORT_NUMERIC`` is used::
 Working with Tree Data
 ======================
 
-.. php:method:: nest($idPath, $parentPath)
-
-Not all data is meant to be represented in a linear way. Collections make it
-easier to construct and flatten hierarchical or nested structures. Creating
-a nested structure where children are grouped by a parent identifier property is
-easy with the ``nest()`` method.
-
-Two parameters are required for this function. The first one is the property
-representing the item identifier. The second parameter is the name of the
-property representing the identifier for the parent item::
-
-    $collection = new Collection([
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
-        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
-        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
-        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
-    ]);
-
-    $collection->nest('id', 'parent_id')->toArray();
-    // Returns
-    [
-        [
-            'id' => 1,
-            'parent_id' => null,
-            'name' => 'Birds',
-            'children' => [
-                ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
-                ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
-                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
-            ]
-        ],
-        [
-            'id' => 6,
-            'parent_id' => null,
-            'name' => 'Fish',
-            'children' => [
-                ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
-            ]
-        ]
-    ];
-
-Children elements are nested inside the ``children`` property inside each of the
-items in the collection. This type of data representation is helpful for
-rendering menus or traversing elements up to certain level in the tree.
-
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
 The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
@@ -722,8 +692,65 @@ or values::
         }
     );
 
+.. php:method:: nest($idPath, $parentPath)
+
+Not all data is meant to be represented in a linear way. Collections make it
+easier to construct and flatten hierarchical or nested structures. Creating
+a nested structure where children are grouped by a parent identifier property is
+easy with the ``nest()`` method.
+
+Two parameters are required for this function. The first one is the property
+representing the item identifier. The second parameter is the name of the
+property representing the identifier for the parent item::
+
+    $collection = new Collection([
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+    ]);
+
+    $collection->nest('id', 'parent_id')->toArray();
+    // Returns
+    [
+        [
+            'id' => 1,
+            'parent_id' => null,
+            'name' => 'Birds',
+            'children' => [
+                ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
+                ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
+                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
+            ]
+        ],
+        [
+            'id' => 6,
+            'parent_id' => null,
+            'name' => 'Fish',
+            'children' => [
+                ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
+            ]
+        ]
+    ];
+
+Children elements are nested inside the ``children`` property inside each of the
+items in the collection. This type of data representation is helpful for
+rendering menus or traversing elements up to certain level in the tree.
+
 Other Methods
 =============
+
+.. php:method:: contains($value)
+
+Collections allow you to quickly check if they contain one particular
+value: by using the ``contains()`` method::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
+    $hasThree = $collection->contains(3);
+
 
 .. php:method:: isEmpty()
 
@@ -736,15 +763,6 @@ Allows you to see if a collection contains any elements::
     $collection = new Collection([1]);
     // Returns false
     $collection->isEmpty();
-
-.. php:method:: contains($value)
-
-Collections allow you to quickly check if they contain one particular
-value: by using the ``contains()`` method::
-
-    $items = ['a' => 1, 'b' => 2, 'c' => 3];
-    $collection = new Collection($items);
-    $hasThree = $collection->contains(3);
 
 Comparisons are performed using the ``===`` operator. If you wish to do looser
 comparison types you can use the ``some()`` method.
@@ -763,6 +781,23 @@ position, use the ``shuffle``::
 Withdrawing Elements
 --------------------
 
+.. php:method:: first()
+
+One of the most common uses of ``take()`` is getting the first element in the
+collection. A shortcut method for achieving the same goal is using the
+``first()`` method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->first(); // Returns 5
+
+.. php:method:: last()
+
+Similarly, you can get the last element of a collection using the ``last()``
+method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->last(); // Returns 2
+
 .. php:method:: sample(int $size)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
@@ -780,6 +815,15 @@ some A/B tests to, you can use the ``sample()`` function::
 argument. If there are not enough elements in the collection to satisfy the
 sample, the full collection in a random order is returned.
 
+.. php:method:: skip(int $positions)
+
+While the second argument of ``take()`` can help you skip some elements before
+getting them from the collection, you can also use ``skip()`` for the same
+purpose as a way to take the rest of the elements after a certain position::
+
+    $collection = new Collection([1, 2, 3, 4]);
+    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
+
 .. php:method:: take(int $size, int $from)
 
 Whenever you want to take a slice of a collection use the ``take()`` function,
@@ -792,32 +836,6 @@ the first argument, starting from the position passed in the second argument::
     $nextTopFive = $collection->sortBy('age')->take(5, 4);
 
 Positions are zero-based, therefore the first position number is ``0``.
-
-.. php:method:: skip(int $positions)
-
-While the second argument of ``take()`` can help you skip some elements before
-getting them from the collection, you can also use ``skip()`` for the same
-purpose as a way to take the rest of the elements after a certain position::
-
-    $collection = new Collection([1, 2, 3, 4]);
-    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
-
-.. php:method:: first()
-
-One of the most common uses of ``take()`` is getting the first element in the
-collection. A shortcut method for achieving the same goal is using the
-``first()`` method::
-
-    $collection = new Collection([5, 4, 3, 2]);
-    $collection->first(); // Returns 5
-
-.. php:method:: last()
-
-Similarly, you can get the last element of a collection using the ``last()``
-method::
-
-    $collection = new Collection([5, 4, 3, 2]);
-    $collection->last(); // Returns 2
 
 Expanding Collections
 ---------------------
