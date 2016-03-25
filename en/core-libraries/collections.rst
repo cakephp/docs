@@ -35,6 +35,16 @@ The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
 collection-like features into any ``Traversable`` object you have in your
 application as well.
 
+There is a convenience wrapper for instantiating a new :php:class:`Cake\Collection\Collection` object. This method
+can help simplify manipulations of a ``Traversable`` object or arrays, and it does not require a ``use`` to import
+the :php:class:`Cake\Collection\Collection` object::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $overOne = collection($items)->filter(function ($value) {
+        return $value > 1;
+    });
+
+
 List of Methods
 ===============
 
@@ -371,24 +381,19 @@ function using the ``some()`` method::
 Aggregation
 ===========
 
-.. php:method:: reduce(callable $c)
+.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
-The counterpart of a ``map()`` operation is usually a ``reduce``. This
-function will help you build a single result out of all the elements in a
-collection::
+The same can be applied to the ``max()`` function, which will return a single
+element from the collection having the highest property value::
 
-    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
-        return $accumulated + $orderLine->price;
-    }, 0);
+    $collection = new Collection($people);
+    $oldest = $collection->max('age');
 
-In the above example, ``$totalPrice`` will be the sum of all single prices
-contained in the collection. Note the second argument for the ``reduce()``
-function takes the initial value for the reduce operation you are
-performing::
+    $personOldestChild = $collection->max(function ($person) {
+        return $person->child->age;
+    });
 
-    $allTags = $collection->reduce(function ($accumulated, $article) {
-        return array_merge($accumulated, $article->tags);
-    }, []);
+    $personWithOldestDad = $collection->min('dad.age');
 
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
@@ -411,19 +416,24 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: reduce(callable $c)
 
-The same can be applied to the ``max()`` function, which will return a single
-element from the collection having the highest property value::
+The counterpart of a ``map()`` operation is usually a ``reduce``. This
+function will help you build a single result out of all the elements in a
+collection::
 
-    $collection = new Collection($people);
-    $oldest = $collection->max('age');
+    $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
+        return $accumulated + $orderLine->price;
+    }, 0);
 
-    $personOldestChild = $collection->max(function ($person) {
-        return $person->child->age;
-    });
+In the above example, ``$totalPrice`` will be the sum of all single prices
+contained in the collection. Note the second argument for the ``reduce()``
+function takes the initial value for the reduce operation you are
+performing::
 
-    $personWithOldestDad = $collection->min('dad.age');
+    $allTags = $collection->reduce(function ($accumulated, $article) {
+        return array_merge($accumulated, $article->tags);
+    }, []);
 
 .. php:method:: sumOf(string|callable $callback)
 
@@ -441,6 +451,20 @@ elements::
 
 Grouping and Counting
 ---------------------
+
+.. php:method:: countBy($callback)
+
+If you only wish to know the number of occurrences per group, you can do so by
+using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
+should be already familiar to you::
+
+    $classResults = $students->countBy(function ($student) {
+        return $student->grade > 6 ? 'approved' : 'denied';
+    });
+
+    // Result could look like this when converted to array:
+    ['approved' => 70, 'denied' => 20]
+
 
 .. php:method:: groupBy($callback)
 
@@ -476,19 +500,6 @@ properties or your own callback function to generate the groups dynamically::
     $classResults = $students->groupBy(function ($student) {
         return $student->grade > 6 ? 'approved' : 'denied';
     });
-
-.. php:method:: countBy($callback)
-
-If you only wish to know the number of occurrences per group, you can do so by
-using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
-should be already familiar to you::
-
-    $classResults = $students->countBy(function ($student) {
-        return $student->grade > 6 ? 'approved' : 'denied';
-    });
-
-    // Result could look like this when converted to array:
-    ['approved' => 70, 'denied' => 20]
 
 .. php:method:: indexBy($callback)
 
@@ -622,53 +633,6 @@ By default, ``SORT_NUMERIC`` is used::
 Working with Tree Data
 ======================
 
-.. php:method:: nest($idPath, $parentPath)
-
-Not all data is meant to be represented in a linear way. Collections make it
-easier to construct and flatten hierarchical or nested structures. Creating
-a nested structure where children are grouped by a parent identifier property is
-easy with the ``nest()`` method.
-
-Two parameters are required for this function. The first one is the property
-representing the item identifier. The second parameter is the name of the
-property representing the identifier for the parent item::
-
-    $collection = new Collection([
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
-        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
-        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
-        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
-    ]);
-
-    $collection->nest('id', 'parent_id')->toArray();
-    // Returns
-    [
-        [
-            'id' => 1,
-            'parent_id' => null,
-            'name' => 'Birds',
-            'children' => [
-                ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
-                ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
-                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
-            ]
-        ],
-        [
-            'id' => 6,
-            'parent_id' => null,
-            'name' => 'Fish',
-            'children' => [
-                ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
-            ]
-        ]
-    ];
-
-Children elements are nested inside the ``children`` property inside each of the
-items in the collection. This type of data representation is helpful for
-rendering menus or traversing elements up to certain level in the tree.
-
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
 The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
@@ -728,8 +692,65 @@ or values::
         }
     );
 
+.. php:method:: nest($idPath, $parentPath)
+
+Not all data is meant to be represented in a linear way. Collections make it
+easier to construct and flatten hierarchical or nested structures. Creating
+a nested structure where children are grouped by a parent identifier property is
+easy with the ``nest()`` method.
+
+Two parameters are required for this function. The first one is the property
+representing the item identifier. The second parameter is the name of the
+property representing the identifier for the parent item::
+
+    $collection = new Collection([
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+    ]);
+
+    $collection->nest('id', 'parent_id')->toArray();
+    // Returns
+    [
+        [
+            'id' => 1,
+            'parent_id' => null,
+            'name' => 'Birds',
+            'children' => [
+                ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
+                ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
+                ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
+            ]
+        ],
+        [
+            'id' => 6,
+            'parent_id' => null,
+            'name' => 'Fish',
+            'children' => [
+                ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
+            ]
+        ]
+    ];
+
+Children elements are nested inside the ``children`` property inside each of the
+items in the collection. This type of data representation is helpful for
+rendering menus or traversing elements up to certain level in the tree.
+
 Other Methods
 =============
+
+.. php:method:: contains($value)
+
+Collections allow you to quickly check if they contain one particular
+value: by using the ``contains()`` method::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
+    $hasThree = $collection->contains(3);
+
 
 .. php:method:: isEmpty()
 
@@ -742,15 +763,6 @@ Allows you to see if a collection contains any elements::
     $collection = new Collection([1]);
     // Returns false
     $collection->isEmpty();
-
-.. php:method:: contains($value)
-
-Collections allow you to quickly check if they contain one particular
-value: by using the ``contains()`` method::
-
-    $items = ['a' => 1, 'b' => 2, 'c' => 3];
-    $collection = new Collection($items);
-    $hasThree = $collection->contains(3);
 
 Comparisons are performed using the ``===`` operator. If you wish to do looser
 comparison types you can use the ``some()`` method.
@@ -769,6 +781,23 @@ position, use the ``shuffle``::
 Withdrawing Elements
 --------------------
 
+.. php:method:: first()
+
+One of the most common uses of ``take()`` is getting the first element in the
+collection. A shortcut method for achieving the same goal is using the
+``first()`` method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->first(); // Returns 5
+
+.. php:method:: last()
+
+Similarly, you can get the last element of a collection using the ``last()``
+method::
+
+    $collection = new Collection([5, 4, 3, 2]);
+    $collection->last(); // Returns 2
+
 .. php:method:: sample(int $size)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
@@ -786,6 +815,15 @@ some A/B tests to, you can use the ``sample()`` function::
 argument. If there are not enough elements in the collection to satisfy the
 sample, the full collection in a random order is returned.
 
+.. php:method:: skip(int $positions)
+
+While the second argument of ``take()`` can help you skip some elements before
+getting them from the collection, you can also use ``skip()`` for the same
+purpose as a way to take the rest of the elements after a certain position::
+
+    $collection = new Collection([1, 2, 3, 4]);
+    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
+
 .. php:method:: take(int $size, int $from)
 
 Whenever you want to take a slice of a collection use the ``take()`` function,
@@ -798,32 +836,6 @@ the first argument, starting from the position passed in the second argument::
     $nextTopFive = $collection->sortBy('age')->take(5, 4);
 
 Positions are zero-based, therefore the first position number is ``0``.
-
-.. php:method:: skip(int $positions)
-
-While the second argument of ``take()`` can help you skip some elements before
-getting them from the collection, you can also use ``skip()`` for the same
-purpose as a way to take the rest of the elements after a certain position::
-
-    $collection = new Collection([1, 2, 3, 4]);
-    $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
-
-.. php:method:: first()
-
-One of the most common uses of ``take()`` is getting the first element in the
-collection. A shortcut method for achieving the same goal is using the
-``first()`` method::
-
-    $collection = new Collection([5, 4, 3, 2]);
-    $collection->first(); // Returns 5
-
-.. php:method:: last()
-
-Similarly, you can get the last element of a collection using the ``last()``
-method::
-
-    $collection = new Collection([5, 4, 3, 2]);
-    $collection->last(); // Returns 2
 
 Expanding Collections
 ---------------------
