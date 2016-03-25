@@ -79,24 +79,6 @@ collection, but will allow you to modify any objects within the collection::
 The return of ``each()`` will be the collection object. Each will iterate the
 collection immediately applying the callback to each value in the collection.
 
-.. php:method:: map(callable $c)
-
-The ``map()`` method will create a new collection based on the output of the
-callback being applied to each object in the original collection::
-
-    $items = ['a' => 1, 'b' => 2, 'c' => 3];
-    $collection = new Collection($items);
-
-    $new = $collection->map(function ($value, $key) {
-        return $value * 2;
-    });
-
-    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
-    $result = $new->toArray();
-
-The ``map()`` method will create a new iterator which lazily creates
-the resulting items when iterated.
-
 .. php:method:: extract($matcher)
 
 One of the most common uses for a ``map()`` function is to extract a single
@@ -162,6 +144,30 @@ we'll be guaranteed to get all values even if there are duplicate keys.
 Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
 ``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
 
+.. php:method:: chunk($chunkSize)
+
+When dealing with big amounts of items in a collection, it may make sense to
+process the elements in batches instead of one by one. For splitting
+a collection into multiple arrays of a certain size, you can use the ``chunk()``
+function::
+
+    $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    $chunked = collection($items)->chunk(2);
+    $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
+
+The ``chunk`` function is particularly useful when doing batch processing, for
+example with a database result::
+
+    collection($articles)
+        ->map(function ($article) {
+            // Change a property in the article
+            $article->property = 'changed';
+        })
+        ->chunk(20)
+        ->each(function ($batch) {
+            myBulkSave($batch); // This function will be called for each batch
+        });
+
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
 Collections allow you to create a new collection made from keys and values in
@@ -207,6 +213,25 @@ instances by the ORM) you may want to group results by date::
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
     ]
+
+
+.. php:method:: map(callable $c)
+
+The ``map()`` method will create a new collection based on the output of the
+callback being applied to each object in the original collection::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+    $collection = new Collection($items);
+
+    $new = $collection->map(function ($value, $key) {
+        return $value * 2;
+    });
+
+    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
+    $result = $new->toArray();
+
+The ``map()`` method will create a new iterator which lazily creates
+the resulting items when iterated.
 
 .. php:method:: stopWhen(callable $c)
 
@@ -266,32 +291,20 @@ to return as many elements for each item in the collection as you may need::
     $result = $new->toList();
 
 
-.. php:method:: chunk($chunkSize)
-
-When dealing with big amounts of items in a collection, it may make sense to
-process the elements in batches instead of one by one. For splitting
-a collection into multiple arrays of a certain size, you can use the ``chunk()``
-function::
-
-    $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    $chunked = collection($items)->chunk(2);
-    $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
-
-The ``chunk`` function is particularly useful when doing batch processing, for
-example with a database result::
-
-    collection($articles)
-        ->map(function ($article) {
-            // Change a property in the article
-            $article->property = 'changed';
-        })
-        ->chunk(20)
-        ->each(function ($batch) {
-            myBulkSave($batch); // This function will be called for each batch
-        });
 
 Filtering
 =========
+
+.. php:method:: every(callable $c)
+
+You can do truth tests with filter functions. To see if every element in
+a collection matches a test you can use ``every()``::
+
+    $collection = new Collection($people);
+    $allYoungPeople = $collection->every(function ($person) {
+        return $person->age < 21;
+    });
+
 
 .. php:method:: filter(callable $c)
 
@@ -306,44 +319,6 @@ collection of elements matching a criteria callback::
     $guys = $collection->filter(function ($person, $key) {
         return $person->gender === 'male';
     });
-
-.. php:method:: reject(callable $c)
-
-The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
-removing elements that match the filter function::
-
-    $collection = new Collection($people);
-    $ladies = $collection->reject(function ($person, $key) {
-        return $person->gender === 'male';
-    });
-
-.. php:method:: every(callable $c)
-
-You can do truth tests with filter functions. To see if every element in
-a collection matches a test you can use ``every()``::
-
-    $collection = new Collection($people);
-    $allYoungPeople = $collection->every(function ($person) {
-        return $person->age < 21;
-    });
-
-.. php:method:: some(callable $c)
-
-You can see if the collection contains at least one element matching a filter
-function using the ``some()`` method::
-
-    $collection = new Collection($people);
-    $hasYoungPeople = $collection->some(function ($person) {
-        return $person->age < 21;
-    });
-
-.. php:method:: match(array $conditions)
-
-If you need to extract a new collection containing only the elements that
-contain a given set of properties, you should use the ``match()`` method::
-
-    $collection = new Collection($comments);
-    $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
@@ -361,6 +336,37 @@ As you can see from the above, both ``match()`` and ``firstMatch()`` allow you
 to provide multiple conditions to match on. In addition, the conditions can be
 for different paths, allowing you to express complex conditions to match
 against.
+
+.. php:method:: match(array $conditions)
+
+If you need to extract a new collection containing only the elements that
+contain a given set of properties, you should use the ``match()`` method::
+
+    $collection = new Collection($comments);
+    $commentsFromMark = $collection->match(['user.name' => 'Mark']);
+
+
+.. php:method:: reject(callable $c)
+
+The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
+removing elements that match the filter function::
+
+    $collection = new Collection($people);
+    $ladies = $collection->reject(function ($person, $key) {
+        return $person->gender === 'male';
+    });
+
+
+.. php:method:: some(callable $c)
+
+You can see if the collection contains at least one element matching a filter
+function using the ``some()`` method::
+
+    $collection = new Collection($people);
+    $hasYoungPeople = $collection->some(function ($person) {
+        return $person->age < 21;
+    });
+
 
 Aggregation
 ===========
