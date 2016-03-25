@@ -98,8 +98,8 @@ such as debugging and translating content.
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
     .. versionadded:: 3.2.6
-        Calling this method will return passed ``$var``, so that you can place it in return
-        calls, for instance.
+        Calling this method will return passed ``$var``, so that you can, for instance,
+        place it in return statements.
 
     If the core ``$debug`` variable is ``true``, ``$var`` is printed out.
     If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
@@ -142,8 +142,8 @@ such as debugging and translating content.
 .. php:function:: pr(mixed $var)
 
     .. versionadded:: 3.2.6
-        Calling this method will return passed ``$var``, so that you can place it in return
-        calls, for instance.
+        Calling this method will return passed ``$var``, so that you can, for instance,
+        place it in return statements.
 
     Convenience wrapper for ``print_r()``, with the addition of
     wrapping ``<pre>`` tags around the output.
@@ -151,8 +151,8 @@ such as debugging and translating content.
 .. php:function:: pj(mixed $var)
 
     .. versionadded:: 3.2.6
-        Calling this method will return passed ``$var``, so that you can place it in return
-        calls, for instance.
+        Calling this method will return passed ``$var``, so that you can, for instance,
+        place it in return statements.
 
     JSON pretty print convenience function, with the addition of
     wrapping ``<pre>`` tags around the output.
