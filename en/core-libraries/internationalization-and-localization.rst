@@ -229,14 +229,13 @@ understands the same options as ``date``.
 
 .. note::
 
-    If you are using PHP 5.5+, you can use also named placeholders like {name}
-    {age}, etc. And pass the variables in an array having the corresponding key
-    names like ``['name' => 'Sara', 'age' => 12]``. This feature is not available
-    in PHP 5.4.
+    Named placeholders are supported in PHP 5.5+ and are formatted as ``{name}``.
+	When using named placeholders pass the variables in an array using key/value
+	pairs, for example ``['name' => 'Sara', 'age' => 12]``.
 
-    If you are planning on making use of the internationalization features it is
-    a good idea to ensure you are running PHP5.5, and have a version of ICU
-    above 48.x.y. Older versions of PHP and ICU have a number of problems.
+    It is recommended to use PHP 5.5 or higher when making use of internationalization 
+	features in CakePHP. The ``php5-intl`` extension must be installed and
+	the ICU version should be above 48.x.y (to check the ICU version ``Intl::getIcuVersion()``).
 
 Plurals
 -------
