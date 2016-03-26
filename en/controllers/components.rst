@@ -6,7 +6,8 @@ CakePHP comes with a fantastic set of core components you can use to aid in
 various common tasks. You can also create your own components. If you find
 yourself wanting to copy and paste things between controllers, you should
 consider creating your own component to contain the functionality. Creating
-components keeps controller code clean and allows you to reuse code between projects.
+components keeps controller code clean and allows you to reuse code between
+different controllers.
 
 For more information on the components included in CakePHP, check out the
 chapter for each component:
