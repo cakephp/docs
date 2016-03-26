@@ -173,24 +173,6 @@ As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
 ``implementedEvents()`` to attach the correct callbacks.
 
-In intances where an event is not dispatched, for example from within a third party plugin, you can still listen to the default fired events. Lets take an example of a plugin ie. `ThirdPartyPlugin` which handles Feedbacks. No events have been implemented, but you would like to know when a Feedback has been saved and ultimately act on it. You can always listen to all `Model.afterSave` events fired by the model. However, you can take a more direct approach and only listen to the event you really need::
-
-    // You can create the following before the save operation, ie. config/bootstrap.php
-    use Cake\ORM\TableRegistry;
-    use Cake\Mailer\Email; // If sending emails
-
-    TableRegistry::get('ThirdPartyPlugin.Feedbacks')->eventManager()->on('Model.afterSave', function($event, $entity)
-    {
-        // For example we can send an email to the admin
-        $email = new Email('default');
-        $email->from('info@yoursite.com' => 'Your Site')
-            ->to('admin@yoursite.com')
-            ->subject('New Feedback - Your Site')
-            ->send('Body of message');
-    }
-
-You can take a similiar approach to specifically listen to any events that are fired by the Model, Controller or View.
-
 Registering Anonymous Listeners
 -------------------------------
 
@@ -219,10 +201,35 @@ supports::
         $eventManager->on('Model.Order.afterPlace', $callable);
     }
 
-.. versionadded:: 3.2.3
+When working with plugins that don't trigger specific events, you can leverage
+event listeners on the default events. Lets take an example  'UserFeedback'
+plugin which handles feedback forms from users. From your application you would
+like to know when a Feedback record has been saved and ultimately act on it. You
+can could listen to the global ``Model.afterSave`` event.  However, you can take
+a more direct approach and only listen to the event you really need::
 
-    The ``matchingListeners`` method returns an array of events matching
-    a search pattern.
+    // You can create the following before the
+    // save operation, ie. config/bootstrap.php
+    use Cake\ORM\TableRegistry;
+    // If sending emails
+    use Cake\Mailer\Email;
+
+    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+        ->eventManager()
+        ->on('Model.afterSave', function($event, $entity)
+        {
+            // For example we can send an email to the admin
+            $email = new Email('default');
+            $email->from('info@yoursite.com' => 'Your Site')
+                ->to('admin@yoursite.com')
+                ->subject('New Feedback - Your Site')
+                ->send('Body of message');
+        });
+
+You can use this same approach to bind listener objects.
+
+Interacting with Existing Listeners
+-----------------------------------
 
 Assuming several event listeners have been registered the presence or absence
 of a particular event pattern can be used as the basis of some action.::
@@ -245,6 +252,11 @@ of a particular event pattern can be used as the basis of some action.::
 .. note::
 
     The pattern passed to the ``matchingListeners`` method is case sensitive.
+
+.. versionadded:: 3.2.3
+
+    The ``matchingListeners`` method returns an array of events matching
+    a search pattern.
 
 .. _event-priorities:
 
