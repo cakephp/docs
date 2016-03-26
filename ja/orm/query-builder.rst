@@ -591,7 +591,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
     WHERE (
     (author_id = 2 OR author_id = 5)
     AND published = 1
-    AND view_count > 10)
+    AND view_count >= 10)
 
 ``or_()`` と ``and_()`` メソッドはまた、それらの引数に関数も渡せるようになっています。
 これはメソッドをチェーンさせる際に可読性を上げられることが良く有ります。 ::

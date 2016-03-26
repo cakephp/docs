@@ -188,6 +188,10 @@ This approach replaces ``find('first')`` in previous versions of CakePHP. You
 may also want to use the ``get()`` method if you are loading entities by primary
 key.
 
+.. note::
+
+    The ``first()`` method will return ``null`` if no results are found.
+
 Getting a Count of Results
 ==========================
 
