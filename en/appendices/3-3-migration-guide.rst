@@ -4,6 +4,16 @@
 CakePHP 3.3 is an API compatible upgrade from 3.2. This page outlines the
 changes and improvements made in 3.3.
 
+Deprecations
+============
+
+* ``Router::mapResources()`` is deprecated. Use routing scopes and
+  ``$routes->resources()`` instead.
+* ``Router::redirect()`` is deprecated. Use routing scopes and
+  ``$routes->redirect()`` instead.
+* ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
+  compatibility will be removed in 4.0.0
+
 Routing
 =======
 
