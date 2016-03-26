@@ -173,6 +173,24 @@ As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
 ``implementedEvents()`` to attach the correct callbacks.
 
+In intances where an event is not dispatched, for example from within a third party plugin, you can still listen to the default fired events. Lets take an example of a plugin ie. `ThirdPartyPlugin` which handles Feedbacks. No events have been implemented, but you would like to know when a Feedback has been saved and ultimately act on it. You can always listen to all `Model.afterSave` events fired by the model. However, you can take a more direct approach and only listen to the event you really need::
+
+    // You can create the following before the save operation, ie. config/bootstrap.php
+    use Cake\ORM\TableRegistry;
+    use Cake\Mailer\Email; // If sending emails
+
+    TableRegistry::get('ThirdPartyPlugin.Feedbacks')->eventManager()->on('Model.afterSave', function($event, $entity)
+    {
+        // For example we can send an email to the admin
+        $email = new Email('default');
+        $email->from('info@yoursite.com' => 'Your Site')
+            ->to('admin@yoursite.com')
+            ->subject('New Feedback - Your Site')
+            ->send('Body of message');
+    }
+
+You can take a similiar approach to specifically listen to any events that are fired by the Model, Controller or View.
+
 Registering Anonymous Listeners
 -------------------------------
 
