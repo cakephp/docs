@@ -24,10 +24,11 @@ default.
 Output from this function is only shown if the core ``$debug`` variable
 has been set to ``true``.
 
-.. versionadded:: 3.2.6
+.. versionadded:: 3.3.0
     Calling this method will return passed ``$var``, so that you can, for instance,
-    place it in return statements, for example: ``return debug($data)`` will return
-    ``$data`` and if debug is set to true return the debug info on ``$data``.
+    place it in return statements, for example::
+    
+    return debug($data); // will return $data in any case.
 
 Also see ``pr()`` and ``pj()``.
 
