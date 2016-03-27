@@ -97,7 +97,7 @@ such as debugging and translating content.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    .. versionadded:: 3.2.6
+    .. versionadded:: 3.3.0
         Calling this method will return passed ``$var``, so that you can, for instance,
         place it in return statements.
 
@@ -141,7 +141,7 @@ such as debugging and translating content.
 
 .. php:function:: pr(mixed $var)
 
-    .. versionadded:: 3.2.6
+    .. versionadded:: 3.3.0
         Calling this method will return passed ``$var``, so that you can, for instance,
         place it in return statements.
 
@@ -150,7 +150,7 @@ such as debugging and translating content.
 
 .. php:function:: pj(mixed $var)
 
-    .. versionadded:: 3.2.6
+    .. versionadded:: 3.3.0
         Calling this method will return passed ``$var``, so that you can, for instance,
         place it in return statements.
 
