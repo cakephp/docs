@@ -97,12 +97,36 @@ such as debugging and translating content.
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
+    .. versionadded:: 3.3.0
+        Calling this method will return passed ``$var``, so that you can, for instance,
+        place it in return statements.
+
     If the core ``$debug`` variable is ``true``, ``$var`` is printed out.
     If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
     browser-friendly.
     If ``$showFrom`` is not set to ``false``, the debug output will start with the line from
     which it was called.
     Also see :doc:`/development/debugging`
+
+.. php:function:: pr(mixed $var)
+
+    .. versionadded:: 3.3.0
+        Calling this method will return passed ``$var``, so that you can, for instance,
+        place it in return statements.
+
+    Convenience wrapper for ``print_r()``, with the addition of
+    wrapping ``<pre>`` tags around the output.
+
+.. php:function:: pj(mixed $var)
+
+    .. versionadded:: 3.3.0
+        Calling this method will return passed ``$var``, so that you can, for instance,
+        place it in return statements.
+
+    JSON pretty print convenience function, with the addition of
+    wrapping ``<pre>`` tags around the output.
+
+    It is meant for debugging the JSON representation of objects and arrays.
 
 .. php:function:: env(string $key, string $default = null)
 
@@ -134,18 +158,6 @@ such as debugging and translating content.
     Split the namespace from the classname.
 
     Commonly used like ``list($namespace, $className) = namespaceSplit('Cake\Core\App');``
-
-.. php:function:: pr(mixed $var)
-
-    Convenience wrapper for ``print_r()``, with the addition of
-    wrapping ``<pre>`` tags around the output.
-
-.. php:function:: pj(mixed $var)
-
-    JSON pretty print convenience function, with the addition of
-    wrapping ``<pre>`` tags around the output.
-
-    It is meant for debugging the JSON representation of objects and arrays.
 
 Core Definition Constants
 =========================
