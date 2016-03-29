@@ -29,7 +29,7 @@ has been set to ``true``.
     Calling this method will return passed ``$var``, so that you can, for instance,
     place it in return statements, for example::
     
-    return debug($data); // will return $data in any case.
+        return debug($data); // will return $data in any case.
 
 Also see ``pr()`` and ``pj()``.
 
