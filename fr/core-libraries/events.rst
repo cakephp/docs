@@ -220,10 +220,35 @@ que PHP supporte::
         $eventManager->on('Model.Order.afterPlace', $callable);
     }
 
-.. versionadded:: 3.2.3
+When working with plugins that don't trigger specific events, you can leverage
+event listeners on the default events. Lets take an example  'UserFeedback'
+plugin which handles feedback forms from users. From your application you would
+like to know when a Feedback record has been saved and ultimately act on it. You
+can could listen to the global ``Model.afterSave`` event.  However, you can take
+a more direct approach and only listen to the event you really need::
 
-    La méthode ``matchingListeners`` retourne un tableau d'events correspondant
-    à un modèle de recherche.
+    // You can create the following before the
+    // save operation, ie. config/bootstrap.php
+    use Cake\ORM\TableRegistry;
+    // If sending emails
+    use Cake\Mailer\Email;
+
+    TableRegistry::get('ThirdPartyPlugin.Feedbacks')
+        ->eventManager()
+        ->on('Model.afterSave', function($event, $entity)
+        {
+            // For example we can send an email to the admin
+            $email = new Email('default');
+            $email->from('info@yoursite.com' => 'Your Site')
+                ->to('admin@yoursite.com')
+                ->subject('New Feedback - Your Site')
+                ->send('Body of message');
+        });
+
+You can use this same approach to bind listener objects.
+
+Interacting with Existing Listeners
+-----------------------------------
 
 En supposant que plusieurs écouteurs d'évènements ont été enregistrés, la
 présence ou l'absence d'un modèle d'évènements particulier peut être utilisé
@@ -248,6 +273,11 @@ comme base de certaines actions::
 
     Le modèle passé à la méthode ``matchingListeners`` n'est pas sensible à la
     casse.
+
+.. versionadded:: 3.2.3
+
+    The ``matchingListeners`` method returns an array of events matching
+    a search pattern.
 
 .. _event-priorities:
 

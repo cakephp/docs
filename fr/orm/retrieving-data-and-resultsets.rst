@@ -204,6 +204,10 @@ Cette approche remplace le ``find('first')`` des versions précédentes de
 CakePHP. Vous pouvez aussi utiliser la méthode ``get()`` si vous chargez les
 entities avec leur clé primaire.
 
+.. note::
+
+    La méthode ``first()`` va retourner ``null`` si aucun résultat n'est trouvé.
+
 Récupérer un Nombre de Résultats
 ================================
 

@@ -48,12 +48,13 @@ utilize one. CakePHP supports a variety of database storage engines:
 Installing CakePHP
 ===================
 
-Before starting you should make sure that you have got an up to date PHP version:
+Before starting you should make sure that you have got an up to date PHP
+version:
 
 .. code-block:: bash
 
     php -v
-    
+
 You should at least have got installed PHP 5.5.9 (cli) or higher.
 Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
 the same version your command line interface (cli) PHP version is of.
@@ -61,9 +62,8 @@ the same version your command line interface (cli) PHP version is of.
 CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool,
 as the officially supported method for installation.
 
-First, you'll need to download and install Composer if you haven't
-done so already. If you have cURL installed, it's as easy as running the
-following:
+First, you'll need to download and install Composer if you haven't done so
+already. If you have cURL installed, it's as easy as running the following:
 
 .. code-block:: bash
 

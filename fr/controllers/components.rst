@@ -8,7 +8,7 @@ dans de nombreuses tâches communes. Vous pouvez également créer votre propre
 component. Si vous vous surprenez à vouloir copier et coller des choses entre
 vos controllers, alors vous devriez envisager de regrouper celle-ci dans un
 Component. Créer des components permet de garder un code de controller propre
-et vous permet de réutiliser du code entre différents projets.
+et vous permet de réutiliser du code entre différents controllers.
 
 Pour plus d'informations sur les components intégrés dans CakePHP, consultez
 le chapitre de chaque component:

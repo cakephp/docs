@@ -40,8 +40,8 @@ You will need the correct PDO extension installed for each of the above database
 drivers. Procedural APIs are not supported.
 
 The Oracle database is supported through the
-`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_ community
-plugin.
+`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_
+community plugin.
 
 .. _running-select-statements:
 
@@ -436,7 +436,7 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
             $schema->columnType('widget_prefs', 'json');
             return $schema;
         }
-    
+
     }
 
 .. _immutable-datetime-mapping:
