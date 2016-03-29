@@ -18,6 +18,11 @@ Request & Response Objects
 Request
 =======
 
+.. _cors-headers:
+
+Setting Cross Origin Request Headers (CORS)
+===========================================
+
 .. meta::
     :title lang=ja: Request and Response objects
     :keywords lang=ja: request controller,request parameters,array indices,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp
