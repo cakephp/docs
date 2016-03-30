@@ -24,6 +24,13 @@ Routing
   when defining nested resources as you can create specialized controllers for
   nested resources.
 
+Request
+=======
+
+- ``Request::is()`` and ``Request::addDetector()`` now supports additional
+  arguments in detectors. This allows detector callables to operate on
+  additional parameters.
+
 ORM
 ===
 
@@ -33,3 +40,9 @@ ORM
 - ``Association::unique()`` was added. This method proxies the target table's
   ``unique()`` method, but ensures that association conditions are applied.
 - ``isUnique`` rules now apply association conditions.
+
+Debugging Functions
+===================
+
+- The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
+  dumped. This makes them easier to use when values are being returned.

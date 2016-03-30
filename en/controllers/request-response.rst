@@ -178,7 +178,7 @@ a subdirectory. The various properties you can use are::
 Checking Request Conditions
 ---------------------------
 
-.. php:method:: is($type)
+.. php:method:: is($type, $args...)
 
 The request object provides an easy way to inspect certain conditions in a given
 request. By using the ``is()`` method you can check a number of common
@@ -232,6 +232,14 @@ Some examples would be::
         }
     );
 
+    // Add a detector that uses additional arguments. As of 3.3.0
+    $this->request->addDetector(
+        'controller',
+        function ($request, $name) {
+            return $request->param('controller') === $name;
+        }
+    );
+
 ``Request`` also includes methods like
 :php:meth:`Cake\\Network\\Request::domain()`,
 :php:meth:`Cake\\Network\\Request::subdomains()` and
@@ -257,6 +265,9 @@ There are several built-in detectors that you can use:
   accept 'application/json' mimetype.
 * ``is('xml')`` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
+
+.. versionadded:: 3.3.0
+    Detectors can take additional parameters as of 3.3.0.
 
 
 Session Data
