@@ -1243,7 +1243,7 @@ l'on tentera de récupérer le premier résultat.
 Ceci vous permet de continuer à chainer les méthodes et les filtres
 à la requête même après avoir ajouté une routine map-reduce::
 
-   $query = $articles->find()
+    $query = $articles->find()
         ->where(['published' => true])
         ->mapReduce($mapper, $reducer);
 
