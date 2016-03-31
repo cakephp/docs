@@ -332,7 +332,10 @@ CakePHP では、コントローラのアクションをスリムに保ち、ア
         return $this->find()
             ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
-                return $q->where(['Tags.title IN' => $options['tags']]);
+               if (empty($options['tags'])) {
+                   return $q->where(['Tags.title IS' => null]);
+               }
+               return $q->where(['Tags.title IN' => $options['tags']]);
             });
     }
 
