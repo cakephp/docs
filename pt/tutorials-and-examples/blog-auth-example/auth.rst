@@ -54,8 +54,7 @@ validações de dados dos usuários::
         );
     }
 
-Vamos criar também nosso UsersController, o conteúdo a seguir corresponde à classe UsersController
-básica `cozida` usando a ferramenta de geração de códigos presente no CakePHP::
+Vamos criar também nosso UsersController, o conteúdo a seguir corresponde à classe básica UsersController gerada através da ferramenta de geração de códigos (Bake) presente no CakePHP::
 
     // app/Controller/UsersController.php
     class UsersController extends AppController {
