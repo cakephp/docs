@@ -75,7 +75,7 @@ The ``$type`` parameter can have the following values:
 .. versionadded:: cakephp/cakephp 3.2.6
 
     As of v3.2.6 an additional parameter is included in the blackHole callback,
-    an instance of the ``~Cake\\Controller\\Exception\\SecurityException`` is
+    an instance of the ``Cake\Controller\Exception\SecurityException`` is
     included as a second parameter.
 
 Restrict Actions to SSL
