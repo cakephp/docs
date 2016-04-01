@@ -72,9 +72,9 @@ The ``$type`` parameter can have the following values:
   error.
 * 'secure' Indicates an SSL method restriction failure.
 
-.. versionadded:: cakephp/cakephp 2.3.6
+.. versionadded:: cakephp/cakephp 3.2.6
 
-    As of v2.3.6 an additional parameter is included in the backHole callback,
+    As of v3.2.6 an additional parameter is included in the blackHole callback,
     an instance of the ``~Cake\\Controller\\Exception\\SecurityException`` is
     included as a second parameter.
 
