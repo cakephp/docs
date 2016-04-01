@@ -33,7 +33,7 @@ les helpers inclus dans CakePHP, regardez le chapitre pour chaque helper:
 Configurer les Helpers
 ======================
 
-Dans CakePHP, vous activez les helpers en les déclarant dans une classe view.
+Dans CakePHP, vous chargez les helpers en les déclarant dans une classe view.
 Une classe ``AppView`` est fournie avec chaque application CakePHP et est le
 lieu idéal pour charger les helpers::
 
@@ -53,9 +53,9 @@ Le chargement des helpers depuis les plugins utilise la
 
     $this->loadHelper('Blog.Comment');
 
-Vous n'avez pas à charger explicitement les helpers fournis par CakePHP ou
-de votre application. Ces helpers seront chargés paresseusement (lazily) au
-moment de la première utilisation. Par exemple::
+Vous n'avez pas à charger explicitement les helpers fournis par CakePHP ou de
+votre application. Ces helpers seront chargés paresseusement (lazily) au moment
+de la première utilisation. Par exemple::
 
     // Charge le FormHelper s'il n'a pas été chargé précédemment.
     $this->Form->create($article);
@@ -257,15 +257,20 @@ et :doc:`/core-libraries/events` pour plus d'informations.
 Créer des Helpers
 =================
 
-Si un helper du cœur (ou l'un présenté sur github ou dans la Boulangerie)
-ne correspond pas à vos besoins, les helpers sont faciles à créer.
+Vous pouvez créer des classes de helper personnalisées pour les utiliser dans
+votre application ou dans vos plugins.
+Comme la plupart des components de CakePHP, les classes de helper ont quelques
+conventions:
 
-Mettons que nous voulions créer un helper, qui pourra être utilisé pour
-produire un lien CSS, façonné spécialement selon vos besoins, à différents
-endroits de votre application. Afin de trouver une place à votre logique dans
-la structure de helper existante dans CakePHP, vous devrez créer une nouvelle
-classe dans **src/View/Helper**. Appelons notre helper LinkHelper. Le
-fichier de la classe PHP ressemblera à quelque chose comme ceci::
+* Les fichiers de classe Helper doivent être placés dans **src/View/Helper**.
+  Par exemple: **src/View/Helper/LinkHelper.php**
+* Les classes Helper doivent être suffixées avec ``Helper``. Par exemple:
+  ``LinkHelper``.
+* Quand vous référencez les noms de classe helper, vous devez omettre le suffixe
+  ``Helper``. Par exemple: ``$this->loadHelper('Link');``.
+
+Vous devrez étendre ``Helper`` pour vous assurer que les choses fonctionnent
+correctement::
 
     /* src/View/Helper/LinkHelper.php */
     namespace App\View\Helper;

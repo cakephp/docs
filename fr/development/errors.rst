@@ -3,11 +3,10 @@ Gestion des Erreurs & Exceptions
 
 Un grand nombre de méthodes internes à PHP utilisent les erreurs pour
 communiquer les échecs. Ces erreurs doivent être récupérées et traitées.
-CakePHP fournit un récupérateur d'erreurs qui les affiche
-et/ou les écrit dans des fichiers de log par défaut lorsqu'elles se
-produisent. Ce gestionnaire d'erreurs est utilisé pour capturer les
-exceptions non interceptées par les controllers et par les autres
-parties de votre application.
+CakePHP fournit un récupérateur d'erreurs qui les affiche et/ou les écrit dans
+des fichiers de log par défaut lorsqu'elles se produisent. Ce gestionnaire
+d'erreurs est utilisé pour capturer les exceptions non interceptées par les
+controllers et par les autres parties de votre application.
 
 .. _error-configuration:
 
@@ -17,9 +16,9 @@ Configuration des Erreurs et des Exceptions
 La configuration des Erreurs est faite à l'intérieur du fichier
 **config/app.php** de votre application. Par défaut CakePHP utilise la classe
 ``ErrorHandler`` ou ``ConsoleErrorHandler`` pour capturer et afficher/mettre
-les erreurs dans des fichiers de log. Vous pouvez remplacer ce comportement
-en changeant le gestionnaire d'erreurs par défaut. Le gestionnaire d'erreurs
-par défaut gère également les exceptions non interceptées.
+les erreurs dans des fichiers de log. Vous pouvez remplacer ce comportement en
+changeant le gestionnaire d'erreurs par défaut. Le gestionnaire d'erreurs par
+défaut gère également les exceptions non interceptées.
 
 La gestion des erreurs accepte quelques options qui vous permettent de
 personnaliser la gestion des erreurs pour votre application:
@@ -45,10 +44,10 @@ personnaliser la gestion des erreurs pour votre application:
   d'allouer un petit espace mémoire supplémentaire pour la journalisation
   (logging) ainsi que la gestion d'erreur.
 
-ErrorHandler affiche par défaut les erreurs quand ``debug`` est ``true`` et
-les erreurs de logs quand ``debug`` est ``false``. Le type d'erreurs capté dans
-les deux cas est contrôlé par ``errorLevel``. Le gestionnaire d'erreurs fatales
-va être appelé indépendamment de ``debug`` ou de la configuration de
+ErrorHandler affiche par défaut les erreurs quand ``debug`` est ``true`` et les
+erreurs de logs quand ``debug`` est ``false``. Le type d'erreurs capté dans les
+deux cas est contrôlé par ``errorLevel``. Le gestionnaire d'erreurs fatales va
+être appelé indépendamment de ``debug`` ou de la configuration de
 ``errorLevel``, mais le résultat va être différent, basé sur le niveau de
 ``debug``. Le comportement par défaut pour les erreurs fatales est d'afficher
 une page avec une erreur interne du serveur (``debug`` désactivé) ou une page
@@ -62,8 +61,8 @@ avec le message, le fichier et la ligne (``debug`` activé).
 Créer vos Propres Gestionnaires d'Erreurs
 =========================================
 
-Vous pouvez créer un gestionnaire d'erreurs à partir de n'importe quel type
-de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError``
+Vous pouvez créer un gestionnaire d'erreurs à partir de n'importe quel type de
+callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError``
 pour gérer vos erreurs. En étendant ``BaseErrorHandler``, vous pouvez fournir
 une logique de gestion des erreurs personnalisée. Un exemple serait::
 
@@ -138,9 +137,9 @@ plage 400 seront traitées comme une erreur interne au serveur.
 Exceptions Intégrées de CakePHP
 ===============================
 
-Il existe plusieurs exceptions intégrées à l'intérieur de CakePHP, en plus
-des exceptions d'infrastructure internes, et il existe plusieurs exceptions pour
-les méthodes HTTP.
+Il existe plusieurs exceptions intégrées à l'intérieur de CakePHP, en plus des
+exceptions d'infrastructure internes, et il existe plusieurs exceptions pour les
+méthodes HTTP.
 
 Exceptions HTTP
 ---------------
@@ -176,7 +175,7 @@ Exceptions HTTP
 .. php:exception:: NotAcceptableException
 
     Utilisée pour faire une erreur 406 Not Acceptable.
-    
+
     .. versionadded:: 3.1.7 NotAcceptableException a été ajoutée.
 
 .. php:exception:: ConflictException
@@ -217,7 +216,7 @@ exceptions HTTP pourrait être le rendu de pages 404 pour les items qui n'ont
 pas été trouvés::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -381,7 +380,7 @@ Vous pouvez envoyer n'importe quelle exception HTTP liée à partir des actions
 de votre controller pour indiquer les états d'échec. Par exemple::
 
     use Cake\Network\Exception\NotFoundException;
-    
+
     public function view($id = null)
     {
         $article = $this->Articles->findById($id)->first();
@@ -392,9 +391,9 @@ de votre controller pour indiquer les états d'échec. Par exemple::
         $this->set('_serialize', ['article']);
     }
 
-Ce qui précède va faire que le gestionnaire d'exception attrape et traite
-la :php:exc:`NotFoundException`. Par défaut, cela va créer une page d'erreur
-et enregistrer l'exception.
+Ce qui précède va faire que le gestionnaire d'exception attrape et traite la
+:php:exc:`NotFoundException`. Par défaut, cela va créer une page d'erreur et
+enregistrer l'exception.
 
 .. _error-views:
 
@@ -403,9 +402,8 @@ Exception Renderer
 
 .. php:class:: ExceptionRenderer(Exception $exception)
 
-La classe ExceptionRenderer avec l'aide de ``ErrorController`` s'occupe
-du rendu des pages d'erreur pour toutes les exceptions lancées par votre
-application.
+La classe ExceptionRenderer avec l'aide de ``ErrorController`` s'occupe du rendu
+des pages d'erreur pour toutes les exceptions lancées par votre application.
 
 Les vues de la page d'erreur sont localisées dans **src/Template/Error/**. Pour
 toutes les erreurs 4xx et 5xx, les fichiers de template **error400.ctp** et
@@ -445,8 +443,8 @@ pour :php:exc:`Cake\\Core\\Exception\\Exception` a été étendu, vous autorisan
 à lui passer des données hashées. Ces hashs sont interpolés dans le
 messageTemplate, ainsi que dans la vue qui est utilisée pour représenter
 l'erreur dans le mode développement. Cela vous permet de créer des exceptions
-riches en données, en fournissant plus de contexte pour vos erreurs. Vous
-pouvez aussi fournir un template de message qui permet aux méthodes natives
+riches en données, en fournissant plus de contexte pour vos erreurs. Vous pouvez
+aussi fournir un template de message qui permet aux méthodes natives
 ``__toString()`` de fonctionner normalement::
 
     use Cake\Core\Exception\Exception;

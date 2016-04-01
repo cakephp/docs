@@ -1,5 +1,6 @@
 Views (Vues)
 ############
+
 .. php:namespace:: Cake\View
 
 .. php:class:: View
@@ -69,18 +70,61 @@ Templates de Vues
 =================
 
 La couche view de CakePHP c'est la façon dont vous parlez à vos utilisateurs.
-La plupart du temps, vos vues afficheront des documents (X)HTML pour les
+La plupart du temps, vos vues afficheront des documents HTML/XHTML pour les
 navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF
 à un objet Flash, répondre à une application distante via SOAP ou produire un
 fichier CSV pour un utilisateur.
 
-Les fichiers de template de CakePHP sont écrits en pur PHP et ont par défaut
-.ctp (Cakephp TemPlate) comme extension. Ces fichiers contiennent toute la
-logique de présentation nécessaire à l'organisation des données reçues du
-controller, dans un format qui satisfasse l'audience que vous recherchez. Si
-vous préférez utiliser un langage de template comme
-`Twig <http://twig.sensiolabs.org>`__, une sous-classe de View fera
-le pont entre votre langage de template et CakePHP.
+CakePHP template files have a default extension of **.ctp** (CakePHP Template)
+and utilize the `alternative PHP syntax
+<http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+for control structures and output. These files contain the logic necessary to
+prepare the data received from the controller into a presentation format that is
+ready for your audience.
+
+Alternative Echos
+-----------------
+
+Echo, or print a variable in your template::
+
+  <?php echo $variable; ?>
+
+Using Short Tag support::
+
+  <?= $variable ?>
+
+Alternative Control Structures
+------------------------------
+
+Control structures, like ``if``, ``for``, ``foreach``, ``switch``, and ``while``
+can be written in a simplified format. Notice that there are no braces. Instead,
+the end brace for the ``foreach`` is replaced with ``endforeach``. Each of the
+control structures listed below has a similar closing syntax: ``endif``,
+``endfor``, ``endforeach``, and ``endwhile``. Also notice that instead of using
+a ``semicolon`` after each structure (except the last one), there is a
+``colon``.
+
+The following is an example using ``foreach``::
+
+  <ul>
+  <?php foreach ($todo as $item): ?>
+  <li><?=$item?></li>
+  <?php endforeach; ?>
+  </ul>
+
+Another example, using if/elseif/else. Notice the colons::
+
+  <?php if ($username === 'sally'): ?>
+     <h3>Hi Sally</h3>
+  <?php elseif ($username === 'joe'): ?>
+     <h3>Hi Joe</h3>
+  <?php else: ?>
+     <h3>Hi unknown user</h3>
+  <?php endif; ?>
+
+If you'd prefer using a templating language like
+`Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your
+templating language and CakePHP.
 
 Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier

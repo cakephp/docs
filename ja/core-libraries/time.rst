@@ -16,6 +16,14 @@ Time
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _immutable-time:
+
+Immutable Dates and Times
+=========================
+
+.. php:class:: FrozenTime
+.. php:class:: FrozenDate
+
 .. meta::
     :title lang=ja: Time
     :description lang=ja: Time class helps you format time and test time.

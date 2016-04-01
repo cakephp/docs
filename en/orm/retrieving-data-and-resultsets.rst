@@ -1175,7 +1175,7 @@ be registered to be run as soon as the first result is attempted to be fetched.
 This allows you to keep chaining additional methods and filters to the query
 even after adding a map-reduce routine::
 
-   $query = $articles->find()
+    $query = $articles->find()
         ->where(['published' => true])
         ->mapReduce($mapper, $reducer);
 

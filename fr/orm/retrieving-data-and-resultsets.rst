@@ -204,6 +204,10 @@ Cette approche remplace le ``find('first')`` des versions précédentes de
 CakePHP. Vous pouvez aussi utiliser la méthode ``get()`` si vous chargez les
 entities avec leur clé primaire.
 
+.. note::
+
+    La méthode ``first()`` va retourner ``null`` si aucun résultat n'est trouvé.
+
 Récupérer un Nombre de Résultats
 ================================
 
@@ -1239,7 +1243,7 @@ l'on tentera de récupérer le premier résultat.
 Ceci vous permet de continuer à chainer les méthodes et les filtres
 à la requête même après avoir ajouté une routine map-reduce::
 
-   $query = $articles->find()
+    $query = $articles->find()
         ->where(['published' => true])
         ->mapReduce($mapper, $reducer);
 

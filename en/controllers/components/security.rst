@@ -45,7 +45,7 @@ components in your ``initialize()`` method.
 Handling Blackhole Callbacks
 ============================
 
-.. php:method:: blackHole(object $controller, string $error)
+.. php:method:: blackHole(object $controller, string $error = '', SecurityException $exception = null)
 
 If an action is restricted by the Security Component it is
 'black-holed' as an invalid request which will result in a 400 error
@@ -71,6 +71,12 @@ The ``$type`` parameter can have the following values:
 * 'auth' Indicates a form validation error, or a controller/action mismatch
   error.
 * 'secure' Indicates an SSL method restriction failure.
+
+.. versionadded:: cakephp/cakephp 3.2.6
+
+    As of v3.2.6 an additional parameter is included in the blackHole callback,
+    an instance of the ``~Cake\\Controller\\Exception\\SecurityException`` is
+    included as a second parameter.
 
 Restrict Actions to SSL
 =======================
