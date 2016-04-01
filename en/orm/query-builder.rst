@@ -336,12 +336,14 @@ you can use, literal arguments and bound parameters. Literal parameters allow
 you to reference columns or other SQL literals. Bound parameters can be used to
 safely add user data to SQL functions. For example::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Article.title' => 'literal',
+        'Article.date' => 'literal',
+        ' - CAT: ',
+        'Category.name' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 By making arguments with a value of ``literal``, the ORM will know that
 the key should be treated as a literal SQL value. The above would generate the
@@ -349,7 +351,7 @@ following SQL on MySQL::
 
     SELECT CONCAT(title, :c0) FROM articles;
 
-The ``:c0`` value will have the ``' NEW'`` text bound when the query is
+The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
 executed.
 
 In addition to the above functions, the ``func()`` method can be used to create
