@@ -343,7 +343,7 @@ safely add user data to SQL functions. For example::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        '(DATEDIFF(NOW(), Articles.created) AS Articles.age)' => 'literal',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
     $query->select(['link_title' => $concat]);
 
@@ -352,7 +352,7 @@ the key should be treated as a literal SQL value. By making arguments with
 a value of ``identifier``, the ORM will know that the key should be treated
 as a field identifier. The above would generate the following SQL on MySQL::
 
-    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created) AS Articles.age)) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
 The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
 executed.
