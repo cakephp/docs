@@ -340,7 +340,6 @@ safely add user data to SQL functions. For example::
     $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
         'Articles.title' => 'identifier',
-        'Articles.date' => 'identifier',
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
@@ -349,10 +348,11 @@ safely add user data to SQL functions. For example::
     $query->select(['link_title' => $concat]);
 
 By making arguments with a value of ``literal``, the ORM will know that
-the key should be treated as a literal SQL value. The above would generate the
-following SQL on MySQL::
+the key should be treated as a literal SQL value. By making arguments with
+a value of ``identifier``, the ORM will know that the key should be treated
+as a field identifier. The above would generate the following SQL on MySQL::
 
-    SELECT CONCAT(Articles.title, Articles.date, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created) AS Articles.age)) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created) AS Articles.age)) FROM articles;
 
 The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
 executed.
@@ -363,10 +363,10 @@ For example::
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -655,7 +655,7 @@ It is also possible to build expressions using SQL functions::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)
