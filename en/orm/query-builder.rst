@@ -338,10 +338,10 @@ safely add user data to SQL functions. For example::
 
     $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'Article.title' => 'literal',
-        'Article.date' => 'literal',
+        'Articles.title' => 'literal',
+        'Articles.date' => 'literal',
         ' - CAT: ',
-        'Category.name' => 'literal',
+        'Categories.name' => 'literal',
     ]);
     $query->select(['link_title' => $concat]);
 
