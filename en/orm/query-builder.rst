@@ -244,16 +244,17 @@ method::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be used
-when you need to sort on complex expressions::
+.. versionadded:: 3.0.12
 
-    // As of 3.0.12 orderAsc & orderDesc are available.
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'literal',
-        'synopsis' => 'literal'
-    ]);
-    $query->orderAsc($concat);
+    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be used
+    when you need to sort on complex expressions::
+
+        $query = $articles->find();
+        $concat = $query->func()->concat([
+            'title' => 'identifier',
+            'synopsis' => 'identifier'
+        ]);
+        $query->orderAsc($concat);
 
 To limit the number of rows or set the row offset you can use the ``limit()``
 and ``page()`` methods::
@@ -332,24 +333,28 @@ A number of commonly used functions can be created with the ``func()`` method:
     ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
-you can use, literal arguments and bound parameters. Literal parameters allow
+you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
 you to reference columns or other SQL literals. Bound parameters can be used to
 safely add user data to SQL functions. For example::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Articles.title' => 'identifier',
+        ' - CAT: ',
+        'Categories.name' => 'identifier',
+        ' - Age: ',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 By making arguments with a value of ``literal``, the ORM will know that
-the key should be treated as a literal SQL value. The above would generate the
-following SQL on MySQL::
+the key should be treated as a literal SQL value. By making arguments with
+a value of ``identifier``, the ORM will know that the key should be treated
+as a field identifier. The above would generate the following SQL on MySQL::
 
-    SELECT CONCAT(title, :c0) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
-The ``:c0`` value will have the ``' NEW'`` text bound when the query is
+The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
 executed.
 
 In addition to the above functions, the ``func()`` method can be used to create
@@ -358,10 +363,10 @@ For example::
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -650,7 +655,7 @@ It is also possible to build expressions using SQL functions::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)
