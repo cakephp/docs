@@ -39,8 +39,8 @@ of a ``View``, use the ``Text`` class::
     }
 
 
-Transliterate Strings
-=====================
+Convert Strings into ASCII
+==========================
 
 .. php:staticmethod:: transliterate($string, $transliteratorId = null)
 
@@ -73,7 +73,7 @@ supported options are:
    If default ```null`` ``Text::$_defaultTransliteratorId`` to be used.
    If `false` no transliteration will be done, only non words will be removed.
 * ``preserve`` Specific non-word character to preserve. Default ```null``.
-   For e.g. this option can be set to '.' to generate clean file names.
+   For e.g. this option can be set to '.' to generate clean file names::
 
     // apple-puree
     Text::slug('apple purée');
@@ -387,4 +387,4 @@ Output::
 
 .. meta::
     :title lang=en: Text
-    :keywords lang=en: slug,transliterate,array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
+    :keywords lang=en: slug,transliterate,ascii,array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
