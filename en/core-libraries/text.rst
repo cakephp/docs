@@ -45,15 +45,18 @@ Convert Strings into ASCII
 .. php:staticmethod:: transliterate($string, $transliteratorId = null)
 
 Transliterate by default converts all characters in provided string into
-equivalent ASCII characters. The transliterate method expects UTF-8 encoding.
-You can use the ``$transliteratorId`` argument to control the transliteration.
-Using ``Text::setTransliteratorId()`` you can change the default transliteration
-id. Examples::
+equivalent ASCII characters. The method expects UTF-8 encoding. The character
+conversion can be controlled using transliteration identifiers which you can pass
+using the ``$transliteratorId`` argument or change the default identifier string
+using ``Text::setTransliteratorId()`. ICU transliteration identifiers are
+basically of form ``<source script>:<target script>`` and you can specify
+multiple conversion pairs separated by ``;``. You can find more info about
+transliterator identifiers `here <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
 
     // apple puree
     Text::transliterate('apple purée');
 
-    // Ubermensch люблю
+    // Ubermensch люблю (only latin characters are transliterated)
     Text::transliterate('Übérmensch люблю', 'Latin-ASCII;');
 
 Creating URL Safe Strings
