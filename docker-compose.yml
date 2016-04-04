@@ -1,0 +1,33 @@
+docs:
+    image: cakephpfr/docs
+    volumes:
+        - .:/data
+docs-server:
+    image: nginx:1.9
+    ports:
+        - "80:80"
+    volumes:
+        - ./build/html/:/usr/share/nginx/html
+        - ./config:/etc/nginx/conf.d
+nginx:
+    image: cakephpfr/3.x:nginx
+    ports:
+        - "8080:80"
+    links:
+        - php
+    volumes:
+        - ./docs_search:/var/www/html
+php:
+    image: cakephpfr/3.x:php70-fpm
+    volumes:
+        - .:/data
+        - ./docs_search:/var/www/html
+    links:
+        - elasticsearch
+        - docs-server
+elasticsearch:
+    image: elasticsearch:2.2
+    command: elasticsearch -Des.network.host=0.0.0.0
+    ports:
+        - "9200:9200"
+        - "9300:9300"

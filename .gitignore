@@ -3,6 +3,7 @@
 *.pyc
 build/*
 */_build/*
+/docs_search
 
 # IDE and editor specific files #
 #################################
