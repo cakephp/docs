@@ -51,7 +51,8 @@ using the ``$transliteratorId`` argument or change the default identifier string
 using ``Text::setTransliteratorId()``. ICU transliteration identifiers are
 basically of form ``<source script>:<target script>`` and you can specify
 multiple conversion pairs separated by ``;``. You can find more info about
-transliterator identifiers `here <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
+transliterator identifiers
+`here <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
 
     // apple puree
     Text::transliterate('apple purée');
@@ -71,11 +72,11 @@ You can provide an array of options that controls slug. ``$options`` can also
 be a string in which case it will be used as replacement string. The
 supported options are:
 
-* ``replacement`` Replacement string. Default '-'.
+* ``replacement`` Replacement string, defaults to '-'.
 * ``transliteratorId`` A valid tranliterator id string.
    If default ```null`` ``Text::$_defaultTransliteratorId`` to be used.
    If `false` no transliteration will be done, only non words will be removed.
-* ``preserve`` Specific non-word character to preserve. Default ```null``.
+* ``preserve`` Specific non-word character to preserve. Defaults to ```null``.
    For e.g. this option can be set to '.' to generate clean file names::
 
     // apple-puree
