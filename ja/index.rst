@@ -2,7 +2,7 @@ Welcome
 #######
 
 .. warning::
-    この文書のバージョンは CakePHP 3.0 用です。
+    この文書のバージョンは CakePHP 3.x 用です。
     `CakePHP 2.x の文書はここにあります <http://book.cakephp.org/2.0/ja>`_ 。
 
 CakePHP 3 は、 **PHP 7** (最小は PHP 5.5.9) 上で動作するウェブ開発フレームワークです。
