@@ -246,8 +246,8 @@ method::
 
 .. versionadded:: 3.0.12
 
-    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be used
-    when you need to sort on complex expressions::
+    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be
+    used when you need to sort on complex expressions::
 
         $query = $articles->find();
         $concat = $query->func()->concat([
@@ -299,7 +299,8 @@ Using SQL Functions
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
 abstraction allows the ORM to select the platform specific implementation of the
 function you want. For example, ``concat`` is implemented differently in MySQL,
-PostgreSQL and SQL Server. Using the abstraction allows your code to be portable::
+PostgreSQL and SQL Server. Using the abstraction allows your code to be
+portable::
 
     // Results in SELECT COUNT(*) count FROM ...
     $query = $articles->find();
@@ -308,7 +309,8 @@ PostgreSQL and SQL Server. Using the abstraction allows your code to be portable
 A number of commonly used functions can be created with the ``func()`` method:
 
 - ``sum()`` Calculate a sum. The arguments will be treated as literal values.
-- ``avg()`` Calculate an average. The arguments will be treated as literal values.
+- ``avg()`` Calculate an average. The arguments will be treated as literal
+  values.
 - ``min()`` Calculate the min of a column. The arguments will be treated as
   literal values.
 - ``max()`` Calculate the max of a column. The arguments will be treated as
