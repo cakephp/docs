@@ -619,11 +619,11 @@ Environment Variables
 
 Some of the modern cloud providers, like Heroku, let you define environment
 variables. By defining environment variables, you can configure your CakePHP
-app as an 12factor app. Following the `12factor app instructions
-<http://12factor.net/>`_ is a good way to create a stateless app, and to ease
-the deployment of your app. This means for example, that if you need to change
-your database, you'll just need to modify a DATABASE_URL variable on your host
-configuration without the need to change it in your source code.
+app as an 12factor app. Following the `12factor app instructions <http://12factor.net/>`_
+is a good way to create a stateless app, and to ease the deployment of your app.
+This means for example, that if you need to change your database, you'll just
+need to modify a DATABASE_URL variable on your host configuration without the
+need to change it in your source code.
 
 As you can see in your **app.php**, the following variables are concerned:
 
