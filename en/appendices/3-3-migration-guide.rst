@@ -34,6 +34,10 @@ Request
 ORM
 ===
 
+- Additional support has been added for mapping complex data types. This makes
+  it easier to work with geo-spatial types, and data that cannot be represented
+  by strings in SQL queries. See the
+  :ref:`mapping-custom-datatypes-to-sql-expressions` for more information.
 - A new ``JsonType`` was added. This new type lets you use the native JSON types
   available in MySQL and Postgres. In other database providers the ``json`` type
   will map to ``TEXT`` columns.
