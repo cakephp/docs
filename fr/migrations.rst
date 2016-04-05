@@ -17,9 +17,9 @@ Installation
 ============
 
 Par défaut Migrations est installé avec le squelette d’application. Si vous le
-retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit
-à partir du répertoire ROOT de votre application (où le fichier composer.json
-est localisé)::
+retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit à
+partir du répertoire ROOT de votre application (où le fichier composer.json est
+localisé)::
 
     $ php composer.phar require cakephp/migrations "@stable"
 
@@ -510,9 +510,9 @@ migrations qui ont été exécutées::
 Vous pouvez aussi afficher les résultats avec le format JSON en utilisant
 l'option ``--format`` (ou ``-f`` en raccourci)::
 
-    $ bin/cake migrations --format json
+    $ bin/cake migrations status --format json
 
-Vous pouvez aussi utilisez les options ``--source``, ``--connection`` et
+Vous pouvez aussi utiliser les options ``--source``, ``--connection`` et
 ``--plugin`` comme pour la commande ``migrate``.
 
 ``mark_migrated`` : Marquer une Migration en Migrée

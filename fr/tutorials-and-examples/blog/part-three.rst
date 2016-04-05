@@ -15,13 +15,13 @@ Plugin Migrations
 =================
 
 Nous voulons utiliser le
-`plugin migrations <https://github.com/cakephp/migrations>`_ pour
-créer une table dans notre base de données. Si vous avez déjà une table
-articles dans votre base de données, supprimez-la.
+`plugin migrations <https://github.com/cakephp/migrations>`_ pour créer une
+table dans notre base de données. Si vous avez déjà une table articles dans
+votre base de données, supprimez-la.
 
-Maintenant ouvrez le fichier **composer.json** de votre application.
-Normalement vous devriez voir que le plugin migrations est déjà dans
-``require``. Si ce n'est pas le cas, ajoutez-le en utilisant::
+Maintenant ouvrez le fichier **composer.json** de votre application. Normalement
+vous devriez voir que le plugin migrations est déjà dans ``require``. Si ce
+n'est pas le cas, ajoutez-le en utilisant::
 
     composer require cakephp/migrations:~1.0
 
@@ -175,6 +175,10 @@ Créez tous les fichiers en lançant les commandes de bake suivantes::
     bin/cake bake model Categories
     bin/cake bake controller Categories
     bin/cake bake template Categories
+
+De manière alternative, vous pouvez créer la totalité avec une seule ligne::
+
+    bin/cake bake all Categories
 
 L'outil bake a créé tous les fichiers en un clin d'œil. Vous pouvez les
 lire rapidement si vous voulez vous re-familiariser avec le fonctionnement de
