@@ -477,7 +477,7 @@ Status コマンドは、現在の状況とすべてのマイグレーション�
 ``--format`` (省略形は ``-f``) オプションを使用することで
 JSON 形式の文字列として結果を出力できます。 ::
 
-    $ bin/cake migrations --format json
+    $ bin/cake migrations status --format json
 
 ``migrate`` コマンドのように ``--source`` 、 ``--connection`` そして ``--plugin``
 オプションが使用できます。
