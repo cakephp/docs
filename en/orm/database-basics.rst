@@ -547,7 +547,7 @@ The above class does a few interesting things:
   equivalent SQL expressions. In our example the resulting SQL would be
   something like ``POINT(10.24, 12.34)``.
 
-Once we've built our custom type, we'll need to use the :ref:`connect our type
+Once we've built our custom type, we'll need to :ref:`connect our type
 to our table class <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:
