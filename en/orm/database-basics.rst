@@ -453,7 +453,7 @@ Mapping Custom Datatypes to SQL Expressions
 The previous example maps a custom datatype for a 'json' column type which is
 easily represented as a string in a SQL statement. Complex SQL data
 types cannot be represented as strings/integers in SQL queries. When working
-with these datatypes. Your Type class needs to implement the
+with these datatypes your Type class needs to implement the
 ``Cake\Database\Type\ExpressionTypeInterface`` interface. This interface lets
 your custom type represent a value as a SQL expression. As an example, we'll
 build a simple Type class for handling ``POINT`` type data out of MySQL. First
