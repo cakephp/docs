@@ -56,7 +56,6 @@ be kicked to **/users/login**, which will show an error page as we have
 not written that code yet. So let's create the login action::
 
     // In src/Controller/UsersController.php
-
     public function login()
     {
         if ($this->request->is('post')) {
@@ -96,13 +95,21 @@ Adding Logout
 Now that people can log in, you'll probably want to provide a way to log out as
 well. Again, in the ``UsersController``, add the following code::
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['logout']);
+    }
+
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
 
-Now you can visit ``/users/logout`` to log out and be sent to the login page.
+This code whitelists the ``logout`` action as a public action, and implements
+the logout method. Now you can visit ``/users/logout`` to log out. You should
+then be sent to the login page.
 
 Enabling Registrations
 ======================
@@ -111,9 +118,11 @@ If you aren't logged in and you try to visit **/users/add** you will be kicked
 to the login page. We should fix that as we want to allow people to sign up for
 our application. In the ``UsersController`` add the following::
 
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function initialize()
     {
-        $this->Auth->allow(['add']);
+        parent::initialize();
+        // Add logout to the allowed actions list.
+        $this->Auth->allow(['logout', 'add']);
     }
 
 The above tells ``AuthComponent`` that the ``add()`` action does *not* require
