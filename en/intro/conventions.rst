@@ -96,7 +96,7 @@ words in another language, CakePHP might not be able to process the right
 inflections (from singular to plural and vice-versa).
 For some reason, if you need to add your own language rules for some words, you
 can use the utility class :php:class:`Cake\\Utility\\Inflector`. Besides
-defining those custom inflection rules, this class will also allows you to check
+defining those custom inflection rules, this class also allows you to check
 that CakePHP understands your custom syntax for plurals and singulars words. See
 the documentation about :doc:`/core-libraries/inflector` for more information.
 
