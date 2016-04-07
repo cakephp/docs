@@ -34,7 +34,7 @@ customize the rules used::
 
     // Person
     echo Inflector::singularize('People');
-    
+
 .. note::
 
     ``singularize()`` may not always correctly convert a noun that is already in its singular form.
@@ -110,6 +110,9 @@ expects UTF-8 encoding::
     // apple-puree
     Inflector::slug('apple purée');
 
+.. note::
+    ``Inflector::slug()`` has been deprecated since 3.2.7. Use ``Text::slug()``
+    instead.
 
 .. _inflection-configuration:
 
