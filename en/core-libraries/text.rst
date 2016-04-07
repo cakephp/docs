@@ -57,8 +57,8 @@ transliterator identifiers
     // apple puree
     Text::transliterate('apple purée');
 
-    // Ubermensch люблю (only latin characters are transliterated)
-    Text::transliterate('Übérmensch люблю', 'Latin-ASCII;');
+    // Ubermensch (only latin characters are transliterated)
+    Text::transliterate('Übérmensch', 'Latin-ASCII;');
 
 Creating URL Safe Strings
 =========================
