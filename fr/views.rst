@@ -104,15 +104,19 @@ control structures listed below has a similar closing syntax: ``endif``,
 a ``semicolon`` after each structure (except the last one), there is a
 ``colon``.
 
-The following is an example using ``foreach``::
+The following is an example using ``foreach``:
+
+.. code-block:: php
 
   <ul>
   <?php foreach ($todo as $item): ?>
-  <li><?=$item?></li>
+  <li><?= $item ?></li>
   <?php endforeach; ?>
   </ul>
 
-Another example, using if/elseif/else. Notice the colons::
+Another example, using if/elseif/else. Notice the colons:
+
+.. code-block:: php
 
   <?php if ($username === 'sally'): ?>
      <h3>Hi Sally</h3>
