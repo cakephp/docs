@@ -410,7 +410,7 @@ Chronosは、出力した日時オブジェクトを表示するための多く�
 - dayOfMonth
 - dayOfYear
 - daysInMonth
-- timesptamp
+- timestamp
 - quarter
 
 ..
