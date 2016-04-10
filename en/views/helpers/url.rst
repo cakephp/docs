@@ -89,6 +89,21 @@ URL for named route::
     // );
     /products/i-m-slug
 
+If you are generating URLs for CSS, Javascript or image files there are helper
+methods for ecah of these asset types::
+
+    // Outputs /img/icon.png
+    $this->Url->image('icon.png');
+
+    // Outputs /js/app.js
+    $this->Url->script('app.js');
+
+    // Outputs /css/app.css
+    $this->Url->css('app.css');
+
+.. versionadded:: 3.2.4
+    The asset helper methods were added in 3.2.4.
+
 For further information check
 `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
 in the API.
