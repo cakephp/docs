@@ -90,7 +90,7 @@ URL for named route::
     /products/i-m-slug
 
 If you are generating URLs for CSS, Javascript or image files there are helper
-methods for ecah of these asset types::
+methods for each of these asset types::
 
     // Outputs /img/icon.png
     $this->Url->image('icon.png');
