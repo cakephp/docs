@@ -238,16 +238,17 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``
-メソッドが使えます。 ::
+.. versionadded:: 3.0.12
 
-    // 3.0.12 以降は orderAsc と orderDesc が使えます。
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'literal',
-        'synopsis' => 'literal'
-    ]);
-    $query->orderAsc($concat);
+    複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``
+    メソッドが使えます。 ::
+
+        $query = $articles->find();
+        $concat = $query->func()->concat([
+            'title' => 'identifier',
+            'synopsis' => 'identifier'
+        ]);
+        $query->orderAsc($concat);
 
 行の数を制限したり、行のオフセットをセットするためには、 ``limit()`` と ``page()``
 メソッドを使うことができます。 ::
@@ -319,23 +320,27 @@ CakePHP の ORM では抽象化された馴染み深い SQL 関数をいくつ�
     ``extract()``、 ``dateAdd()``、 ``dayOfWeek()`` メソッドが追加されました。
 
 SQL 関数に渡す引数には、リテラルの引数と、バインドパラメータの２種類がありえます。
-リテラルの引数により、カラムや他の SQL リテラルを参照できます。
+識別子やリテラルのパラメータにより、カラムや他の SQL リテラルを参照できます。
 バインドパラメータにより、ユーザデータを SQL 関数へと安全に渡すことができます。
 たとえば::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Articles.title' => 'identifier',
+        ' - CAT: ',
+        'Categories.name' => 'identifier',
+        ' - Age: ',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 ``literal`` の値を伴う引数を作ることで、 ORM はそのキーをリテラルな SQL 値として扱うべきであると
-知ることになります。上記では MySQL にて下記の SQL が生成されます。 ::
+知ることになります。 ``identifier`` の値を伴う引数を作ることで、ORM は、そのキーがフィールドの
+識別子として扱うべきであると知ることになります。上記では MySQL にて下記の SQL が生成されます。 ::
 
-    SELECT CONCAT(title, :c0) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
-クエリーが実行される際には、 ``:c0`` という値に ``' NEW'`` というテキストがバインドされることになります。
+クエリーが実行される際には、 ``:c0`` という値に ``' - CAT'`` というテキストがバインドされることになります。
 
 上記の関数に加え、``func()`` メソッドは ``year``、 ``date_format``、 ``convert`` などといった、
 一般的な SQL 関数を構築するのに使います。
@@ -343,10 +348,10 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -631,7 +636,7 @@ SQL 関数を使った式を構築することも可能です。 ::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)

@@ -5,9 +5,9 @@ Inflector
 
 .. php:class:: Inflector
 
-La classe Inflector prend une chaîne de caractères et peut la manipuler
-pour gérer les variations de mot comme les mises au pluriel ou les mises
-en Camel et est normalement accessible statiquement. Exemple:
+La classe Inflector prend une chaîne de caractères et peut la manipuler pour
+gérer les variations de mot comme les mises au pluriel ou les mises en Camel et
+est normalement accessible statiquement. Exemple:
 ``Inflector::pluralize('example')`` retourne "examples".
 
 Vous pouvez essayer les inflexions en ligne sur
@@ -56,9 +56,9 @@ propriétés::
     // apple_pie
     Inflector::underscore('ApplePie');
 
-Il doit être noté que les underscores vont seulement convertir les mots
-formatés en camelCase. Les mots qui contiennent des espaces seront en
-minuscules, mais ne contiendront pas d'underscore.
+Il doit être noté que les underscores vont seulement convertir les mots formatés
+en camelCase. Les mots qui contiennent des espaces seront en minuscules, mais ne
+contiendront pas d'underscore.
 
 Créer des Formes Lisibles par l'Homme
 =====================================
@@ -104,12 +104,16 @@ Créer des Chaînes d'URL Safe
 
 .. php:staticmethod:: slug($word, $replacement = '-')
 
-Slug convertit les caractères spéciaux en version latins et convertit
-les caractères ne correspondant pas et les espaces en tirets. La
-méthode slug s'attend à un encodage UTF-8::
+Slug convertit les caractères spéciaux en version latins et convertit les
+caractères ne correspondant pas et les espaces en tirets. La méthode slug
+s'attend à un encodage UTF-8::
 
     // apple-puree
     Inflector::slug('apple purée');
+
+.. note::
+    ``Inflector::slug()`` est dépréciée depuis la version 3.2.7. Utilisez
+    ``Text::slug()`` à la place.
 
 .. _inflection-configuration:
 
@@ -133,18 +137,18 @@ Charger les Inflexions Personnalisées
 
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
-Définit une nouvelle inflexion et des règles de transliteration que Inflector
-va utiliser. Souvent, cette méthode est utilisée dans votre
+Définit une nouvelle inflexion et des règles de transliteration que Inflector va
+utiliser. Souvent, cette méthode est utilisée dans votre
 **config/bootstrap.php**::
 
     Inflector::rules('singular', ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta']);
     Inflector::rules('uninflected', ['singulars']);
     Inflector::rules('irregular', ['phylum' => 'phyla']); // The key is singular form, value is plural form
 
-Les règles fournies vont être fusionnées dans l'ensemble d'inflexion défini
-dans ``Cake/Utility/Inflector``, avec les règles ajoutées qui supplantent
-les règles du coeur. Vous pouvez utiliser ``Inflector::reset()`` pour nettoyer
-les règles et restaurer l'état d'Inflector originel.
+Les règles fournies vont être fusionnées dans l'ensemble d'inflexion défini dans
+``Cake/Utility/Inflector``, avec les règles ajoutées qui supplantent les règles
+du coeur. Vous pouvez utiliser ``Inflector::reset()`` pour nettoyer les règles
+et restaurer l'état d'Inflector originel.
 
 .. meta::
     :title lang=fr: Inflector

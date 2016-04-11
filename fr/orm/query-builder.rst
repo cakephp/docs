@@ -5,23 +5,23 @@ Query Builder
 
 .. php:class:: Query
 
-Le constructeur de requête de l'ORM fournit une interface facile à utiliser
-pour créer et lancer les requêtes. En arrangeant les requêtes ensemble,
-vous pouvez créer des requêtes avancées en utilisant les unions et les
-sous-requêtes avec facilité.
+Le constructeur de requête de l'ORM fournit une interface facile à utiliser pour
+créer et lancer les requêtes. En arrangeant les requêtes ensemble, vous pouvez
+créer des requêtes avancées en utilisant les unions et les sous-requêtes avec
+facilité.
 
-Sous le capot, le constructeur de requête utilise les requêtes préparées de
-PDO qui protègent contre les attaques d'injection SQL.
+Sous le capot, le constructeur de requête utilise les requêtes préparées de PDO
+qui protègent contre les attaques d'injection SQL.
 
 L'Objet Query
 =============
 
-La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()``
-à partir d'un objet ``Table``. Cette méthode va retourner une requête
-incomplète prête à être modifiée. Vous pouvez aussi utiliser un objet table
-connection pour accéder au niveau inférieur du constructeur de Requête
-qui n'inclut pas les fonctionnalités de l'ORM, si nécessaire. Consultez la
-section :ref:`database-queries` pour plus d'informations::
+La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()`` à
+partir d'un objet ``Table``. Cette méthode va retourner une requête incomplète
+prête à être modifiée. Vous pouvez aussi utiliser un objet table connection pour
+accéder au niveau inférieur du constructeur de Requête qui n'inclut pas les
+fonctionnalités de l'ORM, si nécessaire. Consultez la section
+:ref:`database-queries` pour plus d'informations::
 
     use Cake\ORM\TableRegistry;
     $articles = TableRegistry::get('Articles');
@@ -259,16 +259,17 @@ vous pouvez utiliser la méthode ``order``::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent être
-utilisées quand vous devez trier selon des expressions complexes::
+.. versionadded:: 3.0.12
 
-    // Depuis 3.0.12 orderAsc & orderDesc sont disponibles.
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'literal',
-        'synopsis' => 'literal'
-    ]);
-    $query->orderAsc($concat);
+    En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent
+    être utilisées quand vous devez trier selon des expressions complexes::
+
+        $query = $articles->find();
+        $concat = $query->func()->concat([
+            'title' => 'identifier',
+            'synopsis' => 'identifier'
+        ]);
+        $query->orderAsc($concat);
 
 Pour limiter le nombre de lignes ou définir la ligne offset, vous pouvez
 utiliser les méthodes ``limit()`` et ``page()``::
@@ -348,27 +349,32 @@ méthode ``func()``:
     Les méthodes ``extract()``, ``dateAdd()`` et ``dayOfWeek()`` ont été
     ajoutées.
 
-Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types
-de paramètres que vous pouvez utiliser; Les arguments littéraux et les
-paramètres liés. Les paramètres liés vous permettent de référencer les colonnes
-ou les autres valeurs littérales de SQL. Les paramètres liés peuvent être
-utilisés pour ajouter en toute sécurité les données d'utilisateur aux fonctions
-SQL. Par exemple::
+Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types de
+paramètres que vous pouvez utiliser; Les arguments littéraux et les paramètres
+liés. Les paramètres d'identifaction/littéraux vous permettent de référencer les
+colonnes ou les autres valeurs littérales de SQL. Les paramètres liés peuvent
+être utilisés pour ajouter en toute sécurité les données d'utilisateur aux
+fonctions SQL. Par exemple::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Articles.title' => 'identifier',
+        ' - CAT: ',
+        'Categories.name' => 'identifier',
+        ' - Age: ',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 En modifiant les arguments avec une valeur de ``literal``, l'ORM va savoir que
-la clé doit être traitée comme une valeur SQL littérale. Le code ci-dessus
-génèrera le code SQL suivant en MySQL::
+la clé doit être traitée comme une valeur SQL littérale. En modifiant les
+arguments avec une valeur d'``identifier``, l'ORM va savoir que la clé doit être
+traitée comme un identifieur de champ. Le code ci-dessus va générer le SQL
+suivant sur MySQL::
 
-    SELECT CONCAT(title, :c0) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
-La valeur ``:c0`` aura le texte ``' NEW'`` lié quand la requête est exécutée.
+La valeur ``:c0`` aura le texte ``' - CAT:'`` lié quand la requête est exécutée.
 
 En plus des fonctions ci-dessus, la méthode ``func()`` peut être utilisée pour
 créer toute fonction générique SQL comme ``year``, ``date_format``,
@@ -376,10 +382,10 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -595,9 +601,9 @@ expression où elles sont combinées avec le combinateur courant.
 
 Par exemple, appeler ``$exp->and_(...)`` va créer un nouvel objet ``Expression``
 qui combine toutes les conditions qu'il contient avec ``AND``. Alors que
-``$exp->or_()`` va créer un nouvel objet ``Expression`` qui combine toutes
-les conditions qui lui sont ajoutées avec ``OR``. Un exemple d'ajout de
-conditions avec une objet ``Expression`` serait::
+``$exp->or_()`` va créer un nouvel objet ``Expression`` qui combine toutes les
+conditions qui lui sont ajoutées avec ``OR``. Un exemple d'ajout de conditions
+avec une objet ``Expression`` serait::
 
     $query = $articles->find()
         ->where(function ($exp) {
@@ -611,8 +617,8 @@ conditions avec une objet ``Expression`` serait::
 Puisque nous avons commencé à utiliser ``where()``, nous n'avons pas besoin
 d'appeler ``and_()``, puisqu'elle est appelée implicitement. Un peu de la même
 façon que nous n'appellerions pas ``or_()`` si nous avons commencé notre requête
-avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthodes
-de conditions combinées avec ``AND``. Le code SQL résultant serait::
+avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthodes de
+conditions combinées avec ``AND``. Le code SQL résultant serait::
 
     SELECT *
     FROM articles
@@ -684,7 +690,7 @@ SQL::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)

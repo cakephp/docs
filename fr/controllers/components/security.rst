@@ -3,9 +3,8 @@ SecurityComponent (Sécurité)
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
-Le Component Security offre une manière simple d'inclure une sécurité
-renforcée à votre application. Il fournit des méthodes pour diverses tâches
-comme:
+Le Component Security offre une manière simple d'inclure une sécurité renforcée
+à votre application. Il fournit des méthodes pour diverses tâches comme:
 
 * Restreindre les méthodes HTTP que votre application accepte.
 * Protection contre la falsification de formulaire.
@@ -20,21 +19,21 @@ controller.
 
 En utilisant le Component Security vous obtenez automatiquement une protection
 contre la falsification de formulaire. Des jetons de champs cachés seront
-automatiquement insérés dans les formulaires et vérifiés par le component Security.
+automatiquement insérés dans les formulaires et vérifiés par le component
+Security.
 
-Si vous utilisez la fonctionnalité de protection des formulaires
-par le component Security et que d'autres components traitent des données
-de formulaire dans les callbacks ``startup()``, assurez-vous de placer
-le component Security avant ces components dans la méthode ``initialize()``.
+Si vous utilisez la fonctionnalité de protection des formulaires par le
+component Security et que d'autres components traitent des données de formulaire
+dans les callbacks ``startup()``, assurez-vous de placer le component Security
+avant ces components dans la méthode ``initialize()``.
 
 .. note::
 
-    Quand vous utilisez le component Security vous **devez** utiliser
-    le Helper Form (FormHelper) pour créer vos formulaires. De plus, vous
-    **ne** devez surcharger **aucun** des attributs des champs ' "name".
-    Le component Security regarde certains indicateurs qui sont créés et
-    gérés par le Helper form.
-    (spécialement ceux créés dans
+    Quand vous utilisez le component Security vous **devez** utiliser le Helper
+    Form (FormHelper) pour créer vos formulaires. De plus, vous **ne** devez
+    surcharger **aucun** des attributs des champs ' "name". Le component
+    Security regarde certains indicateurs qui sont créés et gérés par le Helper
+    form. (spécialement ceux créés dans
     :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`) et
     :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`). La modification
     dynamique des champs qui lui sont soumis dans une requête POST (ex.
@@ -51,17 +50,16 @@ le component Security avant ces components dans la méthode ``initialize()``.
 Gestion des callbacks Blackhole
 ===============================
 
-.. php:method:: blackHole(object $controller, string $error)
+.. php:method:: blackHole(object $controller, string $error = '', SecurityException $exception = null)
 
-Si une action est restreinte par le component Security, elle devient
-un black-hole (trou noir), comme une requête invalide qui aboutira à une
-erreur 400 par défaut.
-Vous pouvez configurer ce comportement, en définissant l'option de configuration
-``blackHoleCallback`` par une fonction de rappel (callback)
-dans le controller.
+Si une action est restreinte par le component Security, elle devient un
+black-hole (trou noir), comme une requête invalide qui aboutira à une erreur 400
+par défaut. Vous pouvez configurer ce comportement, en définissant l'option de
+configuration ``blackHoleCallback`` par une fonction de rappel (callback) dans
+le controller.
 
-En configurant la fonction de rappel, vous pouvez personnaliser le processus
-de mise en trou noir (blackhole callback)::
+En configurant la fonction de rappel, vous pouvez personnaliser le processus de
+mise en trou noir (blackhole callback)::
 
     public function beforeFilter(Event $event)
     {
@@ -79,23 +77,29 @@ Le  paramètre ``$type`` peut avoir les valeurs suivantes:
   controller/action.
 * 'secure' Indique un problème sur la méthode de restriction SSL.
 
+.. versionadded:: cakephp/cakephp 3.2.6
+
+    Depuis la version 3.2.6, un paramètre supplémentaire est inclus dans le callback blackHole, une instance de
+    ``Cake\Controller\Exception\SecurityException`` est incluse dans le deuxième
+    paramètre.
+
 Restreindre les actions aux actions SSL
 =======================================
 
 .. php:method:: requireSecure()
 
     Définit les actions qui nécessitent une requête SSL-securisée. Prend un
-    nombre indéfini de paramètres. Peut-être appelé sans argument,
-    pour forcer toutes les actions à requérir une SSL-securisée.
+    nombre indéfini de paramètres. Peut-être appelé sans argument, pour forcer
+    toutes les actions à requérir une SSL-securisée.
 
 .. php:method:: requireAuth()
 
-    Définit les actions qui nécessitent un jeton valide généré par
-    le component Security. Prend un nombre indéfini de paramètres.
-    Peut-être appelé sans argument, pour forcer toutes les actions
-    à requérir une authentification valide.
+    Définit les actions qui nécessitent un jeton valide généré par le component
+    Security. Prend un nombre indéfini de paramètres. Peut-être appelé sans
+    argument, pour forcer toutes les actions à requérir une authentification
+    valide.
 
-Restreindre les demandes croisées de controller
+Restreindre les Demandes croisées de Controller
 ===============================================
 
 .. php:attr:: allowedControllers
@@ -106,16 +110,16 @@ Restreindre les demandes croisées de controller
 
 .. php:attr:: allowedActions
 
-    Une liste des actions qui peuvent envoyer des requêtes vers les actions
-    de ce controller. Ceci peut être utilisé pour contrôler les demandes
-    croisées de controller.
+    Une liste des actions qui peuvent envoyer des requêtes vers les actions de
+    ce controller. Ceci peut être utilisé pour contrôler les demandes croisées
+    de controller.
 
-Prévention de la falsification de formulaire
+Prévention de la Falsification de Formulaire
 ============================================
 
-Par défaut le component Security ``SecurityComponent`` empêche l'utilisation
-de la falsification de formulaire. Le ``SecurityComponent`` va empêcher les
-choses suivantes:
+Par défaut le component Security ``SecurityComponent`` empêche l'utilisation de
+la falsification de formulaire. Le ``SecurityComponent`` va empêcher les choses
+suivantes:
 
 * Les champs inconnus ne peuvent être ajoutés au formulaire.
 * Les champs ne peuvent être retirés du formulaire.
@@ -124,9 +128,9 @@ choses suivantes:
 La prévention de ces types de falsification est faite de concert avec
 FormHelper, en recherchant les champs qui sont dans un formulaire. Les valeurs
 pour les champs cachés sont aussi utilisées. Toutes ces données sont combinées
-et il en ressort un hash. Quand un formulaire est soumis, SecurityComponent
-va utiliser les données POSTées pour construire la même structure et
-comparer le hash.
+et il en ressort un hash. Quand un formulaire est soumis, SecurityComponent va
+utiliser les données POSTées pour construire la même structure et comparer le
+hash.
 
 
 .. note::
@@ -153,8 +157,7 @@ Utilisation
 
 Le component Security est généralement utilisé dans la méthode
 ``beforeFilter()`` de votre controller. Vous pouvez spécifier les restrictions
-de sécurité que vous voulez et le component Security les forcera
-au démarrage::
+de sécurité que vous voulez et le component Security les forcera au démarrage::
 
     namespace App\Controller;
 
@@ -178,8 +181,8 @@ au démarrage::
         }
     }
 
-Cette exemple forcera toutes les actions qui proviennent de la
-"route" Admin à être effectuées via des requêtes sécurisées::
+Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
+être effectuées via des requêtes sécurisées::
 
     namespace App\Controller;
 
@@ -208,22 +211,21 @@ Cette exemple forcera toutes les actions qui proviennent de la
         }
     }
 
-Cet exemple forcera toutes les actions qui proviennent de la "route"
-admin à requérir des requêtes sécurisés SSL. Quand la requête est placée
-dans un trou noir, elle appellera le callback ``forceSSL()`` qui redirigera
-automatiquement les requêtes non sécurisées vers les requêtes sécurisées.
+Cet exemple forcera toutes les actions qui proviennent de la "route" admin à
+requérir des requêtes sécurisés SSL. Quand la requête est placée dans un trou
+noir, elle appellera le callback ``forceSSL()`` qui redirigera automatiquement
+les requêtes non sécurisées vers les requêtes sécurisées.
 
 .. _security-csrf:
 
 Protection CSRF
 ===============
 
-CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour
-les applications Web. Cela permet à un attaquant de capturer et de rejouer
-une requête, et parfois de soumettre des demandes de données en utilisant
-les balises images ou des ressources sur d'autres domaines.
-Pour activer la protection CSRF, utilisez
-:doc:`/controllers/components/csrf`.
+CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour les
+applications Web. Cela permet à un attaquant de capturer et de rejouer une
+requête, et parfois de soumettre des demandes de données en utilisant les
+balises images ou des ressources sur d'autres domaines.
+Pour activer la protection CSRF, utilisez :doc:`/controllers/components/csrf`.
 
 Désactiver le Component Security pour des Actions Spécifiques
 =============================================================

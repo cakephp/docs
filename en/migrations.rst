@@ -494,7 +494,7 @@ status. You can use this command to determine which migrations have been run::
 You can also output the results as a JSON formatted string using the
 ``--format`` option (or ``-f`` for short)::
 
-    $ bin/cake migrations --format json
+    $ bin/cake migrations status --format json
 
 You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
 like for the ``migrate`` command.
