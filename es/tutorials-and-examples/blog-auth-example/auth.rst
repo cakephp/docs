@@ -257,7 +257,7 @@ El hasheo del password aún no esta hecho, abrí ``app/Model/User.php`` y agreg�
 
     // ...
 
-.. nota::
+.. note::
 
     El BlowfishPasswordHasher usa un algoritmo de hasheo mas fuerte (bcrypt) que 
     SimplePasswordHasher (sha1) y provee salts por usuario. SimplePasswordHasher 
