@@ -24,6 +24,13 @@ Routing
   when defining nested resources as you can create specialized controllers for
   nested resources.
 
+Console
+=======
+
+- Shell tasks that are invoked directly from the CLI no longer have their
+  ``_welcome`` method invoked. They will also have the ``requested`` parameter
+  set now.
+
 Request
 =======
 
