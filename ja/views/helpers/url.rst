@@ -1,23 +1,24 @@
-Urlヘルパー
-###########
+Url
+###
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: UrlHelper(View $view, array $config = [])
 
-UrlヘルパーはURLを他のヘルパーよりも簡単に生成します。
-アプリケーションのヘルパーをコアヘルパーでオーバーライドすることで
-URLをカスタマイズする場を提供します。
-:ref:`aliasing-helpers` に詳細があります。
+UrlHelper は他のヘルパーから URL を生成することが容易になります。
+アプリケーションのヘルパーでコアヘルパーをオーバーライドすることによって URL の生成方法を
+カスタマイズする単一の場所を提供します。このやり方は :ref:`aliasing-helpers`
+セクションをご覧ください。
 
-URLの生成
-===============
+URL の生成
+==========
 
 .. php:method:: build(mixed $url = NULL, boolean $full = false)
 
-コントローラーとアクションの組み合わせを指定することでURLを生成して返します。
-``$url`` が空だったら、 ``REQUEST\_URI`` を返します。そうでなかったら、コントローラーとアクションの組み合わせで
-URLを生成します。 ``full`` が ``true`` だったら、結果の前にフルパスURLで返されます。::
+コントローラーとアクションの組み合わせを指定することで URL を生成して返します。
+``$url`` が空の場合、 ``REQUEST\_URI`` を返します。そうでない場合、
+コントローラーとアクションの組み合わせで URL を生成します。
+``full`` が ``true`` の場合、結果がフルベース URL で返されます。 ::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -25,12 +26,12 @@ URLを生成します。 ``full`` が ``true`` だったら、結果の前にフ
         "bar"
     ]);
 
-    // Output
+    // 出力結果
     /posts/view/bar
 
-もう幾つかの役立つ例:
+さらにいつかの使用例は、こちら:
 
-URLに文字列変数を渡す::
+名前付きパラメータの URL::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -38,10 +39,10 @@ URLに文字列変数を渡す::
         "foo" => "bar"
     ]);
 
-    // Output
+    // 出力結果
     /posts/view/foo:bar
 
-拡張子の指定::
+拡張子つきの URL::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -49,17 +50,17 @@ URLに文字列変数を渡す::
         "_ext" => "rss"
     ]);
 
-    // Output
+    // 出力結果
     /posts/list.rss
 
-ドメインの直後に ('/' で開始する)　文字列を追加したURLを生成する。 ::
+フルベース URL を前につけた ('/' から始まる) URL::
 
     echo $this->Url->build('/posts', true);
 
-    // Output
+    // 出力結果
     http://somedomain.com/posts
 
-URL の末尾に GET と名前付きアンカーを生成::
+GET パラメータと名前付きアンカーの URL::
 
     echo $this->Url->build([
         "controller" => "Posts",
@@ -68,14 +69,14 @@ URL の末尾に GET と名前付きアンカーを生成::
         "#" => "first"
     ]);
 
-    // Output
+    // 出力結果
     /posts/search?foo=bar#first
 
-ルーティング::
+名前付きルートの URL::
 
     echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
 
-    // Assuming route is setup like:
+    // 以下のようにルートをセットアップすることを仮定:
     // $router->connect(
     //     '/products/:slug',
     //     [
@@ -88,7 +89,24 @@ URL の末尾に GET と名前付きアンカーを生成::
     // );
     /products/i-m-slug
 
-詳細はAPIの `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_ にて.
+CSS や JavaScript、または画像ファイルの URL を生成する場合、
+これらのアセットタイプのためのヘルパーメソッドがあります。 ::
+
+    // 出力結果 /img/icon.png
+    $this->Url->image('icon.png');
+
+    // 出力結果 /js/app.js
+    $this->Url->script('app.js');
+
+    // 出力結果 /css/app.css
+    $this->Url->css('app.css');
+
+.. versionadded:: 3.2.4
+    アセットヘルパーメソッドは 3.2.4 で追加されました。
+
+詳細は API の
+`Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
+を確認してください。
 
 .. meta::
     :title lang=ja: Urlヘルパー
