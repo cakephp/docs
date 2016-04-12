@@ -94,7 +94,7 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
 
     }
 
-De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.ctp::
+De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.ctp:
 
 .. code-block:: php
 
@@ -217,7 +217,7 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
 
 Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.  
 Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes 
-lineas::
+lineas:
 
 .. code-block:: php
 
