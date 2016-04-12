@@ -94,7 +94,7 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
 
     }
 
-De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.ctp:
+De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.ctp::
 
 .. code-block:: php
 
@@ -251,7 +251,7 @@ Como mencionamos antes, estamos convirtiendo este blog en una herramienta de aut
 
     ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-También, un pequeño cambio en ArticlesController es necesario para guardar el usuario logeado como referencia en los artículos creados:
+También, un pequeño cambio en ArticlesController es necesario para guardar el usuario logeado como referencia en los artículos creados::
 
     // src/Controller/ArticlesController.php
 

@@ -264,7 +264,7 @@ Esto nos permitirá elegir una categoría para un Article al momento de crearlo 
 Modificando el template de Articles
 ===================================
 
-El template add de Article debería verse similar a esto: 
+El template add de Article debería verse similar a esto:: 
 
 .. code-block:: php
 
