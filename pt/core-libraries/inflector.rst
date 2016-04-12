@@ -14,7 +14,7 @@ Você pode testar as inflexões em `inflector.cakephp.org
 <http://inflector.cakephp.org/>`_.
 
 Criando as formas singulares e plurais
-================================
+======================================
 
 .. php:staticmethod:: singularize($singular)
 .. php:staticmethod:: pluralize($singular)
@@ -40,7 +40,7 @@ você pode usar :ref:`inflection-configuration` para personalizar as regras usad
     esteja em sua forma singular.
 
 Criando as formas CamelCase e nome_sublinhado
-=========================================
+=============================================
 
 .. php:staticmethod:: camelize($underscored)
 .. php:staticmethod:: underscore($camelCase)
@@ -58,7 +58,7 @@ em CamelCase. Palavras com espaços serão convertidas para caixa baixa, mas nã
 separadas por sublinhado.
 
 Criando formas legíveis para humanos
-=============================
+====================================
 
 .. php:staticmethod:: humanize($underscored)
 
@@ -69,7 +69,7 @@ a leitura humana::
     Inflector::humanize('apple_pie');
 
 Criando formatos para nomes de tabelas e classes
-===================================
+================================================
 
 .. php:staticmethod:: classify($underscored)
 .. php:staticmethod:: dasherize($dashed)
@@ -88,7 +88,7 @@ os nomes das tabelas ou classes::
     Inflector::tableize('UserProfileSetting');
 
 Criando nomes de variáveis
-=======================
+==========================
 
 .. php:staticmethod:: variable($underscored)
 
@@ -99,7 +99,7 @@ involvem a geração de código ou rotinas baseadas em convenções::
     Inflector::variable('apple_pie');
 
 Criando strings de URL seguras
-=========================
+==============================
 
 .. php:staticmethod:: slug($word, $replacement = '-')
 
@@ -131,7 +131,7 @@ CamelCase e em nome\_sublinhado) não funciona como você gostaria. Caso o CakeP
 reconheça seu "quaisquer" ou "lápis", você pode ensiná-lo a entender seus casos especiais.
 
 Carregando inflexões personalizadas
---------------------------
+-----------------------------------
 
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
