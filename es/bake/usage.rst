@@ -10,7 +10,7 @@ Si tiene problemas para ejecutar el script, asegurese de::
    el ip '127.0.0.1'. En algunos casos PHP CLI tiene problemas al referenciar
    por nombre de host (localhost). 
 3. Dependiendo de como su computadora este configurada, la ejecución del comando
-   CAKE BAKE (cake bash script) puede requerir que permisos de ejecución al
+   CAKE BAKE (cake bash script) puede requerir permisos de ejecución al
    lanzar 'bin/cake bake'.
 
 Antes de comenzar la  ejecución, asegurese de disponer al menos una conexion
@@ -106,8 +106,8 @@ y sus opciones usando el parametro '--help' option::
 Temas Bake / Templates
 ======================
 
-La opción theme is genérica para todos los comandos bake y permite cambiar los
-templates de bake utilizados para generar los archivos finales. Para crear sus
+La opción theme es genérica para todos los comandos bake y permite cambiar los
+templates de bake utilizados a la hora de generar los archivos finales. Para crear sus
 propios templates, ver :ref:`bake theme creation documentation
 <creating-a-bake-theme>`.
 
