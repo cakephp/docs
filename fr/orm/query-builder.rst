@@ -814,10 +814,17 @@ suivantes pour créer des conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+Dans les cas où vous ne pouvez ou ne voulez pas utiliser les méthodes du
+constructeur pour créer les conditions que vous voulez, vous pouvez utiliser du
+code SQL dans des clauses where::
+
+    // Compare deux champs l'un avec l'autre
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    Les noms de champs utilisés dans les expressions ne doivent **jamais**
-    contenir de contenu non fiable.
+    Les noms de champs utilisés dans les expressions et le code SQL ne doivent
+    **jamais** contenir de contenu non fiable.
     Référez-vous à la section :ref:`using-sql-functions` pour savoir comment
     inclure des données non fiables de manière sécurisée dans vos appels de
     fonctions.
