@@ -780,11 +780,18 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+In situations when you can't get, or don't want to use the builder methods to
+create the conditions you want you can also use snippets of SQL in where
+clauses::
+
+    // Compare two fields to each other
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    The field name used in expressions should **never** contain untrusted content.
-    See the :ref:`using-sql-functions` section for how to safely include
-    untrusted data into function calls.
+    The field names used in expressions, and SQL snippets should **never**
+    contain untrusted content.  See the :ref:`using-sql-functions` section for
+    how to safely include unsafe data into function calls.
 
 Automatically Creating IN Clauses
 ---------------------------------
