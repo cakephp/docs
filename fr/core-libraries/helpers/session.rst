@@ -87,7 +87,7 @@ Affichage de notifications ou de messages flash
     controller, vous pouvez avoir du code comme::
 
         // dans un controller
-        $this->Session->setFlash('Le user n'a pu être supprimé.');
+        $this->Session->setFlash('Le user n\'a pu être supprimé.');
 
     Quand le message sort, vous pouvez choisir l'élément utilisé pour afficher
     ce message::
