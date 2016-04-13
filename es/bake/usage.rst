@@ -4,24 +4,33 @@ Code Generation with Bake
 La consola de CAKE se ejecuta usando PHP CLI (command line interface). 
 Si tiene problemas para ejecutar el script, asegurese de::
 
-1) Tener instalado el PHP CLI y que este dispone de los modulos correspondientes habilitados (ej: MySQL y intl).  
-2) Si el host de base de datos es 'localhost', intente realizar la conexión con el ip '127.0.0.1'. En algunos casos PHP CLI tiene problemas al referenciar por nombre de host (localhost). 
-3) Dependiendo de como su computadora este configurada, la ejecución del comando CAKE BAKE (cake bash script) puede requerir que permisos de ejecución al lanzar 'bin/cake bake'. 
+1. Tener instalado el PHP CLI y que este dispone de los modulos correspondientes
+   habilitados (ej: MySQL y intl).
+2. Si el host de base de datos es 'localhost', intente realizar la conexión con
+   el ip '127.0.0.1'. En algunos casos PHP CLI tiene problemas al referenciar
+   por nombre de host (localhost). 
+3. Dependiendo de como su computadora este configurada, la ejecución del comando
+   CAKE BAKE (cake bash script) puede requerir que permisos de ejecución al
+   lanzar 'bin/cake bake'.
 
-Antes de comenzar la  ejecución, asegurese de disponer al menos una conexion a una base de datos configurada. 
-Ver sección :ref:`database configuration <database-configuration>` para mas información.
+Antes de comenzar la  ejecución, asegurese de disponer al menos una conexion
+a una base de datos configurada.  Ver sección :ref:`database configuration
+<database-configuration>` para mas información.
 
-A fin de comenzar con la ejecución del comando, debe abrir la consola de windows y ejecutar "Cake Bake"
+A fin de comenzar con la ejecución del comando, debe abrir la consola de windows
+y ejecutar "Cake Bake"
 
 1. Ir a Inicio (Start) > Ejecutar (Run)
 2. Escribir "cmd" y presionar 'Enter'
 3. Navegar hasta llegar a la carpeta de instalación del cake
 4. Acceder a la carpeta 'bin'
-5. Escribir 'Cake bake' lo cual deberá devolver un listado con todas las tareas/actividades disponibles.
+5. Escribir 'Cake bake' lo cual deberá devolver un listado con todas las
+   tareas/actividades disponibles.
+
 El resultado debería ser algo similar a lo siguiente::
 
- $ bin/cake bake
-    
+    $ bin/cake bake
+
     Welcome to CakePHP v3.1.6 Console
     ---------------------------------------------------------------
     App : src
@@ -52,7 +61,8 @@ El resultado debería ser algo similar a lo siguiente::
 
     By using 'cake bake [name]' you can invoke a specific bake task.
 
-Puede obtener más información sobre lo que realiza cada una de las actividades y sus opciones usando el parametro '--help' option::
+Puede obtener más información sobre lo que realiza cada una de las actividades
+y sus opciones usando el parametro '--help' option::
 
     $ bin/cake bake controller --help
 
@@ -96,7 +106,10 @@ Puede obtener más información sobre lo que realiza cada una de las actividades
 Temas Bake / Templates
 ======================
 
-La opción theme is genérica para todos los comandos bake y permite cambiar los templates de bake utilizados para generar los archivos finales. Para crear sus propios templates, ver :ref:`bake theme creation documentation <creating-a-bake-theme>`.
+La opción theme is genérica para todos los comandos bake y permite cambiar los
+templates de bake utilizados para generar los archivos finales. Para crear sus
+propios templates, ver :ref:`bake theme creation documentation
+<creating-a-bake-theme>`.
 
 .. meta::
     :title lang=en: Code Generation with Bake
