@@ -556,7 +556,7 @@ value. If you use it, it will mark all found migrations as migrated::
 As of 1.5.5, you can use the ``migrations`` shell to seed your database. This
 leverages the `Phinx library seed feature <http://docs.phinx.org/en/latest/seeding.html>`_.
 By default, seed files will be looked for in the ``config/Seeds`` directory of
-your application. Please make sure you follow `Phinx instructions to build your seed files` <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
+your application. Please make sure you follow `Phinx instructions to build your seed files <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
 As for migrations, a ``bake`` interface is provided for seed files::
 
