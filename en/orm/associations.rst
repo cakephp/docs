@@ -382,9 +382,8 @@ Possible keys for hasMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & plural name of the association so ``comments`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'select'. The other
-  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
-  subquery.
+- **strategy**: Defines the query strategy to use. Can be set to 'select' or 
+  'subquery', which replaces the ``IN`` list with an equivalent subquery.
 - **saveStrategy**: Either 'append' or 'replace'. When 'append' the current records
   are appended to any records in the database. When 'replace' associated records
   not in the current set will be removed. If the foreign key is a null able column
