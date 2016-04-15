@@ -17,7 +17,7 @@ Configure を使って、好きなメソッドをデフォルトのエラーハ�
 あなたのアプリケーションが PHP エラー（例外については :doc:`/development/exceptions` にて
 別で説明します）を発生させるたびに呼び出されるコールバックを定義することができます。
 コールバックは PHP が呼ぶことができるものなら無名関数であってもかまいません。
-エラーをハンドルするデフォルトの設定は以下のようになっています::
+エラーをハンドルするデフォルトの設定は以下のようになっています。 ::
 
     Configure::write('Error', array(
         'handler' => 'ErrorHandler::handleError',
@@ -61,7 +61,7 @@ Configure を使って、好きなメソッドをデフォルトのエラーハ�
 
 エラーハンドラはどのような種類のコールバックを使ってでも作ることができます。たとえば、
 ``AppError`` というクラスをエラーをハンドルするのに使うことができます。
-その場合は次のようにすることになるでしょう::
+その場合は次のようにすることになるでしょう。 ::
 
     //app/Config/core.php の中で
     Configure::write('Error.handler', 'AppError::handleError');
@@ -79,7 +79,7 @@ Configure を使って、好きなメソッドをデフォルトのエラーハ�
 
 このクラス／メソッドはエラーが発生するたびに「エラー発生！」と表示します。どのような種類の
 コールバックでも定義することができますので、PHP5.3 以降をお使いなのであれば無名関数を
-使用することもできます::
+使用することもできます。 ::
 
     Configure::write('Error.handler', function($code, $description, $file = null,
         $line = null, $context = null) {
@@ -87,14 +87,13 @@ Configure を使って、好きなメソッドをデフォルトのエラーハ�
     });
 
 重要なことなので思い出していただきたいのは、設定されたエラーハンドラにより捉えられるエラーは
-PHP エラーであり、カスタムエラーをハンドルする必要があるなら、 :doc:`/development/exceptions` の
-設定も扱いたくなるかもしれないということです。
+PHP エラーです。 :doc:`/development/exceptions` は、別に処理されます。
 
 致命的 (fatal) エラーの振る舞いを変える
 =======================================
 
 CakePHP 2.2 以降、 ``Error.handler`` は致命的 (fatal) なエラーコードも受け取るようになりました。
-もしも cake のエラーページを表示させたくないのなら、次のように処理を上書くことができます::
+もしも cake のエラーページを表示させたくないのなら、次のように処理を上書くことができます。 ::
 
     //app/Config/core.php の中で
     Configure::write('Error.handler', 'AppError::handleError');
