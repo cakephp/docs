@@ -52,6 +52,12 @@ ORM
   ``unique()`` method, but ensures that association conditions are applied.
 - ``isUnique`` rules now apply association conditions.
 
+Validation
+==========
+
+- ``Validator::requirePresence()`` now accepts a list of fields. This allows you
+  to more concisely define the fields that are required.
+
 Debugging Functions
 ===================
 
