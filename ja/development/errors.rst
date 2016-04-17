@@ -1,72 +1,130 @@
-Error & Exception Handling
+エラーと例外のハンドリング
 ##########################
 
-Many of PHP's internal methods use errors to communicate failures. These errors
-will need to be trapped and dealt with. CakePHP comes with default error
-trapping that prints and or logs errors as they occur. This same error handler
-is used to catch uncaught exceptions from controllers and other parts of your
-application.
+..
+    Error & Exception Handling
+    ##########################
+    
+    Many of PHP's internal methods use errors to communicate failures. These errors
+    Will need to be trapped and dealt with. CakePHP comes with default error
+    Trapping that prints and or logs errors as they occur. This same error handler
+    Is used to catch uncaught exceptions from controllers and other parts of your
+    Application.
+
+多くのPHP内部メソッドは失敗を伝えるためにエラーを使用します。
+これらのエラーはトラップされ対処される必要があるでしょう。
+CakePHPはエラーが起きるとそれを表示しまたは記録する既定のエラートラップを備えています。
+この同じエラーハンドラがあなたのアプリケーション中のコントローラや他の部分から
+キャッチされなかった例外をつかまえるために用いられます。
 
 .. _error-configuration:
 
-Error & Exception Configuration
-================================
+エラーと例外の設定
+==================
 
-Error configuration is done inside your application's **config/app.php**
-file. By default CakePHP uses the ``ErrorHandler`` or ``ConsoleErrorHandler``
-class to trap errors and print/log the errors. You can replace this behavior by
-changing out the default error handler. The default error handler also handles
-uncaught exceptions.
+..
+    Error & Exception Configuration
+    ======================
+    
+    Error configuration is done inside your application's **config/app.php**
+    file. By default CakePHP uses the ``ErrorHandler`` or ``ConsoleErrorHandler``
+    class to trap errors and print/log the errors. You can replace this behavior by
+    changing out the default error handler. The default error handler also handles
+    uncaught exceptions.
 
-Error handling accepts a few options that allow you to tailor error handling for
-your application:
 
-* ``errorLevel`` - int - The level of errors you are interested in capturing.
-  Use the built-in php error constants, and bitmasks to select the level of
-  error you are interested in.
-* ``trace`` - bool - Include stack traces for errors in log files. Stack
-  traces will be included in the log after each error. This is helpful for
-  finding where/when errors are being raised.
-* ``exceptionRenderer`` - string - The class responsible for rendering uncaught
-  exceptions. If you choose a custom class you should place the file for that
-  class in **src/Error**. This class needs to implement a ``render()`` method.
-* ``log`` - bool - When ``true``, exceptions + their stack traces will be
-  logged to :php:class:`Cake\\Log\\Log`.
-* ``skipLog`` - array - An array of exception classnames that should not be
-  logged. This is useful to remove NotFoundExceptions or other common, but
-  uninteresting logs messages.
-* ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
-  the memory limit by when a fatal error is encountered. This allows breathing
-  room to complete logging or error handling.
+エラーの設定はあなたのアプリケーションの **config/app.php** ファイル内で行われます。
+既定ではCakePHPはエラーをトラップし、そのエラーを表示／記録するために
+``ErrorHandler`` または ``ConsoleErrorHandler`` クラスを使用します。
 
-ErrorHandler by default, displays errors when ``debug`` is ``true``, and logs
-errors when debug is ``false``. The type of errors captured in both cases is
-controlled by ``errorLevel``. The fatal error handler will be called independent
-of ``debug`` level or ``errorLevel`` configuration, but the result will be
-different based on ``debug`` level. The default behavior for fatal errors is
-show a page to internal server error (``debug`` disabled) or a page with the
-message, file and line (``debug`` enabled).
+..
+    Error handling accepts a few options that allow you to tailor error handling for
+    your application:
+    
+    * ``errorLevel`` - int - The level of errors you are interested in capturing.
+      Use the built-in php error constants, and bitmasks to select the level of
+      error you are interested in.
+    * ``trace`` - bool - Include stack traces for errors in log files. Stack
+      traces will be included in the log after each error. This is helpful for
+      finding where/when errors are being raised.
+    * ``exceptionRenderer`` - string - The class responsible for rendering uncaught
+      exceptions. If you choose a custom class you should place the file for that
+      class in **src/Error**. This class needs to implement a ``render()`` method.
+    * ``log`` - bool - When ``true``, exceptions + their stack traces will be
+      logged to :php:class:`Cake\\Log\\Log`.
+    * ``skipLog`` - array - An array of exception classnames that should not be
+      logged. This is useful to remove NotFoundExceptions or other common, but
+      uninteresting logs messages.
+    * ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
+      the memory limit by when a fatal error is encountered. This allows breathing
+      room to complete logging or error handling.
+
+エラーハンドリングはあなたのアプリケーション用のエラーハンドリングを調整するために
+いくつかのオプションを受け入れます:
+
+* ``errorLevel`` - int - あなたが捕捉したいエラーレベル。
+  組み込みのPHPエラー定数を使い、捕捉したいエラーレベルを選択するためにビットマスクをします。
+* ``trace`` - bool - ログファイル中にエラーのスタックトレースを含めます。
+  スタックトレースはログ中の各エラーの後に含まれるでしょう。
+  これはどこで／いつそのエラーが引き起こされたかを見つけるために役に立ちます。
+* ``exceptionRenderer`` - string - キャッチされなかった例外を描画する役目を担うクラス。
+  もしもカスタムクラスを選択する場合は **src/Error** 内にそのクラスのファイルを置くべきです。
+  このクラスは ``render()`` メソッドを実装する必要があります。
+* ``log`` - bool - ``true`` の時、 :php:class:`Cake\\Log\\Log` によって例外とそのスタックトレースが記録されます。
+* ``skipLog`` - array - 記録されるべきではない例外クラス名の配列。
+  これは NotFoundException や他のありふれた、でもログにはメッセージを残したくない例外を除外するのに役立ちます。
+* ``extraFatalErrorMemory`` - int - 致命的エラーが起きた時にメモリの上限を増加させるためのメガバイト数を設定します。
+  これはロギングやエラーハンドリングを完遂するために猶予を与えます。
+
+..
+    ErrorHandler by default, displays errors when ``debug`` is ``true``, and logs
+    errors when debug is ``false``. The type of errors captured in both cases is
+    controlled by ``errorLevel``. The fatal error handler will be called independent
+    of ``debug`` level or ``errorLevel`` configuration, but the result will be
+    different based on ``debug`` level. The default behavior for fatal errors is
+    show a page to internal server error (``debug`` disabled) or a page with the
+    message, file and line (``debug`` enabled).
+
+エラーハンドラは既定では、``debug`` が ``true`` の時にエラーを表示し、
+``debug`` が ``false`` の時にエラーを記録します。
+いずれも捕捉されるエラータイプは ``errorLevel`` によって制御されます。
+致命的エラーのハンドラは ``debug`` レベルや ``errorLevel`` とは独立して呼び出されますが、
+その結果は ``debug`` レベルによって変わるでしょう。
+致命的エラーに対する既定のふるまいは内部サーバーエラーページ（``debug`` 無効）
+またはエラーメッセージ、ファイルおよび行を含むページ（``debug`` 有効）を表示します。
 
 .. note::
 
-    If you use a custom error handler, the supported options will
-    depend on your handler.
+    もしカスタムエラーハンドラを使うなら、サポートされるオプションはあなたのハンドラに依存します。
 
-Creating your Own Error Handler
-===============================
+..
+        If you use a custom error handler, the supported options will
+        depend on your handler.
 
-You can create an error handler out of any callback type. For example you could
-use a class called ``AppError`` to handle your errors. By extending the
-``BaseErrorHandler`` you can supply custom logic for handling errors.
-An example would be::
+独自エラーハンドラの作成
+========================
 
-    // In config/bootstrap.php
+..
+    Creating your Own Error Handler
+    ========================
+    
+    You can create an error handler out of any callback type. For example you could
+    use a class called ``AppError`` to handle your errors. By extending the
+    ``BaseErrorHandler`` you can supply custom logic for handling errors.
+    An example would be::
+
+あなたはコールバックタイプからエラーハンドラを作り出すことができます。
+たとえばあなたのエラーをハンドルするために ``AppError`` というクラスを使うことができます。
+``BaseErrorHandler`` を継承することでエラーをハンドリングするためのカスタムロジックを提供できます。
+一つ例は::
+
+    // config/bootstrap.php 内
     use App\Error\AppError;
 
     $errorHandler = new AppError();
     $errorHandler->register();
 
-    // In src/Error/AppError.php
+    // src/Error/AppError.php 内
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;
@@ -83,32 +141,44 @@ An example would be::
         }
     }
 
-The ``BaseErrorHandler`` defines two abstract methods. ``_displayError()`` is
-used when errors are triggered. The ``_displayException()`` method is called
-when there is an uncaught exception.
+..
+    The ``BaseErrorHandler`` defines two abstract methods. ``_displayError()`` is
+    used when errors are triggered. The ``_displayException()`` method is called
+    when there is an uncaught exception.
 
+``BaseErrorHandler`` は二つの抽象メソッドを定義しています。
+``_displayError()`` はエラーが引き起こされた時に使われます。
+``_displayException()`` メソッドはキャッチされなかった例外がある時に呼ばれます。
 
-Changing Fatal Error Behavior
-=============================
+致命的エラーのふるまい変更
+==========================
 
-The default error handlers convert fatal errors into exceptions and re-use the
-exception handling logic to render an error page. If you do not want to show the
-standard error page, you can override it like::
+..
+    Changing Fatal Error Behavior
+    =============================
+    
+    The default error handlers convert fatal errors into exceptions and re-use the
+    exception handling logic to render an error page. If you do not want to show the
+    standard error page, you can override it like::
 
-    // In config/bootstrap.php
+既定のエラーハンドラは致命的エラーを例外に変換し
+エラーページを描画するための例外ハンドリングのロジックを再利用します。
+もし標準のエラーページを表示したくない場合は、あなたはそれをオーバーライドできます::
+
+    // config/bootstrap.php 内
     use App\Error\AppError;
 
     $errorHandler = new AppError();
     $errorHandler->register();
 
-    // In src/Error/AppError.php
+    // src/Error/AppError.php 内
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;
 
     class AppError extends BaseErrorHandler
     {
-        // Other methods.
+        // 他のメソッド等
 
         public function handleFatalError($code, $description, $file, $line)
         {
@@ -118,99 +188,132 @@ standard error page, you can override it like::
 
 .. php:namespace:: Cake\Network\Exception
 
-Exception Classes
-=================
+例外クラス
+==========
 
-There are a number of exception classes in CakePHP. The built in exception
-handling will capture any uncaught exceptions and render a useful page.
-Exceptions that do not specifically use a 400 range code, will be treated as an
-Internal Server Error.
+..
+    Exception Classes
+    =================
+    
+    There are a number of exception classes in CakePHP. The built in exception
+    handling will capture any uncaught exceptions and render a useful page.
+    Exceptions that do not specifically use a 400 range code, will be treated as an
+    Internal Server Error.
+
+CakePHPにはいくつかの例外クラスがあります。
+組み込みの例外ハンドリングではキャッチされなかったあらゆる例外を捕捉しページを描画するでしょう。
+例外は400番台のコードは使わず、内部サーバーエラーとして処理されるでしょう。
 
 .. _built-in-exceptions:
 
-Built in Exceptions for CakePHP
-===============================
+CakePHP用の組み込みの例外
+=========================
 
-HTTP Exceptions
----------------
+..
+    Built in Exceptions for CakePHP
+    ===============================
+    
+    HTTP Exceptions
+    ---------------
+    
+    There are several built-in exceptions inside CakePHP, outside of the
+    internal framework exceptions, there are several
+    exceptions for HTTP methods
 
-There are several built-in exceptions inside CakePHP, outside of the
-internal framework exceptions, there are several
-exceptions for HTTP methods
+HTTP例外
+--------
+
+いくつかのCakePHP内部の組み込みの例外、フレームワーク外部の例外、
+いくつかのHTTPメソッド用の例外があります。
+
 
 .. php:exception:: BadRequestException
 
-    Used for doing 400 Bad Request error.
+    400 Bad Request エラーに使われます。 
+..    Used for doing 400 Bad Request error.
 
 .. php:exception:: UnauthorizedException
 
-    Used for doing a 401 Unauthorized error.
+    401 Unauthorized エラーに使われます。
+..    Used for doing a 401 Unauthorized error.
 
 .. php:exception:: ForbiddenException
 
-    Used for doing a 403 Forbidden error.
+    403 Forbidden エラーに使われます。
+..    Used for doing a 403 Forbidden error.
 
 .. versionadded:: 3.1
 
-    InvalidCsrfTokenException has been added.
+    InvalidCsrfTokenExceptionが追加されました。
 
 .. php:exception:: InvalidCsrfTokenException
 
-    Used for doing a 403 error caused by an invalid CSRF token.
+    無効なCSRFトークンによって引き起こされた403エラーに使われます。
+..    Used for doing a 403 error caused by an invalid CSRF token.
 
 .. php:exception:: NotFoundException
 
-    Used for doing a 404 Not found error.
+    404 Not Found エラーに使われます。
+..    Used for doing a 404 Not found error.
 
 .. php:exception:: MethodNotAllowedException
 
-    Used for doing a 405 Method Not Allowed error.
-
-
+    405 Method Not Allowed エラーに使われます。
+..    Used for doing a 405 Method Not Allowed error.
 
 .. php:exception:: NotAcceptableException
 
-    Used for doing a 406 Not Acceptable error.
-    
-    .. versionadded:: 3.1.7 NotAcceptableException has been added.
+    406 Not Acceptable エラーに使われます。
 
+    .. versionadded:: 3.1.7 NotAcceptableExceptionが追加されました。
+..    Used for doing a 406 Not Acceptable error.
+    
 .. php:exception:: ConflictException
 
-    Used for doing a 409 Conflict error.
+    409 Conflict エラーに使われます。
 
-    .. versionadded:: 3.1.7 ConflictException has been added.
+    .. versionadded:: 3.1.7 ConflictExceptionが追加されました。
+..    Used for doing a 409 Conflict error.
 
 .. php:exception:: GoneException
 
-    Used for doing a 410 Gone error.
+    410 Gone エラーに使われます。
 
-    .. versionadded:: 3.1.7 GoneException has been added.
+    .. versionadded:: 3.1.7 GoneExceptionが追加されました。
+..    Used for doing a 410 Gone error.
 
-For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
+.. For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
+HTTP 4xx エラーステータスコードの詳細は :rfc:`2616#section-10.4` を参照。
 
 .. php:exception:: InternalErrorException
 
-    Used for doing a 500 Internal Server Error.
+    500 Internal Server Error に使われます。
+..    Used for doing a 500 Internal Server Error.
 
 .. php:exception:: NotImplementedException
 
-    Used for doing a 501 Not Implemented Errors.
-
-
+    501 Not Implemented エラーに使われます。
+..    Used for doing a 501 Not Implemented Errors.
 
 .. php:exception:: ServiceUnavailableException
 
-    Used for doing a 503 Service Unavailable error.
+    503 Service Unavailable エラーに使われます。
 
-    .. versionadded:: 3.1.7 Service Unavailable has been added.
+    .. versionadded:: 3.1.7 Service Unavailableが追加されました。
+..    Used for doing a 503 Service Unavailable error.
 
-For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
+.. For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
 
+HTTP 5xx エラーステータスコードの詳細は :rfc:`2616#section-10.5` を参照。
 
-You can throw these exceptions from your controllers to indicate failure states,
-or HTTP errors. An example use of the HTTP exceptions could be rendering 404
-pages for items that have not been found::
+..
+    You can throw these exceptions from your controllers to indicate failure states,
+    or HTTP errors. An example use of the HTTP exceptions could be rendering 404
+    pages for items that have not been found::
+
+失敗の状態やHTTPエラーを示すためにあなたのコントローラからこれらの例外を投げることができます。
+HTTP例外の使用例はアイテムが見つからなかった場合に404ページを描画することでしょう::
 
     use Cake\Network\Exception\NotFoundException;
     
@@ -224,169 +327,230 @@ pages for items that have not been found::
         $this->set('_serialize', ['article']);
     }
 
-By using exceptions for HTTP errors, you can keep your code both clean, and give
-RESTful responses to client applications and users.
+..
+    By using exceptions for HTTP errors, you can keep your code both clean, and give
+    RESTful responses to client applications and users.
 
-Other Built In Exceptions
--------------------------
+HTTPエラー用の例外を使うことで、あなたのコードを綺麗にし、
+かつRESTfulなレスポンスをアプリケーションのクライアントやユーザーに返すことができます。
 
-In addition, the following framework layer exceptions are available, and will
-be thrown from a number of CakePHP core components:
+その他の組み込みの例外
+----------------------
+..
+    Other Built In Exceptions
+    -------------------------
+    
+    In addition, the following framework layer exceptions are available, and will
+    be thrown from a number of CakePHP core components:
+
+加えて、以下のフレームワーク層の例外が利用可能で、
+そして、いくつかのCakePHPのコアコンポーネントから投げられるでしょう。
 
 .. php:namespace:: Cake\View\Exception
 
 .. php:exception:: MissingViewException
 
-    The chosen view class could not be found.
+    選択されたビュークラスが見つからなかった。
+..    The chosen view class could not be found.
 
 .. php:exception:: MissingTemplateException
 
-    The chosen template file could not be found.
+    選択されたテンプレートファイルが見つからなかった。
+..    The chosen template file could not be found.
 
 .. php:exception:: MissingLayoutException
 
-    The chosen layout could not be found.
+    選択されたレイアウトが見つからなかった。
+..    The chosen layout could not be found.
 
 .. php:exception:: MissingHelperException
 
-    The chosen helper could not be found.
+    選択されたヘルパーが見つからなかった。
+..    The chosen helper could not be found.
 
 .. php:exception:: MissingElementException
 
-    The chosen element file could not be found.
+    選択されたエレメントのファイルが見つからなかった。
+..    The chosen element file could not be found.
 
 .. php:exception:: MissingCellException
 
-    The chosen cell class could not be found.
+    選択されたセルクラスが見つからなかった。
+..    The chosen cell class could not be found.
 
 .. php:exception:: MissingCellViewException
 
-    The chosen cell view file could not be found.
+    選択されたビューファイルが見つからなかった。
+..    The chosen cell view file could not be found.
 
 .. php:namespace:: Cake\Controller\Exception
 
 .. php:exception:: MissingComponentException
 
-    A configured component could not be found.
+    設定されたコンポーネントが見つからなかった。
+..    A configured component could not be found.
 
 .. php:exception:: MissingActionException
 
-    The requested controller action could not be found.
+    要求されたコントローラのアクションが見つからなかった。
+..    The requested controller action could not be found.
 
 .. php:exception:: PrivateActionException
 
-    Accessing private/protected/_ prefixed actions.
+    private／protected／_が前置されたアクションへのアクセス。
+..    Accessing private/protected/_ prefixed actions.
 
 .. php:namespace:: Cake\Console\Exception
 
 .. php:exception:: ConsoleException
 
-    A console library class encounter an error.
+    コンソールライブラリクラスがエラーに遭遇した。
+..    A console library class encounter an error.
 
 .. php:exception:: MissingTaskException
 
-    A configured task could not found.
+    設定されたタスクが見つからなかった。
+..    A configured task could not found.
 
 .. php:exception:: MissingShellException
 
-    The shell class could not be found.
+    シェルクラスが見つからなかった。
+..    The shell class could not be found.
 
 .. php:exception:: MissingShellMethodException
 
-    The chosen shell class has no method of that name.
+    選択されたシェルクラスが該当の名前のメソッドを持っていない。
+..    The chosen shell class has no method of that name.
 
 .. php:namespace:: Cake\Database\Exception
 
 .. php:exception:: MissingConnectionException
 
-    A model's connection is missing.
+    モデルの接続が失われている。
+..    A model's connection is missing.
 
 .. php:exception:: MissingDriverException
 
-    A database driver could not be found.
+    データベースドライバが見つからなかった。
+..    A database driver could not be found.
 
 .. php:exception:: MissingExtensionException
 
-    A PHP extension is missing for the database driver.
+    データベースドライバのためのPHP拡張が見つからない。
+..    A PHP extension is missing for the database driver.
 
 .. php:namespace:: Cake\ORM\Exception
 
 .. php:exception:: MissingTableException
 
-    A model's table could not be found.
+    モデルのテーブルが見つからなかった。
+..    A model's table could not be found.
 
 .. php:exception:: MissingEntityException
 
-    A model's entity could not be found.
+    モデルのエンティティが見つからなかった。
+..    A model's entity could not be found.
 
 .. php:exception:: MissingBehaviorException
 
-    A model's behavior could not be found.
+    モデルのビヘイビアが見つからなかった。
+..    A model's behavior could not be found.
 
 .. php:namespace:: Cake\Datasource\Exception
 
 .. php:exception:: RecordNotFoundException
 
-   The requested record could not be found. This will also set HTTP response
-   headers to 404.
+    要求されたレコードが見つからなかった。
+    これはHTTPレスポンスヘッダに404を設定しもするでしょう。
+..    The requested record could not be found. This will also set HTTP response
+      headers to 404.
 
 .. php:namespace:: Cake\Routing\Exception
 
 .. php:exception:: MissingControllerException
 
-    The requested controller could not be found.
+    要求されたコントローラが見つからなかった。
+..    The requested controller could not be found.
 
 .. php:exception:: MissingRouteException
 
-    The requested URL cannot be reverse routed or cannot be parsed.
+    要求されたURLはルーティングの逆引きができないか解析できない。
+..    The requested URL cannot be reverse routed or cannot be parsed.
 
 .. php:exception:: MissingDispatcherFilterException
 
-    The dispatcher filter could not be found.
+    ディスパッチャフィルタが見つからない。
+..    The dispatcher filter could not be found.
 
 .. php:namespace:: Cake\Core\Exception
 
 .. php:exception:: Exception
 
-    Base exception class in CakePHP. All framework layer exceptions thrown by
-    CakePHP will extend this class.
+    CakePHPでの基底例外クラス。
+    CakePHPによって投げられるすべてのフレームワーク層の例外はこのクラスを継承するでしょう。
+..    Base exception class in CakePHP. All framework layer exceptions thrown by
+      CakePHP will extend this class.
 
-These exception classes all extend :php:exc:`Exception`.
-By extending Exception, you can create your own 'framework' errors.
-All of the standard Exceptions that CakePHP will throw also extend Exception.
+..
+    These exception classes all extend :php:exc:`Exception`.
+    By extending Exception, you can create your own 'framework' errors.
+    All of the standard Exceptions that CakePHP will throw also extend Exception.
+
+これらの例外クラスはすべて :php:exc:`Exception` を継承します。
+Exception を継承することにより、あなたは独自の‘フレームワーク’エラーを作ることができます。
+CakePHPが投げるであろう標準の例外もすべてExceptionを継承します。
 
 .. php:method:: responseHeader($header = null, $value = null)
 
-    See :php:func:`Cake\\Network\\Request::header()`
+    :php:func:`Cake\\Network\\Request::header()` 参照
 
-All Http and Cake exceptions extend the Exception class, which has a method
-to add headers to the response. For instance when throwing a 405
-MethodNotAllowedException the rfc2616 says::
-
-    "The response MUST include an Allow header containing a list of valid
-    methods for the requested resource."
-
-Using HTTP Exceptions in your Controllers
-=========================================
-
-You can throw any of the HTTP related exceptions from your controller actions
-to indicate failure states. For example::
-
-    use Cake\Network\Exception\NotFoundException;
+..
+    All Http and Cake exceptions extend the Exception class, which has a method
+    To add headers to the response. For instance when throwing a 405
+    MethodNotAllowedException the rfc2616 says::
     
-    public function view($id = null)
-    {
-        $article = $this->Articles->findById($id)->first();
-        if (empty($article)) {
-            throw new NotFoundException(__('Article not found'));
-        }
-        $this->set('article', 'article');
-        $this->set('_serialize', ['article']);
-    }
+        "The response MUST include an Allow header containing a list of valid
+        methods for the requested resource."
 
-The above would cause the configured exception handler to catch and
-process the :php:exc:`NotFoundException`. By default this will create an error
-page, and log the exception.
+すべてのHttpとCakeの例外はExceptionクラスを継承し、
+レスポンスにヘッダを追加するためのメソッドを持っています。
+rfc2616 MethodNotAllowedException では::
+
+    「レスポンスは要求されたリソースに有効なメソッドの一覧を含むAllowヘッダを含まなければならない」
+
+
+コントローラ中でのHTTP例外の使用
+================================
+
+..
+    Using HTTP Exceptions in your Controllers
+    =========================================
+    
+    You can throw any of the HTTP related exceptions from your controller actions
+    to indicate failure states. For example::
+    
+失敗の状態を示すためにあたなのコントローラのアクションからあらゆるHTTP関連の例外を投げることができます。
+たとえば::
+
+        use Cake\Network\Exception\NotFoundException;
+        
+        public function view($id = null)
+        {
+            $article = $this->Articles->findById($id)->first();
+            if (empty($article)) {
+                throw new NotFoundException(__('Article not found'));
+            }
+            $this->set('article', 'article');
+            $this->set('_serialize', ['article']);
+        }
+
+..
+    The above would cause the configured exception handler to catch and
+    process the :php:exc:`NotFoundException`. By default this will create an error
+    page, and log the exception.
+
+上記は :php:exc:`NotFoundException` をつかまえて処理するための例外ハンドラを設定するでしょう。
+既定ではエラーページを作り、例外を記録するでしょう。
 
 .. _error-views:
 
@@ -594,5 +758,5 @@ dealt with by ErrorHandler by setting the ``log`` option to ``true`` in your
     no effect. Unless you reference it inside your implementation.
 
 .. meta::
-    :title lang=ja: Error & Exception Handling
+    :title lang=ja: エラーと例外のハンドリング
     :keywords lang=ja: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error, http status codes
