@@ -1,27 +1,25 @@
 Gestion des Erreurs
 ###################
 
-Pour 2.0 ``Object::cakeError()`` a été retirée. A la place, elle a été remplacé
+Pour 2.0 ``Object::cakeError()`` a été retirée. A la place, elle a été remplacée
 par un certain nombre d'exceptions. Toutes les classes du coeur qui appelaient
-avant cakeError envoient maintenant des exceptions. Cela vous laisse choisir
-soit la gestion des erreurs dans le code de votre application, soit laisser
-la gestion intégrée des exceptions le faire pour vous.
+avant cakeError envoient maintenant des exceptions. Cela vous donne la
+possibilité de gérer les erreurs vous-même dans le code de votre application, ou
+bien de laisser la gestion intégrée des exceptions.
 
-Il y a plus de contrôle que jamais pour les erreurs et la gestion des
-exceptions dans CakePHP 2.0. Vous pouvez configurer quelles méthodes vous
-voulez définir en tant que gestionnaire d'erreur, et en gestionnaire
-d'exception en utilisant configure.
+Il n'y a jamais eu autant de contrôle pour les erreurs et la gestion des
+exceptions dans CakePHP 2.0. Vous pouvez configurer les méthodes que vous voulez
+pour gérer les erreurs et les exceptions en utilisant configure.
 
 Configuration des Erreurs
 =========================
 
-La configuration des Erreurs est faite à l'intérieur du fichier
-``app/Config/core.php`` de votre application. Vous pouvez définir un callback
-pour qu'il soit effectué à chaque fois que votre application attrape une erreur
-PHP - les exceptions sont gérées séparément :doc:`/development/exceptions`.
-Le callback peut être n'importe quel PHP appelable, avec la possibilité
-d'appeler une fonction anonyme. L'erreur par défaut de la configuration de
-gestion ressemble à ceci::
+La configuration des Erreurs se fait dans le fichier ``app/Config/core.php`` de
+votre application. Vous pouvez définir un callback pour qu'il soit effectué à
+chaque fois que votre application attrape une erreur PHP. Les
+:doc:`/development/exceptions` sont gérées séparément. Le callback peut être
+n'importe quel PHP appelable, avec la possibilité d'appeler une fonction
+anonyme. L'erreur par défaut de la configuration de gestion ressemble à ceci::
 
     Configure::write('Error', array(
         'handler' => 'ErrorHandler::handleError',
@@ -32,23 +30,22 @@ gestion ressemble à ceci::
 Vous avez 5 options intégrées quand vous gérez la configuration des erreurs:
 
 * ``handler`` - callback - Le callback pour la gestion des erreurs. Vous pouvez
-  définir ceci à n'importe quel type, incluant des fonctions anonymes.
+  définir ceci à n'importe quel type, y compris des fonctions anonymes.
 * ``level`` - int - Le niveau d'erreurs qui vous interesse dans la capture.
   Utilisez les constantes d'erreur intégrées dans PHP, et bitmasks pour
-  séléctionner le niveau d'erreur qui vous intéressent.
+  sélectionner le niveau d'erreur qui vous intéresse.
 * ``trace`` - boolean - Inclut stack traces pour les erreurs dans les fichiers
   de log. Les Stack traces seront inclus dans le log après chaque erreur. C'est
   utile pour trouver où/quand les erreurs ont été faites.
 * ``consoleHandler`` - callback - Le callback utilisé pour gérer les erreurs
-  quand vous lancez la console. Si il n'est pas défini, les gestionnaires
-  par défaut de CakePHP seront utilisés.
+  quand vous lancez la console. S'il n'est pas défini, les gestionnaires par
+  défaut de CakePHP seront utilisés.
 
-ErrorHandler par défaut, affiche les erreurs quand ``debug`` > 0, et les
-erreurs de logs quand debug = 0. Le type d'erreurs capté dans les deux cas est
-contrôlé par ``Error.level``. Le gestionnaire d'erreurs fatales va être appelé
-indépendamment du niveau de ``debug`` ou de la configuration de
-``Error.level``, mais le résultat va être différent, basé sur le niveau de
-``debug``.
+ErrorHandler par défaut, affiche les erreurs quand ``debug`` > 0, et les erreurs
+de logs quand debug = 0. Le type d'erreurs capté dans les deux cas est contrôlé
+par ``Error.level``. Le gestionnaire d'erreurs fatales va être appelé
+indépendamment du niveau de ``debug`` ou de la configuration de ``Error.level``,
+mais le résultat va être différent, selon le niveau de ``debug``.
 
 .. note::
 
@@ -57,20 +54,20 @@ indépendamment du niveau de ``debug`` ou de la configuration de
     fonction de gestion d'erreur.
 
 .. versionadded:: 2.2
-    L'option ``Error.consoleHandler`` a été ajoutée dans 2.2.
+    L'option ``Error.consoleHandler`` a été ajoutée dans la version 2.2.
 
 .. versionchanged:: 2.2
-    Les ``Error.handler`` et ``Error.consoleHandler`` vont recevoir aussi les
-    codes d'erreur fatal. Le comportement par défaut est de montrer une page
-    d'erreur interne du serveur (``debug`` désactivé) ou une page avec le
-    message, fichier et la ligne (``debug`` activé).
+    ``Error.handler`` et ``Error.consoleHandler`` vont aussi recevoir les codes
+    d'erreur fatal. Le comportement par défaut est de montrer une page d'erreur
+    interne du serveur (``debug`` désactivé) ou une page avec le message, le
+    fichier et la ligne (``debug`` activé).
 
-Créer vos propres gestionnaires d'erreurs
+Créer vos Propres Gestionnaires d'Erreurs
 =========================================
 
-Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type
-de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError``
-pour gérer vos erreurs. Ce qui suit serait à faire::
+Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type de
+callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError`` pour
+gérer vos erreurs. Ce qui suit serait à faire::
 
     //dans app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
@@ -103,8 +100,7 @@ Changer le comportement des erreurs fatales
 ===========================================
 
 Depuis CakePHP 2.2, ``Error.handler`` va aussi recevoir les codes d'erreur
-fatal.
-Si vous ne voulez pas montrer la page d'erreur de cake, vous pouvez la
+fatal. Si vous ne voulez pas montrer la page d'erreur de cake, vous pouvez la
 remplacer comme cela::
 
     //dans app/Config/core.php
