@@ -193,7 +193,7 @@ sous-dossier. Les différentes propriétés que vous pouvez utiliser sont::
 Vérifier les Conditions de la Requête
 -------------------------------------
 
-.. php:method:: is($type)
+.. php:method:: is($type, $args...)
 
 L'objet ``Request`` fournit une façon d'inspecter différentes conditions de la
 requête utilisée. En utilisant la méthode ``is()``, vous pouvez vérifier un
@@ -248,6 +248,14 @@ Quelques exemples seraient::
         }
     );
 
+    // Ajouter un détecteur qui utilise des arguments supplémentaires. Depuis la version 3.3.0
+    $this->request->addDetector(
+        'controller',
+        function ($request, $name) {
+            return $request->param('controller') === $name;
+        }
+    );
+
 ``Request`` inclut aussi des méthodes comme
 :php:meth:`Cake\\Network\\Request::domain()`,
 :php:meth:`Cake\\Network\\Request::subdomains()`
@@ -273,6 +281,10 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser :
   accepte le mimetype 'application/json'.
 * ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle
   accepte le mimetype 'application/xml' ou 'text/xml'.
+
+.. versionadded:: 3.3.0
+    Les détecteurs peuvent prendre des paramètres supplémentaires depuis la
+    version 3.3.0.
 
 Données de Session
 ------------------
