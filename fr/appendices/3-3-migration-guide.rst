@@ -28,7 +28,7 @@ Routing
 Console
 =======
 
-- Les Shell tasks qui sont appelés directement à partir du CLI n'appellent plus
+- Les Shell tasks qui sont appelées directement à partir du CLI n'appellent plus
   la méthode ``_welcome``. Ils vont maintenant aussi avoir le paramètre
   ``requested`` défini.
 
@@ -36,7 +36,7 @@ Request
 =======
 
 - ``Request::is()`` et ``Request::addDetector()`` supportent maintenant des
-  arguments supplémentaires dans les détecteurs. Cela permet aux detector
+  arguments supplémentaires dans les détecteurs. Cela permet aux détecteurs
   callables d'opérer sur des paramètres supplémentaires.
 
 ORM
@@ -67,5 +67,5 @@ Debugging Functions
 ===================
 
 - Les fonctions ``pr()``, ``debug()`` et ``pj()`` retournent maintenant la
-  valeur étant dumped. Cela facilite leur utilisation quand des valeurs sont
+  valeur résultante. Cela facilite leur utilisation quand des valeurs sont
   retournées.
