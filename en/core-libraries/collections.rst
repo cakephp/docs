@@ -384,7 +384,7 @@ performing::
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: min($callback, $type = SORT_NUMERIC)
 
 To extract the minimum value for a collection based on a property, just use the
 ``min()`` function. This will return the full element from the collection and
@@ -405,7 +405,7 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: max($callback, $type = SORT_NUMERIC)
 
 The same can be applied to the ``max()`` function, which will return a single
 element from the collection having the highest property value::
@@ -419,7 +419,7 @@ element from the collection having the highest property value::
 
     $personWithOldestDad = $collection->min('dad.age');
 
-.. php:method:: sumOf(string|callable $callback)
+.. php:method:: sumOf($callback)
 
 Finally, the ``sumOf()`` method will return the sum of a property of all
 elements::
@@ -763,7 +763,7 @@ position, use the ``shuffle``::
 Withdrawing Elements
 --------------------
 
-.. php:method:: sample(int $size)
+.. php:method:: sample($size)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
 Another common operation when doing this sort of task is withdrawing a few
@@ -780,7 +780,7 @@ some A/B tests to, you can use the ``sample()`` function::
 argument. If there are not enough elements in the collection to satisfy the
 sample, the full collection in a random order is returned.
 
-.. php:method:: take(int $size, int $from)
+.. php:method:: take($size, $from)
 
 Whenever you want to take a slice of a collection use the ``take()`` function,
 it will create a new collection with at most the number of values you specify in
@@ -793,7 +793,7 @@ the first argument, starting from the position passed in the second argument::
 
 Positions are zero-based, therefore the first position number is ``0``.
 
-.. php:method:: skip(int $positions)
+.. php:method:: skip($positions)
 
 While the second argument of ``take()`` can help you skip some elements before
 getting them from the collection, you can also use ``skip()`` for the same
@@ -849,7 +849,7 @@ collection containing the values from both sources::
 Modifiying Elements
 -------------------
 
-.. php:method:: insert(string $path, array|Traversable $items)
+.. php:method:: insert($path, array|Traversable $items)
 
 At times, you may have two separate sets of data that you would like to insert
 the elements of one set into each of the elements of the other set. This is
@@ -1076,7 +1076,7 @@ into collections that can be iterated more than once::
 Cloning Collections
 -------------------
 
-.. php:method:: compile(bool $preserveKeys = true)
+.. php:method:: compile($preserveKeys = true)
 
 Sometimes you need to get a clone of the elements from another
 collection. This is useful when you need to iterate the same set from different

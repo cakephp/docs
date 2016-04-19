@@ -183,7 +183,7 @@ rendered from the controller.
 Setting View Variables
 ----------------------
 
-.. php:method:: set(string $var, mixed $value)
+.. php:method:: set($var, $value)
 
 The ``Controller::set()`` method is the main way to send data from your
 controller to your view. Once you've used ``Controller::set()``, the variable
@@ -235,7 +235,7 @@ view class.
 Rendering a View
 ----------------
 
-.. php:method:: render(string $view, string $layout)
+.. php:method:: render($view, $layout)
 
 The ``Controller::render()`` method is automatically called at the end of each requested
 controller action. This method performs all the view logic (using the data
@@ -313,7 +313,7 @@ This would render **plugins/Users/src/Template/UserDetails/custom_file.ctp**
 Redirecting to Other Pages
 ==========================
 
-.. php:method:: redirect(string|array $url, integer $status)
+.. php:method:: redirect($url, $status)
 
 The flow control method you'll use most often is ``Controller::redirect()``.
 This method takes its first parameter in the form of a
@@ -388,7 +388,7 @@ view template that will be rendered and forward execution to the named action::
 Loading Additional Models
 =========================
 
-.. php:method:: loadModel(string $modelClass, string $type)
+.. php:method:: loadModel($modelClass, $type)
 
 The ``loadModel()`` function comes handy when you need to use a model
 table/collection that is not the controller's default one::

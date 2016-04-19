@@ -81,7 +81,7 @@ Folder API
         echo $folder->path; // Prints /bar
         $false = $folder->cd('/non-existent-folder');
 
-.. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = [])
+.. php:method:: chmod($path, $mode = false, $recursive = true, $exceptions = [])
 
     Change the mode on a directory structure recursively. This includes
     changing the mode on files as well::
@@ -89,7 +89,7 @@ Folder API
         $dir = new Folder();
         $dir->chmod('/path/to/folder', 0755, true, ['skip_me.php']);
 
-.. php:method:: copy(array|string $options = [])
+.. php:method:: copy($options = [])
 
     Recursively copy a directory. The only parameter $options can either
     be a path into copy to or an array of options::
@@ -125,7 +125,7 @@ Folder API
     Returns a correct set of slashes for given $path ('\\' for
     Windows paths and '/' for other paths).
 
-.. php:method:: create(string $pathname, integer $mode = false)
+.. php:method:: create($pathname, $mode = false)
 
     Create a directory structure recursively. Can be used to create
     deep path structures like `/foo/bar/baz/shoe/horn`::
@@ -135,7 +135,7 @@ Folder API
             // Successfully created the nested folders
         }
 
-.. php:method:: delete(string $path = null)
+.. php:method:: delete($path = null)
 
     Recursively remove directories if the system allows::
 
@@ -152,7 +152,7 @@ Folder API
 
     Get the error from latest method.
 
-.. php:method:: find(string $regexpPattern = '.*', boolean $sort = false)
+.. php:method:: find($regexpPattern = '.*', $sort = false)
 
     Returns an array of all matching files in the current directory::
 
@@ -176,7 +176,7 @@ Folder API
     would like to get folders and files see :php:meth:`Folder::read()` or
     :php:meth:`Folder::tree()`
 
-.. php:method:: findRecursive(string $pattern = '.*', boolean $sort = false)
+.. php:method:: findRecursive($pattern = '.*', $sort = false)
 
     Returns an array of all matching files in and below the current directory::
 
@@ -195,11 +195,11 @@ Folder API
         )
         */
 
-.. php:method:: inCakePath(string $path = '')
+.. php:method:: inCakePath($path = '')
 
     Returns ``true`` if the file is in a given CakePath.
 
-.. php:method:: inPath(string $path = '', boolean $reverse = false)
+.. php:method:: inPath($path = '', $reverse = false)
 
     Returns ``true`` if the file is in the given path::
 
@@ -244,7 +244,7 @@ Folder API
 
     Return current path.
 
-.. php:method:: read(boolean $sort = true, array|boolean $exceptions = false, boolean $fullPath = false)
+.. php:method:: read($sort = true, $exceptions = false, $fullPath = false)
 
     Returns an array of the contents of the current directory. The
     returned array holds two sub arrays: One of directories and one of files::
@@ -269,7 +269,7 @@ Folder API
         )
         */
 
-.. php:method:: realpath(string $path)
+.. php:method:: realpath($path)
 
     Get the real path (taking ".." and such into account).
 
@@ -278,7 +278,7 @@ Folder API
     Returns $path with added terminating slash (corrected for
     Windows or other OS).
 
-.. php:method:: tree(null|string $path = null, array|boolean $exceptions = true, null|string $type = null)
+.. php:method:: tree($path = null, $exceptions = true, $type = null)
 
     Returns an array of nested directories and files in each directory.
 
@@ -317,7 +317,7 @@ File API
 
     The current file's absolute path.
 
-.. php:method:: append(string $data, boolean $force = false)
+.. php:method:: append($data, $force = false)
 
     Append the given data string to the current file.
 
@@ -325,7 +325,7 @@ File API
 
     Closes the current file if it is opened.
 
-.. php:method:: copy(string $dest, boolean $overwrite = true)
+.. php:method:: copy($dest, $overwrite = true)
 
     Copy the file to $dest.
 
@@ -369,7 +369,7 @@ File API
 
     Returns last modified time, or ``false`` in case of an error.
 
-.. php:method:: md5(integer|boolean $maxsize = 5)
+.. php:method:: md5($maxsize = 5)
 
     Get the MD5 Checksum of file with previous check of filesize,
     or ``false`` in case of an error.
@@ -378,11 +378,11 @@ File API
 
     Returns the file name without extension.
 
-.. php:method:: offset(integer|boolean $offset = false, integer $seek = 0)
+.. php:method:: offset($offset = false, $seek = 0)
 
     Sets or gets the offset for the currently opened file.
 
-.. php:method:: open(string $mode = 'r', boolean $force = false)
+.. php:method:: open($mode = 'r', $force = false)
 
     Opens the current file with the given $mode.
 
@@ -404,7 +404,7 @@ File API
 
     Returns the full path of the file.
 
-.. php:method:: read(string $bytes = false, string $mode = 'rb', boolean $force = false)
+.. php:method:: read($bytes = false, $mode = 'rb', $force = false)
 
     Return the contents of the current file as a string or return ``false`` on failure.
 
@@ -412,7 +412,7 @@ File API
 
     Returns ``true`` if the file is readable.
 
-.. php:method:: safe(string $name = null, string $ext = null)
+.. php:method:: safe($name = null, $ext = null)
 
     Makes filename safe for saving.
 
@@ -424,7 +424,7 @@ File API
 
     Returns ``true`` if the file is writable.
 
-.. php:method:: write(string $data, string $mode = 'w', boolean$force = false)
+.. php:method:: write($data, $mode = 'w', $force = false)
 
     Write given data to the current file.
 

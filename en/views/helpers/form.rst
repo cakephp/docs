@@ -230,7 +230,7 @@ return an object. If there is no match return null.
 Creating Form Inputs
 ====================
 
-.. php:method:: input(string $fieldName, array $options = [])
+.. php:method:: input($fieldName, array $options = [])
 
 The ``input()`` method lets you to generate complete form inputs. These
 inputs will include a wrapping div, label, input widget, and validation error if
@@ -683,7 +683,7 @@ Creating Input Elements
 Creating Text Inputs
 --------------------
 
-.. php:method:: text(string $name, array $options)
+.. php:method:: text($name, array $options)
 
 The rest of the methods available in the FormHelper are for
 creating specific form elements. Many of these methods also make
@@ -702,7 +702,7 @@ Will output:
 Creating Password Inputs
 ------------------------
 
-.. php:method:: password(string $fieldName, array $options)
+.. php:method:: password($fieldName, array $options)
 
 Creates a password field. ::
 
@@ -717,7 +717,7 @@ Will output:
 Creating Hidden Inputs
 ----------------------
 
-.. php:method:: hidden(string $fieldName, array $options)
+.. php:method:: hidden($fieldName, array $options)
 
 Creates a hidden form input. Example::
 
@@ -732,7 +732,7 @@ Will output:
 Creating Textareas
 ------------------
 
-.. php:method:: textarea(string $fieldName, array $options)
+.. php:method:: textarea($fieldName, array $options)
 
 Creates a textarea input field. ::
 
@@ -788,7 +788,7 @@ specific options:
 Creating Checkboxes
 -------------------
 
-.. php:method:: checkbox(string $fieldName, array $options)
+.. php:method:: checkbox($fieldName, array $options)
 
 Creates a checkbox form element. This method also generates an
 associated hidden form input to force the submission of data for
@@ -829,7 +829,7 @@ Will output:
 Creating Radio Buttons
 ----------------------
 
-.. php:method:: radio(string $fieldName, array $options, array $attributes)
+.. php:method:: radio($fieldName, array $options, array $attributes)
 
 Creates a set of radio button inputs.
 
@@ -877,7 +877,7 @@ put custom attributes on your radio buttons you can use an expanded format::
 Creating Select Pickers
 -----------------------
 
-.. php:method:: select(string $fieldName, array $options, array $attributes)
+.. php:method:: select($fieldName, array $options, array $attributes)
 
 Creates a select element, populated with the items in ``$options``,
 with the option specified by ``$attributes['value']`` shown as selected by
@@ -1057,7 +1057,7 @@ Output:
 Creating File Inputs
 --------------------
 
-.. php:method:: file(string $fieldName, array $options)
+.. php:method:: file($fieldName, array $options)
 
 To add a file upload field to a form, you must first make sure that
 the form enctype is set to "multipart/form-data", so start off with
@@ -1221,7 +1221,7 @@ Which would create the following two selects:
 Creating Year Inputs
 --------------------
 
-.. php:method:: year(string $fieldName, array $options = [])
+.. php:method:: year($fieldName, array $options = [])
 
 Creates a select element populated with the years from ``minYear``
 to ``maxYear``. Additionally, HTML attributes may be supplied in $options. If
@@ -1265,7 +1265,7 @@ If it was 2009, you would get the following:
 Creating Month Inputs
 ---------------------
 
-.. php:method:: month(string $fieldName, array $attributes)
+.. php:method:: month($fieldName, array $attributes)
 
 Creates a select element populated with month names::
 
@@ -1301,7 +1301,7 @@ passing ``false``. (Note: the default months can be localized with CakePHP
 Creating Day Inputs
 --------------------
 
-.. php:method:: day(string $fieldName, array $attributes)
+.. php:method:: day($fieldName, array $attributes)
 
 Creates a select element populated with the (numerical) days of the
 month.
@@ -1328,7 +1328,7 @@ Will output:
 Creating Hour Inputs
 --------------------
 
-.. php:method:: hour(string $fieldName, array $attributes)
+.. php:method:: hour($fieldName, array $attributes)
 
 Creates a select element populated with the hours of the day. You can
 create either 12 or 24 hour pickers using the format option::
@@ -1343,7 +1343,7 @@ create either 12 or 24 hour pickers using the format option::
 Creating Minute Inputs
 ----------------------
 
-.. php:method:: minute(string $fieldName, array $attributes)
+.. php:method:: minute($fieldName, array $attributes)
 
 Creates a select element populated with the minutes of the hour. You
 can create a select that only contains specific values using the ``interval``
@@ -1357,14 +1357,14 @@ following::
 Creating Meridian Inputs
 ------------------------
 
-.. php:method:: meridian(string $fieldName, array $attributes)
+.. php:method:: meridian($fieldName, array $attributes)
 
 Creates a select element populated with 'am' and 'pm'.
 
 Creating Labels
 ===============
 
-.. php:method:: label(string $fieldName, string $text, array $options)
+.. php:method:: label($fieldName, $text, array $options)
 
 Create a label element. ``$fieldName`` is used for generating the
 DOM id. If ``$text`` is undefined, ``$fieldName`` will be used to inflect
@@ -1396,7 +1396,7 @@ Output:
 Displaying and Checking Errors
 ==============================
 
-.. php:method:: error(string $fieldName, mixed $text, array $options)
+.. php:method:: error($fieldName, $text, array $options)
 
 Shows a validation error message, specified by $text, for the given
 field, in the event that a validation error has occurred.
@@ -1408,7 +1408,7 @@ Options:
 
 .. TODO:: Add examples.
 
-.. php:method:: isFieldError(string $fieldName)
+.. php:method:: isFieldError($fieldName)
 
 Returns ``true`` if the supplied $fieldName has an active validation
 error. ::
@@ -1425,7 +1425,7 @@ error. ::
 Creating Buttons and Submit Elements
 ====================================
 
-.. php:method:: submit(string $caption, array $options)
+.. php:method:: submit($caption, array $options)
 
 Creates a submit input with ``$caption`` as the text. If the supplied
 ``$caption`` is a URL to an image, an image submit button will be generated.
@@ -1456,7 +1456,7 @@ more complex button content you should use ``button()``.
 Creating Button Elements
 ------------------------
 
-.. php:method:: button(string $title, array $options = [])
+.. php:method:: button($title, array $options = [])
 
 Creates an HTML button with the specified title and a default type
 of "button". Setting ``$options['type']`` will output one of the
@@ -1538,7 +1538,7 @@ Will output:
 Creating Standalone Buttons and POST links
 ==========================================
 
-.. php:method:: postButton(string $title, mixed $url, array $options = [])
+.. php:method:: postButton($title, $url, array $options = [])
 
     Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
     POST.
@@ -1549,7 +1549,7 @@ Creating Standalone Buttons and POST links
     or :php:meth:`Cake\\View\\Helper\\FormHelper::button()` to create buttons
     inside opened forms.
 
-.. php:method:: postLink(string $title, mixed $url = null, array $options = [])
+.. php:method:: postLink($title, $url = null, array $options = [])
 
     Creates an HTML link, but accesses the URL using method POST. Requires
     JavaScript to be enabled in browser.

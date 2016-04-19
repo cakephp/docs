@@ -30,14 +30,14 @@ Given the previous array structure, the node would be accessed by
 notation is used for all Session helper methods wherever a ``$key`` is
 used.
 
-.. php:method:: read(string $key)
+.. php:method:: read($key)
 
     :rtype: mixed
 
     Read from the Session. Returns a string or array depending on the
     contents of the session.
 
-.. php:method:: check(string $key)
+.. php:method:: check($key)
 
     :rtype: boolean
 

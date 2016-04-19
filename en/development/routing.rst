@@ -1167,7 +1167,7 @@ RequestActionTrait
     This trait allows classes which include it to create sub-requests or
     request actions.
 
-.. php:method:: requestAction(string $url, array $options)
+.. php:method:: requestAction($url, array $options)
 
     This function calls a controller's action from any location and
     returns the response body from the action. The ``$url`` passed is a
