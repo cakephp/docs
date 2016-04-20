@@ -1,7 +1,7 @@
 ..
     Configuration
 
-構成管理
+構成設定
 #############
 
 ..
@@ -11,14 +11,20 @@
 全ての CakePHP に必要な設定は規約によって取り除かれる一方、
 データベースの認証のようないくつかの設定をする必要があります。
 
-Additionally, there are optional configuration options that allow you to swap
-out default values & implementations with ones tailored to your application.
+..
+    Additionally, there are optional configuration options that allow you to swap
+    out default values & implementations with ones tailored to your application.
+
+加えて、任意のオプション設定はデフォルトの値やあなたのアプリケーションに合わせて作った実装を置き換えられるようになります。
 
 .. index:: app.php, app.php.default
 
 .. index:: configuration
 
-Configuring your Application
+..
+    Configuring your Application
+
+アプリケーションの設定
 ============================
 
 Configuration is generally stored in either PHP or INI files, and loaded during
