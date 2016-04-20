@@ -68,7 +68,7 @@ SQL インジェクション攻撃から守っています。
         debug($article->created);
     }
 
-Query オブジェクトを ``debug()`` で使うと、内部の状態と DB で実行されることになる
+Query オブジェクトを ``debug()`` で使うと、内部の状態とデータベースで実行されることになる
 SQL が出力されます。 ::
 
     debug($articles->find()->where(['id' => 1]));
@@ -185,8 +185,8 @@ Query オブジェクトは遅延評価されます。
   ``SELECT`` ステートメントでのみ使うことができます。
 - クエリーの ``toArray()`` メソッドが呼ばれる。
 
-このような条件が合致するまでは、 SQL を DB へ送らずに、クエリーを変更することができます。
-つまり、 Query が評価サれないかぎり、SQL は DB へ送信されないのです。
+このような条件が合致するまでは、 SQL をデータベースへ送らずに、クエリーを変更することができます。
+つまり、 Query が評価サれないかぎり、SQL はデータベースへ送信されないのです。
 クエリーが実行された後に、クエリーを変更・再評価したら、追加で SQL が走ることになります。
 
 CakePHP が生成している SQL がどんなものか見たいなら、
@@ -238,16 +238,17 @@ CakePHP ではこれらを簡単につくれます。フェッチする列を制
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``
-メソッドが使えます。 ::
+.. versionadded:: 3.0.12
 
-    // 3.0.12 以降は orderAsc と orderDesc が使えます。
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'literal',
-        'synopsis' => 'literal'
-    ]);
-    $query->orderAsc($concat);
+    複合的な式でソートする必要があるなら ``order`` に加えて、 ``orderAsc`` と ``orderDesc``
+    メソッドが使えます。 ::
+
+        $query = $articles->find();
+        $concat = $query->func()->concat([
+            'title' => 'identifier',
+            'synopsis' => 'identifier'
+        ]);
+        $query->orderAsc($concat);
 
 行の数を制限したり、行のオフセットをセットするためには、 ``limit()`` と ``page()``
 メソッドを使うことができます。 ::
@@ -319,23 +320,27 @@ CakePHP の ORM では抽象化された馴染み深い SQL 関数をいくつ�
     ``extract()``、 ``dateAdd()``、 ``dayOfWeek()`` メソッドが追加されました。
 
 SQL 関数に渡す引数には、リテラルの引数と、バインドパラメータの２種類がありえます。
-リテラルの引数により、カラムや他の SQL リテラルを参照できます。
+識別子やリテラルのパラメータにより、カラムや他の SQL リテラルを参照できます。
 バインドパラメータにより、ユーザデータを SQL 関数へと安全に渡すことができます。
 たとえば::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Articles.title' => 'identifier',
+        ' - CAT: ',
+        'Categories.name' => 'identifier',
+        ' - Age: ',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 ``literal`` の値を伴う引数を作ることで、 ORM はそのキーをリテラルな SQL 値として扱うべきであると
-知ることになります。上記では MySQL にて下記の SQL が生成されます。 ::
+知ることになります。 ``identifier`` の値を伴う引数を作ることで、ORM は、そのキーがフィールドの
+識別子として扱うべきであると知ることになります。上記では MySQL にて下記の SQL が生成されます。 ::
 
-    SELECT CONCAT(title, :c0) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
-クエリーが実行される際には、 ``:c0`` という値に ``' NEW'`` というテキストがバインドされることになります。
+クエリーが実行される際には、 ``:c0`` という値に ``' - CAT'`` というテキストがバインドされることになります。
 
 上記の関数に加え、``func()`` メソッドは ``year``、 ``date_format``、 ``convert`` などといった、
 一般的な SQL 関数を構築するのに使います。
@@ -343,10 +348,10 @@ SQL 関数に渡す引数には、リテラルの引数と、バインドパラ�
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -392,7 +397,7 @@ ORM ではまた、 SQL の ``case`` 式も使えます。 ``case`` 式により
 のロジックを SQL の中に実装することができます。これは条件付きで sum や count をしなければならない
 状況や、条件に基いてデータを特定しなければならない状況で、データを出力するのに便利です。
 
-公開済みの記事（published articles）が DB 内にいくつあるのか知りたい場合、次の
+公開済みの記事（published articles）がデータベース内にいくつあるのか知りたい場合、次の
 SQL を生成する必要があります。 ::
 
     SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
@@ -450,19 +455,25 @@ SQL を生成する必要があります。 ::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-エンティティ変換(Hydrate)を無効にする
+エンティティの代わりに配列を取得
 ------------------------------------------
 
-ORM とオブジェクトの結果セットは強力である一方で、エンティティへの変換 (hydrate)
-が不要なときもあります。たとえば、集約されたデータにアクセスする場合、Entity を構築するのは無意味です。
-こういった状況ではエンティティ変換を無効化したいでしょう。 ::
+ORM とオブジェクトの結果セットは強力である一方で、エンティティの作成が不要なときもあります。
+たとえば、集約されたデータにアクセスする場合、Entity を構築するのは無意味です。
+データベースの結果をエンティティに変換する処理は、ハイドレーション (hydration) と呼ばれます。
+もし、この処理を無効化したい場合、このようにします。 ::
 
     $query = $articles->find();
-    $query->hydrate(false);
+    $query->hydrate(false); // エンティティの代わりに配列を返す
+    $result = $query->toList(); // クエリーを実行し、配列を返す
 
-.. note::
+これらの行を実行した後、結果はこのようになります。 ::
 
-    エンティティ変換 (hydrate) を無効化すると基本となる配列が返ります。
+    [
+        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+        ...
+    ]
 
 .. _advanced-query-conditions:
 
@@ -585,7 +596,7 @@ Expression オブジェクトを条件文に加えることができます。 ::
     WHERE (
     (author_id = 2 OR author_id = 5)
     AND published = 1
-    AND view_count > 10)
+    AND view_count >= 10)
 
 ``or_()`` と ``and_()`` メソッドはまた、それらの引数に関数も渡せるようになっています。
 これはメソッドをチェーンさせる際に可読性を上げられることが良く有ります。 ::
@@ -625,7 +636,7 @@ SQL 関数を使った式を構築することも可能です。 ::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)
@@ -747,11 +758,17 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+あたなの望む条件を作成するビルダーメソッドが取得できなかったり利用したくない場合、
+WHERE 句の中で SQL スニペットを使えるようにもできます。 ::
+
+    // ２つのフィールドをお互いに比較
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    式 (expression) の中で使われる列名には安全性が確実でない内容を **絶対に含めてはいけません** 。
-    関数の呼び出しで、安全でないデータを安全に渡す方法については :ref:`using-sql-functions`
-    のセクションを参照してください。
+    式 (expression) の中で使われる列名や SQL スニペットには安全性が確実でない内容を
+    **絶対に含めてはいけません** 。関数の呼び出しで、安全でないデータを安全に渡す
+    方法については :ref:`using-sql-functions` のセクションを参照してください。
 
 IN 句を自動生成する
 ---------------------------------
@@ -1052,7 +1069,7 @@ join を作成する際には ``join()`` だけでなく、``rightJoin()``、 ``
             ],
         ]);
 
-これは Query 内のすべての識別子に引用符が付くことを保証し、いくつかの DB 
+これは Query 内のすべての識別子に引用符が付くことを保証し、いくつかのデータベースドライバ
 （とくに PostgreSQL）でエラーが起こらないようにします。
 
 データを insert する
@@ -1126,7 +1143,7 @@ delete するほうが簡単です。
 SQL インジェクションを防止する
 ===================================
 
-ORM と DB の抽象層では、ほとんどの SQL インジェクション問題を防止してはいますが、
+ORM とデータベースの抽象層では、ほとんどの SQL インジェクション問題を防止してはいますが、
 不適切な用法により危険な値が入り込む余地も依然としてありえます。
 Expression ビルダを使う際には、カラム名にユーザデータを含めてはいけません。 ::
 

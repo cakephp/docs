@@ -98,7 +98,7 @@ self-associated tables to create parent-child relationships::
         }
     }
 
-You can also setup associations in mass by making a single call to 
+You can also setup associations in mass by making a single call to
 ``Table::addAssociations()`` which accepts an array containing a set of
 table names indexed by association type as an argument::
 
@@ -518,10 +518,11 @@ Possible keys for belongsToMany association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the ``IN`` list with an
   equivalent subquery.
-- **saveStrategy**: Either 'append' or 'replace'. Defaults to 'replace'. 
-  Indicates the mode to be used for saving associated entities. The former will 
-  only create new links between both side of the relation and the latter will 
-  do a wipe and replace to create the links between the passed entities when saving.
+- **saveStrategy**: Either 'append' or 'replace'. Defaults to 'replace'.
+  Indicates the mode to be used for saving associated entities. The former will
+  only create new links between both side of the relation and the latter will
+  do a wipe and replace to create the links between the passed entities when
+  saving.
 - **finder**: The finder method to use when loading associated records.
 
 
@@ -560,8 +561,8 @@ Using the 'through' Option
 
 If you plan on adding extra information to the join/pivot table, or if you
 need to use join columns outside of the conventions, you will need to define the
-``through`` option. The ``through`` option provides you full control over how the
-belongsToMany association will be created.
+``through`` option. The ``through`` option provides you full control over how
+the belongsToMany association will be created.
 
 It is sometimes desirable to store additional data with a many to
 many association. Consider the following::
@@ -632,7 +633,13 @@ applied to the root query:
 - Additional joins.
 - Contained associations.
 
-Other aspects of the query, such as selected columns, order, group by, having and
-other sub-statements, will not be applied to the root query. Associations that
-are *not* loaded through joins (hasMany/belongsToMany), do not have the above
-restrictions and can also use result formatters or map/reduce functions.
+Other aspects of the query, such as selected columns, order, group by, having
+and other sub-statements, will not be applied to the root query. Associations
+that are *not* loaded through joins (hasMany/belongsToMany), do not have the
+above restrictions and can also use result formatters or map/reduce functions.
+
+Loading Associations
+--------------------
+
+Once you've defined your associations you can :ref:`eager load associations
+<eager-loading-associations>` when fetching results.

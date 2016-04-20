@@ -299,7 +299,7 @@ utilisant :term:`syntaxe de plugin`. Pour inclure
 Si vous voulez inclure un fichier image qui partage un nom
 avec un plugin chargé vous pouvez faire ce qui suit. Par exemple si vous
 avez un plugin ``Blog``, et si vous voulez également inclure
-**webroot/js/Blog.icon.png**, vous feriez::
+**webroot/img/Blog.icon.png**, vous feriez::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 

@@ -1,23 +1,28 @@
 テーブルオブジェクト
-######################
+####################
 
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Table
     :noindex:
 
-テーブルオブジェクトは特定のテーブルに保存されたエンティティーのコレクションへのアクセスを提供します。
-それぞれのテーブルは与えられたテーブルによって繋がれた関連付けられたテーブルクラスを持ちます。
-もし、ビヘイビアのテーブルをカスタマイズする必要ないなら、Cakeはテーブルのインスタンスを作ります。
+テーブルオブジェクトは特定のテーブルに保存されたエンティティのコレクションへのアクセスを提供します。
+それぞれのテーブルは、与えられたテーブルによって繋がれた関連付けられたテーブルクラスを持ちます。
+もし、与えられたテーブルの振る舞いをカスタマイズする必要ないなら、CakePHP はテーブルのインスタンスを
+作ります。
 
-テーブルオブジェクトとORMを作る前に　データベースへの接続がなされているか確かめましょう。
+テーブルオブジェクトと ORM を作る前に　:ref:`データベースへの接続 <database-configuration>`
+がなされているか確かめましょう。
 
 基本的な使い方
-================
-始めるために、テーブルクラスを作ります。
-**src/Model/Table** に作ります。テーブルはRDBへのモデルコレクションに特化しています。
-そして、DBへの主なアクセス法はORMです。最も基本的なテーブルクラスは以下です。::
+==============
 
+まずはじめにテーブルクラスを作ってください。これらのクラスは **src/Model/Table** に作ります。
+テーブルは、リレーショナルデータベースに特化したモデルコレクションです。
+そして、CakePHP の ORM の中で、あなたのデータベースへの主なインターフェースです。
+最も基本的なテーブルクラスは次のようになります。 ::
+
+    // src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -26,10 +31,11 @@
     {
     }
 
-クラスのためにテーブル使うを使うのかORMに伝えなかったことを覚えておいて下さい。
-小文字とアンダースコアでクラス名を表記します。上記の例では ``articles`` テーブル
-がその例です。 ``BlogPosts`` と描いてあったら、 ``blog_posts`` としてください。
-テーブル ``table()`` メソッドでを特定できます。::
+このクラスで使用するテーブル名を ORM に伝えていないことに注目してください。規約により、
+テーブルオブジェクトは、クラス名を小文字とアンダースコア区切りにした名前のテーブルを使用します。
+上記の例では ``articles`` テーブルが使用されます。テーブルクラスが ``BlogPosts``
+という名前の場合、テーブルは ``blog_posts`` と名付けてください。
+あなたは、 ``table()`` メソッドを使用することでテーブルを指定できます。 ::
 
     namespace App\Model\Table;
 
@@ -45,9 +51,9 @@
 
     }
 
-命名規約に従っていればテーブルを特定した時に適用されます。
-規約によってORMはまたそれぞれのテーブルが主キーを ``id`` として持っていると
-想定します。もしカスタマイズしたければ ``primaryKey()`` メソッドで変えられます。::
+テーブルを指定した時は、命名規則は適用されません。規約により、ORM はそれぞれのテーブルが
+``id`` という名前の主キーを持っていることを前提としています。もし主キーの名前を変更する
+必要がある場合、 ``primaryKey`` メソッドが使用できます。 ::
 
     namespace App\Model\Table;
 
@@ -61,15 +67,13 @@
         }
     }
 
-
-テーブルが使うエンティティーをカスタマイズ
+テーブルが使うエンティティクラスのカスタマイズ
 ----------------------------------------------
 
-デフォルトテーブルオブジェクトは命名規約に従ったエンティティークラスを使います。
-たとえば、 ``ArticlesTable`` というテーブルクラスの名前だったらエンティティーが　``Article``
-に、 ``PurchaseOrdersTable`` というテーブルクラスの名前だったらエンティティーは ``PurchaseOrder``
-になります。デフォルトのテーブルオブジェクトは命名規約に従ったエンティティークラスを使います。
-命名規約に従わない場合は、 ``entityClass()`` メソッドで設定を変えられます。::
+デフォルトではテーブルオブジェクトは命名規則に従った Entity クラスを使います。
+たとえば、 ``ArticlesTable`` というテーブルクラスの名前だったらエンティティは ``Article``
+に、 ``PurchaseOrdersTable`` というテーブルクラスの名前だったらエンティティは ``PurchaseOrder``
+になります。もし命名規約に従わない場合は、 ``entityClass()`` メソッドで設定を変えられます。 ::
 
     class PurchaseOrdersTable extends Table
     {
@@ -79,171 +83,231 @@
         }
     }
 
-上記の例えでは、テーブルオブジェクトはコンストラクターの最後で呼ばれる ``initialize()``
-メソッドを持ちます。
-このメソッドをコンストラクターをオーバーライドする代わりに初期化するために使うことが
-推奨されます。
+上記の例では、テーブルオブジェクトはコンストラクターの最後に呼ばれる ``initialize()``
+メソッドを持ちます。コンストラクターをオーバーライドする代わりに、
+このメソッドで初期化することを推奨します。
 
 テーブルクラスのインスタンスを取得する
 --------------------------------------
 
-テーブルにクエリを送る前に、テーブルインスタンスを取得する必要があります。
-``TableRegistry`` クラスでできます。::
+テーブルにクエリを実行する前に、テーブルインスタンスを取得する必要があります。
+``TableRegistry`` クラスを使用することで取得できます。 ::
 
-    // コントローラーかテーブルメソッドで
+    // コントローラーやテーブルのメソッド内で
     use Cake\ORM\TableRegistry;
 
     $articles = TableRegistry::get('Articles');
 
-The TableRegistry クラスはテーブルを作るための依存関係を提供します。
-そして、全ての作られたテーブルインスタンスの設定を維持し、関係の構築とORMの設定を簡単にしてくれます。
-詳細は :ref:`table-registry-usage` .
+TableRegistry クラスはテーブルを作るための様々な依存関係を提供します。
+そして、作成されたすべてのテーブルインスタンスの設定を維持し、リレーションの構築と
+ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usage` をご覧ください。
+
+テーブルクラスがプラグインの中にある場合、あなたのテーブルクラスのために正しい名前を
+必ず使用してください。それに失敗すると、デフォルトのクラスが正しいクラスの代わりに使われてしまい、
+バリデーションルールやコールバックが呼ばれないなどの結果を生じます。プラグインのテーブルクラスを
+正しくロードするために、次のように使用してください。 ::
+
+    // プラグインの Table
+    $articlesTable = TableRegistry::get('PluginName.Articles');
+
+    // ベンダープレフィックス付きのプラグイン Table
+    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
 コールバックのライフサイクル　
 ============================
 
-テーブルオブジェクトがいろいろなイベントを起こすことを上で見たでしょう。
-イベンドは使えるORMをフックしたり、ロジックを、クラスに属させたり
-メソッドをオーバーライドしたりせずに加えたい時に便利です。
-イベントリスナーはテーブルクラスかビヘイビアクラスで定義できます。
+上記で示した通り、テーブルオブジェクトは、いろいろなイベントを起こします。イベンドは、
+ORM 内でフックしたり、サブクラス化やメソッドをオーバーライドせずにロジックを加えたい時に便利です。
+イベントリスナーはテーブルクラスやビヘイビアクラスで定義できます。
 また、テーブルのイベントマネージャーをリスナーをバインドするために使えます。
 
-コールバックメソッドビエイビアを使う時、テーブルコールバックメソッドが開始する
-**前に** イベントリスナー　``initialize()`` メソッドが開始させます。
-これはコントローラーとコンポーネントと同じシークエンスに従います。
+コールバックメソッドを使うとき、 ``initialize()`` メソッドで追加されたビヘイビアは、
+テーブルコールバックメソッドが開始する **前に** 呼ばれるリスナーを持ちます。
+これは、コントローラーやコンポーネントと同じ流れに従います。
 
-イベントリスナーにテーブルクラスやビヘイビアを追加するには、
-単純にメソッド名を以下の様に使います。この詳細とイベントに
-関するシステムの使い方は :doc:`/core-libraries/events` 。
+イベントリスナーにテーブルクラスやビヘイビアを追加するには、単純にメソッド名を以下の様に使います。
+イベントサブシステムの使い方の詳細は :doc:`/core-libraries/events` をご覧ください。
+
+イベント一覧
+------------
+
+* ``Model.initialize``
+* ``Model.beforeMarshal``
+* ``Model.beforeFind``
+* ``Model.buildValidator``
+* ``Model.buildRules``
+* ``Model.beforeRules``
+* ``Model.afterRules``
+* ``Model.beforeSave``
+* ``Model.afterSave``
+* ``Model.afterSaveCommit``
+* ``Model.beforeDelete``
+* ``Model.afterDelete``
+* ``Model.afterDeleteCommit``
+
+initialize
+----------
+
+.. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
+
+``Model.initialize`` イベントは、コンストラクタと initialize メソッドが呼ばれた後に発行されます。
+デフォルトでは、 ``Table`` クラスは、このイベントを購読しません。そして、代わりに ``initialize``
+フックメソッドを使います。
+
+``Model.initialize`` イベントに応答するために、 ``EventListenerInterface``
+を実装したリスナークラスを作成することができます。 ::
+
+    use Cake\Event\EventListenerInterface;
+    class ModelInitializeListener implements EventListenerInterface
+    {
+        public function implementedEvents()
+        {
+            return array(
+                'Model.initialize' => 'initializeEvent',
+            );
+        }
+        public function initializeEvent($event)
+        {
+            $table = $event->subject();
+            // do something here
+        }
+    }
+
+そして、以下のように ``EventManager`` にリスナーを追加します。 ::
+
+    use Cake\Event\EventManager;
+    $listener = new ModelInitializeListener();
+    EventManager::instance()->attach($listener);
+
+これは、任意の ``Table`` クラスが構築されたとき、  ``initializeEvent`` を呼びます。
 
 beforeMarshal
 -------------
 
 .. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
 
-``Model.beforeMarshal`` イベントは、リクエストデータがエンティティーに変換される前に呼ばれます。
-詳細は :ref:`before-marshal` 。
+``Model.beforeMarshal`` イベントは、リクエストデータがエンティティに変換される前に発行されます。
+詳細は :ref:`before-marshal` をご覧ください。
 
 beforeFind
 ----------
 
 .. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
 
-``Model.beforeFind`` イベントは find する前に呼ばれます。イベントを止めて戻り値を返すことで
-findを完全にバイパスできます。
-$query インスタンスによってなされた全ての変更はfindに影響します。 ``$primary`` はルートクエリ
-である場合やそうでない場合もあります、また関連付けられたクエリである場合もあります。
-全てのアソシエーションは ``Model.beforeFind`` が呼ばれた時にクエリに反映されます。
-アソシエーションがJOINを使うためにダミークエリが用意されています。
-イベントリスナーで追加のフィールド、検索条件、JOINや結果のフォーマットを設定出来ます。
-これらのオプションや機能はルートクエリにコピーされます。
+``Model.beforeFind`` イベントは find する前に発行されます。イベントを止めて戻り値を返すことで
+find を完全にバイパスできます。 $query インスタンスによってなされた全ての変更は find
+に影響します。 ``$primary`` パラメータは、これがルートクエリー、もしくは関連付けられた
+クエリーであるかどうかの指標となります。クエリーに含まれる全てのアソシエーションで、
+``Model.beforeFind`` イベントが呼ばれます。アソシエーションが JOIN を使うために
+ダミークエリーが用意されています。イベントリスナーで追加のフィールド、検索条件、
+JOIN や結果のフォーマットを設定出来ます。これらのオプションや機能はルートクエリーにコピーされます。
 
-このコールバックを、findをACLなどで設定されたユーザーロールによって制限するためや、
-現在のロードした情報にしたがってキャッシュをするために使います。
+ユーザーのロールをもとに find の操作を制限したり、現在のロードをもとにキャッシュの判断をするために、
+このコールバックを使います。
 
-前のCakeでは　 ``afterFind`` コールバックがありましたが、 :ref:`map-reduce`
-機能とエンティティーコンストラクターに置き換えられました。
+CakePHP の旧バージョンでは ``afterFind`` コールバックがありましたが、 :ref:`map-reduce`
+機能とエンティティのコンストラクタに置き換えられました。
 
 buildValidator
 ---------------
 
 .. php:method:: buildValidator(Event $event, Validator $validator, $name)
 
-``Model.buildValidator`` イベントは ``$name`` バリデーターが作られた時に呼ばれます。
-ビヘイビアはこのメソッドを呼ぶために使えます。
+``Model.buildValidator`` イベントは ``$name`` バリデーターが作られた時に発行されます。
+ビヘイビアは、バリデーションメソッドに追加するために、このフックが使用できます。
 
 buildRules
 ----------
 
 .. php:method:: buildRules(Event $event, RulesChecker $rules)
 
-``Model.buildRules`` イベントはルールインスタンスが作られた後 ``beforeRules()`` メソッドが呼ばれる前
-に呼ばれます。
+``Model.buildRules`` イベントはルールインスタンスが作られた後と、
+Table の ``beforeRules()`` メソッドが呼ばれた後に発行されます。
 
-ビフォアルール
+beforeRules
 --------------
 
 .. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
 
-``Model.beforeRules`` イベントはエンティティにルールが適用される前に呼ばれます。
-イベントが止まると、Cakeによるチェックが入る前の戻り値を得られます。
+``Model.beforeRules`` イベントはエンティティにルールが適用される前に発行されます。
+このイベントが止まると、チェックのためのルールを停止して、適用したルールの結果を
+セットすることができます。
 
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)
 
-``Model.afterRules`` イベントはルールがエンティティーに適用された後に呼ばれます。
-イベントが止まると、設定したルールによってチェックした後の戻り値を得られます。
+``Model.afterRules`` イベントはルールがエンティティに適用された後に発行されます。
+このイベントが止まると、操作をチェックするためのルールの結果の値を返すことができます。
 
 beforeSave
 ----------
 
 .. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
-``Model.beforeSave`` イベントはエンティティーが保存する前に呼ばれます。
-イベントを止めることによって、保存を停止できます。イベントが停止すると、このイベントの結果が
-返されます。
+``Model.beforeSave`` イベントはエンティティが保存する前に発行されます。
+このイベントを止めることによって、保存を停止できます。イベントが停止すると、
+このイベントの結果が返されます。
 
 afterSave
 ---------
 
 .. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
 
-``Model.afterSave`` は保存した後に呼ばれます。
+``Model.afterSave`` イベントはエンティティを保存した後に発行されます。
 
 afterSaveCommit
 ---------------
 
 .. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
-``Model.afterSaveCommit`` はトランザクション処理でラップされた保存がコミットされた後に、
-これはまた、明示的でないコミットで原子性でない保存のために呼ばれます。
-このイベントは ``save()`` が直接読んでいるプライマリテーブルのためだけに呼ばれます。
-このイベントは、トランザクション処理が保存を開始する前に呼ばれない。
+``Model.afterSaveCommit`` イベントは、保存処理がラップされたトランザクションが
+コミットされた後に発行されます。データベース操作が暗黙的にコミットされる非アトミックな保存でも
+引き起こされます。イベントは、 ``save()`` が直接呼ばれた最初のテーブルだけに引き起こされます。
+save が呼ばれる前にトランザクションが始まっている場合、イベントは起こりません。
 
 beforeDelete
 ------------
 
 .. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
-``Model.beforeDelete`` は削除する前に呼ばれる。
-イベントを停止することによって、削除を中止できる。
+``Model.beforeDelete`` イベントはエンティティを削除する前に発行されます。
+このイベントを停止することによって、削除を中止できます。
 
 afterDelete
 -----------
 
 .. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
 
-``Model.afterDelete`` はエンティティーが削除された後に呼ばれる。
+``Model.afterDelete`` イベントはエンティティが削除された後に発行されます。
 
 afterDeleteCommit
 -----------------
 
 .. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
 
-``Model.afterDeleteCommit`` イベントはトランザクション処理でラップされた削除処理が
-コミットされた後に呼ばれます。これはまた、明示的でないコミットで原子性でない保存のために呼ばれます。
-このイベントは ``delete()`` が直接呼んでいるプライマリテーブルのためだけに呼ばれます。
-このイベントは、トランザクション処理が削除を開始する前に呼ばれない。
+``Model.afterDeleteCommit`` イベントは、削除処理がラップされたトランザクションが
+コミットされた後に発行されます。データベース操作が暗黙的にコミットされる非アトミックな保存でも
+引き起こされます。イベントは、 ``delete()`` が直接呼ばれた最初のテーブルだけに引き起こされます。
+delete が呼ばれる前にトランザクションが始まっている場合、イベントは起こりません。
 
-Behaviors
-=========
+ビヘイビア
+==========
 
 .. php:method:: addBehavior($name, array $options = [])
 
 .. start-behaviors
 
-ビヘイビアは水平に再利用可能なテーブルに関連付けられたロジックの部品を作るための
-簡単な方法を提供します。なぜビヘイビアは通常のクラスやトレイトではないかと考えて
-いませんか？第一の理由はイベントリスナーだということです。トレイトが再利用可能な
-ロジックの部品を許可しているので、トレイトであることを許可することはイベントの
-作成を複雑にします。
+ビヘイビアは、テーブルクラスにまたがって関連するロジックの再利用可能な部品を作成する
+簡単な方法を提供します。なぜビヘイビアが通常のクラスで、トレイトではないのか
+不思議に思うかもしれません。第一の理由は、ビヘイビアはイベントリスナーだからです。
+トレイトは再利用可能なロジックの部品になりえますが、イベントをバインドするのは厄介です。
 
 ビヘイビアをテーブルに追加するために ``addBehavior()`` メソッドが使えます。
-一般的に、これを ``initialize()`` でやるのがもっともよいです。::
+一般的に、これを ``initialize()`` でやるのがもっともよいです。 ::
 
     namespace App\Model\Table;
 
@@ -257,7 +321,7 @@ Behaviors
         }
     }
 
-アソシエーションには :term:`プラグイン記法` と追加の設定オプションが使えます。::
+アソシエーションには :term:`プラグイン記法` と追加の設定オプションが使えます。 ::
 
     namespace App\Model\Table;
 
@@ -280,16 +344,18 @@ Behaviors
 
 .. end-behaviors
 
-ビヘイビアの詳細は :doc:`/orm/behaviors`　こちら。ビヘイビアに関連することも含みます。
+CakePHP によって提供されるビヘイビアを含む、ビヘイビアに関する詳細は :doc:`/orm/behaviors`
+の章をご覧ください。
 
 
 .. _configuring-table-connections:
 
 接続設定
-=======================
+========
 
 デフォルトでは、全てのテーブルインスタンスは ``default`` データベス接続を使用します。
-もし、複数のデータベース設定を使い分けたいなら、 ``defaultConnectionName()`` で設定できます。::
+もし、複数のデータベース接続を使用している場合、どのコネクションを使用してテーブルを
+設定したくなるでしょう。これは、 ``defaultConnectionName()`` メソッドで出来ます。 ::
 
     namespace App\Model\Table;
 
@@ -304,27 +370,26 @@ Behaviors
 
 .. note::
 
-    The ``defaultConnectionName()`` method **must** be static.
+    ``defaultConnectionName()`` メソッドはスタティックで **なければなりません** 。
 
 .. _table-registry-usage:
 
-Using the TableRegistry
-=======================
+TableRegistry の利用
+====================
 
 .. php:class:: TableRegistry
 
-
 これまで見てきたように、TableRegistry クラスは　factory/registry を
-アプリのテーブルインスタンスに接続するために使うことを簡単にします。
-これには他にも使える機能があります。
+アプリケーションのテーブルインスタンスにアクセスするために使うことを簡単にします。
+これには他にも便利な機能があります。
 
 テーブルオブジェクトの設定
------------------------------
+--------------------------
 
 .. php:staticmethod:: get($alias, $config)
 
 テーブルをレジストリからロードする時に、依存関係をカスタマイズするか、
-``$options`` 配列が用意するモックオブジェクトを使います。::
+``$options`` 配列が用意するモックオブジェクトを使います。 ::
 
     $articles = TableRegistry::get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
@@ -336,32 +401,51 @@ Using the TableRegistry
         'behaviors' => $behaviorRegistry
     ]);
 
-接続とスキーマー設定に注意して下さい。それらは文字列変数ではなくオブジェクトです。
+接続とスキーマ設定に注意して下さい。それらは文字列変数ではなくオブジェクトです。
 この接続は ``Cake\Database\Connection`` のオブジェクトと
-``Cake\Database\Schema\Collection`` のスキーマを操作します。
+スキーマの ``Cake\Database\Schema\Collection`` を扱います。
 
 .. note::
 
-    テーブルは追加の設定を ``initialize()`` で行えます。それらは
-    registry　の設定を上書きします。
+    テーブルは ``initialize()`` メソッドで追加の設定を行う場合、それらの値は
+    レジストリの設定を上書きします。
 
-また、事前に registry を ``config()`` を使って設定できます。
-設定データは *per alias*　に保存され、オブジェクトの
-``initialize()`` メソッドで上書きできます。::
+また、事前にレジストリを ``config()`` メソッドを使って設定できます。
+設定データは *エイリアスごと* に保存され、オブジェクトの
+``initialize()`` メソッドで上書きできます。 ::
 
     TableRegistry::config('Users', ['table' => 'my_users']);
 
 .. note::
 
-    設定はエイリアスに接続しているかする前の　 **最初** だけ変更できます。
-    レジストリが一般化された後に設定しても効果がありません。
+    そのエイリアスにアクセスする前か、**最初** のアクセス時だけテーブルの設定が可能です。
+    レジストリが投入された後に設定しても効果がありません。
 
 レジストリの初期化（追加設定の消去）
 -------------------------------------
 
 .. php:staticmethod:: clear()
 
-テストケースで、レジストリを綺麗にする必要があります。
-モックオブジェクトを使う時やテーブルの依存関係を設定する時によく使う機会があります。::
+テストケースで、レジストリをフラッシュしたいこともあるでしょう。
+モックオブジェクトを使う時やテーブルの依存関係を設定する時に便利です。 ::
 
     TableRegistry::clear();
+
+ORM クラスを配置する名前空間の設定
+-----------------------------------
+
+もし、規約に従わない場合、おそらくテーブルやエンティティクラスは CakePHP によって検知されません。
+これを修正するために、 ``Cake\Core\Configure::write`` メソッドで名前空間をセットできます。
+例えば、 ::
+
+    /src
+        /App
+            /My
+                /Namespace
+                    /Model
+                        /Entity
+                        /Table
+
+は、次のように設定されます。 ::
+
+    Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');

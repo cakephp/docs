@@ -90,6 +90,21 @@ URL utilisant une route labellisée::
     // );
     /produits/i-m-slug
 
+Si vous générez des URLs pour du CSS, du Javascript ou des fichiers image, il
+existe des méthodes d'helper pour chacun de ces types d'assets::
+
+    // Affiche /img/icon.png
+    $this->Url->image('icon.png');
+
+    // Affiche /js/app.js
+    $this->Url->script('app.js');
+
+    // Affiche /css/app.css
+    $this->Url->css('app.css');
+
+.. versionadded:: 3.2.4
+    Les méthodes de helper d'asset ont été ajoutées dans la version 3.2.4.
+
 Pour de plus amples informations, voir
 `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
 dans l'API.

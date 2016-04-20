@@ -87,7 +87,7 @@ Migrations
         }
     }
 
-マイグレーションは、デーテベースに ``products`` という名前のテーブルを追加します。
+マイグレーションは、データベースに ``products`` という名前のテーブルを追加します。
 以下のカラムが定義します。
 
 - ``id`` カラムの型は、主キーの ``integer``
@@ -477,7 +477,7 @@ Status コマンドは、現在の状況とすべてのマイグレーション�
 ``--format`` (省略形は ``-f``) オプションを使用することで
 JSON 形式の文字列として結果を出力できます。 ::
 
-    $ bin/cake migrations --format json
+    $ bin/cake migrations status --format json
 
 ``migrate`` コマンドのように ``--source`` 、 ``--connection`` そして ``--plugin``
 オプションが使用できます。

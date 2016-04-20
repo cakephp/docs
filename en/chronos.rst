@@ -256,7 +256,7 @@ Other properties that can be accessed are:
 - dayOfMonth
 - dayOfYear
 - daysInMonth
-- timesptamp
+- timestamp
 - quarter
 
 Testing Aids

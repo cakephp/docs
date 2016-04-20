@@ -244,16 +244,17 @@ method::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be used
-when you need to sort on complex expressions::
+.. versionadded:: 3.0.12
 
-    // As of 3.0.12 orderAsc & orderDesc are available.
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'literal',
-        'synopsis' => 'literal'
-    ]);
-    $query->orderAsc($concat);
+    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be
+    used when you need to sort on complex expressions::
+
+        $query = $articles->find();
+        $concat = $query->func()->concat([
+            'title' => 'identifier',
+            'synopsis' => 'identifier'
+        ]);
+        $query->orderAsc($concat);
 
 To limit the number of rows or set the row offset you can use the ``limit()``
 and ``page()`` methods::
@@ -298,7 +299,8 @@ Using SQL Functions
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
 abstraction allows the ORM to select the platform specific implementation of the
 function you want. For example, ``concat`` is implemented differently in MySQL,
-PostgreSQL and SQL Server. Using the abstraction allows your code to be portable::
+PostgreSQL and SQL Server. Using the abstraction allows your code to be
+portable::
 
     // Results in SELECT COUNT(*) count FROM ...
     $query = $articles->find();
@@ -307,7 +309,8 @@ PostgreSQL and SQL Server. Using the abstraction allows your code to be portable
 A number of commonly used functions can be created with the ``func()`` method:
 
 - ``sum()`` Calculate a sum. The arguments will be treated as literal values.
-- ``avg()`` Calculate an average. The arguments will be treated as literal values.
+- ``avg()`` Calculate an average. The arguments will be treated as literal
+  values.
 - ``min()`` Calculate the min of a column. The arguments will be treated as
   literal values.
 - ``max()`` Calculate the max of a column. The arguments will be treated as
@@ -332,24 +335,28 @@ A number of commonly used functions can be created with the ``func()`` method:
     ``extract()``, ``dateAdd()`` and ``dayOfWeek()`` methods have been added.
 
 When providing arguments for SQL functions, there are two kinds of parameters
-you can use, literal arguments and bound parameters. Literal parameters allow
+you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
 you to reference columns or other SQL literals. Bound parameters can be used to
 safely add user data to SQL functions. For example::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Articles.title' => 'identifier',
+        ' - CAT: ',
+        'Categories.name' => 'identifier',
+        ' - Age: ',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 By making arguments with a value of ``literal``, the ORM will know that
-the key should be treated as a literal SQL value. The above would generate the
-following SQL on MySQL::
+the key should be treated as a literal SQL value. By making arguments with
+a value of ``identifier``, the ORM will know that the key should be treated
+as a field identifier. The above would generate the following SQL on MySQL::
 
-    SELECT CONCAT(title, :c0) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
-The ``:c0`` value will have the ``' NEW'`` text bound when the query is
+The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
 executed.
 
 In addition to the above functions, the ``func()`` method can be used to create
@@ -358,10 +365,10 @@ For example::
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -463,19 +470,25 @@ automatically produce an ``if .. then .. else`` statement::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Disabling Hydration
--------------------
+Getting Arrays Instead of Entities
+----------------------------------
 
-While ORMs and object result sets are powerful, hydrating entities is sometimes
+While ORMs and object result sets are powerful, creating entities is sometimes
 unnecessary. For example, when accessing aggregated data, building an Entity may
-not make sense. In these situations you may want to disable entity hydration::
+not make sense. The process of converting the database results to entities is
+called hydration. If you wish to disable this process you can do this::
 
     $query = $articles->find();
-    $query->hydrate(false);
+    $query->hydrate(false); // Results as arrays intead of entities
+    $result = $query->toList(); // Execute the query and return the array
 
-.. note::
+After executing those lines, your result should look similar to this::
 
-    When hydration is disabled results will be returned as basic arrays.
+    [
+        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+        ...
+    ]
 
 .. _advanced-query-conditions:
 
@@ -571,9 +584,9 @@ be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where()``, we don't need to call ``and_()``, as that
-happens implicitly. Much like how we would not need to call ``or_()``, had we
-started our query with ``orWhere()``. The above shows a few new condition
+Since we started off using ``where()``, we don't need to call ``and_()``, as
+that happens implicitly. Much like how we would not need to call ``or_()``, had
+we started our query with ``orWhere()``. The above shows a few new condition
 methods being combined with ``AND``. The resulting SQL would look like::
 
     SELECT *
@@ -604,7 +617,7 @@ Which would generate the SQL similar to::
     WHERE (
     (author_id = 2 OR author_id = 5)
     AND published = 1
-    AND view_count > 10)
+    AND view_count >= 10)
 
 The ``or_()`` and ``and_()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
@@ -644,7 +657,7 @@ It is also possible to build expressions using SQL functions::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)
@@ -767,11 +780,18 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+In situations when you can't get, or don't want to use the builder methods to
+create the conditions you want you can also use snippets of SQL in where
+clauses::
+
+    // Compare two fields to each other
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    The field name used in expressions should **never** contain untrusted content.
-    See the :ref:`using-sql-functions` section for how to safely include
-    untrusted data into function calls.
+    The field names used in expressions, and SQL snippets should **never**
+    contain untrusted content.  See the :ref:`using-sql-functions` section for
+    how to safely include unsafe data into function calls.
 
 Automatically Creating IN Clauses
 ---------------------------------
@@ -804,8 +824,8 @@ using::
 Automatic IS NULL Creation
 --------------------------
 
-When a condition value is expected to be ``null`` or any other value, you can use
-the ``IS`` operator to automatically create the correct expression::
+When a condition value is expected to be ``null`` or any other value, you can
+use the ``IS`` operator to automatically create the correct expression::
 
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
@@ -817,8 +837,8 @@ the type of ``$parentId``
 Automatic IS NOT NULL Creation
 ------------------------------
 
-When a condition value is expected not to be ``null`` or any other value, you can use
-the ``IS NOT`` operator to automatically create the correct expression::
+When a condition value is expected not to be ``null`` or any other value, you
+can use the ``IS NOT`` operator to automatically create the correct expression::
 
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
@@ -1118,8 +1138,8 @@ queries::
         ->execute();
 
 .. note::
-    Inserting records with the query builder will not trigger events such as 
-    ``Model.afterSave``. Instead you should use the :doc:`ORM to save 
+    Inserting records with the query builder will not trigger events such as
+    ``Model.afterSave``. Instead you should use the :doc:`ORM to save
     data </orm/saving-data>`.
 
 .. _query-builder-updating-data:
@@ -1140,8 +1160,8 @@ Generally, it is easier to update data using entities and
 :php:meth:`~Cake\\ORM\\Table::patchEntity()`.
 
 .. note::
-    Updating records with the query builder will not trigger events such as 
-    ``Model.afterSave``. Instead you should use the :doc:`ORM to save 
+    Updating records with the query builder will not trigger events such as
+    ``Model.afterSave``. Instead you should use the :doc:`ORM to save
     data </orm/saving-data>`.
 
 Deleting Data

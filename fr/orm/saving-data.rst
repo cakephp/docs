@@ -111,13 +111,38 @@ Sauvegarder des Données dans la Table de Jointure
 
 L'enregistrement de données dans la table de jointure est réalisé en utilisant
 la propriété spéciale ``_joinData``. Cette propriété doit être une instance
-d'Entity de la table de jointure::
+d'``Entity`` de la table de jointure::
 
+    // Lie les enregistrements pour la première fois.
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
     $tag1->_joinData = $articlesTable->ArticlesTags->newEntity();
     $tag1->_joinData->tagComment = 'Je pense que cela est lié à CakePHP';
 
     $articlesTable->Tags->link($article, [$tag1]);
+
+    // Mise à jour d'une association existante.
+    $article = $articlesTable->get(1, ['contain' => ['Tags']]);
+    $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
+
+    $articlesTable->save($article, ['associated' => ['Tags']]);
+
+Vous pouvez aussi créer/mettre à jour les informations de la table jointe quand
+vous utilisez ``newEntity()`` ou ``patchEntity()``. Vos données POST devraient
+ressembler à ceci::
+
+    $data = [
+        'title' => 'My great blog post',
+        'body' => 'Some content that goes on for a bit.',
+        'tags' => [
+            [
+                'id' => 10,
+                '_joinData' => [
+                    'tagComment' => 'Great article!',
+                ]
+            ],
+        ]
+    ];
+    $articlesTable->newEntity($data, ['associated' => ['Tags']]);
 
 Délier les Enregistrements Many To Many
 ---------------------------------------

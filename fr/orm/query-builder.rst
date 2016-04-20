@@ -5,23 +5,23 @@ Query Builder
 
 .. php:class:: Query
 
-Le constructeur de requête de l'ORM fournit une interface facile à utiliser
-pour créer et lancer les requêtes. En arrangeant les requêtes ensemble,
-vous pouvez créer des requêtes avancées en utilisant les unions et les
-sous-requêtes avec facilité.
+Le constructeur de requête de l'ORM fournit une interface facile à utiliser pour
+créer et lancer les requêtes. En arrangeant les requêtes ensemble, vous pouvez
+créer des requêtes avancées en utilisant les unions et les sous-requêtes avec
+facilité.
 
-Sous le capot, le constructeur de requête utilise les requêtes préparées de
-PDO qui protègent contre les attaques d'injection SQL.
+Sous le capot, le constructeur de requête utilise les requêtes préparées de PDO
+qui protègent contre les attaques d'injection SQL.
 
 L'Objet Query
 =============
 
-La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()``
-à partir d'un objet ``Table``. Cette méthode va retourner une requête
-incomplète prête à être modifiée. Vous pouvez aussi utiliser un objet table
-connection pour accéder au niveau inférieur du constructeur de Requête
-qui n'inclut pas les fonctionnalités de l'ORM, si nécessaire. Consultez la
-section :ref:`database-queries` pour plus d'informations::
+La façon la plus simple de créer un objet ``Query`` est d'utiliser ``find()`` à
+partir d'un objet ``Table``. Cette méthode va retourner une requête incomplète
+prête à être modifiée. Vous pouvez aussi utiliser un objet table connection pour
+accéder au niveau inférieur du constructeur de Requête qui n'inclut pas les
+fonctionnalités de l'ORM, si nécessaire. Consultez la section
+:ref:`database-queries` pour plus d'informations::
 
     use Cake\ORM\TableRegistry;
     $articles = TableRegistry::get('Articles');
@@ -259,16 +259,17 @@ vous pouvez utiliser la méthode ``order``::
     $query = $articles->find()
         ->order(['title' => 'ASC', 'id' => 'ASC']);
 
-En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent être
-utilisées quand vous devez trier selon des expressions complexes::
+.. versionadded:: 3.0.12
 
-    // Depuis 3.0.12 orderAsc & orderDesc sont disponibles.
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'literal',
-        'synopsis' => 'literal'
-    ]);
-    $query->orderAsc($concat);
+    En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent
+    être utilisées quand vous devez trier selon des expressions complexes::
+
+        $query = $articles->find();
+        $concat = $query->func()->concat([
+            'title' => 'identifier',
+            'synopsis' => 'identifier'
+        ]);
+        $query->orderAsc($concat);
 
 Pour limiter le nombre de lignes ou définir la ligne offset, vous pouvez
 utiliser les méthodes ``limit()`` et ``page()``::
@@ -348,27 +349,32 @@ méthode ``func()``:
     Les méthodes ``extract()``, ``dateAdd()`` et ``dayOfWeek()`` ont été
     ajoutées.
 
-Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types
-de paramètres que vous pouvez utiliser; Les arguments littéraux et les
-paramètres liés. Les paramètres liés vous permettent de référencer les colonnes
-ou les autres valeurs littérales de SQL. Les paramètres liés peuvent être
-utilisés pour ajouter en toute sécurité les données d'utilisateur aux fonctions
-SQL. Par exemple::
+Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types de
+paramètres que vous pouvez utiliser; Les arguments littéraux et les paramètres
+liés. Les paramètres d'identifaction/littéraux vous permettent de référencer les
+colonnes ou les autres valeurs littérales de SQL. Les paramètres liés peuvent
+être utilisés pour ajouter en toute sécurité les données d'utilisateur aux
+fonctions SQL. Par exemple::
 
-    $query = $articles->find();
+    $query = $articles->find()->innerJoinWith('Categories');
     $concat = $query->func()->concat([
-        'title' => 'literal',
-        ' NEW'
+        'Articles.title' => 'identifier',
+        ' - CAT: ',
+        'Categories.name' => 'identifier',
+        ' - Age: ',
+        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
     ]);
-    $query->select(['title' => $concat]);
+    $query->select(['link_title' => $concat]);
 
 En modifiant les arguments avec une valeur de ``literal``, l'ORM va savoir que
-la clé doit être traitée comme une valeur SQL littérale. Le code ci-dessus
-génèrera le code SQL suivant en MySQL::
+la clé doit être traitée comme une valeur SQL littérale. En modifiant les
+arguments avec une valeur d'``identifier``, l'ORM va savoir que la clé doit être
+traitée comme un identifieur de champ. Le code ci-dessus va générer le SQL
+suivant sur MySQL::
 
-    SELECT CONCAT(title, :c0) FROM articles;
+    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
-La valeur ``:c0`` aura le texte ``' NEW'`` lié quand la requête est exécutée.
+La valeur ``:c0`` aura le texte ``' - CAT:'`` lié quand la requête est exécutée.
 
 En plus des fonctions ci-dessus, la méthode ``func()`` peut être utilisée pour
 créer toute fonction générique SQL comme ``year``, ``date_format``,
@@ -376,10 +382,10 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
 
     $query = $articles->find();
     $year = $query->func()->year([
-        'created' => 'literal'
+        'created' => 'identifier'
     ]);
     $time = $query->func()->date_format([
-        'created' => 'literal',
+        'created' => 'identifier',
         "'%H:%i'" => 'literal'
     ]);
     $query->select([
@@ -488,22 +494,28 @@ va automatiquement produire une instruction ``if .. then .. else``::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Désactiver l'Hydratation
-------------------------
+Récupérer des Tableaux plutôt que des Entities
+----------------------------------------------
 
-Alors que les ensembles de résultats en objet de l'ORM sont puissants,
-l'hydratation des entities n'est parfois pas nécessaire. Par exemple, quand
-vous accédez aux données agrégées, la construction d'une Entity peut ne pas
-être utile. Dans ces situations, vous pouvez désactiver l'hydratation d'une
-entity::
+Bien que les ensembles de résultats en objet de l'ORM soient puissants, créer
+des entities n'est parfois pas nécessaire. Par exemple, quand vous accédez aux
+données agrégées, la construction d'une Entity peut ne pas être utile. Le
+processus de conversion des résultats de la base de données en entities est
+appelé hydratation. Si vous souhaitez désactiver ce processus, vous pouvez
+faire ceci::
 
     $query = $articles->find();
-    $query->hydrate(false);
+    $query->hydrate(false); // Résultats en tableaux plutôt qu'en entities
+    $result = $query->toList(); // Exécute la requête et retourne le tableau
 
-.. note::
+Après avoir exécuté ces lignes, votre résultat devrait ressembler à quelque
+chose comme ceci::
 
-    Quand l'hydratation est désactivée, les résultats seront retournés en
-    tableaux basiques.
+    [
+        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+        ...
+    ]
 
 .. _advanced-query-conditions:
 
@@ -589,9 +601,9 @@ expression où elles sont combinées avec le combinateur courant.
 
 Par exemple, appeler ``$exp->and_(...)`` va créer un nouvel objet ``Expression``
 qui combine toutes les conditions qu'il contient avec ``AND``. Alors que
-``$exp->or_()`` va créer un nouvel objet ``Expression`` qui combine toutes
-les conditions qui lui sont ajoutées avec ``OR``. Un exemple d'ajout de
-conditions avec une objet ``Expression`` serait::
+``$exp->or_()`` va créer un nouvel objet ``Expression`` qui combine toutes les
+conditions qui lui sont ajoutées avec ``OR``. Un exemple d'ajout de conditions
+avec une objet ``Expression`` serait::
 
     $query = $articles->find()
         ->where(function ($exp) {
@@ -605,8 +617,8 @@ conditions avec une objet ``Expression`` serait::
 Puisque nous avons commencé à utiliser ``where()``, nous n'avons pas besoin
 d'appeler ``and_()``, puisqu'elle est appelée implicitement. Un peu de la même
 façon que nous n'appellerions pas ``or_()`` si nous avons commencé notre requête
-avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthodes
-de conditions combinées avec ``AND``. Le code SQL résultant serait::
+avec ``orWhere()``. Le code ci-dessus montre quelques nouvelles méthodes de
+conditions combinées avec ``AND``. Le code SQL résultant serait::
 
     SELECT *
     FROM articles
@@ -614,7 +626,7 @@ de conditions combinées avec ``AND``. Le code SQL résultant serait::
     author_id = 2
     AND published = 1
     AND spam != 1
-    AND view_count > 10)
+    AND view_count >= 10)
 
 Cependant, si nous souhaitons utiliser les deux conditions ``AND`` & ``OR``,
 nous pourrions faire ce qui suit::
@@ -678,7 +690,7 @@ SQL::
     $query = $articles->find()
         ->where(function ($exp, $q) {
             $year = $q->func()->year([
-                'created' => 'literal'
+                'created' => 'identifier'
             ]);
             return $exp
                 ->gte($year, 2014)
@@ -802,10 +814,17 @@ suivantes pour créer des conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+Dans les cas où vous ne pouvez ou ne voulez pas utiliser les méthodes du
+constructeur pour créer les conditions que vous voulez, vous pouvez utiliser du
+code SQL dans des clauses where::
+
+    // Compare deux champs l'un avec l'autre
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    Les noms de champs utilisés dans les expressions ne doivent **jamais**
-    contenir de contenu non fiable.
+    Les noms de champs utilisés dans les expressions et le code SQL ne doivent
+    **jamais** contenir de contenu non fiable.
     Référez-vous à la section :ref:`using-sql-functions` pour savoir comment
     inclure des données non fiables de manière sécurisée dans vos appels de
     fonctions.

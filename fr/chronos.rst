@@ -263,7 +263,7 @@ Les autres propriétés accessibles sont:
 - dayOfMonth
 - dayOfYear
 - daysInMonth
-- timesptamp
+- timestamp
 - quarter
 
 Aides aux Tests

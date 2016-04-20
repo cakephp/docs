@@ -13,8 +13,8 @@ Requirements
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required.
 - PHP 5.5.9 or greater (including PHP 7).
-- mbstring extension
-- intl extension
+- mbstring PHP extension
+- intl PHP extension
 
 .. note::
 
@@ -48,12 +48,22 @@ utilize one. CakePHP supports a variety of database storage engines:
 Installing CakePHP
 ===================
 
-CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool
-for PHP 5.3+, as the officially supported method for installation.
+Before starting you should make sure that you have got an up to date PHP
+version:
 
-First, you'll need to download and install Composer if you haven't
-done so already. If you have cURL installed, it's as easy as running the
-following:
+.. code-block:: bash
+
+    php -v
+
+You should at least have got installed PHP 5.5.9 (cli) or higher.
+Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
+the same version your command line interface (cli) PHP version is of.
+
+CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool,
+as the officially supported method for installation.
+
+First, you'll need to download and install Composer if you haven't done so
+already. If you have cURL installed, it's as easy as running the following:
 
 .. code-block:: bash
 
@@ -79,7 +89,7 @@ Or if Composer is installed globally:
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
 
 Once Composer finishes downloading the application skeleton and the core
 CakePHP library, you should have a functioning CakePHP application

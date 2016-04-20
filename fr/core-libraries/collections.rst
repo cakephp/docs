@@ -58,9 +58,9 @@ Liste des Méthodes
     +----------------------+------------------------+----------------------+---------------------+
     | :php:meth:`reject`   | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
     +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`some`     | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`take`    |
+    | :php:meth:`some`     | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
     +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`through`  | :php:meth:`unfold`     | :php:meth:`zip`      |                     |
+    | :php:meth:`take`     | :php:meth:`through`    | :php:meth:`unfold`   | :php:meth:`zip`     |
     +----------------------+------------------------+----------------------+---------------------+
 
 Faire une Itération

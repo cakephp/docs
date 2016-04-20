@@ -8,19 +8,19 @@ localisation dans CakePHP rendront cela plus facile.
 
 D'abord il est important de comprendre quelques terminologies.
 *Internationalisation* se réfère à la possibilité qu'a une application d'être
-localisée. Le terme *localisation* se réfère à l'adaptation qu'a une
-application de répondre aux besoins d'une langue (ou culture) spécifique
-(par ex: un "locale"). L'internationalisation et la localisation sont souvent
-abrégées en respectivement i18n et l10n; 18 et 10 sont le nombre de caractères
-entre le premier et le dernier caractère.
+localisée. Le terme *localisation* se réfère à l'adaptation qu'a une application
+de répondre aux besoins d'une langue (ou culture) spécifique (par ex: un
+"locale"). L'internationalisation et la localisation sont souvent abrégées en
+respectivement i18n et l10n; 18 et 10 sont le nombre de caractères entre le
+premier et le dernier caractère.
 
 Internationaliser Votre Application
 ===================================
 
 Il n'y a que quelques étapes à franchir pour passer d'une application
-mono-langue à une application multi-langue, la première est
-d'utiliser la fonction :php:func:`__()` dans votre code.
-Ci-dessous un exemple d'un code pour une application mono-langue::
+mono-langue à une application multi-langue, la première est d'utiliser la
+fonction :php:func:`__()` dans votre code. Ci-dessous un exemple d'un code pour
+une application mono-langue::
 
     <h2>Popular Articles</h2>
 
@@ -31,18 +31,18 @@ la chaîne avec :php:func:`__()` comme ceci::
 
 Si vous ne faîtes rien de plus, ces deux bouts de codes donneront un résultat
 identique - ils renverront le même contenu au navigateur.
-La fonction :php:func:`__()` traduira la chaîne passée si une
-traduction est disponible, sinon elle la renverra non modifiée.
+La fonction :php:func:`__()` traduira la chaîne passée si une traduction est
+disponible, sinon elle la renverra non modifiée.
 
 Fichiers de Langues
 -------------------
 
-Les traductions peuvent être mises à disposition en utilisant des fichiers
-de langue stockés dans votre application. Le format par défaut pour ces
-fichiers est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
-Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire,
-il devrait y avoir un sous-dossier par langue que l'application doit prendre
-en charge::
+Les traductions peuvent être mises à disposition en utilisant des fichiers de
+langue stockés dans votre application. Le format par défaut pour ces fichiers
+est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
+Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire, il
+devrait y avoir un sous-dossier par langue que l'application doit prendre en
+charge::
 
     /src
         /Locale
@@ -241,16 +241,15 @@ il comprend les mêmes options que ``date``.
 
 .. note::
 
-    Si vous utilisez PHP 5.5+, vous pouvez également utiliser les placeholders
-    nommés tel que {name}, {age}, etc. Passez ensuite les variables dans un
-    tableau en faisant correspondre les clés aux noms comme
-    ``['name' => 'Sara','age' => 12]``. Cette fonctionnalité n'est pas
-    disponible dans PHP 5.4.
+    Les placeholders nommés sont supportés dans PHP 5.5+ et sont formatés comme
+    ``{name}``. Quand vous utilisez les placeholders nommés, passez les
+    variables dans un tableau en utilisant la paire de clé/valeur, par exemple
+    ``['name' => 'Sara', 'age' => 12]``.
 
-    Si vous prévoyez d'utiliser les fonctionnalités d'internationalisation, il
-    est préférable d'utiliser PHP5.5 et une version d'ICU supérieure à 48.x.y.
-    Les versions antérieures de PHP et ICU comportent un certain nombre de
-    problèmes.
+    Il est recommandé d'utiliser PHP 5.5 ou supérieur quand vous utilisez les
+    fonctionnalités d'internationalisation de CakePHP. L'extension ``php5-intl``
+    doit être installée et la version ICU doit être supérieur à 48.x.y (pour
+    vérifier la version ICU ``Intl::getIcuVersion()``).
 
 Pluriels
 --------

@@ -101,14 +101,21 @@ Maintenant que les personnes peuvent se connecter, vous voudrez aussi
 probablement fournir un moyen de se déconnecter. Encore une fois, dans
 ``UsersController``, ajoutez le code suivant::
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['logout']);
+    }
+
     public function logout()
     {
         $this->Flash->success('Vous êtes maintenant déconnecté.');
         return $this->redirect($this->Auth->logout());
     }
 
-Maintenant vous pouvez visiter ``/users/logout`` pour vous déconnecter et
-être renvoyé vers la page de connexion.
+This code whitelists the ``logout`` action as a public action, and implements
+the logout method. Now you can visit ``/users/logout`` to log out. You should
+then be sent to the login page.
 
 Permettre de s'Enregistrer
 ==========================
@@ -118,9 +125,11 @@ serez renvoyés vers la page de connexion. Nous devrions régler cela puisque no
 voulons que les utilisateurs s'inscrivent à notre application. Dans
 ``UsersController``, ajoutez ce qui suit::
 
-    public function beforeFilter(\Cake\Event\Event $event)
+    public function initialize()
     {
-        $this->Auth->allow('add');
+        parent::initialize();
+        // Ajoute logout à la liste des actions autorisées.
+        $this->Auth->allow(['logout', 'add']);
     }
 
 Ce qui est au-dessus indique à ``AuthComponent`` que l'action ``add()`` *ne*
@@ -206,10 +215,9 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
     }
 
 
-Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark
-qui ne vous appartient pas, vous devriez être redirigé vers la page d'où vous
-venez. Cependant, il n'y a pas de message affiché, donc ensuite, rectifions
-cela::
+Maintenant, si vous essayez de voir, de modifier ou de supprimer un bookmark qui
+ne vous appartient pas, vous devriez être redirigé vers la page d'où vous venez.
+Cependant, il n'y a pas de message affiché, donc ensuite, rectifions cela::
 
     // Dans src/Template/Layout/default.ctp
     // Sous le message flash existant.
@@ -227,10 +235,10 @@ problèmes:
 #. Lors de l'édition d'un bookmark vous pouvez choisir l'utilisateur.
 #. La page de liste montre les bookmarks des autres utilisateurs.
 
-Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')``
-de **src/Template/Bookmarks/add.ctp**. Une fois retiré, nous allons aussi
-mettre à jour l'action ``add()`` dans **src/Controller/BookmarksController.php**
-pour ressembler à ceci::
+Attaquons nous d'abord à add. Pour commencer, retirez ``input('user_id')`` de
+**src/Template/Bookmarks/add.ctp**. Une fois retiré, nous allons aussi mettre à
+jour l'action ``add()`` dans **src/Controller/BookmarksController.php** pour
+ressembler à ceci::
 
     public function add()
     {
@@ -403,18 +411,18 @@ qui suit dans **src/Model/Table/BookmarksTable.php**::
 
 Alors que ce code est un peu plus compliqué que ce que nous avons déjà fait,
 il permet de montrer la puissance de l'ORM de CakePHP. Vous pouvez facilement
-manipuler les résultats de requête en utilisant
-les méthodes des :doc:`/core-libraries/collections`, et gérer les
-scenarios où vous créez les entities à la volée avec facilité.
+manipuler les résultats de requête en utilisant les méthodes des
+:doc:`/core-libraries/collections`, et gérer les scenarios où vous créez les
+entities à la volée avec facilité.
 
 Récapitulatif
 =============
 
-Nous avons élargi notre application de bookmarking pour gérer les scenarios
-de contrôle d'authentification et d'autorisation/d'accès basique. Nous avons
-aussi ajouté quelques améliorations UX en tirant parti du FormHelper et des
-capacités de l'ORM.
+Nous avons élargi notre application de bookmarking pour gérer les scenarios de
+contrôle d'authentification et d'autorisation/d'accès basique. Nous avons aussi
+ajouté quelques améliorations UX en tirant parti du FormHelper et des capacités
+de l'ORM.
 
-Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez
-finir le tutoriel du :doc:`/tutorials-and-examples/blog/blog`, en apprendre
-plus sur l':doc:`ORM </orm>` ou vous pouvez lire attentivement :doc:`/topics`.
+Merci d'avoir pris le temps d'explorer CakePHP. Ensuite, vous pouvez finir le
+tutoriel du :doc:`/tutorials-and-examples/blog/blog`, en apprendre plus sur
+l':doc:`ORM </orm>` ou vous pouvez lire attentivement :doc:`/topics`.

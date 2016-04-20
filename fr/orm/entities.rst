@@ -389,32 +389,16 @@ Lazy loading
     commentaires va fréquemment émettre N requêtes où N est le nombre d'articles
     étant itérés.
 
-Alors que le lazy loading n'est pas inclus par l'ORM de CakePHP, il n'est
-pas difficile de l'intégrer vous-même quand et où vous le souhaitez. Lors
-de l'implémentation d'une méthode accesseur, vous pouvez charger les
-données associées en lazy loading::
+Bien que le lazy loading n'est pas inclus dans l'ORM de CakePHP, vous pouvez
+utiliser un des plugins de la communauté. Nous recommandons le `plugin LazyLoad
+<https://github.com/jeremyharris/cakephp-lazyload>`__
 
-    namespace App\Model\Entity;
-
-    use Cake\ORM\Entity;
-    use Cake\ORM\TableRegistry;
-
-    class Article extends Entity
-    {
-
-        protected function _getComments()
-        {
-            $comments = TableRegistry::get('Comments');
-            return $comments->find('all')
-                ->where(['article_id' => $this->id])
-                ->toArray();
-        }
-
-    }
-
-Intégrer la méthode ci-dessus va vous permettre de faire ce qui suit::
+Après avoir ajouté le plugin à votre entity, vous pourrez le faire avec ce qui
+suit::
 
     $article = $this->Articles->findById($id);
+
+    // La propriété comments a été chargé en lazy
     foreach ($article->comments as $comment) {
         echo $comment->body;
     }

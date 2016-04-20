@@ -17,9 +17,9 @@ Installation
 ============
 
 Par défaut Migrations est installé avec le squelette d’application. Si vous le
-retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit
-à partir du répertoire ROOT de votre application (où le fichier composer.json
-est localisé)::
+retirez et voulez le réinstaller, vous pouvez le faire en lançant ce qui suit à
+partir du répertoire ROOT de votre application (où le fichier composer.json est
+localisé)::
 
     $ php composer.phar require cakephp/migrations "@stable"
 
@@ -510,9 +510,9 @@ migrations qui ont été exécutées::
 Vous pouvez aussi afficher les résultats avec le format JSON en utilisant
 l'option ``--format`` (ou ``-f`` en raccourci)::
 
-    $ bin/cake migrations --format json
+    $ bin/cake migrations status --format json
 
-Vous pouvez aussi utilisez les options ``--source``, ``--connection`` et
+Vous pouvez aussi utiliser les options ``--source``, ``--connection`` et
 ``--plugin`` comme pour la commande ``migrate``.
 
 ``mark_migrated`` : Marquer une Migration en Migrée
@@ -577,7 +577,7 @@ remplir votre base de données. Cela vient de la `fonctionnalité de seed
 de la librairie Phinx <http://docs.phinx.org/en/latest/seeding.html>`_.
 Par défaut, les fichiers de seed vont être recherchés dans le répertoire
 ``config/Seeds`` de votre application. Assurez-vous de suivre les
-`instructions de Phinx pour construire les fichiers de seed` <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
+`instructions de Phinx pour construire les fichiers de seed <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
 En ce qui concerne migrations, une interface ``bake`` est fournie pour les
 fichiers de seed::

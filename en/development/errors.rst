@@ -380,7 +380,7 @@ to indicate failure states. For example::
         if (empty($article)) {
             throw new NotFoundException(__('Article not found'));
         }
-        $this->set('article', 'article);
+        $this->set('article', 'article');
         $this->set('_serialize', ['article']);
     }
 

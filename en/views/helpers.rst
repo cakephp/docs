@@ -1,17 +1,16 @@
 Helpers
 #######
 
-Helpers are the component-like classes for the presentation layer
-of your application. They contain presentational logic that is
-shared between many views, elements, or layouts. This chapter will
-show you how to create your own helpers, and outline the basic
-tasks CakePHP's core helpers can help you accomplish.
+Helpers are the component-like classes for the presentation layer of your
+application. They contain presentational logic that is shared between many
+views, elements, or layouts. This chapter will show you how to configure
+helpers. How to load helpers and use those helpers, and outline the simple steps
+for creating your own custom helpers.
 
-CakePHP features a number of helpers that aid in view creation.
-They assist in creating well-formed markup (including forms), aid
-in formatting text, times and numbers, and can even speed up AJAX
-functionality. For more information on the helpers included in CakePHP,
-check out the chapter for each helper:
+CakePHP includes a number of helpers that aid in view creation. They assist in
+creating well-formed markup (including forms), aid in formatting text, times and
+numbers, and can even speed up AJAX functionality. For more information on the
+helpers included in CakePHP, check out the chapter for each helper:
 
 .. toctree::
     :maxdepth: 1
@@ -32,7 +31,7 @@ check out the chapter for each helper:
 Configuring Helpers
 ===================
 
-You enable helpers in CakePHP by declaring them in a view class. An ``AppView``
+You load helpers in CakePHP by declaring them in a view class. An ``AppView``
 class comes with every CakePHP application and is the ideal place to load
 helpers::
 
@@ -47,7 +46,7 @@ helpers::
         }
     }
 
-Loading helpers from plugins uses the :term:`plugin syntax` used elsewhere in
+To load helpers from plugins use the :term:`plugin syntax` used elsewhere in
 CakePHP::
 
     $this->loadHelper('Blog.Comment');
@@ -93,7 +92,7 @@ Configuration options
 ---------------------
 
 You can pass configuration options to helpers. These options can be used to set
-attribute values or modify behavior of a helper::
+attribute values or modify the behavior of a helper::
 
     namespace App\View\Helper;
 
@@ -102,7 +101,7 @@ attribute values or modify behavior of a helper::
 
     class AwesomeHelper extends Helper
     {
-    
+
         // initialize() hook is available since 3.2. For prior versions you can
         // override the constructor if required.
         public function initialize(array $config)
@@ -114,7 +113,7 @@ attribute values or modify behavior of a helper::
 Options can be specified when declaring helpers in controller as shown::
 
     namespace App\Controller;
-    
+
     use App\Controller\AppController;
 
     class AwesomeController extends AppController
@@ -237,22 +236,23 @@ supports the registry API used elsewhere in CakePHP.
 Callback Methods
 ================
 
-Helpers feature several callbacks that allow you to augment the
-view rendering process. See the :ref:`helper-api` and the
+Helpers feature several callbacks that allow you to augment the view rendering
+process. See the :ref:`helper-api` and the
 :doc:`/core-libraries/events` documentation for more information.
 
 Creating Helpers
 ================
 
-If a core helper (or one showcased on GitHub or in the Bakery)
-doesn't fit your needs, helpers are easy to create.
+You can create custom helper classes for use in your application or plugins.
+Like most components of CakePHP, helper classes have a few conventions:
 
-Let's say we wanted to create a helper that could be used to output
-a specifically crafted CSS-styled link you needed at many different
-places in your application. In order to fit your logic into
-CakePHP's existing helper structure, you'll need to create a new
-class in **src/View/Helper**. Let's call our helper LinkHelper. The
-actual PHP class file would look something like this::
+* Helper class files should be put in **src/View/Helper**. For example:
+  **src/View/Helper/LinkHelper.php**
+* Helper classes should be suffixed with ``Helper``. For example: ``LinkHelper``.
+* When referencing helper class names you should omit the ``Helper`` suffix. For
+  example: ``$this->loadHelper('Link');``.
+
+You'll also want to extend ``Helper`` to ensure things work correctly::
 
     /* src/View/Helper/LinkHelper.php */
     namespace App\View\Helper;
@@ -270,9 +270,9 @@ actual PHP class file would look something like this::
 Including Other Helpers
 -----------------------
 
-You may wish to use some functionality already existing in another
-helper. To do so, you can specify helpers you wish to use with a
-``$helpers`` array, formatted just as you would in a controller::
+You may wish to use some functionality already existing in another helper. To do
+so, you can specify helpers you wish to use with a ``$helpers`` array, formatted
+just as you would in a controller::
 
     /* src/View/Helper/LinkHelper.php (using other helpers) */
 
@@ -300,8 +300,8 @@ helper. To do so, you can specify helpers you wish to use with a
 Using Your Helper
 -----------------
 
-Once you've created your helper and placed it in
-**src/View/Helper/**, you can load it in your views::
+Once you've created your helper and placed it in **src/View/Helper/**, you can
+load it in your views::
 
     class AppView extends View
     {
@@ -312,15 +312,16 @@ Once you've created your helper and placed it in
         }
     }
 
-Once your helper has been loaded, you can use it in your views by accessing 
-the matching view property::
+Once your helper has been loaded, you can use it in your views by accessing the
+matching view property::
 
     <!-- make a link using the new helper -->
     <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
 
 .. note::
 
-    The ``HelperRegistry`` will attempt to lazy load any helpers not specifically identified in your ``Controller``.
+    The ``HelperRegistry`` will attempt to lazy load any helpers not
+    specifically identified in your ``Controller``.
 
 .. _helper-api:
 
@@ -350,9 +351,9 @@ does not implement any of the callback methods.
 
 .. php:method:: beforeRender(Event $event, $viewFile)
 
-    The beforeRender method is called after the controller's
-    beforeRender method but before the controller renders view and
-    layout. Receives the file being rendered as an argument.
+    The beforeRender method is called after the controller's beforeRender method
+    but before the controller renders view and layout. Receives the file being
+    rendered as an argument.
 
 .. php:method:: afterRender(Event $event, $viewFile)
 
@@ -366,8 +367,8 @@ does not implement any of the callback methods.
 
 .. php:method:: afterLayout(Event $event, $layoutFile)
 
-    Is called after layout rendering is complete. Receives the layout filename as an
-    argument.
+    Is called after layout rendering is complete. Receives the layout filename
+    as an argument.
 
 .. meta::
     :title lang=en: Helpers

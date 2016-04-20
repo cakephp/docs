@@ -45,7 +45,17 @@ CakePHP は種々のデータベース・ストレージのエンジンをサポ
 CakePHP のインストール
 ======================
 
-CakePHP の公式のインストール方法としては、PHP 5.3 以降での依存管理ツールである
+始める前に、最新の PHP バージョンであることを確認してください。
+
+.. code-block:: bash
+
+    php -v
+    
+少なくとも PHP 5.5.9 (cli) 以上がインストールされていなければなりません。
+ウェブサーバー版の PHP もまた 5.5.9 以上でなければりませんし、
+コマンドラインインターフェース (cli) 版の PHP と同じバージョンがベストです。
+
+CakePHP の公式のインストール方法として、依存性管理ツール
 `Composer <http://getcomposer.org>`_ を使用します。
 
 もしまだなら、最初に Composer をダウンロードしてインストールしなければなりません。
@@ -73,7 +83,7 @@ Windows インストーラをダウンロードできます。Composer の Windo
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
 
 一度 Composer がアプリケーションの雛形とコアライブラリをダウンロードしたら、
 インストールした CakePHP アプリケーションを Composer から操作できるように

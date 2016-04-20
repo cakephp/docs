@@ -33,9 +33,14 @@ CakePHP は下記のリレーショナルデータベースをサポートして
 * SQLite 3
 * PostgreSQL 8+
 * SQLServer 2008+
+* Oracle (コミュニティプラグイン経由)
 
 上記のデータベースそれぞれについて、適切な PDO 拡張がインストールされている必要があります。
 プロシージャー型 API はサポートされていません。
+
+Oracle データベースは、
+`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_
+コミュニティプラグインを経由してサポートされます。
 
 .. _running-select-statements:
 
