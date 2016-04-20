@@ -113,9 +113,10 @@ probablement fournir un moyen de se déconnecter. Encore une fois, dans
         return $this->redirect($this->Auth->logout());
     }
 
-This code whitelists the ``logout`` action as a public action, and implements
-the logout method. Now you can visit ``/users/logout`` to log out. You should
-then be sent to the login page.
+Ce code autorise l'action ``logout`` en tant qu'action publique,
+et implémente la méthode logout. Vous pouvez maintenant visiter la page 
+``/users/logout`` pour vous déconnecter. Vous devriez alors être renvoyé vers
+la page de connexion.
 
 Permettre de s'Enregistrer
 ==========================
