@@ -773,11 +773,11 @@ Changing the Controller Actions Used
 ------------------------------------
 
 You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit()`` action is called ``update()`` you can
+routes. For example, if your ``edit()`` action is called ``put()`` you can
 use the ``actions`` key to rename the actions used::
 
     $routes->resources('Articles', [
-        'actions' => ['edit' => 'update', 'add' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'create']
     ]);
 
 The above would use ``update()`` for the ``edit()`` action, and ``create()``
