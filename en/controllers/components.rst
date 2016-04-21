@@ -52,7 +52,7 @@ You can configure components at runtime using the ``config()`` method. Often,
 this is done in your controller's ``beforeFilter()`` method. The above could
 also be expressed as::
 
-    public function beforeFilter()
+    public function beforeFilter(Event $event)
     {
         $this->Auth->config('authorize', ['controller']);
         $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
