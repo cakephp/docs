@@ -39,7 +39,7 @@ automatically echo the output into the view.
 Formatting Currency Values
 ==========================
 
-.. php:method:: currency($value, $currency = null, array $options = [])
+.. php:method:: currency(mixed $value, string $currency = null, array $options = [])
 
 This method is used to display a number in common currency formats
 (EUR, GBP, USD). Usage in a view looks like::
@@ -115,7 +115,7 @@ it will clear the currently stored value. By default, it will retrieve the
 Formatting Floating Point Numbers
 =================================
 
-.. php:method:: precision($value, $precision = 3, array $options = [])
+.. php:method:: precision(float $value, int $precision = 3, array $options = [])
 
 This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
@@ -134,7 +134,7 @@ level of precision defined. ::
 Formatting Percentages
 ======================
 
-.. php:method:: toPercentage($value, $precision = 2, array $options = [])
+.. php:method:: toPercentage(mixed $value, int $precision = 2, array $options = [])
 
 +---------------------+----------------------------------------------------+
 | Option              | Description                                        |
@@ -163,7 +163,7 @@ and appends the output with a percent sign. ::
 Interacting with Human Readable Values
 ======================================
 
-.. php:method:: toReadableSize($size)
+.. php:method:: toReadableSize(string $size)
 
 This method formats data sizes in human readable forms. It provides
 a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
@@ -335,7 +335,7 @@ Example::
 Configure formatters
 ====================
 
-.. php:method:: config($locale, $type = NumberFormatter::DECIMAL, array $options = [])
+.. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
 
 This method allows you to configure formatter defaults which persist across calls
 to various methods.

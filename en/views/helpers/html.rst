@@ -108,7 +108,7 @@ and also wanted to include **webroot/css/Blog.common.css**, you would::
 Creating CSS Programatically
 ----------------------------
 
-.. php:method:: style(array $data, $oneline = true)
+.. php:method:: style(array $data, boolean $oneline = true)
 
 Builds CSS style definitions based on the keys and values of the
 array passed to the method. Especially handy if your CSS file is
@@ -128,7 +128,7 @@ Will output::
 Creating meta Tags
 ------------------
 
-.. php:method:: meta($type, string $url = null, array $options = [])
+.. php:method:: meta(string|array $type, string $url = null, array $options = [])
 
 This method is handy for linking to external resources like RSS/Atom feeds
 and favicons. Like css(), you can specify whether or not you'd like this tag
@@ -210,7 +210,7 @@ generated link tag.
 Creating Doctype Tags
 ---------------------
 
-.. php:method:: docType($type = 'html5')
+.. php:method:: docType(string $type = 'html5')
 
 Returns a (X)HTML doctype tag. Supply the doctype according to the
 following table:
@@ -248,7 +248,7 @@ following table:
 Linking to Images
 -----------------
 
-.. php:method:: image($path, array $options = [])
+.. php:method:: image(string $path, array $options = [])
 
 
 Creates a formatted image tag. The path supplied should be relative
@@ -304,7 +304,7 @@ and also wanted to include ``webroot/img/Blog.icon.png``, you would::
 Creating Links
 --------------
 
-.. php:method:: link($title, $url = null, array $options = [])
+.. php:method:: link(string $title, mixed $url = null, array $options = [])
 
 General purpose method for creating HTML links. Use ``$options`` to
 specify attributes for the element and whether or not the
@@ -413,7 +413,8 @@ for more examples of different types of URLs.
 Linking to Videos and Audio Files
 ---------------------------------
 
-.. php:method:: media($path, array $options)
+.. php:method:: media(string|array $path, array $options)
+
 
 Options:
 
@@ -788,8 +789,8 @@ When loading files of templates, your file should look like::
 Creating Breadcrumb Trails with HtmlHelper
 ==========================================
 
-.. php:method:: addCrumb($name, string $link = null, $options = null)
-.. php:method:: getCrumbs($separator = '&raquo;', $startText = false)
+.. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
+.. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 .. php:method:: getCrumbList(array $options = [], $startText = false)
 
 Many applications have breadcrumb trails to ease end user navigations. You can

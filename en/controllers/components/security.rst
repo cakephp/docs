@@ -45,7 +45,7 @@ components in your ``initialize()`` method.
 Handling Blackhole Callbacks
 ============================
 
-.. php:method:: blackHole($controller, $error = '', SecurityException $exception = null)
+.. php:method:: blackHole(object $controller, string $error = '', SecurityException $exception = null)
 
 If an action is restricted by the Security Component it is
 'black-holed' as an invalid request which will result in a 400 error

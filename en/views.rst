@@ -164,7 +164,7 @@ the ``h()`` function::
 Setting View Variables
 ----------------------
 
-.. php:method:: set($var, $value)
+.. php:method:: set(string $var, mixed $value)
 
 Views have a ``set()`` method that is analogous to the ``set()`` found in
 Controller objects. Using set() from your view file will add the variables to
@@ -533,7 +533,7 @@ syntax`. For example, to use the contact layout from the Contacts plugin::
 Elements
 ========
 
-.. php:method:: element($elementPath, array $data, array $options = [])
+.. php:method:: element(string $elementPath, array $data, array $options = [])
 
 Many applications have small blocks of presentation code that need to be
 repeated from page to page, sometimes in different places in the layout. CakePHP

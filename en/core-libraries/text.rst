@@ -115,7 +115,7 @@ such as tag lists::
     // Result contains
     ['cakephp', "'great framework'", 'php'];
 
-.. php:method:: parseFileSize($size, $default)
+.. php:method:: parseFileSize(string $size, $default)
 
 This method unformats a number from a human-readable byte size to an integer
 number of bytes::
@@ -202,7 +202,7 @@ text for the console for example. It accepts the same options than ``wrap()``::
 Highlighting Substrings
 =======================
 
-.. php:method:: highlight($haystack, $needle, array $options = [] )
+.. php:method:: highlight(string $haystack, string $needle, array $options = [] )
 
 Highlights ``$needle`` in ``$haystack`` using the ``$options['format']`` string
 specified or a default string.
@@ -248,7 +248,7 @@ Strips the supplied ``$text`` of any HTML links.
 Truncating Text
 ===============
 
-.. php:method:: truncate($text, $length = 100, array $options)
+.. php:method:: truncate(string $text, int $length = 100, array $options)
 
 If ``$text`` is longer than ``$length``, this method truncates it at ``$length``
 and adds a prefix consisting of ``'ellipsis'``, if defined. If ``'exact'`` is
@@ -296,7 +296,7 @@ Output::
 Truncating the Tail of a String
 ===============================
 
-.. php:method:: tail($text, $length = 100, array $options)
+.. php:method:: tail(string $text, int $length = 100, array $options)
 
 If ``$text`` is longer than ``$length``, this method removes an initial
 substring with length consisting of the difference and prepends a suffix
@@ -346,7 +346,7 @@ Output::
 Extracting an Excerpt
 =====================
 
-.. php:method:: excerpt($haystack, $needle, $radius = 100, $ellipsis = "...")
+.. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
 Extracts an excerpt from ``$haystack`` surrounding the ``$needle`` with a number
 of characters on each side determined by ``$radius``, and prefix/suffix with

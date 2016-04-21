@@ -174,11 +174,11 @@ The lock option can be used to lock sorting into the specified direction::
 
     echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 
-.. php:method:: sortDir($model = null, $options = [])
+.. php:method:: sortDir(string $model = null, mixed $options = [])
 
     Gets the current direction the recordset is sorted.
 
-.. php:method:: sortKey($model = null, $options = [])
+.. php:method:: sortKey(string $model = null, mixed $options = [])
 
     Gets the current key by which the recordset is sorted.
 
@@ -308,7 +308,7 @@ pages in the paged data set.
 Checking the Pagination State
 =============================
 
-.. php:method:: current($model = null)
+.. php:method:: current(string $model = null)
 
     Gets the current page of the recordset for the given model::
 
@@ -316,15 +316,15 @@ Checking the Pagination State
         echo $this->Paginator->current('Comment');
         // Output is 3
 
-.. php:method:: hasNext($model = null)
+.. php:method:: hasNext(string $model = null)
 
     Returns ``true`` if the given result set is not at the last page.
 
-.. php:method:: hasPrev($model = null)
+.. php:method:: hasPrev(string $model = null)
 
     Returns ``true`` if the given result set is not at the first page.
 
-.. php:method:: hasPage($model = null, $page = 1)
+.. php:method:: hasPage(string $model = null, integer $page = 1)
 
     Returns ``true`` if the given result set has the page number given by ``$page``.
 
