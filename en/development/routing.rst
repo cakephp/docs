@@ -780,7 +780,7 @@ use the ``actions`` key to rename the actions used::
         'actions' => ['update' => 'put', 'create' => 'create']
     ]);
 
-The above would use ``update()`` for the ``edit()`` action, and ``create()``
+The above would use ``put()`` for the ``edit()`` action, and ``create()``
 instead of ``add()``.
 
 Mapping Additional Resource Routes
