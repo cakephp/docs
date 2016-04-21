@@ -257,7 +257,7 @@ As stated above, by default the validation methods receive an instance of
 instance to be used each time, you can use table's ``$_validatorClass`` property::
 
     // In your table class
-    public function initialize()
+    public function initialize(array $config)
     {
         $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
     }
