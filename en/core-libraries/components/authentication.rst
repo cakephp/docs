@@ -105,6 +105,7 @@ keys.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``array('User.is_active' => 1)``.
+- ``recursive`` The value of the recursive key passed to ``find()``. Defaults to ``0``.
 - ``contain`` Containable options for when the user record is loaded.
   If you want to use this option, you'll need to make sure your model
   has the containable behavior attached.
