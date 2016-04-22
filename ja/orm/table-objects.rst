@@ -194,7 +194,7 @@ beforeMarshal
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
 ``Model.beforeFind`` イベントは find する前に発行されます。イベントを止めて戻り値を返すことで
 find を完全にバイパスできます。 $query インスタンスによってなされた全ての変更は find
@@ -238,7 +238,7 @@ beforeRules
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
 ``Model.afterRules`` イベントはルールがエンティティに適用された後に発行されます。
 このイベントが止まると、操作をチェックするためのルールの結果の値を返すことができます。

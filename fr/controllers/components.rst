@@ -55,7 +55,7 @@ Vous pouvez configurer les components à la volée en utilisant la méthode
 ``config()``. Souvent, ceci est fait dans la méthode ``beforeFilter()`` de votre
 controller. Ceci peut aussi être exprimé comme ceci::
 
-    public function beforeFilter()
+    public function beforeFilter(Event $event)
     {
         $this->Auth->config('authorize', ['controller']);
         $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);

@@ -57,7 +57,7 @@ contenu que le client accepte. Par exemple::
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter()
+            public function beforeFilter(Event $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute le code seulement si le client accepte une
