@@ -113,6 +113,8 @@ suivante.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
+- ``recursive`` La valeur de la clé récursive passé à ``find()``. Par défaut à
+  ``0``.
 - ``contain`` options de Containable lorsque l'enregistrement de l'utilisateur
   est chargé. Si vous souhaitez utiliser cette option, vous devrez vous assurer
   que votre model a le behavior Containable attaché.
