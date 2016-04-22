@@ -1067,7 +1067,7 @@ conditions can also be expressed as an array of conditions::
                     'c.article_id = articles.id'
                 ]
             ],
-        ], ['a.created' => 'datetime', 'c.moderated' => 'boolean']);
+        ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
 
 When creating joins by hand and using array based conditions, you need to
 provide the datatypes for each column in the join conditions. By providing
