@@ -96,8 +96,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 - ``userModel`` User のモデル名。デフォルトは User。
 - ``scope`` 認証するユーザを検索する際に使う、追加の条件。
   例： ``array('User.is_active' => 1)``
-- ``recursive`` The value of the recursive key passed to ``find()``. Defaults to
-  ``0``.
+- ``recursive`` ``find()`` に渡された recursive キーの値。 デフォルトは ``0`` 。
 - ``contain`` ユーザのレコードがロードされた際に含めることのできるオプション。
   もしこのオプションを使用したい場合、モデルに Containable ビヘイビアを追加する必要があります。
 
