@@ -8,28 +8,27 @@ fonctionnalités du component et les rend disponible dans votre vue.
 Le Helper session est automatiquement ajouté à la vue, il n'est pas nécessaire
 de l'ajouter à la variable tableau ``$helpers`` dans votre controller.
 
-La grande différence entre le Component Session et le Helper Session
-est que ce dernier *ne peut pas* écrire dans la session.
+La grande différence entre le Component Session et le Helper Session est que ce
+dernier *ne peut pas* écrire dans la session.
 
-Comme pour le Component Session, les données sont écrites et lues en
-utilisant des structures de tableaux avec la :term:`notation avec points`,
-comme ci-dessous::
+Comme pour le Component Session, les données sont écrites et lues en utilisant
+des structures de tableaux avec la :term:`notation avec points`, comme
+ci-dessous::
 
     array('User' =>
         array('username' => 'super@example.com')
     );
 
-Étant donné ce tableau, le nœud sera accessible par ``User.username``,
-le point indiquant le tableau imbriqué. Cette notation est utilisée pour
-toutes les méthodes du helper Session où une variable ``$key`` est
-utilisée.
+Étant donné ce tableau, le nœud sera accessible par ``User.username``, le point
+indiquant le tableau imbriqué. Cette notation est utilisée pour toutes les
+méthodes du helper Session où une variable ``$key`` est utilisée.
 
 .. php:method:: read(string $key)
 
     :rtype: mixed
 
-    Lire à partir de la Session. Retourne une chaîne de caractère ou un
-    tableau dépendant des contenus de la session.
+    Lire à partir de la Session. Retourne une chaîne de caractère ou un tableau
+    dépendant des contenus de la session.
 
 .. php:method:: consume($name)
 
@@ -42,14 +41,14 @@ utilisée.
 
     :rtype: boolean
 
-    Vérifie si une clé est dans la Session. Retourne un boléen sur
-    l'existence d'un clé.
+    Vérifie si une clé est dans la Session. Retourne un boléen sur l'existence
+    d'un clé.
 
 .. php:method:: error()
 
     :rtype: string
 
-    Retourne la dernière erreur encourue dans une session.
+    Retourne la dernière erreur rencontrée dans une session.
 
 .. php:method:: valid()
 
@@ -66,11 +65,10 @@ Affichage de notifications ou de messages flash
         Vous devez utiliser :doc:`/core-libraries/helpers/flash` pour afficher
         les messages flash.
 
-    Comme expliqué dans :ref:`creating-notification-messages` vous pouvez
-    créer des notifications uniques pour le feedback. Après avoir
-    créé les messages avec :php:meth:`SessionComponent::setFlash()`, vous
-    voudrez les afficher. Une fois que le message est affiché, il sera
-    retiré et ne s'affichera plus::
+    Comme expliqué dans :ref:`creating-notification-messages` vous pouvez créer
+    des notifications uniques pour le feedback. Après avoir créé les messages
+    avec :php:meth:`SessionComponent::setFlash()`, vous voudrez les afficher.
+    Une fois que le message est affiché, il sera retiré et ne s'affichera plus::
 
         echo $this->Session->flash();
 
@@ -87,7 +85,7 @@ Affichage de notifications ou de messages flash
     controller, vous pouvez avoir du code comme::
 
         // dans un controller
-        $this->Session->setFlash('Le user n'a pu être supprimé.');
+        $this->Session->setFlash("L'utilisateur n'a pas pu être supprimé.");
 
     Quand le message sort, vous pouvez choisir l'élément utilisé pour afficher
     ce message::
@@ -111,7 +109,7 @@ Affichage de notifications ou de messages flash
     ``flash()``, ce qui vous permet de générer des messages personnalisés::
 
         // Dans le controller
-        $this->Session->setFlash('Thanks for your payment %s');
+        $this->Session->setFlash('Merci pour votre paiement %s');
 
         // Dans le layout.
         echo $this->Session->flash('flash', array(
