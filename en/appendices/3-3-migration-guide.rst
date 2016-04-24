@@ -14,6 +14,16 @@ Deprecations
 * ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
   compatibility will be removed in 4.0.0
 
+Behavior Changes
+================
+
+While these changes are API compatible, they represent minor variances in
+behavior that may effect your application:
+
+* The default JSON encode format for Date and DateTime instances is now
+  ISO-8601. This means that the timezone value contains a ``:``.
+  For example ``2015-11-06T00:00:00+03:00``
+
 Routing
 =======
 
