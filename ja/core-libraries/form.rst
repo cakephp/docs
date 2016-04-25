@@ -167,9 +167,9 @@ Validatorクラスの使用なしに、
 
 さてフィールド名を設定することでフォームフィールドを無効化し、その時にメッセージを設定できるようになりました::
 
-    // In a controller
+    // コントローラの中で
     $contact = new ContactForm();
-    $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
+    $contact->setErrors(["email" => ["_required" => "メールアドレスは必須です"]]);
 
 結果を見るためには「FormHelperでHTML作成」に進みます。
 
