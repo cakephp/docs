@@ -18,7 +18,7 @@ Changements de Comportement
 ===========================
 
 Bien que ces changements soient compatibles avec l'API, ils entraînent des
-variations mineurs qui peuvent avoir des effets sur votre application:
+variations mineures qui peuvent avoir des effets sur votre application:
 
 * L'encodage du format JSON par défaut pour les instances Date et DateTime est
   maintenant ISO-8601. Cela signifie que la valeur timezone contient un ``:``.
