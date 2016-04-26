@@ -32,74 +32,72 @@ window.lang = "{{ language }}";
 	"_static/foundation.js"
 ] -%}
 
-{# Use the header block to insert the CSF navbar #}
 {%- block header %}
 {# Outer wrapper for pushing the footer to the bottom #}
 <div id="container">
+	<div class="cake-bar">
+		<a class="logo" href="{{ pathto(master_doc) }}">
+			<img src="{{ pathto('_static/cake-logo.png', 1) }}" alt="CakePHP" width="70" />
+		</a>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+		<div class="menu-block">
+			<ul>
+				<li>Documentation</li>
+				<li>Business Solutions</li>
+				<li>Showcase</li>
+				<li>Community</li>
 			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
+		</div>
+	</div>
+
+	<div class="sitebar row">
+		<div class="i-book site-name">
+			CakePHP 3.2 Red Velvet
+			<strong>Cookbook</strong>
+		</div>
+		<div class="searchbar">
+			{% include 'searchbox.html' %}
+		</div>
+
+		<div class="languages sitebar-dropdown dropdown">
+			{% for lang in languages %}
+				{%- if lang == language -%}
+				<span class="sitebar-label">Language:</span>
+				<a class="dropdown-active" href="#">{{ lang }}</a>
+				{%- endif -%}
+			{% endfor %}
+			<ul>
+			{% for lang in languages %}
+				<li>
+					{%- if lang == language -%}
+					{# Do nothing, we print the active one above #}
+					{%- elif has_lang(lang, pagename) -%}
+					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+					{%- else -%}
+					<span class="disabled">{{ lang }}</span>
+					{%- endif -%}
+				</li>
+			{% endfor %}
 			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
+		</div>
+
+		<div class="versions sitebar-dropdown dropdown">
+			<span class="sitebar-label">Version:</span>
+			<a class="dropdown-active" href="#">3.x</a>
+			<ul>
+				<li><a href="http://book.cakephp.org/3.0/{{ language }}">3.x Book</a></li>
+				<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
+				<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
+				<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
+				<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
 			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+		</div>
+
+	</div>
 {% endblock -%}
 
 
 {%- block relbar1 %}
-<div class="masthead">
-	<div class="header-backing-trap">
-		<div class="header-backing"></div>
-	</div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="{{ pathto(master_doc) }}">
-			<img src="{{ pathto('_static/cake-logo.png', 1) }}" alt="CakePHP" width="70" />
-			</a>
-		</div>
-		{% include 'searchbox.html' %}
-	</div>
-</div>
-
 <div class="breadcrumb-header">
 	<div class="related row">
 		<div class="columns three root-link">
@@ -113,38 +111,6 @@ window.lang = "{{ language }}";
 			</li>
 			{%- endfor %}
 			</ul>
-			<div class="versions dropdown">
-				<a href="#">3.x Book</a>
-				<ul>
-					<a href="http://book.cakephp.org/3.0/{{ language }}">3.0 Book</a>
-					<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				{% for lang in languages %}
-					{%- if lang == language -%}
-						<a href="#">{{ lang }}</a>
-					{%- endif -%}
-				{% endfor %}
-
-				<ul>
-				{% for lang in languages %}
-					<li>
-						{%- if lang == language -%}
-						{# Do nothing, we print the active one above #}
-						{%- elif has_lang(lang, pagename) -%}
-						<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-						{%- else -%}
-						<span class="disabled">{{ lang }}</span>
-						{%- endif -%}
-					</li>
-				{% endfor %}
-				</ul>
-			</div>
 		</div>
 	</div>
 </div>
@@ -158,12 +124,14 @@ window.lang = "{{ language }}";
 			{%- if pagename != 'search' -%}
 				<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
 			{%- endif -%}
+
 			{%- if pagename != 'search' and pagename != 'contents' and pagename != 'index' -%}
-			<div id="page-contents" class="page-contents">
+			<div class="page-contents">
 				<h3>{{ _('Page Contents') }}</h3>
 				{{ toc }}
 			</div>
 			{%- endif -%}
+
 			{% block body %} {% endblock %}
 		</div>
 	</div>
@@ -188,31 +156,99 @@ window.lang = "{{ language }}";
 
 {%- block footer %}
 {# Push the footer down to the bottom of the page #}
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>Found an issue?</strong>
-			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
-			<a href="http://book.cakephp.org/3.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
-		</div>
+<div class="footer-region">
+	<div class="footer-social row">
+		Bunch of social links/buttons go in here.
 	</div>
 
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-			{%- if show_copyright %}
-				{%- if hasdoc('copyright') %}
-					{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
-				{%- else %}
-					{% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
+	<div class="footer-nav row">
+		<div class="columns four">
+			<h3>My CakePHP</h3>
+		</div>
+
+		<div class="footer-links columns two">
+			<h4 class="i-book">Documentation</h4>
+			<ul>
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+
+			<h4 class="i-briefcase">Business Solutions</h4>
+
+			<h4 class="i-tv">Showcase</h4>
+		</div>
+
+		<div class="footer-links columns two">
+			<h4 class="i-people">Community</h4>
+			<ul>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+			</ul>
+		</div>
+
+		<div class="footer-links columns two">
+			<h4 class="i-speech">Help &amp; Support</h4>
+			<ul>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="TODO">Slack</a></li>
+
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">IRC</a></li>
+			</ul>
+
+			<h4 class="i-calendar">Calendar</h4>
+			<ul>
+				<li><a href="TODO">Meetups</a></li>
+				<li><a href="TODO">Events</a></li>
+			</ul>
+		</div>
+
+		<div class="footer-links columns two">
+			<h4 class="i-tag">Marketplace</h4>
+
+			<h5>Service Providers</h5>
+			<ul>
+				<li><a href="http://cakedc.com">CakeDC</a></li>
+				<li><a href="TODO">PHPStorm</a></li>
+				<li><a href="TODO">Rackspace</a></li>
+			</ul>
+
+			<h5>Jobs</h5>
+
+			<ul class="second-level">
+				<li><a href="http://certification.cakephp.org">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</div>
+
+		<div class="row">
+			<div class="columns nine offset-by-three copyright">
+				{%- if show_copyright %}
+					{%- if hasdoc('copyright') %}
+						{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
+					{%- else %}
+						{% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
+					{%- endif %}
 				{%- endif %}
-			{%- endif %}
-			{%- if last_updated %}
-				{% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
-			{%- endif %}
-			{%- if show_sphinx %}
-				{% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
-			{%- endif %}
+				{%- if last_updated %}
+					{% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+				{%- endif %}
+				{%- if show_sphinx %}
+					{% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
+				{%- endif %}
+			</div>
 		</div>
 	</div>
 </div>
@@ -230,4 +266,3 @@ window.lang = "{{ language }}";
 	})();
 </script>
 {%- endblock %}
-
