@@ -297,7 +297,7 @@ message. For example::
     // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
     Log::config('shops', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -307,7 +307,7 @@ message. For example::
     // Configure logs/payments.log to receive all levels, but only
     // those with `payments` scope.
     Log::config('payments', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],

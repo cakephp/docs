@@ -321,7 +321,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
     // mais seulement ceux avec les scope `orders` et `payments`
     Log::config('shops', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -331,7 +331,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // configurez logs/payments.log pour recevoir tous les types, mais seulement
     // ceux qui ont un scope `payments`
     Log::config('payments', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
