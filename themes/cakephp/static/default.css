@@ -26,44 +26,6 @@ body {
 }
 
 
-/* -- top navbars -- */
-.masthead img {
-	margin-top: 6px;
-}
-.masthead .button.red {
-	border: 1px solid #66030C;
-}
-.header-backing {
-	height: 300px;
-}
-.search-header {
-	color: #fff;
-}
-.breadcrumb-header {
-	background: #BD8A5D;
-	color: #fff;
-	margin-bottom: 18px;
-	font-family: MuseoSlab500, Helvetica, Arial;
-}
-.breadcrumb-header .row {
-	position: relative;
-}
-.breadcrumb-header a {
-	color: #fff;
-}
-
-.root-link,
-.breadcrumb {
-	line-height: 25px;
-	margin: 5px 0;
-}
-.root-link a,
-.breadcrumb li {
-	font-size: 18px;
-	margin: 0;
-	vertical-align: middle;
-}
-
 
 /* Dropdown menu's for versions/languages */
 .dropdown {
@@ -129,17 +91,6 @@ body {
 }
 .languages .active {
 	text-decoration: underline;
-}
-
-.dev-release {
-	font-family: MuseoSlab500, Helvetica, Arial;
-	background: #C92434;
-	color: #fff;
-	font-size: 15px;
-	padding: 10px 0;
-}
-.dev-release a {
-	color: #003D4C;
 }
 
 /* Searchbox */
@@ -622,24 +573,6 @@ dt tt {
 .footer-push {
 	clear: both;
 	height: 80px;
-}
-.footer {
-	min-height: 60px;
-}
-.related-pages {
-	float: right;
-}
-
-.footer .contribute {
-	margin-bottom: 10px;
-}
-.contribute strong {
-	color: #C92434;
-}
-.contribute,
-.related-pages a {
-	font-size: 14px;
-	font-family: MuseoSlab500, Helvetica, Arial;
 }
 .copyright {
 	font-size: 12px;

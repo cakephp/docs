@@ -224,49 +224,6 @@ dl.docutils {
     font-size: 1.4rem;
 }
 
-/* tilted header */
-.masthead {
-    background: #417282 url(header-bg.png) repeat-x;
-    position: relative;
-}
-/* This differs from other sites because the search results need to overflow the
- * masthead element. The book has an additional wrapping div in .header-backing
- * to trap the halftone pattern
- */
-.header-backing-trap {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    overflow: hidden;
-}
-.header-backing {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    z-index: 0;
-    background: url(header-halftone.png) repeat-x;
-
-    -webkit-transform: rotate(-2.8deg);
-    -moz-transform: rotate(-2.8deg);
-    transform: rotate(-2.8deg);
-
-    -webkit-transform-origin: top center;
-    -moz-transform-origin: top center;
-    transform-origin: top center;
-}
-.masthead .row {
-    z-index: 1;
-    position: relative;
-}
-
-/* footer */
-.footer {
-    background: #B2CCCD url(pale-halftone-bottom.png) top left repeat-x;
-    padding: 10px 0;
-}
 
 /* Inline */
 .panel.flyout {
@@ -470,30 +427,6 @@ a.improve {
 }
 #sidebar-navigation > ul > li:lang(tr):nth-of-type(43):before {
     content: "Other";
-}
-
-/**
- * Responsive CSF navbar override.
- */
-@media only screen and (max-width: 1000px) {
-    #cakephp-global-navigation li.main {
-        margin-left: 10px;
-    }
-}
-@media only screen and (max-width: 727px) {
-    #cakephp-global-navigation .nav-select {
-        display: block;
-        position: absolute;
-        top: 3px;
-        right: 10px;
-    }
-    #cakephp-global-navigation li {
-        display: none;
-    }
-    #cakephp-global-navigation .main {
-        display: block;
-    }
-
 }
 
 .docutils.internal-toc td {
