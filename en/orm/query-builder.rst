@@ -584,9 +584,9 @@ be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where()``, we don't need to call ``and_()``, as that
-happens implicitly. Much like how we would not need to call ``or_()``, had we
-started our query with ``orWhere()``. The above shows a few new condition
+Since we started off using ``where()``, we don't need to call ``and_()``, as
+that happens implicitly. Much like how we would not need to call ``or_()``, had
+we started our query with ``orWhere()``. The above shows a few new condition
 methods being combined with ``AND``. The resulting SQL would look like::
 
     SELECT *
@@ -780,11 +780,18 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+In situations when you can't get, or don't want to use the builder methods to
+create the conditions you want you can also use snippets of SQL in where
+clauses::
+
+    // Compare two fields to each other
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    The field name used in expressions should **never** contain untrusted content.
-    See the :ref:`using-sql-functions` section for how to safely include
-    untrusted data into function calls.
+    The field names used in expressions, and SQL snippets should **never**
+    contain untrusted content.  See the :ref:`using-sql-functions` section for
+    how to safely include unsafe data into function calls.
 
 Automatically Creating IN Clauses
 ---------------------------------
@@ -817,8 +824,8 @@ using::
 Automatic IS NULL Creation
 --------------------------
 
-When a condition value is expected to be ``null`` or any other value, you can use
-the ``IS`` operator to automatically create the correct expression::
+When a condition value is expected to be ``null`` or any other value, you can
+use the ``IS`` operator to automatically create the correct expression::
 
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
@@ -830,8 +837,8 @@ the type of ``$parentId``
 Automatic IS NOT NULL Creation
 ------------------------------
 
-When a condition value is expected not to be ``null`` or any other value, you can use
-the ``IS NOT`` operator to automatically create the correct expression::
+When a condition value is expected not to be ``null`` or any other value, you
+can use the ``IS NOT`` operator to automatically create the correct expression::
 
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
@@ -1060,7 +1067,7 @@ conditions can also be expressed as an array of conditions::
                     'c.article_id = articles.id'
                 ]
             ],
-        ], ['a.created' => 'datetime', 'c.moderated' => 'boolean']);
+        ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
 
 When creating joins by hand and using array based conditions, you need to
 provide the datatypes for each column in the join conditions. By providing

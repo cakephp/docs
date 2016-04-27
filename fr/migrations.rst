@@ -577,7 +577,7 @@ remplir votre base de données. Cela vient de la `fonctionnalité de seed
 de la librairie Phinx <http://docs.phinx.org/en/latest/seeding.html>`_.
 Par défaut, les fichiers de seed vont être recherchés dans le répertoire
 ``config/Seeds`` de votre application. Assurez-vous de suivre les
-`instructions de Phinx pour construire les fichiers de seed` <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
+`instructions de Phinx pour construire les fichiers de seed <http://docs.phinx.org/en/latest/seeding.html#creating-a-new-seed-class>`_.
 
 En ce qui concerne migrations, une interface ``bake`` est fournie pour les
 fichiers de seed::

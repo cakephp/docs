@@ -34,7 +34,7 @@ Un exemple serait::
 
     // Nom de classe court
     Log::config('debug', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
@@ -97,14 +97,14 @@ example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 
     // Pour src/Log
     Log::config('otherFile', [
-        'className' => 'DatabaseLog',
+        'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // Pour un plugin appelé LoggingPack
     Log::config('otherFile', [
-        'className' => 'LoggingPack.DatabaseLog',
+        'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ]);

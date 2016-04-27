@@ -269,7 +269,7 @@ une instance d'un validator personnalisé, vous pouvez utiliser l'attribut
 
 
     // Dans votre class Table
-    public function initialize()
+    public function initialize(array $config)
     {
         $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
     }

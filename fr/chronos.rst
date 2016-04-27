@@ -227,7 +227,7 @@ datetime::
     // Différents formats standards
     echo $time->toAtomString();      // 1975-12-25T14:15:16-05:00
     echo $time->toCookieString();    // Thursday, 25-Dec-1975 14:15:16 EST
-    echo $time->toIso8601String();   // 1975-12-25T14:15:16-0500
+    echo $time->toIso8601String();   // 1975-12-25T14:15:16-05:00
     echo $time->toRfc822String();    // Thu, 25 Dec 75 14:15:16 -0500
     echo $time->toRfc850String();    // Thursday, 25-Dec-75 14:15:16 EST
     echo $time->toRfc1036String();   // Thu, 25 Dec 75 14:15:16 -0500

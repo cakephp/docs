@@ -32,7 +32,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
     // Short classname
     Log::config('debug', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
@@ -88,14 +88,14 @@ configuring our DatabaseLog would look like::
 
     // For src/Log
     Log::config('otherFile', [
-        'className' => 'DatabaseLog',
+        'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // For plugin called LoggingPack
     Log::config('otherFile', [
-        'className' => 'LoggingPack.DatabaseLog',
+        'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ]);

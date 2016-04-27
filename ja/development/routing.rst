@@ -1068,7 +1068,7 @@ URL フィルターは永続的なパラメーターなどを簡単に扱う機�
         }
         return $params;
     });
-    
+
 これは以下のルートを ::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);
@@ -1087,9 +1087,9 @@ CakePHP 3.0 から名前付きパラメーターが削除されたとしても�
 コントローラの ``beforeFilter()`` メソッドで、 ``parseNamedParams()``
 呼ぶことで渡された引数のすべての名前付きパラメーターを展開できます。 ::
 
-    public function beforeFilter()
+    public function beforeFilter(Event $event)
     {
-        parent::beforeFilter();
+        parent::beforeFilter($event);
         Router::parseNamedParams($this->request);
     }
 

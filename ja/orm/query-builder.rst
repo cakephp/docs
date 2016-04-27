@@ -758,11 +758,17 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+あたなの望む条件を作成するビルダーメソッドが取得できなかったり利用したくない場合、
+WHERE 句の中で SQL スニペットを使えるようにもできます。 ::
+
+    // ２つのフィールドをお互いに比較
+    $query->where(['Categories.parent_id != Parents.id']);
+
 .. warning::
 
-    式 (expression) の中で使われる列名には安全性が確実でない内容を **絶対に含めてはいけません** 。
-    関数の呼び出しで、安全でないデータを安全に渡す方法については :ref:`using-sql-functions`
-    のセクションを参照してください。
+    式 (expression) の中で使われる列名や SQL スニペットには安全性が確実でない内容を
+    **絶対に含めてはいけません** 。関数の呼び出しで、安全でないデータを安全に渡す
+    方法については :ref:`using-sql-functions` のセクションを参照してください。
 
 IN 句を自動生成する
 ---------------------------------
@@ -1024,7 +1030,7 @@ join の条件も条件の配列と同じように表現できます。 ::
                     'c.article_id = articles.id'
                 ]
             ],
-        ], ['a.created' => 'datetime', 'c.moderated' => 'boolean']);
+        ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
 
 手動で join を作成する際、配列による条件を使うなら、join 条件内の各列ごとにデータ型を渡す必要があります。
 join 条件のデータ型を渡すことで、ORM はデータの型を SQL へと正しく変換できるのです。

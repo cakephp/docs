@@ -13,7 +13,7 @@ Regardez la section :ref:`aliasing-helpers` pour voir comment faire.
 Générer des URLs
 ================
 
-.. php:method:: build(mixed $url = NULL, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean $full = false)
 
 Cette méthode retourne une URL pointant vers la combinaison du controller
 et de l'action.
@@ -89,6 +89,21 @@ URL utilisant une route labellisée::
     //     ]
     // );
     /produits/i-m-slug
+
+Si vous générez des URLs pour du CSS, du Javascript ou des fichiers image, il
+existe des méthodes d'helper pour chacun de ces types d'assets::
+
+    // Affiche /img/icon.png
+    $this->Url->image('icon.png');
+
+    // Affiche /js/app.js
+    $this->Url->script('app.js');
+
+    // Affiche /css/app.css
+    $this->Url->css('app.css');
+
+.. versionadded:: 3.2.4
+    Les méthodes de helper d'asset ont été ajoutées dans la version 3.2.4.
 
 Pour de plus amples informations, voir
 `Router::url <http://api.cakephp.org/3.0/class-Cake.Routing.Router.html#_url>`_
