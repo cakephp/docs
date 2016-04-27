@@ -78,6 +78,15 @@ voiture sportive.
 
 .. _cakephp-official-communities:
 
+Forum Officiel
+==============
+
+`Forum Officiel de CakePHP <http://discourse.cakephp.org>`_
+
+Notre forum officiel où vous pouvez demander de l'aide, suggérer des idées et
+discuter de CakePHP. C'est l'endroit idéal pour trouver rapidement des réponses
+et aider les autres. Rejoignez la famille de CakePHP en vous y inscrivant.
+
 Groupes de Discussion Officiels de CakePHP
 ==========================================
 `CakePHP Google Group <http://groups.google.com/group/cake-php>`_

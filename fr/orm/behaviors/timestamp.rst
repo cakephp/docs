@@ -80,3 +80,13 @@ Toucher les enregistrements peut être utile quand vous souhaitez signaler
 qu'une ressource parente a changé quand une ressource enfante est créée/mise
 à jour. Par exemple: mettre à jour un article quand un nouveau commentaire
 est ajouté.
+
+Sauvegardez les Mises à Jour sans Modifier les Timestamps
+=========================================================
+
+Pour désactiver la modification automatique de la colonne timestamp ``updated``
+quand vous sauvegardez une entity, vous pouvez marquer l'attribut avec 'dirty'::
+
+    // Marquer la colonne modified avec dirty
+    // la valeur actuelle à définir lors de la mise à jour.
+    $order->dirty('modified', true);
