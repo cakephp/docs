@@ -4,8 +4,11 @@
 {% endblock -%}
 
 {% block extrahead %}
-<link href="{{ pathto('_static/favicon.ico', 1) }}" type="image/x-icon" rel="icon" />
+<link href="{{ pathto('_static/favicon.png', 1) }}" type="image/png" rel="icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{{ pathto('_static/css/bootstrap.min.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('_static/css/font-awesome.min.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('_static/css/cake.css', 1) }}">
 
 {% for lang in languages %}
 	{%- if lang != language -%}
@@ -28,72 +31,205 @@ window.lang = "{{ language }}";
 	"_static/app.js",
 	"_static/search.js",
 	"_static/typeahead.js",
-	"_static/modernizr.foundation.js",
-	"_static/foundation.js"
 ] -%}
 
 {%- block header %}
 {# Outer wrapper for pushing the footer to the bottom #}
 <div id="container">
-	<div class="cake-bar">
-		<a class="logo" href="{{ pathto(master_doc) }}">
-			<img src="{{ pathto('_static/cake-logo.png', 1) }}" alt="CakePHP" width="70" />
-		</a>
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="{{ pathto(master_doc) }}">
+						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
+					</a>
+				</div>
 
-		<div class="menu-block">
-			<ul>
-				<li>Documentation</li>
-				<li>Business Solutions</li>
-				<li>Showcase</li>
-				<li>Community</li>
-			</ul>
-		</div>
-	</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="toggle-menu"> <i class="fa icon_menu"></i></li>
 
-	<div class="sitebar row">
-		<div class="i-book site-name">
-			CakePHP 3.2 Red Velvet
-			<strong>Cookbook</strong>
-		</div>
-		<div class="searchbar">
-			{% include 'searchbox.html' %}
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Book</a></li>
+									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Api</a></li>
+									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Pirvacy Policy</a></li>
+									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Logos & Trademarks</a></li>
+								</ul>
+							</li> 
+
+							<li><a href="shortcodes.html">Business Solutions</a></li>
+
+							<li><a href="shortcodes.html">Showcase</a></li>
+							
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-3">
+											<ul class="megamenu-list">
+												<li class="menu-title"><i class="fa fa-menu-title fa-calendar-o"></i>Calendar</li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Meetups</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Events</a></li>
+											</ul>
+										</div>
+										<div class="col-3">
+											<ul class="megamenu-list">
+												<li class="menu-title"><i class="fa fa-menu-title fa-tags"></i>Marketplace</li>
+												<li class="menu-sub">Service Providers</li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakedc</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Phpstorm</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Rackspace</a></li>
+												<li class="menu-sub">Jobs</li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelance App</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakephp Jobs</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakexperts</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Job Board</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Linkedin</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelancer</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Upwork</a></li>
+											</ul>
+										</div>
+										<div class="col-3">
+											<ul class="megamenu-list">
+												<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help & Support</li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Youtube Channel</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Google Groups</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Commercial</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Irc</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Quora</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+											</ul>
+										</div>
+										<div class="col-3">
+											<ul class="megamenu-list">
+												<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Blog</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Calendar</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>My Cakephp</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakefest</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakesf</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Oss Bounty</a></li>
+												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div id="wrap">
+									{% include 'searchbox.html' %}
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
 
-		<div class="languages sitebar-dropdown dropdown">
-			{% for lang in languages %}
-				{%- if lang == language -%}
-				<span class="sitebar-label">Language:</span>
-				<a class="dropdown-active" href="#">{{ lang }}</a>
-				{%- endif -%}
-			{% endfor %}
-			<ul>
-			{% for lang in languages %}
-				<li>
-					{%- if lang == language -%}
-					{# Do nothing, we print the active one above #}
-					{%- elif has_lang(lang, pagename) -%}
-					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-					{%- else -%}
-					<span class="disabled">{{ lang }}</span>
-					{%- endif -%}
-				</li>
-			{% endfor %}
-			</ul>
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="{{ pathto(master_doc) }}">
+						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
+					</a>
+				</div>
+
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+							<button class="btn-menu" data-toggle="modal" data-target="#menumodal"><i class="fa toggle-modal icon_menu"></i></button>
+					</div>
+					<div id="wrap">
+						{% include 'searchbox.html' %}
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<div class="versions sitebar-dropdown dropdown">
-			<span class="sitebar-label">Version:</span>
-			<a class="dropdown-active" href="#">3.x</a>
-			<ul>
-				<li><a href="http://book.cakephp.org/3.0/{{ language }}">3.x Book</a></li>
-				<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
-				<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
-				<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
-				<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-			</ul>
-		</div>
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0">
+							 <h2><span class="glyph_range icon-submenu icon-submenu-cook">B</span>CakePHP 3.2 Red Velvet <strong>Cookbook</strong></h2>
+						</div>
 
-	</div>
+						<div class="col-md-4 ">
+							<div class="col-md-10 p0">
+								<input type="text" name="cook" id="cook" class="form-control form-cook" placeholder="CookBook Search">
+							</div>
+							<div class="col-md-2 p0 search-cook">
+								<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+							</div>
+						</div>
+
+						<div class="col-md-7 t-language p0">
+							<h6>Language:</h6>
+						</div>
+						<div class="col-md-5 p0">
+							<ul class="nav navbar-nav">
+								<li class="dropdown">
+									{% for lang in languages %}
+										{%- if lang == language -%}
+										<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+											role="button" aria-haspopup="true" aria-expanded="false" href="#">
+												{{ lang }}
+												<i class="fa fa-menu-en fa-chevron-down"></i>
+											</a>
+										{%- endif -%}
+									{% endfor %}
+									<ul class="dropdown-menu">
+									{% for lang in languages %}
+										<li>
+											{%- if lang == language -%}
+											{# Do nothing, we print the active one above #}
+											{%- elif has_lang(lang, pagename) -%}
+											<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+											{%- else -%}
+											<span class="disabled">{{ lang }}</span>
+											{%- endif -%}
+										</li>
+									{% endfor %}
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+						<div class="col-md-6 p0">
+							<div class="col-md-7 t-language p0">
+								<h6>Version:</h6>
+							</div>
+							<div class="col-md-5 p0">
+								<ul class="nav navbar-nav">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3.2 <i class="fa fa-menu-en fa-chevron-down"></i></a>
+										<ul class="dropdown-menu">
+											<li><a href="http://book.cakephp.org/3.0/{{ language }}">3.x Book</a></li>
+											<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
+											<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
+											<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
+											<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
 {% endblock -%}
 
 

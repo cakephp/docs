@@ -8,10 +8,6 @@
  * :license: BSD, see LICENSE for details.
  *
  */
- @import 'foundation.css';
- @import 'csf-navbar.css';
- @import 'cake.css';
-
 html {
 	overflow-y: scroll;
 }
