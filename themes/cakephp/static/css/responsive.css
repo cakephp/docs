@@ -1,0 +1,510 @@
+@media (max-width: 767px) {
+/*CSS LIDO EM DISPOSITIVOS ATÉ 767 PX DE LARGURA*/
+    .title-home h1 {
+    	font-size: 20px;
+    	margin-bottom: 5px;
+	}
+
+	.logo-cake img {
+		margin-top: 20px;
+    	margin-bottom: 14px;
+	}
+
+	.navbar-right {
+	float: right!important;
+    margin-right: -15px;
+	}
+
+	.title-home h3 {
+		font-size: 35px;
+	}
+
+	.btn-fest {
+		margin-bottom: 70px;
+	}
+
+	.box-data {
+		margin: 0 30px;
+	}
+
+	.sub-fest {
+		font-size: 32px;
+	}
+
+	.sub-expertise {
+		font-size: 33px;
+    	margin-bottom: 5px;
+	}
+
+	.btn-expertise {
+		margin-bottom: 60px;
+	}
+
+	.icon-expertise-2 {
+		text-align: left;
+	}
+
+	.box-services-d:hover .icon-expertise-2 {
+		text-align: left;
+	}
+
+	.title-expertise {
+		line-height: 1;
+    	padding-top: 10px;
+    	padding-bottom: 5px;
+	}
+
+	#companies h3 {
+		font-size: 50px;
+	}
+
+	.title-red {
+	    font-size: 40px;
+	}
+
+	#quote h4 {
+		font-size: 35px;
+	}
+
+	#quote h5 {
+		text-align: left;
+	    line-height: 1;
+	    margin-top: 30px;
+	}
+
+	#quote h6 {
+		text-align: left;
+	}
+
+	.subtitle-black {
+		font-size: 30px;
+    	line-height: 34px;
+	}
+
+	.icon-sharing {
+		font-size: 276px;
+    	margin-top: 538px;
+	}
+
+	#sharing {
+		padding-bottom: 222px;
+	}
+
+	.social iframe {
+		    margin: 5px;
+	}
+
+	.social {
+		margin-bottom: 20px;
+	}
+
+	.footer-social {
+		text-align: center;
+    	padding: 0 !important;
+    	width: 100%;
+	}
+
+	.footer-social > li {
+		display: inline-block;
+	    padding: 13px 14px 10px;
+	    background: #272727;
+	    margin: 7px 5px;
+	    border-radius: 6px;
+	}
+
+	.search-form {
+		top: -21px;
+	}
+
+	.icon-social, .icon-irc, .icon-social-q {
+		margin-bottom: 30px;
+	}
+
+	.submenu {
+		background-color: #D33C44;
+	}
+
+	#wrap input[type="text"]:focus {
+		width: 300px;
+	}
+
+	#wrap input[type="text"] {
+		font-size: 16px;
+		height: 60px;
+	}
+
+	#wrap input[type="submit"] {
+		height: 58px;
+	}
+
+	.nav-up {
+		top: -600px;
+	}
+
+	.menu-title-m {
+		margin-top: 180px;
+	}
+
+	.logo {
+		padding: 14px 0;
+	}
+
+	.toggle-menu .fa {
+		margin: 21px 0;
+	}
+
+	#sub {
+		margin-top: 60px;
+	}
+
+	#fb-root-face {
+		margin-bottom: 12px;
+	}
+
+	#cakefest p {
+		text-align: center;
+	}
+
+	.sub-expertise {
+		text-align: center;
+	}
+
+	#expertise p {
+		text-align: center;
+	}
+
+	.icon-expertise-2 {
+		text-align: center;
+	}
+
+	.title-expertise{
+		text-align: center;
+	}
+
+	.box-services-d:hover .icon-expertise-2 {
+    	text-align: center;
+	}
+
+	.git-frame iframe{
+		padding-left: 34%;
+	}
+
+	.social-footer a {
+		padding: 10px 6px;
+	}
+
+	.phone-support i {
+		font-size: 23px;
+	    padding: 11px 18px 10px;
+	    vertical-align: 3px;
+	}
+
+	.phone-support h6 {
+		font-size: 30px;
+    	padding: 5px 20px;
+	}
+
+	.skype-support i {
+	    vertical-align: 1px;
+    	font-size: 23px;
+	}
+
+	.skype-support h6 {
+	    padding: 6px 20px 5px;
+    	font-size: 30px;
+	}
+
+	.t-support h3{
+	    line-height: 40px;
+	    font-size: 40px;
+	}
+
+	.t-support h5{
+	    line-height: 27px;
+	    font-size: 18px;
+	    margin-top: 15px;
+	}
+
+	.phone-support-number {
+		font-size: 20px;
+	}
+
+	.phone-support-i {
+		font-size: 20px;
+	}
+
+
+	/* ---------------------- COOK BOOK ------------------------- */
+
+
+	#cookbook {
+		padding-top: 50px;
+	}
+
+	.nav-btn {
+    	padding-top: 73px;
+    	padding-bottom: 17px;
+	}
+
+	.read-the-book a {
+		    margin: 15px 5px 22px;
+	}
+
+	.btn-nav {
+		    font-size: 11px;
+	}
+
+	#slideout {
+		bottom: 0;
+	}
+
+	#slideout_inner {
+		bottom: 0;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+/*CSS LIDO EM DISPOSITIVOS ATÉ 991 PX DE LARGURA*/
+	.header-transparent .main-header {
+		background-color: #d33c44;
+	}
+
+	.search-form {
+		top: -21px;
+	}
+
+	.menu > li > a:hover, .menu > li > a:focus, .menu > li:hover > a {
+		color: rgb(202, 202, 202);
+	}
+
+	.align-middle {
+		top: 14%;
+	}
+
+	.box-cakefest {
+	    padding: 120px 10px 80px;
+	    top: 240px;
+	    margin: 0px 90px;
+	}
+
+	.btn-fest {
+		margin-bottom: 70px;
+	}
+
+	.box-data {
+		margin: 0 190px;
+	}
+
+	.btn-expertise {
+		margin-bottom: 50px;
+	}
+
+	.icon-sharing {
+		    margin-top: 350px;
+    font-size: 350px;
+	}
+
+	#sharing {
+		padding-bottom: 160px;
+	}
+
+	.footer-social {
+		text-align: center;
+    	width: 100%;
+    	margin-top: 30px;
+	}
+
+	.fa-menu-title {
+		font-size: 17px;
+	    display: block;
+	    padding-bottom: 8px;
+	}
+
+	.icon-social, .icon-irc, .icon-social-q {
+		margin-bottom: 30px;
+	}
+
+	.social {
+		    margin-bottom: 44px;
+	}
+
+	.menu > li > a {
+		    padding: 25px 25px;
+	}
+
+	#cakefest p {
+		text-align: center;
+	}
+
+	.sub-expertise {
+		text-align: center;
+	}
+
+	#expertise p {
+		text-align: center;
+	}
+
+	.icon-expertise-2 {
+		text-align: center;
+	}
+
+	.title-expertise{
+		text-align: center;
+	}
+
+
+	.box-services-d:hover .icon-expertise-2 {
+    	text-align: center;
+	}
+
+	.social-footer a {
+		padding: 10px 20px;
+	}
+
+	.logo-cake img {
+	    margin-top: 15px;
+	    margin-bottom: 14px;
+	}
+
+	#sub {
+	    margin-top: 60px;
+	}
+
+	#wrap input[type="text"]:focus {
+		width: 450px;
+	}
+
+	#wrap input[type="text"] {
+		font-size: 16px;
+		height: 60px;
+	}
+
+	#wrap input[type="submit"] {
+		height: 58px;
+	}
+
+	/* ---------------------- COOK BOOK ------------------------- */
+
+	#cookbook {
+		padding-top: 50px;
+	}
+	
+	#slideout {
+		bottom: 0;
+	}
+
+	#slideout_inner {
+		bottom: 0;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+/*CSS LIDO EM DISPOSITIVOS ATÉ 1199 PX DE LARGURA*/
+	.menu > li > a {
+		padding: 25px 35px;
+	}
+
+	.menu-fixed .menu > li > a {
+		padding: 25px 25px;
+	}
+
+	.box-cakefest {
+		margin: 0;
+	}
+
+	.icon-fest {
+		font-size: 150px;
+	}
+
+	.box-data h6 span {
+		font-size: 130px;
+	}
+
+	.box-data h6 {
+		padding-bottom: 30px;
+	}
+
+	.box-data h5 {
+		margin: 0;
+    	line-height: 1;
+	}
+
+	.box-data h4 {
+		margin: 0;
+	}
+
+	.icon-sharing {
+    	margin-top: 144px;
+    	font-size: 380px;
+	}
+
+	#sharing {
+		padding-bottom: 150px;
+	}
+
+	.fa-menu-title {
+		font-size: 17px;
+	    display: block;
+	    padding-bottom: 8px;
+	}
+
+	.footer-social {
+		text-align: center;
+	}
+
+	.footer-social > li {
+		    margin-right: 16px;
+	}
+
+	.social {
+		padding-left: 0 !important;
+	}
+
+	.icon-expertise-2 {
+		font-size: 120px;
+	}
+
+
+	/* ---------------------- COOK BOOK ------------------------- */
+
+	.t-language h6 {
+		font-size: 9px;
+	}
+
+	.dropdown > a {
+		font-size: 12px;
+		    padding: 5px 5px !important;
+	}
+
+	
+
+
+}
+
+@media (min-width: 1200px) {
+  /*CSS LIDO EM DISPOSITIVOS DE MAIS DE 1200 PX DE LARGURA*/
+  .hero, .hero-2 {
+  	background-attachment: fixed;
+  }
+  
+}
