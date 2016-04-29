@@ -23,6 +23,9 @@ behavior that may effect your application:
 * The default JSON encode format for Date and DateTime instances is now
   ISO-8601. This means that the timezone value contains a ``:``.
   For example ``2015-11-06T00:00:00+03:00``
+* ``Controller::referer()`` now consistently omits the application base path
+  when generating application local URLs. Previously string URLs would have the
+  base path prepended to them, while array URLs would not.
 
 Routing
 =======
