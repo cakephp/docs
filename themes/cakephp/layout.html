@@ -56,17 +56,9 @@ window.lang = "{{ language }}";
 							<li class="first">
 								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
 								<ul class="submenu">
-									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Book</a></li>
-									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Api</a></li>
-									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
-									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Pirvacy Policy</a></li>
-									<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Logos & Trademarks</a></li>
+									{% include 'menu/documentation.html' %}
 								</ul>
-							</li> 
-
-							<li><a href="shortcodes.html">Business Solutions</a></li>
-
-							<li><a href="shortcodes.html">Showcase</a></li>
+							</li>
 							
 							<li>
 								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
@@ -81,47 +73,17 @@ window.lang = "{{ language }}";
 										</div>
 										<div class="col-3">
 											<ul class="megamenu-list">
-												<li class="menu-title"><i class="fa fa-menu-title fa-tags"></i>Marketplace</li>
-												<li class="menu-sub">Service Providers</li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakedc</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Phpstorm</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Rackspace</a></li>
-												<li class="menu-sub">Jobs</li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelance App</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakephp Jobs</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakexperts</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Job Board</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Linkedin</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelancer</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Upwork</a></li>
+												{% include 'menu/marketplace.html' %}
 											</ul>
 										</div>
 										<div class="col-3">
 											<ul class="megamenu-list">
-												<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help & Support</li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Youtube Channel</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Google Groups</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Commercial</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Irc</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Quora</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+												{% include 'menu/help.html' %}
 											</ul>
 										</div>
 										<div class="col-3">
 											<ul class="megamenu-list">
-												<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Blog</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Calendar</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>My Cakephp</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakefest</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakesf</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Oss Bounty</a></li>
-												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+												{% include 'menu/community.html' %}
 											</ul>
 										</div>
 									</div>
@@ -384,76 +346,25 @@ window.lang = "{{ language }}";
 			<div class="col-sm-12 col-md-9">
 				<div class="col-sm-3">
 					<ul class="footer-menu">
-						<li class="menu-title menu-title-m"><i class="fa fa-menu-title fa-book"></i>Documentation</li>
-						<li><i class="fa fa-menu fa-chevron-right"></i><a href="http://book.cakephp.org">CookBook</a></li>
-						<li><i class="fa fa-menu fa-chevron-right"></i><a href="http://api.cakephp.org">API</a></li>
-
-						<!--
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Logos & Trademerks</a></li>
-
-						<li class="menu-title mt30"><a href="#"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a></li>
-						<li class="menu-title mt30"><a href="#"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a></li>
-						-->
+						{% include 'menu/documentation.html' %}
 					</ul>
 				</div>
 
 				<div class="col-sm-3">
 					<ul class="footer-menu">
-						<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
-						<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-						<li><i class="fa fa-menu fa-chevron-right"></i><a href="http://bakery.cakephp.org">Blog</a></li>
-						<!--
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
-						-->
-						<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
-						<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
-						<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
-						<li><a href="http://cakesf.org"><i class="fa fa-menu fa-chevron-right"></i>Cakesf</a></li>
-						<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
-						<li><a href="http://plugins.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Plugins &amp; Packages</a></li>
+						{% include 'menu/community.html' %}
 					</ul>
 				</div>
 
 				<div class="col-sm-3">
 					<ul class="footer-menu">
-						<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help & Support</li>
-
-						<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues</a></li>
-						<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
-						<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
-						<li><a href="http://goo.gl/mSC0s"><i class="fa fa-menu fa-chevron-right"></i>Google+ Community</a></li>
-						<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook Group</a></li>
-
-						<!--
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Commercial</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Irc</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Quora</a></li>
-
-						<li class="menu-title mt30"><i class="fa fa-menu-title fa-calendar-o"></i>Calendar</li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Meetups</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Events</a></li>
-						-->
+						{% include 'menu/help.html' %}
 					</ul>
 				</div>
 
 				<div class="col-sm-3">
 					<ul class="footer-menu">
-						<li class="menu-title"><i class="fa fa-menu-title fa-tags"></i>Marketplace</li>
-						<li class="menu-sub">Service Providers</li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakedc</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Phpstorm</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Rackspace</a></li>
-
-						<li class="menu-sub">Jobs</li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelance App</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakephp Jobs</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakexperts</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Job Board</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Linkedin</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelancer</a></li>
-						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Upwork</a></li>
+						{% include 'menu/marketplace.html' %}
 					</ul>
 				</div>
 			</div>
