@@ -31,65 +31,6 @@
     font-style: normal;
 }
 
-/* Container elements */
-html {
-    width: 100%;
-}
-body {
-    color: #000;
-    background: #fff;
-    font-family: 'Source Sans Pro', sans-serif;
-    width: 100%;
-}
-
-/* Headings */
-h1, h2, h3, h4, h5 {
-    font-family: Helvetica, Arial;
-    font-weight: normal;
-}
-h1 {
-    font-size: 30px;
-    font-size: 3.0rem;
-    color: #C92434;
-}
-h2 {
-    font-size: 28px;
-    font-size: 2.8rem;
-    color: #C92434;
-}
-h3, h4 {
-    font-size: 24px;
-    font-size: 2.4rem;
-    color: #BD8A5D;
-}
-h5, h6 {
-    font-size: 21px;
-    font-size: 2.1rem;
-    color: #BD8A5D;
-}
-
-/* Font sizes */
-td, th, p, li {
-    font-size: 15px;
-    font-size: 1.5rem;
-    line-height: 140%
-}
-
-/* Emphasis */
-strong {
-    font-weight: 600;
-}
-
-/* Links */
-a {
-    color: #417282;
-}
-a:focus,
-a:hover {
-    color: #003D4C;
-    text-decoration: underline;
-}
-
 /* General button */
 .offline-download a,
 .button {

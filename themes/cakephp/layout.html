@@ -301,104 +301,186 @@ window.lang = "{{ language }}";
 
 {%- block footer %}
 {# Push the footer down to the bottom of the page #}
-<div class="footer-region">
-	<div class="footer-social row">
-		Bunch of social links/buttons go in here.
-	</div>
 
-	<div class="footer-nav row">
-		<div class="columns four">
-			<h3>My CakePHP</h3>
-		</div>
-
-		<div class="footer-links columns two">
-			<h4 class="i-book">Documentation</h4>
-			<ul>
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-
-			<h4 class="i-briefcase">Business Solutions</h4>
-
-			<h4 class="i-tv">Showcase</h4>
-		</div>
-
-		<div class="footer-links columns two">
-			<h4 class="i-people">Community</h4>
-			<ul>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-			</ul>
-		</div>
-
-		<div class="footer-links columns two">
-			<h4 class="i-speech">Help &amp; Support</h4>
-			<ul>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="TODO">Slack</a></li>
-
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">IRC</a></li>
-			</ul>
-
-			<h4 class="i-calendar">Calendar</h4>
-			<ul>
-				<li><a href="TODO">Meetups</a></li>
-				<li><a href="TODO">Events</a></li>
-			</ul>
-		</div>
-
-		<div class="footer-links columns two">
-			<h4 class="i-tag">Marketplace</h4>
-
-			<h5>Service Providers</h5>
-			<ul>
-				<li><a href="http://cakedc.com">CakeDC</a></li>
-				<li><a href="TODO">PHPStorm</a></li>
-				<li><a href="TODO">Rackspace</a></li>
-			</ul>
-
-			<h5>Jobs</h5>
-
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</div>
-
+<section id="socials" class="back-3">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="columns nine offset-by-three copyright">
-				{%- if show_copyright %}
-					{%- if hasdoc('copyright') %}
-						{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
-					{%- else %}
-						{% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
-					{%- endif %}
-				{%- endif %}
-				{%- if last_updated %}
-					{% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
-				{%- endif %}
-				{%- if show_sphinx %}
-					{% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
-				{%- endif %}
+			<div class="col-xs-12 col-sm-12 col-md-5  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+				
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-7 social-footer text-center ">
+				<a href="#" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="#" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="#" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="#" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="#" data-toggle="tooltip" title="Linkedin"><i class="fa icon-social fa-linkedin"></i></a>
+				<a href="#" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="#" data-toggle="tooltip" title="Quora"><span class="glyph_range icon-social">T</span></a>
+				<a href="#" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="#" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<form class="form" method="post" action="">
+						<h4>My CakePHP</h4>
+						<div class="col-md-12 p0 form-user">
+							<label class="mb10">Username<input type="text" name="val_fname" id="val_fname" class="form-control"></label>
+							<label class="mb10">Password<input type="password" name="val_lname" id="val_lname" class="form-control"></label>
+						</div>
+
+						<div class="col-md-4  col-xs-6 p0 pull-right">
+							<button type="submit" class=" btn-user">Login</button>
+						</div>
+
+						<div class="col-md-8 col-xs-6 p0 register">
+							<label><input type="checkbox">Remember me</label>
+							<p>Forgot your password?<br>New user?<a href=""> Register!</a></p>
+							<a href="https://www.openhub.net/p/cakephp">
+								<img src="{{ pathto('_static/open-hub.png', 1) }}">
+							</a>
+							<div class="mt10">
+								<a href="https://www.rackspace.com/">
+									<img src="{{ pathto('_static/rackspace.png', 1) }}">
+								</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-sm-3">
+					<ul class="footer-menu">
+						<li class="menu-title menu-title-m"><i class="fa fa-menu-title fa-book"></i>Documentation</li>
+						<li><i class="fa fa-menu fa-chevron-right"></i><a href="http://book.cakephp.org">CookBook</a></li>
+						<li><i class="fa fa-menu fa-chevron-right"></i><a href="http://api.cakephp.org">API</a></li>
+
+						<!--
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Logos & Trademerks</a></li>
+
+						<li class="menu-title mt30"><a href="#"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a></li>
+						<li class="menu-title mt30"><a href="#"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a></li>
+						-->
+					</ul>
+				</div>
+
+				<div class="col-sm-3">
+					<ul class="footer-menu">
+						<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+						<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+						<li><i class="fa fa-menu fa-chevron-right"></i><a href="http://bakery.cakephp.org">Blog</a></li>
+						<!--
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+						-->
+						<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+						<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+						<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+						<li><a href="http://cakesf.org"><i class="fa fa-menu fa-chevron-right"></i>Cakesf</a></li>
+						<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+						<li><a href="http://plugins.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Plugins &amp; Packages</a></li>
+					</ul>
+				</div>
+
+				<div class="col-sm-3">
+					<ul class="footer-menu">
+						<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help & Support</li>
+
+						<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues</a></li>
+						<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+						<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+						<li><a href="http://goo.gl/mSC0s"><i class="fa fa-menu fa-chevron-right"></i>Google+ Community</a></li>
+						<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook Group</a></li>
+
+						<!--
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Commercial</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Irc</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Quora</a></li>
+
+						<li class="menu-title mt30"><i class="fa fa-menu-title fa-calendar-o"></i>Calendar</li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Meetups</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Events</a></li>
+						-->
+					</ul>
+				</div>
+
+				<div class="col-sm-3">
+					<ul class="footer-menu">
+						<li class="menu-title"><i class="fa fa-menu-title fa-tags"></i>Marketplace</li>
+						<li class="menu-sub">Service Providers</li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakedc</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Phpstorm</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Rackspace</a></li>
+
+						<li class="menu-sub">Jobs</li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelance App</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakephp Jobs</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Cakexperts</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Job Board</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Linkedin</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Freelancer</a></li>
+						<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Upwork</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+					{%- if show_copyright %}
+						{%- if hasdoc('copyright') %}
+							{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
+						{%- else %}
+							{% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
+						{%- endif %}
+					{%- endif %}
+					{%- if last_updated %}
+						{% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+					{%- endif %}
+					{%- if show_sphinx %}
+						{% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
+					{%- endif %}
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
 <script type="text/javascript">
 	var _gaq = _gaq || [];
