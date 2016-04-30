@@ -253,7 +253,8 @@ and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
 .. note::
-Do not use periods in `database` option. Handling this scenario would complicate how to quote identifiers in all cases so CakePHP doesn't support it.
+    
+    Do not use periods in `database` option. Handling this scenario would complicate how to quote identifiers in all cases so CakePHP doesn't support it.
 
 .. php:namespace:: Cake\Datasource
 
