@@ -162,6 +162,10 @@ There are a number of options for create():
 
      <form id="UserLoginForm" method="post" action="/users/login">
 
+  .. deprecated:: 2.8.0
+     The ``$options['action']`` option was deprecated as of 2.8.0.
+     Use the ``$options['url']`` option instead.
+
 * ``$options['url']`` If the desired form action isn't in the current
   controller, you can specify a URL for the form action using the 'url' key of
   the $options array. The supplied URL can be relative to your CakePHP
@@ -192,6 +196,10 @@ There are a number of options for create():
 
   Also check :php:meth:`HtmlHelper::url()` method for more examples of
   different types of URLs.
+
+  .. versionchanged:: 2.8.0
+
+     Use ``'url' => false`` if you don’t want to output a URL as the form action.
 
 * ``$options['default']`` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit
