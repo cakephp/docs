@@ -23,6 +23,10 @@ variations mineures qui peuvent avoir des effets sur votre application:
 * L'encodage du format JSON par défaut pour les instances Date et DateTime est
   maintenant ISO-8601. Cela signifie que la valeur timezone contient un ``:``.
   Par exemple ``2015-11-06T00:00:00+03:00``
+* ``Controller::referer()`` enlève maintenant le chemin de base de l'application
+  de façon cohérente lors de la génération des URLs en local. Avant, les chaînes
+  d'URLs étaient préfixées par le chemin de base alors que les tableaux d'URLs
+  ne l'étaient pas.
 
 Routing
 =======
