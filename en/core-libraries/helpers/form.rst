@@ -1319,6 +1319,7 @@ Ex: name=data[User][username], id=UserUsername
       .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
+            <option value=""></option>
             <option value="Value 1">Label 1</option>
             <option value="Value 2">Label 2</option>
             <option value="Value 3">Label 3</option>
