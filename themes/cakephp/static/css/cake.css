@@ -31,6 +31,10 @@
     font-style: normal;
 }
 
+.page-container {
+    padding-top: 160px;
+}
+
 /* General button */
 .offline-download a,
 .button {

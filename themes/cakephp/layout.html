@@ -201,27 +201,32 @@ window.lang = "{{ language }}";
 
 
 {%- block relbar1 %}
-<div class="breadcrumb-header container">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			{%- for parent in parents %}
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
-			</li>
-			{%- endfor %}
-			</ul>
-		</div>
-	</div>
-</div>
+{# Empty so links aren't duplicated #}
 {% endblock -%}
 
 
 {%- block content %}
-<div class="container">
+<div class="container page-container">
+
+	{# Breadcrumb sidebar #}
+	<div class="breadcrumb-header container">
+		<div class="related row">
+			<div class="columns three root-link">
+				<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
+			</div>
+			<div class="columns nine">
+				<ul class="inline breadcrumb">
+				{%- for parent in parents %}
+				<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
+				</li>
+				{%- endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	{# Document body #}
 	<div class="row">
 		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off">
 			<div class="row">
@@ -240,6 +245,7 @@ window.lang = "{{ language }}";
 			</div>
 		</div>
 
+		{# TOC sidebar #}
 		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="{{ language }}">
 			{%- for sidebartemplate in sidebars %}
 			<aside class="sidebar">
@@ -251,7 +257,6 @@ window.lang = "{{ language }}";
 		</div>
 	</div>
 </div>
-
 {% endblock -%}
 
 {%- block relbar2 %}
@@ -259,8 +264,6 @@ window.lang = "{{ language }}";
 {% endblock %}
 
 {%- block footer %}
-{# Push the footer down to the bottom of the page #}
-
 <section id="socials" class="back-3">
 	<div class="container-fluid">
 		<div class="row">
@@ -343,7 +346,7 @@ window.lang = "{{ language }}";
 			<div class="col-sm-12 col-md-9">
 				<div class="col-sm-3">
 					<ul class="footer-menu">
-						{% include 'menu/documentation.html' %}
+						{% include 'menu/footer-documentation.html' %}
 					</ul>
 				</div>
 
