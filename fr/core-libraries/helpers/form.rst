@@ -3,21 +3,20 @@ FormHelper
 
 .. php:class:: FormHelper(View $view, array $settings = array())
 
-Le Helper Form prend en charge la plupart des opérations lourdes
-en création du formulaire. Le Helper Form se concentre sur la
-possibilité de créer des formulaires rapidement, d'une manière qui
-permettra de rationaliser la validation, la re-population et la mise
-en page (layout). Le Helper Form est aussi flexible - Il va faire à
-peu près tout pour vous en utilisant les conventions, ou vous
-pouvez utiliser des méthodes spécifiques pour ne prendre
+Le Helper Form prend en charge la plupart des opérations lourdes en création du
+formulaire. Le Helper Form se concentre sur la possibilité de créer des
+formulaires rapidement, d'une manière qui permettra de rationaliser la
+validation, la re-population et la mise en page (layout). Le Helper Form est
+aussi flexible - Il va faire à peu près tout pour vous en utilisant les
+conventions, ou vous pouvez utiliser des méthodes spécifiques pour ne prendre
 uniquement que ce dont vous avez besoin.
 
 Création de Formulaire
 ======================
 
-La première méthode dont vous aurez besoin d'utiliser pour prendre
-pleinement avantage du Helper Form (Helper Formulaire) est
-``create()``. Cette méthode affichera un tag d'ouverture de formulaire.
+La première méthode dont vous aurez besoin d'utiliser pour prendre pleinement
+avantage du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
+affichera un tag d'ouverture de formulaire.
 
 .. php:method:: create(string $model = null, array $options = array())
 
@@ -171,6 +170,10 @@ Il y plusieurs options pour create():
         <form id="UserLoginForm" method="post" action="/users/login">
         </form>
 
+  .. deprecated:: 2.8.0
+     L'option ``$options['action']`` a été dépréciée depuis 2.8.0. Utilisez
+     l'option ``$options['url']`` à la place.
+
 *   ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire
     n'est pas dans le controller courant, vous pouvez spécifier une URL
     dans le formulaire en utilisant la clé 'url' de votre tableau $options.
@@ -201,6 +204,11 @@ Il y plusieurs options pour create():
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url()` pour plus
     d'exemples sur les différents types d'URLs.
+
+  .. versionchanged:: 2.8.0
+
+     Utilisez ``'url' => false`` si vous ne voulez pas afficher une URL pour
+     l'action du formulaire.
 
 *   ``$options['default']`` Si la variable 'default' est définie à false,
     l'action de soumission du formulaire est changée de telle manière que le
@@ -1298,6 +1306,7 @@ Ex: name=data[User][username], id=UserUsername
       .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
+            <option value=""></option>
             <option value="0">1</option>
             <option value="1">2</option>
             <option value="2">3</option>
