@@ -1596,27 +1596,7 @@
 
 
 
-/* *********************	Sections	********************* */
-
-
-	.section { padding:100px 0; }
-	.section-bg { 
-		padding:50px 0; 
-		margin:40px 0; 
-		position:relative; 
-	} 
-	.section-page { padding:75px 0 60px; } 
-	.section-boxed { padding:40px 30px; } 
-	.section-boxed-2 { padding: 40px 50px; }
-	.section-large { padding:70px 0; }
-	.section-larger { padding:90px 0; }
-
-	.section-fullwidth { padding-left:15px; padding-right:15px; }
-
-	@media (min-width:768px) {
-		.section-fullheight { height:100%; }
-	}
-	
+/* ********************* Sections ********************* */
 	.section-main { background-color: rgb(181,67,33); }
 	.section-gray { background-color: #eaeaea; }
 	.section-dark { background-color:#303236; }
@@ -1624,84 +1604,7 @@
 
 
 
-	/* Intro Section */
-	.section-intro {
-		position:relative;
-		padding:220px 0 160px;
-	}
-	.section-intro-2 { 
-		position: relative;
-		padding:160px 0;
-	}
-	.section-intro.intro-small { padding:160px 0 100px; }
-
-
-	@media (max-width:991px) {
-		.section-intro { padding: 120px 0 110px; }
-	}
-
-	@media (max-width:767px) {
-		.section-intro-2 { padding: 100px 0; }
-	}
-
-
-	/* Caption overlay */
-	@media (min-width:768px) {
-		.section-caption {
-			position: absolute;
-			top:50%; left:0;
-			-webkit-transform:translateY(-50%); transform:translateY(-50%);
-			width:100%;
-		}
-	}
-
-
-	/* Intro Title */
-	.intro-title {
-		font-size:32px;
-		font-weight: 400;
-		color:#eaecf1;
-		margin-bottom:20px;
-		line-height:36px;
-		letter-spacing: 1px;
-		font-family: 'Raleway', sans-serif;
-		opacity:0.9;
-	}
-	.intro-title::after {
-		content:"";
-		display:block;
-		width:42px;
-		height:2px;
-		background-color:rgb(181,67,33);
-		margin:12px 0 14px;
-	}
-	.intro-title.intro-title-br0::after {
-		content:"";
-		display:none;
-	}
-	.intro-title.shadow {
-		text-shadow: 0 4px 14px rgba(0,0,0,0.5);
-	}
-
-
-	/* Intro title small */
-	.intro-title.intro-title-small { font-size:23px; line-height:28px;}
-
-
-	/* Intro Paragraph */
-	.intro-p {
-		color:#eaecf1;
-		font-size:13px;
-		margin-bottom: 0;
-		font-family: 'Raleway', sans-serif;
-		opacity:0.9;
-	}
-
-
-
 /* *********************	Boxes	********************* */
-
-
 	@media (max-width:767px) {
 		.xs-box { padding-bottom:30px !important; }
 		.xs-box2 { padding-bottom:40px !important; }
@@ -6271,10 +6174,13 @@ header {
 	margin-top: 10px;
 }
 
-.search-cook span{
+.search-cook button {
     padding-left: 7px;
     color: #565656;
     font-size: 23px;
+    border: 0;
+    outline: 0;
+    background: transparent;
 }
 
 #cook::-webkit-input-placeholder {
