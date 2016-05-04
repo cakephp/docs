@@ -30,49 +30,54 @@ behavior that may effect your application:
 Routing
 =======
 
-- ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
+* ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
   a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
   reliance on global state, and necessary for the PSR7 work integration to be done.
-- When building resource routes, you can now define a prefix. This is useful
+* When building resource routes, you can now define a prefix. This is useful
   when defining nested resources as you can create specialized controllers for
   nested resources.
 
 Console
 =======
 
-- Shell tasks that are invoked directly from the CLI no longer have their
+* Shell tasks that are invoked directly from the CLI no longer have their
   ``_welcome`` method invoked. They will also have the ``requested`` parameter
   set now.
 
 Request
 =======
 
-- ``Request::is()`` and ``Request::addDetector()`` now supports additional
+* ``Request::is()`` and ``Request::addDetector()`` now supports additional
   arguments in detectors. This allows detector callables to operate on
   additional parameters.
 
 ORM
 ===
 
-- Additional support has been added for mapping complex data types. This makes
+* Additional support has been added for mapping complex data types. This makes
   it easier to work with geo-spatial types, and data that cannot be represented
   by strings in SQL queries. See the
   :ref:`mapping-custom-datatypes-to-sql-expressions` for more information.
-- A new ``JsonType`` was added. This new type lets you use the native JSON types
+* A new ``JsonType`` was added. This new type lets you use the native JSON types
   available in MySQL and Postgres. In other database providers the ``json`` type
   will map to ``TEXT`` columns.
-- ``Association::unique()`` was added. This method proxies the target table's
+* ``Association::unique()`` was added. This method proxies the target table's
   ``unique()`` method, but ensures that association conditions are applied.
-- ``isUnique`` rules now apply association conditions.
+* ``isUnique`` rules now apply association conditions.
+* When entities are converted into JSON, the associated objects are no longer
+  converted to an array first using ``toArray()``. Instead, the
+  ``jsonSerialize()`` method will be invoked on all associated entities. This
+  gives you more flexibility and control on which properties are exposed in JSON
+  representations of your entities.
 
 Validation
 ==========
 
-- ``Validator::requirePresence()`` now accepts a list of fields. This allows you
+* ``Validator::requirePresence()`` now accepts a list of fields. This allows you
   to more concisely define the fields that are required.
 
 Debugging Functions
 ===================
 
-- The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
+* The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
   dumped. This makes them easier to use when values are being returned.
