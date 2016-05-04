@@ -129,7 +129,8 @@ ul {
     list-style: disc outside;
 }
 ul ul {
-    margin: 9px 0 9px 30px;
+    margin: 9px 0 9px 16px;
+    padding: 0;
 }
 
 /* def list */
@@ -211,6 +212,36 @@ a.improve {
     float: right;
 }
 
+/* -- Sidebar -- */
+.sidebar li {
+    list-style: none;
+    text-transform: capitalize;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.5em;
+    margin: 5px 0;
+}
+.sidebar a {
+    color: #363637;
+    display: block;
+}
+.sidebar a:hover {
+    color: #2f85ae;
+}
+
+#sidebar-navigation > ul {
+    padding-left: 0;
+}
+#sidebar-navigation > ul > li:before {
+    color: #363637;
+    font-family: 'Raleway', sans-serif;
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    padding-bottom: 0.4em;
+    padding-top: 1.3em;
+}
 #sidebar-navigation > ul > li:nth-of-type(5):last-child:after,
 #sidebar-navigation > ul > li:nth-of-type(12):last-child:after,
 #sidebar-navigation > ul > li:nth-of-type(31):last-child:after,
@@ -220,11 +251,8 @@ a.improve {
     margin-bottom: 1em;
 }
 #sidebar-navigation > ul > li:nth-of-type(1):before {
-    color: #BD8A5D;
     content: "Preface";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
+    padding-top: 0;
 }
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(1):before {
     content: "Préface";
@@ -245,13 +273,7 @@ a.improve {
     content: "Preface";
 }
 #sidebar-navigation > ul > li:nth-of-type(6):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
     content: "Getting Started";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
 }
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(6):before {
     content: "Pour Commencer";
@@ -272,13 +294,7 @@ a.improve {
     content: "Getting Started";
 }
 #sidebar-navigation > ul > li:nth-of-type(13):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
     content: "General Topics";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
 }
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(13):before {
     content: "Généralités";
@@ -299,13 +315,7 @@ a.improve {
     content: "General Topics";
 }
 #sidebar-navigation > ul > li:nth-of-type(32):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
     content: "Utility Classes";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
 }
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(32):before {
     content: "Utilitaires";
@@ -326,13 +336,7 @@ a.improve {
     content: "Utility Classes";
 }
 #sidebar-navigation > ul > li:nth-of-type(43):before {
-    border-top: 1px solid #e6e6e6;
-    color: #BD8A5D;
     content: "Other";
-    display: block;
-    font-size: 15px;
-    padding-bottom: .4em;
-    padding-top: 1em;
 }
 #sidebar-navigation > ul > li:lang(fr):nth-of-type(43):before {
     content: "Divers";

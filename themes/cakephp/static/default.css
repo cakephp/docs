@@ -408,24 +408,6 @@ dt tt {
 	font-size: 14px;
 }
 
-/* -- Sidebar -- */
-#sidebar-navigation > ul {
-	margin-left: 0;
-}
-.sidebar li {
-	list-style: none;
-	font-size: 14px;
-	font-family: MuseoSlab500, Helvetica, Arial;
-	margin: 3px 0;
-	line-height: 21px;
-}
-.sidebar .current {
-	color: #C92434;
-}
-.sidebar li ul {
-	margin: 0 0 0 18px;
-}
-
 /* -- pagination -- */
 #search-pagination {
 	margin-bottom: 1em;
