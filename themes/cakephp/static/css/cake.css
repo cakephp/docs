@@ -209,8 +209,32 @@ dl.docutils {
 }
 
 a.improve {
-    float: right;
+    position: absolute;
+    top: 10px;
+    right: 0;
 }
+
+/* -- Page Contents -- */
+.page-contents {
+    background: #F5F5F5;
+    float: right;
+    width: 40%;
+    padding: 2em;
+    margin-left: 2em;
+}
+.page-contents h3 {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+.page-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.page-contents ul ul {
+    margin: 0 1.5em;
+}
+
 
 /* -- Sidebar -- */
 .sidebar li {

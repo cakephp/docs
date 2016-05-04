@@ -127,8 +127,8 @@ tt {
 	font-size: 90%;
 	line-height: normal;
 	background: rgba(100, 100, 100, 0.10);
-    padding: 0px 1px;
-    color: #003D4C;
+	padding: 0px 1px;
+	color: #363637;
 }
 dl tt {
     border-bottom: none;
@@ -324,7 +324,7 @@ dt tt {
 .method .descname,
 .staticmethod .descname {
 	font-weight: bold;
-	color: #C92434;
+	color: #000;
 }
 .role dd,
 .directive dd,
