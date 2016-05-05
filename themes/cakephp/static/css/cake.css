@@ -95,31 +95,6 @@ pre, code {
     font-family: "Bitstream Vera Sans Mono", "Consolas", "Monaco", monospace;
     font-size: 1.3rem;
 }
-pre {
-    margin-bottom: 18px;
-    overflow-x: auto;
-    padding: 8px;
-    background: #f2f2f2;
-    color: #222;
-    line-height: 120%;
-    -moz-box-shadow: inset 0px 1px 4px rgba(0,0,0,0.15);
-    -webkit-box-shadow: inset 0px 1px 4px rgba(0,0,0,0.15);
-    box-shadow: inset 0px 1px 4px rgba(0,0,0,0.15);
-}
-pre::-webkit-scrollbar {
-    height: 10px;
-}
-pre::-webkit-scrollbar-track-piece {
-    background: #ddd;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
-pre::-webkit-scrollbar-thumb:horizontal {
-    background: #c0c0c0;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
-
 
 /* lists */
 ul, ol {
