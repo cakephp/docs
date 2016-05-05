@@ -1,4 +1,6 @@
 .highlight pre {
+    font-family: "Bitstream Vera Sans Mono", "Consolas", "Monaco", monospace;
+    font-size: 1.3rem;
     margin-bottom: 18px;
     overflow-x: auto;
     padding: 10px;
