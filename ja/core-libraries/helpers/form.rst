@@ -157,6 +157,10 @@ create() には多くのオプションがあります:
 
      <form id="UserLoginForm" method="post" action="/users/login">
 
+  .. deprecated:: 2.8.0
+    ``$options['action']`` オプションは、 2.8.0 で非推奨になりました。
+    代わりに ``$options['url']`` オプションを使用してください。
+
 * ``$options['url']`` 現在のコントローラー以外にフォームデータを渡したい
   場合、$options 配列の 'url' キーを使ってフォームアクションの URL
   を指定します。指定された URL は作成中の CakePHP アプリケーションに
@@ -187,6 +191,11 @@ create() には多くのオプションがあります:
 
   さらにいろいろなタイプの URL を指定する例は、:php:meth:`HtmlHelper::url()`
   メソッドを参照してみてください。
+
+  .. versionchanged:: 2.8.0
+
+    form action として URL を出力させたくない場合、
+    ``'url' => false`` を使用してください。
 
 * ``$options['default']``  'default' がブール値の false に設定されている場合、
   フォームの submit アクションが変更され、submit ボタンを押してもフォームが
@@ -1313,6 +1322,7 @@ select, checkbox, radio に関するオプション
       .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
+            <option value=""></option>
             <option value="Value 1">Label 1</option>
             <option value="Value 2">Label 2</option>
             <option value="Value 3">Label 3</option>
