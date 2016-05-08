@@ -342,9 +342,9 @@ $(document).ready(function(){
           hasScrolled();
           didScroll = false;
       }
-      setTimeout(toggleHeader, 250);
+      setTimeout(toggleHeader, 200);
   };
-  setTimeout(toggleHeader, 250);
+  setTimeout(toggleHeader, 200);
 
   function hasScrolled() {
       var st = $(window).scrollTop();
