@@ -206,33 +206,14 @@ window.lang = "{{ language }}";
 
 {%- block content %}
 <div class="container page-container">
-
-	{# Breadcrumb sidebar #}
-	<div class="breadcrumb-header container">
-		<div class="related row">
-			<div class="columns three root-link">
-				<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
-			</div>
-			<div class="columns nine">
-				<ul class="inline breadcrumb">
-				{%- for parent in parents %}
-				<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-					<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
-				</li>
-				{%- endfor %}
-				</ul>
-			</div>
-		</div>
-	</div>
+	{%- if pagename != 'search' -%}
+		<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
+	{%- endif -%}
 
 	{# Document body #}
 	<div class="row">
 		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off">
 			<div class="row">
-				{%- if pagename != 'search' -%}
-					<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
-				{%- endif -%}
-
 				{%- if pagename != 'search' and pagename != 'contents' and pagename != 'index' -%}
 				<div class="page-contents">
 					<h3>{{ _('Page Contents') }}</h3>
