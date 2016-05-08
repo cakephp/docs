@@ -10,9 +10,6 @@ App.config = {
 
 App.Book = (function() {
 	function init() {
-		// Make top nav responsive.
-		$('#cakephp-global-navigation').menuSelect({'class': 'nav-select'});
-
 		// Make side navigation go into a lightbox.
 		$('#tablet-nav').bind('click', function (e) {
 			e.preventDefault();
@@ -325,6 +322,56 @@ $(document).ready(function(){
 	if ((!$('.static-menu').length) && ($windowWidth > 991) && (!isMobileDevice) ) {
 		fixedHeader();
 	}
+
+
+/* **************** Hide header on scroll down *************** */
+(function() {
+  // Hide Header on on scroll down
+  var didScroll;
+  var lastScrollTop = 0;
+  var delta = 5;
+  var navbarHeight = $('header').outerHeight();
+
+  $(window).scroll(function(event){
+      didScroll = true;
+  });
+
+  // Debounce the header toggling to ever 250ms
+  var toggleHeader = function() {
+      if (didScroll) {
+          hasScrolled();
+          didScroll = false;
+      }
+      setTimeout(toggleHeader, 250);
+  };
+  setTimeout(toggleHeader, 250);
+
+  function hasScrolled() {
+      var st = $(window).scrollTop();
+
+      // Make sure they scroll more than delta
+      if (Math.abs(lastScrollTop - st) <= delta) {
+          return;
+      }
+
+      // If they scrolled down and are past the navbar, add class .nav-up.
+      // This is necessary so you never see what is "behind" the navbar.
+      if (st > lastScrollTop && st > navbarHeight){
+          // Scroll Down
+          $('header').removeClass('nav-down').addClass('nav-up');
+        // Scroll Up
+      } else if (st + $(window).height() < $(document).height()) {
+          $('header').removeClass('nav-up').addClass('nav-down');
+      }
+      lastScrollTop = st;
+  }
+
+  // If we're directly linking to a section, hide the nav.
+  if (window.location.fragment.length) {
+      $('header').removeClass('nav-up').addClass('nav-down');
+  }
+}());
+
 });
 
 $(document).ready(App.Book.init);
