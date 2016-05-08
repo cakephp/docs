@@ -592,8 +592,21 @@ dl tt {
 }
 
 /* Tables */
-.docutils td,
-.docutils th {
+table {
+    border-color: #ccc;
+    margin-bottom: 20px;
+}
+table thead th {
+    background: #ECECE9;
+    padding: 9px 10px;
+}
+table tbody td {
+    padding: 9px 10px;
+}
+table td,
+table th {
+    border: 0;
+    border-bottom: 1px solid #ccc;
     font-size: 14px;
     padding-top: 3px;
     padding-bottom: 3px;
