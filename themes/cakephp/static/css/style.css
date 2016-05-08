@@ -5041,11 +5041,8 @@ header {
 
 
 /* ---------------------- COOK BOOK ------------------------- */
-
-
 .icon-submenu-cook {
-	padding: 0 12px 0 0;
-	color: #B8B8AE;
+	padding: 0 6px 0 0;
 }
 
 .t-cook-nav h2 {
@@ -5062,7 +5059,7 @@ header {
 }
 
 .search-cook {
-	margin-top: 10px;
+	margin-top: 8px;
 }
 
 .search-cook button {
@@ -5072,6 +5069,9 @@ header {
     border: 0;
     outline: 0;
     background: transparent;
+}
+.search-cook span {
+    vertical-align: middle;
 }
 
 #cook::-webkit-input-placeholder {
