@@ -351,9 +351,14 @@ table.internal-toc {
     width:80%;
 }
 
-/* Search results */
-.tt-menu {
+/* Inline search */
+.search .twitter-typeahead {
     width: 100%;
+}
+
+/* Inline search results */
+.tt-menu {
+    width: 150%;
     position: absolute;
     background: #fff;
     z-index: 10;
@@ -366,6 +371,7 @@ table.internal-toc {
 
 .tt-menu .empty-result,
 .tt-menu .tt-suggestion {
+    font-size: 12px;
     display: block;
     padding: 5px 10px;
     border-bottom: 1px solid #eee;
@@ -374,6 +380,47 @@ table.internal-toc {
 .tt-suggestion:focus,
 .tt-suggestion:hover {
     background: #eee;
+}
+
+/* Standalone search */
+.standalone-search {
+    margin-bottom: 20px;
+}
+.standalone-search .search-input {
+    width: 100%;
+}
+/* Search pagination */
+#search-pagination {
+    margin: 2em 0;
+}
+#search-pagination a {
+    font-size: 16px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    margin: 0 4px 0 0;
+}
+#search-pagination a:last-child {
+    border: 0;
+}
+#search-pagination a.active {
+    color: #C92434;
+}
+#search-pagination a.active:hover {
+    text-decoration: none;
+}
+
+/* Search results */
+#search-results ul {
+    list-style: none;
+    margin: 0;
+}
+#search-results li {
+    list-style: none;
+    margin-bottom: 1em;
 }
 
 /* tablet and smaller */
@@ -393,11 +440,7 @@ table.internal-toc {
         margin-top: 9px;
     }
     
-    #searchform {
-        margin: 10px 10px 0;
-        clear: none;
-    }
-    .searchbar .twitter-typeahead {
+    .search .twitter-typeahead {
         width: 96%;
     }
     #tablet-nav,
@@ -793,22 +836,3 @@ dt tt {
     font-size: 14px;
 }
 
-/* -- pagination -- */
-#search-pagination {
-    margin-bottom: 1em;
-}
-#search-pagination a {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid #ccc;
-    margin: 0 4px 0 0;
-}
-#search-pagination a.active {
-    color: #C92434;
-}
-#search-pagination a.active:hover {
-    text-decoration: none;
-}

@@ -4463,7 +4463,6 @@ blockquote {
 	display: block;
     width: 100%;
     height: 34px;
-    padding: 15px 20px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #FFF;
@@ -5051,6 +5050,7 @@ header {
     padding: 10px 0;
 }
 
+/* Search form */
 .form-cook {
 	margin-top: 8px;
     background: #565656;
@@ -5062,6 +5062,7 @@ header {
 	margin-top: 8px;
 }
 
+.standalone-search button,
 .search-cook button {
     padding-left: 7px;
     color: #565656;
