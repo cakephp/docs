@@ -7,6 +7,33 @@ App.Search = (function () {
 		limit = 25,
 		paginationContainer;
 
+    var urldecode = function(x) {
+      return decodeURIComponent(x).replace(/\+/g, ' ');
+    };
+/**
+ * This function returns the parsed url parameters of the
+ * current request. Multiple values per key are supported,
+ * it will always return arrays of strings for the value parts.
+ */
+  var getQueryParameters = function(s) {
+    if (typeof s == 'undefined') {
+      s = document.location.search;
+    }
+    var parts = s.substr(s.indexOf('?') + 1).split('&');
+    var result = {};
+    for (var i = 0; i < parts.length; i++) {
+      var tmp = parts[i].split('=', 2);
+      var key = urldecode(tmp[0]);
+      var value = urldecode(tmp[1]);
+      if (key in result) {
+        result[key].push(value);
+      } else {
+        result[key] = [value];
+      }
+    }
+    return result;
+  };
+
 	function executeSearch(value, page) {
 		var query = {lang: window.lang, q: value, version: App.config.version};
 		if (page) {
@@ -98,7 +125,7 @@ App.Search = (function () {
 			executeSearch(searchInput.val(), page);
 		});
 
-		var params = $.getQueryParameters();
+		var params = getQueryParameters();
 		if (params.q) {
 			searchInput.val(params.q).trigger('keyup');
 		}

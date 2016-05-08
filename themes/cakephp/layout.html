@@ -1,39 +1,85 @@
-{% extends 'default/layout.html' -%}
-{%- block doctype %}
-<!DOCTYPE html>
-{% endblock -%}
+{%- macro script(script_files) %}
+    {%- for scriptfile in script_files %}
+    <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- endfor %}
+{%- endmacro %}
 
-{% block extrahead %}
-<link href="{{ pathto('_static/favicon.png', 1) }}" type="image/png" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="{{ pathto('_static/css/bootstrap.min.css', 1) }}">
-<link rel="stylesheet" href="{{ pathto('_static/css/font-awesome.min.css', 1) }}">
-<link rel="stylesheet" href="{{ pathto('_static/css/style.css', 1) }}">
-<link rel="stylesheet" href="{{ pathto('_static/css/responsive.css', 1) }}">
+{%- macro css(css_files) %}
+    {%- for cssfile in css_files %}
+    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+    {%- endfor %}
+{%- endmacro %}
 
-{% for lang in languages %}
-	{%- if lang != language -%}
-		{%- if has_lang(lang, pagename) -%}
-		<link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
-		{%- endif -%}
-	{%- endif -%}
-{% endfor %}
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 3.x Search" href="{{ pathto('_static/opensearchdescription-book-3-x.xml', 1) }}">
-<script type="text/javascript">
-window.lang = "{{ language }}";
-</script>
-{% endblock %}
+{%- set css_files = [
+    '_static/css/bootstrap.min.css',
+    '_static/css/font-awesome.min.css',
+    '_static/css/style.css',
+    '_static/css/default.css',
+    '_static/css/pygments.css',
+    '_static/css/responsive.css',
+] -%}
 
 {%- set script_files = [
 	"_static/jquery.js",
 	"_static/underscore.js",
-	"_static/doctools.js",
 	"_static/vendor.js",
 	"_static/app.js",
 	"_static/search.js",
 	"_static/typeahead.js",
 ] -%}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset={{ encoding }}" />
+    {{ metatags }}
+    <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+    <link href="{{ pathto('_static/favicon.png', 1) }}" type="image/png" rel="icon" />
+
+    {{ css(css_files) }}
+    {{ script(script_files) }}
+
+    {% for lang in languages %}
+        {%- if lang != language -%}
+            {%- if has_lang(lang, pagename) -%}
+            <link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
+            {%- endif -%}
+        {%- endif -%}
+    {% endfor %}
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within {{ docstitle }}" href="{{ pathto('_static/opensearchdescription-book-3-x.xml', 1) }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+{%- block linktags %}
+    {%- if hasdoc('about') %}
+    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+    {%- endif %}
+    {%- if hasdoc('genindex') %}
+    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+    {%- endif %}
+    {%- if hasdoc('search') %}
+    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+    {%- endif %}
+    {%- if hasdoc('copyright') %}
+    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+    {%- endif %}
+    <link rel="top" title="{{ docstitle|e }}" href="{{ pathto('index') }}" />
+    {%- if parents %}
+    <link rel="up" title="{{ parents[-1].title|striptags|e }}" href="{{ parents[-1].link|e }}" />
+    {%- endif %}
+    {%- if next %}
+    <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+    {%- endif %}
+    {%- if prev %}
+    <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+    {%- endif %}
+{%- endblock %}
+
+    <script type="text/javascript">
+    window.lang = "{{ language }}";
+    </script>
+  </head>
+  <body>
 
 {%- block header %}
 {# Outer wrapper for pushing the footer to the bottom #}
@@ -198,12 +244,6 @@ window.lang = "{{ language }}";
 	</header>
 {% endblock -%}
 
-
-{%- block relbar1 %}
-{# Empty so links aren't duplicated #}
-{% endblock -%}
-
-
 {%- block content %}
 <div class="container page-container">
 	{%- if pagename != 'search' -%}
@@ -238,10 +278,6 @@ window.lang = "{{ language }}";
 	</div>
 </div>
 {% endblock -%}
-
-{%- block relbar2 %}
-{# Empty so links aren't duplicated #}
-{% endblock %}
 
 {%- block footer %}
 <section id="socials" class="back-3">
@@ -388,3 +424,5 @@ window.lang = "{{ language }}";
 	})();
 </script>
 {%- endblock %}
+  </body>
+</html>

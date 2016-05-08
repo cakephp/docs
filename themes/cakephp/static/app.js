@@ -367,8 +367,8 @@ $(document).ready(function(){
   }
 
   // If we're directly linking to a section, hide the nav.
-  if (window.location.fragment.length) {
-      $('header').removeClass('nav-up').addClass('nav-down');
+  if (window.location.hash.length) {
+      $('header').addClass('nav-up');
   }
 }());
 
