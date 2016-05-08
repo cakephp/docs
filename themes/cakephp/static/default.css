@@ -189,8 +189,13 @@ a.improve {
     margin-left: 2em;
 }
 .page-contents h3 {
-    font-size: 1.3em;
-    margin-bottom: 1em;
+    font-size: 1em;
+    line-height: 1.2em;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+}
+.page-contents li {
+    font-size: 13px;
 }
 .page-contents ul {
     list-style: none;
