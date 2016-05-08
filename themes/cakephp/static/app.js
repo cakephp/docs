@@ -4,30 +4,16 @@ if (/cakephp\.org/.test(document.domain)) {
 
 App = {};
 App.config = {
-  url: 'http://search.cakephp.org/search',
+  url: 'http://localhost/cakephp/docs_search/search',
+  // url: 'http://search.cakephp.org/search',
   version: '3-0'
 };
 
 App.Book = (function() {
   function init() {
-    // Make side navigation go into a lightbox.
-    $('#tablet-nav').bind('click', function (e) {
-      e.preventDefault();
-
-      // Squirt the nav and page contents into the modal.
-      var contents = $('#sidebar-navigation').html();
-      var localToc = $('.page-contents').html();
-      var modal = $('#nav-modal').html(contents);
-      modal.append(localToc);
-      modal.append('<a href="#" class="close-reveal-modal">&#215;</a>');
-      modal.reveal({
-        animation: 'fade'
-      });
-    });
-
     // Show back to contents button.
     var backToTop = $('#back-to-contents'),
-      contents = $('#page-contents'),
+      contents = $('.page-contents'),
       doc = $(document),
       offset = contents.offset(),
       sidebarHeight = contents.height(),
@@ -41,7 +27,7 @@ App.Book = (function() {
         showing = true;
         backToTop.css({
           position: 'fixed',
-          top: 20,
+          top: 50,
           left: 20,
           display:' block'
         });
@@ -93,7 +79,7 @@ App.InlineSearch = (function () {
   };
 
   var init = function () {
-    var input = $('.masthead .search-input');
+    var input = $('.search input[type=search]');
     input.typeahead(
       {minLength: 3, hint: false, highlight: true},
       {
