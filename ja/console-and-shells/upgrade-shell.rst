@@ -1,4 +1,4 @@
-﻿
+
 .. _upgrade-shell:
 
 Upgrade Shell
