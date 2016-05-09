@@ -751,6 +751,12 @@ HTML attributes. The following will cover the options specific to
   If you need to later change the defaults you can use
   :php:meth:`FormHelper::inputDefaults()`.
 
+* ``$options['maxlength']`` Set this key to set the ``maxlength`` attribute of the ``input``
+  field to a specific value. When this key is omitted and the input-type is ``text``,
+  ``textarea``, ``email``, ``tel``, ``url`` or ``search`` and the field-definition is not
+  one of ``decimal``, ``time`` or ``datetime``, the length option of the database field is
+  used.
+
 GET Form Inputs
 ---------------
 
