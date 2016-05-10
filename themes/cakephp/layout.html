@@ -113,7 +113,7 @@
 								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
 								<div class="megamenu full">
 									<div class="row">
-										<!--
+										{# Event calendar is not done
 										<div class="col-3">
 											<ul class="megamenu-list">
 												<li class="menu-title"><i class="fa fa-menu-title fa-calendar-o"></i>Calendar</li>
@@ -121,12 +121,14 @@
 												<li><a href="#"><i class="fa fa-menu fa-chevron-right"></i>Events</a></li>
 											</ul>
 										</div>
-										-->
+										#}
+										{# Marketplace doesn't exist yet
 										<div class="col-3">
 											<ul class="megamenu-list">
 												{% include 'menu/marketplace.html' %}
 											</ul>
 										</div>
+										#}
 										<div class="col-3">
 											<ul class="megamenu-list">
 												{% include 'menu/help.html' %}
@@ -318,9 +320,9 @@
 				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
 				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
 				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
-				<!-- <a href="#" data-toggle="tooltip" title="Linkedin"><i class="fa icon-social fa-linkedin"></i></a>-->
+				{# <a href="#" data-toggle="tooltip" title="Linkedin"><i class="fa icon-social fa-linkedin"></i></a> #}
 				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
-				<!-- <a href="#" data-toggle="tooltip" title="Quora"><span class="glyph_range icon-social">T</span></a>-->
+				{# <a href="#" data-toggle="tooltip" title="Quora"><span class="glyph_range icon-social">T</span></a> #}
 				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
 				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
 			</div>
@@ -380,11 +382,13 @@
 					</ul>
 				</div>
 
+				{# Marketplace is not done
 				<div class="col-sm-3">
 					<ul class="footer-menu">
 						{% include 'menu/marketplace.html' %}
 					</ul>
 				</div>
+				#}
 			</div>
 		</div>
 
