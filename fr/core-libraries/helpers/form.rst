@@ -772,6 +772,13 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
   Si vous avez besoin de changer plus tard les valeurs par défaut, vous
   pourrez utiliser :php:meth:`FormHelper::inputDefaults()`.
 
+* ``$options['maxlength']`` Définissez cette clé pour définir l'attribut
+  ``maxlength`` du champ ``input`` avec une valeur spécifique. Quand cette clé
+  n'est pas donnée et que le type d'input est ``text``, ``textarea``, ``email``,
+  ``tel``, ``url`` ou ``search`` et que la définition de champ n'est pas
+  ``decimal``, ``time`` ou ``datetime``, l'option length du champ de la base de
+  données est utilisée.
+
 GET Form Inputs
 ---------------
 
