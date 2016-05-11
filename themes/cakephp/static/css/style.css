@@ -5262,62 +5262,12 @@ header {
     margin-bottom: 25px;
 }
 
-.box-featured-light p{
+.box-featured-light p {
 	margin: 0;
 	color: #363637;
 	letter-spacing: 0.01em;
 	font-weight: 500;
 	display: inline;
-}
-
-.featured-yellow {
-	background-color: #fcf8e3;
-}
-
-.featured-yellow span{
-	color: #E2C99C;
-}
-
-.featured-green{
-	background: #dff0d8;
-}
-
-.featured-green span{
-	color: #A7D096;
-}
-
-.featured-red{
-	background: #f2dede;
-}
-
-.featured-red span{
-	color: #E0B9B9;
-}
-
-.featured-blue{
-	background: #d9edf7;
-}
-
-.featured-blue span{
-	color: #97CAE4;
-}
-
-
-.featured-navy-blue {
-	background: #97e0ec;
-}
-
-.featured-navy-blue span{
-	color: #d9edf7;
-}
-
-.featured-navy-blue p{
-	color: #fff;
-}
-
-
-.t-blue {
-	color: #2f85ae;
 }
 
 
@@ -5364,15 +5314,13 @@ header {
 .read-the-book a {
     margin: 25px 5px 50px;
 }
-
 .div-clear {
 	clear:both;
 }
 
 
-
-
-#slideout {
+/* Improve Doc */
+#improve-slideout {
     position: fixed;
     bottom: 70%;
     right: 0;
@@ -5385,8 +5333,14 @@ header {
     position: fixed;
     z-index: 9999;
 }
-#slideout_inner {
-	position: fixed;
+#improve-slideout:hover {
+  right: 200px;
+}
+#improve-slideout:hover #improve-slideout-inner {
+  right: 0;
+}
+#improve-slideout-inner {
+    position: fixed;
     bottom: 70%;
     right: -200px;
     -webkit-transition-duration: 0.3s;
@@ -5397,33 +5351,25 @@ header {
     padding: 5px 12px;
     width: 200px;
 }
-#slideout:hover {
-  right: 200px;
-}
-#slideout:hover #slideout_inner {
-  right: 0;
-}
-
-.icon-improve {
-	color: #bdbdb5;
-    padding: 3px 9px 0 10px;
-    font-size: 24px;
-}
-
-#slideout_inner h6{
+#improve-slideout-inner h6 {
     color: #363637;
     font-weight: 700;
     text-transform: uppercase;
     margin: 0;
     font-size: 14px;
 }
-
+.icon-improve {
+    color: #bdbdb5;
+    padding: 3px 9px 0 10px;
+    font-size: 24px;
+}
 .git-improve {
     font-size: 30px;
     vertical-align: -4px;
     padding-left: 8px;
 }
 
+/* Dropdown menus */
 .dropdown > a {
     background: #bdbdb5;
     padding: 5px 8px !important;

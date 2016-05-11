@@ -250,8 +250,16 @@
 
 {%- block content %}
 <div class="container page-container">
+
 	{%- if pagename != 'search' -%}
-		<a class="button pale improve" href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">Improve this Doc</a>
+	<div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/{{ branch }}/{{ language }}/{{ pagename }}.rst" target="_blank">
+			<div id="improve-slideout-inner">
+				<h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6>
+			</div>
+		</a>
+	</div>
 	{%- endif -%}
 
 	{# Document body #}
