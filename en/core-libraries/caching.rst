@@ -23,7 +23,7 @@ to implement your own caching systems. The built-in caching engines are:
   <http://php.net/apcu>`_ extension. These extensions use shared memory on the
   webserver to store objects. This makes it very fast, and able to provide
   atomic read/write features. By default CakePHP in 2.0-2.2 will use this cache
-  engine if it's available.
+  engine, if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and Microsoft IIS.
