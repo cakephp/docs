@@ -19,10 +19,11 @@ to implement your own caching systems. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files. This is the default Cache engine for 2.3+
-* ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension.
-  This extension uses shared memory on the webserver to store objects.
-  This makes it very fast, and able to provide atomic read/write features.
-  By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
+* ``ApcCache`` APC cache uses the `APC <http://php.net/apc>`_ or `APCu
+  <http://php.net/apcu>`_ extension. These extensions use shared memory on the
+  webserver to store objects. This makes it very fast, and able to provide
+  atomic read/write features. By default CakePHP in 2.0-2.2 will use this cache
+  engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and Microsoft IIS.
