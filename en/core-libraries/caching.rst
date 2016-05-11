@@ -23,7 +23,7 @@ to implement your own caching systems. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
-* ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension.
+* ``ApcCache`` APC cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
