@@ -47,6 +47,9 @@ App.Book = (function() {
     doc.bind('scroll', function() {
       positionBackToTop();
     });
+
+    // Tooltips
+    $("[data-toggle='tooltip']").tooltip();
   }
 
   return {
