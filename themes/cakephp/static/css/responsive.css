@@ -124,10 +124,12 @@
 		background-color: #D33C44;
 	}
 
+	#wrap .tt-input:focus,
 	#wrap input[type="text"]:focus {
 		width: 300px;
 	}
 
+	#wrap .tt-input,
 	#wrap input[type="text"] {
 		font-size: 16px;
 		height: 60px;
@@ -254,14 +256,18 @@
 		    font-size: 11px;
 	}
 
-	#slideout {
+	#improve-slideout {
 		bottom: 0;
 	}
 
-	#slideout_inner {
+	#improve-slideout-inner {
 		bottom: 0;
 	}
 
+	.page-contents {
+		float: none;
+		margin-left: 0;
+	}
 }
 
 
@@ -274,7 +280,6 @@
 
 
 @media (min-width: 768px) and (max-width: 991px) {
-/*CSS LIDO EM DISPOSITIVOS ATÉ 991 PX DE LARGURA*/
 	.header-transparent .main-header {
 		background-color: #d33c44;
 	}
@@ -380,6 +385,8 @@
 	    margin-top: 60px;
 	}
 
+	/* ---------------------- COOK BOOK ------------------------- */
+
 	#wrap input[type="text"]:focus {
 		width: 450px;
 	}
@@ -393,20 +400,13 @@
 		height: 58px;
 	}
 
-	/* ---------------------- COOK BOOK ------------------------- */
-
-	#cookbook {
-		padding-top: 50px;
-	}
-	
-	#slideout {
+	#improve-slideout {
 		bottom: 0;
 	}
 
-	#slideout_inner {
+	#improve-slideout-inner {
 		bottom: 0;
 	}
-	
 }
 
 

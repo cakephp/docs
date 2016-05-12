@@ -97,8 +97,9 @@
 				<div class="col-sm-9 col-md-9">
 					<nav class="navbar-right">
 						<ul class="menu">
-							<li class="toggle-menu"> <i class="fa icon_menu"></i></li>
-
+							<li class="toggle-menu">
+								<i class="fa fa-bars"></i>
+							</li>
 							<li class="first">
 								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
 								<ul class="submenu">
@@ -148,13 +149,27 @@
 			</div>
 		</div>
 
+		{# Mobile responsive header #}
 		<div class="container-fluid hidden-md hidden-lg">
 			<div class="row">
-
 				<div class="col-sm-6 col-xs-6">
 					<a class="logo-cake" href="{{ pathto(master_doc) }}">
 						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
 					</a>
+				</div>
+
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button class="btn-menu" data-toggle="modal" data-target="#menumodal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="{{ pathto('search') }}" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="{{ _('Search') }}" type="submit">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -267,7 +282,7 @@
 		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off">
 			<div class="row">
 				{%- if pagename != 'search' and pagename != 'contents' and pagename != 'index' -%}
-				<div class="page-contents">
+				<div class="page-contents col-sm-5">
 					<h3>{{ _('Page Contents') }}</h3>
 					{{ toc }}
 				</div>

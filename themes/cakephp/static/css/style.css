@@ -833,11 +833,25 @@ button:active  {
 	}
 
 
-	/* Toggle Menu */
-	.menu .toggle-menu { display: none; }
+/* Toggle Menu */
+.menu .toggle-menu { display: none; }
 
 
-	/* Menu on Mobiles */
+/* Hamburger menu on mobile */
+.btn-menu {
+    background: transparent;
+    padding: 0px 0 9px 10px;
+    border: none;
+}
+.toggle-modal {
+    font-size: 30px;
+    color: white;
+    margin: 14px 20px 0 0;
+}
+
+
+/* Menu on Mobiles */
+
 	@media (max-width: 767px) {
 		.header-wrapper { 
 			background-color: #D33C44;
@@ -4708,6 +4722,7 @@ header {
     z-index: 9;
 }
 
+/* Inline search box in responsive layouts */
 #wrap {
     display: inline-block;
     position: relative;
@@ -4718,8 +4733,8 @@ header {
     position: relative;
     z-index: 99;
 }
-
-#wrap input[type="text"] {
+#wrap .tt-input,
+#wrap input[type="search"] {
 	height: 76px;
     font-size: 24px;
     display: inline-block;
@@ -4740,9 +4755,8 @@ header {
     transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
     cursor: pointer;
 }
-
-
-#wrap input[type="text"]:focus {
+#wrap .tt-input:focus,
+#wrap input[type="search"]:focus {
   width: 700px;
   z-index: 1;
   cursor: text;
@@ -4755,7 +4769,7 @@ header {
     display: inline-block;
     color: red;
     float: right;
-    background: url(../images/search.png) center center no-repeat;
+    background: url(../search.png) center center no-repeat;
     background-size: 19px;
     text-indent: -10000px;
     border: none;
@@ -4769,7 +4783,6 @@ header {
     transition: opacity .4s ease;
     outline: none;
 }
-
 #wrap input[type="submit"]:hover {
   opacity: 0.8;
 }
@@ -4881,12 +4894,6 @@ header {
     margin-bottom: 30px;
 }
 
-.toggle-modal {
-	font-size: 30px;
-    color: white;
-    margin: 14px 20px 0 0;
-}
-
 
 .modal-content-menu {
 	border-radius: 1px;
@@ -4968,12 +4975,6 @@ header {
 
 .sidebar-menu-body ul > li {
 	color: white;
-}
-
-.btn-menu {
-	background: transparent;
-    padding: 0px 0 9px 10px;
-    border: none;
 }
 
 .t-support h3 {
