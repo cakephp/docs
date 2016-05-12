@@ -371,7 +371,7 @@ to **src/Model/Table/BookmarksTable.php**::
 
     protected function _buildTags($tagString)
     {
-        $new = array_unique(array_map('trim', explode(',', $tagString)));
+        $new = array_unique(array_filter(array_map('trim', explode(',', $tagString))));
         $out = [];
         $query = $this->Tags->find()
             ->where(['Tags.title IN' => $new]);
