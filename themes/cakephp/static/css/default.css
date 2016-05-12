@@ -29,6 +29,15 @@
 .page-container {
     padding-top: 160px;
 }
+@media (max-width:991px) {
+    .page-container {
+        padding-top: 80px;
+    }
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+}
 
 /* General button */
 .offline-download a,
