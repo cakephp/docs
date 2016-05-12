@@ -344,11 +344,11 @@
 		<div class="row col-p30">
 			<div class="col-sm-12 col-md-3">
 				<div class="footer-widget t-footer">
-					<form class="form" method="post" action="">
+					<form class="form" method="post" action="http://my.cakephp.org/login">
 						<h4>My CakePHP</h4>
 						<div class="col-md-12 p0 form-user">
-							<label class="mb10">Username<input type="text" name="val_fname" id="val_fname" class="form-control"></label>
-							<label class="mb10">Password<input type="password" name="val_lname" id="val_lname" class="form-control"></label>
+							<label class="mb10">Username<input type="text" name="data[AppUser][email]" required class="form-control"></label>
+							<label class="mb10">Password<input type="password" name="data[AppUser][password]" required class="form-control"></label>
 						</div>
 
 						<div class="col-md-4  col-xs-6 p0 pull-right">
@@ -357,7 +357,10 @@
 
 						<div class="col-md-8 col-xs-6 p0 register">
 							<label><input type="checkbox">Remember me</label>
-							<p>Forgot your password?<br>New user?<a href=""> Register!</a></p>
+							<p>
+								<a href="http://my.cakephp.org/users/reset_password">Forgot your password?</a>
+								<br>New user?<a href="http://my.cakephp.org/join"> Register!</a>
+							</p>
 							<a href="https://www.openhub.net/p/cakephp">
 								<img src="{{ pathto('_static/open-hub.png', 1) }}">
 							</a>
