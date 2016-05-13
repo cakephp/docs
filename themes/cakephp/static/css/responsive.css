@@ -1,5 +1,7 @@
+/**
+ * Phone/phablet layout.
+ */
 @media (max-width: 767px) {
-/*CSS LIDO EM DISPOSITIVOS ATÉ 767 PX DE LARGURA*/
     .title-home h1 {
     	font-size: 20px;
     	margin-bottom: 5px;
@@ -244,10 +246,9 @@
 
 
 
-
-
-
-
+/**
+ * Tablet Portrait layout.
+ */
 @media (min-width: 768px) and (max-width: 991px) {
 	.header-transparent .main-header {
 		background-color: #d33c44;
@@ -464,16 +465,4 @@
 		font-size: 12px;
 		    padding: 5px 5px !important;
 	}
-
-	
-
-
-}
-
-@media (min-width: 1200px) {
-  /*CSS LIDO EM DISPOSITIVOS DE MAIS DE 1200 PX DE LARGURA*/
-  .hero, .hero-2 {
-  	background-attachment: fixed;
-  }
-  
 }
