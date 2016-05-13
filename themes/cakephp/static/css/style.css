@@ -300,54 +300,6 @@ button:active  {
 	}
 
 
-	/* Full width videos */
-	.video-wrapper {
-		max-width: 100% ;
-   		max-height: 450px ;
-   		width: 100% ;
-   		height: auto ;
-   		overflow: hidden;
-	}
-	@media (max-width:767px) {
-		.video-wrapper { max-height:280px; }
-	}
-	@media (max-width:991px) {
-		.video-wrapper { max-height:380px; }
-	}
-	@media (min-width:1400px) {
-		.video-wrapper { max-height:550px; }
-	}
-
-	.video-wrapper video {
-		width:100%;
-		height:100%;
-		z-index: 1;
-	}
-	.video-caption {
-		position:absolute;
-		width:100%;
-		top:50%;
-		-ms-transform:translateY(-50%); -webkit-transform:translateY(-50%); transform:translateY(-50%);
-		left:0;
-	}
-	#video-button {
-		position: absolute;
-		left:40px;
-		bottom:40px;
-		color:#fff;
-		font-size: 30px;
-	}
-
-	#video-button.pause .fa:before {
-		content: "\5f";
-		font-family: 'ElegantIcons';
-	}
-	#video-button.play .fa:before {
-		content: "\3d";
-		font-family: 'ElegantIcons';
-	}
-
-
 	/* Box heights fix */
 	@media(max-width:991px) {
 		.max_height.sm_max_height .el_max_height { height: auto !important; }
@@ -4735,7 +4687,7 @@ header {
 }
 #wrap .tt-input,
 #wrap input[type="search"] {
-	height: 76px;
+	height: 60px;
     font-size: 24px;
     display: inline-block;
     font-family: 'Raleway', sans-serif;
@@ -4750,13 +4702,15 @@ header {
     position: absolute;
     top: 0;
     right: 0;
+	left: 0;
     background: none;
     z-index: 3;
-    transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+    transition: width .2s cubic-bezier(0.000, 0.795, 0.000, 1.000);
     cursor: pointer;
 }
 #wrap .tt-input:focus,
 #wrap input[type="search"]:focus {
+	left: -640px; /* 60px less than width so icon is in box */
   width: 700px;
   z-index: 1;
   cursor: text;
@@ -4785,6 +4739,12 @@ header {
 }
 #wrap input[type="submit"]:hover {
   opacity: 0.8;
+}
+#wrap input:-ms-input-placeholder,
+#wrap input:-moz-placeholder,
+#wrap input::-moz-placeholder,
+#wrap input::-webkit-input-placeholder {
+  color:#363637;
 }
 
 
@@ -5074,22 +5034,6 @@ header {
 }
 .search-cook span {
     vertical-align: middle;
-}
-
-#cook::-webkit-input-placeholder {
-  color:#363637;
-}
-
-#cook:-moz-placeholder {
-  color:#363637;
-}
-
-#cook::-moz-placeholder {
-  color:#363637;
-}
-
-#cook:-ms-input-placeholder {
-  color:#363637;
 }
 
 .t-language h6{

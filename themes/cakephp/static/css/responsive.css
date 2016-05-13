@@ -127,12 +127,13 @@
 	}
 
 	#wrap .tt-input:focus,
-	#wrap input[type="text"]:focus {
+	#wrap input[type="search"]:focus {
+		left: -240px; /* 60px less than width so icon is in box */
 		width: 300px;
 	}
 
 	#wrap .tt-input,
-	#wrap input[type="text"] {
+	#wrap input[type="search"] {
 		font-size: 16px;
 		height: 60px;
 	}
@@ -357,7 +358,8 @@
         padding-top: 20px;
     }
 
-	#wrap input[type="text"]:focus {
+	#wrap input[type="search"]:focus {
+		left: -390px; /* 60px less than width so icon is in box */
 		width: 450px;
 	}
 
