@@ -195,46 +195,6 @@
 		padding: 10px 6px;
 	}
 
-	.phone-support i {
-		font-size: 23px;
-	    padding: 11px 18px 10px;
-	    vertical-align: 3px;
-	}
-
-	.phone-support h6 {
-		font-size: 30px;
-    	padding: 5px 20px;
-	}
-
-	.skype-support i {
-	    vertical-align: 1px;
-    	font-size: 23px;
-	}
-
-	.skype-support h6 {
-	    padding: 6px 20px 5px;
-    	font-size: 30px;
-	}
-
-	.t-support h3{
-	    line-height: 40px;
-	    font-size: 40px;
-	}
-
-	.t-support h5{
-	    line-height: 27px;
-	    font-size: 18px;
-	    margin-top: 15px;
-	}
-
-	.phone-support-number {
-		font-size: 20px;
-	}
-
-	.phone-support-i {
-		font-size: 20px;
-	}
-
 
 	/* ---------------------- COOK BOOK ------------------------- */
 
@@ -242,6 +202,10 @@
 	#cookbook {
 		padding-top: 50px;
 	}
+
+    .page-container {
+        padding-top: 20px;
+    }
 
 	.nav-btn {
     	padding-top: 73px;
@@ -251,6 +215,11 @@
 	.read-the-book a {
 		    margin: 15px 5px 22px;
 	}
+
+    .page-container .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
 
 	.btn-nav {
 		    font-size: 11px;
@@ -347,10 +316,6 @@
 		    padding: 25px 25px;
 	}
 
-	#cakefest p {
-		text-align: center;
-	}
-
 	.sub-expertise {
 		text-align: center;
 	}
@@ -386,6 +351,10 @@
 	}
 
 	/* ---------------------- COOK BOOK ------------------------- */
+
+    .page-container {
+        padding-top: 20px;
+    }
 
 	#wrap input[type="text"]:focus {
 		width: 450px;

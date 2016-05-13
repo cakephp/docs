@@ -5335,7 +5335,7 @@ header {
     z-index: 9999;
 }
 #improve-slideout:hover {
-  right: 200px;
+  right: 180px;
 }
 #improve-slideout:hover #improve-slideout-inner {
   right: 0;
@@ -5343,14 +5343,14 @@ header {
 #improve-slideout-inner {
     position: fixed;
     bottom: 70%;
-    right: -200px;
+    right: -180px;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
     background: #e0e0d9;
     padding: 5px 12px;
-    width: 200px;
+    width: 180px;
 }
 #improve-slideout-inner h6 {
     color: #363637;

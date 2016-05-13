@@ -260,7 +260,28 @@
 				</div>
 			</div>
 		</section>
+
 	</header>
+
+	{# Responsive grey bar navigation. This is outside of header so it scrolls with the page. #}
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button class="btn btn-b btn-nav" data-toggle="modal" data-target="#cookbook"><strong>Nav</strong></button>
+				</div>
+				{#
+				Figure out how to display the modal content.
+				It should contain the version and language pickers.
+				#}
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button class="btn btn-b btn-nav" data-toggle="modal" data-target="#collapse"><strong>Table of Contents</strong></button>
+				</div>
+				{# Figure out how to re-use the table of contents here. #}
+			</div>
+		</div>
+	</section>
 {% endblock -%}
 
 {%- block content %}

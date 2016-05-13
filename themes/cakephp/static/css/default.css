@@ -29,15 +29,6 @@
 .page-container {
     padding-top: 160px;
 }
-@media (max-width:991px) {
-    .page-container {
-        padding-top: 80px;
-    }
-    .row {
-        margin-left: -10px;
-        margin-right: -10px;
-    }
-}
 
 /* General button */
 .offline-download a,
@@ -432,53 +423,6 @@ table.internal-toc {
     margin-bottom: 1em;
 }
 
-/* tablet and smaller */
-@media only screen and (max-width: 767px) {
-    .masthead .button {
-        display: inline !important;
-    }
-
-    .root-link {
-        display: none;
-    }
-    .breadcrumb {
-        margin-left: 10px;
-    }
-    .masthead img {
-        margin-left: 10%;
-        margin-top: 9px;
-    }
-    
-    .search .twitter-typeahead {
-        width: 96%;
-    }
-    #tablet-nav,
-    .search-submit {
-        padding: 9px 2.5%;
-        float: left;
-        clear: none;
-        width: 43.5%;
-        margin: 9px 0;
-    }
-    #tablet-nav {
-        font-size: 14px;
-        line-height: 16px;
-        height: 16px;
-    }
-    .search-submit {
-        font-size: 14px;
-        height: 36px;
-        margin-right: 2.5%;
-    }
-    
-    /* modal navigation */
-    #nav-modal ul {
-        list-style: none;
-    }
-    #nav-modal > ul {
-        margin-left:  0;
-    }
-}
 
 
 
@@ -508,13 +452,6 @@ h6:hover .headerlink {
 /* -- body styles -- */
 .body {
     position: relative;
-}
-
-@media handheld, only screen and (max-width: 767px) {
-    td, th, p, li {
-        font-size: 16px;
-        font-size: 1.6rem;
-    }
 }
 
 /* inline code */
