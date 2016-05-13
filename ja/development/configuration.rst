@@ -27,19 +27,34 @@
 アプリケーションの設定
 ============================
 
-Configuration is generally stored in either PHP or INI files, and loaded during
-the application bootstrap. CakePHP comes with one configuration file by default,
-but if required you can add additional configuration files and load them in
-**config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` is used for
-general configuration, and the adapter based classes provide ``config()``
-methods to make configuration simple and transparent.
+..
+    Configuration is generally stored in either PHP or INI files, and loaded during
+    the application bootstrap. CakePHP comes with one configuration file by default,
+    but if required you can add additional configuration files and load them in
+    **config/bootstrap.php**. :php:class:`Cake\\Core\\Configure` is used for
+    general configuration, and the adapter based classes provide ``config()``
+    methods to make configuration simple and transparent.
 
-Loading Additional Configuration Files
+設定は一般的に PHP か INI ファイルに保存され、アプリケーションの bootstrap で読み込まれます。
+CakePHP はデフォルトで一つの設定ファイルからなりますが、
+もし必要であれば追加の設定ファイルを加え、 **config/bootstrap.php** で読み込むことができます。
+:php:class:`Cake\\Core\\Configure` は一般的な設定に利用され、
+基底クラスのアダプターで提供されている ``config()`` メソッドは設定をシンプルで明快にします。
+
+..
+    Loading Additional Configuration Files
+
+追加の設定ファイルの読み込み
 --------------------------------------
 
-If your application has many configuration options it can be helpful to split
-configuration into multiple files. After creating each of the files in your
-**config/** directory you can load them in **bootstrap.php**::
+..
+    If your application has many configuration options it can be helpful to split
+    configuration into multiple files. After creating each of the files in your
+    **config/** directory you can load them in **bootstrap.php**::
+
+もしあなたのアプリケーションに多くの設定オプションがあるとき、設定を複数のファイルに分けることで役に立ちます。
+**config/** ディレクトリに複数ファイルを作成したのち、 **bootstrap.php** でそれらを読み込めます。
+::
 
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
@@ -48,29 +63,57 @@ configuration into multiple files. After creating each of the files in your
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
 
-You can also use additional configuration files to provide environment specific
-overrides. Each file loaded after **app.php** can redefine previously declared
-values allowing you to customize configuration for development or staging
-environments.
+..
+    You can also use additional configuration files to provide environment specific
+    overrides. Each file loaded after **app.php** can redefine previously declared
+    values allowing you to customize configuration for development or staging
+    environments.
 
-General Configuration
+追加の設定ファイルは環境特有のオーバーライドとしても利用できます。各ファイルを **app.php** の後で読み込むことで、
+以前に宣言した変数を再定義でき、 development や staging 環境の設定をカスタマイズ可能となります。
+
+..
+    General Configuration
+
+一般的な設定
 ---------------------
 
-Below is a description of the variables and how they affect your CakePHP
-application.
+..
+    Below is a description of the variables and how they affect your CakePHP
+    application.
+
+変数の書き方と CakePHP アプリケーションへの影響を以下に記述します。
+
+..
+    debug
+        Changes CakePHP debugging output. ``false`` = Production mode. No error
+        messages, errors, or warnings shown. ``true`` = Errors and warnings shown.
 
 debug
-    Changes CakePHP debugging output. ``false`` = Production mode. No error
-    messages, errors, or warnings shown. ``true`` = Errors and warnings shown.
+    CakePHP のデバッグ出力を制御します。 ``false`` = 本番モードです。
+    エラーメッセージやエラー、ワーニング出力を行いません。 ``true`` = エラーとワーニングが出力されます。
+
+..
+    App.namespace
+        The namespace to find app classes under.
+
+        .. note::
+
+            When changing the namespace in your configuration, you will also
+            need to update your **composer.json** file to use this namespace
+            as well. Additionally, create a new autoloader by running
+            ``php composer.phar dumpautoload``.
+
 App.namespace
-    The namespace to find app classes under.
+    app クラス下で見つける名前空間です。
 
     .. note::
 
-        When changing the namespace in your configuration, you will also
-        need to update your **composer.json** file to use this namespace
-        as well. Additionally, create a new autoloader by running
-        ``php composer.phar dumpautoload``.
+        名前空間の設定を変更した時は、おそらく **composer.json** ファイルもまた
+        この名前空間を利用するように更新する必要があります。
+        加えて、新しい autoloader を ``php composer.phar dumpautoload`` を実行して作成します。
+
+
 
 .. _core-configuration-baseurl:
 
