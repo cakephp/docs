@@ -43,6 +43,8 @@ Console
 * Shell tasks that are invoked directly from the CLI no longer have their
   ``_welcome`` method invoked. They will also have the ``requested`` parameter
   set now.
+* ``Shell::err()`` will now apply the 'error' style to text. The default
+  styling is red text.
 
 Request
 =======
