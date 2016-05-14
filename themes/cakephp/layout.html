@@ -160,7 +160,7 @@
 
 				<div class="col-sm-6 col-xs-6">
 					<div class="navbar-right">
-						<button class="btn-menu" data-toggle="modal" data-target="#menumodal">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
 							<i class="fa fa-bars toggle-modal"></i>
 						</button>
 					</div>
@@ -260,7 +260,6 @@
 				</div>
 			</div>
 		</section>
-
 	</header>
 
 	{# Responsive grey bar navigation. This is outside of header so it scrolls with the page. #}
@@ -268,20 +267,30 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-xs-6 text-center">
-					<button class="btn btn-b btn-nav" data-toggle="modal" data-target="#cookbook"><strong>Nav</strong></button>
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
 				</div>
-				{#
-				Figure out how to display the modal content.
-				It should contain the version and language pickers.
-				#}
 
 				<div class="col-sm-6 col-xs-6 text-center">
-					<button class="btn btn-b btn-nav" data-toggle="modal" data-target="#collapse"><strong>Table of Contents</strong></button>
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
 				</div>
-				{# Figure out how to re-use the table of contents here. #}
 			</div>
 		</div>
 	</section>
+
+	{# modal used in mobile responsive views #}
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modal-header">{# header text injected via js #}</h4>
+				</div>
+				<div class="modal-body">{# body is injected via js #}</div>
+			</div>
+		</div>
+	</div>
 {% endblock -%}
 
 {%- block content %}
@@ -380,6 +389,7 @@
 		<div class="row col-p30">
 			<div class="col-sm-12 col-md-3">
 				<div class="footer-widget t-footer">
+					{# Hidden as it is not done
 					<form class="form" method="post" action="http://my.cakephp.org/login">
 						<h4>My CakePHP</h4>
 						<div class="col-md-12 p0 form-user">
@@ -390,13 +400,16 @@
 						<div class="col-md-4  col-xs-6 p0 pull-right">
 							<button type="submit" class=" btn-user">Login</button>
 						</div>
+						#}
 
 						<div class="col-md-8 col-xs-6 p0 register">
+							{# Hide the SSO form for now.
 							<label><input type="checkbox">Remember me</label>
 							<p>
 								<a href="http://my.cakephp.org/users/reset_password">Forgot your password?</a>
 								<br>New user?<a href="http://my.cakephp.org/join"> Register!</a>
 							</p>
+							#}
 							<a href="https://www.openhub.net/p/cakephp">
 								<img src="{{ pathto('_static/open-hub.png', 1) }}">
 							</a>
@@ -406,7 +419,9 @@
 								</a>
 							</div>
 						</div>
+					{#
 					</form>
+					#}
 				</div>
 			</div>
 
