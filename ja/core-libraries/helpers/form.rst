@@ -756,6 +756,11 @@ HTML 属性などもオプションとして設定可能です。ここでは
   ここより先のデフォルトを変更するには
   :php:meth:`FormHelper::inputDefaults()` が使えます。
 
+* ``$opsions['maxlength']`` ``input`` フィールドの ``maxlength`` 属性に指定した値をセットするために
+  使用します。このキーを省略して、 input タイプが ``text``, ``textarea``, ``email``, ``tel``, ``url``,
+  または ``search`` で、データベースのフィールドの定義が ``decimal``, ``time`` または ``datetime``
+  以外の場合、フィールドの length オプションが使用されます。
+
 GET フォーム入力
 ----------------
 
