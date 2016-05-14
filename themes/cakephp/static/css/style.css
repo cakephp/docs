@@ -175,81 +175,6 @@ button:active  {
 	    transition: all .4s ease-in;
 	}
 
-
-
-	/* Background images */
-	.bg-img {
-		position: relative;
-	 	-webkit-backface-visibility: visible !important;
-	 	background-repeat: no-repeat;
-	 	background-position: 50% 0; 
-		background-size: cover;
-		background-attachment: fixed;
-	}
-
-	@media (min-width:768px) {
-		.bg-img.fixed,
-		.stellar { background-attachment: fixed; }
-	}
-
-	/* Background images path */
-	.bg01 { 
-		background-image:url('../images/slider/slide-1.jpg'); 
-		position: relative;
-	    background-repeat: no-repeat;
-	    background-position: center top;
-	    background-size: cover;
-	    background-attachment: fixed;
-	}
-
-	.bg11 { 
-		background-image:url('../images/bg/cakefest.jpg'); 
-		position: relative;
-	    background-repeat: no-repeat;
-	    background-position: center top;
-	    background-size: cover;
-	    background-attachment: fixed;
-	}
-
-
-
-	.bg02 { background-image:url('../images/bg/recipe.jpg'); }
-	.bg03 { background-image:url('../images/demo/bg03.jpg'); }
-	.bg04 { background-image:url('../images/demo/bg04.jpg'); }
-	.bg05 { background-image:url('../images/demo/bg05.jpg'); }
-	.bg06 { background-image:url('../images/demo/bg06.jpg'); }
-	.bg07 { background-image:url('../images/demo/bg07.jpg'); }
-	.bg08 { background-image:url('../images/demo/bg08.jpg'); }
-	.bg09 { background-image:url('../images/demo/bg09.jpg'); }
-	.bg10 { background-image:url('../images/demo/bg10.jpg'); }
-	
-	.bg12 { background-image:url('../images/demo/bg12.jpg'); }
-	.bg13 { background-image:url('../images/demo/bg13.jpg'); }
-	.bg14 { background-image:url('../images/demo/bg14.jpg'); }
-	.bg15 { background-image:url('../images/demo/bg15.jpg'); }
-	.bg16 { background-image:url('../images/demo/bg16.jpg'); }
-	.bg17 { background-image:url('../images/demo/bg17.jpg'); }
-	.bg18 { background-image:url('../images/demo/bg18.jpg'); }
-	.bg19 { background-image:url('../images/demo/bg19.jpg'); }
-
-
-	.bg-team1 { background-image:url('../images/demo/team1.jpg'); }
-	.bg-team2 { background-image:url('../images/demo/team2.jpg'); }
-	.bg-team3 { background-image:url('../images/demo/team3.jpg'); }
-	.bg-team4 { background-image:url('../images/demo/team4.jpg'); }
-	.bg-team5 { background-image:url('../images/demo/team5.jpg'); }
-	.bg-team6 { background-image:url('../images/demo/team6.jpg'); }
-
-
-
-	/* Background Patterns */
-	.bg-pattern {
-		background-position:left top;
-		background-repeat:repeat;
-	}
-	.bg30 { background-image: url('../images/patterns/19.png'); }
-
-
 	/* Background layer */
 	.bg-overlay {
 		position: absolute;
@@ -2572,52 +2497,6 @@ button:active  {
 	.table td {
 		padding:12px !important;
 	}
-
-
-	/* Panels */
-	.panel-group .panel { border-radius:0; }
-	.panel {
-		background-color: transparent;
-		border:none;
-		box-shadow:none;
-		border-radius:0;
-
-		text-align: center;
-    	text-transform: uppercase;
-	}
-	.panel-heading {
-		padding:7px 0;
-		border-bottom:0;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-	}
-	.panel-title {
-		font-family: 'Raleway', sans-serif;
-		color:#666670;
-		font-size:15px;
-	}
-	.panel-title:hover a,
-	.panel-title:focus a { color:#888892; }
-
-	.panel-title .fa { 
-		margin-right:8px; 
-		-webkit-transition:all 0.3s ease-out; transition:all 0.3s ease-out;
-	}
-	.panel-title .fa.upside-down {
-		-webkit-transform:rotateZ(270deg); -ms-transform:rotateZ(270deg); transform:rotateZ(270deg);
-		-webkit-transition:all 0.3s ease-out; transition:all 0.3s ease-out;
-	}
-
-	.panel-title .fa.upside-stop {
-		-webkit-transform:rotateZ(0deg); -ms-transform:rotateZ(0deg); transform:rotateZ(0deg);
-		-webkit-transition:all 0.3s ease-out; transition:all 0.3s ease-out;
-	}
-
-	.panel-group 
-	.panel-heading + .panel-collapse > .panel-body, 
-	.panel-group .panel-heading + .panel-collapse > .list-group { border-top:none; }
-
-	.panel-body { padding:10px; }
 
 
 	/* Tabs */
@@ -5326,26 +5205,24 @@ header {
 
     -webkit-transition: all .0s ease-out;
     transition: all .0s ease-out;
-} 
-
-.navbar-nav>li>.dropdown-menu {
-	margin-top: 0;
-	border-top-left-radius: 2px; 
-	border-top-right-radius: 2px; 
 }
 
-.nav>li>a:hover, .nav>li>a:focus {
+.navbar-nav > li > .dropdown-menu {
+	margin-top: 0;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
 	text-decoration: none;
     background-color: #bdbdb5;
 }
 
-.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
 	background-color: #bdbdb5;
-}
-
-#cookbook {
-	padding-top: 160px;
-	padding-bottom: 80px;
 }
 
 .nav-btn {
@@ -5367,7 +5244,7 @@ header {
 }
 
 
-.title-modal-cookbook {
+.modal-title-cookbook {
     font-size: 18px;
     letter-spacing: 0.04em;
     color: #363638;
@@ -5378,9 +5255,6 @@ header {
     margin-bottom: 0px;
 }
 
-.title-modal-cookbook span {
-	color: #363638;
-}
 
 .form-cook-modal {
 	margin-top: 8px;
@@ -5420,7 +5294,7 @@ header {
     font-size: 38px;
     background: transparent;
     padding: 8px 8px;
-    color: #FDFDFD;
+	color: #363638;
     margin-right: -17px;
     opacity: 1;
 }

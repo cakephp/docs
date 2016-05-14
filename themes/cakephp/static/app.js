@@ -140,16 +140,37 @@ App.InlineSearch = (function () {
 // Responsive modal window menus.
 App.ResponsiveMenus = (function () {
   function init() {
-    $('#btn-toc').on('show.bs.modal', function (event) {
+    $('#modal').on('show.bs.modal', function (event) {
       var modal = $(this);
-      var contents = $('.page-contents').html();
+      var button = $(event.relatedTarget);
+      var id = button.attr('id');
+      var contents, title;
+      if (id == 'btn-toc') {
+        title = 'Table of Contents';
+        contents = $('#sidebar-navigation').html();
+      }
+      if (id == 'btn-nav') {
+        title = 'Navigation';
+        contents = $('#nav-cook').html();
+      }
+      if (id == 'btn-menu') {
+        title = 'Menu';
+        contents = $('.navbar-right').html();
+      }
       modal.find('.modal-body').html(contents);
-    });
+      modal.find('.modal-title-cookbook').text(title);
 
-    $('#btn-nav').on('show.bs.modal', function (event) {
-    });
-
-    $('#btn-menu').on('show.bs.modal', function (event) {
+      // Bind click events for sub menus.
+      modal.find('li').on('click', function() {
+        var el = $(this),
+          menu = el.find('.submenu, .megamenu');
+        // No menu, bail
+        if (menu.length == 0) {
+          return;
+        }
+        menu.toggle();
+        return false;
+      });
     });
   }
   return {

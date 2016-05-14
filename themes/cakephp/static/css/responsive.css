@@ -13,8 +13,8 @@
 	}
 
 	.navbar-right {
-	float: right!important;
-    margin-right: -15px;
+		float: right!important;
+		margin-right: -15px;
 	}
 
 	.title-home h3 {
@@ -300,13 +300,9 @@
     	margin-top: 30px;
 	}
 
-	.fa-menu-title {
-		font-size: 17px;
-	    display: block;
-	    padding-bottom: 8px;
-	}
-
-	.icon-social, .icon-irc, .icon-social-q {
+	.icon-social,
+	.icon-irc,
+	.icon-social-q {
 		margin-bottom: 30px;
 	}
 
@@ -467,4 +463,57 @@
 		font-size: 12px;
 		    padding: 5px 5px !important;
 	}
+}
+
+/* Site menu in modal window */
+#modal .menu {
+	float: none;
+}
+#modal .menu li {
+	float: none;
+	display: block;
+	width: 100%;
+	margin-bottom: 1em;
+}
+#modal .menu > li {
+	background: #aaabac;
+	border-bottom: 2px solid #aaabac;
+}
+#modal .menu > li > a {
+	color: #363638;
+	font-weight: bold;
+}
+#modal .menu a {
+	color: #667;
+	padding: 10px;
+}
+#modal .menu-title {
+	padding: 2px 0 0 10px;
+	color: #363637;
+}
+#modal .megamenu,
+#modal .submenu .submenu,
+#modal .submenu {
+	margin: 2px 2px 0 2px;
+	padding: 0;
+	background: #F1F1F1;
+	min-width: auto;
+	width: auto;
+	top: 0;
+	left: 0;
+	position: relative;
+	z-index: auto;
+}
+#modal .megamenu-list {
+	padding-top: 5px;
+}
+
+#modal .col-3 {
+	padding: 0;
+	width: 100%;
+	border-bottom: 2px solid #aaabac;
+	margin-bottom: 0;
+}
+#modal .col-3:last-child {
+	border-bottom: 0;
 }
