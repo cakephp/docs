@@ -137,6 +137,26 @@ App.InlineSearch = (function () {
   };
 })();
 
+// Responsive modal window menus.
+App.ResponsiveMenus = (function () {
+  function init() {
+    $('#btn-toc').on('show.bs.modal', function (event) {
+      var modal = $(this);
+      var contents = $('.page-contents').html();
+      modal.find('.modal-body').html(contents);
+    });
+
+    $('#btn-nav').on('show.bs.modal', function (event) {
+    });
+
+    $('#btn-menu').on('show.bs.modal', function (event) {
+    });
+  }
+  return {
+    init: init
+  };
+}());
+
 
 // http://stackoverflow.com/questions/967096/using-jquery-to-test-if-an-input-has-focus
 jQuery.extend(jQuery.expr[':'], {
@@ -365,3 +385,4 @@ $(document).ready(function(){
 
 $(document).ready(App.Book.init);
 $(document).ready(App.InlineSearch.init);
+$(document).ready(App.ResponsiveMenus.init);
