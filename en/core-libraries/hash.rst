@@ -78,7 +78,7 @@ Attribute Matching Types
     supported. Use ``get()`` when you want exactly one value out of an array. If
     a matching path is not found the default value will be returned.
 
-.. php:staticmethod:: extract(array\ArrayAccess $data, $path)
+.. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
     ``Hash::extract()`` supports all expression, and matcher components of
     :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays
