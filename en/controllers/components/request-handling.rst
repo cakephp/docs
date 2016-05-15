@@ -57,7 +57,7 @@ the client and its request.
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter()
+            public function beforeFilter(Event $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html)

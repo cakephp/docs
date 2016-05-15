@@ -1030,7 +1030,7 @@ join の条件も条件の配列と同じように表現できます。 ::
                     'c.article_id = articles.id'
                 ]
             ],
-        ], ['a.created' => 'datetime', 'c.moderated' => 'boolean']);
+        ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
 
 手動で join を作成する際、配列による条件を使うなら、join 条件内の各列ごとにデータ型を渡す必要があります。
 join 条件のデータ型を渡すことで、ORM はデータの型を SQL へと正しく変換できるのです。

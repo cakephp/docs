@@ -670,6 +670,16 @@ order to use them in your controllers. As you'll see in the :doc:`/controllers`
 and :doc:`/views` sections there are better ways you add custom logic to your
 application.
 
+.. _additional-class-paths:
+
+Additional Class Paths
+======================
+
+.. _loading-configuration-files:
+
+Loading Configuration Files
+---------------------------
+
 .. meta::
     :title lang=ja: Configuration
     :keywords lang=ja: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web

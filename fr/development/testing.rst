@@ -999,9 +999,14 @@ tests ne vont pas être en échec à cause d'un token non présent::
         $this->post('/posts/add', ['title' => 'News excitante!']);
     }
 
+Il est aussi important d'activer debug dans les tests qui utilisent les tokens
+pour éviter que le SecurityComponent pense que le token debug est utilisé dans
+un environnement non-debug.
+
 .. versionadded:: 3.1.2
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
     ajoutées dans la version 3.1.2.
+
 
 Méthodes d'Assertion
 --------------------

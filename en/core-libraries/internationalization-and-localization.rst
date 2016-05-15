@@ -102,10 +102,14 @@ the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
 Setting the Default Locale
 --------------------------
 
-The default locale can be set in your **config/bootstrap.php** folder by using
-the following line::
+The default locale can be set in your **config/app.php** file by setting
+``App.defaultLocale``::
 
-    ini_set('intl.default_locale', 'fr_FR');
+    'App' => [
+        ...
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        ...
+    ]
 
 This will control several aspects of your application, including the default
 translations language, the date format, number format and currency whenever any

@@ -11,8 +11,9 @@ D'abord il est important de comprendre quelques terminologies.
 localisée. Le terme *localisation* se réfère à l'adaptation qu'a une application
 de répondre aux besoins d'une langue (ou culture) spécifique (par ex: un
 "locale"). L'internationalisation et la localisation sont souvent abrégées en
-respectivement i18n et l10n; 18 et 10 sont le nombre de caractères entre le
-premier et le dernier caractère.
+respectivement i18n et l10n; 18 et 10 correspondent au nombre de caractères
+entre le premier et le dernier caractère respectivement pour
+internationalisation et localisation.
 
 Internationaliser Votre Application
 ===================================
@@ -106,10 +107,14 @@ plus.
 Définir la Locale par Défaut
 ----------------------------
 
-La ``locale`` par défaut se détermine dans le fichier **config/bootstrap.php**
-via::
+La ``locale`` par défaut se détermine dans le fichier **config/app.php**
+en définissant ``App.defaultLocale``::
 
-    ini_set('intl.default_locale', 'fr_FR');
+    'App' => [
+        ...
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        ...
+    ]
 
 Cela permet de contrôler plusieurs aspects de votre application, incluant la
 langue de traduction par défaut, le format des dates, des nombres, et devises
@@ -578,11 +583,12 @@ la locale et utiliser les bonnes classes::
     echo Number::format(524.23); // Displays 524,23
 
 Assurez vous de lire les sections :doc:`/core-libraries/time` et
-:doc:`/core-libraries/number` pour en apprendre plus sur les options de formatage.
+:doc:`/core-libraries/number` pour en apprendre plus sur les options de
+formatage.
 
-Par défaut, les dates renvoyées par l'ORM utilisent la classe ``Cake\I18n\Time``,
-donc leur l'affichage direct dans votre application sera affecté par le
-changement de la locale.
+Par défaut, les dates renvoyées par l'ORM utilisent la classe
+``Cake\I18n\Time``, donc leur affichage direct dans votre application sera
+affecté par le changement de la locale.
 
 .. _parsing-localized-dates:
 
@@ -622,7 +628,7 @@ définira automatiquement la locale en se basant sur l'utilisateur actuel::
 
 Le ``LocaleSelectorFilter`` utilisera l'entête ``Accept-Language`` pour définir
 automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
-l'option de liste de locale pour limiter quelles locales seront utilisées
+l'option de liste de locale pour limiter les locales pouvant être utilisées
 automatiquement.
 
 .. meta::

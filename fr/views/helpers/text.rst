@@ -14,7 +14,7 @@ longues étendues de texte.
 Lier les Adresses Email
 =======================
 
-.. php:method:: autoLinkEmails(string $text, array $options=[])
+.. php:method:: autoLinkEmails(string $text, array $options = [])
 
 Ajoute les liens aux adresses email bien formées dans $text, selon toutes
 les options définies dans ``$options`` (regardez
@@ -35,7 +35,7 @@ Cette méthode échappe automatiquement ces inputs. Utilisez l'option
 Lier les URLs
 =============
 
-.. php:method:: autoLinkUrls(string $text, array $options=[])
+.. php:method:: autoLinkUrls(string $text, array $options = [])
 
 De même que dans ``autoLinkEmails()``, seule cette méthode cherche les
 chaînes de caractères qui commence par https, http, ftp, ou nntp et
@@ -47,7 +47,7 @@ Cette méthode échappe automatiquement son input. Utilisez l'option
 Lier à la fois les URLs et les Adresses Email
 =============================================
 
-.. php:method:: autoLink(string $text, array $options=[])
+.. php:method:: autoLink(string $text, array $options = [])
 
 Exécute la fonctionnalité dans les deux ``autoLinkUrls()`` et
 ``autoLinkEmails()`` sur le ``$text`` fourni. Tous les URLs et emails

@@ -13,7 +13,7 @@ Regardez la section :ref:`aliasing-helpers` pour voir comment faire.
 Générer des URLs
 ================
 
-.. php:method:: build(mixed $url = NULL, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean $full = false)
 
 Cette méthode retourne une URL pointant vers la combinaison du controller
 et de l'action.

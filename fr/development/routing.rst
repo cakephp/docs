@@ -1196,9 +1196,9 @@ Dans la méthode de votre ``beforeFilter()``, vous pouvez appeler
 ``parseNamedParams()`` pour extraire tout paramètre nommé à partir des arguments
 passés::
 
-    public function beforeFilter()
+    public function beforeFilter(Event $event)
     {
-        parent::beforeFilter();
+        parent::beforeFilter($event);
         Router::parseNamedParams($this->request);
     }
 

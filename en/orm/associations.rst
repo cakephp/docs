@@ -491,11 +491,13 @@ Possible keys for belongsToMany association arrays include:
   convention for belongsToMany join tables). By default this table
   name will be used to load the Table instance for the join/pivot table.
 - **foreignKey**: the name of the foreign key found in the current
-  model. This is especially handy if you need to define multiple
+  model or list in case of composite foreign keys.
+  This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
   underscored, singular name of the current model, suffixed with '\_id'.
 - **targetForeignKey**: the name of the foreign key found in the target
-  model. The default value for this key is the underscored, singular name of
+  model or list in case of composite foreign keys.
+  The default value for this key is the underscored, singular name of
   the target model, suffixed with '\_id'.
 - **conditions**: an array of find() compatible conditions.  If you have
   conditions on an associated table, you should use a 'through' model, and
