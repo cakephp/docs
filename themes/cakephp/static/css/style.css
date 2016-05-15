@@ -717,7 +717,7 @@ button:active  {
 /* Hamburger menu on mobile */
 .btn-menu {
     background: transparent;
-    padding: 0px 0 9px 10px;
+    padding: 0px 0 9px 15px;
     border: none;
 }
 .toggle-modal {
@@ -4564,33 +4564,28 @@ header {
     position: relative;
     z-index: 99;
 }
-#wrap .tt-input,
-#wrap input[type="search"] {
+#wrap .tt-input {
 	height: 60px;
-    font-size: 24px;
+    font-size: 16px;
     display: inline-block;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     border: none;
     outline: none;
     color: white;
-    padding: 3px;
-    padding-right: 60px;
-    padding-left: 21px;
-    width: 0px;
+    padding: 3px 40px 3px 21px;
+    width: 0;
     position: absolute;
     top: 0;
     right: 0;
 	left: 0;
     background: none;
     z-index: 3;
-    transition: width .2s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+    transition: width .2s cubic-bezier(0.000, 0.795, 0.000, 1.000),
+				left .2s cubic-bezier(0.000, 0.795, 0.000, 1.000);
     cursor: pointer;
 }
-#wrap .tt-input:focus,
-#wrap input[type="search"]:focus {
-	left: -640px; /* 60px less than width so icon is in box */
-  width: 700px;
+#wrap .tt-input:focus {
   z-index: 1;
   cursor: text;
   background-color: #b8343b;
