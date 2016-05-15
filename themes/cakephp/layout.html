@@ -179,17 +179,20 @@
 			<div class="container-fluid ">
 				<div class="row ">
 					<div class="col-md-12 back-book">
-						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0">
-							 <h2><span class="glyph_range icon-submenu icon-submenu-cook">B</span>CakePHP 3.2 Red Velvet <strong>Cookbook</strong></h2>
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm">
+							<h2>
+								<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+								CakePHP 3.2 Red Velvet <strong>Cookbook</strong>
+							</h2>
 						</div>
 
-						<div class="col-md-4 ">
+						<div class="col-md-4 hidden-sm">
 							<form class="search" action="{{ pathto('search') }}" method="get">
 								<input type="hidden" name="check_keywords" value="yes" />
 								<input type="hidden" name="area" value="default" />
 
 								<div class="col-md-10 p0">
-									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='CookBook Search' />
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
 								</div>
 								<div class="col-md-2 p0 search-cook">
 									<button type="submit">
@@ -402,8 +405,11 @@
 						</div>
 						#}
 
+						{# Remove this div when the SSO form works. #}
+						<div class="col-md-12">
+
+						{# Hide the SSO form for now.
 						<div class="col-md-8 col-xs-6 p0 register">
-							{# Hide the SSO form for now.
 							<label><input type="checkbox">Remember me</label>
 							<p>
 								<a href="http://my.cakephp.org/users/reset_password">Forgot your password?</a>
@@ -426,26 +432,27 @@
 			</div>
 
 			<div class="col-sm-12 col-md-9">
-				<div class="col-sm-3">
+				<div class="col-md-3 col-sm-4">
 					<ul class="footer-menu">
 						{% include 'menu/footer-documentation.html' %}
 					</ul>
 				</div>
 
-				<div class="col-sm-3">
+				<div class="col-md-3 col-sm-4">
 					<ul class="footer-menu">
 						{% include 'menu/community.html' %}
 					</ul>
 				</div>
 
-				<div class="col-sm-3">
+				<div class="col-md-3 col-sm-4">
 					<ul class="footer-menu">
 						{% include 'menu/help.html' %}
 					</ul>
 				</div>
 
-				{# Marketplace is not done
-				<div class="col-sm-3">
+				{# Marketplace is not done.
+				When it is the colums will need to be adjusted.
+				<div class="col-md-3">
 					<ul class="footer-menu">
 						{% include 'menu/marketplace.html' %}
 					</ul>

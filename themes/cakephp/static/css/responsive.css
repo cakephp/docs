@@ -509,7 +509,6 @@
 #modal .megamenu-list {
 	padding-top: 5px;
 }
-
 #modal .col-3 {
 	padding: 0;
 	width: 100%;
@@ -519,3 +518,39 @@
 #modal .col-3:last-child {
 	border-bottom: 0;
 }
+
+/* Book nav in modal menu */
+#modal .back-book:hover,
+#modal .back-book {
+	background: transparent;
+}
+#modal .back-book h6,
+#modal .back-book h2 {
+	color: #363638;
+}
+#modal .t-language h6 {
+	text-align: left;
+	color: #363638;
+}
+#modal .navbar-nav {
+	float: none;
+}
+#modal .dropdown-toggle {
+	display: inline-block;
+	position: static;
+}
+#modal .dropdown .fa-chevron-down {
+	display: none;
+}
+#modal .dropdown-menu {
+	float: none;
+	display: inline-block;
+	position: static;
+	background: transparent;
+	box-shadow: none;
+}
+#modal .dropdown-menu li {
+	float: none;
+	display: inline-block
+}
+
