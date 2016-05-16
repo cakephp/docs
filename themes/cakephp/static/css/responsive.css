@@ -333,6 +333,10 @@
 	text-align: left;
 	color: #363638;
 }
+#modal .search,
+#modal .dropdown .fa-chevron-down {
+	display: none;
+}
 #modal .navbar-nav {
 	float: none;
 }
@@ -340,12 +344,9 @@
 	display: inline-block;
 	position: static;
 }
-#modal .dropdown .fa-chevron-down {
-	display: none;
-}
 #modal .dropdown-menu {
 	float: none;
-	display: inline-block;
+	display: inline;
 	position: static;
 	background: transparent;
 	box-shadow: none;
