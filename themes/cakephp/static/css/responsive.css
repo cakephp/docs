@@ -274,6 +274,9 @@
 	width: 100%;
 	margin-bottom: 1em;
 }
+#modal .menu .fa-chevron-down {
+	display: none;
+}
 #modal .menu > li {
 	background: #aaabac;
 	border-bottom: 2px solid #aaabac;
@@ -281,6 +284,7 @@
 #modal .menu > li > a {
 	color: #363638;
 	font-weight: bold;
+	display: block;
 }
 #modal .menu a {
 	color: #667;

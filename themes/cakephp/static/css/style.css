@@ -96,7 +96,7 @@ ul {
     list-style: disc outside;
 }
 ul ul {
-    margin: 9px 0 9px 16px;
+    margin: 0 0 0 16px;
     padding: 0;
 }
 a {
@@ -4212,6 +4212,10 @@ header {
 #wrap input::-webkit-input-placeholder {
   color:#363637;
 }
+/* Search results should be narrower in the responsive header search */
+#wrap .tt-menu {
+	width: 100%;
+}
 
 
 .icon-social {
@@ -4324,7 +4328,7 @@ header {
     background: transparent;
 }
 .search-cook span {
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .t-language h6{
@@ -4455,7 +4459,7 @@ header {
     background: #363637;
     padding: 5px 0px 4px;
     position: fixed;
-    z-index: 9999;
+    z-index: 90; /* Behind header */
 }
 #improve-slideout:hover {
   right: 180px;
