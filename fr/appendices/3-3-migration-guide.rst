@@ -45,6 +45,8 @@ Console
 * Les Shell tasks qui sont appelées directement à partir du CLI n'appellent plus
   la méthode ``_welcome``. Ils vont maintenant aussi avoir le paramètre
   ``requested`` défini.
+* ``Shell::err()`` va maintenant appliquer le style 'error' au texte. Le style
+  par défaut est le texte rouge.
 
 Request
 =======
