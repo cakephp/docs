@@ -435,6 +435,48 @@ to the snapshot of your plugin.
 Be aware that when you bake a snapshot, it is automatically added to the phinx
 log table as migrated.
 
+Generating a diff between two database states
+=============================================
+
+.. versionadded:: cakephp/migrations 1.6.0
+
+You can generate a migrations file that will group all the differences between
+two database states using the ``migration_diff`` bake template. To do so you can
+use the following command::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations
+
+In order to have a point of comparison from your current database state, the
+migrations shell will generate, after each ``migrate`` or ``rollback`` call, a
+"dump" file. The dump file is a file containing the full schema state of your
+database at a given point in time.
+
+Once a dump file is generated, every modifications you do directly in your
+database management system will be added to the migration file generated when
+you call the ``bake migration_diff`` command.
+
+By default, the diff will be created by connecting to the database defined
+in the ``default`` connection configuration.
+If you need to bake a diff from a different datasource, you can use the
+``--connection`` option::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
+
+If you want to use the diff feature on an application that already has a
+migrations history, you need to manually create the dump file that will be used
+as comparison::
+
+    $ bin/cake migrations dump
+
+The database state must the same as it would be if you just migrated all your
+migrations before you create a dump file.
+Once the dump file is generated, you can start doing changes in your database
+and use the ``bake migration_diff`` command.
+
+.. note::
+
+    Please note that the system can not detect column rename.
+
 The commands
 ============
 
@@ -481,8 +523,8 @@ plugin. It is the reverse action of the ``migrate`` command::
     # to a specific version::
     $ bin/cake migrations rollback -t 20150103081132
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+You can also use the ``--source``, ``--connection`` and ``--plugin`` options
+just like for the ``migrate`` command.
 
 ``status`` : Migrations Status
 ------------------------------
@@ -497,8 +539,8 @@ You can also output the results as a JSON formatted string using the
 
     $ bin/cake migrations status --format json
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+You can also use the ``--source``, ``--connection`` and ``--plugin`` options
+just like for the ``migrate`` command.
 
 ``mark_migrated`` : Marking a migration as migrated
 ---------------------------------------------------
@@ -529,8 +571,8 @@ use the ``--only`` flag::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+You can also use the ``--source``, ``--connection`` and ``--plugin`` options
+just like for the ``migrate`` command.
 
 .. note::
 
@@ -595,6 +637,24 @@ To seed your database, you can use the ``seed`` subcommand::
 
 Be aware that, as opposed to migrations, seeders are not tracked, which means
 that the same seeder can be applied multiple times.
+
+``dump`` : Seeding your database
+--------------------------------
+
+The Dump command creates a file to be used with the ``migration_diff`` bake
+template::
+
+    $ bin/cake migrations dump
+
+Each generated dump file is specific to the connection it is generated from (and
+is suffixed as such). This allows the ``bake migration_diff`` command to
+properly do diff in case your application is dealing with multiple database,
+possibly from different database vendors.
+
+Dump files are created in the same directory as your migrations files.
+
+You can also use the ``--source``, ``--connection`` and ``--plugin`` options
+just like for the ``migrate`` command.
 
 Using Migrations In Plugins
 ===========================
