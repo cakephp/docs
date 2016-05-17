@@ -80,7 +80,7 @@ Les Types d'Attribut Correspondants
 |                                | à l'intérieur de ``...``.                  |
 +--------------------------------+--------------------------------------------+
 
-.. php:staticmethod:: get(array $data, $path, $default = null)
+.. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` est une version simplifiée de ``extract()``, elle ne supporte
     que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``
@@ -88,14 +88,15 @@ Les Types d'Attribut Correspondants
     voulez exactement une valeur sortie d'un tableau. Si un chemin correspondant
     n'est pas trouvé, la valeur par défaut sera retournée.
 
-.. php:staticmethod:: extract(array $data, $path)
+.. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
     ``Hash::extract()`` supporte toutes les expressions, les components
     matcher de la :ref:`hash-path-syntax`. Vous pouvez utiliser l'extract pour
-    récupérer les données à partir des tableaux, le long des chemins
-    arbitraires rapidement sans avoir à parcourir les structures de données.
-    A la place, vous utilisez les expressions de chemin pour qualifier
-    les éléments que vous souhaitez retourner::
+    récupérer les données à partir des tableaux, ou bien un objet implémentant
+    l'interface ``ArrayAccess`` avec des chemins arbitraires rapidement sans
+    avoir à parcourir les structures de données. A la place, vous utilisez les
+    expressions de chemin pour qualifier les éléments que vous souhaitez
+    retourner::
 
         // Utilisation habituelle:
         $users = [

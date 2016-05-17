@@ -82,8 +82,8 @@ Attribute Matching Types
 
     ``Hash::extract()`` supports all expression, and matcher components of
     :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays
-    or object implementing ``ArrayAccess`` interface, along arbitrary paths 
-    quickly without having to loop through the data structures. Instead you 
+    or object implementing ``ArrayAccess`` interface, along arbitrary paths
+    quickly without having to loop through the data structures. Instead you
     use path expressions to qualify which elements you want returned ::
 
         // Common Usage:
