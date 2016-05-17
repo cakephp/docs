@@ -68,19 +68,20 @@ Hash パス構文
 |                                | 要素に絞り込む。                           |
 +--------------------------------+--------------------------------------------+
 
-.. php:staticmethod:: get(array $data, $path, $default = null)
+.. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` は ``extract()`` のシンプル版で、直接的に指定するパス式のみがサポートされます。
     ``{n}`` や ``{s}`` 、マッチャーを使ったパスはサポートされません。
     配列から１つの値だけを取り出したい場合に ``get()`` を使ってください。
     もしマッチするパスが見つからない場合、デフォルト値が返ります。
 
-.. php:staticmethod:: extract(array $data, $path)
+.. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
     ``Hash::extract()`` は :ref:`hash-path-syntax` にあるすべての式とマッチャーを
-    サポートします。extract を使うことで、配列から好きなパスに沿ったデータを手早く
-    取り出すことができます。もはやデータ構造をループする必要はありません。
-    その代わりに欲しい要素を絞り込むパス式を使うのです。 ::
+    サポートします。extract を使うことで、配列もしくは ``ArrayAccess`` インターフェースを
+    実装したオブジェクトから好きなパスに沿ったデータを手早く取り出すことができます。
+    もはやデータ構造をループする必要はありません。その代わりに欲しい要素を絞り込むパス式を
+    使うのです。 ::
 
         // 普通の使い方:
         $users = [
