@@ -11,7 +11,7 @@ CakePHP のモデルを作成することで、データベースとやりとり
 
 CakePHP のモデルクラスのファイルは、 ``Table`` オブジェクトと ``Entity`` オブジェクトに分離して存在します。 ``Table`` オブジェクトは、特定のテーブルに格納されているエンティティの集合にアクセスし、
 ``src/Model/Table`` の中に行きます。``src/Model/Table/ArticlesTable.php`` というファイルを作って保存します。
-ファイルの中身全体は次のようになります::
+ファイルの中身全体は次のようになります。 ::
 
     // src/Model/Table/ArticlesTable.php
     
@@ -43,9 +43,9 @@ CakePHP は自動的に、このTableオブジェクトは ArticlesController �
 
 .. note::
 
-    もし、すでに:doc:`Part 1 of the Blog Tutorial
+    もし、すでに:doc:`ブログチュートリアルのパート1
     </tutorials-and-examples/blog/blog>` を完了していて ``articles`` テーブルをブログ用のデータベースに作成してあれば、
-    CakePHPのbakeコンソールを活用して ``ArticlesTable`` モデルを作成することができます。
+    CakePHPのbakeコンソールを活用して ``ArticlesTable`` モデルを作成することができます。 ::
 
             bin/cake bake model Articles
 
@@ -70,7 +70,7 @@ Articles コントローラの作成
 アプリケーションの中のひとつの関数か、インターフェイスをあらわしています。
 例えば、ユーザが www.example.com/articles/index (www.example.com/articles/ と同じです)
 をリクエストした場合、投稿記事の一覧が表示されると期待するでしょう。
-このアクションのコードは次のようになります::
+このアクションのコードは次のようになります。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -105,9 +105,9 @@ www.example.com/articles/index というリクエストで、そのロジック�
 
 .. note::
 
-    もし、すでに:doc:`Part 1 of the Blog Tutorial
+    もし、すでに:doc:`ブログチュートリアルのパート1
     </tutorials-and-examples/blog/blog>` を完了していて ``articles`` テーブルをブログ用のデータベースに作成してあれば、
-    CakePHPのbakeコンソールを活用して ``ArticlesController`` クラスを作成することができます。
+    CakePHPのbakeコンソールを活用して ``ArticlesController`` クラスを作成することができます。 ::
 
         bin/cake bake controller Articles
 
@@ -185,7 +185,7 @@ CakePHP のリバースルーティング機能を活用することができま
 クリックすると、CakePHP は、そのアクションはまだ定義されていません、という表示を出します。
 もしそういう表示が出ない場合には、何かおかしくなってしまったか、もうすでにあなたが
 その定義作業をしてしまったから（仕事がハヤイ！）か、のどちらかです。
-そうでないなら、これから ``ArticlesController`` の中に作ってみましょう::
+そうでないなら、これから ``ArticlesController`` の中に作ってみましょう。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -216,8 +216,8 @@ URL を通して渡されます。ユーザが、 ``/articles/view/3`` とリク
 「3」という値が ``$id`` として渡されます。
 
 ユーザーが実在するレコードにアクセスすることを保証するために少しだけエラーチェックを行います。
-Articlesテーブルに対して``get()``を用いるとき、存在するレコードにアクセスしています。
-もしリクエスト記事がデータベスに存在しない場合、もしくはidがfalseの場合、``get()`` functionは ``NotFoundException`` を送出します。
+Articlesテーブルに対して ``get()`` を用いるとき、存在するレコードにアクセスしています。
+もしリクエスト記事がデータベスに存在しない場合、もしくはidがfalseの場合、 ``get()`` 関数は ``NotFoundException`` を送出します。
 
 では、新しい「view」アクション用のビューを作って、 ``src/Template/Articles/view.ctp`` というファイルで保存しましょう。
 
@@ -285,8 +285,8 @@ Articlesテーブルに対して``get()``を用いるとき、存在するレコ
 
 .. note::
 
-    :doc:`/controllers/components/flash` Componentを使うコントローラで読み込む必要があります。
-    必要不可欠なら、``AppController`` で読み込むようにしてください。
+    :doc:`/controllers/components/flash` コンポーネントを使うコントローラで読み込む必要があります。
+    必要不可欠なら、 ``AppController`` で読み込むようにしてください。
 
 ``add()`` アクションの動作は次のとおりです: もし、リクエストの HTTP メソッドが
 POST なら、Articles モデルを使ってデータの保存を試みます。
@@ -305,7 +305,7 @@ POST なら、Articles モデルを使ってデータの保存を試みます。
 
 FlashComponent の ``success()`` および ``error()`` メソッドを使って
 セッション変数にメッセージをセットします。
-これらのメソッドはPHPの `マジックメソッド <http://php.net/manual/en/language.oop5.overloading.php#object.call>` を利用しています。
+これらのメソッドはPHPの `マジックメソッド <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_ を利用しています。
 Flashメッセージはリダイレクト後のページに表示されます。
 レイアウトでは ``<?= $this->Flash->render() ?>`` を用いてメッセージを表示し、
 対応するセッション変数を削除します。コントローラの :php:meth:`Cake\\Controller\\Controller::redirect`
@@ -366,13 +366,13 @@ POST で送るフォームを構築している、と解釈されます。
 hiddenのinput要素の出力においては、CSRF/フォーム改ざん防止が有効です。
 
 さて少し戻って、 ``src/Template/Articles/index.ctp`` のビューで「Add Article」というリンクを
-新しく表示するように編集しましょう。 ``<table>`` の前に、以下の行を追加してください::
+新しく表示するように編集しましょう。 ``<table>`` の前に、以下の行を追加してください。 ::
 
     <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
 
 バリデーション要件について、どうやって CakePHP に指示するのだろう、と思ったかもしれません。
 バリデーションのルールは、モデルの中で定義することができます。
-Article モデルを見直して、幾つか修正してみましょう::
+Article モデルを見直して、幾つか修正してみましょう。 ::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -417,7 +417,7 @@ Article モデルを見直して、幾つか修正してみましょう::
 それではさっそく投稿記事の編集ができるように作業をしましょう。
 もう CakePHP プロのあなたは、パターンを見つけ出したでしょうか。
 アクションをつくり、それからビューを作る、というパターンです。
-``ArticlesController`` の ``edit()`` アクションはこんな形になります::
+``ArticlesController`` の ``edit()`` アクションはこんな形になります。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -442,7 +442,7 @@ Article モデルを見直して、幾つか修正してみましょう::
 ``NotFoundException`` を送出して CakePHP の ErrorHandler に処理を委ねます。
 
 次に、リクエストが POST か PUT であるかをチェックします。もしリクエストが POST か PUT なら、
-``patchEntity()`` methodを用いてPOST データを記事エンティティに更新します。
+``patchEntity()`` メソッドを用いてPOST データを記事エンティティに更新します。
 最終的にテーブルオブジェクトを用いて、エンティティを保存したり、退けてバリデーションエラーを表示したりします。
 
 edit ビューは以下のようになるでしょう:
@@ -504,7 +504,7 @@ edit ビューは以下のようになるでしょう:
 ==============
 
 次に、ユーザが投稿記事を削除できるようにする機能を作りましょう。
-``ArticlesController`` の ``delete()`` アクションを作るところから始めます::
+``ArticlesController`` の ``delete()`` アクションを作るところから始めます。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -521,7 +521,7 @@ edit ビューは以下のようになるでしょう:
 
 このロジックは、``$id`` で指定された記事を削除し、 ``$this->Flash->success()``
 を使って、ユーザに確認メッセージを表示し、それから ``/articles`` にリダイレクトします。
-ユーザーが GET リクエストを用いて削除を試みようとすると、``allowMethod()`` が例外を投げます。
+ユーザーが GET リクエストを用いて削除を試みようとすると、 ``allowMethod()`` が例外を投げます。
 捕捉されない例外は CakePHP の例外ハンドラーによって捕まえられ、気の利いたエラーページが
 表示されます。多くの組み込み :doc:`Exceptions </development/errors>` があり、アプリケーションが
 生成することを必要とするであろう様々な HTTP エラーを指し示すのに使われます。
@@ -603,7 +603,7 @@ CakePHP のルーティングは、 ``config/routes.php`` の中にあります�
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 この行は、「/」という URL をデフォルトの CakePHP のホームページに接続します。
-これを、自分のコントローラに接続させるために、次のような行を追加してください::
+これを、自分のコントローラに接続させるために、次のような行を追加してください。
 
 .. code-block:: php
 

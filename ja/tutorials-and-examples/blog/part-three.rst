@@ -13,21 +13,21 @@
 マイグレーション プラグイン
 ===========================
 
-データベース内にテーブルを作るのに`migrations plugin <https://github.com/cakephp/migrations>`を利用します。もしarticlesテーブルが既にデータベースに存在する場合、削除してください。
+データベース内にテーブルを作るのに `migrations プラグイン <https://github.com/cakephp/migrations>`_ を利用します。もしarticlesテーブルが既にデータベースに存在する場合、削除してください。
 
 ``composer.json`` ファイルを開いてください。通常の場合、 ``require`` の下に既にマイグレーションプラグインが記述されているでしょう。
-もし無かったら以下を実行して追加してください::
+もし無かったら以下を実行して追加してください。 ::
 
     composer require cakephp/migrations:~1.0
 
 マイグレーションプラグインはアプリケーションの ``plugins`` フォルダに存在します。
-そして、 アプリケーションの``bootstrap.php`` ファイルに　``Plugin::load('Migrations');`` を追加してください。
+そして、 アプリケーションの ``bootstrap.php`` ファイルに ``Plugin::load('Migrations');`` を追加してください。
 
-プラグインを読み込んだら、次のコマンドを実行してマイグレーションファイルを作成しましょう::
+プラグインを読み込んだら、次のコマンドを実行してマイグレーションファイルを作成しましょう。 ::
 
     bin/cake bake migration CreateArticles title:string body:text category_id:integer created modified
 
-``/config/Migrations`` フォルダにマイグレーションファイルが以下のように生成されます::
+``/config/Migrations`` フォルダにマイグレーションファイルが以下のように生成されます。 ::
 
     <?php
 
@@ -64,11 +64,11 @@
         }
     }
 
-``categories`` テーブルも同じようにコマンドを実行して作成してください。もしフィールドに対して特定の長さを指定する場合、カッコを使って以下のように設定することができます::
+``categories`` テーブルも同じようにコマンドを実行して作成してください。もしフィールドに対して特定の長さを指定する場合、カッコを使って以下のように設定することができます。 ::
 
     bin/cake bake migration CreateCategories parent_id:integer lft:integer[10] rght:integer[10] name:string[100] description:string created modified
 
-これによって、``config/Migrations`` 内に以下が作成されます::
+これによって、 ``config/Migrations`` 内に以下が作成されます。 ::
 
     <?php
 
@@ -119,7 +119,7 @@
 ではマイグレーションファイルが作成されたので、テーブルを作成する前にこれを編集しましょう。
 ``parent_id`` フィールドを ``'null' => false`` を ``'null' => true`` に変更してください。トップレベルのカテゴリでは ``parent_id`` はnullになるからです。
 
-テーブルを作る際は以下のコマンドを実行してください::
+テーブルを作る際は以下のコマンドを実行してください。 ::
 
     bin/cake migrations migrate
 
@@ -131,7 +131,7 @@
 
 既にパート2でファイル(Tables, ControllersおよびTemplates)ができあがっているはずです。カテゴリへ参照を追記していきましょう。
 
-投稿記事とカテゴリとを結びつける必要があります。``src/Model/Table/ArticlesTable.php`` ファイルを開き、以下のように追加してください::
+投稿記事とカテゴリとを結びつける必要があります。 ``src/Model/Table/ArticlesTable.php`` ファイルを開き、以下のように追加してください。 ::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -154,13 +154,13 @@
 Categories のスケルトンコードを作成する
 =======================================
 
-bakeコマンドを利用してすべてのファイルを作成しましょう::
+bakeコマンドを利用してすべてのファイルを作成しましょう。 ::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
     bin/cake bake template Categories
 
-代わりに、1行でbakeすることもできます::
+代わりに、1行でbakeすることもできます。 ::
 
     bin/cake bake all Categories
 
@@ -169,7 +169,7 @@ bakeツールによって、すぐにすべてのファイルが作成されま�
 .. note::
     Windowsを利用している場合は / の代わりに \\ を使用してください。
 
-``src/Template/Categories/add.ctp`` および ``src/Template/Categories/edit.ctp`` を以下のように修正してください::
+``src/Template/Categories/add.ctp`` および ``src/Template/Categories/edit.ctp`` を以下のように修正してください。 ::
 
     echo $this->Form->input('parent_id', [
         'options' => $parentCategories,
@@ -184,20 +184,20 @@ Tree ビヘイビアを Categories テーブルに設置する
 <http://www.sitepoint.com/hierarchical-data-database-2/>`_ を利用しています。
 MPTTツリー構造は読み込みに最適化されているので、ときにブログのような読み込みが重いアプリケーションに適しています。
 
-``src/Model/Table/CategoriesTable.php`` ファイルの　``initialize()`` メソッド内で、Treeビヘイビアが Categoriesテーブルと紐づけられていることがお分かりいただけるでしょう。
+``src/Model/Table/CategoriesTable.php`` ファイルの ``initialize()`` メソッド内で、Treeビヘイビアが Categoriesテーブルと紐づけられていることがお分かりいただけるでしょう。
 
-bakeは ``lft`` 列と ``rght`` 列が存在するあらゆるテーブルにこのビヘイビアを追加します::
+bakeは ``lft`` 列と ``rght`` 列が存在するあらゆるテーブルにこのビヘイビアを追加します。 ::
 
     $this->addBehavior('Tree');
 
 紐づけられたTreeビヘイビアによって、カテゴリの順を並べ直すような機能にアクセスすることが可能になります。すぐにわかるでしょう。
 
-しかし今は、カテゴリの中にあるaddとeditのテンプレートファイル内の次のinputを削除てください::
+しかし今は、カテゴリの中にあるaddとeditのテンプレートファイル内の次のinputを削除てください。 ::
 
     echo $this->Form->input('lft');
     echo $this->Form->input('rght');
 
-さらに、Categoriesテーブルモデルの ``lft`` 列と ``rght`` 列のバリデーターの中のrequirePresenseを無効にするか削除してください::
+さらに、Categoriesテーブルモデルの ``lft`` 列と ``rght`` 列のバリデーターの中のrequirePresenseを無効にするか削除してください。 ::
 
     public function validationDefault(Validator $validator)
     {
@@ -218,14 +218,14 @@ bakeは ``lft`` 列と ``rght`` 列が存在するあらゆるテーブルにこ
 
 カテゴリが保存される際に、これらのフィールドはTreeビヘイビアによって自動的に管理されます。
 
-ブラウザを用いて、``/yoursite/categories/add`` コントローラアクションからいくつかの新しいカテゴリを登録してください。
+ブラウザを用いて、 ``/yoursite/categories/add`` コントローラアクションからいくつかの新しいカテゴリを登録してください。
 
 Treeビヘイビアでカテゴリを並べ替える
 ====================================
 
 categoriesのindexテンプレートファイルでは、categoriesを一覧したり並べ替えたりすることができます。
 
-``CategoriesController.php`` のindexメソッドを編集して、ツリーでカテゴリを並べ替えるために ``moveUp()`` および ``moveDown()`` メソッドを追加してください::
+``CategoriesController.php`` のindexメソッドを編集して、ツリーでカテゴリを並べ替えるために ``moveUp()`` および ``moveDown()`` メソッドを追加してください。 ::
 
     class CategoriesController extends AppController
     {
@@ -262,7 +262,7 @@ categoriesのindexテンプレートファイルでは、categoriesを一覧し�
         }
     }
 
-``src/Template/Categories/index.ctp`` を以下のように置き換えてください::
+``src/Template/Categories/index.ctp`` を以下のように置き換えてください。 ::
 
     <div class="actions large-2 medium-3 columns">
         <h3><?= __('Actions') ?></h3>
@@ -312,7 +312,7 @@ Articles コントローラを編集する
 ===============================
 
 ``ArticlesController`` ではすべてのカテゴリを一覧できます。
-投稿記事を作成あるいは編集するときに、カテゴリを選ぶことができるようになります::
+投稿記事を作成あるいは編集するときに、カテゴリを選ぶことができるようになります。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -349,7 +349,7 @@ Articles コントローラを編集する
 Articles テンプレートを編集する
 ===============================
 
-投稿記事のaddファイルは以下のようになっているはずです::
+投稿記事のaddファイルは以下のようになっているはずです。
 
 .. code-block:: php
 
