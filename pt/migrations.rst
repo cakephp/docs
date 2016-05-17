@@ -31,8 +31,6 @@ plugins do seu arquivo **config/bootstrap.php**::
 
     $ bin/cake plugin load Migrations
 
-Or you can load the plugin by editing your **config/bootstrap.php** file and
-adding the following statement::
 Ou você pode carregar o plugin editando seu arquivo **config/bootstrap.php** e adicionando a linha:
 
     Plugin::load('Migrations');
@@ -42,14 +40,15 @@ Adicionalmente, você irá precisar configurar o banco de dados padrão da sua a
 no arquivo **config/app.php** como explicado em :ref:`Database Configuration section 
 <database-configuration>`.
 
-Overview
+Visão Geral
 ========
 
-A migration is basically a single PHP file that describes the changes to operate
-to the database. A migration file can create or drop tables, add or remove
-columns, create indexes and even insert data into your database.
+Uma migração é basicamente um único arquivo PHP que descreve as mudanças a 
+serem feitas no banco de dados. Um arquivo de migração pode criar ou excluir 
+tabelas, adicionar ou remover colunas, criar índices e até mesmo inserir 
+dados em seu banco de dados.
 
-Here's an example of a migration::
+Aqui um exemplo de migração:
 
     <?php
     use Migrations\AbstractMigration;
@@ -89,6 +88,8 @@ Here's an example of a migration::
 
 This migration will add a table to your database named ``products`` with the
 following column definitions:
+Esta migração irá adicionar uma tabela chamada ``products`` ao banco de dados com as
+seguintes colunas:
 
 - ``id`` column of type ``integer`` as primary key
 - ``name`` column of type ``string``
@@ -98,7 +99,7 @@ following column definitions:
 
 .. tip::
 
-    The primary key column named ``id`` will be added **implicitly**.
+    A coluna de chave primária ``id`` será adicionada **implicitamente**.
 
 .. note::
 
