@@ -234,7 +234,6 @@ $(document).ready(function(){
       desktopMenu: function() {
 
         menu.children("li").show(0);
-        menu.children(".toggle-menu").hide(0);
 
         // Mobile touch for tablets > 768px
         if (isMobileDevice) {
@@ -262,7 +261,7 @@ $(document).ready(function(){
               menu.find(".submenu, .megamenu").fadeOut(300);
             }
           });
-          
+
         // Desktop hover effect
         } else {
           menu.find('li').on({
@@ -277,26 +276,23 @@ $(document).ready(function(){
       },
 
       mobileMenu: function() {
-        var $children = menu.children("li"),
-          $toggle = menu.children("li.toggle-menu"),
-          $notToggle = $children.not("toggle-menu");
+        var children = menu.children("li"),
+          toggle = menu.children("li.toggle-menu");
 
-        $notToggle.hide(0);
-        $toggle.show(0).on("click", function(){
+        toggle.show(0).on("click", function(){
 
           if ($children.is(":hidden")){
-            $children.slideDown(300);
+            children.slideDown(300);
           } else {
-            $notToggle.slideUp(300);
-            $toggle.show(0);
+            toggle.show(0);
           }
         });
 
         // Click (touch) effect
         menu.find("li").not(".toggle-menu").each(function(){
-          var $this = $(this);
-          if ($this.children(".submenu, .megamenu").length) {
-            $this.children("a").on("click", function(e){
+          var el = $(this);
+          if (el.children(".submenu, .megamenu").length) {
+            el.children("a").on("click", function(e){
               if ($(this).attr('href') === '#') {
                 e.preventDefault();
                 e.stopPropagation();
