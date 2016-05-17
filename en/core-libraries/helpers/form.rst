@@ -699,7 +699,8 @@ HTML attributes. The following will cover the options specific to
           'after' => '--after--',
           'between' => '--between---',
           'separator' => '--separator--',
-          'options' => array('1', '2')
+          'options' => array('1', '2'),
+          'type' => 'radio'
       ));
 
   Output:
