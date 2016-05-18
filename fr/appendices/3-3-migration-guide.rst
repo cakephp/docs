@@ -77,6 +77,8 @@ ORM
   ``jsonSerialize()`` sera appelée sur toutes les entities associées. Ceci vous
   donne plus de flexibilité et de contrôle sur les propriétés à exposer dans les
   représentations JSON de vos entities.
+* ``Table::newEntity()`` et ``Table::patchEntity()`` vont maintenant lever une
+  exception quand une association inconnue est dans la clé 'associated'.
 
 Validation
 ==========
