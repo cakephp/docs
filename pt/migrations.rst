@@ -121,11 +121,6 @@ O comando seguinte irá executar um rollback na migração e irá excluir a tabe
 Criando Migrations
 ===================
 
-Migration files are stored in the **config/Migrations** directory of your
-application. The name of the migration files are prefixed with the date in
-which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**.
-Here are examples of migration filenames:
-
 Arquivos de migração são armazeados no diretório **config/Migrations** da 
 sua aplicação. O nome dos arquivos de migração têm como prefixo a data 
 em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui são exemplos de arquivos de migração:
@@ -133,13 +128,11 @@ em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui são
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
 
-The easiest way to create a migrations file is by using the
+A maneira mais fácil de criar um arquivo de migrações é usando o 
 :doc:`/bake/usage` CLI command.
 
-Please make sure you read the official
-`Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>`_
-in order to know the complete list of methods you can use for writing migration
-files.
+Por favor, leia `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>` 
+a fim de conhecer a lista completa dos métodos que você pode usar para escrever os arquivos de migração.
 
 .. note::
 
