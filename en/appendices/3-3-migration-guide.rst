@@ -71,6 +71,8 @@ ORM
   ``jsonSerialize()`` method will be invoked on all associated entities. This
   gives you more flexibility and control on which properties are exposed in JSON
   representations of your entities.
+* ``Table::newEntity()`` and ``Table::patchEntity()`` will now raise an
+  exception when an unknown association is in the 'associated' key.
 
 Validation
 ==========
