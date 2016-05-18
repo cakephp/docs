@@ -441,8 +441,8 @@ Generating a diff between two database states
 .. versionadded:: cakephp/migrations 1.6.0
 
 You can generate a migrations file that will group all the differences between
-two database states using the ``migration_diff`` bake template. To do so you can
-use the following command::
+two database states using the ``migration_diff`` bake template. To do so, you
+can use the following command::
 
     $ bin/cake bake migration_diff NameOfTheMigrations
 
@@ -456,7 +456,7 @@ database management system will be added to the migration file generated when
 you call the ``bake migration_diff`` command.
 
 By default, the diff will be created by connecting to the database defined
-in the ``default`` connection configuration.
+in the ``default`` Connection configuration.
 If you need to bake a diff from a different datasource, you can use the
 ``--connection`` option::
 
@@ -468,10 +468,10 @@ as comparison::
 
     $ bin/cake migrations dump
 
-The database state must the same as it would be if you just migrated all your
-migrations before you create a dump file.
+The database state must be the same as it would be if you just migrated all
+your migrations before you create a dump file.
 Once the dump file is generated, you can start doing changes in your database
-and use the ``bake migration_diff`` command.
+and use the ``bake migration_diff`` command whenever you see fit.
 
 .. note::
 
@@ -638,17 +638,17 @@ To seed your database, you can use the ``seed`` subcommand::
 Be aware that, as opposed to migrations, seeders are not tracked, which means
 that the same seeder can be applied multiple times.
 
-``dump`` : Seeding your database
---------------------------------
+``dump`` : Generating a dump file for the diff baking feature
+-------------------------------------------------------------
 
 The Dump command creates a file to be used with the ``migration_diff`` bake
 template::
 
     $ bin/cake migrations dump
 
-Each generated dump file is specific to the connection it is generated from (and
+Each generated dump file is specific to the Connection it is generated from (and
 is suffixed as such). This allows the ``bake migration_diff`` command to
-properly do diff in case your application is dealing with multiple database,
+properly compute diff in case your application is dealing with multiple database
 possibly from different database vendors.
 
 Dump files are created in the same directory as your migrations files.
