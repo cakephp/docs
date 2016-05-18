@@ -31,7 +31,7 @@ plugins do seu arquivo **config/bootstrap.php**::
 
     $ bin/cake plugin load Migrations
 
-Ou você pode carregar o plugin editando seu arquivo **config/bootstrap.php** e adicionando a linha:
+Ou você pode carregar o plugin editando seu arquivo **config/bootstrap.php** e adicionando a linha::
 
     Plugin::load('Migrations');
 
@@ -41,14 +41,14 @@ no arquivo **config/app.php** como explicado em :ref:`Database Configuration sec
 <database-configuration>`.
 
 Visão Geral
-========
+============
 
 Uma migração é basicamente um único arquivo PHP que descreve as mudanças a 
 serem feitas no banco de dados. Um arquivo de migração pode criar ou excluir 
 tabelas, adicionar ou remover colunas, criar índices e até mesmo inserir 
 dados em seu banco de dados.
 
-Aqui um exemplo de migração:
+Aqui um exemplo de migração::
 
     <?php
     use Migrations\AbstractMigration;
@@ -89,7 +89,7 @@ Aqui um exemplo de migração:
 This migration will add a table to your database named ``products`` with the
 following column definitions:
 Esta migração irá adicionar uma tabela chamada ``products`` ao banco de dados com as
-seguintes colunas:
+seguintes colunas::
 
 - ``id`` column of type ``integer`` as primary key
 - ``name`` column of type ``string``
@@ -110,11 +110,11 @@ seguintes colunas:
     operação rollback seja executada.
 
 Com o arquivo criado na pasta **config/MIgrations**, você será capaz de executar 
-o comando abaixo para executar as migrações no seu banco de dados: 
+o comando abaixo para executar as migrações no seu banco de dados::
 
     bin/cake migrations migrate
 
-O comando seguinte irá executar um rollback na migração e irá excluir a tabela recém criada:
+O comando seguinte irá executar um rollback na migração e irá excluir a tabela recém criada::
 
     bin/cake migrations rollback
 
@@ -123,7 +123,7 @@ Criando Migrations
 
 Arquivos de migração são armazeados no diretório **config/Migrations** da 
 sua aplicação. O nome dos arquivos de migração têm como prefixo a data 
-em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui são exemplos de arquivos de migração:
+em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui estão exemplos de arquivos de migração::
 
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
