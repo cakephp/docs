@@ -103,20 +103,18 @@ seguintes colunas:
 
 .. note::
 
-    Note that this file describes how the database will look **after**
-    applying the migration. At this point no ``products`` table exists in
-    your database, we have merely created a file that is able to both create
-    the ``products`` table with the specified columns as well as drop it
-    when a ``rollback`` operation of the migration is performed.
+    Note que este arquivo descreve como o banco de dados deve ser **após** a
+    aplicação da migração. Neste ponto, a tabela ``products``ainda não existe 
+    no banco de dados, nós apenas criamos um arquivo que é capaz de criar a 
+    tabela ``products`` com seus devidos campos ou excluir a tabela caso uma 
+    operação rollback seja executada.
 
-Once the file has been created in the **config/Migrations** folder, you will be
-able to execute the following ``migrations`` command to create the table in
-your database::
+Com o arquivo criado na pasta **config/MIgrations**, você será capaz de executar 
+o comando abaixo para executar as migrações no seu banco de dados: 
 
     bin/cake migrations migrate
 
-The following ``migrations`` command will perform a ``rollback`` and drop the
-table from your database::
+O comando seguinte irá executar um rollback na migração e irá excluir a tabela recém criada:
 
     bin/cake migrations rollback
 
