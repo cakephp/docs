@@ -118,13 +118,17 @@ O comando seguinte irá executar um rollback na migração e irá excluir a tabe
 
     bin/cake migrations rollback
 
-Creating Migrations
+Criando Migrations
 ===================
 
 Migration files are stored in the **config/Migrations** directory of your
 application. The name of the migration files are prefixed with the date in
 which they were created, in the format **YYYYMMDDHHMMSS_MigrationName.php**.
 Here are examples of migration filenames:
+
+Arquivos de migração são armazeados no diretório **config/Migrations** da 
+sua aplicação. O nome dos arquivos de migração têm como prefixo a data 
+em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui são exemplos de arquivos de migração:
 
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
