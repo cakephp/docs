@@ -459,12 +459,12 @@ différences entre deux états de base de données en utilisant le template bake
 
 Pour avoir un point de comparaison avec l'état actuel de votre base de données,
 le shell migrations va générer, après chaque appel de ``migrate`` ou
-``rollback`` un fichier "dump". Ce fichier dump est fichier qui contient
+``rollback`` un fichier "dump". Ce fichier dump est un fichier qui contient
 l'ensemble de l'état de votre base de données à un point précis dans le temps.
 
 Quand un fichier dump a été généré, toutes les modifications que vous ferez
-directement dans votre SGBD sera ajouté au fichier de migration qui sera généré
-quand vous appelerez la commande ``bake migration_diff``.
+directement dans votre SGBD seront ajoutées au fichier de migration qui sera
+généré quand vous appelerez la commande ``bake migration_diff``.
 
 Par défaut, le diff sera fait en se connectant à la base de données définie
 dans votre configuration de Connection ``default``.
@@ -483,7 +483,7 @@ comparaison::
 L'état de votre base de données devra être le même que si vous aviez migré tous
 vos fichiers de migrations avant de créer le fichier dump.
 Une fois que le fichier dump est créé, vous pouvez opérer des changements dans
-votre base de données et utilisez la commande ``bake migration_diff`` quand
+votre base de données et utiliser la commande ``bake migration_diff`` quand
 vous voulez
 
 .. note::
@@ -678,7 +678,7 @@ La commande Dump crée un fichier qui sera utilisé avec le template bake
 Chaque fichier dump généré est spécifique à la _Connection_ par laquelle il a
 été générée (le nom du fichier est suffixé par ce nom). Cela permet à la 
 commande ``bake migration_diff`` de calculer le diff correctement dans le cas
-où votre application gérerait plusieurs base de données (qui pourraient être 
+où votre application gérerait plusieurs bases de données (qui pourraient être
 basées sur plusieurs SGDB.
 
 Les fichiers de dump sont créés dans le même dossier que vos fichiers de
