@@ -719,7 +719,8 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
         'after' => '--après--',
         'between' => '--entre---',
         'separator' => '--séparateur--',
-        'options' => array('1', '2')
+        'options' => array('1', '2'),
+        'type' => 'radio'
     ));
 
   Affichera:
