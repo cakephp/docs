@@ -86,8 +86,6 @@ Aqui um exemplo de migração::
         }
     }
 
-This migration will add a table to your database named ``products`` with the
-following column definitions:
 Esta migração irá adicionar uma tabela chamada ``products`` ao banco de dados com as
 seguintes colunas::
 
@@ -129,36 +127,34 @@ em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui est�
 * 20160210133047_AddRatingToProducts.php
 
 A maneira mais fácil de criar um arquivo de migrações é usando o 
-:doc:`/bake/usage` CLI command.
+:doc:`/bake/usage` a linha de comando.
 
 Por favor, leia `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>` 
 a fim de conhecer a lista completa dos métodos que você pode usar para escrever os arquivos de migração.
 
 .. note::
 
-    When using the ``bake`` option, you can still modify the migration before
-    running them if so desired.
+    Ao gerar as migrações através do ``bake`` você ainda pode alterá-las antes da sua execução, caso seja necessário.
 
-Syntax
-------
+Sintaxe
+--------
 
-The ``bake`` command syntax follows the form below::
+A sintaxe do ``bake`` para a geração de migrações segue o formato abaixo::
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
 When using ``bake`` to create tables, add columns and so on, to your
 database, you will usually provide two things:
+Quando utilizar o ``bake`` para criar as migrações, você normalmente precisará informar os seguintes dados::
 
-* the name of the migration you will generate (``CreateProducts`` in our
-  example)
-* the columns of the table that will be added or removed in the migration
-  (``name:string description:text created modified`` in our example)
+* o nome da migração que você irá gerar (``CreateProducts`` por exemplo)
+* as colunas da tabela que serão adicionadas ou removidas na migração 
+(``name:string description:text created modified`` no nosso caso)
 
-Due to the conventions, not all schema changes can be performed via these shell
-commands.
+Devido às convenções, nem todas as alterações de schema podem ser realizadas através destes comandos.
 
-Additionally you can create an empty migrations file if you want full control
-over what needs to be executed, by ommiting to specify a columns definition::
+Além disso, você pode criar um arquivo de migração vazio caso deseje ter um 
+controle total do que precisa ser executado. Para isto, apenas omita a definição das colunas::
 
     $ bin/cake migrations create MyCustomMigration
 
