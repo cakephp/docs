@@ -447,9 +447,9 @@ can use the following command::
     $ bin/cake bake migration_diff NameOfTheMigrations
 
 In order to have a point of comparison from your current database state, the
-migrations shell will generate, after each ``migrate`` or ``rollback`` call, a
-"dump" file. The dump file is a file containing the full schema state of your
-database at a given point in time.
+migrations shell will generate a "dump" file after each ``migrate`` or
+``rollback`` call. The dump file is a file containing the full schema state of
+your database at a given point in time.
 
 Once a dump file is generated, every modifications you do directly in your
 database management system will be added to the migration file generated when
