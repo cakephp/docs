@@ -441,19 +441,19 @@ Generating a diff between two database states
 .. versionadded:: cakephp/migrations 1.6.0
 
 You can generate a migrations file that will group all the differences between
-two database states using the ``migration_diff`` bake template. To do so, you
+two database states using the ``migration_diff`` bake template. To do so, you
 can use the following command::
 
     $ bin/cake bake migration_diff NameOfTheMigrations
 
 In order to have a point of comparison from your current database state, the
-migrations shell will generate, after each ``migrate`` or ``rollback`` call, a
+migrations shell will generate, after each ``migrate`` or ``rollback`` call, a
 "dump" file. The dump file is a file containing the full schema state of your
 database at a given point in time.
 
 Once a dump file is generated, every modifications you do directly in your
 database management system will be added to the migration file generated when
-you call the ``bake migration_diff`` command.
+you call the ``bake migration_diff`` command.
 
 By default, the diff will be created by connecting to the database defined
 in the ``default`` Connection configuration.
