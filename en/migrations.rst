@@ -456,7 +456,7 @@ database management system will be added to the migration file generated when
 you call the ``bake migration_diff`` command.
 
 By default, the diff will be created by connecting to the database defined
-in the ``default`` Connection configuration.
+in the ``default`` connection configuration.
 If you need to bake a diff from a different datasource, you can use the
 ``--connection`` option::
 
