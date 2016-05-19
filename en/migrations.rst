@@ -475,7 +475,7 @@ and use the ``bake migration_diff`` command whenever you see fit.
 
 .. note::
 
-    Please note that the system can not detect column rename.
+    The migrations shell can not detect column renamings.
 
 The commands
 ============
