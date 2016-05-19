@@ -85,6 +85,9 @@ Validation
 
 * ``Validator::requirePresence()`` accepte maintenant une liste de champs. Cela
   vous permet de définir de façon plus concise les champs qui sont nécessaires.
+* ``Validator::requirePresence()``, ``Validator::allowEmpty()`` et
+  ``Validator::notEmpty()`` acceptent maintenant une liste de champs. Ceci vous
+  permet de définir de façon plus concise les champs qui sont requis.
 
 Debugging Functions
 ===================
