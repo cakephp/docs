@@ -28,7 +28,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   grands objets ou des éléments qui sont rarement écrits fonctionne
   bien dans les fichiers.
 * ``ApcCache`` Le cache APC utilise l'extension PHP
-  `APC <http://php.net/apc>`_. Cette extension utilise la mémoire partagée du
+  `APCu <http://php.net/apcu>`_. Cette extension utilise la mémoire partagée du
   serveur Web pour stocker les objets. Cela le rend très rapide, et capable de
   fournir les fonctionnalités atomiques en lecture/écriture.
 * ``Wincache`` Utilise l'extension `Wincache <http://php.net/wincache>`_.

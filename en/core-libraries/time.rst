@@ -214,17 +214,22 @@ The default locale in which dates are displayed when using ``nice``
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 You can, however, modify this default at runtime::
 
-    Time::$defaultLocale = 'es-ES';
+    // The same method exists on Date, FrozenDate, and FrozenTime
+    Time::setDefaultLocale('es-ES');
 
-From now on, dates will be displayed in the Spanish preferred format unless
+From now on, datetimes will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
 
 Likewise, it is possible to alter the default formatting string to be used for
 ``i18nFormat``::
 
+    // The same method exists on Date, FrozenDate and FrozenTime
     Time::setToStringFormat(\IntlDateFormatter::SHORT);
 
-    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
+    Time::setToStringFormat([
+        \IntlDateFormatter::FULL,
+        \IntlDateFormatter::SHORT
+    ]);
 
     Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 

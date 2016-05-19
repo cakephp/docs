@@ -14,6 +14,16 @@ Here's what you'll need:
    that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
+Before starting you should make sure that you have got an up to date PHP
+version:
+
+.. code-block:: bash
+
+    php -v
+
+You should at least have got installed PHP 5.5.9 (cli) or higher.
+Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
+the same version your command line interface (cli) PHP version is of.
 If you'd like to see the completed application, checkout `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
 
