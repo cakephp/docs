@@ -301,7 +301,10 @@ Further it's also possible to require a field to be present under certain
 conditions only::
 
     $validator->requirePresence('full_name', function ($context) {
-        return $context['data']['action'] === 'subscribe';
+        if (isset($context['data']['action'])) {
+            return $context['data']['action'] === 'subscribe';
+        }
+        return false;
     });
     $validator->requirePresence('email');
 
