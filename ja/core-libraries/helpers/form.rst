@@ -704,7 +704,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
           'after' => '--after--',
           'between' => '--between---',
           'separator' => '--separator--',
-          'options' => array('1', '2')
+          'options' => array('1', '2'),
+          'type' => 'radio'
       ));
 
   出力結果:
