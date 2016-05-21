@@ -267,7 +267,7 @@ Creating Scoped Clients
 =======================
 
 Having to re-type the domain name, authentication and proxy settings can become
-tedious & error prone.  To reduce the change for mistake and relieve some of the
+tedious & error prone.  To reduce the chance for mistake and relieve some of the
 tedium, you can create scoped clients::
 
     // Create a scoped client.
