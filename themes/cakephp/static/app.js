@@ -322,34 +322,6 @@ $(document).ready(function(){
     Megamenu.desktopMenu();
   }
 
-/* ********************* Vertical / Fullscreen Menu ********************* */
-  // Vertical / Fullscreen Menu Trigger
-  $('#menu-trigger').on("click",function() {
-    if ($(this).hasClass('fullscreen-trigger')) {
-      $(".fullscreen-menu-wrapper").toggleClass("on");
-    } else if ($(this).hasClass("top-menu-trigger")) {
-      $(".top-menu-wrapper").toggleClass("on");
-    } else {
-      $(".vertical-menu-wrapper").toggleClass("on");
-      $(".vertical-menu-footer").toggleClass("on");
-    }
-
-    $(this).toggleClass("menu-close");
-    return false;
-  });
-
-/* ********************* Fixed Header ********************* */
-  function fixedHeader() {
-    $(".main-header").sticky({
-      topSpacing: 0,
-      className:"menu-fixed"
-    });
-  }
-  if ((!$('.static-menu').length) && ($windowWidth > 991) && (!isMobileDevice) ) {
-    fixedHeader();
-  }
-
-
 /* **************** Hide header on scroll down *************** */
 (function() {
   // Hide Header on on scroll down
