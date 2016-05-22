@@ -164,7 +164,7 @@ dl.docutils {
     font-size: 13px;
 }
 .page-contents a {
-	color: #363637;
+    color: #363637;
 }
 .page-contents ul {
     list-style: none;
@@ -671,8 +671,8 @@ dt tt {
     font-size: 14px;
 }
 .descclassname {
-	font-weight: normal;
-	padding: 0;
+    font-weight: normal;
+    padding: 0;
 }
 
 .role .descname,
