@@ -106,7 +106,7 @@ dl.docutils {
     background: #F0F0E8;
     padding: 30px 0;
     width: auto;
-    margin-bottom: 30px;
+    margin-bottom: 30px
 }
 .offline-download strong {
     color: #363637;
@@ -138,7 +138,7 @@ dl.docutils {
     font-size: 15px;
     display: inline-block;
     text-align: center;
-    margin: 25px 5px 0;
+    margin: 25px 5px;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -671,6 +671,10 @@ dt tt {
     font-weight: normal;
     font-size: 14px;
 }
+.descclassname {
+	padding: 0;
+}
+
 .role .descname,
 .directive .descname,
 .class .descname,

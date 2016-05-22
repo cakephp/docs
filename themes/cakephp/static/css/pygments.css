@@ -1,9 +1,9 @@
 .highlight pre {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
     font-size: 1.3rem;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     overflow-x: auto;
-    padding: 10px;
+    padding: 15px 20px;
     background: #ECECE9;
     color: #222;
     line-height: 120%;
