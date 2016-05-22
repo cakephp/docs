@@ -439,9 +439,8 @@ h6:hover .headerlink {
 /* inline code */
 tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
-    font-size: 90%;
+    font-size: 105%;
     line-height: normal;
-    background: rgba(100, 100, 100, 0.10);
     padding: 0px 2px;
     color: #363637;
 }
@@ -672,6 +671,7 @@ dt tt {
     font-size: 14px;
 }
 .descclassname {
+	font-weight: normal;
 	padding: 0;
 }
 
