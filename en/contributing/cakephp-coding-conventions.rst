@@ -544,8 +544,8 @@ underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 
-Avoid empty()
-=============
+Careful when using empty()/isset()
+==================================
 
 While ``empty()`` is an easy to use function it can mask errors and cause
 unintended effects when ``'0'`` and ``0`` are used. When variables or properties
