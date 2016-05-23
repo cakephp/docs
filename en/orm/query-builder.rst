@@ -1314,6 +1314,18 @@ subqueries::
 Subqueries are accepted anywhere a query expression can be used. For example, in
 the ``select()`` and ``join()`` methods.
 
+Adding Locking Statements
+-------------------------
+
+Most relational database vendors support taking out locks when doing select
+operations. You can use the ``epilog()`` method for this::
+
+    // In MySQL
+    $query->epilog('FOR UPDATE');
+
+The ``epilog()`` method allows you to append raw SQL to the end of queries. You
+should never put raw user data into ``epilog()``.
+
 Executing Complex Queries
 -------------------------
 
