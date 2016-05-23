@@ -446,6 +446,51 @@ ajoutées au snapshot de votre plugin.
 Notez que quand vous créez un snapshot, il est automatiquement marqué dans la
 table de log de phinx comme migré.
 
+Générer un diff entre deux états de base de données
+===================================================
+
+.. versionadded:: cakephp/migrations 1.6.0
+
+Vous pouvez générer un fichier de migrations qui regroupera toutes les
+différences entre deux états de base de données en utilisant le template bake
+``migration_diff``. Pour cela, vous pouvez utiliser la commande suivante::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations
+
+Pour avoir un point de comparaison avec l'état actuel de votre base de données,
+le shell migrations va générer, après chaque appel de ``migrate`` ou
+``rollback`` un fichier "dump". Ce fichier dump est un fichier qui contient
+l'ensemble de l'état de votre base de données à un point précis dans le temps.
+
+Quand un fichier dump a été généré, toutes les modifications que vous ferez
+directement dans votre SGBD seront ajoutées au fichier de migration qui sera
+généré quand vous appelerez la commande ``bake migration_diff``.
+
+Par défaut, le diff sera fait en se connectant à la base de données définie
+dans votre configuration de Connection ``default``.
+Si vous avez besoin de faire un diff depuis une source différente, vous pouvez
+utiliser l'option ``--connection``::
+
+    $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
+
+Si vous souhaitez utiliser la fonctionnalité de diff sur une application qui
+possède déjà un historique de migrations, vous allez avoir besoin de créer le 
+fichier dump manuellement pour qu'il puisse être utilisé comme point de
+comparaison::
+
+    $ bin/cake migrations dump
+
+L'état de votre base de données devra être le même que si vous aviez migré tous
+vos fichiers de migrations avant de créer le fichier dump.
+Une fois que le fichier dump est créé, vous pouvez opérer des changements dans
+votre base de données et utiliser la commande ``bake migration_diff`` quand
+vous voulez
+
+.. note::
+
+    Veuillez noter que le système n'est pas capable de détecter les colonnes
+    renommées.
+
 Les Commandes
 =============
 
@@ -621,6 +666,26 @@ sous-commande ``seed``::
 
 Notez que, à l'opposé des migrations, les seeders ne sont pas suivies, ce qui
 signifie que le même seeder peut être appliqué plusieurs fois.
+
+``dump`` : Générer un fichier dump pour la fonctionnalité de diff
+-----------------------------------------------------------------
+
+La commande Dump crée un fichier qui sera utilisé avec le template bake
+``migration_diff``::
+
+    $ bin/cake migrations dump
+
+Chaque fichier dump généré est spécifique à la _Connection_ par laquelle il a
+été générée (le nom du fichier est suffixé par ce nom). Cela permet à la 
+commande ``bake migration_diff`` de calculer le diff correctement dans le cas
+où votre application gérerait plusieurs bases de données (qui pourraient être
+basées sur plusieurs SGDB.
+
+Les fichiers de dump sont créés dans le même dossier que vos fichiers de
+migrations.
+
+Vous pouvez aussi utiliser les options ``--source``, ``--connection`` et
+``--plugin`` comme pour la commande ``migrate``.
 
 Utiliser Migrations dans les Plugins
 ====================================

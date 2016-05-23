@@ -49,10 +49,15 @@ Nous pouvons ensuite utiliser ce nouvel helper dans une de nos commandes shell
 en l'appelant::
 
     // Avec ### de chaque côté
-    $this->helper('Heading')->output('It works!');
+    $this->helper('Heading')->output(['It works!']);
 
     // Avec ~~~~ de chaque côté
-    $this->helper('Heading')->output('It works!', '~', 4);
+    $this->helper('Heading')->output(['It works!', '~', 4]);
+
+Les helpers implémentent généralement la méthode ``output()`` qui prend un
+tableau de paramètres. Cependant, comme les helpers de Console sont des classes
+vanilla elles peuvent implémenter des méthodes supplémentaires qui prennent
+n'importe quelle forme d'argument.
 
 Helpers Fournis
 ===============

@@ -296,7 +296,10 @@ Localized プラグインは、バリデーションのための国の２文字�
 さらに、一定の条件の下でのみフィールドが存在することを求めることも可能です。 ::
 
     $validator->requirePresence('full_name', function ($context) {
-        return $context['data']['action'] === 'subscribe';
+        if (isset($context['data']['action'])) {
+            return $context['data']['action'] === 'subscribe';
+        }
+        return false;
     });
     $validator->requirePresence('email');
 
