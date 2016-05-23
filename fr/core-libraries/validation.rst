@@ -319,7 +319,10 @@ De plus il est aussi possible de demander à ce qu'un champ soit présent sous
 certaines conditions seulement::
 
     $validator->requirePresence('full_name', function ($context) {
-        return $context['data']['action'] === 'subscribe';
+        if (isset($context['data']['action'])) {
+            return $context['data']['action'] === 'subscribe';
+        }
+        return false;
     });
     $validator->requirePresence('email');
 

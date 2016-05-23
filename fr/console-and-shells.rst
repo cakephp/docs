@@ -297,7 +297,10 @@ l'OptionParser du Shell::
     {
         $parser = parent::getOptionParser();
         $parser->addSubcommand('sound', [
-            'help' => 'Execute The Sound Task.'
+            // Fournit un texte d'aide pour la liste des commandes
+            'help' => 'Execute The Sound Task.',
+            // Lie les parsers d'option.
+            'parser' => $this->Sound->getOptionParser(),
         ]);
         return $parser;
     }
