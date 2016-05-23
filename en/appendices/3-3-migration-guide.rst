@@ -13,6 +13,14 @@ Deprecations
   ``$routes->redirect()`` instead.
 * ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
   compatibility will be removed in 4.0.0
+* ``Cake\Http\Response`` has had the following methods deprecated because they
+  overlap with PSR7 interface methods:
+
+  * ``statusCode()`` use ``getStatusCode()`` instead.
+  * ``encoding()`` use ``getEncoding()`` instead.
+  * ``header()`` use ``getHeaderLine()`` instead.
+  * ``cookie()`` use ``getCookie()`` instead.
+  * ``version()`` use ``getProtocolVersion()`` instead.
 
 Behavior Changes
 ================
@@ -26,6 +34,14 @@ behavior that may effect your application:
 * ``Controller::referer()`` now consistently omits the application base path
   when generating application local URLs. Previously string URLs would have the
   base path prepended to them, while array URLs would not.
+
+Http Client is now PSR7 Compatible
+==================================
+
+``Cake\Network\Http\Client`` has been moved to ``Cake\Http\Client``. Its request
+and response objects now implement the
+`PSR7 interfaces <http://www.php-fig.org/psr/psr-7/>`__. Several methods on
+``Cake\Http\Client\Response`` are now deprecated, see above for more information.
 
 Routing
 =======
