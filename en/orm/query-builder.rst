@@ -417,14 +417,20 @@ need to specific data based on a condition.
 
 If we wished to know how many published articles are in our database, we'd need to generate the following SQL::
 
-    SELECT SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published, SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
+    SELECT
+    SUM(CASE published = 'Y' THEN 1 ELSE 0) AS number_published,
+    SUM(CASE published = 'N' THEN 1 ELSE 0) AS number_unpublished
     FROM articles GROUP BY published
 
 To do this with the query builder, we'd use the following code::
 
     $query = $articles->find();
-    $publishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'Y']), 1, 'integer');
-    $notPublishedCase = $query->newExpr()->addCase($query->newExpr()->add(['published' => 'N']), 1, 'integer');
+    $publishedCase = $query->newExpr()
+        ->addCase($query->newExpr()
+        ->add(['published' => 'Y']), 1, 'integer');
+    $notPublishedCase = $query->newExpr()
+        ->addCase($query->newExpr()
+        ->add(['published' => 'N']), 1, 'integer');
 
     $query->select([
         'number_published' => $query->func()->sum($publishedCase),
