@@ -432,9 +432,11 @@ To do this with the query builder, we'd use the following code::
     ])
     ->group('published');
 
-The ``addCase`` function can also chain together multiple statements to create ``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
+The ``addCase`` function can also chain together multiple statements to create
+``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
 
-If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population size, we could do the following::
+If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
+size, we could do the following::
 
     $query = $cities->find()
         ->where(function ($exp, $q) {
@@ -489,6 +491,58 @@ After executing those lines, your result should look similar to this::
         ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
         ...
     ]
+
+.. _format-results:
+
+Adding Calculated Fields
+------------------------
+
+After your queries, you may need to do some post-processing. If you need to add
+a few calculated fields or derived data, you can use the ``formatResults()``
+method. This is a lightweight way to map over the result sets. If you need more
+control over the process, or want to reduce results you should use
+the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
+of people, you could calculate their age with a result formatter::
+
+    // Assuming we have built the fields, conditions and containments.
+    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
+        return $results->map(function ($row) {
+            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+            return $row;
+        });
+    });
+
+As you can see in the example above, formatting callbacks will get a
+``ResultSetDecorator`` as their first argument. The second argument will be
+the Query instance the formatter was attached to. The ``$results`` argument can
+be traversed and modified as necessary.
+
+Result formatters are required to return an iterator object, which will be used
+as the return value for the query. Formatter functions are applied after all the
+Map/Reduce routines have been executed. Result formatters can be applied from
+within contained associations as well. CakePHP will ensure that your formatters
+are properly scoped. For example, doing the following would work as you may
+expect::
+
+    // In a method in the Articles table
+    $query->contain(['Authors' => function ($q) {
+        return $q->formatResults(function ($authors) {
+            return $authors->map(function ($author) {
+                $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+                return $author;
+            });
+        });
+    });
+
+    // Get results
+    $results = $query->all();
+
+    // Outputs 29
+    echo $results->first()->author->age;
+
+As seen above, the formatters attached to associated query builders are scoped
+to operate only on the data in the association. CakePHP will ensure that
+computed values are inserted into the correct entity.
 
 .. _advanced-query-conditions:
 
@@ -1178,6 +1232,7 @@ Instead, create new a query object using ``query()``::
 Generally, it is easier to delete data using entities and
 :php:meth:`~Cake\\ORM\\Table::delete()`.
 
+
 SQL Injection Prevention
 ========================
 
@@ -1264,54 +1319,3 @@ Executing SQL directly allows you to fine tune the query that will be run.
 However, doing so doesn't let you use ``contain`` or other higher level ORM
 features.
 
-.. _format-results:
-
-Adding Calculated Fields
-========================
-
-After your queries, you may need to do some post-processing. If you need to add
-a few calculated fields or derived data, you can use the ``formatResults()``
-method. This is a lightweight way to map over the result sets. If you need more
-control over the process, or want to reduce results you should use
-the :ref:`Map/Reduce <map-reduce>` feature instead. If you were querying a list
-of people, you could calculate their age with a result formatter::
-
-    // Assuming we have built the fields, conditions and containments.
-    $query->formatResults(function (\Cake\Datasource\ResultSetInterface $results) {
-        return $results->map(function ($row) {
-            $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
-            return $row;
-        });
-    });
-
-As you can see in the example above, formatting callbacks will get a
-``ResultSetDecorator`` as their first argument. The second argument will be
-the Query instance the formatter was attached to. The ``$results`` argument can
-be traversed and modified as necessary.
-
-Result formatters are required to return an iterator object, which will be used
-as the return value for the query. Formatter functions are applied after all the
-Map/Reduce routines have been executed. Result formatters can be applied from
-within contained associations as well. CakePHP will ensure that your formatters
-are properly scoped. For example, doing the following would work as you may
-expect::
-
-    // In a method in the Articles table
-    $query->contain(['Authors' => function ($q) {
-        return $q->formatResults(function ($authors) {
-            return $authors->map(function ($author) {
-                $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
-                return $author;
-            });
-        });
-    });
-
-    // Get results
-    $results = $query->all();
-
-    // Outputs 29
-    echo $results->first()->author->age;
-
-As seen above, the formatters attached to associated query builders are scoped
-to operate only on the data in the association. CakePHP will ensure that
-computed values are inserted into the correct entity.
