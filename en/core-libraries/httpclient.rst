@@ -402,7 +402,7 @@ Accessing Response Headers
 You can access headers through a few different methods. Header names are always
 treated as case-insensitive values when accessing them through methods::
 
-    // Get all the headers with array values.
+    // Get all the headers as an associative array.
     $response->getHeaders();
 
     // Get a single header as an array.
@@ -420,7 +420,7 @@ treated as case-insensitive values when accessing them through methods::
 Accessing Cookie Data
 ---------------------
 
-You can read cookies with either a few different methods depending on how much
+You can read cookies with a few different methods depending on how much
 data you need about the cookies::
 
     // Get all cookies (full data)
@@ -430,6 +430,7 @@ data you need about the cookies::
     $response->getCookie('session_id');
 
     // Get a the complete data for a single cookie
+    // includes value, expires, path, httponly, secure keys.
     $response->getCookieData('session_id');
 
     // Access the complete data for all cookies.
