@@ -991,7 +991,7 @@ GROUP BY は？ ::
     WHERE
        ((`Company`.`name` = 'Future Holdings')
        OR
-       (`Company`.`name` = 'Steel Mega Works'))
+       (`Company`.`city` = 'CA'))
     AND
        ((`Company`.`status` = 'active')
        OR (NOT (`Company`.`status` IN ('inactive', 'suspended'))))
