@@ -544,6 +544,72 @@ underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 
+Avoid empty()
+=============
+
+While ``empty()`` is an easy to use function it can mask errors and cause
+unintended effects when ``'0'`` and ``0`` are used. When variables or properties
+are already defined the usage of ``empty()`` is not recommended. When working
+with variables, it is better to rely on type-coercion to boolean instead of
+``empty()``::
+
+    function manipulate($var)
+    {
+        // not recommended, $var is already defined in the scope
+        if (empty($var)) {
+            // ...
+        }
+
+        // Use boolean type coercion
+        if (!$var) {
+            // ...
+        }
+        if ($var) {
+            // ...
+        }
+    }
+
+When dealing with defined properties you should favour ``null`` checks over
+``empty()``/``isset()`` checks::
+
+    class Thing
+    {
+        private $property; // defined
+
+        public function readProperty()
+        {
+            // not recommended as the property is defined in the class
+            if (!isset($this->property)) {
+                // ...
+            }
+            // recommended
+            if ($this->property === null) {
+
+            }
+        }
+    }
+
+When working with arrays, it is better to merge in defaults over using
+``empty()`` checks. By merging in defaults, you can ensure that required keys
+are defined::
+
+    function doWork(array $array)
+    {
+        // Merge defaults to remove need for empty checks.
+        $array += [
+            'key' => null,
+        ];
+
+        // not recommended, the key is already set
+        if (isset($array['key'])) {
+            // ...
+        }
+
+        // recommended
+        if ($array['key'] !== null) {
+            // ...
+        }
+    }
 
 .. meta::
     :title lang=en: Coding Standards
