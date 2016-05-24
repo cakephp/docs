@@ -547,15 +547,15 @@ underscore character, for example::
 Careful when using empty()/isset()
 ==================================
 
-While ``empty()`` is an easy to use function it can mask errors and cause
-unintended effects when ``'0'`` and ``0`` are used. When variables or properties
-are already defined the usage of ``empty()`` is not recommended. When working
+While ``empty()`` is an easy to use function, it can mask errors and cause
+unintended effects when ``'0'`` and ``0`` are given. When variables or properties
+are already defined, the usage of ``empty()`` is not recommended. When working
 with variables, it is better to rely on type-coercion to boolean instead of
 ``empty()``::
 
     function manipulate($var)
     {
-        // not recommended, $var is already defined in the scope
+        // Not recommended, $var is already defined in the scope
         if (empty($var)) {
             // ...
         }
@@ -574,15 +574,15 @@ When dealing with defined properties you should favour ``null`` checks over
 
     class Thing
     {
-        private $property; // defined
+        private $property; // Defined
 
         public function readProperty()
         {
-            // not recommended as the property is defined in the class
+            // Not recommended as the property is defined in the class
             if (!isset($this->property)) {
                 // ...
             }
-            // recommended
+            // Recommended
             if ($this->property === null) {
 
             }
@@ -600,12 +600,12 @@ are defined::
             'key' => null,
         ];
 
-        // not recommended, the key is already set
+        // Not recommended, the key is already set
         if (isset($array['key'])) {
             // ...
         }
 
-        // recommended
+        // Recommended
         if ($array['key'] !== null) {
             // ...
         }
