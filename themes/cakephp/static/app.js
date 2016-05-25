@@ -4,8 +4,7 @@ if (/cakephp\.org/.test(document.domain)) {
 
 App = {};
 App.config = {
-  url: 'http://localhost/cakephp/docs_search/search',
-  // url: 'http://search.cakephp.org/search',
+  url: 'http://search.cakephp.org/search',
   version: '3-0'
 };
 
