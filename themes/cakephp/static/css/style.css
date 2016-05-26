@@ -497,17 +497,11 @@ iframe {
     .megamenu.one_two {
         width: 50%;
     }
+    /* Not actually full, as we're missing some sub-menus */
     .megamenu.full {
-        width: 100%;
-        left: 0;
-    }
-    .megamenu.two_three {
-        width:66.66%;
-        left: 0;
-    }
-    .megamenu.three_four {
-        width:75%;
-        left:0;
+        /* Will need to be 100% one day */
+        width: 400px;
+        right: 0;
     }
 
     @media (min-width: 992px) and (max-width: 1199px) {
