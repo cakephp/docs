@@ -503,6 +503,9 @@ iframe {
         width: 400px;
         right: 0;
     }
+    .megamenu .fa-menu-title {
+        display: inline;
+    }
 
     @media (min-width: 992px) and (max-width: 1199px) {
         .megamenu.one_two { width: 70%; }
