@@ -1,12 +1,12 @@
-データの検証 (バリデーション)
-#############################
+データの検証
+############
 
 :doc:`データを保存する</orm/saving-data>` 前におそらくそのデータが正しく
 矛盾がないことを保証したいはずです。
 CakePHPではデータの検証には二つの段階があります:
 
 1. リクエストデータがエンティティにコンバートされる前、
-   データ型や書式まわりの検証ルールが適用されます。
+   データ型や書式まわりのバリデーションルールが適用されます。
 2. データが保存される前、ドメインまたはアプリケーションルールが適用されます。
    これらのルールはアプリケーションのデータの一貫性の保証に役立ちます。
 
@@ -15,23 +15,23 @@ CakePHPではデータの検証には二つの段階があります:
 エンティティ構築前のデータ検証
 ==============================
 
-データからエンティティを構築する時, データの検証ができます。
-データの検証ではデータの型、形状およびサイズなどを確認することができます。
+データからエンティティを構築する時、データの検証 (バリデーション) ができます。
+データのバリデーションではデータの型、形状およびサイズなどを確認することができます。
 既定ではリクエストデータがエンティティに変換される前に検証が行われます。
-もしも何らかの検証ルールが通らなかった場合、
+もしも何らかのバリデーションルールが通らなかった場合、
 返されたエンティティはエラーを含んだ状態になります。
 エラーのあるフィールドは返されたエンティティには含まれません::
 
     $article = $articles->newEntity($this->request->data);
     if ($article->errors()) {
-        // エンティティは検証を通りませんでした。
+        // エンティティ検証失敗。
     }
 
-検証が有効になっている状態でエンティティを構築すると、次のことが起こります:
+バリデーションが有効になっている状態でエンティティを構築すると、次のことが起こります:
 
 1. バリデータオブジェクトが作成されます。
-2. ``table`` および ``default`` 検証プロバイダが追加されます。
-3. 命名にそった検証メソッドが呼び出されます。たとえば ``validationDefault`` 。
+2. ``table`` および ``default`` バリデーションプロバイダが追加されます。
+3. 命名に沿ったバリデーションメソッドが呼び出されます。たとえば ``validationDefault`` 。
 4. ``Model.buildValidator`` イベントが発動します。
 5. リクエストデータが検証されます。
 6. リクエストデータがそのカラム型に対応する型に変換されます。
@@ -39,7 +39,7 @@ CakePHPではデータの検証には二つの段階があります:
 8. 正しいデータはエンティティに設定されますが、
    検証を通らなかったフィールドは除外されます。
 
-もしもリクエストデータを変換する時に検証を無効にしたければ、
+もしもリクエストデータを変換する時にバリデーションを無効にしたければ、
 ``validate`` オプションに偽を指定してください::
 
     $article = $articles->newEntity(
@@ -53,14 +53,14 @@ CakePHPではデータの検証には二つの段階があります:
         'validate' => false
     ]);
 
-既定の検証セットの作成
-======================
+既定のバリデーションセットの作成
+================================
 
-検証ルールは規約ではテーブルクラス中で定義されます。
+バリデーションルールは規約ではテーブルクラス中で定義されます。
 何のデータが検証されるかとあわせてどこで保存されるかも定義します。
 
 
-テーブル中で既定の検証オブジェクトを作るには、
+テーブル中で既定のバリデーションオブジェクトを作るには、
 ``validationDefault()`` 関数を作成します::
 
     use Cake\ORM\Table;
@@ -85,19 +85,20 @@ CakePHPではデータの検証には二つの段階があります:
         }
     }
 
-有効な検証メソッドやルールは ``Validator`` クラスによって提供され
+有効なバリデーションメソッドやルールは ``Validator`` クラスによって提供され
 :ref:`creating-validators` の節に記載されています。
 
 .. note::
 
-    検証オブジェクトは主にユーザー入力の検証用に意図されています。
+    バリデーションオブジェクトは主にユーザー入力の検証用に意図されています。
     たとえば、フォームやその他の投稿されたリクエストデータです。
 
 
-異なる検証セットの使用
-======================
+異なるバリデーションセットの使用
+================================
 
-検証を無効にすることに加えて適用させたい検証ルールを選ぶこともできます::
+バリデーションを無効にすることに加えて
+適用させたいバリデーションルールを選ぶこともできます::
 
     $article = $articles->newEntity(
         $this->request->data,
@@ -125,14 +126,14 @@ CakePHPではデータの検証には二つの段階があります:
         }
     }
 
-必要に応じていくつもの検証セットを設けることができます。
-検証ルールセットの構築についてのより多くの情報は :doc:`バリデーション
+必要に応じていくつものバリデーションセットを設けることができます。
+バリデーションルールセットの構築についてのより多くの情報は :doc:`バリデーション
 </core-libraries/validation>` を参照してください。
 
-アソシエーションに異なる検証セットを使用
-----------------------------------------
+アソシエーションに異なるバリデーションセットを使用
+--------------------------------------------------
 
-検証セットはアソシエーションごとに定義することもできます。
+バリデーションセットはアソシエーションごとに定義することもできます。
 ``newEntity()`` または ``patchEntity()`` メソッドを使用する時、
 変換されるアソシエーション各々に追加のオプションを渡すことができます::
 
@@ -144,8 +145,8 @@ CakePHPではデータの検証には二つの段階があります:
             'username' => 'マーク'
         ],
         'comments' => [
-            ['body' => '１番目のコメント'],
-            ['body' => '２番目のコメント'],
+            ['body' => '一番目のコメント'],
+            ['body' => '二番目のコメント'],
         ]
     ];
 
@@ -183,23 +184,22 @@ CakePHPではデータの検証には二つの段階があります:
         return $validator;
     }
 
-上の手順では、 ``hardened`` 検証セットを使う時には
-``default`` セット中で定義されている検証ルールも含むことになります。
+上の手順では、 ``hardened`` バリデーションセットを使う時には
+``default`` セット中で定義されているバリデーションルールも含むことになります。
 
-Validation Providers
-====================
+バリデーションプロバイダ
+========================
 
-Validation rules can use functions defined on any known providers. By default
-CakePHP sets up a few providers:
+バリデーションルールは既知のあらゆるプロバイダで定義されている関数を使うことができます。
+既定ではCakePHPはいくつかのプロバイダを設定します:
 
-1. Methods on the table class or its behaviors are available on the ``table``
-   provider.
-2. The core :php:class:`~Cake\\Validation\\Validation` class is setup as the
-   ``default`` provider.
+1. ``table`` プロバイダではテーブルクラスまたはそのビヘイビアのメソッドが有効です。
+2. コアの :php:class:`~Cake\\Validation\\Validation` クラスが
+   ``default`` プロバイダとしてセットアップされます。
 
-When a validation rule is created you can name the provider of that rule. For
-example, if your table has an ``isValidRole`` method you can use it as
-a validation rule::
+バリデーションルールを作る時に、そのルールのプロバイダ名を指定できます。
+たとえば、もしあなたのテーブルが ``isValidRole`` メソッドを持っているとすれば
+それをバリデーションルールとして使うことができます::
 
     use Cake\ORM\Table;
     use Cake\Validation\Validator;
@@ -212,7 +212,7 @@ a validation rule::
             $validator
                 ->add('role', 'validRole', [
                     'rule' => 'isValidRole',
-                    'message' => __('You need to provide a valid role'),
+                    'message' => __('有効な権限を指定する必要があります'),
                     'provider' => 'table',
                 ]);
             return $validator;
@@ -225,38 +225,39 @@ a validation rule::
 
     }
 
-You can also use closures for validation rules::
+バリデーションルールにはクロージャも使うことができます::
 
     $validator->add('name', 'myRule', [
         'rule' => function ($data, $provider) {
             if ($data > 1) {
                 return true;
             }
-            return 'Not a good value.';
+            return '適切な値ではありません。';
         }
     ]);
 
-Validation methods can return error messages when they fail. This is a simple
-way to make error messages dynamic based on the provided value.
+バリデーションメソッドは通らない時にエラーメッセージを返すことができます。
+これは渡された値に動的に基づくエラーメッセージを作るための簡単な方法です。
 
-Getting Validators From Tables
-==============================
+テーブルからのバリデータ取得
+============================
 
-Once you have created a few validation sets in your table class, you can get the
-resulting object by name::
+テーブルクラスにバリデーションセットを作成した後は、
+名前を指定して結果のオブジェクトを取得できるようになります::
 
     $defaultValidator = $usersTable->validator('default');
 
     $hardenedValidator = $usersTable->validator('hardened');
 
-Default Validator Class
-=======================
+既定のバリデータクラス
+======================
 
-As stated above, by default the validation methods receive an instance of
-``Cake\Validation\Validator``. Instead, if you want your custom validator's
-instance to be used each time, you can use table's ``$_validatorClass`` property::
+上述の通り、既定ではバリデーションメソッドは
+``Cake\Validation\Validator`` のインスタンスを受け取ります。
+そうではなくて、カスタムバリデータのインスタンスが毎回ほしいのであれば、
+テーブルの ``$_validatorClass`` プロパティを使うことができます::
 
-    // In your table class
+    // あなたのテーブルクラスの中で
     public function initialize(array $config)
     {
         $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
@@ -264,135 +265,134 @@ instance to be used each time, you can use table's ``$_validatorClass`` property
 
 .. _application-rules:
 
-Applying Application Rules
-==========================
+アプリケーションルールの適用
+============================
 
-While basic data validation is done when :ref:`request data is converted into
-entities <validating-request-data>`, many applications also have more complex
-validation that should only be applied after basic validation has completed.
+:ref:`リクエストデータがエンティティに変換される <validating-request-data>` 時、
+基本的なデータ検証が行われますが、多くのアプリケーションは
+基本的な検証が完了した後にのみ適用されるもっと複雑な検証も設けています。
 
-These types of rules are often referred to as 'domain rules' or 'application
-rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
-before entities are persisted. Some example domain rules are:
+この種のルールはしばしば‘ドメインルール’や‘アプリケーションルール’と言われます。
+CakePHPは、エンティティが保存される前に適用される‘ルールチェッカー’を通して
+これを行います。いくつかのドメインルールの例は次のようになります:
 
-* Ensuring email uniqueness
-* State transitions or workflow steps (e.g., updating an invoice's status).
-* Preventing the modification of soft deleted items.
-* Enforcing usage/rate limit caps.
+* メールアドレスの一意性の保証。
+* ステータス遷移や業務フローの手順 (たとえば、請求書のステータス更新)。
+* 論理削除されたアイテムの更新の抑制。
+* 使用量／料金の上限の強制。
 
-Domain rules are checked when calling the Table ``save()`` and ``delete()`` methods.
+ドメインルールは ``save()`` および ``delete()`` メソッドを呼ぶとチェックされます。
 
-Creating a Rules Checker
-------------------------
+ルールチェッカーの作成
+----------------------
 
-Rules checker classes are generally defined by the ``buildRules()`` method in your
-table class. Behaviors and other event subscribers can use the
-``Model.buildRules`` event to augment the rules checker for a given Table
-class::
+ルールチェッカークラスは一般にテーブルクラスの ``buildRules()``
+メソッドで定義されます。ビヘイビアや他のイベントの受け手は
+与えられたテーブルクラスのルールチェッカーを受け取るために ``Model.buildRules``
+イベントを使うことができます::
 
     use Cake\ORM\RulesChecker;
 
-    // In a table class
+    // テーブルクラスの中で
     public function buildRules(RulesChecker $rules)
     {
-        // Add a rule that is applied for create and update operations
+        // 作成および更新操作に提供されるルールを追加
         $rules->add(function ($entity, $options) {
-            // Return a boolean to indicate pass/failure
+            // 失敗／成功を示す真偽値を返す
         }, 'ruleName');
 
-        // Add a rule for create.
+        // 作成のルールを追加
         $rules->addCreate(function ($entity, $options) {
-            // Return a boolean to indicate pass/failure
+            // 失敗／成功を示す真偽値を返す
         }, 'ruleName');
 
-        // Add a rule for update
+        // 更新のルールを追加
         $rules->addUpdate(function ($entity, $options) {
-            // Return a boolean to indicate pass/failure
+            // 失敗／成功を示す真偽値を返す
         }, 'ruleName');
 
-        // Add a rule for the deleting.
+        // 削除のルールを追加
         $rules->addDelete(function ($entity, $options) {
-            // Return a boolean to indicate pass/failure
+            // 失敗／成功を示す真偽値を返す
         }, 'ruleName');
 
         return $rules;
     }
 
-Your rules functions can expect to get the Entity being checked and an array of
-options. The options array will contain ``errorField``, ``message``, and
-``repository``. The ``repository`` option will contain the table class the rules
-are attached to. Because rules accept any ``callable``, you can also use
-instance functions::
+ルールの関数はチェックされるエンティティとオプションの配列を期待します。
+オプションの配列は ``errorField`` 、 ``message`` 、そして ``repository`` を含みます。
+``repository`` オプションはルールが追加されるテーブルクラスを含みます。 
+ルールはあらゆる ``callable`` を受け取るので、インスタンス関数を使うこともできます::
 
     $rules->addCreate([$this, 'uniqueEmail'], 'uniqueEmail');
 
-or callable classes::
+または呼び出し可能なクラスも使えます::
 
     $rules->addCreate(new IsUnique(['email']), 'uniqueEmail');
 
-When adding rules you can define the field the rule is for and the error
-message as options::
+ルールを追加する時、任意でルールが適用されるフィールドやエラーメッセージ
+を定義することができます::
 
     $rules->add([$this, 'isValidState'], 'validState', [
         'errorField' => 'status',
-        'message' => 'This invoice cannot be moved to that status.'
+        'message' => 'この請求書はそのステータスに遷移できません。'
     ]);
 
-The error will be visible when calling the ``errors()`` method on the entity::
+エンティティの ``errors()`` メソッドを呼ぶとエラーを確認できます::
 
-    $entity->errors(); // Contains the domain rules error messages
+    $entity->errors(); // ドメインルールのエラーメッセージを含んでいます
 
-Creating Unique Field Rules
----------------------------
+一意フィールドルールの作成
+--------------------------
 
-Because unique rules are quite common, CakePHP includes a simple Rule class that
-allows you to define unique field sets::
+一意ルールは極めて一般的なので、CakePHPは一意フィールドの組み合わせを定義できる
+単純なルールクラスを内包しています::
 
     use Cake\ORM\Rule\IsUnique;
 
-    // A single field.
+    // 一つのフィールド
     $rules->add($rules->isUnique(['email']));
 
-    // A list of fields
+    // フィールドのリスト
     $rules->add($rules->isUnique(['username', 'account_id']));
 
-When setting rules on foreign key fields it is important to remember, that
-only the fields listed are used in the rule. This means that setting
-``$user->account->id`` will not trigger the above rule.
+外部キーフィールドのルールを設定する時には、
+ルールでは列挙したフィールドのみが使われるのを覚えておくことが重要です。
+これは ``$user->account->id`` を変更しても上記のルールは発動しないことを意味します。
 
 
-Foreign Key Rules
------------------
+外部キールール
+--------------
 
-While you could rely on database errors to enforce constraints, using rules code
-can help provide a nicer user experience. Because of this CakePHP includes an
-``ExistsIn`` rule class::
+制約を強制するためにデータベースエラーに頼ることもできますが、
+ルールのコードはより良いユーザーエクスペリエンスを提供するのに役立ちます。
+このためにCakePHPは ``ExistsIn`` ルールクラスを内包しています::
 
-    // A single field.
+    // 一つのフィールド
     $rules->add($rules->existsIn('article_id', 'articles'));
 
-    // Multiple keys, useful for composite primary keys.
+    // 複数キー。複合主キーに役立ちます。
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
 
-The fields to check existence against in the related table must be part of the
-primary key.
+存在をチェックするための関連テーブルのフィールドは主キーの一部でなければなりません。
 
-Using Entity Methods as Rules
------------------------------
 
-You may want to use entity methods as domain rules::
+エンティティメソッドをルールとして使用
+--------------------------------------
+
+ドメインルールとしてエンティティのメソッドを使いたいかもしれません::
 
     $rules->add(function ($entity, $options) {
         return $entity->isOkLooking();
     }, 'ruleName');
 
-Creating Custom Rule objects
-----------------------------
+カスタムルールオブジェクト作成
+------------------------------
 
-If your application has rules that are commonly reused, it is helpful to package
-those rules into re-usable classes::
+もしもアプリケーションがよく再利用されるルールを持っているのであれば、
+再利用可能なクラスにそうしたルールをまとめると役に立ちます::
 
-    // in src/Model/Rule/CustomRule.php
+    // src/Model/Rule/CustomRule.php の中で
     namespace App\Model\Rule;
 
     use Cake\Datasource\EntityInterface;
@@ -401,39 +401,40 @@ those rules into re-usable classes::
     {
         public function __invoke(EntityInterface $entity, array $options)
         {
-            // Do work
+            // 何かする
             return false;
         }
     }
 
 
-    // Add the custom rule
+    // カスタムルールの追加
     use App\Model\Rule\CustomRule;
 
     $rules->add(new CustomRule(...), 'ruleName');
 
-By creating custom rule classes you can keep your code DRY and make your domain
-rules easy to test.
+カスタムルールクラスを作ることでコードを *重複がない状態* 
+(訳注：DRY = Don't Repeat Yourself の訳)
+に保つことができ、またドメインルールを簡単にテストできるようになります。
 
-Disabling Rules
----------------
+ルールの無効化
+--------------
 
-When saving an entity, you can disable the rules if necessary::
+エンティティを保存する時、必要であればルールを無効にできます::
 
     $articles->save($article, ['checkRules' => false]);
 
 
-Validation vs. Application Rules
-================================
+バリデーション対アプリケーションルール
+======================================
 
-The CakePHP ORM is unique in that it uses a two-layered approach to validation.
-As you already discovered, the first layer is done through the ``Validator``
-objects when calling ``newEntity()`` or ``patchEntity()``::
+CakePHPのORMは検証に二層のアプローチを使う点がユニークです。
+すでに見てきた通りに、一層目は ``newEntity()`` か ``patchEntity()`` を呼ぶ時に
+``Validator`` オブジェクトを通して行われます::
 
     $validatedEntity = $articlesTable->newEntity($unsafeData);
     $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
 
-Validation is defined using the ``validationCustomName()`` methods::
+バリデーションは ``validationCustomName()`` メソッドを使って定義されます::
 
     public function validationCustom($validator)
     {
@@ -441,51 +442,52 @@ Validation is defined using the ``validationCustomName()`` methods::
         return $validator;
     }
 
-Validation is meant for forms and request data. This means that validation rule
-sets can assume things about the structure of a form and validate fields not in
-the schema of the database. Validation assumes strings or array are passed
-since that is what is received from any request::
+バリデーションはフォームやリクエストデータのために意図されています。
+これはバリデーションルールセットがフォームの構造に関するものを想定しており、
+スキーマやデータベースにないフィールドを検証できることを意味します。
 
-    // In src/Model/Table/UsersTable.php
+バリデーションは文字列や配列を渡されることを想定しています。
+それらがリクエストから得られるものですので::
+
+    // src/Model/Table/UsersTable.php の中で
     public function validatePasswords($validator)
     {
         $validator->add('confirm_password', 'no-misspelling', [
             'rule' => ['compareWith', 'password'],
-            'message' => 'Passwords are not equal',
+            'message' => 'パスワードが一致しません',
         ]);
 
         ...
         return $validator;
     }
 
-Validation is **not** triggered when directly setting properties on your
-entities::
+バリデーションはエンティティのプロパティを直接設定した時には起動 **しません**::
 
     $userEntity->email = 'not an email!!';
     $usersTable->save($userEntity);
 
-In the above example the entity will be saved as validation is only
-triggered for the ``newEntity()`` and ``patchEntity()`` methods. The second
-level of validation is meant to address this situation.
+上記の例では、バリデーションは ``newEntity()`` と ``patchEntity()``
+メソッドのためにのみ起動されるので、エンティティは保存されてしまうことになります。
+検証の第二層がこの状況に対処します。
 
-Application rules as explained above will be checked whenever ``save()`` or
-``delete()`` are called::
+アプリケーションルールは上で説明したように
+``save()`` か ``delete()`` が呼ばれるといつでもチェックされます::
 
-    // In src/Model/Table/UsersTable.php
+    // src/Model/Table/UsersTable.php の中で
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique('email'));
         return $rules;
     }
 
-    // Elsewhere in your application code
+    // アプリケーションのコード中のどこかで
     $userEntity->email = 'a@duplicated.email';
-    $usersTable->save($userEntity); // Returns false
+    $usersTable->save($userEntity); // 偽を返します
 
-While Validation is meant for direct user input, application rules are specific
-for data transitions generated inside your application::
+バリデーションは直接のユーザ入力を意図しており、アプリケーションルールは
+アプリケーション中で生成されたデータの変更に特化しています::
 
-    // In src/Model/Table/OrdersTable.php
+    // src/Model/Table/OrdersTable.php の中で
     public function buildRules(RulesChecker $rules)
     {
         $check = function($order) {
@@ -493,30 +495,31 @@ for data transitions generated inside your application::
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
-            'message' => 'No free shipping for orders under 100!'
+            'message' => '100ドル以下の注文を送料無料にはできません！'
         ]);
         return $rules;
     }
 
-    // Elsewhere in application code
+    // アプリケーションのコード中のどこかで
     $order->price = 50;
     $order->shipping_mode = 'free';
-    $ordersTable->save($order); // Returns false
+    $ordersTable->save($order); // 偽を返します
 
 
-Using Validation as Application Rules
--------------------------------------
+バリデーションをアプリケーションルールとして使用
+------------------------------------------------
 
-In certain situations you may want to run the same data validation routines for
-data that was both generated by users and inside your application. This could
-come up when running a CLI script that directly sets properties on entities::
+ある状況ではユーザーあるいはアプリケーションによって生成されたデータの
+両方に対して同じ検証の処理を走らせたいかもしれません。
+これは、エンティティのプロパティを直接設定するようなCLIスクリプトを走らせる時に
+起こり得るでしょう::
 
-    // In src/Model/Table/UsersTable.php
+    // src/Model/Table/UsersTable.php の中で
     public function validationDefault(Validator $validator)
     {
         $validator->add('email', 'valid', [
             'rule' => 'email',
-            'message' => 'Invalid email'
+            'message' => '無効なメールアドレスです'
         ]);
         ...
         return $validator;
@@ -524,7 +527,7 @@ come up when running a CLI script that directly sets properties on entities::
 
     public function buildRules(RulesChecker $rules)
     {
-        // Add validation rules
+        // アプリケーションルールの追加
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
@@ -539,15 +542,13 @@ come up when running a CLI script that directly sets properties on entities::
         return $rules;
     }
 
-When executed the save will fail thanks to the new application rule that 
-was added::
+保存が実行されると、追加された新しいアプリケーションのおかげで失敗します::
 
     $userEntity->email = 'not an email!!!';
     $usersTable->save($userEntity);
-    $userEntity->errors('email'); // Invalid email
+    $userEntity->errors('email'); // 無効なメールアドレスです
 
-The same result can be expected when using ``newEntity()`` or
-``patchEntity()``::
+同じ結果が ``newEntity()`` や ``patchEntity()`` を使う時にも期待できます::
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
-    $userEntity->errors('email'); // Invalid email
+    $userEntity->errors('email'); // 無効なメールアドレスです
