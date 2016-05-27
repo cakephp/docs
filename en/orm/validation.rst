@@ -386,6 +386,24 @@ You may want to use entity methods as domain rules::
         return $entity->isOkLooking();
     }, 'ruleName');
 
+Creating Custom re-usable Rules
+-------------------------------
+
+You may want to re-use custom domain rules. You can do so by creating your own invokable rule::
+
+    use App\ORM\Rule\IsUniqueWithNulls;
+    // ...
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
+            'errorField' => 'name',
+            'message' => 'Name must be unique per parent.'
+        ]);
+        return $rules;
+    }
+   
+See the core rules for examples on how to create such rules.
+
 Creating Custom Rule objects
 ----------------------------
 
