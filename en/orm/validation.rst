@@ -397,7 +397,7 @@ You may want to re-use custom domain rules. You can do so by creating your own i
     {
         $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
             'errorField' => ['name'],
-            'message' => 'Name must be unique per parent_id.'
+            'message' => 'Name must be unique per parent.'
         ]);
         return $rules;
     }
