@@ -1,7 +1,7 @@
 3.3 Guide de Migration
 ######################
 
-CakePHP 3.2 est une mise à jour de CakePHP 3.2 dont la compatibilité API est
+CakePHP 3.3 est une mise à jour de CakePHP 3.2 dont la compatibilité API est
 complète. Cette page souligne les changements et améliorations faits dans 3.3.
 
 Deprecations
@@ -13,6 +13,14 @@ Deprecations
   ``$routes->redirect()`` à la place.
 * ``Router::parseNamedParams()`` est dépréciée. La rétro-compatibilité des
   paramètres nommés sera retirée dans la version 4.0.0.
+* ``Cake\Http\Response`` a vu ses méthodes suivantes dépréciées car elles se
+  chevauchent avec les méthodes de l'interface PSR7:
+
+  * ``statusCode()`` utilisez ``getStatusCode()`` à la place.
+  * ``encoding()`` utilisez ``getEncoding()`` à la place.
+  * ``header()`` utilisez ``getHeaderLine()`` à la place.
+  * ``cookie()`` utilisez ``getCookie()`` à la place.
+  * ``version()`` utilisez ``getProtocolVersion()`` à la place.
 
 Changements de Comportement
 ===========================
@@ -27,6 +35,15 @@ variations mineures qui peuvent avoir des effets sur votre application:
   de façon cohérente lors de la génération des URLs en local. Avant, les chaînes
   d'URLs étaient préfixées par le chemin de base alors que les tableaux d'URLs
   ne l'étaient pas.
+
+Http Client est maintenant compatible avec PSR7
+===============================================
+
+``Cake\Network\Http\Client`` a été dpélacée vers ``Cake\Http\Client``. Ses
+objet request et response implémentent maintenant les
+`interfaces PSR7 <http://www.php-fig.org/psr/psr-7/>`__. Plusieurs méthodes de
+``Cake\Http\Client\Response`` sont maintenant dépréciées, regardez plus haut
+pour plus d'informations.
 
 Routing
 =======
