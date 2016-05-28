@@ -18,6 +18,9 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 
     **クックブックがどこででも読める**
 
+    .. image:: /_static/read-the-book.jpg
+       :alt: Read the Book - CakePHP
+
     どこでも CakePHP のレシピをお楽しみ頂けます。PDF と EPUB をご用意しましたので、
     多くのデバイス上でオフラインでドキュメントを読むことができます。
 
