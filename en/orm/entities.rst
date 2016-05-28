@@ -149,6 +149,37 @@ you to convert properties as they are set, or create calculated data.
 Mutators and accessors are applied when properties are read using object
 notation, or using get() and set().
 
+Direct Path Access
+------------------
+
+``get()`` and ``set()`` both support direct "dotted" path expressions. This
+allows you to traverse into Entities and arrays nested inside of your Entities
+and behaves similar to ``Hash::get()``. ::
+
+    $entity = new Entity([
+        'a' => new Entity([
+            'b' => 1
+        ])
+    ]);
+
+    echo $entity->get('a.b'); // 1
+    $entity->set('a.b', 2);
+    echo $entity->get('a.b'); // 2
+
+When a path does not exist, ``Entity::get()`` returns null just as
+``Hash::get()`` does. When a path does not already exist, ``Entity::set()``
+will attempt to create the entire path specified just as ``Hash::set()`` does.
+Set creates a new ``\Cake\ORM\Entity`` for each segment in the path where the
+property does not already exist in the parent.
+
+.. warning::
+
+    If you attempt to set a dotted path that already contains a scalar value
+    such as an int or string, an \InvalidArgumentException will be thrown::
+
+    $entity->x = 'just a string';
+    $entity->set('x.y', 'Will fail because `x` is a string, not an array or Entity.');
+
 .. _entities-virtual-properties:
 
 Creating Virtual Fields
@@ -248,7 +279,7 @@ While setting properties to entities in bulk is simple and convenient, it can
 create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the :doc:`/bake`
-CakePHP does not protect against mass-assignment. 
+CakePHP does not protect against mass-assignment.
 
 The ``_accessible`` property allows you to provide a map of properties and
 whether or not they can be mass-assigned. The values ``true`` and ``false``
