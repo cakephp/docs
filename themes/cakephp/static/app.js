@@ -16,16 +16,18 @@ App.Book = (function() {
       doc = $(document),
       offset = contents.offset(),
       sidebarHeight = contents.height(),
+      delay = 150,
+      didScroll = false;
       showing = false;
 
     var positionBackToTop = function() {
+      setTimeout(positionBackToTop, delay);
       if (offset === undefined) {
         return;
       }
       if (!showing && doc.scrollTop() > offset.top + sidebarHeight) {
         showing = true;
         backToTop.css({
-          position: 'fixed',
           top: 50,
           left: 20,
           display:' block'
@@ -37,14 +39,15 @@ App.Book = (function() {
         });
       }
     };
+    setTimeout(positionBackToTop, delay);
 
     backToTop.bind('click', function(evt) {
-      $('html,body').animate({scrollTop: offset.top}, 200);
+      $('html,body').animate({scrollTop: 0}, 200);
       return false;
     });
 
     doc.bind('scroll', function() {
-      positionBackToTop();
+      didScroll = true;
     });
 
     // Tooltips
