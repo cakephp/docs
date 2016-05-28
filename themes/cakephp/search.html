@@ -20,12 +20,20 @@
     containing fewer words won't appear in the result list.{% endtrans %}
   </p>
 
-  <form action="" method="get" class="standalone-search">
-    <input type="search" autocomplete="off" class="search-input" name="q" value="" />
-	<input type="hidden" name="lang" value="{{ language }}" />
-    <input type="submit" class="search-submit search-big button red" value="{{ _('search') }}" />
-  </form>
-  <div id="search-results">
+  <div class="row">
+      <form action="" method="get" class="standalone-search col-md-10 col-md-push-1">
+        <input type="hidden" name="lang" value="{{ language }}" />
+        <div class="col-md-10 col-sm-10">
+            <input type="search" autocomplete="off" class="search-input" name="q" value="" />
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <button type="submit" aria-label="{{ _('search') }}">
+                <span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+            </button>
+        </div>
+      </form>
+    </div>
+  <div class="row" id="search-results">
     <ul>
     </ul>
   </div>
