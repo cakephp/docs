@@ -10,10 +10,9 @@ Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP 3.
 
 The CakePHP cookbook is an openly developed and community editable documentation
-project. Notice the "Improve this Doc" button in the upper right-hand
-corner; it will direct you to the GitHub online editor of the active page,
-allowing you to contribute any additions, deletions, or corrections to
-the documentation.
+project. Notice the pencil icon button fixated against the right wall; it will
+direct you to the GitHub online editor of the active page, allowing you to
+contribute any additions, deletions, or corrections to the documentation.
 
 .. container:: offline-download
 
