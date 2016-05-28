@@ -386,6 +386,25 @@ CakePHPは、エンティティが保存される前に適用される‘ルー�
         return $entity->isOkLooking();
     }, 'ruleName');
 
+再利用可能なカスタムルールの作成
+--------------------------------
+
+カスタムドメインルールを再利用したい事もあるでしょう。それには、
+独自の呼び出し可能なルールを作成することによって行います。 ::
+
+    use App\ORM\Rule\IsUniqueWithNulls;
+    // ...
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
+            'errorField' => 'name',
+            'message' => 'Name must be unique per parent.'
+        ]);
+        return $rules;
+    }
+
+そのようなルールを作成する方法の例として、コアのルールを確認してください。
+
 カスタムルールオブジェクト作成
 ------------------------------
 
