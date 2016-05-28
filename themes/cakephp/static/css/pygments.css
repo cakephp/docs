@@ -1,28 +1,51 @@
-/* @override http://localhost/cake_docs/build/html/en/_static/pygments.css */
+.highlight pre {
+    font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding: 15px 20px;
+    background: #ECECE9;
+    color: #222;
+    line-height: 120%;
+    border: none;
+    border-radius: 0;
+}
+pre::-webkit-scrollbar {
+    height: 10px;
+}
+pre::-webkit-scrollbar-track-piece {
+    background: #ddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+pre::-webkit-scrollbar-thumb:horizontal {
+    background: #c0c0c0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
 
-.highlight .hll { background-color: #ffffcc }
-.highlight  { background: #ffffff; }
- /* Comment */
+/* Comment */
+.highlight .cm,
+.highlight .cp,
 .highlight .c,
 .highlight .c1,
-.highlight .cs { 
+.highlight .cs {
+	color: #363637;
 	color: #5f5f5f;
-	font-style: italic 
 }
-.highlight .err { border: 1px solid #FF0000 } /* Error */
+
+/* Error */
+.highlight .err {
+    border: 1px solid #FF0000;
+}
 /* Keyword */
-.highlight .k { 
-	color: #a71d5d; 
-	font-style: italic 
+.highlight .k {
+	color: #a71d5d;
+	font-style: italic
 }
 /* Operator */
-.highlight .o { 
+.highlight .o {
 	color: #794938 
-}
-.highlight .cm { color: #408090; font-style: italic } /* Comment.Multiline */
- /* Comment.Preproc */
-.highlight .cp { 
-	color: #666 
 }
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
 .highlight .ge { font-style: italic } /* Generic.Emph */

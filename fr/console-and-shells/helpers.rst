@@ -90,10 +90,11 @@ Le ProgessHelper peut être utilisé de deux manières différentes. Le mode sim
 vous permet de fournir une méthode de rappel qui est invoquée jusqu'à ce que
 l'avancement soit complété::
 
-    $this->helper('Progress')->output(function ($progress) {
+    $this->helper('Progress')->output(['callback' => function ($progress) {
         // Fait quelque chose ici.
         $progress->increment(20);
-    });
+        $progress->draw();
+    }]);
 
 Vous pouvez mieux contrôler la barre d'avancement en fournissant des options
 supplémentaires:
@@ -110,6 +111,7 @@ Un exemple d'utilisation de toutes les options serait::
         'width' => 20,
         'callback' => function ($progress) {
             $progress->increment(2);
+            $progress->draw();
         }
     ]);
 

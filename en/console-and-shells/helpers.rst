@@ -86,10 +86,11 @@ Progress Helper
 The ProgressHelper can be used in two different ways. The simple mode lets you
 provide a callback that is invoked until the progress is complete::
 
-    $this->helper('Progress')->output(function ($progress) {
+    $this->helper('Progress')->output(['callback' => function ($progress) {
         // Do work here.
         $progress->increment(20);
-    });
+        $progress->draw();
+    }]);
 
 You can control the progress bar more by providing additional options:
 
@@ -106,6 +107,7 @@ An example of all the options in use would be::
         'width' => 20,
         'callback' => function ($progress) {
             $progress->increment(2);
+            $progress->draw();
         }
     ]);
 

@@ -405,6 +405,26 @@ Vous pouvez utiliser les méthodes entity en tant que règles de domaine::
         return $entity->isOkLooking();
     }, 'ruleName');
 
+Créer des Règles Personnalisées Réutilisables
+---------------------------------------------
+
+Vous pouvez vouloir réutiliser des règles de domaine personnalisées. Vous pouvez
+le faire en créant votre propre règle invokable::
+
+    use App\ORM\Rule\IsUniqueWithNulls;
+    // ...
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
+            'errorField' => 'name',
+            'message' => 'Name must be unique per parent.'
+        ]);
+        return $rules;
+    }
+
+Regardez les règles du coeur pour plus d'informations sur la façon de créer de
+telles règles.
+
 Créer des Objets de Règles Personnalisées
 -----------------------------------------
 
