@@ -86,6 +86,8 @@ ORM Improvements
   exception when an unknown association is in the 'associated' key.
 * ``RulesChecker::validCount()`` was added. This new method allows to apply
   rules to the number of associated records an entity has.
+* The ``partialNullsPass`` option was added to the ``existsIn`` rule. This
+  option allows rules to pass when some columns are null.
 
 FormHelper
 ==========
