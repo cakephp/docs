@@ -468,7 +468,7 @@ L'ORM de CakePHP est unique dans le sens où il utilise une approche à deux
 couches pour la validation.
 
 La première couche est la validation. Les règles de validation ont pour objectif
-d'opérer d'une façon sans état. Ils permettent de s'assurer que la forme, les
+d'opérer d'une façon stateless. Elles permettent de s'assurer que la forme, les
 types de données et le format des données sont corrects.
 
 La seconde couche sont les règles d'application. Les règles d'application
@@ -499,8 +499,8 @@ défini en utilisant la méthode ``validationCustomName()``::
         return $validator;
     }
 
-La validation fait l'hypothèse que les chaînes de caractère et les tableaux sont
-passés puisque c'est ce qui est reçu par n'importe quelle requête::
+La validation fait l'hypothèse que les chaînes de caractères et les tableaux
+sont passés puisque c'est ce qui est reçu par n'importe quelle requête::
 
     // Dans src/Model/Table/UsersTable.php
     public function validatePasswords($validator)
