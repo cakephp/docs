@@ -452,6 +452,10 @@ tt {
     padding: 0px 2px;
     color: #363637;
 }
+a tt {
+    color: #428bca;
+}
+
 dl tt {
     border-bottom: none;
 }
