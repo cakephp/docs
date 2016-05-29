@@ -752,6 +752,9 @@ dt tt {
 .footnote {
     border: 0;
 }
+.footnote td {
+    border: 0;
+}
 .footnote .label {
     background: none;
     color: #000;
