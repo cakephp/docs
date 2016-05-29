@@ -18,8 +18,7 @@ contribute any additions, deletions, or corrections to the documentation.
 
     **Read the Book Anywhere**
 
-    .. image:: /_static/read-the-book.jpg
-       :alt: Read the Book - CakePHP
+    .. image:: /_static/img/read-the-book.jpg
 
     Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
     EPUB, you can now read it on more devices, as well as offline.
@@ -56,6 +55,7 @@ elements in a CakePHP application:
   application needs.
 * :doc:`Models </orm>` are the key ingredient in any application. They handle
   validation, and domain logic within your application.
+
 
 .. meta::
     :title lang=en: .. CakePHP Cookbook documentation master file, created by
