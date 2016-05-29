@@ -378,13 +378,13 @@ The fields to check existence against in the related table must be part of the
 primary key.
 
 .. versionadded:: 3.2.11
-   You may now enforce existsIn to pass on parts of your composite foreign key to be null.
+   You may now enforce ``existsIn()`` to pass on parts of your composite foreign key to be null.
 
-   // The primary composite key of Nodes is (id, site_id).
+   // The primary composite key of nodes is (id, site_id).
    // A node may reference a parent node but does not need to (parent_id = null):
    $rules->add($rules->existsIn(['parent_id', 'site_id'], 'ParentNodes', ['partialNullsPass' => true]));
 
-   // A Node however must in addition also always reference a Site.
+   // A node however must in addition also always reference a site.
    $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
 Using Entity Methods as Rules
