@@ -121,6 +121,7 @@ un tableau::
     {
         public function __construct($options = [])
         {
+            parent::__construct($options);
             // ...
         }
 

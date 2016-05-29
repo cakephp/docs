@@ -401,7 +401,7 @@ You may want to re-use custom domain rules. You can do so by creating your own i
         ]);
         return $rules;
     }
-   
+
 See the core rules for examples on how to create such rules.
 
 Creating Custom Rule objects
@@ -452,8 +452,8 @@ and format of data is correct.
 
 The second layer is application rules. Application rules are best leveraged to
 check stateful properties of your entities. For example, validation rules could
-ensure that an email address is valid, while an application rule could ensure that
-the email address is unique.
+ensure that an email address is valid, while an application rule could ensure
+that the email address is unique.
 
 As you already discovered, the first layer is done through the ``Validator``
 objects when calling ``newEntity()`` or ``patchEntity()``::
@@ -573,7 +573,7 @@ come up when running a CLI script that directly sets properties on entities::
         return $rules;
     }
 
-When executed the save will fail thanks to the new application rule that 
+When executed the save will fail thanks to the new application rule that
 was added::
 
     $userEntity->email = 'not an email!!!';
