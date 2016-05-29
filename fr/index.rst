@@ -12,7 +12,7 @@ la documentation.
 
     **Lire le Livre partout**
 
-    .. image:: /_static/read-the-book.jpg
+    .. image:: /_static/img/read-the-book.jpg
        :alt: Read the Book - CakePHP
 
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en

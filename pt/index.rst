@@ -15,7 +15,7 @@ Note o botão “Improve this Doc” no canto superior direito; ele vai direcion
 
     **Leia a documentação em qualquer lugar**
 
-    .. image:: /_static/read-the-book.jpg
+    .. image:: /_static/img/read-the-book.jpg
        :alt: Read the Book - CakePHP
 
     Consulte o cookbook CakePHP quase em qualquer lugar. Disponível como PDF e

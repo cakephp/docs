@@ -7,7 +7,7 @@ y precisión de la documentación.
 
 .. container:: offline-download
 
-    .. image:: /_static/read-the-book.jpg
+    .. image:: /_static/img/read-the-book.jpg
        :alt: Read the Book - CakePHP
 
     Descargar la documentación:
