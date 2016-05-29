@@ -448,10 +448,12 @@ The CakePHP ORM is unique in that it uses a two-layered approach to validation.
 
 The first layer is validation. Validation rules are intended to be operate in
 a stateless way. They are best leveraged to ensure that the shape, data types
-and format of data is correct.  The second layer is application rules.
-Application rules are best leveraged to check stateful properties of your
-entities. For example, validation rules could ensure that an email address is
-valid, while an application rule could ensure that the email address is unique.
+and format of data is correct.
+
+The second layer is application rules. Application rules are best leveraged to
+check stateful properties of your entities. For example, validation rules could
+ensure that an email address is valid, while an application rule could ensure that
+the email address is unique.
 
 As you already discovered, the first layer is done through the ``Validator``
 objects when calling ``newEntity()`` or ``patchEntity()``::
