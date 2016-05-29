@@ -17,8 +17,7 @@ the documentation.
 
     **Read the Book Anywhere**
 
-    .. image:: /_static/read-the-book.jpg
-       :alt: Read the Book - CakePHP
+    .. image:: /_static/img/read-the-book.jpg
 
     Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
     EPUB, you can now read it on more devices, as well as offline.
@@ -67,6 +66,7 @@ Getting Help
 
 If you're stuck, there are a number of places :doc:`you can get help
 </cakephp-overview/where-to-get-help>`.
+
 
 
 .. meta::
