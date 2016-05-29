@@ -201,7 +201,7 @@ Veja :ref:`query-count` para modos de uso diferentes com o metódo ``count()``.
 .. _table-find-list:
 
 Encontrando Chaves/Pares de Valores
-=======================
+===================================
 
 Frequentemente precisamos gerar um dados associados em array de nossas aplicações.
 Muito usado para criar o elemento ``<select>``. 
