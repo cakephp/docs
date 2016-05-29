@@ -1,4 +1,4 @@
-Retornando dados e conjuntos de resultados
+Requisitando Dados e Conjuntos de Resultados
 ##########################################
 
 .. php:namespace:: Cake\ORM
@@ -21,12 +21,12 @@ Quando o ORM foi implementado, era muito difícil depurar os resultados obtidos 
 
 Tente isto na camada Controller: debug( $this->{EntidadeNome}->find()->all() );
 
-Pegando uma entidade com a chave primária
+Buscando Entidade Com Chave Primária
 =========================================
 
 .. php:method:: get($id, $options = [])
 
-Sempre que é necessário editar ou visualizar uma entidade ou dados relacionais você pode usar ``get()``::
+Quando precisamos editar ou deletar informações podemos usar o metódo ``get()``::
 
     // No controller ou table tente isto.
 
@@ -41,7 +41,7 @@ Sempre que é necessário editar ou visualizar uma entidade ou dados relacionais
 Quando não conseguir obter um resultado
 ``Cake\Datasource\Exception\RecordNotFoundException`` será disparado. Você poderá tratar esta exceção, ou converter num erro 404.
 
-O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache`` quando chamar ``get()`` para uma performance na leitura - ``caching``::
+O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache`` quando chamar ``get()`` para uma performance adicional - ``caching``::
 
     // No controller ou table tente isto.
 
@@ -66,21 +66,21 @@ O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache``
 ``Por padrão o CakePHP possui um sistema interno de cache que viabiliza busca e aumenta a performance - não recomendado desabilatar.``
 
 Opcionalmente você pode usar ``get()`` nas entidades com busca customizavél :ref:`custom-find-methods`. Por
-exemplo, você pode querer pegar todas as traduções de uma entidade. Poderá usar
+exemplo, você pode querer todas as traduções de uma entidade. Poderá usar
 a opção ``finder``::
 
     $article = $articles->get($id, [
         'finder' => 'translations',
     ]);
 
-Usando ``'find()'`` para carregar dados
+``'find()'`` Seu Melhor Amigo
 =======================================
 
 .. php:method:: find($type, $options = [])
 
 Agora que você sabe e pode trabalhar com entidades, Precisará carrega las e gostará muito como fazer isso. O caminho mais simples
-para carregar uma Entidade ou objetos relacionais metódo ``find()``. find provê um extensivél e facíl caminho para procurar e retornar dados,
-talves você se interesse por in::
+para carregar uma Entidade ou objetos relacionais é metódo ``find()``. find provê um extensivél e facíl caminho para procurar e retornar dados,
+talves você se interesse por::
 
     // No controller ou table.
 
@@ -88,9 +88,7 @@ talves você se interesse por in::
     $query = $articles->find('all');
 
 O valor retornado por qualquer metódo ``find()`` será sempre
-um :php:class:`Cake\\ORM\\Query` objeto. A class Query assim permitindo que possa
-posteriormente refinar a consulta depois de cria lá. Objeto Query não será executado até que
-inicie um busca por linhas, seja convertido num array, ou chamado outro metódo, exemplo: ``all()``::
+um :php:class:`Cake\\ORM\\Query`. O objeto Query é estendido, então você pode filtrar os dados retornados de forma simples e prática. Apenas executar o metódo não ira disparar um buscado no banco de dados, você precisa disparar um tratamento de resultados, converter em um array, ou chamar algum metódo de tratamento para o retorno::
 
     // No controller ou table.
 
@@ -98,12 +96,11 @@ inicie um busca por linhas, seja convertido num array, ou chamado outro metódo,
     // Até este ponto, nada acontece.
     $query = $articles->find('all');
 
-    // Uma iteração executa a consulta
+    // A iteração pode disparar uma consulta
     foreach ($query as $row) {
     }
 
-    // Chamando all() executa a consulta.
-    // e retorna os conjuntos de resultados.
+    // Chamando all() e armazenando, a consulta é executada.
     $results = $query->all();
 
     // Linhas são retornadas em forma de array
@@ -115,8 +112,8 @@ inicie um busca por linhas, seja convertido num array, ou chamado outro metódo,
 .. note::
 
     Você já sabe executar uma consulta, gostará de :doc:`/orm/query-builder`
-    para implementar e construir consultas otimizadas ou complexas, adicionando condições específica,
-    limites, incluíndo associação ou uma interface mais fluênte, ou busca de resultados por id de usuário lógado.
+    para implementar e construir consultas otimizadas ou complexas, adicionando condições específicas,
+    limites, incluíndo associação ou uma interface mais fluênte, ou busca de resultados por id de usuário.
 
 ::
 
@@ -126,7 +123,7 @@ inicie um busca por linhas, seja convertido num array, ou chamado outro metódo,
         ->contain(['Comments', 'Authors'])
         ->limit(10);
 
-Não se limite, poderá ir muito além com  ``find()``. Isto o ajuda com metódos simulados::
+Ou
 
     // No controller ou table.
     $query = $articles->find('all', [
@@ -134,7 +131,7 @@ Não se limite, poderá ir muito além com  ``find()``. Isto o ajuda com metódo
         'contain' => ['Authors', 'Comments'],
         'limit' => 10
     ]);
-    //Ao buscar todos os artigos, retorne somente artigos com data de hoje - 10 dias atrás
+    //Ao buscar todos os artigos, retorne somente artigos com data de 10 dias atrás
     //Depois junto com esses artigos me retorne também seus autores e comentários inclusos.
 
 Opções suportadas por find() são:
@@ -143,23 +140,21 @@ Opções suportadas por find() são:
 - ``limit`` Limite o número de resultados.
 - ``offset`` Uma página que você quer. Use ``page`` para cálculo simplificado.
 - ``contain`` defina uma associação para carregar.
-- ``fields`` Quais campos você deseja carregar somente? Quando carregar somente alguns campos o lembre-se dos plugins, callbacks.
+- ``fields`` Quais campos você deseja carregar somente? Quando carregar somente alguns campos, lembre-se de: plugins e callbacks.
 - ``group`` adicione um GROUP BY. muito usado para funçoes agregadas.
 - ``having`` adicionar HVAING.
 - ``join`` Defina um Join específico.
 - ``order`` Ordenar resultados por.
 
-Outras opções fora dessa lista, serão passadas para o beforeFind ou outras funções de tratamento, 
-onde podem ser usados para tratar a consulta a sua maneira. Pode usar o metódo
-``getOptions()`` no objeto para retornar as opções utilizadas. Quando uma consulta for passada para o controller, recomendamos uma leitura
-sobre consultas personalizadas em :ref:`custom-find-methods`. Usando metódos de consultas personalizados, você terá um melhor reuso de seu código, e ficará fácil para testar a sua maneira.
+Você pode tratar suas consultas, em alguns casos precisamos que nossas consultas não retornem apenas dados, mas dados associados a nossa conta de usuário ou até mesmo os produtos de determinada lista, para isso, você pode implementar suas próprias consultas personalizadas sem maiores problemas. veja mais em :ref:`personalizando-metodos-de-consulta`.
+executa o metódo ``getOptions()`` no objeto para retornar as opções utilizadas.
 
 Por padrão consultas retornam :doc:`/orm/entities` objeto. Você pode retorna array basico usando
 hydration::
 
     $query->hydrate(false);
 
-    // $data is ResultSet that contains array data.
+    // $data armazena um ResultSet que contém todo um array de todos os dados.
     $data = $query->all();
 
 .. _table-find-first:
@@ -184,28 +179,28 @@ usar o metódo ``get()`` caso queira carregar uma entidade pelo chave primária.
 
     O metódo ``first()`` retorna ``null`` caso nenhum resultado seja encontrado.
 
-Contando os resultados
+Contando Resultados
 ======================
 
-Criando uma consulta você gosta do metódo ``count()`` para retornar a quantidade de resultados encontrado::
+Criando uma consulta você pode gostar do metódo ``count()`` para retornar a quantidade de resultados encontrado::
 
     // No controller ou table.
     $query = $articles->find('all', [
         'conditions' => ['Articles.title LIKE' => '%Ovens%']
     ]);
     $number = $query->count();
-    //Retorne todos os artigos, me mostre quantos são.
+    //Retorne todos os artigos e me mostre quantos são.
 
 Veja :ref:`query-count` para modos de uso diferentes com o metódo ``count()``.
 
 .. _table-find-list:
 
-Encontrando Chaves/Pares de Valores
-=======================
+Montando Lista Chave/Valor
+===================================
 
 Frequentemente precisamos gerar um dados associados em array de nossas aplicações.
 Muito usado para criar o elemento ``<select>``. 
-O Cake provê um metódo simples e fácil 'lists'::
+O Cake provê um metódo simples e fácil 'list'::
 
     // No controller ou table.
     $query = $articles->find('list');
@@ -248,7 +243,7 @@ passando as opções ``keyField`` e ``valueField`` respectivamente::
     //slug passa a ser a chave
     // title o valor do option no select
 
-Resultados podem ser agrupados se necessitar. Muito usado quando desejar diferencias Chave/Valores por grupo no elemento ``<optgroup>`` com FormHelper::
+Resultados podem ser agrupados se necessário. Muito usado quando desejar diferencias Chave/Valores por grupo no elemento ``<optgroup>`` com FormHelper::
 
     // No controller ou table
     $query = $articles->find('list', [
@@ -265,7 +260,7 @@ Resultados podem ser agrupados se necessitar. Muito usado quando desejar diferen
             'second-article-i-wrote' => 'Second article I wrote',
         ],
         2 => [
-            // More data.
+            // Mais dados.
         ]
     ];
     // Temos então os artigos com sua Chave/Valores diferenciados por autores.
@@ -277,10 +272,10 @@ Não é complicado, use dados associados e poderá gostar do resultado::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
     //Retorne uma lista de todos os artigos, o id representará a idenficação do artigo, porém seu valor será o nome do seu Author.
-    //Importante, sempre que pesquisar ou informar campos adicionais use o '.' como mostrado em 'valueField'.
+    //Importante, sempre que pesquisar ou informar campos adicionais associados use o '.' como mostrado em 'valueField'.
 
-Por ultimo, é muito bom quando podemos usar metódos criados em nossas entidades, isto também é possível no metódo 'list'.
-. Neste exemplo mostra o uso metódo mutador ``_getFullName()`` criado na entidade Author. ::
+O Cake possuí um modo extensível para representar valores, onde o campo pode representar um valor formado por um conjunto de dados em outra entidade, e isto também é possível no metódo 'list'.
+. Neste exemplo mostra o uso metódo ``_getFullName()`` criado na entidade Author. ::
 
     $query = $articles->find('list', [
         'keyField' => 'id',
@@ -288,15 +283,15 @@ Por ultimo, é muito bom quando podemos usar metódos criados em nossas entidade
             return $e->author->get('full_name');
         }
     ]);
-    //O valor da chave, representará o nome completo
-    //Que usa de uma função para acessar o metódo mutador criado na entidade
+    //O valor da chave representará o nome completo
+    //Que usa uma função para acessar outro metódo na entidade Author.
     //Onde ao juntar o 1 nome com o 2 formará o nome completo.
 
-Encontrando dados enfileirados
+Encontrando Dados Enfileirados
 ==============================
 
-O metódo ``find('threaded')`` retorna que estarão relacionados por chaves. 
-Por padrão o Cake usa o campo chave ``parent_id``. Nesse modelo, é possível
+O metódo ``find('threaded')`` retorna dados que estarão relacionados por chaves. 
+Por padrão o Cake usa o campo chave ``parent_id``. Nesse modelo é possível
 encontrar valores no banco de dados adjacentes. Todas as entidades correspondentes recebem um ``parent_id`` e são alocadas no atributo ``children``::
 
     // No controller ou table.
@@ -317,7 +312,7 @@ encontrar valores no banco de dados adjacentes. Todas as entidades correspondent
 
 Um pouco mal explicado pela equipe do Cake, quando buscamos por dados enfileirados podemos ir bem além, até perceber que pode se encaixar perfeitamente em uma carrinho de shopping com seus itens e quantidades co-relacionados. O ``parentField`` e ``keyField`` chaves que serão usadas para encontrar ocorrências.
 
-Será mais interessante quando aprender sobre árvore de dados ao considerar :doc:`/orm/behaviors/tree` posteriormente.
+Isso fica ainda mais interessante quando aprender sobre árvore de dados em :doc:`/orm/behaviors/tree`.
 
 .. _custom-find-methods:
 
@@ -327,7 +322,7 @@ Personalizando Metódos de Consulta
 Mostramos os exemplos de uso do ``all`` e ``list``.
 Ficará interessado em saber as inúmeras possibilidades, e que também recomendamos seriamente, que você as implemente.
 Um metódo personalizado de busca pode ser ideal para simplificar processos, consultar dados complexos, otimizar buscas, ou criar uma busca padrão em um metódo simplificado feito por você.
-Eles podem ser definidos na criação do objeto tabela e devem obedecer a conveção padrão do Cake. Ao criar um metódo deverá iniciar seu nome com ``find`` e logo após adicionar o nome desejado para sua busca personalizada, exemplo: ``find`` e adicionar ``Users`` = ``findUsers``. É de grande ajuda, por exemplo, quando queremos que em uma busca, nossa consulta sempre tenha a condição de que seus resultados sejam de um determinado usuário, ou que em um carrinho tenha sua própria listra agregada, sem precisar encher o controller de códigos e facilitando muito a manutenção no reuso de código.
+Eles podem ser definidos na criação do objeto tabela e devem obedecer a conveção padrão do Cake. Ao criar um metódo deverá iniciar seu nome com ``find`` e logo após adicionar o nome desejado para sua busca personalizada, exemplo: ``find`` e adicionar ``Users`` = ``findUsers``. É de grande ajuda, por exemplo, quando queremos que em uma busca, nossa consulta sempre tenha a condição de que seus resultados sejam de um determinado usuário, ou que em um carrinho tenha sua própria listra agregada, sem precisar encher o controller de códigos e facilitando muito a manutenção e reuso de código.
 Neste exemplo mostramos como encontrarmos um artigo quando este estiver publicado somente.::
 
     use Cake\ORM\Query;
@@ -361,8 +356,10 @@ tem ambas as buscas 'published' e 'recent', poderia fazer assim::
     $articles = TableRegistry::get('Articles');
     $query = $articles->find('published')->find('recent');
     //Busque todos os artigos, dentre eles encontre os publicados, e retorne somente os recentes.
+    //Em published o metódo procurá por artigos publicados somente pelo o estado.
+    //os dados recebidos no primeiro metódo agora entraram em recent e este calcula quem é atual.
 
-Nossos exemplos, foram definidos na classe da própria tabela, porém, você pode ver como um behavior o ajudará a automatizar muitos processos e como a reutilização de código é feito no CakePHP
+Nossos exemplos foram definidos na classe da própria tabela, porém, você pode ver como um behavior o ajudará a automatizar muitos processos e como a reutilização de código é feito no CakePHP
 leia mais em :doc:`/orm/behaviors`.
 
 Em uma necessidade de mudar os resultados após uma busca, deve usar
@@ -370,7 +367,7 @@ a função :ref:`map-reduce` para isto. Isto substituí o antigo 'afterFind' na 
 
 .. _dynamic-finders:
 
-Buscadores dinâmicos
+Buscadores Dinâmicos
 ====================
 
 CakePHP's ORM provê uma dinâmica na construção de metódos de busca, onde na chamada do metódo poderá apenas adicionar o nome do campo que desejar buscar. 
@@ -398,11 +395,10 @@ Use a condição OR expressa::
     //Retorne usuário com nome joebob ou que possua o email joe@example.com
 
 Neste caso, ao usar 'OR' ou 'AND' voce não pode combinar os dois em único metódo. Também não será possível associar dados com o atributo ``contain``, 
-pois não é compatível com buscas dinâmicas. Lembra-se dos nossos queridos :ref:`custom-find-methods` eles podem fazer esse trabalho para você com
-consultas complexas. Por ultimos combine suas buscas personalizadas com as dinâmicas::
+pois não é compatível com buscas dinâmicas. Lembra-se dos nossos queridos :ref:`personalizando-metodos-de-consulta` eles podem fazer esse trabalho para você com consultas personalizadas. Por ultimo combine suas buscas personalizadas com as dinâmicas::
 
     $query = $users->findTrollsByUsername('bro');
-    // Procure pelos trolls, esses trolls devem username = bro
+    // Procure pelos trolls, esses trolls devem ter username = bro
 
 Abaixo um jeito mais organizado::
 
@@ -410,11 +406,11 @@ Abaixo um jeito mais organizado::
         'conditions' => ['username' => 'bro']
     ]);
 
-Caso tenha objeto Query retornado da busca dinâmica você necessitará de chamar ``first()`` Se quer o primeiro resultado.
+O metódo dinâmico retorna um objeto Query que pode ser tratado com ``first()`` para o primeiro resultado.
 
 .. note::
 
-    Esses metódos de busca podem ser simples, porém eles trazem uma sobrecargar adicional, pelo fato de ser necessário enteder as expressões.
+    Esses metódos de busca podem ser simples, porém eles trazem uma sobrecargar adicional, pelo fato de ser necessário entender as expressões.
 
 
 Retornando Dados Associados
@@ -422,78 +418,74 @@ Retornando Dados Associados
 
 Quando desejar alguns dados associados ou um filtro baseado nesses dados associados, terá dois caminhos para atingir seu objetivo:
 
-- use CakePHP ORM query functions like ``contain()`` and ``matching()``
-- use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
+``containt()`` e ``matching()`` - para que o ORM do Cake faça o relacionamento
+``innerJoing()`` e ``rightJoin()`` - monte um Join no seu sql
 
 Use ``contain()`` quando desejar carregar uma entidade e seus dados associados. 
 ``contain()`` aplicará uma condição adicional aos dados relacinados, porém você não poderá 
 aplicar condições nesses dados baseado nos dados relacionais. Mais detalhes veja ``contain()`` em :ref:`eager-loading-associations`.
 
 ``matching()`` se você deseja aplicar condições na sua entidade baseado nos dados relacionais, deve usar isto. 
-Por exemplo, você quer carregar todos os artigos que tem uma tag específica neles. Mais detalhes veja ``matching()``, em :ref:`filtering-by-associated-data`.
+Por exemplo, carregar todos os artigos que tem uma tag específica neles. Mais detalhes veja ``matching()``, em :ref:`filtering-by-associated-data`.
 
 Caso prefira usar a função join, veja mais informações em :ref:`adding-joins`.
 
 .. _eager-loading-associations:
 
-Eager Loading Associations
-==========================
+Carregando Dados Associados
+===========================
 
-By default CakePHP does not load **any** associated data when using ``find()``.
-You need to 'contain' or eager-load each association you want loaded in your
-results.
+Por padrão o CakePHP não carregar qualquer entidade associada quando usa o ``find()``.
+Você precisa definir na opção 'contain' as entidades necessária para os retornos.
 
 .. start-contain
 
-Eager loading helps avoid many of the potential performance problems
-surrounding lazy-loading in an ORM. The queries generated by eager loading can
-better leverage joins, allowing more efficient queries to be made. In CakePHP
-you define eager loaded associations using the 'contain' method::
+Uma das vantagens de definir todas as entidades relacionais será o ganho de performance, o ORM do Cake não terá tantos joins montados, permitindo uma consulta eficiente e bem aplicada. Você pode definir suas entidades usando 'contain'::
 
-    // In a controller or table method.
+    // No controller ou table
 
-    // As an option to find()
+    // um exemplo de uso para o metódo find()
     $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
 
-    // As a method on the query object
+    // Preparando a consulta e depois definindo as entidades relacionadas
     $query = $articles->find('all');
     $query->contain(['Authors', 'Comments']);
+    //No caso acima todos os artigos foram já armazenados em $query
+    //Agora deve relacionar com os dados seus autores e comentários.
 
-The above will load the related author and comments for each article in the
-result set. You can load nested associations using nested arrays to define the
-associations to be loaded::
+No caso acima todos os artigos foram já armazenados em $query. Agora deve relacionar os artigos com os seus autores e comentários. Neste outro exemplo definimos tudo a partir da primeira execução::
 
     $query = $articles->find()->contain([
         'Authors' => ['Addresses'], 'Comments' => ['Authors']
     ]);
 
-Alternatively, you can express nested associations using the dot notation::
+Uma alternativa é expressar o '.'::
 
     $query = $articles->find()->contain([
         'Authors.Addresses',
         'Comments.Authors'
     ]);
 
-You can eager load associations as deep as you like::
+Você pode carregar um entidade associada e também outros dados associados aquela entidade::
 
     $query = $products->find()->contain([
         'Shops.Cities.Countries',
         'Shops.Managers'
     ]);
+    //Procure os produtos, acessando o shop a qual pertence, acesse a cidade do shop, junto com ele quero o pais em qual esta.
+    //Quero também seus gestores.
 
-If you need to reset the containments on a query you can set the second argument
-to ``true``::
+O segundo argumento em ``contain`` resetar todas os relacionamentos anteriores ``true``::
 
     $query = $articles->find();
     $query->contain(['Authors', 'Comments'], true);
 
-Passing Conditions to Contain
+Condições em ``contain()``
 -----------------------------
 
-When using ``contain()`` you are able to restrict the data returned by the
-associations and filter them by conditions::
+Quando usar ``contain()`` você pode aplicar um filtro nos dados associados::
 
-    // In a controller or table method.
+    // No controller ou table.
 
     $query = $articles->find()->contain([
         'Comments' => function ($q) {
@@ -503,7 +495,7 @@ associations and filter them by conditions::
         }
     ]);
 
-This also works for pagination at the Controller level::
+Isto pode ajudar na paginação de resultados também associados::
 
     $this->paginate['contain'] = [
         'Comments' => function (\Cake\ORM\Query $query) {
@@ -514,12 +506,9 @@ This also works for pagination at the Controller level::
 
 .. note::
 
-    When you limit the fields that are fetched from an association, you **must**
-    ensure that the foreign key columns are selected. Failing to select foreign
-    key fields will cause associated data to not be present in the final result.
+    Quando você limita alguns campos selecionado lembre-se das chaves primárias, elas também devem ser selecionados, caso isso ocorra, o resultado final da consulta pode não ser o esperado.
 
-It is also possible to restrict deeply-nested associations using the dot
-notation::
+Usando o '.' você também pode definir um filtro para uma associação mais profunda::
 
     $query = $articles->find()->contain([
         'Comments',
@@ -528,11 +517,9 @@ notation::
         }
     ]);
 
-If you have defined some custom finder methods in your associated table, you can
-use them inside ``contain()``::
+Se você definiu alguma consulta personalizada na sua entidade relacionada, você pode usar essa consulta também usando ``contain``::
 
-    // Bring all articles, but only bring the comments that are approved and
-    // popular.
+    // Retorne todos os artigos, retorne também apenas os comentários aprovados e populares.
     $query = $articles->find()->contain([
         'Comments' => function ($q) {
            return $q->find('approved')->find('popular');
@@ -541,38 +528,32 @@ use them inside ``contain()``::
 
 .. note::
 
-    For ``BelongsTo`` and ``HasOne`` associations only the ``where`` and
-    ``select`` clauses are used when loading the associated records. For the
-    rest of the association types you can use every clause that the query object
-    provides.
+    Para relacionamentos ``BelongsTo`` e ``HasOne`` somente as cláusulas ``where`` e
+    ``select`` podem ser usadas em quanto carrega dados associados. Para o resto
+    dos relacionamentos você pode usar todas as cláusulas que o objeto Query provê.
 
-If you need full control over the query that is generated, you can tell ``contain()``
-to not append the ``foreignKey`` constraints to the generated query. In that
-case you should use an array passing ``foreignKey`` and ``queryBuilder``::
+Se você necessita de um controle mais completo de filtro nas consultas sem o uso da chave primária, você pode desativar ``foreignKey``. Neste caso você pode passar parâmetros na função ``queryBuilder`` e construir um filtro com todas as condições necessárias::
 
     $query = $articles->find()->contain([
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...); // Full conditions for filtering
+                return $q->where(...); // Todas as condições para o filtro
             }
         ]
     ]);
 
-If you have limited the fields you are loading with ``select()`` but also want to
-load fields off of contained associations, you can pass the association object
-to ``select()``::
+Você pode carregar apenas alguns campos com ``select()`` sem precisar alterar quais campos quer no seus dados relacionais::
 
-    // Select id & title from articles, but all fields off of Users.
+    // Selecione id e titulo de artigos, mas todos os campos de usuários.
     $query = $articles->find()
         ->select(['id', 'title'])
         ->select($articlesTable->Users)
         ->contain(['Users']);
 
-Alternatively, if you have multiple associations, you can use ``autoFields()``::
+Um alternativa, se você tem multiplos relacionamentos, pode usar  ``autoFields()``::
 
-    // Select id & title from articles, but all fields off of Users, Comments
-    // and Tags.
+    // Selecione id e titulo de artigo, mas todos o campos de usuários, comentários e tags.
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
         ->autoFields(true)
@@ -580,15 +561,15 @@ Alternatively, if you have multiple associations, you can use ``autoFields()``::
             return $q->autoFields(true);
         }]);
 
-.. versionadded:: 3.1
-    Selecting columns via an association object was added in 3.1
+.. Na versão:: 3.1
+    Você pode selecionar colunas na associação dos objetos
 
 
-Sorting Contained Associations
+Ordenando Dados Associados
 ------------------------------
 
-When loading HasMany and BelongsToMany associations, you can use the ``sort``
-option to sort the data in those associations::
+Quando o relacionamento HasMany e BelongsToMany, você pode usar a opção ``sort``
+para ordenar os resultados associados::
 
     $query->contain([
         'Comments' => [
@@ -600,44 +581,43 @@ option to sort the data in those associations::
 
 .. _filtering-by-associated-data:
 
-Filtering by Associated Data
-----------------------------
+Filtro Baseado Nos Dados Associados
+-----------------------------------
 
 .. start-filtering
 
-A fairly common query case with associations is finding records 'matching'
-specific associated data. For example if you have 'Articles belongsToMany Tags'
-you will probably want to find Articles that have the CakePHP tag. This is
-extremely simple to do with the ORM in CakePHP::
+Em alguns casos queremos realizar uma consulta que seus dados relacionados tenham um valor específico.
+Por exemplo, se você tem 'Articles belongsToMany Tags'
+provavelmente vai querer encontrar Artigos que tenham tags 'CakePHP'.
+Isto é muito simples com o ORM do CakePHP::
 
-    // In a controller or table method.
+    // No controller ou table.
 
     $query = $articles->find();
     $query->matching('Tags', function ($q) {
         return $q->where(['Tags.name' => 'CakePHP']);
     });
+    //Procure todos os artigos, artigos que tenham tags 'CakePHP'
 
-You can apply this strategy to HasMany associations as well. For example if
-'Authors HasMany Articles', you could find all the authors with recently
-published articles using the following::
+Também pode aplicar essa estratégia com relacionamentos HasMany.
+Por exemplo 'Authors HasMany Articles', procure todos os autores com artigos publicados recentemente usando::
 
     $query = $authors->find();
     $query->matching('Articles', function ($q) {
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtering by deep associations is surprisingly easy, and the syntax should be
-already familiar to you::
+Filtro com relacionamentos profundos, isso pode ser familiar para você::
 
-    // In a controller or table method.
+    // No controller ou table.
     $query = $products->find()->matching(
         'Shops.Cities.Countries', function ($q) {
             return $q->where(['Countries.name' => 'Japan']);
         }
     );
 
-    // Bring unique articles that were commented by 'markstory' using passed variable
-    // Dotted matching paths should be used over nested matching() calls
+    // Todos os artigos comentados por 'markstory' passando uma variável
+    // '.' ajudam a definir entidades de entidades
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username]);
@@ -645,15 +625,13 @@ already familiar to you::
 
 .. note::
 
-    As this function will create an ``INNER JOIN``, you might want to consider
-    calling ``distinct`` on the find query as you might get duplicate rows if
-    your conditions don't exclude them already. This might be the case, for
-    example, when the same users comments more than once on a single article.
+    Esta função criará ``INNER JOIN``, então dados duplicados podem ser retornados
+    se isso acontecer, poderá fazer uso de ``distinct`` quando realizar uma consulta,
+    isso elimina os dados duplicados quando as condições passadas não o fizerem.
+    Um exemplo, muitos usuários comentám o mesmo artigo, então o mesmo artigo será retornado muitas vezes.
 
-The data from the association that is 'matched' will be available on the
-``_matchingData`` property of entities. If you both match and contain the same
-association, you can expect to get both the ``_matchingData`` and standard
-association properties in your results.
+Os dados coincidentes encontrados estarão disponíveis na propriedade 
+``_matchingData`` das entidades. 
 
 Using innerJoinWith
 ~~~~~~~~~~~~~~~~~~~
