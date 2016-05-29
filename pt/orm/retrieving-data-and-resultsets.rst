@@ -161,7 +161,7 @@ Opções suportadas por find() são:
 - ``join`` Defina um Join específico.
 - ``order`` Ordenar resultados por.
 
-Outras opções fora dessa lista, serão passadas para o beforeFind ou outras funções de tratamento, 
+Outras opções fora dessa lista, serão passadas para o beforeFind ou outras funções de tratamento,
 onde podem ser usados para tratar a consulta a sua maneira. Pode usar o metódo
 ``getOptions()`` no objeto para retornar as opções utilizadas. Quando uma consulta for passada para o controller, recomendamos uma leitura
 sobre consultas personalizadas em :ref:`custom-find-methods`. Usando metódos de consultas personalizados, você terá um melhor reuso de seu código, e ficará fácil para testar a sua maneira.
@@ -208,7 +208,7 @@ Criando uma consulta você gosta do metódo ``count()`` para retornar a quantida
     $number = $query->count();
     //Retorne todos os artigos, me mostre quantos são.
 
-Veja `query-count` para modos de uso diferentes com o metódo ``count()``.
+Veja :ref:`query-count` para modos de uso diferentes com o metódo ``count()``.
 
 .. _table-find-list:
 
@@ -229,7 +229,7 @@ O Cake provê um metódo simples e fácil 'lists'::
         2 => 'Second article I wrote',
     ];
 
-Com as opções adicionais as chaves de ``$data`` podem representar uma coluna de sua tabela, 
+Com as opções adicionais as chaves de ``$data`` podem representar uma coluna de sua tabela,
 Por exemplo, use ``'displayField()'`` no objeto tabela na função 'initialize()', isto configura um valor a ser mostrado na chave::
 
 
@@ -307,7 +307,7 @@ Por ultimo, é muito bom quando podemos usar metódos criados em nossas entidade
 Encontrando dados enfileirados
 ==============================
 
-O metódo ``find('threaded')`` retorna que estarão relacionados por chaves. 
+O metódo ``find('threaded')`` retorna que estarão relacionados por chaves.
 Por padrão o Cake usa o campo chave ``parent_id``. Nesse modelo, é possível
 encontrar valores no banco de dados adjacentes. Todas as entidades correspondentes recebem um ``parent_id`` e são alocadas no atributo ``children``::
 
@@ -366,7 +366,7 @@ Neste exemplo mostramos como encontrarmos um artigo quando este estiver publicad
 
 O metódo traz muita funcionalidade, em alguns casos precisamos definir uma pilha de lógica, isto será possível usando
 o atributo ``$options`` para personalização de consulta com lógica irelevante.
-Sem esforço você pode expressar algumas consultas complexas. Assumindo que você 
+Sem esforço você pode expressar algumas consultas complexas. Assumindo que você
 tem ambas as buscas 'published' e 'recent', poderia fazer assim::
 
     // No controller ou table.
@@ -385,7 +385,7 @@ a função :ref:`map-reduce` para isto. Isto substituí o antigo 'afterFind' na 
 Buscadores dinâmicos
 ====================
 
-CakePHP's ORM provê uma dinâmica na construção de metódos de busca, onde na chamada do metódo poderá apenas adicionar o nome do campo que desejar buscar. 
+CakePHP's ORM provê uma dinâmica na construção de metódos de busca, onde na chamada do metódo poderá apenas adicionar o nome do campo que desejar buscar.
 Por exemplo, se você quer buscar usuários por seu nome gostará de::
 
     // No controller
@@ -409,7 +409,7 @@ Use a condição OR expressa::
     $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
     //Retorne usuário com nome joebob ou que possua o email joe@example.com
 
-Neste caso, ao usar 'OR' ou 'AND' voce não pode combinar os dois em único metódo. Também não será possível associar dados com o atributo ``contain``, 
+Neste caso, ao usar 'OR' ou 'AND' voce não pode combinar os dois em único metódo. Também não será possível associar dados com o atributo ``contain``,
 pois não é compatível com buscas dinâmicas. Lembra-se dos nossos queridos :ref:`custom-find-methods` eles podem fazer esse trabalho para você com
 consultas complexas. Por ultimos combine suas buscas personalizadas com as dinâmicas::
 
@@ -1233,4 +1233,3 @@ calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::
 
     $query->mapReduce(null, null, true);
-	
