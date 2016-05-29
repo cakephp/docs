@@ -445,13 +445,31 @@ Validation vs. Application Rules
 ================================
 
 The CakePHP ORM is unique in that it uses a two-layered approach to validation.
+
+The first layer is validation. Validation rules are intended to operate in
+a stateless way. They are best leveraged to ensure that the shape, data types
+and format of data is correct.
+
+The second layer is application rules. Application rules are best leveraged to
+check stateful properties of your entities. For example, validation rules could
+ensure that an email address is valid, while an application rule could ensure that
+the email address is unique.
+
 As you already discovered, the first layer is done through the ``Validator``
 objects when calling ``newEntity()`` or ``patchEntity()``::
 
-    $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+    $validatedEntity = $articlesTable->newEntity(
+        $unsafeData,
+        ['validate' => 'customName']
+    );
+    $validatedEntity = $articlesTable->patchEntity(
+        $entity,
+        $unsafeData,
+        ['validate' => 'customName']
+    );
 
-Validation is defined using the ``validationCustomName()`` methods::
+In the above example, we'll use a 'custom' validator, which is defined using the
+``validationCustomName()`` method::
 
     public function validationCustom($validator)
     {
@@ -459,10 +477,8 @@ Validation is defined using the ``validationCustomName()`` methods::
         return $validator;
     }
 
-Validation is meant for forms and request data. This means that validation rule
-sets can assume things about the structure of a form and validate fields not in
-the schema of the database. Validation assumes strings or array are passed
-since that is what is received from any request::
+Validation assumes strings or array are passed since that is what is received
+from any request::
 
     // In src/Model/Table/UsersTable.php
     public function validatePasswords($validator)
