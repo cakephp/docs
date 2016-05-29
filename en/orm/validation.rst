@@ -446,7 +446,7 @@ Validation vs. Application Rules
 
 The CakePHP ORM is unique in that it uses a two-layered approach to validation.
 
-The first layer is validation. Validation rules are intended to be operate in
+The first layer is validation. Validation rules are intended to operate in
 a stateless way. They are best leveraged to ensure that the shape, data types
 and format of data is correct.
 
