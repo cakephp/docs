@@ -3200,6 +3200,11 @@ iframe {
     /* Simple Footer */
     .footer-simple.footer-wrapper { padding:40px 0; }
 
+/* specificity needs to be high to get around responsive styles */
+.footer-wrapper .col-p30 .business-solution {
+    padding: 0 20px;
+}
+
 
 
 
