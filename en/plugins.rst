@@ -79,9 +79,9 @@ plugins you explicitly specify.
 
 There is also a handy shell command to enable the plugin. Execute the following line:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake plugin load ContactManager
+    bin/cake plugin load ContactManager
 
 This will put the ``Plugin::load('ContactManager');`` snippet in the bootstrap for you.
 
@@ -257,23 +257,23 @@ shell.
 
 In order to bake a plugin, use the following command:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake bake plugin ContactManager
+    bin/cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
 of your app. For example - baking controllers:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake bake controller --plugin ContactManager Contacts
+    bin/cake bake controller --plugin ContactManager Contacts
 
 Please refer to the chapter
 :doc:`/bake/usage` if you
 have any problems with using the command line. Be sure to re-generate your
 autoloader once you've created your plugin:
 
-.. code-block:: shell
+.. code-block:: bash
 
     $ php composer.phar dumpautoload
 

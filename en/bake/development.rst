@@ -129,7 +129,7 @@ with the pre-processed template file which is left in the application's
 
 So, for example, when baking a shell like so:
 
-.. code-block:: shell
+.. code-block:: bash
 
     bin/cake bake shell Foo
 
