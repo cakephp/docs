@@ -5,12 +5,17 @@ Retornando dados e conjuntos de resultados
 
 .. php:class:: Table
 
-Quando executar uma query, você obterá um objeto Entidade. Nesta sessão discutiremos diferentes caminhos para se obter: entidades, carregar informações relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre :doc:`/orm/entities` ( ‘Entity’ em inglês ).
+Quando executar uma query, você obterá um objeto Entidade. Nesta sessão
+discutiremos diferentes caminhos para se obter: entidades, carregar informações
+relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre
+:doc:`/orm/entities` ( ‘Entity’ em inglês ).
 
 Depurando Queries e Resultados
 ==============================
 
-Quando o ORM foi implementado, era muito difícil depurar os resultados obtidos nas versões anteriores do CakePHP. Agora existem muitas formas fáceis de inspecionar os dados retornados pelo ORM.
+Quando o ORM foi implementado, era muito difícil depurar os resultados obtidos
+nas versões anteriores do CakePHP. Agora existem muitas formas fáceis de
+inspecionar os dados retornados pelo ORM.
 
 - ``debug($query)`` Mostra o SQL e os parâmetros incluídos, não mostra resultados.
 - ``debug($query->all())`` Mostra a propriedade ResultSet retornado pelo ORM.
@@ -26,7 +31,8 @@ Pegando uma entidade com a chave primária
 
 .. php:method:: get($id, $options = [])
 
-Sempre que é necessário editar ou visualizar uma entidade ou dados relacionais você pode usar ``get()``::
+Sempre que é necessário editar ou visualizar uma entidade ou dados relacionais
+você pode usar ``get()``::
 
     // No controller ou table tente isto.
 
@@ -39,9 +45,11 @@ Sempre que é necessário editar ou visualizar uma entidade ou dados relacionais
     ]);
 
 Quando não conseguir obter um resultado
-``Cake\Datasource\Exception\RecordNotFoundException`` será disparado. Você poderá tratar esta exceção, ou converter num erro 404.
+``Cake\Datasource\Exception\RecordNotFoundException`` será disparado. Você
+poderá tratar esta exceção, ou converter num erro 404.
 
-O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache`` quando chamar ``get()`` para uma performance na leitura - ``caching``::
+O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache``
+quando chamar ``get()`` para uma performance na leitura - ``caching``::
 
     // No controller ou table tente isto.
 
@@ -63,11 +71,12 @@ O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache``
 
 
 
-``Por padrão o CakePHP possui um sistema interno de cache que viabiliza busca e aumenta a performance - não recomendado desabilatar.``
+``Por padrão o CakePHP possui um sistema interno de cache que viabiliza busca
+e aumenta a performance - não recomendado desabilatar.``
 
-Opcionalmente você pode usar ``get()`` nas entidades com busca customizavél :ref:`custom-find-methods`. Por
-exemplo, você pode querer pegar todas as traduções de uma entidade. Poderá usar
-a opção ``finder``::
+Opcionalmente você pode usar ``get()`` nas entidades com busca customizavél
+:ref:`custom-find-methods`. Por exemplo, você pode querer pegar todas as
+traduções de uma entidade. Poderá usar a opção ``finder``::
 
     $article = $articles->get($id, [
         'finder' => 'translations',
@@ -78,19 +87,22 @@ Usando ``'find()'`` para carregar dados
 
 .. php:method:: find($type, $options = [])
 
-Agora que você sabe e pode trabalhar com entidades, Precisará carrega las e gostará muito como fazer isso. O caminho mais simples
-para carregar uma Entidade ou objetos relacionais metódo ``find()``. find provê um extensivél e facíl caminho para procurar e retornar dados,
-talves você se interesse por in::
+Agora que você sabe e pode trabalhar com entidades, Precisará carrega las
+e gostará muito como fazer isso. O caminho mais simples para carregar uma
+Entidade ou objetos relacionais metódo ``find()``. find provê um extensivél
+e facíl caminho para procurar e retornar dados, talves você se interesse por
+in::
 
     // No controller ou table.
 
     // Procure todos os artigos
     $query = $articles->find('all');
 
-O valor retornado por qualquer metódo ``find()`` será sempre
-um :php:class:`Cake\\ORM\\Query` objeto. A class Query assim permitindo que possa
-posteriormente refinar a consulta depois de cria lá. Objeto Query não será executado até que
-inicie um busca por linhas, seja convertido num array, ou chamado outro metódo, exemplo: ``all()``::
+O valor retornado por qualquer metódo ``find()`` será sempre um
+:php:class:`Cake\\ORM\\Query` objeto. A class Query assim permitindo que possa
+posteriormente refinar a consulta depois de cria lá. Objeto Query não será
+executado até que inicie um busca por linhas, seja convertido num array, ou
+chamado outro metódo, exemplo: ``all()``::
 
     // No controller ou table.
 
@@ -196,7 +208,7 @@ Criando uma consulta você gosta do metódo ``count()`` para retornar a quantida
     $number = $query->count();
     //Retorne todos os artigos, me mostre quantos são.
 
-Veja :ref:`query-count` para modos de uso diferentes com o metódo ``count()``.
+Veja `query-count` para modos de uso diferentes com o metódo ``count()``.
 
 .. _table-find-list:
 
@@ -204,7 +216,7 @@ Encontrando Chaves/Pares de Valores
 ===================================
 
 Frequentemente precisamos gerar um dados associados em array de nossas aplicações.
-Muito usado para criar o elemento ``<select>``. 
+Muito usado para criar o elemento ``<select>``.
 O Cake provê um metódo simples e fácil 'lists'::
 
     // No controller ou table.
@@ -420,19 +432,23 @@ Caso tenha objeto Query retornado da busca dinâmica você necessitará de chama
 Retornando Dados Associados
 ===========================
 
-Quando desejar alguns dados associados ou um filtro baseado nesses dados associados, terá dois caminhos para atingir seu objetivo:
+Quando desejar alguns dados associados ou um filtro baseado nesses dados
+associados, terá dois caminhos para atingir seu objetivo:
 
 - use CakePHP ORM query functions like ``contain()`` and ``matching()``
 - use join functions like ``innerJoin()``, ``leftJoin()``, and ``rightJoin()``
 
-Use ``contain()`` quando desejar carregar uma entidade e seus dados associados. 
-``contain()`` aplicará uma condição adicional aos dados relacinados, porém você não poderá 
-aplicar condições nesses dados baseado nos dados relacionais. Mais detalhes veja ``contain()`` em :ref:`eager-loading-associations`.
+Use ``contain()`` quando desejar carregar uma entidade e seus dados associados.
+``contain()`` aplicará uma condição adicional aos dados relacinados, porém você
+não poderá aplicar condições nesses dados baseado nos dados relacionais. Mais
+detalhes veja ``contain()`` em :ref:`eager-loading-associations`.
 
-``matching()`` se você deseja aplicar condições na sua entidade baseado nos dados relacionais, deve usar isto. 
-Por exemplo, você quer carregar todos os artigos que tem uma tag específica neles. Mais detalhes veja ``matching()``, em :ref:`filtering-by-associated-data`.
+``matching()`` se você deseja aplicar condições na sua entidade baseado nos
+dados relacionais, deve usar isto.  Por exemplo, você quer carregar todos os
+artigos que tem uma tag específica neles. Mais detalhes veja ``matching()``, em
+:ref:`filtering-by-associated-data`.
 
-Caso prefira usar a função join, veja mais informações em :ref:`adding-joins`.
+Caso prefira usar a função join, veja mais informações em `adding-joins`.
 
 .. _eager-loading-associations:
 
@@ -856,7 +872,7 @@ Lazy Loading Associations
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
-:ref:`lazy-load-associations` and :ref:`loading-additional-associations`
+`lazy-load-associations` and `loading-additional-associations`
 sections for more information.
 
 Working with Result Sets
@@ -942,7 +958,7 @@ Some other examples of the collection methods being used with result sets are::
     $authorList = $results->combine('id', 'author.name');
 
 The :doc:`/core-libraries/collections` chapter has more detail on what can be
-done with result sets using the collections features. The :ref:`format-results`
+done with result sets using the collections features. The `format-results`
 section show how you can add calculated fields, or replace the result set.
 
 Getting the First & Last Record From a ResultSet
