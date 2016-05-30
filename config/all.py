@@ -1,4 +1,4 @@
-# Global configuration information used across all the 
+# Global configuration information used across all the
 # translations of documentation.
 #
 
@@ -280,7 +280,7 @@ epub_tocdepth = 2
 epub_tocdup = False
 
 # Languages available.
-languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
+languages = ['en', 'pt', 'es', 'ja', 'fr']
 
 # Hack to render the php source code without the <?php tag
 from sphinx.highlighting import lexers
