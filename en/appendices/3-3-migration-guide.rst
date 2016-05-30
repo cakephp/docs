@@ -51,6 +51,10 @@ advantage of features like:
 * Be able to augment the response objects emitted by error handling and asset
   delivery.
 
+See the :doc:`/controllers/middleware` chapter and :ref:`adding-http-stack`
+sections for more information and how to add the new HTTP stack to an existing
+application.
+
 Http Client is now PSR7 Compatible
 ==================================
 
