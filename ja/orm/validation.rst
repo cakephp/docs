@@ -446,24 +446,37 @@ CakePHPは、エンティティが保存される前に適用される‘ルー�
 バリデーション対アプリケーションルール
 ======================================
 
-CakePHPのORMは検証に二層のアプローチを使う点がユニークです。
+CakePHP の ORM は検証に二層のアプローチを使う点がユニークです。
+
+一層目はバリデーションです。バリデーションルールは、ステートレスな方法の操作を意図しています。
+それらは、形状、データ型、データの書式が正しいことを保証するために最もよく作用します。
+
+二層目は、アプリケーションルールです。アプリケーションルールは、あなたのエンティティの
+ステートフルなプロパティのチェックに最もよく作用します。例えば、バリデーションルールは、
+メールアドレスが有効なことを保証することができますが、アプリケーションルールは、
+メールアドレスがユニークであることを保証できます。
+
 すでに見てきた通りに、一層目は ``newEntity()`` か ``patchEntity()`` を呼ぶ時に
-``Validator`` オブジェクトを通して行われます::
+``Validator`` オブジェクトを通して行われます。 ::
 
-    $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+    $validatedEntity = $articlesTable->newEntity(
+        $unsafeData,
+        ['validate' => 'customName']
+    );
+    $validatedEntity = $articlesTable->patchEntity(
+        $entity,
+        $unsafeData,
+        ['validate' => 'customName']
+    );
 
-バリデーションは ``validationCustomName()`` メソッドを使って定義されます::
+上記の例では、 ``validationCustomName()`` メソッドを使って定義される
+「カスタム」バリデータを使用します。 ::
 
     public function validationCustom($validator)
     {
         $validator->add(...);
         return $validator;
     }
-
-バリデーションはフォームやリクエストデータのために意図されています。
-これはバリデーションルールセットがフォームの構造に関するものを想定しており、
-スキーマやデータベースにないフィールドを検証できることを意味します。
 
 バリデーションは文字列や配列を渡されることを想定しています。
 それらがリクエストから得られるものですので::
