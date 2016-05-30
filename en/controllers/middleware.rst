@@ -201,26 +201,49 @@ The protocol is as follows:
 #. Middleware must return a response.
 
 Middleware can return a response either by calling ``$next`` or by creating
-their own response::
+their own response. We can see both options in our simple middleware::
 
-    // Call $next() delegates control to then *next* middleware
-    // In your application's stack.
-    function __invoke($request, $response, $next)
+    // in src/Middleware/SimpleMiddleware.php
+    namespace App\Middleware;
+
+    class SimpleMiddleware
     {
-        // Do some things
-        $response = $next($request, $response);
-        // More things
-        return $response;
+        function __invoke($request, $response, $next)
+        {
+            // If we find /simple/ in the URL return a simple response.
+            if (strpos($request->getUri()->getPath(), '/simple/') !== false) {
+                $body = $response->getBody();
+                $body->write('A simple response');
+                return $response->withStatus(200)
+                    ->withHeader('Content-Type', 'text/plain')
+                    ->withBody($body);
+            }
+            // Calling $next() delegates control to then *next* middleware
+            // In your application's stack.
+            $response = $next($request, $response);
+
+            // We could further modify the response before returning it.
+            return $response;
+        }
     }
 
-Middleware can also short-circuit the dispatching process by returning a
-response object::
+Now that we've made a very simple middleware, lets attach it to our
+application::
 
-    function __invoke($request, $response, $next)
+    // in src/Application.php
+    namespace App;
+
+    use App\Middleware\SimpleMiddleware;
+
+    class Application
     {
-        // By not invoking $next, this will be the last
-        // middleware to run.
-        return $response->withStatusCode(400);
+        public function middleware($middleware)
+        {
+            // Other middleware
+
+            $middleware->push(new SimpleMiddleware());
+            return $middleware;
+        }
     }
 
 .. _adding-http-stack:
