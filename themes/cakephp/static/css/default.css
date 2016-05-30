@@ -68,46 +68,6 @@
     color: #D33C44;
 }
 
-
-/* def list */
-dl.docutils {
-    margin: 2em 0;
-    padding: 0;
-}
-.docutils dt {
-    font-weight: bold;
-    font-size: 14px;
-    font-size: 1.4rem;
-    margin-bottom: 0.5em;
-}
-.docutils dd {
-    border-left: 2px solid #ccc;
-    margin: 0 0 1em 1em;
-    padding: 0 0 .5em .5em;
-    font-size: 14px;
-    font-size: 1.4rem;
-}
-
-
-/* Inline */
-.panel.flyout {
-    border: 3px solid #C92434;
-}
-
-/* Reveal modal dialogs */
-.reveal-modal {
-    background-image: none;
-    border: 4px solid #417282;
-
-    -webkit-box-shadow: 4px 4px 0 #003D4C;
-    -moz-box-shadow: 4px 4px 0 #003D4C;
-    box-shadow: 4px 4px 0 #003D4C;
-
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
 /* promo spot on home page */
 .offline-download {
     background: #F0F0E8;
@@ -336,12 +296,30 @@ dl.docutils {
     content: "Other";
 }
 
+
+
+/* def list */
+dl.docutils {
+    margin: 2em 0;
+    padding: 0;
+}
+.docutils dt {
+    font-weight: bold;
+    font-size: 14px;
+    font-size: 1.4rem;
+    margin-bottom: 0.5em;
+}
+.docutils dd {
+    border-left: 2px solid #ccc;
+    margin: 0 0 1em 1em;
+    padding: 0 0 .5em .5em;
+    font-size: 14px;
+    font-size: 1.4rem;
+}
 .docutils.internal-toc td {
     font-size:1.5em;
     padding:5px;
 }
-
-
 table.internal-toc {
     border:0;
     width:80%;
@@ -446,11 +424,6 @@ h6:hover .headerlink {
 }
 
 
-/* -- body styles -- */
-.body {
-    position: relative;
-}
-
 /* inline code */
 tt {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
@@ -462,7 +435,6 @@ tt {
 a tt {
     color: #428bca;
 }
-
 dl tt {
     border-bottom: none;
 }
@@ -521,7 +493,6 @@ dl tt {
 .admonition ol {
     margin-bottom: 5px;
 }
-
 
 /* Icons on admonititions */
 .admonition:before,
@@ -600,16 +571,6 @@ table th {
     font-size: 14px;
     padding-top: 3px;
     padding-bottom: 3px;
-}
-
-.viewcode-back {
-    font-family: sans-serif;
-}
-
-div.viewcode-block:target {
-    background-color: #f4debf;
-    border-top: 1px solid #ac9;
-    border-bottom: 1px solid #ac9;
 }
 
 /* arguments */
