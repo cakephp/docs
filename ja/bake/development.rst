@@ -129,7 +129,7 @@ bake テンプレートファイルを変更しようとする場合は特に、
 
 だから、例えば、以下のようにシェルを bake した場合:
 
-.. code-block:: shell
+.. code-block:: bash
 
     bin/cake bake shell Foo
 

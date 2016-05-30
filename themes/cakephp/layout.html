@@ -226,7 +226,7 @@
 								<div class="col-md-5 p0">
 									<ul class="nav navbar-nav">
 										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3.2 <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">3.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
 											<ul class="dropdown-menu">
 												<li><a href="http://book.cakephp.org/3.0/{{ language }}">3.x Book</a></li>
 												<li><a href="http://book.cakephp.org/2.0/{{ language }}">2.x Book</a></li>
@@ -373,72 +373,43 @@
 		<div class="row col-p30">
 			<div class="col-sm-12 col-md-3">
 				<div class="footer-widget t-footer">
-					{# Hidden as it is not done
-					<form class="form" method="post" action="http://my.cakephp.org/login">
-						<h4>My CakePHP</h4>
-						<div class="col-md-12 p0 form-user">
-							<label class="mb10">Username<input type="text" name="data[AppUser][email]" required class="form-control"></label>
-							<label class="mb10">Password<input type="password" name="data[AppUser][password]" required class="form-control"></label>
-						</div>
-
-						<div class="col-md-4  col-xs-6 p0 pull-right">
-							<button type="submit" class=" btn-user">Login</button>
-						</div>
-						#}
-
-						{# Remove this div when the SSO form works. #}
-						<div class="col-md-12">
-
-						{# Hide the SSO form for now.
-						<div class="col-md-8 col-xs-6 p0 register">
-							<label><input type="checkbox">Remember me</label>
-							<p>
-								<a href="http://my.cakephp.org/users/reset_password">Forgot your password?</a>
-								<br>New user?<a href="http://my.cakephp.org/join"> Register!</a>
-							</p>
-							#}
-							<a href="https://www.openhub.net/p/cakephp">
-								<img src="{{ pathto('_static/open-hub.png', 1) }}">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="{{ pathto('_static/open-hub.png', 1) }}">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="{{ pathto('_static/rackspace.png', 1) }}">
 							</a>
-							<div class="mt10">
-								<a href="https://www.rackspace.com/">
-									<img src="{{ pathto('_static/rackspace.png', 1) }}">
-								</a>
-							</div>
 						</div>
-					{#
-					</form>
-					#}
+					</div>
 				</div>
 			</div>
 
 			<div class="col-sm-12 col-md-9">
-				<div class="col-md-3 col-sm-4">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						{% include 'menu/business-solutions.html' %}
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
 					<ul class="footer-menu">
 						{% include 'menu/footer-documentation.html' %}
 					</ul>
 				</div>
 
-				<div class="col-md-3 col-sm-4">
+				<div class="col-md-3 col-sm-6">
 					<ul class="footer-menu">
 						{% include 'menu/community.html' %}
 					</ul>
 				</div>
 
-				<div class="col-md-3 col-sm-4">
+				<div class="col-md-3 col-sm-6">
 					<ul class="footer-menu">
 						{% include 'menu/help.html' %}
 					</ul>
 				</div>
-
-				{# Marketplace is not done.
-				When it is the colums will need to be adjusted.
-				<div class="col-md-3">
-					<ul class="footer-menu">
-						{% include 'menu/marketplace.html' %}
-					</ul>
-				</div>
-				#}
 			</div>
 		</div>
 

@@ -20,13 +20,13 @@ répertoires que vous devriez voir:
 
 Vous remarquerez quelques dossiers principaux:
 
-- Le dossier *bin* contient les executables de la console Cake.
+- Le dossier *bin* contient les exécutables de la console Cake.
 - Le dossier *config* contient les (quelques) fichiers de
   :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
   connexion à la base de données, le bootstrapping, les fichiers de
   configuration du cœur et consorts doivent être stockés ici.
-- Le dossier *logs* contient normalement vos fichiers de log dépendant de votre
-  configuration des logs.
+- Le dossier *logs* contient normalement vos fichiers de log avec la
+  configuration par défaut des logs.
 - Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
 - Le dossier *src* sera celui où vous exercerez votre magie : c'est là
@@ -36,7 +36,7 @@ Vous remarquerez quelques dossiers principaux:
 - Le dossier *tmp* est l'endroit où CakePHP stocke les données temporaires. Les
   données qu'il stocke dépendent de la façon dont vous avez configuré CakePHP
   mais ce dossier est généralement utilisé pour stocker les descriptions de
-  model, les logs, et parfois les informations de session.
+  model et parfois les informations de session.
 - Le dossier *vendor* est l'endroit où CakePHP et d'autres dépendances de
   l'application vont être installés. Engagez-vous personnellement à ne
   **pas** modifier les fichiers dans ce dossier. Nous ne pourrons pas vous
@@ -56,17 +56,17 @@ du développement de votre application. Regardons d'un peu plus près les dossie
 à l'intérieur de *src*.
 
 Console
-    Contient les commandes de la console et les Tasks de la console pour votre
-    application. Pour plus d'informations, regardez
+    Contient les commandes de la console et les tasks de la console pour votre
+    application. Pour plus d'informations, regardez la section
     :doc:`/console-and-shells`.
 Controller
-    Contient les Controllers et les Components de votre application.
+    Contient les controllers et les components de votre application.
 Locale
     Stocke les fichiers pour l'internationalisation.
 Model
-    Pour les Tables, Entity et Behaviors de votre application.
+    Pour les tables, entity et behaviors de votre application.
 View
-    Les fichiers de présentation sont placés ici : Vue Grille, helpers et
+    Les fichiers de présentation sont placés ici : cells, helpers et
     templates de vues.
 Template
     Les fichiers de présentation se trouvent ici: elements, pages d'erreur,

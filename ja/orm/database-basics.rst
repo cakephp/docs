@@ -305,7 +305,8 @@ text
 uuid
     データベースがサポートするなら UUID 型に、さもなければ CHAR(36) に変換します。
 integer
-    データベースがサポートするなら INTEGER 型に変換します。
+    データベースがサポートするなら INTEGER 型に変換します。現時点では、
+    BIT はサポートしていません。
 biginteger
     データベースがサポートするなら BIGINT 型に変換します。
 float
@@ -315,7 +316,8 @@ decimal
     DECIMAL 型に変換されます。 ``length`` と ``precision`` オプションをサポート
     します。
 boolean
-    BOOLEAN に変換します。（ MySQL の場合は TINYINT(1) になります。）
+    BOOLEAN に変換します。MySQL の場合は TINYINT(1) になります。現時点では、
+    BIT(1) はサポートしていません。
 binary
     データベースに応じて BLOB または BYTEA 型に変換します。
 date

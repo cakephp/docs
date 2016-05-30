@@ -1,10 +1,10 @@
 Internationalisation & Localisation
 ###################################
 
-L'une des meilleures façons pour que votre application ait une audience plus
-large est de gérer plusieurs langues. Cela peut souvent se révéler être une
-tâche gigantesque, mais les fonctionnalités d'internationalisation et de
-localisation dans CakePHP rendront cela plus facile.
+L'une des meilleures façons pour qu'une application ait une audience plus large
+est de gérer plusieurs langues. Cela peut souvent se révéler être une tâche
+gigantesque, mais les fonctionnalités d'internationalisation et de localisation
+dans CakePHP rendront cela plus facile.
 
 D'abord il est important de comprendre quelques terminologies.
 *Internationalisation* se réfère à la possibilité qu'a une application d'être
@@ -60,7 +60,7 @@ contenir au minimum le fichier ``default.po`` (cf. ci-dessus). Un domaine se
 réfère à un regroupement arbitraire de messages de traduction. Si aucun groupe
 n'est utilisé, le groupe par défaut est sélectionné.
 
-Les messages du coeur extraits de la libairie cakephp peuvent être stockés
+Les messages du coeur extraits de la libairie CakePHP peuvent être stockés
 séparément dans un fichier **cake.po** dans **src/Locale/**.
 La `librairie localized de CakePHP <https://github.com/cakephp/localized>`_
 contient des traductions des chaînes de caractère du coeur (du domaine cake)
