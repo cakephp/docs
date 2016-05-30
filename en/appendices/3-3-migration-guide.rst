@@ -89,6 +89,8 @@ ORM
   representations of your entities.
 * ``Table::newEntity()`` and ``Table::patchEntity()`` will now raise an
   exception when an unknown association is in the 'associated' key.
+* ``RulesChecker::validCount()`` was added. This new method allows to apply
+  rules to the number of associated records an entity has.
 
 Validation
 ==========
