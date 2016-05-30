@@ -180,6 +180,49 @@ Most often you'll be setting headers and response bodies on requests::
 Creating Middleware
 ===================
 
+Middleware can either be implemented as anonymous functions (Closures), or as
+invokable classes. While Closures are suitable for smaller tasks they make
+testing harder, and can create a complicated ``Application`` class. Like most
+parts of CakePHP, middleware classes have a few conventions:
+
+* Middleware class files should be put in **src/Middleware**. For example:
+  **src/Middleware/CorsMiddleware.php**
+* Helper classes should be suffixed with ``Middleware``. For example:
+  ``LinkMiddleware``.
+* Middleware are expected to implement the middleware protocol.
+
+Middleware Protocol
+-------------------
+
+While not a formal interface, Middleware do have a soft-interface or protocol.
+The protocol is as follows:
+
+#. Middleware much implement ``__invoke($request, $response, $next)``.
+#. Middleware must return a response.
+
+Middleware can return a response either by calling ``$next`` or by creating
+their own response::
+
+    // Call $next() delegates control to then *next* middleware
+    // In your application's stack.
+    function __invoke($request, $response, $next)
+    {
+        // Do some things
+        $response = $next($request, $response);
+        // More things
+        return $response;
+    }
+
+Middleware can also short-circuit the dispatching process by returning a
+response object::
+
+    function __invoke($request, $response, $next)
+    {
+        // By not invoking $next, this will be the last
+        // middleware to run.
+        return $response->withStatusCode(400);
+    }
+
 .. _adding-http-stack:
 
 Adding the new HTTP Stack to an Existing Application
