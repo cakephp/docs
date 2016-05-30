@@ -3,6 +3,10 @@ Construtor de queries
 
 .. _query-count:
 
+Returning the Total Count of Records
+------------------------------------
+
+
 .. note::
     A documentação não é atualmente suportada pela lingua portuguesa nesta
     página.
