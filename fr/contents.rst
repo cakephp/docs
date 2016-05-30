@@ -20,6 +20,7 @@ Contenu
     development/configuration
     development/routing
     controllers/request-response
+    controllers/middleware
     controllers
     views
     orm
