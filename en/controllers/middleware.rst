@@ -194,7 +194,7 @@ parts of CakePHP, middleware classes have a few conventions:
 Middleware Protocol
 -------------------
 
-While not a formal interface, Middleware do have a soft-interface or protocol.
+While not a formal interface (yet), Middleware do have a soft-interface or protocol.
 The protocol is as follows:
 
 #. Middleware much implement ``__invoke($request, $response, $next)``.
@@ -203,7 +203,7 @@ The protocol is as follows:
 Middleware can return a response either by calling ``$next`` or by creating
 their own response. We can see both options in our simple middleware::
 
-    // in src/Middleware/SimpleMiddleware.php
+    // In src/Middleware/SimpleMiddleware.php
     namespace App\Middleware;
 
     class SimpleMiddleware
