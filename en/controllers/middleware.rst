@@ -218,6 +218,7 @@ their own response. We can see both options in our simple middleware::
                     ->withHeader('Content-Type', 'text/plain')
                     ->withBody($body);
             }
+
             // Calling $next() delegates control to then *next* middleware
             // In your application's stack.
             $response = $next($request, $response);
