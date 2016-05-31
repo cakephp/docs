@@ -240,9 +240,11 @@ application::
     {
         public function middleware($middleware)
         {
-            // Other middleware
-
+            // Push your simple middleware onto the stack
             $middleware->push(new SimpleMiddleware());
+            
+            // Push some more middleware onto the stack
+
             return $middleware;
         }
     }
