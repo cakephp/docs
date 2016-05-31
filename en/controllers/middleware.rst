@@ -228,10 +228,10 @@ their own response. We can see both options in our simple middleware::
         }
     }
 
-Now that we've made a very simple middleware, lets attach it to our
+Now that we've made a very simple middleware, let's attach it to our
 application::
 
-    // in src/Application.php
+    // In src/Application.php
     namespace App;
 
     use App\Middleware\SimpleMiddleware;
