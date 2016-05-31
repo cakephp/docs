@@ -443,7 +443,7 @@ Filter\AssetFilter
 レスポンス
 ----------
 
-* MIMEタイプ ``text/plain`` から ``cvs`` 拡張子へのマッピングが削除されました。
+* MIMEタイプ ``text/plain`` から ``csv`` 拡張子へのマッピングが削除されました。
   jQuery の XHR リクエストを受け取る際によくある厄介ごとであった ``Accept`` ヘッダーに
   ``text/plain`` が含む場合も、結果として、
   :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` は ``csv``
