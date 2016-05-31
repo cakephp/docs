@@ -1,6 +1,10 @@
 Filtres du Dispatcher
 #####################
 
+.. deprecated:: 3.3.0
+    Depuis la version 3.3.0 , les Filtres de Dispatcher sont dépréciés. Vous
+    devriez maintenant utiliser le :doc:`/controllers/middleware` à la place.
+
 Il y a plusieurs raisons de vouloir exécuter un bout de code avant que tout
 code de controller ne soit lancé ou juste avant que la réponse ne soit
 envoyée au client, comme la mise en cache de la réponse, le tunning de header,
