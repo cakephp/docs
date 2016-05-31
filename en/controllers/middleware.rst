@@ -24,7 +24,7 @@ Using Middleware
 ================
 
 You attach middleware in your ``App\Application`` class' ``middleware`` method.
-If you don't have an ``App\Applicatino`` class, see the section on
+If you don't have an ``App\Application`` class, see the section on
 :ref:`adding-http-stack` for more information. Your application's ``middleware``
 hook method will be called early in the request process, you can use the
 ``Middleware`` object to attach middleware::

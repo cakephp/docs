@@ -342,7 +342,7 @@ request's ``$options`` parameters::
 Response Objects
 ================
 
-.. php:namepspace:: Cake\Http\Client
+.. php:namespace:: Cake\Http\Client
 
 .. php:class:: Response
 
