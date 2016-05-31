@@ -449,16 +449,16 @@ merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the third parameter of the method::
 
     // In a controller.
-    $article = $articles->get(1);
+    $associated = ['Tags', 'Comments.Users'];
+    $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->data(), [
-        'associated' => ['Tags', 'Comments.Users']
+        'associated' => $associated
     ]);
     $articles->save($article);
 
 Associations are merged by matching the primary key field in the source entities
-to the corresponding fields in the data array. For belongsTo and hasOne
-associations, new entities will be constructed if no previous entity is found
-for the target property.
+to the corresponding fields in the data array. Associations will construct new
+entities if no previous entity is found for the association's target property.
 
 For example give some request data like the following::
 
@@ -476,14 +476,13 @@ a new user entity::
     $entity = $articles->patchEntity(new Article, $data);
     echo $entity->user->username; // Echoes 'mark'
 
-The same can be said about hasMany and belongsToMany associations, but an
-important note should be made.
+The same can be said about hasMany and belongsToMany associations, with
+an important caveat:
 
 .. note::
 
     For belongsToMany associations, ensure the relevant entity has
     a property accessible for the associated entity.
-
 
 If a Product belongsToMany Tag::
 
@@ -501,7 +500,7 @@ If a Product belongsToMany Tag::
 
     Remember that using either ``patchEntity()`` or ``patchEntities()`` does not
     persist the data, it just edits (or creates) the given entities. In order to
-    save the entity you will have to call the ``save()`` method.
+    save the entity you will have to call the table's ``save()`` method.
 
 For example, consider the following case::
 
@@ -538,9 +537,8 @@ following result::
     ];
 
 As you can see, the comment with id 2 is no longer there, as it could not be
-matched to anything in the ``$newData`` array. This is done this way to better
-capture the intention of a request data post. The sent data is reflecting the
-new state that the entity should have.
+matched to anything in the ``$newData`` array. This happens because CakePHP is
+reflecting the new state described in the request data.
 
 Some additional advantages of this approach is that it reduces the number of
 operations to be executed when persisting the entity again.
