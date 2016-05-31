@@ -48,13 +48,13 @@ a variety of operations::
 
         $layer = new \App\Middleware\CustomMiddleware;
 
-        // pushed middleware will be last in line.
+        // Pushed middleware will be last in line.
         $middleware->push($layer);
 
         // Prepended middleware will be first in line.
         $middleware->prepend($layer);
 
-        // insert in a specific slot. If the slot is out of
+        // Insert in a specific slot. If the slot is out of
         // bounds, it will be added to the end of the line.
         $middleware->insertAt(2, $layer);
 
