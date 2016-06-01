@@ -40,10 +40,8 @@ hr {
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
-    letter-spacing: -1px;
     margin: 0;
     color: #363637;
-    font-weight:200;
     margin: 9px 0 9px 0;
 }
 h1 {
