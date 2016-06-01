@@ -96,6 +96,9 @@ ORM
   représentations JSON de vos entities.
 * ``Table::newEntity()`` et ``Table::patchEntity()`` vont maintenant lever une
   exception quand une association inconnue est dans la clé 'associated'.
+* ``RulesChecker::validCount()`` a été ajoutée. Cette nouvelle méthode permet
+  d'ajouter des règles qui vérifient le nombre d'enregistrements associés d'une
+  entity.
 
 Validation
 ==========
