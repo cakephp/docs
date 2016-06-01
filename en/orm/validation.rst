@@ -386,10 +386,10 @@ number of values, you can use the ``validCount()`` rule::
     // No more than 5 tags on an article.
     $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
 
-When defining count based rules, the 3 parameter lets you define the comparison
-operator to use.
-``==``, ``>=``, ``<=``, ``>``, ``<``, and ``!=`` are the accepted operators. To
-ensure a property's count is within a range, use two rules::
+When defining count based rules, the third parameter lets you define the
+comparison operator to use. ``==``, ``>=``, ``<=``, ``>``, ``<``, and ``!=``
+are the accepted operators. To ensure a property's count is within a range, use
+two rules::
 
     // Between 3 and 5 tags
     $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
