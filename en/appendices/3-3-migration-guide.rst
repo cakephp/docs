@@ -104,3 +104,15 @@ Debugging Functions
 
 * The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
   dumped. This makes them easier to use when values are being returned.
+
+Cache Shell Added
+=================
+
+To help you better manage cached data from a CLI environment, a shell command
+has been added that exposes methods for clearing cached data::
+
+    // Clear one cache config
+    bin/cake cache clear <configname>
+
+    // Clear all cache configs
+    bin/cake cache clear_all
