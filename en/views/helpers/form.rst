@@ -492,7 +492,8 @@ common options shared by all input methods are as follows:
 
 * ``$options['default']`` Used to set a default value for the input field. The
   value is used if the data passed to the form does not contain a value for the
-  field (or if no data is passed at all).
+  field (or if no data is passed at all). An explicit default value will
+  override any default values defined in the schema.
 
   Example usage::
 
@@ -517,6 +518,11 @@ common options shared by all input methods are as follows:
 In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
+
+.. versionchanged:: 3.3.0
+    As of 3.3.0, FormHelper will automatically use any default values defined
+    in your database schema. You can disable this behavior by setting
+    the ``schemaDefault`` option to ``false``.
 
 Options for Select, Checkbox and Radio Inputs
 ---------------------------------------------

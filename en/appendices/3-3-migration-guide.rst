@@ -90,6 +90,13 @@ ORM
 * ``Table::newEntity()`` and ``Table::patchEntity()`` will now raise an
   exception when an unknown association is in the 'associated' key.
 
+FormHelper
+==========
+
+* FormHelper will now automatically set the default value of fields to the
+  default value defined in your database columns. You can disable this behavior
+  by setting ``schemaDefault`` option to false.
+
 Validation
 ==========
 
