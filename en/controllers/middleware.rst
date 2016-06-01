@@ -199,7 +199,7 @@ Middleware Protocol
 While not a formal interface (yet), Middleware do have a soft-interface or protocol.
 The protocol is as follows:
 
-#. Middleware much implement ``__invoke($request, $response, $next)``.
+#. Middleware must implement ``__invoke($request, $response, $next)``.
 #. Middleware must return an object implementing the PSR7 ``ResponseInterface``.
 
 Middleware can return a response either by calling ``$next`` or by creating
