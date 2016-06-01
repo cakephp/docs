@@ -1,7 +1,7 @@
 Middleware
 ##########
 
-Middleware give you the ability to 'wrap' your application in re-usable,
+Middleware objects give you the ability to 'wrap' your application in re-usable,
 composable layers of Request handling, or response building logic. Middleware
 are part of the new HTTP stack in CakePHP that leverages the PSR7 request and
 response interfaces. By leveraging the PSR7 standard you can use any PSR7
@@ -55,18 +55,20 @@ a variety of operations::
         $middleware->prepend($layer);
 
         // Insert in a specific slot. If the slot is out of
-        // bounds, it will be added to the end of the line.
+        // bounds, it will be added to the end.
         $middleware->insertAt(2, $layer);
 
         // Insert before another middleware.
-        // If the named class cannot be found the new layer
-        // we be added to the end of the line.
+        // If the named class cannot be found,
+        // an exception will be raised.
         $middleware->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
 
         // Insert after another middleware.
+        // If the named class cannot be found, the
+        // middleware will added to the end.
         $middleware->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
@@ -86,7 +88,7 @@ scripts, that add middleware::
     EventManager::instance()->on(
         'Server.buildMiddleware',
         function ($event, $middleware) {
-            $middleware->push(new PluginMiddleware());
+            $middleware->push(new ContactPluginMiddleware());
         });
 
 PSR7 Requests and Responses
@@ -159,12 +161,12 @@ When modifying the response, it is important to remember that responses are
 **immutable**. You must always remember to store the results of any setter
 method. For example::
 
-    // This does *not* change the response. As our new object
-    // is not stored.
+    // This does *not* modify $response. The new object was not
+    // assigned to a variable.
     $response->withHeader('Content-Type', 'application/json');
 
     // This works!
-    $response = $response->withHeader('Content-Type', 'application/json');
+    $newResponse = $response->withHeader('Content-Type', 'application/json');
 
 Most often you'll be setting headers and response bodies on requests::
 
@@ -182,12 +184,12 @@ Creating Middleware
 
 Middleware can either be implemented as anonymous functions (Closures), or as
 invokable classes. While Closures are suitable for smaller tasks they make
-testing harder, and can create a complicated ``Application`` class. Like most
-parts of CakePHP, middleware classes have a few conventions:
+testing harder, and can create a complicated ``Application`` class. Middleware
+classes in CakePHP have a few conventions:
 
 * Middleware class files should be put in **src/Middleware**. For example:
   **src/Middleware/CorsMiddleware.php**
-* Helper classes should be suffixed with ``Middleware``. For example:
+* Middleware classes should be suffixed with ``Middleware``. For example:
   ``LinkMiddleware``.
 * Middleware are expected to implement the middleware protocol.
 
@@ -197,8 +199,8 @@ Middleware Protocol
 While not a formal interface (yet), Middleware do have a soft-interface or protocol.
 The protocol is as follows:
 
-#. Middleware must implement ``__invoke($request, $response, $next)``.
-#. Middleware must return a response.
+#. Middleware much implement ``__invoke($request, $response, $next)``.
+#. Middleware must return an object implementing the PSR7 ``ResponseInterface``.
 
 Middleware can return a response either by calling ``$next`` or by creating
 their own response. We can see both options in our simple middleware::
@@ -213,8 +215,8 @@ their own response. We can see both options in our simple middleware::
             // If we find /simple/ in the URL return a simple response.
             if (strpos($request->getUri()->getPath(), '/simple/') !== false) {
                 $body = $response->getBody();
-                $body->write('A simple response');
-                return $response->withStatus(200)
+                $body->write('Thanks!');
+                return $response->withStatus(202)
                     ->withHeader('Content-Type', 'text/plain')
                     ->withBody($body);
             }
