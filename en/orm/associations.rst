@@ -203,6 +203,7 @@ Possible keys for hasOne association arrays include:
 - **propertyName**: The property name that should be filled with data from the associated
   table into the source table results. By default this is the underscored & singular name of
   the association so ``address`` in our example.
+- **strategy**: Defines the query strategy to use. Can use 'select' as an option.
 - **finder**: The finder method to use when loading associated records.
 
 Once this association has been defined, find operations on the Users table can
