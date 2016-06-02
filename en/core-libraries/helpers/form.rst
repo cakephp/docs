@@ -171,7 +171,7 @@ There are a number of options for create():
   the $options array. The supplied URL can be relative to your CakePHP
   application::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(false, array(
         'url' => array('controller' => 'recipes', 'action' => 'add')
     ));
 
@@ -183,7 +183,7 @@ There are a number of options for create():
 
   or can point to an external domain::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(false, array(
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     ));
