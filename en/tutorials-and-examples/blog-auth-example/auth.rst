@@ -355,7 +355,7 @@ config::
                 'action' => 'display',
                 'home'
             ],
-            'authorize' => array('Controller'),  
+            'authorize' => ['Controller'],  
         ]);
     }
 
