@@ -565,7 +565,7 @@ articles), on changerait la fixture donnée dans la section précédente
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 Si vous voulez utiliser une autre connexion, utilisez::
