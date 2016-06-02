@@ -147,9 +147,9 @@ When using ``bake`` to create tables, add columns and so on, to your
 database, you will usually provide two things:
 Quando utilizar o ``bake`` para criar as migrações, você normalmente precisará informar os seguintes dados::
 
-* o nome da migração que você irá gerar (``CreateProducts`` por exemplo)
-* as colunas da tabela que serão adicionadas ou removidas na migração 
-(``name:string description:text created modified`` no nosso caso)
+  * o nome da migração que você irá gerar (``CreateProducts`` por exemplo)
+  * as colunas da tabela que serão adicionadas ou removidas na migração 
+  (``name:string description:text created modified`` no nosso caso)
 
 Devido às convenções, nem todas as alterações de schema podem ser realizadas através destes comandos.
 
