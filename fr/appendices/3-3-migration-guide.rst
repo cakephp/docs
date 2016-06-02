@@ -100,6 +100,14 @@ ORM
   d'ajouter des règles qui vérifient le nombre d'enregistrements associés d'une
   entity.
 
+FormHelper
+==========
+
+* FormHelper va maintenant automatiquement définir la valeur par défaut des
+  champs avec la valeur par défaut définie dans vos colonnes de base de données.
+  Vous pouvez désactiver ce comportement en définissant l'option
+  ``schemaDefault`` à false.
+
 Validation
 ==========
 

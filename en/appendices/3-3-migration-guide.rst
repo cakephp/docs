@@ -92,6 +92,13 @@ ORM
 * ``RulesChecker::validCount()`` was added. This new method allows to apply
   rules to the number of associated records an entity has.
 
+FormHelper
+==========
+
+* FormHelper will now automatically set the default value of fields to the
+  default value defined in your database columns. You can disable this behavior
+  by setting ``schemaDefault`` option to false.
+
 Validation
 ==========
 
