@@ -230,7 +230,7 @@ Utility
 General
 -------
 
-- :php:func:`pr()` no longer outputs HTML when running in cli mode.
+- :php:func:`pr()` no longer outputs HTML when running in CLI mode.
 
 Sanitize
 --------

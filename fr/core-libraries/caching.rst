@@ -48,7 +48,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 . versionchanged:: 2.3
     FileEngine est toujours le moteur de cache par défaut. Dans le passé, un
     certain nombre de personnes avait des difficultés à configurer et à déployer
-    APC correctement dans les deux cli + web. Utiliser les fichiers devrait
+    APC correctement dans les deux CLI + web. Utiliser les fichiers devrait
     faciliter la configuration de CakePHP pour les nouveaux développeurs.
 
 .. versionchanged:: 2.5
