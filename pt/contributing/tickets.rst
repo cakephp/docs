@@ -19,8 +19,7 @@ que vão te ajudar a descrever um bug:
   Não informar como reproduzir o problema, significa menos change do problema ser corrigido.
 * **Informe** com maior detalhes possível o seu ambiente de desenvolvimento: (OS, PHP
   version, CakePHP version).
-* **Não** use o sistema de ticket para suporte, use o `grupo de discussão <http://groups.google.com/group/cake-php>`_ 
-  ou o canal #cakephp IRC channel para isso.
+* **Não** use o sistema de ticket para suporte, use o canal #cakephp IRC channel para isso.
 
 
 Informando Problemas de Segurança

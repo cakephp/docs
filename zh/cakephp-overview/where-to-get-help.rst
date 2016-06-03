@@ -48,7 +48,6 @@ IRC 频道
 
 **IRC Channels on irc.freenode.net:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ —— 一般讨论   
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ —— 文档
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ —— Bakery
@@ -57,17 +56,6 @@ IRC 频道
 `开发团队 <https://github.com/cakephp?tab=members>`_ 的成员在那里，尤其是在南北
 美洲用户的白天时间。我们很乐意听到你的反馈，你需要什么帮助，或者想在你所在的地区
 寻找使用者，或者想捐赠你崭新的跑车。
-
-.. _cakephp-official-communities:
-
-CakePHP 的官方讨论组
-====================
-`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
-
-CakePHP 在谷歌讨论组上也有它自己的讨论组。那里有成千上万的人在讨论 CakePHP 项目，
-互相帮助，解决问题，构建项目和交流思想。对于寻找现成的答案，常见问题，以及获取解
-决燃眉之急的答案，它都是一个很好的资源。加入其他 CakePHP 用户的讨论吧。
-
 
 Stackoverflow
 =============
