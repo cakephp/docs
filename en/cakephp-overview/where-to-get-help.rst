@@ -105,10 +105,48 @@ enable existing users of stackoverflow to find your questions.
 Where to get Help in your Language
 ==================================
 
+Brazilian Portuguese
+--------------------
+
+- `Brazilian CakePHP Community <http://cakephp-br.org>`_
+
+Danish
+------
+
+- `Danish CakePHP Slack Channel <https://cakesf.slack.com/messages/denmark/>`_
+
 French
 ------
+
 - `French CakePHP Community <http://cakephp-fr.org>`_
 
+German
+------
+
+- `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
+- `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
+
+Dutch
+-----
+
+- `Dutch CakePHP Slack Channel <https://cakesf.slack.com/messages/netherlands/>`_
+
+Japanese
+--------
+
+- `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
+
+Portuguese
+----------
+
+- `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+
+Spanish
+-------
+
+- `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
+- `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
+- `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=en: Where to Get Help
