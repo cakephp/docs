@@ -40,7 +40,7 @@ to implement your own caching systems. The built-in caching engines are:
 
 .. versionchanged:: 2.3
     FileEngine is always the default cache engine. In the past a number of people
-    had difficulty setting up and deploying APC correctly both in cli + web.
+    had difficulty setting up and deploying APC correctly both in CLI + web.
     Using files should make setting up CakePHP simpler for new developers.
 
 .. versionchanged:: 2.5
