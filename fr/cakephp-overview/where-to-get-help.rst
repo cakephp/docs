@@ -85,19 +85,6 @@ Notre forum officiel où vous pouvez demander de l'aide, suggérer des idées et
 discuter de CakePHP. C'est l'endroit idéal pour trouver rapidement des réponses
 et aider les autres. Rejoignez la famille de CakePHP en vous y inscrivant.
 
-
-Communautés Officiels CakePHP
-=============================
-`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
-
-CakePHP a aussi son groupe officiel sur Google Groups. Il y a des centaines de
-personne qui discutent des projets CakePHP, qui s'aident les uns les autres,
-résolvent des problèmes, qui construisent des projets et partagent leurs idées.
-Cela peut être une grande ressource pour trouver des réponses archivées, des
-questions fréquemment posées et obtenir des réponses aux problèmes urgents.
-Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
-
-
 Stackoverflow
 =============
 
@@ -113,7 +100,6 @@ Where to get Help in your Language
 French
 ------
 - `French CakePHP Community <http://cakephp-fr.org>`_
-
 
 .. meta::
     :title lang=fr: Où trouver de l'aide

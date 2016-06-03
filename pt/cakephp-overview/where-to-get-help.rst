@@ -70,7 +70,6 @@ carro esportivo.
 O Google Group
 ==============
 
--  `http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
 -  `http://groups.google.com/group/cakephp-pt <http://groups.google.com/group/cakephp-pt>`_
 
 CakePHP também tem um grupo muito ativo no Google. Pode ser um excelente recurso
