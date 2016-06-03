@@ -76,17 +76,6 @@ esporte.
 
 .. _cakephp-official-communities:
 
-Grupo oficial de discussão do CakePHP
-=====================================
-`Grupo de discussão do Google <http://groups.google.com/group/cake-php>`_
-
-O CakePHP também possui seu grupo de discussão oficial no Google Grupos.
-Existem milhares de pessoas discutindo projetos CakePHP, ajudando uns aos
-outros, resolvendo problemas, construindo projetos e compartilhando idéias.
-Pode ser uma grande fonte para encontrar respostas arquivadas, perguntas
-frequentes e conseguir respostas para problemas imediatos. Junte-se a outros
-usuários do CakePHP e comece a conversar.
-
 Stackoverflow
 =============
 
