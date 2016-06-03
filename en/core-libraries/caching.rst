@@ -310,8 +310,8 @@ that requires manual eviction of cached data.
 
 .. note::
 
-    Because APC and Wincache use isolated caches for webserver and cli they
-    have to be cleared separately (cli cannot clear webserver and vice versa).
+    Because APC and Wincache use isolated caches for webserver and CLI they
+    have to be cleared separately (CLI cannot clear webserver and vice versa).
 
 Using Cache to Store Counters
 =============================

@@ -271,7 +271,7 @@ Filtrer les Cas de Test (TestCase)
 
 Quand vous avez des cas de test plus larges, vous pouvez lancer un
 sous-ensemble de méthodes de test quand vous essayez de travailler sur un
-cas unique d'échec. Avec l'exécuteur cli vous pouvez utiliser une option pour
+cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
 filtrer les méthodes de test::
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
