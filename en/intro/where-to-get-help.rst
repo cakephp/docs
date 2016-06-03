@@ -78,25 +78,13 @@ donate your brand new sports car.
 .. _cakephp-official-communities:
 
 
-Official Forum
-==============
+Official CakePHP Forum
+======================
 `CakePHP Official Forum <http://discourse.cakephp.org>`_
 
 Our official forum where you can ask for help, suggest ideas and have a talk about CakePHP.
 It's a perfect place for quickly finding answers and help others.
 Join the CakePHP family by signing up.
-
-
-Official CakePHP discussion group
-=================================
-`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
-
-CakePHP also has its official discusson group on Google Groups.
-There are thousands of people discussing CakePHP projects, helping each other,
-solving problems, building projects and sharing ideas.
-It can be a great resource for finding archived answers, frequently asked questions, and
-getting answers to immediate problems. Join other CakePHP users and start discussing.
-
 
 Stackoverflow
 =============

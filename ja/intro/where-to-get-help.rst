@@ -57,7 +57,6 @@ IRC チャンネル
 
 **irc.freenode.net での IRC チャンネル:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- 一般的なディスカッション
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ --  ドキュメント化について
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
@@ -79,19 +78,6 @@ IRC チャンネル
 公式フォーラムは、助けを求めたり、アイディアを提案したり、CakePHP について
 語り合う場所です。素早く答えや助けを得るために最適です。
 サインアップして、CakePHP ファミリーに参加しましょう。
-
-公式 CakePHP ディスカッショングループ
-=====================================
-`CakePHP Google グループ <http://groups.google.com/group/cake-php>`_
-
-CakePHP には Google グループ上に公式ディスカッショングループがあります。
-そこでは、たくさんの人々が CakePHP プロジェクトのディスカッションをしたり、
-お互いに助けあったり、問題解決をしたり、プロジェクトを作ったり、
-アイデアの交換を行ったりしています。
-また、以前に行なわれた回答や、よくある質問と答え、差し迫った問題に対する回答などが
-存在している素晴らしい場所となっています。他の CakePHP ユーザーと一緒に、
-ディスカッションを始めましょう。
-
 
 Stackoverflow
 =============
