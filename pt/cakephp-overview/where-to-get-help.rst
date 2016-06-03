@@ -58,7 +58,7 @@ O canal IRC
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Discussões gerais
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Documentação
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
--  `#cakephp-pt <irc://irc.freenode.net/cakephp-bakery>`_ -- Discussões gerais
+-  `#cakephp-pt <irc://irc.freenode.net/cakephp-pt>`_ -- Discussões gerais
    em Português
 
 Se você está confuso, dê um grito no canal do CakePHP no IRC. Alguém da equipe
