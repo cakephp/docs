@@ -166,7 +166,7 @@ create() には多くのオプションがあります:
   を指定します。指定された URL は作成中の CakePHP アプリケーションに
   対する相対値を指定できます::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(false, array(
         'url' => array('controller' => 'recipes', 'action' => 'add')
     ));
 
@@ -178,7 +178,7 @@ create() には多くのオプションがあります:
 
   もしくは、外部ドメインも指定可能です::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(false, array(
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     ));
