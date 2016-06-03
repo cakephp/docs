@@ -731,6 +731,12 @@ soit appeler manuellement la méthode
         // ...
     }
 
+.. note::
+
+    La plupart des utilisateurs proxy devront probablement penser à utiliser
+    l'en-tête Last Modified plutôt que Etags pour des raisons de performance et
+    de compatibilité.
+
 L'En-tête Last-Modified
 ~~~~~~~~~~~~~~~~~~~~~~~
 
