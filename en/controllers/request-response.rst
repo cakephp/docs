@@ -693,6 +693,11 @@ To take advantage of this header, you must either call the
         // ...
     }
 
+.. note::
+
+    Most proxy users should probably consider using the Last Modified Header
+    instead of Etags for performance and compatibility reasons.
+
 The Last Modified Header
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
