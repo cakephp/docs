@@ -422,7 +422,8 @@ Ce trait pourrait donner des méthodes pour rendre les entities comme
 
     namespace SoftDelete\Model\Entity;
 
-    trait SoftDeleteTrait {
+    trait SoftDeleteTrait
+    {
 
         public function softDelete()
         {

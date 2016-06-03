@@ -384,7 +384,8 @@ PHP のトレイトはこういった場合に威力を発揮します。 **src/
 
     namespace SoftDelete\Model\Entity;
 
-    trait SoftDeleteTrait {
+    trait SoftDeleteTrait
+    {
 
         public function softDelete()
         {
