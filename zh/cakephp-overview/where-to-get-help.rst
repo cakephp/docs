@@ -57,6 +57,17 @@ IRC 频道
 美洲用户的白天时间。我们很乐意听到你的反馈，你需要什么帮助，或者想在你所在的地区
 寻找使用者，或者想捐赠你崭新的跑车。
 
+.. _cakephp-official-communities:
+
+Official CakePHP Forum
+======================
+
+`CakePHP Official Forum <http://discourse.cakephp.org>`_
+
+Our official forum where you can ask for help, suggest ideas and have a talk
+about CakePHP. It's a perfect place for quickly finding answers and help others.
+Join the CakePHP family by signing up.
+
 Stackoverflow
 =============
 
