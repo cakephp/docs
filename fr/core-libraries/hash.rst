@@ -446,7 +446,7 @@ Les Types d'Attribut Correspondants
         ];
         $res = Hash::filter($data);
 
-        /* $data ressemble maintenant à:
+        /* $res ressemble maintenant à:
             [
                 [0] => 0
                 [2] => true

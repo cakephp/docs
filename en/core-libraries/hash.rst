@@ -430,7 +430,7 @@ Attribute Matching Types
         ];
         $res = Hash::filter($data);
 
-        /* $data now looks like:
+        /* $res now looks like:
             [
                 [0] => 0
                 [2] => true
