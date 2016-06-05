@@ -121,13 +121,13 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 
 - `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
 
-Portuguese
-----------
+ポルトガル語
+------------
 
 - `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
 
-Spanish
--------
+スペイン語
+----------
 
 - `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
 - `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
