@@ -70,8 +70,8 @@ IRC チャンネル
 
 .. _cakephp-official-communities:
 
-公式フォーラム
-==============
+公式 CakePHP フォーラム
+=======================
 
 `CakePHP 公式フォーラム <http://discourse.cakephp.org>`_
 
@@ -90,16 +90,48 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 あなたの言語で情報を得るには
 ============================
 
+ブラジルポルトガル語
+--------------------
+
+- `Brazilian CakePHP Community <http://cakephp-br.org>`_
+
+デンマーク語
+------------
+
+- `Danish CakePHP Slack Channel <https://cakesf.slack.com/messages/denmark/>`_
+
 フランス語
 ----------
 
 - `French CakePHP Community <http://cakephp-fr.org>`_
+
+ドイツ語
+--------
+
+- `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
+- `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
+
+オランダ語
+----------
+
+- `Dutch CakePHP Slack Channel <https://cakesf.slack.com/messages/netherlands/>`_
 
 日本語
 ------
 
 - `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
 
+ポルトガル語
+------------
+
+- `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+
+スペイン語
+----------
+
+- `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
+- `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
+- `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=ja: Where to Get Help
