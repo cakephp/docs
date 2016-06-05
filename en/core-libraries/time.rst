@@ -206,8 +206,8 @@ Finally, it is possible to use a different locale for displaying a date::
 
     echo $now->nice('Europe/Paris', 'fr-FR');
 
-Setting the Default Locale and Format String
---------------------------------------------
+Setting the Default Locale, Format String and Output Timezone
+-------------------------------------------------------------
 
 The default locale in which dates are displayed when using ``nice``
 ``i18nFormat`` is taken from the directive
@@ -235,6 +235,40 @@ Likewise, it is possible to alter the default formatting string to be used for
 
 It is recommended to always use the constants instead of directly passing a date
 format string.
+
+.. versionadded:: 3.2.11
+
+You can change the default timezone used for outputting your whole app in `app.php`:
+
+    'defaultOutputTimezone' => 'Europe/Berlin',
+
+... or overwrite fetching from app config in `bootstrap.php`:
+
+    Time::setDefaultOutputTimezone('Europe/Berlin');
+    FrozenTime::setDefaultOutputTimezone('Europe/Berlin');
+
+At any point in your application, say in a `FrontendAppController` you may change the
+default output timzeone by calling `setDefaultOutputTimezone()`, for example:
+
+    use Cake\I18n\FrozenTime;
+    use Cake\I18n\Time;
+
+    // ...
+
+    public function initialize() {
+        parent::initialize();
+        Time::setDefaultOutputTimezone('America/Vancouver');
+        FrozenTime::setDefaultOutputTimezone('America/Vancouver');
+    }
+
+In a similar way you will be able to set a goip, browser-based, profile or session based
+default output timezone, for instance by calling:
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        Time::setDefaultOutputTimezone($this->request->session->read('defaultUserTimezone'));
+        FrozenTime::setDefaultOutputTimezone($this->request->session->read('defaultUserTimezone'));
+    }
 
 Formatting Relative Times
 -------------------------
