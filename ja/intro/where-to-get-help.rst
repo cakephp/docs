@@ -50,7 +50,7 @@ API で提供される情報が十分ではないと感じる場合、CakePHP �
 コードをチェックしてください。
 関数の実践的な例やクラスのメンバーの使用法として使用できます。 ::
 
-    tests/TestCase
+    tests/TestCase/
 
 IRC チャンネル
 ==============
@@ -71,8 +71,8 @@ IRC チャンネル
 .. _cakephp-official-communities:
 
 
-公式フォーラム
-==============
+公式 CakePHP フォーラム
+=======================
 `CakePHP 公式フォーラム <http://discourse.cakephp.org>`_
 
 公式フォーラムは、助けを求めたり、アイディアを提案したり、CakePHP について
@@ -90,16 +90,48 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 あなたの言語で情報を得るには
 ============================
 
+ブラジルポルトガル語
+--------------------
+
+- `Brazilian CakePHP Community <http://cakephp-br.org>`_
+
+デンマーク語
+------------
+
+- `Danish CakePHP Slack Channel <https://cakesf.slack.com/messages/denmark/>`_
+
 フランス語
 ----------
 
 - `French CakePHP Community <http://cakephp-fr.org>`_
+
+ドイツ語
+--------
+
+- `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
+- `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
+
+オランダ語
+----------
+
+- `Dutch CakePHP Slack Channel <https://cakesf.slack.com/messages/netherlands/>`_
 
 日本語
 ------
 
 - `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
 
+Portuguese
+----------
+
+- `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+
+Spanish
+-------
+
+- `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
+- `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
+- `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=ja: Where to Get Help
