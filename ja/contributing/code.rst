@@ -131,5 +131,5 @@ Pull Request を作る際には、ベースとなるブランチが正しく選�
 コアチームにより定期的に次期リリースにもマージされます。
 
 .. meta::
-    :title lang=en: Code
-    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
+    :title lang=ja: コード
+    :keywords lang=ja: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
