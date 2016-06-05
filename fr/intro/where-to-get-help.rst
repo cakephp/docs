@@ -99,13 +99,48 @@ questions.
 Où Trouver de l'Aide dans Votre Langue
 ======================================
 
+Portugais brésilien
+-------------------
+
+- `Communauté de CakePHP brésilienne <http://cakephp-br.org>`_
+
+Danoise
+-------
+
+- `Canal CakePHP danois sur Slack <https://cakesf.slack.com/messages/denmark/>`_
+
 Française
 ---------
 - `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
 
-Portugais brésilien
--------------------
-- `Communauté de CakePHP brésilienne <http://cakephp-br.org>`_
+Allemande
+---------
+
+- `Canal CakePHP allemand sur Slack <https://cakesf.slack.com/messages/german/>`_
+- `Groupe Facebook CakePHP Allemand <https://www.facebook.com/groups/146324018754907/>`_
+
+Hollandaise
+-----------
+
+- `Canal CakePHP hollandais sur Slack <https://cakesf.slack.com/messages/netherlands/>`_
+
+Japonaise
+---------
+
+- `Groupe Facebook CakePHP JAPAN <https://www.facebook.com/groups/304490963004377/>`_
+
+Portugaise
+----------
+
+- `Groupe Google CakePHP protugais <http://groups.google.com/group/cakephp-pt>`_
+
+Espagnol
+--------
+
+- `Canal CakePHP espagnol sur Slack <https://cakesf.slack.com/messages/spanish/>`_
+- `Canal IRC de CakePHP espagnol <irc://irc.freenode.net/cakephp-es>`_
+- `Groupe Google de CakePHP espagnol <http://groups.google.com/group/cakephp-esp>`_
+
 
 .. meta::
     :title lang=fr: Où trouver de l'aide
