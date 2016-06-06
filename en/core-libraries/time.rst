@@ -249,7 +249,7 @@ in **app.php**::
     Time::setDefaultOutputTimezone($timezone);
     FrozenTime::setDefaultOutputTimezone($timezone);
 
-At any point in your application, say in a ``FrontendAppController`` you may change the
+At any point in your application, say in custom a ``FrontendAppController`` you may change the
 default output timzeone by calling ``setDefaultOutputTimezone()``, for example::
 
     use Cake\I18n\FrozenTime;
