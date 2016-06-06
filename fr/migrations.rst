@@ -920,3 +920,16 @@ que vous pouvez utilisez pour vider le cache::
 
 Veuillez vous référer à la section du cookbook à propos du :doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>`
 si vous voulez plus de détails à propos de ce shell.
+
+Renommer une table
+------------------
+
+Le plugin vous donne la possibilité de renommer une table en utilisant la
+méthode ``rename()``.
+Dans votre fichier de migration, vous pouvez utiliser la syntaxe suivante::
+
+    public function up()
+    {
+        $this->table('old_table_name')
+            ->rename('new_table_name');
+    }
