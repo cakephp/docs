@@ -12,9 +12,9 @@ CakePHP provides several middleware out of the box:
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` traps exceptions from the
   wrapped middleware and renders an error page using the
   :doc:`/development/errors` Exception handler.
-* ``Cake\Routing\AssetMiddleware`` checks whether the request is referring to a theme
-  or plugin asset file, such as a CSS, JavaScript or image file stored in either a
-  plugin's webroot folder or the corresponding one for a Theme.
+* ``Cake\Routing\AssetMiddleware`` checks whether the request is referring to a
+  theme or plugin asset file, such as a CSS, JavaScript or image file stored in
+  either a plugin's webroot folder or the corresponding one for a Theme.
 * ``Cake\Routing\Middleware\RoutingMiddleware`` uses the ``Router`` to parse the
   incoming URL and assign routing parameters to the request.
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
@@ -196,8 +196,8 @@ classes in CakePHP have a few conventions:
 Middleware Protocol
 -------------------
 
-While not a formal interface (yet), Middleware do have a soft-interface or protocol.
-The protocol is as follows:
+While not a formal interface (yet), Middleware do have a soft-interface or
+protocol. The protocol is as follows:
 
 #. Middleware must implement ``__invoke($request, $response, $next)``.
 #. Middleware must return an object implementing the PSR7 ``ResponseInterface``.

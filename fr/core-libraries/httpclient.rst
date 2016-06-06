@@ -350,11 +350,12 @@ les paramètres ``$options`` de la requête::
         'cookies' => ['sessionid' => '123abc']
     ]);
 
+.. _httpclient-response-objects:
 
 Objets Response
 ===============
 
-.. php:namepspace:: Cake\Http\Client
+.. php:namespace:: Cake\Http\Client
 
 .. php:class:: Response
 

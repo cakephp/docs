@@ -61,7 +61,8 @@ Http Client is now PSR7 Compatible
 ``Cake\Network\Http\Client`` has been moved to ``Cake\Http\Client``. Its request
 and response objects now implement the
 `PSR7 interfaces <http://www.php-fig.org/psr/psr-7/>`__. Several methods on
-``Cake\Http\Client\Response`` are now deprecated, see above for more information.
+``Cake\Http\Client\Response`` are now deprecated, see above for more
+information.
 
 ORM Improvements
 ================
@@ -102,7 +103,8 @@ Routing
 
 * ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
   a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
-  reliance on global state, and necessary for the PSR7 work integration to be done.
+  reliance on global state, and necessary for the PSR7 work integration to be
+  done.
 * When building resource routes, you can now define a prefix. This is useful
   when defining nested resources as you can create specialized controllers for
   nested resources.
