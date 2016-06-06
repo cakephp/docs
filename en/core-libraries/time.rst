@@ -265,7 +265,7 @@ default output timezone by calling ``setDefaultOutputTimezone()`` as such::
     }
 
 In a similar way you will be able to set a GeoIP, browser-based, profile or session based
-default output timezone. Example::
+default output timezone. Example reading session based timezones::
 
     public function beforeFilter() {
         parent::beforeFilter();
