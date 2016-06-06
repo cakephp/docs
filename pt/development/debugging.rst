@@ -2,19 +2,19 @@ Depuração
 #########
 
 Depuração é uma etapa inevitável e importante de qualquer ciclo de
-desenvolvimento. Ainda que o CakePHP não forneça nenhuma ferramenta que se conecte 
+desenvolvimento. Ainda que o CakePHP não forneça nenhuma ferramenta que se conecte
 com qualquer IDE ou editor de texto, este oferece várias ferramentas que
 auxiliam na depuração e exibição de tudo que está sendo executado "por baixo dos panos"
 na sua aplicação.
 
 Depuração Básica
-===============
+================
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
     :noindex:
 
 A função ``debug()`` é uma função de escopo global que funciona de maneira
-similar a função PHP ``print_r()``. A função ``debug()`` 
+similar a função PHP ``print_r()``. A função ``debug()``
 exibe os conteúdos de uma variável de diversas
 maneiras. Primeiramente, se você deseja exibir os dados no formato
 HTML, defina o segundo parâmetro como ``true``. A função
@@ -54,7 +54,7 @@ Para usar o depurador, assegure que ``Configure::read('debug')`` esteja
 definida como ``true``.
 
 Valores de saída
-=================
+================
 
 .. php:staticmethod:: dump($var, $depth = 3)
 
@@ -86,18 +86,18 @@ propriedades e métodos (caso existam) da variável fornecida no primeiro parâm
     }
 
 Criando Logs com Pilha de Execução
-=========================
+==================================
 
 .. php:staticmethod:: log($var, $level = 7, $depth = 3)
 
 Cria um log detalhado da pilha de execução no momento em que a mesma foi invocada. O
-método ``log()`` exibe dados similares ao``Debugger::dump()``, 
-mas no arquivo debug.log ao invés do buffer de saída principal. 
-É valido ressaltar que o diretório **tmp** e seu conteúdo devem ter 
+método ``log()`` exibe dados similares ao``Debugger::dump()``,
+mas no arquivo debug.log ao invés do buffer de saída principal.
+É valido ressaltar que o diretório **tmp** e seu conteúdo devem ter
 permissão de escrita para o servidor web a fim de que a função ``log()`` consiga executar corretamente.
 
 Gerando Pilhas de Execução
-=======================
+==========================
 
 .. php:staticmethod:: trace($options)
 
@@ -120,11 +120,11 @@ a ordem de execução das funções.
 
 
 Pegando Trechos de Arquivos
-==============================
+===========================
 
 .. php:staticmethod:: excerpt($file, $line, $context)
 
-Colete um trecho de um arquivo localizado em $path (caminho absoluto), 
+Colete um trecho de um arquivo localizado em $path (caminho absoluto),
 na linha $line com número de linhas em torno deste trecho $context . ::
 
     pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
@@ -140,7 +140,7 @@ na linha $line com número de linhas em torno deste trecho $context . ::
         [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
     )
 
-Ainda que este método seja usado internamente, o mesmo pode ser conveniente 
+Ainda que este método seja usado internamente, o mesmo pode ser conveniente
 caso você esteja criando suas próprias mensagens de erros e registros de logs.
 
 .. php:staticmethod:: Debugger::getType($var)
@@ -149,17 +149,17 @@ Obtém o tipo da variável. Caso seja um objeto, o retorno do método será o no
 
 
 Usando Logging para Depuração
-======================
+=============================
 
-Registrar as mensagens é uma outra boa maneira de se depurar aplicações. Para isto, pode ser usada a classe 
+Registrar as mensagens é uma outra boa maneira de se depurar aplicações. Para isto, pode ser usada a classe
 :php:class:`Cake\\Log\\Log` para fazer o logging na sua aplicação. Todos os objetos que
 fazem uso de ``LogTrait`` têm um método de instanciação ``log()`` que pode ser usado para registrar
 mensagens::
 
     $this->log('Cheguei aqui', 'debug');
 
-O código acima escreverá ``Cheguei aqui`` no arquivo de registros de depuração (debug log). 
-Você pode usar seus registros para auxiliar na depuração de métodos que contêm redirecionamentos e laços complicados. 
+O código acima escreverá ``Cheguei aqui`` no arquivo de registros de depuração (debug log).
+Você pode usar seus registros para auxiliar na depuração de métodos que contêm redirecionamentos e laços complicados.
 Você poderá usar também :php:meth:`Cake\\Log\\Log::write()` para escrever mensagens nos registros. Esse método pode
 ser chamado de forma estática em qualquer lugar da sua aplicação, pressupondo-se que CakeLog já esteja carregado ::
 
@@ -173,7 +173,7 @@ Debug Kit
 =========
 
 O DebugKit é um plugin composto por ótimas ferramentas de depuração. Uma dessas ferramentas
-é uma toolbar renderizada em HTML, na qual é possível visualizar uma grande quantidade de informações 
+é uma toolbar renderizada em HTML, na qual é possível visualizar uma grande quantidade de informações
 sobre sua aplicação e a atual requisição realizada pela mesma. Veja no
 capítulo :doc:`/debug-kit` como instalar e usar o DebugKit.
 
