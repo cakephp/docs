@@ -13,5 +13,5 @@ Middleware
     information about this page's topic.
 
 .. meta::
-    :title lang=fr Middleware
-    :keywords lang=fr middleware
+    :title lang=fr: Middleware
+    :keywords lang=fr: middleware

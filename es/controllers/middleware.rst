@@ -11,5 +11,5 @@ Middleware
     para obtener información sobre el tema de esta página.
 
 .. meta::
-    :title lang=es: Middleware
-    :keywords lang=es middleware
+    :title lang=es: Http Middleware
+    :keywords lang=es: http, middleware, psr7, request, response, wsgi, application, baseapplication

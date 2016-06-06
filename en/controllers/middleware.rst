@@ -244,7 +244,7 @@ application::
         {
             // Push your simple middleware onto the stack
             $middleware->push(new SimpleMiddleware());
-            
+
             // Push some more middleware onto the stack
 
             return $middleware;
@@ -255,3 +255,9 @@ application::
 
 Adding the new HTTP Stack to an Existing Application
 ====================================================
+
+TODO
+
+.. meta::
+    :title lang=en: Http Middleware
+    :keywords lang=en: http, middleware, psr7, request, response, wsgi, application, baseapplication
