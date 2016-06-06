@@ -238,8 +238,8 @@ format string.
 
 .. versionadded:: 3.2.11
 
-You can change the default timezone used for outputting in your whole application
-in **app.php**::
+You can change the default timezone used for outputting ``Time``/``FrozenTime`` instances
+in your whole application in **app.php**::
 
     'defaultOutputTimezone' => 'Europe/Berlin',
 
