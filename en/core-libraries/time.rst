@@ -239,18 +239,18 @@ format string.
 .. versionadded:: 3.2.11
 
 You can change the default timezone used for outputting your whole application
-in `app.php`::
+in **app.php**::
 
     'defaultOutputTimezone' => 'Europe/Berlin',
 
-... or overwrite fetching from application config in `bootstrap.php`::
+... or overwrite fetching from application config in **bootstrap.php**::
 
     $timezone = 'Europe/Berlin';
     Time::setDefaultOutputTimezone($timezone);
     FrozenTime::setDefaultOutputTimezone($timezone);
 
-At any point in your application, say in a `FrontendAppController` you may change the
-default output timzeone by calling `setDefaultOutputTimezone()`, for example::
+At any point in your application, say in a ``FrontendAppController`` you may change the
+default output timzeone by calling ``setDefaultOutputTimezone()``, for example::
 
     use Cake\I18n\FrozenTime;
     use Cake\I18n\Time;
