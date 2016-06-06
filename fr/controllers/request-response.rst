@@ -787,7 +787,7 @@ la réponse et determine s'il peut toujours être considéré comme récent. Si 
 il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 
     // Dans une action de controller.
-    if ($this->response->checkNotModfied($this->request)) {
+    if ($this->response->checkNotModified($this->request)) {
         return $this->response;
     }
 
