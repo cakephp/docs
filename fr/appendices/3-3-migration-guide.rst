@@ -124,8 +124,8 @@ Debugging Functions
   valeur résultante. Cela facilite leur utilisation quand des valeurs sont
   retournées.
 
- Cache Shell Ajouté
- ==================
+Cache Shell Ajouté
+==================
 
 Pour vous aider à mieux gérer les données mises en cache dans un environnement
 CLI, une commande shell a été ajoutée qui montre les méthodes pour effacer
