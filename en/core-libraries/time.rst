@@ -238,7 +238,7 @@ format string.
 
 .. versionadded:: 3.2.11
 
-You can change the default timezone used for outputting your whole application
+You can change the default timezone used for outputting in your whole application
 in **app.php**::
 
     'defaultOutputTimezone' => 'Europe/Berlin',
