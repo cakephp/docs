@@ -3,12 +3,12 @@ Middleware
 
 Les objets Middleware vous donnent la possibilité de 'wrapper' votre application
 en des couches compatibles et réutilisables de gestion de Requête, ou de la
-logique de construction de réponse. Middleware are part of the new HTTP stack in
-CakePHP that leverages the PSR7 request and response interfaces. By leveraging
-the PSR7 standard you can use any PSR7 compatible middleware available on `The
-Packagist <https://thepackagist.org>`__.
+logique de construction de réponse. Middleware sont une partie du nouveau HTTP
+stack dans qui tire parti des interfaces PSR7 request et response. En tirant
+parti du standard PSR7, vous pouvez utilisez tout middleware compatible avec
+PSR7 qui se trouve sur `Packagist <https://thepackagist.org>`__.
 
-CakePHP provides several middleware out of the box:
+CakePHP fournit plusieurs middlewares:
 
 * ``Cake\Error\Middleware\ErrorHandlerMiddleware`` traps exceptions from the
   wrapped middleware and renders an error page using the
