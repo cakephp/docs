@@ -881,3 +881,16 @@ that you can use to perform this operation::
 
 Be sure to read the :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
 section of the cookbook if you want to know more about this shell.
+
+Renaming a table
+----------------
+
+The plugin gives you the ability to rename a table, using the ``rename()``
+method.
+In your migration file, you can do the following::
+
+    public function up()
+    {
+        $this->table('old_table_name')
+            ->rename('new_table_name');
+    }
