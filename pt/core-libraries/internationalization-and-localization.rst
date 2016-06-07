@@ -326,3 +326,87 @@ Você pode fazer::
 Certifique-se de ler a 
 `Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
 para obter uma visão completa dos aliases que você pode usar para cada idioma.
+
+Usando Gettext para Seleção de Plural
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+O segundo formato para seleção de plural aceito é a utilização das capacidades embutidas
+de Gettext. Neste caso, plurais será armazenado nos arquivos ``.po``,
+criando uma linha de tradução de mensagens separada por forma de plural
+
+.. code-block:: pot
+
+    msgid "One file removed" # One message identifier for singular
+    msgid_plural "{0} files removed" # Another one for plural
+    msgstr[0] "Un fichero eliminado" # Translation in singular
+    msgstr[1] "{0} ficheros eliminados" # Translation in plural
+
+Ao usar este outro formato, você é obrigado a usar outra tradução de forma funcional::
+
+    // Returns: "10 ficheros eliminados"
+    $count = 10;
+    __n('One file removed', '{0} files removed', $count, $count);
+
+    // Também é possível utilizá-lo dentro de um domínio
+    __dn('my_plugin', 'One file removed', '{0} files removed', $count, $count);
+
+O número dentro de ``msgstr[]`` é o número atribuído pela Gettext para o plural na forma da língua. 
+Algumas línguas têm mais de duas formas plurais, para exemplo *Croatian*:
+
+.. code-block:: pot
+
+    msgid "One file removed"
+    msgid_plural "{0} files removed"
+    msgstr[0] "{0} datoteka je uklonjena"
+    msgstr[1] "{0} datoteke su uklonjene"
+    msgstr[2] "{0} datoteka je uklonjeno"
+
+Por favor visite a `Launchpad languages page <https://translations.launchpad.net/+languages>`_
+para uma explicação detalhada dos números de formulário de plurais para cada idioma.
+
+Criar seus próprios Tradutores
+================================
+
+Se você precisar a divergir convenções do CakePHP sobre onde e como as mensagens de tradução são armazenadas, você pode criar 
+seu próprio carregador de mensagem de tradução. A maneira mais fácil de criar o seu próprio tradutor é através da definição de 
+um carregador para um único domínio e localidade::
+use Aura\Intl\Package;
+
+    I18n::translator('animals', 'fr_FR', function () {
+        $package = new Package(
+            'default', // The formatting strategy (ICU)
+            'default'  // The fallback domain
+        );
+        $package->setMessages([
+            'Dog' => 'Chien',
+            'Cat' => 'Chat',
+            'Bird' => 'Oiseau'
+            ...
+        ]);
+
+        return $package;
+    });
+    
+O código acima pode ser adicionado ao seu **config/bootstrap.php** de modo que as traduções podem ser encontradas antes de 
+qualquer função de tradução é usada. O mínimo absoluto que é necessário para a criação de um tradutor é que a função do 
+carregador deve retornar um ``Aura\Intl\Package`` objeto. Uma vez que o código é no lugar que você pode usar as funções de
+tradução, como de costume::
+
+    I18n::locale('fr_FR');
+    __d('animals', 'Dog'); // Retorna "Chien"
+    
+Como você vê objetos, ``Package`` carregam mensagens de tradução como uma matriz. Você pode passar o método ``setMessages()`` 
+da maneira que quiser: com código inline, incluindo outro arquivo, chamar outra função, etc. CakePHP fornece algumas funções da
+carregadeira que podem ser reutilizadas se você só precisa mudar para onde as mensagens são carregadas. Por exemplo, você ainda
+pode usar **.po**, mas carregado de outro local::
+
+    use Cake\I18n\MessagesFileLoader as Loader;
+
+    // Load messages from src/Locale/folder/sub_folder/filename.po
+
+    I18n::translator(
+        'animals',
+        'fr_FR',
+        new Loader('filename', 'folder/sub_folder', 'po')
+    );
+
