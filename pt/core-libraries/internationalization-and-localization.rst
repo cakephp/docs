@@ -272,7 +272,7 @@ as seguintes cadeias
      msgstr "{placeholder,plural,=0{Nenhum resultado} =1{1 resultado} other{{1} resultados}}"
      
 E na aplicação utilize o seguinte código para a saída de uma das
-traduções para essa seqüência:
+traduções para essa seqüência::
 
     __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
@@ -286,7 +286,7 @@ traduções para essa seqüência:
 
     // Returns "many resultados" because the argument {placeholder} is 2 and
     // argument {1} is 'many'
-
+    
 Um olhar mais atento para o formato que acabamos utilizado tornará evidente como as mensagens são
 construídas::
 
@@ -370,7 +370,8 @@ Criar seus próprios Tradutores
 Se você precisar a divergir convenções do CakePHP sobre onde e como as mensagens de tradução são armazenadas, você pode criar 
 seu próprio carregador de mensagem de tradução. A maneira mais fácil de criar o seu próprio tradutor é através da definição de 
 um carregador para um único domínio e localidade::
-use Aura\Intl\Package;
+
+    use Aura\Intl\Package;
 
     I18n::translator('animals', 'fr_FR', function () {
         $package = new Package(
