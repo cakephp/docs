@@ -120,7 +120,7 @@ Allemande
 Iranienne
 ---------
 
-- `Iranian CakePHP Community <http://cakephp.ir>`_
+- `Communauté de CakePHP iranienne <http://cakephp.ir>`_
 
 Hollandaise
 -----------
