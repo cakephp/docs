@@ -117,6 +117,11 @@ Allemande
 - `Canal CakePHP allemand sur Slack <https://cakesf.slack.com/messages/german/>`_
 - `Groupe Facebook CakePHP Allemand <https://www.facebook.com/groups/146324018754907/>`_
 
+Iranienne
+---------
+
+- `Iranian CakePHP Community <http://cakephp.ir>`_
+
 Hollandaise
 -----------
 
