@@ -175,6 +175,9 @@ iframe {
 
 .block { display: block !important; }
 .inline-block { display: inline-block !important; }
+.pl30 {
+    padding-left: 30px !important;
+}
 
 
 .unstyled {
@@ -1248,6 +1251,8 @@ input[type="email"].big-dog::webkit-input-placeholder {
     color: #d8dade;
     position:relative;
     padding:60px 0 40px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 
@@ -1770,6 +1775,9 @@ header {
     color: #B8B8AE;
     text-align: left;
     padding: 10px 0;
+}
+.t-cook-nav a {
+    color: #B8B8AE;
 }
 
 /* Search form */
