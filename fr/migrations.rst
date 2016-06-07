@@ -667,6 +667,39 @@ sous-commande ``seed``::
 Notez que, à l'opposé des migrations, les seeders ne sont pas suivies, ce qui
 signifie que le même seeder peut être appliqué plusieurs fois.
 
+Appeler un Seeder depuis un autre Seeder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: cakephp/migrations 1.6.2
+
+Généralement, quand vous remplissez votre base de données avec des *seeders*,
+l'ordre dans lequel vous faites les insertions est important pour éviter de
+rencontrer des erreurs dûes à des *constraints violations*.
+Puisque les *seeders* sont exécutés dans l'ordre alphabétique par défaut, vous
+pouvez utiliser la méthode ``\Migrations\AbstractSeed::call()`` pour définir
+votre propre séquence d'exécution de *seeders*::
+
+    use Migrations\AbstractSeed;
+
+    class DatabaseSeed extends AbstractSeed
+    {
+        public function run()
+        {
+            $this->call('AnotherSeed');
+            $this->call('YetAnotherSeed');
+
+            // Vous pouvez utiliser la syntaxe "plugin" pour appeler un seeder
+            // d'un autre plugin
+            $this->call('PluginName.FromPluginSeed');
+        }
+    }
+
+.. note::
+
+    Assurez vous d'*extend* la classe du plugin Migrations ``AbstractSeed`` si
+    vous voulez pouvoir utiliser la méthode ``call()``. Cette classe a été
+    ajoutée dans la version 1.6.2.
+
 ``dump`` : Générer un fichier dump pour la fonctionnalité de diff
 -----------------------------------------------------------------
 

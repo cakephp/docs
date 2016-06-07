@@ -638,6 +638,36 @@ To seed your database, you can use the ``seed`` subcommand::
 Be aware that, as opposed to migrations, seeders are not tracked, which means
 that the same seeder can be applied multiple times.
 
+Calling a Seeder from another Seeder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: cakephp/migrations 1.6.2
+
+Usually when seeding, the order in which to insert the data must be respected
+to not encounter constraints violations. Since Seeders are executed in the
+alphabetical order by default, you can use the ``\Migrations\AbstractSeed::call()``
+method to define your own sequence of seeders execution::
+
+    use Migrations\AbstractSeed;
+
+    class DatabaseSeed extends AbstractSeed
+    {
+        public function run()
+        {
+            $this->call('AnotherSeed');
+            $this->call('YetAnotherSeed');
+
+            // You can use the plugin dot syntax to call seeders from a plugin
+            $this->call('PluginName.FromPluginSeed');
+        }
+    }
+
+.. note::
+
+    Make sure to extend the Migrations plugin ``AbstractSeed`` class if you want
+    to be able to use the ``call()`` method. This class was added with release
+    1.6.2.
+
 ``dump`` : Generating a dump file for the diff baking feature
 -------------------------------------------------------------
 
