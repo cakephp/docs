@@ -25,6 +25,7 @@ Depois que você carregou ``Email``, you pode enviar um e-mail com o seguinte::
         ->to('destinatario@exemplo.com')
         ->subject('Assunto')
         ->send('Minha mensagem');
+        
 Com os métodos construtores da classe ``Email``, você é capaz de definir suas propriedades com o encadeamento de método.
 
 ``Email`` tem vários métodos para definir os destinatários - ``to()``, ``cc()``,
