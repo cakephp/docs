@@ -56,7 +56,7 @@ um simples formulário de contato poderia ficar assim::
 No exemplo acima vemos os 3 métodos hooks que o formulário fornece:
 
 * ``_buildSchema`` é usado para definir o esquema de dados usado pelo FormHelper
-para criar um formulário HTML. Você pode definir o tipo de campo, tamanho, e precisão.
+  para criar um formulário HTML. Você pode definir o tipo de campo, tamanho, e precisão.
 * ``_buildValidator`` Pega uma instância do :php:class:`Cake\\Validation\\Validator`
   que você pode você juntar com os validadores.
 * ``_execute`` permite definir o comportamento desejado quando o
