@@ -188,6 +188,9 @@ iframe {
 
 .block { display: block !important; }
 .inline-block { display: inline-block !important; }
+.pl30 {
+    padding-left: 30px !important;
+}
 
 
 .unstyled {
@@ -3080,6 +3083,8 @@ iframe {
         color: #d8dade;
         position:relative;
         padding:60px 0 40px;
+        font-weight: 400;
+        letter-spacing: 0.01em;
     }
 
     .footer-widget { margin-bottom:50px;}
@@ -3638,9 +3643,6 @@ iframe {
 
 
 /* *********************    Updates     ********************* */
-
-    /* v1.3 - 28 June 2015 */
-    /* ******************* */
 
     /* Fix Isotope colums on Firefox between 992px and 1199px */
     @media (min-width:992px) and (max-width:1199px) {
@@ -4304,6 +4306,9 @@ header {
     color: #B8B8AE;
     text-align: left;
     padding: 10px 0;
+}
+.t-cook-nav a {
+    color: #B8B8AE;
 }
 
 /* Search form */
