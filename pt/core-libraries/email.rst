@@ -1,4 +1,5 @@
-Email
+
+E-mail
 #####
  
 .. php:namespace:: Cake\Mailer
@@ -24,6 +25,7 @@ Depois que você carregou ``Email``, you pode enviar um e-mail com o seguinte::
         ->to('destinatario@exemplo.com')
         ->subject('Assunto')
         ->send('Minha mensagem');
+        
 Com os métodos construtores da classe ``Email``, você é capaz de definir suas propriedades com o encadeamento de método.
 
 ``Email`` tem vários métodos para definir os destinatários - ``to()``, ``cc()``,
@@ -194,10 +196,6 @@ Visto como ``Email::setHeaders()`` e ``Email::addHeaders()``
 Enviando E-mail com Templates
 =============================
 
-Emails are often much more than just a simple text message. In order
-to facilitate that, CakePHP provides a way to send emails using CakePHP's
-:doc:`view layer </views>`.
-
 Os templates para e-mails residir em uma pasta especial em sua aplicação no diretório
 ``Template`` chamado ``Email``. Visualizações de e-mail também pode usar layouts
 e os elementos assim como vistas normais::
@@ -238,12 +236,12 @@ Em seus templates de e-mail, você pode usar isso com::
 
     <p>Aqui está o seu valor: <b><?= $value ?></b></p>
 
-Você pode usar helpers em e-mails, bem como você pode em arquivos de modelo normais. Por padrão, somente o ``HtmlHelper`` é carregado. Você pode carregar helpers adicionais usando os métodos ``helpers() ``::
+Você pode usar helpers em e-mails, bem como você pode em arquivos de modelo normais. Por padrão, somente o ``HtmlHelper`` é
+carregado. Você pode carregar helpers adicionais usando os métodos ``helpers()``. ::
     $email->helpers(['Html', 'Custom', 'Text']);
 
 Ao definir ajudantes se esqueça de incluir 'Html' ou ele será removido do helpers carregado no seu template de e-mail.
 
-If you want to send email using templates in a plugin you can use the familiar
 Se você quiser enviar e-mail usando templates em um plugin, você pode usar o familiar
 :term:`Sintaxe Plugin` para faze-lô::
 
@@ -287,14 +285,15 @@ você quer os nomes dos arquivos para aparecer no email do destinatário:
         ]
     ]);
 
-  O acima irá anexar o arquivo com diferentes mimetypes e com identificação de conteúdo personalizado (quando definir o ID de conteúdo do anexo é transformado para linha).
-  O mimetype e contentId são opcionais nessa forma.
+O acima irá anexar o arquivo com diferentes mimetypes e com identificação de conteúdo personalizado (quando definir o ID de
+conteúdo do anexo é transformado para linha).
+O mimetype e contentId são opcionais nessa forma.
 
-   4.1. Quando você estiver usando o ``contentId``, você pode usar o arquivo no corpo HTML como``<img src="cid:my-content-id">``.
+4.1. Quando você estiver usando o ``contentId``, você pode usar o arquivo no corpo HTML como ``<img src="cid:my-content-id">``.
 
-   4.2. Você pode usar a opção ``contentDisposition`` conteúdo para desativar  cabeçalho ``Content-Disposition` para um anexo. Isso é útil quando é feito o envio de convites para o iCal para clientes usando o Outlook.
+4.2. Você pode usar a opção ``contentDisposition`` conteúdo para desativar  cabeçalho ``Content-Disposition`` para um anexo. Isso é útil quando é feito o envio de convites para o iCal para clientes usando o Outlook.
 
-   4.3 Em vez de a opção ``file`` você pode fornecer o conteúdo do arquivo como uma string usando a opção ``data``. Que lhe permite anexar arquivos sem a necessidade de caminhos de arquivo para eles.
+4.3 Em vez de a opção ``file`` você pode fornecer o conteúdo do arquivo como uma string usando a opção ``data``. Que lhe permite anexar arquivos sem a necessidade de caminhos de arquivo para eles.
 
 Usando Transportes
 ==================
