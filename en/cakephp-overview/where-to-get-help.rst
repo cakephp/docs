@@ -111,6 +111,11 @@ German
 - `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
 - `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
 
+Iraian
+------
+
+- `Iranian CakePHP Community <http://cakephp.ir>`_
+
 Dutch
 -----
 
