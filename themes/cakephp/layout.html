@@ -89,7 +89,7 @@
 		<div class="container-fluid hidden-xs hidden-sm">
 			<div class="row">
 				<div class="col-sm-3 col-md-3">
-					<a class="logo-cake" href="{{ pathto(master_doc) }}">
+					<a class="logo-cake" href="http://cakephp.org">
 						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
 					</a>
 				</div>
@@ -111,14 +111,14 @@
 								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
 								<div class="megamenu full">
 									<div class="row">
-										<div class="col-6">
-											<ul class="megamenu-list">
-												{% include 'menu/help.html' %}
-											</ul>
-										</div>
-										<div class="col-6">
+										<div class="col-6 pl30">
 											<ul class="megamenu-list">
 												{% include 'menu/community.html' %}
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												{% include 'menu/help.html' %}
 											</ul>
 										</div>
 									</div>
@@ -134,7 +134,7 @@
 		<div class="container-fluid hidden-md hidden-lg">
 			<div class="row">
 				<div class="col-sm-6 col-xs-6">
-					<a class="logo-cake" href="{{ pathto(master_doc) }}">
+					<a class="logo-cake" href="http://cakephp.org">
 						<img src="{{ pathto('_static/logo-cake.png', 1) }}" alt="CakePHP" />
 					</a>
 				</div>
@@ -162,8 +162,10 @@
 					<div class="col-md-12 back-book">
 						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
 							<h2>
-								<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
-								CakePHP 1.1 <strong>Cookbook</strong>
+								<a href="{{ pathto(master_doc) }}">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 1.1 <strong>Cookbook</strong>
+								</a>
 							</h2>
 						</div>
 
@@ -346,9 +348,8 @@
 				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
 				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
 				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
-				{# <a href="#" data-toggle="tooltip" title="Linkedin"><i class="fa icon-social fa-linkedin"></i></a> #}
 				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
-				{# <a href="#" data-toggle="tooltip" title="Quora"><span class="glyph_range icon-social">T</span></a> #}
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
 				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
 				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
 			</div>
