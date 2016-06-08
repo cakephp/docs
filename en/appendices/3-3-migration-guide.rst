@@ -21,6 +21,8 @@ Deprecations
   * ``header()`` use ``getHeaderLine()`` instead.
   * ``cookie()`` use ``getCookie()`` instead.
   * ``version()`` use ``getProtocolVersion()`` instead.
+* Dispatcher Filters are now deprecated. Use :doc:`/controllers/middleware`
+  instead.
 
 Behavior Changes
 ================
@@ -35,42 +37,35 @@ behavior that may effect your application:
   when generating application local URLs. Previously string URLs would have the
   base path prepended to them, while array URLs would not.
 
+PSR7 Middleware Support Added
+=============================
+
+In tandem with the deprecation of Dispatcher Filters, support for PSR7
+middleware has been added. Middleware is part of the new HTTP stack that is an
+opt-in component of CakePHP 3.3.0. By using the new HTTP stack, you can take
+advantage of features like:
+
+* Using middleware from plugins, and libraries outside of CakePHP.
+* Leverage the same response object methods in both the responses you get from
+  ``Http\Client`` and the responses your application generates.
+* Be able to augment the response objects emitted by error handling and asset
+  delivery.
+
+See the :doc:`/controllers/middleware` chapter and :ref:`adding-http-stack`
+sections for more information and how to add the new HTTP stack to an existing
+application.
+
 Http Client is now PSR7 Compatible
 ==================================
 
 ``Cake\Network\Http\Client`` has been moved to ``Cake\Http\Client``. Its request
 and response objects now implement the
 `PSR7 interfaces <http://www.php-fig.org/psr/psr-7/>`__. Several methods on
-``Cake\Http\Client\Response`` are now deprecated, see above for more information.
+``Cake\Http\Client\Response`` are now deprecated, see above for more
+information.
 
-Routing
-=======
-
-* ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
-  a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
-  reliance on global state, and necessary for the PSR7 work integration to be done.
-* When building resource routes, you can now define a prefix. This is useful
-  when defining nested resources as you can create specialized controllers for
-  nested resources.
-
-Console
-=======
-
-* Shell tasks that are invoked directly from the CLI no longer have their
-  ``_welcome`` method invoked. They will also have the ``requested`` parameter
-  set now.
-* ``Shell::err()`` will now apply the 'error' style to text. The default
-  styling is red text.
-
-Request
-=======
-
-* ``Request::is()`` and ``Request::addDetector()`` now supports additional
-  arguments in detectors. This allows detector callables to operate on
-  additional parameters.
-
-ORM
-===
+ORM Improvements
+================
 
 * Additional support has been added for mapping complex data types. This makes
   it easier to work with geo-spatial types, and data that cannot be represented
@@ -108,8 +103,41 @@ Validation
   ``Validator::notEmpty()`` now accept a list of fields. This allows you
   to more concisely define the fields that are required.
 
+
+Other Enhancements
+==================
+
+Routing
+-------
+
+* ``Router::parse()``, ``RouteCollection::parse()`` and ``Route::parse()`` had
+  a ``$method`` argument added. It defaults to 'GET'. This new parameter reduces
+  reliance on global state, and necessary for the PSR7 work integration to be
+  done.
+* When building resource routes, you can now define a prefix. This is useful
+  when defining nested resources as you can create specialized controllers for
+  nested resources.
+* Dispatcher Filters are now deprecated. Use :doc:`/controllers/middleware`
+  instead.
+
+Console
+-------
+
+* Shell tasks that are invoked directly from the CLI no longer have their
+  ``_welcome`` method invoked. They will also have the ``requested`` parameter
+  set now.
+* ``Shell::err()`` will now apply the 'error' style to text. The default
+  styling is red text.
+
+Request
+-------
+
+* ``Request::is()`` and ``Request::addDetector()`` now supports additional
+  arguments in detectors. This allows detector callables to operate on
+  additional parameters.
+
 Debugging Functions
-===================
+-------------------
 
 * The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
   dumped. This makes them easier to use when values are being returned.

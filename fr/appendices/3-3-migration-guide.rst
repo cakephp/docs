@@ -21,6 +21,8 @@ Deprecations
   * ``header()`` utilisez ``getHeaderLine()`` à la place.
   * ``cookie()`` utilisez ``getCookie()`` à la place.
   * ``version()`` utilisez ``getProtocolVersion()`` à la place.
+* Les Filtres de Dispatcher sont maintenant dépréciés. Utilisez
+  :doc:`/controllers/middleware` à la place.
 
 Changements de Comportement
 ===========================
@@ -36,6 +38,24 @@ variations mineures qui peuvent avoir des effets sur votre application:
   d'URLs étaient préfixées par le chemin de base alors que les tableaux d'URLs
   ne l'étaient pas.
 
+PSR7 Middleware Support Added
+=============================
+
+In tandem with the deprecation of Dispatcher Filters, support for PSR7
+middleware has been added. Middleware is part of the new HTTP stack that is an
+opt-in component of CakePHP 3.3.0. By using the new HTTP stack, you can take
+advantage of features like:
+
+* Using middleware from plugins, and libraries outside of CakePHP.
+* Leverage the same response object methods in both the responses you get from
+  ``Http\Client`` and the responses your application generates.
+* Be able to augment the response objects emitted by error handling and asset
+  delivery.
+
+See the :doc:`/controllers/middleware` chapter and :ref:`adding-http-stack`
+sections for more information and how to add the new HTTP stack to an existing
+application.
+
 Http Client est maintenant compatible avec PSR7
 ===============================================
 
@@ -45,35 +65,8 @@ objet request et response implémentent maintenant les
 ``Cake\Http\Client\Response`` sont maintenant dépréciées, regardez plus haut
 pour plus d'informations.
 
-Routing
-=======
-
-* ``Router::parse()``, ``RouteCollection::parse()`` et ``Route::parse()`` ont
-  un nouvel argument ``$method``. Il est par défaut à 'GET'. Ce nouveau
-  paramètre réduit le recours à l'état global, et est nécessaire pour le travail
-  d'intégration de la norme PSR7.
-* Quand vous construisez vos resource routes, vous pouvez maintenant définir un
-  préfixe. C'est utile quand vous définissez des ressources imbriquées car vous
-  pouvez créer des controllers spécialisés pour les ressources imbriquées.
-
-Console
-=======
-
-* Les Shell tasks qui sont appelées directement à partir du CLI n'appellent plus
-  la méthode ``_welcome``. Ils vont maintenant aussi avoir le paramètre
-  ``requested`` défini.
-* ``Shell::err()`` va maintenant appliquer le style 'error' au texte. Le style
-  par défaut est le texte rouge.
-
-Request
-=======
-
-* ``Request::is()`` et ``Request::addDetector()`` supportent maintenant des
-  arguments supplémentaires dans les détecteurs. Cela permet aux détecteurs
-  callables d'opérer sur des paramètres supplémentaires.
-
-ORM
-===
+Améliorations de l'ORM
+======================
 
 * Le support supplémentaire a été ajouté pour mapper des types de données
   complexes. Cela facilite le travail pour des types geo-spatiaux et les données
@@ -117,8 +110,40 @@ Validation
   ``Validator::notEmpty()`` acceptent maintenant une liste de champs. Ceci vous
   permet de définir de façon plus concise les champs qui sont requis.
 
+Autres Améliorations
+====================
+
+Routing
+-------
+
+* ``Router::parse()``, ``RouteCollection::parse()`` et ``Route::parse()`` ont
+  un nouvel argument ``$method``. Il est par défaut à 'GET'. Ce nouveau
+  paramètre réduit le recours à l'état global, et est nécessaire pour le travail
+  d'intégration de la norme PSR7.
+* Quand vous construisez vos resource routes, vous pouvez maintenant définir un
+  préfixe. C'est utile quand vous définissez des ressources imbriquées car vous
+  pouvez créer des controllers spécialisés pour les ressources imbriquées.
+* Les Filtres de Dispatcher sont maintenant dépréciés. Utilisez
+  :doc:`/controllers/middleware` à la place.
+
+Console
+-------
+
+* Les Shell tasks qui sont appelées directement à partir du CLI n'appellent plus
+  la méthode ``_welcome``. Ils vont maintenant aussi avoir le paramètre
+  ``requested`` défini.
+* ``Shell::err()`` va maintenant appliquer le style 'error' au texte. Le style
+  par défaut est le texte rouge.
+
+Request
+-------
+
+* ``Request::is()`` et ``Request::addDetector()`` supportent maintenant des
+  arguments supplémentaires dans les détecteurs. Cela permet aux détecteurs
+  callables d'opérer sur des paramètres supplémentaires.
+
 Debugging Functions
-===================
+-------------------
 
 * Les fonctions ``pr()``, ``debug()`` et ``pj()`` retournent maintenant la
   valeur résultante. Cela facilite leur utilisation quand des valeurs sont

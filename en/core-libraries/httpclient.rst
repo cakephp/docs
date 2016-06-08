@@ -337,6 +337,7 @@ request's ``$options`` parameters::
         'cookies' => ['sessionid' => '123abc']
     ]);
 
+.. _httpclient-response-objects:
 
 Response Objects
 ================
@@ -452,7 +453,6 @@ Response objects provide a few methods for checking status codes::
 
     // __get() helper
     $response->code;
-
 
 .. meta::
     :title lang=en: HttpClient
