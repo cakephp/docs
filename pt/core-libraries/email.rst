@@ -86,8 +86,8 @@ Ao definir perfis e transportes, você pode manter o código do aplicativo livre
 dos dados de configuração, e evitar a duplicação que faz manutenção e
 implantação mais difícil.
 
-Para carregar uma configuração pré-definida, você pode usar o método ``profile()
-`` ou passá-lo para o construtor de ``Email``::
+Para carregar uma configuração pré-definida, você pode usar o método ``profile()`` 
+ou passá-lo para o construtor de ``Email``::
 
     $email = new Email();
     $email->profile('default');
@@ -245,9 +245,8 @@ Visto como ``Email::setHeaders()`` e ``Email::addHeaders()``.
 Enviando E-mail com Templates
 =============================
 
-Emails are often much more than just a simple text message. In order to
-facilitate that, CakePHP provides a way to send emails using CakePHP's
-:doc:`view layer </views>`.
+E-mails são frequentemente muito mais do que apenas uma simples mensagem de texto. A fim de
+facilitar, o CakePHP fornece uma maneira de enviar e-mails usando o CakePHP. Veja em :doc:`view layer </views>`.
 
 Os templates para e-mails residir em uma pasta especial em sua aplicação no
 diretório ``Template`` chamado ``Email``. Visualizações de e-mail também pode
@@ -299,7 +298,6 @@ helpers adicionais usando os métodos ``helpers()``::
 Ao definir ajudantes se esqueça de incluir 'Html' ou ele será removido do
 helpers carregado no seu template de e-mail.
 
-If you want to send email using templates in a plugin you can use the familiar
 Se você quiser enviar e-mail usando templates em um plugin, você pode usar o
 familiar :term:`Sintaxe Plugin` para faze-lô::
 
