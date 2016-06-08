@@ -530,6 +530,7 @@ dl tt {
 .topic {
     background: #eee;
 }
+.deprecated,
 .warning {
     background: #f2dede;
 }
@@ -537,8 +538,11 @@ dl tt {
     color: #E0B9B9;
     content: 'W';
 }
+.deprecated:before {
+    color: #E0B9B9;
+    content: 'H';
+}
 
-.deprecated,
 .versionadded,
 .versionchanged {
     background: #dff0d8;
@@ -546,7 +550,6 @@ dl tt {
 .versionmodified {
     font-style: italic;
 }
-.deprecated:before,
 .versionadded:before,
 .versionchanged:before {
     color: #A7D096;
