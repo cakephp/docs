@@ -55,9 +55,9 @@ mise à jour:
 
     php -v
 
-Vous devez avoir installé au moins avoir PHP 5.5.9 (cli) ou supérieur. La
+Vous devez avoir installé au moins avoir PHP 5.5.9 (CLI) ou supérieur. La
 version de PHP du serveur web doit être la version 5.5.9 ou supérieur, et doit
-être la même version que la version de PHP de votre ligne de commande (cli).
+être la même version que la version de PHP de votre ligne de commande (CLI).
 
 CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
 dépendances comme méthode officielle supportée pour l'installation.

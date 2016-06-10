@@ -470,17 +470,17 @@ associations à fusionner ou fusionner des niveaux de plus en plus profonds, vou
 pouvez utiliser le troisième paramètre de la méthode::
 
     // Dans un controller.
-    $article = $articles->get(1);
+    $associated = ['Tags', 'Comments.Users'];
+    $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->data(), [
-        'associated' => ['Tags', 'Comments.Users']
+        'associated' => $associated
     ]);
     $articles->save($article);
 
 Les associations sont fusionnées en faisant correspondre le champ de clé
 primaire dans la source entities avec les champs correspondants dans le tableau
-de données. Pour des associations belongsTo et hasOne, les nouvelles entities
-seront construites si aucune entity précédente n'est trouvé pour la propriété
-cible.
+de données. Les associations vont construire de nouvelles entities si aucune
+entity précédente n'est trouvé pour la propriété cible.
 
 Pa exemple, prenons les données requêtées comme ce qui suit::
 
@@ -499,13 +499,12 @@ créer une nouvelle entity user::
     echo $entity->user->username; // Echoes 'mark'
 
 La même chose peut être dite pour les associations hasMany et belongsToMany,
-mais une note importante doit être faîte.
+mais avec une mise en garde importante.
 
 .. note::
 
     Pour les associations belongsToMany, vérifiez que les entities associées
     sont bien présentes dans la propriété ``$_accessible``
-
 
 Si Product belongsToMany Tag::
 
@@ -525,7 +524,7 @@ Si Product belongsToMany Tag::
     Rappelez-vous que l'utilisation de ``patchEntity()`` ou de
     ``patchEntities()`` ne fait pas persister les données, il modifie juste
     (ou créé) les entities données. Afin de sauvegarder l'entity, vous devrez
-    appeler la méthode ``save()``.
+    appeler la méthode ``save()`` de la table.
 
 Par exemple, considérons le cas suivant::
 
@@ -571,9 +570,8 @@ résultat suivant::
     ];
 
 Comme vous l'avez vu, le commentaire avec l'id 2 n'est plus ici, puisqu'il ne
-correspondait à rien dans le tableau ``$newData``. Ceci est fait ainsi pour
-mieux capturer l'intention du post des données requêtées. Les données envoyées
-reflètent le nouvel état que l'entity doit avoir.
+correspondait à rien dans le tableau ``$newData``. Ceci arrive car CakePHP
+reflète le nouvel état décrit dans les données requêtées.
 
 Des avantages supplémentaires à cette approche sont qu'elle réduit le nombre
 d'opérations à exécuter quand on fait persister l'entity à nouveau.

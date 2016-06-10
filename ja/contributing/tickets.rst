@@ -22,9 +22,8 @@ CakePHP の開発プロセスの極めて重要な部分です。CakePHP のチ�
 * サポートの質問にチケットシステムを使用 **しないでください** 。
   `Freenode <https://webchat.freenode.net>`__ の #cakephp IRC チャンネルでは、
   あなたの質問の答えを手助けしてくれる多くの開発者に会えます。
-  他の選択肢は、 CakePHP の
-  `Google グループ <http://groups.google.com/group/cake-php>`_ や、いつも人気がある
-  `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__ です。
+  `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__
+  も覗いてみてください。
 
 セキュリティ問題の報告
 ======================

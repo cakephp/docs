@@ -21,9 +21,9 @@ version:
 
     php -v
 
-You should at least have got installed PHP 5.5.9 (cli) or higher.
+You should at least have got installed PHP 5.5.9 (CLI) or higher.
 Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
-the same version your command line interface (cli) PHP version is of.
+the same version your command line interface (CLI) PHP version is of.
 If you'd like to see the completed application, checkout `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
 

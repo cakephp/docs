@@ -111,6 +111,7 @@ properties are passed to the log adapter's constructor as an array. ::
     {
         public function __construct($options = [])
         {
+            parent::__construct($options);
             // ...
         }
 

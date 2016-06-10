@@ -76,9 +76,9 @@ Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` 
 
 また、プラグインを有効にする便利なシェルコマンドがあります。以下の行を実行してください。
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake plugin load ContactManager
+    bin/cake plugin load ContactManager
 
 これは、 ``Plugin::load('ContactManager');`` を bootstrap に書き込みます。
 
@@ -246,23 +246,23 @@ Bake を使ってプラグインを作成する
 
 プラグインを bake するのは以下のコマンドになります。
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake bake plugin ContactManager
+    bin/cake bake plugin ContactManager
 
 ここからはもういつも通りの記法で  bake ができます。
 例えばコントローラーを bake するには
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake bake controller --plugin ContactManager Contacts
+    bin/cake bake controller --plugin ContactManager Contacts
 
 もしコマンドラインで問題があれば、 :doc:`/bake/usage` を参照してください。
 また、プラグインを作ったら必ずオートローダを再作成してください。
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ php composer.phar dumpautoload
+    php composer.phar dumpautoload
 
 プラグインコントローラー
 ========================

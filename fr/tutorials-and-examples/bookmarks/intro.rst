@@ -14,6 +14,16 @@ Voici ce dont vous allez avoir besoin:
    MySQL, assurez-vous aussi d'avoir ``pdo_mysql`` activé dans PHP.
 #. Des connaissances de base en PHP.
 
+Avant de commencer, vous devez vous assurer que votre version de PHP est à jour:
+
+.. code-block:: bash
+
+    php -v
+
+Vous devez avoir installé au moins la version 5.5.9 (CLI) de PHP ou supérieure.
+La version de PHP de votre serveur web doit aussi être 5.5.9 ou supérieure, et
+doit être préférablement la même version que celle de votre interface en ligne
+de commande (CLI).
 Si vous souhaitez voir ce que donne l'application au final, regardez
 `cakephp/bookmarker <https://github.com/cakephp/bookmarker-tutorial>`__. C'est
 parti !

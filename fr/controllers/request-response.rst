@@ -731,6 +731,12 @@ soit appeler manuellement la méthode
         // ...
     }
 
+.. note::
+
+    La plupart des utilisateurs proxy devront probablement penser à utiliser
+    l'en-tête Last Modified plutôt que Etags pour des raisons de performance et
+    de compatibilité.
+
 L'En-tête Last-Modified
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -781,7 +787,7 @@ la réponse et determine s'il peut toujours être considéré comme récent. Si 
 il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 
     // Dans une action de controller.
-    if ($this->response->checkNotModfied($this->request)) {
+    if ($this->response->checkNotModified($this->request)) {
         return $this->response;
     }
 

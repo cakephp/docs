@@ -212,6 +212,9 @@ Les clés possibles pour une association hasOne sont:
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
+- **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
+  'join'. L'autre valeur valide est 'select', qui utilise les sous-requêtes à la
+  place.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 

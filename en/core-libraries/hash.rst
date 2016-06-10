@@ -71,20 +71,20 @@ Attribute Matching Types
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
 
-.. php:staticmethod:: get(array $data, $path, $default = null)
+.. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` is a simplified version of ``extract()``, it only supports direct
     path expressions. Paths with ``{n}``, ``{s}`` or matchers are not
     supported. Use ``get()`` when you want exactly one value out of an array. If
     a matching path is not found the default value will be returned.
 
-.. php:staticmethod:: extract(array $data, $path)
+.. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
     ``Hash::extract()`` supports all expression, and matcher components of
-    :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays,
-    along arbitrary paths quickly without having to loop through the data
-    structures. Instead you use path expressions to qualify which elements you
-    want returned ::
+    :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays
+    or object implementing ``ArrayAccess`` interface, along arbitrary paths
+    quickly without having to loop through the data structures. Instead you
+    use path expressions to qualify which elements you want returned ::
 
         // Common Usage:
         $users = [
@@ -430,7 +430,7 @@ Attribute Matching Types
         ];
         $res = Hash::filter($data);
 
-        /* $data now looks like:
+        /* $res now looks like:
             [
                 [0] => 0
                 [2] => true
@@ -626,7 +626,20 @@ Attribute Matching Types
 .. php:staticmethod:: apply(array $data, $path, $function)
 
     Apply a callback to a set of extracted values using ``$function``. The function
-    will get the extracted values as the first argument.
+    will get the extracted values as the first argument::
+    
+        $data = [
+            ['date' => '01-01-2016', 'booked' => true],
+            ['date' => '01-01-2016', 'booked' => false],
+            ['date' => '02-01-2016', 'booked' => true]
+        ];
+        $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
+        /* $result now looks like:
+            [
+                '01-01-2016' => 1,
+                '02-01-2016' => 1,
+            ]
+        */
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

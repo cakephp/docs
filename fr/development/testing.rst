@@ -271,7 +271,7 @@ Filtrer les Cas de Test (TestCase)
 
 Quand vous avez des cas de test plus larges, vous pouvez lancer un
 sous-ensemble de méthodes de test quand vous essayez de travailler sur un
-cas unique d'échec. Avec l'exécuteur cli vous pouvez utiliser une option pour
+cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
 filtrer les méthodes de test::
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
@@ -565,7 +565,7 @@ articles), on changerait la fixture donnée dans la section précédente
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 Si vous voulez utiliser une autre connexion, utilisez::

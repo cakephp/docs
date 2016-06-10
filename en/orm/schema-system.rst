@@ -229,4 +229,4 @@ You can use it to get the list of tables or reflect tables into
     $tables = $collection->listTables();
 
     // Get a single table (instance of Schema\Table)
-    $table = $collection->describe('posts')
+    $table = $collection->describe('posts');

@@ -510,9 +510,6 @@ common options shared by all input methods are as follows:
     set the value in ``$this->request->data`` in your controller,
     or set the input option ``checked`` to ``true``.
 
-    Date and datetime fields' default values can be set by using the
-    'selected' key.
-
     Beware of using ``false`` to assign a default value. A ``false`` value is
     used to disable/exclude options of an input field, so ``'default' => false``
     would not set any value at all. Instead use ``'default' => 0``.

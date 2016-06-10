@@ -161,7 +161,10 @@ utilisées dans ``$options``:
   pour déléguer à une stratégie d'authentification. Par défaut l'Auth Basic est
   utilisée.
 - ``ssl_verify_peer`` - par défaut à ``true``. Définie à ``false`` pour
-  désactiver la certification SSL (non conseillé)
+  désactiver la certification SSL (non recommandé)
+- ``ssl_verify_peer_name`` - par défaut à ``true``. Définie à ``false`` pour
+  désactiver la vérification du nom d'hôte quand lors des vérifications des
+  certificats  SSL (non recommandé).
 - ``ssl_verify_depth`` - par défaut à 5. Depth to traverse in the CA chain.
 - ``ssl_verify_host`` - par défaut à ``true``. Valide le certificat SSL pour un
   nom d'hôte.

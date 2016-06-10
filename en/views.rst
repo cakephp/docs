@@ -722,7 +722,7 @@ components of CakePHP, view classes have a few conventions:
   **src/View/PdfView.php**
 * View classes should be suffixed with ``View``. For example: ``PdfView``.
 * When referencing view class names you should omit the ``View`` suffix. For
-  example: ``$builder->viewClass('Pdf');``.
+  example: ``$this->viewBuilder()->className('Pdf');``.
 
 You'll also want to extend ``View`` to ensure things work correctly::
 

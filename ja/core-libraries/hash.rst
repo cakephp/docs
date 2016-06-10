@@ -68,19 +68,20 @@ Hash パス構文
 |                                | 要素に絞り込む。                           |
 +--------------------------------+--------------------------------------------+
 
-.. php:staticmethod:: get(array $data, $path, $default = null)
+.. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
     ``get()`` は ``extract()`` のシンプル版で、直接的に指定するパス式のみがサポートされます。
     ``{n}`` や ``{s}`` 、マッチャーを使ったパスはサポートされません。
     配列から１つの値だけを取り出したい場合に ``get()`` を使ってください。
     もしマッチするパスが見つからない場合、デフォルト値が返ります。
 
-.. php:staticmethod:: extract(array $data, $path)
+.. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
     ``Hash::extract()`` は :ref:`hash-path-syntax` にあるすべての式とマッチャーを
-    サポートします。extract を使うことで、配列から好きなパスに沿ったデータを手早く
-    取り出すことができます。もはやデータ構造をループする必要はありません。
-    その代わりに欲しい要素を絞り込むパス式を使うのです。 ::
+    サポートします。extract を使うことで、配列もしくは ``ArrayAccess`` インターフェースを
+    実装したオブジェクトから好きなパスに沿ったデータを手早く取り出すことができます。
+    もはやデータ構造をループする必要はありません。その代わりに欲しい要素を絞り込むパス式を
+    使うのです。 ::
 
         // 普通の使い方:
         $users = [
@@ -421,7 +422,7 @@ Hash パス構文
         ];
         $res = Hash::filter($data);
 
-        /* $data は以下のようになります:
+        /* $res は以下のようになります:
             [
                 [0] => 0
                 [2] => true
@@ -547,11 +548,11 @@ Hash パス構文
 
         $data = ['one'];
         $res = Hash::numeric(array_keys($data));
-        // $res is true
+        // $res は true
 
         $data = [1 => 'one'];
         $res = Hash::numeric($data);
-        // $res is false
+        // $res は false
 
 .. php:staticmethod:: dimensions (array $data)
 
@@ -612,7 +613,20 @@ Hash パス構文
 .. php:staticmethod:: apply(array $data, $path, $function)
 
     ``$function`` を使用して、抽出された値のセットにコールバックを適用します。
-    この関数は第一引数として抽出された値を取得します。
+    この関数は第一引数として抽出された値を取得します。 ::
+    
+        $data = [
+            ['date' => '01-01-2016', 'booked' => true],
+            ['date' => '01-01-2016', 'booked' => false],
+            ['date' => '02-01-2016', 'booked' => true]
+        ];
+        $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
+        /* $result は以下のようになります:
+            [
+                '01-01-2016' => 1,
+                '02-01-2016' => 1,
+            ]
+        */
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
