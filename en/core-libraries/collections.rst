@@ -31,6 +31,18 @@ A simple use of a Collection would be::
         return $value > 1;
     });
 
+You can also use the ``collection()`` helper function instead of ``new
+Collection()``::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+
+    // These both make a Collection instance.
+    $collectionA = new Collection($items);
+    $collectionB = collection($items);
+
+The benefit of the helper method is that it is easier to chain off of than
+``(new Collection($items))``.
+
 The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
 collection-like features into any ``Traversable`` object you have in your
 application as well.
@@ -274,14 +286,15 @@ a collection into multiple arrays of a certain size, you can use the ``chunk()``
 function::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    $chunked = collection($items)->chunk(2);
+    $collection = new Collection($items);
+    $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
 The ``chunk`` function is particularly useful when doing batch processing, for
 example with a database result::
 
-    collection($articles)
-        ->map(function ($article) {
+    $collection = new Collection($articles);
+    $collection->map(function ($article) {
             // Change a property in the article
             $article->property = 'changed';
         })
