@@ -111,6 +111,11 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 - `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
 - `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
 
+イラン語
+--------
+
+- `Iranian CakePHP Community <http://cakephp.ir>`_
+
 オランダ語
 ----------
 
