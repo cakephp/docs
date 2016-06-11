@@ -20,6 +20,8 @@ CakePHP provides several middleware out of the box:
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
 
+.. _using-middleware:
+
 Using Middleware
 ================
 
@@ -256,7 +258,17 @@ application::
 Adding the new HTTP Stack to an Existing Application
 ====================================================
 
-TODO
+Using HTTP Middleware in an existing application requires a few changes to your
+application.
+
+#. First update your ``webroot/index.php``. Copy the file contents from the `app
+   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
+#. Create an ``Application`` class. See the :ref:`using-middleware` section
+   above for how to do that. Or copy the example in the `app skeleton
+   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+
+Once those two steps are complete, you are ready to start re-implementing any
+application/plugin dispatch filters as HTTP middleware.
 
 .. meta::
     :title lang=en: Http Middleware
