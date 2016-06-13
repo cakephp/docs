@@ -131,7 +131,8 @@ Dutch
 Japanese
 --------
 
-- `CakePHP JAPAN Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
+- `Japanese CakePHP Slack Channel <https://cakesf.slack.com/messages/japanese/>`_
+- `Japanese CakePHP Facebook Group <https://www.facebook.com/groups/304490963004377/>`_
 
 Portuguese
 ----------
