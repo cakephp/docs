@@ -100,7 +100,7 @@ Extraindo arquivos .pot com I18n Shell
 Para criar os arquivos .pot apartir de `__()` e outros tipos de mensagens
 internacionalizadas que podem ser encontrados no código do aplicativo, você pode
 usar o shell i18n.  Por favor, leia o :doc:`Capítulo Seguinte
-</console-e-conchas/i18n-shell>` para saber mais.
+</console-and-shells/i18n-shell>` para saber mais.
 
 Definir a localidade padrão
 ---------------------------
@@ -326,7 +326,7 @@ Você pode fazer::
 
     zero{No Results} one{One result} few{...} many{...} other{...}
 
-Certifique-se de ler a 
+Certifique-se de ler a
 `Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
 para obter uma visão completa dos aliases que você pode usar para cada idioma.
 
