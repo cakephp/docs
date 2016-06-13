@@ -1,14 +1,14 @@
 Internacionalização e Localização
 #################################
 
-Uma das melhores maneiras para uma aplicação alcançar uma maior
-audiência é atender a vários idiomas. Isso muitas vezes pode provar
-ser uma tarefa difícil, mas a internacionalização e
-recursos de localização do CakePHP tornam muito mais fácil.
+Uma das melhores maneiras para uma aplicação alcançar uma maior audiência é
+atender a vários idiomas. Isso muitas vezes pode provar ser uma tarefa difícil,
+mas a internacionalização e recursos de localização do CakePHP tornam muito mais
+fácil.
 
 Primeiro, é importante entender a terminologia.  *Internacionalização* refere-se
-à capacidade de um aplicativo ser localizado. O termo *localização* refere-se
-à adaptação de uma aplicação, para atender idioma específico (ou cultura)
+à capacidade de um aplicativo ser localizado. O termo *localização* refere-se à
+adaptação de uma aplicação, para atender idioma específico (ou cultura)
 requisitos (Isto é, uma "localidade"). Internacionalização e Localização são
 frequentemente abreviado como i18n (internacionalization) e l10n (localization);
 18 e 10 são o número de caracteres entre a primeira e última letra de cada
@@ -18,10 +18,10 @@ termo.
 Configurando Traduções
 ======================
 
-Existem apenas alguns passos para ir de um aplicativo de um único idioma
-a uma aplicação multi-lingual, o primeiro deles é fazer uso
-da função :php:func: `__()` em seu código. Abaixo está um exemplo de algum código
-para uma aplicação de um único idioma::
+Existem apenas alguns passos para ir de um aplicativo de um único idioma a uma
+aplicação multi-lingual, o primeiro deles é fazer uso da função
+:php:func: `__()` em seu código. Abaixo está um exemplo de algum código para uma
+aplicação de um único idioma::
 
     <h2>Popular Articles</h2>
 
@@ -30,10 +30,10 @@ string usando :php:func: `__()` por exemplo::
 
     <h2><?= __('Popular Articles') ?></h2>
 
-Fazendo nada mais, estes dois exemplos de código são funcionalmente
-idênticos - ambos irão enviar o mesmo conteúdo para o navegador.
-A função :php:func: `__()` irá traduzir a string passada
-se a tradução estiver disponível, ou devolvê-la inalterada.
+Fazendo nada mais, estes dois exemplos de código são funcionalmente idênticos -
+ambos irão enviar o mesmo conteúdo para o navegador. A função :php:func: `__()`
+irá traduzir a string passada se a tradução estiver disponível, ou devolvê-la
+inalterada.
 
 Arquivos de Idiomas
 -------------------
@@ -41,8 +41,8 @@ Arquivos de Idiomas
 Traduções podem ser disponibilizados usando arquivos de idiomas armazenados na
 aplicação. O formato padrão para arquivos de tradução do CakePHP é o formato
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Os arquivos precisam ser
-colocado dentro do Diretório **src/Locale/** e dentro deste diretório, deve haver
-uma subpasta para cada idioma, por exemplo::
+colocado dentro do Diretório **src/Locale/** e dentro deste diretório, deve
+haver uma subpasta para cada idioma, por exemplo::
 
     /src
         /Locale
@@ -55,9 +55,9 @@ uma subpasta para cada idioma, por exemplo::
                 default.po
 
 O domínio padrão é 'default', portanto, a pasta **src/Locale/** deve pelo menos
-conter o arquivo **default.po** como mostrado acima. Um domínio refere-se
-a qualquer arbitrário agrupamento de mensagens de tradução. Quando nenhum grupo
-é usado, o grupo padrão é selecionado.
+conter o arquivo **default.po** como mostrado acima. Um domínio refere-se a
+qualquer arbitrário agrupamento de mensagens de tradução. Quando nenhum grupo é
+usado, o grupo padrão é selecionado.
 
 As mensagens das Strings do core extraídos da biblioteca CakePHP podem ser
 armazenado separadamente em um arquivo chamado **cake.po** em **src/Locale/**.
@@ -68,9 +68,7 @@ esperado: **src/Locale/<locale>/cake.po**. Se sua localidade está incompleta ou
 incorreta, por favor envie um PR neste repositório para corrigi-lo.
 
 Plugins também podem conter arquivos de tradução, a convenção é usar o
-``under_score`` do nome do plugin como o domínio para a tradução
-mensagens::
-
+``under_score`` do nome do plugin como o domínio para a tradução mensagens::
 
     MyPlugin
         /src
@@ -80,9 +78,9 @@ mensagens::
                 /de
                     my_plugin.po
 
-Pastas de tradução pode ser o código ISO de duas letras do idioma ou
-nome do local completo, como ``fr_FR``, ``es_AR``, ``da_DK`` que contém tanto o
-idioma e o país onde ele é falado.
+Pastas de tradução pode ser o código ISO de duas letras do idioma ou nome do
+local completo, como ``fr_FR``, ``es_AR``, ``da_DK`` que contém tanto o idioma e
+o país onde ele é falado.
 
 Um exemplo de arquivo de tradução pode ser visto como:
 
@@ -120,7 +118,8 @@ daqueles é exibida usando as bibliotecas de localização que o CakePHP fornece
 Alterando o local em tempo de execução
 --------------------------------------
 
-Para alterar o idioma para as mensagens traduzidas você pode chamar esse método ::
+Para alterar o idioma para as mensagens traduzidas você pode chamar esse
+método::
 
     use Cake\I18n\I18n;
 
@@ -138,9 +137,9 @@ O mais utilizado é :php:func: `__()`. Esta função é usada para recuperar uma
 
     echo __('Popular Articles');
 
-Se você precisa agrupar suas mensagens, por exemplo, traduções dentro de um plugin,
-você pode usar a função :php:func: `__d()` para buscar mensagens de outro
-domínio::
+Se você precisa agrupar suas mensagens, por exemplo, traduções dentro de um
+plugin, você pode usar a função :php:func: `__d()` para buscar mensagens de
+outro domínio::
 
     echo __d('my_plugin', 'Trending right now');
 
@@ -153,14 +152,15 @@ resolver esse problema, você pode usar a função :php:func: `__x()`::
 
     echo __x('alphabet learning', 'He read the first letter');
 
-O primeiro argumento é o contexto da mensagem e a segunda é a mensagem
-a ser traduzida.
+O primeiro argumento é o contexto da mensagem e a segunda é a mensagem a ser
+traduzida.
 
 Usando variáveis em mensagens de tradução
 -----------------------------------------
 
-Funções de tradução permitem que você interpole variáveis para as mensagens usando
-marcadores especiais definidos na própria mensagem ou na string traduzida::
+Funções de tradução permitem que você interpole variáveis para as mensagens
+usando marcadores especiais definidos na própria mensagem ou na string
+traduzida::
 
     echo __("Hello, my name is {0}, I'm {1} years old", ['Jefferson', 19]);
 
@@ -175,20 +175,21 @@ Todas as funções de tradução apoiam as substituições de espaço reservado:
 
     __x('alphabet', 'He read the letter {0}', 'Z');
 
-O caracter ``'`` (aspas simples) age como um código de escape na mensagem de tradução.
-Todas as variáveis entre aspas simples não serão substituídos e é
+O caracter ``'`` (aspas simples) age como um código de escape na mensagem de
+tradução. Todas as variáveis entre aspas simples não serão substituídos e é
 tratado como texto literal. Por exemplo::
 
     __("This variable '{0}' be replaced.", 'will not');
 
-Ao usar duas aspas adjacentes suas variáveis e serão substituídos adequadamente ::
+Ao usar duas aspas adjacentes suas variáveis e serão substituídos
+adequadamente::
 
     __("This variable ''{0}'' be replaced.", 'will');
 
 Estas funções tiram vantagem do
 `UTI MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
-para que possa traduzir mensagens e localizar datas, números e
-moeda, ao mesmo tempo::
+para que possa traduzir mensagens e localizar datas, números e moeda, ao mesmo
+tempo::
 
     echo __(
         'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
@@ -257,9 +258,9 @@ fornece algumas maneiras de selecionar corretamente plurais em suas mensagens.
 Usando UTI para Seleção de Plural
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-O primeiro está aproveitando o formato de mensagem ``ICU`` que vem
-por padrão nas funções de tradução. Nos arquivos de traduções você pode ter
-as seguintes cadeias
+O primeiro está aproveitando o formato de mensagem ``ICU`` que vem por padrão
+nas funções de tradução. Nos arquivos de traduções você pode ter as seguintes
+cadeias
 
 
 .. code-block:: pot
@@ -270,8 +271,8 @@ as seguintes cadeias
      msgid "{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}"
      msgstr "{placeholder,plural,=0{Nenhum resultado} =1{1 resultado} other{{1} resultados}}"
 
-E na aplicação utilize o seguinte código para a saída de uma das
-traduções para essa seqüência::
+E na aplicação utilize o seguinte código para a saída de uma das traduções para
+essa seqüência::
 
     __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
@@ -286,13 +287,14 @@ traduções para essa seqüência::
     // Returns "many resultados" because the argument {placeholder} is 2 and
     // argument {1} is 'many'
 
-Um olhar mais atento para o formato que acabamos utilizado tornará evidente como as mensagens são
-construídas::
+Um olhar mais atento para o formato que acabamos utilizado tornará evidente
+como as mensagens são construídas::
 
     { [count placeholder],plural, case1{message} case2{message} case3{...} ... }
 
 O ``[count placeholder]`` pode ser o número-chave de qualquer das variáveis que
-você passar para a função de tradução. Ele será usado para selecionar o plural correto.
+você passar para a função de tradução. Ele será usado para selecionar o plural
+correto.
 
 Note que essa referência para ``[count placeholder]`` dentro de ``{message}``
 você tem que usar ``#``.
@@ -317,7 +319,7 @@ de que torna o código mais legível.
 
 Às vezes, usando o número de correspondência direta nos plurais é impraticável.
 Por exemplo, idiomas como o árabe exigem um plural diferente quando você se
-refere a algumas coisas. Nesses casos, você pode usar o UTI correspondentes.  Em
+refere a algumas coisas. Nesses casos, você pode usar o UTI correspondentes. Em
 vez de escrever::
 
     =0{No results} =1{...} other{...}
@@ -335,7 +337,7 @@ Usando Gettext para Seleção de Plural
 
 O segundo formato para seleção de plural aceito é a utilização das capacidades
 embutidas de Gettext. Neste caso, plurais será armazenado nos arquivos ``.po``,
-criando uma linha de tradução de mensagens separada por forma de plural
+criando uma linha de tradução de mensagens separada por forma de plural.
 
 .. code-block:: pot
 
@@ -398,8 +400,8 @@ definição de um carregador para um único domínio e localidade::
 O código acima pode ser adicionado ao seu **config/bootstrap.php** de modo que
 as traduções podem ser encontradas antes de qualquer função de tradução é usada.
 O mínimo absoluto que é necessário para a criação de um tradutor é que a função
-do carregador deve retornar um ``Aura\Intl\Package`` objeto. Uma vez que
-o código é no lugar que você pode usar as funções de tradução, como de costume::
+do carregador deve retornar um ``Aura\Intl\Package`` objeto. Uma vez que o
+código é no lugar que você pode usar as funções de tradução, como de costume::
 
     I18n::locale('fr_FR');
     __d('animals', 'Dog'); // Retorna "Chien"
