@@ -1,6 +1,17 @@
 Internacionalização e Localização
 #################################
 
+.. note::
+    A documentação não é atualmente suportada pela lingua portuguesa nesta
+    página.
+
+    Por favor, sinta-se a vontade para nos enviar um pull request no
+    `Github <https://github.com/cakephp/docs>`_ ou use o botão
+    **Improve This Doc** para propor suas mudanças diretamente.
+
+    Você pode referenciar-se à versão inglesa no menu de seleção superior
+    para obter informações sobre o tópico desta página.
+
 Uma das melhores maneiras para uma aplicação alcançar uma maior audiência é
 atender a vários idiomas. Isso muitas vezes pode provar ser uma tarefa difícil,
 mas a internacionalização e recursos de localização do CakePHP tornam muito mais
