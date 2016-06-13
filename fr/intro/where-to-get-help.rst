@@ -132,7 +132,8 @@ Hollandaise
 Japonaise
 ---------
 
-- `Groupe Facebook CakePHP JAPAN <https://www.facebook.com/groups/304490963004377/>`_
+- `Canal Slack CakePHP japonais <https://cakesf.slack.com/messages/japanese/>`_
+- `Groupe Facebook CakePHP japonais <https://www.facebook.com/groups/304490963004377/>`_
 
 Portugaise
 ----------
