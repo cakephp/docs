@@ -1270,8 +1270,15 @@ Ex: name=data[User][username], id=UserUsername
     Si pour quelque raisons vous ne voulez pas du input caché, définissez
     ``$attributes['value']`` à une valeur sélectionnée ou le booléen false
 
+    * ``$attributes['fieldset']`` Si l'attribut ``legend`` n'est pas défini à
+      false, alors cet attribut peut être utilisé pour définir la classe de
+      l'élément fieldset.
+
     .. versionchanged:: 2.1
         L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
+
+    .. versionchanged:: 2.8.5
+        L'option d'attribut ``$attributes['fieldset']`` a été ajoutée dans CakePHP  dans 2.8.5.
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
