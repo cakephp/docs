@@ -1249,7 +1249,7 @@ Ex: name=data[User][username], id=UserUsername
       Will output:
 
       .. code-block:: html
-
+	
         <input name="data[User][gender]" id="UserGender_" value=""
             type="hidden" />
         <input name="data[User][gender]" id="UserGenderM" value="M"
@@ -1258,13 +1258,21 @@ Ex: name=data[User][username], id=UserUsername
         <input name="data[User][gender]" id="UserGenderF" value="F"
             type="radio" />
         <label for="UserGenderF">Female</label>
-
+      
+      
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
 
+    * ``$attributes['fieldset']`` If legend attribute is not set to false, then this 
+      attribute can be used to set the class of the fieldset element.
+
+
     .. versionchanged:: 2.1
         The ``$attributes['disabled']`` option was added in 2.1.
+        
+    .. versionchanged:: 2.8.5
+        The ``$attributes['fieldset']`` option was added in 2.8.5.
 
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
