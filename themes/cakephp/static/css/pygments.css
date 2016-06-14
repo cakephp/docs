@@ -9,6 +9,7 @@
     line-height: 120%;
     border: none;
     border-radius: 0;
+    letter-spacing: normal;
 }
 pre::-webkit-scrollbar {
     height: 10px;
