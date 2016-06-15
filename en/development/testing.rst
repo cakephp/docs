@@ -939,10 +939,10 @@ To test APIs that use stateless authentication, such as Basic authentication,
 you can configure the request to inject environment conditions or headers that
 simulate actual authentication request headers.
 
-When testing Basic or Digest Authentication, you can add the environment variables
-that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_ automatically.
-These environment variables used in the authentication adapter outlined in
-:ref:`basic-authentication`::
+When testing Basic or Digest Authentication, you can add the environment
+variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
+automatically. These environment variables used in the authentication adapter
+outlined in :ref:`basic-authentication`::
 
     public function testBasicAuthentication()
     {

@@ -341,6 +341,8 @@ getUser pour les authentifications HTTP Basic.
 La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
 utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
+.. _basic-authentication:
+
 Utiliser l'Authentification Basic
 ---------------------------------
 
