@@ -932,6 +932,49 @@ required authentication, you could write the following tests::
         // Other assertions.
     }
 
+Testing Stateless Authentication and APIs
+-----------------------------------------
+
+To test APIs that use stateless authentication, such as Basic authentication,
+you can configure the request to inject environment conditions or headers that
+simulate actual authentication request headers.
+
+When testing Basic or Digest Authentication, you can add the environment variables
+that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_ automatically.
+These environment variables used in the authentication adapter outlined in
+:ref:`basic-authentication`::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+If you are testing other forms of authentication, such as OAuth2, you can set
+the Authorization header directly::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+The headers key in ``configRequest()`` can be used to configure any additional
+HTTP headers needed for an action.
+
 Testing Actions Protected by CsrfComponent or SecurityComponent
 ---------------------------------------------------------------
 
@@ -953,8 +996,6 @@ environment.
 .. versionadded:: 3.1.2
     The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
     in 3.1.2
-
-
 
 Assertion methods
 -----------------
