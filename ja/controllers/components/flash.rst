@@ -7,21 +7,21 @@
 
 FlashComponent は、フォームの処理後やデータの確認のために表示する一回限りのメッセージ通知に 使用します。
 このような通知を CakePHP では「フラッシュメッセージ」と呼んでいます。
-FlashComponentはフラッシュメッセージを ``$_SESSION`` に書き込みます。そして :doc:`FlashHelper </views/helpers/flash>` を使ってビューで表示します。
+FlashComponent はフラッシュメッセージを ``$_SESSION`` に書き込みます。そして :doc:`FlashHelper </views/helpers/flash>` を使ってビューで表示します。
 
 フラッシュメッセージの設定
 ==========================
 
 FlashComponent は、フラッシュメッセージの設定に２つの方法を用意しています。
-ひとつは、 ``__call`` マジックメソッドで、もうひとつは ``set()`` メソッドです。
+ひとつは、 ``__call()`` マジックメソッドで、もうひとつは ``set()`` メソッドです。
 アプリケーションをより様々な表現を用いて利用するためには、 FlashComponent の ``__call()`` マジックメソッドを利用することで
 **src/Template/Element/Flash** ディレクトリ以下に配置されたエレメントをマッピングしたメソッド名を使用することができます。
 規約により、キャメルケース形式のメソッドは、 小文字でアンダースコア区切りのエレメント名に置き換えられます。::
 
-    // Uses src/Template/Element/Flash/success.ctp
+    // src/Template/Element/Flash/success.ctp を使用
     $this->Flash->success('This was successful');
 
-    // Uses src/Template/Element/Flash/great_success.ctp
+    // src/Template/Element/Flash/great_success.ctp を使用
     $this->Flash->greatSuccess('This was greatly successful');
 
 あるいは、エレメントをレンダリングしないで平文メッセージを設定するためには、
@@ -38,7 +38,7 @@ FlashComponent は、フラッシュメッセージの設定に２つの方法�
 
 FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2引数をとります、その配列のオプションは以下の通りです。:
 
-* ``key`` デフォルトは ‘flash’。セッション内の ‘Flash’ キー配下の配列キ
+* ``key`` デフォルトは ‘flash’。セッション内の ‘Flash’ キー配下の配列キー。
 * ``element`` デフォルトは null ですが、 ``__call()`` マジックメソッドの使用時には、自動的に設定されます。表示に使用されるエレメント名。
 * ``params`` キーバリューの任意の配列です。エレメントの中で変数として利用する配列。
 
@@ -48,7 +48,7 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
 
 オプションの使用例::
 
-    // In your Controller
+    // コントローラの中で
     $this->Flash->success('The user has been saved', [
         'key' => 'positive',
         'params' => [
@@ -57,10 +57,10 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
         ]
     ]);
 
-    // In your View
+    // ビューの中で
     <?= $this->Flash->render('positive') ?>
 
-    <!-- In src/Template/Element/Flash/success.ctp -->
+    <!-- src/Template/Element/Flash/success.ctp の中で -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
@@ -69,7 +69,7 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
 プラグインから指定したエレメントを取得するためには、 ``plugin`` パラメータをセットしてください。
 例::
 
-    // In your Controller
+    // コントローラの中で
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
 上記のコードは **plugins/PluginName/src/Template/Element/Flash** 配下の
