@@ -1262,12 +1262,20 @@ select, checkbox, radio に関するオプション
             type="radio" />
         <label for="UserGenderF">Female</label>
 
+
     何らかの理由で hidden input が不要な場合、 ``$attributes['value']``
     を選択される値もしくは false にすることで hidden を出力しなく
     なります。
 
+    * ``$attributes['fieldset']`` legend 属性に false がセットされていなければ、
+      この属性は fieldset 要素のクラスを設定するために使用できます。
+
+ 
     .. versionchanged:: 2.1
         ``$attributes['disabled']`` オプションは 2.1 で追加されました。
+        
+    .. versionchanged:: 2.8.5
+        ``$attributes['fieldset']`` オプションは 2.8.5 で追加されました。
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
