@@ -903,6 +903,48 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         // その他のアサーション
     }
 
+ステートレス認証と API のテスト
+-------------------------------
+
+Basic 認証のようなステートレス認証を使用する API をテストするために、実際の認証の
+リクエストヘッダーをシミュレートする環境変数やヘッダを注入するためにリクエストを設定できます。
+
+Basic または Digest 認証をテストする際、自動的に
+`PHP が作成する <http://php.net/manual/ja/features.http-auth.php>`_
+環境変数を追加できます。これらの環境変数は、 :ref:`basic-authentication` に概説されている
+認証アダプター内で使用されます。 ::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+OAuth2 のようなその他の認証方法をテストしている場合、Authorization ヘッダーを
+直接セットできます。 ::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+``configRequest()`` 内の headers キーは、アクションに必要な追加の HTTP ヘッダーを
+設定するために使用されます。
+
 CsrfComponent や SecurityComponent で保護されたアクションのテスト
 -----------------------------------------------------------------
 
