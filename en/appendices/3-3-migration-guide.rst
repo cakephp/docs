@@ -107,6 +107,9 @@ Validation
 Other Enhancements
 ==================
 
+* ``Collection::transpose()`` was added. This method allows you to tranpose the
+  rows and columns of a matrix with equal length rows.
+
 Routing
 -------
 
