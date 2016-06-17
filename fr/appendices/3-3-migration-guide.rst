@@ -113,6 +113,10 @@ Validation
 Autres Améliorations
 ====================
 
+* ``Collection::transpose()`` a été ajoutée. Cette méthode vous permet de
+  transposer les lignes et colonnes d'une matrice avec des colonnes de longueurs
+  égales.
+
 Routing
 -------
 

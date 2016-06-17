@@ -784,7 +784,7 @@ of the each of the original columns::
      ]
 
 .. versionadded:: 3.3.0
-    ``Collection::transpose()`` was added in 3.3.0
+    ``Collection::transpose()`` was added in 3.3.0.
 
 Withdrawing Elements
 --------------------
