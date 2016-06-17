@@ -7,7 +7,7 @@
 ユーザに関連するコードを作成する
 ================================
 
-まずはじめに、ユーザデータを保持するためのブログデータベースの中に新しいテーブルを作成しましょう。::
+まずはじめに、ユーザデータを保持するためのブログデータベースの中に新しいテーブルを作成しましょう。 ::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -21,7 +21,7 @@
 テーブルの命名にはCakePHPの規則がありますが、別の規則も活用できます。
 username と password のカラムをユーザテーブルに使用すると、CakePHPはユーザログインの実装のときにほとんどのことを自動で定義します。
 
-続いてのステップは、ユーザデータを見つけたり、保存したり、バリデートしたりする UserTable クラスを作成することです。::
+続いてのステップは、ユーザデータを見つけたり、保存したり、バリデートしたりする UserTable クラスを作成することです。 ::
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -47,7 +47,7 @@ username と password のカラムをユーザテーブルに使用すると、C
     }
 
 では UsersController も作成しましょう。以下の内容は基本的に bake されたUsersControllerの一部に対応するもので、
-CakePHP にバンドルされているコード生成ユーティリティを利用しています。::
+CakePHP にバンドルされているコード生成ユーティリティを利用しています。 ::
 
     // src/Controller/UsersController.php
 
@@ -119,7 +119,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 認証レイヤを追加する準備が整いました。CakePHPにおいて、これは :php:class:`Cake\\Controller\\Component\\AuthComponent` で扱われており、
 このクラスはあるアクションのログインで必要となり、ユーザのログインとログアウトを扱い、そしてログインユーザがアクセスできるアクションの認証を行います。
 
-このコンポーネントをアプリケーションに追加するには、 **src/Controller/AppController.php** ファイルを開いて、以下の行を追加してください。::
+このコンポーネントをアプリケーションに追加するには、 **src/Controller/AppController.php** ファイルを開いて、以下の行を追加してください。 ::
 
     // src/Controller/AppController.php
 
@@ -164,7 +164,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 
 それでは、新しいユーザを登録できるようにする必要があります。ユーザネームとパスワードを保存し、
 そしてさらに重要なこととして、パスワードがデータベースないに平文で保存されないようにパスワードをハッシュしましょう。
-それでは、 AuthComponent に認証されていないユーザにはユーザ追加機能にアクセスさせるように設定して、ログインとログアウトのアクションを実装しましょう。::
+それでは、 AuthComponent に認証されていないユーザにはユーザ追加機能にアクセスさせるように設定して、ログインとログアウトのアクションを実装しましょう。 ::
 
     // src/Controller/UsersController.php
     namespace App\Controller;
@@ -204,7 +204,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     }
 
 パスワードのハッシュはまだ済んでいません。特別なロジックを扱うためには、UserのEntityクラスが必要です。
-**src/Model/Entity/User.php** にエンティティファイルを作成し、以下を追加します。::
+**src/Model/Entity/User.php** にエンティティファイルを作成し、以下を追加します。 ::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -232,7 +232,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     }
 
 これで、パスワードのプロパティがユーザにアサインされるたびに、 ``DefaultPasswordHasher`` クラスを用いてパスワードがハッシュ化されます。
-ログイン昨日のテンプレートビューファイルが足りていません。 **src/Template/Users/login.ctp** ファイルを開いて、以下を追加してください。:
+ログイン昨日のテンプレートビューファイルが足りていません。 **src/Template/Users/login.ctp** ファイルを開いて、以下を追加してください。
 
 .. code-block:: php
 
@@ -254,7 +254,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
 たとえば ``/articles/add`` のように、明確に許可されていない他のURLにもアクセスしてみてください。アプリケーションがログインページに自動的にリダイレクトするのがわかります。
 
 そして、これで終わりです！ シンプルすぎるようですが、これで良いのです。何が起こったのかを少し戻って説明しましょう。
-AppController の ``beforeFilter()`` ですでに許可されている ``index() `` および ``view()`` アクションに加えて、 ``add()`` アクションんいもログインが不要であることを AuthComponent に ``beforeFilter()`` で伝えています。
+AppController の ``beforeFilter()`` ですでに許可されている ``index()`` および ``view()`` アクションに加えて、 ``add()`` アクションんいもログインが不要であることを AuthComponent に ``beforeFilter()`` で伝えています。
 
 ``login()`` アクションは AuthComponent 内の ``$this->Auth->identify()`` 関数で呼び、特別な設定なしに動きます。
 なぜなら先に言及した通り、規約に従っているからです。Usersテーブルは username, password のカラムを持ち、ユーザデータをコントローラに送るフォームを利用します。
@@ -267,11 +267,11 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
 ========================================
 
 始める前に、このブログをマルチユーザが認可されるツールにし、
-これをするために、記事テーブルを少し変更して、ユーザテーブルへの参照を追加します。::
+これをするために、記事テーブルを少し変更して、ユーザテーブルへの参照を追加します。 ::
 
     ALTER TABLE articles ADD COLUMN user_id INT(11);
 
-さらに、 ArticlesControllerに、記事を作成した現在のログインユーザの参照を追加するように少し変更する必要があります。::
+さらに、 ArticlesControllerに、記事を作成した現在のログインユーザの参照を追加するように少し変更する必要があります。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -305,7 +305,7 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
 それでは、ある著者が他の人の記事を編集したり削除したりするのから守りましょう。
 アプリケーションの基本的なルールは、管理ユーザはすべてのURLにアクセスでき、
 通常のユーザ(著者ロール)は許可されたアクションにしかアクセスできない、というものです。
-もう一度 AppController クラスを開いて、 Auth の設定を少し追加してください。::
+もう一度 AppController クラスを開いて、 Auth の設定を少し追加してください。 ::
 
     // src/Controller/AppController.php
 
@@ -343,7 +343,7 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
 これは、求めているものではありません。 ``isAuthorized()`` メソッドで、さらにルールを追加する必要があります。
 このことを AppConroller 内でやるかわりに、各個別のコントローラにさらなるルールを追加することにしましょう。
 追加しようとしているルールというのは、 ArticlesController によって、著者は記事を作成できるが、自分のものではない記事を編集できないようにする、というものです。
-以下の内容を **ArticlesController.php** に追加してください。::
+以下の内容を **ArticlesController.php** に追加してください。 ::
 
     // src/Controller/ArticlesController.php
 
@@ -368,7 +368,7 @@ AppController の ``beforeFilter()`` ですでに許可されている ``index()
 AppController の ``isAuthorized()`` を上書きして、内部的に親クラスをチェックすることによってすでにユーザを認可しています。
 そうでなければ、 add アクションへのアクセスだけを許可し、条件付きで edit や delete へアクセスできます。
 最後のひとつだけが実装されていません。記事を編集するためのユーザが認可されているかどうかを伝えるために、 Articlesテーブルの ``isOwnedBy()`` 関数を呼んでいます。
-それでは、この関数を実装しましょう。::
+それでは、この関数を実装しましょう。 ::
 
     // src/Model/Table/ArticlesTable.php
 
