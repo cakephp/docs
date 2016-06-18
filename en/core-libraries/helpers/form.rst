@@ -164,7 +164,7 @@ There are a number of options for create():
 
   .. deprecated:: 2.8.0
      The ``$options['action']`` option was deprecated as of 2.8.0.
-     Use the ``$options['url']`` option instead.
+     Use the ``$options['url']`` and ``$options['id']`` options instead.
 
 * ``$options['url']`` If the desired form action isn't in the current
   controller, you can specify a URL for the form action using the 'url' key of
@@ -173,6 +173,7 @@ There are a number of options for create():
 
     echo $this->Form->create(false, array(
         'url' => array('controller' => 'recipes', 'action' => 'add')
+        'id' => 'RecipesAdd'
     ));
 
   Output:
