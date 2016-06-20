@@ -172,7 +172,7 @@ Il y plusieurs options pour create():
 
   .. deprecated:: 2.8.0
      L'option ``$options['action']`` a été dépréciée depuis 2.8.0. Utilisez
-     l'option ``$options['url']`` à la place.
+     les options ``$options['url']`` et ``$options['id']`` à la place.
 
 *   ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire
     n'est pas dans le controller courant, vous pouvez spécifier une URL
@@ -180,7 +180,8 @@ Il y plusieurs options pour create():
     L'URL ainsi fournie peut être relative à votre application CakePHP ::
 
         echo $this->Form->create(false, array(
-            'url' => array('controller' => 'recipes', 'action' => 'add')
+            'url' => array('controller' => 'recipes', 'action' => 'add'),
+            'id' => 'RecipesAdd'
         ));
 
     Affichera:
