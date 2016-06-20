@@ -298,7 +298,7 @@ l'avaient. Une méthode ``eventManager()`` est maintenant fournie par
 et garder une référence d'un gestionnaire d'évènement local.
 
 Le sous-système d'Event s'est vu retiré un certain nombre de fonctionnalités
-Lors du dispatching des évènements, vous ne pouvez plus utiliser les options
+Lors du dispatching des événements, vous ne pouvez plus utiliser les options
 suivantes:
 
 * ``passParams`` Cette option est maintenant toujours activée implicitement.
@@ -676,10 +676,10 @@ AuthComponent
 - ``BaseAuthenticate::_password()`` a été retirée. Utilisez ``PasswordHasher``
   à la place.
 - ``BaseAuthenticate::logout()`` a été retirée.
-- ``AuthComponent`` lance maintenant deux évènements``Auth.afterIdentify`` et
+- ``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
   ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
   avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction
-  de callback pour ces évènements en retournant un tableau de mapping depuis la
+  de callback pour ces événements en retournant un tableau de mapping depuis la
   méthode ``implementedEvents()`` de votre classe d'authentification.
 
 Les classes liées à ACL ont été déplacées dans un plugin séparé. Les hashers
