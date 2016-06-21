@@ -64,7 +64,7 @@ Use this command to check ACL permissions. ::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
-The output will either be ``success`` or ``not allowed``.
+The output will either be ``allowed`` or ``not allowed``.
 
 View the node trees
 ===================
