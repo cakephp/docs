@@ -85,16 +85,16 @@ les notifications par mail, mettre à jour le stock, créer un fichier de log de
 statistiques pertinents et d'autres tâches dans les objets séparés qui se
 focalisent sur ces préoccupations.
 
-Accéder aux Gestionnaires d'Événement
-=====================================
+Accéder aux Gestionnaires d'Événements
+======================================
 
-Dans CakePHP, les événements sont attrapés par les gestionnaires d'événement.
-Les gestionnaires d'Evènement sont disponible dans chaque Table, View et
+Dans CakePHP, les événements sont attrapés par les gestionnaires d'événements.
+Les gestionnaires d'événements sont disponible dans chaque Table, View et
 Controller en utilisant ``eventManager()``::
 
     $events = $this->eventManager();
 
-Chaque Model a un gestionnaire d'événement séparé, alors que View et Controller
+Chaque Model a un gestionnaire d'événements séparé, alors que View et Controller
 en partagent un. Cela permet aux événements de Model d'être autonomes, et permet
 aux components ou aux controllers d'agir sur les événements créés dans la vue si
 nécessaire.
@@ -103,7 +103,7 @@ Le Gestionnaire d'Événement Global
 ----------------------------------
 
 En plus des gestionnaires au niveau des instances d'événement, CakePHP fournit
-un gestionnaire d'événement global qui vous permet d'écouter tout événement
+un gestionnaire d'événements global qui vous permet d'écouter tout événement
 déclenché dans une application. C'est utile quand attacher des écouteurs à une
 instance spécifique semble lent ou difficile. Le gestionnaire global est une
 instance singleton de :php:class:`Cake\\Event\\EventManager` qui reçoit chaque
@@ -142,7 +142,7 @@ Suivre la Trace des Événements
 ------------------------------
 
 Pour garder une liste des événements qui sont déclenchés pour un
-``EventManager`` en particulier, vous pouvez activer le tracking d'événement.
+``EventManager`` en particulier, vous pouvez activer le tracking d'événements.
 Pour ce faire, attachez simplement une :php:class:`Cake\\Event\\EventList` au
 gestionnaire::
 
@@ -158,7 +158,7 @@ Le tracking peut être désactivé en retirant la liste d'événements ou en app
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`
 
 .. versionadded:: 3.2.10
-    Le tracking d'événement et :php:class:`Cake\\Event\\EventList` ont été
+    Le tracking d'événements et :php:class:`Cake\\Event\\EventList` ont été
     ajoutés.
 
 Events du Cœur
@@ -207,13 +207,13 @@ nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
         }
     }
 
-    // Attache l'objet UserStatistic au gestionnaire globale d'événement de la Commande
+    // Attache l'objet UserStatistic au gestionnaire globale d'événements de la Commande
     $statistics = new UserStatistic();
     $this->Order->eventManager()->on($statistics);
 
 Comme vous pouvez le voir dans le code ci-dessus, la fonction ``on()`` va
 accepter les instances de l'interface ``EventListener``. En interne, le
-gestionnaire d'événement va utiliser ``implementedEvents()`` pour attacher
+gestionnaire d'événements va utiliser ``implementedEvents()`` pour attacher
 les bons callbacks.
 
 Enregistrer des Écouteurs Anonymes
@@ -246,7 +246,7 @@ que PHP supporte::
     }
 
 Quand vous travaillez avec des plugins qui ne déclenchent pas d'événement
-spécifique, vous pouvez utiliser les listeners d'événement sur les événements
+spécifique, vous pouvez utiliser les listeners d'événements sur les événements
 utilisés par défaut. Prenons un exemple d'un plugin 'UserFeedback' qui gère les
 formulaires de feedback des utilisateurs. A partir de votre application, vous
 voudrez savoir quand un enregistrement Feedback a été enregistré et en
@@ -387,7 +387,7 @@ déterminer l'ordre des arguments de la fonction.
 Dispatcher les Events
 =====================
 
-Une fois que vous avez obtenu une instance du gestionnaire d'événement, vous
+Une fois que vous avez obtenu une instance du gestionnaire d'événements, vous
 pouvez dispatcher les événements en utilisant
 :php:meth:`~Cake\\Event\\EventManager::dispatch()`. Cette méthode prend une
 instance de la classe :php:class:`Cake\\Event\\Event`. Regardons le dispatch
@@ -526,7 +526,7 @@ Retirer les Callbacks et les Listeners
 --------------------------------------
 
 Si pour certaines raisons, vous voulez retirer toute callback d'un gestionnaire
-d'événement, appelez seulement la méthode
+d'événements, appelez seulement la méthode
 :php:meth:`Cake\\Event\\EventManager::off()` en utilisant des arguments les deux
 premiers paramètres que vous utilisiez pour l'attacher::
 

@@ -1491,13 +1491,13 @@ suivantes::
     }
 
 .. note::
-    Pour faire des asserts sur le fait que des événements sont déclenchés, vous
-    devez d'abord activer :ref:`tracking-events` sur le gestionnaire
+    Pour faire des assertions sur le fait que des événements sont déclenchés,
+    vous devez d'abord activer :ref:`tracking-events` sur le gestionnaire
     d'événements pour lequel vous souhaitez faire des asserts.
 
-Pour tester le ``OrdersTable`` du dessus, nous activons le tracking dans
-``setUp`` puis faisons des asserts que l'événement a été déclenché, et faisons
-un assert que l'entity ``$order`` a été passée dans les données de l'événement::
+Pour tester le ``OrdersTable`` du dessus, vous devez activer le tracking dans la
+méthode ``setUp()`` puis vérifier par exemple que l'événement a été déclenché,
+puis que l'entity ``$order`` a été passée dans les données de l'événement::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -1536,7 +1536,7 @@ un assert que l'entity ``$order`` a été passée dans les données de l'événe
 
 Par défaut, l'``EventManager`` global est utilisé pour les assertions, donc
 tester les événements globaux ne nécessitent pas de passer le gestionnaire
-d'événement::
+d'événements::
 
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);

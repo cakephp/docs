@@ -13,8 +13,8 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either a `PHAR package <http://phpunit.de/#download>`__ or `Composer
-<http://getcomposer.org>`_.
+through using either a `PHAR package <http://phpunit.de/#download>`__ or
+`Composer <http://getcomposer.org>`_.
 
 Install PHPUnit with Composer
 -----------------------------
@@ -23,7 +23,8 @@ To install PHPUnit with Composer::
 
     $ php composer.phar require --dev phpunit/phpunit
 
-This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
+This will add the dependency to the ``require-dev`` section of your
+``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
 
@@ -179,8 +180,9 @@ following::
     }
 
 Calling the parent method is important in test cases, as ``TestCase::setUp()``
-does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
-storing the paths in :php:class:`~Cake\\Core\\App`.
+does a number things like backing up the values in
+:php:class:`~Cake\\Core\\Configure` and, storing the paths in
+:php:class:`~Cake\\Core\\App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
@@ -284,7 +286,8 @@ Combining Test Suites for Plugins
 Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's **phpunit.xml.dist** file::
+additional ``<testsuite>`` sections to your application's **phpunit.xml.dist**
+file::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -1383,7 +1386,7 @@ Testing Events
 ==============
 
 The :doc:`/core-libraries/events` is a great way to decouple your application
-code, but sometimes when testing we tend to test the results of events in the
+code, but sometimes when testing, you tend to test the results of events in the
 test cases that execute those events. This is an additional form of coupling
 that can be removed by using ``assertEventFired`` and ``assertEventFiredWith``
 instead.
@@ -1428,7 +1431,7 @@ Expanding on the Orders example, say we have the following tables::
     To assert that events are fired, you must first enable
     :ref:`tracking-events` on the event manager you wish to assert against.
 
-To test the ``OrdersTable`` above, we enable tracking in ``setUp`` then assert
+To test the ``OrdersTable`` above, we enable tracking in ``setUp()`` then assert
 that the event was fired, and assert that the ``$order`` entity was passed in
 the event data::
 
@@ -1535,12 +1538,11 @@ plugins folder. ::
                     /TestCase
                     /Fixture
 
-They work just like normal tests but you have to remember to use
-the naming conventions for plugins when importing classes. This is
-an example of a testcase for the ``BlogPost`` model from the plugins
-chapter of this manual. A difference from other tests is in the
-first line where 'Blog.BlogPost' is imported. You also need to
-prefix your plugin fixtures with ``plugin.blog.blog_posts``::
+They work just like normal tests but you have to remember to use the naming
+conventions for plugins when importing classes. This is an example of a testcase
+for the ``BlogPost`` model from the plugins chapter of this manual. A difference
+from other tests is in the first line where 'Blog.BlogPost' is imported. You
+also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 
