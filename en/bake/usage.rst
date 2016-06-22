@@ -4,9 +4,9 @@ Code Generation with Bake
 The cake console is run using the PHP CLI (command line interface). 
 If you have problems running the script, ensure that:
 
-1. You have the PHP CLI installed and that it has the proper modules enabled (eg: MySQL, intl). 
-2. Users also might have issues if the database host is 'localhost' and should try '127.0.0.1' instead, as localhost can cause issues with PHP CLI.
-3. Depending on how your computer is configured, you may have to set execute rights on the cake bash script to call it using ``bin/cake bake``.
+#. You have the PHP CLI installed and that it has the proper modules enabled (eg: MySQL, intl). 
+#. Users also might have issues if the database host is 'localhost' and should try '127.0.0.1' instead, as localhost can cause issues with PHP CLI.
+#. Depending on how your computer is configured, you may have to set execute rights on the cake bash script to call it using ``bin/cake bake``.
 
 Before running bake you should make sure you have at least one database
 connection configured. See the section on :ref:`database configuration
