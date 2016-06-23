@@ -69,7 +69,7 @@ HTML/XHTML ドキュメントをブラウザーに返しますが、JSON を介�
 
 CakePHP のテンプレートファイルは既定の拡張子を **.ctp** (CakePHP Template) としており、
 制御構造や出力のために `PHP 別の構文
-<http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+<http://php.net/manual/ja/control-structures.alternative-syntax.php>`_
 を利用することができます。
 これらのファイルにはコントローラから受け取ったデータを、
 閲覧者のために用意した表示形式に整形するのに必要なロジックを入れます。
@@ -283,7 +283,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
     // 上と同じです。
     $this->append('sidebar', $this->element('sidebar/popular_topics'));
 
-あるブロックを消去または上書きする必要するには、いくつかの方法があります。
+もしあるブロックを消去または上書きする必要がある場合、二つほど選択肢があります。
 ``reset()`` メソッドはいつでもブロックを消去または上書きします。
 空文字での ``assign()`` メソッドも特定のブロックを消去するために使えます。 ::
 
