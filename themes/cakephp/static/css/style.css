@@ -320,11 +320,11 @@ iframe {
 
 
 /* Submenu */
-.submenu, 
+.submenu,
 .submenu .submenu {
     list-style: none;
     margin: 0;
-    padding: 0;   
+    padding: 0;
     display: none;
     position: absolute;
     z-index: 999999;
@@ -457,7 +457,7 @@ iframe {
 
 .menu > .right { float: right; }
 
-.menu > .right > a, 
+.menu > .right > a,
 .menu > li > a.last { padding-right:0 !important; }
 
 
@@ -536,7 +536,7 @@ iframe {
 /* Menu on Mobiles */
 
 @media (max-width: 767px) {
-    .header-wrapper { 
+    .header-wrapper {
         background-color: #D33C44;
         color: #dadde2;
     }
@@ -596,7 +596,7 @@ iframe {
         display:block;
         color: white;
     }
-    .menu > li > a, 
+    .menu > li > a,
     .menu > .right > a {
         padding: 15px 25px;
     }
@@ -605,12 +605,12 @@ iframe {
         color:rgb(191, 191, 191);
     }
 
-    .submenu, 
+    .submenu,
     .submenu .submenu {
         width: 100% !important;
         left: 0;
         position: static !important;
-        border: none; 
+        border: none;
     }
     .submenu { border-top:none; }
 
@@ -639,9 +639,9 @@ iframe {
 
 
     /* Topbar */
-    .topbar .pull-right { 
-        float:none !important; 
-        margin-top: 20px; 
+    .topbar .pull-right {
+        float:none !important;
+        margin-top: 20px;
         margin-bottom:20px;
     }
 }
@@ -663,7 +663,7 @@ iframe {
 }
 
 /* Header Dark */
-.header-dark { 
+.header-dark {
     background-color: #292c31;
     color: #dadde2;
 }
@@ -918,7 +918,7 @@ input[type="email"].big-dog::webkit-input-placeholder {
     }
 }
 
-.form-group { 
+.form-group {
     position:relative;
 }
 
@@ -1060,9 +1060,9 @@ input[type="email"].big-dog::webkit-input-placeholder {
     font-size: 16px;
     font-weight: 400;
     line-height: 18px;
-    background-color: inherit; 
-    border-bottom: none; 
-    border-radius: 0; 
+    background-color: inherit;
+    border-bottom: none;
+    border-radius: 0;
 }
 .popover-title::after {
     content:"";
@@ -1843,7 +1843,15 @@ header {
     clear:both;
 }
 
-
+/* -- back to top -- */
+#back-to-contents {
+    position: fixed;
+    bottom: calc(70% - 42px);
+    right: 0;
+    background: #363637;
+    padding: 5px 0px 4px;
+    z-index: 90; /* Behind header */
+}
 /* Improve Doc */
 #improve-slideout {
     position: fixed;
@@ -1855,7 +1863,6 @@ header {
     transition-duration: 0.3s;
     background: #363637;
     padding: 5px 0px 4px;
-    position: fixed;
     z-index: 90; /* Behind header */
 }
 #improve-slideout:hover {
