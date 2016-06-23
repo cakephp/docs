@@ -209,6 +209,7 @@ follow the following pattern::
 For instance, the following are all valid ways of specifying an email field:
 
 * ``email:string:unique``
+* ``email:string?:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
