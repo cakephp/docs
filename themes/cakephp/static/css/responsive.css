@@ -151,10 +151,14 @@
     }
 
     #improve-slideout {
-        bottom: 0;
+        bottom: 42px;
     }
 
     #improve-slideout-inner {
+        bottom: 42px;
+    }
+
+    #back-to-contents {
         bottom: 0;
     }
 
@@ -221,21 +225,16 @@
     }
 
     #improve-slideout {
-        bottom: 0;
+        bottom: 42px;
     }
 
     #improve-slideout-inner {
+        bottom: 42px;
+    }
+    #back-to-contents {
         bottom: 0;
     }
 }
-
-
-
-
-
-
-
-
 
 
 @media (min-width: 992px) and (max-width: 1199px) {

@@ -154,12 +154,6 @@ dl.docutils {
     cursor: pointer;
 }
 
-/* -- back to top -- */
-#back-to-contents {
-    display: block;
-    position: fixed;
-    background: #fff;
-}
 /* -- Page Contents -- */
 .page-contents {
     background: #eaeae7;
@@ -792,4 +786,3 @@ dt tt {
 .genindextable a {
     font-size: 14px;
 }
-
