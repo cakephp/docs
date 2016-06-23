@@ -423,7 +423,8 @@ are a few more tree-orientated permutations at your disposal.
 
     :param $conditions: Uses the same conditional options as find().
     :param $keyPath: Path to the field to use for the key, i.e. "{n}.Post.id".
-    :param $valuePath: Path to the field to use for the label, , i.e. "{n}.Post.title".
+    :param $valuePath: Path to the field to use for the label, i.e.
+      "{n}.Post.title".
     :param $spacer: The string to use in front of each item to indicate depth.
     :param $recursive: The number of levels deep to fetch associated records
 

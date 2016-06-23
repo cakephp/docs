@@ -424,8 +424,10 @@ de permutations en plus des méthodes find de bases.
     .. php:method:: generateTreeList ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
 
     :param $conditions: Utilise les mêmes conditions qu'un find().
-    :param $keyPath: Chemin du champ à utiliser pour la clé.
-    :param $valuePath: Chemin du champ à utiliser pour le label.
+    :param $keyPath: Chemin du champ à utiliser pour la clé, par exemple
+      "{n}.Post.id.
+    :param $valuePath: Chemin du champ à utiliser pour le label, par exemple
+      "{n}.Post.title".
     :param $spacer: La chaîne à utiliser devant chaque élément pour indiquer la
       profondeur.
     :param $recursive: Le nombre de niveaux de profondeur pour rechercher les
