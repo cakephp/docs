@@ -204,13 +204,16 @@ Columns definition
 When using columns in the command line, it may be handy to remember that they
 follow the following pattern::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 For instance, the following are all valid ways of specifying an email field:
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
+
+The question mark following the fieldType will make the column nullable.
 
 The ``length`` parameter for the ``fieldType`` is optional and should always be
 written between bracket.

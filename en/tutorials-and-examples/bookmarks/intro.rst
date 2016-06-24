@@ -223,7 +223,7 @@ users, bookmarks, and tags.
 Adding Password Hashing
 =======================
 
-When you created your users, you probably noticed that the passwords were stored
+When you created your users (by visiting **http://localhost:8765/bookmarks/users** ), you probably noticed that the passwords were stored
 in plain text. This is pretty bad from a security point of view, so let's get
 that fixed.
 
