@@ -4392,7 +4392,7 @@ header {
 /* -- back to top -- */
 #back-to-contents {
     position: fixed;
-    bottom: calc(70% - 42px);
+    bottom: calc(70% - 44px);
     right: 0;
     background: #363637;
     padding: 5px 0px 4px;
@@ -4412,7 +4412,7 @@ header {
     z-index: 90; /* Behind header */
 }
 #improve-slideout:hover {
-  right: 180px;
+  right: 210px;
 }
 #improve-slideout:hover #improve-slideout-inner {
   right: 0;
@@ -4420,14 +4420,14 @@ header {
 #improve-slideout-inner {
     position: fixed;
     bottom: 70%;
-    right: -180px;
+    right: -210px;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
     background: #e0e0d9;
     padding: 5px 12px;
-    width: 180px;
+    width: 210px;
 }
 #improve-slideout-inner h6 {
     color: #363637;
