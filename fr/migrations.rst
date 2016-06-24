@@ -207,14 +207,18 @@ Définition de Colonnes
 Quand vous définissez des colonnes avec la ligne de commande, il peut être
 pratique de se souvenir qu'elles suivent le modèle suivant::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 Par exemple, les façons suivantes sont toutes des façons valides pour spécifier
 un champ d'email:
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
+
+Le point d'interrogation qui suit le type du champ entrainera que la colonne
+peut être null.
 
 Le paramètre ``length`` pour ``fieldType`` est optionnel et doit toujours être
 écrit entre crochets.
@@ -474,7 +478,7 @@ utiliser l'option ``--connection``::
     $ bin/cake bake migration_diff NameOfTheMigrations --connection my_other_connection
 
 Si vous souhaitez utiliser la fonctionnalité de diff sur une application qui
-possède déjà un historique de migrations, vous allez avoir besoin de créer le 
+possède déjà un historique de migrations, vous allez avoir besoin de créer le
 fichier dump manuellement pour qu'il puisse être utilisé comme point de
 comparaison::
 
@@ -709,7 +713,7 @@ La commande Dump crée un fichier qui sera utilisé avec le template bake
     $ bin/cake migrations dump
 
 Chaque fichier dump généré est spécifique à la _Connection_ par laquelle il a
-été générée (le nom du fichier est suffixé par ce nom). Cela permet à la 
+été générée (le nom du fichier est suffixé par ce nom). Cela permet à la
 commande ``bake migration_diff`` de calculer le diff correctement dans le cas
 où votre application gérerait plusieurs bases de données (qui pourraient être
 basées sur plusieurs SGDB.
@@ -946,13 +950,15 @@ vider le cache de l'ORM pour qu'il renouvelle les _metadata_ des colonnes de vos
 tables.
 Autrement, vous pourrez rencontrer des erreurs de colonnes inexistantes quand
 vous effectuerez des opérations sur vos nouvelles colonnes.
-Le Core de CakePHP inclut un :doc:`Shell de Cache de l'ORM <console-and-shells/orm-cache>`
-que vous pouvez utilisez pour vider le cache::
+Le Core de CakePHP inclut un
+:doc:`Shell de Cache de l'ORM <console-and-shells/orm-cache>` que vous pouvez
+utilisez pour vider le cache::
 
     $ bin/cake orm_cache clear
 
-Veuillez vous référer à la section du cookbook à propos du :doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>`
-si vous voulez plus de détails à propos de ce shell.
+Veuillez vous référer à la section du cookbook à propos du
+:doc:`Shell du Cache de l’ORM <console-and-shells/orm-cache>` si vous voulez
+plus de détails à propos de ce shell.
 
 Renommer une table
 ------------------
