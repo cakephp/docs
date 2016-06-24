@@ -413,8 +413,8 @@ delete() をコールします。例は次の通りです。
     .. php:method:: generateTreeList ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
 
     :param $conditions: find() と同様の検索条件オプションに使用
-    :param $keyPath: キーとして使用するフィールドのパス
-    :param $valuePath: ラベルに使用するフィールドのパス
+    :param $keyPath: キーとして使用するフィールドのパス。例: "{n}.Post.id"
+    :param $valuePath: ラベルに使用するフィールドのパス。例: "{n}.Post.title"
     :param $spacer: 各々の値の前に付ける深さを示すための文字列
     :param $recursive: 関連付けられたレコードを取得する際の深さのレベル数
 
