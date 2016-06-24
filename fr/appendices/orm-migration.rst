@@ -82,7 +82,7 @@ Table gèrent les tâches telles que:
 - Valider et sauvegarder des entités.
 - Supprimer des entités.
 - Définir & accéder aux associations.
-- Déclencher les évènements de callback.
+- Déclencher les événements de callback.
 - Interagir avec les behaviors.
 
 Le chapitre de la documentation sur :doc:`/orm/table-objects` fournit bien plus
@@ -92,7 +92,7 @@ il va finir dans un objet Table. Les objets Table ne contiennent aucun
 SQL dépendant de la plateforme. A la place, ils collaborent avec les entités et
 le générateur de requêtes pour faire leur travail. Les objets Table
 intéragissent aussi avec les behaviors et d'autres parties à travers les
-évènements publiés.
+événements publiés.
 
 Les Objets Query
 ----------------

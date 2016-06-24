@@ -24,7 +24,7 @@ Quand vous supprimez des entities, quelques actions se passent:
    retournés.
 3. L'entity sera supprimée.
 4. Toutes les associations dépendantes seront supprimées. Si les associations
-   sont supprimées en tant qu'entities, des évènements supplémentaires seront
+   sont supprimées en tant qu'entities, des événements supplémentaires seront
    dispatchés.
 5. Tout enregistrement de table jointe pour les associations BelongsToMany
    sera retirées.
@@ -58,7 +58,7 @@ d'association HasMany avec ces deux options activées serait::
     Définir ``cascadeCallbacks`` à ``true``, entrainera  des lenteurs
     supplémentaires des suppressions par rapport aux suppressions de masse.
     L'option cascadeCallbacks doit seulement être activée quand votre
-    application a un travail important de gestion des écouteurs d'évènements.
+    application a un travail important de gestion des écouteurs d'événements.
 
 Suppressions en Masse
 ---------------------
@@ -80,6 +80,6 @@ lignes ont été supprimées.
 
 .. warning::
 
-    deleteAll *ne* va *pas* déclencher les évènements beforeDelete/afterDelete.
+    deleteAll *ne* va *pas* déclencher les événements beforeDelete/afterDelete.
     Si vous avez besoin d'eux, chargez d'abord une collection d'enregistrements
     et supprimez les.

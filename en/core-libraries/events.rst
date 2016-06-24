@@ -127,8 +127,8 @@ Tracking Events
 ---------------
 
 To keep a list of events that are fired on a particular ``EventManager``, you
-can enable event tracking. To do so, simply attach an :php:class:`Cake\\Event\\EventList`
-to the manager::
+can enable event tracking. To do so, simply attach an
+:php:class:`Cake\\Event\\EventList` to the manager::
 
     EventManager::instance()->setEventList(new EventList());
 
@@ -138,7 +138,7 @@ After firing an event on the manager, you can retrieve it from the event list::
     $firstEvent = $eventsFired[0];
 
 Tracking can be disabled by removing the event list or calling
-:php:meth:`Cake\\Event\\EventList::trackEvents(false)`
+:php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
 
 .. versionadded:: 3.2.10
     Event tracking and :php:class:`Cake\\Event\\EventList` were added.
