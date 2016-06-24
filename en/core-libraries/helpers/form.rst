@@ -172,7 +172,7 @@ There are a number of options for create():
   application::
 
     echo $this->Form->create(false, array(
-        'url' => array('controller' => 'recipes', 'action' => 'add')
+        'url' => array('controller' => 'recipes', 'action' => 'add'),
         'id' => 'RecipesAdd'
     ));
 

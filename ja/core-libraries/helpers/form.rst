@@ -159,7 +159,7 @@ create() には多くのオプションがあります:
 
   .. deprecated:: 2.8.0
     ``$options['action']`` オプションは、 2.8.0 で非推奨になりました。
-    代わりに ``$options['url']`` オプションを使用してください。
+    代わりに ``$options['url']`` と ``$options['id']`` オプションを使用してください。
 
 * ``$options['url']`` 現在のコントローラー以外にフォームデータを渡したい
   場合、$options 配列の 'url' キーを使ってフォームアクションの URL
@@ -167,7 +167,8 @@ create() には多くのオプションがあります:
   対する相対値を指定できます::
 
     echo $this->Form->create(false, array(
-        'url' => array('controller' => 'recipes', 'action' => 'add')
+        'url' => array('controller' => 'recipes', 'action' => 'add'),
+        'id' => 'RecipesAdd'
     ));
 
   出力結果:
