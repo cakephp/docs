@@ -194,7 +194,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 
 テストケースを使うことにより、 既知の入力セットと期待される出力結果との関係を 簡単に記述することが
 できます。これにより、あなたの書いたコードが期待した動作を満たしているかどうか 簡単に確かめることが
-できます。あなたはより自信を持ってコードを書くことができるようになる 手助けをしてくれます。 
+できます。あなたはより自信を持ってコードを書くことができるようになる 手助けをしてくれます。
 また、テストはコードなので、あなたが変更を加えるたびに再実行するのは簡単です。
 これは新たなバグの発生を防ぐ手助けをしてくれるでしょう。
 
@@ -305,7 +305,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 
 * ``setUp`` は、テストメソッドの前に毎回呼び出されます。
   テストされるオブジェクトの生成や、テストのためのデータの初期化に使われます。
-  ``parent::setUp()`` を呼び出すことを忘れないでください。 
+  ``parent::setUp()`` を呼び出すことを忘れないでください。
 * ``tearDown`` は、テストメソッドの後に毎回呼び出されます。
   テストが完了した後のクリーンアップに使われます。
   ``parent::tearDown()`` を呼び出すことを忘れないでください。
@@ -513,7 +513,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 異なる接続の使用を使用したい場合::
@@ -659,7 +659,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public $fixtures = ['app.articles'];
     }
 
-このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャを設定します。 
+このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャを設定します。
 クエリを実行するにあたり、必要なフィクスチャをすべてインクルードすることを覚えておいてください。
 
 テストメソッドの作成
@@ -902,6 +902,48 @@ CakePHP は特殊な ``IntegrationTestCase`` クラスを提供しています�
         $this->assertResponseOk();
         // その他のアサーション
     }
+
+ステートレス認証と API のテスト
+-------------------------------
+
+Basic 認証のようなステートレス認証を使用する API をテストするために、実際の認証の
+リクエストヘッダーをシミュレートする環境変数やヘッダを注入するためにリクエストを設定できます。
+
+Basic または Digest 認証をテストする際、自動的に
+`PHP が作成する <http://php.net/manual/ja/features.http-auth.php>`_
+環境変数を追加できます。これらの環境変数は、 :ref:`basic-authentication` に概説されている
+認証アダプター内で使用されます。 ::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+OAuth2 のようなその他の認証方法をテストしている場合、Authorization ヘッダーを
+直接セットできます。 ::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+``configRequest()`` 内の headers キーは、アクションに必要な追加の HTTP ヘッダーを
+設定するために使用されます。
 
 CsrfComponent や SecurityComponent で保護されたアクションのテスト
 -----------------------------------------------------------------

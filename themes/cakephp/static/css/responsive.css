@@ -12,30 +12,6 @@
         margin-right: -15px;
     }
 
-    .title-red {
-        font-size: 40px;
-    }
-
-    #quote h4 {
-        font-size: 35px;
-    }
-
-    #quote h5 {
-        text-align: left;
-        line-height: 1;
-        margin-top: 30px;
-    }
-
-    #quote h6 {
-        text-align: left;
-    }
-
-    .subtitle-black {
-        font-size: 30px;
-        line-height: 34px;
-    }
-
-
     .search-form {
         top: -21px;
     }
@@ -88,30 +64,6 @@
         margin-bottom: 12px;
     }
 
-    #cakefest p {
-        text-align: center;
-    }
-
-    .sub-expertise {
-        text-align: center;
-    }
-
-    #expertise p {
-        text-align: center;
-    }
-
-    .icon-expertise-2 {
-        text-align: center;
-    }
-
-    .title-expertise{
-        text-align: center;
-    }
-
-    .box-services-d:hover .icon-expertise-2 {
-        text-align: center;
-    }
-
     .git-frame iframe{
         padding-left: 34%;
     }
@@ -120,14 +72,7 @@
         padding: 10px 6px;
     }
 
-
     /* ---------------------- COOK BOOK ------------------------- */
-
-
-    #cookbook {
-        padding-top: 50px;
-    }
-
     .page-container {
         padding-top: 20px;
     }
@@ -138,7 +83,7 @@
     }
 
     .read-the-book a {
-            margin: 15px 5px 22px;
+        margin: 15px 5px 22px;
     }
 
     .page-container .row {
@@ -147,14 +92,18 @@
     }
 
     .btn-nav {
-            font-size: 11px;
+        font-size: 11px;
     }
 
     #improve-slideout {
-        bottom: 0;
+        bottom: 42px;
     }
 
     #improve-slideout-inner {
+        bottom: 42px;
+    }
+
+    #back-to-contents {
         bottom: 0;
     }
 
@@ -173,10 +122,6 @@
  * Tablet Portrait layout.
  */
 @media (min-width: 768px) and (max-width: 991px) {
-    .header-transparent .main-header {
-        background-color: #d33c44;
-    }
-
     .search-form {
         top: -21px;
     }
@@ -192,10 +137,6 @@
     .logo-cake img {
         margin-top: 15px;
         margin-bottom: 14px;
-    }
-
-    #sub {
-        margin-top: 60px;
     }
 
     /* ---------------------- COOK BOOK ------------------------- */
@@ -221,21 +162,16 @@
     }
 
     #improve-slideout {
-        bottom: 0;
+        bottom: 42px;
     }
 
     #improve-slideout-inner {
+        bottom: 42px;
+    }
+    #back-to-contents {
         bottom: 0;
     }
 }
-
-
-
-
-
-
-
-
 
 
 @media (min-width: 992px) and (max-width: 1199px) {

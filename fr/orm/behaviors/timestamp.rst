@@ -35,7 +35,7 @@ Utiliser et Configurer le Behavior
 ==================================
 
 Si vous avez besoin de modifier les champs avec des noms différents, ou si vous
-souhaitez mettre à jour le timestamp supplémentaire sur des évènements
+souhaitez mettre à jour le timestamp supplémentaire sur des événements
 personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
 
     class OrdersTable extends Table

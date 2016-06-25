@@ -6,8 +6,8 @@ changes in your database by writing PHP files that can be tracked using your
 version control system.
 
 It allows you to evolve your database tables over time. Instead of writing
-schema modifications in SQL, this plugin allows you to use an intuitive set
-of methods to implement your database changes.
+schema modifications in SQL, this plugin allows you to use an intuitive set of
+methods to implement your database changes.
 
 This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_.
 
@@ -180,8 +180,8 @@ Migration names can follow any of the following patterns:
 * (``/^(Alter)(.*)/``) Alters the specified table. An alias
   for CreateTable and AddField.
 
-You can also use the ``underscore_form`` as the name for your migrations
-i.e. ``create_products``.
+You can also use the ``underscore_form`` as the name for your migrations i.e.
+``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
@@ -195,8 +195,8 @@ i.e. ``create_products``.
 
     Migration names are used as migration class names, and thus may collide with
     other migrations if the class names are not unique. In this case, it may be
-    necessary to manually override the name at a later date, or simply change the
-    name you are specifying.
+    necessary to manually override the name at a later date, or simply change
+    the name you are specifying.
 
 Columns definition
 ~~~~~~~~~~~~~~~~~~
@@ -204,13 +204,16 @@ Columns definition
 When using columns in the command line, it may be handy to remember that they
 follow the following pattern::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 For instance, the following are all valid ways of specifying an email field:
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
+
+The question mark following the fieldType will make the column nullable.
 
 The ``length`` parameter for the ``fieldType`` is optional and should always be
 written between bracket.
@@ -638,6 +641,36 @@ To seed your database, you can use the ``seed`` subcommand::
 Be aware that, as opposed to migrations, seeders are not tracked, which means
 that the same seeder can be applied multiple times.
 
+Calling a Seeder from another Seeder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: cakephp/migrations 1.6.2
+
+Usually when seeding, the order in which to insert the data must be respected
+to not encounter constraints violations. Since Seeders are executed in the
+alphabetical order by default, you can use the ``\Migrations\AbstractSeed::call()``
+method to define your own sequence of seeders execution::
+
+    use Migrations\AbstractSeed;
+
+    class DatabaseSeed extends AbstractSeed
+    {
+        public function run()
+        {
+            $this->call('AnotherSeed');
+            $this->call('YetAnotherSeed');
+
+            // You can use the plugin dot syntax to call seeders from a plugin
+            $this->call('PluginName.FromPluginSeed');
+        }
+    }
+
+.. note::
+
+    Make sure to extend the Migrations plugin ``AbstractSeed`` class if you want
+    to be able to use the ``call()`` method. This class was added with release
+    1.6.2.
+
 ``dump`` : Generating a dump file for the diff baking feature
 -------------------------------------------------------------
 
@@ -881,3 +914,16 @@ that you can use to perform this operation::
 
 Be sure to read the :doc:`ORM Cache Shell <console-and-shells/orm-cache>`
 section of the cookbook if you want to know more about this shell.
+
+Renaming a table
+----------------
+
+The plugin gives you the ability to rename a table, using the ``rename()``
+method.
+In your migration file, you can do the following::
+
+    public function up()
+    {
+        $this->table('old_table_name')
+            ->rename('new_table_name');
+    }

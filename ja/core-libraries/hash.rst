@@ -422,7 +422,7 @@ Hash パス構文
         ];
         $res = Hash::filter($data);
 
-        /* $data は以下のようになります:
+        /* $res は以下のようになります:
             [
                 [0] => 0
                 [2] => true
@@ -548,11 +548,11 @@ Hash パス構文
 
         $data = ['one'];
         $res = Hash::numeric(array_keys($data));
-        // $res is true
+        // $res は true
 
         $data = [1 => 'one'];
         $res = Hash::numeric($data);
-        // $res is false
+        // $res は false
 
 .. php:staticmethod:: dimensions (array $data)
 
@@ -613,7 +613,20 @@ Hash パス構文
 .. php:staticmethod:: apply(array $data, $path, $function)
 
     ``$function`` を使用して、抽出された値のセットにコールバックを適用します。
-    この関数は第一引数として抽出された値を取得します。
+    この関数は第一引数として抽出された値を取得します。 ::
+    
+        $data = [
+            ['date' => '01-01-2016', 'booked' => true],
+            ['date' => '01-01-2016', 'booked' => false],
+            ['date' => '02-01-2016', 'booked' => true]
+        ];
+        $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
+        /* $result は以下のようになります:
+            [
+                '01-01-2016' => 1,
+                '02-01-2016' => 1,
+            ]
+        */
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 

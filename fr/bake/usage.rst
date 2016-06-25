@@ -6,10 +6,14 @@ les droits d'exécution au script bash cake ou l'appeler avec la commande
 ``./bin/cake bake``.
 La console cake est exécutée en utilisant le CLI PHP
 (Interface de Ligne de Commande). Si vous avez des problèmes en exécutant ce
-script, vérifiez que le CLI PHP est installé et qu'il a les bons modules
-activés (ex: MySQL, intl). Certains utilisateurs peuvent aussi rencontrer des
-problèmes si la base de données host est 'localhost' et devront essayer
-'127.0.0.1' à la place. Cela peut causer des soucis avec le CLI PHP.
+script, vérifiez que :
+
+#. le CLI PHP est installé et qu'il a les bons modules activés (ex: MySQL, intl).
+#. Certains utilisateurs peuvent aussi rencontrer des problèmes si la base de
+   données host est 'localhost' et devront essayer '127.0.0.1' à la place.
+#. Selon la configuration de votre ordinateur, vous devrez peut-être permettre
+   l'exécution du script bash pour permettre de lancer ``bin/cake bake``.
+
 
 Avant de lancer bake, vous devrez vous assurer qu'au moins une connection à une
 base de données est configurée. Regardez la section dans
@@ -21,7 +25,7 @@ des tâches disponibles. Vous devriez voir quelque chose comme ceci::
 
     $ bin/cake bake
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.x.x Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/
@@ -39,11 +43,13 @@ des tâches disponibles. Vous devriez voir quelque chose comme ceci::
     - fixture
     - form
     - helper
+    - mailer
     - migration
     - migration_snapshot
     - model
     - plugin
     - shell
+    - shell-helper 
     - template
     - test
 
@@ -55,7 +61,7 @@ options disponibles en utilisant l'option ``--help``::
 
     $ bin/cake bake controller --help
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.x.x Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/

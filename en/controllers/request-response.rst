@@ -714,6 +714,11 @@ include the :php:class:`RequestHandlerComponent` in your controller::
         // ...
     }
 
+.. note::
+
+    Most proxy users should probably consider using the Last Modified Header
+    instead of Etags for performance and compatibility reasons.
+
 The Last Modified Header
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -762,7 +767,7 @@ response and determines whether it can still be considered fresh. If so, deletes
 the response content, and sends the `304 Not Modified` header::
 
     // In a controller action.
-    if ($this->response->checkNotModfied($this->request)) {
+    if ($this->response->checkNotModified($this->request)) {
         return $this->response;
     }
 

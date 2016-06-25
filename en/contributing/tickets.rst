@@ -22,8 +22,7 @@ the best bug report possible:
   version, CakePHP version).
 * **Don't**: Please don't use the ticket system to ask support questions. The #cakephp IRC channel
   on `Freenode <https://webchat.freenode.net>`__ has many developers available to help answer
-  your questions. Additional options are CakePHP's
-  `Google Group <http://groups.google.com/group/cake-php>`__ and the always popular
+  your questions. Also have a look at
   `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__.
 
 Reporting Security Issues

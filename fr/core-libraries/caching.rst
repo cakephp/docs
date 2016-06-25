@@ -336,6 +336,12 @@ Garbage collects entries in the cache configuration. C'est principalement
 utilisé par FileEngine. Elle ne devra être implémentée par tout moteur
 de Cache qui a besoin d'une suppresion manuelle des données mises en cache.
 
+.. note::
+
+    Comme APC et Wincache utilisent des caches isolés pour le serveur web et le
+    CLI, ils doivent être supprimés séparément (CLI ne peut pas nettoyer le
+    serveur web et vice et versa).
+
 Utiliser le Cache pour Stocker les Compteurs
 ============================================
 
