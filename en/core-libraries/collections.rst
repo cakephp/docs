@@ -687,15 +687,15 @@ collection.
 Taking the input the nested collection built in the previous example, we can
 flatten it::
 
-    $nested->listNested()->toArray();
+    $nested->listNested()->toList();
 
     // Returns
     [
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish', 'children' => [...]],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
