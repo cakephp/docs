@@ -11,7 +11,7 @@ tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 
 Les fichiers des classes Model de CakePHP se trouvent dans ``/app/Model``,
 et le fichier que nous allons créer maintenant sera enregistré dans
-``/app/Model/Post.php``. Le fichier complet devrait ressembler à ceci ::
+``/app/Model/Post.php``. Le fichier complet devrait ressembler à ceci::
 
     class Post extends AppModel {
     }
@@ -43,7 +43,7 @@ processus de post. En un mot, c'est l'endroit où vous jouerez avec les models
 et où les tâches liées aux posts s'exécutent. Nous placerons ce nouveau
 controller dans un fichier appelé ``PostsController.php`` à l'intérieur du
 dossier ``/app/Controller``. Voici à quoi devrait ressembler le controller
-de base ::
+de base::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -54,7 +54,7 @@ souvent une simple fonction ou une interface dans une application. Par exemple,
 quand les utilisateurs requêtent www.exemple.com/posts/index (qui est
 la même chose que www.exemple.com/posts/), ils pourraient s'attendre à voir une
 liste de posts. Le code pour cette action devrait ressembler à quelque chose
-comme ça ::
+comme ça::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -108,7 +108,7 @@ défaut.
 Vous souvenez-vous, dans la dernière section, comment nous avions assigné
 la variable 'posts' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
-chose comme cela ::
+chose comme cela::
 
     // print_r($posts) affiche:
 
@@ -208,7 +208,7 @@ cette vue (le lien sur le titre d'un post mène à l'URL :
 l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
-tarder dans le Controller Posts ::
+tarder dans le Controller Posts::
 
     // File: /app/Controller/PostsController.php
     class PostsController extends AppController {
@@ -270,7 +270,7 @@ Lire depuis la base de données et nous afficher les posts est un bon début,
 mais lançons-nous dans l'ajout de nouveaux posts.
 
 Premièrement, commençons par créer une action ``add()`` dans le
-PostsController ::
+PostsController::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Flash');
@@ -386,7 +386,7 @@ Voici le code de notre vue "add" (ajout)
 
 Nous utilisons le :php:class:`FormHelper` pour générer la balise
 d'ouverture d'une formulaire HTML. Voici le code HTML généré par
-``$this->Form->create()`` ::
+``$this->Form->create()``::
 
 .. code-block:: html
 
@@ -413,7 +413,7 @@ sur les helpers.
 
 A présent, revenons en arrière et modifions notre vue
 ``/app/View/Posts/index.ctp`` pour ajouter un lien "Ajouter un post". Ajoutez
-la ligne suivante avant ``<table>`` ::
+la ligne suivante avant ``<table>``::
 
     <?php echo $this->Html->link(
         'Ajouter un Post',
@@ -423,7 +423,7 @@ la ligne suivante avant ``<table>`` ::
 Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes
 exigences de validation ? Les règles de validation sont définies dans le
 model. Retournons donc à notre model Post et procédons à quelques
-ajustements ::
+ajustements::
 
     class Post extends AppModel {
         public $validate = array(
@@ -458,7 +458,7 @@ Editer des Posts
 L'édition de posts : nous y voilà. Vous êtes un pro de CakePHP maintenant, vous
 devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue.
 Voici à quoi l'action ``edit()`` du controller Posts (PostsController) devrait
-ressembler ::
+ressembler::
 
     public function edit($id = null) {
         if (!$id) {
@@ -567,7 +567,7 @@ Supprimer des Posts
 
 A présent, mettons en place un moyen de supprimer les posts pour les
 utilisateurs. Démarrons avec une action ``delete()`` dans le controller
-Posts (PostsController) ::
+Posts (PostsController)::
 
     public function delete($id) {
         if ($this->request->is('get')) {
@@ -679,7 +679,7 @@ cela, nous voudrions la remplacer avec notre controller Posts
 
 Le routage de CakePHP se trouve dans ``/app/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle
-ressemble à cela ::
+ressemble à cela::
 
     Router::connect(
         '/',
@@ -688,7 +688,7 @@ ressemble à cela ::
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous
 voulons que cette URL soit connectée à notre propre controller, remplacez donc
-la ligne par celle-ci ::
+la ligne par celle-ci::
 
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 

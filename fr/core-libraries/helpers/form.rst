@@ -159,7 +159,7 @@ Il y plusieurs options pour create():
 *   ``$options['action']`` La clé action vous permet de définir vers quelle
     action de votre controller pointera le formulaire. Par exemple, si vous
     voulez que le formulaire appelle l'action login() de votre controller
-    courant, vous créeriez le tableau $options comme ceci ::
+    courant, vous créeriez le tableau $options comme ceci::
 
         echo $this->Form->create('User', array('action' => 'login'));
 
@@ -177,7 +177,7 @@ Il y plusieurs options pour create():
 *   ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire
     n'est pas dans le controller courant, vous pouvez spécifier une URL
     dans le formulaire en utilisant la clé 'url' de votre tableau $options.
-    L'URL ainsi fournie peut être relative à votre application CakePHP ::
+    L'URL ainsi fournie peut être relative à votre application CakePHP::
 
         echo $this->Form->create(false, array(
             'url' => array('controller' => 'recipes', 'action' => 'add'),
@@ -406,7 +406,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     Supposons un User hasAndBelongsToMany Group. Dans votre controller,
     définissez une variable camelCase au pluriel (groupe -> groupes dans cette
     exemple, ou ExtraFunkyModele -> extraFunkyModeles) avec les options de
-    sélections. Dans l'action du controller vous pouvez définir ::
+    sélections. Dans l'action du controller vous pouvez définir::
 
         $this->set('groups', $this->User->Group->find('list'));
 
@@ -427,7 +427,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     Si votre nom de model est composé de deux mots ou plus,
     ex. "UserGroup", quand vous passez les données en utilisant set()
     vous devrez nommer vos données dans un format CamelCase
-    (les Majuscules séparent les mots) et au pluriel comme ceci ::
+    (les Majuscules séparent les mots) et au pluriel comme ceci::
 
         $this->set('userGroups', $this->UserGroup->find('list'));
         // ou bien
@@ -586,7 +586,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
           <input name="data[User][name]" type="text" value="" id="UserName" />
       </div>
 
-  Désactiver le rendu de la div ::
+  Désactiver le rendu de la div::
 
       echo $this->Form->input('User.name', array('div' => false)); ?>
 
@@ -1313,7 +1313,7 @@ Ex: name=data[User][username], id=UserUsername
       manuellement des options pour un input select (menu de sélection),
       ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
       le Helper Form supposera que la cible est un input select (menu de
-      sélection) ::
+      sélection)::
 
         echo $this->Form->select('field', array(1,2,3,4,5));
 

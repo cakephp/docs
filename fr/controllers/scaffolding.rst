@@ -2,7 +2,7 @@ Scaffolding
 ###########
 
 .. deprecated:: 2.5
-    Le scaffolding dynamique sera retiré et remplacé dans 3.0 
+    Le scaffolding dynamique sera retiré et remplacé dans 3.0
 
 Une application scaffolding (échafaudage en Français) est une technique
 permettant au développeur de définir et créer une application qui peut
@@ -18,7 +18,7 @@ Le scaffolding par CakePHP est vraiment bien imaginé.
 Il vous permet de mettre en place une application basique CRUD
 (Création, Vue, Edition et Destruction) en quelques minutes.
 Il est si bien fait que vous aurez envie de l'utiliser dans toutes
-vos applications. 
+vos applications.
 Attention ! Nous pensons aussi que le scaffolding est utile,
 mais veuillez réaliser que ce n'est... qu'un échafaudage !
 C'est une structure très simple à mettre en oeuvre, et il vaut mieux
@@ -43,12 +43,12 @@ modification, des formulaires pour l'édition et une vue pour afficher un
 enregistrement en particulier.
 
 Pour ajouter le Scaffolding dans votre application, ajoutez la variable
-``$scaffold`` dans votre controller ::
+``$scaffold`` dans votre controller::
 
     class CategoriesController extends AppController {
         public $scaffold;
     }
-    
+
 En supposant que vous avez bien crée un model Category dans le bon
 dossier (``app/Model/Category.php``), vous pouvez aller sur
 http://exemple.com/categories pour voir votre nouveau scaffold.
@@ -103,7 +103,7 @@ d'administration à la variable de scaffolding::
 
     public $scaffold = 'admin';
 
-Vous serez maintenant capable d'accéder aux actions scaffoldées ::
+Vous serez maintenant capable d'accéder aux actions scaffoldées::
 
     http://example.com/admin/controller/index
     http://example.com/admin/controller/view
@@ -117,7 +117,7 @@ avoir de méthodes de scaffolding à la fois dans la partie admin et
 dans la partie non-admin en même temps. Comme avec le scaffolding normal,
 vous pouvez surcharger les méthodes individuelles et les remplacer par
 vos propres méthodes::
-    
+
     public function admin_view($id = null) {
       // du code ici
     }

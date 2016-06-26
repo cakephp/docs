@@ -49,15 +49,17 @@ moment là inclure la logique pour l'expédition, l'email ou la décrémentation
 du produit dans le stock, mais ce sont des tâches importantes pour les personnes
 utilisant votre plugin. Si vous n'utilisiez pas les évènements vous auriez pu
 implémenter cela en attachant des behaviors à vos modèles ou en ajoutant des
-composants à votre controller. Typiquement, quand vous n’utilisez pas directement 
-le modèle observateur (observer pattern) vous feriez cela en attachant des behaviors 
-à la volée à vos models, et peut être quelques components aux controllers.
+composants à votre controller. Typiquement, quand vous n’utilisez pas
+directement le modèle observateur (observer pattern) vous feriez cela en
+attachant des behaviors à la volée à vos models, et peut être quelques
+components aux controllers.
 
-A la place, vous pouvez utiliser les événements pour vous permettre de séparer clairement 
-ce qui concerne votre code et permettre d’ajouter des besoins supplémentaires dans votre 
-plugin en utilisant les événements. Par exemple dans votre plugin Cart, vous avez un model 
-Order qui gère la création des commandes. Vous voulez notifier au reste de l’application 
-qu’une commande a été créée. Pour garder votre model Order propre, vous pouvez utiliser les événements::
+A la place, vous pouvez utiliser les événements pour vous permettre de séparer
+clairement ce qui concerne votre code et permettre d’ajouter des besoins
+supplémentaires dans votre plugin en utilisant les événements. Par exemple dans
+votre plugin Cart, vous avez un model Order qui gère la création des commandes.
+Vous voulez notifier au reste de l’application qu’une commande a été créée. Pour
+garder votre model Order propre, vous pouvez utiliser les événements::
 
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
@@ -76,37 +78,40 @@ qu’une commande a été créée. Pour garder votre model Order propre, vous po
         }
     }
 
-Le code ci-dessus vous permet de notifier aux autres parties de l’application 
-qu’une commande a été créée. Vous pouvez ensuite faire des tâches comme envoyer 
-les notifications par mail, mettre à jour le stock, créer un fichier de log des 
-statistiques pertinents et d’autres tâches dans les objets séparés qui se focalisent 
-sur ces préoccupations.
+Le code ci-dessus vous permet de notifier aux autres parties de l’application
+qu’une commande a été créée. Vous pouvez ensuite faire des tâches comme envoyer
+les notifications par mail, mettre à jour le stock, créer un fichier de log des
+statistiques pertinentes et d’autres tâches dans des objets séparés qui se
+focalisent sur ces préoccupations.
 
 Accéder aux Gestionnaires d'Event
 =================================
 
-Dans CakePHP, les événements sont attrapés par les gestionnaires d’événements. 
-Les gestionnaires d’événements sont disponible dans chaque Table, View et Controller en utilisant ``getEventManager()``::
+Dans CakePHP, les événements sont attrapés par les gestionnaires d’événements.
+Les gestionnaires d’événements sont disponibles dans chaque Table, View et
+Controller en utilisant ``getEventManager()``::
 
     $events = $this->getEventManager();
 
-Chaque Model a un gestionnaire d’événements séparé, alors que View et Controller 
-en partagent un. Cela permet aux événements de Model d’être autonomes, et permet 
-aux components ou aux controllers d’agir sur les événements créés dans la vue si nécessaire.
+Chaque Model a un gestionnaire d’événements séparé, alors que View et Controller
+en partagent un. Cela permet aux événements de Model d’être autonomes, et permet
+aux components ou aux controllers d’agir sur les événements créés dans la vue si
+nécessaire.
 
 Le gestionnaire d'Event global
 ------------------------------
 
-En plus des gestionnaires au niveau des instances d’événement, CakePHP fournit 
-un gestionnaire d’événements global qui vous permet d’écouter tout événement 
-déclenché dans une application. C’est utile quand attacher des écouteurs à une 
-instance spécifique semble lent ou difficile. Le gestionnaire global est une 
-instance singleton de :php:class:`CakeEventManager` qui reçoit chaque événement avant 
-que les gestionnaires d’instance ne le reçoivent. En plus de recevoir les événements 
-en premier, le gestionnaire global maintient aussi une pile de priorité distincte 
-pour les écouteurs. Une fois qu’un événement a été dispatché au gestionnaire global, 
-il sera dispatché au gestionnaire au niveau de l’instance. Vous pouvez accéder au 
-gestionnaire global en utilisant une méthode statique::
+En plus des gestionnaires au niveau des instances d’événement, CakePHP fournit
+un gestionnaire d’événements global qui vous permet d’écouter tout événement
+déclenché dans une application. C’est utile quand attacher des écouteurs à une
+instance spécifique semble lent ou difficile. Le gestionnaire global est une
+instance singleton de :php:class:`CakeEventManager` qui reçoit chaque événement
+avant que les gestionnaires d’instance ne le reçoivent. En plus de recevoir les
+événements en premier, le gestionnaire global maintient aussi une pile de
+priorité distincte pour les écouteurs. Une fois qu’un événement a été dispatché
+au gestionnaire global, il sera dispatché au gestionnaire au niveau de
+l’instance. Vous pouvez accéder au gestionnaire global en utilisant une méthode
+statique::
 
     // Dans n'importe quel fichier de config ou morceau de code qui s'exécute avant l'événement
     App::uses('CakeEventManager', 'Event');
@@ -187,7 +192,7 @@ de statistiques dans le site global. Ce serait naturel de passer une instance
 de cette classe comme un callback, au lien d'implémenter une fonction statique
 personnalisé ou la conversion de n'importe quel autre contournement
 pour déclencher les méthodes de cette classe. Un écouteur (listener)
-``UserStatistics`` est créé comme ci-dessous ::
+``UserStatistics`` est créé comme ci-dessous::
 
     // Dans app/Lib/Event/UserStatistic.php
     App::uses('CakeEventListener', 'Event');
@@ -250,7 +255,7 @@ Tandis que les objects d'écoute d'événements sont généralement une meilleur
 manière d'implémenter les écouteurs, vous pouvez aussi attacher n'importe quel
 ``callable`` comme écouteur d'événement. Par exemple, si nous voulions
 enregistrer chaque commande dans les fichiers de journalisation, nous
-utiliserions une simple fonction anonyme pour le faire ::
+utiliserions une simple fonction anonyme pour le faire::
 
     // Les fonctions anonymes requièrent PHP 5.3+
     $this->Order->getEventManager()->attach(function($event) {

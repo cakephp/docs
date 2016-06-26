@@ -24,7 +24,7 @@ Cela générera un fichier schema.php dans votre dossier ``app/Config/Schema``.
     vous devez ajouter l'option ``-f`` à votre ligne de commande.
 
 Pour reconstruire plus tard votre schéma de base de données
-à partir d'un fichier schema.php précédemment réalisé, lancez ::
+à partir d'un fichier schema.php précédemment réalisé, lancez::
 
     $ Console/cake schema create
 
@@ -124,7 +124,7 @@ le tableParameters qu'ils supportent.
 Exemple
 -------
 
-Voici un exemple complet à partir de la classe acl ::
+Voici un exemple complet à partir de la classe acl::
 
     /**
      * ACO - Access Control Object - Quelque chose qui est souhaité
@@ -173,7 +173,7 @@ Chaque colonne est encodée comme un tableau associatif avec clé et valeur.
 Le nom du champ est la clé du champ, la valeur est un autre tableau avec
 certains des attributs suivants.
 
-Exemple de colonne ::
+Exemple de colonne::
 
     'id' => array(
         'type' => 'integer',
@@ -222,7 +222,7 @@ d'un nom de champ.
 column
     C'est soit un nom de colonne unique, soit un tableau de colonnes.
 
-    par exemple Unique ::
+    par exemple Unique::
 
         'indexes' => array(
             'PRIMARY' => array(
@@ -231,13 +231,13 @@ column
                 )
         )
 
-    par exemple Multiple ::
+    par exemple Multiple::
 
         'indexes' => array(
             'AB_KEY' => array(
                 'column' => array(
-                     'a_id', 
-                     'b_id'), 
+                     'a_id',
+                     'b_id'),
                  'unique' => 1
                 )
         )
@@ -310,11 +310,11 @@ vous avez une méthode facile et élégante pour relever les modifications
 apportées à votre base. Les migrations sont réalisées soit grâce aux fichiers
 de schémas, soit grâce aux vues instantanées. Versionner un fichier de schéma
 avec le shell schema est assez facile. Si vous avez déjà un fichier schema
-créé en utilisant ::
+créé en utilisant::
 
     $ Console/cake schema generate
 
-Vous aurez alors les choix suivants ::
+Vous aurez alors les choix suivants::
 
     Generating Schema... (Génération du Schema)
     Schema file exists. (Le fichier schema existe)
@@ -326,7 +326,7 @@ Vous aurez alors les choix suivants ::
 Choisir [s] (snapshot - vue instantanée) va créer un fichier schema.php
 incrémenté. Ainsi, si vous avez schema.php, cela va créer schema\_2.php et
 ainsi de suite.
-Vous pouvez ensuite restaurer chacun de ces schémas en utilisant ::
+Vous pouvez ensuite restaurer chacun de ces schémas en utilisant::
 
     $ cake schema update -s 2
 

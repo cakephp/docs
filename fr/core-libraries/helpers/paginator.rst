@@ -44,7 +44,7 @@ Les clés acceptée pour ``$options``:
 En considérant que vous paginez des posts, qu'ils sont sur la page un::
 
     echo $this->Paginator->sort('user_id');
-    
+
 Sortie:
 
 .. code-block:: html
@@ -133,7 +133,7 @@ Les options supportées sont:
   false. Si une chaîne est définie un lien pour la première page sera générée
   avec la valeur comme titre::
 
-      echo $this->Paginator->numbers(array('first' => 'Première page')); 
+      echo $this->Paginator->numbers(array('first' => 'Première page'));
 
 * ``last`` Si vous voulez que les derniers liens soit générés, définit à un
   entier pour définir le nombre de 'dernier' liens à générer. Par défaut à
@@ -190,7 +190,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     * ``escape`` Si vous voulez que le contenu soit encodé en HTML,
       par défaut à true.
     * ``model`` Le model à utiliser, par défaut PaginatorHelper::defaultModel()
-        
+
     Un simple exemple serait::
 
         echo $this->Paginator->prev(
@@ -217,7 +217,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
         <span class="prev disabled"><< previous</span>
 
-    Vous pouvez changer la balise enveloppante en utilisant l'option ``tag`` ::
+    Vous pouvez changer la balise enveloppante en utilisant l'option ``tag``::
 
         echo $this->Paginator->prev(__('previous'), array('tag' => 'li'));
 
@@ -317,7 +317,7 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     Retourne true si l'ensemble de résultats fourni a le numéro de page fourni
     par ``$page``.
 
-Création d'un compteur de page 
+Création d'un compteur de page
 ==============================
 
 .. php:method:: counter($options = array())
@@ -350,12 +350,12 @@ supportées sont:
   utilisant les jetons autorisés. Par exemple::
 
       echo $this->Paginator->counter(
-          'Page {:page} of {:pages}, showing {:current} records out of 
+          'Page {:page} of {:pages}, showing {:current} records out of
            {:count} total, starting on record {:start}, ending on {:end}'
-      ); 
+      );
 
   En définissant 'format' à 'range' donnerait en sortie '1 - 3 of 13'::
-      
+
       echo $this->Paginator->counter(array(
           'format' => 'range'
       ));
@@ -363,7 +363,7 @@ supportées sont:
 * ``separator`` Le séparateur entre la page actuelle et le nombre de pages.
   Par défaut à ' of '. Ceci est utilisé en conjonction  avec 'format' ='pages'
   qui la valeur par défaut de 'format'::
-      
+
       echo $this->Paginator->counter(array(
           'separator' => ' sur un total de '
       ));
@@ -390,18 +390,18 @@ supportées sont:
   -  ``sort`` La clé qui décrit la façon de trier les enregistrements.
   -  ``direction`` La direction du tri. Par défaut à 'ASC'.
   -  ``page`` Le numéro de page à afficher.
-  
+
   Les options mentionnées ci-dessus peuvent être utilisées pour forcer
   des pages/directions particulières. Vous pouvez aussi ajouter des contenu
   d'URL supplémentaires dans toutes les URLs générées dans le helper::
-  
+
       $this->Paginator->options(array(
           'url' => array(
               'sort' => 'email', 'direction' => 'desc', 'page' => 6,
               'lang' => 'en'
           )
       ));
-  
+
   Ce qui se trouve ci-dessus  ajoutera ``en`` comme paramètre de route pour
   chacun des liens que le helper va générer. Il créera également des liens avec
   des tris, direction et valeurs de page spécifiques. Par défaut
@@ -498,17 +498,17 @@ Il est aussi possible de trier une colonne basée sur des associations:
 .. code-block:: php
 
     <table>
-        <tr> 
-            <th><?php echo $this->Paginator->sort('titre', 'Titre'); ?></th> 
-            <th><?php echo $this->Paginator->sort('Auteur.nom', 'Auteur'); ?></th> 
-        </tr> 
-           <?php foreach ($data as $recette): ?> 
-        <tr> 
-            <td><?php echo h($recette['Recette']['titre']); ?> </td> 
-            <td><?php echo h($recette['Auteur']['nom']); ?> </td> 
-        </tr> 
-        <?php endforeach; ?> 
-    </table> 
+        <tr>
+            <th><?php echo $this->Paginator->sort('titre', 'Titre'); ?></th>
+            <th><?php echo $this->Paginator->sort('Auteur.nom', 'Auteur'); ?></th>
+        </tr>
+           <?php foreach ($data as $recette): ?>
+        <tr>
+            <td><?php echo h($recette['Recette']['titre']); ?> </td>
+            <td><?php echo h($recette['Auteur']['nom']); ?> </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 
 L'ingrédient final pour l'affichage de la pagination dans les vues
 est l'addition de pages de navigation, aussi fournies par le
@@ -516,11 +516,11 @@ Helper de Pagination::
 
     // Montre les numéros de page
     echo $this->Paginator->numbers();
-    
+
     // Montre les liens précédent et suivant
     echo $this->Paginator->prev('« Previous', null, null, array('class' => 'disabled'));
-    echo $this->Paginator->next('Next »', null, null, array('class' => 'disabled')); 
-    
+    echo $this->Paginator->next('Next »', null, null, array('class' => 'disabled'));
+
     // affiche X et Y, ou X est la page courante et Y est le nombre de pages
     echo $this->Paginator->counter();
 
@@ -530,7 +530,7 @@ en utilisant des marqueurs spéciaux::
     echo $this->Paginator->counter(array(
         'format' => 'Page {:page} of {:pages}, showing {:current} records out of
                  {:count} total, starting on record {:start}, ending on {:end}'
-    )); 
+    ));
 
 D'autres Méthodes
 =================
@@ -593,7 +593,7 @@ D'autres Méthodes
             [prevPage] => 1
             [nextPage] => 3
             [pageCount] => 3
-            [order] => 
+            [order] =>
             [limit] => 20
             [options] => Array
                 (

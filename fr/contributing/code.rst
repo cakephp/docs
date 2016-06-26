@@ -17,7 +17,7 @@ Vous aurez besoin du logiciel suivant:
 * PHPUnit 3.5.10 or greater (3.7.38 recommended)
 
 Mettez en place vos informations d'utilisateur avec votre nom / titre et
-adresse e-mail de travail ::
+adresse e-mail de travail::
 
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
@@ -39,7 +39,7 @@ Après que le fork est fait, clonez votre fork sur votre machine local::
 
 Ajoutez le dépôt CakePHP d'origine comme un dépôt distant. Vous utiliserez ceci
 plus tard pour aller chercher les changements du dépôt CakePHP. Cela vous
-permettra de rester à jour avec CakePHP ::
+permettra de rester à jour avec CakePHP::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git

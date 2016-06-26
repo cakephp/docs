@@ -252,7 +252,7 @@ nous allons utiliser le behavior ``AclBehavior``. Le behavior
 ``AclBehavior`` permet de connecter automagiquement des models avec les
 tables Acl. Son utilisation requiert l'implémentation de ``parentNode()``
 dans vos models. Dans notre Model ``User`` nous allons ajouter le
-code suivant ::
+code suivant::
 
     class User extends Model {
         public $belongsTo = array('Group');

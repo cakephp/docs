@@ -729,7 +729,7 @@ Le component Auth (AuthComponnent) est pessimiste, et par défaut interdit
 l'accès. Vous pouvez marquer des actions comme publique en utilisant
 ``AuthComponent::allow()``. En marquant les actions comme publique, le
 component Auth ne vérifiera pas la connexion d'un utilisateur, ni
-n'autorisera la vérification des objets ::
+n'autorisera la vérification des objets::
 
     // Permet toutes les actions. CakePHP 2.0 (déprécié)
     $this->Auth->allow('*');

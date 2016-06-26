@@ -146,7 +146,7 @@ Shell de Test
 
 Un nouveau TestShell a été ajouté. Il réduit le typage requis pour exécuter les
 tests unitaires, et offre un chemin de fichier en fonction d'interface
-utilisateur ::
+utilisateur::
 
     # Execute les tests du model post
     Console/cake test app/Model/Post.php

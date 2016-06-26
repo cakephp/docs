@@ -17,7 +17,7 @@ Par défaut, cela crée des AROs::
     }
 
 Ceci attacherait le behavior Acl en mode ARO. Pour attacher le behavior
-ACL en mode ACO, utilisez ::
+ACL en mode ACO, utilisez::
 
     class Post extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'controlled'));
@@ -30,7 +30,7 @@ les noeuds ACO et ARO, pour permettre cela utilisez::
         public $actsAs = array('Acl' => array('type' => 'both'));
     }
 
-Vous pouvez aussi attacher le behavior à la volée, comme ceci ::
+Vous pouvez aussi attacher le behavior à la volée, comme ceci::
 
     $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
 

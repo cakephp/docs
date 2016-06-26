@@ -223,7 +223,7 @@ en plaçant les résultats qui ne changent que peu fréquemment ou qui peuvent
 être sujets à de nombreuses lectures dans le cache. Un exemple parfait de
 ceci pourrait être les résultats d'un find :php:meth:`Model::find()`.
 Une méthode qui utilise la mise en Cache pour stocker les résultats pourrait
-ressembler à cela ::
+ressembler à cela::
 
     class Post extends AppModel {
 

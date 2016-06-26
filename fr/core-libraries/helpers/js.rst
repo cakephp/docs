@@ -45,7 +45,7 @@ ajouté au nom).
 
 Par défaut les scripts sont mis en cache, et vous devez explicitement
 imprimer le cache. Pour faire cela à la fin de chacune des pages, incluez
-cette ligne juste avant la balise de fin de ``</body>`` ::
+cette ligne juste avant la balise de fin de ``</body>``::
 
     echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache
 
@@ -193,7 +193,7 @@ de placer ``$this->Js->writeBuffer()`` à la fin du fichier layout
 au dessus la balise ``</body>``. Ceci permettra à tous les scripts
 générés dans les éléments du layout d'être ressortis (output)
 à un endroit. Il doit être noté que les scripts bufferisés sont gérés
-séparément des scripts de fichiers inclus. 
+séparément des scripts de fichiers inclus.
 
 .. php:method:: writeBuffer($options = array())
 
@@ -279,7 +279,7 @@ méthode.
     -  ``postfix`` - Chaîne ajoutée aux donnée retournée.
 
     **Exemple d'utilisation**::
-    
+
         $json = $this->Js->object($data);
 
 .. php:method:: sortable($options = array())
@@ -312,7 +312,7 @@ méthode.
     et les paramètres.
 
     **Exemple d'utilisation**::
-    
+
         $this->Js->get('#ma-liste');
         $this->Js->sortable(array(
             'distance' => 5,
@@ -378,7 +378,7 @@ méthode.
     Définit la 'sélection' interne dans un sélecteur CSS. La sélection
     active est utilisée dans les opérations ultérieures jusqu'à ce qu'une
     nouvelle soit faite. ::
-    
+
         $this->Js->get('#element');
 
     Le ``JsHelper`` fait maintenant référence à toutes les méthodes de
@@ -423,10 +423,10 @@ méthode.
             'wrapCallbacks' => false
         ));
 
-    
+
    Si vous utilisiez le moteur Jquery le code suivant devrait être ajouté
     au buffer
-    
+
     .. code-block:: javascript
 
         $("#element").draggable({
@@ -469,7 +469,7 @@ méthode.
 
     Si vous utilisiez le moteur jQuery le code suivant devrait être
     ajouté au buffer.
-    
+
     .. code-block:: javascript
 
         $("#element").droppable({
@@ -493,7 +493,7 @@ méthode.
     Créé un morceau de code Javascript qui converti un élément dans un
     morceau de code slider ui. Voir les implémentations des différentes
     librairies pour des utilisations supplémentaires et les fonctionnalités.
-    
+
     **Options**
 
     -  ``handle`` - l' id de l'élément utilisé dans le sliding.
@@ -525,7 +525,7 @@ méthode.
 
     Si vous utilisiez le moteur jQuery le code suivant devrait être
     ajouté au buffer.
-    
+
     .. code-block:: javascript
 
         $("#element").slider({
@@ -579,18 +579,18 @@ méthode.
 
     **Options**
 
-    -  ``wrap`` - Si vous souhaitez que le callback soit enveloppé dans une 
+    -  ``wrap`` - Si vous souhaitez que le callback soit enveloppé dans une
        fonction anonyme. (par défaut à true)
     -  ``stop`` - Si vous souhaitez que l'événement s'arrète. (par défaut à
        true)
 
     **Exemple d'utilisation**::
-    
+
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('saperlipopette!'));
 
     Si vous employiez la librairie jQuery, vous devriez avoir le code suivant:
-    
+
     .. code-block:: javascript
 
         $('#some-link').bind('click', function (event) {
@@ -608,10 +608,10 @@ méthode.
             array('stop' => false)
         );
 
-    Si vous employiez la librairie jQuery vous devriez avoir le code 
+    Si vous employiez la librairie jQuery vous devriez avoir le code
     Javascript suivant ajouté au buffer. Notez que l'événement du navigateur
     par défaut n'est pas annulé:
-    
+
     .. code-block:: javascript
 
         $('#some-link').bind('click', function (event) {
@@ -634,7 +634,7 @@ méthode.
         $this->Js->each('$(this).css({color: "red"});');
 
     L'utilisation du moteur jQuery aurait créé le Javascript suivant:
-    
+
     .. code-block:: javascript
 
         $('div.message').each(function () { $(this).css({color: "red"}); });
@@ -688,7 +688,7 @@ méthode.
 
         echo $this->Js->submit('Save', array('update' => '#content'));
 
-    Va créé un bouton submit et un événement onclick attaché. 
+    Va créé un bouton submit et un événement onclick attaché.
     L'événement click sera bufferisé par défaut. ::
 
         echo $this->Js->submit('Save', array(
@@ -698,7 +698,7 @@ méthode.
             'async' => false
         ));
 
-    Montre comment vous pouvez combiner les options de 
+    Montre comment vous pouvez combiner les options de
     :php:func:`FormHelper::submit()` et :php:func:`Helper Js::request()` à
     l'utilisation des submits.
 
@@ -713,7 +713,7 @@ méthode.
     :php:func:`Helper Js::request()` comme une option. Si une Id n'est
     pas fournie, une valeur aléatoire sera créée pour chacun des
     liens générés.
-    
+
     **Options**
 
     -  ``confirm`` - Génère une boite de dialogue de confirmation avant
@@ -769,7 +769,7 @@ méthode.
     Ceci est utile quand vous avez besoin de sérialiser un élément de
     formulaire comme faisant parti d'une autre opération Javascript
     ou utilisez la méthode de sérialisation dans un Objet littéral.
-    
+
 .. php:method:: redirect($url)
 
     Redirige la page vers ``$url`` en utilisant ``window.location``.
@@ -777,7 +777,7 @@ méthode.
 .. php:method:: value($value)
 
     Convertit une variable native PHP d'un type dans une représentation
-    JSON équivalente. Échappe une valeur de chaîne dans une chaîne 
+    JSON équivalente. Échappe une valeur de chaîne dans une chaîne
     compatible JSON. Les caractère UTF-8 seront échappés .
 
 .. _ajax-pagination:
@@ -835,7 +835,7 @@ du buffer. A la fin de votre fichier de vue. Vérifiez l'inclusion de::
 
     echo $this->Js->writeBuffer();
 
-Si vous oubliez cela vous ne pourrez **pas** enchaîner les liens de 
+Si vous oubliez cela vous ne pourrez **pas** enchaîner les liens de
 pagination AJAX. Quand vous écrivez le buffer, cela l'efface également ,
 et vous n'avez donc pas à vous inquiéter de doublon de code Javascript.
 

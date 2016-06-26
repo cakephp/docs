@@ -40,10 +40,10 @@ Pour voir comment Containable fonctionne, regardons quelques exemples.
 Premièrement, nous commencerons avec un appel ``find()`` sur un model nommé
 'Post'. Disons que ce 'Post' a plusieurs (hasMany) 'Comment', et 'Post' a et
 appartient à plusieurs (hasAndBelongsToMany) 'Tag'. La quantité de données
-récupérées par un appel ``find()`` normal est assez étendue ::
+récupérées par un appel ``find()`` normal est assez étendue::
 
     debug($this->Post->find('all'));
-    
+
     [0] => Array
             (
                 [Post] => Array
@@ -148,7 +148,7 @@ Regardons ensemble comment la methode ``contain()`` agit.
 Le premier argument de la méthode accepte le nom, ou un tableau de noms, des
 models à garder lors du find. Si nous désirons aller chercher tous les posts
 et les tags annexes (sans aucune information de commentaire), nous devons
-essayer quelque chose comme ::
+essayer quelque chose comme::
 
     $this->Post->contain('Tag');
     $this->Post->find('all');
@@ -348,7 +348,7 @@ Examinons les associations des models suivants::
     User->Post->Tag
 
 Voici comment nous récupérons les associations ci-dessus avec le behavior
-Containable ::
+Containable::
 
     $this->User->find('all', array(
         'contain' => array(
@@ -408,7 +408,7 @@ les autres behaviors.
   pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 -  **order**: (string, optional) l'ordre dans lequel les elements contenus sont
    triés.
-   
+
 A partir de l'exemple précédent, ceci est un exemple de la façon de forcer
 les Posts à être triés selon la date de dernière modification::
 
