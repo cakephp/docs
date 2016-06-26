@@ -1026,7 +1026,7 @@ arguments, by using the ``configApplication()`` method::
         $this->configApplication('App\App', [CONFIG]);
     }
 
-After the enabling PSR7 mode, and possibly configuring your application class,
+After enabling the PSR7 mode, and possibly configuring your application class,
 you can use the remaining ``IntegrationTestCase`` features as normal.
 
 .. versionadded:: 3.3.0
