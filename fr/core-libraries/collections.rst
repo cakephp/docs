@@ -713,15 +713,15 @@ dans la collection.
 Considérons la collection imbriquée intégrée dans l'exemple précédent, nous
 pouvons l'aplatir::
 
-    $nested->listNested()->toArray();
+    $nested->listNested()->toList();
 
     // Retourne
     [
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish', 'children' => [...]],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
