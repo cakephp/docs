@@ -1,45 +1,28 @@
-Bakeでコード生成
-#########################
+Bake でコード生成
+##################
 
-..
-    Code Generation with Bake
+cake コンソールは、 PHP CLI (command line interface) で実行します。
+もしスクリプトの実行に問題があるなら、以下を満たしてください。
 
-..
-    Depending on how your computer is configured, you may have to set
-    execute rights on the cake bash script to call it using ``bin/cake
-    bake``. The cake console is run using the PHP CLI (command line
-    interface). If you have problems running the script, ensure that
-    you have the PHP CLI installed and that it has the proper modules
-    enabled (eg: MySQL, intl). Users also might have issues if the
-    database host is 'localhost' and should try '127.0.0.1' instead, as localhost
-    can cause issues with PHP CLI.
+#. PHP CLI がインストールされているか適切なモジュールが有効か確認してください (例：MySQL, intl)。
+#. データベースのホストが 'localhost' で問題があるなら、代わりに '127.0.0.1' を使って下さい。
+   PHP CLI でこの問題がおこる可能性があります。
+#. 使っているコンピュータの設定に応じて、 ``bin/cake bake`` で使用する cake bash スクリプトの
+   実行権限を設定する必要があります。
 
-使っているコンピュータの設定に応じて、``bin/cake bake`` の実行権限を設定する必要があります。
-cake bakeはPHP CLI(CommandLineInterface)上で動作します。
-もしスクリプトに問題がおこった場合は、PHP CLIがインストールされているかモジュールが有効か確認してください。
-ユーザーはまた問題の可能性がある、もしデータベースが'localhost'の代わりに '127.0.0.1' を使って下さい。PHP CLIが原因でこの問題がおこる可能性があります。
-
-..
-    Before running bake you should make sure you have at least one database
-    connection configured. See the section on :ref:`database configuration
-    <database-configuration>` for more information.
-
-cake bakeが走る前にデータベースとの接続を確認するべきです。
-詳しくは :ref:`データベースアクセス & ORM 内の設定 <database-configuration>` をご参照ください。
-
-..
-    When run with no arguments ``bin/cake bake`` will output a list of available
-    tasks. You should see something like:
+bake を実行する前にデータベースとの接続を確認しましょう。詳しくは
+:ref:`データベースアクセス & ORM 内の設定 <database-configuration>` をご覧ください。
 
 ``bin/cake bake`` を引数無しで実行すると可能なタスクを表示できます。
-それは以下のような表示のものです::
+それは以下のように表示されます。 ::
 
     $ bin/cake bake
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.1.6 Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/
+    PHP: 5.5.8
     ---------------------------------------------------------------
     The following commands can be used to generate skeleton code for your application.
 
@@ -53,23 +36,23 @@ cake bakeが走る前にデータベースとの接続を確認するべきで�
     - fixture
     - form
     - helper
+    - mailer
+    - migration
+    - migration_snapshot
     - model
     - plugin
     - shell
+    - shell-helper
     - template
     - test
 
     By using `cake bake [name]` you can invoke a specific bake task.
 
-..
-    You can get more information on what each task does, and what options are
-    available using the ``--help`` option:
-
-より詳しい各コマンドの情報を得るには、``--help`` オプションをつけ実行してください。::
+より詳しい各コマンドの情報を得るには、 ``--help`` オプションをつけ実行してください。 ::
 
     $ bin/cake bake controller --help
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.1.6 Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/
@@ -107,17 +90,10 @@ cake bakeが走る前にデータベースとの接続を確認するべきで�
         controllers into plugins. (optional)
 
 Bake テーマオプション
-=======================
-.. 
-    Bake Themes
+=====================
 
-..
-    The theme option is common to all bake commands, and allows changing the bake
-    template files used when baking. To create your own templates, see the
-    :ref:`bake theme creation documentation <creating-a-bake-theme>`.
-
-テーマオプションは全bakeで一般的です。また、bake テンプレートファイルを変更することができます。
-テーマを作るには、 :ref:`Bakeテーマ作成マニュアル <creating-a-bake-theme>` を参照してください。
+テーマオプションは全 bake コマンドで一般的です。また、bake テンプレートファイルを変更することができます。
+テーマを作るには、 :ref:`Bake テーマ作成ドキュメント <creating-a-bake-theme>` をご覧ください。
 
 .. meta::
     :title lang=ja: Code Generation with Bake
