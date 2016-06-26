@@ -773,7 +773,7 @@ For example, testing your controller will also exercise any components, models
 and helpers that would be involved in handling a given request. This gives you a
 more high level test of your application and all its working parts.
 
-Say you have a typical Articles controller, and its corresponding
+Say you have a typical ArticlesController, and its corresponding
 model. The controller code looks like::
 
     namespace App\Controller;
@@ -999,6 +999,38 @@ environment.
 .. versionadded:: 3.1.2
     The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
     in 3.1.2
+
+Integration Testing PSR7 Middleware
+-----------------------------------
+
+Integration testing can also be used to test your entire PSR7 application and
+:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+auto-detect the presence of an ``App\Application`` class and automatically
+enable integration testing of your Application. You can toggle this behavior
+with the ``useHttpServer()`` method::
+
+    public function setUp()
+    {
+        // Enable PSR7 integration testing.
+        $this->useHttpServer(true);
+
+        // Disable PSR7 integration testing.
+        $this->useHttpServer(false);
+    }
+
+You can customize the application class name used, and the constructor
+arguments, by using the ``configApplication()`` method::
+
+    public function setUp()
+    {
+        $this->configApplication('App\App', [CONFIG]);
+    }
+
+After the enabling PSR7 mode, and possibly configuring your application class,
+you can use the remaining ``IntegrationTestCase`` features as normal.
+
+.. versionadded:: 3.3.0
+    PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
 Assertion methods
 -----------------
