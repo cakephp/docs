@@ -144,8 +144,8 @@ requested URI::
     $host = $uri->getHost();
 
 Lastly, you can interact with a request's 'attributes'. CakePHP uses these
-attributes to carry framework specific request parameters. There are a few important
-attributes in any request handled by CakePHP:
+attributes to carry framework specific request parameters. There are a few
+important attributes in any request handled by CakePHP:
 
 * ``base`` contains the base directory for your application if there is one.
 * ``webroot`` contains the webroot directory for your application.

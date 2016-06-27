@@ -143,13 +143,16 @@ requested URI::
     $host = $uri->getHost();
 
 Lastly, you can interact with a request's 'attributes'. CakePHP uses these
-attributes to carry framework specific request parameters. There are 3 important
-attributes in any request handled by CakePHP:
+attributes to carry framework specific request parameters. There are a few
+important attributes in any request handled by CakePHP:
 
 * ``base`` contains the base directory for your application if there is one.
 * ``webroot`` contains the webroot directory for your application.
 * ``params`` contains the results of route matching once routing rules have been
   processed.
+* ``session`` contains an instance of CakePHP's ``Session`` object. See
+  :ref:`accessing-session-object` for more information on how to use the session
+  object.
 
 Interagir avec les Réponses
 ---------------------------
