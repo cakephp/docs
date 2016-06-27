@@ -22,7 +22,7 @@ Finalmente, iremos falar sobre Datasources.
 
 
 Entendendo Modelos
-====================
+==================
 
 Um **Modelo** (Model) representa um modelo lógico de seus dados.
 Em programação orientada a objeto, um **Modelo** é um objeto que 
@@ -106,7 +106,7 @@ Isso mostra como usar modelos que já estão ligados. Para entender como associa
 definidas, dê uma olhada na :doc:`Sessão de Associações <models/associations-linking-models-together>`
 
 Mais sobre modelos
-==============
+==================
 
 .. toctree::
     :maxdepth: 1
