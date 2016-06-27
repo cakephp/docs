@@ -167,9 +167,9 @@ Columns
 
 Each column is encoded as a key value associative array.
 The field name is the key of the field, the value is another array with some of
-the following attributes. 
+the following attributes.
 
-Example column ::
+Example column::
 
     'id' => array(
         'type' => 'integer',
@@ -212,6 +212,7 @@ type
 
 Table key `indexes`
 ===================
+
 The key name `indexes` is put in the table array instead of a field name.
 
 column
@@ -231,9 +232,9 @@ column
         'indexes' => array(
             'AB_KEY' => array(
                 'column' => array(
-                    'a_id', 
+                    'a_id',
                     'b_id'
-                ), 
+                ),
                 'unique' => 1
             )
         )
@@ -294,7 +295,7 @@ schema file. Much like ``indexes``::
 is an example of a table using ``tableParameters`` to set some
 database specific settings. If you use a schema file that contains
 options and features your database does not implement, those
-options will be ignored. 
+options will be ignored.
 
 Migrations with CakePHP schema shell
 ====================================
@@ -330,6 +331,11 @@ statements that represent the difference between the existing
 database the currently executing schema file.
 
 You can perform a dry run by adding a ``--dry`` to your command.
+
+.. note::
+
+    Please note that schema generation in 2.x does not handle foreign key
+    constraints.
 
 Workflow examples
 =================
