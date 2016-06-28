@@ -1340,6 +1340,106 @@ PagematronComponent というコンポーネントがアプリケーションに
 他のヘルパーを使用するヘルパーをテストしている時、View クラスの ``loadHelpers`` メソッドを
 モックにしてください。
 
+.. _testing-events:
+
+イベントのテスト
+================
+
+:doc:`/core-libraries/events` は、アプリケーションコードを分離する素晴らしい方法ですが、
+テストの際、これらのイベントを実行するテストケース内のイベントの結果をテストすることになりがちです。
+これは、 ``assertEventFired`` や ``assertEventFiredWith`` を代わりに使うことで削除ができる、
+余分な結合の一種です。
+
+Orders を例に詳しく説明します。以下のテーブルを持っているとします。 ::
+
+    class OrdersTable extends Table
+    {
+
+        public function place($order)
+        {
+            if ($this->save($order)) {
+                // CartsTable へ移されたカートの移動
+                $event = new Event('Model.Order.afterPlace', $this, [
+                    'order' => $order
+                ]);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CartsTable extends Table
+    {
+
+        public function implementedEvents()
+        {
+            return [
+                'Model.Order.afterPlace' => 'removeFromCart'
+            ];
+        }
+
+        public function removeFromCart(Event $event)
+        {
+            $order = $event->data('order');
+            $this->delete($order->cart_id);
+        }
+    }
+
+.. note::
+    イベントの発生をアサートするために、イベントマネージャ上で最初に :ref:`tracking-events`
+    を有効にしなければなりません。
+
+上記の ``OrdersTable`` をテストするために、``setUp()`` 内でトラッキングを有効にした後、
+イベントが発生することをアサートし、そして ``$order`` エンティティがイベントデータに
+渡されることをアサートします。 ::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\OrdersTable;
+    use Cake\Event\EventList;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\TestCase;
+
+    class OrdersTableTest extends TestCase
+    {
+
+        public $fixtures = ['app.orders'];
+
+        public function setUp()
+        {
+            parent::setUp();
+            $this->Orders = TableRegistry::get('Orders');
+            // イベントトラッキングの有効化
+            $this->Orders->getEventManager()->setEventList(new EventList());
+        }
+
+        public function testPlace()
+        {
+            $order = new Order([
+                'user_id' => 1,
+                'item' => 'Cake',
+                'quantity' => 42,
+            ]);
+
+            $this->assertTrue($this->Orders->place($order));
+
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+        }
+    }
+
+デフォルトでは、アサーションのためにグローバルな ``EventManager`` が利用されるため、
+グローバルイベントのテストは、イベントマネージャに渡す必要はありません。 ::
+
+    $this->assertEventFired('My.Global.Event');
+    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+
+.. versionadded:: 3.2.11
+
+    イベントトラッキングと ``assertEventFired()`` と ``assertEventFiredWith`` は
+    追加されました。
+
 テストスイートの作成
 ====================
 

@@ -157,7 +157,7 @@ Après avoir déclenché un événement sur le gestionnaire, vous pouvez le réc
 Le tracking peut être désactivé en retirant la liste d'événements ou en appelant
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`
 
-.. versionadded:: 3.2.10
+.. versionadded:: 3.2.11
     Le tracking d'événements et :php:class:`Cake\\Event\\EventList` ont été
     ajoutés.
 
