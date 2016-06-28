@@ -177,7 +177,7 @@ Déconnexion
 
 Abordons maintenant la déconnexion. Nous avions plus tôt laissé cette fonction
 vide, il est maintenant temps de la remplir. Dans
-``UsersController::logout()`` ajoutez ce qui suit ::
+``UsersController::logout()`` ajoutez ce qui suit::
 
     $this->Session->setFlash('Au-revoir');
     return $this->redirect($this->Auth->logout());

@@ -21,7 +21,7 @@ sont également disponibles dans ``$this->request->data`` pour un usage rapide
 et pratique.
 
 Voici un exemple simple d'une action de controller qui utilise un model
-CakePHP pour sauvegarder les données dans une table de la base de données ::
+CakePHP pour sauvegarder les données dans une table de la base de données::
 
     public function edit($id) {
         //Est-ce que des données de formulaires ont été POSTées ?

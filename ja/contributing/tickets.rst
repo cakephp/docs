@@ -20,8 +20,7 @@ CakePHP の開発プロセスの極めて重要な部分です。CakePHP のチ�
   問題を再現する方法がないと、修正される可能性が低くなります。
 * 環境 (OS、PHP バージョン、CakePHP バージョン) についてできるだけ詳しく **書いてください** 。
 * サポートの質問にチケットシステムを使用 **しないでください** 。
-  質問には `Google グループ <http://groups.google.com/group/cake-php>`_ 、
-  IRC チャンネルの #cakephp または
+  質問には IRC チャンネルの #cakephp または
   Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>
   を使用してください。
 

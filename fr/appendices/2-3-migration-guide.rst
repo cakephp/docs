@@ -16,7 +16,7 @@ Mise en Cache
 
 - FileEngine est toujours le moteur de cache par défaut. Dans le passé, un
   certain nombre de personnes a des difficultés configurant et déployant
-  APC correctement des deux façons en cli et web. L'utilisation des
+  APC correctement des deux façons en CLI et web. L'utilisation des
   fichiers devrait rendre la configuration de CakePHP plus simple pour
   les nouveaux développeurs.
 - `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` a été ajoutée à

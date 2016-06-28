@@ -49,7 +49,7 @@ Définir les Champs
 ==================
 
 Vous pouvez définir les champs en étendant simplement la valeur ``'Translate'``
-avec un autre tableau, comme ::
+avec un autre tableau, comme::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -61,7 +61,7 @@ avec un autre tableau, comme ::
 
 Après avoir fait cela (par exemple, en précisant "title" comme l'un des champs),
 vous avez déjà terminé la configuration de base. Super ! D'après notre exemple
-courant, le model devrait maintenant ressembler à quelque chose comme cela ::
+courant, le model devrait maintenant ressembler à quelque chose comme cela::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -190,7 +190,7 @@ l'association, dans lequel la clé est le champ traduisible et la valeur
 est le nom fictif de l'association. ::
 
     $this->Post->bindTranslation(array('name' => 'titleTranslation'));
-    $this->Post->find('all', array('recursive' => 1)); // il est nécessaire d'avoir au moins un recursive à 1 pour que ceci fonctionne 
+    $this->Post->find('all', array('recursive' => 1)); // il est nécessaire d'avoir au moins un recursive à 1 pour que ceci fonctionne
 
 Avec ce paramétrage, le résultat de votre find() devrait ressembler à quelque
 chose comme ceci ::
@@ -242,7 +242,7 @@ sauvegardiez les données dans la base. Vous pouvez faire cela dans votre
 controller ou vous pouvez le définir directement dans le model.
 
 **Exemple A:** Dans votre controller::
-    
+
     class PostsController extends AppController {
 
         public function add() {
@@ -286,7 +286,7 @@ Ceux-ci sont **$translateModel** et **$translateTable**.
 
 Disons que nous voulons sauver nos traductions pour tous les posts dans la
 table "post\_i18ns" au lieu de la valeur par défaut de la table "i18n".
-Pour faire cela vous avez besoin de paramétrer votre model comme cela ::
+Pour faire cela vous avez besoin de paramétrer votre model comme cela::
 
     class Post extends AppModel {
         public $actsAs = array(
@@ -317,7 +317,7 @@ displayField directement dans le model utilisant ce behavior.
 
 Assurez vous de changer le ``$displayField`` en ``'field'``. ::
 
-    class PostI18n extends AppModel { 
+    class PostI18n extends AppModel {
         public $displayField = 'field'; // important
     }
     // nom de fichier: PostI18n.php
@@ -331,7 +331,7 @@ Modification de la Table
 ------------------------
 
 Si vous voulez changer le nom de la table, il vous suffit simplement
-de définir $translateTable dans votre model, comme ceci ::
+de définir $translateTable dans votre model, comme ceci::
 
     class Post extends AppModel {
         public $actsAs = array(

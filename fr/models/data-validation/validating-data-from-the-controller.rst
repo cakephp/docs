@@ -30,7 +30,7 @@ vous ne voulez pas valider les 4 règles des champs. Pourtant quand un
 user se connecte, vous voulez valider seulement les règles de
 l'email et du mot_de_passe. Pour le faire, vous pouvez passer un tableau
 d'options spécifiant les champs sur lesquels vous voulez la validation.
-Par exemple ::
+Par exemple::
 
     if ($this->User->validates(array('fieldList' => array('email', 'mot_de_passe')))) {
         // valide
@@ -70,7 +70,7 @@ validation du save pour éviter un deuxième contrôle::
 
     if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
         // sauvegarder sans validation
-    } 
+    }
 
 
 .. meta::

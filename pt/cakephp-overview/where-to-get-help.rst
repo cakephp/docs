@@ -35,7 +35,7 @@ conhecimentos com a comunidade e ganhe fama e fortuna.
 A API
 =====
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/2.8/ <http://api.cakephp.org/2.8/>`_
 
 Direto ao ponto e diretamente dos desenvolvedores do núcleo, a API
 (`Application Programming Interface`) do CakePHP é a mais completa documentação
@@ -58,7 +58,7 @@ O canal IRC
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Discussões gerais
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Documentação
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
--  `#cakephp-pt <irc://irc.freenode.net/cakephp-bakery>`_ -- Discussões gerais
+-  `#cakephp-pt <irc://irc.freenode.net/cakephp-pt>`_ -- Discussões gerais
    em Português
 
 Se você está confuso, dê um grito no canal do CakePHP no IRC. Alguém da equipe
@@ -70,7 +70,6 @@ carro esportivo.
 O Google Group
 ==============
 
--  `http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
 -  `http://groups.google.com/group/cakephp-pt <http://groups.google.com/group/cakephp-pt>`_
 
 CakePHP também tem um grupo muito ativo no Google. Pode ser um excelente recurso

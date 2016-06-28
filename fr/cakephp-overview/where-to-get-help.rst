@@ -15,41 +15,40 @@ Le Cookbook
 
 `http://book.cakephp.org <http://book.cakephp.org>`_
 
-Ce manuel devrait probablement être le premier endroit où vous rendre
-pour obtenir des réponses. Comme pour beaucoup d'autres projets open source,
-nous accueillons de nouvelles personnes régulièrement. Faîtes tout votre
-possible pour répondre à vos questions vous-même dans un premier temps.
+Ce manuel devrait probablement être le premier endroit où vous rendre pour
+obtenir des réponses. Comme pour beaucoup d'autres projets open source, nous
+accueillons de nouvelles personnes régulièrement. Faîtes tout votre possible
+pour répondre à vos questions vous-même dans un premier temps.
 Les réponses peuvent venir lentement, mais elles resteront longtemps et vous
-aurez ainsi allégé notre charge de travail en support utilisateur. Le manuel
-et l'API ont tous deux une version en ligne.
+aurez ainsi allégé notre charge de travail en support utilisateur. Le manuel et
+l'API ont tous deux une version en ligne.
 
 La Boulangerie
 ==============
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-La Boulangerie (Bakery) est une chambre de compensation pour tout
-ce qui concerne CakePHP. Vous y trouverez des tutoriels, des études
-de cas et des exemples de code. Lorsque vous serez familiarisés avec CakePHP,
-connectez-vous pour partager vos connaissances avec la communauté
-et obtenez en un instant la gloire et la fortune.
+La Boulangerie (Bakery) est une chambre de compensation pour tout ce qui
+concerne CakePHP. Vous y trouverez des tutoriels, des études de cas et des
+exemples de code. Lorsque vous serez familiarisés avec CakePHP, connectez-vous
+pour partager vos connaissances avec la communauté et obtenez en un instant la
+gloire et la fortune.
 
 L'API
 =====
 
 `http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
-Allez droit au but et atteignez le graal des développeurs,
-l'API CakePHP (Application Programming Interface) est la documentation
-la plus complète sur tous les détails essentiels au fonctionnement interne
-du framework. C'est une référence directe au code, donc apportez votre chapeau
-à hélice.
+Allez droit au but et atteignez le graal des développeurs, l'API CakePHP
+(Application Programming Interface) est la documentation la plus complète sur
+tous les détails essentiels au fonctionnement interne du framework. C'est une
+référence directe au code, donc apportez votre chapeau à hélice.
 
 Les cas de Test
 ===============
 
-Si vous avez toujours le sentiment que l'information fournie par
-l'API est insuffisante, regardez le code des cas de test fournis avec CakePHP.
+Si vous avez toujours le sentiment que l'information fournie par l'API est
+insuffisante, regardez le code des cas de test fournis avec CakePHP.
 Ils peuvent servir d'exemples pratiques pour l'utilisation d'une fonction et de
 données membres d'une classe. ::
 
@@ -69,42 +68,81 @@ Le canal IRC
 
 Si vous êtes paumé, poussez un hurlement sur le canal IRC de CakePHP.
 Une personne de `l\'équipe de développement
-<https://github.com/cakephp?tab=members>`_ s'y trouve habituellement,
-en particulier durant les heures du jour pour les utilisateurs
-d'Amérique du Nord et du Sud. Nous serions ravis de vous écouter,
-que vous ayez besoin d'un peu d'aide, que vous vouliez trouver des utilisateurs
-dans votre région ou que vous souhaitiez donner votre nouvelle marque de
-voiture sportive.
+<https://github.com/cakephp?tab=members>`_ s'y trouve habituellement, en
+particulier durant les heures du jour pour les utilisateurs d'Amérique du Nord
+et du Sud. Nous serions ravis de vous écouter, que vous ayez besoin d'un peu
+d'aide, que vous vouliez trouver des utilisateurs dans votre région ou que vous
+souhaitiez donner votre nouvelle marque de voiture sportive.
 
 .. _cakephp-official-communities:
 
-Communautés Officiels CakePHP
-=============================
-`CakePHP Google Group <http://groups.google.com/group/cake-php>`_
+Forum Officiel
+==============
 
-CakePHP a aussi son groupe officiel sur Google Groups. Il y a des centaines
-de personne qui discutent des projets CakePHP, qui s'aident les uns les autres,
-résolvent des problèmes, qui construisent des projets et partagent leurs idées.
-Cela peut être une grande ressource pour trouver des réponses archivées, des
-questions fréquemment posées et obtenir des réponses aux problèmes urgents.
-Rejoignez d'autres utilisateurs de CakePHP dans les communautés suivantes.
+`Forum Officiel de CakePHP <http://discourse.cakephp.org>`_
 
+Notre forum officiel où vous pouvez demander de l'aide, suggérer des idées et
+discuter de CakePHP. C'est l'endroit idéal pour trouver rapidement des réponses
+et aider les autres. Rejoignez la famille de CakePHP en vous y inscrivant.
 
 Stackoverflow
 =============
 
 `http://stackoverflow.com/ <http://stackoverflow.com/questions/tagged/cakephp/>`_
 
-Tagge vos questions avec ``cakephp`` et la version sépcifique que vous utilisez
+Taggez vos questions avec ``cakephp`` et la version sépcifique que vous utilisez
 pour permettre aux utilisateurs existant de stackoverflow de trouver vos
 questions.
 
-Where to get Help in your Language
-==================================
+Où Trouver de l'Aide dans Votre Langue
+======================================
 
-French
-------
-- `French CakePHP Community <http://cakephp-fr.org>`_
+Portugais brésilien
+-------------------
+
+- `Communauté de CakePHP brésilienne <http://cakephp-br.org>`_
+
+Danoise
+-------
+
+- `Canal CakePHP danois sur Slack <https://cakesf.slack.com/messages/denmark/>`_
+
+Française
+---------
+- `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
+
+Allemande
+---------
+
+- `Canal CakePHP allemand sur Slack <https://cakesf.slack.com/messages/german/>`_
+- `Groupe Facebook CakePHP Allemand <https://www.facebook.com/groups/146324018754907/>`_
+
+Iranienne
+---------
+
+- `Communauté de CakePHP iranienne <http://cakephp.ir>`_
+
+Hollandaise
+-----------
+
+- `Canal CakePHP hollandais sur Slack <https://cakesf.slack.com/messages/netherlands/>`_
+
+Japonaise
+---------
+
+- `Groupe Facebook CakePHP JAPAN <https://www.facebook.com/groups/304490963004377/>`_
+
+Portugaise
+----------
+
+- `Groupe Google CakePHP protugais <http://groups.google.com/group/cakephp-pt>`_
+
+Espagnol
+--------
+
+- `Canal CakePHP espagnol sur Slack <https://cakesf.slack.com/messages/spanish/>`_
+- `Canal IRC de CakePHP espagnol <irc://irc.freenode.net/cakephp-es>`_
+- `Groupe Google de CakePHP espagnol <http://groups.google.com/group/cakephp-esp>`_
 
 
 .. meta::

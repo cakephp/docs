@@ -7,6 +7,9 @@ y precisión de la documentación.
 
 .. container:: offline-download
 
+    .. image:: /_static/img/read-the-book.jpg
+       :alt: Read the Book - CakePHP
+
     Descargar la documentación:
 
     - `formato PDF <../_downloads/es/CakePHPCookbook.pdf>`_

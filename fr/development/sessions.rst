@@ -245,7 +245,7 @@ cache, puisque si vous avez épuisé l'espace de cache, les sessions vont
 commencer à expirer tandis que les enregistrements sont supprimés.
 
 Pour utiliser les sessions basées sur le Cache, vous pouvez configurer votre
-config Session comme ceci ::
+config Session comme ceci::
 
     Configure::write('Session', array(
         'defaults' => 'cache',

@@ -165,7 +165,7 @@ La classe Filelog intégrée par défaut traitera ce nom de log comme le fichier
 dans lequel vous voulez écrire les logs::
 
     // appelé de manière statique
-    CakeLog::write('activity', 'Un message spécial pour l'activité de logging');
+    CakeLog::write('activity', 'Un message spécial pour l\'activité de logging');
 
     // Aboutit à ce que cela soit ajouté à app/tmp/logs/activity.log (au lieu de error.log)
     // 2007-11-02 10:22:02 Activity: Un message spécial pour l'activité de logging

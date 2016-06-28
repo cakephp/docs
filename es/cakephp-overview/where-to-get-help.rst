@@ -33,14 +33,13 @@ estudio de usuarios del framework.
 El API
 ======
 
-`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
+`http://api.cakephp.org/2.8/ <http://api.cakephp.org/2.8/>`_
 
 Directo al grano y directamente de los desarrolladores principales, el
 API (Application Programming Interface) de CakePHP  es el más
 una amplia documentación en torno a todos los detalles del funcionamiento interno
 del framework. Si quieres los detalles de cada función, los parámetros, y ver
 cómo las clases se complementan entre sí, este es el lugar para buscar.
-
 
 Las pruebas unitarias
 =====================
@@ -57,7 +56,6 @@ El canal IRC
 
 **Canales IRC oficiales en irc.freenode.net:**
 
-
 -  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Discusión general en Inglés
 -  `#cakephp-es <irc://irc.freenode.net/cakephp-es>`_ -- Discusión general en Español
 
@@ -72,9 +70,6 @@ El grupo de Google
 
 En Español:
 `http://groups.google.com/group/cakephp-esp <http://groups.google.com/group/cakephp-esp>`_
-
-En Inglés:
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
 
 CakePHP tiene también un Grupo de Google muy activo. Puede ser un gran
 recurso para encontrar las respuestas archivadas, preguntas frecuentes,

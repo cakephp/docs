@@ -1016,7 +1016,7 @@ all tests are cases. In the past you would have done
 Model/Post``.
 
 
-The testsuite shell has been refactored to use the PHPUnit cli tool. It now
+The testsuite shell has been refactored to use the PHPUnit CLI tool. It now
 supports all the command line options supported by PHPUnit.
 ``cake testsuite help`` will show you a list of all possible modifiers.
 

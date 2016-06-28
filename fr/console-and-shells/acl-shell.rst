@@ -67,7 +67,7 @@ Utilisez cette commande pour accorder les permissions ACL. ::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
-La sortie sera soit ``success``(succès), soit ``not allowed`` (non autorisé).
+La sortie sera soit ``allowed``(succès), soit ``not allowed`` (non autorisé).
 
 Voir l'arbre de noeuds
 ======================

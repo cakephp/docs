@@ -23,9 +23,7 @@ faire le meilleur rapport de bug possible:
 * **A Faire** Donner autant de détails que possible sur votre environnement:
   (OS, version de PHP, Version de CakePHP).
 * **A ne pas Faire** Utiliser un ticket système pour poser une question de
-  support technique. Utilisez le
-  `Groupe google <http://groups.google.com/group/cake-php>`_ ou le
-  canal IRC #cakephp pour cela.
+  support technique. Utilisez le canal IRC #cakephp pour cela.
 
 Rapporter des problèmes de sécurité
 ===================================

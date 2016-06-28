@@ -15,6 +15,9 @@ Note o botão “Improve this Doc” no canto superior direito; ele vai direcion
 
     **Leia a documentação em qualquer lugar**
 
+    .. image:: /_static/img/read-the-book.jpg
+       :alt: Read the Book - CakePHP
+
     Consulte o cookbook CakePHP quase em qualquer lugar. Disponível como PDF e
     EPUB, você pode lê-lo em mais dispositivos, tanto quanto offline.
 

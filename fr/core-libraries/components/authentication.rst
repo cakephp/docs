@@ -113,6 +113,8 @@ suivante.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
   l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
+- ``recursive`` La valeur de la clé récursive passé à ``find()``. Par défaut à
+  ``0``.
 - ``contain`` options de Containable lorsque l'enregistrement de l'utilisateur
   est chargé. Si vous souhaitez utiliser cette option, vous devrez vous assurer
   que votre model a le behavior Containable attaché.
@@ -727,7 +729,7 @@ Le component Auth (AuthComponnent) est pessimiste, et par défaut interdit
 l'accès. Vous pouvez marquer des actions comme publique en utilisant
 ``AuthComponent::allow()``. En marquant les actions comme publique, le
 component Auth ne vérifiera pas la connexion d'un utilisateur, ni
-n'autorisera la vérification des objets ::
+n'autorisera la vérification des objets::
 
     // Permet toutes les actions. CakePHP 2.0 (déprécié)
     $this->Auth->allow('*');

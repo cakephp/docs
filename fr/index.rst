@@ -12,6 +12,9 @@ la documentation.
 
     **Lire le Livre partout**
 
+    .. image:: /_static/img/read-the-book.jpg
+       :alt: Read the Book - CakePHP
+
     Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
     EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et offline.
 

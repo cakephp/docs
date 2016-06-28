@@ -162,13 +162,18 @@ There are a number of options for create():
 
      <form id="UserLoginForm" method="post" action="/users/login">
 
+  .. deprecated:: 2.8.0
+     The ``$options['action']`` option was deprecated as of 2.8.0.
+     Use the ``$options['url']`` and ``$options['id']`` options instead.
+
 * ``$options['url']`` If the desired form action isn't in the current
   controller, you can specify a URL for the form action using the 'url' key of
   the $options array. The supplied URL can be relative to your CakePHP
   application::
 
-    echo $this->Form->create(null, array(
-        'url' => array('controller' => 'recipes', 'action' => 'add')
+    echo $this->Form->create(false, array(
+        'url' => array('controller' => 'recipes', 'action' => 'add'),
+        'id' => 'RecipesAdd'
     ));
 
   Output:
@@ -179,7 +184,7 @@ There are a number of options for create():
 
   or can point to an external domain::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(false, array(
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     ));
@@ -192,6 +197,10 @@ There are a number of options for create():
 
   Also check :php:meth:`HtmlHelper::url()` method for more examples of
   different types of URLs.
+
+  .. versionchanged:: 2.8.0
+
+     Use ``'url' => false`` if you don’t want to output a URL as the form action.
 
 * ``$options['default']`` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit
@@ -691,7 +700,8 @@ HTML attributes. The following will cover the options specific to
           'after' => '--after--',
           'between' => '--between---',
           'separator' => '--separator--',
-          'options' => array('1', '2')
+          'options' => array('1', '2'),
+          'type' => 'radio'
       ));
 
   Output:
@@ -742,6 +752,12 @@ HTML attributes. The following will cover the options specific to
 
   If you need to later change the defaults you can use
   :php:meth:`FormHelper::inputDefaults()`.
+
+* ``$options['maxlength']`` Set this key to set the ``maxlength`` attribute of the ``input``
+  field to a specific value. When this key is omitted and the input-type is ``text``,
+  ``textarea``, ``email``, ``tel``, ``url`` or ``search`` and the field-definition is not
+  one of ``decimal``, ``time`` or ``datetime``, the length option of the database field is
+  used.
 
 GET Form Inputs
 ---------------
@@ -1234,7 +1250,7 @@ Ex: name=data[User][username], id=UserUsername
       Will output:
 
       .. code-block:: html
-
+	
         <input name="data[User][gender]" id="UserGender_" value=""
             type="hidden" />
         <input name="data[User][gender]" id="UserGenderM" value="M"
@@ -1243,13 +1259,21 @@ Ex: name=data[User][username], id=UserUsername
         <input name="data[User][gender]" id="UserGenderF" value="F"
             type="radio" />
         <label for="UserGenderF">Female</label>
-
+      
+      
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
 
+    * ``$attributes['fieldset']`` If legend attribute is not set to false, then this 
+      attribute can be used to set the class of the fieldset element.
+
+
     .. versionchanged:: 2.1
         The ``$attributes['disabled']`` option was added in 2.1.
+        
+    .. versionchanged:: 2.8.5
+        The ``$attributes['fieldset']`` option was added in 2.8.5.
 
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
@@ -1311,6 +1335,7 @@ Ex: name=data[User][username], id=UserUsername
       .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
+            <option value=""></option>
             <option value="Value 1">Label 1</option>
             <option value="Value 2">Label 2</option>
             <option value="Value 3">Label 3</option>

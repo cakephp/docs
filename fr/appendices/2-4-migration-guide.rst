@@ -269,7 +269,7 @@ Utility
 General
 -------
 
-- :php:func:`pr()` ne sort plus le HTML lors du lancement en mode cli.
+- :php:func:`pr()` ne sort plus le HTML lors du lancement en mode CLI.
 
 Sanitize
 --------

@@ -28,7 +28,7 @@ Installation via Package .phar
 Vous pouvez également télécharger le fichier directement. Assurez-vous de
 récupérer la bonne version depuis https://phar.phpunit.de/.
 Assurez-vous également que /usr/local/bin est dans le include_path de votre
-fichier php.ini ::
+fichier php.ini::
 
     wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
     chmod +x phpunit.phar
@@ -293,7 +293,7 @@ Filtrer les cas de test
 
 Quand vous avez des cas de test plus larges, vous voulez souvent lancer
 un sous-ensemble de méthodes de test quand vous essayez de travailler sur un
-cas unique d'échec. Avec l'exécuteur cli vous pouvez utiliser une option pour
+cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
 filtrer les méthodes de test::
 
     ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
@@ -542,7 +542,7 @@ Si vous voulez utiliser une connexion différente, utilisez::
 Puisqu'on utilise votre connexion à la base de données CakePHP, s'il y a un
 préfixe de table déclaré, il sera automatiquement utilisé quand on récupère
 l'information de la table. Pour forcer la fixture et aussi importer ses
-enregistrements, changez l'importation en ::
+enregistrements, changez l'importation en::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);

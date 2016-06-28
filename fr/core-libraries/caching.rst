@@ -24,11 +24,11 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   grands objets ou des éléments qui sont rarement écrits fonctionne
   bien dans les fichiers. C'est le moteur de Cache par défaut pour 2.3+.
 * ``ApcCache`` Le cache APC utilise l'extension PHP
-  `APC <http://php.net/apc>`_. Cette extension utilise la mémoire partagée du
-  serveur Web pour stocker les objets. Cela le rend très rapide, et capable de
-  fournir les fonctionnalités atomiques en lecture/écriture.
-  Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache si il est
-  disponible.
+  `APC <http://php.net/apc>`_ ou `APCu <http://php.net/apcu>`_. Ces extensions
+  utilisent la mémoire partagée du serveur Web pour stocker les objets. Cela le
+  rend très rapide, et capable de fournir les fonctionnalités atomiques en
+  lecture/écriture. Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache
+  si il est disponible.
 * ``Wincache`` Utilise l'extension `Wincache <http://php.net/wincache>`_.
   Wincache offre des fonctionnalités et des performances semblables à APC, mais
   optimisées pour Windows et IIS.
@@ -48,7 +48,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 . versionchanged:: 2.3
     FileEngine est toujours le moteur de cache par défaut. Dans le passé, un
     certain nombre de personnes avait des difficultés à configurer et à déployer
-    APC correctement dans les deux cli + web. Utiliser les fichiers devrait
+    APC correctement dans les deux CLI + web. Utiliser les fichiers devrait
     faciliter la configuration de CakePHP pour les nouveaux développeurs.
 
 .. versionchanged:: 2.5
@@ -223,7 +223,7 @@ en plaçant les résultats qui ne changent que peu fréquemment ou qui peuvent
 être sujets à de nombreuses lectures dans le cache. Un exemple parfait de
 ceci pourrait être les résultats d'un find :php:meth:`Model::find()`.
 Une méthode qui utilise la mise en Cache pour stocker les résultats pourrait
-ressembler à cela ::
+ressembler à cela::
 
     class Post extends AppModel {
 

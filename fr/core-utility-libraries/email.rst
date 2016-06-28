@@ -45,7 +45,7 @@ Choisir l'émetteur
 
 Quand on envoie des emails de la part d'autre personne, c'est souvent une
 bonne idée de définir l'émetteur original en utilisant le header Sender.
-Vous pouvez faire ceci en utilisant ``sender()`` ::
+Vous pouvez faire ceci en utilisant ``sender()``::
 
     $Email = new CakeEmail();
     $Email->sender('app@example.com', 'MyApp emailer');

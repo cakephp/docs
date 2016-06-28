@@ -58,7 +58,7 @@ ACLでの権限をチェックするには check コマンドを使用して下�
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
-``success`` または ``not allowed`` のどちらかが出力されるはずです。
+``allowed`` または ``not allowed`` のどちらかが出力されるはずです。
 
 ノードツリーを確認する
 ======================

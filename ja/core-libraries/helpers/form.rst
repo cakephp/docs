@@ -157,13 +157,18 @@ create() には多くのオプションがあります:
 
      <form id="UserLoginForm" method="post" action="/users/login">
 
+  .. deprecated:: 2.8.0
+    ``$options['action']`` オプションは、 2.8.0 で非推奨になりました。
+    代わりに ``$options['url']`` と ``$options['id']`` オプションを使用してください。
+
 * ``$options['url']`` 現在のコントローラー以外にフォームデータを渡したい
   場合、$options 配列の 'url' キーを使ってフォームアクションの URL
   を指定します。指定された URL は作成中の CakePHP アプリケーションに
   対する相対値を指定できます::
 
-    echo $this->Form->create(null, array(
-        'url' => array('controller' => 'recipes', 'action' => 'add')
+    echo $this->Form->create(false, array(
+        'url' => array('controller' => 'recipes', 'action' => 'add'),
+        'id' => 'RecipesAdd'
     ));
 
   出力結果:
@@ -174,7 +179,7 @@ create() には多くのオプションがあります:
 
   もしくは、外部ドメインも指定可能です::
 
-    echo $this->Form->create(null, array(
+    echo $this->Form->create(false, array(
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     ));
@@ -187,6 +192,11 @@ create() には多くのオプションがあります:
 
   さらにいろいろなタイプの URL を指定する例は、:php:meth:`HtmlHelper::url()`
   メソッドを参照してみてください。
+
+  .. versionchanged:: 2.8.0
+
+    form action として URL を出力させたくない場合、
+    ``'url' => false`` を使用してください。
 
 * ``$options['default']``  'default' がブール値の false に設定されている場合、
   フォームの submit アクションが変更され、submit ボタンを押してもフォームが
@@ -695,7 +705,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
           'after' => '--after--',
           'between' => '--between---',
           'separator' => '--separator--',
-          'options' => array('1', '2')
+          'options' => array('1', '2'),
+          'type' => 'radio'
       ));
 
   出力結果:
@@ -746,6 +757,11 @@ HTML 属性などもオプションとして設定可能です。ここでは
 
   ここより先のデフォルトを変更するには
   :php:meth:`FormHelper::inputDefaults()` が使えます。
+
+* ``$opsions['maxlength']`` ``input`` フィールドの ``maxlength`` 属性に指定した値をセットするために
+  使用します。このキーを省略して、 input タイプが ``text``, ``textarea``, ``email``, ``tel``, ``url``,
+  または ``search`` で、データベースのフィールドの定義が ``decimal``, ``time`` または ``datetime``
+  以外の場合、フィールドの length オプションが使用されます。
 
 GET フォーム入力
 ----------------
@@ -1247,12 +1263,20 @@ select, checkbox, radio に関するオプション
             type="radio" />
         <label for="UserGenderF">Female</label>
 
+
     何らかの理由で hidden input が不要な場合、 ``$attributes['value']``
     を選択される値もしくは false にすることで hidden を出力しなく
     なります。
 
+    * ``$attributes['fieldset']`` legend 属性に false がセットされていなければ、
+      この属性は fieldset 要素のクラスを設定するために使用できます。
+
+ 
     .. versionchanged:: 2.1
         ``$attributes['disabled']`` オプションは 2.1 で追加されました。
+        
+    .. versionchanged:: 2.8.5
+        ``$attributes['fieldset']`` オプションは 2.8.5 で追加されました。
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
@@ -1313,6 +1337,7 @@ select, checkbox, radio に関するオプション
       .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
+            <option value=""></option>
             <option value="Value 1">Label 1</option>
             <option value="Value 2">Label 2</option>
             <option value="Value 3">Label 3</option>

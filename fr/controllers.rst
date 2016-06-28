@@ -665,7 +665,7 @@ Autres Méthodes utiles
     tableau des arguments nommés avec les membres du tableau de
     ``Controller::params`` et ne place pas les arguments nommés dans la clé
     'named'. Des parties supplémentaires dans le tableau ``$option`` vont aussi
-    être disponibles dans le tableau Controller::params de l'action requêtée ::
+    être disponibles dans le tableau Controller::params de l'action requêtée::
 
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');

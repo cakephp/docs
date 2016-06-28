@@ -13,17 +13,17 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does.
-    
+
 Install via Composer
 --------------------
 The newer versions of PHPUnit do not currently work with cake::
 
     "phpunit/phpunit": "3.7.38"
-    
+
 Install via .phar Package
 -------------------------
 
-You can also download the file directly. Just make sure you get the correct version from https://phar.phpunit.de/. 
+You can also download the file directly. Just make sure you get the correct version from https://phar.phpunit.de/.
 Make sure /usr/local/bin is in your php.ini file's include_path::
 
     wget https://phar.phpunit.de/phpunit-3.7.38.phar -O phpunit.phar
@@ -33,13 +33,13 @@ Make sure /usr/local/bin is in your php.ini file's include_path::
 .. note::
 
     PHPUnit 4 is not compatible with CakePHP's Unit Testing.
-    
+
     Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
 .. note::
     In CakePHP 2.5.7 and later you can place the phar directly in your vendors or App/Vendor directory.
-    
+
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6+. Add the ``--debug``
@@ -206,8 +206,8 @@ access the web runner by going to ``http://localhost/your_app/test.php``. The
 exact location of test.php will change depending on your setup. But the file is
 at the same level as ``index.php``.
 
-Once you've loaded up the test runner, you can navigate App, Core and Plugin test
-suites. Clicking an individual test case will run that test and display the
+Once you've loaded up the test runner, you can navigate App, Core and Plugin
+test suites. Clicking an individual test case will run that test and display the
 results.
 
 Viewing code coverage
@@ -233,10 +233,10 @@ lines are considered unexecutable code by Xdebug.
 Running tests from command line
 -------------------------------
 
-CakePHP provides a ``test`` shell for running tests. You can run app, core
-and plugin tests easily using the test shell. It accepts all the arguments
-you would expect to find on the normal PHPUnit command line tool as well. From
-your app directory you can do the following to run tests::
+CakePHP provides a ``test`` shell for running tests. You can run app, core and
+plugin tests easily using the test shell. It accepts all the arguments you would
+expect to find on the normal PHPUnit command line tool as well. From your app
+directory you can do the following to run tests::
 
     # Run a model tests in the app
     ./Console/cake test app Model/Article
@@ -249,17 +249,17 @@ your app directory you can do the following to run tests::
 
 .. note::
 
-    If you are running tests that interact with the session it's generally a good
-    idea to use the ``--stderr`` option. This will fix issues with tests
+    If you are running tests that interact with the session it's generally a
+    good idea to use the ``--stderr`` option. This will fix issues with tests
     failing because of headers_sent warnings.
 
 .. versionchanged:: 2.1
     The ``test`` shell was added in 2.1. The 2.0 ``testsuite`` shell is still
     available but the new syntax is preferred.
 
-You can also run ``test`` shell in the project root directory. This shows
-you a full list of all the tests that you currently have. You can then freely
-choose what test(s) to run::
+You can also run ``test`` shell in the project root directory. This shows you a
+full list of all the tests that you currently have. You can then freely choose
+what test(s) to run::
 
     # Run test in project root directory for application folder called app
     lib/Cake/Console/cake test app
@@ -271,8 +271,8 @@ Filtering test cases
 ~~~~~~~~~~~~~~~~~~~~
 
 When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case. With the
-CLI runner you can use an option to filter test methods::
+methods when you are trying to work on a single failing case. With the CLI
+runner you can use an option to filter test methods::
 
     ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
 
@@ -331,8 +331,7 @@ CakePHP uses the connection named ``$test`` in your ``app/Config/database.php``
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
-CakePHP performs the following during the course of a fixture based
-test case:
+CakePHP performs the following during the course of a fixture based test case:
 
 #. Creates tables for each of the fixtures needed.
 #. Populates tables with data, if data is provided in fixture.
@@ -407,10 +406,9 @@ your models will use the default ``test`` datasource. Fixture datasources must
 be prefixed with ``test`` to reduce the possibility of accidentally truncating
 all your application's data when running tests.
 
-We use ``$fields`` to specify which fields will be part of this table,
-and how they are defined. The format used to define these fields is
-the same used with :php:class:`CakeSchema`. The keys available for table
-definition are:
+We use ``$fields`` to specify which fields will be part of this table, and how
+they are defined. The format used to define these fields is the same used with
+:php:class:`CakeSchema`. The keys available for table definition are:
 
 ``type``
     CakePHP internal data type. Currently supported:
@@ -441,8 +439,8 @@ created. The format is fairly straight forward, ``$records`` is an array of
 records. Each item in ``$records`` should be a single row. Inside each row,
 should be an associative array of the columns and values for the row. Just keep
 in mind that each record in the $records array must have a key for **every**
-field specified in the ``$fields`` array. If a field for a particular record needs
-to have a ``null`` value, just specify the value of that key as ``null``.
+field specified in the ``$fields`` array. If a field for a particular record
+needs to have a ``null`` value, just specify the value of that key as ``null``.
 
 Dynamic data and fixtures
 -------------------------
@@ -481,22 +479,24 @@ could do the following::
 
 When overriding ``init()`` just remember to always call ``parent::init()``.
 
+.. note::
+
+    Please note that fixtures in 2.x do not handle foreign key constraints.
 
 Importing table information and records
 ---------------------------------------
 
-Your application may have already working models with real data
-associated to them, and you might decide to test your application with
-that data. It would be then a duplicate effort to have to define
-the table definition and/or records on your fixtures. Fortunately,
-there's a way for you to define that table definition and/or
-records for a particular fixture come from an existing model or an
-existing table.
+Your application may have already working models with real data associated to
+them, and you might decide to test your application with that data. It would be
+then a duplicate effort to have to define the table definition and/or records on
+your fixtures. Fortunately, there's a way for you to define that table
+definition and/or records for a particular fixture come from an existing model
+or an existing table.
 
-Let's start with an example. Assuming you have a model named
-Article available in your application (that maps to a table named
-articles), change the example fixture given in the previous section
-(``app/Test/Fixture/ArticleFixture.php``) to::
+Let's start with an example. Assuming you have a model named Article available
+in your application (that maps to a table named articles), change the example
+fixture given in the previous section (``app/Test/Fixture/ArticleFixture.php``)
+to::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
@@ -511,35 +511,34 @@ not import records. To import records you can do the following::
         public $import = array('model' => 'Article', 'records' => true);
     }
 
-If on the other hand you have a table created but no model
-available for it, you can specify that your import will take place
-by reading that table information instead. For example::
+If on the other hand you have a table created but no model available for it, you
+can specify that your import will take place by reading that table information
+instead. For example::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles');
     }
 
-Will import table definition from a table called 'articles' using
-your CakePHP database connection named 'default'. If you want to
-use a different connection use::
+Will import table definition from a table called 'articles' using your CakePHP
+database connection named 'default'. If you want to use a different connection
+use::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
-Since it uses your CakePHP database connection, if there's any
-table prefix declared it will be automatically used when fetching
-table information. The two snippets above do not import records
-from the table. To force the fixture to also import its records,
-change the import to::
+Since it uses your CakePHP database connection, if there's any table prefix
+declared it will be automatically used when fetching table information. The two
+snippets above do not import records from the table. To force the fixture to
+also import its records, change the import to::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
     }
 
-You can naturally import your table definition from an existing
-model/table, but have your records defined directly on the fixture
-as it was shown on previous section. For example::
+You can naturally import your table definition from an existing model/table, but
+have your records defined directly on the fixture as it was shown on previous
+section. For example::
 
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
@@ -741,7 +740,7 @@ Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -826,7 +825,7 @@ normal. And instead of your code exiting, it will continue to run code following
 the redirect. For example::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -842,7 +841,7 @@ When testing the above code, you will still run ``// more code`` even when the
 redirect is reached. Instead, you should write the code like::
 
     App::uses('AppController', 'Controller');
-    
+
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -1347,7 +1346,8 @@ bonus, as it gives you a nice graphical view of your testing results::
     --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
-in Jenkins as well. Failing to configure those steps will mean you won't see the results.
+in Jenkins as well. Failing to configure those steps will mean you won't see the
+results.
 
 Run a build
 -----------

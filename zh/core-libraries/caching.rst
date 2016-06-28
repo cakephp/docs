@@ -27,7 +27,7 @@ CakePHP 中的缓存主要是由 :php:class:`Cache` 类来帮助（处理）的�
   Redis 类似于 memcached，提供了快速和可持久化的缓存系统，也提供原子化操作。
 
 .. versionchanged:: 2.3
-    FileEngine 总是默认的缓存引擎。曾经有些人在 cli + web 两种环境中都遇到困难而
+    FileEngine 总是默认的缓存引擎。曾经有些人在 CLI + web 两种环境中都遇到困难而
     无法正确设置和部署 APC。使用文件（缓存），应当使得配置 CakePHP 对新的开发人员
     来说更简单了。
 

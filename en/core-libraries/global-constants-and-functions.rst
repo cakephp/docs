@@ -130,6 +130,7 @@ such as debugging and translating content.
     Also see :doc:`/development/debugging`
 
 .. php:function:: stackTrace(array $options = array())
+    :noindex:
 
     If the application's DEBUG level is non-zero, the stack trace is printed out.
 

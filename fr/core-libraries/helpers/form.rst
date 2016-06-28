@@ -3,21 +3,20 @@ FormHelper
 
 .. php:class:: FormHelper(View $view, array $settings = array())
 
-Le Helper Form prend en charge la plupart des opérations lourdes
-en création du formulaire. Le Helper Form se concentre sur la
-possibilité de créer des formulaires rapidement, d'une manière qui
-permettra de rationaliser la validation, la re-population et la mise
-en page (layout). Le Helper Form est aussi flexible - Il va faire à
-peu près tout pour vous en utilisant les conventions, ou vous
-pouvez utiliser des méthodes spécifiques pour ne prendre
+Le Helper Form prend en charge la plupart des opérations lourdes en création du
+formulaire. Le Helper Form se concentre sur la possibilité de créer des
+formulaires rapidement, d'une manière qui permettra de rationaliser la
+validation, la re-population et la mise en page (layout). Le Helper Form est
+aussi flexible - Il va faire à peu près tout pour vous en utilisant les
+conventions, ou vous pouvez utiliser des méthodes spécifiques pour ne prendre
 uniquement que ce dont vous avez besoin.
 
 Création de Formulaire
 ======================
 
-La première méthode dont vous aurez besoin d'utiliser pour prendre
-pleinement avantage du Helper Form (Helper Formulaire) est
-``create()``. Cette méthode affichera un tag d'ouverture de formulaire.
+La première méthode dont vous aurez besoin d'utiliser pour prendre pleinement
+avantage du Helper Form (Helper Formulaire) est ``create()``. Cette méthode
+affichera un tag d'ouverture de formulaire.
 
 .. php:method:: create(string $model = null, array $options = array())
 
@@ -160,7 +159,7 @@ Il y plusieurs options pour create():
 *   ``$options['action']`` La clé action vous permet de définir vers quelle
     action de votre controller pointera le formulaire. Par exemple, si vous
     voulez que le formulaire appelle l'action login() de votre controller
-    courant, vous créeriez le tableau $options comme ceci ::
+    courant, vous créeriez le tableau $options comme ceci::
 
         echo $this->Form->create('User', array('action' => 'login'));
 
@@ -171,13 +170,18 @@ Il y plusieurs options pour create():
         <form id="UserLoginForm" method="post" action="/users/login">
         </form>
 
+  .. deprecated:: 2.8.0
+     L'option ``$options['action']`` a été dépréciée depuis 2.8.0. Utilisez
+     les options ``$options['url']`` et ``$options['id']`` à la place.
+
 *   ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire
     n'est pas dans le controller courant, vous pouvez spécifier une URL
     dans le formulaire en utilisant la clé 'url' de votre tableau $options.
-    L'URL ainsi fournie peut être relative à votre application CakePHP ::
+    L'URL ainsi fournie peut être relative à votre application CakePHP::
 
-        echo $this->Form->create(null, array(
-            'url' => array('controller' => 'recipes', 'action' => 'add')
+        echo $this->Form->create(false, array(
+            'url' => array('controller' => 'recipes', 'action' => 'add'),
+            'id' => 'RecipesAdd'
         ));
 
     Affichera:
@@ -188,7 +192,7 @@ Il y plusieurs options pour create():
 
     ou pointer vers un domaine extérieur::
 
-        echo $this->Form->create(null, array(
+        echo $this->Form->create(false, array(
             'url' => 'http://www.google.com/search',
             'type' => 'get'
         ));
@@ -201,6 +205,11 @@ Il y plusieurs options pour create():
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url()` pour plus
     d'exemples sur les différents types d'URLs.
+
+  .. versionchanged:: 2.8.0
+
+     Utilisez ``'url' => false`` si vous ne voulez pas afficher une URL pour
+     l'action du formulaire.
 
 *   ``$options['default']`` Si la variable 'default' est définie à false,
     l'action de soumission du formulaire est changée de telle manière que le
@@ -397,7 +406,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     Supposons un User hasAndBelongsToMany Group. Dans votre controller,
     définissez une variable camelCase au pluriel (groupe -> groupes dans cette
     exemple, ou ExtraFunkyModele -> extraFunkyModeles) avec les options de
-    sélections. Dans l'action du controller vous pouvez définir ::
+    sélections. Dans l'action du controller vous pouvez définir::
 
         $this->set('groups', $this->User->Group->find('list'));
 
@@ -418,7 +427,7 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
     Si votre nom de model est composé de deux mots ou plus,
     ex. "UserGroup", quand vous passez les données en utilisant set()
     vous devrez nommer vos données dans un format CamelCase
-    (les Majuscules séparent les mots) et au pluriel comme ceci ::
+    (les Majuscules séparent les mots) et au pluriel comme ceci::
 
         $this->set('userGroups', $this->UserGroup->find('list'));
         // ou bien
@@ -577,7 +586,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
           <input name="data[User][name]" type="text" value="" id="UserName" />
       </div>
 
-  Désactiver le rendu de la div ::
+  Désactiver le rendu de la div::
 
       echo $this->Form->input('User.name', array('div' => false)); ?>
 
@@ -711,7 +720,8 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
         'after' => '--après--',
         'between' => '--entre---',
         'separator' => '--séparateur--',
-        'options' => array('1', '2')
+        'options' => array('1', '2'),
+        'type' => 'radio'
     ));
 
   Affichera:
@@ -763,6 +773,13 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 
   Si vous avez besoin de changer plus tard les valeurs par défaut, vous
   pourrez utiliser :php:meth:`FormHelper::inputDefaults()`.
+
+* ``$options['maxlength']`` Définissez cette clé pour définir l'attribut
+  ``maxlength`` du champ ``input`` avec une valeur spécifique. Quand cette clé
+  n'est pas donnée et que le type d'input est ``text``, ``textarea``, ``email``,
+  ``tel``, ``url`` ou ``search`` et que la définition de champ n'est pas
+  ``decimal``, ``time`` ou ``datetime``, l'option length du champ de la base de
+  données est utilisée.
 
 GET Form Inputs
 ---------------
@@ -1254,8 +1271,15 @@ Ex: name=data[User][username], id=UserUsername
     Si pour quelque raisons vous ne voulez pas du input caché, définissez
     ``$attributes['value']`` à une valeur sélectionnée ou le booléen false
 
+    * ``$attributes['fieldset']`` Si l'attribut ``legend`` n'est pas défini à
+      false, alors cet attribut peut être utilisé pour définir la classe de
+      l'élément fieldset.
+
     .. versionchanged:: 2.1
         L'option d'attribut ``$attributes['disabled']`` a été ajoutée dans CakePHP 2.1.
+
+    .. versionchanged:: 2.8.5
+        L'option d'attribut ``$attributes['fieldset']`` a été ajoutée dans CakePHP  dans 2.8.5.
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
@@ -1289,7 +1313,7 @@ Ex: name=data[User][username], id=UserUsername
       manuellement des options pour un input select (menu de sélection),
       ou pour un groupe radio. A moins que le 'type' soit spécifié à 'radio',
       le Helper Form supposera que la cible est un input select (menu de
-      sélection) ::
+      sélection)::
 
         echo $this->Form->select('field', array(1,2,3,4,5));
 
@@ -1298,6 +1322,7 @@ Ex: name=data[User][username], id=UserUsername
       .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
+            <option value=""></option>
             <option value="0">1</option>
             <option value="1">2</option>
             <option value="2">3</option>

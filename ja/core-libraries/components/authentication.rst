@@ -96,6 +96,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 - ``userModel`` User のモデル名。デフォルトは User。
 - ``scope`` 認証するユーザを検索する際に使う、追加の条件。
   例： ``array('User.is_active' => 1)``
+- ``recursive`` ``find()`` に渡された recursive キーの値。 デフォルトは ``0`` 。
 - ``contain`` ユーザのレコードがロードされた際に含めることのできるオプション。
   もしこのオプションを使用したい場合、モデルに Containable ビヘイビアを追加する必要があります。
 
@@ -306,8 +307,8 @@ Auth が生成するセッションエラーメッセージを表示するため
     // CakePHP 2.7 以上
     echo $this->Flash->render();
     echo $this->Flash->render('auth');
-    
-    // 2.7 より前なら 
+
+    // 2.7 より前なら
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
 
@@ -420,7 +421,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 ダイジェストパスワードを保管するのをお勧めします::
 
     App::uses('DigestAuthenticate', 'Controller/Component/Auth');
-    
+
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // make a password for digest auth.
@@ -486,7 +487,7 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 
     login メソッドに渡される配列に新たなユーザ ID が追加されていることを必ず確認してください。
     そうでない場合、そのユーザ ID が利用できなくなってしまいます。
-    
+
 .. warning::
 
     ``$this->Auth->login()`` にデータを渡す前にパスワードは消去してください。

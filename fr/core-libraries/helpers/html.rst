@@ -280,7 +280,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             'padding' => '10px'
         ));
 
-    Affichera ::
+    Affichera::
 
         background:#633; border-bottom:1px solid #000; padding:10px;
 

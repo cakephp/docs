@@ -22,7 +22,7 @@ En exécutant Bake la première fois, vous serez invité à créer un fichier de
 configuration de la base de données, si vous n'en avez pas créé un auparavant.
 
 Après que vous avez créé un fichier de configuration de la base de données,
-exécuter Bake vous présentera les options suivantes ::
+exécuter Bake vous présentera les options suivantes::
 
     ---------------------------------------------------------------
     App : app
@@ -42,7 +42,7 @@ exécuter Bake vous présentera les options suivantes ::
     >
 
 Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la
-ligne de commande ::
+ligne de commande::
 
     $ cake bake db_config
     $ cake bake model

@@ -1105,7 +1105,7 @@ suppose que tous les tests sont des cas. Dans le passé, vous vous auriez fait
 ``cake testsuite app case models/post``, vous pouvez maintenant faire
 ``cake testsuite app Model/Post``.
 
-Le shell Testsuite a été reconstruit pour utiliser l'outils cli de PHPUnit.
+Le shell Testsuite a été reconstruit pour utiliser l'outils CLI de PHPUnit.
 Cela supporte maintenant toutes les options de ligne de commande supportées
 par PHPUnit. ``cake testsuite help`` vous montrera une liste de toutes les
 modifications possibles.
