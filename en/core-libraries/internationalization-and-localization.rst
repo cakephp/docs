@@ -190,8 +190,8 @@ so you can translate messages and localize dates, numbers and
 currency at the same time::
 
     echo __(
-        'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
-        ['Charles', '2014-01-13 11:12:00', 1354.37]
+        'Hi {0}, your balance on the {1,date} is {2,number,currency}',
+        ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
     );
 
     // Returns
@@ -201,7 +201,7 @@ Numbers in placeholders can be formatted as well with fine grain control of the
 output::
 
     echo __(
-        'You have traveled {0,number,decimal} kilometers in {1,number,integer} weeks',
+        'You have traveled {0,number} kilometers in {1,number,integer} weeks',
         [5423.344, 5.1]
     );
 
@@ -216,7 +216,6 @@ output::
 This is the list of formatter specifiers you can put after the word ``number``:
 
 * ``integer``: Removes the decimal part
-* ``decimal``: Formats the number as a float
 * ``currency``: Puts the locale currency symbol and rounds decimals
 * ``percent``: Formats the number as a percentage
 
