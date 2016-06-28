@@ -65,10 +65,10 @@ as the officially supported method for installation.
 
 Installing Composer on Linux and Mac OS X :
 
-1. Run the installer script as described in the
+#. Run the installer script as described in the
    `official Composer documentation <https://getcomposer.org/download/>`_ and
    follow the instructions to install Composer.
-2. Execute the following command to move the composer.phar to a directory that
+#. Execute the following command to move the composer.phar to a directory that
    is in your path::
 
        mv composer.phar /usr/local/bin/composer
