@@ -59,24 +59,31 @@ Vous devez avoir installé au moins avoir PHP 5.5.9 (CLI) ou supérieur. La
 version de PHP du serveur web doit être la version 5.5.9 ou supérieur, et doit
 être la même version que la version de PHP de votre ligne de commande (CLI).
 
+Installer Composer
+------------------
+
 CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
 dépendances comme méthode officielle supportée pour l'installation.
 
-Tout d'abord, vous aurez besoin de télécharger et d'installer Composer si vous
-ne l'avez pas encore fait. Si vous avez cURL installé, c'est aussi facile que de
-lancer ce qui suit:
+Installer Composer sur Linux et Mac OS X :
 
-.. code-block:: bash
+#. Exécutez le script d'installation comme décrit dans la
+   `documentation officielle de Composer <https://getcomposer.org/download/>`_
+   et suivez les instructions pour installer Composer.
+#. Exécutez la commande suivante pour déplacer composer.phar vers un répertoire
+   qui est dans votre path::
 
-    curl -s https://getcomposer.org/installer | php
+       mv composer.phar /usr/local/bin/composer
 
-Ou vous pouvez télécharger ``composer.phar`` à partir de son
-`site <https://getcomposer.org/download/>`_.
+Installer Composer sur Windows :
 
 Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
 Composer `ici <https://github.com/composer/windows-setup/releases/>`__. D'autres
 instructions pour l'installeur Windows de Composer se trouvent dans le
 `README <https://github.com/composer/windows-setup>`__.
+
+Créer un Projet CakePHP
+-----------------------
 
 Maintenant que vous avez téléchargé et installé Composer, imaginons que vous
 souhaitiez créer une nouvelle application CakePHP dans le dossier my_app_name.
