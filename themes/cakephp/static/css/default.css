@@ -394,8 +394,6 @@ table.internal-toc {
 }
 
 
-
-
 /* -- Headings -- */
 .headerlink {
     display: none;
@@ -433,7 +431,6 @@ a tt {
 dl tt {
     border-bottom: none;
 }
-
 
 
 /* Inline list styles */
