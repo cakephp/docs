@@ -129,8 +129,8 @@ at least the length of the text.
 - ``#`` Is used to denote page titles.
 - ``=`` Is used for sections in a page.
 - ``-`` Is used for subsections.
-- ``~`` Is used for sub-subsections
-- ``^`` Is used for sub-sub-sections.
+- ``~`` Is used for sub-subsections.
+- ``^`` Is used for sub-sub-subsections.
 
 Headings should not be nested more than 5 levels deep. Headings should be
 preceded and followed by a blank line.
