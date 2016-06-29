@@ -100,7 +100,7 @@ Translator tips
 - Do not use
   `HTML entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   for accented characters, the book uses UTF-8.
-- Do not significantly change the markup (HTML) or add new content
+- Do not significantly change the markup (HTML) or add new content.
 - If the original content is missing some info, submit an edit for
   that first.
 
