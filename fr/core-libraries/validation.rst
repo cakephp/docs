@@ -134,6 +134,20 @@ l'option ``last`` à ``true``::
 Dans l'exemple ci-dessus, si la règle minLength (longueur minimale) échoue,
 la règle maxLength ne sera pas exécutée.
 
+Méthodes de Validation Moins Verbeuses
+--------------------------------------
+
+Depuis la version 3.2, l'objet Validator acceote de nombreuses nouvelles
+méthodes qui rendent la construction de validateurs moins verbeux. Par exemple,
+ajouter des règles de validation à un champ username peut maintenant ressembler
+à ceci::
+
+    $validator = new Validator();
+    $validator
+        ->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
+
 Ajouter des Providers de Validation
 -----------------------------------
 
