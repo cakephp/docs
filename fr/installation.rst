@@ -65,22 +65,22 @@ Installer Composer
 CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
 dépendances comme méthode officielle supportée pour l'installation.
 
-Installer Composer sur Linux et Mac OS X :
+- Installer Composer sur Linux et Mac OS X
 
-#. Exécutez le script d'installation comme décrit dans la
-   `documentation officielle de Composer <https://getcomposer.org/download/>`_
-   et suivez les instructions pour installer Composer.
-#. Exécutez la commande suivante pour déplacer composer.phar vers un répertoire
-   qui est dans votre path::
+  #. Exécutez le script d'installation comme décrit dans la
+     `documentation officielle de Composer <https://getcomposer.org/download/>`_
+     et suivez les instructions pour installer Composer.
+  #. Exécutez la commande suivante pour déplacer composer.phar vers un
+     répertoire qui est dans votre path::
 
-       mv composer.phar /usr/local/bin/composer
+         mv composer.phar /usr/local/bin/composer
 
-Installer Composer sur Windows :
+- Installer Composer sur Windows
 
-Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
-Composer `ici <https://github.com/composer/windows-setup/releases/>`__. D'autres
-instructions pour l'installeur Windows de Composer se trouvent dans le
-`README <https://github.com/composer/windows-setup>`__.
+  Pour les systèmes Windows, vous pouvez télécharger l'installeur Windows de
+  Composer `ici <https://github.com/composer/windows-setup/releases/>`__.
+  D'autres instructions pour l'installeur Windows de Composer se trouvent dans
+  le `README <https://github.com/composer/windows-setup>`__.
 
 Créer un Projet CakePHP
 -----------------------

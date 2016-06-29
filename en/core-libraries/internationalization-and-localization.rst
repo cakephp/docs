@@ -1,38 +1,36 @@
 Internationalization & Localization
 ###################################
 
-One of the best ways for an application to reach a larger
-audience is to cater to multiple languages. This can often prove
-to be a daunting task, but the internationalization and
-localization features in CakePHP make it much easier.
+One of the best ways for an application to reach a larger audience is to cater
+to multiple languages. This can often prove to be a daunting task, but the
+internationalization and localization features in CakePHP make it much easier.
 
-First, it's important to understand some terminology.
-*Internationalization* refers to the ability of an application to
-be localized. The term *localization* refers to the adaptation of
-an application to meet specific language (or culture) requirements
-(i.e. a "locale"). Internationalization and localization are often
-abbreviated as i18n and l10n respectively; 18 and 10 are the number
+First, it's important to understand some terminology. *Internationalization*
+refers to the ability of an application to be localized. The term *localization*
+refers to the adaptation of an application to meet specific language (or
+culture) requirements (i.e. a "locale"). Internationalization and localization
+are often abbreviated as i18n and l10n respectively; 18 and 10 are the number
 of characters between the first and last character.
 
 Setting Up Translations
 =======================
 
-There are only a few steps to go from a single-language application
-to a multi-lingual application, the first of which is to make use
-of the :php:func:`__()` function in your code. Below is an example of some code
-for a single-language application::
+There are only a few steps to go from a single-language application to a
+multi-lingual application, the first of which is to make use of the
+:php:func:`__()` function in your code. Below is an example of some code for a
+single-language application::
 
     <h2>Popular Articles</h2>
 
-To internationalize your code, all you need to do is to wrap
-strings in :php:func:`__()` like so::
+To internationalize your code, all you need to do is to wrap strings in
+:php:func:`__()` like so::
 
     <h2><?= __('Popular Articles') ?></h2>
 
-Doing nothing else, these two code examples are functionally
-identical - they will both send the same content to the browser.
-The :php:func:`__()` function will translate the passed string
-if a translation is available, or return it unmodified.
+Doing nothing else, these two code examples are functionally identical - they
+will both send the same content to the browser. The :php:func:`__()` function
+will translate the passed string if a translation is available, or return it
+unmodified.
 
 Language Files
 --------------
@@ -40,8 +38,8 @@ Language Files
 Translations can be made available by using language files stored in the
 application. The default format for CakePHP translation files is the
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
-placed under **src/Locale/** and within this directory, there should be
-a subfolder for each language the application needs to support::
+placed under **src/Locale/** and within this directory, there should be a
+subfolder for each language the application needs to support::
 
     /src
         /Locale
@@ -97,7 +95,8 @@ Extract Pot Files with I18n Shell
 
 To create the pot files from `__()` and other internationalized types of
 messages that can be found in the application code, you can use the i18n shell.
-Please read the :doc:`following chapter </console-and-shells/i18n-shell>` to learn more.
+Please read the :doc:`following chapter </console-and-shells/i18n-shell>` to
+learn more.
 
 Setting the Default Locale
 --------------------------
@@ -124,8 +123,8 @@ To change the language for translated strings you can call this method::
 
     I18n::locale('de_DE');
 
-This will also change how numbers and dates are formatted when using one of
-the localization tools.
+This will also change how numbers and dates are formatted when using one of the
+localization tools.
 
 Using Translation Functions
 ===========================
@@ -186,8 +185,8 @@ By using two adjacent quotes your variables will be replaced properly::
 
 These functions take advantage of the
 `ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
-so you can translate messages and localize dates, numbers and
-currency at the same time::
+so you can translate messages and localize dates, numbers and currency at the
+same time::
 
     echo __(
         'Hi {0}, your balance on the {1,date} is {2,number,currency}',
@@ -251,8 +250,8 @@ a couple ways to correctly select plurals in your messages.
 Using ICU Plural Selection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The first one is taking advantage of the ``ICU`` message format that comes
-by default in the translation functions. In the translations file you could have
+The first one is taking advantage of the ``ICU`` message format that comes by
+default in the translation functions. In the translations file you could have
 the following strings
 
 .. code-block:: pot
