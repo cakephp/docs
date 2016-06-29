@@ -57,8 +57,7 @@ Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
     ##########
 
     .. note::
-        A documentação não é atualmente suportada pela lingua portuguesa nesta
-        página.
+        Atualmente, a documentação desta página não é suportada em português.
 
         Por favor, sinta-se a vontade para nos enviar um *pull request* no
         `Github <https://github.com/cakephp/docs>`_ ou use o botão
