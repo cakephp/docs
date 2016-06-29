@@ -137,7 +137,7 @@ la règle maxLength ne sera pas exécutée.
 Méthodes de Validation Moins Verbeuses
 --------------------------------------
 
-Depuis la version 3.2, l'objet Validator acceote de nombreuses nouvelles
+Depuis la version 3.2, l'objet Validator accepte de nombreuses nouvelles
 méthodes qui rendent la construction de validateurs moins verbeux. Par exemple,
 ajouter des règles de validation à un champ username peut maintenant ressembler
 à ceci::
