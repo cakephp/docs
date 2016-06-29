@@ -380,8 +380,8 @@ primary key.
 .. versionadded:: 3.2.12
    You may now enforce ``existsIn()`` to pass if the nullable parts of your composite foreign keys are null.
 
-   // The primary composite key of nodes is (id, site_id).
-   // A node may reference a parent node but does not need to (parent_id = null):
+   // The primary composite key within NodesTable is (id, site_id).
+   // A Node may reference a parent Node but does not need to whenever parent_id is null:
    $rules->add($rules->existsIn(['parent_id', 'site_id'], 'ParentNodes', ['allowPartialNulls' => true]));
 
 Using Entity Methods as Rules
