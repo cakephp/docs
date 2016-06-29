@@ -177,6 +177,8 @@ model fields, depending on a country, ie::
                 'rule' => 'phone',
                 'provider' => 'fr'
             ]);
+            
+            return $validator;
         }
     }
 
