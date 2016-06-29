@@ -24,11 +24,46 @@ changes.
 Installing CakePHP with Composer
 ================================
 
+Before starting you should make sure that you have got an up to date PHP
+version:
+
+.. code-block:: bash
+
+    php -v
+
+You should at least have got installed PHP 5.3.0 (CLI) or higher.
+Your webserver's PHP version must also be of 5.3.0 or higher, and should best be
+the same version your command line interface (CLI) PHP version is of.
+
+Installing Composer
+-------------------
+
 Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
 libraries. `Packagist <https://packagist.org/>`_ is the main repository of
-Composer installable packages. Since CakePHP also publishes releases to Packagist,
-you can install CakePHP using `Composer <http://getcomposer.org>`_.
+Composer installable packages. Since CakePHP also publishes releases to
+Packagist, you can install CakePHP using `Composer <http://getcomposer.org>`_.
+
+- Installing Composer on Linux and Mac OS X
+
+  #. Run the installer script as described in the
+     `official Composer documentation <https://getcomposer.org/download/>`_
+     and follow the instructions to install Composer.
+  #. Execute the following command to move the composer.phar to a directory
+     that is in your path::
+
+         mv composer.phar /usr/local/bin/composer
+
+- Installing Composer on Windows
+
+  For Windows systems, you can download Composer's Windows installer
+  `here <https://github.com/composer/windows-setup/releases/>`__.  Further
+  instructions for Composer's Windows installer can be found within the
+  README `here <https://github.com/composer/windows-setup>`__.
+
+Create a CakePHP Project
+------------------------
+
 Before installing CakePHP you'll need to setup a ``composer.json`` file. A
 composer.json file for a CakePHP application would look like the following::
 
@@ -91,59 +126,57 @@ the autoloader, and work around an issue in Composer's autoloader. In your
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
-You should now have a functioning CakePHP application installed via
-Composer. Be sure to keep the composer.json and composer.lock file with the
-rest of your source code.
+You should now have a functioning CakePHP application installed via Composer. Be
+sure to keep the composer.json and composer.lock file with the rest of your
+source code.
 
 Sharing CakePHP Libraries with multiple Applications
 ====================================================
 
-There may be some situations where you wish to place CakePHP's
-directories on different places on the filesystem. This may be due
-to a shared host restriction, or maybe you just want a few of your
-apps to share the same CakePHP libraries. This section describes how
-to spread your CakePHP directories across a filesystem.
+There may be some situations where you wish to place CakePHP's directories on
+different places on the filesystem. This may be due to a shared host
+restriction, or maybe you just want a few of your apps to share the same CakePHP
+libraries. This section describes how to spread your CakePHP directories across
+a filesystem.
 
-First, realize that there are three main parts to a CakePHP
-application:
+First, realize that there are three main parts to a CakePHP application:
 
 #. The core CakePHP libraries, in /lib/Cake.
 #. Your application code, in /app.
 #. The application's webroot, usually in /app/webroot.
 
-Each of these directories can be located anywhere on your file
-system, with the exception of the webroot, which needs to be
-accessible by your web server. You can even move the webroot folder
-out of the app folder as long as you tell CakePHP where you've put
-it.
+Each of these directories can be located anywhere on your file system, with the
+exception of the webroot, which needs to be accessible by your web server. You
+can even move the webroot folder out of the app folder as long as you tell
+CakePHP where you've put it.
 
-To configure your CakePHP installation, you'll need to make some
-changes to the following files.
+To configure your CakePHP installation, you'll need to make some changes to the
+following files.
 
 -  /app/webroot/index.php
 -  /app/webroot/test.php (if you use the
    :doc:`Testing </development/testing>` feature.)
 
-There are three constants that you'll need to edit: ``ROOT``,
-``APP_DIR``, and ``CAKE_CORE_INCLUDE_PATH``.
+There are three constants that you'll need to edit: ``ROOT``, ``APP_DIR``, and
+``CAKE_CORE_INCLUDE_PATH``.
 
--  ``ROOT`` should be set to the path of the directory that
-   contains your app folder.
+-  ``ROOT`` should be set to the path of the directory that contains your app
+   folder.
 -  ``APP_DIR`` should be set to the (base)name of your app folder.
--  ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your
-   CakePHP libraries folder.
+-  ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your CakePHP
+   libraries folder.
 
-Let's run through an example so you can see what an advanced
-installation might look like in practice. Imagine that I wanted to
-set up CakePHP to work as follows:
+Let's run through an example so you can see what an advanced installation might
+look like in practice. Imagine that I wanted to set up CakePHP to work as
+follows:
 
 -  The CakePHP core libraries will be placed in /usr/lib/cake.
 -  My application's webroot directory will be /var/www/mysite/.
 -  My application's app directory will be /home/me/myapp.
 
-Given this type of setup, I would need to edit my webroot/index.php
-file (which will end up at /var/www/mysite/index.php, in this
-example) to look like the following::
+Given this type of setup, I would need to edit my webroot/index.php file (which
+will end up at /var/www/mysite/index.php, in this example) to look like the
+following::
 
     // /app/webroot/index.php (partial, comments removed)
 
@@ -159,10 +192,9 @@ example) to look like the following::
         define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
 
-It is recommended to use the ``DS`` constant rather than slashes to
-delimit file paths. This prevents any missing file errors you might
-get as a result of using the wrong delimiter, and it makes your
-code more portable.
+It is recommended to use the ``DS`` constant rather than slashes to delimit file
+paths. This prevents any missing file errors you might get as a result of using
+the wrong delimiter, and it makes your code more portable.
 
 Apache and mod\_rewrite (and .htaccess)
 =======================================
