@@ -377,6 +377,13 @@ can help provide a nicer user experience. Because of this CakePHP includes an
 The fields to check existence against in the related table must be part of the
 primary key.
 
+.. versionadded:: 3.3.0
+   You may now enforce ``existsIn()`` to pass if the nullable parts of your composite foreign keys are null.
+
+   // The primary composite key within NodesTable is (id, site_id).
+   // A Node may reference a parent Node but does not need to whenever parent_id is null:
+   $rules->add($rules->existsIn(['parent_id', 'site_id'], 'ParentNodes', ['allowPartialNulls' => true]));
+
 Using Entity Methods as Rules
 -----------------------------
 
