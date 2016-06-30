@@ -113,27 +113,56 @@ App.namespace
         この名前空間を利用するように更新する必要があります。
         加えて、新しい autoloader を ``php composer.phar dumpautoload`` を実行して作成します。
 
-
-
 .. _core-configuration-baseurl:
 
+..
+    App.baseUrl
+        Un-comment this definition if you **don’t** plan to use Apache’s
+        mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
+        files too.
+
 App.baseUrl
-    Un-comment this definition if you **don’t** plan to use Apache’s
-    mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
-    files too.
+    もし Apache の mod\_rewrite を CakePHPで **利用しない** 予定の場合、この定義のコメントを解除します。
+    .htaccess ファイルを取り除くことを忘れないでください。
+
+..
+    App.base
+        The base directory the app resides in. If ``false`` this
+        will be auto detected. If not ``false``, ensure your string starts
+        with a `/` and does NOT end with a `/`. E.g., `/basedir` is a valid
+        App.base. Otherwise, the AuthComponent will not work properly.
+
 App.base
-    The base directory the app resides in. If ``false`` this
-    will be auto detected. If not ``false``, ensure your string starts
-    with a `/` and does NOT end with a `/`. E.g., `/basedir` is a valid
-    App.base. Otherwise, the AuthComponent will not work properly.
+    アプリの存在するベースディレクトリです。もし ``false`` をセットしたら、自動で検出されます。
+    ``false`` 以外の場合、書き出しは `/` から始め、終わりに `/` を確実に付けないようにしてください。
+    例えば、 `/basedir` は有効な App.base です。さもなければ、AuthComponent は適切に動かなくなります。
+
+..
 App.encoding
     Define what encoding your application uses.  This encoding
     is used to generate the charset in the layout, and encode entities.
     It should match the encoding values specified for your database.
+
+App.encoding
+    あなたのアプリケーションで使用するエンコードを指定します。
+    このエンコーディングはレイアウトの charset の生成やエンティティのエンコードに利用されます。
+    それは、データベースのエンコードの値と合うように指定すべきです。
+
+..
 App.webroot
     The webroot directory.
+
+App.webroot
+    webroot のディレクトリです。
+
+..
 App.wwwRoot
     The file path to webroot.
+
+App.wwwRoot
+    webroot のファイルパスです。
+
+..
 App.fullBaseUrl
     The fully qualified domain name (including protocol) to your application's
     root. This is used when generating absolute URLs. By default this value
@@ -143,31 +172,79 @@ App.fullBaseUrl
     In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
     as there is no webserver involved. You do need to specify it yourself if
     you do need to generate URLs from a shell (e.g. when sending emails).
+
+App.fullBaseUrl
+    アプリケーションのルートまでのドメイン名 ( プロトコル含む ) です。
+    これは完全な URLs を生成する際に利用されます。デフォルトでは、この値は $_SERVER の環境情報から生成されます。
+    しかし、パフォーマンスを最適化したり、他人が ``Host`` ヘッダーを操作するのを心配するならば、自分で指定すべきでしょう。
+    CLI 環境 ( シェル ) では `fullBaseUrl` をまるで web サーバが無いかのように $_SERVER から読むことができません。
+    もしシェルから URLs を作成する必要がある場合 (例えばメールの送信) 、あなたはあなた自身でそれを指定する必要があります。    
+
+..
 App.imageBaseUrl
     Web path to the public images directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.
+
+App.imageBaseUrl
+    webroot 以下の公開画像ディレクトリのパスになります。
+    もし :term:`CDN` を利用している場合、CDN の場所をセットすべきです。
+
+..
 App.cssBaseUrl
     Web path to the public css directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.
+
+App.cssBaseUrl
+    webroot 以下の公開 css ディレクトリのパスになります。
+    もし :term:`CDN` を利用している場合、CDN の場所をセットすべきです。
+
+..
 App.jsBaseUrl
     Web path to the public js directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.
+
+App.jsBaseUrl
+    webroot 以下の公開 js ディレクトリのパスになります。
+    もし :term:`CDN` を利用している場合、CDN の場所をセットすべきです。
+
+..
 App.paths
     Configure paths for non class based resources. Supports the
     ``plugins``, ``templates``, ``locales`` subkeys, which allow the definition
     of paths for plugins, view templates and locale files respectively.
+
+App.paths
+    class ベースでないリソースのパスを構成します。
+    ``plugins`` 、 ``templates`` 、 ``locales`` などのサブキーをサポートし、
+    それぞれプラグイン、view テンプレート、locale ファイルのパスを指定できます。
+ 
+..
 Security.salt
     A random string used in hashing. This value is also used as the
     HMAC salt when doing symetric encryption.
+
+Security.salt
+    ハッシュ化の時に利用されるランダムな文字列です。
+    この値は 対称暗号化の際、HMAC ソルトのように利用されます。
+
+..
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
     file at the end of asset files URLs (CSS, JavaScript, Image) when
     using proper helpers.
     Valid values:
-
     - (bool) ``false`` - Doesn't do anything (default)
     - (bool) ``true`` - Appends the timestamp when debug is ``true``
     - (string) 'force' - Always appends the timestamp.
+
+Asset.timestamp
+    適切なヘルパーを使用した際、アセットファイルの URLs (CSS, JavaScript, Image) の終端に
+    そのファイルの最終更新時間のタイムスタンプを加えます。
+    有効な値:
+
+    - (bool) ``false`` - 何もしません (デフォルト)
+    - (bool) ``true`` - debug が ``true`` の時に加えます
+    - (string) 'force' - 常にタイムスタンプを加えます
 
 Database Configuration
 ----------------------
