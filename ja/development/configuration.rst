@@ -138,10 +138,10 @@ App.base
     例えば、 `/basedir` は有効な App.base です。さもなければ、AuthComponent は適切に動かなくなります。
 
 ..
-App.encoding
-    Define what encoding your application uses.  This encoding
-    is used to generate the charset in the layout, and encode entities.
-    It should match the encoding values specified for your database.
+    App.encoding
+        Define what encoding your application uses.  This encoding
+        is used to generate the charset in the layout, and encode entities.
+        It should match the encoding values specified for your database.
 
 App.encoding
     あなたのアプリケーションで使用するエンコードを指定します。
@@ -149,29 +149,29 @@ App.encoding
     それは、データベースのエンコードの値と合うように指定すべきです。
 
 ..
-App.webroot
-    The webroot directory.
+    App.webroot
+        The webroot directory.
 
 App.webroot
     webroot のディレクトリです。
 
 ..
-App.wwwRoot
-    The file path to webroot.
+    App.wwwRoot
+        The file path to webroot.
 
 App.wwwRoot
     webroot のファイルパスです。
 
 ..
-App.fullBaseUrl
-    The fully qualified domain name (including protocol) to your application's
-    root. This is used when generating absolute URLs. By default this value
-    is generated using the $_SERVER environment. However, you should define it
-    manually to optimize performance or if you are concerned about people
-    manipulating the ``Host`` header.
-    In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
-    as there is no webserver involved. You do need to specify it yourself if
-    you do need to generate URLs from a shell (e.g. when sending emails).
+    App.fullBaseUrl
+        The fully qualified domain name (including protocol) to your application's
+        root. This is used when generating absolute URLs. By default this value
+        is generated using the $_SERVER environment. However, you should define it
+        manually to optimize performance or if you are concerned about people
+        manipulating the ``Host`` header.
+        In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
+        as there is no webserver involved. You do need to specify it yourself if
+        you do need to generate URLs from a shell (e.g. when sending emails).
 
 App.fullBaseUrl
     アプリケーションのルートまでのドメイン名 ( プロトコル含む ) です。
@@ -181,37 +181,37 @@ App.fullBaseUrl
     もしシェルから URLs を作成する必要がある場合 (例えばメールの送信) 、あなたはあなた自身でそれを指定する必要があります。    
 
 ..
-App.imageBaseUrl
-    Web path to the public images directory under webroot. If you are using
-    a :term:`CDN` you should set this value to the CDN's location.
+    App.imageBaseUrl
+        Web path to the public images directory under webroot. If you are using
+        a :term:`CDN` you should set this value to the CDN's location.
 
 App.imageBaseUrl
     webroot 以下の公開画像ディレクトリのパスになります。
     もし :term:`CDN` を利用している場合、CDN の場所をセットすべきです。
 
 ..
-App.cssBaseUrl
-    Web path to the public css directory under webroot. If you are using
-    a :term:`CDN` you should set this value to the CDN's location.
+    App.cssBaseUrl
+        Web path to the public css directory under webroot. If you are using
+        a :term:`CDN` you should set this value to the CDN's location.
 
 App.cssBaseUrl
     webroot 以下の公開 css ディレクトリのパスになります。
     もし :term:`CDN` を利用している場合、CDN の場所をセットすべきです。
 
 ..
-App.jsBaseUrl
-    Web path to the public js directory under webroot. If you are using
-    a :term:`CDN` you should set this value to the CDN's location.
+    App.jsBaseUrl
+        Web path to the public js directory under webroot. If you are using
+        a :term:`CDN` you should set this value to the CDN's location.
 
 App.jsBaseUrl
     webroot 以下の公開 js ディレクトリのパスになります。
     もし :term:`CDN` を利用している場合、CDN の場所をセットすべきです。
 
 ..
-App.paths
-    Configure paths for non class based resources. Supports the
-    ``plugins``, ``templates``, ``locales`` subkeys, which allow the definition
-    of paths for plugins, view templates and locale files respectively.
+    App.paths
+        Configure paths for non class based resources. Supports the
+        ``plugins``, ``templates``, ``locales`` subkeys, which allow the definition
+        of paths for plugins, view templates and locale files respectively.
 
 App.paths
     class ベースでないリソースのパスを構成します。
@@ -219,23 +219,23 @@ App.paths
     それぞれプラグイン、view テンプレート、locale ファイルのパスを指定できます。
  
 ..
-Security.salt
-    A random string used in hashing. This value is also used as the
-    HMAC salt when doing symetric encryption.
+    Security.salt
+        A random string used in hashing. This value is also used as the
+        HMAC salt when doing symetric encryption.
 
 Security.salt
     ハッシュ化の時に利用されるランダムな文字列です。
     この値は 対称暗号化の際、HMAC ソルトのように利用されます。
 
 ..
-Asset.timestamp
-    Appends a timestamp which is last modified time of the particular
-    file at the end of asset files URLs (CSS, JavaScript, Image) when
-    using proper helpers.
-    Valid values:
-    - (bool) ``false`` - Doesn't do anything (default)
-    - (bool) ``true`` - Appends the timestamp when debug is ``true``
-    - (string) 'force' - Always appends the timestamp.
+    Asset.timestamp
+        Appends a timestamp which is last modified time of the particular
+        file at the end of asset files URLs (CSS, JavaScript, Image) when
+        using proper helpers.
+        Valid values:
+        - (bool) ``false`` - Doesn't do anything (default)
+        - (bool) ``true`` - Appends the timestamp when debug is ``true``
+        - (string) 'force' - Always appends the timestamp.
 
 Asset.timestamp
     適切なヘルパーを使用した際、アセットファイルの URLs (CSS, JavaScript, Image) の終端に
