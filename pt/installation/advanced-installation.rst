@@ -22,7 +22,7 @@ Para configurar sua instalação do Cake, você precisa fazer algumas modificaç
 nos seguintes arquivos.
 
 -  /app/webroot/index.php
--  /app/webroot/test.php (se você utilizar o recurso de `Testes <view/1196/Testing>`_.)
+-  /app/webroot/test.php (se você utilizar o recurso de :doc:`Testes </development/testing>`.)
 
 Há três constantes que você precisa editar: ``ROOT``, ``APP_DIR``, e
 ``CAKE_CORE_INCLUDE_PATH``.
@@ -43,16 +43,16 @@ Dado este tipo de configuração, eu preciso editar meu arquivo webroot/index.ph
 (que vai acabar em /var/www/mysite/index.php, neste exemplo) para algo como o
 seguinte::
 
-    // /app/webroot/index.php (parcial, comentários removidos) 
-    
+    // /app/webroot/index.php (parcial, comentários removidos)
+
     if (!defined('ROOT')) {
         define('ROOT', DS . 'home' . DS . 'me');
     }
-    
+
     if (!defined('APP_DIR')) {
         define ('APP_DIR', 'myapp');
     }
-    
+
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
         define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
@@ -68,7 +68,7 @@ Apache e mod\_rewrite (e .htaccess)
 
 O CakePHP é desenvolvido para trabalhar com o mod\_rewrite, mas percebemos que
 alguns usuários apanharam para fazer isto funcionar nos seus sistemas, então
-nós lhe daremos algumas dicas que você pode tentar fazer para rodar corretamente. 
+nós lhe daremos algumas dicas que você pode tentar fazer para rodar corretamente.
 
 Aqui estão algumas coisas que você pode tentar fazer para rodar corretamente.
 Primeiro veja o seu httpd.conf (tenha certeza de estar editando o httpd.conf do
@@ -81,7 +81,7 @@ sistema e não o de um usuário ou de um site específico).
        # Cada diretório com o Apache tenha acesso pode ser configurado com
        # relação aos quais serviços e recursos são permitidos e/ou
        # desabilitados neste diretório (e seus subdiretórios).
-       # 
+       #
        # Primeiro, configuramos o o "padrão" para ter um conjunto muito
        # restrito de recursos.
        #
@@ -205,10 +205,10 @@ script LUA em /etc/lighttpd/cake.
     function removePrefix(str, prefix)
       return str:sub(1,#prefix+1) == prefix.."/" and str:sub(#prefix+2)
     end
-    
+
     -- prefix without the trailing slash
     local prefix = ''
-    
+
     -- the magic ;)
     if (not file_exists(lighty.env["physical.path"])) then
         -- file still missing. pass it to the fastcgi backend
@@ -269,11 +269,11 @@ mas no mínimo, você irá precisar do PHP sendo executado como FastCGI.
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/app/webroot/;
         index  index.php;
-        
+
         access_log /var/www/example.com/log/access.log;
         error_log /var/www/example.com/log/error.log;
 
@@ -289,13 +289,13 @@ mas no mínimo, você irá precisar do PHP sendo executado como FastCGI.
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
-    
+
 URL Rewrites no IIS7 (Windows hosts)
 ====================================
 
 O IIS7 não suporta nativamente os arquivos .htaccess. Embora haja add-ons que
 podem adicionar esse suporte, você também pode importar regras htaccess no IIS
-para usar as regras de reescritas nativas do CakePHP. Para fazer isso, siga 
+para usar as regras de reescritas nativas do CakePHP. Para fazer isso, siga
 estes passos:
 
 #. Use o `Microsift Web Plataform Installer` para instalar o URL
@@ -317,11 +317,11 @@ estes passos:
                             <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
                             <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
                 </conditions>
-    
+
                 <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
-    
+
                 </rule>
-    
+
                 <rule name="Imported Rule 2" stopProcessing="true">
                   <match url="^$" ignoreCase="false" />
                   <action type="Rewrite" url="/" />
