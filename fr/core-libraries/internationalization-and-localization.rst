@@ -219,7 +219,7 @@ contrôle fin et précis sur la sortie::
     // Retourne
     You have traveled 5,423.34 kilometers in 5 weeks
 
-    echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
+    echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 9));
 
     // Retourne
     There are 6,100,000,000 people on earth
