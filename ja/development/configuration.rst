@@ -760,15 +760,42 @@ order to use them in your controllers. As you'll see in the :doc:`/controllers`
 and :doc:`/views` sections there are better ways you add custom logic to your
 application.
 
-.. _additional-class-paths:
+Environment Variables
+=====================
 
-Additional Class Paths
-======================
+Some of the modern cloud providers, like Heroku, let you define environment
+variables. By defining environment variables, you can configure your CakePHP
+app as an 12factor app. Following the
+`12factor app instructions <http://12factor.net/>`_ is a good way to create a
+stateless app, and to ease the deployment of your app.
+This means for example, that if you need to change your database, you'll just
+need to modify a DATABASE_URL variable on your host configuration without the
+need to change it in your source code.
 
-.. _loading-configuration-files:
+As you can see in your **app.php**, the following variables are concerned:
 
-Loading Configuration Files
----------------------------
+- ``DEBUG`` (``0`` or ``1``)
+- ``APP_ENCODING`` (ie UTF-8)
+- ``APP_DEFAULT_LOCALE`` (ie ``en_US``)
+- ``SECURITY_SALT``
+- ``CACHE_DEFAULT_URL`` (ie ``File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/``)
+- ``CACHE_CAKECORE_URL`` (ie ``File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/``)
+- ``CACHE_CAKEMODEL_URL`` (ie ``File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/``)
+- ``EMAIL_TRANSPORT_DEFAULT_URL`` (ie ``smtp://user:password@hostname:port?tls=null&client=null&timeout=30``)
+- ``DATABASE_URL`` (ie ``mysql://user:pass@db/my_app``)
+- ``DATABASE_TEST_URL`` (ie ``mysql://user:pass@db/test_my_app``)
+- ``LOG_DEBUG_URL`` (ie ``file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/``)
+- ``LOG_ERROR_URL`` (ie ``file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/``)
+
+As you can see in the examples, we define some options configuration as
+:term:`DSN` strings. This is the case for databases, logs, email transport and
+cache configurations.
+
+If the environment variables are not defined in your environment, CakePHP will
+use the values that are defined in the **app.php**. You can use
+`php-dotenv library <https://github.com/josegonzalez/php-dotenv>`_ to use
+environment variables in a local development. See the Readme instructions of the
+library for more information.
 
 .. meta::
     :title lang=ja: Configuration
