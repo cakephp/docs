@@ -305,7 +305,7 @@ Cada diretiva popula o índice, e/ou o índice do *namespace*.
 .. rst:directive:: .. php:exception:: name
 
    Esta directiva declara uma nova exceção no *namespace* atual. A
-   assinatura pode incluir argumentos do construtor.
+   assinatura pode incluir argumentos do construtor.
 
 .. rst:directive:: .. php:class:: name
 
