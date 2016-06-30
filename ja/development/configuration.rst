@@ -246,17 +246,30 @@ Asset.timestamp
     - (bool) ``true`` - debug が ``true`` の時に加えます
     - (string) 'force' - 常にタイムスタンプを加えます
 
-Database Configuration
+..
+    Database Configuration
+
+データベースの構成
 ----------------------
 
-See the :ref:`Database Configuration <database-configuration>` for information
-on configuring your database connections.
+..
+    See the :ref:`Database Configuration <database-configuration>` for information
+    on configuring your database connections.
 
-Caching Configuration
+データベース接続の構成は、 :ref:`データベース構成 <database-configuration>` を参照してください。
+
+..
+    Caching Configuration
+
+キャッシュの構成
 ---------------------
 
-See the :ref:`Caching Configuration <cache-configuration>` for information on
-configuring caching in CakePHP.
+..
+    See the :ref:`Caching Configuration <cache-configuration>` for information on
+    configuring caching in CakePHP.
+
+CakePHP のキャッシュ構成は、 :ref:`キャッシュ構成 <cache-configuration>` を参照してください。
+
 
 Error and Exception Handling Configuration
 ------------------------------------------
