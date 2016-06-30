@@ -6,8 +6,8 @@ changes in your database by writing PHP files that can be tracked using your
 version control system.
 
 It allows you to evolve your database tables over time. Instead of writing
-schema modifications in SQL, this plugin allows you to use an intuitive set
-of methods to implement your database changes.
+schema modifications in SQL, this plugin allows you to use an intuitive set of
+methods to implement your database changes.
 
 This plugin is a wrapper for the database migrations library `Phinx <https://phinx.org/>`_.
 
@@ -180,8 +180,8 @@ Migration names can follow any of the following patterns:
 * (``/^(Alter)(.*)/``) Alters the specified table. An alias
   for CreateTable and AddField.
 
-You can also use the ``underscore_form`` as the name for your migrations
-i.e. ``create_products``.
+You can also use the ``underscore_form`` as the name for your migrations i.e.
+``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
@@ -195,8 +195,8 @@ i.e. ``create_products``.
 
     Migration names are used as migration class names, and thus may collide with
     other migrations if the class names are not unique. In this case, it may be
-    necessary to manually override the name at a later date, or simply change the
-    name you are specifying.
+    necessary to manually override the name at a later date, or simply change
+    the name you are specifying.
 
 Columns definition
 ~~~~~~~~~~~~~~~~~~
@@ -204,13 +204,16 @@ Columns definition
 When using columns in the command line, it may be handy to remember that they
 follow the following pattern::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 For instance, the following are all valid ways of specifying an email field:
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
+
+The question mark following the fieldType will make the column nullable.
 
 The ``length`` parameter for the ``fieldType`` is optional and should always be
 written between bracket.

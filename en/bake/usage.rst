@@ -1,14 +1,12 @@
 Code Generation with Bake
 #########################
 
-Depending on how your computer is configured, you may have to set
-execute rights on the cake bash script to call it using ``bin/cake
-bake``. The cake console is run using the PHP CLI (command line
-interface). If you have problems running the script, ensure that
-you have the PHP CLI installed and that it has the proper modules
-enabled (eg: MySQL, intl). Users also might have issues if the
-database host is 'localhost' and should try '127.0.0.1' instead, as localhost
-can cause issues with PHP CLI.
+The cake console is run using the PHP CLI (command line interface). 
+If you have problems running the script, ensure that:
+
+#. You have the PHP CLI installed and that it has the proper modules enabled (eg: MySQL, intl). 
+#. Users also might have issues if the database host is 'localhost' and should try '127.0.0.1' instead, as localhost can cause issues with PHP CLI.
+#. Depending on how your computer is configured, you may have to set execute rights on the cake bash script to call it using ``bin/cake bake``.
 
 Before running bake you should make sure you have at least one database
 connection configured. See the section on :ref:`database configuration
@@ -19,10 +17,11 @@ tasks. You should see something like::
 
     $ bin/cake bake
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.1.6 Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/
+    PHP: 5.5.8
     ---------------------------------------------------------------
     The following commands can be used to generate skeleton code for your application.
 
@@ -36,11 +35,13 @@ tasks. You should see something like::
     - fixture
     - form
     - helper
+    - mailer
     - migration
     - migration_snapshot
     - model
     - plugin
     - shell
+    - shell-helper
     - template
     - test
 
@@ -51,7 +52,7 @@ available using the ``--help`` option::
 
     $ bin/cake bake controller --help
 
-    Welcome to CakePHP v3.0.0 Console
+    Welcome to CakePHP v3.1.6 Console
     ---------------------------------------------------------------
     App : src
     Path: /var/www/cakephp.dev/src/

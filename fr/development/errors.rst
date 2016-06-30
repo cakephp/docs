@@ -592,7 +592,7 @@ vous pouvez utiliser n'importe quel controller de votre choix::
     // ...
 
 Le controller d'erreur, qu'il soit conventionnel ou personnalisé, est utilisé
-pour rendre la vue de page d'erreurs et reçoit tous les évènements standards
+pour rendre la vue de page d'erreurs et reçoit tous les événements standards
 du cycle de vie des requêtes.
 
 Logger les Exceptions

@@ -78,7 +78,6 @@ p {
 }
 
 
-
 /* Preformatted text */
 code {
     font-family: "Roboto Mono", "Consolas", "Monaco", monospace;
@@ -253,13 +252,6 @@ iframe {
 .no-border { border:none !important; }
 
 
-.bg-main { background-color:rgb(181,67,33) !important; }
-.bg-dark { background-color: #444648 !important; }
-.bg-darker { background-color: #303234 !important; }
-.bg-dark-gray { background-color: #778888 !important; }
-.bg-light-gray { background-color: #aaabac !important; }
-
-
 /* Helper classes for mobile */
 @media (max-width:767px) {
     .xs-block { display:block; }
@@ -282,7 +274,6 @@ iframe {
 
     .sm-block { display:block !important; }
 }
-
 
 
 /* *********************    Megamenu    ********************* */
@@ -320,11 +311,11 @@ iframe {
 
 
 /* Submenu */
-.submenu, 
+.submenu,
 .submenu .submenu {
     list-style: none;
     margin: 0;
-    padding: 0;   
+    padding: 0;
     display: none;
     position: absolute;
     z-index: 999999;
@@ -457,7 +448,7 @@ iframe {
 
 .menu > .right { float: right; }
 
-.menu > .right > a, 
+.menu > .right > a,
 .menu > li > a.last { padding-right:0 !important; }
 
 
@@ -536,11 +527,10 @@ iframe {
 /* Menu on Mobiles */
 
 @media (max-width: 767px) {
-    .header-wrapper { 
+    .header-wrapper {
         background-color: #D33C44;
         color: #dadde2;
     }
-    .logo { background-image: url("../images/logo-cake.png") !important; }
 
     .menu.xs-toggle {
         position:relative;
@@ -596,7 +586,7 @@ iframe {
         display:block;
         color: white;
     }
-    .menu > li > a, 
+    .menu > li > a,
     .menu > .right > a {
         padding: 15px 25px;
     }
@@ -605,12 +595,12 @@ iframe {
         color:rgb(191, 191, 191);
     }
 
-    .submenu, 
+    .submenu,
     .submenu .submenu {
         width: 100% !important;
         left: 0;
         position: static !important;
-        border: none; 
+        border: none;
     }
     .submenu { border-top:none; }
 
@@ -639,9 +629,9 @@ iframe {
 
 
     /* Topbar */
-    .topbar .pull-right { 
-        float:none !important; 
-        margin-top: 20px; 
+    .topbar .pull-right {
+        float:none !important;
+        margin-top: 20px;
         margin-bottom:20px;
     }
 }
@@ -649,28 +639,6 @@ iframe {
 
 
 /* *********************    Headers     ********************* */
-
-.logo {
-    display: block;
-    background-image: url("../images/logo-cake.png");
-    background-position: left center;
-    background-repeat: no-repeat;
-    text-indent: -9999999px;
-    margin-top: 5px;
-    background-size: 250px;
-    padding: 23px 0;
-    margin: 0;
-}
-
-/* Header Dark */
-.header-dark { 
-    background-color: #292c31;
-    color: #dadde2;
-}
-.header-dark .menu > li > a { color: #dadde2; }
-.header-dark .logo,
-.topbar.dark .logo { background-image:url("../images/logo-light.png"); }
-.topbar.dark .logo { height:50px; background-position: left center; }
 
 @media (min-width:768px) {
     .header-wrapper .navbar-right { margin-right: 0 !important; }
@@ -918,7 +886,7 @@ input[type="email"].big-dog::webkit-input-placeholder {
     }
 }
 
-.form-group { 
+.form-group {
     position:relative;
 }
 
@@ -1060,9 +1028,9 @@ input[type="email"].big-dog::webkit-input-placeholder {
     font-size: 16px;
     font-weight: 400;
     line-height: 18px;
-    background-color: inherit; 
-    border-bottom: none; 
-    border-radius: 0; 
+    background-color: inherit;
+    border-bottom: none;
+    border-radius: 0;
 }
 .popover-title::after {
     content:"";
@@ -1843,7 +1811,15 @@ header {
     clear:both;
 }
 
-
+/* -- back to top -- */
+#back-to-contents {
+    position: fixed;
+    bottom: calc(70% - 44px);
+    right: 0;
+    background: #363637;
+    padding: 5px 0px 4px;
+    z-index: 90; /* Behind header */
+}
 /* Improve Doc */
 #improve-slideout {
     position: fixed;
@@ -1855,11 +1831,10 @@ header {
     transition-duration: 0.3s;
     background: #363637;
     padding: 5px 0px 4px;
-    position: fixed;
     z-index: 90; /* Behind header */
 }
 #improve-slideout:hover {
-  right: 180px;
+  right: 210px;
 }
 #improve-slideout:hover #improve-slideout-inner {
   right: 0;
@@ -1867,14 +1842,14 @@ header {
 #improve-slideout-inner {
     position: fixed;
     bottom: 70%;
-    right: -180px;
+    right: -210px;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
     background: #e0e0d9;
     padding: 5px 12px;
-    width: 180px;
+    width: 210px;
 }
 #improve-slideout-inner h6 {
     color: #363637;

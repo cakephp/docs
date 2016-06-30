@@ -11,43 +11,11 @@ App.config = {
 App.Book = (function() {
   function init() {
     // Show back to contents button.
-    var backToTop = $('#back-to-contents'),
-      contents = $('.page-contents'),
-      doc = $(document),
-      offset = contents.offset(),
-      sidebarHeight = contents.height(),
-      delay = 150,
-      didScroll = false;
-      showing = false;
-
-    var positionBackToTop = function() {
-      setTimeout(positionBackToTop, delay);
-      if (offset === undefined) {
-        return;
-      }
-      if (!showing && doc.scrollTop() > offset.top + sidebarHeight) {
-        showing = true;
-        backToTop.css({
-          top: 50,
-          left: 20,
-          display:' block'
-        });
-      } else if (showing && doc.scrollTop() <= offset.top + sidebarHeight) {
-        showing = false;
-        backToTop.css({
-          display:'none'
-        });
-      }
-    };
-    setTimeout(positionBackToTop, delay);
+    var backToTop = $('#back-to-contents');
 
     backToTop.bind('click', function(evt) {
       $('html,body').animate({scrollTop: 0}, 200);
       return false;
-    });
-
-    doc.bind('scroll', function() {
-      didScroll = true;
     });
 
     // Tooltips
@@ -208,7 +176,7 @@ $(document).ready(function(){
     // Media queries width include the scrollbar
     mqWidth = $win.outerWidth(true, true),
 
-    // Detect Mobile Devices 
+    // Detect Mobile Devices
     isMobileDevice = (( navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini|Mobi/i) || (mqWidth < 767) ) ? true : false );
 
     // detect IE browsers

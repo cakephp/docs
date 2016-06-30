@@ -134,6 +134,20 @@ l'option ``last`` à ``true``::
 Dans l'exemple ci-dessus, si la règle minLength (longueur minimale) échoue,
 la règle maxLength ne sera pas exécutée.
 
+Méthodes de Validation Moins Verbeuses
+--------------------------------------
+
+Depuis la version 3.2, l'objet Validator accepte de nombreuses nouvelles
+méthodes qui rendent la construction de validateurs moins verbeux. Par exemple,
+ajouter des règles de validation à un champ username peut maintenant ressembler
+à ceci::
+
+    $validator = new Validator();
+    $validator
+        ->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
+
 Ajouter des Providers de Validation
 -----------------------------------
 
@@ -182,13 +196,15 @@ pays, par exemple::
         public function validationDefault(Validator $validator)
         {
             $validator = new Validator();
-            // add the provider to the validator
+            // Ajoute le provider au validator
             $validator->provider('fr', 'Localized\Validation\FrValidation');
-            // use the provider in a field validation rule
+            // utilise le provider dans une règle de validation de champ
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',
                 'provider' => 'fr'
             ]);
+
+            return $validator;
         }
     }
 
@@ -381,8 +397,8 @@ Créer des Validators Ré-utilisables
 
 Bien que définir des validators inline, là où ils sont utilisés, permet de
 donner un bon exemple de code, cela ne conduit pas à avoir des applications
-facilement maintenable. A la place, vous devriez créer des sous-classes
-de ``Validator`` pour votre logique de validation réutilisable::
+facilement maintenable. A la place, vous devriez créer des sous-classes de
+``Validator`` pour votre logique de validation réutilisable::
 
     // Dans src/Model/Validation/ContactValidator.php
     namespace App\Model\Validation;
@@ -492,22 +508,20 @@ les ensembles de validation à appliquer en utilisant le paramètre ``options``:
       ]
     ]);
 
-La validation est habituellement utilisée pour les formulaires ou les
-interfaces utilisateur, et ainsi elle n'est pas limitée seulement à la
-validation des colonnes dans le schéma de la table. Cependant maintenir
-l'intégrité des données selon d'où elles viennent est important. Pour
-résoudre ce problème, CakePHP dispose d'un deuxième niveau de validation
-qui est appelé "règles d'application". Vous pouvez en savoir plus en
-consultant la section
+La validation est habituellement utilisée pour les formulaires ou les interfaces
+utilisateur, et ainsi elle n'est pas limitée seulement à la validation des
+colonnes dans le schéma de la table. Cependant maintenir l'intégrité des données
+selon d'où elles viennent est important. Pour résoudre ce problème, CakePHP
+dispose d'un deuxième niveau de validation qui est appelé "règles
+d'application". Vous pouvez en savoir plus en consultant la section
 :ref:`Appliquer les Règles d'Application <application-rules>`.
 
 Règles de Validation du Cœur
 ============================
 
 CakePHP fournit une suite basique de méthodes de validation dans la classe
-``Validation``. La classe Validation contient un ensemble de méthodes static
-qui fournissent des validators pour plusieurs situations de validation
-habituelles.
+``Validation``. La classe Validation contient un ensemble de méthodes static qui
+fournissent des validators pour plusieurs situations de validation habituelles.
 
 La `documentation de l'API
 <http://api.cakephp.org/3.0/class-Cake.Validation.Validation.html>`_ pour la
@@ -527,6 +541,6 @@ ces conditions limite et options comme suit::
             'rule' => ['range', 1, 5]
         ]);
 
-Les règles du Cœur qui prennent des paramètres supplémentaires doivent avoir
-un tableau pour la clé ``rule`` qui contient la règle comme premier élément, et
-les paramètres supplémentaires en paramètres restants.
+Les règles du Cœur qui prennent des paramètres supplémentaires doivent avoir un
+tableau pour la clé ``rule`` qui contient la règle comme premier élément, et les
+paramètres supplémentaires en paramètres restants.

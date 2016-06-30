@@ -223,9 +223,10 @@ users, bookmarks, and tags.
 Adding Password Hashing
 =======================
 
-When you created your users, you probably noticed that the passwords were stored
-in plain text. This is pretty bad from a security point of view, so let's get
-that fixed.
+When you created your users (by visiting
+**http://localhost:8765/bookmarks/users**), you probably noticed that the
+passwords were stored in plain text. This is pretty bad from a security point of
+view, so let's get that fixed.
 
 This is also a good time to talk about the model layer in CakePHP. In CakePHP,
 we separate the methods that operate on a collection of objects, and a single

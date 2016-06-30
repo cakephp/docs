@@ -1442,6 +1442,110 @@ un message indiquant 1 passé et 4 assertions.
 Lorsque vous testez un Helper qui utilise d'autres Helpers, assurez-vous de
 créer un mock de la méthode ``loadHelpers`` de la classe View.
 
+.. _testing-events:
+
+Tester les Events
+=================
+
+Les :doc:`/core-libraries/events` sont un bon moyen pour découpler le code de
+votre application, mais parfois quand nous les testons, nous avons tendance à
+tester les événements dans les cas de test qui éxecutent ces événements. C'est
+une forme supplémentaire de couplage qui peut être évitée en utilisant
+à la place ``assertEventFired`` et ``assertEventFiredWith``.
+
+En poursuivant l'exemple sur les Orders, disons que nous avons les tables
+suivantes::
+
+    class OrdersTable extends Table
+    {
+
+        public function place($order)
+        {
+            if ($this->save($order)) {
+                // moved cart removal to CartsTable
+                $event = new Event('Model.Order.afterPlace', $this, [
+                    'order' => $order
+                ]);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CartsTable extends Table
+    {
+
+        public function implementedEvents()
+        {
+            return [
+                'Model.Order.afterPlace' => 'removeFromCart'
+            ];
+        }
+
+        public function removeFromCart(Event $event)
+        {
+            $order = $event->data('order');
+            $this->delete($order->cart_id);
+        }
+    }
+
+.. note::
+    Pour faire des assertions sur le fait que des événements sont déclenchés,
+    vous devez d'abord activer :ref:`tracking-events` sur le gestionnaire
+    d'événements pour lequel vous souhaitez faire des asserts.
+
+Pour tester le ``OrdersTable`` du dessus, vous devez activer le tracking dans la
+méthode ``setUp()`` puis vérifier par exemple que l'événement a été déclenché,
+puis que l'entity ``$order`` a été passée dans les données de l'événement::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\OrdersTable;
+    use Cake\Event\EventList;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\TestCase;
+
+    class OrdersTableTest extends TestCase
+    {
+
+        public $fixtures = ['app.orders'];
+
+        public function setUp()
+        {
+            parent::setUp();
+            $this->Orders = TableRegistry::get('Orders');
+            // enable event tracking
+            $this->Orders->getEventManager()->setEventList(new EventList());
+        }
+
+        public function testPlace()
+        {
+            $order = new Order([
+                'user_id' => 1,
+                'item' => 'Cake',
+                'quantity' => 42,
+            ]);
+
+            $this->assertTrue($this->Orders->place($order));
+
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+        }
+    }
+
+Par défaut, l'``EventManager`` global est utilisé pour les assertions, donc
+tester les événements globaux ne nécessitent pas de passer le gestionnaire
+d'événements::
+
+    $this->assertEventFired('My.Global.Event');
+    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+
+.. versionadded:: 3.2.11
+
+    Le tracking d'événement, ``assertEventFired()``, et ``assertEventFiredWith``
+    ont été ajoutés.
+
 Créer des Suites de Test (Test Suites)
 ======================================
 

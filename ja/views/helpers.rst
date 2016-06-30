@@ -12,11 +12,6 @@
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
-.. _aliasing-helpers:
-
-Aliasing Helpers
-----------------
-
 .. toctree::
     :maxdepth: 1
 
@@ -30,6 +25,17 @@ Aliasing Helpers
     /views/helpers/text
     /views/helpers/time
     /views/helpers/url
+
+.. _aliasing-helpers:
+
+Aliasing Helpers
+----------------
+
+.. _helper-api:
+
+Helper Class
+============
+
 
 .. meta::
     :title lang=ja: Helpers

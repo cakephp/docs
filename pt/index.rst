@@ -16,6 +16,8 @@ correções para a documentação.
 
     **Leia a documentação em qualquer lugar**
 
+    .. image:: /_static/img/read-the-book.jpg
+
     Consulte o cookbook CakePHP praticamente em qualquer lugar. Disponível como
     PDF e EPUB, você pode lê-lo em mais dispositivos, e também offline.
 
