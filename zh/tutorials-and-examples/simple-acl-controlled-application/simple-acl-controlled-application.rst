@@ -356,5 +356,5 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
 
 
 .. meta::
-    :title lang=zh_CN: Simple Acl controlled Application
-    :keywords lang=zh_CN: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache
+    :title lang=zh: Simple Acl controlled Application
+    :keywords lang=zh: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache

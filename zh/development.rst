@@ -17,5 +17,5 @@
     development/dispatch-filters
 
 .. meta::
-    :title lang=zh_CN: Development
-    :keywords lang=zh_CN: development sessions,debugging,exceptions
+    :title lang=zh: Development
+    :keywords lang=zh: development sessions,debugging,exceptions

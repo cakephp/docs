@@ -934,6 +934,6 @@ Model::save() 方法来帮你总是这么做::
     }
 
 .. meta::
-    :title lang=zh_CN: Saving Your Data
-    :keywords lang=zh_CN: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
+    :title lang=zh: Saving Your Data
+    :keywords lang=zh: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
 

@@ -18,5 +18,5 @@ CakePHP 让你可以建立一个控制器、模型和视图的组合，并且把
 
 
 .. meta::
-    :title lang=zh_CN: Plugins
-    :keywords lang=zh_CN: plugin folder,plugins,controllers,models,views,package,application,database connection,little space
+    :title lang=zh: Plugins
+    :keywords lang=zh: plugin folder,plugins,controllers,models,views,package,application,database connection,little space

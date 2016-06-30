@@ -206,6 +206,6 @@ CakePHP 内部的路由系统这样的核心过滤器中的逻辑了。虽然并
 
 
 .. meta::
-    :title lang=zh_CN: Dispatcher Filters
-    :description lang=zh_CN: Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent
-    :keywords lang=zh_CN: middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router
+    :title lang=zh: Dispatcher Filters
+    :description lang=zh: Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent
+    :keywords lang=zh: middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router

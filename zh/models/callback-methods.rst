@@ -194,5 +194,5 @@ onError
 
 
 .. meta::
-    :title lang=zh_CN: Callback Methods
-    :keywords lang=zh_CN: querydata,query conditions,model classes,callback methods,special functions,return values,counterparts,array,logic,decisions
+    :title lang=zh: Callback Methods
+    :keywords lang=zh: querydata,query conditions,model classes,callback methods,special functions,return values,counterparts,array,logic,decisions

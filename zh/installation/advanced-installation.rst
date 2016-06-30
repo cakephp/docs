@@ -152,5 +152,5 @@ Apache 和 mod\_rewrite (以及 .htaccess)
 
 
 .. meta::
-    :title lang=zh_CN: Advanced Installation
-    :keywords lang=zh_CN: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path
+    :title lang=zh: Advanced Installation
+    :keywords lang=zh: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path

@@ -101,5 +101,5 @@
 若要保持默认的致命错误行为，可以自定义处理中调用 ``ErrorHandler::handleFatalError()``。
 
 .. meta::
-    :title lang=zh_CN: Error Handling
-    :keywords lang=zh_CN: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
+    :title lang=zh: Error Handling
+    :keywords lang=zh: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error

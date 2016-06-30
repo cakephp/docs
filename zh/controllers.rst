@@ -719,5 +719,5 @@ $components、$helpers 和 $uses
 
 
 .. meta::
-    :title lang=zh_CN: Controllers
-    :keywords lang=zh_CN: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=zh: Controllers
+    :keywords lang=zh: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes

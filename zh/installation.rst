@@ -184,5 +184,5 @@ CakePHP 的默认主页，和当前数据库连接状态的消息。
 
 
 .. meta::
-    :title lang=zh_CN: Installation
-    :keywords lang=zh_CN: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighttpd,repository,enhancements,source code,cakephp,incorporate
+    :title lang=zh: Installation
+    :keywords lang=zh: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighttpd,repository,enhancements,source code,cakephp,incorporate

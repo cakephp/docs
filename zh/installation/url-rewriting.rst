@@ -268,5 +268,5 @@ Hiawatha 的网址重写
 
 
 .. meta::
-    :title lang=zh_CN: URL Rewriting
-    :keywords lang=zh_CN: url rewriting, mod_rewrite, apache, iis, plugin assets, nginx
+    :title lang=zh: URL Rewriting
+    :keywords lang=zh: url rewriting, mod_rewrite, apache, iis, plugin assets, nginx

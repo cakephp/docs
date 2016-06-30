@@ -183,6 +183,6 @@ Xdebug
 
 
 .. meta::
-    :title lang=zh_CN: Debugging
-    :description lang=zh_CN: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
-    :keywords lang=zh_CN: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options
+    :title lang=zh: Debugging
+    :description lang=zh: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
+    :keywords lang=zh: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options

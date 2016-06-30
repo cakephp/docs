@@ -171,5 +171,5 @@ SQL查询中的虚字段
     $this->virtualFields += $this->Author->virtualFields;
 
 .. meta::
-    :title lang=zh_CN: Virtual fields
-    :keywords lang=zh_CN: sql expressions,array name,model fields,sql errors,virtual field,concatenation,model name,first name last name
+    :title lang=zh: Virtual fields
+    :keywords lang=zh: sql expressions,array name,model fields,sql errors,virtual field,concatenation,model name,first name last name

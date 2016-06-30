@@ -19,5 +19,5 @@ Contents
 .. todolist::
 
 .. meta::
-    :title lang=zh_CN: Contents
-    :keywords lang=zh_CN: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=zh: Contents
+    :keywords lang=zh: core libraries,ref search,shells,deployment,appendices,glossary,models

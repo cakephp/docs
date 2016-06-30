@@ -109,5 +109,5 @@ IngredientsController 的控制器会自动初始化 Ingredient 模型，并把�
 
 
 .. meta::
-    :title lang=zh_CN: Models
-    :keywords lang=zh_CN: information workflow,csv file,object oriented programming,model class,model classes,model definition,internal model,core model,simple declaration,application model,php class,database table,data model,data access,external web,inheritance,different ways,validity,functionality,queries
+    :title lang=zh: Models
+    :keywords lang=zh: information workflow,csv file,object oriented programming,model class,model classes,model definition,internal model,core model,simple declaration,application model,php class,database table,data model,data access,external web,inheritance,different ways,validity,functionality,queries

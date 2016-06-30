@@ -78,5 +78,5 @@ Dispatcher 将会负责在视图路径中寻找正确的主题资源。
 
 
 .. meta::
-    :title lang=zh_CN: Themes
-    :keywords lang=zh_CN: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
+    :title lang=zh: Themes
+    :keywords lang=zh: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage

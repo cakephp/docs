@@ -250,5 +250,5 @@ cacheQueries
 
 
 .. meta::
-    :title lang=zh_CN: Model Attributes
-    :keywords lang=zh_CN: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example
+    :title lang=zh: Model Attributes
+    :keywords lang=zh: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example

@@ -68,5 +68,5 @@ webroot
 
 
 .. meta::
-    :title lang=zh_CN: CakePHP Folder Structure
-    :keywords lang=zh_CN: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
+    :title lang=zh: CakePHP Folder Structure
+    :keywords lang=zh: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp

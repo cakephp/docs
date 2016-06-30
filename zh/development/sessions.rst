@@ -319,5 +319,5 @@ IO 的好处，而不必担心缓存满了时会话会逐渐丢失。
 
 
 .. meta::
-    :title lang=zh_CN: Sessions
-    :keywords lang=zh_CN: session defaults,session classes,utility features,session timeout,session ids,persistent data,session key,session cookie,session data,last session,core database,security level,useragent,security reasons,session id,attr,countdown,regeneration,sessions,config
+    :title lang=zh: Sessions
+    :keywords lang=zh: session defaults,session classes,utility features,session timeout,session ids,persistent data,session key,session cookie,session data,last session,core database,security level,useragent,security reasons,session id,attr,countdown,regeneration,sessions,config

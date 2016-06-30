@@ -60,5 +60,5 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
 
 .. meta::
-    :title lang=zh_CN: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=zh_CN: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=zh: .. CakePHP Cookbook documentation master file, created by
+    :keywords lang=zh: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope

@@ -111,5 +111,5 @@ User 表单中显示来自 Group 表的 ID 或者名字构成的下拉列表::
 
 
 .. meta::
-    :title lang=zh_CN: Scaffolding
-    :keywords lang=zh_CN: database schemas,loose structure,scaffolding,scaffold,php class,database tables,web developer,downside,web application,logic,developers,cakephp,running,current,delete,database application
+    :title lang=zh: Scaffolding
+    :keywords lang=zh: database schemas,loose structure,scaffolding,scaffold,php class,database tables,web developer,downside,web application,logic,developers,cakephp,running,current,delete,database application

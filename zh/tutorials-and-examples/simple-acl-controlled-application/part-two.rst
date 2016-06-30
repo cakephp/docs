@@ -175,5 +175,5 @@ logout 方法基本上是删除 Auth 的会话键(*Session Key*)，并且返回�
 
 
 .. meta::
-    :title lang=zh_CN: Simple Acl controlled Application - part 2
-    :keywords lang=zh_CN: shell interface,magic solution,aco,unzipped,config,sync,syntax,cakephp,php,running,acl
+    :title lang=zh: Simple Acl controlled Application - part 2
+    :keywords lang=zh: shell interface,magic solution,aco,unzipped,config,sync,syntax,cakephp,php,running,acl

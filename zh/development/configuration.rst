@@ -749,5 +749,5 @@ CakePHP 知道如何把这些联结在一起，是通过单词的单数和复数
 
 
 .. meta::
-    :title lang=zh_CN: Configuration
-    :keywords lang=zh_CN: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
+    :title lang=zh: Configuration
+    :keywords lang=zh: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web

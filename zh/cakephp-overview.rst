@@ -5,7 +5,7 @@ CakePHP 概述
 得轻而易举!
 
 本手册假定你了解 PHP，并且有面向对象编程(OOP)方面的基础知识。框架中的不同功能使用
-了不同的技术——例如 SQL、JavaScript 和 XML ——本手册不会讲解这些技术，而只是它们在 
+了不同的技术——例如 SQL、JavaScript 和 XML ——本手册不会讲解这些技术，而只是它们在
 CakePHP 框架中是如何应用的。
 
 .. toctree::
@@ -17,5 +17,5 @@ CakePHP 框架中是如何应用的。
 
 
 .. meta::
-    :title lang=zh_CN: CakePHP Overview
-    :keywords lang=zh_CN: web application framework,model view controller,object oriented programming,piece of cake,cookbook,functionality,xml,cakephp
+    :title lang=zh: CakePHP Overview
+    :keywords lang=zh: web application framework,model view controller,object oriented programming,piece of cake,cookbook,functionality,xml,cakephp

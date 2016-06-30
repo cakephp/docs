@@ -981,5 +981,5 @@ books\_tags 表作为连接表，所以需要把 books 表连接(*join*)到 book
 
 
 .. meta::
-    :title lang=zh_CN: Associations: Linking Models Together
-    :keywords lang=zh_CN: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage
+    :title lang=zh: Associations: Linking Models Together
+    :keywords lang=zh: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage

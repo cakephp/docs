@@ -1229,5 +1229,5 @@ step)*，包含如下代码::
 
 
 .. meta::
-    :title lang=zh_CN: Testing
-    :keywords lang=zh_CN: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration
+    :title lang=zh: Testing
+    :keywords lang=zh: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

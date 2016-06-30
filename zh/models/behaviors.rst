@@ -286,5 +286,5 @@ $model 参数。
 
 
 .. meta::
-    :title lang=zh_CN: Behaviors
-    :keywords lang=zh_CN: tree manipulation,manipulation methods,model behaviors,access control list,model class,tree structures,php class,business contract,class category,database table,bakery,inheritance,functionality,interaction,logic,cakephp,models,essence
+    :title lang=zh: Behaviors
+    :keywords lang=zh: tree manipulation,manipulation methods,model behaviors,access control list,model class,tree structures,php class,business contract,class category,database table,bakery,inheritance,functionality,interaction,logic,cakephp,models,essence

@@ -150,5 +150,5 @@ PeopleController 控制器的 index() 方法的调用，并自动加载 Person �
 
 
 .. meta::
-    :title lang=zh_CN: CakePHP Conventions
-    :keywords lang=zh_CN: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,apples,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers
+    :title lang=zh: CakePHP Conventions
+    :keywords lang=zh: web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,apples,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers

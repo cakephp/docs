@@ -403,5 +403,5 @@ AppController 控制器中添加更普遍的规则。
 
 
 .. meta::
-    :title lang=zh_CN: Simple Authentication and Authorization Application
-    :keywords lang=zh_CN: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns
+    :title lang=zh: Simple Authentication and Authorization Application
+    :keywords lang=zh: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns

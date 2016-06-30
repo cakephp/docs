@@ -957,5 +957,5 @@ connectNamed() 方法支持一些选项：
 
 
 .. meta::
-    :title lang=zh_CN: Routing
-    :keywords lang=zh_CN: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
+    :title lang=zh: Routing
+    :keywords lang=zh: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

@@ -1038,5 +1038,5 @@ CakePHP 还能检查 null 字段。在本例中，查询将返回标题(*title*)
 
 
 .. meta::
-    :title lang=zh_CN: Retrieving Your Data
-    :keywords lang=zh_CN: upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models
+    :title lang=zh: Retrieving Your Data
+    :keywords lang=zh: upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models

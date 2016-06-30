@@ -252,5 +252,5 @@
 
 
 .. meta::
-    :title lang=zh_CN: Components
-    :keywords lang=zh_CN: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
+    :title lang=zh: Components
+    :keywords lang=zh: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

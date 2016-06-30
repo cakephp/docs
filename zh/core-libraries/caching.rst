@@ -400,5 +400,5 @@ CacheEngine必需的API为
 
 
 .. meta::
-    :title lang=zh_CN: Caching
-    :keywords lang=zh_CN: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :title lang=zh: Caching
+    :keywords lang=zh: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
