@@ -377,7 +377,7 @@ can help provide a nicer user experience. Because of this CakePHP includes an
 The fields to check existence against in the related table must be part of the
 primary key.
 
-.. versionadded:: 3.2.12
+.. versionadded:: 3.3.0
    You may now enforce ``existsIn()`` to pass if the nullable parts of your composite foreign keys are null.
 
    // The primary composite key within NodesTable is (id, site_id).
