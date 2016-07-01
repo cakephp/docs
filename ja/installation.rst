@@ -55,22 +55,28 @@ CakePHP のインストール
 ウェブサーバー版の PHP もまた 5.5.9 以上でなければりませんし、
 コマンドラインインターフェース (CLI) 版の PHP と同じバージョンがベストです。
 
+Composer のインストール
+-----------------------
+
 CakePHP の公式のインストール方法として、依存性管理ツール
 `Composer <http://getcomposer.org>`_ を使用します。
 
-もしまだなら、最初に Composer をダウンロードしてインストールしなければなりません。
-あなたが cURL をインストールしているのであれば、下記の通り簡単に実行できます。
+- Linux や Mac OS X に Composer をインストール
 
-.. code-block:: bash
+  #. `公式の Composer ドキュメント <https://getcomposer.org/download/>`_ に書かれた
+     インストーラスクリプトを実行し、Composer をインストールするために指示に従ってください。
+  #. composer.phar を指定したパスのディレクトリに移すために以下のコマンドを実行してください。 ::
 
-    curl -s https://getcomposer.org/installer | php
+       mv composer.phar /usr/local/bin/composer
 
-もしくは `Composer のウェブサイト <https://getcomposer.org/download/>`_ から
-``composer.phar`` をダウンロードすることもできます。
+- Windows に Composer をインストール
 
-Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
-Windows インストーラをダウンロードできます。Composer の Windows  インストーラについての詳細は、
-`README <https://github.com/composer/windows-setup>`__ をご覧ください。
+  Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
+  Windows インストーラをダウンロードできます。Composer の Windows インストーラについての詳細は、
+  `README <https://github.com/composer/windows-setup>`__ をご覧ください。
+
+CakePHP プロジェクトを作成
+--------------------------
 
 以上で、Composer をダウンロードとインストールしました。my_app_name フォルダに CakePHP
 の新しいアプリケーションを作りたいなら、下記の composer コマンドを実行して作成します。
