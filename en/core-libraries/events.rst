@@ -140,7 +140,7 @@ After firing an event on the manager, you can retrieve it from the event list::
 Tracking can be disabled by removing the event list or calling
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
 
-.. versionadded:: 3.2.10
+.. versionadded:: 3.2.11
     Event tracking and :php:class:`Cake\\Event\\EventList` were added.
 
 Core Events

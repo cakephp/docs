@@ -3,7 +3,7 @@ Blog Tutorial
 
 This tutorial will walk you through the creation of a simple blog application.
 We'll be installing CakePHP, creating a database, and creating enough
-application logic to list, add, edit, and delete blog posts.
+application logic to list, add, edit, and delete blog articles.
 
 Here's what you'll need:
 

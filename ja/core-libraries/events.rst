@@ -12,6 +12,21 @@
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _tracking-events:
+
+Tracking Events
+---------------
+
+.. _event-priorities:
+
+Establishing Priorities
+-----------------------
+
+.. _stopping-events:
+
+Stopping Events
+---------------
+
 その他の資料
 ============
 

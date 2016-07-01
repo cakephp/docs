@@ -1572,7 +1572,7 @@ d'événements::
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 
-.. versionadded:: 3.2.10
+.. versionadded:: 3.2.11
 
     Le tracking d'événement, ``assertEventFired()``, et ``assertEventFiredWith``
     ont été ajoutés.

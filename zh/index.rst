@@ -12,6 +12,8 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
     **在任何地方阅读本书**
 
+    .. image:: /_static/img/read-the-book.jpg
+
     您几乎可以在任何地方阅读本书，当前提供的格式有 PDF 和 EPUB，您可以在更多设备上阅读它，也可以(把它下载下来)离线阅读。
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_

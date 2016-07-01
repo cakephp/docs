@@ -1508,7 +1508,7 @@ global events does not require passing the event manager::
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 
-.. versionadded:: 3.2.10
+.. versionadded:: 3.2.11
 
     Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
     added.
