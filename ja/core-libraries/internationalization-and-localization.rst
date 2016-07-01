@@ -176,8 +176,8 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 を活用しています。そのためメッセージと地域化された日付や番号、通貨とを同時に翻訳することが可能です。 ::
 
     echo __(
-        'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
-        ['Charles', '2014-01-13 11:12:00', 1354.37]
+        'Hi {0}, your balance on the {1,date} is {2,number,currency}',
+        ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
     );
 
     // 結果
@@ -186,7 +186,7 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 プレースホルダーの中の数字は、出力のきめ細やかなコントロールによって、同様にフォーマットされます。 ::
 
     echo __(
-        'You have traveled {0,number,decimal} kilometers in {1,number,integer} weeks',
+        'You have traveled {0,number} kilometers in {1,number,integer} weeks',
         [5423.344, 5.1]
     );
 
@@ -201,7 +201,6 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 以下は、 ``number`` という言葉の後に続けられるフォーマット修飾子のリストです:
 
 * ``integer``: 小数の部分を取り除く
-* ``decimal``: float として数をフォーマットする
 * ``currency``: 地域の通貨、を利用し、小数点以下を丸めます
 * ``percent``: パーセントとして数をフォーマットします
 
