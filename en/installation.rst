@@ -126,14 +126,15 @@ Each time you run ``php composer.phar update`` you will receive the latest
 stable releases when using the default version constraint ``~3.2``. Only bugfix
 and minor version releases of 3.x will be used when updating.
 
-If you want to keep current with the latest unreleased changes in CakePHP you
-can add the change your application's **composer.json**::
+If you want to keep current with the latest unreleased changes in CakePHP
+designate **dev-master** as the package version in your application's
+**composer.json**::
 
     "require": {
         "cakephp/cakephp": "dev-master"
     }
 
-Be aware that is not recommended, as your application can break when next major
+Be aware that is not recommended, as your application can break when the next major
 version is being released. Additionally composer does not cache development
 branches, so it slows down consecutive composer installs/updates.
 
@@ -149,7 +150,7 @@ As such, make sure the directories **logs**, **tmp** and all its subdirectories
 in your CakePHP installation are writable by the web server user. Composer's
 installation process makes **tmp** and its subfolders globally writeable to get
 things up and running quickly but you can update the permissions for better
-security and keep them writable only for the webserver user.
+security and keep them writable only for the web server user.
 
 One common issue is that **logs** and **tmp** directories and subdirectories
 must be writable both by the web server and the command line user. On a UNIX
@@ -198,8 +199,8 @@ configure a web server.
     The development server should *never* be used in a production environment.
     It is only intended as a basic development server.
 
-If you'd prefer to use a real webserver, you should be able to move your CakePHP
-install (including the hidden files) inside your webserver's document root. You
+If you'd prefer to use a real web server, you should be able to move your CakePHP
+install (including the hidden files) inside your web server's document root. You
 should then be able to point your web-browser at the directory you moved the
 files into and see your application in action.
 
@@ -396,7 +397,7 @@ further information.
        </IfModule>
 
    The above will simply prevent incorrect assets from being sent to index.php
-   and instead display your webserver's 404 page.
+   and instead display your web server's 404 page.
 
    Additionally you can create a matching HTML 404 page, or use the default
    built-in CakePHP 404 by adding an ``ErrorDocument`` directive:
@@ -528,7 +529,7 @@ these steps:
     </configuration>
 
 Once the web.config file is created with the correct IIS-friendly rewrite rules,
-CakePHP's links, CSS, JavaScipt, and rerouting should work correctly.
+CakePHP's links, CSS, JavaScript, and rerouting should work correctly.
 
 I Can't Use URL Rewriting
 -------------------------
