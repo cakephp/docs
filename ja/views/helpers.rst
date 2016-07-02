@@ -26,6 +26,11 @@
     /views/helpers/time
     /views/helpers/url
 
+.. _configuring-helpers:
+
+Configuring Helpers
+===================
+
 .. _aliasing-helpers:
 
 Aliasing Helpers

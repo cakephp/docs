@@ -23,6 +23,11 @@
     /controllers/components/pagination
     /controllers/components/request-handling
 
+.. _configuring-components:
+
+Configuring Components
+======================
+
 .. meta::
     :title lang=ja: Components
     :keywords lang=ja: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
