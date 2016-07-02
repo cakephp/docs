@@ -368,8 +368,7 @@ HTTP ステータスコードを定義することができます。リダイレ
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
-``loadModel`` 関数は、コントローラのデフォルト以外のモデル
-テーブル／コレクション を使う必要がある時に便利です。 ::
+``loadModel`` 関数は、コントローラのデフォルト以外のモデルを使う必要がある時に便利です。 ::
 
     // コントローラのメソッドの中で。
     $this->loadModel('Articles');
