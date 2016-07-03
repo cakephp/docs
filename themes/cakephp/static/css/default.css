@@ -42,7 +42,7 @@
 }
 
 .page-container {
-    padding-top: 160px;
+    padding-top: 185px;
     padding-bottom: 40px;
 }
 
@@ -792,3 +792,10 @@ dt tt {
     font-size: 14px;
 }
 
+
+.outdated-warning {
+    text-align: center;
+    background-color: #ffe4e4;
+    padding: 0.4em;
+    margin: 0;
+}
