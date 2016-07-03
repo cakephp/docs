@@ -6,10 +6,19 @@
 Bem Vindo
 #########
 
+.. warning::
+    Esta é a versão da documentação do CakePHP 2.x.
+    `Clique aqui <http://book.cakephp.org/3.0/>`_ para visualizar a
+    documentação do CakePHP 3.x.
+
+
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
 Esperamos manter um alto nível de qualidade, validade e precisão para a
 documentação.
-Note o botão “Improve this Doc” no canto superior direito; ele vai direcionar você para o editor online do GitHub da página ativa, permitindo que você facilmente contribua com quaisquer adições, exclusões ou correções para a documentação.
+Note o botão “Improve this Doc” no canto superior direito; ele vai direcionar
+você para o editor online do GitHub da página ativa, permitindo que você
+facilmente contribua com quaisquer adições, exclusões ou correções para a
+documentação.
 
 .. container:: offline-download
 
