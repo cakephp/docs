@@ -7,7 +7,7 @@ Bem Vindo
 #########
 
 .. warning::
-    Esta é a versão da documentação do CakePHP 2.x.
+    Esta é a documentação da versão 2.x do CakePHP.
     `Clique aqui <http://book.cakephp.org/3.0/>`_ para visualizar a
     documentação do CakePHP 3.x.
 
