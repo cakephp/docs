@@ -506,6 +506,9 @@ option when generating pagination related elements. You can either use the
     $this->Paginator->options(['defaultModel' => 'title']);
     echo $this->Paginator->sort('title');
 
+By using the ``model`` option, ``PaginatorHelper`` will automatically use the
+``requestScope`` defined in when the query was paginated.
+
 .. versionadded:: 3.3.0
     Multiple Pagination was added in 3.3.0
 
