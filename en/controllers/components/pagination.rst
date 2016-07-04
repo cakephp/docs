@@ -183,6 +183,31 @@ settings to use for pagination. This array should have the same structure as the
 ``finder`` option will be ignored. It is assumed that you are passing in
 the query you want paginated.
 
+.. _paginating-multiple-queries:
+
+Paginating Multiple Queries
+===========================
+
+You can paginate multiple models in a single controller action, using the
+``requestScope`` option::
+
+    // In a controller action
+    $articles = $this->paginate($this->Articles, ['requestScope' => 'article']);
+    $tags = $this->paginate($this->Tags, ['requestScope' => 'tag']);
+    $this->set(compact('articles', 'tags'));
+
+The ``requestScope`` option will result in ``PaginatorComponent`` looking in
+scoped query string parameters. For example, the following URL could be used to
+paginate both tags and articles at the same time::
+
+    /dashboard?article[page]=1&tag[page]=3
+
+See the :ref:`paginator-helper-multiple` section for how to generate scoped HTML
+elements and URLs for pagination.
+
+.. versionadded:: 3.3.0
+    Multiple Pagination was added in 3.3.0
+
 Control which Fields Used for Ordering
 ======================================
 

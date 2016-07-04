@@ -89,6 +89,25 @@ ORM Improvements
 * The ``partialNullsPass`` option was added to the ``existsIn`` rule. This
   option allows rules to pass when some columns are null.
 
+Multiple Pagination Support Added
+=================================
+
+You can now paginate multiple queries in a single controller action/view
+template. See the :ref:`paginating-multiple-queries` section for more
+details.
+
+Cache Shell Added
+=================
+
+To help you better manage cached data from a CLI environment, a shell command
+has been added that exposes methods for clearing cached data::
+
+    // Clear one cache config
+    bin/cake cache clear <configname>
+
+    // Clear all cache configs
+    bin/cake cache clear_all
+
 FormHelper
 ==========
 
@@ -146,15 +165,3 @@ Debugging Functions
 
 * The ``pr()``, ``debug()``, and ``pj()`` functions now return the value being
   dumped. This makes them easier to use when values are being returned.
-
-Cache Shell Added
-=================
-
-To help you better manage cached data from a CLI environment, a shell command
-has been added that exposes methods for clearing cached data::
-
-    // Clear one cache config
-    bin/cake cache clear <configname>
-
-    // Clear all cache configs
-    bin/cake cache clear_all
