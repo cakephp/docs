@@ -396,6 +396,23 @@ une classe de règle ``ExistsIn``::
 Les champs dont il faut vérifier l'existence dans la table liée doivent faire
 parti de la clé primaire.
 
+Vous pouvez forcer ``existsIn`` à passer quand des parties de votre clé
+étrangère composite est nulle::
+
+    // The primary composite key within NodesTable is (id, site_id).
+    // A Node may reference a parent Node but does not need to whenever parent_id is null:
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['partialNullsPass' => true]
+    );
+
+    // A Node however must in addition also always reference a Site.
+    $rules->add($rules->existsIn(['site_id'], 'Sites'));
+
+.. versionadded:: 3.3.0
+    L'option ``partialNullsPass`` a été ajoutée.
+
 Règles sur le Nombre de Valeurs d'une Association
 -------------------------------------------------
 

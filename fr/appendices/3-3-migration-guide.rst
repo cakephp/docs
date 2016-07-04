@@ -92,6 +92,8 @@ Améliorations de l'ORM
 * ``RulesChecker::validCount()`` a été ajoutée. Cette nouvelle méthode permet
   d'ajouter des règles qui vérifient le nombre d'enregistrements associés d'une
   entity.
+* L'option ``partialNullsPass`` a été ajoutée à la règle ``existsIn``. Cette
+  option permet aux règles de passer quand des colonnes sont nulles.
 
 FormHelper
 ==========
