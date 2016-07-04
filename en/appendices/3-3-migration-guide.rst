@@ -99,7 +99,7 @@ details.
 Cache Shell Added
 =================
 
-To help you better manage cached data from a CLI environment, a shell command
+To help you better manage cached data from the CLI environment, a shell command
 has been added that exposes methods for clearing cached data::
 
     // Clear one cache config
