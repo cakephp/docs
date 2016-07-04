@@ -494,10 +494,10 @@ contexts (i.e. JavaScript). ::
 Paginating Multiple Results
 ===========================
 
-If you are :ref:`paginating-multiple-queries` you'll need to set the ``model``
-option when generating pagination related elements. You can either use the
-``model`` option on every method call you make to ``PaginatorHelper``, or use
-``options()`` to set the default model::
+If you are :ref:`paginating-multiple-queries <paginating multiple queries>`
+you'll need to set the ``model`` option when generating pagination related
+elements. You can either use the ``model`` option on every method call you make
+to ``PaginatorHelper``, or use ``options()`` to set the default model::
 
     // Pass the model option
     echo $this->Paginator->sort('title', ['model' => 'Articles']);
