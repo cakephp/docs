@@ -189,14 +189,14 @@ Paginating Multiple Queries
 ===========================
 
 You can paginate multiple models in a single controller action, using the
-``requestScope`` option::
+``scope`` option::
 
     // In a controller action
-    $articles = $this->paginate($this->Articles, ['requestScope' => 'article']);
-    $tags = $this->paginate($this->Tags, ['requestScope' => 'tag']);
+    $articles = $this->paginate($this->Articles, ['scope' => 'article']);
+    $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
     $this->set(compact('articles', 'tags'));
 
-The ``requestScope`` option will result in ``PaginatorComponent`` looking in
+The ``scope`` option will result in ``PaginatorComponent`` looking in
 scoped query string parameters. For example, the following URL could be used to
 paginate both tags and articles at the same time::
 
