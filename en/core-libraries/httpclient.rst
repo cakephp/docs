@@ -108,7 +108,7 @@ the specific multipart HTTP request you want::
     $response = $http->post(
         'http://example.com/api',
         (string)$data,
-        ['headers' => ['Content-Type' => 'multipart/related']]
+        ['headers' => ['Content-Type' => $data->contentType()]]
     );
 
 Sending Request Bodies
