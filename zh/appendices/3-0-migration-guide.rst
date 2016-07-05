@@ -9,5 +9,5 @@
     `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
     button to directly propose your changes.
 
-    You can referer to the english version in the select top menu to have
+    You can referer to the English version in the select top menu to have
     information about this page's topic.
