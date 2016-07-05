@@ -91,7 +91,7 @@ Table names corresponding to CakePHP models are plural and underscored. The
 underlying tables for the above mentioned models would be ``people``,
 ``big_people``, and ``really_big_people``, respectively.
 
-The convention is to use english words for table and column names. If you use
+The convention is to use English words for table and column names. If you use
 words in another language, CakePHP might not be able to process the right
 inflections (from singular to plural and vice-versa).
 For some reason, if you need to add your own language rules for some words, you
