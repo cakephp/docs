@@ -11,7 +11,7 @@ Basics.php
   It directly echos just as ``debug()`` does. But only if debug level is on.
 - New i18n functions have been added. The new functions allow you to include
   message context which allows you disambiguate possibly confusing message
-  strings. For example 'read' can mean multiple things in english depending on
+  strings. For example 'read' can mean multiple things in English depending on
   the context. The new ``__x``, ``__xn``, ``__dx``, ``__dxn``, ``__dxc``,
   ``__dxcn``, and ``__xc`` functions provide access to the new features.
 
