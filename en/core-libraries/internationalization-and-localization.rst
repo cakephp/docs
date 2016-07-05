@@ -144,7 +144,7 @@ domain::
 
 Sometimes translations strings can be ambiguous for people translating them.
 This can happen if two strings are identical but refer to different things. For
-example, 'letter' has multiple meanings in english. To solve that problem, you
+example, 'letter' has multiple meanings in English. To solve that problem, you
 can use the :php:func:`__x()` function::
 
     echo __x('written communication', 'He read the first letter');
