@@ -27,7 +27,7 @@ adresse e-mail de travail::
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
     excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
 
-Récupérer un clone du code source de CakePHP sous github.:
+Récupérer un clone du code source de CakePHP sous GitHub.:
 
 * Si vous n'avez pas de compte `github <http://github.com>`_ , créez en un.
 * Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
@@ -107,9 +107,9 @@ Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branch
 
     git push origin <branch-name>
 
-Une fois que votre branche est sur github, vous pouvez discuter de cela sur la
+Une fois que votre branche est sur GitHub, vous pouvez discuter de cela sur la
 mailing-liste `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
-soumettre un pull request sur github.
+soumettre un pull request sur GitHub.
 
 Choisir l'emplacement dans lequel vos changements seront fusionnés
 ------------------------------------------------------------------

@@ -2,7 +2,7 @@ Código
 ######
 
 Patches e pull requests são as melhores formas de colaborar com o CakePHP.
-Pull requests podem ser feitos através do github e geralmente é a melhor forma de contribuir.
+Pull requests podem ser feitos através do GitHub e geralmente é a melhor forma de contribuir.
 
 Configuração Inicial
 ====================
@@ -24,7 +24,7 @@ Configure suas informações pessoais com seu nome e e-mail::
     Se você é novo com Git, é recomendável que você leia o excelente e gratuito
     `ProGit <http://git-scm.com/book/>`_ book.
 
-Faça o clone do código do CakePHP diretamente do github:
+Faça o clone do código do CakePHP diretamente do GitHub:
 
 * Se você não tem uma conta no `github <http://github.com>`_, crie uma.
 * Faça um Fork do `repositório CakePHP <http://github.com/cakephp/cakephp>`_ clicando
@@ -97,9 +97,9 @@ sua branch para seu fork::
 
     git push origin <branch-name>
 
-Agora que sua branch está no github, você pode discutir as alterações
+Agora que sua branch está no GitHub, você pode discutir as alterações
 na lista de discussão `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
-enviar um pull request no github.
+enviar um pull request no GitHub.
 
 .. note::
 

@@ -18,7 +18,7 @@ ici pour votre confort :
 
     Vous pouvez trouver des sources de données contributives de la communauté
     supplémentaires dans le
-    `Dépôt de Sources de Données CakePHP sur github <https://github.com/cakephp/datasources/tree/2.0>`_.
+    `Dépôt de Sources de Données CakePHP sur GitHub <https://github.com/cakephp/datasources/tree/2.0>`_.
 
 Quand vous spécifiez une configuration de connexion à une base de données
 dans ``app/Config/database.php``, CakePHP utilise de manière transparente la
