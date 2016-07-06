@@ -229,30 +229,29 @@ log
     Set to ``true`` to enable query logging. When enabled queries will be logged
     at a ``debug`` level with the ``queriesLog`` scope.
 quoteIdentifiers
-    Set to ``true`` if you are using reserved words or special characters in your
-    table or column names. Enabling this setting will result in queries built using the
-    :doc:`/orm/query-builder` having identifiers quoted when creating SQL. It should be
-    noted that this decreases performance because each query needs to be traversed
-    and manipulated before being executed.
+    Set to ``true`` if you are using reserved words or special characters in
+    your table or column names. Enabling this setting will result in queries
+    built using the :doc:`/orm/query-builder` having identifiers quoted when
+    creating SQL. It should be noted that this decreases performance because
+    each query needs to be traversed and manipulated before being executed.
 flags
     An associative array of PDO constants that should be passed to the
     underlying PDO instance. See the PDO documentation for the flags supported
     by the driver you are using.
 cacheMetadata
-    Either boolean ``true``, or a string containing the cache configuration to store
-    meta data in. Having metadata caching disable is not advised and can result
-    in very poor performance. See the :ref:`database-metadata-cache` section
-    for more information.
+    Either boolean ``true``, or a string containing the cache configuration to
+    store meta data in. Having metadata caching disable is not advised and can
+    result in very poor performance. See the :ref:`database-metadata-cache`
+    section for more information.
 
 At this point, you might want to take a look at the
-:doc:`/intro/conventions`. The correct
-naming for your tables (and the addition of some columns) can score
-you some free functionality and help you avoid configuration. For
-example, if you name your database table big\_boxes, your table
-BigBoxesTable, and your controller BigBoxesController, everything will
-work together automatically. By convention, use underscores, lower case,
-and plural forms for your database table names - for example:
-bakers, pastry\_stores, and savory\_cakes.
+:doc:`/intro/conventions`. The correct naming for your tables (and the addition
+of some columns) can score you some free functionality and help you avoid
+configuration. For example, if you name your database table big\_boxes, your
+table BigBoxesTable, and your controller BigBoxesController, everything will
+work together automatically. By convention, use underscores, lower case, and
+plural forms for your database table names - for example: bakers,
+pastry\_stores, and savory\_cakes.
 
 .. php:namespace:: Cake\Datasource
 
@@ -261,9 +260,9 @@ Managing Connections
 
 .. php:class:: ConnectionManager
 
-The ``ConnectionManager`` class acts as a registry to access database connections your
-application has. It provides a place that other objects can get references to
-existing connections.
+The ``ConnectionManager`` class acts as a registry to access database
+connections your application has. It provides a place that other objects can get
+references to existing connections.
 
 Accessing Connections
 ---------------------
@@ -586,8 +585,8 @@ Preparing a Statement
 ---------------------
 
 You can create a statement object using ``execute()``, or ``prepare()``. The
-``execute()`` method returns a statement with the provided values bound to it. While
-``prepare()`` returns an incomplete statement::
+``execute()`` method returns a statement with the provided values bound to it.
+While ``prepare()`` returns an incomplete statement::
 
     // Statements from execute will have values bound to them already.
     $stmt = $conn->execute(

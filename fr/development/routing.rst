@@ -19,9 +19,9 @@ jour tous vos codes.
 Tour Rapide
 ===========
 
-Cette section va vous apprendre les utilisations les plus
-habituelles du Router de CakePHP. Typiquement si vous voulez afficher quelque
-chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
+Cette section va vous apprendre les utilisations les plus habituelles du Router
+de CakePHP. Typiquement si vous voulez afficher quelque chose en page d'accueil,
+vous ajoutez ceci au fichier **routes.php**::
 
     use Cake\Routing\Router;
 
@@ -33,10 +33,10 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
     // En utilisant la méthode statique.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-``Router`` fournit deux interfaces pour connecter les routes. La méthode statique
-est une interface retro-compatible, alors que le builder scopé (lié la portée)
-offre une syntaxe plus laconique pour construire des routes multiples, et de
-meilleures performances.
+``Router`` fournit deux interfaces pour connecter les routes. La méthode
+statique est une interface retro-compatible, alors que le builder scopé (lié la
+portée) offre une syntaxe plus laconique pour construire des routes multiples,
+et de meilleures performances.
 
 Ceci va exécuter la méthode ``index`` dans ``ArticlesController`` quand la page
 d'accueil de votre site est visitée. Parfois vous avez besoin de routes
@@ -799,15 +799,15 @@ Changer les Actions du Controller
 
 Vous devrez peut-être modifier le nom des actions du controller qui sont
 utilisés lors de la connexion des routes. Par exemple, si votre action
-``edit()`` est nommée ``update()``, vous pouvez utiliser la clé ``actions`` pour
+``edit()`` est nommée ``put()``, vous pouvez utiliser la clé ``actions`` pour
 renommer vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['edit' => 'update', 'add' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'create']
     ]);
 
-Le code ci-dessus va utiliser ``edit()`` pour l'action update, et ``create()``
-au lieu de ``add()``.
+Le code ci-dessus va utiliser ``put()`` pour l'action ``edit()``, et
+``create()`` au lieu de ``add()``.
 
 Mapper des Routes de Ressource Supplémentaires
 ----------------------------------------------
