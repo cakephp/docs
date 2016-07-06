@@ -97,7 +97,7 @@ expect from CakePHP:
 +-------------------------------+--------------------------+
 | Add a default argument value  | Yes                      |
 | to an existing method         |                          |
-| argument.                     |                          |
+| argument                      |                          |
 +-------------------------------+--------------------------+
 
 Working on CakePHP
@@ -164,8 +164,9 @@ In a minor release you can:
 
 .. [1] Your code *may* be broken by minor releases. Check the migration guide
        for details.
-.. [2] You can change a class/method name as long as the old name remains available.
-       This is generally avoided unless renaming has significant benefit.
+.. [2] You can change a class/method name as long as the old name remains
+       available. This is generally avoided unless renaming has significant
+       benefit.
 .. [3] Avoid whenever possible. Any removals need to be documented in
        the migration guide.
 
