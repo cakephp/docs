@@ -53,14 +53,18 @@ Toda vez que for trabalhar em um *bug*, *feature* ou melhoria, crie um *branch*
 específico.
 
 O *branch* criado deve ser baseado na versão que deseja atualizar. Por exemplo,
-se você estiver corrigindo um *bug* na versão ``2.3.``, você deve usar o
-*branch* ``2.3`` como base. Se sua alteração for uma correção de *bug* para a
-versão estável atual, você deve usar o *branch* ``master``. Isso faz o *merging*
+se você estiver corrigindo um *bug* na versão ``3.x``, você deve usar o
+*branch* ``master`` como base. Se sua alteração for uma correção de *bug* para a
+versão ``2.x``, você deve usar o *branch* ``2.x``. Isso faz o *merging*
 das suas alterações uma tarefa muito mais simples futuramente::
 
-    # corrigindo um bug na versão 2.3
+    # corrigindo um bug na versão 3.x
     git fetch upstream
-    git checkout -b ticket-1234 upstream/2.3
+    git checkout -b ticket-1234 upstream/master
+
+    # corrigindo um bug na versão 2.x
+     git fetch upstream
+     git checkout -b ticket-1234 upstream/2.x
 
 .. tip::
 
@@ -68,7 +72,7 @@ das suas alterações uma tarefa muito mais simples futuramente::
     ou da *feature* é uma boa convenção, e.g. ticket-1234, feature-awesome
 
 A cima criamos um *branch* local baseado no *branch* do *upstream* (CakePHP)
-2.3. Trabalhe na sua correção/atualização e faça quantos *commits* precisar, mas
+2.x. Trabalhe na sua correção/atualização e faça quantos *commits* precisar, mas
 tenha em mente o seguinte:
 
 * Siga as :doc:`/contributing/cakephp-coding-conventions`.
@@ -83,11 +87,12 @@ Enviando um pull request
 Uma vez que suas alterações estiverem concluídas e prontas para serem integradas
 ao CakePHP, você deve atualizar seu *branch*::
 
-    git checkout 2.3
+    # Correção por rebase a partir do topo do branch master
+    git checkout master
     git fetch upstream
-    git merge upstream/2.3
+    git merge upstream/master
     git checkout <branch_name>
-    git rebase 2.3
+    git rebase master
 
 Isso irá requisitar e mesclar quaisquer alterações que aconteceram no CakePHP
 desde que você começou suas alterações, e então executar *rebase* ou replicar
@@ -104,6 +109,11 @@ Verifique se todos os seus testes continuam a passar e então faça *push* do se
 
     git push origin <nome-do-branch>
 
+Se você usou *rebase* após enviar as atualizações do seu *branch* por *push*,
+você precisará forçar o *push*::
+
+    git push --force origin <nome-do-branch>
+
 Uma vez que o seu *branch* estiver no Github, você pode enviar um *pull request*
 .
 
@@ -119,12 +129,12 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
   atual, escolhe o *branch* **master** como seu alvo.
 * Se sua alteração for uma **feature**, então você deve escolher o *branch*
   referente ao próximo número de versão. Por exemplo, se o *branch* atual
-  estável for ``2.2.2``, o *branch* a receber novas funcionalidades será o
-  ``2.3``.
+  estável for ``3.2.10``, o *branch* a receber novas funcionalidades será o
+  ``3.next``.
 * Se sua alteração quebra funcionalidades existentes, ou API's, então você
   deverá escolher o próximo *major release*. Por exemplo, se o branch estável
-  atual for ``2.2.2``, então a versão na qual o comportamento pode ser quebrado
-  será na versão ``3.0``.
+  atual for ``3.2.2``, então a versão na qual o comportamento pode ser quebrado
+  será na versão ``4.x``.
 
 
 .. note::
