@@ -143,8 +143,8 @@ Em um *minor release* você pode:
 | Adicionar uma propriedade     | Sim                      |
 | protegida                     |                          |
 +-------------------------------+--------------------------+
-| Remover uma propriedade   | Sim [3]_                     |
-| protegida                 |                              |
+| Remover uma propriedade       | Sim [3]_                 |
+| protegida                     |                          |
 +-------------------------------+--------------------------+
 | **Métodos**                                              |
 +-------------------------------+--------------------------+
