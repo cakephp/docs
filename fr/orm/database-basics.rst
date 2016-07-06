@@ -211,7 +211,10 @@ username
 password
     Le mot de passe pour le compte.
 database
-    Le nom de la base de données à utiliser pour cette connexion.
+    Le nom de la base de données à utiliser pour cette connexion. Éviter
+    d'utiliser ``.`` dans votre nom de base de données. Comme cela complique
+    l'identifier quoting, CakePHP ne supporte pas ``.`` dans les noms de base de
+    données.
 port (*optionnel*)
     Le port TCP ou le socket Unix utilisé pour se connecter au serveur.
 encoding
