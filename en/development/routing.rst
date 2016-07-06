@@ -441,7 +441,7 @@ you to define name prefixes in each scope::
 You can also use the ``_namePrefix`` option inside nested scopes and it works as
 you'd expect::
 
-    Router::plugin('Contacts', ['_namePrefix' => 'contacts:', function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // This route's name will be `contacts:api:ping`
             $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
