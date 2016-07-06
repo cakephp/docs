@@ -198,7 +198,9 @@ username
 password
     The password for the account.
 database
-    The name of the database for this connection to use.
+    The name of the database for this connection to use. Avoid using ``.`` in
+    your database name. Because of how it complicates identifier quoting CakePHP
+    does not support ``.`` in database names.
 port (*optional*)
     The TCP port or Unix socket used to connect to the server.
 encoding
@@ -251,10 +253,6 @@ BigBoxesTable, and your controller BigBoxesController, everything will
 work together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
-
-.. note::
-    
-    Do not use periods in `database` option. Handling this scenario would complicate how to quote identifiers in all cases so CakePHP doesn't support it.
 
 .. php:namespace:: Cake\Datasource
 
