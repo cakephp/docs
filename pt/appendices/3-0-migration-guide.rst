@@ -24,7 +24,7 @@ Ferramenta de atualização
 Enquanto este documento cobre todas as alterações e melhorias feitas no
 CakePHP 3.0, nós também criamos uma aplicação de console para ajudar você
 a completar mais facilmente algumas das alterações mecânicas que consomem tempo.
-Você pode `pegar a ferramenta de atualização no github <https://github
+Você pode `pegar a ferramenta de atualização no GitHub <https://github
 .com/cakephp/upgrade>`_.
 
 Layout do diretório da aplicação
