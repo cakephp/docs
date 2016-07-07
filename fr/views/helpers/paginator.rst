@@ -395,8 +395,8 @@ supportées sont:
   :php:meth:`PaginatorHelper::defaultModel()`. Ceci est utilisé en conjonction
   avec la chaîne personnalisée de l'option 'format'.
 
-Modification des options que le Helper Paginator utilise
-========================================================
+Configurer les Options de Pagination
+====================================
 
 .. php:method:: options($options = [])
 
@@ -435,20 +435,19 @@ supportées sont:
 * ``model`` Le nom du model en cours de pagination, par défaut à
   :php:meth:`PaginatorHelper::defaultModel()`.
 
-La Pagination dans les Vues
-===========================
+Exemple d'Utilisation
+=====================
 
-C'est à vous de décider comment afficher les enregistrements à
-l'utilisateur, mais la plupart des fois, ce sera fait à l'intérieur des
-tables HTML. L'exemple ci-dessous suppose une présentation
-tabulaire, mais le Helper Paginator disponible dans les vues
-n'a pas toujours besoin d'être limité en tant que tel.
+C'est à vous de décider comment afficher les enregistrements à l'utilisateur,
+mais la plupart des fois, ce sera fait à l'intérieur des tables HTML. L'exemple
+ci-dessous suppose une présentation tabulaire, mais le Helper Paginator
+disponible dans les vues n'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
 `PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
-dans l' API. Comme mentionné précédemment, le Helper Paginator
-offre également des fonctionnalités de tri qui peuvent être intégrées dans vos
-en-têtes de colonne de table:
+dans l' API. Comme mentionné précédemment, le Helper Paginator offre également
+des fonctionnalités de tri qui peuvent être intégrées dans vos en-têtes de
+colonne de table:
 
 .. code-block:: php
 
@@ -466,9 +465,9 @@ en-têtes de colonne de table:
         <?php endforeach; ?>
     </table>
 
-Les liens en retour de la méthode ``sort()`` du ``PaginatorHelper``
-permettent aux utilisateurs de cliquer sur les entêtes de table pour
-faire basculer l'ordre de tri des données d'un champ donné.
+Les liens en retour de la méthode ``sort()`` du ``PaginatorHelper`` permettent
+aux utilisateurs de cliquer sur les entêtes de table pour faire basculer l'ordre
+de tri des données d'un champ donné.
 
 Il est aussi possible de trier une colonne basée sur des associations:
 
@@ -487,9 +486,8 @@ Il est aussi possible de trier une colonne basée sur des associations:
         <?php endforeach; ?>
     </table>
 
-L'ingrédient final pour l'affichage de la pagination dans les vues
-est l'addition de pages de navigation, aussi fournies par le
-Helper de Pagination::
+L'ingrédient final pour l'affichage de la pagination dans les vues est
+l'addition de pages de navigation, aussi fournies par le Helper de Pagination::
 
     // Montre les numéros de page
     <?= $this->Paginator->numbers() ?>
@@ -501,8 +499,8 @@ Helper de Pagination::
     // affiche X et Y, ou X est la page courante et Y est le nombre de pages
     <?= $this->Paginator->counter() ?>
 
-Le texte de sortie de la méthode counter() peut également être personnalisé
-en utilisant des marqueurs spéciaux::
+Le texte de sortie de la méthode counter() peut également être personnalisé en
+utilisant des marqueurs spéciaux::
 
     <?= $this->Paginator->counter([
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
@@ -518,6 +516,30 @@ Retourne par défaut une chaine de l'URL de pagination complète pour utiliser
 dans contexte non-standard(ex. JavaScript)::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+.. _paginator-helper-multiple:
+
+Paginer Plusieurs Résultats
+===========================
+
+Si vous :ref:`paginating-multiple-queries <faîtes des requêtes de pagination
+multiple>` vous devrez définir l'option ``model`` quand vous générez les
+éléments de la pagination. Vous pouvez soit utiliser l'option ``model`` sur
+chaque appel de méthode que vous faîtes au ``PaginatorHelper``, soit utiliser
+``options()`` pour définir le model par défaut::
+
+    // Passe l'option model
+    echo $this->Paginator->sort('title', ['model' => 'Articles']);
+
+    // Définit le model par défaut.
+    $this->Paginator->options(['defaultModel' => 'Articles']);
+    echo $this->Paginator->sort('title');
+
+En utilisant l'option ``model``, ``PaginatorHelper`` va automatiquement utiliser
+le ``scope`` défini quand la reqûete a été paginée.
+
+.. versionadded:: 3.3.0
+    La pagination multiple a été ajoutée dans la version 3.3.0
 
 .. meta::
     :title lang=fr: PaginatorHelper
