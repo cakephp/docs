@@ -1,10 +1,6 @@
 Welcome
 #######
 
-.. warning::
-    This version of the documentation is for CakePHP 3.x. Go `here for the
-    CakePHP 2.x documentation <http://book.cakephp.org/2.0/>`_.
-
 CakePHP 3 is a web development framework running on **PHP 7** (min. PHP 5.5.9).
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP 3.

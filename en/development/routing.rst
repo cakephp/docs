@@ -9,10 +9,10 @@ Routing provides you tools that map URLs to controller actions. By defining
 routes, you can separate how your application is implemented from how its URL's
 are structured.
 
-Routing in CakePHP also encompasses the idea of reverse routing,
-where an array of parameters can be transformed into a URL string.
-By using reverse routing, you can re-factor your application's
-URL structure without having to update all your code.
+Routing in CakePHP also encompasses the idea of reverse routing, where an array
+of parameters can be transformed into a URL string. By using reverse routing,
+you can re-factor your application's URL structure without having to update all
+your code.
 
 .. index:: routes.php
 
@@ -37,10 +37,10 @@ this to your **routes.php** file::
 a backwards compatible interface, while the scoped builders offer more terse
 syntax when building multiple routes, and better performance.
 
-This will execute the index method in the ``ArticlesController`` when the homepage
-of your site is visited. Sometimes you need dynamic routes that will accept
-multiple parameters, this would be the case, for example of a route for viewing
-an article's content::
+This will execute the index method in the ``ArticlesController`` when the
+homepage of your site is visited. Sometimes you need dynamic routes that will
+accept multiple parameters, this would be the case, for example of a route for
+viewing an article's content::
 
     Router::connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
@@ -364,9 +364,8 @@ functions::
         );
     });
 
-Now thanks to the reverse routing capabilities, you can pass
-in the URL array like below and CakePHP will know how to form the URL
-as defined in the routes::
+Now thanks to the reverse routing capabilities, you can pass in the URL array
+like below and CakePHP will know how to form the URL as defined in the routes::
 
     // view.ctp
     // This will return a link to /blog/3-CakePHP_Rocks
@@ -391,9 +390,9 @@ Using Named Routes
 ------------------
 
 Sometimes you'll find typing out all the URL parameters for a route too verbose,
-or you'd like to take advantage of the performance improvements that named routes
-have. When connecting routes you can specifiy a ``_name`` option, this option
-can be used in reverse routing to identify the route you want to use::
+or you'd like to take advantage of the performance improvements that named
+routes have. When connecting routes you can specifiy a ``_name`` option, this
+option can be used in reverse routing to identify the route you want to use::
 
     // Connect a route with a name.
     $routes->connect(
@@ -442,7 +441,7 @@ you to define name prefixes in each scope::
 You can also use the ``_namePrefix`` option inside nested scopes and it works as
 you'd expect::
 
-    Router::plugin('Contacts', ['_namePrefix' => 'contacts:', function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // This route's name will be `contacts:api:ping`
             $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
@@ -629,7 +628,7 @@ Routing File Extensions
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-To handle different file extensions with your routes, you can add the following 
+To handle different file extensions with your routes, you can add the following
 to your routes file::
 
     Router::scope('/', function ($routes) {
@@ -769,14 +768,14 @@ Changing the Controller Actions Used
 ------------------------------------
 
 You may need to change the controller action names that are used when connecting
-routes. For example, if your ``edit()`` action is called ``update()`` you can
+routes. For example, if your ``edit()`` action is called ``put()`` you can
 use the ``actions`` key to rename the actions used::
 
     $routes->resources('Articles', [
-        'actions' => ['edit' => 'update', 'add' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'create']
     ]);
 
-The above would use ``update()`` for the ``edit()`` action, and ``create()``
+The above would use ``put()`` for the ``edit()`` action, and ``create()``
 instead of ``add()``.
 
 Mapping Additional Resource Routes
@@ -1123,7 +1122,7 @@ example)::
         }
         return $params;
     });
-    
+
 This will alter the following route::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);

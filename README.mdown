@@ -183,7 +183,9 @@ Translations
 
 Contributing translations requires that you make a new directory using the two
 letter name for your language. As content is translated, directories mirroring
-the english content should be created with localized content.
+the English content should be created with localized content. For more info,
+please,
+[click here](http://book.cakephp.org/3.0/en/contributing/documentation.html#new-translation-language).
 
 Making Search Work Locally
 --------------------------

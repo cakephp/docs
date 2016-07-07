@@ -113,7 +113,7 @@ spécifique que vous souhaitez::
     $response = $http->post(
         'http://example.com/api',
         (string)$data,
-        ['headers' => ['Content-Type' => 'multipart/related']]
+        ['headers' => ['Content-Type' => $data->contentType()]]
     );
 
 Envoyer des Corps de Requête

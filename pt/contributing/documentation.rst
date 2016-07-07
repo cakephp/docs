@@ -3,10 +3,10 @@ Documentação
 
 Contribuir com a documentação é simples. Os arquivos estão hospedados em
 https://github.com/cakephp/docs. Sinta-se a vontade para copiar o repositório,
-adicionar suas alterações/melhorias/traduções e emitir um pull request.
-Você também pode editar a documentação online com o Github, mesmo sem ter que
-fazer download dos arquivos -- O botão "IMPROVE THIS DOC" presente em qualquer
-página vai direcioná-lo para o editor online do Github.
+adicionar suas alterações/melhorias/traduções e enviar um *pull request*.
+Você também pode editar a documentação online pelo Github, mesmo sem ter que
+fazer *download* dos arquivos -- O botão "IMPROVE THIS DOC" presente na lateral
+direita em qualquer página vai direcioná-lo para o editor online do Github.
 
 A documentação do CakePHP é
 `continuamente integrada <http://en.wikipedia.org/wiki/Continuous_integration>`_,
@@ -28,7 +28,7 @@ haver momentos que um arquivo de tradução não está atualizado. Você deve se
 considerar a versão em inglês como a prevalecente.
 
 Se o seu idioma não está dentre os listados, por favor nos contate pelo Github e
-nós vamos considerar criar um diretório para tal. As seções a seguir são as
+nós vamos considerar incluí-lo. As seções a seguir são as
 primeiras que você deve considerar traduzir, pois seus arquivos não mudam
 frequentemente:
 
@@ -36,14 +36,14 @@ frequentemente:
 - intro.rst
 - quickstart.rst
 - installation.rst
-- /intro folder
-- /tutorials-and-examples folder
+- /intro (todo o diretório)
+- /tutorials-and-examples (todo o diretório)
 
 Lembrete para administradores de documentação
 ---------------------------------------------
 
 A estrutura de todos os diretórios de idioma devem espelhar a estrutura da
-matriz inglesa. Se a estrutura da documentação inglesa sofrer mudanças, as
+matriz em inglês. Se a estrutura da documentação inglesa sofrer mudanças, as
 mesmas devem ser aplicadas em outros idiomas.
 
 Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
@@ -59,12 +59,12 @@ Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
     .. note::
         Atualmente, a documentação desta página não é suportada em português.
 
-        Por favor, sinta-se a vontade para nos enviar um *pull request* no
+        Por favor, sinta-se a vontade para nos enviar um *pull request* para o
         `Github <https://github.com/cakephp/docs>`_ ou use o botão
         **IMPROVE THIS DOC** para propor suas mudanças diretamente.
 
-        Você pode consultar a versão em inglês desta página através do seletor de
-        idioma localizado ao lado direito do campo de buscas da documentação.
+        Você pode consultar a versão em inglês deste tópico através do seletor de
+        idiomas localizado ao lado direito do campo de buscas da documentação.
 
     // Se os elementos toc-tree existirem na versão inglesa
     .. toctree::
@@ -82,13 +82,13 @@ Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
 Dicas para tradutores
 ---------------------
 
-- Navegue no idioma para o qual deseja traduzir para certificar-se do que já foi
-  ou não traduzido.
+- Navegue pelo idioma para o qual deseja traduzir a fim de certificar-se do que
+  já foi traduzido.
 - Sinta-se a vontade para mergulhar na tradução caso o seu idioma já exista no
   manual.
 - Use `Linguagem Informal <https://pt.wikipedia.org/wiki/Linguagem_coloquial>`_.
 - Traduza o conteúdo e o título ao mesmo tempo.
-- Antes de submeter uma correção, compare à versão inglesa.
+- Antes de submeter uma correção, compare à versão original.
   (se você corrigir algo, mas não indicar uma referência, sua submissão não será
   aceita).
 - Se você precisar escrever um termo em inglês, envolva-o na *tag* ``<em>``.
@@ -101,8 +101,8 @@ Dicas para tradutores
   para caracteres acentuados, o manual usa UTF-8.
 - Não faça alterações significativas na marcação (HTML) ou adicione novo
   conteúdo.
-- Se no conteúdo original estiver faltando alguma informação, submeta uma
-  correção paral tal antes.
+- Se estiver faltando alguma informação no conteúdo original, submeta uma
+  correção paral tal antes de incluí-la em seu idioma.
 
 Guia de formatação para documentação
 ====================================
@@ -112,12 +112,12 @@ A nova documentação do CakePHP é escrita com
 (*Re Structured Text*) é uma sintaxe de marcação de texto simples, semelhante a
 *markdown* ou *textfile*. Para manter a consistência, recomenda-se que ao
 adicionar conteúdo à documentação do CakePHP, você siga as diretrizes aqui
-exemplificadas de como estruturar seu texto.
+exemplificadas.
 
 Comprimento da linha
 --------------------
 
-Linhas de texto devem ser limitadas em 80 colunas. As únicas exceções devem ser
+Linhas de texto devem ser limitadas a 80 colunas. As únicas exceções devem ser
 URLs longas e trechos de código.
 
 Títulos e Seções
@@ -152,13 +152,13 @@ Marcação em linha
 
 * Dois asteríscos: **texto** para ênfase forte (negrito)
   Vamos usá-lo para diretórios, títulos de listas, nomes de tabelas
-  e excluindo a seguinte palavra "*table*".
+  (excluindo a palavra "*tabela*").
 
   * ``**/config/Migrations**``, ``**articles**``, etc.
 
 * Dois *backquotes*: ``texto`` para exemplos de código
   Vamos usá-lo para opções, nomes de colunas de tabelas, nomes de
-  objetos (excluindo a palavra "*object*") e nomes de métodos/funções
+  objetos (excluindo a palavra "*objeto*") e nomes de métodos/funções
   -- incluir "()".
 
   * ````cascadeCallbacks````, ````true````, ````id````,
@@ -217,12 +217,12 @@ recuadas consistentemente.
 Links
 -----
 
-Existem diveros tipos de links, cada um com usos particulares.
+Existem diveros tipos de *links*, cada um com usos particulares.
 
 Links externos
 ~~~~~~~~~~~~~~
 
-Links para documentos externos podem ser feitos com o seguinte::
+*Links* para documentos externos podem ser feitos desta forma::
 
     `Link externo para php.net <http://php.net>`_
 
@@ -236,7 +236,7 @@ Links para outras páginas
     Outras páginas na documentação podem ser referenciadas ao usar a função
     ``:doc:``. Você pode referenciar páginas usando caminho absoluto ou
     relativo. Você deve omitir a extensão ``.rst``. Por exemplo, se a referência
-    ``:doc:`form``` estivesse no documento ``core-helpers/html``, então o link
+    ``:doc:`form``` estivesse no documento ``core-helpers/html``, então o *link*
     referenciaria ``core-helpers/form``. Caso a referência fosse
     ``:doc:`/core-helpers```, iria sempre referenciar ``/core-helpers``
     independente de onde a função fosse usada.
@@ -246,12 +246,12 @@ Links de referências cruzados
 
 .. rst:role:: ref
 
-    Você pode referenciar a qualquer título de um documento usando a função
-    ``:ref:``. O texto não pode ser repetido por toda a documentação. Ao criar
-    títulos para metodos de classes, é melhor usar ``class-method`` como
-    formato.
+    Você pode referenciar qualquer título de um documento usando a função
+    ``:ref:``. O título por sua vez, não pode ser repetido por toda a
+    documentação. Ao criar títulos para métodos de classes, é melhor usar
+    ``class-method`` como formato.
 
-    O uso mais comum é a cima de um título. Exemplo::
+    A posição mais comum é a cima de um título. Exemplo::
 
         .. _label-name:
 
@@ -269,11 +269,11 @@ Prevenindo alertas do Sphinx
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 O Sphinx vai disparar alertas se um arquivo não for referenciado em um
-*toc-tree*. É uma grande forma de garantir que todos os arquivos possuem um
+*toc-tree*. É uma forma de garantir que todos os arquivos possuem um
 *link* referenciado a eles, mas as vezes, você não precisa inserir um *link*
 para um arquivo, e.g. para seus arquivos `epub-contents` and `pdf-contents`.
 Nesses casos, você pode adicionar ``:orphan:`` no topo do arquivo, para suprimir
-alertas de que o arquivo não está no *toc-tree*.
+alertas.
 
 Descrevendo classes e seus conteúdos
 ------------------------------------
@@ -287,7 +287,7 @@ recursos de referência cruzada.
 Descrevendo classes e construtores
 ----------------------------------
 
-Cada diretiva popula o índice, e/ou o índice do *namespace*.
+Cada directiva popula o índice, e/ou o índice do *namespace*.
 
 .. rst:directive:: .. php:global:: name
 
@@ -305,7 +305,7 @@ Cada diretiva popula o índice, e/ou o índice do *namespace*.
 .. rst:directive:: .. php:exception:: name
 
    Esta directiva declara uma nova exceção no *namespace* atual. A
-   assinatura pode incluir argumentos do construtor.
+   assinatura pode incluir argumentos do construtor.
 
 .. rst:directive:: .. php:class:: name
 
@@ -314,7 +314,7 @@ Cada diretiva popula o índice, e/ou o índice do *namespace*.
 
         .. php:class:: MyClass
 
-            Class description
+            Descrição da classe
 
            .. php:method:: method($argument)
 
@@ -365,7 +365,7 @@ porém, algumas vezes você quer escrever a função em dois ou mais arquivos, e
 `debug object` está referenciado em `/development/debugging` e em
 `/core-libraries/global-constants-and-functions`. Nesse caso, você pode
 adicionar ``:noindex:`` abaixo do *debug* da função para suprimir alertas.
-Mantenha apenas uma referência **sem** ``:no-index:`` para manter a função
+Mantenha apenas uma referência **sem** ``:no-index:`` para preservar a função
 referenciada::
 
     .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)

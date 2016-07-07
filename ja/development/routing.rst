@@ -412,7 +412,7 @@ CakePHP はそれぞれのスコープのプレフィックス名を定義する
 ``_namePrefix`` オプションをネストしたスコープの中で使えます。
 またそれは、あなたが期待したように動きます。 ::
 
-    Router::plugin('Contacts', ['_namePrefix' => 'contacts:', function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // このルートの名前は `contacts:api:ping` になります。
             $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);

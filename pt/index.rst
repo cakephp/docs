@@ -1,9 +1,7 @@
 Bem-vindo
 #########
 
-.. warning::
-    Esta versão da documentação é para o CakePHP 3.0. Clique `aqui para a
-    documentação do CakePHP 2.x <http://book.cakephp.org/2.0/pt>`_.
+CakePHP 3 é um framework de desenvolvimento web que funciona com o PHP 7 ou no mínimo PHP 5.5.9. Leia CakePHP num piscar de olhos para obter uma introdução aos fundamentos do CakePHP 3.
 
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
 Esperamos manter um alto nível de qualidade, validade e precisão para a

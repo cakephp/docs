@@ -1,40 +1,37 @@
 Constants & Functions
 #####################
 
-While most of your day-to-day work in CakePHP will be utilizing
-core classes and methods, CakePHP features a number of global
-convenience functions that may come in handy. Many of these
-functions are for use with CakePHP classes (loading model or
-component classes), but many others make working with arrays or
+While most of your day-to-day work in CakePHP will be utilizing core classes and
+methods, CakePHP features a number of global convenience functions that may come
+in handy. Many of these functions are for use with CakePHP classes (loading
+model or component classes), but many others make working with arrays or
 strings a little easier.
 
-We'll also cover some of the constants available in CakePHP
-applications. Using these constants will help make upgrades more
-smooth, but are also convenient ways to point to certain files or
-directories in your CakePHP application.
+We'll also cover some of the constants available in CakePHP applications. Using
+these constants will help make upgrades more smooth, but are also convenient
+ways to point to certain files or directories in your CakePHP application.
 
 Global Functions
 ================
 
-Here are CakePHP's globally available functions. Most of them
-are just convenience wrappers for other CakePHP functionality,
-such as debugging and translating content.
+Here are CakePHP's globally available functions. Most of them are just
+convenience wrappers for other CakePHP functionality, such as debugging and
+translating content.
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
     This function handles localization in CakePHP applications. The
-    ``$string_id`` identifies the ID for a translation. Strings
-    used for translations are treated as format strings for
-    ``sprintf()``. You can supply additional arguments to replace
-    placeholders in your string::
+    ``$string_id`` identifies the ID for a translation. Strings used for
+    translations are treated as format strings for ``sprintf()``. You can supply
+    additional arguments to replace placeholders in your string::
 
         __('You have {0} unread messages', $number);
 
     .. note::
 
         Check out the
-        :doc:`/core-libraries/internationalization-and-localization`
-        section for more information.
+        :doc:`/core-libraries/internationalization-and-localization` section for
+        more information.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
@@ -70,9 +67,9 @@ such as debugging and translating content.
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
-    Returns correct plural form of message identified by ``$singular`` and ``$plural``
-    for count ``$count``. Some languages have more than one form for plural
-    messages dependent on the count.
+    Returns correct plural form of message identified by ``$singular`` and
+    ``$plural`` for count ``$count``. Some languages have more than one form for
+    plural messages dependent on the count.
 
 .. php:function:: __x(string $context, string $msg, mixed $args = null)
 
@@ -99,24 +96,22 @@ such as debugging and translating content.
 
     If the core ``$debug`` variable is ``true``, ``$var`` is printed out.
     If ``$showHTML`` is ``true`` or left as ``null``, the data is rendered to be
-    browser-friendly.
-    If ``$showFrom`` is not set to ``false``, the debug output will start with the line from
-    which it was called.
-    Also see :doc:`/development/debugging`
+    browser-friendly. If ``$showFrom`` is not set to ``false``, the debug output
+    will start with the line from which it was called. Also see
+    :doc:`/development/debugging`
 
 .. php:function:: env(string $key, string $default = null)
 
     .. versionadded:: 3.1.1
         The ``$default`` parameter has been added.
 
-    Gets an environment variable from available sources. Used as a
-    backup if ``$_SERVER`` or ``$_ENV`` are disabled.
+    Gets an environment variable from available sources. Used as a backup if
+    ``$_SERVER`` or ``$_ENV`` are disabled.
 
     This function also emulates ``PHP_SELF`` and ``DOCUMENT_ROOT`` on
-    unsupporting servers. In fact, it's a good idea to always use
-    ``env()`` instead of ``$_SERVER`` or ``getenv()`` (especially if
-    you plan to distribute the code), since it's a full emulation
-    wrapper.
+    unsupporting servers. In fact, it's a good idea to always use ``env()``
+    instead of ``$_SERVER`` or ``getenv()`` (especially if you plan to
+    distribute the code), since it's a full emulation wrapper.
 
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
@@ -137,8 +132,8 @@ such as debugging and translating content.
 
 .. php:function:: pr(mixed $var)
 
-    Convenience wrapper for ``print_r()``, with the addition of
-    wrapping ``<pre>`` tags around the output.
+    Convenience wrapper for ``print_r()``, with the addition of wrapping
+    ``<pre>`` tags around the output.
 
 .. php:function:: pj(mixed $var)
 
