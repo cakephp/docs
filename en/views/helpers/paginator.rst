@@ -371,8 +371,8 @@ There are a number of options for ``counter()``. The supported ones are:
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
   conjunction with the custom string on 'format' option.
 
-Modifying the Options PaginatorHelper Uses
-==========================================
+Configuring Pagination Options
+==============================
 
 .. php:method:: options($options = [])
 
@@ -408,8 +408,8 @@ Sets all the options for the Paginator Helper. Supported options are:
 * ``model`` The name of the model being paginated, defaults to
   :php:meth:`PaginatorHelper::defaultModel()`.
 
-Pagination in Views
-===================
+Example Usage
+=============
 
 It's up to you to decide how to show records to the user, but most
 often this will be done inside HTML tables. The examples below
@@ -488,6 +488,29 @@ By default returns a full pagination URL string for use in non-standard
 contexts (i.e. JavaScript). ::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+.. _paginator-helper-multiple:
+
+Paginating Multiple Results
+===========================
+
+If you are :ref:`paginating-multiple-queries <paginating multiple queries>`
+you'll need to set the ``model`` option when generating pagination related
+elements. You can either use the ``model`` option on every method call you make
+to ``PaginatorHelper``, or use ``options()`` to set the default model::
+
+    // Pass the model option
+    echo $this->Paginator->sort('title', ['model' => 'Articles']);
+
+    // Set the default model.
+    $this->Paginator->options(['defaultModel' => 'Articles']);
+    echo $this->Paginator->sort('title');
+
+By using the ``model`` option, ``PaginatorHelper`` will automatically use the
+``scope`` defined in when the query was paginated.
+
+.. versionadded:: 3.3.0
+    Multiple Pagination was added in 3.3.0
 
 .. meta::
     :title lang=en: PaginatorHelper
