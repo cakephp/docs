@@ -1,7 +1,9 @@
 Bem-vindo
 #########
 
-CakePHP 3 é um framework de desenvolvimento web que funciona com o PHP 7 ou no mínimo PHP 5.5.9. Leia CakePHP num piscar de olhos para obter uma introdução aos fundamentos do CakePHP 3.
+CakePHP 3 é um framework de desenvolvimento web que funciona com o PHP 7 ou no
+mínimo PHP 5.5.9. Leia CakePHP num piscar de olhos para obter uma introdução aos
+fundamentos do CakePHP 3.
 
 O cookbook CakePHP é um projeto aberto de documentação editável pela comunidade.
 Esperamos manter um alto nível de qualidade, validade e precisão para a
@@ -38,8 +40,8 @@ receitas para completar tarefas rotineiras. Se você é iniciante, deveria come�
 com o :doc:`/quickstart` que vai lhe proporcionar um panorama sobre o que
 o CakePHP tem a oferecer e seu funcionamento.
 
-Após concluir o tutorial do Marcador de Livros, você pode pincelar sobre os elementos chave em
-uma aplicação CakePHP:
+Após concluir o tutorial do Marcador de Livros, você pode pincelar sobre os
+elementos chave em uma aplicação CakePHP:
 
 * O :ref:`ciclo de requisição do CakePHP <request-cycle>`
 * As :doc:`convenções </intro/conventions>` que o CakePHP
