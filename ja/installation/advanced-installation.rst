@@ -4,8 +4,9 @@
 PEAR インストーラで CakePHP をインストール
 ==========================================
 
-CakePHP はあなたが PEAR インストーラを使用してインストールできるように PEAR パッケージを公開しています。
-PEAR インストーラでインストールすると、複数のアプリケーションで CakePHP ライブラリを共有するのが簡単になります。
+CakePHP はあなたが PEAR インストーラを使用してインストールできるように
+PEAR パッケージを公開しています。PEAR インストーラでインストールすると、
+複数のアプリケーションで CakePHP ライブラリを共有するのが簡単になります。
 PEAR で CakePHP をインストールするには、次の手順を実行する必要があります。 ::
 
     pear channel-discover pear.cakephp.org
@@ -22,10 +23,42 @@ CakePHP は PHP の ``include_path`` 上に配置されるので、とくに他�
 Composer で CakePHP をインストール
 ==================================
 
+始める前に、最新の PHP バージョンであることを確認してください。
+
+.. code-block:: bash
+
+    php -v
+
+少なくとも PHP 5.3.0 (CLI) 以上がインストールされていなければなりません。
+ウェブサーバー版の PHP もまた 5.3.0 以上でなければりませんし、
+コマンドラインインターフェース (CLI) 版の PHP と同じバージョンがベストです。
+
+Composer のインストール
+-----------------------
+
 Composer は、PHP 5.3 以上向けの依存関係管理ツールです。これは、PEAR インストーラが抱える
 問題の多くを解決し、いろんなバージョンのライブラリをシンプルに管理できるようにします。
-`Packagist <https://packagist.org/>`_ は、Composer でインストール可能なパッケージのメインリポジトリです。
-CakePHP は、Packagist 上に公開された時、 `Composer <http://getcomposer.org>`_ を使用してインストールすることができます。
+`Packagist <https://packagist.org/>`_ は、Composer でインストール可能なパッケージの
+メインリポジトリです。 CakePHP は、Packagist 上に公開された時、
+`Composer <http://getcomposer.org>`_ を使用してインストールすることができます。
+
+- Linux や Mac OS X に Composer をインストール
+
+  #. `公式の Composer ドキュメント <https://getcomposer.org/download/>`_ に書かれた
+     インストーラスクリプトを実行し、Composer をインストールするために指示に従ってください。
+  #. composer.phar を指定したパスのディレクトリに移すために以下のコマンドを実行してください。 ::
+
+       mv composer.phar /usr/local/bin/composer
+
+- Windows に Composer をインストール
+
+  Windows 環境なら、 `こちら <https://github.com/composer/windows-setup/releases/>`__ から
+  Windows インストーラをダウンロードできます。Composer の Windows インストーラについての詳細は、
+  `README <https://github.com/composer/windows-setup>`__ をご覧ください。
+
+CakePHP プロジェクトの作成
+--------------------------
+
 CakePHP をインストールする前に ``composer.json`` ファイルをセットアップしましょう。
 CakePHP アプリケーションのための composer.json ファイルは次のようになります。 ::
 

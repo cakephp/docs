@@ -221,7 +221,7 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
     ``https://example.com`` のような完全な URL プリフィクス。
 
     .. deprecated:: 2.4
-        この定数は非推奨です。代わりに :php:meth:`Router::fullbaseUrl()` を使用してください。
+        この定数は非推奨です。代わりに :php:meth:`Router::fullBaseUrl()` を使用してください。
 
 .. php:const:: IMAGES
 
