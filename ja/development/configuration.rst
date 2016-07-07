@@ -8,14 +8,14 @@
     While conventions remove the need to configure all of CakePHP, you'll still need
     to configure a few things like your database credentials.
 
-全ての CakePHP に必要な設定は規約によって取り除かれる一方、
+慣習にのっとることで CakePHP のすべてを設定する必要性はないものの、
 データベースの認証のようないくつかの設定をする必要があります。
 
 ..
     Additionally, there are optional configuration options that allow you to swap
     out default values & implementations with ones tailored to your application.
 
-加えて、任意のオプション設定はデフォルトの値やあなたのアプリケーションに合わせて作った実装を置き換えられるようになります。
+加えて、任意のオプション設定はデフォルトの値やあなたのアプリケーションに合わせたものに置き換えられるようになります。
 
 .. index:: app.php, app.php.default
 
@@ -177,8 +177,8 @@ App.fullBaseUrl
     アプリケーションのルートまでのドメイン名 ( プロトコル含む ) です。
     これは完全な URLs を生成する際に利用されます。デフォルトでは、この値は $_SERVER の環境情報から生成されます。
     しかし、パフォーマンスを最適化したり、他人が ``Host`` ヘッダーを操作するのを心配するならば、自分で指定すべきでしょう。
-    CLI 環境 ( シェル ) では `fullBaseUrl` をまるで web サーバが無いかのように $_SERVER から読むことができません。
-    もしシェルから URLs を作成する必要がある場合 (例えばメールの送信) 、あなたはあなた自身でそれを指定する必要があります。    
+    CLI 環境 ( シェル ) では web サーバとの関連が無いので  `fullBaseUrl` を $_SERVER から読むことができません。
+    もしシェルから URLs を作成する必要がある場合 (例えばメールの送信) 、自力で指定する必要があります。    
 
 ..
     App.imageBaseUrl
@@ -249,45 +249,61 @@ Asset.timestamp
 ..
     Database Configuration
 
-データベースの構成
+データベースの設定
 ----------------------
 
 ..
     See the :ref:`Database Configuration <database-configuration>` for information
     on configuring your database connections.
 
-データベース接続の構成は、 :ref:`データベース構成 <database-configuration>` を参照してください。
+データベース接続の設定は :ref:`データベース設定 <database-configuration>` を参照してください。
 
 ..
     Caching Configuration
 
-キャッシュの構成
+キャッシュの設定
 ---------------------
 
 ..
     See the :ref:`Caching Configuration <cache-configuration>` for information on
     configuring caching in CakePHP.
 
-CakePHP のキャッシュ構成は、 :ref:`キャッシュ構成 <cache-configuration>` を参照してください。
+CakePHP のキャッシュ設定は :ref:`キャッシュ設定 <cache-configuration>` を参照してください。
 
+..
+    Error and Exception Handling Configuration
 
-Error and Exception Handling Configuration
+エラーと例外ハンドリング設定
 ------------------------------------------
 
-See the :ref:`Error and Exception Configuration <error-configuration>` for
-information on configuring error and exception handlers.
+..
+    See the :ref:`Error and Exception Configuration <error-configuration>` for
+    information on configuring error and exception handlers.
 
-Logging Configuration
+エラーの設定と例外のハンドリングは :ref:`Error and Exception Configuration <error-configuration>` を参照してください。
+
+..
+    Logging Configuration
+
+ログの設定
 ---------------------
 
-See the :ref:`log-configuration` for information on configuring logging in
-CakePHP.
+..
+    See the :ref:`log-configuration` for information on configuring logging in
+    CakePHP.
 
-Email Configuration
+CakePHP のログの設定は :ref:`log-configuration` を参照してください。
+
+..
+    Email Configuration
+
+メールの設定
 -------------------
 
-See the :ref:`Email Configuration <email-configuration>` for information on
-configuring email presets in CakePHP.
+..
+    See the :ref:`Email Configuration <email-configuration>` for information on
+    configuring email presets in CakePHP.
+
 
 Session Configuration
 ---------------------
