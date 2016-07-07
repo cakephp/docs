@@ -9,15 +9,15 @@ Configuration Initiale
 ======================
 
 Avant de travailler sur les correctifs pour CakePHP, c'est une bonne idée de
-définir la configuration de votre environnement.
-Vous aurez besoin des logiciels suivants:
+définir la configuration de votre environnement. Vous aurez besoin des logiciels
+suivants:
 
 * Git
 * PHP 5.5.9 ou supérieur
 * PHPUnit 3.7.0 ou supérieur
 
-Mettez en place vos informations d'utilisateur avec votre nom/titre et
-adresse e-mail de travail::
+Mettez en place vos informations d'utilisateur avec votre nom/titre et adresse
+e-mail de travail::
 
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
@@ -27,13 +27,13 @@ adresse e-mail de travail::
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire
     l'excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
 
-Récupérez un clone du code source de CakePHP sous GitHub.:
+Récupérez un clone du code source de CakePHP sous GitHub:
 
 * Si vous n'avez pas de compte `github <http://github.com>`_ , créez-en un.
 * Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
   sur le bouton **Fork**.
 
-Après que le fork est fait, clonez votre fork sur votre machine local::
+Après que le fork est fait, clonez votre fork sur votre machine locale::
 
     git clone git@github.com:YOURNAME/cakephp.git
 
@@ -55,14 +55,20 @@ A chaque fois que vous voulez travailler sur un bug, une fonctionnalité ou
 une amélioration, créez une branche avec un sujet.
 
 La branche que vous créez devra être basée sur la version pour laquelle
-votre correctif/amélioration tourne.
-Par exemple, si vous réglez un bug dans ``2.3``, vous pouvez utiliser la
-branche ``2.3`` comme base de votre branche. Cela simplifiera la fusion
-future de vos changements::
+votre correctif/amélioration tourne. Par exemple, si vous réglez un bug dans
+``3.x``, vous pouvez utiliser la branche ``master`` comme base de votre branche.
+Si vos changements ont pou objet de régler un bug pour les séries de version
+2.x, vous devrez utiliser la branche ``2.x``. Cela simplifiera la fusion future
+de vos changements puisque Github ne vous permet pas de modifier la branche
+cible::
 
-    # régler un bug dans 2.3
+    # régler un bug dans 3.x
     git fetch upstream
-    git checkout -b ticket-1234 upstream/2.3
+    git checkout -b ticket-1234 upstream/master
+
+    # régler un bug dans 2.x
+    git fetch upstream
+    git checkout -b ticket-1234 upstream/2.x
 
 .. tip::
 
@@ -70,7 +76,7 @@ future de vos changements::
     au nom de la fonctionnalité, est une bonne convention. Ex: ticket-1234,
     great-fonctionnality.
 
-Ce qui précède va créer une branche locale basée sur la branche (CakePHP) 2.3
+Ce qui précède va créer une branche locale basée sur la branche (CakePHP) 2.x
 en amont. Travaillez sur votre correctif, et faîtes autant de commits que vous
 le souhaitez; mais gardez à l'esprit ce qui suit:
 
@@ -86,11 +92,12 @@ Soumettre un Pull Request
 Une fois que vos changements sont faits et que vous êtes prêts pour la fusion
 dans CakePHP, vous pouvez mettre à jour votre branche::
 
-    git checkout 2.3
+    # Rebaser un fix en haut de la branche master
+    git checkout master
     git fetch upstream
-    git merge upstream/2.3
+    git merge upstream/master
     git checkout <branch_name>
-    git rebase 2.3
+    git rebase master
 
 Cela récupérera et fusionnera tous les changements qui se sont passés dans
 CakePHP depuis que vous avez commencé. Cela rebasera - ou remettra vos
@@ -102,10 +109,15 @@ Résolvez chaque conflit et continuer le rebase::
     git add <filename> # Faîtes ceci pour chaque fichier en conflit.
     git rebase --continue
 
-Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branche
-à votre fork::
+Vérifiez que tous les tests continuent de fonctionner. Ensuite faîtes un push de
+votre branche à votre fork::
 
     git push origin <branch-name>
+
+Si vous avez rebasé après avoir pusher votre branche, vous devrez utiliser le
+push avec l'option force::
+
+    git push --force origin <branch-name>
 
 Une fois que votre branche est sur GitHub, vous pouvez soumettre un pull request
 sur GitHub.
@@ -123,17 +135,16 @@ le pull request est créée.
   de fusion.
 * Si votre changement est une **nouvelle fonctionnalité** ou un ajout
   au framework, alors vous devez choisir la branche avec le nombre de la version
-  prochaine. Par exemple si la version stable courante est ``2.2.2``, la branche
-  acceptant les nouvelles fonctionnalités sera ``2.3``.
-* Si votre changement est une défaillance d'une fonctionnalité existante, ou de
-  l'API, alors vous devrez choisir la prochaine version majeure. Par exemple,
-  si la version courante est ``2.2.2`` alors la prochaine fois qu'un
-  comportement peut être cassé sera dans ``3.0`` ainsi vous devez cibler
-  cette branche.
+  prochaine. Par exemple si la version stable courante est ``3.2.10``, la
+  branche acceptant les nouvelles fonctionnalités sera ``3.next``.
+* Si votre changement casse une fonctionnalité existante, ou casse l'API, alors
+  vous devrez choisir la prochaine version majeure. Par exemple, si la version
+  courante est ``3.2.2`` alors la prochaine fois qu'un comportement peut être
+  cassé sera dans ``4.x`` ainsi vous devez cibler cette branche.
 
 .. note::
 
-    Rappelez-vous que tout le code auquel vous contribuez pour CakePHP sera
+    Souvenez-vous que tout le code auquel vous contribuez pour CakePHP sera
     sous Licence MIT, et la
     `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent

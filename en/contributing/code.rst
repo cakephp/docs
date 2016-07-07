@@ -22,8 +22,8 @@ Set up your user information with your name/handle and working email address::
 
 .. note::
 
-    If you are new to Git, we highly recommend you to read the excellent and free
-    `ProGit <http://git-scm.com/book/>`_ book.
+    If you are new to Git, we highly recommend you to read the excellent and
+    free `ProGit <http://git-scm.com/book/>`_ book.
 
 Get a clone of the CakePHP source code from GitHub:
 
@@ -53,11 +53,11 @@ Each time you want to work on a bug, feature or enhancement create a topic
 branch.
 
 The branch you create should be based on the version that your fix/enhancement
-is for. For example if you are fixing a bug in ``3.x`` you would want to use
-the ``master`` branch as the base for your branch. If your change is a bug fix
-for the 2.x release series, you should use the ``2.x`` branch. This
-makes merging your changes in later much simpler, as github does not let you
-edit the target branch::
+is for. For example if you are fixing a bug in ``3.x`` you would want to use the
+``master`` branch as the base for your branch. If your change is a bug fix for
+the 2.x release series, you should use the ``2.x`` branch. This makes merging
+your changes in later much simpler, as Github does not let you edit the target
+branch::
 
     # fixing a bug on 3.x
     git fetch upstream
@@ -96,15 +96,14 @@ you'll want to update your branch::
 
 This will fetch + merge in any changes that have happened in CakePHP since you
 started. It will then rebase - or replay your changes on top of the current
-code. You might encounter a conflict during the ``rebase``. If the rebase
-quits early you can see which files are conflicted/un-merged with ``git status``.
+code. You might encounter a conflict during the ``rebase``. If the rebase quits
+early you can see which files are conflicted/un-merged with ``git status``.
 Resolve each conflict, and then continue the rebase::
 
     git add <filename> # do this for each conflicted file.
     git rebase --continue
 
-Check that all your tests continue to pass. Then push your branch to your
-fork::
+Check that all your tests continue to pass. Then push your branch to your fork::
 
     git push origin <branch-name>
 
@@ -120,13 +119,13 @@ Choosing Where Your Changes will be Merged Into
 When making pull requests you should make sure you select the correct base
 branch, as you cannot edit it once the pull request is created.
 
-* If your change is a **bugfix** and doesn't introduce new functionality and only
-  corrects existing behavior that is present in the current release. Then
+* If your change is a **bugfix** and doesn't introduce new functionality and
+  only corrects existing behavior that is present in the current release. Then
   choose **master** as your merge target.
 * If your change is a **new feature** or an addition to the framework, then you
   should choose the branch with the next version number. For example if the
-  current stable release is ``3.2.10``, the branch accepting new features will be
-  ``3.next``
+  current stable release is ``3.2.10``, the branch accepting new features will
+  be ``3.next``.
 * If your change is a breaks existing functionality, or API's then you'll have
   to choose then next major release. For example, if the current release is
   ``3.2.2`` then the next time existing behavior can be broken will be in
