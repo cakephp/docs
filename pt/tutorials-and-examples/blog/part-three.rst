@@ -36,7 +36,7 @@ Um arquivo de migração será gerado na pasta /config/Migrations com o seguinte
 
     use Migrations\AbstractMigration;
 
-    class CreateArticlesTable extends AbstractMigration
+    class CreateArticles extends AbstractMigration
     {
         public function change()
         {
@@ -81,7 +81,7 @@ Isso irá gerar o seguinte arquivo no config/Migrations:
 
     use Migrations\AbstractMigration;
 
-    class CreateCategoriesTable extends AbstractMigration
+    class CreateCategories extends AbstractMigration
     {
         public function change()
         {
@@ -376,7 +376,7 @@ O artigo adicionado deveria se parecer como isto:
 .. code-block:: php
 
     <!-- File: src/Template/Articles/add.ctp -->
-    
+
     <h1>Add Article</h1>
     <?php
     echo $this->Form->create($article);
@@ -390,4 +390,3 @@ O artigo adicionado deveria se parecer como isto:
 
 Quando você vai para o endereço ``/yoursite/articles/add`` você deve ver uma lista
 de categorias para escolher.
-
