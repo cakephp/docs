@@ -36,7 +36,7 @@ A migration file will be generated in the **/config/Migrations** folder with the
 
     use Migrations\AbstractMigration;
 
-    class CreateArticlesTable extends AbstractMigration
+    class CreateArticles extends AbstractMigration
     {
         public function change()
         {
@@ -78,7 +78,7 @@ This will generate the following file in **config/Migrations**::
 
     use Migrations\AbstractMigration;
 
-    class CreateCategoriesTable extends AbstractMigration
+    class CreateCategories extends AbstractMigration
     {
         public function change()
         {
