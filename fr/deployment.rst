@@ -4,8 +4,24 @@ Déploiement
 Une fois que votre application CakePHP est terminée, ou même avant que
 vous souhaitiez la déployer, il y a certains points à vérifier.
 
-Mise à jour de config/app.php
-=============================
+Déplacer les Fichiers
+=====================
+
+Nous vous incitons à créer un git commit et de faire un pull ou un clone du
+commit ou du répertoire sur votre serveur et de lancer ``composer install``.
+Bien que cela nécessite quelques connaissances de git et que vous ayez ``git``
+et ``composer`` installés, cette façon de faire vous permettra de gérer les
+dépendances de librairies et les permissions des fichiers et des dossiers.
+
+Rappelez-vous que lors d'un déploiement via FTP, vous devrez au moins mettre les
+bonnes permissions pour les fichiers et les dossiers.
+
+Vous pouvez aussi utiliser cette technique de déploiement pour configurer des
+versions staging ou demo (pre-production) et les garder à jour avec votre
+version de dev.
+
+Modifier le fichier config/app.php
+==================================
 
 Mettre à jour app.php, spécialement la valeur de ``debug`` est extrêmement
 important. Mettre debug = ``false`` désactive un certain nombre de
@@ -107,6 +123,12 @@ répertoires seront copiés à la place des liens symboliques. Vous pouvez aussi
 explicitement copier les répertoires en utilisant::
 
     bin/cake plugin assets copy
+
+Déployer une Mise à Jour
+========================
+
+Après un déploiement ou une mise à jour, vous pouvez aussi lancer ``bin/cake
+orm_cache clear``, qui fait parti du shell :doc:`/console-and-shells/orm-cache`.
 
 .. meta::
     :title lang=fr: Déploiement

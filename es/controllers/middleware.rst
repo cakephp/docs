@@ -1,7 +1,5 @@
-Database Basics
-###############
-
-.. php:namespace:: Cake\Database
+Middleware
+##########
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
@@ -12,4 +10,6 @@ Database Basics
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
 
-.. _database-configuration:
+.. meta::
+    :title lang=es: Http Middleware
+    :keywords lang=es: http, middleware, psr7, request, response, wsgi, application, baseapplication

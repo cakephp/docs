@@ -263,8 +263,8 @@ CLI runner you can use an option to filter test methods::
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
-The filter parameter is used as a case-sensitive regular expression for filtering
-which test methods to run.
+The filter parameter is used as a case-sensitive regular expression for
+filtering which test methods to run.
 
 Generating Code Coverage
 ------------------------
@@ -433,9 +433,9 @@ your models will use the default ``test`` datasource. Fixture datasources must
 be prefixed with ``test`` to reduce the possibility of accidentally truncating
 all your application's data when running tests.
 
-We use ``$fields`` to specify which fields will be part of this table,
-and how they are defined. The format used to define these fields is
-the same used with :php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
+We use ``$fields`` to specify which fields will be part of this table, and how
+they are defined. The format used to define these fields is the same used with
+:php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
 definition are:
 
 type
@@ -470,17 +470,17 @@ created. The format is fairly straight forward, ``$records`` is an array of
 records. Each item in ``$records`` should be a single row. Inside each row,
 should be an associative array of the columns and values for the row. Just keep
 in mind that each record in the $records array must have a key for **every**
-field specified in the ``$fields`` array. If a field for a particular record needs
-to have a ``null`` value, just specify the value of that key as ``null``.
+field specified in the ``$fields`` array. If a field for a particular record
+needs to have a ``null`` value, just specify the value of that key as ``null``.
 
 Dynamic Data and Fixtures
 -------------------------
 
-Since records for a fixture are declared as a class property, you cannot
-use functions or other dynamic data to define fixtures. To solve this problem,
-you can define ``$records`` in the ``init()`` function of your fixture. For
-example if you wanted all the created and modified timestamps to reflect today's
-date you could do the following::
+Since records for a fixture are declared as a class property, you cannot use
+functions or other dynamic data to define fixtures. To solve this problem, you
+can define ``$records`` in the ``init()`` function of your fixture. For example
+if you wanted all the created and modified timestamps to reflect today's date
+you could do the following::
 
     namespace App\Test\Fixture;
 
@@ -557,9 +557,9 @@ use that to retrieve the table name::
 
 Since this uses ``TableRegistry::get()``, it also supports plugin syntax.
 
-You can naturally import your table definition from an existing
-model/table, but have your records defined directly on the fixture
-as it was shown on previous section. For example::
+You can naturally import your table definition from an existing model/table, but
+have your records defined directly on the fixture as it was shown on previous
+section. For example::
 
     class ArticlesFixture extends TestFixture
     {
@@ -619,8 +619,8 @@ Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
 You can control when your fixtures are loaded by setting
-:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load them using
-:php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
+:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load
+them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase
     {
@@ -633,10 +633,10 @@ You can control when your fixtures are loaded by setting
         }
     }
 
-You can load fixtures in subdirectories. Using multiple directories
-can make it easier to organize your fixtures if you have a larger application.
-To load fixtures in subdirectories, simply include the subdirectory name in the
-fixture name::
+You can load fixtures in subdirectories. Using multiple directories can make it
+easier to organize your fixtures if you have a larger application. To load
+fixtures in subdirectories, simply include the subdirectory name in the fixture
+name::
 
     class ArticlesTest extends CakeTestCase
     {
@@ -738,9 +738,9 @@ section for more information on how to run your test case.
 Mocking Model Methods
 ---------------------
 
-There will be times you'll want to mock methods on models when testing them. You should
-use ``getMockForModel`` to create testing mocks of table classes. It avoids issues
-with reflected properties that normal mocks have::
+There will be times you'll want to mock methods on models when testing them. You
+should use ``getMockForModel`` to create testing mocks of table classes. It
+avoids issues with reflected properties that normal mocks have::
 
     public function testSendingEmails()
     {
@@ -773,8 +773,8 @@ For example, testing your controller will also exercise any components, models
 and helpers that would be involved in handling a given request. This gives you a
 more high level test of your application and all its working parts.
 
-Say you have a typical Articles controller, and its corresponding
-model. The controller code looks like::
+Say you have a typical ArticlesController, and its corresponding model. The
+controller code looks like::
 
     namespace App\Controller;
 
@@ -999,6 +999,38 @@ environment.
 .. versionadded:: 3.1.2
     The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
     in 3.1.2
+
+Integration Testing PSR7 Middleware
+-----------------------------------
+
+Integration testing can also be used to test your entire PSR7 application and
+:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+auto-detect the presence of an ``App\Application`` class and automatically
+enable integration testing of your Application. You can toggle this behavior
+with the ``useHttpServer()`` method::
+
+    public function setUp()
+    {
+        // Enable PSR7 integration testing.
+        $this->useHttpServer(true);
+
+        // Disable PSR7 integration testing.
+        $this->useHttpServer(false);
+    }
+
+You can customize the application class name used, and the constructor
+arguments, by using the ``configApplication()`` method::
+
+    public function setUp()
+    {
+        $this->configApplication('App\App', [CONFIG]);
+    }
+
+After enabling the PSR7 mode, and possibly configuring your application class,
+you can use the remaining ``IntegrationTestCase`` features as normal.
+
+.. versionadded:: 3.3.0
+    PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
 Assertion methods
 -----------------
@@ -1250,8 +1282,8 @@ controllers that use it. Here is our example component located in
         }
     }
 
-Now we can write tests to ensure our paginate ``limit`` parameter is being
-set correctly by the ``adjust()`` method in our component. We create the file
+Now we can write tests to ensure our paginate ``limit`` parameter is being set
+correctly by the ``adjust()`` method in our component. We create the file
 **tests/TestCase/Controller/Component/PagematronComponentTest.php**::
 
     namespace App\Test\TestCase\Controller\Component;
@@ -1515,21 +1547,19 @@ would create **tests/TestCase/AllModelTest.php**. Put the following in it::
         }
     }
 
-The code above will group all test cases found in the
-**tests/TestCase/Model/** folder. To add an individual file, use
-``$suite->addTestFile($filename);``. You can recursively add a directory
-for all tests using::
+The code above will group all test cases found in the **tests/TestCase/Model/**
+folder. To add an individual file, use ``$suite->addTestFile($filename);``. You
+can recursively add a directory for all tests using::
 
     $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
-Would recursively add all test cases in the **tests/TestCase/**
-directory.
+Would recursively add all test cases in the **tests/TestCase/** directory.
 
 Creating Tests for Plugins
 ==========================
 
-Tests for plugins are created in their own directory inside the
-plugins folder. ::
+Tests for plugins are created in their own directory inside the plugins
+folder. ::
 
     /src
         /plugins

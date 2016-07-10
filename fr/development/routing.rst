@@ -708,8 +708,6 @@ vues automatiquement en se basant sur les types de contenu.
 Créer des Routes RESTful
 ========================
 
-.. php:staticmethod:: mapResources($controller, $options)
-
 Le router rend facile la génération des routes RESTful pour vos controllers.
 Les routes RESTful sont utiles lorsque vous créez des points de terminaison
 d'API pour vos applications. Si nous voulions permettre l'accès à une base
@@ -774,10 +772,32 @@ Le code ci-dessus va générer une ressource de routes pour ``articles`` et
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
+You can get the ``article_id`` in ``CommentsController`` by::
+
+    $this->request->param('article_id');
+
+By default resource routes map to the same prefix as the containing scope. If
+you have both nested and non-nested resource controllers you can use a different
+controller in each context by using prefixes::
+
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
+            $routes->resources('Comments', ['prefix' => 'articles']);
+        });
+    });
+
+The above would map the 'Comments' resource to the
+``App\Controller\Articles\CommentsController``. Having separate controllers lets
+you keep your controller logic simpler. The prefixes created this way are
+compatible with :ref:`prefix-routing`.
+
 .. note::
 
     Vous pouvez imbriquer autant de ressources que vous le souhaitez, mais il
     n'est pas recommandé d'imbriquer plus de 2 ressources ensembles.
+
+.. versionadded:: 3.3
+    L'option ``prefix`` a été ajoutée à ``resources()`` dans la version 3.3.
 
 Limiter la Création des Routes
 ------------------------------
@@ -1022,8 +1042,6 @@ vous générez des URLs:
 Routing de Redirection
 ======================
 
-.. php:staticmethod:: redirect($route, $url, $options = [])
-
 Le routing de redirection permet de créer des statuts HTTP de redirection
 30x pour les routes entrantes et les pointer vers des URLs différentes.
 C'est utile lorsque vous souhaitez informer les applications clientes qu'une
@@ -1035,13 +1053,15 @@ effectuent une redirection d'en-tête si une correspondance est trouvée. La
 redirection peut se produire vers une destination au sein de votre
 application ou un emplacement à extérieur::
 
-    $routes->redirect(
-        '/home/*',
-        ['controller' => 'Articles', 'action' => 'view'],
-        ['persist' => true]
-        // ou ['persist'=>['id']] pour le routing par défaut où
-        // l'action view attend $id comme paramètre
-    );
+    Router::scope('/', function ($routes) {
+        $routes->redirect(
+            '/home/*',
+            ['controller' => 'Articles', 'action' => 'view'],
+            ['persist' => true]
+            // Or ['persist'=>['id']] for default routing where the
+            // view action expects $id as an argument.
+        );
+    })
 
 Redirige ``/home/*`` vers ``/articles/view`` et passe les paramètres vers
 ``/articles/view``. Utiliser un tableau comme destination de redirection vous
@@ -1049,9 +1069,11 @@ permet d'utiliser différentes routes pour définir où la chaine URL devrait
 être redirigée. Vous pouvez rediriger vers des destinations externes en
 utilisant des chaines URLs pour destination::
 
-    $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    Router::scope('/', function ($routes) {
+        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    });
 
-Cela redirigerai ``/articles/*`` vers ``http://google.com`` avec un statut
+Cela redirigerait ``/articles/*`` vers ``http://google.com`` avec un statut
 HTTP 302.
 
 .. _custom-route-classes:

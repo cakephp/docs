@@ -342,6 +342,9 @@ timestamp
     Maps to the TIMESTAMP type.
 time
     Maps to a TIME type in all databases.
+json
+    Maps to a JSON type if it's available, otherwise it maps to TEXT. The 'json'
+    type was added in 3.3.0
 
 These types are used in both the schema reflection features that CakePHP
 provides, and schema generation features CakePHP uses when using test fixtures.
@@ -441,6 +444,114 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
     }
 
+.. _mapping-custom-datatypes-to-sql-expressions:
+
+Mapping Custom Datatypes to SQL Expressions
+--------------------------------------------
+
+.. versionadded:: 3.3.0
+    Support for mapping custom data types to SQL expressions was added in 3.3.0.
+
+The previous example maps a custom datatype for a 'json' column type which is
+easily represented as a string in a SQL statement. Complex SQL data
+types cannot be represented as strings/integers in SQL queries. When working
+with these datatypes your Type class needs to implement the
+``Cake\Database\Type\ExpressionTypeInterface`` interface. This interface lets
+your custom type represent a value as a SQL expression. As an example, we'll
+build a simple Type class for handling ``POINT`` type data out of MySQL. First
+we'll define a 'value' object that we can use to represent ``POINT`` data in
+PHP::
+
+    // in src/Database/Point.php
+    namespace App\Database;
+
+    // Our value object is immutable.
+    class Point
+    {
+        protected $_lat;
+        protected $_long;
+
+        // Factory method.
+        public static function parse($value)
+        {
+            // Parse the data from MySQL.
+            return new static($part[0], $part[1]);
+        }
+
+        public function __construct($lat, $long)
+        {
+            $this->_lat = $lat;
+            $this->_long = $long;
+        }
+
+        public function lat()
+        {
+            return $this->_lat;
+        }
+
+        public function long()
+        {
+            return $this->_long;
+        }
+    }
+
+With our value object created, we'll need a Type class to map data into this
+value object and into SQL expressions::
+
+    namespace App\Database\Type;
+
+    use App\Database\Point;
+    use Cake\Database\Expression\FunctionExpression;
+    use Cake\Database\Type as BaseType;
+    use Cake\Database\Type\ExpressionTypeInterface;
+
+    class PointType extends BaseType implements ExpressionTypeInterface
+    {
+        public function toPHP($value, Driver $d)
+        {
+            return Point::parse($value);
+        }
+
+        public function marshall($value)
+        {
+            if (is_string($value)) {
+                $value = extract(',', $value);
+            }
+            if (is_array($value)) {
+                return new Point($value[0], $value[1]);
+            }
+            return null;
+        }
+
+        public function toExpression($value)
+        {
+            if ($value instanceof Point) {
+                return new FunctionExpression(
+                    'POINT',
+                    $value->lat(),
+                    $value->long()
+                );
+            }
+            if (is_array($value)) {
+                return new FunctionExpression('POINT', $value[0], $value[1]);
+            }
+            // Handle other cases.
+        }
+    }
+
+The above class does a few interesting things:
+
+* The ``toPHP`` method handles parsing the SQL query results into a value
+  object.
+* The ``marshall`` method handles converting, data such as given request data, into our value object.
+  We're going to accept string values like ``'10.24,12.34`` and arrays for now.
+* The ``toExpression`` method handles converting our value object into the
+  equivalent SQL expressions. In our example the resulting SQL would be
+  something like ``POINT(10.24, 12.34)``.
+
+Once we've built our custom type, we'll need to :ref:`connect our type
+to our table class <saving-complex-types>`.
+
 .. _immutable-datetime-mapping:
 
 Enabling Immutable DateTime Objects
@@ -484,7 +595,7 @@ PDO. There are a few different ways you can run queries depending on the type of
 query you need to run and what kind of results you need back. The most basic
 method is ``query()`` which allows you to run already completed SQL queries::
 
-    $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -493,7 +604,7 @@ additional parameters you should use the ``execute()`` method, which allows for
 placeholders to be used::
 
     $stmt = $conn->execute(
-        'UPDATE posts SET published = ? WHERE id = ?',
+        'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
 
@@ -502,7 +613,7 @@ are string values. If you need to bind specific types of data, you can use their
 abstract type names when creating a query::
 
     $stmt = $conn->execute(
-        'UPDATE posts SET published_date = ? WHERE id = ?',
+        'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
     );
@@ -515,7 +626,7 @@ to use the :doc:`/orm/query-builder`. This approach allows you to build complex 
 expressive queries without having to use platform specific SQL::
 
     $query = $conn->newQuery();
-    $query->update('posts')
+    $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
     $stmt = $query->execute();
@@ -526,7 +637,7 @@ will first execute it and then start iterating over the result set::
 
     $query = $conn->newQuery();
     $query->select('*')
-        ->from('posts')
+        ->from('articles')
         ->where(['published' => true]);
 
     foreach ($query as $row) {
@@ -546,8 +657,8 @@ transactions. The most basic way of doing transactions is through the ``begin()`
 ``commit()`` and ``rollback()`` methods, which map to their SQL equivalents::
 
     $conn->begin();
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     $conn->commit();
 
 .. php:method:: transactional(callable $callback)
@@ -557,8 +668,8 @@ In addition to this interface connection instances also provide the
 much simpler::
 
     $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
 In addition to basic queries, you can execute more complex queries using either

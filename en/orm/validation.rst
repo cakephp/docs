@@ -377,6 +377,44 @@ can help provide a nicer user experience. Because of this CakePHP includes an
 The fields to check existence against in the related table must be part of the
 primary key.
 
+You can enforce ``existsIn`` to pass when parts of your composite foreign key
+are null::
+
+    // The primary composite key within NodesTable is (id, site_id).
+    // A Node may reference a parent Node but does not need to whenever parent_id is null:
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['partialNullsPass' => true]
+    );
+
+    // A Node however must in addition also always reference a Site.
+    $rules->add($rules->existsIn(['site_id'], 'Sites'));
+
+.. versionadded:: 3.3.0
+    The ``partialNullsPass`` option was added.
+
+Association Count Rules
+-----------------------
+
+If you need to validate that a property or association contains the correct
+number of values, you can use the ``validCount()`` rule::
+
+    // No more than 5 tags on an article.
+    $rules->add($rules->validCount('tags', 5, '<=', 'You can only have 5 tags'));
+
+When defining count based rules, the third parameter lets you define the
+comparison operator to use. ``==``, ``>=``, ``<=``, ``>``, ``<``, and ``!=``
+are the accepted operators. To ensure a property's count is within a range, use
+two rules::
+
+    // Between 3 and 5 tags
+    $rules->add($rules->validCount('tags', 3, '>=', 'You must have at least 3 tags'));
+    $rules->add($rules->validCount('tags', 5, '<=', 'You must have at most 5 tags'));
+
+.. versionadded:: 3.3.0
+    The ``validCount()`` method was added in 3.3.0.
+
 Using Entity Methods as Rules
 -----------------------------
 
@@ -404,7 +442,7 @@ You may want to re-use custom domain rules. You can do so by creating your own i
 
 See the core rules for examples on how to create such rules.
 
-Creating Custom Rule objects
+Creating Custom Rule Objects
 ----------------------------
 
 If your application has rules that are commonly reused, it is helpful to package

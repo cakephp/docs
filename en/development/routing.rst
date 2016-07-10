@@ -676,8 +676,6 @@ to do automatic view switching based on content types.
 Creating RESTful Routes
 =======================
 
-.. php:staticmethod:: mapResources($controller, $options)
-
 Router makes it easy to generate RESTful routes for your controllers. RESTful
 routes are helpful when you are creating API endpoints for your application.  If
 we wanted to allow REST access to a recipe controller, we'd do something like
@@ -744,12 +742,30 @@ comments routes will look like::
 
 You can get the ``article_id`` in ``CommentsController`` by::
 
-    $this->request->params['article_id']
+    $this->request->param('article_id');
+
+By default resource routes map to the same prefix as the containing scope. If
+you have both nested and non-nested resource controllers you can use a different
+controller in each context by using prefixes::
+
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
+            $routes->resources('Comments', ['prefix' => 'articles']);
+        });
+    });
+
+The above would map the 'Comments' resource to the
+``App\Controller\Articles\CommentsController``. Having separate controllers lets
+you keep your controller logic simpler. The prefixes created this way are
+compatible with :ref:`prefix-routing`.
 
 .. note::
 
     While you can nest resources as deeply as you require, it is not recommended
     to nest more than 2 resources together.
+
+.. versionadded:: 3.3
+    The ``prefix`` option was added to ``resources()`` in 3.3.
 
 Limiting the Routes Created
 ---------------------------
@@ -979,8 +995,6 @@ You can also use any of the special route elements when generating URLs:
 Redirect Routing
 ================
 
-.. php:staticmethod:: redirect($route, $url, $options = [])
-
 Redirect routing allows you to issue HTTP status 30x redirects for
 incoming routes, and point them at different URLs. This is useful
 when you want to inform client applications that a resource has moved
@@ -990,13 +1004,15 @@ Redirection routes are different from normal routes as they perform an actual
 header redirection if a match is found. The redirection can occur to
 a destination within your application or an outside location::
 
-    $routes->redirect(
-        '/home/*',
-        ['controller' => 'Articles', 'action' => 'view'],
-        ['persist' => true]
-        // Or ['persist'=>['id']] for default routing where the
-        // view action expects $id as an argument.
-    );
+    Router::scope('/', function ($routes) {
+        $routes->redirect(
+            '/home/*',
+            ['controller' => 'Articles', 'action' => 'view'],
+            ['persist' => true]
+            // Or ['persist'=>['id']] for default routing where the
+            // view action expects $id as an argument.
+        );
+    })
 
 Redirects ``/home/*`` to ``/articles/view`` and passes the parameters to
 ``/articles/view``. Using an array as the redirect destination allows
@@ -1004,7 +1020,9 @@ you to use other routes to define where a URL string should be
 redirected to. You can redirect to external locations using
 string URLs as the destination::
 
-    $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    Router::scope('/', function ($routes) {
+        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    });
 
 This would redirect ``/articles/*`` to ``http://google.com`` with a
 HTTP status of 302.
