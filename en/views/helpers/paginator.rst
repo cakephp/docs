@@ -495,7 +495,7 @@ By default returns a full pagination URL string for use in non-standard contexts
 Paginating Multiple Results
 ===========================
 
-If you are :ref:`paginating-multiple-queries <paginating multiple queries>`
+If you are :ref:`paginating multiple queries <paginating-multiple-queries>`
 you'll need to set the ``model`` option when generating pagination related
 elements. You can either use the ``model`` option on every method call you make
 to ``PaginatorHelper``, or use ``options()`` to set the default model::

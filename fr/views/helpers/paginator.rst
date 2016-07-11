@@ -522,8 +522,8 @@ dans contexte non-standard(ex. JavaScript)::
 Paginer Plusieurs Résultats
 ===========================
 
-Si vous :ref:`paginating-multiple-queries <faîtes des requêtes de pagination
-multiple>` vous devrez définir l'option ``model`` quand vous générez les
+Si vous :ref:`faîtes des requêtes de pagination
+multiple <paginating-multiple-queries>` vous devrez définir l'option ``model`` quand vous générez les
 éléments de la pagination. Vous pouvez soit utiliser l'option ``model`` sur
 chaque appel de méthode que vous faîtes au ``PaginatorHelper``, soit utiliser
 ``options()`` pour définir le model par défaut::
