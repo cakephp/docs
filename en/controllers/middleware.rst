@@ -5,7 +5,7 @@ Middleware objects give you the ability to 'wrap' your application in re-usable,
 composable layers of Request handling, or response building logic. Middleware
 are part of the new HTTP stack in CakePHP that leverages the PSR7 request and
 response interfaces. By leveraging the PSR7 standard you can use any PSR7
-compatible middleware available on `The Packagist <https://thepackagist.org>`__.
+compatible middleware available on `The Packagist <https://packagist.org>`__.
 
 CakePHP provides several middleware out of the box:
 
