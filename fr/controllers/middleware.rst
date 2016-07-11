@@ -6,7 +6,7 @@ en des couches compatibles et réutilisables de gestion de Requête, ou de la
 logique de construction de réponse. Middleware sont une partie du nouveau HTTP
 stack dans qui tire parti des interfaces PSR7 request et response. En tirant
 parti du standard PSR7, vous pouvez utilisez tout middleware compatible avec
-PSR7 qui se trouve sur `Packagist <https://thepackagist.org>`__.
+PSR7 qui se trouve sur `Packagist <https://packagist.org>`__.
 
 CakePHP fournit plusieurs middlewares:
 
@@ -36,7 +36,7 @@ hook method will be called early in the request process, you can use the
 
     class Application extends BaseApplication
     {
-        public functin middleware($middleware)
+        public function middleware($middleware)
         {
             $error = new \Cake\Error\Middleware\ErrorHandlerMiddleware();
             $middleware->push($error);
