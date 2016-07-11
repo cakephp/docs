@@ -37,7 +37,7 @@ hook method will be called early in the request process, you can use the
 
     class Application extends BaseApplication
     {
-        public functin middleware($middleware)
+        public function middleware($middleware)
         {
             $error = new \Cake\Error\Middleware\ErrorHandlerMiddleware();
             $middleware->push($error);
