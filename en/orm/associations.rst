@@ -357,6 +357,23 @@ syntax::
         }
     }
 
+Sometimes you may want to configure composite keys in your associations::
+
+    $this->hasMany('Reviews', [
+        'foreignKey' => [
+            'article_id',
+            'article_name'
+        ],
+        'bindingKey' => [
+            'article_id',
+            'article_name'
+        ]
+    ]);
+
+In the example above, we have passed an array containing the desired composite
+keys for both ``foreignKey`` and ``bindingKey`` configuration keys in the
+relationship.
+
 Possible keys for hasMany association arrays include:
 
 - **className**: the class name of the model being associated to
