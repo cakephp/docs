@@ -359,7 +359,7 @@ syntax::
 
 Sometimes you may want to configure composite keys in your associations::
 
-    // within ArticlesTable::initialize() call
+    // Within ArticlesTable::initialize() call
     $this->hasMany('Reviews', [
         'foreignKey' => [
             'article_id',
@@ -369,10 +369,10 @@ Sometimes you may want to configure composite keys in your associations::
 
 In the example above, we have passed an array containing the desired composite
 keys to ``foreignKey``. Maybe you need to specify different
-binding fields than the defaults so you can setup it manually in your
+binding fields than the defaults, so you can setup it manually in your
 ``bindingKeys`` array::
 
-    // within ArticlesTable::initialize() call
+    // Within ArticlesTable::initialize() call
     $this->hasMany('Reviews', [
         'foreignKey' => [
             'article_id',
