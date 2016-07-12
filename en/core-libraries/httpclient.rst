@@ -152,7 +152,9 @@ addition request information.  The following keys can be used in ``$options``:
 - ``auth`` - Array of authentication data, the ``type`` key is used to delegate to
   an authentication strategy. By default Basic auth is used.
 - ``ssl_verify_peer`` - defaults to ``true``. Set to ``false`` to disable SSL certification
-  verification (not advised)
+  verification (not recommended).
+- ``ssl_verify_peer_name`` - defaults to ``true``. Set to ``false`` to disable
+  host name verification when verifying SSL certificates (not recommended).
 - ``ssl_verify_depth`` - defaults to 5. Depth to traverse in the CA chain.
 - ``ssl_verify_host`` - defaults to ``true``. Validate the SSL certificate against the host name.
 - ``ssl_cafile`` - defaults to built in cafile. Overwrite to use custom CA bundles.
@@ -267,7 +269,7 @@ Creating Scoped Clients
 =======================
 
 Having to re-type the domain name, authentication and proxy settings can become
-tedious & error prone.  To reduce the change for mistake and relieve some of the
+tedious & error prone.  To reduce the chance for mistake and relieve some of the
 tedium, you can create scoped clients::
 
     // Create a scoped client.

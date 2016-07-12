@@ -25,6 +25,11 @@ Saving Data
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _converting-request-data:
+
+Converting Request Data into Entities
+=====================================
+
 .. _changing-accessible-fields:
 
 Changing Accessible Fields
@@ -36,6 +41,9 @@ Modifying Request Data Before Building Entities
 -----------------------------------------------
 
 .. _saving-entities:
+
+Saving Entities
+===============
 
 .. _saving-complex-types:
 

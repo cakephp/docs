@@ -31,6 +31,18 @@ A simple use of a Collection would be::
         return $value > 1;
     });
 
+You can also use the ``collection()`` helper function instead of ``new
+Collection()``::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+
+    // These both make a Collection instance.
+    $collectionA = new Collection($items);
+    $collectionB = collection($items);
+
+The benefit of the helper method is that it is easier to chain off of than
+``(new Collection($items))``.
+
 The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
 collection-like features into any ``Traversable`` object you have in your
 application as well.
@@ -274,14 +286,15 @@ a collection into multiple arrays of a certain size, you can use the ``chunk()``
 function::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    $chunked = collection($items)->chunk(2);
+    $collection = new Collection($items);
+    $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
 The ``chunk`` function is particularly useful when doing batch processing, for
 example with a database result::
 
-    collection($articles)
-        ->map(function ($article) {
+    $collection = new Collection($articles);
+    $collection->map(function ($article) {
             // Change a property in the article
             $article->property = 'changed';
         })
@@ -674,15 +687,15 @@ collection.
 Taking the input the nested collection built in the previous example, we can
 flatten it::
 
-    $nested->listNested()->toArray();
+    $nested->listNested()->toList();
 
     // Returns
     [
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish', 'children' => [...]],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 

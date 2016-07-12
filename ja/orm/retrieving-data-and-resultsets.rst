@@ -548,7 +548,7 @@ contain に条件を渡す
 またロードしたいなら、 ``select()`` に関連オブジェクトを渡すこともできます。 ::
 
     // Articles から id と title を、 Users から全列を select する
-    $articlesTable
+    $query = $articles->find()
         ->select(['id', 'title'])
         ->select($articlesTable->Users)
         ->contain(['Users']);

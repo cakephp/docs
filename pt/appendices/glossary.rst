@@ -38,7 +38,7 @@ Glossário
             // Would generate
             checked="checked"
 
-    plugin syntax
+    sintaxe plugin
         Plugin syntax refers to the dot separated class name indicating classes
         are part of a plugin::
 

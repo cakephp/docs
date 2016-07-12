@@ -13,7 +13,7 @@ overriding the core helper with an application one. See the
 Generating URLs
 ===============
 
-.. php:method:: build(mixed $url = NULL, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean $full = false)
 
 Returns a URL pointing to a combination of controller and action.
 If ``$url`` is empty, it returns the ``REQUEST\_URI``, otherwise it

@@ -28,7 +28,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   grands objets ou des éléments qui sont rarement écrits fonctionne
   bien dans les fichiers.
 * ``ApcCache`` Le cache APC utilise l'extension PHP
-  `APC <http://php.net/apc>`_. Cette extension utilise la mémoire partagée du
+  `APCu <http://php.net/apcu>`_. Cette extension utilise la mémoire partagée du
   serveur Web pour stocker les objets. Cela le rend très rapide, et capable de
   fournir les fonctionnalités atomiques en lecture/écriture.
 * ``Wincache`` Utilise l'extension `Wincache <http://php.net/wincache>`_.
@@ -335,6 +335,12 @@ différentes configurations de cache ont des préfixes différents::
 Garbage collects entries in the cache configuration. C'est principalement
 utilisé par FileEngine. Elle ne devra être implémentée par tout moteur
 de Cache qui a besoin d'une suppresion manuelle des données mises en cache.
+
+.. note::
+
+    Comme APC et Wincache utilisent des caches isolés pour le serveur web et le
+    CLI, ils doivent être supprimés séparément (CLI ne peut pas nettoyer le
+    serveur web et vice et versa).
 
 Utiliser le Cache pour Stocker les Compteurs
 ============================================

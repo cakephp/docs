@@ -336,12 +336,13 @@ string
     ``fixed`` va forcer une colonne CHAR. Dans SQL Server, les types NCHAR et
     NVARCHAR sont utilisés.
 text
-    Correspond aux types TEXT
+    Correspond aux types TEXT.
 uuid
     Correspond au type UUID si une base de données en fournit un, sinon cela
     générera un champ CHAR(36).
 integer
-    Correspond au type INTEGER fourni par la base de données.
+    Correspond au type INTEGER fourni par la base de données. BIT n'est pour
+    l'instant pas supporté.
 biginteger
     Correspond au type BIGINT fourni par la base de données.
 float
@@ -353,7 +354,7 @@ decimal
     ``precision``.
 boolean
     Correspond au BOOLEAN sauf pour MySQL, où TINYINT(1) est utilisé pour
-    représenter les booléens.
+    représenter les booléens. BIT(1) n'est pour l'instant pas supporté.
 binary
     Correspond au type BLOB ou BYTEA fourni par la base de données.
 date

@@ -107,9 +107,8 @@ Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branch
 
     git push origin <branch-name>
 
-Une fois que votre branche est sur github, vous pouvez discuter de cela sur la
-mailing-liste `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
-soumettre un pull request sur github.
+Une fois que votre branche est sur github, vous pouvez soumettre un pull request
+sur github.
 
 Choisir l'Emplacement dans lequel vos Changements seront Fusionnés
 ------------------------------------------------------------------

@@ -210,7 +210,7 @@ tasks. Você define tasks para uma shell usando a propriedade ``$tasks``::
         public $tasks = ['Template'];
     }
 
-Você pode utilizar tasks de plugins utilizando o padrão :term:`plugin syntax`.
+Você pode utilizar tasks de plugins utilizando o padrão :term:`sintaxe plugin`.
 Tasks são armazenadas sob ``Shell/Task/`` em arquivos nomeados depois de suas
 classes. Então se nós estivéssemos criando uma nova task 'FileGenerator', você
 deveria criar **src/Shell/Task/FileGeneratorTask.php**.

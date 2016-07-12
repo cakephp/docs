@@ -83,9 +83,9 @@ explicitement.
 Il existe aussi une commande shell très pratique qui va activer le plugin.
 Exécutez la ligne suivante:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake plugin load ContactManager
+    bin/cake plugin load ContactManager
 
 Ceci va vous ajouter le bout de code ``Plugin::load('ContactManager');`` dans le
 fichier bootstrap.
@@ -269,25 +269,25 @@ le shell bake.
 
 Pour cuisiner un plugin, utilisez la commande suivante:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake bake plugin ContactManager
+    bin/cake bake plugin ContactManager
 
 Maintenant vous pouvez cuisiner en utilisant les mêmes conventions qui
 s'appliquent au reste de votre app. Par exemple - baking controllers:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ bin/cake bake controller --plugin ContactManager Contacts
+    bin/cake bake controller --plugin ContactManager Contacts
 
 Référez-vous au chapitre
 :doc:`/bake/usage` si vous avez le moindre
 problème avec l'utilisation de la ligne de commande. Assurez-vous de
 re-générer votre autoloader une fois que vous avez créé votre plugin:
 
-.. code-block:: shell
+.. code-block:: bash
 
-    $ php composer.phar dumpautoload
+    php composer.phar dumpautoload
 
 Controllers du Plugin
 =====================

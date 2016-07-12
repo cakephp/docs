@@ -32,7 +32,7 @@ configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
     // Short classname
     Log::config('debug', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
@@ -88,14 +88,14 @@ configuring our DatabaseLog would look like::
 
     // For src/Log
     Log::config('otherFile', [
-        'className' => 'DatabaseLog',
+        'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // For plugin called LoggingPack
     Log::config('otherFile', [
-        'className' => 'LoggingPack.DatabaseLog',
+        'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ]);
@@ -111,6 +111,7 @@ properties are passed to the log adapter's constructor as an array. ::
     {
         public function __construct($options = [])
         {
+            parent::__construct($options);
             // ...
         }
 
@@ -297,7 +298,7 @@ message. For example::
     // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
     Log::config('shops', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -307,7 +308,7 @@ message. For example::
     // Configure logs/payments.log to receive all levels, but only
     // those with `payments` scope.
     Log::config('payments', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],

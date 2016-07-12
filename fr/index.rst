@@ -11,10 +11,10 @@ Vous pouvez lire :doc:`CakePHP en un coup d'oeil </intro>` pour avoir une
 introduction aux fondamentaux de CakePHP 3.
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
-la documentation. Remarquez le bouton "Improve this Doc" dans le coin en haut
-à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la page
-active, vous permettant de contribuer, d'ajouter, de supprimer ou corriger la
-documentation.
+la documentation. Remarquez le bouton icone en forme de crayon fixé dans le coin
+en haut à droite; il vous redirigera vers l'éditeur en ligne de GitHub pour la
+page active, vous permettant de contribuer, d'ajouter, de supprimer ou corriger
+la documentation.
 
 .. container:: offline-download
 

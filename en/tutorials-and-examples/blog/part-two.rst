@@ -498,8 +498,8 @@ The edit view might look something like this:
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
 
-CakePHP will determine to whether a ``save()`` generates an insert, or update
-statement based on state in the entity.
+CakePHP will determine whether a ``save()`` generates an insert or an
+update statement based on the state of the entity.
 
 You can now update your index view with links to edit specific
 articles:

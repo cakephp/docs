@@ -177,6 +177,8 @@ model fields, depending on a country, ie::
                 'rule' => 'phone',
                 'provider' => 'fr'
             ]);
+            
+            return $validator;
         }
     }
 
@@ -236,7 +238,7 @@ containing data related to the validation process:
   a preexisting one.
   
 If you need to pass additional data to your validation methods such as the 
-current users id, you can use a custom dynamic provider from your controller. ::
+current user's id, you can use a custom dynamic provider from your controller. ::
 
     $this->Examples->validator('default')->provider('passed', [
         'count' => $countFromController,
@@ -301,7 +303,10 @@ Further it's also possible to require a field to be present under certain
 conditions only::
 
     $validator->requirePresence('full_name', function ($context) {
-        return $context['data']['action'] === 'subscribe';
+        if (isset($context['data']['action'])) {
+            return $context['data']['action'] === 'subscribe';
+        }
+        return false;
     });
     $validator->requirePresence('email');
 

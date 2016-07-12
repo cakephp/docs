@@ -132,11 +132,11 @@ balises php, comme du texte.
 Une façon de voir/comprendre la façon dont les templates de Bake fonctionne,
 spécialement quand on essaie de modifier les fichiers de template de bake, est
 de créer avec bake une classe et de comparer le template utilisé avec le
-template déjà présent dans le dossier tmp de votre application.
+template déjà présent dans le dossier **tmp/bake** de votre application.
 
 Ainsi, par exemple, pour créer avec bake un shell comme ceci:
 
-.. code-block:: shell
+.. code-block:: bash
 
     bin/cake bake shell Foo
 
@@ -167,7 +167,7 @@ ressemble à ceci::
     }
 
 Le fichier template déjà présent (pre-processed)
-(**tmp/Bake-Shell-shell-ctp.php**), qui est le fichier réellement
+(**tmp/bake/Bake-Shell-shell-ctp.php**), qui est le fichier réellement
 rendu, ressemble à ceci::
 
     <CakePHPBakeOpenTagphp

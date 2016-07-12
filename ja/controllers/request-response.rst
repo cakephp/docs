@@ -18,6 +18,22 @@ Request & Response Objects
 Request
 =======
 
+.. _check-the-request:
+
+Checking Request Conditions
+---------------------------
+
+.. _cake-response-file:
+
+Sending Files
+-------------
+
+.. _cake-response-caching:
+
+Fine Tuning HTTP Cache
+----------------------
+
+
 .. _cors-headers:
 
 Setting Cross Origin Request Headers (CORS)

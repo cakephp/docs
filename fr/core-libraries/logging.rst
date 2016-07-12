@@ -34,7 +34,7 @@ Un exemple serait::
 
     // Nom de classe court
     Log::config('debug', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
@@ -97,14 +97,14 @@ example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 
     // Pour src/Log
     Log::config('otherFile', [
-        'className' => 'DatabaseLog',
+        'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // Pour un plugin appelé LoggingPack
     Log::config('otherFile', [
-        'className' => 'LoggingPack.DatabaseLog',
+        'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ]);
@@ -121,6 +121,7 @@ un tableau::
     {
         public function __construct($options = [])
         {
+            parent::__construct($options);
             // ...
         }
 
@@ -321,7 +322,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
     // mais seulement ceux avec les scope `orders` et `payments`
     Log::config('shops', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -331,7 +332,7 @@ ce niveau de message va journaliser le message. Par exemple::
     // configurez logs/payments.log pour recevoir tous les types, mais seulement
     // ceux qui ont un scope `payments`
     Log::config('payments', [
-        'className' => 'FileLog',
+        'className' => 'File',
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],

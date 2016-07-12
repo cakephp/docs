@@ -102,9 +102,7 @@ fork::
 
     git push origin <branch-name>
 
-Once your branch is on GitHub, you can discuss it on the
-`cakephp-core <http://groups.google.com/group/cakephp-core>`_ mailing list or
-submit a pull request on GitHub.
+Once your branch is on GitHub, you can submit a pull request on GitHub.
 
 Choosing Where Your Changes will be Merged Into
 -----------------------------------------------

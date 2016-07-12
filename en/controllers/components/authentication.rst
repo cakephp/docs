@@ -313,6 +313,8 @@ The above is how you could implement getUser method for HTTP basic
 authentication. The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
 
+.. _basic-authentication:
+
 Using Basic Authentication
 --------------------------
 

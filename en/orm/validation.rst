@@ -257,7 +257,7 @@ As stated above, by default the validation methods receive an instance of
 instance to be used each time, you can use table's ``$_validatorClass`` property::
 
     // In your table class
-    public function initialize()
+    public function initialize(array $config)
     {
         $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
     }
@@ -386,6 +386,24 @@ You may want to use entity methods as domain rules::
         return $entity->isOkLooking();
     }, 'ruleName');
 
+Creating Custom re-usable Rules
+-------------------------------
+
+You may want to re-use custom domain rules. You can do so by creating your own invokable rule::
+
+    use App\ORM\Rule\IsUniqueWithNulls;
+    // ...
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
+            'errorField' => 'name',
+            'message' => 'Name must be unique per parent.'
+        ]);
+        return $rules;
+    }
+
+See the core rules for examples on how to create such rules.
+
 Creating Custom Rule objects
 ----------------------------
 
@@ -427,13 +445,31 @@ Validation vs. Application Rules
 ================================
 
 The CakePHP ORM is unique in that it uses a two-layered approach to validation.
+
+The first layer is validation. Validation rules are intended to operate in
+a stateless way. They are best leveraged to ensure that the shape, data types
+and format of data is correct.
+
+The second layer is application rules. Application rules are best leveraged to
+check stateful properties of your entities. For example, validation rules could
+ensure that an email address is valid, while an application rule could ensure
+that the email address is unique.
+
 As you already discovered, the first layer is done through the ``Validator``
 objects when calling ``newEntity()`` or ``patchEntity()``::
 
-    $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+    $validatedEntity = $articlesTable->newEntity(
+        $unsafeData,
+        ['validate' => 'customName']
+    );
+    $validatedEntity = $articlesTable->patchEntity(
+        $entity,
+        $unsafeData,
+        ['validate' => 'customName']
+    );
 
-Validation is defined using the ``validationCustomName()`` methods::
+In the above example, we'll use a 'custom' validator, which is defined using the
+``validationCustomName()`` method::
 
     public function validationCustom($validator)
     {
@@ -441,10 +477,8 @@ Validation is defined using the ``validationCustomName()`` methods::
         return $validator;
     }
 
-Validation is meant for forms and request data. This means that validation rule
-sets can assume things about the structure of a form and validate fields not in
-the schema of the database. Validation assumes strings or array are passed
-since that is what is received from any request::
+Validation assumes strings or array are passed since that is what is received
+from any request::
 
     // In src/Model/Table/UsersTable.php
     public function validatePasswords($validator)
@@ -539,7 +573,7 @@ come up when running a CLI script that directly sets properties on entities::
         return $rules;
     }
 
-When executed the save will fail thanks to the new application rule that 
+When executed the save will fail thanks to the new application rule that
 was added::
 
     $userEntity->email = 'not an email!!!';

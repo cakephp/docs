@@ -10,14 +10,15 @@ Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP 3.
 
 The CakePHP cookbook is an openly developed and community editable documentation
-project. Notice the "Improve this Doc" button in the upper right-hand
-corner; it will direct you to the GitHub online editor of the active page,
-allowing you to contribute any additions, deletions, or corrections to
-the documentation.
+project. Notice the pencil icon button fixated against the right wall; it will
+direct you to the GitHub online editor of the active page, allowing you to
+contribute any additions, deletions, or corrections to the documentation.
 
 .. container:: offline-download
 
     **Read the Book Anywhere**
+
+    .. image:: /_static/img/read-the-book.jpg
 
     Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
     EPUB, you can now read it on more devices, as well as offline.
@@ -54,6 +55,7 @@ elements in a CakePHP application:
   application needs.
 * :doc:`Models </orm>` are the key ingredient in any application. They handle
   validation, and domain logic within your application.
+
 
 .. meta::
     :title lang=en: .. CakePHP Cookbook documentation master file, created by

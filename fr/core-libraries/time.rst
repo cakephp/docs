@@ -222,18 +222,23 @@ La locale par défaut avec laquelle les dates sont affichées quand vous utilise
 `intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 Vous pouvez cependant modifier ceci par défaut à la volée::
 
-    Time::$defaultLocale = 'es-ES';
+    // La même méthode existe pour les Date, FrozenDate, et FrozenTime
+    Time::setDefaultLocale('es-ES');
 
-A partir de maintenant, les dates vont s'afficher avec un format de préférence
-Espagnol, à moins qu'une locale différente ne soit spécifiée directement dans
-la méthode de formatage.
+A partir de maintenant, les datetimes vont s'afficher avec un format de
+préférence Espagnol, à moins qu'une locale différente ne soit spécifiée
+directement dans la méthode de formatage.
 
 De même, il est possible de modifier la chaîne de formatage par défaut à
 utiliser pour le format ``i18nFormat``::
 
+    // La même méthode existe pour les Date, FrozenDate, et FrozenTime
     Time::setToStringFormat(\IntlDateFormatter::SHORT);
 
-    Time::setToStringFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
+    Time::setToStringFormat([
+        \IntlDateFormatter::FULL,
+        \IntlDateFormatter::SHORT
+    ]);
 
     Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 

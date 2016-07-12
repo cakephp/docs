@@ -341,6 +341,8 @@ getUser pour les authentifications HTTP Basic.
 La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
 utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
+.. _basic-authentication:
+
 Utiliser l'Authentification Basic
 ---------------------------------
 
@@ -520,10 +522,10 @@ supporter des authentifications sans cookie ou sans état (stateless). Regardez
 les sections portant sur l'authentification digest et basic plus bas pour plus
 d'information.
 
-``AuthComponent`` lance maintenant deux évènements``Auth.afterIdentify`` et
+``AuthComponent`` lance maintenant deux événements``Auth.afterIdentify`` et
 ``Auth.logout`` respectivement après qu'un utilisateur a été identifié et
 avant qu'un utilisateur ne soit déconnecté. Vous pouvez définir une fonction de
-callback pour ces évènements en retournant un tableau de mapping depuis la
+callback pour ces événements en retournant un tableau de mapping depuis la
 méthode ``implementedEvents()`` de votre classe d'authentification::
 
     public function implementedEvents()
@@ -1165,23 +1167,24 @@ storage
     vous devriez définir cette option à ``Memory``. Par défaut à ``Session``.
     Vous pouvez passer des options de config pour stocker une classe en
     utilisant le format de tableau. Par exemple, pour utiliser une clé de
-    session personnalisée, vous pouvez définir ``storage`` avec ``['className' => 'Storage', 'key' => 'Auth.Admin']``.
+    session personnalisée, vous pouvez définir ``storage`` avec
+    ``['className' => 'Storage', 'key' => 'Auth.Admin']``.
 checkAuthIn
     Le nom de l'event pour lequel les vérifications de l'authentification
     doivent être faites. Défaut à ``Controller.startup``. Vous pouvez le
     spécifier à ``Controller.initialize`` si vous souhaitez que les
-    vérifications soient faites avant que l'action ``beforeFilter()`` du controller
-    soit executée.
+    vérifications soient faites avant que l'action ``beforeFilter()`` du
+    controller soit executée.
 
-Aussi, ``$this->Auth->config()`` vous permet d'obtenir une valeur de configuration
-en appelant seulement l'option de configuration::
+Aussi, ``$this->Auth->config()`` vous permet d'obtenir une valeur de
+configuration en appelant seulement l'option de configuration::
 
     $this->Auth->config('loginAction');
 
     $this->redirect($this->Auth->config('loginAction'));
 
-Utile si vous souhaitez rediriger un utilisateur sur la page ``login`` par exemple.
-Sans option, la configuration complète sera retournée.
+Utile si vous souhaitez rediriger un utilisateur sur la page ``login`` par
+exemple. Sans option, la configuration complète sera retournée.
 
 Tester des Actions Protégées par AuthComponent
 ==============================================

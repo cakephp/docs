@@ -100,9 +100,7 @@ Pull Request を送信する
 
     git push origin <branch-name>
 
-あなたのブランチが GitHub 上に行ったら、
-`cakephp-core <http://groups.google.com/group/cakephp-core>`_
-メーリングリストでそれを知らせるか、GitHub で Pull Request を送ってください。
+あなたのブランチが GitHub に上がったら、GitHub で Pull Request を送ってください。
 
 変更対象のマージ先を選ぶ
 -------------------------
@@ -133,5 +131,5 @@ Pull Request を作る際には、ベースとなるブランチが正しく選�
 コアチームにより定期的に次期リリースにもマージされます。
 
 .. meta::
-    :title lang=en: Code
-    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout
+    :title lang=ja: コード
+    :keywords lang=ja: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout

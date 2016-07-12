@@ -82,7 +82,7 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:function:: collection(mixed $items)
 
-    渡された引数をラップする、新しい :php:class:`Cake\Collection\Collection`
+    渡された引数をラップする、新しい :php:class:`Cake\\Collection\\Collection`
     オブジェクトをインスタンス化するための簡易ラッパー。 ``$items`` パラメータは
     ``Traversable`` オブジェクトまたは配列のいずれかを取ります。
 

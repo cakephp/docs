@@ -656,24 +656,19 @@ et une action ``showItems()``, la route générée sera
 Routing des Extensions de Fichier
 ---------------------------------
 
-.. php:staticmethod:: extensions($extensions, $merge = true)
+.. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-Pour manipuler différentes extensions de fichier avec vos routes, vous avez
-besoin d'une ligne supplémentaire dans votre fichier de config des routes::
+Pour manipuler différentes extensions de fichier avec vos routes, vous pouvez
+ajouter ce qui suit dans votre fichier de config des routes::
 
-    Router::extensions(['html', 'rss']);
+    Router::scope('/', function ($routes) {
+        $routes->extensions(['json', 'xml']);
+        ...
+    });
 
 Cela activera les extensions de nom pour toutes les routes déclarées **après**
 l'appel de cette méthode. Par défaut, les extensions que vous avez déclarées
-seront fusionnées avec la liste des extensions existantes. Vous pouvez passer
-``false`` en second argument pour remplacer la liste d'extensions déjà
-existantes. Si vous appelez la méthode sans arguments, elle retournera la liste
-des extensions existantes. Vous pouvez définir des extensions pour chaque
-scope::
-
-    Router::scope('/api', function ($routes) {
-        $routes->extensions(['json', 'xml']);
-    });
+seront fusionnées avec la liste des extensions existantes.
 
 .. note::
 
@@ -1196,9 +1191,9 @@ Dans la méthode de votre ``beforeFilter()``, vous pouvez appeler
 ``parseNamedParams()`` pour extraire tout paramètre nommé à partir des arguments
 passés::
 
-    public function beforeFilter()
+    public function beforeFilter(Event $event)
     {
-        parent::beforeFilter();
+        parent::beforeFilter($event);
         Router::parseNamedParams($this->request);
     }
 

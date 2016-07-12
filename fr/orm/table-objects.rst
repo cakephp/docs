@@ -212,7 +212,7 @@ ne soient converties en entities. Consultez la documentation
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
 L'event ``Model.beforeFind`` est lancé avant chaque opération find. En
 stoppant l'event et en fournissant une valeur de retour, vous pouvez
@@ -262,7 +262,7 @@ finale de l'opération de vérification des règles.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
 L'event ``Model.afterRules`` est déclenché après que les règles soient
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur

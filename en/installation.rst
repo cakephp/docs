@@ -1,11 +1,10 @@
 Installation
 ############
 
-CakePHP is simple and easy to install. The minimum requirements are a
-web server and a copy of CakePHP, that's it! While this chapter focuses
-primarily on setting up on Apache (because it's simple to install and setup),
-CakePHP will run on a variety of web servers such as nginx, LightHTTPD, or
-Microsoft IIS.
+CakePHP is simple and easy to install. The minimum requirements are a web server
+and a copy of CakePHP, that's it! While this chapter focuses primarily on
+setting up on Apache (because it's simple to install and setup), CakePHP will
+run on a variety of web servers such as nginx, LightHTTPD, or Microsoft IIS.
 
 Requirements
 ============
@@ -18,8 +17,7 @@ Requirements
 
 .. note::
 
-    In both XAMPP and WAMP, the mbstring extension is working by
-    default.
+    In both XAMPP and WAMP, the mbstring extension is working by default.
 
     In XAMPP, intl extension is included but you have to uncomment
     ``extension=php_intl.dll`` in **php.ini** and restart the server through
@@ -42,11 +40,11 @@ utilize one. CakePHP supports a variety of database storage engines:
 
 .. note::
 
-    All built-in drivers require PDO. You should make sure you have the
-    correct PDO extensions installed.
+    All built-in drivers require PDO. You should make sure you have the correct
+    PDO extensions installed.
 
 Installing CakePHP
-===================
+==================
 
 Before starting you should make sure that you have got an up to date PHP
 version:
@@ -55,27 +53,35 @@ version:
 
     php -v
 
-You should at least have got installed PHP 5.5.9 (cli) or higher.
+You should at least have got installed PHP 5.5.9 (CLI) or higher.
 Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
-the same version your command line interface (cli) PHP version is of.
+the same version your command line interface (CLI) PHP version is of.
+
+Installing Composer
+-------------------
 
 CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool,
 as the officially supported method for installation.
 
-First, you'll need to download and install Composer if you haven't done so
-already. If you have cURL installed, it's as easy as running the following:
+- Installing Composer on Linux and Mac OS X
 
-.. code-block:: bash
+  #. Run the installer script as described in the
+     `official Composer documentation <https://getcomposer.org/download/>`_
+     and follow the instructions to install Composer.
+  #. Execute the following command to move the composer.phar to a directory
+     that is in your path::
 
-    curl -s https://getcomposer.org/installer | php
+         mv composer.phar /usr/local/bin/composer
 
-Or, you can download ``composer.phar`` from the
-`Composer website <https://getcomposer.org/download/>`_.
+- Installing Composer on Windows
 
-For Windows systems, you can download Composer's Windows installer
-`here <https://github.com/composer/windows-setup/releases/>`__.  Further
-instructions for Composer's Windows installer can be found within the README
-`here <https://github.com/composer/windows-setup>`__.
+  For Windows systems, you can download Composer's Windows installer
+  `here <https://github.com/composer/windows-setup/releases/>`__.  Further
+  instructions for Composer's Windows installer can be found within the
+  README `here <https://github.com/composer/windows-setup>`__.
+
+Create a CakePHP Project
+------------------------
 
 Now that you've downloaded and installed Composer, let's say you want to create
 a new CakePHP application into my_app_name folder. For this just run the
@@ -91,13 +97,14 @@ Or if Composer is installed globally:
 
     composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
 
-Once Composer finishes downloading the application skeleton and the core
-CakePHP library, you should have a functioning CakePHP application
-installed via Composer. Be sure to keep the composer.json and composer.lock
-files with the rest of your source code.
+Once Composer finishes downloading the application skeleton and the core CakePHP
+library, you should have a functioning CakePHP application installed via
+Composer. Be sure to keep the composer.json and composer.lock files with the
+rest of your source code.
 
 You can now visit the path to where you installed your CakePHP application and
-see the default home page. To change the content of this page, edit: **src/Template/Pages/home.ctp**.
+see the default home page. To change the content of this page, edit
+**src/Template/Pages/home.ctp**.
 
 Although composer is the recommended installation method, there are
 pre-installed downloads available on
@@ -115,10 +122,9 @@ By default this is what your application **composer.json** looks like::
         "cakephp/cakephp": "~3.2"
     }
 
-Each time you run
-``php composer.phar update`` you will receive the latest stable releases when
-using the default version constraint ``~3.2``. Only bugfix and minor version
-releases of 3.x will be used when updating.
+Each time you run ``php composer.phar update`` you will receive the latest
+stable releases when using the default version constraint ``~3.2``. Only bugfix
+and minor version releases of 3.x will be used when updating.
 
 If you want to keep current with the latest unreleased changes in CakePHP you
 can add the change your application's **composer.json**::
@@ -135,8 +141,9 @@ Permissions
 ===========
 
 CakePHP uses the **tmp** directory for a number of different operations.
-Model descriptions, cached views, and session information are just a few examples.
-The **logs** directory is used to write log files by the default ``FileLog`` engine.
+Model descriptions, cached views, and session information are just a few
+examples. The **logs** directory is used to write log files by the default
+``FileLog`` engine.
 
 As such, make sure the directories **logs**, **tmp** and all its subdirectories
 in your CakePHP installation are writable by the web server user. Composer's
@@ -144,11 +151,11 @@ installation process makes **tmp** and its subfolders globally writeable to get
 things up and running quickly but you can update the permissions for better
 security and keep them writable only for the webserver user.
 
-One common issue is that **logs** and **tmp** directories and subdirectories must be
-writable both by the web server and the command line user. On a UNIX system, if
-your web server user is different from your command line user, you can run the
-following commands from your application directory just once in your project to
-ensure that permissions will be setup properly:
+One common issue is that **logs** and **tmp** directories and subdirectories
+must be writable both by the web server and the command line user. On a UNIX
+system, if your web server user is different from your command line user, you
+can run the following commands from your application directory just once in your
+project to ensure that permissions will be setup properly:
 
 .. code-block:: bash
 
@@ -161,7 +168,7 @@ ensure that permissions will be setup properly:
 Development Server
 ==================
 
-A development installation is the fastest method to setup CakePHP.  In this
+A development installation is the fastest method to setup CakePHP. In this
 example, we will be using CakePHP's console to run PHP's built-in web server
 which will make your application available at **http://host:port**. From the app
 directory, execute:
@@ -173,8 +180,8 @@ directory, execute:
 By default, without any arguments provided, this will serve your application at
 **http://localhost:8765/**.
 
-If you have something conflicting with **localhost** or port 8765, you can
-tell the CakePHP console to run the web server on a specific host and/or port
+If you have something conflicting with **localhost** or port 8765, you can tell
+the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments:
 
 .. code-block:: bash
@@ -199,7 +206,7 @@ files into and see your application in action.
 Production
 ==========
 
-A production installation is a more flexible way to setup CakePHP.  Using this
+A production installation is a more flexible way to setup CakePHP. Using this
 method allows an entire domain to act as a single CakePHP application. This
 example will help you install CakePHP anywhere on your filesystem and make it
 available at http://www.example.com. Note that this installation may require the
@@ -227,28 +234,26 @@ production setup will look like this on the file system::
         phpunit.xml.dist
         README.md
 
-Developers using Apache should set the ``DocumentRoot`` directive
-for the domain to:
+Developers using Apache should set the ``DocumentRoot`` directive for the domain
+to:
 
 .. code-block:: apacheconf
 
     DocumentRoot /cake_install/webroot
 
-If your web server is configured correctly, you should now find
-your CakePHP application accessible at http://www.example.com.
-
+If your web server is configured correctly, you should now find your CakePHP
+application accessible at http://www.example.com.
 
 Fire It Up
 ==========
 
-Alright, let's see CakePHP in action. Depending on which setup you
-used, you should point your browser to http://example.com/ or
-http://localhost:8765/. At this point, you'll be
-presented with CakePHP's default home, and a message that tells you
-the status of your current database connection.
+Alright, let's see CakePHP in action. Depending on which setup you used, you
+should point your browser to http://example.com/ or http://localhost:8765/. At
+this point, you'll be presented with CakePHP's default home, and a message that
+tells you the status of your current database connection.
 
-Congratulations! You are ready to :doc:`create your first CakePHP
-application </quickstart>`.
+Congratulations! You are ready to :doc:`create your first CakePHP application
+</quickstart>`.
 
 .. _url-rewriting:
 
@@ -258,21 +263,20 @@ URL Rewriting
 Apache
 ------
 
-While CakePHP is built to work with mod\_rewrite out of the box–and
-usually does–we've noticed that a few users struggle with getting
-everything to play nicely on their systems.
+While CakePHP is built to work with mod\_rewrite out of the box–and usually
+does–we've noticed that a few users struggle with getting everything to play
+nicely on their systems.
 
-Here are a few things you might try to get it running correctly.
-First look at your httpd.conf. (Make sure you are editing the system
-httpd.conf rather than a user- or site-specific httpd.conf.)
+Here are a few things you might try to get it running correctly. First look at
+your httpd.conf. (Make sure you are editing the system httpd.conf rather than a
+user- or site-specific httpd.conf.)
 
-These files can vary between different distributions and Apache versions.  You
+These files can vary between different distributions and Apache versions. You
 may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for
 further information.
 
-#. Make sure that an .htaccess override is allowed and that
-   AllowOverride is set to All for the correct DocumentRoot. You
-   should see something similar to:
+#. Make sure that an .htaccess override is allowed and that AllowOverride is set
+   to All for the correct DocumentRoot. You should see something similar to:
 
    .. code-block:: apacheconf
 
@@ -289,26 +293,25 @@ further information.
        #    Deny from all
        </Directory>
 
-#. Make sure you are loading mod\_rewrite correctly. You should
-   see something like:
+#. Make sure you are loading mod\_rewrite correctly. You should see something
+   like:
 
    .. code-block:: apacheconf
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   In many systems these will be commented out by default, so you may
-   just need to remove the leading # symbols.
+   In many systems these will be commented out by default, so you may just need
+   to remove the leading # symbols.
 
-   After you make changes, restart Apache to make sure the settings
-   are active.
+   After you make changes, restart Apache to make sure the settings are active.
 
-   Verify that your .htaccess files are actually in the right
-   directories. Some operating systems treat files that start
-   with '.' as hidden and therefore won't copy them.
+   Verify that your .htaccess files are actually in the right directories. Some
+   operating systems treat files that start with '.' as hidden and therefore
+   won't copy them.
 
-#. Make sure your copy of CakePHP comes from the downloads section of
-   the site or our Git repository, and has been unpacked correctly, by
-   checking for .htaccess files.
+#. Make sure your copy of CakePHP comes from the downloads section of the site
+   or our Git repository, and has been unpacked correctly, by checking for
+   .htaccess files.
 
    CakePHP app directory (will be copied to the top directory of your
    application by bake):
@@ -321,8 +324,8 @@ further information.
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   CakePHP webroot directory (will be copied to your application's web
-   root by bake):
+   CakePHP webroot directory (will be copied to your application's web root by
+   bake):
 
    .. code-block:: apacheconf
 
@@ -332,11 +335,11 @@ further information.
            RewriteRule ^ index.php [L]
        </IfModule>
 
-   If your CakePHP site still has problems with mod\_rewrite, you might
-   want to try modifying settings for Virtual Hosts. On Ubuntu,
-   edit the file **/etc/apache2/sites-available/default** (location is
-   distribution-dependent). In this file, ensure that
-   ``AllowOverride None`` is changed to ``AllowOverride All``, so you have:
+   If your CakePHP site still has problems with mod\_rewrite, you might want to
+   try modifying settings for Virtual Hosts. On Ubuntu, edit the file
+   **/etc/apache2/sites-available/default** (location is
+   distribution-dependent). In this file, ensure that ``AllowOverride None`` is
+   changed to ``AllowOverride All``, so you have:
 
    .. code-block:: apacheconf
 
@@ -352,20 +355,18 @@ further information.
        </Directory>
 
    On Mac OSX, another solution is to use the tool
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
-   to make a Virtual Host to point to your folder.
+   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ to make a Virtual
+   Host to point to your folder.
 
-   For many hosting services (GoDaddy, 1and1), your web server is
-   actually being served from a user directory that already uses
-   mod\_rewrite. If you are installing CakePHP into a user directory
-   (http://example.com/~username/cakephp/), or any other URL structure
-   that already utilizes mod\_rewrite, you'll need to add RewriteBase
-   statements to the .htaccess files CakePHP uses (.htaccess,
-   webroot/.htaccess).
+   For many hosting services (GoDaddy, 1and1), your web server is actually being
+   served from a user directory that already uses mod\_rewrite. If you are
+   installing CakePHP into a user directory
+   (http://example.com/~username/cakephp/), or any other URL structure that
+   already utilizes mod\_rewrite, you'll need to add RewriteBase statements to
+   the .htaccess files CakePHP uses (.htaccess, webroot/.htaccess).
 
-   This can be added to the same section with the RewriteEngine
-   directive, so for example, your webroot .htaccess file would look
-   like:
+   This can be added to the same section with the RewriteEngine directive, so
+   for example, your webroot .htaccess file would look like:
 
    .. code-block:: apacheconf
 
@@ -376,9 +377,9 @@ further information.
            RewriteRule ^ index.php [L]
        </IfModule>
 
-   The details of those changes will depend on your setup, and can
-   include additional things that are not related to CakePHP. Please refer
-   to Apache's online documentation for more information.
+   The details of those changes will depend on your setup, and can include
+   additional things that are not related to CakePHP. Please refer to Apache's
+   online documentation for more information.
 
 #. (Optional) To improve production setup, you should prevent invalid assets
    from being parsed by CakePHP. Modify your webroot .htaccess to something
@@ -526,17 +527,15 @@ these steps:
         </system.webServer>
     </configuration>
 
-Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
-correctly.
+Once the web.config file is created with the correct IIS-friendly rewrite rules,
+CakePHP's links, CSS, JavaScipt, and rerouting should work correctly.
 
 I Can't Use URL Rewriting
 -------------------------
 
-If you don't want or can't get mod\_rewrite (or some other
-compatible module) up and running on your server, you'll need to
-use CakePHP's built in pretty URLs. In **config/app.php**,
-uncomment the line that looks like::
+If you don't want or can't get mod\_rewrite (or some other compatible module) up
+and running on your server, you'll need to use CakePHP's built in pretty URLs.
+In **config/app.php**, uncomment the line that looks like::
 
     'App' => [
         // ...
@@ -549,8 +548,8 @@ Also remove these .htaccess files::
     webroot/.htaccess
 
 This will make your URLs look like
-www.example.com/index.php/controllername/actionname/param rather
-than www.example.com/controllername/actionname/param.
+www.example.com/index.php/controllername/actionname/param rather than
+www.example.com/controllername/actionname/param.
 
 .. _GitHub: http://github.com/cakephp/cakephp
 .. _Composer: http://getcomposer.org

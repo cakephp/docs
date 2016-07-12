@@ -13,8 +13,8 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either a `PHAR package <http://phpunit.de/#download>`__ or `Composer
-<http://getcomposer.org>`_.
+through using either a `PHAR package <http://phpunit.de/#download>`__ or
+`Composer <http://getcomposer.org>`_.
 
 Install PHPUnit with Composer
 -----------------------------
@@ -23,7 +23,8 @@ To install PHPUnit with Composer::
 
     $ php composer.phar require --dev phpunit/phpunit
 
-This will add the dependency to the ``require-dev`` section of your ``composer.json``, and then install PHPUnit along with any dependencies.
+This will add the dependency to the ``require-dev`` section of your
+``composer.json``, and then install PHPUnit along with any dependencies.
 
 You can now run PHPUnit using::
 
@@ -179,8 +180,9 @@ following::
     }
 
 Calling the parent method is important in test cases, as ``TestCase::setUp()``
-does a number things like backing up the values in :php:class:`~Cake\\Core\\Configure` and,
-storing the paths in :php:class:`~Cake\\Core\\App`.
+does a number things like backing up the values in
+:php:class:`~Cake\\Core\\Configure` and, storing the paths in
+:php:class:`~Cake\\Core\\App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect::
@@ -284,7 +286,8 @@ Combining Test Suites for Plugins
 Often times your application will be composed of several plugins. In these
 situations it can be pretty tedious to run tests for each plugin. You can make
 running tests for each of the plugins that compose your application by adding
-additional ``<testsuite>`` sections to your application's **phpunit.xml.dist** file::
+additional ``<testsuite>`` sections to your application's **phpunit.xml.dist**
+file::
 
     <testsuites>
         <testsuite name="App Test Suite">
@@ -532,7 +535,7 @@ in your application, change the example fixture given in the previous section
 
     class ArticlesFixture extends TestFixture
     {
-        public $import = ['table' => 'articles']
+        public $import = ['table' => 'articles'];
     }
 
 If you want to use a different connection use::
@@ -932,6 +935,49 @@ required authentication, you could write the following tests::
         // Other assertions.
     }
 
+Testing Stateless Authentication and APIs
+-----------------------------------------
+
+To test APIs that use stateless authentication, such as Basic authentication,
+you can configure the request to inject environment conditions or headers that
+simulate actual authentication request headers.
+
+When testing Basic or Digest Authentication, you can add the environment
+variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
+automatically. These environment variables used in the authentication adapter
+outlined in :ref:`basic-authentication`::
+
+    public function testBasicAuthentication()
+    {
+        $this->configRequest([
+            'environment' => [
+                'PHP_AUTH_USER' => 'username',
+                'PHP_AUTH_PW' => 'password',
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+If you are testing other forms of authentication, such as OAuth2, you can set
+the Authorization header directly::
+
+    public function testOauthToken()
+    {
+        $this->configRequest([
+            'headers' => [
+                'authorization' => 'Bearer: oauth-token'
+            ]
+        ]);
+
+        $this->get('/api/posts');
+        $this->assertResponseOk();
+    }
+
+The headers key in ``configRequest()`` can be used to configure any additional
+HTTP headers needed for an action.
+
 Testing Actions Protected by CsrfComponent or SecurityComponent
 ---------------------------------------------------------------
 
@@ -946,10 +992,13 @@ token mismatches::
         $this->post('/posts/add', ['title' => 'Exciting news!']);
     }
 
+It is also important to enable debug in tests that use tokens to prevent the
+SecurityComponent from thinking the debug token is being used in a non-debug
+environment.
+
 .. versionadded:: 3.1.2
     The ``enableCsrfToken()`` and ``enableSecurityToken()`` methods were added
     in 3.1.2
-
 
 Assertion methods
 -----------------
@@ -1331,6 +1380,107 @@ indicating 1 pass and 4 assertions.
 When you are testing a Helper which uses other helpers, be sure to mock the
 View clases ``loadHelpers`` method.
 
+.. _testing-events:
+
+Testing Events
+==============
+
+The :doc:`/core-libraries/events` is a great way to decouple your application
+code, but sometimes when testing, you tend to test the results of events in the
+test cases that execute those events. This is an additional form of coupling
+that can be removed by using ``assertEventFired`` and ``assertEventFiredWith``
+instead.
+
+Expanding on the Orders example, say we have the following tables::
+
+    class OrdersTable extends Table
+    {
+
+        public function place($order)
+        {
+            if ($this->save($order)) {
+                // moved cart removal to CartsTable
+                $event = new Event('Model.Order.afterPlace', $this, [
+                    'order' => $order
+                ]);
+                $this->eventManager()->dispatch($event);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CartsTable extends Table
+    {
+
+        public function implementedEvents()
+        {
+            return [
+                'Model.Order.afterPlace' => 'removeFromCart'
+            ];
+        }
+
+        public function removeFromCart(Event $event)
+        {
+            $order = $event->data('order');
+            $this->delete($order->cart_id);
+        }
+    }
+
+.. note::
+    To assert that events are fired, you must first enable
+    :ref:`tracking-events` on the event manager you wish to assert against.
+
+To test the ``OrdersTable`` above, we enable tracking in ``setUp()`` then assert
+that the event was fired, and assert that the ``$order`` entity was passed in
+the event data::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\OrdersTable;
+    use Cake\Event\EventList;
+    use Cake\ORM\TableRegistry;
+    use Cake\TestSuite\TestCase;
+
+    class OrdersTableTest extends TestCase
+    {
+
+        public $fixtures = ['app.orders'];
+
+        public function setUp()
+        {
+            parent::setUp();
+            $this->Orders = TableRegistry::get('Orders');
+            // enable event tracking
+            $this->Orders->getEventManager()->setEventList(new EventList());
+        }
+
+        public function testPlace()
+        {
+            $order = new Order([
+                'user_id' => 1,
+                'item' => 'Cake',
+                'quantity' => 42,
+            ]);
+
+            $this->assertTrue($this->Orders->place($order));
+
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+        }
+    }
+
+By default, the global ``EventManager`` is used for assertions, so testing
+global events does not require passing the event manager::
+
+    $this->assertEventFired('My.Global.Event');
+    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+
+.. versionadded:: 3.2.11
+
+    Event tracking, ``assertEventFired()``, and ``assertEventFiredWith`` were
+    added.
+
 Creating Test Suites
 ====================
 
@@ -1388,12 +1538,11 @@ plugins folder. ::
                     /TestCase
                     /Fixture
 
-They work just like normal tests but you have to remember to use
-the naming conventions for plugins when importing classes. This is
-an example of a testcase for the ``BlogPost`` model from the plugins
-chapter of this manual. A difference from other tests is in the
-first line where 'Blog.BlogPost' is imported. You also need to
-prefix your plugin fixtures with ``plugin.blog.blog_posts``::
+They work just like normal tests but you have to remember to use the naming
+conventions for plugins when importing classes. This is an example of a testcase
+for the ``BlogPost`` model from the plugins chapter of this manual. A difference
+from other tests is in the first line where 'Blog.BlogPost' is imported. You
+also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 
@@ -1546,7 +1695,8 @@ of your testing results:
     vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
-in Jenkins as well. Failing to configure those steps will mean you won't see the results.
+in Jenkins as well. Failing to configure those steps will mean you won't see the
+results.
 
 Run a Build
 -----------

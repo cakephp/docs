@@ -16,6 +16,21 @@ Http Client
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+.. _http_client_request_options:
+
+Request Method Options
+=======================
+
+.. _http_client_scoped_client:
+
+Creating Scoped Clients
+=======================
+
+.. _http-client-xml-json:
+
+Reading JSON and XML Response Bodies
+------------------------------------
+
 .. meta::
     :title lang=ja: HttpClient
     :keywords lang=ja: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results

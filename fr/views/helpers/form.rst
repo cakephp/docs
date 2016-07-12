@@ -537,9 +537,6 @@ répétitions, les options communes partagées par toutes les méthodes input so
     vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
     votre controller, ou définir l'option ``checked`` de l'input à ``true``.
 
-    La valeur par défaut des champs Date et datetime peut être définie en
-    utilisant la clé 'selected'.
-
     Attention à l'utilisation de ``false`` pour assigner une valeur par défaut.
     Une valeur ``false`` est utilisée pour désactiver/exclure les options d'un
     champ, ainsi ``'default' => false`` ne définirait aucune valeur. A la place,

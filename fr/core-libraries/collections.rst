@@ -33,6 +33,18 @@ Collection serait::
         return $value > 1;
     });
 
+Vous pouvez aussi utiliser la fonction ``collection()`` à la place de
+Collection()``::
+
+    $items = ['a' => 1, 'b' => 2, 'c' => 3];
+
+    // Les deux créent une instance de Collection.
+    $collectionA = new Collection($items);
+    $collectionB = collection($items);
+
+Le bénéfice de cette méthode est qu'il est plus facile de chaîner par rapport à
+``(new Collection($items))``.
+
 Le :php:trait:`~Cake\\Collection\\CollectionTrait` vous permet également
 d'intégrer des fonctionnalités semblables aux Collections pour tout objet
 ``Traversable`` de votre application.
@@ -280,15 +292,16 @@ une collection en plusieurs tableaux d'une certaine taille, vous pouvez utiliser
 la fonction ``chunk()``::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    $chunked = collection($items)->chunk(2);
+    $collection = new Collection($items);
+    $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
 La fonction ``chunk`` est particulièrement utile quand vous faîtes des
 opérations en lots, par exemple avec les résultats d'une base de données::
 
-    collection($articles)
-        ->map(function ($article) {
-            // Change une propriété dans l'article
+    $collection = new Collection($articles);
+    $collection->map(function ($article) {
+            // Change une propriété de l'article
             $article->property = 'changed';
         })
         ->chunk(20)
@@ -700,15 +713,15 @@ dans la collection.
 Considérons la collection imbriquée intégrée dans l'exemple précédent, nous
 pouvons l'aplatir::
 
-    $nested->listNested()->toArray();
+    $nested->listNested()->toList();
 
     // Retourne
     [
-        ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+        ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ['id' => 6, 'parent_id' => null, 'name' => 'Fish', 'children' => [...]],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 

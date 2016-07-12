@@ -14,6 +14,16 @@ Here's what you'll need:
    that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
+Before starting you should make sure that you have got an up to date PHP
+version:
+
+.. code-block:: bash
+
+    php -v
+
+You should at least have got installed PHP 5.5.9 (CLI) or higher.
+Your webserver's PHP version must also be of 5.5.9 or higher, and should best be
+the same version your command line interface (CLI) PHP version is of.
 If you'd like to see the completed application, checkout `cakephp/bookmarker
 <https://github.com/cakephp/bookmarker-tutorial>`__. Let's get started!
 
@@ -213,9 +223,10 @@ users, bookmarks, and tags.
 Adding Password Hashing
 =======================
 
-When you created your users, you probably noticed that the passwords were stored
-in plain text. This is pretty bad from a security point of view, so let's get
-that fixed.
+When you created your users (by visiting
+**http://localhost:8765/bookmarks/users**), you probably noticed that the
+passwords were stored in plain text. This is pretty bad from a security point of
+view, so let's get that fixed.
 
 This is also a good time to talk about the model layer in CakePHP. In CakePHP,
 we separate the methods that operate on a collection of objects, and a single

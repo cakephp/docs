@@ -217,7 +217,7 @@ and it is the ``first()`` method::
         ->where(['author_id' => 1])
         ->first();
 
-If you are a loading a single record by its primary key, it will be better to
+If you are loading a single record by its primary key, it will be better to
 just call ``get()``::
 
     $article = $this->Articles->get(10);

@@ -14,6 +14,16 @@ Voici ce dont vous allez avoir besoin:
    MySQL, assurez-vous aussi d'avoir ``pdo_mysql`` activé dans PHP.
 #. Des connaissances de base en PHP.
 
+Avant de commencer, vous devez vous assurer que votre version de PHP est à jour:
+
+.. code-block:: bash
+
+    php -v
+
+Vous devez avoir installé au moins la version 5.5.9 (CLI) de PHP ou supérieure.
+La version de PHP de votre serveur web doit aussi être 5.5.9 ou supérieure, et
+doit être préférablement la même version que celle de votre interface en ligne
+de commande (CLI).
 Si vous souhaitez voir ce que donne l'application au final, regardez
 `cakephp/bookmarker <https://github.com/cakephp/bookmarker-tutorial>`__. C'est
 parti !
@@ -227,24 +237,25 @@ users, bookmarks, et tags.
 Ajouter un Hashage de Mot de Passe
 ==================================
 
-Quand vous créez vos users, vous avez probablement remarqué que les mots de
-passe sont stockés en clair. C'est très mauvais d'un point du vue
+Quand vous avez créé vos users, (en visitant
+**http://localhost:8765/bookmarks/users**) vous avez probablement remarqué que
+les mots de passe sont stockés en clair. C'est très mauvais d'un point du vue
 sécurité, donc réglons ceci.
 
 C'est aussi un bon moment pour parler de la couche model dans CakePHP. Dans
-CakePHP, nous séparons les méthodes qui agissent sur une collection
-d'objets, et celles qui agissent sur un objet unique, dans des classes
-différentes. Les méthodes qui agissent sur la collection des entities sont
-mises dans la classe ``Table``, alors que les fonctionnalités correspondant
-à un enregistrement unique sont mises dans la classe ``Entity``.
+CakePHP, nous séparons les méthodes qui agissent sur une collection d'objets, et
+celles qui agissent sur un objet unique, dans des classes différentes. Les
+méthodes qui agissent sur la collection des entities sont mises dans la classe
+``Table``, alors que les fonctionnalités correspondant à un enregistrement
+unique sont mises dans la classe ``Entity``.
 
 Par exemple, le hashage des mots de passe se fait pour un enregistrement
 individuel, donc nous allons intégrer ce comportement sur l'objet entity.
-Comme nous voulons hasher le mot de passe à chaque fois qu'il est défini
-nous allons utiliser une méthode mutateur/setter. CakePHP va appeler
-les méthodes setter basées sur les conventions à chaque fois qu'une
-propriété est définie dans une de vos entities. Ajoutons un setter pour le
-mot de passe. Dans **src/Model/Entity/User.php**, ajoutez ce qui suit::
+Comme nous voulons hasher le mot de passe à chaque fois qu'il est défini nous
+allons utiliser une méthode mutateur/setter. CakePHP va appeler les méthodes
+setter basées sur les conventions à chaque fois qu'une propriété est définie
+dans une de vos entities. Ajoutons un setter pour le mot de passe. Dans
+**src/Model/Entity/User.php**, ajoutez ce qui suit::
 
     namespace App\Model\Entity;
 
@@ -264,12 +275,12 @@ mot de passe. Dans **src/Model/Entity/User.php**, ajoutez ce qui suit::
     }
 
 Maintenant mettez à jour un des users que vous avez créé précédemment, si vous
-changez son mot de passe, vous devriez voir un mot de passe hashé à la
-place de la valeur originale sur la liste ou les pages de vue. CakePHP hashe les
-mots de passe avec
+changez son mot de passe, vous devriez voir un mot de passe hashé à la place de
+la valeur originale sur la liste ou les pages de vue. CakePHP hashe les mots de
+passe avec
 `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ par défaut.
-Vous pouvez aussi utiliser sha1 ou md5 si vous travaillez avec une
-base de données existante.
+Vous pouvez aussi utiliser sha1 ou md5 si vous travaillez avec une base de
+données existante.
 
 Récupérer les Bookmarks avec un Tag Spécifique
 ==============================================
@@ -277,14 +288,14 @@ Récupérer les Bookmarks avec un Tag Spécifique
 Maintenant que vous avez stocké les mots de passe de façon sécurisé, nous
 pouvons construire quelques fonctionnalités intéressantes dans notre
 application. Une fois que vous avez une collection de bookmarks, il peut
-être pratique de pouvoir les chercher par tag. Ensuite nous allons
-intégrer une route, une action de controller, et une méthode finder pour
-chercher les bookmarks par tag.
+être pratique de pouvoir les chercher par tag. Ensuite nous allons intégrer une
+route, une action de controller, et une méthode finder pour chercher les
+bookmarks par tag.
 
 Idéalement, nous aurions une URL qui ressemble à
-**http://localhost:8765/bookmarks/tagged/funny/cat/gifs** Cela nous aide
-à trouver tous les bookmarks qui ont les tags 'funny', 'cat' ou 'gifs'. Avant
-de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
+**http://localhost:8765/bookmarks/tagged/funny/cat/gifs** Cela nous aide à
+trouver tous les bookmarks qui ont les tags 'funny', 'cat' ou 'gifs'. Avant de
+pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
 **config/routes.php** doit ressembler à ceci::
 
     <?php
@@ -318,13 +329,13 @@ de pouvoir intégrer ceci, nous allons ajouter une nouvelle route. Votre fichier
         $routes->fallbacks('InflectedRoute');
     });
 
-Ce qui est au-dessus définit une nouvelle 'route' qui connecte le
-chemin **/bookmarks/tagged/***, vers ``BookmarksController::tags()``. En
-définissant les routes, vous pouvez isoler la définition de vos URLs, de la
-façon dont elles sont intégrées. Si nous visitions
-**http://localhost:8765/bookmarks/tagged**, nous verrions une page d'erreur
-de CakePHP. Intégrons maintenant la méthode manquante. Dans
-**src/Controller/BookmarksController.php**, ajoutez ce qui suit::
+Ce qui est au-dessus définit une nouvelle 'route' qui connecte le chemin
+**/bookmarks/tagged/***, vers ``BookmarksController::tags()``. En définissant
+les routes, vous pouvez isoler la définition de vos URLs, de la façon dont elles
+sont intégrées. Si nous visitions **http://localhost:8765/bookmarks/tagged**,
+nous verrions une page d'erreur de CakePHP. Intégrons maintenant la méthode
+manquante. Dans **src/Controller/BookmarksController.php**, ajoutez ce qui
+suit::
 
     public function tags()
     {
@@ -379,9 +390,9 @@ réutilisable de vos requêtes. Les finders attendent toujours un objet
 :doc:`/orm/query-builder` et un tableau d'options en paramètre. Les finders
 peuvent manipuler les requêtes et ajouter n'importe quels conditions ou
 critères. Une fois qu'ils ont terminé, les finders doivent retourner l'objet
-Query modifié. Dans notre finder nous avons amené la méthode
-``matching()`` qui nous permet de trouver les bookmarks qui ont un tag
-qui 'match'. La méthode ``matching()`` accepte `une fonction anonyme
+Query modifié. Dans notre finder nous avons amené la méthode ``matching()`` qui
+nous permet de trouver les bookmarks qui ont un tag qui 'match'. La méthode
+``matching()`` accepte `une fonction anonyme
 <http://php.net/manual/fr/functions.anonymous.php>`_ qui reçoit un constructeur
 de requête comme argument. Dans le callback, nous utilisons le constructeur de
 requête pour définir de nouvelles conditions qui permettront de filtrer les

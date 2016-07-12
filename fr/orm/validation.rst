@@ -269,7 +269,7 @@ une instance d'un validator personnalisé, vous pouvez utiliser l'attribut
 
 
     // Dans votre class Table
-    public function initialize()
+    public function initialize(array $config)
     {
         $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
     }
@@ -405,6 +405,26 @@ Vous pouvez utiliser les méthodes entity en tant que règles de domaine::
         return $entity->isOkLooking();
     }, 'ruleName');
 
+Créer des Règles Personnalisées Réutilisables
+---------------------------------------------
+
+Vous pouvez vouloir réutiliser des règles de domaine personnalisées. Vous pouvez
+le faire en créant votre propre règle invokable::
+
+    use App\ORM\Rule\IsUniqueWithNulls;
+    // ...
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
+            'errorField' => 'name',
+            'message' => 'Name must be unique per parent.'
+        ]);
+        return $rules;
+    }
+
+Regardez les règles du coeur pour plus d'informations sur la façon de créer de
+telles règles.
+
 Créer des Objets de Règles Personnalisées
 -----------------------------------------
 
@@ -445,15 +465,33 @@ Validation vs. Application Rules
 ================================
 
 L'ORM de CakePHP est unique dans le sens où il utilise une approche à deux
-couches pour la validation. Comme vous avez pu le voir, la première couche est
-réalisée via l'objet ``Validator`` lors de l'appel à ``newEntity()`` ou
-``patchEntity()``::
+couches pour la validation.
 
-    $validatedEntity = $articlesTable->newEntity($unsafeData);
-    $validatedEntity = $articlesTable->patchEntity($entity, $unsafeData);
+La première couche est la validation. Les règles de validation ont pour objectif
+d'opérer d'une façon stateless. Elles permettent de s'assurer que la forme, les
+types de données et le format des données sont corrects.
 
-La validation est définie en utilisant les méthodes
-``validationCustomName()``::
+La seconde couche sont les règles d'application. Les règles d'application
+permettent de vérifier les propriétés stateful de vos entities. Par exemple,
+les règles de validation peuvent permettre de s'assurer qu'une adresse email est
+valide, alors qu'une règle d'application permet de s'assurer que l'adresse
+email est unique.
+
+Comme vous avez pu le voir, la première couche est réalisée via l'objet
+``Validator`` lors de l'appel à ``newEntity()`` ou ``patchEntity()``::
+
+    $validatedEntity = $articlesTable->newEntity(
+        $unsafeData,
+        ['validate' => 'customName']
+    );
+    $validatedEntity = $articlesTable->patchEntity(
+        $entity,
+        $unsafeData,
+        ['validate' => 'customName']
+    );
+
+Dans l'exemple ci-dessus, nous allons utiliser un validateur 'custom', qui est
+défini en utilisant la méthode ``validationCustomName()``::
 
     public function validationCustom($validator)
     {
@@ -461,12 +499,8 @@ La validation est définie en utilisant les méthodes
         return $validator;
     }
 
-La validation est pensée pour les formulaires et les données de requêtes. Cela
-signifie que les règles de validation peuvent assumer des choses sur la
-structure d'un formulaire, et valider des champs qui ne font pas parti du
-schéma de la base de données. La validation assume que les chaines de
-caractères ou les tableaux sont passés en l'état de ce qui est reçu de la
-requête::
+La validation fait l'hypothèse que les chaînes de caractères et les tableaux
+sont passés puisque c'est ce qui est reçu par n'importe quelle requête::
 
     // Dans src/Model/Table/UsersTable.php
     public function validatePasswords($validator)

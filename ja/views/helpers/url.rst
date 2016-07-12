@@ -13,7 +13,7 @@ UrlHelper は他のヘルパーから URL を生成することが容易にな�
 URL の生成
 ==========
 
-.. php:method:: build(mixed $url = NULL, boolean $full = false)
+.. php:method:: build(mixed $url = null, boolean $full = false)
 
 コントローラーとアクションの組み合わせを指定することで URL を生成して返します。
 ``$url`` が空の場合、 ``REQUEST\_URI`` を返します。そうでない場合、

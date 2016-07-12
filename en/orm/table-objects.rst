@@ -200,7 +200,7 @@ into entities. See the :ref:`before-marshal` documentation for more information.
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, boolean $primary)
+.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event and supplying a return value you can bypass the find operation
@@ -246,7 +246,7 @@ of applying rules.
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)
+.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
 The ``Model.afterRules`` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking

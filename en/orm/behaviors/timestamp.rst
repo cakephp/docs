@@ -75,3 +75,13 @@ After you have saved the entity, the field is updated.
 Touching records can be useful when you want to signal that a parent resource
 has changed when a child resource is created/updated. For example: updating an
 article when a new comment is added.
+
+Saving Updates Without Modifying Timestamps
+===========================================
+
+To disable the automatic modification of the ``updated`` timestamp column when
+saving an entity you can mark the attribute as 'dirty'::
+
+    // Mark the modified column as dirty making
+    // the current value be set on update.
+    $order->dirty('modified', true);

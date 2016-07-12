@@ -308,12 +308,13 @@ string
     Generally backed by CHAR or VARCHAR columns. Using the ``fixed`` option
     will force a CHAR column. In SQL Server, NCHAR and NVARCHAR types are used.
 text
-    Maps to TEXT types
+    Maps to TEXT types.
 uuid
     Maps to the UUID type if a database provides one, otherwise this will
     generate a CHAR(36) field.
 integer
-    Maps to the INTEGER type provided by the database.
+    Maps to the INTEGER type provided by the database. BIT is not yet supported
+    at this moment.
 biginteger
     Maps to the BIGINT type provided by the database.
 float
@@ -324,7 +325,7 @@ decimal
     options.
 boolean
     Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
-    booleans.
+    booleans. BIT(1) is not yet supported at this moment.
 binary
     Maps to the BLOB or BYTEA type provided by the database.
 date

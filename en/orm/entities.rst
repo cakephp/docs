@@ -248,7 +248,7 @@ While setting properties to entities in bulk is simple and convenient, it can
 create significant security issues. Bulk assigning user data from the request
 into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the :doc:`/bake`
-CakePHP does not protect against mass-assignment. 
+CakePHP does not protect against mass-assignment.
 
 The ``_accessible`` property allows you to provide a map of properties and
 whether or not they can be mass-assigned. The values ``true`` and ``false``
@@ -398,7 +398,8 @@ could be provided by a trait::
 
     namespace SoftDelete\Model\Entity;
 
-    trait SoftDeleteTrait {
+    trait SoftDeleteTrait
+    {
 
         public function softDelete()
         {

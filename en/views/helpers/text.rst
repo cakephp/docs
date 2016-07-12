@@ -14,7 +14,7 @@ truncating long stretches of text.
 Linking Email addresses
 =======================
 
-.. php:method:: autoLinkEmails(string $text, array $options=[])
+.. php:method:: autoLinkEmails(string $text, array $options = [])
 
 Adds links to the well-formed email addresses in $text, according
 to any options defined in ``$options`` (see
@@ -35,7 +35,7 @@ option to disable this if necessary.
 Linking URLs
 ============
 
-.. php:method:: autoLinkUrls(string $text, array $options=[])
+.. php:method:: autoLinkUrls(string $text, array $options = [])
 
 Same as ``autoLinkEmails()``, only this method searches for
 strings that start with https, http, ftp, or nntp and links them
@@ -47,7 +47,7 @@ option to disable this if necessary.
 Linking Both URLs and Email Addresses
 =====================================
 
-.. php:method:: autoLink(string $text, array $options=[])
+.. php:method:: autoLink(string $text, array $options = [])
 
 Performs the functionality in both ``autoLinkUrls()`` and
 ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails

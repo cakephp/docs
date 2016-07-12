@@ -615,7 +615,7 @@ vous souhaitez aussi charger les champs enlevés des associations avec contain,
 vous pouvez passer l'objet association à ``select()``::
 
     // Sélectionne id & title de articles, mais tous les champs enlevés pour Users.
-    $articlesTable
+    $query = $articles->find()
         ->select(['id', 'title'])
         ->select($articlesTable->Users)
         ->contain(['Users']);

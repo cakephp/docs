@@ -1,13 +1,21 @@
+
 Server Shell
 ############
 
-.. note::
-    The documentation is not currently supported in Japanese language for this
-    page.
+``ServerShell`` は、ビルトイン PHP ウェブサーバを使用して簡単なウェブサーバを
+立ち上げることができます。このサーバは製品利用するためのものではありません。
+すぐにアイデアを試してみたくて Apache や nginx を設定する時間を費やすしたくない開発中に、
+手軽に行うことができます。以下のように、サーバのシェルを起動することができます。 ::
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+    $ bin/cake server
 
-    You can referer to the english version in the select top menu to have
-    information about this page's topic.
+サーバの起動とポート 8765 へのアタッチを確認してください。
+ウェブブラウザから ``http://localhost:8765`` へ、 CLI サーバにアクセスしてください。
+あなたの端末内で ``CTRL-C`` を押してサーバを閉じることができます。
+
+ポートおよびドキュメントルートの変更
+====================================
+
+オプションを使用してポートおよびドキュメントルートをカスタマイズすることができます。 ::
+
+    $ bin/cake server --port 8080 --document_root path/to/app
