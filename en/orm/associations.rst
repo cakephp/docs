@@ -359,20 +359,22 @@ syntax::
 
 Sometimes you may want to configure composite keys in your associations::
 
+    // within ArticlesTable::initialize() call
     $this->hasMany('Reviews', [
         'foreignKey' => [
             'article_id',
-            'article_name'
+            'article_revision'
         ],
         'bindingKey' => [
-            'article_id',
-            'article_name'
+            'id',
+            'revision'
         ]
     ]);
 
 In the example above, we have passed an array containing the desired composite
 keys for both ``foreignKey`` and ``bindingKey`` configuration keys in the
-relationship.
+relationship. You have the flexibility to setup different keys of the
+``foreignKey`` ones in your ``bindingKeys`` array.
 
 Possible keys for hasMany association arrays include:
 
