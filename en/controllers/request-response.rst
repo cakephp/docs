@@ -63,11 +63,6 @@ are also all found in the request parameters:
 * ``action`` The action handling the current request.
 * ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
   more information.
-* ``bare`` Present when the request came from
-  :php:meth:`~Cake\\Controller\\Controller::requestAction()` and included the
-  bare option. Bare requests do not have layouts rendered.
-* ``requested`` Present and set to ``true`` when the action came from
-  :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Query String Parameters
 -----------------------
