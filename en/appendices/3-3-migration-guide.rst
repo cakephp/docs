@@ -23,6 +23,8 @@ Deprecations
   * ``version()`` use ``getProtocolVersion()`` instead.
 * Dispatcher Filters are now deprecated. Use :doc:`/controllers/middleware`
   instead.
+* ``RequestActionTrait`` has been deprecated. Refactor your code to use view
+  cells instead.
 
 Behavior Changes
 ================
@@ -124,6 +126,10 @@ Validation
   ``Validator::notEmpty()`` now accept a list of fields. This allows you
   to more concisely define the fields that are required.
 
+StringTemplate
+==============
+``StringTemplate::format()`` now throws an exception instead of returning ``null``
+when requested template is not found.
 
 Other Enhancements
 ==================
