@@ -412,7 +412,7 @@ CakePHP はそれぞれのスコープのプレフィックス名を定義する
 ``_namePrefix`` オプションをネストしたスコープの中で使えます。
 またそれは、あなたが期待したように動きます。 ::
 
-    Router::plugin('Contacts', ['_namePrefix' => 'contacts:', function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // このルートの名前は `contacts:api:ping` になります。
             $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
@@ -729,14 +729,14 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 -------------------------------
 
 ルーティングされるときに使われるコントローラー名を変更したい場合があるでしょう。
-例えば、 ``edit()`` アクションを ``update()`` で呼びたいときに、
+例えば、 ``edit()`` アクションを ``put()`` で呼びたいときに、
 ``actions`` キーをアクション名のリネームに使います。 ::
 
     $routes->resources('Articles', [
-        'actions' => ['edit' => 'update', 'add' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'create']
     ]);
 
-上記は ``update()`` を ``edit()`` アクションの代わりに使い、 ``create()``
+上記は ``put()`` を ``edit()`` アクションの代わりに使い、 ``create()``
 を ``add()`` の代わりに使います。
 
 追加のリソースへのルートをマップする

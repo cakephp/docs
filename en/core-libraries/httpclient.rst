@@ -1,7 +1,7 @@
 Http Client
 ###########
 
-.. php:namespace:: Cake\Network\Http
+.. php:namespace:: Cake\Http
 
 .. php:class:: Client(mixed $config = [])
 
@@ -9,12 +9,15 @@ CakePHP includes a basic but powerful HTTP client which can be used for
 making requests. It is a great way to communicate with webservices, and
 remote APIs.
 
+.. versionchanged:: 3.3.0
+    Prior to 3.3.0 you should use ``Cake\Network\Http\Client``.
+
 Doing Requests
 ==============
 
 Doing requests is simple and straight forward.  Doing a GET request looks like::
 
-    use Cake\Network\Http\Client;
+    use Cake\Http\Client;
 
     $http = new Client();
 
@@ -88,7 +91,7 @@ There may be times when you need to build a request body in a very specific way.
 In these situations you can often use ``Cake\Network\Http\FormData`` to craft
 the specific multipart HTTP request you want::
 
-    use Cake\Network\Http\FormData;
+    use Cake\Http\Client\FormData;
 
     $data = new FormData();
 
@@ -108,7 +111,7 @@ the specific multipart HTTP request you want::
     $response = $http->post(
         'http://example.com/api',
         (string)$data,
-        ['headers' => ['Content-Type' => 'multipart/related']]
+        ['headers' => ['Content-Type' => $data->contentType()]]
     );
 
 Sending Request Bodies
@@ -171,7 +174,7 @@ They can also be used when constructing ``Client`` to create
 Authentication
 ==============
 
-Http\\Client supports a few different authentication systems.  Different
+``Cake\Http\Client`` supports a few different authentication systems.  Different
 authentication strategies can be added by developers. Auth strategies are called
 before the request is sent, and allow headers to be added to the request
 context.
@@ -186,8 +189,8 @@ An example of basic authentication::
       'auth' => ['username' => 'mark', 'password' => 'secret']
     ]);
 
-By default Http\\Client will use basic authentication if there is no ``'type'``
-key in the auth option.
+By default ``Cake\Http\Client`` will use basic authentication if there is no
+``'type'`` key in the auth option.
 
 
 Using Digest Authentication
@@ -233,7 +236,7 @@ key and consumer secret::
 OAuth 2 Authentication
 ----------------------
 
-Because OAuth2 is often just a simple header, there is not a specialized
+Because OAuth2 is often a single header, there is not a specialized
 authentication adapter. Instead you can create a client with the access token::
 
     $http = new Client([
@@ -336,77 +339,43 @@ request's ``$options`` parameters::
         'cookies' => ['sessionid' => '123abc']
     ]);
 
+.. _httpclient-response-objects:
 
 Response Objects
 ================
+
+.. php:namespace:: Cake\Http\Client
 
 .. php:class:: Response
 
 Response objects have a number of methods for inspecting the response data.
 
-.. php:method:: body($parser = null)
-
-    Get the response body. Pass in an optional parser, to decode the response
-    body. For example. `json_decode` could be used for decoding response data.
-
-.. php:method:: header($name)
-
-    Get a header with ``$name``. ``$name`` is case-insensitive.
-
-.. php:method:: headers()
-
-    Get all the headers.
-
-.. php:method:: isOk()
-
-    Check if the response was ok. Any valid 20x response code will be
-    treated as OK.
-
-.. php:method:: isRedirect()
-
-    Check if the response was a redirect.
-
-.. php:method:: cookies()
-
-    Get the cookies from the response. Cookies will be returned as
-    an array with all the properties that were defined in the response header.
-    To access the raw cookie data you can use :php:meth:`header()`
-
-.. php:method:: cookie($name = null, $all = false)
-
-    Get a single cookie from the response. By default only the value of a cookie
-    is returned. If you set the second parameter to ``true``, all the properties
-    set in the response will be returned.
-
-.. php:method:: statusCode()
-
-    Get the status code.
-
-.. php:method:: encoding()
-
-    Get the encoding of the response. Will return null if the response
-    headers did not contain an encoding.
-
-In addition to the above methods you can also use object accessors to read data
-from the following properties:
-
-* cookies
-* headers
-* body
-* code
-* json
-* xml
+.. versionchanged:: 3.3.0
+    As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR7
+    ResponseInterface
+    <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
 
-::
+Reading Response Bodies
+-----------------------
 
-    $http = new Client(['host' => 'example.com']);
-    $response = $http->get('/test');
+You read the entire response body as a string::
 
-    // Use object accessors to read data.
-    debug($response->body);
-    debug($response->code);
-    debug($response->headers);
+    // Read the entire response as a string.
+    $response->body();
+
+    // As a property
+    $response->body;
+
+You can also access the stream object for the response and use its methods::
+
+    // Get a Psr\Http\Message\StreamInterface containing the response body
+    $stream = $response->getBody();
+
+    // Read a stream 100 bytes at a time.
+    while (!$stream->eof()) {
+        echo $stream->read(100);
+    }
 
 .. _http-client-xml-json:
 
@@ -429,6 +398,63 @@ XML data is decoded into a ``SimpleXMLElement`` tree::
 
 The decoded response data is stored in the response object, so accessing it
 multiple times has no additional cost.
+
+Accessing Response Headers
+--------------------------
+
+You can access headers through a few different methods. Header names are always
+treated as case-insensitive values when accessing them through methods::
+
+    // Get all the headers as an associative array.
+    $response->getHeaders();
+
+    // Get a single header as an array.
+    $response->getHeader('content-type');
+
+    // Get a header as a string
+    $response->getHeaderLine('content-type');
+
+    // Get the response encoding
+    $response->getEncoding();
+
+    // Get an array of key=>value for all headers
+    $response->headers;
+
+Accessing Cookie Data
+---------------------
+
+You can read cookies with a few different methods depending on how much
+data you need about the cookies::
+
+    // Get all cookies (full data)
+    $response->getCookies();
+
+    // Get a single cookie's value.
+    $response->getCookie('session_id');
+
+    // Get a the complete data for a single cookie
+    // includes value, expires, path, httponly, secure keys.
+    $response->getCookieData('session_id');
+
+    // Access the complete data for all cookies.
+    $response->cookies;
+
+Checking the Status Code
+------------------------
+
+Response objects provide a few methods for checking status codes::
+
+    // Was the response a 20x
+    $response->isOk();
+
+    // Was the response a 30x
+    $response->isRedirect();
+
+    // Get the status code
+    $response->getStatusCode();
+
+    // __get() helper
+    $response->code;
 
 .. meta::
     :title lang=en: HttpClient

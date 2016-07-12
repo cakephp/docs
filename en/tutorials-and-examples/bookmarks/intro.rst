@@ -243,7 +243,7 @@ add the following::
 
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher; //include this line
     use Cake\ORM\Entity;
 
     class User extends Entity
@@ -412,7 +412,7 @@ template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 
 You may notice that we were able to use the ``$tags`` and ``$bookmarks``
-variables in our view. When we use the ``set()`` method in our controller's we
+variables in our view. When we use the ``set()`` method in our controller, we
 set specific variables to be sent to the view. The view will make all passed
 variables available in the templates as local variables.
 

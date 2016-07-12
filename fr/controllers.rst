@@ -6,34 +6,33 @@ Controllers (Contrôleurs)
 .. php:class:: Controller
 
 Les Controllers sont le 'C' dans MVC. Après que le routage a été appliqué et
-que le bon controller a été trouvé, l'action de votre controller est
-appelée. Votre controller devra gérer l'interprétation des données requêtées,
-s'assurer que les bons models sont appelés et que la bonne réponse ou vue est
-rendue. Les controllers peuvent être imaginés comme une couche au milieu entre
-le Model et la Vue. Le mieux est de garder des controllers peu chargés, et
-des models plus fournis. Cela vous aidera à réutiliser votre code et facilitera
-le test de votre code.
+que le bon controller a été trouvé, l'action de votre controller est appelée.
+Votre controller devra gérer l'interprétation des données requêtées, s'assurer
+que les bons models sont appelés et que la bonne réponse ou vue est rendue. Les
+controllers peuvent être imaginés comme une couche au milieu entre le Model et
+la Vue. Le mieux est de garder des controllers peu chargés, et des models plus
+fournis. Cela vous aidera à réutiliser votre code et facilitera le test de votre
+code.
 
-Habituellement, les controllers sont utilisés pour gérer la logique autour
-d'un seul model. Par exemple, si vous construisez un site pour gérer une
-boulangerie en-ligne, vous aurez sans doute un RecettesController qui gère
-vos recettes et un IngredientsController qui gère vos ingrédients. Cependant,
-il est aussi possible d'avoir des controllers qui fonctionnent avec plus d'un
-model. Dans CakePHP, un controller est nommé d'après le model principal qu'il
-gère.
+Habituellement, les controllers sont utilisés pour gérer la logique autour d'un
+seul model. Par exemple, si vous construisez un site pour gérer une boulangerie
+en-ligne, vous aurez sans doute un RecettesController qui gère vos recettes et
+un IngredientsController qui gère vos ingrédients. Cependant, il est aussi
+possible d'avoir des controllers qui fonctionnent avec plus d'un model. Dans
+CakePHP, un controller est nommé d'après le model principal qu'il gère.
 
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
 :php:class:`Controller` du cœur. La classe ``AppController`` peut être définie
-dans **src/Controller/AppController.php** et elle devra contenir les
-méthodes partagées par tous les controllers de votre application.
+dans **src/Controller/AppController.php** et elle devra contenir les méthodes
+partagées par tous les controllers de votre application.
 
 Les controllers peuvent inclure un certain nombre de méthodes qui gèrent les
 requêtes. Celles-ci sont appelées des *actions*. Par défaut, chaque méthode
 publique dans un controller est une action accessible via une URL. Une action
-est responsable de l'interprétation des requêtes et de la création de
-la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais
-il y a aussi d'autres façons de créer des réponses.
+est responsable de l'interprétation des requêtes et de la création de la
+réponse. Habituellement, les réponses sont sous forme de vue rendue, mais il y a
+aussi d'autres façons de créer des réponses.
 
 .. _app-controller:
 
@@ -56,13 +55,13 @@ librairie du cœur de CakePHP. ``AppController`` est définie dans
 
 Les attributs et méthodes de controller créés dans ``AppController`` seront
 disponibles dans tous les controllers de votre application. Les Components (que
-vous découvrirez plus loin) sont plus appropriés pour du code utilisé dans
-la plupart des controllers (mais pas nécessairement tous).
+vous découvrirez plus loin) sont plus appropriés pour du code utilisé dans la
+plupart des controllers (mais pas nécessairement tous).
 
 Vous pouvez utiliser ``AppController`` pour charger les components qui seront
-utilisés dans tous les controllers de votre application. CakePHP fournit
-une méthode ``initialize()`` qui est appelée à la fin du constructeur du
-Controller pour ce type d'utilisation::
+utilisés dans tous les controllers de votre application. CakePHP fournit une
+méthode ``initialize()`` qui est appelée à la fin du constructeur du Controller
+pour ce type d'utilisation::
 
     namespace App\Controller;
 
@@ -132,46 +131,20 @@ RecipesController pourrait contenir les actions
         }
     }
 
-Les fichiers de template pour ces actions seraient **src/Template/Recipes/view.ctp**,
-**src/Template/Recipes/share.ctp**, et **src/Template/Recipes/search.ctp**. Le
-nom du fichier de vue est par convention le nom de l'action en minuscules et
-avec des underscores.
+Les fichiers de template pour ces actions seraient
+**src/Template/Recipes/view.ctp**, **src/Template/Recipes/share.ctp**, et
+**src/Template/Recipes/search.ctp**. Le nom du fichier de vue est par convention
+le nom de l'action en minuscules et avec des underscores.
 
-Les actions du Controller utilisent généralement ``Controller::set()``
-pour créer un contexte que ``View`` utilise pour afficher la couche de vue. Du
-fait des conventions que CakePHP utilise, vous n'avez pas à créer et rendre
-la vue manuellement. Au lieu de ça, une fois qu'une action du controller est
-terminée, CakePHP va gérer le rendu et la livraison de la Vue.
+Les actions du Controller utilisent généralement ``Controller::set()`` pour
+créer un contexte que ``View`` utilise pour afficher la couche de vue. Du fait
+des conventions que CakePHP utilise, vous n'avez pas à créer et rendre la vue
+manuellement. Au lieu de ça, une fois qu'une action du controller est terminée,
+CakePHP va gérer le rendu et la livraison de la Vue.
 
 Si pour certaines raisons, vous voulez éviter le comportement par défaut, vous
 pouvez retourner un objet de :php:class:`Cake\\Network\\Response` de l'action
 avec la response complètement créée.
-
-Quand vous utilisez les méthodes du controller avec
-:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`, vous voudrez
-souvent retourner une instance de ``Response``. Si vous
-avez des méthodes du controller qui sont utilisées pour des requêtes web
-normales + requestAction, vous devrez vérifier le type de requête avant de
-retourner::
-
-    // src/Controller/RecipesController.php
-
-    class RecipesController extends AppController
-    {
-        public function popular()
-        {
-            $popular = $this->Recipes->find('popular');
-            if ($this->request->is('requested')) {
-                $this->response->body(json_encode($popular));
-                return $this->response;
-            }
-            $this->set('popular', $popular);
-        }
-    }
-
-Le controller ci-dessus est un exemple montrant comment la méthode peut être
-utilisée avec :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-et des requêtes normales.
 
 Afin que vous utilisiez efficacement le controller dans votre propre
 application, nous couvrons certains des attributs et méthodes du cœur fournis

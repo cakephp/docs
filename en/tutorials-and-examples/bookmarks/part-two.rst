@@ -371,16 +371,22 @@ to **src/Model/Table/BookmarksTable.php**::
 
     protected function _buildTags($tagString)
     {
-        $new = array_unique(array_map('trim', explode(',', $tagString)));
+        // Trim tags
+        $newTags = array_map('trim', explode(',', $tagString);
+        // Remove all empty tags
+        $newTags = array_filter($newTags);
+        // Reduce duplicated tags
+        $newTags = array_unique($newTags);
+
         $out = [];
         $query = $this->Tags->find()
-            ->where(['Tags.title IN' => $new]);
+            ->where(['Tags.title IN' => $newTags]);
 
         // Remove existing tags from the list of new tags.
         foreach ($query->extract('title') as $existing) {
-            $index = array_search($existing, $new);
+            $index = array_search($existing, $newTags);
             if ($index !== false) {
-                unset($new[$index]);
+                unset($newTags[$index]);
             }
         }
         // Add existing tags.
@@ -388,7 +394,7 @@ to **src/Model/Table/BookmarksTable.php**::
             $out[] = $tag;
         }
         // Add new tags.
-        foreach ($new as $tag) {
+        foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
         return $out;

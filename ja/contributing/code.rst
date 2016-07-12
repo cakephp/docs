@@ -51,24 +51,26 @@ Fork できたら、Fork したものを自分のローカルマシンへと clo
 
 バグや新機能、改善に取り組むたびに毎回、 トピック・ブランチを作成してください。
 
-ブランチは 修正/改善対象のバージョンをベースにして作成してください。たとえば、
-``2.3`` のバグを修正するなら、ブランチのベースとして ``2.3`` ブランチを使うことになります。
-もしも変更が現在の安定版リリースのバグ修正なら、 ``master`` ブランチを使ってください。
-こうすることで、あなたの変更を後でマージする際にとても簡単になります。 ::
+ブランチは 修正/改善対象のバージョンをベースにして作成してください。たとえば、 ``3.x``
+のバグを修正するなら、ブランチのベースとして ``master`` ブランチを使うことになります。
+もし、 2.x 系のバグ修正なら、 ``2.x`` ブランチを使用してください。これで、Github は、
+あなたに対象のブランチを編集させないので、後で変更をマージする際にとても簡単になります。 ::
 
-    # 2.3 のバグを修正
+    # 3.x のバグを修正
     git fetch upstream
-    git checkout -b ticket-1234 upstream/2.3
+    git checkout -b ticket-1234 upstream/master
+
+    # 2.x のバグを修正
+    git fetch upstream
+    git checkout -b ticket-1234 upstream/2.x
 
 .. tip::
 
-    ブランチの名前は説明的につけてください。
-    チケット名や機能名を含めるのは良い慣習です。
+    ブランチの名前は説明的につけてください。チケット名や機能名を含めるのは良い慣習です。
     例) ticket-1234, feature-awesome
 
-上記は upstream (CakePHP) 2.3 ブランチをベースにローカル・ブランチを作成します。
-修正に取り組み、必要なだけ commit してください。
-ただし、注意点があります:
+上記は upstream (CakePHP) 2.x ブランチをベースにローカル・ブランチを作成します。
+修正に取り組み、必要なだけ commit してください。ただし、注意点があります:
 
 * :doc:`/contributing/cakephp-coding-conventions` に従ってください。
 * バグが修正されたこと、もしくは新機能が機能することが判るテストケースを追加してください。
@@ -80,11 +82,12 @@ Pull Request を送信する
 変更し終え、 CakePHP へとマージされる準備が整ったら、あなたのブランチを
 更新したくなることでしょう。 ::
 
-    git checkout 2.3
+    # master のトップに修正をリベース
+    git checkout master
     git fetch upstream
-    git merge upstream/2.3
+    git merge upstream/master
     git checkout <branch_name>
-    git rebase 2.3
+    git rebase master
 
 これは作業開始以降に CakePHP で行われたすべての変更を fetch + merge します。
 その後に rebase 、つまり現在のコードの先端にあなたの変更を適用します。
@@ -100,6 +103,10 @@ Pull Request を送信する
 
     git push origin <branch-name>
 
+ブランチを push した後 rebase した場合、force push を使用する必要があります。 ::
+
+    git push --force origin <branch-name>
+
 あなたのブランチが GitHub に上がったら、GitHub で Pull Request を送ってください。
 
 変更対象のマージ先を選ぶ
@@ -113,19 +120,19 @@ Pull Request を作る際には、ベースとなるブランチが正しく選�
   マージ先として **master** を選んでください。
 * あなたの変更が **新機能** もしくはフレームワークへの追加なら、
   次のバージョン番号のブランチを選んでください。
-  たとえば、現在の安定版リリースが ``2.2.2`` なら、
-  新機能を受け入れるブランチは ``2.3`` になります。
+  たとえば、現在の安定版リリースが ``3.2.10`` なら、
+  新機能を受け入れるブランチは ``3.next`` になります。
 * あなたの変更が既存の機能性を壊すものであったり、API の仕様を変えるものであるなら、
-  次のメジャーリリースを選ばなければなりません。たとえば、現在のリリースが ``2.2.2`` なら、
-  次に既存の振る舞いを変更できるのは ``3.0`` となりますので、そのブランチを選んでください。
+  次のメジャーリリースを選ばなければなりません。たとえば、現在のリリースが ``3.2.2`` なら、
+  次に既存の振る舞いを変更できるのは ``4.x`` となりますので、そのブランチを選んでください。
 
 .. note::
 
     あなたが貢献したすべてのコードは MIT License に基づき CakePHP にライセンスされることを
-    覚えておいてください。 `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
-    がすべての貢献されたコードの所有者になります。貢献する人は
-    `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_
-    に従うようお願いします。
+    覚えておいてください。 `Cake Software Foundation
+    <http://cakefoundation.org/pages/about>`_ がすべての貢献されたコードの所有者になります。
+    貢献する人は `CakePHP Community Guidelines
+    <http://community.cakephp.org/guidelines>`_ に従うようお願いします。
 
 メンテナンス・ブランチへとマージされたすべてのバグ修正は、
 コアチームにより定期的に次期リリースにもマージされます。

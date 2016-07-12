@@ -1,7 +1,7 @@
 Client Http
 ###########
 
-.. php:namespace:: Cake\Network\Http
+.. php:namespace:: Cake\Http
 
 .. php:class:: Client(mixed $config = [])
 
@@ -9,13 +9,16 @@ CakePHP intègre un client HTTP basique mais puissant qui peut être utilisé po
 faire des requêtes. C'est un bon moyen de communiquer avec des services webs et
 des APIs distantes.
 
+.. versionchanged:: 3.3.0
+    Avant 3.3.0, vous devez utiliser ``Cake\Network\Http\Client``.
+
 Faire des Requêtes
 ==================
 
 Faire des requêtes est simple et direct. Faire une requête GET ressemble à
 ceci::
 
-    use Cake\Network\Http\Client;
+    use Cake\Http\Client;
 
     $http = new Client();
 
@@ -93,7 +96,7 @@ façon très spécifique. Dans ces situations, vous pouvez utiliser
 ``Cake\Network\Http\FormData`` pour fabriquer la requête HTTP multipart
 spécifique que vous souhaitez::
 
-    use Cake\Network\Http\FormData;
+    use Cake\Http\Client\FormData;
 
     $data = new FormData();
 
@@ -113,7 +116,7 @@ spécifique que vous souhaitez::
     $response = $http->post(
         'http://example.com/api',
         (string)$data,
-        ['headers' => ['Content-Type' => 'multipart/related']]
+        ['headers' => ['Content-Type' => $data->contentType()]]
     );
 
 Envoyer des Corps de Requête
@@ -183,10 +186,11 @@ Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des
 Authentification
 ================
 
-Http\\Client intègre plusieurs systèmes d'authentification. Les différentes
-stratégies d'authentification peuvent être ajoutées par les développeurs.
-Les stratégies d'Authentification sont appelées avant que la requête ne soit
-envoyée, et permettent aux headers d'être ajoutés au contexte de la requête.
+``Cake\Http\Client`` intègre plusieurs systèmes d'authentification. Les
+différentes stratégies d'authentification peuvent être ajoutées par les
+développeurs. Les stratégies d'Authentification sont appelées avant que la
+requête ne soit envoyée, et permettent aux headers d'être ajoutés au contexte de
+la requête.
 
 Utiliser l'Authentication Basic
 -------------------------------
@@ -198,8 +202,8 @@ Un exemple simple d'authentification::
       'auth' => ['username' => 'mark', 'password' => 'secret']
     ]);
 
-Par défaut Http\\Client va utiliser l'authentification basic s'il n'y a pas
-de clé ``'type'`` dans l'option auth.
+Par défaut ``Cake\Http\Client`` va utiliser l'authentification basic s'il n'y a
+pas de clé ``'type'`` dans l'option auth.
 
 Utiliser l'Authentification Digest
 ----------------------------------
@@ -245,7 +249,7 @@ Authentification OAuth 2
 ------------------------
 
 Il n'y a pas d'adapteur d'authentification spécialisé car OAuth2 est souvent
-juste un simple entête. A la place, vous pouvez créer un client avec le token
+un simple entête. A la place, vous pouvez créer un client avec le token
 d'accès::
 
     $http = new Client([
@@ -349,77 +353,45 @@ les paramètres ``$options`` de la requête::
         'cookies' => ['sessionid' => '123abc']
     ]);
 
+.. _httpclient-response-objects:
 
 Objets Response
 ===============
 
+.. php:namespace:: Cake\Http\Client
+
 .. php:class:: Response
 
-Les objets Response ont un certain nombre de méthode pour parcourir les données
+Les objets Response ont un certain nombre de méthodes pour parcourir les données
 de réponse.
 
-.. php:method:: body($parser = null)
+.. versionchanged:: 3.3.0
+    Depuis la version 3.3.0 ``Cake\Http\Client\Response`` implémente
+    `PSR7 ResponseInterface
+    <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
-    Récupère le corps de la réponse. Passé dans un parser en option pour décoder
-    le corps de la réponse. Par exemple. `json_decode` peut être utilisé pour
-    décoder les données de réponse.
 
-.. php:method:: header($name)
+Lire des Corps des Réponses
+---------------------------
 
-    Récupère un header avec ``$name``. ``$name`` n'est pas sensible à la casse.
+Vous pouvez lire le corps entier de la réponse en chaîne de caractères::
 
-.. php:method:: headers()
+    // Lit le corps entier de la réponse en chaîne de caractères.
+    $response->body();
 
-    Récupère tous les headers.
+    // En propriété
+    $response->body;
 
-.. php:method:: isOk()
+Vous pouvez aussi accéder à l'objet stream de la réponse et utilisez ses
+méthodes::
 
-    Vérifie si la réponse était ok. Tout code de réponse valide 20x sera traité
-    comme OK.
+    // Récupère une Psr\Http\Message\StreamInterface contenant le corps de la réponse
+    $stream = $response->getBody();
 
-.. php:method:: isRedirect()
-
-    Vérifie si la réponse était une redirection.
-
-.. php:method:: cookies()
-
-    Récupère les cookies à partir de la réponse. Les Cookies seront retournés
-    en tableau avec toutes les propriétés qui étaient définies dans le header
-    de response. Pour accéder aux données brutes du cookie, vous pouvez utiliser
-    :php:meth:`header()`
-
-.. php:method:: cookie($name = null, $all = false)
-
-    Récupère un cookie unique à partir de response. Par défaut, seule la valeur
-    d'un cookie est retourné. Si vous définissez le deuxième paramètre à
-    ``true``, toutes les propriétés définies dans la response seront retournées.
-
-.. php:method:: statusCode()
-
-    Récupère le code de statut.
-
-.. php:method:: encoding()
-
-    Récupère l'encodage de response. Va retourner null si les headers de
-    response ne contiennent pas d'encodage.
-
-En plus des méthodes ci-dessus, vous pouvez aussi utiliser les accesseurs
-d'objet pour lire les données à partir des propriétés suivantes:
-
-* cookies
-* body
-* status
-* headers
-
-::
-
-    $http = new Client(['host' => 'example.com']);
-    $response = $http->get('/test');
-
-    // Utlisation des accesseurs d'objet pour lire les données.
-    debug($response->body);
-    debug($response->status);
-    debug($response->headers);
+    // Lit un stream de 100 bytes en une fois.
+    while (!$stream->eof()) {
+        echo $stream->read(100);
+    }
 
 .. _http-client-xml-json:
 
@@ -443,6 +415,65 @@ un arbre ``SimpleXMLElement``::
 
 Les données de réponse décodées sont stockées dans l'objet response, donc y
 accéder de nombreuses fois n'augmente pas la charge.
+
+Accéder aux En-têtes de la Réponse
+----------------------------------
+
+Vous pouvez accéder aux en-têtes de différentes manières. Les noms de l'en-tête
+sont toujours traités avec des valeurs sensibles à la casse quand vous y accédez
+avec les méthodes::
+
+    // Récupère les en-têtes sous la forme d'un tableau associatif array.
+    $response->getHeaders();
+
+    // Récupère un en-tête unique sous la forme d'un tableau.
+    $response->getHeader('content-type');
+
+    // Récupère un en-tête sous la forme d'une chaîne de caractères
+    $response->getHeaderLine('content-type');
+
+    // Récupère la réponse encodée
+    $response->getEncoding();
+
+    // Récupère un tableau de key=>value pour tous les en-têtes
+    $response->headers;
+
+Accéder aux données de Cookie
+-----------------------------
+
+Vous pouvez lire les cookies avec différentes méthodes selon le nombre de
+données que vous souhaitez sur les cookies::
+
+    // Récupère tous les cookies (toutes les données)
+    $response->getCookies();
+
+    // Récupère une valeur d'une unique cookie.
+    $response->getCookie('session_id');
+
+    // Récupère les données complètes pour un unique cookie
+    // includes value, expires, path, httponly, secure keys.
+    $response->getCookieData('session_id');
+
+    // Accède aux données complètes pour tous les cookies.
+    $response->cookies;
+
+Vérifier le Code de statut
+--------------------------
+
+Les objets Response fournissent quelques méthodes pour vérifier les codes de
+statuts::
+
+    // La réponse était-elle 20x
+    $response->isOk();
+
+    // La réponse était-elle 30x
+    $response->isRedirect();
+
+    // Récupère le code de statut
+    $response->getStatusCode();
+
+    // helper __get()
+    $response->code;
 
 .. meta::
     :title lang=fr: HttpClient

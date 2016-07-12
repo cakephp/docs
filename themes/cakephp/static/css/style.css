@@ -15,7 +15,7 @@ body {
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100%;
-    font-family: 'Raleway', sans-serif;
+    font-family: Raleway, sans-serif;
     font-size: 14px;
     line-height: 26px;
     letter-spacing: 0.05em;
@@ -39,6 +39,7 @@ hr {
     width: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
+    font-family: Raleway, sans-serif;
     font-weight: 300;
     margin: 0;
     color: #363637;
@@ -76,7 +77,6 @@ h6 {
 p {
     margin: 0 0 20px;
 }
-
 
 
 /* Preformatted text */
@@ -253,13 +253,6 @@ iframe {
 .no-border { border:none !important; }
 
 
-.bg-main { background-color:rgb(181,67,33) !important; }
-.bg-dark { background-color: #444648 !important; }
-.bg-darker { background-color: #303234 !important; }
-.bg-dark-gray { background-color: #778888 !important; }
-.bg-light-gray { background-color: #aaabac !important; }
-
-
 /* Helper classes for mobile */
 @media (max-width:767px) {
     .xs-block { display:block; }
@@ -282,7 +275,6 @@ iframe {
 
     .sm-block { display:block !important; }
 }
-
 
 
 /* *********************    Megamenu    ********************* */
@@ -648,16 +640,6 @@ iframe {
 
 
 /* *********************    Headers     ********************* */
-
-/* Header Dark */
-.header-dark {
-    background-color: #292c31;
-    color: #dadde2;
-}
-.header-dark .menu > li > a { color: #dadde2; }
-.header-dark,
-.topbar.dark { background-image:url("../logo-light.png"); }
-.topbar.dark { height:50px; background-position: left center; }
 
 @media (min-width:768px) {
     .header-wrapper .navbar-right { margin-right: 0 !important; }

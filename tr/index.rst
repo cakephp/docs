@@ -14,6 +14,8 @@ düzeltmeler yapabilmeniz için Gihub çevrimiçi düzenleyicisine yönlendirece
 
     **Kitabı heryerde okumak için**
 
+    .. image:: /_static/img/read-the-book.jpg
+
     Hemen hemen her yerde CakePHP yemekkitabının keyfini çıkarın. Birden fazla
     cihazda, hem de çevrimdışı olarak okuyabilmeniz için PDF ve EPUB olarak da
     mevcuttur.

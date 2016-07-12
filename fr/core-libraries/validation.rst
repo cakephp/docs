@@ -78,6 +78,26 @@ le deuxième paramètre::
 
     $validator->requirePresence('author_id', 'create');
 
+If you have multiple fields that are required, you can define them as a list::
+
+    // Define multiple fields for create
+    $validator->requirePresence(['author_id', 'title'], 'create');
+
+    // Define multiple fields for mixed modes
+    $validator->requirePresence([
+        'author_id' => [
+            'mode' => 'create',
+            'message' => 'An author is required.',
+        ],
+        'published' => [
+            'mode' => 'update',
+            'message' => 'The published state is required.',
+        ]
+    ]);
+
+.. versionadded:: 3.3.0
+    ``requirePresence()`` accepts an array of fields as of 3.3.0
+
 Permettre aux Champs d'être Vides
 ---------------------------------
 
@@ -133,6 +153,20 @@ l'option ``last`` à ``true``::
 
 Dans l'exemple ci-dessus, si la règle minLength (longueur minimale) échoue,
 la règle maxLength ne sera pas exécutée.
+
+Méthodes de Validation Moins Verbeuses
+--------------------------------------
+
+Depuis la version 3.2, l'objet Validator accepte de nombreuses nouvelles
+méthodes qui rendent la construction de validateurs moins verbeux. Par exemple,
+ajouter des règles de validation à un champ username peut maintenant ressembler
+à ceci::
+
+    $validator = new Validator();
+    $validator
+        ->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
 
 Ajouter des Providers de Validation
 -----------------------------------

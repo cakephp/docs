@@ -452,16 +452,18 @@ Lors de la construction d'APIs, vous avez peut-être besoin de convertir des
 entities en tableaux ou en données JSON. CakePHP facilite cela::
 
     // Obtenir un tableau.
+    // Les associations seront aussi converties avec toArray().
     $array = $user->toArray();
 
     // Convertir en JSON
+    // Les associations seront aussi converties avec le hook jsonSerialize.
     $json = json_encode($user);
 
-Lors de la conversion d'une entity en tableau/JSON, les listes de champ
-virtuel & caché sont utilisées. Les entities sont converties aussi de façon
-récursive. Cela signifie que si les entities et leurs associations sont
-chargées en eager loading, CakePHP va correctement gérer la conversion des
-données associées dans le bon format.
+Lors de la conversion d'une entity en JSON, les listes de champ virtuel & caché
+sont utilisées. Les entities sont converties aussi de façon récursive en JSON.
+Cela signifie que si les entities et leurs associations sont chargées en eager
+loading, CakePHP va correctement gérer la conversion des données associées dans
+le bon format.
 
 Montrer les Propriétés Virtuelles
 ---------------------------------

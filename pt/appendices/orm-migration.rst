@@ -2,12 +2,11 @@ Guia de atualização para o novo ORM
 ###################################
 
 .. note::
-    A documentação não é atualmente suportada pela lingua portuguesa nesta
-    página.
+    Atualmente, a documentação desta página não é suportada em português.
 
-    Por favor, sinta-se a vontade para nos enviar um pull request no
+    Por favor, sinta-se a vontade para nos enviar um *pull request* para o
     `Github <https://github.com/cakephp/docs>`_ ou use o botão
-    **Improve This Doc** para propor suas mudanças diretamente.
+    **IMPROVE THIS DOC** para propor suas mudanças diretamente.
 
-    Você pode referenciar-se à versão inglesa no menu de seleção superior
-    para obter informações sobre o tópico desta página.
+    Você pode consultar a versão em inglês deste tópico através do seletor de
+    idiomas localizado ao lado direito do campo de buscas da documentação.
