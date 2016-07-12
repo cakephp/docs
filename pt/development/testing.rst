@@ -70,10 +70,30 @@ usada pelo CakePHP para fixar tabelas e dados::
         ],
     ],
 
+.. _running-tests:
+
+Running Tests
+=============
+
+.. _test-fixtures:
+
+Fixtures
+========
+
 .. _integration-testing:
 
 Controller Integration Testing
 ===============================
+
+.. _testing-authentication:
+
+Testing Actions That Require Authentication
+-------------------------------------------
+
+.. _testing-events:
+
+Testing Events
+==============
 
 .. note::
 

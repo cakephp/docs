@@ -15,6 +15,8 @@ a la documentación actual.
 
     **Lee el libro donde sea**
 
+    .. image:: /_static/img/read-the-book.jpg
+
     Disfruta el manual donde quieras. Disponible tanto en PDF como en
     EPUB, puedes leerlo offline y en muchos dispositivos.
 

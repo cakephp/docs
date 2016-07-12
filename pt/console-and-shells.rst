@@ -946,6 +946,7 @@ Mais tópicos
     console-and-shells/routes-shell
     console-and-shells/upgrade-shell
     console-and-shells/server-shell
+    console-and-shells/cache
 
 .. meta::
     :title lang=pt: Console e Shells

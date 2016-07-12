@@ -142,31 +142,6 @@ If for some reason you'd like to skip the default behavior, you can return a
 :php:class:`Cake\\Network\\Response` object from the action with the fully
 created response.
 
-When you use controller methods with
-:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-you will typically return a ``Response`` instance. If you have controller
-methods that are used for normal web requests + requestAction, you should check
-the request type before returning::
-
-    // src/Controller/RecipesController.php
-
-    class RecipesController extends AppController
-    {
-        public function popular()
-        {
-            $popular = $this->Recipes->find('popular');
-            if ($this->request->is('requested')) {
-                $this->response->body(json_encode($popular));
-                return $this->response;
-            }
-            $this->set('popular', $popular);
-        }
-    }
-
-The above controller action is an example of how a method can be used with
-:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` and normal
-requests.
-
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
 

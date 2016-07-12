@@ -73,6 +73,26 @@ the mode using the second parameter::
 
     $validator->requirePresence('author_id', 'create');
 
+If you have multiple fields that are required, you can define them as a list::
+
+    // Define multiple fields for create
+    $validator->requirePresence(['author_id', 'title'], 'create');
+
+    // Define multiple fields for mixed modes
+    $validator->requirePresence([
+        'author_id' => [
+            'mode' => 'create',
+            'message' => 'An author is required.',
+        ],
+        'published' => [
+            'mode' => 'update',
+            'message' => 'The published state is required.',
+        ]
+    ]);
+
+.. versionadded:: 3.3.0
+    ``requirePresence()`` accepts an array of fields as of 3.3.0
+
 Allowing Empty Fields
 ---------------------
 
@@ -124,6 +144,19 @@ a specific rule has failed, you can set the ``last`` option to ``true``::
 
 If the minLength rule fails in the example above, the maxLength rule will not be
 run.
+
+Validation Methods Less Verbose
+-------------------------------
+
+Since 3.2, the Validator object has a number of new methods that make building
+validators less verbose. For example adding validation rules to a username field
+can now look like::
+
+    $validator = new Validator();
+    $validator
+        ->email('username')
+        ->ascii('username')
+        ->lengthBetween('username', [4, 8]);
 
 Adding Validation Providers
 ---------------------------
@@ -177,7 +210,7 @@ model fields, depending on a country, ie::
                 'rule' => 'phone',
                 'provider' => 'fr'
             ]);
-            
+
             return $validator;
         }
     }
@@ -236,15 +269,15 @@ containing data related to the validation process:
   need to create complex rules by calling multiple providers.
 - **newRecord**: Whether the validation call is for a new record or
   a preexisting one.
-  
-If you need to pass additional data to your validation methods such as the 
+
+If you need to pass additional data to your validation methods such as the
 current user's id, you can use a custom dynamic provider from your controller. ::
 
     $this->Examples->validator('default')->provider('passed', [
         'count' => $countFromController,
         'userid' => $this->Auth->user('id')
     ]);
-    
+
 Then ensure that your validation method has the second context parameter. ::
 
     public function customValidationMethod($check, array $context)
@@ -487,8 +520,8 @@ The `API documentation
 available, and their basic usage.
 
 Some of the validation methods accept additional parameters to define boundary
-conditions or valid options. You can provide these boundary conditions and options
-as follows::
+conditions or valid options. You can provide these boundary conditions and
+options as follows::
 
     $validator = new Validator();
     $validator

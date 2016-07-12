@@ -161,7 +161,7 @@ Due to the conventions, not all schema changes can be performed via these shell
 commands.
 
 Additionally you can create an empty migrations file if you want full control
-over what needs to be executed, by ommiting to specify a columns definition::
+over what needs to be executed, by omitting to specify a columns definition::
 
     $ bin/cake migrations create MyCustomMigration
 

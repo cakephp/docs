@@ -12,9 +12,6 @@ Extending Bake
 
 .. _creating-a-bake-theme:
 
-Creating a Bake Theme
-=====================
-
 .. meta::
     :title lang=es: Extending Bake
     :keywords lang=es: command line interface,development,bake view, bake template syntax,erb tags,asp tags,percent tags

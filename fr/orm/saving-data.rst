@@ -124,6 +124,9 @@ d'``Entity`` de la table de jointure::
     $article = $articlesTable->get(1, ['contain' => ['Tags']]);
     $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
 
+    // Nécessaire car nous changeons une propriété directement
+    $article->dirty('tags', true);
+
     $articlesTable->save($article, ['associated' => ['Tags']]);
 
 Vous pouvez aussi créer/mettre à jour les informations de la table jointe quand

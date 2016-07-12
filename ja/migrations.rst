@@ -194,14 +194,16 @@ Migrations
 コマンドラインでカラムを使用する場合には、次のようなパターンに従っている事を
 覚えておくと便利です。 ::
 
-    fieldName:fieldType[length]:indexType:indexName
+    fieldName:fieldType?[length]:indexType:indexName
 
 例えば、以下はメールアドレスのカラムを指定する方法です。
 
+* ``email:string?``
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
+fieldType の後のクエスチョンマークは、ヌルを許可するカラムを作成します。
 
 ``fieldType`` のための ``length`` パラメータは任意です。カッコの中に記述します。
 
@@ -617,6 +619,34 @@ JSON 形式の文字列として結果を出力できます。 ::
 マイグレーションとは対照的にシーダーは追跡されないことに注意してください。
 それは、同じシーダーは、複数回適用することができることを意味します。
 
+シーダーから別のシーダーの呼び出し
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: cakephp/migrations 1.6.2
+
+たいてい初期データ投入時は、データの挿入する順番は、規約違反しないように遵守しなければなりません。
+デフォルトでは、アルファベット順でシーダーが実行されますが、独自にシーダーの実行順を定義するために
+``\Migrations\AbstractSeed::call()`` メソッドが利用できます。 ::
+
+    use Migrations\AbstractSeed;
+
+    class DatabaseSeed extends AbstractSeed
+    {
+        public function run()
+        {
+            $this->call('AnotherSeed');
+            $this->call('YetAnotherSeed');
+
+            // プラグインからシーダーを呼ぶためにプラグインドット記法が使えます
+            $this->call('PluginName.FromPluginSeed');
+        }
+    }
+
+.. note::
+
+    もし、 ``call()`` メソッドを使いたい場合、Maigrations プラグインの ``AbstractSeed``
+    クラスを継承していることを確認してください。このクラスは、リリース 1.6.2 で追加されました。
+
 ``dump`` : 差分を bake する機能のためのダンプファイルの生成
 -------------------------------------------------------------
 
@@ -850,3 +880,15 @@ CakePHP コアは、この操作を行うために使用できる :doc:`ORM キ�
 このシェルについてもっと知りたい場合、クックブックの
 :doc:`ORM キャッシュシェル <console-and-shells/orm-cache>`
 セクションをご覧ください。
+
+テーブルのリネーム
+------------------
+
+プラグインは、 ``rename()`` メソッドを使用することでテーブルのリネームができます。
+あなたのマイグレーションファイルの中で、以下のように記述できます。 ::
+
+    public function up()
+    {
+        $this->table('old_table_name')
+            ->rename('new_table_name');
+    }

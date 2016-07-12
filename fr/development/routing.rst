@@ -19,9 +19,9 @@ jour tous vos codes.
 Tour Rapide
 ===========
 
-Cette section va vous apprendre les utilisations les plus
-habituelles du Router de CakePHP. Typiquement si vous voulez afficher quelque
-chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
+Cette section va vous apprendre les utilisations les plus habituelles du Router
+de CakePHP. Typiquement si vous voulez afficher quelque chose en page d'accueil,
+vous ajoutez ceci au fichier **routes.php**::
 
     use Cake\Routing\Router;
 
@@ -33,10 +33,10 @@ chose en page d'accueil, vous ajoutez ceci au fichier **routes.php**::
     // En utilisant la méthode statique.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-``Router`` fournit deux interfaces pour connecter les routes. La méthode statique
-est une interface retro-compatible, alors que le builder scopé (lié la portée)
-offre une syntaxe plus laconique pour construire des routes multiples, et de
-meilleures performances.
+``Router`` fournit deux interfaces pour connecter les routes. La méthode
+statique est une interface retro-compatible, alors que le builder scopé (lié la
+portée) offre une syntaxe plus laconique pour construire des routes multiples,
+et de meilleures performances.
 
 Ceci va exécuter la méthode ``index`` dans ``ArticlesController`` quand la page
 d'accueil de votre site est visitée. Parfois vous avez besoin de routes
@@ -130,10 +130,10 @@ scope et connecter certaines routes, nous allons utiliser la méthode
         $routes->fallbacks('DashedRoute');
     });
 
-La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez
-faire correspondre, les valeurs par défaut pour les éléments de votre
-route, et les règles d'expression régulière pour aider le router à
-faire correspondre les éléments dans l'URL.
+La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez faire
+correspondre, les valeurs par défaut pour les éléments de votre route, et les
+règles d'expression régulière pour aider le router à faire correspondre les
+éléments dans l'URL.
 
 Le format basique pour une définition de route est::
 
@@ -143,36 +143,36 @@ Le format basique pour une définition de route est::
         ['option' => 'matchingRegex']
     );
 
-Le premier paramètre est utilisé pour dire au router quelle sorte d'URL
-vous essayez de contrôler. L'URL est une chaîne normale délimitée par
-des slashes, mais peut aussi contenir une wildcard (\*) ou
-:ref:`route-elements`. Utiliser une wildcard dit au router que vous êtes prêt
-à accepter tout argument supplémentaire fourni. Les Routes sans un \* ne
-matchent que le pattern template exact fourni.
+Le premier paramètre est utilisé pour dire au router quelle sorte d'URL vous
+essayez de contrôler. L'URL est une chaîne normale délimitée par des slashes,
+mais peut aussi contenir une wildcard (\*) ou :ref:`route-elements`. Utiliser
+une wildcard dit au router que vous êtes prêt à accepter tout argument
+supplémentaire fourni. Les Routes sans un \* ne matchent que le pattern template
+exact fourni.
 
 Une fois que vous spécifiez une URL, vous utilisez les deux derniers paramètres
 de ``connect()`` pour dire à CakePHP quoi faire avec une requête une fois
-qu'elle a été matchée. Le deuxième paramètre est un tableau associatif. Les
-clés du tableau devraient être appelées après les éléments de route dans l'URL,
-ou les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``.
-Les valeurs dans le tableau sont les valeurs par défaut pour ces clés.
-Regardons quelques exemples simples avant que nous commencions à voir
-l'utilisation du troisième paramètre de connect()::
+qu'elle a été matchée. Le deuxième paramètre est un tableau associatif. Les clés
+du tableau devraient être appelées après les éléments de route dans l'URL, ou
+les éléments par défaut: ``:controller``, ``:action``, et ``:plugin``. Les
+valeurs dans le tableau sont les valeurs par défaut pour ces clés. Regardons
+quelques exemples simples avant que nous commencions à voir l'utilisation du
+troisième paramètre de connect()::
 
     $routes->connect(
         '/pages/*',
         ['controller' => 'Pages', 'action' => 'display']
     );
 
-Cette route est trouvée dans le fichier routes.php distribué avec CakePHP.
-Cette route matche toute URL commençant par ``/pages/`` et il tend vers
-l'action ``display()`` de ``PagesController`` La requête ``/pages/products``
-serait mappé vers ``PagesController->display('products')``.
+Cette route est trouvée dans le fichier routes.php distribué avec CakePHP. Cette
+route matche toute URL commençant par ``/pages/`` et il tend vers l'action
+``display()`` de ``PagesController`` La requête ``/pages/products`` serait mappé
+vers ``PagesController->display('products')``.
 
 En plus de l'étoile greedy ``/*`` il y aussi la syntaxe de l'étoile trailing
-``/**``. Utiliser une étoile double trailing, va capturer le reste de l'URL
-en tant qu'argument unique passé. Ceci est utile quand vous voulez utilisez
-un argument qui incluait un ``/`` dedans::
+``/**``. Utiliser une étoile double trailing, va capturer le reste de l'URL en
+tant qu'argument unique passé. Ceci est utile quand vous voulez utilisez un
+argument qui incluait un ``/`` dedans::
 
     $routes->connect(
         '/pages/**',
@@ -193,8 +193,8 @@ paramètre de routing qui est composé des valeurs par défaut de la route::
 Cet exemple montre comment vous pouvez utiliser le deuxième paramètre de
 ``connect()`` pour définir les paramètres par défaut. Si vous construisez un
 site qui propose des produits pour différentes catégories de clients, vous
-pourriez considérer la création d'une route. Cela vous permet de vous lier
-à ``/government`` plutôt qu'à ``/pages/display/5``.
+pourriez considérer la création d'une route. Cela vous permet de vous lier à
+``/government`` plutôt qu'à ``/pages/display/5``.
 
 Une autre utilisation ordinaire pour le Router est de définir un "alias" pour
 un controller. Disons qu'au lieu d'accéder à notre URL régulière à
@@ -205,19 +205,19 @@ un controller. Disons qu'au lieu d'accéder à notre URL régulière à
         '/cooks/:action/*', ['controller' => 'Users']
     );
 
-Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être
-envoyée au controller users. L'action appelée dépendra de la valeur du
-paramètre ``:action``. En utilisant :ref:`route-elements`, vous pouvez
-créer des routes variables, qui acceptent les entrées utilisateur ou les
-variables. La route ci-dessus utilise aussi l'étoile greedy.
-L'étoile greedy indique au :php:class:`Router` que cette route devrait
-accepter tout argument de position supplémentaire donné. Ces arguments
-seront rendus disponibles dans le tableau :ref:`passed-arguments`.
+Cela dit au Router que toute URL commençant par ``/cooks/`` devrait être envoyée
+au controller users. L'action appelée dépendra de la valeur du paramètre
+``:action``. En utilisant :ref:`route-elements`, vous pouvez créer des routes
+variables, qui acceptent les entrées utilisateur ou les variables. La route
+ci-dessus utilise aussi l'étoile greedy. L'étoile greedy indique au
+:php:class:`Router` que cette route devrait accepter tout argument de position
+supplémentaire donné. Ces arguments seront rendus disponibles dans le tableau
+:ref:`passed-arguments`.
 
 Quand on génère les URLs, les routes sont aussi utilisées. Utiliser
-``['controller' => 'Users', 'action' => 'some_action', 5]`` en
-URL va sortir /cooks/some_action/5 si la route ci-dessus est la
-première correspondante trouvée.
+``['controller' => 'Users', 'action' => 'some_action', 5]`` en URL va sortir
+``/cooks/some_action/5`` si la route ci-dessus est la première correspondante
+trouvée.
 
 .. _route-elements:
 
@@ -463,7 +463,7 @@ scope::
 Vous pouvez aussi utiliser l'option ``_namePrefix`` dans les scopes imbriqués et
 elle fonctionne comme vous pouvez vous y attendre::
 
-    Router::plugin('Contacts', ['_namePrefix' => 'contacts:', function ($routes) {
+    Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
             // Le nom de cette route sera `contacts:api:ping`
             $routes->connect('/ping', ['controller' => 'Pings'], ['_name' => 'ping']);
@@ -708,8 +708,6 @@ vues automatiquement en se basant sur les types de contenu.
 Créer des Routes RESTful
 ========================
 
-.. php:staticmethod:: mapResources($controller, $options)
-
 Le router rend facile la génération des routes RESTful pour vos controllers.
 Les routes RESTful sont utiles lorsque vous créez des points de terminaison
 d'API pour vos applications. Si nous voulions permettre l'accès à une base
@@ -774,10 +772,32 @@ Le code ci-dessus va générer une ressource de routes pour ``articles`` et
     /api/articles/:article_id/comments
     /api/articles/:article_id/comments/:id
 
+You can get the ``article_id`` in ``CommentsController`` by::
+
+    $this->request->param('article_id');
+
+By default resource routes map to the same prefix as the containing scope. If
+you have both nested and non-nested resource controllers you can use a different
+controller in each context by using prefixes::
+
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
+            $routes->resources('Comments', ['prefix' => 'articles']);
+        });
+    });
+
+The above would map the 'Comments' resource to the
+``App\Controller\Articles\CommentsController``. Having separate controllers lets
+you keep your controller logic simpler. The prefixes created this way are
+compatible with :ref:`prefix-routing`.
+
 .. note::
 
     Vous pouvez imbriquer autant de ressources que vous le souhaitez, mais il
     n'est pas recommandé d'imbriquer plus de 2 ressources ensembles.
+
+.. versionadded:: 3.3
+    L'option ``prefix`` a été ajoutée à ``resources()`` dans la version 3.3.
 
 Limiter la Création des Routes
 ------------------------------
@@ -799,15 +819,15 @@ Changer les Actions du Controller
 
 Vous devrez peut-être modifier le nom des actions du controller qui sont
 utilisés lors de la connexion des routes. Par exemple, si votre action
-``edit()`` est nommée ``update()``, vous pouvez utiliser la clé ``actions`` pour
+``edit()`` est nommée ``put()``, vous pouvez utiliser la clé ``actions`` pour
 renommer vos actions::
 
     $routes->resources('Articles', [
-        'actions' => ['edit' => 'update', 'add' => 'create']
+        'actions' => ['update' => 'put', 'create' => 'create']
     ]);
 
-Le code ci-dessus va utiliser ``edit()`` pour l'action update, et ``create()``
-au lieu de ``add()``.
+Le code ci-dessus va utiliser ``put()`` pour l'action ``edit()``, et
+``create()`` au lieu de ``add()``.
 
 Mapper des Routes de Ressource Supplémentaires
 ----------------------------------------------
@@ -1022,8 +1042,6 @@ vous générez des URLs:
 Routing de Redirection
 ======================
 
-.. php:staticmethod:: redirect($route, $url, $options = [])
-
 Le routing de redirection permet de créer des statuts HTTP de redirection
 30x pour les routes entrantes et les pointer vers des URLs différentes.
 C'est utile lorsque vous souhaitez informer les applications clientes qu'une
@@ -1035,13 +1053,15 @@ effectuent une redirection d'en-tête si une correspondance est trouvée. La
 redirection peut se produire vers une destination au sein de votre
 application ou un emplacement à extérieur::
 
-    $routes->redirect(
-        '/home/*',
-        ['controller' => 'Articles', 'action' => 'view'],
-        ['persist' => true]
-        // ou ['persist'=>['id']] pour le routing par défaut où
-        // l'action view attend $id comme paramètre
-    );
+    Router::scope('/', function ($routes) {
+        $routes->redirect(
+            '/home/*',
+            ['controller' => 'Articles', 'action' => 'view'],
+            ['persist' => true]
+            // Or ['persist'=>['id']] for default routing where the
+            // view action expects $id as an argument.
+        );
+    })
 
 Redirige ``/home/*`` vers ``/articles/view`` et passe les paramètres vers
 ``/articles/view``. Utiliser un tableau comme destination de redirection vous
@@ -1049,9 +1069,11 @@ permet d'utiliser différentes routes pour définir où la chaine URL devrait
 être redirigée. Vous pouvez rediriger vers des destinations externes en
 utilisant des chaines URLs pour destination::
 
-    $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    Router::scope('/', function ($routes) {
+        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    });
 
-Cela redirigerai ``/articles/*`` vers ``http://google.com`` avec un statut
+Cela redirigerait ``/articles/*`` vers ``http://google.com`` avec un statut
 HTTP 302.
 
 .. _custom-route-classes:

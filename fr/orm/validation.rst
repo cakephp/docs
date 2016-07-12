@@ -396,6 +396,45 @@ une classe de règle ``ExistsIn``::
 Les champs dont il faut vérifier l'existence dans la table liée doivent faire
 parti de la clé primaire.
 
+Vous pouvez forcer ``existsIn`` à passer quand des parties de votre clé
+étrangère composite est nulle::
+
+    // The primary composite key within NodesTable is (id, site_id).
+    // A Node may reference a parent Node but does not need to whenever parent_id is null:
+    $rules->add($rules->existsIn(
+        ['parent_id', 'site_id'],
+        'ParentNodes',
+        ['partialNullsPass' => true]
+    );
+
+    // A Node however must in addition also always reference a Site.
+    $rules->add($rules->existsIn(['site_id'], 'Sites'));
+
+.. versionadded:: 3.3.0
+    L'option ``partialNullsPass`` a été ajoutée.
+
+Règles sur le Nombre de Valeurs d'une Association
+-------------------------------------------------
+
+Si vous devez valider qu'une propriété ou une association contient un bon nombre
+de valeurs, vous pouvez utiliser la règle ``validCount()``::
+
+    // Pas plus de 5 tags sur un article.
+    $rules->add($rules->validCount('tags', 5, '<=', 'Vous pouvez avoir seulement 5 tags'));
+
+Quand vous définissez des règles qui concernent le nombre, le troisième
+paramètre vous permet de définir l'opérateur de comparaison à utiliser. ``==``,
+``>=``, ``<=``, ``>``, ``<``, and ``!=`` sont les opérateurs acceptés. Pour vous
+assurer qu'un nombre d'une propriété est entre certaines valeurs, utilisez deux
+règles::
+
+    // Entre 3 et 5 tags
+    $rules->add($rules->validCount('tags', 3, '>=', 'Vous devez avoir au moins 3 tags'));
+    $rules->add($rules->validCount('tags', 5, '<=', 'Vous devez avoir au moins 5 tags'));
+
+.. versionadded:: 3.3.0
+    La méthode ``validCount()`` a été ajoutée dans la version 3.3.0.
+
 Utiliser les Méthodes Entity en tant que Règles
 -----------------------------------------------
 

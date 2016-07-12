@@ -1,6 +1,10 @@
 Dispatcher Filters
 ##################
 
+.. deprecated:: 3.3.0
+    As of 3.3.0 Dispatcher Filters are deprecated. You should use
+    :doc:`/controllers/middleware` instead now.
+
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,
 such as response caching, header tuning, special authentication or just to

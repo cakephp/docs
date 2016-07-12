@@ -428,13 +428,15 @@ When building APIs, you may often need to convert entities into arrays or JSON
 data. CakePHP makes this simple::
 
     // Get an array.
+    // Associations will be converted with toArray() as well.
     $array = $user->toArray();
 
     // Convert to JSON
+    // Associations will be converted with jsonSerialize hook as well.
     $json = json_encode($user);
 
-When converting an entity to an array/JSON the virtual & hidden field lists are
-applied. Entities are converted recursively as well. This means that if you
+When converting an entity to an JSON the virtual & hidden field lists are
+applied. Entities are recursively converted to JSON as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 

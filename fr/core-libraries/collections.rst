@@ -55,25 +55,27 @@ Liste des Méthodes
 .. table::
     :class: docutils internal-toc
 
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`append`   | :php:meth:`buffered`   | :php:meth:`combine`  | :php:meth:`compile` |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`contains` | :php:meth:`countBy`    | :php:meth:`chunk`    | :php:meth:`each`    |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`every`    | :php:meth:`extract`    | :php:meth:`filter`   | :php:meth:`first`   |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`groupBy`  | :php:meth:`indexBy`    | :php:meth:`insert`   | :php:meth:`isEmpty` |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`last`     | :php:meth:`listNested` | :php:meth:`map`      | :php:meth:`match`   |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`max`      | :php:meth:`min`        | :php:meth:`nest`     | :php:meth:`reduce`  |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`reject`   | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`some`     | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
-    +----------------------+------------------------+----------------------+---------------------+
-    | :php:meth:`take`     | :php:meth:`through`    | :php:meth:`unfold`   | :php:meth:`zip`     |
-    +----------------------+------------------------+----------------------+---------------------+
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`append`    | :php:meth:`buffered`   | :php:meth:`combine`  | :php:meth:`compile` |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`contains`  | :php:meth:`countBy`    | :php:meth:`chunk`    | :php:meth:`each`    |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`every`     | :php:meth:`extract`    | :php:meth:`filter`   | :php:meth:`first`   |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`groupBy`   | :php:meth:`indexBy`    | :php:meth:`insert`   | :php:meth:`isEmpty` |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`last`      | :php:meth:`listNested` | :php:meth:`map`      | :php:meth:`match`   |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`max`       | :php:meth:`min`        | :php:meth:`nest`     | :php:meth:`reduce`  |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`reject`    | :php:meth:`sample`     | :php:meth:`shuffle`  | :php:meth:`skip`    |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`some`      | :php:meth:`sortBy`     | :php:meth:`stopWhen` | :php:meth:`sumOf`   |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`take`      | :php:meth:`through`    | :php:meth:`unfold`   | :php:meth:`zip`     |
+    +-----------------------+------------------------+----------------------+---------------------+
+    | :php:meth:`transpose` |                        |                      |                     |
+    +-----------------------+------------------------+----------------------+---------------------+
 
 Faire une Itération
 ===================
@@ -799,6 +801,30 @@ dans une position au hasard, utilisez ``shuffle``::
 
     // Ceci pourrait retourner [2, 3, 1]
     $collection->shuffle()->toArray();
+
+.. php:method:: transpose()
+
+Quand vous transposez une collection, vous récupérez une nouvelle collection
+contenant une colonne avec chacune des colonnes originales::
+
+     $items = [
+        ['Products', '2012', '2013', '2014'],
+        ['Product A', '200', '100', '50'],
+        ['Product B', '300', '200', '100'],
+        ['Product C', '400', '300', '200'],
+     ]
+     $transpose = (new Collection($items))->transpose()->toList();
+
+     // Returns
+     [
+         ['Products', 'Product A', 'Product B', 'Product C'],
+         ['2012', '200', '300', '400'],
+         ['2013', '100', '200', '300'],
+         ['2014', '50', '100', '200'],
+     ]
+
+.. versionadded:: 3.3.0
+    ``Collection::transpose()`` a été ajoutée dans la version 3.3.0.
 
 Retrait d'Eléments
 ------------------
