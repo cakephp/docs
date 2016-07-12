@@ -65,11 +65,6 @@ trouver dans les paramètres de la requête:
 * ``action`` L'action gérant la requête courante.
 * ``prefix`` Le préfixe pour l'action courante. Voir :ref:`prefix-routing` pour
   plus d'informations.
-* ``bare`` Présent quand la requête vient de
-  :php:meth:`~Cake\\Controller\\Controller::requestAction()` et inclut l'option
-  bare. Les requêtes bare n'ont pas de layout de rendu.
-* ``requested`` Présent et mis à ``true`` quand l'action vient de
-  :php:meth:`~Cake\\Controller\\Controller::requestAction()`.
 
 Accéder aux Paramètres Querystring
 ----------------------------------
