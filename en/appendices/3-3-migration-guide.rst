@@ -23,8 +23,8 @@ Deprecations
   * ``version()`` use ``getProtocolVersion()`` instead.
 * Dispatcher Filters are now deprecated. Use :doc:`/controllers/middleware`
   instead.
-* ``RequestActionTrait`` has been deprecated. Refactor your code to use view
-  cells instead.
+* ``RequestActionTrait`` has been deprecated. Refactor your code to use 
+  :doc:`/views/cells` instead.
 
 Behavior Changes
 ================
