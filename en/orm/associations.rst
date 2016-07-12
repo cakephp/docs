@@ -357,6 +357,33 @@ syntax::
         }
     }
 
+Sometimes you may want to configure composite keys in your associations::
+
+    // within ArticlesTable::initialize() call
+    $this->hasMany('Reviews', [
+        'foreignKey' => [
+            'article_id',
+            'article_hash'
+        ]
+    ]);
+
+In the example above, we have passed an array containing the desired composite
+keys to ``foreignKey``. Maybe you need to specify different
+binding fields than the defaults so you can setup it manually in your
+``bindingKeys`` array::
+
+    // within ArticlesTable::initialize() call
+    $this->hasMany('Reviews', [
+        'foreignKey' => [
+            'article_id',
+            'article_hash'
+        ],
+        'bindingKey' => [
+            'whatever_id',
+            'whatever_hash'
+        ]
+    ]);
+
 Possible keys for hasMany association arrays include:
 
 - **className**: the class name of the model being associated to
