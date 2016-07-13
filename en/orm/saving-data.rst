@@ -123,6 +123,10 @@ class::
     $article->dirty('tags', true); 
 
     $articlesTable->save($article, ['associated' => ['Tags']]);
+    
+    // Will do the same as above as by default all associated entities marked dirty are being saved
+    // You can set 'associated' => false to stop this default behavior.
+    $articlesTable->save($article);
 
 You can also create/update join table information when using ``newEntity()`` or
 ``patchEntity()``. Your POST data should look like::
@@ -331,7 +335,7 @@ Converting Multiple Records
 When creating forms that create/update multiple records at once you can use
 ``newEntities()``::
 
-    // In a controller.
+    // In a controller
     $articles = TableRegistry::get('Articles');
     $entities = $articles->newEntities($this->request->data());
 
@@ -351,7 +355,7 @@ In this situation, the request data for multiple articles should look like::
 Once you've converted request data into entities you can ``save()`` or
 ``delete()`` them::
 
-    // In a controller.
+    // In a controller
     foreach ($entities as $entity) {
         // Save entity
         $articles->save($entity);
@@ -364,7 +368,7 @@ The above will run a separate transaction for each entity saved. If you'd like
 to process all the entities as a single transaction you can use
 ``transactional()``::
 
-    // In a controller.
+    // In a controller
     $articles->connection()->transactional(function () use ($articles, $entities) {
         foreach ($entities as $entity) {
             $articles->save($entity, ['atomic' => false]);
@@ -414,7 +418,7 @@ changed will be saved, as opposed to sending all fields to the database to be
 persisted. You can merge an array of raw data into an existing entity using the
 ``patchEntity()`` method::
 
-    // In a controller.
+    // In a controller
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->data());
@@ -429,7 +433,7 @@ before it is copied to the entity. The mechanism is explained in the
 :ref:`validating-request-data` section. If you wish to disable validation while
 patching an entity, pass the ``validate`` option as follows::
 
-    // In a controller.
+    // In a controller
     $articles = TableRegistry::get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
@@ -451,7 +455,7 @@ merging associations, by default only the first level of associations are
 merged, but if you wish to control the list of associations to be merged or
 merge deeper to deeper levels, you can use the third parameter of the method::
 
-    // In a controller.
+    // In a controller
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->data(), [
@@ -475,7 +479,7 @@ For example give some request data like the following::
 Trying to patch an entity without an entity in the user property will create
 a new user entity::
 
-    // In a controller.
+    // In a controller
     $entity = $articles->patchEntity(new Article, $data);
     echo $entity->user->username; // Echoes 'mark'
 
@@ -551,7 +555,7 @@ the database, if you wish to remove the comments for that article that are not
 present in the entity, you can collect the primary keys and execute a batch
 delete for those not in the list::
 
-    // In a controller.
+    // In a controller
     $comments = TableRegistry::get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
@@ -567,7 +571,7 @@ patching hasMany and belongsToMany associations apply for patching multiple
 entities: Matches are done by the primary key field value and missing matches in
 the original entities array will be removed and not present in the result::
 
-    // In a controller.
+    // In a controller
     $articles = TableRegistry::get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->data());
@@ -579,7 +583,7 @@ Similarly to using ``patchEntity()``, you can use the third argument for
 controlling the associations that will be merged in each of the entities in the
 array::
 
-    // In a controller.
+    // In a controller
     $patched = $articles->patchEntities(
         $list,
         $this->request->data(),
@@ -770,21 +774,20 @@ The ``save()`` method will return the modified entity on success, and ``false``
 on failure. You can disable rules and/or transactions using the
 ``$options`` argument for save::
 
-    // In a controller or table method.
+    // In a controller or table method
     $articles->save($article, ['checkRules' => false, 'atomic' => false]);
 
 Saving Associations
 -------------------
 
-When you are saving an entity, you can also elect to save some or all of the
-associated entities. By default all first level entities will be saved. For
-example saving an Article, will also automatically update any dirty entities
-that are directly related to articles table.
+When you are saving an entity, by default all associated entities,
+that are marekd dirty will be saved. You can however elect to save
+no associated entities by setting the ``associated`` option to ``false``.
 
-You can fine tune which associations are saved by using the ``associated``
-option::
+You can also fine tune which associations are saved by using the
+``associated`` option::
 
-    // In a controller.
+    // In a controller
 
     // Only save the comments association
     $articles->save($entity, ['associated' => ['Comments']]);
@@ -820,7 +823,7 @@ Saving BelongsTo Associations
 When saving belongsTo associations, the ORM expects a single nested entity at
 the singular, underscored version of the association name. For example::
 
-    // In a controller.
+    // In a controller
     $data = [
         'title' => 'First Post',
         'user' => [
@@ -841,7 +844,7 @@ Saving HasOne Associations
 When saving hasOne associations, the ORM expects a single nested entity at the
 singular, underscored version of the association name. For example::
 
-    // In a controller.
+    // In a controller
     $data = [
         'id' => 1,
         'username' => 'cakephp',
@@ -861,7 +864,7 @@ Saving HasMany Associations
 When saving hasMany associations, the ORM expects an array of entities at the
 plural, underscored version of the association name. For example::
 
-    // In a controller.
+    // In a controller
     $data = [
         'title' => 'First Post',
         'comments' => [
@@ -903,7 +906,7 @@ Saving BelongsToMany Associations
 When saving belongsToMany associations, the ORM expects an array of entities at
 the plural, underscored version of the association name. For example::
 
-    // In a controller.
+    // In a controller
     $data = [
         'title' => 'First Post',
         'tags' => [
