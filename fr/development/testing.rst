@@ -1226,7 +1226,7 @@ test::
     // En supposant que cette action modifie le cookie.
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('my_cookie', 'Une valeur mise à jour');
+    $this->assertCookieEncrypted('Une valeur mise à jour', 'my_cookie');
 
 .. versionadded: 3.1.7
     ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans la

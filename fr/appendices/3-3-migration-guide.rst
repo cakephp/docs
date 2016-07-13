@@ -23,6 +23,8 @@ Deprecations
   * ``version()`` utilisez ``getProtocolVersion()`` à la place.
 * Les Filtres de Dispatcher sont maintenant dépréciés. Utilisez
   :doc:`/controllers/middleware` à la place.
+* ``RequestActionTrait`` a été dépréciée. Refactorez votre code pour utiliser
+  :doc:`/views/cells` à la place.
 
 Changements de Comportement
 ===========================
@@ -131,6 +133,12 @@ Validation
 * ``Validator::requirePresence()``, ``Validator::allowEmpty()`` et
   ``Validator::notEmpty()`` acceptent maintenant une liste de champs. Ceci vous
   permet de définir de façon plus concise les champs qui sont requis.
+
+StringTemplate
+==============
+
+``StringTemplate::format()`` lève maintenant une exception au lieu de retourner
+``null`` quand un template demandé n'est pas trouvé.
 
 Autres Améliorations
 ====================

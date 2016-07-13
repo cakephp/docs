@@ -373,9 +373,9 @@ Persister la Chaîne Tag
 Maintenant que nous pouvons voir les tags existants en chaîne, nous voudrions
 aussi sauvegarder les données. Comme nous marquons les ``tag_string``
 accessibles, l'ORM va copier ces données à partir de la requête dans notre
-entity. Nous pouvons utiliser une méthode hook ``beforeSave()`` pour
-parser la chaîne de tag et trouver/construire les entities liées. Ajoutez ce
-qui suit dans **src/Model/Table/BookmarksTable.php**::
+entity. Nous pouvons utiliser une méthode hook ``beforeSave()`` pour parser la
+chaîne de tag et trouver/construire les entities liées. Ajoutez ce qui suit dans
+**src/Model/Table/BookmarksTable.php**::
 
 
     public function beforeSave($event, $entity, $options)
@@ -388,7 +388,7 @@ qui suit dans **src/Model/Table/BookmarksTable.php**::
     protected function _buildTags($tagString)
     {
         // Trim tags
-        $newTags = array_map('trim', explode(',', $tagString);
+        $newTags = array_map('trim', explode(',', $tagString));
         // Retire tous les tags vides
         $newTags = array_filter($newTags);
         // Réduit les tags dupliqués
