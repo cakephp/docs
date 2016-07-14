@@ -118,12 +118,20 @@ CaePHPの場合、正確には ``touch()`` はこのように使うことがで�
 例えば、記事を更新したときに、新しくコメントを追加するといったことです。
 
 
-Saving Updates Without Modifying Timestamps
+..
+    Saving Updates Without Modifying Timestamps
+
+編集のタイムスタンプ無しで更新の保存
 ===========================================
 
-To disable the automatic modification of the ``updated`` timestamp column when
-saving an entity you can mark the attribute as 'dirty'::
+..
+    To disable the automatic modification of the ``updated`` timestamp column when
+    saving an entity you can mark the attribute as 'dirty'
 
-    // Mark the modified column as dirty making
-    // the current value be set on update.
+..
+    Mark the modified column as dirty making the current value be set on update.
+
+'dirty' で印を付けると、自動的な更新をするtimestampのupdatedカラムを無効化することができます。::
+
+    // dirtyを使い、更新した時にカラムに現在の値をセットする
     $order->dirty('modified', true);
