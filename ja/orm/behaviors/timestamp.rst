@@ -5,11 +5,16 @@ Timestamp
 
 .. php:class:: TimestampBehavior
 
-The timestamp behavior allows your table objects to update one or more
-timestamps on each model event. This is primarily used to populate data into
-``created`` and ``modified`` fields. However, with some additional
-configuration, you can update any timestamp/datetime column on any event a table
-publishes.
+..
+    The timestamp behavior allows your table objects to update one or more
+    timestamps on each model event. This is primarily used to populate data into
+    ``created`` and ``modified`` fields. However, with some additional
+    configuration, you can update any timestamp/datetime column on any event a table
+    publishes.
+
+TimestampビヘイビアはTableObjectを更新する度、もしくは各モデルのイベントのたびに許可し、 ``created`` や ``modified`` で使われています。
+けれども、設定を追加すると、任意のtimestampとdatatimeカラムを任意のイベントで更新することができます。
+
 
 Basic Usage
 ===========
