@@ -280,7 +280,7 @@ CakePHP のキャッシュ設定は :ref:`キャッシュ設定 <cache-configura
     See the :ref:`Error and Exception Configuration <error-configuration>` for
     information on configuring error and exception handlers.
 
-エラーの設定と例外のハンドリングは :ref:`Error and Exception Configuration <error-configuration>` を参照してください。
+エラーの設定と例外のハンドリングは :ref:`エラーと例外設定 <error-configuration>` を参照してください。
 
 ..
     Logging Configuration
@@ -306,26 +306,47 @@ CakePHP のログの設定は :ref:`log-configuration` を参照してくださ�
 
 CakePHP のメールプリセットの設定は :ref:`メールの設定 <email-configuration>` を参照してください。
 
-Session Configuration
+..
+    Session Configuration
+
+セッションの設定
 ---------------------
 
-See the :ref:`session-configuration` for information on configuring session
-handling in CakePHP.
+..
+    See the :ref:`session-configuration` for information on configuring session
+    handling in CakePHP.
 
-Routing configuration
+CakePHP のセッション操作の設定は :ref:`セッションの設定 <session-configuration>` を参照してください。
+
+..
+    Routing configuration
+
+ルーティングの設定
 ---------------------
 
-See the :ref:`Routes Configuration <routes-configuration>` for more information
-on configuring routing and creating routes for your application.
+..
+    See the :ref:`Routes Configuration <routes-configuration>` for more information
+    on configuring routing and creating routes for your application.
+
+ルーティングの設定やあなたのアプリケーションのルートの作成に関するより多くの情報は :ref:`ルーティングの設定 <session-configuration>` を参照してください。
 
 .. _additional-class-paths:
 
-Additional Class Paths
+..
+    Additional Class Paths
+
+追加のクラスパス
 ======================
 
-Additional class paths are setup through the autoloaders your application uses.
-When using ``Composer`` to generate your autoloader, you could do the following,
-to provide fallback paths for controllers in your application::
+..
+    Additional class paths are setup through the autoloaders your application uses.
+    When using ``Composer`` to generate your autoloader, you could do the following,
+    to provide fallback paths for controllers in your application::
+
+追加のクラスパスはあなたのアプリケーションで利用されるオートローダーを通じてセットアップされます。
+``Composer`` を利用してオートローダーを作成する際、以下のように記述してコントローラーの fallback パスを提供します。
+
+::
 
     "autoload": {
         "psr-4": {
@@ -338,6 +359,10 @@ The above would setup paths for both the ``App`` and ``App\Controller``
 namespace. The first key will be searched, and if that path does not contain the
 class/file the second key will be searched. You can also map a single namespace
 to multiple directories with the following::
+
+上記は ``App`` と ``App\Controller`` 両方の名前空間のセットアップパスです。
+
+::
 
     "autoload": {
         "psr-4": {
