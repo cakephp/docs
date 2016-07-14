@@ -967,7 +967,7 @@ to ``_joinData`` and then saving the association with ``link()``, example::
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
 
-    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $user->_joinData = new Entity(['vote_type' => $voteType], ['markNew' => true]);
     $this->Articles->Users->link($article, [$user]);
 
 Saving Additional Data to the Join Table
