@@ -820,7 +820,7 @@ les Models, Components et Helpers qui auraient été invoqués suite à une requ
 HTTP. Cela vous permet d'écrire des tests au plus haut niveau de votre
 application en ayant un impact sur chacun de ses travaux.
 
-Disons que vous avez un controller typique Articles, et son model
+Disons que vous avez un controller typique ArticlesController, et son model
 correspondant. Le code du controller ressemble à ceci::
 
     namespace App\Controller;
@@ -1052,6 +1052,37 @@ un environnement non-debug.
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
     ajoutées dans la version 3.1.2.
 
+Integration Testing PSR7 Middleware
+-----------------------------------
+
+Integration testing can also be used to test your entire PSR7 application and
+:doc:`/controllers/middleware`. By default ``IntegrationTestCase`` will
+auto-detect the presence of an ``App\Application`` class and automatically
+enable integration testing of your Application. You can toggle this behavior
+with the ``useHttpServer()`` method::
+
+    public function setUp()
+    {
+        // Enable PSR7 integration testing.
+        $this->useHttpServer(true);
+
+        // Disable PSR7 integration testing.
+        $this->useHttpServer(false);
+    }
+
+You can customize the application class name used, and the constructor
+arguments, by using the ``configApplication()`` method::
+
+    public function setUp()
+    {
+        $this->configApplication('App\App', [CONFIG]);
+    }
+
+After enabling the PSR7 mode, and possibly configuring your application class,
+you can use the remaining ``IntegrationTestCase`` features as normal.
+
+.. versionadded:: 3.3.0
+    PSR7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
 
 Méthodes d'Assertion
 --------------------
@@ -1195,7 +1226,7 @@ test::
     // En supposant que cette action modifie le cookie.
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('my_cookie', 'Une valeur mise à jour');
+    $this->assertCookieEncrypted('Une valeur mise à jour', 'my_cookie');
 
 .. versionadded: 3.1.7
     ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans la

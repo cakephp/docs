@@ -519,7 +519,8 @@ répétitions, les options communes partagées par toutes les méthodes input so
 * ``$options['default']`` Utilisé pour définir une valeur par défaut au champ
   input. La valeur est utilisée si les données passées au formulaire ne
   contiennent pas de valeur pour le champ (ou si aucune donnée n'est
-  transmise)
+  transmise). Une valeur par défaut explicite va surcharger toute valeur définie
+  par défaut dans le schéma.
 
   Exemple d'utilisation::
 
@@ -547,6 +548,12 @@ que vous souhaitez utiliser. Tout nom d'option non-special sera
 traité comme un attribut HTML, et appliqué à l'élément HTML input généré.
 NdT. celui qui capte cette phrase gagne un giroTermoOnduleur à double
 convection.
+
+.. versionchanged:: 3.3.0
+    Depuis la version 3.3.0, FormHelper va automatiquement utiliser les valeurs
+    par défaut définies dans le schéma de votre base de données. Vous pouvez
+    désactiver ce comportement en définissant l'option ``schemaDefault`` à
+    ``false``.
 
 Les Options pour Select, Checkbox et Inputs Radio
 -------------------------------------------------

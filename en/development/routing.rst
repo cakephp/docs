@@ -318,8 +318,7 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_ext`` Used for :ref:`File extentions routing <file-extensions>`.
 * ``_base`` Set to ``false`` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
-  URLs that are 'cake relative'. cake relative URLs are required when using
-  requestAction.
+  URLs that are 'cake relative'.
 * ``_scheme``  Set to create links on different schemes like `webcal` or `ftp`.
   Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
@@ -676,8 +675,6 @@ to do automatic view switching based on content types.
 Creating RESTful Routes
 =======================
 
-.. php:staticmethod:: mapResources($controller, $options)
-
 Router makes it easy to generate RESTful routes for your controllers. RESTful
 routes are helpful when you are creating API endpoints for your application.  If
 we wanted to allow REST access to a recipe controller, we'd do something like
@@ -744,12 +741,30 @@ comments routes will look like::
 
 You can get the ``article_id`` in ``CommentsController`` by::
 
-    $this->request->params['article_id']
+    $this->request->param('article_id');
+
+By default resource routes map to the same prefix as the containing scope. If
+you have both nested and non-nested resource controllers you can use a different
+controller in each context by using prefixes::
+
+    Router::scope('/api', function ($routes) {
+        $routes->resources('Articles', function ($routes) {
+            $routes->resources('Comments', ['prefix' => 'articles']);
+        });
+    });
+
+The above would map the 'Comments' resource to the
+``App\Controller\Articles\CommentsController``. Having separate controllers lets
+you keep your controller logic simpler. The prefixes created this way are
+compatible with :ref:`prefix-routing`.
 
 .. note::
 
     While you can nest resources as deeply as you require, it is not recommended
     to nest more than 2 resources together.
+
+.. versionadded:: 3.3
+    The ``prefix`` option was added to ``resources()`` in 3.3.
 
 Limiting the Routes Created
 ---------------------------
@@ -842,7 +857,7 @@ You can specify an alternative inflection type using the ``inflect`` option::
         $routes->resources('BlogPosts', [
             'inflect' => 'dasherize' // Will use ``Inflector::dasherize()``
         ];
-    })
+    });
 
 The above will generate URLs styled like: **/blog-posts/\***.
 
@@ -961,8 +976,7 @@ You can also use any of the special route elements when generating URLs:
 * ``_ext`` Used for :ref:`file-extensions` routing.
 * ``_base`` Set to ``false`` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
-  URLs that are 'cake relative'.  cake relative URLs are required when using
-  requestAction.
+  URLs that are 'cake relative'.
 * ``_scheme``  Set to create links on different schemes like ``webcal`` or
   ``ftp``. Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
@@ -979,8 +993,6 @@ You can also use any of the special route elements when generating URLs:
 Redirect Routing
 ================
 
-.. php:staticmethod:: redirect($route, $url, $options = [])
-
 Redirect routing allows you to issue HTTP status 30x redirects for
 incoming routes, and point them at different URLs. This is useful
 when you want to inform client applications that a resource has moved
@@ -990,13 +1002,15 @@ Redirection routes are different from normal routes as they perform an actual
 header redirection if a match is found. The redirection can occur to
 a destination within your application or an outside location::
 
-    $routes->redirect(
-        '/home/*',
-        ['controller' => 'Articles', 'action' => 'view'],
-        ['persist' => true]
-        // Or ['persist'=>['id']] for default routing where the
-        // view action expects $id as an argument.
-    );
+    Router::scope('/', function ($routes) {
+        $routes->redirect(
+            '/home/*',
+            ['controller' => 'Articles', 'action' => 'view'],
+            ['persist' => true]
+            // Or ['persist'=>['id']] for default routing where the
+            // view action expects $id as an argument.
+        );
+    })
 
 Redirects ``/home/*`` to ``/articles/view`` and passes the parameters to
 ``/articles/view``. Using an array as the redirect destination allows
@@ -1004,7 +1018,9 @@ you to use other routes to define where a URL string should be
 redirected to. You can redirect to external locations using
 string URLs as the destination::
 
-    $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    Router::scope('/', function ($routes) {
+        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+    });
 
 This would redirect ``/articles/*`` to ``http://google.com`` with a
 HTTP status of 302.
@@ -1151,106 +1167,6 @@ arguments::
 This will populate ``$this->request->params['named']`` with any named parameters
 found in the passed arguments.  Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
-
-.. _request-action:
-
-RequestActionTrait
-==================
-
-.. php:trait:: RequestActionTrait
-
-    This trait allows classes which include it to create sub-requests or
-    request actions.
-
-.. php:method:: requestAction(string $url, array $options)
-
-    This function calls a controller's action from any location and
-    returns the response body from the action. The ``$url`` passed is a
-    CakePHP-relative URL (/controllername/actionname/params). To pass
-    extra data to the receiving controller action add to the $options
-    array.
-
-    .. note::
-
-        You can use ``requestAction()`` to retrieve a rendered view by passing
-        'return' in the options: ``requestAction($url, ['return']);``. It is
-        important to note that making a requestAction using 'return' from
-        a controller method may cause script and css tags to not work correctly.
-
-    Generally you can avoid dispatching sub-requests by using
-    :doc:`/views/cells`. Cells give you a lightweight way to create re-usable
-    view components when compared to ``requestAction()``.
-
-    You should always include checks to make sure your requestAction methods are
-    actually originating from ``requestAction()``.  Failing to do so will allow
-    requestAction methods to be directly accessible from a URL, which is
-    generally undesirable.
-
-    If we now create a simple element to call that function::
-
-        // src/View/Element/latest_comments.ctp
-        echo $this->requestAction('/comments/latest');
-
-    We can then place that element anywhere to get the output
-    using::
-
-        echo $this->element('latest_comments');
-
-    Written in this way, whenever the element is rendered, a request will be
-    made to the controller to get the data, the data will be processed, rendered
-    and returned. However in accordance with the warning above it's best to make
-    use of element caching to prevent needless processing. By modifying the call
-    to element to look like this::
-
-        echo $this->element('latest_comments', [], ['cache' => '+1 hour']);
-
-    The ``requestAction`` call will not be made while the cached
-    element view file exists and is valid.
-
-    In addition, requestAction takes routing array URLs::
-
-        echo $this->requestAction(
-            ['controller' => 'Articles', 'action' => 'featured']
-        );
-
-    .. note::
-
-        Unlike other places where array URLs are analogous to string URLs,
-        requestAction treats them differently.
-
-    The URL based array are the same as the ones that
-    :php:meth:`Cake\\Routing\\Router::url()` uses with one difference - if you
-    are using passed parameters, you must put them in a second array and wrap
-    them with the correct key. This is because requestAction merges the extra
-    parameters (requestAction's 2nd parameter) with the ``request->params``
-    member array and does not explicitly place them under the ``pass`` key. Any
-    additional keys in the ``$option`` array will be made available in the
-    requested action's ``request->params`` property::
-
-        echo $this->requestAction('/articles/view/5');
-
-    As an array in the requestAction would then be::
-
-        echo $this->requestAction(
-            ['controller' => 'Articles', 'action' => 'view'],
-            ['pass' => [5]]
-        );
-
-    You can also pass querystring arguments, post data or cookies using the
-    appropriate keys. Cookies can be passed using the ``cookies`` key.
-    Get parameters can be set with ``query`` and post data can be sent
-    using the ``post`` key::
-
-        $vars = $this->requestAction('/articles/popular', [
-          'query' => ['page' = > 1],
-          'cookies' => ['remember_me' => 1],
-        ]);
-
-    When using an array URL in conjunction with requestAction() you
-    must specify **all** parameters that you will need in the requested
-    action. This includes parameters like ``$this->request->data``.  In addition
-    to passing all required parameters, passed arguments must be done
-    in the second array as seen above.
 
 .. toctree::
     :glob:

@@ -114,7 +114,7 @@ probablement fournir un moyen de se déconnecter. Encore une fois, dans
     }
 
 Ce code autorise l'action ``logout`` en tant qu'action publique,
-et implémente la méthode logout. Vous pouvez maintenant visiter la page 
+et implémente la méthode logout. Vous pouvez maintenant visiter la page
 ``/users/logout`` pour vous déconnecter. Vous devriez alors être renvoyé vers
 la page de connexion.
 
@@ -373,9 +373,9 @@ Persister la Chaîne Tag
 Maintenant que nous pouvons voir les tags existants en chaîne, nous voudrions
 aussi sauvegarder les données. Comme nous marquons les ``tag_string``
 accessibles, l'ORM va copier ces données à partir de la requête dans notre
-entity. Nous pouvons utiliser une méthode hook ``beforeSave()`` pour
-parser la chaîne de tag et trouver/construire les entities liées. Ajoutez ce
-qui suit dans **src/Model/Table/BookmarksTable.php**::
+entity. Nous pouvons utiliser une méthode hook ``beforeSave()`` pour parser la
+chaîne de tag et trouver/construire les entities liées. Ajoutez ce qui suit dans
+**src/Model/Table/BookmarksTable.php**::
 
 
     public function beforeSave($event, $entity, $options)
@@ -387,16 +387,22 @@ qui suit dans **src/Model/Table/BookmarksTable.php**::
 
     protected function _buildTags($tagString)
     {
-        $new = array_unique(array_map('trim', explode(',', $tagString)));
+        // Trim tags
+        $newTags = array_map('trim', explode(',', $tagString));
+        // Retire tous les tags vides
+        $newTags = array_filter($newTags);
+        // Réduit les tags dupliqués
+        $newTags = array_unique($newTags);
+
         $out = [];
         $query = $this->Tags->find()
-            ->where(['Tags.title IN' => $new]);
+            ->where(['Tags.title IN' => $newTags]);
 
         // Retire les tags existants de la liste des tags nouveaux.
         foreach ($query->extract('title') as $existing) {
-            $index = array_search($existing, $new);
+            $index = array_search($existing, $newTags);
             if ($index !== false) {
-                unset($new[$index]);
+                unset($newTags[$index]);
             }
         }
         // Ajoute les tags existants.
@@ -404,7 +410,7 @@ qui suit dans **src/Model/Table/BookmarksTable.php**::
             $out[] = $tag;
         }
         // Ajoute les nouveaux tags.
-        foreach ($new as $tag) {
+        foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
         return $out;

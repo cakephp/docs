@@ -9,6 +9,14 @@ each version and the migration path between 2.x and 3.x. If you are currently
 using 1.x you should first upgrade to 2.x. See the 2.x documentation for the
 relevant upgrade guides.
 
+3.3 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    3-3-migration-guide
+
 3.2 Migration Guide
 ===================
 

@@ -129,29 +129,6 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 もし何らかの理由でデフォルトの動作をスキップさせたければ、完全にレスポンスを作成して、
 アクションから :php:class:`Cake\\Network\\Response` オブジェクトを返すこともできます。
 
-:php:meth:`~Controller::requestAction()` からコントローラのメソッドを呼ぶ時には、
-一般的には ``Response`` のインスタンスを返します。
-もし通常のウェブのリクエストからも requestAction からも呼ばれるコントローラのメソッドがあれば、
-値を返す前にリクエストタイプをチェックしましょう。 ::
-
-    // src/Controller/RecipesController.php
-
-    class RecipesController extends AppController
-    {
-        public function popular()
-        {
-            $popular = $this->Recipes->find('popular');
-            if ($this->request->is('requested')) {
-                $this->response->body(json_encode($popular));
-                return $this->response;
-            }
-            $this->set('popular', $popular);
-        }
-    }
-
-上記のコントローラのアクションは :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
-と通常のリクエストとで、メソッドがどのように使われるかの例です。
-
 アプリケーションでコントローラを効率的に使うために、CakePHP のコントローラから提供される
 いくつかのコアな属性やメソッドを説明しましょう。
 

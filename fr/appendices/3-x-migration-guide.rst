@@ -10,6 +10,14 @@ les versions 2.x et 3.x. Si vous utilisez actuellement la version 1.x, vous
 devrez d'abord mettre à jour vers la version 2.x. Consultez la documentation
 de la version 2.x pour avoir les guides de mise à jour qui s'y rapportent.
 
+3.3 Guide de Migration
+======================
+
+.. toctree::
+    :maxdepth: 1
+
+    3-3-migration-guide
+
 3.2 Guide de Migration
 ======================
 

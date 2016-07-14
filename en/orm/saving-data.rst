@@ -118,6 +118,9 @@ class::
     // Update an existing association.
     $article = $articlesTable->get(1, ['contain' => ['Tags']]);
     $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
+    
+    // Necessary because we are changing a property directly
+    $article->dirty('tags', true); 
 
     $articlesTable->save($article, ['associated' => ['Tags']]);
 

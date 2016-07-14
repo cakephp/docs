@@ -5,8 +5,8 @@ Paginator
 
 .. php:class:: PaginatorHelper(View $view, array $config = [])
 
-The Paginator helper is used to output pagination controls such as
-page numbers and next/previous links. It works in tandem with
+The Paginator helper is used to output pagination controls such as page numbers
+and next/previous links. It works in tandem with
 :php:class:`PaginatorComponent`.
 
 See also :doc:`/controllers/components/pagination` for information on how to
@@ -39,8 +39,8 @@ customize multiple templates and keep your code DRY::
     }
 
 This will load the file located at **config/paginator-templates.php**. See the
-example below for how the file should look like. You can also load
-templates from a plugin using :term:`plugin syntax`::
+example below for how the file should look like. You can also load templates
+from a plugin using :term:`plugin syntax`::
 
     // In your AppView.php
     public function initialize()
@@ -62,8 +62,8 @@ Changing Templates at Run-time
 .. php:method:: templates($templates = null)
 
 This method allows you to change the templates used by PaginatorHelper at
-runtime. This can be useful when you want to customize templates for
-a particular method call::
+runtime. This can be useful when you want to customize templates for a
+particular method call::
 
     // Read the current template value.
     $result = $this->Paginator->templates('number');
@@ -75,10 +75,11 @@ a particular method call::
 
 .. warning::
 
-    Template strings containing a percentage sign (``%``) need special attention,
-    you should prefix this character with another percentage so it looks like
-    ``%%``. The reason is that internally templates are compiled to be used with
-    ``sprintf()``. Example: '<div style="width:{{size}}%%">{{content}}</div>'
+    Template strings containing a percentage sign (``%``) need special
+    attention, you should prefix this character with another percentage so it
+    looks like ``%%``. The reason is that internally templates are compiled to
+    be used with ``sprintf()``.
+    Example: '<div style="width:{{size}}%%">{{content}}</div>'
 
 Template Names
 --------------
@@ -371,8 +372,8 @@ There are a number of options for ``counter()``. The supported ones are:
   :php:meth:`PaginatorHelper::defaultModel()`. This is used in
   conjunction with the custom string on 'format' option.
 
-Modifying the Options PaginatorHelper Uses
-==========================================
+Configuring Pagination Options
+==============================
 
 .. php:method:: options($options = [])
 
@@ -408,18 +409,18 @@ Sets all the options for the Paginator Helper. Supported options are:
 * ``model`` The name of the model being paginated, defaults to
   :php:meth:`PaginatorHelper::defaultModel()`.
 
-Pagination in Views
-===================
+Example Usage
+=============
 
-It's up to you to decide how to show records to the user, but most
-often this will be done inside HTML tables. The examples below
-assume a tabular layout, but the PaginatorHelper available in views
-doesn't always need to be restricted as such.
+It's up to you to decide how to show records to the user, but most often this
+will be done inside HTML tables. The examples below assume a tabular layout, but
+the PaginatorHelper available in views doesn't always need to be restricted as
+such.
 
 See the details on
-`PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_
-in the API. As mentioned, the PaginatorHelper also offers sorting features
-which can be integrated into your table column headers:
+`PaginatorHelper <http://api.cakephp.org/3.0/class-Cake.View.Helper.PaginatorHelper.html>`_ in
+the API. As mentioned, the PaginatorHelper also offers sorting features which
+can be integrated into your table column headers:
 
 .. code-block:: php
 
@@ -437,9 +438,9 @@ which can be integrated into your table column headers:
         <?php endforeach; ?>
     </table>
 
-The links output from the ``sort()`` method of the ``PaginatorHelper``
-allow users to click on table headers to toggle the sorting of the
-data by a given field.
+The links output from the ``sort()`` method of the ``PaginatorHelper`` allow
+users to click on table headers to toggle the sorting of the data by a given
+field.
 
 It is also possible to sort a column based on associations:
 
@@ -458,8 +459,8 @@ It is also possible to sort a column based on associations:
         <?php endforeach; ?>
     </table>
 
-The final ingredient to pagination display in views is the addition
-of page navigation, also supplied by the PaginationHelper::
+The final ingredient to pagination display in views is the addition of page
+navigation, also supplied by the PaginationHelper::
 
     // Shows the page numbers
     <?= $this->Paginator->numbers() ?>
@@ -471,8 +472,8 @@ of page navigation, also supplied by the PaginationHelper::
     // Prints X of Y, where X is current page and Y is number of pages
     <?= $this->Paginator->counter() ?>
 
-The wording output by the counter() method can also be customized
-using special markers::
+The wording output by the counter() method can also be customized using special
+markers::
 
     <?= $this->Paginator->counter([
         'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
@@ -484,10 +485,33 @@ Generating Pagination URLs
 
 .. php:method:: generateUrl(array $options = [], $model = null, $full = false)
 
-By default returns a full pagination URL string for use in non-standard
-contexts (i.e. JavaScript). ::
+By default returns a full pagination URL string for use in non-standard contexts
+(i.e. JavaScript). ::
 
     echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+.. _paginator-helper-multiple:
+
+Paginating Multiple Results
+===========================
+
+If you are :ref:`paginating multiple queries <paginating-multiple-queries>`
+you'll need to set the ``model`` option when generating pagination related
+elements. You can either use the ``model`` option on every method call you make
+to ``PaginatorHelper``, or use ``options()`` to set the default model::
+
+    // Pass the model option
+    echo $this->Paginator->sort('title', ['model' => 'Articles']);
+
+    // Set the default model.
+    $this->Paginator->options(['defaultModel' => 'Articles']);
+    echo $this->Paginator->sort('title');
+
+By using the ``model`` option, ``PaginatorHelper`` will automatically use the
+``scope`` defined in when the query was paginated.
+
+.. versionadded:: 3.3.0
+    Multiple Pagination was added in 3.3.0
 
 .. meta::
     :title lang=en: PaginatorHelper

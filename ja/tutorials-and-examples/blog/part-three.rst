@@ -33,7 +33,7 @@
 
     use Migrations\AbstractMigration;
 
-    class CreateArticlesTable extends AbstractMigration
+    class CreateArticles extends AbstractMigration
     {
         public function change()
         {
@@ -74,7 +74,7 @@
 
     use Migrations\AbstractMigration;
 
-    class CreateCategoriesTable extends AbstractMigration
+    class CreateCategories extends AbstractMigration
     {
         public function change()
         {
