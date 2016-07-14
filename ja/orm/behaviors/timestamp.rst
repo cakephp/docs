@@ -19,7 +19,7 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
     Basic Usage
 
 一般的な使い方
-=============================
+========================================================
 
 ..
     You enable the timestamp behavior like any other behavior
@@ -50,7 +50,7 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
     Using and Configuring the Behavior
 
 使い方と設定方法
-==================================
+========================================================
 
 
 ..
@@ -83,26 +83,40 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
 
 ご覧の通り、一般的な ``Model.beforeSave`` イベントと同じように、 ``completed_at`` を追加し完了です。
 
+..
+    Updating Timestamps on Entities
 
+EntityでのTimestamp更新
+========================================================
 
-Updating Timestamps on Entities
-===============================
+..
+    Sometimes you'll want to update just the timestamps on an entity without
+    changing any other properties. This is sometimes referred to as 'touching'
+    a record. In CakePHP you can use the ``touch()`` method to do exactly this::
 
-Sometimes you'll want to update just the timestamps on an entity without
-changing any other properties. This is sometimes referred to as 'touching'
-a record. In CakePHP you can use the ``touch()`` method to do exactly this::
+他のEntityのPropertyが変わった時に、timestampを更新したい時のために、 'touching' に関して記述します。
+CaePHPの場合、正確には ``touch()`` はこのように使うことができます。::
 
-    // Touch based on the Model.beforeSave event.
+    // touch は Model.beforeSave イベントを基にしている場合
     $articles->touch($article);
 
-    // Touch based on a specific event.
+    // touch は 特別なイベントを基にしている場合
     $orders->touch($order, 'Orders.completed');
 
-After you have saved the entity, the field is updated.
 
-Touching records can be useful when you want to signal that a parent resource
-has changed when a child resource is created/updated. For example: updating an
-article when a new comment is added.
+..
+    After you have saved the entity, the field is updated.
+
+その後、Entityを保存すると、フィールドが更新されます。
+
+..
+    Touching records can be useful when you want to signal that a parent resource
+    has changed when a child resource is created/updated. For example: updating an
+    article when a new comment is added.
+
+親要素から子要素へ追加や更新のシグナルを送るときにTouching レコードは使うことができます。
+例えば、記事を更新したときに、新しくコメントを追加するといったことです。
+
 
 Saving Updates Without Modifying Timestamps
 ===========================================
