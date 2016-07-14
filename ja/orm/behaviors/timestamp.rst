@@ -15,7 +15,6 @@ Timestamp
 TimestampビヘイビアはTableObjectを更新する度、もしくは各モデルのイベントのたびに許可し、 ``created`` や ``modified`` で使われています。
 けれども、設定を追加すると、任意のtimestampとdatatimeカラムを任意のイベントで更新することができます。
 
-
 ..
     Basic Usage
 
@@ -47,12 +46,17 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
 - 新しくEntityを保存するとき、 ``created`` と ``modified`` に現在の日時を設定します。
 - Entityを更新したとき、 ``modified`` に現在の日時を設定します。
 
+..
+    Using and Configuring the Behavior
 
-Using and Configuring the Behavior
+使い方と設定方法
 ==================================
 
-If you need to modify fields with different names, or want to update additional
-timestamp fields on custom events you can use some additional configuration::
+
+..
+    If you need to modify fields with different names, or want to update additional timestamp fields on custom events you can use some additional configuration
+
+もしあなたが難しい名前のフィールドを修正したいときか、カスタムイベントで更新のtimestampを追加したフィールドを追加したいのであれば、以下設定を追加することにより可能となります。::
 
     class OrdersTable extends Table
     {
@@ -72,8 +76,14 @@ timestamp fields on custom events you can use some additional configuration::
         }
     }
 
-As you can see above, in addition to the standard ``Model.beforeSave`` event, we
-are also updating the ``completed_at`` column when orders are completed.
+
+..
+    As you can see above, in addition to the standard ``Model.beforeSave`` event, we
+    are also updating the ``completed_at`` column when orders are completed.
+
+ご覧の通り、一般的な ``Model.beforeSave`` イベントと同じように、 ``completed_at`` を追加し完了です。
+
+
 
 Updating Timestamps on Entities
 ===============================
