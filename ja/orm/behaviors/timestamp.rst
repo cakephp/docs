@@ -16,10 +16,16 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
 けれども、設定を追加すると、任意のtimestampとdatatimeカラムを任意のイベントで更新することができます。
 
 
-Basic Usage
-===========
+..
+    Basic Usage
 
-You enable the timestamp behavior like any other behavior::
+一般的な使い方
+=================
+
+..
+    You enable the timestamp behavior like any other behavior
+
+あなたは他のビヘイビアと同様に、timestampビヘイビアを以下の様に有効にできます。::
 
     class ArticlesTable extends Table
     {
@@ -29,11 +35,18 @@ You enable the timestamp behavior like any other behavior::
         }
     }
 
-The default configuration will do the following:
+..
+    The default configuration will do the following:
 
-- When a new entity is saved the ``created`` and ``modified`` fields will be set
-  to the current time.
-- When an entity is updated, the ``modified`` field is set to the current time.
+デフォルトの設定は以下のようになっています:
+
+..
+    - When a new entity is saved the ``created`` and ``modified`` fields will be set to the current time.
+    - When an entity is updated, the ``modified`` field is set to the current time.
+
+- 新しくEntityを保存するとき、 ``created`` と ``modified`` に現在の日時を設定します。
+- Entityを更新したとき、 ``modified`` に現在の日時を設定します。
+
 
 Using and Configuring the Behavior
 ==================================
