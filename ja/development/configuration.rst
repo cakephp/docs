@@ -304,6 +304,7 @@ CakePHP のログの設定は :ref:`log-configuration` を参照してくださ�
     See the :ref:`Email Configuration <email-configuration>` for information on
     configuring email presets in CakePHP.
 
+CakePHP のメールプリセットの設定は :ref:`メールの設定 <email-configuration>` を参照してください。
 
 Session Configuration
 ---------------------
@@ -460,6 +461,7 @@ exist, a :php:class:`RuntimeException` will be thrown::
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
 .. versionadded:: 3.1.7
+
 ``Configure::readOrFail()`` was added in 3.1.7
 
 Checking to see if Configuration Data is Defined
@@ -666,7 +668,7 @@ configuration information that the resource named ``$key`` contains.
 
     :param string $key: The key name or identifier to load.
 
-        This method should load/parse the configuration data identified by ``$key``
+    This method should load/parse the configuration data identified by ``$key``
     and return an array of data in the file.
 
 .. php:method:: dump($key)
