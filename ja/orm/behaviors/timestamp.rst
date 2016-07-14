@@ -20,7 +20,7 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
     Basic Usage
 
 一般的な使い方
-=================
+=============================
 
 ..
     You enable the timestamp behavior like any other behavior
