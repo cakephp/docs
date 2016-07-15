@@ -1171,7 +1171,7 @@ helper methods for interacting with encrypted cookies in your test cases::
     // Assume this action modifies the cookie.
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('my_cookie', 'An updated value');
+    $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
 .. versionadded: 3.1.7
     ``assertCookieEncrypted`` and ``cookieEncrypted`` were added in 3.1.7.

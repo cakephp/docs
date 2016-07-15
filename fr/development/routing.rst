@@ -338,7 +338,6 @@ spécifiquement utiliser leur signification.
 * ``_base`` Défini à ``false`` pour retirer le chemin de base de l'URL générée.
   Si votre application n'est pas dans le répertoire racine, cette option peut
   être utilisée pour générer les URLs qui sont 'liées à cake'.
-  Les URLs liées à cake sont nécessaires pour utiliser requestAction.
 * ``_scheme`` Défini pour créer les liens sur les schémas différents comme
   `webcal` ou `ftp`. Par défaut, au schéma courant.
 * ``_host`` Définit l'hôte à utiliser pour le lien. Par défaut à l'hôte courant.
@@ -1024,7 +1023,6 @@ vous générez des URLs:
 * ``_base`` Défini à ``false`` pour retirer le chemin de base de l'URL générée.
   Si votre application n'est pas dans le répertoire racine, cette option peut
   être utilisée pour générer les URLs qui sont 'liées à cake'.
-  Les URLs liées à cake sont nécessaires pour utiliser requestAction.
 * ``_scheme`` Défini pour créer les liens sur les schémas différents comme
   `webcal` ou `ftp`. Par défaut, au schéma courant.
 * ``_host`` Définit l'hôte à utiliser pour le lien. Par défaut à l'hôte courant.
@@ -1205,7 +1203,7 @@ Un autre cas lorsque l'on souhaite changer une route en particulier à la volée
 Gérer les Paramètres Nommés dans les URLs
 =========================================
 
-Bien que les paramètres nommés ont été retirés dans CakePHP 3.0, les
+Bien que les paramètres nommés aient été retirés dans CakePHP 3.0, les
 applications peuvent publier des URLs les contenant. Vous pouvez continuer à
 accepter les URLs contenant les paramètres nommés.
 
@@ -1223,107 +1221,6 @@ Ceci va remplir ``$this->request->params['named']`` avec tout paramètre nommé
 trouvé dans les arguments passés. Tout argument passé qui a été interprété comme
 un paramètre nommé, sera retiré de la liste des arguments passés.
 
-
-RequestActionTrait
-==================
-
-.. php:trait:: RequestActionTrait
-
-    Ce trait permet aux classes qui l'incluent de créer des sous-requêtes ou des
-    actions de requête.
-
-.. php:method:: requestAction(string $url, array $options)
-
-    Cette fonction appelle une action du controller à partir de tout
-    endroit et retourne le corps de la réponse. L'``$url`` passé est une URL
-    liée à CakePHP (/controllername/actionname/params). Pour passer des données
-    supplémentaires à l'action du controller reçue, ajoutez les au tableau
-    $options.
-
-    .. note::
-
-        Vous pouvez utiliser ``requestAction()`` pour récupérer une vue
-        complètement rendue en passant 'return' dans les options:
-        ``requestAction($url, ['return']);``. Il est important de noter que
-        faire une requestAction en utilisant 'return' à partir d'une méthode
-        de controller peut empêcher les balises script et css de fonctionner
-        correctement.
-
-    Généralement, vous pouvez éviter le dispatch des sous-requêtes en utilisant
-    :doc:`/views/cells`. Les Cells vous donnent un manière simple de créer des
-    composants de vues réutilisables comparées à ``requestAction()``.
-
-    Vous devez toujours inclure des vérifications pour vous assurer que les
-    méthodes requestAction sont réellement originaires de ``requestAction()``.
-    Ne pas le faire permettra aux méthodes requestAction d'être directement
-    accessibles depuis une URL, ce qui est généralement indésirable.
-    Si nous créons maintenant un simple element pour appeler cette fonction::
-
-        // src/View/Element/latest_comments.ctp
-        echo $this->requestAction('/comments/latest');
-
-    Nous pouvons placer cet element n'importe où pour récupérer le résultat en
-    utilisant::
-
-        echo $this->element('latest_comments');
-
-    Ecris de cette façon,  peu importe quand l'element est rendu, une requête
-    sera faite au controller pour récupérer les données, les données seront
-    traitées, générées et retournées. Toutefois, conformément à
-    l'avertissement ci-dessus, il est préférable d'utiliser la mise en cache
-    d'élément pour éviter des traitements inutiles. En modifiant l'appel à
-    l'élément pour ressembler à ceci::
-
-        echo $this->element('latest_comments', [], ['cache' => '+1 hour']);
-
-    L'appel à ``requestAction`` ne sera pas fait tant que le cache de l'element
-    de vue existe et est valide.
-
-    De plus, requestAction accepte les URLS sous forme de tableau de routing::
-
-        echo $this->requestAction(
-            ['controller' => 'Articles', 'action' => 'featured']
-        );
-
-    .. note::
-        Contrairement à d'autres endroits où les tableaux d'URLs sont identiques
-        aux chaînes d'URLs, requestAction les traite différemment.
-
-    Les URLs issues de tableaux sont les même que celles utilisée par
-    :php:meth:`Cake\\Routing\\Router::url()` à une différence près - Si vous
-    utilisez des paramètres passés, vous devez les mettre dans un second
-    tableau et les envelopper avec les bonnes clés. C'est parce que
-    requestAction fusionne les paramètres additionnels (2ème paramètre de
-    requestAction) avec les éléments du tableau ``request->params`` et ne les
-    place pas explicitement sous la clé ``pass``. Toute clé additionnelle du
-    tableau ``$options`` sera rendu accessible dans la propriété
-    ``request->params`` de l'action requêtée::
-
-        echo $this->requestAction('/articles/view/5');
-
-    Devient ainsi ceci sous la forme d'un tableau::
-
-        echo $this->requestAction(
-            ['controller' => 'Articles', 'action' => 'view', 5],
-        );
-
-    Vous pouvez également passer des arguments de chaine d'URL, données POST ou
-    des cookies en utilisant la clé appropriée. Les cookies peuvent être
-    passés en utilisant la clé ``cookies``.
-    Les paramètres GET peuvent être définis avec ``query`` et les données POST
-    peuvent être envoyées en utilisant la clé ``post``::
-
-        $vars = $this->requestAction('/articles/popular', [
-          'query' => ['page' = > 1],
-          'cookies' => ['remember_me' => 1],
-        ]);
-
-    Lorsque vous utilisez une URL en tableau en conjugaison avec
-    requestAction(), vous devez spécifier **tous** les paramètres dont vous
-    aurez besoin dans l'action requêtée. Cela inclut les paramètres tels que
-    ``$this->request->data``. En plus de passer tous les paramètres
-    nécessaires, les arguments passés doivent être envoyés dans un second
-    tableau tel que vu au dessus.
 
 .. toctree::
     :glob:

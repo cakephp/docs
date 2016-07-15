@@ -2,8 +2,7 @@ View Cells
 ##########
 
 View cells sont des mini-controllers qui peuvent invoquer de la logique de vue
-et afficher les templates. Ils sont un module de remplacement léger pour
-``requestAction()``. L'idée des cells est empruntée aux `cells dans ruby
+et afficher les templates. L'idée des cells est empruntée aux `cells dans ruby
 <https://github.com/apotonick/cells>`_, où elles remplissent un rôle et un
 sujet similaire.
 
@@ -13,18 +12,16 @@ Quand utiliser les Cells
 Les Cells sont idéales pour la construction de components de page réutilisables
 qui nécessitent une interaction avec les models, la logique de view, et la
 logique de rendu. Un exemple simple serait un caddie dans un magasin en ligne,
-ou un menu de navigation selon des données dans un CMS. Puisque les cells ne
-dispatchent pas les sous-requêtes, elles évitent toute la charge coûteuse
-de ``requestAction()``.
+ou un menu de navigation selon des données dans un CMS.
 
 Créer une Cell
 ==============
 
 Pour créer une cell, vous définissez une classe dans **src/View/Cell**, et un
-template dans **src/Template/Cell/**. Dans cet exemple, nous ferons une
-cell pour afficher le nombre de messages dans la boite de message de
-notification de l'utilisateur. D'abord, créons le fichier de classe.
-Son contenu devrait ressembler à ceci::
+template dans **src/Template/Cell/**. Dans cet exemple, nous ferons une cell
+pour afficher le nombre de messages dans la boite de message de notification de
+l'utilisateur. D'abord, créons le fichier de classe. Son contenu devrait
+ressembler à ceci::
 
     namespace App\View\Cell;
 
@@ -202,12 +199,12 @@ d'une cell pour activer & configurer la mise en cache::
         'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
     ]);
 
-Si une clé est générée, la version en underscore de la classe cell et le nom
-du template seront utilisés.
+Si une clé est générée, la version en underscore de la classe cell et le nom du
+template seront utilisés.
 
 .. note::
 
-    Une nouvelle instance de ``View`` est utilisée pour retourner chaque cell
-    et ces nouveaux objets ne partagent pas de contexte avec le template /layout
+    Une nouvelle instance de ``View`` est utilisée pour retourner chaque cell et
+    ces nouveaux objets ne partagent pas de contexte avec le template /layout
     principal. Chaque cell est auto-contenu et a seulement accès aux variables
     passés en arguments par l'appel de ``View::cell()``.
