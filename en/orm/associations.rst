@@ -369,7 +369,7 @@ Sometimes you may want to configure composite keys in your associations::
 
 Relying on the example above, we have passed an array containing the desired
 composite keys to ``foreignKey``. By default the ``bindingKey`` would be
-automatically defined as ``id`` and ``hash` respectively, but let's assume that
+automatically defined as ``id`` and ``hash`` respectively, but let's assume that
 you need to specify different binding fields than the defaults due some reason,
 so you can setup it manually in your ``bindingKeys`` array::
 
