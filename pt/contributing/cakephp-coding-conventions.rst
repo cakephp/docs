@@ -353,3 +353,283 @@ processadas se forem a primeira coisa numa linha de DocBlock, por exemplo::
 
 Blocos de comentários, com a exceção do primeiro bloco em um arquivo, devem
 sempre ser precedidos por uma nova linha.
+
+Tipos de variáveis
+------------------
+
+Tipos de variáveis para serem usadas em DocBlocks:
+
+Tipo
+    Descrição
+mixed
+    Uma variável com múltiplos tipos ou tipo indefinido.
+int
+    Variável de tipo *int* (número inteiro).
+float
+    Variável de tipo *float* (número decimal).
+bool
+    Variável de tipo *bool* (lógico, verdadeiro ou falso).
+string
+    Variável de tipo *string* (qualquer valor dentro de " " ou ' ').
+null
+    Variável de tipo *null*. Normalmente usada em conjunto com outro tipo.
+array
+    Variável de tipo *array*.
+object
+    Variável de tipo *object*. Um nome específico de classe deve ser usado, se
+    possível.
+resource
+    Variável de tipo *resource* (retornado de mysql\_connect() por exemplo).
+    Lembre-se que quando você especificar o tipo como *mixed*, você deve indicar
+    se o mesmo é desconhecido, ou quais os tipos possíveis.
+callable
+    Variável de tipo função.
+
+Você também pode combinar tipos usando o caractere de barra vertical::
+
+    int|bool
+
+Para mais de dois tipos é melhor usar ``mixed``.
+
+Ao retornar o próprio objeto, e.g. para encadeamento, use ``$this`` ao invés::
+
+    /**
+     * Função Foo.
+     *
+     * @return $this
+     */
+    public function foo()
+    {
+        return $this;
+    }
+
+Incluindo arquivos
+==================
+
+``include``, ``require``, ``include_once`` e ``require_once`` não tem
+parênteses::
+
+    // errado = com parênteses
+    require_once('ClassFileName.php');
+    require_once ($class);
+
+    // certo = sem parênteses
+    require_once 'ClassFileName.php';
+    require_once $class;
+
+Ao incluir arquivos com classes ou bibliotecas, use sempre e apenas a função
+`require\_once <http://php.net/require_once>`_.
+
+Tags do PHP
+===========
+
+Use sempre *tags* longas (``<?php ?>``) ao invés de *tags* curtas (``<? ?>``).
+O *short echo* deve ser usado em arquivos de template (**.ctp**) quando
+apropriado.
+
+Short Echo
+----------
+
+O *short echo* deve ser usado em arquivos de template no lugar de
+``<?php echo``. Deve também, ser imediatamente seguido por um espaço em branco,
+a variável ou função a ser chamada pelo ``echo``, um espaço em branco e a *tag*
+de fechamento do PHP::
+
+    // errado = ponto-e-virgula, sem espaços
+    <td><?=$name;?></td>
+
+    // certo = sem ponto-e-virgula, com espaços
+    <td><?= $name ?></td>
+
+A partir do PHP 5.4 a *tag short echo* (``<?=``) não é mais considerada um
+atalho, estando sempre disponível independentemente da configuração da chave
+``short_open_tag``.
+
+Convenção de nomenclatura
+=========================
+
+Funções
+---------
+
+Escreva todas as funções no padrão "camelBack", isto é, com a letra da primeira palavra
+minúscula e a primeira letra das demais palavras maiúsculas::
+
+    function longFunctionName()
+    {
+    }
+
+Classes
+-------
+
+Escreva todas as funções no padrão "CamelCase", isto é, com a primeira letra de
+cada palavra que compõem o nome da classe maiúscula::
+
+    class ExampleClass
+    {
+    }
+
+Variáveis
+---------
+
+Nomes de variáveis devem ser tanto curtas como descritivas, o quanto possível.
+Todas as variáveis devem começar com letra minúscula e seguir o padrão
+"camelBack" no caso de muitas palavras. Variáveis referenciando objetos devem
+estar de alguma forma associadas à classe indicada. Exemplo::
+
+    $user = 'John';
+    $users = ['John', 'Hans', 'Arne'];
+
+    $dispatcher = new Dispatcher();
+
+Visibilidade
+------------
+
+Use as palavras reservadas do PHP5, *private* e *protected* para indicar métodos
+e variáveis. Adicionalmente, nomes de métodos e variáveis não-públicos começar
+com um *underscore* singular (``_``). Exemplo::
+
+    class A
+    {
+        protected $_iAmAProtectedVariable;
+
+        protected function _iAmAProtectedMethod()
+        {
+           /* ... */
+        }
+
+        private $_iAmAPrivateVariable;
+
+        private function _iAmAPrivateMethod()
+        {
+            /* ... */
+        }
+    }
+
+Endereços para exemplos
+-----------------------
+
+Para qualquer URL e endereços de email, use "example.com", "example.org" e
+"example.net", por exemplo:
+
+*  Email: someone@example.com
+*  WWW: `http://www.example.com <http://www.example.com>`_
+*  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
+
+O nome de domínio "example.com" foi reservado para isso (see :rfc:`2606`), sendo
+recomendado o seu uso em documentações como exemplos.
+
+Arquivos
+--------
+
+Nomes de arquivos que não contém classes devem ser em caixa baixa e sublinhados,
+por exemplo::
+
+    long_file_name.php
+
+Moldagem de tipos
+-----------------
+
+Para moldagem usamos:
+
+Tipo
+    Descrição
+(bool)
+    Converte para *boolean*.
+(int)
+    Converte para *integer*.
+(float)
+    Converte para *float*.
+(string)
+    Converte para *string*.
+(array)
+    Converte para *array*.
+(object)
+    Converte para *object*.
+
+Por favor use ``(int)$var`` ao invés de ``intval($var)`` e ``(float)$var`` ao
+invés de ``floatval($var)`` quando aplicável.
+
+Constante
+---------
+
+Constantes devem ser definidas em caixa alta::
+
+
+    define('CONSTANT', 1);
+
+Se o nome de uma constante consiste de múltiplas palavras, eles devem ser
+separados por um *underscore*, por exemplo::
+
+    define('LONG_NAMED_CONSTANT', 2);
+
+Cuidados usando empty()/isset()
+===============================
+
+Apesar de ``empty()`` ser uma função simples de ser usada, pode mascarar erros e
+causar efeitos não intencionais quando ``'0'`` e ``0`` são retornados. Quando
+variáveis ou propriedades já estão definidas, o uso de ``empty()`` não é
+recomendado. Ao trabalhar com variáveis, é melhor confiar em coerção de tipo
+com booleanos ao invés de ``empty()``::
+
+
+    function manipulate($var)
+    {
+        // Não recomendado, $var já está definida no escopo
+        if (empty($var)) {
+            // ...
+        }
+
+        // Recomendado, use coerção de tipo booleano
+        if (!$var) {
+            // ...
+        }
+        if ($var) {
+            // ...
+        }
+    }
+
+Ao lidar com propriedades fefinidas, você deve favorecer verificações por
+``null`` sobre verificações por ``empty()``/``isset()``::
+
+    class Thing
+    {
+        private $property; // Definida
+
+        public function readProperty()
+        {
+            // Não recomendado já que a propriedade está definida na classe
+            if (!isset($this->property)) {
+                // ...
+            }
+            // Recomendado
+            if ($this->property === null) {
+
+            }
+        }
+    }
+
+Ao trabalhar com *arrays*, é melhor mesclar valores padronizados ao usar
+verificações por ``empty()``. Assim, você se assegura que as chaves necessárias
+estão definidas::
+
+    function doWork(array $array)
+    {
+        // Mescla valores para remover a necessidade de verificações via empty.
+        $array += [
+            'key' => null,
+        ];
+
+        // Não recomendado, a chave já está definida
+        if (isset($array['key'])) {
+            // ...
+        }
+
+        // Recomendado
+        if ($array['key'] !== null) {
+            // ...
+        }
+    }
+
+.. meta::
+    :title lang=pt: Padrões de codificação
+    :keywords lang=pt: indentação,comprimento,linha,funções,classes,métodos,variáveis,propriedades,arquivos,tipos,visibilidade,inclusão,operadores ternários,template,estruturas de controle
