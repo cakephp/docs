@@ -372,7 +372,7 @@ to **src/Model/Table/BookmarksTable.php**::
     protected function _buildTags($tagString)
     {
         // Trim tags
-        $newTags = array_map('trim', explode(',', $tagString);
+        $newTags = array_map('trim', explode(',', $tagString));
         // Remove all empty tags
         $newTags = array_filter($newTags);
         // Reduce duplicated tags

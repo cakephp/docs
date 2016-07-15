@@ -447,11 +447,17 @@ suivant::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()
-        ->addCase($query->newExpr()
-        ->add(['published' => 'Y']), 1, 'integer');
+        ->addCase(
+            $query->newExpr()->add(['published' => 'Y']),
+            1,
+            'integer'
+        );
     $notPublishedCase = $query->newExpr()
-        ->addCase($query->newExpr()
-        ->add(['published' => 'N']), 1, 'integer');
+        ->addCase(
+            $query->newExpr()->add(['published' => 'N']),
+            1,
+            'integer'
+        );
 
     $query->select([
         'number_published' => $query->func()->sum($publishedCase),

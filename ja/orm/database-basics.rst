@@ -307,10 +307,10 @@ text
 uuid
     データベースがサポートするなら UUID 型に、さもなければ CHAR(36) に変換します。
 integer
-    データベースがサポートするなら INTEGER 型に変換します。現時点では、
+    データベースがサポートする INTEGER 型に変換します。現時点では、
     BIT はサポートしていません。
 biginteger
-    データベースがサポートするなら BIGINT 型に変換します。
+    データベースがサポートする BIGINT 型に変換します。
 float
     データベースに応じて DOUBLE 型か FLOAT 型に変換されます。
     精度（小数点以下桁数）を指定するために ``precision`` オプションを使うことができます。
@@ -335,6 +335,9 @@ timestamp
     TIMESTAMP 型に変換します。
 time
     全てのデータベースで TIME 型に変換します。
+json
+    可能であれば、JSON 型に変換し、そうでなければ TEXT 型に変換します。
+    'json' 型は 3.3.0 で追加されました。
 
 これらの型は、テストフィクスチャを使用している時に、CakePHP が提供する
 スキーマリフレクション機能とスキーマ生成機能の両方で使用されます。
@@ -366,7 +369,7 @@ Type クラスは次のメソッドを実装することが期待されます。
 拡張することです。例えば、もしあなたが JSON 型を追加したいなら、下記のような型クラスを
 作成します。 ::
 
-    // in src/Database/Type/JsonType.php
+    // src/Database/Type/JsonType.php の中で
 
     namespace App\Database\Type;
 
@@ -434,6 +437,109 @@ JSON データを変換してクエリを作成します。
 
     }
 
+.. _mapping-custom-datatypes-to-sql-expressions:
+
+独自データ型から SQL 表現への変換
+--------------------------------------------
+
+.. versionadded:: 3.3.0
+    独自データ型から SQL 表現への変換のサポートは 3.3.0 で追加されました。
+
+前の例は、SQL 文の文字列として表現しやすい 'json' カラム型のための独自データ型に変換します。
+複雑な SQL データ型は、SQL クエリの文字列や整数として表現することはできません。
+これらのデータ型を動作させる際、あなたの Type クラスは、
+``Cake\Database\Type\ExpressionTypeInterface`` インスタンスを実装する必要があります。
+例として、MySQL の ``POINT`` 型データのためのシンプルな Type クラスを作成します。
+最初に、PHP の ``POINT`` データを表現するために使用する「値」オブジェクトを定義します。 ::
+
+    // src/Database/Point.php の中で
+    namespace App\Database;
+
+    // 値オブジェクトはイミュータブルです。
+    class Point
+    {
+        protected $_lat;
+        protected $_long;
+
+        // ファクトリメソッド
+        public static function parse($value)
+        {
+            // MySQL からのデータをパース
+            return new static($part[0], $part[1]);
+        }
+
+        public function __construct($lat, $long)
+        {
+            $this->_lat = $lat;
+            $this->_long = $long;
+        }
+
+        public function lat()
+        {
+            return $this->_lat;
+        }
+
+        public function long()
+        {
+            return $this->_long;
+        }
+    }
+
+値オブジェクトを作成することで、この値オブジェクトや SQL 表現にデータを変換する
+Type クラスが必要になります。 ::
+
+    namespace App\Database\Type;
+
+    use App\Database\Point;
+    use Cake\Database\Expression\FunctionExpression;
+    use Cake\Database\Type as BaseType;
+    use Cake\Database\Type\ExpressionTypeInterface;
+
+    class PointType extends BaseType implements ExpressionTypeInterface
+    {
+        public function toPHP($value, Driver $d)
+        {
+            return Point::parse($value);
+        }
+
+        public function marshall($value)
+        {
+            if (is_string($value)) {
+                $value = extract(',', $value);
+            }
+            if (is_array($value)) {
+                return new Point($value[0], $value[1]);
+            }
+            return null;
+        }
+
+        public function toExpression($value)
+        {
+            if ($value instanceof Point) {
+                return new FunctionExpression(
+                    'POINT',
+                    $value->lat(),
+                    $value->long()
+                );
+            }
+            if (is_array($value)) {
+                return new FunctionExpression('POINT', $value[0], $value[1]);
+            }
+            // その他のケースを処理
+        }
+    }
+
+上記のクラスは、いくつかの興味深い特徴があります。
+
+* ``toPHP`` メソッドは、SQL クエリの結果を値オブジェクトにパースします。
+* ``marchall`` メソッドは、例えばリクエストデータで与えられたデータから値オブジェクトへ
+  変換します。 ``'10.24,12.34`` のような文字列や配列を受け取れるようにしています。
+* ``toExpression`` メソッドは、値オブジェクトから同等の SQL 表現へ変換します。
+  例えば、結果の SQL は、 ``POINT(10.24, 12.34)`` のようになります。
+
+一度独自の型を作成したら、 :ref:`独自の型をテーブルクラスと関連づける <saving-complex-types>`
+必要があります。
+
 .. _immutable-datetime-mapping:
 
 イミュータブル DateTime オブジェクトの有効化
@@ -477,7 +583,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 いくつかあります。
 もっとも基本的な方法は、完全な SQL クエリの実行を可能にする ``query()`` です。 ::
 
-    $stmt = $conn->query('UPDATE posts SET published = 1 WHERE id = 2');
+    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -485,7 +591,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 プレースホルダを使用可能な ``execute()`` メソッドを使用します。 ::
 
     $stmt = $conn->execute(
-        'UPDATE posts SET published = ? WHERE id = ?',
+        'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
 
@@ -494,7 +600,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 できます。 ::
 
     $stmt = $conn->execute(
-        'UPDATE posts SET published_date = ? WHERE id = ?',
+        'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
     );
@@ -508,7 +614,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 構築することができます。 ::
 
     $query = $conn->newQuery();
-    $query->update('posts')
+    $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
     $stmt = $query->execute();
@@ -519,7 +625,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 
     $query = $conn->newQuery();
     $query->select('*')
-        ->from('posts')
+        ->from('articles')
         ->where(['published' => true]);
 
     foreach ($query as $row) {
@@ -540,8 +646,8 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 ``commit()`` , ``rollback()`` を使用するものです。 ::
 
     $conn->begin();
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     $conn->commit();
 
 .. php:method:: transactional(callable $callback)
@@ -550,8 +656,8 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
 簡単にハンドリングする ``transactional()`` メソッドが提供されています。 ::
 
     $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE posts SET published = ? WHERE id = ?', [false, 4]);
+        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
 基本的なクエリに加えて、 :doc:`/orm/query-builder` または :doc:`/orm/table-objects` の
