@@ -1484,7 +1484,7 @@ the event data::
             parent::setUp();
             $this->Orders = TableRegistry::get('Orders');
             // enable event tracking
-            $this->Orders->getEventManager()->setEventList(new EventList());
+            $this->Orders->eventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1497,8 +1497,8 @@ the event data::
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
         }
     }
 
