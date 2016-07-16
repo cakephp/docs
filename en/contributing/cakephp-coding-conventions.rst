@@ -413,7 +413,7 @@ When including files with classes or libraries, use only and always the
 PHP Tags
 ========
 
-Always use long tags (``<?php ?>``) Instead of short tags (``<? ?>``). The short
+Always use long tags (``<?php ?>``) instead of short tags (``<? ?>``). The short
 echo should be used in template files (**.ctp**) where appropriate.
 
 Short Echo
