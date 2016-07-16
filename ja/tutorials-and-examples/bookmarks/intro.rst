@@ -232,13 +232,13 @@ Scaffold コードの生成
 
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher; // この行を追加してください
     use Cake\ORM\Entity;
 
     class User extends Entity
     {
 
-        // Code from bake.
+        // bake で生成されたコード
 
         protected function _setPassword($value)
         {
