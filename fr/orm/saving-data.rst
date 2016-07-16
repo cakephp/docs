@@ -1040,7 +1040,7 @@ l'association avec ``link()``, par exemple::
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
 
-    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $user->_joinData = new Entity(['vote_type' => $voteType], ['markNew' => true]);
     $this->Articles->Users->link($article, [$user]);
 
 Sauvegarder des Données Supplémentaires à la Table de Jointure

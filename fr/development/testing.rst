@@ -1547,7 +1547,7 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
             parent::setUp();
             $this->Orders = TableRegistry::get('Orders');
             // enable event tracking
-            $this->Orders->getEventManager()->setEventList(new EventList());
+            $this->Orders->eventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1560,8 +1560,8 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
         }
     }
 
