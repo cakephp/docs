@@ -128,8 +128,8 @@ HasOne Associations
 Let's set up a Users Table with a hasOne relationship to an Addresses Table.
 
 First, your database tables need to be keyed correctly. For a hasOne
-relationship to work, one table has to contain a foreign key that points to
-a record in the other. In this case the addresses table will contain a field
+relationship to work, one table has to contain a foreign key that points to a
+record in the other. In this case the addresses table will contain a field
 called ``user_id``. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
@@ -144,9 +144,10 @@ Doctors hasOne Mentors mentors.doctor\_id
 
 .. note::
 
-    It is not mandatory to follow CakePHP conventions, you can override
-    the use of any foreignKey in your associations definitions. Nevertheless sticking
-    to conventions will make your code less repetitive, easier to read and to maintain.
+    It is not mandatory to follow CakePHP conventions, you can override the use
+    of any foreignKey in your associations definitions. Nevertheless sticking
+    to conventions will make your code less repetitive, easier to read and to
+    maintain.
 
 If we had the ``UsersTable`` and ``AddressesTable`` classes made we could make
 the association with the following code::
@@ -159,9 +160,9 @@ the association with the following code::
         }
     }
 
-If you need more control, you can define your associations using
-array syntax. For example, you might want to limit the association
-to include only certain records::
+If you need more control, you can define your associations using array syntax.
+For example, you might want to limit the association to include only certain
+records::
 
     class UsersTable extends Table
     {
@@ -177,32 +178,31 @@ to include only certain records::
 
 Possible keys for hasOne association arrays include:
 
-- **className**: the class name of the table being associated to
-  the current model. If you're defining a 'User hasOne Address'
-  relationship, the className key should equal 'Addresses'.
-- **foreignKey**: the name of the foreign key found in the other
-  table. This is especially handy if you need to define multiple
-  hasOne relationships. The default value for this key is the
-  underscored, singular name of the current model, suffixed with
-  '\_id'. In the example above it would default to 'user\_id'.
+- **className**: the class name of the table being associated to the current
+  model. If you're defining a 'User hasOne Address' relationship, the className
+  key should equal 'Addresses'.
+- **foreignKey**: the name of the foreign key found in the other table. This is
+  especially handy if you need to define multiple hasOne relationships. The
+  default value for this key is the underscored, singular name of the current
+  model, suffixed with '\_id'. In the example above it would default to
+  'user\_id'.
 - **bindingKey**: The name of the column in the current table, that will be used
-  for matching the ``foreignKey``. If not specified, the primary key (for example
-  the id column of the ``Users`` table) will be used.
-- **conditions**: an array of find() compatible conditions
-  such as ``['Addresses.primary' => true]``
+  for matching the ``foreignKey``. If not specified, the primary key (for
+  example the id column of the ``Users`` table) will be used.
+- **conditions**: an array of find() compatible conditions such as
+  ``['Addresses.primary' => true]``
 - **joinType**: the type of the join to use in the SQL query, default
   is LEFT. You can use INNER if your hasOne association is always present.
-- **dependent**: When the dependent key is set to ``true``, and an
-  entity is deleted, the associated model records are also deleted. In this
-  case we set it to ``true`` so that deleting a User will also delete her associated
-  Address.
-- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded deletes will
-  load and delete entities so that callbacks are properly triggered. When ``false``,
-  ``deleteAll()`` is used to remove associated data and no callbacks are
-  triggered.
-- **propertyName**: The property name that should be filled with data from the associated
-  table into the source table results. By default this is the underscored & singular name of
-  the association so ``address`` in our example.
+- **dependent**: When the dependent key is set to ``true``, and an entity is
+  deleted, the associated model records are also deleted. In this case we set it
+  to ``true`` so that deleting a User will also delete her associated Address.
+- **cascadeCallbacks**: When this and **dependent** are ``true``, cascaded
+  deletes will load and delete entities so that callbacks are properly
+  triggered. When ``false``, ``deleteAll()`` is used to remove associated data
+  and no callbacks are triggered.
+- **propertyName**: The property name that should be filled with data from the
+  associated table into the source table results. By default this is the
+  underscored & singular name of the association so ``address`` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'join'. The other
   valid value is 'select', which utilizes sub-queries instead.
 - **finder**: The finder method to use when loading associated records.
@@ -223,13 +223,13 @@ The above would emit SQL that is similar to::
 BelongsTo Associations
 ======================
 
-Now that we have Address data access from the User table, let's
-define a belongsTo association in the Addresses table in order to get
-access to related User data. The belongsTo association is a natural
-complement to the hasOne and hasMany associations.
+Now that we have Address data access from the User table, let's define a
+belongsTo association in the Addresses table in order to get access to related
+User data. The belongsTo association is a natural complement to the hasOne and
+hasMany associations.
 
-When keying your database tables for a belongsTo relationship,
-follow this convention:
+When keying your database tables for a belongsTo relationship, follow this
+convention:
 
 **belongsTo:** the *current* model contains the foreign key.
 
@@ -243,8 +243,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
 .. tip::
 
-    If a Table contains a foreign key, it belongs to the other
-    Table.
+    If a Table contains a foreign key, it belongs to the other Table.
 
 We can define the belongsTo association in our Addresses table as follows::
 
@@ -274,22 +273,21 @@ syntax::
 
 Possible keys for belongsTo association arrays include:
 
-- **className**: the class name of the model being associated to
-  the current model. If you're defining a 'Profile belongsTo User'
-  relationship, the className key should equal 'Users'.
+- **className**: the class name of the model being associated to the current
+  model. If you're defining a 'Profile belongsTo User' relationship, the
+  className key should equal 'Users'.
 - **foreignKey**: the name of the foreign key found in the current table. This
   is especially handy if you need to define multiple belongsTo relationships to
   the same model. The default value for this key is the underscored, singular
   name of the other model, suffixed with ``_id``.
 - **bindingKey**: The name of the column in the other table, that will be used
-  for matching the ``foreignKey``. If not specified, the primary key (for example
-  the id column of the ``Users`` table) will be used.
-- **conditions**: an array of find() compatible conditions or SQL
-  strings such as ``['Users.active' => true]``
-- **joinType**: the type of the join to use in the SQL query, default
-  is LEFT which may not fit your needs in all situations, INNER may
-  be helpful when you want everything from your main and associated
-  models or nothing at all.
+  for matching the ``foreignKey``. If not specified, the primary key (for
+  example the id column of the ``Users`` table) will be used.
+- **conditions**: an array of find() compatible conditions or SQL strings such
+  as ``['Users.active' => true]``
+- **joinType**: the type of the join to use in the SQL query, default is LEFT
+  which may not fit your needs in all situations, INNER may be helpful when you
+  want everything from your main and associated models or nothing at all.
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``user`` in our example.
@@ -312,12 +310,12 @@ The above would emit SQL that is similar to::
 HasMany Associations
 ====================
 
-An example of a hasMany association is "Article hasMany Comments".
-Defining this association will allow us to fetch an article's comments
-when the article is loaded.
+An example of a hasMany association is "Article hasMany Comments". Defining this
+association will allow us to fetch an article's comments when the article is
+loaded.
 
-When creating your database tables for a hasMany relationship, follow
-this convention:
+When creating your database tables for a hasMany relationship, follow this
+convention:
 
 **hasMany:** the *other* model contains the foreign key.
 
@@ -342,8 +340,7 @@ We can define the hasMany association in our Articles model as follows::
         }
     }
 
-We can also define a more specific relationship using array
-syntax::
+We can also define a more specific relationship using array syntax::
 
     class ArticlesTable extends Table
     {
@@ -399,8 +396,8 @@ Possible keys for hasMany association arrays include:
   underscored, singular name of the actual model, suffixed with
   '\_id'.
 - **bindingKey**: The name of the column in the current table, that will be used
-  for matching the ``foreignKey``. If not specified, the primary key (for example
-  the id column of the ``Articles`` table) will be used.
+  for matching the ``foreignKey``. If not specified, the primary key (for
+  example the id column of the ``Articles`` table) will be used.
 - **conditions**: an array of find() compatible conditions or SQL
   strings such as ``['Comments.visible' => true]``
 - **sort**  an array of find() compatible order clauses or SQL
@@ -415,17 +412,17 @@ Possible keys for hasMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default this is the
   underscored & plural name of the association so ``comments`` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'select'. The other
-  valid value is 'subquery', which replaces the ``IN`` list with an equivalent
-  subquery.
-- **saveStrategy**: Either 'append' or 'replace'. When 'append' the current records
-  are appended to any records in the database. When 'replace' associated records
-  not in the current set will be removed. If the foreign key is a null able column
-  or if ``dependent`` is true records will be orphaned.
+- **strategy**: Defines the query strategy to use. Defaults to 'select'. The
+  other valid value is 'subquery', which replaces the ``IN`` list with an
+  equivalent subquery.
+- **saveStrategy**: Either 'append' or 'replace'. When 'append' the current
+  records are appended to any records in the database. When 'replace' associated
+  records not in the current set will be removed. If the foreign key is a null
+  able column or if ``dependent`` is true records will be orphaned.
 - **finder**: The finder method to use when loading associated records.
 
-Once this association has been defined, find operations on the Articles table can
-contain the Comment records if they exist::
+Once this association has been defined, find operations on the Articles table
+can contain the Comment records if they exist::
 
     // In a controller or table method.
     $query = $articles->find('all')->contain(['Comments']);
@@ -594,13 +591,13 @@ generated::
 Using the 'through' Option
 --------------------------
 
-If you plan on adding extra information to the join/pivot table, or if you
-need to use join columns outside of the conventions, you will need to define the
+If you plan on adding extra information to the join/pivot table, or if you need
+to use join columns outside of the conventions, you will need to define the
 ``through`` option. The ``through`` option provides you full control over how
 the belongsToMany association will be created.
 
-It is sometimes desirable to store additional data with a many to
-many association. Consider the following::
+It is sometimes desirable to store additional data with a many to many
+association. Consider the following::
 
     Student BelongsToMany Course
     Course BelongsToMany Student
@@ -610,16 +607,15 @@ is a simple many to many association. The following table would suffice::
 
     id | student_id | course_id
 
-Now what if we want to store the number of days that were attended
-by the student on the course and their final grade? The table we'd
-want would be::
+Now what if we want to store the number of days that were attended by the
+student on the course and their final grade? The table we'd want would be::
 
     id | student_id | course_id | days_attended | grade
 
-The way to implement our requirement is to use a **join model**,
-otherwise known as a **hasMany through** association.
-That is, the association is a model itself. So, we can create a new
-model CoursesMemberships. Take a look at the following models. ::
+The way to implement our requirement is to use a **join model**, otherwise known
+as a **hasMany through** association. That is, the association is a model
+itself. So, we can create a new model CoursesMemberships. Take a look at the
+following models. ::
 
     class StudentsTable extends Table
     {
@@ -650,9 +646,8 @@ model CoursesMemberships. Take a look at the following models. ::
         }
     }
 
-The CoursesMemberships join table uniquely identifies a given
-Student's participation on a Course in addition to extra
-meta-information.
+The CoursesMemberships join table uniquely identifies a given Student's
+participation on a Course in addition to extra meta-information.
 
 Default Association Conditions
 ------------------------------
@@ -660,9 +655,9 @@ Default Association Conditions
 The ``finder`` option allows you to use a :ref:`custom finder
 <custom-find-methods>` to load associated record data. This lets you encapsulate
 your queries better and keep your code DRY'er. There are some limitations when
-using finders to load data in associations that are loaded using
-joins (belongsTo/hasOne). Only the following aspects of the query will be
-applied to the root query:
+using finders to load data in associations that are loaded using joins
+(belongsTo/hasOne). Only the following aspects of the query will be applied to
+the root query:
 
 - WHERE conditions.
 - Additional joins.

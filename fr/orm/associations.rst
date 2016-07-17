@@ -372,6 +372,39 @@ tableau::
         }
     }
 
+Parfois vous voudrez configurer les clés composites dans vos associations::
+
+    // Dans l'appel ArticlesTable::initialize()
+    $this->hasMany('Reviews', [
+        'foreignKey' => [
+            'article_id',
+            'article_hash'
+        ]
+    ]);
+
+En se référant à l'exemple du dessus, nous avons passé un tableau contenant les
+clés composites dans ``foreignKey``. Par défaut ``bindingKey`` serait
+automatiquement défini respectivement avec ``id`` et ``hash``, mais imaginons
+que vous souhaitiez spécifier avec des champs de liaisons différents de ceux par
+défault, vous pouvez les configurer manuellement dans votre tableau
+``bindingKeys``::
+
+    // Dans un appel de ArticlesTable::initialize()
+    $this->hasMany('Reviews', [
+        'foreignKey' => [
+            'article_id',
+            'article_hash'
+        ],
+        'bindingKey' => [
+            'whatever_id',
+            'whatever_hash'
+        ]
+    ]);
+
+Il est important de noter que les valeurs de ``foreignKey`` font référence à la
+table **reviews** et les valeurs de ``bindingKey`` font référence à la table
+**articles**.
+
 Les clés possibles pour les tableaux d'association hasMany sont:
 
 - **className**: le nom de la classe du model que l'on souhaite associer au
