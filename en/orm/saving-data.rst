@@ -1072,13 +1072,10 @@ Saving Multiple Entities
 
 .. php:method:: saveMany($entities, $options = [])
 
-.. note::
-
-    Available since 3.2.8.
 
 Using this method you can save multiple entities atomically. ``$entites`` can
 be an array of entities created using ``newEntities()`` / ``patchEntities()``.
-``$options`` can have the same options as accepted by ``save()``.
+``$options`` can have the same options as accepted by ``save()``::
 
     $data = [
         [
@@ -1095,6 +1092,8 @@ be an array of entities created using ``newEntities()`` / ``patchEntities()``.
     $result = $articles->saveMany($entities);
 
 The result will be updated entities on success or ``false`` on failure.
+
+.. versionadded:: 3.2.8
 
 Bulk Updates
 ============
