@@ -1067,6 +1067,34 @@ receiving from the end user is the correct type. Failing to correctly handle
 complex data could result in malicious users being able to store data they
 would not normally be able to.
 
+Saving Multiple Entities
+========================
+
+.. php:method:: saveMany($entities, $options = [])
+
+.. note::
+
+    Available since 3.2.8.
+
+Using this method you can save multiple entities atomically. ``$entites`` can
+be an array of entities created using ``newEntities()`` / ``patchEntities()``.
+``$options`` can have the same options as accepted by ``save()``.
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($data);
+    $result = $articles->saveMany($entities);
+
+The result will be updated entities on success or ``false`` on failure.
 
 Bulk Updates
 ============
