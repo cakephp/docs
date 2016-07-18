@@ -38,6 +38,9 @@ behavior that may effect your application:
 * ``Controller::referer()`` now consistently omits the application base path
   when generating application local URLs. Previously string URLs would have the
   base path prepended to them, while array URLs would not.
+* The default ``ErrorController`` no longer disables ``Auth`` and ``Security``
+  components, as it does not extend ``AppController``. If you are enabling these
+  components through events, you will need to update your code.
 
 PSR7 Middleware Support Added
 =============================
@@ -137,6 +140,8 @@ Other Enhancements
 
 * ``Collection::transpose()`` was added. This method allows you to tranpose the
   rows and columns of a matrix with equal length rows.
+* The default ``ErrorController`` now loads ``RequestHandlerComponent`` to
+  enable ``Accept`` header based content-type negotiation for error pages.
 
 Routing
 -------
