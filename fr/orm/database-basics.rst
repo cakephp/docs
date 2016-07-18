@@ -853,10 +853,6 @@ méthodes fonctionnent de la même façon que celles fournies par PDO::
     $code = $stmt->errorCode();
     $info = $stmt->errorInfo();
 
-.. todo::
-    Si possible documenter CallbackStatement et BufferedStatement
-
-
 .. _database-query-logging:
 
 Faire des Logs de Requête

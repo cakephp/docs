@@ -1,6 +1,17 @@
 Middleware
 ##########
 
+.. note::
+    The documentation is not currently supported in French language for this
+    page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
+
+    You can refer to the English version in the select top menu to have
+    information about this page's topic.
+
 Les objets Middleware vous donnent la possibilité de 'wrapper' votre application
 en des couches compatibles et réutilisables de gestion de Requête, ou de la
 logique de construction de réponse. Middleware sont une partie du nouveau HTTP
@@ -20,6 +31,8 @@ CakePHP fournit plusieurs middlewares:
   incoming URL and assign routing parameters to the request.
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
+
+.. _using-middleware:
 
 Utilisation du Middleware
 =========================
@@ -260,7 +273,17 @@ application::
 Adding the new HTTP Stack to an Existing Application
 ====================================================
 
-TODO
+Using HTTP Middleware in an existing application requires a few changes to your
+application.
+
+#. First update your ``webroot/index.php``. Copy the file contents from the `app
+   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
+#. Create an ``Application`` class. See the :ref:`using-middleware` section
+   above for how to do that. Or copy the example in the `app skeleton
+   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+
+Once those two steps are complete, you are ready to start re-implementing any
+application/plugin dispatch filters as HTTP middleware.
 
 .. meta::
     :title lang=fr: Http Middleware

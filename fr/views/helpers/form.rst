@@ -1455,8 +1455,6 @@ Options:
 -  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
    l'erreur.
 
-.. TODO:: Add examples.
-
 .. php:method:: isFieldError(string $fieldName)
 
 Retourne ``true`` si le champ $fieldName fourni a une erreur de validation en
