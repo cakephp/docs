@@ -1611,6 +1611,11 @@ Créer des Boutons Indépendants et des liens POST
     devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
     ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
 
+    .. note::
+        Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
+        ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
+        tampon le formulaire dans des :ref:`view-blocks`
+
 Personnaliser les Templates que FormHelper Utilise
 ==================================================
 
