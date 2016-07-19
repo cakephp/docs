@@ -160,7 +160,7 @@ within a cell template if required.
 
     Echoing a cell uses the PHP ``__toString()`` magic method which prevents PHP
     from showing the filename and line number for any fatal errors raised. To
-    obtain a meanful error message it is recommended to use the ``Cell::render()``
+    obtain a meanful error message, it is recommended to use the ``Cell::render()``
     method, for example ``<?= $cell->render() ?>``.
 
 Rendering Alternate Templates
