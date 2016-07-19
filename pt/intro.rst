@@ -130,8 +130,8 @@ como um cíclo de requisição funciona no CakePHP:
    :align: center
    :alt: Diagrama de fluxo exibindo uma típica requisição CakePHP
 
-O cíclo de requisição do CakePHP começa com a solicitação a uma página ou
-recurso da sua aplicação. O ciclo segue a seguinte cadência:
+O cíclo de requisição do CakePHP começa com a solicitação de uma página ou
+recurso da sua aplicação, seguindo a cadência abaixo:
 
 #. As regras de reescrita do servidor encaminham a requisição para
    **webroot/index.php**.
