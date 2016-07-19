@@ -1566,6 +1566,10 @@ Creating Standalone Buttons and POST links
     use :php:meth:`Cake\\View\\Helper\\FormHelper::button()` or
     :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` instead.
 
+    .. note::
+        Be careful to not put a postLink inside an open form. Instead use the
+        ``block`` option to buffer the form into a :ref:`view-blocks`
+
 
 Customizing the Templates FormHelper Uses
 =========================================
