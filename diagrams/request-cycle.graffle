@@ -99,7 +99,7 @@
 			<key>Points</key>
 			<array>
 				<string>{383.11111450195312, 345.75}</string>
-				<string>{383.0989412780952, 300.62499609635648}</string>
+				<string>{383.11111450195312, 300.62499618530273}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -146,6 +146,11 @@
 						<string>0.78566</string>
 					</dict>
 				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
 				<key>stroke</key>
 				<dict>
 					<key>CornerRadius</key>
@@ -185,6 +190,11 @@
 						<key>r</key>
 						<string>0.78566</string>
 					</dict>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
 				</dict>
 				<key>stroke</key>
 				<dict>
@@ -1556,7 +1566,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2016-07-19 03:19:31 +0000</string>
+	<string>2016-07-20 02:29:00 +0000</string>
 	<key>Modifier</key>
 	<string>Mark Story</string>
 	<key>NotesVisible</key>
@@ -1637,7 +1647,7 @@
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{61, 33}, {951, 742}}</string>
+		<string>{{61, 35}, {951, 742}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
