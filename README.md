@@ -89,13 +89,12 @@ To build the documentation you'll need the following for linux/OS X:
 
 * Make
 * Python
-* Sphinx 1.2.* (currently the make commands will not work with 1.3.* versions
-  and up)
+* Sphinx 1.4.5
 * PhpDomain for sphinx
 
 You can install sphinx using:
 
-    pip install sphinx==1.2.3
+    pip install sphinx==1.4.5
 
 You can install the phpdomain using:
 
