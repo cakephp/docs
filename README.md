@@ -90,7 +90,7 @@ To build the documentation you'll need the following for linux/OS X:
 * Make
 * Python
 * Sphinx 1.4.5
-* PhpDomain for sphinx
+* PhpDomain for sphinx 0.2.0
 
 You can install sphinx using:
 
@@ -98,7 +98,7 @@ You can install sphinx using:
 
 You can install the phpdomain using:
 
-    pip install sphinxcontrib-phpdomain
+    pip install sphinxcontrib-phpdomain==0.2.0
 
 *To run the pip command, python-pip package must be previously installed.*
 
