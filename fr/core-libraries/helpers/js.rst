@@ -594,7 +594,7 @@ méthode.
     .. code-block:: javascript
 
         $('#some-link').bind('click', function (event) {
-            alert(saperlipopette!');
+            alert('saperlipopette!');
             return false;
         });
 
