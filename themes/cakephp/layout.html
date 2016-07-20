@@ -10,23 +10,9 @@
     {%- endfor %}
 {%- endmacro %}
 
-{%- set css_files = [
-    '_static/css/bootstrap.min.css',
-    '_static/css/font-awesome.min.css',
-    '_static/css/style.css',
-    '_static/css/default.css',
-    '_static/css/pygments.css',
-    '_static/css/responsive.css',
-] -%}
-
-{%- set script_files = [
-	"_static/jquery.js",
-	"_static/underscore.js",
-	"_static/vendor.js",
-	"_static/app.js",
-	"_static/search.js",
-	"_static/typeahead.js",
-] -%}
+{# The files that make these builds are defined in Makefile #}
+{%- set css_files = ['_static/css/app.css'] -%}
+{%- set script_files = ['_static/app.js'] -%}
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
