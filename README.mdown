@@ -10,16 +10,12 @@ You can read all of the documentation within as its just in plain text files, ma
 
 * Make
 * Python
-* Sphinx
-* PhpDomain for sphinx
+* Sphinx 1.4.5
+* PhpDomain for sphinx >=0.2.0
 
-You can install sphinx using:
+You can install dependencies using:
 
-	easy_install sphinx
-
-You can install the phpdomain using:
-
-	easy_install sphinxcontrib-phpdomain
+    pip install -r requirements.txt
 
 *To run the easy_install command, the setuptools package must be previously installed.*
 
