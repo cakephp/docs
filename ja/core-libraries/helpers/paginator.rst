@@ -161,7 +161,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 特定のページ番号に直接行けるリンクを作れるだけでなく、現在の直前や直後、
 および先頭や末尾へのリンクを作りたくなる場合もあるでしょう。
 
-.. php:method:: prev($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
+.. php:method:: prev($title = '<?= __('<< previous') ?>', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
     :param string $title: リンクのタイトル
     :param mixed $options: ページ制御用リンクのオプション
@@ -195,7 +195,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
         <span class="prev">
           <a rel="prev" href="/posts/index/page:1/sort:title/order:desc">
-            << previous
+            <?= __('<< previous') ?>
           </a>
         </span>
 
@@ -203,7 +203,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
     .. code-block:: html
 
-        <span class="prev disabled"><< previous</span>
+        <span class="prev disabled"><?= __('<< previous') ?></span>
 
     ``tag`` オプションによりラッピング用のタグを変更できます。 ::
 
