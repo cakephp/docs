@@ -3,32 +3,32 @@ Authentication
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $config = [])
 
-Identifying, authenticating, and authorizing users is a common part of
-almost every web application. In CakePHP AuthComponent provides a
-pluggable way to do these tasks. AuthComponent allows you to combine
-authentication objects and authorization objects to create flexible
-ways of identifying and checking user authorization.
+Identifying, authenticating, and authorizing users is a common part of almost
+every web application. In CakePHP AuthComponent provides a pluggable way to do
+these tasks. AuthComponent allows you to combine authentication objects and
+authorization objects to create flexible ways of identifying and checking user
+authorization.
 
 .. _authentication-objects:
 
 Suggested Reading Before Continuing
 ===================================
 
-Configuring authentication requires several steps including defining
-a users table, creating a model, controller & views, etc.
+Configuring authentication requires several steps including defining a users
+table, creating a model, controller & views, etc.
 
 This is all covered step by step in the
-:doc:`Blog Tutorial </tutorials-and-examples/blog-auth-example/auth>`.
-
+:doc:`Blog Tutorial
+</tutorials-and-examples/part4-authentication>`.
 
 Authentication
 ==============
 
-Authentication is the process of identifying users by provided
-credentials and ensuring that users are who they say they are.
-Generally this is done through a username and password, that are checked
-against a known list of users. In CakePHP, there are several built-in
-ways of authenticating users stored in your application.
+Authentication is the process of identifying users by provided credentials and
+ensuring that users are who they say they are. Generally this is done through a
+username and password, that are checked against a known list of users. In
+CakePHP, there are several built-in ways of authenticating users stored in your
+application.
 
 * ``FormAuthenticate`` allows you to authenticate users based on form POST
   data. Usually this is a login form that users enter information into.
@@ -109,7 +109,7 @@ keys.
 - ``passwordHasher`` Password hasher class; Defaults to ``Default``.
 - The ``scope`` and ``contain`` options have been deprecated as of 3.1. Use
   a custom finder instead to modify the query to fetch a user record.
-- The ``userFields`` option has been deprecated as of 3.1. Use ``select()`` in 
+- The ``userFields`` option has been deprecated as of 3.1. Use ``select()`` in
   your custom finder.
 
 To configure different fields for user in your ``initialize()`` method::
@@ -184,7 +184,7 @@ option in authenticate class config::
 
 This will require your ``UsersTable`` to have finder method ``findAuth()``.
 In the example shown below the query is modified to fetch only required fields
-and add condition. You must ensure that you select the fields you need to 
+and add condition. You must ensure that you select the fields you need to
 authenticate a user, such as ``username`` and ``password``::
 
     public function findAuth(\Cake\ORM\Query $query, array $options)
@@ -1073,7 +1073,7 @@ only the configuration option::
 
     $this->redirect($this->Auth->config('loginAction'));
 
-This is useful if you want to redirect an user to the ``login`` route for example. 
+This is useful if you want to redirect an user to the ``login`` route for example.
 Without a parameter, the full configuration will be returned.
 
 Testing Actions Protected By AuthComponent

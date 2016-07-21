@@ -12,13 +12,13 @@ and components.
 .. toctree::
     :maxdepth: 1
 
-    tutorials-and-examples/bookmarks/intro
-    tutorials-and-examples/bookmarks/part-two
-    tutorials-and-examples/blog/blog
-    tutorials-and-examples/blog/part-two
-    tutorials-and-examples/blog/part-three
-    tutorials-and-examples/blog-auth-example/auth
-
+    tutorials-and-examples/part1-installation
+    tutorials-and-examples/part2-schema-and-manual-crud
+    tutorials-and-examples/part3-bake-for-crud-and-tags
+    tutorials-and-examples/part4-authentication
+    tutorials-and-examples/part5-authorization
+    tutorials-and-examples/part6-categorization-tree
+    tutorials-and-examples/part7-cache
 
 .. meta::
     :title lang=en: Tutorials & Examples
