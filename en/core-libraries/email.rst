@@ -483,7 +483,7 @@ following::
         {
             $this
                 ->to($user->email)
-                ->subject(sprintf('Welcome %s', $user->name))
+                ->subject(__('Welcome %s', $user->name))
                 ->template('welcome_mail') // By default template with same name as method name is used.
                 ->layout('custom');
         }
