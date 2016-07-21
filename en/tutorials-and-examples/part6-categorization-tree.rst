@@ -1,4 +1,4 @@
-Part 5 - Categorization and Tree
+Part 6 - Categorization and Tree
 ################################
 
 On the next chapter :doc:`/tutorials-and-examples/part7-cache`, you'll see how
