@@ -329,14 +329,18 @@ Using Gettext Plural Selection
 
 The second plural selection format accepted is using the built-in capabilities
 of Gettext. In this case, plurals will be stored in the ``.po``
-file by creating a separate message translation line per plural form
+file by creating a separate message translation line per plural form:
 
 .. code-block:: pot
 
-    msgid "One file removed" # One message identifier for singular
-    msgid_plural "{0} files removed" # Another one for plural
-    msgstr[0] "Un fichero eliminado" # Translation in singular
-    msgstr[1] "{0} ficheros eliminados" # Translation in plural
+    # One message identifier for singular
+    msgid "One file removed"
+    # Another one for plural
+    msgid_plural "{0} files removed"
+    # Translation in singular
+    msgstr[0] "Un fichero eliminado"
+    # Translation in plural
+    msgstr[1] "{0} ficheros eliminados"
 
 When using this other format, you are required to use another translation
 function::

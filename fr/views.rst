@@ -235,7 +235,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci:
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post->id'
+        $post->id
     ]); ?>
     </li>
     <?php $this->end(); ?>

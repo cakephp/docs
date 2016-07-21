@@ -996,8 +996,6 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
-.. todo::
-
 Testing Stateless Authentication and APIs
 -----------------------------------------
 

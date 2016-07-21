@@ -347,14 +347,18 @@ Usando Gettext para Seleção de Plural
 
 O segundo formato para seleção de plural aceito é a utilização das capacidades
 embutidas de Gettext. Neste caso, plurais será armazenado nos arquivos ``.po``,
-criando uma linha de tradução de mensagens separada por forma de plural.
+criando uma linha de tradução de mensagens separada por forma de plural:
 
 .. code-block:: pot
 
-    msgid "One file removed" # One message identifier for singular
-    msgid_plural "{0} files removed" # Another one for plural
-    msgstr[0] "Un fichero eliminado" # Translation in singular
-    msgstr[1] "{0} ficheros eliminados" # Translation in plural
+    # One message identifier for singular
+    msgid "One file removed"
+    # Another one for plural
+    msgid_plural "{0} files removed"
+    # Translation in singular
+    msgstr[0] "Un fichero eliminado"
+    # Translation in plural
+    msgstr[1] "{0} ficheros eliminados"
 
 Ao usar este outro formato, você é obrigado a usar outra tradução de forma
 funcional::
