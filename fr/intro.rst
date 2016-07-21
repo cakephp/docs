@@ -145,18 +145,22 @@ chaque requête passe par les étapes suivantes:
 
 #. Les règles de réécriture de votre serveur web dirigent la requête vers
    **webroot/index.php**.
-#. Les fichiers autoloader et bootstrap de votre application sont exécutés.
-#. Tout :doc:`filtre du dispatcher </development/dispatch-filters>`
-   configuré peut manipuler la requête, et optionnellement générer une réponse.
-#. Le dispatcher sélectionne le controller et l'action appropriée en se basant
-   sur les règles de routage.
+#. Votre Application est chargée et liée à un ``HttpServer``.
+#. Le middleware de votre application est initialisé.
+#. Une requête et une réponse sont dispatchés à travers le Middleware PSR-7
+   que votre application utilise. Typiquement, il inclut les error trapping, et
+   le routing.
+#. Si aucune réponse n'est retournée à partir du middleware et que la requête
+   contient des informations de routing, un controller & action are selected.
 #. L'action du controller est appelée et le controller interagit avec les
    Models et Components nécessaires.
 #. Le controller délègue la création de la response à la View pour générer
    le résultat obtenu à partir des données du model.
 #. Le View utilise les Helpers et les Cells pour générer l'en-tête et le corps
    de la réponse.
-#. La réponse est renvoyée au client.
+#. La réponse est de nouveau envoyée à travers le
+   :doc:`/controllers/middleware`.
+#. ``HttpServer`` émet la réponse au serveur web.
 
 
 Que le Début

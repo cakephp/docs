@@ -165,6 +165,14 @@ underscores de notre nom d'action, par exemple **display.ctp**.
 Puisque les cells utilisent ``View`` pour afficher les templates, vous pouvez
 charger les cells supplémentaires dans un template de cell si nécessaire.
 
+.. note::
+
+    L'affichage d'une cell utilise la méthode magique PHP ``__toString()`` qui
+    empêche PHP de montrer le nom du fichier et le numéro de la ligne pour
+    toutes les erreurs fatales levées. Pour obtenir un message d'erreur qui a
+    du sens, il est recommandé d'utiliser la méthode ``Cell::render()``, par
+    exemple ``<?= $cell->render() ?>``.
+
 Afficher un Template alternatif
 -------------------------------
 
