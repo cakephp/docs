@@ -204,7 +204,7 @@ Yöntemleri ``Table`` sınıflarını içeriye atarak topluyoruz. Bu özellikler
 
 Örnek olarak, şifre karıştırma işlemi tamamen başlı başına bir  bireysel kayıttır, yani entity nesnesin deki işlevi uygulayacağız. Çünkü biz şifrelerimizi her kayıt olduğu an karıştırmak istiyoruz.
 Biz mutator/setter yöntemini uygulayacağız.Her hangi bir zaman entities deki bir özellik çalıştığı zaman CakePHP setter metotunu çağıracaktır. Şifrelerimiz için setter'i ekleyelim.
-**src/Model/Entity/User.php** de şunları izleyin.
+**src/Model/Entity/User.php** de şunları izleyin::
 
     namespace App\Model\Entity;
 
