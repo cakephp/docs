@@ -147,11 +147,12 @@ chaque requête passe par les étapes suivantes:
    **webroot/index.php**.
 #. Votre Application est chargée et liée à un ``HttpServer``.
 #. Le middleware de votre application est initialisé.
-#. Une requête et une réponse sont dispatchés à travers le Middleware PSR-7
-   que votre application utilise. Typiquement, il inclut les error trapping, et
-   le routing.
+#. Une requête et une réponse sont dispatchées à travers le Middleware PSR-7
+   utilisé par votre application. Typiquement, il inclut l'interception
+   d'erreurs et le routing.
 #. Si aucune réponse n'est retournée à partir du middleware et que la requête
-   contient des informations de routing, un controller & action are selected.
+   contient des informations de routing, un controller et une action sont
+   sélectionnés.
 #. L'action du controller est appelée et le controller interagit avec les
    Models et Components nécessaires.
 #. Le controller délègue la création de la response à la View pour générer
