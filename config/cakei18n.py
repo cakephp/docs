@@ -10,7 +10,6 @@ i18n links to other sub doc projects.
 def setup(app):
     app.connect('html-page-context', append_template_ctx)
     app.add_config_value('languages', [], '')
-    return app
 
 def append_template_ctx(app, pagename, templatename, ctx, event_arg):
     def lang_link(lang, path):
@@ -36,7 +35,7 @@ def append_template_ctx(app, pagename, templatename, ctx, event_arg):
             folder = tokens[0]
         else:
             folder = lang
-        possible = '..' + SEP + folder +  SEP + path + app.config.source_suffix
+        possible = '..' + SEP + folder +  SEP + path + ''.join(app.config.source_suffix)
         full_path = os.path.realpath(os.path.join(os.getcwd(), possible))
 
         return os.path.isfile(full_path)
