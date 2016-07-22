@@ -8,8 +8,8 @@ work well together or separately.
 The goal of this overview is to introduce the general concepts in CakePHP, and
 give you a quick overview of how those concepts are implemented in CakePHP. If
 you are itching to get started on a project, you can :doc:`start with the
-tutorial </tutorials-and-examples/bookmarks/intro>`, or :doc:`dive into the docs
-</topics>`.
+tutorial </tutorials-and-examples/part1-installation>`, or :doc:`dive into the
+docs </topics>`.
 
 Conventions Over Configuration
 ==============================
@@ -159,7 +159,7 @@ features in CakePHP are:
 
 The next obvious steps are to :doc:`download CakePHP </installation>`, read the
 :doc:`tutorial and build something awesome
-</tutorials-and-examples/bookmarks/intro>`.
+</tutorials-and-examples/part1-installation>`.
 
 Additional Reading
 ==================

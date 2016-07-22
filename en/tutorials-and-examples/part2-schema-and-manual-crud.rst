@@ -1,13 +1,94 @@
-Blog Tutorial - Part 2
-######################
+Part 2 - Database, Schema and Articles
+######################################
+
+In the first part, you have configured your webserver, and a new project with
+all CakePHP files has been created with Composer. In this part, you'll configure
+your database, create a schema in your database and create some controllers,
+tables and view files for the articles.
+
+Database Configuration
+======================
+
+Next, let's tell CakePHP where our database is and how to connect to it. For
+many, this will be the first and last time you will need to configure anything.
+
+The configuration should be pretty straightforward: just replace the values in
+the ``Datasources.default`` array in the **config/app.php** file with those that
+apply to your setup. A sample completed configuration array might look something
+like the following::
+
+    return [
+        // More configuration above.
+        'Datasources' => [
+            'default' => [
+                'className' => 'Cake\Database\Connection',
+                'driver' => 'Cake\Database\Driver\Mysql',
+                'persistent' => false,
+                'host' => 'localhost',
+                'username' => 'cakephp',
+                'password' => 'AngelF00dC4k3~',
+                'database' => 'cake_blog',
+                'encoding' => 'utf8',
+                'timezone' => 'UTC',
+                'cacheMetadata' => true,
+            ],
+        ],
+        // More configuration below.
+    ];
+
+Once you've saved your **config/app.php** file, you should see that 'CakePHP is
+able to connect to the database' section have a checkmark.
+
+.. note::
+
+    A copy of CakePHP's default configuration file is found in
+    **config/app.default.php**.
+
+Creating the Blog Database
+==========================
+
+Next, let's set up the underlying MySQL database for our blog. If you haven't
+already done so, create an empty database for use in this tutorial, with a name
+of your choice, e.g. ``cake_blog``. Right now, we'll just create a single table
+to store our articles. We'll also throw in a few articles to use for testing
+purposes. Execute the following SQL statements into your database::
+
+    /* First, create our articles table: */
+    CREATE TABLE articles (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(50),
+        body TEXT,
+        url TEXT,
+        created DATETIME,
+        modified DATETIME
+    );
+
+    /* Then insert some articles for testing: */
+    INSERT INTO articles (title,body,created)
+        VALUES ('The title', 'This is the article body.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('A title once again', 'And the article body follows.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+
+The choices on table and column names are not arbitrary. If you follow CakePHP's
+database naming conventions, and CakePHP's class naming conventions (both
+outlined in :doc:`/intro/conventions`), you'll be able to take advantage of a
+lot of free functionality and avoid configuration. CakePHP is flexible enough to
+accommodate even inconsistent legacy database schemas, but adhering to the
+conventions will save you time.
+
+Check out :doc:`/intro/conventions` for more information, but it's suffice to
+say that naming our table 'articles' automatically hooks it to our Articles
+model, and having fields called 'modified' and 'created' will be automatically
+managed by CakePHP.
 
 Create an Article Model
 =======================
 
-Models are the bread and butter of CakePHP applications. By
-creating a CakePHP model that will interact with our database,
-we'll have the foundation in place needed to do our view, add,
-edit, and delete operations later.
+Models are the bread and butter of CakePHP applications. By creating a CakePHP
+model that will interact with our database, we'll have the foundation in place
+needed to do our view, add, edit, and delete operations later.
 
 CakePHP's model class files are split between ``Table`` and ``Entity`` objects.
 ``Table`` objects provide access to the collection of entities stored in a
@@ -31,40 +112,29 @@ look like this::
 
 Naming conventions are very important in CakePHP. By naming our Table object
 ``ArticlesTable``, CakePHP can automatically infer that this Table object will
-be used in the ``ArticlesController``, and will be tied to a database table called
-``articles``.
+be used in the ``ArticlesController``, and will be tied to a database table
+called ``articles``.
 
 .. note::
 
-    CakePHP will dynamically create a model object for you if it
-    cannot find a corresponding file in **src/Model/Table**. This also means
-    that if you accidentally name your file wrong (i.e. articlestable.php or
+    CakePHP will dynamically create a model object for you if it cannot find a
+    corresponding file in **src/Model/Table**. This also means that if you
+    accidentally name your file wrong (i.e. articlestable.php or
     ArticleTable.php), CakePHP will not recognize any of your settings and will
     use the generated model instead.
 
 For more on models, such as callbacks, and validation, check out the :doc:`/orm`
 chapter of the Manual.
 
-.. note::
-
-    If you completed :doc:`Part 1 of the Blog Tutorial
-    </tutorials-and-examples/blog/blog>` and created the ``articles`` table in
-    our Blog database you can leverage CakePHP's bake console and its code
-    generation capabilities to create the ``ArticlesTable`` model::
-
-        bin/cake bake model Articles
-
-For more on bake and its code generation features please visit :doc:`/bake/usage`.
-
 Create the Articles Controller
 ==============================
 
-Next, we'll create a controller for our articles. The controller is
-where all interaction with articles will happen. In a nutshell, it's the place
-where you play with the business logic contained in the models and get work
-related to articles done. We'll place this new controller in a file called
-**ArticlesController.php** inside the **src/Controller** directory. Here's
-what the basic controller should look like::
+Next, we'll create a controller for our articles. The controller is where all
+interaction with articles will happen. In a nutshell, it's the place where you
+play with the business logic contained in the models and get work related to
+articles done. We'll place this new controller in a file called
+**ArticlesController.php** inside the **src/Controller** directory. Here's what
+the basic controller should look like::
 
     // src/Controller/ArticlesController.php
 
@@ -74,11 +144,11 @@ what the basic controller should look like::
     {
     }
 
-Now, let's add an action to our controller. Actions often represent
-a single function or interface in an application. For example, when
-users request www.example.com/articles/index (which is also the same
-as www.example.com/articles/), they might expect to see a listing of
-articles. The code for that action would look like this::
+Now, let's add an action to our controller. Actions often represent a single
+function or interface in an application. For example, when users request
+www.example.com/articles/index (which is also the same as
+www.example.com/articles/), they might expect to see a listing of articles. The
+code for that action would look like this::
 
     // src/Controller/ArticlesController.php
 
@@ -101,27 +171,16 @@ access that at www.example.com/articles/foobar.
 
 .. warning::
 
-    You may be tempted to name your controllers and actions a certain
-    way to obtain a certain URL. Resist that temptation. Follow
+    You may be tempted to name your controllers and actions a certain way to
+    obtain a certain URL. Resist that temptation. Follow
     :doc:`/intro/conventions` (capitalization, plural names, etc.) and create
     readable, understandable action names. You can map URLs to your code using
     :doc:`/development/routing` covered later on.
 
-The single instruction in the action uses ``set()`` to pass data
-from the controller to the view (which we'll create next). The line
-sets the view variable called 'articles' equal to the return value of
-the ``find('all')`` method of the ``ArticlesTable`` object.
-
-.. note::
-
-    If you completed :doc:`Part 1 of the Blog Tutorial
-    </tutorials-and-examples/blog/blog>` and created the ``articles`` table in
-    your Blog database you can leverage CakePHP's bake console and its code
-    generation capabilities to create the ArticlesController class::
-
-        bin/cake bake controller Articles
-
-For more on bake and its code generation features please visit :doc:`/bake/usage`.
+The single instruction in the action uses ``set()`` to pass data from the
+controller to the view (which we'll create next). The line sets the view
+variable called 'articles' equal to the return value of the ``find('all')``
+method of the ``ArticlesTable`` object.
 
 To learn more about CakePHP's controllers, check out the
 :doc:`/controllers` chapter.
@@ -129,26 +188,26 @@ To learn more about CakePHP's controllers, check out the
 Creating Article Views
 ======================
 
-Now that we have our data flowing from our model, and our application
-logic is defined by our controller, let's create a view for
-the index action we created above.
+Now that we have our data flowing from our model, and our application logic is
+defined by our controller, let's create a view for the index action we created
+above.
 
-CakePHP views are just presentation-flavored fragments that fit inside
-an application's layout. For most applications, they're HTML mixed
-with PHP, but they may end up as XML, CSV, or even binary data.
+CakePHP views are just presentation-flavored fragments that fit inside an
+application's layout. For most applications, they're HTML mixed with PHP, but
+they may end up as XML, CSV, or even binary data.
 
-A layout is presentation code that is wrapped around a view.
-Multiple layouts can be defined, and you can switch between
-them, but for now, let's just use the default.
+A layout is presentation code that is wrapped around a view. Multiple layouts
+can be defined, and you can switch between them, but for now, let's just use the
+default.
 
-Remember in the last section how we assigned the 'articles' variable
-to the view using the ``set()`` method? That would hand down the query
-object collection to the view to be invoked with a ``foreach`` iteration.
+Remember in the last section how we assigned the 'articles' variable to the view
+using the ``set()`` method? That would hand down the query object collection to
+the view to be invoked with a ``foreach`` iteration.
 
-CakePHP's template files are stored in **src/Template** inside a folder
-named after the controller they correspond to (we'll have to create
-a folder named 'Articles' in this case). To format this article data in a
-nice table, our view code might look something like this:
+CakePHP's template files are stored in **src/Template** inside a folder named
+after the controller they correspond to (we'll have to create a folder named
+'Articles' in this case). To format this article data in a nice table, our view
+code might look something like this:
 
 .. code-block:: php
 
@@ -187,24 +246,23 @@ output a snap. You can learn more about how to use them in
 method will generate an HTML link with the given title (the first parameter) and
 URL (the second parameter).
 
-When specifying URLs in CakePHP, it is recommended that you use the
-array format. This is explained in more detail in the section on
-Routes. Using the array format for URLs allows you to take
-advantage of CakePHP's reverse routing capabilities. You can also
-specify URLs relative to the base of the application in the form of
-``/controller/action/param1/param2`` or use :ref:`named routes <named-routes>`.
+When specifying URLs in CakePHP, it is recommended that you use the array
+format. This is explained in more detail in the section on Routes. Using the
+array format for URLs allows you to take advantage of CakePHP's reverse routing
+capabilities. You can also specify URLs relative to the base of the application
+in the form of ``/controller/action/param1/param2`` or use :ref:`named routes
+<named-routes>`.
 
 At this point, you should be able to point your browser to
-http://www.example.com/articles/index. You should see your view,
-correctly formatted with the title and table listing of the articles.
+http://www.example.com/articles/index. You should see your view, correctly
+formatted with the title and table listing of the articles.
 
-If you happened to have clicked on one of the links we created in
-this view (that link a article's title to a URL ``/articles/view/some\_id``),
-you were probably informed by CakePHP that the action hasn't yet
-been defined. If you were not so informed, either something has
-gone wrong, or you actually did define it already, in which case
-you are very sneaky. Otherwise, we'll create it in the
-``ArticlesController`` now::
+If you happened to have clicked on one of the links we created in this view
+(that link a article's title to a URL ``/articles/view/some\_id``),
+you were probably informed by CakePHP that the action hasn't yet been defined.
+If you were not so informed, either something has gone wrong, or you actually
+did define it already, in which case you are very sneaky. Otherwise, we'll
+create it in the ``ArticlesController`` now::
 
     // src/Controller/ArticlesController.php
 
@@ -225,20 +283,18 @@ you are very sneaky. Otherwise, we'll create it in the
         }
     }
 
-The ``set()`` call should look familiar. Notice we're using
-``get()`` rather than ``find('all')`` because we only really want
-a single article's information.
+The ``set()`` call should look familiar. Notice we're using ``get()`` rather
+than ``find('all')`` because we only really want a single article's information.
 
-Notice that our view action takes a parameter: the ID of the article
-we'd like to see. This parameter is handed to the action through
-the requested URL. If a user requests ``/articles/view/3``, then the value
-'3' is passed as ``$id``.
+Notice that our view action takes a parameter: the ID of the article we'd like
+to see. This parameter is handed to the action through the requested URL. If a
+user requests ``/articles/view/3``, then the value '3' is passed as ``$id``.
 
-We also do a bit of error checking to ensure a user is actually accessing
-a record. By using the ``get()`` function in the Articles table, we make sure
+We also do a bit of error checking to ensure a user is actually accessing a
+record. By using the ``get()`` function in the Articles table, we make sure
 the user has accessed a record that exists. In case the requested article is not
-present in the database, or the id is false the ``get()`` function will throw
-a ``NotFoundException``.
+present in the database, or the id is false the ``get()`` function will throw a
+``NotFoundException``.
 
 Now let's create the view for our new 'view' action and place it in
 **src/Template/Articles/view.ctp**
@@ -379,31 +435,29 @@ form. Here's the HTML that ``$this->Form->create()`` generates:
 
     <form method="post" action="/articles/add">
 
-If ``create()`` is called with no parameters supplied, it assumes
-you are building a form that submits via POST to the current controller's
-``add()`` action (or ``edit()`` action when ``id`` is included in
-the form data).
+If ``create()`` is called with no parameters supplied, it assumes you are
+building a form that submits via POST to the current controller's ``add()``
+action (or ``edit()`` action when ``id`` is included in the form data).
 
-The ``$this->Form->input()`` method is used to create form elements
-of the same name. The first parameter tells CakePHP which field
-they correspond to, and the second parameter allows you to specify
-a wide array of options - in this case, the number of rows for the
-textarea. There's a bit of introspection and automagic here:
-``input()`` will output different form elements based on the model
-field specified.
+The ``$this->Form->input()`` method is used to create form elements of the same
+name. The first parameter tells CakePHP which field they correspond to, and the
+second parameter allows you to specify a wide array of options - in this case,
+the number of rows for the textarea. There's a bit of introspection and
+automagic here: ``input()`` will output different form elements based on the
+model field specified.
 
 The ``$this->Form->end()`` call ends the form. Outputting hidden inputs if
 CSRF/Form Tampering prevention is enabled.
 
-Now let's go back and update our **src/Template/Articles/index.ctp**
-view to include a new "Add Article" link. Before the ``<table>``, add
-the following line::
+Now let's go back and update our **src/Template/Articles/index.ctp** view to
+include a new "Add Article" link. Before the ``<table>``, add the following
+line::
 
     <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
 
-You may be wondering: how do I tell CakePHP about my validation
-requirements? Validation rules are defined in the model. Let's look
-back at our Articles model and make a few adjustments::
+You may be wondering: how do I tell CakePHP about my validation requirements?
+Validation rules are defined in the model. Let's look back at our Articles model
+and make a few adjustments::
 
     // src/Model/Table/ArticlesTable.php
 
@@ -436,22 +490,21 @@ the ``save()`` method is called. Here, we've specified that both the body and
 title fields must not be empty, and are required for both create and update
 operations. CakePHP's validation engine is strong, with a number of pre-built
 rules (credit card numbers, email addresses, etc.) and flexibility for adding
-your own validation rules. For more information on that
-setup, check the :doc:`/core-libraries/validation` documentation.
+your own validation rules. For more information on that setup, check the
+:doc:`/core-libraries/validation` documentation.
 
 Now that your validation rules are in place, use the app to try to add
-an article with an empty title or body to see how it works.  Since we've used the
-:php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper to
-create our form elements, our validation error messages will be shown
+an article with an empty title or body to see how it works.  Since we've used
+the :php:meth:`Cake\\View\\Helper\\FormHelper::input()` method of the FormHelper
+to create our form elements, our validation error messages will be shown
 automatically.
 
 Editing Articles
 ================
 
-Post editing: here we go. You're a CakePHP pro by now, so you
-should have picked up a pattern. Make the action, then the view.
-Here's what the ``edit()`` action of the ``ArticlesController`` would look
-like::
+Post editing: here we go. You're a CakePHP pro by now, so you should have picked
+up a pattern. Make the action, then the view. Here's what the ``edit()`` action
+of the ``ArticlesController`` would look like::
 
     // src/Controller/ArticlesController.php
 
@@ -471,13 +524,12 @@ like::
     }
 
 This action first ensures that the user has tried to access an existing record.
-If they haven't passed in an ``$id`` parameter, or the article does not
-exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take
-care of.
+If they haven't passed in an ``$id`` parameter, or the article does not exist,
+we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST data to update our article entity by using the
-``patchEntity()`` method.  Finally we use the table object to save the entity
+``patchEntity()`` method. Finally we use the table object to save the entity
 back or kick back and show the user validation errors.
 
 The edit view might look something like this:
@@ -495,14 +547,13 @@ The edit view might look something like this:
         echo $this->Form->end();
     ?>
 
-This view outputs the edit form (with the values populated), along
-with any necessary validation error messages.
+This view outputs the edit form (with the values populated), along with any
+necessary validation error messages.
 
-CakePHP will determine whether a ``save()`` generates an insert or an
-update statement based on the state of the entity.
+CakePHP will determine whether a ``save()`` generates an insert or an update
+statement based on the state of the entity.
 
-You can now update your index view with links to edit specific
-articles:
+You can now update your index view with links to edit specific articles:
 
 .. code-block:: php
 
@@ -540,8 +591,8 @@ articles:
 Deleting Articles
 =================
 
-Next, let's make a way for users to delete articles. Start with a
-``delete()`` action in the ``ArticlesController``::
+Next, let's make a way for users to delete articles. Start with a ``delete()``
+action in the ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
@@ -557,17 +608,17 @@ Next, let's make a way for users to delete articles. Start with a
     }
 
 This logic deletes the article specified by ``$id``, and uses
-``$this->Flash->success()`` to show the user a confirmation
-message after redirecting them on to ``/articles``. If the user attempts to
-do a delete using a GET request, the ``allowMethod()`` will throw an Exception.
-Uncaught exceptions are captured by CakePHP's exception handler, and a nice
-error page is displayed. There are many built-in
-:doc:`Exceptions </development/errors>` that can be used to indicate the various
-HTTP errors your application might need to generate.
+``$this->Flash->success()`` to show the user a confirmation message after
+redirecting them on to ``/articles``. If the user attempts to do a delete using
+a GET request, the ``allowMethod()`` will throw an Exception. Uncaught
+exceptions are captured by CakePHP's exception handler, and a nice error page is
+displayed. There are many built-in :doc:`Exceptions </development/errors>` that
+can be used to indicate the various HTTP errors your application might need to
+generate.
 
-Because we're just executing some logic and redirecting, this
-action has no view. You might want to update your index view with
-links that allow users to delete articles, however:
+Because we're just executing some logic and redirecting, this action has no
+view. You might want to update your index view with links that allow users to
+delete articles, however:
 
 .. code-block:: php
 
@@ -624,31 +675,28 @@ that uses JavaScript to do a POST request deleting our article.
 Routes
 ======
 
-For some, CakePHP's default routing works well enough. Developers
-who are sensitive to user-friendliness and general search engine
-compatibility will appreciate the way that CakePHP's URLs map to
-specific actions. So we'll just make a quick change to routes in
-this tutorial.
+For some, CakePHP's default routing works well enough. Developers who are
+sensitive to user-friendliness and general search engine compatibility will
+appreciate the way that CakePHP's URLs map to specific actions. So we'll just
+make a quick change to routes in this tutorial.
 
 For more information on advanced routing techniques, see
 :ref:`routes-configuration`.
 
-By default, CakePHP responds to a request for the root of your site
-(e.g., http://www.example.com) using its ``PagesController``, rendering
-a view called "home". Instead, we'll replace this with our
-ArticlesController by creating a routing rule.
+By default, CakePHP responds to a request for the root of your site (e.g.,
+http://www.example.com) using its ``PagesController``, rendering a view called
+"home". Instead, we'll replace this with our ArticlesController by creating a
+routing rule.
 
-CakePHP's routing is found in **config/routes.php**. You'll want
-to comment out or remove the line that defines the default root
-route. It looks like this:
+CakePHP's routing is found in **config/routes.php**. You'll want to comment out
+or remove the line that defines the default root route. It looks like this:
 
 .. code-block:: php
 
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-This line connects the URL '/' with the default CakePHP home page.
-We want it to connect with our own controller, so replace that line
-with this one:
+This line connects the URL '/' with the default CakePHP home page. We want it to
+connect with our own controller, so replace that line with this one:
 
 .. code-block:: php
 
@@ -659,28 +707,26 @@ our ``ArticlesController``.
 
 .. note::
 
-    CakePHP also makes use of 'reverse routing'. If, with the above
-    route defined, you pass
-    ``['controller' => 'Articles', 'action' => 'index']`` to a
-    function expecting an array, the resulting URL used will be '/'.
-    It's therefore a good idea to always use arrays for URLs as this
-    means your routes define where a URL goes, and also ensures that
-    links point to the same place.
+    CakePHP also makes use of 'reverse routing'. If, with the above route
+    defined, you pass ``['controller' => 'Articles', 'action' => 'index']`` to a
+    function expecting an array, the resulting URL used will be '/'. It's
+    therefore a good idea to always use arrays for URLs as this means your
+    routes define where a URL goes, and also ensures that links point to the
+    same place.
 
 Conclusion
 ==========
 
-Creating applications this way will win you peace, honor, love, and
-money beyond even your wildest fantasies. Simple, isn't it? Keep in
-mind that this tutorial was very basic. CakePHP has *many* more
-features to offer, and is flexible in ways we didn't wish to cover
-here for simplicity's sake. Use the rest of this manual as a guide
-for building more feature-rich applications.
+Creating applications this way will win you peace, honor, love, and money beyond
+even your wildest fantasies. Simple, isn't it? Keep in mind that this tutorial
+was very basic. CakePHP has *many* more features to offer, and is flexible in
+ways we didn't wish to cover here for simplicity's sake. Use the rest of this
+manual as a guide for building more feature-rich applications.
 
 Now that you've created a basic CakePHP application, you can either continue to
-:doc:`/tutorials-and-examples/blog/part-three`, or start your own project. You
-can also peruse the :doc:`/topics` or `API <http://api.cakephp.org/3.0>` to
-learn more about CakePHP.
+:doc:`/tutorials-and-examples/part3-bake-for-crud-and-tags`, or start your own
+project. You can also peruse the :doc:`/topics` or `API
+<http://api.cakephp.org/3.0>` to learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the
 :doc:`/intro/where-to-get-help` page.  Welcome to CakePHP!
@@ -693,10 +739,9 @@ These are common tasks people learning CakePHP usually want to study next:
 1. :ref:`view-layouts`: Customizing your website layout
 2. :ref:`view-elements`: Including and reusing view snippets
 3. :doc:`/bake/usage`: Generating basic CRUD code
-4. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication
-   and authorization tutorial
+4. :doc:`/tutorials-and-examples/part3-bake-for-crud-and-tags`: Bake tags files
 
 
 .. meta::
-    :title lang=en: Blog Tutorial Adding a Layer
-    :keywords lang=en: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
+    :title lang=en: Blog Tutorial Part 2 - Database and schema
+    :keywords lang=en: tuto, blog, database, schema, part2
