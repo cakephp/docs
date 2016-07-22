@@ -12,7 +12,7 @@ Timestamp
     configuration, you can update any timestamp/datetime column on any event a table
     publishes.
 
-TimestampビヘイビアはTableObjectを更新する度、もしくは各モデルのイベントのたびに許可し、 ``created`` や ``modified`` で使われています。
+Timestamp ビヘイビアは、モデルのイベントのたびにテーブルオブジェクトのタイムスタンプを更新します。これは、主に ``created`` や ``modified`` フィールドにデータを投入するために使用されます。
 けれども、設定を追加すると、任意のtimestampとdatatimeカラムを任意のイベントで更新することができます。
 
 ..
@@ -56,7 +56,7 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
 ..
     If you need to modify fields with different names, or want to update additional timestamp fields on custom events you can use some additional configuration
 
-もしあなたが難しい名前のフィールドを修正したいときか、カスタムイベントで更新のtimestampを追加したフィールドを追加したいのであれば、以下設定を追加することにより可能となります。::
+もしあなたが別の名前のフィールドを修正したいときか、カスタムイベントで更新のtimestampを追加したフィールドを追加したいのであれば、以下設定を追加することにより可能となります。::
 
     class OrdersTable extends Table
     {
@@ -81,7 +81,7 @@ TimestampビヘイビアはTableObjectを更新する度、もしくは各モデ
     As you can see above, in addition to the standard ``Model.beforeSave`` event, we
     are also updating the ``completed_at`` column when orders are completed.
 
-ご覧の通り、一般的な ``Model.beforeSave`` イベントと同じように、 ``completed_at`` を追加し完了です。
+上記の例では、標準の ``Model.beforeSave`` イベントに加えて、注文完了時に ``completed_at`` カラムを更新しています。
 
 ..
     Updating Timestamps on Entities
@@ -94,28 +94,29 @@ EntityでのTimestamp更新
     changing any other properties. This is sometimes referred to as 'touching'
     a record. In CakePHP you can use the ``touch()`` method to do exactly this::
 
-他のEntityのPropertyが変わった時に、timestampを更新したい時のために、 'touching' に関して記述します。
-CaePHPの場合、正確には ``touch()`` はこのように使うことができます。::
 
-    // touch は Model.beforeSave イベントを基にしている場合
+しばしば、他のプロパティを変更せずに、エンティティのタイムスタンプのみ更新したいこともあるでしょう。
+これは、レコードに「touch する」と呼ばれます。CakePHP では、これを正確に行うために ``touch()`` メソッドを使うことができます。 ::
+
+    // Model.beforeSave イベントに基づいて touch します
     $articles->touch($article);
 
-    // touch は 特別なイベントを基にしている場合
+	// 指定したイベントに基づいて touch します
     $orders->touch($order, 'Orders.completed');
 
 
 ..
     After you have saved the entity, the field is updated.
 
-その後、Entityを保存すると、フィールドが更新されます。
+Entityを保存後、フィールドが更新されます。
 
 ..
     Touching records can be useful when you want to signal that a parent resource
     has changed when a child resource is created/updated. For example: updating an
     article when a new comment is added.
 
-親要素から子要素へ追加や更新のシグナルを送るときにTouching レコードは使うことができます。
-例えば、記事を更新したときに、新しくコメントを追加するといったことです。
+レコードの touch 、子リソースが作成や更新されたときに親リソースを変更するためのシグナルがほしい際に便利です。
+例えば、新しくコメントが追加されたときに記事を更新するといったことです。
 
 
 ..
