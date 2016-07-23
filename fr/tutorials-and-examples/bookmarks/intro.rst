@@ -238,7 +238,7 @@ Ajouter un Hashage de Mot de Passe
 ==================================
 
 Quand vous avez créé vos users, (en visitant
-**http://localhost:8765/bookmarks/users**) vous avez probablement remarqué que
+**http://localhost:8765/users**) vous avez probablement remarqué que
 les mots de passe sont stockés en clair. C'est très mauvais d'un point du vue
 sécurité, donc réglons ceci.
 

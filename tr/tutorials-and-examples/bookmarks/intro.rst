@@ -221,7 +221,7 @@ ekledikten sonra veritabanı tablolarını görüyor olmanız gerekmektedir.
 Parola Karıştırma Ekleme (Hashing)
 ==================================
 
-Kullanıcılarınızı oluşturduktan sonra (**http://localhost:8765/bookmarks/users**
+Kullanıcılarınızı oluşturduktan sonra (**http://localhost:8765/users**
 sayfasında ki), siz muhtemelen şifrelerin düz metin olarak saklandığını
 görüyorsunuzdur. Bu gözle görünür derecede oldukça güvenlik açısından kötüdür.
 Yani bunu düzeltmemiz gerekiyor. 
