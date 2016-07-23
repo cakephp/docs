@@ -36,15 +36,16 @@ yolu da aşşağıda ki yöntem ile çok basit yapabilirsiniz::
 
     curl -s https://getcomposer.org/installer | php
 
-Veya, ``composer.phar`` 'ı `Composer website
-<https://getcomposer.org/download/>`_. adresinden indirebilirsiniz. 
+Veya, ``composer.phar`` 'ı 
+`Composer website <https://getcomposer.org/download/>`_. adresinden
+indirebilirsiniz.
 
 CakePHP iskeleti basitçe oluşturup kurmak için terminalizine **bookmarker**
 komut satırını çalıştırınız::
 
     php composer.phar create-project --prefer-dist cakephp/app bookmarker
 
-Eğer `Composer Windows Installer<https://getcomposer.org/Composer-Setup.exe>`_
+Eğer `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 'i indirip kurduysanız, o zaman kurulum klasöründe belirtilen komudu yazarak
 devam edebilirsiniz. (Örnek kurulum klasörü C:\\wamp\\www\\dev\\cakephp3)::
 
