@@ -1,5 +1,5 @@
-Not Found
-#########
+Página não encontrada
+#####################
 
-The page you're looking for cannot be found. Try using the search bar to find
-what you're looking for.
+A página que você está procurando não foi encontrada. Tente usar o campo de
+busca para localizar o que você procura.
