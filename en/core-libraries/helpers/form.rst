@@ -890,12 +890,12 @@ Options for select, checkbox and  radio inputs
     A list of key-value pairs can be supplied for a date or datetime field::
 
         echo $this->Form->dateTime('Contact.date', 'DMY', '12',
-	        array(
-	            'empty' => array(
-                    'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-                    'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-                )
-            )
+        	array(
+        		'empty' => array(
+        			'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+        			'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
+        		)
+        	)
         );
 
   Output:
