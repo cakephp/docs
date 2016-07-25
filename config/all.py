@@ -54,7 +54,6 @@ release = '3.x'
 # directories to ignore when looking for source files.
 exclude_patterns = [
     'themes',
-    '404.rst'
 ]
 
 # The reST default role (used for this markup: `text`) to
