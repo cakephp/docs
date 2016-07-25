@@ -994,7 +994,7 @@ token mismatches::
 
 It is also important to enable debug in tests that use tokens to prevent the
 SecurityComponent from thinking the debug token is being used in a non-debug
-environment. When testing other with other methods like ``requireSecure()`` you
+environment. When testing with other methods like ``requireSecure()`` you
 can use ``configRequest()`` to set the correct environment variables::
 
     // Fake out SSL connections.
