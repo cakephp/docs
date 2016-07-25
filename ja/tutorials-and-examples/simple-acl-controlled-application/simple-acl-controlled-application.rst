@@ -367,7 +367,7 @@ ACL を使用しないということです。グローバルなルート ACO �
 設定を若干変更する必要があります。ACL がコントローラとアクションを走査するにあたり正しい
 ノードパスを使用するために、 ``AuthComponent`` に根ノードの存在を教えてください。
 これを行うには、先のコードで定義してあるように、 ``AppController`` の ``$components`` で、
-配列が ``actionPAth`` を必ず含むようにしてください::
+配列が ``actionPath`` を必ず含むようにしてください::
 
     class AppController extends Controller {
         public $components = array(
