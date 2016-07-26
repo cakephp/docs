@@ -1055,7 +1055,14 @@ tests ne vont pas être en échec à cause d'un token non présent::
 
 Il est aussi important d'activer debug dans les tests qui utilisent les tokens
 pour éviter que le SecurityComponent pense que le token debug est utilisé dans
-un environnement non-debug.
+un environnement non-debug. Quand vous testez avec d'autres méthodes comme
+``requireSecure()``, vous pouvez utiliser ``configRequest()`` pour définir les
+bonnes variables d'environnement::
+
+    // Fake out SSL connections.
+    $this->configRequest([
+        'environment' => ['HTTPS' => 'on']
+    ]);
 
 .. versionadded:: 3.1.2
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
