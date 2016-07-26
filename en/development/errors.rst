@@ -552,7 +552,7 @@ Implementing this class can give you a configuration free way of customizing
 error page output.
 
 If you are using custom exception renderer, you can use the ``_getController()``
-method to return a customize the controller.  By implementing
+method to return a customized the controller.  By implementing
 ``_getController()`` in your exception renderer you can use any controller you
 want::
 
