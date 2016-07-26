@@ -451,7 +451,7 @@ Response objects provide a few methods for checking status codes::
     $response->isRedirect();
 
     // Get the status code
-    $response->getStatusCode();
+    $response->statusCode();
 
     // __get() helper
     $response->code;
