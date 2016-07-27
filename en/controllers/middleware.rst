@@ -269,7 +269,7 @@ application.
    skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
 #. Create an ``Application`` class. See the :ref:`using-middleware` section
    above for how to do that. Or copy the example in the `app skeleton
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+   <https://github.com/cakephp/app/blob/3.next/src/Application.php>`__.
 
 Once those two steps are complete, you are ready to start re-implementing any
 application/plugin dispatch filters as HTTP middleware.
