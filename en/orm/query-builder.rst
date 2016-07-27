@@ -846,6 +846,37 @@ conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+- ``exists()`` Create a condition using ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->exists($subquery);
+        });
+    # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
+- ``notExists()`` Create a negated condition using ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->notExists($subquery);
+        });
+    # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
+	
 In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses::
