@@ -377,22 +377,23 @@ can help provide a nicer user experience. Because of this CakePHP includes an
 The fields to check existence against in the related table must be part of the
 primary key.
 
-You can enforce ``existsIn`` to pass when parts of your composite foreign key
+You can enforce ``existsIn`` to pass when nullable parts of your composite foreign key
 are null::
 
-    // The primary composite key within NodesTable is (id, site_id).
-    // A Node may reference a parent Node but does not need to whenever parent_id is null:
+    // Example: A composite primary key within NodesTable is (id, site_id).
+    // A Node may reference a parent Node but does not need to. In latter case, parent_id is null.
+    // Allow this rule to pass, even if fields that are nullable, like parent_id, are null:
     $rules->add($rules->existsIn(
-        ['parent_id', 'site_id'],
+        ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
-        ['partialNullsPass' => true]
+        ['allowNullableNulls' => true] 
     );
 
-    // A Node however must in addition also always reference a Site.
+    // A Node however should in addition also always reference a Site.
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
 .. versionadded:: 3.3.0
-    The ``partialNullsPass`` option was added.
+    The ``allowNullableNulls`` option was added.
 
 Association Count Rules
 -----------------------
