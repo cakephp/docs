@@ -25,6 +25,9 @@ Deprecations
   :doc:`/controllers/middleware` à la place.
 * ``RequestActionTrait`` a été dépréciée. Refactorez votre code pour utiliser
   :doc:`/views/cells` à la place.
+* Le moteur ``Cake\\Utility\\Crypto\\Mcrypt`` a été déprécié puisque l'extension
+  ``mcrypt`` est dépréciée dans PHP 7.1. Utilisez ``openssl`` et
+  :php:class:`Cake\\Utility\\Crypto\\Openssl` à la place.
 
 Changements de Comportement
 ===========================

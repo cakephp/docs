@@ -25,6 +25,9 @@ Cette méthode va soit utiliser `openssl <http://php.net/openssl>`_ soit `mcrypt
 données cryptées dans une implémentation sont portables vers les autres
 implémentations.
 
+.. warning::
+    L'extension `mcrypt <http://php.net/mcrypt>`_ a été dépréciée dans PHP7.1
+
 Cette méthode **ne** devrait **jamais** être utilisée pour stocker des mots
 de passe. A la place, vous devriez utiliser la manière de hasher les mots
 de passe fournie par :php:meth:`~Cake\\Utility\\Security::hash()`.
