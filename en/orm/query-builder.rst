@@ -849,11 +849,11 @@ conditions:
 - ``exists()`` Create a condition using ``EXISTS``::
 
     $subquery = $cities->find()
-		->select(['id'])
+        ->select(['id'])
         ->where(function ($exp, $q) {
-			return $exp->equalFields('countries.id', 'cities.country_id');
+            return $exp->equalFields('countries.id', 'cities.country_id');
         })
-		->andWhere(['population >', 5000000]);
+        ->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
         ->where(function ($exp, $q) use ($subquery) {
@@ -864,11 +864,11 @@ conditions:
 - ``notExists()`` Create a negated condition using ``EXISTS``::
 
     $subquery = $cities->find()
-		->select(['id'])
+        ->select(['id'])
         ->where(function ($exp, $q) {
-			return $exp->equalFields('countries.id', 'cities.country_id');
+            return $exp->equalFields('countries.id', 'cities.country_id');
         })
-		->andWhere(['population >', 5000000]);
+        ->andWhere(['population >', 5000000]);
 
     $query = $countries->find()
         ->where(function ($exp, $q) use ($subquery) {
@@ -876,7 +876,7 @@ conditions:
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
-	
+
 In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses::
@@ -1373,4 +1373,3 @@ the desired SQL directly <running-select-statements>`.
 Executing SQL directly allows you to fine tune the query that will be run.
 However, doing so doesn't let you use ``contain`` or other higher level ORM
 features.
-
