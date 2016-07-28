@@ -25,8 +25,6 @@ Deprecations
   instead.
 * ``RequestActionTrait`` has been deprecated. Refactor your code to use
   :doc:`/views/cells` instead.
-  * ``RequestActionTrait`` has been deprecated. Refactor your code to use
-  :doc:`/views/cells` instead.
 * ``Cake\\Utility\\Crypto\\Mcrypt`` engine has been deprecated as the ``mcrypt``
   extension is deprecated in PHP 7.1. Use the ``openssl`` and 
   :php:class:`Cake\\Utility\\Crypto\\Openssl` instead.
