@@ -588,7 +588,7 @@ com booleanos ao invés de ``empty()``::
         }
     }
 
-Ao lidar com propriedades fefinidas, você deve favorecer verificações por
+Ao lidar com propriedades definidas, você deve favorecer verificações por
 ``null`` sobre verificações por ``empty()``/``isset()``::
 
     class Thing
