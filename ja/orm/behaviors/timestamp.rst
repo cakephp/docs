@@ -56,7 +56,7 @@ Timestamp ビヘイビアは、モデルのイベントのたびにテーブル�
 ..
     If you need to modify fields with different names, or want to update additional timestamp fields on custom events you can use some additional configuration
 
-もしあなたが別の名前のフィールドを修正したいときか、カスタムイベントで更新のtimestampを追加したフィールドを追加したいのであれば、以下設定を追加することにより可能となります。::
+もしあなたが別の名前のフィールドを修正したいときや、カスタムイベントで更新のtimestampを追加したフィールドを追加したいのであれば、以下設定を追加することにより可能となります。::
 
     class OrdersTable extends Table
     {
