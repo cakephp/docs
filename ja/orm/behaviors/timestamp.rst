@@ -15,8 +15,6 @@ Timestamp ビヘイビアは、モデルのイベントのたびにテーブル�
 一般的な使い方
 ================
 
-..
-    You enable the timestamp behavior like any other behavior
 
 あなたは他のビヘイビアと同様に、timestampビヘイビアを以下の様に有効にできます。::
 
@@ -35,8 +33,6 @@ Timestamp ビヘイビアは、モデルのイベントのたびにテーブル�
 - 新しくEntityを保存するとき、 ``created`` と ``modified`` に現在の日時を設定します。
 - Entityを更新したとき、 ``modified`` に現在の日時を設定します。
 
-..
-    Using and Configuring the Behavior
 
 使い方と設定方法
 ================
