@@ -376,21 +376,22 @@ CakePHP は、エンティティが保存される前に適用される‘ルー
 
 存在をチェックするための関連テーブルのフィールドは主キーの一部でなければなりません。
 
-複合外部キーの一部が null の時、 ``existsIn`` をパスすることができます。 ::
+複合外部キーの null が可能な部分が null の時、 ``existsIn`` が通るように強制することができます。 ::
 
-    // NodesTable の複合主キーは (id, site_id) です。
-    // Node は、親 Node を参照しますが、parent_id が null の場合、参照は必要ありません。
+    // 例: NodesTable の複合主キーは (id, site_id) です。
+    // Node は、親 Node を参照しますが、必須ではありません。参照しない場合、parent_id が null になります。
+    // たとえ null が可能なフィールド (parent_id のような) が null であっても、このルールが通ることを許可します。
     $rules->add($rules->existsIn(
-        ['parent_id', 'site_id'],
+        ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
-        ['partialNullsPass' => true]
+        ['allowNullableNulls' => true]
     );
 
-    // それに加えて Node は、常に Site を参照しなければなりません。
+    // それに加えて Node は、常に Site を参照してください。
     $rules->add($rules->existsIn(['site_id'], 'Sites'));
 
 .. versionadded:: 3.3.0
-    ``partialNullsPass`` オプションが追加されました。
+    ``allowNullableNulls`` オプションが追加されました。
 
 アソシエーションカウントルール
 ------------------------------

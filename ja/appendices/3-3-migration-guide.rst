@@ -25,6 +25,9 @@ CakePHP 3.3 は、3.2 の API の完全上位互換です。
   代わりに :doc:`/controllers/middleware` を使用してください。
 * ``RequestActionTrait`` は非推奨になりました。
   代わりに :doc:`/views/cells` を使用するようにあなたのコードを修正してください。
+* PHP 7.1 で ``mcrypt`` 拡張が非推奨なため、 ``Cake\\Utility\\Crypto\\Mcrypt``
+  エンジンは非推奨になりました。代わりに ``openssl`` と
+  :php:class:`Cake\\Utility\\Crypto\\Openssl` を使用してください。
 
 振る舞いの変更
 ==============
@@ -97,7 +100,7 @@ ORM の改善
   'associated' キーの中で未知のアソシエーションがあるとき例外が発生します。
 * ``RulesChecker::validCount()`` が追加されました。この新しいメソッドは、
   エンティティが持つ関連するレコードの数にルールを適用することができます。
-* ``existsIn`` ルールに ``partialNullsPass`` オプションが追加されました。
+* ``existsIn`` ルールに ``allowNullableNulls`` オプションが追加されました。
   このオプションは、いくつかのカラムが null である場合にルールを
   通過することができます。
 
