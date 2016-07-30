@@ -829,6 +829,36 @@ Expression オブジェクトを使う際、下記のメソッド使って条件
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+- ``exists()`` ``EXISTS`` を使用した条件を作成します。 ::
+
+    $subquery = $cities->find()
+        ->select(['id'])
+        ->where(function ($exp, $q) {
+            return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+        ->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->exists($subquery);
+        });
+    # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
+- ``notExists()`` ``EXISTS`` を使用した条件の否定を作成します。 ::
+
+    $subquery = $cities->find()
+        ->select(['id'])
+        ->where(function ($exp, $q) {
+            return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+        ->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->notExists($subquery);
+        });
+    # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
 あたなの望む条件を作成するビルダーメソッドが取得できなかったり利用したくない場合、
 WHERE 句の中で SQL スニペットを使えるようにもできます。 ::
 
