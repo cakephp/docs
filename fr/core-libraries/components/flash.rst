@@ -3,6 +3,8 @@ Flash
 
 .. php:class:: FlashComponent(ComponentCollection $collection, array $config = array())
 
+.. versionadded:: 2.7.0 en replacement de :php:meth:`SessionHelper::flash()`
+
 FlashComponent est un moyen de définir des messages de notifications à afficher
 après avoir envoyé un formulaire ou des données connus. CakePHP appelle
 ces messages des "messages flash". FlashComponent écrit les messages flash dans

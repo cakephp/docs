@@ -3,6 +3,8 @@ FlashHelper
 
 .. php:class:: FlashHelper(View $view, array $config = array())
 
+.. versionadded:: 2.7.0 in replacement of :php:meth:`SessionHelper::flash()`
+
 FlashHelper provides a way to render flash messages that were set in
 ``$_SESSION`` by :doc:`FlashComponent </core-libraries/components/flash>`.
 :doc:`FlashComponent </core-libraries/components/flash>` and FlashHelper
