@@ -342,7 +342,7 @@ dialog::
     echo $this->Html->link(
         'Delete',
         ['controller' => 'Recipes', 'action' => 'delete', 6],
-        ['confirm' => 'Are you sure you wish to delete this recipe?'],
+        ['confirm' => 'Are you sure you wish to delete this recipe?']
     );
 
 Will output:
