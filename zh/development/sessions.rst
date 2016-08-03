@@ -14,7 +14,7 @@ CakePHP 在 PHP 的 ``session`` 扩展之上，提供了封装和一套工具。
 * ``Session.cookie`` - 改变 session cookie 的名字。
 
 * ``Session.timeout`` - *分钟* 数，之后 CakePHP 的会话处理器(*session handler*)
-  会让会话过期。这会影响到 ``Session.autoRegenerate`` (见下)，是由 CakeSession 
+  会让会话过期。这会影响到 ``Session.autoRegenerate`` (见下)，是由 CakeSession
   类处理的。
 
 * ``Session.cookieTimeout`` - *分钟* 数，之后 session cookie 会过期。如果没有定
@@ -27,7 +27,7 @@ CakePHP 在 PHP 的 ``session`` 扩展之上，提供了封装和一套工具。
 * ``Session.autoRegenerate`` - 开启该设置，就会打开会话的自动延期，导致频繁变化
   的会话标识(id)。开启该值，会使用会话的 ``Config.countdown`` 值来跟踪请求(数量)。
   一旦倒计数达到 0，会话标识(id)就会重新生成。对于由于安全原因而需要频繁改变会话
-  标识的应用程序，这是很好的选项。你可以通过改变 
+  标识的应用程序，这是很好的选项。你可以通过改变
   :php:attr:`CakeSession::$requestCountdown` 来控制重新生成会话所需要的请求数。
 
 * ``Session.defaults`` - 让你可以使用内置默认会话配置之一作为会话配置的基础。
@@ -35,11 +35,15 @@ CakePHP 在 PHP 的 ``session`` 扩展之上，提供了封装和一套工具。
 * ``Session.handler`` - 让你定义定制会话处理器。核心的数据库和缓存会话处理器使用
   该选项。这个选项代替了旧版本的 ``Session.save``。后面有会话处理器的更多信息。
 
-* ``Session.ini`` - 让你可以设置配置中的额外的会话 ini 设置。这和 
+* ``Session.ini`` - 让你可以设置配置中的额外的会话 ini 设置。这和
   ``Session.handler`` 一起代替了旧版本的自定义会话处理功能。
 
+* ``Session.cacheLimiter`` - 让你可以定义用于会话 cookie 的缓存控制表头。默认为
+  ``must-revalidate``。该选项在 2.8.0 中加入。
+
+
 当应用程序使用 SSL协议时，CakePHP 默认设置 ``session.cookie_secure`` 为 true。如
-果应用程序同时使用 SSL 和非 SSL 协议，你也许会有会话丢失的问题。如果你要在  SSL 
+果应用程序同时使用 SSL 和非 SSL 协议，你也许会有会话丢失的问题。如果你要在  SSL
 和非 SSL 域中访问会话，就应该关闭这个::
 
     Configure::write('Session', array(
@@ -49,7 +53,7 @@ CakePHP 在 PHP 的 ``session`` 扩展之上，提供了封装和一套工具。
         )
     ));
 
-在 2.0 版本中，Session cookie 路径默认是 ``/``，要改变它，可以设置 
+在 2.0 版本中，Session cookie 路径默认是 ``/``，要改变它，可以设置
 ``session.cookie_path`` ini 标识为应用程序的目录路径::
 
     Configure::write('Session', array(
@@ -102,9 +106,9 @@ CakePHP 自带几个内置的会话配置。你可以用这些作为配置的基
 会话处理器
 ----------
 
-会话处理器也可以定义在会话配置数组中。定义之后，它们让你可以把各种 
+会话处理器也可以定义在会话配置数组中。定义之后，它们让你可以把各种
 ``session_save_handler`` 值映射到你要用来保存会话的类或对象。有两种方式使用'处理
-器'。第一种是提供含有 5 个 callable 的数组。然后这些 callable 应用于 
+器'。第一种是提供含有 5 个 callable 的数组。然后这些 callable 应用于
 ``session_set_save_handler``::
 
     Configure::write('Session', array(
@@ -125,13 +129,13 @@ CakePHP 自带几个内置的会话配置。你可以用这些作为配置的基
         )
     ));
 
-第二种模式是定义一个 'engine' 键。该键应当是一个实现了 
+第二种模式是定义一个 'engine' 键。该键应当是一个实现了
 ``CakeSessionHandlerInterface`` 接口的类的名称。实现该接口让 CakeSession 可以自
 动为处理器映射方法。核心的缓存(*Cache*)和数据库(*Database*)会话的处理器都使用这
 种方法来保存会话。处理器的额外设置应当放在处理器数组内。你可以在处理器内读出这些
 值。
 
-你也可以在插件内使用会话处理器。只需把引擎设置为类似 
+你也可以在插件内使用会话处理器。只需把引擎设置为类似
 ``MyPlugin.PluginSessionHandler`` 这样。这会加载和使用应用程序中 MyPlugin 插件内
 的 ``PluginSessionHandler`` 类。
 
@@ -142,13 +146,13 @@ CakeSessionHandlerInterface 接口
 该接口用于 CakePHP 中所有的自定义会话处理器，而且可以用来创建自定义的用户会话处
 理器。只需在类中实现该接口，并设置创建的类名为 ``Session.handler.engine``。
 CakePHP 会尝试从 ``app/Model/Datasource/Session/$classname.php`` 内加载处理器。
-所以如果类名为 ``AppSessionHandler``，文件就应当是 
+所以如果类名为 ``AppSessionHandler``，文件就应当是
 ``app/Model/Datasource/Session/AppSessionHandler.php``。
 
 数据库会话
 ----------
 
-会话配置的变化改变了如何定义数据库会话。大多数情况下只需在配置中设置 
+会话配置的变化改变了如何定义数据库会话。大多数情况下只需在配置中设置
 ``Session.handler.model``，以及选择数据库默认值::
 
 
@@ -159,7 +163,7 @@ CakePHP 会尝试从 ``app/Model/Datasource/Session/$classname.php`` 内加载�
         )
     ));
 
-以上代码会告诉 CakeSession 使用内置的 'database' 默认值，并且指定叫做 
+以上代码会告诉 CakeSession 使用内置的 'database' 默认值，并且指定叫做
 ``CustomSession`` 的模型负责保存会话信息到数据库中。
 
 如果你不需要完全自定义的会话处理器，但是仍然要求以数据库为基础保存会话，可以简化
@@ -185,7 +189,7 @@ CakePHP 会尝试从 ``app/Model/Datasource/Session/$classname.php`` 内加载�
 缓存会话
 --------
 
-Cache 类也可以用来保存会话。这让你可以把会话保存在象 APC、memcache 或者 Xcache 
+Cache 类也可以用来保存会话。这让你可以把会话保存在象 APC、memcache 或者 Xcache
 这样的缓存中。使用缓存会话有一些注意事项，如果用光了缓存的容量，随着记录被清理，
 会话就会开始过期。
 
@@ -205,7 +209,7 @@ Cache 类也可以用来保存会话。这让你可以把会话保存在象 APC�
 =============
 
 内置的默认值试图为会话配置提供共同的基础。你也许还需要调整特定的 ini 设置。
-CakePHP 提供了为默认配置和自定义配置自定义 ini 设置的功能。会话设置中的 ``ini`` 
+CakePHP 提供了为默认配置和自定义配置自定义 ini 设置的功能。会话设置中的 ``ini``
 键让你可以指定单个配置的值。例如你可以用它来控制象 ``session.gc_divisor`` 这样的
 设置::
 
@@ -222,10 +226,10 @@ CakePHP 提供了为默认配置和自定义配置自定义 ini 设置的功能�
 ====================
 
 在 CakePHP 中创建自定义会话处理器(*session handler*)是直截了当的。在下面的例子中，
-我们会创建一个会话处理器，把会话保存在缓存(apc)和数据库中。这给我们 apc 的高速 
+我们会创建一个会话处理器，把会话保存在缓存(apc)和数据库中。这给我们 apc 的高速
 IO 的好处，而不必担心缓存满了时会话会逐渐丢失。
 
-首先我们需要创建自定义类，把它放在 
+首先我们需要创建自定义类，把它放在
 ``app/Model/Datasource/Session/ComboSession.php``。该类应该象这样::
 
     App::uses('DatabaseSession', 'Model/Datasource/Session');
@@ -291,7 +295,7 @@ IO 的好处，而不必担心缓存满了时会话会逐渐丢失。
 读写会话数据
 ============
 
-取决于所处的上下文，应用程序有不同的类提供对会话的访问。在控制器中，可以使用 
+取决于所处的上下文，应用程序有不同的类提供对会话的访问。在控制器中，可以使用
 :php:class:`SessionComponent`。在视图中，可以使用 :php:class:`SessionHelper`。在
 应用程序的任何部分，也可以使用 ``CakeSession`` 来访问会话。就像会话的其它接口，
 ``CakeSession`` 提供简单的 CRUD 接口。
@@ -314,7 +318,7 @@ IO 的好处，而不必担心缓存满了时会话会逐渐丢失。
 
     CakeSession::delete('Config.language');
 
-你还应当阅读 :doc:`/core-libraries/components/sessions` 和 
+你还应当阅读 :doc:`/core-libraries/components/sessions` 和
 :doc:`/core-libraries/helpers/session`，来了解如何在控制器和视图中访问会话数据。
 
 
