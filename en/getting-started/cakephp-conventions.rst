@@ -138,7 +138,7 @@ the foreign key would be category\_type\_id.
 
 Join tables, used in hasAndBelongsToMany (HABTM) relationships
 between models, must be named after the model tables they will
-join, e.g. users HABTM groups would be joined by groups_users, and 
+join, e.g. users HABTM groups would be joined by groups_users, and
 should be arranged in alphabetical order, e.g. apes\_zoos
 is better than zoos\_apes.
 
@@ -149,7 +149,8 @@ a single-field primary key, CakePHP's convention is that a
 single-field primary key is added to the table. You must add a
 single-field primary key if you want to use that table's model.
 
-If primary key's name is not ``id``, then you must set the  ``Model.primaryKey`` attribute.
+If primary key's name is not ``id``, then you must set the ``Model.primaryKey``
+attribute.
 
 CakePHP does not support composite primary keys. If you want to
 directly manipulate your join table data, use direct
