@@ -355,12 +355,15 @@ CakePHP のセッション操作の設定は :ref:`セッションの設定 <ses
         }
     }
 
-The above would setup paths for both the ``App`` and ``App\Controller``
-namespace. The first key will be searched, and if that path does not contain the
-class/file the second key will be searched. You can also map a single namespace
-to multiple directories with the following::
+..
+    The above would setup paths for both the ``App`` and ``App\Controller``
+    namespace. The first key will be searched, and if that path does not contain the
+    class/file the second key will be searched. You can also map a single namespace
+    to multiple directories with the following::
 
 上記は ``App`` と ``App\Controller`` 両方の名前空間のセットアップパスです。
+一つ目のキーが検索され、もしパスがその class/file に含まれなければ二つ目のキーが検索されます。
+一つの名前空間に複数のディレクトリをマップでき、以下のように記述します。
 
 ::
 
@@ -370,12 +373,21 @@ to multiple directories with the following::
         }
     }
 
-Plugin, View Template and Locale Paths
+..
+    Plugin, View Template and Locale Paths
+
+プラグイン、ビュー、テンプレート、ロケールのパス
 --------------------------------------
 
-Since plugins, view templates and locales are not classes, they cannot have an
-autoloader configured. CakePHP provides three Configure variables to setup additional
-paths for these resources. In your **config/app.php** you can set these variables::
+..
+    Since plugins, view templates and locales are not classes, they cannot have an
+    autoloader configured. CakePHP provides three Configure variables to setup additional
+    paths for these resources. In your **config/app.php** you can set these variables::
+
+プラグイン、ビューテンプレート、そしてロケールはクラスではないので、オートローダーの構成はありません。
+CakePHP はこれらのリソースの追加パスのセットアップに 3 つの設定変数を提供します。
+
+::
 
     return [
         // More configuration
@@ -396,7 +408,10 @@ paths for these resources. In your **config/app.php** you can set these variable
         ]
     ];
 
-Paths should end with a directory separator, or they will not work properly.
+..
+    Paths should end with a directory separator, or they will not work properly.
+
+パスはディレクトリセパレータ付きで終了し、そうでないと適切に動作しないです。
 
 Inflection Configuration
 ========================
