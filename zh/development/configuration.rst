@@ -292,7 +292,7 @@ Session
     * 'cache' - 使用 Cache 类保存会话。
 
     要定义自定义会话处理器，把它保存在
-    ``app/ModelSDatasource/Session/<name>.php`` 中。确保这个类实现了
+    ``app/Model/Datasource/Session/<name>.php`` 中。确保这个类实现了
     :php:interface:`CakeSessionHandlerInterface`，并设置 Session.handler 为
     <name>。
 
