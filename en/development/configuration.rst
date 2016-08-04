@@ -51,7 +51,7 @@ datasource
 persistent
     Whether or not to use a persistent connection to the database. When using
     SQLServer you should not enable persistent connections as it causes
-    difficulty to diagnose crashes.
+    difficult to diagnose crashes.
 host
     The database server's hostname (or IP address).
 login
