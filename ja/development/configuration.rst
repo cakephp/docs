@@ -413,28 +413,47 @@ CakePHP はこれらのリソースの追加パスのセットアップに 3 つ
 
 パスはディレクトリセパレータ付きで終了し、そうでないと適切に動作しないです。
 
-Inflection Configuration
+..
+    Inflection Configuration
+
+Inflection の設定
 ========================
+..
+    See the :ref:`inflection-configuration` docs for more information.
 
-See the :ref:`inflection-configuration` docs for more information.
+ :ref:`inflection-configuration` を参照してください。
 
-Configure Class
+..
+    Configure Class
+
+Configure クラス
 ===============
 
 .. php:namespace:: Cake\Core
 
 .. php:class:: Configure
 
-CakePHP's Configure class can be used to store and retrieve
-application or runtime specific values. Be careful, this class
-allows you to store anything in it, then use it in any other part
-of your code: a sure temptation to break the MVC pattern CakePHP
-was designed for. The main goal of Configure class is to keep
-centralized variables that can be shared between many objects.
-Remember to try to live by "convention over configuration" and you
-won't end up breaking the MVC structure we've set in place.
+..
+    CakePHP's Configure class can be used to store and retrieve
+    application or runtime specific values. Be careful, this class
+    allows you to store anything in it, then use it in any other part
+    of your code: a sure temptation to break the MVC pattern CakePHP
+    was designed for. The main goal of Configure class is to keep
+    centralized variables that can be shared between many objects.
+    Remember to try to live by "convention over configuration" and you
+    won't end up breaking the MVC structure we've set in place.
 
-You can access ``Configure`` from anywhere in your application::
+CakePHP の Configure クラスはアプリケーションもしくは実行時の特定の値の保存と取り出しで利用されます。
+このクラスは何でも保存でき、その後他のどのような箇所でも利用できるため、確実に CakePHP の MVC デザインパターンを破壊する誘惑に気をつけてください。
+Configure クラスの主なゴールは、中央集権化された変数を維持し、たくさんのオブジェクト間で共有できることです。
+"構成よりも規約" であることを努めるように、そして MVC の構造を破壊しないように記憶しておいてください。
+
+..
+    You can access ``Configure`` from anywhere in your application
+
+ ``Configure`` はどこからでもアクセスできます。
+
+::
 
     Configure::read('debug');
 
