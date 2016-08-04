@@ -1250,7 +1250,7 @@ Ex: name=data[User][username], id=UserUsername
       Will output:
 
       .. code-block:: html
-	
+
         <input name="data[User][gender]" id="UserGender_" value=""
             type="hidden" />
         <input name="data[User][gender]" id="UserGenderM" value="M"
@@ -1259,19 +1259,19 @@ Ex: name=data[User][username], id=UserUsername
         <input name="data[User][gender]" id="UserGenderF" value="F"
             type="radio" />
         <label for="UserGenderF">Female</label>
-      
-      
+
+
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
 
-    * ``$attributes['fieldset']`` If legend attribute is not set to false, then this 
+    * ``$attributes['fieldset']`` If legend attribute is not set to false, then this
       attribute can be used to set the class of the fieldset element.
 
 
     .. versionchanged:: 2.1
         The ``$attributes['disabled']`` option was added in 2.1.
-        
+
     .. versionchanged:: 2.8.5
         The ``$attributes['fieldset']`` option was added in 2.8.5.
 
@@ -1612,7 +1612,7 @@ Creating buttons and submit elements
 
     This method creates a ``<form>`` element. If you want to use this method
     inside of an existing form, you must use the ``inline`` or ``block`` options
-    so that the new form can be rendered outside of its parent.
+    so that the new form can be rendered outside of the existing form.
 
     If all you are looking for is a button to submit your form, then you should
     use :php:meth:`FormHelper::submit()` instead.

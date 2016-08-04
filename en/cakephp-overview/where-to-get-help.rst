@@ -75,7 +75,7 @@ Official CakePHP Forum
 
 `CakePHP Official Forum <http://discourse.cakephp.org>`_
 
-Our official forum where you can ask for help, suggest ideas and have a talk
+Our official forum is where you can ask for help, suggest ideas and have a talk
 about CakePHP. It's a perfect place for quickly finding answers and help others.
 Join the CakePHP family by signing up.
 
