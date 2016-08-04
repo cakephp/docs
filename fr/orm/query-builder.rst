@@ -882,6 +882,36 @@ suivantes pour créer des conditions:
         });
     # WHERE population BETWEEN 999 AND 5000000,
 
+- ``exists()`` Crée une condition en utilisant ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->exists($subquery);
+        });
+    # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
+- ``notExists()`` Crée une condition négative en utilisant ``EXISTS``::
+
+    $subquery = $cities->find()
+		->select(['id'])
+        ->where(function ($exp, $q) {
+			return $exp->equalFields('countries.id', 'cities.country_id');
+        })
+		->andWhere(['population >', 5000000]);
+
+    $query = $countries->find()
+        ->where(function ($exp, $q) use ($subquery) {
+            return $exp->notExists($subquery);
+        });
+    # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
+
 Dans les cas où vous ne pouvez ou ne voulez pas utiliser les méthodes du
 constructeur pour créer les conditions que vous voulez, vous pouvez utiliser du
 code SQL dans des clauses where::

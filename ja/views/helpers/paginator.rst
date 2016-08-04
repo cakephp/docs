@@ -21,6 +21,11 @@ Paginator
 PaginatorHelper Templates
 =========================
 
+.. _paginator-helper-multiple:
+
+Paginating Multiple Results
+===========================
+
 .. meta::
     :title lang=ja: PaginatorHelper
     :description lang=ja: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.

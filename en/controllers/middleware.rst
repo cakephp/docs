@@ -40,18 +40,18 @@ hook method will be called early in the request process, you can use the
         public function middleware($middleware)
         {
             $error = new \Cake\Error\Middleware\ErrorHandlerMiddleware();
-            $middleware->push($error);
+            $middleware->add($error);
             return $middleware;
         }
     }
 
-In addition to pushing onto the end of the ``MiddlewareStack`` you can do
+In addition to adding to the end of the ``MiddlewareQueue`` you can do
 a variety of operations::
 
         $layer = new \App\Middleware\CustomMiddleware;
 
-        // Pushed middleware will be last in line.
-        $middleware->push($layer);
+        // Added middleware will be last in line.
+        $middleware->add($layer);
 
         // Prepended middleware will be first in line.
         $middleware->prepend($layer);
@@ -79,7 +79,7 @@ a variety of operations::
 Adding Middleware from Plugins
 ------------------------------
 
-After the middleware stack has been prepared by the application, the
+After the middleware queue has been prepared by the application, the
 ``Server.buildMiddleware`` event is triggered. This event can be useful to add
 middleware from plugins. Plugins can register listeners in their bootstrap
 scripts, that add middleware::
@@ -90,7 +90,7 @@ scripts, that add middleware::
     EventManager::instance()->on(
         'Server.buildMiddleware',
         function ($event, $middleware) {
-            $middleware->push(new ContactPluginMiddleware());
+            $middleware->add(new ContactPluginMiddleware());
         });
 
 PSR7 Requests and Responses
@@ -228,7 +228,7 @@ their own response. We can see both options in our simple middleware::
             }
 
             // Calling $next() delegates control to then *next* middleware
-            // In your application's stack.
+            // In your application's queue.
             $response = $next($request, $response);
 
             // We could further modify the response before returning it.
@@ -248,10 +248,10 @@ application::
     {
         public function middleware($middleware)
         {
-            // Push your simple middleware onto the stack
-            $middleware->push(new SimpleMiddleware());
+            // Add your simple middleware onto the queue
+            $middleware->add(new SimpleMiddleware());
 
-            // Push some more middleware onto the stack
+            // Add some more middleware onto the queue
 
             return $middleware;
         }

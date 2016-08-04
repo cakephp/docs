@@ -346,14 +346,18 @@ Utiliser la Sélection Plurielle Gettext
 Le second format de sélection plurielle accepté est d'utiliser les
 fonctionnalités intégrées de Gettext. Dans ce cas, les pluriels seront
 enregistrés dans le fichier ``.po`` en créant une ligne de traduction séparée
-pour chaque forme plurielle.
+pour chaque forme plurielle:
 
 .. code-block:: pot
 
-    msgid "One file removed" # Un identificateur de message pour le singulier
-    msgid_plural "{0} files removed" # Une autre pour le pluriel
-    msgstr[0] "Un fichero eliminado" # Traduction au singulier
-    msgstr[1] "{0} ficheros eliminados" # Traduction au pluriel
+    # Un identificateur de message pour le singulier
+    msgid "One file removed"
+    # Une autre pour le pluriel
+    msgid_plural "{0} files removed"
+    # Traduction au singulier
+    msgstr[0] "Un fichero eliminado"
+    # Traduction au pluriel
+    msgstr[1] "{0} ficheros eliminados"
 
 Lorsque vous utilisez cet autre format, vous devez utiliser une autre fonction
 de traduction::

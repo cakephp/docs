@@ -1,6 +1,17 @@
 Middleware
 ##########
 
+.. note::
+    The documentation is not currently supported in French language for this
+    page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
+
+    You can refer to the English version in the select top menu to have
+    information about this page's topic.
+
 Les objets Middleware vous donnent la possibilité de 'wrapper' votre application
 en des couches compatibles et réutilisables de gestion de Requête, ou de la
 logique de construction de réponse. Middleware sont une partie du nouveau HTTP
@@ -21,6 +32,8 @@ CakePHP fournit plusieurs middlewares:
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
 
+.. _using-middleware:
+
 Utilisation du Middleware
 =========================
 
@@ -39,18 +52,18 @@ hook method will be called early in the request process, you can use the
         public function middleware($middleware)
         {
             $error = new \Cake\Error\Middleware\ErrorHandlerMiddleware();
-            $middleware->push($error);
+            $middleware->add($error);
             return $middleware;
         }
     }
 
-In addition to pushing onto the end of the ``MiddlewareStack`` you can do
-a variety of operations::
+In addition to adding to the end of the ``MiddlewareQueue`` you can do a variety
+of operations::
 
         $layer = new \App\Middleware\CustomMiddleware;
 
-        // Pushed middleware will be last in line.
-        $middleware->push($layer);
+        // Le middleware ajouté sera le dernier sur la ligne.
+        $middleware->add($layer);
 
         // Prepended middleware will be first in line.
         $middleware->prepend($layer);
@@ -78,7 +91,7 @@ a variety of operations::
 Ajouter un Middleware à partir des Plugins
 ------------------------------------------
 
-After the middleware stack has been prepared by the application, the
+After the middleware queue has been prepared by the application, the
 ``Server.buildMiddleware`` event is triggered. This event can be useful to add
 middleware from plugins. Plugins can register listeners in their bootstrap
 scripts, that add middleware::
@@ -89,7 +102,7 @@ scripts, that add middleware::
     EventManager::instance()->on(
         'Server.buildMiddleware',
         function ($event, $middleware) {
-            $middleware->push(new ContactPluginMiddleware());
+            $middleware->add(new ContactPluginMiddleware());
         });
 
 Requêtes et Réponses PSR7
@@ -226,7 +239,7 @@ their own response. We can see both options in our simple middleware::
             }
 
             // Calling $next() delegates control to then *next* middleware
-            // In your application's stack.
+            // In your application's queue.
             $response = $next($request, $response);
 
             // We could further modify the response before returning it.
@@ -246,10 +259,10 @@ application::
     {
         public function middleware($middleware)
         {
-            // Push your simple middleware onto the stack
-            $middleware->push(new SimpleMiddleware());
+            // Add your simple middleware onto the queue
+            $middleware->add(new SimpleMiddleware());
 
-            // Push some more middleware onto the stack
+            // Add some more middleware onto the queue
 
             return $middleware;
         }
@@ -260,7 +273,17 @@ application::
 Adding the new HTTP Stack to an Existing Application
 ====================================================
 
-TODO
+Using HTTP Middleware in an existing application requires a few changes to your
+application.
+
+#. First update your ``webroot/index.php``. Copy the file contents from the `app
+   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
+#. Create an ``Application`` class. See the :ref:`using-middleware` section
+   above for how to do that. Or copy the example in the `app skeleton
+   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+
+Once those two steps are complete, you are ready to start re-implementing any
+application/plugin dispatch filters as HTTP middleware.
 
 .. meta::
     :title lang=fr: Http Middleware

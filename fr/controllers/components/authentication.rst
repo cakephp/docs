@@ -241,7 +241,7 @@ connexion pourrait ressembler à cela::
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Flash->error(__('Nom d'utilisateur ou mot de passe incorrect'), [
+                $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect"), [
                     'key' => 'auth'
                 ]);
             }

@@ -1,6 +1,17 @@
 Testing
 #######
 
+.. note::
+    The documentation is not currently supported in French language for this
+    page.
+
+    Please feel free to send us a pull request on
+    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+    button to directly propose your changes.
+
+    You can refer to the English version in the select top menu to have
+    information about this page's topic.
+
 CakePHP fournit un support de test intégré compréhensible. CakePHP permet
 l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes les
 fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
@@ -985,8 +996,6 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
-.. todo::
-
 Testing Stateless Authentication and APIs
 -----------------------------------------
 
@@ -1046,7 +1055,14 @@ tests ne vont pas être en échec à cause d'un token non présent::
 
 Il est aussi important d'activer debug dans les tests qui utilisent les tokens
 pour éviter que le SecurityComponent pense que le token debug est utilisé dans
-un environnement non-debug.
+un environnement non-debug. Quand vous testez avec d'autres méthodes comme
+``requireSecure()``, vous pouvez utiliser ``configRequest()`` pour définir les
+bonnes variables d'environnement::
+
+    // Fake out SSL connections.
+    $this->configRequest([
+        'environment' => ['HTTPS' => 'on']
+    ]);
 
 .. versionadded:: 3.1.2
     Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
@@ -1547,7 +1563,7 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
             parent::setUp();
             $this->Orders = TableRegistry::get('Orders');
             // enable event tracking
-            $this->Orders->getEventManager()->setEventList(new EventList());
+            $this->Orders->eventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1560,8 +1576,8 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
         }
     }
 

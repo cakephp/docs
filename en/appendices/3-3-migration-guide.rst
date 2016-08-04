@@ -25,6 +25,9 @@ Deprecations
   instead.
 * ``RequestActionTrait`` has been deprecated. Refactor your code to use
   :doc:`/views/cells` instead.
+* ``Cake\\Utility\\Crypto\\Mcrypt`` engine has been deprecated as the ``mcrypt``
+  extension is deprecated in PHP 7.1. Use the ``openssl`` and 
+  :php:class:`Cake\\Utility\\Crypto\\Openssl` instead.
 
 Behavior Changes
 ================
@@ -38,6 +41,9 @@ behavior that may effect your application:
 * ``Controller::referer()`` now consistently omits the application base path
   when generating application local URLs. Previously string URLs would have the
   base path prepended to them, while array URLs would not.
+* The default ``ErrorController`` no longer disables ``Auth`` and ``Security``
+  components, as it does not extend ``AppController``. If you are enabling these
+  components through events, you will need to update your code.
 
 PSR7 Middleware Support Added
 =============================
@@ -88,7 +94,7 @@ ORM Improvements
   exception when an unknown association is in the 'associated' key.
 * ``RulesChecker::validCount()`` was added. This new method allows to apply
   rules to the number of associated records an entity has.
-* The ``partialNullsPass`` option was added to the ``existsIn`` rule. This
+* The ``allowNullableNulls`` option was added to the ``existsIn`` rule. This
   option allows rules to pass when some columns are null.
 
 Multiple Pagination Support Added
@@ -137,6 +143,8 @@ Other Enhancements
 
 * ``Collection::transpose()`` was added. This method allows you to tranpose the
   rows and columns of a matrix with equal length rows.
+* The default ``ErrorController`` now loads ``RequestHandlerComponent`` to
+  enable ``Accept`` header based content-type negotiation for error pages.
 
 Routing
 -------

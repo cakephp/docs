@@ -25,6 +25,9 @@ Deprecations
   :doc:`/controllers/middleware` à la place.
 * ``RequestActionTrait`` a été dépréciée. Refactorez votre code pour utiliser
   :doc:`/views/cells` à la place.
+* Le moteur ``Cake\\Utility\\Crypto\\Mcrypt`` a été déprécié puisque l'extension
+  ``mcrypt`` est dépréciée dans PHP 7.1. Utilisez ``openssl`` et
+  :php:class:`Cake\\Utility\\Crypto\\Openssl` à la place.
 
 Changements de Comportement
 ===========================
@@ -39,24 +42,29 @@ variations mineures qui peuvent avoir des effets sur votre application:
   de façon cohérente lors de la génération des URLs en local. Avant, les chaînes
   d'URLs étaient préfixées par le chemin de base alors que les tableaux d'URLs
   ne l'étaient pas.
+* Le ``ErrorController`` par défaut ne désactive plus les components ``Auth`` et
+  ``Security``, puisqu'il n'étend plus ``AppController``. Si vous activez ces
+  components avec des events, vous devrez mettre à jour votre code.
 
-PSR7 Middleware Support Added
-=============================
+Support du Middleware PSR7 Ajouté
+=================================
 
-In tandem with the deprecation of Dispatcher Filters, support for PSR7
-middleware has been added. Middleware is part of the new HTTP stack that is an
-opt-in component of CakePHP 3.3.0. By using the new HTTP stack, you can take
-advantage of features like:
+En même temps qu'avec la dépréciation des Filters du Dispatcher, le support pour
+le middleware PSR7 a été ajouté. Middleware est une partie de la nouvelle stack
+HTTP qui est un component au choix de CakePHP 3.3.0. En utilisant la nouvelle
+stack HTTP, vous pouvez tirer profit des fonctionnalités comme:
 
-* Using middleware from plugins, and libraries outside of CakePHP.
-* Leverage the same response object methods in both the responses you get from
-  ``Http\Client`` and the responses your application generates.
-* Be able to augment the response objects emitted by error handling and asset
-  delivery.
+* Utilisation du middleware à partir des plugins, et des libraries en-dehors de
+  CakePHP.
+* Amène les mêmes méthodes pour l'objet response à la fois pour les réponses que
+  vous obtenez à partir de ``Http\Client`` et les réponses que votre application
+  génère.
+* Être capable d'augmenter les objets response émis par la gestion des erreurs
+  et la délivrance des assets.
 
-See the :doc:`/controllers/middleware` chapter and :ref:`adding-http-stack`
-sections for more information and how to add the new HTTP stack to an existing
-application.
+Consultez le chapitre :doc:`/controllers/middleware` et les sections
+:ref:`adding-http-stack` pour plus d'informations sur la façon d'ajouter la
+nouvelle stack HTTP à une application existante.
 
 Http Client est maintenant compatible avec PSR7
 ===============================================
@@ -94,7 +102,7 @@ Améliorations de l'ORM
 * ``RulesChecker::validCount()`` a été ajoutée. Cette nouvelle méthode permet
   d'ajouter des règles qui vérifient le nombre d'enregistrements associés d'une
   entity.
-* L'option ``partialNullsPass`` a été ajoutée à la règle ``existsIn``. Cette
+* L'option ``allowNullableNulls`` a été ajoutée à la règle ``existsIn``. Cette
   option permet aux règles de passer quand des colonnes sont nulles.
 
 Support pour la Pagination Multiple Ajouté
@@ -146,6 +154,9 @@ Autres Améliorations
 * ``Collection::transpose()`` a été ajoutée. Cette méthode vous permet de
   transposer les lignes et colonnes d'une matrice avec des colonnes de longueurs
   égales.
+* Le ``ErrorController`` par défaut charge maintenant
+  ``RequestHandlerComponent`` pour activer l'en-tête ``Accept`` selon le type de
+  contenu pour les pages d'erreur.
 
 Routing
 -------

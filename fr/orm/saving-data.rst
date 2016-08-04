@@ -1040,7 +1040,7 @@ l'association avec ``link()``, par exemple::
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
 
-    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $user->_joinData = new Entity(['vote_type' => $voteType], ['markNew' => true]);
     $this->Articles->Users->link($article, [$user]);
 
 Sauvegarder des Données Supplémentaires à la Table de Jointure
@@ -1147,6 +1147,36 @@ données que vous recevez de l'utilisateur final sont valides. Ne pas gérer
 correctement les données complexes va permettre à des utilisateurs mal
 intentionnés d'être capable de stocker des données qu'ils ne pourraient pas
 stocker normalement.
+
+Sauvegarder Plusieurs Entities
+==============================
+
+.. php:method:: saveMany($entities, $options = [])
+
+
+En utilisant cette méthode, vous pouvez sauvegarder plusieurs entities de façon
+atomique. ``$entites`` peuvent être un tableau d'entities créé avec
+``newEntities()`` / ``patchEntities()``. ``$options`` peut avoir les mêmes
+options que celles acceptées par ``save()``::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($data);
+    $result = $articles->saveMany($entities);
+
+Le résultat sera la mise à jour des entities en cas de succès ou ``false`` en
+cas d'échec.
+
+.. versionadded:: 3.2.8
 
 Mises à Jour en Masse
 =====================

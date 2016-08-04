@@ -42,6 +42,8 @@ rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make html LANG=$*
+	make build/html/$*/_static/css/app.css
+	make build/html/$*/_static/app.js
 
 htmlhelp-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make htmlhelp LANG=$*
@@ -90,3 +92,28 @@ clean:
 
 clean-website:
 	rm -rf $(DEST)/*
+
+build/html/%/_static:
+	mkdir -p build/html/$*/_static
+
+CSS_FILES = themes/cakephp/static/css/bootstrap.min.css \
+  themes/cakephp/static/css/font-awesome.min.css \
+  themes/cakephp/static/css/style.css \
+  themes/cakephp/static/css/default.css \
+  themes/cakephp/static/css/default.css \
+  themes/cakephp/static/css/pygments.css \
+  themes/cakephp/static/css/responsive.css
+
+build/html/%/_static/css/app.css: build/html/%/_static $(CSS_FILES)
+	# echo all dependencies ($$^) into the output ($$@)
+	cat $(CSS_FILES) > $@
+
+JS_FILES = themes/cakephp/static/jquery.js \
+  themes/cakephp/static/vendor.js \
+  themes/cakephp/static/app.js \
+  themes/cakephp/static/search.js \
+  themes/cakephp/static/typeahead.js
+
+build/html/%/_static/app.js: build/html/%/_static $(JS_FILES)
+	# echo all dependencies ($JS_FILES) into the output ($$@)
+	cat $(JS_FILES) > $@

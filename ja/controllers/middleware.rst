@@ -12,6 +12,17 @@ Middleware
     You can referer to the english version in the select top menu to have
     information about this page's topic.
 
+
+.. _using-middleware:
+
+Using Middleware
+================
+
+.. _adding-http-stack:
+
+Adding the new HTTP Stack to an Existing Application
+====================================================
+
 .. meta::
     :title lang=ja: Middleware
     :keywords lang=ja: middleware

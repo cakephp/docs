@@ -958,6 +958,16 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
         $this->post('/posts/add', ['title' => 'Exciting news!']);
     }
 
+また、トークンを使用するテストで debug を有効にすることは重要です。SecurityComponent が
+「デバッグ用トークンがデバッグ以外の環境で使われている」と考えてしまうのを防ぐためです。
+``requireSecure()`` のような他のメソッドでテストした時は、適切な環境変数をセットするために
+``configRequest()`` を利用できます。 ::
+
+    // SSL 接続を装います。
+    $this->configRequest([
+        'environment' => ['HTTPS' => 'on']
+    ]);
+
 .. versionadded:: 3.1.2
     ``enableCsrfToken()`` と ``enableSecurityToken()`` メソッドは 3.1.2 で追加されました。
 
@@ -1441,7 +1451,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
             parent::setUp();
             $this->Orders = TableRegistry::get('Orders');
             // イベントトラッキングの有効化
-            $this->Orders->getEventManager()->setEventList(new EventList());
+            $this->Orders->eventManager()->setEventList(new EventList());
         }
 
         public function testPlace()
@@ -1454,8 +1464,8 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
         }
     }
 

@@ -118,9 +118,9 @@ class::
     // Update an existing association.
     $article = $articlesTable->get(1, ['contain' => ['Tags']]);
     $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
-    
+
     // Necessary because we are changing a property directly
-    $article->dirty('tags', true); 
+    $article->dirty('tags', true);
 
     $articlesTable->save($article, ['associated' => ['Tags']]);
 
@@ -932,9 +932,9 @@ append
     in the array of entities to be saved.
 replace
     When saving, existing links will be removed and new links will be created in
-    the junction table. If there are existing link in the database to some of the
-    entities intended to be saved, those links will be updated, not deleted and
-    then re-saved.
+    the junction table. If there are existing link in the database to some of
+    the entities intended to be saved, those links will be updated, not deleted
+    and then re-saved.
 
 By default the ``replace`` strategy is used. Whenever you add new records into
 an existing association you should always mark the association property as
@@ -956,9 +956,9 @@ entities, eg. a user coauthoring an article. This is done by using the method
     $this->Articles->Users->link($article, [$user]);
 
 When saving belongsToMany Associations, it can be relevant to save some
-additional data to the junction Table.  In the previous example of tags, it could
-be the ``vote_type`` of person who voted on that article.  The ``vote_type`` can
-be either ``upvote`` or ``downvote`` and is represented by a string.  The
+additional data to the junction Table. In the previous example of tags, it could
+be the ``vote_type`` of person who voted on that article. The ``vote_type`` can
+be either ``upvote`` or ``downvote`` and is represented by a string. The
 relation is between Users and Articles.
 
 Saving that association, and the ``vote_type`` is done by first adding some data
@@ -967,7 +967,7 @@ to ``_joinData`` and then saving the association with ``link()``, example::
     $article = $this->Articles->get($articleId);
     $user = $this->Users->get($userId);
 
-    $user->_joinData = new Entity(['vote_type' => $voteType, ['markNew' => true]]);
+    $user->_joinData = new Entity(['vote_type' => $voteType], ['markNew' => true]);
     $this->Articles->Users->link($article, [$user]);
 
 Saving Additional Data to the Join Table
@@ -982,8 +982,8 @@ Courses, we could have a junction table that looks like::
 
     id | student_id | course_id | days_attended | grade
 
-When saving data you can populate the additional columns on the junction table by
-setting data to the ``_joinData`` property::
+When saving data you can populate the additional columns on the junction table
+by setting data to the ``_joinData`` property::
 
     $student->courses[0]->_joinData->grade = 80.12;
     $student->courses[0]->_joinData->days_attended = 30;
@@ -991,8 +991,8 @@ setting data to the ``_joinData`` property::
     $studentsTable->save($student);
 
 The ``_joinData`` property can be either an entity, or an array of data if you
-are saving entities built from request data. When saving junction table data from
-request data your POST data should look like::
+are saving entities built from request data. When saving junction table data
+from request data your POST data should look like::
 
     $data = [
         'first_name' => 'Sally',
@@ -1067,6 +1067,33 @@ receiving from the end user is the correct type. Failing to correctly handle
 complex data could result in malicious users being able to store data they
 would not normally be able to.
 
+Saving Multiple Entities
+========================
+
+.. php:method:: saveMany($entities, $options = [])
+
+
+Using this method you can save multiple entities atomically. ``$entites`` can
+be an array of entities created using ``newEntities()`` / ``patchEntities()``.
+``$options`` can have the same options as accepted by ``save()``::
+
+    $data = [
+        [
+            'title' => 'First post',
+            'published' => 1
+        ],
+        [
+            'title' => 'Second post',
+            'published' => 1
+        ],
+    ];
+    $articles = TableRegistry::get('Articles');
+    $entities = $articles->newEntities($data);
+    $result = $articles->saveMany($entities);
+
+The result will be updated entities on success or ``false`` on failure.
+
+.. versionadded:: 3.2.8
 
 Bulk Updates
 ============

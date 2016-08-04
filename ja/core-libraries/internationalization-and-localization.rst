@@ -304,14 +304,18 @@ Gettext の複数形選択を使用する
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 二番目の複数形のフォーマットは、Gettext のビルトイン機能を用いたものです。
-この場合、複数形ごとに分かれた翻訳メッセージの行を作成した ``.po`` ファイルに複数形が置かれます。
+この場合、複数形ごとに分かれた翻訳メッセージの行を作成した ``.po`` ファイルに複数形が置かれます。:
 
 .. code-block:: pot
 
-    msgid "One file removed" # One message identifier for singular
-    msgid_plural "{0} files removed" # Another one for plural
-    msgstr[0] "Un fichero eliminado" # Translation in singular
-    msgstr[1] "{0} ficheros eliminados" # Translation in plural
+    # One message identifier for singular
+    msgid "One file removed"
+    # Another one for plural
+    msgid_plural "{0} files removed"
+    # Translation in singular
+    msgstr[0] "Un fichero eliminado"
+    # Translation in plural
+    msgstr[1] "{0} ficheros eliminados"
 
 これを別のフォーマットで利用するとき、別の翻訳機能を利用する必要があります。 ::
 

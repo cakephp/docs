@@ -60,10 +60,10 @@ Using placeholders allows us to validate parts of the URL, in this case we used
 the ``\d+`` regular expression so that only digits are matched. Finally, we told
 the Router to treat the ``id`` placeholder as a function argument to the
 ``view()`` function by specifying the ``pass`` option. More on using this
-options later.
+option later.
 
 The CakePHP Router can also reverse match routes. That means that from an
-array containing matching parameters, it is capable of generation a URL string::
+array containing matching parameters, it is capable of generating a URL string::
 
     use Cake\Routing\Router;
 

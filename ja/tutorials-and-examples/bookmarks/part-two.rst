@@ -16,7 +16,7 @@ CakePHP では、認証は :doc:`/controllers/components` によって制御さ�
 すべてのメソッドに認証を必須にすることをおすすめします。では AuthComponent を
 AppController に追加しましょう。 ::
 
-    // In src/Controller/AppController.php
+    // src/Controller/AppController.php の中で
     namespace App\Controller;
 
     use Cake\Controller\Controller;
@@ -41,8 +41,8 @@ AppController に追加しましょう。 ::
                 ]
             ]);
 
-            // Allow the display action so our pages controller
-            // continues to work.
+            // PagesController が動作し続けるように
+            // display アクションを許可
             $this->Auth->allow(['display']);
         }
     }
@@ -56,7 +56,7 @@ AppController に追加しましょう。 ::
 それでは、ログインアクションを作成しましょう。 ::
 
 
-    // In src/Controller/UsersController.php
+    // src/Controller/UsersController.php の中で
     public function login()
     {
         if ($this->request->is('post')) {
@@ -65,7 +65,7 @@ AppController に追加しましょう。 ::
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error('Your username or password is incorrect.');
+            $this->Flash->error('あなたのユーザー名またはパスワードが不正です。');
         }
     }
 
@@ -104,7 +104,7 @@ AppController に追加しましょう。 ::
 
     public function logout()
     {
-        $this->Flash->success('You are now logged out.');
+        $this->Flash->success('ログアウトします。');
         return $this->redirect($this->Auth->logout());
     }
 
@@ -122,7 +122,7 @@ AppController に追加しましょう。 ::
     public function initialize()
     {
         parent::initialize();
-        // Add logout to the allowed actions list.
+        // 許可するアクション一覧に logout を追加
         $this->Auth->allow(['logout', 'add']);
     }
 
@@ -155,7 +155,7 @@ AppController に追加しましょう。 ::
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
-                'authorize'=> 'Controller',//added this line
+                'authorize'=> 'Controller',//この行を追加
                 'authenticate' => [
                     'Form' => [
                         'fields' => [
@@ -171,8 +171,8 @@ AppController に追加しましょう。 ::
                 'unauthorizedRedirect' => $this->referer()
             ]);
 
-            // Allow the display action so our pages controller
-            // continues to work.
+            // PagesController が動作し続けるように
+            // display アクションを許可
             $this->Auth->allow(['display']);
         }
 
@@ -184,16 +184,16 @@ AppController に追加しましょう。 ::
     {
         $action = $this->request->params['action'];
 
-        // The add and index actions are always allowed.
+        // add と index アクションは常に許可します。
         if (in_array($action, ['index', 'add', 'tags'])) {
             return true;
         }
-        // All other actions require an id.
+        // その他のすべてのアクションは、id を必要とします。
         if (empty($this->request->params['pass'][0])) {
             return false;
         }
 
-        // Check that the bookmark belongs to the current user.
+	// ブックマークが現在のユーザに属するかどうかをチェック
         $id = $this->request->params['pass'][0];
         $bookmark = $this->Bookmarks->get($id);
         if ($bookmark->user_id == $user['id']) {
@@ -206,8 +206,8 @@ AppController に追加しましょう。 ::
 元のページにリダイレクトされるはずです。ただし、何のエラーメッセージはされないでしょう。
 それでは次のように修正しましょう。 ::
 
-    // In src/Template/Layout/default.ctp
-    // Under the existing flash message.
+    // src/Template/Layout/default.ctp の中の
+    // 既存のフラッシュメッセージの下で
     <?= $this->Flash->render('auth') ?>
 
 これで許可エラーメッセージが表示されるはずです。
@@ -232,10 +232,10 @@ AppController に追加しましょう。 ::
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
-                $this->Flash->success('The bookmark has been saved.');
+                $this->Flash->success('ブックマークを保存しました。');
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error('The bookmark could not be saved. Please, try again.');
+            $this->Flash->error('ブックマークは保存できませんでした。もう一度お試しください。');
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
@@ -255,10 +255,10 @@ AppController に追加しましょう。 ::
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
-                $this->Flash->success('The bookmark has been saved.');
+                $this->Flash->success('ブックマークを保存しました。');
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error('The bookmark could not be saved. Please, try again.');
+            $this->Flash->error('ブックマークは保存できませんでした。もう一度お試しください。');
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
@@ -352,6 +352,7 @@ AppController に追加しましょう。 ::
 ``beforeSave()`` フックメソッドを使用して、タグ文字列を解析し、関連するエンティティを検索/構築します。
 **src/Model/Table/BookmarksTable.php** に以下を追加します。 ::
 
+
     public function beforeSave($event, $entity, $options)
     {
         if ($entity->tag_string) {
@@ -361,24 +362,30 @@ AppController に追加しましょう。 ::
 
     protected function _buildTags($tagString)
     {
-        $new = array_unique(array_map('trim', explode(',', $tagString)));
+        // タグに trim 適用
+        $newTags = array_map('trim', explode(',', $tagString));
+        // すべての空のタグを削除
+        $newTags = array_filter($newTags);
+        // 重複するタグの削減
+        $newTags = array_unique($newTags);
+
         $out = [];
         $query = $this->Tags->find()
-            ->where(['Tags.title IN' => $new]);
+            ->where(['Tags.title IN' => $newTags]);
 
-        // Remove existing tags from the list of new tags.
+	// 新しいタグの一覧から既存のタグを削除
         foreach ($query->extract('title') as $existing) {
-            $index = array_search($existing, $new);
+            $index = array_search($existing, $newTags);
             if ($index !== false) {
-                unset($new[$index]);
+                unset($newTags[$index]);
             }
         }
-        // Add existing tags.
+        // 既存のタグの追加
         foreach ($query as $tag) {
             $out[] = $tag;
         }
-        // Add new tags.
-        foreach ($new as $tag) {
+        // 新しいタグの追加
+        foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
         return $out;
@@ -394,6 +401,6 @@ AppController に追加しましょう。 ::
 認証と基本的な許可/アクセス制御シナリオを処理できるようブックマークアプリケーションを拡張してきました。
 また、FormHelper と ORM の機能を活用することで、いくつかの素晴らしい UX の改善を追加しました。
 
-CakePHPを探求する時間を割いていただきありがとうございます。次は
+CakePHP を探求する時間を割いていただきありがとうございます。次は
 :doc:`/tutorials-and-examples/blog/blog` を完了するか、
 :doc:`/orm` について更に学ぶか、もしくは :doc:`/topics` を熟読してください。

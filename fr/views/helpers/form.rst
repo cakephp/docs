@@ -1455,8 +1455,6 @@ Options:
 -  'escape' booléen s'il faut ou non que le HTML échappe le contenu de
    l'erreur.
 
-.. TODO:: Add examples.
-
 .. php:method:: isFieldError(string $fieldName)
 
 Retourne ``true`` si le champ $fieldName fourni a une erreur de validation en
@@ -1612,6 +1610,11 @@ Créer des Boutons Indépendants et des liens POST
     Si vous cherchez un bouton pour soumettre votre formulaire, alors vous
     devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
     ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
+
+    .. note::
+        Attention à ne pas mettre un postLink à l'intérieur d'un formulaire
+        ouvert. À la place, utilisez l'option ``block`` pour mettre en mémoire
+        tampon le formulaire dans des :ref:`view-blocks`
 
 Personnaliser les Templates que FormHelper Utilise
 ==================================================

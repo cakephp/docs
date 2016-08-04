@@ -214,7 +214,7 @@ Scaffold コードの生成
 パスワードハッシュを追加
 ========================
 
-(**http://localhost:8765/bookmarks/users** にアクセスして)
+(**http://localhost:8765/users** にアクセスして)
 ユーザーを作成した時、パスワードが平文で保存されることにおそらく気づくでしょう。
 これはセキュリティの観点から、とても良くありませんので修正しましょう。
 
@@ -232,13 +232,13 @@ Scaffold コードの生成
 
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Cake\Auth\DefaultPasswordHasher; // この行を追加してください
     use Cake\ORM\Entity;
 
     class User extends Entity
     {
 
-        // Code from bake.
+        // bake で生成されたコード
 
         protected function _setPassword($value)
         {
