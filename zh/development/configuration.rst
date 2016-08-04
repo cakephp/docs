@@ -1,7 +1,7 @@
 配置
 ####
 
-配置 CakePHP 应用程序简直是小菜一碟。在安装完 CakePHP 后，创建一个基本的 web 
+配置 CakePHP 应用程序简直是小菜一碟。在安装完 CakePHP 后，创建一个基本的 web
 应用只需设置数据库配置。
 
 当然，还有其它可选的配置步骤可以采用，来充分利用 CakePHP 的灵活架构。可以容易地
@@ -41,7 +41,8 @@ datasource
     Database/Postgres、Database/Sqlite。可以使用 :term:`plugin syntax` 指定要
     使用的插件数据源。
 persistent
-    是否使用连接数据库的持久化连接。
+    是否使用连接数据库的持久化连接。当使用 SQLServer 时，应当不要启用持久化连接，
+    因为这会造成难以诊断的崩溃。
 host
     数据库服务器的主机名(或IP地址)。
 login
@@ -81,11 +82,11 @@ settings
 .. note::
 
     前缀设置作用于表，**而不是** 模型。举个例子，如果为 Apple 和 Flavor 模型创建
-    了一个连接表，应当命名为 prefix\_apples\_flavors(**而不是** 
+    了一个连接表，应当命名为 prefix\_apples\_flavors(**而不是**
     prefix\_apples\_prefix\_flavors)，前缀设置应设为 'prefix\_'。
 
 在这个时候，你也许可以看下 :doc:`/getting-started/cakephp-conventions` 。对表(
-以及某些字段)的正确命名让你自动获得一些功能，而且避免配置。例如，如果将表命名为 
+以及某些字段)的正确命名让你自动获得一些功能，而且避免配置。例如，如果将表命名为
 big\_boxes，模型命名为 BigBox，控制器命名为 BigBoxesController，那这一切就能够自动协作了。按照约定，数据库表名应当使用下划线
 分隔的小写复数形式 — 例如：bakers、pastry\_stores 和 savory\_cakes。
 
@@ -196,7 +197,7 @@ big\_boxes，模型命名为 BigBox，控制器命名为 BigBoxesController，�
 CakePHP 核心配置
 ----------------
 
-:php:class:`Configure` 类用来管理一系列 CakePHP 核心配置变量。这些变量可在 
+:php:class:`Configure` 类用来管理一系列 CakePHP 核心配置变量。这些变量可在
 ``app/Config/core.php`` 文件中找到。下面是每个变量的描述、以及如何影响到程序的。
 
 debug
@@ -204,12 +205,12 @@ debug
 
     * 0 = 生产模式。无输出。
     * 1 = 显示错误和警告。
-    * 2 = 显示错误，警告和 SQL 语句。 [只有在视图或布局中添加 
+    * 2 = 显示错误，警告和 SQL 语句。 [只有在视图或布局中添加
       $this->element('sql\_dump') 才会显示 SQL 日志。]
 
 Error
-    配置处理应用程序错误的错误处理器。默认使用 
-    :php:meth:`ErrorHandler::handleError()`。当 debug > 0 时，使用 
+    配置处理应用程序错误的错误处理器。默认使用
+    :php:meth:`ErrorHandler::handleError()`。当 debug > 0 时，使用
     :php:class:`Debugger` 显示错误，而当 debug = 0 时，使用 :php:class:`CakeLog`
     将错误记录在日志中。
 
@@ -222,10 +223,10 @@ Error
       信息。
 
 Exception
-    配置异常处理程序用于未捕获的异常。默认情况下，会使用 
+    配置异常处理程序用于未捕获的异常。默认情况下，会使用
     ErrorHandler::handleException()。对异常会显示一个 HTML 页面。当 debug > 0 时，
     像 Missing Controller 这样的框架错误会显示出来。而当 debug = 0 时，框架错误
-    被强制转换为通常的 HTTP 错误。欲知更多异常处理的信息，请参见 
+    被强制转换为通常的 HTTP 错误。欲知更多异常处理的信息，请参见
     :doc:`exceptions` 一节。
 
 .. _core-configuration-baseurl:
@@ -248,7 +249,7 @@ App.baseUrl
     www.example.com/index.php/controllername/actionname/param rather
     而不是 www.example.com/controllername/actionname/param.
 
-    如果你把 CakePHP 安装到不是 Apache 的 web 服务器上，你可以从 
+    如果你把 CakePHP 安装到不是 Apache 的 web 服务器上，你可以从
     :doc:`/installation/url-rewriting` 一节找到在其它服务器上使网址重写运行的
     说明。
 App.encoding
@@ -269,19 +270,19 @@ Session
 
     子键
 
-    * ``name`` - 要使用的，cookie 的名字。默认为'CAKEPHP' 
+    * ``name`` - 要使用的，cookie 的名字。默认为'CAKEPHP'
     * ``timeout`` - 要会话存在的分钟数。这个超时是由 CakePHP 处理的。
-    * ``cookieTimeout`` - 要会话 coookie 存在的分钟数。 
-    * ``checkAgent`` - 在启动会话时，要检查用户代理吗？在处理旧版 IE、Chrome 
+    * ``cookieTimeout`` - 要会话 coookie 存在的分钟数。
+    * ``checkAgent`` - 在启动会话时，要检查用户代理吗？在处理旧版 IE、Chrome
       Frame 或者某些网络浏览设备以及 AJAX 时，你或许想要设置该值为 false。
     * ``defaults`` - 会话作为基础使用的默认配置集。有四种内置(默认配置集): php、
       cake、cache、database。
-    * ``handler`` - 可以用来启用自定义会话处理器。期待可用于 
-      `session_save_handler` 的回调数组。使用该选项会自动添加 
+    * ``handler`` - 可以用来启用自定义会话处理器。期待可用于
+      `session_save_handler` 的回调数组。使用该选项会自动添加
       `session.save_handler` 到 ini 数组。
-    * ``autoRegenerate`` - 启用该设置，就启用了会话的自动延续，以及频繁变化的 
+    * ``autoRegenerate`` - 启用该设置，就启用了会话的自动延续，以及频繁变化的
       sessionid。参看 :php:attr:`CakeSession::$requestCountdown`。
-    * ``ini`` - 要设置的额外 ini 值的关联数组。 
+    * ``ini`` - 要设置的额外 ini 值的关联数组。
 
     内置默认值为：
 
@@ -290,12 +291,12 @@ Session
     * 'database' - 使用 CakePHP 的数据库会话。
     * 'cache' - 使用 Cache 类保存会话。
 
-    要定义自定义会话处理器，把它保存在 
-    ``app/ModelSDatasource/Session/<name>.php`` 中。确保这个类实现了 
-    :php:interface:`CakeSessionHandlerInterface`，并设置 Session.handler 为 
+    要定义自定义会话处理器，把它保存在
+    ``app/Model/Datasource/Session/<name>.php`` 中。确保这个类实现了
+    :php:interface:`CakeSessionHandlerInterface`，并设置 Session.handler 为
     <name>。
 
-    要使用数据库会话，用 cake 控制台命令运行 ``app/ConfigSSchema/sessions.php`` 
+    要使用数据库会话，用 cake 控制台命令运行 ``app/ConfigSSchema/sessions.php``
     数据结构： ``cake schema create Sessions``
 
 Security.salt
@@ -339,7 +340,7 @@ CakePHP 在内部使用两个缓存配置，``_cake_model_`` 和 ``_cake_core_``
 因为它们会在每次请求时读取。默认情况下，当 debug 大于 0 时这两个配置都是每 10 秒
 就会过期。
 
-就象所有缓存在 :php:class:`Class` 中的缓存数据一样，可以使用 
+就象所有缓存在 :php:class:`Class` 中的缓存数据一样，可以使用
 :php:meth:`Cache::clear()` 清除数据。
 
 Configure 类
@@ -352,7 +353,7 @@ Configure 类
 必须引入那个配置文件。
 
 CakePHP 的 Configure 类可以用来保存和读取应用程序或运行时相关的值。当心，这个类
-允许在其中保存任何东西，然后在代码的任何部分使用它：明显诱使人打破作为 CakePHP 
+允许在其中保存任何东西，然后在代码的任何部分使用它：明显诱使人打破作为 CakePHP
 的设计目的的 MVC 模式。Configure 类的主要目标是保持变量集中在一起，可在许多对象
 之间共享。记得尽量保持“约定重于配置”，你就不会打破我们设定好的 MVC 结构了。
 
@@ -458,9 +459,9 @@ CakePHP 的 Configure 类可以用来保存和读取应用程序或运行时相�
 ============
 
 CakePHP 附带两种内置的配置文件读取器。:php:class:`PhpReader` 能够读取 PHP 配置
-文件，与 Configure 类之前读取的格式相同。:php:class:`IniReader` 能够读取 ini 
-配置文件。欲知 ini 文件的更多细节，请参见 
-`PHP 文档 <http://php.net/parse_ini_file>`_。为了使用核心配置读取器，需要使用 
+文件，与 Configure 类之前读取的格式相同。:php:class:`IniReader` 能够读取 ini
+配置文件。欲知 ini 文件的更多细节，请参见
+`PHP 文档 <http://php.net/parse_ini_file>`_。为了使用核心配置读取器，需要使用
 :php:meth:`Configure::config()` 把它附加到 Configure 类上::
 
     App::uses('PhpReader', 'Configure');
@@ -514,8 +515,8 @@ CakePHP 附带两种内置的配置文件读取器。:php:class:`PhpReader` 能�
     :param array $keys: 要保存的顶层键的列表。默认为所有键。
 
 把 Configure 类中的所有或部分数据保存到配置读取器支持的文件或存储系统中。序列化
-的格式由 $config 指定的附加配置读取器来决定。例如，如果 'default' 适配器为 
-:php:class:`PhpReader` 类，生成的文件将会是一个 PHP 配置文件，能够由 
+的格式由 $config 指定的附加配置读取器来决定。例如，如果 'default' 适配器为
+:php:class:`PhpReader` 类，生成的文件将会是一个 PHP 配置文件，能够由
 :php:class:`PhpReader` 类加载。
 
 假定 'default' 读取器是一个 PhpReader 的实例。保存 Configure 类中的所有数据到
@@ -573,7 +574,7 @@ CakePHP 附带两种内置的配置文件读取器。:php:class:`PhpReader` 能�
 ====================
 
 既然配置读取器是 CakePHP 可以扩展的部分，就可以在应用程序和插件中创建配置读取器。
-配置读取器需要实现 :php:interface:`ConfigReaderInterface` 接口。该接口定义了 
+配置读取器需要实现 :php:interface:`ConfigReaderInterface` 接口。该接口定义了
 read 方法为唯一必需的方法。如果你真的喜欢 XML 文件，你可以为应用程序创建一个简单
 的 Xml 配置读取器::
 
@@ -644,7 +645,7 @@ read 方法为唯一必需的方法。如果你真的喜欢 XML 文件，你可�
 .. php:class:: PhpReader
 
     让你可以读取保存为普通 PHP 文件的配置文件。你可以从 ``app/Config`` 目录中
-    读取，也可以用 :term:`plugin syntax` 从插件配置目录中读取。文件 **必须** 
+    读取，也可以用 :term:`plugin syntax` 从插件配置目录中读取。文件 **必须**
     包含 ``$config`` 变量。下面是一个配置文件示例::
 
         $config = array(
@@ -667,7 +668,7 @@ read 方法为唯一必需的方法。如果你真的喜欢 XML 文件，你可�
 
 .. php:class:: IniReader
 
-    让你可以读取保存为普通 .ini 文件的配置文件。ini 文件必须与 PHP 的 
+    让你可以读取保存为普通 .ini 文件的配置文件。ini 文件必须与 PHP 的
     ``parse_ini_file`` 函数兼容，并且从以下改进中获益
 
     * 点分隔的值会扩展为数组。
@@ -692,19 +693,19 @@ read 方法为唯一必需的方法。如果你真的喜欢 XML 文件，你可�
 词形变化配置
 ============
 
-CakePHP 的命名约定真的很好 —— 你可以把数据库表命名为 big\_boxes，把模型命名为 
+CakePHP 的命名约定真的很好 —— 你可以把数据库表命名为 big\_boxes，把模型命名为
 BigBox，把控制器命名为 BigBoxesController，所有这一切就可以自动在一起运作。
 CakePHP 知道如何把这些联结在一起，是通过单词的单数和复数形式之间的词形变化。
 
-偶尔(特别是对我们操非英语的朋友们)，你会遇到 CakePHP 的 :php:class:`Inflector` 
+偶尔(特别是对我们操非英语的朋友们)，你会遇到 CakePHP 的 :php:class:`Inflector`
 类(把单词变成复数形式、单数形式、驼峰命名形式和下划线分隔形式的类)不像你希望的
-那样进行词形变化。如果 CakePHP 认不出你的 Foci 或者 Fish，你可以告诉 CakePHP 
+那样进行词形变化。如果 CakePHP 认不出你的 Foci 或者 Fish，你可以告诉 CakePHP
 这些特殊情形。
 
 加载自定义词形变化
 ------------------
 
-你可以在 ``app/Config/bootstrap.php`` 文件中用 :php:meth:`Inflector::rules()` 
+你可以在 ``app/Config/bootstrap.php`` 文件中用 :php:meth:`Inflector::rules()`
 方法加载自定义词形变化::
 
     Inflector::rules('singular', array(

@@ -173,7 +173,7 @@ Debug Kit
 
 DebugKit 是一个插件，提供了一些很好的调试工具。它主要在渲染的 HTML 中提供了一个
 工具栏，用来显示应用程序和当前请求的大量信息。你可以从 Github 下载
-`DebugKit <https://github.com/cakephp/debug_kit>`_ 。
+`DebugKit <https://github.com/cakephp/debug_kit/tree/2.2>`_ 。
 
 Xdebug
 ======

@@ -145,38 +145,35 @@ data
 -  name
 -  type
 
-The types CakePHP supports are:
+CakePHP 支持的类型如下：
 
 string
-    Generally backed by CHAR or VARCHAR columns. In SQL Server, NCHAR and
-    NVARCHAR types are used.
+    通常对应 CHAR 或 VARCHAR 列。对于 SQL Server，使用 NCHAR 和 NVARCHAR。
 text
-    Maps to TEXT, MONEY types.
+    对应 TEXT，MONEY 类型。
 uuid
-    Maps to the UUID type if a database provides one, otherwise this will
-    generate a CHAR(36) field.
+    对应 UUID 类型，如果数据库支持的话，否则就会生成 CHAR(36) 字段。
 integer
-    Maps to the INTEGER, SMALLINT types provided by the database.
+    对应数据库提供的 INTEGER，SMALLINT 类型。
 biginteger
-    Maps to the BIGINT type provided by the database.
+    对应数据库提供的 BIGINT 类型。
 decimal
-    Maps to the DECIMAL, NUMERIC types.
+    对应 DECIMAL，NUMERIC 类型。
 float
-    Maps to the REAL, DOUBLE PRECISION types.
+    对应 REAL，DOUBLE PRECISION 类型。
 boolean
-    Maps to BOOLEAN except in MySQL, where TINYINT(1) is used to represent
-    booleans.
+    对应 BOOLEAN 类型，但在 MySQL 中，用 TINYINT(1) 代表布尔值。
 binary
-    Maps to the BLOB or BYTEA type provided by the database.
+    对应数据库提供的 BLOB 或 BYTEA 类型。
 date
-    Maps to a timezone naive DATE column type.
+    对应支持时区的 DATE 列类型。
 datetime
-    Maps to a timezone naive DATETIME column type. In PostgreSQL, and SQL
-    Server this turns into a TIMESTAMP or TIMESTAMPTZ type.
+    对应支持时区的 DATETIME 列类型。在 PostgreSQL 和 SQL Server 中，这会变成
+    TIMESTAMP 或 TIMESTAMPTZ 类型。
 timestamp
-    Maps to the TIMESTAMP type.
+    对应 TIMESTAMP 类型。
 time
-    Maps to a TIME type in all databases.
+    在所有的数据库中，对应 TIME 类型。
 
 -  null
 -  default value

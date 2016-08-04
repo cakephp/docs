@@ -71,7 +71,8 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         }
 
         public function view($id = null) {
-            if (!$this->User->exists($id)) {
+            $this->User->id = $id;
+            if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
             }
             $this->set('user', $this->User->findById($id));
@@ -110,7 +111,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         }
 
         public function delete($id = null) {
-            // Prior to 2.5 use
+            // 在 2.5 版本之前，请使用
             // $this->request->onlyAllow('post');
 
             $this->request->allowMethod('post');

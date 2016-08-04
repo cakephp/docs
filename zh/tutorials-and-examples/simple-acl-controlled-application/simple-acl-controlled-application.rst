@@ -9,9 +9,9 @@
 
 在这个教程中，你将会使用 :doc:`/core-libraries/components/authentication` 和
 :doc:`/core-libraries/components/access-control-lists` 创建一个简单的应用。这个
-教程假设你已经阅读过 :doc:`/tutorials-and-examples/blog/blog`，并且熟悉 
+教程假设你已经阅读过 :doc:`/tutorials-and-examples/blog/blog`，并且熟悉
 :doc:`/console-and-shells/code-generation-with-bake`。你应该对 CakePHP 有了一些
-经验, 并且熟悉 MVC 概念。这个教程是对 :php:class:`AuthComponent` 和 
+经验, 并且熟悉 MVC 概念。这个教程是对 :php:class:`AuthComponent` 和
 :php:class:`AclComponent` 的一个简单介绍。
 
 你所需要的：
@@ -19,7 +19,7 @@
 
 #. 一个可以运行的 web 服务器。我们将假定你使用的是 Apache，不过使用其他服务器的
    步骤也差不多。我们也许要稍微调整服务器的配置，但大多数人完全不需要任何配置就
-   可以让 CakePHP 运行起来。  
+   可以让 CakePHP 运行起来。
 #. 一个数据库服务器。在本教程中我们将使用 MySQL 数据库。你将会需要对 SQL 有足够
    的了解以便创建一个数据库：接下来就是 CakePHP 的事情了。
 #. PHP 的基础知识。你使用面向对象编程越多越好，但如果你只熟悉面向过程编程也不要
@@ -30,7 +30,7 @@
 
 首先，让我们获取一份最新的 CakePHP 的代码。
 
-要获得最新的代码，请访问在 GitHub 上的 CakePHP 项目： 
+要获得最新的代码，请访问在 GitHub 上的 CakePHP 项目：
 https://github.com/cakephp/cakephp/tags，并下载稳定发行版。对于本教程，你需要
 最新的 2.0 发行版本。
 
@@ -39,9 +39,9 @@ https://github.com/cakephp/cakephp/tags，并下载稳定发行版。对于本�
 
     git clone git://github.com/cakephp/cakephp.git
 
-一旦你获得了最新的 CakePHP 代码，请设置配置文件 database.php，修改 
-app/Config/core.php 文件中的 Security.salt 的值。在此我们将为应用重新建立一个
-简单的数据库结构。在数据库中执行如下的 SQL 语句::
+一旦你获得了最新的 CakePHP 代码，改变分支到最新的 2.0 版本，设置配置文件
+database.php，修改 app/Config/core.php 文件中的 Security.salt 的值。然后我们会
+建立一个简单的数据库结构，作为应用程序的基础。在数据库中执行如下的 SQL 语句::
 
    CREATE TABLE users (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -88,7 +88,7 @@ app/Config/core.php 文件中的 Security.salt 的值。在此我们将为应用
 在这里要避免使用脚手架(*Scaffold*)。如果生成带有脚手架功能的控制器，将会严重影响
 ACO(*Access Control Object*)的生成。
 
-当自动生成模型代码时，cake 会自动探测出模型之间的关联(即表之间的关系)。让 cake 
+当自动生成模型代码时，cake 会自动探测出模型之间的关联(即表之间的关系)。让 cake
 提供正确的 hasMany 和 belongsTo 关系。如果提示你选择 hasOne 或者 hasMany 关系，
 在本教程中通常(只)需要 hasMany 关系。
 
@@ -144,8 +144,8 @@ ACO(*Access Control Object*)的生成。
         }
     }
 
-接下来要改动一下 ``AppController``。如果还没有 
-``/app/Controller/AppController.php``，就创建该文件。因为我们要使用 Auth 和 Acl 
+接下来要改动一下 ``AppController``。如果还没有
+``/app/Controller/AppController.php``，就创建该文件。因为我们要使用 Auth 和 Acl
 组件控制整个网站，所以我们会在 ``AppController`` 中把它们设置好::
 
     class AppController extends Controller {
@@ -178,9 +178,9 @@ ACO(*Access Control Object*)的生成。
     }
 
 在设置 ACL 组件之前，需要添加一些用户和组。因为启用了 :php:class:`AuthComponent`
-组件，我们无法访问任何动作，因为还没有登录。现在我们添加一些特例，这样 
-:php:class:`AuthComponent` 组件就会允许我们创建一些组和用户。在 
-``GroupsController`` 控制器和 ``UsersController`` 控制器中 **都** 添加::    
+组件，我们无法访问任何动作，因为还没有登录。现在我们添加一些特例，这样
+:php:class:`AuthComponent` 组件就会允许我们创建一些组和用户。在
+``GroupsController`` 控制器和 ``UsersController`` 控制器中 **都** 添加::
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -199,15 +199,15 @@ ACO(*Access Control Object*)的生成。
 ============================
 
 在我们创建任何用户或者组之前，我们要把它们连接到 Acl 组件。不过，我们现在还没有
-任何 Acl 组件的表，如果你现在试图访问任何页面，你会得到表不存在的错误("Error: 
-Database table acos for model Aco was not found.")。要消除这些错误，我们需要运行
-一个数据结构(*schema*)文件。在命令行执行下面的命令::
+任何 Acl 组件的表，如果你现在试图访问任何页面，你可能会得到表不存在的错误（
+"Error: Database table acos for model Aco was not found."）。要消除这些错误，我们
+需要运行一个数据结构（*schema*）文件。在命令行执行下面的命令::
 
     ./Console/cake schema create DbAcl
 
 这个脚本会提示你删除并新建表。对删除和创建表的请求回答 yes。
 
-如果你没有访问外壳(*shell*)的权限，或者无法使用终端，你可以执行 sql 文件 
+如果你没有访问外壳(*shell*)的权限，或者无法使用终端，你可以执行 sql 文件
 /path/to/app/Config/Schema/db\_acl.sql。
 
 为数据输入设置了控制器，也初始化了 Acl 组件的表，这就行了吗？还不够，还需要在
@@ -256,8 +256,8 @@ Acl 组件的表中的记录进行关联。为此需要用到 ``AclBehavior`` �
 这使得 Acl 的管理轻而易举，因为 ARO 透明地与 ``users`` 和 ``groups`` 表绑定在
 一起了。所以，每次创建或者删除一个用户/组的同时，Aro 表也会更新。
 
-我们的控制器和模型已经可以添加一些初始数据了，而且我们的 ``Group`` 和 ``User`` 
-模型已经绑定到 Acl 组件的表了。所以可以浏览 http://example.com/groups/add 和 
+我们的控制器和模型已经可以添加一些初始数据了，而且我们的 ``Group`` 和 ``User``
+模型已经绑定到 Acl 组件的表了。所以可以浏览 http://example.com/groups/add 和
 http://example.com/users/add，使用自动生成的表单添加一些组和用户。我添加了这些组：
 
 -  administrators
@@ -265,7 +265,7 @@ http://example.com/users/add，使用自动生成的表单添加一些组和用�
 -  users
 
 我同时也在每个组中创建了一个用户，这样每个不同访问权限组都有一个用户，用于之后的
-测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 MySQL 
+测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 MySQL
 提示符后运行 ``SELECT * FROM aros;``，应该可以看到象下面这样的记录::
 
     +----+-----------+-------+-------------+-------+------+------+
@@ -286,7 +286,7 @@ http://example.com/users/add，使用自动生成的表单添加一些组和用�
 只按组的 ACL
 --------------
 
-如果我们要简单一些，只按组设置的权限，需要在 ``User`` 模型中实现 ``bindNode()`` 
+如果我们要简单一些，只按组设置的权限，需要在 ``User`` 模型中实现 ``bindNode()``
 方法::
 
     public function bindNode($user) {
@@ -313,7 +313,7 @@ http://example.com/users/add，使用自动生成的表单添加一些组和用�
     +----+-----------+-------+-------------+-------+------+------+
     3 rows in set (0.00 sec)
 
-注意：如果你到这里一直跟随此教程，你需要删除你的表，包括 ``aros``，``groups`` 和 
+注意：如果你到这里一直跟随此教程，你需要删除你的表，包括 ``aros``，``groups`` 和
 ``users``，然后从头重新创建组和用户，才能得到上面的 ``aros`` 表。
 
 创建 ACO (Access Control Objects)
@@ -322,7 +322,7 @@ http://example.com/users/add，使用自动生成的表单添加一些组和用�
 现在我们已经有了用户和组(aro)，我们可以开始把现有的控制器输入到 Acl 中，并对组和
 用户设置权限，并启用登录/登出。
 
-我们的 ARO 会在新建户和组的时候自动创建。有没有什么办法从控制器和动作来自动创建 
+我们的 ARO 会在新建户和组的时候自动创建。有没有什么办法从控制器和动作来自动创建
 ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了一些方法来手动创建 ACO。
 你可以通过 Acl 外壳程序或者 ``AclComponent`` 组件创建 ACO。从外壳程序创建 Aco::
 
@@ -334,9 +334,9 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
     $this->Acl->Aco->save();
 
 上面两个例子都会创建 'root' 或者顶层 ACO，会叫做 'controllers' 。这个根(*root*)
-节点的目的，是为了在整个应用程序的范围内更容易地允许/拒绝访问，并且允许把 Acl 
+节点的目的，是为了在整个应用程序的范围内更容易地允许/拒绝访问，并且允许把 Acl
 组件用于和控制器/动作无关的目的，比如检查模型记录的访问权限。既然我们要使用全局
-的根(*root*) ACO，我们要略微修改 ``AuthComponent`` 组件的配置。``AuthComponent`` 
+的根(*root*) ACO，我们要略微修改 ``AuthComponent`` 组件的配置。``AuthComponent``
 组件需要知道这个根节点的存在，这样当进行 ACL 检查的时候，它可以在查找控制器/动作
 时使用正确的节点路径。在 ``AppController`` 中确保 ``$components`` 数组中包含先前
 定义的 ``actionPath``::

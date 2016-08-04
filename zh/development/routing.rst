@@ -2,7 +2,7 @@
 ####
 
 路由(*routing*)是把网址(*URL*)映射到控制器动作的功能。这个功能添加到 CakePHP 中，
-是为了使友好网址更容易配置和更加灵活。使用路由不要求一定要用 Apache 的 
+是为了使友好网址更容易配置和更加灵活。使用路由不要求一定要用 Apache 的
 mod\_rewrite 模块，不过这会使地址栏看起来更加整洁。
 
 CakePHP 的路由还包括反向路由的思想，即，参数数组可以逆转成字符串网址。使用反向路
@@ -15,14 +15,14 @@ CakePHP 的路由还包括反向路由的思想，即，参数数组可以逆转
 路由的配置
 ==========
 
-应用程序中的路由是在 ``app/Config/routes.php`` 中配置的。当处理路由被 
+应用程序中的路由是在 ``app/Config/routes.php`` 中配置的。当处理路由被
 :php:class:`Dispatcher` 引入，让你可以定义应用程序要使用的特定路由。在该文件中声
 明的路由从上而下处理，直到收到的请求匹配。这意味着放置路由的顺序会影响路由的解析。
 通常好的做法是，把最常访问的路由尽可能放在路由文件的最上面。这可以省去对每个请求
 不得不检查若干个不能匹配的路由。
 
 路由以它们连入的顺序来解析和匹配。如果你定义两个类似的路由，定义的第一个路由比后
-定义的那个有更高的优先级。在连接路由之后，你可以使用 
+定义的那个有更高的优先级。在连接路由之后，你可以使用
 :php:meth:`Router::promote()` 来操纵路由的顺序。
 
 CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需要它们了，可以把它们关闭。
@@ -36,17 +36,17 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
 默认路由适用于任何应用程序的很多情况。把一个动作的名称放入请求中，就可以直接从网
 址访问该动作。也可以用网址传递参数到控制器动作。 ::
 
-        URL pattern default routes:
+        // 网址（*URL*）模式的默认路由：
         http://example.com/controller/action/param1/param2/param3
 
-网址 /posts/view 映射到 PostsController 的 view() 动作，而网址 
+网址 /posts/view 映射到 PostsController 的 view() 动作，而网址
 /products/view\_clearance 映射到 ProductsController 的 view\_clearance() 动作。
 
 默认的路由设置也让你可以用网址传递参数到动作。例如，对 /posts/view/25 的请求等于
 调用 PostsController 的 view(25)。默认的路由也提供插件的路由、前缀路由，如果你选
 择使用这些功能的话。
 
-内置的路由位于 ``Cake/Config/routes.php``。你可以通过在应用程序的 
+内置的路由位于 ``Cake/Config/routes.php``。你可以通过在应用程序的
 :term:`routes.php` 文件中去掉默认路由来关闭它们。
 
 .. index:: :controller, :action, :plugin
@@ -55,7 +55,7 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
 连接路由
 ========
 
-定义你自己的路由让你可以定义应用程序如何对一个给定的网址作出反应。用 
+定义你自己的路由让你可以定义应用程序如何对一个给定的网址作出反应。用
 :php:meth:`Router::connect()` 方法在 ``app/Config/routes.php`` 文件中定义定义自
 己的路由。
 
@@ -84,8 +84,8 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
         array('controller' => 'pages', 'action' => 'display')
     );
 
-以上这个路由在随 CakePHP 发布的 routes.php 文件中。该路由匹配任何以 ``/pages/`` 
-开始的网址，并把它交给 ``PagesController();`` 的 ``display()`` 动作。请求 
+以上这个路由在随 CakePHP 发布的 routes.php 文件中。该路由匹配任何以 ``/pages/``
+开始的网址，并把它交给 ``PagesController();`` 的 ``display()`` 动作。请求
 /pages/products 会映射到 ``PagesController->display('products')``。
 
 除了贪婪的星号 ``/*``，还有 ``/**`` 后缀星号语法。使用后缀双星号，会捕获网址的其
@@ -96,7 +96,7 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
         array('controller' => 'pages', 'action' => 'show')
     );
 
-传入的网址 ``/pages/the-example-/-and-proof`` 会导致单个传入参数 
+传入的网址 ``/pages/the-example-/-and-proof`` 会导致单个传入参数
 ``the-example-/-and-proof``。
 
 .. versionadded:: 2.1
@@ -112,16 +112,16 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
     );
 
 这个例子说明如何使用 ``connect()`` 方法的第二个参数来定义默认参数。如果你构建一
-个网站，有针对不同类别客户的产品，你也许会考虑创建一个路由。这让你可以链接 
+个网站，有针对不同类别客户的产品，你也许会考虑创建一个路由。这让你可以链接
 ``/government``，而不是 ``/pages/display/5``。
 
 .. note::
 
     尽管你可以连接不同的路由，默认的路由还是会继续有效。在这样的设置下，可以从2个
-    不同的网址访问相同的内容。欲知如何关闭默认路由，以及只提供你定义的网址，请参看 
+    不同的网址访问相同的内容。欲知如何关闭默认路由，以及只提供你定义的网址，请参看
     :ref:`disabling-default-routes`。
 
-另一个路由器的常见用法是为控制器定义"别名"。比方说，我们不要访问通常的网址 
+另一个路由器的常见用法是为控制器定义"别名"。比方说，我们不要访问通常的网址
 ``/users/some_action/5``，希望能够通过 ``/cooks/some_action/5`` 来访问。下面的路
 由轻易地实现了::
 
@@ -131,11 +131,11 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
 
 这就是告诉路由器，任何以 ``/cooks/`` 开始的网址应当交给用户控制器。调用的动作取
 决于 ``:action`` 参数的值。使用 :ref:`route-elements`，就能够创造路由变量，接受
-用户输入或者变量。上面的路由也使用了贪婪的星号。贪婪的星号告诉 
-:php:class:`Router`，这个路由应当接受任何给定的额外位置参数。这些参数会被放入 
+用户输入或者变量。上面的路由也使用了贪婪的星号。贪婪的星号告诉
+:php:class:`Router`，这个路由应当接受任何给定的额外位置参数。这些参数会被放入
 :ref:`passed-arguments` 数组供访问。
 
-当生成网址时，也使用路由。如果上述路由最先匹配，使用 
+当生成网址时，也使用路由。如果上述路由最先匹配，使用
 ``array('controller' => 'users', 'action' => 'some_action', 5)`` 作为网址，就会
 输出 /cooks/some_action/5。
 
@@ -149,10 +149,10 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
 --------
 
 你可以指定自己的路由元素，这么做让你有能力能够定义控制器动作的参数在网址中应当占
-据的位置。当发出一个请求时，这些路由元素的值就会在控制器的 
+据的位置。当发出一个请求时，这些路由元素的值就会在控制器的
 ``$this->request->params`` 中。这不同于命名参数(*named parameters*)处理的方式，
-所以请注意区别：命名参数(/controller/action/name:value)在 
-``$this->request->params['named']`` 中，而自定义路由元素数据在 
+所以请注意区别：命名参数(/controller/action/name:value)在
+``$this->request->params['named']`` 中，而自定义路由元素数据在
 ``$this->request->params`` 中。当你定义自定义路由元素时，你可以指定可选的正则表
 达式 — 这告诉 CakePHP 如何判断网址的格式是否正确。如果你选择不提供正则表达式，任
 何非 ``/`` 字符就会被当做参数的一部分::
@@ -174,8 +174,8 @@ CakePHP 也带有一些默认的路由帮你开始。以后如果你肯定不需
     路由元素使用的模式必须不能含有任何捕获分组(*capturing group*)。如果含有捕获
     分组，路由器就无法正常工作。
 
-一旦定义了路由，请求 ``/apples/5`` 就等同于请求 ``/apples/view/5``。二者都会调用 
-ApplesController 控制器的 view() 方法。在 view() 方法内，需要用 
+一旦定义了路由，请求 ``/apples/5`` 就等同于请求 ``/apples/view/5``。二者都会调用
+ApplesController 控制器的 view() 方法。在 view() 方法内，需要用
 ``$this->request->params['id']`` 来访问传入的 ID。
 
 如果在应用程序中只有一个控制器，并且不想让控制器名称出现在网站中，你可以把所有网
@@ -213,7 +213,7 @@ ApplesController 控制器的 view() 方法。在 view() 方法内，需要用
 是不支持括号(分组)的。你可以使用其它的，象上面那样，但是不能用括号分组。
 
 一旦定义好，路由就可以匹配 ``/articles/2007/02/01`` 、 ``/posts/2004/11/16``，把
-请求传递给相应控制器的 index() 动作，并把日期参数放入 ``$this->request->params`` 
+请求传递给相应控制器的 index() 动作，并把日期参数放入 ``$this->request->params``
 中。
 
 有几个路由元素在 CakePHP 中有特殊意义，不应当使用，除非你需要这种特殊意义。
@@ -307,8 +307,8 @@ ApplesController 控制器的 view() 方法。在 view() 方法内，需要用
     Configure::write('Routing.prefixes', array('admin'));
 
 在控制器中，任何以 ``admin_`` 前缀开始的动作就可以被调用了。在用户的例子中，访问
-网址 ``/admin/users/edit/5`` 就会调用 ``UsersController`` 控制器的方法 
-``admin_edit``，传入 5 作为第一个参数。使用的视图文件为 
+网址 ``/admin/users/edit/5`` 就会调用 ``UsersController`` 控制器的方法
+``admin_edit``，传入 5 作为第一个参数。使用的视图文件为
 ``app/View/Users/admin_edit.ctp``。
 
 可以用下面的路由映射网址 /admin 到 pages 控制器的 ``admin_index`` 动作::
@@ -342,7 +342,7 @@ CakePHP 会自动生成 admin 和 manager 两个前缀的路由。每个配置�
         array('prefix' => $prefix, $prefix => true)
     );
 
-和 admin 路由很类似，所有的前缀动作应当加上前缀名称。所以 ``/manager/posts/add`` 
+和 admin 路由很类似，所有的前缀动作应当加上前缀名称。所以 ``/manager/posts/add``
 就会映射到 ``PostsController::manager_add()``。
 
 而且，当前前缀在控制器方法中可以通过 ``$this->request->prefix`` 得到。
@@ -367,7 +367,7 @@ CakePHP 会自动生成 admin 和 manager 两个前缀的路由。每个配置�
 插件路由
 --------
 
-插件路由使用 **plugin** 键。你可以创建指向插件的链接，但需在网址数组中添加 
+插件路由使用 **plugin** 键。你可以创建指向插件的链接，但需在网址数组中添加
 plugin 键::
 
     echo $this->Html->link(
@@ -426,16 +426,16 @@ plugin 键::
 使用额外条件匹配路由
 --------------------
 
-当创建路由时，你也许要基于特定的请求/环境设置来限制某些网址。一个很好的例子是 
+当创建路由时，你也许要基于特定的请求/环境设置来限制某些网址。一个很好的例子是
 :doc:`rest` 路由。你可以在 :php:meth:`Router::connect()` 的 ``$defaults`` 参数指
-定额外的条件。默认情况下 CakePHP 提供3个环境条件，但是你可以用 
+定额外的条件。默认情况下 CakePHP 提供3个环境条件，但是你可以用
 :ref:`custom-route-classes` 添加更多(的条件)。内置的选项为：
 
 - ``[type]`` 只匹配特定内容类型的请求。
 - ``[method]`` 只匹配有特定 HTTP 动词的请求。
 - ``[server]`` 只有当 $_SERVER['SERVER_NAME'] 匹配给定值时才会匹配。
 
-我们在这里提供一个简单的例子，说明如何使用 ``[method]`` 选项来创建自定义 RESTful 
+我们在这里提供一个简单的例子，说明如何使用 ``[method]`` 选项来创建自定义 RESTful
 路由::
 
 
@@ -461,7 +461,7 @@ plugin 键::
 
 在上面的例子中，``recent`` 和 ``mark`` 都是 ``CalendarsController::view()`` 的参
 数。传入参数以三种方式提供给控制器。首先可以作为被调用动作方法的参数，其次可以在
-``$this->request->params['pass']`` 中作为数字索引的数组访问。最后，可以在 
+``$this->request->params['pass']`` 中作为数字索引的数组访问。最后，可以在
 ``$this->passedArgs`` 中通过和第二种同样的方式访问。在使用自定义路由时，你也可以
 强制特定的参数作为传入参数。
 
@@ -515,7 +515,7 @@ plugin 键::
 命名参数
 ========
 
-你可以给参数命名并用网址传递它们的值。对 
+你可以给参数命名并用网址传递它们的值。对
 ``/posts/view/title:first/category:general`` 的请求会导致对 PostsController 控制
 器的 view() 动作的调用。在这个动作中，你可以在 ``$this->params['named']`` 中得到
 title 和 category 参数的值。它们也可以在 ``$this->passedArgs`` 中得到。在这两种
@@ -526,7 +526,7 @@ title 和 category 参数的值。它们也可以在 ``$this->passedArgs`` 中�
 .. note::
 
     什么会被解析为命名参数，是由 :php:meth:`Router::connectNamed()` 方法控制的。
-    如果你的命名参数不支持反向路由，或不能正确解析，你就需要让 
+    如果你的命名参数不支持反向路由，或不能正确解析，你就需要让
     :php:class:`Router` 知道它们(的存在)。
 
 一些默认路由的总结性例子也许有用::
@@ -585,7 +585,7 @@ title 和 category 参数的值。它们也可以在 ``$this->passedArgs`` 中�
     ));
 
 以上代码会生成网址 ``/posts/index/filter[published]:1/filter[frontpage]:1``。然
-后参数会被解析，并作为数组存储在控制器的 passedArgs 变量中，就象你把它们发送给 
+后参数会被解析，并作为数组存储在控制器的 passedArgs 变量中，就象你把它们发送给
 :php:meth:`Router::url` 一样::
 
     $this->passedArgs['filter'] = array(
@@ -644,7 +644,7 @@ title 和 category 参数的值。它们也可以在 ``$this->passedArgs`` 中�
 控制命名参数
 ------------
 
-你可以在路由级别或者在全局级别控制命名参数的配置。全局控制通过 
+你可以在路由级别或者在全局级别控制命名参数的配置。全局控制通过
 ``Router::connectNamed()`` 进行。下面是一些例子，说明如何使用 connectNamed() 方
 法来控制命名参数的解析。
 
@@ -772,7 +772,7 @@ connectNamed() 方法支持一些选项：
 ============
 
 自定义路由类让你可以扩展并改变单个路由如何解析请求和处理反向路由。自定义路由应当
-在 ``app/Routing/Route`` 目录中创建，而且应当扩展 :php:class:`CakeRoute` 并实现 
+在 ``app/Routing/Route`` 目录中创建，而且应当扩展 :php:class:`CakeRoute` 并实现
 ``match()`` 和 ``parse()`` 两个方法中的一个或全部。``parse()`` 方法用于解析请求，
 而 ``match()`` 方法用于处理反向路由。
 
@@ -839,13 +839,13 @@ connectNamed() 方法支持一些选项：
       它从正常的路由数组中删除。例如 ``'pass' => array('slug')``。
 
     * ``persist`` 用于定义在生成新网址时哪个路由参数应当自动包括在内。你可以覆盖
-      持久参数，只需在网址中重新定义它们，或者通过设置该参数为 ``false``。例如 
+      持久参数，只需在网址中重新定义它们，或者通过设置该参数为 ``false``。例如
       ``'persist' => array('lang')``。
 
     * ``routeClass`` 用于通过自定义路由类来扩展和改变单个路由如何解析请求及处理
       反向路由。例如 ``'routeClass' => 'SlugRoute'``。
 
-    * ``named`` 用于在路由级别配置命名参数。该键使用与 
+    * ``named`` 用于在路由级别配置命名参数。该键使用与
       :php:meth:`Router::connectNamed()` 相同的键。
 
 .. php:staticmethod:: redirect($route, $url, $options = array())
@@ -865,7 +865,7 @@ connectNamed() 方法支持一些选项：
         separator、greedy、reset、default。
 
     指定 CakePHP 应当从接收的网址中解析哪些命名参数。默认情况下，CakePHP 会从收
-    到的网址中解析所有命名参数。欲知详情，请参见 
+    到的网址中解析所有命名参数。欲知详情，请参见
     :ref:`controlling-named-parameters`。
 
 .. php:staticmethod:: promote($which = null)
@@ -894,7 +894,7 @@ connectNamed() 方法支持一些选项：
     有一些'特殊'的参数会改变最终生成的网址字符串：
 
     * ``base`` — 设置为 false 来去掉生成的网址中的基准路径。如果你的应用程序不在
-      根目录，这可以用来生成'CakePHP 的相对'网址。CakePHP 的相对网址在使用 
+      根目录，这可以用来生成'CakePHP 的相对'网址。CakePHP 的相对网址在使用
       requestAction 是必须的。
     * ``?`` — 接受查询字符串参数数组
     * ``#`` — 让你可以设置网址哈希片段(*hash fragment*)。
@@ -915,7 +915,7 @@ connectNamed() 方法支持一些选项：
 
     .. versionadded:: 2.2
 
-    设置或添加合法的扩展名。要解析扩展名，你仍然必须调用 
+    设置或添加合法的扩展名。要解析扩展名，你仍然必须调用
     :php:meth:`Router::parseExtensions()` 方法。
 
 .. php:staticmethod:: defaultRouteClass($classname)

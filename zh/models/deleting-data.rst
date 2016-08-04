@@ -5,7 +5,7 @@ CakePHP的模型类提供了多种从数据库中删除记录的方法。
 
 .. _model-delete:
 
-delete方法 
+delete方法
 ==========
 
 ``delete(int $id = null, boolean $cascade = true);``
@@ -23,8 +23,14 @@ delete方法
     $this->Comment->delete($this->request->data('Comment.id'));
 
 在处理删除操作中，可以在自定义业务逻辑使用 ``beforeDelete`` 和 ``afterDelete`` 回调方法。
-这些方法位于模型和行为中。更多信息参见  
+这些方法位于模型和行为中。更多信息参见
 :doc:`/models/callback-methods`。
+
+.. note::
+
+	如果你删除一条带有依赖（*dependent*）关联记录的记录，而其中某个 delete 回调
+	函数，例如 ``beforeDelete``，返回 ``false``，那么这不会阻止事件的进一步传播，
+	也不会改变最初的 ``delete`` 方法的返回值。
 
 .. _model-deleteall:
 
@@ -34,7 +40,7 @@ deleteAll
 ``deleteAll(mixed $conditions, $cascade = true, $callbacks = false)``
 
 ``deleteAll()`` 与 ``delete()`` 类似，将删除匹配条件的所有记录。
-``$conditions`` 作为条件可以是SQL语句片段或数组形式。 
+``$conditions`` 作为条件可以是SQL语句片段或数组形式。
 
 * **conditions** 匹配的条件
 * **cascade** 布尔型，设置true，会导致级联删除
