@@ -79,37 +79,38 @@ Stackoverflow
 ================
 
 巴西葡萄牙语
---------------------
+--------------
 
 - `巴西 CakePHP 社区 <http://cakephp-br.org>`_
 
 丹麦语
-------
+----------
 
 - `丹麦 CakePHP Slack 频道 <https://cakesf.slack.com/messages/denmark/>`_
 
 法语
-------
+----------
+
 - `法语 CakePHP 社区 <http://cakephp-fr.org>`_
 
 德语
-------
+----------
 
 - `德语 CakePHP Slack 频道 <https://cakesf.slack.com/messages/german/>`_
 - `德语 CakePHP Facebook 群 <https://www.facebook.com/groups/146324018754907/>`_
 
 意大利语
--------
+----------
 
 - `意大利 CakePHP 社区 <http://cakephp.ir>`_
 
 荷兰语
------
+----------
 
 - `荷兰 CakePHP Slack 频道 <https://cakesf.slack.com/messages/netherlands/>`_
 
 日语
---------
+----------
 
 - `CakePHP 日本 Facebook 群 <https://www.facebook.com/groups/304490963004377/>`_
 
@@ -119,7 +120,7 @@ Stackoverflow
 - `葡萄牙 CakePHP Google 群 <http://groups.google.com/group/cakephp-pt>`_
 
 西班牙语
--------
+----------
 
 - `西班牙 CakePHP Slack 频道 <https://cakesf.slack.com/messages/spanish/>`_
 - `西班牙 CakePHP IRC 频道 <irc://irc.freenode.net/cakephp-es>`_
