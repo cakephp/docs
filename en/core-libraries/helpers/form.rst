@@ -887,16 +887,16 @@ Options for select, checkbox and  radio inputs
     If you need to set the default value in a password field to blank,
     use 'value' => '' instead.
 
-    A list of key-value pairs can be supplied for a date or datetime field::
+  A list of key-value pairs can be supplied for a date or datetime field::
 
-        echo $this->Form->dateTime('Contact.date', 'DMY', '12',
-        	array(
-        		'empty' => array(
-        			'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-        			'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-        		)
-        	)
-        );
+    echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+        array(
+            'empty' => array(
+                'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+                'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
+            )
+        )
+    );
 
   Output:
 
