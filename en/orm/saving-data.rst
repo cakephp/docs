@@ -596,13 +596,16 @@ If you need to modify request data before it is converted into entities, you can
 use the ``Model.beforeMarshal`` event. This event lets you manipulate the
 request data just before entities are created::
 
+    // Include use statements at the top of your file.
+    use Cake\Event\Event;
+    use ArrayObject;
+
     // In a table or behavior class
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
     {
        if (isset($data['username'])) {
            $data['username'] = mb_strtolower($data['username']);
        }
-    }
 
 The ``$data`` parameter is an ``ArrayObject`` instance, so you don't have to
 return it to change the data used to create entities.
@@ -616,6 +619,10 @@ validation process, one of the reasons is that ``beforeMarshal`` is allowed to
 change the validation rules and the saving options, such as the field whitelist.
 Validation is triggered just after this event is finished. A common example of
 changing the data before it is validated is trimming all fields before saving::
+
+    // Include use statements at the top of your file.
+    use Cake\Event\Event;
+    use ArrayObject;
 
     // In a table or behavior class
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
