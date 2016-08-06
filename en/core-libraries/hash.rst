@@ -217,14 +217,14 @@ Attribute Matching Types
                 [14] =>
             ]
         */
-        
+
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.user');
         /* $result now looks like:
             [
                 [2] => 'mariano.iglesias'
                 [14] => 'phpnut'
             ]
-        */        
+        */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
         /* $result now looks like:
@@ -635,7 +635,7 @@ Attribute Matching Types
 
     Apply a callback to a set of extracted values using ``$function``. The function
     will get the extracted values as the first argument::
-    
+
         $data = [
             ['date' => '01-01-2016', 'booked' => true],
             ['date' => '01-01-2016', 'booked' => false],

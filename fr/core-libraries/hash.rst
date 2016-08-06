@@ -233,6 +233,14 @@ Les Types d'Attribut Correspondants
             ]
         */
 
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.user');
+        /* $result ressemble maintenant à:
+            [
+                [2] => 'mariano.iglesias'
+                [14] => 'phpnut'
+            ]
+        */
+
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
         /* $result ressemble maintenant à:
             [
