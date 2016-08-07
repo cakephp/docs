@@ -126,8 +126,6 @@ FormHelper
 Validation
 ==========
 
-* ``Validator::requirePresence()`` now accepts a list of fields. This allows you
-  to more concisely define the fields that are required.
 * ``Validator::requirePresence()``, ``Validator::allowEmpty()`` and
   ``Validator::notEmpty()`` now accept a list of fields. This allows you
   to more concisely define the fields that are required.
