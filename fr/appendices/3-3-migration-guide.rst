@@ -69,7 +69,7 @@ nouvelle stack HTTP à une application existante.
 Http Client est maintenant compatible avec PSR7
 ===============================================
 
-``Cake\Network\Http\Client`` a été dpélacée vers ``Cake\Http\Client``. Ses
+``Cake\Network\Http\Client`` a été déplacée vers ``Cake\Http\Client``. Ses
 objet request et response implémentent maintenant les
 `interfaces PSR7 <http://www.php-fig.org/psr/psr-7/>`__. Plusieurs méthodes de
 ``Cake\Http\Client\Response`` sont maintenant dépréciées, regardez plus haut
@@ -136,8 +136,6 @@ FormHelper
 Validation
 ==========
 
-* ``Validator::requirePresence()`` accepte maintenant une liste de champs. Cela
-  vous permet de définir de façon plus concise les champs qui sont nécessaires.
 * ``Validator::requirePresence()``, ``Validator::allowEmpty()`` et
   ``Validator::notEmpty()`` acceptent maintenant une liste de champs. Ceci vous
   permet de définir de façon plus concise les champs qui sont requis.
