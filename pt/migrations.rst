@@ -162,57 +162,64 @@ Migrations file name
 ~~~~~~~~~~~~~~~~~~~~
 
 Migration names can follow any of the following patterns:
+O nome das migrações pode seguir qualquer um dos seguintes padrões:
 
-* (``/^(Create)(.*)/``) Creates the specified table.
-* (``/^(Drop)(.*)/``) Drops the specified table.
-  Ignores specified field arguments
-* (``/^(Add).*(?:To)(.*)/``) Adds fields to the specified
-  table
-* (``/^(Remove).*(?:From)(.*)/``) Removes fields from the
-  specified table
-* (``/^(Alter)(.*)/``) Alters the specified table. An alias
-  for CreateTable and AddField.
+* (``/^(Create)(.*)/``) Cria a tabela especificada.
+* (``/^(Drop)(.*)/``) Exclui a tabela especificada.
+  Ignora campos especificados nos argumentos
+* (``/^(Add).*(?:To)(.*)/``) Adiciona campos a 
+tabela especificada
+* (``/^(Remove).*(?:From)(.*)/``) Remove campos de uma
+  tabela específica
+* (``/^(Alter)(.*)/``) Altera a tabela especificada. Um apelido para
+um CreateTable seguido de um AlterTable
 
-You can also use the ``underscore_form`` as the name for your migrations
-i.e. ``create_products``.
+Você também pode usar  ``underscore_form`` como nome das suas migrations. 
+Ex.: ``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
-    As of v1.5.2 of the `migrations plugin <https://github.com/cakephp/migrations/>`_,
-    the migration filename will be automatically camelized. This version of the
-    plugin is only available with a release of CakePHP >= to 3.1. Prior to this
-    version of the plugin the migration name would be in the underscore form,
-    i.e. ``20160121164955_create_products.php``.
+    A partir da versão 1.5.2 do `plugin migrations<https://github.com/cakephp/migrations/>`_,
+    o nome dos arquivos de migrações são colocados automaticamente no padrão camel case. 
+    Esta versão do plugin está disponível apenas a partir da versão 3.1 do CakePHP.
+    Antes disto, o padrão de nomes do plugin migrations utilizava a nomenclatura baseada 
+    em underlines, ex.:  ``20160121164955_create_products.php``.
 
 .. warning::
 
-    Migration names are used as migration class names, and thus may collide with
-    other migrations if the class names are not unique. In this case, it may be
-    necessary to manually override the name at a later date, or simply change the
-    name you are specifying.
+    O nome das migrações são usados como nomes de classe, e podem colidir com
+    outras migrações se o nome das classes não forem únicos. Neste caso, pode ser
+    necessário sobreescrever manualmente os nomes mais tarde ou simplesmente
+    mudar os nomes que você está especificando.
 
-Columns definition
+Definição de colunas
 ~~~~~~~~~~~~~~~~~~
 
 When using columns in the command line, it may be handy to remember that they
 follow the following pattern::
+Quando utilizar colunas na linha de comando, pode ser útil lembrar que eles seguem o
+seguinte padrão::
 
     fieldName:fieldType[length]:indexType:indexName
 
-For instance, the following are all valid ways of specifying an email field:
+Por exemplo, veja formas válidas de especificar um campo de e-mail:
 
 * ``email:string:unique``
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
-The ``length`` parameter for the ``fieldType`` is optional and should always be
-written between bracket.
+
+O parâmetro ``length`` para o ``fieldType`` é opcional e deve sempre ser 
+escrito entre colchetes
 
 Fields named ``created`` and ``modified`` will automatically be set to the type
 ``datetime``.
 
-Field types a those generically made available by the ``Phinx`` library. Those
-can be:
+Os campos  ``created`` e ``modified`` serão automaticamente definidos
+como ``datetime``.
+
+Os tipos de campos são genericamente disponibilizados pela biblioteca ``Phinx``.
+Eles podem ser:
 
 * string
 * text
@@ -228,20 +235,20 @@ can be:
 * boolean
 * uuid
 
-There are some heuristics to choosing fieldtypes when left unspecified or set to
-an invalid value. Default field type is ``string``:
+Há algumas heurísticas para a escolha de tipos de campos que não são especificados 
+ou são definidos com valor inválido. O tipo de campo padrão é ``string``;
 
 * id: integer
 * created, modified, updated: datetime
 
-Creating a table
+Criando uma tabela
 ----------------
 
-You can use ``bake`` to create a table::
+Você pode utilizar o ``bake`` para criar uma tabela::
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
-The command line above will generate a migration file that resembles::
+A linha de comando acima irá gerar um arquivo de migração parecido com este::
 
     <?php
     use Migrations\AbstractMigration;
@@ -279,16 +286,17 @@ The command line above will generate a migration file that resembles::
         }
     }
 
-Adding columns to an existing table
+Adicionando colunas a uma tabela existente
 -----------------------------------
 
-If the migration name in the command line is of the form "AddXXXToYYY" and is
-followed by a list of column names and types then a migration file containing
-the code for creating the columns will be generated::
+Se o nome da migração na linha de comando estiver na forma "AddXXXToYYY" e
+for seguido por uma lista de nomes de colunas e tipos, então o arquivo de migração
+com o código para criar as colunas será gerado::
+
 
     $ bin/cake bake migration AddPriceToProducts price:decimal
 
-Executing the command line above will generate::
+A linha de comando acima irá gerar um arquivo com o seguinte conteúdo:
 
     <?php
     use Migrations\AbstractMigration;
