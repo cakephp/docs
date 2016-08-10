@@ -327,7 +327,14 @@ for the request. For example::
 
     $this->request->header('User-Agent');
 
-would return the user agent used for the request.
+would return the user agent used for the request. Some servers don't populate
+``$_SERVER['HTTP_AUTHORIZATION']`` when the ``Authorization`` header is set.  If
+you are using Apache you can add the following to your ``.htaccess`` to allow
+you to access the ``Authorization`` header::
+
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 .. php:method:: referer($local = false)
 
