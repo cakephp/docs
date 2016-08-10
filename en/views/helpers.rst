@@ -325,6 +325,23 @@ matching view property::
 
 .. _helper-api:
 
+Rendering A View Element Inside Your Helper
+-----------------
+
+If you would like to render an Element inside your Helper you can use **$this->_View->element()** like::
+
+    class AwesomeHelper extends Helper
+    {
+        public someFunction() 
+        {
+            //output directly in your helper
+            echo $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+          
+            //or return it to your view
+            return $this->_View->element('/path/to/element',['foo'=>'bar','bar'=>'foo']);
+        }
+    }
+
 Helper Class
 ============
 
