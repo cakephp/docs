@@ -312,13 +312,14 @@ A linha de comando acima irá gerar um arquivo com o seguinte conteúdo:
     }
 
 Adding a column as index to a table
+Adicionando uma coluna como indice a uma tabela
 -----------------------------------
 
-It is also possible to add indexes to columns::
+Também é possível adicionar índices a colunas::
 
     $ bin/cake bake migration AddNameIndexToProducts name:string:index
 
-will generate::
+irá gerar::
 
     <?php
     use Migrations\AbstractMigration;
@@ -335,17 +336,17 @@ will generate::
     }
 
 
-Specifying field length
+Especificando o tamanho do campo
 -----------------------
 
 .. versionadded:: cakephp/migrations 1.4
 
-If you need to specify a field length, you can do it within brackets in the
-field type, ie::
+Se você precisar especificar o tamanho do campo, você pode fazer isto entre
+colchetes logo após o tipo do campo, ex.::
 
     $ bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
 
-Executing the command line above will generate::
+Executando o comando acima irá gerar::
 
     <?php
     use Migrations\AbstractMigration;
@@ -364,21 +365,22 @@ Executing the command line above will generate::
         }
     }
 
-If no length is specified, lengths for certain type of columns are defaulted:
+Se o tamanho não for especificado, os seguintes padrões serão utilizados:
 
 * string: 255
 * integer: 11
 * biginteger: 20
 
-Removing a column from a table
+Removendo uma coluna de uma tabela
 ------------------------------
 
-In the same way, you can generate a migration to remove a column by using the
-command line, if the migration name is of the form "RemoveXXXFromYYY"::
+Da mesma forma, você pode gerar uma migração para remover uma coluna
+utilizando a linha de comando, se o nome da migração estiver na forma 
+"RemoveXXXFromYYY"::
 
     $ bin/cake bake migration RemovePriceFromProducts price
 
-creates the file::
+cria o arquivo::
 
     <?php
     use Migrations\AbstractMigration;
@@ -392,49 +394,47 @@ creates the file::
         }
     }
 
-Generating migrations from an existing database
+Gerando migrações a partir de uma base de dados existente
 ===============================================
 
-If you are dealing with a pre-existing database and want to start using
-migrations, or to version control the initial schema of your application's
-database, you can run the ``migration_snapshot`` command::
+Se você está trabalhando com um banco de dados pré-existente e quer começar 
+a usar migrações, ou para versionar o schema inicial da base de dados da sua aplicação, 
+você pode executar o comando ``migration_snapshot``::
 
     $ bin/cake bake migration_snapshot Initial
 
-It will generate a migration file called **YYYYMMDDHHMMSS_Initial.php**
-containing all the create statements for all tables in your database.
+Isto irá gerar um arquivo de migração chamado **YYYYMMDDHHMMSS_Initial.php**
+contendo todas as instruções CREATE para todas as tabelas no seu banco de dados.
 
-By default, the snapshot will be created by connecting to the database defined
-in the ``default`` connection configuration.
-If you need to bake a snapshot from a different datasource, you can use the
-``--connection`` option::
+Por padrão, o snapshot será criado a partir da conexão ``default`` definida na configuração.
+Se você precisar fazer o bake de um snapshot de uma fonte de dados diferente, 
+você pode utilizar a opção ``--connection``::
 
     $ bin/cake bake migration_snapshot Initial --connection my_other_connection
 
-You can also make sure the snapshot includes only the tables for which you have
-defined the corresponding model classes by using the ``--require-table`` flag::
+Você também pode definir que o snapshot inclua apenas as tabelas para as quais você 
+tenha definido models correspendentes, utilizando a flag ``require-table``::
 
     $ bin/cake bake migration_snapshot Initial --require-table
 
-When using the ``--require-table`` flag, the shell will look through your
-application ``Table`` classes and will only add the model tables in the snapshot
-.
+Quando utilizar a flag ``--require-table``, o shell irá olhar através das classes do 
+diretório ``Table`` da sua aplicação e apenas irá adicionar no snapshot as tabelas lá definidas::
 
-The same logic will be applied implicitly if you wish to bake a snapshot for a
-plugin. To do so, you need to use the ``--plugin`` option::
+A mesma lógica será aplicada implicitamente se você quiser fazer o bake de um snapshot para 
+um plugin. Para fazer isso, você precisar usar a opção ``--plugin``::
 
     $ bin/cake bake migration_snapshot Initial --plugin MyPlugin
 
-Only the tables which have a ``Table`` object model class defined will be added
-to the snapshot of your plugin.
+Apenas as tabelas que tiverem um objeto ``Table`` definido serão adicionadas  ao snapshot do
+seu plugin.
 
 .. note::
 
-    When baking a snapshot for a plugin, the migration files will be created
-    in your plugin's **config/Migrations** directory.
+    Quando fizer o bake de um snapshot para um plugin, os arquivos de migrações
+    serão criados no diretório **config/Migrations** do seu plugin.
 
-Be aware that when you bake a snapshot, it is automatically added to the phinx
-log table as migrated.
+Fique atento que quando você faz o bake de um snapshot, ele é automaticamente
+ adicionado ao log do phinx como migrado.
 
 The commands
 ============
