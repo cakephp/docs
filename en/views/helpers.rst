@@ -326,7 +326,7 @@ matching view property::
 .. _helper-api:
 
 Rendering A View Element Inside Your Helper
------------------
+-------------------------------------------
 
 If you would like to render an Element inside your Helper you can use **$this->_View->element()** like::
 
