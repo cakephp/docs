@@ -133,7 +133,7 @@ following steps:
 #. Your Application is loaded and bound to an ``HttpServer``.
 #. Your application's middleware is initialized.
 #. A request and response is dispatched through the PSR-7 Middleware that your
-   application uses. Typically this includes, error trapping, and routing.
+   application uses. Typically this includes error trapping and routing.
 #. If no response is returned from the middleware and the request contains
    routing information, a controller & action are selected.
 #. The controller's action is called and the controller interacts with the
