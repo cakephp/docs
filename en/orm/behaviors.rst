@@ -110,7 +110,7 @@ It could be invoked using::
     $slug = $articles->slug('My article name');
 
 Limiting or Renaming Exposed Mixin Methods
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When creating behaviors, there may be situations where you don't want to expose
 public methods as mixin methods. In these cases you can use the
@@ -213,7 +213,7 @@ Once our behavior has the above method we can call it::
     $article = $articles->find('slug', ['slug' => $value])->first();
 
 Limiting or Renaming Exposed Finder Methods
--------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When creating behaviors, there may be situations where you don't want to expose
 finder methods, or you need to rename finders to avoid duplicated methods. In
@@ -241,6 +241,29 @@ rename/remove finder methods when adding a behavior to a table. For example::
             'slugged' => 'findSlug',
         ]
     ]);
+
+Defining Custom Marshalling Behavior Logic
+==========================================
+
+Behaviors can participate in defining how the custom fields they provide are
+marshalled by implementing the ``Cake\ORM\PropertyMarshalInterface``. This
+interface requires a single method be implemented::
+
+    public function buildMarhshalMap($marshaller, $map, $options)
+    {
+        return [
+            'custom_behavior_field' => function ($value, $entity) {
+                // Transform the value as necessary
+                return $value . '123';
+            }
+        ];
+    }
+
+The ``TranslateBehavior`` has a non-trivial implementation of this interface
+that you might want to refer to.
+
+.. versionadded:: 3.3.0
+    The ability for behaviors to participate in marshalling was added in 3.3.0
 
 Removing Loaded Behaviors
 =========================
