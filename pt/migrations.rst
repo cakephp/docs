@@ -436,119 +436,121 @@ seu plugin.
 Fique atento que quando você faz o bake de um snapshot, ele é automaticamente
  adicionado ao log do phinx como migrado.
 
-The commands
+Os Comandos
 ============
 
-``migrate`` : Applying Migrations
+``migrate`` : Aplicando Migrações
 ---------------------------------
 
-Once you have generated or written your migration file, you need to execute the
-following command to apply the changes to your database::
+Depois de ter gerado ou escrito seu arquivo de migração, você precisa executar
+o seguinte comando para aplicar as mudanças a sua base de dados::
 
-    # Run all the migrations
+    # Executa todas as migrações
     $ bin/cake migrations migrate
 
-    # Migrate to a specific version using the ``--target`` option
-    # or ``-t`` for short.
-    # The value is the timestamp that is prefixed to the migrations file name::
+    # Execute uma migração específica utilizando a opção ``--target`` ou ``-t``
+    # O valor é um timestamp que serve como prefixo para cada migração::
     $ bin/cake migrations migrate -t 20150103081132
 
-    # By default, migration files are looked for in the **config/Migrations**
-    # directory. You can specify the directory using the ``--source`` option
-    # or ``-s`` for short.
-    # The following example will run migrations in the **config/Alternate**
-    # directory
+    # Por padrão, as migrações ficam no diretório **config/Migrations**. Você
+    # pode especificar um diretório utilizando a opção ``--source`` ou ``-s``.
+    # O comando abaixo executa as migrações no diretório **config/Alternate**
     $ bin/cake migrations migrate -s Alternate
 
-    # You can run migrations to a different connection than the ``default`` one
-    # using the ``--connection`` option or ``-c`` for short
+    # Você pode executar as migrações de uma conexão diferente da ``default``
+    # utilizando a opção ``--connection`` ou ``-c``.
     $ bin/cake migrations migrate -c my_custom_connection
 
-    # Migrations can also be run for plugins. Simply use the ``--plugin`` option
-    # or ``-p`` for short
+    # Migrações também podem ser executadas para plugins. Simplesmente utilize 
+    # a opção ``--plugin`` ou ``-p``
     $ bin/cake migrations migrate -p MyAwesomePlugin
 
-``rollback`` : Reverting Migrations
+``rollback`` : Revertendo Migrações
 -----------------------------------
 
-The Rollback command is used to undo previous migrations executed by this
-plugin. It is the reverse action of the ``migrate`` command::
+O comando Rollback é utilizado para desfazer migrações realizadas anteriormente
+pelo plugin Migrations. É o inverso do comando ``migrate``::
 
-    # You can rollback to the previous migration by using the
-    # ``rollback`` command::
+    # Você pode desfazer uma migração anterior utilizando o
+    # comando ``rollback``::
     $ bin/cake migrations rollback
 
-    # You can also pass a migration version number to rollback
-    # to a specific version::
+    # Você também pode passar a versão da migração para voltar
+    # para uma versão específica::
     $ bin/cake migrations rollback -t 20150103081132
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+Você também pode utilizar as opções ``--source``, ``--connection`` e ``--plugin``
+exatamente como no comando ``migrate``.
 
-``status`` : Migrations Status
+``status`` : Status da Migração
 ------------------------------
 
-The Status command prints a list of all migrations, along with their current
-status. You can use this command to determine which migrations have been run::
+O comando Status exibe uma lista de todas as migrações juntamente com seu
+status. Você pode utilizar este comando para ver quais migrações foram executadas::
 
     $ bin/cake migrations status
 
 You can also output the results as a JSON formatted string using the
 ``--format`` option (or ``-f`` for short)::
+Você também pode ver os resultados como JSON utilizando a opção
+``--format`` (ou ``-f``)::
 
     $ bin/cake migrations status --format json
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+Você também pode utilizar as opções ``--source``, ``--connection`` e ``--plugin``
+exatamente como no comando ``migrate``.
 
-``mark_migrated`` : Marking a migration as migrated
+
+``mark_migrated`` : Marcando uma migração como migrada
 ---------------------------------------------------
 
 .. versionadded:: 1.4.0
 
-It can sometimes be useful to mark a set of migrations as migrated without
-actually running them.
-In order to do this, you can use the ``mark_migrated`` command.
-The command works seamlessly as the other commands.
+Algumas vezes pode ser útil marcar uma lista de migrações como migrada sem
+efetivamente executá-las.
+Para fazer isto, você pode usar o comando ``mark_migrated``. O comando é
+bastante semelhante aos outros comandos.
 
-You can mark all migrations as migrated using this command::
+Você pode marcar todas as migrações como migradas utilizando este comando::
 
     $ bin/cake migrations mark_migrated
 
 You can also mark all migrations up to a specific version as migrated using
 the ``--target`` option::
+Você também pode marcar todas as migrações de uma versão específica 
+utilizando a opção ``--target``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000
 
-If you do not want the targeted migration to be marked as migrated during the
-process, you can use the ``--exclude`` flag with it::
+Se você não quer marcar a migração alvo como migrada durante o processo, você
+pode utilizar a opção ``--exclude``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --exclude
 
-Finally, if you wish to mark only the targeted migration as migrated, you can
-use the ``--only`` flag::
+Finalmente, se você deseja marcar somente a migração alvo como migrada, 
+você pode utilizar a opção ``--only``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
 
-You can also use the ``--source``, ``--connection`` and ``--plugin`` option just
-like for the ``migrate`` command.
+Você também pode utilizar as opções ``--source``, ``--connection`` e ``--plugin``
+exatamente como no comando ``migrate``.
 
 .. note::
 
-    When you bake a snapshot with the ``cake bake migration_snapshot``
-    command, the created migration will automatically be marked as migrated.
+    Quando você criar um snapshot utilizando o bake com o comando 
+    ``cake bake migration_snapshot``, a migração criada será automaticamente
+    marcada como migrada.
 
 .. deprecated:: 1.4.0
 
-    The following way of using the command has been deprecated. Use it only
-    if you are using a version of the plugin < 1.4.0.
+    A seguinte maneira de utilizar o comando foi depreciada. Use somente se
+    você estiver utilizando uma versão do plugin inferior a 1.4.0.
 
-This command expects the migration version number as argument::
+Este comando espera um número de versão de migração como argumento::
 
-    $ bin/cake migrations mark_migrated 20150420082532
-
-If you wish to mark all migrations as migrated, you can use the ``all`` special
-value. If you use it, it will mark all found migrations as migrated::
+Se você deseja marcar todas as migrações como migradas, você pode utilizar
+o valor especial ``all``. Se você o utilizar, ele irá marcar todas as migrações
+como migradas.
 
     $ bin/cake migrations mark_migrated all
 
