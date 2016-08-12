@@ -296,6 +296,11 @@ the Author entity. ::
         }
     ]);
 
+You can also fetch the full name in the list directly using. ::
+
+    $this->displayField('full_name');
+    $query = $authors->find('list');
+
 Finding Threaded Data
 =====================
 
