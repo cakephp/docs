@@ -1,22 +1,23 @@
 Migrations
 ##########
 
-Migrations é um plugin suportado pela equipe oficial que ajuda você a 
-fazer mudanças no schema do banco de dados utilizando arquivos PHP, 
+Migrations é um plugin suportado pela equipe oficial do CakePHP que ajuda você a
+fazer mudanças no **schema** do banco de dados utilizando arquivos PHP,
 que podem ser versionados utilizando um sistema de controle de versão.
 
-Ele permite que você evolua suas tabelas ao longo do tempo. Ao invés de 
-escrever modificações de schema via SQL, este plugin permite que você utilize 
-um conjunto intuitivo de métodos para fazer mudanças no seu banco de dados.
+Ele permite que você atualize suas tabelas ao longo do tempo. Ao invés de
+escrever modificações de **schema** via SQL, este plugin permite que você
+utilize um conjunto intuitivo de métodos para fazer mudanças no seu banco de
+dados.
 
-Este plugin é um wrapper para a biblioteca de migrações `Phinx <https://phinx.org/>`_.
+Esse plugin é um **wrapper** para a biblioteca `Phinx <https://phinx.org/>`_.
 
 Instalação
-============
+==========
 
-Por padrão o plugin Migrations é instalado junto com a aplicação esqueleto. 
-Se você removeu e quer reinstalá-lo, você pode executar o comando a seguir 
-a partir do diretório ROOT da sua aplicação 
+Por padrão o plugin é instalado junto com o esqueleto da aplicação.
+Se você o removeu e quer reinstalá-lo, execute o comando a seguir a partir do
+diretório **ROOT** da sua aplicação
 (onde o arquivo composer.json está localizado)::
 
     $ php composer.phar require cakephp/migrations "@stable"
@@ -25,30 +26,31 @@ a partir do diretório ROOT da sua aplicação
 
     $ composer require cakephp/migrations "@stable"
 
-Para usar o plugin você precisa carregá-lo no arquivo **config/bootstrap.php** da sua aplicação. 
-Você pode usar o :ref:`CakePHP's Plugin shell <plugin-shell>` para carregar e descarregar
+Para usar o plugin você precisa carregá-lo no arquivo **config/bootstrap.php**
+da sua aplicação. Você pode usar o
+:ref:`shell de plugins do CakePHP <plugin-shell>` para carregar e descarregar
 plugins do seu arquivo **config/bootstrap.php**::
 
     $ bin/cake plugin load Migrations
 
-Ou você pode carregar o plugin editando seu arquivo **config/bootstrap.php** e adicionando a linha::
+Ou você pode carregar o plugin editando seu arquivo **config/bootstrap.php** e
+adicionando a linha::
 
     Plugin::load('Migrations');
 
-
-Adicionalmente, você irá precisar configurar o banco de dados padrão da sua aplicação, 
-no arquivo **config/app.php** como explicado em :ref:`Database Configuration section 
-<database-configuration>`.
+Adicionalmente, você precisará configurar o banco de dados padrão da sua
+aplicação, no arquivo **config/app.php** como explicado na seção
+:ref:`Configuração de banco de dados <database-configuration>`.
 
 Visão Geral
-============
+===========
 
-Uma migração é basicamente um único arquivo PHP que descreve as mudanças a 
+Uma migração é basicamente um arquivo PHP que descreve as mudanças a
 serem feitas no banco de dados. Um arquivo de migração pode criar ou excluir 
 tabelas, adicionar ou remover colunas, criar índices e até mesmo inserir 
 dados em seu banco de dados.
 
-Aqui um exemplo de migração::
+Aqui segue um exemplo de migração::
 
     <?php
     use Migrations\AbstractMigration;
@@ -86,14 +88,14 @@ Aqui um exemplo de migração::
         }
     }
 
-Esta migração irá adicionar uma tabela chamada ``products`` ao banco de dados com as
-seguintes colunas::
+Essa migração irá adicionar uma tabela chamada ``products`` ao banco de dados
+com as seguintes colunas::
 
-- ``id`` column of type ``integer`` as primary key
-- ``name`` column of type ``string``
-- ``description`` column of type ``text``
-- ``created`` column of type ``datetime``
-- ``modified`` column of type ``datetime``
+- ``id`` coluna do tipo ``integer`` como chave primária
+- ``name`` coluna do tipo ``string``
+- ``description`` coluna do tipo ``text``
+- ``created`` coluna do tipo ``datetime``
+- ``modified`` coluna do tipo ``datetime``
 
 .. tip::
 
@@ -112,16 +114,18 @@ o comando abaixo para executar as migrações no seu banco de dados::
 
     bin/cake migrations migrate
 
-O comando seguinte irá executar um rollback na migração e irá excluir a tabela recém criada::
+O comando seguinte irá executar um **rollback** na migração e irá excluir a
+tabela recém criada::
 
     bin/cake migrations rollback
 
-Criando Migrations
-===================
+Criando migrations
+==================
 
 Arquivos de migração são armazeados no diretório **config/Migrations** da 
 sua aplicação. O nome dos arquivos de migração têm como prefixo a data 
-em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui estão exemplos de arquivos de migração::
+em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui
+estão exemplos de arquivos de migração::
 
 * 20160121163850_CreateProducts.php
 * 20160210133047_AddRatingToProducts.php
@@ -129,74 +133,77 @@ em que foram criados, no formato **YYYYMMDDHHMMSS_MigrationName.php**. Aqui est�
 A maneira mais fácil de criar um arquivo de migrações é usando o 
 :doc:`/bake/usage` a linha de comando.
 
-Por favor, leia `Phinx documentation <http://docs.phinx.org/en/latest/migrations.html>` 
-a fim de conhecer a lista completa dos métodos que você pode usar para escrever os arquivos de migração.
+Por favor, leia a `documentação do Phinx <http://docs.phinx.org/en/latest/migrations.html>`
+a fim de conhecer a lista completa dos métodos que você pode usar para escrever
+os arquivos de migração.
 
 .. note::
 
-    Ao gerar as migrações através do ``bake`` você ainda pode alterá-las antes da sua execução, caso seja necessário.
+    Ao gerar as migrações através do ``bake`` você ainda pode alterá-las antes
+    da sua execução, caso seja necessário.
 
 Sintaxe
---------
+-------
 
 A sintaxe do ``bake`` para a geração de migrações segue o formato abaixo::
 
     $ bin/cake bake migration CreateProducts name:string description:text created modified
 
-When using ``bake`` to create tables, add columns and so on, to your
-database, you will usually provide two things:
-Quando utilizar o ``bake`` para criar as migrações, você normalmente precisará informar os seguintes dados::
+Quando utilizar o ``bake`` para criar as migrações, você normalmente precisará
+informar os seguintes dados::
 
   * o nome da migração que você irá gerar (``CreateProducts`` por exemplo)
   * as colunas da tabela que serão adicionadas ou removidas na migração 
   (``name:string description:text created modified`` no nosso caso)
 
-Devido às convenções, nem todas as alterações de schema podem ser realizadas através destes comandos.
+Devido às convenções, nem todas as alterações de schema podem ser realizadas
+através destes comandos.
 
 Além disso, você pode criar um arquivo de migração vazio caso deseje ter um 
-controle total do que precisa ser executado. Para isto, apenas omita a definição das colunas::
+controle total do que precisa ser executado. Para isto, apenas omita a definição
+das colunas::
 
     $ bin/cake migrations create MyCustomMigration
 
-Migrations file name
-~~~~~~~~~~~~~~~~~~~~
+Nomenclatura de migrations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Migration names can follow any of the following patterns:
-O nome das migrações pode seguir qualquer um dos seguintes padrões:
+A nomenclatura das migrações pode seguir qualquer um dos padrões apresentados a
+seguir:
 
 * (``/^(Create)(.*)/``) Cria a tabela especificada.
 * (``/^(Drop)(.*)/``) Exclui a tabela especificada.
   Ignora campos especificados nos argumentos
 * (``/^(Add).*(?:To)(.*)/``) Adiciona campos a 
-tabela especificada
+  tabela especificada
 * (``/^(Remove).*(?:From)(.*)/``) Remove campos de uma
   tabela específica
 * (``/^(Alter)(.*)/``) Altera a tabela especificada. Um apelido para
-um CreateTable seguido de um AlterTable
+  um CreateTable seguido de um AlterTable
 
-Você também pode usar  ``underscore_form`` como nome das suas migrations. 
+Você também pode usar  ``underscore_form`` como nome das suas **migrations**.
 Ex.: ``create_products``.
 
 .. versionadded:: cakephp/migrations 1.5.2
 
     A partir da versão 1.5.2 do `plugin migrations<https://github.com/cakephp/migrations/>`_,
-    o nome dos arquivos de migrações são colocados automaticamente no padrão camel case. 
-    Esta versão do plugin está disponível apenas a partir da versão 3.1 do CakePHP.
-    Antes disto, o padrão de nomes do plugin migrations utilizava a nomenclatura baseada 
-    em underlines, ex.:  ``20160121164955_create_products.php``.
+    o nome dos arquivos de migrações são colocados automaticamente no padrão
+    **camel case**.
+    Esta versão do plugin está disponível apenas a partir da versão 3.1 do
+    CakePHP.
+    Antes disto, o padrão de nomes do plugin migrations utilizava a nomenclatura
+    baseada em **underlines**, ex.:  ``20160121164955_create_products.php``.
 
 .. warning::
 
     O nome das migrações são usados como nomes de classe, e podem colidir com
-    outras migrações se o nome das classes não forem únicos. Neste caso, pode ser
-    necessário sobreescrever manualmente os nomes mais tarde ou simplesmente
+    outras migrações se o nome das classes não forem únicos. Neste caso, pode
+    ser necessário sobreescrever manualmente os nomes mais tarde ou simplesmente
     mudar os nomes que você está especificando.
 
 Definição de colunas
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
-When using columns in the command line, it may be handy to remember that they
-follow the following pattern::
 Quando utilizar colunas na linha de comando, pode ser útil lembrar que eles seguem o
 seguinte padrão::
 
@@ -208,12 +215,8 @@ Por exemplo, veja formas válidas de especificar um campo de e-mail:
 * ``email:string:unique:EMAIL_INDEX``
 * ``email:string[120]:unique:EMAIL_INDEX``
 
-
 O parâmetro ``length`` para o ``fieldType`` é opcional e deve sempre ser 
 escrito entre colchetes
-
-Fields named ``created`` and ``modified`` will automatically be set to the type
-``datetime``.
 
 Os campos  ``created`` e ``modified`` serão automaticamente definidos
 como ``datetime``.
@@ -242,7 +245,7 @@ ou são definidos com valor inválido. O tipo de campo padrão é ``string``;
 * created, modified, updated: datetime
 
 Criando uma tabela
-----------------
+------------------
 
 Você pode utilizar o ``bake`` para criar uma tabela::
 
@@ -287,16 +290,15 @@ A linha de comando acima irá gerar um arquivo de migração parecido com este::
     }
 
 Adicionando colunas a uma tabela existente
------------------------------------
+------------------------------------------
 
 Se o nome da migração na linha de comando estiver na forma "AddXXXToYYY" e
-for seguido por uma lista de nomes de colunas e tipos, então o arquivo de migração
-com o código para criar as colunas será gerado::
-
+for seguido por uma lista de nomes de colunas e tipos, então o arquivo de
+migração com o código para criar as colunas será gerado::
 
     $ bin/cake bake migration AddPriceToProducts price:decimal
 
-A linha de comando acima irá gerar um arquivo com o seguinte conteúdo:
+A linha de comando acima irá gerar um arquivo com o seguinte conteúdo::
 
     <?php
     use Migrations\AbstractMigration;
@@ -311,9 +313,8 @@ A linha de comando acima irá gerar um arquivo com o seguinte conteúdo:
         }
     }
 
-Adding a column as index to a table
 Adicionando uma coluna como indice a uma tabela
------------------------------------
+-----------------------------------------------
 
 Também é possível adicionar índices a colunas::
 
@@ -337,7 +338,7 @@ irá gerar::
 
 
 Especificando o tamanho do campo
------------------------
+--------------------------------
 
 .. versionadded:: cakephp/migrations 1.4
 
@@ -346,7 +347,7 @@ colchetes logo após o tipo do campo, ex.::
 
     $ bin/cake bake migration AddFullDescriptionToProducts full_description:string[60]
 
-Executando o comando acima irá gerar::
+Executar o comando acima irá gerar::
 
     <?php
     use Migrations\AbstractMigration;
@@ -372,7 +373,7 @@ Se o tamanho não for especificado, os seguintes padrões serão utilizados:
 * biginteger: 20
 
 Removendo uma coluna de uma tabela
-------------------------------
+----------------------------------
 
 Da mesma forma, você pode gerar uma migração para remover uma coluna
 utilizando a linha de comando, se o nome da migração estiver na forma 
@@ -380,7 +381,7 @@ utilizando a linha de comando, se o nome da migração estiver na forma
 
     $ bin/cake bake migration RemovePriceFromProducts price
 
-cria o arquivo::
+Cria o arquivo::
 
     <?php
     use Migrations\AbstractMigration;
@@ -395,38 +396,42 @@ cria o arquivo::
     }
 
 Gerando migrações a partir de uma base de dados existente
-===============================================
+=========================================================
 
 Se você está trabalhando com um banco de dados pré-existente e quer começar 
-a usar migrações, ou para versionar o schema inicial da base de dados da sua aplicação, 
-você pode executar o comando ``migration_snapshot``::
+a usar migrações, ou para versionar o schema inicial da base de dados da sua
+aplicação, você pode executar o comando ``migration_snapshot``::
 
     $ bin/cake bake migration_snapshot Initial
 
 Isto irá gerar um arquivo de migração chamado **YYYYMMDDHHMMSS_Initial.php**
 contendo todas as instruções CREATE para todas as tabelas no seu banco de dados.
 
-Por padrão, o snapshot será criado a partir da conexão ``default`` definida na configuração.
+Por padrão, o snapshot será criado a partir da conexão ``default`` definida na
+configuração.
 Se você precisar fazer o bake de um snapshot de uma fonte de dados diferente, 
 você pode utilizar a opção ``--connection``::
 
     $ bin/cake bake migration_snapshot Initial --connection my_other_connection
 
-Você também pode definir que o snapshot inclua apenas as tabelas para as quais você 
-tenha definido models correspendentes, utilizando a flag ``require-table``::
+Você também pode definir que o snapshot inclua apenas as tabelas para as quais
+você tenha definido models correspendentes, utilizando a flag
+``require-table``::
 
     $ bin/cake bake migration_snapshot Initial --require-table
 
-Quando utilizar a flag ``--require-table``, o shell irá olhar através das classes do 
-diretório ``Table`` da sua aplicação e apenas irá adicionar no snapshot as tabelas lá definidas::
+Quando utilizar a flag ``--require-table``, o shell irá olhar através das
+classes do diretório ``Table`` da sua aplicação e apenas irá adicionar no
+snapshot as tabelas lá definidas::
 
-A mesma lógica será aplicada implicitamente se você quiser fazer o bake de um snapshot para 
-um plugin. Para fazer isso, você precisar usar a opção ``--plugin``::
+A mesma lógica será aplicada implicitamente se você quiser fazer o bake de um
+snapshot para um plugin. Para fazer isso, você precisar usar a opção
+``--plugin``::
 
     $ bin/cake bake migration_snapshot Initial --plugin MyPlugin
 
-Apenas as tabelas que tiverem um objeto ``Table`` definido serão adicionadas  ao snapshot do
-seu plugin.
+Apenas as tabelas que tiverem um objeto ``Table`` definido serão adicionadas
+ao snapshot do seu plugin.
 
 .. note::
 
@@ -437,9 +442,9 @@ Fique atento que quando você faz o bake de um snapshot, ele é automaticamente
  adicionado ao log do phinx como migrado.
 
 Os Comandos
-============
+===========
 
-``migrate`` : Aplicando Migrações
+``migrate`` : Aplicando migrações
 ---------------------------------
 
 Depois de ter gerado ou escrito seu arquivo de migração, você precisa executar
@@ -465,10 +470,10 @@ o seguinte comando para aplicar as mudanças a sua base de dados::
     # a opção ``--plugin`` ou ``-p``
     $ bin/cake migrations migrate -p MyAwesomePlugin
 
-``rollback`` : Revertendo Migrações
+``rollback`` : Revertendo migrações
 -----------------------------------
 
-O comando Rollback é utilizado para desfazer migrações realizadas anteriormente
+O comando rollback é utilizado para desfazer migrações realizadas anteriormente
 pelo plugin Migrations. É o inverso do comando ``migrate``::
 
     # Você pode desfazer uma migração anterior utilizando o
@@ -479,30 +484,29 @@ pelo plugin Migrations. É o inverso do comando ``migrate``::
     # para uma versão específica::
     $ bin/cake migrations rollback -t 20150103081132
 
-Você também pode utilizar as opções ``--source``, ``--connection`` e ``--plugin``
-exatamente como no comando ``migrate``.
+Você também pode utilizar as opções ``--source``, ``--connection`` e
+``--plugin`` exatamente como no comando ``migrate``.
 
-``status`` : Status da Migração
-------------------------------
+``status`` : Status da migração
+-------------------------------
 
-O comando Status exibe uma lista de todas as migrações juntamente com seu
-status. Você pode utilizar este comando para ver quais migrações foram executadas::
+O comando status exibe uma lista de todas as migrações juntamente com seu
+status. Você pode utilizar este comando para ver quais migrações foram
+executadas::
 
     $ bin/cake migrations status
 
-You can also output the results as a JSON formatted string using the
-``--format`` option (or ``-f`` for short)::
 Você também pode ver os resultados como JSON utilizando a opção
 ``--format`` (ou ``-f``)::
 
     $ bin/cake migrations status --format json
 
-Você também pode utilizar as opções ``--source``, ``--connection`` e ``--plugin``
-exatamente como no comando ``migrate``.
+Você também pode utilizar as opções ``--source``, ``--connection`` e
+``--plugin`` exatamente como no comando ``migrate``.
 
 
 ``mark_migrated`` : Marcando uma migração como migrada
----------------------------------------------------
+------------------------------------------------------
 
 .. versionadded:: 1.4.0
 
@@ -515,8 +519,6 @@ Você pode marcar todas as migrações como migradas utilizando este comando::
 
     $ bin/cake migrations mark_migrated
 
-You can also mark all migrations up to a specific version as migrated using
-the ``--target`` option::
 Você também pode marcar todas as migrações de uma versão específica 
 utilizando a opção ``--target``::
 
@@ -532,8 +534,8 @@ você pode utilizar a opção ``--only``::
 
     $ bin/cake migrations mark_migrated --target=20151016204000 --only
 
-Você também pode utilizar as opções ``--source``, ``--connection`` e ``--plugin``
-exatamente como no comando ``migrate``.
+Você também pode utilizar as opções ``--source``, ``--connection`` e
+``--plugin`` exatamente como no comando ``migrate``.
 
 .. note::
 
@@ -550,7 +552,7 @@ Este comando espera um número de versão de migração como argumento::
 
 Se você deseja marcar todas as migrações como migradas, você pode utilizar
 o valor especial ``all``. Se você o utilizar, ele irá marcar todas as migrações
-como migradas.
+como migradas::
 
     $ bin/cake migrations mark_migrated all
 
