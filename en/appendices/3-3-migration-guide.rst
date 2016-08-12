@@ -96,6 +96,8 @@ ORM Improvements
   rules to the number of associated records an entity has.
 * The ``allowNullableNulls`` option was added to the ``existsIn`` rule. This
   option allows rules to pass when some columns are null.
+* Saving translated records is now simpler. See the
+  :ref:`saving-multiple-translations` for more information.
 
 Multiple Pagination Support Added
 =================================
